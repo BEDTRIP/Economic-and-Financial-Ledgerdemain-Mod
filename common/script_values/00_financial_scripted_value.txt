@@ -28,14 +28,14 @@ REPLACE:prosperity_target = {
 		}
 	}
 	if = {
-		limit = { 
-			#exists = executive 
-			executive = {  
-				has_modifier = UNI_modifier_1 
-			} 
+		limit = {
+			#exists = executive
+			executive = {
+				has_modifier = UNI_modifier_1
+			}
 		}
 		add = 100
-	} 
+	}
 
 	min = 0
 	max = define:NEconomy|COMPANY_PROSPERITY_MAX
@@ -55,39 +55,39 @@ REPLACE:prosperity_increase = {
 	}
 
 	if = {
-		limit = { 
-			#exists = executive 
-			executive = {  
-				has_modifier = UNI_modifier_1 
-			} 
+		limit = {
+			#exists = executive
+			executive = {
+				has_modifier = UNI_modifier_1
+			}
 		}
 		add = 100
-	}  
+	}
 }
 
 ##################################################################################
 # INJECT:prosperity_increase = {
 # 	if = {
-# 		limit = { 
-# 			#exists = executive 
-# 			executive = {  
-# 				has_modifier = UNI_modifier_1 
-# 			} 
+# 		limit = {
+# 			#exists = executive
+# 			executive = {
+# 				has_modifier = UNI_modifier_1
+# 			}
 # 		}
 # 		add = 100
-# 	}     	  	 
-# } 
+# 	}
+# }
 
-# INJECT:prosperity_target = {   
+# INJECT:prosperity_target = {
 # 	if = {
-# 		limit = { 
-# 			#exists = executive 
-# 			executive = {  
-# 				has_modifier = UNI_modifier_1 
-# 			} 
+# 		limit = {
+# 			#exists = executive
+# 			executive = {
+# 				has_modifier = UNI_modifier_1
+# 			}
 # 		}
 # 		add = 100
-# 	}   
+# 	}
 # }
 ##################################################################################
 
@@ -3707,6 +3707,8 @@ base_demande_manufacture_stock = {
 }
 base_demande_manufacture_stock_fix = {
 	value = var:base_demande_manufacture_stock_fix
+
+	min = 0.001 #test Div/0
 }
 target_demand_manufacture_stock = {
     value = manufacture_stock_market_goods_sell_orders
@@ -3754,6 +3756,8 @@ base_demande_agricultural_stock = {
 }
 base_demande_agricultural_stock_fix = {
 	value = var:base_demande_agricultural_stock_fix
+
+	min = 0.001 #test Div/0
 }
 target_demand_agricultural_stock = {
     value = agricultural_stock_market_goods_sell_orders
@@ -3801,6 +3805,8 @@ base_demande_mining_stock = {
 }
 base_demande_mining_stock_fix = {
 	value = var:base_demande_mining_stock_fix
+
+	min = 0.001 #test Div/0
 }
 target_demand_mining_stock = {
     value = mining_stock_market_goods_sell_orders
@@ -3848,6 +3854,8 @@ base_demande_railroad_stock = {
 }
 base_demande_railroad_stock_fix = {
 	value = var:base_demande_railroad_stock_fix
+
+	min = 0.001 #test Div/0
 }
 target_demand_railroad_stock = {
     value = railroad_stock_market_goods_sell_orders
@@ -3998,8 +4006,8 @@ sell_limit_var_0 = {
 ###########################################################################################################################################################################################
 ###########################################################################################################################################################################################
 ###########################################################################################################################################################################################
- 
-#ammunition 
+
+#ammunition
 ammunition_price = {
 	value = 50
 	subtract = {
@@ -4013,26 +4021,26 @@ ammunition_price = {
 			divide = 50
 		}
 	}
-} 
+}
 buy_ammunition_market_panel = {
 	value = player.var:ammunition_market_panel_quantity
 	multiply = owner.ammunition_price
-} 
+}
 sell_ammunition_market_panel = {
 	value = player.var:ammunition_market_panel_quantity
 	multiply = player.ammunition_price
-} 
+}
 buy_ammunition_in_gold_market_panel = {
 	value = player.var:ammunition_market_panel_quantity
 	multiply = owner.ammunition_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_ammunition_in_gold_market_panel = {
 	value = player.var:ammunition_market_panel_quantity
 	multiply = player.ammunition_price
 	multiply = player.money_value_rapported_inflation
 }
-#small_arms 
+#small_arms
 small_arms_price = {
 	value = 60
 	subtract = {
@@ -4046,26 +4054,26 @@ small_arms_price = {
 			divide = 60
 		}
 	}
-} 
+}
 buy_small_arms_market_panel = {
 	value = player.var:small_arms_market_panel_quantity
 	multiply = owner.small_arms_price
-} 
+}
 sell_small_arms_market_panel = {
 	value = player.var:small_arms_market_panel_quantity
 	multiply = player.small_arms_price
-} 
+}
 buy_small_arms_in_gold_market_panel = {
 	value = player.var:small_arms_market_panel_quantity
 	multiply = owner.small_arms_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_small_arms_in_gold_market_panel = {
 	value = player.var:small_arms_market_panel_quantity
 	multiply = player.small_arms_price
 	multiply = player.money_value_rapported_inflation
 }
-#artillery 
+#artillery
 artillery_price = {
 	value = 70
 	subtract = {
@@ -4079,26 +4087,26 @@ artillery_price = {
 			divide = 70
 		}
 	}
-} 
+}
 buy_artillery_market_panel = {
 	value = player.var:artillery_market_panel_quantity
 	multiply = owner.artillery_price
-} 
+}
 sell_artillery_market_panel = {
 	value = player.var:artillery_market_panel_quantity
 	multiply = player.artillery_price
-} 
+}
 buy_artillery_in_gold_market_panel = {
 	value = player.var:artillery_market_panel_quantity
 	multiply = owner.artillery_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_artillery_in_gold_market_panel = {
 	value = player.var:artillery_market_panel_quantity
 	multiply = player.artillery_price
 	multiply = player.money_value_rapported_inflation
 }
-#tanks 
+#tanks
 tanks_price = {
 	value = 80
 	subtract = {
@@ -4112,26 +4120,26 @@ tanks_price = {
 			divide = 80
 		}
 	}
-} 
+}
 buy_tanks_market_panel = {
 	value = player.var:tanks_market_panel_quantity
 	multiply = owner.tanks_price
-} 
+}
 sell_tanks_market_panel = {
 	value = player.var:tanks_market_panel_quantity
 	multiply = player.tanks_price
-} 
+}
 buy_tanks_in_gold_market_panel = {
 	value = player.var:tanks_market_panel_quantity
 	multiply = owner.tanks_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_tanks_in_gold_market_panel = {
 	value = player.var:tanks_market_panel_quantity
 	multiply = player.tanks_price
 	multiply = player.money_value_rapported_inflation
 }
-#aeroplanes 
+#aeroplanes
 aeroplanes_price = {
 	value = 80
 	subtract = {
@@ -4145,26 +4153,26 @@ aeroplanes_price = {
 			divide = 80
 		}
 	}
-} 
+}
 buy_aeroplanes_market_panel = {
 	value = player.var:aeroplanes_market_panel_quantity
 	multiply = owner.aeroplanes_price
-} 
+}
 sell_aeroplanes_market_panel = {
 	value = player.var:aeroplanes_market_panel_quantity
 	multiply = player.aeroplanes_price
-} 
+}
 buy_aeroplanes_in_gold_market_panel = {
 	value = player.var:aeroplanes_market_panel_quantity
 	multiply = owner.aeroplanes_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_aeroplanes_in_gold_market_panel = {
 	value = player.var:aeroplanes_market_panel_quantity
 	multiply = player.aeroplanes_price
 	multiply = player.money_value_rapported_inflation
 }
-#grain 
+#grain
 grain_price = {
 	value = 20
 	subtract = {
@@ -4178,26 +4186,26 @@ grain_price = {
 			divide = 20
 		}
 	}
-} 
+}
 buy_grain_market_panel = {
 	value = player.var:grain_market_panel_quantity
 	multiply = owner.grain_price
-} 
+}
 sell_grain_market_panel = {
 	value = player.var:grain_market_panel_quantity
 	multiply = player.grain_price
-} 
+}
 buy_grain_in_gold_market_panel = {
 	value = player.var:grain_market_panel_quantity
 	multiply = owner.grain_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_grain_in_gold_market_panel = {
 	value = player.var:grain_market_panel_quantity
 	multiply = player.grain_price
 	multiply = player.money_value_rapported_inflation
 }
-#fabric 
+#fabric
 fabric_price = {
 	value = 20
 	subtract = {
@@ -4211,26 +4219,26 @@ fabric_price = {
 			divide = 20
 		}
 	}
-} 
+}
 buy_fabric_market_panel = {
 	value = player.var:fabric_market_panel_quantity
 	multiply = owner.fabric_price
-} 
+}
 sell_fabric_market_panel = {
 	value = player.var:fabric_market_panel_quantity
 	multiply = player.fabric_price
-} 
+}
 buy_fabric_in_gold_market_panel = {
 	value = player.var:fabric_market_panel_quantity
 	multiply = owner.fabric_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_fabric_in_gold_market_panel = {
 	value = player.var:fabric_market_panel_quantity
 	multiply = player.fabric_price
 	multiply = player.money_value_rapported_inflation
 }
-#wood 
+#wood
 wood_price = {
 	value = 20
 	subtract = {
@@ -4244,26 +4252,26 @@ wood_price = {
 			divide = 20
 		}
 	}
-} 
+}
 buy_wood_market_panel = {
 	value = player.var:wood_market_panel_quantity
 	multiply = owner.wood_price
-} 
+}
 sell_wood_market_panel = {
 	value = player.var:wood_market_panel_quantity
 	multiply = player.wood_price
-} 
+}
 buy_wood_in_gold_market_panel = {
 	value = player.var:wood_market_panel_quantity
 	multiply = owner.wood_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_wood_in_gold_market_panel = {
 	value = player.var:wood_market_panel_quantity
 	multiply = player.wood_price
 	multiply = player.money_value_rapported_inflation
 }
-#groceries 
+#groceries
 groceries_price = {
 	value = 30
 	subtract = {
@@ -4277,26 +4285,26 @@ groceries_price = {
 			divide = 30
 		}
 	}
-} 
+}
 buy_groceries_market_panel = {
 	value = player.var:groceries_market_panel_quantity
 	multiply = owner.groceries_price
-} 
+}
 sell_groceries_market_panel = {
 	value = player.var:groceries_market_panel_quantity
 	multiply = player.groceries_price
-} 
+}
 buy_groceries_in_gold_market_panel = {
 	value = player.var:groceries_market_panel_quantity
 	multiply = owner.groceries_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_groceries_in_gold_market_panel = {
 	value = player.var:groceries_market_panel_quantity
 	multiply = player.groceries_price
 	multiply = player.money_value_rapported_inflation
 }
-#clothes 
+#clothes
 clothes_price = {
 	value = 30
 	subtract = {
@@ -4310,26 +4318,26 @@ clothes_price = {
 			divide = 30
 		}
 	}
-} 
+}
 buy_clothes_market_panel = {
 	value = player.var:clothes_market_panel_quantity
 	multiply = owner.clothes_price
-} 
+}
 sell_clothes_market_panel = {
 	value = player.var:clothes_market_panel_quantity
 	multiply = player.clothes_price
-} 
+}
 buy_clothes_in_gold_market_panel = {
 	value = player.var:clothes_market_panel_quantity
 	multiply = owner.clothes_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_clothes_in_gold_market_panel = {
 	value = player.var:clothes_market_panel_quantity
 	multiply = player.clothes_price
 	multiply = player.money_value_rapported_inflation
 }
-#paper 
+#paper
 paper_price = {
 	value = 30
 	subtract = {
@@ -4343,26 +4351,26 @@ paper_price = {
 			divide = 30
 		}
 	}
-} 
+}
 buy_paper_market_panel = {
 	value = player.var:paper_market_panel_quantity
 	multiply = owner.paper_price
-} 
+}
 sell_paper_market_panel = {
 	value = player.var:paper_market_panel_quantity
 	multiply = player.paper_price
-} 
+}
 buy_paper_in_gold_market_panel = {
 	value = player.var:paper_market_panel_quantity
 	multiply = owner.paper_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_paper_in_gold_market_panel = {
 	value = player.var:paper_market_panel_quantity
 	multiply = player.paper_price
 	multiply = player.money_value_rapported_inflation
 }
-#silk 
+#silk
 silk_price = {
 	value = 40
 	subtract = {
@@ -4376,26 +4384,26 @@ silk_price = {
 			divide = 40
 		}
 	}
-} 
+}
 buy_silk_market_panel = {
 	value = player.var:silk_market_panel_quantity
 	multiply = owner.silk_price
-} 
+}
 sell_silk_market_panel = {
 	value = player.var:silk_market_panel_quantity
 	multiply = player.silk_price
-} 
+}
 buy_silk_in_gold_market_panel = {
 	value = player.var:silk_market_panel_quantity
 	multiply = owner.silk_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_silk_in_gold_market_panel = {
 	value = player.var:silk_market_panel_quantity
 	multiply = player.silk_price
 	multiply = player.money_value_rapported_inflation
 }
-#dye 
+#dye
 dye_price = {
 	value = 40
 	subtract = {
@@ -4409,26 +4417,26 @@ dye_price = {
 			divide = 40
 		}
 	}
-} 
+}
 buy_dye_market_panel = {
 	value = player.var:dye_market_panel_quantity
 	multiply = owner.dye_price
-} 
+}
 sell_dye_market_panel = {
 	value = player.var:dye_market_panel_quantity
 	multiply = player.dye_price
-} 
+}
 buy_dye_in_gold_market_panel = {
 	value = player.var:dye_market_panel_quantity
 	multiply = owner.dye_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_dye_in_gold_market_panel = {
 	value = player.var:dye_market_panel_quantity
 	multiply = player.dye_price
 	multiply = player.money_value_rapported_inflation
 }
-#sulfur 
+#sulfur
 sulfur_price = {
 	value = 50
 	subtract = {
@@ -4442,26 +4450,26 @@ sulfur_price = {
 			divide = 50
 		}
 	}
-} 
+}
 buy_sulfur_market_panel = {
 	value = player.var:sulfur_market_panel_quantity
 	multiply = owner.sulfur_price
-} 
+}
 sell_sulfur_market_panel = {
 	value = player.var:sulfur_market_panel_quantity
 	multiply = player.sulfur_price
-} 
+}
 buy_sulfur_in_gold_market_panel = {
 	value = player.var:sulfur_market_panel_quantity
 	multiply = owner.sulfur_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_sulfur_in_gold_market_panel = {
 	value = player.var:sulfur_market_panel_quantity
 	multiply = player.sulfur_price
 	multiply = player.money_value_rapported_inflation
 }
-#coal 
+#coal
 coal_price = {
 	value = 30
 	subtract = {
@@ -4475,26 +4483,26 @@ coal_price = {
 			divide = 30
 		}
 	}
-} 
+}
 buy_coal_market_panel = {
 	value = player.var:coal_market_panel_quantity
 	multiply = owner.coal_price
-} 
+}
 sell_coal_market_panel = {
 	value = player.var:coal_market_panel_quantity
 	multiply = player.coal_price
-} 
+}
 buy_coal_in_gold_market_panel = {
 	value = player.var:coal_market_panel_quantity
 	multiply = owner.coal_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_coal_in_gold_market_panel = {
 	value = player.var:coal_market_panel_quantity
 	multiply = player.coal_price
 	multiply = player.money_value_rapported_inflation
 }
-#iron 
+#iron
 iron_price = {
 	value = 40
 	subtract = {
@@ -4508,26 +4516,26 @@ iron_price = {
 			divide = 40
 		}
 	}
-} 
+}
 buy_iron_market_panel = {
 	value = player.var:iron_market_panel_quantity
 	multiply = owner.iron_price
-} 
+}
 sell_iron_market_panel = {
 	value = player.var:iron_market_panel_quantity
 	multiply = player.iron_price
-} 
+}
 buy_iron_in_gold_market_panel = {
 	value = player.var:iron_market_panel_quantity
 	multiply = owner.iron_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_iron_in_gold_market_panel = {
 	value = player.var:iron_market_panel_quantity
 	multiply = player.iron_price
 	multiply = player.money_value_rapported_inflation
 }
-#lead 
+#lead
 lead_price = {
 	value = 40
 	subtract = {
@@ -4541,26 +4549,26 @@ lead_price = {
 			divide = 40
 		}
 	}
-} 
+}
 buy_lead_market_panel = {
 	value = player.var:lead_market_panel_quantity
 	multiply = owner.lead_price
-} 
+}
 sell_lead_market_panel = {
 	value = player.var:lead_market_panel_quantity
 	multiply = player.lead_price
-} 
+}
 buy_lead_in_gold_market_panel = {
 	value = player.var:lead_market_panel_quantity
 	multiply = owner.lead_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_lead_in_gold_market_panel = {
 	value = player.var:lead_market_panel_quantity
 	multiply = player.lead_price
 	multiply = player.money_value_rapported_inflation
 }
-#hardwood 
+#hardwood
 hardwood_price = {
 	value = 40
 	subtract = {
@@ -4574,26 +4582,26 @@ hardwood_price = {
 			divide = 40
 		}
 	}
-} 
+}
 buy_hardwood_market_panel = {
 	value = player.var:hardwood_market_panel_quantity
 	multiply = owner.hardwood_price
-} 
+}
 sell_hardwood_market_panel = {
 	value = player.var:hardwood_market_panel_quantity
 	multiply = player.hardwood_price
-} 
+}
 buy_hardwood_in_gold_market_panel = {
 	value = player.var:hardwood_market_panel_quantity
 	multiply = owner.hardwood_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_hardwood_in_gold_market_panel = {
 	value = player.var:hardwood_market_panel_quantity
 	multiply = player.hardwood_price
 	multiply = player.money_value_rapported_inflation
 }
-#rubber 
+#rubber
 rubber_price = {
 	value = 40
 	subtract = {
@@ -4607,26 +4615,26 @@ rubber_price = {
 			divide = 40
 		}
 	}
-} 
+}
 buy_rubber_market_panel = {
 	value = player.var:rubber_market_panel_quantity
 	multiply = owner.rubber_price
-} 
+}
 sell_rubber_market_panel = {
 	value = player.var:rubber_market_panel_quantity
 	multiply = player.rubber_price
-} 
+}
 buy_rubber_in_gold_market_panel = {
 	value = player.var:rubber_market_panel_quantity
 	multiply = owner.rubber_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_rubber_in_gold_market_panel = {
 	value = player.var:rubber_market_panel_quantity
 	multiply = player.rubber_price
 	multiply = player.money_value_rapported_inflation
 }
-#oil 
+#oil
 oil_price = {
 	value = 40
 	subtract = {
@@ -4640,26 +4648,26 @@ oil_price = {
 			divide = 40
 		}
 	}
-} 
+}
 buy_oil_market_panel = {
 	value = player.var:oil_market_panel_quantity
 	multiply = owner.oil_price
-} 
+}
 sell_oil_market_panel = {
 	value = player.var:oil_market_panel_quantity
 	multiply = player.oil_price
-} 
+}
 buy_oil_in_gold_market_panel = {
 	value = player.var:oil_market_panel_quantity
 	multiply = owner.oil_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_oil_in_gold_market_panel = {
 	value = player.var:oil_market_panel_quantity
 	multiply = player.oil_price
 	multiply = player.money_value_rapported_inflation
 }
-#engines 
+#engines
 engines_price = {
 	value = 60
 	subtract = {
@@ -4673,26 +4681,26 @@ engines_price = {
 			divide = 60
 		}
 	}
-} 
+}
 buy_engines_market_panel = {
 	value = player.var:engines_market_panel_quantity
 	multiply = owner.engines_price
-} 
+}
 sell_engines_market_panel = {
 	value = player.var:engines_market_panel_quantity
 	multiply = player.engines_price
-} 
+}
 buy_engines_in_gold_market_panel = {
 	value = player.var:engines_market_panel_quantity
 	multiply = owner.engines_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_engines_in_gold_market_panel = {
 	value = player.var:engines_market_panel_quantity
 	multiply = player.engines_price
 	multiply = player.money_value_rapported_inflation
 }
-#steel 
+#steel
 steel_price = {
 	value = 50
 	subtract = {
@@ -4706,26 +4714,26 @@ steel_price = {
 			divide = 50
 		}
 	}
-} 
+}
 buy_steel_market_panel = {
 	value = player.var:steel_market_panel_quantity
 	multiply = owner.steel_price
-} 
+}
 sell_steel_market_panel = {
 	value = player.var:steel_market_panel_quantity
 	multiply = player.steel_price
-} 
+}
 buy_steel_in_gold_market_panel = {
 	value = player.var:steel_market_panel_quantity
 	multiply = owner.steel_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_steel_in_gold_market_panel = {
 	value = player.var:steel_market_panel_quantity
 	multiply = player.steel_price
 	multiply = player.money_value_rapported_inflation
 }
-#fertilizer 
+#fertilizer
 fertilizer_price = {
 	value = 30
 	subtract = {
@@ -4739,26 +4747,26 @@ fertilizer_price = {
 			divide = 30
 		}
 	}
-} 
+}
 buy_fertilizer_market_panel = {
 	value = player.var:fertilizer_market_panel_quantity
 	multiply = owner.fertilizer_price
-} 
+}
 sell_fertilizer_market_panel = {
 	value = player.var:fertilizer_market_panel_quantity
 	multiply = player.fertilizer_price
-} 
+}
 buy_fertilizer_in_gold_market_panel = {
 	value = player.var:fertilizer_market_panel_quantity
 	multiply = owner.fertilizer_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_fertilizer_in_gold_market_panel = {
 	value = player.var:fertilizer_market_panel_quantity
 	multiply = player.fertilizer_price
 	multiply = player.money_value_rapported_inflation
 }
-#tools 
+#tools
 tools_price = {
 	value = 40
 	subtract = {
@@ -4772,26 +4780,26 @@ tools_price = {
 			divide = 40
 		}
 	}
-} 
+}
 buy_tools_market_panel = {
 	value = player.var:tools_market_panel_quantity
 	multiply = owner.tools_price
-} 
+}
 sell_tools_market_panel = {
 	value = player.var:tools_market_panel_quantity
 	multiply = player.tools_price
-} 
+}
 buy_tools_in_gold_market_panel = {
 	value = player.var:tools_market_panel_quantity
 	multiply = owner.tools_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_tools_in_gold_market_panel = {
 	value = player.var:tools_market_panel_quantity
 	multiply = player.tools_price
 	multiply = player.money_value_rapported_inflation
 }
-#explosives 
+#explosives
 explosives_price = {
 	value = 50
 	subtract = {
@@ -4805,26 +4813,26 @@ explosives_price = {
 			divide = 50
 		}
 	}
-} 
+}
 buy_explosives_market_panel = {
 	value = player.var:explosives_market_panel_quantity
 	multiply = owner.explosives_price
-} 
+}
 sell_explosives_market_panel = {
 	value = player.var:explosives_market_panel_quantity
 	multiply = player.explosives_price
-} 
+}
 buy_explosives_in_gold_market_panel = {
 	value = player.var:explosives_market_panel_quantity
 	multiply = owner.explosives_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_explosives_in_gold_market_panel = {
 	value = player.var:explosives_market_panel_quantity
 	multiply = player.explosives_price
 	multiply = player.money_value_rapported_inflation
 }
-#automobiles 
+#automobiles
 automobiles_price = {
 	value = 100
 	subtract = {
@@ -4838,26 +4846,26 @@ automobiles_price = {
 			divide = 100
 		}
 	}
-} 
+}
 buy_automobiles_market_panel = {
 	value = player.var:automobiles_market_panel_quantity
 	multiply = owner.automobiles_price
-} 
+}
 sell_automobiles_market_panel = {
 	value = player.var:automobiles_market_panel_quantity
 	multiply = player.automobiles_price
-} 
+}
 buy_automobiles_in_gold_market_panel = {
 	value = player.var:automobiles_market_panel_quantity
 	multiply = owner.automobiles_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_automobiles_in_gold_market_panel = {
 	value = player.var:automobiles_market_panel_quantity
 	multiply = player.automobiles_price
 	multiply = player.money_value_rapported_inflation
 }
-#telephones 
+#telephones
 telephones_price = {
 	value = 70
 	subtract = {
@@ -4871,26 +4879,26 @@ telephones_price = {
 			divide = 70
 		}
 	}
-} 
+}
 buy_telephones_market_panel = {
 	value = player.var:telephones_market_panel_quantity
 	multiply = owner.telephones_price
-} 
+}
 sell_telephones_market_panel = {
 	value = player.var:telephones_market_panel_quantity
 	multiply = player.telephones_price
-} 
+}
 buy_telephones_in_gold_market_panel = {
 	value = player.var:telephones_market_panel_quantity
 	multiply = owner.telephones_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_telephones_in_gold_market_panel = {
 	value = player.var:telephones_market_panel_quantity
 	multiply = player.telephones_price
 	multiply = player.money_value_rapported_inflation
 }
-#radios 
+#radios
 radios_price = {
 	value = 80
 	subtract = {
@@ -4904,26 +4912,26 @@ radios_price = {
 			divide = 80
 		}
 	}
-} 
+}
 buy_radios_market_panel = {
 	value = player.var:radios_market_panel_quantity
 	multiply = owner.radios_price
-} 
+}
 sell_radios_market_panel = {
 	value = player.var:radios_market_panel_quantity
 	multiply = player.radios_price
-} 
+}
 buy_radios_in_gold_market_panel = {
 	value = player.var:radios_market_panel_quantity
 	multiply = owner.radios_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_radios_in_gold_market_panel = {
 	value = player.var:radios_market_panel_quantity
 	multiply = player.radios_price
 	multiply = player.money_value_rapported_inflation
 }
-#opium 
+#opium
 opium_price = {
 	value = 50
 	subtract = {
@@ -4937,26 +4945,26 @@ opium_price = {
 			divide = 50
 		}
 	}
-} 
+}
 buy_opium_market_panel = {
 	value = player.var:opium_market_panel_quantity
 	multiply = owner.opium_price
-} 
+}
 sell_opium_market_panel = {
 	value = player.var:opium_market_panel_quantity
 	multiply = player.opium_price
-} 
+}
 buy_opium_in_gold_market_panel = {
 	value = player.var:opium_market_panel_quantity
 	multiply = owner.opium_price
 	multiply = owner.money_value_rapported_inflation
-} 
+}
 sell_opium_in_gold_market_panel = {
 	value = player.var:opium_market_panel_quantity
 	multiply = player.opium_price
 	multiply = player.money_value_rapported_inflation
 }
- 
+
 ###########################################################################################################################################################################################
 ###########################################################################################################################################################################################
 ###########################################################################################################################################################################################
@@ -5052,7 +5060,7 @@ total_at_term_10Y = {
 	value = bond_final_interest_10Y
 	add = price_bond
 }
- 
+
 ###########################################################################################################################################################################################
 ###########################################################################################################################################################################################
 #scripter gui pas pour l'affichage
@@ -6333,7 +6341,7 @@ ai_central_bank_debt_privat_bank_gold_loaned_25 = {
 		add = owner.var:ai_privat_bank_bond_value_25
 	}
 }
- 
+
 #private bank interest
 ai_privat_bank_total_interest_gui = {
 	value = 0
@@ -6525,7 +6533,7 @@ ai_entral_bank_debt_privat_bank_interest_refund_per_year_25 = {
 		add = owner.var:ai_privat_bank_interest_calculated_25
 	}
 }
- 
+
 ########################################################################################################################################
 ########################################################################################################################################
 ########################################################################################################################################

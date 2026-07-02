@@ -15,32 +15,32 @@
 ########################################################################################################################################
 ########################################################################################################################################
 
-pm_no_bond_exchange = {
-	texture = "gfx/interface/icons/production_method_icons/bond_exchange.dds"
+# pm_no_bond_exchange = {
+# 	texture = "gfx/interface/icons/production_method_icons/bond_exchange.dds"
 
-	unlocking_production_methods = {	
-		pm_no_bond_exchange
-	}
+# 	unlocking_production_methods = {	
+# 		pm_no_bond_exchange
+# 	}
 
-	building_modifiers = {
-		level_scaled = {
-			building_employment_clerks_add = 5
-            building_employment_bureaucrats_add = 10
-		}
-		workforce_scaled = {
-		}
-	}
-	country_modifiers = {
-		workforce_scaled = {
-		}
-	}
-}
+# 	building_modifiers = {
+# 		level_scaled = {
+# 			building_employment_clerks_add = 5
+#             building_employment_bureaucrats_add = 10
+# 		}
+# 		workforce_scaled = {
+# 		}
+# 	}
+# 	country_modifiers = {
+# 		workforce_scaled = {
+# 		}
+# 	}
+# }
 pm_bond_exchange = {
 	texture = "gfx/interface/icons/production_method_icons/bond_exchange.dds"
 
-	unlocking_production_methods = {	
-		pm_bond_exchange
-	}
+	# unlocking_production_methods = {	
+	# 	pm_bond_exchange
+	# }
 
 	building_modifiers = {
 		level_scaled = { 
@@ -66,10 +66,11 @@ pm_bond_exchange = {
 
 pm_no_manufacture_stock_exchange = {
 	texture = "gfx/interface/icons/production_method_icons/no_manufacture_stock_exchange.dds" 
-   
-	unlocking_production_methods = {	
-		pm_no_manufacture_stock_exchange
-	}
+   	is_default = yes
+
+	# unlocking_production_methods = {	
+	# 	pm_no_manufacture_stock_exchange
+	# }
 	building_modifiers = {
 		level_scaled = {
 		}
@@ -84,9 +85,9 @@ pm_no_manufacture_stock_exchange = {
 pm_manufacture_stock_exchange = {
 	texture = "gfx/interface/icons/production_method_icons/manufacture_stock_exchange.dds"
 
-	unlocking_production_methods = {	
-		pm_manufacture_stock_exchange
-	}
+	# unlocking_production_methods = {	
+	# 	pm_manufacture_stock_exchange
+	# }
 	unlocking_technologies = {
 		financial_center
 	}
@@ -104,9 +105,9 @@ pm_manufacture_stock_exchange = {
 pm_no_agricultural_stock_exchange = {
 	texture = "gfx/interface/icons/production_method_icons/no_agricultural_stock_exchange.dds" 
    
-	unlocking_production_methods = {	
-		pm_no_agricultural_stock_exchange
-	}
+	# unlocking_production_methods = {	
+	# 	pm_no_agricultural_stock_exchange
+	# }
 	building_modifiers = {
 		level_scaled = {
 		}
@@ -121,9 +122,9 @@ pm_no_agricultural_stock_exchange = {
 pm_agricultural_stock_exchange = {
 	texture = "gfx/interface/icons/production_method_icons/agricultural_stock_exchange.dds"
 
-	unlocking_production_methods = {	
-		pm_agricultural_stock_exchange
-	}
+	# unlocking_production_methods = {	
+	# 	pm_agricultural_stock_exchange
+	# }
 	unlocking_technologies = {
 		financial_center
 	}
@@ -141,9 +142,9 @@ pm_agricultural_stock_exchange = {
 pm_no_mining_stock_exchange = {
 	texture = "gfx/interface/icons/production_method_icons/no_mining_stock_exchange.dds"
 
-	unlocking_production_methods = {	
-		pm_no_mining_stock_exchange
-	}
+	# unlocking_production_methods = {	
+	# 	pm_no_mining_stock_exchange
+	# }
 	building_modifiers = {
 		level_scaled = {
 		}
@@ -158,9 +159,9 @@ pm_no_mining_stock_exchange = {
 pm_mining_stock_exchange = {
 	texture = "gfx/interface/icons/production_method_icons/mining_stock_exchange.dds"
 
-	unlocking_production_methods = {	
-		pm_mining_stock_exchange
-	}
+	# unlocking_production_methods = {	
+	# 	pm_mining_stock_exchange
+	# }
 	unlocking_technologies = {
 		financial_center
 	}
@@ -178,9 +179,9 @@ pm_mining_stock_exchange = {
 pm_no_railroad_stock_exchange = {
 	texture = "gfx/interface/icons/production_method_icons/no_railroad_stock_exchange.dds"
 
-	unlocking_production_methods = {	
-		pm_no_railroad_stock_exchange
-	}
+	# unlocking_production_methods = {	
+	# 	pm_no_railroad_stock_exchange
+	# }
 	building_modifiers = {
 		workforce_scaled = {
 		}
@@ -193,9 +194,9 @@ pm_no_railroad_stock_exchange = {
 pm_railroad_stock_exchange = {
 	texture = "gfx/interface/icons/production_method_icons/railroad_stock_exchange.dds"
 
-	unlocking_production_methods = {	
-		pm_railroad_stock_exchange
-	}
+	# unlocking_production_methods = {	
+	# 	pm_railroad_stock_exchange
+	# }
 	unlocking_technologies = {
 		financial_center
 	}
@@ -209,3 +210,6 @@ pm_railroad_stock_exchange = {
 		}
 	}
 }
+
+
+#required_input_goods = key peux etre activer que si le good est dans le marché

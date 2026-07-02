@@ -20706,6 +20706,52 @@ test_23_c_global_stokpile_variable_list = {
 }
 
 
+#test_24
+test_24_c_global_stokpile_variable_list = {
+	every_country = {
+		limit = {
+			has_modifier = has_central_bank 
+			#has_building = building_bank
+			has_law = law_type:law_external_exchange_standard
+		}
+		root = {
+			add_to_variable_list = {
+				name = test_24_c_global_stokpile_variable_list_test_24
+				target = prev
+			}
+		}
+	}
+	root  = {
+		if = {
+			clear_variable_list = list_before_order
+			every_in_list = {
+				variable = test_24_c_global_stokpile_variable_list_test_24
+				root = {
+					add_to_variable_list = {
+						name = list_before_order
+						target = prev
+					}
+				}
+			}
+			clear_variable_list = test_24_c_global_stokpile_variable_list_ordered_test_24
+			if = {
+				ordered_in_list = {
+					variable = list_before_order
+					order_by = national_capacity #{ value = 0 subtract = money_value_in_gold }
+					max = 100
+					check_range_bounds = no
+					root = {
+						add_to_variable_list = {
+							name = test_24_c_global_stokpile_variable_list_ordered_test_24
+							target = prev
+						}
+					}
+				}
+			}
+		}
+		clear_variable_list = test_24_c_global_stokpile_variable_list_test_24
+	}
+}
 
 
      

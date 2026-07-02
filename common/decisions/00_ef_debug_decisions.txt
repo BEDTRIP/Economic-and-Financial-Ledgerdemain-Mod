@@ -55,16 +55,46 @@ Test_event_1 = {
 		base = 0
     }
 
-	when_taken = {              
-		# trigger_event = {
-		# 	id = 00_ef_economic_event.106
-		# 	days = 0
-		# 	popup = no
-		# }  
-		monetary_policy_ideology_dynamic = yes 
-		# #monetary_policy_ideology_dynamic_reset = yes
+	when_taken = {  
+		every_scope_state = {
+			#dollar_canadian_dollar
+			if = {
+				limit = {
+					owner = {
+						or = {
+							any_overlord_or_above = {
+								has_law = law_type:law_dollar_canadian_dollar_currency
+							}
+							market.owner = {
+								has_law = law_type:law_dollar_canadian_dollar_currency
+							}
+						}
+						market_owner_is_root = no
+						market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent 
+					}
+					has_building = building_bank 
+					not = {
+						is_production_method_active = {
+							building_type = building_bank
+							production_method = pm_subject_currency_dollar_canadian_dollar_currency
+						}
+					}
+				}
+				owner = {
+					change_variable = {
+						name = test_var_5 #use
+						add = 100
+					}
+				}
+				activate_production_method = {
+					building_type = building_bank
+					production_method = pm_subject_currency_dollar_canadian_dollar_currency
+				} 
+			} 
 
-	}
+
+		}
+	}	
 }
 
 #independence

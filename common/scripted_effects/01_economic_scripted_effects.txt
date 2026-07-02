@@ -1729,6 +1729,8 @@ is_treaty_port_disable_pm_market_liquidity = {
 	}
 }
 
+
+
 ###########################################################################################################################################################################################
 ###########################################################################################################################################################################################
 ###########################################################################################################################################################################################
@@ -10274,8 +10276,8 @@ global_monetary_reference_reset = {
 				}
 			}
 			central_bank_bankruptcy = yes
-		} 
-		
+		}
+
 		#country_bankruptcy
 		if = {
 			limit  = {
@@ -42285,7 +42287,7 @@ global_monetary_reference_reset = {
 				name = money_value_target_1
 				value = var:money_value_target_valided
 			}
- 
+
 			############# Reset
 			set_variable = {
 				name = devaluation_on_time
@@ -42313,7 +42315,7 @@ global_monetary_reference_reset = {
 				name = money_value_target_1
 				value = var:money_value_target_valided
 			}
- 
+
 			############# Reset
 			set_variable = {
 				name = revaluation_on_time
@@ -42324,7 +42326,7 @@ global_monetary_reference_reset = {
 		}
 	}
 
-	monetary_policy_ideology_dynamic = {  
+	monetary_policy_ideology_dynamic = {
 		capital= {
 			save_scope_as = capital_state
 		}
@@ -42343,37 +42345,37 @@ global_monetary_reference_reset = {
 				exists = scope:ig_want_a_large_monetary_policy
 				or = {
 					central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent > 1.25
-					central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 0.75 
+					central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 0.75
 				}
 			}
 			trigger_event = 00_ef_economic_event.106
-		}  
+		}
 
 		random_interest_group = {
 			limit = {
-				has_ideology = ideology:ideology_monetary_policy 
+				has_ideology = ideology:ideology_monetary_policy
 			}
-			save_scope_as = ig_no_want_a_large_monetary_policy 
+			save_scope_as = ig_no_want_a_large_monetary_policy
 		}
 		if = {
 			limit = {
 				exists = scope:ig_no_want_a_large_monetary_policy
  				AND = {
 					central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 1.25
-					central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent > 0.75 
+					central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent > 0.75
 				}
 			}
 			trigger_event = 00_ef_economic_event.107
-		}  
-	}  
-	monetary_policy_ideology_dynamic_reset = { 
+		}
+	}
+	monetary_policy_ideology_dynamic_reset = {
 		every_interest_group = {
 			limit = {
-				has_ideology = ideology:ideology_monetary_policy 
+				has_ideology = ideology:ideology_monetary_policy
 			}
-			remove_ideology = ideology_monetary_policy 
-		} 
-	} 
+			remove_ideology = ideology_monetary_policy
+		}
+	}
 #brace
 
 ############################################################################################################################################################
@@ -42408,7 +42410,7 @@ stockpiling_central_bank_metal_reserves_state = {
 	# 			has_law = law_type:law_bimetallism_standard
 	# 		}
 	# 	}
-	# 	storing_gold_1 = yes 
+	# 	storing_gold_1 = yes
 	# }
 	# if = {
 	# 	limit = {
@@ -42419,7 +42421,7 @@ stockpiling_central_bank_metal_reserves_state = {
 	# 	}
 	# 	storing_silver_1 = yes
 
-	# }  
+	# }
 	storing_gold_1 = yes
 	storing_silver_1 = yes
 }
@@ -134805,7 +134807,7 @@ enemy_capital_is_occuped = {
 					name = stockpiling_opium_state_1
 					divide = 2
 				}
- 
+
 				#####################
 				#financial product
 				#####################
@@ -136304,7 +136306,7 @@ central_bank_production_methods = {
 		}
 	}
 }
-central_bank_production_methods_2 = { #subject
+central_bank_production_methods_2 = { #subject //Désactiver suite à trop de bug
 	every_scope_state = {
 		#dinar
 		if = {
@@ -136318,7 +136320,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_dinar_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -136329,10 +136334,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_dinar_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#dinar_algerian_dinar
@@ -136347,7 +136348,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_dinar_algerian_dinar_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -136358,10 +136362,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_dinar_algerian_dinar_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#dinar_iraqi_dinar
@@ -136376,7 +136376,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_dinar_iraqi_dinar_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -136387,10 +136390,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_dinar_iraqi_dinar_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#dinar_libyan_dinar
@@ -136405,7 +136404,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_dinar_libyan_dinar_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -136416,10 +136418,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_dinar_libyan_dinar_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#dinar_moroccan_dirham
@@ -136434,7 +136432,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_dinar_moroccan_dirham_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -136445,10 +136446,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_dinar_moroccan_dirham_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#dinar_omanian_rial
@@ -136463,7 +136460,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_dinar_omanian_rial_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -136474,10 +136474,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_dinar_omanian_rial_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#dinar_qiran
@@ -136492,7 +136488,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_dinar_qiran_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -136503,10 +136502,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_dinar_qiran_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#dinar_saudi_riyal
@@ -136521,7 +136516,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_dinar_saudi_riyal_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -136532,10 +136530,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_dinar_saudi_riyal_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#dinar_serbian_dinar
@@ -136550,7 +136544,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_dinar_serbian_dinar_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -136561,10 +136558,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_dinar_serbian_dinar_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#dinar_tunisian_dinar
@@ -136579,7 +136572,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_dinar_tunisian_dinar_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -136590,10 +136586,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_dinar_tunisian_dinar_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#dinar_yugoslav_dinar
@@ -136608,7 +136600,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_dinar_yugoslav_dinar_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -136619,10 +136614,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_dinar_yugoslav_dinar_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#dollar_australian_dollar
@@ -136637,7 +136628,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_dollar_australian_dollar_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -136648,10 +136642,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_dollar_australian_dollar_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#dollar_canadian_dollar
@@ -136666,7 +136656,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_dollar_canadian_dollar_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -136677,10 +136670,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_dollar_canadian_dollar_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#dollar_caribbean_dollar
@@ -136695,7 +136684,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_dollar_caribbean_dollar_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -136706,10 +136698,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_dollar_caribbean_dollar_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#dollar_confederate_states_dollar
@@ -136724,7 +136712,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_dollar_confederate_states_dollar_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -136735,10 +136726,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_dollar_confederate_states_dollar_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#dollar_liberian_dollar
@@ -136753,7 +136740,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_dollar_liberian_dollar_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -136764,10 +136754,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_dollar_liberian_dollar_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#dollar_new_zealand_dollar
@@ -136782,7 +136768,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_dollar_new_zealand_dollar_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -136793,10 +136782,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_dollar_new_zealand_dollar_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#dollar_sierra_leonean_dollar
@@ -136811,7 +136796,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_dollar_sierra_leonean_dollar_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -136822,10 +136810,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_dollar_sierra_leonean_dollar_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#dollar_united_states_dollar
@@ -136840,7 +136824,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_dollar_united_states_dollar_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -136851,10 +136838,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_dollar_united_states_dollar_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#eco_ariary
@@ -136869,7 +136852,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_eco_ariary_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -136880,10 +136866,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_eco_ariary_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#eco_central_african_eco
@@ -136898,7 +136880,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_eco_central_african_eco_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -136909,10 +136894,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_eco_central_african_eco_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#eco_east_african_eco
@@ -136927,7 +136908,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_eco_east_african_eco_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -136938,10 +136922,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_eco_east_african_eco_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#eco_ethiopian_birr
@@ -136956,7 +136936,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_eco_ethiopian_birr_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -136967,10 +136950,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_eco_ethiopian_birr_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#eco_ghanaian_pound
@@ -136985,7 +136964,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_eco_ghanaian_pound_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -136996,10 +136978,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_eco_ghanaian_pound_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#eco_nigerian_naira
@@ -137014,7 +136992,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_eco_nigerian_naira_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137025,10 +137006,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_eco_nigerian_naira_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#eco_south_african_rand
@@ -137043,7 +137020,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_eco_south_african_rand_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137054,10 +137034,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_eco_south_african_rand_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#eco_tuareg_ouguiya
@@ -137072,7 +137048,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_eco_tuareg_ouguiya_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137083,10 +137062,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_eco_tuareg_ouguiya_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#eco_west_african_eco
@@ -137101,7 +137076,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_eco_west_african_eco_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137112,10 +137090,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_eco_west_african_eco_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#franc_belgian_franc
@@ -137130,7 +137104,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_franc_belgian_franc_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137142,40 +137119,35 @@ central_bank_production_methods_2 = { #subject
 				building_type = building_bank
 				production_method = pm_subject_currency_franc_belgian_franc_currency
 			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
-			}
 		}
-		#franc_french_franc
-		if = {
-			limit = {
-				owner = {
-					or = {
-						any_overlord_or_above = {
-							has_law = law_type:law_franc_french_franc_currency
-						}
-						market.owner = {
-							has_law = law_type:law_franc_french_franc_currency
-						}
-					}
-				}
-				not = {
-					is_production_method_active = {
-						building_type = building_bank
-						production_method = pm_subject_currency_franc_french_franc_currency
-					}
-				}
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_subject_currency_franc_french_franc_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
-			}
-		}
+		# #franc_french_franc
+		# if = {
+		# 	limit = {
+		# 		owner = {
+		# 			or = {
+		# 				any_overlord_or_above = {
+		# 					has_law = law_type:law_franc_french_franc_currency
+		# 				}
+		# 				market.owner = {
+		# 					has_law = law_type:law_franc_french_franc_currency
+		# 				}
+		# 			}
+		# 			market_owner_is_root = no
+		# 			market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
+		# 		}
+		# 		has_building = building_bank
+		# 		not = {
+		# 			is_production_method_active = {
+		# 				building_type = building_bank
+		# 				production_method = pm_subject_currency_franc_french_franc_currency
+		# 			}
+		# 		}
+		# 	}
+		# 	activate_production_method = {
+		# 		building_type = building_bank
+		# 		production_method = pm_subject_currency_franc_french_franc_currency
+		# 	}
+		# }
 		#franc_luxembourgish_franc
 		if = {
 			limit = {
@@ -137188,7 +137160,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_franc_luxembourgish_franc_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137199,10 +137174,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_franc_luxembourgish_franc_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#franc_swiss_franc
@@ -137217,7 +137188,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_franc_swiss_franc_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137228,10 +137202,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_franc_swiss_franc_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#gulden
@@ -137246,7 +137216,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_gulden_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137257,10 +137230,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_gulden_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#gulden_bavarian_gulden
@@ -137275,7 +137244,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_gulden_bavarian_gulden_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137286,10 +137258,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_gulden_bavarian_gulden_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#gulden_florin
@@ -137304,7 +137272,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_gulden_florin_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137315,10 +137286,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_gulden_florin_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#gulden_hungarian_forint
@@ -137333,7 +137300,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_gulden_hungarian_forint_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137344,10 +137314,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_gulden_hungarian_forint_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#gulden_indies_guilder
@@ -137362,7 +137328,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_gulden_indies_guilder_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137370,13 +137339,15 @@ central_bank_production_methods_2 = { #subject
 					}
 				}
 			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_subject_currency_gulden_indies_guilder_currency
+			owner = {
+				change_variable = {
+					name = test_var_5 #use
+					add = 1
+				}
 			}
 			activate_production_method = {
 				building_type = building_bank
-				production_method = pm_no_metal_consuption
+				production_method = pm_subject_currency_gulden_indies_guilder_currency
 			}
 		}
 		#gulden_south_german_gulden
@@ -137391,7 +137362,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_gulden_south_german_gulden_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137402,10 +137376,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_gulden_south_german_gulden_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#krone_czech_koruna
@@ -137420,7 +137390,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_krone_czech_koruna_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137431,10 +137404,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_krone_czech_koruna_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#krone_danish_krone
@@ -137449,7 +137418,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_krone_danish_krone_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137460,10 +137432,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_krone_danish_krone_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#krone_estonian_kroon
@@ -137478,7 +137446,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_krone_estonian_kroon_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137489,10 +137460,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_krone_estonian_kroon_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#krone_icelandic_krona
@@ -137507,7 +137474,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_krone_icelandic_krona_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137518,10 +137488,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_krone_icelandic_krona_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#krone_norwegian_krone
@@ -137536,7 +137502,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_krone_norwegian_krone_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137547,10 +137516,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_krone_norwegian_krone_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#krone_slovak_koruna
@@ -137565,7 +137530,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_krone_slovak_koruna_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137576,10 +137544,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_krone_slovak_koruna_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#krone_swedish_krona
@@ -137594,7 +137558,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_krone_swedish_krona_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137605,10 +137572,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_krone_swedish_krona_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#leon_leu
@@ -137623,7 +137586,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_leon_leu_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137634,10 +137600,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_leon_leu_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#leon_lev
@@ -137652,7 +137614,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_leon_lev_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137663,10 +137628,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_leon_lev_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#lira
@@ -137681,7 +137642,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_lira_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137692,10 +137656,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_lira_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#lira_ducato
@@ -137710,7 +137670,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_lira_ducato_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137721,10 +137684,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_lira_ducato_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#lira_ottoman_lira
@@ -137739,7 +137698,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_lira_ottoman_lira_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137750,10 +137712,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_lira_ottoman_lira_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#lira_scudo_pontificio
@@ -137768,7 +137726,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_lira_scudo_pontificio_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137779,10 +137740,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_lira_scudo_pontificio_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#lira_scudo_sardo
@@ -137797,7 +137754,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_lira_scudo_sardo_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137808,10 +137768,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_lira_scudo_sardo_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#lira_toscane_lira
@@ -137826,7 +137782,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_lira_toscane_lira_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137837,10 +137796,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_lira_toscane_lira_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#mark
@@ -137855,7 +137810,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_mark_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137866,10 +137824,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_mark_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#mark_finnish_markka
@@ -137884,7 +137838,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_mark_finnish_markka_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137895,10 +137852,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_mark_finnish_markka_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#peso
@@ -137913,7 +137866,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_peso_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137924,10 +137880,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_peso_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#peso_argentine_peso
@@ -137942,7 +137894,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_peso_argentine_peso_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137953,10 +137908,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_peso_argentine_peso_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#peso_bolivien_peso
@@ -137971,7 +137922,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_peso_bolivien_peso_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -137982,10 +137936,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_peso_bolivien_peso_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#peso_chilean_peso
@@ -138000,7 +137950,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_peso_chilean_peso_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138011,10 +137964,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_peso_chilean_peso_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#peso_colombian_peso
@@ -138029,7 +137978,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_peso_colombian_peso_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138040,10 +137992,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_peso_colombian_peso_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#peso_costa_rican_colon
@@ -138058,7 +138006,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_peso_costa_rican_colon_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138069,10 +138020,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_peso_costa_rican_colon_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#peso_cuban_peso
@@ -138087,7 +138034,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_peso_cuban_peso_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138098,10 +138048,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_peso_cuban_peso_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#peso_ecuadorian_peso
@@ -138116,7 +138062,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_peso_ecuadorian_peso_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138127,10 +138076,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_peso_ecuadorian_peso_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#peso_el_salvador_colon
@@ -138145,7 +138090,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_peso_el_salvador_colon_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138156,10 +138104,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_peso_el_salvador_colon_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#peso_guatemalan_quetzal
@@ -138174,7 +138118,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_peso_guatemalan_quetzal_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138185,10 +138132,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_peso_guatemalan_quetzal_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#peso_honduran_lempira
@@ -138203,7 +138146,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_peso_honduran_lempira_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138214,10 +138160,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_peso_honduran_lempira_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#peso_mexican_peso
@@ -138232,7 +138174,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_peso_mexican_peso_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138243,10 +138188,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_peso_mexican_peso_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#peso_nicaraguan_cordoba
@@ -138261,7 +138202,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_peso_nicaraguan_cordoba_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138272,10 +138216,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_peso_nicaraguan_cordoba_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#peso_paraguayan_peso
@@ -138290,7 +138230,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_peso_paraguayan_peso_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138301,10 +138244,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_peso_paraguayan_peso_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#peso_philippine_peso
@@ -138319,7 +138258,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_peso_philippine_peso_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138330,10 +138272,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_peso_philippine_peso_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#peso_sol_de_oro
@@ -138348,7 +138286,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_peso_sol_de_oro_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138359,10 +138300,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_peso_sol_de_oro_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#peso_uruguayan_peso
@@ -138377,7 +138314,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_peso_uruguayan_peso_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138388,10 +138328,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_peso_uruguayan_peso_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#peso_venezuelan_peso
@@ -138406,7 +138342,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_peso_venezuelan_peso_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138417,10 +138356,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_peso_venezuelan_peso_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#pound_egyptian_pound
@@ -138435,7 +138370,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_pound_egyptian_pound_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138446,10 +138384,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_pound_egyptian_pound_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#pound_irish_pound
@@ -138464,7 +138398,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_pound_irish_pound_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138475,10 +138412,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_pound_irish_pound_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#pound_sterling
@@ -138493,7 +138426,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_pound_sterling_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138504,10 +138440,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_pound_sterling_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#real
@@ -138522,7 +138454,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_real_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138533,10 +138468,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_real_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#real_brazilian_real
@@ -138551,7 +138482,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_real_brazilian_real_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138562,10 +138496,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_real_brazilian_real_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#rupee_indian_rupee
@@ -138580,7 +138510,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_rupee_indian_rupee_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138591,10 +138524,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_rupee_indian_rupee_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#rupee_indonesian_rupiah
@@ -138609,7 +138538,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_rupee_indonesian_rupiah_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138620,10 +138552,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_rupee_indonesian_rupiah_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#spe_baht
@@ -138638,7 +138566,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_spe_baht_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138649,10 +138580,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_spe_baht_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#spe_dong
@@ -138667,7 +138594,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_spe_dong_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138678,10 +138608,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_spe_dong_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#spe_drachma
@@ -138696,7 +138622,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_spe_drachma_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138707,10 +138636,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_spe_drachma_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#spe_korean_won
@@ -138725,7 +138650,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_spe_korean_won_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138736,10 +138664,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_spe_korean_won_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#spe_latvian_lats
@@ -138754,7 +138678,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_spe_latvian_lats_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138765,10 +138692,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_spe_latvian_lats_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#spe_lithuanian_litas
@@ -138783,7 +138706,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_spe_lithuanian_litas_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138794,10 +138720,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_spe_lithuanian_litas_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#spe_peseta
@@ -138812,7 +138734,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_spe_peseta_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138823,10 +138748,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_spe_peseta_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#spe_ruble
@@ -138841,7 +138762,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_spe_ruble_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138852,10 +138776,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_spe_ruble_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#spe_uni
@@ -138870,7 +138790,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_spe_uni_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138881,10 +138804,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_spe_uni_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#spe_yen
@@ -138899,7 +138818,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_spe_yen_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138910,10 +138832,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_spe_yen_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#spe_yuan
@@ -138928,7 +138846,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_spe_yuan_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138939,10 +138860,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_spe_yuan_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#spe_zloti
@@ -138957,7 +138874,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_spe_zloti_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138968,10 +138888,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_spe_zloti_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#thaler_hannoveraner_thaler
@@ -138986,7 +138902,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_thaler_hannoveraner_thaler_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -138997,10 +138916,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_thaler_hannoveraner_thaler_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#thaler_prussian_thaler
@@ -139015,7 +138930,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_thaler_prussian_thaler_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -139026,10 +138944,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_thaler_prussian_thaler_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 		#thaler_saxon_thaler
@@ -139044,7 +138958,10 @@ central_bank_production_methods_2 = { #subject
 							has_law = law_type:law_thaler_saxon_thaler_currency
 						}
 					}
+					market_owner_is_root = no
+					market_owner_is_root_univ_with_buiding = no #pays avec une centrale bank independente (blocke la repetition) donc le block ne fonction que si je ne possede pas mohn marcher et que les pm de ma bank sont celle d'un pays independent
 				}
+				has_building = building_bank
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -139055,10 +138972,6 @@ central_bank_production_methods_2 = { #subject
 			activate_production_method = {
 				building_type = building_bank
 				production_method = pm_subject_currency_thaler_saxon_thaler_currency
-			}
-			activate_production_method = {
-				building_type = building_bank
-				production_method = pm_no_metal_consuption
 			}
 		}
 	}
@@ -139071,13 +138984,13 @@ central_bank_production_methods_2_act = {
 					market.owner = this
 				}
 			}
-			central_bank_production_methods_2 = yes
+			#central_bank_production_methods_2 = yes
 		}
 	}
 }
 central_bank_production_methods_3 = {
 	every_scope_state = {
-				#dinar
+		#dinar
 		if = {
 			limit = {
 				owner = {
@@ -141458,7 +141371,7 @@ central_bank_production_methods_4 = {
 	every_scope_state = {
 		#-> pm_no_gold_standard_bank_money_currency
 		if = {
-			limit = { 
+			limit = {
 				not = {
 					is_production_method_active = {
 						building_type = building_bank
@@ -143658,7 +143571,7 @@ reset_debt_in_national_currency = {
 
 remove_suject_currency = {
 	activate_law = law_type:law_fiat_standard #law_no_monetary_system #Si on laisse law_no_monetary_system le systeme retourne jamais au silver standart il reste bloquer en no_monetary et utilise sa currency comme sourece de metal ou celle de l'overlord
-	 
+
 	macro_facilities_on_action_bc = yes #On reprend completement
 
 	# #a verifier
@@ -143707,11 +143620,11 @@ remove_suject_currency = {
 	# 		var:law_gold_exchange_standard = 1
 	# 	}
 	# 	activate_law = law_type:law_gold_exchange_standard
-	# } 
-	
-	central_bank_production_methods_2 = yes
+	# }
+
+	#central_bank_production_methods_2 = yes
 	money_value_target_modification = yes #il faut recalculer la target à verifier
- 
+
 	#pas de reset auto, si le pays ce crash à la libration il passe par la vois normal de la faillité
 
 	#Event for player
@@ -143741,8 +143654,8 @@ remove_suject_currency = {
 }
 subject_currency = {
 	activate_law = law_type:law_external_exchange_standard
- 
-	central_bank_production_methods_2 = yes
+
+	#central_bank_production_methods_2 = yes
 	#central_bank_production_methods = yes #why not?
 	money_value_target_modification = yes
 

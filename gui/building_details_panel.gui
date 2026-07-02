@@ -277,7 +277,40 @@ types building_panels
 							building_average_wage_label = {
 								margin_top = 10
 							}
-						}
+
+							flowcontainer = {
+								margin_top = 5
+								visible = "[Building.HasHoldingCharacter]"
+								datacontext = "[Building.AccessHoldingCharacter]"
+								spacing = 5
+
+								button = {
+									size = { 40 40 }
+									onclick = "[InformationPanelBar.OpenCharacterPanel(Character.AccessSelf)]"
+									onrightclick = "[RightClickMenuManager.ShowForCharacter(Character.AccessSelf)]"
+									tooltip = "GO_TO_BUTTON_CHARACTER"
+
+									character_portrait_small = {}
+								}
+
+								flowcontainer = {
+									direction = vertical
+									textbox = {
+										text = "HOLDING"
+										autoresize = yes
+										align = nobaseline
+										using = tooltip_font
+									}
+
+									textbox = {
+										text = "[Character.GetFullName]"
+										autoresize = yes
+										align = nobaseline
+										using = tooltip_font
+									}
+								}
+							}
+						} 
 
 						building_productivity_mini_chart = {}
 					}
@@ -1069,19 +1102,6 @@ types building_panels
 						}
 					}
 
-					### port connection revenue
-					building_process_entry = {
-						blockoverride "visible" {
-							visible = "[GreaterThan_CFixedPoint(Building.GetPortConnectionRevenue, '(CFixedPoint)0')]"
-						}
-						blockoverride "text" {
-							text = "PORT_CONNECTION_REVENUE"
-						}
-						blockoverride "text_right" {
-							raw_text = "#variable [Building.GetState.GetOwner.GetCustom('currency_symbol')][Building.GetPortConnectionRevenue|K]#!"
-						}
-					}
-
 					### Ship construction revenue
 					building_process_entry = {
 						blockoverride "visible" {
@@ -1107,6 +1127,7 @@ types building_panels
 						blockoverride "text_right" {
 							raw_text = "#variable [Building.GetState.GetOwner.GetCustom('currency_symbol')][Building.GetSupplyShipMaintenanceRevenue|K]#!"
 						}
+						tooltip = "SUPPLY_SHIP_BUILDING_MAINTENANCE_EXPENSES_BREAKDOWN"
 					}
 
 					### Military ship maintenance revenue
@@ -1116,10 +1137,12 @@ types building_panels
 						}
 						blockoverride "text" {
 							text = "MILITARY_SHIP_MAINTENANCE_REVENUE"
+							fontsize = 14
 						}
 						blockoverride "text_right" {
 							raw_text = "#variable [Building.GetState.GetOwner.GetCustom('currency_symbol')][Building.GetMilitaryShipMaintenanceRevenue|K]#!"
 						}
+						tooltip = "MILITARY_SHIP_BUILDING_MAINTENANCE_EXPENSES"
 					}
 
 					building_process_entry = {
@@ -1134,6 +1157,21 @@ types building_panels
 						}
 						blockoverride "text_right" {
 							raw_text = "#variable [Building.CalcUrbanizationProvided|+=]#!"
+						}
+					}
+
+					building_process_entry = {
+						tooltip = BUILDING_LOGISTICS_SUPPLY_TOOLTIP
+
+						blockoverride "visible" {
+							visible = "[Not(IsDataModelEmpty(Building.GetSuppliedFormations))]"
+						}
+
+						blockoverride "text" {
+							raw_text = "[concept_supply]"
+						}
+						blockoverride "text_right" {
+							text = "BUILDING_LOGISTICS_SUPPLY_VALUE"
 						}
 					}
 				}
@@ -4515,19 +4553,6 @@ types building_panels
 				}
 			}
 
-			### port connection revenue
-			building_process_entry_small = {
-				blockoverride "visible" {
-					visible = "[GreaterThan_CFixedPoint(Building.GetPortConnectionRevenue, '(CFixedPoint)0')]"
-				}
-				blockoverride "text" {
-					text = "PORT_CONNECTION_REVENUE"
-				}
-				blockoverride "text_right" {
-					raw_text = "#variable [Building.GetState.GetOwner.GetCustom('currency_symbol')][Building.GetPortConnectionRevenue|K]#!"
-				}
-			}
-
 			### Ship construction revenue
 			building_process_entry_small = {
 				blockoverride "visible" {
@@ -4555,13 +4580,14 @@ types building_panels
 				}
 			}
 
-			### Supply ship maintenance revenue
+			### Military ship maintenance revenue
 			building_process_entry_small = {
 				blockoverride "visible" {
 					visible = "[GreaterThan_CFixedPoint(Building.GetMilitaryShipMaintenanceRevenue, '(CFixedPoint)0')]"
 				}
 				blockoverride "text" {
 					text = "MILITARY_SHIP_MAINTENANCE_REVENUE"
+					fontsize = 13
 				}
 				blockoverride "text_right" {
 					raw_text = "#variable [Building.GetState.GetOwner.GetCustom('currency_symbol')][Building.GetMilitaryShipMaintenanceRevenue|K]#!"

@@ -557,8 +557,8 @@ central_bank_ef_on_half_yearly_pulse_country = {
 		limit = {
 			is_player = yes
 		}
-		monetary_policy_ideology_dynamic = yes 
-	} 
+		monetary_policy_ideology_dynamic = yes
+	}
 	if  = {
 		limit  = {
 			has_central_bank_SS_BS_GS_GES_NISO = yes
@@ -646,11 +646,11 @@ financial_center_ef_on_half_yearly_pulse_country = {
 		interest_per_month_from_foreign_debt_investment = yes
 	}
 }
-national_stockpile_ef_on_half_yearly_pulse_country = { 
+national_stockpile_ef_on_half_yearly_pulse_country = {
 	if  = {
 		limit = {
 			has_modifier = has_national_stockpile
-		} 
+		}
 		national_stockpile_state_modifier_clean = yes #si je le met pas là max il sera activer à chaque fin de store/realease or si uje stock pas ou realease pas le bien qui est bloquer par moddifier il reste tout le temps
 	}
 }
@@ -998,7 +998,7 @@ central_bank_ef_on_yearly_pulse_country = {
 			market_owner_is_root = no
 			market_owner_is_root_univ_with_buiding = no #na pas la configuration deja sujet actif evite les répétition
 		}
-		central_bank_production_methods_2 = yes
+		#central_bank_production_methods_2 = yes
 	}
 	if = {
 		limit = {
@@ -17235,7 +17235,7 @@ RMSA_MMSA_order_trigger = {
 			}
 		}
 		sell_opium_order = yes
-	} 
+	}
 }
 ai_set_stockpile_reserve_limit = {
 	ef_ai_set_ammunition_reserve = yes

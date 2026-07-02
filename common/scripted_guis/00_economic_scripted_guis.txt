@@ -10,49 +10,48 @@ test_execute = {
 
 PL_actualize = {
 	effect  = {
-		list_generation_when_player_open_tab = yes
-		currency_law_list = yes
-		central_bank_debt_privat_bank_buyer_list_1_clear = yes
+		# list_generation_when_player_open_tab = yes
+		# currency_law_list = yes
+		# central_bank_debt_privat_bank_buyer_list_1_clear = yes
 
-		global_monetary_reference_flux = yes
-		national_capacity_variable_list = yes
+		# global_monetary_reference_flux = yes
+		# national_capacity_variable_list = yes
+ 
+		#scandinavian_leader_list_1_list = yes
+		# update_import_export_value_in_currency_in_reeserve_liste_debug = yes
+		# test_1_c_global_stokpile_variable_list = yes
+		# test_2_c_global_stokpile_variable_list = yes
+		# test_3_c_global_stokpile_variable_list = yes
+		# test_4_c_global_stokpile_variable_list = yes
+		# test_5_c_global_stokpile_variable_list = yes
+		# test_6_c_global_stokpile_variable_list = yes
+		# test_7_c_global_stokpile_variable_list = yes
+		# test_8_c_global_stokpile_variable_list = yes
+		# test_9_c_global_stokpile_variable_list = yes
+		# test_10_c_global_stokpile_variable_list = yes
+		# test_11_c_global_stokpile_variable_list = yes
+		# test_12_c_global_stokpile_variable_list = yes
+		# test_13_c_global_stokpile_variable_list = yes
+		# test_14_c_global_stokpile_variable_list = yes
+		# test_15_c_global_stokpile_variable_list = yes
 
+		# test_16_c_global_stokpile_variable_list = yes
+		# test_17_c_global_stokpile_variable_list = yes
+		# test_18_c_global_stokpile_variable_list_1_list = yes
+		# global_arbitrage_bank_variable_list = yes
 
-
-		update_import_export_value_in_currency_in_reeserve_liste_debug = yes
-		test_1_c_global_stokpile_variable_list = yes
-		test_2_c_global_stokpile_variable_list = yes
-		test_3_c_global_stokpile_variable_list = yes
-		test_4_c_global_stokpile_variable_list = yes
-		test_5_c_global_stokpile_variable_list = yes
-		test_6_c_global_stokpile_variable_list = yes
-		test_7_c_global_stokpile_variable_list = yes
-		test_8_c_global_stokpile_variable_list = yes
-		test_9_c_global_stokpile_variable_list = yes
-		test_10_c_global_stokpile_variable_list = yes
-		test_11_c_global_stokpile_variable_list = yes
-		test_12_c_global_stokpile_variable_list = yes
-		test_13_c_global_stokpile_variable_list = yes
-		test_14_c_global_stokpile_variable_list = yes
-		test_15_c_global_stokpile_variable_list = yes
-
-		test_16_c_global_stokpile_variable_list = yes
-		test_17_c_global_stokpile_variable_list = yes
-		test_18_c_global_stokpile_variable_list_1_list = yes
-		global_arbitrage_bank_variable_list = yes
-
-		global_arbitrage_bank_spe_ruble_variable_list = yes
-		update_company_Rothschild_Bank_fra_currency_stored_liste = yes
-
-
-
-		test_20_c_global_stokpile_variable_list = yes
-		test_21_c_global_stokpile_variable_list = yes
-		test_22_c_global_stokpile_variable_list = yes 
+		# global_arbitrage_bank_spe_ruble_variable_list = yes
+		# update_company_Rothschild_Bank_fra_currency_stored_liste = yes
 
 
 
-		scandinavian_leader_list_1_list = yes
+		# test_20_c_global_stokpile_variable_list = yes
+		# test_21_c_global_stokpile_variable_list = yes
+		# test_22_c_global_stokpile_variable_list = yes
+		test_24_c_global_stokpile_variable_list = yes 
+
+
+
 	}
 }
 
@@ -623,13 +622,13 @@ no_monetary_policy_0 = {
 	is_shown = {
 	}
 	is_valid = {
-		Not = {  
+		Not = {
 			or = {
-				has_law = law_type:law_no_monetary_policy 
+				has_law = law_type:law_no_monetary_policy
  				var:devaluation_on = 1
 				var:revaluation_on = 1
-			}  
-		} 
+			}
+		}
 	}
 	effect = {
 		activate_law = law_type:law_no_monetary_policy
@@ -1041,7 +1040,7 @@ revaluation_time_reduce = {
 
 ################################
 
-set_devaluation_rate = { 
+set_devaluation_rate = {
 	effect = {
 		set_variable = {
 			name = devaluation_on
@@ -1069,7 +1068,7 @@ set_devaluation_rate = {
 		#activate_law = law_type:law_no_monetary_policy
 	}
 }
-set_revaluation_rate = { 
+set_revaluation_rate = {
 	effect = {
 		set_variable = {
 			name = revaluation_on
@@ -1578,7 +1577,7 @@ interest_rate_policy_on = {
 		}
 	}
 }
-refinancing_operations_on = { 
+refinancing_operations_on = {
 	is_valid = {
 		Not = { var:refinancing_operations_on = 1 }
 	}
@@ -1592,7 +1591,7 @@ refinancing_operations_on = {
 			value = 1
 		}
 	}
-} 
+}
 interest_rate_policy_on_button_visibility = {
 	is_shown = {
 		var:interest_rate_policy_on = 1
@@ -1619,7 +1618,7 @@ devaluation_visibility = {
 		set_variable = {
 			name = revaluation_visibility_on
 			value = 0
-		} 
+		}
 	}
 }
 revaluation_visibility = {
@@ -1637,9 +1636,9 @@ revaluation_visibility = {
 		set_variable = {
 			name = revaluation_visibility_on
 			value = 1
-		} 
+		}
 	}
-}  
+}
 
 #autre
 has_gold_exchange_standard_tech_more_button_visibility = {

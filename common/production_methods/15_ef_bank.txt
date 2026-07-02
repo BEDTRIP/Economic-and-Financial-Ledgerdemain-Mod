@@ -210,43 +210,7 @@ pm_no_monetary_policy = {
         law_no_monetary_policy
     }
 }
-pm_revaluation_bank_money_currency = {
-	texture = "gfx/interface/icons/production_method_icons/revaluation.dds"
 
-	unlocking_production_methods = {
-		pm_reserve_currency_bank_money_currency
-	}
-
-	disallowing_laws = {
-		law_no_monetary_policy
-		law_devaluation
-		law_war_economy
-	}
-
-	building_modifiers = {
-		workforce_scaled = {
-			goods_output_money_add = -5000
-		}
-	}
-}
-pm_devaluation_bank_money_currency = {
-	texture = "gfx/interface/icons/production_method_icons/devaluation.dds"
-
-	unlocking_production_methods = {
-		pm_reserve_currency_bank_money_currency
-	}
-
-	disallowing_laws = {
-		law_no_monetary_policy
-		law_revaluation
-	}
-
-	building_modifiers = {
-		workforce_scaled = {
-			goods_output_money_add = 5000
-		}
-	}
-}
 
 pm_revaluation = {
 	texture = "gfx/interface/icons/production_method_icons/revaluation.dds"
@@ -274,6 +238,44 @@ pm_devaluation = {
 		}
 	}
 }
+ 
+# pm_revaluation_bank_money_currency = {
+# 	texture = "gfx/interface/icons/production_method_icons/revaluation.dds"
+
+# 	unlocking_production_methods = {
+# 		pm_reserve_currency_bank_money_currency
+# 	}
+
+# 	disallowing_laws = {
+# 		law_no_monetary_policy
+# 		law_devaluation
+# 		law_war_economy
+# 	}
+
+# 	building_modifiers = {
+# 		workforce_scaled = {
+# 			goods_output_money_add = -5000
+# 		}
+# 	}
+# }
+# pm_devaluation_bank_money_currency = {
+# 	texture = "gfx/interface/icons/production_method_icons/devaluation.dds"
+
+# 	unlocking_production_methods = {
+# 		pm_reserve_currency_bank_money_currency
+# 	}
+
+# 	disallowing_laws = {
+# 		law_no_monetary_policy
+# 		law_revaluation
+# 	}
+
+# 	building_modifiers = {
+# 		workforce_scaled = {
+# 			goods_output_money_add = 5000
+# 		}
+# 	}
+# }
 ############################################################################################################################################################
 ############################################################################################################################################################
 ############################################################################################################################################################
@@ -1653,17 +1655,17 @@ pm_currency_thaler_saxon_thaler_currency = {
 pm_no_subject_currency_type = {
 	texture = "gfx/interface/icons/production_method_icons/no_sub_currency.dds"
 
-	unlocking_production_methods = {
-		pm_no_subject_currency_type
-	}
+	# disallowing_laws = {
+	# 	law_external_exchange_standard
+	# }
 }
 #dinar
 pm_subject_currency_dinar_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_dinar_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -1676,8 +1678,8 @@ pm_subject_currency_dinar_algerian_dinar_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_dinar_algerian_dinar_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -1690,8 +1692,8 @@ pm_subject_currency_dinar_iraqi_dinar_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_dinar_iraqi_dinar_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -1704,8 +1706,8 @@ pm_subject_currency_dinar_libyan_dinar_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_dinar_libyan_dinar_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -1718,8 +1720,8 @@ pm_subject_currency_dinar_moroccan_dirham_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_dinar_moroccan_dirham_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -1732,8 +1734,8 @@ pm_subject_currency_dinar_omanian_rial_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_dinar_omanian_rial_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -1746,8 +1748,8 @@ pm_subject_currency_dinar_qiran_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_dinar_qiran_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -1760,8 +1762,8 @@ pm_subject_currency_dinar_saudi_riyal_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_dinar_saudi_riyal_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -1774,8 +1776,8 @@ pm_subject_currency_dinar_serbian_dinar_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_dinar_serbian_dinar_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -1788,8 +1790,8 @@ pm_subject_currency_dinar_tunisian_dinar_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_dinar_tunisian_dinar_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -1802,8 +1804,8 @@ pm_subject_currency_dinar_yugoslav_dinar_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_dinar_yugoslav_dinar_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -1816,8 +1818,8 @@ pm_subject_currency_dollar_australian_dollar_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_dollar_australian_dollar_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -1830,8 +1832,8 @@ pm_subject_currency_dollar_canadian_dollar_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_dollar_canadian_dollar_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -1844,8 +1846,8 @@ pm_subject_currency_dollar_caribbean_dollar_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_dollar_caribbean_dollar_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -1858,8 +1860,8 @@ pm_subject_currency_dollar_confederate_states_dollar_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_dollar_confederate_states_dollar_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -1872,8 +1874,8 @@ pm_subject_currency_dollar_liberian_dollar_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_dollar_liberian_dollar_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -1886,8 +1888,8 @@ pm_subject_currency_dollar_new_zealand_dollar_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_dollar_new_zealand_dollar_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -1900,8 +1902,8 @@ pm_subject_currency_dollar_sierra_leonean_dollar_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_dollar_sierra_leonean_dollar_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -1914,8 +1916,8 @@ pm_subject_currency_dollar_united_states_dollar_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_dollar_united_states_dollar_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -1928,8 +1930,8 @@ pm_subject_currency_eco_ariary_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_eco_ariary_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -1942,8 +1944,8 @@ pm_subject_currency_eco_central_african_eco_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_eco_central_african_eco_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -1956,8 +1958,8 @@ pm_subject_currency_eco_east_african_eco_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_eco_east_african_eco_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -1970,8 +1972,8 @@ pm_subject_currency_eco_ethiopian_birr_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_eco_ethiopian_birr_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -1984,8 +1986,8 @@ pm_subject_currency_eco_ghanaian_pound_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_eco_ghanaian_pound_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -1998,8 +2000,8 @@ pm_subject_currency_eco_nigerian_naira_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_eco_nigerian_naira_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2012,8 +2014,8 @@ pm_subject_currency_eco_south_african_rand_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_eco_south_african_rand_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2026,8 +2028,8 @@ pm_subject_currency_eco_tuareg_ouguiya_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_eco_tuareg_ouguiya_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2040,8 +2042,8 @@ pm_subject_currency_eco_west_african_eco_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_eco_west_african_eco_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2054,8 +2056,8 @@ pm_subject_currency_franc_belgian_franc_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_franc_belgian_franc_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2068,8 +2070,8 @@ pm_subject_currency_franc_french_franc_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_franc_french_franc_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2082,8 +2084,8 @@ pm_subject_currency_franc_luxembourgish_franc_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_franc_luxembourgish_franc_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2096,8 +2098,8 @@ pm_subject_currency_franc_swiss_franc_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_franc_swiss_franc_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2110,8 +2112,8 @@ pm_subject_currency_gulden_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_gulden_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2124,8 +2126,8 @@ pm_subject_currency_gulden_bavarian_gulden_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_gulden_bavarian_gulden_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2138,8 +2140,8 @@ pm_subject_currency_gulden_florin_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_gulden_florin_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2152,8 +2154,8 @@ pm_subject_currency_gulden_hungarian_forint_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_gulden_hungarian_forint_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2166,8 +2168,8 @@ pm_subject_currency_gulden_indies_guilder_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_gulden_indies_guilder_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2180,8 +2182,8 @@ pm_subject_currency_gulden_south_german_gulden_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_gulden_south_german_gulden_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2194,8 +2196,8 @@ pm_subject_currency_krone_czech_koruna_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_krone_czech_koruna_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2208,8 +2210,8 @@ pm_subject_currency_krone_danish_krone_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_krone_danish_krone_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2222,8 +2224,8 @@ pm_subject_currency_krone_estonian_kroon_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_krone_estonian_kroon_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2236,8 +2238,8 @@ pm_subject_currency_krone_icelandic_krona_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_krone_icelandic_krona_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2250,8 +2252,8 @@ pm_subject_currency_krone_norwegian_krone_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_krone_norwegian_krone_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2264,8 +2266,8 @@ pm_subject_currency_krone_slovak_koruna_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_krone_slovak_koruna_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2278,8 +2280,8 @@ pm_subject_currency_krone_swedish_krona_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_krone_swedish_krona_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2292,8 +2294,8 @@ pm_subject_currency_leon_leu_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_leon_leu_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2306,8 +2308,8 @@ pm_subject_currency_leon_lev_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_leon_lev_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2320,8 +2322,8 @@ pm_subject_currency_lira_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_lira_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2334,8 +2336,8 @@ pm_subject_currency_lira_ducato_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_lira_ducato_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2348,8 +2350,8 @@ pm_subject_currency_lira_ottoman_lira_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_lira_ottoman_lira_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2362,8 +2364,8 @@ pm_subject_currency_lira_scudo_pontificio_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_lira_scudo_pontificio_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2376,8 +2378,8 @@ pm_subject_currency_lira_scudo_sardo_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_lira_scudo_sardo_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2390,8 +2392,8 @@ pm_subject_currency_lira_toscane_lira_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_lira_toscane_lira_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2404,8 +2406,8 @@ pm_subject_currency_mark_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_mark_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2418,8 +2420,8 @@ pm_subject_currency_mark_finnish_markka_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_mark_finnish_markka_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2432,8 +2434,8 @@ pm_subject_currency_peso_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_peso_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2446,8 +2448,8 @@ pm_subject_currency_peso_argentine_peso_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_peso_argentine_peso_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2460,8 +2462,8 @@ pm_subject_currency_peso_bolivien_peso_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_peso_bolivien_peso_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2474,8 +2476,8 @@ pm_subject_currency_peso_chilean_peso_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_peso_chilean_peso_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2488,8 +2490,8 @@ pm_subject_currency_peso_colombian_peso_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_peso_colombian_peso_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2502,8 +2504,8 @@ pm_subject_currency_peso_costa_rican_colon_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_peso_costa_rican_colon_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2516,8 +2518,8 @@ pm_subject_currency_peso_cuban_peso_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_peso_cuban_peso_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2530,8 +2532,8 @@ pm_subject_currency_peso_ecuadorian_peso_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_peso_ecuadorian_peso_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2544,8 +2546,8 @@ pm_subject_currency_peso_el_salvador_colon_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_peso_el_salvador_colon_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2558,8 +2560,8 @@ pm_subject_currency_peso_guatemalan_quetzal_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_peso_guatemalan_quetzal_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2572,8 +2574,8 @@ pm_subject_currency_peso_honduran_lempira_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_peso_honduran_lempira_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2586,8 +2588,8 @@ pm_subject_currency_peso_mexican_peso_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_peso_mexican_peso_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2600,8 +2602,8 @@ pm_subject_currency_peso_nicaraguan_cordoba_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_peso_nicaraguan_cordoba_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2614,8 +2616,8 @@ pm_subject_currency_peso_paraguayan_peso_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_peso_paraguayan_peso_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2628,8 +2630,8 @@ pm_subject_currency_peso_philippine_peso_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_peso_philippine_peso_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2642,8 +2644,8 @@ pm_subject_currency_peso_sol_de_oro_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_peso_sol_de_oro_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2656,8 +2658,8 @@ pm_subject_currency_peso_uruguayan_peso_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_peso_uruguayan_peso_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2670,8 +2672,8 @@ pm_subject_currency_peso_venezuelan_peso_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_peso_venezuelan_peso_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2684,8 +2686,8 @@ pm_subject_currency_pound_egyptian_pound_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_pound_egyptian_pound_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2698,8 +2700,8 @@ pm_subject_currency_pound_irish_pound_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_pound_irish_pound_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2712,8 +2714,8 @@ pm_subject_currency_pound_sterling_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_pound_sterling_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2726,8 +2728,8 @@ pm_subject_currency_real_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_real_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2740,8 +2742,8 @@ pm_subject_currency_real_brazilian_real_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_real_brazilian_real_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2754,8 +2756,8 @@ pm_subject_currency_rupee_indian_rupee_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_rupee_indian_rupee_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2768,8 +2770,8 @@ pm_subject_currency_rupee_indonesian_rupiah_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_rupee_indonesian_rupiah_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2782,8 +2784,8 @@ pm_subject_currency_spe_baht_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_spe_baht_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2796,8 +2798,8 @@ pm_subject_currency_spe_dong_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_spe_dong_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2810,8 +2812,8 @@ pm_subject_currency_spe_drachma_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_spe_drachma_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2824,8 +2826,8 @@ pm_subject_currency_spe_korean_won_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_spe_korean_won_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2838,8 +2840,8 @@ pm_subject_currency_spe_latvian_lats_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_spe_latvian_lats_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2852,8 +2854,8 @@ pm_subject_currency_spe_lithuanian_litas_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_spe_lithuanian_litas_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2866,8 +2868,8 @@ pm_subject_currency_spe_peseta_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_spe_peseta_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2880,8 +2882,8 @@ pm_subject_currency_spe_ruble_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_spe_ruble_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2894,8 +2896,8 @@ pm_subject_currency_spe_uni_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_spe_uni_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2908,8 +2910,8 @@ pm_subject_currency_spe_yen_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_spe_yen_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2922,8 +2924,8 @@ pm_subject_currency_spe_yuan_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_spe_yuan_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2936,8 +2938,8 @@ pm_subject_currency_spe_zloti_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_spe_zloti_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2950,8 +2952,8 @@ pm_subject_currency_thaler_hannoveraner_thaler_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_thaler_hannoveraner_thaler_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2964,8 +2966,8 @@ pm_subject_currency_thaler_prussian_thaler_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_thaler_prussian_thaler_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2978,8 +2980,8 @@ pm_subject_currency_thaler_saxon_thaler_currency = {
 	texture = "gfx/interface/icons/production_method_icons/sub_currency.dds"
 	is_hidden_when_unavailable = yes
 
-	unlocking_production_methods = {
-		pm_subject_currency_thaler_saxon_thaler_currency
+	unlocking_laws = {
+		law_external_exchange_standard
 	}
 	building_modifiers = {
 		workforce_scaled = {
@@ -2987,6 +2989,9 @@ pm_subject_currency_thaler_saxon_thaler_currency = {
 		}
 	}
 }
+
+
+
 
 # ############################################################################################################################################################
 # ############################################################################################################################################################
@@ -3004,66 +3009,7 @@ pm_subject_currency_thaler_saxon_thaler_currency = {
 # ############################################################################################################################################################
 # ############################################################################################################################################################
 # ############################################################################################################################################################
-
-# pm_no_additional_production_method = {
-# 	texture = "gfx/interface/icons/production_method_icons/pm_no_additional_production_method.dds"
-
-# 	unlocking_production_methods = {
-# 		pm_no_additional_production_method
-# 	}
-# 	country_modifiers = {
-# 	}
-# }
-# pm_desactive_bc = {
-# 	texture = "gfx/interface/icons/production_method_icons/pm_desactive_bc.dds"
-
-# 	unlocking_production_methods = {
-# 		pm_desactive_bc
-# 	}
-# 	country_modifiers = {
-# 		unscaled = {
-# 			country_minting_mult = -1
-# 		}
-# 	}
-# }
-# pm_protectora_limit_30 = {
-# 	texture = "gfx/interface/icons/production_method_icons/pm_protectora_limit_30.dds"
-
-# 	unlocking_production_methods = {
-# 		pm_protectora_limit_30
-# 	}
-# 	country_modifiers = {
-# 		unscaled = {
-# 			country_minting_mult = -0.30
-# 		}
-# 	}
-# }
-# pm_dominion_limit_50 = {
-# 	texture = "gfx/interface/icons/production_method_icons/pm_dominion_limit_50.dds"
-
-# 	unlocking_production_methods = {
-# 		pm_dominion_limit_50
-# 	}
-# 	country_modifiers = {
-# 		unscaled = {
-# 			country_minting_mult = -0.5
-# 		}
-# 	}
-# }
-# pm_puppet_limit_75 = {
-# 	texture = "gfx/interface/icons/production_method_icons/pm_puppet_limit_75.dds"
-
-# 	unlocking_production_methods = {
-# 		pm_puppet_limit_75
-# 	}
-# 	country_modifiers = {
-# 		unscaled = {
-# 			country_minting_mult = -0.75
-# 		}
-# 	}
-# }
-
-
+ 
 # ############################################################################################################################################################
 # ############################################################################################################################################################
 # ############################################################################################################################################################

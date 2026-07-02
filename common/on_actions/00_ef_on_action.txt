@@ -285,7 +285,7 @@ ef_on_decade_pulse_country = {
 	effect = {
 		if = {
 			limit = {
-        has_modifier = has_national_stockpile
+        		has_modifier = has_national_stockpile
 				market_owner_is_root  = yes
 				is_ai = yes
 			}
@@ -397,18 +397,23 @@ ef_on_battle_ended = {
 	}
 }
 
-# ef_on_production_method_changed = {
-# 	effect = {
-# 		owner = {
-# 			if = {
-# 				limit = {
-# 					has_modifier = has_national_stockpile
-# 					#market_owner_is_root= yes
-# 				}
-# 				validate_national_stockpiles_production_methods_reset = yes
-# 				validate_national_stockpiles_production_methods_store_0 = yes
-# 				validate_national_stockpiles_production_methods_release_0 = yes
-# 			}
-# 		}
-# 	}
-# }
+ef_on_production_method_changed = {
+	effect = {
+		owner = { 
+			# if = {
+			# 	limit = {
+			# 		has_modifier = has_central_bank 
+ 			# 		has_law = law_type:law_external_exchange_standard  
+   			# 	}
+			# 	central_bank_production_methods_2 = yes 
+ 			# }
+			if = {
+				limit = {
+					has_modifier = has_financial_center
+ 				}
+				financial_center_production_methods = yes
+ 			}
+			private_ownership_production_stocks = yes 
+		}
+	}
+}

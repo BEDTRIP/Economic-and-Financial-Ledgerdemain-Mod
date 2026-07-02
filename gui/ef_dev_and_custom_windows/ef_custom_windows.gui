@@ -7861,6 +7861,78 @@ default_popup = {
 							}
 
 
+							
+							#test_24_c_global_stokpile_variable_list_ordered_test_24
+							textbox = {
+								text = "test_24_c_global_stokpile_variable_list_ordered_test_24"
+								align = left|nobaseline
+								elide = right
+								default_format = "#white #bold"
+								autoresize = yes
+								fontsize = 20
+								allow_outside = yes
+								ignoreinvisible = yes
+								margin_left = 0
+
+								position = { 75 8 }
+							}
+							flowcontainer = {
+								direction = vertical
+								#datamodel = "[GetGlobalList('test_11_c_global_stokpile_variable_list_ordered_test_12')]"
+								datamodel = "[GetPlayer.MakeScope.GetList('test_24_c_global_stokpile_variable_list_ordered_test_24')]"
+
+								margin_top = 10 
+
+								item = {
+									button = {
+										using = default_button
+										size = { 350 40 }
+
+										hbox = {
+											margin = { 12 0 }
+
+											textbox = {
+												layoutstretchfactor_horizontal = 1
+												layoutpolicy_horizontal = expanding
+
+												datacontext = "[Scope.GetCountry]"
+
+												text = "[Country.GetName]"
+												margin_left = 0
+												margin_bottom = 1
+												elide = right
+												align = left|nobaseline
+												parentanchor = left|nobaseline
+												alwaystransparent = yes
+											}
+
+											vertical_divider = {}
+
+											textbox = {
+												layoutstretchfactor_horizontal = 1
+												layoutpolicy_horizontal = expanding
+
+												datacontext = "[Scope.GetCountry]"
+
+												tooltip = "NATIONAL_CAPACITY_TOOLTIPS"
+
+												text = "[Country.MakeScope.ScriptValue('central_bank_silver_reserves_market_goods_sell_orders')|D]#! @silver!"
+												margin_left = 12
+												margin_bottom = 1
+												elide = right
+												align = left|nobaseline
+												parentanchor = left|nobaseline
+												alwaystransparent = yes
+											}
+										}
+									}
+								}
+							}
+
+
+
+
+
 						}
 						#colone 2
 						flowcontainer = {
@@ -43250,7 +43322,7 @@ default_popup = {
 						spacing = 1
 
 						textbox = {
-							text = "dinar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dinar')|D]"
+							text = "dinar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dinar')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43260,7 +43332,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "dinar_algerian_dinar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dinar_algerian_dinar')|D]"
+							text = "dinar_algerian_dinar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dinar_algerian_dinar')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43270,7 +43342,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "dinar_iraqi_dinar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dinar_iraqi_dinar')|D]"
+							text = "dinar_iraqi_dinar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dinar_iraqi_dinar')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43280,7 +43352,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "dinar_libyan_dinar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dinar_libyan_dinar')|D]"
+							text = "dinar_libyan_dinar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dinar_libyan_dinar')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43290,7 +43362,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "dinar_moroccan_dirham [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dinar_moroccan_dirham')|D]"
+							text = "dinar_moroccan_dirham [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dinar_moroccan_dirham')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43300,7 +43372,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "dinar_omanian_rial [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dinar_omanian_rial')|D]"
+							text = "dinar_omanian_rial [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dinar_omanian_rial')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43310,7 +43382,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "dinar_qiran [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dinar_qiran')|D]"
+							text = "dinar_qiran [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dinar_qiran')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43320,7 +43392,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "dinar_saudi_riyal [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dinar_saudi_riyal')|D]"
+							text = "dinar_saudi_riyal [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dinar_saudi_riyal')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43330,7 +43402,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "dinar_serbian_dinar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dinar_serbian_dinar')|D]"
+							text = "dinar_serbian_dinar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dinar_serbian_dinar')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43340,7 +43412,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "dinar_tunisian_dinar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dinar_tunisian_dinar')|D]"
+							text = "dinar_tunisian_dinar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dinar_tunisian_dinar')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43350,7 +43422,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "dinar_yugoslav_dinar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dinar_yugoslav_dinar')|D]"
+							text = "dinar_yugoslav_dinar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dinar_yugoslav_dinar')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43360,7 +43432,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "dollar_australian_dollar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dollar_australian_dollar')|D]"
+							text = "dollar_australian_dollar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dollar_australian_dollar')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43370,7 +43442,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "dollar_canadian_dollar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dollar_canadian_dollar')|D]"
+							text = "dollar_canadian_dollar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dollar_canadian_dollar')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43380,7 +43452,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "dollar_caribbean_dollar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dollar_caribbean_dollar')|D]"
+							text = "dollar_caribbean_dollar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dollar_caribbean_dollar')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43390,7 +43462,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "dollar_confederate_states_dollar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dollar_confederate_states_dollar')|D]"
+							text = "dollar_confederate_states_dollar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dollar_confederate_states_dollar')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43400,7 +43472,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "dollar_liberian_dollar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dollar_liberian_dollar')|D]"
+							text = "dollar_liberian_dollar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dollar_liberian_dollar')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43410,7 +43482,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "dollar_new_zealand_dollar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dollar_new_zealand_dollar')|D]"
+							text = "dollar_new_zealand_dollar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dollar_new_zealand_dollar')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43420,7 +43492,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "dollar_sierra_leonean_dollar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dollar_sierra_leonean_dollar')|D]"
+							text = "dollar_sierra_leonean_dollar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dollar_sierra_leonean_dollar')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43430,7 +43502,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "dollar_united_states_dollar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dollar_united_states_dollar')|D]"
+							text = "dollar_united_states_dollar [GetPlayer.MakeScope.ScriptValue('currency_identifiers_dollar_united_states_dollar')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43440,7 +43512,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "eco_ariary [GetPlayer.MakeScope.ScriptValue('currency_identifiers_eco_ariary')|D]"
+							text = "eco_ariary [GetPlayer.MakeScope.ScriptValue('currency_identifiers_eco_ariary')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43450,7 +43522,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "eco_central_african_eco [GetPlayer.MakeScope.ScriptValue('currency_identifiers_eco_central_african_eco')|D]"
+							text = "eco_central_african_eco [GetPlayer.MakeScope.ScriptValue('currency_identifiers_eco_central_african_eco')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43460,7 +43532,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "eco_east_african_eco [GetPlayer.MakeScope.ScriptValue('currency_identifiers_eco_east_african_eco')|D]"
+							text = "eco_east_african_eco [GetPlayer.MakeScope.ScriptValue('currency_identifiers_eco_east_african_eco')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43470,7 +43542,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "eco_ethiopian_birr [GetPlayer.MakeScope.ScriptValue('currency_identifiers_eco_ethiopian_birr')|D]"
+							text = "eco_ethiopian_birr [GetPlayer.MakeScope.ScriptValue('currency_identifiers_eco_ethiopian_birr')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43480,7 +43552,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "eco_ghanaian_pound [GetPlayer.MakeScope.ScriptValue('currency_identifiers_eco_ghanaian_pound')|D]"
+							text = "eco_ghanaian_pound [GetPlayer.MakeScope.ScriptValue('currency_identifiers_eco_ghanaian_pound')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43490,7 +43562,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "eco_nigerian_naira [GetPlayer.MakeScope.ScriptValue('currency_identifiers_eco_nigerian_naira')|D]"
+							text = "eco_nigerian_naira [GetPlayer.MakeScope.ScriptValue('currency_identifiers_eco_nigerian_naira')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43500,7 +43572,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "eco_south_african_rand [GetPlayer.MakeScope.ScriptValue('currency_identifiers_eco_south_african_rand')|D]"
+							text = "eco_south_african_rand [GetPlayer.MakeScope.ScriptValue('currency_identifiers_eco_south_african_rand')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43510,7 +43582,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "eco_tuareg_ouguiya [GetPlayer.MakeScope.ScriptValue('currency_identifiers_eco_tuareg_ouguiya')|D]"
+							text = "eco_tuareg_ouguiya [GetPlayer.MakeScope.ScriptValue('currency_identifiers_eco_tuareg_ouguiya')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43520,7 +43592,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "eco_west_african_eco [GetPlayer.MakeScope.ScriptValue('currency_identifiers_eco_west_african_eco')|D]"
+							text = "eco_west_african_eco [GetPlayer.MakeScope.ScriptValue('currency_identifiers_eco_west_african_eco')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43530,7 +43602,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "franc_belgian_franc [GetPlayer.MakeScope.ScriptValue('currency_identifiers_franc_belgian_franc')|D]"
+							text = "franc_belgian_franc [GetPlayer.MakeScope.ScriptValue('currency_identifiers_franc_belgian_franc')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43540,7 +43612,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "franc_french_franc [GetPlayer.MakeScope.ScriptValue('currency_identifiers_franc_french_franc')|D]"
+							text = "franc_french_franc [GetPlayer.MakeScope.ScriptValue('currency_identifiers_franc_french_franc')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43550,7 +43622,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "franc_luxembourgish_franc [GetPlayer.MakeScope.ScriptValue('currency_identifiers_franc_luxembourgish_franc')|D]"
+							text = "franc_luxembourgish_franc [GetPlayer.MakeScope.ScriptValue('currency_identifiers_franc_luxembourgish_franc')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43560,7 +43632,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "franc_swiss_franc [GetPlayer.MakeScope.ScriptValue('currency_identifiers_franc_swiss_franc')|D]"
+							text = "franc_swiss_franc [GetPlayer.MakeScope.ScriptValue('currency_identifiers_franc_swiss_franc')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43570,7 +43642,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "gulden [GetPlayer.MakeScope.ScriptValue('currency_identifiers_gulden')|D]"
+							text = "gulden [GetPlayer.MakeScope.ScriptValue('currency_identifiers_gulden')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43580,7 +43652,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "gulden_bavarian_gulden [GetPlayer.MakeScope.ScriptValue('currency_identifiers_gulden_bavarian_gulden')|D]"
+							text = "gulden_bavarian_gulden [GetPlayer.MakeScope.ScriptValue('currency_identifiers_gulden_bavarian_gulden')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43590,7 +43662,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "gulden_florin [GetPlayer.MakeScope.ScriptValue('currency_identifiers_gulden_florin')|D]"
+							text = "gulden_florin [GetPlayer.MakeScope.ScriptValue('currency_identifiers_gulden_florin')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43600,7 +43672,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "gulden_hungarian_forint [GetPlayer.MakeScope.ScriptValue('currency_identifiers_gulden_hungarian_forint')|D]"
+							text = "gulden_hungarian_forint [GetPlayer.MakeScope.ScriptValue('currency_identifiers_gulden_hungarian_forint')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43610,7 +43682,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "gulden_indies_guilder [GetPlayer.MakeScope.ScriptValue('currency_identifiers_gulden_indies_guilder')|D]"
+							text = "gulden_indies_guilder [GetPlayer.MakeScope.ScriptValue('currency_identifiers_gulden_indies_guilder')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43620,7 +43692,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "gulden_south_german_gulden [GetPlayer.MakeScope.ScriptValue('currency_identifiers_gulden_south_german_gulden')|D]"
+							text = "gulden_south_german_gulden [GetPlayer.MakeScope.ScriptValue('currency_identifiers_gulden_south_german_gulden')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43630,7 +43702,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "krone_czech_koruna [GetPlayer.MakeScope.ScriptValue('currency_identifiers_krone_czech_koruna')|D]"
+							text = "krone_czech_koruna [GetPlayer.MakeScope.ScriptValue('currency_identifiers_krone_czech_koruna')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43640,7 +43712,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "krone_danish_krone [GetPlayer.MakeScope.ScriptValue('currency_identifiers_krone_danish_krone')|D]"
+							text = "krone_danish_krone [GetPlayer.MakeScope.ScriptValue('currency_identifiers_krone_danish_krone')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43650,7 +43722,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "krone_estonian_kroon [GetPlayer.MakeScope.ScriptValue('currency_identifiers_krone_estonian_kroon')|D]"
+							text = "krone_estonian_kroon [GetPlayer.MakeScope.ScriptValue('currency_identifiers_krone_estonian_kroon')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43660,7 +43732,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "krone_icelandic_krona [GetPlayer.MakeScope.ScriptValue('currency_identifiers_krone_icelandic_krona')|D]"
+							text = "krone_icelandic_krona [GetPlayer.MakeScope.ScriptValue('currency_identifiers_krone_icelandic_krona')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43670,7 +43742,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "krone_norwegian_krone [GetPlayer.MakeScope.ScriptValue('currency_identifiers_krone_norwegian_krone')|D]"
+							text = "krone_norwegian_krone [GetPlayer.MakeScope.ScriptValue('currency_identifiers_krone_norwegian_krone')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43680,7 +43752,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "krone_slovak_koruna [GetPlayer.MakeScope.ScriptValue('currency_identifiers_krone_slovak_koruna')|D]"
+							text = "krone_slovak_koruna [GetPlayer.MakeScope.ScriptValue('currency_identifiers_krone_slovak_koruna')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43690,7 +43762,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "krone_swedish_krona [GetPlayer.MakeScope.ScriptValue('currency_identifiers_krone_swedish_krona')|D]"
+							text = "krone_swedish_krona [GetPlayer.MakeScope.ScriptValue('currency_identifiers_krone_swedish_krona')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43700,7 +43772,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "leon_leu [GetPlayer.MakeScope.ScriptValue('currency_identifiers_leon_leu')|D]"
+							text = "leon_leu [GetPlayer.MakeScope.ScriptValue('currency_identifiers_leon_leu')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43710,7 +43782,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "leon_lev [GetPlayer.MakeScope.ScriptValue('currency_identifiers_leon_lev')|D]"
+							text = "leon_lev [GetPlayer.MakeScope.ScriptValue('currency_identifiers_leon_lev')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43720,7 +43792,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "lira [GetPlayer.MakeScope.ScriptValue('currency_identifiers_lira')|D]"
+							text = "lira [GetPlayer.MakeScope.ScriptValue('currency_identifiers_lira')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43730,7 +43802,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "lira_ducato [GetPlayer.MakeScope.ScriptValue('currency_identifiers_lira_ducato')|D]"
+							text = "lira_ducato [GetPlayer.MakeScope.ScriptValue('currency_identifiers_lira_ducato')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43740,7 +43812,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "lira_ottoman_lira [GetPlayer.MakeScope.ScriptValue('currency_identifiers_lira_ottoman_lira')|D]"
+							text = "lira_ottoman_lira [GetPlayer.MakeScope.ScriptValue('currency_identifiers_lira_ottoman_lira')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43750,7 +43822,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "lira_scudo_pontificio [GetPlayer.MakeScope.ScriptValue('currency_identifiers_lira_scudo_pontificio')|D]"
+							text = "lira_scudo_pontificio [GetPlayer.MakeScope.ScriptValue('currency_identifiers_lira_scudo_pontificio')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43760,7 +43832,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "lira_scudo_sardo [GetPlayer.MakeScope.ScriptValue('currency_identifiers_lira_scudo_sardo')|D]"
+							text = "lira_scudo_sardo [GetPlayer.MakeScope.ScriptValue('currency_identifiers_lira_scudo_sardo')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43770,7 +43842,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "lira_toscane_lira [GetPlayer.MakeScope.ScriptValue('currency_identifiers_lira_toscane_lira')|D]"
+							text = "lira_toscane_lira [GetPlayer.MakeScope.ScriptValue('currency_identifiers_lira_toscane_lira')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43780,7 +43852,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "mark [GetPlayer.MakeScope.ScriptValue('currency_identifiers_mark')|D]"
+							text = "mark [GetPlayer.MakeScope.ScriptValue('currency_identifiers_mark')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43790,7 +43862,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "mark_finnish_markka [GetPlayer.MakeScope.ScriptValue('currency_identifiers_mark_finnish_markka')|D]"
+							text = "mark_finnish_markka [GetPlayer.MakeScope.ScriptValue('currency_identifiers_mark_finnish_markka')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43800,7 +43872,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "peso [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso')|D]"
+							text = "peso [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43810,7 +43882,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "peso_argentine_peso [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_argentine_peso')|D]"
+							text = "peso_argentine_peso [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_argentine_peso')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43820,7 +43892,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "peso_bolivien_peso [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_bolivien_peso')|D]"
+							text = "peso_bolivien_peso [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_bolivien_peso')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43830,7 +43902,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "peso_chilean_peso [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_chilean_peso')|D]"
+							text = "peso_chilean_peso [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_chilean_peso')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43840,7 +43912,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "peso_colombian_peso [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_colombian_peso')|D]"
+							text = "peso_colombian_peso [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_colombian_peso')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43850,7 +43922,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "peso_costa_rican_colon [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_costa_rican_colon')|D]"
+							text = "peso_costa_rican_colon [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_costa_rican_colon')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43860,7 +43932,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "peso_cuban_peso [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_cuban_peso')|D]"
+							text = "peso_cuban_peso [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_cuban_peso')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43870,7 +43942,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "peso_ecuadorian_peso [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_ecuadorian_peso')|D]"
+							text = "peso_ecuadorian_peso [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_ecuadorian_peso')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43880,7 +43952,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "peso_el_salvador_colon [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_el_salvador_colon')|D]"
+							text = "peso_el_salvador_colon [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_el_salvador_colon')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43890,7 +43962,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "peso_guatemalan_quetzal [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_guatemalan_quetzal')|D]"
+							text = "peso_guatemalan_quetzal [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_guatemalan_quetzal')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43900,7 +43972,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "peso_honduran_lempira [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_honduran_lempira')|D]"
+							text = "peso_honduran_lempira [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_honduran_lempira')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43910,7 +43982,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "peso_mexican_peso [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_mexican_peso')|D]"
+							text = "peso_mexican_peso [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_mexican_peso')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43920,7 +43992,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "peso_nicaraguan_cordoba [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_nicaraguan_cordoba')|D]"
+							text = "peso_nicaraguan_cordoba [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_nicaraguan_cordoba')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43930,7 +44002,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "peso_paraguayan_peso [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_paraguayan_peso')|D]"
+							text = "peso_paraguayan_peso [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_paraguayan_peso')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43940,7 +44012,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "peso_philippine_peso [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_philippine_peso')|D]"
+							text = "peso_philippine_peso [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_philippine_peso')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43950,7 +44022,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "peso_sol_de_oro [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_sol_de_oro')|D]"
+							text = "peso_sol_de_oro [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_sol_de_oro')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43960,7 +44032,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "peso_uruguayan_peso [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_uruguayan_peso')|D]"
+							text = "peso_uruguayan_peso [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_uruguayan_peso')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43970,7 +44042,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "peso_venezuelan_peso [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_venezuelan_peso')|D]"
+							text = "peso_venezuelan_peso [GetPlayer.MakeScope.ScriptValue('currency_identifiers_peso_venezuelan_peso')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43980,7 +44052,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "pound_egyptian_pound [GetPlayer.MakeScope.ScriptValue('currency_identifiers_pound_egyptian_pound')|D]"
+							text = "pound_egyptian_pound [GetPlayer.MakeScope.ScriptValue('currency_identifiers_pound_egyptian_pound')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -43990,7 +44062,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "pound_irish_pound [GetPlayer.MakeScope.ScriptValue('currency_identifiers_pound_irish_pound')|D]"
+							text = "pound_irish_pound [GetPlayer.MakeScope.ScriptValue('currency_identifiers_pound_irish_pound')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44000,7 +44072,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "pound_sterling [GetPlayer.MakeScope.ScriptValue('currency_identifiers_pound_sterling')|D]"
+							text = "pound_sterling [GetPlayer.MakeScope.ScriptValue('currency_identifiers_pound_sterling')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44010,7 +44082,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "real [GetPlayer.MakeScope.ScriptValue('currency_identifiers_real')|D]"
+							text = "real [GetPlayer.MakeScope.ScriptValue('currency_identifiers_real')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44020,7 +44092,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "real_brazilian_real [GetPlayer.MakeScope.ScriptValue('currency_identifiers_real_brazilian_real')|D]"
+							text = "real_brazilian_real [GetPlayer.MakeScope.ScriptValue('currency_identifiers_real_brazilian_real')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44030,7 +44102,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "rupee_indian_rupee [GetPlayer.MakeScope.ScriptValue('currency_identifiers_rupee_indian_rupee')|D]"
+							text = "rupee_indian_rupee [GetPlayer.MakeScope.ScriptValue('currency_identifiers_rupee_indian_rupee')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44040,7 +44112,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "rupee_indonesian_rupiah [GetPlayer.MakeScope.ScriptValue('currency_identifiers_rupee_indonesian_rupiah')|D]"
+							text = "rupee_indonesian_rupiah [GetPlayer.MakeScope.ScriptValue('currency_identifiers_rupee_indonesian_rupiah')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44050,7 +44122,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "spe_baht [GetPlayer.MakeScope.ScriptValue('currency_identifiers_spe_baht')|D]"
+							text = "spe_baht [GetPlayer.MakeScope.ScriptValue('currency_identifiers_spe_baht')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44060,7 +44132,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "spe_dong [GetPlayer.MakeScope.ScriptValue('currency_identifiers_spe_dong')|D]"
+							text = "spe_dong [GetPlayer.MakeScope.ScriptValue('currency_identifiers_spe_dong')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44070,7 +44142,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "spe_drachma [GetPlayer.MakeScope.ScriptValue('currency_identifiers_spe_drachma')|D]"
+							text = "spe_drachma [GetPlayer.MakeScope.ScriptValue('currency_identifiers_spe_drachma')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44080,7 +44152,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "spe_korean_won [GetPlayer.MakeScope.ScriptValue('currency_identifiers_spe_korean_won')|D]"
+							text = "spe_korean_won [GetPlayer.MakeScope.ScriptValue('currency_identifiers_spe_korean_won')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44090,7 +44162,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "spe_latvian_lats [GetPlayer.MakeScope.ScriptValue('currency_identifiers_spe_latvian_lats')|D]"
+							text = "spe_latvian_lats [GetPlayer.MakeScope.ScriptValue('currency_identifiers_spe_latvian_lats')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44100,7 +44172,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "spe_lithuanian_litas [GetPlayer.MakeScope.ScriptValue('currency_identifiers_spe_lithuanian_litas')|D]"
+							text = "spe_lithuanian_litas [GetPlayer.MakeScope.ScriptValue('currency_identifiers_spe_lithuanian_litas')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44110,7 +44182,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "spe_peseta [GetPlayer.MakeScope.ScriptValue('currency_identifiers_spe_peseta')|D]"
+							text = "spe_peseta [GetPlayer.MakeScope.ScriptValue('currency_identifiers_spe_peseta')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44120,7 +44192,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "spe_ruble [GetPlayer.MakeScope.ScriptValue('currency_identifiers_spe_ruble')|D]"
+							text = "spe_ruble [GetPlayer.MakeScope.ScriptValue('currency_identifiers_spe_ruble')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44130,7 +44202,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "spe_uni [GetPlayer.MakeScope.ScriptValue('currency_identifiers_spe_uni')|D]"
+							text = "spe_uni [GetPlayer.MakeScope.ScriptValue('currency_identifiers_spe_uni')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44140,7 +44212,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "spe_yen [GetPlayer.MakeScope.ScriptValue('currency_identifiers_spe_yen')|D]"
+							text = "spe_yen [GetPlayer.MakeScope.ScriptValue('currency_identifiers_spe_yen')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44150,7 +44222,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "spe_yuan [GetPlayer.MakeScope.ScriptValue('currency_identifiers_spe_yuan')|D]"
+							text = "spe_yuan [GetPlayer.MakeScope.ScriptValue('currency_identifiers_spe_yuan')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44160,7 +44232,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "spe_zloti [GetPlayer.MakeScope.ScriptValue('currency_identifiers_spe_zloti')|D]"
+							text = "spe_zloti [GetPlayer.MakeScope.ScriptValue('currency_identifiers_spe_zloti')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44170,7 +44242,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "thaler_hannoveraner_thaler [GetPlayer.MakeScope.ScriptValue('currency_identifiers_thaler_hannoveraner_thaler')|D]"
+							text = "thaler_hannoveraner_thaler [GetPlayer.MakeScope.ScriptValue('currency_identifiers_thaler_hannoveraner_thaler')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44180,7 +44252,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "thaler_prussian_thaler [GetPlayer.MakeScope.ScriptValue('currency_identifiers_thaler_prussian_thaler')|D]"
+							text = "thaler_prussian_thaler [GetPlayer.MakeScope.ScriptValue('currency_identifiers_thaler_prussian_thaler')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44190,7 +44262,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "thaler_saxon_thaler [GetPlayer.MakeScope.ScriptValue('currency_identifiers_thaler_saxon_thaler')|D]"
+							text = "thaler_saxon_thaler [GetPlayer.MakeScope.ScriptValue('currency_identifiers_thaler_saxon_thaler')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44224,7 +44296,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre')|D]"
+							text = "has_building_financial_centre [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44234,7 +44306,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_arg [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_arg')|D]"
+							text = "has_building_financial_centre_arg [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_arg')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44244,7 +44316,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_arg [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_arg')|D]"
+							text = "has_building_financial_centre_arg [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_arg')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44254,7 +44326,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_aus [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_aus')|D]"
+							text = "has_building_financial_centre_aus [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_aus')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44264,7 +44336,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_bav [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_bav')|D]"
+							text = "has_building_financial_centre_bav [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_bav')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44274,7 +44346,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_bel [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_bel')|D]"
+							text = "has_building_financial_centre_bel [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_bel')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44284,7 +44356,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_bic [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_bic')|D]"
+							text = "has_building_financial_centre_bic [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_bic')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44294,7 +44366,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_brz [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_brz')|D]"
+							text = "has_building_financial_centre_brz [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_brz')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44304,7 +44376,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_chi [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_chi')|D]"
+							text = "has_building_financial_centre_chi [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_chi')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44314,7 +44386,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_chl [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_chl')|D]"
+							text = "has_building_financial_centre_chl [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_chl')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44324,7 +44396,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_den [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_den')|D]"
+							text = "has_building_financial_centre_den [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_den')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44334,7 +44406,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_dei [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_dei')|D]"
+							text = "has_building_financial_centre_dei [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_dei')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44344,7 +44416,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_egy [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_egy')|D]"
+							text = "has_building_financial_centre_egy [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_egy')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44354,7 +44426,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_fra [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_fra')|D]"
+							text = "has_building_financial_centre_fra [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_fra')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44364,7 +44436,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_frm [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_frm')|D]"
+							text = "has_building_financial_centre_frm [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_frm')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44374,7 +44446,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_gbr [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_gbr')|D]"
+							text = "has_building_financial_centre_gbr [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_gbr')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44384,7 +44456,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_gbr_2 [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_gbr_2')|D]"
+							text = "has_building_financial_centre_gbr_2 [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_gbr_2')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44394,7 +44466,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_gre [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_gre')|D]"
+							text = "has_building_financial_centre_gre [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_gre')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44404,7 +44476,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_hkh [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_hkh')|D]"
+							text = "has_building_financial_centre_hkh [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_hkh')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44414,7 +44486,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_han [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_han')|D]"
+							text = "has_building_financial_centre_han [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_han')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44424,7 +44496,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_ita [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_ita')|D]"
+							text = "has_building_financial_centre_ita [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_ita')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44434,7 +44506,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_jap [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_jap')|D]"
+							text = "has_building_financial_centre_jap [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_jap')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44444,7 +44516,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_mex [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_mex')|D]"
+							text = "has_building_financial_centre_mex [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_mex')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44454,7 +44526,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_net [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_net')|D]"
+							text = "has_building_financial_centre_net [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_net')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44464,7 +44536,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_nsw [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_nsw')|D]"
+							text = "has_building_financial_centre_nsw [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_nsw')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44474,7 +44546,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_ont [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_ont')|D]"
+							text = "has_building_financial_centre_ont [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_ont')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44484,7 +44556,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_peu [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_peu')|D]"
+							text = "has_building_financial_centre_peu [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_peu')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44494,7 +44566,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_por [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_por')|D]"
+							text = "has_building_financial_centre_por [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_por')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44504,7 +44576,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_pru [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_pru')|D]"
+							text = "has_building_financial_centre_pru [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_pru')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44514,7 +44586,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_que [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_que')|D]"
+							text = "has_building_financial_centre_que [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_que')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44524,7 +44596,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_rus [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_rus')|D]"
+							text = "has_building_financial_centre_rus [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_rus')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44534,7 +44606,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_saf [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_saf')|D]"
+							text = "has_building_financial_centre_saf [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_saf')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44544,7 +44616,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_sar [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_sar')|D]"
+							text = "has_building_financial_centre_sar [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_sar')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44554,7 +44626,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_sic [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_sic')|D]"
+							text = "has_building_financial_centre_sic [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_sic')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44564,7 +44636,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_spa [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_spa')|D]"
+							text = "has_building_financial_centre_spa [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_spa')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44574,7 +44646,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_swe [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_swe')|D]"
+							text = "has_building_financial_centre_swe [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_swe')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44584,7 +44656,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_swi [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_swi')|D]"
+							text = "has_building_financial_centre_swi [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_swi')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44594,7 +44666,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_tus [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_tus')|D]"
+							text = "has_building_financial_centre_tus [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_tus')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44604,7 +44676,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_tur [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_tur')|D]"
+							text = "has_building_financial_centre_tur [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_tur')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44614,7 +44686,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_uru [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_uru')|D]"
+							text = "has_building_financial_centre_uru [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_uru')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44624,7 +44696,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_usa [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_usa')|D]"
+							text = "has_building_financial_centre_usa [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_usa')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44634,7 +44706,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_usa_2 [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_usa_2')|D]"
+							text = "has_building_financial_centre_usa_2 [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_usa_2')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -44644,7 +44716,7 @@ default_popup = {
 							autoresize = yes
 						}
 						textbox = {
-							text = "has_building_financial_centre_sax [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_sax')|D]"
+							text = "has_building_financial_centre_sax [GetPlayer.MakeScope.ScriptValue('has_building_financial_centre_sax')|D+]"
 							#text = "YYYY [GetPlayer.MakeScope.Var('YYYYYYYY').GetValue|D]"
 							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
@@ -53131,6 +53203,21 @@ default_popup = {
 							default_format = "#white #bold"
 							autoresize = yes
 						}
+
+						textbox = {
+							#text = "test_var_5 [GetPlayer.MakeScope.ScriptValue('money_value_in_gold')|D]"
+							text = "test_var_5 [GetPlayer.MakeScope.Var('test_var_5').GetValue|D]"
+							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
+
+							align = left|nobaseline
+							elide = right
+							default_format = "#white #bold"
+							autoresize = yes
+						}
+
+
+
+						
  					}
 				}
 			}
