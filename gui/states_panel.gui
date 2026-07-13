@@ -838,7 +838,7 @@ types state_panel_types
 
 											textbox = {
 												visible = "[Not(Goods.IsLocal)]"
-												raw_text = "[State.GetOwner.GetCustom('currency_symbol')][Goods.GetMarketPrice|0v] [Goods.GetCompareIconAgainstBasePriceNoFormatting( Goods.GetMarketPrice )]"
+												raw_text = "@money![Goods.GetMarketPrice|0v] [Goods.GetCompareIconAgainstBasePriceNoFormatting( Goods.GetMarketPrice )]"
 												align = hcenter|nobaseline
 												autoresize = yes
 												parentanchor = hcenter
@@ -4081,7 +4081,7 @@ types building_item_types
 					align = right|nobaseline
 					max_width = 52
 					fontsize_min = 12
-					raw_text = "#v [State.GetOwner.GetCustom('currency_symbol')][Building.GetAverageAnnualEarningsPerEmployeeFormatted|1+]#!"
+					raw_text = "#v @money![Building.GetAverageAnnualEarningsPerEmployeeFormatted|1+]#!"
 				}
 
 				textbox = {
@@ -4091,7 +4091,7 @@ types building_item_types
 					autoresize = yes
 					alpha = "[TransparentIfFalse(Building.IsActive)]"
 					align = right|nobaseline
-					raw_text = "#N [State.GetOwner.GetCustom('currency_symbol')]-[Building.GetGovernmentExpenses|D-]#!"
+					raw_text = "#N @money!-[Building.GetGovernmentExpenses|D-]#!"
 				}
 			}
 		}
@@ -4107,7 +4107,7 @@ types building_item_types
 			item = {
 				textbox = {
 					visible = "[And(PopListItem.GetPopType.HasSubsistenceIncome,GreaterThan_int64(Building.GetMaxPopSize(PopListItem.GetPopType),'(int64)0'))]"
-					raw_text = "[State.GetOwner.GetCustom('currency_symbol')][PopListItem.GetAverageAnnualWage|v1]"
+					raw_text = "@money![PopListItem.GetAverageAnnualWage|v1]"
 					autoresize = yes
 					align = right|nobaseline
 				}
@@ -4262,7 +4262,7 @@ types building_item_types
 							textbox = {
 								parentanchor = right
 								visible = "[And(Not(Building.IsGovernmentFunded), Building.IsActive)]"
-								raw_text = "#v [State.GetOwner.GetCustom('currency_symbol')][Building.GetAverageAnnualEarningsPerEmployeeFormatted|1+]#!"
+								raw_text = "#v @money![Building.GetAverageAnnualEarningsPerEmployeeFormatted|1+]#!"
 								align = right|nobaseline
 								autoresize = yes
 								minimumsize = { 23 27 }
@@ -4298,7 +4298,7 @@ types building_item_types
 
 								textbox = {
 									datacontext = "[Building]"
-									raw_text = "#N [State.GetOwner.GetCustom('currency_symbol')]#bold -[Building.GetSubsidies|D]#!"
+									raw_text = "#N @money!#bold -[Building.GetSubsidies|D]#!"
 									tooltip = "[Building.GetSubsidiesDesc]"
 									autoresize = yes
 									position = { 0 0 }
@@ -4641,7 +4641,7 @@ types building_item_types
 					parentanchor = vcenter
 					textbox = {
 						visible = "[And(And(Not(Building.IsGovernmentFunded), Building.IsActive), Not(Building.IsSubsistenceBuilding))]"
-						raw_text = "#v [State.GetOwner.GetCustom('currency_symbol')][Building.GetAverageAnnualEarningsPerEmployeeFormatted|1+]#!"
+						raw_text = "#v @money![Building.GetAverageAnnualEarningsPerEmployeeFormatted|1+]#!"
 						tooltip = "TOOLTIP_BUILDING_PRODUCTIVITY"
 						tooltipwidget = {
 							GraphTooltip_Productivity = {}

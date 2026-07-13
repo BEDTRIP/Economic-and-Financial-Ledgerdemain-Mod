@@ -4,14 +4,15 @@
 ### COAL MINE
 INJECT:building_coal_mine = {
     production_method_groups = {
-        pmg_market_liquidity
         pmg_private_ownership_mining_stock
+        pmg_market_liquidity
     }
 }
 
 ### IRON MINE
 INJECT:building_iron_mine = {
     production_method_groups = {
+        pmg_private_ownership_mining_stock
         pmg_market_liquidity
         pmg_private_ownership_mining_stock
     }
@@ -20,32 +21,33 @@ INJECT:building_iron_mine = {
 ### LEAD MINE
 INJECT:building_lead_mine = {
     production_method_groups = {
+        pmg_private_ownership_mining_stock
         pmg_market_liquidity
         pmg_private_ownership_mining_stock
     }
 }
 
-# ### SULFUR MINE
-# INJECT:building_sulfur_mine = {
-#     production_method_groups = {
-#         pmg_market_liquidity
-#         pmg_private_ownership_mining_stock
-#     }
-# }
+### SULFUR MINE
+INJECT:building_sulfur_mine = {
+    production_method_groups = {
+        pmg_market_liquidity
+        pmg_private_ownership_mining_stock
+    }
+}
 
 ### GOLD MINE
 INJECT:building_gold_mine = {
     production_method_groups = {
-        pmg_market_liquidity
         pmg_private_ownership_mining_stock
+        pmg_market_liquidity 
     }
 }
 
 ### GOLD FIELDS
 INJECT:building_gold_field = {
     production_method_groups = {
-        pmg_market_liquidity
         pmg_private_ownership_mining_stock
+        pmg_market_liquidity 
     }
 }
 
@@ -80,8 +82,8 @@ building_silver_mine = {
 		pmg_steam_automation_building_silver_mine
 		pmg_train_automation_building_silver_mine
 		############################################################################################################################################################
-		pmg_market_liquidity
-		pmg_private_ownership_mining_stock
+        pmg_private_ownership_mining_stock
+		pmg_market_liquidity 
 		############################################################################################################################################################
 	}
 	ownership_type = self

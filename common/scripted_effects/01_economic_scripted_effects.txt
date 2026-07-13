@@ -55415,7 +55415,14 @@ on_activate_law_devaluation = {
 ###########################################################################################################################################################################################
 
 stockpiling_currency = {
-	if  = { limit = { 	money_value_dinar > 0  } stockpiling_currency_type_1 = { currency = dinar }  }
+	if  = { 
+		limit = { 	
+			money_value_dinar > 0  
+		} 
+		stockpiling_currency_type_1 = { 
+			currency = dinar 
+		}  
+	}
 	if  = { limit = { 	money_value_dinar_algerian_dinar > 0  } stockpiling_currency_type_1 = { currency = dinar_algerian_dinar }  }
 	if  = { limit = { 	money_value_dinar_iraqi_dinar > 0  } stockpiling_currency_type_1 = { currency = dinar_iraqi_dinar }  }
 	if  = { limit = { 	money_value_dinar_libyan_dinar > 0  } stockpiling_currency_type_1 = { currency = dinar_libyan_dinar }  }
@@ -55641,32 +55648,32 @@ stockpiling_currency_type_1 = {
 			}
 		}
 
-		#Stockpiling if $currency$ in market but no my currency
-		if = {
-			limit = {
-				$currency$_c_market_goods_delta > 0
-			}
-			change_variable = {
-				name = stockpiling_$currency$_c_var_2
-				add = $currency$_c_market_goods_delta
-			}
-			change_variable = {
-				name = stockpiling_$currency$_c_var_2
-				multiply = 4
-			}
-			change_variable = {
-				name = stockpiling_$currency$_c_var_1
-				add = var:stockpiling_$currency$_c_var_2
-			}
-			scope:central_bank_site = {
-				if = {
-					set_variable = {
-						name = stockpiling_$currency$_state_1
-						value = root.var:stockpiling_$currency$_c_var_1
-					}
-				}
-			}
-		}
+		# #Stockpiling if $currency$ in market but no my currency -> plus de reserve de d'autre currency dans le marcher
+		# if = {
+		# 	limit = {
+		# 		$currency$_c_market_goods_delta > 0
+		# 	}
+		# 	change_variable = {
+		# 		name = stockpiling_$currency$_c_var_2
+		# 		add = $currency$_c_market_goods_delta
+		# 	}
+		# 	change_variable = {
+		# 		name = stockpiling_$currency$_c_var_2
+		# 		multiply = 4
+		# 	}
+		# 	change_variable = {
+		# 		name = stockpiling_$currency$_c_var_1
+		# 		add = var:stockpiling_$currency$_c_var_2
+		# 	}
+		# 	scope:central_bank_site = {
+		# 		if = {
+		# 			set_variable = {
+		# 				name = stockpiling_$currency$_state_1
+		# 				value = root.var:stockpiling_$currency$_c_var_1
+		# 			}
+		# 		}
+		# 	}
+		# }
 
 		#reserve_currency_$currency$
 		if = {
@@ -143880,7 +143887,7 @@ private_bank_gold_lose = {
 	}
 }
 private_bank_silver_lose = {
-			#company_Rothschild_Bank_gbr
+	#company_Rothschild_Bank_gbr
 	if = {
 		limit = {
 			scope:buyer = {

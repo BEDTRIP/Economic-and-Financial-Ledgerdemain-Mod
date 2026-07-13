@@ -53214,10 +53214,29 @@ default_popup = {
 							default_format = "#white #bold"
 							autoresize = yes
 						}
+						textbox = {
+							text = "base_demande_currency_state [GetPlayer.MakeScope.ScriptValue('base_demande_currency_state')|D]"
+							#text = "currency_market_goods_sell_orders_bis_fix [GetPlayer.MakeScope.Var('currency_market_goods_sell_orders_bis_fix').GetValue|D]"
+							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
+							align = left|nobaseline
+							elide = right
+							default_format = "#white #bold"
+							autoresize = yes
+						}
 
+						textbox = {
+							text = "currency_market_goods_sell_orders_per_state [GetPlayer.MakeScope.ScriptValue('currency_market_goods_sell_orders_per_state')|D]"
+							#text = "currency_market_goods_sell_orders_bis_fix [GetPlayer.MakeScope.Var('currency_market_goods_sell_orders_bis_fix').GetValue|D]"
+							#text = "XXXX [GetGlobalVariable('XXXX').GetValue|D]"
 
-						
+							align = left|nobaseline
+							elide = right
+							default_format = "#white #bold"
+							autoresize = yes
+						}
+
+ 
  					}
 				}
 			}

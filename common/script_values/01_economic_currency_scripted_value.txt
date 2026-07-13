@@ -219,1351 +219,26 @@ money_value_in_gold_by_country = {
 ############################################################################################################################################################
 
 #currency demande
-
+#Vw9mvBZGQtK3y8UeNtRD
 ############################################################################################################################################################
 ############################################################################################################################################################
 ############################################################################################################################################################
 ############################################################################################################################################################
- 
-base_demande_currency = {  
-	value = 0
-	#dinar
-	if = {
-		limit = {
-			has_law = law_type:law_dinar_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_dinar_c_add
-	} 
-	#dinar_algerian_dinar
-	if = {
-		limit = {
-			has_law = law_type:law_dinar_algerian_dinar_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_dinar_algerian_dinar_c_add
-	} 
-	#dinar_iraqi_dinar
-	if = {
-		limit = {
-			has_law = law_type:law_dinar_iraqi_dinar_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_dinar_iraqi_dinar_c_add
-	} 
-	#dinar_libyan_dinar
-	if = {
-		limit = {
-			has_law = law_type:law_dinar_libyan_dinar_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_dinar_libyan_dinar_c_add
-	} 
-	#dinar_moroccan_dirham
-	if = {
-		limit = {
-			has_law = law_type:law_dinar_moroccan_dirham_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_dinar_moroccan_dirham_c_add
-	} 
-	#dinar_omanian_rial
-	if = {
-		limit = {
-			has_law = law_type:law_dinar_omanian_rial_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_dinar_omanian_rial_c_add
-	} 
-	#dinar_qiran
-	if = {
-		limit = {
-			has_law = law_type:law_dinar_qiran_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_dinar_qiran_c_add
-	} 
-	#dinar_saudi_riyal
-	if = {
-		limit = {
-			has_law = law_type:law_dinar_saudi_riyal_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_dinar_saudi_riyal_c_add
-	} 
-	#dinar_serbian_dinar
-	if = {
-		limit = {
-			has_law = law_type:law_dinar_serbian_dinar_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_dinar_serbian_dinar_c_add
-	} 
-	#dinar_tunisian_dinar
-	if = {
-		limit = {
-			has_law = law_type:law_dinar_tunisian_dinar_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_dinar_tunisian_dinar_c_add
-	} 
-	#dinar_yugoslav_dinar
-	if = {
-		limit = {
-			has_law = law_type:law_dinar_yugoslav_dinar_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_dinar_yugoslav_dinar_c_add
-	} 
-	#dollar_australian_dollar
-	if = {
-		limit = {
-			has_law = law_type:law_dollar_australian_dollar_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_dollar_australian_dollar_c_add
-	} 
-	#dollar_canadian_dollar
-	if = {
-		limit = {
-			has_law = law_type:law_dollar_canadian_dollar_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_dollar_canadian_dollar_c_add
-	} 
-	#dollar_caribbean_dollar
-	if = {
-		limit = {
-			has_law = law_type:law_dollar_caribbean_dollar_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_dollar_caribbean_dollar_c_add
-	} 
-	#dollar_confederate_states_dollar
-	if = {
-		limit = {
-			has_law = law_type:law_dollar_confederate_states_dollar_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_dollar_confederate_states_dollar_c_add
-	} 
-	#dollar_liberian_dollar
-	if = {
-		limit = {
-			has_law = law_type:law_dollar_liberian_dollar_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_dollar_liberian_dollar_c_add
-	} 
-	#dollar_new_zealand_dollar
-	if = {
-		limit = {
-			has_law = law_type:law_dollar_new_zealand_dollar_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_dollar_new_zealand_dollar_c_add
-	} 
-	#dollar_sierra_leonean_dollar
-	if = {
-		limit = {
-			has_law = law_type:law_dollar_sierra_leonean_dollar_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_dollar_sierra_leonean_dollar_c_add
-	} 
-	#dollar_united_states_dollar
-	if = {
-		limit = {
-			has_law = law_type:law_dollar_united_states_dollar_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_dollar_united_states_dollar_c_add
-	} 
-	#eco_ariary
-	if = {
-		limit = {
-			has_law = law_type:law_eco_ariary_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_eco_ariary_c_add
-	} 
-	#eco_central_african_eco
-	if = {
-		limit = {
-			has_law = law_type:law_eco_central_african_eco_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_eco_central_african_eco_c_add
-	} 
-	#eco_east_african_eco
-	if = {
-		limit = {
-			has_law = law_type:law_eco_east_african_eco_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_eco_east_african_eco_c_add
-	} 
-	#eco_ethiopian_birr
-	if = {
-		limit = {
-			has_law = law_type:law_eco_ethiopian_birr_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_eco_ethiopian_birr_c_add
-	} 
-	#eco_ghanaian_pound
-	if = {
-		limit = {
-			has_law = law_type:law_eco_ghanaian_pound_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_eco_ghanaian_pound_c_add
-	} 
-	#eco_nigerian_naira
-	if = {
-		limit = {
-			has_law = law_type:law_eco_nigerian_naira_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_eco_nigerian_naira_c_add
-	} 
-	#eco_south_african_rand
-	if = {
-		limit = {
-			has_law = law_type:law_eco_south_african_rand_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_eco_south_african_rand_c_add
-	} 
-	#eco_tuareg_ouguiya
-	if = {
-		limit = {
-			has_law = law_type:law_eco_tuareg_ouguiya_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_eco_tuareg_ouguiya_c_add
-	} 
-	#eco_west_african_eco
-	if = {
-		limit = {
-			has_law = law_type:law_eco_west_african_eco_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_eco_west_african_eco_c_add
-	} 
-	#franc_belgian_franc
-	if = {
-		limit = {
-			has_law = law_type:law_franc_belgian_franc_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_franc_belgian_franc_c_add
-	} 
-	#franc_french_franc
-	if = {
-		limit = {
-			has_law = law_type:law_franc_french_franc_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_franc_french_franc_c_add
-	} 
-	#franc_luxembourgish_franc
-	if = {
-		limit = {
-			has_law = law_type:law_franc_luxembourgish_franc_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_franc_luxembourgish_franc_c_add
-	} 
-	#franc_swiss_franc
-	if = {
-		limit = {
-			has_law = law_type:law_franc_swiss_franc_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_franc_swiss_franc_c_add
-	} 
-	#gulden
-	if = {
-		limit = {
-			has_law = law_type:law_gulden_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_gulden_c_add
-	} 
-	#gulden_bavarian_gulden
-	if = {
-		limit = {
-			has_law = law_type:law_gulden_bavarian_gulden_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_gulden_bavarian_gulden_c_add
-	} 
-	#gulden_florin
-	if = {
-		limit = {
-			has_law = law_type:law_gulden_florin_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_gulden_florin_c_add
-	} 
-	#gulden_hungarian_forint
-	if = {
-		limit = {
-			has_law = law_type:law_gulden_hungarian_forint_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_gulden_hungarian_forint_c_add
-	} 
-	#gulden_indies_guilder
-	if = {
-		limit = {
-			has_law = law_type:law_gulden_indies_guilder_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_gulden_indies_guilder_c_add
-	} 
-	#gulden_south_german_gulden
-	if = {
-		limit = {
-			has_law = law_type:law_gulden_south_german_gulden_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_gulden_south_german_gulden_c_add
-	} 
-	#krone_czech_koruna
-	if = {
-		limit = {
-			has_law = law_type:law_krone_czech_koruna_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_krone_czech_koruna_c_add
-	} 
-	#krone_danish_krone
-	if = {
-		limit = {
-			has_law = law_type:law_krone_danish_krone_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_krone_danish_krone_c_add
-	} 
-	#krone_estonian_kroon
-	if = {
-		limit = {
-			has_law = law_type:law_krone_estonian_kroon_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_krone_estonian_kroon_c_add
-	} 
-	#krone_icelandic_krona
-	if = {
-		limit = {
-			has_law = law_type:law_krone_icelandic_krona_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_krone_icelandic_krona_c_add
-	} 
-	#krone_norwegian_krone
-	if = {
-		limit = {
-			has_law = law_type:law_krone_norwegian_krone_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_krone_norwegian_krone_c_add
-	} 
-	#krone_slovak_koruna
-	if = {
-		limit = {
-			has_law = law_type:law_krone_slovak_koruna_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_krone_slovak_koruna_c_add
-	} 
-	#krone_swedish_krona
-	if = {
-		limit = {
-			has_law = law_type:law_krone_swedish_krona_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_krone_swedish_krona_c_add
-	} 
-	#leon_leu
-	if = {
-		limit = {
-			has_law = law_type:law_leon_leu_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_leon_leu_c_add
-	} 
-	#leon_lev
-	if = {
-		limit = {
-			has_law = law_type:law_leon_lev_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_leon_lev_c_add
-	} 
-	#lira
-	if = {
-		limit = {
-			has_law = law_type:law_lira_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_lira_c_add
-	} 
-	#lira_ducato
-	if = {
-		limit = {
-			has_law = law_type:law_lira_ducato_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_lira_ducato_c_add
-	} 
-	#lira_ottoman_lira
-	if = {
-		limit = {
-			has_law = law_type:law_lira_ottoman_lira_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_lira_ottoman_lira_c_add
-	} 
-	#lira_scudo_pontificio
-	if = {
-		limit = {
-			has_law = law_type:law_lira_scudo_pontificio_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_lira_scudo_pontificio_c_add
-	} 
-	#lira_scudo_sardo
-	if = {
-		limit = {
-			has_law = law_type:law_lira_scudo_sardo_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_lira_scudo_sardo_c_add
-	} 
-	#lira_toscane_lira
-	if = {
-		limit = {
-			has_law = law_type:law_lira_toscane_lira_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_lira_toscane_lira_c_add
-	} 
-	#mark
-	if = {
-		limit = {
-			has_law = law_type:law_mark_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_mark_c_add
-	} 
-	#mark_finnish_markka
-	if = {
-		limit = {
-			has_law = law_type:law_mark_finnish_markka_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_mark_finnish_markka_c_add
-	} 
-	#peso
-	if = {
-		limit = {
-			has_law = law_type:law_peso_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_peso_c_add
-	} 
-	#peso_argentine_peso
-	if = {
-		limit = {
-			has_law = law_type:law_peso_argentine_peso_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_peso_argentine_peso_c_add
-	} 
-	#peso_bolivien_peso
-	if = {
-		limit = {
-			has_law = law_type:law_peso_bolivien_peso_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_peso_bolivien_peso_c_add
-	} 
-	#peso_chilean_peso
-	if = {
-		limit = {
-			has_law = law_type:law_peso_chilean_peso_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_peso_chilean_peso_c_add
-	} 
-	#peso_colombian_peso
-	if = {
-		limit = {
-			has_law = law_type:law_peso_colombian_peso_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_peso_colombian_peso_c_add
-	} 
-	#peso_costa_rican_colon
-	if = {
-		limit = {
-			has_law = law_type:law_peso_costa_rican_colon_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_peso_costa_rican_colon_c_add
-	} 
-	#peso_cuban_peso
-	if = {
-		limit = {
-			has_law = law_type:law_peso_cuban_peso_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_peso_cuban_peso_c_add
-	} 
-	#peso_ecuadorian_peso
-	if = {
-		limit = {
-			has_law = law_type:law_peso_ecuadorian_peso_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_peso_ecuadorian_peso_c_add
-	} 
-	#peso_el_salvador_colon
-	if = {
-		limit = {
-			has_law = law_type:law_peso_el_salvador_colon_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_peso_el_salvador_colon_c_add
-	} 
-	#peso_guatemalan_quetzal
-	if = {
-		limit = {
-			has_law = law_type:law_peso_guatemalan_quetzal_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_peso_guatemalan_quetzal_c_add
-	} 
-	#peso_honduran_lempira
-	if = {
-		limit = {
-			has_law = law_type:law_peso_honduran_lempira_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_peso_honduran_lempira_c_add
-	} 
-	#peso_mexican_peso
-	if = {
-		limit = {
-			has_law = law_type:law_peso_mexican_peso_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_peso_mexican_peso_c_add
-	} 
-	#peso_nicaraguan_cordoba
-	if = {
-		limit = {
-			has_law = law_type:law_peso_nicaraguan_cordoba_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_peso_nicaraguan_cordoba_c_add
-	} 
-	#peso_paraguayan_peso
-	if = {
-		limit = {
-			has_law = law_type:law_peso_paraguayan_peso_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_peso_paraguayan_peso_c_add
-	} 
-	#peso_philippine_peso
-	if = {
-		limit = {
-			has_law = law_type:law_peso_philippine_peso_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_peso_philippine_peso_c_add
-	} 
-	#peso_sol_de_oro
-	if = {
-		limit = {
-			has_law = law_type:law_peso_sol_de_oro_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_peso_sol_de_oro_c_add
-	} 
-	#peso_uruguayan_peso
-	if = {
-		limit = {
-			has_law = law_type:law_peso_uruguayan_peso_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_peso_uruguayan_peso_c_add
-	} 
-	#peso_venezuelan_peso
-	if = {
-		limit = {
-			has_law = law_type:law_peso_venezuelan_peso_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_peso_venezuelan_peso_c_add
-	} 
-	#pound_egyptian_pound
-	if = {
-		limit = {
-			has_law = law_type:law_pound_egyptian_pound_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_pound_egyptian_pound_c_add
-	} 
-	#pound_irish_pound
-	if = {
-		limit = {
-			has_law = law_type:law_pound_irish_pound_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_pound_irish_pound_c_add
-	} 
-	#pound_sterling
-	if = {
-		limit = {
-			has_law = law_type:law_pound_sterling_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_pound_sterling_c_add
-	} 
-	#real
-	if = {
-		limit = {
-			has_law = law_type:law_real_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_real_c_add
-	} 
-	#real_brazilian_real
-	if = {
-		limit = {
-			has_law = law_type:law_real_brazilian_real_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_real_brazilian_real_c_add
-	} 
-	#rupee_indian_rupee
-	if = {
-		limit = {
-			has_law = law_type:law_rupee_indian_rupee_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_rupee_indian_rupee_c_add
-	} 
-	#rupee_indonesian_rupiah
-	if = {
-		limit = {
-			has_law = law_type:law_rupee_indonesian_rupiah_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_rupee_indonesian_rupiah_c_add
-	} 
-	#spe_baht
-	if = {
-		limit = {
-			has_law = law_type:law_spe_baht_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_spe_baht_c_add
-	} 
-	#spe_dong
-	if = {
-		limit = {
-			has_law = law_type:law_spe_dong_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_spe_dong_c_add
-	} 
-	#spe_drachma
-	if = {
-		limit = {
-			has_law = law_type:law_spe_drachma_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_spe_drachma_c_add
-	} 
-	#spe_korean_won
-	if = {
-		limit = {
-			has_law = law_type:law_spe_korean_won_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_spe_korean_won_c_add
-	} 
-	#spe_latvian_lats
-	if = {
-		limit = {
-			has_law = law_type:law_spe_latvian_lats_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_spe_latvian_lats_c_add
-	} 
-	#spe_lithuanian_litas
-	if = {
-		limit = {
-			has_law = law_type:law_spe_lithuanian_litas_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_spe_lithuanian_litas_c_add
-	} 
-	#spe_peseta
-	if = {
-		limit = {
-			has_law = law_type:law_spe_peseta_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_spe_peseta_c_add
-	} 
-	#spe_ruble
-	if = {
-		limit = {
-			has_law = law_type:law_spe_ruble_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_spe_ruble_c_add
-	} 
-	#spe_uni
-	if = {
-		limit = {
-			has_law = law_type:law_spe_uni_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_spe_uni_c_add
-	} 
-	#spe_yen
-	if = {
-		limit = {
-			has_law = law_type:law_spe_yen_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_spe_yen_c_add
-	} 
-	#spe_yuan
-	if = {
-		limit = {
-			has_law = law_type:law_spe_yuan_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_spe_yuan_c_add
-	} 
-	#spe_zloti
-	if = {
-		limit = {
-			has_law = law_type:law_spe_zloti_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_spe_zloti_c_add
-	} 
-	#thaler_hannoveraner_thaler
-	if = {
-		limit = {
-			has_law = law_type:law_thaler_hannoveraner_thaler_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_thaler_hannoveraner_thaler_c_add
-	} 
-	#thaler_prussian_thaler
-	if = {
-		limit = {
-			has_law = law_type:law_thaler_prussian_thaler_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_thaler_prussian_thaler_c_add
-	} 
-	#thaler_saxon_thaler
-	if = {
-		limit = {
-			has_law = law_type:law_thaler_saxon_thaler_currency
-		} 
-		add = scope:central_bank_scope.modifier:goods_output_thaler_saxon_thaler_c_add
-	} 
-
+  
+base_demande_currency = { 
+	value = scope:central_bank_scope.modifier:goods_output_liquidity_currency_add  
 }
 base_demande_currency_fix = { 
-	value = var:base_demande_currency_fix
-}
-currency_market_goods_sell_orders = {
+	value = var:base_demande_currency_fix 
+}  
+currency_market_goods_sell_orders_per_state = { #consomation nationale de currency dans un pays non égale à la consomation issu du marché pour les marché constitueer de pls pays
 	value = 0
-	#dinar
-	if = {
-		limit = {
-			has_law = law_type:law_dinar_currency
-		}
-		add = market.mg:dinar_c.market_goods_buy_orders
-	}
-	#dinar_algerian_dinar
-	if = {
-		limit = {
-			has_law = law_type:law_dinar_algerian_dinar_currency
-		}
-		add = market.mg:dinar_algerian_dinar_c.market_goods_buy_orders
-	}
-	#dinar_iraqi_dinar
-	if = {
-		limit = {
-			has_law = law_type:law_dinar_iraqi_dinar_currency
-		}
-		add = market.mg:dinar_iraqi_dinar_c.market_goods_buy_orders
-	}
-	#dinar_libyan_dinar
-	if = {
-		limit = {
-			has_law = law_type:law_dinar_libyan_dinar_currency
-		}
-		add = market.mg:dinar_libyan_dinar_c.market_goods_buy_orders
-	}
-	#dinar_moroccan_dirham
-	if = {
-		limit = {
-			has_law = law_type:law_dinar_moroccan_dirham_currency
-		}
-		add = market.mg:dinar_moroccan_dirham_c.market_goods_buy_orders
-	}
-	#dinar_omanian_rial
-	if = {
-		limit = {
-			has_law = law_type:law_dinar_omanian_rial_currency
-		}
-		add = market.mg:dinar_omanian_rial_c.market_goods_buy_orders
-	}
-	#dinar_qiran
-	if = {
-		limit = {
-			has_law = law_type:law_dinar_qiran_currency
-		}
-		add = market.mg:dinar_qiran_c.market_goods_buy_orders
-	}
-	#dinar_saudi_riyal
-	if = {
-		limit = {
-			has_law = law_type:law_dinar_saudi_riyal_currency
-		}
-		add = market.mg:dinar_saudi_riyal_c.market_goods_buy_orders
-	}
-	#dinar_serbian_dinar
-	if = {
-		limit = {
-			has_law = law_type:law_dinar_serbian_dinar_currency
-		}
-		add = market.mg:dinar_serbian_dinar_c.market_goods_buy_orders
-	}
-	#dinar_tunisian_dinar
-	if = {
-		limit = {
-			has_law = law_type:law_dinar_tunisian_dinar_currency
-		}
-		add = market.mg:dinar_tunisian_dinar_c.market_goods_buy_orders
-	}
-	#dinar_yugoslav_dinar
-	if = {
-		limit = {
-			has_law = law_type:law_dinar_yugoslav_dinar_currency
-		}
-		add = market.mg:dinar_yugoslav_dinar_c.market_goods_buy_orders
-	}
-	#dollar_australian_dollar
-	if = {
-		limit = {
-			has_law = law_type:law_dollar_australian_dollar_currency
-		}
-		add = market.mg:dollar_australian_dollar_c.market_goods_buy_orders
-	}
-	#dollar_canadian_dollar
-	if = {
-		limit = {
-			has_law = law_type:law_dollar_canadian_dollar_currency
-		}
-		add = market.mg:dollar_canadian_dollar_c.market_goods_buy_orders
-	}
-	#dollar_caribbean_dollar
-	if = {
-		limit = {
-			has_law = law_type:law_dollar_caribbean_dollar_currency
-		}
-		add = market.mg:dollar_caribbean_dollar_c.market_goods_buy_orders
-	}
-	#dollar_confederate_states_dollar
-	if = {
-		limit = {
-			has_law = law_type:law_dollar_confederate_states_dollar_currency
-		}
-		add = market.mg:dollar_confederate_states_dollar_c.market_goods_buy_orders
-	}
-	#dollar_liberian_dollar
-	if = {
-		limit = {
-			has_law = law_type:law_dollar_liberian_dollar_currency
-		}
-		add = market.mg:dollar_liberian_dollar_c.market_goods_buy_orders
-	}
-	#dollar_new_zealand_dollar
-	if = {
-		limit = {
-			has_law = law_type:law_dollar_new_zealand_dollar_currency
-		}
-		add = market.mg:dollar_new_zealand_dollar_c.market_goods_buy_orders
-	}
-	#dollar_sierra_leonean_dollar
-	if = {
-		limit = {
-			has_law = law_type:law_dollar_sierra_leonean_dollar_currency
-		}
-		add = market.mg:dollar_sierra_leonean_dollar_c.market_goods_buy_orders
-	}
-	#dollar_united_states_dollar
-	if = {
-		limit = {
-			has_law = law_type:law_dollar_united_states_dollar_currency
-		}
-		add = market.mg:dollar_united_states_dollar_c.market_goods_buy_orders
-	}
-	#eco_ariary
-	if = {
-		limit = {
-			has_law = law_type:law_eco_ariary_currency
-		}
-		add = market.mg:eco_ariary_c.market_goods_buy_orders
-	}
-	#eco_central_african_eco
-	if = {
-		limit = {
-			has_law = law_type:law_eco_central_african_eco_currency
-		}
-		add = market.mg:eco_central_african_eco_c.market_goods_buy_orders
-	}
-	#eco_east_african_eco
-	if = {
-		limit = {
-			has_law = law_type:law_eco_east_african_eco_currency
-		}
-		add = market.mg:eco_east_african_eco_c.market_goods_buy_orders
-	}
-	#eco_ethiopian_birr
-	if = {
-		limit = {
-			has_law = law_type:law_eco_ethiopian_birr_currency
-		}
-		add = market.mg:eco_ethiopian_birr_c.market_goods_buy_orders
-	}
-	#eco_ghanaian_pound
-	if = {
-		limit = {
-			has_law = law_type:law_eco_ghanaian_pound_currency
-		}
-		add = market.mg:eco_ghanaian_pound_c.market_goods_buy_orders
-	}
-	#eco_nigerian_naira
-	if = {
-		limit = {
-			has_law = law_type:law_eco_nigerian_naira_currency
-		}
-		add = market.mg:eco_nigerian_naira_c.market_goods_buy_orders
-	}
-	#eco_south_african_rand
-	if = {
-		limit = {
-			has_law = law_type:law_eco_south_african_rand_currency
-		}
-		add = market.mg:eco_south_african_rand_c.market_goods_buy_orders
-	}
-	#eco_tuareg_ouguiya
-	if = {
-		limit = {
-			has_law = law_type:law_eco_tuareg_ouguiya_currency
-		}
-		add = market.mg:eco_tuareg_ouguiya_c.market_goods_buy_orders
-	}
-	#eco_west_african_eco
-	if = {
-		limit = {
-			has_law = law_type:law_eco_west_african_eco_currency
-		}
-		add = market.mg:eco_west_african_eco_c.market_goods_buy_orders
-	}
-	#franc_belgian_franc
-	if = {
-		limit = {
-			has_law = law_type:law_franc_belgian_franc_currency
-		}
-		add = market.mg:franc_belgian_franc_c.market_goods_buy_orders
-	}
-	#franc_french_franc
-	if = {
-		limit = {
-			has_law = law_type:law_franc_french_franc_currency
-		}
-		add = market.mg:franc_french_franc_c.market_goods_buy_orders
-	}
-	#franc_luxembourgish_franc
-	if = {
-		limit = {
-			has_law = law_type:law_franc_luxembourgish_franc_currency
-		}
-		add = market.mg:franc_luxembourgish_franc_c.market_goods_buy_orders
-	}
-	#franc_swiss_franc
-	if = {
-		limit = {
-			has_law = law_type:law_franc_swiss_franc_currency
-		}
-		add = market.mg:franc_swiss_franc_c.market_goods_buy_orders
-	}
-	#gulden
-	if = {
-		limit = {
-			has_law = law_type:law_gulden_currency
-		}
-		add = market.mg:gulden_c.market_goods_buy_orders
-	}
-	#gulden_bavarian_gulden
-	if = {
-		limit = {
-			has_law = law_type:law_gulden_bavarian_gulden_currency
-		}
-		add = market.mg:gulden_bavarian_gulden_c.market_goods_buy_orders
-	}
-	#gulden_florin
-	if = {
-		limit = {
-			has_law = law_type:law_gulden_florin_currency
-		}
-		add = market.mg:gulden_florin_c.market_goods_buy_orders
-	}
-	#gulden_hungarian_forint
-	if = {
-		limit = {
-			has_law = law_type:law_gulden_hungarian_forint_currency
-		}
-		add = market.mg:gulden_hungarian_forint_c.market_goods_buy_orders
-	}
-	#gulden_indies_guilder
-	if = {
-		limit = {
-			has_law = law_type:law_gulden_indies_guilder_currency
-		}
-		add = market.mg:gulden_indies_guilder_c.market_goods_buy_orders
-	}
-	#gulden_south_german_gulden
-	if = {
-		limit = {
-			has_law = law_type:law_gulden_south_german_gulden_currency
-		}
-		add = market.mg:gulden_south_german_gulden_c.market_goods_buy_orders
-	}
-	#krone_czech_koruna
-	if = {
-		limit = {
-			has_law = law_type:law_krone_czech_koruna_currency
-		}
-		add = market.mg:krone_czech_koruna_c.market_goods_buy_orders
-	}
-	#krone_danish_krone
-	if = {
-		limit = {
-			has_law = law_type:law_krone_danish_krone_currency
-		}
-		add = market.mg:krone_danish_krone_c.market_goods_buy_orders
-	}
-	#krone_estonian_kroon
-	if = {
-		limit = {
-			has_law = law_type:law_krone_estonian_kroon_currency
-		}
-		add = market.mg:krone_estonian_kroon_c.market_goods_buy_orders
-	}
-	#krone_icelandic_krona
-	if = {
-		limit = {
-			has_law = law_type:law_krone_icelandic_krona_currency
-		}
-		add = market.mg:krone_icelandic_krona_c.market_goods_buy_orders
-	}
-	#krone_norwegian_krone
-	if = {
-		limit = {
-			has_law = law_type:law_krone_norwegian_krone_currency
-		}
-		add = market.mg:krone_norwegian_krone_c.market_goods_buy_orders
-	}
-	#krone_slovak_koruna
-	if = {
-		limit = {
-			has_law = law_type:law_krone_slovak_koruna_currency
-		}
-		add = market.mg:krone_slovak_koruna_c.market_goods_buy_orders
-	}
-	#krone_swedish_krona
-	if = {
-		limit = {
-			has_law = law_type:law_krone_swedish_krona_currency
-		}
-		add = market.mg:krone_swedish_krona_c.market_goods_buy_orders
-	}
-	#leon_leu
-	if = {
-		limit = {
-			has_law = law_type:law_leon_leu_currency
-		}
-		add = market.mg:leon_leu_c.market_goods_buy_orders
-	}
-	#leon_lev
-	if = {
-		limit = {
-			has_law = law_type:law_leon_lev_currency
-		}
-		add = market.mg:leon_lev_c.market_goods_buy_orders
-	}
-	#lira
-	if = {
-		limit = {
-			has_law = law_type:law_lira_currency
-		}
-		add = market.mg:lira_c.market_goods_buy_orders
-	}
-	#lira_ducato
-	if = {
-		limit = {
-			has_law = law_type:law_lira_ducato_currency
-		}
-		add = market.mg:lira_ducato_c.market_goods_buy_orders
-	}
-	#lira_ottoman_lira
-	if = {
-		limit = {
-			has_law = law_type:law_lira_ottoman_lira_currency
-		}
-		add = market.mg:lira_ottoman_lira_c.market_goods_buy_orders
-	}
-	#lira_scudo_pontificio
-	if = {
-		limit = {
-			has_law = law_type:law_lira_scudo_pontificio_currency
-		}
-		add = market.mg:lira_scudo_pontificio_c.market_goods_buy_orders
-	}
-	#lira_scudo_sardo
-	if = {
-		limit = {
-			has_law = law_type:law_lira_scudo_sardo_currency
-		}
-		add = market.mg:lira_scudo_sardo_c.market_goods_buy_orders
-	}
-	#lira_toscane_lira
-	if = {
-		limit = {
-			has_law = law_type:law_lira_toscane_lira_currency
-		}
-		add = market.mg:lira_toscane_lira_c.market_goods_buy_orders
-	}
-	#mark
-	if = {
-		limit = {
-			has_law = law_type:law_mark_currency
-		}
-		add = market.mg:mark_c.market_goods_buy_orders
-	}
-	#mark_finnish_markka
-	if = {
-		limit = {
-			has_law = law_type:law_mark_finnish_markka_currency
-		}
-		add = market.mg:mark_finnish_markka_c.market_goods_buy_orders
-	}
-	#peso
-	if = {
-		limit = {
-			has_law = law_type:law_peso_currency
-		}
-		add = market.mg:peso_c.market_goods_buy_orders
-	}
-	#peso_argentine_peso
-	if = {
-		limit = {
-			has_law = law_type:law_peso_argentine_peso_currency
-		}
-		add = market.mg:peso_argentine_peso_c.market_goods_buy_orders
-	}
-	#peso_bolivien_peso
-	if = {
-		limit = {
-			has_law = law_type:law_peso_bolivien_peso_currency
-		}
-		add = market.mg:peso_bolivien_peso_c.market_goods_buy_orders
-	}
-	#peso_chilean_peso
-	if = {
-		limit = {
-			has_law = law_type:law_peso_chilean_peso_currency
-		}
-		add = market.mg:peso_chilean_peso_c.market_goods_buy_orders
-	}
-	#peso_colombian_peso
-	if = {
-		limit = {
-			has_law = law_type:law_peso_colombian_peso_currency
-		}
-		add = market.mg:peso_colombian_peso_c.market_goods_buy_orders
-	}
-	#peso_costa_rican_colon
-	if = {
-		limit = {
-			has_law = law_type:law_peso_costa_rican_colon_currency
-		}
-		add = market.mg:peso_costa_rican_colon_c.market_goods_buy_orders
-	}
-	#peso_cuban_peso
-	if = {
-		limit = {
-			has_law = law_type:law_peso_cuban_peso_currency
-		}
-		add = market.mg:peso_cuban_peso_c.market_goods_buy_orders
-	}
-	#peso_ecuadorian_peso
-	if = {
-		limit = {
-			has_law = law_type:law_peso_ecuadorian_peso_currency
-		}
-		add = market.mg:peso_ecuadorian_peso_c.market_goods_buy_orders
-	}
-	#peso_el_salvador_colon
-	if = {
-		limit = {
-			has_law = law_type:law_peso_el_salvador_colon_currency
-		}
-		add = market.mg:peso_el_salvador_colon_c.market_goods_buy_orders
-	}
-	#peso_guatemalan_quetzal
-	if = {
-		limit = {
-			has_law = law_type:law_peso_guatemalan_quetzal_currency
-		}
-		add = market.mg:peso_guatemalan_quetzal_c.market_goods_buy_orders
-	}
-	#peso_honduran_lempira
-	if = {
-		limit = {
-			has_law = law_type:law_peso_honduran_lempira_currency
-		}
-		add = market.mg:peso_honduran_lempira_c.market_goods_buy_orders
-	}
-	#peso_mexican_peso
-	if = {
-		limit = {
-			has_law = law_type:law_peso_mexican_peso_currency
-		}
-		add = market.mg:peso_mexican_peso_c.market_goods_buy_orders
-	}
-	#peso_nicaraguan_cordoba
-	if = {
-		limit = {
-			has_law = law_type:law_peso_nicaraguan_cordoba_currency
-		}
-		add = market.mg:peso_nicaraguan_cordoba_c.market_goods_buy_orders
-	}
-	#peso_paraguayan_peso
-	if = {
-		limit = {
-			has_law = law_type:law_peso_paraguayan_peso_currency
-		}
-		add = market.mg:peso_paraguayan_peso_c.market_goods_buy_orders
-	}
-	#peso_philippine_peso
-	if = {
-		limit = {
-			has_law = law_type:law_peso_philippine_peso_currency
-		}
-		add = market.mg:peso_philippine_peso_c.market_goods_buy_orders
-	}
-	#peso_sol_de_oro
-	if = {
-		limit = {
-			has_law = law_type:law_peso_sol_de_oro_currency
-		}
-		add = market.mg:peso_sol_de_oro_c.market_goods_buy_orders
-	}
-	#peso_uruguayan_peso
-	if = {
-		limit = {
-			has_law = law_type:law_peso_uruguayan_peso_currency
-		}
-		add = market.mg:peso_uruguayan_peso_c.market_goods_buy_orders
-	}
-	#peso_venezuelan_peso
-	if = {
-		limit = {
-			has_law = law_type:law_peso_venezuelan_peso_currency
-		}
-		add = market.mg:peso_venezuelan_peso_c.market_goods_buy_orders
-	}
-	#pound_egyptian_pound
-	if = {
-		limit = {
-			has_law = law_type:law_pound_egyptian_pound_currency
-		}
-		add = market.mg:pound_egyptian_pound_c.market_goods_buy_orders
-	}
-	#pound_irish_pound
-	if = {
-		limit = {
-			has_law = law_type:law_pound_irish_pound_currency
-		}
-		add = market.mg:pound_irish_pound_c.market_goods_buy_orders
-	}
-	#pound_sterling
-	if = {
-		limit = {
-			has_law = law_type:law_pound_sterling_currency
-		}
-		add = market.mg:pound_sterling_c.market_goods_buy_orders
-	}
-	#real
-	if = {
-		limit = {
-			has_law = law_type:law_real_currency
-		}
-		add = market.mg:real_c.market_goods_buy_orders
-	}
-	#real_brazilian_real
-	if = {
-		limit = {
-			has_law = law_type:law_real_brazilian_real_currency
-		}
-		add = market.mg:real_brazilian_real_c.market_goods_buy_orders
-	}
-	#rupee_indian_rupee
-	if = {
-		limit = {
-			has_law = law_type:law_rupee_indian_rupee_currency
-		}
-		add = market.mg:rupee_indian_rupee_c.market_goods_buy_orders
-	}
-	#rupee_indonesian_rupiah
-	if = {
-		limit = {
-			has_law = law_type:law_rupee_indonesian_rupiah_currency
-		}
-		add = market.mg:rupee_indonesian_rupiah_c.market_goods_buy_orders
-	}
-	#spe_baht
-	if = {
-		limit = {
-			has_law = law_type:law_spe_baht_currency
-		}
-		add = market.mg:spe_baht_c.market_goods_buy_orders
-	}
-	#spe_dong
-	if = {
-		limit = {
-			has_law = law_type:law_spe_dong_currency
-		}
-		add = market.mg:spe_dong_c.market_goods_buy_orders
-	}
-	#spe_drachma
-	if = {
-		limit = {
-			has_law = law_type:law_spe_drachma_currency
-		}
-		add = market.mg:spe_drachma_c.market_goods_buy_orders
-	}
-	#spe_korean_won
-	if = {
-		limit = {
-			has_law = law_type:law_spe_korean_won_currency
-		}
-		add = market.mg:spe_korean_won_c.market_goods_buy_orders
-	}
-	#spe_latvian_lats
-	if = {
-		limit = {
-			has_law = law_type:law_spe_latvian_lats_currency
-		}
-		add = market.mg:spe_latvian_lats_c.market_goods_buy_orders
-	}
-	#spe_lithuanian_litas
-	if = {
-		limit = {
-			has_law = law_type:law_spe_lithuanian_litas_currency
-		}
-		add = market.mg:spe_lithuanian_litas_c.market_goods_buy_orders
-	}
-	#spe_peseta
-	if = {
-		limit = {
-			has_law = law_type:law_spe_peseta_currency
-		}
-		add = market.mg:spe_peseta_c.market_goods_buy_orders
-	}
-	#spe_ruble
-	if = {
-		limit = {
-			has_law = law_type:law_spe_ruble_currency
-		}
-		add = market.mg:spe_ruble_c.market_goods_buy_orders
-	}
-	#spe_uni
-	if = {
-		limit = {
-			has_law = law_type:law_spe_uni_currency
-		}
-		add = market.mg:spe_uni_c.market_goods_buy_orders
-	}
-	#spe_yen
-	if = {
-		limit = {
-			has_law = law_type:law_spe_yen_currency
-		}
-		add = market.mg:spe_yen_c.market_goods_buy_orders
-	}
-	#spe_yuan
-	if = {
-		limit = {
-			has_law = law_type:law_spe_yuan_currency
-		}
-		add = market.mg:spe_yuan_c.market_goods_buy_orders
-	}
-	#spe_zloti
-	if = {
-		limit = {
-			has_law = law_type:law_spe_zloti_currency
-		}
-		add = market.mg:spe_zloti_c.market_goods_buy_orders
-	}
-	#thaler_hannoveraner_thaler
-	if = {
-		limit = {
-			has_law = law_type:law_thaler_hannoveraner_thaler_currency
-		}
-		add = market.mg:thaler_hannoveraner_thaler_c.market_goods_buy_orders
-	}
-	#thaler_prussian_thaler
-	if = {
-		limit = {
-			has_law = law_type:law_thaler_prussian_thaler_currency
-		}
-		add = market.mg:thaler_prussian_thaler_c.market_goods_buy_orders
-	}
-	#thaler_saxon_thaler
-	if = {
-		limit = {
-			has_law = law_type:law_thaler_saxon_thaler_currency
-		}
-		add = market.mg:thaler_saxon_thaler_c.market_goods_buy_orders
-	}  
+	every_scope_state = {
+		add = sg:liquidity_currency.state_goods_consumption   
+	} 
+} 
+currency_market_goods_sell_orders = { #réussir à ajuster la demande uniquement pour la demande de currency dans les etat que je possede
+	value = currency_market_goods_sell_orders_per_state 
 } 
 target_demand_currency = {
     value = currency_market_goods_sell_orders
@@ -17009,12 +15684,12 @@ currency_own_by_private_bank = {
 	#dinar
 	dinar_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:dinar_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	dinar_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:dinar_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	dinar_c_market_goods_delta = {
@@ -17022,7 +15697,7 @@ currency_own_by_private_bank = {
 		subtract = dinar_c_market_goods_buy_orders
 	}
 	dinar_c_market_goods_lake_ratio = {
-		value = market.mg:dinar_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = dinar_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -17094,16 +15769,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#dinar_algerian_dinar
 	dinar_algerian_dinar_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:dinar_algerian_dinar_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	dinar_algerian_dinar_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:dinar_algerian_dinar_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	dinar_algerian_dinar_c_market_goods_delta = {
@@ -17111,7 +15786,7 @@ currency_own_by_private_bank = {
 		subtract = dinar_algerian_dinar_c_market_goods_buy_orders
 	}
 	dinar_algerian_dinar_c_market_goods_lake_ratio = {
-		value = market.mg:dinar_algerian_dinar_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = dinar_algerian_dinar_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -17183,16 +15858,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#dinar_iraqi_dinar
 	dinar_iraqi_dinar_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:dinar_iraqi_dinar_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	dinar_iraqi_dinar_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:dinar_iraqi_dinar_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	dinar_iraqi_dinar_c_market_goods_delta = {
@@ -17200,7 +15875,7 @@ currency_own_by_private_bank = {
 		subtract = dinar_iraqi_dinar_c_market_goods_buy_orders
 	}
 	dinar_iraqi_dinar_c_market_goods_lake_ratio = {
-		value = market.mg:dinar_iraqi_dinar_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = dinar_iraqi_dinar_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -17272,16 +15947,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#dinar_libyan_dinar
 	dinar_libyan_dinar_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:dinar_libyan_dinar_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	dinar_libyan_dinar_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:dinar_libyan_dinar_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	dinar_libyan_dinar_c_market_goods_delta = {
@@ -17289,7 +15964,7 @@ currency_own_by_private_bank = {
 		subtract = dinar_libyan_dinar_c_market_goods_buy_orders
 	}
 	dinar_libyan_dinar_c_market_goods_lake_ratio = {
-		value = market.mg:dinar_libyan_dinar_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = dinar_libyan_dinar_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -17361,16 +16036,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#dinar_moroccan_dirham
 	dinar_moroccan_dirham_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:dinar_moroccan_dirham_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	dinar_moroccan_dirham_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:dinar_moroccan_dirham_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	dinar_moroccan_dirham_c_market_goods_delta = {
@@ -17378,7 +16053,7 @@ currency_own_by_private_bank = {
 		subtract = dinar_moroccan_dirham_c_market_goods_buy_orders
 	}
 	dinar_moroccan_dirham_c_market_goods_lake_ratio = {
-		value = market.mg:dinar_moroccan_dirham_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = dinar_moroccan_dirham_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -17450,16 +16125,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#dinar_omanian_rial
 	dinar_omanian_rial_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:dinar_omanian_rial_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	dinar_omanian_rial_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:dinar_omanian_rial_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	dinar_omanian_rial_c_market_goods_delta = {
@@ -17467,7 +16142,7 @@ currency_own_by_private_bank = {
 		subtract = dinar_omanian_rial_c_market_goods_buy_orders
 	}
 	dinar_omanian_rial_c_market_goods_lake_ratio = {
-		value = market.mg:dinar_omanian_rial_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = dinar_omanian_rial_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -17539,16 +16214,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#dinar_qiran
 	dinar_qiran_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:dinar_qiran_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	dinar_qiran_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:dinar_qiran_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	dinar_qiran_c_market_goods_delta = {
@@ -17556,7 +16231,7 @@ currency_own_by_private_bank = {
 		subtract = dinar_qiran_c_market_goods_buy_orders
 	}
 	dinar_qiran_c_market_goods_lake_ratio = {
-		value = market.mg:dinar_qiran_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = dinar_qiran_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -17628,16 +16303,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#dinar_saudi_riyal
 	dinar_saudi_riyal_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:dinar_saudi_riyal_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	dinar_saudi_riyal_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:dinar_saudi_riyal_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	dinar_saudi_riyal_c_market_goods_delta = {
@@ -17645,7 +16320,7 @@ currency_own_by_private_bank = {
 		subtract = dinar_saudi_riyal_c_market_goods_buy_orders
 	}
 	dinar_saudi_riyal_c_market_goods_lake_ratio = {
-		value = market.mg:dinar_saudi_riyal_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = dinar_saudi_riyal_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -17717,16 +16392,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#dinar_serbian_dinar
 	dinar_serbian_dinar_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:dinar_serbian_dinar_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	dinar_serbian_dinar_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:dinar_serbian_dinar_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	dinar_serbian_dinar_c_market_goods_delta = {
@@ -17734,7 +16409,7 @@ currency_own_by_private_bank = {
 		subtract = dinar_serbian_dinar_c_market_goods_buy_orders
 	}
 	dinar_serbian_dinar_c_market_goods_lake_ratio = {
-		value = market.mg:dinar_serbian_dinar_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = dinar_serbian_dinar_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -17806,16 +16481,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#dinar_tunisian_dinar
 	dinar_tunisian_dinar_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:dinar_tunisian_dinar_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	dinar_tunisian_dinar_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:dinar_tunisian_dinar_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	dinar_tunisian_dinar_c_market_goods_delta = {
@@ -17823,7 +16498,7 @@ currency_own_by_private_bank = {
 		subtract = dinar_tunisian_dinar_c_market_goods_buy_orders
 	}
 	dinar_tunisian_dinar_c_market_goods_lake_ratio = {
-		value = market.mg:dinar_tunisian_dinar_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = dinar_tunisian_dinar_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -17895,16 +16570,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#dinar_yugoslav_dinar
 	dinar_yugoslav_dinar_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:dinar_yugoslav_dinar_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	dinar_yugoslav_dinar_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:dinar_yugoslav_dinar_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	dinar_yugoslav_dinar_c_market_goods_delta = {
@@ -17912,7 +16587,7 @@ currency_own_by_private_bank = {
 		subtract = dinar_yugoslav_dinar_c_market_goods_buy_orders
 	}
 	dinar_yugoslav_dinar_c_market_goods_lake_ratio = {
-		value = market.mg:dinar_yugoslav_dinar_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = dinar_yugoslav_dinar_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -17984,16 +16659,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#dollar_australian_dollar
 	dollar_australian_dollar_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:dollar_australian_dollar_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	dollar_australian_dollar_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:dollar_australian_dollar_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	dollar_australian_dollar_c_market_goods_delta = {
@@ -18001,7 +16676,7 @@ currency_own_by_private_bank = {
 		subtract = dollar_australian_dollar_c_market_goods_buy_orders
 	}
 	dollar_australian_dollar_c_market_goods_lake_ratio = {
-		value = market.mg:dollar_australian_dollar_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = dollar_australian_dollar_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -18073,16 +16748,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#dollar_canadian_dollar
 	dollar_canadian_dollar_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:dollar_canadian_dollar_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	dollar_canadian_dollar_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:dollar_canadian_dollar_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	dollar_canadian_dollar_c_market_goods_delta = {
@@ -18090,7 +16765,7 @@ currency_own_by_private_bank = {
 		subtract = dollar_canadian_dollar_c_market_goods_buy_orders
 	}
 	dollar_canadian_dollar_c_market_goods_lake_ratio = {
-		value = market.mg:dollar_canadian_dollar_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = dollar_canadian_dollar_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -18162,16 +16837,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#dollar_caribbean_dollar
 	dollar_caribbean_dollar_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:dollar_caribbean_dollar_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	dollar_caribbean_dollar_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:dollar_caribbean_dollar_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	dollar_caribbean_dollar_c_market_goods_delta = {
@@ -18179,7 +16854,7 @@ currency_own_by_private_bank = {
 		subtract = dollar_caribbean_dollar_c_market_goods_buy_orders
 	}
 	dollar_caribbean_dollar_c_market_goods_lake_ratio = {
-		value = market.mg:dollar_caribbean_dollar_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = dollar_caribbean_dollar_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -18251,16 +16926,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#dollar_confederate_states_dollar
 	dollar_confederate_states_dollar_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:dollar_confederate_states_dollar_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	dollar_confederate_states_dollar_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:dollar_confederate_states_dollar_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	dollar_confederate_states_dollar_c_market_goods_delta = {
@@ -18268,7 +16943,7 @@ currency_own_by_private_bank = {
 		subtract = dollar_confederate_states_dollar_c_market_goods_buy_orders
 	}
 	dollar_confederate_states_dollar_c_market_goods_lake_ratio = {
-		value = market.mg:dollar_confederate_states_dollar_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = dollar_confederate_states_dollar_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -18340,16 +17015,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#dollar_liberian_dollar
 	dollar_liberian_dollar_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:dollar_liberian_dollar_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	dollar_liberian_dollar_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:dollar_liberian_dollar_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	dollar_liberian_dollar_c_market_goods_delta = {
@@ -18357,7 +17032,7 @@ currency_own_by_private_bank = {
 		subtract = dollar_liberian_dollar_c_market_goods_buy_orders
 	}
 	dollar_liberian_dollar_c_market_goods_lake_ratio = {
-		value = market.mg:dollar_liberian_dollar_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = dollar_liberian_dollar_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -18429,16 +17104,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#dollar_new_zealand_dollar
 	dollar_new_zealand_dollar_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:dollar_new_zealand_dollar_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	dollar_new_zealand_dollar_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:dollar_new_zealand_dollar_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	dollar_new_zealand_dollar_c_market_goods_delta = {
@@ -18446,7 +17121,7 @@ currency_own_by_private_bank = {
 		subtract = dollar_new_zealand_dollar_c_market_goods_buy_orders
 	}
 	dollar_new_zealand_dollar_c_market_goods_lake_ratio = {
-		value = market.mg:dollar_new_zealand_dollar_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = dollar_new_zealand_dollar_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -18518,16 +17193,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#dollar_sierra_leonean_dollar
 	dollar_sierra_leonean_dollar_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:dollar_sierra_leonean_dollar_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	dollar_sierra_leonean_dollar_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:dollar_sierra_leonean_dollar_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	dollar_sierra_leonean_dollar_c_market_goods_delta = {
@@ -18535,7 +17210,7 @@ currency_own_by_private_bank = {
 		subtract = dollar_sierra_leonean_dollar_c_market_goods_buy_orders
 	}
 	dollar_sierra_leonean_dollar_c_market_goods_lake_ratio = {
-		value = market.mg:dollar_sierra_leonean_dollar_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = dollar_sierra_leonean_dollar_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -18607,16 +17282,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#dollar_united_states_dollar
 	dollar_united_states_dollar_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:dollar_united_states_dollar_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	dollar_united_states_dollar_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:dollar_united_states_dollar_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	dollar_united_states_dollar_c_market_goods_delta = {
@@ -18624,7 +17299,7 @@ currency_own_by_private_bank = {
 		subtract = dollar_united_states_dollar_c_market_goods_buy_orders
 	}
 	dollar_united_states_dollar_c_market_goods_lake_ratio = {
-		value = market.mg:dollar_united_states_dollar_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = dollar_united_states_dollar_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -18696,16 +17371,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#eco_ariary
 	eco_ariary_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:eco_ariary_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	eco_ariary_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:eco_ariary_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	eco_ariary_c_market_goods_delta = {
@@ -18713,7 +17388,7 @@ currency_own_by_private_bank = {
 		subtract = eco_ariary_c_market_goods_buy_orders
 	}
 	eco_ariary_c_market_goods_lake_ratio = {
-		value = market.mg:eco_ariary_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = eco_ariary_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -18785,16 +17460,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#eco_central_african_eco
 	eco_central_african_eco_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:eco_central_african_eco_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	eco_central_african_eco_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:eco_central_african_eco_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	eco_central_african_eco_c_market_goods_delta = {
@@ -18802,7 +17477,7 @@ currency_own_by_private_bank = {
 		subtract = eco_central_african_eco_c_market_goods_buy_orders
 	}
 	eco_central_african_eco_c_market_goods_lake_ratio = {
-		value = market.mg:eco_central_african_eco_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = eco_central_african_eco_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -18874,16 +17549,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#eco_east_african_eco
 	eco_east_african_eco_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:eco_east_african_eco_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	eco_east_african_eco_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:eco_east_african_eco_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	eco_east_african_eco_c_market_goods_delta = {
@@ -18891,7 +17566,7 @@ currency_own_by_private_bank = {
 		subtract = eco_east_african_eco_c_market_goods_buy_orders
 	}
 	eco_east_african_eco_c_market_goods_lake_ratio = {
-		value = market.mg:eco_east_african_eco_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = eco_east_african_eco_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -18963,16 +17638,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#eco_ethiopian_birr
 	eco_ethiopian_birr_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:eco_ethiopian_birr_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	eco_ethiopian_birr_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:eco_ethiopian_birr_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	eco_ethiopian_birr_c_market_goods_delta = {
@@ -18980,7 +17655,7 @@ currency_own_by_private_bank = {
 		subtract = eco_ethiopian_birr_c_market_goods_buy_orders
 	}
 	eco_ethiopian_birr_c_market_goods_lake_ratio = {
-		value = market.mg:eco_ethiopian_birr_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = eco_ethiopian_birr_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -19052,16 +17727,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#eco_ghanaian_pound
 	eco_ghanaian_pound_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:eco_ghanaian_pound_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	eco_ghanaian_pound_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:eco_ghanaian_pound_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	eco_ghanaian_pound_c_market_goods_delta = {
@@ -19069,7 +17744,7 @@ currency_own_by_private_bank = {
 		subtract = eco_ghanaian_pound_c_market_goods_buy_orders
 	}
 	eco_ghanaian_pound_c_market_goods_lake_ratio = {
-		value = market.mg:eco_ghanaian_pound_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = eco_ghanaian_pound_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -19141,16 +17816,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#eco_nigerian_naira
 	eco_nigerian_naira_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:eco_nigerian_naira_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	eco_nigerian_naira_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:eco_nigerian_naira_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	eco_nigerian_naira_c_market_goods_delta = {
@@ -19158,7 +17833,7 @@ currency_own_by_private_bank = {
 		subtract = eco_nigerian_naira_c_market_goods_buy_orders
 	}
 	eco_nigerian_naira_c_market_goods_lake_ratio = {
-		value = market.mg:eco_nigerian_naira_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = eco_nigerian_naira_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -19230,16 +17905,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#eco_south_african_rand
 	eco_south_african_rand_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:eco_south_african_rand_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	eco_south_african_rand_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:eco_south_african_rand_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	eco_south_african_rand_c_market_goods_delta = {
@@ -19247,7 +17922,7 @@ currency_own_by_private_bank = {
 		subtract = eco_south_african_rand_c_market_goods_buy_orders
 	}
 	eco_south_african_rand_c_market_goods_lake_ratio = {
-		value = market.mg:eco_south_african_rand_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = eco_south_african_rand_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -19319,16 +17994,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#eco_tuareg_ouguiya
 	eco_tuareg_ouguiya_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:eco_tuareg_ouguiya_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	eco_tuareg_ouguiya_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:eco_tuareg_ouguiya_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	eco_tuareg_ouguiya_c_market_goods_delta = {
@@ -19336,7 +18011,7 @@ currency_own_by_private_bank = {
 		subtract = eco_tuareg_ouguiya_c_market_goods_buy_orders
 	}
 	eco_tuareg_ouguiya_c_market_goods_lake_ratio = {
-		value = market.mg:eco_tuareg_ouguiya_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = eco_tuareg_ouguiya_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -19408,16 +18083,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#eco_west_african_eco
 	eco_west_african_eco_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:eco_west_african_eco_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	eco_west_african_eco_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:eco_west_african_eco_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	eco_west_african_eco_c_market_goods_delta = {
@@ -19425,7 +18100,7 @@ currency_own_by_private_bank = {
 		subtract = eco_west_african_eco_c_market_goods_buy_orders
 	}
 	eco_west_african_eco_c_market_goods_lake_ratio = {
-		value = market.mg:eco_west_african_eco_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = eco_west_african_eco_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -19497,16 +18172,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#franc_belgian_franc
 	franc_belgian_franc_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:franc_belgian_franc_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	franc_belgian_franc_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:franc_belgian_franc_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	franc_belgian_franc_c_market_goods_delta = {
@@ -19514,7 +18189,7 @@ currency_own_by_private_bank = {
 		subtract = franc_belgian_franc_c_market_goods_buy_orders
 	}
 	franc_belgian_franc_c_market_goods_lake_ratio = {
-		value = market.mg:franc_belgian_franc_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = franc_belgian_franc_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -19586,16 +18261,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#franc_french_franc
 	franc_french_franc_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:franc_french_franc_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	franc_french_franc_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:franc_french_franc_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	franc_french_franc_c_market_goods_delta = {
@@ -19603,7 +18278,7 @@ currency_own_by_private_bank = {
 		subtract = franc_french_franc_c_market_goods_buy_orders
 	}
 	franc_french_franc_c_market_goods_lake_ratio = {
-		value = market.mg:franc_french_franc_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = franc_french_franc_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -19675,16 +18350,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#franc_luxembourgish_franc
 	franc_luxembourgish_franc_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:franc_luxembourgish_franc_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	franc_luxembourgish_franc_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:franc_luxembourgish_franc_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	franc_luxembourgish_franc_c_market_goods_delta = {
@@ -19692,7 +18367,7 @@ currency_own_by_private_bank = {
 		subtract = franc_luxembourgish_franc_c_market_goods_buy_orders
 	}
 	franc_luxembourgish_franc_c_market_goods_lake_ratio = {
-		value = market.mg:franc_luxembourgish_franc_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = franc_luxembourgish_franc_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -19764,16 +18439,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#franc_swiss_franc
 	franc_swiss_franc_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:franc_swiss_franc_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	franc_swiss_franc_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:franc_swiss_franc_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	franc_swiss_franc_c_market_goods_delta = {
@@ -19781,7 +18456,7 @@ currency_own_by_private_bank = {
 		subtract = franc_swiss_franc_c_market_goods_buy_orders
 	}
 	franc_swiss_franc_c_market_goods_lake_ratio = {
-		value = market.mg:franc_swiss_franc_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = franc_swiss_franc_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -19853,16 +18528,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#gulden
 	gulden_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:gulden_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	gulden_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:gulden_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	gulden_c_market_goods_delta = {
@@ -19870,7 +18545,7 @@ currency_own_by_private_bank = {
 		subtract = gulden_c_market_goods_buy_orders
 	}
 	gulden_c_market_goods_lake_ratio = {
-		value = market.mg:gulden_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = gulden_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -19942,16 +18617,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#gulden_bavarian_gulden
 	gulden_bavarian_gulden_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:gulden_bavarian_gulden_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	gulden_bavarian_gulden_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:gulden_bavarian_gulden_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	gulden_bavarian_gulden_c_market_goods_delta = {
@@ -19959,7 +18634,7 @@ currency_own_by_private_bank = {
 		subtract = gulden_bavarian_gulden_c_market_goods_buy_orders
 	}
 	gulden_bavarian_gulden_c_market_goods_lake_ratio = {
-		value = market.mg:gulden_bavarian_gulden_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = gulden_bavarian_gulden_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -20031,16 +18706,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#gulden_florin
 	gulden_florin_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:gulden_florin_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	gulden_florin_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:gulden_florin_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	gulden_florin_c_market_goods_delta = {
@@ -20048,7 +18723,7 @@ currency_own_by_private_bank = {
 		subtract = gulden_florin_c_market_goods_buy_orders
 	}
 	gulden_florin_c_market_goods_lake_ratio = {
-		value = market.mg:gulden_florin_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = gulden_florin_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -20120,16 +18795,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#gulden_hungarian_forint
 	gulden_hungarian_forint_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:gulden_hungarian_forint_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	gulden_hungarian_forint_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:gulden_hungarian_forint_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	gulden_hungarian_forint_c_market_goods_delta = {
@@ -20137,7 +18812,7 @@ currency_own_by_private_bank = {
 		subtract = gulden_hungarian_forint_c_market_goods_buy_orders
 	}
 	gulden_hungarian_forint_c_market_goods_lake_ratio = {
-		value = market.mg:gulden_hungarian_forint_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = gulden_hungarian_forint_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -20209,16 +18884,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#gulden_indies_guilder
 	gulden_indies_guilder_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:gulden_indies_guilder_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	gulden_indies_guilder_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:gulden_indies_guilder_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	gulden_indies_guilder_c_market_goods_delta = {
@@ -20226,7 +18901,7 @@ currency_own_by_private_bank = {
 		subtract = gulden_indies_guilder_c_market_goods_buy_orders
 	}
 	gulden_indies_guilder_c_market_goods_lake_ratio = {
-		value = market.mg:gulden_indies_guilder_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = gulden_indies_guilder_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -20298,16 +18973,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#gulden_south_german_gulden
 	gulden_south_german_gulden_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:gulden_south_german_gulden_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	gulden_south_german_gulden_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:gulden_south_german_gulden_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	gulden_south_german_gulden_c_market_goods_delta = {
@@ -20315,7 +18990,7 @@ currency_own_by_private_bank = {
 		subtract = gulden_south_german_gulden_c_market_goods_buy_orders
 	}
 	gulden_south_german_gulden_c_market_goods_lake_ratio = {
-		value = market.mg:gulden_south_german_gulden_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = gulden_south_german_gulden_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -20387,16 +19062,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#krone_czech_koruna
 	krone_czech_koruna_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:krone_czech_koruna_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	krone_czech_koruna_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:krone_czech_koruna_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	krone_czech_koruna_c_market_goods_delta = {
@@ -20404,7 +19079,7 @@ currency_own_by_private_bank = {
 		subtract = krone_czech_koruna_c_market_goods_buy_orders
 	}
 	krone_czech_koruna_c_market_goods_lake_ratio = {
-		value = market.mg:krone_czech_koruna_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = krone_czech_koruna_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -20476,16 +19151,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#krone_danish_krone
 	krone_danish_krone_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:krone_danish_krone_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	krone_danish_krone_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:krone_danish_krone_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	krone_danish_krone_c_market_goods_delta = {
@@ -20493,7 +19168,7 @@ currency_own_by_private_bank = {
 		subtract = krone_danish_krone_c_market_goods_buy_orders
 	}
 	krone_danish_krone_c_market_goods_lake_ratio = {
-		value = market.mg:krone_danish_krone_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = krone_danish_krone_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -20565,16 +19240,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#krone_estonian_kroon
 	krone_estonian_kroon_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:krone_estonian_kroon_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	krone_estonian_kroon_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:krone_estonian_kroon_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	krone_estonian_kroon_c_market_goods_delta = {
@@ -20582,7 +19257,7 @@ currency_own_by_private_bank = {
 		subtract = krone_estonian_kroon_c_market_goods_buy_orders
 	}
 	krone_estonian_kroon_c_market_goods_lake_ratio = {
-		value = market.mg:krone_estonian_kroon_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = krone_estonian_kroon_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -20654,16 +19329,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#krone_icelandic_krona
 	krone_icelandic_krona_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:krone_icelandic_krona_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	krone_icelandic_krona_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:krone_icelandic_krona_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	krone_icelandic_krona_c_market_goods_delta = {
@@ -20671,7 +19346,7 @@ currency_own_by_private_bank = {
 		subtract = krone_icelandic_krona_c_market_goods_buy_orders
 	}
 	krone_icelandic_krona_c_market_goods_lake_ratio = {
-		value = market.mg:krone_icelandic_krona_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = krone_icelandic_krona_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -20743,16 +19418,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#krone_norwegian_krone
 	krone_norwegian_krone_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:krone_norwegian_krone_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	krone_norwegian_krone_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:krone_norwegian_krone_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	krone_norwegian_krone_c_market_goods_delta = {
@@ -20760,7 +19435,7 @@ currency_own_by_private_bank = {
 		subtract = krone_norwegian_krone_c_market_goods_buy_orders
 	}
 	krone_norwegian_krone_c_market_goods_lake_ratio = {
-		value = market.mg:krone_norwegian_krone_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = krone_norwegian_krone_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -20832,16 +19507,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#krone_slovak_koruna
 	krone_slovak_koruna_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:krone_slovak_koruna_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	krone_slovak_koruna_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:krone_slovak_koruna_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	krone_slovak_koruna_c_market_goods_delta = {
@@ -20849,7 +19524,7 @@ currency_own_by_private_bank = {
 		subtract = krone_slovak_koruna_c_market_goods_buy_orders
 	}
 	krone_slovak_koruna_c_market_goods_lake_ratio = {
-		value = market.mg:krone_slovak_koruna_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = krone_slovak_koruna_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -20921,16 +19596,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#krone_swedish_krona
 	krone_swedish_krona_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:krone_swedish_krona_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	krone_swedish_krona_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:krone_swedish_krona_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	krone_swedish_krona_c_market_goods_delta = {
@@ -20938,7 +19613,7 @@ currency_own_by_private_bank = {
 		subtract = krone_swedish_krona_c_market_goods_buy_orders
 	}
 	krone_swedish_krona_c_market_goods_lake_ratio = {
-		value = market.mg:krone_swedish_krona_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = krone_swedish_krona_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -21010,16 +19685,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#leon_leu
 	leon_leu_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:leon_leu_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	leon_leu_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:leon_leu_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	leon_leu_c_market_goods_delta = {
@@ -21027,7 +19702,7 @@ currency_own_by_private_bank = {
 		subtract = leon_leu_c_market_goods_buy_orders
 	}
 	leon_leu_c_market_goods_lake_ratio = {
-		value = market.mg:leon_leu_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = leon_leu_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -21099,16 +19774,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#leon_lev
 	leon_lev_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:leon_lev_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	leon_lev_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:leon_lev_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	leon_lev_c_market_goods_delta = {
@@ -21116,7 +19791,7 @@ currency_own_by_private_bank = {
 		subtract = leon_lev_c_market_goods_buy_orders
 	}
 	leon_lev_c_market_goods_lake_ratio = {
-		value = market.mg:leon_lev_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = leon_lev_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -21188,16 +19863,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#lira
 	lira_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:lira_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	lira_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:lira_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	lira_c_market_goods_delta = {
@@ -21205,7 +19880,7 @@ currency_own_by_private_bank = {
 		subtract = lira_c_market_goods_buy_orders
 	}
 	lira_c_market_goods_lake_ratio = {
-		value = market.mg:lira_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = lira_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -21277,16 +19952,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#lira_ducato
 	lira_ducato_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:lira_ducato_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	lira_ducato_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:lira_ducato_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	lira_ducato_c_market_goods_delta = {
@@ -21294,7 +19969,7 @@ currency_own_by_private_bank = {
 		subtract = lira_ducato_c_market_goods_buy_orders
 	}
 	lira_ducato_c_market_goods_lake_ratio = {
-		value = market.mg:lira_ducato_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = lira_ducato_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -21366,16 +20041,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#lira_ottoman_lira
 	lira_ottoman_lira_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:lira_ottoman_lira_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	lira_ottoman_lira_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:lira_ottoman_lira_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	lira_ottoman_lira_c_market_goods_delta = {
@@ -21383,7 +20058,7 @@ currency_own_by_private_bank = {
 		subtract = lira_ottoman_lira_c_market_goods_buy_orders
 	}
 	lira_ottoman_lira_c_market_goods_lake_ratio = {
-		value = market.mg:lira_ottoman_lira_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = lira_ottoman_lira_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -21455,16 +20130,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#lira_scudo_pontificio
 	lira_scudo_pontificio_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:lira_scudo_pontificio_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	lira_scudo_pontificio_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:lira_scudo_pontificio_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	lira_scudo_pontificio_c_market_goods_delta = {
@@ -21472,7 +20147,7 @@ currency_own_by_private_bank = {
 		subtract = lira_scudo_pontificio_c_market_goods_buy_orders
 	}
 	lira_scudo_pontificio_c_market_goods_lake_ratio = {
-		value = market.mg:lira_scudo_pontificio_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = lira_scudo_pontificio_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -21544,16 +20219,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#lira_scudo_sardo
 	lira_scudo_sardo_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:lira_scudo_sardo_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	lira_scudo_sardo_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:lira_scudo_sardo_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	lira_scudo_sardo_c_market_goods_delta = {
@@ -21561,7 +20236,7 @@ currency_own_by_private_bank = {
 		subtract = lira_scudo_sardo_c_market_goods_buy_orders
 	}
 	lira_scudo_sardo_c_market_goods_lake_ratio = {
-		value = market.mg:lira_scudo_sardo_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = lira_scudo_sardo_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -21633,16 +20308,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#lira_toscane_lira
 	lira_toscane_lira_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:lira_toscane_lira_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	lira_toscane_lira_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:lira_toscane_lira_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	lira_toscane_lira_c_market_goods_delta = {
@@ -21650,7 +20325,7 @@ currency_own_by_private_bank = {
 		subtract = lira_toscane_lira_c_market_goods_buy_orders
 	}
 	lira_toscane_lira_c_market_goods_lake_ratio = {
-		value = market.mg:lira_toscane_lira_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = lira_toscane_lira_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -21722,16 +20397,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#mark
 	mark_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:mark_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	mark_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:mark_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	mark_c_market_goods_delta = {
@@ -21739,7 +20414,7 @@ currency_own_by_private_bank = {
 		subtract = mark_c_market_goods_buy_orders
 	}
 	mark_c_market_goods_lake_ratio = {
-		value = market.mg:mark_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = mark_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -21811,16 +20486,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#mark_finnish_markka
 	mark_finnish_markka_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:mark_finnish_markka_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	mark_finnish_markka_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:mark_finnish_markka_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	mark_finnish_markka_c_market_goods_delta = {
@@ -21828,7 +20503,7 @@ currency_own_by_private_bank = {
 		subtract = mark_finnish_markka_c_market_goods_buy_orders
 	}
 	mark_finnish_markka_c_market_goods_lake_ratio = {
-		value = market.mg:mark_finnish_markka_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = mark_finnish_markka_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -21900,16 +20575,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#peso
 	peso_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:peso_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	peso_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:peso_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	peso_c_market_goods_delta = {
@@ -21917,7 +20592,7 @@ currency_own_by_private_bank = {
 		subtract = peso_c_market_goods_buy_orders
 	}
 	peso_c_market_goods_lake_ratio = {
-		value = market.mg:peso_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = peso_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -21989,16 +20664,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#peso_argentine_peso
 	peso_argentine_peso_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:peso_argentine_peso_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	peso_argentine_peso_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:peso_argentine_peso_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	peso_argentine_peso_c_market_goods_delta = {
@@ -22006,7 +20681,7 @@ currency_own_by_private_bank = {
 		subtract = peso_argentine_peso_c_market_goods_buy_orders
 	}
 	peso_argentine_peso_c_market_goods_lake_ratio = {
-		value = market.mg:peso_argentine_peso_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = peso_argentine_peso_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -22078,16 +20753,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#peso_bolivien_peso
 	peso_bolivien_peso_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:peso_bolivien_peso_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	peso_bolivien_peso_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:peso_bolivien_peso_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	peso_bolivien_peso_c_market_goods_delta = {
@@ -22095,7 +20770,7 @@ currency_own_by_private_bank = {
 		subtract = peso_bolivien_peso_c_market_goods_buy_orders
 	}
 	peso_bolivien_peso_c_market_goods_lake_ratio = {
-		value = market.mg:peso_bolivien_peso_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = peso_bolivien_peso_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -22167,16 +20842,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#peso_chilean_peso
 	peso_chilean_peso_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:peso_chilean_peso_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	peso_chilean_peso_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:peso_chilean_peso_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	peso_chilean_peso_c_market_goods_delta = {
@@ -22184,7 +20859,7 @@ currency_own_by_private_bank = {
 		subtract = peso_chilean_peso_c_market_goods_buy_orders
 	}
 	peso_chilean_peso_c_market_goods_lake_ratio = {
-		value = market.mg:peso_chilean_peso_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = peso_chilean_peso_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -22256,16 +20931,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#peso_colombian_peso
 	peso_colombian_peso_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:peso_colombian_peso_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	peso_colombian_peso_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:peso_colombian_peso_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	peso_colombian_peso_c_market_goods_delta = {
@@ -22273,7 +20948,7 @@ currency_own_by_private_bank = {
 		subtract = peso_colombian_peso_c_market_goods_buy_orders
 	}
 	peso_colombian_peso_c_market_goods_lake_ratio = {
-		value = market.mg:peso_colombian_peso_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = peso_colombian_peso_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -22345,16 +21020,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#peso_costa_rican_colon
 	peso_costa_rican_colon_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:peso_costa_rican_colon_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	peso_costa_rican_colon_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:peso_costa_rican_colon_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	peso_costa_rican_colon_c_market_goods_delta = {
@@ -22362,7 +21037,7 @@ currency_own_by_private_bank = {
 		subtract = peso_costa_rican_colon_c_market_goods_buy_orders
 	}
 	peso_costa_rican_colon_c_market_goods_lake_ratio = {
-		value = market.mg:peso_costa_rican_colon_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = peso_costa_rican_colon_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -22434,16 +21109,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#peso_cuban_peso
 	peso_cuban_peso_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:peso_cuban_peso_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	peso_cuban_peso_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:peso_cuban_peso_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	peso_cuban_peso_c_market_goods_delta = {
@@ -22451,7 +21126,7 @@ currency_own_by_private_bank = {
 		subtract = peso_cuban_peso_c_market_goods_buy_orders
 	}
 	peso_cuban_peso_c_market_goods_lake_ratio = {
-		value = market.mg:peso_cuban_peso_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = peso_cuban_peso_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -22523,16 +21198,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#peso_ecuadorian_peso
 	peso_ecuadorian_peso_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:peso_ecuadorian_peso_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	peso_ecuadorian_peso_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:peso_ecuadorian_peso_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	peso_ecuadorian_peso_c_market_goods_delta = {
@@ -22540,7 +21215,7 @@ currency_own_by_private_bank = {
 		subtract = peso_ecuadorian_peso_c_market_goods_buy_orders
 	}
 	peso_ecuadorian_peso_c_market_goods_lake_ratio = {
-		value = market.mg:peso_ecuadorian_peso_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = peso_ecuadorian_peso_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -22612,16 +21287,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#peso_el_salvador_colon
 	peso_el_salvador_colon_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:peso_el_salvador_colon_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	peso_el_salvador_colon_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:peso_el_salvador_colon_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	peso_el_salvador_colon_c_market_goods_delta = {
@@ -22629,7 +21304,7 @@ currency_own_by_private_bank = {
 		subtract = peso_el_salvador_colon_c_market_goods_buy_orders
 	}
 	peso_el_salvador_colon_c_market_goods_lake_ratio = {
-		value = market.mg:peso_el_salvador_colon_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = peso_el_salvador_colon_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -22701,16 +21376,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#peso_guatemalan_quetzal
 	peso_guatemalan_quetzal_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:peso_guatemalan_quetzal_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	peso_guatemalan_quetzal_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:peso_guatemalan_quetzal_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	peso_guatemalan_quetzal_c_market_goods_delta = {
@@ -22718,7 +21393,7 @@ currency_own_by_private_bank = {
 		subtract = peso_guatemalan_quetzal_c_market_goods_buy_orders
 	}
 	peso_guatemalan_quetzal_c_market_goods_lake_ratio = {
-		value = market.mg:peso_guatemalan_quetzal_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = peso_guatemalan_quetzal_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -22790,16 +21465,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#peso_honduran_lempira
 	peso_honduran_lempira_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:peso_honduran_lempira_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	peso_honduran_lempira_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:peso_honduran_lempira_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	peso_honduran_lempira_c_market_goods_delta = {
@@ -22807,7 +21482,7 @@ currency_own_by_private_bank = {
 		subtract = peso_honduran_lempira_c_market_goods_buy_orders
 	}
 	peso_honduran_lempira_c_market_goods_lake_ratio = {
-		value = market.mg:peso_honduran_lempira_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = peso_honduran_lempira_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -22879,16 +21554,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#peso_mexican_peso
 	peso_mexican_peso_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:peso_mexican_peso_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	peso_mexican_peso_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:peso_mexican_peso_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	peso_mexican_peso_c_market_goods_delta = {
@@ -22896,7 +21571,7 @@ currency_own_by_private_bank = {
 		subtract = peso_mexican_peso_c_market_goods_buy_orders
 	}
 	peso_mexican_peso_c_market_goods_lake_ratio = {
-		value = market.mg:peso_mexican_peso_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = peso_mexican_peso_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -22968,16 +21643,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#peso_nicaraguan_cordoba
 	peso_nicaraguan_cordoba_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:peso_nicaraguan_cordoba_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	peso_nicaraguan_cordoba_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:peso_nicaraguan_cordoba_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	peso_nicaraguan_cordoba_c_market_goods_delta = {
@@ -22985,7 +21660,7 @@ currency_own_by_private_bank = {
 		subtract = peso_nicaraguan_cordoba_c_market_goods_buy_orders
 	}
 	peso_nicaraguan_cordoba_c_market_goods_lake_ratio = {
-		value = market.mg:peso_nicaraguan_cordoba_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = peso_nicaraguan_cordoba_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -23057,16 +21732,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#peso_paraguayan_peso
 	peso_paraguayan_peso_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:peso_paraguayan_peso_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	peso_paraguayan_peso_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:peso_paraguayan_peso_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	peso_paraguayan_peso_c_market_goods_delta = {
@@ -23074,7 +21749,7 @@ currency_own_by_private_bank = {
 		subtract = peso_paraguayan_peso_c_market_goods_buy_orders
 	}
 	peso_paraguayan_peso_c_market_goods_lake_ratio = {
-		value = market.mg:peso_paraguayan_peso_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = peso_paraguayan_peso_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -23146,16 +21821,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#peso_philippine_peso
 	peso_philippine_peso_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:peso_philippine_peso_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	peso_philippine_peso_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:peso_philippine_peso_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	peso_philippine_peso_c_market_goods_delta = {
@@ -23163,7 +21838,7 @@ currency_own_by_private_bank = {
 		subtract = peso_philippine_peso_c_market_goods_buy_orders
 	}
 	peso_philippine_peso_c_market_goods_lake_ratio = {
-		value = market.mg:peso_philippine_peso_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = peso_philippine_peso_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -23235,16 +21910,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#peso_sol_de_oro
 	peso_sol_de_oro_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:peso_sol_de_oro_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	peso_sol_de_oro_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:peso_sol_de_oro_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	peso_sol_de_oro_c_market_goods_delta = {
@@ -23252,7 +21927,7 @@ currency_own_by_private_bank = {
 		subtract = peso_sol_de_oro_c_market_goods_buy_orders
 	}
 	peso_sol_de_oro_c_market_goods_lake_ratio = {
-		value = market.mg:peso_sol_de_oro_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = peso_sol_de_oro_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -23324,16 +21999,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#peso_uruguayan_peso
 	peso_uruguayan_peso_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:peso_uruguayan_peso_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	peso_uruguayan_peso_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:peso_uruguayan_peso_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	peso_uruguayan_peso_c_market_goods_delta = {
@@ -23341,7 +22016,7 @@ currency_own_by_private_bank = {
 		subtract = peso_uruguayan_peso_c_market_goods_buy_orders
 	}
 	peso_uruguayan_peso_c_market_goods_lake_ratio = {
-		value = market.mg:peso_uruguayan_peso_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = peso_uruguayan_peso_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -23413,16 +22088,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#peso_venezuelan_peso
 	peso_venezuelan_peso_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:peso_venezuelan_peso_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	peso_venezuelan_peso_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:peso_venezuelan_peso_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	peso_venezuelan_peso_c_market_goods_delta = {
@@ -23430,7 +22105,7 @@ currency_own_by_private_bank = {
 		subtract = peso_venezuelan_peso_c_market_goods_buy_orders
 	}
 	peso_venezuelan_peso_c_market_goods_lake_ratio = {
-		value = market.mg:peso_venezuelan_peso_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = peso_venezuelan_peso_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -23502,16 +22177,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#pound_egyptian_pound
 	pound_egyptian_pound_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:pound_egyptian_pound_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	pound_egyptian_pound_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:pound_egyptian_pound_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	pound_egyptian_pound_c_market_goods_delta = {
@@ -23519,7 +22194,7 @@ currency_own_by_private_bank = {
 		subtract = pound_egyptian_pound_c_market_goods_buy_orders
 	}
 	pound_egyptian_pound_c_market_goods_lake_ratio = {
-		value = market.mg:pound_egyptian_pound_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = pound_egyptian_pound_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -23591,16 +22266,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#pound_irish_pound
 	pound_irish_pound_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:pound_irish_pound_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	pound_irish_pound_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:pound_irish_pound_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	pound_irish_pound_c_market_goods_delta = {
@@ -23608,7 +22283,7 @@ currency_own_by_private_bank = {
 		subtract = pound_irish_pound_c_market_goods_buy_orders
 	}
 	pound_irish_pound_c_market_goods_lake_ratio = {
-		value = market.mg:pound_irish_pound_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = pound_irish_pound_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -23680,16 +22355,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#pound_sterling
 	pound_sterling_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:pound_sterling_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	pound_sterling_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:pound_sterling_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	pound_sterling_c_market_goods_delta = {
@@ -23697,7 +22372,7 @@ currency_own_by_private_bank = {
 		subtract = pound_sterling_c_market_goods_buy_orders
 	}
 	pound_sterling_c_market_goods_lake_ratio = {
-		value = market.mg:pound_sterling_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = pound_sterling_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -23769,16 +22444,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#real
 	real_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:real_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	real_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:real_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	real_c_market_goods_delta = {
@@ -23786,7 +22461,7 @@ currency_own_by_private_bank = {
 		subtract = real_c_market_goods_buy_orders
 	}
 	real_c_market_goods_lake_ratio = {
-		value = market.mg:real_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = real_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -23858,16 +22533,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#real_brazilian_real
 	real_brazilian_real_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:real_brazilian_real_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	real_brazilian_real_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:real_brazilian_real_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	real_brazilian_real_c_market_goods_delta = {
@@ -23875,7 +22550,7 @@ currency_own_by_private_bank = {
 		subtract = real_brazilian_real_c_market_goods_buy_orders
 	}
 	real_brazilian_real_c_market_goods_lake_ratio = {
-		value = market.mg:real_brazilian_real_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = real_brazilian_real_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -23947,16 +22622,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#rupee_indian_rupee
 	rupee_indian_rupee_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:rupee_indian_rupee_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	rupee_indian_rupee_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:rupee_indian_rupee_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	rupee_indian_rupee_c_market_goods_delta = {
@@ -23964,7 +22639,7 @@ currency_own_by_private_bank = {
 		subtract = rupee_indian_rupee_c_market_goods_buy_orders
 	}
 	rupee_indian_rupee_c_market_goods_lake_ratio = {
-		value = market.mg:rupee_indian_rupee_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = rupee_indian_rupee_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -24036,16 +22711,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#rupee_indonesian_rupiah
 	rupee_indonesian_rupiah_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:rupee_indonesian_rupiah_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	rupee_indonesian_rupiah_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:rupee_indonesian_rupiah_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	rupee_indonesian_rupiah_c_market_goods_delta = {
@@ -24053,7 +22728,7 @@ currency_own_by_private_bank = {
 		subtract = rupee_indonesian_rupiah_c_market_goods_buy_orders
 	}
 	rupee_indonesian_rupiah_c_market_goods_lake_ratio = {
-		value = market.mg:rupee_indonesian_rupiah_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = rupee_indonesian_rupiah_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -24125,16 +22800,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#spe_baht
 	spe_baht_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:spe_baht_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	spe_baht_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:spe_baht_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	spe_baht_c_market_goods_delta = {
@@ -24142,7 +22817,7 @@ currency_own_by_private_bank = {
 		subtract = spe_baht_c_market_goods_buy_orders
 	}
 	spe_baht_c_market_goods_lake_ratio = {
-		value = market.mg:spe_baht_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = spe_baht_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -24214,16 +22889,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#spe_dong
 	spe_dong_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:spe_dong_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	spe_dong_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:spe_dong_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	spe_dong_c_market_goods_delta = {
@@ -24231,7 +22906,7 @@ currency_own_by_private_bank = {
 		subtract = spe_dong_c_market_goods_buy_orders
 	}
 	spe_dong_c_market_goods_lake_ratio = {
-		value = market.mg:spe_dong_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = spe_dong_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -24303,16 +22978,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#spe_drachma
 	spe_drachma_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:spe_drachma_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	spe_drachma_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:spe_drachma_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	spe_drachma_c_market_goods_delta = {
@@ -24320,7 +22995,7 @@ currency_own_by_private_bank = {
 		subtract = spe_drachma_c_market_goods_buy_orders
 	}
 	spe_drachma_c_market_goods_lake_ratio = {
-		value = market.mg:spe_drachma_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = spe_drachma_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -24392,16 +23067,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#spe_korean_won
 	spe_korean_won_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:spe_korean_won_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	spe_korean_won_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:spe_korean_won_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	spe_korean_won_c_market_goods_delta = {
@@ -24409,7 +23084,7 @@ currency_own_by_private_bank = {
 		subtract = spe_korean_won_c_market_goods_buy_orders
 	}
 	spe_korean_won_c_market_goods_lake_ratio = {
-		value = market.mg:spe_korean_won_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = spe_korean_won_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -24481,16 +23156,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#spe_latvian_lats
 	spe_latvian_lats_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:spe_latvian_lats_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	spe_latvian_lats_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:spe_latvian_lats_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	spe_latvian_lats_c_market_goods_delta = {
@@ -24498,7 +23173,7 @@ currency_own_by_private_bank = {
 		subtract = spe_latvian_lats_c_market_goods_buy_orders
 	}
 	spe_latvian_lats_c_market_goods_lake_ratio = {
-		value = market.mg:spe_latvian_lats_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = spe_latvian_lats_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -24570,16 +23245,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#spe_lithuanian_litas
 	spe_lithuanian_litas_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:spe_lithuanian_litas_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	spe_lithuanian_litas_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:spe_lithuanian_litas_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	spe_lithuanian_litas_c_market_goods_delta = {
@@ -24587,7 +23262,7 @@ currency_own_by_private_bank = {
 		subtract = spe_lithuanian_litas_c_market_goods_buy_orders
 	}
 	spe_lithuanian_litas_c_market_goods_lake_ratio = {
-		value = market.mg:spe_lithuanian_litas_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = spe_lithuanian_litas_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -24659,16 +23334,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#spe_peseta
 	spe_peseta_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:spe_peseta_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	spe_peseta_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:spe_peseta_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	spe_peseta_c_market_goods_delta = {
@@ -24676,7 +23351,7 @@ currency_own_by_private_bank = {
 		subtract = spe_peseta_c_market_goods_buy_orders
 	}
 	spe_peseta_c_market_goods_lake_ratio = {
-		value = market.mg:spe_peseta_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = spe_peseta_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -24748,16 +23423,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#spe_ruble
 	spe_ruble_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:spe_ruble_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	spe_ruble_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:spe_ruble_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	spe_ruble_c_market_goods_delta = {
@@ -24765,7 +23440,7 @@ currency_own_by_private_bank = {
 		subtract = spe_ruble_c_market_goods_buy_orders
 	}
 	spe_ruble_c_market_goods_lake_ratio = {
-		value = market.mg:spe_ruble_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = spe_ruble_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -24837,16 +23512,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#spe_uni
 	spe_uni_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:spe_uni_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	spe_uni_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:spe_uni_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	spe_uni_c_market_goods_delta = {
@@ -24854,7 +23529,7 @@ currency_own_by_private_bank = {
 		subtract = spe_uni_c_market_goods_buy_orders
 	}
 	spe_uni_c_market_goods_lake_ratio = {
-		value = market.mg:spe_uni_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = spe_uni_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -24926,16 +23601,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#spe_yen
 	spe_yen_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:spe_yen_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	spe_yen_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:spe_yen_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	spe_yen_c_market_goods_delta = {
@@ -24943,7 +23618,7 @@ currency_own_by_private_bank = {
 		subtract = spe_yen_c_market_goods_buy_orders
 	}
 	spe_yen_c_market_goods_lake_ratio = {
-		value = market.mg:spe_yen_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = spe_yen_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -25015,16 +23690,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#spe_yuan
 	spe_yuan_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:spe_yuan_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	spe_yuan_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:spe_yuan_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	spe_yuan_c_market_goods_delta = {
@@ -25032,7 +23707,7 @@ currency_own_by_private_bank = {
 		subtract = spe_yuan_c_market_goods_buy_orders
 	}
 	spe_yuan_c_market_goods_lake_ratio = {
-		value = market.mg:spe_yuan_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = spe_yuan_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -25104,16 +23779,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#spe_zloti
 	spe_zloti_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:spe_zloti_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	spe_zloti_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:spe_zloti_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	spe_zloti_c_market_goods_delta = {
@@ -25121,7 +23796,7 @@ currency_own_by_private_bank = {
 		subtract = spe_zloti_c_market_goods_buy_orders
 	}
 	spe_zloti_c_market_goods_lake_ratio = {
-		value = market.mg:spe_zloti_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = spe_zloti_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -25193,16 +23868,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#thaler_hannoveraner_thaler
 	thaler_hannoveraner_thaler_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:thaler_hannoveraner_thaler_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	thaler_hannoveraner_thaler_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:thaler_hannoveraner_thaler_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	thaler_hannoveraner_thaler_c_market_goods_delta = {
@@ -25210,7 +23885,7 @@ currency_own_by_private_bank = {
 		subtract = thaler_hannoveraner_thaler_c_market_goods_buy_orders
 	}
 	thaler_hannoveraner_thaler_c_market_goods_lake_ratio = {
-		value = market.mg:thaler_hannoveraner_thaler_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = thaler_hannoveraner_thaler_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -25282,16 +23957,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#thaler_prussian_thaler
 	thaler_prussian_thaler_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:thaler_prussian_thaler_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	thaler_prussian_thaler_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:thaler_prussian_thaler_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	thaler_prussian_thaler_c_market_goods_delta = {
@@ -25299,7 +23974,7 @@ currency_own_by_private_bank = {
 		subtract = thaler_prussian_thaler_c_market_goods_buy_orders
 	}
 	thaler_prussian_thaler_c_market_goods_lake_ratio = {
-		value = market.mg:thaler_prussian_thaler_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = thaler_prussian_thaler_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -25371,16 +24046,16 @@ currency_own_by_private_bank = {
 	}
 	############################################################################################################################################################
 
- 	############################################################################################################################################################
+	############################################################################################################################################################
 	#thaler_saxon_thaler
 	thaler_saxon_thaler_c_market_goods_buy_orders = {
 		value = {
-			add = market.mg:thaler_saxon_thaler_c.market_goods_buy_orders
+			add = market.mg:liquidity_currency.market_goods_buy_orders
 		}
 	}
 	thaler_saxon_thaler_c_market_goods_sell_orders = {
 		value = {
-			add = market.mg:thaler_saxon_thaler_c.market_goods_sell_orders
+			add = market.mg:liquidity_currency.market_goods_sell_orders
 		}
 	}
 	thaler_saxon_thaler_c_market_goods_delta = {
@@ -25388,7 +24063,7 @@ currency_own_by_private_bank = {
 		subtract = thaler_saxon_thaler_c_market_goods_buy_orders
 	}
 	thaler_saxon_thaler_c_market_goods_lake_ratio = {
-		value = market.mg:thaler_saxon_thaler_c.market_goods_cheaper
+		value = market.mg:liquidity_currency.market_goods_cheaper
 		#divide = thaler_saxon_thaler_c_market_goods_buy_orders
 		multiply = -1 #pour avoir une valeur positive
 	}
@@ -25459,6 +24134,7 @@ currency_own_by_private_bank = {
 		subtract = money_supply
 	}
 	############################################################################################################################################################
+ 
 #end_tag_15
 
 ############################################################################################################################################################

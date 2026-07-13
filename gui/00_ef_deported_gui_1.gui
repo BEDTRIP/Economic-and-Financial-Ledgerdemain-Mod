@@ -131680,7 +131680,7 @@ types market_states_panel
 
 			#E&F debug
 			flowcontainer  = {
-				visible = "[GetScriptedGui('EF_debug_mode_visibility').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				#visible = "[GetScriptedGui('EF_debug_mode_visibility').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
  				margin_top = 0
 				margin_right = 0
@@ -132769,7 +132769,247 @@ types market_states_panel
 			############################################################################################################################################################
 			############################################################################################################################################################
 			############################################################################################################################################################
+ 
+			default_header = {
+				blockoverride "text" {
+					text = "national_currency"
+				}
+				visible = "[GetScriptedGui('has_central_banking_tech_visibility').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
+			}
+			flowcontainer = {
+				spacing = 10
+				direction = vertical
+				using = default_list_position
+				visible = "[GetScriptedGui('has_central_banking_tech_visibility').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]" 
+
+				flowcontainer  = {
+					margin_top = 0
+					margin_right = 0
+					margin_left = 0
+					margin_bottom = 10
+
+					direction = vertical
+					parentanchor = hcenter
+
+					spacing = 5 
+ 
+					flowcontainer = {
+						margin_top = 0
+						margin_right = 0
+						margin_left = 0
+
+						direction = vertical
+						spacing = 15 
+
+						flowcontainer = { 
+							margin_top = 10
+							margin_right = 0
+							margin_left = 0
+
+							spacing = 25
+
+							direction = horizontal
+
+							parentanchor = hcenter
+
+							flag = {
+								using = tooltip_above
+								datacontext = "[AccessPlayer]" 
+								onclick = "[GetVariableSystem.Clear('un_panel')]"
+								onclick = "[GetVariableSystem.Clear('international_open')]"
+							} 
+							textbox = {
+								text = "#v [GetPlayer.GetCustom('currency_name')]#!"
+
+								#align = left|nobaseline
+								#parentanchor = hcenter
+								#elide = right
+								default_format = "#white #bold"
+								autoresize = yes
+								fontsize = 35
+								allow_outside = yes
+								ignoreinvisible = yes 
+							}
+							icon = {
+								size = { 36 36 }
+								name = dip_power_icon
+								textbox = {
+									#margin_left = 75
+									fontsize = 46
+									position = { 0 20 }
+									name = capital_value
+									text = "[GetPlayer.GetCustom('currency_symbol')]"
+									#parentanchor = hcenter
+									#align = left|nobaseline
+
+								}
+							} 
+						}  
+						 
+						divider_decorative = {
+						}
+
+						#1 ligne
+						flowcontainer = {
+							argin_top = 15
+							spacing = 25
+							direction = horizontal
+ 
+							#currency_name_p
+							flowcontainer = {
+								spacing = 0
+								direction = vertical
+
+								textbox = {
+									autoresize = yes
+									text = "currency_name_p"
+									align = hcenter
+									parentanchor = hcenter
+									multiline = yes
+									minimumsize = { 100 40 }
+									maximumsize = { 100 -1 }
+								} 
+								textbox = {
+									autoresize = yes
+									text = "[GetPlayer.GetCustom('currency_name')]"
+
+									align = hcenter
+									parentanchor = hcenter
+									fontsize = 24
+									multiline = yes
+									minimumsize = { 100 40 }
+									maximumsize = { 100 -1 }
+									default_format = "#white #bold"
+								}  
+								background = {
+									using = entry_bg_simple
+									margin = { 10 10 }
+								}
+
+								minimumsize = { 100 110 }
+								maximumsize = { 100 -1 } 
+							} 
+							#currency_symbol_p
+							flowcontainer = {
+								spacing = 0
+								direction = vertical
+
+								textbox = {
+									autoresize = yes
+									text = "currency_symbol_p"
+									align = hcenter
+									parentanchor = hcenter
+									multiline = yes
+									minimumsize = { 100 40 }
+									maximumsize = { 100 -1 }
+								} 
+								textbox = {
+									autoresize = yes
+									text = "[GetPlayer.GetCustom('currency_symbol')]"
+
+									align = hcenter
+									parentanchor = hcenter
+									fontsize = 35
+								}  
+								textbox = {
+									autoresize = yes
+									text = "Appears As @money!"
+
+									align = hcenter
+									parentanchor = hcenter
+									fontsize = 18
+								}
+								background = {
+									using = entry_bg_simple
+									margin = { 10 10 }
+								} 
+
+								minimumsize = { 100 110 }
+								maximumsize = { 100 -1 }
+							} 
+							#currency_good_p
+							flowcontainer = {
+								spacing = 0
+								direction = vertical
+
+								textbox = {
+									autoresize = yes
+									text = "currency_good_p"
+									align = hcenter
+									parentanchor = hcenter
+									multiline = yes
+									minimumsize = { 100 40 }
+									maximumsize = { 100 -1 }
+								}
+								textbox = {
+									autoresize = yes
+									text = "[GetPlayer.GetCustom('currency_good')]"
+ 
+									align = hcenter
+									parentanchor = hcenter
+									fontsize = 35
+								}    
+								textbox = {
+									autoresize = yes
+									text = "Appears As @liquidity_currency!"
+
+									align = hcenter
+									parentanchor = hcenter
+									fontsize = 18
+								}
+								background = {
+									using = entry_bg_simple
+									margin = { 10 10 }
+								}
+
+								minimumsize = { 100 110 }
+								maximumsize = { 100 -1 }
+							}
+							#currency_ISO_p
+							flowcontainer = {
+								spacing = 0
+								direction = vertical
+
+								textbox = {
+									autoresize = yes
+									text = "currency_ISO_p"
+									align = hcenter
+									parentanchor = hcenter
+									multiline = yes
+									minimumsize = { 100 40 }
+									maximumsize = { 100 -1 }
+								}
+								textbox = {
+									autoresize = yes
+									text = "[GetPlayer.GetCustom('currency_ISO_4217')]" 
+									default_format = "#white #bold"
+									align = hcenter
+									parentanchor = hcenter
+									fontsize = 35
+								}   
+								background = {
+									using = entry_bg_simple
+									margin = { 10 10 }
+								}
+
+								minimumsize = { 100 110 }
+								maximumsize = { 100 -1 }
+							}
+						}  
+					}
+				} 
+			}
+
+			############################################################################################################################################################
+			############################################################################################################################################################
+			############################################################################################################################################################
+			############################################################################################################################################################
+			############################################################################################################################################################
+			############################################################################################################################################################
+			############################################################################################################################################################
+			############################################################################################################################################################
+  
 			default_header = {
 				blockoverride "text" {
 					text = "[concept_government_treasury]"
