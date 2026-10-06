@@ -1433,7 +1433,7 @@ country_credit_rating_national_debt_compared_gdp = {
 
 	if = {
 		limit  = {
-			exists = this
+			exists = root
 			national_debt_compared_gdp <= 1
 		}
 		add = 0
@@ -1441,70 +1441,70 @@ country_credit_rating_national_debt_compared_gdp = {
 
 	if = {
 		limit  = {
-			exists = this
+			exists = root
 			national_debt_compared_gdp <= 0.90
 		}
 		add = 1
 	}
 	if = {
 		limit  = {
-			exists = this
+			exists = root
 			national_debt_compared_gdp <= 0.80
 		}
 		add = 1
 	}
 	if = {
 		limit  = {
-			exists = this
+			exists = root
 			national_debt_compared_gdp <= 0.70
 		}
 		add = 1
 	}
 	if = {
 		limit  = {
-			exists = this
+			exists = root
 			national_debt_compared_gdp <= 0.60
 		}
 		add = 1
 	}
 	if = {
 		limit  = {
-			exists = this
+			exists = root
 			national_debt_compared_gdp <= 0.50
 		}
 		add = 1
 	}
 	if = {
 		limit  = {
-			exists = this
+			exists = root
 			national_debt_compared_gdp <= 0.40
 		}
 		add = 1
 	}
 	if = {
 		limit  = {
-			exists = this
+			exists = root
 			national_debt_compared_gdp <= 0.30
 		}
 		add = 1
 	}
 	if = {
 		limit  = {
-			exists = this
+			exists = root
 			national_debt_compared_gdp <= 0.20
 		}
 		add = 1
 	}
 	if = {
 		limit  = {
-			exists = this
+			exists = root
 			national_debt_compared_gdp <= 0.10
 		}
 		add = 1
 	}
 	if = {
 		limit  = {
-			exists = this
+			exists = root
 			national_debt_compared_gdp <= 0
 		}
 		add = 1
@@ -2305,6 +2305,7 @@ country_credit_rating_national_debt_compared_gdp_malus_100 = {
 
 	if = {
 		limit  = {
+			exists = root
 			country_credit_rating_national_debt_compared_gdp = 0
 			national_debt_compared_gdp > 1
 			not = {
@@ -2697,7 +2698,10 @@ country_indice_underperformance = {
 }
 country_max_companies_var = {
 	value = 0
-    add = root.modifier:country_max_companies_add
+	if = {
+		limit = { exists = root }
+		add = root.modifier:country_max_companies_add
+	}
 	floor = yes
 }
 num_company_var = {
@@ -3270,7 +3274,7 @@ manufacture_stock_price_brut = {
 		multiply = {
 			value = 0
 			subtract = {
-				value = capita.market.mg:manufacture_stock.market_goods_pricier
+				value = market.mg:manufacture_stock.market_goods_pricier
 				multiply = 25
 			}
 			divide = 25
@@ -4977,6 +4981,9 @@ price_bond_in_currency_converti_gui = { #for market owner currency
 	value = price_bond_in_currency_gui
 	multiply = exchange_rate_for_international_trade_buy_for_target_market_panel_gui
 }
+price_bond_in_currency_for_gui = { #for seller currency, read as scope:seller.price_bond_in_currency_for_gui
+	value = price_bond_in_currency_gui
+}
 
 bond_final_interest_in_currency_gui = {
 	value = price_bond_gui
@@ -5142,13 +5149,11 @@ no_longer_exists_1 = {
 	value = 0
 	every_in_list = {
 		variable = seller_country_general_1
-		exists = prev
 		add = 1
 		add = economic_instability_var_sc
 	}
 	every_in_list = {
 		variable = seller_country_general_in_currency_1
-		exists = prev
 		add = 1
 		add = economic_instability_var_sc
 	}
@@ -5157,13 +5162,11 @@ no_longer_exists_2 = {
 	value = 0
 	every_in_list = {
 		variable = seller_country_general_2
-		exists = prev
 		add = 1
 		add = economic_instability_var_sc
 	}
 	every_in_list = {
 		variable = seller_country_general_in_currency_2
-		exists = prev
 		add = 1
 		add = economic_instability_var_sc
 	}
@@ -5172,13 +5175,11 @@ no_longer_exists_3 = {
 	value = 0
 	every_in_list = {
 		variable = seller_country_general_3
-		exists = prev
 		add = 1
 		add = economic_instability_var_sc
 	}
 	every_in_list = {
 		variable = seller_country_general_in_currency_3
-		exists = prev
 		add = 1
 		add = economic_instability_var_sc
 	}
@@ -5187,13 +5188,11 @@ no_longer_exists_4 = {
 	value = 0
 	every_in_list = {
 		variable = seller_country_general_4
-		exists = prev
 		add = 1
 		add = economic_instability_var_sc
 	}
 	every_in_list = {
 		variable = seller_country_general_in_currency_4
-		exists = prev
 		add = 1
 		add = economic_instability_var_sc
 	}
@@ -5202,13 +5201,11 @@ no_longer_exists_5 = {
 	value = 0
 	every_in_list = {
 		variable = seller_country_general_5
-		exists = prev
 		add = 1
 		add = economic_instability_var_sc
 	}
 	every_in_list = {
 		variable = seller_country_general_in_currency_5
-		exists = prev
 		add = 1
 		add = economic_instability_var_sc
 	}
@@ -5217,13 +5214,11 @@ no_longer_exists_6 = {
 	value = 0
 	every_in_list = {
 		variable = seller_country_general_6
-		exists = prev
 		add = 1
 		add = economic_instability_var_sc
 	}
 	every_in_list = {
 		variable = seller_country_general_in_currency_6
-		exists = prev
 		add = 1
 		add = economic_instability_var_sc
 	}
@@ -5232,13 +5227,11 @@ no_longer_exists_7 = {
 	value = 0
 	every_in_list = {
 		variable = seller_country_general_7
-		exists = prev
 		add = 1
 		add = economic_instability_var_sc
 	}
 	every_in_list = {
 		variable = seller_country_general_in_currency_7
-		exists = prev
 		add = 1
 		add = economic_instability_var_sc
 	}
@@ -5247,13 +5240,11 @@ no_longer_exists_8 = {
 	value = 0
 	every_in_list = {
 		variable = seller_country_general_8
-		exists = prev
 		add = 1
 		add = economic_instability_var_sc
 	}
 	every_in_list = {
 		variable = seller_country_general_in_currency_8
-		exists = prev
 		add = 1
 		add = economic_instability_var_sc
 	}
@@ -5262,13 +5253,11 @@ no_longer_exists_9 = {
 	value = 0
 	every_in_list = {
 		variable = seller_country_general_9
-		exists = prev
 		add = 1
 		add = economic_instability_var_sc
 	}
 	every_in_list = {
 		variable = seller_country_general_in_currency_9
-		exists = prev
 		add = 1
 		add = economic_instability_var_sc
 	}
@@ -5277,13 +5266,11 @@ no_longer_exists_10 = {
 	value = 0
 	every_in_list = {
 		variable = seller_country_general_10
-		exists = prev
 		add = 1
 		add = economic_instability_var_sc
 	}
 	every_in_list = {
 		variable = seller_country_general_in_currency_10
-		exists = prev
 		add = 1
 		add = economic_instability_var_sc
 	}
@@ -5296,7 +5283,6 @@ ai_no_longer_exists_1 = {
 	if = {
 		every_in_list = {
 			variable = ai_seller_country_general_1
-			exists = prev
 			add = 1
 			add = economic_instability_var_sc
 		}
@@ -5307,7 +5293,6 @@ ai_no_longer_exists_2 = {
 	if = {
 		every_in_list = {
 			variable = ai_seller_country_general_2
-			exists = prev
 			add = 1
 			add = economic_instability_var_sc
 		}
@@ -5318,7 +5303,6 @@ ai_no_longer_exists_3 = {
 	if = {
 		every_in_list = {
 			variable = ai_seller_country_general_3
-			exists = prev
 			add = 1
 			add = economic_instability_var_sc
 		}
@@ -5329,7 +5313,6 @@ ai_no_longer_exists_4 = {
 	if = {
 		every_in_list = {
 			variable = ai_seller_country_general_4
-			exists = prev
 			add = 1
 			add = economic_instability_var_sc
 		}
@@ -5340,7 +5323,6 @@ ai_no_longer_exists_5 = {
 	if = {
 		every_in_list = {
 			variable = ai_seller_country_general_5
-			exists = prev
 			add = 1
 			add = economic_instability_var_sc
 		}
@@ -5351,7 +5333,6 @@ ai_no_longer_exists_6 = {
 	if = {
 		every_in_list = {
 			variable = ai_seller_country_general_6
-			exists = prev
 			add = 1
 			add = economic_instability_var_sc
 		}
@@ -5362,7 +5343,6 @@ ai_no_longer_exists_7 = {
 	if = {
 		every_in_list = {
 			variable = ai_seller_country_general_7
-			exists = prev
 			add = 1
 			add = economic_instability_var_sc
 		}
@@ -5373,7 +5353,6 @@ ai_no_longer_exists_8 = {
 	if = {
 		every_in_list = {
 			variable = ai_seller_country_general_8
-			exists = prev
 			add = 1
 			add = economic_instability_var_sc
 		}
@@ -5384,7 +5363,6 @@ ai_no_longer_exists_9 = {
 	if = {
 		every_in_list = {
 			variable = ai_seller_country_general_9
-			exists = prev
 			add = 1
 			add = economic_instability_var_sc
 		}
@@ -5395,7 +5373,6 @@ ai_no_longer_exists_10 = {
 	if = {
 		every_in_list = {
 			variable = ai_seller_country_general_10
-			exists = prev
 			add = 1
 			add = economic_instability_var_sc
 		}

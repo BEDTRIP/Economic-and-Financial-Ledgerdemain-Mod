@@ -1,4 +1,4 @@
-#########################################################################################################################################################################################
+﻿#########################################################################################################################################################################################
 #########################################################################################################################################################################################
 #########################################################################################################################################################################################
 #########################################################################################################################################################################################
@@ -812,7 +812,7 @@ ai_buy_bond_1 = {
 
     if = {
         limit = {
-            scope:buyer.ai_selle_bond_maturity_yers_time_1 = 0
+            scope:buyer.var:ai_selle_bond_maturity_yers_time_1 = 0
             exists = scope:seller
             scope:seller = {
                 not = {
@@ -1122,7 +1122,7 @@ ai_buy_bond_2 = {
 
     if = {
         limit = {
-            scope:buyer.ai_selle_bond_maturity_yers_time_2 = 0
+            scope:buyer.var:ai_selle_bond_maturity_yers_time_2 = 0
             exists = scope:seller
             scope:seller = {
                 not = {
@@ -1432,7 +1432,7 @@ ai_buy_bond_3 = {
 
     if = {
         limit = {
-            scope:buyer.ai_selle_bond_maturity_yers_time_3 = 0
+            scope:buyer.var:ai_selle_bond_maturity_yers_time_3 = 0
             exists = scope:seller
             scope:seller = {
                 not = {
@@ -1742,7 +1742,7 @@ ai_buy_bond_4 = {
 
     if = {
         limit = {
-            scope:buyer.ai_selle_bond_maturity_yers_time_4 = 0
+            scope:buyer.var:ai_selle_bond_maturity_yers_time_4 = 0
             exists = scope:seller
             scope:seller = {
                 not = {
@@ -2052,7 +2052,7 @@ ai_buy_bond_5 = {
 
     if = {
         limit = {
-            scope:buyer.ai_selle_bond_maturity_yers_time_5 = 0
+            scope:buyer.var:ai_selle_bond_maturity_yers_time_5 = 0
             exists = scope:seller
             scope:seller = {
                 not = {
@@ -2362,7 +2362,7 @@ ai_buy_bond_6 = {
 
     if = {
         limit = {
-            scope:buyer.ai_selle_bond_maturity_yers_time_6 = 0
+            scope:buyer.var:ai_selle_bond_maturity_yers_time_6 = 0
             exists = scope:seller
             scope:seller = {
                 not = {
@@ -2672,7 +2672,7 @@ ai_buy_bond_7 = {
 
     if = {
         limit = {
-            scope:buyer.ai_selle_bond_maturity_yers_time_7 = 0
+            scope:buyer.var:ai_selle_bond_maturity_yers_time_7 = 0
             exists = scope:seller
             scope:seller = {
                 not = {
@@ -2982,7 +2982,7 @@ ai_buy_bond_8 = {
 
     if = {
         limit = {
-            scope:buyer.ai_selle_bond_maturity_yers_time_8 = 0
+            scope:buyer.var:ai_selle_bond_maturity_yers_time_8 = 0
             exists = scope:seller
             scope:seller = {
                 not = {
@@ -3292,7 +3292,7 @@ ai_buy_bond_9 = {
 
     if = {
         limit = {
-            scope:buyer.ai_selle_bond_maturity_yers_time_9 = 0
+            scope:buyer.var:ai_selle_bond_maturity_yers_time_9 = 0
             exists = scope:seller
             scope:seller = {
                 not = {
@@ -3602,7 +3602,7 @@ ai_buy_bond_10 = {
 
     if = {
         limit = {
-            scope:buyer.ai_selle_bond_maturity_yers_time_10 = 0
+            scope:buyer.var:ai_selle_bond_maturity_yers_time_10 = 0
             exists = scope:seller
             scope:seller = {
                 not = {
@@ -14458,7 +14458,7 @@ establish_bank_and_ef_compagnie = {
 			NOT = { has_company = company_type:saint_petersburg_international_commercial_bank }
 		}
 		add_company = company_type:saint_petersburg_international_commercial_bank
-		company_type:saint_petersburg_international_commercial_bank = {
+		company:saint_petersburg_international_commercial_bank = {
 			set_company_state_region = s:STATE_INGRIA
 		}
 		random_scope_state = {
@@ -14491,7 +14491,7 @@ establish_bank_and_ef_compagnie = {
 			NOT = { has_company = company_type:russo_chinese_bank }
 		}
 		add_company = company_type:russo_chinese_bank
-		company_type:russo_chinese_bank = {
+		company:russo_chinese_bank = {
 			set_company_state_region = s:STATE_INGRIA
 		}
 		random_scope_state = {
@@ -16610,11 +16610,6 @@ establish_bank_and_ef_compagnie = {
 							is_building_type = building_motor_industry
 							level < 10
 						}
-						not = { has_building = building_military_shipyard }
-						any_scope_building = {
-							is_building_type = building_military_shipyard
-							level < 10
-						}
 						not = { has_building = building_shipyard }
 						any_scope_building = {
 							is_building_type = building_shipyard
@@ -16624,17 +16619,6 @@ establish_bank_and_ef_compagnie = {
 				}
 				create_building = {
 					building = "building_motor_industry"
-					add_ownership = {
-						company = {
-							type = company_schichau
-							country = "c:NGF"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_military_shipyard"
 					add_ownership = {
 						company = {
 							type = company_schichau
@@ -17658,11 +17642,6 @@ establish_bank_and_ef_compagnie = {
 							is_building_type = building_steel_mill
 							level < 10
 						}
-						not = { has_building = building_military_shipyard }
-						any_scope_building = {
-							is_building_type = building_military_shipyard
-							level < 10
-						}
 					}
 				}
 				create_building = {
@@ -17678,17 +17657,6 @@ establish_bank_and_ef_compagnie = {
 				}
 				create_building = {
 					building = "building_steel_mill"
-					add_ownership = {
-						company = {
-							type = company_ansaldo
-							country = "c:ITA"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_military_shipyard"
 					add_ownership = {
 						company = {
 							type = company_ansaldo
@@ -26067,39 +26035,6 @@ private_ownership_production_stocks = {
 				production_method = pm_no_private_ownership_manufacture_stock
 			}
 		}
-		#building_military_shipyard
-		if = {
-			limit = {
-				has_building = building_military_shipyard
-				b:building_military_shipyard  = {
-					private_ownership_fraction > 0.5
-				}
-				is_production_method_active = {
-					building_type = building_military_shipyard
-					production_method = pm_no_private_ownership_manufacture_stock
-				}
-			}
-			activate_production_method = {
-				building_type = building_military_shipyard
-				production_method = pm_private_ownership_majority_manufacture_stock
-			}
-		}
-		if = {
-			limit = {
-				has_building = building_military_shipyard
-				b:building_military_shipyard  = {
-					private_ownership_fraction <= 0.5
-				}
-				is_production_method_active = {
-					building_type = building_military_shipyard
-					production_method = pm_private_ownership_majority_manufacture_stock
-				}
-			}
-			activate_production_method = {
-				building_type = building_military_shipyard
-				production_method = pm_no_private_ownership_manufacture_stock
-			}
-		}
 		#building_automotive_industry
 		if = {
 			limit = {
@@ -26465,36 +26400,36 @@ private_ownership_production_stocks = {
 				production_method = pm_no_private_ownership_agricultural_stock
 			}
 		}
-		#building_vineyard_plantation
+		#building_vineyard
 		if = {
 			limit = {
-				has_building = building_vineyard_plantation
-				b:building_vineyard_plantation  = {
+				has_building = building_vineyard
+				b:building_vineyard  = {
 					private_ownership_fraction > 0.5
 				}
 				is_production_method_active = {
-					building_type = building_vineyard_plantation
+					building_type = building_vineyard
 					production_method = pm_no_private_ownership_agricultural_stock
 				}
 			}
 			activate_production_method = {
-				building_type = building_vineyard_plantation
+				building_type = building_vineyard
 				production_method = pm_private_ownership_majority_agricultural_stock
 			}
 		}
 		if = {
 			limit = {
-				has_building = building_vineyard_plantation
-				b:building_vineyard_plantation  = {
+				has_building = building_vineyard
+				b:building_vineyard  = {
 					private_ownership_fraction <= 0.5
 				}
 				is_production_method_active = {
-					building_type = building_vineyard_plantation
+					building_type = building_vineyard
 					production_method = pm_private_ownership_majority_agricultural_stock
 				}
 			}
 			activate_production_method = {
-				building_type = building_vineyard_plantation
+				building_type = building_vineyard
 				production_method = pm_no_private_ownership_agricultural_stock
 			}
 		}
@@ -26927,36 +26862,36 @@ private_ownership_production_stocks = {
 				production_method = pm_no_private_ownership_agricultural_stock
 			}
 		}
-		#building_vineyard_plantation
+		#building_vineyard
 		if = {
 			limit = {
-				has_building = building_vineyard_plantation
-				b:building_vineyard_plantation  = {
+				has_building = building_vineyard
+				b:building_vineyard  = {
 					private_ownership_fraction > 0.5
 				}
 				is_production_method_active = {
-					building_type = building_vineyard_plantation
+					building_type = building_vineyard
 					production_method = pm_no_private_ownership_agricultural_stock
 				}
 			}
 			activate_production_method = {
-				building_type = building_vineyard_plantation
+				building_type = building_vineyard
 				production_method = pm_private_ownership_majority_agricultural_stock
 			}
 		}
 		if = {
 			limit = {
-				has_building = building_vineyard_plantation
-				b:building_vineyard_plantation  = {
+				has_building = building_vineyard
+				b:building_vineyard  = {
 					private_ownership_fraction <= 0.5
 				}
 				is_production_method_active = {
-					building_type = building_vineyard_plantation
+					building_type = building_vineyard
 					production_method = pm_private_ownership_majority_agricultural_stock
 				}
 			}
 			activate_production_method = {
-				building_type = building_vineyard_plantation
+				building_type = building_vineyard
 				production_method = pm_no_private_ownership_agricultural_stock
 			}
 		}
@@ -28684,32 +28619,6 @@ currency_crisis = {
 	}
 	currency_crisis_count_reset = yes
 	country_credit_rating = yes
-	#event for player
-	if = {
-		limit  = {
-			is_subject_custom_trigger = no
-			is_revolutionary =  no
-			has_modifier = has_central_bank
-			# not = {
-			# 	has_modifier = economic_instability
-			# }
-			or = {
-				is_at_war = yes
-				var:economic_instability_count >= 1
-			}
-		}
-		every_country = {
-			limit = {
-				is_player = yes
-				has_interest_marker_in_region = root.capital.region
-			}
-			trigger_event = {
-				id = 00_ef_economic_instability_event.1
-				days = 0
-				popup = no
-			}
-		}
-	}
 	economic_instability = yes
 }
 economic_crisis = {
@@ -28724,33 +28633,6 @@ economic_crisis = {
 	}
 	economic_crisis_count_reset = yes
 	#country_credit_rating = yes
-	#event for player
-	if = {
-		limit  = {
-			#is_subject_custom_trigger = no
-			is_revolutionary =  no
-			global_country_ranking < 100  #all pays
-			#has_modifier = has_central_bank
-			# not = {
-			# 	has_modifier = economic_instability
-			# }
-			or = {
-				is_at_war = yes
-				var:economic_instability_count >= 1
-			}
-		}
-		every_country = {
-			limit = {
-				is_player = yes
-				has_interest_marker_in_region = root.capital.region
-			}
-			trigger_event = {
-				id = 00_ef_economic_instability_event.2
-				days = 0
-				popup = no
-			}
-		}
-	}
 	economic_instability = yes
 } #-> revante devise en mass + pas de rachat si foreign_exchange_controls
 financial_crash = {
@@ -28765,32 +28647,6 @@ financial_crash = {
 	}
 	financial_crash_count_reset = yes
 	#country_credit_rating = yes
-	#event for player
-	if = {
-		limit  = {
-			is_subject_custom_trigger = no
-			is_revolutionary =  no
-			has_modifier = has_financial_center
-			# not = {
-			# 	has_modifier = economic_instability
-			# }
-			or = {
-				is_at_war = yes
-				var:economic_instability_count >= 1
-			}
-		}
-		every_country = {
-			limit = {
-				is_player = yes
-				has_interest_marker_in_region = root.capital.region
-			}
-			trigger_event = {
-				id = 00_ef_economic_instability_event.3
-				days = 0
-				popup = no
-			}
-		}
-	}
 	economic_instability = yes
 }
 central_bank_bankruptcy = {
@@ -28819,32 +28675,6 @@ central_bank_bankruptcy = {
 	}
 	central_bank_bankruptcy_count_reset = yes
 	#country_credit_rating = yes
-	#event for player
-	if = {
-		limit  = {
-			is_subject_custom_trigger = no
-			is_revolutionary =  no
-			has_modifier = has_central_bank
-			not = {
-				has_modifier = economic_instability
-			}
-			# or = {
-			# 	is_at_war = yes
-			# 	var:economic_instability_count >= 1
-			# }
-		}
-		every_country = {
-			limit = {
-				is_player = yes
-				has_interest_marker_in_region = root.capital.region
-			}
-			trigger_event = {
-				id = 00_ef_economic_instability_event.4
-				days = 0
-				popup = no
-			}
-		}
-	}
 	economic_instability = yes
 } #-> revante devise en mass + pas de rachat si foreign_exchange_controls
 
@@ -28860,28 +28690,6 @@ country_bankruptcy = {
 	}
 
 	#country_credit_rating = yes
-	#event for player
-	if = {
-		limit  = {
-			is_subject_custom_trigger = no
-			is_revolutionary =  no
-			global_country_ranking < 50 #all pays
-			# not = {
-			# 	has_modifier = economic_instability
-			# }
-		}
-		every_country = {
-			limit = {
-				is_player = yes
-				has_interest_marker_in_region = root.capital.region
-			}
-			trigger_event = {
-				id = 00_ef_economic_instability_event.5
-				days = 0
-				popup = no
-			}
-		}
-	}
 	economic_instability = yes
 }
 ########################################################################################
@@ -28928,35 +28736,6 @@ economic_instability = {
 	}
 	economic_instability_count_reset = yes
 
-	#economic_instability notif
-	if = {
-		limit  = {
-			var:economic_instability_count = 1
-		}
-		every_country = { #notif for player
-			limit = {
-				is_player = yes
-				has_interest_marker_in_region = root.capital.region
-
-				root = {
-					not = {
-						or  = {
-							is_at_war = yes
-							is_revolutionary = yes
-							#var:country_bankruptcy = 1
-							market_owner_is_root_univ_with_buiding = yes
-							is_subject_custom_trigger = yes
-						}
-					}
-				}
-			}
-			trigger_event = {
-				id = 00_ef_economic_instability_event.6
-				days = 0
-				popup = no
-			}
-		}
-	}
 
 	#economic_instability concequences
 	if = {
@@ -29271,7 +29050,7 @@ financial_crash_consequences = {
 				is_building_type = building_financial_centre_spa
 				is_building_type = building_financial_centre_swe
 				is_building_type = building_financial_centre_tur
-				is_building_type = building_financial_centre_TUS
+				is_building_type = building_financial_centre_tus
 				is_building_type = building_financial_centre_uru
 				is_building_type = building_financial_centre_usa
 
@@ -29288,7 +29067,6 @@ financial_crash_consequences = {
 				is_building_type = building_steel_mill
 				is_building_type = building_motor_industry
 				is_building_type = building_shipyard
-				is_building_type = building_military_shipyard
 				is_building_type = building_automotive_industry
 				is_building_type = building_electrics_industry
 				is_building_type = building_arms_industry
@@ -29302,7 +29080,7 @@ financial_crash_consequences = {
 				is_building_type = building_maize_farm
 				is_building_type = building_millet_farm
 				is_building_type = building_livestock_ranch
-				is_building_type = building_vineyard_plantation
+				is_building_type = building_vineyard
 				is_building_type = building_logging_camp
 				is_building_type = building_rubber_plantation
 				is_building_type = building_fishing_wharf
@@ -29316,7 +29094,7 @@ financial_crash_consequences = {
 				is_building_type = building_sugar_plantation
 				is_building_type = building_banana_plantation
 				is_building_type = building_silk_plantation
-				is_building_type = building_vineyard_plantation
+				is_building_type = building_vineyard
 
 				#mine
 				is_building_type = building_coal_mine
@@ -29360,8 +29138,8 @@ economic_crisis_consequences = {
 			or = {
 				#admin
 				is_building_type = building_government_administration
-				is_building_type = building_barracks
-				is_building_type = building_naval_base
+				is_building_type = building_barrack
+				is_building_type = building_naval_administration
 				is_building_type = building_conscription_center
 				is_building_type = building_port
 				is_building_type = building_university
@@ -29403,7 +29181,7 @@ economic_crisis_consequences = {
 				is_building_type = building_financial_centre_spa
 				is_building_type = building_financial_centre_swe
 				is_building_type = building_financial_centre_tur
-				is_building_type = building_financial_centre_TUS
+				is_building_type = building_financial_centre_tus
 				is_building_type = building_financial_centre_uru
 				is_building_type = building_financial_centre_usa
 
@@ -29420,7 +29198,6 @@ economic_crisis_consequences = {
 				is_building_type = building_steel_mill
 				is_building_type = building_motor_industry
 				is_building_type = building_shipyard
-				is_building_type = building_military_shipyard
 				is_building_type = building_automotive_industry
 				is_building_type = building_electrics_industry
 				is_building_type = building_arms_industry
@@ -29434,7 +29211,7 @@ economic_crisis_consequences = {
 				is_building_type = building_maize_farm
 				is_building_type = building_millet_farm
 				is_building_type = building_livestock_ranch
-				is_building_type = building_vineyard_plantation
+				is_building_type = building_vineyard
 				is_building_type = building_logging_camp
 				is_building_type = building_rubber_plantation
 				is_building_type = building_fishing_wharf
@@ -29448,7 +29225,7 @@ economic_crisis_consequences = {
 				is_building_type = building_sugar_plantation
 				is_building_type = building_banana_plantation
 				is_building_type = building_silk_plantation
-				is_building_type = building_vineyard_plantation
+				is_building_type = building_vineyard
 
 				#mine
 				is_building_type = building_coal_mine
@@ -29523,7 +29300,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_basic_colonial_plantations_2 .prosperity < 100
+				company:company_basic_colonial_plantations_2.prosperity < 100
 			}
 			remove_company = company_type:company_basic_colonial_plantations_2
 		}
@@ -29622,7 +29399,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_basic_food .prosperity < 100
+				company:company_basic_food.prosperity < 100
 			}
 			remove_company = company_type:company_basic_food
 		}
@@ -29688,7 +29465,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_basic_shipyards .prosperity < 100
+				company:company_basic_shipyards.prosperity < 100
 			}
 			remove_company = company_type:company_basic_shipyards
 		}
@@ -29699,7 +29476,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_basic_chemicals .prosperity < 100
+				company:company_basic_chemicals.prosperity < 100
 			}
 			remove_company = company_type:company_basic_chemicals
 		}
@@ -29710,7 +29487,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_basic_motors .prosperity < 100
+				company:company_basic_motors.prosperity < 100
 			}
 			remove_company = company_type:company_basic_motors
 		}
@@ -29721,7 +29498,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_basic_munitions .prosperity < 100
+				company:company_basic_munitions.prosperity < 100
 			}
 			remove_company = company_type:company_basic_munitions
 		}
@@ -29732,7 +29509,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_basic_electrics .prosperity < 100
+				company:company_basic_electrics.prosperity < 100
 			}
 			remove_company = company_type:company_basic_electrics
 		}
@@ -29776,7 +29553,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_us_steel .prosperity < 100
+				company:company_us_steel.prosperity < 100
 			}
 			remove_company = company_type:company_us_steel
 		}
@@ -29787,7 +29564,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_general_electric .prosperity < 100
+				company:company_general_electric.prosperity < 100
 			}
 			remove_company = company_type:company_general_electric
 		}
@@ -29798,7 +29575,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_william_cramp .prosperity < 100
+				company:company_william_cramp.prosperity < 100
 			}
 			remove_company = company_type:company_william_cramp
 		}
@@ -29809,7 +29586,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_ford_motor .prosperity < 100
+				company:company_ford_motor.prosperity < 100
 			}
 			remove_company = company_type:company_ford_motor
 		}
@@ -29820,7 +29597,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_da_afghan_nassaji_sherkat .prosperity < 100
+				company:company_da_afghan_nassaji_sherkat.prosperity < 100
 			}
 			remove_company = company_type:company_da_afghan_nassaji_sherkat
 		}
@@ -29831,7 +29608,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_iranian_state_railway .prosperity < 100
+				company:company_iranian_state_railway.prosperity < 100
 			}
 			remove_company = company_type:company_iranian_state_railway
 		}
@@ -29842,7 +29619,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_tashkent_railroad .prosperity < 100
+				company:company_tashkent_railroad.prosperity < 100
 			}
 			remove_company = company_type:company_tashkent_railroad
 		}
@@ -29853,7 +29630,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_west_ural_petroleum .prosperity < 100
+				company:company_west_ural_petroleum.prosperity < 100
 			}
 			remove_company = company_type:company_west_ural_petroleum
 		}
@@ -29864,7 +29641,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_sherkat_shemali .prosperity < 100
+				company:company_sherkat_shemali.prosperity < 100
 			}
 			remove_company = company_type:company_sherkat_shemali
 		}
@@ -29875,7 +29652,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_opium_export_monopoly .prosperity < 100
+				company:company_opium_export_monopoly.prosperity < 100
 			}
 			remove_company = company_type:company_opium_export_monopoly
 		}
@@ -29886,7 +29663,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_sherkate_eslamiya .prosperity < 100
+				company:company_sherkate_eslamiya.prosperity < 100
 			}
 			remove_company = company_type:company_sherkate_eslamiya
 		}
@@ -29897,7 +29674,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_nicolas_portalis .prosperity < 100
+				company:company_nicolas_portalis.prosperity < 100
 			}
 			remove_company = company_type:company_nicolas_portalis
 		}
@@ -29930,7 +29707,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_persshelk .prosperity < 100
+				company:company_persshelk.prosperity < 100
 			}
 			remove_company = company_type:company_persshelk
 		}
@@ -29941,7 +29718,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_perskhlopok .prosperity < 100
+				company:company_perskhlopok.prosperity < 100
 			}
 			remove_company = company_type:company_perskhlopok
 		}
@@ -29963,7 +29740,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_guinness .prosperity < 100
+				company:company_guinness.prosperity < 100
 			}
 			remove_company = company_type:company_guinness
 		}
@@ -29974,7 +29751,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_oriental_development_company .prosperity < 100
+				company:company_oriental_development_company.prosperity < 100
 			}
 			remove_company = company_type:company_oriental_development_company
 		}
@@ -29985,7 +29762,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_turkish_petroleum .prosperity < 100
+				company:company_turkish_petroleum.prosperity < 100
 			}
 			remove_company = company_type:company_turkish_petroleum
 		}
@@ -29996,7 +29773,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_anglo_persian_oil .prosperity < 100
+				company:company_anglo_persian_oil.prosperity < 100
 			}
 			remove_company = company_type:company_anglo_persian_oil
 		}
@@ -30007,7 +29784,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_national_iranian_oil .prosperity < 100
+				company:company_national_iranian_oil.prosperity < 100
 			}
 			remove_company = company_type:company_national_iranian_oil
 		}
@@ -30018,7 +29795,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_vodka_monopoly .prosperity < 100
+				company:company_vodka_monopoly.prosperity < 100
 			}
 			remove_company = company_type:company_vodka_monopoly
 		}
@@ -30029,7 +29806,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_putilov_company .prosperity < 100
+				company:company_putilov_company.prosperity < 100
 			}
 			remove_company = company_type:company_putilov_company
 		}
@@ -30040,7 +29817,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_branobel .prosperity < 100
+				company:company_branobel.prosperity < 100
 			}
 			remove_company = company_type:company_branobel
 		}
@@ -30051,7 +29828,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_izhevsk_arms_plant .prosperity < 100
+				company:company_izhevsk_arms_plant.prosperity < 100
 			}
 			remove_company = company_type:company_izhevsk_arms_plant
 		}
@@ -30073,7 +29850,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_john_hughes .prosperity < 100
+				company:company_john_hughes.prosperity < 100
 			}
 			remove_company = company_type:company_john_hughes
 		}
@@ -30106,7 +29883,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_mitsubishi  .prosperity < 100
+				company:company_mitsubishi.prosperity < 100
 			}
 			remove_company = company_type:company_mitsubishi
 		}
@@ -30117,7 +29894,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_ansaldo .prosperity < 100
+				company:company_ansaldo.prosperity < 100
 			}
 			remove_company = company_type:company_ansaldo
 		}
@@ -30150,7 +29927,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_stt .prosperity < 100
+				company:company_stt.prosperity < 100
 			}
 			remove_company = company_type:company_stt
 		}
@@ -30161,7 +29938,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_ilva .prosperity < 100
+				company:company_ilva.prosperity < 100
 			}
 			remove_company = company_type:company_ilva
 		}
@@ -30172,7 +29949,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_ansaldo .prosperity < 100
+				company:company_ansaldo.prosperity < 100
 			}
 			remove_company = company_type:company_ansaldo
 		}
@@ -30183,7 +29960,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_ricordi .prosperity < 100
+				company:company_ricordi.prosperity < 100
 			}
 			remove_company = company_type:company_ricordi
 		}
@@ -30194,7 +29971,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_fiat .prosperity < 100
+				company:company_fiat.prosperity < 100
 			}
 			remove_company = company_type:company_fiat
 		}
@@ -30205,7 +29982,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_stt .prosperity < 100
+				company:company_stt.prosperity < 100
 			}
 			remove_company = company_type:company_stt
 		}
@@ -30216,7 +29993,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_krupp .prosperity < 100
+				company:company_krupp.prosperity < 100
 			}
 			remove_company = company_type:company_krupp
 		}
@@ -30238,7 +30015,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_schichau .prosperity < 100
+				company:company_schichau.prosperity < 100
 			}
 			remove_company = company_type:company_schichau
 		}
@@ -30260,7 +30037,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_prussian_state_railways .prosperity < 100
+				company:company_prussian_state_railways.prosperity < 100
 			}
 			remove_company = company_type:company_prussian_state_railways
 		}
@@ -30282,7 +30059,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_societe_mokta_el_hadid .prosperity < 100
+				company:company_societe_mokta_el_hadid.prosperity < 100
 			}
 			remove_company = company_type:company_societe_mokta_el_hadid
 		}
@@ -30293,7 +30070,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_schneider_creusot .prosperity < 100
+				company:company_schneider_creusot.prosperity < 100
 			}
 			remove_company = company_type:company_schneider_creusot
 		}
@@ -30304,7 +30081,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_dmc .prosperity < 100
+				company:company_dmc.prosperity < 100
 			}
 			remove_company = company_type:company_dmc
 		}
@@ -30337,7 +30114,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_fcm .prosperity < 100
+				company:company_fcm.prosperity < 100
 			}
 			remove_company = company_type:company_fcm
 		}
@@ -30348,7 +30125,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_mines_anzin .prosperity < 100
+				company:company_mines_anzin.prosperity < 100
 			}
 			remove_company = company_type:company_mines_anzin
 		}
@@ -30359,7 +30136,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_societe_mokta_el_hadid .prosperity < 100
+				company:company_societe_mokta_el_hadid.prosperity < 100
 			}
 			remove_company = company_type:company_societe_mokta_el_hadid
 		}
@@ -30381,7 +30158,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_dmc .prosperity < 100
+				company:company_dmc.prosperity < 100
 			}
 			remove_company = company_type:company_dmc
 		}
@@ -30392,7 +30169,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_cgv .prosperity < 100
+				company:company_cgv.prosperity < 100
 			}
 			remove_company = company_type:company_cgv
 		}
@@ -30403,7 +30180,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_saint_etienne .prosperity < 100
+				company:company_saint_etienne.prosperity < 100
 			}
 			remove_company = company_type:company_saint_etienne
 		}
@@ -30414,7 +30191,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_fcm .prosperity < 100
+				company:company_fcm.prosperity < 100
 			}
 			remove_company = company_type:company_fcm
 		}
@@ -30425,7 +30202,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_mines_anzin .prosperity < 100
+				company:company_mines_anzin.prosperity < 100
 			}
 			remove_company = company_type:company_mines_anzin
 		}
@@ -30436,7 +30213,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_sao_paulo_railway .prosperity < 100
+				company:company_sao_paulo_railway.prosperity < 100
 			}
 			remove_company = company_type:company_sao_paulo_railway
 		}
@@ -30447,7 +30224,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_estaleiro_maua .prosperity < 100
+				company:company_estaleiro_maua.prosperity < 100
 			}
 			remove_company = company_type:company_estaleiro_maua
 		}
@@ -30458,7 +30235,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_pernambuco_textiles .prosperity < 100
+				company:company_pernambuco_textiles.prosperity < 100
 			}
 			remove_company = company_type:company_pernambuco_textiles
 		}
@@ -30480,7 +30257,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_rossi .prosperity < 100
+				company:company_rossi.prosperity < 100
 			}
 			remove_company = company_type:company_rossi
 		}
@@ -30491,7 +30268,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_estanifera_llallagua .prosperity < 100
+				company:company_estanifera_llallagua.prosperity < 100
 			}
 			remove_company = company_type:company_estanifera_llallagua
 		}
@@ -30524,7 +30301,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_electricidad_de_caracas .prosperity < 100
+				company:company_electricidad_de_caracas.prosperity < 100
 			}
 			remove_company = company_type:company_electricidad_de_caracas
 		}
@@ -30546,7 +30323,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_eea .prosperity < 100
+				company:company_eea.prosperity < 100
 			}
 			remove_company = company_type:company_eea
 		}
@@ -30557,7 +30334,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_kaiping_mining .prosperity < 100
+				company:company_kaiping_mining.prosperity < 100
 			}
 			remove_company = company_type:company_kaiping_mining
 		}
@@ -30568,7 +30345,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_hanyang_arsenal .prosperity < 100
+				company:company_hanyang_arsenal.prosperity < 100
 			}
 			remove_company = company_type:company_hanyang_arsenal
 		}
@@ -30601,7 +30378,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_skoda .prosperity < 100
+				company:company_skoda.prosperity < 100
 			}
 			remove_company = company_type:company_skoda
 		}
@@ -30612,7 +30389,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_mav .prosperity < 100
+				company:company_mav.prosperity < 100
 			}
 			remove_company = company_type:company_mav
 		}
@@ -30623,7 +30400,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_manfred_weiss .prosperity < 100
+				company:company_manfred_weiss.prosperity < 100
 			}
 			remove_company = company_type:company_manfred_weiss
 		}
@@ -30634,7 +30411,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_galician_carpathian_oil .prosperity < 100
+				company:company_galician_carpathian_oil.prosperity < 100
 			}
 			remove_company = company_type:company_galician_carpathian_oil
 		}
@@ -30645,7 +30422,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_oevg .prosperity < 100
+				company:company_oevg.prosperity < 100
 			}
 			remove_company = company_type:company_oevg
 		}
@@ -30656,7 +30433,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_east_india_company .prosperity < 100
+				company:company_east_india_company.prosperity < 100
 			}
 			remove_company = company_type:company_east_india_company
 		}
@@ -30667,7 +30444,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_imperial_arsenal .prosperity < 100
+				company:company_imperial_arsenal.prosperity < 100
 			}
 			remove_company = company_type:company_imperial_arsenal
 		}
@@ -30678,7 +30455,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_ottoman_tobacco_regie .prosperity < 100
+				company:company_ottoman_tobacco_regie.prosperity < 100
 			}
 			remove_company = company_type:company_ottoman_tobacco_regie
 		}
@@ -30689,7 +30466,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_allatini_mills .prosperity < 100
+				company:company_allatini_mills.prosperity < 100
 			}
 			remove_company = company_type:company_allatini_mills
 		}
@@ -30700,7 +30477,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_orient_express .prosperity < 100
+				company:company_orient_express.prosperity < 100
 			}
 			remove_company = company_type:company_orient_express
 		}
@@ -30711,7 +30488,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_great_indian_railway .prosperity < 100
+				company:company_great_indian_railway.prosperity < 100
 			}
 			remove_company = company_type:company_great_indian_railway
 		}
@@ -30722,7 +30499,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_tata .prosperity < 100
+				company:company_tata.prosperity < 100
 			}
 			remove_company = company_type:company_tata
 		}
@@ -30744,7 +30521,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_nam_dinh .prosperity < 100
+				company:company_nam_dinh.prosperity < 100
 			}
 			remove_company = company_type:company_nam_dinh
 		}
@@ -30766,7 +30543,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_san_miguel .prosperity < 100
+				company:company_san_miguel.prosperity < 100
 			}
 			remove_company = company_type:company_san_miguel
 		}
@@ -30777,7 +30554,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_william_sandford .prosperity < 100
+				company:company_william_sandford.prosperity < 100
 			}
 			remove_company = company_type:company_william_sandford
 		}
@@ -30799,7 +30576,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_fundidora_monterrey .prosperity < 100
+				company:company_fundidora_monterrey.prosperity < 100
 			}
 			remove_company = company_type:company_fundidora_monterrey
 		}
@@ -30810,7 +30587,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_el_aguila .prosperity < 100
+				company:company_el_aguila.prosperity < 100
 			}
 			remove_company = company_type:company_el_aguila
 		}
@@ -30821,7 +30598,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_csfa .prosperity < 100
+				company:company_csfa.prosperity < 100
 			}
 			remove_company = company_type:company_csfa
 		}
@@ -30832,7 +30609,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_caribbean_petroleum .prosperity < 100
+				company:company_caribbean_petroleum.prosperity < 100
 			}
 			remove_company = company_type:company_caribbean_petroleum
 		}
@@ -30843,7 +30620,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_bunge_born .prosperity < 100
+				company:company_bunge_born.prosperity < 100
 			}
 			remove_company = company_type:company_bunge_born
 		}
@@ -30854,7 +30631,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_la_rosada .prosperity < 100
+				company:company_la_rosada.prosperity < 100
 			}
 			remove_company = company_type:company_la_rosada
 		}
@@ -30876,7 +30653,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_peruvian_amazon .prosperity < 100
+				company:company_peruvian_amazon.prosperity < 100
 			}
 			remove_company = company_type:company_peruvian_amazon
 		}
@@ -30898,7 +30675,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_hbc .prosperity < 100
+				company:company_hbc.prosperity < 100
 			}
 			remove_company = company_type:company_hbc
 		}
@@ -30909,7 +30686,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_panama_company .prosperity < 100
+				company:company_panama_company.prosperity < 100
 			}
 			remove_company = company_type:company_panama_company
 		}
@@ -30920,7 +30697,7 @@ bankrupt_company = {
 		}
 		if = {
 			limit = {
-				company:company_misr .prosperity < 100
+				company:company_misr.prosperity < 100
 			}
 			remove_company = company_type:company_misr
 		}
@@ -31352,17 +31129,6 @@ bankrupt_company = {
 				company:company_west_ural_petroleum.prosperity < 100
 			}
 			remove_company = company_type:company_west_ural_petroleum
-		}
-	}
-    if = {
-		limit = {
-			has_company = company_type:company_kirgizian_mining_company=
-		}
-		if = {
-			limit = {
-				company:company_kirgizian_mining_company=.prosperity < 100
-			}
-			remove_company = company_type:company_kirgizian_mining_company=
 		}
 	}
     if = {
@@ -31814,17 +31580,6 @@ bankrupt_company = {
 				company:company_mitsubishi.prosperity < 100
 			}
 			remove_company = company_type:company_mitsubishi
-		}
-	}
-    if = {
-		limit = {
-			has_company = company_type:company_Tanaka-Iga_Butsugu
-		}
-		if = {
-			limit = {
-				company:company_Tanaka-Iga_Butsugu.prosperity < 100
-			}
-			remove_company = company_type:company_Tanaka-Iga_Butsugu
 		}
 	}
     if = {

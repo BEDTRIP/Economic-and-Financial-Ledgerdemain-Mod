@@ -173,7 +173,7 @@ BUILDINGS = {
 			limit = {
 				c:BAV ?= this
 			}
-			add_company = company_type:company_BayerischeHypothekenUndWechselBank
+			if = { limit = { not = { has_company = company_type:company_BayerischeHypothekenUndWechselBank } } add_company = company_type:company_BayerischeHypothekenUndWechselBank }
 			company:company_BayerischeHypothekenUndWechselBank = {
 				set_company_establishment_date = 1830.1.1
 				set_company_state_region = s:STATE_BAVARIA
@@ -284,7 +284,7 @@ BUILDINGS = {
 			limit = {
 				c:QUE ?= this
 			}
-			add_company = company_type:company_BankOfMontreal
+			if = { limit = { not = { has_company = company_type:company_BankOfMontreal } } add_company = company_type:company_BankOfMontreal }
 			company:company_BankOfMontreal = {
 				set_company_establishment_date = 1830.1.1
 				set_company_state_region = s:STATE_QUEBEC
@@ -410,12 +410,12 @@ BUILDINGS = {
 			limit = {
 				c:GBR ?= this
 			}
-			add_company = company_type:company_BankofEngland
-			add_company = company_type:company_LloydsBank
-			add_company = company_type:company_barclaysBank
+			if = { limit = { not = { has_company = company_type:company_BankofEngland } } add_company = company_type:company_BankofEngland }
+			if = { limit = { not = { has_company = company_type:company_LloydsBank } } add_company = company_type:company_LloydsBank }
+			if = { limit = { not = { has_company = company_type:company_barclaysBank } } add_company = company_type:company_barclaysBank }
 			add_company = company_type:company_NationalWestminsterBank
-			add_company = company_type:company_RoyalBankOfScotland
-			add_company = company_type:company_Rothschild_Bank_gbr
+			if = { limit = { not = { has_company = company_type:company_RoyalBankOfScotland } } add_company = company_type:company_RoyalBankOfScotland }
+			if = { limit = { not = { has_company = company_type:company_Rothschild_Bank_gbr } } add_company = company_type:company_Rothschild_Bank_gbr }
 			add_company = company_type:company_basic_gold_and_silver_mining_2
 
 			company:company_BankofEngland = {
@@ -452,8 +452,8 @@ BUILDINGS = {
 			limit = {
 				c:FRA ?= this
 			}
-			add_company = company_type:company_BanqueDeFrance
-			add_company = company_type:company_Rothschild_Bank_fra
+			if = { limit = { not = { has_company = company_type:company_BanqueDeFrance } } add_company = company_type:company_BanqueDeFrance }
+			if = { limit = { not = { has_company = company_type:company_Rothschild_Bank_fra } } add_company = company_type:company_Rothschild_Bank_fra }
 			add_company = company_type:company_basic_gold_and_silver_mining_2
 			company:company_BanqueDeFrance = {
 				set_company_establishment_date = 1830.1.1
@@ -516,7 +516,7 @@ BUILDINGS = {
 				c:AUS ?= this
 			}
 			add_company = company_type:company_OesterreichischeCreditAnstalt
-			add_company = company_type:company_Rothschild_Bank_aus
+			if = { limit = { not = { has_company = company_type:company_Rothschild_Bank_aus } } add_company = company_type:company_Rothschild_Bank_aus }
 			company:company_OesterreichischeCreditAnstalt = {
 				set_company_establishment_date = 1830.1.1
 				set_company_state_region = s:STATE_AUSTRIA
@@ -531,7 +531,7 @@ BUILDINGS = {
 			limit = {
 				c:NET ?= this
 			}
-			add_company = company_type:company_DeNederlandscheBank
+			if = { limit = { not = { has_company = company_type:company_DeNederlandscheBank } } add_company = company_type:company_DeNederlandscheBank }
 			add_company = company_type:company_basic_gold_and_silver_mining_2
 			company:company_DeNederlandscheBank = {
 				set_company_establishment_date = 1830.1.1
@@ -674,7 +674,7 @@ BUILDINGS = {
 				c:MEX ?= this
 			}
 			add_company = company_type:company_bancodelondresmexico
-			add_company = company_type:company_basic_silver_mining_mex
+			if = { limit = { not = { has_company = company_type:company_basic_silver_mining_mex } } add_company = company_type:company_basic_silver_mining_mex }
 			company:company_bancodelondresmexico = {
 				set_company_establishment_date = 1830.1.1
 				set_company_state_region = s:STATE_MEXICO
@@ -721,7 +721,7 @@ BUILDINGS = {
 			limit = {
 				c:ARG ?= this
 			}
-			add_company = company_type:company_BancoProvincia
+			if = { limit = { not = { has_company = company_type:company_BancoProvincia } } add_company = company_type:company_BancoProvincia }
 			add_company = company_type:company_basic_gold_and_silver_mining_2
 			company:company_BancoProvincia = {
 				set_company_establishment_date = 1830.1.1
@@ -749,7 +749,7 @@ BUILDINGS = {
 				c:JAP ?= this
 			}
 			add_company = company_type:company_BankOfJapan 
-			company:company_BanqueEgyptienne = {
+			company:company_BankOfJapan = {
 				set_company_establishment_date = 1830.1.1
 				set_company_state_region = s:STATE_KANTO
 			} 
@@ -1764,7 +1764,7 @@ BUILDINGS = {
 						levels=1
 					}
 					company={
-						type=company_RoyalBankofCanada
+						type=company_BankOfMontreal
 						country="c:QUE"
 						levels=1
 					}
@@ -1865,7 +1865,7 @@ BUILDINGS = {
 						levels=1
 					}
 					company={
-						type=company_BankOfMontreal
+						type=company_RoyalBankofCanada
 						country="c:ONT"
 						levels=1
 					}
