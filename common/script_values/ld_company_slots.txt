@@ -36,7 +36,7 @@
 zz_ef_slots_rating = {
 	value = 0
 	if = {
-		limit = { has_variable = country_credit_note_fixe }
+		limit = { exists = this has_variable = country_credit_note_fixe }
 		value = var:country_credit_note_fixe
 		divide = 2
 		round = yes
@@ -47,10 +47,10 @@ zz_ef_slots_rating = {
 
 zz_ef_cap_total = {
 	value = 0
-	if = { limit = { has_variable = zz_ef_cap_avg_ms } add = var:zz_ef_cap_avg_ms }
-	if = { limit = { has_variable = zz_ef_cap_avg_as } add = var:zz_ef_cap_avg_as }
-	if = { limit = { has_variable = zz_ef_cap_avg_mn } add = var:zz_ef_cap_avg_mn }
-	if = { limit = { has_variable = zz_ef_cap_avg_rr } add = var:zz_ef_cap_avg_rr }
+	if = { limit = { exists = this has_variable = zz_ef_cap_avg_ms } add = var:zz_ef_cap_avg_ms }
+	if = { limit = { exists = this has_variable = zz_ef_cap_avg_as } add = var:zz_ef_cap_avg_as }
+	if = { limit = { exists = this has_variable = zz_ef_cap_avg_mn } add = var:zz_ef_cap_avg_mn }
+	if = { limit = { exists = this has_variable = zz_ef_cap_avg_rr } add = var:zz_ef_cap_avg_rr }
 	min = 0
 }
 
