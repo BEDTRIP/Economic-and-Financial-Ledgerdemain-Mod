@@ -601,23 +601,6 @@ sovereign_bond_yields = {
 		}
 	}
 }
-economic_instability_count_reset = {
-	if = {
-		limit  = {
-			var:economic_instability_count >= 2
-			var:economic_crisis = 0
-			var:financial_crash = 0
-			var:central_bank_bankruptcy = 0
-			var:currency_crisis = 0
-			#var:country_bankruptcy = 0
-		}
-		set_variable = {
-			name = economic_instability_count
-			value = 0
-		}
-		country_credit_rating = yes
-	}
-}
 
 #########################################################################################################################################################################################
 #########################################################################################################################################################################################
