@@ -1,0 +1,264 @@
+﻿#############################################
+# М.9 (the user, 4.10): a currency's strength against the reference currency (see
+# scripted_triggers/zz_ef_reference_currency_triggers.txt). COUNTRY scope.
+# zz_ef_value_to_parity: under a metal standard with a parity -- the value / the parity (1 at the
+# parity; M.2); else E&F's own measure -- the value in gold / the median of all currencies.
+# The reference's own value_to_parity is kept monthly in global_var:zz_ef_ref_vtp by the reference
+# country (zz_ef_reference_strength_step, the money model's monthly step).
+# !! MAINTENANCE !! Key-level REPLACE_OR_CREATE of E&F's difference_with_average_gold_exchange_
+# rate_currencies and money_value_median_and_money_value_in_gold_ratio (script_values/
+# 00_economic_scripted_value.txt:4970, 8542): our strength instead of the value / the median --
+# they drive E&F's trade-route modifiers and the tooltip's "+15% against the average".
+#############################################
+
+zz_ef_value_to_parity = {
+	value = 1
+	if = {
+		limit = { has_global_variable = money_value_median global_var:money_value_median > 0 }
+		value = money_value_in_gold
+		divide = global_var:money_value_median
+	}
+	if = {
+		limit = {
+			has_variable = money_value_target_1
+			var:money_value_target_1 > 0
+			OR = {
+				has_law = law_type:law_gold_standard
+				has_law = law_type:law_silver_standard
+				has_law = law_type:law_bimetallism_standard
+			}
+		}
+		value = money_value_0
+		divide = var:money_value_target_1
+	}
+}
+zz_ef_currency_strength = {
+	value = zz_ef_value_to_parity
+	if = {
+		limit = { has_global_variable = zz_ef_ref_vtp global_var:zz_ef_ref_vtp > 0 }
+		divide = global_var:zz_ef_ref_vtp
+	}
+}
+# Е.10 (5.10, Д.5): the trade modifier's multiplier: (1 - strength) x 40, within -10..10 -- +10 (export +10%,
+# import -10%) at strength 0.75, -10 at 1.25, 0 at the reference's level. Beyond the band it stays at 10
+# (taken at night: the user named +-10% at 1.25 / 0.75, the clamp is a guess -- check).
+zz_ef_currency_trade_m = {
+	value = 1
+	subtract = zz_ef_currency_strength
+	multiply = 40
+	max = 10
+	min = -10
+}
+
+# M.8 (4.10, scripted_effects/zz_ef_subject_metal.txt): a country's metal in gold, and the metal in
+# gold 40% of its money supply needs at its parity (E&F's value in gold when there is no parity).
+zz_ef_metal_in_gold = {
+	value = gold_state_native_for_stockpile
+	add = {
+		value = silver_state_native_for_stockpile
+		multiply = silver_to_gold_rate
+	}
+}
+zz_ef_metal_target_in_gold = {
+	value = zz_ef_agg_m2
+	multiply = zz_ef_cover_normal
+	if = {
+		limit = {
+			has_variable = money_value_target_1
+			var:money_value_target_1 > 0
+		}
+		multiply = var:money_value_target_1
+		if = {
+			limit = { has_law = law_type:law_silver_standard }
+			multiply = silver_to_gold_rate
+		}
+	}
+	else = {
+		multiply = money_value_in_gold
+	}
+	min = 0
+}
+
+# Ф.2 (4.10, scripted_effects/zz_ef_money_model.txt): what the issuer owes foreign private banks a year.
+# Е.5 (5.10, Д.2): the week's interest the scope country owes on its bonds held by other countries' treasuries --
+# E&F's yearly interest of the holders on its bonds (ai_central_bank_interest_refund_per_year_N: over the buyer list
+# of bond N), / 48 as E&F pays the holders (interest per month = year / 12, x 0.25 a week). The private banks'
+# bonds are paid by zz_ef_privbank_interest_pay (Ф.2).
+zz_ef_bond_interest_due_week = {
+	value = 0
+	add = ai_central_bank_interest_refund_per_year_1
+	add = ai_central_bank_interest_refund_per_year_2
+	add = ai_central_bank_interest_refund_per_year_3
+	add = ai_central_bank_interest_refund_per_year_4
+	add = ai_central_bank_interest_refund_per_year_5
+	add = ai_central_bank_interest_refund_per_year_6
+	add = ai_central_bank_interest_refund_per_year_7
+	add = ai_central_bank_interest_refund_per_year_8
+	add = ai_central_bank_interest_refund_per_year_9
+	add = ai_central_bank_interest_refund_per_year_10
+	divide = 48
+	min = 0
+}
+zz_ef_privbank_interest_due = {
+	value = 0
+	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_1
+	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_2
+	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_3
+	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_4
+	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_5
+	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_6
+	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_7
+	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_8
+	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_9
+	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_10
+	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_11
+	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_12
+	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_13
+	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_14
+	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_15
+	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_16
+	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_17
+	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_18
+	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_19
+	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_20
+	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_21
+	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_22
+	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_23
+	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_24
+	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_25
+	min = 0
+}
+
+# Ф.1 (4.10, В7.3): the banks' balance sheet -- assets (the pool as their reserves, business and
+# consumer credit, bonds) minus liabilities (pops' deposits, debt to the CB); shown in the banks' card.
+zz_ef_bank_capital = {
+	value = zz_ef_pool
+	add = zz_ef_bc_debt
+	add = zz_ef_cc_debt
+	add = zz_ef_bank_bonds
+	subtract = zz_ef_pop_deposits
+	subtract = zz_ef_bank_cb_debt
+	# Д2.30 (6.10 day): other CBs' deposits (our currency they hold)
+	subtract = zz_ef_nr_dep_v
+}
+
+# 4.10 (the money tooltip): the week's change of pops' savings and deposits (ledger at the step), and the
+# banks' loans (business + consumer credit) for the banks' line.
+zz_ef_v_d_savings = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_d_savings } value = var:zz_ef_d_savings }
+}
+zz_ef_v_d_deposits = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_d_deposits } value = var:zz_ef_d_deposits }
+}
+zz_ef_bank_loans = {
+	value = zz_ef_bc_debt
+	add = zz_ef_cc_debt
+}
+
+# 4.10 (the rate line, bimetallism): the value in silver too -- E&F counts bimetallism in gold.
+zz_ef_value_in_silver = {
+	value = money_value_0
+	multiply = gold_to_silver_rate
+}
+
+# 4.10 (the cards): the last receiver's flows into pops' savings, in the window of the ledger's changes
+zz_ef_v_w_inflow = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_w_inflow } value = var:zz_ef_w_inflow }
+}
+zz_ef_v_w_buyout = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_w_buyout_got } value = var:zz_ef_w_buyout_got }
+}
+
+# 4.10 (the tooltip and the cards): the CB's foreign currency at parity in money, and its reserves in money
+# (metal + currency) -- what the cover counts (national_capacity / parity)
+zz_ef_fx_money = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = money_value_target_1
+			var:money_value_target_1 > 0
+		}
+		value = zz_ef_v_fx_metal
+		divide = var:money_value_target_1
+	}
+	min = 0
+}
+zz_ef_reserves_money = {
+	value = zz_ef_cb_money
+	add = zz_ef_fx_money
+}
+# the banks' balance sheet's two sides (Ф.1)
+zz_ef_bank_assets = {
+	value = zz_ef_pool
+	add = zz_ef_bc_debt
+	add = zz_ef_cc_debt
+	add = zz_ef_bank_bonds
+}
+zz_ef_bank_liabilities = {
+	value = zz_ef_pop_deposits
+	add = zz_ef_bank_cb_debt
+	add = zz_ef_nr_dep_v
+}
+
+# 4.10 (the tooltip): negated values to print with their own sign and colour
+zz_ef_v_d_deposits_neg = {
+	value = zz_ef_v_d_deposits
+	multiply = -1
+}
+zz_ef_tr_abr_overlap_neg = {
+	value = zz_ef_tr_abr_overlap
+	multiply = -1
+}
+zz_ef_v_d_bonds_neg = {
+	value = zz_ef_v_d_bonds
+	multiply = -1
+}
+zz_ef_v_d_tbonds_neg = {
+	value = zz_ef_v_d_tbonds
+	multiply = -1
+}
+
+# UI.8 (4.10, Budget -> Economy, regen_ef_economy_panel_gui.py): the market's imports and exports of the
+# week at the goods' base prices (В1.6, 5.10: one price, as zz_ef_trade_net_week), the market owner's; others 0
+zz_ef_trade_exports_week = {
+	value = 0
+	if = {
+		limit = { exists = market market.owner = this }
+		market = {
+			every_market_goods = {
+				add = {
+					value = market_goods_exports
+					multiply = goods.base_price
+				}
+			}
+		}
+	}
+}
+zz_ef_trade_imports_week = {
+	value = 0
+	if = {
+		limit = { exists = market market.owner = this }
+		market = {
+			every_market_goods = {
+				add = {
+					value = market_goods_imports
+					multiply = goods.base_price
+				}
+			}
+		}
+	}
+}
+
+# 6.10 day: the EFP line of the yearly reference pick (zz_ef_reference_currency.txt)
+zz_ef_has_cb_v = {
+	value = 0
+	if = { limit = { has_modifier = has_central_bank } value = 1 }
+}
+zz_ef_is_reference_v = {
+	value = 0
+	if = { limit = { has_modifier = global_monetary_reference } value = 1 }
+}

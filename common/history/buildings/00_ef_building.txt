@@ -1,5 +1,26 @@
+﻿# PSC RENAME APPLIED IN PLACE by tools/regen_ef_psc_copies.py:
+# building_ef_private_construction -> building_construction_sector (28 occurrence(s)).
+# This is the hotfix's own, hand-maintained override of E&F's 00_ef_building.txt
+# (STATE_LOWER_ANDALUSIA, the GRE block that built in a NULL state, the
+# companies pulled up before the central banks). Edit it by hand; after an
+# E&F update re-merge E&F's file first, then re-run the script.
+
 BUILDINGS = {
 	every_country = {
+
+		### HOTFIX: pulled up from further down this same file (it still runs there,
+		### and is a no-op the second time -- every branch of it is guarded by
+		### NOT = { has_company = ... }).
+		###
+		### It has to happen BEFORE the central banks are built. The bank is now
+		### created already owned by a company (zz_ef_cm_create_owned_bank), and the
+		### company it picks has to exist at that moment -- otherwise Britain's bank
+		### falls through to the generic company_BasicBank and the Bank of England,
+		### established a few hundred lines later, never gets it. Nothing in the game
+		### can move ownership afterwards: add_ownership is a field of create_building
+		### and there is no effect anywhere that hands over a standing building.
+		establish_bank_and_ef_compagnie = yes
+
 
 		#####################################################################################################################################################
 		#####################################################################################################################################################
@@ -833,7 +854,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_Rothschild_Bank_aus
@@ -865,7 +886,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_Rothschild_Bank_aus
@@ -893,7 +914,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_Rothschild_Bank_ger
@@ -1025,7 +1046,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_Rothschild_Bank_ger
@@ -1157,7 +1178,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_Rothschild_Bank_ger
@@ -1297,7 +1318,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_PreussischeSeehandlung
@@ -1331,7 +1352,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_PreussischeSeehandlung
@@ -1405,7 +1426,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_PreussischeSeehandlung
@@ -1482,7 +1503,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_Rothschild_Bank_ita
@@ -1509,7 +1530,7 @@ BUILDINGS = {
 				reserves=1
 			} 
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_BancaDItalia
@@ -1537,7 +1558,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_Rothschild_Bank_aus
@@ -1586,7 +1607,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_Rothschild_Bank_aus
@@ -1670,7 +1691,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_Rothschild_Bank_gbr
@@ -1713,7 +1734,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_Rothschild_Bank_gbr
@@ -1768,7 +1789,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_barclaysBank
@@ -1811,7 +1832,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_barclaysBank
@@ -1857,7 +1878,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_Rothschild_Bank_gbr
@@ -1905,7 +1926,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_Rothschild_Bank_gbr
@@ -2002,7 +2023,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_OesterreichischeCreditAnstalt
@@ -2082,7 +2103,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_SocieteGeneraledeBelgique
@@ -2110,7 +2131,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_Rothschild_Bank_gbr
@@ -2143,7 +2164,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_Rothschild_Bank_fra
@@ -2196,7 +2217,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_Rothschild_Bank_gbr
@@ -2224,7 +2245,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_DeNederlandscheBank
@@ -2252,7 +2273,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_Bank_Ultramarino
@@ -2280,7 +2301,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_StateBankRussianEmpire
@@ -2334,7 +2355,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_BankofSpain
@@ -2369,7 +2390,7 @@ BUILDINGS = {
 				reserves=1
 			}
 			create_building={
-				building="building_ef_private_construction"
+				building="building_construction_sector"
 				add_ownership={
 					company={
 						type=company_BankWellsFargo
@@ -3612,7 +3633,7 @@ BUILDINGS = {
 	}
 
 	#SPA
-	s:STATE_ANDALUSIA={
+	s:STATE_LOWER_ANDALUSIA={
 		region_state:SPA={
 			create_building={
 				building="building_silver_mine"
@@ -3813,70 +3834,78 @@ BUILDINGS = {
 		}
 	}
  
-	#GRE
-	s:STATE_SAXONY={
-		region_state:GRE={
-			create_building={
-				building="building_gold_mine"
-				add_ownership={
-					company={
-						type=company_PreussischeSeehandlung
-						country="c:GRE"
-						levels=1
-					}
-				}
-				reserves=1
-			}
-			create_building={
-				building="building_silver_mine"
-				add_ownership={
-					company={
-						type=company_PreussischeSeehandlung
-						country="c:GRE"
-						levels=3
-					}
-				}
-				reserves=1
-			}
-			create_building={
-				building="building_gold_mine"
-				add_ownership={
-					company={
-						type=company_basic_gold_and_silver_mining_2
-						country="c:GRE"
-						levels=2
-					}
-				}
-				reserves=1
-			}
-			create_building={
-				building="building_silver_mine"
-				add_ownership={
-					company={
-						type=company_basic_gold_and_silver_mining_2
-						country="c:GRE"
-						levels=10
-					}
-				}
-				reserves=1
-			}
-		}
-	}
-	s:STATE_BRANDENBURG={
-		region_state:GRE={
-			create_building={
-				building="building_trade_center"
-				add_ownership={
-					company={
-						type=company_basic_gold_and_silver_mining_2
-						country="c:GRE"
-						levels=5
-					}
-				}
-				reserves=1
-			}
-		}
-	}
+	### ─── E&F Hotfix [1.13] ────────────────────────────────────────────────────
+	### The #GRE block below is a character-for-character copy of the #PRU block
+	### with PRU swapped for GRE, company_PreussischeSeehandlung included.
+	### Greece owns neither Saxony nor Brandenburg, so region_state:GRE resolves
+	### to an invalid state and every create_building inside it fails with
+	### 'create_building effect [ Scoped object is not valid. Type: NULL_STATE ]'.
+	### The whole block is commented out.
+	### ────────────────────────────────────────────────────────────────────────────
+#	#GRE
+#	s:STATE_SAXONY={
+#		region_state:GRE={
+#			create_building={
+#				building="building_gold_mine"
+#				add_ownership={
+#					company={
+#						type=company_PreussischeSeehandlung
+#						country="c:GRE"
+#						levels=1
+#					}
+#				}
+#				reserves=1
+#			}
+#			create_building={
+#				building="building_silver_mine"
+#				add_ownership={
+#					company={
+#						type=company_PreussischeSeehandlung
+#						country="c:GRE"
+#						levels=3
+#					}
+#				}
+#				reserves=1
+#			}
+#			create_building={
+#				building="building_gold_mine"
+#				add_ownership={
+#					company={
+#						type=company_basic_gold_and_silver_mining_2
+#						country="c:GRE"
+#						levels=2
+#					}
+#				}
+#				reserves=1
+#			}
+#			create_building={
+#				building="building_silver_mine"
+#				add_ownership={
+#					company={
+#						type=company_basic_gold_and_silver_mining_2
+#						country="c:GRE"
+#						levels=10
+#					}
+#				}
+#				reserves=1
+#			}
+#		}
+#	}
+#	s:STATE_BRANDENBURG={
+#		region_state:GRE={
+#			create_building={
+#				building="building_trade_center"
+#				add_ownership={
+#					company={
+#						type=company_basic_gold_and_silver_mining_2
+#						country="c:GRE"
+#						levels=5
+#					}
+#				}
+#				reserves=1
+#			}
+#		}
+#	}
 
 	#RUS
 	s:STATE_URALSK={

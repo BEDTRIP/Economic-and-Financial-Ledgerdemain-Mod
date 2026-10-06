@@ -622,23 +622,10 @@ central_bank_ef_on_half_yearly_pulse_country = {
 		privat_bank_buy_currency = yes
 	}
 }
+### E&F's half-yearly financial-centre effect without the snapshot pair.
 financial_center_ef_on_half_yearly_pulse_country = {
-
-	if  = {
-		limit  = {
-			country_indice > 5000000
-		}
-		fluctuations_country_indice_value_year = yes
-	}
-	if  = {
-		limit  = {
-			country_indice < 5000000
-			NOT = {
-				stock_market_index = 100
-			}
-		}
-		fluctuations_country_indice_value_year_clear = yes
-	}
+	### EF.24: the crash check and the index change are monthly now
+	### (zz_ef_cap_monthly_crash_check above).
 	if  = {
 		limit  = {
 			interest_per_month_from_foreign_debt_investment > 0
@@ -18421,6 +18408,8 @@ money_value_global_var = {
 
 }
 update_modifiers_bc_fc_ns = {
+	set_variable = { name = zz_ef_bcfcns_ran value = 0 }
+
 	#si il n'a pas le batiment il ne délanche pas
 	if = {
 		limit = {
@@ -18429,7 +18418,10 @@ update_modifiers_bc_fc_ns = {
 			}
 		}
 		central_bank_modifier = yes
-		stockpiling_capital_state_transfert = yes
+		### EF.15: bond output of the central bank follows debt/GDP.
+		### zz_ef_cb_bond_issuance.txt
+		zz_ef_cb_bond_issuance_update = yes
+		set_variable = { name = zz_ef_bcfcns_ran value = 1 }
 	}
 	if = {
 		limit = {
@@ -18480,9 +18472,10 @@ update_modifiers_bc_fc_ns = {
 				}
 			}
 		}
-		financial_center_modifier = yes
+		### 7i: `financial_center_modifier = yes` removed here -- the transfert
+		### below opens with it. See the header.
 
-		stockpiling_capital_state_transfert = yes
+		set_variable = { name = zz_ef_bcfcns_ran value = 1 }
 	}
 	if = {
 		limit = {
@@ -18493,6 +18486,17 @@ update_modifiers_bc_fc_ns = {
 		}
 		national_stockpile_modifier = yes
 
+		set_variable = { name = zz_ef_bcfcns_ran value = 1 }
+	}
+
+	### The three branches above each ended with `stockpiling_capital_state_transfert = yes`
+	### in E&F. One call here does the work of all three -- see the header.
+	if = {
+		limit = { var:zz_ef_bcfcns_ran = 1 }
+		### 7i: seed states created since the one-shot seed ran. See the header.
+		every_scope_state = {
+			zz_ef_seed_stockpile_vars_on_state = yes
+		}
 		stockpiling_capital_state_transfert = yes
 	}
 

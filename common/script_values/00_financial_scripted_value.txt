@@ -110,17 +110,23 @@ building_urban_center_lvl = {
 	}
 }
 
+# The limit. Re-issued under E&F's name, so everything that already asks
+# E&F for it -- can_build_private and ai_value of the sector
+# (zz_pb_ef_construction_sector.txt), pcs_construction_sector_headroom_by_base_rate
+# (buttons 9-12), E&F's button 13 tooltip -- gets the new formula.
+# E&F: 00_financial_scripted_value.txt:113, urban centre levels x
+# base_rate_to_pcs_factor, min 1, round. base_rate_to_pcs_factor itself is NOT
+# re-issued: E&F also feeds it into value_for_has_financial_center
+# (00_economic_scripted_value.txt:4617 -> country_max_companies_add), which is
+# not ours to change.
+# Callers guard on has_variable = base_rate_percentage (young countries).
 building_urban_center_lvl_by_base_rate = {
-	value = building_urban_center_lvl
-	multiply = base_rate_to_pcs_factor
-	# multiply = {
-	# 	value = {
-	# 	 	add = 10
-	# 	 	subtract = owner.base_rate_percentage_decimal
-	# 	}
-	# 	divide = 9
-	# }
-	max = building_urban_center_lvl
+	value = zz_pb_ef_urban_center_levels
+	multiply = zz_pb_ef_css_rate_factor
+	add = {  # STR.3 / D.9: sectors for households' and urban centres' own demand
+		value = zz_pb_ef_urban_center_levels
+		multiply = zz_pb_ef_css_household_mult
+	}
 	min = 1
 	round = yes
 }
@@ -155,21 +161,20 @@ building_ef_private_construction_max_level_var = {
 }
 
 building_ef_private_construction_lvl_state = {
-	value = b:building_ef_private_construction.level
+	value = b:building_construction_sector.level
 }
 
 building_ef_private_construction_lvl = {
 	value = 0
 	every_scope_building = {
 		limit = {
-			is_building_type = building_ef_private_construction
+			is_building_type = building_construction_sector
 		}
 		add = level
 	}
 }
 building_ef_private_construction_lvl_to_build = {
-	value = building_urban_center_lvl #building_construction_sector_lvl
-
+	value = building_urban_center_lvl
 	multiply = {
 		value = {
 		 	add = 10
@@ -202,7 +207,7 @@ state_market_access = {
 
 max_building_financial_center_by_number_in_market = {
 	value = var:gdp_view_fc
-	divide = building_financial_num
+	divide = { value = building_financial_num min = 1 }
 }
 
 building_financial_num = {
@@ -925,12 +930,8 @@ country_credit_pondered_mean = {
 	if = {
 		limit = {
 			has_modifier = has_central_bank
-			#global_country_ranking > 1
 			or  = {
-				and  = {
-					global_country_ranking > 1
-					global_country_ranking < 50
-				}
+				global_country_ranking > 1
 				is_player = yes
 			}
 		}
@@ -2868,18 +2869,19 @@ stockpiling_bond_var_1 = {
 releasing_bond_var_1 = {
 	value = 0
 }
+# var:credit_at_central_bank is only set once a country has touched E&F's
+# credit effects; without the guard every other country logs
+# "Failed to fetch variable" (same guard as EF.15).
 stockpiling_bond_var_state = {
-	value = 0
-	add  = {
-		every_scope_state = {
-			if = {
-				limit = {
-					has_modifier = financial_center_historic_place
-					is_incorporated = yes
-				}
-				add = var:stockpiling_bond_var_state_1
-			}
-		}
+	value = country_credit
+	if = {
+		limit = { has_variable = credit_at_central_bank }
+		add = var:credit_at_central_bank
+	}
+	min = 0
+	divide = {
+		value = bond_price
+		min = 1
 	}
 }
 
@@ -2898,18 +2900,18 @@ manufacture_stock_market_goods_delta = {
 	value = manufacture_stock_market_goods_sell_orders
 	subtract = manufacture_stock_market_goods_buy_orders
 }
+### Quantities read by every E&F formula: the yearly average / today's price.
 stockpiling_manufacture_stock_var_state = {
-	value = 0
-	add  = {
-		every_scope_state = {
-			if = {
-				limit = {
-					has_modifier = financial_center_historic_place
-					is_incorporated = yes
-				}
-				add = var:stockpiling_manufacture_stock_var_state_1
-			}
+	if = {
+		limit = { has_variable = zz_ef_cap_avg_ms }
+		value = var:zz_ef_cap_avg_ms
+		divide = {
+			value = manufacture_stock_price
+			min = 1
 		}
+	}
+	else = {
+		value = zz_ef_cap_qty_manufacture_stock
 	}
 }
 manufacture_stock_by_price_in_gold = {
@@ -2951,17 +2953,16 @@ agricultural_stock_market_goods_delta = {
 	subtract = agricultural_stock_market_goods_buy_orders
 }
 stockpiling_agricultural_stock_var_state = {
-	value = 0
-	add  = {
-		every_scope_state = {
-			if = {
-				limit = {
-					has_modifier = financial_center_historic_place
-					is_incorporated = yes
-				}
-				add = var:stockpiling_agricultural_stock_var_state_1
-			}
+	if = {
+		limit = { has_variable = zz_ef_cap_avg_as }
+		value = var:zz_ef_cap_avg_as
+		divide = {
+			value = agricultural_stock_price
+			min = 1
 		}
+	}
+	else = {
+		value = zz_ef_cap_qty_agricultural_stock
 	}
 }
 agricultural_stock_by_price_in_gold = {
@@ -3003,17 +3004,16 @@ railroad_stock_market_goods_delta = {
 	subtract = railroad_stock_market_goods_buy_orders
 }
 stockpiling_railroad_stock_var_state = {
-	value = 0
-	add  = {
-		every_scope_state = {
-			if = {
-				limit = {
-					has_modifier = financial_center_historic_place
-					is_incorporated = yes
-				}
-				add = var:stockpiling_railroad_stock_var_state_1
-			}
+	if = {
+		limit = { has_variable = zz_ef_cap_avg_rr }
+		value = var:zz_ef_cap_avg_rr
+		divide = {
+			value = railroad_stock_price
+			min = 1
 		}
+	}
+	else = {
+		value = zz_ef_cap_qty_railroad_stock
 	}
 }
 railroad_stock_by_price_in_gold = {
@@ -3055,17 +3055,16 @@ mining_stock_market_goods_delta = {
 	subtract = mining_stock_market_goods_buy_orders
 }
 stockpiling_mining_stock_var_state = {
-	value = 0
-	add  = {
-		every_scope_state = {
-			if = {
-				limit = {
-					has_modifier = financial_center_historic_place
-					is_incorporated = yes
-				}
-				add = var:stockpiling_mining_stock_var_state_1
-			}
+	if = {
+		limit = { has_variable = zz_ef_cap_avg_mn }
+		value = var:zz_ef_cap_avg_mn
+		divide = {
+			value = mining_stock_price
+			min = 1
 		}
+	}
+	else = {
+		value = zz_ef_cap_qty_mining_stock
 	}
 }
 mining_stock_by_price_in_gold = {
@@ -3554,28 +3553,43 @@ bg_financial_centre_modifier = {
 #mutual_fund
 ############
 bond_price_by_demand_fc = {
-	value = 0
-	add = target_demand_bond_ajusted
+	value = target_demand_bond_ajusted
+	if = {
+		limit = { has_variable = base_demande_bond_fix }
+		max = { value = var:base_demande_bond_fix multiply = 251 min = 0 }
+	}
 	multiply = bond_price_brut
 }
 manufacture_stock_price_by_demand_fc = {
-	value = 0
-	add = target_demand_manufacture_stock_ajusted
+	value = target_demand_manufacture_stock_ajusted
+	if = {
+		limit = { has_variable = base_demande_manufacture_stock_fix }
+		max = { value = var:base_demande_manufacture_stock_fix multiply = 251 min = 0 }
+	}
 	multiply = manufacture_stock_price_brut
 }
 agricultural_stock_price_by_demand_fc = {
-	value = 0
-	add = target_demand_agricultural_stock_ajusted
+	value = target_demand_agricultural_stock_ajusted
+	if = {
+		limit = { has_variable = base_demande_agricultural_stock_fix }
+		max = { value = var:base_demande_agricultural_stock_fix multiply = 251 min = 0 }
+	}
 	multiply = agricultural_stock_price_brut
 }
 mining_stock_price_by_demand_fc = {
-	value = 0
-	add = target_demand_mining_stock_ajusted
+	value = target_demand_mining_stock_ajusted
+	if = {
+		limit = { has_variable = base_demande_mining_stock_fix }
+		max = { value = var:base_demande_mining_stock_fix multiply = 251 min = 0 }
+	}
 	multiply = mining_stock_price_brut
 }
 railroad_stock_price_by_demand_fc = {
-	value = 0
-	add = target_demand_railroad_stock_ajusted
+	value = target_demand_railroad_stock_ajusted
+	if = {
+		limit = { has_variable = base_demande_railroad_stock_fix }
+		max = { value = var:base_demande_railroad_stock_fix multiply = 251 min = 0 }
+	}
 	multiply = railroad_stock_price_brut
 }
 total_cost_fcc = {
@@ -3601,29 +3615,32 @@ collateral_quantity_mutual_fund = {
     divide = 250
 }
 target_supply_mutual_fund = {
-    value = collateral_quantity_mutual_fund #quantité à avoir pour assurer le cout des bien
-    multiply = 1.5 ##ajuster cette vvaleur pour augmenter prix du bien au dessus de neutralité
+	value = collateral_quantity_mutual_fund
+	multiply = 1.25	### EF.17 (4b): E&F has 1.5
 }
 total_gain_mf = {
     value = target_supply_mutual_fund
     multiply = 250
 }
 target_supply_mutual_fund_for_modifier = {
-    value = target_supply_mutual_fund
-    subtract = base_supply_mutual_fund_fix
-    divide = base_supply_mutual_fund_fix
-    multiply = 100
+	value = 0
+	if = {
+		limit = { has_variable = base_demande_bond_fix base_supply_mutual_fund_fix > 0 }
+		value = target_supply_mutual_fund
+		subtract = base_supply_mutual_fund_fix
+		divide = base_supply_mutual_fund_fix
+		multiply = 100
+	}
 	if = {
 		limit = {
 			or = {
 				is_subject = yes
-				not = {
-					market.owner = root
-				}
+				not = { market.owner = root }
 			}
 		}
 		multiply = 0.1
 	}
+	max = 25000
 }
 
 fiancial_center_week_balance = {
@@ -3664,17 +3681,15 @@ target_demand_bond = {
     multiply = 1 #ajuster cette vvaleur pour augmenter prix du bien au dessus de neutralité
 }
 target_demand_bond_ajusted = {
-    value = target_demand_bond
-    subtract = market.mg:bond.market_goods_exports
-	divide = building_financial_num #Je divise la quantité dans le marché à ciblé en fonction du nombre de FC pour un equilibrage globale ---------------> division par zero possible
+	value = target_demand_bond
+	subtract = market.mg:bond.market_goods_exports
+	divide = { value = building_financial_num min = 1 }
 
 	if = {
 		limit = {
 			or = {
 				is_subject = yes
-				not = {
-					market.owner = root
-				}
+				not = { market.owner = root }
 			}
 		}
 		multiply = 0.05
@@ -3687,11 +3702,13 @@ target_demand_bond_ajusted = {
 }
 target_demand_bond_for_modifier = {
 	value = 0
-	value = target_demand_bond_ajusted
-	subtract = base_demande_bond_fix
-	divide = base_demande_bond_fix
-	multiply = 100
-
+	if = {
+		limit = { has_variable = base_demande_bond_fix base_demande_bond_fix > 0 }
+		value = target_demand_bond_ajusted
+		subtract = base_demande_bond_fix
+		divide = base_demande_bond_fix
+		multiply = 100
+	}
 	max = 25000
 }
 bond_market_goods_sell_orders_ratio = {
@@ -3715,17 +3732,15 @@ target_demand_manufacture_stock = {
     multiply = 1 #ajuster cette valeur pour augmenter prix du bien au dessus de neutralité
 }
 target_demand_manufacture_stock_ajusted = {
-    value = target_demand_manufacture_stock
-    subtract = market.mg:manufacture_stock.market_goods_exports
-	divide = building_financial_num #Je divise la quantité dans le marché à ciblé en fonction du nombre de FC pour un equilibrage globale ---------------> division par zero possible
+	value = target_demand_manufacture_stock
+	subtract = market.mg:manufacture_stock.market_goods_exports
+	divide = { value = building_financial_num min = 1 }
 
 	if = {
 		limit = {
 			or = {
 				is_subject = yes
-				not = {
-					market.owner = root
-				}
+				not = { market.owner = root }
 			}
 		}
 		multiply = 0.05
@@ -3737,11 +3752,14 @@ target_demand_manufacture_stock_ajusted = {
 	min = 0
 }
 target_demand_manufacture_stock_for_modifier = {
-    value = target_demand_manufacture_stock_ajusted
-    subtract = base_demande_manufacture_stock_fix
-    divide = base_demande_manufacture_stock_fix
-    multiply = 100
-
+	value = 0
+	if = {
+		limit = { has_variable = base_demande_manufacture_stock_fix base_demande_manufacture_stock_fix > 0 }
+		value = target_demand_manufacture_stock_ajusted
+		subtract = base_demande_manufacture_stock_fix
+		divide = base_demande_manufacture_stock_fix
+		multiply = 100
+	}
 	max = 25000
 }
 manufacture_stock_market_goods_sell_orders_ratio = {
@@ -3764,17 +3782,15 @@ target_demand_agricultural_stock = {
     multiply = 1 #ajuster cette vvaleur pour augmenter prix du bien au dessus de neutralité
 }
 target_demand_agricultural_stock_ajusted = {
-    value = target_demand_agricultural_stock
-    subtract = market.mg:agricultural_stock.market_goods_exports
-	divide = building_financial_num #Je divise la quantité dans le marché à ciblé en fonction du nombre de FC pour un equilibrage globale ---------------> division par zero possible
+	value = target_demand_agricultural_stock
+	subtract = market.mg:agricultural_stock.market_goods_exports
+	divide = { value = building_financial_num min = 1 }
 
 	if = {
 		limit = {
 			or = {
 				is_subject = yes
-				not = {
-					market.owner = root
-				}
+				not = { market.owner = root }
 			}
 		}
 		multiply = 0.05
@@ -3786,11 +3802,14 @@ target_demand_agricultural_stock_ajusted = {
 	min = 0
 }
 target_demand_agricultural_stock_for_modifier = {
-    value = target_demand_agricultural_stock_ajusted
-    subtract = base_demande_agricultural_stock_fix
-    divide = base_demande_agricultural_stock_fix
-    multiply = 100
-
+	value = 0
+	if = {
+		limit = { has_variable = base_demande_agricultural_stock_fix base_demande_agricultural_stock_fix > 0 }
+		value = target_demand_agricultural_stock_ajusted
+		subtract = base_demande_agricultural_stock_fix
+		divide = base_demande_agricultural_stock_fix
+		multiply = 100
+	}
 	max = 25000
 }
 agricultural_stock_market_goods_sell_orders_ratio = {
@@ -3813,17 +3832,15 @@ target_demand_mining_stock = {
     multiply = 1 #ajuster cette vvaleur pour augmenter prix du bien au dessus de neutralité
 }
 target_demand_mining_stock_ajusted = {
-    value = target_demand_mining_stock
-    subtract = market.mg:mining_stock.market_goods_exports
-	divide = building_financial_num #Je divise la quantité dans le marché à ciblé en fonction du nombre de FC pour un equilibrage globale ---------------> division par zero possible
+	value = target_demand_mining_stock
+	subtract = market.mg:mining_stock.market_goods_exports
+	divide = { value = building_financial_num min = 1 }
 
 	if = {
 		limit = {
 			or = {
 				is_subject = yes
-				not = {
-					market.owner = root
-				}
+				not = { market.owner = root }
 			}
 		}
 		multiply = 0.05
@@ -3835,11 +3852,14 @@ target_demand_mining_stock_ajusted = {
 	min = 0
 }
 target_demand_mining_stock_for_modifier = {
-    value = target_demand_mining_stock_ajusted
-    subtract = base_demande_mining_stock_fix
-    divide = base_demande_mining_stock_fix
-    multiply = 100
-
+	value = 0
+	if = {
+		limit = { has_variable = base_demande_mining_stock_fix base_demande_mining_stock_fix > 0 }
+		value = target_demand_mining_stock_ajusted
+		subtract = base_demande_mining_stock_fix
+		divide = base_demande_mining_stock_fix
+		multiply = 100
+	}
 	max = 25000
 }
 mining_stock_market_goods_sell_orders_ratio = {
@@ -3862,17 +3882,15 @@ target_demand_railroad_stock = {
     multiply = 1 #ajuster cette vvaleur pour augmenter prix du bien au dessus de neutralité
 }
 target_demand_railroad_stock_ajusted = {
-    value = target_demand_railroad_stock
-    subtract = market.mg:railroad_stock.market_goods_exports
-	divide = building_financial_num #Je divise la quantité dans le marché à ciblé en fonction du nombre de FC pour un equilibrage globale ---------------> division par zero possible
+	value = target_demand_railroad_stock
+	subtract = market.mg:railroad_stock.market_goods_exports
+	divide = { value = building_financial_num min = 1 }
 
 	if = {
 		limit = {
 			or = {
 				is_subject = yes
-				not = {
-					market.owner = root
-				}
+				not = { market.owner = root }
 			}
 		}
 		multiply = 0.05
@@ -3884,11 +3902,14 @@ target_demand_railroad_stock_ajusted = {
 	min = 0
 }
 target_demand_railroad_stock_for_modifier = {
-    value = target_demand_railroad_stock_ajusted
-    subtract = base_demande_railroad_stock_fix
-    divide = base_demande_railroad_stock_fix
-    multiply = 100
-
+	value = 0
+	if = {
+		limit = { has_variable = base_demande_railroad_stock_fix base_demande_railroad_stock_fix > 0 }
+		value = target_demand_railroad_stock_ajusted
+		subtract = base_demande_railroad_stock_fix
+		divide = base_demande_railroad_stock_fix
+		multiply = 100
+	}
 	max = 25000
 }
 railroad_stock_market_goods_sell_orders_ratio = {

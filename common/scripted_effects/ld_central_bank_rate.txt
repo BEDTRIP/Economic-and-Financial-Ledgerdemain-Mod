@@ -1,0 +1,56 @@
+﻿#############################################
+# EF.30 + EF.26 (2026-09-30, v2 same day) -- the central bank sets the rate.
+#
+# WHAT E&F DOES (4.1.7)
+# base_rate_change (01_economic_scripted_effects.txt:135314) is the AI-only
+# half-yearly rate controller. It reads the private funds against limits and
+# metal cover, but the yearly pool credit is itself a function of the rate,
+# so outside 6-7% the rate confirms its own trigger and crawls to 11.1%
+# (or 2%). The EF.26 typo fix only opened the upward branch: 9 of the 45
+# biggest countries sat at the ceiling in 1850.
+#
+# WHAT THIS DOES
+# base_rate_change is emptied (E&F still calls it half-yearly for the AI).
+# zz_ef_cb_rate_step moves the rate by zz_ef_cb_rate_next_step
+# (script_values/zz_ef_cb_rate_values.txt) -- towards the target from the
+# credit rating -- for every country, AI and player alike, every 3 months
+# (on_actions/zz_ef_cb_rate_on_actions.txt).
+#
+# rise_base_rate / down_base_rate are NOT empty labels: E&F reads them monthly
+# for private-bank currency arbitrage (00_on_action_main.txt:446) and for the
+# inflation policy (01_economic_scripted_effects.txt:10126). A step sets the
+# matching one for 3 months, as a rate change did in E&F. The player's buttons
+# no longer check them (free, no cooldown since 2026-09-30), so the bank's
+# steps do not lock the buttons.
+#
+# !! MAINTENANCE !! Key-level REPLACE_OR_CREATE of base_rate_change. Drop the
+# file if E&F rebuilds the rate itself.
+#############################################
+
+zz_ef_cb_rate_step = {
+	if = {
+		limit = { has_variable = base_rate_percentage }
+
+		set_variable = {
+			name = base_rate_percentage_old
+			value = var:base_rate_percentage
+		}
+		change_variable = {
+			name = base_rate_percentage
+			add = zz_ef_cb_rate_next_step
+		}
+
+		if = {
+			limit = { var:base_rate_percentage_old > var:base_rate_percentage }
+			remove_modifier = rise_base_rate
+			remove_modifier = down_base_rate
+			add_modifier = { name = down_base_rate months = 3 }
+		}
+		else_if = {
+			limit = { var:base_rate_percentage_old < var:base_rate_percentage }
+			remove_modifier = down_base_rate
+			remove_modifier = rise_base_rate
+			add_modifier = { name = rise_base_rate months = 3 }
+		}
+	}
+}

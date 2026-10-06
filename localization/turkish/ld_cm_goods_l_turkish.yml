@@ -1,0 +1,34 @@
+﻿l_turkish:
+
+ # Д2.4 (5.10.2026): the private bank -- makes bank settlements (the former E&F currency good).
+ bg_zz_ef_banking:0 "Banking"
+ building_zz_ef_bank:0 "Bank"
+ building_zz_ef_bank_desc:0 "A private bank: payments, transfers, bills of exchange. Makes the bank settlements that businesses and the population buy."
+ pmg_zz_ef_bank_base:0 "Banking"
+ pm_zz_ef_bank_money_changer:0 "Money Changer"
+ pm_zz_ef_bank_counting_house:0 "Counting House"
+ pm_zz_ef_bank_joint_stock:0 "Joint-Stock Bank"
+ pm_zz_ef_bank_telegraph:0 "Telegraphic Transfers"
+ pm_zz_ef_bank_modern:0 "Modern Bank"
+
+ # EF.15: central bank bond output follows debt as % of GDP (modifier on the bank).
+ zz_ef_cb_bond_issuance_low:0 "Bond Issuance: Debt Below Reference"
+ zz_ef_cb_bond_issuance_high:0 "Bond Issuance: Debt Above Reference"
+
+ # EF.14: E&F has this key in english only.
+ pm_currency_liquidity_currency:0 "National Currency Production"
+
+ # Modifier type of the minor-country currency grant (modifier_type_definitions/zz_ef_liquidity_currency_sell_orders.txt).
+ state_sell_orders_liquidity_currency_add:0 "State Sell Orders: Local Currency"
+
+ # EF.25: company dividends to company workers, growing with equity capitalization / GDP.
+ zz_ef_mass_shareholding:0 "Mass Shareholding"
+ zz_ef_mass_shareholding_desc:0 "Shares are widely held: part of the dividends of company-owned buildings goes to their workers. Grows with the market capitalization of stocks relative to GDP, up to 25% at a capitalization equal to GDP."
+
+ # EF.22: publicly traded company headquarters.
+ pm_company_headquarter_publicly_traded:0 "$pm_publicly_traded$"
+  zz_ef_stock_issue_literacy:0 "Narrow Investor Base"
+  zz_ef_stock_issue_literacy_desc:0 "Only literate people wealthy enough to buy financial products can hold shares. They are under 12% of the population, so private buildings issue fewer stocks: issuance is proportional to the share of literate wealthy pops (wealth 15 and up), in full at 12% and above. Now: [GetPlayer.MakeScope.Var('zz_ef_literate_rich_share').GetValue|%1]."
+ notification_zz_ef_bubble_rising_name:0 "Speculative Bubble Grows"
+ notification_zz_ef_bubble_rising_desc:0 "The speculative market is growing faster than the economy. Speculative bubble: [GetPlayer.MakeScope.Var('speculative_share_1').GetValue|0]%."
+ notification_zz_ef_bubble_rising_tooltip:0 "#header $notification_zz_ef_bubble_rising_name$#!\n$TOOLTIP_DELIMITER$\n$notification_zz_ef_bubble_rising_desc$"

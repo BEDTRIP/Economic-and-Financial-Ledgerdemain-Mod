@@ -121,7 +121,11 @@ state_construction_spending_allocation = {
 }
 
 construction_ordering = {
-	value = var:state_construction_production
+	value = 0
+	if = {
+		limit = { has_variable = state_construction_production }
+		value = var:state_construction_production
+	}
 	multiply = 100
 	add = {
 		value = gdp
@@ -173,25 +177,7 @@ calculate_max_government_construction_spending = {
 }
 
 private_construction_increase = {
-	value = investment_pool_gross_income
-	multiply = {
-		value = 1
-		subtract = var:privatisation_percent_estimate
-	}
-	divide = {
-		value = investment_pool_gross_income
-		multiply = {
-			value = 1
-			subtract = var:privatisation_percent_estimate
-		}
-
-		add = var:limited_government_construction_spending
-		multiply = {
-			value = 1 
-			subtract = modifier:country_construction_goods_cost_mult
-		}
-		min = 0.01
-	}
+	value = zz_ef_psc_private_target
 	subtract = var:corrected_private_allocation
 }
 
@@ -270,15 +256,16 @@ calculate_state_construction_efficiency = {
 # Scope: Any
 # Calculates square roots for values of up to 10000000000
 calculate_sqrt = {
-	# Use a linear estimate over two intervals to calculate an estimated square root:
-	# https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Linear_estimates
 	value = scope:num_to_sqrt
+	max = 1000000000000
+	save_temporary_value_as = num_to_sqrt
 	save_temporary_value_as = a
 	value = 0
 	save_temporary_value_as = n
+	save_temporary_value_as = sqrt_iter
 	if = {
 		limit = {
-			scope:a = 0
+			scope:a <= 0
 		}
 		value = 0
 	}
@@ -333,6 +320,9 @@ calculate_sqrt = {
 }
 
 recurse_sqrt1 = {
+	value = scope:sqrt_iter
+	add = 1
+	save_temporary_value_as = sqrt_iter
 	value = {
 		add = scope:guess
 		subtract = {
@@ -359,6 +349,7 @@ recurse_sqrt1 = {
 	save_temporary_value_as = error_relative
 	if = {
 		limit = {
+			scope:sqrt_iter < 60
 			AND = {
 				OR = {
 					scope:error_relative > 1
@@ -769,27 +760,28 @@ state_construction_allocation = {
 
 # Scope: State
 calculate_state_construction_base_price = {
-	b:building_construction_regulator = {
-		if = {
-			limit = {
-				has_active_production_method = pm_wood_point_conversion
+	# Default to the regulator's default PM (pm_wood_point_conversion) when regulator is missing / not initialized yet.
+	value = wood_construction_good_base_price
+
+	# Only inspect production methods if the regulator building exists in this state.
+	if = {
+		limit = { has_building = building_construction_regulator }
+		b:building_construction_regulator = {
+			if = {
+				limit = { has_active_production_method = pm_wood_point_conversion }
+				value = wood_construction_good_base_price
 			}
-			value = wood_construction_good_base_price
-		}
-		else_if = {
-			limit = {
-				has_active_production_method = pm_iron_point_conversion
+			else_if = {
+				limit = { has_active_production_method = pm_iron_point_conversion }
+				value = iron_construction_good_base_price
 			}
-			value = iron_construction_good_base_price
-		}
-		else_if = {
-			limit = {
-				has_active_production_method = pm_steel_point_conversion
+			else_if = {
+				limit = { has_active_production_method = pm_steel_point_conversion }
+				value = steel_construction_good_base_price
 			}
-			value = steel_construction_good_base_price
-		}
-		else = {
-			value = arc_welded_construction_good_base_price
+			else = {
+				value = arc_welded_construction_good_base_price
+			}
 		}
 	}
 }

@@ -1,0 +1,1491 @@
+﻿#############################################
+# EF.39 / EF.48 (2026-09-30) -- the money model, in the engine's money, on
+# the budget's own rhythm: a WEEKLY step (bank credit from the central bank
+# at the key rate, its interest to the treasury, the ledger of each account's
+# change, M0/M1/M2 history) and a monthly one (E&F's currency good, which
+# E&F moves monthly; EF.31's modifier). Numbers and the why:
+# script_values/zz_ef_money_model_values.txt. Started from
+# on_actions/zz_ef_money_model_on_actions.txt.
+#
+# The engine has no weekly pulse for countries (script_docs on_actions.log:
+# monthly and slower only), so the week is a chain: the weekly on_action
+# re-triggers itself 7 days later (trigger_event = { on_action days = 7 },
+# as LLWA and PSC do). The chain starts right after the engine's weekly
+# budget tick: a daily probe (at most 8 days) waits until the treasury
+# (gold_reserves - principal) changes. Then every 7-day window holds exactly
+# one tick, and the budget read at the step is the tick in the window.
+#
+# E&F's investement_pool_borrowing (01_economic_scripted_effects.txt:135769,
+# yearly, market owners) is replaced: its +-2..10% of the money supply a year
+# by the rate, gated by the private credit limits, is what filled rich pools
+# for decades ahead. Kept from it: the interest the private banks earn on
+# the foreign bonds they hold (ai_privat_bank_total_interest), while the pool
+# is under the model's target.
+#
+# !! MAINTENANCE !! Key-level REPLACE_OR_CREATE of investement_pool_borrowing.
+#############################################
+
+# Ф.2 (4.10): the issuer pays the year's interest on its bonds held by foreign private banks (E&F's
+# ai_entral_bank_debt_privat_bank_interest_refund_per_year_1..25: the holders' interest on bond N, summed
+# over its buyer list) out of its treasury -- the engine's money is one unit for every country, so the
+# sum is the holders'. E&F only counted it against the "gold loaned" and paid the holders from nothing.
+# The treasury's change lands in the treasury's E&F moves (tr_other), a payment abroad.
+zz_ef_privbank_interest_pay = {
+	set_variable = { name = zz_ef_f_pbi_paid value = zz_ef_privbank_interest_due }
+	if = {
+		limit = { var:zz_ef_f_pbi_paid > 0 }
+		add_treasury = {
+			value = var:zz_ef_f_pbi_paid
+			multiply = -1
+		}
+		if = {
+			limit = {
+				OR = {
+					is_player = yes
+					gdp > 20000000
+				}
+			}
+			debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|privbank_interest|paid [THIS.GetCountry.MakeScope.Var('zz_ef_f_pbi_paid').GetValue|0]"
+		}
+	}
+}
+
+# Е.5 (5.10, Д.2): the issuer paid the interest on its bonds held by other treasuries as an expense line -- replaced
+# by the bond ledger (В5.5, 5.10: scripted_effects/zz_ef_bond_ledger.txt), which pays the holder out of the issuer's pool.
+
+# ---- the weekly chain -------------------------------------------------------
+
+# Monthly: (re)start the chain if it is not running (new game, new country,
+# a save that lost its delayed on_actions). var:zz_ef_week_alive lives 10
+# days and every step renews it.
+zz_ef_money_week_start = {
+	# Business cash at ~0.3 GDP: now in base_values (static_modifiers/
+	# zz_ef_business_cash.txt); the monthly modifier of 330ba50 goes.
+	if = {
+		limit = { has_modifier = zz_ef_business_cash }
+		remove_modifier = zz_ef_business_cash
+	}
+	if = {
+		limit = {
+			NOT = { has_variable = zz_ef_week_alive }
+			NOT = { has_variable = zz_ef_week_probe }
+		}
+		set_variable = { name = zz_ef_week_probe value = 0 days = 10 }
+		set_variable = { name = zz_ef_week_probe_value value = zz_ef_budget_position }
+		trigger_event = { on_action = zz_ef_money_week_probe days = 1 }
+	}
+}
+
+# Daily until the treasury changes (the budget tick), at most 8 days.
+zz_ef_money_week_probe_step = {
+	if = {
+		limit = {
+			OR = {
+				NOT = { zz_ef_budget_position = var:zz_ef_week_probe_value }
+				var:zz_ef_week_probe >= 7
+			}
+		}
+		remove_variable = zz_ef_week_probe
+		remove_variable = zz_ef_week_probe_value
+		trigger_event = { on_action = zz_ef_money_model_weekly }
+	}
+	else = {
+		change_variable = { name = zz_ef_week_probe add = 1 }
+		set_variable = { name = zz_ef_week_probe_value value = zz_ef_budget_position }
+		trigger_event = { on_action = zz_ef_money_week_probe days = 1 }
+	}
+}
+
+# ---- the weekly step --------------------------------------------------------
+
+zz_ef_money_model_step = {
+	set_variable = { name = zz_ef_week_alive value = yes days = 10 }
+	# Business cash: the sum over the buildings, once a week (run 15: the
+	# estimate from the credit limit -- credit - base - 1.7 x GDP -- swung by
+	# millions a week, M2 by +-30%).
+	set_variable = { name = zz_ef_bcash value = zz_ef_building_cash_sum }
+	# В2 (7.10): the Banks' cash -- the banks' own money, out of M1 / M2
+	set_variable = { name = zz_ef_bkcash value = zz_ef_bank_cash_sum }
+	# В1.3 probe (3.10): who gets the business cash jump of 1 January
+	zz_ef_probe_newyear_cash = yes
+	# UI.7 (3.10): the CB's metal rescaled this step, in money (zz_ef_metal_rescale_step)
+	set_variable = { name = zz_ef_f_cb_rescale value = 0 }
+	# foreign currency in the reserves (night 2, item 2), before the rescale
+	zz_ef_fx_metal_update = yes
+	# П.8 (4.10): each foreign currency's weekly change, for E&F's table (generated, zz_ef_clearing.txt)
+	zz_ef_cbfx_week_step = yes
+	# В2.5 (4.10): CB states taken from a country send their metal back to it
+	zz_ef_cb_state_owner_step = yes
+	# Е.5 (5.10, Д.2): the issuer pays the week's interest to the treasuries holding its bonds
+	# В5.5 (5.10): bonds as parts of the engine's debt (generated, scripted_effects/zz_ef_bond_ledger.txt); replaces
+	# Е.5's issuer-pays expense line (zz_ef_bond_interest_step)
+	zz_ef_bond_ledger_step = yes
+	if = {
+		limit = { NOT = { has_variable = zz_ef_weeks_run } }
+		set_variable = { name = zz_ef_weeks_run value = 0 }
+	}
+	if = {
+		limit = { var:zz_ef_weeks_run < 100 }
+		change_variable = { name = zz_ef_weeks_run add = 1 }
+	}
+	# M.8 (4.10): subjects' and CB-less countries' E&F metal recounted to 40% of their money at week 12 -- removed
+	# (М, Д2.13, 6.10: a subject's metal is only what it bought); E&F's start metal of CB-less countries is taken
+	# off at the first step (zz_ef_metal_start_step), the overlord gets nothing from its subjects.
+
+	# Gold parity re-anchor, once per change of what the money supply counts.
+	# The money supply is the engine's money now (treasury + businesses' cash +
+	# pool; since 2026-09-30 evening, version 2 -- E&F's goods counts are out),
+	# Version 6 (1.10 evening): the national capacity x 2.5 -- parity = value
+	# with the metal covering 40% of the money (zz_ef_capacity_per_metal).
+	# Version 5 (1.10 day): the money in circulation now holds pops' savings
+	# at hand too (the user's M2 - M0).
+	# Version 4 (1.10, item 11): the treasury left the money supply.
+	# Version 3 (1.10 night, EF.48 item 6): E&F's trade balance left the
+	# national capacity (the CB's metal moves with the flows abroad instead).
+	# a fraction of what E&F counted, so every currency is worth several times
+	# its gold parity and the metal cover reads 200%+ (Britain 1848: 15.3 vs
+	# 7.32). E&F sets the parity itself from the value when a standard is
+	# adopted (money_value_target_valided); the same here: parity = today's
+	# value, cover back to ~100%. Metal standards with a central bank only.
+	# Version 7 (1.10 evening, the user): a NEW game keeps E&F's historical
+	# parity (history/global/99_ef_history_global_variable.txt: the pound 7.32
+	# -- grams of gold in a sovereign, the franc 0.75, ...); our re-anchors put
+	# the pound at 60-80. E&F gives the CB metal = parity x its own money (a
+	# counter ~10 times our money in circulation), i.e. ~1000% cover of ours.
+	# So the CB's metal is rescaled once: 40% cover of the money in
+	# circulation at the historical parity (zz_ef_cover_normal); with the
+	# capacity x 2.5 the value starts at the parity. Older saves keep their
+	# re-anchored parity (versions <= 6) -- test with a new game.
+	# Twice: at the first step against the money expected (at least 0.45 GDP
+	# -- run 15: at the first step the engine had not filled the buildings'
+	# cash yet, Russia's M2 was 2M, France's 0, and the metal was cut to
+	# nothing), and at week 12 against the money itself, if it is over 10% of
+	# GDP by then (else a week later).
+	# Version 8 (stage 2, night 6.10, Д2.23 / Д2.13): the parity ~1 for everyone and the start's metal accounts
+	# (scripted_effects/zz_ef_metal_accounts.txt, zz_ef_metal_start_step) -- the week-12 recount stays, both are the
+	# start's stock in the world line of metal.
+	if = {
+		limit = { NOT = { has_variable = zz_ef_parity_version } }
+		set_variable = { name = zz_ef_parity_version value = 8 }
+		set_variable = { name = zz_ef_metal_rescale_due value = 11 }
+		zz_ef_metal_start_step = yes
+		# Д2.31 (6.10 day): our currency held by other CBs cut to 5% of the money expected (zz_ef_nr_deposits.txt)
+		zz_ef_fx_liab_trim = { BASE = zz_ef_rescale_money }
+	}
+	else_if = {
+		limit = { has_variable = zz_ef_metal_rescale_due }
+		change_variable = { name = zz_ef_metal_rescale_due subtract = 1 }
+		if = {
+			limit = {
+				var:zz_ef_metal_rescale_due <= 0
+				zz_ef_agg_m2_to_gdp > 0.1
+			}
+			remove_variable = zz_ef_metal_rescale_due
+			zz_ef_metal_start_cb_before = yes
+			zz_ef_metal_rescale_step = yes
+			zz_ef_metal_start_cb_after = yes
+			set_variable = { name = zz_ef_ms_what value = 3 }
+			zz_ef_metal_start_log = yes
+		}
+	}
+	if = {
+		limit = { var:zz_ef_parity_version < 6 }
+		set_variable = { name = zz_ef_parity_version value = 6 }
+		if = {
+			limit = {
+				has_modifier = has_central_bank
+				has_variable = money_value_target_1
+				OR = {
+					has_law = law_type:law_gold_standard
+					has_law = law_type:law_silver_standard
+					has_law = law_type:law_bimetallism_standard
+				}
+			}
+			set_variable = { name = zz_ef_parity_before value = var:money_value_target_1 }
+			set_variable = { name = money_value_target_1 value = money_value_0 }
+		}
+	}
+
+	# The budget's week, as the engine counted it at its last tick.
+	set_variable = { name = zz_ef_f_budget value = zz_ef_budget_week }
+	set_variable = { name = zz_ef_f_contrib value = investment_pool_gross_income }
+	set_variable = { name = zz_ef_f_transfer value = zz_ef_pool_transfer_week }
+
+	# Bank credit from the central bank: the debt goes to GDP x a share by the
+	# rate (zz_ef_cb_credit_target, 1.10 evening), repaid from the pool when
+	# over it (at most the debt); interest at the key rate goes
+	# pool -> CB -> treasury (the CB's profit).
+	if = {
+		limit = { NOT = { has_variable = zz_ef_bank_cb_debt } }
+		set_variable = { name = zz_ef_bank_cb_debt value = 0 }
+	}
+	set_variable = { name = zz_ef_f_cb_interest value = zz_ef_cb_interest }
+	set_variable = { name = zz_ef_f_cb_borrow value = zz_ef_cb_borrow }
+	set_variable = { name = zz_ef_f_cb_repay value = zz_ef_cb_repay }
+	add_investment_pool = var:zz_ef_f_cb_borrow
+	change_variable = { name = zz_ef_bank_cb_debt add = var:zz_ef_f_cb_borrow }
+	add_investment_pool = {
+		value = var:zz_ef_f_cb_repay
+		multiply = -1
+	}
+	change_variable = { name = zz_ef_bank_cb_debt subtract = var:zz_ef_f_cb_repay }
+	add_investment_pool = {
+		value = var:zz_ef_f_cb_interest
+		multiply = -1
+	}
+	add_treasury = var:zz_ef_f_cb_interest
+
+	# Д2.7б (5.10): consols -- the CB's bonds sold are the treasury's perpetual debt to pops: interest treasury -> pops'
+	# savings, buy-back out of the surplus over the engine's limit first (scripted_effects/zz_ef_consols.txt)
+	zz_ef_consol_step = yes
+
+	# Д4.5 / EF.38 (the user, 4.10): the treasury over the engine's limit (gold_reserves_limit; over it
+	# the engine's returns fall off and the surplus burns, E&F GOLD_RESERVE_RETURNS_FACTOR) buys the
+	# banks' bonds -- the excess goes into the pool (stays in circulation as bank money). Before the
+	# ledger: a known flow treasury -> pool (zz_ef_v_f_tr_pool in both accounts' "other").
+	set_variable = { name = zz_ef_f_tr_pool value = 0 }
+	if = {
+		limit = { gold_reserves > gold_reserves_limit }
+		set_variable = { name = zz_ef_f_tr_pool value = gold_reserves }
+		change_variable = { name = zz_ef_f_tr_pool subtract = gold_reserves_limit }
+		add_treasury = {
+			value = var:zz_ef_f_tr_pool
+			multiply = -1
+		}
+		add_investment_pool = var:zz_ef_f_tr_pool
+	}
+	# EF.48 item 5 (business credit; repayment in money, 1.10 evening).
+	zz_ef_business_credit_step = yes
+
+	# The CB coined half of the mined gold / silver (1.10 night) -- removed (М, the user 6.10): metal is taken from
+	# the market only; the mines sell all of it, and whoever needs metal buys it (CB, banks, pops). The mint's log
+	# keys (EFR mint / mint_tr) stay 0.
+	set_variable = { name = zz_ef_f_mint value = 0 }
+	set_variable = { name = zz_ef_f_mint_tr value = 0 }
+	# Stage 2, night 6.10 (steps 4, 5, 7): the metal accounts -- the week's purchases of the CB, the banks and the pops,
+	# the CB's sale and buy-back, the buildings' modifiers for the coming week (scripted_effects/zz_ef_metal_accounts.txt)
+	zz_ef_metal_week_step = yes
+
+	# History rings (1.10, the user's M0..M3 -- var:zz_ef_agg0..3): a week ago
+	# (w1..4), 13 blocks of 4 weeks (q1..13, a year), 20 blocks of 13 weeks
+	# (r1..20, 5 years); plus the money in circulation and GDP for the inflation
+	# (q only). Filled from last week's value; each macro skips a quantity not
+	# yet recorded. The old m0/m1/m2 rings (definitions before 1.10) are left
+	# to rot in old saves.
+	if = {
+		limit = { NOT = { has_variable = zz_ef_ring_q } }
+		set_variable = { name = zz_ef_ring_q value = 0 }
+		set_variable = { name = zz_ef_ring_r value = 0 }
+	}
+	# Once: the year ring of the money in circulation takes over the old M3
+	# ring (until 1.10 day M3 was the same sum: businesses' cash + the pool +
+	# savings at hand), so the inflation does not start from zero again.
+	if = {
+		limit = {
+			has_variable = zz_ef_m3_q1
+			NOT = { has_variable = zz_ef_circ_q1 }
+		}
+		if = { limit = { has_variable = zz_ef_m3_q1 } set_variable = { name = zz_ef_circ_q1 value = var:zz_ef_m3_q1 } }
+		if = { limit = { has_variable = zz_ef_m3_q2 } set_variable = { name = zz_ef_circ_q2 value = var:zz_ef_m3_q2 } }
+		if = { limit = { has_variable = zz_ef_m3_q3 } set_variable = { name = zz_ef_circ_q3 value = var:zz_ef_m3_q3 } }
+		if = { limit = { has_variable = zz_ef_m3_q4 } set_variable = { name = zz_ef_circ_q4 value = var:zz_ef_m3_q4 } }
+		if = { limit = { has_variable = zz_ef_m3_q5 } set_variable = { name = zz_ef_circ_q5 value = var:zz_ef_m3_q5 } }
+		if = { limit = { has_variable = zz_ef_m3_q6 } set_variable = { name = zz_ef_circ_q6 value = var:zz_ef_m3_q6 } }
+		if = { limit = { has_variable = zz_ef_m3_q7 } set_variable = { name = zz_ef_circ_q7 value = var:zz_ef_m3_q7 } }
+		if = { limit = { has_variable = zz_ef_m3_q8 } set_variable = { name = zz_ef_circ_q8 value = var:zz_ef_m3_q8 } }
+		if = { limit = { has_variable = zz_ef_m3_q9 } set_variable = { name = zz_ef_circ_q9 value = var:zz_ef_m3_q9 } }
+		if = { limit = { has_variable = zz_ef_m3_q10 } set_variable = { name = zz_ef_circ_q10 value = var:zz_ef_m3_q10 } }
+		if = { limit = { has_variable = zz_ef_m3_q11 } set_variable = { name = zz_ef_circ_q11 value = var:zz_ef_m3_q11 } }
+		if = { limit = { has_variable = zz_ef_m3_q12 } set_variable = { name = zz_ef_circ_q12 value = var:zz_ef_m3_q12 } }
+		if = { limit = { has_variable = zz_ef_m3_q13 } set_variable = { name = zz_ef_circ_q13 value = var:zz_ef_m3_q13 } }
+	}
+	zz_ef_ring_w_push = { M = agg0 }
+	zz_ef_ring_w_push = { M = agg1 }
+	zz_ef_ring_w_push = { M = agg2 }
+	zz_ef_ring_w_push = { M = agg3 }
+	change_variable = { name = zz_ef_ring_q add = 1 }
+	if = {
+		limit = { var:zz_ef_ring_q >= 4 }
+		set_variable = { name = zz_ef_ring_q value = 0 }
+		zz_ef_ring_q_push = { M = agg0 }
+		zz_ef_ring_q_push = { M = agg1 }
+		zz_ef_ring_q_push = { M = agg2 }
+		zz_ef_ring_q_push = { M = agg3 }
+		zz_ef_ring_q_push = { M = circ }
+		zz_ef_ring_q_push = { M = gdp }
+		# prices settle in the first two months of a game (run 17: the USA's index
+		# 144 -> 99 by spring 1836, read as -37% a year): the year ring of prices
+		# starts with week 9
+		if = {
+			limit = { var:zz_ef_weeks_run >= 9 }
+			zz_ef_ring_q_push = { M = price }
+		}
+	}
+	change_variable = { name = zz_ef_ring_r add = 1 }
+	if = {
+		limit = { var:zz_ef_ring_r >= 13 }
+		set_variable = { name = zz_ef_ring_r value = 0 }
+		zz_ef_ring_r_push = { M = agg0 }
+		zz_ef_ring_r_push = { M = agg1 }
+		zz_ef_ring_r_push = { M = agg2 }
+		zz_ef_ring_r_push = { M = agg3 }
+	}
+
+	# UI.7 (3.10): what moves the CB's account (its metal at parity), for the
+	# CB card -- each a week, in money; the rest is E&F's own metal operations.
+	# Revaluation: the reserves of last step at the new parity minus at the old
+	# one = cbm_prev x (parity_prev / parity_now - 1) -- devaluation laws and
+	# re-anchors (run e0_3: the USA 2.06 -> 11.8 -> 29.9, cbm +99M / -86M).
+	# Hume: the metal zz_ef_cb_hume_step added last week (after last week's
+	# ledger, so it is in this week's change), at the parity.
+	set_variable = { name = zz_ef_f_cb_reval value = 0 }
+	set_variable = { name = zz_ef_f_cb_hume_m value = 0 }
+	set_variable = { name = zz_ef_f_cb_stock value = 0 }
+	if = {
+		limit = {
+			has_variable = money_value_target_1
+			var:money_value_target_1 > 0
+		}
+		if = {
+			limit = {
+				has_variable = zz_ef_prev_cbm
+				has_variable = zz_ef_prev_cbval
+			}
+			set_variable = { name = zz_ef_f_cb_reval value = var:zz_ef_prev_cbval }
+			change_variable = { name = zz_ef_f_cb_reval divide = zz_ef_cb_valuation }
+			change_variable = { name = zz_ef_f_cb_reval subtract = 1 }
+			change_variable = { name = zz_ef_f_cb_reval multiply = var:zz_ef_prev_cbm }
+		}
+		if = {
+			limit = {
+				has_variable = zz_ef_f_hume
+				zz_ef_cb_metal_money > 0
+			}
+			set_variable = { name = zz_ef_f_cb_hume_m value = var:zz_ef_f_hume }
+			change_variable = { name = zz_ef_f_cb_hume_m divide = zz_ef_cb_valuation }
+		}
+		# UI.11 (5.10): E&F's CB building stored metal since the last step (its monthly stockpiling,
+		# scripted_effects/zz_ef_cb_stockpile_track.txt), at the parity -- a line of the CB card
+		if = {
+			limit = { has_variable = zz_ef_cb_stock_acc }
+			set_variable = { name = zz_ef_f_cb_stock value = var:zz_ef_cb_stock_acc }
+			change_variable = { name = zz_ef_f_cb_stock divide = zz_ef_cb_valuation }
+		}
+		set_variable = { name = zz_ef_prev_cbval value = zz_ef_cb_valuation }
+	}
+	else_if = {
+		limit = { has_variable = zz_ef_prev_cbval }
+		remove_variable = zz_ef_prev_cbval
+	}
+	if = {
+		limit = { has_variable = zz_ef_cb_stock_acc }
+		remove_variable = zz_ef_cb_stock_acc
+	}
+	# Week-on-week change of each account (0 in the first week).
+	zz_ef_money_ledger_delta = { ACC = pool VALUE = investment_pool }
+	zz_ef_money_ledger_delta = { ACC = buildings VALUE = zz_ef_building_cash }
+	zz_ef_money_ledger_delta = { ACC = tc VALUE = zz_ef_tc_cash }
+	zz_ef_money_ledger_delta = { ACC = treasury VALUE = zz_ef_treasury }
+	zz_ef_money_ledger_delta = { ACC = bonds VALUE = zz_ef_bank_bonds }
+	zz_ef_money_ledger_delta = { ACC = tbonds VALUE = zz_ef_treasury_bonds }
+	zz_ef_money_ledger_delta = { ACC = m2 VALUE = zz_ef_m2 }
+	zz_ef_money_ledger_delta = { ACC = cbm VALUE = zz_ef_cb_money }
+	# П.7 (4.10, В.4): abroad = the net foreign position (bonds + the CB's foreign currency - our currency abroad)
+	zz_ef_money_ledger_delta = { ACC = abroad VALUE = zz_ef_abroad_net }
+	zz_ef_money_ledger_delta = { ACC = agg0 VALUE = zz_ef_agg_m0 }
+	zz_ef_money_ledger_delta = { ACC = agg1 VALUE = zz_ef_agg_m1 }
+	zz_ef_money_ledger_delta = { ACC = agg2 VALUE = zz_ef_agg_m2 }
+	zz_ef_money_ledger_delta = { ACC = agg3 VALUE = zz_ef_agg_m3 }
+	zz_ef_money_ledger_delta = { ACC = circ VALUE = zz_ef_circulation }
+	zz_ef_money_ledger_delta = { ACC = gdp VALUE = gdp }
+	zz_ef_money_ledger_delta = { ACC = price VALUE = zz_ef_price_index }
+	# night 2, item 6: building levels the government owns (privatization)
+	zz_ef_money_ledger_delta = { ACC = govlv VALUE = zz_ef_gov_levels }
+	# 4.10 (the money tooltip): pops' savings and deposits, for the cash-at-hand and deposits lines
+	zz_ef_money_ledger_delta = { ACC = savings VALUE = zz_ef_pop_savings }
+	zz_ef_money_ledger_delta = { ACC = deposits VALUE = zz_ef_pop_deposits }
+
+	# Sandbox log (tools/run_vic3_sandbox.ps1 reads debug.log): one line a
+	# week for the player and the big economies.
+	if = {
+		limit = {
+			OR = {
+				is_player = yes
+				gdp > 20000000
+			}
+		}
+		debug_log = "EFW|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|m0 [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_agg_m0')|0]|m1 [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_agg_m1')|0]|m2 [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_agg_m2')|0]|m3 [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_agg_m3')|0]|circ [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_circulation')|0]|cbm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_money')|0]|abroad [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_abroad_net')|0]|bonds_abr [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_foreign_assets')|0]|eng [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_m2')|0]|d_treasury [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_d_treasury')|0]|d_buildings [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_d_buildings')|0]|d_pool [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_d_pool')|0]|d_m2 [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_d_m2')|0]|budget [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_budget')|0]|contrib [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_contrib')|0]|transfer [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_transfer')|0]|cb_borrow [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_cb_borrow')|0]|cb_repay [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_cb_repay')|0]|cb_debt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bank_cb_debt')|0]|gdp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_raw_gdp')|0]|infl [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_inflation')|3]|g_m3 [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_circ_growth_year')|3]|g_gdp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gdp_growth_year')|3]|mv0 [THIS.GetCountry.MakeScope.ScriptValue('money_value_0')|2]|cover [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_cover')|3]|cbtgt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_credit_target')|0]|target1 [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_valuation')|2]|trea [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_treasury')|0]|bcash [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_building_cash')|0]|bkcash [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bank_cash')|0]|credit [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_raw_credit')|0]|rate [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_money_rate')|4]|rule [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_rate_rating_target')|4]|r_cov [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_rule_cover')|4]|r_mon [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_rule_money')|4]|deprate [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_deposit_rate')|4]|normsh [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cash_norm_gdp')|3]|need [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pool_need')|0]|r_rat [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_rule_rating')|4]|r_stab [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_rule_stability')|4]|r_fx [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_risk_fx_pp')|2]|r_debt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_risk_debt_pp')|2]|debt_gdp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_risk_debt_to_gdp')|3]|bal_avg [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_risk_balance_avg')|4]"
+	}
+
+	# The GUI bridge (gui/ld_money_hook.gui): the budget's lines outside
+	# the accounts (minting, additional income and expenses, diplomacy,
+	# treaties, power bloc, supply network fees, tolls, piracy) are GUI-only;
+	# the hook reads them for every country in the list and hands them back
+	# through scripted_guis/zz_ef_money_hook.txt, which computes the leak.
+	# Last week's values are dropped, so a week without the GUI reads 0.
+	# The deposit operations the receiver made after the previous step fell
+	# into the window just closed: moved to var:zz_ef_w_dep_* for the leak.
+	zz_ef_money_window_roll = { F = dep_in }
+	zz_ef_money_window_roll = { F = dep_out }
+	zz_ef_money_window_roll = { F = dep_int }
+	zz_ef_money_window_roll = { F = cc_issue }
+	zz_ef_money_window_roll = { F = cc_repay }
+	zz_ef_money_window_roll = { F = cc_int }
+	zz_ef_money_window_roll = { F = cc_net }
+	zz_ef_money_window_roll = { F = hume_money }
+	# Д2.30 (6.10 day): other CBs' deposits put into / drawn out of the pool
+	zz_ef_money_window_roll = { F = nr_dep }
+	# 4.10 (the cash-at-hand card): what went into pops' savings at the last receiver -- the window the
+	# ledger's change of M0 / savings / deposits covers
+	zz_ef_money_window_roll = { F = inflow }
+	zz_ef_money_window_roll = { F = buyout_got }
+	# stage 2 (6.10): savings over their norm into wealth, at the last receiver -- the pops' card
+	zz_ef_money_window_roll = { F = sav_wealth }
+	# П.6 / П.7 (4.10): the clearing's currency at the last receiver, for the abroad card
+	zz_ef_money_window_roll = { F = clr_cur_out }
+	zz_ef_money_window_roll = { F = clr_fx_in }
+	zz_ef_money_window_roll = { F = clr_own_back }
+	if = { limit = { has_variable = zz_ef_f_ext } remove_variable = zz_ef_f_ext }
+	if = { limit = { has_variable = zz_ef_f_leak } remove_variable = zz_ef_f_leak }
+	set_variable = { name = zz_ef_hook_pending value = yes days = 6 }
+	if = {
+		limit = {
+			NOT = { is_target_in_global_variable_list = { name = zz_ef_hook_countries target = this } }
+		}
+		add_to_global_variable_list = { name = zz_ef_hook_countries target = this days = 6 }
+	}
+}
+
+# Called by the GUI bridge with scope:ext = the week's budget lines outside
+# the accounts (settled, GetTrendValue). Once per week: the pending var is
+# consumed (on_start may fire twice). The leak = what left the engine's
+# money unexplained: the change of M2 minus the outside lines, the CB's
+# credit and the private banks' foreign bonds. Negative = money went to pops
+# (their income left over, wealth) or abroad inside the market.
+zz_ef_money_hook_receive = {
+	# Diagnostics: every call, also the ones that find nothing pending.
+	if = {
+		limit = { NOT = { has_global_variable = zz_ef_hook_calls } }
+		set_global_variable = { name = zz_ef_hook_calls value = 0 }
+	}
+	change_global_variable = { name = zz_ef_hook_calls add = 1 }
+	if = {
+		limit = { has_variable = zz_ef_hook_pending }
+		remove_variable = zz_ef_hook_pending
+		remove_list_global_variable = { name = zz_ef_hook_countries target = this }
+		set_variable = { name = zz_ef_f_ext value = scope:ext }
+		set_variable = { name = zz_ef_f_pool_other value = zz_ef_pool_other_week }
+		set_variable = { name = zz_ef_f_tr_other value = zz_ef_other_treasury_budget }
+		set_variable = { name = zz_ef_f_abr value = scope:abr }
+		set_variable = { name = zz_ef_g_imp value = scope:g_imp }
+		set_variable = { name = zz_ef_g_exp value = scope:g_exp }
+		set_variable = { name = zz_ef_g_surplus value = scope:g_surplus }
+		set_variable = { name = zz_ef_g_fown value = scope:g_fown }
+		set_variable = { name = zz_ef_g_aown value = scope:g_aown }
+		set_variable = { name = zz_ef_g_poolchg value = scope:g_poolchg }
+		set_variable = { name = zz_ef_g_pcons value = scope:g_pcons }
+		set_variable = { name = zz_ef_g_grate value = scope:g_grate }
+		set_variable = { name = zz_ef_g_maxcred value = scope:g_maxcred }
+		set_variable = { name = zz_ef_g_wgdp value = scope:g_wgdp }
+		set_variable = { name = zz_ef_g_wrate value = scope:g_wrate }
+		set_variable = { name = zz_ef_g_ipay value = scope:g_ipay }
+		set_variable = { name = zz_ef_g_sdebt value = scope:g_sdebt }
+		set_variable = { name = zz_ef_g_sdebtf value = scope:g_sdebtf }
+		# П.17 (4.10): additional income - expenses (bond interest, events), the BoP's primary income
+		# В4.2: the engine's factor on the government's rate -- its yearly rate over the adds it is given (smoothed)
+		if = {
+			limit = {
+				zz_ef_ir_add > 0.005
+				zz_ef_v_g_grate > 0
+			}
+			set_variable = {
+				name = zz_ef_gr_k_now
+				value = {
+					value = zz_ef_v_g_grate
+					divide = zz_ef_ir_add
+					min = 0.5
+					max = 1.5
+				}
+			}
+			if = {
+				limit = { NOT = { has_variable = zz_ef_gr_k } }
+				set_variable = { name = zz_ef_gr_k value = var:zz_ef_gr_k_now }
+			}
+			change_variable = { name = zz_ef_gr_k multiply = 0.5 }
+			change_variable = { name = zz_ef_gr_k add = { value = var:zz_ef_gr_k_now multiply = 0.5 } }
+			remove_variable = zz_ef_gr_k_now
+		}
+		set_variable = { name = zz_ef_f_aint value = scope:g_aint }
+		# В5.4 (5.10): the interest to our own CB is not a payment abroad
+		change_variable = { name = zz_ef_f_aint add = zz_ef_v_cbl_int }
+		# В1.6 (5.10 evening): who has additional income - expenses (the world sum +0.25-0.75M a month, run s1g)
+		if = {
+			limit = {
+				OR = {
+					var:zz_ef_f_aint > 1000
+					var:zz_ef_f_aint < -1000
+				}
+			}
+			debug_log = "EFA|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|aint [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_aint')|0]|cbl_int [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_cbl_int')|0]|cbm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cbm_v')|0]|fdi [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fdi_mod_v')|0]"
+		}
+		# night 2, item 4: trade and dividends abroad in money, for the leak
+		# and Hume (values file)
+		set_variable = { name = zz_ef_f_trade value = zz_ef_trade_net_week }
+		# Е.3 (5.10): imports of the week for the balance of payments' "paid out" group (exports = net + imports)
+		set_variable = { name = zz_ef_f_imp value = zz_ef_trade_imports_week }
+		# В1.6 (5.10 evening): exports at base prices and the treasury's trade fees, for the world trade pool
+		set_variable = { name = zz_ef_f_exp value = zz_ef_trade_exports_week }
+		set_variable = { name = zz_ef_f_tfees value = scope:g_tfees }
+		# В3.3: a customs union member's account, for the market owner's side
+		if = {
+			limit = { zz_ef_cu_member = yes }
+			set_variable = { name = zz_ef_member_trade value = var:zz_ef_f_trade }
+		}
+		else_if = {
+			limit = { has_variable = zz_ef_member_trade }
+			remove_variable = zz_ef_member_trade
+		}
+		set_variable = { name = zz_ef_f_trade_fin value = zz_ef_trade_fin_week }
+		set_variable = { name = zz_ef_f_div value = zz_ef_div_net_week }
+		set_variable = { name = zz_ef_f_leak value = zz_ef_leak_week }
+		zz_ef_pop_savings_step = yes
+		zz_ef_cb_hume_step = yes
+		# Д2.30 (6.10 day): our currency held by other CBs lies in our banks (zz_ef_nr_deposits.txt)
+		zz_ef_nr_dep_step = yes
+		zz_ef_consumer_credit_step = yes
+		zz_ef_pop_extra_income_step = yes
+		if = {
+			limit = {
+				OR = {
+					is_player = yes
+					gdp > 20000000
+					zz_ef_cu_member = yes
+				}
+			}
+			debug_log = "EFR|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|ext [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_ext')|0]|leak [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_leak')|0]|savings [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_savings')|0]|deposits [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_deposits')|0]|inflow [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_inflow')|0]|dep_in [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_dep_in')|0]|dep_out [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_dep_out')|0]|dep_int [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_dep_int')|0]|pool [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pool')|0]|abr [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_abr')|0]|ext_net [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_ext_net')|0]|hume [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_hume')|0]|metal [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_metal')|0]|mv0 [THIS.GetCountry.MakeScope.ScriptValue('money_value_0')|2]|pool_other [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_pool_other')|0]|tr_other [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_tr_other')|0]|bc_debt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bc_debt')|0]|cc_debt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cc_debt')|0]|cc_net [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_cc_net')|0]|cc_wage [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cc_wage_add')|2]|dependents [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_dependents')|0]|d_tc [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_d_tc')|0]|tc [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_tc_cash')|0]|norm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_cash_norm')|0]|g_imp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_imp')|0]|g_exp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_exp')|0]|g_surplus [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_surplus')|0]|g_fown [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_fown')|0]|g_aown [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_aown')|0]|g_poolchg [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_poolchg')|0]|g_pcons [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_pcons')|0]|g_grate [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_grate')|4]|g_maxcred [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_maxcred')|0]|g_wgdp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_wgdp')|0]|cpi [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_price_index')|2]|mint [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_mint')|0]|mint_tr [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_mint_tr')|0]|gmined [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gold_mined_week')|1]|fx [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fx_reserves_metal')|0]|bc_new [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_bc_new')|0]|bc_paid [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_bc_paid')|0]|svc [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_bc_svc')|0]|trade [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_trade')|0]|tfin [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_trade_fin')|0]|div [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_div')|0]|profit [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_profit_week')|0]|wrate [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_wrate')|5]|ipay [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_ipay')|0]|sdebt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_sdebt')|0]|sdebtf [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_sdebtf')|3]|principal [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_debt_principal')|0]|ir_add [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_ir_add')|4]|ir_mult [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_ir_mult')|4]|grt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gov_rate_target')|4]|govlv [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gov_levels')|1]|privlv [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_priv_levels')|1]|d_govlv [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_d_govlv')|1]|fxm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_fx_metal')|0]|s2g [THIS.GetCountry.MakeScope.ScriptValue('silver_to_gold_rate')|5]|csub [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_clr_sub')|0]|csent [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_clr_sent')|0]|gpm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_gold_per_money')|5]|event_sav [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_event_sav')|0]|gr_k [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gr_k_v')|3]|sav_wealth [THIS.GetCountry.MakeScope.Var('zz_ef_f_sav_wealth').GetValue|0]|sav_norm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_sav_norm')|0]|buyback_m [THIS.GetCountry.MakeScope.Var('zz_ef_f_mt_buyback_money').GetValue|0]|nr_dep [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_nr_dep_v')|0]|f_nr_dep [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_nr_dep')|0]|liab_all [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fx_liab_all')|0]|nr_int [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_nr_int')|0]|hdem [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fx_holders_demand_m')|1]"
+			# UI.7 (3.10): the "прочее" of each account card (zz_ef_money_log_rest.txt,
+			# generated) -- here, after the receiver set the week's pool_other, tr_other,
+			# inflow and abr: at the step the log read last week's (run e0_4)
+			zz_ef_money_log_rest = yes
+			# UI.7б probe (3.10): pops' income from the engine, per pop
+			zz_ef_probe_pop_income = yes
+		}
+	}
+}
+
+# var:zz_ef_w_<F> = var:zz_ef_f_<F> (0 if unset); var:zz_ef_f_<F> = 0.
+zz_ef_money_window_roll = {
+	set_variable = { name = zz_ef_w_$F$ value = 0 }
+	if = {
+		limit = { has_variable = zz_ef_f_$F$ }
+		set_variable = { name = zz_ef_w_$F$ value = var:zz_ef_f_$F$ }
+	}
+	set_variable = { name = zz_ef_f_$F$ value = 0 }
+}
+
+# Pops' savings (decided 2026-09-30: savings = the money the engine lost,
+# merged -- pops' income left over, which vanilla turns into wealth, and
+# payments abroad inside the market). var:zz_ef_pop_savings (S) holds all,
+# var:zz_ef_pop_deposits (D) the part in banks; cash at hand = S - D.
+# Deposits are real engine money again: add_investment_pool. D moves 5% of
+# the gap a week towards S x the deposit share (by the key rate); interest at
+# the deposit rate is paid from the pool into D. The operations fall into the
+# next week's window and are taken out of that week's leak.
+zz_ef_pop_savings_step = {
+	if = {
+		limit = { NOT = { has_variable = zz_ef_pop_savings } }
+		# pops' starting cash (1.10 evening): M0 is cash at hand, it cannot
+		# start at zero; zz_ef_pop_start_savings
+		set_variable = { name = zz_ef_pop_savings value = zz_ef_pop_start_savings }
+		# Е.7 (5.10, Д.4): over the cash norm -- deposits from the start, the money in the banks' pool
+		set_variable = { name = zz_ef_pop_deposits value = zz_ef_pop_start_deposits }
+		add_investment_pool = var:zz_ef_pop_deposits
+		# stage 2, step 3 (6.10): the banks' start metal by the reserve norm (scripted_effects/zz_ef_metal_accounts.txt)
+		zz_ef_metal_start_banks = yes
+	}
+	set_variable = { name = zz_ef_f_inflow value = zz_ef_v_f_leak }
+	change_variable = { name = zz_ef_f_inflow multiply = -1 }
+	# The first weeks of a game are the engine settling (run 14: Britain's
+	# treasury 21 -> 39M in the second week, read as pops spending 20M of
+	# savings they never had): no inflow while zz_ef_weeks_run < 3.
+	if = {
+		limit = {
+			OR = {
+				NOT = { has_variable = zz_ef_weeks_run }
+				var:zz_ef_weeks_run < 3
+			}
+		}
+		set_variable = { name = zz_ef_f_inflow value = 0 }
+	}
+	change_variable = { name = zz_ef_pop_savings add = var:zz_ef_f_inflow }
+	# В1.2 (3.10): levels sold to companies -- the price to the sellers' savings
+	# (zz_ef_v_f_buyout); the pool's loss stays out of the leak.
+	set_variable = { name = zz_ef_f_buyout_got value = 0 }
+	if = {
+		limit = {
+			has_variable = zz_ef_weeks_run
+			var:zz_ef_weeks_run >= 3
+		}
+		set_variable = { name = zz_ef_f_buyout_got value = zz_ef_v_f_buyout }
+		change_variable = { name = zz_ef_pop_savings add = var:zz_ef_f_buyout_got }
+	}
+
+	# В1.6 / ИВ.1 (the user 5.10 evening, (a)): the treasury's event spending and income (the budget's additional
+	# expenses / income -- expeditions, "developing the can opener", DLC events; E&F's interest to its own CB not
+	# counted) pair with pops' savings: what the treasury spent on an event is an order at home -- into the savings;
+	# what it got from one -- out of them (at most what they hold). The engine itself only destroys / creates it.
+	set_variable = { name = zz_ef_f_event_sav value = 0 }
+	if = {
+		limit = {
+			has_variable = zz_ef_weeks_run
+			var:zz_ef_weeks_run >= 3
+		}
+		set_variable = {
+			name = zz_ef_f_event_sav
+			value = {
+				value = zz_ef_v_f_aint
+				multiply = -1
+				min = {
+					value = var:zz_ef_pop_savings
+					min = 0
+					multiply = -1
+				}
+			}
+		}
+		change_variable = { name = zz_ef_pop_savings add = var:zz_ef_f_event_sav }
+	}
+	# Stage 2, step 6 (Д2.20, Д2.22 в, 6.10): savings over their norm (0.3..0.6 GDP by the deposit rate) -- 10% of the
+	# excess a week leaves the money into wealth; the deposits follow the cash norm inside what is left
+	set_variable = { name = zz_ef_f_sav_wealth value = 0 }
+	if = {
+		limit = {
+			has_variable = zz_ef_weeks_run
+			var:zz_ef_weeks_run >= 3
+		}
+		set_variable = { name = zz_ef_f_sav_wealth value = zz_ef_sav_to_wealth }
+		change_variable = { name = zz_ef_pop_savings subtract = var:zz_ef_f_sav_wealth }
+	}
+	set_variable = { name = zz_ef_f_dep_in value = zz_ef_dep_in }
+	set_variable = { name = zz_ef_f_dep_out value = zz_ef_dep_out }
+	add_investment_pool = var:zz_ef_f_dep_in
+	change_variable = { name = zz_ef_pop_deposits add = var:zz_ef_f_dep_in }
+	add_investment_pool = {
+		value = var:zz_ef_f_dep_out
+		multiply = -1
+	}
+	change_variable = { name = zz_ef_pop_deposits subtract = var:zz_ef_f_dep_out }
+
+	set_variable = { name = zz_ef_f_dep_int value = zz_ef_dep_interest }
+	add_investment_pool = {
+		value = var:zz_ef_f_dep_int
+		multiply = -1
+	}
+	change_variable = { name = zz_ef_pop_deposits add = var:zz_ef_f_dep_int }
+	change_variable = { name = zz_ef_pop_savings add = var:zz_ef_f_dep_int }
+}
+
+# EF.48 item 6 (the user, 1.10): the CB and abroad are one account -- the CB
+# settles every payment abroad. Its reserves: metal (E&F's var:gold_state_1 /
+# silver_state_1 on the CB's state, re-read by E&F's storing_gold_1 every
+# month, so a change there stays) and E&F's currency-good stock. The week's
+# net flow abroad (zz_ef_ext_net_week: budget lines with other countries,
+# trade centres' cash, the pool's unexplained change, foreign bonds) moves
+# the metal at the currency's value (Hume's price-specie flow): an outflow
+# pays out metal, an inflow brings it in. Metal standards with a central
+# bank only (fiat: nothing moves, the rate does). Metal and money fall by
+# the same fraction, so an outflow alone does not move the currency's value.
+zz_ef_cb_hume_step = {
+	set_variable = { name = zz_ef_f_ext_net value = zz_ef_ext_net_week }
+	set_variable = { name = zz_ef_f_hume value = 0 }
+	set_variable = { name = zz_ef_f_hume_money value = 0 }
+	# П.6 (the user, 4.10, В.2 / В.3): the world clearing -- the outflow pays the house in metal (by trust in
+	# the currency) and in the own currency, the inflow takes a slice of what the house holds; every country
+	# with a CB, fiat too (pays in currency). Was: the metal moved by the country's own flow with nobody on the
+	# other side (generated, scripted_effects/zz_ef_clearing.txt; sets var:zz_ef_f_hume, the CB's metal, native).
+	zz_ef_clr_step = yes
+	if = {
+		limit = {
+			has_modifier = has_central_bank
+			OR = {
+				has_law = law_type:law_gold_standard
+				has_law = law_type:law_silver_standard
+				has_law = law_type:law_bimetallism_standard
+			}
+		}
+		# M.3 (the user, 4.10): Hume at full strength -- the metal that came in is coined: the CB
+		# issues as much money at the parity; the metal that went out takes as much money out of
+		# circulation. The engine has no effect on a building's cash, so the money goes into / out of
+		# the banks (the pool: the exporters' receipts deposited; the importers' payments drawn),
+		# at most the pool on the way out. The pool operation falls into next week's window, as the
+		# deposits do (var:zz_ef_w_hume_money in the pool's and the leak's accounts).
+		# Check (night 4.10): the engine already pays exporters for the goods sold abroad and takes
+		# the importers' money, so part of this may count twice -- switch: zz_ef_hume_money_on.
+		if = {
+			limit = {
+				has_variable = money_value_target_1
+				var:money_value_target_1 > 0
+				NOT = { var:zz_ef_f_hume = 0 }
+				zz_ef_hume_money_on > 0
+			}
+			set_variable = { name = zz_ef_f_hume_money value = var:zz_ef_f_hume }
+			change_variable = { name = zz_ef_f_hume_money divide = var:money_value_target_1 }
+			if = {
+				limit = { var:zz_ef_f_hume_money < 0 }
+				set_variable = {
+					name = zz_ef_f_hume_money
+					value = {
+						value = var:zz_ef_f_hume_money
+						min = {
+							value = investment_pool
+							min = 0
+							multiply = -1
+						}
+					}
+				}
+			}
+			add_investment_pool = var:zz_ef_f_hume_money
+		}
+	}
+	# В1.6 (5.10): the world's sums of the week (the EFG line)
+	zz_ef_world_acc = yes
+}
+
+# В1.6 (5.10): the world line. Every country's receiver adds its week to global sums in GOLD (the flow x
+# zz_ef_clr_gold_per_money; a country with no value of its money counts in n0 only); the first receiver of the
+# next 7-day window writes them (EFG|date|WORLD|..., tools/check_flows.py) and zeroes them. Keys: in / out -- the
+# net inflows / outflows with abroad (zz_ef_f_ext_net) of all countries; nocl -- |flow| of the countries outside
+# the clearing (no CB); subj_in / subj_out -- the subjects' part (В1.7); hume -- the CBs' metal moved by the
+# clearing, + in / - out, signed sum and |sum|; n / n0 -- countries counted / with no gold value. In the engine's
+# money (5.10): in_m / out_m; trade_m, abr_m, div_m, bond_m -- the signed world sums of the flow's parts (bond_m:
+# the rest -- bonds and the bond ledger); sub -- the members' flows settled by their heads (В1.7), gold.
+zz_ef_world_acc = {
+	if = {
+		limit = { NOT = { has_global_variable = zz_ef_wld_window } }
+		if = {
+			limit = { has_global_variable = zz_ef_wld_n }
+			# stage 2, step 8 (6.10): the world line of metal (scripted_effects/zz_ef_metal_accounts.txt)
+			zz_ef_world_metal_log = yes
+			debug_log = "EFG|[TimeKeeper.GetCurrentDate.GetString]|WORLD|in [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_in_v')|0]|out [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_out_v')|0]|nocl [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_nocl_v')|0]|subj_in [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_subj_in_v')|0]|subj_out [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_subj_out_v')|0]|hume [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_hume_v')|0]|hume_abs [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_hume_abs_v')|0]|n [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_n_v')|0]|n0 [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_n0_v')|0]|clr_in [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_in_last_v')|0]|clr_out [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_out_last_v')|0]|clr_pot [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_pot_value')|0]|in_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_in_m_v')|0]|out_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_out_m_v')|0]|trade_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_trade_m_v')|0]|abr_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_abr_m_v')|0]|div_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_div_m_v')|0]|bond_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_bond_m_v')|0]|sub [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_sub_v')|0]|gpm_avg [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_gpm_avg_v')|5]|wexp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_wexp_v')|0]|wimp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_wimp_v')|0]|wfee [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_wfee_v')|0]|waint [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_waint_v')|0]|kr [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wtr_kr_v')|4]|kp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wtr_kp_v')|4]|waown [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_waown_v')|0]|wfown [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_wfown_v')|0]|dkr [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wdv_kr_v')|4]|dkp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wdv_kp_v')|4]"
+		}
+		# the world's average value of money in gold, weighted by GDP (the price of a market with no currency)
+		if = {
+			limit = {
+				has_global_variable = zz_ef_wld_gpm_w
+				global_var:zz_ef_wld_gpm_w > 0
+			}
+			set_global_variable = {
+				name = zz_ef_wld_gpm_avg
+				value = {
+					value = global_var:zz_ef_wld_gpm_wsum
+					divide = global_var:zz_ef_wld_gpm_w
+				}
+			}
+		}
+		# В1.6: the world trade pool's ratios for the next window
+		set_global_variable = { name = zz_ef_wtr_kr value = 1 }
+		set_global_variable = { name = zz_ef_wtr_kp value = 1 }
+		if = {
+			limit = { has_global_variable = zz_ef_wld_wexp }
+			if = {
+				limit = {
+					global_var:zz_ef_wld_wimp > 0
+					global_var:zz_ef_wld_wexp > 0
+				}
+				set_global_variable = {
+					name = zz_ef_wtr_kr
+					value = {
+						value = global_var:zz_ef_wld_wimp
+						divide = {
+							value = global_var:zz_ef_wld_wexp
+							add = global_var:zz_ef_wld_wfee
+						}
+						max = 1
+					}
+				}
+				set_global_variable = {
+					name = zz_ef_wtr_kp
+					value = {
+						value = global_var:zz_ef_wld_wexp
+						add = global_var:zz_ef_wld_wfee
+						divide = global_var:zz_ef_wld_wimp
+						max = 1
+					}
+				}
+			}
+		}
+		# В1.6: the world dividends pool's ratios (the GDP owned abroad against the foreign-owned)
+		set_global_variable = { name = zz_ef_wdv_kr value = 1 }
+		set_global_variable = { name = zz_ef_wdv_kp value = 1 }
+		if = {
+			limit = {
+				has_global_variable = zz_ef_wld_waown
+				global_var:zz_ef_wld_waown > 0
+				global_var:zz_ef_wld_wfown > 0
+			}
+			set_global_variable = {
+				name = zz_ef_wdv_kr
+				value = {
+					value = global_var:zz_ef_wld_wfown
+					divide = global_var:zz_ef_wld_waown
+					max = 1
+				}
+			}
+			set_global_variable = {
+				name = zz_ef_wdv_kp
+				value = {
+					value = global_var:zz_ef_wld_waown
+					divide = global_var:zz_ef_wld_wfown
+					max = 1
+				}
+			}
+		}
+		set_global_variable = { name = zz_ef_wld_waown value = 0 }
+		set_global_variable = { name = zz_ef_wld_wfown value = 0 }
+		set_global_variable = { name = zz_ef_wld_wexp value = 0 }
+		set_global_variable = { name = zz_ef_wld_wimp value = 0 }
+		set_global_variable = { name = zz_ef_wld_wfee value = 0 }
+		set_global_variable = { name = zz_ef_wld_waint value = 0 }
+		set_global_variable = { name = zz_ef_wld_gpm_wsum value = 0 }
+		set_global_variable = { name = zz_ef_wld_gpm_w value = 0 }
+		set_global_variable = { name = zz_ef_wld_window value = yes days = 7 }
+		set_global_variable = { name = zz_ef_wld_in value = 0 }
+		set_global_variable = { name = zz_ef_wld_out value = 0 }
+		set_global_variable = { name = zz_ef_wld_nocl value = 0 }
+		set_global_variable = { name = zz_ef_wld_subj_in value = 0 }
+		set_global_variable = { name = zz_ef_wld_subj_out value = 0 }
+		set_global_variable = { name = zz_ef_wld_hume value = 0 }
+		set_global_variable = { name = zz_ef_wld_hume_abs value = 0 }
+		set_global_variable = { name = zz_ef_wld_n value = 0 }
+		set_global_variable = { name = zz_ef_wld_n0 value = 0 }
+		set_global_variable = { name = zz_ef_wld_in_m value = 0 }
+		set_global_variable = { name = zz_ef_wld_out_m value = 0 }
+		set_global_variable = { name = zz_ef_wld_trade_m value = 0 }
+		set_global_variable = { name = zz_ef_wld_abr_m value = 0 }
+		set_global_variable = { name = zz_ef_wld_div_m value = 0 }
+		set_global_variable = { name = zz_ef_wld_bond_m value = 0 }
+		set_global_variable = { name = zz_ef_wld_sub value = 0 }
+	}
+	change_global_variable = { name = zz_ef_wld_n add = 1 }
+	change_global_variable = { name = zz_ef_wld_waown add = zz_ef_v_g_aown }
+	change_global_variable = { name = zz_ef_wld_wfown add = zz_ef_v_g_fown }
+	change_global_variable = { name = zz_ef_wld_wexp add = zz_ef_v_f_exp }
+	change_global_variable = { name = zz_ef_wld_wimp add = zz_ef_v_f_imp }
+	change_global_variable = { name = zz_ef_wld_wfee add = zz_ef_v_f_tfees }
+	change_global_variable = { name = zz_ef_wld_waint add = zz_ef_v_f_aint }
+	if = {
+		limit = {
+			zz_ef_clr_gpm_own > 0
+			gdp > 0
+		}
+		change_global_variable = { name = zz_ef_wld_gpm_wsum add = { value = zz_ef_clr_gpm_own multiply = gdp } }
+		change_global_variable = { name = zz_ef_wld_gpm_w add = gdp }
+	}
+	# В1.6 item 5 (5.10): the same in the engine's money, every country (its payments abroad are in it), and the
+	# signed sums of the flow's parts -- a part whose world sum is not ~0 has a payment without a counterpart
+	if = {
+		limit = { var:zz_ef_f_ext_net > 0 }
+		change_global_variable = { name = zz_ef_wld_in_m add = var:zz_ef_f_ext_net }
+	}
+	else = {
+		change_global_variable = { name = zz_ef_wld_out_m subtract = var:zz_ef_f_ext_net }
+	}
+	change_global_variable = { name = zz_ef_wld_trade_m add = zz_ef_v_f_trade }
+	change_global_variable = { name = zz_ef_wld_abr_m add = { value = zz_ef_v_f_abr subtract = zz_ef_tr_abr_overlap } }
+	change_global_variable = { name = zz_ef_wld_div_m add = zz_ef_v_f_div }
+	change_global_variable = {
+		name = zz_ef_wld_bond_m
+		add = {
+			value = var:zz_ef_f_ext_net
+			subtract = zz_ef_v_f_trade
+			subtract = zz_ef_v_f_abr
+			add = zz_ef_tr_abr_overlap
+			subtract = zz_ef_v_f_div
+		}
+	}
+	# В1.7: the members' flows (gold) their heads settled this week
+	change_global_variable = { name = zz_ef_wld_sub add = zz_ef_v_f_clr_sub }
+	if = {
+		limit = { zz_ef_clr_gold_per_money > 0 }
+		set_variable = { name = zz_ef_wld_g value = var:zz_ef_f_ext_net }
+		change_variable = { name = zz_ef_wld_g multiply = zz_ef_clr_gold_per_money }
+		if = {
+			limit = { var:zz_ef_wld_g > 0 }
+			change_global_variable = { name = zz_ef_wld_in add = var:zz_ef_wld_g }
+			if = {
+				limit = { is_subject = yes }
+				change_global_variable = { name = zz_ef_wld_subj_in add = var:zz_ef_wld_g }
+			}
+		}
+		else = {
+			change_global_variable = { name = zz_ef_wld_out subtract = var:zz_ef_wld_g }
+			if = {
+				limit = { is_subject = yes }
+				change_global_variable = { name = zz_ef_wld_subj_out subtract = var:zz_ef_wld_g }
+			}
+		}
+		if = {
+			limit = { NOT = { has_modifier = has_central_bank } }
+			if = {
+				limit = { var:zz_ef_wld_g < 0 }
+				change_variable = { name = zz_ef_wld_g multiply = -1 }
+			}
+			change_global_variable = { name = zz_ef_wld_nocl add = var:zz_ef_wld_g }
+		}
+		remove_variable = zz_ef_wld_g
+	}
+	else = {
+		change_global_variable = { name = zz_ef_wld_n0 add = 1 }
+	}
+	if = {
+		limit = {
+			has_variable = zz_ef_f_hume
+			NOT = { var:zz_ef_f_hume = 0 }
+		}
+		set_variable = { name = zz_ef_wld_g value = var:zz_ef_f_hume }
+		if = {
+			limit = { has_law = law_type:law_silver_standard }
+			change_variable = { name = zz_ef_wld_g multiply = silver_to_gold_rate }
+		}
+		change_global_variable = { name = zz_ef_wld_hume add = var:zz_ef_wld_g }
+		if = {
+			limit = { var:zz_ef_wld_g < 0 }
+			change_variable = { name = zz_ef_wld_g multiply = -1 }
+		}
+		change_global_variable = { name = zz_ef_wld_hume_abs add = var:zz_ef_wld_g }
+		remove_variable = zz_ef_wld_g
+	}
+}
+
+# EF.48 item 4: consumer credit, in the receiver after the savings (its pool
+# operations fall into the next week's window, like the deposits). Values:
+# script_values/zz_ef_money_model_values.txt.
+zz_ef_consumer_credit_step = {
+	if = {
+		limit = {
+			has_modifier = has_central_bank
+			has_variable = zz_ef_dependents
+			var:zz_ef_dependents > 0
+		}
+		if = {
+			limit = { NOT = { has_variable = zz_ef_cc_debt } }
+			set_variable = { name = zz_ef_cc_debt value = 0 }
+		}
+		set_variable = { name = zz_ef_f_cc_issue value = zz_ef_cc_issue }
+		set_variable = { name = zz_ef_f_cc_repay value = zz_ef_cc_repay }
+		set_variable = { name = zz_ef_f_cc_int value = zz_ef_cc_interest }
+		set_variable = { name = zz_ef_f_cc_net value = var:zz_ef_f_cc_issue }
+		change_variable = { name = zz_ef_f_cc_net subtract = var:zz_ef_f_cc_repay }
+		change_variable = { name = zz_ef_f_cc_net subtract = var:zz_ef_f_cc_int }
+		# pops cannot pay more than the floor (values file): cut the repayment,
+		# then the interest, which is added to the debt
+		set_variable = { name = zz_ef_cc_short value = zz_ef_cc_floor_week }
+		change_variable = { name = zz_ef_cc_short subtract = var:zz_ef_f_cc_net }
+		if = {
+			limit = { var:zz_ef_cc_short > 0 }
+			if = {
+				limit = { var:zz_ef_cc_short > var:zz_ef_f_cc_repay }
+				change_variable = { name = zz_ef_cc_short subtract = var:zz_ef_f_cc_repay }
+				set_variable = { name = zz_ef_f_cc_repay value = 0 }
+				change_variable = { name = zz_ef_f_cc_int subtract = var:zz_ef_cc_short }
+				change_variable = { name = zz_ef_cc_debt add = var:zz_ef_cc_short }
+			}
+			else = {
+				change_variable = { name = zz_ef_f_cc_repay subtract = var:zz_ef_cc_short }
+			}
+			set_variable = { name = zz_ef_f_cc_net value = zz_ef_cc_floor_week }
+		}
+		remove_variable = zz_ef_cc_short
+		change_variable = { name = zz_ef_cc_debt add = var:zz_ef_f_cc_issue }
+		change_variable = { name = zz_ef_cc_debt subtract = var:zz_ef_f_cc_repay }
+		# pool side
+		add_investment_pool = {
+			value = var:zz_ef_f_cc_net
+			multiply = -1
+		}
+	}
+}
+
+# The dependents' surcharge for the coming week: the consumer credit's net
+# flow (zz_ef_cc_wage_add). Every country with dependents: without a CB it is
+# 0 and clears the surcharge of the savings spending tried in run 14.
+zz_ef_pop_extra_income_step = {
+	if = {
+		limit = {
+			has_variable = zz_ef_dependents
+			var:zz_ef_dependents > 0
+		}
+		remove_modifier = zz_ef_consumer_credit
+		add_modifier = {
+			name = zz_ef_consumer_credit
+			multiplier = zz_ef_cc_wage_add
+		}
+	}
+}
+
+# ---- the monthly step -------------------------------------------------------
+
+zz_ef_money_model_monthly_step = {
+	# В3.2 (5.10): a subject of a metal-standard overlord takes its standard, currency and parity
+	# (scripted_effects/zz_ef_currency_zone.txt, generated)
+	zz_ef_cur_zone_step = yes
+	# night 2, item 1: the silver-to-gold rate from market prices
+	zz_ef_silver_rate_update = yes
+	# М.9 (4.10): the reference currency's value / parity for the strength of the others
+	zz_ef_reference_strength_step = yes
+	# Е.10 (5.10, Д.5): the strength's trade modifier, against the reference
+	zz_ef_currency_trade_step = yes
+	# Д2.7а (5.10): the CB's metal = what its building bought -- weekly since 6.10 (zz_ef_metal_week_step)
+	# Ф.2 (4.10): the issuer pays its foreign private banks' interest, in January
+	if = {
+		limit = { month = 0 }
+		zz_ef_privbank_interest_pay = yes
+	}
+	# В2.1 (2.10): part of the net exports paid in the importer's currency
+	# (generated, scripted_effects/zz_ef_reserve_trade.txt). П.6 (4.10): off -- the
+	# weekly clearing pays the outflow in metal and the payer's currency
+	# (zz_ef_clr_step), the monthly pair swap on top of it would count it twice.
+	# zz_ef_rc_step = yes
+	# В2.1: AI central banks on the forex monthly was tried and taken back
+	# (run 24, 2.10): every E&F purchase is at parity, twelve a year blew the
+	# reserves up (France's cover 64% -> 436%, Russia's currency 1.2 billion
+	# silver in 2.5 years). E&F's yearly ai_buy_sell_currency stays.
+	# night 2: every currency once a month (Hanover's thaler, silver rates)
+	if = {
+		limit = {
+			has_variable = money_value_target_1
+			gdp > 1000000
+		}
+		debug_log = "EFX|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|std [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_std_code')|0]|cb [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_has_cb')|0]|mv0 [THIS.GetCountry.MakeScope.ScriptValue('money_value_0')|3]|target1 [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_valuation')|3]|gpu [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gold_per_unit')|4]|subj [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_is_subject')|0]|cover [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_cover')|3]|gold [THIS.GetCountry.MakeScope.ScriptValue('gold_state_native_for_stockpile')|0]|silver [THIS.GetCountry.MakeScope.ScriptValue('silver_state_native_for_stockpile')|0]|fxm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_fx_metal')|0]|own [THIS.GetCountry.MakeScope.ScriptValue('money_supply_state')|0]|m2 [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_agg_m2')|0]|crisis [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_crisis_flag')|0]|s2g [THIS.GetCountry.MakeScope.ScriptValue('silver_to_gold_rate')|5]|median [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_money_median')|3]|gdp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_raw_gdp')|0]|rcin [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_rc_fx_in')|0]|rcback [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_rc_back')|0]|rcmetal [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_rc_metal_out')|0]|liab [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fx_liab_all')|0]|clr_ratio [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_ratio_v')|3]|clr_pot [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_pot_value')|0]|clr_pay [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_pay_ratio_v')|3]|clr_in [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_in_last_v')|0]|clr_out [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_out_last_v')|0]|clr_hume [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_hume')|0]|clr_cur_out [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_w_clr_cur_out')|0]|clr_fx_in [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_w_clr_fx_in_money')|0]|clr_back [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_w_clr_own_back')|0]|share [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_metal_share')|2]|strength [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_currency_strength')|3]|extn [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_ext_net')|0]|gpm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_gold_per_money')|5]|trade [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_trade')|0]|mtrade [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_members_trade_sum')|0]|cum [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cu_member_v')|0]"
+	}
+	# EF.48 item 4: dependents for the surcharge (consumer credit; since 1.10
+	# evening also the savings spent -- every country).
+	set_variable = { name = zz_ef_dependents value = zz_ef_dependents_count }
+
+	# E&F's currency good moves monthly (stockpile_currency_type_1).
+	zz_ef_money_ledger_delta = { ACC = cb VALUE = money_supply_state }
+
+	# EF.31 items 8-9: the price of the government's rate policy.
+	zz_ef_rate_policy_costs = yes
+
+	# night 2, item 5: the government's rate
+	zz_ef_gov_rate_step = yes
+
+	# В4.1 (2.10): devaluation / revaluation towards a cover target
+	# (generated, scripted_effects/zz_ef_monetary_policy.txt)
+	zz_ef_mp_step = yes
+
+	# СТР.5 (CB company dividends -> treasury) removed 5.10 (Д2.5): the central bank is the state's again.
+
+	# EF.31: the rate's share of private construction. PSC rewrites the whole
+	# private share every week; it keeps this line only because our
+	# REPLACE of private_construction_increase adds it back from the variable
+	# (СТР.5, script_values/zz_ef_psc_private_allocation.txt).
+	set_variable = { name = zz_ef_rate_constr_applied value = zz_ef_rate_construction_mult }
+	remove_modifier = zz_ef_rate_private_construction
+	add_modifier = {
+		name = zz_ef_rate_private_construction
+		multiplier = var:zz_ef_rate_constr_applied
+	}
+}
+
+# History rings: var:zz_ef_<M>_w1..4 / q1..13 / r1..20 <- var:zz_ef_prev_<M>
+# (last week's value), oldest out. Nothing before the first recorded week.
+zz_ef_ring_w_push = {
+	if = {
+		limit = { has_variable = zz_ef_prev_$M$ }
+		if = { limit = { has_variable = zz_ef_$M$_w3 } set_variable = { name = zz_ef_$M$_w4 value = var:zz_ef_$M$_w3 } }
+		if = { limit = { has_variable = zz_ef_$M$_w2 } set_variable = { name = zz_ef_$M$_w3 value = var:zz_ef_$M$_w2 } }
+		if = { limit = { has_variable = zz_ef_$M$_w1 } set_variable = { name = zz_ef_$M$_w2 value = var:zz_ef_$M$_w1 } }
+		set_variable = { name = zz_ef_$M$_w1 value = var:zz_ef_prev_$M$ }
+	}
+}
+zz_ef_ring_r_push = {
+	if = {
+		limit = { has_variable = zz_ef_prev_$M$ }
+		if = { limit = { has_variable = zz_ef_$M$_r19 } set_variable = { name = zz_ef_$M$_r20 value = var:zz_ef_$M$_r19 } }
+		if = { limit = { has_variable = zz_ef_$M$_r18 } set_variable = { name = zz_ef_$M$_r19 value = var:zz_ef_$M$_r18 } }
+		if = { limit = { has_variable = zz_ef_$M$_r17 } set_variable = { name = zz_ef_$M$_r18 value = var:zz_ef_$M$_r17 } }
+		if = { limit = { has_variable = zz_ef_$M$_r16 } set_variable = { name = zz_ef_$M$_r17 value = var:zz_ef_$M$_r16 } }
+		if = { limit = { has_variable = zz_ef_$M$_r15 } set_variable = { name = zz_ef_$M$_r16 value = var:zz_ef_$M$_r15 } }
+		if = { limit = { has_variable = zz_ef_$M$_r14 } set_variable = { name = zz_ef_$M$_r15 value = var:zz_ef_$M$_r14 } }
+		if = { limit = { has_variable = zz_ef_$M$_r13 } set_variable = { name = zz_ef_$M$_r14 value = var:zz_ef_$M$_r13 } }
+		if = { limit = { has_variable = zz_ef_$M$_r12 } set_variable = { name = zz_ef_$M$_r13 value = var:zz_ef_$M$_r12 } }
+		if = { limit = { has_variable = zz_ef_$M$_r11 } set_variable = { name = zz_ef_$M$_r12 value = var:zz_ef_$M$_r11 } }
+		if = { limit = { has_variable = zz_ef_$M$_r10 } set_variable = { name = zz_ef_$M$_r11 value = var:zz_ef_$M$_r10 } }
+		if = { limit = { has_variable = zz_ef_$M$_r9 } set_variable = { name = zz_ef_$M$_r10 value = var:zz_ef_$M$_r9 } }
+		if = { limit = { has_variable = zz_ef_$M$_r8 } set_variable = { name = zz_ef_$M$_r9 value = var:zz_ef_$M$_r8 } }
+		if = { limit = { has_variable = zz_ef_$M$_r7 } set_variable = { name = zz_ef_$M$_r8 value = var:zz_ef_$M$_r7 } }
+		if = { limit = { has_variable = zz_ef_$M$_r6 } set_variable = { name = zz_ef_$M$_r7 value = var:zz_ef_$M$_r6 } }
+		if = { limit = { has_variable = zz_ef_$M$_r5 } set_variable = { name = zz_ef_$M$_r6 value = var:zz_ef_$M$_r5 } }
+		if = { limit = { has_variable = zz_ef_$M$_r4 } set_variable = { name = zz_ef_$M$_r5 value = var:zz_ef_$M$_r4 } }
+		if = { limit = { has_variable = zz_ef_$M$_r3 } set_variable = { name = zz_ef_$M$_r4 value = var:zz_ef_$M$_r3 } }
+		if = { limit = { has_variable = zz_ef_$M$_r2 } set_variable = { name = zz_ef_$M$_r3 value = var:zz_ef_$M$_r2 } }
+		if = { limit = { has_variable = zz_ef_$M$_r1 } set_variable = { name = zz_ef_$M$_r2 value = var:zz_ef_$M$_r1 } }
+		set_variable = { name = zz_ef_$M$_r1 value = var:zz_ef_prev_$M$ }
+	}
+}
+zz_ef_ring_q_push = {
+	if = {
+		limit = { has_variable = zz_ef_prev_$M$ }
+		zz_ef_ring_q_push_body = { M = $M$ }
+	}
+}
+zz_ef_ring_q_push_body = {
+	if = { limit = { has_variable = zz_ef_$M$_q12 } set_variable = { name = zz_ef_$M$_q13 value = var:zz_ef_$M$_q12 } }
+	if = { limit = { has_variable = zz_ef_$M$_q11 } set_variable = { name = zz_ef_$M$_q12 value = var:zz_ef_$M$_q11 } }
+	if = { limit = { has_variable = zz_ef_$M$_q10 } set_variable = { name = zz_ef_$M$_q11 value = var:zz_ef_$M$_q10 } }
+	if = { limit = { has_variable = zz_ef_$M$_q9 } set_variable = { name = zz_ef_$M$_q10 value = var:zz_ef_$M$_q9 } }
+	if = { limit = { has_variable = zz_ef_$M$_q8 } set_variable = { name = zz_ef_$M$_q9 value = var:zz_ef_$M$_q8 } }
+	if = { limit = { has_variable = zz_ef_$M$_q7 } set_variable = { name = zz_ef_$M$_q8 value = var:zz_ef_$M$_q7 } }
+	if = { limit = { has_variable = zz_ef_$M$_q6 } set_variable = { name = zz_ef_$M$_q7 value = var:zz_ef_$M$_q6 } }
+	if = { limit = { has_variable = zz_ef_$M$_q5 } set_variable = { name = zz_ef_$M$_q6 value = var:zz_ef_$M$_q5 } }
+	if = { limit = { has_variable = zz_ef_$M$_q4 } set_variable = { name = zz_ef_$M$_q5 value = var:zz_ef_$M$_q4 } }
+	if = { limit = { has_variable = zz_ef_$M$_q3 } set_variable = { name = zz_ef_$M$_q4 value = var:zz_ef_$M$_q3 } }
+	if = { limit = { has_variable = zz_ef_$M$_q2 } set_variable = { name = zz_ef_$M$_q3 value = var:zz_ef_$M$_q2 } }
+	if = { limit = { has_variable = zz_ef_$M$_q1 } set_variable = { name = zz_ef_$M$_q2 value = var:zz_ef_$M$_q1 } }
+	set_variable = { name = zz_ef_$M$_q1 value = var:zz_ef_prev_$M$ }
+}
+
+# var:zz_ef_d_<ACC> = VALUE now - VALUE at the previous step; var:zz_ef_prev_<ACC>
+# keeps this step's value.
+zz_ef_money_ledger_delta = {
+	if = {
+		limit = { has_variable = zz_ef_prev_$ACC$ }
+		set_variable = { name = zz_ef_d_$ACC$ value = $VALUE$ }
+		change_variable = { name = zz_ef_d_$ACC$ subtract = var:zz_ef_prev_$ACC$ }
+	}
+	else = {
+		set_variable = { name = zz_ef_d_$ACC$ value = 0 }
+	}
+	set_variable = { name = zz_ef_prev_$ACC$ value = $VALUE$ }
+}
+
+# EF.48 version 7 (1.10 evening): the CB's metal rescaled to cover
+# zz_ef_cover_normal (40%) of the money in circulation at the historical
+# parity. Metal standards with a CB only.
+zz_ef_metal_rescale_step = {
+	if = {
+		limit = {
+			has_modifier = has_central_bank
+			has_variable = money_value_target_1
+			var:money_value_target_1 > 0
+			OR = {
+				has_law = law_type:law_gold_standard
+				has_law = law_type:law_silver_standard
+				has_law = law_type:law_bimetallism_standard
+			}
+			zz_ef_cb_cover_ref > 0
+			# 6.10: some metal to scale (E&F's reserves read 0.01 with none)
+			central_bank_reserves > 1
+		}
+		set_variable = { name = zz_ef_metal_rescale value = zz_ef_cover_normal }
+		change_variable = { name = zz_ef_metal_rescale divide = zz_ef_cb_cover_ref }
+		# UI.7 (3.10): the CB card shows the rescale as a flow -- not at the
+		# first step, where the account has no change yet (run e0_5: +1 bn "other")
+		if = {
+			limit = { has_variable = zz_ef_prev_cbm }
+			set_variable = { name = zz_ef_f_cb_rescale value = var:zz_ef_metal_rescale }
+			change_variable = { name = zz_ef_f_cb_rescale subtract = 1 }
+			change_variable = { name = zz_ef_f_cb_rescale multiply = zz_ef_cb_money }
+		}
+		# every CB state, as E&F's gold_state_native_for_stockpile sums them
+		every_scope_state = {
+			limit = {
+				has_modifier = central_bank_historic_place
+			}
+			if = {
+				limit = { has_variable = gold_state_1 }
+				change_variable = { name = gold_state_1 multiply = owner.var:zz_ef_metal_rescale }
+			}
+			if = {
+				limit = { has_variable = silver_state_1 }
+				change_variable = { name = silver_state_1 multiply = owner.var:zz_ef_metal_rescale }
+			}
+			# night 2, item 2 (2.10): E&F's currency stocks went with the HOLDER's metal factor -- off since
+			# Д2.31 (6.10 day): a currency's stocks are cut by its issuer (zz_ef_fx_liab_trim, zz_ef_nr_deposits.txt)
+			# zz_ef_fx_stock_rescale = yes
+		}
+		if = {
+			limit = { has_variable = zz_ef_fx_metal }
+			change_variable = { name = zz_ef_fx_metal multiply = var:zz_ef_metal_rescale }
+		}
+	}
+	# Д2.23 (6.10): a CB with no metal at all gets the 40% too (the start's stock), in a CB state
+	else_if = {
+		limit = {
+			has_modifier = has_central_bank
+			has_variable = money_value_target_1
+			var:money_value_target_1 > 0
+			OR = {
+				has_law = law_type:law_gold_standard
+				has_law = law_type:law_silver_standard
+				has_law = law_type:law_bimetallism_standard
+			}
+			any_scope_state = { has_modifier = central_bank_historic_place }
+		}
+		set_variable = { name = zz_ef_metal_rescale value = zz_ef_rescale_money }
+		change_variable = { name = zz_ef_metal_rescale multiply = zz_ef_cover_normal }
+		change_variable = { name = zz_ef_metal_rescale multiply = var:money_value_target_1 }
+		random_scope_state = {
+			limit = { has_modifier = central_bank_historic_place }
+			if = {
+				limit = { owner = { has_law = law_type:law_silver_standard } }
+				if = { limit = { NOT = { has_variable = silver_state_1 } } set_variable = { name = silver_state_1 value = 0 } }
+				change_variable = { name = silver_state_1 add = owner.var:zz_ef_metal_rescale }
+			}
+			else = {
+				if = { limit = { NOT = { has_variable = gold_state_1 } } set_variable = { name = gold_state_1 value = 0 } }
+				change_variable = { name = gold_state_1 add = owner.var:zz_ef_metal_rescale }
+			}
+		}
+	}
+}
+
+# Night 2, item 2 (2.10): foreign currency in the CB's reserves, kept weekly
+# (zz_ef_fx_reserves_metal walks 95 currencies x the CB states; the national
+# capacity reads it hundreds of times a month). E&F values it in gold
+# (money_value_target_real_in_gold of the issuer); a silver standard holds
+# its cover in silver.
+zz_ef_fx_metal_update = {
+	set_variable = { name = zz_ef_fx_metal value = zz_ef_fx_reserves_metal }
+	if = {
+		limit = { has_law = law_type:law_silver_standard }
+		change_variable = { name = zz_ef_fx_metal multiply = gold_to_silver_rate }
+	}
+}
+
+# Night 2, item 3 (2.10): a seller redeems a currency in crisis for the
+# issuer's metal (generated sell_<currency>_currency_crisis,
+# scripted_effects/zz_ef_fx_crisis.txt). SELLER scope; var:zz_ef_crisis_due =
+# the holdings at the issuer's parity, in the issuer's metal. The issuer pays
+# from its CB capital's stock, at most what it holds; the seller gets it in
+# its own standard's metal at the market rate (silver_to_gold_rate). Was:
+# the issuer's metal set to 0, the sellers' stocks to 0, nobody paid.
+zz_ef_crisis_redeem = {
+	set_variable = { name = zz_ef_crisis_paid value = 0 }
+	set_variable = { name = zz_ef_crisis_got value = 0 }
+	if = {
+		limit = {
+			scope:overrated_currency_country_owner = { has_law = law_type:law_silver_standard }
+			scope:central_bank_site_overrated_currency_owner = { has_variable = silver_state_1 }
+		}
+		set_variable = {
+			name = zz_ef_crisis_paid
+			value = {
+				value = var:zz_ef_crisis_due
+				max = scope:central_bank_site_overrated_currency_owner.var:silver_state_1
+				min = 0
+			}
+		}
+		scope:central_bank_site_overrated_currency_owner = {
+			change_variable = { name = silver_state_1 subtract = scope:seller_root.var:zz_ef_crisis_paid }
+		}
+		set_variable = { name = zz_ef_crisis_got value = var:zz_ef_crisis_paid }
+		if = {
+			limit = { NOT = { has_law = law_type:law_silver_standard } }
+			change_variable = { name = zz_ef_crisis_got multiply = silver_to_gold_rate }
+		}
+	}
+	else_if = {
+		limit = {
+			scope:overrated_currency_country_owner = { NOT = { has_law = law_type:law_fiat_standard } }
+			scope:central_bank_site_overrated_currency_owner = { has_variable = gold_state_1 }
+		}
+		set_variable = {
+			name = zz_ef_crisis_paid
+			value = {
+				value = var:zz_ef_crisis_due
+				max = scope:central_bank_site_overrated_currency_owner.var:gold_state_1
+				min = 0
+			}
+		}
+		scope:central_bank_site_overrated_currency_owner = {
+			change_variable = { name = gold_state_1 subtract = scope:seller_root.var:zz_ef_crisis_paid }
+		}
+		set_variable = { name = zz_ef_crisis_got value = var:zz_ef_crisis_paid }
+		if = {
+			limit = { has_law = law_type:law_silver_standard }
+			change_variable = { name = zz_ef_crisis_got multiply = gold_to_silver_rate }
+		}
+	}
+	scope:central_bank_site_root = {
+		if = {
+			limit = { owner = { has_law = law_type:law_silver_standard } }
+			if = {
+				limit = { NOT = { has_variable = silver_state_1 } }
+				set_variable = { name = silver_state_1 value = 0 }
+			}
+			change_variable = { name = silver_state_1 add = scope:seller_root.var:zz_ef_crisis_got }
+		}
+		else = {
+			if = {
+				limit = { NOT = { has_variable = gold_state_1 } }
+				set_variable = { name = gold_state_1 value = 0 }
+			}
+			change_variable = { name = gold_state_1 add = scope:seller_root.var:zz_ef_crisis_got }
+		}
+	}
+	if = {
+		limit = { var:zz_ef_crisis_due > 0 }
+		debug_log = "EFC|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|due [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_crisis_due')|0]|paid [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_crisis_paid')|0]"
+		scope:overrated_currency_country_owner = {
+			debug_log = "EFC|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|issuer"
+		}
+	}
+}
+
+# Night 2, item 1 (2.10, the user): the silver-to-gold rate from the metals'
+# market prices (values file, zz_ef_silver_to_gold_market), once a month by
+# the first country of the month (a 25-day global flag).
+zz_ef_silver_rate_update = {
+	if = {
+		limit = { NOT = { has_global_variable = zz_ef_s2g_fresh } }
+		set_global_variable = { name = zz_ef_s2g_fresh value = yes days = 25 }
+		set_global_variable = { name = zz_ef_s2g value = zz_ef_silver_to_gold_market }
+	}
+}
+
+# EF.48 item 5 -- business credit with repayment (the user, 1.10 evening:
+# "repayment in any case, the point is a realistic money turnover"). Until
+# now only values existed and the debt was never kept (always 0). Private
+# construction paid with the banks' borrowed money (the CB's credit and pops'
+# deposits, by their share of the pool) becomes the businesses' debt; due a
+# week: 1/260 of it (5 years) + interest (key + 3 pp). It is paid from the
+# buildings' contributions to the pool -- real money, business cash -> pool,
+# out of M1. When the contributions fall short, zz_ef_debt_service raises the
+# owners' contribution share (profits go to the bank instead of dividends),
+# a step a week up to +0.3; when they cover the due by 20% it steps down.
+# What is still unpaid is added to the debt.
+zz_ef_business_credit_step = {
+	if = {
+		limit = { NOT = { has_variable = zz_ef_bc_debt } }
+		set_variable = { name = zz_ef_bc_debt value = 0 }
+	}
+	if = {
+		limit = { NOT = { has_variable = zz_ef_bc_svc } }
+		set_variable = { name = zz_ef_bc_svc value = 0 }
+	}
+	set_variable = { name = zz_ef_f_bc_new value = zz_ef_bc_new }
+	set_variable = { name = zz_ef_f_bc_int value = zz_ef_bc_interest }
+	set_variable = { name = zz_ef_f_bc_due value = zz_ef_bc_due }
+	set_variable = { name = zz_ef_f_bc_paid value = zz_ef_bc_paid }
+	change_variable = { name = zz_ef_bc_debt add = var:zz_ef_f_bc_new }
+	change_variable = { name = zz_ef_bc_debt add = var:zz_ef_f_bc_int }
+	change_variable = { name = zz_ef_bc_debt subtract = var:zz_ef_f_bc_paid }
+	if = {
+		limit = { var:zz_ef_bc_debt < 0 }
+		set_variable = { name = zz_ef_bc_debt value = 0 }
+	}
+	# the controller of the owners' contribution share
+	if = {
+		limit = {
+			var:zz_ef_f_bc_due > zz_ef_v_f_contrib
+			var:zz_ef_bc_svc < zz_ef_bc_svc_max
+		}
+		change_variable = { name = zz_ef_bc_svc add = 1 }
+	}
+	else_if = {
+		limit = {
+			var:zz_ef_bc_svc > 0
+			zz_ef_bc_contrib_slack > 0
+		}
+		change_variable = { name = zz_ef_bc_svc subtract = 1 }
+	}
+	remove_modifier = zz_ef_debt_service
+	if = {
+		limit = { var:zz_ef_bc_svc > 0 }
+		add_modifier = {
+			name = zz_ef_debt_service
+			multiplier = var:zz_ef_bc_svc
+		}
+	}
+}
+
+# Night 2, item 5 (2.10): the government's rate to key + premium (static_
+# modifiers/zz_ef_gov_rate.txt, values file). Ours cancels the other
+# multipliers (total 1) and tops the adds up to the target.
+zz_ef_gov_rate_step = {
+	set_variable = { name = zz_ef_gr_target value = zz_ef_gov_rate_target }
+	set_variable = { name = zz_ef_gr_mult_new value = zz_ef_gov_rate_mult_other }
+	change_variable = { name = zz_ef_gr_mult_new multiply = -1 }
+	set_variable = { name = zz_ef_gr_add_new value = var:zz_ef_gr_target }
+	# В4.2 (5.10 evening, run r1005_163333): the engine's rate stayed 11-18% under the target for France and Russia
+	# (0.0727 at grt 0.0873) while modifier:country_loan_interest_rate_mult read 0 -- something the script does not see
+	# (E&F's banks' prosperity modifiers, -0.05 each?) scales the whole rate. Calibrated by the fact: the target over
+	# the engine's own factor (zz_ef_gr_k, weekly: its yearly rate / the adds).
+	change_variable = { name = zz_ef_gr_add_new divide = zz_ef_gr_k_v }
+	change_variable = { name = zz_ef_gr_add_new subtract = zz_ef_gov_rate_add_other }
+	remove_modifier = zz_ef_gov_rate_mult
+	remove_modifier = zz_ef_gov_rate_add
+	set_variable = { name = zz_ef_gr_mult value = var:zz_ef_gr_mult_new }
+	set_variable = { name = zz_ef_gr_add value = var:zz_ef_gr_add_new }
+	set_variable = { name = zz_ef_gr_mult_units value = var:zz_ef_gr_mult }
+	change_variable = { name = zz_ef_gr_mult_units multiply = 100 }
+	set_variable = { name = zz_ef_gr_add_units value = var:zz_ef_gr_add }
+	change_variable = { name = zz_ef_gr_add_units multiply = 1000 }
+	add_modifier = {
+		name = zz_ef_gov_rate_mult
+		multiplier = var:zz_ef_gr_mult_units
+	}
+	add_modifier = {
+		name = zz_ef_gov_rate_add
+		multiplier = var:zz_ef_gr_add_units
+	}
+	remove_variable = zz_ef_gr_mult_new
+	remove_variable = zz_ef_gr_add_new
+}
+
+# В1.3 probe (3.10, stage 0): the businesses' cash jumps on 1 January (Britain
+# only: +2.1M 1837.1, +0.7M 1838.1, run e0_1) and eats the pops' savings
+# through the leak; no script effect touches a building's cash. Buildings hold
+# no variables ("This scope doesn't support variables", run e0_1), so no delta
+# here: every December week and the first January week, each building with
+# over 10K cash -> EFJ line (country, building, state, cash, level); the jump
+# is the difference between the last December and the first January line,
+# taken offline. Off: zz_ef_probe_on = 0.
+zz_ef_probe_newyear_cash = {
+	if = {
+		limit = {
+			zz_ef_probe_on > 0
+			OR = {
+				month = 11
+				AND = {
+					month = 0
+					NOT = { has_variable = zz_ef_probe_jan }
+				}
+			}
+		}
+		if = {
+			limit = { month = 0 }
+			set_variable = { name = zz_ef_probe_jan days = 60 }
+		}
+		every_scope_building = {
+			limit = { cash_reserves_available > 10000 }
+			debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetBuilding.GetOwner.GetNameNoFormatting]|[THIS.GetBuilding.GetBuildingType.GetNameNoFormatting]|[THIS.GetBuilding.GetState.GetNameNoFormatting]|cash [THIS.GetBuilding.MakeScope.ScriptValue('zz_ef_probe_cash_now')|0]|lv [THIS.GetBuilding.MakeScope.ScriptValue('zz_ef_probe_level')|0]"
+		}
+	}
+}
+
+# UI.7б probe (3.10, stage 0): the dependents' income the engine pays from
+# nothing (pop types' dependent_wage 0.5 / 0.25 / 0 a year x the laws'
+# state_dependent_wage_mult, plus our consumer credit surcharge) is in no card:
+# pops spend it, business cash grows -- the business card's "other". Weekly
+# until 1838, the player and France: one EFD line per pop -- income, the
+# workforce's and the dependents' part, dependents, type. Offline: the sum
+# against the business residual and against dependents x dependent_wage / 52.
+# Off: zz_ef_probe_pop_on = 0.
+zz_ef_probe_pop_income = {
+	if = {
+		limit = {
+			zz_ef_probe_pop_on > 0
+			game_date < 1838.1.1
+			OR = {
+				is_player = yes
+				c:FRA ?= this
+			}
+		}
+		every_scope_pop = {
+			debug_log = "EFD|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetPop.GetCountry.GetNameNoFormatting]|inc [THIS.GetPop.GetIncome|2]|wf [THIS.GetPop.GetWorkforceIncome|2]|dep [THIS.GetPop.GetDependentIncome|2]|n [THIS.GetPop.GetDependentsSize]|size [THIS.GetPop.GetTotalSize]|type [THIS.GetPop.GetPopType.GetNameNoIconNoFormatting]|st [THIS.GetPop.GetState.GetNameNoFormatting]|cu [THIS.GetPop.GetCulture.GetNameNoFormatting]"
+		}
+	}
+}

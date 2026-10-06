@@ -1,0 +1,2943 @@
+﻿#############################################
+# EF.39 / EF.44 / EF.48 (2026-09-30) -- the money model as a flow matrix
+# between accounts, all in the ENGINE'S money. COUNTRY scope. Per WEEK, as
+# the engine's budget counts (the user, 2026-09-30: a monthly step against
+# weekly budget lines did not add up); rates are fractions (a year). Steps:
+# scripted_effects/zz_ef_money_model.txt;
+# the tooltip: tools/regen_ef_money_supply_loc.py. Decisions: План проекта.md,
+# EF.48.
+#
+# Decided by the user 2026-09-30 (evening, after a new game to 1838): every
+# account in the engine's own money. E&F labels that money with the national
+# currency, but its "central bank reserves" (money_supply_state) and the
+# currency-good flows are counts of the liquidity_currency GOOD (x 4), not
+# money -- they are shown apart. Pops hold no money in the engine: their
+# income goes to taxes, purchases and pool contributions, and what is left
+# becomes wealth (an index), i.e. leaves the money -- so the engine does not
+# conserve money, and pops are a transit account, not a stock.
+#
+# MONEY (all exact engine numbers, no model stock)
+#   M0 = treasury (gold_reserves > 0)
+#   M1 = M0 + businesses' cash (vanilla credit limit - defines)
+#   M2 = M1 + the investment pool (banks)
+# E&F's money_supply is replaced by M2, so the currency value reads it.
+#
+# WHAT THE MODEL MOVES
+#   Bank credit is borrowed from the central bank at the key rate: the pool is
+#   steered to (monthly contributions) x credit months (12 at 2%, 3 at 12%);
+#   below it banks borrow 1.15% of the gap a week (~5% a month; debt
+#   var:zz_ef_bank_cb_debt), above it they repay as much (at most the debt);
+#   interest at the key rate pool -> CB
+#   -> treasury (the CB's profit). CB credit creates money, repayment removes
+#   it. Everything else is the engine's own and only shown.
+# (Steps 2-3 of the afternoon -- pops' savings from flows, deposits and their
+# interest -- are gone: without money at pops there is nothing to hold them.)
+#############################################
+
+# ---- parameters -----------------------------------------------------------
+
+# Share of the gap to the pool target borrowed / repaid per week (~5% a
+# month).
+zz_ef_borrow_speed = 0.0115
+zz_ef_repay_speed = 0.0115
+zz_ef_weeks_per_month = 4.333
+
+# ---- rate -----------------------------------------------------------------
+
+# The rate the model reads: the central bank's, else E&F's neutral 6.5%.
+zz_ef_money_rate = {
+	value = 0.065
+	if = {
+		limit = { has_variable = base_rate_percentage }
+		value = var:base_rate_percentage
+	}
+	min = 0
+	max = 0.3
+}
+
+# ---- money ----------------------------------------------------------------
+
+zz_ef_pool = {
+	value = investment_pool
+}
+zz_ef_treasury = {
+	value = gold_reserves
+	min = 0
+}
+# Vanilla `credit` is the credit LIMIT = buildings' cash reserves +
+# COUNTRY_MIN_CREDIT_BASE + COUNTRY_MIN_CREDIT_SCALED x GDP (defines; Grey's
+# Soft Econ Adjustments, zzz_MoG_SEA_def.txt, sets 10000 / 0.01 in this
+# playset, vanilla 100000 / 0.5). The cash part (the 1838 save: equal to the
+# sum of the buildings' cash_reserves):
+zz_ef_building_cash_estimate = {
+	value = credit
+	subtract = define:NEconomy|COUNTRY_MIN_CREDIT_BASE
+	subtract = {
+		value = gdp
+		multiply = define:NEconomy|COUNTRY_MIN_CREDIT_SCALED
+	}
+	min = 0
+}
+# Since run 15 (1.10 evening) the sum over the buildings, kept weekly in
+# var:zz_ef_bcash by the step (the estimate above swung by millions a week
+# once the GDP share of the credit limit became 1.7); the estimate until the
+# first step.
+zz_ef_building_cash_sum = {
+	value = 0
+	every_scope_building = {
+		add = cash_reserves_available
+	}
+}
+zz_ef_building_cash = {
+	value = zz_ef_building_cash_estimate
+	if = {
+		limit = { has_variable = zz_ef_bcash }
+		value = var:zz_ef_bcash
+	}
+	min = 0
+}
+
+# The engine's own money (treasury + businesses' cash + the pool): what the
+# leak to pops' savings is measured against. Internal; the aggregates the
+# player sees are zz_ef_agg_m0..m3 below.
+zz_ef_m2 = {
+	value = zz_ef_treasury
+	add = zz_ef_building_cash
+	add = investment_pool
+}
+# What the weekly probe watches for the budget tick: treasury net of debt.
+zz_ef_budget_position = {
+	value = gold_reserves
+	subtract = principal
+}
+
+# Cash of the country's trade centres (part of the businesses' cash). EF.48
+# item 1 (1.10): through them the country pays for imports -- their cash
+# fell 34M -> 15M in half a year in the sandbox run (Britain 1836). Its
+# change is a flow abroad, not pops' savings.
+zz_ef_tc_cash = {
+	value = 0
+	every_scope_building = {
+		limit = { is_building_type = building_trade_center }
+		add = cash_reserves_available
+	}
+}
+
+# ---- bank credit from the central bank ------------------------------------
+
+zz_ef_bank_cb_debt = {
+	value = 0
+	if = {
+		limit = { has_variable = zz_ef_bank_cb_debt }
+		value = var:zz_ef_bank_cb_debt
+	}
+	min = 0
+}
+zz_ef_pool_contrib_month = {
+	value = investment_pool_gross_income
+	multiply = zz_ef_weeks_per_month
+	min = 0
+}
+# Months of contributions banks keep lendable: 12 at 2% and below, 3 at 12%
+# and above (cheap money -> more credit).
+zz_ef_credit_months = {
+	value = zz_ef_money_rate
+	subtract = 0.02
+	multiply = -90
+	add = 12
+	min = 3
+	max = 12
+}
+# Where the pool is steered.
+zz_ef_pool_target = {
+	value = zz_ef_pool_contrib_month
+	multiply = zz_ef_credit_months
+}
+# Banks' credit from the central bank, steered by the rate against GDP (the
+# user, 1.10 evening, run 10): with the target "pool = contributions x months"
+# the pool was almost always over it, and in 6 years the CB lent Britain 1.2M
+# at M2 ~300M -- the credit channel was off. Now the banks' debt to the CB goes
+# to GDP x share: 50% at a 2% key rate, 0 at 12%, linear (27.5% at E&F's
+# neutral 6.5%); the money comes into the pool and the engine spends it on
+# private construction (and the consumer credit lends from it). 1.10 evening,
+# check the 50%.
+zz_ef_cb_credit_gdp_max = 0.5
+zz_ef_cb_credit_share = {
+	value = 0.12
+	subtract = zz_ef_money_rate
+	divide = 0.10
+	min = 0
+	max = 1
+}
+zz_ef_cb_credit_target = {
+	value = gdp
+	min = 0
+	multiply = zz_ef_cb_credit_gdp_max
+	multiply = zz_ef_cb_credit_share
+	multiply = zz_ef_cb_cover_credit_mult
+}
+# What the banks need in the pool (1.10 evening, run 15: the pool piled up
+# to 0.9 GDP while the banks kept borrowing from the CB): 3 months of what it
+# pays out -- the transfer for private construction or the contributions,
+# whichever is larger, at least 0.1% of GDP a week.
+zz_ef_pool_need = {
+	value = zz_ef_v_f_transfer
+	min = zz_ef_v_f_contrib
+	min = {
+		value = gdp
+		divide = 1000
+	}
+	multiply = 13
+}
+# Pool over its need, in needs (0 = no idle money).
+zz_ef_pool_idle = {
+	value = 0
+	if = {
+		limit = { zz_ef_pool_need > 0 }
+		value = investment_pool
+		divide = zz_ef_pool_need
+		subtract = 1
+	}
+	min = 0
+}
+# Borrowed from the central bank this week: the debt under its target, and
+# only what the pool lacks of its need -- idle deposits are lent first.
+zz_ef_cb_borrow = {
+	value = zz_ef_cb_credit_target
+	subtract = zz_ef_bank_cb_debt
+	multiply = zz_ef_borrow_speed
+	max = {
+		value = zz_ef_pool_need
+		subtract = investment_pool
+	}
+	# stage 2, step 6 (Д2.26, 6.10): not past the banks' reserve ceiling (script_values/zz_ef_metal_accounts_values.txt)
+	max = zz_ef_credit_room
+	min = 0
+}
+# Repaid this week: the debt over its target, or the pool's idle money (the
+# banks give back the CB's credit they do not need), not more than the debt
+# and the pool holds.
+zz_ef_cb_repay = {
+	value = zz_ef_bank_cb_debt
+	subtract = zz_ef_cb_credit_target
+	multiply = zz_ef_repay_speed
+	min = {
+		value = investment_pool
+		subtract = zz_ef_pool_need
+		multiply = zz_ef_repay_speed
+	}
+	min = 0
+	max = zz_ef_bank_cb_debt
+	max = {
+		value = investment_pool
+		min = 0
+	}
+}
+# Interest on the banks' debt at the key rate, a week (not more than the
+# pool); the CB remits it to the treasury.
+zz_ef_cb_interest = {
+	value = zz_ef_bank_cb_debt
+	multiply = zz_ef_money_rate
+	divide = 52
+	max = {
+		value = investment_pool
+		min = 0
+	}
+	min = 0
+}
+
+# Private banks' foreign bonds (E&F ai_privat_bank_bond_1..25: bought straight
+# from the pool, add_investment_pool = -bond value). The weekly change of
+# the sum is the bonds bought (+) or run off (-).
+zz_ef_bank_bonds = {
+	value = 0
+	if = { limit = { has_variable = ai_privat_bank_bond_value_1 } add = var:ai_privat_bank_bond_value_1 }
+	if = { limit = { has_variable = ai_privat_bank_bond_value_2 } add = var:ai_privat_bank_bond_value_2 }
+	if = { limit = { has_variable = ai_privat_bank_bond_value_3 } add = var:ai_privat_bank_bond_value_3 }
+	if = { limit = { has_variable = ai_privat_bank_bond_value_4 } add = var:ai_privat_bank_bond_value_4 }
+	if = { limit = { has_variable = ai_privat_bank_bond_value_5 } add = var:ai_privat_bank_bond_value_5 }
+	if = { limit = { has_variable = ai_privat_bank_bond_value_6 } add = var:ai_privat_bank_bond_value_6 }
+	if = { limit = { has_variable = ai_privat_bank_bond_value_7 } add = var:ai_privat_bank_bond_value_7 }
+	if = { limit = { has_variable = ai_privat_bank_bond_value_8 } add = var:ai_privat_bank_bond_value_8 }
+	if = { limit = { has_variable = ai_privat_bank_bond_value_9 } add = var:ai_privat_bank_bond_value_9 }
+	if = { limit = { has_variable = ai_privat_bank_bond_value_10 } add = var:ai_privat_bank_bond_value_10 }
+	if = { limit = { has_variable = ai_privat_bank_bond_value_11 } add = var:ai_privat_bank_bond_value_11 }
+	if = { limit = { has_variable = ai_privat_bank_bond_value_12 } add = var:ai_privat_bank_bond_value_12 }
+	if = { limit = { has_variable = ai_privat_bank_bond_value_13 } add = var:ai_privat_bank_bond_value_13 }
+	if = { limit = { has_variable = ai_privat_bank_bond_value_14 } add = var:ai_privat_bank_bond_value_14 }
+	if = { limit = { has_variable = ai_privat_bank_bond_value_15 } add = var:ai_privat_bank_bond_value_15 }
+	if = { limit = { has_variable = ai_privat_bank_bond_value_16 } add = var:ai_privat_bank_bond_value_16 }
+	if = { limit = { has_variable = ai_privat_bank_bond_value_17 } add = var:ai_privat_bank_bond_value_17 }
+	if = { limit = { has_variable = ai_privat_bank_bond_value_18 } add = var:ai_privat_bank_bond_value_18 }
+	if = { limit = { has_variable = ai_privat_bank_bond_value_19 } add = var:ai_privat_bank_bond_value_19 }
+	if = { limit = { has_variable = ai_privat_bank_bond_value_20 } add = var:ai_privat_bank_bond_value_20 }
+	if = { limit = { has_variable = ai_privat_bank_bond_value_21 } add = var:ai_privat_bank_bond_value_21 }
+	if = { limit = { has_variable = ai_privat_bank_bond_value_22 } add = var:ai_privat_bank_bond_value_22 }
+	if = { limit = { has_variable = ai_privat_bank_bond_value_23 } add = var:ai_privat_bank_bond_value_23 }
+	if = { limit = { has_variable = ai_privat_bank_bond_value_24 } add = var:ai_privat_bank_bond_value_24 }
+	if = { limit = { has_variable = ai_privat_bank_bond_value_25 } add = var:ai_privat_bank_bond_value_25 }
+}
+
+# ---- EF.31: the rate moves private construction ---------------------------
+
+# Multiplier of zz_ef_rate_private_construction (0.01 each): 5 per pp under
+# 6.5%, +-30.
+zz_ef_rate_construction_mult = {
+	value = 0.065
+	subtract = zz_ef_money_rate
+	multiply = 500
+	min = -30
+	max = 30
+}
+
+# ---- debt (not money) -----------------------------------------------------
+
+zz_ef_debt_principal = {
+	value = principal
+}
+zz_ef_debt_cb_gold = {
+	value = 0
+	if = {
+		limit = { has_variable = credit_at_central_bank }
+		value = var:credit_at_central_bank
+	}
+}
+
+# ---- engine and E&F flows, for the ledger ---------------------------------
+
+zz_ef_gdp_week = {
+	value = gdp
+	divide = 52
+}
+# The budget's balance of the week (all income - all expenses).
+zz_ef_budget_week = {
+	value = total_income
+	subtract = total_expenses
+}
+# The pool's transfer to the treasury for private construction, this week:
+# gross income - net income (the pool tooltip's "new construction").
+zz_ef_pool_transfer_week = {
+	value = investment_pool_gross_income
+	subtract = investment_pool_net_income
+	min = 0
+}
+zz_ef_minting_month = {
+	value = modifier:country_minting_add
+	multiply = {
+		value = 1
+		add = modifier:country_minting_mult
+	}
+	multiply = zz_ef_weeks_per_month
+	min = 0
+}
+zz_ef_total_income_week = {
+	value = total_income
+}
+zz_ef_total_expenses_week = {
+	value = total_expenses
+}
+zz_ef_market_gdp_share = {
+	value = 1
+	if = {
+		limit = { market.gdp > 0 }
+		value = gdp
+		divide = market.gdp
+	}
+	min = 0
+	max = 1
+}
+# The currency GOOD in E&F's central bank (counts, not money), month (E&F:
+# stockpile_currency_type_1, 01_economic_scripted_effects.txt:55549): var_2 =
+# (sell - buy orders of the currency good in the market) x 4 + devaluation -
+# revaluation, market owner only.
+zz_ef_cb_issue_month = {
+	value = 0
+	if = {
+		limit = { exists = market market.owner = this }
+		value = market.mg:liquidity_currency.market_goods_sell_orders
+		multiply = 4
+	}
+}
+zz_ef_cb_demand_month = {
+	value = 0
+	if = {
+		limit = { exists = market market.owner = this }
+		value = market.mg:liquidity_currency.market_goods_buy_orders
+		multiply = 4
+	}
+}
+zz_ef_cb_demand_own = {
+	value = zz_ef_cb_demand_month
+	multiply = zz_ef_market_gdp_share
+}
+zz_ef_cb_demand_others = {
+	value = zz_ef_cb_demand_month
+	subtract = zz_ef_cb_demand_own
+	min = 0
+}
+zz_ef_cb_devaluation_month = {
+	value = 0
+	if = {
+		limit = { has_variable = devaluation_on var:devaluation_on = 1 }
+		value = money_supply_to_add_per_month
+	}
+	min = 0
+}
+zz_ef_cb_revaluation_month = {
+	value = 0
+	if = {
+		limit = { has_variable = revaluation_on var:revaluation_on = 1 }
+		value = money_supply_to_subtract_per_month
+		abs = yes
+	}
+}
+# Trade balance of the week, E&F's trade_balance_in_gold_delta
+# (export_value_in_gold_week - import_value_in_gold_week) / money_value_in_gold
+# (gold per unit). Positive: exports over imports.
+zz_ef_trade_week = {
+	value = 0
+	if = {
+		limit = { zz_ef_gold_per_unit > 0 }
+		value = trade_balance_in_gold_delta
+		divide = zz_ef_gold_per_unit
+	}
+}
+# The treasury card's "other": its change over the week minus the budget of
+# the week as read at the step (var:zz_ef_f_budget) minus the CB's profit the
+# model pays in.
+zz_ef_other_treasury_budget = {
+	value = zz_ef_v_d_treasury
+	subtract = zz_ef_v_f_budget
+	subtract = zz_ef_v_f_cb_interest
+	subtract = zz_ef_v_f_mint_tr
+	# Д4.5 (4.10): the treasury's surplus over its limit, moved to the pool
+	add = zz_ef_v_f_tr_pool
+	# В5.5 (5.10): interest on the treasury's parts of other countries' debt (the bond ledger)
+	subtract = zz_ef_v_f_bl_int_in
+	# Д2.7б (5.10): consols' interest and buy-back, treasury -> pops' savings (zz_ef_consols.txt)
+	add = zz_ef_v_f_cons_int
+	add = zz_ef_v_f_cons_buy
+}
+# Д4.5 (4.10): treasury -> pool this step (zz_ef_money_model_step)
+zz_ef_v_f_tr_pool = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_tr_pool } value = var:zz_ef_f_tr_pool }
+}
+
+# ---- reconciliation block (raw engine numbers, weekly) --------------------
+
+zz_ef_raw_fixed_income = { value = fixed_income }
+zz_ef_raw_total_income = { value = total_income }
+zz_ef_raw_fixed_expenses = { value = fixed_expenses }
+zz_ef_raw_total_expenses = { value = total_expenses }
+zz_ef_raw_military = { value = military_expenses }
+zz_ef_raw_minting_week = {
+	value = zz_ef_minting_month
+	divide = zz_ef_weeks_per_month
+}
+zz_ef_raw_pool_gross = { value = investment_pool_gross_income }
+zz_ef_raw_pool_net = { value = investment_pool_net_income }
+zz_ef_raw_gdp = { value = gdp }
+zz_ef_raw_credit = { value = credit }
+
+# ---- guarded reads of the ledger variables (0 before the first step) ------
+
+zz_ef_v_f_contrib = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_contrib } value = var:zz_ef_f_contrib }
+}
+zz_ef_v_f_budget = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_budget } value = var:zz_ef_f_budget }
+}
+zz_ef_v_f_transfer = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_transfer } value = var:zz_ef_f_transfer }
+}
+zz_ef_v_f_cb_borrow = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_cb_borrow } value = var:zz_ef_f_cb_borrow }
+}
+zz_ef_v_f_cb_repay = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_cb_repay } value = var:zz_ef_f_cb_repay }
+}
+zz_ef_v_f_cb_interest = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_cb_interest } value = var:zz_ef_f_cb_interest }
+}
+zz_ef_v_d_pool = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_d_pool } value = var:zz_ef_d_pool }
+}
+zz_ef_v_d_buildings = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_d_buildings } value = var:zz_ef_d_buildings }
+}
+zz_ef_v_d_treasury = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_d_treasury } value = var:zz_ef_d_treasury }
+}
+zz_ef_v_d_cb = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_d_cb } value = var:zz_ef_d_cb }
+}
+zz_ef_v_d_m2 = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_d_m2 } value = var:zz_ef_d_m2 }
+}
+zz_ef_v_d_tc = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_d_tc } value = var:zz_ef_d_tc }
+}
+zz_ef_v_f_pool_other = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_pool_other } value = var:zz_ef_f_pool_other }
+}
+zz_ef_v_d_bonds = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_d_bonds } value = var:zz_ef_d_bonds }
+}
+# M0/M1/M2: the week's change, and the change in % (a fraction) against
+# the value 4 weeks ago (month), 49-52 weeks ago (year) and 248-260 weeks ago
+# (5 years; the history rings in zz_ef_money_model_step). 0 until filled.
+# ---- the GUI bridge: the leak ----------------------------------------------
+
+zz_ef_v_f_ext = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_ext } value = var:zz_ef_f_ext }
+}
+zz_ef_v_f_leak = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_leak } value = var:zz_ef_f_leak }
+}
+# Calls of the bridge's receiver since the start (diagnostics).
+zz_ef_hook_calls = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_hook_calls } value = global_var:zz_ef_hook_calls }
+}
+zz_ef_hook_probe_calls = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_hook_probe_calls } value = global_var:zz_ef_hook_probe_calls }
+}
+# 1 when this week's bridge data arrived, else 0.
+zz_ef_hook_ok = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_ext } value = 1 }
+}
+# EF.48 item 2 (1.10): the pool's change nobody explains -- the change minus
+# the contributions, minus the transfer to the treasury, the CB's credit and
+# interest, the deposits and the foreign bonds. About 0 in a normal week; in
+# the sandbox run lump drops of 0.8-1.7M a week (Britain, Nov 1836 - Feb
+# 1837), not E&F (no bonds, no bank currency purchases). Run 5 (1.10): the
+# drops are multiples of 15 000 = VC's PRIVATIZATION_PER_LEVEL_COST 150 x
+# MIN_FAKE_CONSTRUCTION_COST 100 -- the pool buying building levels at the
+# privatization price; no treasury receives it. Shown as money leaving
+# circulation, kept out of the pops' savings and out of the CB's metal.
+# (1.10 -- check where it goes.)
+zz_ef_pool_other_week = {
+	value = zz_ef_v_d_pool
+	subtract = zz_ef_v_f_contrib
+	add = zz_ef_v_f_transfer
+	subtract = zz_ef_v_f_cb_borrow
+	add = zz_ef_v_f_cb_repay
+	add = zz_ef_v_f_cb_interest
+	subtract = zz_ef_v_w_dep_in
+	add = zz_ef_v_w_dep_out
+	add = zz_ef_v_w_dep_int
+	add = zz_ef_v_d_bonds
+	add = zz_ef_v_w_cc_issue
+	subtract = zz_ef_v_w_cc_repay
+	subtract = zz_ef_v_w_cc_int
+	# M.3 (4.10): Hume's coined / withdrawn money
+	subtract = zz_ef_v_w_hume_money
+	# Д2.30 (6.10 day): other CBs' deposits put into / drawn out of the pool
+	subtract = zz_ef_v_w_nr_dep
+	# Д4.5 (4.10): the treasury's surplus put into the pool
+	subtract = zz_ef_v_f_tr_pool
+	# В5.5 (5.10): the bond ledger's moves on the pool (a seller's), with abroad
+	subtract = zz_ef_v_f_bl_sold
+	add = zz_ef_v_f_bl_int_out
+	add = zz_ef_v_f_bl_redeem
+}
+# Unexplained change of M2 this week: the change minus the budget's lines
+# outside the accounts, minus the CB's net credit, plus the foreign bonds the
+# private banks bought (they left the pool for abroad), minus the pool's own
+# unexplained change and the trade centres' cash (both abroad, items 1-2).
+# What is left is the treasury and the businesses' cash only. The consumer
+# credit (item 4) is NOT taken out (UI.7б, 3.10): the pool loses it and the
+# engine pays pops the same as the dependents' surcharge; what pops spend comes
+# back into business cash, both inside M2 -- the change of M2 is minus the
+# unspent part, which is exactly the savings. Taking it out (until 3.10)
+# counted it into savings twice: run e0_6, Switzerland -- the business card's
+# "other" equal to last week's cc_net to the unit in 115 weeks of 119; pops'
+# savings grew by the whole consumer credit every week on top.
+zz_ef_leak_week = {
+	value = zz_ef_v_d_m2
+	subtract = zz_ef_v_f_ext
+	subtract = zz_ef_v_f_cb_borrow
+	add = zz_ef_v_f_cb_repay
+	add = zz_ef_v_d_bonds
+	subtract = zz_ef_v_w_dep_in
+	add = zz_ef_v_w_dep_out
+	add = zz_ef_v_w_dep_int
+	subtract = zz_ef_v_f_pool_other
+	subtract = zz_ef_v_d_tc
+	subtract = zz_ef_tr_other_net
+	# M.3 (4.10): Hume's coined / withdrawn money -- the CB's, not pops'
+	subtract = zz_ef_v_w_hume_money
+	# Д2.30 (6.10 day): other CBs' deposits in the pool -- abroad's, not pops'
+	subtract = zz_ef_v_w_nr_dep
+	# В5.5 (5.10): the bond ledger with abroad -- the pool's (out of pool_other now) and the treasury's interest (out
+	# of the treasury's "other"; the parts repaid stay there, as E&F's bond moves)
+	subtract = zz_ef_v_f_bl_sold
+	add = zz_ef_v_f_bl_int_out
+	add = zz_ef_v_f_bl_redeem
+	subtract = zz_ef_v_f_bl_int_in
+	# Д2.7б (5.10): consols' interest and buy-back left M2 for pops' savings by our rule (put there at the step)
+	add = zz_ef_v_f_cons_int
+	add = zz_ef_v_f_cons_buy
+}
+# The treasury's change beyond the week's budget and the CB's profit: E&F's
+# scripted moves on the treasury -- ai_refund_central_bank (the government
+# repays the CB from the treasury) and ai_buy_bond_N (the treasury buys other
+# countries' bonds), around 1 January: run 6 (1.10), Russia 1840.1.2 -16.7M
+# with a budget of -17K, France -6.4M. Not pops' savings: shown as treasury
+# -> the CB and abroad. Not in the CB's metal (a refund and a bond purchase
+# cannot be told apart -- check).
+zz_ef_v_f_tr_other = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_tr_other } value = var:zz_ef_f_tr_other }
+}
+# Part of the treasury's E&F move the budget's lines with abroad already show
+# (scope:abr). Runs 10-11 (1.10 evening): every treasury bond purchase
+# (ai_buy_bond_N, a plain add_treasury) also came in abr at the same sum --
+# Russia 1837.12.28 -9.62M / -9.61M, Ottomans 1837.8.3 -27.8M both -- so it was
+# taken out of the leak twice (pops' savings -9.5M) and paid out of the CB's
+# metal twice. Which budget line shows it is not found yet (check in the game,
+# the budget tooltip in the bond week). The overlap: the same sign, the
+# smaller magnitude.
+zz_ef_tr_abr_overlap = {
+	value = 0
+	if = {
+		limit = {
+			zz_ef_v_f_tr_other < 0
+			zz_ef_v_f_abr < 0
+		}
+		value = zz_ef_v_f_tr_other
+		min = zz_ef_v_f_abr
+	}
+	else_if = {
+		limit = {
+			zz_ef_v_f_tr_other > 0
+			zz_ef_v_f_abr > 0
+		}
+		value = zz_ef_v_f_tr_other
+		max = zz_ef_v_f_abr
+	}
+}
+# The treasury's E&F move not in the budget's lines.
+zz_ef_tr_other_net = {
+	value = zz_ef_v_f_tr_other
+	subtract = zz_ef_tr_abr_overlap
+}
+
+# ---- pops' savings and deposits (the receiver, zz_ef_pop_savings_step) --------
+
+# Pops' savings at the first step (1.10 evening, the user's M0 = cash at
+# hand): 15% of a year's GDP -- coin and notes in Britain in the 1830s were
+# ~11% of GDP, and part of the savings goes to deposits. Not engine money
+# (pops hold none): the share deposited enters the pool as new money --
+# check.
+# Е.7 (5.10, Д.4): the start puts M2 at the model's norm, 45% of a year's GDP (Britain 1830s): the pops'
+# savings = 45% of GDP - the business cash (M2 = cash at hand + business cash + deposits), not under the
+# cash norm; over the norm they are deposits at once (zz_ef_pop_start_deposits), as the weekly step settles
+# them by the deposit rate. Was 15% of GDP with no deposits: the banks started empty and the first years went
+# to filling the norm (the user, 4.10: "население беднеет, вкладов нет").
+# Stage 2, night 6.10 (run r1006_132739): the savings start AT their norm (zz_ef_sav_norm, 0.3-0.6 GDP by the deposit
+# rate, Д2.22) -- was 45% of GDP minus the business cash (Britain 3.2M against a norm of 14.6M): the first year the
+# savings grew to the norm, M2 doubled (18 -> 38M) and the cover halved; the user: "in equilibrium from the first day".
+zz_ef_pop_start_savings = {
+	value = zz_ef_sav_norm
+	min = zz_ef_pop_cash_norm
+	min = 0
+}
+zz_ef_pop_start_deposits = {
+	value = zz_ef_pop_start_savings
+	subtract = zz_ef_pop_cash_norm
+	min = 0
+}
+# ---- pops' cash at hand and deposits (the user, 1.10 evening, run 14) -------
+# Cash at hand is held at a norm -- by the deposit rate, 12% of a year's GDP
+# at 3% (Britain's coin and notes in the 1830s ~11% of GDP); over it pops
+# deposit, under it they withdraw (zz_ef_dep_in / zz_ef_dep_out).
+# Run 14 tried spending the excess as income (the dependents' surcharge): pops
+# in the engine hold no money, what they did not spend vanished back into the
+# savings -- a perpetual surcharge (Britain ~71M a year at a GDP of 58M), the
+# savings kept growing. Deposits are engine money in the pool, which builds.
+# By the deposit rate (the user, 1.10 evening: not an iron 12%): 20% of GDP
+# at 0%, 12% at 3%, at least 6%; pops move 10% of the gap a week each way.
+zz_ef_cash_norm_gdp = {
+	value = zz_ef_deposit_rate
+	multiply = -2.667
+	add = 0.2
+	min = 0.06
+	max = 0.2
+}
+zz_ef_cash_speed = 0.1
+zz_ef_pop_cash_norm = {
+	value = gdp
+	min = 0
+	multiply = zz_ef_cash_norm_gdp
+}
+# Deposit rate: the key rate - 1.5 pp, at least 0.5% (the banks' margin).
+# The banks' margin (1.10 evening, the user: cash and deposits move with the
+# rates): 1.5 pp, + 1 pp per need of idle money in the pool -- banks with
+# money they cannot lend pay less for more of it.
+zz_ef_deposit_margin = {
+	value = zz_ef_pool_idle
+	multiply = 0.01
+	add = 0.015
+}
+zz_ef_deposit_rate = {
+	value = zz_ef_money_rate
+	subtract = zz_ef_deposit_margin
+	min = 0
+}
+zz_ef_pop_savings = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_pop_savings } value = var:zz_ef_pop_savings }
+}
+zz_ef_pop_deposits = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_pop_deposits } value = var:zz_ef_pop_deposits }
+}
+zz_ef_pop_cash = {
+	value = zz_ef_pop_savings
+	subtract = zz_ef_pop_deposits
+}
+# Deposited this week: 10% of the cash over the norm.
+zz_ef_dep_in = {
+	value = zz_ef_pop_cash
+	subtract = zz_ef_pop_cash_norm
+	multiply = zz_ef_cash_speed
+	min = 0
+}
+# Withdrawn: 10% of the cash under the norm, not more than the deposits and
+# the pool hold.
+zz_ef_dep_out = {
+	value = zz_ef_pop_cash_norm
+	subtract = zz_ef_pop_cash
+	multiply = zz_ef_cash_speed
+	min = 0
+	max = {
+		value = zz_ef_pop_deposits
+		min = 0
+	}
+	max = {
+		value = investment_pool
+		min = 0
+	}
+}
+zz_ef_dep_interest = {
+	value = zz_ef_pop_deposits
+	min = 0
+	multiply = zz_ef_deposit_rate
+	divide = 52
+	max = {
+		value = investment_pool
+		min = 0
+	}
+}
+# В1.2 (3.10): the pool's unexplained loss is companies buying building
+# levels from aristocrats and capitalists (manors, financial districts) at the
+# privatization price -- the engine's company privatization of privately
+# owned levels: VC's PRIVATIZATION_PER_LEVEL_COST 150 x MIN_FAKE_CONSTRUCTION_
+# COST 100 = 15 000 a level. Saves of the night-Г run 4 (1839.1 -> 1841.1,
+# levels moved without the building changing): 130-190 levels a half-year in
+# the world go from manors / financial districts / foreign pops to companies,
+# the state sells 6-49. The engine pays the sellers nothing (pops hold no
+# money, manors have no cash): the sellers get it in their savings -- the
+# receiver of money the engine loses. The buyer's country's savings (a seller
+# abroad -- rare -- is not told apart).
+zz_ef_v_f_buyout = {
+	value = zz_ef_v_f_pool_other
+	max = 0
+	multiply = -1
+}
+# Change of the savings at this week's receive: what dropped out of the
+# engine's money + deposit interest + the levels sold to companies.
+zz_ef_pop_savings_week = {
+	value = zz_ef_v_f_inflow
+	add = zz_ef_v_f_dep_int
+	add = zz_ef_v_f_buyout
+}
+zz_ef_v_f_inflow = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_inflow } value = var:zz_ef_f_inflow }
+}
+zz_ef_v_f_dep_in = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_dep_in } value = var:zz_ef_f_dep_in }
+}
+zz_ef_v_f_dep_out = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_dep_out } value = var:zz_ef_f_dep_out }
+}
+zz_ef_v_f_dep_int = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_dep_int } value = var:zz_ef_f_dep_int }
+}
+zz_ef_v_w_dep_in = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_w_dep_in } value = var:zz_ef_w_dep_in }
+}
+zz_ef_v_w_dep_out = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_w_dep_out } value = var:zz_ef_w_dep_out }
+}
+zz_ef_v_w_dep_int = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_w_dep_int } value = var:zz_ef_w_dep_int }
+}
+
+# ---- the CB and abroad, one account (EF.48 item 6) ------------------------
+
+# !! MAINTENANCE !! Key-level REPLACE_OR_CREATE of E&F's national_capacity
+# (script_values/00_economic_scripted_value.txt): without
+# var:trade_balance_in_gold_fixe. E&F added its cumulative trade balance in
+# gold to the reserves; now the flows abroad move the CB's metal itself
+# (zz_ef_cb_hume_step), so counting both would count trade twice.
+# Times zz_ef_capacity_per_metal (the user, 1.10 evening): E&F's value =
+# capacity / money in circulation means the metal always covers 100% of the
+# money at the current value -- and our parity re-anchor (value = parity) made
+# every country start at 100% cover. With the capacity x 1/0.4 the value is
+# metal per unit AT PARITY while the metal covers 40% of the money (the Bank
+# of England in the 1830s); the value falls under the parity exactly when the
+# cover falls under 40%. The CB's reserves in money (zz_ef_cb_metal_money) and
+# Hume's metal per unit (money_value_0) stay consistent: an outflow of X
+# lowers the reserves by X.
+#
+# M.1 / M.2 (the user, 4.10): one measure. The reserves = the CB's metal + foreign currency in its
+# reserves, in the standard's metal; "gold pledged abroad" and "gold loaned to the CB"
+# (gold_loaned_to_central_bank_in_national_metal) are NOT reserves (В2.6: the debt's repayment cut
+# the capacity in steps at the turn of the year). The capacity is the reserves themselves -- no
+# x 2.5 (the "national capital" table read 193M for Britain's 9.87M of metal, В2.7); the cover =
+# the reserves at parity / M2 everywhere (zz_ef_cb_cover), the value comes from the cover and the
+# parity (money_value_0 below), not from capacity / money.
+zz_ef_cover_normal = 0.4
+zz_ef_capacity_per_metal = 1
+
+# M.2 (the user, 4.10): under a metal standard the currency is worth its parity (the mint par:
+# metal per unit, var:money_value_target_1) within +-2% while the cover is 25%+ -- notes are
+# redeemed in metal, arbitrage holds the value; the band leans with the cover (+-0.1 x the gap to
+# 40%). Under 25% redemption is suspended and the value = parity x cover / 40%. Fiat and the gold
+# exchange standard: E&F's formula (fiat 0.01 -- E&F's own money_value then; gold exchange by the
+# reference currency). Was (E&F, and ours with x 2.5): value = capacity / money -- the value
+# swung with every week's metal and money, and the AI's devaluation chased it.
+# !! MAINTENANCE !! Key-level REPLACE_OR_CREATE of E&F's money_value_0
+# (script_values/00_economic_scripted_value.txt:5408).
+zz_ef_value_floor_cover = 0.25
+zz_ef_value_band = 0.02
+
+zz_ef_metal_value = {
+	# no parity yet (a standard just adopted, E&F sets it from the value): E&F's formula
+	value = national_capacity
+	divide = money_supply
+	if = {
+		limit = {
+			has_variable = money_value_target_1
+			var:money_value_target_1 > 0
+		}
+		value = var:money_value_target_1
+		if = {
+			limit = { zz_ef_cb_cover >= zz_ef_value_floor_cover }
+			multiply = {
+				value = zz_ef_cb_cover
+				subtract = zz_ef_cover_normal
+				multiply = 0.1
+				min = {
+					value = zz_ef_value_band
+					multiply = -1
+				}
+				max = zz_ef_value_band
+				add = 1
+			}
+		}
+		else = {
+			multiply = {
+				value = zz_ef_cb_cover
+				divide = zz_ef_cover_normal
+			}
+		}
+	}
+}
+
+# The metal the CB pays out from (silver standard: silver; else gold, for
+# bimetallism in gold terms).
+zz_ef_cb_metal = {
+	value = gold_state_native_for_stockpile
+	if = {
+		limit = { has_law = law_type:law_silver_standard }
+		value = silver_state_native_for_stockpile
+	}
+}
+# The week's net flow abroad in the engine's money (+ in, - out): the
+# budget's lines with other countries (the bridge's scope:abr), the trade
+# centres' cash, foreign bonds bought. Not the pool's unexplained change: run
+# 5 showed it in multiples of 15 000 = VC's PRIVATIZATION_PER_LEVEL_COST 150
+# x MIN_FAKE_CONSTRUCTION_COST 100 -- the pool buying building levels at the
+# privatization price; the money reaches no treasury, so it is a sink, not a
+# payment abroad (1.10, check).
+# Night 2, item 4 (2.10): the trade by the market's own trade balance in money
+# (zz_ef_trade_net_week: exports - imports x price) instead of the trade
+# centres' cash (their cash is their profit and cash flow, not what the
+# country paid abroad). Not the dividends estimate (zz_ef_div_net_week, log
+# only): run 21 read the buildings' profit a year at ~1 GDP -- Britain
+# +220K a week from abroad, its metal 59 -> 458M in three years.
+zz_ef_ext_net_week = {
+	value = zz_ef_v_f_abr
+	# В1.6: the fees' part the world's importers did not pay (the world trade pool)
+	subtract = zz_ef_tfees_cut
+	subtract = zz_ef_tr_abr_overlap
+	add = zz_ef_v_f_trade
+	subtract = zz_ef_v_d_bonds
+	subtract = zz_ef_v_d_tbonds
+	# M.6 (4.10): dividends from abroad, net
+	add = zz_ef_v_f_div
+	# В5.5 (5.10): the bond ledger -- as a seller: parts sold into our pool, interest and repayments out of it;
+	# as a holder: interest in (the parts bought / repaid are in d_tbonds; a part written off is no payment)
+	add = zz_ef_v_f_bl_sold
+	subtract = zz_ef_v_f_bl_int_out
+	subtract = zz_ef_v_f_bl_redeem
+	add = zz_ef_v_f_bl_int_in
+	subtract = zz_ef_v_f_bl_lost
+}
+# Metal moved by it: the flow x the currency's PARITY (metal per unit of
+# money at the mint par, var:money_value_target_1), never more than the CB
+# holds. Was today's value (money_value_0 = capacity / money): the value grows
+# with the metal, so a surplus fed on itself -- Russia's metal 187 -> 1644M
+# (run 22), Prussia's value 31 -> 186 in two years (run 24). Payments abroad
+# under a metal standard settle at the mint par (2.10).
+zz_ef_hume_metal_week = {
+	value = zz_ef_ext_net_week
+	if = {
+		limit = {
+			has_variable = money_value_target_1
+			var:money_value_target_1 > 0
+		}
+		multiply = var:money_value_target_1
+	}
+	else = {
+		multiply = money_value_0
+	}
+	min = {
+		value = zz_ef_cb_metal
+		multiply = -1
+	}
+}
+# Metal cover: the metal at parity against the money in circulation (1 =
+# 100%; 40% at the start, zz_ef_cover_normal).
+zz_ef_cb_cover = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = money_value_target_1
+			var:money_value_target_1 > 0
+		}
+		value = national_capacity
+		divide = zz_ef_capacity_per_metal
+		divide = money_supply
+		divide = var:money_value_target_1
+	}
+}
+# The cover the first rescale aims at (version 7): against the money in
+# circulation, but at least 0.45 GDP -- the money expected once the buildings'
+# cash is in (0.12 cash at hand + ~0.33 business cash).
+zz_ef_rescale_money = {
+	value = money_supply
+	if = {
+		# the first rescale (the second one comes after the due var is gone); 6.10: the savings' norm + ~0.33 GDP of
+		# business cash (the savings start at their norm, zz_ef_pop_start_savings)
+		limit = { has_variable = zz_ef_metal_rescale_due }
+		value = zz_ef_sav_norm_gdp
+		add = 0.33
+		multiply = gdp
+		min = money_supply
+	}
+	min = 1
+}
+zz_ef_cb_cover_ref = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = money_value_target_1
+			var:money_value_target_1 > 0
+		}
+		value = national_capacity
+		divide = zz_ef_capacity_per_metal
+		divide = zz_ef_rescale_money
+		divide = var:money_value_target_1
+	}
+}
+# ---- the CB's reserves: interventions and mining (the user, 1.10 night) ---
+# E&F's interventions (scripted_effects/zz_ef_fx_deals.txt, generated): a
+# deal is 2% of the issuer's M2 in its currency (was a random 1-10 million
+# units, E&F's money scale).
+zz_ef_fx_deal_size = {
+	value = zz_ef_agg_m2
+	multiply = 0.02
+	min = 1
+}
+# Mining into the reserves: the CB coins half of the country's weekly gold
+# (and silver on a silver or bimetallic standard) at the market price -- the
+# metal goes to its reserves at parity, the same money to the mines' owners
+# (pops' savings, then deposits). The engine cannot take goods off the
+# market, so the mines still sell all of it: this is extra issue against the
+# metal mined (a gold rush widens the money and the cover).
+zz_ef_mint_share = 0.5
+# В2.3 (2.10): the treasury's share of the coined money (0.01 = a 1% brassage,
+# the rest to the owners -- variant a; 1 = all to the treasury -- variant b).
+# A parameter until a run shows how much is coined (EFR mint / mint_tr);
+# later perhaps a law group (free coinage / state monopoly, block И).
+zz_ef_mint_treasury_share = 0.01
+zz_ef_gold_mined_week = {
+	value = 0
+	every_scope_state = {
+		limit = {
+			any_scope_building = {
+				OR = {
+					is_building_type = building_gold_mine
+					is_building_type = building_gold_field
+				}
+			}
+		}
+		add = sg:gold.state_goods_production
+	}
+}
+zz_ef_silver_mined_week = {
+	value = 0
+	every_scope_state = {
+		limit = {
+			any_scope_building = { is_building_type = building_silver_mine }
+		}
+		add = sg:silver.state_goods_production
+	}
+}
+zz_ef_gold_price = {
+	value = g:gold.base_price
+	multiply = {
+		value = 1
+		add = market.mg:gold.market_goods_pricier
+	}
+}
+zz_ef_silver_price = {
+	value = g:silver.base_price
+	multiply = {
+		value = 1
+		add = market.mg:silver.market_goods_pricier
+	}
+}
+# Money coined this week from gold / silver (metal standards with a CB only).
+zz_ef_mint_gold_money = {
+	value = 0
+	if = {
+		limit = {
+			has_modifier = has_central_bank
+			has_variable = money_value_target_1
+			OR = {
+				has_law = law_type:law_gold_standard
+				has_law = law_type:law_bimetallism_standard
+			}
+		}
+		value = zz_ef_gold_mined_week
+		multiply = zz_ef_gold_price
+		multiply = zz_ef_mint_share
+	}
+}
+zz_ef_mint_silver_money = {
+	value = 0
+	if = {
+		limit = {
+			has_modifier = has_central_bank
+			has_variable = money_value_target_1
+			OR = {
+				has_law = law_type:law_silver_standard
+				has_law = law_type:law_bimetallism_standard
+			}
+		}
+		value = zz_ef_silver_mined_week
+		multiply = zz_ef_silver_price
+		multiply = zz_ef_mint_share
+	}
+}
+# Metal for it at parity (var:money_value_target_1, metal per unit; a
+# bimetallic parity is in gold -- silver at the gold-to-silver rate).
+zz_ef_mint_gold_metal = {
+	value = zz_ef_mint_gold_money
+	multiply = var:money_value_target_1
+}
+zz_ef_mint_silver_metal = {
+	value = zz_ef_mint_silver_money
+	multiply = var:money_value_target_1
+	if = {
+		limit = { has_law = law_type:law_bimetallism_standard }
+		multiply = gold_to_silver_rate
+	}
+}
+zz_ef_v_f_mint_tr = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_mint_tr } value = var:zz_ef_f_mint_tr }
+}
+# В2.3: the coined money that goes to the owners (pops' savings)
+zz_ef_v_f_mint_own = {
+	value = zz_ef_v_f_mint
+	subtract = zz_ef_v_f_mint_tr
+}
+zz_ef_v_f_mint = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_mint } value = var:zz_ef_f_mint }
+}
+# The cover limits the CB's credit to banks (the user, 1.10 evening): 1 at the
+# normal cover (40%) and above, down to 0 at half of it (20%), linear. Metal
+# standards with a CB only; else 1. A CB lending too much lowers its own cover
+# (the money grows, the metal does not), and an outflow of metal abroad
+# tightens the credit -- the gold standard's discipline, no manual penalty.
+zz_ef_cb_cover_credit_mult = {
+	value = 1
+	if = {
+		limit = {
+			has_modifier = has_central_bank
+			has_variable = money_value_target_1
+			OR = {
+				has_law = law_type:law_gold_standard
+				has_law = law_type:law_silver_standard
+				has_law = law_type:law_bimetallism_standard
+			}
+		}
+		value = zz_ef_cb_cover
+		divide = zz_ef_cover_normal
+		subtract = 0.5
+		multiply = 2
+		min = 0
+		max = 1
+	}
+}
+zz_ef_v_f_abr = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_abr } value = var:zz_ef_f_abr }
+}
+zz_ef_v_f_ext_net = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_ext_net } value = var:zz_ef_f_ext_net }
+}
+# M.3 (4.10): Hume's money on (1) / off (0) -- see zz_ef_cb_hume_step. П.5 (the user, 4.10, В.1): off -- the
+# engine pays the exporter already (one money for the world), the CB's issue counted it twice (run n1_b: Britain's
+# pool 4M -> 163M in 8 years, rates down to 2%).
+zz_ef_hume_money_on = 0
+# M.3 (4.10): money the CB issued (+) / withdrew (-) for Hume's metal, this receiver / last window
+zz_ef_v_f_hume_money = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_hume_money } value = var:zz_ef_f_hume_money }
+}
+zz_ef_v_w_hume_money = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_w_hume_money } value = var:zz_ef_w_hume_money }
+}
+zz_ef_v_f_hume = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_hume } value = var:zz_ef_f_hume }
+}
+# UI.7 (3.10): the CB card's flows, in money a week (zz_ef_money_model_step)
+zz_ef_v_f_cb_reval = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_cb_reval } value = var:zz_ef_f_cb_reval }
+}
+zz_ef_v_f_cb_hume_m = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_cb_hume_m } value = var:zz_ef_f_cb_hume_m }
+}
+zz_ef_v_f_cb_rescale = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_cb_rescale } value = var:zz_ef_f_cb_rescale }
+}
+
+# Accounts without a stock (pops, CB in money, abroad): change 0.
+zz_ef_zero = 0
+
+# ---- EF.48 item 7: the top sums in gold (E&F money_value_in_gold, gold per
+# unit of money; 0 for a subject or without a standard) ----------------------
+zz_ef_agg_m0_gold = {
+	value = zz_ef_agg_m0
+	multiply = zz_ef_gold_per_unit
+}
+zz_ef_agg_m1_gold = {
+	value = zz_ef_agg_m1
+	multiply = zz_ef_gold_per_unit
+}
+zz_ef_agg_m2_gold = {
+	value = zz_ef_agg_m2
+	multiply = zz_ef_gold_per_unit
+}
+zz_ef_agg_m3_gold = {
+	value = zz_ef_agg_m3
+	multiply = zz_ef_gold_per_unit
+}
+zz_ef_savings_gold = {
+	value = zz_ef_pop_savings
+	multiply = zz_ef_gold_per_unit
+}
+
+# ---- EF.48 item 4: consumer credit (the user, 1.10) -------------------------
+# One debt per country (var:zz_ef_cc_debt), countries with a central bank.
+# Limit: 4 months of income (GDP / 12 x 4); target = limit x f(rate): 100% at
+# a 2% key rate, 0 at 12%. Net borrowing moves 5% of the gap a week; the debt
+# rolls over in a year (1/52 repaid and re-lent a week). Rate: key + 3 pp,
+# interest to the pool (banks' income). New loans only from the free pool.
+# Money: pool -> pops through the dependents' surcharge (static_modifiers/
+# zz_ef_consumer_credit.txt), back pops -> pool. Mortgages: with housing (СТР.3).
+zz_ef_cc_speed = 0.05
+zz_ef_cc_debt = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_cc_debt } value = var:zz_ef_cc_debt }
+	min = 0
+}
+zz_ef_cc_rate = {
+	value = zz_ef_money_rate
+	add = 0.03
+}
+zz_ef_cc_share = {
+	value = 0.12
+	subtract = zz_ef_money_rate
+	divide = 0.10
+	min = 0
+	max = 1
+}
+zz_ef_cc_limit = {
+	value = gdp
+	divide = 3
+	min = 0
+}
+zz_ef_cc_target = {
+	value = zz_ef_cc_limit
+	multiply = zz_ef_cc_share
+	# stage 2, step 6 (Д2.27 а, 6.10): the cover squeezes the consumer credit too (1 at 40%, 0 at 20%)
+	multiply = zz_ef_cb_cover_credit_mult
+}
+# Rollover of a year's term.
+zz_ef_cc_rollover = {
+	value = zz_ef_cc_debt
+	divide = 52
+}
+# Lent this week: the rollover + 5% of the gap below the target, from the
+# free pool only.
+zz_ef_cc_issue = {
+	value = zz_ef_cc_target
+	subtract = zz_ef_cc_debt
+	multiply = zz_ef_cc_speed
+	min = 0
+	# stage 2, step 6 (Д2.26, 6.10): new credit not past the banks' reserve ceiling; the rollover as was
+	max = zz_ef_credit_room
+	add = zz_ef_cc_rollover
+	max = {
+		value = investment_pool
+		min = 0
+	}
+	min = 0
+}
+# Repaid this week: the rollover + 5% of the gap above the target.
+zz_ef_cc_repay = {
+	value = zz_ef_cc_debt
+	subtract = zz_ef_cc_target
+	multiply = zz_ef_cc_speed
+	min = 0
+	add = zz_ef_cc_rollover
+	max = zz_ef_cc_debt
+}
+zz_ef_cc_interest = {
+	value = zz_ef_cc_debt
+	multiply = zz_ef_cc_rate
+	divide = 52
+}
+# The engine never lets dependents' income go below 0 (the 1840.7.1 save of
+# run 6: Prussia's surcharge -0.27 a year per dependent, its dependents' income
+# 0 everywhere; Britain's base ~0.2 + -0.17 = 0.03): a repayment larger than
+# their income would not be collected, while the pool got it. So pops pay at
+# most 0.1 a year per dependent net; the rest of the repayment waits, unpaid
+# interest is added to the debt (1.10, check the floor).
+zz_ef_cc_floor_per_dependent = -0.1
+zz_ef_cc_floor_week = {
+	value = 0
+	if = {
+		limit = { has_variable = zz_ef_dependents }
+		value = var:zz_ef_dependents
+		multiply = zz_ef_cc_floor_per_dependent
+		divide = 52
+	}
+}
+# Pops' dependents (var:zz_ef_dependents, refreshed monthly: the sum over
+# pops is not cheap).
+zz_ef_dependents_count = {
+	value = 0
+	every_scope_pop = {
+		add = dependents
+	}
+}
+# The surcharge per dependent a year for this week's net flow.
+zz_ef_cc_wage_add = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = zz_ef_dependents
+			var:zz_ef_dependents > 0
+		}
+		value = zz_ef_pop_extra_income_week
+		multiply = 52
+		divide = var:zz_ef_dependents
+	}
+}
+# The week's extra income to pops through the dependents' surcharge: the
+# consumer credit's net flow.
+zz_ef_pop_extra_income_week = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_cc_net } add = var:zz_ef_f_cc_net }
+}
+zz_ef_v_f_cc_issue = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_cc_issue } value = var:zz_ef_f_cc_issue }
+}
+zz_ef_v_f_cc_repay = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_cc_repay } value = var:zz_ef_f_cc_repay }
+}
+zz_ef_v_f_cc_int = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_cc_int } value = var:zz_ef_f_cc_int }
+}
+zz_ef_v_f_cc_net = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_cc_net } value = var:zz_ef_f_cc_net }
+}
+zz_ef_v_w_cc_issue = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_w_cc_issue } value = var:zz_ef_w_cc_issue }
+}
+zz_ef_v_w_cc_repay = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_w_cc_repay } value = var:zz_ef_w_cc_repay }
+}
+zz_ef_v_w_cc_int = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_w_cc_int } value = var:zz_ef_w_cc_int }
+}
+zz_ef_v_w_cc_net = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_w_cc_net } value = var:zz_ef_w_cc_net }
+}
+zz_ef_cc_debt_to_gdp = {
+	value = 0
+	if = {
+		limit = { gdp > 0 }
+		value = zz_ef_cc_debt
+		divide = gdp
+	}
+}
+zz_ef_v_dependents = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_dependents } value = var:zz_ef_dependents }
+}
+
+# ---- EF.48 item 5: business credit (the user, 1.10; repaid in money 1.10
+# evening -- scripted_effects/zz_ef_money_model.txt, zz_ef_business_credit_step)
+# One debt per country (var:zz_ef_bc_debt). Private construction is paid from
+# the pool (the transfer to the treasury); the part of it that was the banks'
+# borrowed money -- the CB's credit and pops' deposits, by their share of the
+# pool -- becomes the businesses' debt. Interest at the consumer rate (key +
+# 3 pp), repaid over 5 years (term decided at night, check); both are
+# counted against the buildings' contributions to the pool -- no money moves.
+# What the contributions do not cover is added to the debt.
+zz_ef_bc_term_weeks = 260
+zz_ef_bc_debt = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_bc_debt } value = var:zz_ef_bc_debt }
+	min = 0
+}
+zz_ef_bc_borrowed_share = {
+	value = 0
+	if = {
+		limit = { investment_pool > 0 }
+		value = zz_ef_bank_cb_debt
+		add = zz_ef_pop_deposits
+		divide = investment_pool
+	}
+	min = 0
+	max = 1
+}
+zz_ef_bc_new = {
+	value = zz_ef_v_f_transfer
+	multiply = zz_ef_bc_borrowed_share
+	# stage 2, step 6 (Д2.26: new credit over the ceiling -- 0, 6.10): the part of construction over the banks' reserve
+	# ceiling is not lent (r1006_135058: Britain's business debt 19M against a ceiling of ~10M by 1838)
+	max = zz_ef_credit_room
+	min = 0
+}
+zz_ef_bc_interest = {
+	value = zz_ef_bc_debt
+	multiply = zz_ef_cc_rate
+	divide = 52
+}
+zz_ef_bc_due = {
+	value = zz_ef_bc_debt
+	divide = zz_ef_bc_term_weeks
+	add = zz_ef_bc_interest
+}
+# Paid from the week's contributions, at most all of them.
+zz_ef_bc_paid = {
+	value = zz_ef_bc_due
+	max = {
+		value = zz_ef_v_f_contrib
+		min = 0
+	}
+}
+zz_ef_v_f_bc_new = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_bc_new } value = var:zz_ef_f_bc_new }
+}
+zz_ef_v_f_bc_int = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_bc_int } value = var:zz_ef_f_bc_int }
+}
+zz_ef_v_f_bc_paid = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_bc_paid } value = var:zz_ef_f_bc_paid }
+}
+zz_ef_bc_debt_to_gdp = {
+	value = 0
+	if = {
+		limit = { gdp > 0 }
+		value = zz_ef_bc_debt
+		divide = gdp
+	}
+}
+# The controller of zz_ef_debt_service (steps of +0.01 of every stratum's
+# contribution share, at most 30): steps down when the contributions cover
+# the due by 20%.
+zz_ef_bc_svc_max = 30
+zz_ef_bc_contrib_slack = {
+	value = zz_ef_v_f_contrib
+	subtract = {
+		value = 0
+		if = { limit = { has_variable = zz_ef_f_bc_due } value = var:zz_ef_f_bc_due }
+		multiply = 1.2
+	}
+}
+zz_ef_v_bc_svc = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_bc_svc } value = var:zz_ef_bc_svc }
+}
+# Share of the contributions that went to debt service this week.
+zz_ef_bc_service_share = {
+	value = 0
+	if = {
+		limit = { zz_ef_v_f_contrib > 0 }
+		value = zz_ef_v_f_bc_paid
+		divide = zz_ef_v_f_contrib
+	}
+}
+
+# ---- EF.48 items 11-12: money in circulation, M3, inflation (the user, 1.10)
+zz_ef_circulation = {
+	value = money_supply
+}
+zz_ef_circ_now = {
+	value = zz_ef_circulation
+}
+zz_ef_gdp_now = {
+	value = gdp
+	min = 1
+}
+# Growth a year, annualised from the oldest slot of the year ring (4-week
+# blocks, var:zz_ef_<m>_q1..13; 13 = a year ago). 0 before the first block.
+zz_ef_circ_growth_year = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = zz_ef_circ_q13
+			var:zz_ef_circ_q13 > 0
+		}
+		value = zz_ef_circ_now
+		divide = var:zz_ef_circ_q13
+		subtract = 1
+		multiply = 1.00000
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_circ_q12
+			var:zz_ef_circ_q12 > 0
+		}
+		value = zz_ef_circ_now
+		divide = var:zz_ef_circ_q12
+		subtract = 1
+		multiply = 1.08333
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_circ_q11
+			var:zz_ef_circ_q11 > 0
+		}
+		value = zz_ef_circ_now
+		divide = var:zz_ef_circ_q11
+		subtract = 1
+		multiply = 1.18182
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_circ_q10
+			var:zz_ef_circ_q10 > 0
+		}
+		value = zz_ef_circ_now
+		divide = var:zz_ef_circ_q10
+		subtract = 1
+		multiply = 1.30000
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_circ_q9
+			var:zz_ef_circ_q9 > 0
+		}
+		value = zz_ef_circ_now
+		divide = var:zz_ef_circ_q9
+		subtract = 1
+		multiply = 1.44444
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_circ_q8
+			var:zz_ef_circ_q8 > 0
+		}
+		value = zz_ef_circ_now
+		divide = var:zz_ef_circ_q8
+		subtract = 1
+		multiply = 1.62500
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_circ_q7
+			var:zz_ef_circ_q7 > 0
+		}
+		value = zz_ef_circ_now
+		divide = var:zz_ef_circ_q7
+		subtract = 1
+		multiply = 1.85714
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_circ_q6
+			var:zz_ef_circ_q6 > 0
+		}
+		value = zz_ef_circ_now
+		divide = var:zz_ef_circ_q6
+		subtract = 1
+		multiply = 2.16667
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_circ_q5
+			var:zz_ef_circ_q5 > 0
+		}
+		value = zz_ef_circ_now
+		divide = var:zz_ef_circ_q5
+		subtract = 1
+		multiply = 2.60000
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_circ_q4
+			var:zz_ef_circ_q4 > 0
+		}
+		value = zz_ef_circ_now
+		divide = var:zz_ef_circ_q4
+		subtract = 1
+		multiply = 3.25000
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_circ_q3
+			var:zz_ef_circ_q3 > 0
+		}
+		value = zz_ef_circ_now
+		divide = var:zz_ef_circ_q3
+		subtract = 1
+		multiply = 4.33333
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_circ_q2
+			var:zz_ef_circ_q2 > 0
+		}
+		value = zz_ef_circ_now
+		divide = var:zz_ef_circ_q2
+		subtract = 1
+		multiply = 6.50000
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_circ_q1
+			var:zz_ef_circ_q1 > 0
+		}
+		value = zz_ef_circ_now
+		divide = var:zz_ef_circ_q1
+		subtract = 1
+		multiply = 13.00000
+	}
+}
+zz_ef_gdp_growth_year = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = zz_ef_gdp_q13
+			var:zz_ef_gdp_q13 > 0
+		}
+		value = zz_ef_gdp_now
+		divide = var:zz_ef_gdp_q13
+		subtract = 1
+		multiply = 1.00000
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_gdp_q12
+			var:zz_ef_gdp_q12 > 0
+		}
+		value = zz_ef_gdp_now
+		divide = var:zz_ef_gdp_q12
+		subtract = 1
+		multiply = 1.08333
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_gdp_q11
+			var:zz_ef_gdp_q11 > 0
+		}
+		value = zz_ef_gdp_now
+		divide = var:zz_ef_gdp_q11
+		subtract = 1
+		multiply = 1.18182
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_gdp_q10
+			var:zz_ef_gdp_q10 > 0
+		}
+		value = zz_ef_gdp_now
+		divide = var:zz_ef_gdp_q10
+		subtract = 1
+		multiply = 1.30000
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_gdp_q9
+			var:zz_ef_gdp_q9 > 0
+		}
+		value = zz_ef_gdp_now
+		divide = var:zz_ef_gdp_q9
+		subtract = 1
+		multiply = 1.44444
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_gdp_q8
+			var:zz_ef_gdp_q8 > 0
+		}
+		value = zz_ef_gdp_now
+		divide = var:zz_ef_gdp_q8
+		subtract = 1
+		multiply = 1.62500
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_gdp_q7
+			var:zz_ef_gdp_q7 > 0
+		}
+		value = zz_ef_gdp_now
+		divide = var:zz_ef_gdp_q7
+		subtract = 1
+		multiply = 1.85714
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_gdp_q6
+			var:zz_ef_gdp_q6 > 0
+		}
+		value = zz_ef_gdp_now
+		divide = var:zz_ef_gdp_q6
+		subtract = 1
+		multiply = 2.16667
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_gdp_q5
+			var:zz_ef_gdp_q5 > 0
+		}
+		value = zz_ef_gdp_now
+		divide = var:zz_ef_gdp_q5
+		subtract = 1
+		multiply = 2.60000
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_gdp_q4
+			var:zz_ef_gdp_q4 > 0
+		}
+		value = zz_ef_gdp_now
+		divide = var:zz_ef_gdp_q4
+		subtract = 1
+		multiply = 3.25000
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_gdp_q3
+			var:zz_ef_gdp_q3 > 0
+		}
+		value = zz_ef_gdp_now
+		divide = var:zz_ef_gdp_q3
+		subtract = 1
+		multiply = 4.33333
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_gdp_q2
+			var:zz_ef_gdp_q2 > 0
+		}
+		value = zz_ef_gdp_now
+		divide = var:zz_ef_gdp_q2
+		subtract = 1
+		multiply = 6.50000
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_gdp_q1
+			var:zz_ef_gdp_q1 > 0
+		}
+		value = zz_ef_gdp_now
+		divide = var:zz_ef_gdp_q1
+		subtract = 1
+		multiply = 13.00000
+	}
+}
+# ---- inflation from prices (the user, 1.10 night) --------------------------
+# A consumer price index of the country's market: the vanilla consumer goods
+# (staple and luxury, + electricity; without gold, merchant marine and the
+# mods' goods -- not every mod is in the playset), each at its price
+# (base price x (1 + market_goods_pricier)) weighted by its buy orders x base
+# price: sum(price x q) / sum(base x q) x 100 -- 100 = base prices. The
+# weights are this week's (a Paasche-type level); the index is kept weekly
+# in the year ring (var:zz_ef_price_q1..13). Replaces E&F's inflation: E&F
+# summed five groups' mean changes unweighted, took the price deviation in
+# absolute value (prices under base read as inflation too) and added manual
+# monetary-policy marks.
+zz_ef_cpi_value = {
+	value = 0
+	market = {
+		mg:grain = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:grain.base_price } }
+		mg:fish = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:fish.base_price } }
+		mg:fabric = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:fabric.base_price } }
+		mg:wood = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:wood.base_price } }
+		mg:groceries = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:groceries.base_price } }
+		mg:clothes = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:clothes.base_price } }
+		mg:furniture = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:furniture.base_price } }
+		mg:paper = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:paper.base_price } }
+		mg:services = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:services.base_price } }
+		mg:transportation = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:transportation.base_price } }
+		mg:electricity = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:electricity.base_price } }
+		mg:porcelain = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:porcelain.base_price } }
+		mg:meat = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:meat.base_price } }
+		mg:fruit = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:fruit.base_price } }
+		mg:liquor = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:liquor.base_price } }
+		mg:wine = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:wine.base_price } }
+		mg:tea = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:tea.base_price } }
+		mg:coffee = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:coffee.base_price } }
+		mg:sugar = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:sugar.base_price } }
+		mg:tobacco = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:tobacco.base_price } }
+		mg:opium = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:opium.base_price } }
+		mg:automobiles = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:automobiles.base_price } }
+		mg:telephones = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:telephones.base_price } }
+		mg:radios = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:radios.base_price } }
+		mg:luxury_clothes = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:luxury_clothes.base_price } }
+		mg:luxury_furniture = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:luxury_furniture.base_price } }
+		mg:fine_art = { add = { value = market_goods_pricier add = 1 multiply = market_goods_buy_orders multiply = g:fine_art.base_price } }
+	}
+}
+zz_ef_cpi_weight = {
+	value = 0
+	market = {
+		mg:grain = { add = { value = market_goods_buy_orders multiply = g:grain.base_price } }
+		mg:fish = { add = { value = market_goods_buy_orders multiply = g:fish.base_price } }
+		mg:fabric = { add = { value = market_goods_buy_orders multiply = g:fabric.base_price } }
+		mg:wood = { add = { value = market_goods_buy_orders multiply = g:wood.base_price } }
+		mg:groceries = { add = { value = market_goods_buy_orders multiply = g:groceries.base_price } }
+		mg:clothes = { add = { value = market_goods_buy_orders multiply = g:clothes.base_price } }
+		mg:furniture = { add = { value = market_goods_buy_orders multiply = g:furniture.base_price } }
+		mg:paper = { add = { value = market_goods_buy_orders multiply = g:paper.base_price } }
+		mg:services = { add = { value = market_goods_buy_orders multiply = g:services.base_price } }
+		mg:transportation = { add = { value = market_goods_buy_orders multiply = g:transportation.base_price } }
+		mg:electricity = { add = { value = market_goods_buy_orders multiply = g:electricity.base_price } }
+		mg:porcelain = { add = { value = market_goods_buy_orders multiply = g:porcelain.base_price } }
+		mg:meat = { add = { value = market_goods_buy_orders multiply = g:meat.base_price } }
+		mg:fruit = { add = { value = market_goods_buy_orders multiply = g:fruit.base_price } }
+		mg:liquor = { add = { value = market_goods_buy_orders multiply = g:liquor.base_price } }
+		mg:wine = { add = { value = market_goods_buy_orders multiply = g:wine.base_price } }
+		mg:tea = { add = { value = market_goods_buy_orders multiply = g:tea.base_price } }
+		mg:coffee = { add = { value = market_goods_buy_orders multiply = g:coffee.base_price } }
+		mg:sugar = { add = { value = market_goods_buy_orders multiply = g:sugar.base_price } }
+		mg:tobacco = { add = { value = market_goods_buy_orders multiply = g:tobacco.base_price } }
+		mg:opium = { add = { value = market_goods_buy_orders multiply = g:opium.base_price } }
+		mg:automobiles = { add = { value = market_goods_buy_orders multiply = g:automobiles.base_price } }
+		mg:telephones = { add = { value = market_goods_buy_orders multiply = g:telephones.base_price } }
+		mg:radios = { add = { value = market_goods_buy_orders multiply = g:radios.base_price } }
+		mg:luxury_clothes = { add = { value = market_goods_buy_orders multiply = g:luxury_clothes.base_price } }
+		mg:luxury_furniture = { add = { value = market_goods_buy_orders multiply = g:luxury_furniture.base_price } }
+		mg:fine_art = { add = { value = market_goods_buy_orders multiply = g:fine_art.base_price } }
+	}
+}
+zz_ef_price_index = {
+	value = 100
+	if = {
+		limit = { zz_ef_cpi_weight > 0 }
+		value = zz_ef_cpi_value
+		divide = zz_ef_cpi_weight
+		multiply = 100
+	}
+}
+# Change of the index over a year (13 four-week blocks); before the year is
+# full, the change since the oldest block from the 6th on, annualised; under 6
+# blocks 0 (one month's noise is not a year's inflation).
+zz_ef_price_growth_year = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = zz_ef_price_q13
+			var:zz_ef_price_q13 > 0
+		}
+		value = zz_ef_price_index
+		divide = var:zz_ef_price_q13
+		subtract = 1
+		multiply = 1.00000
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_price_q12
+			var:zz_ef_price_q12 > 0
+		}
+		value = zz_ef_price_index
+		divide = var:zz_ef_price_q12
+		subtract = 1
+		multiply = 1.08333
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_price_q11
+			var:zz_ef_price_q11 > 0
+		}
+		value = zz_ef_price_index
+		divide = var:zz_ef_price_q11
+		subtract = 1
+		multiply = 1.18182
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_price_q10
+			var:zz_ef_price_q10 > 0
+		}
+		value = zz_ef_price_index
+		divide = var:zz_ef_price_q10
+		subtract = 1
+		multiply = 1.30000
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_price_q9
+			var:zz_ef_price_q9 > 0
+		}
+		value = zz_ef_price_index
+		divide = var:zz_ef_price_q9
+		subtract = 1
+		multiply = 1.44444
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_price_q8
+			var:zz_ef_price_q8 > 0
+		}
+		value = zz_ef_price_index
+		divide = var:zz_ef_price_q8
+		subtract = 1
+		multiply = 1.62500
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_price_q7
+			var:zz_ef_price_q7 > 0
+		}
+		value = zz_ef_price_index
+		divide = var:zz_ef_price_q7
+		subtract = 1
+		multiply = 1.85714
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_price_q6
+			var:zz_ef_price_q6 > 0
+		}
+		value = zz_ef_price_index
+		divide = var:zz_ef_price_q6
+		subtract = 1
+		multiply = 2.16667
+	}
+}
+# Inflation a year: the consumer price index's change (the user, 1.10 night;
+# until then money growth - nominal GDP growth, which measured the velocity
+# of money, not prices, and multiplied a month by 13 in the first year).
+zz_ef_inflation = {
+	value = zz_ef_price_growth_year
+	min = -0.5
+	max = 1
+}
+
+# ---- EF.31 item 10 (the user, 1.10): no manual penalty for a cheap rate --
+# a low rate pays back through the money itself (more credit -> faster M3 ->
+# inflation, item 12). The bubble (EF.34) is only measured here, from the
+# accounting; its mechanics come with block Б.
+zz_ef_credit_total = {
+	value = zz_ef_bank_cb_debt
+	add = zz_ef_cc_debt
+	add = zz_ef_bc_debt
+}
+zz_ef_credit_to_gdp = {
+	value = 0
+	if = {
+		limit = { gdp > 0 }
+		value = zz_ef_credit_total
+		divide = gdp
+	}
+}
+# The pool in months of contributions (E&F's bubble grows when money piles
+# up in the pool faster than it is invested).
+zz_ef_pool_months = {
+	value = 0
+	if = {
+		limit = { zz_ef_pool_contrib_month > 0 }
+		value = investment_pool
+		divide = zz_ef_pool_contrib_month
+	}
+}
+zz_ef_savings_to_gdp = {
+	value = 0
+	if = {
+		limit = { gdp > 0 }
+		value = zz_ef_pop_savings
+		divide = gdp
+	}
+}
+# The treasury card's "other" after the E&F moves are shown as their own line
+# (0 once the week's bridge data arrived).
+zz_ef_other_treasury_rest = {
+	value = zz_ef_other_treasury_budget
+	subtract = zz_ef_v_f_tr_other
+}
+
+# ---- the user's money aggregates (1.10 day; the CB out of them 1.10 evening)
+# M0 = the treasury; M1 = M0 + the banks (the pool); M2 = M1 + businesses'
+# cash + pops' savings at hand; M3 = M2 + claims on abroad (foreign bonds of
+# the private banks and of the treasury). Deposits are part of the pool, so
+# pops' savings count only at hand.
+# The CB's metal and currency-good stock are its RESERVES -- the cover of the
+# money, not money (the user, 1.10 evening, run 10): with them in M0 a payment
+# abroad was counted twice -- the money left the pool (or business cash) and
+# Hume's mechanism took the same sum off the CB's metal (Britain 1840.1.2:
+# bonds -7.7M from the pool, metal -7.4M, M2 -4.4% in a month). Now an outflow
+# lowers the money once and the cover by the same sum. The CB issues money
+# only as credit to banks; that money is in the pool (M1).
+
+# The central bank's reserves in money: its metal at parity (E&F's
+# central_bank_reserves, in the standard's metal, / var:money_value_target_1,
+# metal per unit). Metal only (the user, 1.10 evening): E&F's currency-good
+# stock (money_supply_state) is counts of a good, shown in the CB's card.
+zz_ef_cb_metal_money = {
+	value = 0
+	if = {
+		limit = {
+			has_modifier = has_central_bank
+			has_variable = money_value_target_1
+			var:money_value_target_1 > 0
+		}
+		value = central_bank_reserves
+		divide = zz_ef_cb_valuation
+	}
+}
+# Metal per unit the CB's metal is valued at: the parity. Until version 7 it
+# was never under today's value (run 8: re-anchors after a collapse put the
+# parity at a tiny value -- Spain, Ottomans, Belgium -- the CB's money jumped
+# to billions); with the historical parity and 40% cover (1.10 evening) the
+# reserves at parity are the cover itself, so the floor is gone.
+zz_ef_cb_valuation = {
+	value = var:money_value_target_1
+	max = 1000000
+	min = 0.00001
+}
+# The CB's reserves in money (not money: outside M0-M3, shown as the cover).
+zz_ef_cb_money = {
+	value = zz_ef_cb_metal_money
+	min = 0
+}
+zz_ef_pop_cash_held = {
+	value = zz_ef_pop_cash
+	min = 0
+}
+# The treasury's foreign bonds (E&F ai_buy_bond_1..10: bought with
+# add_treasury = -ai_total_bond_value_N, live while ai_buy_bond_N_on = 1).
+zz_ef_treasury_bonds = {
+	# В5.5 (5.10): the treasury's parts of other countries' engine debt (the bond ledger), not E&F's prices
+	value = zz_ef_bl_parts
+}
+# Claims on abroad in M3: the banks' and the treasury's foreign bonds. E&F's
+# trade account (var:trade_balance_in_gold_fixe, a counter of cumulative trade
+# in gold -- 12.6 billion for Belgium at M2 182M, runs 8-9) is gone with В2.1
+# (2.10): the trade moves the CB's metal (Hume) and, for a share, the
+# importer's currency (zz_ef_rc_step); the currency held abroad is
+# zz_ef_fx_liab (the log's liab).
+zz_ef_foreign_assets = {
+	value = zz_ef_bank_bonds
+	add = zz_ef_treasury_bonds
+}
+# П.7 (the user, 4.10, В.4): the account "abroad" = the country's net foreign position, in its money -- the
+# claims (other countries' bonds of the banks and the treasury, the CB's foreign currency) minus the debt (our
+# currency held by other CBs and waiting in the clearing house, П.6). The CB's foreign currency counts in the
+# cover too (national_capacity); in the tooltip it is here, not in the CB's reserves (metal only).
+zz_ef_fx_liab_all = {
+	value = zz_ef_fx_liab
+	add = zz_ef_clr_own_in_pot
+}
+# П.17 (4.10): the balance of payments of the week, recorded at the receiver with the net flow (zz_ef_ext_net_week):
+# current account = goods trade + primary income (dividends, bond interest) + secondary income (the other budget
+# lines with abroad); financial account = foreign bonds bought (-); current + financial = the net flow.
+zz_ef_v_f_aint = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_aint } value = var:zz_ef_f_aint }
+}
+# В5.4 (5.10): the week's interest on the treasury's loan from its own CB (E&F's interest_at_the_central_bank, an
+# "additional expense"; scripted_effects/zz_ef_cb_loan_interest.txt) -- treasury -> CB, not abroad.
+zz_ef_v_cbl_int = {
+	value = 0
+	if = {
+		limit = {
+			has_modifier = interest_at_the_central_bank
+			has_variable = zz_ef_cbl_int
+		}
+		value = var:zz_ef_cbl_int
+		min = 0
+	}
+}
+zz_ef_bop_primary = {
+	value = zz_ef_v_f_div
+	add = zz_ef_v_f_aint
+	# В5.5 (5.10): bond interest by the ledger
+	add = zz_ef_v_f_bl_int_in
+	subtract = zz_ef_v_f_bl_int_out
+}
+zz_ef_bop_secondary = {
+	value = zz_ef_v_f_abr
+	subtract = zz_ef_v_f_aint
+	subtract = zz_ef_tr_abr_overlap
+}
+zz_ef_bop_current = {
+	value = zz_ef_v_f_trade
+	add = zz_ef_bop_primary
+	add = zz_ef_bop_secondary
+}
+zz_ef_bop_financial = {
+	value = 0
+	subtract = zz_ef_v_d_bonds
+	subtract = zz_ef_v_d_tbonds
+	# В5.5 (5.10): parts of our debt sold abroad / repaid; a part of theirs written off is no payment
+	add = zz_ef_v_f_bl_sold
+	subtract = zz_ef_v_f_bl_redeem
+	subtract = zz_ef_v_f_bl_lost
+}
+# Е.3–Е.4 (5.10, Д.1): the same balance in two groups for reading -- "+ received" and "− paid out", each item by its
+# sign; goods trade as exports (+) and imports (−) (imports recorded at the step, exports = net + imports so the
+# pair adds up to the net); what the parts miss of the net flow -- "other", by its sign. received − paid = the net.
+zz_ef_v_f_imp = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_imp } value = var:zz_ef_f_imp }
+}
+zz_ef_bop_exp = {
+	value = zz_ef_v_f_trade
+	add = zz_ef_v_f_imp
+}
+zz_ef_bop_other = {
+	value = zz_ef_v_f_ext_net
+	subtract = zz_ef_bop_current
+	subtract = zz_ef_bop_financial
+}
+zz_ef_bop_div_in = { value = zz_ef_v_f_div min = 0 }
+zz_ef_bop_div_out = { value = 0 subtract = zz_ef_v_f_div min = 0 }
+zz_ef_bop_int_in = { value = zz_ef_v_f_aint min = 0 }
+zz_ef_bop_int_out = { value = 0 subtract = zz_ef_v_f_aint min = 0 }
+zz_ef_bop_sec_in = { value = zz_ef_bop_secondary min = 0 }
+zz_ef_bop_sec_out = { value = 0 subtract = zz_ef_bop_secondary min = 0 }
+zz_ef_bop_fin_in = { value = zz_ef_bop_financial min = 0 }
+zz_ef_bop_fin_out = { value = 0 subtract = zz_ef_bop_financial min = 0 }
+zz_ef_bop_oth_in = { value = zz_ef_bop_other min = 0 }
+zz_ef_bop_oth_out = { value = 0 subtract = zz_ef_bop_other min = 0 }
+zz_ef_bop_in_total = {
+	value = zz_ef_bop_exp
+	add = zz_ef_bop_div_in
+	add = zz_ef_bop_int_in
+	add = zz_ef_bop_sec_in
+	add = zz_ef_bop_fin_in
+	add = zz_ef_bop_oth_in
+}
+zz_ef_bop_out_total = {
+	value = zz_ef_v_f_imp
+	add = zz_ef_bop_div_out
+	add = zz_ef_bop_int_out
+	add = zz_ef_bop_sec_out
+	add = zz_ef_bop_fin_out
+	add = zz_ef_bop_oth_out
+}
+zz_ef_abroad_net = {
+	value = zz_ef_foreign_assets
+	add = zz_ef_fx_money
+	subtract = zz_ef_fx_liab_all
+	# В5.5 (5.10): the parts of our engine debt held abroad (the bond ledger)
+	subtract = zz_ef_bl_held_v
+}
+# the clearing's currency at the last receiver (window values, П.6), in money
+zz_ef_v_w_clr_cur_out = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_w_clr_cur_out } value = var:zz_ef_w_clr_cur_out }
+}
+zz_ef_v_w_clr_own_back = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_w_clr_own_back } value = var:zz_ef_w_clr_own_back }
+}
+zz_ef_v_w_clr_fx_in_money = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = zz_ef_w_clr_fx_in
+			zz_ef_clr_gold_per_money > 0
+		}
+		value = var:zz_ef_w_clr_fx_in
+		divide = zz_ef_clr_gold_per_money
+	}
+}
+# As in real statistics (the user, 1.10 evening, run 12): M0 = cash at
+# hand, M1 = + business cash (current accounts), M2 = + pops' deposits. The
+# treasury (the government's account), the CB's reserves and the banks' own
+# funds (the pool beyond deposits) are outside the money supply. Deposits are
+# the banks' debt to pops: the pool may have lent them on -- then the same
+# money is also in business cash (the banks created it).
+zz_ef_agg_m0 = {
+	value = zz_ef_pop_cash_held
+}
+# В2 (the user, 7.10): the Banks' cash (building_zz_ef_bank) is the banks' own money, not money in circulation -- out
+# of M1 / M2, shown with the banks (save 1842.1 of run r1006_141714: 38-47% of the business cash -- Britain 15.4M of 33.1M,
+# M2 ~1 GDP). The engine's money (zz_ef_m2, the leak) keeps the whole business cash.
+zz_ef_bank_cash_sum = {
+	value = 0
+	every_scope_building = {
+		limit = { is_building_type = building_zz_ef_bank }
+		add = cash_reserves_available
+	}
+}
+zz_ef_bank_cash = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_bkcash } value = var:zz_ef_bkcash }
+	min = 0
+}
+zz_ef_circ_business_cash = {
+	value = zz_ef_building_cash
+	subtract = zz_ef_bank_cash
+	min = 0
+}
+zz_ef_agg_m1 = {
+	value = zz_ef_agg_m0
+	add = zz_ef_circ_business_cash
+}
+zz_ef_agg_m2 = {
+	value = zz_ef_agg_m1
+	add = {
+		value = zz_ef_pop_deposits
+		min = 0
+	}
+}
+# Shares of a year's GDP, for the tooltip (the norm: Britain 1830s M2 ~45%).
+zz_ef_agg_m0_to_gdp = {
+	value = 0
+	if = {
+		limit = { gdp > 0 }
+		value = zz_ef_agg_m0
+		divide = gdp
+	}
+}
+zz_ef_agg_m1_to_gdp = {
+	value = 0
+	if = {
+		limit = { gdp > 0 }
+		value = zz_ef_agg_m1
+		divide = gdp
+	}
+}
+zz_ef_agg_m2_to_gdp = {
+	value = 0
+	if = {
+		limit = { gdp > 0 }
+		value = zz_ef_agg_m2
+		divide = gdp
+	}
+}
+zz_ef_agg_m3 = {
+	value = zz_ef_agg_m2
+	add = zz_ef_foreign_assets
+}
+zz_ef_v_d_tbonds = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_d_tbonds } value = var:zz_ef_d_tbonds }
+}
+# The E&F treasury moves beyond the budget minus the treasury's bond
+# purchases: the government repaying the CB (ai_refund_central_bank).
+zz_ef_tr_to_cb = {
+	value = zz_ef_v_f_tr_other
+	add = zz_ef_v_d_tbonds
+	# В5.5 (5.10): a part written off left the parts without money
+	add = zz_ef_v_f_bl_lost
+}
+zz_ef_v_d_agg0 = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_d_agg0 } value = var:zz_ef_d_agg0 }
+}
+zz_ef_agg0_pct_month = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = zz_ef_agg0_w4
+			var:zz_ef_agg0_w4 > 0
+		}
+		value = zz_ef_agg_m0
+		subtract = var:zz_ef_agg0_w4
+		divide = var:zz_ef_agg0_w4
+	}
+}
+zz_ef_agg0_pct_year = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = zz_ef_agg0_q13
+			var:zz_ef_agg0_q13 > 0
+		}
+		value = zz_ef_agg_m0
+		subtract = var:zz_ef_agg0_q13
+		divide = var:zz_ef_agg0_q13
+	}
+}
+zz_ef_agg0_pct_5y = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = zz_ef_agg0_r20
+			var:zz_ef_agg0_r20 > 0
+		}
+		value = zz_ef_agg_m0
+		subtract = var:zz_ef_agg0_r20
+		divide = var:zz_ef_agg0_r20
+	}
+}
+zz_ef_v_d_agg1 = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_d_agg1 } value = var:zz_ef_d_agg1 }
+}
+zz_ef_agg1_pct_month = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = zz_ef_agg1_w4
+			var:zz_ef_agg1_w4 > 0
+		}
+		value = zz_ef_agg_m1
+		subtract = var:zz_ef_agg1_w4
+		divide = var:zz_ef_agg1_w4
+	}
+}
+zz_ef_agg1_pct_year = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = zz_ef_agg1_q13
+			var:zz_ef_agg1_q13 > 0
+		}
+		value = zz_ef_agg_m1
+		subtract = var:zz_ef_agg1_q13
+		divide = var:zz_ef_agg1_q13
+	}
+}
+zz_ef_agg1_pct_5y = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = zz_ef_agg1_r20
+			var:zz_ef_agg1_r20 > 0
+		}
+		value = zz_ef_agg_m1
+		subtract = var:zz_ef_agg1_r20
+		divide = var:zz_ef_agg1_r20
+	}
+}
+zz_ef_v_d_agg2 = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_d_agg2 } value = var:zz_ef_d_agg2 }
+}
+zz_ef_agg2_pct_month = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = zz_ef_agg2_w4
+			var:zz_ef_agg2_w4 > 0
+		}
+		value = zz_ef_agg_m2
+		subtract = var:zz_ef_agg2_w4
+		divide = var:zz_ef_agg2_w4
+	}
+}
+zz_ef_agg2_pct_year = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = zz_ef_agg2_q13
+			var:zz_ef_agg2_q13 > 0
+		}
+		value = zz_ef_agg_m2
+		subtract = var:zz_ef_agg2_q13
+		divide = var:zz_ef_agg2_q13
+	}
+}
+zz_ef_agg2_pct_5y = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = zz_ef_agg2_r20
+			var:zz_ef_agg2_r20 > 0
+		}
+		value = zz_ef_agg_m2
+		subtract = var:zz_ef_agg2_r20
+		divide = var:zz_ef_agg2_r20
+	}
+}
+zz_ef_v_d_agg3 = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_d_agg3 } value = var:zz_ef_d_agg3 }
+}
+zz_ef_agg3_pct_month = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = zz_ef_agg3_w4
+			var:zz_ef_agg3_w4 > 0
+		}
+		value = zz_ef_agg_m3
+		subtract = var:zz_ef_agg3_w4
+		divide = var:zz_ef_agg3_w4
+	}
+}
+zz_ef_agg3_pct_year = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = zz_ef_agg3_q13
+			var:zz_ef_agg3_q13 > 0
+		}
+		value = zz_ef_agg_m3
+		subtract = var:zz_ef_agg3_q13
+		divide = var:zz_ef_agg3_q13
+	}
+}
+zz_ef_agg3_pct_5y = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = zz_ef_agg3_r20
+			var:zz_ef_agg3_r20 > 0
+		}
+		value = zz_ef_agg_m3
+		subtract = var:zz_ef_agg3_r20
+		divide = var:zz_ef_agg3_r20
+	}
+}
+# UI.11 (5.10): E&F's CB building stored metal since the last step (its monthly stockpiling), in money at the parity
+zz_ef_v_f_cb_stock = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_cb_stock } value = var:zz_ef_f_cb_stock }
+}
+zz_ef_v_d_cbm = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_d_cbm } value = var:zz_ef_d_cbm }
+}
+zz_ef_v_d_abroad = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_d_abroad } value = var:zz_ef_d_abroad }
+}
+
+# Gold per unit of the country's own money, from its OWN value only
+# (money_value_0: capacity / money in circulation, in the standard's metal;
+# silver converted by E&F's silver_to_gold_rate, from world production).
+# E&F's money_value_in_gold goes through the market owner for subjects; read
+# weekly for every country (M3, run 8, 1.10) it ended in a stack overflow
+# crash -- so it is not read here. 0 without a central bank on a metal
+# standard.
+zz_ef_gold_per_unit = {
+	value = 0
+	if = {
+		limit = {
+			has_modifier = has_central_bank
+			OR = {
+				has_law = law_type:law_gold_standard
+				has_law = law_type:law_bimetallism_standard
+			}
+		}
+		value = money_value_0
+	}
+	else_if = {
+		limit = {
+			has_modifier = has_central_bank
+			has_law = law_type:law_silver_standard
+		}
+		value = money_value_0
+		multiply = silver_to_gold_rate
+	}
+}
+
+# ---- engine probes from the GUI bridge (dump_data_types, 1.10 night): trade, ownership
+# abroad, the pool's change, the government's rate -- the weekly log only, for now.
+zz_ef_v_g_imp = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_g_imp } value = var:zz_ef_g_imp }
+}
+zz_ef_v_g_exp = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_g_exp } value = var:zz_ef_g_exp }
+}
+zz_ef_v_g_surplus = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_g_surplus } value = var:zz_ef_g_surplus }
+}
+zz_ef_v_g_fown = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_g_fown } value = var:zz_ef_g_fown }
+}
+zz_ef_v_g_aown = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_g_aown } value = var:zz_ef_g_aown }
+}
+zz_ef_v_g_poolchg = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_g_poolchg } value = var:zz_ef_g_poolchg }
+}
+zz_ef_v_g_pcons = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_g_pcons } value = var:zz_ef_g_pcons }
+}
+zz_ef_v_g_grate = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_g_grate } value = var:zz_ef_g_grate }
+}
+zz_ef_v_g_maxcred = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_g_maxcred } value = var:zz_ef_g_maxcred }
+}
+zz_ef_v_g_wgdp = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_g_wgdp } value = var:zz_ef_g_wgdp }
+}
+
+# ---- night 2 (2.10): currencies, the silver rate, reserves -----------------
+
+# Item 1 (the user, 1.10 night): the silver-to-gold rate (gold per unit of
+# silver, E&F's silver_to_gold_rate) from the metals' prices: (silver price /
+# gold price) x (gold base price / silver base price) / 15.5 -- 1:15.5 at the
+# base prices (the French legal ratio of 1803, near the 1830s market). E&F's
+# was world gold / silver production (global_var:global_*_production_fix, 2 /
+# 13), clamped to 1:5 .. 1:64: silver currencies read ~3 times their gold
+# value, the "average value of money" followed them up and the pound read as
+# "weak, -55%" (run 18). Prices over every market, weighted by the metal's
+# sell + buy orders there (the world price); 1 if nothing is traded. Kept
+# monthly in global_var:zz_ef_s2g (zz_ef_silver_rate_update); E&F's bounds.
+zz_ef_world_gold_price_mult = {
+	value = 1
+	if = {
+		limit = { zz_ef_world_gold_orders > 0 }
+		value = 0
+		every_market = {
+			add = {
+				value = mg:gold.market_goods_pricier
+				add = 1
+				multiply = {
+					value = mg:gold.market_goods_sell_orders
+					add = mg:gold.market_goods_buy_orders
+				}
+			}
+		}
+		divide = zz_ef_world_gold_orders
+	}
+	min = 0.05
+}
+zz_ef_world_gold_orders = {
+	value = 0
+	every_market = {
+		add = mg:gold.market_goods_sell_orders
+		add = mg:gold.market_goods_buy_orders
+	}
+}
+zz_ef_world_silver_price_mult = {
+	value = 1
+	if = {
+		limit = { zz_ef_world_silver_orders > 0 }
+		value = 0
+		every_market = {
+			add = {
+				value = mg:silver.market_goods_pricier
+				add = 1
+				multiply = {
+					value = mg:silver.market_goods_sell_orders
+					add = mg:silver.market_goods_buy_orders
+				}
+			}
+		}
+		divide = zz_ef_world_silver_orders
+	}
+	min = 0.05
+}
+zz_ef_world_silver_orders = {
+	value = 0
+	every_market = {
+		add = mg:silver.market_goods_sell_orders
+		add = mg:silver.market_goods_buy_orders
+	}
+}
+zz_ef_silver_to_gold_market = {
+	value = zz_ef_world_silver_price_mult
+	divide = zz_ef_world_gold_price_mult
+	divide = 15.5
+	max = 0.2
+	min = 0.01563
+}
+
+# Item 2: foreign currency in the reserves, in the standard's metal (kept
+# weekly by zz_ef_fx_metal_update).
+zz_ef_v_fx_metal = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_fx_metal } value = var:zz_ef_fx_metal }
+	min = 0
+}
+
+# Item 3: the crisis redemption, for the log.
+zz_ef_v_crisis_due = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_crisis_due } value = var:zz_ef_crisis_due }
+}
+zz_ef_v_crisis_paid = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_crisis_paid } value = var:zz_ef_crisis_paid }
+}
+
+# The monthly currency line (EFX): standard (1 gold, 2 silver, 3 bimetallism,
+# 4 gold exchange, 5 fiat, 0 none), CB, subject, E&F's crisis flags.
+zz_ef_std_code = {
+	value = 0
+	if = { limit = { has_law = law_type:law_gold_standard } value = 1 }
+	else_if = { limit = { has_law = law_type:law_silver_standard } value = 2 }
+	else_if = { limit = { has_law = law_type:law_bimetallism_standard } value = 3 }
+	else_if = { limit = { has_law = law_type:law_gold_exchange_standard } value = 4 }
+	else_if = { limit = { has_law = law_type:law_fiat_standard } value = 5 }
+}
+zz_ef_has_cb = {
+	value = 0
+	if = { limit = { has_modifier = has_central_bank } value = 1 }
+}
+zz_ef_is_subject = {
+	value = 0
+	if = { limit = { is_subject = yes } value = 1 }
+}
+zz_ef_crisis_flag = {
+	value = 0
+	if = { limit = { has_variable = currency_crisis var:currency_crisis = 1 } add = 1 }
+	if = { limit = { has_variable = central_bank_bankruptcy var:central_bank_bankruptcy = 1 } add = 2 }
+}
+zz_ef_money_median = {
+	value = 0
+	if = { limit = { has_global_variable = money_value_median } value = global_var:money_value_median }
+}
+
+# Item 4 (the user, 1.10 night): the trade balance from the engine's data. The
+# engine counts imports and exports in units of goods (run 19); in money: the
+# market's exports - imports of every good x its price there (base price x (1 +
+# market_goods_pricier)), a week. Trade is the market's: the market owner
+# holds it, the other members 0. All goods, the financial ones (E&F's bonds,
+# stocks, funds, currency) too -- a payment abroad either way; they are also
+# shown apart (zz_ef_trade_fin_week).
+# В1.6 item 1 (5.10): at ONE price -- the good's base price, not the market's (base x (1 + pricier)). A good
+# leaving one market and entering another was counted at two prices, the importer's and the exporter's, so the
+# world's trade did not add up (run s1b, 1839: +32M gold a year without a counterpart).
+# В1.6 (5.10 evening, run s1f): at one price the world's exports were still over its imports by 1-4M a month (the
+# world market of 1.13 holds goods between its hubs), and the treasuries' market fees, tolls and piracy (abr, +0.5-1.5M)
+# have no payer's line. The world market is a pool: what the importers pay is shared by the exporters and the fees'
+# receivers (zz_ef_wtr_kr: min(1, imports / (exports + fees)) of the window before); if they claim less, the importers
+# pay as much (zz_ef_wtr_kp). The fees' part not covered goes off the flow (zz_ef_tfees_cut).
+zz_ef_trade_net_week = {
+	value = 0
+	if = {
+		limit = { exists = market market.owner = this }
+		value = zz_ef_trade_exports_week
+		multiply = zz_ef_wtr_kr_v
+		subtract = {
+			value = zz_ef_trade_imports_week
+			multiply = zz_ef_wtr_kp_v
+		}
+		# В3.3 (2.10): customs union members with their own currency settle
+		# their sales inside the market with the owner (generated,
+		# zz_ef_customs_union_values.txt)
+		subtract = zz_ef_members_trade_sum
+	}
+	else_if = {
+		limit = { zz_ef_cu_member = yes }
+		value = zz_ef_member_goods_net
+	}
+}
+zz_ef_trade_fin_week = {
+	value = 0
+	if = {
+		limit = { exists = market market.owner = this }
+		market = {
+			mg:bond = { add = { value = market_goods_exports subtract = market_goods_imports multiply = g:bond.base_price } }
+			mg:manufacture_stock = { add = { value = market_goods_exports subtract = market_goods_imports multiply = g:manufacture_stock.base_price } }
+			mg:agricultural_stock = { add = { value = market_goods_exports subtract = market_goods_imports multiply = g:agricultural_stock.base_price } }
+			mg:mining_stock = { add = { value = market_goods_exports subtract = market_goods_imports multiply = g:mining_stock.base_price } }
+			mg:railroad_stock = { add = { value = market_goods_exports subtract = market_goods_imports multiply = g:railroad_stock.base_price } }
+			mg:mutual_funds = { add = { value = market_goods_exports subtract = market_goods_imports multiply = g:mutual_funds.base_price } }
+			mg:liquidity_currency = { add = { value = market_goods_exports subtract = market_goods_imports multiply = g:liquidity_currency.base_price } }
+		}
+	}
+}
+# Dividends abroad (an estimate from the engine's numbers): the week's profit
+# of the country's buildings (weekly_profit, losses not counted) x the share of
+# its GDP foreign owners hold (GetForeignOwnedGDP, the bridge) out; the same
+# profit rate x the GDP the country owns abroad (GetGDPOwnedInForeignCountries)
+# in. + in, - out. Accepted at night -- check against the budget tooltips.
+zz_ef_profit_week = {
+	value = 0
+	every_scope_building = {
+		add = {
+			value = weekly_profit
+			min = 0
+		}
+	}
+}
+# M.6 / В1.4 (the user, 4.10: a channel back for the metal): dividends and interest from abroad,
+# net -- (GDP owned in foreign countries - GDP foreign-owned here, the engine's yearly numbers from
+# the GUI bridge) x the owners' yield, a week. Was: x the buildings' profit / GDP -- the profit of a
+# year came out at ~1 GDP (Britain +11..25M a year, run e0_7), in the log only. The yield 15% of the
+# GDP owned (capital's share of value added ~30-40%, half of it paid out) -- decided at night,
+# check. Now in the flow abroad (zz_ef_ext_net_week): it moves the metal (Hume).
+zz_ef_div_yield = 0.15
+# В1.6 (5.10 evening, run s1g): the engine's GDP owned abroad and foreign-owned do not add up over the world (dividends
+# -0.1..-0.5M a month without a counterpart) -- a pool as the world trade's: the receivers get x zz_ef_wdv_kr =
+# min(1, world paid / world claimed), the payers pay x zz_ef_wdv_kp = min(1, claimed / paid) of the window before.
+zz_ef_div_net_week = {
+	value = zz_ef_v_g_aown
+	multiply = zz_ef_wdv_kr_v
+	subtract = {
+		value = zz_ef_v_g_fown
+		multiply = zz_ef_wdv_kp_v
+	}
+	multiply = zz_ef_div_yield
+	divide = 52
+}
+zz_ef_v_f_trade = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_trade } value = var:zz_ef_f_trade }
+}
+zz_ef_v_f_trade_fin = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_trade_fin } value = var:zz_ef_f_trade_fin }
+}
+zz_ef_v_f_div = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_div } value = var:zz_ef_f_div }
+}
+
+# Item 5: the government's rate -- the probes and the engine's modifier sums.
+zz_ef_v_g_wrate = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_g_wrate } value = var:zz_ef_g_wrate }
+}
+zz_ef_v_g_ipay = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_g_ipay } value = var:zz_ef_g_ipay }
+}
+zz_ef_v_g_sdebt = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_g_sdebt } value = var:zz_ef_g_sdebt }
+}
+zz_ef_v_g_sdebtf = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_g_sdebtf } value = var:zz_ef_g_sdebtf }
+}
+zz_ef_ir_add = {
+	value = modifier:country_loan_interest_rate_add
+}
+zz_ef_ir_mult = {
+	value = modifier:country_loan_interest_rate_mult
+}
+
+# Item 6: building levels the government owns -- a drop in a week with the
+# pool's unexplained loss (zz_ef_pool_other_week) tells a privatization.
+zz_ef_gov_levels = {
+	value = 0
+	every_scope_building = {
+		limit = {
+			level > 0
+			NOT = { is_under_construction = yes }
+			country_ownership_fraction > 0
+		}
+		add = {
+			value = level
+			multiply = country_ownership_fraction
+		}
+	}
+}
+zz_ef_v_d_govlv = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_d_govlv } value = var:zz_ef_d_govlv }
+}
+
+# Item 5 (the user, 1.10 night): the government's rate = the key rate + the
+# risk premium, the engine's corrections scaling the premium only (static_
+# modifiers/zz_ef_gov_rate.txt). The other multipliers: the engine's sum minus
+# ours (var:zz_ef_gr_mult, a fraction); the other adds likewise.
+zz_ef_gov_rate_mult_other = {
+	value = modifier:country_loan_interest_rate_mult
+	if = { limit = { has_variable = zz_ef_gr_mult } subtract = var:zz_ef_gr_mult }
+}
+zz_ef_gov_rate_add_other = {
+	value = modifier:country_loan_interest_rate_add
+	if = { limit = { has_variable = zz_ef_gr_add } subtract = var:zz_ef_gr_add }
+}
+# The corrections: the others' multipliers, from -0.5 to +1 (the premium x
+# 0.5 .. x 2).
+zz_ef_gov_rate_corr = {
+	value = zz_ef_gov_rate_mult_other
+	min = -0.5
+	max = 1
+}
+zz_ef_gov_rate_premium = {
+	value = zz_ef_cb_rule_risk
+	multiply = {
+		value = 1
+		add = zz_ef_gov_rate_corr
+	}
+	min = 0
+}
+zz_ef_gov_rate_target = {
+	value = zz_ef_money_rate
+	add = zz_ef_gov_rate_premium
+}
+zz_ef_gov_rate_target_pp = {
+	value = zz_ef_gov_rate_target
+	multiply = 100
+}
+zz_ef_gov_rate_premium_pp = {
+	value = zz_ef_gov_rate_premium
+	multiply = 100
+}
+zz_ef_gov_rate_corr_pct = {
+	value = zz_ef_gov_rate_corr
+	multiply = 100
+}
+# Item 6, run 21: the pool's drops (multiples of 15 000) do not come with the
+# government's levels falling -- not a privatization from the state. Next
+# probe: the privately owned levels.
+zz_ef_priv_levels = {
+	value = 0
+	every_scope_building = {
+		limit = {
+			level > 0
+			NOT = { is_under_construction = yes }
+			private_ownership_fraction > 0
+		}
+		add = {
+			value = level
+			multiply = private_ownership_fraction
+		}
+	}
+}
+
+# В1.3 probe (3.10): 1 = on (zz_ef_probe_newyear_cash, the EFJ log lines).
+zz_ef_probe_on = 0
+# UI.7б probe (3.10): 1 = on (zz_ef_probe_pop_income, the EFD log lines).
+zz_ef_probe_pop_on = 0
+# building scope: the cash now, level
+zz_ef_probe_cash_now = {
+	value = cash_reserves_available
+}
+zz_ef_probe_level = {
+	value = level
+}
+
+# В1.6 (5.10): the world's sums of the week for the EFG line (scripted_effects/zz_ef_money_model.txt, zz_ef_world_acc)
+zz_ef_wld_in_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_wld_in } value = global_var:zz_ef_wld_in }
+}
+zz_ef_wld_out_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_wld_out } value = global_var:zz_ef_wld_out }
+}
+zz_ef_wld_nocl_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_wld_nocl } value = global_var:zz_ef_wld_nocl }
+}
+zz_ef_wld_subj_in_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_wld_subj_in } value = global_var:zz_ef_wld_subj_in }
+}
+zz_ef_wld_subj_out_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_wld_subj_out } value = global_var:zz_ef_wld_subj_out }
+}
+zz_ef_wld_hume_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_wld_hume } value = global_var:zz_ef_wld_hume }
+}
+zz_ef_wld_hume_abs_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_wld_hume_abs } value = global_var:zz_ef_wld_hume_abs }
+}
+zz_ef_wld_n_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_wld_n } value = global_var:zz_ef_wld_n }
+}
+zz_ef_wld_n0_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_wld_n0 } value = global_var:zz_ef_wld_n0 }
+}
+zz_ef_wld_in_m_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_wld_in_m } value = global_var:zz_ef_wld_in_m }
+}
+zz_ef_wld_out_m_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_wld_out_m } value = global_var:zz_ef_wld_out_m }
+}
+zz_ef_wld_trade_m_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_wld_trade_m } value = global_var:zz_ef_wld_trade_m }
+}
+zz_ef_wld_abr_m_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_wld_abr_m } value = global_var:zz_ef_wld_abr_m }
+}
+zz_ef_wld_div_m_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_wld_div_m } value = global_var:zz_ef_wld_div_m }
+}
+zz_ef_wld_bond_m_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_wld_bond_m } value = global_var:zz_ef_wld_bond_m }
+}
+# В1.6 (5.10 evening): the world trade pool -- the ratios of the window before (1 until set), the week's fees
+zz_ef_wld_wexp_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_wld_wexp } value = global_var:zz_ef_wld_wexp }
+}
+zz_ef_wld_wimp_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_wld_wimp } value = global_var:zz_ef_wld_wimp }
+}
+zz_ef_wld_wfee_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_wld_wfee } value = global_var:zz_ef_wld_wfee }
+}
+zz_ef_wld_waint_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_wld_waint } value = global_var:zz_ef_wld_waint }
+}
+zz_ef_wdv_kr_v = {
+	value = 1
+	if = { limit = { has_global_variable = zz_ef_wdv_kr } value = global_var:zz_ef_wdv_kr }
+}
+zz_ef_wdv_kp_v = {
+	value = 1
+	if = { limit = { has_global_variable = zz_ef_wdv_kp } value = global_var:zz_ef_wdv_kp }
+}
+zz_ef_wld_waown_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_wld_waown } value = global_var:zz_ef_wld_waown }
+}
+zz_ef_wld_wfown_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_wld_wfown } value = global_var:zz_ef_wld_wfown }
+}
+zz_ef_wtr_kr_v = {
+	value = 1
+	if = { limit = { has_global_variable = zz_ef_wtr_kr } value = global_var:zz_ef_wtr_kr }
+}
+zz_ef_wtr_kp_v = {
+	value = 1
+	if = { limit = { has_global_variable = zz_ef_wtr_kp } value = global_var:zz_ef_wtr_kp }
+}
+zz_ef_v_f_tfees = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_tfees } value = var:zz_ef_f_tfees }
+	min = 0
+}
+zz_ef_tfees_cut = {
+	value = 1
+	subtract = zz_ef_wtr_kr_v
+	multiply = zz_ef_v_f_tfees
+}
+zz_ef_v_f_exp = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_exp } value = var:zz_ef_f_exp }
+}
+zz_ef_wld_gpm_avg_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_wld_gpm_avg } value = global_var:zz_ef_wld_gpm_avg }
+}
+zz_ef_wld_sub_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_wld_sub } value = global_var:zz_ef_wld_sub }
+}
+# В2.4 (5.10): for the cur_intro log line (scripted_effects/zz_ef_currency_intro_metal.txt)
+zz_ef_cur_intro_first_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_cur_intro_first } value = 1 }
+}
+
+# В1.6 (5.10 evening): for the EFA line -- E&F's two modifiers of the additional income / expenses on or off
+zz_ef_cbm_v = {
+	value = 0
+	if = { limit = { has_modifier = interest_at_the_central_bank } value = 1 }
+}
+zz_ef_fdi_mod_v = {
+	value = 0
+	if = { limit = { has_modifier = interest_from_foreign_debt_investment } value = 1 }
+}
+# В1.6 / ИВ.1 (5.10 evening): the week's event money between the treasury and pops' savings (+ to the savings)
+zz_ef_v_f_event_sav = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_event_sav } value = var:zz_ef_f_event_sav }
+}
+# В4.2 (5.10 evening): the engine's factor on the government's rate (1 until measured)
+zz_ef_gr_k_v = {
+	value = 1
+	if = { limit = { has_variable = zz_ef_gr_k } value = var:zz_ef_gr_k }
+}

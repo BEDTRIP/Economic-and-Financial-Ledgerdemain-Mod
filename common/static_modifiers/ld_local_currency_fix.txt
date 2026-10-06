@@ -1,0 +1,24 @@
+﻿### E&F Hotfix — liquidity_currency issued from the computed demand
+###
+### E&F's flat 2500 is disabled at the source (see zz_ef_no_money_production.txt);
+### this modifier is the replacement grant.
+###
+### The base value is +1 and the real amount comes from the multiplier applied
+### when the modifier is handed out: zz_ef_local_currency_per_state, see
+### common/on_actions/.
+###
+### The key is deliberately still called "fix" rather than "grant": the
+### _ZZ EF Local Banks mod neuters this modifier through TRY_REPLACE on that
+### exact key, and renaming it would mean a synchronised edit in two mods.
+###
+### Targets liquidity_currency, not local_currency (changed 02.09.2026,
+### same evening as the split). One good for everyone: minor countries get
+### plain liquidity_currency from this formula, central banks mint one of
+### its three prestige variants instead (common/prestige_goods/). Simpler,
+### but liquidity_currency is tradeable (zz_ef_cm_liquidity_currency_market.txt)
+### — see zz_ef_local_currency_triggers.txt for what that costs.
+
+zz_ef_local_currency_fix = {
+	icon = gfx/interface/icons/timed_modifier_icons/no_money_production.dds
+	state_sell_orders_liquidity_currency_add = 1
+}

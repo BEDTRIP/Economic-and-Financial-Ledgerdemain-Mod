@@ -1,0 +1,94 @@
+﻿#############################################
+# Д2.10 (5.10.2026, decided by the user) -- the stock market's capitalization = the value of what is listed:
+# the listed companies' yearly dividends / (the government's rate + an equity risk premium ~4 pp). The target
+# (the user): about 0.3 GDP for Britain in the 1840s and ~1.0 by 1913 by itself, without steering the index.
+# E&F's stock goods (manufacture / agricultural / mining / railroad stock) are the exchange's turnover, not its
+# capitalization: until 5.10 the capitalization was their weekly output x 520 x price (EF.24).
+#
+# Listed = company headquarters with the "publicly traded" method (EF.22, switched by script monthly, Д2.11:
+# scripted_effects/zz_ef_listing.txt). A company's dividends are its headquarters' profit (the save: the HQ's
+# profit_after_reserves = dividends = its ownership income less taxes; one HQ type per company,
+# building_company_<key>, group bg_company_headquarter): listed dividends a year = the public HQs' weekly_profit x 52.
+# Without an exchange nothing is listed: capitalization 0, burnt through the yearly average (Д2.12, EF.47).
+# COUNTRY scope.
+#############################################
+
+# !! TUNING !! the equity risk premium over the government's rate (the user: ~4 pp)
+zz_ef_equity_premium = 0.04
+
+zz_ef_hq_levels = {
+	value = 0
+	every_scope_building = {
+		limit = { is_building_group = bg_company_headquarter }
+		add = level
+	}
+}
+zz_ef_hq_count = {
+	value = 0
+	every_scope_building = {
+		limit = { is_building_group = bg_company_headquarter }
+		add = 1
+	}
+}
+# All companies' dividends a week (the headquarters' profit), for the log.
+zz_ef_hq_div_week = {
+	value = 0
+	every_scope_building = {
+		limit = { is_building_group = bg_company_headquarter }
+		add = {
+			value = weekly_profit
+			min = 0
+		}
+	}
+}
+zz_ef_listed_hq_levels = {
+	value = 0
+	every_scope_building = {
+		limit = {
+			is_building_group = bg_company_headquarter
+			has_active_production_method = pm_company_headquarter_publicly_traded
+		}
+		add = level
+	}
+}
+zz_ef_listed_share = {
+	value = 0
+	if = {
+		limit = { zz_ef_hq_levels > 0 }
+		value = zz_ef_listed_hq_levels
+		divide = zz_ef_hq_levels
+		max = 1
+	}
+}
+zz_ef_listed_div_year = {
+	value = 0
+	every_scope_building = {
+		limit = {
+			is_building_group = bg_company_headquarter
+			has_active_production_method = pm_company_headquarter_publicly_traded
+		}
+		add = {
+			value = weekly_profit
+			min = 0
+		}
+	}
+	multiply = 52
+}
+zz_ef_cap_discount = {
+	value = zz_ef_gov_rate_target
+	add = zz_ef_equity_premium
+	min = 0.02
+}
+# This month's capitalization (the snapshot the yearly average follows).
+zz_ef_cap_listed_snapshot = {
+	value = zz_ef_listed_div_year
+	divide = zz_ef_cap_discount
+}
+zz_ef_cap_to_gdp = {
+	value = 0
+	if = {
+		limit = { gdp > 0 }
+		value = zz_ef_equity_capitalization
+		divide = gdp
+	}
+}

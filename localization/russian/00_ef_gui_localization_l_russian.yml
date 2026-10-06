@@ -248,7 +248,7 @@ metal_barometre_7: "#gold Золото @gold!#! #p крайне дорогое#!
 
   building_urban_center_lvl_by_base_rate:0 "[concept_building_urban_center_lvl_by_base_rate]"
   concept_building_urban_center_lvl_by_base_rate:0 "Максимальный уровень частного строительного сектора"
-  concept_building_urban_center_lvl_by_base_rate_desc:1 "Максимальный уровень [GetBuildingType('building_ef_private_construction').GetName] определяется количеством [GetBuildingType('building_urban_center').GetName] в области и [concept_base_rate_percentage]. Для [concept_base_rate_percentage] 1% или менее максимальный уровень равен количеству [GetBuildingType('building_urban_center').GetName]. Для [concept_base_rate_percentage] 10% максимальный уровень [GetBuildingType('building_ef_private_construction').GetName] равен 1."
+  concept_building_urban_center_lvl_by_base_rate_desc:1 "Максимальный уровень [GetBuildingType('building_construction_sector').GetName] равен суммарному уровню [GetBuildingType('building_urban_center').GetName] в стране × (1 − 5 × [concept_base_rate_percentage]). При ставке 1% это 95% городских центров, при 6% — 70%, при 12% — 40%, при 20% и выше — ноль."
 
   # credit_at_central_bank_interest_1_years:0 "Interest to be repaid per years"
   # credit_at_central_bank_interest_per_years:0 "Interest to be repaid per years"
@@ -1755,7 +1755,7 @@ alert_fso_alert_name:0 "Доступно действие в Управлени�
   from_gold_reserves:0 "(Из золотого резерва)"
   to_the_central_bank:0 "(В центральный банк)"
 
-  debt_issued_relative_GDP_2:0 "[GetPlayer.MakeScope.ScriptValue('debt_issued_relative_GDP')|D] [GetPlayer.GetCustom('monetary_system')] или [GetPlayer.MakeScope.Var('debt_issued_relative_GDP_percentage').GetValue|%|] от ВВП"
+  debt_issued_relative_GDP_2:0 "[GetPlayer.MakeScope.ScriptValue('debt_issued_relative_GDP')|D] [GetPlayer.GetCustom('monetary_system')] or [GetPlayer.MakeScope.Var('debt_issued_relative_GDP_percentage').GetValue|%1] of GDP"
 
   debt_issued_relative_GDP_3:0 "Производство [GetPlayer.MakeScope.ScriptValue('debt_issued_relative_GDP_in_currency')|D] [GetPlayer.GetCustom('currency_good')] и [GetPlayer.MakeScope.ScriptValue('bond_creation_by_debt')|D] @bond!"
 

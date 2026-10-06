@@ -643,15 +643,26 @@ economic_instability_count_reset = {
 #########################################################################################################################################################################################
 #########################################################################################################################################################################################
 
+# В5.4 (5.10): the interest on the treasury's loan from its OWN central bank (E&F's "credit at the central bank":
+# the player's button, zz_ef_cb_loan, and ai_credit_at_central_bank) is E&F's modifier interest_at_the_central_bank,
+# country_expenses_add x the multiplier, a week -- the budget's "additional expenses". The money model took the
+# additional income - expenses whole as primary income with abroad (zz_ef_f_aint, the bridge's g_aint): a payment to
+# our own CB went into the balance of payments and the clearing. The multiplier is not readable from script, so it is
+# kept in var:zz_ef_cbl_int when the modifier is set; the bridge takes it out of the abroad line and shows it as
+# treasury -> CB (tools/regen_ef_money_supply_loc.py, zz_ef_v_cbl_int).
+# !! MAINTENANCE !! Key-level REPLACE_OR_CREATE of E&F's two effects (01_financial_scripted_effects.txt): the bodies are
+# E&F's as of 04.07.2026 plus the variable.
 credit_at_central_bank_interest_per_week = {
 	remove_modifier = interest_at_the_central_bank
+	set_variable = { name = zz_ef_cbl_int value = credit_at_central_bank_interest_per_month_by_inflation }
 	add_modifier = {
 		name = interest_at_the_central_bank
-		multiplier = credit_at_central_bank_interest_per_month_by_inflation
+		multiplier = var:zz_ef_cbl_int
 	}
 }
 credit_at_central_bank_interest_per_week_off = {
 	remove_modifier = interest_at_the_central_bank
+	remove_variable = zz_ef_cbl_int
 }
 ai_credit_at_central_bank = {
 	if  = {
@@ -791,11 +802,6 @@ ai_refund_central_bank = {
 #########################################################################################################################################################################################
 
 stockpile_finacial_product = {
-	stockpiling_bond_1 = yes
-	stockpiling_manufacture_stock_1 = yes
-	stockpiling_agricultural_stock_1 = yes
-	stockpiling_mining_stock_1 = yes
-	stockpiling_railroad_stock_1 = yes
 }
 
 stockpiling_bond_1 = {
@@ -1022,6 +1028,7 @@ ai_buy_bond_1 = {
 			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
 			has_financial_center = yes #has fc
 			remaining_debt > 0
+			zz_ef_bl_room > 0
 			market_owner_is_root_4 = yes
 			central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 0.75
 			not = {
@@ -1331,6 +1338,7 @@ ai_buy_bond_2 = {
 			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
 			has_financial_center = yes #has fc
 			remaining_debt > 0
+			zz_ef_bl_room > 0
 			market_owner_is_root_4 = yes
 			central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 0.75
 			not = {
@@ -1640,6 +1648,7 @@ ai_buy_bond_3 = {
 			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
 			has_financial_center = yes #has fc
 			remaining_debt > 0
+			zz_ef_bl_room > 0
 			market_owner_is_root_4 = yes
 			central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 0.75
 			not = {
@@ -1949,6 +1958,7 @@ ai_buy_bond_4 = {
 			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
 			has_financial_center = yes #has fc
 			remaining_debt > 0
+			zz_ef_bl_room > 0
 			market_owner_is_root_4 = yes
 			central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 0.75
 			not = {
@@ -2258,6 +2268,7 @@ ai_buy_bond_5 = {
 			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
 			has_financial_center = yes #has fc
 			remaining_debt > 0
+			zz_ef_bl_room > 0
 			market_owner_is_root_4 = yes
 			central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 0.75
 			not = {
@@ -2567,6 +2578,7 @@ ai_buy_bond_6 = {
 			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
 			has_financial_center = yes #has fc
 			remaining_debt > 0
+			zz_ef_bl_room > 0
 			market_owner_is_root_4 = yes
 			central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 0.75
 			not = {
@@ -2876,6 +2888,7 @@ ai_buy_bond_7 = {
 			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
 			has_financial_center = yes #has fc
 			remaining_debt > 0
+			zz_ef_bl_room > 0
 			market_owner_is_root_4 = yes
 			central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 0.75
 			not = {
@@ -3185,6 +3198,7 @@ ai_buy_bond_8 = {
 			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
 			has_financial_center = yes #has fc
 			remaining_debt > 0
+			zz_ef_bl_room > 0
 			market_owner_is_root_4 = yes
 			central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 0.75
 			not = {
@@ -3494,6 +3508,7 @@ ai_buy_bond_9 = {
 			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
 			has_financial_center = yes #has fc
 			remaining_debt > 0
+			zz_ef_bl_room > 0
 			market_owner_is_root_4 = yes
 			central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 0.75
 			not = {
@@ -3803,6 +3818,7 @@ ai_buy_bond_10 = {
 			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
 			has_financial_center = yes #has fc
 			remaining_debt > 0
+			zz_ef_bl_room > 0
 			market_owner_is_root_4 = yes
 			central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 0.75
 			not = {
@@ -10078,6 +10094,7 @@ ai_privat_bank_bond_1_renforcement = {
         limit = {
             exists = scope:seller_1
 			scope:seller_1.remaining_debt > 0
+			scope:seller_1.zz_ef_bl_room > 0
         }
 		scope:seller_1 = {
 			scope:buyer = {
@@ -10200,6 +10217,7 @@ ai_privat_bank_bond_2_renforcement = {
         limit = {
             exists = scope:seller_2
 			scope:seller_2.remaining_debt > 0
+			scope:seller_2.zz_ef_bl_room > 0
         }
 		scope:seller_2 = {
 			scope:buyer = {
@@ -10322,6 +10340,7 @@ ai_privat_bank_bond_3_renforcement = {
         limit = {
             exists = scope:seller_3
 			scope:seller_3.remaining_debt > 0
+			scope:seller_3.zz_ef_bl_room > 0
         }
 		scope:seller_3 = {
 			scope:buyer = {
@@ -10444,6 +10463,7 @@ ai_privat_bank_bond_4_renforcement = {
         limit = {
             exists = scope:seller_4
 			scope:seller_4.remaining_debt > 0
+			scope:seller_4.zz_ef_bl_room > 0
         }
 		scope:seller_4 = {
 			scope:buyer = {
@@ -10566,6 +10586,7 @@ ai_privat_bank_bond_5_renforcement = {
         limit = {
             exists = scope:seller_5
 			scope:seller_5.remaining_debt > 0
+			scope:seller_5.zz_ef_bl_room > 0
         }
 		scope:seller_5 = {
 			scope:buyer = {
@@ -10688,6 +10709,7 @@ ai_privat_bank_bond_6_renforcement = {
         limit = {
             exists = scope:seller_6
 			scope:seller_6.remaining_debt > 0
+			scope:seller_6.zz_ef_bl_room > 0
         }
 		scope:seller_6 = {
 			scope:buyer = {
@@ -10810,6 +10832,7 @@ ai_privat_bank_bond_7_renforcement = {
         limit = {
             exists = scope:seller_7
 			scope:seller_7.remaining_debt > 0
+			scope:seller_7.zz_ef_bl_room > 0
         }
 		scope:seller_7 = {
 			scope:buyer = {
@@ -10932,6 +10955,7 @@ ai_privat_bank_bond_8_renforcement = {
         limit = {
             exists = scope:seller_8
 			scope:seller_8.remaining_debt > 0
+			scope:seller_8.zz_ef_bl_room > 0
         }
 		scope:seller_8 = {
 			scope:buyer = {
@@ -11054,6 +11078,7 @@ ai_privat_bank_bond_9_renforcement = {
         limit = {
             exists = scope:seller_9
 			scope:seller_9.remaining_debt > 0
+			scope:seller_9.zz_ef_bl_room > 0
         }
 		scope:seller_9 = {
 			scope:buyer = {
@@ -11176,6 +11201,7 @@ ai_privat_bank_bond_10_renforcement = {
         limit = {
             exists = scope:seller_10
 			scope:seller_10.remaining_debt > 0
+			scope:seller_10.zz_ef_bl_room > 0
         }
 		scope:seller_10 = {
 			scope:buyer = {
@@ -11298,6 +11324,7 @@ ai_privat_bank_bond_11_renforcement = {
         limit = {
             exists = scope:seller_11
 			scope:seller_11.remaining_debt > 0
+			scope:seller_11.zz_ef_bl_room > 0
         }
 		scope:seller_11 = {
 			scope:buyer = {
@@ -11420,6 +11447,7 @@ ai_privat_bank_bond_12_renforcement = {
         limit = {
             exists = scope:seller_12
 			scope:seller_12.remaining_debt > 0
+			scope:seller_12.zz_ef_bl_room > 0
         }
 		scope:seller_12 = {
 			scope:buyer = {
@@ -11542,6 +11570,7 @@ ai_privat_bank_bond_13_renforcement = {
         limit = {
             exists = scope:seller_13
 			scope:seller_13.remaining_debt > 0
+			scope:seller_13.zz_ef_bl_room > 0
         }
 		scope:seller_13 = {
 			scope:buyer = {
@@ -11664,6 +11693,7 @@ ai_privat_bank_bond_14_renforcement = {
         limit = {
             exists = scope:seller_14
 			scope:seller_14.remaining_debt > 0
+			scope:seller_14.zz_ef_bl_room > 0
         }
 		scope:seller_14 = {
 			scope:buyer = {
@@ -11786,6 +11816,7 @@ ai_privat_bank_bond_15_renforcement = {
         limit = {
             exists = scope:seller_15
 			scope:seller_15.remaining_debt > 0
+			scope:seller_15.zz_ef_bl_room > 0
         }
 		scope:seller_15 = {
 			scope:buyer = {
@@ -11908,6 +11939,7 @@ ai_privat_bank_bond_16_renforcement = {
         limit = {
             exists = scope:seller_16
 			scope:seller_16.remaining_debt > 0
+			scope:seller_16.zz_ef_bl_room > 0
         }
 		scope:seller_16 = {
 			scope:buyer = {
@@ -12030,6 +12062,7 @@ ai_privat_bank_bond_17_renforcement = {
         limit = {
             exists = scope:seller_17
 			scope:seller_17.remaining_debt > 0
+			scope:seller_17.zz_ef_bl_room > 0
         }
 		scope:seller_17 = {
 			scope:buyer = {
@@ -12152,6 +12185,7 @@ ai_privat_bank_bond_18_renforcement = {
         limit = {
             exists = scope:seller_18
 			scope:seller_18.remaining_debt > 0
+			scope:seller_18.zz_ef_bl_room > 0
         }
 		scope:seller_18 = {
 			scope:buyer = {
@@ -12274,6 +12308,7 @@ ai_privat_bank_bond_19_renforcement = {
         limit = {
             exists = scope:seller_19
 			scope:seller_19.remaining_debt > 0
+			scope:seller_19.zz_ef_bl_room > 0
         }
 		scope:seller_19 = {
 			scope:buyer = {
@@ -12396,6 +12431,7 @@ ai_privat_bank_bond_20_renforcement = {
         limit = {
             exists = scope:seller_20
 			scope:seller_20.remaining_debt > 0
+			scope:seller_20.zz_ef_bl_room > 0
         }
 		scope:seller_20 = {
 			scope:buyer = {
@@ -12518,6 +12554,7 @@ ai_privat_bank_bond_21_renforcement = {
         limit = {
             exists = scope:seller_21
 			scope:seller_21.remaining_debt > 0
+			scope:seller_21.zz_ef_bl_room > 0
         }
 		scope:seller_21 = {
 			scope:buyer = {
@@ -12640,6 +12677,7 @@ ai_privat_bank_bond_22_renforcement = {
         limit = {
             exists = scope:seller_22
 			scope:seller_22.remaining_debt > 0
+			scope:seller_22.zz_ef_bl_room > 0
         }
 		scope:seller_22 = {
 			scope:buyer = {
@@ -12762,6 +12800,7 @@ ai_privat_bank_bond_23_renforcement = {
         limit = {
             exists = scope:seller_23
 			scope:seller_23.remaining_debt > 0
+			scope:seller_23.zz_ef_bl_room > 0
         }
 		scope:seller_23 = {
 			scope:buyer = {
@@ -12884,6 +12923,7 @@ ai_privat_bank_bond_24_renforcement = {
         limit = {
             exists = scope:seller_24
 			scope:seller_24.remaining_debt > 0
+			scope:seller_24.zz_ef_bl_room > 0
         }
 		scope:seller_24 = {
 			scope:buyer = {
@@ -13006,6 +13046,7 @@ ai_privat_bank_bond_25_renforcement = {
         limit = {
             exists = scope:seller_25
 			scope:seller_25.remaining_debt > 0
+			scope:seller_25.zz_ef_bl_room > 0
         }
 		scope:seller_25 = {
 			scope:buyer = {
@@ -13160,16 +13201,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_BankJPMorgan
@@ -13177,7 +13218,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -13200,16 +13241,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_BankGoldmanSachs
@@ -13217,7 +13258,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -13240,16 +13281,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_ChaseBank
@@ -13257,7 +13298,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -13280,16 +13321,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_BankWellsFargo
@@ -13297,7 +13338,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -13320,16 +13361,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_BankAmericanExpress
@@ -13337,7 +13378,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -13362,16 +13403,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_DeNederlandscheBank
@@ -13379,7 +13420,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -13402,16 +13443,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_amsterdamschebank
@@ -13419,7 +13460,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -13442,16 +13483,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_RotterdamscheBankvereeniging
@@ -13459,7 +13500,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -13484,16 +13525,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_BanqueNationaleDeBelgique
@@ -13501,7 +13542,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -13524,16 +13565,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_SocieteGeneraledeBelgique
@@ -13541,7 +13582,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -13564,16 +13605,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_BanqueDeBruxelles
@@ -13581,7 +13622,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -13606,16 +13647,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_Bankenverein
@@ -13623,7 +13664,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -13648,16 +13689,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_HandelsBanken
@@ -13665,7 +13706,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -13690,16 +13731,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_LandmandsBanken
@@ -13707,7 +13748,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -13732,16 +13773,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_ChristianiaBank
@@ -13749,7 +13790,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -13774,16 +13815,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_BankofSpain
@@ -13791,7 +13832,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -13814,16 +13855,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_BancoDeBilbao
@@ -13831,7 +13872,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -13854,16 +13895,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_BancoHispanoColonial
@@ -13871,7 +13912,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -13896,16 +13937,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_BancoDePortugal
@@ -13913,7 +13954,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -13936,16 +13977,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_BancoCommercialPortugues
@@ -13953,7 +13994,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -13976,16 +14017,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_Bank_Ultramarino
@@ -13993,7 +14034,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -14018,16 +14059,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_Rothschild_Bank_gbr
@@ -14035,7 +14076,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -14058,16 +14099,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_Rothschild_Bank_fra
@@ -14075,7 +14116,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -14098,16 +14139,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_Rothschild_Bank_ger
@@ -14115,7 +14156,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -14138,16 +14179,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_Rothschild_Bank_aus
@@ -14155,7 +14196,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -14178,16 +14219,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_Rothschild_Bank_ita
@@ -14195,7 +14236,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -14217,12 +14258,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BancaDItalia
@@ -14230,7 +14271,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -14250,12 +14291,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BancaCommercialeItaliana
@@ -14263,7 +14304,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -14283,12 +14324,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_CassaDiRisparmioDiTorino
@@ -14296,7 +14337,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -14318,12 +14359,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BankofEngland
@@ -14331,7 +14372,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -14351,12 +14392,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_LloydsBank
@@ -14364,7 +14405,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -14384,12 +14425,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_barclaysBank
@@ -14397,7 +14438,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -14417,12 +14458,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_NationalWestminsterBank
@@ -14430,7 +14471,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -14450,12 +14491,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_RoyalBankOfScotland
@@ -14463,7 +14504,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -14485,12 +14526,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BanqueDeFrance
@@ -14498,7 +14539,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -14518,12 +14559,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BankCreditLyonnais
@@ -14531,7 +14572,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -14551,12 +14592,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_SocieteGenerale
@@ -14564,7 +14605,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -14584,12 +14625,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BanqueDeParisEtDesPaysBas
@@ -14597,7 +14638,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -14619,12 +14660,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_StateBankRussianEmpire
@@ -14632,7 +14673,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -14652,12 +14693,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = saint_petersburg_international_commercial_bank
@@ -14665,7 +14706,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -14685,12 +14726,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = russo_chinese_bank
@@ -14698,7 +14739,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -14720,12 +14761,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_DeutscheBank
@@ -14733,7 +14774,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -14753,12 +14794,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_Reichsbank
@@ -14766,7 +14807,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -14786,12 +14827,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_PreussischeSeehandlung
@@ -14799,7 +14840,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -14819,12 +14860,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BayerischeHypothekenUndWechselBank
@@ -14832,7 +14873,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -14854,12 +14895,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_OesterreichischeNationalbank
@@ -14867,7 +14908,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -14887,12 +14928,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_OesterreichischeCreditAnstalt
@@ -14900,7 +14941,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -14920,12 +14961,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_WienerBankverein
@@ -14933,7 +14974,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -14955,12 +14996,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_bankofgreec
@@ -14968,7 +15009,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -14990,12 +15031,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_OttomanBank
@@ -15003,7 +15044,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15023,12 +15064,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_TurkishZiraatBankasi
@@ -15036,7 +15077,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15056,12 +15097,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BanqueImperialeOttomane
@@ -15069,7 +15110,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15091,12 +15132,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_ImperialBankofPersia
@@ -15104,7 +15145,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15124,12 +15165,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BankMelliIran
@@ -15137,7 +15178,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15157,12 +15198,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BankTejaratPersia
@@ -15170,7 +15211,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15190,12 +15231,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BankAngloPersian
@@ -15203,7 +15244,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15225,12 +15266,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BanqueEgyptienne
@@ -15238,7 +15279,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15260,12 +15301,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_ChohungBank
@@ -15273,7 +15314,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15293,12 +15334,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BankHSBC
@@ -15306,7 +15347,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15326,12 +15367,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BankIBC
@@ -15339,7 +15380,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15359,12 +15400,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BankBOCOM
@@ -15372,7 +15413,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15392,12 +15433,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_DaQingBank
@@ -15405,7 +15446,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15427,12 +15468,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_Mitsubishiexchangehousebank
@@ -15440,7 +15481,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15460,12 +15501,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BankOfJapan
@@ -15473,7 +15514,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15493,12 +15534,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_SumitomoBank
@@ -15506,7 +15547,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15528,12 +15569,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_ImperialBankofIndia
@@ -15541,7 +15582,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15561,12 +15602,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BankOfIndiaCompany
@@ -15574,7 +15615,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15594,12 +15635,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BankOfBombay
@@ -15607,7 +15648,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15629,12 +15670,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_RoyalBankofCanada
@@ -15642,7 +15683,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15662,12 +15703,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BankOfMontreal
@@ -15675,7 +15716,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15695,12 +15736,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_CanadianImperialBankOfCommerce
@@ -15708,7 +15749,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15728,12 +15769,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BankDesjardins
@@ -15741,7 +15782,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15763,12 +15804,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_ColonialBankOfAustralia
@@ -15776,7 +15817,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15796,12 +15837,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_NationalBankOfAustralia
@@ -15809,7 +15850,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15829,12 +15870,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_SouthAustralianBank
@@ -15842,7 +15883,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15864,12 +15905,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BancoDeMexico
@@ -15877,7 +15918,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15897,12 +15938,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_bancodelondresmexico
@@ -15910,7 +15951,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15930,12 +15971,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BancoMercantilMexicano
@@ -15943,7 +15984,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -15965,12 +16006,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BancoCentralDeCostaRica
@@ -15978,7 +16019,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -16000,12 +16041,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BancoCentralDeGuatemala
@@ -16013,7 +16054,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -16035,12 +16076,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BancoCentralDeHonduras
@@ -16048,7 +16089,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -16070,12 +16111,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BancoNacionalDePanama
@@ -16083,7 +16124,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -16105,12 +16146,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BancoDoBrasil
@@ -16118,7 +16159,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -16138,12 +16179,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BancoMercantil
@@ -16151,7 +16192,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -16171,12 +16212,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BancoCommercialDoBrasil
@@ -16184,7 +16225,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -16206,12 +16247,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BancoNacionArgentina
@@ -16219,7 +16260,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -16239,12 +16280,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BancoHipotecarioNacional
@@ -16252,7 +16293,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -16272,12 +16313,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BancoProvincia
@@ -16285,7 +16326,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -16307,12 +16348,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BancoDeChile
@@ -16320,7 +16361,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -16340,12 +16381,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BancoEstado
@@ -16353,7 +16394,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -16373,12 +16414,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BancoDeValparaiso
@@ -16386,7 +16427,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -16408,12 +16449,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BancoNacionalDeBolivia
@@ -16421,7 +16462,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -16443,12 +16484,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BancoRepublicaColombia
@@ -16456,7 +16497,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -16478,12 +16519,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BancoCentralDeVenezuela
@@ -16491,7 +16532,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -16513,12 +16554,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BancoEspanolDeLaHabana
@@ -16526,7 +16567,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -16548,12 +16589,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BancoCentralDelUruguay
@@ -16561,7 +16602,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -16583,12 +16624,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BancoNacionalDelParaguay
@@ -16596,7 +16637,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -16618,12 +16659,12 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						any_scope_building = { is_building_type = building_ef_private_construction level < 10 }
-						not = { has_building = building_ef_private_construction }
+						any_scope_building = { is_building_type = building_construction_sector level < 10 }
+						not = { has_building = building_construction_sector }
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BankSBoBSA
@@ -16631,7 +16672,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 10
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -16672,7 +16713,7 @@ establish_bank_and_ef_compagnie = {
 				has_company = company_type:company_private_construction
 			}
 			# any_scope_building = { #inutile il possede deja un centre fiancier
-			# 	is_building_type = building_ef_private_construction
+			# 	is_building_type = building_construction_sector
 			# 	level >= 1
 			# }
 		}
@@ -16682,16 +16723,16 @@ establish_bank_and_ef_compagnie = {
 				limit = {
 					or = {
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = {
-							has_building = building_ef_private_construction
+							has_building = building_construction_sector
 						}
 					}
 				}
 				create_building={
-					building="building_ef_private_construction"
+					building="building_construction_sector"
 					add_ownership={
 						company={
 							type=company_private_construction
@@ -16699,7 +16740,7 @@ establish_bank_and_ef_compagnie = {
 							levels=5
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -16773,7 +16814,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -16807,7 +16848,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -16851,7 +16892,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_military_shipyard"
@@ -16862,7 +16903,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_shipyard"
@@ -16873,7 +16914,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -16917,7 +16958,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_munition_plant"
@@ -16928,7 +16969,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_explosives_factory"
@@ -16939,7 +16980,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -16973,7 +17014,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -17012,7 +17053,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_chemical_plant"
@@ -17023,7 +17064,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -17057,7 +17098,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -17101,7 +17142,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_artillery_foundry"
@@ -17112,7 +17153,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_steel_mill"
@@ -17123,7 +17164,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -17157,7 +17198,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -17201,7 +17242,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_cotton_plantation"
@@ -17212,7 +17253,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_livestock_ranch"
@@ -17223,7 +17264,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -17262,7 +17303,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_port"
@@ -17273,7 +17314,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -17312,7 +17353,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_port"
@@ -17323,7 +17364,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -17357,7 +17398,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -17391,7 +17432,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -17430,7 +17471,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_steel_mill"
@@ -17441,7 +17482,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -17475,7 +17516,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -17514,7 +17555,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_furniture_manufactory"
@@ -17525,7 +17566,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -17564,7 +17605,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_chemical_plant"
@@ -17575,7 +17616,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -17593,9 +17634,9 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						not = { has_building = building_ef_private_construction }
+						not = { has_building = building_construction_sector }
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = { has_building = building_railway }
@@ -17626,7 +17667,7 @@ establish_bank_and_ef_compagnie = {
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_PreussischeSeehandlung
@@ -17634,7 +17675,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_railway"
@@ -17645,7 +17686,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_trade_center"
@@ -17656,7 +17697,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_gold_mine"
@@ -17667,7 +17708,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_silver_mine"
@@ -17678,7 +17719,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_financial_centre_pru"
@@ -17689,7 +17730,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -17728,7 +17769,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_automotive_industry"
@@ -17739,7 +17780,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -17773,7 +17814,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -17812,7 +17853,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_sugar_plantation"
@@ -17823,7 +17864,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -17867,7 +17908,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_shipyard"
@@ -17878,7 +17919,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_steel_mill"
@@ -17889,7 +17930,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -17928,7 +17969,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_art_academy"
@@ -17939,7 +17980,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -17978,7 +18019,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_shipyard"
@@ -17989,7 +18030,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -18023,7 +18064,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -18057,7 +18098,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -18091,7 +18132,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -18125,7 +18166,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -18164,7 +18205,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_shipyard"
@@ -18175,7 +18216,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -18214,7 +18255,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_motor_industry"
@@ -18225,7 +18266,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -18269,7 +18310,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_chemical_plant"
@@ -18280,7 +18321,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_oil_rig"
@@ -18291,7 +18332,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -18335,7 +18376,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_port"
@@ -18346,7 +18387,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_trade_center"
@@ -18357,7 +18398,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -18396,7 +18437,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_synthetics_plant"
@@ -18407,7 +18448,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -18446,7 +18487,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_rye_farm"
@@ -18457,7 +18498,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -18491,7 +18532,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -18530,7 +18571,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_logging_camp"
@@ -18541,7 +18582,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -18575,7 +18616,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -18614,7 +18655,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_synthetics_plant"
@@ -18625,7 +18666,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -18664,7 +18705,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_steel_mill"
@@ -18675,7 +18716,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -18709,7 +18750,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -18743,7 +18784,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -18782,7 +18823,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_gold_mine"
@@ -18793,7 +18834,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -18827,7 +18868,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -18866,7 +18907,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_shipyard"
@@ -18877,7 +18918,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -18911,7 +18952,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -18950,7 +18991,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_motor_industry"
@@ -18961,7 +19002,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -19000,7 +19041,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_glassworks"
@@ -19011,7 +19052,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -19050,7 +19091,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_military_shipyard"
@@ -19061,7 +19102,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -19100,7 +19141,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_motor_industry"
@@ -19111,7 +19152,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -19150,7 +19191,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_synthetics_plant"
@@ -19161,7 +19202,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -19195,7 +19236,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -19234,7 +19275,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_synthetics_plant"
@@ -19245,7 +19286,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -19284,7 +19325,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_tooling_workshop"
@@ -19295,7 +19336,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -19339,7 +19380,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_munition_plant"
@@ -19350,7 +19391,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_automotive_industry"
@@ -19361,7 +19402,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -19400,7 +19441,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_wheat_farm"
@@ -19411,7 +19452,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -19450,7 +19491,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_synthetics_plant"
@@ -19461,7 +19502,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -19500,7 +19541,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_wheat_farm"
@@ -19511,7 +19552,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -19550,7 +19591,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_railway"
@@ -19561,7 +19602,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -19595,7 +19636,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -19629,7 +19670,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -19663,7 +19704,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -19707,7 +19748,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_artillery_foundry"
@@ -19718,7 +19759,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_motor_industry"
@@ -19729,7 +19770,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -19763,7 +19804,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -19797,7 +19838,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -19833,7 +19874,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -19851,9 +19892,9 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						not = { has_building = building_ef_private_construction }
+						not = { has_building = building_construction_sector }
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = { has_building = building_railway }
@@ -19884,7 +19925,7 @@ establish_bank_and_ef_compagnie = {
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_WienerBankverein
@@ -19892,7 +19933,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_railway"
@@ -19903,7 +19944,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_trade_center"
@@ -19914,7 +19955,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_gold_mine"
@@ -19925,7 +19966,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_silver_mine"
@@ -19936,7 +19977,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_financial_centre_aus"
@@ -19947,7 +19988,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -19981,7 +20022,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -20020,7 +20061,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_paper_mill"
@@ -20031,7 +20072,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -20070,7 +20111,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_electrics_industry"
@@ -20081,7 +20122,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -20120,7 +20161,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_tooling_workshop"
@@ -20131,7 +20172,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -20170,7 +20211,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_steel_mill"
@@ -20181,7 +20222,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -20225,7 +20266,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_motor_industry"
@@ -20236,7 +20277,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_artillery_foundry"
@@ -20247,7 +20288,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -20281,7 +20322,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -20315,7 +20356,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -20349,7 +20390,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -20383,7 +20424,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -20427,7 +20468,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_textile_mill"
@@ -20438,7 +20479,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_coal_mine"
@@ -20449,7 +20490,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -20483,7 +20524,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -20501,9 +20542,9 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						not = { has_building = building_ef_private_construction }
+						not = { has_building = building_construction_sector }
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = { has_building = building_coal_mine }
@@ -20544,7 +20585,7 @@ establish_bank_and_ef_compagnie = {
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_OesterreichischeCreditAnstalt
@@ -20552,7 +20593,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_coal_mine"
@@ -20563,7 +20604,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_iron_mine"
@@ -20574,7 +20615,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_lead_mine"
@@ -20585,7 +20626,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_sulfur_mine"
@@ -20596,7 +20637,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_gold_mine"
@@ -20607,7 +20648,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_silver_mine"
@@ -20618,7 +20659,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_financial_centre_aus"
@@ -20629,7 +20670,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -20663,7 +20704,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -20697,7 +20738,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -20731,7 +20772,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -20770,7 +20811,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_textile_mill"
@@ -20781,7 +20822,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -20825,7 +20866,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_steel_mill"
@@ -20836,7 +20877,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_military_shipyard"
@@ -20847,7 +20888,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -20886,7 +20927,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_military_shipyard"
@@ -20897,7 +20938,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -20931,7 +20972,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -20949,9 +20990,9 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						not = { has_building = building_ef_private_construction }
+						not = { has_building = building_construction_sector }
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = { has_building = building_railway }
@@ -20982,7 +21023,7 @@ establish_bank_and_ef_compagnie = {
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_BancaCommercialeItaliana
@@ -20990,7 +21031,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_railway"
@@ -21001,7 +21042,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_trade_center"
@@ -21012,7 +21053,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_gold_mine"
@@ -21023,7 +21064,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_silver_mine"
@@ -21034,7 +21075,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_financial_centre_ita"
@@ -21045,7 +21086,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -21079,7 +21120,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -21113,7 +21154,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -21152,7 +21193,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_synthetics_plant"
@@ -21163,7 +21204,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -21197,7 +21238,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -21236,7 +21277,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_wheat_farm"
@@ -21247,7 +21288,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -21286,7 +21327,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_food_industry"
@@ -21297,7 +21338,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -21336,7 +21377,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_steel_mill"
@@ -21347,7 +21388,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -21381,7 +21422,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -21420,7 +21461,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_art_academy"
@@ -21431,7 +21472,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -21470,7 +21511,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_furniture_manufactory"
@@ -21481,7 +21522,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -21515,7 +21556,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -21559,7 +21600,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_railway"
@@ -21570,7 +21611,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_steel_mill"
@@ -21581,7 +21622,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -21599,9 +21640,9 @@ establish_bank_and_ef_compagnie = {
 			if = {
 				limit = {
 					or = {
-						not = { has_building = building_ef_private_construction }
+						not = { has_building = building_construction_sector }
 						any_scope_building = {
-							is_building_type = building_ef_private_construction
+							is_building_type = building_construction_sector
 							level < 10
 						}
 						not = { has_building = building_railway }
@@ -21632,7 +21673,7 @@ establish_bank_and_ef_compagnie = {
 					}
 				}
 				create_building = {
-					building = "building_ef_private_construction"
+					building = "building_construction_sector"
 					add_ownership = {
 						company = {
 							type = company_SocieteGenerale
@@ -21640,7 +21681,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_railway"
@@ -21651,7 +21692,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_trade_center"
@@ -21662,7 +21703,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_gold_mine"
@@ -21673,7 +21714,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_silver_mine"
@@ -21684,7 +21725,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_financial_centre_fra"
@@ -21695,7 +21736,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -21734,7 +21775,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_textile_mill"
@@ -21745,7 +21786,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -21789,7 +21830,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_munition_plant"
@@ -21800,7 +21841,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_automotive_industry"
@@ -21811,7 +21852,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -21855,7 +21896,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_tooling_workshop"
@@ -21866,7 +21907,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_textile_mill"
@@ -21877,7 +21918,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -21921,7 +21962,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_munition_plant"
@@ -21932,7 +21973,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_automotive_industry"
@@ -21943,7 +21984,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -21977,7 +22018,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -22016,7 +22057,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_textile_mill"
@@ -22027,7 +22068,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -22061,7 +22102,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -22095,7 +22136,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -22134,7 +22175,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_textile_mill"
@@ -22145,7 +22186,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -22189,7 +22230,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_iron_mine"
@@ -22200,7 +22241,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_coal_mine"
@@ -22211,7 +22252,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -22245,7 +22286,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -22279,7 +22320,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -22313,7 +22354,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -22352,7 +22393,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_livestock_ranch"
@@ -22363,7 +22404,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -22402,7 +22443,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_port"
@@ -22413,7 +22454,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -22452,7 +22493,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_port"
@@ -22463,7 +22504,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -22502,7 +22543,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_art_academy"
@@ -22513,7 +22554,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -22552,7 +22593,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_food_industry"
@@ -22563,7 +22604,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -22602,7 +22643,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 				create_building = {
 					building = "building_paper_mill"
@@ -22613,7 +22654,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -22644,7 +22685,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -22674,7 +22715,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -22705,7 +22746,7 @@ establish_bank_and_ef_compagnie = {
 							levels = 5
 						}
 					}
-					reserves = 1
+					reserves = 0
 				}
 			}
 		}
@@ -22740,7 +22781,7 @@ establish_bank_and_ef_compagnie = {
 							levels=10
 						}
 					}
-					reserves=1
+					reserves=0
 				}
 			}
 		}
@@ -23908,14 +23949,7 @@ ai_bond_maturity_1 = {
 			}
 		}
 
-		if = {
-			limit = {
-				ai_no_longer_exists_1 = 1
-			}
-			add_treasury = {
-				add = var:ai_total_bond_value_1
-			}
-		}
+		# В5.5: the payout from nobody removed -- the ledger buys the part back
 
 		#Reset variable
 		set_variable = {
@@ -24005,14 +24039,7 @@ ai_bond_maturity_2 = {
 			}
 		}
 
-		if = {
-			limit = {
-				ai_no_longer_exists_2 = 1
-			}
-			add_treasury = {
-				add = var:ai_total_bond_value_2
-			}
-		}
+		# В5.5: the payout from nobody removed -- the ledger buys the part back
 
 		#Reset variable
 		set_variable = {
@@ -24102,14 +24129,7 @@ ai_bond_maturity_3 = {
 			}
 		}
 
-		if = {
-			limit = {
-				ai_no_longer_exists_3 = 1
-			}
-			add_treasury = {
-				add = var:ai_total_bond_value_3
-			}
-		}
+		# В5.5: the payout from nobody removed -- the ledger buys the part back
 
 		#Reset variable
 		set_variable = {
@@ -24199,14 +24219,7 @@ ai_bond_maturity_4 = {
 			}
 		}
 
-		if = {
-			limit = {
-				ai_no_longer_exists_4 = 1
-			}
-			add_treasury = {
-				add = var:ai_total_bond_value_4
-			}
-		}
+		# В5.5: the payout from nobody removed -- the ledger buys the part back
 
 		#Reset variable
 		set_variable = {
@@ -24296,14 +24309,7 @@ ai_bond_maturity_5 = {
 			}
 		}
 
-		if = {
-			limit = {
-				ai_no_longer_exists_5 = 1
-			}
-			add_treasury = {
-				add = var:ai_total_bond_value_5
-			}
-		}
+		# В5.5: the payout from nobody removed -- the ledger buys the part back
 
 		#Reset variable
 		set_variable = {
@@ -24393,14 +24399,7 @@ ai_bond_maturity_6 = {
 			}
 		}
 
-		if = {
-			limit = {
-				ai_no_longer_exists_6 = 1
-			}
-			add_treasury = {
-				add = var:ai_total_bond_value_6
-			}
-		}
+		# В5.5: the payout from nobody removed -- the ledger buys the part back
 
 		#Reset variable
 		set_variable = {
@@ -24490,14 +24489,7 @@ ai_bond_maturity_7 = {
 			}
 		}
 
-		if = {
-			limit = {
-				ai_no_longer_exists_7 = 1
-			}
-			add_treasury = {
-				add = var:ai_total_bond_value_7
-			}
-		}
+		# В5.5: the payout from nobody removed -- the ledger buys the part back
 
 		#Reset variable
 		set_variable = {
@@ -24587,14 +24579,7 @@ ai_bond_maturity_8 = {
 			}
 		}
 
-		if = {
-			limit = {
-				ai_no_longer_exists_8 = 1
-			}
-			add_treasury = {
-				add = var:ai_total_bond_value_8
-			}
-		}
+		# В5.5: the payout from nobody removed -- the ledger buys the part back
 
 		#Reset variable
 		set_variable = {
@@ -24684,14 +24669,7 @@ ai_bond_maturity_9 = {
 			}
 		}
 
-		if = {
-			limit = {
-				ai_no_longer_exists_9 = 1
-			}
-			add_treasury = {
-				add = var:ai_total_bond_value_9
-			}
-		}
+		# В5.5: the payout from nobody removed -- the ledger buys the part back
 
 		#Reset variable
 		set_variable = {
@@ -24781,14 +24759,7 @@ ai_bond_maturity_10 = {
 			}
 		}
 
-		if = {
-			limit = {
-				ai_no_longer_exists_10 = 1
-			}
-			add_treasury = {
-				add = var:ai_total_bond_value_10
-			}
-		}
+		# В5.5: the payout from nobody removed -- the ledger buys the part back
 
 		#Reset variable
 		set_variable = {
@@ -24931,10 +24902,6 @@ central_bank_interest_refund_per_year_in_gold = {
 }
 interest_per_month_from_foreign_debt_investment = {
 	remove_modifier = interest_from_foreign_debt_investment
-	add_modifier = {
-		name = interest_from_foreign_debt_investment
-		multiplier = interest_per_month_from_foreign_debt_investment
-	}
 }
 
 #########################################################################################################################################################################################

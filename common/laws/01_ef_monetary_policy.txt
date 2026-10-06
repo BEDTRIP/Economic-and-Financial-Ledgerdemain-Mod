@@ -28,7 +28,7 @@ law_revaluation = {
 		on_activate_law_revaluation = yes
 	}
 	progressiveness = 50
- 
+
 	ai_will_do = {
 		always = no
 	}
@@ -50,15 +50,9 @@ law_devaluation = {
 	}
 	progressiveness = 50
 
-	
-	ai_enact_weight_modifier = { #Petitions
-		value = 0
-
-		if = {
-			limit = { money_supply_state_ratio < 0.1 }
-			add = 2000
-		}
-	} 
+	ai_will_do = {
+		always = no
+	}
 }  
 
 law_large_monetary_policy = {

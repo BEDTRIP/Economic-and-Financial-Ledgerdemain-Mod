@@ -1,0 +1,22 @@
+﻿#############################################
+# Д2.4 (5.10.2026) -- the banks' seed (scripted_effects/zz_ef_bank_seed.txt, tools/regen_ef_bank_seed.py).
+# STATE scope.
+#############################################
+
+# Trade centre levels of the state: the weight the market's banks are spread by.
+zz_ef_bank_tc_levels = {
+	value = 0
+	every_scope_building = {
+		limit = { is_building_type = building_trade_center }
+		add = level
+	}
+}
+
+# Bank levels of the state (the log).
+zz_ef_bank_levels = {
+	value = 0
+	every_scope_building = {
+		limit = { is_building_type = building_zz_ef_bank }
+		add = level
+	}
+}

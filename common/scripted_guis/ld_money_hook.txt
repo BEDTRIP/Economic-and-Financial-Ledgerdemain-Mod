@@ -1,0 +1,31 @@
+﻿#############################################
+# EF.48 (2026-09-30) -- the GUI bridge's receiver. The hook
+# (gui/ld_money_hook.gui) executes it once per queued country with
+# scope:ext = the budget's lines outside the accounts and scope:abr = the
+# part of them with other countries (EF.48 item 6), read by GUI data
+# functions that script cannot reach. The pattern is BPM's
+# (BPM_factionhook.gui): a GUI state fires Execute with MakeScopeValue.
+#############################################
+
+zz_ef_money_hook_sg = {
+	scope = country
+	saved_scopes = {
+		ext
+		abr
+	}
+	effect = {
+		zz_ef_money_hook_receive = yes
+	}
+}
+
+# Probe: counts launches of the hook's items, no value passed.
+zz_ef_money_hook_probe_sg = {
+	scope = country
+	effect = {
+		if = {
+			limit = { NOT = { has_global_variable = zz_ef_hook_probe_calls } }
+			set_global_variable = { name = zz_ef_hook_probe_calls value = 0 }
+		}
+		change_global_variable = { name = zz_ef_hook_probe_calls add = 1 }
+	}
+}

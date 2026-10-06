@@ -1,0 +1,10 @@
+﻿
+# Remap E&F "private construction sector" script_values to the unified building type.
+# Keep the script_value names used by E&F JE/UI, but point them to building_construction_sector.
+
+# Headroom to the Urban Center-based cap (used by buttons; avoids inline arithmetic in triggers).
+pcs_construction_sector_headroom_by_base_rate = {
+	value = building_urban_center_lvl_by_base_rate
+	subtract = building_ef_private_construction_lvl
+}
+

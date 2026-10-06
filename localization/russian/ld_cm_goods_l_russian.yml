@@ -1,0 +1,31 @@
+﻿l_russian:
+
+ # Д2.4 (5.10.2026): частный банк -- проводит банковские расчёты (бывшая валюта E&F).
+ bg_zz_ef_banking:0 "Банки"
+ building_zz_ef_bank:0 "Банк"
+ building_zz_ef_bank_desc:0 "Частный банк: платежи, переводы, векселя. Проводит банковские расчёты, которые покупают предприятия и население."
+ pmg_zz_ef_bank_base:0 "Банковское дело"
+ pm_zz_ef_bank_money_changer:0 "Меняла"
+ pm_zz_ef_bank_counting_house:0 "Банкирский дом"
+ pm_zz_ef_bank_joint_stock:0 "Акционерный банк"
+ pm_zz_ef_bank_telegraph:0 "Телеграфные переводы"
+ pm_zz_ef_bank_modern:0 "Современный банк"
+
+ # EF.15: выпуск облигаций ЦБ по долгу в % ВВП (модификатор здания ЦБ).
+ zz_ef_cb_bond_issuance_low:0 "Выпуск облигаций: долг ниже нормы"
+ zz_ef_cb_bond_issuance_high:0 "Выпуск облигаций: долг выше нормы"
+
+ # Тип модификатора выдачи валюты минорам (modifier_type_definitions/zz_ef_liquidity_currency_sell_orders.txt).
+ state_sell_orders_liquidity_currency_add:0 "Приказы о продаже локальной валюты"
+
+ # EF.25: доля дивидендов компаний работникам, растёт с капитализацией акций / ВВП.
+ zz_ef_mass_shareholding:0 "Массовое акционерство"
+ zz_ef_mass_shareholding_desc:0 "Акции широко распространены: часть дивидендов зданий, принадлежащих компаниям, получают их работники. Растёт с капитализацией акций относительно ВВП, до 25% при капитализации, равной ВВП."
+
+ # EF.22: публичная компания у штаба.
+ pm_company_headquarter_publicly_traded:0 "$pm_publicly_traded$"
+  zz_ef_stock_issue_literacy:0 "Узкий круг вкладчиков"
+  zz_ef_stock_issue_literacy_desc:0 "Покупать и понимать акции может только грамотный и достаточно богатый житель. Таких в стране меньше 12% населения, поэтому частные здания выпускают меньше акций: выпуск пропорционален доле грамотных богатых (от 15-го уровня богатства) и полный при 12% и выше. Сейчас: [GetPlayer.MakeScope.Var('zz_ef_literate_rich_share').GetValue|%1]."
+ notification_zz_ef_bubble_rising_name:0 "Спекулятивный пузырь растёт"
+ notification_zz_ef_bubble_rising_desc:0 "Спекулятивный рынок растёт быстрее экономики. Пузырь: [GetPlayer.MakeScope.Var('speculative_share_1').GetValue|0]%."
+ notification_zz_ef_bubble_rising_tooltip:0 "#header $notification_zz_ef_bubble_rising_name$#!\n$TOOLTIP_DELIMITER$\n$notification_zz_ef_bubble_rising_desc$"

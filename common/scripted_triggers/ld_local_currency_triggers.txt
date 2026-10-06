@@ -1,0 +1,29 @@
+﻿### E&F Hotfix — who gets the recomputed liquidity_currency output
+###
+### The same condition is needed in two places (game start and the monthly
+### pulse), so it lives here.
+###
+########################################################################
+### No market throttle, by choice — read this before "fixing" the leak
+###
+### Before 02.09.2026 this trigger walked market ?= { owner ?= { ... } } to
+### keep the formula's output away from countries sharing a market with a
+### real currency: the local currency used to be tradeable, so a cheap flat
+### grant could leak onto a shared market and undercut real national
+### currencies there. That is exactly the bug this project once removed the
+### whole recompute system over (see EF.5 in План проекта.md).
+###
+### 02.09.2026, same evening: local_currency and liquidity_currency were
+### unified back into one good on request — minor countries now receive
+### plain liquidity_currency from this same formula, not a separate
+### non-tradeable good, and liquidity_currency IS tradeable
+### (zz_ef_cm_liquidity_currency_market.txt), because central banks' prestige
+### variants need to trade too. So the leak this throttle used to prevent is
+### structurally possible again, by design, in exchange for one good instead
+### of two. Not verified in game whether it is a problem in practice with the
+### current formula's numbers — see EF.10 in План проекта.md.
+########################################################################
+
+zz_ef_local_currency_needs_throttle = {
+	has_modifier = no_money_production
+}

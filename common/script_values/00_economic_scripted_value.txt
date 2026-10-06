@@ -4615,10 +4615,9 @@ bg_bank_lvl_by_base_rate = {
 	round = yes
 }
 value_for_has_financial_center = {
-	value = bg_financial_centre_lvl
-	multiply = base_rate_to_pcs_factor #private_bank_borrowings_year_var_2
-
-	round = yes
+	value = zz_ef_slots_rating
+	add = zz_ef_slots_cb
+	add = zz_ef_slots_cap
 }
 
 bg_building_urban_center_lvl = {
@@ -4887,10 +4886,9 @@ manufacture_stock_product_by_pcs = {
 	value = 0
 	every_scope_building = {
 		limit = {
-			is_building_type = building_ef_private_construction
+			is_building_type = building_construction_sector
 		}
 		add = modifier:goods_output_manufacture_stock_add
-		#multiply = overbuilding_regulation_factor_revers
 	}
 }
 manufacture_stock_product_by_pcs_real = {
@@ -4974,8 +4972,7 @@ scandinavian_monetary_union_country_in_debat = {
 ############################################################################################################################################################
 
 difference_with_average_gold_exchange_rate_currencies = {
-	value = money_value_in_gold #money_value_rapported_inflation
-	divide = global_var:money_value_median
+	value = zz_ef_currency_strength
 }
 difference_with_average_gold_exchange_rate_currencies_revers = {
 	value = 1
@@ -5311,7 +5308,7 @@ money_value = {
 	#subjectt
 	if = {
 		limit = {
-	        market_owner_is_root_4 = no
+	        zz_ef_currency_own = no
         }
 		if = {
 			limit = {
@@ -5407,11 +5404,9 @@ money_value_target_2_in_gold = {
 }
 money_value_0 = {
 	value = 0
-
 	if = {
 		limit = {
 			has_law = law_type:law_fiat_standard
-			#has_law = law_type:law_no_monetary_system
 		}
 		value = 0.01
 	}
@@ -5423,8 +5418,7 @@ money_value_0 = {
 				has_law = law_type:law_gold_standard
 			}
 		}
-		value = national_capacity
-		divide = money_supply
+		value = zz_ef_metal_value
 	}
 	if = {
 		limit = {
@@ -5432,9 +5426,10 @@ money_value_0 = {
 		}
 		add = money_value_by_reference_currency
 	}
-
-	#max = 10
 }
+# E&F's money_value_in_gold: the owner's branches as E&F has them; a customs union member converts its own
+# money_value by its own standard (silver at the silver-to-gold rate; bimetallism and gold as they are, as
+# E&F's money_value_target_real_in_gold); the rest -- E&F's subject branch.
 money_value_in_gold = {
 	value = 0
 	if = {
@@ -5449,24 +5444,40 @@ money_value_in_gold = {
 	}
 	if = {
 		limit = {
-			market_owner_is_root_4  = yes
+			market_owner_is_root_4 = yes
 			has_law = law_type:law_silver_standard
 		}
 		add = money_value_silver_standard_in_gold
 	}
 	if = {
 		limit = {
-			market_owner_is_root_4  = yes
+			market_owner_is_root_4 = yes
 			has_law = law_type:law_bimetallism_standard
 		}
 		add = money_value_bimetallism_standard_in_gold
 	}
+	if = {
+		limit = {
+			zz_ef_cu_member = yes
+			is_subject = no
+		}
+		add = money_value
+		if = {
+			limit = { has_law = law_type:law_silver_standard }
+			multiply = silver_to_gold_rate
+		}
+	}
 	if = { #subject
 		limit = {
-			or  = {
-			    market_owner_is_root_4 = no
-			    is_subject = yes
-		    }
+			zz_ef_currency_own = no
+		}
+		add = money_value
+		multiply = rate_by_law_metal_type_2
+	}
+	if = { #subject owning its market
+		limit = {
+			zz_ef_currency_own = yes
+			is_subject = yes
 		}
 		add = money_value
 		multiply = rate_by_law_metal_type_2
@@ -5778,9 +5789,7 @@ money_value_exchange_rate_with_reference_currency = {
 ############################################################################################################################################################
 
 money_supply = {
-	value = 0 #à voir
-	add = money_supply_state
-	add = money_circulating
+	value = money_circulating
 	min = 1
 }
 money_supply_montly = {
@@ -5788,13 +5797,21 @@ money_supply_montly = {
 	add = money_supply_state_monthly
 	add = pop_savings_monthly
 }
+# !! MAINTENANCE !! Key-level REPLACE_OR_CREATE of E&F's money_circulating and
+# money_supply (script_values/00_economic_scripted_value.txt). E&F's
+# money_supply = money_supply_state (goods) + money_circulating (pop savings
+# counter + pool + credit limit + government_loan counter).
+# The money in circulation (the user, 1.10 day: M2 - M0): businesses' cash +
+# the pool + pops' savings at hand. The treasury and the CB are out of it
+# (EF.48 item 11: hoarding deflates, spending inflates). The currency's value
+# (E&F money_value_0 = national capacity / money_supply) and the inflation
+# read it.
+# 1.10 evening (the user, run 12): the money in circulation is M2 -- pops'
+# cash, business cash and pops' deposits (zz_ef_agg_m2). The pool beyond the
+# deposits (the CB's credit, contributions not yet spent) becomes money when
+# the banks spend it.
 money_circulating = {
-	value = 0
-	add = pop_savings
-	add = private_bank_funds #private_bank_funds
-	add = building_saving
-	add = government_loan_fixe
-
+	value = zz_ef_agg_m2
 	min = 1
 }
 
@@ -5883,19 +5900,12 @@ national_capacity = {
 				has_law = law_type:law_gold_standard
 			}
 		}
-		add = central_bank_reserves #en fonction du type de metal
-		add = gold_loaned_to_central_bank_in_national_metal # en or pour gold standart et bimetalisme et convertis en equivalent argent pour le silver
-		add = var:trade_balance_in_gold_fixe # en or ou en metal sion utilise le money_value_in_gold
+		add = central_bank_reserves
+		# night 2, item 2 (2.10): foreign currency in the reserves, in the
+		# standard's metal (var:zz_ef_fx_metal, kept weekly by the step)
+		add = zz_ef_v_fx_metal
+		multiply = zz_ef_capacity_per_metal
 	}
-
-
-	#tu dois armoniser le bimetalisme pour que la majoritait des 2 sources:
-	# 	- add = gold_loaned_to_central_bank_in_national_metal # en or pour gold standart et bimetalisme et convertis en equivalent argent pour le silver
-	# 	- add = var:trade_balance_in_gold_fixe # en or ou en metal sion utilise le money_value_in_gold
-	# doivent etre en or, c'est uniquement dans le silver standart que c'est valeur sont adpaté pour avoir un esquivalent argent
-	#concernant la reserve dans le bimetalisme l'or est compté à 1 et le silver est calculer dans sont équivalent or ce qui veux dire que c'est comme un gold standart quand la reserve est principalement composé d'or mais comme un silver standart dépendent du prix international du silver quand elle est composé de silver principalement
-
-
 	min = 0.01
 }
 
@@ -7346,13 +7356,18 @@ global_gold_production = {
 	add = global_var:global_gold_production_fix
 }
 
-silver_to_gold_rate = { # = gold_silver_ rate
-	value = global_gold_production
-	divide = global_silver_production
-
-
+# !! MAINTENANCE !! Key-level REPLACE_OR_CREATE of E&F's silver_to_gold_rate
+# (script_values/00_economic_scripted_value.txt); gold_to_silver_rate = 1 /
+# it stays E&F's. Before the first month of a game (E&F's history at the
+# start): 1 / 15.5.
+silver_to_gold_rate = {
+	value = 0.06452
+	if = {
+		limit = { has_global_variable = zz_ef_s2g }
+		value = global_var:zz_ef_s2g
+	}
 	max = 0.2
-	min = 0.015625
+	min = 0.01563
 }
 gold_to_silver_rate = {
 	value = 1
@@ -7714,17 +7729,29 @@ rate_by_law_metal_type_2_FRA = {
 }
 
 #gold_drain	gold_to_silver_rate > bimetallic_rate_gold_to_silver
+# В3 (the user, 6.10 day): the yearly bimetallic arbitrage is off. E&F's private bank took the undervalued metal
+# out of a bimetallic CB and paid the other one from its own stock (00_on_action_main.txt:1065-1202, before 1873) --
+# the bank's metal is in none of the money model's accounts, so the CB's metal appeared / vanished: run r1006_162423,
+# the world's "other" metal at the turn of the year, 1837.12 -1.8M gold, 1838.12 +9.2M silver. The branch runs only
+# when the misalignment is 5%+; at 0 it never does (no deal, no event). E&F's tooltip then shows no drain.
+# Gresham's law, if wanted later: on our accounts (the CB loses the undervalued metal, buys the other on the market).
+# !! MAINTENANCE !! Key-level REPLACE_OR_CREATE of E&F's misalignment_rate_gold_drain / _silver_drain
+# (script_values/00_economic_scripted_value.txt:7717, 7735).
 misalignment_rate_gold_drain = {
-	value = gold_to_silver_rate
-	subtract = bimetallic_rate_gold_to_silver
-	divide = gold_to_silver_rate
-
-	min = 0
-	max = 0.15   # 15% max de drain/an
+	value = 0
 }
 gold_lost = {
 	value = gold_state_native_for_stockpile
 	multiply = misalignment_rate_gold_drain
+	if = {
+		limit = { exists = scope:arbitrage_privat_bank }
+		max = {
+			value = scope:arbitrage_privat_bank.private_bank_silver_reserve_per_bank_gui
+			divide = gold_to_silver_rate
+			min = 0
+		}
+	}
+	min = 0
 }
 silver_gained = {
 	value = gold_lost
@@ -7733,16 +7760,20 @@ silver_gained = {
 
 #silver_drain gold_to_silver_rate < bimetallic_rate_gold_to_silver
 misalignment_rate_silver_drain = {
-	value = bimetallic_rate_gold_to_silver
-	subtract = gold_to_silver_rate
-	divide = bimetallic_rate_gold_to_silver
-
-	min = 0
-	max = 0.15   # 15% max de drain/an
+	value = 0
 }
 silver_lost = {
 	value = silver_state_native_for_stockpile
 	multiply = misalignment_rate_silver_drain
+	if = {
+		limit = { exists = scope:arbitrage_privat_bank }
+		max = {
+			value = scope:arbitrage_privat_bank.private_bank_gold_reserve_per_bank_gui
+			multiply = gold_to_silver_rate
+			min = 0
+		}
+	}
+	min = 0
 }
 gold_gained = {
 	value = silver_lost
@@ -7970,15 +8001,13 @@ inflation_value_100 = {
 	value = inflation_value
 	multiply = 100
 }
+# !! MAINTENANCE !! Key-level REPLACE_OR_CREATE of E&F's inflation_value
+# (script_values/00_economic_scripted_value.txt: the 6-month price change of
+# five goods groups + the currency's change + E&F's monetary-policy marks).
+# E&F's consumers (inflation_country / deflation_country, the Fisher target,
+# cumulative inflation, money_value_rapported_inflation) read ours unchanged.
 inflation_value = {
-	value = 0
-	add = var:inflation_on_consumer_goods_rolling_inflation_6_months
-	add = var:inflation_on_energy_rolling_inflation_6_months
-	add = var:inflation_on_raw_material_rolling_inflation_6_months
-	add = var:inflation_on_manufactured_goods_rolling_inflation_6_months
-	add = var:inflation_on_military_equipment_rolling_inflation_6_months
-	add = money_value_dif_01_rolling_inflation_6_months_limited
-	add = monetary_policy_inflation
+	value = zz_ef_inflation
 }
 
 money_value_dif_01_rolling_inflation_6_months_limited = {
@@ -8540,8 +8569,7 @@ money_value_median_0_75 = {
 }
 
 money_value_median_and_money_value_in_gold_ratio = {
-	value = money_value_in_gold
-	divide = global_var:money_value_median
+	value = zz_ef_currency_strength
 }
 
 money_value_median_0_5 = {

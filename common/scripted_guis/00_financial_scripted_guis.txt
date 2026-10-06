@@ -2250,14 +2250,20 @@ buy_bond_in_currrency_market_panel_10Y = {
 debt_issued_relative_GDP_increase = {
 	is_shown = {
 	}
+	is_valid = {
+		custom_tooltip = {
+			text = zz_ef_loan_tt_share_max
+			var:debt_issued_relative_GDP_percentage < 0.4975
+		}
+	}
 	effect = {
+		change_variable = {
+			name = debt_issued_relative_GDP_percentage
+			add = 0.005
+		}
 		if = {
-			limit = {
-			}
-			change_variable = {
-				name = debt_issued_relative_GDP_percentage
-				add = 0.05
-			}
+			limit = { var:debt_issued_relative_GDP_percentage > 0.5 }
+			set_variable = { name = debt_issued_relative_GDP_percentage value = 0.5 }
 		}
 	}
 }
@@ -2265,48 +2271,57 @@ debt_issued_relative_GDP_reduce = {
 	is_shown = {
 	}
 	is_valid = {
-		var:debt_issued_relative_GDP_percentage > 0.05
+		custom_tooltip = {
+			text = zz_ef_loan_tt_share_min
+			var:debt_issued_relative_GDP_percentage > 0.0075
+		}
 	}
 	effect = {
+		change_variable = {
+			name = debt_issued_relative_GDP_percentage
+			subtract = 0.005
+		}
 		if = {
-			limit = {
-				#has_variable = debt_issued_relative_GDP
-				var:debt_issued_relative_GDP_percentage > 0.05
-			}
-			change_variable = {
-				name = debt_issued_relative_GDP_percentage
-				subtract = 0.05
-			}
+			limit = { var:debt_issued_relative_GDP_percentage < 0.005 }
+			set_variable = { name = debt_issued_relative_GDP_percentage value = 0.005 }
 		}
 	}
 }
 set_debt_issued = {
+	is_valid = {
+		custom_tooltip = {
+			text = zz_ef_loan_tt_cap
+			zz_ef_cb_loan_after_to_gdp <= 0.5
+		}
+	}
+	# E&F's "take" button has no enabled = IsValid binding: the cap is checked in the effect too
 	effect = {
-		change_variable = {
-			name = credit_at_central_bank
-			add = debt_issued_relative_GDP
-		}
-		add_treasury = {
-			add = debt_issued_relative_GDP
-		}
-		every_scope_state = {
-			if = {
-				limit = {
-					has_modifier = financial_center_historic_place
-				}
-				change_variable = {
-					name = stockpiling_bond_var_state_1
-					add = owner.bond_creation_by_debt
-
+		if = {
+			limit = { zz_ef_cb_loan_after_to_gdp <= 0.5 }
+			change_variable = {
+				name = credit_at_central_bank
+				add = debt_issued_relative_GDP
+			}
+			add_treasury = {
+				add = debt_issued_relative_GDP
+			}
+			every_scope_state = {
+				if = {
+					limit = {
+						has_modifier = financial_center_historic_place
+					}
+					change_variable = {
+						name = stockpiling_bond_var_state_1
+						add = owner.bond_creation_by_debt
+					}
 				}
 			}
+			change_variable = {
+				name = government_loan
+				add = debt_issued_relative_GDP_in_currency
+			}
+			credit_at_central_bank_interest_per_week = yes
 		}
-		change_variable = {
-			name = government_loan
-			add = debt_issued_relative_GDP_in_currency
-		}
-
-		credit_at_central_bank_interest_per_week = yes
 	}
 }
 
@@ -3669,64 +3684,92 @@ base_rate_increase = {
 	is_shown = {
 	}
 	is_valid = {
-		var:base_rate_percentage < 0.12
- 		not = {
-			or = {
-				has_modifier = rise_base_rate #auto excluant pour pas multiplier les moddifier
-				has_modifier = down_base_rate #auto excluant pour pas multiplier les moddifier
-
-				has_law = law_type:law_devaluation #la loi de devaluation interdit une monter du taux 
-
-				has_modifier = foreign_exchange_controls #modification de la valeur du standart  
-			} 
+		custom_tooltip = {
+			text = zz_ef_rate_tt_below_max
+			var:base_rate_percentage < zz_ef_cb_rate_ceiling
+		}
+		custom_tooltip = {
+			text = zz_ef_rate_tt_bias_up
+			OR = {
+				NOT = { has_variable = zz_ef_rate_bias }
+				var:zz_ef_rate_bias < 0.0199
+			}
+		}
+		custom_tooltip = {
+			text = zz_ef_rate_tt_no_devaluation
+			NOT = { has_law = law_type:law_devaluation }
+		}
+		custom_tooltip = {
+			text = zz_ef_rate_tt_no_fx_controls
+			NOT = { has_modifier = foreign_exchange_controls }
 		}
 	}
-	effect = { 
-		# if = {
-		# 	limit = {
-		# 		var:base_rate_percentage < 0.01
-		# 	}
-			change_variable = {
-				name = base_rate_percentage
-				add =  0.005
+	effect = {
+		custom_tooltip = zz_ef_rate_tt_effect_up
+		hidden_effect = {
+			change_variable = { name = base_rate_percentage add = 0.005 }
+			if = {
+				limit = { var:base_rate_percentage > zz_ef_cb_rate_ceiling }
+				set_variable = { name = base_rate_percentage value = zz_ef_cb_rate_ceiling }
 			}
-			add_modifier = {
-				name = rise_base_rate
-				months = 6
+			if = {
+				limit = { has_variable = zz_ef_rate_bias }
+				change_variable = { name = zz_ef_rate_bias add = 0.005 }
 			}
-		# }
+			else = {
+				set_variable = { name = zz_ef_rate_bias value = 0.005 }
+			}
+			remove_modifier = down_base_rate
+			remove_modifier = rise_base_rate
+			add_modifier = { name = rise_base_rate months = 3 }
+			zz_ef_rate_policy_costs = yes
+		}
 	}
 }
 base_rate_reduce = {
 	is_shown = {
 	}
 	is_valid = {
-		var:base_rate_percentage > 0.01
- 		not = {
-			or = { 
-				has_modifier = rise_base_rate #auto excluant pour pas multiplier les moddifier
-				has_modifier = down_base_rate #auto excluant pour pas multiplier les moddifier
-
-				has_law = law_type:law_revaluation #la loi de revaluation interdit une baisse du taux
-
-				has_modifier = foreign_exchange_controls #modification de la valeur du standart  
-			} 
+		custom_tooltip = {
+			text = zz_ef_rate_tt_above_min
+			var:base_rate_percentage > 0.005
+		}
+		custom_tooltip = {
+			text = zz_ef_rate_tt_bias_down
+			OR = {
+				NOT = { has_variable = zz_ef_rate_bias }
+				var:zz_ef_rate_bias > -0.0199
+			}
+		}
+		custom_tooltip = {
+			text = zz_ef_rate_tt_no_revaluation
+			NOT = { has_law = law_type:law_revaluation }
+		}
+		custom_tooltip = {
+			text = zz_ef_rate_tt_no_fx_controls
+			NOT = { has_modifier = foreign_exchange_controls }
 		}
 	}
 	effect = {
-		# if = {
-		# 	limit = {
-		# 		var:base_rate_percentage < 0.01
-		# 	}
-			change_variable = {
-				name = base_rate_percentage
-				subtract =  0.005
+		custom_tooltip = zz_ef_rate_tt_effect_down
+		hidden_effect = {
+			change_variable = { name = base_rate_percentage add = -0.005 }
+			if = {
+				limit = { var:base_rate_percentage < 0.005 }
+				set_variable = { name = base_rate_percentage value = 0.005 }
 			}
-			add_modifier = {
-				name = down_base_rate
-				months = 6
+			if = {
+				limit = { has_variable = zz_ef_rate_bias }
+				change_variable = { name = zz_ef_rate_bias add = -0.005 }
 			}
-		# } 
+			else = {
+				set_variable = { name = zz_ef_rate_bias value = -0.005 }
+			}
+			remove_modifier = rise_base_rate
+			remove_modifier = down_base_rate
+			add_modifier = { name = down_base_rate months = 3 }
+			zz_ef_rate_policy_costs = yes
+		}
 	}
 }
 
@@ -5902,276 +5945,167 @@ speculative_share_8_button = { #count = 20
 	}
 }
 
-speculative_share_9_button = { #count = 5/12mois
+speculative_share_9_button = { ### stimulus: limit factor 4 for 36 months, +10 penalty
 	name = "speculative_share_9_button"
 	desc = "speculative_share_9_button_desc"
 
-	# is_shown = {
-	# 	var:speculative_share_1 = 0
-	# 	var:speculative_share_2 = 0
-	# }
 	is_valid = {
 		NOT = {
 			has_modifier = speculative_share_modifier_5
 		}
 		has_modifier = has_financial_center
 		custom_tooltip = {
-			text = speculative_share_5_button_tt_1
-			var:speculative_share_1 < 20
-		}
-		custom_tooltip = {
 			text = speculative_share_9_button_tt_1
-			var:speculative_share_2 = 0
+			var:speculative_share_2 < 90
 		}
-		custom_tooltip = {
-			text = speculative_share_9_button_tt_2
-			building_ef_private_construction_lvl < building_urban_center_lvl_by_base_rate
-		}
-		custom_tooltip = {
-			text = speculative_share_9_button_tt_3
-			base_rate_percentage_decimal < 12
-			base_rate_percentage_decimal > 1.10
-		}
-		#is_player = yes
 	}
 
 	effect = {
-		while = {
-			count = 5
-			random_scope_state = {
-				start_privately_funded_building_construction = building_ef_private_construction
-			}
-		}
 		add_modifier = {
 			name = speculative_share_modifier_5
-			months = 12
-		}
-		add_modifier = {
-			name = speculative_share_modifier_6 #Monetary Expansion Lock
 			months = 12
 		}
 		custom_tooltip = {
 			text = speculative_share_9_button_tt_effect_1
 		}
-		# custom_tooltip = {
-		# 	text = speculative_share_9_button_tt_effect_2
-		# }
-		if = { #protection de l'IA
-			limit = {
-				is_player = yes
-			}
-			change_variable = {
-				name = base_rate_percentage
-				subtract =  0.01
-			}
-			add_modifier = {
-				name = down_base_rate
-				months = 6
+		set_variable = {
+			name = zz_pb_ef_stimulus_mult
+			value = 4
+			days = 1080
+		}
+		change_variable = {
+			name = speculative_share_2
+			add = 10
+		}
+		if = {
+			limit = { var:speculative_share_2 > 100 }
+			set_variable = {
+				name = speculative_share_2
+				value = 100
 			}
 		}
 	}
 }
-speculative_share_10_button = { #count = 10/18mois
+speculative_share_10_button = { ### stimulus: limit factor 3.5 for 36 months, +20 penalty
 	name = "speculative_share_10_button"
 	desc = "speculative_share_10_button_desc"
 
-	# is_shown = {
-	# 	var:speculative_share_1 = 0
-	# 	var:speculative_share_2 = 0
-	# }
 	is_valid = {
 		NOT = {
 			has_modifier = speculative_share_modifier_5
 		}
 		has_modifier = has_financial_center
 		custom_tooltip = {
-			text = speculative_share_5_button_tt_1
-			var:speculative_share_1 < 20
-		}
-		custom_tooltip = {
 			text = speculative_share_10_button_tt_1
-			var:speculative_share_2 = 0
+			var:speculative_share_2 < 80
 		}
-		custom_tooltip = {
-			text = speculative_share_10_button_tt_2
-			building_ef_private_construction_lvl < building_urban_center_lvl_by_base_rate
-		}
-		custom_tooltip = {
-			text = speculative_share_10_button_tt_3
-			base_rate_percentage_decimal < 12
-			base_rate_percentage_decimal > 2.10
-		}
-		#is_player = yes
 	}
 
 	effect = {
-		while = {
-			count = 10
-			random_scope_state = {
-				start_privately_funded_building_construction = building_ef_private_construction
-			}
-		}
 		add_modifier = {
 			name = speculative_share_modifier_5
-			months = 12
-		}
-		add_modifier = {
-			name = speculative_share_modifier_6 #Monetary Expansion Lock
 			months = 12
 		}
 		custom_tooltip = {
 			text = speculative_share_10_button_tt_effect_1
 		}
-		custom_tooltip = {
-			text = speculative_share_10_button_tt_effect_2
+		set_variable = {
+			name = zz_pb_ef_stimulus_mult
+			value = 3.5
+			days = 1080
 		}
 		change_variable = {
-			name = base_rate_percentage
-			subtract =  0.02
+			name = speculative_share_2
+			add = 20
 		}
-		add_modifier = {
-			name = down_base_rate
-			months = 6
-		}
-		change_variable = {
-			name = government_loan
-			subtract = private_bank_funds_proportion_by_psc_10_by_rarity
+		if = {
+			limit = { var:speculative_share_2 > 100 }
+			set_variable = {
+				name = speculative_share_2
+				value = 100
+			}
 		}
 	}
 }
-speculative_share_11_button = { #count = 15/24mois
+speculative_share_11_button = { ### stimulus: limit factor 3 for 36 months, +30 penalty
 	name = "speculative_share_11_button"
 	desc = "speculative_share_11_button_desc"
 
-	# is_shown = {
-	# 	var:speculative_share_1 = 0
-	# 	var:speculative_share_2 = 0
-	# }
 	is_valid = {
 		NOT = {
 			has_modifier = speculative_share_modifier_5
 		}
 		has_modifier = has_financial_center
 		custom_tooltip = {
-			text = speculative_share_5_button_tt_1
-			var:speculative_share_1 < 20
-		}
-		custom_tooltip = {
 			text = speculative_share_11_button_tt_1
-			var:speculative_share_2 = 0
+			var:speculative_share_2 < 70
 		}
-		custom_tooltip = {
-			text = speculative_share_11_button_tt_2
-			building_ef_private_construction_lvl < building_urban_center_lvl_by_base_rate
-		}
-		custom_tooltip = {
-			text = speculative_share_11_button_tt_3
-			base_rate_percentage_decimal < 12
-			base_rate_percentage_decimal > 3.10
-		}
-		#is_player = yes
 	}
 
 	effect = {
-		while = {
-			count = 15
-			random_scope_state = {
-				start_privately_funded_building_construction = building_ef_private_construction
-			}
-		}
 		add_modifier = {
 			name = speculative_share_modifier_5
-			months = 12
-		}
-		add_modifier = {
-			name = speculative_share_modifier_6 #Monetary Expansion Lock
 			months = 12
 		}
 		custom_tooltip = {
 			text = speculative_share_11_button_tt_effect_1
 		}
-		custom_tooltip = {
-			text = speculative_share_11_button_tt_effect_2
+		set_variable = {
+			name = zz_pb_ef_stimulus_mult
+			value = 3
+			days = 1080
 		}
 		change_variable = {
-			name = base_rate_percentage
-			subtract =  0.03
+			name = speculative_share_2
+			add = 30
 		}
-		add_modifier = {
-			name = down_base_rate
-			months = 6
-		}
-		change_variable = {
-			name = government_loan
-			subtract = private_bank_funds_proportion_by_psc_15_by_rarity
+		if = {
+			limit = { var:speculative_share_2 > 100 }
+			set_variable = {
+				name = speculative_share_2
+				value = 100
+			}
 		}
 	}
 }
-speculative_share_12_button = { #count = 20/30mois
+speculative_share_12_button = { ### stimulus: limit factor 2.5 for 36 months, +40 penalty
 	name = "speculative_share_12_button"
 	desc = "speculative_share_12_button_desc"
 
-	# is_shown = {
-	# 	var:speculative_share_1 = 0
-	# 	var:speculative_share_2 = 0
-	# }
 	is_valid = {
 		NOT = {
 			has_modifier = speculative_share_modifier_5
 		}
 		has_modifier = has_financial_center
 		custom_tooltip = {
-			text = speculative_share_5_button_tt_1
-			var:speculative_share_1 < 20
-		}
-		custom_tooltip = {
 			text = speculative_share_12_button_tt_1
-			var:speculative_share_2 = 0
+			var:speculative_share_2 < 60
 		}
-		custom_tooltip = {
-			text = speculative_share_12_button_tt_2
-			building_ef_private_construction_lvl < building_urban_center_lvl_by_base_rate
-		}
-		custom_tooltip = {
-			text = speculative_share_12_button_tt_3
-			base_rate_percentage_decimal < 12
-			base_rate_percentage_decimal > 4.10
-		}
-		#is_player = yes
 	}
 
 	effect = {
-		while = {
-			count = 20
-			random_scope_state = {
-				start_privately_funded_building_construction = building_ef_private_construction
-			}
-		}
 		add_modifier = {
 			name = speculative_share_modifier_5
-			months = 12
-		}
-		add_modifier = {
-			name = speculative_share_modifier_6 #Monetary Expansion Lock
 			months = 12
 		}
 		custom_tooltip = {
 			text = speculative_share_12_button_tt_effect_1
 		}
-		custom_tooltip = {
-			text = speculative_share_12_button_tt_effect_2
+		set_variable = {
+			name = zz_pb_ef_stimulus_mult
+			value = 2.5
+			days = 1080
 		}
 		change_variable = {
-			name = base_rate_percentage
-			subtract =  0.04
+			name = speculative_share_2
+			add = 40
 		}
-		add_modifier = {
-			name = down_base_rate
-			months = 6
-		}
-		change_variable = {
-			name = government_loan
-			subtract = private_bank_funds_proportion_by_psc_20_by_rarity
+		if = {
+			limit = { var:speculative_share_2 > 100 }
+			set_variable = {
+				name = speculative_share_2
+				value = 100
+			}
 		}
 	}
 }

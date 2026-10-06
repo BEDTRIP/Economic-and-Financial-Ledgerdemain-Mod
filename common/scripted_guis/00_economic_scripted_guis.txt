@@ -662,119 +662,37 @@ revaluation_currency = {
 #for devaluation revaluation bouton
 ################################
 
+# E&F's 25/50/75% buttons (gui/00_ef_deported_gui_1.gui, budget_panel_economy_panel_content)
+# hidden: the scale replaces them. !! MAINTENANCE !! key-level REPLACE_OR_CREATE of E&F's guis.
 devaluation_currency_25 = {
-    is_shown = { has_law = law_type:law_devaluation }
-    is_valid = {
-        has_law = law_type:law_devaluation
-        not = { has_modifier = devaluation_currency_25 }
-    }
-    effect = {
-        remove_modifier = revaluation_currency_25
-        remove_modifier = devaluation_currency_25
-
-        remove_modifier = revaluation_currency_50
-        remove_modifier = devaluation_currency_50
-
-        remove_modifier = revaluation_currency_75
-        remove_modifier = devaluation_currency_75
-
-        add_modifier = { name = devaluation_currency_25 }
-    }
+	is_shown = { always = no }
+	is_valid = { always = no }
+	effect = { }
 }
 revaluation_currency_25 = {
-    is_shown = { has_law = law_type:law_revaluation }
-    is_valid = {
-        has_law = law_type:law_revaluation
-        not = { has_modifier = revaluation_currency_25 }
-    }
-    effect = {
-        remove_modifier = revaluation_currency_25
-        remove_modifier = devaluation_currency_25
-
-        remove_modifier = revaluation_currency_50
-        remove_modifier = devaluation_currency_50
-
-        remove_modifier = revaluation_currency_75
-        remove_modifier = devaluation_currency_75
-
-        add_modifier = { name = revaluation_currency_25 }
-    }
+	is_shown = { always = no }
+	is_valid = { always = no }
+	effect = { }
 }
 devaluation_currency_50 = {
-    is_shwn = { }
-    is_valid = {
-        has_law = law_type:law_devaluation
-        not = { has_modifier = devaluation_currency_50 }
-    }
-    effect = {
-        remove_modifier = revaluation_currency_25
-        remove_modifier = devaluation_currency_25
-
-        remove_modifier = revaluation_currency_50
-        remove_modifier = devaluation_currency_50
-
-        remove_modifier = revaluation_currency_75
-        remove_modifier = devaluation_currency_75
-
-        add_modifier = { name = devaluation_currency_50 }
-    }
+	is_shown = { always = no }
+	is_valid = { always = no }
+	effect = { }
 }
 revaluation_currency_50 = {
-    is_shown = { }
-    is_valid = {
-        has_law = law_type:law_revaluation
-        not = { has_modifier = revaluation_currency_50 }
-    }
-    effect = {
-        remove_modifier = revaluation_currency_25
-        remove_modifier = devaluation_currency_25
-
-        remove_modifier = revaluation_currency_50
-        remove_modifier = devaluation_currency_50
-
-        remove_modifier = revaluation_currency_75
-        remove_modifier = devaluation_currency_75
-
-        add_modifier = { name = revaluation_currency_50 }
-    }
+	is_shown = { always = no }
+	is_valid = { always = no }
+	effect = { }
 }
 devaluation_currency_75 = {
-    is_shown = { }
-    is_valid = {
-        has_law = law_type:law_devaluation
-        not = { has_modifier = devaluation_currency_75 }
-    }
-    effect = {
-        remove_modifier = revaluation_currency_25
-        remove_modifier = devaluation_currency_25
-
-        remove_modifier = revaluation_currency_50
-        remove_modifier = devaluation_currency_50
-
-        remove_modifier = revaluation_currency_75
-        remove_modifier = devaluation_currency_75
-
-        add_modifier = { name = devaluation_currency_75 }
-    }
+	is_shown = { always = no }
+	is_valid = { always = no }
+	effect = { }
 }
 revaluation_currency_75 = {
-    is_shown = { }
-    is_valid = {
-        has_law = law_type:law_revaluation
-        not = { has_modifier = revaluation_currency_75 }
-    }
-    effect = {
-        remove_modifier = revaluation_currency_25
-        remove_modifier = devaluation_currency_25
-
-        remove_modifier = revaluation_currency_50
-        remove_modifier = devaluation_currency_50
-
-        remove_modifier = revaluation_currency_75
-        remove_modifier = devaluation_currency_75
-
-        add_modifier = { name = revaluation_currency_75 }
-    }
+	is_shown = { always = no }
+	is_valid = { always = no }
+	effect = { }
 }
 
 ################################
@@ -1685,13 +1603,11 @@ currency_quantity_increase = {
 		if = {
 			limit = {
 				has_variable = currency_quantity
-				#var:currency_quantity < market.owner.stockpiling_currency_state
-				#var:currency_quantity < sell_limit_currency_var_rest
 				var:currency_quantity < 20000000
 			}
 			change_variable = {
 				name = currency_quantity
-				add = 5000000
+				add = 500000
 			}
 		}
 	}
@@ -1701,11 +1617,11 @@ currency_quantity_reduce = {
 		if = {
 			limit = {
 				has_variable = currency_quantity
-				var:currency_quantity > 5000000
+				var:currency_quantity > 500000
 			}
 			change_variable = {
 				name = currency_quantity
-				subtract = 5000000
+				subtract = 500000
 			}
 		}
 	}

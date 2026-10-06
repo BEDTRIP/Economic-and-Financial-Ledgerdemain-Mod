@@ -172,19 +172,32 @@ financial_center_je_2 = {
 		}
 	}
 
-	#scripted_progress_bar = speculative_share_progress_bar
-	#scripted_progress_bar = overbuilt_economy_progress_bar
+	### EF.18 v2: both bars on again (2026-09-25) -- the outliner shows a
+	### journal entry's scripted bars and nothing else. In the journal panel
+	### they are hidden by the CMF hook widget below: the sections draw their own.
+	scripted_progress_bar = speculative_share_progress_bar
+	scripted_progress_bar = overbuilt_economy_progress_bar
 
 	widget = {
-		gui = "gui/scripted_widgets/00_ef_custom_widgets.gui"
-		name = "widget_je_ef_fc_fso_situation"
+		### EF.18 v2: our rebuilt sections (gui/scripted_widgets/ld_pb_fso_widgets.gui).
+		gui = "gui/scripted_widgets/ld_pb_fso_widgets.gui"
+		name = "zz_pb_ef_fso_bubble_widget"
 		container = "custom_widget_container_3"
 	}
 
 	widget = {
-		gui = "gui/scripted_widgets/00_ef_custom_widgets.gui"
-		name = "widget_je_ef_pcs_fso_situation"
+		gui = "gui/scripted_widgets/ld_pb_fso_widgets.gui"
+		name = "zz_pb_ef_fso_overcap_widget"
 		container = "custom_widget_container_3"
+	}
+
+	widget = {
+		### CMF hook (2026-09-25): any widget in this container turns off CMF's
+		### default scripted progress bars for this journal (CMF,
+		### gui/com_gui_journal_entry.gui). The widget itself is empty.
+		gui = "gui/scripted_widgets/ld_pb_fso_widgets.gui"
+		name = "zz_pb_ef_fso_hide_bars_widget"
+		container = "com_custom_widget_container_scripted_progress_bars"
 	}
 
 	scripted_button = speculative_share_1_button
@@ -202,142 +215,23 @@ financial_center_je_2 = {
 	scripted_button = speculative_share_11_button
 	scripted_button = speculative_share_12_button
 
-	scripted_button = speculative_share_13_button
+	### EF.18 v2: speculative_share_13_button removed -- it demolishes
+	### building_ef_private_construction, which does not exist under PSC.
+	### EF.18 v2: ban / allow private construction sectors
+	### (scripted_buttons/zz_pb_ef_css_private_ban_buttons.txt).
+	scripted_button = zz_pb_ef_css_private_ban_button
+	scripted_button = zz_pb_ef_css_private_allow_button
 
 	#progressbar and var
 	on_monthly_pulse = {
 		effect = {
 
-			####################################################################################
-			#Fiancial part
-			if = {
-				limit = {
-					fiancial_center_week_balance_in_ratio < 0.10
-					var:speculative_share_1 > 0
-				}
-				change_variable = { name = speculative_share_1 add = -3 }
-			}
-			# 10–20% → -2
-			else_if = {
-				limit = {
-					fiancial_center_week_balance_in_ratio >= 0.10
-					fiancial_center_week_balance_in_ratio < 0.20
-					var:speculative_share_1 > 0
-				}
-				change_variable = { name = speculative_share_1 add = -2 }
-			}
-			# 20–30% → -1
-			else_if = {
-				limit = {
-					fiancial_center_week_balance_in_ratio >= 0.20
-					fiancial_center_week_balance_in_ratio < 0.30
-					var:speculative_share_1 > 0
-				}
-				change_variable = { name = speculative_share_1 add = -1 }
-			}
-			# 30–40% → +1
-			else_if = {
-				limit = {
-					fiancial_center_week_balance_in_ratio >= 0.30
-					fiancial_center_week_balance_in_ratio < 0.40
-					var:speculative_share_1 < 100
-				}
-				change_variable = { name = speculative_share_1 add = 1 }
-			}
-			# 40–50% → +2
-			else_if = {
-				limit = {
-					fiancial_center_week_balance_in_ratio >= 0.40
-					fiancial_center_week_balance_in_ratio < 0.50
-					var:speculative_share_1 < 100
-				}
-				change_variable = { name = speculative_share_1 add = 2 }
-			}
-			# ≥50% → +3
-			else_if = {
-				limit = {
-					fiancial_center_week_balance_in_ratio >= 0.50
-					var:speculative_share_1 < 100
-				}
-				change_variable = { name = speculative_share_1 add = 3}
-			}
+			### EF.29 (2026-09-25): the bubble (speculative_share_1, its bar, modifiers,
+			### notification) moved to the E&F hotfix, on_actions/zz_ef_bubble_on_actions.txt:
+			### it follows the stock market, and stock issuance is the hotfix's (EF.28).
 
-			#Regulation
-			if = {
-				limit = {
-					var:speculative_share_1 > 100
-				}
-				set_variable = { name = speculative_share_1 value = 100 }
-			}
-			if = {
-				limit = {
-					var:speculative_share_1 < 0
-				}
-				set_variable = { name = speculative_share_1 value = 0 }
-			}
-
-			#change_variable = { name = speculative_share_1 add = 10 } #debug
-
-			je:financial_center_je_2 ?= {
-				set_bar_progress = {
-					value = owner.var:speculative_share_1
-					name = speculative_share_progress_bar
-				}
-			}
-			remove_modifier = speculative_bubble_modifier
-			every_scope_character = {
-				limit = {
-					has_role = executive
-				}
-				remove_modifier = speculative_bubble_character_modifier
-			}
-			if = {
-				limit = {
-					var:speculative_share_1 > 0
-				}
-				add_modifier = {
-					name = speculative_bubble_modifier
-					multiplier = speculative_share_1_penality #var:speculative_share_1 negativé
-					#months = 12
-				}
-				every_scope_character = {
-					limit = {
-						has_role = executive
-					}
-					add_modifier = {
-						name = speculative_bubble_character_modifier
-						multiplier = speculative_share_1_penality
-					}
-				}
-			}
-			####################################################################################
-
-			####################################################################################
-			#Construction part
-			if = {
-				limit = {
-					building_ef_private_construction_lvl > building_urban_center_lvl_by_base_rate
-				}
-				change_variable = { name = speculative_share_2 add = 1 }
-			}
-			if = {
-				limit = {
-					building_ef_private_construction_lvl < building_urban_center_lvl_by_base_rate
-					var:speculative_share_2 > 0
-				}
-				change_variable = { name = speculative_share_2 subtract = 1 }
-			}
-
-			#change_variable = { name = speculative_share_2 add = 10 } #debug
-
-			je:financial_center_je_2 ?= {
-				set_bar_progress = {
-					value = owner.var:speculative_share_2
-					name = overbuilt_economy_progress_bar
-				}
-			}
-			#trouver un moyen de détruit les PCS en trop pour equilibré pour l'IA
-			####################################################################################
+			### EF.18 v2: the construction part (speculative_share_2 +-1 and its bar)
+			### moved to on_actions/zz_pb_ef_overbuild_counter.txt -- one writer, one pulse.
 		}
 	}
 }

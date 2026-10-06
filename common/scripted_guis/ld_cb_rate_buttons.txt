@@ -1,0 +1,41 @@
+﻿#############################################
+# EF.30 (2026-09-30, v2 same day) -- the player's rate buttons: government
+# policy on top of the central bank.
+#
+# E&F's base_rate_increase / base_rate_reduce (00_financial_scripted_guis.txt
+# :3668) moved the rate +-0.5 pp for free and were blocked while
+# rise_base_rate / down_base_rate were active. The central bank now sets
+# those on each of its quarterly steps, so the old check locked the buttons
+# for good -- the "why can't I press it" of the 30.09 test.
+#
+# Now: each press moves the rate 0.5 pp at once AND moves the bank's target
+# by the same (var:zz_ef_rate_bias, within +-2 pp), so the bank keeps it.
+# Free and without a cooldown (user 2026-09-30: the price and the 3-month
+# cooldown of v2 removed; the cost of deviating from the bank's target comes
+# later as a standing penalty, see EF.31). Kept from E&F: devaluation law blocks raising,
+# revaluation blocks cutting, foreign exchange controls block both. Every
+# condition is a custom_tooltip line, so the button's tooltip
+# (BuildTooltip, gui/ld_cb_rate_panel.gui) lists them green/red.
+# Same names, so E&F's other callers keep working.
+#############################################
+
+# Colour of the policy rule rate box (gui/ld_cb_rate_panel.gui): red
+# when the rule wants a higher rate than we have (policy looser than the rule),
+# green when lower, plain when equal (within 0.01 pp).
+zz_ef_cb_rule_above_rate = {
+	is_shown = {
+		zz_ef_cb_rule_gap > 0.0001
+	}
+}
+zz_ef_cb_rule_below_rate = {
+	is_shown = {
+		zz_ef_cb_rule_gap < -0.0001
+	}
+}
+zz_ef_cb_rule_at_rate = {
+	is_shown = {
+		zz_ef_cb_rule_gap <= 0.0001
+		zz_ef_cb_rule_gap >= -0.0001
+	}
+}
+

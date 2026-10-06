@@ -3,70 +3,23 @@ building_ef_private_construction = {
 	icon = "gfx/interface/icons/building_icons/ef_private_construction.dds"
 
 	city_type = city
-	levels_per_mesh = 25
+	levels_per_mesh = 1
 
 	ownership_type = self
 	ai_nationalization_desire = 0
 
-	required_construction = construction_cost_medium #construction_cost_very_low
-	unlocking_technologies = {
-		urbanization
-	}
-	production_method_groups = {
-		pmg_base_building_private_construction_sector
-		############################################################################################################################################################
-		pmg_market_liquidity
-		############################################################################################################################################################	
-	}
+	unlocking_technologies = { }
+	production_method_groups = { }
 
-	buildable = yes
-	expandable = yes
+	buildable = no
+	expandable = no
 	downsizeable = no
- 
-	#has_max_level = yes
 
-	can_build_government = {
-		always = no
-		# or = {
-		# 	any_scope_building = {
-		# 		is_building_type = building_ef_private_construction
-		# 		level < state.building_urban_center_lvl_by_base_rate #b:building_urban_center.level
-		# 	} 
-		# 	not = {
-		# 		has_building = building_ef_private_construction
-		# 	}
-		# }
-	}
-	can_build_private = {
-		#always = yes
-		# or = {
-		# 	any_scope_building = {
-		# 		is_building_type = building_ef_private_construction
-		# 		level < state.building_urban_center_lvl_by_base_rate #b:building_urban_center.level
-		# 	} 
-		# 	not = {
-		# 		has_building = building_ef_private_construction
-		# 	}
-		# } 
+	can_build_government = { always = no }
+	can_build_private = { always = no }
+	potential = { always = no }
 
-		#owner.building_ef_private_construction_lvl < owner.bg_bank_lvl_by_base_rate #bg_bank_lvl #permet de ne pas etre générateur de croissance en ce scalant sur la BC #bloc le JE
-	}	
-
-	potential = {
-		# any_scope_building = {
-		# 	is_building_type = building_ef_private_construction
-		# 	level < state.building_urban_center_lvl_by_base_rate #b:building_urban_center.level
-		# } 
-		# or = {
-		# 	market.owner = owner
-		# 	any_scope_building = {
-		# 		is_building_type = building_ef_private_construction
-		# 		level < 10
-		# 	} 
-		# }  
-	} 
-
-	ai_value = 100 
+	ai_value = 0
 
 	background = "gfx/interface/icons/building_icons/backgrounds/building_panel_bg_light_industry.dds"
 }
