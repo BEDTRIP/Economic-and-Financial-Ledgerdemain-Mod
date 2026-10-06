@@ -8,7 +8,7 @@
 коэффициент, закомментированный вызов); `мёртвый` — ни откуда не вызывается; `дубль` — считает то же или пишет те же
 счета, что модель `ld_*`. Строки файлов — на момент записи, при правке файла сдвигаются: искать по имени.
 
-Итого: мёртвый 44, выключен 15, дубль 5, живой 224.
+Итого: мёртвый 44, выключен 15, дубль 5, живой 225.
 
 ## Денежная модель и металл (`money-model.md`)
 
@@ -304,6 +304,7 @@
 | Журнальные записи E&F (7) | живой | common/journal_entries/00_ef_*.txt | `financial_center_je_2` — ld (`ld_bubble`,`ld_pb_overbuild_counter`); `silver_crisis_je_1` — `00_on_action_main.txt:1315`; остальные активируются игроком (`is_shown_when_inactive`) | журнал |
 | События E&F .1–.35, .56–.65, .95, .96 (запускаются кодом) | живой | events/00_ef_economic_event.txt | `trigger_event`/`id =` из `00_on_action_main.txt`, решения, арбитража | события игроку |
 | Сообщения E&F | живой | common/messages/00_ef_messages.txt | 15 событийных (-1) + `your_currency_are_*` (190 ссылок) + `ai_*_bond_maturity_*` | лента сообщений |
+| Правила игры `unique_companies_banks`/`_newspapers` (TRY_REPLACE, по умолчанию disabled) | живой | common/game_rules/00_EF_unique_companies_game_rules.txt:1-19 | TRY_REPLACE ванильных правил; флаги `banks_disabled`/`newspapers_disabled` читают ванильные компании-банки и газеты (E&F по умолчанию их выключает — свои банки); кодом мода не читаются | настройки игры |
 | Дефайны E&F `NEconomy` (PRICE_RANGE 0.99 и др.), `REINVESTMENT_SUBSISTENCE_FRACTION_REDUCTION`, `COUNTRY_MIN_CREDIT_SCALED` | живой | common/defines/00_ef_defines.txt:10-29; zz_ef_reinvestment_defines.txt; zzzz_ef_credit_def.txt | дефайны читает движок | — |
 | `list`-эффекты `*_variable_list`, `<cur>_currency_law_list`, `<cur>_c_global_variable_list` | живой | common/scripted_effects/08_list_effect.txt | `currency_law_list`, `national_capacity_variable_list` и др. зовутся годовым пульсом/месячной ветвью | таблицы рейтингов E&F (scripted_guis) |
 

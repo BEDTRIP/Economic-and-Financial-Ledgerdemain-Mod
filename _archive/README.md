@@ -39,4 +39,3 @@ _archive/<механизм>/
 | Учёт финпродуктов `stockpiling_<вид>_1` (+ `_2_state`, 5 видов) | `ef_stockpiling_financial_1/` | 10 определений и баннер из `01_financial_scripted_effects.txt` |
 | Годовой снимок индекса `fluctuations_country_indice_value_year(_clear)` | `ef_index_year_snapshot/` | два определения из `01_financial_scripted_effects.txt` |
 | Группа PM `pmg_currency_type` (+ `pm_no_currency_type`, `pm_currency_liquidity_currency`) | `ef_pmg_currency_type/` | группа, два PM, закомментированная строка в `ef_15_bank.txt`, 3 ключа локализации |
-| Правила игры `unique_companies_banks` / `_newspapers` | `ef_unique_company_rules/` | файл `common/game_rules/00_EF_unique_companies_game_rules.txt` целиком (пункты исчезают из меню правил) |
