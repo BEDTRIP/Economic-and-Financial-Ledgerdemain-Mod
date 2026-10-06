@@ -30,8 +30,6 @@
 | 10 | `history/global/zz_ef_currency_fix.txt` | после 99: валюта WUR; страны без валюты → `law_no_market_liquidity` |
 | 11 | `history/global/zz_ef_init_stockpiling_state_vars.txt` | заводит 7 переменных `stockpiling_*_var_state_1` штатам (охрана `has_variable`) |
 | 12 | `history/states/01_ef_states.txt` | `s:STATE_X = add_modifier silver_mine_max_level` (60 штатов, множитель = макс. уровень серебряной шахты) |
-`history/global/update new country/nw_*.py` — генераторы: копируют блоки `#begin_copy…#end_copy` из history в `10_new_country_var.txt` (пути Windows автора; не запускать).
-
 После лобби `on_game_started_after_lobby`: `com_topbar_setup_ef` (E&F: добавляет 7 элементов верхней панели `com_topbar_element_inflation / law_*_standard / law_subject` и ставит их всем странам в `com_topbar_second_line`) и `zz_ef_init_stockpile_state_vars` (`ld_stockpile_state_var_init.txt`: `zz_ef_seed_stockpile_state_vars` — проход `every_state` для старых сейвов). PSC: `set_construction_start` (из history) → `set_construction_weekly_on_action` + `set_construction_country` для каждой страны.
 
 ### При создании страны

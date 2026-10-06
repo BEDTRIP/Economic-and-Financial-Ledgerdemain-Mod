@@ -41,14 +41,12 @@ GUI-тип регистрирует первый файл по имени (ASCII
 - `gui/ef_dev_and_custom_windows/ef_custom_windows.gui` (56 тыс. строк) — 83 `default_popup`: `gold_reserve_window`,
   `currency_reserve_window`, `ef_custom_windows` (хаб кнопок) и 80 тестовых `panel_*`; все открываются
   `ExecuteConsoleCommand('gui.createwidget …')` + `GetVariableSystem.Toggle('<имя>')`.
-- `gui/ef_dev_and_custom_windows/00_ef_dev_tips.gui` — заметки автора (не GUI-код; строки без `#`).
 - `gui/ef_dev_and_custom_windows/maj/Essential/*.gui` (8) — `budget_panel`, `market_panel`, `states_panel` (дубли корневых,
   отличаются подстановкой `[..GetCustom('currency_symbol')]` вместо `@money!`), `building_browser_panel`,
   `building_details_panel`, `goods_panel`, `goods_state_panel`, `production_methods` — подмены ванильных по имени.
 - `gui/ef_dev_and_custom_windows/maj/NonEssential/*.gui` (19) — копии ванильных (`custom_tooltip`, `right_click_menu`,
   `map_list_panel`, `map_markers`, `military_formation_panel`, `popups`, `outliner_pinnable_types`, `graph_tooltips`, …);
   `companies_panel.gui` там — 63 строки, проигрывает корневому.
-- `gui/ef_dev_and_custom_windows/maj/save/2026-06-25_15-42-59/*.gui.backup` — 20 резервных копий (1,8 МБ), игра не грузит.
 
 ### Файлы проекта (`ld_*`, переопределяют типы E&F; грузятся раньше или вместо оригинала)
 - `gui/ld_economy_panel.gui` (генерат. `regen_ef_economy_panel_gui.py`) — `budget_panel_economy_panel_content` (:10,
@@ -91,18 +89,16 @@ GUI-тип регистрирует первый файл по имени (ASCII
   `financial_center_`, `speculative_share_`, `overbuilt_economy_`, `*_monetary_union_`, `silver_crisis_`, `je_efcc_progress_bar`).
 - `common/game_concepts/00_ef_game_concepts.txt` (77 `concept_*`), `ld_cb_rate_concepts.txt` (2: `concept_zz_ef_policy_rule_rate`,
   `concept_zz_ef_discretionary_adjustment`), `PSC_game_concepts.txt` (`concept_construction_spending`).
-- Отладка: `common/decisions/00_ef_debug_decisions.txt` (11 решений, показ — `has_global_variable = EF_debug_mode`),
-  `common/scripted_effects/test.txt` (2667 строк, один безымянный блок `every_scope_state = {…}`).
+- Отладка: `common/decisions/00_ef_debug_decisions.txt` (11 решений, показ — `has_global_variable = EF_debug_mode`).
 
 ### Локализация (`localization/<язык>/`, 11 языков)
-- Полные: `english/` (37 `.yml` + дубль `01_ef_currency_name_localization_l_english.yaml`, игра `.yaml` не грузит) и `russian/`
+- Полные: `english/` (37 `.yml`) и `russian/`
   (+`zz_ef_rus_gui_fix_l_russian.yml`, 22 строки ключей, которых нет в моде). Остальные девять — копии английской
   (`python ../vic3_mods/tools/ld_loc_langs.py`).
 - Группы: `00_ef_gui_localization_*` (12 351 строка: подписи панелей), `01_ef_*` (здания, компании, понятия, валюты, события,
   товары, законы, модификаторы, технологии, подсказки), `PSC_*`, `ld_*` (`ld_cb_rate_panel`, `ld_economy_panel`, `ld_cbfx`,
   `ld_bond_tables`, `ld_monetary_policy`, `ld_currency_trade`, …), `replace/ld_*` (REPLACE-ключи: `ld_money_supply_replace`,
   `ld_cb_loan_replace`, `ld_pb_psc`, `ld_tgr_private_ownership_stock`, `ld_psc_modifiers`).
-- `localization/english/ef_dev_localization/maj/save/loc_2026-04-28_14-43-32/` — 24 `.yml.backup` (4,3 МБ), игра не грузит.
 
 ## Поток / порядок
 - Регистрация GUI-типов — при загрузке; победитель по правилу выше. Типы `ld_*` и `ld_currency_symbol_fix` не имеют

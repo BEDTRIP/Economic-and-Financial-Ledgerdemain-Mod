@@ -8,7 +8,7 @@
 коэффициент, закомментированный вызов); `мёртвый` — ни откуда не вызывается; `дубль` — считает то же или пишет те же
 счета, что модель `ld_*`. Строки файлов — на момент записи, при правке файла сдвигаются: искать по имени.
 
-Итого: мёртвый 76, выключен 42, дубль 5, живой 220.
+Итого: мёртвый 66, выключен 42, дубль 5, живой 220.
 
 ## Денежная модель и металл (`money-model.md`)
 
@@ -165,8 +165,6 @@
 | механизм | статус | где | доказательство | интерфейс |
 | --- | --- | --- | --- | --- |
 | Старая таблица zz_ef_cbfx_update | мёртвый | common/scripted_guis/ld_cbfx.txt:4 | refs=0 в index.tsv (заменена sorted) | — |
-| Архив 99_ai_buy_sell_currency_effect.zip (950 эффектов buy_<cur>_N/sell_<cur>_N) | мёртвый | common/scripted_effects/99_ai_buy_sell_currency_effect.zip | игра .zip не грузит; вызовов buy_dinar_1 и т.п. нет, имена только в customizable_localization как переменные (var:buy_dinar_1) | — |
-| Архив 99_ai_strategies.zip | мёртвый | common/scripted_effects/99_ai_strategies.zip | .zip не грузится игрой (содержимое не просматривалось) | — |
 | Тела buy_currency_privat_bank / sell_currency_privat_bank (+ sell_currency_privat_bank_variable_list) | мёртвый | 01_economic_scripted_effects.txt:92241,92422; 08_list_effect.txt:2228 | refs=0 для первых двух; список обновляет только их | — |
 | Валютные запасы частных банков stockpiling_<cur>_company_<Bank>_fixe | мёртвый | common/history/global/00_ef_economic_global_variable.txt; common/script_values/ld_clearing_values.txt:387… | пишет только история (старт), в эффектах нет записи; читают значения zz_ef_bank_holds_* | диаграмма «банки держат нашу валюту» (ld_economy_panel.gui:9875) |
 | Месячный торговый резерв zz_ef_rc_step (+rc_pair/search/read_held/take_held/add_units) | выключен | common/scripted_effects/ld_reserve_trade.txt:6-534; вызов ld_money_model.txt:1046 закомментирован | «# zz_ef_rc_step = yes» (клиринг платит то же недельно, иначе двойной счёт); подфункции только из rc_step | — |
@@ -229,7 +227,6 @@
 | ef_11 bg_ef_private_construction_score (инвестиции в группу без зданий) | мёртвый | common/buildings/ef_11_private_infrastructure.txt:39; common/building_groups/00_ef_building_groups.txt:123 | группа bg_ef_private_construction содержит только заглушку с potential=no | — |
 | Сглаживание/эффективность PSC: construction_sector_efficiency_multiplier | мёртвый | common/script_values/PSC_construction_values.txt:498 | refs=0 в index.tsv | — |
 | Константы PSC command_economy_spending_mult, oversupply_limit, state_oversupply_limit, construction_price_weeks | мёртвый | common/script_values/PSC_set_values.txt:1,5,9,33 | refs=0 в index.tsv | — |
-| Пустые файлы common/game_concepts/PSC_game_concepts.txt и gui/scripted_widgets/PSC_scripted_widgets.txt | мёртвый | 0 строк (wc -l) | нет определений | — |
 | AI-ветки кнопок E&F speculative_share_9..12 (scripted_buttons) | выключен | common/scripted_buttons/00_ef_buttons.txt:2331-2546 | visible = { always = no } (AI branch off) | — |
 | Здание E&F building_ef_private_construction (ef_14) | выключен | common/buildings/ef_14_private_construction.txt:1 | buildable/expandable = no, potential = always no, PMG пусты; все 28 ссылок истории переименованы на building_construction_sector | — |
 | E&F building_ef_private_construction_modifier (штраф overbuilt_economy_modifier по зданию-заглушке) | выключен | common/scripted_effects/09_introduction_building_lvl.txt:22923; вызов 00_on_action_main.txt:291 | вызывается ежемесячно, но every_scope_building по типу, которого нет — no-op; штраф заменён zz_pb_ef_overbuilt_economy | — |
@@ -275,12 +272,10 @@
 | механизм | статус | где | доказательство | интерфейс |
 | --- | --- | --- | --- | --- |
 | Вызов `initialize_historic_macro_facilities_ns` из history зданий | мёртвый | common/history/buildings/00_ef_building.txt:117; common/scripted_effects/09_introduction_building_lvl.txt:23546 | единственное определение эффекта закомментировано (комментарий в `00_a_ef_history_var_init.txt`) | — |
-| Генераторы `history/global/update new country/nw_*.py` | мёртвый | common/history/global/update new country/ (4 файла .py) | Python-скрипты с путями `C:/Users/Compt/…`, игрой не читаются | — |
 | Ветки, вызываемые только из пустых `privat_bank_*_currency`: `buy_currency_privat_bank`, `sell_currency_privat_bank` | мёртвый | common/scripted_effects/01_economic_scripted_effects.txt:92241 (177 строк), 92422 (121 строка) | нет вызовов (grep: только определения) | — |
 | `money_creation_in_foreign_exchange_reserve` / `money_destruction_in_foreign_exchange_reserve` | мёртвый | common/scripted_effects/01_economic_scripted_effects.txt:11529 (1538 строк), 13067 (1537 строк) | refs=0 в index.tsv; вызовов в коде нет | — |
 | `central_bank_production_methods_2` (+ `_2_act`) | мёртвый | common/scripted_effects/01_economic_scripted_effects.txt:99450 (2670 строк) | refs=0; вызовы закомментированы: 00_on_action_main.txt:988 и в `ef_on_production_method_changed` (00_ef_on_action.txt:~402-411) | — |
 | `contract_1_year` (сбор очистки контрактов) | мёртвый | common/scripted_effects/00_on_action_main.txt:17914 (205 строк) | refs=0; те же 29 `clear_<good>_contract_1_year` вызываются прямо из `ef_on_yearly_pulse_reset` | — |
-| Архивы `*.zip`/`*.rar` в common и events (ИИ-стратегии, ИИ-форекс, старые PM нацзапаса, старые события) | мёртвый | common/scripted_effects/99_ai_strategies.zip; 99_ai_buy_sell_currency_effect.zip; common/script_values/99_ai_strategies.zip; events/old.zip; common/production_methods/old/15_ef_bank.rar, 17_ef_national_stockpile.zip | движок не читает архивы; в `99_ai_strategies.zip` лежит `02_ai_strategies.txt` (1,1 млн строк) | — |
 | Месячный `ef_on_monthly_pulse_reset` | выключен | common/on_actions/00_ef_on_action.txt:97; common/scripted_effects/00_on_action_main.txt:242 | вызов закомментирован (00_ef_on_action.txt:97), определение закомментировано (00_on_action_main.txt:242) | — |
 | Месячный ЦБ: закупка/продажа валюты частными банками при `rise_base_rate`/`down_base_rate`/`revaluation_currency_target` | выключен | common/scripted_effects/00_on_action_main.txt:466,474,487,622; 01_economic_scripted_effects.txt:92238,92419 | `privat_bank_buy_currency`/`privat_bank_sell_currency` — пустые тела (комментарии «В3: … off») | — |
 | Отметка `attack_on_currency` + `privat_bank_sell_currency` (после 1873, биметаллизм/серебро) | выключен | common/scripted_effects/00_on_action_main.txt:1198-1204 | переменная ставится, получатель — пустое тело | — |
@@ -372,10 +367,6 @@
 | je_meiji_restoration_get_faction_sgui (вызов без определения) | мёртвый | gui/states_panel.gui | имени нет в common/scripted_guis | — |
 | Окно currency_reserve_window | мёртвый | gui/ef_dev_and_custom_windows/ef_custom_windows.gui:2838; gui/ld_economy_panel.gui:7091 | кнопка открытия в ld_economy_panel.gui:7091 закомментирована; других вызовов нет | — |
 | Тестовые окна panel_1…panel_20, panel_1_N, panel_2_N, panel_3_N (80 шт.) | мёртвый | gui/ef_dev_and_custom_windows/ef_custom_windows.gui:5574+ | имена не встречаются вне самого файла; входа из игровых панелей нет, только из хаба `ef_custom_windows` (отладка) | отладочные кнопки |
-| common/scripted_effects/test.txt (безымянный блок every_scope_state, 2667 строк) | мёртвый | common/scripted_effects/test.txt:1 | определение эффекта с именем `every_scope_state` (совпадает со встроенным итератором); refs=0 в index.tsv; активирует PM банков по валютам; не вызывается | — |
-| Резервные копии GUI maj/save/*.gui.backup (20 файлов, 1,8 МБ) | мёртвый | gui/ef_dev_and_custom_windows/maj/save/2026-06-25_15-42-59/ | расширение .backup, игра не грузит; 18 из 19 сопоставимых идентичны текущим maj/NonEssential | — |
-| Резервные копии локализации ef_dev_localization/maj/save/*.backup (24 файла, 4,3 МБ) | мёртвый | localization/english/ef_dev_localization/maj/save/loc_2026-04-28_14-43-32/ | расширение .yml.backup, игра не грузит; рабочих файлов в ef_dev_localization нет | — |
-| Дубль локализации 01_ef_currency_name_localization_l_english.yaml | мёртвый | localization/english/01_ef_currency_name_localization_l_english.yaml | 601 строка, как в одноимённом .yml (отличие — BOM в начале); два файла с одним набором ключей; игра берёт локализацию из .yml, второй файл лишний | — |
 | maj/Essential/{budget_panel,market_panel,states_panel}.gui — дубли корневых | мёртвый | gui/ef_dev_and_custom_windows/maj/Essential/ | те же типы в gui/budget_panel.gui, market_panel.gui, states_panel.gui; корень выигрывает у подкаталога | — |
 | maj/NonEssential/companies_panel.gui и maj/Essential/building_details_panel.gui — дубли | мёртвый | gui/ef_dev_and_custom_windows/maj/NonEssential/companies_panel.gui; maj/Essential/building_details_panel.gui | типы объявлены в gui/companies_panel.gui и gui/00_MPM_building_details_panel.gui (имя 00_… раньше) | — |
 | Типы vo_plotline_income_formwork / vo_plotline_expenses_formwork / vo_plotline_gdp_formwork / vo_plotline_gdp (+цепочки income/expenses) | мёртвый | gui/00_ef_deported_gui_2.gui:10983,11330,11368,11709,11747,11829 | refs=0 в index.tsv для formwork и gdp; income/expenses вызываются только из formwork; живой — vo_plotline_minting (ld_economy_panel.gui:4180) | — |
@@ -383,7 +374,6 @@
 | Прогресс-бары bank_je_central_progress_bar, bank_central_currency_JE_dollar_united_states_dollar_progress_bar | мёртвый | common/scripted_progress_bars/00_ef_progressbar.txt:88,143 | refs=0; вызовы в 00_ef_bank_central_je.txt:203,211 закомментированы | — |
 | concept_automatic_money_value, concept_financial_product | мёртвый | common/game_concepts/00_ef_game_concepts.txt:29,161 | refs=0 в index.tsv | — |
 | com_add_local_good (com_local_goods_sgui.txt) | мёртвый | common/scripted_guis/com_local_goods_sgui.txt:1 | refs=0 в index.tsv | — |
-| Заметки автора 00_ef_dev_tips.gui (89 строк без #) | мёртвый | gui/ef_dev_and_custom_windows/00_ef_dev_tips.gui | не GUI-код: французские заметки, строки без `#` (возможный шум в gui.log) | — |
 | Отладочный флаг EF_debug_mode (виджет + sgui) | выключен | gui/00_ef_debug_widget.gui; gui/scripted_widgets/EF_scripted_widgets.txt; common/scripted_guis/09_ef_other.txt:13-31 | регистрация указывает на gui/01_ef_debug_widget.gui (такого файла нет) (файла нет, он `00_…`); флаг читают только отладочные решения | — |
 | Отладочные решения 00_ef_debug_decisions.txt (Open_/Close_Test_Decision, Test_event_1..5, law_encouranging_childbirth_Decision_*) | выключен | common/decisions/00_ef_debug_decisions.txt:6-277 | показ требует has_global_variable = EF_debug_mode (:9,:25) или openTestDecision_variable; refs=0 для всех 11 | решения (только в -debug_mode) |
 | Кнопки bank_central_currency_JE_1..4_button (пустые) | выключен | common/scripted_buttons/00_ef_buttons.txt:2742-2778 | refs=0, тела `visible/possible/effect` пустые; журнал закомментирован (00_ef_bank_central_je.txt:331) | — |

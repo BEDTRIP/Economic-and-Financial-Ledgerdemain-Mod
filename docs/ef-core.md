@@ -105,6 +105,3 @@
 - `common/prestige_goods/00_ef_prestige_goods_2.txt` — престижный товар `manufacture_stock_usa`.
 - `common/customizable_localization/00_ef_localization_ custom.txt` — имя валюты страны (`currency_name` и др.; пробел в имени
   файла — авторский).
-- Архивы, которые игра не грузит (мёртвый груз): `common/script_values/99_ai_strategies.zip`,
-  `common/scripted_effects/99_ai_strategies.zip`, `common/scripted_effects/99_ai_buy_sell_currency_effect.zip`,
-  `common/production_methods/old/` (`.rar`, `.zip`), `events/old.zip`.
