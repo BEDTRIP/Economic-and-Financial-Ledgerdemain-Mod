@@ -1,0 +1,25 @@
+﻿# Вырезано из common/production_methods/00_ef_market_liquidity.txt (строки 67-87, определение pm_privately_owned_building_arms_industry).
+
+pm_privately_owned_building_arms_industry = {
+	texture = "gfx/interface/icons/production_method_icons/privately_owned.dds"
+
+	unlocking_production_methods = {
+		pm_rifles
+		pm_repeaters
+		pm_bolt_action_rifles
+	}
+
+	disallowing_laws = {
+		law_command_economy
+		law_council_republic
+	}
+
+	building_modifiers = {
+		level_scaled = {
+			building_employment_capitalists_add = 100
+		}
+		unscaled = {
+			building_capitalists_money_add = 5
+		}
+	}
+}

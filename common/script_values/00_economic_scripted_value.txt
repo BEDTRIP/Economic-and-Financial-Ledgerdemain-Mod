@@ -5354,7 +5354,8 @@ private_bank_funds_limit_ratio = {
 
     # 3. Stabilité du taux de base (crédit stable → limite plus haute)
     add = {
-        value = base_rate_percentage
+        value = 0
+        if = { limit = { has_variable = base_rate_percentage } add = var:base_rate_percentage }
         multiply = -0.50     # taux haut → limite privée plus basse
     }
 
@@ -5395,7 +5396,8 @@ private_bank_funds_min_limit_ratio = {
 
     # 3. Taux de base : +2% à -3%
     add = {
-        value = base_rate_percentage
+        value = 0
+        if = { limit = { has_variable = base_rate_percentage } add = var:base_rate_percentage }
         multiply = -0.30     # +10% → -3% (raisonnable)
     }
 
@@ -6328,41 +6330,41 @@ authorized_debt_interest = {
  	value = 0
 	if = {
 		limit = {
-			expenses < income_150
+			total_expenses < income_150
 		}
 		add = 0.25
 	}
 	if = {
 		limit = {
-			expenses > income_150
-			expenses < income_175
+			total_expenses > income_150
+			total_expenses < income_175
 		}
 		add = 0.20
 	}
 	if = {
 		limit = {
-			expenses > income_175
-			expenses < income_200
+			total_expenses > income_175
+			total_expenses < income_200
 		}
 		add = 0.15
 	}
 	if = {
 		limit = {
-			expenses > income_200
-			expenses < income_225
+			total_expenses > income_200
+			total_expenses < income_225
 		}
 		add = 0.10
 	}
 	if = {
 		limit = {
-			expenses > income_225
-			expenses < income_250
+			total_expenses > income_225
+			total_expenses < income_250
 		}
 		add = 0.05
 	}
 	if = {
 		limit = {
-			expenses > income_250
+			total_expenses > income_250
 		}
 		add = 0
 	}
@@ -6602,22 +6604,22 @@ bimetallic_rate_gold_to_silver = {
 			not = {
 				or = {
 					any_active_law = {
-						has_amendment = amendment_bimetallic_ratio_15_5_fra
+						has_amendment = amendment_type:amendment_bimetallic_ratio_15_5_fra
 					}
 					any_active_law = {
-						has_amendment = amendment_bimetallic_ratio_15_5_latine_union
+						has_amendment = amendment_type:amendment_bimetallic_ratio_15_5_latine_union
 					}
 					any_active_law = {
-						has_amendment = amendment_usa_bimetallic_ratio_1834
+						has_amendment = amendment_type:amendment_usa_bimetallic_ratio_1834
 					}
 					any_active_law = {
-						has_amendment = amendment_spain_bimetallic_ratio_traditional
+						has_amendment = amendment_type:amendment_spain_bimetallic_ratio_traditional
 					}
 					any_active_law = {
-						has_amendment = amendment_german_bimetallic_ratio_conservative
+						has_amendment = amendment_type:amendment_german_bimetallic_ratio_conservative
 					}
 					any_active_law = {
-						has_amendment = amendment_netherlands_bimetallic_ratio
+						has_amendment = amendment_type:amendment_netherlands_bimetallic_ratio
 					}
 				}
 			}
@@ -6638,7 +6640,7 @@ bimetallic_rate_gold_to_silver = {
 		limit  = {
 			has_law = law_type:law_bimetallic_ratio_15
 			any_active_law = {
-				has_amendment = amendment_bimetallic_ratio_15_5_fra
+				has_amendment = amendment_type:amendment_bimetallic_ratio_15_5_fra
 			}
 		}
 		add = 15.5
@@ -6648,7 +6650,7 @@ bimetallic_rate_gold_to_silver = {
 		limit  = {
 			has_law = law_type:law_bimetallic_ratio_15
 			any_active_law = {
-				has_amendment = amendment_bimetallic_ratio_15_5_latine_union
+				has_amendment = amendment_type:amendment_bimetallic_ratio_15_5_latine_union
 			}
 		}
 		add = 15.5
@@ -6658,7 +6660,7 @@ bimetallic_rate_gold_to_silver = {
 		limit  = {
 			has_law = law_type:law_bimetallic_ratio_15
 			any_active_law = {
-				has_amendment = amendment_usa_bimetallic_ratio_1834
+				has_amendment = amendment_type:amendment_usa_bimetallic_ratio_1834
 			}
 		}
 		add = 16.1
@@ -6668,7 +6670,7 @@ bimetallic_rate_gold_to_silver = {
 		limit  = {
 			has_law = law_type:law_bimetallic_ratio_15
 			any_active_law = {
-				has_amendment = amendment_spain_bimetallic_ratio_traditional
+				has_amendment = amendment_type:amendment_spain_bimetallic_ratio_traditional
 			}
 		}
 		add = 15.1
@@ -6678,7 +6680,7 @@ bimetallic_rate_gold_to_silver = {
 		limit  = {
 			has_law = law_type:law_bimetallic_ratio_15
 			any_active_law = {
-				has_amendment = amendment_german_bimetallic_ratio_conservative
+				has_amendment = amendment_type:amendment_german_bimetallic_ratio_conservative
 			}
 		}
 		add = 14.5
@@ -6688,7 +6690,7 @@ bimetallic_rate_gold_to_silver = {
 		limit  = {
 			has_law = law_type:law_bimetallic_ratio_15
 			any_active_law = {
-				has_amendment = amendment_netherlands_bimetallic_ratio
+				has_amendment = amendment_type:amendment_netherlands_bimetallic_ratio
 			}
 		}
 		add = 15.6
@@ -6847,13 +6849,6 @@ rate_by_law_metal_type_FRA = {
 	value = 0
 
 	c:FRA = {
-		limit = {
-			or = {
-				has_law = law_type:law_gold_standard
-				has_law = law_type:law_gold_exchange_standard
-			}
-		}
-
 		if = {
 			limit = {
 				or = {

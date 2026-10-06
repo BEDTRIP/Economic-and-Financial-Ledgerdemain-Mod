@@ -295,7 +295,7 @@
 							any_scope_article_option = {
 								OR = {
 									source_country ?= scope:target_country
-									is_giftable_treaty_article = no
+									NOT = { is_giftable_to = root }
 								}
 							}
 						}

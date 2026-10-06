@@ -1,4 +1,4 @@
-namespace = 00_ef_economic_event
+﻿namespace = 00_ef_economic_event
 
 #ok 00_ef_economic_event.1.t:0 "Nouvelle banque centreale et nouvelle currency en [SCOPE.sC('target_country').GetName]"
 00_ef_economic_event.1 = { #image no text en
@@ -31,7 +31,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.1.a
-		option_par_défaut = oui
+		default_option = yes
 	}
 }
 # #  00_ef_economic_event.2.t:0 "Réforme du standard monétaire en [SCOPE.sC('target_country').GetName]"
@@ -170,7 +170,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.5.a
-		option_par_défaut = oui
+		default_option = yes
 	}
 }
 #ok  00_ef_economic_event.6.t:0 "Unification monétaire fianal de l'empire allemand"
@@ -203,7 +203,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.6.a
-		option_par_défaut = oui
+		default_option = yes
 	}
 }
 ##ok 00_ef_economic_event.7.t:0 "Unification monétaire du royaume d'italie
@@ -236,7 +236,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.7.a
-		option_par_défaut = oui
+		default_option = yes
 	}
 }
 
@@ -301,7 +301,7 @@ namespace = 00_ef_economic_event
 				}
 			}
 			or = {
-				country_is_in_europe = yes
+				is_in_geographic_region = geographic_region_europe
 				"relations(scope:target_country)" > relations_threshold:cordial
 			} 
 		} 
@@ -315,7 +315,7 @@ namespace = 00_ef_economic_event
 	}
 	option = {
 		name = 00_ef_economic_event.8.b
-		option_par_défaut = oui
+		default_option = yes
 	}  
 } 
 # 00_ef_economic_event.9.t:0 #Avancement du déabt à 2ans
@@ -356,7 +356,7 @@ namespace = 00_ef_economic_event
 				}
 			}
 			or = {
-				country_is_in_europe = yes
+				is_in_geographic_region = geographic_region_europe
 				"relations(scope:target_country)" > relations_threshold:cordial
 			} 
 		} 
@@ -370,7 +370,7 @@ namespace = 00_ef_economic_event
 	}
 	option = {
 		name = 00_ef_economic_event.9.b
-		option_par_défaut = oui
+		default_option = yes
 	} 
 }
 # 00_ef_economic_event.10.t:0 #Avancement du déabt à 4ans
@@ -411,7 +411,7 @@ namespace = 00_ef_economic_event
 				}
 			}
 			or = {
-				country_is_in_europe = yes
+				is_in_geographic_region = geographic_region_europe
 				"relations(scope:target_country)" > relations_threshold:cordial
 			} 
 		} 
@@ -425,7 +425,7 @@ namespace = 00_ef_economic_event
 	}
 	option = {
 		name = 00_ef_economic_event.10.b
-		option_par_défaut = oui
+		default_option = yes
 	} 
 }
 #Country in union #trigger à chaque pays rejoingant les diiscution
@@ -458,7 +458,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.11.a
-		option_par_défaut = oui
+		default_option = yes
 	}  
 } 
 #Country signature et treaty #Final et fin de la serie 
@@ -505,7 +505,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.12.a
-		option_par_défaut = oui
+		default_option = yes
 
 		#ajouter +5% de prestige
 	}  
@@ -570,7 +570,7 @@ namespace = 00_ef_economic_event
 	}
 	option = {
 		name = 00_ef_economic_event.19.b
-		option_par_défaut = oui
+		default_option = yes
 	}  
 }  
 # 00_ef_economic_event.20.t:0 #Avancement du déabt à 1ans
@@ -627,7 +627,7 @@ namespace = 00_ef_economic_event
 	}
 	option = {
 		name = 00_ef_economic_event.20.b
-		option_par_défaut = oui
+		default_option = yes
 	} 
 }
 # 00_ef_economic_event.21.t:0 #Avancement du déabt à 2ans
@@ -684,7 +684,7 @@ namespace = 00_ef_economic_event
 	}
 	option = {
 		name = 00_ef_economic_event.21.b
-		option_par_défaut = oui
+		default_option = yes
 	} 
 } 
 #Country in union #trigger à chaque pays rejoingant les diiscution
@@ -717,7 +717,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.22.a
-		option_par_défaut = oui
+		default_option = yes
 	}  
 }  
 #Country signature et treaty #Final et fin de la serie 
@@ -791,7 +791,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.23.a
-		option_par_défaut = oui
+		default_option = yes
 
 		#ajouter +5% de prestige
 	}  
@@ -883,7 +883,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.26.a
-		option_par_défaut = oui 
+		default_option = yes 
 		custom_tooltip = {
 			text = 00_ef_economic_event_desc.26.a
 		}
@@ -920,7 +920,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.27.a
-		option_par_défaut = oui 
+		default_option = yes 
 		custom_tooltip = {
 			text = 00_ef_economic_event_desc.27.a
 		}
@@ -958,7 +958,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.28.a
-		option_par_défaut = oui 
+		default_option = yes 
 	}  
 }   
 #Passagfe FEED -> -> passage en notification ok inverssement queant la monaie revient sur le marché
@@ -992,7 +992,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.29.a
-		option_par_défaut = oui 
+		default_option = yes 
 	}  
 }  
 
@@ -1027,7 +1027,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.30.a
-		option_par_défaut = oui 
+		default_option = yes 
 	}  
 }  
 
@@ -1062,7 +1062,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.31.a
-		option_par_défaut = oui 
+		default_option = yes 
 	}  
 }   
 #Passagfe FEED -> ok changement de money value target -> revaluation 
@@ -1096,7 +1096,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.32.a
-		option_par_défaut = oui 
+		default_option = yes 
 	}  
 }  
 
@@ -1130,7 +1130,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.33.a
-		option_par_défaut = oui 
+		default_option = yes 
 	}  
 }   
 #Passagfe FEED -> ok le pays x devien le global fiancial power 
@@ -1163,7 +1163,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.34.a
-		option_par_défaut = oui 
+		default_option = yes 
 	}  
 }  
  
@@ -1200,7 +1200,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.35.a
-		option_par_défaut = oui 
+		default_option = yes 
 	}  
 }  
 
@@ -1272,7 +1272,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.56.a
-		option_par_défaut = oui  
+		default_option = yes  
 		trigger = {
 			has_modifier = has_central_bank
 			or = {
@@ -1337,7 +1337,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.57.a
-		option_par_défaut = oui 
+		default_option = yes 
 	}  
 }  
 #Silver Price Collapse of "Game date" 
@@ -1370,7 +1370,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.58.a
-		option_par_défaut = oui 
+		default_option = yes 
 		custom_tooltip = {
 			text = 00_ef_economic_event_desc.58.a
 		}
@@ -1408,7 +1408,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.59.a
-		option_par_défaut = oui 
+		default_option = yes 
 		custom_tooltip = {
 			text = 00_ef_economic_event_desc.59.a
 		}
@@ -1444,7 +1444,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.60.a
-		option_par_défaut = oui 
+		default_option = yes 
 		custom_tooltip = {
 			text = 00_ef_economic_event_desc.60.a
 		}
@@ -1482,7 +1482,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.61.a
-		option_par_défaut = oui 
+		default_option = yes 
 		custom_tooltip = {
 			text = 00_ef_economic_event_desc.61.a
 		}
@@ -1518,7 +1518,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.62.a
-		option_par_défaut = oui 
+		default_option = yes 
 		custom_tooltip = {
 			text = 00_ef_economic_event_desc.62.a
 		}
@@ -1554,7 +1554,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.63.a
-		option_par_défaut = oui 
+		default_option = yes 
 		custom_tooltip = {
 			text = 00_ef_economic_event_desc.63.a
 		}
@@ -1590,7 +1590,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.64.a
-		option_par_défaut = oui 
+		default_option = yes 
 		custom_tooltip = {
 			text = 00_ef_economic_event_desc.64.a
 		}
@@ -1627,7 +1627,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.65.a
-		option_par_défaut = oui 
+		default_option = yes 
 		custom_tooltip = {
 			text = 00_ef_economic_event_desc.65.a
 		}
@@ -1669,7 +1669,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.95.a
-		option_par_défaut = oui  
+		default_option = yes  
 	}    
 }  
 #Passagfe FEED -> 
@@ -1703,7 +1703,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.96.a
-		option_par_défaut = oui  
+		default_option = yes  
 	}    
 }  
  
@@ -1740,7 +1740,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.106.a
-		option_par_défaut = oui
+		default_option = yes
 		
 		scope:ig_want_a_large_monetary_policy = {
  			add_ideology = ideology_monetary_policy
@@ -1775,7 +1775,7 @@ namespace = 00_ef_economic_event
 
 	option = {
 		name = 00_ef_economic_event.107.a
-		option_par_défaut = oui 
+		default_option = yes 
  
 		scope:ig_no_want_a_large_monetary_policy = {
 			remove_ideology = ideology_monetary_policy 

@@ -66,7 +66,7 @@ PSC-хук: `on_production_method_changed`, `on_building_built`, `on_acquired_te
 | условие | эффекты |
 |---|---|
 | всегда | `ef_on_half_yearly_pulse_recurence`: `ai_building_strategy` (ИИ строит частные железные дороги в штатах с `state_market_access < 0.80`), `fluctuations_gdp_1_year`, `economic_sentiment_index_base_JE_fixe_half_year_pulse`, `law_no_monetary_system` |
-| `has_central_bank` | `central_bank_ef_on_half_yearly_pulse_country`: игрок — `monetary_policy_ideology_dynamic`; `has_central_bank_SS_BS_GS_GES_NISO` — `fluctuations_money_value_1_year`, `buy_sell_currency_order` (6938 строк), `leading_producer_of_oil`; ИИ — `ai_credit_at_central_bank`, `ai_refund_central_bank`; золотой обменный — `reference_currency_in_gold_fixe`; береговые порты — `is_treaty_port_disable_pm_market_liquidity`; ранг №1 — `fluctuations_silver_to_gold_rate_1_year`, `global_arbitrage_bank_variable_list`; ИИ — `base_rate_change` (пустое тело); `crisis_general_reset_count`; держатель `global_monetary_reference` — `privat_bank_buy_currency` (пустое) |
+| `has_central_bank` | `central_bank_ef_on_half_yearly_pulse_country`: игрок — `monetary_policy_ideology_dynamic`; `has_central_bank_SS_BS_GS_GES_NISO` — `fluctuations_money_value_1_year`, `leading_producer_of_oil`; ИИ — `ai_credit_at_central_bank`, `ai_refund_central_bank`; золотой обменный — `reference_currency_in_gold_fixe`; береговые порты — `is_treaty_port_disable_pm_market_liquidity`; ранг №1 — `fluctuations_silver_to_gold_rate_1_year`, `global_arbitrage_bank_variable_list`; ИИ — `base_rate_change` (пустое тело); `crisis_general_reset_count`; держатель `global_monetary_reference` — `privat_bank_buy_currency` (пустое) |
 | `has_financial_center` | `financial_center_ef_on_half_yearly_pulse_country`: только `interest_per_month_from_foreign_debt_investment` (снимок/крах капитализации вынесены в месячный `zz_ef_cap_monthly_*`) |
 | `has_national_stockpile` | `national_stockpile_state_modifier_clean` |
 | `global_monetary_reference` | `money_value_global_var` |
@@ -102,7 +102,7 @@ PSC-хук: `on_production_method_changed`, `on_building_built`, `on_acquired_te
 
 ## Вызовы и связи
 - Модель денег `ld_*`: месячные хуки зовут эффекты из `common/scripted_effects/ld_*.txt`; из тел E&F зовутся `zz_ef_cb_rate_step`, `zz_ef_std_switch_before/after`, `zz_ef_privbank_interest_pay`, `zz_ef_mp_init/_clear`, `zz_ef_crisis_redeem` (в `01_economic_scripted_effects.txt`), `zz_ef_cur_intro_after` (в `09_introduction_building_lvl.txt`).
-- Эффекты E&F, пишущие `gold_state_1` / `silver_state_1` ЦБ-штата (счета модели): арбитраж `private_bank_arbitrage_*_drain` (годовой), `enemy_capital_is_occuped`, `buy_/sell_<cur>_currency` (через `buy_sell_currency_order`, `ai_buy_sell_currency`), стартовые значения `99_ef_history_global_variable.txt`.
+- Эффекты E&F, пишущие `gold_state_1` / `silver_state_1` ЦБ-штата (счета модели): арбитраж `private_bank_arbitrage_*_drain` (годовой), `enemy_capital_is_occuped`, `buy_/sell_<cur>_currency` (через `ai_buy_sell_currency`), стартовые значения `99_ef_history_global_variable.txt`.
 - GUI: верхняя панель — `com_topbar_setup_ef`; пульсы GUI не вызывают, но scripted_guis зовут `reset_*`, `stockpiling_capital_state_transfert`, `reset_debt_in_national_currency_player`.
 
 ## Логи

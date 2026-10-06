@@ -1,4 +1,4 @@
-gold_gui_1_trigger = {
+﻿gold_gui_1_trigger = {
 	or = {
 		and = { #Salle max remplissage en fobnction de ce qui reste d'or
 			EF_gold_gui_room = var:EF_current_room
@@ -516,22 +516,13 @@ market_owner_is_root_univ_with_buiding = { #market_owner_is_root_univ_with_buidi
 			building_type = building_bank
 			production_method = pm_external_exchange_standard_bank_money_currency #pm_no_metal_consuption
 		}
-		not = { #soit qu'il possede la consomation d'une currency étrangère
-			is_production_method_active = {
-				building_type = building_bank
-				production_method = pm_no_subject_currency_type
-			}
-		}
+		# pm_no_subject_currency_type no longer exists (pmg_subject_currency_type is hidden): its negation is always true
 	}
 }
 
 bank_central_buiding_no_external_currency_consuption = {
- 	any_scope_state = {
-		is_production_method_active = {
-			building_type = building_bank
-			production_method = pm_no_subject_currency_type
-		}
-	}
+	# pm_no_subject_currency_type no longer exists (pmg_subject_currency_type is hidden): never true
+	always = no
 }
 
 #####################################################################################################################################################
@@ -733,7 +724,7 @@ is_valid_country = {
 			c:IBE ?= this
 			c:ICL ?= this
 			c:HND ?= this
-			c:BTH ?= this
+			c:BHT ?= this
 			c:IDN ?= this
 			c:TPG ?= this
 			c:IRE ?= this
@@ -1189,7 +1180,6 @@ country_is_in_unwanted_region = {
 			c:IND ?= this
 			c:DEI ?= this
 			#c:IND ?= this
-			c:PEN ?= this
 			c:PER ?= this
 			c:AFG ?= this
 			c:BUR ?= this
@@ -1325,7 +1315,6 @@ market_goods_is_financial_product = {
 		goods = g:agricultural_stock
 		goods = g:mining_stock
 		goods = g:railroad_stock
-		goods = g:war_bond
 		goods = g:mutual_funds
 	}
 }
@@ -5588,7 +5577,7 @@ is_monetary_systeme_transition_valid_country_to_bimetalisme = {
 					c:DEN ?= this
 					c:NOR ?= this
 					c:SWE ?= this
-					c:ROU ?= this
+					c:ROM ?= this
 					c:BUL ?= this
 					c:ITA ?= this
 					c:TUR ?= this
@@ -5680,7 +5669,7 @@ is_monetary_systeme_transition_valid_country_to_gold = {
 					c:DEN ?= this
 					c:NOR ?= this
 					c:SWE ?= this
-					c:ROU ?= this
+					c:ROM ?= this
 					c:BUL ?= this
 					c:ITA ?= this
 					c:TUR ?= this
@@ -5881,7 +5870,7 @@ is_valid_country_ITA_bimetalisme = {
 }
 is_valid_country_ROU_bimetalisme = {
 	root = {
-		c:ROU ?= this  #1867
+		c:ROM ?= this  #1867
 		game_date > 1867.1.1
 	}
 }
@@ -6170,7 +6159,7 @@ is_valid_country_SWE_gold_standard = {
 }
 is_valid_country_ROU_gold_standard = {
 	root = {
-		c:ROU ?= this  #1890
+		c:ROM ?= this  #1890
 		game_date > 1890.1.1
 	}
 }
@@ -6344,7 +6333,7 @@ is_valid_country_JAP_gold_standard = {
 
 #is_hmm_activate
 is_valid_country_hmm = {
-	has_game_rule = historical_map_mod_enabled
+	always = no # E&F: the Historical Map Mod game rule (historical_map_mod_enabled) does not exist in this playset
 	or = {
 		#1837
 		AND = {
@@ -6364,7 +6353,6 @@ is_valid_country_hmm = {
                 c:CLM ?= this
                 c:URU ?= this
                 c:ARG ?= this
-                c:Y44 ?= this
                 c:CSA ?= this
                 c:EGY ?= this
                 c:SER ?= this
@@ -6424,7 +6412,6 @@ is_valid_country_hmm = {
                 c:ITA ?= this
                 c:KOR ?= this
                 c:SAF ?= this
-                c:Y44 ?= this
                 c:SIA ?= this
                 c:DAI ?= this
                 c:LIB ?= this
@@ -6466,7 +6453,6 @@ is_valid_country_hmm = {
                 c:ITA ?= this
                 c:KOR ?= this
                 c:SAF ?= this
-                c:Y44 ?= this
                 c:SIA ?= this
                 c:DAI ?= this
                 c:LIB ?= this

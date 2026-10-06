@@ -12095,7 +12095,7 @@ reference_currency_owned_by_the_country = {
 		limit = {
 			global_var:global_monetary_reference_lira_scudo_pontificio = 1
 		}
-		add = stockpiling_lira_scudo_pontificio
+		add = stockpiling_lira_scudo_pontificio_state
 	}
 	#lira_scudo_sardo
 	else_if = {
@@ -26925,7 +26925,7 @@ export_in_gold = {
 	value = 0
 	if = {
 		limit= {
-			total_export_trade_routes > 0
+			total_market_exports_quantity > 0
 			export_to_gold > 0
 		}
 		value = export_to_gold
@@ -38047,7 +38047,7 @@ currency_identifiers_dinar = {
 						# country_has_primary_culture = cu:bengali
 						#country_has_primary_culture = cu:burmese
 						# country_has_primary_culture = cu:kachin
-						country_has_primary_culture = cu:kashmiria 
+						country_has_primary_culture = cu:kashmiri 
 						# country_has_primary_culture = cu:assamese
 						# country_has_primary_culture = cu:oriya
 						# country_has_primary_culture = cu:gujarati
@@ -38545,7 +38545,7 @@ currency_identifiers_eco_east_african_eco = {
 			or = {
 				AND = { country_has_primary_culture = cu:shona }
 				AND = { country_has_primary_culture = cu:yao }
-				AND = { country_has_primary_culture = cu:sea }
+				AND = { country_has_primary_culture = cu:swahili }
 				AND = { country_has_primary_culture = cu:lacustrine_bantu }
 				AND = { country_has_primary_culture = cu:nilotic }
 				AND = { country_has_primary_culture = cu:kikuyu }
@@ -38553,7 +38553,7 @@ currency_identifiers_eco_east_african_eco = {
 				AND = { country_has_primary_culture = cu:baganda }
 				AND = { country_has_primary_culture = cu:ruanda }
 				AND = { country_has_primary_culture = cu:rundi }
-				AND = { country_has_primary_culture = cu:unyamwezi }
+				AND = { country_has_primary_culture = cu:nyamwezi }
 				AND = { country_has_primary_culture = cu:chewa }
 			}
 		}
@@ -39626,7 +39626,6 @@ currency_identifiers_rupee_indian_rupee = {
 				country_has_primary_culture = cu:marathi
 				country_has_primary_culture = cu:bihari
 				country_has_primary_culture = cu:tamil
-				country_has_primary_culture = cu:kanauji
 				country_has_primary_culture = cu:sinhala
 				country_has_primary_culture = cu:malayalam
 				country_has_primary_culture = cu:kannada
@@ -39882,7 +39881,7 @@ currency_identifiers_spe_uni = {
 					country_has_primary_culture = cu:baluchi
 					country_has_primary_culture = cu:bengali
 					country_has_primary_culture = cu:kachin
-					country_has_primary_culture = cu:kashmiria
+					country_has_primary_culture = cu:kashmiri
 					country_has_primary_culture = cu:nepali
 					country_has_primary_culture = cu:assamese
 					country_has_primary_culture = cu:oriya
@@ -39891,7 +39890,6 @@ currency_identifiers_spe_uni = {
 					country_has_primary_culture = cu:marathi
 					country_has_primary_culture = cu:bihari
 					country_has_primary_culture = cu:tamil
-					country_has_primary_culture = cu:kanauji
 					country_has_primary_culture = cu:sinhala
 					country_has_primary_culture = cu:malayalam
 					country_has_primary_culture = cu:kannada
@@ -40005,7 +40003,7 @@ currency_identifiers_spe_uni = {
 
 					country_has_primary_culture = cu:shona
 					country_has_primary_culture = cu:yao
-					country_has_primary_culture = cu:sea
+					country_has_primary_culture = cu:swahili
 					country_has_primary_culture = cu:lacustrine_bantu
 					country_has_primary_culture = cu:nilotic
 					country_has_primary_culture = cu:kikuyu
@@ -40018,7 +40016,7 @@ currency_identifiers_spe_uni = {
 
 					country_has_primary_culture = cu:chewa
 
-					country_has_primary_culture = cu:unyamwezi
+					country_has_primary_culture = cu:nyamwezi
 
 
 
@@ -40097,7 +40095,6 @@ currency_identifiers_spe_uni = {
 					country_has_primary_culture = cu:marathi
 					country_has_primary_culture = cu:bihari
 					country_has_primary_culture = cu:tamil
-					country_has_primary_culture = cu:kanauji
 					country_has_primary_culture = cu:sinhala
 					country_has_primary_culture = cu:malayalam
 					country_has_primary_culture = cu:kannada

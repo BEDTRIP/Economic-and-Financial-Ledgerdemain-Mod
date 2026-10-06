@@ -1,4 +1,4 @@
-GLOBAL = {
+﻿GLOBAL = {
 	every_country = {
 		################################################################################################################################
 		################################################################################################################################
@@ -21,7 +21,7 @@ GLOBAL = {
 			limit = {
 				has_modifier = has_financial_center
 			}
-			var:central_bank_location = {
+			var:central_bank_location ?= {
 				set_variable = {
 					name = stockpiling_bond_var_state_1
 					value = 0
@@ -63,7 +63,7 @@ GLOBAL = {
 			limit = {
 				c:USA ?= this
 			}
-			var:financial_center_location = {
+			var:financial_center_location ?= {
 				set_variable = {
 					name = stockpiling_bond_var_state_1
 					value = 0
@@ -135,7 +135,7 @@ GLOBAL = {
 				name = circulating_pound_sterling_c_var_1
                 add = { 750000009 1000000009 }
 			}
-			var:central_bank_location = {
+			var:central_bank_location ?= {
 				change_variable = {
 					name = stockpiling_pound_sterling_state_1
                     add  = {
@@ -198,7 +198,7 @@ GLOBAL = {
 				name = circulating_franc_french_franc_c_var_1
                 add = { 1500000009  2000000009 } #500 000 009 - 1 000 000 009
 			}
-			var:central_bank_location = {
+			var:central_bank_location ?= {
 				change_variable = {
 					name = stockpiling_franc_french_franc_state_1
                     add  = {
@@ -259,7 +259,7 @@ GLOBAL = {
 				name = circulating_dollar_united_states_dollar_c_var_1
                 add = { 250000009  500000009 } #500 000 009 - 1 000 000 009
 			}
-			var:central_bank_location = {
+			var:central_bank_location ?= {
 				change_variable = {
 					name = stockpiling_dollar_united_states_dollar_state_1
                     add  = {
@@ -338,7 +338,7 @@ GLOBAL = {
 				name = circulating_gulden_florin_c_var_1
                 add = { 300000009  600000009 } #500 000 009 - 1 000 000 009
 			}
-			var:central_bank_location = {
+			var:central_bank_location ?= {
 				change_variable = {
 					name = stockpiling_gulden_florin_state_1
                     add  = {
@@ -409,7 +409,7 @@ GLOBAL = {
 				name = circulating_gulden_c_var_1
                 add = { 500000009  900000009 } #500 000 009 - 1 000 000 009
 			}
-			var:central_bank_location = {
+			var:central_bank_location ?= {
 				change_variable = {
 					name = stockpiling_gulden_state_1
                     add  = {
@@ -462,7 +462,7 @@ GLOBAL = {
 				name = circulating_spe_ruble_c_var_1
                 add = { 500000009  900000009 } #500 000 009 - 1 000 000 009
 			}
-			var:central_bank_location = {
+			var:central_bank_location ?= {
 				change_variable = {
 					name = stockpiling_spe_ruble_state_1
                     add  = {
@@ -515,7 +515,7 @@ GLOBAL = {
 				name = circulating_thaler_prussian_thaler_c_var_1
                 add = { 500000009  900000009 } #500 000 009 - 1 000 000 009
 			}
-			var:central_bank_location = {
+			var:central_bank_location ?= {
 				change_variable = {
 					name = stockpiling_thaler_prussian_thaler_state_1
                     add  = {
@@ -564,7 +564,7 @@ GLOBAL = {
 				name = circulating_spe_yuan_c_var_1
                 add = { 300000009  600000009 } #500 000 009 - 1 000 000 009
 			}
-			var:central_bank_location = {
+			var:central_bank_location ?= {
 				change_variable = {
 					name = stockpiling_spe_yuan_state_1
                     add  = {
@@ -617,7 +617,7 @@ GLOBAL = {
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
                     name = stockpiling_dollar_canadian_dollar_state_1
                     add = {
@@ -669,7 +669,7 @@ GLOBAL = {
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
                     name = stockpiling_dollar_canadian_dollar_state_1
                     add = {
@@ -721,7 +721,7 @@ GLOBAL = {
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
                     name = stockpiling_dollar_australian_dollar_state_1
                     add = {
@@ -773,7 +773,7 @@ GLOBAL = {
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
                     name = stockpiling_rupee_indian_rupee_state_1
                     add = {
@@ -825,7 +825,7 @@ GLOBAL = {
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
                     name = stockpiling_mark_finnish_markka_state_1
                     add = {
@@ -877,7 +877,7 @@ GLOBAL = {
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
                     name = stockpiling_rupee_indonesian_rupiah_state_1
                     add = {
@@ -925,23 +925,23 @@ GLOBAL = {
             }
 
             change_variable = {
-                name = circulating_gulden_south_german_gulde_c_var_1
+                name = circulating_gulden_south_german_gulden_c_var_1
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_gulden_south_german_gulde_state_1
+                    name = stockpiling_gulden_south_german_gulden_state_1
                     add = {
-                        value = owner.var:circulating_gulden_south_german_gulde_c_var_1
+                        value = owner.var:circulating_gulden_south_german_gulden_c_var_1
                         multiply = 0.1
                     }
                 }
                 change_variable = {
                     name = silver_state_1
                     add = {
-                        value = owner.var:circulating_gulden_south_german_gulde_c_var_1
-                        add = var:stockpiling_gulden_south_german_gulde_state_1
+                        value = owner.var:circulating_gulden_south_german_gulden_c_var_1
+                        add = var:stockpiling_gulden_south_german_gulden_state_1
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -981,7 +981,7 @@ GLOBAL = {
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
                     name = stockpiling_thaler_hannoveraner_thaler_state_1
                     add = {
@@ -1033,7 +1033,7 @@ GLOBAL = {
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
                     name = stockpiling_thaler_saxon_thaler_state_1
                     add = {
@@ -1085,7 +1085,7 @@ GLOBAL = {
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
                     name = stockpiling_gulden_bavarian_gulden_state_1
                     add = {
@@ -1137,7 +1137,7 @@ GLOBAL = {
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
                     name = stockpiling_franc_swiss_franc_state_1
                     add = {
@@ -1189,7 +1189,7 @@ GLOBAL = {
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
                     name = stockpiling_franc_belgian_franc_state_1
                     add = {
@@ -1241,7 +1241,7 @@ GLOBAL = {
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
                     name = stockpiling_krone_danish_krone_state_1
                     add = {
@@ -1293,7 +1293,7 @@ GLOBAL = {
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
                     name = stockpiling_spe_drachma_state_1
                     add = {
@@ -1345,7 +1345,7 @@ GLOBAL = {
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
                     name = stockpiling_dinar_qiran_state_1
                     add = {
@@ -1397,7 +1397,7 @@ GLOBAL = {
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
                     name = stockpiling_real_state_1
                     add = {
@@ -1449,7 +1449,7 @@ GLOBAL = {
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
                     name = stockpiling_lira_toscane_lira_state_1
                     add = {
@@ -1501,7 +1501,7 @@ GLOBAL = {
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
                     name = stockpiling_lira_scudo_pontificio_state_1
                     add = {
@@ -1553,7 +1553,7 @@ GLOBAL = {
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
                     name = stockpiling_lira_scudo_sardo_state_1
                     add = {
@@ -1605,7 +1605,7 @@ GLOBAL = {
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
                     name = stockpiling_lira_ducato_state_1
                     add = {
@@ -1657,7 +1657,7 @@ GLOBAL = {
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
                     name = stockpiling_krone_swedish_krona_state_1
                     add = {
@@ -1709,7 +1709,7 @@ GLOBAL = {
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
                     name = stockpiling_peso_bolivien_peso_state_1
                     add = {
@@ -1761,7 +1761,7 @@ GLOBAL = {
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
                     name = stockpiling_peso_bolivien_peso_state_1
                     add = {
@@ -1813,7 +1813,7 @@ GLOBAL = {
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
                     name = stockpiling_real_brazilian_real_state_1
                     add = {
@@ -1865,7 +1865,7 @@ GLOBAL = {
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
                     name = stockpiling_peso_mexican_peso_state_1
                     add = {
@@ -1917,7 +1917,7 @@ GLOBAL = {
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
                     name = stockpiling_spe_peseta_state_1
                     add = {
@@ -1969,7 +1969,7 @@ GLOBAL = {
                 add = { 50000000 100000000 }
             }
 
-            var:central_bank_location = {
+            var:central_bank_location ?= {
                 change_variable = {
                     name = stockpiling_lira_ottoman_lira_state_1
                     add = {
@@ -2006,7 +2006,7 @@ GLOBAL = {
 		###########################
 		if = {
 			limit = {
-				has_game_rule = historical_map_mod_enabled
+				always = no # E&F: the Historical Map Mod game rule does not exist in this playset
 			}
 			#all potential country for the 5 mods 1837/1861/1871/1890/1919
 
@@ -2033,7 +2033,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_bolivien_peso_state_1
                             add = {
@@ -2089,7 +2089,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_thaler_prussian_thaler_state_1
                             add = {
@@ -2125,7 +2125,7 @@ GLOBAL = {
                 # peso_mexican_peso
                 if = {
                     limit = {
-                        c:Y44?= this
+                    	always = no # c:Y44 does not exist
                     }
 
                     activate_law = law_type:law_peso_mexican_peso_currency
@@ -2141,7 +2141,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_mexican_peso_state_1
                             add = {
@@ -2193,7 +2193,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_eco_south_african_rand_state_1
                             add = {
@@ -2245,7 +2245,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_dollar_canadian_dollar_state_1
                             add = {
@@ -2297,7 +2297,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_cuban_peso_state_1
                             add = {
@@ -2349,7 +2349,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_colombian_peso_state_1
                             add = {
@@ -2401,7 +2401,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_uruguayan_peso_state_1
                             add = {
@@ -2453,7 +2453,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_argentine_peso_state_1
                             add = {
@@ -2489,10 +2489,9 @@ GLOBAL = {
                 # UNKNOWN
                 if = {
                     limit = {
-                        c:Y44?= this
+                    	always = no # c:Y44 does not exist
                     }
 
-                    activate_law = law_type:law_UNKNOWN_currency
                     activate_law = law_type:law_silver_standard
 
                     set_variable = {
@@ -2505,7 +2504,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_UNKNOWN_state_1
                             add = {
@@ -2557,7 +2556,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_dollar_confederate_states_dollar_state_1
                             add = {
@@ -2609,7 +2608,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_pound_egyptian_pound_state_1
                             add = {
@@ -2661,7 +2660,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_dinar_serbian_dinar_state_1
                             add = {
@@ -2713,7 +2712,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_leon_leu_state_1
                             add = {
@@ -2765,7 +2764,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_spe_zloti_state_1
                             add = {
@@ -2813,23 +2812,23 @@ GLOBAL = {
                     }
 
                     change_variable = {
-                        name = circulating_gulden_south_german_gulde_c_var_1
+                        name = circulating_gulden_south_german_gulden_c_var_1
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
-                            name = stockpiling_gulden_south_german_gulde_state_1
+                            name = stockpiling_gulden_south_german_gulden_state_1
                             add = {
-                                value = owner.var:circulating_gulden_south_german_gulde_c_var_1
+                                value = owner.var:circulating_gulden_south_german_gulden_c_var_1
                                 multiply = 0.1
                             }
                         }
                         change_variable = {
                             name = silver_state_1
                             add = {
-                                value = owner.var:circulating_gulden_south_german_gulde_c_var_1
-                                add = var:stockpiling_gulden_south_german_gulde_state_1
+                                value = owner.var:circulating_gulden_south_german_gulden_c_var_1
+                                add = var:stockpiling_gulden_south_german_gulden_state_1
                                 add = owner.building_saving
                                 multiply = owner.var:money_value_target_1
                             }
@@ -2869,7 +2868,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_lira_state_1
                             add = {
@@ -2921,7 +2920,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_gulden_hungarian_forint_state_1
                             add = {
@@ -2979,7 +2978,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_uruguayan_peso_state_1
                             add = {
@@ -3031,7 +3030,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_paraguayan_peso_state_1
                             add = {
@@ -3083,7 +3082,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_spe_korean_won_state_1
                             add = {
@@ -3135,7 +3134,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_spe_zloti_state_1
                             add = {
@@ -3187,7 +3186,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_gulden_hungarian_forint_state_1
                             add = {
@@ -3239,7 +3238,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_dollar_new_zealand_dollar_state_1
                             add = {
@@ -3292,7 +3291,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_leon_leu_state_1
                             add = {
@@ -3344,7 +3343,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_leon_lev_state_1
                             add = {
@@ -3396,7 +3395,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_dinar_serbian_dinar_state_1
                             add = {
@@ -3448,7 +3447,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_krone_norwegian_krone_state_1
                             add = {
@@ -3500,7 +3499,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_dollar_caribbean_dollar_state_1
                             add = {
@@ -3552,7 +3551,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_dollar_canadian_dollar_state_1
                             add = {
@@ -3604,7 +3603,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_cuban_peso_state_1
                             add = {
@@ -3656,7 +3655,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_guatemalan_quetzal_state_1
                             add = {
@@ -3708,7 +3707,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_el_salvador_colon_state_1
                             add = {
@@ -3760,7 +3759,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_honduran_lempira_state_1
                             add = {
@@ -3812,7 +3811,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_nicaraguan_cordoba_state_1
                             add = {
@@ -3864,7 +3863,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_costa_rican_colon_state_1
                             add = {
@@ -3916,7 +3915,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_venezuelan_peso_state_1
                             add = {
@@ -3967,7 +3966,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_colombian_peso_state_1
                             add = {
@@ -4019,7 +4018,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_ecuadorian_peso_state_1
                             add = {
@@ -4071,7 +4070,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_sol_de_oro_state_1
                             add = {
@@ -4123,7 +4122,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_chilean_peso_state_1
                             add = {
@@ -4175,7 +4174,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_argentine_peso_state_1
                             add = {
@@ -4227,7 +4226,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_eco_south_african_rand_state_1
                             add = {
@@ -4279,7 +4278,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_pound_egyptian_pound_state_1
                             add = {
@@ -4331,7 +4330,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_spe_yen_state_1
                             add = {
@@ -4383,7 +4382,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_lira_state_1
                             add = {
@@ -4435,7 +4434,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_mark_state_1
                             add = {
@@ -4488,7 +4487,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_philippine_peso_state_1
                             add = {
@@ -4537,7 +4536,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_dollar_new_zealand_dollar_state_1
                             add = {
@@ -4586,7 +4585,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_dollar_australian_dollar_state_1
                             add = {
@@ -4635,7 +4634,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_spe_zloti_state_1
                             add = {
@@ -4684,7 +4683,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_lira_state_1
                             add = {
@@ -4733,7 +4732,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_spe_korean_won_state_1
                             add = {
@@ -4782,7 +4781,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_eco_south_african_rand_state_1
                             add = {
@@ -4815,7 +4814,7 @@ GLOBAL = {
                 # spe_yuan
                 if = {
                     limit = {
-                        c:Y44?= this
+                    	always = no # c:Y44 does not exist
                     }
 
                     activate_law = law_type:law_spe_yuan_currency
@@ -4831,7 +4830,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_spe_yuan_state_1
                             add = {
@@ -4880,7 +4879,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_spe_baht_state_1
                             add = {
@@ -4929,7 +4928,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_spe_dong_state_1
                             add = {
@@ -4978,7 +4977,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_dollar_liberian_dollar_state_1
                             add = {
@@ -5027,7 +5026,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_spe_yen_state_1
                             add = {
@@ -5076,7 +5075,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_dinar_moroccan_dirham_state_1
                             add = {
@@ -5125,7 +5124,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_pound_egyptian_pound_state_1
                             add = {
@@ -5174,7 +5173,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_leon_leu_state_1
                             add = {
@@ -5223,7 +5222,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_leon_lev_state_1
                             add = {
@@ -5272,7 +5271,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_dinar_serbian_dinar_state_1
                             add = {
@@ -5321,7 +5320,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_gulden_hungarian_forint_state_1
                             add = {
@@ -5370,7 +5369,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_krone_norwegian_krone_state_1
                             add = {
@@ -5419,7 +5418,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_mark_state_1
                             add = {
@@ -5468,7 +5467,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_uruguayan_peso_state_1
                             add = {
@@ -5517,7 +5516,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_paraguayan_peso_state_1
                             add = {
@@ -5566,7 +5565,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_argentine_peso_state_1
                             add = {
@@ -5615,7 +5614,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_chilean_peso_state_1
                             add = {
@@ -5664,7 +5663,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_sol_de_oro_state_1
                             add = {
@@ -5713,7 +5712,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_dollar_caribbean_dollar_state_1
                             add = {
@@ -5762,7 +5761,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_ecuadorian_peso_state_1
                             add = {
@@ -5811,7 +5810,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_venezuelan_peso_state_1
                             add = {
@@ -5860,7 +5859,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_colombian_peso_state_1
                             add = {
@@ -5909,7 +5908,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_costa_rican_colon_state_1
                             add = {
@@ -5958,7 +5957,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_nicaraguan_cordoba_state_1
                             add = {
@@ -6007,7 +6006,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_honduran_lempira_state_1
                             add = {
@@ -6056,7 +6055,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_el_salvador_colon_state_1
                             add = {
@@ -6105,7 +6104,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_guatemalan_quetzal_state_1
                             add = {
@@ -6154,7 +6153,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_cuban_peso_state_1
                             add = {
@@ -6203,7 +6202,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_dollar_canadian_dollar_state_1
                             add = {
@@ -6257,7 +6256,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_philippine_peso_state_1
                             add = {
@@ -6306,7 +6305,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_dollar_new_zealand_dollar_state_1
                             add = {
@@ -6355,7 +6354,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_dollar_australian_dollar_state_1
                             add = {
@@ -6404,7 +6403,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_spe_zloti_state_1
                             add = {
@@ -6453,7 +6452,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_lira_state_1
                             add = {
@@ -6502,7 +6501,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_spe_korean_won_state_1
                             add = {
@@ -6551,7 +6550,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_eco_south_african_rand_state_1
                             add = {
@@ -6584,7 +6583,7 @@ GLOBAL = {
                 # spe_yuan
                 if = {
                     limit = {
-                        c:Y44?= this
+                    	always = no # c:Y44 does not exist
                     }
 
                     activate_law = law_type:law_spe_yuan_currency
@@ -6600,7 +6599,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_spe_yuan_state_1
                             add = {
@@ -6649,7 +6648,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_spe_baht_state_1
                             add = {
@@ -6698,7 +6697,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_spe_dong_state_1
                             add = {
@@ -6747,7 +6746,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_dollar_liberian_dollar_state_1
                             add = {
@@ -6796,7 +6795,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_spe_yen_state_1
                             add = {
@@ -6845,7 +6844,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_dinar_moroccan_dirham_state_1
                             add = {
@@ -6894,7 +6893,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_pound_egyptian_pound_state_1
                             add = {
@@ -6943,7 +6942,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_leon_leu_state_1
                             add = {
@@ -6992,7 +6991,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_leon_lev_state_1
                             add = {
@@ -7041,7 +7040,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_dinar_serbian_dinar_state_1
                             add = {
@@ -7090,7 +7089,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_gulden_hungarian_forint_state_1
                             add = {
@@ -7139,7 +7138,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_krone_norwegian_krone_state_1
                             add = {
@@ -7188,7 +7187,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_mark_state_1
                             add = {
@@ -7237,7 +7236,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_uruguayan_peso_state_1
                             add = {
@@ -7286,7 +7285,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_paraguayan_peso_state_1
                             add = {
@@ -7335,7 +7334,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_argentine_peso_state_1
                             add = {
@@ -7384,7 +7383,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_chilean_peso_state_1
                             add = {
@@ -7433,7 +7432,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_sol_de_oro_state_1
                             add = {
@@ -7482,7 +7481,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_dollar_caribbean_dollar_state_1
                             add = {
@@ -7531,7 +7530,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_ecuadorian_peso_state_1
                             add = {
@@ -7580,7 +7579,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_venezuelan_peso_state_1
                             add = {
@@ -7629,7 +7628,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_colombian_peso_state_1
                             add = {
@@ -7678,7 +7677,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_costa_rican_colon_state_1
                             add = {
@@ -7727,7 +7726,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_nicaraguan_cordoba_state_1
                             add = {
@@ -7776,7 +7775,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_honduran_lempira_state_1
                             add = {
@@ -7825,7 +7824,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_el_salvador_colon_state_1
                             add = {
@@ -7874,7 +7873,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_guatemalan_quetzal_state_1
                             add = {
@@ -7923,7 +7922,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_peso_cuban_peso_state_1
                             add = {
@@ -7972,7 +7971,7 @@ GLOBAL = {
                         add = { 50000000 100000000 }
                     }
 
-                    var:central_bank_location = {
+                    var:central_bank_location ?= {
                         change_variable = {
                             name = stockpiling_dollar_canadian_dollar_state_1
                             add = {

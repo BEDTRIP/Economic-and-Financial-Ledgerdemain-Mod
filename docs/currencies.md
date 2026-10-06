@@ -5,8 +5,8 @@
 Таможенный союз даёт члену свою валюту на чужом рынке. Деньги-как-товар (`<cur>_c`, 57 валют) — в других подсистемах; здесь только определения E&F.
 
 ## Файлы
-- `common/law_groups/01_ef_laws.txt` — группы законов: `lawgroup_monetary_policy`, `lawgroup_monetary_system`, `lawgroup_currency_type`, `lawgroup_bimetalism_ratio` (видна только при биметаллизме).
-- `common/laws/01_ef_currency_type.txt` — 95 законов `law_<cur>_currency` + `law_no_market_liquidity` (нет валюты). Одинаковая форма: `possible` = `has_modifier = has_central_bank` + список тегов, которым E&F выдаёт валюту в истории; 39 законов с `always = no` (товар закомментирован / вырезан под лимит 128 товаров); `unlocking_technologies = currency_standards`.
+- `common/law_groups/01_ef_laws.txt` — группы законов: `lawgroup_monetary_policy`, `lawgroup_monetary_system`, `lawgroup_currency_type`, `lawgroup_bimetalism_ratio` (группа ратио биметаллизма; видимость по биметаллизму не задана).
+- `common/laws/01_ef_currency_type.txt` — 95 законов `law_<cur>_currency` + `law_no_market_liquidity` (нет валюты). Одинаковая форма: `can_enact` = `has_modifier = has_central_bank` + список тегов, которым E&F выдаёт валюту в истории; 39 законов с `always = no` (товар закомментирован / вырезан под лимит 128 товаров); `unlocking_technologies = currency_standards`.
 - `common/laws/01_ef_monetary_system.txt` — `law_no_monetary_system`, `law_fiat_standard`, `law_silver_standard`, `law_bimetallism_standard`, `law_gold_standard`, `law_gold_exchange_standard`, `law_external_exchange_standard`; `on_activate` зовёт `on_activate_monetary_system_law` (01_economic_scripted_effects.txt:42301, тело E&F + `zz_ef_std_switch_before/_after`).
 - `common/laws/01_ef_bimetalism_ratio.txt` — `law_bimetallic_ratio_no/10/15/20` (соотношение золото:серебро).
 - `common/laws/01_ef_monetary_policy.txt` — `law_no_monetary_policy`, `law_revaluation`, `law_devaluation`, `law_large_monetary_policy` (на уровне ЦБ: `central-bank.md`).

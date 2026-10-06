@@ -28,6 +28,9 @@ _archive/<механизм>/
 | Хронометрия чеканки ЦБ (`zz_ef_mint_*`) | `ef_mint_timing/` | 7 значений из `ld_money_model_values.txt` (обнуления `zz_ef_f_mint*` остались — их читают логи) |
 | Деньги за металл по Юму (`zz_ef_hume_money_on`) | `ef_hume_money/` | ветка `if` в `zz_ef_cb_hume_step`; два значения |
 | Зонды EFJ / EFD | `ef_probes_efj_efd/` | два вызова и два эффекта в `ld_money_model.txt`; 4 значения |
+| Приказы валюты по уровням `buy_sell_currency_order` (вызывали несуществующие эффекты `buy_<cur>_N`) | `ef_currency_orders_numbered/` | определение `buy_sell_currency_order` и его вызов в `central_bank_ef_on_half_yearly_pulse_country` (`00_on_action_main.txt`) |
+| ПМ потребления металла банка: тела `central_bank_production_methods`, `_3`, `_4` (ПМ не существуют) | `ef_central_bank_pm_consuption/` | тела трёх эффектов в `01_economic_scripted_effects.txt` (определения остались пустыми) |
+| ПМ `pm_privately_owned_building_arms_industry` (вне групп, несуществующий модификатор) | `ef_arms_industry_pm/` | определение из `00_ef_market_liquidity.txt` |
 | Пустой модификатор `zz_ef_business_cash` | `ef_business_cash_modifier/` | файл `ld_business_cash.txt`; снятие в `zz_ef_money_week_start` |
 | Проверочные значения валют (`money_supply_verification_<cur>`, `sell_<cur>_market_panel_verification`, `buy_<cur>_order`, `*_spe_to_add_*`, `buy_/sell_<cur>_market_panel` и др.) | `ef_currency_verification_values/` | 765 определений из `01_economic_currency_scripted_value.txt` (252 626 строк) |
 | Значения и триггер валют без ссылок (`zz_ef_reserves_money`, `*_neg`, `zz_ef_cb_rule_*_pp`, `is_valid_country_for_currency_accumulation`) | `ef_unused_currency_values/` | 6 значений из `ld_reference_currency_values.txt` / `ld_cb_rate_values.txt`, триггер из `00_ef_custom_trigger.txt` |

@@ -151,7 +151,10 @@ amendment_german_bimetallic_ratio_conservative = {
 	}
 
 	possible = {
-		country_has_primary_culture = cu:german
+		OR = {
+			country_has_primary_culture = cu:north_german
+			country_has_primary_culture = cu:south_german
+		}
 		game_date < 1871.1.1
 	}
 

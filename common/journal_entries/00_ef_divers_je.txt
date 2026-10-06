@@ -1,4 +1,4 @@
-latin_monetary_union_je_1 = {
+﻿latin_monetary_union_je_1 = {
 	icon = "gfx/interface/icons/event_icons/latin_monetary_union.dds"
 
 	group = je_group_ef
@@ -13,7 +13,7 @@ latin_monetary_union_je_1 = {
 			and = {
 				is_player = yes
 				or = {
-					country_is_in_europe = yes
+					is_in_geographic_region = geographic_region_europe
 					"relations(scope:PREV)" > relations_threshold:cordial
 				}
 			}
@@ -800,7 +800,6 @@ scandinavian_monetary_union_je_1 = {
 			}  
 			any_in_global_list = { 
 				variable = scandinavian_leader_list_1_country_1  
-				save_scope_as = scandinavian_leader
 				this = root
 			}  
 		}
@@ -968,7 +967,6 @@ scandinavian_monetary_union_je_1 = {
 				}
 			} 
 		} 
-		set_global_variable = 00_ef_economic_event_19
 	}
 
 	scripted_progress_bar = scandinavian_monetary_union_progress_bar
@@ -1182,6 +1180,7 @@ scandinavian_monetary_union_je_1 = {
 	}
  
  	on_complete = {    
+		set_global_variable = 00_ef_economic_event_19
 		if = {
 			limit = { 
 				or = { 
