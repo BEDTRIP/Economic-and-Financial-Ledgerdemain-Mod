@@ -62,3 +62,6 @@ _archive/<механизм>/
 | Скриптовые GUI без ссылок | `ef_unused_scripted_guis/` | 913 sgui из 4 файлов `common/scripted_guis/` + `com_local_goods_sgui.txt` |
 | Осиротевшие после выноса GUI (значения, эффекты, sgui) | `ef_gui_orphans/` | 115 script_values, 24 эффекта `test_*_variable_list`, 37 sgui |
 | Мёртвое в GUI и журналах E&F | `ef_gui_dead_leftovers/` | 6 типов `vo_plotline_*`, 2 виджета журнала, 4 пустые кнопки, 2 прогресс-бара, 2 понятия |
+| Месячный торговый резерв `zz_ef_rc_step` | `ef_reserve_trade_step/` | закомментированный вызов в `ld_money_model.txt`; эффекты и 6 значений из генератора `regen_ef_reserve_trade` |
+| Несортированная таблица валют ЦБ `zz_ef_cbfx_update` | `ef_cbfx_update/` | определение в `ld_cbfx.txt` и генераторе `regen_ef_clearing` |
+| Строка расходов эмитента `zz_ef_foreign_bond_interest` | `ef_foreign_bond_interest/` | снятие модификатора в `ld_bond_ledger.txt` (и генераторе), значение `zz_ef_bond_interest_due_week` |

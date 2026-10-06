@@ -31,7 +31,7 @@
 | `regen_ef_monetary_policy` | `common/scripted_effects/ld_monetary_policy.txt`, `common/script_values/ld_monetary_policy_values.txt`, `common/scripted_triggers/ld_monetary_policy_triggers.txt`, `common/scripted_guis/ld_monetary_policy_buttons.txt`, `localization/<lang>/ld_monetary_policy_l_<lang>.yml` | — |
 | `regen_ef_money_supply_loc` | `localization/<lang>/replace/ld_money_supply_replace_l_<lang>.yml`, `gui/ld_money_hook.gui`, `common/scripted_effects/ld_money_log_rest.txt` | — |
 | `regen_ef_nr_deposits` | `common/scripted_effects/ld_nr_deposits.txt`, `common/script_values/ld_nr_deposits_values.txt`, `common/scripted_triggers/ld_nr_deposits_triggers.txt`, `common/static_modifiers/ld_fx_holders_demand.txt` | список валют (`ld_reserve_trade_values.txt`) |
-| `regen_ef_reserve_trade` | `common/scripted_effects/ld_reserve_trade.txt`, `common/script_values/ld_reserve_trade_values.txt` | `common/scripted_effects/01_economic_scripted_effects.txt` (валюты) |
+| `regen_ef_reserve_trade` | `common/script_values/ld_reserve_trade_values.txt` | `common/scripted_effects/01_economic_scripted_effects.txt` (валюты) |
 
 Генератор ведёт только записи, которые есть в его файлах; в файле могут быть и рукописные записи. Законы денежной
 политики, кнопки кредита ЦБ, панель экономики, сделки форекса и прочие места в файлах E&F правятся руками.

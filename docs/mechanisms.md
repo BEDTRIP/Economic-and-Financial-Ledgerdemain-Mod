@@ -8,7 +8,7 @@
 коэффициент, закомментированный вызов); `мёртвый` — ни откуда не вызывается; `дубль` — считает то же или пишет те же
 счета, что модель `ld_*`. Строки файлов — на момент записи, при правке файла сдвигаются: искать по имени.
 
-Итого: мёртвый 8, выключен 1, дубль 5, живой 229.
+Итого: мёртвый 4, выключен 0, дубль 5, живой 229.
 
 ## Денежная модель и металл (`money-model.md`)
 
@@ -73,7 +73,6 @@
 
 | механизм | статус | где | доказательство | интерфейс |
 | --- | --- | --- | --- | --- |
-| Константы zz_ef_mp_target_min / zz_ef_mp_target_max | мёртвый | common/script_values/ld_monetary_policy_values.txt:10-11 | refs=0 в index.tsv | — |
 | Модификаторы devaluation_currency_25/50/75/100, revaluation_currency_25/50/75/100 и скрытые scripted_gui devaluation_/revaluation_currency_25/50/75 | живой (частично мёртв) | common/scripted_effects/01_economic_scripted_effects.txt:42221-42232; common/static_modifiers/00_ef_dynamic_modifier_country.txt:180-203; common/scripted_guis/00_economic_scripted_guis.txt:667-700; gui/ld_economy_panel.gui:4429- | _25 ставит закон девальвации/ревальвации и читает monetary_policy_inflation; _50/_75/_100 нигде не ставятся (только снимаются и умножают script_value 01_economic_currency_scripted_value.txt:160-166); scripted_gui-заглушки (is_shown = no) нужны кнопкам ld_economy_panel.gui (скрытым) | скрытые кнопки панели экономики |
 | Закон law_large_monetary_policy | живой | common/laws/01_ef_monetary_policy.txt:58-80 | в группе lawgroup_monetary_policy, принимается игроком (технологии central_banking + monetary_policy_tools), ИИ не принимает; on_activate пуст, но закон разрешает кнопки zz_ef_mp_* (devaluation_revaluation_enabled, is_in_large_monetary_policy_trigger) и читается идеологиями ИГ | окно законов |
 | Кнопки ставки base_rate_increase / base_rate_reduce (политика игрока) | дубль | common/scripted_guis/00_financial_scripted_guis.txt:3683, 3729 | переписаны под zz_ef_rate_bias и вызывают zz_ef_rate_policy_costs; E&F-шаг ±0.5 пп без цели заменён | кнопки на панели ставки |
@@ -116,7 +115,6 @@
 
 | механизм | статус | где | доказательство | интерфейс |
 | --- | --- | --- | --- | --- |
-| Строка расходов эмитента zz_ef_foreign_bond_interest | мёртвый | common/static_modifiers/ld_bond_interest.txt:10; ld_bond_ledger.txt:9 | нигде не add_modifier, только remove_modifier в шаге реестра | — |
 | Дублирующие проценты облигаций E&F interest_from_foreign_debt_investment (модификатор доходов) | живой | common/scripted_effects/ld_bond_ledger.txt:10 | модификатор ставит окно покупки облигаций E&F (00_financial_scripted_guis.txt: add_modifier на покупателя), его читают `gold_lent_to_other` и `zz_ef_fdi_mod_v`; реестр облигаций снимает каждую неделю (файл ведёт генератор regen_ef_bond_ledger) | показатель interest_per_month_from_foreign_debt_investment в окнах E&F (00_financial_scripted_guis.txt:315-505) |
 | Реестр облигаций zz_ef_bond_ledger_step (доли в долге продавца, слоты казны) | живой | common/scripted_effects/ld_bond_ledger.txt:7-543; вызов ld_money_model.txt:122 | недельный шаг модели денег; пишет investment_pool продавца и add_treasury держателя (счета модели ld_*, по замыслу); лог EFB | таблицы Бюджет→Финансы (ld_cb_rate_panel.gui:12404) |
 | Слоты частных банков zz_ef_pb_slot_1..25 | живой | common/scripted_effects/ld_bond_ledger.txt:644-1866 | вызываются из zz_ef_bond_ledger_step; читают ai_privat_bank_bond_value_N; лог EFP | то же |
@@ -136,9 +134,7 @@
 
 | механизм | статус | где | доказательство | интерфейс |
 | --- | --- | --- | --- | --- |
-| Старая таблица zz_ef_cbfx_update | мёртвый | common/scripted_guis/ld_cbfx.txt:4 | refs=0 в index.tsv (заменена sorted) | — |
 | Валютные запасы частных банков stockpiling_<cur>_company_<Bank>_fixe | живой | common/history/global/00_ef_economic_global_variable.txt; common/script_values/ld_clearing_values.txt:387… | переменные задаются историей (старт) и читаются значениями zz_ef_bank_holds_* и диаграммой; без инициализации показ изменился бы | диаграмма «банки держат нашу валюту» (ld_economy_panel.gui:9875) |
-| Месячный торговый резерв zz_ef_rc_step (+rc_pair/search/read_held/take_held/add_units) | выключен | common/scripted_effects/ld_reserve_trade.txt:6-534; вызов ld_money_model.txt:1046 закомментирован | «# zz_ef_rc_step = yes» (клиринг платит то же недельно, иначе двойной счёт); подфункции только из rc_step | — |
 | E&F trade_balance (счётчики *_fix, trade_balance_in_gold_fixe) | живой | common/scripted_effects/01_economic_scripted_effects.txt:41765-42152; вызовы 00_economic_scripted_guis.txt:425, 01_economic_scripted_effects.txt:14791,41371,42319 | вызывается из месячного ЦБ, окон, событий; обнуляет `trade_balance_in_gold_fixe`, которую пишут `reset_debt_in_currency*` и кнопка `trade_balance_actualized`, читают ~15 значений `00_economic_scripted_value.txt` и строка ld_economy_panel.gui:553 | показатели торгового баланса E&F |
 | Мировой клиринг zz_ef_clr_step (pay/receive/put_own/take_all) | живой | common/scripted_effects/ld_clearing.txt:70-2063; вызов ld_money_model.txt:705 из zz_ef_cb_hume_step | недельный; пишет gold_state_1/silver_state_1 и stockpiling_<cur>_state_1 столицы ЦБ, глобалки zz_ef_clr_*; счета модели ld_* по замыслу | карточка платёжного баланса/резервы в ld_economy_panel.gui |
 | Окно палаты zz_ef_clr_window_roll | живой | common/scripted_effects/ld_clearing.txt:5 | refs=2; вызывается из zz_ef_clr_step | тултип окна |
@@ -285,7 +281,6 @@
 
 | механизм | статус | где | доказательство | интерфейс |
 | --- | --- | --- | --- | --- |
-| Несортированная таблица валют ЦБ zz_ef_cbfx_update | мёртвый | common/scripted_guis/ld_cbfx.txt:4 | refs=0 в index.tsv; заменена _sorted (:106) | — |
 | Кнопки секций *_list_gerenation_ordered (25 вызовов, sgui не определены) | мёртвый | gui/00_ef_deported_gui_1.gui:184758; gui/ld_economy_panel.gui; gui/ld_cb_rate_panel.gui; gui/scripted_widgets/00_ef_custom_widgets.gui | GetScriptedGui('<имя>') без определения в common/scripted_guis (определены только financial_product_panel_ и world_currency_ в 09_ef_other.txt:1946,1971) | кнопки заголовков секций (клик без эффекта) |
 | Сортировка gdpg_sort_by_country_gdp (13 вызовов, sgui не определён) | мёртвый | gui/00_ef_deported_gui_1.gui; gui/ld_cb_rate_panel.gui | GetScriptedGui('gdpg_sort_by_country_gdp') без определения | кнопки сортировки таблиц |
 | je_meiji_restoration_get_faction_sgui (вызов без определения) | мёртвый | gui/states_panel.gui | имени нет в common/scripted_guis | — |

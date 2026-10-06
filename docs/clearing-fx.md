@@ -2,16 +2,15 @@
 Мировой клиринг платежей с заграницей (каждую неделю чистый внешний поток страны проходит через «клиринговую палату»: плательщик платит
 золотом/металлом по доверию к валюте и своей валютой, получатель забирает долю содержимого палаты). Форекс E&F (ИИ раз в год, игрок кнопками) меняет
 валюту на металл и обратно в запасах ЦБ. Валютные запасы ЦБ показываются таблицей и диаграммой держателей. Сила валюты двигает торговлю.
-Месячный «торговый резерв» (`zz_ef_rc_*`) и E&F `trade_balance` отключены. Ключи `ld_*` — с префиксом `zz_ef_`.
+E&F `trade_balance` отключён. Ключи `ld_*` — с префиксом `zz_ef_`.
 
 ## Файлы
 - `common/scripted_effects/ld_clearing.txt` — генерат (`tools/regen_ef_clearing.py`): `zz_ef_clr_window_roll` (окно 7 дней, глобалки `zz_ef_clr_window`, `zz_ef_clr_in_acc`, `zz_ef_clr_out_acc`), `zz_ef_clr_step` (страна, недельный), `zz_ef_clr_head_find` (кто платит за нас: хозяин валютной зоны `zz_ef_cur_zone` / владелец рынка), `zz_ef_clr_pay`, `zz_ef_clr_receive`, `zz_ef_clr_put_own` (своя валюта в палату), `zz_ef_clr_take_all` (по 95 валютам, 1617 строк), `zz_ef_cbfx_week_step` (недельная дельта запасов каждой валюты `zz_ef_cbfx_d_<cur>`).
 - `common/script_values/ld_clearing_values.txt` — доля металла плательщика `zz_ef_clr_metal_share` (0.75…1.25 → 100%…30%), золото за единицу денег `zz_ef_clr_gold_per_money` (+`_gpm_head`, `_gpm_own`), `zz_ef_clr_pot_value` (всё в палате в золоте, по валютам), `zz_ef_clr_pay_ratio_v`, `zz_ef_clr_ratio_v`, потоки `zz_ef_v_f_clr_*`, `zz_ef_bank_holds_<Bank>` (валюта страны у частных банков E&F, из `stockpiling_<cur>_company_<Bank>_fixe`), `zz_ef_cbfx_<cur>` (запас валюты ЦБ).
-- `common/scripted_guis/ld_cbfx.txt` — `zz_ef_cbfx_update` (не используется), `zz_ef_cbfx_update_sorted` (таблица валют ЦБ, список `zz_ef_cbfx_list`), `zz_ef_holders_update` (кто держит нашу валюту: `zz_ef_holds_pc`, `zz_ef_holders_list`, `zz_ef_bank_holders_list`).
+- `common/scripted_guis/ld_cbfx.txt` — `zz_ef_cbfx_update_sorted` (таблица валют ЦБ, список `zz_ef_cbfx_list`), `zz_ef_holders_update` (кто держит нашу валюту: `zz_ef_holds_pc`, `zz_ef_holders_list`, `zz_ef_bank_holders_list`).
 - `common/script_values/ld_fx_reserves_values.txt` — `zz_ef_fx_reserves_metal` (чужая валюта в резервах ЦБ в золоте: `stockpiling_<cur>_state_1` × стоимость валюты).
 - `common/scripted_effects/ld_stockpile_state_var_seed.txt` — смежный учётный файл.
-- `common/scripted_effects/ld_reserve_trade.txt` — генерат: `zz_ef_rc_step` (месячный: часть чистого экспорта оплачивается валютой импортёра), `zz_ef_rc_pair`, `zz_ef_rc_search`, `zz_ef_rc_read_held`, `zz_ef_rc_take_held`, `zz_ef_rc_add_units`. Шапка говорит о замене E&F `trade_balance`, но замена — в `01_economic_scripted_effects.txt:41765`.
-- `common/script_values/ld_reserve_trade_values.txt` — `zz_ef_rc_share` (0.25), `zz_ef_rc_unit_price`, `zz_ef_rc_export_value`, `zz_ef_rc_pair_net`, `zz_ef_rc_currency_value` (стоимость валюты, живое — читает клиринг), `zz_ef_fx_liab` (чужие запасы нашей валюты у держателей, живое), `zz_ef_v_rc_*`.
+- `common/script_values/ld_reserve_trade_values.txt` (генерат) — `zz_ef_rc_currency_value` (стоимость валюты, живое — читает клиринг), `zz_ef_fx_liab` (чужие запасы нашей валюты у держателей, живое), `zz_ef_v_rc_*` (поля лога `EFX`, всегда 0).
 - `common/scripted_effects/ld_reference_strength.txt` — `zz_ef_currency_trade_step` (месяц: накладывает `zz_ef_currency_trade` по силе валюты), `zz_ef_reference_strength_step`.
 - `common/static_modifiers/ld_currency_trade.txt` — `zz_ef_currency_trade` (импорт/экспорт ±10% при силе 1.25/0.75), плюс E&F `strong_currency`/`weak_currency` без торговых полей.
 - `common/static_modifiers/ld_fx_holders_demand.txt` — экспортное преимущество от валюты за рубежом (см. `banks.md`).
@@ -25,7 +24,7 @@
 
 ## Поток / порядок
 - Неделя (`zz_ef_money_model_step`, `ld_money_model.txt:101`): `zz_ef_fx_metal_update` (:114) → `zz_ef_cbfx_week_step` (:116) → … → `zz_ef_cb_hume_step` (:552) → `zz_ef_clr_step` (:705): взнос членов зоны глава-стране (`zz_ef_clr_sub_g`), у страны с ЦБ — окно, `zz_ef_clr_pay` при `zz_ef_f_clr_net < 0` (долг в золоте × `zz_ef_clr_pay_ratio_v`; металл ≤ металла ЦБ, остальное своей валютой `zz_ef_f_clr_cur_out`), `zz_ef_clr_receive` при `> 0` (доля палаты: металл + валюты, своя валюта погашается, чужая → запас ЦБ `zz_ef_f_clr_fx_in`); страна без ЦБ платит только валютой. Результаты в `zz_ef_f_hume`, `zz_ef_f_clr_*`. Затем `zz_ef_nr_dep_step` (:554).
-- Месяц (`zz_ef_money_model_monthly_step`, `ld_money_model.txt:1027`): `zz_ef_currency_trade_step` (:1036); `zz_ef_rc_step` закомментирован (:1046).
+- Месяц (`zz_ef_money_model_monthly_step`, `ld_money_model.txt:1027`): `zz_ef_currency_trade_step` (:1036).
 - Год (`central_bank_ef_on_yearly_pulse_country`, `00_on_action_main.txt:919`, `on_actions/00_ef_on_action.txt:189`): для ИИ-владельца рынка с ЦБ `SS/BS/GS/NISO` — `ai_buy_sell_currency` (:954) и `monetary_systeme_transition`; сделка = `zz_ef_fx_deal_size` (2% M2 эмитента, `ld_money_model_values.txt:987`). Арбитраж биметаллизма (:1050-1170, до 1873, закон `law_bimetallism_standard`, перекос ≥ 0.05): металл ЦБ меняет золото на серебро (`gold_state_1`/`silver_state_1`), доля у случайного частного банка (`private_bank_arbitrage_*_drain` → `company_*_gold_stockpile_fix`), событие `00_ef_economic_event.95` игроку.
 - Метал-сверка: `zz_ef_metal_reconcile` (`ld_metal_accounts.txt:149`) относит движение металла ЦБ, не покрытое нашими парами (форекс E&F, арбитраж, смена стандарта), в «oth» (лог `EFQ`).
 
@@ -56,4 +55,4 @@
 - `EFX|` — месячная строка по валютам/стандарту (`ld_money_model.txt:1058`).
 - `EFR|` — недельное состояние внешних счетов страны (клиринг, вклады: `ld_money_model.txt:565`).
 - `EFQ` — «oth» сверки металла ЦБ (`ld_metal_accounts.txt`).
-- Файлы `ld_clearing.txt`, `ld_reserve_trade.txt`, `ld_cbfx.txt` своих `debug_log` не имеют.
+- Файлы `ld_clearing.txt`, `ld_cbfx.txt` своих `debug_log` не имеют.
