@@ -42,6 +42,7 @@
 | `zz_ef_bank_l`, `zz_ef_bank_w`, `zz_ef_bank_n` | уровни, вес, уровни в штате (временные) | `ld_bank_seed.txt` | он же |
 | `zz_ef_nr_dep` | вклады чужих ЦБ в наших банках, деньги | `zz_ef_nr_dep_step` | `zz_ef_nr_dep_v`, `ld_reference_currency_values.txt:142,204` |
 | `zz_ef_f_nr_dep`, `zz_ef_f_nr_int` | поток недели: взнос/изъятие, проценты | `zz_ef_nr_dep_step` | `zz_ef_v_f_nr_dep`, `zz_ef_v_f_nr_int`, лог `EFR` |
+| `zz_ef_t_liab_all` | временная: `zz_ef_fx_liab_all` после блока процентов, посчитанное один раз за шаг (для `zz_ef_f_nr_dep` и `zz_ef_fx_holders_demand_m`; значение имеет смысл только внутри шага) | `zz_ef_nr_dep_step` | он же, `zz_ef_fx_holders_demand_m` |
 | `zz_ef_nr_started` | вклады запущены | `zz_ef_nr_dep_step` | он же |
 | `zz_ef_fxt_liab/_cap/_k` | временные обрезки | `zz_ef_fx_liab_trim` | он же |
 | `zz_ef_bkcash` | наличность банков | `ld_money_model.txt:108` | модель денег |
