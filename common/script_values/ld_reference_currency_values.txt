@@ -13,11 +13,7 @@
 
 zz_ef_value_to_parity = {
 	value = 1
-	if = {
-		limit = { has_global_variable = money_value_median global_var:money_value_median > 0 }
-		value = money_value_in_gold
-		divide = global_var:money_value_median
-	}
+	# metal standards first: money_value_in_gold (a chain over 95 currencies) is not evaluated for them
 	if = {
 		limit = {
 			has_variable = money_value_target_1
@@ -30,6 +26,11 @@ zz_ef_value_to_parity = {
 		}
 		value = money_value_0
 		divide = var:money_value_target_1
+	}
+	else_if = {
+		limit = { has_global_variable = money_value_median global_var:money_value_median > 0 }
+		value = money_value_in_gold
+		divide = global_var:money_value_median
 	}
 }
 zz_ef_currency_strength = {

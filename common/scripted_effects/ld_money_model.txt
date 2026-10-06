@@ -1089,17 +1089,20 @@ zz_ef_ring_q_push_body = {
 }
 
 # var:zz_ef_d_<ACC> = VALUE now - VALUE at the previous step; var:zz_ef_prev_<ACC>
-# keeps this step's value.
+# keeps this step's value. VALUE is evaluated once (var:zz_ef_t_led): some are loops over
+# buildings or countries.
 zz_ef_money_ledger_delta = {
+	set_variable = { name = zz_ef_t_led value = $VALUE$ }
 	if = {
 		limit = { has_variable = zz_ef_prev_$ACC$ }
-		set_variable = { name = zz_ef_d_$ACC$ value = $VALUE$ }
+		set_variable = { name = zz_ef_d_$ACC$ value = var:zz_ef_t_led }
 		change_variable = { name = zz_ef_d_$ACC$ subtract = var:zz_ef_prev_$ACC$ }
 	}
 	else = {
 		set_variable = { name = zz_ef_d_$ACC$ value = 0 }
 	}
-	set_variable = { name = zz_ef_prev_$ACC$ value = $VALUE$ }
+	set_variable = { name = zz_ef_prev_$ACC$ value = var:zz_ef_t_led }
+	remove_variable = zz_ef_t_led
 }
 
 # EF.48 version 7 (1.10 evening): the CB's metal rescaled to cover
