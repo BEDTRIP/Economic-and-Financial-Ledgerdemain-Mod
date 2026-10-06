@@ -22920,36 +22920,6 @@ destroy_building_not_allowed = {
         # }
 	}
 }
-building_ef_private_construction_modifier = {
-	# set_variable = {
-	# 	name = overbuilding_regulation_factor_revers_fix
-	# 	value = overbuilding_regulation_factor_revers
-	# }
-	every_scope_building = {
-		limit = {
-			is_building_type = building_ef_private_construction
-		}
-		remove_modifier = overbuilt_economy_modifier
-	}
-
-	#overbuilding_regulation
-	if = {
-		limit = {
-			#manufacture_stock_product_by_pcs_rate > 0.1
-			speculative_share_2_penality < 0
-		}
-		every_scope_building = {
-			limit = {
-				is_building_type = building_ef_private_construction
-			}
-            remove_modifier = overbuilt_economy_modifier
-			add_modifier = {
-				name = overbuilt_economy_modifier
-				multiplier = speculative_share_2_penality
-			}
-		}
-	}
-}
 
 financial_center_modifier_fixed_var = {
 	set_variable = {

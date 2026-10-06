@@ -1,0 +1,31 @@
+# из common/scripted_effects/09_introduction_building_lvl.txt, scripted_effect building_ef_private_construction_modifier (строки 22923–22952) (на 2026-10-06)
+building_ef_private_construction_modifier = {
+	# set_variable = {
+	# 	name = overbuilding_regulation_factor_revers_fix
+	# 	value = overbuilding_regulation_factor_revers
+	# }
+	every_scope_building = {
+		limit = {
+			is_building_type = building_ef_private_construction
+		}
+		remove_modifier = overbuilt_economy_modifier
+	}
+
+	#overbuilding_regulation
+	if = {
+		limit = {
+			#manufacture_stock_product_by_pcs_rate > 0.1
+			speculative_share_2_penality < 0
+		}
+		every_scope_building = {
+			limit = {
+				is_building_type = building_ef_private_construction
+			}
+            remove_modifier = overbuilt_economy_modifier
+			add_modifier = {
+				name = overbuilt_economy_modifier
+				multiplier = speculative_share_2_penality
+			}
+		}
+	}
+}

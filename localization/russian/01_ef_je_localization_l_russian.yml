@@ -44,7 +44,7 @@
 
   financial_center_je_2_reason_1_3:0 "Чем выше уровень ваших финансовых центров, тем активнее частный сектор реинвестирует инвестиционный пул, тем больше создаётся финансовых продуктов — и тем выше потенциал спекулятивного пузыря"
 
-  financial_center_je_2_reason_2:0 "#b Текущие значения:#!\n - Число [GetBuildingType('building_ef_private_construction').GetName] в стране: #p [GetPlayer.MakeScope.ScriptValue('building_ef_private_construction_lvl')]#!\n - Суммарный уровень [GetBuildingType('building_urban_center').GetName]: #p [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl')]#!\n - Текущая [concept_base_rate_percentage]: #p [GetPlayer.MakeScope.ScriptValue('base_rate_percentage_decimal')]%#!\n - Теоретический максимум уровня ЧСС: #p [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl_by_base_rate')]#! #b (т.е. [GetPlayer.MakeScope.ScriptValue('base_rate_to_pcs_factor')|%] от [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl')])#!"
+  financial_center_je_2_reason_2:0 "#b Текущие значения:#!\n - Число [GetBuildingType('building_construction_sector').GetName] в стране: #p [GetPlayer.MakeScope.ScriptValue('building_ef_private_construction_lvl')]#!\n - Суммарный уровень [GetBuildingType('building_urban_center').GetName]: #p [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl')]#!\n - Текущая [concept_base_rate_percentage]: #p [GetPlayer.MakeScope.ScriptValue('base_rate_percentage_decimal')]%#!\n - Теоретический максимум уровня ЧСС: #p [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl_by_base_rate')]#! #b (т.е. [GetPlayer.MakeScope.ScriptValue('base_rate_to_pcs_factor')|%] от [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl')])#!"
 
   economic_sentiment_index_base_1_button:1 "#b 5 [GetBuildingType('building_construction_sector').GetName]#!"
   economic_sentiment_index_base_1_button_desc: "Попросить частный сектор инвестировать в новые [GetBuildingType('building_construction_sector').GetName]. Определённое количество таких секторов будет построено по всей стране.\nОднако после этого запроса частный сектор некоторое время не сможет отвечать на дальнейшие требования правительства."
@@ -110,14 +110,14 @@
   speculative_share_9_button:1 "#b Стимулирование спроса на строительство #!" 
   speculative_share_9_button_desc: "Правительство стимулирует частное строительство: на #b 36 месяцев#! лимит строительных секторов меньше зависит от ключевой ставки — городские центры × (1 − #b 4#! × ставка) вместо × (1 − 5 × ставка). Лишние частные секторы перегружают экономику: штраф избыточных строительных мощностей растёт на #b 10#! пунктов и затем возвращается к цели. Повторное нажатие во время стимула заменяет его."
   speculative_share_9_button_tt_1: "Штраф избыточных строительных мощностей ниже #b 90#! (сейчас: #b [GetPlayer.MakeScope.Var('speculative_share_2').GetValue|0]#!)"
-  speculative_share_9_button_tt_2: "Общий уровень [GetBuildingType('building_ef_private_construction').GetName] #b [GetPlayer.MakeScope.ScriptValue('building_ef_private_construction_lvl')]#! ниже теоретического лимита #b [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl_by_base_rate')]#!"
+  speculative_share_9_button_tt_2: "Общий уровень [GetBuildingType('building_construction_sector').GetName] #b [GetPlayer.MakeScope.ScriptValue('building_ef_private_construction_lvl')]#! ниже теоретического лимита #b [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl_by_base_rate')]#!"
   speculative_share_9_button_tt_3: "[concept_base_rate_percentage] ниже #b 12%#! и выше #b 1.10%#! (Сейчас: #b [GetPlayer.MakeScope.ScriptValue('base_rate_percentage_decimal')]%#!)"
     speculative_share_9_button_tt_effect_1: "Множитель ставки в лимите строительных секторов — #b 4#! вместо 5 на #b 36 месяцев#!."
 
   speculative_share_10_button:1 "#b Программа частной инфраструктуры #!" 
   speculative_share_10_button_desc: "Правительство стимулирует частное строительство: на #b 36 месяцев#! лимит строительных секторов меньше зависит от ключевой ставки — городские центры × (1 − #b 3.5#! × ставка) вместо × (1 − 5 × ставка). Лишние частные секторы перегружают экономику: штраф избыточных строительных мощностей растёт на #b 20#! пунктов и затем возвращается к цели. Повторное нажатие во время стимула заменяет его."
   speculative_share_10_button_tt_1: "Штраф избыточных строительных мощностей ниже #b 80#! (сейчас: #b [GetPlayer.MakeScope.Var('speculative_share_2').GetValue|0]#!)"
-  speculative_share_10_button_tt_2: "Общий уровень [GetBuildingType('building_ef_private_construction').GetName] #b [GetPlayer.MakeScope.ScriptValue('building_ef_private_construction_lvl')]#! ниже теоретического лимита #b [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl_by_base_rate')]#!"
+  speculative_share_10_button_tt_2: "Общий уровень [GetBuildingType('building_construction_sector').GetName] #b [GetPlayer.MakeScope.ScriptValue('building_ef_private_construction_lvl')]#! ниже теоретического лимита #b [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl_by_base_rate')]#!"
   speculative_share_10_button_tt_3: "[concept_base_rate_percentage] ниже #b 12%#! и выше #b 2.10%#! (Сейчас: #b [GetPlayer.MakeScope.ScriptValue('base_rate_percentage_decimal')]%#!)" 
   speculative_share_10_button_tt_effect_1: "Множитель ставки в лимите строительных секторов — #b 3.5#! вместо 5 на #b 36 месяцев#!."
   speculative_share_10_button_tt_effect_2: "Сумма #b [GetPlayer.MakeScope.ScriptValue('private_bank_funds_proportion_by_psc_10_by_rarity')|D]#! [GetPlayer.GetCustom('global_monetary_reference_currency_good')] будет заблокирована в государственном фонде. Эту денежную массу нельзя изменить."
@@ -125,7 +125,7 @@
   speculative_share_11_button:1 "#b Кампания городского развития #!" 
   speculative_share_11_button_desc: "Правительство стимулирует частное строительство: на #b 36 месяцев#! лимит строительных секторов меньше зависит от ключевой ставки — городские центры × (1 − #b 3#! × ставка) вместо × (1 − 5 × ставка). Лишние частные секторы перегружают экономику: штраф избыточных строительных мощностей растёт на #b 30#! пунктов и затем возвращается к цели. Повторное нажатие во время стимула заменяет его."
   speculative_share_11_button_tt_1: "Штраф избыточных строительных мощностей ниже #b 70#! (сейчас: #b [GetPlayer.MakeScope.Var('speculative_share_2').GetValue|0]#!)"
-  speculative_share_11_button_tt_2: "Общий уровень [GetBuildingType('building_ef_private_construction').GetName] #b [GetPlayer.MakeScope.ScriptValue('building_ef_private_construction_lvl')]#! ниже теоретического лимита #b [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl_by_base_rate')]#!"
+  speculative_share_11_button_tt_2: "Общий уровень [GetBuildingType('building_construction_sector').GetName] #b [GetPlayer.MakeScope.ScriptValue('building_ef_private_construction_lvl')]#! ниже теоретического лимита #b [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl_by_base_rate')]#!"
   speculative_share_11_button_tt_3: "[concept_base_rate_percentage] ниже #b 12%#! и выше #b 3.10%#! (Сейчас: #b [GetPlayer.MakeScope.ScriptValue('base_rate_percentage_decimal')]%#!)" 
   speculative_share_11_button_tt_effect_1: "Множитель ставки в лимите строительных секторов — #b 3#! вместо 5 на #b 36 месяцев#!."
   speculative_share_11_button_tt_effect_2: "Сумма #b [GetPlayer.MakeScope.ScriptValue('private_bank_funds_proportion_by_psc_15_by_rarity')|D]#! [GetPlayer.GetCustom('global_monetary_reference_currency_good')] будет заблокирована в государственном фонде. Эту денежную массу нельзя изменить."
@@ -133,14 +133,11 @@
   speculative_share_12_button:1 "#b Закон об экономике, движимой строительством #!" 
   speculative_share_12_button_desc: "Правительство стимулирует частное строительство: на #b 36 месяцев#! лимит строительных секторов меньше зависит от ключевой ставки — городские центры × (1 − #b 2.5#! × ставка) вместо × (1 − 5 × ставка). Лишние частные секторы перегружают экономику: штраф избыточных строительных мощностей растёт на #b 40#! пунктов и затем возвращается к цели. Повторное нажатие во время стимула заменяет его."
   speculative_share_12_button_tt_1: "Штраф избыточных строительных мощностей ниже #b 60#! (сейчас: #b [GetPlayer.MakeScope.Var('speculative_share_2').GetValue|0]#!)"
-  speculative_share_12_button_tt_2: "Общий уровень [GetBuildingType('building_ef_private_construction').GetName] #b [GetPlayer.MakeScope.ScriptValue('building_ef_private_construction_lvl')]#! ниже теоретического лимита #b [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl_by_base_rate')]#!"
+  speculative_share_12_button_tt_2: "Общий уровень [GetBuildingType('building_construction_sector').GetName] #b [GetPlayer.MakeScope.ScriptValue('building_ef_private_construction_lvl')]#! ниже теоретического лимита #b [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl_by_base_rate')]#!"
   speculative_share_12_button_tt_3: "[concept_base_rate_percentage] ниже #b 12%#! и выше #b 4.10%#! (Сейчас: #b [GetPlayer.MakeScope.ScriptValue('base_rate_percentage_decimal')]%#!)" 
   speculative_share_12_button_tt_effect_1: "Множитель ставки в лимите строительных секторов — #b 2.5#! вместо 5 на #b 36 месяцев#!."
   speculative_share_12_button_tt_effect_2: "Сумма #b [GetPlayer.MakeScope.ScriptValue('private_bank_funds_proportion_by_psc_20_by_rarity')|D]#! [GetPlayer.GetCustom('global_monetary_reference_currency_good')] будет заблокирована в государственном фонде. Эту денежную массу нельзя изменить."
 
-  speculative_share_13_button:1 "#b Регулировать частный строительный сектор #!"
-  speculative_share_13_button_desc: "Частное строительство разрослось сверх устойчивого уровня. Вмешательство государства призвано восстановить равновесие и не допустить дальнейшего перекоса."
-  speculative_share_13_button_tt_1:0 "- Теоретический максимум уровня [GetBuildingType('building_construction_sector').GetName] (сейчас: #p [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl_by_base_rate')]#!) превышает текущее число [GetBuildingType('building_construction_sector').GetName] в стране (сейчас: #p [GetPlayer.MakeScope.ScriptValue('building_ef_private_construction_lvl')]#!).\n- Отсутствует модификатор [GetStaticModifier('speculative_share_modifier_7').GetName|v]"
 
   status_central_bank_1: "При отсутствии централизованной денежной системы страна опирается на разрозненный набор способов обмена. Бартер, устаревшие местные монеты и смесь иностранных валют обращаются бок о бок, подчёркивая фрагментированное состояние экономики."
   status_central_bank_2: "После открытия технологии «Валютные стандарты» в разных областях страны обращаются различные виды банкнот без какой-либо централизованной унификации"
@@ -193,7 +190,6 @@
   speculative_share_modifier_4:0 "Экстренный указ о приостановке финансовых рынков"
   speculative_share_modifier_5:0 "Указ о частных инвестициях"
   speculative_share_modifier_6:0 "Блокировка монетарного расширения"
-  speculative_share_modifier_7:0 "Недавнее регулирование [GetBuildingType('building_construction_sector').GetName]"
 
   status_speculative_share_1_5:0 "Финансы: #n Спекулятивный всплеск#! — рынок в состоянии эйфории. Потоки частного капитала выходят за любые разумные пределы, системный пузырь уже здесь."
   status_speculative_share_1_4:0 "Финансы: #O Перегретый рынок#! — финансовая активность взлетает, спекулятивные инвестиции опережают реальное производство."
@@ -339,8 +335,6 @@ latin_monetary_union_2_button_desc: "Вы решаете снова вступи
   speculative_share_12_button_tt: "$speculative_share_12_button$\n\n$speculative_share_12_button_desc$\n\nВозможно, если:\n- Нет модификатора [GetStaticModifier('speculative_share_modifier_5').GetName|v]\n- Есть модификатор [GetStaticModifier('has_financial_center').GetName|v]\n- $speculative_share_12_button_tt_1$\n\nЭффект:\n$speculative_share_12_button_tt_effect_1_1$"
   speculative_share_12_button_tt_effect_1_1: "- $speculative_share_12_button_tt_effect_1$\n- Штраф избыточных строительных мощностей #r +40#! (не выше 100)\n- [GetPlayer.GetName] получает [GetStaticModifier('speculative_share_modifier_5').GetName|v] на 12 месяцев"
 
-  speculative_share_13_button_tt:0 "$speculative_share_13_button$\n\n$speculative_share_13_button_desc$\n\nВозможно, если:\n$speculative_share_13_button_tt_1$\n\nЭффект:\n- $speculative_share_13_button_tt_effect_1_1$"
-  speculative_share_13_button_tt_effect_1_1:0 "Один из [GetBuildingType('building_construction_sector').GetName] в случайной области будет полностью демонтирован, что сократит общее число [GetBuildingType('building_construction_sector').GetName] в стране."
 
 
 je_ef_efcc_situation:0 "Комитет по экономическому и финансовому кризису"

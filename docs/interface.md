@@ -73,7 +73,7 @@ GUI-тип регистрирует первый файл по имени (ASCII
   (+`_visible`, `_on`, `_off`), `money_value_<cur>_visible`, `<cur>_buy_in_gold`/`_sell_in_gold`, девальвация/ревальвация
   (`devaluation_*`, `revaluation_*`, `set_*_rate`), `currency_quantity_increase/_reduce`, `is_ai`/`not_is_ai`, законы стандартов.
 - `common/scripted_guis/00_stockpile_scripted_guis.txt` (1602) — запасы по валютам, `set_store_<товар>_enabled`, `buy_<товар>_budget_panel_visible`, `trade_<товар>_budget_panel*`.
-- `common/scripted_guis/00_financial_scripted_guis.txt` (45) — облигации, кредит ЦБ, `speculative_share_N_button` (sgui),
+- `common/scripted_guis/00_financial_scripted_guis.txt` (44) — облигации, кредит ЦБ, `speculative_share_N_button` (sgui),
   `transfert_currency_to_investement_pool_*`, `global_player_help_*`.
 - `common/scripted_guis/09_ef_other.txt` (1155) — отладочный флаг (`EF_sg_set_debug_flag`, `EF_sg_unset_debug_flag`,
   `EF_debug_mode_visibility` = `always = no`), `EF_room_gui_N`/`EF_current_room_gui_N` (100+100; панель `gold_reserve_window`),
@@ -83,7 +83,7 @@ GUI-тип регистрирует первый файл по имени (ASCII
 - `common/scripted_guis/ld_*.txt` — `ld_money_hook` (приёмник моста), `ld_cb_rate_buttons` (кнопки ставки), `ld_monetary_policy_buttons`
   (девальвация/ревальвация как инструмент ЦБ), `ld_bond_tables` (заполнение таблиц держателей), `ld_cbfx` (`zz_ef_cbfx_update_sorted`,
   `zz_ef_holders_update`: списки для таблицы валют и круга держателей), `ld_pb_fso_sguis` (показ строк журнала).
-- `common/scripted_buttons/00_ef_buttons.txt` (21) — кнопки журналов: `speculative_share_1..13_button`, `latin_/scandinavian_monetary_union_1/2_button`,
+- `common/scripted_buttons/00_ef_buttons.txt` (16) — кнопки журналов: `speculative_share_1..8_button`, `latin_/scandinavian_monetary_union_1/2_button`,
   `bank_central_currency_JE_1..4_button` (пустые). `ld_pb_css_private_ban_buttons.txt` — `zz_pb_ef_css_private_ban_button` / `_allow_button` (кнопки ИИ).
 - `common/scripted_progress_bars/00_ef_progressbar.txt` (12) — полосы журналов (`currency_standards_`, `central_banking_`, `stock_exchange_`,
   `financial_center_`, `speculative_share_`, `overbuilt_economy_`, `*_monetary_union_`, `silver_crisis_`, `je_efcc_progress_bar`).

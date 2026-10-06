@@ -1,0 +1,8 @@
+# из localization/english/01_ef_je_localization_l_english.yml, ключи кнопки speculative_share_13_button и модификатора speculative_share_modifier_7 (на 2026-10-06)
+l_english:
+  speculative_share_13_button:1 "#b Regulate Private Construction Sector #!"
+  speculative_share_13_button_desc: "Private construction has grown beyond sustainable levels. State intervention seeks to restore equilibrium and prevent further imbalance."
+  speculative_share_13_button_tt_1:0 "- The theoretical maximum level of [GetBuildingType('building_construction_sector').GetName] (Current: #p [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl_by_base_rate')]#!) exceeds the current number of [GetBuildingType('building_construction_sector').GetName] in the country (Current: #p [GetPlayer.MakeScope.ScriptValue('building_ef_private_construction_lvl')]#!).\n- Does not have the modifier [GetStaticModifier('speculative_share_modifier_7').GetName|v]"
+  speculative_share_modifier_7:0 "Recent [GetBuildingType('building_construction_sector').GetName] regulatuion"
+  speculative_share_13_button_tt:0 "$speculative_share_13_button$\n\n$speculative_share_13_button_desc$\n\nPossible:\n$speculative_share_13_button_tt_1$\n\nEffect:\n- $speculative_share_13_button_tt_effect_1_1$"
+  speculative_share_13_button_tt_effect_1_1:0 "A [GetBuildingType('building_construction_sector').GetName] in a random state will be completely dismantled, reducing the total number of [GetBuildingType('building_construction_sector').GetName] in the country."

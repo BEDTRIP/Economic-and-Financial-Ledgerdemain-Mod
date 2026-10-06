@@ -1,0 +1,31 @@
+# из common/scripted_guis/00_financial_scripted_guis.txt, scripted_gui speculative_share_13_button (строки 6113–6142) (на 2026-10-06)
+#Regulation PCS
+speculative_share_13_button = {
+	name = "speculative_share_13_button"
+	desc = "speculative_share_13_button_desc"
+
+	# is_shown = {
+	# 	var:speculative_share_2 > 0
+	# }
+	is_valid = { 
+		custom_tooltip = {
+			text = speculative_share_13_button_tt_1
+			building_ef_private_construction_lvl > building_urban_center_lvl_by_base_rate
+			NOT = {has_modifier = speculative_share_modifier_7 }  
+		}
+		is_player = yes
+ 	}
+	effect = {  
+		random_scope_state = { 
+			limit = {
+				has_building = building_ef_private_construction
+			}
+			remove_building = building_ef_private_construction 
+		}  
+		add_modifier = {
+			name = speculative_share_modifier_7
+			months = 1
+		} 
+	}
+	cooldown = { months = 1 }
+} 

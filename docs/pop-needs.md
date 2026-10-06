@@ -6,10 +6,10 @@
 - `common/pop_needs/ld_household_construction.txt` — `popneed_household_construction` (домохозяйства и городские центры берут `wood_construction`, `iron_construction`, `steel_construction`, `arc_welded_construction`, вес 1; генератор `tools/regen_ef_household_construction.py`, руками не править). Описана в PSC/ld-подсистемах.
 - `common/pop_needs/ld_metal_hoard.txt` — `popneed_metal_hoard` (серебро по умолчанию; `silver` и `gold` с весами 0,5; генератор `tools/regen_ef_metal_hoard.py`). Описана в подсистеме модели денег.
 - `common/buy_packages/00_ef_buy_packages.txt` — 99 строк `INJECT:wealth_N={goods={...}}`, N = 1..99 (уровень достатка), по одной строке на уровень.
-- `common/goods/ef_00_goods.txt` — товары E&F: `INJECT:gold` (торгуемый, `fixed_price = no`, `traded_quantity = 5`), `silver`, `bond`, `manufacture_stock`, `agricultural_stock`, `mining_stock`, `railroad_stock`, `mutual_funds` (не торгуется, фикс. цена 250), `local_currency` (`tradeable = no`, `local = no`), `liquidity_currency` (торгуемый). Остальные ~967 строк — закомментированные блоки 95 национальных валют-товаров (`# INJECT_OR_CREATE:<cur>_c`).
+- `common/goods/ef_00_goods.txt` — товары E&F: `INJECT:gold` (торгуемый, `fixed_price = no`, `traded_quantity = 5`), `silver`, `bond`, `manufacture_stock`, `agricultural_stock`, `mining_stock`, `railroad_stock`, `mutual_funds` (не торгуется, фикс. цена 250), `local_currency` (`tradeable = no`, `local = no`), `liquidity_currency` (торгуемый).
 - `common/goods/PSC_goods.txt` — PSC: `wood_construction`, `iron_construction`, `steel_construction`, `arc_welded_construction`.
-- `common/named_colors/00_ef_goods_colors.txt` — цвета товаров для GUI: `silver`, `bond`, `manufacture_stock`, `agricultural_stock`, `mining_stock` + 95 цветов `<cur>_c` (в основном без живых товаров).
-- `common/prestige_goods/00_ef_prestige_goods.txt`, `00_ef_prestige_goods_2.txt` — 15 престижных вариантов товаров (`prestige_good_mexican_silver`, `prestige_good_russian_gold`, `prestige_good_usa_oil`, `bond_usa`, `manufacture_stock_{construction,gbr,gbr_2,usa}`, `agricultural_stock_rus`, `mining_stock_{usa,aus}`, `railroad_stock_{usa,fra,ger,rus}`); подключаются в `common/company_types/00_ef_companies.txt` (`possible_prestige_goods`).
+- `common/named_colors/00_ef_goods_colors.txt` — цвета товаров для GUI: `silver`, `bond`, `manufacture_stock`, `agricultural_stock`, `mining_stock`.
+- `common/prestige_goods/00_ef_prestige_goods.txt`, `00_ef_prestige_goods_2.txt` — 14 престижных вариантов товаров (`prestige_good_mexican_silver`, `prestige_good_russian_gold`, `prestige_good_usa_oil`, `manufacture_stock_{construction,gbr,gbr_2,usa}`, `agricultural_stock_rus`, `mining_stock_{usa,aus}`, `railroad_stock_{usa,fra,ger,rus}`); подключаются в `common/company_types/00_ef_companies.txt` (`possible_prestige_goods`).
 
 ## Поток / порядок
 Расчёта по on_action нет: движок каждую неделю считает покупки попов по пакету их уровня достатка. Строка `wealth_N` содержит записи:
@@ -27,7 +27,7 @@
 
 ## Вызовы и связи
 - Товары `bond`/акции/`mutual_funds`/`liquidity_currency` участвуют в модели `ld_*` (клиринг, листинг, капитализация, массовое владение акциями `script_values/ld_mass_shareholding_values.txt`, грамотность `ld_stock_issue_literacy_values.txt`).
-- Для каждого товара в `modifier_type_definitions/00_ef_building_modifier_types.txt` заведены `goods_input_<good>_add/_mult`, `goods_output_<good>_add/_mult` (217 имён на 108 товаров: из них живых товаров лишь 9; остальные — 95 закомментированных валют и `commodity_crates`, `paper_gold`, `war_bond`, `construction_loans`).
+- Для каждого товара в `modifier_type_definitions/00_ef_building_modifier_types.txt` заведены `goods_input_<good>_add/_mult`, `goods_output_<good>_add/_mult` (134 имени: 38 — на 10 живых товаров, 96 — на несуществующие товары (национальные валюты `<cur>_c`, `war_bond`), их читают значения `base_demande_<валюта>` (`modifier:goods_input_<cur>_c_add` в `00_economic_scripted_value.txt`) и PM `pm_government_aid_*`).
 - Закон/валюта: `laws/01_ef_currency_type.txt:1888` помечает `spe_uni_c` как «внутренний по умолчанию `popneed_currency`».
 - Локализация: `01_ef_goods_localization_l_*.yml`.
 - GUI: рынок и панели товаров E&F берут цвета из `00_ef_goods_colors.txt`.

@@ -3,7 +3,7 @@
 `building_construction_regulator`; делёж долей (частные/государственные очки стройки) пересчитывается раз в неделю.
 Кол-во секторов ограничено уровнями городских центров и ключевой ставкой; сверх лимита копится «перестройка»
 (`speculative_share_2`, штраф к пропускной способности), ИИ сносит лишнее. Домохозяйства и ЖКХ покупают стройтовары.
-E&F-овское `building_ef_private_construction` в форке заглушка: настоящее здание — `building_construction_sector`.
+Настоящее здание стройки — `building_construction_sector` (PSC); E&F-овского `building_ef_private_construction` в форке нет, его имя остаётся только в названиях скрипт-значений `building_ef_private_construction_lvl*`.
 
 ## Файлы
 **PSC (ядро)**
@@ -39,13 +39,13 @@ E&F-овское `building_ef_private_construction` в форке заглушк
 - `common/production_methods/ld_household_construction_pms.txt` — 10 `INJECT:` в натуральные PM (`pm_home_workshops_*_subsistence_*`: +0.15/0.3 `wood_construction`) и 4 `REPLACE:` ванильных PM городского центра (`pm_market_stalls/squares/covered_markets/arcades`: вход — стройтовар). Ключи — ванильные имена, поэтому refs=0 в индексе.
 
 **E&F**
-- `common/buildings/ef_14_private_construction.txt` — `building_ef_private_construction`: заглушка (не строится, нет PMG, `potential = no`); группа `bg_ef_private_construction` в `common/building_groups/00_ef_building_groups.txt:123`.
+- `common/building_groups/00_ef_building_groups.txt:123` — группа `bg_ef_private_construction` (зданий в ней нет; на неё ссылается запись `bg_ef_private_construction_score` в `INJECT:building_financial_district`, `common/buildings/ef_11_private_infrastructure.txt:39`).
 - `common/buildings/ef_11_private_infrastructure.txt` — не здание: `INJECT` PMG (`pmg_market_liquidity`, `pmg_private_ownership_*`) в порт/железную дорогу/торговый центр и `investment_scores` в `building_financial_district` (`bg_construction_score` живой, `bg_ef_private_construction_score` — в группу без зданий).
 - `common/script_values/00_financial_scripted_value.txt:123-190` — переопределены: `building_urban_center_lvl_by_base_rate` (лимит), `building_ef_private_construction_lvl` (= сумма уровней `building_construction_sector`), `..._lvl_to_build`, `..._lvl_state`.
-- `common/scripted_effects/09_introduction_building_lvl.txt:22923` — `building_ef_private_construction_modifier` (зовётся из `00_on_action_main.txt:291` ежемесячно; работает по зданию-заглушке, фактически холостой). Остальные ~50 тыс. строк файла — валюты/центробанк/ФЦ, не стройка.
+- `common/scripted_effects/09_introduction_building_lvl.txt` — ~50 тыс. строк: валюты/центробанк/ФЦ, не стройка.
 - `common/history/buildings/00_ef_building.txt` — стартовые `create_building building_construction_sector` (221 `create_building`, ~28 — сектор) с владельцами-банками/компаниями; `00_a_ef_history_var_init.txt` — предзапись переменных (стройки не касается).
 - `common/defines/zz_ef_reinvestment_defines.txt` — `REINVESTMENT_SUBSISTENCE_FRACTION_REDUCTION = 0`, `OWNER_COMPANY_PRIVATIZATION_CHANCE_MULTIPLIER = 0.4`; `zzzz_ef_credit_def.txt` (кредитный лимит) и `00_ef_defines.txt` (приватизация закомментирована) со стройкой не связаны.
-- `common/scripted_guis/00_financial_scripted_guis.txt:5948-6110` — кнопки стимула `speculative_share_9..12_button` (ставят `var:zz_pb_ef_stimulus_mult` на 1080 дней, +10..+40 к `speculative_share_2`); `speculative_share_13_button` (:6114) и дубль в `common/scripted_buttons/00_ef_buttons.txt:2618` в журнал не подключены.
+- `common/scripted_guis/00_financial_scripted_guis.txt:5948-6110` — кнопки стимула `speculative_share_9..12_button` (ставят `var:zz_pb_ef_stimulus_mult` на 1080 дней, +10..+40 к `speculative_share_2`).
 
 ## Поток / порядок
 1. `history/global/PSC_global.txt` -> `set_construction_start`: запуск `set_construction_weekly_on_action` и `set_construction_country` для всех стран.
@@ -93,7 +93,7 @@ E&F-овское `building_ef_private_construction` в форке заглушк
 `debug_log` в подсистеме нет. Уведомление игроку: `zz_pb_ef_overbuild_rising` (рост полосы `speculative_share_2` на 10).
 
 ## Прочие файлы
-- `common/script_values/PSC_set_values.txt` — константы PSC (`command_economy_spending_mult`, `oversupply_limit` …).
+- `common/script_values/PSC_set_values.txt` — константы PSC (`privatisation_percent_weeks`, цены строительных товаров, `construction_goods_per_point` …).
 - `common/script_values/PSC_event_values.txt` — `calculate_added_days` (дни до начала недели для событий PSC).
 - `common/scripted_effects/PSC_my_trigger_event.txt` — `my_trigger_event` (обёртка `trigger_event` по on_action).
 - `common/scripted_effects/PSC_production_method_building_switch.txt` — `production_method_building_switch`.

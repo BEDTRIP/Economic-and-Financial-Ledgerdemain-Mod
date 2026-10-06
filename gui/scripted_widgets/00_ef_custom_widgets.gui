@@ -624,57 +624,6 @@ flowcontainer = {
 							} 
 						} 
 					}  
-					#No PCS growing  
-					flowcontainer = { 
-						visible = "[GetScriptedGui('no_PCS_growing_visibility').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-						margin_top = 0
-						margin_right = 0
-						margin_left = 0
-
-						spacing = 10
-
-						direction = vertical
-						parentanchor = hcenter
-
-						flowcontainer = { 
-							margin_top = 0
-							margin_right = 0
-							margin_left = 0
-
-							spacing = 10
-
-							direction = vertical
-							parentanchor = hcenter
-
-							#_13
-							button = {  
-								using = default_button_action
-								tooltip = "speculative_share_13_button_tt"
-								enabled = "[GetScriptedGui('speculative_share_13_button').IsValid( GuiScope.SetRoot(GetPlayer.MakeScope ).End)]"
-								onclick = "[GetScriptedGui('speculative_share_13_button').Execute( GuiScope.SetRoot(GetPlayer.MakeScope ).End)]"
-								size = { 400 50 }
-								margin = { 20 20 }
-		
-								textbox = {
-									parentanchor = center
-									align = nobaseline
-									autoresize = yes
-									max_width = 230
-									elide = right
-									fontsize_min = 14
-									text = "speculative_share_13_button"
-								}
-
-								icon = {
-
-									using = highlighted_square_selection
-								}
-							} 
-						}
-
-					} 
-
 					divider_decorative = {
 					} 
 				} 

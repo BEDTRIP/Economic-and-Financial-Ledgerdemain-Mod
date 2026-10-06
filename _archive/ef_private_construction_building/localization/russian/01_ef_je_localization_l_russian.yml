@@ -1,0 +1,8 @@
+# из localization/russian/01_ef_je_localization_l_russian.yml, ключи кнопки speculative_share_13_button и модификатора speculative_share_modifier_7 (на 2026-10-06)
+l_russian:
+  speculative_share_13_button:1 "#b Регулировать частный строительный сектор #!"
+  speculative_share_13_button_desc: "Частное строительство разрослось сверх устойчивого уровня. Вмешательство государства призвано восстановить равновесие и не допустить дальнейшего перекоса."
+  speculative_share_13_button_tt_1:0 "- Теоретический максимум уровня [GetBuildingType('building_construction_sector').GetName] (сейчас: #p [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl_by_base_rate')]#!) превышает текущее число [GetBuildingType('building_construction_sector').GetName] в стране (сейчас: #p [GetPlayer.MakeScope.ScriptValue('building_ef_private_construction_lvl')]#!).\n- Отсутствует модификатор [GetStaticModifier('speculative_share_modifier_7').GetName|v]"
+  speculative_share_modifier_7:0 "Недавнее регулирование [GetBuildingType('building_construction_sector').GetName]"
+  speculative_share_13_button_tt:0 "$speculative_share_13_button$\n\n$speculative_share_13_button_desc$\n\nВозможно, если:\n$speculative_share_13_button_tt_1$\n\nЭффект:\n- $speculative_share_13_button_tt_effect_1_1$"
+  speculative_share_13_button_tt_effect_1_1:0 "Один из [GetBuildingType('building_construction_sector').GetName] в случайной области будет полностью демонтирован, что сократит общее число [GetBuildingType('building_construction_sector').GetName] в стране."

@@ -1,0 +1,3307 @@
+# из common/scripted_effects/00_on_action_main.txt, эффект ai_building_strategy (строки 2103–5483 до правки, на 2026-10-06):
+# закомментированные строки тела и блок if с вызовом ai_build_privat_building_gold_mining (эффект нигде не определён).
+# Живые строки эффекта (частные железные дороги ИИ) остались в файле на месте.
+	# limit = {
+	# 	XXXXXXXXX
+	# }
+	#A chaque boucle
+	# - construction au niveau du pays
+	# - verifit si l'infrastructure est correct et l'ajoute
+	# - Financial center maintenue au niveau maximum à voir 5 niveau max par boucle
+	# matière premiere dans tout les etat possible minimum 3
+	#
+	# - en fct des strategie du pays developpement de secteur
+	#idée coode
+	#num_queued_private_constructions
+	# construction_queue_num_queued_private_levels
+	#construction_queue_private_duration
+	# #building_ef_private_construction
+	# if = {
+	# 	limit  = {
+	# 		building_ef_private_construction_lvl_to_build > 0
+	# 		has_modifier = has_financial_center
+	# 	}
+	# 	random_scope_state = {
+	# 		limit = {
+	# 			not = {
+	# 				building_ef_private_construction_lvl_to_build = 0
+	# 			}
+	# 			building_urban_center_lvl_by_base_rate >= building_ef_private_construction_lvl_state
+	# 		}
+	# 		switch = {
+	# 			trigger = building_urban_center_lvl_by_base_rate
+	# 			1 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 1
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 1
+	# 					}
+	# 				}
+	# 			}
+	# 			2 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 2
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 2
+	# 					}
+	# 				}
+	# 			}
+	# 			3 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 3
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 3
+	# 					}
+	# 				}
+	# 			}
+	# 			4 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 4
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 4
+	# 					}
+	# 				}
+	# 			}
+	# 			5 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 5
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 5
+	# 					}
+	# 				}
+	# 			}
+	# 			6 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 6
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 6
+	# 					}
+	# 				}
+	# 			}
+	# 			7 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 7
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 7
+	# 					}
+	# 				}
+	# 			}
+	# 			8 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 8
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 8
+	# 					}
+	# 				}
+	# 			}
+	# 			9 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 9
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 9
+	# 					}
+	# 				}
+	# 			}
+	# 			10 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 10
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 10
+	# 					}
+	# 				}
+	# 			}
+	# 			11 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 11
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 11
+	# 					}
+	# 				}
+	# 			}
+	# 			12 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 12
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 12
+	# 					}
+	# 				}
+	# 			}
+	# 			13 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 13
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 13
+	# 					}
+	# 				}
+	# 			}
+	# 			14 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 14
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 14
+	# 					}
+	# 				}
+	# 			}
+	# 			15 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 15
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 15
+	# 					}
+	# 				}
+	# 			}
+	# 			16 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 16
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 16
+	# 					}
+	# 				}
+	# 			}
+	# 			17 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 17
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 17
+	# 					}
+	# 				}
+	# 			}
+	# 			18 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 18
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 18
+	# 					}
+	# 				}
+	# 			}
+	# 			19 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 19
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 19
+	# 					}
+	# 				}
+	# 			}
+	# 			20 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 20
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 20
+	# 					}
+	# 				}
+	# 			}
+	# 			21 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 21
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 21
+	# 					}
+	# 				}
+	# 			}
+	# 			22 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 22
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 22
+	# 					}
+	# 				}
+	# 			}
+	# 			23 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 23
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 23
+	# 					}
+	# 				}
+	# 			}
+	# 			24 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 24
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 24
+	# 					}
+	# 				}
+	# 			}
+	# 			25 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 25
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 25
+	# 					}
+	# 				}
+	# 			}
+	# 			26 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 26
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 26
+	# 					}
+	# 				}
+	# 			}
+	# 			27 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 27
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 27
+	# 					}
+	# 				}
+	# 			}
+	# 			28 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 28
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 28
+	# 					}
+	# 				}
+	# 			}
+	# 			29 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 29
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 29
+	# 					}
+	# 				}
+	# 			}
+	# 			30 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 30
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 30
+	# 					}
+	# 				}
+	# 			}
+	# 			31 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 31
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 31
+	# 					}
+	# 				}
+	# 			}
+	# 			32 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 32
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 32
+	# 					}
+	# 				}
+	# 			}
+	# 			33 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 33
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 33
+	# 					}
+	# 				}
+	# 			}
+	# 			34 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 34
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 34
+	# 					}
+	# 				}
+	# 			}
+	# 			35 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 35
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 35
+	# 					}
+	# 				}
+	# 			}
+	# 			36 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 36
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 36
+	# 					}
+	# 				}
+	# 			}
+	# 			37 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 37
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 37
+	# 					}
+	# 				}
+	# 			}
+	# 			38 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 38
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 38
+	# 					}
+	# 				}
+	# 			}
+	# 			39 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 39
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 39
+	# 					}
+	# 				}
+	# 			}
+	# 			40 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 40
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 40
+	# 					}
+	# 				}
+	# 			}
+	# 			41 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 41
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 41
+	# 					}
+	# 				}
+	# 			}
+	# 			42 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 42
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 42
+	# 					}
+	# 				}
+	# 			}
+	# 			43 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 43
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 43
+	# 					}
+	# 				}
+	# 			}
+	# 			44 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 44
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 44
+	# 					}
+	# 				}
+	# 			}
+	# 			45 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 45
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 45
+	# 					}
+	# 				}
+	# 			}
+	# 			46 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 46
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 46
+	# 					}
+	# 				}
+	# 			}
+	# 			47 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 47
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 47
+	# 					}
+	# 				}
+	# 			}
+	# 			48 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 48
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 48
+	# 					}
+	# 				}
+	# 			}
+	# 			49 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 49
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 49
+	# 					}
+	# 				}
+	# 			}
+	# 			50 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 50
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 50
+	# 					}
+	# 				}
+	# 			}
+	# 			51 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 51
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 51
+	# 					}
+	# 				}
+	# 			}
+	# 			52 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 52
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 52
+	# 					}
+	# 				}
+	# 			}
+	# 			53 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 53
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 53
+	# 					}
+	# 				}
+	# 			}
+	# 			54 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 54
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 54
+	# 					}
+	# 				}
+	# 			}
+	# 			55 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 55
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 55
+	# 					}
+	# 				}
+	# 			}
+	# 			56 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 56
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 56
+	# 					}
+	# 				}
+	# 			}
+	# 			57 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 57
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 57
+	# 					}
+	# 				}
+	# 			}
+	# 			58 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 58
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 58
+	# 					}
+	# 				}
+	# 			}
+	# 			59 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 59
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 59
+	# 					}
+	# 				}
+	# 			}
+	# 			60 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 60
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 60
+	# 					}
+	# 				}
+	# 			}
+	# 			61 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 61
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 61
+	# 					}
+	# 				}
+	# 			}
+	# 			62 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 62
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 62
+	# 					}
+	# 				}
+	# 			}
+	# 			63 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 63
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 63
+	# 					}
+	# 				}
+	# 			}
+	# 			64 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 64
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 64
+	# 					}
+	# 				}
+	# 			}
+	# 			65 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 65
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 65
+	# 					}
+	# 				}
+	# 			}
+	# 			66 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 66
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 66
+	# 					}
+	# 				}
+	# 			}
+	# 			67 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 67
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 67
+	# 					}
+	# 				}
+	# 			}
+	# 			68 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 68
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 68
+	# 					}
+	# 				}
+	# 			}
+	# 			69 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 69
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 69
+	# 					}
+	# 				}
+	# 			}
+	# 			70 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 70
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 70
+	# 					}
+	# 				}
+	# 			}
+	# 			71 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 71
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 71
+	# 					}
+	# 				}
+	# 			}
+	# 			72 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 72
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 72
+	# 					}
+	# 				}
+	# 			}
+	# 			73 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 73
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 73
+	# 					}
+	# 				}
+	# 			}
+	# 			74 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 74
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 74
+	# 					}
+	# 				}
+	# 			}
+	# 			75 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 75
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 75
+	# 					}
+	# 				}
+	# 			}
+	# 			76 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 76
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 76
+	# 					}
+	# 				}
+	# 			}
+	# 			77 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 77
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 77
+	# 					}
+	# 				}
+	# 			}
+	# 			78 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 78
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 78
+	# 					}
+	# 				}
+	# 			}
+	# 			79 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 79
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 79
+	# 					}
+	# 				}
+	# 			}
+	# 			80 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 80
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 80
+	# 					}
+	# 				}
+	# 			}
+	# 			81 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 81
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 81
+	# 					}
+	# 				}
+	# 			}
+	# 			82 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 82
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 82
+	# 					}
+	# 				}
+	# 			}
+	# 			83 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 83
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 83
+	# 					}
+	# 				}
+	# 			}
+	# 			84 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 84
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 84
+	# 					}
+	# 				}
+	# 			}
+	# 			85 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 85
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 85
+	# 					}
+	# 				}
+	# 			}
+	# 			86 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 86
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 86
+	# 					}
+	# 				}
+	# 			}
+	# 			87 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 87
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 87
+	# 					}
+	# 				}
+	# 			}
+	# 			88 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 88
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 88
+	# 					}
+	# 				}
+	# 			}
+	# 			89 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 89
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 89
+	# 					}
+	# 				}
+	# 			}
+	# 			90 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 90
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 90
+	# 					}
+	# 				}
+	# 			}
+	# 			91 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 91
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 91
+	# 					}
+	# 				}
+	# 			}
+	# 			92 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 92
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 92
+	# 					}
+	# 				}
+	# 			}
+	# 			93 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 93
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 93
+	# 					}
+	# 				}
+	# 			}
+	# 			94 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 94
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 94
+	# 					}
+	# 				}
+	# 			}
+	# 			95 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 95
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 95
+	# 					}
+	# 				}
+	# 			}
+	# 			96 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 96
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 96
+	# 					}
+	# 				}
+	# 			}
+	# 			97 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 97
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 97
+	# 					}
+	# 				}
+	# 			}
+	# 			98 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 98
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 98
+	# 					}
+	# 				}
+	# 			}
+	# 			99 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 99
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 99
+	# 					}
+	# 				}
+	# 			}
+	# 			100 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 100
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 100
+	# 					}
+	# 				}
+	# 			}
+	# 			101 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 101
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 101
+	# 					}
+	# 				}
+	# 			}
+	# 			102 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 102
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 102
+	# 					}
+	# 				}
+	# 			}
+	# 			103 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 103
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 103
+	# 					}
+	# 				}
+	# 			}
+	# 			104 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 104
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 104
+	# 					}
+	# 				}
+	# 			}
+	# 			105 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 105
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 105
+	# 					}
+	# 				}
+	# 			}
+	# 			106 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 106
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 106
+	# 					}
+	# 				}
+	# 			}
+	# 			107 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 107
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 107
+	# 					}
+	# 				}
+	# 			}
+	# 			108 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 108
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 108
+	# 					}
+	# 				}
+	# 			}
+	# 			109 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 109
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 109
+	# 					}
+	# 				}
+	# 			}
+	# 			110 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 110
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 110
+	# 					}
+	# 				}
+	# 			}
+	# 			111 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 111
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 111
+	# 					}
+	# 				}
+	# 			}
+	# 			112 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 112
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 112
+	# 					}
+	# 				}
+	# 			}
+	# 			113 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 113
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 113
+	# 					}
+	# 				}
+	# 			}
+	# 			114 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 114
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 114
+	# 					}
+	# 				}
+	# 			}
+	# 			115 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 115
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 115
+	# 					}
+	# 				}
+	# 			}
+	# 			116 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 116
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 116
+	# 					}
+	# 				}
+	# 			}
+	# 			117 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 117
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 117
+	# 					}
+	# 				}
+	# 			}
+	# 			118 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 118
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 118
+	# 					}
+	# 				}
+	# 			}
+	# 			119 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 119
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 119
+	# 					}
+	# 				}
+	# 			}
+	# 			120 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 120
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 120
+	# 					}
+	# 				}
+	# 			}
+	# 			121 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 121
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 121
+	# 					}
+	# 				}
+	# 			}
+	# 			122 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 122
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 122
+	# 					}
+	# 				}
+	# 			}
+	# 			123 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 123
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 123
+	# 					}
+	# 				}
+	# 			}
+	# 			124 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 124
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 124
+	# 					}
+	# 				}
+	# 			}
+	# 			125 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 125
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 125
+	# 					}
+	# 				}
+	# 			}
+	# 			126 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 126
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 126
+	# 					}
+	# 				}
+	# 			}
+	# 			127 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 127
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 127
+	# 					}
+	# 				}
+	# 			}
+	# 			128 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 128
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 128
+	# 					}
+	# 				}
+	# 			}
+	# 			129 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 129
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 129
+	# 					}
+	# 				}
+	# 			}
+	# 			130 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 130
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 130
+	# 					}
+	# 				}
+	# 			}
+	# 			131 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 131
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 131
+	# 					}
+	# 				}
+	# 			}
+	# 			132 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 132
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 132
+	# 					}
+	# 				}
+	# 			}
+	# 			133 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 133
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 133
+	# 					}
+	# 				}
+	# 			}
+	# 			134 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 134
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 134
+	# 					}
+	# 				}
+	# 			}
+	# 			135 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 135
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 135
+	# 					}
+	# 				}
+	# 			}
+	# 			136 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 136
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 136
+	# 					}
+	# 				}
+	# 			}
+	# 			137 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 137
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 137
+	# 					}
+	# 				}
+	# 			}
+	# 			138 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 138
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 138
+	# 					}
+	# 				}
+	# 			}
+	# 			139 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 139
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 139
+	# 					}
+	# 				}
+	# 			}
+	# 			140 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 140
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 140
+	# 					}
+	# 				}
+	# 			}
+	# 			141 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 141
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 141
+	# 					}
+	# 				}
+	# 			}
+	# 			142 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 142
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 142
+	# 					}
+	# 				}
+	# 			}
+	# 			143 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 143
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 143
+	# 					}
+	# 				}
+	# 			}
+	# 			144 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 144
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 144
+	# 					}
+	# 				}
+	# 			}
+	# 			145 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 145
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 145
+	# 					}
+	# 				}
+	# 			}
+	# 			146 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 146
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 146
+	# 					}
+	# 				}
+	# 			}
+	# 			147 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 147
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 147
+	# 					}
+	# 				}
+	# 			}
+	# 			148 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 148
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 148
+	# 					}
+	# 				}
+	# 			}
+	# 			149 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 149
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 149
+	# 					}
+	# 				}
+	# 			}
+	# 			150 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 150
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 150
+	# 					}
+	# 				}
+	# 			}
+	# 			151 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 151
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 151
+	# 					}
+	# 				}
+	# 			}
+	# 			152 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 152
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 152
+	# 					}
+	# 				}
+	# 			}
+	# 			153 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 153
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 153
+	# 					}
+	# 				}
+	# 			}
+	# 			154 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 154
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 154
+	# 					}
+	# 				}
+	# 			}
+	# 			155 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 155
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 155
+	# 					}
+	# 				}
+	# 			}
+	# 			156 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 156
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 156
+	# 					}
+	# 				}
+	# 			}
+	# 			157 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 157
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 157
+	# 					}
+	# 				}
+	# 			}
+	# 			158 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 158
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 158
+	# 					}
+	# 				}
+	# 			}
+	# 			159 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 159
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 159
+	# 					}
+	# 				}
+	# 			}
+	# 			160 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 160
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 160
+	# 					}
+	# 				}
+	# 			}
+	# 			161 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 161
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 161
+	# 					}
+	# 				}
+	# 			}
+	# 			162 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 162
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 162
+	# 					}
+	# 				}
+	# 			}
+	# 			163 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 163
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 163
+	# 					}
+	# 				}
+	# 			}
+	# 			164 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 164
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 164
+	# 					}
+	# 				}
+	# 			}
+	# 			165 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 165
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 165
+	# 					}
+	# 				}
+	# 			}
+	# 			166 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 166
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 166
+	# 					}
+	# 				}
+	# 			}
+	# 			167 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 167
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 167
+	# 					}
+	# 				}
+	# 			}
+	# 			168 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 168
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 168
+	# 					}
+	# 				}
+	# 			}
+	# 			169 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 169
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 169
+	# 					}
+	# 				}
+	# 			}
+	# 			170 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 170
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 170
+	# 					}
+	# 				}
+	# 			}
+	# 			171 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 171
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 171
+	# 					}
+	# 				}
+	# 			}
+	# 			172 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 172
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 172
+	# 					}
+	# 				}
+	# 			}
+	# 			173 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 173
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 173
+	# 					}
+	# 				}
+	# 			}
+	# 			174 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 174
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 174
+	# 					}
+	# 				}
+	# 			}
+	# 			175 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 175
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 175
+	# 					}
+	# 				}
+	# 			}
+	# 			176 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 176
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 176
+	# 					}
+	# 				}
+	# 			}
+	# 			177 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 177
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 177
+	# 					}
+	# 				}
+	# 			}
+	# 			178 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 178
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 178
+	# 					}
+	# 				}
+	# 			}
+	# 			179 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 179
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 179
+	# 					}
+	# 				}
+	# 			}
+	# 			180 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 180
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 180
+	# 					}
+	# 				}
+	# 			}
+	# 			181 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 181
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 181
+	# 					}
+	# 				}
+	# 			}
+	# 			182 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 182
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 182
+	# 					}
+	# 				}
+	# 			}
+	# 			183 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 183
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 183
+	# 					}
+	# 				}
+	# 			}
+	# 			184 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 184
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 184
+	# 					}
+	# 				}
+	# 			}
+	# 			185 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 185
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 185
+	# 					}
+	# 				}
+	# 			}
+	# 			186 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 186
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 186
+	# 					}
+	# 				}
+	# 			}
+	# 			187 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 187
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 187
+	# 					}
+	# 				}
+	# 			}
+	# 			188 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 188
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 188
+	# 					}
+	# 				}
+	# 			}
+	# 			189 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 189
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 189
+	# 					}
+	# 				}
+	# 			}
+	# 			190 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 190
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 190
+	# 					}
+	# 				}
+	# 			}
+	# 			191 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 191
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 191
+	# 					}
+	# 				}
+	# 			}
+	# 			192 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 192
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 192
+	# 					}
+	# 				}
+	# 			}
+	# 			193 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 193
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 193
+	# 					}
+	# 				}
+	# 			}
+	# 			194 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 194
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 194
+	# 					}
+	# 				}
+	# 			}
+	# 			195 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 195
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 195
+	# 					}
+	# 				}
+	# 			}
+	# 			196 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 196
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 196
+	# 					}
+	# 				}
+	# 			}
+	# 			197 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 197
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 197
+	# 					}
+	# 				}
+	# 			}
+	# 			198 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 198
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 198
+	# 					}
+	# 				}
+	# 			}
+	# 			199 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 199
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 199
+	# 					}
+	# 				}
+	# 			}
+	# 			200 = {
+	# 				if = {
+	# 					limit ={
+	# 						or ={
+	# 							not = {
+	# 								has_building = building_ef_private_construction
+	# 							}
+	# 							b:building_urban_center.level <= 200
+	# 						}
+	# 					}
+	# 					create_building = {
+	# 						building = building_ef_private_construction
+	# 						level = 200
+	# 					}
+	# 				}
+	# 			}
+	# 		}
+	# 	}
+	# }
+	#building_railway
+			#is_ai = yes
+			#has_strategy = ai_strategy_resource_expansion
+			# ai_buy_resource_buildings_coast < gold_reserves_var_25 # to see
+		# ai_buy_building_fishing_wharf = yes
+		# ai_buy_building_logging_camp = yes
+		# #initialisation
+		# every_scope_state = {
+		# 	limit = {
+		# 		not = {
+		# 			has_building = building_railway
+		# 			any_scope_building = {
+		# 				is_building_type = building_railway
+		# 				is_under_construction = yes
+		# 			}
+		# 		}
+		# 	}
+		# 	start_privately_funded_building_construction = building_railway
+		# }
+		#infrastructure scale
+					#has_building = building_railway
+				#probleme les colononie et terrictoire outre mere sur produiser des chemin de fer il doive etre exclu de la selection d'etat
+	# #building_financial_centre
+	# if  = {
+	# 	limit  = {
+	# 		has_technology_researched = railways
+	# 	}
+	# 	#infrastructure scale
+	# 	any_scope_state = {
+	# 		limit = {
+	# 			or = {
+	# 				has_building = building_financial_centre_fra
+	# 				has_building = building_financial_centre_gbr
+	# 				has_building = building_financial_centre_usa
+	# 				has_building = building_financial_centre_net
+	# 				has_building = building_financial_centre_ger
+	# 				has_building = building_financial_centre_aus
+	# 				has_building = building_financial_centre_ita
+	# 				has_building = building_financial_centre_chi
+	# 				has_building = building_financial_centre_jap
+	# 			}
+	# 		}
+	# 		start_privately_funded_building_construction = building_railway
+	# 	}
+	# 	#infrastructure scale
+	# 	every_scope_state = {
+	# 		limit = {
+	# 			state_market_access < 0.80
+	# 		}
+	# 		start_privately_funded_building_construction = building_railway
+	# 	}
+	# }
+	#mine
+			#has_strategy = ai_strategy_resource_expansion
+			# ai_buy_resource_buildings_coast < gold_reserves_var_25 # to see
+			# is_ai = yes
+		# ai_buy_building_fishing_wharf = yes
+		# ai_buy_building_logging_camp = yes
+			#ai_buy_building_coal_mine = yes
+			#ai_buy_building_iron_mine = yes
+			#ai_buy_building_lead_mine = yes
+			#ai_buy_building_sulfur_mine = yes
+		if  = {
+			limit = {
+				has_technology_researched = shaft_mining
+				bg_gold_mining_potential_lvl_to_build > 0
+			}
+			ai_build_privat_building_gold_mining = yes
+		}
+			#ai_buy_building_whaling_station = yes
+			#ai_buy_building_rubber_plantation = yes
+			#ai_buy_building_oil_rig = yes

@@ -44,7 +44,7 @@
 
   financial_center_je_2_reason_1_3:0 "Plus vous augmenter le niveau de vos fiancial center augmente, plus le secteur privé réinvesti le pool d'invessstissement, plus cela crer de fiancial product et donc de bull spéculative pontentiel"
 
-  financial_center_je_2_reason_2:0 "#b Current value:#!\n - Number of [GetBuildingType('building_ef_private_construction').GetName] in the country: #p [GetPlayer.MakeScope.ScriptValue('building_ef_private_construction_lvl')]#!\n - Total level of [GetBuildingType('building_urban_center').GetName]: #p [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl')]#!\n - Current [concept_base_rate_percentage]: #p [GetPlayer.MakeScope.ScriptValue('base_rate_percentage_decimal')]%#!\n - Theoretical maximum PCS level: #p [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl_by_base_rate')]#! #b (Soit [GetPlayer.MakeScope.ScriptValue('base_rate_to_pcs_factor')|%] of [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl')])#!"
+  financial_center_je_2_reason_2:0 "#b Current value:#!\n - Number of [GetBuildingType('building_construction_sector').GetName] in the country: #p [GetPlayer.MakeScope.ScriptValue('building_ef_private_construction_lvl')]#!\n - Total level of [GetBuildingType('building_urban_center').GetName]: #p [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl')]#!\n - Current [concept_base_rate_percentage]: #p [GetPlayer.MakeScope.ScriptValue('base_rate_percentage_decimal')]%#!\n - Theoretical maximum PCS level: #p [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl_by_base_rate')]#! #b (Soit [GetPlayer.MakeScope.ScriptValue('base_rate_to_pcs_factor')|%] of [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl')])#!"
 
   economic_sentiment_index_base_1_button:1 "#b 5 [GetBuildingType('building_construction_sector').GetName]#!"
   economic_sentiment_index_base_1_button_desc: "Request the private sector to invest in new [GetBuildingType('building_construction_sector').GetName]. A number of such sector will be built across the country.\nHowever, once this request is made, the private sector will be unable to respond to further government demands for a certain period of time."
@@ -110,14 +110,14 @@
   speculative_share_9_button:1 "#b Construction Demand Stimulus #!"
   speculative_share_9_button_desc: "The government stimulates private construction: for #b 36 months#! the limit of construction sectors depends less on the base rate -- urban centres × (1 − #b 4#! × rate) instead of × (1 − 5 × rate). The extra private sectors overload the economy: the overbuilt economy penalty rises by #b 10#! points and then returns to its target. Pressing again while a stimulus runs replaces it."
   speculative_share_9_button_tt_1: "Overbuilt economy penalty below #b 90#! (current: #b [GetPlayer.MakeScope.Var('speculative_share_2').GetValue|0]#!)"
-  speculative_share_9_button_tt_2: "The total level of [GetBuildingType('building_ef_private_construction').GetName] #b [GetPlayer.MakeScope.ScriptValue('building_ef_private_construction_lvl')]#! is below the theoretical limit of #b [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl_by_base_rate')]#!"
+  speculative_share_9_button_tt_2: "The total level of [GetBuildingType('building_construction_sector').GetName] #b [GetPlayer.MakeScope.ScriptValue('building_ef_private_construction_lvl')]#! is below the theoretical limit of #b [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl_by_base_rate')]#!"
   speculative_share_9_button_tt_3: "The [concept_base_rate_percentage] is below #b 12%#! and greater than #b 1.10%#! (Current: #b [GetPlayer.MakeScope.ScriptValue('base_rate_percentage_decimal')]%#!)"
     speculative_share_9_button_tt_effect_1: "The rate factor in the construction sector limit is #b 4#! instead of 5 for #b 36 months#!."
 
   speculative_share_10_button:1 "#b Private Infrastructure Program #!"
   speculative_share_10_button_desc: "The government stimulates private construction: for #b 36 months#! the limit of construction sectors depends less on the base rate -- urban centres × (1 − #b 3.5#! × rate) instead of × (1 − 5 × rate). The extra private sectors overload the economy: the overbuilt economy penalty rises by #b 20#! points and then returns to its target. Pressing again while a stimulus runs replaces it."
   speculative_share_10_button_tt_1: "Overbuilt economy penalty below #b 80#! (current: #b [GetPlayer.MakeScope.Var('speculative_share_2').GetValue|0]#!)"
-  speculative_share_10_button_tt_2: "The total level of [GetBuildingType('building_ef_private_construction').GetName] #b [GetPlayer.MakeScope.ScriptValue('building_ef_private_construction_lvl')]#! is below the theoretical limit of #b [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl_by_base_rate')]#!"
+  speculative_share_10_button_tt_2: "The total level of [GetBuildingType('building_construction_sector').GetName] #b [GetPlayer.MakeScope.ScriptValue('building_ef_private_construction_lvl')]#! is below the theoretical limit of #b [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl_by_base_rate')]#!"
   speculative_share_10_button_tt_3: "The [concept_base_rate_percentage] is below #b 12%#! and greater than #b 2.10%#! (Current: #b [GetPlayer.MakeScope.ScriptValue('base_rate_percentage_decimal')]%#!)"
   speculative_share_10_button_tt_effect_1: "The rate factor in the construction sector limit is #b 3.5#! instead of 5 for #b 36 months#!."
   speculative_share_10_button_tt_effect_2: "An amount of #b [GetPlayer.MakeScope.ScriptValue('private_bank_funds_proportion_by_psc_10_by_rarity')|D]#! [GetPlayer.GetCustom('global_monetary_reference_currency_good')] will be locked in a governmental fund. This monetary mass cannot be altered."
@@ -125,7 +125,7 @@
   speculative_share_11_button:1 "#b Urban Development Drive #!"
   speculative_share_11_button_desc: "The government stimulates private construction: for #b 36 months#! the limit of construction sectors depends less on the base rate -- urban centres × (1 − #b 3#! × rate) instead of × (1 − 5 × rate). The extra private sectors overload the economy: the overbuilt economy penalty rises by #b 30#! points and then returns to its target. Pressing again while a stimulus runs replaces it."
   speculative_share_11_button_tt_1: "Overbuilt economy penalty below #b 70#! (current: #b [GetPlayer.MakeScope.Var('speculative_share_2').GetValue|0]#!)"
-  speculative_share_11_button_tt_2: "The total level of [GetBuildingType('building_ef_private_construction').GetName] #b [GetPlayer.MakeScope.ScriptValue('building_ef_private_construction_lvl')]#! is below the theoretical limit of #b [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl_by_base_rate')]#!"
+  speculative_share_11_button_tt_2: "The total level of [GetBuildingType('building_construction_sector').GetName] #b [GetPlayer.MakeScope.ScriptValue('building_ef_private_construction_lvl')]#! is below the theoretical limit of #b [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl_by_base_rate')]#!"
   speculative_share_11_button_tt_3: "The [concept_base_rate_percentage] is below #b 12%#! and greater than #b 3.10%#! (Current: #b [GetPlayer.MakeScope.ScriptValue('base_rate_percentage_decimal')]%#!)"
   speculative_share_11_button_tt_effect_1: "The rate factor in the construction sector limit is #b 3#! instead of 5 for #b 36 months#!."
   speculative_share_11_button_tt_effect_2: "An amount of #b [GetPlayer.MakeScope.ScriptValue('private_bank_funds_proportion_by_psc_15_by_rarity')|D]#! [GetPlayer.GetCustom('global_monetary_reference_currency_good')] will be locked in a governmental fund. This monetary mass cannot be altered."
@@ -133,14 +133,11 @@
   speculative_share_12_button:1 "#b Construction-Led Economy Act #!"
   speculative_share_12_button_desc: "The government stimulates private construction: for #b 36 months#! the limit of construction sectors depends less on the base rate -- urban centres × (1 − #b 2.5#! × rate) instead of × (1 − 5 × rate). The extra private sectors overload the economy: the overbuilt economy penalty rises by #b 40#! points and then returns to its target. Pressing again while a stimulus runs replaces it."
   speculative_share_12_button_tt_1: "Overbuilt economy penalty below #b 60#! (current: #b [GetPlayer.MakeScope.Var('speculative_share_2').GetValue|0]#!)"
-  speculative_share_12_button_tt_2: "The total level of [GetBuildingType('building_ef_private_construction').GetName] #b [GetPlayer.MakeScope.ScriptValue('building_ef_private_construction_lvl')]#! is below the theoretical limit of #b [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl_by_base_rate')]#!"
+  speculative_share_12_button_tt_2: "The total level of [GetBuildingType('building_construction_sector').GetName] #b [GetPlayer.MakeScope.ScriptValue('building_ef_private_construction_lvl')]#! is below the theoretical limit of #b [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl_by_base_rate')]#!"
   speculative_share_12_button_tt_3: "The [concept_base_rate_percentage] is below #b 12%#! and greater than #b 4.10%#! (Current: #b [GetPlayer.MakeScope.ScriptValue('base_rate_percentage_decimal')]%#!)"
   speculative_share_12_button_tt_effect_1: "The rate factor in the construction sector limit is #b 2.5#! instead of 5 for #b 36 months#!."
   speculative_share_12_button_tt_effect_2: "An amount of #b [GetPlayer.MakeScope.ScriptValue('private_bank_funds_proportion_by_psc_20_by_rarity')|D]#! [GetPlayer.GetCustom('global_monetary_reference_currency_good')] will be locked in a governmental fund. This monetary mass cannot be altered."
 
-  speculative_share_13_button:1 "#b Regulate Private Construction Sector #!"
-  speculative_share_13_button_desc: "Private construction has grown beyond sustainable levels. State intervention seeks to restore equilibrium and prevent further imbalance."
-  speculative_share_13_button_tt_1:0 "- The theoretical maximum level of [GetBuildingType('building_construction_sector').GetName] (Current: #p [GetPlayer.MakeScope.ScriptValue('building_urban_center_lvl_by_base_rate')]#!) exceeds the current number of [GetBuildingType('building_construction_sector').GetName] in the country (Current: #p [GetPlayer.MakeScope.ScriptValue('building_ef_private_construction_lvl')]#!).\n- Does not have the modifier [GetStaticModifier('speculative_share_modifier_7').GetName|v]"
 
   status_central_bank_1: "With no centralized monetary system, the nation relies on a patchwork of exchange methods. Barter, obsolete local coins, and a mix of foreign currencies circulate side by side, highlighting the fragmented state of the economy."
   status_central_bank_2: "Currency Standard technology is discover, in different states of the country, various types of banknotes circulate without any centralized unification"
@@ -193,7 +190,6 @@
   speculative_share_modifier_4:0 "Emergency Decree on Financial Market Suspension"
   speculative_share_modifier_5:0 "Private Investment Decre"
   speculative_share_modifier_6:0 "Monetary Expansion Lock"
-  speculative_share_modifier_7:0 "Recent [GetBuildingType('building_construction_sector').GetName] regulatuion"
 
   status_speculative_share_1_5:0 "Financial: #n Speculative Surge#! — The market is in a state of euphoria. Private capital flows exceed all reasonable bounds, systemic bubbleis here."
   status_speculative_share_1_4:0 "Financial: #O Overheated Market#! — Financial activity is soaring, with speculative investments outpacing real production."
@@ -339,8 +335,6 @@ latin_monetary_union_2_button_desc: "You decide to re-enter the convention and b
   speculative_share_12_button_tt: "$speculative_share_12_button$\n\n$speculative_share_12_button_desc$\n\nPossible:\n- Not has [GetStaticModifier('speculative_share_modifier_5').GetName|v] modifier\n- [GetStaticModifier('has_financial_center').GetName|v] modifier\n- $speculative_share_12_button_tt_1$\n\nEffect:\n$speculative_share_12_button_tt_effect_1_1$"
   speculative_share_12_button_tt_effect_1_1: "- $speculative_share_12_button_tt_effect_1$\n- Overbuilt economy penalty #r +40#! (at most 100)\n- [GetPlayer.GetName] gets [GetStaticModifier('speculative_share_modifier_5').GetName|v] for 12 months"
 
-  speculative_share_13_button_tt:0 "$speculative_share_13_button$\n\n$speculative_share_13_button_desc$\n\nPossible:\n$speculative_share_13_button_tt_1$\n\nEffect:\n- $speculative_share_13_button_tt_effect_1_1$"
-  speculative_share_13_button_tt_effect_1_1:0 "A [GetBuildingType('building_construction_sector').GetName] in a random state will be completely dismantled, reducing the total number of [GetBuildingType('building_construction_sector').GetName] in the country."
 
 
 je_ef_efcc_situation:0 "Economic and Financial Crisis Committee"
