@@ -150,21 +150,43 @@ zz_ef_metal_week_step = {
 	# (var:zz_ef_mt_start_adj_*); this week's own purchases come after the snapshot. EFQ line when it is not ~0.
 	zz_ef_metal_reconcile = yes
 	# what was bought / sold this week
-	set_variable = { name = zz_ef_f_mt_cb_in_g value = zz_ef_cb_in_gold_goods }
+	# the CB's and the banks' input (goods) once each: the pops' part below is the states' consumption less these two
+	# (= zz_ef_pop_<metal>_goods, with the same floor at 0)
+	set_variable = { name = zz_ef_t_cb_in_g value = zz_ef_cb_in_gold_goods }
+	set_variable = { name = zz_ef_t_cb_in_s value = zz_ef_cb_in_silver_goods }
+	set_variable = { name = zz_ef_t_bank_in_g value = zz_ef_bank_in_gold_goods }
+	set_variable = { name = zz_ef_t_bank_in_s value = zz_ef_bank_in_silver_goods }
+	set_variable = { name = zz_ef_f_mt_cb_in_g value = var:zz_ef_t_cb_in_g }
 	change_variable = { name = zz_ef_f_mt_cb_in_g multiply = zz_ef_gold_units_per_good }
-	set_variable = { name = zz_ef_f_mt_cb_in_s value = zz_ef_cb_in_silver_goods }
+	set_variable = { name = zz_ef_f_mt_cb_in_s value = var:zz_ef_t_cb_in_s }
 	change_variable = { name = zz_ef_f_mt_cb_in_s multiply = zz_ef_silver_units_per_good }
 	set_variable = { name = zz_ef_f_mt_cb_out_g value = zz_ef_cb_out_gold_goods }
 	change_variable = { name = zz_ef_f_mt_cb_out_g multiply = zz_ef_gold_units_per_good }
 	set_variable = { name = zz_ef_f_mt_cb_out_s value = zz_ef_cb_out_silver_goods }
 	change_variable = { name = zz_ef_f_mt_cb_out_s multiply = zz_ef_silver_units_per_good }
-	set_variable = { name = zz_ef_f_mt_bank_in_g value = zz_ef_bank_in_gold_goods }
+	set_variable = { name = zz_ef_f_mt_bank_in_g value = var:zz_ef_t_bank_in_g }
 	change_variable = { name = zz_ef_f_mt_bank_in_g multiply = zz_ef_gold_units_per_good }
-	set_variable = { name = zz_ef_f_mt_bank_in_s value = zz_ef_bank_in_silver_goods }
+	set_variable = { name = zz_ef_f_mt_bank_in_s value = var:zz_ef_t_bank_in_s }
 	change_variable = { name = zz_ef_f_mt_bank_in_s multiply = zz_ef_silver_units_per_good }
-	set_variable = { name = zz_ef_f_mt_pop_in_g value = zz_ef_pop_gold_goods }
+	set_variable = {
+		name = zz_ef_f_mt_pop_in_g
+		value = {
+			value = zz_ef_state_gold_cons
+			subtract = var:zz_ef_t_cb_in_g
+			subtract = var:zz_ef_t_bank_in_g
+			min = 0
+		}
+	}
 	change_variable = { name = zz_ef_f_mt_pop_in_g multiply = zz_ef_gold_units_per_good }
-	set_variable = { name = zz_ef_f_mt_pop_in_s value = zz_ef_pop_silver_goods }
+	set_variable = {
+		name = zz_ef_f_mt_pop_in_s
+		value = {
+			value = zz_ef_state_silver_cons
+			subtract = var:zz_ef_t_cb_in_s
+			subtract = var:zz_ef_t_bank_in_s
+			min = 0
+		}
+	}
 	change_variable = { name = zz_ef_f_mt_pop_in_s multiply = zz_ef_silver_units_per_good }
 	# the CB: bought - sold, into (out of) its CB state; a sale never more than it holds
 	if = {
@@ -276,17 +298,21 @@ zz_ef_metal_week_step = {
 	set_variable = { name = zz_ef_mt_bank_s value = zz_ef_bank_buy_silver_goods }
 	set_variable = { name = zz_ef_mt_bank_mult_g value = zz_ef_bank_mult_gold }
 	set_variable = { name = zz_ef_mt_bank_mult_s value = zz_ef_bank_mult_silver }
-	every_scope_building = {
-		limit = { is_building_type = building_zz_ef_bank }
-		remove_modifier = zz_ef_bank_gold_buy
-		remove_modifier = zz_ef_bank_silver_buy
-		add_modifier = {
-			name = zz_ef_bank_gold_buy
-			multiplier = root.var:zz_ef_mt_bank_mult_g
-		}
-		add_modifier = {
-			name = zz_ef_bank_silver_buy
-			multiplier = root.var:zz_ef_mt_bank_mult_s
+	# no bank levels -- no building of the type (a level-0 building is gone), so nothing to remove or add
+	if = {
+		limit = { var:zz_ef_mt_bank_levels > 0 }
+		every_scope_building = {
+			limit = { is_building_type = building_zz_ef_bank }
+			remove_modifier = zz_ef_bank_gold_buy
+			remove_modifier = zz_ef_bank_silver_buy
+			add_modifier = {
+				name = zz_ef_bank_gold_buy
+				multiplier = root.var:zz_ef_mt_bank_mult_g
+			}
+			add_modifier = {
+				name = zz_ef_bank_silver_buy
+				multiplier = root.var:zz_ef_mt_bank_mult_s
+			}
 		}
 	}
 	set_variable = { name = zz_ef_mt_cb_mult value = 0 }
