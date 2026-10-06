@@ -26,7 +26,7 @@
 | 5 | `history/global/00_ef_financial_global_variable.txt` (2 тыс.) | переменные облигаций/акций/займов по странам (436 `set_variable`) |
 | 6 | `history/global/00_ef_stockpile_global_variable.txt` (3,2 тыс.) | флаги товаров нацзапаса `stocked_<good>_flag_global_variable`, список `stocked_goods_global_variable_list`, `coal_release_quantity` (признак «страна уже инициализирована») |
 | 7 | `history/global/01_ef_state_global_variable.txt` | `GLOBAL = every_state`: переменные штатов (`gold_state_1`, `silver_state_1`, `test_var_*`, `stockpiling_*_state_1`) |
-| 8 | `history/global/99_ef_history_global_variable.txt` (8,7 тыс.) | исторические начальные условия: 312 `activate_law` (денежные системы, валюта страны), стартовые `gold_state_1`/`silver_state_1` через `var:central_bank_location`, `set_institution_investment_level`, `add_amendment` (биметаллические коэффициенты FRA/USA/NET и др.), 3 `create_pop`, `add_ideology = ideology_monetary_*` для ИГ |
+| 8 | `history/global/99_ef_history_global_variable.txt` (2,7 тыс.) | исторические начальные условия: 312 `activate_law` (денежные системы, валюта страны), стартовые `gold_state_1`/`silver_state_1` через `var:central_bank_location`, `set_institution_investment_level`, `add_amendment` (биметаллические коэффициенты FRA/USA/NET и др.), 3 `create_pop`, `add_ideology = ideology_monetary_*` для ИГ |
 | 9 | `history/global/PSC_global.txt` | `trigger_event = { on_action = set_construction_start }` — запуск PSC-стройки |
 | 10 | `history/global/zz_ef_currency_fix.txt` | после 99: валюта WUR; страны без валюты → `law_no_market_liquidity` |
 | 11 | `history/global/zz_ef_init_stockpiling_state_vars.txt` | заводит 7 переменных `stockpiling_*_var_state_1` штатам (охрана `has_variable`) |
