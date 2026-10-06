@@ -1,0 +1,212 @@
+# из common/scripted_effects/01_financial_scripted_effects.txt, строки 787–803 (на 2026-10-06), шапка-баннер раздела «STOCKPILING FINANCIAL PRODUCT»
+#########################################################################################################################################################################################
+#########################################################################################################################################################################################
+#########################################################################################################################################################################################
+#########################################################################################################################################################################################
+
+# ███████╗████████╗ ██████╗  ██████╗██╗  ██╗██████╗ ██╗██╗     ██╗███╗   ██╗ ██████╗     ███████╗██╗███╗   ██╗ █████╗ ███╗   ██╗ ██████╗██╗ █████╗ ██╗         ██████╗ ██████╗
+# ██╔════╝╚══██╔══╝██╔═══██╗██╔════╝██║ ██╔╝██╔══██╗██║██║     ██║████╗  ██║██╔════╝     ██╔════╝██║████╗  ██║██╔══██╗████╗  ██║██╔════╝██║██╔══██╗██║         ██╔══██╗██╔══██╗
+# ███████╗   ██║   ██║   ██║██║     █████╔╝ ██████╔╝██║██║     ██║██╔██╗ ██║██║  ███╗    █████╗  ██║██╔██╗ ██║███████║██╔██╗ ██║██║     ██║███████║██║         ██████╔╝██║  ██║
+# ╚════██║   ██║   ██║   ██║██║     ██╔═██╗ ██╔═══╝ ██║██║     ██║██║╚██╗██║██║   ██║    ██╔══╝  ██║██║╚██╗██║██╔══██║██║╚██╗██║██║     ██║██╔══██║██║         ██╔═══╝ ██║  ██║
+# ███████║   ██║   ╚██████╔╝╚██████╗██║  ██╗██║     ██║███████╗██║██║ ╚████║╚██████╔╝    ██║     ██║██║ ╚████║██║  ██║██║ ╚████║╚██████╗██║██║  ██║███████╗    ██║     ██████╔╝
+# ╚══════╝   ╚═╝    ╚═════╝  ╚═════╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝╚═╝  ╚═══╝ ╚═════╝     ╚═╝     ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝╚═╝╚═╝  ╚═╝╚══════╝    ╚═╝     ╚═════╝
+
+#########################################################################################################################################################################################
+#########################################################################################################################################################################################
+#########################################################################################################################################################################################
+#########################################################################################################################################################################################
+
+
+# из common/scripted_effects/01_financial_scripted_effects.txt, строки 807–997 (на 2026-10-06), stockpiling_bond_1 / _manufacture_stock_1 / _agricultural_stock_1 / _mining_stock_1 / _railroad_stock_1 и их *_2_state
+stockpiling_bond_1 = {
+    set_variable = {
+        name = stockpiling_bond_var_2
+        value = 0
+    }
+    if = {
+        limit = {
+            bond_market_goods_buy_orders > 0
+			stockpiling_bond_var_1 < 1000000
+        }
+        change_variable = {
+            name = stockpiling_bond_var_2
+			add = bond_market_goods_buy_orders
+			#add = bond_market_goods_delta
+        }
+        change_variable = {
+            name = stockpiling_bond_var_2
+            multiply = 4
+        }
+		stockpiling_bond_2_state = yes
+    }
+}
+stockpiling_bond_2_state = {
+    every_scope_state = {
+        if = {
+            limit = {
+                has_modifier = financial_center_historic_place
+            }
+            save_scope_as = financial_center_historic_place
+            scope:financial_center_historic_place = {
+                change_variable = {
+                    name = stockpiling_bond_var_state_1
+                    add = root.var:stockpiling_bond_var_2
+                }
+            }
+        }
+    }
+}
+
+stockpiling_manufacture_stock_1 = {
+    set_variable = {
+        name = stockpiling_manufacture_stock_var_2
+        value = 0
+    }
+    if = {
+        limit = {
+            manufacture_stock_market_goods_buy_orders > 0
+			stockpiling_manufacture_stock_var_1 < 1000000
+        }
+        change_variable = {
+            name = stockpiling_manufacture_stock_var_2
+			add = manufacture_stock_market_goods_buy_orders
+            #add = manufacture_stock_market_goods_delta
+        }
+        change_variable = {
+            name = stockpiling_manufacture_stock_var_2
+            multiply = 4
+        }
+		stockpiling_manufacture_stock_2_state = yes
+    }
+}
+stockpiling_manufacture_stock_2_state = {
+    every_scope_state = {
+        if = {
+            limit = {
+                has_modifier = financial_center_historic_place
+            }
+            save_scope_as = financial_center_historic_place
+            scope:financial_center_historic_place = {
+                change_variable = {
+                    name = stockpiling_manufacture_stock_var_state_1
+                    add = root.var:stockpiling_manufacture_stock_var_2
+                }
+            }
+        }
+    }
+}
+
+stockpiling_agricultural_stock_1 = {
+    set_variable = {
+        name = stockpiling_agricultural_stock_var_2
+        value = 0
+    }
+    if = {
+        limit = {
+            agricultural_stock_market_goods_buy_orders > 0
+			stockpiling_agricultural_stock_var_1 < 1000000
+        }
+        change_variable = {
+            name = stockpiling_agricultural_stock_var_2
+			add = agricultural_stock_market_goods_buy_orders
+        }
+        change_variable = {
+            name = stockpiling_agricultural_stock_var_2
+            multiply = 4
+        }
+		stockpiling_agricultural_stock_2_state = yes
+    }
+}
+stockpiling_agricultural_stock_2_state = {
+    every_scope_state = {
+        if = {
+            limit = {
+                has_modifier = financial_center_historic_place
+            }
+            save_scope_as = financial_center_historic_place
+            scope:financial_center_historic_place = {
+                change_variable = {
+                    name = stockpiling_agricultural_stock_var_state_1
+                    add = root.var:stockpiling_agricultural_stock_var_2
+                }
+            }
+        }
+    }
+}
+
+stockpiling_mining_stock_1 = {
+    set_variable = {
+        name = stockpiling_mining_stock_var_2
+        value = 0
+    }
+    if = {
+        limit = {
+            mining_stock_market_goods_buy_orders > 0
+			stockpiling_mining_stock_var_1 < 1000000
+        }
+        change_variable = {
+            name = stockpiling_mining_stock_var_2
+			add = mining_stock_market_goods_buy_orders
+        }
+        change_variable = {
+            name = stockpiling_mining_stock_var_2
+            multiply = 4
+        }
+		stockpiling_mining_stock_2_state = yes
+    }
+}
+stockpiling_mining_stock_2_state = {
+    every_scope_state = {
+        if = {
+            limit = {
+                has_modifier = financial_center_historic_place
+            }
+            save_scope_as = financial_center_historic_place
+            scope:financial_center_historic_place = {
+                change_variable = {
+                    name = stockpiling_mining_stock_var_state_1
+                    add = root.var:stockpiling_mining_stock_var_2
+                }
+            }
+        }
+    }
+}
+
+stockpiling_railroad_stock_1 = {
+    set_variable = {
+        name = stockpiling_railroad_stock_var_2
+        value = 0
+    }
+    if = {
+        limit = {
+            railroad_stock_market_goods_buy_orders > 0
+			stockpiling_railroad_stock_var_1 < 1000000
+        }
+        change_variable = {
+            name = stockpiling_railroad_stock_var_2
+			add = railroad_stock_market_goods_buy_orders
+        }
+        change_variable = {
+            name = stockpiling_railroad_stock_var_2
+            multiply = 4
+        }
+		stockpiling_railroad_stock_2_state = yes
+    }
+}
+stockpiling_railroad_stock_2_state = {
+    every_scope_state = {
+        if = {
+            limit = {
+                has_modifier = financial_center_historic_place
+            }
+            save_scope_as = financial_center_historic_place
+            scope:financial_center_historic_place = {
+                change_variable = {
+                    name = stockpiling_railroad_stock_var_state_1
+                    add = root.var:stockpiling_railroad_stock_var_2
+                }
+            }
+        }
+    }
+}
+

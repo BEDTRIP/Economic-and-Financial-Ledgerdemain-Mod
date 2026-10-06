@@ -1,0 +1,98 @@
+# из common/scripted_effects/00_on_action_main.txt, строки 438–494 (на 2026-10-06), central_bank_ef_on_monthly_pulse_country: арбитраж при rise_base_rate / down_base_rate / revaluation_currency_target (+ закомментированный devaluation)
+
+	#################################################
+	#Arbitrage: Base rate d'arbi -> à mettre tout les mois
+	#################################################
+
+	if  = {
+		limit = {
+			has_modifier = rise_base_rate
+			market_owner_is_root = yes
+			OR = {
+				# Cas 1 : le pays n'a NI bimetallisme NI silver standard → passe toujours
+				AND = {
+					NOT = { has_law = law_type:law_bimetallism_standard }
+					NOT = { has_law = law_type:law_silver_standard }
+				}
+
+				# Cas 2 : le pays a l'un des deux standards → passe seulement avant 1873
+				AND = {
+					OR = {
+						has_law = law_type:law_bimetallism_standard
+						has_law = law_type:law_silver_standard
+					}
+					game_date < 1873.1.1
+				}
+			}
+		}
+		set_variable = rise_base_rate
+		privat_bank_buy_currency = yes
+	}
+	if  = {
+		limit = {
+			has_modifier = down_base_rate
+			market_owner_is_root = yes
+		}
+		set_variable = down_base_rate
+		privat_bank_sell_currency = yes
+	}
+
+	#################################################
+	#Arbitrage: Base rate d'arbi -> à mettre tout les mois
+	#################################################
+
+	if  = { #vente de la currency pour obtenir du metal puisque otient plus de metal
+		limit = {
+			has_modifier = revaluation_currency_target
+			market_owner_is_root = yes
+		}
+		set_variable = revaluation_currency_target
+		privat_bank_sell_currency = yes
+	}
+	# if  = { #legere vente pour retirer de l'exposition -> infime donc non
+	# 	limit = {
+	# 		has_modifier = devaluation_currency_target
+	# 		market_owner_is_root = yes
+	# 	}
+	# 	privat_bank_buy_currency = yes
+	# }
+
+# из common/scripted_effects/00_on_action_main.txt, строки 604–616 (на 2026-10-06), central_bank_ef_on_half_yearly_pulse_country: арбитраж по global_monetary_reference
+
+
+	#################################################
+	#Arbitrage sur la money de référence
+	#################################################
+
+	if  = {
+		limit = {
+			has_modifier = global_monetary_reference
+		}
+		set_variable = global_monetary_reference_arbitrage
+		privat_bank_buy_currency = yes
+	}
+
+# из common/scripted_effects/00_on_action_main.txt, строки 1183–1204 (на 2026-10-06), годовой пульс ЦБ: отметка attack_on_currency + privat_bank_sell_currency
+
+	#################################################
+	#Arbitrage: post 1873 - Attaque systematique sur silver et bimetalisme
+	#################################################
+
+	if = {
+		limit = {
+			game_date > 1873.1.1
+			or = {
+				has_law = law_type:law_bimetallism_standard
+				has_law = law_type:law_silver_standard
+			}
+		}
+		set_variable = attack_on_currency
+		privat_bank_sell_currency = yes
+	}
+
+	#################################################
+	#Attack sur la currency
+	#################################################
+
+
+

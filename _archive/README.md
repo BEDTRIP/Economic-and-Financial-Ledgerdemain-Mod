@@ -33,3 +33,10 @@ _archive/<механизм>/
 | Значения и триггер валют без ссылок (`zz_ef_reserves_money`, `*_neg`, `zz_ef_cb_rule_*_pp`, `is_valid_country_for_currency_accumulation`) | `ef_unused_currency_values/` | 6 значений из `ld_reference_currency_values.txt` / `ld_cb_rate_values.txt`, триггер из `00_ef_custom_trigger.txt` |
 | Остатки выдачи местной валюты (`zz_ef_local_currency_*`, `zz_ef_lc_curve_*`) | `ef_local_currency_issuance/` | четыре файла `ld_local_currency_*` целиком (в т.ч. on_action очистки модификатора) |
 | Контроллер ставки E&F `base_rate_change` | `ef_base_rate_change/` | пустое определение из `01_economic_scripted_effects.txt`; вызов (`if is_ai`) в `00_on_action_main.txt` |
+| Арбитраж частных банков E&F (`privat_bank_*_currency`, тела `buy/sell_currency_privat_bank`, флаги `attack_on_currency` и др.) | `ef_privat_bank_arbitrage/` | 5 `if` в `00_on_action_main.txt` (месяц, полугодие, год); 2 пустые обёртки, 2 тела, 6 осиротевших помощников из `01_economic_scripted_effects.txt`; `sell_currency_privat_bank_variable_list` из `08_list_effect.txt` |
+| Печать/изъятие валюты по резерву `money_creation/destruction_in_foreign_exchange_reserve` | `ef_fx_reserve_money/` | два определения (3077 строк) из `01_economic_scripted_effects.txt` |
+| Пустой `stockpile_finacial_product` | `ef_stockpile_finacial_product/` | определение из `01_financial_scripted_effects.txt`; `if` в месячном пульсе финцентра |
+| Учёт финпродуктов `stockpiling_<вид>_1` (+ `_2_state`, 5 видов) | `ef_stockpiling_financial_1/` | 10 определений и баннер из `01_financial_scripted_effects.txt` |
+| Годовой снимок индекса `fluctuations_country_indice_value_year(_clear)` | `ef_index_year_snapshot/` | два определения из `01_financial_scripted_effects.txt` |
+| Группа PM `pmg_currency_type` (+ `pm_no_currency_type`, `pm_currency_liquidity_currency`) | `ef_pmg_currency_type/` | группа, два PM, закомментированная строка в `ef_15_bank.txt`, 3 ключа локализации |
+| Правила игры `unique_companies_banks` / `_newspapers` | `ef_unique_company_rules/` | файл `common/game_rules/00_EF_unique_companies_game_rules.txt` целиком (пункты исчезают из меню правил) |

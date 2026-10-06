@@ -1,0 +1,90 @@
+# из common/scripted_effects/01_financial_scripted_effects.txt, строки 32055–32142 (на 2026-10-06), fluctuations_country_indice_value_year и _clear
+fluctuations_country_indice_value_year = {
+	change_variable = {
+		name = index_value_count
+		add = 1
+	}
+
+    if = {
+        limit = {
+            var:index_value_count = 1
+        }
+        set_variable = {
+            name = country_indice_value_1
+            value = country_indice
+        }
+    }
+    if = {
+        limit = {
+            var:index_value_count = 2
+        }
+        set_variable = {
+            name = country_indice_value_2
+            value = country_indice
+        }
+
+        set_variable = {
+            name = country_indice_value_dif_01
+            value = 0
+        }
+        change_variable = {
+            name = country_indice_value_dif_01
+            add = var:country_indice_value_2
+        }
+        change_variable = {
+            name = country_indice_value_dif_01
+            subtract = var:country_indice_value_1
+        }
+        change_variable = {
+            name = country_indice_value_dif_01
+            divide = var:country_indice_value_1
+        }
+
+		#change base_index_value
+		set_variable = {
+			name = base_index_value_dif
+			value = var:base_index_value
+		}
+		change_variable = {
+			name = base_index_value_dif
+			multiply = var:country_indice_value_dif_01
+		}
+
+		if = {
+			limit = {
+				or = {
+					var:base_index_value < 1000000 #point
+					base_index_value_dif < 0
+				}
+			}
+			change_variable = {
+				name = base_index_value
+				add = var:base_index_value_dif
+			}
+		}
+
+        set_variable = {
+            name = index_value_count
+            value = 0
+        }
+
+		if = {
+			limit = {
+				var:country_indice_value_dif_01 < -0.5
+			}
+			financial_crash = yes
+		}
+    }
+}
+fluctuations_country_indice_value_year_clear = {
+	set_variable = {
+		name = country_indice_value_dif_01
+		value = 0
+	}
+	set_variable = {
+		name = base_index_value_dif
+		value = 0
+	}
+}
+
+

@@ -14,8 +14,8 @@
 - `common/on_actions/ld_bank_on_actions.txt` — `on_monthly_pulse_country` → `zz_ef_bank_monthly` → `zz_ef_bank_seed_step`.
 - `common/scripted_effects/ld_bank_seed.txt` — генерат: `zz_ef_bank_seed_step` (страна-владелец рынка, один раз, флаг `zz_ef_bank_seeded`), `zz_ef_bank_seed_state` (по штату), `zz_ef_bank_seed_company` (по банковской компании E&F, `$COMPANY$`), `zz_ef_bank_seed_state_owned` (запасной вариант — 100% государству).
 - `common/scripted_effects/ld_cm_bank_ownership.txt` — `zz_ef_cm_create_owned_bank` (строит/доращивает ЦБ до размера `$CB_SIZE$`, государственный, резервы 0); зовут спавнеры E&F в `09_introduction_building_lvl.txt:23506…23644`.
-- `common/buildings/ef_15_bank.txt` — `building_bank` (ЦБ E&F: `buildable = no`, PMG `pmg_minting_type`, `pmg_monetary_policy`; `pmg_currency_type` закомментирован).
-- `common/production_method_groups/15_ef_bank.txt`, `common/production_methods/15_ef_bank.txt` — методы ЦБ по валютным стандартам (`pm_*_standard_bank_money_currency`: `country_minting_add`, выпуск облигаций `goods_output_bond_add`), `pm_revaluation`/`pm_devaluation`, `pm_no_currency_type`/`pm_currency_liquidity_currency` (группа не подключена).
+- `common/buildings/ef_15_bank.txt` — `building_bank` (ЦБ E&F: `buildable = no`, PMG `pmg_minting_type`, `pmg_monetary_policy`).
+- `common/production_method_groups/15_ef_bank.txt`, `common/production_methods/15_ef_bank.txt` — методы ЦБ по валютным стандартам (`pm_*_standard_bank_money_currency`: `country_minting_add`, выпуск облигаций `goods_output_bond_add`), `pm_revaluation`/`pm_devaluation`.
 - `common/scripted_effects/ld_nr_deposits.txt` — генерат: `zz_ef_fx_liab_trim` (обрезка чужих запасов валюты эмитента до `zz_ef_fx_start_cap` × базы), `zz_ef_nr_dep_step` (недельный шаг у эмитента: вклады, проценты, `add_investment_pool`, модификатор `zz_ef_fx_holders_demand`).
 - `common/script_values/ld_nr_deposits_values.txt` — `zz_ef_fx_start_cap` (0.05), `zz_ef_nr_dep_v`, `zz_ef_v_f_nr_dep`, `zz_ef_v_w_nr_dep`, `zz_ef_nr_int_week`, `zz_ef_v_f_nr_int`, `zz_ef_fx_holders_demand_m` (до 20).
 - `common/scripted_triggers/ld_nr_deposits_triggers.txt` — `zz_ef_nr_issuer` (есть `has_central_bank`, нет `zz_ef_cur_zone`).
@@ -46,7 +46,7 @@
 | `zz_ef_fxt_liab/_cap/_k` | временные обрезки | `zz_ef_fx_liab_trim` | он же |
 | `zz_ef_bkcash` | наличность банков | `ld_money_model.txt:108` | модель денег |
 | `ai_privat_bank_bond_value_N`, `ai_privat_bank_buyer_slot_N`, `ai_privat_bank_seller_country_general_N` | облигации частных банков (E&F) | `ai_privat_bank_bond_N` | `zz_ef_bank_bonds` (`ld_money_model_values.txt:249`), `ld_bond_ledger.txt` (`zz_ef_pb_slot_N`) |
-| `company_<Банк>_gold_stockpile_fix`, `_silver_stockpile_fix` (глобальные) | металл частного банка E&F | арбитраж, `private_bank_gold_lose` | GUI E&F (`private_bank_gold_reserve_per_bank_gui`); модель `ld_*` их не читает |
+| `company_<Банк>_gold_stockpile_fix`, `_silver_stockpile_fix` (глобальные) | металл частного банка E&F | арбитраж (`private_bank_arbitrage_*`) | GUI E&F (`private_bank_gold_reserve_per_bank_gui`); модель `ld_*` их не читает |
 
 ## Вызовы и связи
 - ЦБ создаётся спавнерами E&F через `zz_ef_cm_create_owned_bank` (`09_introduction_building_lvl.txt`, `history/buildings/00_ef_building.txt:16`).

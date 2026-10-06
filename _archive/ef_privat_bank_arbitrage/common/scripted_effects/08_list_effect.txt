@@ -1,0 +1,340 @@
+# из common/scripted_effects/08_list_effect.txt, строки 2228–2565 (на 2026-10-06), sell_currency_privat_bank_variable_list (список частных банков для продажи валюты)
+sell_currency_privat_bank_variable_list = {
+	
+	#company_Rothschild_Bank_gbr
+	if  = {
+		limit = {
+			global_var:stockpiling_$currency$_company_Rothschild_Bank_gbr_fixe > 1000000 #sort de la liste de vente si inferieur à 1M
+		}
+		every_country = {
+			every_company = {
+				limit = {
+					type = company_type:company_Rothschild_Bank_gbr
+				} 	
+				root = {
+					add_to_variable_list = {
+						name = sell_currency_privat_bank_variable_list
+						target = prev
+					}
+				}  
+			} 
+		}  
+	} 
+	#company_Rothschild_Bank_fra
+	if  = {
+		limit = {
+			global_var:stockpiling_$currency$_company_Rothschild_Bank_fra_fixe > 1000000
+		}
+		every_country = {
+			every_company = {
+				limit = {
+					type = company_type:company_Rothschild_Bank_fra
+				} 	
+				root = {
+					add_to_variable_list = {
+						name = sell_currency_privat_bank_variable_list
+						target = prev
+					}
+				}  
+			} 
+		}  
+	} 
+	#company_Rothschild_Bank_ger
+	if  = {
+		limit = {
+			global_var:stockpiling_$currency$_company_Rothschild_Bank_ger_fixe > 1000000
+		}
+		every_country = {
+			every_company = {
+				limit = {
+					type = company_type:company_Rothschild_Bank_ger
+				} 	
+				root = {
+					add_to_variable_list = {
+						name = sell_currency_privat_bank_variable_list
+						target = prev
+					}
+				}  
+			} 
+		}  
+	} 
+	#company_Rothschild_Bank_aus
+	if  = {
+		limit = {
+			global_var:stockpiling_$currency$_company_Rothschild_Bank_aus_fixe > 1000000
+		}
+		every_country = {
+			every_company = {
+				limit = {
+					type = company_type:company_Rothschild_Bank_aus
+				} 	
+				root = {
+					add_to_variable_list = {
+						name = sell_currency_privat_bank_variable_list
+						target = prev
+					}
+				}  
+			} 
+		}  
+	} 
+	#company_Rothschild_Bank_ita
+	if  = {
+		limit = {
+			global_var:stockpiling_$currency$_company_Rothschild_Bank_ita_fixe > 1000000
+		}
+		every_country = {
+			every_company = {
+				limit = {
+					type = company_type:company_Rothschild_Bank_ita
+				} 	
+				root = {
+					add_to_variable_list = {
+						name = sell_currency_privat_bank_variable_list
+						target = prev
+					}
+				}  
+			} 
+		}  
+	} 
+	#company_BanqueDeParisEtDesPaysBas
+	if  = {
+		limit = {
+			global_var:stockpiling_$currency$_company_BanqueDeParisEtDesPaysBas_fixe > 1000000
+		}
+		every_country = {
+			every_company = {
+				limit = {
+					type = company_type:company_BanqueDeParisEtDesPaysBas
+				} 	
+				root = {
+					add_to_variable_list = {
+						name = sell_currency_privat_bank_variable_list
+						target = prev
+					}
+				}  
+			} 
+		}  
+	} 
+	#company_BankJPMorgan
+	if  = {
+		limit = {
+			global_var:stockpiling_$currency$_company_BankJPMorgan_fixe > 1000000
+		}
+		every_country = {
+			every_company = {
+				limit = {
+					type = company_type:company_BankJPMorgan
+				} 	
+				root = {
+					add_to_variable_list = {
+						name = sell_currency_privat_bank_variable_list
+						target = prev
+					}
+				}  
+			} 
+		}  
+	} 
+	#company_DeutscheBank
+	if  = {
+		limit = {
+			global_var:stockpiling_$currency$_company_DeutscheBank_fixe > 1000000
+		}
+		every_country = {
+			every_company = {
+				limit = {
+					type = company_type:company_DeutscheBank
+				} 	
+				root = {
+					add_to_variable_list = {
+						name = sell_currency_privat_bank_variable_list
+						target = prev
+					}
+				}  
+			} 
+		}  
+	} 
+	#company_BankHSBC
+	if  = {
+		limit = {
+			global_var:stockpiling_$currency$_company_BankHSBC_fixe > 1000000
+		}
+		every_country = {
+			every_company = {
+				limit = {
+					type = company_type:company_BankHSBC
+				} 	
+				root = {
+					add_to_variable_list = {
+						name = sell_currency_privat_bank_variable_list
+						target = prev
+					}
+				}  
+			} 
+		}  
+	} 
+	#company_Bankenverein
+	if  = {
+		limit = {
+			global_var:stockpiling_$currency$_company_Bankenverein_fixe > 1000000
+		}
+		every_country = {
+			every_company = {
+				limit = {
+					type = company_type:company_Bankenverein
+				} 	
+				root = {
+					add_to_variable_list = {
+						name = sell_currency_privat_bank_variable_list
+						target = prev
+					}
+				}  
+			} 
+		}  
+	} 
+	#company_BancaCommercialeItaliana
+	if  = {
+		limit = {
+			global_var:stockpiling_$currency$_company_BancaCommercialeItaliana_fixe > 1000000
+		}
+		every_country = {
+			every_company = {
+				limit = {
+					type = company_type:company_BancaCommercialeItaliana
+				} 	
+				root = {
+					add_to_variable_list = {
+						name = sell_currency_privat_bank_variable_list
+						target = prev
+					}
+				}  
+			} 
+		}  
+	} 
+	#company_DeNederlandscheBank
+	if  = {
+		limit = {
+			global_var:stockpiling_$currency$_company_DeNederlandscheBank_fixe > 1000000
+		}
+		every_country = {
+			every_company = {
+				limit = {
+					type = company_type:company_DeNederlandscheBank
+				} 	
+				root = {
+					add_to_variable_list = {
+						name = sell_currency_privat_bank_variable_list
+						target = prev
+					}
+				}  
+			} 
+		}  
+	} 
+	#company_amsterdamschebank
+	if  = {
+		limit = {
+			global_var:stockpiling_$currency$_company_amsterdamschebank_fixe > 1000000
+		}
+		every_country = {
+			every_company = {
+				limit = {
+					type = company_type:company_amsterdamschebank
+				} 	
+				root = {
+					add_to_variable_list = {
+						name = sell_currency_privat_bank_variable_list
+						target = prev
+					}
+				}  
+			} 
+		}  
+	} 
+	#company_RotterdamscheBankvereeniging
+	if  = {
+		limit = {
+			global_var:stockpiling_$currency$_company_RotterdamscheBankvereeniging_fixe > 1000000
+		}
+		every_country = {
+			every_company = {
+				limit = {
+					type = company_type:company_RotterdamscheBankvereeniging
+				} 	
+				root = {
+					add_to_variable_list = {
+						name = sell_currency_privat_bank_variable_list
+						target = prev
+					}
+				}  
+			} 
+		}  
+	} 
+	#company_BankIBC
+	if  = {
+		limit = {
+			global_var:stockpiling_$currency$_company_BankIBC_fixe > 1000000
+		}
+		every_country = {
+			every_company = {
+				limit = {
+					type = company_type:company_BankIBC
+				} 	
+				root = {
+					add_to_variable_list = {
+						name = sell_currency_privat_bank_variable_list
+						target = prev
+					}
+				}  
+			} 
+		}  
+	} 
+	#company_Mitsubishiexchangehousebank
+	if  = {
+		limit = {
+			global_var:stockpiling_$currency$_company_Mitsubishiexchangehousebank_fixe > 1000000
+		}
+		every_country = {
+			every_company = {
+				limit = {
+					type = company_type:company_Mitsubishiexchangehousebank
+				} 	
+				root = {
+					add_to_variable_list = {
+						name = sell_currency_privat_bank_variable_list
+						target = prev
+					}
+				}  
+			} 
+		}  
+	} 
+ 
+	root  = {
+		if = {
+			clear_variable_list = list_before_order
+			every_in_list = {
+				variable = sell_currency_privat_bank_variable_list
+				root = {
+					add_to_variable_list = {
+						name = list_before_order
+						target = prev
+					}
+				}
+			} 
+			clear_variable_list = sell_currency_privat_bank_variable_list_ordered
+			if = {
+				ordered_in_list = {
+					variable = list_before_order
+					order_by = gdp_var
+					max = 100
+					check_range_bounds = no
+					root = {
+						add_to_variable_list = {
+							name = sell_currency_privat_bank_variable_list_ordered
+							target = prev
+						}
+					}
+				}
+			} 
+		}
+		clear_variable_list = sell_currency_privat_bank_variable_list
+	}
+}
+

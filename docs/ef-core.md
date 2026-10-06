@@ -6,13 +6,13 @@
 - `common/buildings/ef_01_industry.txt`, `ef_02_agro.txt`, `ef_03_mines.txt` (кроме `building_silver_mine`), `ef_04_plantations.txt`, `ef_06_urban_center.txt`, `ef_09_misc_resource.txt`, `ef_11_private_infrastructure.txt` (порт, железная дорога, торговый центр) — `INJECT:building_<vanilla>` с добавлением `pmg_market_liquidity` и `pmg_private_ownership_{manufacture,agricultural,mining,railroad}_stock` в ванильные здания; `ef_11` также `INJECT:building_financial_district` (оценки инвестиций `bg_ef_private_construction_score`, `bg_financial_centre_score`, `bg_construction_score`).
 - `common/buildings/ef_03_mines.txt:53` — новое `building_silver_mine` (группа `bg_silver_mining`, доступно только при `silver_mine_max_level`, 4 PMG).
 - `common/buildings/ef_14_private_construction.txt` — `building_ef_private_construction`: пустышка (не строится, `potential = always no`); реальная частная стройка — PSC `buildings/zz_PSC_construction.txt`.
-- `common/buildings/ef_15_bank.txt` — `building_bank` (центральный банк, `ownership_type = no_ownership`, PMG `pmg_minting_type`, `pmg_monetary_policy`; `pmg_currency_type` закомментирована). Частный банк — `buildings/ld_bank.txt`.
+- `common/buildings/ef_15_bank.txt` — `building_bank` (центральный банк, `ownership_type = no_ownership`, PMG `pmg_minting_type`, `pmg_monetary_policy`). Частный банк — `buildings/ld_bank.txt`.
 - `common/buildings/ef_16_financial_centre.txt` — `building_financial_centre` (общий, только в столице, нет, если уже есть национальный вариант) и 40 страновых вариантов `building_financial_centre_<tag>` (`arg aus bav bel bic brz chi chl den dei egy fra frm gbr gbr_2 gre hkh han ita jap mex net nsw ont peu por pru que rus saf sar sic spa swe swi tus tur uru usa usa_2 sax`), по ~44 строки каждый, одинаковые PMG (биржи 4 видов + `pmg_bond_exchange`).
 - `common/production_method_groups/01_ef_industry.txt`, `02_ef_agro.txt`, `03_ef_mine.txt`, `11_ef_private_infrastructure.txt`, `14_ef_private_construction.txt`, `15_ef_bank.txt`, `16_ef_financial_centre.txt` — PMG: `pmg_market_liquidity`, `pmg_private_ownership_{manufacture,agricultural,mining,railroad}_stock`, 4 PMG серебряной шахты, `pmg_minting_type`, `pmg_monetary_policy`, `pmg_currency_type`, `pmg_bond_exchange`, 4 биржи.
 - `common/production_methods/00_ef_market_liquidity.txt` — `pm_no_market_liquidity`, `pm_market_liquidity_currency` (вход `goods_input_liquidity_currency_add = 28`), 5 `pm_government_aid_*` и `pm_privately_owned_building_arms_industry` (нигде не подключены).
 - `common/production_methods/01_ef_industry.txt`, `02_ef_agro.txt`, `03_ef_mines.txt`, `11_ef_private_infrastructure.txt` — PM «частного владения» (`pm_no_private_ownership_*` / `pm_private_ownership_majority_*`: выход акций 12,5 на рабочую силу), PM серебряной шахты (кирка, насосы, взрывчатка, паровой осёл), `REPLACE:pm_company_headquarter_*` (16 ванильных PM штаб-квартиры с ослабленными акциями капиталистов).
 - `common/production_methods/14_ef_private_construction.txt` — 4 PM `pm_*_buildings_private` для пустышки E&F (без живого здания).
-- `common/production_methods/15_ef_bank.txt` — 6 PM стандарта (`pm_<fiat|silver|bimetallism|gold|gold_exchange|external_exchange>_standard_bank_money_currency`: выход `goods_output_bond_add` и `country_minting_add`), `pm_no_monetary_policy`/`pm_revaluation`/`pm_devaluation`, `pm_no_currency_type`, `pm_currency_liquidity_currency`.
+- `common/production_methods/15_ef_bank.txt` — 6 PM стандарта (`pm_<fiat|silver|bimetallism|gold|gold_exchange|external_exchange>_standard_bank_money_currency`: выход `goods_output_bond_add` и `country_minting_add`), `pm_no_monetary_policy`/`pm_revaluation`/`pm_devaluation`.
 - `common/production_methods/16_ef_financial_centre.txt` — `pm_bond_exchange` (выход `mutual_funds`, вход `bond`), 4 пары `pm_[no_]<kind>_stock_exchange` (вход акций).
 - `common/building_groups/00_ef_building_groups.txt` — `bg_bank`, `bg_financial_centre`, `bg_national_stockpile`, `bg_ef_private_construction`, `bg_silver_mining`.
 ### Модификаторы
@@ -39,7 +39,6 @@
 - `common/journal_entries/00_ef_bank_central_je.txt` (`bank_je_central_1`), `00_ef_divers_je.txt` (`latin_monetary_union_je_1`, `scandinavian_monetary_union_je_1`, `silver_crisis_je_1`, `je_ef_efcc_situation`), `00_ef_financial_center_je.txt` (`financial_center_je_1`, `financial_center_je_2`); `common/journal_entry_groups/00_ef_journal_entries.txt` — `je_group_ef`.
 - `events/00_ef_economic_event.txt` — 52 события `00_ef_economic_event.<N>` (историческое объединение валют, ограбление, уведомления, кризисы).
 - `common/defines/00_ef_defines.txt` (`NEconomy`: `PRICE_RANGE=0.99`, `GOODS_SHORTAGE_PENALTY_MAX=0.9`, `GOLD_RESERVE_RETURNS_FACTOR=0.0001`), `zz_ef_reinvestment_defines.txt` (`REINVESTMENT_SUBSISTENCE_FRACTION_REDUCTION=0`, `OWNER_COMPANY_PRIVATIZATION_CHANCE_MULTIPLIER=0.4`), `zzzz_ef_credit_def.txt` (`COUNTRY_MIN_CREDIT_SCALED=1.7`), `PSC_defines.txt`.
-- `common/game_rules/00_EF_unique_companies_game_rules.txt` — `TRY_REPLACE` ванильных правил `unique_companies_banks`/`_newspapers`: по умолчанию `*_disabled`.
 
 ## Поток / порядок
 Расчёт — по пульсам (см. `entry-points`): `ef_on_*_pulse_country` зовёт эффекты из `00_on_action_main.txt`, а те — эффекты `01_economic_scripted_effects.txt`. Оглавление `01_economic_scripted_effects.txt` (строка; эффект; кто живой):
@@ -52,18 +51,16 @@
 | 7956–10161 | `fluctuations_*`, `cumulative_inflation_*`, 5 групп `inflation_on_<type>_market_value_fluctuations` + `_rolling_inflation_6_months_effect` + `reset_*` | да (месячный/годовой) |
 | 10024–10161 | `monetary_policy_inflation[_reset|_reset_law|_base_rate]` | да (игрок) |
 | 10161–11434 | `currency_strength_modifier`, `inflation_modifier`, `money_value_target_modification`, `devaluation/revaluation_money_value_target*` | да |
-| 11529–14606 | `money_creation_in_foreign_exchange_reserve`, `money_destruction_in_foreign_exchange_reserve` (по 1,5 тыс. строк) | нет вызовов (refs=0) |
 | 14606–17370 | `extreme_weak_currency_solution[_player]`, `reset_balance`, `reset_law_event_currency`, `reset_debt_in_currency`, `reset_debt_currency_reserve_and_export_value` (24 тыс. строк) | да — из scripted_guis (кнопки смены закона) |
 | 41512–42367 | `devaluation_on`, `revaluation_on`, `set_reset_monetary_system_status`, `on_activate_*_law` | — |
 | 41765 | `trade_balance` (388) | да (месячный) |
 | 42367–42720 | `stockpiling_currency`, `stockpiling_currency_type_1` | да |
 | 42720–91109 | 95×3 `buy_<cur>_currency`, `sell_<cur>_currency`, `sell_<cur>_currency_crisis` (по ~510 строк на валюту) | да, из `buy_sell_currency_order`/`ai_buy_sell_currency`; `_crisis` — из `00_on_action_main.txt:9164` и др.; пишут `gold_state_1`/`silver_state_1` |
-| 91172–92241 | `sell_private_bank_reserve_currency`, `private_bank_reserve_currency`, `private_bank_arbitrage_gold_drain`/`_silver_drain` | арбитраж живой (годовой, биметаллизм до 1873) |
-| 92238–92575 | `privat_bank_buy_currency`, `privat_bank_sell_currency` — пустые; `buy_currency_privat_bank`, `sell_currency_privat_bank` (298 строк) | вызываются только из пустых — мертвы |
+| 91172–92241 | `private_bank_arbitrage_gold_drain`/`_silver_drain` | арбитраж живой (годовой, биметаллизм до 1873) |
 | 92575, 104603 | `reset_debt_in_national_currency[_player]` (2×2 тыс. строк) | да (GUI/смена закона) |
 | 94692–99107 | `stockpiling_capital_state_transfert`, `..._financial_center_place`, `enemy_capital_is_occuped` (1,8 тыс.), `enemy_stats_is_occuped` | да (месячный, решение ИИ, бой) |
 | 99199–104511 | `central_bank_production_methods`, `_2` (2,7 тыс., refs=0: вызов закомментирован), `_2_act`, `_3` (2,4 тыс.), `_4` | `central_bank_production_methods`, `_3` живые; `_2` мёртв |
-| 106713–107610 | `remove_suject_currency`, `subject_currency`, `private_bank_gold_lose/_silver_lose/_gold_gain/_silver_gain` | подданные — живые; `private_bank_*` — из арбитража |
+| 106713–107610 | `remove_suject_currency`, `subject_currency` | живые (подданные) |
 Внутри E&F-тел встроены вызовы модели: `zz_ef_cb_rate_step`, `zz_ef_std_switch_*`, `zz_ef_privbank_interest_pay`, `zz_ef_mp_init/_clear`, `zz_ef_crisis_redeem` (95), `zz_ef_cb_cover`, `zz_ef_fx_deal_size`, `zz_ef_cover_normal` (по 95 валютам в `buy_/sell_`).
 
 ## Переменные
@@ -73,7 +70,7 @@
 | `money_value_<cur>` / `money_value_target_<cur>` / `money_value_in_gold_<cur>` (глобальные) | курс валюты, цель и в золоте по каждой из 95 валют | `money_value[_target|_in_gold]_<cur>_global_var` | инфляция, GUI |
 | `base_rate_percentage`, `rise_base_rate`, `down_base_rate` | ставка ЦБ; модификаторы направления | `zz_ef_cb_rate_step` | `central_bank_ef_on_monthly_pulse_country`, PSC |
 | `speculative_share_1` / `_2` | пузырь / индекс перестройки | `ld_bubble`, `ld_pb_overbuild_counter` | JE `financial_center_je_2` |
-| `looting_1_year`, `attack_on_currency` | флаги грабежа / атаки на валюту | `enemy_capital_is_occuped`, годовой пульс | `ef_on_yearly_pulse_reset` |
+| `looting_1_year` | флаг грабежа | `enemy_capital_is_occuped`, годовой пульс | `ef_on_yearly_pulse_reset` |
 | `global_var:money_value_median` | медиана курсов | `median_currency_value` | `central_bank_ef_on_monthly_pulse_country` |
 
 ## Вызовы и связи

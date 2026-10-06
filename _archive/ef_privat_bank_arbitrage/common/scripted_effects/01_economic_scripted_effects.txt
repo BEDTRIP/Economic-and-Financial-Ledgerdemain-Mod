@@ -1,0 +1,1645 @@
+# из common/scripted_effects/01_economic_scripted_effects.txt, строки 92125–92429 (на 2026-10-06), пустые обёртки privat_bank_buy_currency / privat_bank_sell_currency и тела buy_currency_privat_bank / sell_currency_privat_bank
+privat_bank_buy_currency = {
+	# В3: E&F's private-bank purchase of the currency for metal -- off
+}
+buy_currency_privat_bank = {
+
+	#scope:
+	root = {
+		save_scope_as = seller
+		every_scope_state = {
+			if = {
+				limit = {
+					has_modifier = central_bank_historic_place
+					is_capital = yes
+				}
+				save_scope_as = central_bank_site
+			}
+		}
+	}
+
+	random_in_global_list = {
+		variable = global_arbitrage_bank_variable_list_ordered #private bank
+		save_scope_as = buyer
+	}
+	if = {
+		limit = { exists = scope:buyer }
+
+		scope:buyer.owner = {
+			save_scope_as = buyer_country
+		}
+
+		#mecha
+		if = {
+			limit = {
+				exists = scope:seller
+				scope:seller = {
+					has_law = law_type:law_$currency$_currency
+					#buy_currency_1 = yes
+				}
+			}
+
+			scope:buyer_country = {
+				#gold
+				if = {
+					limit = {
+						law_$currency$_monetary_system_GS_GES_trigger = yes
+					}
+
+					if = {
+						limit = {
+							investment_pool_10_in_gold < scope:seller.central_bank_debt_05_for_privat_bank
+						}
+						set_variable = {
+							name = arbitrage_value_in_metal
+							value = investment_pool_10_in_gold
+						}
+						scope:central_bank_site = {
+							change_variable = {
+								name = gold_state_1
+								add = scope:buyer_country.var:arbitrage_value_in_metal
+							}
+						}
+
+						private_bank_gold_lose = yes
+
+						# add_investment_pool = {
+						# 	subtract = var:arbitrage_value_in_metal
+						# }
+						set_variable = {
+							name = arbitrage_value_in_currency
+							value = {
+								add = var:arbitrage_value_in_metal
+								divide = scope:seller.money_value
+							}
+						}
+					}
+					if = {
+						limit = {
+							investment_pool_10_in_gold > scope:seller.central_bank_debt_05_for_privat_bank
+						}
+						set_variable = {
+							name = arbitrage_value_in_metal
+							value = scope:seller.central_bank_debt_05_for_privat_bank
+						}
+						scope:central_bank_site = {
+							change_variable = {
+								name = gold_state_1
+								add = scope:buyer_country.var:arbitrage_value_in_metal
+							}
+						}
+						private_bank_gold_lose = yes
+
+						# add_investment_pool = {
+						# 	subtract = var:arbitrage_value_in_metal
+						# }
+						set_variable = {
+							name = arbitrage_value_in_currency
+							value = {
+								add = var:arbitrage_value_in_metal
+								divide = scope:seller.money_value
+							}
+						}
+					}
+				}
+				#silver
+				if = {
+					limit = {
+						law_$currency$_monetary_system_SS_BS_trigger = yes
+					}
+
+					if = {
+						limit = {
+							investment_pool_10_in_silver < scope:seller.central_bank_debt_05_for_privat_bank
+						}
+						set_variable = {
+							name = arbitrage_value_in_metal
+							value = investment_pool_10_in_silver
+						}
+						scope:central_bank_site = {
+							change_variable = {
+								name = silver_state_1
+								add = scope:buyer_country.var:arbitrage_value_in_metal
+							}
+						}
+
+						private_bank_silver_lose = yes
+
+						# add_investment_pool = {
+						# 	subtract = var:arbitrage_value_in_metal
+						# }
+						set_variable = {
+							name = arbitrage_value_in_currency
+							value = {
+								add = var:arbitrage_value_in_metal
+								divide = scope:seller.money_value
+							}
+						}
+					}
+					if = {
+						limit = {
+							investment_pool_10_in_silver > scope:seller.central_bank_debt_05_for_privat_bank
+						}
+						set_variable = {
+							name = arbitrage_value_in_metal
+							value = scope:seller.central_bank_debt_05_for_privat_bank
+						}
+						scope:central_bank_site = {
+							change_variable = {
+								name = silver_state_1
+								add = scope:buyer_country.var:arbitrage_value_in_metal
+							}
+						}
+
+						private_bank_silver_lose = yes
+
+						# add_investment_pool = {
+						# 	subtract = var:arbitrage_value_in_metal
+						# }
+						set_variable = {
+							name = arbitrage_value_in_currency
+							value = {
+								add = var:arbitrage_value_in_metal
+								divide = scope:seller.money_value
+							}
+						}
+					}
+				}
+
+				if  = {
+					limit = {
+						var:arbitrage_value_in_currency > 0
+					}
+					private_bank_reserve_currency =  {
+						CURRENCY = $currency$
+					}
+				}
+			}
+		}
+
+	}
+}
+
+privat_bank_sell_currency = {
+	# В3: E&F's private-bank sale of the currency for CB metal -- off
+}
+sell_currency_privat_bank = {
+	#scope:
+	root = {
+		save_scope_as = buyer
+		every_scope_state = {
+			if = {
+				limit = {
+					has_modifier = central_bank_historic_place
+					is_capital = yes
+				}
+				save_scope_as = central_bank_site
+			}
+		}
+	}
+
+	sell_currency_privat_bank_variable_list = {
+		currency = $currency$
+	}
+
+	random_in_list = {
+		variable = sell_currency_privat_bank_variable_list_ordered #private bank
+		save_scope_as = seller
+	}
+
+	# Guard: if the list was empty, we won't have a seller; abort cleanly.
+	if = {
+		limit = { NOT = { exists = scope:seller } }
+	}
+	else = {
+		scope:seller.owner = {
+			save_scope_as = seller_country
+		}
+
+		#mecha
+		if = {
+			limit = {
+				exists = scope:buyer
+				scope:buyer = {
+					has_law = law_type:law_$currency$_currency
+				}
+			}
+
+			# Only run if we have a seller.
+			if = {
+				limit = { exists = scope:seller }
+				sell_private_bank_reserve_currency = {
+					currency = $currency$
+				}
+			}
+
+			scope:buyer = {
+				#gold
+				if = {
+					limit = {
+						law_$currency$_monetary_system_GS_GES_trigger = yes
+					}
+					set_variable = {
+						name = sell_arbitrage_value_in_metal
+						value = {
+							add = var:sell_arbitrage_value_10_in_currency
+							multiply = money_value
+						}
+					}
+
+					if = {
+						limit = {
+							var:sell_arbitrage_value_in_metal < gold_state_native_for_stockpile
+							exists = scope:central_bank_site
+						}
+						scope:central_bank_site = {
+							change_variable = {
+								name = gold_state_1
+								subtract = scope:buyer.var:sell_arbitrage_value_in_metal
+							}
+
+							change_variable = {
+								name = stockpiling_$currency$_state_1
+								add = scope:buyer.var:sell_arbitrage_value_10_in_currency
+							}
+						}
+					}
+
+					private_bank_gold_gain = yes
+				}
+				#silver
+				if = {
+					limit = {
+						law_$currency$_monetary_system_SS_BS_trigger = yes
+					}
+					set_variable = {
+						name = sell_arbitrage_value_in_metal
+						value = {
+							add = var:sell_arbitrage_value_10_in_currency
+							multiply = money_value
+						}
+					}
+
+					if = {
+						limit = {
+							var:sell_arbitrage_value_in_metal < silver_state_native_for_stockpile
+							exists = scope:central_bank_site
+						}
+						scope:central_bank_site = {
+							change_variable = {
+								name = silver_state_1
+								subtract = scope:buyer.var:sell_arbitrage_value_in_metal
+							}
+
+							change_variable = {
+								name = stockpiling_$currency$_state_1
+								add = scope:buyer.var:sell_arbitrage_value_10_in_currency
+							}
+						}
+					}
+
+					private_bank_silver_gain = yes
+				}
+			}
+		}
+	}
+}
+
+# из common/scripted_effects/01_economic_scripted_effects.txt, строки 103919–104113 (на 2026-10-06), осиротевшие после выноса privat_bank_*, помощники частных банков: private_bank_silver_gain
+private_bank_silver_gain = {
+
+	#company_Rothschild_Bank_gbr
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_Rothschild_Bank_gbr
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_gbr_silver_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_Rothschild_Bank_fra
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_Rothschild_Bank_fra
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_fra_silver_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_Rothschild_Bank_ger
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_Rothschild_Bank_ger
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_ger_silver_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_Rothschild_Bank_aus
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_Rothschild_Bank_aus
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_aus_silver_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_Rothschild_Bank_ita
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_Rothschild_Bank_ita
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_ita_silver_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_BanqueDeParisEtDesPaysBas
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_BanqueDeParisEtDesPaysBas
+			}
+		}
+		change_global_variable = {
+			name = company_BanqueDeParisEtDesPaysBas_silver_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_BankJPMorgan
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_BankJPMorgan
+			}
+		}
+		change_global_variable = {
+			name = company_BankJPMorgan_silver_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_DeutscheBank
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_DeutscheBank
+			}
+		}
+		change_global_variable = {
+			name = company_DeutscheBank_silver_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_BankHSBC
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_BankHSBC
+			}
+		}
+		change_global_variable = {
+			name = company_BankHSBC_silver_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_Bankenverein
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_Bankenverein
+			}
+		}
+		change_global_variable = {
+			name = company_Bankenverein_silver_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_BancaCommercialeItaliana
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_BancaCommercialeItaliana
+			}
+		}
+		change_global_variable = {
+			name = company_BancaCommercialeItaliana_silver_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_DeNederlandscheBank
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_DeNederlandscheBank
+			}
+		}
+		change_global_variable = {
+			name = company_DeNederlandscheBank_silver_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_amsterdamschebank
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_amsterdamschebank
+			}
+		}
+		change_global_variable = {
+			name = company_amsterdamschebank_silver_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_RotterdamscheBankvereeniging
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_RotterdamscheBankvereeniging
+			}
+		}
+		change_global_variable = {
+			name = company_RotterdamscheBankvereeniging_silver_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_BankIBC
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_BankIBC
+			}
+		}
+		change_global_variable = {
+			name = company_BankIBC_silver_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_Mitsubishiexchangehousebank
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_Mitsubishiexchangehousebank
+			}
+		}
+		change_global_variable = {
+			name = company_Mitsubishiexchangehousebank_silver_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+}
+
+# из common/scripted_effects/01_economic_scripted_effects.txt, строки 103724–103918 (на 2026-10-06), осиротевшие после выноса privat_bank_*, помощники частных банков: private_bank_gold_gain
+private_bank_gold_gain = {
+
+	#company_Rothschild_Bank_gbr
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_Rothschild_Bank_gbr
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_gbr_gold_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_Rothschild_Bank_fra
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_Rothschild_Bank_fra
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_fra_gold_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_Rothschild_Bank_ger
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_Rothschild_Bank_ger
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_ger_gold_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_Rothschild_Bank_aus
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_Rothschild_Bank_aus
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_aus_gold_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_Rothschild_Bank_ita
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_Rothschild_Bank_ita
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_ita_gold_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_BanqueDeParisEtDesPaysBas
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_BanqueDeParisEtDesPaysBas
+			}
+		}
+		change_global_variable = {
+			name = company_BanqueDeParisEtDesPaysBas_gold_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_BankJPMorgan
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_BankJPMorgan
+			}
+		}
+		change_global_variable = {
+			name = company_BankJPMorgan_gold_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_DeutscheBank
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_DeutscheBank
+			}
+		}
+		change_global_variable = {
+			name = company_DeutscheBank_gold_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_BankHSBC
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_BankHSBC
+			}
+		}
+		change_global_variable = {
+			name = company_BankHSBC_gold_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_Bankenverein
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_Bankenverein
+			}
+		}
+		change_global_variable = {
+			name = company_Bankenverein_gold_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_BancaCommercialeItaliana
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_BancaCommercialeItaliana
+			}
+		}
+		change_global_variable = {
+			name = company_BancaCommercialeItaliana_gold_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_DeNederlandscheBank
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_DeNederlandscheBank
+			}
+		}
+		change_global_variable = {
+			name = company_DeNederlandscheBank_gold_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_amsterdamschebank
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_amsterdamschebank
+			}
+		}
+		change_global_variable = {
+			name = company_amsterdamschebank_gold_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_RotterdamscheBankvereeniging
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_RotterdamscheBankvereeniging
+			}
+		}
+		change_global_variable = {
+			name = company_RotterdamscheBankvereeniging_gold_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_BankIBC
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_BankIBC
+			}
+		}
+		change_global_variable = {
+			name = company_BankIBC_gold_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+	#company_Mitsubishiexchangehousebank
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_Mitsubishiexchangehousebank
+			}
+		}
+		change_global_variable = {
+			name = company_Mitsubishiexchangehousebank_gold_stockpile_fix
+			add = scope:buyer.var:sell_arbitrage_value_in_metal
+		}
+	}
+}
+
+# из common/scripted_effects/01_economic_scripted_effects.txt, строки 103529–103722 (на 2026-10-06), осиротевшие после выноса privat_bank_*, помощники частных банков: private_bank_silver_lose
+private_bank_silver_lose = {
+	#company_Rothschild_Bank_gbr
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_Rothschild_Bank_gbr
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_gbr_silver_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_Rothschild_Bank_fra
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_Rothschild_Bank_fra
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_fra_silver_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_Rothschild_Bank_ger
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_Rothschild_Bank_ger
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_ger_silver_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_Rothschild_Bank_aus
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_Rothschild_Bank_aus
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_aus_silver_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_Rothschild_Bank_ita
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_Rothschild_Bank_ita
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_ita_silver_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_BanqueDeParisEtDesPaysBas
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_BanqueDeParisEtDesPaysBas
+			}
+		}
+		change_global_variable = {
+			name = company_BanqueDeParisEtDesPaysBas_silver_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_BankJPMorgan
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_BankJPMorgan
+			}
+		}
+		change_global_variable = {
+			name = company_BankJPMorgan_silver_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_DeutscheBank
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_DeutscheBank
+			}
+		}
+		change_global_variable = {
+			name = company_DeutscheBank_silver_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_BankHSBC
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_BankHSBC
+			}
+		}
+		change_global_variable = {
+			name = company_BankHSBC_silver_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_Bankenverein
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_Bankenverein
+			}
+		}
+		change_global_variable = {
+			name = company_Bankenverein_silver_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_BancaCommercialeItaliana
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_BancaCommercialeItaliana
+			}
+		}
+		change_global_variable = {
+			name = company_BancaCommercialeItaliana_silver_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_DeNederlandscheBank
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_DeNederlandscheBank
+			}
+		}
+		change_global_variable = {
+			name = company_DeNederlandscheBank_silver_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_amsterdamschebank
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_amsterdamschebank
+			}
+		}
+		change_global_variable = {
+			name = company_amsterdamschebank_silver_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_RotterdamscheBankvereeniging
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_RotterdamscheBankvereeniging
+			}
+		}
+		change_global_variable = {
+			name = company_RotterdamscheBankvereeniging_silver_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_BankIBC
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_BankIBC
+			}
+		}
+		change_global_variable = {
+			name = company_BankIBC_silver_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_Mitsubishiexchangehousebank
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_Mitsubishiexchangehousebank
+			}
+		}
+		change_global_variable = {
+			name = company_Mitsubishiexchangehousebank_silver_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+}
+
+# из common/scripted_effects/01_economic_scripted_effects.txt, строки 103334–103528 (на 2026-10-06), осиротевшие после выноса privat_bank_*, помощники частных банков: private_bank_gold_lose
+private_bank_gold_lose = {
+
+	#company_Rothschild_Bank_gbr
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_Rothschild_Bank_gbr
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_gbr_gold_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_Rothschild_Bank_fra
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_Rothschild_Bank_fra
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_fra_gold_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_Rothschild_Bank_ger
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_Rothschild_Bank_ger
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_ger_gold_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_Rothschild_Bank_aus
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_Rothschild_Bank_aus
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_aus_gold_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_Rothschild_Bank_ita
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_Rothschild_Bank_ita
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_ita_gold_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_BanqueDeParisEtDesPaysBas
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_BanqueDeParisEtDesPaysBas
+			}
+		}
+		change_global_variable = {
+			name = company_BanqueDeParisEtDesPaysBas_gold_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_BankJPMorgan
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_BankJPMorgan
+			}
+		}
+		change_global_variable = {
+			name = company_BankJPMorgan_gold_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_DeutscheBank
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_DeutscheBank
+			}
+		}
+		change_global_variable = {
+			name = company_DeutscheBank_gold_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_BankHSBC
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_BankHSBC
+			}
+		}
+		change_global_variable = {
+			name = company_BankHSBC_gold_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_Bankenverein
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_Bankenverein
+			}
+		}
+		change_global_variable = {
+			name = company_Bankenverein_gold_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_BancaCommercialeItaliana
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_BancaCommercialeItaliana
+			}
+		}
+		change_global_variable = {
+			name = company_BancaCommercialeItaliana_gold_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_DeNederlandscheBank
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_DeNederlandscheBank
+			}
+		}
+		change_global_variable = {
+			name = company_DeNederlandscheBank_gold_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_amsterdamschebank
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_amsterdamschebank
+			}
+		}
+		change_global_variable = {
+			name = company_amsterdamschebank_gold_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_RotterdamscheBankvereeniging
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_RotterdamscheBankvereeniging
+			}
+		}
+		change_global_variable = {
+			name = company_RotterdamscheBankvereeniging_gold_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_BankIBC
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_BankIBC
+			}
+		}
+		change_global_variable = {
+			name = company_BankIBC_gold_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+	#company_Mitsubishiexchangehousebank
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_Mitsubishiexchangehousebank
+			}
+		}
+		change_global_variable = {
+			name = company_Mitsubishiexchangehousebank_gold_stockpile_fix
+			subtract = scope:buyer_country.var:arbitrage_value_in_metal
+		}
+	}
+}
+
+# из common/scripted_effects/01_economic_scripted_effects.txt, строки 88336–88529 (на 2026-10-06), осиротевшие после выноса privat_bank_*, помощники частных банков: private_bank_reserve_currency
+private_bank_reserve_currency = {
+	#company_Rothschild_Bank_gbr
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_Rothschild_Bank_gbr
+			}
+		}
+		change_global_variable = {
+			name = stockpiling_$CURRENCY$_company_Rothschild_Bank_gbr_fixe
+			add = var:arbitrage_value_in_currency
+		}
+	}
+	#company_Rothschild_Bank_fra
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_Rothschild_Bank_fra
+			}
+		}
+		change_global_variable = {
+			name = stockpiling_$CURRENCY$_company_Rothschild_Bank_fra_fixe
+			add = var:arbitrage_value_in_currency
+		}
+	}
+	#company_Rothschild_Bank_ger
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_Rothschild_Bank_ger
+			}
+		}
+		change_global_variable = {
+			name = stockpiling_$CURRENCY$_company_Rothschild_Bank_ger_fixe
+			add = var:arbitrage_value_in_currency
+		}
+	}
+	#company_Rothschild_Bank_aus
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_Rothschild_Bank_aus
+			}
+		}
+		change_global_variable = {
+			name = stockpiling_$CURRENCY$_company_Rothschild_Bank_aus_fixe
+			add = var:arbitrage_value_in_currency
+		}
+	}
+	#company_Rothschild_Bank_ita
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_Rothschild_Bank_ita
+			}
+		}
+		change_global_variable = {
+			name = stockpiling_$CURRENCY$_company_Rothschild_Bank_ita_fixe
+			add = var:arbitrage_value_in_currency
+		}
+	}
+	#company_BanqueDeParisEtDesPaysBas
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_BanqueDeParisEtDesPaysBas
+			}
+		}
+		change_global_variable = {
+			name = stockpiling_$CURRENCY$_company_BanqueDeParisEtDesPaysBas_fixe
+			add = var:arbitrage_value_in_currency
+		}
+	}
+	#company_BankJPMorgan
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_BankJPMorgan
+			}
+		}
+		change_global_variable = {
+			name = stockpiling_$CURRENCY$_company_BankJPMorgan_fixe
+			add = var:arbitrage_value_in_currency
+		}
+	}
+	#company_DeutscheBank
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_DeutscheBank
+			}
+		}
+		change_global_variable = {
+			name = stockpiling_$CURRENCY$_company_DeutscheBank_fixe
+			add = var:arbitrage_value_in_currency
+		}
+	}
+	#company_BankHSBC
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_BankHSBC
+			}
+		}
+		change_global_variable = {
+			name = stockpiling_$CURRENCY$_company_BankHSBC_fixe
+			add = var:arbitrage_value_in_currency
+		}
+	}
+	#company_Bankenverein
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_Bankenverein
+			}
+		}
+		change_global_variable = {
+			name = stockpiling_$CURRENCY$_company_Bankenverein_fixe
+			add = var:arbitrage_value_in_currency
+		}
+	}
+	#company_BancaCommercialeItaliana
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_BancaCommercialeItaliana
+			}
+		}
+		change_global_variable = {
+			name = stockpiling_$CURRENCY$_company_BancaCommercialeItaliana_fixe
+			add = var:arbitrage_value_in_currency
+		}
+	}
+	#company_DeNederlandscheBank
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_DeNederlandscheBank
+			}
+		}
+		change_global_variable = {
+			name = stockpiling_$CURRENCY$_company_DeNederlandscheBank_fixe
+			add = var:arbitrage_value_in_currency
+		}
+	}
+	#company_amsterdamschebank
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_amsterdamschebank
+			}
+		}
+		change_global_variable = {
+			name = stockpiling_$CURRENCY$_company_amsterdamschebank_fixe
+			add = var:arbitrage_value_in_currency
+		}
+	}
+	#company_RotterdamscheBankvereeniging
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_RotterdamscheBankvereeniging
+			}
+		}
+		change_global_variable = {
+			name = stockpiling_$CURRENCY$_company_RotterdamscheBankvereeniging_fixe
+			add = var:arbitrage_value_in_currency
+		}
+	}
+	#company_BankIBC
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_BankIBC
+			}
+		}
+		change_global_variable = {
+			name = stockpiling_$CURRENCY$_company_BankIBC_fixe
+			add = var:arbitrage_value_in_currency
+		}
+	}
+	#company_Mitsubishiexchangehousebank
+	if = {
+		limit = {
+			scope:buyer = {
+				is_company_type = company_type:company_Mitsubishiexchangehousebank
+			}
+		}
+		change_global_variable = {
+			name = stockpiling_$CURRENCY$_company_Mitsubishiexchangehousebank_fixe
+			add = var:arbitrage_value_in_currency
+		}
+	}
+}
+
+# из common/scripted_effects/01_economic_scripted_effects.txt, строки 87982–88334 (на 2026-10-06), осиротевшие после выноса privat_bank_*, помощники частных банков: sell_private_bank_reserve_currency
+sell_private_bank_reserve_currency = {
+	#company_Rothschild_Bank_gbr
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_Rothschild_Bank_gbr
+			}
+ 		}
+		set_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			value = global_var:stockpiling_$currency$_company_Rothschild_Bank_gbr_fixe
+		}
+		change_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			multiply = 0.1 #10% de la vente maximal à chaque atbitrage
+		}
+
+		change_global_variable = {
+			name = stockpiling_$currency$_company_Rothschild_Bank_gbr_fixe
+			subtract = var:sell_arbitrage_value_10_in_currency
+		}
+	}
+	#company_Rothschild_Bank_fra
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_Rothschild_Bank_fra
+			}
+			global_var:stockpiling_$currency$_company_Rothschild_Bank_fra_fixe > 1000000
+		}
+		set_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			value = global_var:stockpiling_$currency$_company_Rothschild_Bank_fra_fixe
+		}
+		change_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			multiply = 0.1 #10% de la vente maximal à chaque atbitrage
+		}
+
+		change_global_variable = {
+			name = stockpiling_$currency$_company_Rothschild_Bank_fra_fixe
+			subtract = var:sell_arbitrage_value_10_in_currency
+		}
+	}
+	#company_Rothschild_Bank_ger
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_Rothschild_Bank_ger
+			}
+			global_var:stockpiling_$currency$_company_Rothschild_Bank_ger_fixe > 1000000
+		}
+		set_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			value = global_var:stockpiling_$currency$_company_Rothschild_Bank_ger_fixe
+		}
+		change_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			multiply = 0.1 #10% de la vente maximal à chaque atbitrage
+		}
+
+		change_global_variable = {
+			name = stockpiling_$currency$_company_Rothschild_Bank_ger_fixe
+			subtract = var:sell_arbitrage_value_10_in_currency
+		}
+	}
+	#company_Rothschild_Bank_aus
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_Rothschild_Bank_aus
+			}
+			global_var:stockpiling_$currency$_company_Rothschild_Bank_aus_fixe > 1000000
+		}
+		set_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			value = global_var:stockpiling_$currency$_company_Rothschild_Bank_aus_fixe
+		}
+		change_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			multiply = 0.1 #10% de la vente maximal à chaque atbitrage
+		}
+
+		change_global_variable = {
+			name = stockpiling_$currency$_company_Rothschild_Bank_aus_fixe
+			subtract = var:sell_arbitrage_value_10_in_currency
+		}
+	}
+	#company_Rothschild_Bank_ita
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_Rothschild_Bank_ita
+			}
+			global_var:stockpiling_$currency$_company_Rothschild_Bank_ita_fixe > 1000000
+		}
+		set_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			value = global_var:stockpiling_$currency$_company_Rothschild_Bank_ita_fixe
+		}
+		change_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			multiply = 0.1 #10% de la vente maximal à chaque atbitrage
+		}
+
+		change_global_variable = {
+			name = stockpiling_$currency$_company_Rothschild_Bank_ita_fixe
+			subtract = var:sell_arbitrage_value_10_in_currency
+		}
+	}
+	#company_BanqueDeParisEtDesPaysBas
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_BanqueDeParisEtDesPaysBas
+			}
+			global_var:stockpiling_$currency$_company_BanqueDeParisEtDesPaysBas_fixe > 1000000
+		}
+		set_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			value = global_var:stockpiling_$currency$_company_BanqueDeParisEtDesPaysBas_fixe
+		}
+		change_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			multiply = 0.1 #10% de la vente maximal à chaque atbitrage
+		}
+
+		change_global_variable = {
+			name = stockpiling_$currency$_company_BanqueDeParisEtDesPaysBas_fixe
+			subtract = var:sell_arbitrage_value_10_in_currency
+		}
+	}
+	#company_BankJPMorgan
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_BankJPMorgan
+			}
+			global_var:stockpiling_$currency$_company_BankJPMorgan_fixe > 1000000
+		}
+		set_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			value = global_var:stockpiling_$currency$_company_BankJPMorgan_fixe
+		}
+		change_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			multiply = 0.1 #10% de la vente maximal à chaque atbitrage
+		}
+
+		change_global_variable = {
+			name = stockpiling_$currency$_company_BankJPMorgan_fixe
+			subtract = var:sell_arbitrage_value_10_in_currency
+		}
+	}
+	#company_DeutscheBank
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_DeutscheBank
+			}
+			global_var:stockpiling_$currency$_company_DeutscheBank_fixe > 1000000
+		}
+		set_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			value = global_var:stockpiling_$currency$_company_DeutscheBank_fixe
+		}
+		change_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			multiply = 0.1 #10% de la vente maximal à chaque atbitrage
+		}
+
+		change_global_variable = {
+			name = stockpiling_$currency$_company_DeutscheBank_fixe
+			subtract = var:sell_arbitrage_value_10_in_currency
+		}
+	}
+	#company_BankHSBC
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_BankHSBC
+			}
+			global_var:stockpiling_$currency$_company_BankHSBC_fixe > 1000000
+		}
+		set_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			value = global_var:stockpiling_$currency$_company_BankHSBC_fixe
+		}
+		change_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			multiply = 0.1 #10% de la vente maximal à chaque atbitrage
+		}
+
+		change_global_variable = {
+			name = stockpiling_$currency$_company_BankHSBC_fixe
+			subtract = var:sell_arbitrage_value_10_in_currency
+		}
+	}
+	#company_Bankenverein
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_Bankenverein
+			}
+			global_var:stockpiling_$currency$_company_Bankenverein_fixe > 1000000
+		}
+		set_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			value = global_var:stockpiling_$currency$_company_Bankenverein_fixe
+		}
+		change_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			multiply = 0.1 #10% de la vente maximal à chaque atbitrage
+		}
+
+		change_global_variable = {
+			name = stockpiling_$currency$_company_Bankenverein_fixe
+			subtract = var:sell_arbitrage_value_10_in_currency
+		}
+	}
+	#company_BancaCommercialeItaliana
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_BancaCommercialeItaliana
+			}
+			global_var:stockpiling_$currency$_company_BancaCommercialeItaliana_fixe > 1000000
+		}
+		set_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			value = global_var:stockpiling_$currency$_company_BancaCommercialeItaliana_fixe
+		}
+		change_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			multiply = 0.1 #10% de la vente maximal à chaque atbitrage
+		}
+
+		change_global_variable = {
+			name = stockpiling_$currency$_company_BancaCommercialeItaliana_fixe
+			subtract = var:sell_arbitrage_value_10_in_currency
+		}
+	}
+	#company_DeNederlandscheBank
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_DeNederlandscheBank
+			}
+			global_var:stockpiling_$currency$_company_DeNederlandscheBank_fixe > 1000000
+		}
+		set_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			value = global_var:stockpiling_$currency$_company_DeNederlandscheBank_fixe
+		}
+		change_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			multiply = 0.1 #10% de la vente maximal à chaque atbitrage
+		}
+
+		change_global_variable = {
+			name = stockpiling_$currency$_company_DeNederlandscheBank_fixe
+			subtract = var:sell_arbitrage_value_10_in_currency
+		}
+	}
+	#company_amsterdamschebank
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_amsterdamschebank
+			}
+			global_var:stockpiling_$currency$_company_amsterdamschebank_fixe > 1000000
+		}
+		set_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			value = global_var:stockpiling_$currency$_company_amsterdamschebank_fixe
+		}
+		change_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			multiply = 0.1 #10% de la vente maximal à chaque atbitrage
+		}
+
+		change_global_variable = {
+			name = stockpiling_$currency$_company_amsterdamschebank_fixe
+			subtract = var:sell_arbitrage_value_10_in_currency
+		}
+	}
+	#company_RotterdamscheBankvereeniging
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_RotterdamscheBankvereeniging
+			}
+			global_var:stockpiling_$currency$_company_RotterdamscheBankvereeniging_fixe > 1000000
+		}
+		set_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			value = global_var:stockpiling_$currency$_company_RotterdamscheBankvereeniging_fixe
+		}
+		change_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			multiply = 0.1 #10% de la vente maximal à chaque atbitrage
+		}
+
+		change_global_variable = {
+			name = stockpiling_$currency$_company_RotterdamscheBankvereeniging_fixe
+			subtract = var:sell_arbitrage_value_10_in_currency
+		}
+	}
+	#company_BankIBC
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_BankIBC
+			}
+			global_var:stockpiling_$currency$_company_BankIBC_fixe > 1000000
+		}
+		set_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			value = global_var:stockpiling_$currency$_company_BankIBC_fixe
+		}
+		change_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			multiply = 0.1 #10% de la vente maximal à chaque atbitrage
+		}
+
+		change_global_variable = {
+			name = stockpiling_$currency$_company_BankIBC_fixe
+			subtract = var:sell_arbitrage_value_10_in_currency
+		}
+	}
+	#company_Mitsubishiexchangehousebank
+	if = {
+		limit = {
+			scope:seller = {
+				is_company_type = company_type:company_Mitsubishiexchangehousebank
+			}
+			global_var:stockpiling_$currency$_company_Mitsubishiexchangehousebank_fixe > 1000000
+		}
+		set_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			value = global_var:stockpiling_$currency$_company_Mitsubishiexchangehousebank_fixe
+		}
+		change_variable = {
+			name = sell_arbitrage_value_10_in_currency
+			multiply = 0.1 #10% de la vente maximal à chaque atbitrage
+		}
+
+		change_global_variable = {
+			name = stockpiling_$currency$_company_Mitsubishiexchangehousebank_fixe
+			subtract = var:sell_arbitrage_value_10_in_currency
+		}
+	}
+}
+
