@@ -31,7 +31,7 @@
 | `zz_ef_bl_held` (страна-продавец) | суммарные доли облигаций, проданные за рубеж | `zz_ef_bl_register`, `_hold`, `_cutback`, `zz_ef_pb_buy` | `zz_ef_bl_held_v`, `zz_ef_bl_room` |
 | `zz_ef_bl_ratio`, `zz_ef_bl_prev_principal`, `zz_ef_bl_woff_now` | коэффициент урезания, прошлый принципал, признак списания | `zz_ef_bond_ledger_step` | слоты держателей |
 | `zz_ef_bh_N`, `zz_ef_bs_N` | наша доля и продавец в слоте казны N | `zz_ef_bl_slot_N` | `zz_ef_bl_parts`, `ld_bond_tables.txt` |
-| `zz_ef_pbh_N`, `zz_ef_pbs_N` | то же для слота частного банка | `zz_ef_pb_slot_N` | `zz_ef_bank_bonds` |
+| `zz_ef_pbh_N`, `zz_ef_pbs_N` | то же для слота частного банка (создаются, только когда у страны есть `ai_privat_bank_bond_value_N` или уже есть `zz_ef_pbh_N`; иначе `zz_ef_pb_slot_N` ничего не делает) | `zz_ef_pb_slot_N` | `zz_ef_bank_bonds` |
 | `zz_ef_bl_acc_<F>` / `zz_ef_f_bl_<F>` (`sold`,`int_out`,`redeem`,`woff`) | недельные суммы продавца | `zz_ef_bl_acc_add` / `zz_ef_bl_roll` | `zz_ef_v_f_bl_*` (модель денег, лог) |
 | `zz_ef_f_bl_buy/refund/int_in/back/lost/int_short`, `zz_ef_f_pb_*` | потоки держателя за неделю | слоты | модель денег (`EFM`) |
 | `zz_ef_consol_debt` | долг казны населению по консолям | `zz_ef_consol_step` | `zz_ef_consol_debt_v`, `zz_ef_consol_debt_to_gdp` |

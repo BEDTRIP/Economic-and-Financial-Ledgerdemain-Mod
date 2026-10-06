@@ -641,1225 +641,1450 @@ zz_ef_pb_cutback = {
 
 # private banks' slot 1: E&F's ai_privat_bank_bond_value_1 / ai_privat_bank_seller_country_general_1
 zz_ef_pb_slot_1 = {
-	if = { limit = { NOT = { has_variable = zz_ef_pbh_1 } } set_variable = { name = zz_ef_pbh_1 value = 0 } }
-	set_variable = { name = zz_ef_pb_v value = 0 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_1 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_1 } }
-	if = {
-		limit = { var:zz_ef_pb_v > var:zz_ef_pbh_1 }
-		if = {
-			limit = { has_variable_list = ai_privat_bank_seller_country_general_1 }
-			random_in_list = {
-				variable = ai_privat_bank_seller_country_general_1
-				limit = { is_country_type = recognized }
-				save_scope_as = zz_ef_pbsel_1
-			}
-		}
-		if = {
-			limit = { exists = scope:zz_ef_pbsel_1 }
-			scope:zz_ef_pbsel_1 = { save_scope_as = zz_ef_bl_seller }
-			set_variable = { name = zz_ef_pbs_1 value = scope:zz_ef_pbsel_1 }
-			zz_ef_pb_buy = { N = 1 }
-		}
-		else = {
-			zz_ef_pb_no_seller = { N = 1 }
-		}
-		set_variable = { name = zz_ef_pbh_1 value = var:ai_privat_bank_bond_value_1 }
-	}
-	else_if = {
-		limit = { var:zz_ef_pb_v < var:zz_ef_pbh_1 }
-		zz_ef_pb_drop = { N = 1 }
-	}
+	# no slot (E&F's value absent, nothing registered): the body would only set zeros nothing reads -- skip it
 	if = {
 		limit = {
-			var:zz_ef_pbh_1 > 0
-			has_variable = zz_ef_pbs_1
-			exists = var:zz_ef_pbs_1
-			var:zz_ef_pbs_1 = {
-				is_country_type = recognized
-				has_variable = zz_ef_bl_ratio
-				var:zz_ef_bl_ratio < 1
+			OR = {
+				has_variable = ai_privat_bank_bond_value_1
+				has_variable = zz_ef_pbh_1
 			}
 		}
-		zz_ef_pb_cutback = { N = 1 }
-	}
-	if = {
-		limit = { var:zz_ef_pbh_1 <= 0 has_variable = zz_ef_pbs_1 }
-		remove_variable = zz_ef_pbs_1
+		if = { limit = { NOT = { has_variable = zz_ef_pbh_1 } } set_variable = { name = zz_ef_pbh_1 value = 0 } }
+		set_variable = { name = zz_ef_pb_v value = 0 }
+		if = { limit = { has_variable = ai_privat_bank_bond_value_1 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_1 } }
+		if = {
+			limit = { var:zz_ef_pb_v > var:zz_ef_pbh_1 }
+			if = {
+				limit = { has_variable_list = ai_privat_bank_seller_country_general_1 }
+				random_in_list = {
+					variable = ai_privat_bank_seller_country_general_1
+					limit = { is_country_type = recognized }
+					save_scope_as = zz_ef_pbsel_1
+				}
+			}
+			if = {
+				limit = { exists = scope:zz_ef_pbsel_1 }
+				scope:zz_ef_pbsel_1 = { save_scope_as = zz_ef_bl_seller }
+				set_variable = { name = zz_ef_pbs_1 value = scope:zz_ef_pbsel_1 }
+				zz_ef_pb_buy = { N = 1 }
+			}
+			else = {
+				zz_ef_pb_no_seller = { N = 1 }
+			}
+			set_variable = { name = zz_ef_pbh_1 value = var:ai_privat_bank_bond_value_1 }
+		}
+		else_if = {
+			limit = { var:zz_ef_pb_v < var:zz_ef_pbh_1 }
+			zz_ef_pb_drop = { N = 1 }
+		}
+		if = {
+			limit = {
+				var:zz_ef_pbh_1 > 0
+				has_variable = zz_ef_pbs_1
+				exists = var:zz_ef_pbs_1
+				var:zz_ef_pbs_1 = {
+					is_country_type = recognized
+					has_variable = zz_ef_bl_ratio
+					var:zz_ef_bl_ratio < 1
+				}
+			}
+			zz_ef_pb_cutback = { N = 1 }
+		}
+		if = {
+			limit = { var:zz_ef_pbh_1 <= 0 has_variable = zz_ef_pbs_1 }
+			remove_variable = zz_ef_pbs_1
+		}
 	}
 }
 
 # private banks' slot 2: E&F's ai_privat_bank_bond_value_2 / ai_privat_bank_seller_country_general_2
 zz_ef_pb_slot_2 = {
-	if = { limit = { NOT = { has_variable = zz_ef_pbh_2 } } set_variable = { name = zz_ef_pbh_2 value = 0 } }
-	set_variable = { name = zz_ef_pb_v value = 0 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_2 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_2 } }
-	if = {
-		limit = { var:zz_ef_pb_v > var:zz_ef_pbh_2 }
-		if = {
-			limit = { has_variable_list = ai_privat_bank_seller_country_general_2 }
-			random_in_list = {
-				variable = ai_privat_bank_seller_country_general_2
-				limit = { is_country_type = recognized }
-				save_scope_as = zz_ef_pbsel_2
-			}
-		}
-		if = {
-			limit = { exists = scope:zz_ef_pbsel_2 }
-			scope:zz_ef_pbsel_2 = { save_scope_as = zz_ef_bl_seller }
-			set_variable = { name = zz_ef_pbs_2 value = scope:zz_ef_pbsel_2 }
-			zz_ef_pb_buy = { N = 2 }
-		}
-		else = {
-			zz_ef_pb_no_seller = { N = 2 }
-		}
-		set_variable = { name = zz_ef_pbh_2 value = var:ai_privat_bank_bond_value_2 }
-	}
-	else_if = {
-		limit = { var:zz_ef_pb_v < var:zz_ef_pbh_2 }
-		zz_ef_pb_drop = { N = 2 }
-	}
+	# no slot (E&F's value absent, nothing registered): the body would only set zeros nothing reads -- skip it
 	if = {
 		limit = {
-			var:zz_ef_pbh_2 > 0
-			has_variable = zz_ef_pbs_2
-			exists = var:zz_ef_pbs_2
-			var:zz_ef_pbs_2 = {
-				is_country_type = recognized
-				has_variable = zz_ef_bl_ratio
-				var:zz_ef_bl_ratio < 1
+			OR = {
+				has_variable = ai_privat_bank_bond_value_2
+				has_variable = zz_ef_pbh_2
 			}
 		}
-		zz_ef_pb_cutback = { N = 2 }
-	}
-	if = {
-		limit = { var:zz_ef_pbh_2 <= 0 has_variable = zz_ef_pbs_2 }
-		remove_variable = zz_ef_pbs_2
+		if = { limit = { NOT = { has_variable = zz_ef_pbh_2 } } set_variable = { name = zz_ef_pbh_2 value = 0 } }
+		set_variable = { name = zz_ef_pb_v value = 0 }
+		if = { limit = { has_variable = ai_privat_bank_bond_value_2 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_2 } }
+		if = {
+			limit = { var:zz_ef_pb_v > var:zz_ef_pbh_2 }
+			if = {
+				limit = { has_variable_list = ai_privat_bank_seller_country_general_2 }
+				random_in_list = {
+					variable = ai_privat_bank_seller_country_general_2
+					limit = { is_country_type = recognized }
+					save_scope_as = zz_ef_pbsel_2
+				}
+			}
+			if = {
+				limit = { exists = scope:zz_ef_pbsel_2 }
+				scope:zz_ef_pbsel_2 = { save_scope_as = zz_ef_bl_seller }
+				set_variable = { name = zz_ef_pbs_2 value = scope:zz_ef_pbsel_2 }
+				zz_ef_pb_buy = { N = 2 }
+			}
+			else = {
+				zz_ef_pb_no_seller = { N = 2 }
+			}
+			set_variable = { name = zz_ef_pbh_2 value = var:ai_privat_bank_bond_value_2 }
+		}
+		else_if = {
+			limit = { var:zz_ef_pb_v < var:zz_ef_pbh_2 }
+			zz_ef_pb_drop = { N = 2 }
+		}
+		if = {
+			limit = {
+				var:zz_ef_pbh_2 > 0
+				has_variable = zz_ef_pbs_2
+				exists = var:zz_ef_pbs_2
+				var:zz_ef_pbs_2 = {
+					is_country_type = recognized
+					has_variable = zz_ef_bl_ratio
+					var:zz_ef_bl_ratio < 1
+				}
+			}
+			zz_ef_pb_cutback = { N = 2 }
+		}
+		if = {
+			limit = { var:zz_ef_pbh_2 <= 0 has_variable = zz_ef_pbs_2 }
+			remove_variable = zz_ef_pbs_2
+		}
 	}
 }
 
 # private banks' slot 3: E&F's ai_privat_bank_bond_value_3 / ai_privat_bank_seller_country_general_3
 zz_ef_pb_slot_3 = {
-	if = { limit = { NOT = { has_variable = zz_ef_pbh_3 } } set_variable = { name = zz_ef_pbh_3 value = 0 } }
-	set_variable = { name = zz_ef_pb_v value = 0 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_3 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_3 } }
-	if = {
-		limit = { var:zz_ef_pb_v > var:zz_ef_pbh_3 }
-		if = {
-			limit = { has_variable_list = ai_privat_bank_seller_country_general_3 }
-			random_in_list = {
-				variable = ai_privat_bank_seller_country_general_3
-				limit = { is_country_type = recognized }
-				save_scope_as = zz_ef_pbsel_3
-			}
-		}
-		if = {
-			limit = { exists = scope:zz_ef_pbsel_3 }
-			scope:zz_ef_pbsel_3 = { save_scope_as = zz_ef_bl_seller }
-			set_variable = { name = zz_ef_pbs_3 value = scope:zz_ef_pbsel_3 }
-			zz_ef_pb_buy = { N = 3 }
-		}
-		else = {
-			zz_ef_pb_no_seller = { N = 3 }
-		}
-		set_variable = { name = zz_ef_pbh_3 value = var:ai_privat_bank_bond_value_3 }
-	}
-	else_if = {
-		limit = { var:zz_ef_pb_v < var:zz_ef_pbh_3 }
-		zz_ef_pb_drop = { N = 3 }
-	}
+	# no slot (E&F's value absent, nothing registered): the body would only set zeros nothing reads -- skip it
 	if = {
 		limit = {
-			var:zz_ef_pbh_3 > 0
-			has_variable = zz_ef_pbs_3
-			exists = var:zz_ef_pbs_3
-			var:zz_ef_pbs_3 = {
-				is_country_type = recognized
-				has_variable = zz_ef_bl_ratio
-				var:zz_ef_bl_ratio < 1
+			OR = {
+				has_variable = ai_privat_bank_bond_value_3
+				has_variable = zz_ef_pbh_3
 			}
 		}
-		zz_ef_pb_cutback = { N = 3 }
-	}
-	if = {
-		limit = { var:zz_ef_pbh_3 <= 0 has_variable = zz_ef_pbs_3 }
-		remove_variable = zz_ef_pbs_3
+		if = { limit = { NOT = { has_variable = zz_ef_pbh_3 } } set_variable = { name = zz_ef_pbh_3 value = 0 } }
+		set_variable = { name = zz_ef_pb_v value = 0 }
+		if = { limit = { has_variable = ai_privat_bank_bond_value_3 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_3 } }
+		if = {
+			limit = { var:zz_ef_pb_v > var:zz_ef_pbh_3 }
+			if = {
+				limit = { has_variable_list = ai_privat_bank_seller_country_general_3 }
+				random_in_list = {
+					variable = ai_privat_bank_seller_country_general_3
+					limit = { is_country_type = recognized }
+					save_scope_as = zz_ef_pbsel_3
+				}
+			}
+			if = {
+				limit = { exists = scope:zz_ef_pbsel_3 }
+				scope:zz_ef_pbsel_3 = { save_scope_as = zz_ef_bl_seller }
+				set_variable = { name = zz_ef_pbs_3 value = scope:zz_ef_pbsel_3 }
+				zz_ef_pb_buy = { N = 3 }
+			}
+			else = {
+				zz_ef_pb_no_seller = { N = 3 }
+			}
+			set_variable = { name = zz_ef_pbh_3 value = var:ai_privat_bank_bond_value_3 }
+		}
+		else_if = {
+			limit = { var:zz_ef_pb_v < var:zz_ef_pbh_3 }
+			zz_ef_pb_drop = { N = 3 }
+		}
+		if = {
+			limit = {
+				var:zz_ef_pbh_3 > 0
+				has_variable = zz_ef_pbs_3
+				exists = var:zz_ef_pbs_3
+				var:zz_ef_pbs_3 = {
+					is_country_type = recognized
+					has_variable = zz_ef_bl_ratio
+					var:zz_ef_bl_ratio < 1
+				}
+			}
+			zz_ef_pb_cutback = { N = 3 }
+		}
+		if = {
+			limit = { var:zz_ef_pbh_3 <= 0 has_variable = zz_ef_pbs_3 }
+			remove_variable = zz_ef_pbs_3
+		}
 	}
 }
 
 # private banks' slot 4: E&F's ai_privat_bank_bond_value_4 / ai_privat_bank_seller_country_general_4
 zz_ef_pb_slot_4 = {
-	if = { limit = { NOT = { has_variable = zz_ef_pbh_4 } } set_variable = { name = zz_ef_pbh_4 value = 0 } }
-	set_variable = { name = zz_ef_pb_v value = 0 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_4 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_4 } }
-	if = {
-		limit = { var:zz_ef_pb_v > var:zz_ef_pbh_4 }
-		if = {
-			limit = { has_variable_list = ai_privat_bank_seller_country_general_4 }
-			random_in_list = {
-				variable = ai_privat_bank_seller_country_general_4
-				limit = { is_country_type = recognized }
-				save_scope_as = zz_ef_pbsel_4
-			}
-		}
-		if = {
-			limit = { exists = scope:zz_ef_pbsel_4 }
-			scope:zz_ef_pbsel_4 = { save_scope_as = zz_ef_bl_seller }
-			set_variable = { name = zz_ef_pbs_4 value = scope:zz_ef_pbsel_4 }
-			zz_ef_pb_buy = { N = 4 }
-		}
-		else = {
-			zz_ef_pb_no_seller = { N = 4 }
-		}
-		set_variable = { name = zz_ef_pbh_4 value = var:ai_privat_bank_bond_value_4 }
-	}
-	else_if = {
-		limit = { var:zz_ef_pb_v < var:zz_ef_pbh_4 }
-		zz_ef_pb_drop = { N = 4 }
-	}
+	# no slot (E&F's value absent, nothing registered): the body would only set zeros nothing reads -- skip it
 	if = {
 		limit = {
-			var:zz_ef_pbh_4 > 0
-			has_variable = zz_ef_pbs_4
-			exists = var:zz_ef_pbs_4
-			var:zz_ef_pbs_4 = {
-				is_country_type = recognized
-				has_variable = zz_ef_bl_ratio
-				var:zz_ef_bl_ratio < 1
+			OR = {
+				has_variable = ai_privat_bank_bond_value_4
+				has_variable = zz_ef_pbh_4
 			}
 		}
-		zz_ef_pb_cutback = { N = 4 }
-	}
-	if = {
-		limit = { var:zz_ef_pbh_4 <= 0 has_variable = zz_ef_pbs_4 }
-		remove_variable = zz_ef_pbs_4
+		if = { limit = { NOT = { has_variable = zz_ef_pbh_4 } } set_variable = { name = zz_ef_pbh_4 value = 0 } }
+		set_variable = { name = zz_ef_pb_v value = 0 }
+		if = { limit = { has_variable = ai_privat_bank_bond_value_4 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_4 } }
+		if = {
+			limit = { var:zz_ef_pb_v > var:zz_ef_pbh_4 }
+			if = {
+				limit = { has_variable_list = ai_privat_bank_seller_country_general_4 }
+				random_in_list = {
+					variable = ai_privat_bank_seller_country_general_4
+					limit = { is_country_type = recognized }
+					save_scope_as = zz_ef_pbsel_4
+				}
+			}
+			if = {
+				limit = { exists = scope:zz_ef_pbsel_4 }
+				scope:zz_ef_pbsel_4 = { save_scope_as = zz_ef_bl_seller }
+				set_variable = { name = zz_ef_pbs_4 value = scope:zz_ef_pbsel_4 }
+				zz_ef_pb_buy = { N = 4 }
+			}
+			else = {
+				zz_ef_pb_no_seller = { N = 4 }
+			}
+			set_variable = { name = zz_ef_pbh_4 value = var:ai_privat_bank_bond_value_4 }
+		}
+		else_if = {
+			limit = { var:zz_ef_pb_v < var:zz_ef_pbh_4 }
+			zz_ef_pb_drop = { N = 4 }
+		}
+		if = {
+			limit = {
+				var:zz_ef_pbh_4 > 0
+				has_variable = zz_ef_pbs_4
+				exists = var:zz_ef_pbs_4
+				var:zz_ef_pbs_4 = {
+					is_country_type = recognized
+					has_variable = zz_ef_bl_ratio
+					var:zz_ef_bl_ratio < 1
+				}
+			}
+			zz_ef_pb_cutback = { N = 4 }
+		}
+		if = {
+			limit = { var:zz_ef_pbh_4 <= 0 has_variable = zz_ef_pbs_4 }
+			remove_variable = zz_ef_pbs_4
+		}
 	}
 }
 
 # private banks' slot 5: E&F's ai_privat_bank_bond_value_5 / ai_privat_bank_seller_country_general_5
 zz_ef_pb_slot_5 = {
-	if = { limit = { NOT = { has_variable = zz_ef_pbh_5 } } set_variable = { name = zz_ef_pbh_5 value = 0 } }
-	set_variable = { name = zz_ef_pb_v value = 0 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_5 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_5 } }
-	if = {
-		limit = { var:zz_ef_pb_v > var:zz_ef_pbh_5 }
-		if = {
-			limit = { has_variable_list = ai_privat_bank_seller_country_general_5 }
-			random_in_list = {
-				variable = ai_privat_bank_seller_country_general_5
-				limit = { is_country_type = recognized }
-				save_scope_as = zz_ef_pbsel_5
-			}
-		}
-		if = {
-			limit = { exists = scope:zz_ef_pbsel_5 }
-			scope:zz_ef_pbsel_5 = { save_scope_as = zz_ef_bl_seller }
-			set_variable = { name = zz_ef_pbs_5 value = scope:zz_ef_pbsel_5 }
-			zz_ef_pb_buy = { N = 5 }
-		}
-		else = {
-			zz_ef_pb_no_seller = { N = 5 }
-		}
-		set_variable = { name = zz_ef_pbh_5 value = var:ai_privat_bank_bond_value_5 }
-	}
-	else_if = {
-		limit = { var:zz_ef_pb_v < var:zz_ef_pbh_5 }
-		zz_ef_pb_drop = { N = 5 }
-	}
+	# no slot (E&F's value absent, nothing registered): the body would only set zeros nothing reads -- skip it
 	if = {
 		limit = {
-			var:zz_ef_pbh_5 > 0
-			has_variable = zz_ef_pbs_5
-			exists = var:zz_ef_pbs_5
-			var:zz_ef_pbs_5 = {
-				is_country_type = recognized
-				has_variable = zz_ef_bl_ratio
-				var:zz_ef_bl_ratio < 1
+			OR = {
+				has_variable = ai_privat_bank_bond_value_5
+				has_variable = zz_ef_pbh_5
 			}
 		}
-		zz_ef_pb_cutback = { N = 5 }
-	}
-	if = {
-		limit = { var:zz_ef_pbh_5 <= 0 has_variable = zz_ef_pbs_5 }
-		remove_variable = zz_ef_pbs_5
+		if = { limit = { NOT = { has_variable = zz_ef_pbh_5 } } set_variable = { name = zz_ef_pbh_5 value = 0 } }
+		set_variable = { name = zz_ef_pb_v value = 0 }
+		if = { limit = { has_variable = ai_privat_bank_bond_value_5 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_5 } }
+		if = {
+			limit = { var:zz_ef_pb_v > var:zz_ef_pbh_5 }
+			if = {
+				limit = { has_variable_list = ai_privat_bank_seller_country_general_5 }
+				random_in_list = {
+					variable = ai_privat_bank_seller_country_general_5
+					limit = { is_country_type = recognized }
+					save_scope_as = zz_ef_pbsel_5
+				}
+			}
+			if = {
+				limit = { exists = scope:zz_ef_pbsel_5 }
+				scope:zz_ef_pbsel_5 = { save_scope_as = zz_ef_bl_seller }
+				set_variable = { name = zz_ef_pbs_5 value = scope:zz_ef_pbsel_5 }
+				zz_ef_pb_buy = { N = 5 }
+			}
+			else = {
+				zz_ef_pb_no_seller = { N = 5 }
+			}
+			set_variable = { name = zz_ef_pbh_5 value = var:ai_privat_bank_bond_value_5 }
+		}
+		else_if = {
+			limit = { var:zz_ef_pb_v < var:zz_ef_pbh_5 }
+			zz_ef_pb_drop = { N = 5 }
+		}
+		if = {
+			limit = {
+				var:zz_ef_pbh_5 > 0
+				has_variable = zz_ef_pbs_5
+				exists = var:zz_ef_pbs_5
+				var:zz_ef_pbs_5 = {
+					is_country_type = recognized
+					has_variable = zz_ef_bl_ratio
+					var:zz_ef_bl_ratio < 1
+				}
+			}
+			zz_ef_pb_cutback = { N = 5 }
+		}
+		if = {
+			limit = { var:zz_ef_pbh_5 <= 0 has_variable = zz_ef_pbs_5 }
+			remove_variable = zz_ef_pbs_5
+		}
 	}
 }
 
 # private banks' slot 6: E&F's ai_privat_bank_bond_value_6 / ai_privat_bank_seller_country_general_6
 zz_ef_pb_slot_6 = {
-	if = { limit = { NOT = { has_variable = zz_ef_pbh_6 } } set_variable = { name = zz_ef_pbh_6 value = 0 } }
-	set_variable = { name = zz_ef_pb_v value = 0 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_6 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_6 } }
-	if = {
-		limit = { var:zz_ef_pb_v > var:zz_ef_pbh_6 }
-		if = {
-			limit = { has_variable_list = ai_privat_bank_seller_country_general_6 }
-			random_in_list = {
-				variable = ai_privat_bank_seller_country_general_6
-				limit = { is_country_type = recognized }
-				save_scope_as = zz_ef_pbsel_6
-			}
-		}
-		if = {
-			limit = { exists = scope:zz_ef_pbsel_6 }
-			scope:zz_ef_pbsel_6 = { save_scope_as = zz_ef_bl_seller }
-			set_variable = { name = zz_ef_pbs_6 value = scope:zz_ef_pbsel_6 }
-			zz_ef_pb_buy = { N = 6 }
-		}
-		else = {
-			zz_ef_pb_no_seller = { N = 6 }
-		}
-		set_variable = { name = zz_ef_pbh_6 value = var:ai_privat_bank_bond_value_6 }
-	}
-	else_if = {
-		limit = { var:zz_ef_pb_v < var:zz_ef_pbh_6 }
-		zz_ef_pb_drop = { N = 6 }
-	}
+	# no slot (E&F's value absent, nothing registered): the body would only set zeros nothing reads -- skip it
 	if = {
 		limit = {
-			var:zz_ef_pbh_6 > 0
-			has_variable = zz_ef_pbs_6
-			exists = var:zz_ef_pbs_6
-			var:zz_ef_pbs_6 = {
-				is_country_type = recognized
-				has_variable = zz_ef_bl_ratio
-				var:zz_ef_bl_ratio < 1
+			OR = {
+				has_variable = ai_privat_bank_bond_value_6
+				has_variable = zz_ef_pbh_6
 			}
 		}
-		zz_ef_pb_cutback = { N = 6 }
-	}
-	if = {
-		limit = { var:zz_ef_pbh_6 <= 0 has_variable = zz_ef_pbs_6 }
-		remove_variable = zz_ef_pbs_6
+		if = { limit = { NOT = { has_variable = zz_ef_pbh_6 } } set_variable = { name = zz_ef_pbh_6 value = 0 } }
+		set_variable = { name = zz_ef_pb_v value = 0 }
+		if = { limit = { has_variable = ai_privat_bank_bond_value_6 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_6 } }
+		if = {
+			limit = { var:zz_ef_pb_v > var:zz_ef_pbh_6 }
+			if = {
+				limit = { has_variable_list = ai_privat_bank_seller_country_general_6 }
+				random_in_list = {
+					variable = ai_privat_bank_seller_country_general_6
+					limit = { is_country_type = recognized }
+					save_scope_as = zz_ef_pbsel_6
+				}
+			}
+			if = {
+				limit = { exists = scope:zz_ef_pbsel_6 }
+				scope:zz_ef_pbsel_6 = { save_scope_as = zz_ef_bl_seller }
+				set_variable = { name = zz_ef_pbs_6 value = scope:zz_ef_pbsel_6 }
+				zz_ef_pb_buy = { N = 6 }
+			}
+			else = {
+				zz_ef_pb_no_seller = { N = 6 }
+			}
+			set_variable = { name = zz_ef_pbh_6 value = var:ai_privat_bank_bond_value_6 }
+		}
+		else_if = {
+			limit = { var:zz_ef_pb_v < var:zz_ef_pbh_6 }
+			zz_ef_pb_drop = { N = 6 }
+		}
+		if = {
+			limit = {
+				var:zz_ef_pbh_6 > 0
+				has_variable = zz_ef_pbs_6
+				exists = var:zz_ef_pbs_6
+				var:zz_ef_pbs_6 = {
+					is_country_type = recognized
+					has_variable = zz_ef_bl_ratio
+					var:zz_ef_bl_ratio < 1
+				}
+			}
+			zz_ef_pb_cutback = { N = 6 }
+		}
+		if = {
+			limit = { var:zz_ef_pbh_6 <= 0 has_variable = zz_ef_pbs_6 }
+			remove_variable = zz_ef_pbs_6
+		}
 	}
 }
 
 # private banks' slot 7: E&F's ai_privat_bank_bond_value_7 / ai_privat_bank_seller_country_general_7
 zz_ef_pb_slot_7 = {
-	if = { limit = { NOT = { has_variable = zz_ef_pbh_7 } } set_variable = { name = zz_ef_pbh_7 value = 0 } }
-	set_variable = { name = zz_ef_pb_v value = 0 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_7 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_7 } }
-	if = {
-		limit = { var:zz_ef_pb_v > var:zz_ef_pbh_7 }
-		if = {
-			limit = { has_variable_list = ai_privat_bank_seller_country_general_7 }
-			random_in_list = {
-				variable = ai_privat_bank_seller_country_general_7
-				limit = { is_country_type = recognized }
-				save_scope_as = zz_ef_pbsel_7
-			}
-		}
-		if = {
-			limit = { exists = scope:zz_ef_pbsel_7 }
-			scope:zz_ef_pbsel_7 = { save_scope_as = zz_ef_bl_seller }
-			set_variable = { name = zz_ef_pbs_7 value = scope:zz_ef_pbsel_7 }
-			zz_ef_pb_buy = { N = 7 }
-		}
-		else = {
-			zz_ef_pb_no_seller = { N = 7 }
-		}
-		set_variable = { name = zz_ef_pbh_7 value = var:ai_privat_bank_bond_value_7 }
-	}
-	else_if = {
-		limit = { var:zz_ef_pb_v < var:zz_ef_pbh_7 }
-		zz_ef_pb_drop = { N = 7 }
-	}
+	# no slot (E&F's value absent, nothing registered): the body would only set zeros nothing reads -- skip it
 	if = {
 		limit = {
-			var:zz_ef_pbh_7 > 0
-			has_variable = zz_ef_pbs_7
-			exists = var:zz_ef_pbs_7
-			var:zz_ef_pbs_7 = {
-				is_country_type = recognized
-				has_variable = zz_ef_bl_ratio
-				var:zz_ef_bl_ratio < 1
+			OR = {
+				has_variable = ai_privat_bank_bond_value_7
+				has_variable = zz_ef_pbh_7
 			}
 		}
-		zz_ef_pb_cutback = { N = 7 }
-	}
-	if = {
-		limit = { var:zz_ef_pbh_7 <= 0 has_variable = zz_ef_pbs_7 }
-		remove_variable = zz_ef_pbs_7
+		if = { limit = { NOT = { has_variable = zz_ef_pbh_7 } } set_variable = { name = zz_ef_pbh_7 value = 0 } }
+		set_variable = { name = zz_ef_pb_v value = 0 }
+		if = { limit = { has_variable = ai_privat_bank_bond_value_7 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_7 } }
+		if = {
+			limit = { var:zz_ef_pb_v > var:zz_ef_pbh_7 }
+			if = {
+				limit = { has_variable_list = ai_privat_bank_seller_country_general_7 }
+				random_in_list = {
+					variable = ai_privat_bank_seller_country_general_7
+					limit = { is_country_type = recognized }
+					save_scope_as = zz_ef_pbsel_7
+				}
+			}
+			if = {
+				limit = { exists = scope:zz_ef_pbsel_7 }
+				scope:zz_ef_pbsel_7 = { save_scope_as = zz_ef_bl_seller }
+				set_variable = { name = zz_ef_pbs_7 value = scope:zz_ef_pbsel_7 }
+				zz_ef_pb_buy = { N = 7 }
+			}
+			else = {
+				zz_ef_pb_no_seller = { N = 7 }
+			}
+			set_variable = { name = zz_ef_pbh_7 value = var:ai_privat_bank_bond_value_7 }
+		}
+		else_if = {
+			limit = { var:zz_ef_pb_v < var:zz_ef_pbh_7 }
+			zz_ef_pb_drop = { N = 7 }
+		}
+		if = {
+			limit = {
+				var:zz_ef_pbh_7 > 0
+				has_variable = zz_ef_pbs_7
+				exists = var:zz_ef_pbs_7
+				var:zz_ef_pbs_7 = {
+					is_country_type = recognized
+					has_variable = zz_ef_bl_ratio
+					var:zz_ef_bl_ratio < 1
+				}
+			}
+			zz_ef_pb_cutback = { N = 7 }
+		}
+		if = {
+			limit = { var:zz_ef_pbh_7 <= 0 has_variable = zz_ef_pbs_7 }
+			remove_variable = zz_ef_pbs_7
+		}
 	}
 }
 
 # private banks' slot 8: E&F's ai_privat_bank_bond_value_8 / ai_privat_bank_seller_country_general_8
 zz_ef_pb_slot_8 = {
-	if = { limit = { NOT = { has_variable = zz_ef_pbh_8 } } set_variable = { name = zz_ef_pbh_8 value = 0 } }
-	set_variable = { name = zz_ef_pb_v value = 0 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_8 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_8 } }
-	if = {
-		limit = { var:zz_ef_pb_v > var:zz_ef_pbh_8 }
-		if = {
-			limit = { has_variable_list = ai_privat_bank_seller_country_general_8 }
-			random_in_list = {
-				variable = ai_privat_bank_seller_country_general_8
-				limit = { is_country_type = recognized }
-				save_scope_as = zz_ef_pbsel_8
-			}
-		}
-		if = {
-			limit = { exists = scope:zz_ef_pbsel_8 }
-			scope:zz_ef_pbsel_8 = { save_scope_as = zz_ef_bl_seller }
-			set_variable = { name = zz_ef_pbs_8 value = scope:zz_ef_pbsel_8 }
-			zz_ef_pb_buy = { N = 8 }
-		}
-		else = {
-			zz_ef_pb_no_seller = { N = 8 }
-		}
-		set_variable = { name = zz_ef_pbh_8 value = var:ai_privat_bank_bond_value_8 }
-	}
-	else_if = {
-		limit = { var:zz_ef_pb_v < var:zz_ef_pbh_8 }
-		zz_ef_pb_drop = { N = 8 }
-	}
+	# no slot (E&F's value absent, nothing registered): the body would only set zeros nothing reads -- skip it
 	if = {
 		limit = {
-			var:zz_ef_pbh_8 > 0
-			has_variable = zz_ef_pbs_8
-			exists = var:zz_ef_pbs_8
-			var:zz_ef_pbs_8 = {
-				is_country_type = recognized
-				has_variable = zz_ef_bl_ratio
-				var:zz_ef_bl_ratio < 1
+			OR = {
+				has_variable = ai_privat_bank_bond_value_8
+				has_variable = zz_ef_pbh_8
 			}
 		}
-		zz_ef_pb_cutback = { N = 8 }
-	}
-	if = {
-		limit = { var:zz_ef_pbh_8 <= 0 has_variable = zz_ef_pbs_8 }
-		remove_variable = zz_ef_pbs_8
+		if = { limit = { NOT = { has_variable = zz_ef_pbh_8 } } set_variable = { name = zz_ef_pbh_8 value = 0 } }
+		set_variable = { name = zz_ef_pb_v value = 0 }
+		if = { limit = { has_variable = ai_privat_bank_bond_value_8 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_8 } }
+		if = {
+			limit = { var:zz_ef_pb_v > var:zz_ef_pbh_8 }
+			if = {
+				limit = { has_variable_list = ai_privat_bank_seller_country_general_8 }
+				random_in_list = {
+					variable = ai_privat_bank_seller_country_general_8
+					limit = { is_country_type = recognized }
+					save_scope_as = zz_ef_pbsel_8
+				}
+			}
+			if = {
+				limit = { exists = scope:zz_ef_pbsel_8 }
+				scope:zz_ef_pbsel_8 = { save_scope_as = zz_ef_bl_seller }
+				set_variable = { name = zz_ef_pbs_8 value = scope:zz_ef_pbsel_8 }
+				zz_ef_pb_buy = { N = 8 }
+			}
+			else = {
+				zz_ef_pb_no_seller = { N = 8 }
+			}
+			set_variable = { name = zz_ef_pbh_8 value = var:ai_privat_bank_bond_value_8 }
+		}
+		else_if = {
+			limit = { var:zz_ef_pb_v < var:zz_ef_pbh_8 }
+			zz_ef_pb_drop = { N = 8 }
+		}
+		if = {
+			limit = {
+				var:zz_ef_pbh_8 > 0
+				has_variable = zz_ef_pbs_8
+				exists = var:zz_ef_pbs_8
+				var:zz_ef_pbs_8 = {
+					is_country_type = recognized
+					has_variable = zz_ef_bl_ratio
+					var:zz_ef_bl_ratio < 1
+				}
+			}
+			zz_ef_pb_cutback = { N = 8 }
+		}
+		if = {
+			limit = { var:zz_ef_pbh_8 <= 0 has_variable = zz_ef_pbs_8 }
+			remove_variable = zz_ef_pbs_8
+		}
 	}
 }
 
 # private banks' slot 9: E&F's ai_privat_bank_bond_value_9 / ai_privat_bank_seller_country_general_9
 zz_ef_pb_slot_9 = {
-	if = { limit = { NOT = { has_variable = zz_ef_pbh_9 } } set_variable = { name = zz_ef_pbh_9 value = 0 } }
-	set_variable = { name = zz_ef_pb_v value = 0 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_9 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_9 } }
-	if = {
-		limit = { var:zz_ef_pb_v > var:zz_ef_pbh_9 }
-		if = {
-			limit = { has_variable_list = ai_privat_bank_seller_country_general_9 }
-			random_in_list = {
-				variable = ai_privat_bank_seller_country_general_9
-				limit = { is_country_type = recognized }
-				save_scope_as = zz_ef_pbsel_9
-			}
-		}
-		if = {
-			limit = { exists = scope:zz_ef_pbsel_9 }
-			scope:zz_ef_pbsel_9 = { save_scope_as = zz_ef_bl_seller }
-			set_variable = { name = zz_ef_pbs_9 value = scope:zz_ef_pbsel_9 }
-			zz_ef_pb_buy = { N = 9 }
-		}
-		else = {
-			zz_ef_pb_no_seller = { N = 9 }
-		}
-		set_variable = { name = zz_ef_pbh_9 value = var:ai_privat_bank_bond_value_9 }
-	}
-	else_if = {
-		limit = { var:zz_ef_pb_v < var:zz_ef_pbh_9 }
-		zz_ef_pb_drop = { N = 9 }
-	}
+	# no slot (E&F's value absent, nothing registered): the body would only set zeros nothing reads -- skip it
 	if = {
 		limit = {
-			var:zz_ef_pbh_9 > 0
-			has_variable = zz_ef_pbs_9
-			exists = var:zz_ef_pbs_9
-			var:zz_ef_pbs_9 = {
-				is_country_type = recognized
-				has_variable = zz_ef_bl_ratio
-				var:zz_ef_bl_ratio < 1
+			OR = {
+				has_variable = ai_privat_bank_bond_value_9
+				has_variable = zz_ef_pbh_9
 			}
 		}
-		zz_ef_pb_cutback = { N = 9 }
-	}
-	if = {
-		limit = { var:zz_ef_pbh_9 <= 0 has_variable = zz_ef_pbs_9 }
-		remove_variable = zz_ef_pbs_9
+		if = { limit = { NOT = { has_variable = zz_ef_pbh_9 } } set_variable = { name = zz_ef_pbh_9 value = 0 } }
+		set_variable = { name = zz_ef_pb_v value = 0 }
+		if = { limit = { has_variable = ai_privat_bank_bond_value_9 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_9 } }
+		if = {
+			limit = { var:zz_ef_pb_v > var:zz_ef_pbh_9 }
+			if = {
+				limit = { has_variable_list = ai_privat_bank_seller_country_general_9 }
+				random_in_list = {
+					variable = ai_privat_bank_seller_country_general_9
+					limit = { is_country_type = recognized }
+					save_scope_as = zz_ef_pbsel_9
+				}
+			}
+			if = {
+				limit = { exists = scope:zz_ef_pbsel_9 }
+				scope:zz_ef_pbsel_9 = { save_scope_as = zz_ef_bl_seller }
+				set_variable = { name = zz_ef_pbs_9 value = scope:zz_ef_pbsel_9 }
+				zz_ef_pb_buy = { N = 9 }
+			}
+			else = {
+				zz_ef_pb_no_seller = { N = 9 }
+			}
+			set_variable = { name = zz_ef_pbh_9 value = var:ai_privat_bank_bond_value_9 }
+		}
+		else_if = {
+			limit = { var:zz_ef_pb_v < var:zz_ef_pbh_9 }
+			zz_ef_pb_drop = { N = 9 }
+		}
+		if = {
+			limit = {
+				var:zz_ef_pbh_9 > 0
+				has_variable = zz_ef_pbs_9
+				exists = var:zz_ef_pbs_9
+				var:zz_ef_pbs_9 = {
+					is_country_type = recognized
+					has_variable = zz_ef_bl_ratio
+					var:zz_ef_bl_ratio < 1
+				}
+			}
+			zz_ef_pb_cutback = { N = 9 }
+		}
+		if = {
+			limit = { var:zz_ef_pbh_9 <= 0 has_variable = zz_ef_pbs_9 }
+			remove_variable = zz_ef_pbs_9
+		}
 	}
 }
 
 # private banks' slot 10: E&F's ai_privat_bank_bond_value_10 / ai_privat_bank_seller_country_general_10
 zz_ef_pb_slot_10 = {
-	if = { limit = { NOT = { has_variable = zz_ef_pbh_10 } } set_variable = { name = zz_ef_pbh_10 value = 0 } }
-	set_variable = { name = zz_ef_pb_v value = 0 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_10 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_10 } }
-	if = {
-		limit = { var:zz_ef_pb_v > var:zz_ef_pbh_10 }
-		if = {
-			limit = { has_variable_list = ai_privat_bank_seller_country_general_10 }
-			random_in_list = {
-				variable = ai_privat_bank_seller_country_general_10
-				limit = { is_country_type = recognized }
-				save_scope_as = zz_ef_pbsel_10
-			}
-		}
-		if = {
-			limit = { exists = scope:zz_ef_pbsel_10 }
-			scope:zz_ef_pbsel_10 = { save_scope_as = zz_ef_bl_seller }
-			set_variable = { name = zz_ef_pbs_10 value = scope:zz_ef_pbsel_10 }
-			zz_ef_pb_buy = { N = 10 }
-		}
-		else = {
-			zz_ef_pb_no_seller = { N = 10 }
-		}
-		set_variable = { name = zz_ef_pbh_10 value = var:ai_privat_bank_bond_value_10 }
-	}
-	else_if = {
-		limit = { var:zz_ef_pb_v < var:zz_ef_pbh_10 }
-		zz_ef_pb_drop = { N = 10 }
-	}
+	# no slot (E&F's value absent, nothing registered): the body would only set zeros nothing reads -- skip it
 	if = {
 		limit = {
-			var:zz_ef_pbh_10 > 0
-			has_variable = zz_ef_pbs_10
-			exists = var:zz_ef_pbs_10
-			var:zz_ef_pbs_10 = {
-				is_country_type = recognized
-				has_variable = zz_ef_bl_ratio
-				var:zz_ef_bl_ratio < 1
+			OR = {
+				has_variable = ai_privat_bank_bond_value_10
+				has_variable = zz_ef_pbh_10
 			}
 		}
-		zz_ef_pb_cutback = { N = 10 }
-	}
-	if = {
-		limit = { var:zz_ef_pbh_10 <= 0 has_variable = zz_ef_pbs_10 }
-		remove_variable = zz_ef_pbs_10
+		if = { limit = { NOT = { has_variable = zz_ef_pbh_10 } } set_variable = { name = zz_ef_pbh_10 value = 0 } }
+		set_variable = { name = zz_ef_pb_v value = 0 }
+		if = { limit = { has_variable = ai_privat_bank_bond_value_10 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_10 } }
+		if = {
+			limit = { var:zz_ef_pb_v > var:zz_ef_pbh_10 }
+			if = {
+				limit = { has_variable_list = ai_privat_bank_seller_country_general_10 }
+				random_in_list = {
+					variable = ai_privat_bank_seller_country_general_10
+					limit = { is_country_type = recognized }
+					save_scope_as = zz_ef_pbsel_10
+				}
+			}
+			if = {
+				limit = { exists = scope:zz_ef_pbsel_10 }
+				scope:zz_ef_pbsel_10 = { save_scope_as = zz_ef_bl_seller }
+				set_variable = { name = zz_ef_pbs_10 value = scope:zz_ef_pbsel_10 }
+				zz_ef_pb_buy = { N = 10 }
+			}
+			else = {
+				zz_ef_pb_no_seller = { N = 10 }
+			}
+			set_variable = { name = zz_ef_pbh_10 value = var:ai_privat_bank_bond_value_10 }
+		}
+		else_if = {
+			limit = { var:zz_ef_pb_v < var:zz_ef_pbh_10 }
+			zz_ef_pb_drop = { N = 10 }
+		}
+		if = {
+			limit = {
+				var:zz_ef_pbh_10 > 0
+				has_variable = zz_ef_pbs_10
+				exists = var:zz_ef_pbs_10
+				var:zz_ef_pbs_10 = {
+					is_country_type = recognized
+					has_variable = zz_ef_bl_ratio
+					var:zz_ef_bl_ratio < 1
+				}
+			}
+			zz_ef_pb_cutback = { N = 10 }
+		}
+		if = {
+			limit = { var:zz_ef_pbh_10 <= 0 has_variable = zz_ef_pbs_10 }
+			remove_variable = zz_ef_pbs_10
+		}
 	}
 }
 
 # private banks' slot 11: E&F's ai_privat_bank_bond_value_11 / ai_privat_bank_seller_country_general_11
 zz_ef_pb_slot_11 = {
-	if = { limit = { NOT = { has_variable = zz_ef_pbh_11 } } set_variable = { name = zz_ef_pbh_11 value = 0 } }
-	set_variable = { name = zz_ef_pb_v value = 0 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_11 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_11 } }
-	if = {
-		limit = { var:zz_ef_pb_v > var:zz_ef_pbh_11 }
-		if = {
-			limit = { has_variable_list = ai_privat_bank_seller_country_general_11 }
-			random_in_list = {
-				variable = ai_privat_bank_seller_country_general_11
-				limit = { is_country_type = recognized }
-				save_scope_as = zz_ef_pbsel_11
-			}
-		}
-		if = {
-			limit = { exists = scope:zz_ef_pbsel_11 }
-			scope:zz_ef_pbsel_11 = { save_scope_as = zz_ef_bl_seller }
-			set_variable = { name = zz_ef_pbs_11 value = scope:zz_ef_pbsel_11 }
-			zz_ef_pb_buy = { N = 11 }
-		}
-		else = {
-			zz_ef_pb_no_seller = { N = 11 }
-		}
-		set_variable = { name = zz_ef_pbh_11 value = var:ai_privat_bank_bond_value_11 }
-	}
-	else_if = {
-		limit = { var:zz_ef_pb_v < var:zz_ef_pbh_11 }
-		zz_ef_pb_drop = { N = 11 }
-	}
+	# no slot (E&F's value absent, nothing registered): the body would only set zeros nothing reads -- skip it
 	if = {
 		limit = {
-			var:zz_ef_pbh_11 > 0
-			has_variable = zz_ef_pbs_11
-			exists = var:zz_ef_pbs_11
-			var:zz_ef_pbs_11 = {
-				is_country_type = recognized
-				has_variable = zz_ef_bl_ratio
-				var:zz_ef_bl_ratio < 1
+			OR = {
+				has_variable = ai_privat_bank_bond_value_11
+				has_variable = zz_ef_pbh_11
 			}
 		}
-		zz_ef_pb_cutback = { N = 11 }
-	}
-	if = {
-		limit = { var:zz_ef_pbh_11 <= 0 has_variable = zz_ef_pbs_11 }
-		remove_variable = zz_ef_pbs_11
+		if = { limit = { NOT = { has_variable = zz_ef_pbh_11 } } set_variable = { name = zz_ef_pbh_11 value = 0 } }
+		set_variable = { name = zz_ef_pb_v value = 0 }
+		if = { limit = { has_variable = ai_privat_bank_bond_value_11 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_11 } }
+		if = {
+			limit = { var:zz_ef_pb_v > var:zz_ef_pbh_11 }
+			if = {
+				limit = { has_variable_list = ai_privat_bank_seller_country_general_11 }
+				random_in_list = {
+					variable = ai_privat_bank_seller_country_general_11
+					limit = { is_country_type = recognized }
+					save_scope_as = zz_ef_pbsel_11
+				}
+			}
+			if = {
+				limit = { exists = scope:zz_ef_pbsel_11 }
+				scope:zz_ef_pbsel_11 = { save_scope_as = zz_ef_bl_seller }
+				set_variable = { name = zz_ef_pbs_11 value = scope:zz_ef_pbsel_11 }
+				zz_ef_pb_buy = { N = 11 }
+			}
+			else = {
+				zz_ef_pb_no_seller = { N = 11 }
+			}
+			set_variable = { name = zz_ef_pbh_11 value = var:ai_privat_bank_bond_value_11 }
+		}
+		else_if = {
+			limit = { var:zz_ef_pb_v < var:zz_ef_pbh_11 }
+			zz_ef_pb_drop = { N = 11 }
+		}
+		if = {
+			limit = {
+				var:zz_ef_pbh_11 > 0
+				has_variable = zz_ef_pbs_11
+				exists = var:zz_ef_pbs_11
+				var:zz_ef_pbs_11 = {
+					is_country_type = recognized
+					has_variable = zz_ef_bl_ratio
+					var:zz_ef_bl_ratio < 1
+				}
+			}
+			zz_ef_pb_cutback = { N = 11 }
+		}
+		if = {
+			limit = { var:zz_ef_pbh_11 <= 0 has_variable = zz_ef_pbs_11 }
+			remove_variable = zz_ef_pbs_11
+		}
 	}
 }
 
 # private banks' slot 12: E&F's ai_privat_bank_bond_value_12 / ai_privat_bank_seller_country_general_12
 zz_ef_pb_slot_12 = {
-	if = { limit = { NOT = { has_variable = zz_ef_pbh_12 } } set_variable = { name = zz_ef_pbh_12 value = 0 } }
-	set_variable = { name = zz_ef_pb_v value = 0 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_12 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_12 } }
-	if = {
-		limit = { var:zz_ef_pb_v > var:zz_ef_pbh_12 }
-		if = {
-			limit = { has_variable_list = ai_privat_bank_seller_country_general_12 }
-			random_in_list = {
-				variable = ai_privat_bank_seller_country_general_12
-				limit = { is_country_type = recognized }
-				save_scope_as = zz_ef_pbsel_12
-			}
-		}
-		if = {
-			limit = { exists = scope:zz_ef_pbsel_12 }
-			scope:zz_ef_pbsel_12 = { save_scope_as = zz_ef_bl_seller }
-			set_variable = { name = zz_ef_pbs_12 value = scope:zz_ef_pbsel_12 }
-			zz_ef_pb_buy = { N = 12 }
-		}
-		else = {
-			zz_ef_pb_no_seller = { N = 12 }
-		}
-		set_variable = { name = zz_ef_pbh_12 value = var:ai_privat_bank_bond_value_12 }
-	}
-	else_if = {
-		limit = { var:zz_ef_pb_v < var:zz_ef_pbh_12 }
-		zz_ef_pb_drop = { N = 12 }
-	}
+	# no slot (E&F's value absent, nothing registered): the body would only set zeros nothing reads -- skip it
 	if = {
 		limit = {
-			var:zz_ef_pbh_12 > 0
-			has_variable = zz_ef_pbs_12
-			exists = var:zz_ef_pbs_12
-			var:zz_ef_pbs_12 = {
-				is_country_type = recognized
-				has_variable = zz_ef_bl_ratio
-				var:zz_ef_bl_ratio < 1
+			OR = {
+				has_variable = ai_privat_bank_bond_value_12
+				has_variable = zz_ef_pbh_12
 			}
 		}
-		zz_ef_pb_cutback = { N = 12 }
-	}
-	if = {
-		limit = { var:zz_ef_pbh_12 <= 0 has_variable = zz_ef_pbs_12 }
-		remove_variable = zz_ef_pbs_12
+		if = { limit = { NOT = { has_variable = zz_ef_pbh_12 } } set_variable = { name = zz_ef_pbh_12 value = 0 } }
+		set_variable = { name = zz_ef_pb_v value = 0 }
+		if = { limit = { has_variable = ai_privat_bank_bond_value_12 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_12 } }
+		if = {
+			limit = { var:zz_ef_pb_v > var:zz_ef_pbh_12 }
+			if = {
+				limit = { has_variable_list = ai_privat_bank_seller_country_general_12 }
+				random_in_list = {
+					variable = ai_privat_bank_seller_country_general_12
+					limit = { is_country_type = recognized }
+					save_scope_as = zz_ef_pbsel_12
+				}
+			}
+			if = {
+				limit = { exists = scope:zz_ef_pbsel_12 }
+				scope:zz_ef_pbsel_12 = { save_scope_as = zz_ef_bl_seller }
+				set_variable = { name = zz_ef_pbs_12 value = scope:zz_ef_pbsel_12 }
+				zz_ef_pb_buy = { N = 12 }
+			}
+			else = {
+				zz_ef_pb_no_seller = { N = 12 }
+			}
+			set_variable = { name = zz_ef_pbh_12 value = var:ai_privat_bank_bond_value_12 }
+		}
+		else_if = {
+			limit = { var:zz_ef_pb_v < var:zz_ef_pbh_12 }
+			zz_ef_pb_drop = { N = 12 }
+		}
+		if = {
+			limit = {
+				var:zz_ef_pbh_12 > 0
+				has_variable = zz_ef_pbs_12
+				exists = var:zz_ef_pbs_12
+				var:zz_ef_pbs_12 = {
+					is_country_type = recognized
+					has_variable = zz_ef_bl_ratio
+					var:zz_ef_bl_ratio < 1
+				}
+			}
+			zz_ef_pb_cutback = { N = 12 }
+		}
+		if = {
+			limit = { var:zz_ef_pbh_12 <= 0 has_variable = zz_ef_pbs_12 }
+			remove_variable = zz_ef_pbs_12
+		}
 	}
 }
 
 # private banks' slot 13: E&F's ai_privat_bank_bond_value_13 / ai_privat_bank_seller_country_general_13
 zz_ef_pb_slot_13 = {
-	if = { limit = { NOT = { has_variable = zz_ef_pbh_13 } } set_variable = { name = zz_ef_pbh_13 value = 0 } }
-	set_variable = { name = zz_ef_pb_v value = 0 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_13 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_13 } }
-	if = {
-		limit = { var:zz_ef_pb_v > var:zz_ef_pbh_13 }
-		if = {
-			limit = { has_variable_list = ai_privat_bank_seller_country_general_13 }
-			random_in_list = {
-				variable = ai_privat_bank_seller_country_general_13
-				limit = { is_country_type = recognized }
-				save_scope_as = zz_ef_pbsel_13
-			}
-		}
-		if = {
-			limit = { exists = scope:zz_ef_pbsel_13 }
-			scope:zz_ef_pbsel_13 = { save_scope_as = zz_ef_bl_seller }
-			set_variable = { name = zz_ef_pbs_13 value = scope:zz_ef_pbsel_13 }
-			zz_ef_pb_buy = { N = 13 }
-		}
-		else = {
-			zz_ef_pb_no_seller = { N = 13 }
-		}
-		set_variable = { name = zz_ef_pbh_13 value = var:ai_privat_bank_bond_value_13 }
-	}
-	else_if = {
-		limit = { var:zz_ef_pb_v < var:zz_ef_pbh_13 }
-		zz_ef_pb_drop = { N = 13 }
-	}
+	# no slot (E&F's value absent, nothing registered): the body would only set zeros nothing reads -- skip it
 	if = {
 		limit = {
-			var:zz_ef_pbh_13 > 0
-			has_variable = zz_ef_pbs_13
-			exists = var:zz_ef_pbs_13
-			var:zz_ef_pbs_13 = {
-				is_country_type = recognized
-				has_variable = zz_ef_bl_ratio
-				var:zz_ef_bl_ratio < 1
+			OR = {
+				has_variable = ai_privat_bank_bond_value_13
+				has_variable = zz_ef_pbh_13
 			}
 		}
-		zz_ef_pb_cutback = { N = 13 }
-	}
-	if = {
-		limit = { var:zz_ef_pbh_13 <= 0 has_variable = zz_ef_pbs_13 }
-		remove_variable = zz_ef_pbs_13
+		if = { limit = { NOT = { has_variable = zz_ef_pbh_13 } } set_variable = { name = zz_ef_pbh_13 value = 0 } }
+		set_variable = { name = zz_ef_pb_v value = 0 }
+		if = { limit = { has_variable = ai_privat_bank_bond_value_13 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_13 } }
+		if = {
+			limit = { var:zz_ef_pb_v > var:zz_ef_pbh_13 }
+			if = {
+				limit = { has_variable_list = ai_privat_bank_seller_country_general_13 }
+				random_in_list = {
+					variable = ai_privat_bank_seller_country_general_13
+					limit = { is_country_type = recognized }
+					save_scope_as = zz_ef_pbsel_13
+				}
+			}
+			if = {
+				limit = { exists = scope:zz_ef_pbsel_13 }
+				scope:zz_ef_pbsel_13 = { save_scope_as = zz_ef_bl_seller }
+				set_variable = { name = zz_ef_pbs_13 value = scope:zz_ef_pbsel_13 }
+				zz_ef_pb_buy = { N = 13 }
+			}
+			else = {
+				zz_ef_pb_no_seller = { N = 13 }
+			}
+			set_variable = { name = zz_ef_pbh_13 value = var:ai_privat_bank_bond_value_13 }
+		}
+		else_if = {
+			limit = { var:zz_ef_pb_v < var:zz_ef_pbh_13 }
+			zz_ef_pb_drop = { N = 13 }
+		}
+		if = {
+			limit = {
+				var:zz_ef_pbh_13 > 0
+				has_variable = zz_ef_pbs_13
+				exists = var:zz_ef_pbs_13
+				var:zz_ef_pbs_13 = {
+					is_country_type = recognized
+					has_variable = zz_ef_bl_ratio
+					var:zz_ef_bl_ratio < 1
+				}
+			}
+			zz_ef_pb_cutback = { N = 13 }
+		}
+		if = {
+			limit = { var:zz_ef_pbh_13 <= 0 has_variable = zz_ef_pbs_13 }
+			remove_variable = zz_ef_pbs_13
+		}
 	}
 }
 
 # private banks' slot 14: E&F's ai_privat_bank_bond_value_14 / ai_privat_bank_seller_country_general_14
 zz_ef_pb_slot_14 = {
-	if = { limit = { NOT = { has_variable = zz_ef_pbh_14 } } set_variable = { name = zz_ef_pbh_14 value = 0 } }
-	set_variable = { name = zz_ef_pb_v value = 0 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_14 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_14 } }
-	if = {
-		limit = { var:zz_ef_pb_v > var:zz_ef_pbh_14 }
-		if = {
-			limit = { has_variable_list = ai_privat_bank_seller_country_general_14 }
-			random_in_list = {
-				variable = ai_privat_bank_seller_country_general_14
-				limit = { is_country_type = recognized }
-				save_scope_as = zz_ef_pbsel_14
-			}
-		}
-		if = {
-			limit = { exists = scope:zz_ef_pbsel_14 }
-			scope:zz_ef_pbsel_14 = { save_scope_as = zz_ef_bl_seller }
-			set_variable = { name = zz_ef_pbs_14 value = scope:zz_ef_pbsel_14 }
-			zz_ef_pb_buy = { N = 14 }
-		}
-		else = {
-			zz_ef_pb_no_seller = { N = 14 }
-		}
-		set_variable = { name = zz_ef_pbh_14 value = var:ai_privat_bank_bond_value_14 }
-	}
-	else_if = {
-		limit = { var:zz_ef_pb_v < var:zz_ef_pbh_14 }
-		zz_ef_pb_drop = { N = 14 }
-	}
+	# no slot (E&F's value absent, nothing registered): the body would only set zeros nothing reads -- skip it
 	if = {
 		limit = {
-			var:zz_ef_pbh_14 > 0
-			has_variable = zz_ef_pbs_14
-			exists = var:zz_ef_pbs_14
-			var:zz_ef_pbs_14 = {
-				is_country_type = recognized
-				has_variable = zz_ef_bl_ratio
-				var:zz_ef_bl_ratio < 1
+			OR = {
+				has_variable = ai_privat_bank_bond_value_14
+				has_variable = zz_ef_pbh_14
 			}
 		}
-		zz_ef_pb_cutback = { N = 14 }
-	}
-	if = {
-		limit = { var:zz_ef_pbh_14 <= 0 has_variable = zz_ef_pbs_14 }
-		remove_variable = zz_ef_pbs_14
+		if = { limit = { NOT = { has_variable = zz_ef_pbh_14 } } set_variable = { name = zz_ef_pbh_14 value = 0 } }
+		set_variable = { name = zz_ef_pb_v value = 0 }
+		if = { limit = { has_variable = ai_privat_bank_bond_value_14 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_14 } }
+		if = {
+			limit = { var:zz_ef_pb_v > var:zz_ef_pbh_14 }
+			if = {
+				limit = { has_variable_list = ai_privat_bank_seller_country_general_14 }
+				random_in_list = {
+					variable = ai_privat_bank_seller_country_general_14
+					limit = { is_country_type = recognized }
+					save_scope_as = zz_ef_pbsel_14
+				}
+			}
+			if = {
+				limit = { exists = scope:zz_ef_pbsel_14 }
+				scope:zz_ef_pbsel_14 = { save_scope_as = zz_ef_bl_seller }
+				set_variable = { name = zz_ef_pbs_14 value = scope:zz_ef_pbsel_14 }
+				zz_ef_pb_buy = { N = 14 }
+			}
+			else = {
+				zz_ef_pb_no_seller = { N = 14 }
+			}
+			set_variable = { name = zz_ef_pbh_14 value = var:ai_privat_bank_bond_value_14 }
+		}
+		else_if = {
+			limit = { var:zz_ef_pb_v < var:zz_ef_pbh_14 }
+			zz_ef_pb_drop = { N = 14 }
+		}
+		if = {
+			limit = {
+				var:zz_ef_pbh_14 > 0
+				has_variable = zz_ef_pbs_14
+				exists = var:zz_ef_pbs_14
+				var:zz_ef_pbs_14 = {
+					is_country_type = recognized
+					has_variable = zz_ef_bl_ratio
+					var:zz_ef_bl_ratio < 1
+				}
+			}
+			zz_ef_pb_cutback = { N = 14 }
+		}
+		if = {
+			limit = { var:zz_ef_pbh_14 <= 0 has_variable = zz_ef_pbs_14 }
+			remove_variable = zz_ef_pbs_14
+		}
 	}
 }
 
 # private banks' slot 15: E&F's ai_privat_bank_bond_value_15 / ai_privat_bank_seller_country_general_15
 zz_ef_pb_slot_15 = {
-	if = { limit = { NOT = { has_variable = zz_ef_pbh_15 } } set_variable = { name = zz_ef_pbh_15 value = 0 } }
-	set_variable = { name = zz_ef_pb_v value = 0 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_15 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_15 } }
-	if = {
-		limit = { var:zz_ef_pb_v > var:zz_ef_pbh_15 }
-		if = {
-			limit = { has_variable_list = ai_privat_bank_seller_country_general_15 }
-			random_in_list = {
-				variable = ai_privat_bank_seller_country_general_15
-				limit = { is_country_type = recognized }
-				save_scope_as = zz_ef_pbsel_15
-			}
-		}
-		if = {
-			limit = { exists = scope:zz_ef_pbsel_15 }
-			scope:zz_ef_pbsel_15 = { save_scope_as = zz_ef_bl_seller }
-			set_variable = { name = zz_ef_pbs_15 value = scope:zz_ef_pbsel_15 }
-			zz_ef_pb_buy = { N = 15 }
-		}
-		else = {
-			zz_ef_pb_no_seller = { N = 15 }
-		}
-		set_variable = { name = zz_ef_pbh_15 value = var:ai_privat_bank_bond_value_15 }
-	}
-	else_if = {
-		limit = { var:zz_ef_pb_v < var:zz_ef_pbh_15 }
-		zz_ef_pb_drop = { N = 15 }
-	}
+	# no slot (E&F's value absent, nothing registered): the body would only set zeros nothing reads -- skip it
 	if = {
 		limit = {
-			var:zz_ef_pbh_15 > 0
-			has_variable = zz_ef_pbs_15
-			exists = var:zz_ef_pbs_15
-			var:zz_ef_pbs_15 = {
-				is_country_type = recognized
-				has_variable = zz_ef_bl_ratio
-				var:zz_ef_bl_ratio < 1
+			OR = {
+				has_variable = ai_privat_bank_bond_value_15
+				has_variable = zz_ef_pbh_15
 			}
 		}
-		zz_ef_pb_cutback = { N = 15 }
-	}
-	if = {
-		limit = { var:zz_ef_pbh_15 <= 0 has_variable = zz_ef_pbs_15 }
-		remove_variable = zz_ef_pbs_15
+		if = { limit = { NOT = { has_variable = zz_ef_pbh_15 } } set_variable = { name = zz_ef_pbh_15 value = 0 } }
+		set_variable = { name = zz_ef_pb_v value = 0 }
+		if = { limit = { has_variable = ai_privat_bank_bond_value_15 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_15 } }
+		if = {
+			limit = { var:zz_ef_pb_v > var:zz_ef_pbh_15 }
+			if = {
+				limit = { has_variable_list = ai_privat_bank_seller_country_general_15 }
+				random_in_list = {
+					variable = ai_privat_bank_seller_country_general_15
+					limit = { is_country_type = recognized }
+					save_scope_as = zz_ef_pbsel_15
+				}
+			}
+			if = {
+				limit = { exists = scope:zz_ef_pbsel_15 }
+				scope:zz_ef_pbsel_15 = { save_scope_as = zz_ef_bl_seller }
+				set_variable = { name = zz_ef_pbs_15 value = scope:zz_ef_pbsel_15 }
+				zz_ef_pb_buy = { N = 15 }
+			}
+			else = {
+				zz_ef_pb_no_seller = { N = 15 }
+			}
+			set_variable = { name = zz_ef_pbh_15 value = var:ai_privat_bank_bond_value_15 }
+		}
+		else_if = {
+			limit = { var:zz_ef_pb_v < var:zz_ef_pbh_15 }
+			zz_ef_pb_drop = { N = 15 }
+		}
+		if = {
+			limit = {
+				var:zz_ef_pbh_15 > 0
+				has_variable = zz_ef_pbs_15
+				exists = var:zz_ef_pbs_15
+				var:zz_ef_pbs_15 = {
+					is_country_type = recognized
+					has_variable = zz_ef_bl_ratio
+					var:zz_ef_bl_ratio < 1
+				}
+			}
+			zz_ef_pb_cutback = { N = 15 }
+		}
+		if = {
+			limit = { var:zz_ef_pbh_15 <= 0 has_variable = zz_ef_pbs_15 }
+			remove_variable = zz_ef_pbs_15
+		}
 	}
 }
 
 # private banks' slot 16: E&F's ai_privat_bank_bond_value_16 / ai_privat_bank_seller_country_general_16
 zz_ef_pb_slot_16 = {
-	if = { limit = { NOT = { has_variable = zz_ef_pbh_16 } } set_variable = { name = zz_ef_pbh_16 value = 0 } }
-	set_variable = { name = zz_ef_pb_v value = 0 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_16 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_16 } }
-	if = {
-		limit = { var:zz_ef_pb_v > var:zz_ef_pbh_16 }
-		if = {
-			limit = { has_variable_list = ai_privat_bank_seller_country_general_16 }
-			random_in_list = {
-				variable = ai_privat_bank_seller_country_general_16
-				limit = { is_country_type = recognized }
-				save_scope_as = zz_ef_pbsel_16
-			}
-		}
-		if = {
-			limit = { exists = scope:zz_ef_pbsel_16 }
-			scope:zz_ef_pbsel_16 = { save_scope_as = zz_ef_bl_seller }
-			set_variable = { name = zz_ef_pbs_16 value = scope:zz_ef_pbsel_16 }
-			zz_ef_pb_buy = { N = 16 }
-		}
-		else = {
-			zz_ef_pb_no_seller = { N = 16 }
-		}
-		set_variable = { name = zz_ef_pbh_16 value = var:ai_privat_bank_bond_value_16 }
-	}
-	else_if = {
-		limit = { var:zz_ef_pb_v < var:zz_ef_pbh_16 }
-		zz_ef_pb_drop = { N = 16 }
-	}
+	# no slot (E&F's value absent, nothing registered): the body would only set zeros nothing reads -- skip it
 	if = {
 		limit = {
-			var:zz_ef_pbh_16 > 0
-			has_variable = zz_ef_pbs_16
-			exists = var:zz_ef_pbs_16
-			var:zz_ef_pbs_16 = {
-				is_country_type = recognized
-				has_variable = zz_ef_bl_ratio
-				var:zz_ef_bl_ratio < 1
+			OR = {
+				has_variable = ai_privat_bank_bond_value_16
+				has_variable = zz_ef_pbh_16
 			}
 		}
-		zz_ef_pb_cutback = { N = 16 }
-	}
-	if = {
-		limit = { var:zz_ef_pbh_16 <= 0 has_variable = zz_ef_pbs_16 }
-		remove_variable = zz_ef_pbs_16
+		if = { limit = { NOT = { has_variable = zz_ef_pbh_16 } } set_variable = { name = zz_ef_pbh_16 value = 0 } }
+		set_variable = { name = zz_ef_pb_v value = 0 }
+		if = { limit = { has_variable = ai_privat_bank_bond_value_16 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_16 } }
+		if = {
+			limit = { var:zz_ef_pb_v > var:zz_ef_pbh_16 }
+			if = {
+				limit = { has_variable_list = ai_privat_bank_seller_country_general_16 }
+				random_in_list = {
+					variable = ai_privat_bank_seller_country_general_16
+					limit = { is_country_type = recognized }
+					save_scope_as = zz_ef_pbsel_16
+				}
+			}
+			if = {
+				limit = { exists = scope:zz_ef_pbsel_16 }
+				scope:zz_ef_pbsel_16 = { save_scope_as = zz_ef_bl_seller }
+				set_variable = { name = zz_ef_pbs_16 value = scope:zz_ef_pbsel_16 }
+				zz_ef_pb_buy = { N = 16 }
+			}
+			else = {
+				zz_ef_pb_no_seller = { N = 16 }
+			}
+			set_variable = { name = zz_ef_pbh_16 value = var:ai_privat_bank_bond_value_16 }
+		}
+		else_if = {
+			limit = { var:zz_ef_pb_v < var:zz_ef_pbh_16 }
+			zz_ef_pb_drop = { N = 16 }
+		}
+		if = {
+			limit = {
+				var:zz_ef_pbh_16 > 0
+				has_variable = zz_ef_pbs_16
+				exists = var:zz_ef_pbs_16
+				var:zz_ef_pbs_16 = {
+					is_country_type = recognized
+					has_variable = zz_ef_bl_ratio
+					var:zz_ef_bl_ratio < 1
+				}
+			}
+			zz_ef_pb_cutback = { N = 16 }
+		}
+		if = {
+			limit = { var:zz_ef_pbh_16 <= 0 has_variable = zz_ef_pbs_16 }
+			remove_variable = zz_ef_pbs_16
+		}
 	}
 }
 
 # private banks' slot 17: E&F's ai_privat_bank_bond_value_17 / ai_privat_bank_seller_country_general_17
 zz_ef_pb_slot_17 = {
-	if = { limit = { NOT = { has_variable = zz_ef_pbh_17 } } set_variable = { name = zz_ef_pbh_17 value = 0 } }
-	set_variable = { name = zz_ef_pb_v value = 0 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_17 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_17 } }
-	if = {
-		limit = { var:zz_ef_pb_v > var:zz_ef_pbh_17 }
-		if = {
-			limit = { has_variable_list = ai_privat_bank_seller_country_general_17 }
-			random_in_list = {
-				variable = ai_privat_bank_seller_country_general_17
-				limit = { is_country_type = recognized }
-				save_scope_as = zz_ef_pbsel_17
-			}
-		}
-		if = {
-			limit = { exists = scope:zz_ef_pbsel_17 }
-			scope:zz_ef_pbsel_17 = { save_scope_as = zz_ef_bl_seller }
-			set_variable = { name = zz_ef_pbs_17 value = scope:zz_ef_pbsel_17 }
-			zz_ef_pb_buy = { N = 17 }
-		}
-		else = {
-			zz_ef_pb_no_seller = { N = 17 }
-		}
-		set_variable = { name = zz_ef_pbh_17 value = var:ai_privat_bank_bond_value_17 }
-	}
-	else_if = {
-		limit = { var:zz_ef_pb_v < var:zz_ef_pbh_17 }
-		zz_ef_pb_drop = { N = 17 }
-	}
+	# no slot (E&F's value absent, nothing registered): the body would only set zeros nothing reads -- skip it
 	if = {
 		limit = {
-			var:zz_ef_pbh_17 > 0
-			has_variable = zz_ef_pbs_17
-			exists = var:zz_ef_pbs_17
-			var:zz_ef_pbs_17 = {
-				is_country_type = recognized
-				has_variable = zz_ef_bl_ratio
-				var:zz_ef_bl_ratio < 1
+			OR = {
+				has_variable = ai_privat_bank_bond_value_17
+				has_variable = zz_ef_pbh_17
 			}
 		}
-		zz_ef_pb_cutback = { N = 17 }
-	}
-	if = {
-		limit = { var:zz_ef_pbh_17 <= 0 has_variable = zz_ef_pbs_17 }
-		remove_variable = zz_ef_pbs_17
+		if = { limit = { NOT = { has_variable = zz_ef_pbh_17 } } set_variable = { name = zz_ef_pbh_17 value = 0 } }
+		set_variable = { name = zz_ef_pb_v value = 0 }
+		if = { limit = { has_variable = ai_privat_bank_bond_value_17 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_17 } }
+		if = {
+			limit = { var:zz_ef_pb_v > var:zz_ef_pbh_17 }
+			if = {
+				limit = { has_variable_list = ai_privat_bank_seller_country_general_17 }
+				random_in_list = {
+					variable = ai_privat_bank_seller_country_general_17
+					limit = { is_country_type = recognized }
+					save_scope_as = zz_ef_pbsel_17
+				}
+			}
+			if = {
+				limit = { exists = scope:zz_ef_pbsel_17 }
+				scope:zz_ef_pbsel_17 = { save_scope_as = zz_ef_bl_seller }
+				set_variable = { name = zz_ef_pbs_17 value = scope:zz_ef_pbsel_17 }
+				zz_ef_pb_buy = { N = 17 }
+			}
+			else = {
+				zz_ef_pb_no_seller = { N = 17 }
+			}
+			set_variable = { name = zz_ef_pbh_17 value = var:ai_privat_bank_bond_value_17 }
+		}
+		else_if = {
+			limit = { var:zz_ef_pb_v < var:zz_ef_pbh_17 }
+			zz_ef_pb_drop = { N = 17 }
+		}
+		if = {
+			limit = {
+				var:zz_ef_pbh_17 > 0
+				has_variable = zz_ef_pbs_17
+				exists = var:zz_ef_pbs_17
+				var:zz_ef_pbs_17 = {
+					is_country_type = recognized
+					has_variable = zz_ef_bl_ratio
+					var:zz_ef_bl_ratio < 1
+				}
+			}
+			zz_ef_pb_cutback = { N = 17 }
+		}
+		if = {
+			limit = { var:zz_ef_pbh_17 <= 0 has_variable = zz_ef_pbs_17 }
+			remove_variable = zz_ef_pbs_17
+		}
 	}
 }
 
 # private banks' slot 18: E&F's ai_privat_bank_bond_value_18 / ai_privat_bank_seller_country_general_18
 zz_ef_pb_slot_18 = {
-	if = { limit = { NOT = { has_variable = zz_ef_pbh_18 } } set_variable = { name = zz_ef_pbh_18 value = 0 } }
-	set_variable = { name = zz_ef_pb_v value = 0 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_18 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_18 } }
-	if = {
-		limit = { var:zz_ef_pb_v > var:zz_ef_pbh_18 }
-		if = {
-			limit = { has_variable_list = ai_privat_bank_seller_country_general_18 }
-			random_in_list = {
-				variable = ai_privat_bank_seller_country_general_18
-				limit = { is_country_type = recognized }
-				save_scope_as = zz_ef_pbsel_18
-			}
-		}
-		if = {
-			limit = { exists = scope:zz_ef_pbsel_18 }
-			scope:zz_ef_pbsel_18 = { save_scope_as = zz_ef_bl_seller }
-			set_variable = { name = zz_ef_pbs_18 value = scope:zz_ef_pbsel_18 }
-			zz_ef_pb_buy = { N = 18 }
-		}
-		else = {
-			zz_ef_pb_no_seller = { N = 18 }
-		}
-		set_variable = { name = zz_ef_pbh_18 value = var:ai_privat_bank_bond_value_18 }
-	}
-	else_if = {
-		limit = { var:zz_ef_pb_v < var:zz_ef_pbh_18 }
-		zz_ef_pb_drop = { N = 18 }
-	}
+	# no slot (E&F's value absent, nothing registered): the body would only set zeros nothing reads -- skip it
 	if = {
 		limit = {
-			var:zz_ef_pbh_18 > 0
-			has_variable = zz_ef_pbs_18
-			exists = var:zz_ef_pbs_18
-			var:zz_ef_pbs_18 = {
-				is_country_type = recognized
-				has_variable = zz_ef_bl_ratio
-				var:zz_ef_bl_ratio < 1
+			OR = {
+				has_variable = ai_privat_bank_bond_value_18
+				has_variable = zz_ef_pbh_18
 			}
 		}
-		zz_ef_pb_cutback = { N = 18 }
-	}
-	if = {
-		limit = { var:zz_ef_pbh_18 <= 0 has_variable = zz_ef_pbs_18 }
-		remove_variable = zz_ef_pbs_18
+		if = { limit = { NOT = { has_variable = zz_ef_pbh_18 } } set_variable = { name = zz_ef_pbh_18 value = 0 } }
+		set_variable = { name = zz_ef_pb_v value = 0 }
+		if = { limit = { has_variable = ai_privat_bank_bond_value_18 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_18 } }
+		if = {
+			limit = { var:zz_ef_pb_v > var:zz_ef_pbh_18 }
+			if = {
+				limit = { has_variable_list = ai_privat_bank_seller_country_general_18 }
+				random_in_list = {
+					variable = ai_privat_bank_seller_country_general_18
+					limit = { is_country_type = recognized }
+					save_scope_as = zz_ef_pbsel_18
+				}
+			}
+			if = {
+				limit = { exists = scope:zz_ef_pbsel_18 }
+				scope:zz_ef_pbsel_18 = { save_scope_as = zz_ef_bl_seller }
+				set_variable = { name = zz_ef_pbs_18 value = scope:zz_ef_pbsel_18 }
+				zz_ef_pb_buy = { N = 18 }
+			}
+			else = {
+				zz_ef_pb_no_seller = { N = 18 }
+			}
+			set_variable = { name = zz_ef_pbh_18 value = var:ai_privat_bank_bond_value_18 }
+		}
+		else_if = {
+			limit = { var:zz_ef_pb_v < var:zz_ef_pbh_18 }
+			zz_ef_pb_drop = { N = 18 }
+		}
+		if = {
+			limit = {
+				var:zz_ef_pbh_18 > 0
+				has_variable = zz_ef_pbs_18
+				exists = var:zz_ef_pbs_18
+				var:zz_ef_pbs_18 = {
+					is_country_type = recognized
+					has_variable = zz_ef_bl_ratio
+					var:zz_ef_bl_ratio < 1
+				}
+			}
+			zz_ef_pb_cutback = { N = 18 }
+		}
+		if = {
+			limit = { var:zz_ef_pbh_18 <= 0 has_variable = zz_ef_pbs_18 }
+			remove_variable = zz_ef_pbs_18
+		}
 	}
 }
 
 # private banks' slot 19: E&F's ai_privat_bank_bond_value_19 / ai_privat_bank_seller_country_general_19
 zz_ef_pb_slot_19 = {
-	if = { limit = { NOT = { has_variable = zz_ef_pbh_19 } } set_variable = { name = zz_ef_pbh_19 value = 0 } }
-	set_variable = { name = zz_ef_pb_v value = 0 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_19 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_19 } }
-	if = {
-		limit = { var:zz_ef_pb_v > var:zz_ef_pbh_19 }
-		if = {
-			limit = { has_variable_list = ai_privat_bank_seller_country_general_19 }
-			random_in_list = {
-				variable = ai_privat_bank_seller_country_general_19
-				limit = { is_country_type = recognized }
-				save_scope_as = zz_ef_pbsel_19
-			}
-		}
-		if = {
-			limit = { exists = scope:zz_ef_pbsel_19 }
-			scope:zz_ef_pbsel_19 = { save_scope_as = zz_ef_bl_seller }
-			set_variable = { name = zz_ef_pbs_19 value = scope:zz_ef_pbsel_19 }
-			zz_ef_pb_buy = { N = 19 }
-		}
-		else = {
-			zz_ef_pb_no_seller = { N = 19 }
-		}
-		set_variable = { name = zz_ef_pbh_19 value = var:ai_privat_bank_bond_value_19 }
-	}
-	else_if = {
-		limit = { var:zz_ef_pb_v < var:zz_ef_pbh_19 }
-		zz_ef_pb_drop = { N = 19 }
-	}
+	# no slot (E&F's value absent, nothing registered): the body would only set zeros nothing reads -- skip it
 	if = {
 		limit = {
-			var:zz_ef_pbh_19 > 0
-			has_variable = zz_ef_pbs_19
-			exists = var:zz_ef_pbs_19
-			var:zz_ef_pbs_19 = {
-				is_country_type = recognized
-				has_variable = zz_ef_bl_ratio
-				var:zz_ef_bl_ratio < 1
+			OR = {
+				has_variable = ai_privat_bank_bond_value_19
+				has_variable = zz_ef_pbh_19
 			}
 		}
-		zz_ef_pb_cutback = { N = 19 }
-	}
-	if = {
-		limit = { var:zz_ef_pbh_19 <= 0 has_variable = zz_ef_pbs_19 }
-		remove_variable = zz_ef_pbs_19
+		if = { limit = { NOT = { has_variable = zz_ef_pbh_19 } } set_variable = { name = zz_ef_pbh_19 value = 0 } }
+		set_variable = { name = zz_ef_pb_v value = 0 }
+		if = { limit = { has_variable = ai_privat_bank_bond_value_19 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_19 } }
+		if = {
+			limit = { var:zz_ef_pb_v > var:zz_ef_pbh_19 }
+			if = {
+				limit = { has_variable_list = ai_privat_bank_seller_country_general_19 }
+				random_in_list = {
+					variable = ai_privat_bank_seller_country_general_19
+					limit = { is_country_type = recognized }
+					save_scope_as = zz_ef_pbsel_19
+				}
+			}
+			if = {
+				limit = { exists = scope:zz_ef_pbsel_19 }
+				scope:zz_ef_pbsel_19 = { save_scope_as = zz_ef_bl_seller }
+				set_variable = { name = zz_ef_pbs_19 value = scope:zz_ef_pbsel_19 }
+				zz_ef_pb_buy = { N = 19 }
+			}
+			else = {
+				zz_ef_pb_no_seller = { N = 19 }
+			}
+			set_variable = { name = zz_ef_pbh_19 value = var:ai_privat_bank_bond_value_19 }
+		}
+		else_if = {
+			limit = { var:zz_ef_pb_v < var:zz_ef_pbh_19 }
+			zz_ef_pb_drop = { N = 19 }
+		}
+		if = {
+			limit = {
+				var:zz_ef_pbh_19 > 0
+				has_variable = zz_ef_pbs_19
+				exists = var:zz_ef_pbs_19
+				var:zz_ef_pbs_19 = {
+					is_country_type = recognized
+					has_variable = zz_ef_bl_ratio
+					var:zz_ef_bl_ratio < 1
+				}
+			}
+			zz_ef_pb_cutback = { N = 19 }
+		}
+		if = {
+			limit = { var:zz_ef_pbh_19 <= 0 has_variable = zz_ef_pbs_19 }
+			remove_variable = zz_ef_pbs_19
+		}
 	}
 }
 
 # private banks' slot 20: E&F's ai_privat_bank_bond_value_20 / ai_privat_bank_seller_country_general_20
 zz_ef_pb_slot_20 = {
-	if = { limit = { NOT = { has_variable = zz_ef_pbh_20 } } set_variable = { name = zz_ef_pbh_20 value = 0 } }
-	set_variable = { name = zz_ef_pb_v value = 0 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_20 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_20 } }
-	if = {
-		limit = { var:zz_ef_pb_v > var:zz_ef_pbh_20 }
-		if = {
-			limit = { has_variable_list = ai_privat_bank_seller_country_general_20 }
-			random_in_list = {
-				variable = ai_privat_bank_seller_country_general_20
-				limit = { is_country_type = recognized }
-				save_scope_as = zz_ef_pbsel_20
-			}
-		}
-		if = {
-			limit = { exists = scope:zz_ef_pbsel_20 }
-			scope:zz_ef_pbsel_20 = { save_scope_as = zz_ef_bl_seller }
-			set_variable = { name = zz_ef_pbs_20 value = scope:zz_ef_pbsel_20 }
-			zz_ef_pb_buy = { N = 20 }
-		}
-		else = {
-			zz_ef_pb_no_seller = { N = 20 }
-		}
-		set_variable = { name = zz_ef_pbh_20 value = var:ai_privat_bank_bond_value_20 }
-	}
-	else_if = {
-		limit = { var:zz_ef_pb_v < var:zz_ef_pbh_20 }
-		zz_ef_pb_drop = { N = 20 }
-	}
+	# no slot (E&F's value absent, nothing registered): the body would only set zeros nothing reads -- skip it
 	if = {
 		limit = {
-			var:zz_ef_pbh_20 > 0
-			has_variable = zz_ef_pbs_20
-			exists = var:zz_ef_pbs_20
-			var:zz_ef_pbs_20 = {
-				is_country_type = recognized
-				has_variable = zz_ef_bl_ratio
-				var:zz_ef_bl_ratio < 1
+			OR = {
+				has_variable = ai_privat_bank_bond_value_20
+				has_variable = zz_ef_pbh_20
 			}
 		}
-		zz_ef_pb_cutback = { N = 20 }
-	}
-	if = {
-		limit = { var:zz_ef_pbh_20 <= 0 has_variable = zz_ef_pbs_20 }
-		remove_variable = zz_ef_pbs_20
+		if = { limit = { NOT = { has_variable = zz_ef_pbh_20 } } set_variable = { name = zz_ef_pbh_20 value = 0 } }
+		set_variable = { name = zz_ef_pb_v value = 0 }
+		if = { limit = { has_variable = ai_privat_bank_bond_value_20 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_20 } }
+		if = {
+			limit = { var:zz_ef_pb_v > var:zz_ef_pbh_20 }
+			if = {
+				limit = { has_variable_list = ai_privat_bank_seller_country_general_20 }
+				random_in_list = {
+					variable = ai_privat_bank_seller_country_general_20
+					limit = { is_country_type = recognized }
+					save_scope_as = zz_ef_pbsel_20
+				}
+			}
+			if = {
+				limit = { exists = scope:zz_ef_pbsel_20 }
+				scope:zz_ef_pbsel_20 = { save_scope_as = zz_ef_bl_seller }
+				set_variable = { name = zz_ef_pbs_20 value = scope:zz_ef_pbsel_20 }
+				zz_ef_pb_buy = { N = 20 }
+			}
+			else = {
+				zz_ef_pb_no_seller = { N = 20 }
+			}
+			set_variable = { name = zz_ef_pbh_20 value = var:ai_privat_bank_bond_value_20 }
+		}
+		else_if = {
+			limit = { var:zz_ef_pb_v < var:zz_ef_pbh_20 }
+			zz_ef_pb_drop = { N = 20 }
+		}
+		if = {
+			limit = {
+				var:zz_ef_pbh_20 > 0
+				has_variable = zz_ef_pbs_20
+				exists = var:zz_ef_pbs_20
+				var:zz_ef_pbs_20 = {
+					is_country_type = recognized
+					has_variable = zz_ef_bl_ratio
+					var:zz_ef_bl_ratio < 1
+				}
+			}
+			zz_ef_pb_cutback = { N = 20 }
+		}
+		if = {
+			limit = { var:zz_ef_pbh_20 <= 0 has_variable = zz_ef_pbs_20 }
+			remove_variable = zz_ef_pbs_20
+		}
 	}
 }
 
 # private banks' slot 21: E&F's ai_privat_bank_bond_value_21 / ai_privat_bank_seller_country_general_21
 zz_ef_pb_slot_21 = {
-	if = { limit = { NOT = { has_variable = zz_ef_pbh_21 } } set_variable = { name = zz_ef_pbh_21 value = 0 } }
-	set_variable = { name = zz_ef_pb_v value = 0 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_21 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_21 } }
-	if = {
-		limit = { var:zz_ef_pb_v > var:zz_ef_pbh_21 }
-		if = {
-			limit = { has_variable_list = ai_privat_bank_seller_country_general_21 }
-			random_in_list = {
-				variable = ai_privat_bank_seller_country_general_21
-				limit = { is_country_type = recognized }
-				save_scope_as = zz_ef_pbsel_21
-			}
-		}
-		if = {
-			limit = { exists = scope:zz_ef_pbsel_21 }
-			scope:zz_ef_pbsel_21 = { save_scope_as = zz_ef_bl_seller }
-			set_variable = { name = zz_ef_pbs_21 value = scope:zz_ef_pbsel_21 }
-			zz_ef_pb_buy = { N = 21 }
-		}
-		else = {
-			zz_ef_pb_no_seller = { N = 21 }
-		}
-		set_variable = { name = zz_ef_pbh_21 value = var:ai_privat_bank_bond_value_21 }
-	}
-	else_if = {
-		limit = { var:zz_ef_pb_v < var:zz_ef_pbh_21 }
-		zz_ef_pb_drop = { N = 21 }
-	}
+	# no slot (E&F's value absent, nothing registered): the body would only set zeros nothing reads -- skip it
 	if = {
 		limit = {
-			var:zz_ef_pbh_21 > 0
-			has_variable = zz_ef_pbs_21
-			exists = var:zz_ef_pbs_21
-			var:zz_ef_pbs_21 = {
-				is_country_type = recognized
-				has_variable = zz_ef_bl_ratio
-				var:zz_ef_bl_ratio < 1
+			OR = {
+				has_variable = ai_privat_bank_bond_value_21
+				has_variable = zz_ef_pbh_21
 			}
 		}
-		zz_ef_pb_cutback = { N = 21 }
-	}
-	if = {
-		limit = { var:zz_ef_pbh_21 <= 0 has_variable = zz_ef_pbs_21 }
-		remove_variable = zz_ef_pbs_21
+		if = { limit = { NOT = { has_variable = zz_ef_pbh_21 } } set_variable = { name = zz_ef_pbh_21 value = 0 } }
+		set_variable = { name = zz_ef_pb_v value = 0 }
+		if = { limit = { has_variable = ai_privat_bank_bond_value_21 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_21 } }
+		if = {
+			limit = { var:zz_ef_pb_v > var:zz_ef_pbh_21 }
+			if = {
+				limit = { has_variable_list = ai_privat_bank_seller_country_general_21 }
+				random_in_list = {
+					variable = ai_privat_bank_seller_country_general_21
+					limit = { is_country_type = recognized }
+					save_scope_as = zz_ef_pbsel_21
+				}
+			}
+			if = {
+				limit = { exists = scope:zz_ef_pbsel_21 }
+				scope:zz_ef_pbsel_21 = { save_scope_as = zz_ef_bl_seller }
+				set_variable = { name = zz_ef_pbs_21 value = scope:zz_ef_pbsel_21 }
+				zz_ef_pb_buy = { N = 21 }
+			}
+			else = {
+				zz_ef_pb_no_seller = { N = 21 }
+			}
+			set_variable = { name = zz_ef_pbh_21 value = var:ai_privat_bank_bond_value_21 }
+		}
+		else_if = {
+			limit = { var:zz_ef_pb_v < var:zz_ef_pbh_21 }
+			zz_ef_pb_drop = { N = 21 }
+		}
+		if = {
+			limit = {
+				var:zz_ef_pbh_21 > 0
+				has_variable = zz_ef_pbs_21
+				exists = var:zz_ef_pbs_21
+				var:zz_ef_pbs_21 = {
+					is_country_type = recognized
+					has_variable = zz_ef_bl_ratio
+					var:zz_ef_bl_ratio < 1
+				}
+			}
+			zz_ef_pb_cutback = { N = 21 }
+		}
+		if = {
+			limit = { var:zz_ef_pbh_21 <= 0 has_variable = zz_ef_pbs_21 }
+			remove_variable = zz_ef_pbs_21
+		}
 	}
 }
 
 # private banks' slot 22: E&F's ai_privat_bank_bond_value_22 / ai_privat_bank_seller_country_general_22
 zz_ef_pb_slot_22 = {
-	if = { limit = { NOT = { has_variable = zz_ef_pbh_22 } } set_variable = { name = zz_ef_pbh_22 value = 0 } }
-	set_variable = { name = zz_ef_pb_v value = 0 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_22 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_22 } }
-	if = {
-		limit = { var:zz_ef_pb_v > var:zz_ef_pbh_22 }
-		if = {
-			limit = { has_variable_list = ai_privat_bank_seller_country_general_22 }
-			random_in_list = {
-				variable = ai_privat_bank_seller_country_general_22
-				limit = { is_country_type = recognized }
-				save_scope_as = zz_ef_pbsel_22
-			}
-		}
-		if = {
-			limit = { exists = scope:zz_ef_pbsel_22 }
-			scope:zz_ef_pbsel_22 = { save_scope_as = zz_ef_bl_seller }
-			set_variable = { name = zz_ef_pbs_22 value = scope:zz_ef_pbsel_22 }
-			zz_ef_pb_buy = { N = 22 }
-		}
-		else = {
-			zz_ef_pb_no_seller = { N = 22 }
-		}
-		set_variable = { name = zz_ef_pbh_22 value = var:ai_privat_bank_bond_value_22 }
-	}
-	else_if = {
-		limit = { var:zz_ef_pb_v < var:zz_ef_pbh_22 }
-		zz_ef_pb_drop = { N = 22 }
-	}
+	# no slot (E&F's value absent, nothing registered): the body would only set zeros nothing reads -- skip it
 	if = {
 		limit = {
-			var:zz_ef_pbh_22 > 0
-			has_variable = zz_ef_pbs_22
-			exists = var:zz_ef_pbs_22
-			var:zz_ef_pbs_22 = {
-				is_country_type = recognized
-				has_variable = zz_ef_bl_ratio
-				var:zz_ef_bl_ratio < 1
+			OR = {
+				has_variable = ai_privat_bank_bond_value_22
+				has_variable = zz_ef_pbh_22
 			}
 		}
-		zz_ef_pb_cutback = { N = 22 }
-	}
-	if = {
-		limit = { var:zz_ef_pbh_22 <= 0 has_variable = zz_ef_pbs_22 }
-		remove_variable = zz_ef_pbs_22
+		if = { limit = { NOT = { has_variable = zz_ef_pbh_22 } } set_variable = { name = zz_ef_pbh_22 value = 0 } }
+		set_variable = { name = zz_ef_pb_v value = 0 }
+		if = { limit = { has_variable = ai_privat_bank_bond_value_22 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_22 } }
+		if = {
+			limit = { var:zz_ef_pb_v > var:zz_ef_pbh_22 }
+			if = {
+				limit = { has_variable_list = ai_privat_bank_seller_country_general_22 }
+				random_in_list = {
+					variable = ai_privat_bank_seller_country_general_22
+					limit = { is_country_type = recognized }
+					save_scope_as = zz_ef_pbsel_22
+				}
+			}
+			if = {
+				limit = { exists = scope:zz_ef_pbsel_22 }
+				scope:zz_ef_pbsel_22 = { save_scope_as = zz_ef_bl_seller }
+				set_variable = { name = zz_ef_pbs_22 value = scope:zz_ef_pbsel_22 }
+				zz_ef_pb_buy = { N = 22 }
+			}
+			else = {
+				zz_ef_pb_no_seller = { N = 22 }
+			}
+			set_variable = { name = zz_ef_pbh_22 value = var:ai_privat_bank_bond_value_22 }
+		}
+		else_if = {
+			limit = { var:zz_ef_pb_v < var:zz_ef_pbh_22 }
+			zz_ef_pb_drop = { N = 22 }
+		}
+		if = {
+			limit = {
+				var:zz_ef_pbh_22 > 0
+				has_variable = zz_ef_pbs_22
+				exists = var:zz_ef_pbs_22
+				var:zz_ef_pbs_22 = {
+					is_country_type = recognized
+					has_variable = zz_ef_bl_ratio
+					var:zz_ef_bl_ratio < 1
+				}
+			}
+			zz_ef_pb_cutback = { N = 22 }
+		}
+		if = {
+			limit = { var:zz_ef_pbh_22 <= 0 has_variable = zz_ef_pbs_22 }
+			remove_variable = zz_ef_pbs_22
+		}
 	}
 }
 
 # private banks' slot 23: E&F's ai_privat_bank_bond_value_23 / ai_privat_bank_seller_country_general_23
 zz_ef_pb_slot_23 = {
-	if = { limit = { NOT = { has_variable = zz_ef_pbh_23 } } set_variable = { name = zz_ef_pbh_23 value = 0 } }
-	set_variable = { name = zz_ef_pb_v value = 0 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_23 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_23 } }
-	if = {
-		limit = { var:zz_ef_pb_v > var:zz_ef_pbh_23 }
-		if = {
-			limit = { has_variable_list = ai_privat_bank_seller_country_general_23 }
-			random_in_list = {
-				variable = ai_privat_bank_seller_country_general_23
-				limit = { is_country_type = recognized }
-				save_scope_as = zz_ef_pbsel_23
-			}
-		}
-		if = {
-			limit = { exists = scope:zz_ef_pbsel_23 }
-			scope:zz_ef_pbsel_23 = { save_scope_as = zz_ef_bl_seller }
-			set_variable = { name = zz_ef_pbs_23 value = scope:zz_ef_pbsel_23 }
-			zz_ef_pb_buy = { N = 23 }
-		}
-		else = {
-			zz_ef_pb_no_seller = { N = 23 }
-		}
-		set_variable = { name = zz_ef_pbh_23 value = var:ai_privat_bank_bond_value_23 }
-	}
-	else_if = {
-		limit = { var:zz_ef_pb_v < var:zz_ef_pbh_23 }
-		zz_ef_pb_drop = { N = 23 }
-	}
+	# no slot (E&F's value absent, nothing registered): the body would only set zeros nothing reads -- skip it
 	if = {
 		limit = {
-			var:zz_ef_pbh_23 > 0
-			has_variable = zz_ef_pbs_23
-			exists = var:zz_ef_pbs_23
-			var:zz_ef_pbs_23 = {
-				is_country_type = recognized
-				has_variable = zz_ef_bl_ratio
-				var:zz_ef_bl_ratio < 1
+			OR = {
+				has_variable = ai_privat_bank_bond_value_23
+				has_variable = zz_ef_pbh_23
 			}
 		}
-		zz_ef_pb_cutback = { N = 23 }
-	}
-	if = {
-		limit = { var:zz_ef_pbh_23 <= 0 has_variable = zz_ef_pbs_23 }
-		remove_variable = zz_ef_pbs_23
+		if = { limit = { NOT = { has_variable = zz_ef_pbh_23 } } set_variable = { name = zz_ef_pbh_23 value = 0 } }
+		set_variable = { name = zz_ef_pb_v value = 0 }
+		if = { limit = { has_variable = ai_privat_bank_bond_value_23 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_23 } }
+		if = {
+			limit = { var:zz_ef_pb_v > var:zz_ef_pbh_23 }
+			if = {
+				limit = { has_variable_list = ai_privat_bank_seller_country_general_23 }
+				random_in_list = {
+					variable = ai_privat_bank_seller_country_general_23
+					limit = { is_country_type = recognized }
+					save_scope_as = zz_ef_pbsel_23
+				}
+			}
+			if = {
+				limit = { exists = scope:zz_ef_pbsel_23 }
+				scope:zz_ef_pbsel_23 = { save_scope_as = zz_ef_bl_seller }
+				set_variable = { name = zz_ef_pbs_23 value = scope:zz_ef_pbsel_23 }
+				zz_ef_pb_buy = { N = 23 }
+			}
+			else = {
+				zz_ef_pb_no_seller = { N = 23 }
+			}
+			set_variable = { name = zz_ef_pbh_23 value = var:ai_privat_bank_bond_value_23 }
+		}
+		else_if = {
+			limit = { var:zz_ef_pb_v < var:zz_ef_pbh_23 }
+			zz_ef_pb_drop = { N = 23 }
+		}
+		if = {
+			limit = {
+				var:zz_ef_pbh_23 > 0
+				has_variable = zz_ef_pbs_23
+				exists = var:zz_ef_pbs_23
+				var:zz_ef_pbs_23 = {
+					is_country_type = recognized
+					has_variable = zz_ef_bl_ratio
+					var:zz_ef_bl_ratio < 1
+				}
+			}
+			zz_ef_pb_cutback = { N = 23 }
+		}
+		if = {
+			limit = { var:zz_ef_pbh_23 <= 0 has_variable = zz_ef_pbs_23 }
+			remove_variable = zz_ef_pbs_23
+		}
 	}
 }
 
 # private banks' slot 24: E&F's ai_privat_bank_bond_value_24 / ai_privat_bank_seller_country_general_24
 zz_ef_pb_slot_24 = {
-	if = { limit = { NOT = { has_variable = zz_ef_pbh_24 } } set_variable = { name = zz_ef_pbh_24 value = 0 } }
-	set_variable = { name = zz_ef_pb_v value = 0 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_24 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_24 } }
-	if = {
-		limit = { var:zz_ef_pb_v > var:zz_ef_pbh_24 }
-		if = {
-			limit = { has_variable_list = ai_privat_bank_seller_country_general_24 }
-			random_in_list = {
-				variable = ai_privat_bank_seller_country_general_24
-				limit = { is_country_type = recognized }
-				save_scope_as = zz_ef_pbsel_24
-			}
-		}
-		if = {
-			limit = { exists = scope:zz_ef_pbsel_24 }
-			scope:zz_ef_pbsel_24 = { save_scope_as = zz_ef_bl_seller }
-			set_variable = { name = zz_ef_pbs_24 value = scope:zz_ef_pbsel_24 }
-			zz_ef_pb_buy = { N = 24 }
-		}
-		else = {
-			zz_ef_pb_no_seller = { N = 24 }
-		}
-		set_variable = { name = zz_ef_pbh_24 value = var:ai_privat_bank_bond_value_24 }
-	}
-	else_if = {
-		limit = { var:zz_ef_pb_v < var:zz_ef_pbh_24 }
-		zz_ef_pb_drop = { N = 24 }
-	}
+	# no slot (E&F's value absent, nothing registered): the body would only set zeros nothing reads -- skip it
 	if = {
 		limit = {
-			var:zz_ef_pbh_24 > 0
-			has_variable = zz_ef_pbs_24
-			exists = var:zz_ef_pbs_24
-			var:zz_ef_pbs_24 = {
-				is_country_type = recognized
-				has_variable = zz_ef_bl_ratio
-				var:zz_ef_bl_ratio < 1
+			OR = {
+				has_variable = ai_privat_bank_bond_value_24
+				has_variable = zz_ef_pbh_24
 			}
 		}
-		zz_ef_pb_cutback = { N = 24 }
-	}
-	if = {
-		limit = { var:zz_ef_pbh_24 <= 0 has_variable = zz_ef_pbs_24 }
-		remove_variable = zz_ef_pbs_24
+		if = { limit = { NOT = { has_variable = zz_ef_pbh_24 } } set_variable = { name = zz_ef_pbh_24 value = 0 } }
+		set_variable = { name = zz_ef_pb_v value = 0 }
+		if = { limit = { has_variable = ai_privat_bank_bond_value_24 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_24 } }
+		if = {
+			limit = { var:zz_ef_pb_v > var:zz_ef_pbh_24 }
+			if = {
+				limit = { has_variable_list = ai_privat_bank_seller_country_general_24 }
+				random_in_list = {
+					variable = ai_privat_bank_seller_country_general_24
+					limit = { is_country_type = recognized }
+					save_scope_as = zz_ef_pbsel_24
+				}
+			}
+			if = {
+				limit = { exists = scope:zz_ef_pbsel_24 }
+				scope:zz_ef_pbsel_24 = { save_scope_as = zz_ef_bl_seller }
+				set_variable = { name = zz_ef_pbs_24 value = scope:zz_ef_pbsel_24 }
+				zz_ef_pb_buy = { N = 24 }
+			}
+			else = {
+				zz_ef_pb_no_seller = { N = 24 }
+			}
+			set_variable = { name = zz_ef_pbh_24 value = var:ai_privat_bank_bond_value_24 }
+		}
+		else_if = {
+			limit = { var:zz_ef_pb_v < var:zz_ef_pbh_24 }
+			zz_ef_pb_drop = { N = 24 }
+		}
+		if = {
+			limit = {
+				var:zz_ef_pbh_24 > 0
+				has_variable = zz_ef_pbs_24
+				exists = var:zz_ef_pbs_24
+				var:zz_ef_pbs_24 = {
+					is_country_type = recognized
+					has_variable = zz_ef_bl_ratio
+					var:zz_ef_bl_ratio < 1
+				}
+			}
+			zz_ef_pb_cutback = { N = 24 }
+		}
+		if = {
+			limit = { var:zz_ef_pbh_24 <= 0 has_variable = zz_ef_pbs_24 }
+			remove_variable = zz_ef_pbs_24
+		}
 	}
 }
 
 # private banks' slot 25: E&F's ai_privat_bank_bond_value_25 / ai_privat_bank_seller_country_general_25
 zz_ef_pb_slot_25 = {
-	if = { limit = { NOT = { has_variable = zz_ef_pbh_25 } } set_variable = { name = zz_ef_pbh_25 value = 0 } }
-	set_variable = { name = zz_ef_pb_v value = 0 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_25 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_25 } }
-	if = {
-		limit = { var:zz_ef_pb_v > var:zz_ef_pbh_25 }
-		if = {
-			limit = { has_variable_list = ai_privat_bank_seller_country_general_25 }
-			random_in_list = {
-				variable = ai_privat_bank_seller_country_general_25
-				limit = { is_country_type = recognized }
-				save_scope_as = zz_ef_pbsel_25
-			}
-		}
-		if = {
-			limit = { exists = scope:zz_ef_pbsel_25 }
-			scope:zz_ef_pbsel_25 = { save_scope_as = zz_ef_bl_seller }
-			set_variable = { name = zz_ef_pbs_25 value = scope:zz_ef_pbsel_25 }
-			zz_ef_pb_buy = { N = 25 }
-		}
-		else = {
-			zz_ef_pb_no_seller = { N = 25 }
-		}
-		set_variable = { name = zz_ef_pbh_25 value = var:ai_privat_bank_bond_value_25 }
-	}
-	else_if = {
-		limit = { var:zz_ef_pb_v < var:zz_ef_pbh_25 }
-		zz_ef_pb_drop = { N = 25 }
-	}
+	# no slot (E&F's value absent, nothing registered): the body would only set zeros nothing reads -- skip it
 	if = {
 		limit = {
-			var:zz_ef_pbh_25 > 0
-			has_variable = zz_ef_pbs_25
-			exists = var:zz_ef_pbs_25
-			var:zz_ef_pbs_25 = {
-				is_country_type = recognized
-				has_variable = zz_ef_bl_ratio
-				var:zz_ef_bl_ratio < 1
+			OR = {
+				has_variable = ai_privat_bank_bond_value_25
+				has_variable = zz_ef_pbh_25
 			}
 		}
-		zz_ef_pb_cutback = { N = 25 }
-	}
-	if = {
-		limit = { var:zz_ef_pbh_25 <= 0 has_variable = zz_ef_pbs_25 }
-		remove_variable = zz_ef_pbs_25
+		if = { limit = { NOT = { has_variable = zz_ef_pbh_25 } } set_variable = { name = zz_ef_pbh_25 value = 0 } }
+		set_variable = { name = zz_ef_pb_v value = 0 }
+		if = { limit = { has_variable = ai_privat_bank_bond_value_25 } set_variable = { name = zz_ef_pb_v value = var:ai_privat_bank_bond_value_25 } }
+		if = {
+			limit = { var:zz_ef_pb_v > var:zz_ef_pbh_25 }
+			if = {
+				limit = { has_variable_list = ai_privat_bank_seller_country_general_25 }
+				random_in_list = {
+					variable = ai_privat_bank_seller_country_general_25
+					limit = { is_country_type = recognized }
+					save_scope_as = zz_ef_pbsel_25
+				}
+			}
+			if = {
+				limit = { exists = scope:zz_ef_pbsel_25 }
+				scope:zz_ef_pbsel_25 = { save_scope_as = zz_ef_bl_seller }
+				set_variable = { name = zz_ef_pbs_25 value = scope:zz_ef_pbsel_25 }
+				zz_ef_pb_buy = { N = 25 }
+			}
+			else = {
+				zz_ef_pb_no_seller = { N = 25 }
+			}
+			set_variable = { name = zz_ef_pbh_25 value = var:ai_privat_bank_bond_value_25 }
+		}
+		else_if = {
+			limit = { var:zz_ef_pb_v < var:zz_ef_pbh_25 }
+			zz_ef_pb_drop = { N = 25 }
+		}
+		if = {
+			limit = {
+				var:zz_ef_pbh_25 > 0
+				has_variable = zz_ef_pbs_25
+				exists = var:zz_ef_pbs_25
+				var:zz_ef_pbs_25 = {
+					is_country_type = recognized
+					has_variable = zz_ef_bl_ratio
+					var:zz_ef_bl_ratio < 1
+				}
+			}
+			zz_ef_pb_cutback = { N = 25 }
+		}
+		if = {
+			limit = { var:zz_ef_pbh_25 <= 0 has_variable = zz_ef_pbs_25 }
+			remove_variable = zz_ef_pbs_25
+		}
 	}
 }
