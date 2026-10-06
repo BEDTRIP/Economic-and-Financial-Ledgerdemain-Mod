@@ -81,6 +81,8 @@ zz_ef_money_week_probe_step = {
 		}
 		remove_variable = zz_ef_week_probe
 		remove_variable = zz_ef_week_probe_value
+		# a restarted chain takes its day of the week anew (zz_ef_money_week_slot_assign)
+		if = { limit = { has_variable = zz_ef_week_slot } remove_variable = zz_ef_week_slot }
 		trigger_event = { on_action = zz_ef_money_model_weekly }
 	}
 	else = {
@@ -88,6 +90,38 @@ zz_ef_money_week_probe_step = {
 		set_variable = { name = zz_ef_week_probe_value value = zz_ef_budget_position }
 		trigger_event = { on_action = zz_ef_money_week_probe days = 1 }
 	}
+}
+
+# The country's day of the week (user 7.10: spread the weekly step over the days). Once per country, on the
+# first weekly call after the budget-tick probe (also for a save whose chain runs already): slot = the
+# countries counted so far modulo 7; slot 0 steps now, slot N waits N days. The world and clearing windows are
+# 7-day globals, so every country still steps once per window; its own window keeps exactly one budget tick.
+zz_ef_money_week_slot_assign = {
+	if = {
+		limit = { NOT = { has_global_variable = zz_ef_week_slot_n } }
+		set_global_variable = { name = zz_ef_week_slot_n value = 0 }
+	}
+	set_variable = {
+		name = zz_ef_week_slot
+		value = {
+			value = global_var:zz_ef_week_slot_n
+			modulo = 7
+		}
+	}
+	change_global_variable = { name = zz_ef_week_slot_n add = 1 }
+	# the chain is alive while it waits (the monthly restart must not start a second one)
+	set_variable = { name = zz_ef_week_alive value = yes days = 10 }
+	if = {
+		limit = { var:zz_ef_week_slot = 0 }
+		zz_ef_money_model_step = yes
+		trigger_event = { on_action = zz_ef_money_model_weekly days = 7 }
+	}
+	else_if = { limit = { var:zz_ef_week_slot = 1 } trigger_event = { on_action = zz_ef_money_model_weekly days = 1 } }
+	else_if = { limit = { var:zz_ef_week_slot = 2 } trigger_event = { on_action = zz_ef_money_model_weekly days = 2 } }
+	else_if = { limit = { var:zz_ef_week_slot = 3 } trigger_event = { on_action = zz_ef_money_model_weekly days = 3 } }
+	else_if = { limit = { var:zz_ef_week_slot = 4 } trigger_event = { on_action = zz_ef_money_model_weekly days = 4 } }
+	else_if = { limit = { var:zz_ef_week_slot = 5 } trigger_event = { on_action = zz_ef_money_model_weekly days = 5 } }
+	else = { trigger_event = { on_action = zz_ef_money_model_weekly days = 6 } }
 }
 
 # ---- the weekly step --------------------------------------------------------

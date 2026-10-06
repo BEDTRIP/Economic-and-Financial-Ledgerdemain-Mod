@@ -26,9 +26,17 @@ zz_ef_money_week_probe = {
 	}
 }
 
+# The week's day of each country: var:zz_ef_week_slot 0..6 (zz_ef_money_week_slot_assign), so the countries'
+# steps and GUI-bridge receivers spread over the 7 days instead of all landing on the budget tick's day.
 zz_ef_money_model_weekly = {
 	effect = {
-		zz_ef_money_model_step = yes
-		trigger_event = { on_action = zz_ef_money_model_weekly days = 7 }
+		if = {
+			limit = { NOT = { has_variable = zz_ef_week_slot } }
+			zz_ef_money_week_slot_assign = yes
+		}
+		else = {
+			zz_ef_money_model_step = yes
+			trigger_event = { on_action = zz_ef_money_model_weekly days = 7 }
+		}
 	}
 }
