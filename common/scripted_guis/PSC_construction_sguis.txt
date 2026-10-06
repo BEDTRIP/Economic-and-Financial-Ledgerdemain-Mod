@@ -1,0 +1,220 @@
+﻿psc_button_decrease_sgui = {
+    scope = country
+    effect = {
+        change_variable = {
+            name = construction_spending_level
+            subtract = 0.01
+        }
+        set_variable = {
+            name = max_government_construction_at_spending_level
+            value = {
+                value = var:max_government_construction_spending
+                multiply = var:construction_spending_level
+            }
+        }
+    }
+    is_valid = {
+        has_variable = construction_spending_level
+        custom_tooltip = {
+            text = CURRENT_DESC
+            NOT = {
+                var:construction_spending_level = 0
+            }
+        }
+    }
+}
+
+psc_button_increase_sgui = {
+    scope = country
+    effect = {
+        change_variable = {
+            name = construction_spending_level
+            add = 0.01
+        }
+        set_variable = {
+            name = max_government_construction_at_spending_level
+            value = {
+                value = var:max_government_construction_spending
+                multiply = var:construction_spending_level
+            }
+        }
+    }
+    is_valid = {
+        has_variable = construction_spending_level
+        custom_tooltip = {
+            text = CURRENT_DESC
+            NOT = {
+                var:construction_spending_level = 1
+            }
+        }
+    }
+}
+
+psc_button_decrease_shift_sgui = {
+    scope = country
+    effect = {
+        change_variable = {
+            name = construction_spending_level
+            subtract = 0.05
+        }
+        change_variable = {
+            name = construction_spending_level
+            max = 0
+        }
+        set_variable = {
+            name = max_government_construction_at_spending_level
+            value = {
+                value = var:max_government_construction_spending
+                multiply = var:construction_spending_level
+            }
+        }
+    }
+    is_valid = {
+        has_variable = construction_spending_level
+        custom_tooltip = {
+            text = CURRENT_DESC
+            NOT = {
+                var:construction_spending_level = 0
+            }
+        }
+    }
+}
+
+psc_button_increase_shift_sgui = {
+    scope = country
+    effect = {
+        change_variable = {
+            name = construction_spending_level
+            add = 0.05
+        }
+        change_variable = {
+            name = construction_spending_level
+            min = 1
+        }
+        set_variable = {
+            name = max_government_construction_at_spending_level
+            value = {
+                value = var:max_government_construction_spending
+                multiply = var:construction_spending_level
+            }
+        }
+    }
+    is_valid = {
+        has_variable = construction_spending_level
+        custom_tooltip = {
+            text = CURRENT_DESC
+            NOT = {
+                var:construction_spending_level = 1
+            }
+        }
+    }
+}
+
+psc_button_decrease_ctrl_sgui = {
+    scope = country
+    effect = {
+        change_variable = {
+            name = construction_spending_level
+            subtract = 0.1
+        }
+        change_variable = {
+            name = construction_spending_level
+            max = 0
+        }
+        set_variable = {
+            name = max_government_construction_at_spending_level
+            value = {
+                value = var:max_government_construction_spending
+                multiply = var:construction_spending_level
+            }
+        }
+    }
+    is_valid = {
+        has_variable = construction_spending_level
+        custom_tooltip = {
+            text = CURRENT_DESC
+            NOT = {
+                var:construction_spending_level = 0
+            }
+        }
+    }
+}
+
+psc_button_increase_ctrl_sgui = {
+    scope = country
+    effect = {
+        change_variable = {
+            name = construction_spending_level
+            add = 0.1
+        }
+        change_variable = {
+            name = construction_spending_level
+            min = 1
+        }
+        set_variable = {
+            name = max_government_construction_at_spending_level
+            value = {
+                value = var:max_government_construction_spending
+                multiply = var:construction_spending_level
+            }
+        }
+    }
+    is_valid = {
+        has_variable = construction_spending_level
+        custom_tooltip = {
+            text = CURRENT_DESC
+            NOT = {
+                var:construction_spending_level = 1
+            }
+        }
+    }
+}
+
+psc_save_real_construction_cost = {
+    scope = country
+	
+    saved_scopes = {
+		construction_good_expenses
+	}
+    effect = {
+        set_variable = {
+            name = real_construction_spending
+            value = scope:construction_good_expenses
+        }
+        if = {
+            limit = {
+                NOT = {
+                    has_variable = last_construction_run
+                }
+            }
+            set_variable = {
+                name = last_construction_run
+                value = game_date
+            }
+        }
+        set_variable = {
+            name = last_real_construction_check
+            value = game_date
+        }
+
+    }
+}
+
+psc_test_show = {
+    scope = country
+
+    is_valid = {
+        AND = {
+            is_player = yes
+            OR = {
+                NOT = {
+                    has_variable = last_real_construction_check
+                }
+                NOT = {
+                    has_variable = last_construction_run
+                }
+                var:last_construction_run > var:last_real_construction_check
+            }
+        }
+    }
+}

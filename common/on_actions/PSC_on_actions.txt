@@ -1,0 +1,140 @@
+﻿set_construction_start = {
+	effect = {
+        trigger_event = {
+            on_action = set_construction_weekly_on_action
+        }
+		every_country = {
+			trigger_event = {
+				on_action = set_construction_country
+			}
+		}
+	}
+}
+
+set_construction_country = {
+	effect = {
+        if = {
+            limit = {
+                OR = {
+                    NOT = {
+                        has_variable = last_construction_run
+                    }
+                    game_date != var:last_construction_run
+                }
+            }
+		    set_construction_point_demand = yes
+            set_variable = {
+                name = last_construction_run
+                value = game_date
+            }
+        }
+	}
+}
+
+set_spending_value = {
+    effect = {
+        if = {
+            limit = {
+                is_player = yes
+            }
+            set_government_construction_spending = yes
+        }
+    }
+}
+
+set_construction_weekly_on_action = {
+    effect = {
+        set_global_variable = {
+            name = added_days
+            value = calculate_added_days
+        }
+        every_country = {
+            set_local_variable = {
+                name = event_day
+                value = global_var:added_days
+            }
+            set_local_variable = {
+                name = month_length
+                value = calculate_month_length
+            }
+            while = {
+                limit = {
+                    local_var:event_day < local_var:month_length
+                }
+                delay_event_switch = {
+                    on_action_name = set_construction_country
+                    num_days = local_var:event_day
+                }
+                change_local_variable = {
+                    name = event_day
+                    add = 1
+                }
+                delay_event_switch = {
+                    on_action_name = set_spending_value
+                    num_days = local_var:event_day
+                }
+                change_local_variable = {
+                    name = event_day
+                    add = 6
+                }
+            }
+        }
+    }
+}
+
+on_monthly_pulse = {
+    on_actions = {
+        set_construction_weekly_on_action
+    }
+}
+
+on_production_method_changed = {
+    on_actions = {
+        on_construction_sector_method_changed
+    }
+}
+
+on_construction_sector_method_changed = {
+    effect = {
+        if = {
+            limit = {
+                is_building_type = building_construction_sector
+            }
+            set_new_point_conversion_method = yes
+        }
+    }
+}
+
+on_acquired_technology = {
+    on_actions = {
+        on_acquired_construction_tech
+    }
+}
+
+on_acquired_construction_tech = {
+    effect = {
+        if = {
+            limit = {
+                has_variable = last_construction_run
+            }
+            set_point_conversion_method_from_tech = yes
+        }
+    }
+}
+
+on_building_built = {
+    on_actions = {
+        on_construction_sector_built
+    }
+}
+
+on_construction_sector_built = {
+    effect = {
+        if = {
+            limit = {
+                is_building_type = building_construction_sector
+            }
+            set_new_point_conversion_method = yes
+        }
+    }
+}

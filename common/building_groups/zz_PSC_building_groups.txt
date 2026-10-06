@@ -1,0 +1,34 @@
+﻿REPLACE:bg_construction = {
+	infrastructure_usage_per_level = 2
+
+	parent_group = bg_private_infrastructure
+
+	can_use_slaves = yes
+	subsidized = no
+	always_possible = yes
+
+	economy_of_scale = yes
+
+	should_auto_expand = { 
+		default_auto_expand_rule = yes
+	}
+
+	economy_of_scale_ai_factor = 2.0
+	foreign_investment_ai_factor = 0.75
+}
+
+REPLACE_OR_CREATE:bg_construction_regulator = {	
+	parent_group = bg_public_infrastructure
+		
+	min_hiring_rate = 1.0
+	max_hiring_rate = 1.0
+		
+	proportionality_limit = 1.0
+	ignores_productivity_when_hiring = yes
+	fired_pops_become_radical = no
+	urbanization = 0
+	
+	infrastructure_usage_per_level = 0
+	
+	stateregion_max_level = no
+}

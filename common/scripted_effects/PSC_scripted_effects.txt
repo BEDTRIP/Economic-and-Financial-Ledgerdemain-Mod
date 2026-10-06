@@ -1,0 +1,576 @@
+﻿check_construction_spending_level = {
+    if = {
+        limit = {
+            is_player = yes
+        }
+        if = {
+            limit = {
+                NOT = {
+                    has_variable = construction_spending_level
+                }
+            }
+            set_variable = {
+                name = construction_spending_level
+                value = 0.25
+            }
+        }
+    }
+    else = {
+        set_variable = {
+            name = construction_spending_level
+            value = {
+                if = {
+                    limit = {
+                        OR = {
+                            is_construction_paused = yes
+                            construction_queue_num_queued_government_levels = 0 
+                        }
+                    }
+                    value = 0
+                } else = {
+                    value = ai_construction_demand
+                    divide = {
+                        value = var:max_government_construction_spending
+                        min = 1
+                    }
+                    min = 0
+                    max = 1
+                }
+            }
+        }
+    }
+}
+
+#Scope: Country
+set_construction_point_demand = {
+    if = {
+        limit = {
+            has_variable = num_runs
+        }
+        change_variable = {
+            name = num_runs
+            add = 1
+        }
+    }
+    else = {
+        set_variable = {
+            name = num_runs
+            value = 1
+        }
+    }
+    if = {
+        limit = { 
+            has_technology_researched = urbanization
+        }
+        if = {
+            limit = {
+                has_modifier = country_private_construction_allocation_add
+            }
+            remove_modifier = country_private_construction_allocation_add
+        }
+        else = {
+            set_variable = {
+                name = prev_construction_allocation
+                value = 0
+            }
+        }
+        
+        if = {
+            limit = {
+                NOT = {
+                    has_variable = prev_estimated_investment_pool
+                }
+            }
+            set_variable = {
+                name = prev_estimated_investment_pool
+                value = 0
+            }
+        }
+        
+        if = {
+            limit = {
+                has_variable = privatisation_percent_estimate
+            }
+            set_variable = {
+                name = privatisation_percent_estimate
+                value = privatisation_spending_percent
+            }
+        }
+        else = {
+            set_variable = {
+                name = privatisation_percent_estimate
+                value = 0.1
+            }
+        }
+        
+        set_variable = {
+            name = national_production
+            value = 0
+        }
+        set_variable = {
+            name = weighted_total
+            value = 0
+        }
+        every_scope_state = {
+            save_temporary_scope_value_as = {
+                name = temp_production
+                value = sum_construction_types_production
+            }
+            save_temporary_scope_value_as = {
+                name = state_base_price
+                value = calculate_state_construction_base_price
+            }
+            set_variable = {
+                name = state_construction_production
+                value = scope:temp_production
+            }
+            owner = {
+                change_variable = {
+                    name = national_production
+                    add = scope:temp_production
+                }
+            }
+            owner = {
+                change_variable = {
+                    name = weighted_total
+                    add = {
+                        value = scope:temp_production
+                        divide = scope:state_base_price
+                    }
+                }
+            }
+        }
+
+
+        set_variable = {
+            name = corrected_private_allocation
+            value = calculate_corrected_private_allocation
+        }
+        set_variable = {
+            name = weekly_income_multiplier
+            value = {
+                value = weekly_income_multiplier_base
+                subtract = var:corrected_private_allocation
+            }
+        }
+        set_variable = {
+            name = max_government_construction_spending
+            value = calculate_max_government_construction_spending
+        }
+        check_construction_spending_level = yes
+        set_variable = {
+            name = max_government_construction_at_spending_level
+            value = {
+                value = var:max_government_construction_spending
+                multiply = var:construction_spending_level
+            }
+        }
+        set_variable = {
+            name = limited_government_construction_spending
+            value = calculate_limited_government_construction_spending
+        }
+        set_local_variable = {
+            name = current_construction_increase
+            value = private_construction_increase
+        }
+
+        add_modifier = {
+            name = country_private_construction_allocation_add
+            multiplier = {
+                value = local_var:current_construction_increase
+            }
+        }
+
+        set_variable = {
+            name = prev_construction_allocation
+            value = local_var:current_construction_increase
+        }
+
+        set_variable = {
+            name = total_construction_spending
+            value = calculate_total_construction_spending
+        }
+        set_local_variable = {
+            name = remaining_construction_spending
+            value = var:total_construction_spending
+        }
+        ordered_scope_state = {
+            order_by = construction_ordering
+            min = 0
+            set_construction_regulator_level = yes
+
+            set_local_variable = {
+                name = state_construction_base_price
+                value = calculate_state_construction_base_price
+            }
+            set_local_variable = {
+                name = state_construction_spending
+                value = state_construction_spending_allocation
+            }
+            
+            change_local_variable = {
+                name = remaining_construction_spending
+                subtract = local_var:state_construction_spending
+            }
+
+            set_state_construction_efficiency = yes
+            set_local_variable = {
+                name = state_construction
+                value = state_construction_allocation
+            }
+            b:building_construction_regulator = {
+                if = {
+                    limit = {
+                        has_modifier = construction_throughput_mult
+                    }
+                    remove_modifier = construction_throughput_mult
+                }
+
+                set_local_variable = {
+                    name = modifier_mult
+                    value = {
+                        value = local_var:state_construction
+                        divide = {
+                            value = level
+                            min = 1
+                        }
+                        subtract = 1
+                        subtract = modifier:building_throughput_add
+                    }
+                }
+                add_modifier = {
+                    name = construction_throughput_mult
+                    multiplier = local_var:modifier_mult
+                }
+            }
+        }
+
+        set_variable = {
+            name = prev_estimated_investment_pool
+            value = {
+                value = investment_pool
+                add = investment_pool_net_income
+                min = 0
+            }
+        }
+    }
+}
+
+#Scope: State
+set_construction_regulator_level = {
+    set_local_variable = {
+        name = regulator_level
+        value = construction_regulator_level
+    }
+    if = {
+        limit = {
+                state_has_building_type_levels = {
+                    target = bt:building_construction_regulator
+                    value > local_var:regulator_level
+                }
+        }
+        if = {
+            limit = {
+                OR = {
+                    NOT = {
+                        has_variable = week_count
+                    }
+                    var:week_count >= 4  
+                }
+            }
+            remove_building = "building_construction_regulator"
+            set_variable = {
+                name = week_count
+                value = 0
+            }
+        }
+        else = {
+            change_variable = {
+                name = week_count
+                add = 1
+            }
+        }
+    }
+    if = {
+        limit = {
+            state_has_building_type_levels = {
+                target = bt:building_construction_regulator
+                value < local_var:regulator_level
+            }
+        }
+        set_new_regulator_point_conversion_method = yes
+        set_local_variable = {
+            name = production_method_chosen
+            value = var:production_method_chosen
+        }
+        production_method_building_switch = {
+            level = local_var:regulator_level
+            production_methods = local_var:production_method_chosen
+        }
+    }
+}
+
+#Scope: State
+set_state_construction_efficiency = {
+    if = {
+        limit = {
+            has_building = building_construction_sector
+        }
+        if = {
+            limit = {
+                has_modifier = state_construction_efficiency_increase
+            }
+            remove_modifier = state_construction_efficiency_increase
+        }
+        set_local_variable = {
+            name = efficiency_val
+            value = calculate_state_construction_efficiency
+        }
+        add_modifier = {
+            name = state_construction_efficiency_increase
+            multiplier = local_var:efficiency_val
+        }
+    }
+}
+
+set_government_construction_spending = {
+    set_variable = {
+        name = government_construction_spending
+        value = calculate_government_construction_spending
+    }
+}
+
+#Scope: Building
+set_new_point_conversion_method = {
+    if = {
+        limit = {
+            has_active_production_method = pm_wooden_buildings
+            NOT = {
+                state = {
+                    b:building_construction_regulator = {
+                        has_active_production_method = pm_wood_point_conversion
+                    }
+                }
+            }
+        }
+        state = {
+            activate_production_method = {
+                building_type = building_construction_regulator
+                production_method = pm_wood_point_conversion
+            }
+        }
+    }
+    else_if = {
+        limit = {
+            has_active_production_method = pm_iron_frame_buildings
+            NOT = {
+                state = {
+                    b:building_construction_regulator = {
+                        has_active_production_method = pm_iron_point_conversion
+                    }
+                }
+            }
+        }
+        state = {
+            activate_production_method = {
+                building_type = building_construction_regulator
+                production_method = pm_iron_point_conversion
+            }
+        }
+    }
+    else_if = {
+        limit = {
+            has_active_production_method = pm_steel_frame_buildings
+            NOT = {
+                state = {
+                    b:building_construction_regulator = {
+                        has_active_production_method = pm_steel_point_conversion
+                    }
+                }
+            }
+        }
+        state = {
+            activate_production_method = {
+                building_type = building_construction_regulator
+                production_method = pm_steel_point_conversion
+            }
+        }
+    }
+    else_if = {
+        limit = {
+            has_active_production_method = pm_arc_welded_buildings
+            NOT = {
+                state = {
+                    b:building_construction_regulator = {
+                        has_active_production_method = pm_arc_welded_point_conversion
+                    }
+                }
+            }
+        }
+        state = {
+            activate_production_method = {
+                building_type = building_construction_regulator
+                production_method = pm_arc_welded_point_conversion
+            }
+        }
+    }
+}
+
+#Scope: State
+set_new_regulator_point_conversion_method = {
+    if = {
+        limit = {
+            has_building = building_construction_sector
+            b:building_construction_sector = {
+                has_active_production_method = pm_wooden_buildings
+            }
+        }
+        set_variable = {
+            name = production_method_chosen
+            value = 3
+        }
+    }
+    else_if = {
+        limit = {
+            has_building = building_construction_sector
+            b:building_construction_sector = {
+                has_active_production_method = pm_iron_frame_buildings
+            }
+        }
+        set_variable = {
+            name = production_method_chosen
+            value = 2
+        }
+    }
+    else_if = {
+        limit = {
+            has_building = building_construction_sector
+            b:building_construction_sector = {
+                has_active_production_method = pm_steel_frame_buildings
+            }
+        }
+        set_variable = {
+            name = production_method_chosen
+            value = 1
+        }
+    }
+    else_if = {
+        limit = {
+            has_building = building_construction_sector
+            b:building_construction_sector = {
+                has_active_production_method = pm_arc_welded_buildings
+            }
+        }
+        set_variable = {
+            name = production_method_chosen
+            value = 0
+        }
+    }
+    else_if = {
+        limit = {
+            owner = {
+                has_technology_researched = arc_welding
+            }
+        }
+        set_variable = {
+            name = production_method_chosen
+            value = 0
+        }
+    }
+    else_if = {
+        limit = {
+            owner = {
+                has_technology_researched = steel_frame_buildings
+            }
+        }
+        set_variable = {
+            name = production_method_chosen
+            value = 1
+        }
+    }
+    else_if = {
+        limit = {
+            owner = {
+                has_technology_researched = urban_planning
+            }
+        }
+        set_variable = {
+            name = production_method_chosen
+            value = 2
+        }
+    }
+    else = {
+        set_variable = {
+            name = production_method_chosen
+            value = 3
+        }
+    }
+}
+
+
+#Scope: Country
+set_point_conversion_method_from_tech = {
+    if = {
+        limit = {
+            has_technology_researched = arc_welding
+        }
+        every_scope_state = {
+            if = {
+                limit = {
+                    NOR = {
+                        has_building = building_construction_sector
+                        b:building_construction_regulator = {
+                            has_active_production_method = pm_arc_welded_point_conversion
+                        }
+                    }
+                }
+                activate_production_method = {
+                    building_type = building_construction_regulator
+                    production_method = pm_arc_welded_point_conversion
+                }
+            }
+        }
+    }
+    else_if = {
+        limit = {
+            has_technology_researched = steel_frame_buildings
+        }
+        every_scope_state = {
+            if = {
+                limit = {
+                    NOR = {
+                        has_building = building_construction_sector
+                        b:building_construction_regulator = {
+                            has_active_production_method = pm_steel_point_conversion
+                        }
+                    }               
+                }
+                activate_production_method = {
+                    building_type = building_construction_regulator
+                    production_method = pm_steel_point_conversion
+                }
+            }
+        }
+    }
+    else_if = {
+        limit = {
+            has_technology_researched = urban_planning
+        }
+        every_scope_state = {
+            if = {
+                limit = {
+                    NOR = {
+                        has_building = building_construction_sector
+                        b:building_construction_regulator = {
+                            has_active_production_method = pm_iron_point_conversion
+                        }
+                    }
+                }
+                activate_production_method = {
+                    building_type = building_construction_regulator
+                    production_method = pm_iron_point_conversion
+                }
+            }
+        }
+    }
+}
