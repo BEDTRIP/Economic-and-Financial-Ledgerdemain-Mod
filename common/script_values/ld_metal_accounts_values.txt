@@ -285,19 +285,6 @@ zz_ef_state_silver_cons = {
 		add = sg:silver.state_goods_consumption
 	}
 }
-zz_ef_pop_gold_goods = {
-	value = zz_ef_state_gold_cons
-	subtract = zz_ef_cb_in_gold_goods
-	subtract = zz_ef_bank_in_gold_goods
-	min = 0
-}
-zz_ef_pop_silver_goods = {
-	value = zz_ef_state_silver_cons
-	subtract = zz_ef_cb_in_silver_goods
-	subtract = zz_ef_bank_in_silver_goods
-	min = 0
-}
-
 # ---- step 5: the banks' purchase for next week (Д2.25) ----------------------------
 # Target: the norm x the larger of the credit (+5% room to grow) and the deposits; 2% of the gap a week; a surplus
 # buys nothing (sold in Ф3). In the country's metal (zz_ef_metal_silver_share).
