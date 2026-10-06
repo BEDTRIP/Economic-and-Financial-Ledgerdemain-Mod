@@ -71,4 +71,4 @@
 
 ## Известные несоответствия
 - `financial_crash_consequences` перечисляет не все национальные биржи (нет `_dei`, `_han`, `_sax`, `_usa_2`, `_gbr_2`; `_TUS` в другом регистре).
-- `bankrupt_company` и `08_list_effect.txt` ссылаются на ключи компаний, которых нет в `00_ef_companies.txt` (старые ключи `company_Bank_BIO`, `company_Bank_CA`, `company_Bank_BNSW`, `company_bank_italy`, `company_bank_of_Japan`, `company_Bank_of_Brazil`, `company_Bank_of_Montreal`, `company_BankSBoBS`, `company_Rothschild_Bank_Europe`; они же — цели `replaces_company`) и сотни ключей, которых нет в диспетчере `ld_listing_switch.txt` (диспетчер знает только 271 тип).
+- `bankrupt_company` и `08_list_effect.txt` ссылаются на ключи компаний, которых нет в диспетчере `ld_listing_switch.txt` (диспетчер знает только 271 тип); ссылки на ключи, которых нет ни в ванили, ни в CMF/ETF, ни в форке, удалены.
