@@ -210,7 +210,6 @@ metal_barometre_7: "#gold Золото @gold!#! #p крайне дорогое#!
   ## Title:
   ################################
 
-  ECONOMY:0 "Экономика"
   FINANCE:0 "Финансы"
   STOCKPILE:0 "Запасы"
   COUNTRY_CURRENCY_ONE_LINE:0 "Валюта государства"
@@ -238,7 +237,6 @@ metal_barometre_7: "#gold Золото @gold!#! #p крайне дорогое#!
   EF_BP_CHART_MONEY_SUPPLY_HEADING_TITLE:0 "[concept_money_supply]"
   EF_BP_CHART_NATIONAL_CAPACITY_HEADING:0 "[concept_national_capacity]"
 
-  CAPITAL_MONEY:1 "#tooltip_header [concept_money]#!\nБаланс: #variable [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_symbol')][AccessPlayer.PredictWeeklyBalance|D=+]#![GetPlayer.GetPowerDeltaIcon('money')]\n[SelectLocalization(GreaterThan_CFixedPoint(GetPlayer.GetPrincipal, '(CFixedPoint)0'), 'CREDIT_DESC', 'GOVERNMENT_TREASURY_DESC_EF')][SelectLocalization(GetMetaPlayer.GetPlayedOrObservedCountry.IsValid, 'CAPITAL_MONEY_DELAYED', 'OBSERVER_NO_COUNTRY_SELECTED') ]"
 
   GOVERNMENT_TREASURY_DESC_EF:0 "[concept_government_treasury]: #T [GetPlayer.GetGoldReserves|Dv] [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_symbol')] / [GetPlayer.MakeScope.ScriptValue('gdp_var')|D3] [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_symbol')]#!"
 

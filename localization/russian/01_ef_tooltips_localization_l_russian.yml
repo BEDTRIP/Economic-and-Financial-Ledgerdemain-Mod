@@ -330,7 +330,6 @@
   ################################
   #GDP_TOOLTIP
   ################################
-  GDP_TOOLTIP:1 "#header [concept_gdp]#!\n[Country.GetAdjective]ий $GDP_SHORT$: #N [GetPlayer.GetCustom('currency_symbol')] [Country.GetGDP|Dv]#! ([Country.GetGDPRanking])\n$TOOLTIP_DELIMITER$\nВВП на душу населения: #variable [GetPlayer.GetCustom('currency_symbol')] [Country.GetGDPPerCapita|2*]#! ([Country.GetGDPPerCapitaRanking])\n$TOOLTIP_DELIMITER$\n#v Исторически:#!\nВВП за 1 год: [Country.MakeScope.ScriptValue('GDP_dif_1_final')|%|+=]\nВВП за 5 лет: [Country.MakeScope.ScriptValue('GDP_dif_5_final')|%|+=]\nВВП за 10 лет: [Country.MakeScope.ScriptValue('GDP_dif_10_final')|%|+=]"
 
   ################################
   # #other_Interface
