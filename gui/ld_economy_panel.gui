@@ -38,43 +38,6 @@ types zz_ef_economy_panel
 			###########################################################################################################################################################################################
 			###########################################################################################################################################################################################
 
-			#E&F debug
-			flowcontainer  = {
-				#visible = "[GetScriptedGui('EF_debug_mode_visibility').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
- 				margin_top = 0
-				margin_right = 0
-				margin_left = 10
-
-				direction = horizontal
-				parentanchor = left
-
-				spacing = 5
-
-				#Panel_1
-				button_icon_round = {
-					name = "Panel_1"
-					size = { 33 33 }
-
-
-					onclick = "[ExecuteConsoleCommand( Select_CString( GetVariableSystem.Exists('my_ef_custom_windows'), 'gui.ClearWidgets ef_custom_windows', 'gui.createwidget gui/ef_dev_and_custom_windows/ef_custom_windows.gui ef_custom_windows' ) )]"
-					onclick = "[GetVariableSystem.Toggle('my_ef_custom_windows')]"
-
-					sing = shimmer
-					position = { 0 33 }
-					textbox = {
-						text = "1"
-						align = center|nobaseline
-						default_format = "#white #bold"
-						autoresize = yes
-						fontsize = 25
-						allow_outside = no
-						ignoreinvisible = yes
-						margin_left = 10
-					}
-				}
-			}
-
 			###########################################################################################################################################################################################
 			###########################################################################################################################################################################################
 			###########################################################################################################################################################################################
@@ -7080,36 +7043,6 @@ types zz_ef_economy_panel
 									}
 								}
 							}
-
-							# divider_decorative = { 	
-							# 	margin_top = 0
-							# 	size =  { 75% 10 }
-							# 	parentanchor = hcenter 
-							# } 
-
-							# button_icon_square = {
-							# 	name = "currency_reserve_window"
-							# 	size = { 275 40 }
-
-							# 	parentanchor = hcenter
-
-							# 	onclick = "[ExecuteConsoleCommand( Select_CString( GetVariableSystem.Exists('currency_reserve_window'), 'gui.ClearWidgets currency_reserve_window', 'gui.createwidget gui/ef_dev_and_custom_windows/ef_custom_windows.gui currency_reserve_window' ) )]"
-							# 	onclick = "[GetVariableSystem.Toggle('currency_reserve_window')]"
-
-							# 	sing = shimmer
-							# 	position = { 0 0 }  
-							# 	textbox = {
-							# 		text = "show_currency_reserve_window"
-							# 		parentanchor = hcenter
-
-							# 		align = hcenter|nobaseline
-							# 		default_format = "#white #bold"
-							# 		autoresize = yes
-							# 		fontsize = 25
-							# 		allow_outside = no
-							# 		ignoreinvisible = yes 
-							# 	}
-							# } 
 
 							divider_decorative = { 	
 								margin_top = 0

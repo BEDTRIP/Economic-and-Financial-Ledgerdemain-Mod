@@ -1,0 +1,43 @@
+# из common/scripted_guis/00_financial_scripted_guis.txt, строки 94–98, 116–127, 128–133, 134–145, 146–151 (на 6.10.2026), sgui без ссылок (refs=0), в GUI/скриптах не вызываются и не собираются динамически
+
+ai_quantity_purchasing_1_visibility = {
+	is_shown = {
+		gold_lent_to_other > 0
+	}
+}
+global_player_help_on = {
+	effect = {
+		set_variable = {
+			name = player_help
+			value = 0
+		}
+		set_variable = {
+			name = player_help_reverce
+			value = 0
+		}
+	}
+}
+global_player_help_on_visible = {
+	is_shown = {
+		var:player_help = 1
+		var:player_help_reverce = 1
+	}
+}
+global_player_help_off = {
+	effect = {
+		set_variable = {
+			name = player_help
+			value = 1
+		}
+		set_variable = {
+			name = player_help_reverce
+			value = 1
+		}
+	}
+}
+global_player_help_off_visible = {
+	is_shown = {
+		var:player_help = 0
+		var:player_help_reverce = 0
+	}
+}

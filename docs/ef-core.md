@@ -28,7 +28,7 @@
 - `common/script_values/00_economic_scripted_value.txt` — 486 значений: `money_value`, `bimetallic_rate_gold_to_silver`, `central_bank_overlord_currency_purchases` (1333 строки), инфляция, цели девальвации/ревальвации.
 - `common/scripted_triggers/00_ef_custom_trigger.txt` — 665 триггеров: `has_central_bank_*`, `is_valid_country_*`, `law_<cur>_monetary_system_{SS,BS,GS,GES,...}_trigger` (по 95 валютам), `market_owner_is_root*`, `is_subject_custom_trigger`.
 ### Прочее
-- `common/decisions/00_ef_debug_decisions.txt` (отладка, 277 строк), `00_ef_ai_loooting.txt` (ИИ-грабёж центробанка столицы).
+- `common/decisions/00_ef_ai_loooting.txt` (ИИ-грабёж центробанка столицы).
 - `common/ideologies/00_ef_ig_ideologies.txt` — 4 новые идеологии (`ideology_monetary_{moderate,conservative,left}`, `ideology_monetary_policy`) + `INJECT` оценок законов в 9 ванильных (`laissez_faire … socialist`).
 - `common/institutions/00_ef_institutions.txt` — `institution_economic_central_bank`.
 - `common/amendments/00_ef_amendments.txt` — 7 поправок закона `lawgroup_bimetalism_ratio` (коэффициент FRA/латинский союз/USA 1834 и 1873/ESP/GER/NET).
@@ -77,7 +77,6 @@
 - Законы: 95 `law_<cur>_currency` (`laws/01_ef_currency_type.txt`), `law_*_standard`, `lawgroup_monetary_policy`, `lawgroup_bimetalism_ratio` — триггеры `law_<cur>_monetary_system_*_trigger` (customizable_localization `00_ef_localization_ custom.txt`, GUI).
 - Здания ↔ PM ↔ товары: `pmg_market_liquidity` вставлена в ванильные здания (`goods_input_liquidity_currency_add = 28`); PM «частного владения» производят акции; фин. центр потребляет акции/облигации и производит `mutual_funds`; банк `ld_bank` производит `liquidity_currency`.
 - Решения: `00_ef_ai_loooting_decisions_1` (ИИ при `enemy_capital_is_occuped >= 1`) → `enemy_capital_is_occuped` + событие `00_ef_economic_event.35`.
-- Отладка: решения `Open_Test_Decision`/`Close_Test_Decison` и `Test_event_1..5`, `law_encouranging_childbirth_Decision_*` показываются только при `has_global_variable = EF_debug_mode` (ставит scripted_gui `scripted_guis/09_ef_other.txt`); панель `gui/ld_economy_panel.gui:43` кнопку отладки не показывает (строка закомментирована).
 - События `00_ef_economic_event.1..35, 56..65, 95, 96, 106, 107` — из `ef_on_yearly_pulse_event_at_date`, `enemy_capital_is_occuped`, арбитража (`.95/.96`), решений; сообщения `00_ef_economic_event_<N>_message`.
 - Алерты (`alert_types`) движок обходит сам: регистрация по папке, `valid` определяет показ; в `trigger`/GUI на них ссылок нет, это норма.
 - Идеологии: `ideology_monetary_*` раздаются ИГ в `99_ef_history_global_variable.txt:~8000` (`add_ideology`), оценки законов читает движок.

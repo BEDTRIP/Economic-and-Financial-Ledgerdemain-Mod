@@ -1,0 +1,3068 @@
+# из common/scripted_guis/00_economic_scripted_guis.txt, строки 80–84, 92–99, 100–107, 519–561, 562–602, 642–650 … (на 6.10.2026), sgui без ссылок (refs=0), в GUI/скриптах не вызываются и не собираются динамически
+
+is_ai_v = {
+	is_valid = {
+		is_ai = yes
+	}
+}
+seller_country_general_XY_oclick = {
+	effect = {
+		set_variable = {
+			name = seller_country_general
+			value = 10
+		}
+	}
+}
+buyer_country_general_XY_oclick = {
+	effect = {
+		set_variable = {
+			name = seller_country_general
+			value = 5
+		}
+	}
+}
+gold_standard_standard_law = {
+	is_shown = {
+	}
+	is_valid = {
+		# var:revaluation_on = 0
+		# var:devaluation_on = 0
+		# has_technology_researched = central_banking
+		# has_modifier = has_central_bank
+		or = {
+			has_law = law_type:law_bimetallism_standard
+			has_law = law_type:law_gold_exchange_standard
+		}
+		has_technology_researched = metalique_standard
+		NOT = {
+			has_law = law_type:law_gold_standard
+			is_not_market_owner = yes
+			has_law = law_type:law_isolationism
+			has_modifier = central_bank_bankruptcy_country
+			has_modifier = currency_crisis_country
+			#has_modifier = monetary_systeme_transition
+		}
+	}
+	effect = {
+		# money_value_target_pre_set = yes
+		activate_law = law_type:law_gold_standard
+		# central_bank_production_methods = yes
+		# remove_modifier = foreign_exchange_controls
+		# add_modifier = {
+		# 	name = foreign_exchange_controls
+		# 	months = 12
+		# }
+		# set_variable = {
+		# 	name = money_value_target_1
+		# 	value = money_value_target_pre_set
+		# }
+		# trade_balance = yes
+		# remove_modifier = monetary_systeme_transition
+		# add_modifier = {
+		# 	name = monetary_systeme_transition
+		# 	months = 12
+		# }
+	}
+}
+gold_exchange_standard_standard_law = {
+	is_shown = {
+	}
+	is_valid = {
+		# var:revaluation_on = 0
+		# var:devaluation_on = 0
+		# has_modifier = has_central_bank
+
+		has_technology_researched = gold_exchange_standard
+		has_law = law_type:law_gold_exchange_standard
+		NOT = {
+			has_law = law_type:law_gold_exchange_standard
+			is_not_market_owner = yes
+			has_law = law_type:law_isolationism
+			has_modifier = central_bank_bankruptcy_country
+			has_modifier = currency_crisis_country
+			#has_modifier = monetary_systeme_transition
+		}
+	}
+	effect = {
+		# money_value_target_pre_set = yes
+		activate_law = law_type:law_gold_exchange_standard
+		# central_bank_production_methods = yes
+		# central_bank_production_methods_3 = yes
+		# remove_modifier = foreign_exchange_controls
+		# add_modifier = {
+		# 	name = foreign_exchange_controls
+		# 	months = 12
+		# }
+		# set_variable = {
+		# 	name = money_value_target_1
+		# 	value = money_value_target_pre_set
+		# }
+		# trade_balance = yes
+		# remove_modifier = monetary_systeme_transition
+		# add_modifier = {
+		# 	name = monetary_systeme_transition
+		# 	months = 12
+		# }
+	}
+}
+devaluation_currency = {
+	is_shown = {
+	}
+	is_valid = {
+	}
+	effect = {
+		activate_law = law_type:law_devaluation
+	}
+}
+revaluation_currency = {
+	is_shown = {
+	}
+	is_valid = {
+	}
+	effect = {
+		activate_law = law_type:law_revaluation
+	}
+}
+buy_sell_currency_in_currency_on_button_visibility = {
+	is_shown = {
+		var:sell_in_currency_on = 1
+	}
+}
+bond_in_currency_always_no = {
+	is_valid = {
+		always = yes
+	}
+}
+choose_currency_type_dinar_on = {
+	is_shown = {
+		var:choose_currency_type_dinar = 1
+	}
+}
+choose_currency_type_dinar_off = {
+	is_shown = {
+		var:choose_currency_type_dinar = 0
+	}
+}
+choose_currency_type_dinar_algerian_dinar_on = {
+	is_shown = {
+		var:choose_currency_type_dinar_algerian_dinar = 1
+	}
+}
+choose_currency_type_dinar_algerian_dinar_off = {
+	is_shown = {
+		var:choose_currency_type_dinar_algerian_dinar = 0
+	}
+}
+choose_currency_type_dinar_iraqi_dinar_on = {
+	is_shown = {
+		var:choose_currency_type_dinar_iraqi_dinar = 1
+	}
+}
+choose_currency_type_dinar_iraqi_dinar_off = {
+	is_shown = {
+		var:choose_currency_type_dinar_iraqi_dinar = 0
+	}
+}
+choose_currency_type_dinar_libyan_dinar_on = {
+	is_shown = {
+		var:choose_currency_type_dinar_libyan_dinar = 1
+	}
+}
+choose_currency_type_dinar_libyan_dinar_off = {
+	is_shown = {
+		var:choose_currency_type_dinar_libyan_dinar = 0
+	}
+}
+choose_currency_type_dinar_moroccan_dirham_on = {
+	is_shown = {
+		var:choose_currency_type_dinar_moroccan_dirham = 1
+	}
+}
+choose_currency_type_dinar_moroccan_dirham_off = {
+	is_shown = {
+		var:choose_currency_type_dinar_moroccan_dirham = 0
+	}
+}
+choose_currency_type_dinar_omanian_rial_on = {
+	is_shown = {
+		var:choose_currency_type_dinar_omanian_rial = 1
+	}
+}
+choose_currency_type_dinar_omanian_rial_off = {
+	is_shown = {
+		var:choose_currency_type_dinar_omanian_rial = 0
+	}
+}
+choose_currency_type_dinar_qiran_on = {
+	is_shown = {
+		var:choose_currency_type_dinar_qiran = 1
+	}
+}
+choose_currency_type_dinar_qiran_off = {
+	is_shown = {
+		var:choose_currency_type_dinar_qiran = 0
+	}
+}
+choose_currency_type_dinar_saudi_riyal_on = {
+	is_shown = {
+		var:choose_currency_type_dinar_saudi_riyal = 1
+	}
+}
+choose_currency_type_dinar_saudi_riyal_off = {
+	is_shown = {
+		var:choose_currency_type_dinar_saudi_riyal = 0
+	}
+}
+choose_currency_type_dinar_serbian_dinar_on = {
+	is_shown = {
+		var:choose_currency_type_dinar_serbian_dinar = 1
+	}
+}
+choose_currency_type_dinar_serbian_dinar_off = {
+	is_shown = {
+		var:choose_currency_type_dinar_serbian_dinar = 0
+	}
+}
+choose_currency_type_dinar_tunisian_dinar_on = {
+	is_shown = {
+		var:choose_currency_type_dinar_tunisian_dinar = 1
+	}
+}
+choose_currency_type_dinar_tunisian_dinar_off = {
+	is_shown = {
+		var:choose_currency_type_dinar_tunisian_dinar = 0
+	}
+}
+choose_currency_type_dinar_yugoslav_dinar_on = {
+	is_shown = {
+		var:choose_currency_type_dinar_yugoslav_dinar = 1
+	}
+}
+choose_currency_type_dinar_yugoslav_dinar_off = {
+	is_shown = {
+		var:choose_currency_type_dinar_yugoslav_dinar = 0
+	}
+}
+choose_currency_type_dollar_australian_dollar_on = {
+	is_shown = {
+		var:choose_currency_type_dollar_australian_dollar = 1
+	}
+}
+choose_currency_type_dollar_australian_dollar_off = {
+	is_shown = {
+		var:choose_currency_type_dollar_australian_dollar = 0
+	}
+}
+choose_currency_type_dollar_canadian_dollar_on = {
+	is_shown = {
+		var:choose_currency_type_dollar_canadian_dollar = 1
+	}
+}
+choose_currency_type_dollar_canadian_dollar_off = {
+	is_shown = {
+		var:choose_currency_type_dollar_canadian_dollar = 0
+	}
+}
+choose_currency_type_dollar_caribbean_dollar_on = {
+	is_shown = {
+		var:choose_currency_type_dollar_caribbean_dollar = 1
+	}
+}
+choose_currency_type_dollar_caribbean_dollar_off = {
+	is_shown = {
+		var:choose_currency_type_dollar_caribbean_dollar = 0
+	}
+}
+choose_currency_type_dollar_confederate_states_dollar_on = {
+	is_shown = {
+		var:choose_currency_type_dollar_confederate_states_dollar = 1
+	}
+}
+choose_currency_type_dollar_confederate_states_dollar_off = {
+	is_shown = {
+		var:choose_currency_type_dollar_confederate_states_dollar = 0
+	}
+}
+choose_currency_type_dollar_liberian_dollar_on = {
+	is_shown = {
+		var:choose_currency_type_dollar_liberian_dollar = 1
+	}
+}
+choose_currency_type_dollar_liberian_dollar_off = {
+	is_shown = {
+		var:choose_currency_type_dollar_liberian_dollar = 0
+	}
+}
+choose_currency_type_dollar_new_zealand_dollar_on = {
+	is_shown = {
+		var:choose_currency_type_dollar_new_zealand_dollar = 1
+	}
+}
+choose_currency_type_dollar_new_zealand_dollar_off = {
+	is_shown = {
+		var:choose_currency_type_dollar_new_zealand_dollar = 0
+	}
+}
+choose_currency_type_dollar_sierra_leonean_dollar_on = {
+	is_shown = {
+		var:choose_currency_type_dollar_sierra_leonean_dollar = 1
+	}
+}
+choose_currency_type_dollar_sierra_leonean_dollar_off = {
+	is_shown = {
+		var:choose_currency_type_dollar_sierra_leonean_dollar = 0
+	}
+}
+choose_currency_type_dollar_united_states_dollar_on = {
+	is_shown = {
+		var:choose_currency_type_dollar_united_states_dollar = 1
+	}
+}
+choose_currency_type_dollar_united_states_dollar_off = {
+	is_shown = {
+		var:choose_currency_type_dollar_united_states_dollar = 0
+	}
+}
+choose_currency_type_eco_ariary_on = {
+	is_shown = {
+		var:choose_currency_type_eco_ariary = 1
+	}
+}
+choose_currency_type_eco_ariary_off = {
+	is_shown = {
+		var:choose_currency_type_eco_ariary = 0
+	}
+}
+choose_currency_type_eco_central_african_eco_on = {
+	is_shown = {
+		var:choose_currency_type_eco_central_african_eco = 1
+	}
+}
+choose_currency_type_eco_central_african_eco_off = {
+	is_shown = {
+		var:choose_currency_type_eco_central_african_eco = 0
+	}
+}
+choose_currency_type_eco_east_african_eco_on = {
+	is_shown = {
+		var:choose_currency_type_eco_east_african_eco = 1
+	}
+}
+choose_currency_type_eco_east_african_eco_off = {
+	is_shown = {
+		var:choose_currency_type_eco_east_african_eco = 0
+	}
+}
+choose_currency_type_eco_ethiopian_birr_on = {
+	is_shown = {
+		var:choose_currency_type_eco_ethiopian_birr = 1
+	}
+}
+choose_currency_type_eco_ethiopian_birr_off = {
+	is_shown = {
+		var:choose_currency_type_eco_ethiopian_birr = 0
+	}
+}
+choose_currency_type_eco_ghanaian_pound_on = {
+	is_shown = {
+		var:choose_currency_type_eco_ghanaian_pound = 1
+	}
+}
+choose_currency_type_eco_ghanaian_pound_off = {
+	is_shown = {
+		var:choose_currency_type_eco_ghanaian_pound = 0
+	}
+}
+choose_currency_type_eco_nigerian_naira_on = {
+	is_shown = {
+		var:choose_currency_type_eco_nigerian_naira = 1
+	}
+}
+choose_currency_type_eco_nigerian_naira_off = {
+	is_shown = {
+		var:choose_currency_type_eco_nigerian_naira = 0
+	}
+}
+choose_currency_type_eco_south_african_rand_on = {
+	is_shown = {
+		var:choose_currency_type_eco_south_african_rand = 1
+	}
+}
+choose_currency_type_eco_south_african_rand_off = {
+	is_shown = {
+		var:choose_currency_type_eco_south_african_rand = 0
+	}
+}
+choose_currency_type_eco_tuareg_ouguiya_on = {
+	is_shown = {
+		var:choose_currency_type_eco_tuareg_ouguiya = 1
+	}
+}
+choose_currency_type_eco_tuareg_ouguiya_off = {
+	is_shown = {
+		var:choose_currency_type_eco_tuareg_ouguiya = 0
+	}
+}
+choose_currency_type_eco_west_african_eco_on = {
+	is_shown = {
+		var:choose_currency_type_eco_west_african_eco = 1
+	}
+}
+choose_currency_type_eco_west_african_eco_off = {
+	is_shown = {
+		var:choose_currency_type_eco_west_african_eco = 0
+	}
+}
+choose_currency_type_franc_belgian_franc_on = {
+	is_shown = {
+		var:choose_currency_type_franc_belgian_franc = 1
+	}
+}
+choose_currency_type_franc_belgian_franc_off = {
+	is_shown = {
+		var:choose_currency_type_franc_belgian_franc = 0
+	}
+}
+choose_currency_type_franc_french_franc_on = {
+	is_shown = {
+		var:choose_currency_type_franc_french_franc = 1
+	}
+}
+choose_currency_type_franc_french_franc_off = {
+	is_shown = {
+		var:choose_currency_type_franc_french_franc = 0
+	}
+}
+choose_currency_type_franc_luxembourgish_franc_on = {
+	is_shown = {
+		var:choose_currency_type_franc_luxembourgish_franc = 1
+	}
+}
+choose_currency_type_franc_luxembourgish_franc_off = {
+	is_shown = {
+		var:choose_currency_type_franc_luxembourgish_franc = 0
+	}
+}
+choose_currency_type_franc_swiss_franc_on = {
+	is_shown = {
+		var:choose_currency_type_franc_swiss_franc = 1
+	}
+}
+choose_currency_type_franc_swiss_franc_off = {
+	is_shown = {
+		var:choose_currency_type_franc_swiss_franc = 0
+	}
+}
+choose_currency_type_gulden_on = {
+	is_shown = {
+		var:choose_currency_type_gulden = 1
+	}
+}
+choose_currency_type_gulden_off = {
+	is_shown = {
+		var:choose_currency_type_gulden = 0
+	}
+}
+choose_currency_type_gulden_bavarian_gulden_on = {
+	is_shown = {
+		var:choose_currency_type_gulden_bavarian_gulden = 1
+	}
+}
+choose_currency_type_gulden_bavarian_gulden_off = {
+	is_shown = {
+		var:choose_currency_type_gulden_bavarian_gulden = 0
+	}
+}
+choose_currency_type_gulden_florin_on = {
+	is_shown = {
+		var:choose_currency_type_gulden_florin = 1
+	}
+}
+choose_currency_type_gulden_florin_off = {
+	is_shown = {
+		var:choose_currency_type_gulden_florin = 0
+	}
+}
+choose_currency_type_gulden_hungarian_forint_on = {
+	is_shown = {
+		var:choose_currency_type_gulden_hungarian_forint = 1
+	}
+}
+choose_currency_type_gulden_hungarian_forint_off = {
+	is_shown = {
+		var:choose_currency_type_gulden_hungarian_forint = 0
+	}
+}
+choose_currency_type_gulden_indies_guilder_on = {
+	is_shown = {
+		var:choose_currency_type_gulden_indies_guilder = 1
+	}
+}
+choose_currency_type_gulden_indies_guilder_off = {
+	is_shown = {
+		var:choose_currency_type_gulden_indies_guilder = 0
+	}
+}
+choose_currency_type_gulden_south_german_gulden_on = {
+	is_shown = {
+		var:choose_currency_type_gulden_south_german_gulden = 1
+	}
+}
+choose_currency_type_gulden_south_german_gulden_off = {
+	is_shown = {
+		var:choose_currency_type_gulden_south_german_gulden = 0
+	}
+}
+choose_currency_type_krone_czech_koruna_on = {
+	is_shown = {
+		var:choose_currency_type_krone_czech_koruna = 1
+	}
+}
+choose_currency_type_krone_czech_koruna_off = {
+	is_shown = {
+		var:choose_currency_type_krone_czech_koruna = 0
+	}
+}
+choose_currency_type_krone_danish_krone_on = {
+	is_shown = {
+		var:choose_currency_type_krone_danish_krone = 1
+	}
+}
+choose_currency_type_krone_danish_krone_off = {
+	is_shown = {
+		var:choose_currency_type_krone_danish_krone = 0
+	}
+}
+choose_currency_type_krone_estonian_kroon_on = {
+	is_shown = {
+		var:choose_currency_type_krone_estonian_kroon = 1
+	}
+}
+choose_currency_type_krone_estonian_kroon_off = {
+	is_shown = {
+		var:choose_currency_type_krone_estonian_kroon = 0
+	}
+}
+choose_currency_type_krone_icelandic_krona_on = {
+	is_shown = {
+		var:choose_currency_type_krone_icelandic_krona = 1
+	}
+}
+choose_currency_type_krone_icelandic_krona_off = {
+	is_shown = {
+		var:choose_currency_type_krone_icelandic_krona = 0
+	}
+}
+choose_currency_type_krone_norwegian_krone_on = {
+	is_shown = {
+		var:choose_currency_type_krone_norwegian_krone = 1
+	}
+}
+choose_currency_type_krone_norwegian_krone_off = {
+	is_shown = {
+		var:choose_currency_type_krone_norwegian_krone = 0
+	}
+}
+choose_currency_type_krone_slovak_koruna_on = {
+	is_shown = {
+		var:choose_currency_type_krone_slovak_koruna = 1
+	}
+}
+choose_currency_type_krone_slovak_koruna_off = {
+	is_shown = {
+		var:choose_currency_type_krone_slovak_koruna = 0
+	}
+}
+choose_currency_type_krone_swedish_krona_on = {
+	is_shown = {
+		var:choose_currency_type_krone_swedish_krona = 1
+	}
+}
+choose_currency_type_krone_swedish_krona_off = {
+	is_shown = {
+		var:choose_currency_type_krone_swedish_krona = 0
+	}
+}
+choose_currency_type_leon_leu_on = {
+	is_shown = {
+		var:choose_currency_type_leon_leu = 1
+	}
+}
+choose_currency_type_leon_leu_off = {
+	is_shown = {
+		var:choose_currency_type_leon_leu = 0
+	}
+}
+choose_currency_type_leon_lev_on = {
+	is_shown = {
+		var:choose_currency_type_leon_lev = 1
+	}
+}
+choose_currency_type_leon_lev_off = {
+	is_shown = {
+		var:choose_currency_type_leon_lev = 0
+	}
+}
+choose_currency_type_lira_on = {
+	is_shown = {
+		var:choose_currency_type_lira = 1
+	}
+}
+choose_currency_type_lira_off = {
+	is_shown = {
+		var:choose_currency_type_lira = 0
+	}
+}
+choose_currency_type_lira_ducato_on = {
+	is_shown = {
+		var:choose_currency_type_lira_ducato = 1
+	}
+}
+choose_currency_type_lira_ducato_off = {
+	is_shown = {
+		var:choose_currency_type_lira_ducato = 0
+	}
+}
+choose_currency_type_lira_ottoman_lira_on = {
+	is_shown = {
+		var:choose_currency_type_lira_ottoman_lira = 1
+	}
+}
+choose_currency_type_lira_ottoman_lira_off = {
+	is_shown = {
+		var:choose_currency_type_lira_ottoman_lira = 0
+	}
+}
+choose_currency_type_lira_scudo_pontificio_on = {
+	is_shown = {
+		var:choose_currency_type_lira_scudo_pontificio = 1
+	}
+}
+choose_currency_type_lira_scudo_pontificio_off = {
+	is_shown = {
+		var:choose_currency_type_lira_scudo_pontificio = 0
+	}
+}
+choose_currency_type_lira_scudo_sardo_on = {
+	is_shown = {
+		var:choose_currency_type_lira_scudo_sardo = 1
+	}
+}
+choose_currency_type_lira_scudo_sardo_off = {
+	is_shown = {
+		var:choose_currency_type_lira_scudo_sardo = 0
+	}
+}
+choose_currency_type_lira_toscane_lira_on = {
+	is_shown = {
+		var:choose_currency_type_lira_toscane_lira = 1
+	}
+}
+choose_currency_type_lira_toscane_lira_off = {
+	is_shown = {
+		var:choose_currency_type_lira_toscane_lira = 0
+	}
+}
+choose_currency_type_mark_on = {
+	is_shown = {
+		var:choose_currency_type_mark = 1
+	}
+}
+choose_currency_type_mark_off = {
+	is_shown = {
+		var:choose_currency_type_mark = 0
+	}
+}
+choose_currency_type_mark_finnish_markka_on = {
+	is_shown = {
+		var:choose_currency_type_mark_finnish_markka = 1
+	}
+}
+choose_currency_type_mark_finnish_markka_off = {
+	is_shown = {
+		var:choose_currency_type_mark_finnish_markka = 0
+	}
+}
+choose_currency_type_peso_on = {
+	is_shown = {
+		var:choose_currency_type_peso = 1
+	}
+}
+choose_currency_type_peso_off = {
+	is_shown = {
+		var:choose_currency_type_peso = 0
+	}
+}
+choose_currency_type_peso_argentine_peso_on = {
+	is_shown = {
+		var:choose_currency_type_peso_argentine_peso = 1
+	}
+}
+choose_currency_type_peso_argentine_peso_off = {
+	is_shown = {
+		var:choose_currency_type_peso_argentine_peso = 0
+	}
+}
+choose_currency_type_peso_bolivien_peso_on = {
+	is_shown = {
+		var:choose_currency_type_peso_bolivien_peso = 1
+	}
+}
+choose_currency_type_peso_bolivien_peso_off = {
+	is_shown = {
+		var:choose_currency_type_peso_bolivien_peso = 0
+	}
+}
+choose_currency_type_peso_chilean_peso_on = {
+	is_shown = {
+		var:choose_currency_type_peso_chilean_peso = 1
+	}
+}
+choose_currency_type_peso_chilean_peso_off = {
+	is_shown = {
+		var:choose_currency_type_peso_chilean_peso = 0
+	}
+}
+choose_currency_type_peso_colombian_peso_on = {
+	is_shown = {
+		var:choose_currency_type_peso_colombian_peso = 1
+	}
+}
+choose_currency_type_peso_colombian_peso_off = {
+	is_shown = {
+		var:choose_currency_type_peso_colombian_peso = 0
+	}
+}
+choose_currency_type_peso_costa_rican_colon_on = {
+	is_shown = {
+		var:choose_currency_type_peso_costa_rican_colon = 1
+	}
+}
+choose_currency_type_peso_costa_rican_colon_off = {
+	is_shown = {
+		var:choose_currency_type_peso_costa_rican_colon = 0
+	}
+}
+choose_currency_type_peso_cuban_peso_on = {
+	is_shown = {
+		var:choose_currency_type_peso_cuban_peso = 1
+	}
+}
+choose_currency_type_peso_cuban_peso_off = {
+	is_shown = {
+		var:choose_currency_type_peso_cuban_peso = 0
+	}
+}
+choose_currency_type_peso_ecuadorian_peso_on = {
+	is_shown = {
+		var:choose_currency_type_peso_ecuadorian_peso = 1
+	}
+}
+choose_currency_type_peso_ecuadorian_peso_off = {
+	is_shown = {
+		var:choose_currency_type_peso_ecuadorian_peso = 0
+	}
+}
+choose_currency_type_peso_el_salvador_colon_on = {
+	is_shown = {
+		var:choose_currency_type_peso_el_salvador_colon = 1
+	}
+}
+choose_currency_type_peso_el_salvador_colon_off = {
+	is_shown = {
+		var:choose_currency_type_peso_el_salvador_colon = 0
+	}
+}
+choose_currency_type_peso_guatemalan_quetzal_on = {
+	is_shown = {
+		var:choose_currency_type_peso_guatemalan_quetzal = 1
+	}
+}
+choose_currency_type_peso_guatemalan_quetzal_off = {
+	is_shown = {
+		var:choose_currency_type_peso_guatemalan_quetzal = 0
+	}
+}
+choose_currency_type_peso_honduran_lempira_on = {
+	is_shown = {
+		var:choose_currency_type_peso_honduran_lempira = 1
+	}
+}
+choose_currency_type_peso_honduran_lempira_off = {
+	is_shown = {
+		var:choose_currency_type_peso_honduran_lempira = 0
+	}
+}
+choose_currency_type_peso_mexican_peso_on = {
+	is_shown = {
+		var:choose_currency_type_peso_mexican_peso = 1
+	}
+}
+choose_currency_type_peso_mexican_peso_off = {
+	is_shown = {
+		var:choose_currency_type_peso_mexican_peso = 0
+	}
+}
+choose_currency_type_peso_nicaraguan_cordoba_on = {
+	is_shown = {
+		var:choose_currency_type_peso_nicaraguan_cordoba = 1
+	}
+}
+choose_currency_type_peso_nicaraguan_cordoba_off = {
+	is_shown = {
+		var:choose_currency_type_peso_nicaraguan_cordoba = 0
+	}
+}
+choose_currency_type_peso_paraguayan_peso_on = {
+	is_shown = {
+		var:choose_currency_type_peso_paraguayan_peso = 1
+	}
+}
+choose_currency_type_peso_paraguayan_peso_off = {
+	is_shown = {
+		var:choose_currency_type_peso_paraguayan_peso = 0
+	}
+}
+choose_currency_type_peso_philippine_peso_on = {
+	is_shown = {
+		var:choose_currency_type_peso_philippine_peso = 1
+	}
+}
+choose_currency_type_peso_philippine_peso_off = {
+	is_shown = {
+		var:choose_currency_type_peso_philippine_peso = 0
+	}
+}
+choose_currency_type_peso_sol_de_oro_on = {
+	is_shown = {
+		var:choose_currency_type_peso_sol_de_oro = 1
+	}
+}
+choose_currency_type_peso_sol_de_oro_off = {
+	is_shown = {
+		var:choose_currency_type_peso_sol_de_oro = 0
+	}
+}
+choose_currency_type_peso_uruguayan_peso_on = {
+	is_shown = {
+		var:choose_currency_type_peso_uruguayan_peso = 1
+	}
+}
+choose_currency_type_peso_uruguayan_peso_off = {
+	is_shown = {
+		var:choose_currency_type_peso_uruguayan_peso = 0
+	}
+}
+choose_currency_type_peso_venezuelan_peso_on = {
+	is_shown = {
+		var:choose_currency_type_peso_venezuelan_peso = 1
+	}
+}
+choose_currency_type_peso_venezuelan_peso_off = {
+	is_shown = {
+		var:choose_currency_type_peso_venezuelan_peso = 0
+	}
+}
+choose_currency_type_pound_egyptian_pound_on = {
+	is_shown = {
+		var:choose_currency_type_pound_egyptian_pound = 1
+	}
+}
+choose_currency_type_pound_egyptian_pound_off = {
+	is_shown = {
+		var:choose_currency_type_pound_egyptian_pound = 0
+	}
+}
+choose_currency_type_pound_irish_pound_on = {
+	is_shown = {
+		var:choose_currency_type_pound_irish_pound = 1
+	}
+}
+choose_currency_type_pound_irish_pound_off = {
+	is_shown = {
+		var:choose_currency_type_pound_irish_pound = 0
+	}
+}
+choose_currency_type_pound_sterling_on = {
+	is_shown = {
+		var:choose_currency_type_pound_sterling = 1
+	}
+}
+choose_currency_type_pound_sterling_off = {
+	is_shown = {
+		var:choose_currency_type_pound_sterling = 0
+	}
+}
+choose_currency_type_real_on = {
+	is_shown = {
+		var:choose_currency_type_real = 1
+	}
+}
+choose_currency_type_real_off = {
+	is_shown = {
+		var:choose_currency_type_real = 0
+	}
+}
+choose_currency_type_real_brazilian_real_on = {
+	is_shown = {
+		var:choose_currency_type_real_brazilian_real = 1
+	}
+}
+choose_currency_type_real_brazilian_real_off = {
+	is_shown = {
+		var:choose_currency_type_real_brazilian_real = 0
+	}
+}
+choose_currency_type_rupee_indian_rupee_on = {
+	is_shown = {
+		var:choose_currency_type_rupee_indian_rupee = 1
+	}
+}
+choose_currency_type_rupee_indian_rupee_off = {
+	is_shown = {
+		var:choose_currency_type_rupee_indian_rupee = 0
+	}
+}
+choose_currency_type_rupee_indonesian_rupiah_on = {
+	is_shown = {
+		var:choose_currency_type_rupee_indonesian_rupiah = 1
+	}
+}
+choose_currency_type_rupee_indonesian_rupiah_off = {
+	is_shown = {
+		var:choose_currency_type_rupee_indonesian_rupiah = 0
+	}
+}
+choose_currency_type_spe_baht_on = {
+	is_shown = {
+		var:choose_currency_type_spe_baht = 1
+	}
+}
+choose_currency_type_spe_baht_off = {
+	is_shown = {
+		var:choose_currency_type_spe_baht = 0
+	}
+}
+choose_currency_type_spe_dong_on = {
+	is_shown = {
+		var:choose_currency_type_spe_dong = 1
+	}
+}
+choose_currency_type_spe_dong_off = {
+	is_shown = {
+		var:choose_currency_type_spe_dong = 0
+	}
+}
+choose_currency_type_spe_drachma_on = {
+	is_shown = {
+		var:choose_currency_type_spe_drachma = 1
+	}
+}
+choose_currency_type_spe_drachma_off = {
+	is_shown = {
+		var:choose_currency_type_spe_drachma = 0
+	}
+}
+choose_currency_type_spe_korean_won_on = {
+	is_shown = {
+		var:choose_currency_type_spe_korean_won = 1
+	}
+}
+choose_currency_type_spe_korean_won_off = {
+	is_shown = {
+		var:choose_currency_type_spe_korean_won = 0
+	}
+}
+choose_currency_type_spe_latvian_lats_on = {
+	is_shown = {
+		var:choose_currency_type_spe_latvian_lats = 1
+	}
+}
+choose_currency_type_spe_latvian_lats_off = {
+	is_shown = {
+		var:choose_currency_type_spe_latvian_lats = 0
+	}
+}
+choose_currency_type_spe_lithuanian_litas_on = {
+	is_shown = {
+		var:choose_currency_type_spe_lithuanian_litas = 1
+	}
+}
+choose_currency_type_spe_lithuanian_litas_off = {
+	is_shown = {
+		var:choose_currency_type_spe_lithuanian_litas = 0
+	}
+}
+choose_currency_type_spe_peseta_on = {
+	is_shown = {
+		var:choose_currency_type_spe_peseta = 1
+	}
+}
+choose_currency_type_spe_peseta_off = {
+	is_shown = {
+		var:choose_currency_type_spe_peseta = 0
+	}
+}
+choose_currency_type_spe_ruble_on = {
+	is_shown = {
+		var:choose_currency_type_spe_ruble = 1
+	}
+}
+choose_currency_type_spe_ruble_off = {
+	is_shown = {
+		var:choose_currency_type_spe_ruble = 0
+	}
+}
+choose_currency_type_spe_uni_on = {
+	is_shown = {
+		var:choose_currency_type_spe_uni = 1
+	}
+}
+choose_currency_type_spe_uni_off = {
+	is_shown = {
+		var:choose_currency_type_spe_uni = 0
+	}
+}
+choose_currency_type_spe_yen_on = {
+	is_shown = {
+		var:choose_currency_type_spe_yen = 1
+	}
+}
+choose_currency_type_spe_yen_off = {
+	is_shown = {
+		var:choose_currency_type_spe_yen = 0
+	}
+}
+choose_currency_type_spe_yuan_on = {
+	is_shown = {
+		var:choose_currency_type_spe_yuan = 1
+	}
+}
+choose_currency_type_spe_yuan_off = {
+	is_shown = {
+		var:choose_currency_type_spe_yuan = 0
+	}
+}
+choose_currency_type_spe_zloti_on = {
+	is_shown = {
+		var:choose_currency_type_spe_zloti = 1
+	}
+}
+choose_currency_type_spe_zloti_off = {
+	is_shown = {
+		var:choose_currency_type_spe_zloti = 0
+	}
+}
+choose_currency_type_thaler_hannoveraner_thaler_on = {
+	is_shown = {
+		var:choose_currency_type_thaler_hannoveraner_thaler = 1
+	}
+}
+choose_currency_type_thaler_hannoveraner_thaler_off = {
+	is_shown = {
+		var:choose_currency_type_thaler_hannoveraner_thaler = 0
+	}
+}
+choose_currency_type_thaler_prussian_thaler_on = {
+	is_shown = {
+		var:choose_currency_type_thaler_prussian_thaler = 1
+	}
+}
+choose_currency_type_thaler_prussian_thaler_off = {
+	is_shown = {
+		var:choose_currency_type_thaler_prussian_thaler = 0
+	}
+}
+choose_currency_type_thaler_saxon_thaler_on = {
+	is_shown = {
+		var:choose_currency_type_thaler_saxon_thaler = 1
+	}
+}
+choose_currency_type_thaler_saxon_thaler_off = {
+	is_shown = {
+		var:choose_currency_type_thaler_saxon_thaler = 0
+	}
+}
+money_value_dinar_visible = {
+	is_shown = {
+		dinar_c_global_stokpile > 0
+		not = {
+			root = {
+				has_law = law_type:law_dinar_currency
+			}
+		}
+	}
+}
+money_value_dinar_algerian_dinar_visible = {
+	is_shown = {
+		dinar_algerian_dinar_c_global_stokpile > 0
+	}
+}
+money_value_dinar_iraqi_dinar_visible = {
+	is_shown = {
+		dinar_iraqi_dinar_c_global_stokpile > 0
+	}
+}
+money_value_dinar_libyan_dinar_visible = {
+	is_shown = {
+		dinar_libyan_dinar_c_global_stokpile > 0
+	}
+}
+money_value_dinar_moroccan_dirham_visible = {
+	is_shown = {
+		dinar_moroccan_dirham_c_global_stokpile > 0
+	}
+}
+money_value_dinar_omanian_rial_visible = {
+	is_shown = {
+		dinar_omanian_rial_c_global_stokpile > 0
+	}
+}
+money_value_dinar_qiran_visible = {
+	is_shown = {
+		dinar_qiran_c_global_stokpile > 0
+	}
+}
+money_value_dinar_saudi_riyal_visible = {
+	is_shown = {
+		dinar_saudi_riyal_c_global_stokpile > 0
+	}
+}
+money_value_dinar_serbian_dinar_visible = {
+	is_shown = {
+		dinar_serbian_dinar_c_global_stokpile > 0
+	}
+}
+money_value_dinar_tunisian_dinar_visible = {
+	is_shown = {
+		dinar_tunisian_dinar_c_global_stokpile > 0
+	}
+}
+money_value_dinar_yugoslav_dinar_visible = {
+	is_shown = {
+		dinar_yugoslav_dinar_c_global_stokpile > 0
+	}
+}
+money_value_dollar_australian_dollar_visible = {
+	is_shown = {
+		dollar_australian_dollar_c_global_stokpile > 0
+	}
+}
+money_value_dollar_canadian_dollar_visible = {
+	is_shown = {
+		dollar_canadian_dollar_c_global_stokpile > 0
+	}
+}
+money_value_dollar_caribbean_dollar_visible = {
+	is_shown = {
+		dollar_caribbean_dollar_c_global_stokpile > 0
+	}
+}
+money_value_dollar_confederate_states_dollar_visible = {
+	is_shown = {
+		dollar_confederate_states_dollar_c_global_stokpile > 0
+	}
+}
+money_value_dollar_liberian_dollar_visible = {
+	is_shown = {
+		dollar_liberian_dollar_c_global_stokpile > 0
+	}
+}
+money_value_dollar_new_zealand_dollar_visible = {
+	is_shown = {
+		dollar_new_zealand_dollar_c_global_stokpile > 0
+	}
+}
+money_value_dollar_sierra_leonean_dollar_visible = {
+	is_shown = {
+		dollar_sierra_leonean_dollar_c_global_stokpile > 0
+	}
+}
+money_value_dollar_united_states_dollar_visible = {
+	is_shown = {
+		dollar_united_states_dollar_c_global_stokpile > 0
+	}
+}
+money_value_eco_ariary_visible = {
+	is_shown = {
+		eco_ariary_c_global_stokpile > 0
+	}
+}
+money_value_eco_central_african_eco_visible = {
+	is_shown = {
+		eco_central_african_eco_c_global_stokpile > 0
+	}
+}
+money_value_eco_east_african_eco_visible = {
+	is_shown = {
+		eco_east_african_eco_c_global_stokpile > 0
+	}
+}
+money_value_eco_ethiopian_birr_visible = {
+	is_shown = {
+		eco_ethiopian_birr_c_global_stokpile > 0
+	}
+}
+money_value_eco_ghanaian_pound_visible = {
+	is_shown = {
+		eco_ghanaian_pound_c_global_stokpile > 0
+	}
+}
+money_value_eco_nigerian_naira_visible = {
+	is_shown = {
+		eco_nigerian_naira_c_global_stokpile > 0
+	}
+}
+money_value_eco_south_african_rand_visible = {
+	is_shown = {
+		eco_south_african_rand_c_global_stokpile > 0
+	}
+}
+money_value_eco_tuareg_ouguiya_visible = {
+	is_shown = {
+		eco_tuareg_ouguiya_c_global_stokpile > 0
+	}
+}
+money_value_eco_west_african_eco_visible = {
+	is_shown = {
+		eco_west_african_eco_c_global_stokpile > 0
+	}
+}
+money_value_franc_belgian_franc_visible = {
+	is_shown = {
+		franc_belgian_franc_c_global_stokpile > 0
+	}
+}
+money_value_franc_french_franc_visible = {
+	is_shown = {
+		franc_french_franc_c_global_stokpile > 0
+	}
+}
+money_value_franc_luxembourgish_franc_visible = {
+	is_shown = {
+		franc_luxembourgish_franc_c_global_stokpile > 0
+	}
+}
+money_value_franc_swiss_franc_visible = {
+	is_shown = {
+		franc_swiss_franc_c_global_stokpile > 0
+	}
+}
+money_value_gulden_visible = {
+	is_shown = {
+		gulden_c_global_stokpile > 0
+	}
+}
+money_value_gulden_bavarian_gulden_visible = {
+	is_shown = {
+		gulden_bavarian_gulden_c_global_stokpile > 0
+	}
+}
+money_value_gulden_florin_visible = {
+	is_shown = {
+		gulden_florin_c_global_stokpile > 0
+	}
+}
+money_value_gulden_hungarian_forint_visible = {
+	is_shown = {
+		gulden_hungarian_forint_c_global_stokpile > 0
+	}
+}
+money_value_gulden_indies_guilder_visible = {
+	is_shown = {
+		gulden_indies_guilder_c_global_stokpile > 0
+	}
+}
+money_value_gulden_south_german_gulden_visible = {
+	is_shown = {
+		gulden_south_german_gulden_c_global_stokpile > 0
+	}
+}
+money_value_krone_czech_koruna_visible = {
+	is_shown = {
+		krone_czech_koruna_c_global_stokpile > 0
+	}
+}
+money_value_krone_danish_krone_visible = {
+	is_shown = {
+		krone_danish_krone_c_global_stokpile > 0
+	}
+}
+money_value_krone_estonian_kroon_visible = {
+	is_shown = {
+		krone_estonian_kroon_c_global_stokpile > 0
+	}
+}
+money_value_krone_icelandic_krona_visible = {
+	is_shown = {
+		krone_icelandic_krona_c_global_stokpile > 0
+	}
+}
+money_value_krone_norwegian_krone_visible = {
+	is_shown = {
+		krone_norwegian_krone_c_global_stokpile > 0
+	}
+}
+money_value_krone_slovak_koruna_visible = {
+	is_shown = {
+		krone_slovak_koruna_c_global_stokpile > 0
+	}
+}
+money_value_krone_swedish_krona_visible = {
+	is_shown = {
+		krone_swedish_krona_c_global_stokpile > 0
+	}
+}
+money_value_leon_leu_visible = {
+	is_shown = {
+		leon_leu_c_global_stokpile > 0
+	}
+}
+money_value_leon_lev_visible = {
+	is_shown = {
+		leon_lev_c_global_stokpile > 0
+	}
+}
+money_value_lira_visible = {
+	is_shown = {
+		lira_c_global_stokpile > 0
+	}
+}
+money_value_lira_ducato_visible = {
+	is_shown = {
+		lira_ducato_c_global_stokpile > 0
+	}
+}
+money_value_lira_ottoman_lira_visible = {
+	is_shown = {
+		lira_ottoman_lira_c_global_stokpile > 0
+	}
+}
+money_value_lira_scudo_pontificio_visible = {
+	is_shown = {
+		lira_scudo_pontificio_c_global_stokpile > 0
+	}
+}
+money_value_lira_scudo_sardo_visible = {
+	is_shown = {
+		lira_scudo_sardo_c_global_stokpile > 0
+	}
+}
+money_value_lira_toscane_lira_visible = {
+	is_shown = {
+		lira_toscane_lira_c_global_stokpile > 0
+	}
+}
+money_value_mark_visible = {
+	is_shown = {
+		mark_c_global_stokpile > 0
+	}
+}
+money_value_mark_finnish_markka_visible = {
+	is_shown = {
+		mark_finnish_markka_c_global_stokpile > 0
+	}
+}
+money_value_peso_visible = {
+	is_shown = {
+		peso_c_global_stokpile > 0
+	}
+}
+money_value_peso_argentine_peso_visible = {
+	is_shown = {
+		peso_argentine_peso_c_global_stokpile > 0
+	}
+}
+money_value_peso_bolivien_peso_visible = {
+	is_shown = {
+		peso_bolivien_peso_c_global_stokpile > 0
+	}
+}
+money_value_peso_chilean_peso_visible = {
+	is_shown = {
+		peso_chilean_peso_c_global_stokpile > 0
+	}
+}
+money_value_peso_colombian_peso_visible = {
+	is_shown = {
+		peso_colombian_peso_c_global_stokpile > 0
+	}
+}
+money_value_peso_costa_rican_colon_visible = {
+	is_shown = {
+		peso_costa_rican_colon_c_global_stokpile > 0
+	}
+}
+money_value_peso_cuban_peso_visible = {
+	is_shown = {
+		peso_cuban_peso_c_global_stokpile > 0
+	}
+}
+money_value_peso_ecuadorian_peso_visible = {
+	is_shown = {
+		peso_ecuadorian_peso_c_global_stokpile > 0
+	}
+}
+money_value_peso_el_salvador_colon_visible = {
+	is_shown = {
+		peso_el_salvador_colon_c_global_stokpile > 0
+	}
+}
+money_value_peso_guatemalan_quetzal_visible = {
+	is_shown = {
+		peso_guatemalan_quetzal_c_global_stokpile > 0
+	}
+}
+money_value_peso_honduran_lempira_visible = {
+	is_shown = {
+		peso_honduran_lempira_c_global_stokpile > 0
+	}
+}
+money_value_peso_mexican_peso_visible = {
+	is_shown = {
+		peso_mexican_peso_c_global_stokpile > 0
+	}
+}
+money_value_peso_nicaraguan_cordoba_visible = {
+	is_shown = {
+		peso_nicaraguan_cordoba_c_global_stokpile > 0
+	}
+}
+money_value_peso_paraguayan_peso_visible = {
+	is_shown = {
+		peso_paraguayan_peso_c_global_stokpile > 0
+	}
+}
+money_value_peso_philippine_peso_visible = {
+	is_shown = {
+		peso_philippine_peso_c_global_stokpile > 0
+	}
+}
+money_value_peso_sol_de_oro_visible = {
+	is_shown = {
+		peso_sol_de_oro_c_global_stokpile > 0
+	}
+}
+money_value_peso_uruguayan_peso_visible = {
+	is_shown = {
+		peso_uruguayan_peso_c_global_stokpile > 0
+	}
+}
+money_value_peso_venezuelan_peso_visible = {
+	is_shown = {
+		peso_venezuelan_peso_c_global_stokpile > 0
+	}
+}
+money_value_pound_egyptian_pound_visible = {
+	is_shown = {
+		pound_egyptian_pound_c_global_stokpile > 0
+	}
+}
+money_value_pound_irish_pound_visible = {
+	is_shown = {
+		pound_irish_pound_c_global_stokpile > 0
+	}
+}
+money_value_pound_sterling_visible = {
+	is_shown = {
+		pound_sterling_c_global_stokpile > 0
+	}
+}
+money_value_real_visible = {
+	is_shown = {
+		real_c_global_stokpile > 0
+	}
+}
+money_value_real_brazilian_real_visible = {
+	is_shown = {
+		real_brazilian_real_c_global_stokpile > 0
+	}
+}
+money_value_rupee_indian_rupee_visible = {
+	is_shown = {
+		rupee_indian_rupee_c_global_stokpile > 0
+	}
+}
+money_value_rupee_indonesian_rupiah_visible = {
+	is_shown = {
+		rupee_indonesian_rupiah_c_global_stokpile > 0
+	}
+}
+money_value_spe_baht_visible = {
+	is_shown = {
+		spe_baht_c_global_stokpile > 0
+	}
+}
+money_value_spe_dong_visible = {
+	is_shown = {
+		spe_dong_c_global_stokpile > 0
+	}
+}
+money_value_spe_drachma_visible = {
+	is_shown = {
+		spe_drachma_c_global_stokpile > 0
+	}
+}
+money_value_spe_korean_won_visible = {
+	is_shown = {
+		spe_korean_won_c_global_stokpile > 0
+	}
+}
+money_value_spe_latvian_lats_visible = {
+	is_shown = {
+		spe_latvian_lats_c_global_stokpile > 0
+	}
+}
+money_value_spe_lithuanian_litas_visible = {
+	is_shown = {
+		spe_lithuanian_litas_c_global_stokpile > 0
+	}
+}
+money_value_spe_peseta_visible = {
+	is_shown = {
+		spe_peseta_c_global_stokpile > 0
+	}
+}
+money_value_spe_ruble_visible = {
+	is_shown = {
+		spe_ruble_c_global_stokpile > 0
+	}
+}
+money_value_spe_uni_visible = {
+	is_shown = {
+		spe_uni_c_global_stokpile > 0
+		money_value_spe_uni > 0
+	}
+}
+money_value_spe_yen_visible = {
+	is_shown = {
+		spe_yen_c_global_stokpile > 0
+	}
+}
+money_value_spe_yuan_visible = {
+	is_shown = {
+		spe_yuan_c_global_stokpile > 0
+	}
+}
+money_value_spe_zloti_visible = {
+	is_shown = {
+		spe_zloti_c_global_stokpile > 0
+	}
+}
+money_value_thaler_hannoveraner_thaler_visible = {
+	is_shown = {
+		thaler_hannoveraner_thaler_c_global_stokpile > 0
+	}
+}
+money_value_thaler_prussian_thaler_visible = {
+	is_shown = {
+		thaler_prussian_thaler_c_global_stokpile > 0
+	}
+}
+money_value_thaler_saxon_thaler_visible = {
+	is_shown = {
+		thaler_saxon_thaler_c_global_stokpile > 0
+	}
+}
+money_value_thaler_saxon_thaler_visible = {
+
+	effect = {
+
+		set_global_variable = {
+			name = currency_dropdown_option_0
+			value = flag:option_0
+		}
+		set_global_variable = {
+			name = currency_dropdown_option_25
+			value = flag:option_25
+		}
+		set_global_variable = {
+			name = currency_dropdown_option_50
+			value = flag:option_50
+		}
+		set_global_variable = {
+			name = currency_dropdown_option_75
+			value = flag:option_75
+		}
+		set_global_variable = {
+			name = currency_dropdown_option_100
+			value = flag:option_100
+		}
+
+
+
+
+		add_to_global_variable_list = {
+			name = dropdown_menu_currency
+			target = global_var:currency_dropdown_option_0
+		}
+		add_to_global_variable_list = {
+			name = dropdown_menu_currency
+			target = global_var:currency_dropdown_option_25
+		}
+		add_to_global_variable_list = {
+			name = dropdown_menu_currency
+			target = global_var:currency_dropdown_option_50
+		}
+		add_to_global_variable_list = {
+			name = dropdown_menu_currency
+			target = global_var:currency_dropdown_option_75
+		}
+		add_to_global_variable_list = {
+			name = dropdown_menu_currency
+			target = global_var:currency_dropdown_option_100
+		}
+	}
+}
+update_import_export_value_in_currency_in_reeserve_liste = {
+	effect = {
+		clear_global_variable_list = import_export_value_in_currency_in_reeserve
+
+		#gold
+		if = {
+			limit = {
+				var:excess_in_gold_sc > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_gold_03
+			}
+		}
+		#dinar
+		if = {
+			limit = {
+				var:stockpiling_dinar_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_dinar_03
+			}
+		}
+		#dinar_algerian_dinar
+		if = {
+			limit = {
+				var:stockpiling_dinar_algerian_dinar_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_dinar_algerian_dinar_03
+			}
+		}
+		#dinar_iraqi_dinar
+		if = {
+			limit = {
+				var:stockpiling_dinar_iraqi_dinar_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_dinar_iraqi_dinar_03
+			}
+		}
+		#dinar_libyan_dinar
+		if = {
+			limit = {
+				var:stockpiling_dinar_libyan_dinar_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_dinar_libyan_dinar_03
+			}
+		}
+		#dinar_moroccan_dirham
+		if = {
+			limit = {
+				var:stockpiling_dinar_moroccan_dirham_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_dinar_moroccan_dirham_03
+			}
+		}
+		#dinar_omanian_rial
+		if = {
+			limit = {
+				var:stockpiling_dinar_omanian_rial_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_dinar_omanian_rial_03
+			}
+		}
+		#dinar_qiran
+		if = {
+			limit = {
+				var:stockpiling_dinar_qiran_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_dinar_qiran_03
+			}
+		}
+		#dinar_saudi_riyal
+		if = {
+			limit = {
+				var:stockpiling_dinar_saudi_riyal_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_dinar_saudi_riyal_03
+			}
+		}
+		#dinar_serbian_dinar
+		if = {
+			limit = {
+				var:stockpiling_dinar_serbian_dinar_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_dinar_serbian_dinar_03
+			}
+		}
+		#dinar_tunisian_dinar
+		if = {
+			limit = {
+				var:stockpiling_dinar_tunisian_dinar_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_dinar_tunisian_dinar_03
+			}
+		}
+		#dinar_yugoslav_dinar
+		if = {
+			limit = {
+				var:stockpiling_dinar_yugoslav_dinar_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_dinar_yugoslav_dinar_03
+			}
+		}
+		#dollar_australian_dollar
+		if = {
+			limit = {
+				var:stockpiling_dollar_australian_dollar_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_dollar_australian_dollar_03
+			}
+		}
+		#dollar_canadian_dollar
+		if = {
+			limit = {
+				var:stockpiling_dollar_canadian_dollar_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_dollar_canadian_dollar_03
+			}
+		}
+		#dollar_caribbean_dollar
+		if = {
+			limit = {
+				var:stockpiling_dollar_caribbean_dollar_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_dollar_caribbean_dollar_03
+			}
+		}
+		#dollar_confederate_states_dollar
+		if = {
+			limit = {
+				var:stockpiling_dollar_confederate_states_dollar_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_dollar_confederate_states_dollar_03
+			}
+		}
+		#dollar_liberian_dollar
+		if = {
+			limit = {
+				var:stockpiling_dollar_liberian_dollar_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_dollar_liberian_dollar_03
+			}
+		}
+		#dollar_new_zealand_dollar
+		if = {
+			limit = {
+				var:stockpiling_dollar_new_zealand_dollar_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_dollar_new_zealand_dollar_03
+			}
+		}
+		#dollar_sierra_leonean_dollar
+		if = {
+			limit = {
+				var:stockpiling_dollar_sierra_leonean_dollar_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_dollar_sierra_leonean_dollar_03
+			}
+		}
+		#dollar_united_states_dollar
+		if = {
+			limit = {
+				var:stockpiling_dollar_united_states_dollar_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_dollar_united_states_dollar_03
+			}
+		}
+		#eco_ariary
+		if = {
+			limit = {
+				var:stockpiling_eco_ariary_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_eco_ariary_03
+			}
+		}
+		#eco_central_african_eco
+		if = {
+			limit = {
+				var:stockpiling_eco_central_african_eco_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_eco_central_african_eco_03
+			}
+		}
+		#eco_east_african_eco
+		if = {
+			limit = {
+				var:stockpiling_eco_east_african_eco_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_eco_east_african_eco_03
+			}
+		}
+		#eco_ethiopian_birr
+		if = {
+			limit = {
+				var:stockpiling_eco_ethiopian_birr_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_eco_ethiopian_birr_03
+			}
+		}
+		#eco_ghanaian_pound
+		if = {
+			limit = {
+				var:stockpiling_eco_ghanaian_pound_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_eco_ghanaian_pound_03
+			}
+		}
+		#eco_nigerian_naira
+		if = {
+			limit = {
+				var:stockpiling_eco_nigerian_naira_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_eco_nigerian_naira_03
+			}
+		}
+		#eco_south_african_rand
+		if = {
+			limit = {
+				var:stockpiling_eco_south_african_rand_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_eco_south_african_rand_03
+			}
+		}
+		#eco_tuareg_ouguiya
+		if = {
+			limit = {
+				var:stockpiling_eco_tuareg_ouguiya_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_eco_tuareg_ouguiya_03
+			}
+		}
+		#eco_west_african_eco
+		if = {
+			limit = {
+				var:stockpiling_eco_west_african_eco_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_eco_west_african_eco_03
+			}
+		}
+		#franc_belgian_franc
+		if = {
+			limit = {
+				var:stockpiling_franc_belgian_franc_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_franc_belgian_franc_03
+			}
+		}
+		#franc_french_franc
+		if = {
+			limit = {
+				var:stockpiling_franc_french_franc_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_franc_french_franc_03
+			}
+		}
+		#franc_luxembourgish_franc
+		if = {
+			limit = {
+				var:stockpiling_franc_luxembourgish_franc_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_franc_luxembourgish_franc_03
+			}
+		}
+		#franc_swiss_franc
+		if = {
+			limit = {
+				var:stockpiling_franc_swiss_franc_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_franc_swiss_franc_03
+			}
+		}
+		#gulden
+		if = {
+			limit = {
+				var:stockpiling_gulden_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_gulden_03
+			}
+		}
+		#gulden_bavarian_gulden
+		if = {
+			limit = {
+				var:stockpiling_gulden_bavarian_gulden_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_gulden_bavarian_gulden_03
+			}
+		}
+		#gulden_florin
+		if = {
+			limit = {
+				var:stockpiling_gulden_florin_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_gulden_florin_03
+			}
+		}
+		#gulden_hungarian_forint
+		if = {
+			limit = {
+				var:stockpiling_gulden_hungarian_forint_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_gulden_hungarian_forint_03
+			}
+		}
+		#gulden_indies_guilder
+		if = {
+			limit = {
+				var:stockpiling_gulden_indies_guilder_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_gulden_indies_guilder_03
+			}
+		}
+		#gulden_south_german_gulden
+		if = {
+			limit = {
+				var:stockpiling_gulden_south_german_gulden_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_gulden_south_german_gulden_03
+			}
+		}
+		#krone_czech_koruna
+		if = {
+			limit = {
+				var:stockpiling_krone_czech_koruna_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_krone_czech_koruna_03
+			}
+		}
+		#krone_danish_krone
+		if = {
+			limit = {
+				var:stockpiling_krone_danish_krone_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_krone_danish_krone_03
+			}
+		}
+		#krone_estonian_kroon
+		if = {
+			limit = {
+				var:stockpiling_krone_estonian_kroon_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_krone_estonian_kroon_03
+			}
+		}
+		#krone_icelandic_krona
+		if = {
+			limit = {
+				var:stockpiling_krone_icelandic_krona_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_krone_icelandic_krona_03
+			}
+		}
+		#krone_norwegian_krone
+		if = {
+			limit = {
+				var:stockpiling_krone_norwegian_krone_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_krone_norwegian_krone_03
+			}
+		}
+		#krone_slovak_koruna
+		if = {
+			limit = {
+				var:stockpiling_krone_slovak_koruna_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_krone_slovak_koruna_03
+			}
+		}
+		#krone_swedish_krona
+		if = {
+			limit = {
+				var:stockpiling_krone_swedish_krona_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_krone_swedish_krona_03
+			}
+		}
+		#leon_leu
+		if = {
+			limit = {
+				var:stockpiling_leon_leu_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_leon_leu_03
+			}
+		}
+		#leon_lev
+		if = {
+			limit = {
+				var:stockpiling_leon_lev_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_leon_lev_03
+			}
+		}
+		#lira
+		if = {
+			limit = {
+				var:stockpiling_lira_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_lira_03
+			}
+		}
+		#lira_ducato
+		if = {
+			limit = {
+				var:stockpiling_lira_ducato_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_lira_ducato_03
+			}
+		}
+		#lira_ottoman_lira
+		if = {
+			limit = {
+				var:stockpiling_lira_ottoman_lira_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_lira_ottoman_lira_03
+			}
+		}
+		#lira_scudo_pontificio
+		if = {
+			limit = {
+				var:stockpiling_lira_scudo_pontificio_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_lira_scudo_pontificio_03
+			}
+		}
+		#lira_scudo_sardo
+		if = {
+			limit = {
+				var:stockpiling_lira_scudo_sardo_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_lira_scudo_sardo_03
+			}
+		}
+		#lira_toscane_lira
+		if = {
+			limit = {
+				var:stockpiling_lira_toscane_lira_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_lira_toscane_lira_03
+			}
+		}
+		#mark
+		if = {
+			limit = {
+				var:stockpiling_mark_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_mark_03
+			}
+		}
+		#mark_finnish_markka
+		if = {
+			limit = {
+				var:stockpiling_mark_finnish_markka_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_mark_finnish_markka_03
+			}
+		}
+		#peso
+		if = {
+			limit = {
+				var:stockpiling_peso_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_peso_03
+			}
+		}
+		#peso_argentine_peso
+		if = {
+			limit = {
+				var:stockpiling_peso_argentine_peso_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_peso_argentine_peso_03
+			}
+		}
+		#peso_bolivien_peso
+		if = {
+			limit = {
+				var:stockpiling_peso_bolivien_peso_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_peso_bolivien_peso_03
+			}
+		}
+		#peso_chilean_peso
+		if = {
+			limit = {
+				var:stockpiling_peso_chilean_peso_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_peso_chilean_peso_03
+			}
+		}
+		#peso_colombian_peso
+		if = {
+			limit = {
+				var:stockpiling_peso_colombian_peso_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_peso_colombian_peso_03
+			}
+		}
+		#peso_costa_rican_colon
+		if = {
+			limit = {
+				var:stockpiling_peso_costa_rican_colon_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_peso_costa_rican_colon_03
+			}
+		}
+		#peso_cuban_peso
+		if = {
+			limit = {
+				var:stockpiling_peso_cuban_peso_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_peso_cuban_peso_03
+			}
+		}
+		#peso_ecuadorian_peso
+		if = {
+			limit = {
+				var:stockpiling_peso_ecuadorian_peso_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_peso_ecuadorian_peso_03
+			}
+		}
+		#peso_el_salvador_colon
+		if = {
+			limit = {
+				var:stockpiling_peso_el_salvador_colon_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_peso_el_salvador_colon_03
+			}
+		}
+		#peso_guatemalan_quetzal
+		if = {
+			limit = {
+				var:stockpiling_peso_guatemalan_quetzal_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_peso_guatemalan_quetzal_03
+			}
+		}
+		#peso_honduran_lempira
+		if = {
+			limit = {
+				var:stockpiling_peso_honduran_lempira_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_peso_honduran_lempira_03
+			}
+		}
+		#peso_mexican_peso
+		if = {
+			limit = {
+				var:stockpiling_peso_mexican_peso_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_peso_mexican_peso_03
+			}
+		}
+		#peso_nicaraguan_cordoba
+		if = {
+			limit = {
+				var:stockpiling_peso_nicaraguan_cordoba_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_peso_nicaraguan_cordoba_03
+			}
+		}
+		#peso_paraguayan_peso
+		if = {
+			limit = {
+				var:stockpiling_peso_paraguayan_peso_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_peso_paraguayan_peso_03
+			}
+		}
+		#peso_philippine_peso
+		if = {
+			limit = {
+				var:stockpiling_peso_philippine_peso_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_peso_philippine_peso_03
+			}
+		}
+		#peso_sol_de_oro
+		if = {
+			limit = {
+				var:stockpiling_peso_sol_de_oro_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_peso_sol_de_oro_03
+			}
+		}
+		#peso_uruguayan_peso
+		if = {
+			limit = {
+				var:stockpiling_peso_uruguayan_peso_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_peso_uruguayan_peso_03
+			}
+		}
+		#peso_venezuelan_peso
+		if = {
+			limit = {
+				var:stockpiling_peso_venezuelan_peso_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_peso_venezuelan_peso_03
+			}
+		}
+		#pound_egyptian_pound
+		if = {
+			limit = {
+				var:stockpiling_pound_egyptian_pound_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_pound_egyptian_pound_03
+			}
+		}
+		#pound_irish_pound
+		if = {
+			limit = {
+				var:stockpiling_pound_irish_pound_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_pound_irish_pound_03
+			}
+		}
+		#pound_sterling
+		if = {
+			limit = {
+				var:stockpiling_pound_sterling_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_pound_sterling_03
+			}
+		}
+		#real
+		if = {
+			limit = {
+				var:stockpiling_real_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_real_03
+			}
+		}
+		#real_brazilian_real
+		if = {
+			limit = {
+				var:stockpiling_real_brazilian_real_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_real_brazilian_real_03
+			}
+		}
+		#rupee_indian_rupee
+		if = {
+			limit = {
+				var:stockpiling_rupee_indian_rupee_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_rupee_indian_rupee_03
+			}
+		}
+		#rupee_indonesian_rupiah
+		if = {
+			limit = {
+				var:stockpiling_rupee_indonesian_rupiah_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_rupee_indonesian_rupiah_03
+			}
+		}
+		#spe_baht
+		if = {
+			limit = {
+				var:stockpiling_spe_baht_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_spe_baht_03
+			}
+		}
+		#spe_dong
+		if = {
+			limit = {
+				var:stockpiling_spe_dong_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_spe_dong_03
+			}
+		}
+		#spe_drachma
+		if = {
+			limit = {
+				var:stockpiling_spe_drachma_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_spe_drachma_03
+			}
+		}
+		#spe_korean_won
+		if = {
+			limit = {
+				var:stockpiling_spe_korean_won_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_spe_korean_won_03
+			}
+		}
+		#spe_latvian_lats
+		if = {
+			limit = {
+				var:stockpiling_spe_latvian_lats_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_spe_latvian_lats_03
+			}
+		}
+		#spe_lithuanian_litas
+		if = {
+			limit = {
+				var:stockpiling_spe_lithuanian_litas_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_spe_lithuanian_litas_03
+			}
+		}
+		#spe_peseta
+		if = {
+			limit = {
+				var:stockpiling_spe_peseta_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_spe_peseta_03
+			}
+		}
+		#spe_ruble
+		if = {
+			limit = {
+				var:stockpiling_spe_ruble_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_spe_ruble_03
+			}
+		}
+		#spe_uni
+		if = {
+			limit = {
+				var:stockpiling_spe_uni_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_spe_uni_03
+			}
+		}
+		#spe_yen
+		if = {
+			limit = {
+				var:stockpiling_spe_yen_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_spe_yen_03
+			}
+		}
+		#spe_yuan
+		if = {
+			limit = {
+				var:stockpiling_spe_yuan_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_spe_yuan_03
+			}
+		}
+		#spe_zloti
+		if = {
+			limit = {
+				var:stockpiling_spe_zloti_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_spe_zloti_03
+			}
+		}
+		#thaler_hannoveraner_thaler
+		if = {
+			limit = {
+				var:stockpiling_thaler_hannoveraner_thaler_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_thaler_hannoveraner_thaler_03
+			}
+		}
+		#thaler_prussian_thaler
+		if = {
+			limit = {
+				var:stockpiling_thaler_prussian_thaler_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_thaler_prussian_thaler_03
+			}
+		}
+		#thaler_saxon_thaler
+		if = {
+			limit = {
+				var:stockpiling_thaler_saxon_thaler_c_in_reserve_currency > 0
+			}
+			add_to_global_variable_list = {
+				name = import_export_value_in_currency_in_reeserve
+				target = global_var:currency_import_export_value_thaler_saxon_thaler_03
+			}
+		}
+	}
+}
+update_import_export_value_in_currency_in_reeserve_liste_debug = {
+	effect = {
+		clear_global_variable_list = import_export_value_in_currency_in_reeserve
+
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_gold_03
+		}
+
+ 		#dinar
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_dinar_03
+		}
+		#dinar_algerian_dinar
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_dinar_algerian_dinar_03
+		}
+		#dinar_iraqi_dinar
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_dinar_iraqi_dinar_03
+		}
+		#dinar_libyan_dinar
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_dinar_libyan_dinar_03
+		}
+		#dinar_moroccan_dirham
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_dinar_moroccan_dirham_03
+		}
+		#dinar_omanian_rial
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_dinar_omanian_rial_03
+		}
+		#dinar_qiran
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_dinar_qiran_03
+		}
+		#dinar_saudi_riyal
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_dinar_saudi_riyal_03
+		}
+		#dinar_serbian_dinar
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_dinar_serbian_dinar_03
+		}
+		#dinar_tunisian_dinar
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_dinar_tunisian_dinar_03
+		}
+		#dinar_yugoslav_dinar
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_dinar_yugoslav_dinar_03
+		}
+		#dollar_australian_dollar
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_dollar_australian_dollar_03
+		}
+		#dollar_canadian_dollar
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_dollar_canadian_dollar_03
+		}
+		#dollar_caribbean_dollar
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_dollar_caribbean_dollar_03
+		}
+		#dollar_confederate_states_dollar
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_dollar_confederate_states_dollar_03
+		}
+		#dollar_liberian_dollar
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_dollar_liberian_dollar_03
+		}
+		#dollar_new_zealand_dollar
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_dollar_new_zealand_dollar_03
+		}
+		#dollar_sierra_leonean_dollar
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_dollar_sierra_leonean_dollar_03
+		}
+		#dollar_united_states_dollar
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_dollar_united_states_dollar_03
+		}
+		#eco_ariary
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_eco_ariary_03
+		}
+		#eco_central_african_eco
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_eco_central_african_eco_03
+		}
+		#eco_east_african_eco
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_eco_east_african_eco_03
+		}
+		#eco_ethiopian_birr
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_eco_ethiopian_birr_03
+		}
+		#eco_ghanaian_pound
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_eco_ghanaian_pound_03
+		}
+		#eco_nigerian_naira
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_eco_nigerian_naira_03
+		}
+		#eco_south_african_rand
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_eco_south_african_rand_03
+		}
+		#eco_tuareg_ouguiya
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_eco_tuareg_ouguiya_03
+		}
+		#eco_west_african_eco
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_eco_west_african_eco_03
+		}
+		#franc_belgian_franc
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_franc_belgian_franc_03
+		}
+		#franc_french_franc
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_franc_french_franc_03
+		}
+		#franc_luxembourgish_franc
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_franc_luxembourgish_franc_03
+		}
+		#franc_swiss_franc
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_franc_swiss_franc_03
+		}
+		#gulden
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_gulden_03
+		}
+		#gulden_bavarian_gulden
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_gulden_bavarian_gulden_03
+		}
+		#gulden_florin
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_gulden_florin_03
+		}
+		#gulden_hungarian_forint
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_gulden_hungarian_forint_03
+		}
+		#gulden_indies_guilder
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_gulden_indies_guilder_03
+		}
+		#gulden_south_german_gulden
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_gulden_south_german_gulden_03
+		}
+		#krone_czech_koruna
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_krone_czech_koruna_03
+		}
+		#krone_danish_krone
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_krone_danish_krone_03
+		}
+		#krone_estonian_kroon
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_krone_estonian_kroon_03
+		}
+		#krone_icelandic_krona
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_krone_icelandic_krona_03
+		}
+		#krone_norwegian_krone
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_krone_norwegian_krone_03
+		}
+		#krone_slovak_koruna
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_krone_slovak_koruna_03
+		}
+		#krone_swedish_krona
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_krone_swedish_krona_03
+		}
+		#leon_leu
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_leon_leu_03
+		}
+		#leon_lev
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_leon_lev_03
+		}
+		#lira
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_lira_03
+		}
+		#lira_ducato
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_lira_ducato_03
+		}
+		#lira_ottoman_lira
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_lira_ottoman_lira_03
+		}
+		#lira_scudo_pontificio
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_lira_scudo_pontificio_03
+		}
+		#lira_scudo_sardo
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_lira_scudo_sardo_03
+		}
+		#lira_toscane_lira
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_lira_toscane_lira_03
+		}
+		#mark
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_mark_03
+		}
+		#mark_finnish_markka
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_mark_finnish_markka_03
+		}
+		#peso
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_peso_03
+		}
+		#peso_argentine_peso
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_peso_argentine_peso_03
+		}
+		#peso_bolivien_peso
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_peso_bolivien_peso_03
+		}
+		#peso_chilean_peso
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_peso_chilean_peso_03
+		}
+		#peso_colombian_peso
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_peso_colombian_peso_03
+		}
+		#peso_costa_rican_colon
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_peso_costa_rican_colon_03
+		}
+		#peso_cuban_peso
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_peso_cuban_peso_03
+		}
+		#peso_ecuadorian_peso
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_peso_ecuadorian_peso_03
+		}
+		#peso_el_salvador_colon
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_peso_el_salvador_colon_03
+		}
+		#peso_guatemalan_quetzal
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_peso_guatemalan_quetzal_03
+		}
+		#peso_honduran_lempira
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_peso_honduran_lempira_03
+		}
+		#peso_mexican_peso
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_peso_mexican_peso_03
+		}
+		#peso_nicaraguan_cordoba
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_peso_nicaraguan_cordoba_03
+		}
+		#peso_paraguayan_peso
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_peso_paraguayan_peso_03
+		}
+		#peso_philippine_peso
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_peso_philippine_peso_03
+		}
+		#peso_sol_de_oro
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_peso_sol_de_oro_03
+		}
+		#peso_uruguayan_peso
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_peso_uruguayan_peso_03
+		}
+		#peso_venezuelan_peso
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_peso_venezuelan_peso_03
+		}
+		#pound_egyptian_pound
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_pound_egyptian_pound_03
+		}
+		#pound_irish_pound
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_pound_irish_pound_03
+		}
+		#pound_sterling
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_pound_sterling_03
+		}
+		#real
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_real_03
+		}
+		#real_brazilian_real
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_real_brazilian_real_03
+		}
+		#rupee_indian_rupee
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_rupee_indian_rupee_03
+		}
+		#rupee_indonesian_rupiah
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_rupee_indonesian_rupiah_03
+		}
+		#spe_baht
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_spe_baht_03
+		}
+		#spe_dong
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_spe_dong_03
+		}
+		#spe_drachma
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_spe_drachma_03
+		}
+		#spe_korean_won
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_spe_korean_won_03
+		}
+		#spe_latvian_lats
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_spe_latvian_lats_03
+		}
+		#spe_lithuanian_litas
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_spe_lithuanian_litas_03
+		}
+		#spe_peseta
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_spe_peseta_03
+		}
+		#spe_ruble
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_spe_ruble_03
+		}
+		#spe_uni
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_spe_uni_03
+		}
+		#spe_yen
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_spe_yen_03
+		}
+		#spe_yuan
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_spe_yuan_03
+		}
+		#spe_zloti
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_spe_zloti_03
+		}
+		#thaler_hannoveraner_thaler
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_thaler_hannoveraner_thaler_03
+		}
+		#thaler_prussian_thaler
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_thaler_prussian_thaler_03
+		}
+		#thaler_saxon_thaler
+		add_to_global_variable_list = {
+			name = import_export_value_in_currency_in_reeserve
+			target = global_var:currency_import_export_value_thaler_saxon_thaler_03
+		}
+	}
+}

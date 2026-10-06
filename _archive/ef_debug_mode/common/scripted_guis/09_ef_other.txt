@@ -1,0 +1,19 @@
+# из common/scripted_guis/09_ef_other.txt, строки 13–18, 20–25, 27–31 (на 6.10.2026), отладочный флаг EF_debug_mode: sgui виджета и показ кнопки «1»
+
+EF_sg_set_debug_flag = {
+    scope = country
+    effect = {
+        set_global_variable = EF_debug_mode
+    }
+}
+EF_sg_unset_debug_flag = {
+    scope = country
+    effect = {
+        remove_global_variable = EF_debug_mode
+    }
+}
+EF_debug_mode_visibility = {
+	is_shown = {
+		always = no
+	}
+}

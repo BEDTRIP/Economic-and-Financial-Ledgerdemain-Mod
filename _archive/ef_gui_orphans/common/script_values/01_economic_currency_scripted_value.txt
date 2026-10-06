@@ -1,0 +1,11 @@
+# из common/script_values/01_economic_currency_scripted_value.txt, строки 8–12, 30220–30223 (на 6.10.2026), осиротевшие после выноса мёртвых sgui/окон: на них ссылались только вынесенные блоки (refs=0)
+
+weighted_average_currency_value_test = {
+    value = 0
+	add = money_value_in_gold_by_country
+	divide = leading_currency_type
+}
+previsio_gold_standart = {  #comparaison
+	value = debt_in_national_currency_in_gold
+	multiply = silver_to_gold_rate #previsionnel en gold standart
+}

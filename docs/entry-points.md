@@ -95,7 +95,6 @@ PSC-хук: `on_production_method_changed`, `on_building_built`, `on_acquired_te
 | `zz_ef_cb_rate_month` | счётчик месяцев до шага ставки (0..2) | `zz_ef_cb_rate_monthly` | оно же |
 | `speculative_share_1` / `_2` | пузырь (0..100) / индекс перестройки (0..100) | `zz_ef_bubble_monthly` / `zz_pb_ef_overbuild_counter` | JE `financial_center_je_2`, модификаторы |
 | `last_construction_run` | дата последнего PSC-пересчёта | `set_construction_country` | PSC |
-| `EF_debug_mode` (глобальная) | режим отладки решений | `scripted_guis/09_ef_other.txt` | `00_ef_debug_decisions.txt` |
 | `country_already_financial_center`, `gdp_view_fc` | стартовые флаги ФЦ | `00_a_ef_history_var_init`, history global | `financial_center_modifier` |
 | `global_monetary_reference` (модификатор) | единственная страна — держатель общих списков/медианы | `global_monetary_reference_1` | `ef_on_*` гейты |
 

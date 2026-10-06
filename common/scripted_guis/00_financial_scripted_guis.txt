@@ -91,12 +91,6 @@ bond_10Y_v = {
 # 	}
 # }
 
-ai_quantity_purchasing_1_visibility = {
-	is_shown = {
-		gold_lent_to_other > 0
-	}
-}
-
 ai_seller = {
 	is_shown = {
 		is_ai = yes
@@ -112,43 +106,6 @@ ai_seller = {
 #####################################################################################################################################################
 #####################################################################################################################################################
 #####################################################################################################################################################
-
-global_player_help_on = {
-	effect = {
-		set_variable = {
-			name = player_help
-			value = 0
-		}
-		set_variable = {
-			name = player_help_reverce
-			value = 0
-		}
-	}
-}
-global_player_help_on_visible = {
-	is_shown = {
-		var:player_help = 1
-		var:player_help_reverce = 1
-	}
-}
-global_player_help_off = {
-	effect = {
-		set_variable = {
-			name = player_help
-			value = 1
-		}
-		set_variable = {
-			name = player_help_reverce
-			value = 1
-		}
-	}
-}
-global_player_help_off_visible = {
-	is_shown = {
-		var:player_help = 0
-		var:player_help_reverce = 0
-	}
-}
 
 increase_bond_quantity = {
 	is_valid = {

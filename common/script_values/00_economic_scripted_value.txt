@@ -15,15 +15,6 @@
 ############################################################################################################################################################
 ############################################################################################################################################################
  
-is_revolutionary_yes_or_not = {
-	if = {
-		limit = {
-			is_revolutionary = yes 
-		}
-		add = 100   
- 	} 
-}
- 
 #silver
 base_demande_silver = {
 	value = scope:central_bank_scope.modifier:goods_input_silver_add
@@ -4432,54 +4423,6 @@ time_from_begining_silver_crisis = {
 	subtract = 1873
 }
 
-law_no_monetary_system_test = {
-	value = 0
-	if = {
-		#- mesure de régulation pour etre sure que tout les pays ayant la tech currency_standards,
-		#et pas encore de bc soit dans la loi fiat standart qui permet l'introduction
-		#- quleque soit le pb quand une nouvelle currency doit apparaitre le pays doit toujours etre revenue en fiat standart
-		limit = {
-			has_law = law_type:law_no_monetary_system
-			has_technology_researched = currency_standards
-			#has_technology_researched = central_banking
-
-			or = {
-				has_law = law_type:law_isolationism
-				not = {
-					has_modifier = has_central_bank
-				}
-			}
- 		}
-		add =1
-	}
-}
-
-country_already_central_bank_test = {
-	value = 0
-	if = {
-		limit = {
-			has_variable = country_already_central_bank
-		}
-		add = 1
-	}
-}
-
-market_owner_is_root_univ_with_buiding_no_external_currency_consuption = {
-	value = 0
-	if = {
-		limit = {
-			market_owner_is_root = no
-			or = {
-				bank_central_buiding_no_external_currency_consuption = yes
-				not = {
-					has_law = law_type:law_external_exchange_standard
-				}
-			}
-		}
-		add = 1
-	}
-}
-
 gdp_var = {
 	value = root.gdp
 	min = 1
@@ -4542,21 +4485,6 @@ navy_size_var = {
 	add = navy_size
 }
 
-currency_quantity_sell = {
-	value = 0.5
-	if = {
-		limit = {
-			or  = {
-				#has_modifier = extreme_weak_currency voir si on change
-				var:currency_crisis = 1
-				var:central_bank_bankruptcy = 1
-				scope:overrated_currency_country_owner.infamy >= infamy_threshold:pariah
-			}
-		}
-		add = 0.5
-	}
-}
-
 bg_financial_centre_lvl = {
 	value = 0
 	every_scope_building = {
@@ -4565,28 +4493,6 @@ bg_financial_centre_lvl = {
 		}
 		add = level
 	}
-}
-bg_bank_lvl = {
-	value = 0
-	every_scope_building = {
-		limit = {
-			is_building_group = bg_bank
-		}
-		add = level
-	}
-}
-bg_bank_lvl_by_base_rate = {
-	value = bg_bank_lvl
-	multiply = {
-		value = {
-		 	add = 10
-		 	subtract = base_rate_percentage_decimal
-		}
-		divide = 9
-	}
-	max = bg_bank_lvl
-	min = 1
-	round = yes
 }
 value_for_has_financial_center = {
 	value = zz_ef_slots_rating
@@ -4846,48 +4752,6 @@ offshore_port_num = {
 }
 
 #manufacture_stock limit
-manufacture_stock_product_by_pcs = {
-	value = 0
-	every_scope_building = {
-		limit = {
-			is_building_type = building_construction_sector
-		}
-		add = modifier:goods_output_manufacture_stock_add
-	}
-}
-manufacture_stock_product_by_pcs_real = {
-	value = manufacture_stock_product_by_pcs
-	multiply = var:overbuilding_regulation_factor_revers_fix
-}
-manufacture_stock_product_by_pcs_rate = {
-	value = manufacture_stock_product_by_pcs_real
-	divide = manufacture_stock_market_goods_sell_orders #mon 100%
-}
-overbuilding_regulation_factor = {
-    value = 0
-    if = {
-        limit = {
-            manufacture_stock_product_by_pcs_rate > 0.10
-            manufacture_stock_product_by_pcs_rate < 0.40
-        }
-        # Régulation progressive de 0 à 70 entre 10% et 40%
-        add = manufacture_stock_product_by_pcs_rate
-        subtract = 0.10
-        divide = 0.30
-        multiply = 70
-    }
-
-    # En dessous ou égal à 10%, add = 0
-}
-overbuilding_regulation_factor_revers = {
-	value = 100
-	subtract = overbuilding_regulation_factor
-	#multiply = -1
-	divide = 100
-	# subtract = 0.15
-	# min = -1
-}
-
 extreme_weak_currency_solution_count_sc = {
     value = 0
     add = var:extreme_weak_currency_solution_count_player
@@ -5425,9 +5289,6 @@ gold_value_rapported_inflation = {
 	value = 1
 	divide = money_value_rapported_inflation
 }
-money_value_target_change_prediction = {
-	value = money_value
-}
 money_value_target_real = {
 	add = var:money_value_target_1
 }
@@ -5457,14 +5318,6 @@ money_value_target_real_in_gold = {
 		#multiply = bimetallic_rate_silver_to_gold #bimetallic_rate
 	}
 }
-money_value_target_real_below_10 = {
-	value = money_value_target_real_in_gold
-	multiply = 0.90
-}
-money_value_target_real_above_10 = {
-	value = money_value_target_real_in_gold
-	multiply = 1.1
-}
 money_value_target_real_below_25 = {
 	value = money_value_target_real_in_gold
 	multiply = 0.75
@@ -5481,58 +5334,6 @@ money_value_target_with_the_reference_currency = {
 	add = global_monetary_reference
 	multiply = var:money_value_target_with_the_reference_currency_2
 }
-purchasable_currency_amount = {
-	value = money_supply
-	subtract = money_value_target
-}
-money_supply_80 = {
-	value = money_supply
-	multiply = 0.8
-}
-purchasable_currency_amount_80 = {
-	value = money_supply_80
-	subtract = money_value_target
-}
-private_bank_funds_errosion_projection = {
-	value = private_bank_funds
-	add = private_bank_borrowings_year
-}
-private_bank_funds_errosion_projection_ratio = {
-	value = private_bank_funds_errosion_projection
-	divide = money_supply
-}
-private_bank_funds_pourcent_projection = {
-	value = private_bank_funds
-	subtract = purchasable_currency_amount
-}
-private_bank_funds_pourcent_projection_ratio = {
-	value = private_bank_funds_pourcent_projection
-	divide = money_supply
-}
-private_bank_funds_pourcent_at_20 = { #limite du pool pour avoir 40% du money supply venant du pool
-	value = private_bank_funds
-	multiply  = {
-		value = 0.4
-		divide = private_bank_funds_pourcent
-	}
-}
-private_bank_funds_pourcent_at_20_to_substract = {
-	value = private_bank_funds
-	subtract = private_bank_funds_pourcent_at_20
-}
-private_bank_funds_prevision = {
-	value = private_bank_funds
-	add = private_bank_borrowings_year
-}
-private_bank_funds_prevision_interest = {
-	value = private_bank_funds
-	add = ai_privat_bank_total_interest
-}
-private_bank_funds_to_be_completed = {
-	value = private_bank_funds_pourcent_at_20
-	subtract = private_bank_funds
-}
-
 private_bank_funds_limit = {
 	value = money_supply
 	multiply = private_bank_funds_limit_ratio
@@ -5701,16 +5502,6 @@ total_money_supply = {
 	add = money_supply
 	add = money_supply_stockpile_by_other_country
 }
-percentage_money_supply_abroad = {
-	value = 0
-	add = money_supply_stockpile_by_other_country
-	divide = total_money_supply
-}
-money_supply_state_25 = {
-	value = money_supply_state
-	multiply = 0.25
-}
-
 money_supply_state_ratio = {
     value = money_supply_state
     divide = money_supply
@@ -5757,13 +5548,6 @@ national_capacity_in_gold = {
 	}
 }
 
-test_bourse  = {
-	value = owner.var:circulating_dollar_united_states_dollar_c_var_1
-	add = var:stockpiling_dollar_united_states_dollar_state_1
-	multiply = owner.var:money_value_target_1
-	multiply = 1 #0.9
-}
-
 national_capacity = {
 	value = 1
 	if = {
@@ -5787,19 +5571,10 @@ national_capacity_ratio = {
 	add = national_capacity
 	divide = money_supply
 }
-central_bank_reserves_ratio = {
-	add = central_bank_reserves
-	divide = national_capacity
-}
 gold_loaned_to_central_bank_ratio = {
 	add = gold_loaned_to_central_bank_in_national_metal
 	divide = national_capacity
 }
-trade_balance_in_gold_ratio = {
-	add = var:trade_balance_in_gold_fixe
-	divide = national_capacity
-}
-
 gold_loaned_to_central_bank_in_national_metal = {
 	value = 0
 	if = {
@@ -5939,26 +5714,6 @@ silver_state_native_for_stockpile_in_gold = {
 	}
 }
 
-trade_balance_gold_to_silver_rate = {
-    add = var:trade_balance_in_gold_fixe
-    multiply = gold_to_silver_rate
-}
-trade_balance_bimetallic_rate_silver_to_gold = {
-    add = var:trade_balance_in_gold_fixe
-	divide = gold_to_silver_rate
-	multiply = bimetallic_rate_gold_to_silver #normal tkt c'est inversé car le calcule e la trade balance concidére que c'est de l'or que l'on scale à de la argent -> dont on fait l'invese pour avoir la bonne quantité
-}
-
-import_value_in_gold_previsionel = {
-	value = debt_in_national_currency #=debt_in_national_currency_in_gold à multiplié par la money value future
-
-
-		multiply = {
-			add = var:money_value_target_1
-			#multiply = bimetallic_rate_silver_to_gold
-		} #= money_value_target_real_in_gold
-}
-
 trade_balance_fiat_to_silver = {
 	value = {
 		value = excess_foreign_state_currency_in_gold_no_excess_in_gold_sc
@@ -6017,16 +5772,6 @@ trade_balance_silver_to_bimetallic = {
 	}
 }
 
-trade_balance_bimetallic_to_gold = {
-	value = {
-		value = excess_foreign_state_currency_in_gold_no_excess_in_gold_sc
- 		add = excess_in_gold_sc
-	}
-	subtract = {
-		value = debt_in_national_currency
-		multiply = var:money_value_target_1
-	}
-}
 trade_balance_bimetallic_to_silver = {
 	value = {
 		value = excess_foreign_state_currency_in_gold_no_excess_in_gold_sc
@@ -6055,11 +5800,6 @@ trade_balance_gold_to_silver = {
 			multiply = gold_to_silver_rate
 		} #= money_value_target_real_in_gold
 	}
-}
-
-money_value_target_bimetlic = {
-	value = global_var:money_value_median
-	#multiply = bimetallic_rate_gold_to_silver
 }
 
 ##############
@@ -6117,10 +5857,6 @@ money_value_silver_standard = {
 money_value_silver_standard_in_gold = {
 	value = money_value_silver_standard
 	multiply = silver_to_gold_rate
-}
-money_value_silver_standard_in_gold_50 = {
-	value = money_value_silver_standard_in_gold
-	multiply = 0.50
 }
 money_value_silver_standard_in_gold_33 = {
 	value = money_value_silver_standard_in_gold
@@ -6246,10 +5982,6 @@ money_value_bimetallism_standard_in_gold_50 = {
 	value = money_value_bimetallism_standard_in_gold #pb avec le fiatt stta	andar affiche 0 ddonc je l'ai remis sinnon just money_value
 	multiply = 0.50
 }
-money_value_bimetallism_standard_in_gold_33 = {
-	value = money_value_bimetallism_standard_in_gold #pb avec le fiatt stta	andar affiche 0 ddonc je l'ai remis sinnon just money_value
-	multiply = 0.66
-}
 stockpiling_central_bank_metal_reserves_bimetallism_standard_in_gold = {
 	value = 0
 	add = stockpiling_central_bank_metal_reserves_silver_standard_in_gold
@@ -6327,17 +6059,6 @@ stockpiling_central_bank_metal_reserves_gold_standard_native = {
 total_gold_reserves = {
 	add = gold_reserves
 }
-percentage_gold_borrowed = {
-	value = gold_loaned_to_central_bank
-	divide = central_bank_reserves
-}
-all_gold_owned = {
-	value = 0
-	add = central_bank_metal_reserves_state
-	add = var:trade_balance_in_gold_fixe
-
-	#add = gold_loaned_to_central_bank
-}
 country_credit = {
 	value = credit
 	multiply = scaled_debt #credit
@@ -6354,19 +6075,6 @@ private_bank_funds_pourcent = {
 	value = private_bank_funds #private_bank_funds
 	divide = money_supply #money_circulating
 }
-investment_pool_10 = {
-	value = investment_pool
-	multiply = 0.10
-}
-investment_pool_10_in_gold = {
-	value = investment_pool_10
-	multiply = money_value_in_gold
-}
-investment_pool_10_in_silver = {
-	value = investment_pool_10_in_gold
-	multiply = gold_to_silver_rate
-}
-
 private_bank_funds_proportion_by_psc_10 = {
 	value = private_bank_funds
 	multiply = 0.02
@@ -6419,14 +6127,6 @@ central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent = {
 	divide = central_bank_metal_reserves_state_to_ensure_the_conversion
 }
 
-central_bank_metal_reserves_state_to_ensure_the_conversion_75 = {
-	value = central_bank_metal_reserves_state_to_ensure_the_conversion
-	multiply = 0.75
-}
-gold_available_for_purchase = {
-	value = central_bank_reserves
-	subtract = central_bank_metal_reserves_state_to_ensure_the_conversion_75
-}
 ############
 gold_reserves_var = {
 	value = gold_reserves
@@ -6467,15 +6167,6 @@ gold_reserves_var_10 = {
 	value = gold_reserves_var
 	multiply = 0.1
 }
-gold_reserves_var_25 = {
-	value = gold_reserves_var
-	multiply = 0.25
-}
-gold_reserves_var_35 = {
-	value = gold_reserves_var
-	multiply = 0.35
-}
-
 gold_reserves_10 = {
 	value = gold_reserves_limit
 	multiply = 0.10
@@ -6516,68 +6207,15 @@ gold_reserves_90 = {
 	value = gold_reserves_limit
 	multiply = 0.90
 }
-gold_reserves_rest = {
-	value = gold_reserves_limit
-	subtract = gold_reserves
-}
-gold_reserves_rest = {
-	value = gold_reserves_limit
-	subtract = gold_reserves
-}
 gold_reserve_compared_gold_reserves_limit = {
 	value = gold_reserves
 	divide = gold_reserves_limit
 }
 
-private_bank_funds_10 = {
-	value = private_bank_funds
-	multiply = 0.10
-}
-private_bank_funds_15 = {
-	value = private_bank_funds
-	multiply = 0.15
-}
-private_bank_funds_20 = {
-	value = private_bank_funds
-	multiply = 0.20
-}
 private_bank_funds_25 = {
 	value = private_bank_funds
 	multiply = 0.25
 }
-private_bank_funds_30 = {
-	value = private_bank_funds
-	multiply = 0.23
-}
-private_bank_funds_40 = {
-	value = private_bank_funds
-	multiply = 0.40
-}
-private_bank_funds_50 = {
-	value = private_bank_funds
-	multiply = 0.50
-}
-private_bank_funds_60 = {
-	value = private_bank_funds
-	multiply = 0.60
-}
-private_bank_funds_70 = {
-	value = private_bank_funds
-	multiply = 0.70
-}
-private_bank_funds_75 = {
-	value = private_bank_funds
-	multiply = 0.75
-}
-private_bank_funds_80 = {
-	value = private_bank_funds
-	multiply = 0.80
-}
-private_bank_funds_90 = {
-	value = private_bank_funds
-	multiply = 0.90
-}
-
 ############################################################################################################################################################
 #national_debt & central_bank_debt
 ############################################################################################################################################################
@@ -6616,17 +6254,6 @@ central_bank_metal_reserves_state_100 = {
 	subtract = central_bank_reserves #en fonction du type de metal
 	subtract = var:trade_balance_in_gold_fixe
 }
-central_bank_metal_reserves_state_75 = {
-	value = central_bank_metal_reserves_state_to_ensure_the_conversion #la valeur nécessaire de métaux en plus de la trade balance et de la national cap pour assurer 75% de conversion
-	multiply = 0.75 #central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent -> je veux tout prendre pour appliquer la capcité de fiancment après
-	subtract = central_bank_reserves #en fonction du type de metal
-	subtract = var:trade_balance_in_gold_fixe
-}
-central_bank_metal_reserves_state_25 = { #cela sigifi que je permet les pret étrager à représenter que 25% de ma ational capacité
-	value = central_bank_metal_reserves_state_to_ensure_the_conversion
-	multiply = 0.25 #central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent
-	#subtract = national_capacity
-}
 central_bank_equity = {
 	add = central_bank_reserves #en fonction du type de metal
 	add = var:trade_balance_in_gold_fixe
@@ -6656,11 +6283,6 @@ bond_producted = {
 	value = national_debt_allowed_in_gold
 	divide = bond_price
 }
-central_bank_debt_05_for_privat_bank = {
-	value = central_bank_debt
-	multiply = 0.05
-}
-
 #debt at war
 national_debt_allowed_in_gold_war = { #maximum 60% de dette en pib et minimum 16%
 	value = gold_reserves_15 #15% en plus
@@ -6930,11 +6552,6 @@ gold_to_silver_rate = {
 	value = 1
 	divide = silver_to_gold_rate
 }
-gold_to_silver_rate_x_2 = {
-	value = gold_to_silver_rate
-	multiply = 2
-}
-
 weight_gold = {
 	value = gold_state_native_for_stockpile
 	divide  = {
@@ -7077,11 +6694,6 @@ bimetallic_rate_gold_to_silver = {
 		add = 15.6
 	}
 }
-bimetallic_rate_gold_to_silver_x_2 = {
-	value = bimetallic_rate_gold_to_silver
-	multiply = 2
-}
-
 gold_to_silver_law = {
 	value = 1
 	if = {
@@ -7474,11 +7086,6 @@ sell_limit_currency_var_0 = {
 
 	}
 }
-sell_limit_currency_var_rest = {
-	value = sell_limit_currency_var_0
-	subtract = var:sell_limit_currency_var_1
-}
-
 ############################################################################################################################################################
 ############################################################################################################################################################
 ############################################################################################################################################################
@@ -7502,11 +7109,6 @@ sell_limit_currency_var_rest = {
 ############################################################################################################################################################
 ############################################################################################################################################################
 ############################################################################################################################################################
-
-all_currency_in_gold_10 = {
-	value = all_currency_in_gold
-	multiply = 0.1
-}
 
 ############################################################################################################################################################
 ############################################################################################################################################################
@@ -7552,23 +7154,6 @@ inflation_value_100 = {
 # cumulative inflation, money_value_rapported_inflation) read ours unchanged.
 inflation_value = {
 	value = zz_ef_inflation
-}
-
-money_value_dif_01_rolling_inflation_6_months_limited = {
-	add = var:money_value_dif_01_rolling_inflation_6_months
-
-	# if = {
-	# 	limit = {
-	# 		not = {
-	# 			has_modifier = foreign_exchange_controls
-	# 		}
-	# 	}
-	# 	max = 0.1
-	# 	min = -0.1
-	# }
-
-	max = 0.1
-	min = -0.1
 }
 
 inflation_value_for_modifier = {
@@ -8097,11 +7682,6 @@ cumulative_inflation_10_year = {
 ############################################################################################################################################################
 ############################################################################################################################################################
 
-money_value_median_in_silver = {
-	value = global_var:money_value_median
-	multiply = gold_to_silver_rate
-}
-
 money_value_median_1_25 = {
 	value = global_var:money_value_median
 	multiply = 1.25
@@ -8116,40 +7696,10 @@ money_value_median_and_money_value_in_gold_ratio = {
 	value = zz_ef_currency_strength
 }
 
-money_value_median_0_5 = {
-	value = global_var:money_value_median
-	multiply = 0.5
-}
-
-money_value_median_2_1 = {
-	value = global_var:money_value_median
-	multiply = 2.1
-}
-
 revaluation_money_value_max = {
 	value = global_var:money_value_median
 	multiply = 2
 	multiply = rate_by_law_metal_type
-}
-
-devaluation_money_value_target_trigger_var = {
-	value = 0
-	if  = {
-		limit = {
-			devaluation_money_value_target_trigger = yes
-		}
-		add = 1
-	}
-}
-
-revaluation_money_value_target_trigger_var = {
-	value = 0
-	if  = {
-		limit = {
-			revaluation_money_value_target_trigger = yes
-		}
-		add = 1
-	}
 }
 
 devaluation_money_value_target = {
@@ -8398,120 +7948,12 @@ private_bank_borrowings_year = {
 	# 	add = var:direct_transfer
 	# }
 }
-private_bank_borrowings_year_gui = {
-	value = 0
-
-	# if = {
-	# 	limit = {
-	# 		# or = {
-	# 		# 	central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent > 0.75
-	# 		# 	is_player = yes #meme si dépasse continue d'ajouter c'est au joueur de gérer
-	# 		# }
-	# 		or = {
-	# 			private_bank_funds_prevision < private_bank_funds_limit
-	# 			is_player = yes #meme si dépasse continue d'ajouter c'est au joueur de gérer
-	# 		}
-	# 	}
-	# 	add = private_bank_borrowings_year
-	# }
-	if = {
-		limit = {
-			private_bank_borrowings_year < 0
-			private_bank_funds_pourcent > 0.15 #minn 15% d'équivalent du money supply protegé par l'érosion
-		}
-		add = private_bank_borrowings_year
-	}
-}
-
 #gui
-private_bank_borrowings_year_var_1 = {
-	if  = {
-		limit  = {
-			var:base_rate_percentage > 0.01
-		}
-		value = var:base_rate_percentage
-		multiply = 10
-	}
-	if  = {
-		limit  = {
-			var:base_rate_percentage < 0.01
-		}
-		value = var:base_rate_percentage #0.95
-		multiply = 2
-	}
-}
-base_rate_percentage_revers = {
-	value = 1
-	subtract = var:base_rate_percentage
-	# subtract = {
-	# 	value = var:base_rate_percentage
-	# 	multiply = 1
-	# }
-}
 base_rate_percentage_decimal = {
 	value = var:base_rate_percentage
 	multiply = 100
 }
 
-ef_msf = {
-    base = 0
-
-    # Couverture très basse : 0% → 80%
-    if = {
-        limit = {
-            central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 0.80
-        }
-        add = -0.5
-    }
-
-    # Couverture basse : 80% → 95%
-    if = {
-        limit = {
-            central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent >= 0.80
-            central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 0.95
-        }
-        add = -0.25
-    }
-
-    # Couverture neutre : 95% → 105%
-    # (pas d’add, donc MSF = 0)
-
-    # Couverture haute : 105% → 120%
-    if = {
-        limit = {
-            central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent >= 1.05
-            central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 1.20
-        }
-        add = 0.25
-    }
-
-    # Couverture très haute : > 120%
-    if = {
-        limit = {
-            central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent >= 1.20
-        }
-        add = 0.5
-    }
-}
-BRI  = {
-	value =  0.1
-	subtract = var:base_rate_percentage
-	divide = 0.1
-
-	min = 0
-}
-effective_pool_growth = {
-	value = BRI
-	multiply  = {
-		add = 1
-		add = ef_msf
-	}
-}
-
-base_rate_percentage_delta = {
-	value = var:base_rate_percentage
-	subtract = var:base_rate_percentage_old
-}
 base_rate_effective_growth = {
     value = 0
 
@@ -8536,220 +7978,6 @@ base_rate_effective_growth = {
     if = { limit = { var:base_rate_percentage >= 0.11 } add = -0.10 }
 }
 #valeur de suivit debug
-base_rate_direction_exit_neutral_zone = {
-    value = 0
-
-    # --- ZONE NEUTRE 6–7% : sortie de la zone neutre  ---
-    if = {
-        limit = {
-            var:base_rate_percentage >= 0.06
-            var:base_rate_percentage <= 0.07
-        }
-
-        # Si pool privé trop faible (<15%) → remonter vers 7%
-        if = {
-            limit = { private_bank_funds < private_bank_funds_min_limit }
-            add = -1
-        }
-
-        # Si pool privé suffisant mais sous-utilisé → baisser légèrement
-        if = {
-            limit = {
-                private_bank_funds_pourcent >= 0.15
-		  	 	private_bank_funds < private_bank_funds_limit
-            }
-            add = -1
-        }
-
-        # Si pool privé en surcharge → remonter un peu
-        if = {
-            limit = {
-		  	 	private_bank_funds > private_bank_funds_limit
-            }
-            add = 1
-        }
-
-        # Coverage très mauvais (< 0.70) → remonter un peu
-        if = {
-            limit = { central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 0.70 }
-            add = 1
-        }
-
-        # Coverage excellent (> 1.10) → baisser légèrement
-        if = {
-            limit = { central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent > 1.10 }
-            add = -1
-        }
-    }
-}
-base_rate_direction_rebalancing_pos_to_neutral = {
-    value = 0
-
-    # --- rééquilibrage positif vers zone neutre ---
-    if = {
-        limit = {
-            private_bank_borrowings_year > 0
-            # or = {
-            #     private_bank_funds_prevision > private_bank_funds_limit
-            #     private_bank_funds > private_bank_funds_limit
-            # }
-		    private_bank_funds > private_bank_funds_limit
-            var:base_rate_percentage < 0.06
-        }
-        add = 1
-    }
-}
-base_rate_direction_pos_borrowing = {
-    value = 0
-
-    # --- progression du taux positif (freinage du crédit privé) ---
-    if = {
-        limit = {
-            private_bank_borrowings_year > 0
-            # or = {
-            #     private_bank_funds_prevision < private_bank_funds_limit
-            #     private_bank_funds < private_bank_funds_limit
-            # }
-		    private_bank_funds < private_bank_funds_limit
-            var:base_rate_percentage < 0.06
-            var:base_rate_percentage >= 0.01
-        }
-
-        # Coverage critique (<60%) → ajustement minimal
-        if = {
-            limit = { central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 0.60 }
-            add = 1
-
-
-			#retour à la zone de neutralité +++++ voir on of neutre progression mais etour vers 6%
-        }
-
-        # Coverage faible (60–80%) → petite pente
-        if = {
-            limit = {
-                central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent >= 0.60
-                central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 0.80
-            }
-            add = 1
-        }
-
-        # Coverage normal (80–100%) → pente modérée
-        if = {
-            limit = {
-                central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent >= 0.80
-                central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 1.00
-            }
-            add = 1
-        }
-
-        # Coverage bon (100–120%) → pente forte
-        if = {
-            limit = {
-                central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent >= 1.00
-                central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 1.20
-            }
-            add = 1
-        }
-
-        # Coverage excédentaire (>120%) → pente maximale
-        if = {
-            limit = { central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent >= 1.20 }
-            add = 1
-        }
-    }
-}
-
-base_rate_direction_rebalancing_neg_to_neutral = {
-    value = 0
-
-    # --- rééquilibrage négatif vers zone neutre ---
-    if = {
-        limit = {
-            private_bank_borrowings_year < 0
-           	private_bank_funds < private_bank_funds_min_limit
-            var:base_rate_percentage > 0.07
-        }
-        add = 1
-    }
-}
-base_rate_direction_neg_borrowing = {
-    value = 0
-
-    # --- progression du taux négatif ---
-    if = {
-        limit = {
-            private_bank_borrowings_year < 0
-            private_bank_funds > private_bank_funds_min_limit
-            var:base_rate_percentage > 0.07
-            var:base_rate_percentage <= 0.11
-        }
-
-        # Coverage critique (<60%)
-        if = {
-            limit = { central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 0.60 }
-            add = 1
-        }
-
-        # Coverage faible (60–80%)
-        if = {
-            limit = {
-                central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent >= 0.60
-                central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 0.80
-            }
-            add = 1
-        }
-
-        # Coverage normal (80–100%)
-        if = {
-            limit = {
-                central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent >= 0.80
-                central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 1.00
-            }
-            add = 1
-        }
-
-        # Coverage bon (100–120%)
-        if = {
-            limit = {
-                central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent >= 1.00
-                central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 1.20
-            }
-            add = 1
-        }
-
-        # Coverage excédentaire (>120%)
-        if = {
-            limit = { central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent >= 1.20 }
-            add = 1
-        }
-    }
-}
-
-pool_growing = {
-    value = 0
-    if = {
-        limit = {
-			private_bank_borrowings_year > 0
-            # or = {
-            #     private_bank_funds_prevision < private_bank_funds_limit
-            #     private_bank_funds < private_bank_funds_limit
-            # }
-		    private_bank_funds < private_bank_funds_limit
-        }
-        add = 1
-    }
-}
-pol_erosion = {
-    value = 0
-    if = {
-		limit = {
-			private_bank_borrowings_year < 0
-			private_bank_funds_pourcent > 0.15 #minn 15% d'équivalent du money supply protegé par l'érosion
-		}
-        add = 1
-    }
-}
-
 government_loan_fixe = {
 	value = var:government_loan
 }

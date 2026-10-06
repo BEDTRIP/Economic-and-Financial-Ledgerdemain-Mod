@@ -1,0 +1,1537 @@
+# из common/scripted_guis/00_stockpile_scripted_guis.txt, строки 1066–1075, 1077–1086, 1088–1097, 1099–1108, 1110–1119, 1121–1130 … (на 6.10.2026), sgui без ссылок (refs=0), в GUI/скриптах не вызываются и не собираются динамически
+
+buy_ammunition_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_ammunition_budget_panel
+		stockpiling_ammunition_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_small_arms_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_small_arms_budget_panel
+		stockpiling_small_arms_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_artillery_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_artillery_budget_panel
+		stockpiling_artillery_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_tanks_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_tanks_budget_panel
+		stockpiling_tanks_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_aeroplanes_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_aeroplanes_budget_panel
+		stockpiling_aeroplanes_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_grain_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_grain_budget_panel
+		stockpiling_grain_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_fabric_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_fabric_budget_panel
+		stockpiling_fabric_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_wood_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_wood_budget_panel
+		stockpiling_wood_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_groceries_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_groceries_budget_panel
+		stockpiling_groceries_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_clothes_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_clothes_budget_panel
+		stockpiling_clothes_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_paper_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_paper_budget_panel
+		stockpiling_paper_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_silk_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_silk_budget_panel
+		stockpiling_silk_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_dye_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_dye_budget_panel
+		stockpiling_dye_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_sulfur_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_sulfur_budget_panel
+		stockpiling_sulfur_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_coal_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_coal_budget_panel
+		stockpiling_coal_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_iron_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_iron_budget_panel
+		stockpiling_iron_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_lead_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_lead_budget_panel
+		stockpiling_lead_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_hardwood_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_hardwood_budget_panel
+		stockpiling_hardwood_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_rubber_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_rubber_budget_panel
+		stockpiling_rubber_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_oil_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_oil_budget_panel
+		stockpiling_oil_var_state < 9000000
+		has_technology_researched = international_trade 
+	}
+}
+buy_engines_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_engines_budget_panel
+		stockpiling_engines_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_steel_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_steel_budget_panel
+		stockpiling_steel_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_fertilizer_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_fertilizer_budget_panel
+		stockpiling_fertilizer_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_tools_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_tools_budget_panel
+		stockpiling_tools_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_explosives_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_explosives_budget_panel
+		stockpiling_explosives_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_automobiles_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_automobiles_budget_panel
+		stockpiling_automobiles_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_telephones_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_telephones_budget_panel
+		stockpiling_telephones_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_radios_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_radios_budget_panel
+		stockpiling_radios_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+buy_opium_budget_panel_visible = {
+	is_valid = {
+		not  = {
+			infamy >= infamy_threshold:pariah
+		}
+		gold_reserves > international_buy_opium_budget_panel
+		stockpiling_opium_var_state < 9000000
+		has_technology_researched = international_trade
+	}
+}
+sell_limit_var_show = {
+	is_shown = {
+		var:sell_limit_var_1 > 0
+	}
+}
+sell_limit_var_show_0 = {
+	is_shown = {
+		var:sell_limit_var_1 = 0
+	}
+}
+	dinar_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_dinar_var
+				value = 3
+			}
+		}
+	}
+	dinar_sell_in_gold_v = {
+		is_shown = {
+			var:trade_dinar_var = 3
+		}
+	}
+	dinar_algerian_dinar_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_dinar_algerian_dinar_var
+				value = 3
+			}
+		}
+	}
+	dinar_algerian_dinar_sell_in_gold_v = {
+		is_shown = {
+			var:trade_dinar_algerian_dinar_var = 3
+		}
+	}
+	dinar_iraqi_dinar_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_dinar_iraqi_dinar_var
+				value = 3
+			}
+		}
+	}
+	dinar_iraqi_dinar_sell_in_gold_v = {
+		is_shown = {
+			var:trade_dinar_iraqi_dinar_var = 3
+		}
+	}
+	dinar_libyan_dinar_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_dinar_libyan_dinar_var
+				value = 3
+			}
+		}
+	}
+	dinar_libyan_dinar_sell_in_gold_v = {
+		is_shown = {
+			var:trade_dinar_libyan_dinar_var = 3
+		}
+	}
+	dinar_moroccan_dirham_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_dinar_moroccan_dirham_var
+				value = 3
+			}
+		}
+	}
+	dinar_moroccan_dirham_sell_in_gold_v = {
+		is_shown = {
+			var:trade_dinar_moroccan_dirham_var = 3
+		}
+	}
+	dinar_omanian_rial_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_dinar_omanian_rial_var
+				value = 3
+			}
+		}
+	}
+	dinar_omanian_rial_sell_in_gold_v = {
+		is_shown = {
+			var:trade_dinar_omanian_rial_var = 3
+		}
+	}
+	dinar_qiran_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_dinar_qiran_var
+				value = 3
+			}
+		}
+	}
+	dinar_qiran_sell_in_gold_v = {
+		is_shown = {
+			var:trade_dinar_qiran_var = 3
+		}
+	}
+	dinar_saudi_riyal_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_dinar_saudi_riyal_var
+				value = 3
+			}
+		}
+	}
+	dinar_saudi_riyal_sell_in_gold_v = {
+		is_shown = {
+			var:trade_dinar_saudi_riyal_var = 3
+		}
+	}
+	dinar_serbian_dinar_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_dinar_serbian_dinar_var
+				value = 3
+			}
+		}
+	}
+	dinar_serbian_dinar_sell_in_gold_v = {
+		is_shown = {
+			var:trade_dinar_serbian_dinar_var = 3
+		}
+	}
+	dinar_tunisian_dinar_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_dinar_tunisian_dinar_var
+				value = 3
+			}
+		}
+	}
+	dinar_tunisian_dinar_sell_in_gold_v = {
+		is_shown = {
+			var:trade_dinar_tunisian_dinar_var = 3
+		}
+	}
+	dinar_yugoslav_dinar_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_dinar_yugoslav_dinar_var
+				value = 3
+			}
+		}
+	}
+	dinar_yugoslav_dinar_sell_in_gold_v = {
+		is_shown = {
+			var:trade_dinar_yugoslav_dinar_var = 3
+		}
+	}
+	dollar_australian_dollar_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_dollar_australian_dollar_var
+				value = 3
+			}
+		}
+	}
+	dollar_australian_dollar_sell_in_gold_v = {
+		is_shown = {
+			var:trade_dollar_australian_dollar_var = 3
+		}
+	}
+	dollar_canadian_dollar_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_dollar_canadian_dollar_var
+				value = 3
+			}
+		}
+	}
+	dollar_canadian_dollar_sell_in_gold_v = {
+		is_shown = {
+			var:trade_dollar_canadian_dollar_var = 3
+		}
+	}
+	dollar_caribbean_dollar_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_dollar_caribbean_dollar_var
+				value = 3
+			}
+		}
+	}
+	dollar_caribbean_dollar_sell_in_gold_v = {
+		is_shown = {
+			var:trade_dollar_caribbean_dollar_var = 3
+		}
+	}
+	dollar_confederate_states_dollar_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_dollar_confederate_states_dollar_var
+				value = 3
+			}
+		}
+	}
+	dollar_confederate_states_dollar_sell_in_gold_v = {
+		is_shown = {
+			var:trade_dollar_confederate_states_dollar_var = 3
+		}
+	}
+	dollar_liberian_dollar_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_dollar_liberian_dollar_var
+				value = 3
+			}
+		}
+	}
+	dollar_liberian_dollar_sell_in_gold_v = {
+		is_shown = {
+			var:trade_dollar_liberian_dollar_var = 3
+		}
+	}
+	dollar_new_zealand_dollar_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_dollar_new_zealand_dollar_var
+				value = 3
+			}
+		}
+	}
+	dollar_new_zealand_dollar_sell_in_gold_v = {
+		is_shown = {
+			var:trade_dollar_new_zealand_dollar_var = 3
+		}
+	}
+	dollar_sierra_leonean_dollar_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_dollar_sierra_leonean_dollar_var
+				value = 3
+			}
+		}
+	}
+	dollar_sierra_leonean_dollar_sell_in_gold_v = {
+		is_shown = {
+			var:trade_dollar_sierra_leonean_dollar_var = 3
+		}
+	}
+	dollar_united_states_dollar_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_dollar_united_states_dollar_var
+				value = 3
+			}
+		}
+	}
+	dollar_united_states_dollar_sell_in_gold_v = {
+		is_shown = {
+			var:trade_dollar_united_states_dollar_var = 3
+		}
+	}
+	eco_ariary_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_eco_ariary_var
+				value = 3
+			}
+		}
+	}
+	eco_ariary_sell_in_gold_v = {
+		is_shown = {
+			var:trade_eco_ariary_var = 3
+		}
+	}
+	eco_central_african_eco_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_eco_central_african_eco_var
+				value = 3
+			}
+		}
+	}
+	eco_central_african_eco_sell_in_gold_v = {
+		is_shown = {
+			var:trade_eco_central_african_eco_var = 3
+		}
+	}
+	eco_east_african_eco_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_eco_east_african_eco_var
+				value = 3
+			}
+		}
+	}
+	eco_east_african_eco_sell_in_gold_v = {
+		is_shown = {
+			var:trade_eco_east_african_eco_var = 3
+		}
+	}
+	eco_ethiopian_birr_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_eco_ethiopian_birr_var
+				value = 3
+			}
+		}
+	}
+	eco_ethiopian_birr_sell_in_gold_v = {
+		is_shown = {
+			var:trade_eco_ethiopian_birr_var = 3
+		}
+	}
+	eco_ghanaian_pound_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_eco_ghanaian_pound_var
+				value = 3
+			}
+		}
+	}
+	eco_ghanaian_pound_sell_in_gold_v = {
+		is_shown = {
+			var:trade_eco_ghanaian_pound_var = 3
+		}
+	}
+	eco_nigerian_naira_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_eco_nigerian_naira_var
+				value = 3
+			}
+		}
+	}
+	eco_nigerian_naira_sell_in_gold_v = {
+		is_shown = {
+			var:trade_eco_nigerian_naira_var = 3
+		}
+	}
+	eco_south_african_rand_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_eco_south_african_rand_var
+				value = 3
+			}
+		}
+	}
+	eco_south_african_rand_sell_in_gold_v = {
+		is_shown = {
+			var:trade_eco_south_african_rand_var = 3
+		}
+	}
+	eco_tuareg_ouguiya_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_eco_tuareg_ouguiya_var
+				value = 3
+			}
+		}
+	}
+	eco_tuareg_ouguiya_sell_in_gold_v = {
+		is_shown = {
+			var:trade_eco_tuareg_ouguiya_var = 3
+		}
+	}
+	eco_west_african_eco_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_eco_west_african_eco_var
+				value = 3
+			}
+		}
+	}
+	eco_west_african_eco_sell_in_gold_v = {
+		is_shown = {
+			var:trade_eco_west_african_eco_var = 3
+		}
+	}
+	franc_belgian_franc_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_franc_belgian_franc_var
+				value = 3
+			}
+		}
+	}
+	franc_belgian_franc_sell_in_gold_v = {
+		is_shown = {
+			var:trade_franc_belgian_franc_var = 3
+		}
+	}
+	franc_french_franc_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_franc_french_franc_var
+				value = 3
+			}
+		}
+	}
+	franc_french_franc_sell_in_gold_v = {
+		is_shown = {
+			var:trade_franc_french_franc_var = 3
+		}
+	}
+	franc_luxembourgish_franc_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_franc_luxembourgish_franc_var
+				value = 3
+			}
+		}
+	}
+	franc_luxembourgish_franc_sell_in_gold_v = {
+		is_shown = {
+			var:trade_franc_luxembourgish_franc_var = 3
+		}
+	}
+	franc_swiss_franc_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_franc_swiss_franc_var
+				value = 3
+			}
+		}
+	}
+	franc_swiss_franc_sell_in_gold_v = {
+		is_shown = {
+			var:trade_franc_swiss_franc_var = 3
+		}
+	}
+	gulden_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_gulden_var
+				value = 3
+			}
+		}
+	}
+	gulden_sell_in_gold_v = {
+		is_shown = {
+			var:trade_gulden_var = 3
+		}
+	}
+	gulden_bavarian_gulden_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_gulden_bavarian_gulden_var
+				value = 3
+			}
+		}
+	}
+	gulden_bavarian_gulden_sell_in_gold_v = {
+		is_shown = {
+			var:trade_gulden_bavarian_gulden_var = 3
+		}
+	}
+	gulden_florin_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_gulden_florin_var
+				value = 3
+			}
+		}
+	}
+	gulden_florin_sell_in_gold_v = {
+		is_shown = {
+			var:trade_gulden_florin_var = 3
+		}
+	}
+	gulden_hungarian_forint_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_gulden_hungarian_forint_var
+				value = 3
+			}
+		}
+	}
+	gulden_hungarian_forint_sell_in_gold_v = {
+		is_shown = {
+			var:trade_gulden_hungarian_forint_var = 3
+		}
+	}
+	gulden_indies_guilder_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_gulden_indies_guilder_var
+				value = 3
+			}
+		}
+	}
+	gulden_indies_guilder_sell_in_gold_v = {
+		is_shown = {
+			var:trade_gulden_indies_guilder_var = 3
+		}
+	}
+	gulden_south_german_gulden_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_gulden_south_german_gulden_var
+				value = 3
+			}
+		}
+	}
+	gulden_south_german_gulden_sell_in_gold_v = {
+		is_shown = {
+			var:trade_gulden_south_german_gulden_var = 3
+		}
+	}
+	krone_czech_koruna_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_krone_czech_koruna_var
+				value = 3
+			}
+		}
+	}
+	krone_czech_koruna_sell_in_gold_v = {
+		is_shown = {
+			var:trade_krone_czech_koruna_var = 3
+		}
+	}
+	krone_danish_krone_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_krone_danish_krone_var
+				value = 3
+			}
+		}
+	}
+	krone_danish_krone_sell_in_gold_v = {
+		is_shown = {
+			var:trade_krone_danish_krone_var = 3
+		}
+	}
+	krone_estonian_kroon_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_krone_estonian_kroon_var
+				value = 3
+			}
+		}
+	}
+	krone_estonian_kroon_sell_in_gold_v = {
+		is_shown = {
+			var:trade_krone_estonian_kroon_var = 3
+		}
+	}
+	krone_icelandic_krona_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_krone_icelandic_krona_var
+				value = 3
+			}
+		}
+	}
+	krone_icelandic_krona_sell_in_gold_v = {
+		is_shown = {
+			var:trade_krone_icelandic_krona_var = 3
+		}
+	}
+	krone_norwegian_krone_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_krone_norwegian_krone_var
+				value = 3
+			}
+		}
+	}
+	krone_norwegian_krone_sell_in_gold_v = {
+		is_shown = {
+			var:trade_krone_norwegian_krone_var = 3
+		}
+	}
+	krone_slovak_koruna_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_krone_slovak_koruna_var
+				value = 3
+			}
+		}
+	}
+	krone_slovak_koruna_sell_in_gold_v = {
+		is_shown = {
+			var:trade_krone_slovak_koruna_var = 3
+		}
+	}
+	krone_swedish_krona_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_krone_swedish_krona_var
+				value = 3
+			}
+		}
+	}
+	krone_swedish_krona_sell_in_gold_v = {
+		is_shown = {
+			var:trade_krone_swedish_krona_var = 3
+		}
+	}
+	leon_leu_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_leon_leu_var
+				value = 3
+			}
+		}
+	}
+	leon_leu_sell_in_gold_v = {
+		is_shown = {
+			var:trade_leon_leu_var = 3
+		}
+	}
+	leon_lev_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_leon_lev_var
+				value = 3
+			}
+		}
+	}
+	leon_lev_sell_in_gold_v = {
+		is_shown = {
+			var:trade_leon_lev_var = 3
+		}
+	}
+	lira_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_lira_var
+				value = 3
+			}
+		}
+	}
+	lira_sell_in_gold_v = {
+		is_shown = {
+			var:trade_lira_var = 3
+		}
+	}
+	lira_ducato_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_lira_ducato_var
+				value = 3
+			}
+		}
+	}
+	lira_ducato_sell_in_gold_v = {
+		is_shown = {
+			var:trade_lira_ducato_var = 3
+		}
+	}
+	lira_ottoman_lira_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_lira_ottoman_lira_var
+				value = 3
+			}
+		}
+	}
+	lira_ottoman_lira_sell_in_gold_v = {
+		is_shown = {
+			var:trade_lira_ottoman_lira_var = 3
+		}
+	}
+	lira_scudo_pontificio_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_lira_scudo_pontificio_var
+				value = 3
+			}
+		}
+	}
+	lira_scudo_pontificio_sell_in_gold_v = {
+		is_shown = {
+			var:trade_lira_scudo_pontificio_var = 3
+		}
+	}
+	lira_scudo_sardo_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_lira_scudo_sardo_var
+				value = 3
+			}
+		}
+	}
+	lira_scudo_sardo_sell_in_gold_v = {
+		is_shown = {
+			var:trade_lira_scudo_sardo_var = 3
+		}
+	}
+	lira_toscane_lira_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_lira_toscane_lira_var
+				value = 3
+			}
+		}
+	}
+	lira_toscane_lira_sell_in_gold_v = {
+		is_shown = {
+			var:trade_lira_toscane_lira_var = 3
+		}
+	}
+	mark_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_mark_var
+				value = 3
+			}
+		}
+	}
+	mark_sell_in_gold_v = {
+		is_shown = {
+			var:trade_mark_var = 3
+		}
+	}
+	mark_finnish_markka_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_mark_finnish_markka_var
+				value = 3
+			}
+		}
+	}
+	mark_finnish_markka_sell_in_gold_v = {
+		is_shown = {
+			var:trade_mark_finnish_markka_var = 3
+		}
+	}
+	peso_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_peso_var
+				value = 3
+			}
+		}
+	}
+	peso_sell_in_gold_v = {
+		is_shown = {
+			var:trade_peso_var = 3
+		}
+	}
+	peso_argentine_peso_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_peso_argentine_peso_var
+				value = 3
+			}
+		}
+	}
+	peso_argentine_peso_sell_in_gold_v = {
+		is_shown = {
+			var:trade_peso_argentine_peso_var = 3
+		}
+	}
+	peso_bolivien_peso_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_peso_bolivien_peso_var
+				value = 3
+			}
+		}
+	}
+	peso_bolivien_peso_sell_in_gold_v = {
+		is_shown = {
+			var:trade_peso_bolivien_peso_var = 3
+		}
+	}
+	peso_chilean_peso_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_peso_chilean_peso_var
+				value = 3
+			}
+		}
+	}
+	peso_chilean_peso_sell_in_gold_v = {
+		is_shown = {
+			var:trade_peso_chilean_peso_var = 3
+		}
+	}
+	peso_colombian_peso_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_peso_colombian_peso_var
+				value = 3
+			}
+		}
+	}
+	peso_colombian_peso_sell_in_gold_v = {
+		is_shown = {
+			var:trade_peso_colombian_peso_var = 3
+		}
+	}
+	peso_costa_rican_colon_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_peso_costa_rican_colon_var
+				value = 3
+			}
+		}
+	}
+	peso_costa_rican_colon_sell_in_gold_v = {
+		is_shown = {
+			var:trade_peso_costa_rican_colon_var = 3
+		}
+	}
+	peso_cuban_peso_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_peso_cuban_peso_var
+				value = 3
+			}
+		}
+	}
+	peso_cuban_peso_sell_in_gold_v = {
+		is_shown = {
+			var:trade_peso_cuban_peso_var = 3
+		}
+	}
+	peso_ecuadorian_peso_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_peso_ecuadorian_peso_var
+				value = 3
+			}
+		}
+	}
+	peso_ecuadorian_peso_sell_in_gold_v = {
+		is_shown = {
+			var:trade_peso_ecuadorian_peso_var = 3
+		}
+	}
+	peso_el_salvador_colon_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_peso_el_salvador_colon_var
+				value = 3
+			}
+		}
+	}
+	peso_el_salvador_colon_sell_in_gold_v = {
+		is_shown = {
+			var:trade_peso_el_salvador_colon_var = 3
+		}
+	}
+	peso_guatemalan_quetzal_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_peso_guatemalan_quetzal_var
+				value = 3
+			}
+		}
+	}
+	peso_guatemalan_quetzal_sell_in_gold_v = {
+		is_shown = {
+			var:trade_peso_guatemalan_quetzal_var = 3
+		}
+	}
+	peso_honduran_lempira_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_peso_honduran_lempira_var
+				value = 3
+			}
+		}
+	}
+	peso_honduran_lempira_sell_in_gold_v = {
+		is_shown = {
+			var:trade_peso_honduran_lempira_var = 3
+		}
+	}
+	peso_mexican_peso_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_peso_mexican_peso_var
+				value = 3
+			}
+		}
+	}
+	peso_mexican_peso_sell_in_gold_v = {
+		is_shown = {
+			var:trade_peso_mexican_peso_var = 3
+		}
+	}
+	peso_nicaraguan_cordoba_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_peso_nicaraguan_cordoba_var
+				value = 3
+			}
+		}
+	}
+	peso_nicaraguan_cordoba_sell_in_gold_v = {
+		is_shown = {
+			var:trade_peso_nicaraguan_cordoba_var = 3
+		}
+	}
+	peso_paraguayan_peso_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_peso_paraguayan_peso_var
+				value = 3
+			}
+		}
+	}
+	peso_paraguayan_peso_sell_in_gold_v = {
+		is_shown = {
+			var:trade_peso_paraguayan_peso_var = 3
+		}
+	}
+	peso_philippine_peso_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_peso_philippine_peso_var
+				value = 3
+			}
+		}
+	}
+	peso_philippine_peso_sell_in_gold_v = {
+		is_shown = {
+			var:trade_peso_philippine_peso_var = 3
+		}
+	}
+	peso_sol_de_oro_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_peso_sol_de_oro_var
+				value = 3
+			}
+		}
+	}
+	peso_sol_de_oro_sell_in_gold_v = {
+		is_shown = {
+			var:trade_peso_sol_de_oro_var = 3
+		}
+	}
+	peso_uruguayan_peso_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_peso_uruguayan_peso_var
+				value = 3
+			}
+		}
+	}
+	peso_uruguayan_peso_sell_in_gold_v = {
+		is_shown = {
+			var:trade_peso_uruguayan_peso_var = 3
+		}
+	}
+	peso_venezuelan_peso_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_peso_venezuelan_peso_var
+				value = 3
+			}
+		}
+	}
+	peso_venezuelan_peso_sell_in_gold_v = {
+		is_shown = {
+			var:trade_peso_venezuelan_peso_var = 3
+		}
+	}
+	pound_egyptian_pound_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_pound_egyptian_pound_var
+				value = 3
+			}
+		}
+	}
+	pound_egyptian_pound_sell_in_gold_v = {
+		is_shown = {
+			var:trade_pound_egyptian_pound_var = 3
+		}
+	}
+	pound_irish_pound_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_pound_irish_pound_var
+				value = 3
+			}
+		}
+	}
+	pound_irish_pound_sell_in_gold_v = {
+		is_shown = {
+			var:trade_pound_irish_pound_var = 3
+		}
+	}
+	pound_sterling_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_pound_sterling_var
+				value = 3
+			}
+		}
+	}
+	pound_sterling_sell_in_gold_v = {
+		is_shown = {
+			var:trade_pound_sterling_var = 3
+		}
+	}
+	real_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_real_var
+				value = 3
+			}
+		}
+	}
+	real_sell_in_gold_v = {
+		is_shown = {
+			var:trade_real_var = 3
+		}
+	}
+	real_brazilian_real_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_real_brazilian_real_var
+				value = 3
+			}
+		}
+	}
+	real_brazilian_real_sell_in_gold_v = {
+		is_shown = {
+			var:trade_real_brazilian_real_var = 3
+		}
+	}
+	rupee_indian_rupee_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_rupee_indian_rupee_var
+				value = 3
+			}
+		}
+	}
+	rupee_indian_rupee_sell_in_gold_v = {
+		is_shown = {
+			var:trade_rupee_indian_rupee_var = 3
+		}
+	}
+	rupee_indonesian_rupiah_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_rupee_indonesian_rupiah_var
+				value = 3
+			}
+		}
+	}
+	rupee_indonesian_rupiah_sell_in_gold_v = {
+		is_shown = {
+			var:trade_rupee_indonesian_rupiah_var = 3
+		}
+	}
+	spe_baht_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_spe_baht_var
+				value = 3
+			}
+		}
+	}
+	spe_baht_sell_in_gold_v = {
+		is_shown = {
+			var:trade_spe_baht_var = 3
+		}
+	}
+	spe_dong_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_spe_dong_var
+				value = 3
+			}
+		}
+	}
+	spe_dong_sell_in_gold_v = {
+		is_shown = {
+			var:trade_spe_dong_var = 3
+		}
+	}
+	spe_drachma_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_spe_drachma_var
+				value = 3
+			}
+		}
+	}
+	spe_drachma_sell_in_gold_v = {
+		is_shown = {
+			var:trade_spe_drachma_var = 3
+		}
+	}
+	spe_korean_won_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_spe_korean_won_var
+				value = 3
+			}
+		}
+	}
+	spe_korean_won_sell_in_gold_v = {
+		is_shown = {
+			var:trade_spe_korean_won_var = 3
+		}
+	}
+	spe_latvian_lats_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_spe_latvian_lats_var
+				value = 3
+			}
+		}
+	}
+	spe_latvian_lats_sell_in_gold_v = {
+		is_shown = {
+			var:trade_spe_latvian_lats_var = 3
+		}
+	}
+	spe_lithuanian_litas_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_spe_lithuanian_litas_var
+				value = 3
+			}
+		}
+	}
+	spe_lithuanian_litas_sell_in_gold_v = {
+		is_shown = {
+			var:trade_spe_lithuanian_litas_var = 3
+		}
+	}
+	spe_peseta_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_spe_peseta_var
+				value = 3
+			}
+		}
+	}
+	spe_peseta_sell_in_gold_v = {
+		is_shown = {
+			var:trade_spe_peseta_var = 3
+		}
+	}
+	spe_ruble_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_spe_ruble_var
+				value = 3
+			}
+		}
+	}
+	spe_ruble_sell_in_gold_v = {
+		is_shown = {
+			var:trade_spe_ruble_var = 3
+		}
+	}
+	spe_uni_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_spe_uni_var
+				value = 3
+			}
+		}
+	}
+	spe_uni_sell_in_gold_v = {
+		is_shown = {
+			var:trade_spe_uni_var = 3
+		}
+	}
+	spe_yen_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_spe_yen_var
+				value = 3
+			}
+		}
+	}
+	spe_yen_sell_in_gold_v = {
+		is_shown = {
+			var:trade_spe_yen_var = 3
+		}
+	}
+	spe_yuan_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_spe_yuan_var
+				value = 3
+			}
+		}
+	}
+	spe_yuan_sell_in_gold_v = {
+		is_shown = {
+			var:trade_spe_yuan_var = 3
+		}
+	}
+	spe_zloti_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_spe_zloti_var
+				value = 3
+			}
+		}
+	}
+	spe_zloti_sell_in_gold_v = {
+		is_shown = {
+			var:trade_spe_zloti_var = 3
+		}
+	}
+	thaler_hannoveraner_thaler_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_thaler_hannoveraner_thaler_var
+				value = 3
+			}
+		}
+	}
+	thaler_hannoveraner_thaler_sell_in_gold_v = {
+		is_shown = {
+			var:trade_thaler_hannoveraner_thaler_var = 3
+		}
+	}
+	thaler_prussian_thaler_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_thaler_prussian_thaler_var
+				value = 3
+			}
+		}
+	}
+	thaler_prussian_thaler_sell_in_gold_v = {
+		is_shown = {
+			var:trade_thaler_prussian_thaler_var = 3
+		}
+	}
+	thaler_saxon_thaler_sell_in_gold_on = {
+		effect = {
+			set_variable = {
+				name = trade_thaler_saxon_thaler_var
+				value = 3
+			}
+		}
+	}
+	thaler_saxon_thaler_sell_in_gold_v = {
+		is_shown = {
+			var:trade_thaler_saxon_thaler_var = 3
+		}
+	} #end_tag_1
