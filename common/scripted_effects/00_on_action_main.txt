@@ -5138,19 +5138,19 @@ all_currency_resold = {
 			}
 			sell_lira_ottoman_lira_currency_crisis = yes
 		}
-		#lira_scudo_pontelse_ificio
+		#lira_scudo_pontificio
 		else_if  = {
 			limit  = {
 				scope:target_country = {
-					has_law = law_type:law_lira_scudo_pontelse_ificio_currency
+					has_law = law_type:law_lira_scudo_pontificio_currency
 					or = {
 							var:currency_crisis = 1
 						var:central_bank_bankruptcy = 1
 					}
 				}
-				stockpiling_lira_scudo_pontelse_ificio_state > 0
+				stockpiling_lira_scudo_pontificio_state > 0
 			}
-			sell_lira_scudo_pontelse_ificio_currency_crisis = yes
+			sell_lira_scudo_pontificio_currency_crisis = yes
 		}
 		#lira_scudo_sardo
 		else_if  = {
@@ -14863,15 +14863,6 @@ update_modifiers_bc_fc_ns = {
 	remove_country_building_modifier = yes
 	destroy_building_not_allowed = yes
 
-	if  = {  #réinitialis la loi si un pays si lib
-		limit = {
-			law_currency_enacted = yes
-			not  = {
-				country_already_central_bank = yes
-			}
-		}
-		remove_law_currency = yes
-	}
 }
 crisis_general_reset_count = {
 	if = {

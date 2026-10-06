@@ -59,7 +59,7 @@ _archive/<механизм>/
 | Пустой `on_monthly_pulse` журнала `financial_center_je_2` | `ef_je_empty_monthly_pulse/` | блок из `00_ef_financial_center_je.txt` |
 | Тестовые окна `panel_*` (80), `currency_reserve_window`, хаб `ef_custom_windows` + кнопка «1» вкладки «Экономика», дубли `maj/{budget,market,states}_panel`, `maj/NonEssential/companies_panel` | `ef_dev_custom_windows/` | 82 `default_popup` из `ef_custom_windows.gui` (остался `gold_reserve_window`), кнопка `Panel_1` и закомментированная кнопка резервов в `ld_economy_panel.gui`, 4 файла `maj/`, 4 ключа локализации (en+ru) |
 | Отладочный режим `EF_debug_mode` | `ef_debug_mode/` | виджет `00_ef_debug_widget.gui`, `EF_scripted_widgets.txt`, `00_ef_debug_decisions.txt`, 3 sgui из `09_ef_other.txt` |
-| Скриптовые GUI без ссылок | `ef_unused_scripted_guis/` | 913 sgui из 4 файлов `common/scripted_guis/` + `com_local_goods_sgui.txt` |
+| Скриптовые GUI без ссылок | `ef_unused_scripted_guis/` | 914 sgui из 4 файлов `common/scripted_guis/` + `com_local_goods_sgui.txt` |
 | Осиротевшие после выноса GUI (значения, эффекты, sgui) | `ef_gui_orphans/` | 115 script_values, 24 эффекта `test_*_variable_list`, 37 sgui |
 | Мёртвое в GUI и журналах E&F | `ef_gui_dead_leftovers/` | 6 типов `vo_plotline_*`, 2 виджета журнала, 4 пустые кнопки, 2 прогресс-бара, 2 понятия |
 | Месячный торговый резерв `zz_ef_rc_step` | `ef_reserve_trade_step/` | закомментированный вызов в `ld_money_model.txt`; эффекты и 6 значений из генератора `regen_ef_reserve_trade` |

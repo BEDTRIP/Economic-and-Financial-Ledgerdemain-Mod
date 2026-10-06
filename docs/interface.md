@@ -125,7 +125,7 @@ GUI-тип регистрирует первый файл по имени (ASCII
   облигации — `ld_bond_tables`; стройка — `PSC_*`.
 - GUI ссылается на 2757 имён `GetScriptedGui('…')`; не определены в `common/scripted_guis`: 25 живых вызовов `*_list_gerenation_ordered`
   (кнопки секций в `00_ef_deported_gui_1.gui`, `ld_economy_panel.gui`, `ld_cb_rate_panel.gui`, `00_ef_custom_widgets.gui`;
-  определены только `financial_product_panel_…` и `world_currency_…` в `09_ef_other.txt:1946,1971`), `gdpg_sort_by_country_gdp`
+  определён только `world_currency_…` в `09_ef_other.txt`), `gdpg_sort_by_country_gdp`
   (13 вызовов), `je_meiji_restoration_get_faction_sgui` (`states_panel.gui`). Клик не выполняет эффекта (ожидается ошибка поиска sgui в `error.log`; в игре не проверено).
 - `topbar.gui` → `currency_symbol_top_bar` (96 `GetCustom('currency_symbol_<cur>')`, считаются каждый кадр).
 - Подкаталог мода выигрывает у ванили: в `maj/NonEssential/{map_markers,custom_tooltip,military_formation_panel,popups,right_click_menu}.gui`

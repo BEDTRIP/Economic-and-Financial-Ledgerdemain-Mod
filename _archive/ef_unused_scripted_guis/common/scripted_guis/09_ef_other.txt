@@ -2432,3 +2432,29 @@
 				}
 			}
 		}
+
+# --- financial_product_panel_list_gerenation_ordered (ФК2 шаг 4, из 09_ef_other.txt после reference_currency_in_gold_fixe_ac): эффекты bond_variable_list / manufacture_, agricultural_, mining_, railroad_stock_variable_list нигде не определены, sgui в GUI не вызывается
+	financial_product_panel_list_gerenation_ordered = {
+		scope = country
+		saved_scopes = {
+			player_country
+		}
+
+		is_shown = {
+			always = yes
+		}
+
+		is_valid = {
+			always = yes
+		}
+
+		effect = {
+
+			#SPE
+			bond_variable_list = yes
+			manufacture_stock_variable_list = yes
+			agricultural_stock_variable_list = yes
+			mining_stock_variable_list = yes
+			railroad_stock_variable_list = yes
+		}
+	}

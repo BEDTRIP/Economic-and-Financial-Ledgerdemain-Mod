@@ -10,7 +10,7 @@
 - `common/building_groups/ld_banking_group.txt` — `bg_zz_ef_banking` (дочерняя `bg_trade`).
 - `common/production_method_groups/ld_bank_pmg.txt` — `pmg_zz_ef_bank_base` (5 методов по эпохам).
 - `common/production_methods/ld_bank_pm.txt` — `pm_zz_ef_bank_money_changer … _modern`: выход `goods_output_liquidity_currency_add` 300…1600, вход services/paper/telephones/electricity + базовые 0.01 золота и 0.02 серебра на рабочего (покупку металла регулируют модификаторы `zz_ef_bank_gold_buy`/`zz_ef_bank_silver_buy`, см. `ld_metal_accounts.txt:281-289`, `static_modifiers/ld_metal_trade.txt`). Комментарии называют их `zz_ef_bank_metal_buy` — такого ключа нет.
-- `common/script_values/ld_bank_values.txt` — `zz_ef_bank_tc_levels` (уровни торговых центров штата, веса посева), `zz_ef_bank_levels` (уровни банков; ДУБЛЬ ключа в `script_values/ld_metal_accounts_values.txt:275`).
+- `common/script_values/ld_bank_values.txt` — `zz_ef_bank_tc_levels` (уровни торговых центров штата, веса посева), `zz_ef_bank_levels` (уровни банков).
 - `common/on_actions/ld_bank_on_actions.txt` — `on_monthly_pulse_country` → `zz_ef_bank_monthly` → `zz_ef_bank_seed_step`.
 - `common/scripted_effects/ld_bank_seed.txt` — генерат: `zz_ef_bank_seed_step` (страна-владелец рынка, один раз, флаг `zz_ef_bank_seeded`), `zz_ef_bank_seed_state` (по штату), `zz_ef_bank_seed_company` (по банковской компании E&F, `$COMPANY$`), `zz_ef_bank_seed_state_owned` (запасной вариант — 100% государству).
 - `common/scripted_effects/ld_cm_bank_ownership.txt` — `zz_ef_cm_create_owned_bank` (строит/доращивает ЦБ до размера `$CB_SIZE$`, государственный, резервы 0); зовут спавнеры E&F в `09_introduction_building_lvl.txt:23506…23644`.

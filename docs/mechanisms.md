@@ -8,7 +8,7 @@
 коэффициент, закомментированный вызов); `мёртвый` — ни откуда не вызывается; `дубль` — считает то же или пишет те же
 счета, что модель `ld_*`. Строки файлов — на момент записи, при правке файла сдвигаются: искать по имени.
 
-Итого: мёртвый 4, выключен 0, дубль 5, живой 229.
+Итого: мёртвый 4, выключен 0, дубль 4, живой 229.
 
 ## Денежная модель и металл (`money-model.md`)
 
@@ -95,7 +95,6 @@
 
 | механизм | статус | где | доказательство | интерфейс |
 | --- | --- | --- | --- | --- |
-| Дубль скрипт-значения zz_ef_bank_levels | дубль | common/script_values/ld_bank_values.txt:16; common/script_values/ld_metal_accounts_values.txt:275 | один ключ определён в двух файлах (тело одинаковое) | — |
 | Здание «Банк» zz_ef_bank (методы, группа, PMG) | живой | common/buildings/ld_bank.txt:19; common/production_methods/ld_bank_pm.txt; common/production_method_groups/ld_bank_pmg.txt:2 | refs building/pmg 12; читают ld_metal_accounts_values.txt:230-278, ld_money_model_values.txt:2150 | здание «Банк», панель здания |
 | Посев банков по рынку zz_ef_bank_seed_* | живой | common/scripted_effects/ld_bank_seed.txt:10,65,576,1002; common/on_actions/ld_bank_on_actions.txt:2-11 | on_monthly_pulse_country → zz_ef_bank_monthly → zz_ef_bank_seed_step; лог EFK | здания «Банк» в штатах |
 | Центральный банк building_bank + pmg_minting_type/pmg_monetary_policy | живой | common/buildings/ef_15_bank.txt; common/production_methods/15_ef_bank.txt:18-250 | создаётся zz_ef_cm_create_owned_bank из 09_introduction_building_lvl.txt:23506; refs pmg_minting_type/pmg_monetary_policy см. index.tsv | панель ЦБ, ld_cb_rate_panel.gui |
@@ -266,7 +265,7 @@
 | Ядро инфляции и курсов `money_value_*_global_var`, `inflation_on_*`, `fluctuations_*` | живой | common/scripted_effects/01_economic_scripted_effects.txt:1762-10161 | месячные/годовые пульсы; курсы читает E&F-GUI; в модели `ld_*` курс `money_value_0` читают `zz_ef_*` | курсы валют, инфляция |
 | Алерты E&F (32): `fso_alert`, 2 по облигациям, 29 `store_release_<good>` | живой | common/alert_types/00_ef_alert_types.txt:2,30,56- | движок регистрирует алерты по имени; `valid` зависит от переменных; не вызываются из кода (refs=0 — норма) | панель алертов игрока |
 | Идеологии `ideology_monetary_{moderate,conservative,left}`, `ideology_monetary_policy` | живой | common/ideologies/00_ef_ig_ideologies.txt:1-111; common/history/global/99_ef_history_global_variable.txt:~8020 | `add_ideology` в history | идеологии ИГ |
-| `INJECT` оценок законов в 9 ванильных идеологий (`laissez_faire … socialist`) | живой | common/ideologies/00_ef_ig_ideologies.txt:112-291 | INJECT ванильных ключей; refs=0 — ожидаемо. Часть оценок — на несуществующие законы `law_bimetallic_standard`, `law_gold_exchange` (есть `law_bimetallism_standard`, `law_gold_exchange_standard`) — эти строки никуда не попадают (24 строки) | отношение ИГ к законам |
+| `INJECT` оценок законов в 9 ванильных идеологий (`laissez_faire … socialist`) | живой | common/ideologies/00_ef_ig_ideologies.txt:112-291 | INJECT ванильных ключей; refs=0 — ожидаемо. Оценки законов валютной системы — по именам `law_bimetallism_standard`, `law_gold_exchange_standard` | отношение ИГ к законам |
 | Институт `institution_economic_central_bank` | живой | common/institutions/00_ef_institutions.txt | refs=36 | институт «Центробанк» |
 | Поправки `amendment_*_bimetallic_ratio*` (7) | живой | common/amendments/00_ef_amendments.txt | `add_amendment` в `99_ef_history_global_variable.txt:239,317,388`; refs 11-14 | закон «биметаллический коэффициент» |
 | Технологии E&F (10 REPLACE + 9 своих) | живой | common/technology/technologies/ef_technology.txt | refs: central_banking 1042, financial_center 93; `corporate_charters` refs=0 (REPLACE ванильной) | дерево технологий |
@@ -281,7 +280,7 @@
 
 | механизм | статус | где | доказательство | интерфейс |
 | --- | --- | --- | --- | --- |
-| Кнопки секций *_list_gerenation_ordered (25 вызовов, sgui не определены) | мёртвый | gui/00_ef_deported_gui_1.gui:184758; gui/ld_economy_panel.gui; gui/ld_cb_rate_panel.gui; gui/scripted_widgets/00_ef_custom_widgets.gui | GetScriptedGui('<имя>') без определения в common/scripted_guis (определены только financial_product_panel_ и world_currency_ в 09_ef_other.txt:1946,1971) | кнопки заголовков секций (клик без эффекта) |
+| Кнопки секций *_list_gerenation_ordered (25 вызовов, sgui не определены) | мёртвый | gui/00_ef_deported_gui_1.gui:184758; gui/ld_economy_panel.gui; gui/ld_cb_rate_panel.gui; gui/scripted_widgets/00_ef_custom_widgets.gui | GetScriptedGui('<имя>') без определения в common/scripted_guis (определён только world_currency_ в 09_ef_other.txt) | кнопки заголовков секций (клик без эффекта) |
 | Сортировка gdpg_sort_by_country_gdp (13 вызовов, sgui не определён) | мёртвый | gui/00_ef_deported_gui_1.gui; gui/ld_cb_rate_panel.gui | GetScriptedGui('gdpg_sort_by_country_gdp') без определения | кнопки сортировки таблиц |
 | je_meiji_restoration_get_faction_sgui (вызов без определения) | мёртвый | gui/states_panel.gui | имени нет в common/scripted_guis | — |
 | Дубль текстиконок texticons.gui ↔ 00_ef_texticons.gui | дубль | gui/texticons.gui; gui/00_ef_texticons.gui | 30 имён `icon =` объявлены в обоих файлах (2 повтора внутри 00_ef_texticons.gui); победитель — первый по имени (00_ef_texticons.gui) | иконки в тексте |
