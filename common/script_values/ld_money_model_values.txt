@@ -47,9 +47,13 @@ zz_ef_weeks_per_month = 4.333
 # The rate the model reads: the central bank's, else E&F's neutral 6.5%.
 zz_ef_money_rate = {
 	value = 0.065
+	# exists = this: history/buildings evaluates this in an empty scope (no variables there)
 	if = {
-		limit = { has_variable = base_rate_percentage }
-		value = var:base_rate_percentage
+		limit = { exists = this }
+		if = {
+			limit = { has_variable = base_rate_percentage }
+			value = var:base_rate_percentage
+		}
 	}
 	min = 0
 	max = 0.3

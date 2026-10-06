@@ -22042,98 +22042,109 @@ gdp_view_on_action_fc = {
 #####################################################################################################################################################
 
 central_bank_modifier = {
-	capital = {
-		save_scope_as = capital_scope
-	}
-	every_scope_state = { #historic_place jamais netoyer
+	# Modifiers read country variables that history/global sets after history/buildings: during the history
+	# call (initialize_historic_macro_facilities_bc) they are empty and the multipliers evaluate in an empty
+	# scope. The first monthly pulse (update_modifiers_bc_fc_ns) applies them.
+	if = {
+		limit = { has_variable = base_demande_currency_fix }
 		if = {
-			limit = {
-				has_modifier = central_bank_place
+			limit = { exists = capital }
+			capital = {
+				save_scope_as = capital_scope
 			}
-			remove_modifier = central_bank_place
 		}
-	}
-	scope:capital_scope = { #actualisation capital
-		#place
-		if = {
-			limit = {
-				not = {
+		every_scope_state = { #historic_place jamais netoyer
+			if = {
+				limit = {
 					has_modifier = central_bank_place
 				}
-			}
-			remove_modifier = central_bank_place
-			add_modifier = {
-				name = central_bank_place
+				remove_modifier = central_bank_place
 			}
 		}
-		#historic_place
-		if = {
+		scope:capital_scope ?= { #actualisation capital
+			#place
+			if = {
+				limit = {
+					not = {
+						has_modifier = central_bank_place
+					}
+				}
+				remove_modifier = central_bank_place
+				add_modifier = {
+					name = central_bank_place
+				}
+			}
+			#historic_place
+			if = {
+				limit = {
+					has_modifier = central_bank_place
+				}
+				remove_modifier = central_bank_historic_place
+				add_modifier = {
+					name = central_bank_historic_place
+				}
+			}
+		}
+		if = { #country - une seul fois
+			limit = {
+				any_scope_state = {
+					has_building = building_bank
+				}
+				# not  = {
+				# 	has_modifier = has_central_bank
+				# }
+			}
+			remove_modifier = has_central_bank
+			add_modifier = {
+				name = has_central_bank
+			}
+			remove_modifier = central_bank_metal_purchases
+			add_modifier = {
+				name = central_bank_metal_purchases
+				multiplier = central_bank_metal_purchases
+				months = 2
+			}
+		}
+		# if = { #country_already_central_bank -> defini avant notif joueur quand le pays a vraiment une bc
+		# 	limit = {
+		# 		# any_scope_state = {
+		# 		# 	has_building = building_bank
+		# 		# }
+		# 		has_building = building_bank
+		# 		not = {
+		# 			has_variable = country_already_central_bank
+		# 		}
+		# 	}
+		# 	set_variable = { name = country_already_central_bank }
+		# }
+
+	    every_scope_state = {
 			limit = {
 				has_modifier = central_bank_place
 			}
-			remove_modifier = central_bank_historic_place
-			add_modifier = {
-				name = central_bank_historic_place
-			}
-		}
-	}
-	if = { #country - une seul fois
-		limit = {
-			any_scope_state = {
-				has_building = building_bank
-			}
-			# not  = {
-			# 	has_modifier = has_central_bank
-			# }
-		}
-		remove_modifier = has_central_bank
-		add_modifier = {
-			name = has_central_bank
-		}
-		remove_modifier = central_bank_metal_purchases
-		add_modifier = {
-			name = central_bank_metal_purchases
-			multiplier = central_bank_metal_purchases
-			months = 2
-		}
-	}
-	# if = { #country_already_central_bank -> defini avant notif joueur quand le pays a vraiment une bc
-	# 	limit = {
-	# 		# any_scope_state = {
-	# 		# 	has_building = building_bank
-	# 		# }
-	# 		has_building = building_bank
-	# 		not = {
-	# 			has_variable = country_already_central_bank
-	# 		}
-	# 	}
-	# 	set_variable = { name = country_already_central_bank }
-	# }
-
-    every_scope_state = {
-		limit = {
-			has_modifier = central_bank_place
-		}
-		random_scope_building = {
-			limit = {
-				is_building_group = bg_bank
-			}
-			save_scope_as = central_bank_scope
+			random_scope_building = {
+				limit = {
+					is_building_group = bg_bank
+				}
+				save_scope_as = central_bank_scope
  
-			owner = {
-				central_bank_modifier_fixed_var = yes
-			}
+				owner = {
+					central_bank_modifier_fixed_var = yes
+				}
 
-			remove_modifier = currency_demande
-			add_modifier = {
-				name = currency_demande
-				multiplier = target_demand_currency_for_modifier
+				remove_modifier = currency_demande
+				add_modifier = {
+					name = currency_demande
+					multiplier = target_demand_currency_for_modifier
+				}
 			}
-		}
-	} 
+		} 
+	}
 }   
    
 financial_center_modifier = {
+	# root is empty during history/buildings; the country itself is saved for the fixed-var calls.
+	save_scope_as = financial_center_country
     every_scope_state = {
         if = {
             limit = {
@@ -22251,6 +22262,16 @@ financial_center_modifier = {
 					has_modifier = financial_center_place_spe
 				}
 				remove_modifier = financial_center_place_spe
+			}
+			# the multiplier reads var:gdp_view_fc in the state scope; the variable lives on the country
+			if = {
+				limit = {
+					scope:financial_center_country = { has_variable = gdp_view_fc }
+				}
+				set_variable = {
+					name = gdp_view_fc
+					value = scope:financial_center_country.var:gdp_view_fc
+				}
 			}
 			add_modifier = {
 				name = financial_center_place_spe
@@ -22426,7 +22447,7 @@ financial_center_modifier = {
 			}
 			save_scope_as = financial_center_scope
 
-			root = {
+			scope:financial_center_country = {
 				financial_center_modifier_fixed_var = yes
 			}
 
@@ -22502,7 +22523,7 @@ financial_center_modifier = {
 			}
 			save_scope_as = financial_center_scope
 
-			root = {
+			scope:financial_center_country = {
 				financial_center_modifier_fixed_var = yes
 			}
 
@@ -34400,6 +34421,7 @@ introduction_new_currency = {
 
 	if = {
 		limit = {
+			exists = capital
 			not = {
 				any_scope_state = {
 					has_building = building_bank
@@ -34411,7 +34433,7 @@ introduction_new_currency = {
 		capital = {
 			save_scope_as = central_bank_site
 		}
-		scope:central_bank_site = {
+		scope:central_bank_site ?= {
 			zz_ef_cm_create_owned_bank = { BANK_BLDG_TYPE = building_bank CB_SIZE = 5 }
 		}
 		central_bank_modifier = yes
@@ -34566,7 +34588,7 @@ introduction_of_dinar = {
 				name = circulating_dinar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dinar_state_1
 					add  = {
@@ -34653,7 +34675,7 @@ introduction_of_dinar = {
 				name = circulating_dinar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dinar_state_1
 					add  = {
@@ -34745,7 +34767,7 @@ introduction_of_dinar_algerian_dinar = {
 				name = circulating_dinar_algerian_dinar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dinar_algerian_dinar_state_1
 					add  = {
@@ -34832,7 +34854,7 @@ introduction_of_dinar_algerian_dinar = {
 				name = circulating_dinar_algerian_dinar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dinar_algerian_dinar_state_1
 					add  = {
@@ -34924,7 +34946,7 @@ introduction_of_dinar_iraqi_dinar = {
 				name = circulating_dinar_iraqi_dinar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dinar_iraqi_dinar_state_1
 					add  = {
@@ -35011,7 +35033,7 @@ introduction_of_dinar_iraqi_dinar = {
 				name = circulating_dinar_iraqi_dinar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dinar_iraqi_dinar_state_1
 					add  = {
@@ -35103,7 +35125,7 @@ introduction_of_dinar_libyan_dinar = {
 				name = circulating_dinar_libyan_dinar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dinar_libyan_dinar_state_1
 					add  = {
@@ -35190,7 +35212,7 @@ introduction_of_dinar_libyan_dinar = {
 				name = circulating_dinar_libyan_dinar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dinar_libyan_dinar_state_1
 					add  = {
@@ -35282,7 +35304,7 @@ introduction_of_dinar_moroccan_dirham = {
 				name = circulating_dinar_moroccan_dirham_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dinar_moroccan_dirham_state_1
 					add  = {
@@ -35369,7 +35391,7 @@ introduction_of_dinar_moroccan_dirham = {
 				name = circulating_dinar_moroccan_dirham_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dinar_moroccan_dirham_state_1
 					add  = {
@@ -35461,7 +35483,7 @@ introduction_of_dinar_omanian_rial = {
 				name = circulating_dinar_omanian_rial_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dinar_omanian_rial_state_1
 					add  = {
@@ -35548,7 +35570,7 @@ introduction_of_dinar_omanian_rial = {
 				name = circulating_dinar_omanian_rial_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dinar_omanian_rial_state_1
 					add  = {
@@ -35640,7 +35662,7 @@ introduction_of_dinar_qiran = {
 				name = circulating_dinar_qiran_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dinar_qiran_state_1
 					add  = {
@@ -35727,7 +35749,7 @@ introduction_of_dinar_qiran = {
 				name = circulating_dinar_qiran_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dinar_qiran_state_1
 					add  = {
@@ -35819,7 +35841,7 @@ introduction_of_dinar_saudi_riyal = {
 				name = circulating_dinar_saudi_riyal_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dinar_saudi_riyal_state_1
 					add  = {
@@ -35906,7 +35928,7 @@ introduction_of_dinar_saudi_riyal = {
 				name = circulating_dinar_saudi_riyal_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dinar_saudi_riyal_state_1
 					add  = {
@@ -35998,7 +36020,7 @@ introduction_of_dinar_serbian_dinar = {
 				name = circulating_dinar_serbian_dinar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dinar_serbian_dinar_state_1
 					add  = {
@@ -36085,7 +36107,7 @@ introduction_of_dinar_serbian_dinar = {
 				name = circulating_dinar_serbian_dinar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dinar_serbian_dinar_state_1
 					add  = {
@@ -36177,7 +36199,7 @@ introduction_of_dinar_tunisian_dinar = {
 				name = circulating_dinar_tunisian_dinar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dinar_tunisian_dinar_state_1
 					add  = {
@@ -36264,7 +36286,7 @@ introduction_of_dinar_tunisian_dinar = {
 				name = circulating_dinar_tunisian_dinar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dinar_tunisian_dinar_state_1
 					add  = {
@@ -36356,7 +36378,7 @@ introduction_of_dinar_yugoslav_dinar = {
 				name = circulating_dinar_yugoslav_dinar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dinar_yugoslav_dinar_state_1
 					add  = {
@@ -36443,7 +36465,7 @@ introduction_of_dinar_yugoslav_dinar = {
 				name = circulating_dinar_yugoslav_dinar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dinar_yugoslav_dinar_state_1
 					add  = {
@@ -36535,7 +36557,7 @@ introduction_of_dollar_australian_dollar = {
 				name = circulating_dollar_australian_dollar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dollar_australian_dollar_state_1
 					add  = {
@@ -36622,7 +36644,7 @@ introduction_of_dollar_australian_dollar = {
 				name = circulating_dollar_australian_dollar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dollar_australian_dollar_state_1
 					add  = {
@@ -36714,7 +36736,7 @@ introduction_of_dollar_canadian_dollar = {
 				name = circulating_dollar_canadian_dollar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dollar_canadian_dollar_state_1
 					add  = {
@@ -36801,7 +36823,7 @@ introduction_of_dollar_canadian_dollar = {
 				name = circulating_dollar_canadian_dollar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dollar_canadian_dollar_state_1
 					add  = {
@@ -36893,7 +36915,7 @@ introduction_of_dollar_caribbean_dollar = {
 				name = circulating_dollar_caribbean_dollar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dollar_caribbean_dollar_state_1
 					add  = {
@@ -36980,7 +37002,7 @@ introduction_of_dollar_caribbean_dollar = {
 				name = circulating_dollar_caribbean_dollar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dollar_caribbean_dollar_state_1
 					add  = {
@@ -37072,7 +37094,7 @@ introduction_of_dollar_confederate_states_dollar = {
 				name = circulating_dollar_confederate_states_dollar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dollar_confederate_states_dollar_state_1
 					add  = {
@@ -37159,7 +37181,7 @@ introduction_of_dollar_confederate_states_dollar = {
 				name = circulating_dollar_confederate_states_dollar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dollar_confederate_states_dollar_state_1
 					add  = {
@@ -37251,7 +37273,7 @@ introduction_of_dollar_liberian_dollar = {
 				name = circulating_dollar_liberian_dollar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dollar_liberian_dollar_state_1
 					add  = {
@@ -37338,7 +37360,7 @@ introduction_of_dollar_liberian_dollar = {
 				name = circulating_dollar_liberian_dollar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dollar_liberian_dollar_state_1
 					add  = {
@@ -37430,7 +37452,7 @@ introduction_of_dollar_new_zealand_dollar = {
 				name = circulating_dollar_new_zealand_dollar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dollar_new_zealand_dollar_state_1
 					add  = {
@@ -37517,7 +37539,7 @@ introduction_of_dollar_new_zealand_dollar = {
 				name = circulating_dollar_new_zealand_dollar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dollar_new_zealand_dollar_state_1
 					add  = {
@@ -37609,7 +37631,7 @@ introduction_of_dollar_sierra_leonean_dollar = {
 				name = circulating_dollar_sierra_leonean_dollar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dollar_sierra_leonean_dollar_state_1
 					add  = {
@@ -37696,7 +37718,7 @@ introduction_of_dollar_sierra_leonean_dollar = {
 				name = circulating_dollar_sierra_leonean_dollar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dollar_sierra_leonean_dollar_state_1
 					add  = {
@@ -37788,7 +37810,7 @@ introduction_of_dollar_united_states_dollar = {
 				name = circulating_dollar_united_states_dollar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dollar_united_states_dollar_state_1
 					add  = {
@@ -37875,7 +37897,7 @@ introduction_of_dollar_united_states_dollar = {
 				name = circulating_dollar_united_states_dollar_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_dollar_united_states_dollar_state_1
 					add  = {
@@ -37967,7 +37989,7 @@ introduction_of_eco_ariary = {
 				name = circulating_eco_ariary_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_eco_ariary_state_1
 					add  = {
@@ -38054,7 +38076,7 @@ introduction_of_eco_ariary = {
 				name = circulating_eco_ariary_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_eco_ariary_state_1
 					add  = {
@@ -38146,7 +38168,7 @@ introduction_of_eco_central_african_eco = {
 				name = circulating_eco_central_african_eco_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_eco_central_african_eco_state_1
 					add  = {
@@ -38233,7 +38255,7 @@ introduction_of_eco_central_african_eco = {
 				name = circulating_eco_central_african_eco_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_eco_central_african_eco_state_1
 					add  = {
@@ -38325,7 +38347,7 @@ introduction_of_eco_east_african_eco = {
 				name = circulating_eco_east_african_eco_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_eco_east_african_eco_state_1
 					add  = {
@@ -38412,7 +38434,7 @@ introduction_of_eco_east_african_eco = {
 				name = circulating_eco_east_african_eco_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_eco_east_african_eco_state_1
 					add  = {
@@ -38504,7 +38526,7 @@ introduction_of_eco_ethiopian_birr = {
 				name = circulating_eco_ethiopian_birr_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_eco_ethiopian_birr_state_1
 					add  = {
@@ -38591,7 +38613,7 @@ introduction_of_eco_ethiopian_birr = {
 				name = circulating_eco_ethiopian_birr_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_eco_ethiopian_birr_state_1
 					add  = {
@@ -38683,7 +38705,7 @@ introduction_of_eco_ghanaian_pound = {
 				name = circulating_eco_ghanaian_pound_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_eco_ghanaian_pound_state_1
 					add  = {
@@ -38770,7 +38792,7 @@ introduction_of_eco_ghanaian_pound = {
 				name = circulating_eco_ghanaian_pound_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_eco_ghanaian_pound_state_1
 					add  = {
@@ -38862,7 +38884,7 @@ introduction_of_eco_nigerian_naira = {
 				name = circulating_eco_nigerian_naira_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_eco_nigerian_naira_state_1
 					add  = {
@@ -38949,7 +38971,7 @@ introduction_of_eco_nigerian_naira = {
 				name = circulating_eco_nigerian_naira_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_eco_nigerian_naira_state_1
 					add  = {
@@ -39041,7 +39063,7 @@ introduction_of_eco_south_african_rand = {
 				name = circulating_eco_south_african_rand_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_eco_south_african_rand_state_1
 					add  = {
@@ -39128,7 +39150,7 @@ introduction_of_eco_south_african_rand = {
 				name = circulating_eco_south_african_rand_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_eco_south_african_rand_state_1
 					add  = {
@@ -39220,7 +39242,7 @@ introduction_of_eco_tuareg_ouguiya = {
 				name = circulating_eco_tuareg_ouguiya_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_eco_tuareg_ouguiya_state_1
 					add  = {
@@ -39307,7 +39329,7 @@ introduction_of_eco_tuareg_ouguiya = {
 				name = circulating_eco_tuareg_ouguiya_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_eco_tuareg_ouguiya_state_1
 					add  = {
@@ -39399,7 +39421,7 @@ introduction_of_eco_west_african_eco = {
 				name = circulating_eco_west_african_eco_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_eco_west_african_eco_state_1
 					add  = {
@@ -39486,7 +39508,7 @@ introduction_of_eco_west_african_eco = {
 				name = circulating_eco_west_african_eco_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_eco_west_african_eco_state_1
 					add  = {
@@ -39578,7 +39600,7 @@ introduction_of_franc_belgian_franc = {
 				name = circulating_franc_belgian_franc_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_franc_belgian_franc_state_1
 					add  = {
@@ -39665,7 +39687,7 @@ introduction_of_franc_belgian_franc = {
 				name = circulating_franc_belgian_franc_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_franc_belgian_franc_state_1
 					add  = {
@@ -39757,7 +39779,7 @@ introduction_of_franc_french_franc = {
 				name = circulating_franc_french_franc_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_franc_french_franc_state_1
 					add  = {
@@ -39844,7 +39866,7 @@ introduction_of_franc_french_franc = {
 				name = circulating_franc_french_franc_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_franc_french_franc_state_1
 					add  = {
@@ -39936,7 +39958,7 @@ introduction_of_franc_luxembourgish_franc = {
 				name = circulating_franc_luxembourgish_franc_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_franc_luxembourgish_franc_state_1
 					add  = {
@@ -40023,7 +40045,7 @@ introduction_of_franc_luxembourgish_franc = {
 				name = circulating_franc_luxembourgish_franc_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_franc_luxembourgish_franc_state_1
 					add  = {
@@ -40115,7 +40137,7 @@ introduction_of_franc_swiss_franc = {
 				name = circulating_franc_swiss_franc_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_franc_swiss_franc_state_1
 					add  = {
@@ -40202,7 +40224,7 @@ introduction_of_franc_swiss_franc = {
 				name = circulating_franc_swiss_franc_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_franc_swiss_franc_state_1
 					add  = {
@@ -40294,7 +40316,7 @@ introduction_of_gulden = {
 				name = circulating_gulden_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_gulden_state_1
 					add  = {
@@ -40381,7 +40403,7 @@ introduction_of_gulden = {
 				name = circulating_gulden_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_gulden_state_1
 					add  = {
@@ -40473,7 +40495,7 @@ introduction_of_gulden_bavarian_gulden = {
 				name = circulating_gulden_bavarian_gulden_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_gulden_bavarian_gulden_state_1
 					add  = {
@@ -40560,7 +40582,7 @@ introduction_of_gulden_bavarian_gulden = {
 				name = circulating_gulden_bavarian_gulden_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_gulden_bavarian_gulden_state_1
 					add  = {
@@ -40652,7 +40674,7 @@ introduction_of_gulden_florin = {
 				name = circulating_gulden_florin_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_gulden_florin_state_1
 					add  = {
@@ -40739,7 +40761,7 @@ introduction_of_gulden_florin = {
 				name = circulating_gulden_florin_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_gulden_florin_state_1
 					add  = {
@@ -40831,7 +40853,7 @@ introduction_of_gulden_hungarian_forint = {
 				name = circulating_gulden_hungarian_forint_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_gulden_hungarian_forint_state_1
 					add  = {
@@ -40918,7 +40940,7 @@ introduction_of_gulden_hungarian_forint = {
 				name = circulating_gulden_hungarian_forint_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_gulden_hungarian_forint_state_1
 					add  = {
@@ -41010,7 +41032,7 @@ introduction_of_gulden_indies_guilder = {
 				name = circulating_gulden_indies_guilder_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_gulden_indies_guilder_state_1
 					add  = {
@@ -41097,7 +41119,7 @@ introduction_of_gulden_indies_guilder = {
 				name = circulating_gulden_indies_guilder_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_gulden_indies_guilder_state_1
 					add  = {
@@ -41189,7 +41211,7 @@ introduction_of_gulden_south_german_gulden = {
 				name = circulating_gulden_south_german_gulden_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_gulden_south_german_gulden_state_1
 					add  = {
@@ -41276,7 +41298,7 @@ introduction_of_gulden_south_german_gulden = {
 				name = circulating_gulden_south_german_gulden_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_gulden_south_german_gulden_state_1
 					add  = {
@@ -41368,7 +41390,7 @@ introduction_of_krone_czech_koruna = {
 				name = circulating_krone_czech_koruna_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_krone_czech_koruna_state_1
 					add  = {
@@ -41455,7 +41477,7 @@ introduction_of_krone_czech_koruna = {
 				name = circulating_krone_czech_koruna_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_krone_czech_koruna_state_1
 					add  = {
@@ -41547,7 +41569,7 @@ introduction_of_krone_danish_krone = {
 				name = circulating_krone_danish_krone_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_krone_danish_krone_state_1
 					add  = {
@@ -41634,7 +41656,7 @@ introduction_of_krone_danish_krone = {
 				name = circulating_krone_danish_krone_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_krone_danish_krone_state_1
 					add  = {
@@ -41726,7 +41748,7 @@ introduction_of_krone_estonian_kroon = {
 				name = circulating_krone_estonian_kroon_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_krone_estonian_kroon_state_1
 					add  = {
@@ -41813,7 +41835,7 @@ introduction_of_krone_estonian_kroon = {
 				name = circulating_krone_estonian_kroon_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_krone_estonian_kroon_state_1
 					add  = {
@@ -41905,7 +41927,7 @@ introduction_of_krone_icelandic_krona = {
 				name = circulating_krone_icelandic_krona_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_krone_icelandic_krona_state_1
 					add  = {
@@ -41992,7 +42014,7 @@ introduction_of_krone_icelandic_krona = {
 				name = circulating_krone_icelandic_krona_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_krone_icelandic_krona_state_1
 					add  = {
@@ -42084,7 +42106,7 @@ introduction_of_krone_norwegian_krone = {
 				name = circulating_krone_norwegian_krone_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_krone_norwegian_krone_state_1
 					add  = {
@@ -42171,7 +42193,7 @@ introduction_of_krone_norwegian_krone = {
 				name = circulating_krone_norwegian_krone_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_krone_norwegian_krone_state_1
 					add  = {
@@ -42263,7 +42285,7 @@ introduction_of_krone_slovak_koruna = {
 				name = circulating_krone_slovak_koruna_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_krone_slovak_koruna_state_1
 					add  = {
@@ -42350,7 +42372,7 @@ introduction_of_krone_slovak_koruna = {
 				name = circulating_krone_slovak_koruna_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_krone_slovak_koruna_state_1
 					add  = {
@@ -42442,7 +42464,7 @@ introduction_of_krone_swedish_krona = {
 				name = circulating_krone_swedish_krona_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_krone_swedish_krona_state_1
 					add  = {
@@ -42529,7 +42551,7 @@ introduction_of_krone_swedish_krona = {
 				name = circulating_krone_swedish_krona_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_krone_swedish_krona_state_1
 					add  = {
@@ -42621,7 +42643,7 @@ introduction_of_leon_leu = {
 				name = circulating_leon_leu_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_leon_leu_state_1
 					add  = {
@@ -42708,7 +42730,7 @@ introduction_of_leon_leu = {
 				name = circulating_leon_leu_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_leon_leu_state_1
 					add  = {
@@ -42800,7 +42822,7 @@ introduction_of_leon_lev = {
 				name = circulating_leon_lev_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_leon_lev_state_1
 					add  = {
@@ -42887,7 +42909,7 @@ introduction_of_leon_lev = {
 				name = circulating_leon_lev_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_leon_lev_state_1
 					add  = {
@@ -42979,7 +43001,7 @@ introduction_of_lira = {
 				name = circulating_lira_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_lira_state_1
 					add  = {
@@ -43066,7 +43088,7 @@ introduction_of_lira = {
 				name = circulating_lira_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_lira_state_1
 					add  = {
@@ -43158,7 +43180,7 @@ introduction_of_lira_ducato = {
 				name = circulating_lira_ducato_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_lira_ducato_state_1
 					add  = {
@@ -43245,7 +43267,7 @@ introduction_of_lira_ducato = {
 				name = circulating_lira_ducato_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_lira_ducato_state_1
 					add  = {
@@ -43337,7 +43359,7 @@ introduction_of_lira_ottoman_lira = {
 				name = circulating_lira_ottoman_lira_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_lira_ottoman_lira_state_1
 					add  = {
@@ -43424,7 +43446,7 @@ introduction_of_lira_ottoman_lira = {
 				name = circulating_lira_ottoman_lira_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_lira_ottoman_lira_state_1
 					add  = {
@@ -43516,7 +43538,7 @@ introduction_of_lira_scudo_pontificio = {
 				name = circulating_lira_scudo_pontificio_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_lira_scudo_pontificio_state_1
 					add  = {
@@ -43603,7 +43625,7 @@ introduction_of_lira_scudo_pontificio = {
 				name = circulating_lira_scudo_pontificio_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_lira_scudo_pontificio_state_1
 					add  = {
@@ -43695,7 +43717,7 @@ introduction_of_lira_scudo_sardo = {
 				name = circulating_lira_scudo_sardo_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_lira_scudo_sardo_state_1
 					add  = {
@@ -43782,7 +43804,7 @@ introduction_of_lira_scudo_sardo = {
 				name = circulating_lira_scudo_sardo_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_lira_scudo_sardo_state_1
 					add  = {
@@ -43874,7 +43896,7 @@ introduction_of_lira_toscane_lira = {
 				name = circulating_lira_toscane_lira_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_lira_toscane_lira_state_1
 					add  = {
@@ -43961,7 +43983,7 @@ introduction_of_lira_toscane_lira = {
 				name = circulating_lira_toscane_lira_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_lira_toscane_lira_state_1
 					add  = {
@@ -44053,7 +44075,7 @@ introduction_of_mark = {
 				name = circulating_mark_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_mark_state_1
 					add  = {
@@ -44140,7 +44162,7 @@ introduction_of_mark = {
 				name = circulating_mark_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_mark_state_1
 					add  = {
@@ -44232,7 +44254,7 @@ introduction_of_mark_finnish_markka = {
 				name = circulating_mark_finnish_markka_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_mark_finnish_markka_state_1
 					add  = {
@@ -44319,7 +44341,7 @@ introduction_of_mark_finnish_markka = {
 				name = circulating_mark_finnish_markka_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_mark_finnish_markka_state_1
 					add  = {
@@ -44411,7 +44433,7 @@ introduction_of_peso = {
 				name = circulating_peso_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_state_1
 					add  = {
@@ -44498,7 +44520,7 @@ introduction_of_peso = {
 				name = circulating_peso_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_state_1
 					add  = {
@@ -44590,7 +44612,7 @@ introduction_of_peso_argentine_peso = {
 				name = circulating_peso_argentine_peso_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_argentine_peso_state_1
 					add  = {
@@ -44677,7 +44699,7 @@ introduction_of_peso_argentine_peso = {
 				name = circulating_peso_argentine_peso_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_argentine_peso_state_1
 					add  = {
@@ -44769,7 +44791,7 @@ introduction_of_peso_bolivien_peso = {
 				name = circulating_peso_bolivien_peso_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_bolivien_peso_state_1
 					add  = {
@@ -44856,7 +44878,7 @@ introduction_of_peso_bolivien_peso = {
 				name = circulating_peso_bolivien_peso_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_bolivien_peso_state_1
 					add  = {
@@ -44948,7 +44970,7 @@ introduction_of_peso_chilean_peso = {
 				name = circulating_peso_chilean_peso_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_chilean_peso_state_1
 					add  = {
@@ -45035,7 +45057,7 @@ introduction_of_peso_chilean_peso = {
 				name = circulating_peso_chilean_peso_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_chilean_peso_state_1
 					add  = {
@@ -45127,7 +45149,7 @@ introduction_of_peso_colombian_peso = {
 				name = circulating_peso_colombian_peso_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_colombian_peso_state_1
 					add  = {
@@ -45214,7 +45236,7 @@ introduction_of_peso_colombian_peso = {
 				name = circulating_peso_colombian_peso_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_colombian_peso_state_1
 					add  = {
@@ -45306,7 +45328,7 @@ introduction_of_peso_costa_rican_colon = {
 				name = circulating_peso_costa_rican_colon_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_costa_rican_colon_state_1
 					add  = {
@@ -45393,7 +45415,7 @@ introduction_of_peso_costa_rican_colon = {
 				name = circulating_peso_costa_rican_colon_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_costa_rican_colon_state_1
 					add  = {
@@ -45485,7 +45507,7 @@ introduction_of_peso_cuban_peso = {
 				name = circulating_peso_cuban_peso_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_cuban_peso_state_1
 					add  = {
@@ -45572,7 +45594,7 @@ introduction_of_peso_cuban_peso = {
 				name = circulating_peso_cuban_peso_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_cuban_peso_state_1
 					add  = {
@@ -45664,7 +45686,7 @@ introduction_of_peso_ecuadorian_peso = {
 				name = circulating_peso_ecuadorian_peso_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_ecuadorian_peso_state_1
 					add  = {
@@ -45751,7 +45773,7 @@ introduction_of_peso_ecuadorian_peso = {
 				name = circulating_peso_ecuadorian_peso_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_ecuadorian_peso_state_1
 					add  = {
@@ -45843,7 +45865,7 @@ introduction_of_peso_el_salvador_colon = {
 				name = circulating_peso_el_salvador_colon_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_el_salvador_colon_state_1
 					add  = {
@@ -45930,7 +45952,7 @@ introduction_of_peso_el_salvador_colon = {
 				name = circulating_peso_el_salvador_colon_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_el_salvador_colon_state_1
 					add  = {
@@ -46022,7 +46044,7 @@ introduction_of_peso_guatemalan_quetzal = {
 				name = circulating_peso_guatemalan_quetzal_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_guatemalan_quetzal_state_1
 					add  = {
@@ -46109,7 +46131,7 @@ introduction_of_peso_guatemalan_quetzal = {
 				name = circulating_peso_guatemalan_quetzal_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_guatemalan_quetzal_state_1
 					add  = {
@@ -46201,7 +46223,7 @@ introduction_of_peso_honduran_lempira = {
 				name = circulating_peso_honduran_lempira_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_honduran_lempira_state_1
 					add  = {
@@ -46288,7 +46310,7 @@ introduction_of_peso_honduran_lempira = {
 				name = circulating_peso_honduran_lempira_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_honduran_lempira_state_1
 					add  = {
@@ -46380,7 +46402,7 @@ introduction_of_peso_mexican_peso = {
 				name = circulating_peso_mexican_peso_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_mexican_peso_state_1
 					add  = {
@@ -46467,7 +46489,7 @@ introduction_of_peso_mexican_peso = {
 				name = circulating_peso_mexican_peso_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_mexican_peso_state_1
 					add  = {
@@ -46559,7 +46581,7 @@ introduction_of_peso_nicaraguan_cordoba = {
 				name = circulating_peso_nicaraguan_cordoba_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_nicaraguan_cordoba_state_1
 					add  = {
@@ -46646,7 +46668,7 @@ introduction_of_peso_nicaraguan_cordoba = {
 				name = circulating_peso_nicaraguan_cordoba_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_nicaraguan_cordoba_state_1
 					add  = {
@@ -46738,7 +46760,7 @@ introduction_of_peso_paraguayan_peso = {
 				name = circulating_peso_paraguayan_peso_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_paraguayan_peso_state_1
 					add  = {
@@ -46825,7 +46847,7 @@ introduction_of_peso_paraguayan_peso = {
 				name = circulating_peso_paraguayan_peso_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_paraguayan_peso_state_1
 					add  = {
@@ -46917,7 +46939,7 @@ introduction_of_peso_philippine_peso = {
 				name = circulating_peso_philippine_peso_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_philippine_peso_state_1
 					add  = {
@@ -47004,7 +47026,7 @@ introduction_of_peso_philippine_peso = {
 				name = circulating_peso_philippine_peso_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_philippine_peso_state_1
 					add  = {
@@ -47096,7 +47118,7 @@ introduction_of_peso_sol_de_oro = {
 				name = circulating_peso_sol_de_oro_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_sol_de_oro_state_1
 					add  = {
@@ -47183,7 +47205,7 @@ introduction_of_peso_sol_de_oro = {
 				name = circulating_peso_sol_de_oro_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_sol_de_oro_state_1
 					add  = {
@@ -47275,7 +47297,7 @@ introduction_of_peso_uruguayan_peso = {
 				name = circulating_peso_uruguayan_peso_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_uruguayan_peso_state_1
 					add  = {
@@ -47362,7 +47384,7 @@ introduction_of_peso_uruguayan_peso = {
 				name = circulating_peso_uruguayan_peso_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_uruguayan_peso_state_1
 					add  = {
@@ -47454,7 +47476,7 @@ introduction_of_peso_venezuelan_peso = {
 				name = circulating_peso_venezuelan_peso_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_venezuelan_peso_state_1
 					add  = {
@@ -47541,7 +47563,7 @@ introduction_of_peso_venezuelan_peso = {
 				name = circulating_peso_venezuelan_peso_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_peso_venezuelan_peso_state_1
 					add  = {
@@ -47633,7 +47655,7 @@ introduction_of_pound_egyptian_pound = {
 				name = circulating_pound_egyptian_pound_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_pound_egyptian_pound_state_1
 					add  = {
@@ -47720,7 +47742,7 @@ introduction_of_pound_egyptian_pound = {
 				name = circulating_pound_egyptian_pound_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_pound_egyptian_pound_state_1
 					add  = {
@@ -47812,7 +47834,7 @@ introduction_of_pound_irish_pound = {
 				name = circulating_pound_irish_pound_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_pound_irish_pound_state_1
 					add  = {
@@ -47899,7 +47921,7 @@ introduction_of_pound_irish_pound = {
 				name = circulating_pound_irish_pound_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_pound_irish_pound_state_1
 					add  = {
@@ -47991,7 +48013,7 @@ introduction_of_pound_sterling = {
 				name = circulating_pound_sterling_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_pound_sterling_state_1
 					add  = {
@@ -48078,7 +48100,7 @@ introduction_of_pound_sterling = {
 				name = circulating_pound_sterling_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_pound_sterling_state_1
 					add  = {
@@ -48170,7 +48192,7 @@ introduction_of_real = {
 				name = circulating_real_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_real_state_1
 					add  = {
@@ -48257,7 +48279,7 @@ introduction_of_real = {
 				name = circulating_real_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_real_state_1
 					add  = {
@@ -48349,7 +48371,7 @@ introduction_of_real_brazilian_real = {
 				name = circulating_real_brazilian_real_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_real_brazilian_real_state_1
 					add  = {
@@ -48436,7 +48458,7 @@ introduction_of_real_brazilian_real = {
 				name = circulating_real_brazilian_real_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_real_brazilian_real_state_1
 					add  = {
@@ -48528,7 +48550,7 @@ introduction_of_rupee_indian_rupee = {
 				name = circulating_rupee_indian_rupee_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_rupee_indian_rupee_state_1
 					add  = {
@@ -48615,7 +48637,7 @@ introduction_of_rupee_indian_rupee = {
 				name = circulating_rupee_indian_rupee_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_rupee_indian_rupee_state_1
 					add  = {
@@ -48707,7 +48729,7 @@ introduction_of_rupee_indonesian_rupiah = {
 				name = circulating_rupee_indonesian_rupiah_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_rupee_indonesian_rupiah_state_1
 					add  = {
@@ -48794,7 +48816,7 @@ introduction_of_rupee_indonesian_rupiah = {
 				name = circulating_rupee_indonesian_rupiah_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_rupee_indonesian_rupiah_state_1
 					add  = {
@@ -48886,7 +48908,7 @@ introduction_of_spe_baht = {
 				name = circulating_spe_baht_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_spe_baht_state_1
 					add  = {
@@ -48973,7 +48995,7 @@ introduction_of_spe_baht = {
 				name = circulating_spe_baht_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_spe_baht_state_1
 					add  = {
@@ -49065,7 +49087,7 @@ introduction_of_spe_dong = {
 				name = circulating_spe_dong_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_spe_dong_state_1
 					add  = {
@@ -49152,7 +49174,7 @@ introduction_of_spe_dong = {
 				name = circulating_spe_dong_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_spe_dong_state_1
 					add  = {
@@ -49244,7 +49266,7 @@ introduction_of_spe_drachma = {
 				name = circulating_spe_drachma_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_spe_drachma_state_1
 					add  = {
@@ -49331,7 +49353,7 @@ introduction_of_spe_drachma = {
 				name = circulating_spe_drachma_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_spe_drachma_state_1
 					add  = {
@@ -49423,7 +49445,7 @@ introduction_of_spe_korean_won = {
 				name = circulating_spe_korean_won_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_spe_korean_won_state_1
 					add  = {
@@ -49510,7 +49532,7 @@ introduction_of_spe_korean_won = {
 				name = circulating_spe_korean_won_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_spe_korean_won_state_1
 					add  = {
@@ -49602,7 +49624,7 @@ introduction_of_spe_latvian_lats = {
 				name = circulating_spe_latvian_lats_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_spe_latvian_lats_state_1
 					add  = {
@@ -49689,7 +49711,7 @@ introduction_of_spe_latvian_lats = {
 				name = circulating_spe_latvian_lats_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_spe_latvian_lats_state_1
 					add  = {
@@ -49781,7 +49803,7 @@ introduction_of_spe_lithuanian_litas = {
 				name = circulating_spe_lithuanian_litas_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_spe_lithuanian_litas_state_1
 					add  = {
@@ -49868,7 +49890,7 @@ introduction_of_spe_lithuanian_litas = {
 				name = circulating_spe_lithuanian_litas_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_spe_lithuanian_litas_state_1
 					add  = {
@@ -49960,7 +49982,7 @@ introduction_of_spe_peseta = {
 				name = circulating_spe_peseta_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_spe_peseta_state_1
 					add  = {
@@ -50047,7 +50069,7 @@ introduction_of_spe_peseta = {
 				name = circulating_spe_peseta_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_spe_peseta_state_1
 					add  = {
@@ -50139,7 +50161,7 @@ introduction_of_spe_ruble = {
 				name = circulating_spe_ruble_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_spe_ruble_state_1
 					add  = {
@@ -50226,7 +50248,7 @@ introduction_of_spe_ruble = {
 				name = circulating_spe_ruble_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_spe_ruble_state_1
 					add  = {
@@ -50318,7 +50340,7 @@ introduction_of_spe_uni = {
 				name = circulating_spe_uni_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_spe_uni_state_1
 					add  = {
@@ -50405,7 +50427,7 @@ introduction_of_spe_uni = {
 				name = circulating_spe_uni_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_spe_uni_state_1
 					add  = {
@@ -50497,7 +50519,7 @@ introduction_of_spe_yen = {
 				name = circulating_spe_yen_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_spe_yen_state_1
 					add  = {
@@ -50584,7 +50606,7 @@ introduction_of_spe_yen = {
 				name = circulating_spe_yen_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_spe_yen_state_1
 					add  = {
@@ -50676,7 +50698,7 @@ introduction_of_spe_yuan = {
 				name = circulating_spe_yuan_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_spe_yuan_state_1
 					add  = {
@@ -50763,7 +50785,7 @@ introduction_of_spe_yuan = {
 				name = circulating_spe_yuan_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_spe_yuan_state_1
 					add  = {
@@ -50855,7 +50877,7 @@ introduction_of_spe_zloti = {
 				name = circulating_spe_zloti_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_spe_zloti_state_1
 					add  = {
@@ -50942,7 +50964,7 @@ introduction_of_spe_zloti = {
 				name = circulating_spe_zloti_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_spe_zloti_state_1
 					add  = {
@@ -51034,7 +51056,7 @@ introduction_of_thaler_hannoveraner_thaler = {
 				name = circulating_thaler_hannoveraner_thaler_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_thaler_hannoveraner_thaler_state_1
 					add  = {
@@ -51121,7 +51143,7 @@ introduction_of_thaler_hannoveraner_thaler = {
 				name = circulating_thaler_hannoveraner_thaler_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_thaler_hannoveraner_thaler_state_1
 					add  = {
@@ -51213,7 +51235,7 @@ introduction_of_thaler_prussian_thaler = {
 				name = circulating_thaler_prussian_thaler_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_thaler_prussian_thaler_state_1
 					add  = {
@@ -51300,7 +51322,7 @@ introduction_of_thaler_prussian_thaler = {
 				name = circulating_thaler_prussian_thaler_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_thaler_prussian_thaler_state_1
 					add  = {
@@ -51392,7 +51414,7 @@ introduction_of_thaler_saxon_thaler = {
 				name = circulating_thaler_saxon_thaler_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_thaler_saxon_thaler_state_1
 					add  = {
@@ -51479,7 +51501,7 @@ introduction_of_thaler_saxon_thaler = {
 				name = circulating_thaler_saxon_thaler_c_var_1
 				add = { 50000009 100000009 }
 			}
-			scope:central_bank_site = {
+			scope:central_bank_site ?= {
 				change_variable = {
 					name = stockpiling_thaler_saxon_thaler_state_1
 					add  = {

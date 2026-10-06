@@ -1029,7 +1029,10 @@ macro_facilities_on_action_fc_limit = {
 		is_player = yes
 	}
 	or = {
-		var:gdp_view >= 1 #AI que à partir de 5M  GDP
+		AND = {
+			has_variable = gdp_view
+			var:gdp_view >= 1 #AI que à partir de 5M  GDP
+		}
 		country_already_financial_center = yes
 		is_player = yes
 	}
@@ -5573,46 +5576,46 @@ is_monetary_systeme_transition_valid_country_to_bimetalisme = {
 			money_value_silver_standard_in_gold <= money_value_bimetallism_standard_in_gold #shunt la  -> non en fait
 			NOT = {
 				OR = {
-					this = c:SER ?= this
-					this = c:CAN ?= this
-					this = c:USA ?= this
-					this = c:BEL ?= this
-					this = c:FRA ?= this
-					this = c:SWI ?= this
-					this = c:AUS ?= this
-					this = c:BAV ?= this
-					this = c:NET ?= this
-					this = c:DEN ?= this
-					this = c:NOR ?= this
-					this = c:SWE ?= this
-					this = c:ROU ?= this
-					this = c:BUL ?= this
-					this = c:ITA ?= this
-					this = c:TUR ?= this
-					this = c:GER ?= this
-					this = c:ARG ?= this
-					this = c:BOL ?= this
-					this = c:CHL ?= this
-					this = c:CLM ?= this
-					this = c:COS ?= this
-					this = c:CUB ?= this
-					this = c:ECU ?= this
-					this = c:ELS ?= this
-					this = c:GUA ?= this
-					this = c:HON ?= this
-					this = c:MEX ?= this
-					this = c:NIC ?= this
-					this = c:PRG ?= this
-					this = c:PHI ?= this
-					this = c:PER ?= this
-					this = c:URU ?= this
-					this = c:VNZ ?= this
-					this = c:GBR ?= this
-					this = c:POR ?= this
-					this = c:BRZ ?= this
-					this = c:SPA ?= this
-					this = c:RUS ?= this
-					this = c:JAP ?= this
+					c:SER ?= this
+					c:CAN ?= this
+					c:USA ?= this
+					c:BEL ?= this
+					c:FRA ?= this
+					c:SWI ?= this
+					c:AUS ?= this
+					c:BAV ?= this
+					c:NET ?= this
+					c:DEN ?= this
+					c:NOR ?= this
+					c:SWE ?= this
+					c:ROU ?= this
+					c:BUL ?= this
+					c:ITA ?= this
+					c:TUR ?= this
+					c:GER ?= this
+					c:ARG ?= this
+					c:BOL ?= this
+					c:CHL ?= this
+					c:CLM ?= this
+					c:COS ?= this
+					c:CUB ?= this
+					c:ECU ?= this
+					c:ELS ?= this
+					c:GUA ?= this
+					c:HON ?= this
+					c:MEX ?= this
+					c:NIC ?= this
+					c:PRG ?= this
+					c:PHI ?= this
+					c:PER ?= this
+					c:URU ?= this
+					c:VNZ ?= this
+					c:GBR ?= this
+					c:POR ?= this
+					c:BRZ ?= this
+					c:SPA ?= this
+					c:RUS ?= this
+					c:JAP ?= this
 
 					has_law = law_type:law_peso_bolivien_peso_currency
 					has_law = law_type:law_peso_sol_de_oro_currency
@@ -5623,17 +5626,17 @@ is_monetary_systeme_transition_valid_country_to_bimetalisme = {
 	}
 	not = { #ne passeron jamais au dessus du silver
 		OR = {
-			this = c:SIC ?= this
-			this = c:PAP ?= this
-			this = c:SAR ?= this
-			this = c:PAR ?= this
-			this = c:MOD ?= this
-			this = c:TUS ?= this
-			this = c:CHI ?= this
-			this = c:MEX ?= this
-			this = c:PRU ?= this
-			this = c:HAN ?= this
-			this = c:SAX ?= this
+			c:SIC ?= this
+			c:PAP ?= this
+			c:SAR ?= this
+			c:PAR ?= this
+			c:MOD ?= this
+			c:TUS ?= this
+			c:CHI ?= this
+			c:MEX ?= this
+			c:PRU ?= this
+			c:HAN ?= this
+			c:SAX ?= this
 
 			# this = c:GER ?= this
 			# this = c:ITA ?= this
@@ -5649,14 +5652,14 @@ is_monetary_systeme_transition_valid_country_to_gold = {
 		AND = {
 			has_law = law_type:law_silver_standard #money_value_bimetallism_standard_in_gold <= money_value_gold_standard -> donc il sont obligé de dépssé la datte
 			OR = { #il invalid directement
-				this = c:GBR ?= this
-				this = c:AUS ?= this
-				this = c:DEN ?= this
-				this = c:SWE ?= this
-				this = c:NOR ?= this
-				this = c:RUS ?= this
-				this = c:GER ?= this
-				this = c:ITA ?= this
+				c:GBR ?= this
+				c:AUS ?= this
+				c:DEN ?= this
+				c:SWE ?= this
+				c:NOR ?= this
+				c:RUS ?= this
+				c:GER ?= this
+				c:ITA ?= this
 			}
 		}
 	}
@@ -5665,47 +5668,47 @@ is_monetary_systeme_transition_valid_country_to_gold = {
 			money_value_bimetallism_standard_in_gold <= money_value_gold_standard
 			NOT = {
 				OR = {
-					this = c:SER ?= this
-					this = c:CAN ?= this
-					this = c:USA ?= this
-					this = c:BEL ?= this
-					this = c:FRA ?= this
-					this = c:SWI ?= this
-					this = c:AUS ?= this
-					this = c:BAV ?= this
-					this = c:NET ?= this
-					this = c:DEN ?= this
-					this = c:NOR ?= this
-					this = c:SWE ?= this
-					this = c:ROU ?= this
-					this = c:BUL ?= this
-					this = c:ITA ?= this
-					this = c:TUR ?= this
-					this = c:GER ?= this
-					this = c:ARG ?= this
-					this = c:BOL ?= this
-					this = c:CHL ?= this
-					this = c:CLM ?= this
-					this = c:COS ?= this
-					this = c:CUB ?= this
-					this = c:ECU ?= this
-					this = c:ELS ?= this
-					this = c:GUA ?= this
-					this = c:HON ?= this
-					this = c:MEX ?= this
-					this = c:NIC ?= this
-					this = c:PRG ?= this
-					this = c:PHI ?= this
-					this = c:PER ?= this
-					this = c:URU ?= this
-					this = c:VNZ ?= this
-					this = c:GBR ?= this
-					this = c:POR ?= this
-					this = c:BRZ ?= this
-					this = c:SPA ?= this
-					this = c:RUS ?= this
-					this = c:JAP ?= this
-					this = c:GRE ?= this
+					c:SER ?= this
+					c:CAN ?= this
+					c:USA ?= this
+					c:BEL ?= this
+					c:FRA ?= this
+					c:SWI ?= this
+					c:AUS ?= this
+					c:BAV ?= this
+					c:NET ?= this
+					c:DEN ?= this
+					c:NOR ?= this
+					c:SWE ?= this
+					c:ROU ?= this
+					c:BUL ?= this
+					c:ITA ?= this
+					c:TUR ?= this
+					c:GER ?= this
+					c:ARG ?= this
+					c:BOL ?= this
+					c:CHL ?= this
+					c:CLM ?= this
+					c:COS ?= this
+					c:CUB ?= this
+					c:ECU ?= this
+					c:ELS ?= this
+					c:GUA ?= this
+					c:HON ?= this
+					c:MEX ?= this
+					c:NIC ?= this
+					c:PRG ?= this
+					c:PHI ?= this
+					c:PER ?= this
+					c:URU ?= this
+					c:VNZ ?= this
+					c:GBR ?= this
+					c:POR ?= this
+					c:BRZ ?= this
+					c:SPA ?= this
+					c:RUS ?= this
+					c:JAP ?= this
+					c:GRE ?= this
 				}
 			}
 		}

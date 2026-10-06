@@ -1,4 +1,4 @@
-############################################################################################################################################################
+﻿############################################################################################################################################################
 ############################################################################################################################################################
 ############################################################################################################################################################
 ############################################################################################################################################################
@@ -6119,8 +6119,12 @@ central_bank_metal_reserves_state_to_ensure_the_conversion = {
 }
 
 central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent = {
-	value = national_capacity #central_bank_reserves
-	divide = central_bank_metal_reserves_state_to_ensure_the_conversion
+	value = 0
+	if = {
+		limit = { central_bank_metal_reserves_state_to_ensure_the_conversion > 0 }
+		value = national_capacity #central_bank_reserves
+		divide = central_bank_metal_reserves_state_to_ensure_the_conversion
+	}
 }
 
 ############
@@ -6812,21 +6816,30 @@ money_value_target_pre_set = {
 			has_law = law_type:law_silver_standard
 			has_law = law_type:law_bimetallic_ratio_no
 		}
-		add = var:money_value_target_1_silver
+		if = {
+			limit = { has_variable = money_value_target_1_silver }
+			add = var:money_value_target_1_silver
+		}
 	}
 	if = {
 		limit = {
 			has_law = law_type:law_bimetallism_standard
 			has_law = law_type:law_bimetallic_ratio_15
 		}
-		add = var:money_value_target_1_bimetallic
+		if = {
+			limit = { has_variable = money_value_target_1_bimetallic }
+			add = var:money_value_target_1_bimetallic
+		}
 	}
 	if = {
 		limit = {
 			has_law = law_type:law_gold_standard
 			has_law = law_type:law_bimetallic_ratio_no
 		}
-		add = var:money_value_target_1_gold
+		if = {
+			limit = { has_variable = money_value_target_1_gold }
+			add = var:money_value_target_1_gold
+		}
 	}
 }
 

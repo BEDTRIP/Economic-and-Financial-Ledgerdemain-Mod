@@ -84,6 +84,7 @@ REPLACE:central_banking = {
 				or = {
 					is_valid_country = yes 
 					AND = { 
+						has_variable = gdp_view
 						var:gdp_view >= 1 #AI que à partir de 5M  GDP
 						NOT = {
 							c:JAP ?= this # JAP is valided by is_valid_country 

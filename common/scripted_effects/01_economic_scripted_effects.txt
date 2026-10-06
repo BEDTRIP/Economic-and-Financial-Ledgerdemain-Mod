@@ -39111,7 +39111,10 @@ set_reset_monetary_system_status = {
 on_activate_monetary_system_law = {
 	if = {
 		limit = {
-			var:extreme_weak_currency_solution_count = 0
+			OR = {
+				NOT = { has_variable = extreme_weak_currency_solution_count }
+				var:extreme_weak_currency_solution_count = 0
+			}
 		}
 		zz_ef_std_switch_before = yes
 		money_value_target_pre_set = yes
