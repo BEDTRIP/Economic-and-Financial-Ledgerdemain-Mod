@@ -993,7 +993,7 @@ flowcontainer = {
 
 							textbox = {
 								autoresize = yes
-								text = "#T [GetPlayer.GetCustom('monetary_system_icon')]#!"
+								raw_text = "#T [GetPlayer.GetCustom('monetary_system_icon')]#!"
 								align = hcenter
 								parentanchor = hcenter
 								fontsize = 20
@@ -1001,7 +1001,7 @@ flowcontainer = {
 
 							textbox = {
 								autoresize = yes
-								text = "#T [GetPlayer.GetCustom('monetary_system_name')]#!"
+								raw_text = "#T [GetPlayer.GetCustom('monetary_system_name')]#!"
 								align = hcenter
 								parentanchor = hcenter
 								fontsize = 20
@@ -1031,7 +1031,7 @@ flowcontainer = {
 							}
 							textbox = {
 								autoresize = yes
-								text = "#T [GetPlayer.GetCustom('modifier_currency_value')]#!"
+								raw_text = "#T [GetPlayer.GetCustom('modifier_currency_value')]#!"
 								align = hcenter
 								parentanchor = hcenter
 								fontsize = 20
@@ -1089,7 +1089,7 @@ flowcontainer = {
 								parentanchor = hcenter
 
 								textbox = {
-									text = "#v New [GetPlayer.GetCustom('currency_name')]#! [GetPlayer.GetCustom('currency_good')]#!"
+									raw_text = "#v New [GetPlayer.GetCustom('currency_name')]#! [GetPlayer.GetCustom('currency_good')]#!"
 
 									parentanchor = hcenter
 									align = hcenter|nobaseline
@@ -1102,7 +1102,7 @@ flowcontainer = {
 									ignoreinvisible = yes
 								}
 								textbox = {
-									text = "1 [GetPlayer.GetCustom('currency_ISO_4217')] ([GetPlayer.GetCustom('currency_symbol')]) = [GetPlayer.MakeScope.ScriptValue('money_value_prevision_new_currency')|D] @silver!"
+									raw_text = "1 [GetPlayer.GetCustom('currency_ISO_4217')] ([GetPlayer.GetCustom('currency_symbol')]) = [GetPlayer.MakeScope.ScriptValue('money_value_prevision_new_currency')|D] @silver!"
 
 									parentanchor = hcenter
 									align = hcenter|nobaseline
@@ -1115,7 +1115,7 @@ flowcontainer = {
 									ignoreinvisible = yes
 								}
 								textbox = {
-									text = "(1 [GetPlayer.GetCustom('currency_ISO_4217')] ([GetPlayer.GetCustom('currency_symbol')]) = [GetPlayer.MakeScope.ScriptValue('money_value_prevision_new_currency_in_gold')|D] @gold!)"
+									raw_text = "(1 [GetPlayer.GetCustom('currency_ISO_4217')] ([GetPlayer.GetCustom('currency_symbol')]) = [GetPlayer.MakeScope.ScriptValue('money_value_prevision_new_currency_in_gold')|D] @gold!)"
 
 									parentanchor = hcenter
 									align = hcenter|nobaseline

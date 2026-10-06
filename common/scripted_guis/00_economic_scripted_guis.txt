@@ -1,4 +1,4 @@
-################################################################################################################################################################
+﻿################################################################################################################################################################
 ################################################################################################################################################################
 ################################################################################################################################################################
 ################################################################################################################################################################
@@ -101,7 +101,7 @@ stockpiling_central_bank_metal_reserves_state_transfert = {
 }
 looting_state_button = { #enemy_capital_is_occuped_gui
 	is_valid = {
-		save_scope_as = occupied_capital
+		save_temporary_scope_as = occupied_capital
 		owner = {
 			is_at_war = yes
 			has_war_with = player
@@ -1111,7 +1111,7 @@ currency_introduction = {
 		has_central_bank_FS_NISO = yes #un  pays  en  fiat  standart  à cause  d'une première  crise ne refera pas de crise en boucle, il sera bloqué en fiat  standart
 		not = {
 			or = {
-				has_modifier = economic_instability_country
+				#has_modifier = economic_instability_country # модификатора нет
 				has_modifier = currency_crisis_country
 				has_modifier = central_bank_bankruptcy_country
 				has_modifier = financial_crash_country

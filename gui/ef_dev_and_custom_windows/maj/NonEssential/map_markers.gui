@@ -3774,8 +3774,8 @@ container = {
 						parentanchor = center
 						size = { 40 40 }
 						onclick = "[InformationPanelBar.OpenSeaRegionPanelTab(NavalMissionMarker.GetProvince.Self, 'navy')]"
-						onrightclick = "[RightClickMenuManager.ToggleFleetsOnMissionInSeaRegion(NavalMissionMarker.Self, NavalMissionType.Self, PdxGuiWidget.AccessSelf, 'fleets_on_mission_in_sea_region')]"
-						tooltip = "NAVAL_MISSION_MARKER_TOOLTIP"
+						onrightclick = "[RightClickMenuManager.ToggleFleetsOnMissionInSeaRegion(NavalMissionMarker.Self, NavalMissionType.Self, PdxGuiWidget.AccessSelf)]"
+						#tooltip = "NAVAL_MISSION_MARKER_TOOLTIP" # ключа локализации нет
 						alpha = "[Select_float(NavalMissionMarker.AreAllFleetsOnMissionTypeRecalledForRepairs(NavalMissionType.Self),'(float)0.5','(float)1.0')]"
 
 						state = {
