@@ -1,0 +1,152 @@
+# из common/production_methods/00_ef_market_liquidity.txt, строки 67–149 (на 6.10.2026), 5 PM `pm_government_aid_*` (военные заказы; ни в одной PMG)
+pm_government_aid_building_arms_industry_0 = {
+	texture = "gfx/interface/icons/production_method_icons/government_run.dds"
+
+	unlocking_technologies = {
+		breech_loading_artillery
+	}
+
+	unlocking_laws = {
+		law_mass_conscription
+	}
+
+	building_modifiers = {
+		workforce_scaled = {
+			# input goods
+			goods_input_war_bond_add = 1
+
+			# output goods
+			goods_output_artillery_add = 40
+		}
+
+		level_scaled = {
+			building_employment_machinists_add = 500
+			building_employment_engineers_add = 500
+		}
+	}
+}
+pm_government_aid_building_arms_industry_1 = {
+	texture = "gfx/interface/icons/production_method_icons/government_run.dds"
+
+	unlocking_technologies = {
+		bolt_action_rifles
+	}
+
+	unlocking_laws = {
+		law_mass_conscription
+	}
+
+	building_modifiers = {
+		workforce_scaled = {
+			# input goods
+			goods_input_war_bond_add = 1
+
+			# output goods
+			goods_output_small_arms_add = 75
+		}
+
+		level_scaled = {
+			# employment
+			building_employment_laborers_add = 1000
+			building_employment_machinists_add = 2000
+			building_employment_engineers_add = 1500
+		}
+	}
+}
+pm_government_aid_building_munition_industry = {
+	texture = "gfx/interface/icons/production_method_icons/government_run.dds"
+
+	unlocking_technologies = {
+	}
+
+	unlocking_laws = {
+		law_mass_conscription
+	}
+
+	pollution_generation = 15
+
+	building_modifiers = {
+		workforce_scaled = {
+			# input goods
+			goods_input_war_bond_add = 1
+
+			# output goods
+			goods_output_ammunition_add = 90
+		}
+
+
+		level_scaled = {
+			building_employment_laborers_add = 2000
+			building_employment_machinists_add = 1500
+			building_employment_engineers_add = 1000
+		}
+	}
+}
+# из common/production_methods/00_ef_market_liquidity.txt, строки 175–238 (на 6.10.2026), 5 PM `pm_government_aid_*` (военные заказы; ни в одной PMG)
+pm_government_aid_building_tank_industry = {
+	texture = "gfx/interface/icons/production_method_icons/government_run.dds"
+
+
+	unlocking_technologies = {
+		mobile_armor
+	}
+
+	unlocking_laws = {
+		law_mass_conscription
+	}
+
+	building_modifiers = {
+		workforce_scaled = {
+			# input goods
+			goods_input_war_bond_add = 1
+			goods_input_engines_add = -10
+			goods_input_hardwood_add = -20
+			goods_input_fabric_add = -20
+			goods_input_oil_add = -20
+
+			# output goods
+			goods_output_tanks_add = 40
+		}
+
+		level_scaled = {
+			# employment
+			building_employment_engineers_add = 500
+		}
+	}
+}
+pm_government_aid_building_shipbuilding_industry = {
+	texture = "gfx/interface/icons/production_method_icons/government_run.dds"
+
+	pollution_generation = 20
+
+	unlocking_technologies = {
+		arc_welding
+		pm_metal_shipbuilding
+		pm_arc_welding_shipbuilding
+	}
+
+	unlocking_laws = {
+		law_mass_conscription
+	}
+
+	building_modifiers = {
+		workforce_scaled = {
+			# input goods
+			goods_input_war_bond_add = 1
+
+			# output goods
+			goods_output_steamers_add = 80
+			goods_output_ironclads_add = 25
+		}
+
+		level_scaled = {
+			# employment
+			building_employment_laborers_add = 1000
+			building_employment_machinists_add = 2000
+			building_employment_engineers_add = 1500
+		}
+	}
+}
+# из common/production_methods/00_ef_market_liquidity.txt, строки 74–75 (на 6.10.2026), две строки в `unlocking_production_methods` PM `pm_privately_owned_building_arms_industry` (остаётся в моде: имя ванильное)
+		pm_government_aid_building_arms_industry_1
+		pm_government_aid_building_arms_industry_0

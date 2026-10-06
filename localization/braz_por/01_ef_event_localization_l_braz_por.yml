@@ -183,16 +183,6 @@
  00_ef_economic_event.35.a:0 "Adopt the universal gold reference"
 
 
- 00_ef_economic_event.36.t:0 "The Silver Standard: The World’s Dominant Monetary System"
- 00_ef_economic_event.36.d:0 "A Legacy of Global Stability"
- 00_ef_economic_event.36.f:0 "For centuries, #b silver#! has served as the most widely adopted monetary standard across the world. Since the sixteenth century, states on every continent have relied on silver coinage as the basis for their currency, drawn by its relative abundance, predictable supply, and stability in long-distance trade.\n\nFrom European powers managing colonial commerce to Asian empires conducting vast internal markets, the #b silver standard#! became the universal reference for daily transactions, taxation, and international payment systems. Even in the nineteenth century, despite the growing prestige of gold in certain financial centers, silver remains the most commonly used foundation of global monetary circulation.\n\nThis historical dominance continues to shape the structure and value of many national currencies, influencing trade balances, metal demand, and the monetary policies of nations large and small."
- 00_ef_economic_event.36.a:0 "Acknowledge the legacy of silver"
-
- 00_ef_economic_event.37.t:0 "[SCOPE.sC('target_country').GetName] Contracts a Domestic Debt"
- 00_ef_economic_event.37.d:0 "Borrowing from the Central Bank"
- 00_ef_economic_event.37.f:0 "The government of [SCOPE.sC('target_country').GetName] has contracted a new debt with its #b Central Bank#!, issuing obligations denominated directly in the #b national currency#! rather than in precious metals.\n\nThis loan increases the Treasury’s access to immediate liquidity, but also expands the volume of currency in circulation, potentially widening the gap between legal parity and real metal-backed convertibility.\n\nBy relying on paper-denominated credit instead of gold or silver reserves, the country strengthens its short-term fiscal capacity while exposing itself to future inflationary pressure and heightened dependence on the confidence of domestic and foreign investors."
- 00_ef_economic_event.37.a:0 "Acknowledge the new debt issuance"
-
 
 
 
@@ -283,88 +273,6 @@
   00_ef_economic_event.96.d:0 "A major private bank is involved: [SCOPE.sCompany('arbitrage_privat_bank').GetName]."  
   00_ef_economic_event.96.f:0 "A coordinated arbitrage operation is underway.\n\nThe listed private banks have begun exploiting the statutory bimetallic ratio, attacking the value of [SCOPE.sC('target_country').GetCustom('currency_name')] [SCOPE.sC('target_country').GetCustom('currency_symbol')] by draining the country's #v Silver reserves#! @Silver! through large-scale arbitrage.\n\n A flow of #p [SCOPE.sC('target_country').MakeScope.ScriptValue('gold_gained')|D=]#! @gold! and an outflow of #n -[SCOPE.sC('target_country').MakeScope.ScriptValue('silver_lost')|D]#! @silver!.\n\n If this continues, the mismatch between the legal ratio and the global silver price will trigger severe monetary instability." 
   00_ef_economic_event.96.a:0 "Monitor the silver drain"
- #00_ef_economic_event.97
-00_ef_economic_event.97.t:0 "Arbitrage on the [SCOPE.sC('seller').GetCustom('currency_name')]"
-00_ef_economic_event.97.d:0 "The bank #v [SCOPE.sCompany('buyer').GetName]#! of #v [SCOPE.sC('buyer_country').GetName]#! has carried out an arbitrage operation on the currency of [SCOPE.sC('seller').GetName], following an increase in the base rate."
-00_ef_economic_event.97.f:0 "The rise in the rate has strengthened the attractiveness of the currency, prompting private banks to acquire additional currency in order to benefit from the new parity. This dynamic encourages increased inflows of metal into the issuing country.\n\nWithin this framework, the bank acquired a total of #v [SCOPE.sC('buyer_country').MakeScope.Var('arbitrage_value_in_currency').GetValue|D] [SCOPE.sC('seller').GetCustom('currency_symbol')]#! — equivalent to #v [SCOPE.sC('buyer_country').MakeScope.Var('arbitrage_value_in_metal').GetValue|D]#! [SCOPE.sC('seller').GetCustom('monetary_system_partiel')] — in accordance with market conditions and the prevailing parity.\n\nThis operation reflects the bank’s investment strategy as well as renewed confidence in the currency."
-00_ef_economic_event.97.a:0 "Continue"
-
-#00_ef_economic_event.971
-00_ef_economic_event.971.t:0 "Accumulation of [SCOPE.sC('seller').GetCustom('currency_name')] [SCOPE.sC('seller').GetCustom('currency_symbol')]"
-00_ef_economic_event.971.d:0 "The bank #v [SCOPE.sCompany('buyer').GetName]#! of #v [SCOPE.sC('buyer_country').GetName]#! has strengthened its holdings of the currency of [SCOPE.sC('seller').GetName], considered the reference currency of the international monetary system."
-00_ef_economic_event.971.f:0 "Due to its stability and its central role in international settlements, this currency has historically occupied a privileged position in the composition of bank reserves. Financial institutions naturally seek to hold a significant share of it, both to secure their assets and to facilitate their external operations.\n\nWithin this framework, the bank acquired a total of #v [SCOPE.sC('buyer_country').MakeScope.Var('arbitrage_value_in_currency').GetValue|D] [SCOPE.sC('seller').GetCustom('currency_symbol')]#! — equivalent to #v [SCOPE.sC('buyer_country').MakeScope.Var('arbitrage_value_in_metal').GetValue|D]#! [SCOPE.sC('seller').GetCustom('monetary_system_partiel')] — in accordance with prevailing financial practices.\n\nThis movement illustrates the monetary prestige of the issuing country and the structuring role its currency plays in the balance of the global system."
-00_ef_economic_event.971.a:0 "Continue"
-
-
-#00_ef_economic_event.98
-00_ef_economic_event.98.t:0 "Sale of [SCOPE.sC('buyer').GetCustom('currency_name')] [SCOPE.sC('seller').GetCustom('currency_symbol')]"
-00_ef_economic_event.98.d:0 "The bank #v [SCOPE.sCompany('seller').GetName]#! of #v [SCOPE.sC('seller_country').GetName]#! has carried out a sale of currency on international markets, following a reduction in the base rate."
-00_ef_economic_event.98.f:0 "It sold a total of #v [SCOPE.sC('buyer').MakeScope.Var('sell_arbitrage_value_10_in_currency').GetValue|D] [SCOPE.sC('buyer').GetCustom('currency_symbol')]#! — equivalent to #v [SCOPE.sC('buyer').MakeScope.Var('sell_arbitrage_value_in_metal').GetValue|D]#! [SCOPE.sC('buyer').GetCustom('monetary_system_partiel')] — in accordance with market conditions.\n\nThis operation reflects the bank’s arbitrage strategy following monetary easing, which reduces the relative attractiveness of the currency on the markets."
-00_ef_economic_event.98.a:0 "Continue"
-
-#00_ef_economic_event.981
-00_ef_economic_event.981.t:0 "Sale of [SCOPE.sC('buyer').GetCustom('currency_name')] [SCOPE.sC('seller').GetCustom('currency_symbol')]"
-00_ef_economic_event.981.d:0 "The bank #v [SCOPE.sCompany('seller').GetName]#! of #v [SCOPE.sC('seller_country').GetName]#! has carried out a sale of currency on international markets, following an increase in the statutory value of the monetary standard."
-00_ef_economic_event.981.f:0 "The official revaluation of the standard has increased the legal value of the currency. Private banks arbitrage this situation by selling the currency in order to recover metal, which has become relatively more advantageous.\n\nWithin this framework, the bank sold a total of #v [SCOPE.sC('buyer').MakeScope.Var('sell_arbitrage_value_10_in_currency').GetValue|D] [SCOPE.sC('buyer').GetCustom('currency_symbol')]#! — equivalent to #v [SCOPE.sC('buyer').MakeScope.Var('sell_arbitrage_value_in_metal').GetValue|D]#! [SCOPE.sC('buyer').GetCustom('monetary_system_partiel')] — in accordance with market conditions.\n\nThis operation represents approximately #v 10%#! of the reserves held by the bank, mobilized to take advantage of the gap created by the new official parity."
-00_ef_economic_event.981.a:0 "Continue"
-
-#00_ef_economic_event.982
-00_ef_economic_event.982.t:0 "Pressure on the [SCOPE.sC('buyer').GetCustom('currency_name')] [SCOPE.sC('seller').GetCustom('currency_symbol')]"
-00_ef_economic_event.982.d:0 "The bank #v [SCOPE.sCompany('seller').GetName]#! of #v [SCOPE.sC('seller_country').GetName]#! has carried out a significant sale of currency on international markets, as the currency is exposed to fluctuations in the global price of silver."
-00_ef_economic_event.982.f:0 "Dependent on #v Silver#! @silver!, the value of the currency is directly affected by international variations in the metal. When the price of silver weakens, private banks tend to divest themselves of this currency, considered more fragile compared to currencies backed by more stable standards.\n\nIn this context, the bank sold a total of #v [SCOPE.sC('buyer').MakeScope.Var('sell_arbitrage_value_10_in_currency').GetValue|D] [SCOPE.sC('buyer').GetCustom('currency_symbol')]#! — equivalent to #v [SCOPE.sC('buyer').MakeScope.Var('sell_arbitrage_value_in_metal').GetValue|D]#! [SCOPE.sC('buyer').GetCustom('monetary_system_partiel')] — in accordance with market conditions.\n\nThe pressure exerted by financial institutions illustrates the vulnerability of a currency tied to a metal subject to strong international volatility."
-00_ef_economic_event.982.a:0 "Continue"
-
-# [SCOPE.sC('seller').GetCustom('currency_name')]  #nom d ema currency 
-# [SCOPE.sC('seller').GetCustom('currency_symbol')] #sybole de ma currency
-# seller #mon pays
-# buyer #la banque qui achete
-# buyer_country #le pays de la bank
-# capital_state #capital du pays de la bank 
-  
-# [SCOPE.sC('buyer_country').MakeScope.Var('arbitrage_value_in_currency').GetValue]
-# [SCOPE.sC('buyer_country').MakeScope.Var('arbitrage_value_in_metal').GetValue]
-
-#monetary_system_partiel
-
-##################
-#Crisis event
-##################
-  #currency_crisis
-  00_ef_economic_event.100.t:0 "Currency Crisis in [SCOPE.sC('target_country').GetName]"
-  00_ef_economic_event.100.d:1 "The [SCOPE.sC('target_country').GetCustom('currency_name')]#! [SCOPE.sC('target_country').GetCustom('currency_symbol')] experienced a price fluctuation of more than [SCOPE.sC('target_country').MakeScope.ScriptValue('money_value_dif_1_final')|%|+=], causing a currency crisis in [SCOPE.sC('target_country').GetName]."
-  00_ef_economic_event.100.f:1 "A currency crisis occurs when a currency rapidly loses its value, often due to a loss of confidence from investors or citizens in the country’s economy. This leads to a sharp increase in the prices of imported goods and services, a devaluation of the currency, and can cause major economic disruptions."
-  00_ef_economic_event.100.a:0 "Light a big fire"
-
-  #currency_crisis
-  00_ef_economic_event.101.t:0 "Economic crisis in [SCOPE.sC('target_country').GetName]"
-  00_ef_economic_event.101.d:1 "The [SCOPE.sC('target_country').GetCustom('currency_name')]#! experienced an economic crisis with a decline in its GDP of [SCOPE.sC('target_country').MakeScope.ScriptValue('GDP_dif_1_final')|%|+=] this year.
-  00_ef_economic_event.101.f:1 "An economic crisis is a period of major financial difficulties that affects a country or region. It is characterized by a rapid decline in production, an increase in unemployment, and a reduction in investments. During an economic crisis, businesses may close, consumers spend less, and confidence in the economy collapses. This can result from various factors, such as financial problems, natural disasters, political changes, or wars. Economic crises can have lasting consequences on people's lives and the economy as a whole."
-  00_ef_economic_event.101.a:0 "Every hardship is an opportunity to rebuild and emerge stronger."
-
-  #currency_crisis
-  00_ef_economic_event.102.t:0 "Financial Crash in [SCOPE.sC('target_country').GetName]"
-  00_ef_economic_event.102.d:1 "The #T [SCOPE.sC('target_country').GetCustom('stock_exchange_name')]#!, the stock exchange of [SCOPE.sC('target_country').GetName] experienced a financial crash of [SCOPE.sC('target_country').MakeScope.Var('country_indice_value_dif_01').GetValue|%|+=]."
-  00_ef_economic_event.102.f:1 "A financial crash is a sudden and significant decline in the value of financial assets, such as stocks or bonds, leading to widespread panic among investors. This event often results from factors like economic instability, market speculation, or external shocks, causing a loss of confidence in the market. During a financial crash, stock prices plummet, and investors may experience substantial losses, potentially leading to broader economic repercussions, such as recession or increased unemployment."
-  00_ef_economic_event.102.a:0 "Markets are unpredictable, but it also presents an opportunity for reevaluation and renewal."
-
-  #central_bank_bankruptcy
-  00_ef_economic_event.103.t:0 "Central Bank Bankruptcy in [SCOPE.sC('target_country').GetName]"
-  00_ef_economic_event.103.d:1 "The Central bank of [SCOPE.sC('target_country').GetName] is bankrupt, leading to a significant loss of confidence in its currency."
-  00_ef_economic_event.103.f:1 "A central bank's bankruptcy occurs when the institution can no longer meet its financial obligations, often due to massive losses on its assets or ineffective monetary management. This leads to a loss of confidence in the national currency, resulting in devaluation, inflation, or hyperinflation. A central bank's bankruptcy can also destabilize a country's economy, affecting financial stability and causing severe consequences for the entire economic system."
-  00_ef_economic_event.103.a:0 "I hope we didn't have any assets in that bank"
-
-  #country_bankruptcy
-  00_ef_economic_event.104.t:0 "[SCOPE.sC('target_country').GetName] is a bankrupt state."
-  00_ef_economic_event.104.d:1 "After many years of struggling with a systematically deficit budget, [SCOPE.sC('target_country').GetName] has defaulted on its debt."
-  00_ef_economic_event.104.f:1 "A bankrupt country is one that is unable to meet its financial obligations, often due to overwhelming debt and mismanagement of its economy. This situation typically leads to a default on loans, resulting in a loss of confidence from investors and the international community. A bankrupt country may face severe economic consequences, including hyperinflation, high unemployment, and social unrest. The government might struggle to provide essential services, and citizens may experience a decline in their standard of living as the economy collapses."
-  00_ef_economic_event.104.a:0 "Even in the darkest times, there is always a path to recovery and a chance to rebuild."
-
-  #country_bankruptcy
-  00_ef_economic_event.105.t:0 "[SCOPE.sC('target_country').GetName] is in economic instability."
-  00_ef_economic_event.105.d:1 "[SCOPE.sC('target_country').GetName] is experiencing ongoing economic instability. If this trend continues, it could lead to a major crisis."
-  00_ef_economic_event.105.f:1 "[SCOPE.sC('target_country').GetName] is currently facing economic instability due to multiple crises, including currency crisis, economic crisis, financial crash, central bank bankruptcy, and the threat of country bankruptcy. If any of these crises reoccur, they could lead to catastrophic economic consequences, including severe inflation, increased unemployment, and long-term decline (2 Years). Immediate action is essential to stabilize the situation and prevent further deterioration."
-  #\n economic_instability_count [SCOPE.sC('target_country').MakeScope.Var('economic_instability_count').GetValue|D]\n country_bankruptcy [SCOPE.sC('target_country').MakeScope.Var('country_bankruptcy').GetValue|D]\n currency_crisis [SCOPE.sC('target_country').MakeScope.Var('currency_crisis').GetValue|D]\n central_bank_bankruptcy [SCOPE.sC('target_country').MakeScope.Var('central_bank_bankruptcy').GetValue|D]\n economic_crisis [SCOPE.sC('target_country').MakeScope.Var('economic_crisis').GetValue|D]\n financial_crash [SCOPE.sC('target_country').MakeScope.Var('financial_crash').GetValue|D]"
-  00_ef_economic_event.105.a:0 "Let's take the necessary measures." 
  
   notification_00_ef_economic_event_30_message_tooltip: "#header $notification_00_ef_economic_event_30_message_name$#!\n$TOOLTIP_DELIMITER$\n$notification_00_ef_economic_event_30_message_desc$"
   notification_00_ef_economic_event_30_message_name: "[SCOPE.sC('target_country').GetName] Abandons Metal Convertibility"
@@ -397,26 +305,6 @@
   notification_00_ef_economic_event_96_message_tooltip: "#header $notification_00_ef_economic_event_96_message_name$#!\n$TOOLTIP_DELIMITER$\n$notification_00_ef_economic_event_96_message_desc$"
   notification_00_ef_economic_event_96_message_name: "Private Banks Target the Silver Reserves"
   notification_00_ef_economic_event_96_message_desc: "A coordinated arbitrage operation is underway.\n\nThe listed private banks have begun exploiting the statutory bimetallic ratio, attacking the value of [SCOPE.sC('target_country').GetCustom('currency_name')] [SCOPE.sC('target_country').GetCustom('currency_symbol')] by draining the country's #v Silver reserves#! @Silver! through large-scale arbitrage.\n\n A flow of #p [SCOPE.sC('target_country').MakeScope.ScriptValue('gold_gained')|D=]#! @gold! and an outflow of #n -[SCOPE.sC('target_country').MakeScope.ScriptValue('silver_lost')|D]#! @silver!.\n\n If this continues, the mismatch between the legal ratio and the global silver price will trigger severe monetary instability."
-
-  notification_00_ef_economic_event_97_message_tooltip: "#header $notification_00_ef_economic_event_97_message_name$#!\n$TOOLTIP_DELIMITER$\n$notification_00_ef_economic_event_97_message_desc$"
-  notification_00_ef_economic_event_97_message_name: "Arbitrage on the [SCOPE.sC('seller').GetCustom('currency_name')]"
-  notification_00_ef_economic_event_97_message_desc: "The rise in the rate has strengthened the attractiveness of the currency, prompting private banks to acquire additional currency in order to benefit from the new parity. This dynamic encourages increased inflows of metal into the issuing country.\n\nWithin this framework, the bank acquired a total of #v [SCOPE.sC('buyer_country').MakeScope.Var('arbitrage_value_in_currency').GetValue|D] [SCOPE.sC('seller').GetCustom('currency_symbol')]#! — equivalent to #v [SCOPE.sC('buyer_country').MakeScope.Var('arbitrage_value_in_metal').GetValue|D]#! [SCOPE.sC('seller').GetCustom('monetary_system_partiel')] — in accordance with market conditions and the prevailing parity.\n\nThis operation reflects the bank’s investment strategy as well as renewed confidence in the currency."
-
-  notification_00_ef_economic_event_971_message_tooltip: "#header $notification_00_ef_economic_event_971_message_name$#!\n$TOOLTIP_DELIMITER$\n$notification_00_ef_economic_event_971_message_desc$"
-  notification_00_ef_economic_event_971_message_name: "Accumulation of [SCOPE.sC('seller').GetCustom('currency_name')] [SCOPE.sC('seller').GetCustom('currency_symbol')]"
-  notification_00_ef_economic_event_971_message_desc: "Due to its stability and its central role in international settlements, this currency has historically occupied a privileged position in the composition of bank reserves. Financial institutions naturally seek to hold a significant share of it, both to secure their assets and to facilitate their external operations.\n\nWithin this framework, the bank acquired a total of #v [SCOPE.sC('buyer_country').MakeScope.Var('arbitrage_value_in_currency').GetValue|D] [SCOPE.sC('seller').GetCustom('currency_symbol')]#! — equivalent to #v [SCOPE.sC('buyer_country').MakeScope.Var('arbitrage_value_in_metal').GetValue|D]#! [SCOPE.sC('seller').GetCustom('monetary_system_partiel')] — in accordance with prevailing financial practices.\n\nThis movement illustrates the monetary prestige of the issuing country and the structuring role its currency plays in the balance of the global system."
-
-  notification_00_ef_economic_event_98_message_tooltip: "#header $notification_00_ef_economic_event_98_message_name$#!\n$TOOLTIP_DELIMITER$\n$notification_00_ef_economic_event_98_message_desc$"
-  notification_00_ef_economic_event_98_message_name: "Sale of [SCOPE.sC('buyer').GetCustom('currency_name')] [SCOPE.sC('seller').GetCustom('currency_symbol')]"
-  notification_00_ef_economic_event_98_message_desc: "It sold a total of #v [SCOPE.sC('buyer').MakeScope.Var('sell_arbitrage_value_10_in_currency').GetValue|D] [SCOPE.sC('buyer').GetCustom('currency_symbol')]#! — equivalent to #v [SCOPE.sC('buyer').MakeScope.Var('sell_arbitrage_value_in_metal').GetValue|D]#! [SCOPE.sC('buyer').GetCustom('monetary_system_partiel')] — in accordance with market conditions.\n\nThis operation reflects the bank’s arbitrage strategy following monetary easing, which reduces the relative attractiveness of the currency on the markets."
-
-  notification_00_ef_economic_event_981_message_tooltip: "#header $notification_00_ef_economic_event_981_message_name$#!\n$TOOLTIP_DELIMITER$\n$notification_00_ef_economic_event_981_message_desc$"
-  notification_00_ef_economic_event_981_message_name: "Sale of [SCOPE.sC('buyer').GetCustom('currency_name')] [SCOPE.sC('seller').GetCustom('currency_symbol')]"
-  notification_00_ef_economic_event_981_message_desc: "The official revaluation of the standard has increased the legal value of the currency. Private banks arbitrage this situation by selling the currency in order to recover metal, which has become relatively more advantageous.\n\nWithin this framework, the bank sold a total of #v [SCOPE.sC('buyer').MakeScope.Var('sell_arbitrage_value_10_in_currency').GetValue|D] [SCOPE.sC('buyer').GetCustom('currency_symbol')]#! — equivalent to #v [SCOPE.sC('buyer').MakeScope.Var('sell_arbitrage_value_in_metal').GetValue|D]#! [SCOPE.sC('buyer').GetCustom('monetary_system_partiel')] — in accordance with market conditions.\n\nThis operation represents approximately #v 10%#! of the reserves held by the bank, mobilized to take advantage of the gap created by the new official parity."
-
-  notification_00_ef_economic_event_982_message_tooltip: "#header $notification_00_ef_economic_event_982_message_name$#!\n$TOOLTIP_DELIMITER$\n$notification_00_ef_economic_event_982_message_desc$"
-  notification_00_ef_economic_event_982_message_name: "Pressure on the [SCOPE.sC('buyer').GetCustom('currency_name')] [SCOPE.sC('seller').GetCustom('currency_symbol')]"
-  notification_00_ef_economic_event_982_message_desc: "Dependent on #v Silver#! @silver!, the value of the currency is directly affected by international variations in the metal. When the price of silver weakens, private banks tend to divest themselves of this currency, considered more fragile compared to currencies backed by more stable standards.\n\nIn this context, the bank sold a total of #v [SCOPE.sC('buyer').MakeScope.Var('sell_arbitrage_value_10_in_currency').GetValue|D] [SCOPE.sC('buyer').GetCustom('currency_symbol')]#! — equivalent to #v [SCOPE.sC('buyer').MakeScope.Var('sell_arbitrage_value_in_metal').GetValue|D]#! [SCOPE.sC('buyer').GetCustom('monetary_system_partiel')] — in accordance with market conditions.\n\nThe pressure exerted by financial institutions illustrates the vulnerability of a currency tied to a metal subject to strong international volatility."
 
   notification_00_ef_economic_event_1_message_tooltip: "#header $notification_00_ef_economic_event_1_message_name$#!\n$TOOLTIP_DELIMITER$\n$notification_00_ef_economic_event_1_message_desc$"
   notification_00_ef_economic_event_1_message_name: "New Central Bank and National Currency in [SCOPE.sC('target_country').GetName]"

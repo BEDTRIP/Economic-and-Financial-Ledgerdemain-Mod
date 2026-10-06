@@ -1,0 +1,380 @@
+# из events/00_ef_economic_event.txt, строки 1710–2090 (на 6.10.2026), события .97, .971, .98, .981, .982 (передача FEED арбитража, hidden) и .100–.105 (кризисы), никем не запускаются
+#Passagfe FEED -> achat de currency pour modfication du taux à la hausse
+00_ef_economic_event.97 = { #image no text en
+	type = country_event
+	placement = scope:capital_state
+
+	hidden = yes #Passage FEED 
+
+	title = 00_ef_economic_event.97.t
+	desc = 00_ef_economic_event.97.d
+	flavor = 00_ef_economic_event.97.f
+
+	dlc = dlc_ef
+	duration = 3 #0 pas de duration
+
+	event_image = {
+		texture = "gfx/event_pictures/00_ef_economic_event_96.dds"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/00_ef_economic_event_97.dds"
+
+	trigger = {
+	}
+
+	immediate = {   
+		post_notification = 00_ef_economic_event_97_message 
+	} 
+
+	option = {
+		name = 00_ef_economic_event.97.a
+		option_par_défaut = oui 
+	}  
+} 
+#Passagfe FEED -> achat de currency de reference
+00_ef_economic_event.971 = { #image no text en
+	type = country_event
+	placement = scope:capital_state
+
+	hidden = yes #Passage FEED 
+
+	title = 00_ef_economic_event.971.t
+	desc = 00_ef_economic_event.971.d
+	flavor = 00_ef_economic_event.971.f
+
+	dlc = dlc_ef
+	duration = 3 #0 pas de duration
+
+	event_image = {
+		texture = "gfx/event_pictures/00_ef_economic_event_96.dds"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/00_ef_economic_event_98.dds"
+
+	trigger = {
+	}
+
+	immediate = {   
+		post_notification = 00_ef_economic_event_971_message 
+	} 
+
+	option = {
+		name = 00_ef_economic_event.971.a
+		option_par_défaut = oui 
+	}  
+} 
+#Passagfe FEED -> vente de currency pour modfication du taux à la baisse
+00_ef_economic_event.98 = { #image no text en
+	type = country_event
+	placement = scope:capital_state
+
+	hidden = yes #Passage FEED 
+
+	title = 00_ef_economic_event.98.t
+	desc = 00_ef_economic_event.98.d
+	flavor = 00_ef_economic_event.98.f
+
+	dlc = dlc_ef
+	duration = 3 #0 pas de duration
+
+	event_image = {
+		texture = "gfx/event_pictures/00_ef_economic_event_96.dds"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/00_ef_economic_event_98.dds"
+
+	trigger = {
+	}
+
+	immediate = {   
+		post_notification = 00_ef_economic_event_98_message 
+	} 
+
+	option = {
+		name = 00_ef_economic_event.98.a
+		option_par_défaut = oui 
+	}  
+}  
+#Passagfe FEED -> vente de currency pour modfication de la valeur du standart 
+00_ef_economic_event.981 = { #image no text en
+	type = country_event
+	placement = scope:capital_state
+
+	hidden = yes #Passage FEED 
+
+	title = 00_ef_economic_event.981.t
+	desc = 00_ef_economic_event.981.d
+	flavor = 00_ef_economic_event.981.f
+
+	dlc = dlc_ef
+	duration = 3 #0 pas de duration
+
+	event_image = {
+		texture = "gfx/event_pictures/00_ef_economic_event_96.dds"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/00_ef_economic_event_98.dds"
+
+	trigger = {
+	}
+
+	immediate = {   
+		post_notification = 00_ef_economic_event_981_message 
+	} 
+
+	option = {
+		name = 00_ef_economic_event.981.a
+		option_par_défaut = oui 
+	}  
+}  
+#Passagfe FEED -> vente de currency pour attaquer le silver et bimetalisme post 1873
+00_ef_economic_event.982 = { #image no text en
+	type = country_event
+	placement = scope:capital_state
+
+	hidden = yes #Passage FEED 
+
+	title = 00_ef_economic_event.982.t
+	desc = 00_ef_economic_event.982.d
+	flavor = 00_ef_economic_event.982.f
+
+	dlc = dlc_ef
+	duration = 3 #0 pas de duration
+
+	event_image = {
+		texture = "gfx/event_pictures/00_ef_economic_event_96.dds"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/00_ef_economic_event_98.dds"
+
+	trigger = {
+	}
+
+	immediate = {   
+		post_notification = 00_ef_economic_event_982_message 
+	} 
+
+	option = {
+		name = 00_ef_economic_event.982.a
+		option_par_défaut = oui 
+	}  
+} 
+
+
+
+
+
+
+
+
+
+
+##################
+#Crisis event
+##################
+
+#currency_crisis
+00_ef_economic_event.100 = {
+	type = country_event
+	placement = scope:capital_state
+
+	#hidden = yes
+
+	title = 00_ef_economic_event.100.t
+	desc = 00_ef_economic_event.100.d
+	flavor = 00_ef_economic_event.100.f
+
+	duration = 3 #0 pas de duration
+
+	event_image = {
+		texture = "gfx/event_pictures/00_ef_economic_event_100.dds"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	trigger = {
+	}
+
+	immediate = { 
+	}
+
+	option = {
+		name = 00_ef_economic_event.100.a
+		option_par_défaut = oui
+	}
+}
+#economic_crisis
+00_ef_economic_event.101 = {
+	type = country_event
+	placement = scope:capital_state
+
+	#hidden = yes
+
+	title = 00_ef_economic_event.101.t
+	desc = 00_ef_economic_event.101.d
+	flavor = 00_ef_economic_event.101.f
+
+	duration = 3 #0 pas de duration
+
+	event_image = {
+		texture = "gfx/event_pictures/00_ef_economic_event_101.dds"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	trigger = {
+	}
+
+	immediate = { 
+	}
+
+	option = {
+		name = 00_ef_economic_event.101.a
+		option_par_défaut = oui
+	}
+}
+#financial_crash
+00_ef_economic_event.102 = {
+	type = country_event
+	placement = scope:capital_state
+
+	#hidden = yes
+
+	title = 00_ef_economic_event.102.t
+	desc = 00_ef_economic_event.102.d
+	flavor = 00_ef_economic_event.102.f
+
+	duration = 3 #0 pas de duration
+
+	event_image = {
+		texture = "gfx/event_pictures/00_ef_economic_event_102.dds"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	trigger = {
+	}
+
+	immediate = { 
+	}
+
+	option = {
+		name = 00_ef_economic_event.102.a
+		option_par_défaut = oui
+	}
+}
+#central_bank_bankruptcy
+00_ef_economic_event.103 = {
+	type = country_event
+	placement = scope:capital_state
+
+	#hidden = yes
+
+	title = 00_ef_economic_event.103.t
+	desc = 00_ef_economic_event.103.d
+	flavor = 00_ef_economic_event.103.f
+
+	duration = 3 #0 pas de duration
+
+	event_image = {
+		texture = "gfx/event_pictures/00_ef_economic_event_102.dds"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	trigger = {
+	}
+
+	immediate = { 
+	}
+
+	option = {
+		name = 00_ef_economic_event.103.a
+		option_par_défaut = oui
+	}
+}
+#country_bankruptcy
+00_ef_economic_event.104 = {
+	type = country_event
+	placement = scope:capital_state
+
+	#hidden = yes
+
+	title = 00_ef_economic_event.104.t
+	desc = 00_ef_economic_event.104.d
+	flavor = 00_ef_economic_event.104.f
+
+	duration = 3 #0 pas de duration
+
+	event_image = {
+		texture = "gfx/event_pictures/00_ef_economic_event_102.dds"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	trigger = {
+	}
+
+	immediate = { 
+	}
+
+	option = {
+		name = 00_ef_economic_event.104.a
+		option_par_défaut = oui
+	}
+} 
+#economic_instability
+00_ef_economic_event.105 = {
+	type = country_event
+	placement = scope:capital_state
+
+	#hidden = yes
+
+	title = 00_ef_economic_event.105.t
+	desc = 00_ef_economic_event.105.d
+	flavor = 00_ef_economic_event.105.f
+
+	duration = 3 #0 pas de duration
+
+	event_image = {
+		texture = "gfx/event_pictures/00_ef_economic_event_102.dds"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	trigger = {
+	}
+
+	immediate = { 
+	}
+
+	option = {
+		name = 00_ef_economic_event.105.a
+		option_par_défaut = oui
+	}
+}
+
+
+

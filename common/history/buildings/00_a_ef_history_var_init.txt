@@ -45,11 +45,6 @@
 # SCOPE NOTE: BUILDINGS is a country-iterating context here, same as E&F uses
 # on the very next line of its own file -- `BUILDINGS = { every_country = { ...`.
 #
-# NOT FIXED HERE, but found while digging: 00_ef_building.txt:117 calls
-# `initialize_historic_macro_facilities_ns = { ... }`, and that effect's only
-# definition is commented out at 09_introduction_building_lvl.txt:23546. The
-# call therefore resolves to nothing. Left alone -- removing it changes what
-# the campaign starts with, which is a decision for the E&F author, not a fix.
 #############################################
 
 BUILDINGS = {

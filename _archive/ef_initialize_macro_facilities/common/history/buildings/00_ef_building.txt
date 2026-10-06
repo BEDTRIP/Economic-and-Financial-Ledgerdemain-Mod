@@ -1,0 +1,20 @@
+# из common/history/buildings/00_ef_building.txt, строки 123–141 (на 6.10.2026), вызов отсутствующего эффекта `initialize_historic_macro_facilities_ns` (блок `if` целиком, внутри только он)
+		if = {
+			limit = {
+				or = {
+					c:FRA ?= this
+					c:GBR ?= this
+					c:AUS ?= this
+					c:PRU ?= this
+					c:NET ?= this
+					c:CHI ?= this
+					c:BEL ?= this
+					c:USA ?= this
+					c:RUS ?= this
+					is_valid_country_hmm = yes
+				}
+			}
+			initialize_historic_macro_facilities_ns = {
+				STOCKPILE_SITE = capital
+			}
+		}

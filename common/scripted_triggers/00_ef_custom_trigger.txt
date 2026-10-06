@@ -338,11 +338,6 @@ building_financial_centre_spe = {
 #####################################################################################################################################################
 
 #####################################################################################################################################################
-owner_is_player = {
-	owner = {
-		is_player = yes
-	}
-}
 #####################################################################################################################################################
 
 
@@ -427,16 +422,6 @@ has_central_bank_SS_BS_GS_GES = {
 		has_law = law_type:law_external_exchange_standard
 	}
 }
-has_central_bank_FS_NS_NISO = {
-	has_modifier = has_central_bank
-	or = {
-		has_law = law_type:law_no_monetary_system
-		has_law = law_type:law_fiat_standard #test
-	}
-	not = {
-		has_law = law_type:law_isolationism
-	}
-}
 has_central_bank_FS_NISO = {
 	has_modifier = has_central_bank
 	has_law = law_type:law_fiat_standard #test
@@ -464,23 +449,6 @@ ai_set_stockpile_reserve_limit_spe_country = {
 	}
 }
 #####################################################################################################################################################
-
-subject_overlord_has_central_bank = {
-	if = {
-		limit = {
-			or = {
-				is_subject_custom_trigger = yes
-				no_indepeendeent_market_test = no
-			}
-		}
-		overlord_has_central_bank = yes
-	}
-}
-overlord_has_central_bank = {
-	any_overlord_or_above = {
-		has_modifier = has_central_bank
-	}
-}
 
 #####################################################################################################################################################
 is_subject_custom_trigger = {
@@ -566,31 +534,6 @@ bank_central_buiding_no_external_currency_consuption = {
 	}
 }
 
-market_owner_is_root_with_buiding_subject_building_modifier = { #market_owner_is_root_univ_with_buiding = yes -> pays avec une bank centrale dépendente
-	any_scope_building = {
-		or = {
-			has_modifier = protectora_limit_30
-			has_modifier = dominion_limit_50
-			has_modifier = puppet_limit_75
-		}
-	}
-}
-
-market_owner_power_bloc_leader = {
-	is_power_bloc_leader = yes
-}
-
-no_indepeendeent_market_test = {
-
-	market = prev.market
-
-	# scope:target_country = {
-	# 	market = prev.market
-	# 	NOT = { is_diplomatic_play_enemy_of = root }
-	# }
-
-}
-
 #####################################################################################################################################################
 
 #####################################################################################################################################################
@@ -648,37 +591,6 @@ is_extreme_weak_currency = {
 }
 
 #####################################################################################################################################################
-is_in_devaluation = {
-	root = {
-		or = {
-			any_scope_building = {
-				or = {
-					has_active_production_method = pm_devaluation_25
-					has_active_production_method = pm_devaluation_50
-					has_active_production_method = pm_devaluation_75
-					has_active_production_method = pm_devaluation_100
-				}
-			}
-			var:devaluation_on = 1
-		}
-	}
-}
-is_in_revaluation = {
-	root = {
-		or = {
-			any_scope_building = {
-				or = {
-					has_active_production_method = pm_revaluation_25
-					has_active_production_method = pm_revaluation_50
-					has_active_production_method = pm_revaluation_75
-					has_active_production_method = pm_revaluation_100
-				}
-			}
-			var:revaluation_on = 1
-		}
-	}
-}
-
 is_in_devaluation_trigger = {
 	root = {
 		#or = {
@@ -888,12 +800,6 @@ is_valid_country_CLM = {
 		c:CLM ?= this  #1857
 	}
 }
-is_valid_country_PEU = {
-	root = {
-		game_date > 1863.1.1
-		c:PEU ?= this  #1863
-	}
-}
 is_valid_country_PBC = {
 	root = {
 		game_date > 1863.1.1
@@ -964,12 +870,6 @@ is_valid_country_GUA = {
 	root = {
 		game_date > 1877.1.1
 		c:GUA ?= this  #1877
-	}
-}
-is_valid_country_BOL = {
-	root = {
-		game_date > 1880.1.1
-		c:BOL ?= this  #1880
 	}
 }
 is_valid_country_CHL = {
@@ -1134,21 +1034,6 @@ macro_facilities_on_action_fc_limit = {
 		is_player = yes
 	}
 }
-macro_facilities_on_action_ns_limit = {
-	has_technology_researched = national_stockpile
-	is_revolutionary = no
-	is_invalid_country = no
-	or = {
-		is_invalid_country = no
-		is_player = yes
-	}
-	market_owner_is_root = yes
-	or = {
-		country_already_national_stockpile = yes
-		var:gdp_view >= 1 #AI que à partir de 5M  GDP
-		is_player = yes
-	}
-}
 #####################################################################################################################################################
 
 law_currency_enacted = {
@@ -1256,19 +1141,6 @@ law_currency_enacted = {
 #####################################################################################################################################################
 
 
-state_is_in_annexable_territory_NGF = {
-	OR = {
-		region = sr:region_north_germany
-		#region = sr:region_south_germany
-	}
-}
-
-country_is_in_annexable_territory_NGF = {
-	exists = capital
-	capital = {
-		state_is_in_annexable_territory_NGF = yes
-	}
-}
 # country_is_in_india = {
 # 	exists = capital
 # 	capital = {
@@ -1458,16 +1330,6 @@ market_goods_is_financial_product = {
 #####################################################################################################################################################
 #####################################################################################################################################################
 
-ai_purchase_territory_valid_NGF = {
-	is_power_bloc_leader = yes
-	c:HAN ?= {
-		market_owner_is_root_univ_with_buiding = no
-	}
-	has_strategy = ai_strategy_unify_germany
-
-	#plus puissant que AUS
-}
-
 #####################################################################################################################################################
 
 ############################################################################################################################################################
@@ -1510,12 +1372,6 @@ law_dinar_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = dinar_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_dinar_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = dinar_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -1561,12 +1417,6 @@ law_dinar_algerian_dinar_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_dinar_algerian_dinar_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = dinar_algerian_dinar_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #dinar_iraqi_dinar
@@ -1608,12 +1458,6 @@ law_dinar_iraqi_dinar_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = dinar_iraqi_dinar_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_dinar_iraqi_dinar_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = dinar_iraqi_dinar_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -1659,12 +1503,6 @@ law_dinar_libyan_dinar_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_dinar_libyan_dinar_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = dinar_libyan_dinar_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #dinar_moroccan_dirham
@@ -1706,12 +1544,6 @@ law_dinar_moroccan_dirham_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = dinar_moroccan_dirham_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_dinar_moroccan_dirham_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = dinar_moroccan_dirham_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -1757,12 +1589,6 @@ law_dinar_omanian_rial_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_dinar_omanian_rial_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = dinar_omanian_rial_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #dinar_qiran
@@ -1804,12 +1630,6 @@ law_dinar_qiran_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = dinar_qiran_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_dinar_qiran_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = dinar_qiran_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -1855,12 +1675,6 @@ law_dinar_saudi_riyal_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_dinar_saudi_riyal_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = dinar_saudi_riyal_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #dinar_serbian_dinar
@@ -1902,12 +1716,6 @@ law_dinar_serbian_dinar_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = dinar_serbian_dinar_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_dinar_serbian_dinar_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = dinar_serbian_dinar_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -1953,12 +1761,6 @@ law_dinar_tunisian_dinar_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_dinar_tunisian_dinar_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = dinar_tunisian_dinar_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #dinar_yugoslav_dinar
@@ -2000,12 +1802,6 @@ law_dinar_yugoslav_dinar_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = dinar_yugoslav_dinar_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_dinar_yugoslav_dinar_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = dinar_yugoslav_dinar_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -2051,12 +1847,6 @@ law_dollar_australian_dollar_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_dollar_australian_dollar_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = dollar_australian_dollar_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #dollar_canadian_dollar
@@ -2098,12 +1888,6 @@ law_dollar_canadian_dollar_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = dollar_canadian_dollar_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_dollar_canadian_dollar_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = dollar_canadian_dollar_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -2149,12 +1933,6 @@ law_dollar_caribbean_dollar_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_dollar_caribbean_dollar_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = dollar_caribbean_dollar_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #dollar_confederate_states_dollar
@@ -2196,12 +1974,6 @@ law_dollar_confederate_states_dollar_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = dollar_confederate_states_dollar_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_dollar_confederate_states_dollar_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = dollar_confederate_states_dollar_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -2247,12 +2019,6 @@ law_dollar_liberian_dollar_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_dollar_liberian_dollar_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = dollar_liberian_dollar_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #dollar_new_zealand_dollar
@@ -2294,12 +2060,6 @@ law_dollar_new_zealand_dollar_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = dollar_new_zealand_dollar_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_dollar_new_zealand_dollar_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = dollar_new_zealand_dollar_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -2345,12 +2105,6 @@ law_dollar_sierra_leonean_dollar_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_dollar_sierra_leonean_dollar_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = dollar_sierra_leonean_dollar_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #dollar_united_states_dollar
@@ -2392,12 +2146,6 @@ law_dollar_united_states_dollar_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = dollar_united_states_dollar_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_dollar_united_states_dollar_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = dollar_united_states_dollar_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -2443,12 +2191,6 @@ law_eco_ariary_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_eco_ariary_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = eco_ariary_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #eco_central_african_eco
@@ -2490,12 +2232,6 @@ law_eco_central_african_eco_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = eco_central_african_eco_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_eco_central_african_eco_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = eco_central_african_eco_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -2541,12 +2277,6 @@ law_eco_east_african_eco_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_eco_east_african_eco_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = eco_east_african_eco_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #eco_ethiopian_birr
@@ -2588,12 +2318,6 @@ law_eco_ethiopian_birr_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = eco_ethiopian_birr_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_eco_ethiopian_birr_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = eco_ethiopian_birr_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -2639,12 +2363,6 @@ law_eco_ghanaian_pound_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_eco_ghanaian_pound_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = eco_ghanaian_pound_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #eco_nigerian_naira
@@ -2686,12 +2404,6 @@ law_eco_nigerian_naira_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = eco_nigerian_naira_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_eco_nigerian_naira_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = eco_nigerian_naira_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -2737,12 +2449,6 @@ law_eco_south_african_rand_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_eco_south_african_rand_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = eco_south_african_rand_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #eco_tuareg_ouguiya
@@ -2784,12 +2490,6 @@ law_eco_tuareg_ouguiya_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = eco_tuareg_ouguiya_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_eco_tuareg_ouguiya_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = eco_tuareg_ouguiya_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -2835,12 +2535,6 @@ law_eco_west_african_eco_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_eco_west_african_eco_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = eco_west_african_eco_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #franc_belgian_franc
@@ -2882,12 +2576,6 @@ law_franc_belgian_franc_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = franc_belgian_franc_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_franc_belgian_franc_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = franc_belgian_franc_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -2933,12 +2621,6 @@ law_franc_french_franc_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_franc_french_franc_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = franc_french_franc_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #franc_luxembourgish_franc
@@ -2980,12 +2662,6 @@ law_franc_luxembourgish_franc_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = franc_luxembourgish_franc_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_franc_luxembourgish_franc_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = franc_luxembourgish_franc_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -3031,12 +2707,6 @@ law_franc_swiss_franc_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_franc_swiss_franc_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = franc_swiss_franc_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #gulden
@@ -3078,12 +2748,6 @@ law_gulden_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = gulden_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_gulden_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = gulden_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -3129,12 +2793,6 @@ law_gulden_bavarian_gulden_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_gulden_bavarian_gulden_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = gulden_bavarian_gulden_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #gulden_florin
@@ -3176,12 +2834,6 @@ law_gulden_florin_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = gulden_florin_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_gulden_florin_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = gulden_florin_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -3227,12 +2879,6 @@ law_gulden_hungarian_forint_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_gulden_hungarian_forint_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = gulden_hungarian_forint_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #gulden_indies_guilder
@@ -3274,12 +2920,6 @@ law_gulden_indies_guilder_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = gulden_indies_guilder_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_gulden_indies_guilder_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = gulden_indies_guilder_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -3325,12 +2965,6 @@ law_gulden_south_german_gulden_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_gulden_south_german_gulden_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = gulden_south_german_gulden_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #krone_czech_koruna
@@ -3372,12 +3006,6 @@ law_krone_czech_koruna_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = krone_czech_koruna_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_krone_czech_koruna_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = krone_czech_koruna_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -3423,12 +3051,6 @@ law_krone_danish_krone_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_krone_danish_krone_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = krone_danish_krone_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #krone_estonian_kroon
@@ -3470,12 +3092,6 @@ law_krone_estonian_kroon_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = krone_estonian_kroon_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_krone_estonian_kroon_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = krone_estonian_kroon_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -3521,12 +3137,6 @@ law_krone_icelandic_krona_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_krone_icelandic_krona_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = krone_icelandic_krona_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #krone_norwegian_krone
@@ -3568,12 +3178,6 @@ law_krone_norwegian_krone_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = krone_norwegian_krone_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_krone_norwegian_krone_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = krone_norwegian_krone_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -3619,12 +3223,6 @@ law_krone_slovak_koruna_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_krone_slovak_koruna_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = krone_slovak_koruna_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #krone_swedish_krona
@@ -3666,12 +3264,6 @@ law_krone_swedish_krona_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = krone_swedish_krona_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_krone_swedish_krona_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = krone_swedish_krona_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -3717,12 +3309,6 @@ law_leon_leu_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_leon_leu_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = leon_leu_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #leon_lev
@@ -3764,12 +3350,6 @@ law_leon_lev_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = leon_lev_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_leon_lev_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = leon_lev_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -3815,12 +3395,6 @@ law_lira_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_lira_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = lira_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #lira_ducato
@@ -3862,12 +3436,6 @@ law_lira_ducato_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = lira_ducato_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_lira_ducato_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = lira_ducato_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -3913,12 +3481,6 @@ law_lira_ottoman_lira_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_lira_ottoman_lira_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = lira_ottoman_lira_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #lira_scudo_pontificio
@@ -3960,12 +3522,6 @@ law_lira_scudo_pontificio_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = lira_scudo_pontificio_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_lira_scudo_pontificio_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = lira_scudo_pontificio_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -4011,12 +3567,6 @@ law_lira_scudo_sardo_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_lira_scudo_sardo_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = lira_scudo_sardo_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #lira_toscane_lira
@@ -4058,12 +3608,6 @@ law_lira_toscane_lira_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = lira_toscane_lira_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_lira_toscane_lira_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = lira_toscane_lira_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -4109,12 +3653,6 @@ law_mark_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_mark_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = mark_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #mark_finnish_markka
@@ -4156,12 +3694,6 @@ law_mark_finnish_markka_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = mark_finnish_markka_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_mark_finnish_markka_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = mark_finnish_markka_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -4207,12 +3739,6 @@ law_peso_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_peso_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = peso_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #peso_argentine_peso
@@ -4254,12 +3780,6 @@ law_peso_argentine_peso_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = peso_argentine_peso_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_peso_argentine_peso_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = peso_argentine_peso_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -4305,12 +3825,6 @@ law_peso_bolivien_peso_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_peso_bolivien_peso_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = peso_bolivien_peso_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #peso_chilean_peso
@@ -4352,12 +3866,6 @@ law_peso_chilean_peso_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = peso_chilean_peso_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_peso_chilean_peso_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = peso_chilean_peso_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -4403,12 +3911,6 @@ law_peso_colombian_peso_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_peso_colombian_peso_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = peso_colombian_peso_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #peso_costa_rican_colon
@@ -4450,12 +3952,6 @@ law_peso_costa_rican_colon_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = peso_costa_rican_colon_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_peso_costa_rican_colon_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = peso_costa_rican_colon_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -4501,12 +3997,6 @@ law_peso_cuban_peso_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_peso_cuban_peso_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = peso_cuban_peso_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #peso_ecuadorian_peso
@@ -4548,12 +4038,6 @@ law_peso_ecuadorian_peso_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = peso_ecuadorian_peso_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_peso_ecuadorian_peso_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = peso_ecuadorian_peso_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -4599,12 +4083,6 @@ law_peso_el_salvador_colon_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_peso_el_salvador_colon_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = peso_el_salvador_colon_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #peso_guatemalan_quetzal
@@ -4646,12 +4124,6 @@ law_peso_guatemalan_quetzal_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = peso_guatemalan_quetzal_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_peso_guatemalan_quetzal_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = peso_guatemalan_quetzal_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -4697,12 +4169,6 @@ law_peso_honduran_lempira_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_peso_honduran_lempira_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = peso_honduran_lempira_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #peso_mexican_peso
@@ -4744,12 +4210,6 @@ law_peso_mexican_peso_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = peso_mexican_peso_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_peso_mexican_peso_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = peso_mexican_peso_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -4795,12 +4255,6 @@ law_peso_nicaraguan_cordoba_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_peso_nicaraguan_cordoba_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = peso_nicaraguan_cordoba_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #peso_paraguayan_peso
@@ -4842,12 +4296,6 @@ law_peso_paraguayan_peso_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = peso_paraguayan_peso_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_peso_paraguayan_peso_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = peso_paraguayan_peso_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -4893,12 +4341,6 @@ law_peso_philippine_peso_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_peso_philippine_peso_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = peso_philippine_peso_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #peso_sol_de_oro
@@ -4940,12 +4382,6 @@ law_peso_sol_de_oro_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = peso_sol_de_oro_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_peso_sol_de_oro_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = peso_sol_de_oro_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -4991,12 +4427,6 @@ law_peso_uruguayan_peso_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_peso_uruguayan_peso_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = peso_uruguayan_peso_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #peso_venezuelan_peso
@@ -5038,12 +4468,6 @@ law_peso_venezuelan_peso_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = peso_venezuelan_peso_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_peso_venezuelan_peso_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = peso_venezuelan_peso_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -5089,12 +4513,6 @@ law_pound_egyptian_pound_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_pound_egyptian_pound_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = pound_egyptian_pound_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #pound_irish_pound
@@ -5136,12 +4554,6 @@ law_pound_irish_pound_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = pound_irish_pound_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_pound_irish_pound_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = pound_irish_pound_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -5187,12 +4599,6 @@ law_pound_sterling_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_pound_sterling_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = pound_sterling_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #real
@@ -5234,12 +4640,6 @@ law_real_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = real_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_real_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = real_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -5285,12 +4685,6 @@ law_real_brazilian_real_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_real_brazilian_real_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = real_brazilian_real_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #rupee_indian_rupee
@@ -5332,12 +4726,6 @@ law_rupee_indian_rupee_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = rupee_indian_rupee_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_rupee_indian_rupee_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = rupee_indian_rupee_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -5383,12 +4771,6 @@ law_rupee_indonesian_rupiah_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_rupee_indonesian_rupiah_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = rupee_indonesian_rupiah_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #spe_baht
@@ -5430,12 +4812,6 @@ law_spe_baht_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = spe_baht_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_spe_baht_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = spe_baht_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -5481,12 +4857,6 @@ law_spe_dong_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_spe_dong_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = spe_dong_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #spe_drachma
@@ -5528,12 +4898,6 @@ law_spe_drachma_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = spe_drachma_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_spe_drachma_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = spe_drachma_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -5579,12 +4943,6 @@ law_spe_korean_won_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_spe_korean_won_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = spe_korean_won_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #spe_latvian_lats
@@ -5626,12 +4984,6 @@ law_spe_latvian_lats_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = spe_latvian_lats_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_spe_latvian_lats_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = spe_latvian_lats_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -5677,12 +5029,6 @@ law_spe_lithuanian_litas_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_spe_lithuanian_litas_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = spe_lithuanian_litas_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #spe_peseta
@@ -5724,12 +5070,6 @@ law_spe_peseta_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = spe_peseta_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_spe_peseta_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = spe_peseta_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -5775,12 +5115,6 @@ law_spe_ruble_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_spe_ruble_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = spe_ruble_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #spe_uni
@@ -5822,12 +5156,6 @@ law_spe_uni_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = spe_uni_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_spe_uni_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = spe_uni_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -5873,12 +5201,6 @@ law_spe_yen_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_spe_yen_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = spe_yen_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #spe_yuan
@@ -5920,12 +5242,6 @@ law_spe_yuan_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = spe_yuan_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_spe_yuan_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = spe_yuan_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -5971,12 +5287,6 @@ law_spe_zloti_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_spe_zloti_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = spe_zloti_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #thaler_hannoveraner_thaler
@@ -6018,12 +5328,6 @@ law_thaler_hannoveraner_thaler_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = thaler_hannoveraner_thaler_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_thaler_hannoveraner_thaler_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = thaler_hannoveraner_thaler_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -6069,12 +5373,6 @@ law_thaler_prussian_thaler_monetary_system_SS_BS_trigger = {
 		has_law = law_type:law_silver_standard
 	}
 }
-law_thaler_prussian_thaler_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = thaler_prussian_thaler_leading_currency_type
-		has_law = law_type:law_fiat_standard
-	}
-}
 ############################################################################################################################################################
 ############################################################################################################################################################
 #thaler_saxon_thaler
@@ -6116,12 +5414,6 @@ law_thaler_saxon_thaler_monetary_system_SS_BS_trigger = {
 	any_country = {
 		has_modifier = thaler_saxon_thaler_leading_currency_type
 		has_law = law_type:law_silver_standard
-	}
-}
-law_thaler_saxon_thaler_monetary_system_FS_trigger = {
-	any_country = {
-		has_modifier = thaler_saxon_thaler_leading_currency_type
-		has_law = law_type:law_fiat_standard
 	}
 }
 ############################################################################################################################################################
@@ -6191,25 +5483,6 @@ revaluation_money_value_target_trigger = {
 	# }
 }
 
-union_latine = {
-	root = {
-		OR = {
-			c:FRA ?= this
-			c:ITA ?= this
-			c:BEL ?= this
-			c:SWI ?= this
-			c:GRE ?= this
-
-			c:SAR ?= this
-			c:PAR ?= this
-			c:MOD ?= this
-			c:LUC ?= this
-			c:TUS ?= this
-			c:PAP ?= this
-			c:SIC ?= this
-		}
-	}
-}
 scripted_money_value_target = {
 	root = {
 		OR = {
@@ -6256,97 +5529,6 @@ scripted_money_value_target = {
 # 		c:PHI ?= this  #1851
 # 	}
 # }
-
-subjetc_no_modifier_on_bc = {
-	market_owner_is_root = no
-	is_subject_custom_trigger = yes
-	has_modifier = has_central_bank
-	not = {
-		any_scope_building = {
-		or = {
-			has_modifier = protectora_limit_30
-			has_modifier = dominion_limit_50
-			has_modifier = puppet_limit_75
-			}
-		}
-	}
-}
-not_the_same_monetary_system_as_overlord = {
-	or = {
-		and = {
-			or = {
-				any_overlord_or_above = {
-					has_law = law_type:law_fiat_standard
-				}
-				market.owner = {
-					has_law = law_type:law_fiat_standard
-				}
-			}
-			not = {
-				has_law = law_type:law_fiat_standard
-			}
-		}
-		and = {
-			or = {
-				any_overlord_or_above = {
-					has_law = law_type:law_silver_standard
-				}
-				market.owner = {
-					has_law = law_type:law_silver_standard
-				}
-			}
-			not = {
-				has_law = law_type:law_silver_standard
-			}
-		}
-		and = {
-			or = {
-				any_overlord_or_above = {
-					has_law = law_type:law_bimetallism_standard
-				}
-				market.owner = {
-					has_law = law_type:law_bimetallism_standard
-				}
-			}
-			not = {
-				has_law = law_type:law_bimetallism_standard
-			}
-		}
-		and = {
-			or = {
-				any_overlord_or_above = {
-					has_law = law_type:law_gold_standard
-				}
-				market.owner = {
-					has_law = law_type:law_gold_standard
-				}
-			}
-			not = {
-				has_law = law_type:law_gold_standard
-			}
-		}
-		and = {
-			or = {
-				any_overlord_or_above = {
-					has_law = law_type:law_gold_standard
-				}
-				market.owner = {
-					has_law = law_type:law_gold_standard
-				}
-			}
-			not = {
-				has_law = law_type:law_gold_standard
-			}
-		}
-	}
-}
-
-any_neighbouring_state_root = {
-	any_neighbouring_state = {
-		owner = root
-
-	}
-}
 
 ############################################################################################################################################################
 

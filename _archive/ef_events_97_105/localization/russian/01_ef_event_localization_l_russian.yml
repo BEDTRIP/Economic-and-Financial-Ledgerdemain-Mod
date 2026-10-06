@@ -1,0 +1,104 @@
+# из localization/russian/01_ef_event_localization_l_russian.yml, строки 276–357 (на 6.10.2026), ключи локализации событий .97–.105 и сообщений .97–.982
+ #00_ef_economic_event.97
+00_ef_economic_event.97.t:0 "Арбитраж с [SCOPE.sC('seller').GetCustom('currency_name')]"
+00_ef_economic_event.97.d:0 "Банк #v [SCOPE.sCompany('buyer').GetName]#! из #v [SCOPE.sC('buyer_country').GetName]#! провёл арбитражную операцию с валютой [SCOPE.sC('seller').GetAltName('RU_CL_RP')] после повышения ключевой ставки."
+00_ef_economic_event.97.f:0 "Повышение ставки усилило привлекательность валюты, побудив частные банки приобретать её дополнительно, чтобы воспользоваться новым паритетом. Эта динамика стимулирует увеличение притока металла в страну-эмитента.\n\nВ рамках этого банк приобрёл в общей сложности #v [SCOPE.sC('buyer_country').MakeScope.Var('arbitrage_value_in_currency').GetValue|D] [SCOPE.sC('seller').GetCustom('currency_symbol')]#! — что эквивалентно #v [SCOPE.sC('buyer_country').MakeScope.Var('arbitrage_value_in_metal').GetValue|D]#! [SCOPE.sC('seller').GetCustom('monetary_system_partiel')] — в соответствии с рыночными условиями и действующим паритетом.\n\nЭта операция отражает инвестиционную стратегию банка, а также возобновившееся доверие к валюте."
+00_ef_economic_event.97.a:0 "Продолжить"
+
+#00_ef_economic_event.971
+00_ef_economic_event.971.t:0 "Накопление [SCOPE.sC('seller').GetCustom('currency_name')] [SCOPE.sC('seller').GetCustom('currency_symbol')]"
+00_ef_economic_event.971.d:0 "Банк #v [SCOPE.sCompany('buyer').GetName]#! из #v [SCOPE.sC('buyer_country').GetName]#! увеличил свои запасы валюты [SCOPE.sC('seller').GetAltName('RU_CL_RP')], считающейся эталонной валютой международной денежной системы."
+00_ef_economic_event.971.f:0 "Благодаря своей стабильности и центральной роли в международных расчётах эта валюта исторически занимает привилегированное место в составе банковских резервов. Финансовые учреждения естественным образом стремятся держать значительную её долю — как для защиты активов, так и для облегчения внешних операций.\n\nВ рамках этого банк приобрёл в общей сложности #v [SCOPE.sC('buyer_country').MakeScope.Var('arbitrage_value_in_currency').GetValue|D] [SCOPE.sC('seller').GetCustom('currency_symbol')]#! — что эквивалентно #v [SCOPE.sC('buyer_country').MakeScope.Var('arbitrage_value_in_metal').GetValue|D]#! [SCOPE.sC('seller').GetCustom('monetary_system_partiel')] — в соответствии с устоявшейся финансовой практикой.\n\nЭто движение иллюстрирует денежный престиж страны-эмитента и структурообразующую роль, которую её валюта играет в равновесии мировой системы."
+00_ef_economic_event.971.a:0 "Продолжить"
+
+
+#00_ef_economic_event.98
+00_ef_economic_event.98.t:0 "Продажа [SCOPE.sC('buyer').GetCustom('currency_name')] [SCOPE.sC('seller').GetCustom('currency_symbol')]"
+00_ef_economic_event.98.d:0 "Банк #v [SCOPE.sCompany('seller').GetName]#! из #v [SCOPE.sC('seller_country').GetName]#! осуществил продажу валюты на международных рынках после снижения ключевой ставки."
+00_ef_economic_event.98.f:0 "Он продал в общей сложности #v [SCOPE.sC('buyer').MakeScope.Var('sell_arbitrage_value_10_in_currency').GetValue|D] [SCOPE.sC('buyer').GetCustom('currency_symbol')]#! — что эквивалентно #v [SCOPE.sC('buyer').MakeScope.Var('sell_arbitrage_value_in_metal').GetValue|D]#! [SCOPE.sC('buyer').GetCustom('monetary_system_partiel')] — в соответствии с рыночными условиями.\n\nЭта операция отражает арбитражную стратегию банка после смягчения денежной политики, которое снижает относительную привлекательность валюты на рынках."
+00_ef_economic_event.98.a:0 "Продолжить"
+
+#00_ef_economic_event.981
+00_ef_economic_event.981.t:0 "Продажа [SCOPE.sC('buyer').GetCustom('currency_name')] [SCOPE.sC('seller').GetCustom('currency_symbol')]"
+00_ef_economic_event.981.d:0 "Банк #v [SCOPE.sCompany('seller').GetName]#! из #v [SCOPE.sC('seller_country').GetName]#! осуществил продажу валюты на международных рынках после повышения установленной законом стоимости денежного стандарта."
+00_ef_economic_event.981.f:0 "Официальная переоценка стандарта увеличила законную стоимость валюты. Частные банки арбитражируют эту ситуацию, продавая валюту, чтобы вернуть металл, который стал относительно более выгодным.\n\nВ рамках этого банк продал в общей сложности #v [SCOPE.sC('buyer').MakeScope.Var('sell_arbitrage_value_10_in_currency').GetValue|D] [SCOPE.sC('buyer').GetCustom('currency_symbol')]#! — что эквивалентно #v [SCOPE.sC('buyer').MakeScope.Var('sell_arbitrage_value_in_metal').GetValue|D]#! [SCOPE.sC('buyer').GetCustom('monetary_system_partiel')] — в соответствии с рыночными условиями.\n\nЭта операция составляет примерно #v 10%#! резервов, находившихся у банка, мобилизованных для того, чтобы воспользоваться разрывом, созданным новым официальным паритетом."
+00_ef_economic_event.981.a:0 "Продолжить"
+
+#00_ef_economic_event.982
+00_ef_economic_event.982.t:0 "Давление на [SCOPE.sC('buyer').GetCustom('currency_name')] [SCOPE.sC('seller').GetCustom('currency_symbol')]"
+00_ef_economic_event.982.d:0 "Банк #v [SCOPE.sCompany('seller').GetName]#! из #v [SCOPE.sC('seller_country').GetName]#! осуществил значительную продажу валюты на международных рынках, поскольку валюта подвержена колебаниям мировой цены на серебро."
+00_ef_economic_event.982.f:0 "Будучи зависимой от #v Серебра#! @silver!, стоимость валюты напрямую определяется международными колебаниями цены металла. Когда цена серебра снижается, частные банки склонны избавляться от этой валюты, считающейся более хрупкой по сравнению с валютами, обеспеченными более стабильными стандартами.\n\nВ этом контексте банк продал в общей сложности #v [SCOPE.sC('buyer').MakeScope.Var('sell_arbitrage_value_10_in_currency').GetValue|D] [SCOPE.sC('buyer').GetCustom('currency_symbol')]#! — что эквивалентно #v [SCOPE.sC('buyer').MakeScope.Var('sell_arbitrage_value_in_metal').GetValue|D]#! [SCOPE.sC('buyer').GetCustom('monetary_system_partiel')] — в соответствии с рыночными условиями.\n\nДавление со стороны финансовых учреждений иллюстрирует уязвимость валюты, привязанной к металлу, подверженному сильной международной волатильности."
+00_ef_economic_event.982.a:0 "Продолжить"
+
+# [SCOPE.sC('seller').GetCustom('currency_name')]  #nom d ema currency 
+# [SCOPE.sC('seller').GetCustom('currency_symbol')] #sybole de ma currency
+# seller #mon pays
+# buyer #la banque qui achete
+# buyer_country #le pays de la bank
+# capital_state #capital du pays de la bank 
+  
+# [SCOPE.sC('buyer_country').MakeScope.Var('arbitrage_value_in_currency').GetValue]
+# [SCOPE.sC('buyer_country').MakeScope.Var('arbitrage_value_in_metal').GetValue]
+
+#monetary_system_partiel
+
+##################
+#Crisis event
+##################
+  #currency_crisis
+  00_ef_economic_event.100.t:0 "Валютный кризис в [SCOPE.sC('target_country').GetAltName('RU_CL_PP')]"
+  00_ef_economic_event.100.d:1 "Курс [SCOPE.sC('target_country').GetCustom('currency_name')]#! [SCOPE.sC('target_country').GetCustom('currency_symbol')] изменился более чем на [SCOPE.sC('target_country').MakeScope.ScriptValue('money_value_dif_1_final')|%|+=], что вызвало валютный кризис в [SCOPE.sC('target_country').GetAltName('RU_CL_PP')]."
+  00_ef_economic_event.100.f:1 "Валютный кризис происходит, когда валюта быстро теряет свою стоимость, чаще всего из-за утраты доверия инвесторов или граждан к экономике страны. Это приводит к резкому росту цен на импортные товары и услуги, девальвации валюты и может вызвать серьёзные экономические потрясения."
+  00_ef_economic_event.100.a:0 "Разжечь большой пожар"
+
+  #currency_crisis
+  00_ef_economic_event.101.t:0 "Экономический кризис в [SCOPE.sC('target_country').GetAltName('RU_CL_PP')]"
+  00_ef_economic_event.101.d:1 "[SCOPE.sC('target_country').GetCustom('currency_name')]#! переживает экономический кризис: в этом году ВВП снизился на [SCOPE.sC('target_country').MakeScope.ScriptValue('GDP_dif_1_final')|%|+=]."
+  00_ef_economic_event.101.f:1 "Экономический кризис — это период серьёзных финансовых трудностей, который затрагивает страну или регион. Он характеризуется быстрым спадом производства, ростом безработицы и сокращением инвестиций. Во время экономического кризиса предприятия могут закрываться, потребители тратят меньше, а доверие к экономике рушится. Это может происходить по разным причинам, например из-за финансовых проблем, стихийных бедствий, политических изменений или войн. Экономические кризисы могут иметь долгосрочные последствия для жизни людей и экономики в целом."
+  00_ef_economic_event.101.a:0 "Любые трудности — это возможность восстановиться и стать сильнее."
+
+  #currency_crisis
+  00_ef_economic_event.102.t:0 "Финансовый крах в [SCOPE.sC('target_country').GetAltName('RU_CL_PP')]"
+  00_ef_economic_event.102.d:1 "#T [SCOPE.sC('target_country').GetCustom('stock_exchange_name')]#!, фондовая биржа [SCOPE.sC('target_country').GetAltName('RU_CL_RP')], пережила финансовый крах величиной [SCOPE.sC('target_country').MakeScope.Var('country_indice_value_dif_01').GetValue|%|+=]."
+  00_ef_economic_event.102.f:1 "Финансовый крах — это внезапное и значительное падение стоимости финансовых активов, таких как акции или облигации, которое вызывает массовую панику среди инвесторов. Обычно он связан с такими факторами, как экономическая нестабильность, рыночные спекуляции или внешние шоки, приводящие к утрате доверия к рынку. Во время финансового краха котировки акций обрушиваются, и инвесторы могут понести существенные потери, что способно вызвать более широкие экономические последствия, такие как рецессия или рост безработицы."
+  00_ef_economic_event.102.a:0 "Рынки непредсказуемы, но это также возможность всё переосмыслить и обновиться."
+
+  #central_bank_bankruptcy
+  00_ef_economic_event.103.t:0 "Банкротство центрального банка в [SCOPE.sC('target_country').GetAltName('RU_CL_PP')]"
+  00_ef_economic_event.103.d:1 "Центральный банк [SCOPE.sC('target_country').GetAltName('RU_CL_RP')] обанкротился, что привело к существенной утрате доверия к его валюте."
+  00_ef_economic_event.103.f:1 "Банкротство центрального банка происходит, когда учреждение больше не может выполнять свои финансовые обязательства — часто из-за огромных убытков по активам или неэффективного управления денежной политикой. Это приводит к утрате доверия к национальной валюте, вызывая девальвацию, инфляцию или гиперинфляцию. Банкротство центрального банка также может дестабилизировать экономику страны, подорвать финансовую устойчивость и привести к тяжёлым последствиям для всей экономической системы."
+  00_ef_economic_event.103.a:0 "Надеюсь, у нас не было активов в этом банке"
+
+  #country_bankruptcy
+  00_ef_economic_event.104.t:0 "[SCOPE.sC('target_country').GetName] — государство-банкрот."
+  00_ef_economic_event.104.d:1 "После многих лет борьбы с хронически дефицитным бюджетом [SCOPE.sC('target_country').GetName] объявил[SCOPE.sC('target_country').GetAltNameNoFormatting('RU_CL_END_FEM')] дефолт по своему долгу."
+  00_ef_economic_event.104.f:1 "Страна-банкрот — это государство, которое не в состоянии выполнять свои финансовые обязательства, чаще всего из-за непосильного долга и неэффективного управления экономикой. Обычно это приводит к дефолту по займам, что вызывает утрату доверия со стороны инвесторов и международного сообщества. Страна-банкрот может столкнуться с тяжёлыми экономическими последствиями, включая гиперинфляцию, высокую безработицу и социальные волнения. Правительству становится трудно обеспечивать базовые услуги, а граждане могут столкнуться со снижением уровня жизни по мере обрушения экономики."
+  00_ef_economic_event.104.a:0 "Даже в самые тёмные времена всегда есть путь к восстановлению и шанс начать заново."
+
+  #country_bankruptcy
+  00_ef_economic_event.105.t:0 "[SCOPE.sC('target_country').GetName] в состоянии экономической нестабильности."
+  00_ef_economic_event.105.d:1 "[SCOPE.sC('target_country').GetName] переживает затяжную экономическую нестабильность. Если эта тенденция сохранится, это может привести к крупному кризису."
+  00_ef_economic_event.105.f:1 "[SCOPE.sC('target_country').GetName] в настоящее время сталкивается с экономической нестабильностью из-за нескольких кризисов, включая валютный кризис, экономический кризис, финансовый крах, банкротство центрального банка и угрозу банкротства государства. Если любой из этих кризисов повторится, это может привести к катастрофическим экономическим последствиям, включая тяжёлую инфляцию, рост безработицы и долгосрочный спад (2 года). Необходимы немедленные действия, чтобы стабилизировать ситуацию и предотвратить дальнейшее ухудшение."
+  #\n economic_instability_count [SCOPE.sC('target_country').MakeScope.Var('economic_instability_count').GetValue|D]\n country_bankruptcy [SCOPE.sC('target_country').MakeScope.Var('country_bankruptcy').GetValue|D]\n currency_crisis [SCOPE.sC('target_country').MakeScope.Var('currency_crisis').GetValue|D]\n central_bank_bankruptcy [SCOPE.sC('target_country').MakeScope.Var('central_bank_bankruptcy').GetValue|D]\n economic_crisis [SCOPE.sC('target_country').MakeScope.Var('economic_crisis').GetValue|D]\n financial_crash [SCOPE.sC('target_country').MakeScope.Var('financial_crash').GetValue|D]"
+  00_ef_economic_event.105.a:0 "Давайте примем необходимые меры." 
+# из localization/russian/01_ef_event_localization_l_russian.yml, строки 391–410 (на 6.10.2026), ключи локализации событий .97–.105 и сообщений .97–.982
+  notification_00_ef_economic_event_97_message_tooltip:0 "#header $notification_00_ef_economic_event_97_message_name$#!\n$TOOLTIP_DELIMITER$\n$notification_00_ef_economic_event_97_message_desc$"
+  notification_00_ef_economic_event_97_message_name:0 "Арбитраж на [SCOPE.sC('seller').GetCustom('currency_name')]"
+  notification_00_ef_economic_event_97_message_desc:0 "Рост курса повысил привлекательность валюты, и частные банки стали докупать её, чтобы воспользоваться новым паритетом. Это подстёгивает приток металла в страну-эмитент.\n\nВ рамках этого банк приобрёл в общей сложности #v [SCOPE.sC('buyer_country').MakeScope.Var('arbitrage_value_in_currency').GetValue|D] [SCOPE.sC('seller').GetCustom('currency_symbol')]#! — что соответствует #v [SCOPE.sC('buyer_country').MakeScope.Var('arbitrage_value_in_metal').GetValue|D]#! [SCOPE.sC('seller').GetCustom('monetary_system_partiel')] — сообразно рыночным условиям и действующему паритету.\n\nОперация отражает инвестиционную стратегию банка и возросшее доверие к валюте."
+
+  notification_00_ef_economic_event_971_message_tooltip:0 "#header $notification_00_ef_economic_event_971_message_name$#!\n$TOOLTIP_DELIMITER$\n$notification_00_ef_economic_event_971_message_desc$"
+  notification_00_ef_economic_event_971_message_name:0 "Накопление [SCOPE.sC('seller').GetCustom('currency_name')] [SCOPE.sC('seller').GetCustom('currency_symbol')]"
+  notification_00_ef_economic_event_971_message_desc:0 "Благодаря устойчивости и центральной роли в международных расчётах эта валюта исторически занимает привилегированное место в структуре банковских резервов. Финансовые учреждения естественным образом стремятся держать её значительную долю — и чтобы обезопасить активы, и чтобы облегчить внешние операции.\n\nВ рамках этого банк приобрёл в общей сложности #v [SCOPE.sC('buyer_country').MakeScope.Var('arbitrage_value_in_currency').GetValue|D] [SCOPE.sC('seller').GetCustom('currency_symbol')]#! — что соответствует #v [SCOPE.sC('buyer_country').MakeScope.Var('arbitrage_value_in_metal').GetValue|D]#! [SCOPE.sC('seller').GetCustom('monetary_system_partiel')] — сообразно принятой финансовой практике.\n\nЭто движение показывает денежный престиж страны-эмитента и структурообразующую роль её валюты в равновесии мировой системы."
+
+  notification_00_ef_economic_event_98_message_tooltip:0 "#header $notification_00_ef_economic_event_98_message_name$#!\n$TOOLTIP_DELIMITER$\n$notification_00_ef_economic_event_98_message_desc$"
+  notification_00_ef_economic_event_98_message_name:0 "Продажа [SCOPE.sC('buyer').GetCustom('currency_name')] [SCOPE.sC('seller').GetCustom('currency_symbol')]"
+  notification_00_ef_economic_event_98_message_desc:0 "Он продал в общей сложности #v [SCOPE.sC('buyer').MakeScope.Var('sell_arbitrage_value_10_in_currency').GetValue|D] [SCOPE.sC('buyer').GetCustom('currency_symbol')]#! — что соответствует #v [SCOPE.sC('buyer').MakeScope.Var('sell_arbitrage_value_in_metal').GetValue|D]#! [SCOPE.sC('buyer').GetCustom('monetary_system_partiel')] — сообразно рыночным условиям.\n\nОперация отражает арбитражную стратегию банка после смягчения денежной политики, которое снижает относительную привлекательность валюты на рынках."
+
+  notification_00_ef_economic_event_981_message_tooltip:0 "#header $notification_00_ef_economic_event_981_message_name$#!\n$TOOLTIP_DELIMITER$\n$notification_00_ef_economic_event_981_message_desc$"
+  notification_00_ef_economic_event_981_message_name:0 "Продажа [SCOPE.sC('buyer').GetCustom('currency_name')] [SCOPE.sC('seller').GetCustom('currency_symbol')]"
+  notification_00_ef_economic_event_981_message_desc:0 "Официальная ревальвация стандарта повысила законную стоимость валюты. Частные банки играют на этом, продавая валюту ради металла, ставшего относительно более выгодным.\n\nВ рамках этого банк продал в общей сложности #v [SCOPE.sC('buyer').MakeScope.Var('sell_arbitrage_value_10_in_currency').GetValue|D] [SCOPE.sC('buyer').GetCustom('currency_symbol')]#! — что соответствует #v [SCOPE.sC('buyer').MakeScope.Var('sell_arbitrage_value_in_metal').GetValue|D]#! [SCOPE.sC('buyer').GetCustom('monetary_system_partiel')] — сообразно рыночным условиям.\n\nЭто примерно #v 10%#! резервов банка, задействованных ради выгоды от разрыва, созданного новым официальным паритетом."
+
+  notification_00_ef_economic_event_982_message_tooltip:0 "#header $notification_00_ef_economic_event_982_message_name$#!\n$TOOLTIP_DELIMITER$\n$notification_00_ef_economic_event_982_message_desc$"
+  notification_00_ef_economic_event_982_message_name:0 "Давление на [SCOPE.sC('buyer').GetCustom('currency_name')] [SCOPE.sC('seller').GetCustom('currency_symbol')]"
+  notification_00_ef_economic_event_982_message_desc:0 "Завися от #v серебра#! @silver!, стоимость валюты напрямую зависит от международных колебаний цены металла. Когда серебро дешевеет, частные банки склонны избавляться от этой валюты, считая её более уязвимой, чем валюты на более устойчивых стандартах.\n\nВ этих условиях банк продал в общей сложности #v [SCOPE.sC('buyer').MakeScope.Var('sell_arbitrage_value_10_in_currency').GetValue|D] [SCOPE.sC('buyer').GetCustom('currency_symbol')]#! — что соответствует #v [SCOPE.sC('buyer').MakeScope.Var('sell_arbitrage_value_in_metal').GetValue|D]#! [SCOPE.sC('buyer').GetCustom('monetary_system_partiel')] — сообразно рыночным условиям.\n\nДавление финансовых учреждений показывает уязвимость валюты, привязанной к металлу с сильной международной волатильностью."
+

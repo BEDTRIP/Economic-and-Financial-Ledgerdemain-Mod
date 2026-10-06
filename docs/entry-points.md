@@ -5,7 +5,7 @@
 - `common/on_actions/00_ef_on_action.txt` — корневые on_action E&F (`ef_on_*_pulse_country`, `ef_on_production_method_changed`, `ef_on_battle_ended`, `com_topbar_setup_ef`).
 - `common/on_actions/PSC_on_actions.txt` — PSC: распределение очков стройки по дням месяца, пересчёт метода конверсии при смене PM/технологии/постройке сектора.
 - `common/on_actions/ld_*_on_actions.txt` — `ld_bank`, `ld_bubble`, `ld_capitalization`, `ld_cb_rate`, `ld_money_model` — месячные хуки модели; `common/on_actions/ld_new_country_immediate_init.txt`, `ld_stockpile_state_var_init` — инициализация переменных; `ld_pb_ai_sector_downsize`, `ld_pb_overbuild_counter` — штраф перестройки (PSC). Имена on_action и эффектов внутри сохранили префикс `zz_ef_*` / `zz_pb_ef_*`.
-- `common/scripted_effects/00_on_action_main.txt` — 19 тыс. строк: все эффекты, которые зовут `ef_on_*`: пульсы ЦБ/ФЦ/нацзапаса, ИИ-торговля валютой, ИИ-стройка, инфляция, исторические события по датам, сбросы счётчиков кризисов.
+- `common/scripted_effects/00_on_action_main.txt` — 15 тыс. строк: все эффекты, которые зовут `ef_on_*`: пульсы ЦБ/ФЦ/нацзапаса, ИИ-торговля валютой, ИИ-стройка, инфляция, исторические события по датам, сбросы счётчиков кризисов.
 - `common/scripted_effects/10_new_country_var.txt` — `new_country_var_ef`: заводит все переменные страны и её штатов (34 тыс. строк).
 - `common/history/global/*.txt`, `common/history/states/01_ef_states.txt`, `common/history/buildings/*.txt` — стартовые данные (см. «Старт игры»).
 - `events/ld_new_country_immediate_init_events.txt` — скрытое событие `zz_ef_newcountry.1` (контекст для `new_country_var_ef` у освобождённой страны).

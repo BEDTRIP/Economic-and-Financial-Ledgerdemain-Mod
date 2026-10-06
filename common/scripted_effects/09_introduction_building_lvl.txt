@@ -23510,29 +23510,6 @@ initialize_historic_macro_facilities_fc = { #history
 	financial_center_modifier = yes
 
 }
-# initialize_historic_macro_facilities_ns = {  #history
-# 	add_technology_researched = stockpiling_goods
-# 	add_technology_researched = national_stockpile
-
-# 	$STOCKPILE_SITE$ = {
-# 		create_building = {
-# 			building = building_national_stockpile
-# 			level = 1
-# 		}
-# 		owner = {
-# 			add_modifier = {
-# 				name = has_national_stockpile
-# 			}
-# 			set_variable = {
-# 				name = stockpile_location
-# 				value = $STOCKPILE_SITE$
-# 			}
-# 		}
-# 	}
-# 	#update_modifiers_bc_fc_ns = yes
-# 	national_stockpile_modifier = yes
-
-# }
 
 #####################################################################################################################################################
 #####################################################################################################################################################
@@ -31597,7 +31574,6 @@ macro_facilities_bc = {
 			market_owner_is_root = no
 			market_owner_is_root_univ_with_buiding = no #na pas la configuration deja sujet actif evite les répétition
 		}
-		#central_bank_production_methods_2 = yes
 	}
 	if = {
 		limit = {

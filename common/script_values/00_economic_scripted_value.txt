@@ -4183,11 +4183,6 @@ EF_gui_room_brut = {
 	}
 }
 
-EF_current_room_moins_1 = {
-	value = var:EF_current_room
-	subtract = 1
-}
-
 #last room gold
 	avant_der_room = {
 		value = EF_gold_gui_room
@@ -4485,20 +4480,6 @@ market_owner_is_root_univ_with_buiding_no_external_currency_consuption = {
 	}
 }
 
-market_owner_is_root_univ_with_buiding_test = {
-	value = 0
-	if = {
-		limit = {
-			market_owner_is_root = yes
-			or = {
-				market_owner_is_root_univ_with_buiding = yes
-				has_law = law_type:law_external_exchange_standard
-			}
-		}
-		add = 1
-	}
-}
-
 gdp_var = {
 	value = root.gdp
 	min = 1
@@ -4541,9 +4522,6 @@ loyalist_fraction_pop = {
 radical_fraction_pop = {
 	value = radical_fraction
 }
-var_global_country_ranking = {
-	value = country_rank
-}
 national_capacity_reference_currency = {
 	value = 1
 	every_country = {
@@ -4559,10 +4537,6 @@ ratio_with_national_capacity_reference_currency = {
 	divide = national_capacity_reference_currency
 }
 
-army_size_var = {
-	value = 0
-	add = army_size
-}
 navy_size_var = {
 	value = 0
 	add = navy_size
@@ -4618,16 +4592,6 @@ value_for_has_financial_center = {
 	value = zz_ef_slots_rating
 	add = zz_ef_slots_cb
 	add = zz_ef_slots_cap
-}
-
-bg_building_urban_center_lvl = {
-	value = 0
-	every_scope_building = {
-		limit = {
-			is_building_type = building_urban_center
-		}
-		add = level
-	}
 }
 
 num_states_var = {
@@ -5078,49 +5042,6 @@ money_supply_stockpile_by_other_country_reference_currency_flux = {
 ############################################################################################################################################################
 ############################################################################################################################################################
 
-player_has_central_bank = {
-	value = 0
-	every_country = {
-		limit = {
-			is_player = yes
-			has_modifier = has_central_bank
-		}
-		add = 1
-	}
-}
-money_value_of_player = {
-	every_country = {
-		limit = {
-			is_player = yes
-		}
-		value = money_value
-	}
-}
-money_value_rapported_inflation_of_player = {
-	every_country = {
-		limit = {
-			is_player = yes
-		}
-		value = money_value_rapported_inflation
-	}
-}
-money_supply_of_player = {
-	every_country = {
-		limit = {
-			is_player = yes
-		}
-		value = money_supply
-	}
-}
-money_supply_stockpile_by_other_country_of_player = {
-	every_country = {
-		limit = {
-			is_player = yes
-		}
-		value = money_supply_stockpile_by_other_country
-	}
-}
-
 ############################################################################################################################################################
 ############################################################################################################################################################
 ############################################################################################################################################################
@@ -5173,10 +5094,6 @@ devaluation_time_month = {
 devaluation_time_1_month = { #special for exchange control
 	value = var:devaluation_time_1
 	multiply = 12
-}
-devaluation_time_week = {
-	value = var:devaluation_time
-	multiply = 52
 }
 inflation_value_predicted_devaluation_month = {
 	value = var:devaluation_rate
@@ -5238,10 +5155,6 @@ revaluation_time_month = {
 revaluation_time_1_month = { #special for exchange control
 	value = var:revaluation_time_1
 	multiply = 12
-}
-revaluation_time_week = {
-	value = var:revaluation_time
-	multiply = 52
 }
 inflation_value_predicted_revaluation_month = {
 	value = var:revaluation_rate
@@ -5560,9 +5473,6 @@ money_value_target_real_above_25 = {
 	value = money_value_target_real_in_gold
 	multiply = 1.25
 }
-money_value_target_real_gui = {
-	add = var:money_value_target_2
-}
 money_value_target = {
 	add = national_capacity
 	divide = var:money_value_target_1  #valeur à choisir
@@ -5579,18 +5489,6 @@ money_supply_80 = {
 	value = money_supply
 	multiply = 0.8
 }
-money_supply_30 = {
-	value = money_supply
-	multiply = 0.3
-}
-money_supply_40 = {
-	value = money_supply
-	multiply = 0.4
-}
-money_supply_50 = {
-	value = money_supply
-	multiply = 0.5
-}
 purchasable_currency_amount_80 = {
 	value = money_supply_80
 	subtract = money_value_target
@@ -5603,15 +5501,6 @@ private_bank_funds_errosion_projection_ratio = {
 	value = private_bank_funds_errosion_projection
 	divide = money_supply
 }
-private_bank_funds_growing_projection = {
-	value = private_bank_funds
-	add = private_bank_borrowings_year
-}
-private_bank_funds_growing_projection_ratio = {
-	value = private_bank_funds_growing_projection
-	divide = money_supply
-}
-
 private_bank_funds_pourcent_projection = {
 	value = private_bank_funds
 	subtract = purchasable_currency_amount
@@ -5725,15 +5614,6 @@ private_bank_funds_min_limit_ratio = {
 }
 
 
-private_bank_funds_limit_60 = {
-	value = private_bank_funds_limit
-	multiply = 0.6
-}
-private_bank_funds_limit_80 = {
-	value = private_bank_funds_limit
-	multiply = 0.8
-}
-
 money_value_dif_1_final = {
 	value = var:money_value_dif_1
 }
@@ -5825,12 +5705,6 @@ percentage_money_supply_abroad = {
 	value = 0
 	add = money_supply_stockpile_by_other_country
 	divide = total_money_supply
-}
-private_bank_funds_monthly = {
-	value = 0
-	add = investment_pool_income
-
-	min = 1
 }
 money_supply_state_25 = {
 	value = money_supply_state
@@ -6068,10 +5942,6 @@ silver_state_native_for_stockpile_in_gold = {
 trade_balance_gold_to_silver_rate = {
     add = var:trade_balance_in_gold_fixe
     multiply = gold_to_silver_rate
-}
-trade_balance_bimetallic_rate_gold_to_silver = {
-    add = var:trade_balance_in_gold_fixe
-    multiply = bimetallic_rate_gold_to_silver
 }
 trade_balance_bimetallic_rate_silver_to_gold = {
     add = var:trade_balance_in_gold_fixe
@@ -6380,25 +6250,6 @@ money_value_bimetallism_standard_in_gold_33 = {
 	value = money_value_bimetallism_standard_in_gold #pb avec le fiatt stta	andar affiche 0 ddonc je l'ai remis sinnon just money_value
 	multiply = 0.66
 }
-stockpiling_central_bank_metal_reserves_bimetallism_standard = {
-	value = 0
-
-	add = {
-		add = silver_market_goods_sell_orders
-		#multiply = 1000
-		multiply = 100
-		multiply = 4 #month
-		multiply = gold_to_silver_rate
-	}
-
-	add = {
-		add = gold_market_goods_sell_orders
-	#	multiply = 1000
-		multiply = 100
-		multiply = 4 #month
-		#multiply = gold_to_silver_rate
-	}
-}
 stockpiling_central_bank_metal_reserves_bimetallism_standard_in_gold = {
 	value = 0
 	add = stockpiling_central_bank_metal_reserves_silver_standard_in_gold
@@ -6452,10 +6303,6 @@ money_value_gold_standard = {
 	value = central_bank_reserves_gold_standard
 	divide = money_supply
 }
-money_value_gold_standard_33 = {
-	value = money_value_gold_standard
-	multiply = 0.66
-}
 stockpiling_central_bank_metal_reserves_gold_standard = {
 	value = 0
 
@@ -6483,13 +6330,6 @@ total_gold_reserves = {
 percentage_gold_borrowed = {
 	value = gold_loaned_to_central_bank
 	divide = central_bank_reserves
-}
-all_gold_value_inflation = {
-	value = 0
-	add = central_bank_metal_reserves_state
-	add = var:trade_balance_in_gold_fixe
-
-	#add = gold_loaned_to_central_bank
 }
 all_gold_owned = {
 	value = 0
@@ -6587,261 +6427,9 @@ gold_available_for_purchase = {
 	value = central_bank_reserves
 	subtract = central_bank_metal_reserves_state_to_ensure_the_conversion_75
 }
-gold_available_for_purchase_10 = {
-	value = gold_available_for_purchase
-	multiply = 0.1
-}
-gold_available_for_purchase_09 = {
-	value = gold_available_for_purchase
-	multiply = 0.09
-}
-gold_available_for_purchase_08 = {
-	value = gold_available_for_purchase
-	multiply = 0.08
-}
-gold_available_for_purchase_07 = {
-	value = gold_available_for_purchase
-	multiply = 0.07
-}
-gold_available_for_purchase_06 = {
-	value = gold_available_for_purchase
-	multiply = 0.06
-}
-gold_available_for_purchase_05 = {
-	value = gold_available_for_purchase
-	multiply = 0.05
-}
-gold_available_for_purchase_04 = {
-	value = gold_available_for_purchase
-	multiply = 0.04
-}
-gold_available_for_purchase_03 = {
-	value = gold_available_for_purchase
-	multiply = 0.03
-}
-gold_available_for_purchase_02 = {
-	value = gold_available_for_purchase
-	multiply = 0.02
-}
-gold_available_for_purchase_01 = {
-	value = gold_available_for_purchase
-	multiply = 0.01
-}
-
-valid_purchasable_currency_amount_10 = {
-	value = gold_available_for_purchase_10
-	divide = scope:undervalued_currency_country_owner.money_value
-}
-valid_purchasable_currency_amount_09 = {
-	value = gold_available_for_purchase_09
-	divide = scope:undervalued_currency_country_owner.money_value
-}
-valid_purchasable_currency_amount_08 = {
-	value = gold_available_for_purchase_08
-	divide = scope:undervalued_currency_country_owner.money_value
-}
-valid_purchasable_currency_amount_07 = {
-	value = gold_available_for_purchase_07
-	divide = scope:undervalued_currency_country_owner.money_value
-}
-valid_purchasable_currency_amount_06 = {
-	value = gold_available_for_purchase_06
-	divide = scope:undervalued_currency_country_owner.money_value
-}
-valid_purchasable_currency_amount_05 = {
-	value = gold_available_for_purchase_05
-	divide = scope:undervalued_currency_country_owner.money_value
-}
-valid_purchasable_currency_amount_04 = {
-	value = gold_available_for_purchase_04
-	divide = scope:undervalued_currency_country_owner.money_value
-}
-valid_purchasable_currency_amount_03 = {
-	value = gold_available_for_purchase_03
-	divide = scope:undervalued_currency_country_owner.money_value
-}
-valid_purchasable_currency_amount_02 = {
-	value = gold_available_for_purchase_02
-	divide = scope:undervalued_currency_country_owner.money_value
-}
-valid_purchasable_currency_amount_01 = {
-	value = gold_available_for_purchase_01
-	divide = scope:undervalued_currency_country_owner.money_value
-}
-
-valid_purchasable_currency_amount = {
-	if = {
-		limit  = {
-			purchasable_currency_amount > valid_purchasable_currency_amount_10
-		}
-		add = valid_purchasable_currency_amount_10
-	}
-	if = {
-		limit  = {
-			purchasable_currency_amount < valid_purchasable_currency_amount_10
-			purchasable_currency_amount > valid_purchasable_currency_amount_9
-		}
-		add = valid_purchasable_currency_amount_9
-	}
-	if = {
-		limit  = {
-			purchasable_currency_amount < valid_purchasable_currency_amount_9
-			purchasable_currency_amount > valid_purchasable_currency_amount_8
-		}
-		add = valid_purchasable_currency_amount_8
-	}
-	if = {
-		limit  = {
-			purchasable_currency_amount < valid_purchasable_currency_amount_8
-			purchasable_currency_amount > valid_purchasable_currency_amount_7
-		}
-		add = valid_purchasable_currency_amount_7
-	}
-	if = {
-		limit  = {
-			purchasable_currency_amount < valid_purchasable_currency_amount_7
-			purchasable_currency_amount > valid_purchasable_currency_amount_6
-		}
-		add = valid_purchasable_currency_amount_6
-	}
-	if = {
-		limit  = {
-			purchasable_currency_amount < valid_purchasable_currency_amount_6
-			purchasable_currency_amount > valid_purchasable_currency_amount_5
-		}
-		add = valid_purchasable_currency_amount_5
-	}
-	if = {
-		limit  = {
-			purchasable_currency_amount < valid_purchasable_currency_amount_5
-			purchasable_currency_amount > valid_purchasable_currency_amount_4
-		}
-		add = valid_purchasable_currency_amount_4
-	}
-	if = {
-		limit  = {
-			purchasable_currency_amount < valid_purchasable_currency_amount_4
-			purchasable_currency_amount > valid_purchasable_currency_amount_3
-		}
-		add = valid_purchasable_currency_amount_3
-	}
-	if = {
-		limit  = {
-			purchasable_currency_amount < valid_purchasable_currency_amount_3
-			purchasable_currency_amount > valid_purchasable_currency_amount_2
-		}
-		add = valid_purchasable_currency_amount_2
-	}
-	if = {
-		limit  = {
-			purchasable_currency_amount < valid_purchasable_currency_amount_2
-			purchasable_currency_amount > valid_purchasable_currency_amount_1
-		}
-		add = valid_purchasable_currency_amount_1
-	}
-}
-
-valid_purchasable_currency_amount_1 = {
-	value = 0
-}
-valid_purchasable_currency_amount_2 = {
-	value = 0
-}
-valid_purchasable_currency_amount_3 = {
-	value = 0
-}
-valid_purchasable_currency_amount_4 = {
-	value = 0
-}
-valid_purchasable_currency_amount_5 = {
-	value = 0
-}
-valid_purchasable_currency_amount_6 = {
-	value = 0
-}
-valid_purchasable_currency_amount_7 = {
-	value = 0
-}
-valid_purchasable_currency_amount_8 = {
-	value = 0
-}
-valid_purchasable_currency_amount_9 = {
-	value = 0
-}
-valid_purchasable_currency_amount_10= {
-	value = 0
-}
-
 ############
 gold_reserves_var = {
 	value = gold_reserves
-}
-gold_reserve_rest = {
-	value = gold_reserves
-
-	subtract = var:ammunition_buy_price_by_price_in_gold
-	subtract = var:ammunition_sell_price_by_price_in_gold
-	subtract = var:small_arms_buy_price_by_price_in_gold
-	subtract = var:small_arms_sell_price_by_price_in_gold
-	subtract = var:artillery_buy_price_by_price_in_gold
-	subtract = var:artillery_sell_price_by_price_in_gold
-	subtract = var:tanks_buy_price_by_price_in_gold
-	subtract = var:tanks_sell_price_by_price_in_gold
-	subtract = var:aeroplanes_buy_price_by_price_in_gold
-	subtract = var:aeroplanes_sell_price_by_price_in_gold
-	subtract = var:grain_buy_price_by_price_in_gold
-	subtract = var:grain_sell_price_by_price_in_gold
-	subtract = var:fabric_buy_price_by_price_in_gold
-	subtract = var:fabric_sell_price_by_price_in_gold
-	subtract = var:wood_buy_price_by_price_in_gold
-	subtract = var:wood_sell_price_by_price_in_gold
-	subtract = var:groceries_buy_price_by_price_in_gold
-	subtract = var:groceries_sell_price_by_price_in_gold
-	subtract = var:clothes_buy_price_by_price_in_gold
-	subtract = var:clothes_sell_price_by_price_in_gold
-	subtract = var:paper_buy_price_by_price_in_gold
-	subtract = var:paper_sell_price_by_price_in_gold
-	subtract = var:silk_buy_price_by_price_in_gold
-	subtract = var:silk_sell_price_by_price_in_gold
-	subtract = var:dye_buy_price_by_price_in_gold
-	subtract = var:dye_sell_price_by_price_in_gold
-	subtract = var:sulfur_buy_price_by_price_in_gold
-	subtract = var:sulfur_sell_price_by_price_in_gold
-	subtract = var:coal_buy_price_by_price_in_gold
-	subtract = var:coal_sell_price_by_price_in_gold
-	subtract = var:iron_buy_price_by_price_in_gold
-	subtract = var:iron_sell_price_by_price_in_gold
-	subtract = var:lead_buy_price_by_price_in_gold
-	subtract = var:lead_sell_price_by_price_in_gold
-	subtract = var:hardwood_buy_price_by_price_in_gold
-	subtract = var:hardwood_sell_price_by_price_in_gold
-	subtract = var:rubber_buy_price_by_price_in_gold
-	subtract = var:rubber_sell_price_by_price_in_gold
-	subtract = var:oil_buy_price_by_price_in_gold
-	subtract = var:oil_sell_price_by_price_in_gold
-	subtract = var:engines_buy_price_by_price_in_gold
-	subtract = var:engines_sell_price_by_price_in_gold
-	subtract = var:steel_buy_price_by_price_in_gold
-	subtract = var:steel_sell_price_by_price_in_gold
-	subtract = var:fertilizer_buy_price_by_price_in_gold
-	subtract = var:fertilizer_sell_price_by_price_in_gold
-	subtract = var:tools_buy_price_by_price_in_gold
-	subtract = var:tools_sell_price_by_price_in_gold
-	subtract = var:explosives_buy_price_by_price_in_gold
-	subtract = var:explosives_sell_price_by_price_in_gold
-	subtract = var:automobiles_buy_price_by_price_in_gold
-	subtract = var:automobiles_sell_price_by_price_in_gold
-	subtract = var:telephones_buy_price_by_price_in_gold
-	subtract = var:telephones_sell_price_by_price_in_gold
-	subtract = var:radios_buy_price_by_price_in_gold
-	subtract = var:radios_sell_price_by_price_in_gold
-	subtract = var:opium_buy_price_by_price_in_gold
-	subtract = var:opium_sell_price_by_price_in_gold
-
-}
-gold_reserves_var_01 = {
-	value = gold_reserves_var
-	multiply = 0.01
 }
 gold_reserves_var_02 = {
 	value = gold_reserves_var
@@ -6879,18 +6467,6 @@ gold_reserves_var_10 = {
 	value = gold_reserves_var
 	multiply = 0.1
 }
-gold_reserves_var_11 = {
-	value = gold_reserves_var
-	multiply = 0.11
-}
-gold_reserves_var_12 = {
-	value = gold_reserves_var
-	multiply = 0.12
-}
-gold_reserves_var_13 = {
-	value = gold_reserves_var
-	multiply = 0.13
-}
 gold_reserves_var_25 = {
 	value = gold_reserves_var
 	multiply = 0.25
@@ -6912,10 +6488,6 @@ gold_reserves_20 = {
 	value = gold_reserves_limit
 	multiply = 0.20
 }
-gold_reserves_25 = {
-	value = gold_reserves_limit
-	multiply = 0.25
-}
 gold_reserves_30 = {
 	value = gold_reserves_limit
 	multiply = 0.23
@@ -6935,10 +6507,6 @@ gold_reserves_60 = {
 gold_reserves_70 = {
 	value = gold_reserves_limit
 	multiply = 0.70
-}
-gold_reserves_75 = {
-	value = gold_reserves_limit
-	multiply = 0.75
 }
 gold_reserves_80 = {
 	value = gold_reserves_limit
@@ -7028,13 +6596,6 @@ bond_creation_by_debt = {
 	divide = bond_price
 }
 
-credit_at_central_bank_in_gold = {
-	value = var:credit_at_central_bank
-	multiply = money_value_rapported_inflation
-}
-government_loan_fixe = {
-	value = var:government_loan
-}
 country_minting_month = {
 	add = root.modifier:country_minting_add
 	multiply = {
@@ -7301,10 +6862,6 @@ silver_market_goods_sell_orders = {
 		}
 	}
 }
-stockpiling_central_bank_metal_reserves_var_0 = {
-	value = var:stockpiling_central_bank_metal_reserves_var_1
-}
-
 debt_in_gold_sc = {
 	value = var:debt_in_gold
 }
@@ -7823,25 +7380,12 @@ exchange_rate_for_international_trade_buy_for_target_market_panel = {
 	divide = player.money_value_in_gold
 }
 
-exchange_rate_for_international_trade_buy_market_panel_gui = {
-	value = scope:buyer.money_value_in_gold
-	divide = money_value_in_gold
-}
 exchange_rate_for_international_trade_buy_for_target_market_panel_gui = {
 	value = money_value_in_gold
 	divide = scope:buyer.money_value_in_gold
 }
 
 #######
-exchange_rate_our_reference = {    #(FRF/GBP = 0.25) = (1FRF = 0.25 GBP)
-	value = money_value_in_gold
-	divide = global_monetary_reference
-}
-exchange_rate_reference_our = {  #(GBP/FRF = 15) = (1GBP = 15 FRF)
-	value = global_monetary_reference
-	divide = money_value_in_gold
-}
-
 ############################################################################################################################################################
 ############################################################################################################################################################
 ############################################################################################################################################################
@@ -8817,196 +8361,6 @@ overlord_money_value_target = {
 	value = overlord.var:money_value_target_1
 }
 
-devaluation_money_value_target_in_gold = {
-	value = 0
-	if = {
-		#1
-		limit = {
-			money_value_median_and_money_value_in_gold_ratio > 1
-			money_value_median_and_money_value_in_gold_ratio < 1.1
-		}
-		value = global_var:money_value_median
-		multiply = rate_by_law_metal_type
-	}
-	if = {
-		#1.1
-		limit = {
-			money_value_median_and_money_value_in_gold_ratio > 1.1
-			money_value_median_and_money_value_in_gold_ratio < 1.2
-		}
-		value = global_var:money_value_median
-		multiply = 1
-	}
-	if = {
-		#1.2
-		limit = {
-			money_value_median_and_money_value_in_gold_ratio > 1.2
-			money_value_median_and_money_value_in_gold_ratio < 1.3
-		}
-		value = global_var:money_value_median
-		multiply = 1.1
-	}
-	if = {
-		#1.3
-		limit = {
-			money_value_median_and_money_value_in_gold_ratio > 1.3
-			money_value_median_and_money_value_in_gold_ratio < 1.4
-		}
-		value = global_var:money_value_median
-		multiply = 1.2
-	}
-	if = {
-		#1.4
-		limit = {
-			money_value_median_and_money_value_in_gold_ratio > 1.4
-			money_value_median_and_money_value_in_gold_ratio < 1.5
-		}
-		value = global_var:money_value_median
-		multiply = 1.3
-	}
-	if = {
-		#1.5
-		limit = {
-			money_value_median_and_money_value_in_gold_ratio > 1.5
-			money_value_median_and_money_value_in_gold_ratio < 1.6
-		}
-		value = global_var:money_value_median
-		multiply = 1.4
-	}
-	if = {
-		#1.6
-		limit = {
-			money_value_median_and_money_value_in_gold_ratio > 1.6
-			money_value_median_and_money_value_in_gold_ratio < 1.7
-		}
-		value = global_var:money_value_median
-		multiply = 1.5
-	}
-	if = {
-		#1.7
-		limit = {
-			money_value_median_and_money_value_in_gold_ratio > 1.7
-			money_value_median_and_money_value_in_gold_ratio < 1.8
-		}
-		value = global_var:money_value_median
-		multiply = 1.6
-	}
-	if = {
-		#1.8
-		limit = {
-			money_value_median_and_money_value_in_gold_ratio > 1.8
-			money_value_median_and_money_value_in_gold_ratio < 1.9
-		}
-		value = global_var:money_value_median
-		multiply = 1.7
-	}
-	if = {
-		#1.9
-		limit = {
-			money_value_median_and_money_value_in_gold_ratio > 1.9
-		}
-		value  = {
-			add = var:money_value_target_1
-			multiply = 0.9
-		}
-	}
-
-	if = {
-		#
-		limit = {
-			var:money_value_target_1 > revaluation_money_value_max
-		}
-		value = revaluation_money_value_max
-		divide = rate_by_law_metal_type
-	}
-}
-revaluation_money_value_target_in_gold = {
-	value = 0
-
-	if = { #réévalue à la valeur de la moyenne si la cible est a 0
-		limit = {
-			var:money_value_target_1 = 0
-		}
-		value = global_var:money_value_median
-	}
-
-	if = {
-		limit = {
-			money_value_median_and_money_value_in_gold_ratio <  1
-			money_value_median_and_money_value_in_gold_ratio > 0.9
-		}
-		value = global_var:money_value_median
-	}
-
-	if = {
-		#0.8
-		limit = {
-			money_value_median_and_money_value_in_gold_ratio < 0.9
-		}
-		value = global_var:money_value_median
-		multiply = 1
-	}
-	if = {
-		#0.8
-		limit = {
-			money_value_median_and_money_value_in_gold_ratio < 0.8
-		}
-		value = global_var:money_value_median
-		multiply = 0.9
-	}
-	if = {
-		#0.7
-		limit = {
-			money_value_median_and_money_value_in_gold_ratio < 0.7
-		}
-		value = global_var:money_value_median
-		multiply = 0.8
-	}
-	if = {
-		#0.6
-		limit = {
-			money_value_median_and_money_value_in_gold_ratio < 0.6
-		}
-		value = global_var:money_value_median
-		multiply = 0.7
-	}
-	if = {
-		#0.5
-		limit = {
-			money_value_median_and_money_value_in_gold_ratio < 0.5
-		}
-		value = global_var:money_value_median
-		multiply = 0.6
-	}
-	if = {
-		#0.4
-		limit = {
-			money_value_median_and_money_value_in_gold_ratio < 0.4
-		}
-		value = global_var:money_value_median
-		multiply = 0.5
-	}
-	if = {
-		#0.3
-		limit = {
-			money_value_median_and_money_value_in_gold_ratio < 0.3
-		}
-		value = global_var:money_value_median
-		multiply = 0.4
-		multiply = rate_by_law_metal_type
-	}
-	if = {
-		#0.2
-		limit = {
-			money_value_median_and_money_value_in_gold_ratio < 0.2
-		}
-		value = global_var:money_value_median
-		multiply = 0.3
-	}
-
-	#max = revaluation_money_value_max
-}
-
 ############################################################################################################################################################
 ############################################################################################################################################################
 ############################################################################################################################################################
@@ -9154,50 +8508,6 @@ effective_pool_growth = {
 	}
 }
 
-base_rate_percentage_target = {
-    value = 0
-
-    # --- Zone 1 : Couverture en crise absolue (< 40%) ---
-    if = {
-        limit = { central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 0.40 }
-        add = 0.10     # 10%
-    }
-
-    # --- Zone 2 : Mauvaise couverture (40% → 70%) ---
-    if = {
-        limit = {
-            central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent >= 0.40
-            central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 0.70
-        }
-        add = 0.08     # 8%
-    }
-
-    # --- Zone 3 : Zone normale / historique (70% → 110%) ---
-    if = {
-        limit = {
-            central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent >= 0.70
-            central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 1.10
-        }
-        add = 0.05     # 5% (taux neutre historique)
-    }
-
-    # --- Zone 4 : Couverture solide (110% → 150%) ---
-    if = {
-        limit = {
-            central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent >= 1.10
-            central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 1.50
-        }
-        add = 0.03     # 3%
-    }
-
-    # --- Zone 5 : Couverture excellente (> 150%) ---
-    if = {
-        limit = {
-            central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent >= 1.50
-        }
-        add = 0.01     # 1% (taux plancher absolu)
-    }
-}
 base_rate_percentage_delta = {
 	value = var:base_rate_percentage
 	subtract = var:base_rate_percentage_old

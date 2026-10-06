@@ -43,3 +43,17 @@ _archive/<механизм>/
 | Здание-пустышка `building_ef_private_construction`, 4 PM `pm_*_buildings_private`, PMG, кнопки `speculative_share_9..13` (ветка ИИ и снос), модификаторы, текстиконка, меши | `ef_private_construction_building/` | 3 файла целиком; эффект и вызов `building_ef_private_construction_modifier`; 5 scripted_button и sgui 13; 4 строки JE; обёртка в виджете; 2 static_modifier, тип модификатора, texticon, 6 строк `city_types`, ключи локализации |
 | Товары национальных валют `<cur>_c` (закомментированы), их цвета, модификаторы `goods_input/output_<cur>_c_*` (300 типов), `bond_usa` | `ef_goods_currencies/` | 1 тыс. строк комментариев в `ef_00_goods.txt`; 95 цветов; 300 типов модификаторов и их ключи локализации; `bond_usa` |
 | Значения PSC без ссылок (`command_economy_spending_mult`, `oversupply_limit`, `state_oversupply_limit`, `construction_price_weeks`, `construction_sector_efficiency_multiplier`) | `psc_unused_values/` | пять определений из `PSC_set_values.txt` / `PSC_construction_values.txt` |
+| Вызов `initialize_historic_macro_facilities_ns` (эффекта нет) | `ef_initialize_macro_facilities/` | блок `if` в `history/buildings/00_ef_building.txt`; закомментированное определение; абзац комментария |
+| `central_bank_production_methods_2` (+ `_2_act`) | `ef_central_bank_pm_subject_2/` | 2 определения (2682 строки) из `01_economic_scripted_effects.txt`; `if` в годовом шаге ЦБ; вызовы в двух sgui (`09_ef_other.txt`); закомментированные вызовы |
+| Сбор очистки контрактов `contract_1_year` | `ef_contract_1_year/` | определение из `00_on_action_main.txt` |
+| Месячный `ef_on_monthly_pulse_reset` | `ef_monthly_pulse_reset/` | закомментированные определение и вызов |
+| События `.36`, `.37` (серебряный стандарт, внутренний долг) | `ef_events_silver_crisis_36_37/` | 2 события, 8 ключей локализации |
+| События `.97 .971 .98 .981 .982 .100–.105` и их сообщения | `ef_events_97_105/` | 11 событий, 5 сообщений, 36 ключей локализации |
+| Сообщения `unstable_currency_toast/_message` | `ef_messages_unstable_currency/` | 2 сообщения, 3 ключа локализации |
+| Военные PM `pm_government_aid_*` (5), тип модификатора `goods_input_war_bond_add` | `ef_government_aid_pm/` | 5 PM, 2 строки в `unlocking_production_methods` (`pm_privately_owned_building_arms_industry` остался), тип модификатора и его ключи локализации |
+| Группа зданий `bg_national_stockpile` | `ef_bg_national_stockpile/` | определение с баннером |
+| Модификатор `modifier_test_supply` | `ef_modifier_test_supply/` | определение из `00_ef_dynamic_modifier_building.txt` |
+| Триггеры без ссылок (95 `law_<cur>_monetary_system_FS_trigger` + 19 прочих) | `ef_unused_triggers/` | 114 определений из `00_ef_custom_trigger.txt` |
+| Значения без ссылок в `00_economic_scripted_value.txt` (71) | `ef_unused_economic_values/` | 71 определение |
+| Закомментированные алерты `buy_sell_<good>_order` | `ef_alerts_buy_sell_order/` | 29 закомментированных блоков, 87 ключей локализации |
+| Пустой `on_monthly_pulse` журнала `financial_center_je_2` | `ef_je_empty_monthly_pulse/` | блок из `00_ef_financial_center_je.txt` |

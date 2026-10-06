@@ -1,0 +1,68 @@
+# из events/00_ef_economic_event.txt, строки 1207–1273 (на 6.10.2026), события .36 (серебряный стандарт) и .37 (внутренний долг), никем не запускаются (вызов .37 в `ef_on_yearly_pulse_event_at_date` закомментирован)
+#le paysX contract une dette de X à çà banque centrale et au investisseur étranger 
+00_ef_economic_event.36 = { #image ok text en
+	type = country_event
+	placement = scope:capital_state
+
+	#hidden = yes
+
+	title = 00_ef_economic_event.36.t
+	desc = 00_ef_economic_event.36.d
+	flavor = 00_ef_economic_event.36.f
+
+	dlc = dlc_ef
+	duration = 3 #0 pas de duration
+
+	event_image = {
+		texture = "gfx/event_pictures/00_ef_economic_event_31.dds"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/00_ef_economic_event_31.dds"
+
+	trigger = {
+	}
+
+	immediate = {   
+	} 
+
+	option = {
+		name = 00_ef_economic_event.36.a
+		option_par_défaut = oui 
+	}  
+}  
+
+#dette qui dépasse les 200% de pib
+00_ef_economic_event.37 = { #image ok text en
+	type = country_event
+	placement = scope:capital_state
+
+	#hidden = yes
+
+	title = 00_ef_economic_event.37.t
+	desc = 00_ef_economic_event.37.d
+	flavor = 00_ef_economic_event.37.f
+
+	dlc = dlc_ef
+	duration = 3 #0 pas de duration
+
+	event_image = {
+		texture = "gfx/event_pictures/00_ef_economic_event_31.dds"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/00_ef_economic_event_31.dds"
+
+	trigger = {
+	}
+
+	immediate = {   
+	} 
+
+	option = {
+		name = 00_ef_economic_event.37.a
+		option_par_défaut = oui 
+	}  
+}  

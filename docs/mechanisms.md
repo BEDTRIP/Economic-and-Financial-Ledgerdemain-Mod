@@ -8,7 +8,7 @@
 коэффициент, закомментированный вызов); `мёртвый` — ни откуда не вызывается; `дубль` — считает то же или пишет те же
 счета, что модель `ld_*`. Строки файлов — на момент записи, при правке файла сдвигаются: искать по имени.
 
-Итого: мёртвый 35, выключен 8, дубль 5, живой 228.
+Итого: мёртвый 23, выключен 5, дубль 5, живой 230.
 
 ## Денежная модель и металл (`money-model.md`)
 
@@ -227,11 +227,6 @@
 
 | механизм | статус | где | доказательство | интерфейс |
 | --- | --- | --- | --- | --- |
-| Вызов `initialize_historic_macro_facilities_ns` из history зданий | мёртвый | common/history/buildings/00_ef_building.txt:117; common/scripted_effects/09_introduction_building_lvl.txt:23546 | единственное определение эффекта закомментировано (комментарий в `00_a_ef_history_var_init.txt`) | — |
-| `central_bank_production_methods_2` (+ `_2_act`) | мёртвый | common/scripted_effects/01_economic_scripted_effects.txt:99450 (2670 строк) | refs=0; вызовы закомментированы: 00_on_action_main.txt:988 и в `ef_on_production_method_changed` (00_ef_on_action.txt:~402-411) | — |
-| `contract_1_year` (сбор очистки контрактов) | мёртвый | common/scripted_effects/00_on_action_main.txt:17914 (205 строк) | refs=0; те же 29 `clear_<good>_contract_1_year` вызываются прямо из `ef_on_yearly_pulse_reset` | — |
-| Месячный `ef_on_monthly_pulse_reset` | выключен | common/on_actions/00_ef_on_action.txt:97; common/scripted_effects/00_on_action_main.txt:242 | вызов закомментирован (00_ef_on_action.txt:97), определение закомментировано (00_on_action_main.txt:242) | — |
-| События 37, 36 (серебряный кризис) | выключен | common/scripted_effects/00_on_action_main.txt:2125-2128; events/00_ef_economic_event.txt:78,1242 | вызов `00_ef_economic_event.37` закомментирован, событие .36 закомментировано целиком | — |
 | Отладочные решения (`Open_Test_Decision`, `Test_event_1..5`, `law_encouranging_childbirth_Decision_*`) | выключен | common/decisions/00_ef_debug_decisions.txt:6-277 | показ только при `has_global_variable = EF_debug_mode` (ставит `scripted_guis/09_ef_other.txt:16`); `gui/ld_economy_panel.gui:43` закомментирован | — |
 | Корневые пульсы E&F (`ef_on_{monthly,half_yearly,yearly,five_year,decade}_pulse_country`) | живой | common/on_actions/00_ef_on_action.txt:22-70,89-314,389-419 | хуки `on_*_pulse_country` вызывают on_action; тела — `00_on_action_main.txt` | — |
 | Верхняя панель `com_topbar_setup_ef` (7 элементов: инфляция, law_*_standard, law_subject) | живой | common/on_actions/00_ef_on_action.txt:22-26,316-387 | `on_game_started_after_lobby` → `com_topbar_setup_ef` | верхняя панель (инфляция, стандарты) |
@@ -262,17 +257,9 @@
 
 | механизм | статус | где | доказательство | интерфейс |
 | --- | --- | --- | --- | --- |
-| `pm_government_aid_*` (5 штук) и `pm_privately_owned_building_arms_industry` | мёртвый | common/production_methods/00_ef_market_liquidity.txt:67-238 | имена не встречаются ни в одном PMG или здании (grep по `common`) | — |
-| Группа `bg_national_stockpile` | мёртвый | common/building_groups/00_ef_building_groups.txt:89-122 | refs=0; здания с этой группой нет | — |
-| `economic_sentiment_index_modifier_1..3`, `economic_sentiment_index_malus[_mutual_fund]`, `modifier_test_supply` | мёртвый | common/static_modifiers/00_ef_dynamic_modifier_country.txt:106-121; 00_ef_dynamic_modifier_building.txt:18,275-279 | refs=0 в index.tsv | — |
-| Триггеры `law_<cur>_monetary_system_FS_trigger` (95 штук) | мёртвый | common/scripted_triggers/00_ef_custom_trigger.txt (например :5582-6121) | refs=0: в customizable_localization есть только `_SS/_BS/_GS/_GES*`-варианты | — |
-| Триггеры `union_latine`, `is_in_revaluation`, `is_in_devaluation`, `macro_facilities_on_action_ns_limit`, `subjetc_no_modifier_on_bc` и ещё ~10 | мёртвый | common/scripted_triggers/00_ef_custom_trigger.txt:6194,666,651,1137,6260 | refs=0 в index.tsv (111 триггеров refs=0, 731 строка) | — |
-| Значения `devaluation/revaluation_money_value_target_in_gold`, `valid_purchasable_currency_amount`, `gold_reserve_rest`, `base_rate_percentage_target` | мёртвый | common/script_values/00_economic_scripted_value.txt:8820,8923,6672,6779,9157 | refs=0 (55 значений refs=0, 624 строки) | — |
-| Закомментированные алерты `buy_sell_<good>_order` | мёртвый | common/alert_types/00_ef_alert_types.txt:92-596 | блоки `# buy_sell_<good>_order = {` закомментированы (с 92 по 596 строку и далее) | — |
-| События .97, .971, .98, .981, .982, .100–.105 | мёртвый | events/00_ef_economic_event.txt:1778-1961,1962-2196 | ни одного `trigger_event`/`id =` (grep по common, events, gui) | — |
-| Сообщения `unstable_currency_toast`, `unstable_currency_message` | мёртвый | common/messages/00_ef_messages.txt:174,182 | refs=0; `post_notification` не найден | — |
-| Сообщения событий .97–.982 (`00_ef_economic_event_97_message` …) | мёртвый | common/messages/00_ef_messages.txt:85-125 | события-источники не запускаются | — |
-| `on_monthly_pulse` журнала `financial_center_je_2` (пузырь и перестройка) | выключен | common/journal_entries/00_ef_financial_center_je.txt:226-235 | блок `on_monthly_pulse = { effect = { } }` пуст (только комментарии); счётчики `speculative_share_1/_2` ведёт `ld_bubble_on_actions.txt`/`ld_pb_overbuild_counter.txt` | журнал (полосы прогресса рисуются) |
+| `pm_privately_owned_building_arms_industry` | живой | common/production_methods/00_ef_market_liquidity.txt:66-87 | ни в одной PMG, но имя совпадает с ванильным PM (с `unlocking_production_methods` на ванильные ПМ арсенала) — вероятно, переопределение; без ванильных файлов вынос не проверить | — |
+| `economic_sentiment_index_modifier_1..3`, `economic_sentiment_index_malus[_mutual_fund]` | мёртвый | common/static_modifiers/00_ef_dynamic_modifier_country.txt:106-121; 00_ef_dynamic_modifier_building.txt:275-279 | refs=0 в index.tsv; не трогать — подключит EF.31 | — |
+| Значения `every_subject_gold`, `exchange_rate_1_XXX`, `exchange_rate_XXX_1`, `exchange_rate_for_international_trade_buy_market_panel`, `money_value_median_0_75`/`_1_25` | живой | common/script_values/00_economic_scripted_value.txt | читает GUI `ld_economy_panel.gui`/`00_ef_deported_gui_1.gui` через `ScriptValue('...')` (индекс `ld_index` не видит: `#T` в тексте GUI принимает за комментарий) | окно экономики |
 | Фин. центры E&F: общий + 40 страновых `building_financial_centre_<tag>` | живой | common/buildings/ef_16_financial_centre.txt:1-1912; common/production_methods/16_ef_financial_centre.txt | зовутся историей, `financial_center_modifier`, `has_building`; refs 80-90 | здания ФЦ, JE |
 | Центральный банк `building_bank` и PM стандартов | живой | common/buildings/ef_15_bank.txt:1-31; common/production_methods/15_ef_bank.txt:18-203 | refs=895; PMG `pmg_minting_type`, `pmg_monetary_policy` | окно ЦБ |
 | Рыночная ликвидность `pmg_market_liquidity` (вход `liquidity_currency` 28) | живой | common/production_methods/00_ef_market_liquidity.txt:25-45; common/production_method_groups/01_ef_industry.txt:18 | INJECT в ванильные здания (`buildings/ef_01..ef_11`); 68 ссылок | PM здания «рыночная ликвидность» |

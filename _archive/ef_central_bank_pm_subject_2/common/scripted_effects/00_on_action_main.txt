@@ -1,0 +1,8 @@
+# из common/scripted_effects/00_on_action_main.txt, строки 897–903 (на 6.10.2026), `if` с закомментированным вызовом внутри (в `central_bank_ef_on_monthly_pulse_country`/годовом шаге; `limit` без эффекта)
+	if = {
+		limit = {
+			market_owner_is_root = no
+			market_owner_is_root_univ_with_buiding = no #na pas la configuration deja sujet actif evite les répétition
+		}
+		#central_bank_production_methods_2 = yes
+	}
