@@ -62,7 +62,6 @@
 | 92238–92575 | `privat_bank_buy_currency`, `privat_bank_sell_currency` — пустые; `buy_currency_privat_bank`, `sell_currency_privat_bank` (298 строк) | вызываются только из пустых — мертвы |
 | 92575, 104603 | `reset_debt_in_national_currency[_player]` (2×2 тыс. строк) | да (GUI/смена закона) |
 | 94692–99107 | `stockpiling_capital_state_transfert`, `..._financial_center_place`, `enemy_capital_is_occuped` (1,8 тыс.), `enemy_stats_is_occuped` | да (месячный, решение ИИ, бой) |
-| 99160 | `base_rate_change` — пустое (ставку ведёт `zz_ef_cb_rate_step`) | заглушка |
 | 99199–104511 | `central_bank_production_methods`, `_2` (2,7 тыс., refs=0: вызов закомментирован), `_2_act`, `_3` (2,4 тыс.), `_4` | `central_bank_production_methods`, `_3` живые; `_2` мёртв |
 | 106713–107610 | `remove_suject_currency`, `subject_currency`, `private_bank_gold_lose/_silver_lose/_gold_gain/_silver_gain` | подданные — живые; `private_bank_*` — из арбитража |
 Внутри E&F-тел встроены вызовы модели: `zz_ef_cb_rate_step`, `zz_ef_std_switch_*`, `zz_ef_privbank_interest_pay`, `zz_ef_mp_init/_clear`, `zz_ef_crisis_redeem` (95), `zz_ef_cb_cover`, `zz_ef_fx_deal_size`, `zz_ef_cover_normal` (по 95 валютам в `buy_/sell_`).

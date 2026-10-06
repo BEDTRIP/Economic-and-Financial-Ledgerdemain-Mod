@@ -18,7 +18,6 @@
 - `common/scripted_effects/ld_currency_zone.txt` (генерируется `tools/regen_ef_currency_zone.py`) — `zz_ef_cur_zone_step`, `zz_ef_cur_zone_currency` (667 строк: цепочка `else_if` по 95 законам).
 - `common/scripted_triggers/ld_currency_zone_triggers.txt` — `zz_ef_cur_zone_has_currency` (OR по 95 законам).
 - `common/script_values/ld_customs_union_values.txt`, `common/scripted_triggers/ld_customs_union_triggers.txt` (генерируются `tools/regen_ef_customs_union.py`) — `zz_ef_cu_member`, `zz_ef_currency_own`, `zz_ef_member_goods_net` (по товарам, 324 строки), `zz_ef_members_trade_sum`.
-- `common/script_values/ld_local_currency_values.txt`, `common/scripted_triggers/ld_local_currency_triggers.txt`, `common/on_actions/ld_local_currency_on_actions.txt`, `common/static_modifiers/ld_local_currency_fix.txt` — остатки «местной валюты» малых стран (см. реестр: выдача удалена, остаётся очистка модификатора).
 - `common/history/global/zz_ef_currency_fix.txt` — старт: опечатка WUR (`law_gulden_south_german_gulden_currency`), 13 стран без валюты → `law_no_market_liquidity`. Грузится после `99_ef_history_global_variable.txt`.
 - `common/treaty_articles/16_latin_monetary_union_treaty.txt`, `common/treaty_articles/17_scandinavian_monetary_union_treaty.txt` — статьи договоров (флаги, `can_ratify`, `on_entry_into_force` только лоббийное умиротворение). Денежных эффектов нет.
 - `common/treaty_articles/15_supply_agreement.txt` — `material_supply` (поставки со склада, подсистема запасов; валют не касается).
@@ -31,8 +30,8 @@
 - :1926 `leading_currency_type`; :2800.. `currency_of_player_is_<cur>` = `global_var:currency_of_player_is_<cur>` (это script_value, не триггер; глобальные переменные обнуляются в `common/history/global/00_ef_economic_global_variable.txt:46622..`); :3181 `currency_of_player` (сумма).
 - :3306.. `money_value_<cur>` = `global_var:money_value_<cur>_global_var`; `money_value_<cur>_target`, `money_value_in_gold_<cur>`, `money_value_<cur>_related_to_country_law` (:4854, пересчёт под стандарт).
 - :7788 `is_reference_type`; :8476 `money_supply_state` (+`_monthly`, `_market_panel`, `_market_owner`) — цепочка `if has_law <cur>_currency add stockpiling_<cur>_state`.
-- :8871 `pop_savings`, :9066 `pop_savings_monthly`; :15013.. `<cur>_c_market_goods_*`, `stockpiling_<cur>_state/_private_bank`, `<cur>_c_total/global_stokpile`; :25073 `buy_/sell_<cur>_market_panel` (GUI биржи).
-- :24090 `buy_sell_currency_in_metal_market_panel`; :28789.. `money_supply_verification_<cur>` (1050 строк × 93); :128589 `buy_<cur>_order(_valid)`; :132876 `sell_<cur>_market_panel_verification(_current)`.
+- :8871 `pop_savings`, :9066 `pop_savings_monthly`; :15013.. `<cur>_c_market_goods_*`, `stockpiling_<cur>_state/_private_bank`, `<cur>_c_total/global_stokpile`; `buy_/sell_<cur>_in_gold_market_panel`.
+- :24090 `buy_sell_currency_in_metal_market_panel` (его читает GUI биржи валют).
 - :277203.. торговля в золоте: `export_/import_to/from/in_<cur>`, `*_value_in_gold(_week)`, `trade_balance_*`, `debt_in_national_currency_*`, `excess_foreign_state_currency_*`, `currency_identifiers_<cur>`, `valid_<cur>_metal_reserve_type`.
 
 ## Поток / порядок
@@ -41,7 +40,6 @@
 - Раз в год (`ef_on_yearly_pulse_country`, `on_actions/00_ef_on_action.txt:173`, зовёт страна-эталон): `national_capacity_variable_list` → пересев эталона. Кандидат: великая держава, ЦБ, рейтинг ≥ 6 (BBB), металлический/золотодевизный стандарт, нет дефолта ЦБ, покрытие ≥ 25%.
 - Смена закона стандарта: `on_activate_monetary_system_law` → `zz_ef_std_switch_before` (запомнить стандарт и паритет) → тело E&F → `zz_ef_std_switch_after` (пересчёт паритета по `silver_to_gold_rate`/`gold_to_silver_rate`, перевод запасов `silver_state_1`↔`gold_state_1` в столичных штатах с `central_bank_historic_place`).
 - Зона: подданный (≥13 недель `zz_ef_weeks_run`), сюзерен с ЦБ, металл. стандарт и валюта → подданный получает стандарт, валюту и паритет сюзерена, `monetary_systeme_transition` на 2 мес. Иначе `zz_ef_cur_zone` снимается.
-- `zz_ef_local_currency_monthly` (`on_monthly_pulse_country`) только снимает `zz_ef_local_currency_fix` со страны и штатов.
 
 ## Переменные
 | имя | смысл | пишет | читает |
@@ -62,7 +60,7 @@
 - Членство в ТС: `zz_ef_cu_member` читают `ld_money_model.txt`, `ld_clearing_values.txt`, `00_economic_scripted_value.txt` (`money_value`/`money_value_in_gold` для члена).
 - `zz_ef_bond_interest_due_week`, `zz_ef_privbank_interest_due` — `static_modifiers/ld_bond_interest.txt`, `ld_money_model.txt`.
 - Договоры: `latin_monetary_union_treaty` создаётся событием `events/00_ef_economic_event.txt:499`, ЖЗ `latin_monetary_union_je_1` (`journal_entries/00_ef_divers_je.txt:1`) проверяет статью.
-- GUI: биржа валют (`sell_/buy_<cur>_market_panel`), карточки банка (значения `zz_ef_v_*`), панель ставки (`gui/ld_cb_rate_panel.gui`, другой документ).
+- GUI: биржа валют (`buy_sell_currency_in_metal_market_panel`, `buy_/sell_<cur>_in_gold_market_panel`), карточки банка (значения `zz_ef_v_*`), панель ставки (`gui/ld_cb_rate_panel.gui`, другой документ).
 
 ## Логи
 - `EFM|…|std_switch|old …` — смена стандарта (`ld_standard_switch.txt:130`).

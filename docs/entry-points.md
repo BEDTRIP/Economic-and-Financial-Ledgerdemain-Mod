@@ -4,7 +4,7 @@
 ## Файлы
 - `common/on_actions/00_ef_on_action.txt` — корневые on_action E&F (`ef_on_*_pulse_country`, `ef_on_production_method_changed`, `ef_on_battle_ended`, `com_topbar_setup_ef`).
 - `common/on_actions/PSC_on_actions.txt` — PSC: распределение очков стройки по дням месяца, пересчёт метода конверсии при смене PM/технологии/постройке сектора.
-- `common/on_actions/ld_*_on_actions.txt` — `ld_bank`, `ld_bubble`, `ld_capitalization`, `ld_cb_rate`, `ld_local_currency`, `ld_money_model` — месячные хуки модели; `common/on_actions/ld_new_country_immediate_init.txt`, `ld_stockpile_state_var_init` — инициализация переменных; `ld_pb_ai_sector_downsize`, `ld_pb_overbuild_counter` — штраф перестройки (PSC). Имена on_action и эффектов внутри сохранили префикс `zz_ef_*` / `zz_pb_ef_*`.
+- `common/on_actions/ld_*_on_actions.txt` — `ld_bank`, `ld_bubble`, `ld_capitalization`, `ld_cb_rate`, `ld_money_model` — месячные хуки модели; `common/on_actions/ld_new_country_immediate_init.txt`, `ld_stockpile_state_var_init` — инициализация переменных; `ld_pb_ai_sector_downsize`, `ld_pb_overbuild_counter` — штраф перестройки (PSC). Имена on_action и эффектов внутри сохранили префикс `zz_ef_*` / `zz_pb_ef_*`.
 - `common/scripted_effects/00_on_action_main.txt` — 19 тыс. строк: все эффекты, которые зовут `ef_on_*`: пульсы ЦБ/ФЦ/нацзапаса, ИИ-торговля валютой, ИИ-стройка, инфляция, исторические события по датам, сбросы счётчиков кризисов.
 - `common/scripted_effects/10_new_country_var.txt` — `new_country_var_ef`: заводит все переменные страны и её штатов (34 тыс. строк).
 - `common/history/global/*.txt`, `common/history/states/01_ef_states.txt`, `common/history/buildings/*.txt` — стартовые данные (см. «Старт игры»).
@@ -50,7 +50,6 @@
 | `zz_ef_bubble_monthly` (`ld_bubble`, условие: JE `financial_center_je_2` и `var:speculative_share_1`) | пузырь `speculative_share_1`, модификаторы `speculative_bubble_*`, уведомление `zz_ef_bubble_rising` | фин. центр / пузырь |
 | `zz_ef_capitalization_monthly` (`ld_capitalization`) | `zz_ef_stock_issue_update`, `zz_ef_listing_update`, `zz_ef_cap_monthly_update`, `zz_ef_listing_log`, `zz_ef_cap_monthly_crash_check`, затем `zz_ef_mass_shareholding` (модификатор по `zz_ef_msh_points`) | акции / капитализация |
 | `zz_ef_cb_rate_monthly` (`ld_cb_rate`) | `zz_ef_risk_monthly`; счётчик `zz_ef_cb_rate_month` 0..2, на 3 — `zz_ef_cb_rate_step` (квартальный шаг ставки ЦБ); сид `zz_ef_rate_bias` | ставка ЦБ |
-| `zz_ef_local_currency_monthly` (`ld_local_currency`) | только чистка модификатора `zz_ef_local_currency_fix` (на стране и штатах) | модель денег (остаток) |
 | `zz_ef_money_model_monthly` (`ld_money_model`) | `zz_ef_money_model_monthly_step` (порядок: `zz_ef_cur_zone_step`, `zz_ef_silver_rate_update`, `zz_ef_reference_strength_step`, `zz_ef_currency_trade_step`, `zz_ef_privbank_interest_pay`, `zz_ef_rate_policy_costs`, `zz_ef_gov_rate_step`, `zz_ef_mp_step`; лог EFX), затем `zz_ef_money_week_start` (перезапуск недельной цепочки) | модель денег |
 | `zz_pb_ef_ai_sector_downsize` (`ld_pb_ai_sector_downsize`; условие: ИИ, `base_rate_percentage`) | таймер `zz_pb_ef_ai_downsize_timer`, раз в 3 мес. при `speculative_share_2>=10` и избытке секторов — `zz_pb_ef_css_downsize_one` | PSC: перестройка |
 | `zz_pb_ef_overbuild_counter` (`ld_pb_overbuild_counter`) | индекс `speculative_share_2` (шаг `zz_pb_ef_overbuild_step`), модификатор `zz_pb_ef_overbuilt_economy`, уведомление `zz_pb_ef_overbuild_rising`, полоса JE | PSC: перестройка |
@@ -102,7 +101,7 @@ PSC-хук: `on_production_method_changed`, `on_building_built`, `on_acquired_te
 
 ## Вызовы и связи
 - Модель денег `ld_*`: месячные хуки зовут эффекты из `common/scripted_effects/ld_*.txt`; из тел E&F зовутся `zz_ef_cb_rate_step`, `zz_ef_std_switch_before/after`, `zz_ef_privbank_interest_pay`, `zz_ef_mp_init/_clear`, `zz_ef_crisis_redeem` (в `01_economic_scripted_effects.txt`), `zz_ef_cur_intro_after` (в `09_introduction_building_lvl.txt`).
-- Кандидаты на изоляцию: пустые тела E&F-эффектов заглушают прежние ветки (см. реестр): `privat_bank_buy_currency`, `privat_bank_sell_currency`, `base_rate_change`, `stockpile_finacial_product`.
+- Кандидаты на изоляцию: пустые тела E&F-эффектов заглушают прежние ветки (см. реестр): `privat_bank_buy_currency`, `privat_bank_sell_currency`, `stockpile_finacial_product`.
 - Эффекты E&F, пишущие `gold_state_1` / `silver_state_1` ЦБ-штата (счета модели): арбитраж `private_bank_arbitrage_*_drain` (годовой), `enemy_capital_is_occuped`, `buy_/sell_<cur>_currency` (через `buy_sell_currency_order`, `ai_buy_sell_currency`), стартовые значения `99_ef_history_global_variable.txt`.
 - GUI: верхняя панель — `com_topbar_setup_ef`; пульсы GUI не вызывают, но scripted_guis зовут `reset_*`, `stockpiling_capital_state_transfert`, `reset_debt_in_national_currency_player`.
 

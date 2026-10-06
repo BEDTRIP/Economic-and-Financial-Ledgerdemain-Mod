@@ -159,10 +159,6 @@ zz_ef_fx_money = {
 	}
 	min = 0
 }
-zz_ef_reserves_money = {
-	value = zz_ef_cb_money
-	add = zz_ef_fx_money
-}
 # the banks' balance sheet's two sides (Ф.1)
 zz_ef_bank_assets = {
 	value = zz_ef_pool
@@ -179,18 +175,6 @@ zz_ef_bank_liabilities = {
 # 4.10 (the tooltip): negated values to print with their own sign and colour
 zz_ef_v_d_deposits_neg = {
 	value = zz_ef_v_d_deposits
-	multiply = -1
-}
-zz_ef_tr_abr_overlap_neg = {
-	value = zz_ef_tr_abr_overlap
-	multiply = -1
-}
-zz_ef_v_d_bonds_neg = {
-	value = zz_ef_v_d_bonds
-	multiply = -1
-}
-zz_ef_v_d_tbonds_neg = {
-	value = zz_ef_v_d_tbonds
 	multiply = -1
 }
 

@@ -29,3 +29,7 @@ _archive/<механизм>/
 | Деньги за металл по Юму (`zz_ef_hume_money_on`) | `ef_hume_money/` | ветка `if` в `zz_ef_cb_hume_step`; два значения |
 | Зонды EFJ / EFD | `ef_probes_efj_efd/` | два вызова и два эффекта в `ld_money_model.txt`; 4 значения |
 | Пустой модификатор `zz_ef_business_cash` | `ef_business_cash_modifier/` | файл `ld_business_cash.txt`; снятие в `zz_ef_money_week_start` |
+| Проверочные значения валют (`money_supply_verification_<cur>`, `sell_<cur>_market_panel_verification`, `buy_<cur>_order`, `*_spe_to_add_*`, `buy_/sell_<cur>_market_panel` и др.) | `ef_currency_verification_values/` | 765 определений из `01_economic_currency_scripted_value.txt` (252 626 строк) |
+| Значения и триггер валют без ссылок (`zz_ef_reserves_money`, `*_neg`, `zz_ef_cb_rule_*_pp`, `is_valid_country_for_currency_accumulation`) | `ef_unused_currency_values/` | 6 значений из `ld_reference_currency_values.txt` / `ld_cb_rate_values.txt`, триггер из `00_ef_custom_trigger.txt` |
+| Остатки выдачи местной валюты (`zz_ef_local_currency_*`, `zz_ef_lc_curve_*`) | `ef_local_currency_issuance/` | четыре файла `ld_local_currency_*` целиком (в т.ч. on_action очистки модификатора) |
+| Контроллер ставки E&F `base_rate_change` | `ef_base_rate_change/` | пустое определение из `01_economic_scripted_effects.txt`; вызов (`if is_ai`) в `00_on_action_main.txt` |

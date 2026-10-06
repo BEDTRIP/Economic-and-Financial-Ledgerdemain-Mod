@@ -15,7 +15,7 @@
 - `common/scripted_effects/ld_reference_strength.txt` — `zz_ef_currency_trade_step` (месяц: накладывает `zz_ef_currency_trade` по силе валюты), `zz_ef_reference_strength_step`.
 - `common/static_modifiers/ld_currency_trade.txt` — `zz_ef_currency_trade` (импорт/экспорт ±10% при силе 1.25/0.75), плюс E&F `strong_currency`/`weak_currency` без торговых полей.
 - `common/static_modifiers/ld_fx_holders_demand.txt` — экспортное преимущество от валюты за рубежом (см. `banks.md`).
-- `common/modifier_type_definitions/ld_liquidity_currency_sell_orders.txt` — объявляет `state_sell_orders_liquidity_currency_add` (иначе модификатор `zz_ef_local_currency_fix` отбрасывается при загрузке).
+- `common/modifier_type_definitions/ld_liquidity_currency_sell_orders.txt` — объявляет `state_sell_orders_liquidity_currency_add` (модификатора с ним больше нет).
 - `common/production_methods/00_ef_market_liquidity.txt` — `pm_no_market_liquidity`, `pm_market_liquidity_currency` (вход `goods_input_liquidity_currency_add = 28` — бизнесы покупают услугу расчётов у банков), далее методы военных заказов (`pm_government_aid_*`).
 - E&F, форекс и арбитраж:
   - `common/scripted_effects/00_on_action_main.txt`: `ai_buy_sell_currency` (:5687; по каждой валюте с `money_value_<cur> > 0`: `buy_<cur>_currency` если валюта не слабая, `sell_<cur>_currency` если запас > 1 000 000 и `purchase_cycle = 0`), вызов из `central_bank_ef_on_yearly_pulse_country` (:954), `monetary_systeme_transition`; арбитражи — см. поток.
@@ -51,7 +51,7 @@
 - `zz_ef_clr_gold_per_money` и `zz_ef_rc_currency_value` читают клиринг, таблицы облигаций (`ld_bond_tables.txt`), модель денег.
 - `zz_ef_fx_liab`/`zz_ef_fx_liab_all` — вклады (`banks.md`).
 - Интерфейс: `gui/ld_economy_panel.gui` (кнопки `zz_ef_cbfx_update_sorted`, `zz_ef_holders_update` :3011-3012, диаграммы :9832, :9874; кнопка `trade_balance_actualized` :2802, :3016); `gui/00_ef_deported_gui_1.gui` — окно покупки/продажи валют и облигаций E&F.
-- Модификатор `zz_ef_currency_trade` — на стране (импорт/экспорт); `zz_ef_local_currency_fix` — выпуск местной валюты (`script_values/ld_local_currency_values.txt:178`).
+- Модификатор `zz_ef_currency_trade` — на стране (импорт/экспорт).
 
 ## Логи
 - `EFX|` — месячная строка по валютам/стандарту (`ld_money_model.txt:1058`).

@@ -6379,18 +6379,6 @@ nothing_crisis = {
 
 
 
-is_valid_country_for_currency_accumulation = {
-	not = {
-		or = {
-			# var:currency_crisis = 1
-			# var:central_bank_bankruptcy = 1
-			has_modifier = central_bank_bankruptcy_country
-			has_modifier = currency_crisis_country
-			market_owner_is_root_univ_with_buiding = yes
-			is_subject_custom_trigger = yes
-		}
-	}
-}
 
 ############################################################################################################################################################
 
