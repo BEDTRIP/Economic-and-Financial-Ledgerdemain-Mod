@@ -1,4 +1,4 @@
-﻿  l_german:
+﻿l_german:
 
 
   #####################################################################################################################
@@ -170,7 +170,7 @@ metal_barometre_7: "#gold Gold @gold!#! #p extremely expensive#! — #gray Silve
 
   #for_list
 
-  money_value_in_paper_no_bc_top_bar_for_list:0 "@uni! = #b [Country.MakeScope.ScriptValue('money_value_rapported_inflation')|D3]#!
+  money_value_in_paper_no_bc_top_bar_for_list:0 "@uni! = #b [Country.MakeScope.ScriptValue('money_value_rapported_inflation')|D3]#!"
   money_value_in_paper_top_bar_for_list:0 "[Country.GetCustom('currency_symbol')] = #b [Country.MakeScope.ScriptValue('money_value_rapported_inflation')|D3]#!"
 
   money_value_in_silver_top_bar_for_list:0 "#b [Country.MakeScope.ScriptValue('money_value_in_gold')|3]#! @silver!"
@@ -210,7 +210,6 @@ metal_barometre_7: "#gold Gold @gold!#! #p extremely expensive#! — #gray Silve
   CENTRAL_BANK_TITLE:0 "[concept_central_bank]"
   FINANCIAL_CENTRE_TITLE:0 "[concept_financial_centre]"
   NATIONAL_STOCKPILE_TITLE:0 "[concept_national_stockpile]"
-  RESERVES_CURRENCY_TITLE:0 "[concept_currency_reserves]"
   RESERVES_CURRENCY_TITLE:0 "[concept_currency_reserves]"
   FOREIN_INVESTMENT_TITLE:0 "[concept_purchase_of_bond_debt]"
   RESERVE_CURRENCY_TITLE:0 "[concept_currency_reserves]"
@@ -593,7 +592,6 @@ metal_barometre_7: "#gold Gold @gold!#! #p extremely expensive#! — #gray Silve
   set_devaluation_rate_txt:0 "You will creat [GetPlayer.MakeScope.ScriptValue('money_supply_predicted_add_devaluation_1')|0=+] [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_symbol')] in [GetPlayer.MakeScope.Var('devaluation_time').GetValue] Year(s) after that your currency will no longer be exchangeable on forex for [GetPlayer.MakeScope.Var('devaluation_time_1').GetValue]#! Year(s)."
   set_revaluation_rate_txt:0 "You will destroy [GetPlayer.MakeScope.ScriptValue('money_supply_predicted_add_revaluation_1')|0=+] [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_symbol')] in [GetPlayer.MakeScope.Var('revaluation_time').GetValue] Year(s) after that your currency will no longer be exchangeable on forex for [GetPlayer.MakeScope.Var('revaluation_time_1').GetValue]#! Year(s)."
 
-  devaluation_rate:0 "Devaluation Rate"
   revaluation_rate:0 "Revaluation Rate"
   devaluation_time:0 "Devaluation Time"
   revaluation_time:0 "Revaluation Time"
@@ -2248,7 +2246,6 @@ ammunition_flag_status_state_panel:0 "[GetPlayer.GetCustom('stokpiling_ammunitio
 
 
 #ammunition
-ammunition_flag_icon:0 "@ammunition!"
 ammunition_flag_var_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_ammunition_var_state')|D] @ammunition!/1.00M"
 ammunition_flag_green_arow_bellow:0 "@green_arow_bellow! [GetPlayer.MakeScope.ScriptValue('ammunition_market_goods_delta_month_view')|=+D]"
 ammunition_flag_red_arow_bellow:0 "@red_arow_bellow! #N -#! [GetPlayer.MakeScope.Var('release_ammunition_var_1').GetValue|-D]"
@@ -3118,7 +3115,6 @@ opium_flag_status:0 "[GetPlayer.GetCustom('stokpiling_opium_status')]"
   reserve_currency_amoun_held:0 "Reserve currency amount"
 
   is_looted_state:0 "This capital state was recently looted."
-  is_looted_state:0 "This capital state was recently looted."
 
   central_bank_metal_reserves_state_transfert:0 "Transfer the bank's reserves, the financial products from the [Localize('FINANCIAL_CENTRE_TITLE')], and the goods from the [Localize('NATIONAL_STOCKPILE_TITLE')] to your capital city state. (You must not be at war)"
   looting_state_button:0 "Pillage half of all assets (Metals, Fiancials product, Stockpile) stored in this state. They will be transferred to your capital state. Looting is allowed once every year and applies a #N 50#! [concept_infamy] penalty each time."
@@ -3132,119 +3128,90 @@ opium_flag_status:0 "[GetPlayer.GetCustom('stokpiling_opium_status')]"
 
   #list:
   #dinar
-  dinar_02_name_currency:0 "[Localize('dinar_good')]  [Localize('dinar')]"
   dinar_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_dinar_state')|+D] @dinar!"
   dinar_02_name_accumulation_state:0 "[GetPlayer.GetCustom('dinar_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_dinar_added_per_month')|+D] @dinar!)"
   #dinar_algerian_dinar
-  dinar_algerian_dinar_02_name_currency:0 "[Localize('dinar_algerian_dinar_good')]  [Localize('dinar_algerian_dinar')]"
   dinar_algerian_dinar_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_dinar_algerian_dinar_state')|+D] @dinar_algerian_dinar!"
   dinar_algerian_dinar_02_name_accumulation_state:0 "[GetPlayer.GetCustom('dinar_algerian_dinar_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_dinar_algerian_dinar_added_per_month')|+D] @dinar_algerian_dinar!)"
   #dinar_iraqi_dinar
-  dinar_iraqi_dinar_02_name_currency:0 "[Localize('dinar_iraqi_dinar_good')]  [Localize('dinar_iraqi_dinar')]"
   dinar_iraqi_dinar_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_dinar_iraqi_dinar_state')|+D] @dinar_iraqi_dinar!"
   dinar_iraqi_dinar_02_name_accumulation_state:0 "[GetPlayer.GetCustom('dinar_iraqi_dinar_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_dinar_iraqi_dinar_added_per_month')|+D] @dinar_iraqi_dinar!)"
   #dinar_libyan_dinar
-  dinar_libyan_dinar_02_name_currency:0 "[Localize('dinar_libyan_dinar_good')]  [Localize('dinar_libyan_dinar')]"
   dinar_libyan_dinar_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_dinar_libyan_dinar_state')|+D] @dinar_libyan_dinar!"
   dinar_libyan_dinar_02_name_accumulation_state:0 "[GetPlayer.GetCustom('dinar_libyan_dinar_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_dinar_libyan_dinar_added_per_month')|+D] @dinar_libyan_dinar!)"
   #dinar_moroccan_dirham
-  dinar_moroccan_dirham_02_name_currency:0 "[Localize('dinar_moroccan_dirham_good')]  [Localize('dinar_moroccan_dirham')]"
   dinar_moroccan_dirham_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_dinar_moroccan_dirham_state')|+D] @dinar_moroccan_dirham!"
   dinar_moroccan_dirham_02_name_accumulation_state:0 "[GetPlayer.GetCustom('dinar_moroccan_dirham_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_dinar_moroccan_dirham_added_per_month')|+D] @dinar_moroccan_dirham!)"
   #dinar_omanian_rial
-  dinar_omanian_rial_02_name_currency:0 "[Localize('dinar_omanian_rial_good')]  [Localize('dinar_omanian_rial')]"
   dinar_omanian_rial_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_dinar_omanian_rial_state')|+D] @dinar_omanian_rial!"
   dinar_omanian_rial_02_name_accumulation_state:0 "[GetPlayer.GetCustom('dinar_omanian_rial_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_dinar_omanian_rial_added_per_month')|+D] @dinar_omanian_rial!)"
   #dinar_qiran
-  dinar_qiran_02_name_currency:0 "[Localize('dinar_qiran_good')]  [Localize('dinar_qiran')]"
   dinar_qiran_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_dinar_qiran_state')|+D] @dinar_qiran!"
   dinar_qiran_02_name_accumulation_state:0 "[GetPlayer.GetCustom('dinar_qiran_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_dinar_qiran_added_per_month')|+D] @dinar_qiran!)"
   #dinar_saudi_riyal
-  dinar_saudi_riyal_02_name_currency:0 "[Localize('dinar_saudi_riyal_good')]  [Localize('dinar_saudi_riyal')]"
   dinar_saudi_riyal_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_dinar_saudi_riyal_state')|+D] @dinar_saudi_riyal!"
   dinar_saudi_riyal_02_name_accumulation_state:0 "[GetPlayer.GetCustom('dinar_saudi_riyal_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_dinar_saudi_riyal_added_per_month')|+D] @dinar_saudi_riyal!)"
   #dinar_serbian_dinar
-  dinar_serbian_dinar_02_name_currency:0 "[Localize('dinar_serbian_dinar_good')]  [Localize('dinar_serbian_dinar')]"
   dinar_serbian_dinar_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_dinar_serbian_dinar_state')|+D] @dinar_serbian_dinar!"
   dinar_serbian_dinar_02_name_accumulation_state:0 "[GetPlayer.GetCustom('dinar_serbian_dinar_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_dinar_serbian_dinar_added_per_month')|+D] @dinar_serbian_dinar!)"
   #dinar_tunisian_dinar
-  dinar_tunisian_dinar_02_name_currency:0 "[Localize('dinar_tunisian_dinar_good')]  [Localize('dinar_tunisian_dinar')]"
   dinar_tunisian_dinar_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_dinar_tunisian_dinar_state')|+D] @dinar_tunisian_dinar!"
   dinar_tunisian_dinar_02_name_accumulation_state:0 "[GetPlayer.GetCustom('dinar_tunisian_dinar_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_dinar_tunisian_dinar_added_per_month')|+D] @dinar_tunisian_dinar!)"
   #dinar_yugoslav_dinar
-  dinar_yugoslav_dinar_02_name_currency:0 "[Localize('dinar_yugoslav_dinar_good')]  [Localize('dinar_yugoslav_dinar')]"
   dinar_yugoslav_dinar_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_dinar_yugoslav_dinar_state')|+D] @dinar_yugoslav_dinar!"
   dinar_yugoslav_dinar_02_name_accumulation_state:0 "[GetPlayer.GetCustom('dinar_yugoslav_dinar_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_dinar_yugoslav_dinar_added_per_month')|+D] @dinar_yugoslav_dinar!)"
   #dollar_australian_dollar
-  dollar_australian_dollar_02_name_currency:0 "[Localize('dollar_australian_dollar_good')]  [Localize('dollar_australian_dollar')]"
   dollar_australian_dollar_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_dollar_australian_dollar_state')|+D] @dollar_australian_dollar!"
   dollar_australian_dollar_02_name_accumulation_state:0 "[GetPlayer.GetCustom('dollar_australian_dollar_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_dollar_australian_dollar_added_per_month')|+D] @dollar_australian_dollar!)"
   #dollar_canadian_dollar
-  dollar_canadian_dollar_02_name_currency:0 "[Localize('dollar_canadian_dollar_good')]  [Localize('dollar_canadian_dollar')]"
   dollar_canadian_dollar_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_dollar_canadian_dollar_state')|+D] @dollar_canadian_dollar!"
   dollar_canadian_dollar_02_name_accumulation_state:0 "[GetPlayer.GetCustom('dollar_canadian_dollar_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_dollar_canadian_dollar_added_per_month')|+D] @dollar_canadian_dollar!)"
   #dollar_caribbean_dollar
-  dollar_caribbean_dollar_02_name_currency:0 "[Localize('dollar_caribbean_dollar_good')]  [Localize('dollar_caribbean_dollar')]"
   dollar_caribbean_dollar_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_dollar_caribbean_dollar_state')|+D] @dollar_caribbean_dollar!"
   dollar_caribbean_dollar_02_name_accumulation_state:0 "[GetPlayer.GetCustom('dollar_caribbean_dollar_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_dollar_caribbean_dollar_added_per_month')|+D] @dollar_caribbean_dollar!)"
   #dollar_confederate_states_dollar
-  dollar_confederate_states_dollar_02_name_currency:0 "[Localize('dollar_confederate_states_dollar_good')]  [Localize('dollar_confederate_states_dollar')]"
   dollar_confederate_states_dollar_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_dollar_confederate_states_dollar_state')|+D] @dollar_confederate_states_dollar!"
   dollar_confederate_states_dollar_02_name_accumulation_state:0 "[GetPlayer.GetCustom('dollar_confederate_states_dollar_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_dollar_confederate_states_dollar_added_per_month')|+D] @dollar_confederate_states_dollar!)"
   #dollar_liberian_dollar
-  dollar_liberian_dollar_02_name_currency:0 "[Localize('dollar_liberian_dollar_good')]  [Localize('dollar_liberian_dollar')]"
   dollar_liberian_dollar_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_dollar_liberian_dollar_state')|+D] @dollar_liberian_dollar!"
   dollar_liberian_dollar_02_name_accumulation_state:0 "[GetPlayer.GetCustom('dollar_liberian_dollar_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_dollar_liberian_dollar_added_per_month')|+D] @dollar_liberian_dollar!)"
   #dollar_new_zealand_dollar
-  dollar_new_zealand_dollar_02_name_currency:0 "[Localize('dollar_new_zealand_dollar_good')]  [Localize('dollar_new_zealand_dollar')]"
   dollar_new_zealand_dollar_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_dollar_new_zealand_dollar_state')|+D] @dollar_new_zealand_dollar!"
   dollar_new_zealand_dollar_02_name_accumulation_state:0 "[GetPlayer.GetCustom('dollar_new_zealand_dollar_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_dollar_new_zealand_dollar_added_per_month')|+D] @dollar_new_zealand_dollar!)"
   #dollar_sierra_leonean_dollar
-  dollar_sierra_leonean_dollar_02_name_currency:0 "[Localize('dollar_sierra_leonean_dollar_good')]  [Localize('dollar_sierra_leonean_dollar')]"
   dollar_sierra_leonean_dollar_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_dollar_sierra_leonean_dollar_state')|+D] @dollar_sierra_leonean_dollar!"
   dollar_sierra_leonean_dollar_02_name_accumulation_state:0 "[GetPlayer.GetCustom('dollar_sierra_leonean_dollar_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_dollar_sierra_leonean_dollar_added_per_month')|+D] @dollar_sierra_leonean_dollar!)"
   #dollar_united_states_dollar
-  dollar_united_states_dollar_02_name_currency:0 "[Localize('dollar_united_states_dollar_good')]  [Localize('dollar_united_states_dollar')]"
   dollar_united_states_dollar_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_dollar_united_states_dollar_state')|+D] @dollar_united_states_dollar!"
   dollar_united_states_dollar_02_name_accumulation_state:0 "[GetPlayer.GetCustom('dollar_united_states_dollar_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_dollar_united_states_dollar_added_per_month')|+D] @dollar_united_states_dollar!)"
   #eco_ariary
-  eco_ariary_02_name_currency:0 "[Localize('eco_ariary_good')]  [Localize('eco_ariary')]"
   eco_ariary_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_eco_ariary_state')|+D] @eco_ariary!"
   eco_ariary_02_name_accumulation_state:0 "[GetPlayer.GetCustom('eco_ariary_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_eco_ariary_added_per_month')|+D] @eco_ariary!)"
   #eco_central_african_eco
-  eco_central_african_eco_02_name_currency:0 "[Localize('eco_central_african_eco_good')]  [Localize('eco_central_african_eco')]"
   eco_central_african_eco_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_eco_central_african_eco_state')|+D] @eco_central_african_eco!"
   eco_central_african_eco_02_name_accumulation_state:0 "[GetPlayer.GetCustom('eco_central_african_eco_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_eco_central_african_eco_added_per_month')|+D] @eco_central_african_eco!)"
   #eco_east_african_eco
-  eco_east_african_eco_02_name_currency:0 "[Localize('eco_east_african_eco_good')]  [Localize('eco_east_african_eco')]"
   eco_east_african_eco_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_eco_east_african_eco_state')|+D] @eco_east_african_eco!"
   eco_east_african_eco_02_name_accumulation_state:0 "[GetPlayer.GetCustom('eco_east_african_eco_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_eco_east_african_eco_added_per_month')|+D] @eco_east_african_eco!)"
   #eco_ethiopian_birr
-  eco_ethiopian_birr_02_name_currency:0 "[Localize('eco_ethiopian_birr_good')]  [Localize('eco_ethiopian_birr')]"
   eco_ethiopian_birr_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_eco_ethiopian_birr_state')|+D] @eco_ethiopian_birr!"
   eco_ethiopian_birr_02_name_accumulation_state:0 "[GetPlayer.GetCustom('eco_ethiopian_birr_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_eco_ethiopian_birr_added_per_month')|+D] @eco_ethiopian_birr!)"
   #eco_ghanaian_pound
-  eco_ghanaian_pound_02_name_currency:0 "[Localize('eco_ghanaian_pound_good')]  [Localize('eco_ghanaian_pound')]"
   eco_ghanaian_pound_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_eco_ghanaian_pound_state')|+D] @eco_ghanaian_pound!"
   eco_ghanaian_pound_02_name_accumulation_state:0 "[GetPlayer.GetCustom('eco_ghanaian_pound_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_eco_ghanaian_pound_added_per_month')|+D] @eco_ghanaian_pound!)"
   #eco_nigerian_naira
-  eco_nigerian_naira_02_name_currency:0 "[Localize('eco_nigerian_naira_good')]  [Localize('eco_nigerian_naira')]"
   eco_nigerian_naira_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_eco_nigerian_naira_state')|+D] @eco_nigerian_naira!"
   eco_nigerian_naira_02_name_accumulation_state:0 "[GetPlayer.GetCustom('eco_nigerian_naira_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_eco_nigerian_naira_added_per_month')|+D] @eco_nigerian_naira!)"
   #eco_south_african_rand
-  eco_south_african_rand_02_name_currency:0 "[Localize('eco_south_african_rand_good')]  [Localize('eco_south_african_rand')]"
   eco_south_african_rand_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_eco_south_african_rand_state')|+D] @eco_south_african_rand!"
   eco_south_african_rand_02_name_accumulation_state:0 "[GetPlayer.GetCustom('eco_south_african_rand_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_eco_south_african_rand_added_per_month')|+D] @eco_south_african_rand!)"
   #eco_tuareg_ouguiya
-  eco_tuareg_ouguiya_02_name_currency:0 "[Localize('eco_tuareg_ouguiya_good')]  [Localize('eco_tuareg_ouguiya')]"
   eco_tuareg_ouguiya_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_eco_tuareg_ouguiya_state')|+D] @eco_tuareg_ouguiya!"
   eco_tuareg_ouguiya_02_name_accumulation_state:0 "[GetPlayer.GetCustom('eco_tuareg_ouguiya_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_eco_tuareg_ouguiya_added_per_month')|+D] @eco_tuareg_ouguiya!)"
   #eco_west_african_eco
-  eco_west_african_eco_02_name_currency:0 "[Localize('eco_west_african_eco_good')]  [Localize('eco_west_african_eco')]"
   eco_west_african_eco_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_eco_west_african_eco_state')|+D] @eco_west_african_eco!"
   eco_west_african_eco_02_name_accumulation_state:0 "[GetPlayer.GetCustom('eco_west_african_eco_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_eco_west_african_eco_added_per_month')|+D] @eco_west_african_eco!)"
   #franc_belgian_franc
-  franc_belgian_franc_02_name_currency:0 "[Localize('franc_belgian_franc_good')]  [Localize('franc_belgian_franc')]"
   franc_belgian_franc_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_franc_belgian_franc_state')|+D] @franc_belgian_franc!"
   franc_belgian_franc_02_name_accumulation_state:0 "[GetPlayer.GetCustom('franc_belgian_franc_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_franc_belgian_franc_added_per_month')|+D] @franc_belgian_franc!)"
 
@@ -3252,7 +3219,6 @@ opium_flag_status:0 "[GetPlayer.GetCustom('stokpiling_opium_status')]"
   ####################
 
   #franc_french_franc
-  franc_french_franc_02_name_currency:0 "[Localize('franc_french_franc_good')]  [Localize('franc_french_franc')]"
 
   #franc_french_franc_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_franc_french_franc_state')|+D] @franc_french_franc!"
   franc_french_franc_02_name_state:0 "[Scope.GetState.GetOwner.MakeScope.ScriptValue('stockpiling_franc_french_franc_state')|+D] @franc_french_franc!"
@@ -3263,235 +3229,177 @@ opium_flag_status:0 "[GetPlayer.GetCustom('stokpiling_opium_status')]"
 
 
   #franc_luxembourgish_franc
-  franc_luxembourgish_franc_02_name_currency:0 "[Localize('franc_luxembourgish_franc_good')]  [Localize('franc_luxembourgish_franc')]"
   franc_luxembourgish_franc_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_franc_luxembourgish_franc_state')|+D] @franc_luxembourgish_franc!"
   franc_luxembourgish_franc_02_name_accumulation_state:0 "[GetPlayer.GetCustom('franc_luxembourgish_franc_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_franc_luxembourgish_franc_added_per_month')|+D] @franc_luxembourgish_franc!)"
   #franc_swiss_franc
-  franc_swiss_franc_02_name_currency:0 "[Localize('franc_swiss_franc_good')]  [Localize('franc_swiss_franc')]"
   franc_swiss_franc_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_franc_swiss_franc_state')|+D] @franc_swiss_franc!"
   franc_swiss_franc_02_name_accumulation_state:0 "[GetPlayer.GetCustom('franc_swiss_franc_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_franc_swiss_franc_added_per_month')|+D] @franc_swiss_franc!)"
   #gulden
-  gulden_02_name_currency:0 "[Localize('gulden_good')]  [Localize('gulden')]"
   gulden_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_gulden_state')|+D] @gulden!"
   gulden_02_name_accumulation_state:0 "[GetPlayer.GetCustom('gulden_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_gulden_added_per_month')|+D] @gulden!)"
   #gulden_bavarian_gulden
-  gulden_bavarian_gulden_02_name_currency:0 "[Localize('gulden_bavarian_gulden_good')]  [Localize('gulden_bavarian_gulden')]"
   gulden_bavarian_gulden_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_gulden_bavarian_gulden_state')|+D] @gulden_bavarian_gulden!"
   gulden_bavarian_gulden_02_name_accumulation_state:0 "[GetPlayer.GetCustom('gulden_bavarian_gulden_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_gulden_bavarian_gulden_added_per_month')|+D] @gulden_bavarian_gulden!)"
   #gulden_florin
-  gulden_florin_02_name_currency:0 "[Localize('gulden_florin_good')]  [Localize('gulden_florin')]"
   gulden_florin_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_gulden_florin_state')|+D] @gulden_florin!"
   gulden_florin_02_name_accumulation_state:0 "[GetPlayer.GetCustom('gulden_florin_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_gulden_florin_added_per_month')|+D] @gulden_florin!)"
   #gulden_hungarian_forint
-  gulden_hungarian_forint_02_name_currency:0 "[Localize('gulden_hungarian_forint_good')]  [Localize('gulden_hungarian_forint')]"
   gulden_hungarian_forint_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_gulden_hungarian_forint_state')|+D] @gulden_hungarian_forint!"
   gulden_hungarian_forint_02_name_accumulation_state:0 "[GetPlayer.GetCustom('gulden_hungarian_forint_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_gulden_hungarian_forint_added_per_month')|+D] @gulden_hungarian_forint!)"
   #gulden_indies_guilder
-  gulden_indies_guilder_02_name_currency:0 "[Localize('gulden_indies_guilder_good')]  [Localize('gulden_indies_guilder')]"
   gulden_indies_guilder_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_gulden_indies_guilder_state')|+D] @gulden_indies_guilder!"
   gulden_indies_guilder_02_name_accumulation_state:0 "[GetPlayer.GetCustom('gulden_indies_guilder_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_gulden_indies_guilder_added_per_month')|+D] @gulden_indies_guilder!)"
   #gulden_south_german_gulden
-  gulden_south_german_gulden_02_name_currency:0 "[Localize('gulden_south_german_gulden_good')]  [Localize('gulden_south_german_gulden')]"
   gulden_south_german_gulden_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_gulden_south_german_gulden_state')|+D] @gulden_south_german_gulden!"
   gulden_south_german_gulden_02_name_accumulation_state:0 "[GetPlayer.GetCustom('gulden_south_german_gulden_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_gulden_south_german_gulden_added_per_month')|+D] @gulden_south_german_gulden!)"
   #krone_czech_koruna
-  krone_czech_koruna_02_name_currency:0 "[Localize('krone_czech_koruna_good')]  [Localize('krone_czech_koruna')]"
   krone_czech_koruna_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_krone_czech_koruna_state')|+D] @krone_czech_koruna!"
   krone_czech_koruna_02_name_accumulation_state:0 "[GetPlayer.GetCustom('krone_czech_koruna_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_krone_czech_koruna_added_per_month')|+D] @krone_czech_koruna!)"
   #krone_danish_krone
-  krone_danish_krone_02_name_currency:0 "[Localize('krone_danish_krone_good')]  [Localize('krone_danish_krone')]"
   krone_danish_krone_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_krone_danish_krone_state')|+D] @krone_danish_krone!"
   krone_danish_krone_02_name_accumulation_state:0 "[GetPlayer.GetCustom('krone_danish_krone_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_krone_danish_krone_added_per_month')|+D] @krone_danish_krone!)"
   #krone_estonian_kroon
-  krone_estonian_kroon_02_name_currency:0 "[Localize('krone_estonian_kroon_good')]  [Localize('krone_estonian_kroon')]"
   krone_estonian_kroon_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_krone_estonian_kroon_state')|+D] @krone_estonian_kroon!"
   krone_estonian_kroon_02_name_accumulation_state:0 "[GetPlayer.GetCustom('krone_estonian_kroon_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_krone_estonian_kroon_added_per_month')|+D] @krone_estonian_kroon!)"
   #krone_icelandic_krona
-  krone_icelandic_krona_02_name_currency:0 "[Localize('krone_icelandic_krona_good')]  [Localize('krone_icelandic_krona')]"
   krone_icelandic_krona_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_krone_icelandic_krona_state')|+D] @krone_icelandic_krona!"
   krone_icelandic_krona_02_name_accumulation_state:0 "[GetPlayer.GetCustom('krone_icelandic_krona_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_krone_icelandic_krona_added_per_month')|+D] @krone_icelandic_krona!)"
   #krone_norwegian_krone
-  krone_norwegian_krone_02_name_currency:0 "[Localize('krone_norwegian_krone_good')]  [Localize('krone_norwegian_krone')]"
   krone_norwegian_krone_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_krone_norwegian_krone_state')|+D] @krone_norwegian_krone!"
   krone_norwegian_krone_02_name_accumulation_state:0 "[GetPlayer.GetCustom('krone_norwegian_krone_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_krone_norwegian_krone_added_per_month')|+D] @krone_norwegian_krone!)"
   #krone_slovak_koruna
-  krone_slovak_koruna_02_name_currency:0 "[Localize('krone_slovak_koruna_good')]  [Localize('krone_slovak_koruna')]"
   krone_slovak_koruna_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_krone_slovak_koruna_state')|+D] @krone_slovak_koruna!"
   krone_slovak_koruna_02_name_accumulation_state:0 "[GetPlayer.GetCustom('krone_slovak_koruna_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_krone_slovak_koruna_added_per_month')|+D] @krone_slovak_koruna!)"
   #krone_swedish_krona
-  krone_swedish_krona_02_name_currency:0 "[Localize('krone_swedish_krona_good')]  [Localize('krone_swedish_krona')]"
   krone_swedish_krona_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_krone_swedish_krona_state')|+D] @krone_swedish_krona!"
   krone_swedish_krona_02_name_accumulation_state:0 "[GetPlayer.GetCustom('krone_swedish_krona_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_krone_swedish_krona_added_per_month')|+D] @krone_swedish_krona!)"
   #leon_leu
-  leon_leu_02_name_currency:0 "[Localize('leon_leu_good')]  [Localize('leon_leu')]"
   leon_leu_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_leon_leu_state')|+D] @leon_leu!"
   leon_leu_02_name_accumulation_state:0 "[GetPlayer.GetCustom('leon_leu_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_leon_leu_added_per_month')|+D] @leon_leu!)"
   #leon_lev
-  leon_lev_02_name_currency:0 "[Localize('leon_lev_good')]  [Localize('leon_lev')]"
   leon_lev_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_leon_lev_state')|+D] @leon_lev!"
   leon_lev_02_name_accumulation_state:0 "[GetPlayer.GetCustom('leon_lev_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_leon_lev_added_per_month')|+D] @leon_lev!)"
   #lira
-  lira_02_name_currency:0 "[Localize('lira_good')]  [Localize('lira')]"
   lira_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_lira_state')|+D] @lira!"
   lira_02_name_accumulation_state:0 "[GetPlayer.GetCustom('lira_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_lira_added_per_month')|+D] @lira!)"
   #lira_ducato
-  lira_ducato_02_name_currency:0 "[Localize('lira_ducato_good')]  [Localize('lira_ducato')]"
   lira_ducato_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_lira_ducato_state')|+D] @lira_ducato!"
   lira_ducato_02_name_accumulation_state:0 "[GetPlayer.GetCustom('lira_ducato_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_lira_ducato_added_per_month')|+D] @lira_ducato!)"
   #lira_ottoman_lira
-  lira_ottoman_lira_02_name_currency:0 "[Localize('lira_ottoman_lira_good')]  [Localize('lira_ottoman_lira')]"
   lira_ottoman_lira_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_lira_ottoman_lira_state')|+D] @lira_ottoman_lira!"
   lira_ottoman_lira_02_name_accumulation_state:0 "[GetPlayer.GetCustom('lira_ottoman_lira_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_lira_ottoman_lira_added_per_month')|+D] @lira_ottoman_lira!)"
   #lira_scudo_pontificio
-  lira_scudo_pontificio_02_name_currency:0 "[Localize('lira_scudo_pontificio_good')]  [Localize('lira_scudo_pontificio')]"
   lira_scudo_pontificio_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_lira_scudo_pontificio_state')|+D] @lira_scudo_pontificio!"
   lira_scudo_pontificio_02_name_accumulation_state:0 "[GetPlayer.GetCustom('lira_scudo_pontificio_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_lira_scudo_pontificio_added_per_month')|+D] @lira_scudo_pontificio!)"
   #lira_scudo_sardo
-  lira_scudo_sardo_02_name_currency:0 "[Localize('lira_scudo_sardo_good')]  [Localize('lira_scudo_sardo')]"
   lira_scudo_sardo_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_lira_scudo_sardo_state')|+D] @lira_scudo_sardo!"
   lira_scudo_sardo_02_name_accumulation_state:0 "[GetPlayer.GetCustom('lira_scudo_sardo_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_lira_scudo_sardo_added_per_month')|+D] @lira_scudo_sardo!)"
   #lira_toscane_lira
-  lira_toscane_lira_02_name_currency:0 "[Localize('lira_toscane_lira_good')]  [Localize('lira_toscane_lira')]"
   lira_toscane_lira_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_lira_toscane_lira_state')|+D] @lira_toscane_lira!"
   lira_toscane_lira_02_name_accumulation_state:0 "[GetPlayer.GetCustom('lira_toscane_lira_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_lira_toscane_lira_added_per_month')|+D] @lira_toscane_lira!)"
   #mark
-  mark_02_name_currency:0 "[Localize('mark_good')]  [Localize('mark')]"
   mark_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_mark_state')|+D] @mark!"
   mark_02_name_accumulation_state:0 "[GetPlayer.GetCustom('mark_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_mark_added_per_month')|+D] @mark!)"
   #mark_finnish_markka
-  mark_finnish_markka_02_name_currency:0 "[Localize('mark_finnish_markka_good')]  [Localize('mark_finnish_markka')]"
   mark_finnish_markka_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_mark_finnish_markka_state')|+D] @mark_finnish_markka!"
   mark_finnish_markka_02_name_accumulation_state:0 "[GetPlayer.GetCustom('mark_finnish_markka_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_mark_finnish_markka_added_per_month')|+D] @mark_finnish_markka!)"
   #peso
-  peso_02_name_currency:0 "[Localize('peso_good')]  [Localize('peso')]"
   peso_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_peso_state')|+D] @peso!"
   peso_02_name_accumulation_state:0 "[GetPlayer.GetCustom('peso_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_peso_added_per_month')|+D] @peso!)"
   #peso_argentine_peso
-  peso_argentine_peso_02_name_currency:0 "[Localize('peso_argentine_peso_good')]  [Localize('peso_argentine_peso')]"
   peso_argentine_peso_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_peso_argentine_peso_state')|+D] @peso_argentine_peso!"
   peso_argentine_peso_02_name_accumulation_state:0 "[GetPlayer.GetCustom('peso_argentine_peso_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_peso_argentine_peso_added_per_month')|+D] @peso_argentine_peso!)"
   #peso_bolivien_peso
-  peso_bolivien_peso_02_name_currency:0 "[Localize('peso_bolivien_peso_good')]  [Localize('peso_bolivien_peso')]"
   peso_bolivien_peso_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_peso_bolivien_peso_state')|+D] @peso_bolivien_peso!"
   peso_bolivien_peso_02_name_accumulation_state:0 "[GetPlayer.GetCustom('peso_bolivien_peso_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_peso_bolivien_peso_added_per_month')|+D] @peso_bolivien_peso!)"
   #peso_chilean_peso
-  peso_chilean_peso_02_name_currency:0 "[Localize('peso_chilean_peso_good')]  [Localize('peso_chilean_peso')]"
   peso_chilean_peso_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_peso_chilean_peso_state')|+D] @peso_chilean_peso!"
   peso_chilean_peso_02_name_accumulation_state:0 "[GetPlayer.GetCustom('peso_chilean_peso_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_peso_chilean_peso_added_per_month')|+D] @peso_chilean_peso!)"
   #peso_colombian_peso
-  peso_colombian_peso_02_name_currency:0 "[Localize('peso_colombian_peso_good')]  [Localize('peso_colombian_peso')]"
   peso_colombian_peso_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_peso_colombian_peso_state')|+D] @peso_colombian_peso!"
   peso_colombian_peso_02_name_accumulation_state:0 "[GetPlayer.GetCustom('peso_colombian_peso_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_peso_colombian_peso_added_per_month')|+D] @peso_colombian_peso!)"
   #peso_costa_rican_colon
-  peso_costa_rican_colon_02_name_currency:0 "[Localize('peso_costa_rican_colon_good')]  [Localize('peso_costa_rican_colon')]"
   peso_costa_rican_colon_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_peso_costa_rican_colon_state')|+D] @peso_costa_rican_colon!"
   peso_costa_rican_colon_02_name_accumulation_state:0 "[GetPlayer.GetCustom('peso_costa_rican_colon_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_peso_costa_rican_colon_added_per_month')|+D] @peso_costa_rican_colon!)"
   #peso_cuban_peso
-  peso_cuban_peso_02_name_currency:0 "[Localize('peso_cuban_peso_good')]  [Localize('peso_cuban_peso')]"
   peso_cuban_peso_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_peso_cuban_peso_state')|+D] @peso_cuban_peso!"
   peso_cuban_peso_02_name_accumulation_state:0 "[GetPlayer.GetCustom('peso_cuban_peso_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_peso_cuban_peso_added_per_month')|+D] @peso_cuban_peso!)"
   #peso_ecuadorian_peso
-  peso_ecuadorian_peso_02_name_currency:0 "[Localize('peso_ecuadorian_peso_good')]  [Localize('peso_ecuadorian_peso')]"
   peso_ecuadorian_peso_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_peso_ecuadorian_peso_state')|+D] @peso_ecuadorian_peso!"
   peso_ecuadorian_peso_02_name_accumulation_state:0 "[GetPlayer.GetCustom('peso_ecuadorian_peso_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_peso_ecuadorian_peso_added_per_month')|+D] @peso_ecuadorian_peso!)"
   #peso_el_salvador_colon
-  peso_el_salvador_colon_02_name_currency:0 "[Localize('peso_el_salvador_colon_good')]  [Localize('peso_el_salvador_colon')]"
   peso_el_salvador_colon_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_peso_el_salvador_colon_state')|+D] @peso_el_salvador_colon!"
   peso_el_salvador_colon_02_name_accumulation_state:0 "[GetPlayer.GetCustom('peso_el_salvador_colon_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_peso_el_salvador_colon_added_per_month')|+D] @peso_el_salvador_colon!)"
   #peso_guatemalan_quetzal
-  peso_guatemalan_quetzal_02_name_currency:0 "[Localize('peso_guatemalan_quetzal_good')]  [Localize('peso_guatemalan_quetzal')]"
   peso_guatemalan_quetzal_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_peso_guatemalan_quetzal_state')|+D] @peso_guatemalan_quetzal!"
   peso_guatemalan_quetzal_02_name_accumulation_state:0 "[GetPlayer.GetCustom('peso_guatemalan_quetzal_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_peso_guatemalan_quetzal_added_per_month')|+D] @peso_guatemalan_quetzal!)"
   #peso_honduran_lempira
-  peso_honduran_lempira_02_name_currency:0 "[Localize('peso_honduran_lempira_good')]  [Localize('peso_honduran_lempira')]"
   peso_honduran_lempira_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_peso_honduran_lempira_state')|+D] @peso_honduran_lempira!"
   peso_honduran_lempira_02_name_accumulation_state:0 "[GetPlayer.GetCustom('peso_honduran_lempira_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_peso_honduran_lempira_added_per_month')|+D] @peso_honduran_lempira!)"
   #peso_mexican_peso
-  peso_mexican_peso_02_name_currency:0 "[Localize('peso_mexican_peso_good')]  [Localize('peso_mexican_peso')]"
   peso_mexican_peso_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_peso_mexican_peso_state')|+D] @peso_mexican_peso!"
   peso_mexican_peso_02_name_accumulation_state:0 "[GetPlayer.GetCustom('peso_mexican_peso_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_peso_mexican_peso_added_per_month')|+D] @peso_mexican_peso!)"
   #peso_nicaraguan_cordoba
-  peso_nicaraguan_cordoba_02_name_currency:0 "[Localize('peso_nicaraguan_cordoba_good')]  [Localize('peso_nicaraguan_cordoba')]"
   peso_nicaraguan_cordoba_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_peso_nicaraguan_cordoba_state')|+D] @peso_nicaraguan_cordoba!"
   peso_nicaraguan_cordoba_02_name_accumulation_state:0 "[GetPlayer.GetCustom('peso_nicaraguan_cordoba_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_peso_nicaraguan_cordoba_added_per_month')|+D] @peso_nicaraguan_cordoba!)"
   #peso_paraguayan_peso
-  peso_paraguayan_peso_02_name_currency:0 "[Localize('peso_paraguayan_peso_good')]  [Localize('peso_paraguayan_peso')]"
   peso_paraguayan_peso_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_peso_paraguayan_peso_state')|+D] @peso_paraguayan_peso!"
   peso_paraguayan_peso_02_name_accumulation_state:0 "[GetPlayer.GetCustom('peso_paraguayan_peso_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_peso_paraguayan_peso_added_per_month')|+D] @peso_paraguayan_peso!)"
   #peso_philippine_peso
-  peso_philippine_peso_02_name_currency:0 "[Localize('peso_philippine_peso_good')]  [Localize('peso_philippine_peso')]"
   peso_philippine_peso_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_peso_philippine_peso_state')|+D] @peso_philippine_peso!"
   peso_philippine_peso_02_name_accumulation_state:0 "[GetPlayer.GetCustom('peso_philippine_peso_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_peso_philippine_peso_added_per_month')|+D] @peso_philippine_peso!)"
   #peso_sol_de_oro
-  peso_sol_de_oro_02_name_currency:0 "[Localize('peso_sol_de_oro_good')]  [Localize('peso_sol_de_oro')]"
   peso_sol_de_oro_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_peso_sol_de_oro_state')|+D] @peso_sol_de_oro!"
   peso_sol_de_oro_02_name_accumulation_state:0 "[GetPlayer.GetCustom('peso_sol_de_oro_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_peso_sol_de_oro_added_per_month')|+D] @peso_sol_de_oro!)"
   #peso_uruguayan_peso
-  peso_uruguayan_peso_02_name_currency:0 "[Localize('peso_uruguayan_peso_good')]  [Localize('peso_uruguayan_peso')]"
   peso_uruguayan_peso_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_peso_uruguayan_peso_state')|+D] @peso_uruguayan_peso!"
   peso_uruguayan_peso_02_name_accumulation_state:0 "[GetPlayer.GetCustom('peso_uruguayan_peso_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_peso_uruguayan_peso_added_per_month')|+D] @peso_uruguayan_peso!)"
   #peso_venezuelan_peso
-  peso_venezuelan_peso_02_name_currency:0 "[Localize('peso_venezuelan_peso_good')]  [Localize('peso_venezuelan_peso')]"
   peso_venezuelan_peso_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_peso_venezuelan_peso_state')|+D] @peso_venezuelan_peso!"
   peso_venezuelan_peso_02_name_accumulation_state:0 "[GetPlayer.GetCustom('peso_venezuelan_peso_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_peso_venezuelan_peso_added_per_month')|+D] @peso_venezuelan_peso!)"
   #pound_egyptian_pound
-  pound_egyptian_pound_02_name_currency:0 "[Localize('pound_egyptian_pound_good')]  [Localize('pound_egyptian_pound')]"
   pound_egyptian_pound_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_pound_egyptian_pound_state')|+D] @pound_egyptian_pound!"
   pound_egyptian_pound_02_name_accumulation_state:0 "[GetPlayer.GetCustom('pound_egyptian_pound_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_pound_egyptian_pound_added_per_month')|+D] @pound_egyptian_pound!)"
   #pound_irish_pound
-  pound_irish_pound_02_name_currency:0 "[Localize('pound_irish_pound_good')]  [Localize('pound_irish_pound')]"
   pound_irish_pound_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_pound_irish_pound_state')|+D] @pound_irish_pound!"
   pound_irish_pound_02_name_accumulation_state:0 "[GetPlayer.GetCustom('pound_irish_pound_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_pound_irish_pound_added_per_month')|+D] @pound_irish_pound!)"
   #pound_sterling
-  pound_sterling_02_name_currency:0 "[Localize('pound_sterling_good')]  [Localize('pound_sterling')]"
   pound_sterling_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_pound_sterling_state')|+D] @pound_sterling!"
   pound_sterling_02_name_accumulation_state:0 "[GetPlayer.GetCustom('pound_sterling_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_pound_sterling_added_per_month')|+D] @pound_sterling!)"
   #real
-  real_02_name_currency:0 "[Localize('real_good')]  [Localize('real')]"
   real_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_real_state')|+D] @real!"
   real_02_name_accumulation_state:0 "[GetPlayer.GetCustom('real_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_real_added_per_month')|+D] @real!)"
   #real_brazilian_real
-  real_brazilian_real_02_name_currency:0 "[Localize('real_brazilian_real_good')]  [Localize('real_brazilian_real')]"
   real_brazilian_real_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_real_brazilian_real_state')|+D] @real_brazilian_real!"
   real_brazilian_real_02_name_accumulation_state:0 "[GetPlayer.GetCustom('real_brazilian_real_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_real_brazilian_real_added_per_month')|+D] @real_brazilian_real!)"
   #rupee_indian_rupee
-  rupee_indian_rupee_02_name_currency:0 "[Localize('rupee_indian_rupee_good')]  [Localize('rupee_indian_rupee')]"
   rupee_indian_rupee_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_rupee_indian_rupee_state')|+D] @rupee_indian_rupee!"
   rupee_indian_rupee_02_name_accumulation_state:0 "[GetPlayer.GetCustom('rupee_indian_rupee_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_rupee_indian_rupee_added_per_month')|+D] @rupee_indian_rupee!)"
   #rupee_indonesian_rupiah
-  rupee_indonesian_rupiah_02_name_currency:0 "[Localize('rupee_indonesian_rupiah_good')]  [Localize('rupee_indonesian_rupiah')]"
   rupee_indonesian_rupiah_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_rupee_indonesian_rupiah_state')|+D] @rupee_indonesian_rupiah!"
   rupee_indonesian_rupiah_02_name_accumulation_state:0 "[GetPlayer.GetCustom('rupee_indonesian_rupiah_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_rupee_indonesian_rupiah_added_per_month')|+D] @rupee_indonesian_rupiah!)"
   #spe_baht
-  spe_baht_02_name_currency:0 "[Localize('spe_baht_good')]  [Localize('spe_baht')]"
   spe_baht_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_spe_baht_state')|+D] @spe_baht!"
   spe_baht_02_name_accumulation_state:0 "[GetPlayer.GetCustom('spe_baht_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_spe_baht_added_per_month')|+D] @spe_baht!)"
   #spe_dong
-  spe_dong_02_name_currency:0 "[Localize('spe_dong_good')]  [Localize('spe_dong')]"
   spe_dong_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_spe_dong_state')|+D] @spe_dong!"
   spe_dong_02_name_accumulation_state:0 "[GetPlayer.GetCustom('spe_dong_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_spe_dong_added_per_month')|+D] @spe_dong!)"
   #spe_drachma
-  spe_drachma_02_name_currency:0 "[Localize('spe_drachma_good')]  [Localize('spe_drachma')]"
   spe_drachma_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_spe_drachma_state')|+D] @spe_drachma!"
   spe_drachma_02_name_accumulation_state:0 "[GetPlayer.GetCustom('spe_drachma_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_spe_drachma_added_per_month')|+D] @spe_drachma!)"
   #spe_korean_won
-  spe_korean_won_02_name_currency:0 "[Localize('spe_korean_won_good')]  [Localize('spe_korean_won')]"
   spe_korean_won_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_spe_korean_won_state')|+D] @spe_korean_won!"
   spe_korean_won_02_name_accumulation_state:0 "[GetPlayer.GetCustom('spe_korean_won_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_spe_korean_won_added_per_month')|+D] @spe_korean_won!)"
   #spe_latvian_lats
-  spe_latvian_lats_02_name_currency:0 "[Localize('spe_latvian_lats_good')]  [Localize('spe_latvian_lats')]"
   spe_latvian_lats_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_spe_latvian_lats_state')|+D] @spe_latvian_lats!"
   spe_latvian_lats_02_name_accumulation_state:0 "[GetPlayer.GetCustom('spe_latvian_lats_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_spe_latvian_lats_added_per_month')|+D] @spe_latvian_lats!)"
   #spe_lithuanian_litas
-  spe_lithuanian_litas_02_name_currency:0 "[Localize('spe_lithuanian_litas_good')]  [Localize('spe_lithuanian_litas')]"
   spe_lithuanian_litas_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_spe_lithuanian_litas_state')|+D] @spe_lithuanian_litas!"
   spe_lithuanian_litas_02_name_accumulation_state:0 "[GetPlayer.GetCustom('spe_lithuanian_litas_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_spe_lithuanian_litas_added_per_month')|+D] @spe_lithuanian_litas!)"
   #spe_peseta
-  spe_peseta_02_name_currency:0 "[Localize('spe_peseta_good')]  [Localize('spe_peseta')]"
   spe_peseta_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_spe_peseta_state')|+D] @spe_peseta!"
   spe_peseta_02_name_accumulation_state:0 "[GetPlayer.GetCustom('spe_peseta_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_spe_peseta_added_per_month')|+D] @spe_peseta!)"
   #spe_ruble
-  spe_ruble_02_name_currency:0 "[Localize('spe_ruble_good')]  [Localize('spe_ruble')]"
 
   #spe_ruble_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_spe_ruble_state')|+D] @spe_ruble!"
   #spe_ruble_02_name_state:0 "[SCOPE.sCountry('seller_russia').MakeScope.ScriptValue('stockpiling_spe_ruble_state')|+D] @spe_ruble!"
@@ -3500,31 +3408,24 @@ opium_flag_status:0 "[GetPlayer.GetCustom('stokpiling_opium_status')]"
 
   spe_ruble_02_name_accumulation_state:0 "[GetPlayer.GetCustom('spe_ruble_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_spe_ruble_added_per_month')|+D] @spe_ruble!)"
   #spe_uni
-  spe_uni_02_name_currency:0 "[Localize('spe_uni_good')]  [Localize('spe_uni')]"
   spe_uni_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_spe_uni_state')|+D] @spe_uni!"
   spe_uni_02_name_accumulation_state:0 "[GetPlayer.GetCustom('spe_uni_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_spe_uni_added_per_month')|+D] @spe_uni!)"
   #spe_yen
-  spe_yen_02_name_currency:0 "[Localize('spe_yen_good')]  [Localize('spe_yen')]"
   spe_yen_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_spe_yen_state')|+D] @spe_yen!"
   spe_yen_02_name_accumulation_state:0 "[GetPlayer.GetCustom('spe_yen_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_spe_yen_added_per_month')|+D] @spe_yen!)"
   #spe_yuan
-  spe_yuan_02_name_currency:0 "[Localize('spe_yuan_good')]  [Localize('spe_yuan')]"
   spe_yuan_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_spe_yuan_state')|+D] @spe_yuan!"
   spe_yuan_02_name_accumulation_state:0 "[GetPlayer.GetCustom('spe_yuan_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_spe_yuan_added_per_month')|+D] @spe_yuan!)"
   #spe_zloti
-  spe_zloti_02_name_currency:0 "[Localize('spe_zloti_good')]  [Localize('spe_zloti')]"
   spe_zloti_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_spe_zloti_state')|+D] @spe_zloti!"
   spe_zloti_02_name_accumulation_state:0 "[GetPlayer.GetCustom('spe_zloti_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_spe_zloti_added_per_month')|+D] @spe_zloti!)"
   #thaler_hannoveraner_thaler
-  thaler_hannoveraner_thaler_02_name_currency:0 "[Localize('thaler_hannoveraner_thaler_good')]  [Localize('thaler_hannoveraner_thaler')]"
   thaler_hannoveraner_thaler_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_thaler_hannoveraner_thaler_state')|+D] @thaler_hannoveraner_thaler!"
   thaler_hannoveraner_thaler_02_name_accumulation_state:0 "[GetPlayer.GetCustom('thaler_hannoveraner_thaler_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_thaler_hannoveraner_thaler_added_per_month')|+D] @thaler_hannoveraner_thaler!)"
   #thaler_prussian_thaler
-  thaler_prussian_thaler_02_name_currency:0 "[Localize('thaler_prussian_thaler_good')]  [Localize('thaler_prussian_thaler')]"
   thaler_prussian_thaler_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_thaler_prussian_thaler_state')|+D] @thaler_prussian_thaler!"
   thaler_prussian_thaler_02_name_accumulation_state:0 "[GetPlayer.GetCustom('thaler_prussian_thaler_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_thaler_prussian_thaler_added_per_month')|+D] @thaler_prussian_thaler!)"
   #thaler_saxon_thaler
-  thaler_saxon_thaler_02_name_currency:0 "[Localize('thaler_saxon_thaler_good')]  [Localize('thaler_saxon_thaler')]"
   thaler_saxon_thaler_02_name_state:0 "[GetPlayer.MakeScope.ScriptValue('stockpiling_thaler_saxon_thaler_state')|+D] @thaler_saxon_thaler!"
   thaler_saxon_thaler_02_name_accumulation_state:0 "[GetPlayer.GetCustom('thaler_saxon_thaler_currency_accumulation')] ([GetPlayer.MakeScope.ScriptValue('stockpiling_thaler_saxon_thaler_added_per_month')|+D] @thaler_saxon_thaler!)"
 

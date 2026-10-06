@@ -83,11 +83,11 @@ GUI-тип регистрирует первый файл по имени (ASCII
   `concept_zz_ef_discretionary_adjustment`), `PSC_game_concepts.txt` (`concept_construction_spending`).
 
 ### Локализация (`localization/<язык>/`, 11 языков)
-- Полные: `english/` (37 `.yml`) и `russian/`
+- Полные: `english/` (38 `.yml`) и `russian/`
   (+`zz_ef_rus_gui_fix_l_russian.yml`, 22 строки ключей, которых нет в моде). Остальные девять — копии английской
   (`python ../vic3_mods/tools/ld_loc_langs.py`).
 - Группы: `00_ef_gui_localization_*` (12 351 строка: подписи панелей), `01_ef_*` (здания, компании, понятия, валюты, события,
-  товары, законы, модификаторы, технологии, подсказки), `PSC_*`, `ld_*` (`ld_cb_rate_panel`, `ld_economy_panel`, `ld_cbfx`,
+  товары, законы, модификаторы, технологии, подсказки), `PSC_*`, `ld_*` (`ld_missing_keys` — литеральные ключи из `.gui`/`custom_description`, не определённые в других файлах; `ld_cb_rate_panel`, `ld_economy_panel`, `ld_cbfx`,
   `ld_bond_tables`, `ld_monetary_policy`, `ld_currency_trade`, …), `replace/ld_*` (REPLACE-ключи: `ld_money_supply_replace`,
   `ld_cb_loan_replace`, `ld_pb_psc`, `ld_tgr_private_ownership_stock`, `ld_psc_modifiers`).
 
