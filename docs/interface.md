@@ -101,7 +101,7 @@ GUI-тип регистрирует первый файл по имени (ASCII
   забирает `var:zz_ef_hook_pending` и снимает страну со списка. Мост работает только при открытом/созданном HUD.
 - Клик по кнопке: `onclick = [GetScriptedGui('<имя>').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]`; видимость/доступность:
   `.IsShown(...)` / `.IsValid(...)`; параметры — `.AddScope('имя', MakeScopeValue(...))`. Корень — игрок, рынок (`Market.MakeScope`) или страна.
-- Списки панелей: `GetGlobalList('<имя>')` в `datamodel` (список заполняет эффект/sgui при открытии секции — `*_list_gerenation_ordered`).
+- Списки панелей: `GetGlobalList('<имя>')` в `datamodel` (список заполняет эффект/sgui при открытии секции; `*_list_gerenation_ordered` определён только `world_currency_…`).
 - Открытие секций/окон: `GetVariableSystem.Toggle('<флаг>')` (чисто GUI, скрипт не видит). Окно резервов: ещё
   `ExecuteConsoleCommand('gui.createwidget gui/ef_dev_and_custom_windows/ef_custom_windows.gui gold_reserve_window')`.
 - Журналы: `scripted_button`/`scripted_progress_bar`/`widget = { gui = …; name = …; container = … }` в `common/journal_entries/*`.
@@ -123,10 +123,9 @@ GUI-тип регистрирует первый файл по имени (ASCII
 ## Вызовы и связи
 - Панели, зависящие от других подсистем (описаны там): деньги — `ld_money_model.txt`; ставка/ЦБ — `ld_cb_rate_*`; валютный клиринг — `ld_cbfx`;
   облигации — `ld_bond_tables`; стройка — `PSC_*`.
-- GUI ссылается на 2757 имён `GetScriptedGui('…')`; не определены в `common/scripted_guis`: 25 живых вызовов `*_list_gerenation_ordered`
-  (кнопки секций в `00_ef_deported_gui_1.gui`, `ld_economy_panel.gui`, `ld_cb_rate_panel.gui`, `00_ef_custom_widgets.gui`;
-  определён только `world_currency_…` в `09_ef_other.txt`), `gdpg_sort_by_country_gdp`
-  (13 вызовов), `je_meiji_restoration_get_faction_sgui` (`states_panel.gui`). Клик не выполняет эффекта (ожидается ошибка поиска sgui в `error.log`; в игре не проверено).
+- GUI ссылается на 2757 имён `GetScriptedGui('…')`; не определены в `common/scripted_guis`: 10 живых вызовов `*_list_gerenation_ordered`
+  (кнопки секций в `ld_cb_rate_panel.gui`; файл ведёт генератор `regen_ef_cb_rate_gui`; определён только `world_currency_…` в `09_ef_other.txt`),
+  9 вызовов `gdpg_sort_by_country_gdp` (там же; sgui — `gdp_sort_by_country_gdp`), `je_meiji_restoration_get_faction_sgui` (`states_panel.gui`, ванильное имя). Клик не выполняет эффекта (ожидается ошибка поиска sgui в `error.log`; в игре не проверено).
 - `topbar.gui` → `currency_symbol_top_bar` (96 `GetCustom('currency_symbol_<cur>')`, считаются каждый кадр).
 - Подкаталог мода выигрывает у ванили: в `maj/NonEssential/{map_markers,custom_tooltip,military_formation_panel,popups,right_click_menu}.gui`
   и `frontend/shared/lists.gui` отсутствуют имена, которых нет в копиях E&F, но есть в ванили 1.13 (`enemy_naval_mission_marker`,

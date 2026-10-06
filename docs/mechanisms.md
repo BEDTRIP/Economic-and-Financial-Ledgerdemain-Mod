@@ -280,8 +280,8 @@
 
 | механизм | статус | где | доказательство | интерфейс |
 | --- | --- | --- | --- | --- |
-| Кнопки секций *_list_gerenation_ordered (25 вызовов, sgui не определены) | мёртвый | gui/00_ef_deported_gui_1.gui:184758; gui/ld_economy_panel.gui; gui/ld_cb_rate_panel.gui; gui/scripted_widgets/00_ef_custom_widgets.gui | GetScriptedGui('<имя>') без определения в common/scripted_guis (определён только world_currency_ в 09_ef_other.txt) | кнопки заголовков секций (клик без эффекта) |
-| Сортировка gdpg_sort_by_country_gdp (13 вызовов, sgui не определён) | мёртвый | gui/00_ef_deported_gui_1.gui; gui/ld_cb_rate_panel.gui | GetScriptedGui('gdpg_sort_by_country_gdp') без определения | кнопки сортировки таблиц |
+| Кнопки секций *_list_gerenation_ordered (10 вызовов, sgui не определены) | мёртвый | gui/ld_cb_rate_panel.gui | GetScriptedGui('<имя>') без определения в common/scripted_guis (определён только world_currency_ в 09_ef_other.txt) | кнопки заголовков секций (клик без эффекта) |
+| Сортировка gdpg_sort_by_country_gdp (9 вызовов, sgui не определён) | мёртвый | gui/ld_cb_rate_panel.gui | GetScriptedGui('gdpg_sort_by_country_gdp') без определения (sgui — gdp_sort_by_country_gdp) | кнопки сортировки таблиц |
 | je_meiji_restoration_get_faction_sgui (вызов без определения) | мёртвый | gui/states_panel.gui | имени нет в common/scripted_guis | — |
 | Дубль текстиконок texticons.gui ↔ 00_ef_texticons.gui | дубль | gui/texticons.gui; gui/00_ef_texticons.gui | 30 имён `icon =` объявлены в обоих файлах (2 повтора внутри 00_ef_texticons.gui); победитель — первый по имени (00_ef_texticons.gui) | иконки в тексте |
 | Мост «бюджет → скрипт» zz_ef_money_hook (ld) | живой | gui/ld_money_hook.gui; gui/scripted_widgets/ld_money_hook.txt; common/scripted_guis/ld_money_hook.txt:12; common/scripted_effects/ld_money_model.txt:465 | вызов `zz_ef_money_hook_receive` из sgui; виджет зарегистрирован; передаёт в скрипт ext/abr/g_* для модели денег (тихо трогает данные модели ld_*) | скрытый виджет (HUD) |

@@ -82,7 +82,6 @@ types zz_ef_economy_panel
 				}
 
 				textbox = {
-					autoresize = yes
 					text = "central_bank_budget_panel_desc"
 					align = left|nobaseline
 					elide = right
@@ -123,7 +122,6 @@ types zz_ef_economy_panel
 
 					blockoverride "onclick" {
 						onclick = "[GetVariableSystem.Toggle('info_eco_main')]"
-						onclick = "[GetScriptedGui('info_eco_main_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
 					}
 
@@ -162,7 +160,7 @@ types zz_ef_economy_panel
 									autoresize = yes
 									text = "[concept_money_value]"
 									align = nobaseline
-									parentanchor = Hcenter
+									parentanchor = hcenter
 									fontsize = 20
 								}
 
@@ -170,7 +168,7 @@ types zz_ef_economy_panel
 									autoresize = yes
 									text = "[GetPlayer.MakeScope.ScriptValue('money_value')|+D] [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_symbol')]"
 									align = nobaseline
-									parentanchor = Hcenter
+									parentanchor = hcenter
 									fontsize = 20
 								}
 
@@ -257,8 +255,7 @@ types zz_ef_economy_panel
 									text = "money_value_var_1_years"
 									default_format = "#white #bold"
 									align = hcenter
-									parentanchor = Hcenter
-									multiline = yes
+									parentanchor = hcenter
 									multiline = yes
 									minimumsize = { 100 40 }
 									maximumsize = { 100 -1 }
@@ -268,7 +265,7 @@ types zz_ef_economy_panel
 									autoresize = yes
 									text = "[GetPlayer.MakeScope.ScriptValue('money_value_dif_1_final')|%|+=]"
 									align = nobaseline
-									parentanchor = Hcenter
+									parentanchor = hcenter
 									fontsize = 20
 								}
 
@@ -297,8 +294,7 @@ types zz_ef_economy_panel
 									text = "money_value_var_5_years"
 									default_format = "#white #bold"
 									align = hcenter
-									parentanchor = Hcenter
-									multiline = yes
+									parentanchor = hcenter
 									multiline = yes
 									minimumsize = { 100 40 }
 									maximumsize = { 100 -1 }
@@ -308,7 +304,7 @@ types zz_ef_economy_panel
 									autoresize = yes
 									text = "[GetPlayer.MakeScope.ScriptValue('money_value_dif_5_final')|%|+=]"
 									align = nobaseline
-									parentanchor = Hcenter
+									parentanchor = hcenter
 									fontsize = 20
 								}
 
@@ -332,8 +328,7 @@ types zz_ef_economy_panel
 									text = "money_value_var_10_years"
 									default_format = "#white #bold"
 									align = hcenter
-									parentanchor = Hcenter
-									multiline = yes
+									parentanchor = hcenter
 									multiline = yes
 									minimumsize = { 100 40 }
 									maximumsize = { 100 -1 }
@@ -343,7 +338,7 @@ types zz_ef_economy_panel
 									autoresize = yes
 									text = "[GetPlayer.MakeScope.ScriptValue('money_value_dif_10_final')|%|+=]"
 									align = nobaseline
-									parentanchor = Hcenter
+									parentanchor = hcenter
 									fontsize = 20
 								}
 
@@ -365,7 +360,7 @@ types zz_ef_economy_panel
 									autoresize = yes
 									text = "[concept_money_supply]"
 									align = nobaseline
-									parentanchor = Hcenter
+									parentanchor = hcenter
 									fontsize = 20
 								}
 
@@ -373,7 +368,7 @@ types zz_ef_economy_panel
 									autoresize = yes
 									text = "[GetPlayer.MakeScope.ScriptValue('money_supply')|+D] [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_symbol')]"
 									align = nobaseline
-									parentanchor = Hcenter
+									parentanchor = hcenter
 									fontsize = 20
 								}
 
@@ -396,7 +391,7 @@ types zz_ef_economy_panel
 									autoresize = yes
 									text = "[concept_national_capacity]"
 									align = Hcenter
-									parentanchor = Hcenter
+									parentanchor = hcenter
 									multiline = yes
 									fontsize = 15
 									minimumsize = { 100 40 }
@@ -407,7 +402,7 @@ types zz_ef_economy_panel
 									autoresize = yes
 									text = "[GetPlayer.MakeScope.ScriptValue('national_capacity')|+D] [GetPlayer.GetCustom('monetary_system')]"
 									align = nobaseline
-									parentanchor = Hcenter
+									parentanchor = hcenter
 									fontsize = 20
 								}
 
@@ -435,7 +430,7 @@ types zz_ef_economy_panel
 									autoresize = yes
 									text = "[concept_central_bank_metal_reserves]"
 									align = Hcenter
-									parentanchor = Hcenter
+									parentanchor = hcenter
 									multiline = yes
 									fontsize = 15
 									minimumsize = { 100 40 }
@@ -446,7 +441,7 @@ types zz_ef_economy_panel
 									autoresize = yes
 									text = "[GetPlayer.MakeScope.ScriptValue('central_bank_metal_reserves_state')|=+D] [GetPlayer.GetCustom('monetary_system')]"
 									align = nobaseline
-									parentanchor = Hcenter
+									parentanchor = hcenter
 									fontsize = 20
 								}
 
@@ -469,7 +464,7 @@ types zz_ef_economy_panel
 									autoresize = yes
 									text = "[concept_government_treasury]"
 									align = Hcenter
-									parentanchor = Hcenter
+									parentanchor = hcenter
 									multiline = yes
 									fontsize = 15
 									minimumsize = { 100 40 }
@@ -480,7 +475,7 @@ types zz_ef_economy_panel
 									autoresize = yes
 									text = "[GetPlayer.MakeScope.ScriptValue('gold_reserves_var')|+D] [GetPlayer.GetCustom('monetary_system_partiel')]"
 									align = nobaseline
-									parentanchor = Hcenter
+									parentanchor = hcenter
 									fontsize = 20
 								}
 
@@ -504,7 +499,7 @@ types zz_ef_economy_panel
 									autoresize = yes
 									text = "gold_balance_scripted"
 									align = Hcenter
-									parentanchor = Hcenter
+									parentanchor = hcenter
 									multiline = yes
 									fontsize = 15
 									minimumsize = { 100 40 }
@@ -515,7 +510,7 @@ types zz_ef_economy_panel
 									autoresize = yes
 									text = "[GetPlayer.MakeScope.ScriptValue('trade_balance_in_gold_fixe_sv')|=+D] [GetPlayer.GetCustom('monetary_system_partiel')]"
 									align = nobaseline
-									parentanchor = Hcenter
+									parentanchor = hcenter
 									fontsize = 20
 								}
 
@@ -538,7 +533,7 @@ types zz_ef_economy_panel
 									autoresize = yes
 									text = "delta_value_small"
 									align = Hcenter
-									parentanchor = Hcenter
+									parentanchor = hcenter
 									multiline = yes
 									fontsize = 15
 									minimumsize = { 100 40 }
@@ -549,7 +544,7 @@ types zz_ef_economy_panel
 									autoresize = yes
 									text = "[GetPlayer.MakeScope.ScriptValue('trade_balance_in_gold_delta_fix_sv')|=+D] [GetPlayer.GetCustom('monetary_system_partiel')]"
 									align = nobaseline
-									parentanchor = Hcenter
+									parentanchor = hcenter
 									fontsize = 20
 								}
 
@@ -576,7 +571,6 @@ types zz_ef_economy_panel
 
 					blockoverride "onclick" {
 						onclick = "[GetVariableSystem.Toggle('info_eco_detailed')]"
-						onclick = "[GetScriptedGui('info_eco_detailed_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
 					}
 
@@ -1175,7 +1169,7 @@ types zz_ef_economy_panel
 
 						#1 ligne
 						flowcontainer = {
-							argin_top = 15
+							margin_top = 15
 							spacing = 25
 							direction = horizontal
  
@@ -1505,7 +1499,6 @@ types zz_ef_economy_panel
 								parentanchor = hcenter
 
 								textbox = {
-									autoresize = yes
 									text = "[concept_central_bank_metal_reserves]"
 
 									align = left|nobaseline
@@ -1548,7 +1541,6 @@ types zz_ef_economy_panel
 								parentanchor = hcenter
 
 								textbox = {
-									autoresize = yes
 									text = "central_bank_metal_stacked_per_month"
 
 									align = left|nobaseline
@@ -2411,7 +2403,6 @@ types zz_ef_economy_panel
 
 							blockoverride "onclick" {
 								onclick = "[GetVariableSystem.Toggle('transfer_government_treasury_to_central_bank_metal_reserves')]"
-								onclick = "[GetScriptedGui('transfer_government_treasury_to_central_bank_metal_reserves_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
 							}
 
@@ -2447,7 +2438,6 @@ types zz_ef_economy_panel
 								textbox = {
 									margin_bottom = 5
 
-									autoresize = yes
 									text = "you_need_monetary_policy_tools"
 									parentanchor = hcenter
 
@@ -2588,7 +2578,6 @@ types zz_ef_economy_panel
 							onclick = "[ExecuteConsoleCommand( Select_CString( GetVariableSystem.Exists('gold_reserve_window'), 'gui.ClearWidgets gold_reserve_window', 'gui.createwidget gui/ef_dev_and_custom_windows/ef_custom_windows.gui gold_reserve_window' ) )]"
 							onclick = "[GetVariableSystem.Toggle('gold_reserve_window')]"
 
-							sing = shimmer
 							position = { 0 0 }  
 							textbox = {
 								text = "show_gold_reserve_window"
@@ -2676,7 +2665,6 @@ types zz_ef_economy_panel
 								direction = horizontal
 
 								textbox = {
-									autoresize = yes
 									text = "zz_ef_ep_current_account"
 
 									align = left|nobaseline
@@ -2719,7 +2707,6 @@ types zz_ef_economy_panel
 								parentanchor = hcenter
 
 								textbox = {
-									autoresize = yes
 									text = "gold_balance_scripted"
 
 									align = left|nobaseline
@@ -2802,7 +2789,6 @@ types zz_ef_economy_panel
 									direction = vertical
 
 									textbox = {
-										autoresize = yes
 										text = "[concept_import_value]"
 
 										parentanchor = hcenter
@@ -2878,7 +2864,6 @@ types zz_ef_economy_panel
 									direction = vertical
 
 									textbox = {
-										autoresize = yes
 										text = "[concept_export_value]"
 
 										parentanchor = hcenter
@@ -3181,7 +3166,6 @@ types zz_ef_economy_panel
 
 							blockoverride "onclick" {
 								onclick = "[GetVariableSystem.Toggle('take_debt')]"
-								onclick = "[GetScriptedGui('take_debt_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
 							}
 
@@ -3499,14 +3483,14 @@ types zz_ef_economy_panel
 										autoresize = yes
 										text = "debt_issued_relative_GDP_2"
 										align = nobaseline
-										parentanchor = Hcenter
+										parentanchor = hcenter
 										fontsize = 40
 									}
 									textbox = {
 										autoresize = yes
 										text = "debt_issued_relative_GDP_3"
 										align = nobaseline
-										parentanchor = Hcenter
+										parentanchor = hcenter
 										fontsize = 25
 									}
 
@@ -3550,7 +3534,6 @@ types zz_ef_economy_panel
 									button_icon_square = {
 										name = "set_debt_issued"
 
-										parentanchor = hcenter
 
 										size = { 138 40 }
 										parentanchor = hcenter
@@ -3589,7 +3572,6 @@ types zz_ef_economy_panel
 
 							blockoverride "onclick" {
 								onclick = "[GetVariableSystem.Toggle('refune_debt')]"
-								onclick = "[GetScriptedGui('refune_debt_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
 							}
 
@@ -3643,7 +3625,7 @@ types zz_ef_economy_panel
 											autoresize = yes
 											text = "[GetPlayer.MakeScope.ScriptValue('interest_value_10Y')|%|=]"
 											align = nobaseline
-											parentanchor = Hcenter
+											parentanchor = hcenter
 											fontsize = 20
 										}
 
@@ -3674,7 +3656,7 @@ types zz_ef_economy_panel
 											autoresize = yes
 											text = "[GetPlayer.MakeScope.Var('credit_at_central_bank').GetValue|+D] [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_symbol')]"
 											align = nobaseline
-											parentanchor = Hcenter
+											parentanchor = hcenter
 											fontsize = 20
 										}
 
@@ -3784,7 +3766,7 @@ types zz_ef_economy_panel
 										autoresize = yes
 										text = "[GetPlayer.MakeScope.Var('refund_credit_at_central_bank').GetValue|D] [GetPlayer.GetCustom('currency_symbol')] eq. [GetPlayer.MakeScope.ScriptValue('refund_credit_at_central_bank_in_metal')|D] [GetPlayer.GetCustom('monetary_system_partiel')]"
 										align = nobaseline
-										parentanchor = Hcenter
+										parentanchor = hcenter
 										fontsize = 40
 									}
 
@@ -3921,7 +3903,6 @@ types zz_ef_economy_panel
 
 				blockoverride "onclick" {
 					onclick = "[GetVariableSystem.Toggle('domestic_loans')]"
-					onclick = "[GetScriptedGui('domestic_loans_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
 				}
 
@@ -4155,7 +4136,6 @@ types zz_ef_economy_panel
 									direction = vertical
 
 									textbox = {
-										autoresize = yes
 										text = "current_monetary_policy"
 										parentanchor = hcenter
 
@@ -4170,7 +4150,6 @@ types zz_ef_economy_panel
 
 									#icon
 									textbox = {
-										autoresize = yes
 										text = "[GetPlayer.GetCustom('law_monetary_policy_texture')]"
 
 										parentanchor = hcenter
@@ -4185,7 +4164,6 @@ types zz_ef_economy_panel
 
 									#law_monetary_policy
 									textbox = {
-										autoresize = yes
 										text = "[GetPlayer.GetCustom('law_monetary_policy')]"
 
 										parentanchor = hcenter
@@ -4719,7 +4697,6 @@ types zz_ef_economy_panel
 
 							blockoverride "onclick" {
 								onclick = "[GetVariableSystem.Toggle('large_monetary_policy')]"
-								onclick = "[GetScriptedGui('large_monetary_policy_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								onclick = "[GetScriptedGui('country_credit_rating_actualized').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 							}
 
@@ -4825,7 +4802,7 @@ types zz_ef_economy_panel
 												autoresize = yes
 												text = "[concept_money_value]"
 												align = nobaseline
-												parentanchor = Hcenter
+												parentanchor = hcenter
 												fontsize = 20
 											}
 
@@ -4833,7 +4810,7 @@ types zz_ef_economy_panel
 												autoresize = yes
 												text = "[GetPlayer.MakeScope.ScriptValue('money_value')|+D] [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_symbol')]"
 												align = nobaseline
-												parentanchor = Hcenter
+												parentanchor = hcenter
 												fontsize = 20
 											}
 
@@ -4841,7 +4818,7 @@ types zz_ef_economy_panel
 												autoresize = yes
 												text = "([GetPlayer.MakeScope.ScriptValue('money_value_predicted_devaluation')|+D] [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_symbol')])"
 												align = nobaseline
-												parentanchor = Hcenter
+												parentanchor = hcenter
 												fontsize = 20
 											}
 
@@ -4882,7 +4859,7 @@ types zz_ef_economy_panel
 												autoresize = yes
 												text = "([GetPlayer.MakeScope.ScriptValue('money_supply_predicted_add_devaluation_1')|=+D] [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_symbol')])"
 												align = nobaseline
-												parentanchor = Hcenter
+												parentanchor = hcenter
 												fontsize = 20
 											}
 
@@ -4923,7 +4900,7 @@ types zz_ef_economy_panel
 												autoresize = yes
 												text = "[GetPlayer.GetCustom('money_value_undervalued')]"
 												align = nobaseline
-												parentanchor = Hcenter
+												parentanchor = hcenter
 												fontsize = 20
 											}
 
@@ -4962,7 +4939,7 @@ types zz_ef_economy_panel
 												autoresize = yes
 												text = "inflation_value_predicted_devaluation"
 												align = Hcenter
-												parentanchor = Hcenter
+												parentanchor = hcenter
 												fontsize = 20
 												multiline = yes
 
@@ -5164,7 +5141,7 @@ types zz_ef_economy_panel
 												autoresize = yes
 												text = "[concept_money_value]"
 												align = nobaseline
-												parentanchor = Hcenter
+												parentanchor = hcenter
 												fontsize = 20
 											}
 
@@ -5172,7 +5149,7 @@ types zz_ef_economy_panel
 												autoresize = yes
 												text = "[GetPlayer.MakeScope.ScriptValue('money_value')|+D] [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_symbol')]"
 												align = nobaseline
-												parentanchor = Hcenter
+												parentanchor = hcenter
 												fontsize = 20
 											}
 
@@ -5180,7 +5157,7 @@ types zz_ef_economy_panel
 												autoresize = yes
 												text = "([GetPlayer.MakeScope.ScriptValue('money_value_predicted_revaluation')|+D] [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_symbol')])"
 												align = nobaseline
-												parentanchor = Hcenter
+												parentanchor = hcenter
 												fontsize = 20
 											}
 
@@ -5221,7 +5198,7 @@ types zz_ef_economy_panel
 												autoresize = yes
 												text = "([GetPlayer.MakeScope.ScriptValue('money_supply_predicted_add_revaluation_1')|=+D] [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_symbol')])"
 												align = nobaseline
-												parentanchor = Hcenter
+												parentanchor = hcenter
 												fontsize = 20
 											}
 
@@ -5262,7 +5239,7 @@ types zz_ef_economy_panel
 												autoresize = yes
 												text = "[GetPlayer.GetCustom('money_value_overrated')]"
 												align = nobaseline
-												parentanchor = Hcenter
+												parentanchor = hcenter
 												fontsize = 20
 											}
 
@@ -5301,7 +5278,7 @@ types zz_ef_economy_panel
 												autoresize = yes
 												text = "inflation_value_predicted_revaluation"
 												align = Hcenter
-												parentanchor = Hcenter
+												parentanchor = hcenter
 												fontsize = 20
 												multiline = yes
 
@@ -5493,7 +5470,6 @@ types zz_ef_economy_panel
 								textbox = {
 									margin_bottom = 5
 
-									autoresize = yes
 									text = "you_need_monetary_policy_tools"
 									parentanchor = hcenter
 
@@ -6612,7 +6588,6 @@ types zz_ef_economy_panel
 
 					blockoverride "onclick" {
 						onclick = "[GetVariableSystem.Toggle('subject_list')]"
-						onclick = "[GetScriptedGui('subject_list_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
 					}
 
@@ -9163,7 +9138,6 @@ types zz_ef_economy_panel
 
 						blockoverride "onclick" {
 							onclick = "[GetVariableSystem.Toggle('CONCEPT_EXCHANGE_RATE_TITLE')]"
-							onclick = "[GetScriptedGui('CONCEPT_EXCHANGE_RATE_TITLE_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
 						}
 
@@ -9605,7 +9579,6 @@ types zz_ef_economy_panel
 
 					blockoverride "onclick" {
 						onclick = "[GetVariableSystem.Toggle('EVOLUTION_OF_THE_CURRENCY_VALUE_TITLE')]"
-						onclick = "[GetScriptedGui('EVOLUTION_OF_THE_CURRENCY_VALUE_TITLE_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
 					}
 
