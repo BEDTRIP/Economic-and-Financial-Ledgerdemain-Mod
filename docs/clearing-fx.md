@@ -34,6 +34,7 @@ E&F `trade_balance` отключён. Ключи `ld_*` — с префиксо�
 | `zz_ef_f_ext_net` | чистый внешний поток недели, деньги | `zz_ef_cb_hume_step` | `zz_ef_clr_step` |
 | `zz_ef_f_clr_net`, `zz_ef_f_clr_sent`, `zz_ef_f_clr_sub` | сумма к расчёту, отправлено главе, принято от членов | `zz_ef_clr_step` | значения `zz_ef_v_f_clr_*` |
 | `zz_ef_clr_head` | глава расчётов (overlord / владелец рынка) | `zz_ef_clr_head_find` | `zz_ef_clr_step` |
+| `zz_ef_t_gpm` | временная: `zz_ef_clr_gold_per_money`, посчитанное один раз за `zz_ef_clr_step` (и за `zz_ef_world_acc` после блока окна); значение имеет смысл только внутри вызова | `zz_ef_clr_step`, `zz_ef_world_acc` | `zz_ef_clr_step`, `_pay`, `_receive`, `zz_ef_world_acc` |
 | `zz_ef_clr_sub_g` | золото членов к расчёту | члены | `zz_ef_clr_step` главы |
 | `zz_ef_f_hume` | металл ЦБ за неделю (native, +вход/−выход) | `zz_ef_clr_pay/receive` | `zz_ef_metal_reconcile` |
 | `zz_ef_f_clr_cur_out`, `_fx_in`, `_own_back` | потоки валюты | `zz_ef_clr_*` | карточка платёжного баланса, лог |

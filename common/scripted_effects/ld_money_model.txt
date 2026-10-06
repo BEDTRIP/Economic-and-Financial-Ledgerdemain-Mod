@@ -885,10 +885,12 @@ zz_ef_world_acc = {
 	}
 	# В1.7: the members' flows (gold) their heads settled this week
 	change_global_variable = { name = zz_ef_wld_sub add = zz_ef_v_f_clr_sub }
+	# the world's average (set by the window block above) is final for this receiver: one pass of the price chain
+	set_variable = { name = zz_ef_t_gpm value = zz_ef_clr_gold_per_money }
 	if = {
-		limit = { zz_ef_clr_gold_per_money > 0 }
+		limit = { var:zz_ef_t_gpm > 0 }
 		set_variable = { name = zz_ef_wld_g value = var:zz_ef_f_ext_net }
-		change_variable = { name = zz_ef_wld_g multiply = zz_ef_clr_gold_per_money }
+		change_variable = { name = zz_ef_wld_g multiply = var:zz_ef_t_gpm }
 		if = {
 			limit = { var:zz_ef_wld_g > 0 }
 			change_global_variable = { name = zz_ef_wld_in add = var:zz_ef_wld_g }
