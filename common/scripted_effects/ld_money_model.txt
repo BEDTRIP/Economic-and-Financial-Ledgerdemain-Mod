@@ -59,12 +59,6 @@ zz_ef_privbank_interest_pay = {
 # a save that lost its delayed on_actions). var:zz_ef_week_alive lives 10
 # days and every step renews it.
 zz_ef_money_week_start = {
-	# Business cash at ~0.3 GDP: now in base_values (static_modifiers/
-	# zz_ef_business_cash.txt); the monthly modifier of 330ba50 goes.
-	if = {
-		limit = { has_modifier = zz_ef_business_cash }
-		remove_modifier = zz_ef_business_cash
-	}
 	if = {
 		limit = {
 			NOT = { has_variable = zz_ef_week_alive }
@@ -106,8 +100,6 @@ zz_ef_money_model_step = {
 	set_variable = { name = zz_ef_bcash value = zz_ef_building_cash_sum }
 	# В2 (7.10): the Banks' cash -- the banks' own money, out of M1 / M2
 	set_variable = { name = zz_ef_bkcash value = zz_ef_bank_cash_sum }
-	# В1.3 probe (3.10): who gets the business cash jump of 1 January
-	zz_ef_probe_newyear_cash = yes
 	# UI.7 (3.10): the CB's metal rescaled this step, in money (zz_ef_metal_rescale_step)
 	set_variable = { name = zz_ef_f_cb_rescale value = 0 }
 	# foreign currency in the reserves (night 2, item 2), before the rescale
@@ -567,8 +559,6 @@ zz_ef_money_hook_receive = {
 			# generated) -- here, after the receiver set the week's pool_other, tr_other,
 			# inflow and abr: at the step the log read last week's (run e0_4)
 			zz_ef_money_log_rest = yes
-			# UI.7б probe (3.10): pops' income from the engine, per pop
-			zz_ef_probe_pop_income = yes
 		}
 	}
 }
@@ -703,49 +693,6 @@ zz_ef_cb_hume_step = {
 	# with a CB, fiat too (pays in currency). Was: the metal moved by the country's own flow with nobody on the
 	# other side (generated, scripted_effects/zz_ef_clearing.txt; sets var:zz_ef_f_hume, the CB's metal, native).
 	zz_ef_clr_step = yes
-	if = {
-		limit = {
-			has_modifier = has_central_bank
-			OR = {
-				has_law = law_type:law_gold_standard
-				has_law = law_type:law_silver_standard
-				has_law = law_type:law_bimetallism_standard
-			}
-		}
-		# M.3 (the user, 4.10): Hume at full strength -- the metal that came in is coined: the CB
-		# issues as much money at the parity; the metal that went out takes as much money out of
-		# circulation. The engine has no effect on a building's cash, so the money goes into / out of
-		# the banks (the pool: the exporters' receipts deposited; the importers' payments drawn),
-		# at most the pool on the way out. The pool operation falls into next week's window, as the
-		# deposits do (var:zz_ef_w_hume_money in the pool's and the leak's accounts).
-		# Check (night 4.10): the engine already pays exporters for the goods sold abroad and takes
-		# the importers' money, so part of this may count twice -- switch: zz_ef_hume_money_on.
-		if = {
-			limit = {
-				has_variable = money_value_target_1
-				var:money_value_target_1 > 0
-				NOT = { var:zz_ef_f_hume = 0 }
-				zz_ef_hume_money_on > 0
-			}
-			set_variable = { name = zz_ef_f_hume_money value = var:zz_ef_f_hume }
-			change_variable = { name = zz_ef_f_hume_money divide = var:money_value_target_1 }
-			if = {
-				limit = { var:zz_ef_f_hume_money < 0 }
-				set_variable = {
-					name = zz_ef_f_hume_money
-					value = {
-						value = var:zz_ef_f_hume_money
-						min = {
-							value = investment_pool
-							min = 0
-							multiply = -1
-						}
-					}
-				}
-			}
-			add_investment_pool = var:zz_ef_f_hume_money
-		}
-	}
 	# В1.6 (5.10): the world's sums of the week (the EFG line)
 	zz_ef_world_acc = yes
 }
@@ -1201,9 +1148,6 @@ zz_ef_metal_rescale_step = {
 				limit = { has_variable = silver_state_1 }
 				change_variable = { name = silver_state_1 multiply = owner.var:zz_ef_metal_rescale }
 			}
-			# night 2, item 2 (2.10): E&F's currency stocks went with the HOLDER's metal factor -- off since
-			# Д2.31 (6.10 day): a currency's stocks are cut by its issuer (zz_ef_fx_liab_trim, zz_ef_nr_deposits.txt)
-			# zz_ef_fx_stock_rescale = yes
 		}
 		if = {
 			limit = { has_variable = zz_ef_fx_metal }
@@ -1435,57 +1379,3 @@ zz_ef_gov_rate_step = {
 	remove_variable = zz_ef_gr_add_new
 }
 
-# В1.3 probe (3.10, stage 0): the businesses' cash jumps on 1 January (Britain
-# only: +2.1M 1837.1, +0.7M 1838.1, run e0_1) and eats the pops' savings
-# through the leak; no script effect touches a building's cash. Buildings hold
-# no variables ("This scope doesn't support variables", run e0_1), so no delta
-# here: every December week and the first January week, each building with
-# over 10K cash -> EFJ line (country, building, state, cash, level); the jump
-# is the difference between the last December and the first January line,
-# taken offline. Off: zz_ef_probe_on = 0.
-zz_ef_probe_newyear_cash = {
-	if = {
-		limit = {
-			zz_ef_probe_on > 0
-			OR = {
-				month = 11
-				AND = {
-					month = 0
-					NOT = { has_variable = zz_ef_probe_jan }
-				}
-			}
-		}
-		if = {
-			limit = { month = 0 }
-			set_variable = { name = zz_ef_probe_jan days = 60 }
-		}
-		every_scope_building = {
-			limit = { cash_reserves_available > 10000 }
-			debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetBuilding.GetOwner.GetNameNoFormatting]|[THIS.GetBuilding.GetBuildingType.GetNameNoFormatting]|[THIS.GetBuilding.GetState.GetNameNoFormatting]|cash [THIS.GetBuilding.MakeScope.ScriptValue('zz_ef_probe_cash_now')|0]|lv [THIS.GetBuilding.MakeScope.ScriptValue('zz_ef_probe_level')|0]"
-		}
-	}
-}
-
-# UI.7б probe (3.10, stage 0): the dependents' income the engine pays from
-# nothing (pop types' dependent_wage 0.5 / 0.25 / 0 a year x the laws'
-# state_dependent_wage_mult, plus our consumer credit surcharge) is in no card:
-# pops spend it, business cash grows -- the business card's "other". Weekly
-# until 1838, the player and France: one EFD line per pop -- income, the
-# workforce's and the dependents' part, dependents, type. Offline: the sum
-# against the business residual and against dependents x dependent_wage / 52.
-# Off: zz_ef_probe_pop_on = 0.
-zz_ef_probe_pop_income = {
-	if = {
-		limit = {
-			zz_ef_probe_pop_on > 0
-			game_date < 1838.1.1
-			OR = {
-				is_player = yes
-				c:FRA ?= this
-			}
-		}
-		every_scope_pop = {
-			debug_log = "EFD|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetPop.GetCountry.GetNameNoFormatting]|inc [THIS.GetPop.GetIncome|2]|wf [THIS.GetPop.GetWorkforceIncome|2]|dep [THIS.GetPop.GetDependentIncome|2]|n [THIS.GetPop.GetDependentsSize]|size [THIS.GetPop.GetTotalSize]|type [THIS.GetPop.GetPopType.GetNameNoIconNoFormatting]|st [THIS.GetPop.GetState.GetNameNoFormatting]|cu [THIS.GetPop.GetCulture.GetNameNoFormatting]"
-		}
-	}
-}

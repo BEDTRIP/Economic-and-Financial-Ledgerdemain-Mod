@@ -72,7 +72,7 @@ GUI-тип регистрирует первый файл по имени (ASCII
 - `common/scripted_guis/00_economic_scripted_guis.txt` (959 определений) — выбор валюты `choose_currency_type_<cur>`
   (+`_visible`, `_on`, `_off`), `money_value_<cur>_visible`, `<cur>_buy_in_gold`/`_sell_in_gold`, девальвация/ревальвация
   (`devaluation_*`, `revaluation_*`, `set_*_rate`), `currency_quantity_increase/_reduce`, `is_ai`/`not_is_ai`, законы стандартов.
-- `common/scripted_guis/00_stockpile_scripted_guis.txt` (1602) — запасы по валютам, `set_store_<товар>_enabled`, `buy_<товар>_budget_panel_*`.
+- `common/scripted_guis/00_stockpile_scripted_guis.txt` (1602) — запасы по валютам, `set_store_<товар>_enabled`, `buy_<товар>_budget_panel_visible`, `trade_<товар>_budget_panel*`.
 - `common/scripted_guis/00_financial_scripted_guis.txt` (45) — облигации, кредит ЦБ, `speculative_share_N_button` (sgui),
   `transfert_currency_to_investement_pool_*`, `global_player_help_*`.
 - `common/scripted_guis/09_ef_other.txt` (1155) — отладочный флаг (`EF_sg_set_debug_flag`, `EF_sg_unset_debug_flag`,

@@ -1,0 +1,174 @@
+# из common/script_values/ld_money_model_values.txt, строки 151–155, 298–304, 349–360, 373–404, 481–484, 768–774, 1165–1166, 1168–1189, 1305–1316, 1337–1344, 1438–1446, 2753–2756 (на 6.10.2026), значения без единой ссылки (22 штуки, кроме zz_ef_hume_metal_week)
+# Where the pool is steered.
+zz_ef_pool_target = {
+	value = zz_ef_pool_contrib_month
+	multiply = zz_ef_credit_months
+}
+
+zz_ef_debt_cb_gold = {
+	value = 0
+	if = {
+		limit = { has_variable = credit_at_central_bank }
+		value = var:credit_at_central_bank
+	}
+}
+
+# The currency GOOD in E&F's central bank (counts, not money), month (E&F:
+# stockpile_currency_type_1, 01_economic_scripted_effects.txt:55549): var_2 =
+# (sell - buy orders of the currency good in the market) x 4 + devaluation -
+# revaluation, market owner only.
+zz_ef_cb_issue_month = {
+	value = 0
+	if = {
+		limit = { exists = market market.owner = this }
+		value = market.mg:liquidity_currency.market_goods_sell_orders
+		multiply = 4
+	}
+}
+
+zz_ef_cb_demand_others = {
+	value = zz_ef_cb_demand_month
+	subtract = zz_ef_cb_demand_own
+	min = 0
+}
+zz_ef_cb_devaluation_month = {
+	value = 0
+	if = {
+		limit = { has_variable = devaluation_on var:devaluation_on = 1 }
+		value = money_supply_to_add_per_month
+	}
+	min = 0
+}
+zz_ef_cb_revaluation_month = {
+	value = 0
+	if = {
+		limit = { has_variable = revaluation_on var:revaluation_on = 1 }
+		value = money_supply_to_subtract_per_month
+		abs = yes
+	}
+}
+# Trade balance of the week, E&F's trade_balance_in_gold_delta
+# (export_value_in_gold_week - import_value_in_gold_week) / money_value_in_gold
+# (gold per unit). Positive: exports over imports.
+zz_ef_trade_week = {
+	value = 0
+	if = {
+		limit = { zz_ef_gold_per_unit > 0 }
+		value = trade_balance_in_gold_delta
+		divide = zz_ef_gold_per_unit
+	}
+}
+
+zz_ef_v_d_cb = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_d_cb } value = var:zz_ef_d_cb }
+}
+
+# Change of the savings at this week's receive: what dropped out of the
+# engine's money + deposit interest + the levels sold to companies.
+zz_ef_pop_savings_week = {
+	value = zz_ef_v_f_inflow
+	add = zz_ef_v_f_dep_int
+	add = zz_ef_v_f_buyout
+}
+
+# Accounts without a stock (pops, CB in money, abroad): change 0.
+zz_ef_zero = 0
+
+# ---- EF.48 item 7: the top sums in gold (E&F money_value_in_gold, gold per
+# unit of money; 0 for a subject or without a standard) ----------------------
+zz_ef_agg_m0_gold = {
+	value = zz_ef_agg_m0
+	multiply = zz_ef_gold_per_unit
+}
+zz_ef_agg_m1_gold = {
+	value = zz_ef_agg_m1
+	multiply = zz_ef_gold_per_unit
+}
+zz_ef_agg_m2_gold = {
+	value = zz_ef_agg_m2
+	multiply = zz_ef_gold_per_unit
+}
+zz_ef_agg_m3_gold = {
+	value = zz_ef_agg_m3
+	multiply = zz_ef_gold_per_unit
+}
+zz_ef_savings_gold = {
+	value = zz_ef_pop_savings
+	multiply = zz_ef_gold_per_unit
+}
+
+zz_ef_v_f_cc_issue = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_cc_issue } value = var:zz_ef_f_cc_issue }
+}
+zz_ef_v_f_cc_repay = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_cc_repay } value = var:zz_ef_f_cc_repay }
+}
+zz_ef_v_f_cc_int = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_cc_int } value = var:zz_ef_f_cc_int }
+}
+
+zz_ef_cc_debt_to_gdp = {
+	value = 0
+	if = {
+		limit = { gdp > 0 }
+		value = zz_ef_cc_debt
+		divide = gdp
+	}
+}
+
+# Share of the contributions that went to debt service this week.
+zz_ef_bc_service_share = {
+	value = 0
+	if = {
+		limit = { zz_ef_v_f_contrib > 0 }
+		value = zz_ef_v_f_bc_paid
+		divide = zz_ef_v_f_contrib
+	}
+}
+
+zz_ef_gov_rate_target_pp = {
+	value = zz_ef_gov_rate_target
+	multiply = 100
+}
+
+# из common/script_values/ld_money_model_values.txt, строки 141–150, 345–348 (на 6.10.2026), значения, осиротевшие после выноса zz_ef_pool_target и zz_ef_cb_demand_others: zz_ef_credit_months, zz_ef_cb_demand_own
+# Months of contributions banks keep lendable: 12 at 2% and below, 3 at 12%
+# and above (cheap money -> more credit).
+zz_ef_credit_months = {
+	value = zz_ef_money_rate
+	subtract = 0.02
+	multiply = -90
+	add = 12
+	min = 3
+	max = 12
+}
+
+zz_ef_cb_demand_own = {
+	value = zz_ef_cb_demand_month
+	multiply = zz_ef_market_gdp_share
+}
+
+# из common/script_values/ld_money_model_values.txt, строки 317–326, 327–334 (на 6.10.2026), значения, осиротевшие после выноса zz_ef_cb_demand_own: zz_ef_market_gdp_share, zz_ef_cb_demand_month
+zz_ef_market_gdp_share = {
+	value = 1
+	if = {
+		limit = { market.gdp > 0 }
+		value = gdp
+		divide = market.gdp
+	}
+	min = 0
+	max = 1
+}
+
+zz_ef_cb_demand_month = {
+	value = 0
+	if = {
+		limit = { exists = market market.owner = this }
+		value = market.mg:liquidity_currency.market_goods_buy_orders
+		multiply = 4
+	}
+}

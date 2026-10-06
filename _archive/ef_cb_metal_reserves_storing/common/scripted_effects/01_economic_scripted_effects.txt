@@ -1,0 +1,114 @@
+# из common/scripted_effects/01_economic_scripted_effects.txt, строки 41643–41755 (на 6.10.2026), пустая обёртка stockpiling_central_bank_metal_reserves_state и E&F storing_gold_1 / storing_silver_1
+stockpiling_central_bank_metal_reserves_state = {
+	# Д2.7а: E&F's storing_gold_1 / storing_silver_1 (the market's sell orders x 400) -- off
+}
+storing_gold_1 = {
+    every_scope_state = {
+        if = {
+            limit = {
+                has_modifier = central_bank_historic_place
+				is_capital = yes
+            }
+            save_scope_as = central_bank_site
+		}
+	}
+
+	#######################################################################
+	#cela est pour récupérer la valeur de l'etat
+	set_variable = {
+		name = gold_state_var_1
+		value = gold_state_native_for_stockpile
+	}
+	#######################################################################
+
+    if = {
+        limit = {
+			gold_market_goods_sell_orders > 0
+        }
+		set_variable = {
+			name = stockpiling_gold_var_2
+			value = gold_market_goods_sell_orders
+		}
+        change_variable = {
+            name = stockpiling_gold_var_2
+           # multiply = 1000
+            multiply = 100
+        }
+        change_variable = {
+            name = stockpiling_gold_var_2
+            multiply = 4 #month
+        }
+		# if = {
+		# 	limit = {
+		# 		has_law = law_type:law_bimetallism_standard
+		# 	}
+		# 	change_variable = {
+		# 		name = stockpiling_gold_var_2
+		# 		multiply = bimetallic_rate_gold_to_silver
+		# 	}
+		# }
+		change_variable = {
+			name = gold_state_var_1
+			add = var:stockpiling_gold_var_2
+		}
+		scope:central_bank_site = {
+			set_variable = {
+				name = gold_state_1
+				value = root.var:gold_state_var_1
+			}
+		}
+    }
+}
+storing_silver_1 = {
+    every_scope_state = {
+        if = {
+            limit = {
+                has_modifier = central_bank_historic_place
+				is_capital = yes
+            }
+            save_scope_as = central_bank_site
+		}
+	}
+
+	#######################################################################
+	#cela est pour récupérer la valeur de l'etat
+	set_variable = {
+		name = silver_state_var_1
+		value = silver_state_native_for_stockpile
+	}
+	#######################################################################
+
+    if = {
+        limit = {
+			silver_market_goods_sell_orders > 0
+        }
+
+		set_variable = {
+			name = stockpiling_silver_var_2
+			value = silver_market_goods_sell_orders
+		}
+        change_variable = {
+            name = stockpiling_silver_var_2
+            #multiply = 1000
+            multiply = 100
+        }
+        change_variable = {
+            name = stockpiling_silver_var_2
+            multiply = 4 #month
+        }
+		change_variable = {
+			name = stockpiling_silver_var_2
+			multiply = gold_to_silver_rate
+		}
+		change_variable = {
+			name = silver_state_var_1
+			add = var:stockpiling_silver_var_2
+		}
+		scope:central_bank_site = {
+			set_variable = {
+				name = silver_state_1
+				value = root.var:silver_state_var_1
+			}
+		}
+    }
+}

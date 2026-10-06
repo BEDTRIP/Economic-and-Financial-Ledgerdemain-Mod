@@ -50,34 +50,6 @@ zz_ef_currency_trade_m = {
 	min = -10
 }
 
-# M.8 (4.10, scripted_effects/zz_ef_subject_metal.txt): a country's metal in gold, and the metal in
-# gold 40% of its money supply needs at its parity (E&F's value in gold when there is no parity).
-zz_ef_metal_in_gold = {
-	value = gold_state_native_for_stockpile
-	add = {
-		value = silver_state_native_for_stockpile
-		multiply = silver_to_gold_rate
-	}
-}
-zz_ef_metal_target_in_gold = {
-	value = zz_ef_agg_m2
-	multiply = zz_ef_cover_normal
-	if = {
-		limit = {
-			has_variable = money_value_target_1
-			var:money_value_target_1 > 0
-		}
-		multiply = var:money_value_target_1
-		if = {
-			limit = { has_law = law_type:law_silver_standard }
-			multiply = silver_to_gold_rate
-		}
-	}
-	else = {
-		multiply = money_value_in_gold
-	}
-	min = 0
-}
 
 # Ф.2 (4.10, scripted_effects/zz_ef_money_model.txt): what the issuer owes foreign private banks a year.
 # Е.5 (5.10, Д.2): the week's interest the scope country owes on its bonds held by other countries' treasuries --

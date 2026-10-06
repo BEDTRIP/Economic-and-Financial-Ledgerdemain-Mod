@@ -54,7 +54,7 @@
 | 10161–11434 | `currency_strength_modifier`, `inflation_modifier`, `money_value_target_modification`, `devaluation/revaluation_money_value_target*` | да |
 | 11529–14606 | `money_creation_in_foreign_exchange_reserve`, `money_destruction_in_foreign_exchange_reserve` (по 1,5 тыс. строк) | нет вызовов (refs=0) |
 | 14606–17370 | `extreme_weak_currency_solution[_player]`, `reset_balance`, `reset_law_event_currency`, `reset_debt_in_currency`, `reset_debt_currency_reserve_and_export_value` (24 тыс. строк) | да — из scripted_guis (кнопки смены закона) |
-| 41512–42367 | `devaluation_on`, `revaluation_on`, `set_reset_monetary_system_status`, `on_activate_*_law`, `storing_gold_1`/`storing_silver_1` | `storing_*` — без вызовов |
+| 41512–42367 | `devaluation_on`, `revaluation_on`, `set_reset_monetary_system_status`, `on_activate_*_law` | — |
 | 41765 | `trade_balance` (388) | да (месячный) |
 | 42367–42720 | `stockpiling_currency`, `stockpiling_currency_type_1` | да |
 | 42720–91109 | 95×3 `buy_<cur>_currency`, `sell_<cur>_currency`, `sell_<cur>_currency_crisis` (по ~510 строк на валюту) | да, из `buy_sell_currency_order`/`ai_buy_sell_currency`; `_crisis` — из `00_on_action_main.txt:9164` и др.; пишут `gold_state_1`/`silver_state_1` |

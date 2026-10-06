@@ -1,0 +1,44 @@
+# из common/scripted_effects/ld_money_model.txt, строки 700–742 (на 6.10.2026), выключенная ветка «деньги за металл по Юму» в zz_ef_cb_hume_step (if стандарт металла → if zz_ef_hume_money_on > 0 → add_investment_pool)
+	if = {
+		limit = {
+			has_modifier = has_central_bank
+			OR = {
+				has_law = law_type:law_gold_standard
+				has_law = law_type:law_silver_standard
+				has_law = law_type:law_bimetallism_standard
+			}
+		}
+		# M.3 (the user, 4.10): Hume at full strength -- the metal that came in is coined: the CB
+		# issues as much money at the parity; the metal that went out takes as much money out of
+		# circulation. The engine has no effect on a building's cash, so the money goes into / out of
+		# the banks (the pool: the exporters' receipts deposited; the importers' payments drawn),
+		# at most the pool on the way out. The pool operation falls into next week's window, as the
+		# deposits do (var:zz_ef_w_hume_money in the pool's and the leak's accounts).
+		# Check (night 4.10): the engine already pays exporters for the goods sold abroad and takes
+		# the importers' money, so part of this may count twice -- switch: zz_ef_hume_money_on.
+		if = {
+			limit = {
+				has_variable = money_value_target_1
+				var:money_value_target_1 > 0
+				NOT = { var:zz_ef_f_hume = 0 }
+				zz_ef_hume_money_on > 0
+			}
+			set_variable = { name = zz_ef_f_hume_money value = var:zz_ef_f_hume }
+			change_variable = { name = zz_ef_f_hume_money divide = var:money_value_target_1 }
+			if = {
+				limit = { var:zz_ef_f_hume_money < 0 }
+				set_variable = {
+					name = zz_ef_f_hume_money
+					value = {
+						value = var:zz_ef_f_hume_money
+						min = {
+							value = investment_pool
+							min = 0
+							multiply = -1
+						}
+					}
+				}
+			}
+			add_investment_pool = var:zz_ef_f_hume_money
+		}
+	}

@@ -1,0 +1,7 @@
+# из common/scripted_effects/ld_money_model.txt, строки 62–67 (на 6.10.2026), снятие пустого модификатора zz_ef_business_cash в начале zz_ef_money_week_start
+	# Business cash at ~0.3 GDP: now in base_values (static_modifiers/
+	# zz_ef_business_cash.txt); the monthly modifier of 330ba50 goes.
+	if = {
+		limit = { has_modifier = zz_ef_business_cash }
+		remove_modifier = zz_ef_business_cash
+	}

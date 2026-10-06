@@ -1,0 +1,29 @@
+# из common/script_values/ld_money_model_values.txt, строки 849–871, 999–1002 (на 6.10.2026), значения zz_ef_hume_metal_week (без ссылок) и переключатель zz_ef_hume_money_on = 0
+# Metal moved by it: the flow x the currency's PARITY (metal per unit of
+# money at the mint par, var:money_value_target_1), never more than the CB
+# holds. Was today's value (money_value_0 = capacity / money): the value grows
+# with the metal, so a surplus fed on itself -- Russia's metal 187 -> 1644M
+# (run 22), Prussia's value 31 -> 186 in two years (run 24). Payments abroad
+# under a metal standard settle at the mint par (2.10).
+zz_ef_hume_metal_week = {
+	value = zz_ef_ext_net_week
+	if = {
+		limit = {
+			has_variable = money_value_target_1
+			var:money_value_target_1 > 0
+		}
+		multiply = var:money_value_target_1
+	}
+	else = {
+		multiply = money_value_0
+	}
+	min = {
+		value = zz_ef_cb_metal
+		multiply = -1
+	}
+}
+
+# M.3 (4.10): Hume's money on (1) / off (0) -- see zz_ef_cb_hume_step. П.5 (the user, 4.10, В.1): off -- the
+# engine pays the exporter already (one money for the world), the CB's issue counted it twice (run n1_b: Britain's
+# pool 4M -> 163M in 8 years, rates down to 2%).
+zz_ef_hume_money_on = 0

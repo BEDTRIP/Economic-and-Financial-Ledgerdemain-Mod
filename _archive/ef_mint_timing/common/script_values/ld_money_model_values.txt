@@ -1,0 +1,71 @@
+# из common/script_values/ld_money_model_values.txt, строки 925–936, 951–959, 974–1020 (на 6.10.2026), значения хронометрии чеканки ЦБ: zz_ef_mint_share, zz_ef_mint_treasury_share, zz_ef_silver_mined_week, zz_ef_mint_gold/silver_money, zz_ef_mint_gold/silver_metal
+# Mining into the reserves: the CB coins half of the country's weekly gold
+# (and silver on a silver or bimetallic standard) at the market price -- the
+# metal goes to its reserves at parity, the same money to the mines' owners
+# (pops' savings, then deposits). The engine cannot take goods off the
+# market, so the mines still sell all of it: this is extra issue against the
+# metal mined (a gold rush widens the money and the cover).
+zz_ef_mint_share = 0.5
+# В2.3 (2.10): the treasury's share of the coined money (0.01 = a 1% brassage,
+# the rest to the owners -- variant a; 1 = all to the treasury -- variant b).
+# A parameter until a run shows how much is coined (EFR mint / mint_tr);
+# later perhaps a law group (free coinage / state monopoly, block И).
+zz_ef_mint_treasury_share = 0.01
+
+zz_ef_silver_mined_week = {
+	value = 0
+	every_scope_state = {
+		limit = {
+			any_scope_building = { is_building_type = building_silver_mine }
+		}
+		add = sg:silver.state_goods_production
+	}
+}
+
+# Money coined this week from gold / silver (metal standards with a CB only).
+zz_ef_mint_gold_money = {
+	value = 0
+	if = {
+		limit = {
+			has_modifier = has_central_bank
+			has_variable = money_value_target_1
+			OR = {
+				has_law = law_type:law_gold_standard
+				has_law = law_type:law_bimetallism_standard
+			}
+		}
+		value = zz_ef_gold_mined_week
+		multiply = zz_ef_gold_price
+		multiply = zz_ef_mint_share
+	}
+}
+zz_ef_mint_silver_money = {
+	value = 0
+	if = {
+		limit = {
+			has_modifier = has_central_bank
+			has_variable = money_value_target_1
+			OR = {
+				has_law = law_type:law_silver_standard
+				has_law = law_type:law_bimetallism_standard
+			}
+		}
+		value = zz_ef_silver_mined_week
+		multiply = zz_ef_silver_price
+		multiply = zz_ef_mint_share
+	}
+}
+# Metal for it at parity (var:money_value_target_1, metal per unit; a
+# bimetallic parity is in gold -- silver at the gold-to-silver rate).
+zz_ef_mint_gold_metal = {
+	value = zz_ef_mint_gold_money
+	multiply = var:money_value_target_1
+}
+zz_ef_mint_silver_metal = {
+	value = zz_ef_mint_silver_money
+	multiply = var:money_value_target_1
+	if = {
+		limit = { has_law = law_type:law_bimetallism_standard }
+		multiply = gold_to_silver_rate
+	}
+}

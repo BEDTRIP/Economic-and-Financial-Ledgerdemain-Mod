@@ -1,0 +1,61 @@
+# из common/scripted_effects/ld_money_model.txt, строки 103–104, 564–565, 1386–1439 (на 6.10.2026), зонды EFJ/EFD: вызовы zz_ef_probe_newyear_cash / zz_ef_probe_pop_income и оба эффекта
+	# В1.3 probe (3.10): who gets the business cash jump of 1 January
+	zz_ef_probe_newyear_cash = yes
+
+			# UI.7б probe (3.10): pops' income from the engine, per pop
+			zz_ef_probe_pop_income = yes
+
+# В1.3 probe (3.10, stage 0): the businesses' cash jumps on 1 January (Britain
+# only: +2.1M 1837.1, +0.7M 1838.1, run e0_1) and eats the pops' savings
+# through the leak; no script effect touches a building's cash. Buildings hold
+# no variables ("This scope doesn't support variables", run e0_1), so no delta
+# here: every December week and the first January week, each building with
+# over 10K cash -> EFJ line (country, building, state, cash, level); the jump
+# is the difference between the last December and the first January line,
+# taken offline. Off: zz_ef_probe_on = 0.
+zz_ef_probe_newyear_cash = {
+	if = {
+		limit = {
+			zz_ef_probe_on > 0
+			OR = {
+				month = 11
+				AND = {
+					month = 0
+					NOT = { has_variable = zz_ef_probe_jan }
+				}
+			}
+		}
+		if = {
+			limit = { month = 0 }
+			set_variable = { name = zz_ef_probe_jan days = 60 }
+		}
+		every_scope_building = {
+			limit = { cash_reserves_available > 10000 }
+			debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetBuilding.GetOwner.GetNameNoFormatting]|[THIS.GetBuilding.GetBuildingType.GetNameNoFormatting]|[THIS.GetBuilding.GetState.GetNameNoFormatting]|cash [THIS.GetBuilding.MakeScope.ScriptValue('zz_ef_probe_cash_now')|0]|lv [THIS.GetBuilding.MakeScope.ScriptValue('zz_ef_probe_level')|0]"
+		}
+	}
+}
+
+# UI.7б probe (3.10, stage 0): the dependents' income the engine pays from
+# nothing (pop types' dependent_wage 0.5 / 0.25 / 0 a year x the laws'
+# state_dependent_wage_mult, plus our consumer credit surcharge) is in no card:
+# pops spend it, business cash grows -- the business card's "other". Weekly
+# until 1838, the player and France: one EFD line per pop -- income, the
+# workforce's and the dependents' part, dependents, type. Offline: the sum
+# against the business residual and against dependents x dependent_wage / 52.
+# Off: zz_ef_probe_pop_on = 0.
+zz_ef_probe_pop_income = {
+	if = {
+		limit = {
+			zz_ef_probe_pop_on > 0
+			game_date < 1838.1.1
+			OR = {
+				is_player = yes
+				c:FRA ?= this
+			}
+		}
+		every_scope_pop = {
+			debug_log = "EFD|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetPop.GetCountry.GetNameNoFormatting]|inc [THIS.GetPop.GetIncome|2]|wf [THIS.GetPop.GetWorkforceIncome|2]|dep [THIS.GetPop.GetDependentIncome|2]|n [THIS.GetPop.GetDependentsSize]|size [THIS.GetPop.GetTotalSize]|type [THIS.GetPop.GetPopType.GetNameNoIconNoFormatting]|st [THIS.GetPop.GetState.GetNameNoFormatting]|cu [THIS.GetPop.GetCulture.GetNameNoFormatting]"
+		}
+	}
+}

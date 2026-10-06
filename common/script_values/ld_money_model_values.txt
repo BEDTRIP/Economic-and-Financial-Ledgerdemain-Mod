@@ -138,21 +138,6 @@ zz_ef_pool_contrib_month = {
 	multiply = zz_ef_weeks_per_month
 	min = 0
 }
-# Months of contributions banks keep lendable: 12 at 2% and below, 3 at 12%
-# and above (cheap money -> more credit).
-zz_ef_credit_months = {
-	value = zz_ef_money_rate
-	subtract = 0.02
-	multiply = -90
-	add = 12
-	min = 3
-	max = 12
-}
-# Where the pool is steered.
-zz_ef_pool_target = {
-	value = zz_ef_pool_contrib_month
-	multiply = zz_ef_credit_months
-}
 # Banks' credit from the central bank, steered by the rate against GDP (the
 # user, 1.10 evening, run 10): with the target "pool = contributions x months"
 # the pool was almost always over it, and in 6 years the CB lent Britain 1.2M
@@ -295,13 +280,6 @@ zz_ef_rate_construction_mult = {
 zz_ef_debt_principal = {
 	value = principal
 }
-zz_ef_debt_cb_gold = {
-	value = 0
-	if = {
-		limit = { has_variable = credit_at_central_bank }
-		value = var:credit_at_central_bank
-	}
-}
 
 # ---- engine and E&F flows, for the ledger ---------------------------------
 
@@ -335,72 +313,6 @@ zz_ef_total_income_week = {
 }
 zz_ef_total_expenses_week = {
 	value = total_expenses
-}
-zz_ef_market_gdp_share = {
-	value = 1
-	if = {
-		limit = { market.gdp > 0 }
-		value = gdp
-		divide = market.gdp
-	}
-	min = 0
-	max = 1
-}
-# The currency GOOD in E&F's central bank (counts, not money), month (E&F:
-# stockpile_currency_type_1, 01_economic_scripted_effects.txt:55549): var_2 =
-# (sell - buy orders of the currency good in the market) x 4 + devaluation -
-# revaluation, market owner only.
-zz_ef_cb_issue_month = {
-	value = 0
-	if = {
-		limit = { exists = market market.owner = this }
-		value = market.mg:liquidity_currency.market_goods_sell_orders
-		multiply = 4
-	}
-}
-zz_ef_cb_demand_month = {
-	value = 0
-	if = {
-		limit = { exists = market market.owner = this }
-		value = market.mg:liquidity_currency.market_goods_buy_orders
-		multiply = 4
-	}
-}
-zz_ef_cb_demand_own = {
-	value = zz_ef_cb_demand_month
-	multiply = zz_ef_market_gdp_share
-}
-zz_ef_cb_demand_others = {
-	value = zz_ef_cb_demand_month
-	subtract = zz_ef_cb_demand_own
-	min = 0
-}
-zz_ef_cb_devaluation_month = {
-	value = 0
-	if = {
-		limit = { has_variable = devaluation_on var:devaluation_on = 1 }
-		value = money_supply_to_add_per_month
-	}
-	min = 0
-}
-zz_ef_cb_revaluation_month = {
-	value = 0
-	if = {
-		limit = { has_variable = revaluation_on var:revaluation_on = 1 }
-		value = money_supply_to_subtract_per_month
-		abs = yes
-	}
-}
-# Trade balance of the week, E&F's trade_balance_in_gold_delta
-# (export_value_in_gold_week - import_value_in_gold_week) / money_value_in_gold
-# (gold per unit). Positive: exports over imports.
-zz_ef_trade_week = {
-	value = 0
-	if = {
-		limit = { zz_ef_gold_per_unit > 0 }
-		value = trade_balance_in_gold_delta
-		divide = zz_ef_gold_per_unit
-	}
 }
 # The treasury card's "other": its change over the week minus the budget of
 # the week as read at the step (var:zz_ef_f_budget) minus the CB's profit the
@@ -477,10 +389,6 @@ zz_ef_v_d_buildings = {
 zz_ef_v_d_treasury = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_d_treasury } value = var:zz_ef_d_treasury }
-}
-zz_ef_v_d_cb = {
-	value = 0
-	if = { limit = { has_variable = zz_ef_d_cb } value = var:zz_ef_d_cb }
 }
 zz_ef_v_d_m2 = {
 	value = 0
@@ -765,13 +673,6 @@ zz_ef_v_f_buyout = {
 	max = 0
 	multiply = -1
 }
-# Change of the savings at this week's receive: what dropped out of the
-# engine's money + deposit interest + the levels sold to companies.
-zz_ef_pop_savings_week = {
-	value = zz_ef_v_f_inflow
-	add = zz_ef_v_f_dep_int
-	add = zz_ef_v_f_buyout
-}
 zz_ef_v_f_inflow = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_f_inflow } value = var:zz_ef_f_inflow }
@@ -913,29 +814,6 @@ zz_ef_ext_net_week = {
 	add = zz_ef_v_f_bl_int_in
 	subtract = zz_ef_v_f_bl_lost
 }
-# Metal moved by it: the flow x the currency's PARITY (metal per unit of
-# money at the mint par, var:money_value_target_1), never more than the CB
-# holds. Was today's value (money_value_0 = capacity / money): the value grows
-# with the metal, so a surplus fed on itself -- Russia's metal 187 -> 1644M
-# (run 22), Prussia's value 31 -> 186 in two years (run 24). Payments abroad
-# under a metal standard settle at the mint par (2.10).
-zz_ef_hume_metal_week = {
-	value = zz_ef_ext_net_week
-	if = {
-		limit = {
-			has_variable = money_value_target_1
-			var:money_value_target_1 > 0
-		}
-		multiply = var:money_value_target_1
-	}
-	else = {
-		multiply = money_value_0
-	}
-	min = {
-		value = zz_ef_cb_metal
-		multiply = -1
-	}
-}
 # Metal cover: the metal at parity against the money in circulation (1 =
 # 100%; 40% at the start, zz_ef_cover_normal).
 zz_ef_cb_cover = {
@@ -989,18 +867,6 @@ zz_ef_fx_deal_size = {
 	multiply = 0.02
 	min = 1
 }
-# Mining into the reserves: the CB coins half of the country's weekly gold
-# (and silver on a silver or bimetallic standard) at the market price -- the
-# metal goes to its reserves at parity, the same money to the mines' owners
-# (pops' savings, then deposits). The engine cannot take goods off the
-# market, so the mines still sell all of it: this is extra issue against the
-# metal mined (a gold rush widens the money and the cover).
-zz_ef_mint_share = 0.5
-# В2.3 (2.10): the treasury's share of the coined money (0.01 = a 1% brassage,
-# the rest to the owners -- variant a; 1 = all to the treasury -- variant b).
-# A parameter until a run shows how much is coined (EFR mint / mint_tr);
-# later perhaps a law group (free coinage / state monopoly, block И).
-zz_ef_mint_treasury_share = 0.01
 zz_ef_gold_mined_week = {
 	value = 0
 	every_scope_state = {
@@ -1015,15 +881,6 @@ zz_ef_gold_mined_week = {
 		add = sg:gold.state_goods_production
 	}
 }
-zz_ef_silver_mined_week = {
-	value = 0
-	every_scope_state = {
-		limit = {
-			any_scope_building = { is_building_type = building_silver_mine }
-		}
-		add = sg:silver.state_goods_production
-	}
-}
 zz_ef_gold_price = {
 	value = g:gold.base_price
 	multiply = {
@@ -1036,53 +893,6 @@ zz_ef_silver_price = {
 	multiply = {
 		value = 1
 		add = market.mg:silver.market_goods_pricier
-	}
-}
-# Money coined this week from gold / silver (metal standards with a CB only).
-zz_ef_mint_gold_money = {
-	value = 0
-	if = {
-		limit = {
-			has_modifier = has_central_bank
-			has_variable = money_value_target_1
-			OR = {
-				has_law = law_type:law_gold_standard
-				has_law = law_type:law_bimetallism_standard
-			}
-		}
-		value = zz_ef_gold_mined_week
-		multiply = zz_ef_gold_price
-		multiply = zz_ef_mint_share
-	}
-}
-zz_ef_mint_silver_money = {
-	value = 0
-	if = {
-		limit = {
-			has_modifier = has_central_bank
-			has_variable = money_value_target_1
-			OR = {
-				has_law = law_type:law_silver_standard
-				has_law = law_type:law_bimetallism_standard
-			}
-		}
-		value = zz_ef_silver_mined_week
-		multiply = zz_ef_silver_price
-		multiply = zz_ef_mint_share
-	}
-}
-# Metal for it at parity (var:money_value_target_1, metal per unit; a
-# bimetallic parity is in gold -- silver at the gold-to-silver rate).
-zz_ef_mint_gold_metal = {
-	value = zz_ef_mint_gold_money
-	multiply = var:money_value_target_1
-}
-zz_ef_mint_silver_metal = {
-	value = zz_ef_mint_silver_money
-	multiply = var:money_value_target_1
-	if = {
-		limit = { has_law = law_type:law_bimetallism_standard }
-		multiply = gold_to_silver_rate
 	}
 }
 zz_ef_v_f_mint_tr = {
@@ -1131,10 +941,6 @@ zz_ef_v_f_ext_net = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_f_ext_net } value = var:zz_ef_f_ext_net }
 }
-# M.3 (4.10): Hume's money on (1) / off (0) -- see zz_ef_cb_hume_step. П.5 (the user, 4.10, В.1): off -- the
-# engine pays the exporter already (one money for the world), the CB's issue counted it twice (run n1_b: Britain's
-# pool 4M -> 163M in 8 years, rates down to 2%).
-zz_ef_hume_money_on = 0
 # M.3 (4.10): money the CB issued (+) / withdrew (-) for Hume's metal, this receiver / last window
 zz_ef_v_f_hume_money = {
 	value = 0
@@ -1162,31 +968,7 @@ zz_ef_v_f_cb_rescale = {
 	if = { limit = { has_variable = zz_ef_f_cb_rescale } value = var:zz_ef_f_cb_rescale }
 }
 
-# Accounts without a stock (pops, CB in money, abroad): change 0.
-zz_ef_zero = 0
 
-# ---- EF.48 item 7: the top sums in gold (E&F money_value_in_gold, gold per
-# unit of money; 0 for a subject or without a standard) ----------------------
-zz_ef_agg_m0_gold = {
-	value = zz_ef_agg_m0
-	multiply = zz_ef_gold_per_unit
-}
-zz_ef_agg_m1_gold = {
-	value = zz_ef_agg_m1
-	multiply = zz_ef_gold_per_unit
-}
-zz_ef_agg_m2_gold = {
-	value = zz_ef_agg_m2
-	multiply = zz_ef_gold_per_unit
-}
-zz_ef_agg_m3_gold = {
-	value = zz_ef_agg_m3
-	multiply = zz_ef_gold_per_unit
-}
-zz_ef_savings_gold = {
-	value = zz_ef_pop_savings
-	multiply = zz_ef_gold_per_unit
-}
 
 # ---- EF.48 item 4: consumer credit (the user, 1.10) -------------------------
 # One debt per country (var:zz_ef_cc_debt), countries with a central bank.
@@ -1302,18 +1084,6 @@ zz_ef_pop_extra_income_week = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_f_cc_net } add = var:zz_ef_f_cc_net }
 }
-zz_ef_v_f_cc_issue = {
-	value = 0
-	if = { limit = { has_variable = zz_ef_f_cc_issue } value = var:zz_ef_f_cc_issue }
-}
-zz_ef_v_f_cc_repay = {
-	value = 0
-	if = { limit = { has_variable = zz_ef_f_cc_repay } value = var:zz_ef_f_cc_repay }
-}
-zz_ef_v_f_cc_int = {
-	value = 0
-	if = { limit = { has_variable = zz_ef_f_cc_int } value = var:zz_ef_f_cc_int }
-}
 zz_ef_v_f_cc_net = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_f_cc_net } value = var:zz_ef_f_cc_net }
@@ -1333,14 +1103,6 @@ zz_ef_v_w_cc_int = {
 zz_ef_v_w_cc_net = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_w_cc_net } value = var:zz_ef_w_cc_net }
-}
-zz_ef_cc_debt_to_gdp = {
-	value = 0
-	if = {
-		limit = { gdp > 0 }
-		value = zz_ef_cc_debt
-		divide = gdp
-	}
 }
 zz_ef_v_dependents = {
 	value = 0
@@ -1434,15 +1196,6 @@ zz_ef_bc_contrib_slack = {
 zz_ef_v_bc_svc = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_bc_svc } value = var:zz_ef_bc_svc }
-}
-# Share of the contributions that went to debt service this week.
-zz_ef_bc_service_share = {
-	value = 0
-	if = {
-		limit = { zz_ef_v_f_contrib > 0 }
-		value = zz_ef_v_f_bc_paid
-		divide = zz_ef_v_f_contrib
-	}
 }
 
 # ---- EF.48 items 11-12: money in circulation, M3, inflation (the user, 1.10)
@@ -2750,10 +2503,6 @@ zz_ef_gov_rate_target = {
 	value = zz_ef_money_rate
 	add = zz_ef_gov_rate_premium
 }
-zz_ef_gov_rate_target_pp = {
-	value = zz_ef_gov_rate_target
-	multiply = 100
-}
 zz_ef_gov_rate_premium_pp = {
 	value = zz_ef_gov_rate_premium
 	multiply = 100
@@ -2780,17 +2529,6 @@ zz_ef_priv_levels = {
 	}
 }
 
-# В1.3 probe (3.10): 1 = on (zz_ef_probe_newyear_cash, the EFJ log lines).
-zz_ef_probe_on = 0
-# UI.7б probe (3.10): 1 = on (zz_ef_probe_pop_income, the EFD log lines).
-zz_ef_probe_pop_on = 0
-# building scope: the cash now, level
-zz_ef_probe_cash_now = {
-	value = cash_reserves_available
-}
-zz_ef_probe_level = {
-	value = level
-}
 
 # В1.6 (5.10): the world's sums of the week for the EFG line (scripted_effects/zz_ef_money_model.txt, zz_ef_world_acc)
 zz_ef_wld_in_v = {

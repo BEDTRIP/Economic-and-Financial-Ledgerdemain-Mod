@@ -1,0 +1,12 @@
+# из common/script_values/ld_money_model_values.txt, строки 2564–2574 (на 6.10.2026), переключатели zz_ef_probe_on / zz_ef_probe_pop_on и значения zz_ef_probe_cash_now / zz_ef_probe_level
+# В1.3 probe (3.10): 1 = on (zz_ef_probe_newyear_cash, the EFJ log lines).
+zz_ef_probe_on = 0
+# UI.7б probe (3.10): 1 = on (zz_ef_probe_pop_income, the EFD log lines).
+zz_ef_probe_pop_on = 0
+# building scope: the cash now, level
+zz_ef_probe_cash_now = {
+	value = cash_reserves_available
+}
+zz_ef_probe_level = {
+	value = level
+}
