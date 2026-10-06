@@ -129,11 +129,9 @@ construction_ordering = {
 	multiply = 100
 	add = {
 		value = gdp
-		owner = {
-			divide = {
-				value = gdp
-				min = 1
-			}
+		divide = {
+			value = owner.gdp
+			min = 1
 		}
 	}
 }
