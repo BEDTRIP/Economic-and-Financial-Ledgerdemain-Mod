@@ -8,7 +8,7 @@
 коэффициент, закомментированный вызов); `мёртвый` — ни откуда не вызывается; `дубль` — считает то же или пишет те же
 счета, что модель `ld_*`. Строки файлов — на момент записи, при правке файла сдвигаются: искать по имени.
 
-Итого: мёртвый 4, выключен 0, дубль 3, живой 218.
+Итого: мёртвый 4, выключен 0, дубль 3, живой 219.
 
 ## Денежная модель и металл (`money-model.md`)
 
@@ -66,6 +66,7 @@
 
 | механизм | статус | где | доказательство | интерфейс |
 | --- | --- | --- | --- | --- |
+| Закон «Центральный банк» (государственный / частный / нет) и флаг `zz_ef_cb_kind` | живой | common/laws/ld_central_bank_laws.txt; common/scripted_effects/ld_cb_law.txt | `zz_ef_cb_law_sync` из истории и месячного хаба E&F; закон следует за `has_central_bank`, принять нельзя (R4) | окно законов |
 | Модификаторы devaluation_currency_25/50/75/100, revaluation_currency_25/50/75/100 и скрытые scripted_gui devaluation_/revaluation_currency_25/50/75 | живой (частично мёртв) | common/scripted_effects/01_economic_scripted_effects.txt:27877-27888; common/static_modifiers/00_ef_dynamic_modifier_country.txt:180-203; common/scripted_guis/00_economic_scripted_guis.txt:664-697; gui/ld_economy_panel.gui:4384- | _25 ставит закон девальвации/ревальвации и читает monetary_policy_inflation; _50/_75/_100 нигде не ставятся (только снимаются и умножают script_value 01_economic_currency_scripted_value.txt:160-166); scripted_gui-заглушки (is_shown = no) нужны кнопкам ld_economy_panel.gui (скрытым) | скрытые кнопки панели экономики |
 | Закон law_large_monetary_policy | живой | common/laws/01_ef_monetary_policy.txt:58-80 | в группе lawgroup_monetary_policy, принимается игроком (технологии central_banking + monetary_policy_tools), ИИ не принимает; on_activate пуст, но закон разрешает кнопки zz_ef_mp_* (devaluation_revaluation_enabled, is_in_large_monetary_policy_trigger) и читается идеологиями ИГ | окно законов |
 | Кнопки ставки base_rate_increase / base_rate_reduce (политика игрока) | дубль | common/scripted_guis/00_financial_scripted_guis.txt:3683, 3729 | переписаны под zz_ef_rate_bias и вызывают zz_ef_rate_policy_costs; E&F-шаг ±0.5 пп без цели заменён | кнопки на панели ставки |
