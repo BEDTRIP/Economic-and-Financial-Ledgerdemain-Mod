@@ -26,7 +26,7 @@
   - `common/script_values/00_financial_scripted_value.txt` — значения для интерфейса/ИИ покупок облигаций; `common/script_values/00_economic_scripted_value.txt:5598-7008` — `private_bank_funds*` (`private_bank_funds` = `investment_pool`, :6509); `01_economic_company_value.txt:29` `total_privat_bank`.
   - `common/scripted_guis/00_financial_scripted_guis.txt` — только облигационные/кредитные кнопки (см. `bonds.md`); банковских кнопок нет.
   - `common/history/global/00_ef_financial_global_variable.txt` — стартовые переменные стран E&F (`speculative_share_*`, бонды); счёта частных банков не создаёт.
-  - `common/scripted_effects/01_economic_scripted_effects.txt:91721…92440` — арбитражи частных банков (см. `clearing-fx.md`, реестр).
+  - `common/scripted_effects/01_economic_scripted_effects.txt:83997…84716` — арбитражи частных банков (см. `clearing-fx.md`, реестр).
 
 ## Поток / порядок
 - Месяц (`on_monthly_pulse_country`): `zz_ef_bank_seed_step` — у владельца рынка, если нет `zz_ef_bank_seeded`: уровни = (заказы на покупку `liquidity_currency` × 1.2 − заказы на продажу) / 500, распределяются по штатам стран рынка весом `zz_ef_bank_tc_levels`; в штате `zz_ef_bank_seed_state` создаёт здание (если `zz_ef_bank_n ≥ 1`), долевая собственность с компанией E&F владельца из жёсткого списка (`zz_ef_bank_seed_company`), иначе государству. Лог `EFK|`.

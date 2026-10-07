@@ -38,7 +38,7 @@
 6. Массовое владение: `remove_modifier`/`add_modifier zz_ef_mass_shareholding` с множителем `zz_ef_msh_points` (= капитализация/ВВП, max 1 × `literacy_rate` × 25).
 Отдельный on_action `zz_ef_bubble_monthly` (`ld_bubble_on_actions.txt`, `on_monthly_pulse_country`; условие: есть `financial_center_je_2` и `speculative_share_1`): сдвиг пузыря −3..+3 по `fiancial_center_week_balance_in_ratio`, прогресс-бар, сообщение при входе в новую десятку, модификаторы `speculative_bubble_modifier` и `speculative_bubble_character_modifier` (на исполнителей).
 Слоты компаний: `has_financial_center` с множителем `value_for_has_financial_center` = `zz_ef_slots_rating` (0..5, из `country_credit_note_fixe`/2) + `zz_ef_slots_cb` (0..5, от ставки ЦБ `zz_ef_money_rate`) + `zz_ef_slots_cap` (0..10, +1 за каждые 10% ВВП).
-Прочее: `financial_center_je_1` (месячный пульс) выдаёт технологии биржи по ВВП; крах → `economic_instability`; при втором кризисе в `01_financial_scripted_effects.txt:33927` — `financial_crash_consequences` (разрушает биржи, `government_loan`, `add_investment_pool`, `bankrupt_company`).
+Прочее: `financial_center_je_1` (месячный пульс) выдаёт технологии биржи по ВВП; крах → `economic_instability`; при втором кризисе в `01_financial_scripted_effects.txt:33874` — `financial_crash_consequences` (разрушает биржи, `government_loan`, `add_investment_pool`, `bankrupt_company`).
 
 ## Переменные
 | имя | смысл | пишет | читает |
