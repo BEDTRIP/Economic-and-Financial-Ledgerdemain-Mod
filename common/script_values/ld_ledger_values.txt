@@ -1,0 +1,37 @@
+﻿# R1а.5: the ledger's values (scripted_effects/ld_ledger.txt).
+# The banks' book -- our accounts of the pool: liabilities (deposits of pops and of other CBs, the CB's credit,
+# the treasury's money, capital) less the loans (consumer, business). Before the first reconciliation the capital is 0.
+zz_ef_bank_book_v = {
+	value = 0
+	add = zz_ef_ledger_deposits_v
+	add = zz_ef_nr_dep_v
+	if = { limit = { has_variable = zz_ef_bank_cb_debt } add = var:zz_ef_bank_cb_debt }
+	if = { limit = { has_variable = zz_ef_bank_gov_dep } add = var:zz_ef_bank_gov_dep }
+	if = { limit = { has_variable = zz_ef_bank_capital } add = var:zz_ef_bank_capital }
+	if = { limit = { has_variable = zz_ef_cc_debt } subtract = var:zz_ef_cc_debt }
+	if = { limit = { has_variable = zz_ef_bc_debt } subtract = var:zz_ef_bc_debt }
+}
+zz_ef_ledger_deposits_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_pop_deposits } value = var:zz_ef_pop_deposits }
+}
+zz_ef_raw_pool = { value = investment_pool }
+zz_ef_f_other_abs_v = {
+	value = 0
+	if = {
+		limit = { has_variable = zz_ef_f_other }
+		value = var:zz_ef_f_other
+		if = { limit = { var:zz_ef_f_other < 0 } multiply = -1 }
+	}
+}
+zz_ef_v_other = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_other } value = var:zz_ef_other }
+}
+zz_ef_v_f_other = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_other } value = var:zz_ef_f_other }
+}
+zz_ef_wld_other_v = { value = global_var:zz_ef_wld_other }
+zz_ef_wld_other_abs_v = { value = global_var:zz_ef_wld_other_abs }
+zz_ef_wld_other_n_v = { value = global_var:zz_ef_wld_other_n }

@@ -8,7 +8,7 @@
 коэффициент, закомментированный вызов); `мёртвый` — ни откуда не вызывается; `дубль` — считает то же или пишет те же
 счета, что модель `ld_*`. Строки файлов — на момент записи, при правке файла сдвигаются: искать по имени.
 
-Итого: мёртвый 4, выключен 0, дубль 4, живой 226.
+Итого: мёртвый 4, выключен 0, дубль 4, живой 227.
 
 ## Денежная модель и металл (`money-model.md`)
 
@@ -17,6 +17,7 @@
 | E&F: запасы валют регионов ЦБ (stockpiling_currency → stockpiling_currency_type_1 ×95) | дубль | common/scripted_effects/01_economic_scripted_effects.txt:28023,28127; вызов 00_on_action_main.txt:318 | ежемесячно пишет stockpiling_<cur>_state_1 из рынка валютного товара ×4 и gold_state_1 при девальвации/ревальвации; те же счета (запас валюты ЦБ, металл), что zz_ef_fx_* и zz_ef_metal_week_step; trade_balance обнулён | карточка валют ЦБ |
 | Планировщик модели денег (одна глобальная цепочка: зонд тика → день → шаги стран А / Б, месячные шаги, мировой проход) | живой | common/scripted_effects/ld_scheduler.txt; common/on_actions/ld_scheduler_on_actions.txt | on_game_started_after_lobby / on_monthly_pulse → zz_ef_sched_ensure; zz_ef_sched_day перезапускает себя days = 1 | карточки денежной массы (через переменные zz_ef_*) |
 | Роли стран А / Б / В (`var:zz_ef_role`, месячный проход по миру) | живой | common/scripted_effects/ld_roles.txt; common/on_actions/ld_roles_on_actions.txt; common/scripted_triggers/ld_roles_triggers.txt | on_monthly_pulse → zz_ef_roles_world_pass; роль В снимает месячный шаг и цепочку модели | — |
+| Реестр счетов, проводка, сверка по запасам («прочее» `zz_ef_other`) | живой | common/scripted_effects/ld_ledger.txt; common/script_values/ld_ledger_values.txt | zz_ef_registry_init и zz_ef_reconcile в недельном шаге; zz_ef_post* — проводки (проценты ЦБ, излишек казны) | — |
 | Приёмник GUI-моста (утечка, сбережения, вклады, кредиты) | живой | common/scripted_effects/ld_money_model.txt:440-550; gui/ld_money_hook.gui; common/scripted_guis/ld_money_hook.txt:10 | Execute zz_ef_money_hook_sg по trigger_when на глобальном списке zz_ef_hook_countries | виджет zz_ef_money_hook (скрытый) |
 | Проба вызовов моста zz_ef_money_hook_probe_sg | живой | common/scripted_guis/ld_money_hook.txt:22; gui/ld_money_hook.gui | считает вызовы в global var zz_ef_hook_probe_calls; читает zz_ef_hook_ok | — |
 | Кредит ЦБ банкам, проценты в казну (пул ↔ ЦБ ↔ казна) | живой | common/scripted_effects/ld_money_model.txt:~205-225; common/script_values/ld_money_model_values.txt:172-250 | add_investment_pool / add_treasury по zz_ef_cb_borrow/repay/interest в недельном шаге | карточки пула и ЦБ |

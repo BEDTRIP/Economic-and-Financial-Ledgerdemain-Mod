@@ -66,6 +66,8 @@ zz_ef_money_week_retire = {
 # ---- the weekly step --------------------------------------------------------
 
 zz_ef_money_model_step = {
+	# R1а.5: the registry's accounts exist from the first step (scripted_effects/ld_ledger.txt)
+	zz_ef_registry_init = yes
 	# Business cash: the sum over the buildings, once a week (run 15: the
 	# estimate from the credit limit -- credit - base - 1.7 x GDP -- swung by
 	# millions a week, M2 by +-30%).
@@ -196,11 +198,8 @@ zz_ef_money_model_step = {
 		multiply = -1
 	}
 	change_variable = { name = zz_ef_bank_cb_debt subtract = var:zz_ef_f_cb_repay }
-	add_investment_pool = {
-		value = var:zz_ef_f_cb_interest
-		multiply = -1
-	}
-	add_treasury = var:zz_ef_f_cb_interest
+	# R1а.5: the interest -- the banks pay it (their capital) to the CB, the CB's profit to the treasury
+	zz_ef_post_eng_paid = { FROM = pool TO = treasury PAYER = zz_ef_bank_capital V = var:zz_ef_f_cb_interest }
 
 	# Д2.7б (5.10): consols -- the CB's bonds sold are the treasury's perpetual debt to pops: interest treasury -> pops'
 	# savings, buy-back out of the surplus over the engine's limit first (scripted_effects/zz_ef_consols.txt)
@@ -215,11 +214,8 @@ zz_ef_money_model_step = {
 		limit = { gold_reserves > gold_reserves_limit }
 		set_variable = { name = zz_ef_f_tr_pool value = gold_reserves }
 		change_variable = { name = zz_ef_f_tr_pool subtract = gold_reserves_limit }
-		add_treasury = {
-			value = var:zz_ef_f_tr_pool
-			multiply = -1
-		}
-		add_investment_pool = var:zz_ef_f_tr_pool
+		# R1а.5: a posting -- the treasury's money into the banks, its claim on them
+		zz_ef_post_eng = { FROM = treasury TO = pool CLAIM = zz_ef_bank_gov_dep V = var:zz_ef_f_tr_pool }
 	}
 	# EF.48 item 5 (business credit; repayment in money, 1.10 evening).
 	zz_ef_business_credit_step = yes
@@ -349,6 +345,8 @@ zz_ef_money_model_step = {
 	# 4.10 (the money tooltip): pops' savings and deposits, for the cash-at-hand and deposits lines
 	zz_ef_money_ledger_delta = { ACC = savings VALUE = zz_ef_pop_savings }
 	zz_ef_money_ledger_delta = { ACC = deposits VALUE = zz_ef_pop_deposits }
+	# R1а.5: the reconciliation by stocks -- «прочее» (scripted_effects/ld_ledger.txt)
+	zz_ef_reconcile = yes
 
 	# Sandbox log (tools/run_vic3_sandbox.ps1 reads debug.log): one line a
 	# week for the player and the big economies.

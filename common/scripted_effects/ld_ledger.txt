@@ -1,0 +1,128 @@
+﻿#############################################
+# R1а.5 (схема 3.1; R0.8: Р4, Р5, Р12, Р13): the ledger -- the registry of accounts, the posting, the reconciliation
+# by stocks. The list of accounts and their variables: docs/money-model.md, «Реестр счетов».
+#
+# Posting: one effect with a pair of accounts, the same amount out of one and into the other. Our accounts are
+# country variables (their names are the accounts' names, zz_ef_*); the engine's accounts are the treasury and the
+# pool (ENG = treasury | pool), moved by add_treasury / add_investment_pool. $V$ -- one token (var:x, a script value).
+#
+# Reconciliation by stocks (decided 7.10, R0.8): the engine's money on the date (treasury + buildings' cash + pool)
+# against the sum of our accounts on it. The treasury and the buildings' cash are the state's and the businesses'
+# own accounts, read from the engine; the pool is the banks' cash, and our accounts say whose it is
+# (zz_ef_bank_book_v): deposits of pops and of other CBs, the CB's credit to the banks, the treasury's money in the
+# banks, the banks' capital, less their loans (consumer, business). The difference -- the line «прочее»
+# (var:zz_ef_other, its change var:zz_ef_f_other) -- is nobody's income: it is logged (EFJ) and summed over the world
+# (the world pass). A step missed (B every 4 weeks, a lost chain) is made good by the next one: the stocks are read
+# on the date. The banks' capital starts as the pool less the other accounts (the first reconciliation, «прочее» 0).
+#############################################
+
+# Country scope: the accounts that start at zero on the first day (схема 3.1), once.
+zz_ef_registry_init = {
+	if = {
+		limit = { NOT = { has_variable = zz_ef_registry } }
+		set_variable = { name = zz_ef_registry value = 1 }
+		# the population's claims (stocks, bonds, the private sector -- building levels its money paid for), R6 / R7
+		if = { limit = { NOT = { has_variable = zz_ef_pop_claims_stocks } } set_variable = { name = zz_ef_pop_claims_stocks value = 0 } }
+		if = { limit = { NOT = { has_variable = zz_ef_pop_claims_bonds } } set_variable = { name = zz_ef_pop_claims_bonds value = 0 } }
+		if = { limit = { NOT = { has_variable = zz_ef_pop_claims_private } } set_variable = { name = zz_ef_pop_claims_private value = 0 } }
+		# the net position to the clearing house («долг загранице»), R8
+		if = { limit = { NOT = { has_variable = zz_ef_clr_position } } set_variable = { name = zz_ef_clr_position value = 0 } }
+		# the treasury's money in the banks (its surplus over the engine's limit, zz_ef_f_tr_pool)
+		if = { limit = { NOT = { has_variable = zz_ef_bank_gov_dep } } set_variable = { name = zz_ef_bank_gov_dep value = 0 } }
+		# the loans the reconciliation reads
+		if = { limit = { NOT = { has_variable = zz_ef_bank_cb_debt } } set_variable = { name = zz_ef_bank_cb_debt value = 0 } }
+		if = { limit = { NOT = { has_variable = zz_ef_cc_debt } } set_variable = { name = zz_ef_cc_debt value = 0 } }
+		if = { limit = { NOT = { has_variable = zz_ef_bc_debt } } set_variable = { name = zz_ef_bc_debt value = 0 } }
+		# the banks' capital: 0 until the first reconciliation sets it
+		if = { limit = { NOT = { has_variable = zz_ef_bank_capital } } set_variable = { name = zz_ef_bank_capital value = 0 } }
+	}
+}
+
+# Our account -> our account.
+zz_ef_post = {
+	change_variable = { name = $FROM$ subtract = $V$ }
+	change_variable = { name = $TO$ add = $V$ }
+}
+# An engine account (treasury | pool) -> our account.
+zz_ef_post_from_eng = {
+	zz_ef_eng_sub_$ENG$ = { V = $V$ }
+	change_variable = { name = $TO$ add = $V$ }
+}
+# Our account -> an engine account.
+zz_ef_post_to_eng = {
+	change_variable = { name = $FROM$ subtract = $V$ }
+	zz_ef_eng_add_$ENG$ = { V = $V$ }
+}
+# Engine account -> engine account (the treasury <-> the pool), with our account of the claim (CLAIM += V).
+zz_ef_post_eng = {
+	zz_ef_eng_sub_$FROM$ = { V = $V$ }
+	zz_ef_eng_add_$TO$ = { V = $V$ }
+	change_variable = { name = $CLAIM$ add = $V$ }
+}
+# Engine account -> engine account, paid by our account PAYER (PAYER -= V: an interest, a fee).
+zz_ef_post_eng_paid = {
+	zz_ef_eng_sub_$FROM$ = { V = $V$ }
+	zz_ef_eng_add_$TO$ = { V = $V$ }
+	change_variable = { name = $PAYER$ subtract = $V$ }
+}
+zz_ef_eng_add_treasury = { add_treasury = $V$ }
+zz_ef_eng_sub_treasury = { add_treasury = { value = $V$ multiply = -1 } }
+zz_ef_eng_add_pool = { add_investment_pool = $V$ }
+zz_ef_eng_sub_pool = { add_investment_pool = { value = $V$ multiply = -1 } }
+
+# Country scope, at the end of the step: «прочее» = the pool - the banks' book (our accounts of it).
+zz_ef_reconcile = {
+	zz_ef_registry_init = yes
+	if = {
+		limit = { NOT = { has_variable = zz_ef_other } }
+		change_variable = {
+			name = zz_ef_bank_capital
+			add = {
+				value = investment_pool
+				subtract = zz_ef_bank_book_v
+			}
+		}
+		set_variable = { name = zz_ef_other value = 0 }
+	}
+	set_variable = { name = zz_ef_other_prev value = var:zz_ef_other }
+	set_variable = {
+		name = zz_ef_other
+		value = {
+			value = investment_pool
+			subtract = zz_ef_bank_book_v
+		}
+	}
+	set_variable = { name = zz_ef_f_other value = var:zz_ef_other }
+	change_variable = { name = zz_ef_f_other subtract = var:zz_ef_other_prev }
+	# the world's sums of the week (the world pass writes and zeroes them)
+	if = { limit = { NOT = { has_global_variable = zz_ef_wld_other } } set_global_variable = { name = zz_ef_wld_other value = 0 } }
+	if = { limit = { NOT = { has_global_variable = zz_ef_wld_other_abs } } set_global_variable = { name = zz_ef_wld_other_abs value = 0 } }
+	if = { limit = { NOT = { has_global_variable = zz_ef_wld_other_n } } set_global_variable = { name = zz_ef_wld_other_n value = 0 } }
+	change_global_variable = { name = zz_ef_wld_other add = var:zz_ef_f_other }
+	change_global_variable = { name = zz_ef_wld_other_abs add = zz_ef_f_other_abs_v }
+	change_global_variable = { name = zz_ef_wld_other_n add = 1 }
+	if = {
+		limit = {
+			zz_ef_logs_on = yes
+			OR = {
+				is_player = yes
+				gdp > 20000000
+			}
+		}
+		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|other [THIS.GetCountry.MakeScope.Var('zz_ef_other').GetValue|0]|d_other [THIS.GetCountry.MakeScope.Var('zz_ef_f_other').GetValue|0]|pool [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_raw_pool')|0]|book [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bank_book_v')|0]|capital [THIS.GetCountry.MakeScope.Var('zz_ef_bank_capital').GetValue|0]|dep [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_deposits')|0]|weeks [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_step_weeks_v')|0]|role [THIS.GetCountry.MakeScope.Var('zz_ef_role').GetValue|0]"
+	}
+}
+
+# Anchor country, the world pass: the world's «прочее» of the week (EFJ|WORLD), then zeroed.
+zz_ef_other_world_log = {
+	if = {
+		limit = {
+			zz_ef_logs_on = yes
+			has_global_variable = zz_ef_wld_other
+		}
+		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|WORLD|other [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_other_v')|0]|other_abs [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_other_abs_v')|0]|n [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_other_n_v')|0]"
+	}
+	set_global_variable = { name = zz_ef_wld_other value = 0 }
+	set_global_variable = { name = zz_ef_wld_other_abs value = 0 }
+	set_global_variable = { name = zz_ef_wld_other_n value = 0 }
+}

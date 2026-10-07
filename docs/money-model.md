@@ -23,6 +23,36 @@
 - `common/static_modifiers/ld_debt_service.txt` — `zz_ef_debt_service` (+1% взноса в пул у слоёв).
 - E&F вне списка, но пишут те же счета: `common/scripted_effects/01_economic_scripted_effects.txt` (`stockpiling_currency` → `stockpiling_currency_type_1` ×95; `investement_pool_borrowing`), `common/scripted_effects/00_on_action_main.txt` (месячный запуск запасов валют, арбитраж частных банков).
 
+## Реестр счетов, проводка, сверка (R1а.5)
+Файлы: `common/scripted_effects/ld_ledger.txt`, `common/script_values/ld_ledger_values.txt`.
+| счёт | переменная (страна) | чей | движет |
+| --- | --- | --- | --- |
+| казна | движок: `gold_reserves` (`zz_ef_treasury`) | государство | бюджет движка; наши проводки `zz_ef_post_eng*` (`ENG = treasury`) |
+| касса бизнеса (M1) | движок: `cash_reserves` зданий (`zz_ef_bcash`); касса торговых центров — её часть | бизнес | движок |
+| пул (касса банков) | движок: `investment_pool` | банки — по счетам ниже | движок (взносы, стройка, выкуп), наши проводки (`ENG = pool`) |
+| вклады населения | `zz_ef_pop_deposits` | население | вклады / изъятия, проценты |
+| наличные населения (M0) | `zz_ef_pop_savings` − `zz_ef_pop_deposits` | население | проводки |
+| вклады чужих ЦБ | `zz_ef_nr_dep` | заграница | `ld_nr_deposits.txt` |
+| кредит ЦБ банкам | `zz_ef_bank_cb_debt` | ЦБ | недельный шаг |
+| деньги казны в банках | `zz_ef_bank_gov_dep` | казна | излишек казны сверх предела (`zz_ef_f_tr_pool`) |
+| капитал банков | `zz_ef_bank_capital` | банки (агрегат) | первая сверка (пул − остальные счета), проценты ЦБ (`zz_ef_post_eng_paid`) |
+| потреб- / бизнес-кредит | `zz_ef_cc_debt`, `zz_ef_bc_debt` | банки (актив) | `zz_ef_consumer_credit_step`, `zz_ef_business_credit_step` |
+| требования населения | `zz_ef_pop_claims_stocks`, `_bonds`, `_private` | население | по нулям (R6, R7) |
+| позиция к палате клиринга | `zz_ef_clr_position` | страна | по нулям (R8) |
+| металл ЦБ / банков / населения | `gold_state_1` / `silver_state_1` штата ЦБ, `zz_ef_bankm_*`, `zz_ef_popm_*` | — | `ld_metal_accounts.txt` |
+Счета, которых нет, заводит `zz_ef_registry_init` в начале каждого шага (раз за игру, признак `zz_ef_registry`).
+
+**Проводка** — пара счетов, одна сумма: `zz_ef_post = { FROM TO V }` (наш → наш), `zz_ef_post_from_eng = { ENG TO V }`,
+`zz_ef_post_to_eng = { FROM ENG V }`, `zz_ef_post_eng = { FROM TO CLAIM V }` (казна ↔ пул и требование на CLAIM),
+`zz_ef_post_eng_paid = { FROM TO PAYER V }` (то же, платит PAYER); `ENG` — `treasury` / `pool`, `V` — один токен.
+
+**Сверка по запасам** (`zz_ef_reconcile`, конец недельного шага): «прочее» `zz_ef_other` = пул − книга банков
+`zz_ef_bank_book_v` (вклады населения и чужих ЦБ + кредит ЦБ + деньги казны + капитал − потреб- и бизнес-кредит); казна
+и касса бизнеса — счета движка, читаются как есть. Изменение за шаг — `zz_ef_f_other`; первая сверка ставит капитал так,
+что «прочее» 0. «Прочее» никому не зачисляется; лог `EFJ` (страна: прочее, изменение, пул, книга, капитал, вклады, недель
+в шаге, роль) и `EFJ|WORLD` в мировом проходе (сумма изменений, сумма модулей, число стран за неделю). Значения для окон:
+`zz_ef_v_other`, `zz_ef_v_f_other`.
+
 ## Роли стран (R1а.3)
 `var:zz_ef_role`: 1 — **А** (полный шаг каждую неделю), 2 — **Б** (упрощённый, раз в 4 недели — планировщик), 3 — **В**
 (`is_country_type = decentralized`: ни месячного шага модели, ни недельной цепочки, ни моста; счетов нет). Пересчёт раз в
