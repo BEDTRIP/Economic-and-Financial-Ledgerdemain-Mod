@@ -133,11 +133,8 @@ company_BasicBank = {
 	}
 
 	ai_construction_targets = {
-		any_scope_state = {
-			any_scope_building = {
-				is_building_type = building_construction_sector
-				level >= 5
-			}
+		building_construction_sector = {
+			level = 5
 		}
 	}
 
@@ -170,9 +167,7 @@ company_BankJPMorgan = {
 		building_zz_ef_bank
 	}
 
-	possible_prestige_goods = {
-		manufacture_stock_usa
-	}
+	# possible_prestige_goods = { manufacture_stock_usa } # off: see common/prestige_goods/00_ef_prestige_goods_2.txt
 
 	potential = {
 		has_interest_marker_in_region = region_atlantic_coast
@@ -1942,7 +1937,7 @@ company_barclaysBank = {
 	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufacturing_light.dds"
 
 	flavored_company = yes
-	replaces_company = company_barclaysBank
+	#replaces_company = company_barclaysBank
 
 	preferred_headquarters = { STATE_HOME_COUNTIES }
 
@@ -6710,7 +6705,7 @@ company_private_construction = {
 	icon = "gfx/interface/icons/company_icons/company_private_construction.dds"
 	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufacturing_light.dds"
 
-	replaces_company = company_private_construction
+	#replaces_company = company_private_construction
 
 	uses_dynamic_naming = yes
 
@@ -6750,7 +6745,7 @@ company_basic_gold_and_silver_mining_2 = {
 	icon = "gfx/interface/icons/company_icons/basic_gold_mining_2.dds"
 	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_mining.dds"
 
-	replaces_company = company_basic_gold_and_silver_mining_2
+	#replaces_company = company_basic_gold_and_silver_mining_2
 
 	uses_dynamic_naming = yes
 
