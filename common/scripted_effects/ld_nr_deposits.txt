@@ -129,6 +129,9 @@ zz_ef_nr_dep_step = {
 			NOT = { has_variable = zz_ef_nr_started }
 			has_variable = zz_ef_parity_version
 		}
+		# the stock cut once more against M2: a currency whose law came after the first step was not cut there
+		# (r1007_203105: Hanover's thalers -- 8.8M in Britain's reserves, 8.2M in France's)
+		zz_ef_fx_liab_trim = { BASE = zz_ef_agg_m2 }
 		set_variable = { name = zz_ef_nr_started value = yes }
 		if = { limit = { NOT = { has_variable = zz_ef_nr_dep } } set_variable = { name = zz_ef_nr_dep value = 0 } }
 		set_variable = { name = zz_ef_t_liab_all value = zz_ef_fx_liab_all }
