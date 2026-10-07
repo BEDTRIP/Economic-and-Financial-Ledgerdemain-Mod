@@ -139,7 +139,8 @@ zz_ef_nr_dep_step = {
 			zz_ef_nr_issuer = yes
 			has_variable = zz_ef_nr_started
 		}
-		# Д2.33 (a): interest to the holders at the deposit rate, credited as more deposits (the pool unchanged)
+		# Д2.33 (a): interest to the holders at the deposit rate, credited as more deposits (the pool unchanged);
+		# R1б (В8, 8.10): paid out of the banks' capital, like the pops' deposit interest (zz_ef_post)
 		set_variable = { name = zz_ef_f_nr_int value = 0 }
 		set_variable = { name = zz_ef_nri_liab value = zz_ef_fx_liab }
 		if = {
@@ -248,7 +249,7 @@ zz_ef_nr_dep_step = {
 			else_if = { limit = { has_law = law_type:law_thaler_prussian_thaler_currency } every_country = { limit = { NOT = { this = scope:zz_fxt_issuer } NOT = { has_law = law_type:law_thaler_prussian_thaler_currency } has_modifier = has_central_bank } capital = { if = { limit = { has_variable = stockpiling_thaler_prussian_thaler_state_1 } change_variable = { name = stockpiling_thaler_prussian_thaler_state_1 multiply = scope:zz_fxt_issuer.var:zz_ef_nri_k } } } } }
 			else_if = { limit = { has_law = law_type:law_thaler_saxon_thaler_currency } every_country = { limit = { NOT = { this = scope:zz_fxt_issuer } NOT = { has_law = law_type:law_thaler_saxon_thaler_currency } has_modifier = has_central_bank } capital = { if = { limit = { has_variable = stockpiling_thaler_saxon_thaler_state_1 } change_variable = { name = stockpiling_thaler_saxon_thaler_state_1 multiply = scope:zz_fxt_issuer.var:zz_ef_nri_k } } } } }
 			set_variable = { name = zz_ef_nr_dep value = zz_ef_nr_dep_v }
-			change_variable = { name = zz_ef_nr_dep add = var:zz_ef_f_nr_int }
+			zz_ef_post = { FROM = zz_ef_bank_capital TO = zz_ef_nr_dep V = var:zz_ef_f_nr_int }
 		}
 		# the holders' stock is final for the week here (the interest above was its last change): one pass of
 		# zz_ef_fx_liab_all, read by the deposits below and by zz_ef_fx_holders_demand_m

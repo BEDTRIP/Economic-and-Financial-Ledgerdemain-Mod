@@ -61,7 +61,7 @@
 | 94692–99107 | `stockpiling_capital_state_transfert`, `..._financial_center_place`, `enemy_capital_is_occuped` (1,8 тыс.), `enemy_stats_is_occuped` | да (месячный, решение ИИ, бой) |
 | 99199–104511 | `central_bank_production_methods`, `_3`, `_4` — пустые определения (тела в `_archive/ef_central_bank_pm_consuption/`) | пусто |
 | 106713–107610 | `remove_suject_currency`, `subject_currency` | живые (подданные) |
-Внутри E&F-тел встроены вызовы модели: `zz_ef_cb_rate_step`, `zz_ef_std_switch_*`, `zz_ef_privbank_interest_pay`, `zz_ef_mp_init/_clear`, `zz_ef_crisis_redeem` (95), `zz_ef_cb_cover`, `zz_ef_fx_deal_size`, `zz_ef_cover_normal` (по 95 валютам в `buy_/sell_`).
+Внутри E&F-тел встроены вызовы модели: `zz_ef_cb_rate_step`, `zz_ef_std_switch_*`, `zz_ef_mp_init/_clear`, `zz_ef_crisis_redeem` (95), `zz_ef_cb_cover`, `zz_ef_fx_deal_size`, `zz_ef_cover_normal` (по 95 валютам в `buy_/sell_`).
 
 ## Переменные
 | имя | смысл | пишет | читает |

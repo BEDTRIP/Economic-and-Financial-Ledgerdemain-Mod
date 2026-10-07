@@ -1,0 +1,19 @@
+﻿# from common/scripted_effects/01_economic_scripted_effects.txt (~line 80404); call in 00_on_action_main.txt (yearly central_bank_ef_on_yearly_pulse_country):
+#	if = {
+#		limit = {
+#			market_owner_is_root = yes
+# 		}
+#		investement_pool_borrowing = yes
+#	}
+#
+# Ф.2 (the user, 4.10): that interest is now paid -- by the issuer's treasury, every January
+# (zz_ef_privbank_interest_pay, the monthly step) -- so the holder gets it always, not only while
+# its pool is under the target (EF.34: "money from nothing" in the banks' card).
+investement_pool_borrowing = {
+	if = {
+		limit = {
+			ai_privat_bank_total_interest > 0
+		}
+		add_investment_pool = ai_privat_bank_total_interest
+	}
+}

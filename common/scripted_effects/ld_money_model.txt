@@ -15,40 +15,9 @@
 # (gold_reserves - principal) changes. Then every 7-day window holds exactly
 # one tick, and the budget read at the step is the tick in the window.
 #
-# E&F's investement_pool_borrowing (01_economic_scripted_effects.txt:135769,
-# yearly, market owners) is replaced: its +-2..10% of the money supply a year
-# by the rate, gated by the private credit limits, is what filled rich pools
-# for decades ahead. Kept from it: the interest the private banks earn on
-# the foreign bonds they hold (ai_privat_bank_total_interest), while the pool
-# is under the model's target.
-#
-# !! MAINTENANCE !! Key-level REPLACE_OR_CREATE of investement_pool_borrowing.
+# E&F's investement_pool_borrowing (yearly, market owners) and its replacement (the
+# private banks' interest on foreign bonds into the pool) -- _archive/ld_privbank_interest/ (R1б, В7).
 #############################################
-
-# Ф.2 (4.10): the issuer pays the year's interest on its bonds held by foreign private banks (E&F's
-# ai_entral_bank_debt_privat_bank_interest_refund_per_year_1..25: the holders' interest on bond N, summed
-# over its buyer list) out of its treasury -- the engine's money is one unit for every country, so the
-# sum is the holders'. E&F only counted it against the "gold loaned" and paid the holders from nothing.
-# The treasury's change lands in the treasury's E&F moves (tr_other), a payment abroad.
-zz_ef_privbank_interest_pay = {
-	set_variable = { name = zz_ef_f_pbi_paid value = zz_ef_privbank_interest_due }
-	if = {
-		limit = { var:zz_ef_f_pbi_paid > 0 }
-		add_treasury = {
-			value = var:zz_ef_f_pbi_paid
-			multiply = -1
-		}
-		if = {
-			limit = {
-				OR = {
-					is_player = yes
-					gdp > 20000000
-				}
-			}
-			if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|privbank_interest|paid [THIS.GetCountry.MakeScope.Var('zz_ef_f_pbi_paid').GetValue|0]" }
-		}
-	}
-}
 
 # Е.5 (5.10, Д.2): the issuer paid the interest on its bonds held by other treasuries as an expense line -- replaced
 # by the bond ledger (В5.5, 5.10: scripted_effects/zz_ef_bond_ledger.txt), which pays the holder out of the issuer's pool.
@@ -967,11 +936,7 @@ zz_ef_money_model_monthly_step = {
 	# Е.10 (5.10, Д.5): the strength's trade modifier, against the reference
 	zz_ef_currency_trade_step = yes
 	# Д2.7а (5.10): the CB's metal = what its building bought -- weekly since 6.10 (zz_ef_metal_week_step)
-	# Ф.2 (4.10): the issuer pays its foreign private banks' interest, in January
-	if = {
-		limit = { month = 0 }
-		zz_ef_privbank_interest_pay = yes
-	}
+	# R1б (В7, 8.10): Ф.2's January interest to foreign private banks -- _archive/ld_privbank_interest/
 	# В2.1: AI central banks on the forex monthly was tried and taken back
 	# (run 24, 2.10): every E&F purchase is at parity, twelve a year blew the
 	# reserves up (France's cover 64% -> 436%, Russia's currency 1.2 billion

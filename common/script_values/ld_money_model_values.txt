@@ -164,6 +164,11 @@ zz_ef_cb_credit_target = {
 	multiply = zz_ef_cb_credit_gdp_max
 	multiply = zz_ef_cb_credit_share
 	multiply = zz_ef_cb_cover_credit_mult
+	# R1б (В1, 8.10): no CB -- no refinancing; a debt left from before is repaid from the pool (zz_ef_cb_repay)
+	if = {
+		limit = { NOT = { has_modifier = has_central_bank } }
+		value = 0
+	}
 }
 # What the banks need in the pool (1.10 evening, run 15: the pool piled up
 # to 0.9 GDP while the banks kept borrowing from the CB): 3 months of what it

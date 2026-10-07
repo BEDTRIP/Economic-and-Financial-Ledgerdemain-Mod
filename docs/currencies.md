@@ -57,7 +57,6 @@
 - Сила: `zz_ef_currency_strength` = `zz_ef_value_to_parity` / `global_var:zz_ef_ref_vtp`; пороги 1.25 / 0.75 (`is_strong/weak_currency`). Подмена E&F: `difference_with_average_gold_exchange_rate_currencies`, `money_value_median_and_money_value_in_gold_ratio` (`00_economic_scripted_value.txt:4707, 8279`).
 - `zz_ef_cb_cover`, `zz_ef_value_floor_cover` (0.25) — `ld_money_model_values.txt`; `zz_ef_reference_candidate` и риск-премия читают их.
 - Членство в ТС: `zz_ef_cu_member` читают `ld_money_model.txt`, `ld_clearing_values.txt`, `00_economic_scripted_value.txt` (`money_value`/`money_value_in_gold` для члена).
-- `zz_ef_privbank_interest_due` — `ld_money_model.txt`.
 - Договоры: `latin_monetary_union_treaty` создаётся событием `events/00_ef_economic_event.txt:499`, ЖЗ `latin_monetary_union_je_1` (`journal_entries/00_ef_divers_je.txt:1`) проверяет статью.
 - GUI: биржа валют (`buy_sell_currency_in_metal_market_panel`, `buy_/sell_<cur>_in_gold_market_panel`), карточки банка (значения `zz_ef_v_*`), панель ставки (`gui/ld_cb_rate_panel.gui`, другой документ).
 

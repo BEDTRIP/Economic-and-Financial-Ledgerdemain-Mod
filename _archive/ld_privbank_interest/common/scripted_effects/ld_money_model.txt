@@ -1,0 +1,32 @@
+﻿# from common/scripted_effects/ld_money_model.txt (before zz_ef_money_week_retire); call in zz_ef_money_model_monthly_step:
+#	# Ф.2 (4.10): the issuer pays its foreign private banks' interest, in January
+#	if = {
+#		limit = { month = 0 }
+#		zz_ef_privbank_interest_pay = yes
+#	}
+#
+# Ф.2 (4.10): the issuer pays the year's interest on its bonds held by foreign private banks (E&F's
+# ai_entral_bank_debt_privat_bank_interest_refund_per_year_1..25: the holders' interest on bond N, summed
+# over its buyer list) out of its treasury -- the engine's money is one unit for every country, so the
+# sum is the holders'. E&F only counted it against the "gold loaned" and paid the holders from nothing.
+# The treasury's change lands in the treasury's E&F moves (tr_other), a payment abroad.
+zz_ef_privbank_interest_pay = {
+	set_variable = { name = zz_ef_f_pbi_paid value = zz_ef_privbank_interest_due }
+	if = {
+		limit = { var:zz_ef_f_pbi_paid > 0 }
+		add_treasury = {
+			value = var:zz_ef_f_pbi_paid
+			multiply = -1
+		}
+		if = {
+			limit = {
+				OR = {
+					is_player = yes
+					gdp > 20000000
+				}
+			}
+			if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|privbank_interest|paid [THIS.GetCountry.MakeScope.Var('zz_ef_f_pbi_paid').GetValue|0]" }
+		}
+	}
+}
+
