@@ -75,7 +75,7 @@ state_construction_spending_allocation = {
 		limit = {
 			var:state_construction_production = 0
 		}
-		value = local_var:remaining_construction_spending
+		value = owner.var:psc_remaining_construction_spending
 		multiply = 0.5
 		min = {
 			value = {
@@ -87,7 +87,7 @@ state_construction_spending_allocation = {
 			}
 			multiply = construction_min_demand
 		}
-		max = local_var:remaining_construction_spending
+		max = owner.var:psc_remaining_construction_spending
 	}
 	else = {
 		multiply = var:state_construction_production

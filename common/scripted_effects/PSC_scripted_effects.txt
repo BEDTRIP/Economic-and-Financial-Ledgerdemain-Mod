@@ -190,8 +190,10 @@ set_construction_point_demand = {
             name = total_construction_spending
             value = calculate_total_construction_spending
         }
-        set_local_variable = {
-            name = remaining_construction_spending
+        # ФК2 (7.10): the remainder is a country variable -- a local variable set in the country scope is not seen from
+        # the states inside ordered_scope_state (error.log: state_construction_spending_allocation came out 'none')
+        set_variable = {
+            name = psc_remaining_construction_spending
             value = var:total_construction_spending
         }
         ordered_scope_state = {
@@ -210,10 +212,15 @@ set_construction_point_demand = {
                 value = state_construction_spending_allocation
             }
             
-            change_local_variable = {
-                name = remaining_construction_spending
-                subtract = local_var:state_construction_spending
+            save_temporary_scope_as = psc_state
+            set_variable = { name = psc_state_spending value = local_var:state_construction_spending }
+            owner = {
+                change_variable = {
+                    name = psc_remaining_construction_spending
+                    subtract = scope:psc_state.var:psc_state_spending
+                }
             }
+            remove_variable = psc_state_spending
 
             set_state_construction_efficiency = yes
             set_local_variable = {
@@ -247,6 +254,7 @@ set_construction_point_demand = {
             }
         }
 
+        remove_variable = psc_remaining_construction_spending
         set_variable = {
             name = prev_estimated_investment_pool
             value = {
