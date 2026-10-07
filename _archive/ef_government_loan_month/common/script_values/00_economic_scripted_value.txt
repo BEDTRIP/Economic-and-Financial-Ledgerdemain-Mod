@@ -1,0 +1,9 @@
+﻿# Вырезано из common/script_values/00_economic_scripted_value.txt, строки 5991-5998 до выреза (читал только government_loan_month).
+country_minting_month = {
+	add = root.modifier:country_minting_add
+	multiply = {
+		add = 1
+		add = root.modifier:country_minting_mult
+	}
+	multiply = 4
+}
