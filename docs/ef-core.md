@@ -37,7 +37,7 @@
 - `common/alert_types/00_ef_alert_types.txt` — 32 алерта: `fso_alert`, `selle_bond_maturity_yers_time_5_Y/_10_Y`, 29× `store_release_<good>`; `PSC_alert_types.txt` — PSC.
 - `common/journal_entries/00_ef_bank_central_je.txt` (`bank_je_central_1`), `00_ef_divers_je.txt` (`latin_monetary_union_je_1`, `scandinavian_monetary_union_je_1`, `silver_crisis_je_1`, `je_ef_efcc_situation`), `00_ef_financial_center_je.txt` (`financial_center_je_1`, `financial_center_je_2`); `common/journal_entry_groups/00_ef_journal_entries.txt` — `je_group_ef`.
 - `events/00_ef_economic_event.txt` — 39 событий `00_ef_economic_event.<N>` (историческое объединение валют, ограбление, уведомления, идеологии).
-- `common/defines/00_ef_defines.txt` (`NEconomy`: `PRICE_RANGE=0.99`, `GOODS_SHORTAGE_PENALTY_MAX=0.9`, `GOLD_RESERVE_RETURNS_FACTOR=0.0001`), `zz_ef_reinvestment_defines.txt` (`REINVESTMENT_SUBSISTENCE_FRACTION_REDUCTION=0`, `OWNER_COMPANY_PRIVATIZATION_CHANCE_MULTIPLIER=0.4`), `zzzz_ef_credit_def.txt` (`COUNTRY_MIN_CREDIT_SCALED=1.7`), `PSC_defines.txt`.
+- `common/defines/00_ef_defines.txt` (`NEconomy`: `PRICE_RANGE=0.99`, `GOODS_SHORTAGE_PENALTY_MAX=0.9`, `GOODS_SHORTAGE_PENALTY_MISSING_INPUTS=0.9` (движок требует ≥ MAX), `GOLD_RESERVE_RETURNS_FACTOR=0.0001`), `zz_ef_reinvestment_defines.txt` (`REINVESTMENT_SUBSISTENCE_FRACTION_REDUCTION=0`, `OWNER_COMPANY_PRIVATIZATION_CHANCE_MULTIPLIER=0.4`), `zzzz_ef_credit_def.txt` (`COUNTRY_MIN_CREDIT_SCALED=1.7`), `PSC_defines.txt`.
 - `common/game_rules/00_EF_unique_companies_game_rules.txt` — `TRY_REPLACE` ванильных правил `unique_companies_banks`/`_newspapers`: по умолчанию `*_disabled`.
 
 ## Поток / порядок

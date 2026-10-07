@@ -11,6 +11,7 @@ NEconomy = {
 	PRICE_RANGE = 0.99							# min price of a good is base * (1 - PRICE_RANGE), Max price is base * (1 + PRICE_RANGE), PRICE_RANGE is locked to [0-1]
     #GOODS_SHORTAGE_PENALTY_MIN = 0.05			# Goods shortage penalty can't be lower than this if there is any shortage
 	GOODS_SHORTAGE_PENALTY_MAX = 0.9			# Goods shortage penalty can't be higher than this	
+	GOODS_SHORTAGE_PENALTY_MISSING_INPUTS = 0.9	# must be >= GOODS_SHORTAGE_PENALTY_MAX (vanilla 0.75 is rejected against MAX 0.9)	
 	GOLD_RESERVE_RETURNS_FACTOR = 0.0001				# How rapidly diminishing returns will cause gold reserves to drop off after the limit has been reached (higher value increases penalty) #evite la déflation de l'or dans la reserve du pays
   
 	# COMPANY_OVER_LIMIT_BONUS_PENALTY_MIN = 0.33			# If the number of companies in the country exceeds the limit, all company bonuses get penalty. The penalty is scaled proportionally to the limit (exceeding the limit by 100% reduces bonuses by 100%) and the minimum value is this
