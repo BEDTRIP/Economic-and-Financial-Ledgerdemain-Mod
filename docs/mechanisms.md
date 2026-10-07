@@ -8,7 +8,7 @@
 коэффициент, закомментированный вызов); `мёртвый` — ни откуда не вызывается; `дубль` — считает то же или пишет те же
 счета, что модель `ld_*`. Строки файлов — на момент записи, при правке файла сдвигаются: искать по имени.
 
-Итого: мёртвый 4, выключен 0, дубль 4, живой 225.
+Итого: мёртвый 4, выключен 0, дубль 4, живой 226.
 
 ## Денежная модель и металл (`money-model.md`)
 
@@ -16,6 +16,7 @@
 | --- | --- | --- | --- | --- |
 | E&F: запасы валют регионов ЦБ (stockpiling_currency → stockpiling_currency_type_1 ×95) | дубль | common/scripted_effects/01_economic_scripted_effects.txt:28023,28127; вызов 00_on_action_main.txt:318 | ежемесячно пишет stockpiling_<cur>_state_1 из рынка валютного товара ×4 и gold_state_1 при девальвации/ревальвации; те же счета (запас валюты ЦБ, металл), что zz_ef_fx_* и zz_ef_metal_week_step; trade_balance обнулён | карточка валют ЦБ |
 | Недельная цепочка денежной модели (зонд → шаг → самоперезапуск 7 дней) | живой | common/on_actions/ld_money_model_on_actions.txt:10-34; common/scripted_effects/ld_money_model.txt:61-101 | подвеска в on_monthly_pulse_country; шаг перезапускает себя trigger_event days = 7 | карточки денежной массы (через переменные zz_ef_*) |
+| Роли стран А / Б / В (`var:zz_ef_role`, месячный проход по миру) | живой | common/scripted_effects/ld_roles.txt; common/on_actions/ld_roles_on_actions.txt; common/scripted_triggers/ld_roles_triggers.txt | on_monthly_pulse → zz_ef_roles_world_pass; роль В снимает месячный шаг и цепочку модели | — |
 | Приёмник GUI-моста (утечка, сбережения, вклады, кредиты) | живой | common/scripted_effects/ld_money_model.txt:440-550; gui/ld_money_hook.gui; common/scripted_guis/ld_money_hook.txt:10 | Execute zz_ef_money_hook_sg по trigger_when на глобальном списке zz_ef_hook_countries | виджет zz_ef_money_hook (скрытый) |
 | Проба вызовов моста zz_ef_money_hook_probe_sg | живой | common/scripted_guis/ld_money_hook.txt:22; gui/ld_money_hook.gui | считает вызовы в global var zz_ef_hook_probe_calls; читает zz_ef_hook_ok | — |
 | Кредит ЦБ банкам, проценты в казну (пул ↔ ЦБ ↔ казна) | живой | common/scripted_effects/ld_money_model.txt:~205-225; common/script_values/ld_money_model_values.txt:172-250 | add_investment_pool / add_treasury по zz_ef_cb_borrow/repay/interest в недельном шаге | карточки пула и ЦБ |

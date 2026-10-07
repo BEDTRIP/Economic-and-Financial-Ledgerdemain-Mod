@@ -22,6 +22,19 @@
 - `common/static_modifiers/ld_debt_service.txt` — `zz_ef_debt_service` (+1% взноса в пул у слоёв).
 - E&F вне списка, но пишут те же счета: `common/scripted_effects/01_economic_scripted_effects.txt` (`stockpiling_currency` → `stockpiling_currency_type_1` ×95; `investement_pool_borrowing`), `common/scripted_effects/00_on_action_main.txt` (месячный запуск запасов валют, арбитраж частных банков).
 
+## Роли стран (R1а.3)
+`var:zz_ef_role`: 1 — **А** (полный шаг каждую неделю), 2 — **Б** (упрощённый, раз в 4 недели — планировщик), 3 — **В**
+(`is_country_type = decentralized`: ни месячного шага модели, ни недельной цепочки, ни моста; счетов нет). Пересчёт раз в
+месяц одним проходом по миру: `on_monthly_pulse` → `zz_ef_roles_world_pass` (`common/scripted_effects/ld_roles.txt`,
+on_action — `common/on_actions/ld_roles_on_actions.txt`): глобальные `zz_ef_role_gdp40` / `zz_ef_role_gdp50` — ВВП 40-й и
+50-й страны (`ordered_country`), затем `zz_ef_role_update` у каждой страны. А — игрок, страны с ЦБ (`has_central_bank`),
+первые 40 по ВВП; выход из А — ниже 50-го места 6 месяцев подряд (`zz_ef_role_low`) и не меньше 12 месяцев в роли
+(`zz_ef_role_months`); вход Б → А по ВВП — тоже после 12 месяцев в Б; первое назначение — сразу. Смена роли —
+`zz_ef_role_change` (место проводки переноса остатков; в R1а у А и Б одни и те же счета страны — переносить нечего).
+Триггеры `zz_ef_role_is_a/b/v` — `common/scripted_triggers/ld_roles_triggers.txt` (нет роли — ни одна, шаг как прежде);
+числа для лога `EFY` — `common/script_values/ld_roles_values.txt`. Роль В снимает месячный шаг (`trigger` у
+`zz_ef_money_model_monthly`) и останавливает цепочку (`zz_ef_money_model_weekly`).
+
 ## Поток / порядок
 1. **Месяц** (`on_monthly_pulse_country`, все страны): `zz_ef_money_model_monthly` → `zz_ef_money_model_monthly_step` (зона валюты, курс серебра, сила валюты, торговый модификатор, январская выплата процентов частных банков `zz_ef_privbank_interest_pay`, `zz_ef_dependents`, `zz_ef_money_ledger_delta ACC=cb`, цена политики ставки, ставка правительства `zz_ef_gov_rate_step`, `zz_ef_mp_step`, модификатор частного строительства) и `zz_ef_money_week_start` (запуск цепочки, если нет `zz_ef_week_alive`/`zz_ef_week_probe`).
 2. **Старт цепочки**: дневной зонд (`zz_ef_money_week_probe`, ≤8 дней) ждёт смены казны (бюджетный тик движка), затем `zz_ef_money_model_weekly`; первый вызов назначает стране день недели (`zz_ef_week_slot`, 0..6) и сдвигает её цепочку на столько дней — шаги стран разнесены по неделе.

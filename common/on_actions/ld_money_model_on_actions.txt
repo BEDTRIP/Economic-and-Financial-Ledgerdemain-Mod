@@ -13,6 +13,10 @@ on_monthly_pulse_country = {
 }
 
 zz_ef_money_model_monthly = {
+	# R1а.3 (Д.2): role V (decentralized) is outside the money model
+	trigger = {
+		NOT = { zz_ef_role_is_v = yes }
+	}
 	effect = {
 		zz_ef_money_model_monthly_step = yes
 		zz_ef_money_week_start = yes
@@ -30,7 +34,13 @@ zz_ef_money_week_probe = {
 # steps and GUI-bridge receivers spread over the 7 days instead of all landing on the budget tick's day.
 zz_ef_money_model_weekly = {
 	effect = {
+		# R1а.3 (Д.2): a country that became V stops its chain (and with it the GUI bridge)
 		if = {
+			limit = { zz_ef_role_is_v = yes }
+			if = { limit = { has_variable = zz_ef_week_alive } remove_variable = zz_ef_week_alive }
+			if = { limit = { has_variable = zz_ef_week_slot } remove_variable = zz_ef_week_slot }
+		}
+		else_if = {
 			limit = { NOT = { has_variable = zz_ef_week_slot } }
 			zz_ef_money_week_slot_assign = yes
 		}
