@@ -16,6 +16,11 @@
 - `popneed_currency = X` — потребность в деньгах (банковские расчёты `liquidity_currency`): 0,07 от значения E&F (от 1 на уровне 1 до 432 на уровне 99; спрос населения ~2% ВВП, решение Д2.2). Ключ в строке один: повторы одного ключа в `goods` движок складывает.
 - `popneed_household_construction = Y` — строительные товары, во всех 99 уровнях (7 → 38438).
 - `popneed_metal_hoard = Z` — металлы-накопления, уровни 5–14 (2 → 10), и в строках 1–4 и 15–99 отсутствует.
+- Покупки населения по этой потребности — металл населения `zz_ef_popm_gold/silver` (`zz_ef_metal_week_step`): потребление
+  штатов `sg:<металл>.state_goods_consumption` минус вход ЦБ (`building_bank`) и банков (`building_zz_ef_bank`), не ниже 0;
+  в статистике движка — обычный спрос населения на товар. Отдельного потребления попов скрипт не читает (`triggers.log`:
+  только `state_goods_consumption`), но других потребителей золота и серебра нет ни в форке, ни в пачке (поиск
+  `goods_input_gold/silver_*` по оригиналам модов и мастерской), так что остаток точен.
 - `popneed_financial_products = F` — финпродукты, начиная с уровня 15 (40 → 360556 на 99).
 Цепочка: `liquidity_currency` производят банки (`production_methods/ld_bank_pm.txt`, `ld_trade_center_settlements.txt`) и покупают здания (`pm_market_liquidity_currency`, вход 28) и попы; `bond`/акции производят ПМ владения (`goods_output_<stock>_add` в `production_methods/01..03/11_ef_*`) и покупают фин. центры (`16_ef_financial_centre.txt`, вход `goods_input_*_stock_add`); `mutual_funds` — выход `pm_bond_exchange`, не торгуется.
 
