@@ -37,8 +37,9 @@
 | кредит ЦБ банкам | `zz_ef_bank_cb_debt` | ЦБ | недельный шаг; только при ЦБ (`has_central_bank`: без ЦБ цель `zz_ef_cb_credit_target` = 0, долг гасится из пула) |
 | деньги казны в банках | `zz_ef_bank_gov_dep` | казна | излишек казны сверх предела (`zz_ef_f_tr_pool`) |
 | кредит ЦБ казне | `credit_at_central_bank` (E&F, деньги движка; `government_loan` — зеркало в валюте E&F) | ЦБ (актив), долг казны | заём / возврат — кнопки `set_debt_issued`, `refund_credit_at_central_bank(_all)`, ИИ `ai_credit_at_central_bank` / `ai_refund_central_bank`: казна ↔ счёт (`zz_ef_eng_add/sub_treasury`); прощение без денег (ИИ) — списание ЦБ `zz_ef_cb_writeoff` |
-| капитал банков | `zz_ef_bank_capital` | банки (агрегат) | первая сверка (пул − остальные счета), проценты ЦБ (`zz_ef_post_eng_paid`), проценты вкладам населения и чужих ЦБ (`zz_ef_post`) |
+| капитал банков | `zz_ef_bank_capital` | банки (агрегат) | первая сверка (пул − остальные счета), проценты ЦБ (`zz_ef_post_eng_paid`), проценты вкладам населения и чужих ЦБ (`zz_ef_post`); облигации (R2): у продавца — выручка от продажи долей и выплаты держателям из пула (`zz_ef_bl_seller_capital(_out)`), у банков-держателей — списания долей |
 | потреб- / бизнес-кредит | `zz_ef_cc_debt`, `zz_ef_bc_debt` | банки (актив) | `zz_ef_consumer_credit_step`, `zz_ef_business_credit_step` |
+| доли банков в чужих облигациях | `zz_ef_bank_bonds` (= Σ `ai_privat_bank_bond_value_N` E&F) | банки (актив) | покупка E&F `ai_privat_bank_bond_N` (пул → доля), реестр облигаций (`ld_bond_ledger.txt`: возврат лишнего — пул, выкуп — пул, списание и недоплата продавца — из капитала банков) |
 | требования населения | `zz_ef_pop_claims_stocks`, `_bonds`, `_private` | население | по нулям (R6, R7) |
 | позиция к палате клиринга | `zz_ef_clr_position` | страна | по нулям (R8) |
 | металл ЦБ / банков / населения | `gold_state_1` / `silver_state_1` штата ЦБ, `zz_ef_bankm_*`, `zz_ef_popm_*` | — | `ld_metal_accounts.txt` |
@@ -50,7 +51,7 @@
 
 **Сверка по запасам** (`zz_ef_reconcile`, конец недельного шага): «прочее» `zz_ef_other` = часть пула + часть казны.
 Пул: `zz_ef_other_pool` = пул − книга банков `zz_ef_bank_book_v` (вклады населения и чужих ЦБ + кредит ЦБ + деньги казны
-+ капитал − потреб- и бизнес-кредит). Казна (В5): `zz_ef_other_tr` копится по шагам — изменение казны за вычетом долга
++ капитал − потреб- и бизнес-кредит − доли в чужих облигациях `zz_ef_bank_bonds`). Казна (В5): `zz_ef_other_tr` копится по шагам — изменение казны за вычетом долга
 (`zz_ef_treasury_net_v` = `gold_reserves` − `principal`; снимок `zz_ef_tr_prev`) − бюджет движка недель шага
 (`zz_ef_budget_steps_v` = `zz_ef_budget_week` × недели шага) − наши проводки на казну `zz_ef_tr_posted` (каждый наш
 `add_treasury` помечен `zz_ef_tr_mark` / `zz_ef_tr_unmark`: проводки `zz_ef_post_eng*`, консоли, денежная политика,

@@ -44,6 +44,11 @@
 - `zz_ef_foreign_assets` = `zz_ef_bank_bonds` + `zz_ef_treasury_bonds` (`ld_money_model_values.txt:1999-2008`) — позиция «за рубежом» M3.
 - Реестр берёт E&F-слоты как источник цены/продавца и сам перераспределяет деньги; процент за неделю берёт у движка (`zz_ef_v_g_ipay`).
 - Пул продавца (`investment_pool`) платит процент и погашения (не больше, чем там есть; недостающее — `zz_ef_f_bl_int_short`/`lost`).
+- Учёт (R2, шаг 7): у продавца выручка от продажи долей (в пул) и выплаты держателям (из пула) — капитал его банков
+  (`zz_ef_bl_seller_capital`, `_out`); у банков-держателей доли — актив книги (`zz_ef_bank_bonds` в `zz_ef_bank_book_v`), списание
+  доли и недоплата продавца — из их капитала (`zz_ef_bl_short_pool`); покупка облигации казной ИИ (`ai_buy_bond_N`, цена из казны) помечена
+  как наша (`zz_ef_tr_unmark`), возврат лишнего и проценты — уже помечены. Слоты игрока (`buy_bond_*`, погашение `bond_maturity_N`) реестр
+  не ведёт — открыто.
 - Облигации ЦБ как товар `bond` — `pm_*_standard_bank_money_currency` (`production_methods/15_ef_bank.txt`, `goods_output_bond_add`), множитель по долгу — `ld_cb_bond_issuance.txt`.
 - Смежные: `ld_capitalization_snapshot.txt` (счётчики E&F), `ld_reference_currency_values.txt:86-112` (проценты частным банкам).
 
