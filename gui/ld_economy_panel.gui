@@ -1133,8 +1133,12 @@ types zz_ef_economy_panel
 							flag = {
 								using = tooltip_above
 								datacontext = "[AccessPlayer]" 
-								onclick = "[GetVariableSystem.Clear('un_panel')]"
-								onclick = "[GetVariableSystem.Clear('international_open')]"
+								blockoverride "onclicks" {
+									onclick = "[InformationPanelBar.OpenCountryPanel(Country.Self)]"
+									onrightclick = "[RightClickMenuManager.ShowForCountry(Country.AccessSelf)]"
+									onclick = "[GetVariableSystem.Clear('un_panel')]"
+									onclick = "[GetVariableSystem.Clear('international_open')]"
+								}
 							} 
 							textbox = {
 								raw_text = "#v [GetPlayer.GetCustom('currency_name')]#!"
@@ -5891,8 +5895,12 @@ types zz_ef_economy_panel
 										blockoverride "flag_tooltip" {
 											tooltip = "[ContextualDiplomaticPact.GetTooltip]"
 										}
-										onclick = "[GetVariableSystem.Clear('un_panel')]"
-										onclick = "[GetVariableSystem.Clear('international_open')]"
+										blockoverride "onclicks" {
+											onclick = "[InformationPanelBar.OpenCountryPanel(Country.Self)]"
+											onrightclick = "[RightClickMenuManager.ShowForCountry(Country.AccessSelf)]"
+											onclick = "[GetVariableSystem.Clear('un_panel')]"
+											onclick = "[GetVariableSystem.Clear('international_open')]"
+										}
 									}
 
 									textbox = {

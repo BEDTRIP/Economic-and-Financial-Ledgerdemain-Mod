@@ -29,10 +29,6 @@
 		post_notification = 00_ef_economic_event_1_message
 	}
 
-	option = {
-		name = 00_ef_economic_event.1.a
-		default_option = yes
-	}
 }
 # #  00_ef_economic_event.2.t:0 "Réforme du standard monétaire en [SCOPE.sC('target_country').GetName]"
 # 00_ef_economic_event.2 = { #image no text en
@@ -116,7 +112,7 @@
 # 	duration = 3 #0 pas de duration
 
 # 	event_image = {
-# 		texture = "gfx/event_pictures/00_ef_economic_event_35.dds"
+# 		texture = "gfx/event_pictures/00_ef_economic_event_27.dds"
 # 	}
 
 # 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
@@ -810,7 +806,7 @@
 	duration = 3 #0 pas de duration
 
 	event_image = {
-		texture = "gfx/event_pictures/00_ef_economic_event_24.dds"
+		texture = "gfx/event_pictures/00_ef_economic_event_27.dds"
 	}
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
@@ -881,13 +877,6 @@
 		post_notification = 00_ef_economic_event_26_message
 	} 
 
-	option = {
-		name = 00_ef_economic_event.26.a
-		default_option = yes 
-		custom_tooltip = {
-			text = 00_ef_economic_event_desc.26.a
-		}
-	}   
 }   
 #Passagfe FEED -> ok event de changement pour le standart gold
 00_ef_economic_event.27 = { #image ok text en
@@ -918,13 +907,6 @@
 		post_notification = 00_ef_economic_event_27_message
 	} 
 
-	option = {
-		name = 00_ef_economic_event.27.a
-		default_option = yes 
-		custom_tooltip = {
-			text = 00_ef_economic_event_desc.27.a
-		}
-	}    
 }  
  
 #Passagfe FEED -> -> passage en notification ok la monaie de x pays est devenu une sous monaie du pays x (overlord) ce ui ne l a rend plus échangeable sur le marché
@@ -947,7 +929,7 @@
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 
-	icon = "gfx/interface/icons/event_icons/00_ef_economic_event_28.dds"
+	icon = "gfx/interface/icons/event_icons/central_bank.dds"
 
 	trigger = {
 	}
@@ -956,10 +938,6 @@
 		post_notification = 00_ef_economic_event_28_message 
 	} 
 
-	option = {
-		name = 00_ef_economic_event.28.a
-		default_option = yes 
-	}  
 }   
 #Passagfe FEED -> -> passage en notification ok inverssement queant la monaie revient sur le marché
 00_ef_economic_event.29 = { #image ok text en
@@ -981,7 +959,7 @@
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 
-	icon = "gfx/interface/icons/event_icons/00_ef_economic_event_29.dds"
+	icon = "gfx/interface/icons/event_icons/central_bank.dds"
 
 	trigger = {
 	}
@@ -990,10 +968,6 @@
 		post_notification = 00_ef_economic_event_29_message
 	} 
 
-	option = {
-		name = 00_ef_economic_event.29.a
-		default_option = yes 
-	}  
 }  
 
 #Passagfe FEED -> ok passage au fiat standart pour cause d'instabilité monetaire importante
@@ -1016,7 +990,7 @@
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 
-	icon = "gfx/interface/icons/event_icons/00_ef_economic_event_30.dds"
+	icon = "gfx/interface/icons/event_icons/gold.dds"
 
 	trigger = {
 	}
@@ -1025,10 +999,6 @@
 		post_notification = 00_ef_economic_event_30_message
 	} 
 
-	option = {
-		name = 00_ef_economic_event.30.a
-		default_option = yes 
-	}  
 }  
 
 #Passagfe FEED -> ok changement de money value target -> devauation 
@@ -1051,7 +1021,7 @@
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 
-	icon = "gfx/interface/icons/event_icons/00_ef_economic_event_31.dds"
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
 
 	trigger = {
 	}
@@ -1060,10 +1030,6 @@
 		post_notification = 00_ef_economic_event_31_message
 	} 
 
-	option = {
-		name = 00_ef_economic_event.31.a
-		default_option = yes 
-	}  
 }   
 #Passagfe FEED -> ok changement de money value target -> revaluation 
 00_ef_economic_event.32 = { #image OK text en
@@ -1085,7 +1051,7 @@
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 
-	icon = "gfx/interface/icons/event_icons/00_ef_economic_event_31.dds"
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
 
 	trigger = {
 	}
@@ -1094,10 +1060,6 @@
 		post_notification = 00_ef_economic_event_32_message
 	} 
 
-	option = {
-		name = 00_ef_economic_event.32.a
-		default_option = yes 
-	}  
 }  
 
 #Passagfe FEED -> ok le pays X devient la monaie de référence mondial 
@@ -1120,7 +1082,7 @@
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 
-	icon = "gfx/interface/icons/event_icons/00_ef_economic_event_33.dds"
+	icon = "gfx/interface/icons/event_icons/financial_center.dds"
 
 	trigger = {
 	}
@@ -1153,7 +1115,7 @@
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 
-	icon = "gfx/interface/icons/event_icons/00_ef_economic_event_34.dds"
+	icon = "gfx/interface/icons/event_icons/financial_center.dds"
 
 	trigger = {
 	}
@@ -1185,12 +1147,12 @@
 	duration = 3 #0 pas de duration
 
 	event_image = {
-		texture = "gfx/event_pictures/00_ef_economic_event_35.dds"
+		texture = "gfx/event_pictures/00_ef_economic_event_27.dds"
 	}
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 
-	icon = "gfx/interface/icons/event_icons/00_ef_economic_event_35.dds"
+	icon = "gfx/interface/icons/event_icons/gold.dds"
 
 	trigger = {
 	}
@@ -1667,10 +1629,6 @@
 		post_notification = 00_ef_economic_event_95_message
 	} 
 
-	option = {
-		name = 00_ef_economic_event.95.a
-		default_option = yes  
-	}    
 }  
 #Passagfe FEED -> 
 00_ef_economic_event.96 = { #image ok text en
@@ -1701,10 +1659,6 @@
 		post_notification = 00_ef_economic_event_96_message
 	} 
 
-	option = {
-		name = 00_ef_economic_event.96.a
-		default_option = yes  
-	}    
 }  
  
 ##################

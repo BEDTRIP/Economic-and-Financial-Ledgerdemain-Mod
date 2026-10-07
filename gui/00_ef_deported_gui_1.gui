@@ -342,7 +342,6 @@ types market_states_panel
 
 								dropdown_menu_standard = {
 									parentanchor = hcenter
-									onclick = "[GetScriptedGui('update_currency_liste').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
 									blockoverride "dropdown_properties"
 									{
@@ -88465,7 +88464,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_ammunition_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_ammunition_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -88565,7 +88564,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_ammunition_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_ammunition_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -88694,7 +88693,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_ammunition_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_ammunition_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -89070,7 +89069,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_ammunition_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_ammunition_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -89171,7 +89170,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_ammunition_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_ammunition_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -89301,7 +89300,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_ammunition_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_ammunition_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -89689,7 +89688,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_small_arms_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_small_arms_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -89789,7 +89788,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_small_arms_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_small_arms_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -89918,7 +89917,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_small_arms_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_small_arms_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -90294,7 +90293,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_small_arms_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_small_arms_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -90395,7 +90394,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_small_arms_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_small_arms_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -90525,7 +90524,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_small_arms_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_small_arms_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -90913,7 +90912,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_artillery_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_artillery_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -91013,7 +91012,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_artillery_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_artillery_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -91142,7 +91141,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_artillery_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_artillery_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -91518,7 +91517,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_artillery_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_artillery_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -91619,7 +91618,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_artillery_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_artillery_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -91749,7 +91748,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_artillery_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_artillery_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -92137,7 +92136,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_tanks_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_tanks_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -92237,7 +92236,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_tanks_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_tanks_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -92366,7 +92365,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_tanks_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_tanks_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -92742,7 +92741,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_tanks_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_tanks_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -92843,7 +92842,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_tanks_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_tanks_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -92973,7 +92972,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_tanks_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_tanks_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -93361,7 +93360,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_aeroplanes_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_aeroplanes_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -93461,7 +93460,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_aeroplanes_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_aeroplanes_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -93590,7 +93589,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_aeroplanes_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_aeroplanes_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -93966,7 +93965,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_aeroplanes_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_aeroplanes_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -94067,7 +94066,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_aeroplanes_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_aeroplanes_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -94197,7 +94196,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_aeroplanes_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_aeroplanes_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -94585,7 +94584,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_grain_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_grain_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -94685,7 +94684,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_grain_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_grain_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -94814,7 +94813,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_grain_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_grain_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -95190,7 +95189,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_grain_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_grain_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -95291,7 +95290,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_grain_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_grain_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -95421,7 +95420,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_grain_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_grain_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -95809,7 +95808,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_fabric_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_fabric_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -95909,7 +95908,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_fabric_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_fabric_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -96038,7 +96037,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_fabric_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_fabric_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -96414,7 +96413,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_fabric_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_fabric_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -96515,7 +96514,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_fabric_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_fabric_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -96645,7 +96644,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_fabric_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_fabric_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -97033,7 +97032,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_wood_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_wood_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -97133,7 +97132,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_wood_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_wood_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -97262,7 +97261,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_wood_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_wood_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -97638,7 +97637,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_wood_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_wood_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -97739,7 +97738,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_wood_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_wood_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -97869,7 +97868,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_wood_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_wood_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -98257,7 +98256,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_groceries_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_groceries_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -98357,7 +98356,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_groceries_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_groceries_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -98486,7 +98485,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_groceries_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_groceries_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -98862,7 +98861,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_groceries_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_groceries_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -98963,7 +98962,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_groceries_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_groceries_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -99093,7 +99092,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_groceries_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_groceries_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -99481,7 +99480,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_clothes_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_clothes_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -99581,7 +99580,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_clothes_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_clothes_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -99710,7 +99709,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_clothes_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_clothes_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -100086,7 +100085,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_clothes_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_clothes_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -100187,7 +100186,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_clothes_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_clothes_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -100317,7 +100316,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_clothes_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_clothes_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -100705,7 +100704,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_paper_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_paper_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -100805,7 +100804,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_paper_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_paper_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -100934,7 +100933,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_paper_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_paper_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -101310,7 +101309,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_paper_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_paper_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -101411,7 +101410,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_paper_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_paper_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -101541,7 +101540,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_paper_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_paper_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -101929,7 +101928,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_silk_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_silk_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -102029,7 +102028,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_silk_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_silk_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -102158,7 +102157,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_silk_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_silk_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -102534,7 +102533,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_silk_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_silk_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -102635,7 +102634,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_silk_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_silk_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -102765,7 +102764,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_silk_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_silk_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -103153,7 +103152,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_dye_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_dye_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -103253,7 +103252,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_dye_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_dye_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -103382,7 +103381,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_dye_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_dye_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -103758,7 +103757,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_dye_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_dye_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -103859,7 +103858,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_dye_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_dye_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -103989,7 +103988,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_dye_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_dye_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -104377,7 +104376,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_sulfur_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_sulfur_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -104477,7 +104476,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_sulfur_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_sulfur_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -104606,7 +104605,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_sulfur_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_sulfur_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -104982,7 +104981,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_sulfur_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_sulfur_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -105083,7 +105082,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_sulfur_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_sulfur_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -105213,7 +105212,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_sulfur_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_sulfur_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -105601,7 +105600,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_coal_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_coal_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -105701,7 +105700,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_coal_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_coal_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -105830,7 +105829,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_coal_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_coal_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -106206,7 +106205,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_coal_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_coal_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -106307,7 +106306,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_coal_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_coal_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -106437,7 +106436,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_coal_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_coal_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -106825,7 +106824,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_iron_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_iron_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -106925,7 +106924,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_iron_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_iron_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -107054,7 +107053,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_iron_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_iron_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -107430,7 +107429,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_iron_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_iron_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -107531,7 +107530,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_iron_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_iron_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -107661,7 +107660,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_iron_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_iron_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -108049,7 +108048,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_lead_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_lead_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -108149,7 +108148,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_lead_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_lead_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -108278,7 +108277,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_lead_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_lead_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -108654,7 +108653,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_lead_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_lead_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -108755,7 +108754,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_lead_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_lead_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -108885,7 +108884,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_lead_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_lead_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -109273,7 +109272,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_hardwood_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_hardwood_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -109373,7 +109372,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_hardwood_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_hardwood_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -109502,7 +109501,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_hardwood_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_hardwood_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -109878,7 +109877,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_hardwood_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_hardwood_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -109979,7 +109978,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_hardwood_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_hardwood_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -110109,7 +110108,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_hardwood_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_hardwood_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -110497,7 +110496,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_rubber_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_rubber_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -110597,7 +110596,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_rubber_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_rubber_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -110726,7 +110725,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_rubber_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_rubber_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -111102,7 +111101,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_rubber_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_rubber_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -111203,7 +111202,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_rubber_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_rubber_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -111333,7 +111332,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_rubber_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_rubber_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -111721,7 +111720,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_oil_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_oil_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -111821,7 +111820,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_oil_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_oil_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -111950,7 +111949,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_oil_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_oil_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -112326,7 +112325,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_oil_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_oil_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -112427,7 +112426,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_oil_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_oil_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -112557,7 +112556,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_oil_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_oil_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -112945,7 +112944,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_engines_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_engines_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -113045,7 +113044,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_engines_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_engines_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -113174,7 +113173,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_engines_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_engines_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -113550,7 +113549,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_engines_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_engines_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -113651,7 +113650,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_engines_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_engines_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -113781,7 +113780,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_engines_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_engines_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -114169,7 +114168,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_steel_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_steel_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -114269,7 +114268,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_steel_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_steel_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -114398,7 +114397,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_steel_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_steel_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -114774,7 +114773,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_steel_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_steel_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -114875,7 +114874,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_steel_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_steel_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -115005,7 +115004,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_steel_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_steel_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -115393,7 +115392,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_fertilizer_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_fertilizer_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -115493,7 +115492,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_fertilizer_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_fertilizer_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -115622,7 +115621,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_fertilizer_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_fertilizer_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -115998,7 +115997,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_fertilizer_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_fertilizer_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -116099,7 +116098,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_fertilizer_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_fertilizer_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -116229,7 +116228,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_fertilizer_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_fertilizer_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -116617,7 +116616,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_tools_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_tools_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -116717,7 +116716,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_tools_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_tools_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -116846,7 +116845,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_tools_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_tools_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -117222,7 +117221,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_tools_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_tools_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -117323,7 +117322,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_tools_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_tools_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -117453,7 +117452,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_tools_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_tools_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -117841,7 +117840,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_explosives_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_explosives_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -117941,7 +117940,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_explosives_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_explosives_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -118070,7 +118069,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_explosives_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_explosives_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -118446,7 +118445,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_explosives_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_explosives_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -118547,7 +118546,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_explosives_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_explosives_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -118677,7 +118676,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_explosives_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_explosives_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -119065,7 +119064,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_automobiles_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_automobiles_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -119165,7 +119164,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_automobiles_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_automobiles_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -119294,7 +119293,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_automobiles_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_automobiles_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -119670,7 +119669,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_automobiles_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_automobiles_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -119771,7 +119770,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_automobiles_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_automobiles_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -119901,7 +119900,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_automobiles_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_automobiles_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -120289,7 +120288,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_telephones_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_telephones_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -120389,7 +120388,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_telephones_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_telephones_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -120518,7 +120517,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_telephones_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_telephones_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -120894,7 +120893,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_telephones_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_telephones_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -120995,7 +120994,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_telephones_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_telephones_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -121125,7 +121124,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_telephones_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_telephones_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -121513,7 +121512,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_radios_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_radios_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -121613,7 +121612,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_radios_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_radios_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -121742,7 +121741,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_radios_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_radios_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -122118,7 +122117,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_radios_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_radios_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -122219,7 +122218,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_radios_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_radios_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -122349,7 +122348,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_radios_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_radios_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -122737,7 +122736,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_opium_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_opium_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -122837,7 +122836,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_opium_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_opium_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -122966,7 +122965,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_opium_var_state')|=+D]"
+													value = "[Market.GetOwner.MakeScope.ScriptValue('stockpiling_opium_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -123342,7 +123341,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_opium_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_opium_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -123443,7 +123442,7 @@ types market_states_panel
 												position = { 75 8 }
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_opium_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_opium_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -123573,7 +123572,7 @@ types market_states_panel
 
 
 												blockoverride "values" {
-													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_opium_var_state')|=+D]"
+													value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_opium_var_state')]"
 													min = 0
 													max = 1000000
 												}
@@ -132228,7 +132227,7 @@ types market_states_panel
 
 										name = "stockpiling_ammunition_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_ammunition_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_ammunition_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -132255,7 +132254,7 @@ types market_states_panel
 										name = "stockpiling_ammunition_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_ammunition_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_ammunition_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -132319,7 +132318,7 @@ types market_states_panel
 
 										name = "stockpiling_ammunition_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_ammunition_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_ammunition_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -133879,7 +133878,7 @@ types market_states_panel
 
 										name = "stockpiling_small_arms_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_small_arms_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_small_arms_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -133906,7 +133905,7 @@ types market_states_panel
 										name = "stockpiling_small_arms_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_small_arms_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_small_arms_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -133970,7 +133969,7 @@ types market_states_panel
 
 										name = "stockpiling_small_arms_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_small_arms_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_small_arms_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -135530,7 +135529,7 @@ types market_states_panel
 
 										name = "stockpiling_artillery_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_artillery_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_artillery_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -135557,7 +135556,7 @@ types market_states_panel
 										name = "stockpiling_artillery_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_artillery_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_artillery_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -135621,7 +135620,7 @@ types market_states_panel
 
 										name = "stockpiling_artillery_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_artillery_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_artillery_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -137181,7 +137180,7 @@ types market_states_panel
 
 										name = "stockpiling_tanks_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_tanks_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_tanks_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -137208,7 +137207,7 @@ types market_states_panel
 										name = "stockpiling_tanks_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_tanks_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_tanks_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -137272,7 +137271,7 @@ types market_states_panel
 
 										name = "stockpiling_tanks_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_tanks_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_tanks_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -138832,7 +138831,7 @@ types market_states_panel
 
 										name = "stockpiling_aeroplanes_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_aeroplanes_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_aeroplanes_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -138859,7 +138858,7 @@ types market_states_panel
 										name = "stockpiling_aeroplanes_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_aeroplanes_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_aeroplanes_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -138923,7 +138922,7 @@ types market_states_panel
 
 										name = "stockpiling_aeroplanes_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_aeroplanes_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_aeroplanes_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -140483,7 +140482,7 @@ types market_states_panel
 
 										name = "stockpiling_grain_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_grain_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_grain_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -140510,7 +140509,7 @@ types market_states_panel
 										name = "stockpiling_grain_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_grain_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_grain_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -140574,7 +140573,7 @@ types market_states_panel
 
 										name = "stockpiling_grain_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_grain_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_grain_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -142134,7 +142133,7 @@ types market_states_panel
 
 										name = "stockpiling_fabric_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_fabric_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_fabric_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -142161,7 +142160,7 @@ types market_states_panel
 										name = "stockpiling_fabric_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_fabric_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_fabric_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -142225,7 +142224,7 @@ types market_states_panel
 
 										name = "stockpiling_fabric_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_fabric_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_fabric_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -143785,7 +143784,7 @@ types market_states_panel
 
 										name = "stockpiling_wood_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_wood_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_wood_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -143812,7 +143811,7 @@ types market_states_panel
 										name = "stockpiling_wood_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_wood_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_wood_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -143876,7 +143875,7 @@ types market_states_panel
 
 										name = "stockpiling_wood_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_wood_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_wood_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -145436,7 +145435,7 @@ types market_states_panel
 
 										name = "stockpiling_groceries_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_groceries_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_groceries_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -145463,7 +145462,7 @@ types market_states_panel
 										name = "stockpiling_groceries_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_groceries_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_groceries_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -145527,7 +145526,7 @@ types market_states_panel
 
 										name = "stockpiling_groceries_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_groceries_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_groceries_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -147087,7 +147086,7 @@ types market_states_panel
 
 										name = "stockpiling_clothes_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_clothes_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_clothes_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -147114,7 +147113,7 @@ types market_states_panel
 										name = "stockpiling_clothes_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_clothes_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_clothes_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -147178,7 +147177,7 @@ types market_states_panel
 
 										name = "stockpiling_clothes_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_clothes_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_clothes_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -148738,7 +148737,7 @@ types market_states_panel
 
 										name = "stockpiling_paper_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_paper_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_paper_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -148765,7 +148764,7 @@ types market_states_panel
 										name = "stockpiling_paper_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_paper_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_paper_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -148829,7 +148828,7 @@ types market_states_panel
 
 										name = "stockpiling_paper_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_paper_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_paper_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -150389,7 +150388,7 @@ types market_states_panel
 
 										name = "stockpiling_silk_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_silk_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_silk_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -150416,7 +150415,7 @@ types market_states_panel
 										name = "stockpiling_silk_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_silk_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_silk_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -150480,7 +150479,7 @@ types market_states_panel
 
 										name = "stockpiling_silk_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_silk_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_silk_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -152040,7 +152039,7 @@ types market_states_panel
 
 										name = "stockpiling_dye_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_dye_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_dye_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -152067,7 +152066,7 @@ types market_states_panel
 										name = "stockpiling_dye_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_dye_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_dye_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -152131,7 +152130,7 @@ types market_states_panel
 
 										name = "stockpiling_dye_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_dye_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_dye_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -153691,7 +153690,7 @@ types market_states_panel
 
 										name = "stockpiling_sulfur_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_sulfur_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_sulfur_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -153718,7 +153717,7 @@ types market_states_panel
 										name = "stockpiling_sulfur_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_sulfur_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_sulfur_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -153782,7 +153781,7 @@ types market_states_panel
 
 										name = "stockpiling_sulfur_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_sulfur_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_sulfur_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -155342,7 +155341,7 @@ types market_states_panel
 
 										name = "stockpiling_coal_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_coal_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_coal_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -155369,7 +155368,7 @@ types market_states_panel
 										name = "stockpiling_coal_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_coal_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_coal_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -155433,7 +155432,7 @@ types market_states_panel
 
 										name = "stockpiling_coal_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_coal_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_coal_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -156993,7 +156992,7 @@ types market_states_panel
 
 										name = "stockpiling_iron_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_iron_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_iron_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -157020,7 +157019,7 @@ types market_states_panel
 										name = "stockpiling_iron_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_iron_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_iron_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -157084,7 +157083,7 @@ types market_states_panel
 
 										name = "stockpiling_iron_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_iron_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_iron_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -158644,7 +158643,7 @@ types market_states_panel
 
 										name = "stockpiling_lead_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_lead_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_lead_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -158671,7 +158670,7 @@ types market_states_panel
 										name = "stockpiling_lead_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_lead_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_lead_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -158735,7 +158734,7 @@ types market_states_panel
 
 										name = "stockpiling_lead_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_lead_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_lead_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -160295,7 +160294,7 @@ types market_states_panel
 
 										name = "stockpiling_hardwood_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_hardwood_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_hardwood_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -160322,7 +160321,7 @@ types market_states_panel
 										name = "stockpiling_hardwood_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_hardwood_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_hardwood_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -160386,7 +160385,7 @@ types market_states_panel
 
 										name = "stockpiling_hardwood_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_hardwood_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_hardwood_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -161946,7 +161945,7 @@ types market_states_panel
 
 										name = "stockpiling_rubber_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_rubber_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_rubber_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -161973,7 +161972,7 @@ types market_states_panel
 										name = "stockpiling_rubber_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_rubber_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_rubber_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -162037,7 +162036,7 @@ types market_states_panel
 
 										name = "stockpiling_rubber_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_rubber_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_rubber_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -163597,7 +163596,7 @@ types market_states_panel
 
 										name = "stockpiling_oil_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_oil_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_oil_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -163624,7 +163623,7 @@ types market_states_panel
 										name = "stockpiling_oil_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_oil_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_oil_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -163688,7 +163687,7 @@ types market_states_panel
 
 										name = "stockpiling_oil_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_oil_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_oil_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -165248,7 +165247,7 @@ types market_states_panel
 
 										name = "stockpiling_engines_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_engines_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_engines_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -165275,7 +165274,7 @@ types market_states_panel
 										name = "stockpiling_engines_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_engines_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_engines_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -165339,7 +165338,7 @@ types market_states_panel
 
 										name = "stockpiling_engines_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_engines_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_engines_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -166899,7 +166898,7 @@ types market_states_panel
 
 										name = "stockpiling_steel_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_steel_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_steel_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -166926,7 +166925,7 @@ types market_states_panel
 										name = "stockpiling_steel_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_steel_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_steel_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -166990,7 +166989,7 @@ types market_states_panel
 
 										name = "stockpiling_steel_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_steel_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_steel_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -168550,7 +168549,7 @@ types market_states_panel
 
 										name = "stockpiling_fertilizer_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_fertilizer_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_fertilizer_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -168577,7 +168576,7 @@ types market_states_panel
 										name = "stockpiling_fertilizer_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_fertilizer_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_fertilizer_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -168641,7 +168640,7 @@ types market_states_panel
 
 										name = "stockpiling_fertilizer_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_fertilizer_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_fertilizer_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -170201,7 +170200,7 @@ types market_states_panel
 
 										name = "stockpiling_tools_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_tools_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_tools_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -170228,7 +170227,7 @@ types market_states_panel
 										name = "stockpiling_tools_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_tools_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_tools_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -170292,7 +170291,7 @@ types market_states_panel
 
 										name = "stockpiling_tools_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_tools_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_tools_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -171852,7 +171851,7 @@ types market_states_panel
 
 										name = "stockpiling_explosives_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_explosives_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_explosives_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -171879,7 +171878,7 @@ types market_states_panel
 										name = "stockpiling_explosives_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_explosives_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_explosives_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -171943,7 +171942,7 @@ types market_states_panel
 
 										name = "stockpiling_explosives_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_explosives_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_explosives_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -173503,7 +173502,7 @@ types market_states_panel
 
 										name = "stockpiling_automobiles_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_automobiles_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_automobiles_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -173530,7 +173529,7 @@ types market_states_panel
 										name = "stockpiling_automobiles_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_automobiles_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_automobiles_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -173594,7 +173593,7 @@ types market_states_panel
 
 										name = "stockpiling_automobiles_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_automobiles_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_automobiles_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -175154,7 +175153,7 @@ types market_states_panel
 
 										name = "stockpiling_telephones_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_telephones_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_telephones_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -175181,7 +175180,7 @@ types market_states_panel
 										name = "stockpiling_telephones_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_telephones_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_telephones_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -175245,7 +175244,7 @@ types market_states_panel
 
 										name = "stockpiling_telephones_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_telephones_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_telephones_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -176805,7 +176804,7 @@ types market_states_panel
 
 										name = "stockpiling_radios_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_radios_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_radios_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -176832,7 +176831,7 @@ types market_states_panel
 										name = "stockpiling_radios_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_radios_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_radios_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -176896,7 +176895,7 @@ types market_states_panel
 
 										name = "stockpiling_radios_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_radios_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_radios_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -178456,7 +178455,7 @@ types market_states_panel
 
 										name = "stockpiling_opium_var_state"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_opium_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_opium_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -178483,7 +178482,7 @@ types market_states_panel
 										name = "stockpiling_opium_var_state_store"
 
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_opium_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_opium_var_state')]"
 											min = 0
 											max = 1000000
 										}
@@ -178547,7 +178546,7 @@ types market_states_panel
 
 										name = "stockpiling_opium_var_state_release"
 										blockoverride "values" {
-											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_opium_var_state')|=+D]"
+											value = "[GetPlayer.MakeScope.ScriptValue('stockpiling_opium_var_state')]"
 											min = 0
 											max = 1000000
 										}
