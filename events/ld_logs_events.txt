@@ -1,0 +1,11 @@
+﻿namespace = zz_ef_logs
+
+# Console: "event zz_ef_logs.1" -- switches the EF* debug logs on for this game (scripted_triggers/ld_logs_triggers.txt).
+zz_ef_logs.1 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		set_global_variable = zz_ef_logs_on
+	}
+}

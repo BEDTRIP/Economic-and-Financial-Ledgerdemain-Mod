@@ -49,6 +49,6 @@ zz_ef_consol_step = {
 				var:zz_ef_f_cons_sale > 0
 			}
 		}
-		debug_log = "EFS|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|debt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_consol_debt_v')|0]|sale [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_cons_sale')|0]|int [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_cons_int')|0]|buy [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_cons_buy')|0]|out [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_consol_output')|1]|price [THIS.GetCountry.MakeScope.ScriptValue('bond_price')|2]|grt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gov_rate_target')|4]|d_gdp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_consol_debt_to_gdp')|3]"
+		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFS|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|debt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_consol_debt_v')|0]|sale [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_cons_sale')|0]|int [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_cons_int')|0]|buy [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_cons_buy')|0]|out [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_consol_output')|1]|price [THIS.GetCountry.MakeScope.ScriptValue('bond_price')|2]|grt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gov_rate_target')|4]|d_gdp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_consol_debt_to_gdp')|3]" }
 	}
 }

@@ -115,7 +115,7 @@ zz_ef_fx_liab_trim = {
 			else_if = { limit = { has_law = law_type:law_thaler_prussian_thaler_currency } every_country = { limit = { NOT = { this = scope:zz_fxt_issuer } NOT = { has_law = law_type:law_thaler_prussian_thaler_currency } has_modifier = has_central_bank } capital = { if = { limit = { has_variable = stockpiling_thaler_prussian_thaler_state_1 } change_variable = { name = stockpiling_thaler_prussian_thaler_state_1 multiply = scope:zz_fxt_issuer.var:zz_ef_fxt_k } } } } }
 			else_if = { limit = { has_law = law_type:law_thaler_saxon_thaler_currency } every_country = { limit = { NOT = { this = scope:zz_fxt_issuer } NOT = { has_law = law_type:law_thaler_saxon_thaler_currency } has_modifier = has_central_bank } capital = { if = { limit = { has_variable = stockpiling_thaler_saxon_thaler_state_1 } change_variable = { name = stockpiling_thaler_saxon_thaler_state_1 multiply = scope:zz_fxt_issuer.var:zz_ef_fxt_k } } } } }
 		}
-		debug_log = "EFN|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|trim|liab [THIS.GetCountry.MakeScope.Var('zz_ef_fxt_liab').GetValue|0]|cap [THIS.GetCountry.MakeScope.Var('zz_ef_fxt_cap').GetValue|0]|k [THIS.GetCountry.MakeScope.Var('zz_ef_fxt_k').GetValue|4]|after [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fx_liab')|0]"
+		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFN|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|trim|liab [THIS.GetCountry.MakeScope.Var('zz_ef_fxt_liab').GetValue|0]|cap [THIS.GetCountry.MakeScope.Var('zz_ef_fxt_cap').GetValue|0]|k [THIS.GetCountry.MakeScope.Var('zz_ef_fxt_k').GetValue|4]|after [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fx_liab')|0]" }
 	}
 }
 

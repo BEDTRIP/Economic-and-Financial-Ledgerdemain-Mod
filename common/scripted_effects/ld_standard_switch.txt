@@ -127,6 +127,6 @@ zz_ef_std_switch_after = {
 			}
 			set_variable = { name = money_value_target_1 value = var:zz_ef_std_parity_new }
 		}
-		debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|std_switch|old [THIS.GetCountry.MakeScope.Var('zz_ef_std_old').GetValue|0]|parity_old [THIS.GetCountry.MakeScope.Var('zz_ef_std_parity_old').GetValue|4]|parity [THIS.GetCountry.MakeScope.Var('money_value_target_1').GetValue|4]|cover [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_cover')|3]"
+		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|std_switch|old [THIS.GetCountry.MakeScope.Var('zz_ef_std_old').GetValue|0]|parity_old [THIS.GetCountry.MakeScope.Var('zz_ef_std_parity_old').GetValue|4]|parity [THIS.GetCountry.MakeScope.Var('money_value_target_1').GetValue|4]|cover [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_cover')|3]" }
 	}
 }

@@ -207,7 +207,7 @@ national_capacity_variable_list = {
 	# the reference now. Line EFE.
 	every_country = {
 		limit = { country_rank >= rank_value:great_power }
-		debug_log = "EFE|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|note [THIS.GetCountry.MakeScope.Var('country_credit_note_fixe').GetValue|0]|cover [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_cover')|3]|cap_g [THIS.GetCountry.MakeScope.ScriptValue('national_capacity_in_gold')|0]|std [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_std_code')|0]|cb [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_has_cb_v')|0]|ref [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_is_reference_v')|0]"
+		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFE|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|note [THIS.GetCountry.MakeScope.Var('country_credit_note_fixe').GetValue|0]|cover [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_cover')|3]|cap_g [THIS.GetCountry.MakeScope.ScriptValue('national_capacity_in_gold')|0]|std [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_std_code')|0]|cb [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_has_cb_v')|0]|ref [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_is_reference_v')|0]" }
 	}
     every_country = {
         limit = {
@@ -264,7 +264,7 @@ national_capacity_variable_list = {
             # at 1837.12.29, Britain 10.1M, and the reference stayed with Britain -- the log of the candidates and the pick
             every_in_list = {
                 variable = reference_currency_list_1
-                debug_log = "EFE|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|cand|cap_g [THIS.GetCountry.MakeScope.ScriptValue('national_capacity_in_gold')|0]"
+                if = { limit = { zz_ef_logs_on = yes } debug_log = "EFE|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|cand|cap_g [THIS.GetCountry.MakeScope.ScriptValue('national_capacity_in_gold')|0]" }
             }
             ordered_in_list = {
                 variable = reference_currency_list_1
@@ -285,7 +285,7 @@ national_capacity_variable_list = {
 
 			every_in_list = {
 				variable = reference_currency_country_1
-				debug_log = "EFE|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|pick"
+				if = { limit = { zz_ef_logs_on = yes } debug_log = "EFE|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|pick" }
 			}
 			if = {
 				limit = { any_in_list = { variable = reference_currency_country_1 } }

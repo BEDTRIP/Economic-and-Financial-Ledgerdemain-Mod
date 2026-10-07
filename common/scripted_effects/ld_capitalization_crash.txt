@@ -109,8 +109,7 @@ zz_ef_cap_monthly_crash_check = {
 				}
 				### game.log: which country crashed and when (2026-09-25: the
 				### 1847 run crashed someone once, and the log could not say who).
-				debug_log = "ZZEF crash: equity fell by more than half in a year"
-				debug_log_scopes = yes
+				if = { limit = { zz_ef_logs_on = yes } debug_log = "ZZEF crash: equity fell by more than half in a year" debug_log_scopes = yes }
 				financial_crash = yes
 			}
 		}

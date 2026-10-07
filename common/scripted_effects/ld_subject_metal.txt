@@ -37,7 +37,7 @@ zz_ef_cb_state_owner_step = {
 					}
 					set_variable = { name = zz_ef_cb_owner value = owner }
 				}
-				debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|cb_state_lost"
+				if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|cb_state_lost" }
 			}
 			if = { limit = { has_variable = gold_state_1 } set_variable = { name = gold_state_1 value = 0 } }
 			if = { limit = { has_variable = silver_state_1 } set_variable = { name = silver_state_1 value = 0 } }
