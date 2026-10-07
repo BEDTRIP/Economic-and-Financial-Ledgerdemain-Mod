@@ -13,6 +13,7 @@
 #     the buildings' cash (zz_ef_cb_metal_start_step, var:zz_ef_cb_start_due); E&F's metal from history is not taken
 #     (its scale is ~10 times our money); until then the CB does not trade metal (Д.2);
 #   * a country without a CB on a metal standard: E&F's metal of its CB states goes to the pops (В4), not to nobody;
+#   * E&F's metal outside a CB state (history writes it before the country has a CB -- Bavaria) -- the pops' too (Д.R1.1);
 #   * the pops' metal: 5% of GDP with a CB, 20% without (В4: a traditional economy saves in metal), or E&F's metal of a
 #     CB-less country if more; once;
 #   * the banks' metal: the reserve norm x the start deposits -- at the first receiver (zz_ef_metal_start_banks).
@@ -38,6 +39,22 @@ zz_ef_metal_start_step = {
 			limit = { has_modifier = central_bank_historic_place }
 			if = { limit = { has_variable = gold_state_1 } set_variable = { name = gold_state_1 value = 0 } }
 			if = { limit = { has_variable = silver_state_1 } set_variable = { name = silver_state_1 value = 0 } }
+		}
+	}
+	# Д.R1.1 (8.10): E&F's metal outside a CB state -- history writes it into var:central_bank_location before the
+	# country has a CB (r1008_001240: Bavaria 37.1M gold in a state with no central_bank_historic_place; the first step
+	# did not see it, the CB made later counted it as its metal from nothing) -- the pops' too (В4), and 0
+	every_scope_state = {
+		limit = { NOT = { has_modifier = central_bank_historic_place } }
+		if = {
+			limit = { has_variable = gold_state_1 }
+			owner = { change_variable = { name = zz_ef_ms_ef_g add = PREV.var:gold_state_1 } }
+			set_variable = { name = gold_state_1 value = 0 }
+		}
+		if = {
+			limit = { has_variable = silver_state_1 }
+			owner = { change_variable = { name = zz_ef_ms_ef_s add = PREV.var:silver_state_1 } }
+			set_variable = { name = silver_state_1 value = 0 }
 		}
 	}
 	zz_ef_metal_start_cb_after = yes
