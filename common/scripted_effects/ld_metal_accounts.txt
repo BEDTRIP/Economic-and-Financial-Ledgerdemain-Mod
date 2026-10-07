@@ -78,10 +78,9 @@ zz_ef_cb_metal_start_step = {
 			# 40% before them, and read 0.27-0.30 once they came in)
 			has_variable = zz_ef_pop_savings
 			zz_ef_agg_m2_to_gdp > 0.1
-			# E&F makes the CB's state in the first month and writes its metal there by its own formula (r1007_200927:
-			# Denmark, Bolivia, Brazil, Qing... -- the CB's metal 0 at the first step, 22M gold + 344M silver a week later,
-			# 3.9 bn gold in the world line from nothing; in R1а's base too): the start waits for the CB's state and
-			# scales what E&F wrote
+			# a CB state to hold the metal (E&F writes the CB's metal in the first month by its own formula -- r1007_200927:
+			# Denmark, Bolivia, Brazil, Qing... 0 at the first step, 22M gold + 344M silver a week later); the start scales
+			# what E&F wrote and counts it as the start's stock (below)
 			any_scope_state = { has_modifier = central_bank_historic_place }
 		}
 		remove_variable = zz_ef_cb_start_due
@@ -134,6 +133,17 @@ zz_ef_cb_metal_start_step = {
 			remove_variable = zz_ef_metal_rescale
 		}
 		zz_ef_metal_start_cb_after = yes
+		# E&F's metal written since the last snapshot (its CB made in the first month, r1007_201854: Denmark 21.5M gold +
+		# 333M silver a week after the first step) is the start's stock too, not «прочее» of the CB's metal
+		if = {
+			limit = { has_variable = zz_ef_mt_prev_g }
+			set_variable = { name = zz_ef_ms_g0 value = { value = var:zz_ef_ms_g0 subtract = var:zz_ef_mt_prev_g } }
+			set_variable = { name = zz_ef_ms_s0 value = { value = var:zz_ef_ms_s0 subtract = var:zz_ef_mt_prev_s } }
+			change_variable = { name = zz_ef_mt_start_adj_g add = var:zz_ef_ms_g0 }
+			change_variable = { name = zz_ef_mt_start_adj_s add = var:zz_ef_ms_s0 }
+			zz_ef_wm_add = { KEY = start_gold VALUE = var:zz_ef_ms_g0 }
+			zz_ef_wm_add = { KEY = start_silver VALUE = var:zz_ef_ms_s0 }
+		}
 		set_variable = { name = zz_ef_ms_what value = 3 }
 		zz_ef_metal_start_log = yes
 	}
