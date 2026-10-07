@@ -494,7 +494,7 @@ zz_ef_leak_week = {
 	add = zz_ef_v_w_dep_out
 	add = zz_ef_v_w_dep_int
 	subtract = zz_ef_v_f_pool_other
-	subtract = zz_ef_v_d_tc
+	# R1а.7 (Д.5): the trade centres' cash is business cash (M1), not abroad -- no longer taken out
 	subtract = zz_ef_tr_other_net
 	# M.3 (4.10): Hume's coined / withdrawn money -- the CB's, not pops'
 	subtract = zz_ef_v_w_hume_money
@@ -2349,14 +2349,15 @@ zz_ef_money_median = {
 # have no payer's line. The world market is a pool: what the importers pay is shared by the exporters and the fees'
 # receivers (zz_ef_wtr_kr: min(1, imports / (exports + fees)) of the window before); if they claim less, the importers
 # pay as much (zz_ef_wtr_kp). The fees' part not covered goes off the flow (zz_ef_tfees_cut).
+# R1а.7: from the step's exports / imports (var:zz_ef_f_exp / _imp, zz_ef_trade_step), not summed again.
 zz_ef_trade_net_week = {
 	value = 0
 	if = {
 		limit = { exists = market market.owner = this }
-		value = zz_ef_trade_exports_week
+		value = zz_ef_v_f_exp
 		multiply = zz_ef_wtr_kr_v
 		subtract = {
-			value = zz_ef_trade_imports_week
+			value = zz_ef_v_f_imp
 			multiply = zz_ef_wtr_kp_v
 		}
 		# В3.3 (2.10): customs union members with their own currency settle

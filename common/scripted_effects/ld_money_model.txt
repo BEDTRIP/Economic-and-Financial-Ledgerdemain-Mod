@@ -74,6 +74,8 @@ zz_ef_money_model_step = {
 	set_variable = { name = zz_ef_bcash value = zz_ef_building_cash_sum }
 	# В2 (7.10): the Banks' cash -- the banks' own money, out of M1 / M2
 	set_variable = { name = zz_ef_bkcash value = zz_ef_bank_cash_sum }
+	# R1а.7 (Д.5): the trade, one measure, once a step
+	zz_ef_trade_step = yes
 	# UI.7 (3.10): the CB's metal rescaled this step, in money (zz_ef_metal_rescale_step)
 	set_variable = { name = zz_ef_f_cb_rescale value = 0 }
 	# foreign currency in the reserves (night 2, item 2), before the rescale
@@ -475,27 +477,10 @@ zz_ef_money_hook_receive = {
 			}
 			if = { limit = { zz_ef_logs_on = yes } debug_log = "EFA|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|aint [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_aint')|0]|cbl_int [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_cbl_int')|0]|cbm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cbm_v')|0]|fdi [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fdi_mod_v')|0]" }
 		}
-		# night 2, item 4: trade and dividends abroad in money, for the leak
-		# and Hume (values file)
-		set_variable = { name = zz_ef_f_trade value = zz_ef_trade_net_week }
-		# Е.3 (5.10): imports of the week for the balance of payments' "paid out" group (exports = net + imports)
-		set_variable = { name = zz_ef_f_imp value = zz_ef_trade_imports_week }
-		# В1.6 (5.10 evening): exports at base prices and the treasury's trade fees, for the world trade pool
-		set_variable = { name = zz_ef_f_exp value = zz_ef_trade_exports_week }
+		# R1а.7: the trade -- measured once at the step (zz_ef_trade_step: var:zz_ef_f_trade / _imp / _exp), read here
+		# by the clearing and the balance of payments; the treasury's trade fees from the bridge
 		set_variable = { name = zz_ef_f_tfees value = scope:g_tfees }
-		zz_ef_sw = { F = trade }
-		zz_ef_sw = { F = imp }
-		zz_ef_sw = { F = exp }
 		zz_ef_sw = { F = tfees }
-		# В3.3: a customs union member's account, for the market owner's side
-		if = {
-			limit = { zz_ef_cu_member = yes }
-			set_variable = { name = zz_ef_member_trade value = var:zz_ef_f_trade }
-		}
-		else_if = {
-			limit = { has_variable = zz_ef_member_trade }
-			remove_variable = zz_ef_member_trade
-		}
 		set_variable = { name = zz_ef_f_trade_fin value = zz_ef_trade_fin_week }
 		set_variable = { name = zz_ef_f_div value = zz_ef_div_net_week }
 		zz_ef_sw = { F = trade_fin }
@@ -521,6 +506,30 @@ zz_ef_money_hook_receive = {
 			# inflow and abr: at the step the log read last week's (run e0_4)
 			if = { limit = { zz_ef_logs_on = yes } zz_ef_money_log_rest = yes }
 		}
+	}
+}
+
+# R1а.7 (Д.5, Р2; схема 3.1): the trade -- ONE posting a step, the market's trade at the goods' base prices
+# (zz_ef_trade_net_week). Exports and imports are summed once into var:zz_ef_f_exp / _imp (53 goods each; was 3-4
+# passes a week -- the receiver's net, imports, exports, the world line), the net from them into var:zz_ef_f_trade;
+# the clearing (zz_ef_ext_net_week), the balance of payments and the world trade pool read these variables. The
+# trade centres' cash is business cash (M1), not a payment abroad (check 7.10: its change is tens of times smaller
+# than the trade and unrelated to it).
+zz_ef_trade_step = {
+	set_variable = { name = zz_ef_f_exp value = zz_ef_trade_exports_week }
+	set_variable = { name = zz_ef_f_imp value = zz_ef_trade_imports_week }
+	set_variable = { name = zz_ef_f_trade value = zz_ef_trade_net_week }
+	zz_ef_sw = { F = trade }
+	zz_ef_sw = { F = imp }
+	zz_ef_sw = { F = exp }
+	# В3.3: a customs union member's account, for the market owner's side
+	if = {
+		limit = { zz_ef_cu_member = yes }
+		set_variable = { name = zz_ef_member_trade value = var:zz_ef_f_trade }
+	}
+	else_if = {
+		limit = { has_variable = zz_ef_member_trade }
+		remove_variable = zz_ef_member_trade
 	}
 }
 
