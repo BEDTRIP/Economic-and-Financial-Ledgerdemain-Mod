@@ -1,0 +1,31 @@
+﻿# from common/script_values/ld_money_model_values.txt
+
+# The cover the first rescale aims at (version 7): against the money in
+# circulation, but at least 0.45 GDP -- the money expected once the buildings'
+# cash is in (0.12 cash at hand + ~0.33 business cash).
+zz_ef_rescale_money = {
+	value = money_supply
+	if = {
+		# the first rescale (the second one comes after the due var is gone); 6.10: the savings' norm + ~0.33 GDP of
+		# business cash (the savings start at their norm, zz_ef_pop_start_savings)
+		limit = { has_variable = zz_ef_metal_rescale_due }
+		value = zz_ef_sav_norm_gdp
+		add = 0.33
+		multiply = gdp
+		min = money_supply
+	}
+	min = 1
+}
+zz_ef_cb_cover_ref = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = money_value_target_1
+			var:money_value_target_1 > 0
+		}
+		value = national_capacity
+		divide = zz_ef_capacity_per_metal
+		divide = zz_ef_rescale_money
+		divide = var:money_value_target_1
+	}
+}

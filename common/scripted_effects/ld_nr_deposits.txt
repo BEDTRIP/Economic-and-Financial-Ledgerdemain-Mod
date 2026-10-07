@@ -128,11 +128,11 @@ zz_ef_nr_dep_step = {
 			zz_ef_nr_issuer = yes
 			NOT = { has_variable = zz_ef_nr_started }
 			has_variable = zz_ef_parity_version
-			NOT = { has_variable = zz_ef_metal_rescale_due }
 		}
-		zz_ef_fx_liab_trim = { BASE = zz_ef_agg_m2 }
 		set_variable = { name = zz_ef_nr_started value = yes }
-		set_variable = { name = zz_ef_nr_dep value = 0 }
+		if = { limit = { NOT = { has_variable = zz_ef_nr_dep } } set_variable = { name = zz_ef_nr_dep value = 0 } }
+		set_variable = { name = zz_ef_t_liab_all value = zz_ef_fx_liab_all }
+		zz_ef_post = { FROM = zz_ef_bank_capital TO = zz_ef_nr_dep V = var:zz_ef_t_liab_all }
 	}
 	if = {
 		limit = {

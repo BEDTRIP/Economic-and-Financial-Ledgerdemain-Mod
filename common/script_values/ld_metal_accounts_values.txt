@@ -15,28 +15,20 @@
 zz_ef_gold_units_per_good = 100
 zz_ef_silver_units_per_good = 775
 
-# Gold per unit of money at the parity (0 = no parity): gold standard and bimetallism count their parity in gold,
-# a silver standard in silver.
-zz_ef_gold_per_money_par = {
+# R1б.1 (Д.1, 8.10): the engine's money is one unit for every country -- 1 unit of money = 1 gold unit of the reserves
+# at the base price (gold costs 100 = one good). The metal is counted in it at a fixed rate, the parity is not in it
+# (the parity -- var:money_value_target_1, E&F's historical one -- sets only the rate between currencies and the labels
+# in national units). Native metal units per unit of money: gold and bimetallism (counted in gold) 1, a silver
+# standard -- silver at the market rate.
+zz_ef_metal_per_money = {
 	value = 1
 	if = {
-		limit = {
-			has_variable = money_value_target_1
-			var:money_value_target_1 > 0
-			OR = {
-				has_law = law_type:law_gold_standard
-				has_law = law_type:law_bimetallism_standard
-				has_law = law_type:law_silver_standard
-			}
-		}
-		value = var:money_value_target_1
-		if = {
-			limit = { has_law = law_type:law_silver_standard }
-			multiply = silver_to_gold_rate
-		}
+		limit = { has_law = law_type:law_silver_standard }
+		value = gold_to_silver_rate
 	}
-	min = 0.00001
 }
+# Gold per unit of money: 1 (Д.1); was the parity, ~1 since Д2.13.
+zz_ef_gold_per_money_par = 1
 
 # The country keeps its metal in silver (silver standard; no CB and no gold / bimetallic standard -- Asia's silver
 # economies) or in gold. Bimetallism: both, half and half.
@@ -152,10 +144,10 @@ zz_ef_credit_room = {
 	min = 0
 }
 
-# ---- step 6: savings at their norm (Д2.20, Д2.22 в) --------------------------
-# The norm of pops' savings: 0.6 of a year's GDP at a 0% deposit rate, 0.3 at 6%, linear, within 0.3..0.6 (as the
-# cash norm moves with the rate). Over it, 10% of the gap a week leaves the money -- into wealth, as the engine
-# turns pops' leftover income into wealth (Д2.20: the same leftover came back as deposits too, twice).
+# ---- the norm of pops' savings (Д2.22 в) --------------------------------------
+# 0.6 of a year's GDP at a 0% deposit rate, 0.3 at 6%, linear, within 0.3..0.6. Only the start reads it (the start
+# deposits, zz_ef_pop_start_savings; the start's money, zz_ef_start_money) and the pops' card; nothing is written off
+# over it (the write-off "into wealth" -- _archive/ld_pop_savings_guesses/).
 zz_ef_sav_norm_gdp = {
 	value = zz_ef_deposit_rate
 	multiply = -5
@@ -347,10 +339,10 @@ zz_ef_cb_buy_mult = {
 	multiply = 5000
 	min = -100
 	max = 1000
-	# the start (until the week-12 recount): the method's own -- r1006_141026, the start's cover read 0.33 for its first
-	# weeks, the CB bought +355..+491% and gold in London went to 161
+	# until the CB's start metal (Д.2, var:zz_ef_cb_start_due): the method's own -- r1006_141026, the start's cover read
+	# 0.33 for its first weeks, the CB bought +355..+491% and gold in London went to 161
 	if = {
-		limit = { has_variable = zz_ef_metal_rescale_due }
+		limit = { has_variable = zz_ef_cb_start_due }
 		value = 0
 	}
 }
@@ -361,9 +353,9 @@ zz_ef_cb_sell_units = {
 	if = {
 		limit = {
 			zz_ef_cb_cover > zz_ef_cb_sell_cover
-			# not during the start (until the week-12 recount: r1006_135058, the first step read 0.75 cover before the
-			# engine filled the business cash, and Britain sold 440 gold)
-			NOT = { has_variable = zz_ef_metal_rescale_due }
+			# not before the CB's start metal (Д.2: r1006_135058, the first step read 0.75 cover before the engine filled
+			# the business cash, and Britain sold 440 gold)
+			NOT = { has_variable = zz_ef_cb_start_due }
 		}
 		value = zz_ef_cb_cover
 		subtract = zz_ef_cb_sell_cover
@@ -405,7 +397,7 @@ zz_ef_cb_buyback_units = {
 	if = {
 		limit = {
 			zz_ef_cb_cover < zz_ef_cover_normal
-			NOT = { has_variable = zz_ef_metal_rescale_due }
+			NOT = { has_variable = zz_ef_cb_start_due }
 		}
 		value = zz_ef_cover_normal
 		subtract = zz_ef_cb_cover

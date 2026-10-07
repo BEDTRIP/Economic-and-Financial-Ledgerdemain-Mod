@@ -1,0 +1,142 @@
+﻿# from common/scripted_effects/ld_money_model.txt
+
+# EF.48 version 7 (1.10 evening): the CB's metal rescaled to cover
+# zz_ef_cover_normal (40%) of the money in circulation at the historical
+# parity. Metal standards with a CB only.
+zz_ef_metal_rescale_step = {
+	if = {
+		limit = {
+			has_modifier = has_central_bank
+			has_variable = money_value_target_1
+			var:money_value_target_1 > 0
+			OR = {
+				has_law = law_type:law_gold_standard
+				has_law = law_type:law_silver_standard
+				has_law = law_type:law_bimetallism_standard
+			}
+			zz_ef_cb_cover_ref > 0
+			# 6.10: some metal to scale (E&F's reserves read 0.01 with none)
+			central_bank_reserves > 1
+		}
+		set_variable = { name = zz_ef_metal_rescale value = zz_ef_cover_normal }
+		change_variable = { name = zz_ef_metal_rescale divide = zz_ef_cb_cover_ref }
+		# UI.7 (3.10): the CB card shows the rescale as a flow -- not at the
+		# first step, where the account has no change yet (run e0_5: +1 bn "other")
+		if = {
+			limit = { has_variable = zz_ef_prev_cbm }
+			set_variable = { name = zz_ef_f_cb_rescale value = var:zz_ef_metal_rescale }
+			change_variable = { name = zz_ef_f_cb_rescale subtract = 1 }
+			change_variable = { name = zz_ef_f_cb_rescale multiply = zz_ef_cb_money }
+		}
+		# every CB state, as E&F's gold_state_native_for_stockpile sums them
+		every_scope_state = {
+			limit = {
+				has_modifier = central_bank_historic_place
+			}
+			if = {
+				limit = { has_variable = gold_state_1 }
+				change_variable = { name = gold_state_1 multiply = owner.var:zz_ef_metal_rescale }
+			}
+			if = {
+				limit = { has_variable = silver_state_1 }
+				change_variable = { name = silver_state_1 multiply = owner.var:zz_ef_metal_rescale }
+			}
+		}
+		if = {
+			limit = { has_variable = zz_ef_fx_metal }
+			change_variable = { name = zz_ef_fx_metal multiply = var:zz_ef_metal_rescale }
+		}
+	}
+	# Д2.23 (6.10): a CB with no metal at all gets the 40% too (the start's stock), in a CB state
+	else_if = {
+		limit = {
+			has_modifier = has_central_bank
+			has_variable = money_value_target_1
+			var:money_value_target_1 > 0
+			OR = {
+				has_law = law_type:law_gold_standard
+				has_law = law_type:law_silver_standard
+				has_law = law_type:law_bimetallism_standard
+			}
+			any_scope_state = { has_modifier = central_bank_historic_place }
+		}
+		set_variable = { name = zz_ef_metal_rescale value = zz_ef_rescale_money }
+		change_variable = { name = zz_ef_metal_rescale multiply = zz_ef_cover_normal }
+		change_variable = { name = zz_ef_metal_rescale multiply = var:money_value_target_1 }
+		random_scope_state = {
+			limit = { has_modifier = central_bank_historic_place }
+			if = {
+				limit = { owner = { has_law = law_type:law_silver_standard } }
+				if = { limit = { NOT = { has_variable = silver_state_1 } } set_variable = { name = silver_state_1 value = 0 } }
+				change_variable = { name = silver_state_1 add = owner.var:zz_ef_metal_rescale }
+			}
+			else = {
+				if = { limit = { NOT = { has_variable = gold_state_1 } } set_variable = { name = gold_state_1 value = 0 } }
+				change_variable = { name = gold_state_1 add = owner.var:zz_ef_metal_rescale }
+			}
+		}
+	}
+}
+
+
+# in zz_ef_money_model_step:
+	# M.8 (4.10): subjects' and CB-less countries' E&F metal recounted to 40% of their money at week 12 -- removed
+	# (М, Д2.13, 6.10: a subject's metal is only what it bought); E&F's start metal of CB-less countries is taken
+	# off at the first step (zz_ef_metal_start_step), the overlord gets nothing from its subjects.
+
+	# Gold parity re-anchor, once per change of what the money supply counts.
+	# The money supply is the engine's money now (treasury + businesses' cash +
+	# pool; since 2026-09-30 evening, version 2 -- E&F's goods counts are out),
+	# Version 6 (1.10 evening): the national capacity x 2.5 -- parity = value
+	# with the metal covering 40% of the money (zz_ef_capacity_per_metal).
+	# Version 5 (1.10 day): the money in circulation now holds pops' savings
+	# at hand too (the user's M2 - M0).
+	# Version 4 (1.10, item 11): the treasury left the money supply.
+	# Version 3 (1.10 night, EF.48 item 6): E&F's trade balance left the
+	# national capacity (the CB's metal moves with the flows abroad instead).
+	# a fraction of what E&F counted, so every currency is worth several times
+	# its gold parity and the metal cover reads 200%+ (Britain 1848: 15.3 vs
+	# 7.32). E&F sets the parity itself from the value when a standard is
+	# adopted (money_value_target_valided); the same here: parity = today's
+	# value, cover back to ~100%. Metal standards with a central bank only.
+	# Version 7 (1.10 evening, the user): a NEW game keeps E&F's historical
+	# parity (history/global/99_ef_history_global_variable.txt: the pound 7.32
+	# -- grams of gold in a sovereign, the franc 0.75, ...); our re-anchors put
+	# the pound at 60-80. E&F gives the CB metal = parity x its own money (a
+	# counter ~10 times our money in circulation), i.e. ~1000% cover of ours.
+	# So the CB's metal is rescaled once: 40% cover of the money in
+	# circulation at the historical parity (zz_ef_cover_normal); with the
+	# capacity x 2.5 the value starts at the parity. Older saves keep their
+	# re-anchored parity (versions <= 6) -- test with a new game.
+	# Twice: at the first step against the money expected (at least 0.45 GDP
+	# -- run 15: at the first step the engine had not filled the buildings'
+	# cash yet, Russia's M2 was 2M, France's 0, and the metal was cut to
+	# nothing), and at week 12 against the money itself, if it is over 10% of
+	# GDP by then (else a week later).
+	# Version 8 (stage 2, night 6.10, Д2.23 / Д2.13): the parity ~1 for everyone and the start's metal accounts
+	# (scripted_effects/zz_ef_metal_accounts.txt, zz_ef_metal_start_step) -- the week-12 recount stays, both are the
+	# start's stock in the world line of metal.
+	if = {
+		limit = { NOT = { has_variable = zz_ef_parity_version } }
+		set_variable = { name = zz_ef_parity_version value = 8 }
+		set_variable = { name = zz_ef_metal_rescale_due value = 11 }
+		zz_ef_metal_start_step = yes
+		# Д2.31 (6.10 day): our currency held by other CBs cut to 5% of the money expected (zz_ef_nr_deposits.txt)
+		zz_ef_fx_liab_trim = { BASE = zz_ef_rescale_money }
+	}
+	else_if = {
+		limit = { has_variable = zz_ef_metal_rescale_due }
+		change_variable = { name = zz_ef_metal_rescale_due subtract = 1 }
+		if = {
+			limit = {
+				var:zz_ef_metal_rescale_due <= 0
+				zz_ef_agg_m2_to_gdp > 0.1
+			}
+			remove_variable = zz_ef_metal_rescale_due
+			zz_ef_metal_start_cb_before = yes
+			zz_ef_metal_rescale_step = yes
+			zz_ef_metal_start_cb_after = yes
+			set_variable = { name = zz_ef_ms_what value = 3 }
+			zz_ef_metal_start_log = yes
+		}
+	}

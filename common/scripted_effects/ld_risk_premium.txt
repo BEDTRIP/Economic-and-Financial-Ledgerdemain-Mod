@@ -9,26 +9,21 @@ zz_ef_risk_parity_changed = {
 
 # The penalty grows by $PEN$ (at most zz_ef_risk_fx_max) and fades out over 5 years from now.
 zz_ef_risk_fx_add = {
+	# R1б.1 (8.10): from the first day (was: from week 13 -- the start re-anchored the parities)
 	if = {
-		limit = {
-			has_variable = zz_ef_weeks_run
-			var:zz_ef_weeks_run >= 13
-		}
-		if = {
-			limit = { NOT = { has_variable = zz_ef_risk_fx_pen } }
-			set_variable = { name = zz_ef_risk_fx_pen value = 0 }
-		}
-		change_variable = { name = zz_ef_risk_fx_pen add = $PEN$ }
-		set_variable = {
-			name = zz_ef_risk_fx_pen
-			value = {
-				value = var:zz_ef_risk_fx_pen
-				max = zz_ef_risk_fx_max
-			}
-		}
-		set_variable = { name = zz_ef_risk_fx_step value = var:zz_ef_risk_fx_pen }
-		change_variable = { name = zz_ef_risk_fx_step divide = zz_ef_risk_fx_months }
+		limit = { NOT = { has_variable = zz_ef_risk_fx_pen } }
+		set_variable = { name = zz_ef_risk_fx_pen value = 0 }
 	}
+	change_variable = { name = zz_ef_risk_fx_pen add = $PEN$ }
+	set_variable = {
+		name = zz_ef_risk_fx_pen
+		value = {
+			value = var:zz_ef_risk_fx_pen
+			max = zz_ef_risk_fx_max
+		}
+	}
+	set_variable = { name = zz_ef_risk_fx_step value = var:zz_ef_risk_fx_pen }
+	change_variable = { name = zz_ef_risk_fx_step divide = zz_ef_risk_fx_months }
 }
 
 # Monthly, every country (zz_ef_cb_rate_monthly): the suspension's start, the fade, the deficit's average.

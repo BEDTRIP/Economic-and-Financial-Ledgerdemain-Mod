@@ -79,11 +79,8 @@ zz_ef_clr_gpm_own = {
 			has_variable = money_value_target_1
 			var:money_value_target_1 > 0
 		}
-		value = var:money_value_target_1
-		if = {
-			limit = { has_law = law_type:law_silver_standard }
-			multiply = silver_to_gold_rate
-		}
+		# R1б.1 (Д.1): a metal standard's unit of the engine's money is 1 gold unit; the parity is not in it
+		value = 1
 	}
 	min = 0
 }

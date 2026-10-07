@@ -45,7 +45,7 @@
 
 ## Вызовы и связи
 - Кто зовёт: `ld_money_model.txt` — `zz_ef_rate_policy_costs`, `zz_ef_mp_step`, `zz_ef_gov_rate_*`, стройка; `base_rate_increase/reduce` — `zz_ef_rate_policy_costs`; E&F-законы — `zz_ef_mp_init/_clear`.
-- Что читает ЦБ из денежной модели: `zz_ef_cb_cover`, `zz_ef_cover_normal`, `zz_ef_inflation`, `zz_ef_circ_growth_year`, `zz_ef_gdp_growth_year`, `zz_ef_budget_week`, `zz_ef_weeks_run`, `zz_ef_value_floor_cover`.
+- Что читает ЦБ из денежной модели: `zz_ef_cb_cover`, `zz_ef_cover_normal`, `zz_ef_inflation`, `zz_ef_circ_growth_year`, `zz_ef_gdp_growth_year`, `zz_ef_budget_week`, `zz_ef_cb_start_due` (ИИ-политика курса — после стартового металла ЦБ), `zz_ef_value_floor_cover`.
 - `zz_ef_mp_can_work` требует металл. стандарт, паритет и `NOT zz_ef_cur_zone` (подданные зоны не девальвируют).
 - Закон `law_revaluation/devaluation` блокирует кнопки ставки (повышение/снижение, E&F-условия сохранены).
 - GUI: `gui/ld_cb_rate_panel.gui` — блоки ставки, правила, политики; строка девальвации скрыта по `zz_ef_mp_visible` (:9446); значения `zz_ef_cb_*_pp`, `zz_ef_mp_*_v`, `zz_ef_risk_*_pp` — для подсказок.

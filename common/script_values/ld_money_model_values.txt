@@ -578,6 +578,11 @@ zz_ef_pop_start_savings = {
 }
 zz_ef_pop_start_deposits = {
 	value = zz_ef_pop_start_savings
+	# R1б.1: out of the pool as it is
+	max = {
+		value = investment_pool
+		min = 0
+	}
 }
 # ---- pops' deposits (the receiver) -------
 # Deposit rate: the key rate - 1.5 pp, at least 0.5% (the banks' margin).
@@ -756,37 +761,17 @@ zz_ef_cb_cover = {
 		value = national_capacity
 		divide = zz_ef_capacity_per_metal
 		divide = money_supply
-		divide = var:money_value_target_1
+		divide = zz_ef_metal_per_money
 	}
 }
-# The cover the first rescale aims at (version 7): against the money in
-# circulation, but at least 0.45 GDP -- the money expected once the buildings'
-# cash is in (0.12 cash at hand + ~0.33 business cash).
-zz_ef_rescale_money = {
-	value = money_supply
-	if = {
-		# the first rescale (the second one comes after the due var is gone); 6.10: the savings' norm + ~0.33 GDP of
-		# business cash (the savings start at their norm, zz_ef_pop_start_savings)
-		limit = { has_variable = zz_ef_metal_rescale_due }
-		value = zz_ef_sav_norm_gdp
-		add = 0.33
-		multiply = gdp
-		min = money_supply
-	}
+# R1б.1 (8.10): the money expected once the buildings' cash is in, for the cut of our currency held abroad at the
+# first step (zz_ef_fx_liab_trim): the savings' norm + ~0.33 GDP of business cash, at least the money now.
+zz_ef_start_money = {
+	value = zz_ef_sav_norm_gdp
+	add = 0.33
+	multiply = gdp
+	min = money_supply
 	min = 1
-}
-zz_ef_cb_cover_ref = {
-	value = 0
-	if = {
-		limit = {
-			has_variable = money_value_target_1
-			var:money_value_target_1 > 0
-		}
-		value = national_capacity
-		divide = zz_ef_capacity_per_metal
-		divide = zz_ef_rescale_money
-		divide = var:money_value_target_1
-	}
 }
 # ---- the CB's reserves: interventions and mining (the user, 1.10 night) ---
 # E&F's interventions (scripted_effects/zz_ef_fx_deals.txt, generated): a
@@ -1662,8 +1647,9 @@ zz_ef_cb_metal_money = {
 # parity at a tiny value -- Spain, Ottomans, Belgium -- the CB's money jumped
 # to billions); with the historical parity and 40% cover (1.10 evening) the
 # reserves at parity are the cover itself, so the floor is gone.
+# R1б.1 (Д.1): the metal per unit of the engine's money (zz_ef_metal_per_money), the parity is not in it.
 zz_ef_cb_valuation = {
-	value = var:money_value_target_1
+	value = zz_ef_metal_per_money
 	max = 1000000
 	min = 0.00001
 }
