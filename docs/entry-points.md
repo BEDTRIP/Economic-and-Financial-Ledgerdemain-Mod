@@ -26,7 +26,7 @@
 | 5 | `history/global/00_ef_financial_global_variable.txt` (2 тыс.) | переменные облигаций/акций/займов по странам (436 `set_variable`) |
 | 6 | `history/global/00_ef_stockpile_global_variable.txt` | `looting_1_year` (счётчик грабежа ЦБ), `zz_ef_country_vars_set` (признак «страна уже инициализирована») |
 | 7 | `history/global/01_ef_state_global_variable.txt` | `GLOBAL = every_state`: переменные штатов (`gold_state_1`, `silver_state_1`, `test_var_*`, `stockpiling_*_state_1`) |
-| 8 | `history/global/99_ef_history_global_variable.txt` (2,7 тыс.) | исторические начальные условия: 312 `activate_law` (денежные системы, валюта страны), стартовые `gold_state_1`/`silver_state_1` через `var:central_bank_location`, `set_institution_investment_level`, `add_amendment` (биметаллические коэффициенты FRA/USA/NET и др.), 3 `create_pop`, `add_ideology = ideology_monetary_*` для ИГ |
+| 8 | `history/global/99_ef_history_global_variable.txt` (2,7 тыс.) | исторические начальные условия: 312 `activate_law` (денежные системы, валюта страны), стартовые `gold_state_1`/`silver_state_1` через `var:central_bank_location`, `set_institution_investment_level`, `add_amendment` (биметаллические коэффициенты FRA/USA/NET и др.), 3 `create_pop`, `add_ideology = ideology_monetary_*` для ИГ; свою валюту ЦБ кладёт в `stockpiling_<cur>_state_1` (10 % оборота E&F), чужих валют не раздаёт (`_archive/ef_start_fx_reserves/`) |
 | 9 | `history/global/PSC_global.txt` | `trigger_event = { on_action = set_construction_start }` — запуск PSC-стройки |
 | 10 | `history/global/zz_ef_currency_fix.txt` | после 99: валюта WUR; страны без валюты → `law_no_market_liquidity`; `currency_standards` странам с подушным налогом |
 | 11 | `history/global/zz_ef_init_stockpiling_state_vars.txt` | заводит 7 переменных `stockpiling_*_var_state_1` штатам (охрана `has_variable`) |
@@ -123,7 +123,6 @@ PSC-хук: `on_production_method_changed`, `on_building_built`, `on_acquired_te
 | EFB | `common/scripted_effects/ld_bond_ledger.txt:95` | книга облигаций страны: принципал, на руках, проценты, погашение, списание | недельный `zz_ef_bond_ledger_step` |
 | EFP | `common/scripted_effects/ld_bond_ledger.txt:571` | слот облигаций без продавца (`no_seller`) | `zz_ef_pb_no_seller` (слот `$N$`) |
 | EFS | `common/scripted_effects/ld_consols.txt:52` | консоли: долг, продажа, проценты, цена, цель ставки | недельный `zz_ef_consol_step` |
-| EFN | `common/scripted_effects/ld_nr_deposits.txt:118` | обрезка обязательств иностранных вкладов (`trim`) | `zz_ef_fx_liab_trim` |
 | EFW | `common/scripted_effects/ld_money_model.txt:392` | M0..M3, оборот, ЦБ, заграница, дельты (только игрок или ВВП > 20 млн) | недельный `zz_ef_money_model_step` |
 | EFG | `common/scripted_effects/ld_money_model.txt:743` | WORLD: потоки валюты по миру, клиринг | недельный (через `zz_ef_world_acc`) |
 | EFA | `common/scripted_effects/ld_money_model.txt:504` | проценты, ЦБ, прямые инвестиции | `zz_ef_bridge_apply` (недельный шаг) |

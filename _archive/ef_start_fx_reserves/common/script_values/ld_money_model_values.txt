@@ -1,0 +1,11 @@
+# Из common/script_values/ld_money_model_values.txt, перед блоком «the CB's reserves: interventions and mining», 8.10.2026.
+
+# R1б.1 (8.10): the money expected once the buildings' cash is in, for the cut of our currency held abroad at the
+# first step (zz_ef_fx_liab_trim): the savings' norm + ~0.33 GDP of business cash, at least the money now.
+zz_ef_start_money = {
+	value = zz_ef_sav_norm_gdp
+	add = 0.33
+	multiply = gdp
+	min = money_supply
+	min = 1
+}

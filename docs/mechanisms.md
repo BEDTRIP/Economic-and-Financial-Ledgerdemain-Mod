@@ -8,7 +8,7 @@
 коэффициент, закомментированный вызов); `мёртвый` — ни откуда не вызывается; `дубль` — считает то же или пишет те же
 счета, что модель `ld_*`. Строки файлов — на момент записи, при правке файла сдвигаются: искать по имени.
 
-Итого: мёртвый 4, выключен 0, дубль 4, живой 225.
+Итого: мёртвый 4, выключен 0, дубль 4, живой 224.
 
 ## Денежная модель и металл (`money-model.md`)
 
@@ -95,8 +95,7 @@
 | Посев банков по рынку zz_ef_bank_seed_* | живой | common/scripted_effects/ld_bank_seed.txt:10,65,576,1002; common/on_actions/ld_bank_on_actions.txt:2-11 | on_monthly_pulse_country → zz_ef_bank_monthly → zz_ef_bank_seed_step; лог EFK | здания «Банк» в штатах |
 | Центральный банк building_bank + pmg_minting_type/pmg_monetary_policy | живой | common/buildings/ef_15_bank.txt; common/production_methods/15_ef_bank.txt:18-250 | создаётся zz_ef_cm_create_owned_bank из 09_introduction_building_lvl.txt:23410; refs pmg_minting_type/pmg_monetary_policy см. index.tsv | панель ЦБ, ld_cb_rate_panel.gui |
 | Создание ЦБ нужного размера zz_ef_cm_create_owned_bank | живой | common/scripted_effects/ld_cm_bank_ownership.txt:15 | refs=1004 в index.tsv (спавнеры E&F) | здание ЦБ |
-| Вклады чужих ЦБ nr_dep (zz_ef_nr_dep_step) | живой | common/scripted_effects/ld_nr_deposits.txt:124; вызов ld_money_model.txt:529 | вызывается в zz_ef_money_model_step; пишет add_investment_pool (счёт модели ld_*, по замыслу) | диаграмма держателей валюты в ld_economy_panel.gui |
-| Обрезка чужих запасов валюты zz_ef_fx_liab_trim | живой | common/scripted_effects/ld_nr_deposits.txt:7 | вызов ld_nr_deposits.txt:133 и ld_money_model.txt:173; лог EFN | — |
+| Вклады чужих ЦБ nr_dep (zz_ef_nr_dep_step) | живой | common/scripted_effects/ld_nr_deposits.txt:124; вызов ld_money_model.txt:529 | вызывается в zz_ef_money_model_step; add_investment_pool — только проводка клиринга, прочее изменение запасов держателей — в «прочее» (zz_ef_f_nr_oth) | диаграмма держателей валюты в ld_economy_panel.gui |
 | Спрос держателей валюты (модификатор zz_ef_fx_holders_demand) | живой | common/static_modifiers/ld_fx_holders_demand.txt; ld_nr_deposits.txt:276-286 | add_modifier с multiplier zz_ef_fx_holders_demand_m (0..20) | модификатор страны (экспортное преимущество) |
 | Покупка металла банками (zz_ef_bank_gold_buy/silver_buy) | живой | common/scripted_effects/ld_metal_accounts.txt:281-289; common/static_modifiers/ld_metal_trade.txt:16 | add_modifier по недельному шагу; комментарии в ld_bank_pm.txt называют несуществующий zz_ef_bank_metal_buy | товары золото/серебро на рынке |
 | Назначение банковских компаний ИИ establish_bank_and_ef_compagnie | живой | common/scripted_effects/01_financial_scripted_effects.txt:13164 | вызов 00_on_action_main.txt:~1000 (ежегодный пульс, is_ai=yes); компании — владельцы посева | компании в списке компаний |

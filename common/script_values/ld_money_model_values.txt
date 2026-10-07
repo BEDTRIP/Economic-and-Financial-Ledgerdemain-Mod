@@ -578,12 +578,17 @@ zz_ef_pop_start_savings = {
 }
 zz_ef_pop_start_deposits = {
 	value = zz_ef_pop_start_savings
-	# R1б.1: out of the pool as it is
+	# R1б.1: out of the pool as it is; Хвост R1 (the user, 8.10): at most zz_ef_dep_start_pool_share of it -- the rest is
+	# the banks' own capital (was: the norm, 0.3-0.6 GDP, took the whole pool, the capital started at ~0 and the deposits'
+	# interest ran it negative)
 	max = {
 		value = investment_pool
 		min = 0
+		multiply = zz_ef_dep_start_pool_share
 	}
 }
+# Хвост R1: the share of the pool the pops' start deposits may take; the rest stays the banks' capital
+zz_ef_dep_start_pool_share = 0.9
 # ---- pops' deposits (the receiver) -------
 # Deposit rate: the key rate - 1.5 pp, at least 0.5% (the banks' margin).
 # The banks' margin (1.10 evening, the user: cash and deposits move with the
@@ -763,15 +768,6 @@ zz_ef_cb_cover = {
 		divide = money_supply
 		divide = zz_ef_metal_per_money
 	}
-}
-# R1б.1 (8.10): the money expected once the buildings' cash is in, for the cut of our currency held abroad at the
-# first step (zz_ef_fx_liab_trim): the savings' norm + ~0.33 GDP of business cash, at least the money now.
-zz_ef_start_money = {
-	value = zz_ef_sav_norm_gdp
-	add = 0.33
-	multiply = gdp
-	min = money_supply
-	min = 1
 }
 # ---- the CB's reserves: interventions and mining (the user, 1.10 night) ---
 # E&F's interventions (scripted_effects/zz_ef_fx_deals.txt, generated): a
