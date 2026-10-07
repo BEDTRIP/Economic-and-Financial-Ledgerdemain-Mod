@@ -7,6 +7,8 @@ zz_ef_pm_stock_building = {
 	if = {
 		limit = {
 			has_active_production_method = pm_no_private_ownership_manufacture_stock
+			level > 0
+			NOT = { is_under_construction = yes }
 			private_ownership_fraction > 0.5
 			or = {
 				is_building_type = building_food_industry
@@ -121,6 +123,8 @@ zz_ef_pm_stock_building = {
 	else_if = {
 		limit = {
 			has_active_production_method = pm_private_ownership_majority_manufacture_stock
+			level > 0
+			NOT = { is_under_construction = yes }
 			private_ownership_fraction <= 0.5
 			or = {
 				is_building_type = building_food_industry
@@ -235,6 +239,8 @@ zz_ef_pm_stock_building = {
 	else_if = {
 		limit = {
 			has_active_production_method = pm_no_private_ownership_agricultural_stock
+			level > 0
+			NOT = { is_under_construction = yes }
 			private_ownership_fraction > 0.5
 			or = {
 				is_building_type = building_rye_farm
@@ -354,6 +360,8 @@ zz_ef_pm_stock_building = {
 	else_if = {
 		limit = {
 			has_active_production_method = pm_private_ownership_majority_agricultural_stock
+			level > 0
+			NOT = { is_under_construction = yes }
 			private_ownership_fraction <= 0.5
 			or = {
 				is_building_type = building_rye_farm
@@ -473,6 +481,8 @@ zz_ef_pm_stock_building = {
 	else_if = {
 		limit = {
 			has_active_production_method = pm_no_private_ownership_mining_stock
+			level > 0
+			NOT = { is_under_construction = yes }
 			private_ownership_fraction > 0.5
 			or = {
 				is_building_type = building_coal_mine
@@ -522,6 +532,8 @@ zz_ef_pm_stock_building = {
 	else_if = {
 		limit = {
 			has_active_production_method = pm_private_ownership_majority_mining_stock
+			level > 0
+			NOT = { is_under_construction = yes }
 			private_ownership_fraction <= 0.5
 			or = {
 				is_building_type = building_coal_mine
@@ -571,6 +583,8 @@ zz_ef_pm_stock_building = {
 	else_if = {
 		limit = {
 			has_active_production_method = pm_no_private_ownership_railroad_stock
+			level > 0
+			NOT = { is_under_construction = yes }
 			private_ownership_fraction > 0.5
 			or = {
 				is_building_type = building_railway
@@ -590,6 +604,8 @@ zz_ef_pm_stock_building = {
 	else_if = {
 		limit = {
 			has_active_production_method = pm_private_ownership_majority_railroad_stock
+			level > 0
+			NOT = { is_under_construction = yes }
 			private_ownership_fraction <= 0.5
 			or = {
 				is_building_type = building_railway
