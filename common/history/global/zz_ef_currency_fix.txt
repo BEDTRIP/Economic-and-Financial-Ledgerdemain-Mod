@@ -56,5 +56,20 @@ GLOBAL = {
 
 		# 4. Initial liquidity_currency grant to minor countries -- removed 5.10 (Д2.3): bank settlements come
 		#    from banks (buildings/zz_ef_bank.txt) and are traded.
+
+		########################################################################
+		# R0.3 (7.10): per-capita taxation needs the vanilla technology
+		#    currency_standards; E&F moved it to era 2 behind banking, so ~30
+		#    countries without a central bank start with the law but not the
+		#    technology ("not permitted to retain law", game.log). Give it to
+		#    them; the marker keeps E&F's on_researched from switching to fiat.
+		if = {
+			limit = {
+				has_law = law_type:law_per_capita_based_taxation
+				NOT = { has_technology_researched = currency_standards }
+			}
+			set_variable = zz_ef_start_currency_standards
+			add_technology_researched = currency_standards
+		}
 	}
 }
