@@ -95,6 +95,6 @@
 ## Прочие файлы
 - `common/script_values/PSC_set_values.txt` — константы PSC (`privatisation_percent_weeks`, цены строительных товаров, `construction_goods_per_point` …).
 - `common/script_values/PSC_event_values.txt` — `calculate_added_days` (дни до начала недели для событий PSC).
-- `common/scripted_effects/PSC_my_trigger_event.txt` — `my_trigger_event` (обёртка `trigger_event` по on_action).
+- `my_trigger_event` (обёртка `trigger_event` по on_action) — из CMF (его файл com_trigger_event.txt), тело то же, что было у PSC.
 - `common/scripted_effects/PSC_production_method_building_switch.txt` — `production_method_building_switch`.
 - `common/script_values/ld_pb_ai_construction_values.txt` — помощники ИИ по цене строительных товаров рынка.
