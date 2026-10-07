@@ -24,20 +24,14 @@ zz_ef_consol_step = {
 		set_variable = { name = zz_ef_f_cons_buy value = zz_ef_consol_buyback_week }
 		if = {
 			limit = { var:zz_ef_f_cons_int > 0 }
-			add_treasury = {
-				value = var:zz_ef_f_cons_int
-				multiply = -1
-			}
-			zz_ef_tr_unmark = { V = var:zz_ef_f_cons_int }
+			# R1б (В3): the treasury's money -> the pops' banknotes (the CB's debt to them)
+			zz_ef_post_from_eng = { ENG = treasury TO = zz_ef_notes V = var:zz_ef_f_cons_int }
 			change_variable = { name = zz_ef_pop_savings add = var:zz_ef_f_cons_int }
 		}
 		if = {
 			limit = { var:zz_ef_f_cons_buy > 0 }
-			add_treasury = {
-				value = var:zz_ef_f_cons_buy
-				multiply = -1
-			}
-			zz_ef_tr_unmark = { V = var:zz_ef_f_cons_buy }
+			# R1б (В3): the treasury's money -> the pops' banknotes (the CB's debt to them)
+			zz_ef_post_from_eng = { ENG = treasury TO = zz_ef_notes V = var:zz_ef_f_cons_buy }
 			change_variable = { name = zz_ef_pop_savings add = var:zz_ef_f_cons_buy }
 			change_variable = { name = zz_ef_consol_debt subtract = var:zz_ef_f_cons_buy }
 		}

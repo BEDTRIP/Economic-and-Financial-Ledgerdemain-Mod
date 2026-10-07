@@ -1,0 +1,71 @@
+﻿# from common/script_values/ld_money_model_values.txt
+
+# ---- pops' cash at hand and deposits (the user, 1.10 evening, run 14) -------
+# Cash at hand is held at a norm -- by the deposit rate, 12% of a year's GDP
+# at 3% (Britain's coin and notes in the 1830s ~11% of GDP); over it pops
+# deposit, under it they withdraw (zz_ef_dep_in / zz_ef_dep_out).
+# Run 14 tried spending the excess as income (the dependents' surcharge): pops
+# in the engine hold no money, what they did not spend vanished back into the
+# savings -- a perpetual surcharge (Britain ~71M a year at a GDP of 58M), the
+# savings kept growing. Deposits are engine money in the pool, which builds.
+# By the deposit rate (the user, 1.10 evening: not an iron 12%): 20% of GDP
+# at 0%, 12% at 3%, at least 6%; pops move 10% of the gap a week each way.
+zz_ef_cash_norm_gdp = {
+	value = zz_ef_deposit_rate
+	multiply = -2.667
+	add = 0.2
+	min = 0.06
+	max = 0.2
+}
+zz_ef_cash_speed = 0.1
+zz_ef_pop_cash_norm = {
+	value = gdp
+	min = 0
+	multiply = zz_ef_cash_norm_gdp
+}
+
+# Deposited this week: 10% of the cash over the norm.
+zz_ef_dep_in = {
+	value = zz_ef_pop_cash
+	subtract = zz_ef_pop_cash_norm
+	multiply = zz_ef_cash_speed
+	min = 0
+}
+# Withdrawn: 10% of the cash under the norm, not more than the deposits and
+# the pool hold.
+zz_ef_dep_out = {
+	value = zz_ef_pop_cash_norm
+	subtract = zz_ef_pop_cash
+	multiply = zz_ef_cash_speed
+	min = 0
+	max = {
+		value = zz_ef_pop_deposits
+		min = 0
+	}
+	max = {
+		value = investment_pool
+		min = 0
+	}
+}
+
+zz_ef_v_f_dep_in = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_dep_in } value = var:zz_ef_f_dep_in }
+}
+zz_ef_v_f_dep_out = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_dep_out } value = var:zz_ef_f_dep_out }
+}
+
+zz_ef_v_w_dep_in = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_w_dep_in } value = var:zz_ef_w_dep_in }
+}
+zz_ef_v_w_dep_out = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_w_dep_out } value = var:zz_ef_w_dep_out }
+}
+
+# in zz_ef_pool_other_week and zz_ef_leak_week (after `add = zz_ef_v_f_cb_interest` / `add = zz_ef_v_d_bonds`):
+	subtract = zz_ef_v_w_dep_in
+	add = zz_ef_v_w_dep_out

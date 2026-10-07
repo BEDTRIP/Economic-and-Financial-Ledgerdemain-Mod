@@ -31,7 +31,7 @@
 | касса бизнеса (M1) | движок: `cash_reserves` зданий (`zz_ef_bcash`); касса торговых центров — её часть | бизнес | движок |
 | пул (касса банков) | движок: `investment_pool` | банки — по счетам ниже | движок (взносы, стройка, выкуп), наши проводки (`ENG = pool`) |
 | вклады населения | `zz_ef_pop_deposits` | население | вклады / изъятия, проценты |
-| наличные населения (M0) | `zz_ef_pop_savings` − `zz_ef_pop_deposits` | население | проводки |
+| банкноты в обращении = наличные населения (M0) | `zz_ef_notes` | долг ЦБ (без ЦБ — банков) населению; вне книги банков | консоли (казна → банкноты), выкуп металла ЦБ (новые банкноты); старт 0 |
 | вклады чужих ЦБ | `zz_ef_nr_dep` | заграница | `ld_nr_deposits.txt`; проценты — из капитала банков (`zz_ef_post`) |
 | кредит ЦБ банкам | `zz_ef_bank_cb_debt` | ЦБ | недельный шаг; только при ЦБ (`has_central_bank`: без ЦБ цель `zz_ef_cb_credit_target` = 0, долг гасится из пула) |
 | деньги казны в банках | `zz_ef_bank_gov_dep` | казна | излишек казны сверх предела (`zz_ef_f_tr_pool`) |
@@ -70,12 +70,14 @@
   входит). Частная стройка пула (перевод в казну) сверх нового бизнес-кредита оплачена из вкладов: D → требования
   «частный сектор» `zz_ef_pop_claims_private` (`zz_ef_f_dep_build`; принято ночью, проверить). Плановая экономика
   (`law_command_economy`) — пула нет, вкладов нет.
-- **Наличные** двигаются только проводками: наличные ↔ вклады по норме наличных (`zz_ef_dep_in` / `zz_ef_dep_out`,
-  банкноты в банк — касса пула), потребкредит, консоли, выкуп металла ЦБ. Остаток сверки недели («утечка»
+- **Наличные** (M0) — банкноты, долг ЦБ населению (В3): счёт `zz_ef_notes`, `zz_ef_pop_cash` читает его; S = банкноты +
+  D. Двигают только проводки: консоли (`zz_ef_post_from_eng` казна → `zz_ef_notes`), выкуп металла ЦБ (новые банкноты).
+  Старт — 0; старый сейв без счёта — банкноты = S − D (в начале недельного шага). Норма наличных от ВВП и наличные ↔
+  вклады по ней — в `_archive/ld_cash_norm/` (поведение — R7). Остаток сверки недели («утечка»
   `zz_ef_f_leak`) и необъяснённая убыль пула — «прочее», в сбережения не идут. Догадки хотфикса (выкуп уровней и события
   казны → сбережения, излишек → «в богатство») вынуты в `_archive/ld_pop_savings_guesses/`.
 - **Проценты** по вкладам — капитал банков → D (`zz_ef_post`), по бизнес- и потребкредиту — в капитал банков.
-- Стартовые вклады — от нормы (`zz_ef_pop_start_deposits`, в пул при первом `zz_ef_pop_savings_step`; принято ночью, проверить).
+- Стартовые сбережения — только вклады (`zz_ef_pop_start_deposits` = `zz_ef_pop_start_savings` = норма накоплений `zz_ef_sav_norm`), в пул при первом `zz_ef_pop_savings_step`; принято ночью, проверить.
 - `zz_ef_f_inflow` — что вошло в сбережения за шаг (взносы − стройка), карточка наличных (`zz_ef_v_w_inflow`).
 
 ## Торговля — одна проводка (R1а.7)
@@ -113,10 +115,10 @@ on_action — `common/on_actions/ld_roles_on_actions.txt`): глобальные
 | глобальные `zz_ef_sched_alive`, `zz_ef_sched_probing`, `zz_ef_sched_d`, `zz_ef_sched_week`, `zz_ef_dom`, `zz_ef_month_n`, `zz_ef_week_slot_n`; у якоря `zz_ef_sched_probe(_value)` | планировщик: жив (3 дня), зонд, день недели, номер недели, день и номер месяца, счётчик слотов | `ld_scheduler.txt`, `ld_roles_on_actions.txt` (месяц) | `ld_scheduler.txt` |
 | `zz_ef_week_slot`, `zz_ef_week_phase`, `zz_ef_m_offset`, `zz_ef_m_done`, `zz_ef_last_step_week`, `zz_ef_step_weeks` | день недели и фаза 4 недель страны, день месяца её месячных шагов, месяц последнего, неделя последнего шага, недель в шаге | `zz_ef_sched_slot_assign`, `zz_ef_sched_country_day` | планировщик, `zz_ef_sw`, `zz_ef_step_weeks_v` |
 | `zz_ef_weeks_run` | недель модели (до 100; Б — по 4 за шаг) | `zz_ef_money_model_step` | условия «первые N недель» |
-| `zz_ef_pop_savings`, `zz_ef_pop_deposits` | сбережения населения (S), вклады в банках (D); наличные = S−D | `zz_ef_pop_deposits_step` (взносы, стройка), `zz_ef_pop_savings_step`, `zz_ef_metal_week_step` (выкуп), `ld_consols.txt` | `zz_ef_pop_cash`, M0–M3, карточки, книга банков |
+| `zz_ef_pop_savings`, `zz_ef_pop_deposits`, `zz_ef_notes` | сбережения населения (S), вклады в банках (D), банкноты (M0); S = банкноты + D | `zz_ef_pop_deposits_step` (взносы, стройка), `zz_ef_pop_savings_step`, `zz_ef_metal_week_step` (выкуп), `ld_consols.txt` | `zz_ef_pop_cash`, M0–M3, карточки, книга банков |
 | `zz_ef_bank_cb_debt` | долг банков перед ЦБ | `zz_ef_money_model_step` | `zz_ef_cb_credit_target`, кредитные лимиты |
 | `zz_ef_cc_debt`, `zz_ef_bc_debt`, `zz_ef_bc_svc` | потребительский / бизнес-долг, обслуживание | `zz_ef_consumer_credit_step`, `zz_ef_business_credit_step` | значения `zz_ef_cc_*`, `zz_ef_bc_*`, модификатор `zz_ef_debt_service` |
-| `zz_ef_f_<F>` (`budget`, `contrib`, `transfer`, `cb_borrow`, `cb_repay`, `cb_interest`, `tr_pool`, `ext`, `abr`, `leak`, `inflow`, `dep_in/out/int`, `trade`, `div`, …) | поток недели по статье | недельный шаг и приёмник | `zz_ef_v_f_<F>` (значения для GUI), окна `zz_ef_w_<F>` (`zz_ef_money_window_roll`) |
+| `zz_ef_f_<F>` (`budget`, `contrib`, `transfer`, `cb_borrow`, `cb_repay`, `cb_interest`, `tr_pool`, `ext`, `abr`, `leak`, `inflow`, `dep_int`, `trade`, `div`, …) | поток недели по статье | недельный шаг и приёмник | `zz_ef_v_f_<F>` (значения для GUI), окна `zz_ef_w_<F>` (`zz_ef_money_window_roll`) |
 | `zz_ef_prev_<ACC>`, `zz_ef_<ACC>_w1..4/q1..13/r1..20` | прошлая неделя и кольца истории счета (`pool`, `buildings`, `tc`, `treasury`, `bonds`, `tbonds`, `m2`, `cbm`, `abroad`, `agg0..3`, `circ`, `gdp`, `price`, `govlv`, `savings`, `deposits`, `cb`) | `zz_ef_money_ledger_delta`, `zz_ef_ring_*_push` | `zz_ef_v_d_<ACC>`, `zz_ef_agg<N>_pct_*`, `zz_ef_circ_growth_year`, `zz_ef_price_index` |
 | `zz_ef_t_led` | временная: значение счёта, посчитанное один раз в `zz_ef_money_ledger_delta` (снимается там же) | `zz_ef_money_ledger_delta` | оно же |
 | `zz_ef_bcash`, `zz_ef_bkcash` | наличные бизнеса и банков за неделю | `zz_ef_money_model_step` | `zz_ef_building_cash`, `zz_ef_agg_m0..m3` |

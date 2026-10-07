@@ -1,0 +1,16 @@
+﻿# from common/scripted_effects/ld_money_model.txt
+
+# in zz_ef_pop_savings_step (after the comment on the hotfix's guesses):
+	set_variable = { name = zz_ef_f_dep_in value = zz_ef_dep_in }
+	set_variable = { name = zz_ef_f_dep_out value = zz_ef_dep_out }
+	add_investment_pool = var:zz_ef_f_dep_in
+	change_variable = { name = zz_ef_pop_deposits add = var:zz_ef_f_dep_in }
+	add_investment_pool = {
+		value = var:zz_ef_f_dep_out
+		multiply = -1
+	}
+	change_variable = { name = zz_ef_pop_deposits subtract = var:zz_ef_f_dep_out }
+
+# in zz_ef_money_model_step:
+	zz_ef_money_window_roll = { F = dep_in }
+	zz_ef_money_window_roll = { F = dep_out }

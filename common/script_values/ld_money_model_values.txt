@@ -459,8 +459,6 @@ zz_ef_pool_other_week = {
 	subtract = zz_ef_v_f_cb_borrow
 	add = zz_ef_v_f_cb_repay
 	add = zz_ef_v_f_cb_interest
-	subtract = zz_ef_v_w_dep_in
-	add = zz_ef_v_w_dep_out
 	add = zz_ef_v_w_dep_int
 	add = zz_ef_v_d_bonds
 	add = zz_ef_v_w_cc_issue
@@ -495,8 +493,6 @@ zz_ef_leak_week = {
 	subtract = zz_ef_v_f_cb_borrow
 	add = zz_ef_v_f_cb_repay
 	add = zz_ef_v_d_bonds
-	subtract = zz_ef_v_w_dep_in
-	add = zz_ef_v_w_dep_out
 	add = zz_ef_v_w_dep_int
 	subtract = zz_ef_v_f_pool_other
 	# R1а.7 (Д.5): the trade centres' cash is business cash (M1), not abroad -- no longer taken out
@@ -574,39 +570,16 @@ zz_ef_tr_other_net = {
 # Stage 2, night 6.10 (run r1006_132739): the savings start AT their norm (zz_ef_sav_norm, 0.3-0.6 GDP by the deposit
 # rate, Д2.22) -- was 45% of GDP minus the business cash (Britain 3.2M against a norm of 14.6M): the first year the
 # savings grew to the norm, M2 doubled (18 -> 38M) and the cover halved; the user: "in equilibrium from the first day".
+# R1б (В3, 8.10): the pops' cash at hand (M0) is the CB's banknotes (var:zz_ef_notes) and starts at 0 -- the savings
+# start as deposits only
 zz_ef_pop_start_savings = {
 	value = zz_ef_sav_norm
-	min = zz_ef_pop_cash_norm
 	min = 0
 }
 zz_ef_pop_start_deposits = {
 	value = zz_ef_pop_start_savings
-	subtract = zz_ef_pop_cash_norm
-	min = 0
 }
-# ---- pops' cash at hand and deposits (the user, 1.10 evening, run 14) -------
-# Cash at hand is held at a norm -- by the deposit rate, 12% of a year's GDP
-# at 3% (Britain's coin and notes in the 1830s ~11% of GDP); over it pops
-# deposit, under it they withdraw (zz_ef_dep_in / zz_ef_dep_out).
-# Run 14 tried spending the excess as income (the dependents' surcharge): pops
-# in the engine hold no money, what they did not spend vanished back into the
-# savings -- a perpetual surcharge (Britain ~71M a year at a GDP of 58M), the
-# savings kept growing. Deposits are engine money in the pool, which builds.
-# By the deposit rate (the user, 1.10 evening: not an iron 12%): 20% of GDP
-# at 0%, 12% at 3%, at least 6%; pops move 10% of the gap a week each way.
-zz_ef_cash_norm_gdp = {
-	value = zz_ef_deposit_rate
-	multiply = -2.667
-	add = 0.2
-	min = 0.06
-	max = 0.2
-}
-zz_ef_cash_speed = 0.1
-zz_ef_pop_cash_norm = {
-	value = gdp
-	min = 0
-	multiply = zz_ef_cash_norm_gdp
-}
+# ---- pops' deposits (the receiver) -------
 # Deposit rate: the key rate - 1.5 pp, at least 0.5% (the banks' margin).
 # The banks' margin (1.10 evening, the user: cash and deposits move with the
 # rates): 1.5 pp, + 1 pp per need of idle money in the pool -- banks with
@@ -629,32 +602,12 @@ zz_ef_pop_deposits = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_pop_deposits } value = var:zz_ef_pop_deposits }
 }
+# R1б (В3, 8.10): the pops' cash at hand = the banknotes in circulation (the CB's debt to them; without a CB -- the
+# banks'), var:zz_ef_notes; moved only by postings: consols (treasury -> notes), the CB's buy-back of the pops' metal
+# (new notes). The savings S = notes + deposits.
 zz_ef_pop_cash = {
-	value = zz_ef_pop_savings
-	subtract = zz_ef_pop_deposits
-}
-# Deposited this week: 10% of the cash over the norm.
-zz_ef_dep_in = {
-	value = zz_ef_pop_cash
-	subtract = zz_ef_pop_cash_norm
-	multiply = zz_ef_cash_speed
-	min = 0
-}
-# Withdrawn: 10% of the cash under the norm, not more than the deposits and
-# the pool hold.
-zz_ef_dep_out = {
-	value = zz_ef_pop_cash_norm
-	subtract = zz_ef_pop_cash
-	multiply = zz_ef_cash_speed
-	min = 0
-	max = {
-		value = zz_ef_pop_deposits
-		min = 0
-	}
-	max = {
-		value = investment_pool
-		min = 0
-	}
+	value = 0
+	if = { limit = { has_variable = zz_ef_notes } value = var:zz_ef_notes }
 }
 zz_ef_dep_interest = {
 	value = zz_ef_pop_deposits
@@ -670,25 +623,9 @@ zz_ef_v_f_inflow = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_f_inflow } value = var:zz_ef_f_inflow }
 }
-zz_ef_v_f_dep_in = {
-	value = 0
-	if = { limit = { has_variable = zz_ef_f_dep_in } value = var:zz_ef_f_dep_in }
-}
-zz_ef_v_f_dep_out = {
-	value = 0
-	if = { limit = { has_variable = zz_ef_f_dep_out } value = var:zz_ef_f_dep_out }
-}
 zz_ef_v_f_dep_int = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_f_dep_int } value = var:zz_ef_f_dep_int }
-}
-zz_ef_v_w_dep_in = {
-	value = 0
-	if = { limit = { has_variable = zz_ef_w_dep_in } value = var:zz_ef_w_dep_in }
-}
-zz_ef_v_w_dep_out = {
-	value = 0
-	if = { limit = { has_variable = zz_ef_w_dep_out } value = var:zz_ef_w_dep_out }
 }
 zz_ef_v_w_dep_int = {
 	value = 0

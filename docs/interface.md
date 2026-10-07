@@ -145,7 +145,7 @@ GUI-тип регистрирует первый файл по имени (ASCII
 пула (пул + кредиты + облигации − вклады − кредит ЦБ − вклады чужих ЦБ), т. е. капитал банков учёта
 (`var:zz_ef_bank_capital`, `money-model.md`) + «прочее».
 <!-- vitrine -->
-Сгенерировано `../vic3_mods/tools/ld_vitrine.py --write`. Имён 589: переменных 11, значений-витрины 160, вычисляемых при перерисовке 418; файлов 13.
+Сгенерировано `../vic3_mods/tools/ld_vitrine.py --write`. Имён 586: переменных 11, значений-витрины 159, вычисляемых при перерисовке 416; файлов 13.
 
 | имя | класс | где читается |
 | --- | --- | --- |
@@ -645,9 +645,8 @@ GUI-тип регистрирует первый файл по имени (ASCII
 | `zz_ef_pool` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_pool_months` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_pool_transfer_week` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
-| `zz_ef_pop_cash` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
+| `zz_ef_pop_cash` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_pop_cash_held` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
-| `zz_ef_pop_cash_norm` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_pop_deposits` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_pop_savings` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_popm_gold` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
@@ -731,9 +730,7 @@ GUI-тип регистрирует первый файл по имени (ASCII
 | `zz_ef_v_w_clr_cur_out` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_w_clr_fx_in_money` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_w_clr_own_back` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
-| `zz_ef_v_w_dep_in` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_w_dep_int` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
-| `zz_ef_v_w_dep_out` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_w_hume_money` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_w_inflow` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_w_nr_dep` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |

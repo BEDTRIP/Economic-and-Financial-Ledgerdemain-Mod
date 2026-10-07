@@ -288,6 +288,8 @@ zz_ef_metal_week_step = {
 			change_variable = { name = zz_ef_popm_gold subtract = var:zz_ef_f_mt_buyback }
 		}
 		change_variable = { name = zz_ef_pop_savings add = var:zz_ef_f_mt_buyback_money }
+		# R1б (В3, 8.10): paid in new banknotes -- the CB's debt to the pops
+		change_variable = { name = zz_ef_notes add = var:zz_ef_f_mt_buyback_money }
 	}
 	# the CB card (UI.11): its reserves' change by purchases, sales and the buy-back
 	if = {
