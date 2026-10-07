@@ -65,12 +65,30 @@ zz_ef_post_eng_paid = {
 	zz_ef_eng_add_$TO$ = { V = $V$ }
 	change_variable = { name = $PAYER$ subtract = $V$ }
 }
-zz_ef_eng_add_treasury = { add_treasury = $V$ }
-zz_ef_eng_sub_treasury = { add_treasury = { value = $V$ multiply = -1 } }
+zz_ef_eng_add_treasury = {
+	add_treasury = $V$
+	zz_ef_tr_mark = { V = $V$ }
+}
+zz_ef_eng_sub_treasury = {
+	add_treasury = { value = $V$ multiply = -1 }
+	zz_ef_tr_unmark = { V = $V$ }
+}
+# R1б (В5, 8.10): every add_treasury of ours is marked (var:zz_ef_tr_posted, zeroed by the reconciliation), so the
+# treasury's «прочее» is its change less the engine's budget less our postings -- what E&F and the rest wrote.
+zz_ef_tr_mark = {
+	if = { limit = { NOT = { has_variable = zz_ef_tr_posted } } set_variable = { name = zz_ef_tr_posted value = 0 } }
+	change_variable = { name = zz_ef_tr_posted add = $V$ }
+}
+zz_ef_tr_unmark = {
+	if = { limit = { NOT = { has_variable = zz_ef_tr_posted } } set_variable = { name = zz_ef_tr_posted value = 0 } }
+	change_variable = { name = zz_ef_tr_posted subtract = $V$ }
+}
 zz_ef_eng_add_pool = { add_investment_pool = $V$ }
 zz_ef_eng_sub_pool = { add_investment_pool = { value = $V$ multiply = -1 } }
 
-# Country scope, at the end of the step: «прочее» = the pool - the banks' book (our accounts of it).
+# Country scope, at the end of the step: «прочее» = the pool's part (the pool - the banks' book, our accounts of it)
+# + the treasury's part (R1б, В5: summed each step -- the change of the treasury net of debt since the last step, less
+# the engine's budget of the week(s), less our postings var:zz_ef_tr_posted).
 zz_ef_reconcile = {
 	zz_ef_registry_init = yes
 	if = {
@@ -86,10 +104,32 @@ zz_ef_reconcile = {
 	}
 	set_variable = { name = zz_ef_other_prev value = var:zz_ef_other }
 	set_variable = {
-		name = zz_ef_other
+		name = zz_ef_other_pool
 		value = {
 			value = investment_pool
 			subtract = zz_ef_bank_book_v
+		}
+	}
+	# the treasury's part: from the second reconciliation on (the first one takes the snapshot)
+	if = { limit = { NOT = { has_variable = zz_ef_other_tr } } set_variable = { name = zz_ef_other_tr value = 0 } }
+	set_variable = { name = zz_ef_f_other_tr value = 0 }
+	set_variable = { name = zz_ef_t_trnet value = zz_ef_treasury_net_v }
+	if = {
+		limit = { has_variable = zz_ef_tr_prev }
+		set_variable = { name = zz_ef_f_other_tr value = var:zz_ef_t_trnet }
+		change_variable = { name = zz_ef_f_other_tr subtract = var:zz_ef_tr_prev }
+		change_variable = { name = zz_ef_f_other_tr subtract = zz_ef_budget_steps_v }
+		change_variable = { name = zz_ef_f_other_tr subtract = zz_ef_tr_posted_v }
+		change_variable = { name = zz_ef_other_tr add = var:zz_ef_f_other_tr }
+	}
+	set_variable = { name = zz_ef_tr_prev value = var:zz_ef_t_trnet }
+	set_variable = { name = zz_ef_tr_posted value = 0 }
+	remove_variable = zz_ef_t_trnet
+	set_variable = {
+		name = zz_ef_other
+		value = {
+			value = var:zz_ef_other_pool
+			add = var:zz_ef_other_tr
 		}
 	}
 	set_variable = { name = zz_ef_f_other value = var:zz_ef_other }
@@ -101,6 +141,8 @@ zz_ef_reconcile = {
 	change_global_variable = { name = zz_ef_wld_other add = var:zz_ef_f_other }
 	change_global_variable = { name = zz_ef_wld_other_abs add = zz_ef_f_other_abs_v }
 	change_global_variable = { name = zz_ef_wld_other_n add = 1 }
+	if = { limit = { NOT = { has_global_variable = zz_ef_wld_other_tr } } set_global_variable = { name = zz_ef_wld_other_tr value = 0 } }
+	change_global_variable = { name = zz_ef_wld_other_tr add = var:zz_ef_f_other_tr }
 	if = {
 		limit = {
 			zz_ef_logs_on = yes
@@ -109,7 +151,7 @@ zz_ef_reconcile = {
 				gdp > 20000000
 			}
 		}
-		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|other [THIS.GetCountry.MakeScope.Var('zz_ef_other').GetValue|0]|d_other [THIS.GetCountry.MakeScope.Var('zz_ef_f_other').GetValue|0]|pool [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_raw_pool')|0]|book [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bank_book_v')|0]|capital [THIS.GetCountry.MakeScope.Var('zz_ef_bank_capital').GetValue|0]|dep [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_deposits')|0]|weeks [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_step_weeks_v')|0]|role [THIS.GetCountry.MakeScope.Var('zz_ef_role').GetValue|0]"
+		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|other [THIS.GetCountry.MakeScope.Var('zz_ef_other').GetValue|0]|d_other [THIS.GetCountry.MakeScope.Var('zz_ef_f_other').GetValue|0]|pool [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_raw_pool')|0]|book [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bank_book_v')|0]|other_pool [THIS.GetCountry.MakeScope.Var('zz_ef_other_pool').GetValue|0]|other_tr [THIS.GetCountry.MakeScope.Var('zz_ef_other_tr').GetValue|0]|d_other_tr [THIS.GetCountry.MakeScope.Var('zz_ef_f_other_tr').GetValue|0]|trnet [THIS.GetCountry.MakeScope.Var('zz_ef_tr_prev').GetValue|0]|budget [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_budget_steps_v')|0]|capital [THIS.GetCountry.MakeScope.Var('zz_ef_bank_capital').GetValue|0]|dep [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_deposits')|0]|weeks [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_step_weeks_v')|0]|role [THIS.GetCountry.MakeScope.Var('zz_ef_role').GetValue|0]"
 	}
 }
 
@@ -120,9 +162,10 @@ zz_ef_other_world_log = {
 			zz_ef_logs_on = yes
 			has_global_variable = zz_ef_wld_other
 		}
-		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|WORLD|other [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_other_v')|0]|other_abs [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_other_abs_v')|0]|n [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_other_n_v')|0]"
+		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|WORLD|other [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_other_v')|0]|other_tr [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_other_tr_v')|0]|other_abs [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_other_abs_v')|0]|n [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_other_n_v')|0]"
 	}
 	set_global_variable = { name = zz_ef_wld_other value = 0 }
 	set_global_variable = { name = zz_ef_wld_other_abs value = 0 }
 	set_global_variable = { name = zz_ef_wld_other_n value = 0 }
+	set_global_variable = { name = zz_ef_wld_other_tr value = 0 }
 }

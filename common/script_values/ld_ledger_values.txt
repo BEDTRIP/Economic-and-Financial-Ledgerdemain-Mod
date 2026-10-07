@@ -35,3 +35,21 @@ zz_ef_v_f_other = {
 zz_ef_wld_other_v = { value = global_var:zz_ef_wld_other }
 zz_ef_wld_other_abs_v = { value = global_var:zz_ef_wld_other_abs }
 zz_ef_wld_other_n_v = { value = global_var:zz_ef_wld_other_n }
+# R1б (В5): the treasury net of its debt (the engine's gold_reserves - principal), the engine's budget of the weeks the
+# step covers, our postings to the treasury since the last reconciliation (scripted_effects/ld_ledger.txt)
+zz_ef_treasury_net_v = {
+	value = gold_reserves
+	subtract = principal
+}
+zz_ef_budget_steps_v = {
+	value = zz_ef_budget_week
+	multiply = zz_ef_step_weeks_v
+}
+zz_ef_tr_posted_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_tr_posted } value = var:zz_ef_tr_posted }
+}
+zz_ef_wld_other_tr_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_wld_other_tr } value = global_var:zz_ef_wld_other_tr }
+}

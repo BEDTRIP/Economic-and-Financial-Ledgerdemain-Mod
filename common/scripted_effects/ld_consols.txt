@@ -28,6 +28,7 @@ zz_ef_consol_step = {
 				value = var:zz_ef_f_cons_int
 				multiply = -1
 			}
+			zz_ef_tr_unmark = { V = var:zz_ef_f_cons_int }
 			change_variable = { name = zz_ef_pop_savings add = var:zz_ef_f_cons_int }
 		}
 		if = {
@@ -36,6 +37,7 @@ zz_ef_consol_step = {
 				value = var:zz_ef_f_cons_buy
 				multiply = -1
 			}
+			zz_ef_tr_unmark = { V = var:zz_ef_f_cons_buy }
 			change_variable = { name = zz_ef_pop_savings add = var:zz_ef_f_cons_buy }
 			change_variable = { name = zz_ef_consol_debt subtract = var:zz_ef_f_cons_buy }
 		}
