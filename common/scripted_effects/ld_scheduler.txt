@@ -142,7 +142,9 @@ zz_ef_sched_country_day = {
 			set_variable = { name = zz_ef_step_weeks value = 4 }
 		}
 		set_variable = { name = zz_ef_last_step_week value = global_var:zz_ef_sched_week }
-		zz_ef_money_model_step = yes
+		# its own on_action: the step's code reads root (bond ledger, metal modifiers) -- inside every_country of the
+		# anchor's chain root would be the anchor (r1007_180243: 2600 errors in ld_bond_ledger.txt / ld_metal_accounts.txt)
+		trigger_event = { on_action = zz_ef_sched_step }
 	}
 }
 

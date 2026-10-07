@@ -18,6 +18,13 @@ zz_ef_sched_probe = {
 	}
 }
 
+# Country scope (A or B): its weekly step, as its own on_action so that root is the country.
+zz_ef_sched_step = {
+	effect = {
+		zz_ef_money_model_step = yes
+	}
+}
+
 # Anchor country: one day of the world (self-renewing).
 zz_ef_sched_day = {
 	effect = {
