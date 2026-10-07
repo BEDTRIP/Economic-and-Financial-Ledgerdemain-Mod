@@ -1,0 +1,61 @@
+﻿# R1а.4 (Д.4): the money model's global scheduler (scripted_effects/ld_scheduler.txt).
+on_game_started_after_lobby = {
+	on_actions = {
+		zz_ef_sched_start
+	}
+}
+
+zz_ef_sched_start = {
+	effect = {
+		zz_ef_sched_ensure = yes
+	}
+}
+
+# Anchor country: daily until the budget tick.
+zz_ef_sched_probe = {
+	effect = {
+		zz_ef_sched_probe_step = yes
+	}
+}
+
+# Anchor country: one day of the world (self-renewing).
+zz_ef_sched_day = {
+	effect = {
+		zz_ef_sched_day_step = yes
+	}
+}
+
+# The engine's monthly pulse of a country (in place of E&F's ef_on_monthly_pulse_country, 00_ef_on_action.txt): a
+# country the scheduler does not run (V, no role yet, the chain not started or lost) gets E&F's hub here; an A / B
+# country while the chain is not running -- all its monthly steps (and the scheduler skips its month).
+zz_ef_monthly_unscheduled = {
+	trigger = {
+		NOT = {
+			AND = {
+				has_global_variable = zz_ef_sched_alive
+				OR = {
+					zz_ef_role_is_a = yes
+					zz_ef_role_is_b = yes
+				}
+			}
+		}
+	}
+	effect = {
+		if = {
+			limit = {
+				OR = {
+					zz_ef_role_is_a = yes
+					zz_ef_role_is_b = yes
+				}
+			}
+			if = {
+				limit = { has_global_variable = zz_ef_month_n }
+				set_variable = { name = zz_ef_m_done value = global_var:zz_ef_month_n }
+			}
+			zz_ef_sched_monthly = yes
+		}
+		else = {
+			trigger_event = { on_action = ef_on_monthly_pulse_country }
+		}
+	}
+}

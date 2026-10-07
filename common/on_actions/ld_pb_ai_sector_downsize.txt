@@ -26,11 +26,7 @@
 # Countries E&F has not initialised (no var:base_rate_percentage) are skipped.
 #############################################
 
-on_monthly_pulse_country = {
-	on_actions = {
-		zz_pb_ef_ai_sector_downsize
-	}
-}
+# R1а.4 (Д.4): run by the scheduler (scripted_effects/ld_scheduler.txt, zz_ef_sched_monthly), not on on_monthly_pulse_country.
 
 zz_pb_ef_ai_sector_downsize = {
 	trigger = {

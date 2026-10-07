@@ -1,0 +1,10 @@
+﻿# R1а.4: the scheduler's numbers (scripted_effects/ld_scheduler.txt).
+zz_ef_sched_week_mod4 = {
+	value = global_var:zz_ef_sched_week
+	modulo = 4
+}
+# the weeks a step covers (1 for A; 4 for B), for the flows measured over one week
+zz_ef_step_weeks_v = {
+	value = 1
+	if = { limit = { has_variable = zz_ef_step_weeks } value = var:zz_ef_step_weeks }
+}

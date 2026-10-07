@@ -27,7 +27,9 @@ on_game_started_after_lobby = {
 
 on_monthly_pulse_country = {
 	on_actions = {
-    	ef_on_monthly_pulse_country
+		# R1а.4 (Д.4): the monthly hub runs from the scheduler for roles A / B (ld_scheduler.txt, zz_ef_sched_monthly);
+		# the engine's pulse -- only for the countries outside it (zz_ef_monthly_unscheduled, ld_scheduler_on_actions.txt)
+    	zz_ef_monthly_unscheduled
     }
 }
 

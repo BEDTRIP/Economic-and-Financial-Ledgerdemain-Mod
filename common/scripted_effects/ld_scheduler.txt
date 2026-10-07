@@ -1,0 +1,215 @@
+﻿#############################################
+# R1а.4 (Д.4; схема 4.3, «Глобальный календарь»): the money model's scheduler -- ONE global chain.
+#
+# The engine's budget tick is the same day of the week for every country (check Р10, 7.10: 280 of 289), so one
+# probe for the world is enough. The chain lives on an anchor country (the largest economy when it starts; the
+# engine has no global delayed on_action) and steps once a day:
+#   * global_var:zz_ef_sched_d -- the day of the week 0..6 (0 = the budget tick's day), zz_ef_sched_week -- the
+#     week's number; zz_ef_dom -- the day of the month (0 at on_monthly_pulse), zz_ef_month_n -- the month's number;
+#   * every country of role A or B (scripted_triggers/ld_roles_triggers.txt) has its day var:zz_ef_week_slot 0..6 and
+#     its phase var:zz_ef_week_phase 0..3 (countries counted modulo 7, then modulo 4); A steps every week on its day,
+#     B every 4th week (the week's number modulo 4 = its phase) -- the same accounts, the flows of the weeks since
+#     its last step in one posting (var:zz_ef_step_weeks, zz_ef_sw);
+#   * the monthly steps (E&F's monthly hub and the ld_* ones) -- once a calendar month, on the day of the month
+#     var:zz_ef_m_offset = slot + 7 x phase (0..27): spread as the engine's pulse was, in a fixed order;
+#   * the world pass -- at the end of day 6: the world line and the clearing house open their next window
+#     (they opened at the first receiver after a floating 7-day global before).
+# The chain renews global_var:zz_ef_sched_alive (3 days); a lost chain (the anchor died) is restarted by the
+# monthly pulse (zz_ef_sched_ensure). V countries are outside (Д.2).
+#############################################
+
+# Global scope or any: start the chain if it is not running (game start, monthly).
+zz_ef_sched_ensure = {
+	if = {
+		limit = {
+			NOT = { has_global_variable = zz_ef_sched_alive }
+			NOT = { has_global_variable = zz_ef_sched_probing }
+		}
+		if = {
+			limit = { NOT = { has_global_variable = zz_ef_roles_done } }
+			zz_ef_roles_world_pass = yes
+		}
+		if = {
+			limit = { NOT = { has_global_variable = zz_ef_sched_week } }
+			set_global_variable = { name = zz_ef_sched_week value = 0 }
+		}
+		if = {
+			limit = { NOT = { has_global_variable = zz_ef_month_n } }
+			set_global_variable = { name = zz_ef_month_n value = 1 }
+			set_global_variable = { name = zz_ef_dom value = 0 }
+		}
+		ordered_country = {
+			limit = { NOT = { is_country_type = decentralized } }
+			order_by = gdp
+			max = 1
+			set_global_variable = { name = zz_ef_sched_probing value = yes days = 12 }
+			set_variable = { name = zz_ef_sched_probe value = 0 }
+			set_variable = { name = zz_ef_sched_probe_value value = zz_ef_budget_position }
+			trigger_event = { on_action = zz_ef_sched_probe days = 1 }
+		}
+	}
+}
+
+# Anchor country: daily until its treasury changes (the budget tick), at most 8 days; then day 0 of the week.
+zz_ef_sched_probe_step = {
+	if = {
+		limit = {
+			OR = {
+				NOT = { zz_ef_budget_position = var:zz_ef_sched_probe_value }
+				var:zz_ef_sched_probe >= 7
+			}
+		}
+		remove_variable = zz_ef_sched_probe
+		remove_variable = zz_ef_sched_probe_value
+		remove_global_variable = zz_ef_sched_probing
+		set_global_variable = { name = zz_ef_sched_d value = 0 }
+		set_global_variable = { name = zz_ef_sched_alive value = yes days = 3 }
+		zz_ef_sched_day_step = yes
+	}
+	else = {
+		change_variable = { name = zz_ef_sched_probe add = 1 }
+		set_variable = { name = zz_ef_sched_probe_value value = zz_ef_budget_position }
+		trigger_event = { on_action = zz_ef_sched_probe days = 1 }
+	}
+}
+
+# Anchor country: one day of the world.
+zz_ef_sched_day_step = {
+	set_global_variable = { name = zz_ef_sched_alive value = yes days = 3 }
+	change_global_variable = { name = zz_ef_dom add = 1 }
+	every_country = {
+		limit = {
+			OR = {
+				zz_ef_role_is_a = yes
+				zz_ef_role_is_b = yes
+			}
+		}
+		zz_ef_sched_country_day = yes
+	}
+	if = {
+		limit = { global_var:zz_ef_sched_d >= 6 }
+		zz_ef_world_week_close = yes
+		set_global_variable = { name = zz_ef_sched_d value = 0 }
+		change_global_variable = { name = zz_ef_sched_week add = 1 }
+	}
+	else = {
+		change_global_variable = { name = zz_ef_sched_d add = 1 }
+	}
+	trigger_event = { on_action = zz_ef_sched_day days = 1 }
+}
+
+# Country scope (A or B): its day -- the monthly steps once a month, the weekly step on its day.
+zz_ef_sched_country_day = {
+	if = {
+		limit = { NOT = { has_variable = zz_ef_week_phase } }
+		zz_ef_sched_slot_assign = yes
+	}
+	if = {
+		limit = {
+			OR = {
+				NOT = { has_variable = zz_ef_m_done }
+				NOT = { var:zz_ef_m_done = global_var:zz_ef_month_n }
+			}
+			global_var:zz_ef_dom > var:zz_ef_m_offset
+		}
+		set_variable = { name = zz_ef_m_done value = global_var:zz_ef_month_n }
+		zz_ef_sched_monthly = yes
+	}
+	if = {
+		limit = {
+			var:zz_ef_week_slot = global_var:zz_ef_sched_d
+			OR = {
+				zz_ef_role_is_a = yes
+				var:zz_ef_week_phase = zz_ef_sched_week_mod4
+			}
+		}
+		# the weeks since this country's last step (B: 4; a role change or a restarted chain: what it is, 1..8)
+		set_variable = { name = zz_ef_step_weeks value = 1 }
+		if = {
+			limit = { has_variable = zz_ef_last_step_week }
+			set_variable = {
+				name = zz_ef_step_weeks
+				value = {
+					value = global_var:zz_ef_sched_week
+					subtract = var:zz_ef_last_step_week
+					min = 1
+					max = 8
+				}
+			}
+		}
+		else_if = {
+			limit = { zz_ef_role_is_b = yes }
+			set_variable = { name = zz_ef_step_weeks value = 4 }
+		}
+		set_variable = { name = zz_ef_last_step_week value = global_var:zz_ef_sched_week }
+		zz_ef_money_model_step = yes
+	}
+}
+
+# Country scope: the day of the week, the phase of the 4 weeks and the day of the month, once.
+zz_ef_sched_slot_assign = {
+	if = {
+		limit = { NOT = { has_global_variable = zz_ef_week_slot_n } }
+		set_global_variable = { name = zz_ef_week_slot_n value = 0 }
+	}
+	set_variable = {
+		name = zz_ef_week_slot
+		value = {
+			value = global_var:zz_ef_week_slot_n
+			modulo = 7
+		}
+	}
+	set_variable = {
+		name = zz_ef_week_phase
+		value = {
+			value = global_var:zz_ef_week_slot_n
+			divide = 7
+			floor = yes
+			modulo = 4
+		}
+	}
+	set_variable = {
+		name = zz_ef_m_offset
+		value = {
+			value = var:zz_ef_week_phase
+			multiply = 7
+			add = var:zz_ef_week_slot
+		}
+	}
+	change_global_variable = { name = zz_ef_week_slot_n add = 1 }
+}
+
+# Country scope: the monthly steps in a fixed order (the engine's order between on_action files is not fixed).
+# E&F's hub and the ld_* on_actions keep their bodies; they are no longer on on_monthly_pulse_country (E&F's hub stays
+# there for countries outside the scheduler -- zz_ef_ef_monthly_unscheduled, 00_ef_on_action.txt).
+zz_ef_sched_monthly = {
+	trigger_event = { on_action = ef_on_monthly_pulse_country }
+	trigger_event = { on_action = zz_ef_money_model_monthly }
+	trigger_event = { on_action = zz_ef_bank_monthly }
+	trigger_event = { on_action = zz_ef_cb_rate_monthly }
+	trigger_event = { on_action = zz_ef_capitalization_monthly }
+	trigger_event = { on_action = zz_ef_bubble_monthly }
+	trigger_event = { on_action = zz_pb_ef_overbuild_counter }
+	trigger_event = { on_action = zz_pb_ef_ai_sector_downsize }
+	trigger_event = { on_action = zz_ef_init_stockpile_state_vars_monthly_backstop }
+}
+
+# Anchor country, the end of day 6: the world's next window (world line EFG, clearing ratios).
+zz_ef_world_week_close = {
+	if = { limit = { has_global_variable = zz_ef_wld_window } remove_global_variable = zz_ef_wld_window }
+	zz_ef_world_window_open = yes
+	if = { limit = { has_global_variable = zz_ef_clr_window } remove_global_variable = zz_ef_clr_window }
+	zz_ef_clr_window_roll = yes
+}
+
+# Country scope: var:zz_ef_f_$F$ x the weeks since the last step (a flow measured for one week, B's step covers 4).
+zz_ef_sw = {
+	if = {
+		limit = {
+			has_variable = zz_ef_step_weeks
+			var:zz_ef_step_weeks > 1
+			has_variable = zz_ef_f_$F$
+		}
+		change_variable = { name = zz_ef_f_$F$ multiply = var:zz_ef_step_weeks }
+	}
+}

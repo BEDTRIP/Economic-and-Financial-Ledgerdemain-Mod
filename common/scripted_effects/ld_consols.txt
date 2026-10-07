@@ -19,6 +19,8 @@ zz_ef_consol_step = {
 	if = {
 		limit = { has_variable = zz_ef_pop_savings }
 		set_variable = { name = zz_ef_f_cons_int value = zz_ef_consol_interest_week }
+		# R1а.4: the interest of the weeks the step covers
+		zz_ef_sw = { F = cons_int }
 		set_variable = { name = zz_ef_f_cons_buy value = zz_ef_consol_buyback_week }
 		if = {
 			limit = { var:zz_ef_f_cons_int > 0 }
