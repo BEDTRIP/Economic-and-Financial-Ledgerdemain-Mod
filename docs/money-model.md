@@ -53,6 +53,23 @@
 в шаге, роль) и `EFJ|WORLD` в мировом проходе (сумма изменений, сумма модулей, число стран за неделю). Значения для окон:
 `zz_ef_v_other`, `zz_ef_v_f_other`.
 
+## Население: наличные и вклады (R1а.6)
+Решение Д.6 (пользователь 7.10): пул — деньги в банке, взнос попа в пул — его вклад. Счета населения: сбережения S
+`zz_ef_pop_savings` = наличные (M0) + вклады D `zz_ef_pop_deposits`; позже — металл, акции.
+- **Вклады = взносы движка** (`zz_ef_pop_deposits_step`, недельный шаг после бизнес-кредита): D и S += взносы пула
+  (`investment_pool_gross_income` × недели шага) − часть, что гасит бизнес-кредит (`zz_ef_f_bc_paid`) —
+  `zz_ef_f_dep_contrib`; своих денег в пул за них не кладём (проба 7.10: наш `add_investment_pool` во взносы движка не
+  входит). Частная стройка пула (перевод в казну) сверх нового бизнес-кредита оплачена из вкладов: D → требования
+  «частный сектор» `zz_ef_pop_claims_private` (`zz_ef_f_dep_build`; принято ночью, проверить). Плановая экономика
+  (`law_command_economy`) — пула нет, вкладов нет.
+- **Наличные** двигаются только проводками: наличные ↔ вклады по норме наличных (`zz_ef_dep_in` / `zz_ef_dep_out`,
+  банкноты в банк — касса пула), потребкредит, консоли, события, выкуп уровней, излишек сверх нормы
+  (`zz_ef_sav_to_wealth`, пока списание без пары). Остаток сверки недели («утечка» `zz_ef_f_leak`) — «прочее», в
+  сбережения не идёт.
+- **Проценты** по вкладам — капитал банков → D (`zz_ef_post`), по бизнес- и потребкредиту — в капитал банков.
+- Стартовые вклады — от нормы (`zz_ef_pop_start_deposits`, в пул при первом приёмнике; принято ночью, проверить).
+- `zz_ef_f_inflow` — что вошло в сбережения за шаг (взносы − стройка), карточка наличных (`zz_ef_v_w_inflow`).
+
 ## Торговля — одна проводка (R1а.7)
 Мера — торговля рынка по базовым ценам (`zz_ef_trade_net_week`, владелец рынка; член таможенного союза —
 `zz_ef_member_goods_net`). Считается раз за шаг в `zz_ef_trade_step` (`ld_money_model.txt`, в начале недельного шага):
@@ -86,7 +103,7 @@ on_action — `common/on_actions/ld_roles_on_actions.txt`): глобальные
 | глобальные `zz_ef_sched_alive`, `zz_ef_sched_probing`, `zz_ef_sched_d`, `zz_ef_sched_week`, `zz_ef_dom`, `zz_ef_month_n`, `zz_ef_week_slot_n`; у якоря `zz_ef_sched_probe(_value)` | планировщик: жив (3 дня), зонд, день недели, номер недели, день и номер месяца, счётчик слотов | `ld_scheduler.txt`, `ld_roles_on_actions.txt` (месяц) | `ld_scheduler.txt` |
 | `zz_ef_week_slot`, `zz_ef_week_phase`, `zz_ef_m_offset`, `zz_ef_m_done`, `zz_ef_last_step_week`, `zz_ef_step_weeks` | день недели и фаза 4 недель страны, день месяца её месячных шагов, месяц последнего, неделя последнего шага, недель в шаге | `zz_ef_sched_slot_assign`, `zz_ef_sched_country_day` | планировщик, `zz_ef_sw`, `zz_ef_step_weeks_v` |
 | `zz_ef_weeks_run` | недель модели (до 100; Б — по 4 за шаг) | `zz_ef_money_model_step` | условия «первые N недель» |
-| `zz_ef_pop_savings`, `zz_ef_pop_deposits` | сбережения населения (S), вклады в банках (D); наличные = S−D | `zz_ef_pop_savings_step`, `zz_ef_metal_week_step` (выкуп), `ld_consols.txt` | `zz_ef_pop_cash`, M0–M3, карточки |
+| `zz_ef_pop_savings`, `zz_ef_pop_deposits` | сбережения населения (S), вклады в банках (D); наличные = S−D | `zz_ef_pop_deposits_step` (взносы, стройка), `zz_ef_pop_savings_step`, `zz_ef_metal_week_step` (выкуп), `ld_consols.txt` | `zz_ef_pop_cash`, M0–M3, карточки, книга банков |
 | `zz_ef_bank_cb_debt` | долг банков перед ЦБ | `zz_ef_money_model_step` | `zz_ef_cb_credit_target`, кредитные лимиты |
 | `zz_ef_cc_debt`, `zz_ef_bc_debt`, `zz_ef_bc_svc` | потребительский / бизнес-долг, обслуживание | `zz_ef_consumer_credit_step`, `zz_ef_business_credit_step` | значения `zz_ef_cc_*`, `zz_ef_bc_*`, модификатор `zz_ef_debt_service` |
 | `zz_ef_f_<F>` (`budget`, `contrib`, `transfer`, `cb_borrow`, `cb_repay`, `cb_interest`, `tr_pool`, `ext`, `abr`, `leak`, `inflow`, `dep_in/out/int`, `trade`, `div`, …) | поток недели по статье | недельный шаг и приёмник | `zz_ef_v_f_<F>` (значения для GUI), окна `zz_ef_w_<F>` (`zz_ef_money_window_roll`) |

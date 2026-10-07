@@ -221,6 +221,8 @@ zz_ef_money_model_step = {
 	}
 	# EF.48 item 5 (business credit; repayment in money, 1.10 evening).
 	zz_ef_business_credit_step = yes
+	# R1а.6 (Д.6): the pops' deposits = their contributions to the pool by the engine
+	zz_ef_pop_deposits_step = yes
 
 	# The CB coined half of the mined gold / silver (1.10 night) -- removed (М, the user 6.10): metal is taken from
 	# the market only; the mines sell all of it, and whoever needs metal buys it (CB, banks, pops). The mint's log
@@ -547,10 +549,13 @@ zz_ef_money_window_roll = {
 # merged -- pops' income left over, which vanilla turns into wealth, and
 # payments abroad inside the market). var:zz_ef_pop_savings (S) holds all,
 # var:zz_ef_pop_deposits (D) the part in banks; cash at hand = S - D.
-# Deposits are real engine money again: add_investment_pool. D moves 5% of
-# the gap a week towards S x the deposit share (by the key rate); interest at
-# the deposit rate is paid from the pool into D. The operations fall into the
-# next week's window and are taken out of that week's leak.
+# R1а.6 (Д.6, the user 7.10: "the pool is money in the bank, a contribution to the pool is putting money into a
+# deposit"): the deposits are the pops' contributions to the pool by the engine (zz_ef_pop_deposits_step, at the
+# step) -- no money of ours is added to the pool for them (the probe 7.10: our add_investment_pool is not in
+# investment_pool_gross_income, so the contributions are the engine's alone). Cash at hand (S - D) moves only by
+# postings: cash <-> deposits by the cash norm (dep_in / dep_out -- banknotes into the bank, the pool's cash), the
+# consumer credit, the consols, the events, the buy-outs, the excess over the norm. The leak (the reconciliation's
+# rest of the week) is «прочее» (ld_ledger.txt), not savings. Interest on deposits: the banks' capital -> D.
 zz_ef_pop_savings_step = {
 	if = {
 		limit = { NOT = { has_variable = zz_ef_pop_savings } }
@@ -563,21 +568,7 @@ zz_ef_pop_savings_step = {
 		# stage 2, step 3 (6.10): the banks' start metal by the reserve norm (scripted_effects/zz_ef_metal_accounts.txt)
 		zz_ef_metal_start_banks = yes
 	}
-	set_variable = { name = zz_ef_f_inflow value = zz_ef_v_f_leak }
-	change_variable = { name = zz_ef_f_inflow multiply = -1 }
-	# The first weeks of a game are the engine settling (run 14: Britain's
-	# treasury 21 -> 39M in the second week, read as pops spending 20M of
-	# savings they never had): no inflow while zz_ef_weeks_run < 3.
-	if = {
-		limit = {
-			OR = {
-				NOT = { has_variable = zz_ef_weeks_run }
-				var:zz_ef_weeks_run < 3
-			}
-		}
-		set_variable = { name = zz_ef_f_inflow value = 0 }
-	}
-	change_variable = { name = zz_ef_pop_savings add = var:zz_ef_f_inflow }
+	# R1а.6 (Д.6): the leak no longer goes into the savings (it is «прочее»)
 	# В1.2 (3.10): levels sold to companies -- the price to the sellers' savings
 	# (zz_ef_v_f_buyout); the pool's loss stays out of the leak.
 	set_variable = { name = zz_ef_f_buyout_got value = 0 }
@@ -637,12 +628,52 @@ zz_ef_pop_savings_step = {
 
 	set_variable = { name = zz_ef_f_dep_int value = zz_ef_dep_interest }
 	zz_ef_sw = { F = dep_int }
-	add_investment_pool = {
-		value = var:zz_ef_f_dep_int
-		multiply = -1
-	}
-	change_variable = { name = zz_ef_pop_deposits add = var:zz_ef_f_dep_int }
+	# R1а.6: credited to the deposits, paid by the banks' capital (no cash leaves the pool)
+	zz_ef_post = { FROM = zz_ef_bank_capital TO = zz_ef_pop_deposits V = var:zz_ef_f_dep_int }
 	change_variable = { name = zz_ef_pop_savings add = var:zz_ef_f_dep_int }
+}
+
+# R1а.6 (Д.6), at the step after the business credit: the pops' contributions to the pool (the engine's gross income
+# of the pool, x the weeks of the step) are their deposits -- less the part that services the business credit (it
+# repays the banks' loans, zz_ef_f_bc_paid). The pool's private construction (its transfer to the treasury) less the
+# banks' new business credit is paid out of the deposits for building levels: deposits -> the private sector
+# (zz_ef_pop_claims_private; accepted at night 7.10, check). The planned economy has no pool -- no deposits.
+zz_ef_pop_deposits_step = {
+	set_variable = { name = zz_ef_f_dep_contrib value = 0 }
+	set_variable = { name = zz_ef_f_dep_build value = 0 }
+	if = {
+		limit = {
+			has_variable = zz_ef_pop_savings
+			NOT = { has_law = law_type:law_command_economy }
+		}
+		set_variable = {
+			name = zz_ef_f_dep_contrib
+			value = {
+				value = zz_ef_v_f_contrib
+				subtract = zz_ef_v_f_bc_paid
+				min = 0
+			}
+		}
+		change_variable = { name = zz_ef_pop_deposits add = var:zz_ef_f_dep_contrib }
+		change_variable = { name = zz_ef_pop_savings add = var:zz_ef_f_dep_contrib }
+		set_variable = {
+			name = zz_ef_f_dep_build
+			value = {
+				value = zz_ef_v_f_transfer
+				subtract = zz_ef_v_f_bc_new
+				min = 0
+				max = {
+					value = var:zz_ef_pop_deposits
+					min = 0
+				}
+			}
+		}
+		zz_ef_post = { FROM = zz_ef_pop_deposits TO = zz_ef_pop_claims_private V = var:zz_ef_f_dep_build }
+		change_variable = { name = zz_ef_pop_savings subtract = var:zz_ef_f_dep_build }
+	}
+	# what entered the pops' savings this step (the cash-at-hand card: zz_ef_v_w_inflow)
+	set_variable = { name = zz_ef_f_inflow value = var:zz_ef_f_dep_contrib }
+	change_variable = { name = zz_ef_f_inflow subtract = var:zz_ef_f_dep_build }
 }
 
 # EF.48 item 6 (the user, 1.10): the CB and abroad are one account -- the CB
@@ -902,6 +933,8 @@ zz_ef_consumer_credit_step = {
 		zz_ef_sw = { F = cc_issue }
 		zz_ef_sw = { F = cc_repay }
 		zz_ef_sw = { F = cc_int }
+		# R1а.6: the interest due is the banks' income (paid now, or added to the debt below) -- their capital
+		change_variable = { name = zz_ef_bank_capital add = var:zz_ef_f_cc_int }
 		set_variable = { name = zz_ef_f_cc_net value = var:zz_ef_f_cc_issue }
 		change_variable = { name = zz_ef_f_cc_net subtract = var:zz_ef_f_cc_repay }
 		change_variable = { name = zz_ef_f_cc_net subtract = var:zz_ef_f_cc_int }
@@ -1302,6 +1335,8 @@ zz_ef_business_credit_step = {
 	}
 	change_variable = { name = zz_ef_bc_debt add = var:zz_ef_f_bc_new }
 	change_variable = { name = zz_ef_bc_debt add = var:zz_ef_f_bc_int }
+	# R1а.6: the interest accrues -- the banks' claim grows, so does their capital (ld_ledger.txt, the banks' book)
+	change_variable = { name = zz_ef_bank_capital add = var:zz_ef_f_bc_int }
 	change_variable = { name = zz_ef_bc_debt subtract = var:zz_ef_f_bc_paid }
 	if = {
 		limit = { var:zz_ef_bc_debt < 0 }
