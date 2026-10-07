@@ -97,5 +97,5 @@
 - `common/defines/zzzz_ef_credit_def.txt` — `NEconomy.COUNTRY_MIN_CREDIT_SCALED`.
 - `common/decisions/00_ef_ai_loooting.txt` — решения ИИ с ЦБ (грабёж резервов).
 - `common/prestige_goods/00_ef_prestige_goods_2.txt` — пусто: `manufacture_stock_usa` выключен (у `manufacture_stock` уже три престижных товара — предел движка).
-- `common/customizable_localization/00_ef_localization_ custom.txt` — имя валюты страны (`currency_name` и др.; пробел в имени
-  файла — авторский).
+- `common/customizable_localization/00_ef_localization_ custom.txt` — имя валюты страны (`currency_name`, `currency_symbol*` — по `var:zz_ef_cur`, генератор `regen_ld_currency_data`; пробел в
+  имени файла — авторский).

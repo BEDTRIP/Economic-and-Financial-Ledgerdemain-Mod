@@ -52,6 +52,10 @@ law_no_market_liquidity = {
     icon = "gfx/interface/icons/law_icons/currency_chose.dds"
 	
 	progressiveness = 0
+	# R1б.2: no currency law -- the currency by culture (zz_ef_cur_set)
+	on_activate = {
+		zz_ef_cur_set = yes
+	}
 }
 
 law_dinar_currency = {
@@ -62,6 +66,8 @@ law_dinar_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:dinar }
     }
 
     can_enact = {
@@ -81,6 +87,8 @@ law_dinar_algerian_dinar_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:dinar_algerian_dinar }
     }
 
     can_enact = {
@@ -100,6 +108,8 @@ law_dinar_iraqi_dinar_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:dinar_iraqi_dinar }
     }
 
     can_enact = {
@@ -119,6 +129,8 @@ law_dinar_libyan_dinar_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:dinar_libyan_dinar }
     }
 
     can_enact = {
@@ -138,6 +150,8 @@ law_dinar_moroccan_dirham_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:dinar_moroccan_dirham }
     }
 
     can_enact = {
@@ -160,6 +174,8 @@ law_dinar_omanian_rial_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:dinar_omanian_rial }
     }
 
     can_enact = {
@@ -179,6 +195,8 @@ law_dinar_qiran_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:dinar_qiran }
     }
 
     can_enact = {
@@ -201,6 +219,8 @@ law_dinar_saudi_riyal_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:dinar_saudi_riyal }
     }
 
     can_enact = {
@@ -220,6 +240,8 @@ law_dinar_serbian_dinar_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:dinar_serbian_dinar }
     }
 
     can_enact = {
@@ -242,6 +264,8 @@ law_dinar_tunisian_dinar_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:dinar_tunisian_dinar }
     }
 
     can_enact = {
@@ -261,6 +285,8 @@ law_dinar_yugoslav_dinar_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:dinar_yugoslav_dinar }
     }
 
     can_enact = {
@@ -280,6 +306,8 @@ law_dollar_australian_dollar_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:dollar_australian_dollar }
     }
 
     can_enact = {
@@ -303,6 +331,8 @@ law_dollar_canadian_dollar_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:dollar_canadian_dollar }
     }
 
     can_enact = {
@@ -327,6 +357,8 @@ law_dollar_caribbean_dollar_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:dollar_caribbean_dollar }
     }
 
     can_enact = {
@@ -346,6 +378,8 @@ law_dollar_confederate_states_dollar_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:dollar_confederate_states_dollar }
     }
 
     can_enact = {
@@ -368,6 +402,8 @@ law_dollar_liberian_dollar_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:dollar_liberian_dollar }
     }
 
     can_enact = {
@@ -387,6 +423,8 @@ law_dollar_new_zealand_dollar_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:dollar_new_zealand_dollar }
     }
 
     can_enact = {
@@ -406,6 +444,8 @@ law_dollar_sierra_leonean_dollar_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:dollar_sierra_leonean_dollar }
     }
 
     can_enact = {
@@ -425,6 +465,8 @@ law_dollar_united_states_dollar_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:dollar_united_states_dollar }
     }
 
     can_enact = {
@@ -447,6 +489,8 @@ law_eco_ariary_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:eco_ariary }
     }
 
     can_enact = {
@@ -466,6 +510,8 @@ law_eco_central_african_eco_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:eco_central_african_eco }
     }
 
     can_enact = {
@@ -485,6 +531,8 @@ law_eco_east_african_eco_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:eco_east_african_eco }
     }
 
     can_enact = {
@@ -504,6 +552,8 @@ law_eco_ethiopian_birr_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:eco_ethiopian_birr }
     }
 
     can_enact = {
@@ -523,6 +573,8 @@ law_eco_ghanaian_pound_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:eco_ghanaian_pound }
     }
 
     can_enact = {
@@ -542,6 +594,8 @@ law_eco_nigerian_naira_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:eco_nigerian_naira }
     }
 
     can_enact = {
@@ -561,6 +615,8 @@ law_eco_south_african_rand_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:eco_south_african_rand }
     }
 
     can_enact = {
@@ -583,6 +639,8 @@ law_eco_tuareg_ouguiya_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:eco_tuareg_ouguiya }
     }
 
     can_enact = {
@@ -602,6 +660,8 @@ law_eco_west_african_eco_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:eco_west_african_eco }
     }
 
     can_enact = {
@@ -621,6 +681,8 @@ law_franc_belgian_franc_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:franc_belgian_franc }
     }
 
     can_enact = {
@@ -643,6 +705,8 @@ law_franc_french_franc_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:franc_french_franc }
     }
 
     can_enact = {
@@ -665,6 +729,8 @@ law_franc_luxembourgish_franc_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:franc_luxembourgish_franc }
     }
 
     can_enact = {
@@ -684,6 +750,8 @@ law_franc_swiss_franc_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:franc_swiss_franc }
     }
 
     can_enact = {
@@ -706,6 +774,8 @@ law_gulden_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:gulden }
     }
 
     can_enact = {
@@ -728,6 +798,8 @@ law_gulden_bavarian_gulden_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:gulden_bavarian_gulden }
     }
 
     can_enact = {
@@ -750,6 +822,8 @@ law_gulden_florin_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:gulden_florin }
     }
 
     can_enact = {
@@ -772,6 +846,8 @@ law_gulden_hungarian_forint_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:gulden_hungarian_forint }
     }
 
     can_enact = {
@@ -794,6 +870,8 @@ law_gulden_indies_guilder_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:gulden_indies_guilder }
     }
 
     can_enact = {
@@ -813,6 +891,8 @@ law_gulden_south_german_gulden_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:gulden_south_german_gulden }
     }
 
     can_enact = {
@@ -835,6 +915,8 @@ law_krone_czech_koruna_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:krone_czech_koruna }
     }
 
     can_enact = {
@@ -854,6 +936,8 @@ law_krone_danish_krone_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:krone_danish_krone }
     }
 
     can_enact = {
@@ -876,6 +960,8 @@ law_krone_estonian_kroon_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:krone_estonian_kroon }
     }
 
     can_enact = {
@@ -895,6 +981,8 @@ law_krone_icelandic_krona_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:krone_icelandic_krona }
     }
 
     can_enact = {
@@ -914,6 +1002,8 @@ law_krone_norwegian_krone_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:krone_norwegian_krone }
     }
 
     can_enact = {
@@ -936,6 +1026,8 @@ law_krone_slovak_koruna_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:krone_slovak_koruna }
     }
 
     can_enact = {
@@ -955,6 +1047,8 @@ law_krone_swedish_krona_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:krone_swedish_krona }
     }
 
     can_enact = {
@@ -977,6 +1071,8 @@ law_leon_leu_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:leon_leu }
     }
 
     can_enact = {
@@ -999,6 +1095,8 @@ law_leon_lev_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:leon_lev }
     }
 
     can_enact = {
@@ -1021,6 +1119,8 @@ law_lira_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:lira }
     }
 
     can_enact = {
@@ -1043,6 +1143,8 @@ law_lira_ducato_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:lira_ducato }
     }
 
     can_enact = {
@@ -1065,6 +1167,8 @@ law_lira_ottoman_lira_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:lira_ottoman_lira }
     }
 
     can_enact = {
@@ -1087,6 +1191,8 @@ law_lira_scudo_pontificio_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:lira_scudo_pontificio }
     }
 
     can_enact = {
@@ -1109,6 +1215,8 @@ law_lira_scudo_sardo_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:lira_scudo_sardo }
     }
 
     can_enact = {
@@ -1131,6 +1239,8 @@ law_lira_toscane_lira_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:lira_toscane_lira }
     }
 
     can_enact = {
@@ -1153,6 +1263,8 @@ law_mark_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:mark }
     }
 
     can_enact = {
@@ -1175,6 +1287,8 @@ law_mark_finnish_markka_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:mark_finnish_markka }
     }
 
     can_enact = {
@@ -1197,6 +1311,8 @@ law_peso_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:peso }
     }
 
     can_enact = {
@@ -1216,6 +1332,8 @@ law_peso_argentine_peso_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:peso_argentine_peso }
     }
 
     can_enact = {
@@ -1238,6 +1356,8 @@ law_peso_bolivien_peso_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:peso_bolivien_peso }
     }
 
     can_enact = {
@@ -1261,6 +1381,8 @@ law_peso_chilean_peso_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:peso_chilean_peso }
     }
 
     can_enact = {
@@ -1283,6 +1405,8 @@ law_peso_colombian_peso_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:peso_colombian_peso }
     }
 
     can_enact = {
@@ -1305,6 +1429,8 @@ law_peso_costa_rican_colon_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:peso_costa_rican_colon }
     }
 
     can_enact = {
@@ -1324,6 +1450,8 @@ law_peso_cuban_peso_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:peso_cuban_peso }
     }
 
     can_enact = {
@@ -1346,6 +1474,8 @@ law_peso_ecuadorian_peso_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:peso_ecuadorian_peso }
     }
 
     can_enact = {
@@ -1365,6 +1495,8 @@ law_peso_el_salvador_colon_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:peso_el_salvador_colon }
     }
 
     can_enact = {
@@ -1384,6 +1516,8 @@ law_peso_guatemalan_quetzal_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:peso_guatemalan_quetzal }
     }
 
     can_enact = {
@@ -1403,6 +1537,8 @@ law_peso_honduran_lempira_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:peso_honduran_lempira }
     }
 
     can_enact = {
@@ -1422,6 +1558,8 @@ law_peso_mexican_peso_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:peso_mexican_peso }
     }
 
     can_enact = {
@@ -1444,6 +1582,8 @@ law_peso_nicaraguan_cordoba_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:peso_nicaraguan_cordoba }
     }
 
     can_enact = {
@@ -1463,6 +1603,8 @@ law_peso_paraguayan_peso_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:peso_paraguayan_peso }
     }
 
     can_enact = {
@@ -1482,6 +1624,8 @@ law_peso_philippine_peso_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:peso_philippine_peso }
     }
 
     can_enact = {
@@ -1504,6 +1648,8 @@ law_peso_sol_de_oro_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:peso_sol_de_oro }
     }
 
     can_enact = {
@@ -1526,6 +1672,8 @@ law_peso_uruguayan_peso_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:peso_uruguayan_peso }
     }
 
     can_enact = {
@@ -1545,6 +1693,8 @@ law_peso_venezuelan_peso_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:peso_venezuelan_peso }
     }
 
     can_enact = {
@@ -1564,6 +1714,8 @@ law_pound_egyptian_pound_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:pound_egyptian_pound }
     }
 
     can_enact = {
@@ -1586,6 +1738,8 @@ law_pound_irish_pound_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:pound_irish_pound }
     }
 
     can_enact = {
@@ -1605,6 +1759,8 @@ law_pound_sterling_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:pound_sterling }
     }
 
     can_enact = {
@@ -1627,6 +1783,8 @@ law_real_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:real }
     }
 
     can_enact = {
@@ -1649,6 +1807,8 @@ law_real_brazilian_real_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:real_brazilian_real }
     }
 
     can_enact = {
@@ -1671,6 +1831,8 @@ law_rupee_indian_rupee_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:rupee_indian_rupee }
     }
 
     can_enact = {
@@ -1693,6 +1855,8 @@ law_rupee_indonesian_rupiah_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:rupee_indonesian_rupiah }
     }
 
     can_enact = {
@@ -1715,6 +1879,8 @@ law_spe_baht_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:spe_baht }
     }
 
     can_enact = {
@@ -1737,6 +1903,8 @@ law_spe_dong_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:spe_dong }
     }
 
     can_enact = {
@@ -1756,6 +1924,8 @@ law_spe_drachma_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:spe_drachma }
     }
 
     can_enact = {
@@ -1778,6 +1948,8 @@ law_spe_korean_won_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:spe_korean_won }
     }
 
     can_enact = {
@@ -1800,6 +1972,8 @@ law_spe_latvian_lats_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:spe_latvian_lats }
     }
 
     can_enact = {
@@ -1819,6 +1993,8 @@ law_spe_lithuanian_litas_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:spe_lithuanian_litas }
     }
 
     can_enact = {
@@ -1838,6 +2014,8 @@ law_spe_peseta_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:spe_peseta }
     }
 
     can_enact = {
@@ -1860,6 +2038,8 @@ law_spe_ruble_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:spe_ruble }
     }
 
     can_enact = {
@@ -1882,6 +2062,8 @@ law_spe_uni_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:spe_uni }
     }
 
     can_enact = {
@@ -1901,6 +2083,8 @@ law_spe_yen_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:spe_yen }
     }
 
     can_enact = {
@@ -1923,6 +2107,8 @@ law_spe_yuan_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:spe_yuan }
     }
 
     can_enact = {
@@ -1945,6 +2131,8 @@ law_spe_zloti_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:spe_zloti }
     }
 
     can_enact = {
@@ -1967,6 +2155,8 @@ law_thaler_hannoveraner_thaler_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:thaler_hannoveraner_thaler }
     }
 
     can_enact = {
@@ -1989,6 +2179,8 @@ law_thaler_prussian_thaler_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:thaler_prussian_thaler }
     }
 
     can_enact = {
@@ -2012,6 +2204,8 @@ law_thaler_saxon_thaler_currency = {
     progressiveness = 25
     
     on_activate = {
+        # R1б.2: the country's currency (zz_ef_cur, scripted_effects/ld_currency_var.txt)
+        set_variable = { name = zz_ef_cur value = flag:thaler_saxon_thaler }
     }
 
     can_enact = {

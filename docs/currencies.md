@@ -33,6 +33,8 @@
 - :24090 `buy_sell_currency_in_metal_market_panel` (его читает GUI биржи валют).
 - :277203.. торговля в золоте: `export_/import_to/from/in_<cur>`, `*_value_in_gold(_week)`, `trade_balance_*`, `debt_in_national_currency_*`, `excess_foreign_state_currency_*`, `currency_identifiers_<cur>`, `valid_<cur>_metal_reserve_type`.
 
+Таблица 95 валют (название, символ, ISO, страны и паритет на 1836) — `currency-table.md` (генерируется).
+
 ## Поток / порядок
 - Старт: `99_ef_history_global_variable.txt` выдаёт законы валют → `zz_ef_currency_fix.txt` правит WUR и 13 стран.
 - Раз в месяц (`zz_ef_money_model_monthly_step`, `ld_money_model.txt:1005..`): `zz_ef_cur_zone_step`; `zz_ef_reference_strength_step`; `zz_ef_currency_trade_step` (после шага эталона; только страны с ЦБ, не эталон).
@@ -43,6 +45,7 @@
 ## Переменные
 | имя | смысл | пишет | читает |
 |---|---|---|---|
+| `var:zz_ef_cur` | валюта страны — `flag:<ключ>` (закон валюты; нет закона — валюта E&F по культуре `currency_identifiers_<cur>`; нет и её — переменной нет, общий символ) | `on_activate` законов валюты, `zz_ef_cur_set` (`ld_currency_var.txt`, генератор `regen_ld_currency_data`): первый шаг страны, каждый январь, `zz_ef_cur_intro_after` | `currency_name`, `currency_symbol`, `currency_symbol_generic`, `currency_symbol_<cur>` (custom loc) |
 | `var:money_value_target_1` | паритет (металл на единицу) | история E&F, `zz_ef_std_switch_after`, `zz_ef_cur_zone_step`, `zz_ef_mp_complete` | `zz_ef_value_to_parity`, `zz_ef_metal_target_in_gold`, `zz_ef_cur_zone_step`, `zz_ef_mp_can_work` |
 | `global_var:money_value_<cur>_global_var` | курс валюты `<cur>` | E&F | `money_value_<cur>` |
 | `global_var:money_value_median` | медиана E&F | E&F | `zz_ef_value_to_parity` (запасной путь), `is_reference_currency` |

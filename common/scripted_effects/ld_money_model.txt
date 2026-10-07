@@ -90,6 +90,12 @@ zz_ef_money_model_step = {
 		set_variable = { name = zz_ef_cb_start_due value = yes }
 	}
 	zz_ef_cb_metal_start_step = yes
+	# R1б.2: the country's currency as data, at its first step (then by the laws and every January)
+	if = {
+		limit = { NOT = { has_variable = zz_ef_cur_init } }
+		set_variable = { name = zz_ef_cur_init value = yes }
+		zz_ef_cur_set = yes
+	}
 	if = {
 		limit = { var:zz_ef_parity_version < 6 }
 		set_variable = { name = zz_ef_parity_version value = 6 }
@@ -903,6 +909,11 @@ zz_ef_money_model_monthly_step = {
 	zz_ef_currency_trade_step = yes
 	# Д2.7а (5.10): the CB's metal = what its building bought -- weekly since 6.10 (zz_ef_metal_week_step)
 	# R1б (В7, 8.10): Ф.2's January interest to foreign private banks -- _archive/ld_privbank_interest/
+	# R1б.2: the country's currency as data, every January (a culture changed, a law taken without on_activate)
+	if = {
+		limit = { month = 0 }
+		zz_ef_cur_set = yes
+	}
 	# В2.1: AI central banks on the forex monthly was tried and taken back
 	# (run 24, 2.10): every E&F purchase is at parity, twelve a year blew the
 	# reserves up (France's cover 64% -> 436%, Russia's currency 1.2 billion
