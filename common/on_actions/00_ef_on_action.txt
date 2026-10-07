@@ -314,14 +314,9 @@ ef_on_battle_ended = {
 
 ef_on_production_method_changed = {
 	effect = {
-		owner = { 
-			if = {
-				limit = {
-					has_modifier = has_financial_center
- 				}
-				financial_center_production_methods = yes
- 			}
-			private_ownership_production_stocks = yes 
-		}
+		# R1а.2 (Д.1): only the building that changed its method (scope -- building); the country-wide sweep
+		# private_ownership_production_stocks stays in the yearly pulse. Rules and the financial centre call --
+		# zz_ef_pm_stock_building (common/scripted_effects/ld_pm_stock_hook.txt).
+		zz_ef_pm_stock_building = yes
 	}
 }

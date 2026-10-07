@@ -79,7 +79,7 @@ PSC-хук: `on_production_method_changed`, `on_building_built`, `on_acquired_te
 ### Прочие хуки
 | хук | on_action → эффекты |
 |---|---|
-| `on_production_method_changed` | `ef_on_production_method_changed`: владелец → `financial_center_production_methods` (если ФЦ), `private_ownership_production_stocks`; PSC `on_construction_sector_method_changed` → `set_new_point_conversion_method` (если сектор) |
+| `on_production_method_changed` | `ef_on_production_method_changed` → `zz_ef_pm_stock_building` (`common/scripted_effects/ld_pm_stock_hook.txt`, генератор): только здание, сменившее метод, — его метод «акций» (4 группы: промышленность / сельское хозяйство / добыча / железная дорога, 48 типов) по `private_ownership_fraction` (> 0,5 — `pm_private_ownership_majority_*_stock`, ≤ 0,5 — `pm_no_private_ownership_*_stock`), после переключения — `financial_center_production_methods` владельца (если ФЦ); переключение снова зовёт хук для того же здания, оно уже согласовано — вложенности нет. Перебор всей страны (`private_ownership_production_stocks`) — только годовой; PSC `on_construction_sector_method_changed` → `set_new_point_conversion_method` (если сектор) |
 | `on_battle_ended` | `ef_on_battle_ended` → `enemy_stats_is_occuped` при `enemy_stats_is_occuped >= 1` |
 | `on_acquired_technology` (PSC) | `on_acquired_construction_tech` → `set_point_conversion_method_from_tech` |
 | `on_building_built` (PSC) | `on_construction_sector_built` → `set_new_point_conversion_method` |
