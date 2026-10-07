@@ -4703,16 +4703,6 @@ inflation_value_predicted_devaluation_month = {
 	value = var:devaluation_rate
     divide = devaluation_time_month
 }
-money_supply_to_add_per_month = { #valeur à ajouter par an
-	value = 0
-	if  = {
-		limit  = {
-			var:devaluation_on = 1
-		}
-		add = var:money_supply_predicted_add_devaluation_1_month_valided #valided to save the vare
-		divide = devaluation_time_month
-	}
-}
 devaluation_on_time_scripted = {
 	value = 0
 	if  = {
@@ -4760,16 +4750,6 @@ inflation_value_predicted_revaluation_month = {
 	value = var:revaluation_rate
     divide = revaluation_time_month
 	multiply = -1
-}
-money_supply_to_subtract_per_month = {
-	value = 0
-	if  = {
-		limit  = {
-			var:revaluation_on = 1
-		}
-		add = var:money_supply_predicted_add_revaluation_1_month_valided #valided to save the vare
-		divide = revaluation_time_month
-	}
 }
 revaluation_on_time_scripted = { #valeur à ajouter par an
 	value = 0
@@ -5009,13 +4989,6 @@ money_value_in_gold = {
 money_value_no_bc = {
 	value = 0.01
 }
-money_value_prevision_new_currency = {
-	value = global_var:money_value_median
-	multiply = gold_to_silver_rate
-}
-money_value_prevision_new_currency_in_gold = {
-	value = global_var:money_value_median
-}
 money_value_raported_to_overrlord = {
 	value = money_value_rapported_inflation
 	divide = overlord.money_value
@@ -5061,14 +5034,6 @@ money_value_target_real_in_gold = {
 		value = money_value_target_real
 		#multiply = bimetallic_rate_silver_to_gold #bimetallic_rate
 	}
-}
-money_value_target_real_below_25 = {
-	value = money_value_target_real_in_gold
-	multiply = 0.75
-}
-money_value_target_real_above_25 = {
-	value = money_value_target_real_in_gold
-	multiply = 1.25
 }
 money_value_target = {
 	add = national_capacity
@@ -6674,23 +6639,6 @@ rate_by_law_metal_type_2_FRA = {
 # (script_values/00_economic_scripted_value.txt:7717, 7735).
 misalignment_rate_gold_drain = {
 	value = 0
-}
-gold_lost = {
-	value = gold_state_native_for_stockpile
-	multiply = misalignment_rate_gold_drain
-	if = {
-		limit = { exists = scope:arbitrage_privat_bank }
-		max = {
-			value = scope:arbitrage_privat_bank.private_bank_silver_reserve_per_bank_gui
-			divide = gold_to_silver_rate
-			min = 0
-		}
-	}
-	min = 0
-}
-silver_gained = {
-	value = gold_lost
-	multiply = gold_to_silver_rate
 }
 
 #silver_drain gold_to_silver_rate < bimetallic_rate_gold_to_silver

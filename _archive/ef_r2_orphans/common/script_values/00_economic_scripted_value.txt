@@ -1,0 +1,61 @@
+﻿# Вырезано из common/script_values/00_economic_scripted_value.txt: определения без ссылок после переносов R2 (8.10); строки — до выреза.
+# строки 4706-4715: money_supply_to_add_per_month
+money_supply_to_add_per_month = { #valeur à ajouter par an
+	value = 0
+	if  = {
+		limit  = {
+			var:devaluation_on = 1
+		}
+		add = var:money_supply_predicted_add_devaluation_1_month_valided #valided to save the vare
+		divide = devaluation_time_month
+	}
+}
+# строки 4764-4773: money_supply_to_subtract_per_month
+money_supply_to_subtract_per_month = {
+	value = 0
+	if  = {
+		limit  = {
+			var:revaluation_on = 1
+		}
+		add = var:money_supply_predicted_add_revaluation_1_month_valided #valided to save the vare
+		divide = revaluation_time_month
+	}
+}
+# строки 5012-5015: money_value_prevision_new_currency
+money_value_prevision_new_currency = {
+	value = global_var:money_value_median
+	multiply = gold_to_silver_rate
+}
+# строки 5016-5018: money_value_prevision_new_currency_in_gold
+money_value_prevision_new_currency_in_gold = {
+	value = global_var:money_value_median
+}
+# строки 5065-5068: money_value_target_real_below_25
+money_value_target_real_below_25 = {
+	value = money_value_target_real_in_gold
+	multiply = 0.75
+}
+# строки 5069-5072: money_value_target_real_above_25
+money_value_target_real_above_25 = {
+	value = money_value_target_real_in_gold
+	multiply = 1.25
+}
+# строки 6691-6694: silver_gained
+silver_gained = {
+	value = gold_lost
+	multiply = gold_to_silver_rate
+}
+# строки 6643-6655 (проход 2): gold_lost
+gold_lost = {
+	value = gold_state_native_for_stockpile
+	multiply = misalignment_rate_gold_drain
+	if = {
+		limit = { exists = scope:arbitrage_privat_bank }
+		max = {
+			value = scope:arbitrage_privat_bank.private_bank_silver_reserve_per_bank_gui
+			divide = gold_to_silver_rate
+			min = 0
+		}
+	}
+	min = 0
+}
