@@ -79,7 +79,9 @@
 
 ## Роли стран (R1а.3)
 `var:zz_ef_role`: 1 — **А** (полный шаг каждую неделю), 2 — **Б** (упрощённый, раз в 4 недели — планировщик), 3 — **В**
-(`is_country_type = decentralized`: ни месячного шага модели, ни недельной цепочки, ни моста; счетов нет). Пересчёт раз в
+(`is_country_type = decentralized`: ни месячного шага модели, ни недельной цепочки, ни моста; счетов нет). `every_country`
+децентрализованные не перебирает (прогон r1007_180243: 284 = 442 − 158), так что переменной роли у них нет — вне планировщика,
+только хаб E&F через `zz_ef_monthly_unscheduled`. Пересчёт раз в
 месяц одним проходом по миру: `on_monthly_pulse` → `zz_ef_roles_world_pass` (`common/scripted_effects/ld_roles.txt`,
 on_action — `common/on_actions/ld_roles_on_actions.txt`): глобальные `zz_ef_role_gdp40` / `zz_ef_role_gdp50` — ВВП 40-й и
 50-й страны (`ordered_country`), затем `zz_ef_role_update` у каждой страны. А — игрок, страны с ЦБ (`has_central_bank`),
