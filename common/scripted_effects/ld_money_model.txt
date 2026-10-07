@@ -909,10 +909,14 @@ zz_ef_money_model_monthly_step = {
 	zz_ef_currency_trade_step = yes
 	# Д2.7а (5.10): the CB's metal = what its building bought -- weekly since 6.10 (zz_ef_metal_week_step)
 	# R1б (В7, 8.10): Ф.2's January interest to foreign private banks -- _archive/ld_privbank_interest/
-	# R1б.2: the country's currency as data, every January (a culture changed, a law taken without on_activate)
+	# R1б.2: the country's currency as data, every January (a culture changed, a law taken without on_activate); the
+	# issuer's parity in gold for the reserves' value (Д.1) -- every month
 	if = {
 		limit = { month = 0 }
 		zz_ef_cur_set = yes
+	}
+	else = {
+		zz_ef_cur_par_update = yes
 	}
 	# В2.1: AI central banks on the forex monthly was tried and taken back
 	# (run 24, 2.10): every E&F purchase is at parity, twelve a year blew the

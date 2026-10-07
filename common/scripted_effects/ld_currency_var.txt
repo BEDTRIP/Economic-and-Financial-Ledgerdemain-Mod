@@ -195,4 +195,110 @@ zz_ef_cur_set = {
 	else_if = { limit = { currency_identifiers_thaler_prussian_thaler = 1 } set_variable = { name = zz_ef_cur value = flag:thaler_prussian_thaler } }
 	else_if = { limit = { currency_identifiers_thaler_saxon_thaler = 1 } set_variable = { name = zz_ef_cur value = flag:thaler_saxon_thaler } }
 	else_if = { limit = { has_variable = zz_ef_cur } remove_variable = zz_ef_cur }
+	zz_ef_cur_par_update = yes
+}
+
+# R1б.1 (Д.1): the issuer's parity in gold, per currency (global_var:zz_ef_fxpar_<cur>), for the value of a currency
+# held in other CBs' reserves in the engine's money (zz_ef_fx_gold_<cur>, script_values/ld_currency_values.txt):
+# E&F's value of the currency (money_value_<cur>, gold per national unit) / this = gold per unit of the engine's
+# money. A CB on a metal standard with a currency law; monthly (zz_ef_money_model_monthly_step) and with zz_ef_cur_set.
+zz_ef_cur_par_update = {
+	if = {
+		limit = { zz_ef_cb_metal_standard = yes has_variable = money_value_target_1 var:money_value_target_1 > 0 }
+		if = { limit = { has_law = law_type:law_dinar_currency } set_global_variable = { name = zz_ef_fxpar_dinar value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_dinar_algerian_dinar_currency } set_global_variable = { name = zz_ef_fxpar_dinar_algerian_dinar value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_dinar_iraqi_dinar_currency } set_global_variable = { name = zz_ef_fxpar_dinar_iraqi_dinar value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_dinar_libyan_dinar_currency } set_global_variable = { name = zz_ef_fxpar_dinar_libyan_dinar value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_dinar_moroccan_dirham_currency } set_global_variable = { name = zz_ef_fxpar_dinar_moroccan_dirham value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_dinar_omanian_rial_currency } set_global_variable = { name = zz_ef_fxpar_dinar_omanian_rial value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_dinar_qiran_currency } set_global_variable = { name = zz_ef_fxpar_dinar_qiran value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_dinar_saudi_riyal_currency } set_global_variable = { name = zz_ef_fxpar_dinar_saudi_riyal value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_dinar_serbian_dinar_currency } set_global_variable = { name = zz_ef_fxpar_dinar_serbian_dinar value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_dinar_tunisian_dinar_currency } set_global_variable = { name = zz_ef_fxpar_dinar_tunisian_dinar value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_dinar_yugoslav_dinar_currency } set_global_variable = { name = zz_ef_fxpar_dinar_yugoslav_dinar value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_dollar_australian_dollar_currency } set_global_variable = { name = zz_ef_fxpar_dollar_australian_dollar value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_dollar_canadian_dollar_currency } set_global_variable = { name = zz_ef_fxpar_dollar_canadian_dollar value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_dollar_caribbean_dollar_currency } set_global_variable = { name = zz_ef_fxpar_dollar_caribbean_dollar value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_dollar_confederate_states_dollar_currency } set_global_variable = { name = zz_ef_fxpar_dollar_confederate_states_dollar value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_dollar_liberian_dollar_currency } set_global_variable = { name = zz_ef_fxpar_dollar_liberian_dollar value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_dollar_new_zealand_dollar_currency } set_global_variable = { name = zz_ef_fxpar_dollar_new_zealand_dollar value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_dollar_sierra_leonean_dollar_currency } set_global_variable = { name = zz_ef_fxpar_dollar_sierra_leonean_dollar value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_dollar_united_states_dollar_currency } set_global_variable = { name = zz_ef_fxpar_dollar_united_states_dollar value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_eco_ariary_currency } set_global_variable = { name = zz_ef_fxpar_eco_ariary value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_eco_central_african_eco_currency } set_global_variable = { name = zz_ef_fxpar_eco_central_african_eco value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_eco_east_african_eco_currency } set_global_variable = { name = zz_ef_fxpar_eco_east_african_eco value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_eco_ethiopian_birr_currency } set_global_variable = { name = zz_ef_fxpar_eco_ethiopian_birr value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_eco_ghanaian_pound_currency } set_global_variable = { name = zz_ef_fxpar_eco_ghanaian_pound value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_eco_nigerian_naira_currency } set_global_variable = { name = zz_ef_fxpar_eco_nigerian_naira value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_eco_south_african_rand_currency } set_global_variable = { name = zz_ef_fxpar_eco_south_african_rand value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_eco_tuareg_ouguiya_currency } set_global_variable = { name = zz_ef_fxpar_eco_tuareg_ouguiya value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_eco_west_african_eco_currency } set_global_variable = { name = zz_ef_fxpar_eco_west_african_eco value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_franc_belgian_franc_currency } set_global_variable = { name = zz_ef_fxpar_franc_belgian_franc value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_franc_french_franc_currency } set_global_variable = { name = zz_ef_fxpar_franc_french_franc value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_franc_luxembourgish_franc_currency } set_global_variable = { name = zz_ef_fxpar_franc_luxembourgish_franc value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_franc_swiss_franc_currency } set_global_variable = { name = zz_ef_fxpar_franc_swiss_franc value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_gulden_currency } set_global_variable = { name = zz_ef_fxpar_gulden value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_gulden_bavarian_gulden_currency } set_global_variable = { name = zz_ef_fxpar_gulden_bavarian_gulden value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_gulden_florin_currency } set_global_variable = { name = zz_ef_fxpar_gulden_florin value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_gulden_hungarian_forint_currency } set_global_variable = { name = zz_ef_fxpar_gulden_hungarian_forint value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_gulden_indies_guilder_currency } set_global_variable = { name = zz_ef_fxpar_gulden_indies_guilder value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_gulden_south_german_gulden_currency } set_global_variable = { name = zz_ef_fxpar_gulden_south_german_gulden value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_krone_czech_koruna_currency } set_global_variable = { name = zz_ef_fxpar_krone_czech_koruna value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_krone_danish_krone_currency } set_global_variable = { name = zz_ef_fxpar_krone_danish_krone value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_krone_estonian_kroon_currency } set_global_variable = { name = zz_ef_fxpar_krone_estonian_kroon value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_krone_icelandic_krona_currency } set_global_variable = { name = zz_ef_fxpar_krone_icelandic_krona value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_krone_norwegian_krone_currency } set_global_variable = { name = zz_ef_fxpar_krone_norwegian_krone value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_krone_slovak_koruna_currency } set_global_variable = { name = zz_ef_fxpar_krone_slovak_koruna value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_krone_swedish_krona_currency } set_global_variable = { name = zz_ef_fxpar_krone_swedish_krona value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_leon_leu_currency } set_global_variable = { name = zz_ef_fxpar_leon_leu value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_leon_lev_currency } set_global_variable = { name = zz_ef_fxpar_leon_lev value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_lira_currency } set_global_variable = { name = zz_ef_fxpar_lira value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_lira_ducato_currency } set_global_variable = { name = zz_ef_fxpar_lira_ducato value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_lira_ottoman_lira_currency } set_global_variable = { name = zz_ef_fxpar_lira_ottoman_lira value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_lira_scudo_pontificio_currency } set_global_variable = { name = zz_ef_fxpar_lira_scudo_pontificio value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_lira_scudo_sardo_currency } set_global_variable = { name = zz_ef_fxpar_lira_scudo_sardo value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_lira_toscane_lira_currency } set_global_variable = { name = zz_ef_fxpar_lira_toscane_lira value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_mark_currency } set_global_variable = { name = zz_ef_fxpar_mark value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_mark_finnish_markka_currency } set_global_variable = { name = zz_ef_fxpar_mark_finnish_markka value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_peso_currency } set_global_variable = { name = zz_ef_fxpar_peso value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_peso_argentine_peso_currency } set_global_variable = { name = zz_ef_fxpar_peso_argentine_peso value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_peso_bolivien_peso_currency } set_global_variable = { name = zz_ef_fxpar_peso_bolivien_peso value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_peso_chilean_peso_currency } set_global_variable = { name = zz_ef_fxpar_peso_chilean_peso value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_peso_colombian_peso_currency } set_global_variable = { name = zz_ef_fxpar_peso_colombian_peso value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_peso_costa_rican_colon_currency } set_global_variable = { name = zz_ef_fxpar_peso_costa_rican_colon value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_peso_cuban_peso_currency } set_global_variable = { name = zz_ef_fxpar_peso_cuban_peso value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_peso_ecuadorian_peso_currency } set_global_variable = { name = zz_ef_fxpar_peso_ecuadorian_peso value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_peso_el_salvador_colon_currency } set_global_variable = { name = zz_ef_fxpar_peso_el_salvador_colon value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_peso_guatemalan_quetzal_currency } set_global_variable = { name = zz_ef_fxpar_peso_guatemalan_quetzal value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_peso_honduran_lempira_currency } set_global_variable = { name = zz_ef_fxpar_peso_honduran_lempira value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_peso_mexican_peso_currency } set_global_variable = { name = zz_ef_fxpar_peso_mexican_peso value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_peso_nicaraguan_cordoba_currency } set_global_variable = { name = zz_ef_fxpar_peso_nicaraguan_cordoba value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_peso_paraguayan_peso_currency } set_global_variable = { name = zz_ef_fxpar_peso_paraguayan_peso value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_peso_philippine_peso_currency } set_global_variable = { name = zz_ef_fxpar_peso_philippine_peso value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_peso_sol_de_oro_currency } set_global_variable = { name = zz_ef_fxpar_peso_sol_de_oro value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_peso_uruguayan_peso_currency } set_global_variable = { name = zz_ef_fxpar_peso_uruguayan_peso value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_peso_venezuelan_peso_currency } set_global_variable = { name = zz_ef_fxpar_peso_venezuelan_peso value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_pound_egyptian_pound_currency } set_global_variable = { name = zz_ef_fxpar_pound_egyptian_pound value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_pound_irish_pound_currency } set_global_variable = { name = zz_ef_fxpar_pound_irish_pound value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_pound_sterling_currency } set_global_variable = { name = zz_ef_fxpar_pound_sterling value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_real_currency } set_global_variable = { name = zz_ef_fxpar_real value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_real_brazilian_real_currency } set_global_variable = { name = zz_ef_fxpar_real_brazilian_real value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_rupee_indian_rupee_currency } set_global_variable = { name = zz_ef_fxpar_rupee_indian_rupee value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_rupee_indonesian_rupiah_currency } set_global_variable = { name = zz_ef_fxpar_rupee_indonesian_rupiah value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_spe_baht_currency } set_global_variable = { name = zz_ef_fxpar_spe_baht value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_spe_dong_currency } set_global_variable = { name = zz_ef_fxpar_spe_dong value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_spe_drachma_currency } set_global_variable = { name = zz_ef_fxpar_spe_drachma value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_spe_korean_won_currency } set_global_variable = { name = zz_ef_fxpar_spe_korean_won value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_spe_latvian_lats_currency } set_global_variable = { name = zz_ef_fxpar_spe_latvian_lats value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_spe_lithuanian_litas_currency } set_global_variable = { name = zz_ef_fxpar_spe_lithuanian_litas value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_spe_peseta_currency } set_global_variable = { name = zz_ef_fxpar_spe_peseta value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_spe_ruble_currency } set_global_variable = { name = zz_ef_fxpar_spe_ruble value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_spe_uni_currency } set_global_variable = { name = zz_ef_fxpar_spe_uni value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_spe_yen_currency } set_global_variable = { name = zz_ef_fxpar_spe_yen value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_spe_yuan_currency } set_global_variable = { name = zz_ef_fxpar_spe_yuan value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_spe_zloti_currency } set_global_variable = { name = zz_ef_fxpar_spe_zloti value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_thaler_hannoveraner_thaler_currency } set_global_variable = { name = zz_ef_fxpar_thaler_hannoveraner_thaler value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_thaler_prussian_thaler_currency } set_global_variable = { name = zz_ef_fxpar_thaler_prussian_thaler value = zz_ef_parity_gold } }
+		else_if = { limit = { has_law = law_type:law_thaler_saxon_thaler_currency } set_global_variable = { name = zz_ef_fxpar_thaler_saxon_thaler value = zz_ef_parity_gold } }
+	}
 }

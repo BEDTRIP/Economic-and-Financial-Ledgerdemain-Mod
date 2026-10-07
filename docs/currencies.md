@@ -46,6 +46,7 @@
 | имя | смысл | пишет | читает |
 |---|---|---|---|
 | `var:zz_ef_cur` | валюта страны — `flag:<ключ>` (закон валюты; нет закона — валюта E&F по культуре `currency_identifiers_<cur>`; нет и её — переменной нет, общий символ) | `on_activate` законов валюты, `zz_ef_cur_set` (`ld_currency_var.txt`, генератор `regen_ld_currency_data`): первый шаг страны, каждый январь, `zz_ef_cur_intro_after` | `currency_name`, `currency_symbol`, `currency_symbol_generic`, `currency_symbol_<cur>` (custom loc) |
+| `global_var:zz_ef_fxpar_<cur>` | паритет эмитента в золоте (`zz_ef_parity_gold`) по валюте — ЦБ на металлическом стандарте с законом валюты | `zz_ef_cur_par_update` (`ld_currency_var.txt`): месячный шаг, `zz_ef_cur_set` | `zz_ef_fx_gold_<cur>` (`ld_currency_values.txt`): единица валюты в резервах ЦБ в золоте по деньгам движка (стоимость E&F / паритет, ≈ 1 у металлических; фиат — стоимость E&F) → `zz_ef_fx_reserves_metal` |
 | `var:money_value_target_1` | паритет (металл на единицу) | история E&F, `zz_ef_std_switch_after`, `zz_ef_cur_zone_step`, `zz_ef_mp_complete` | `zz_ef_value_to_parity`, `zz_ef_metal_target_in_gold`, `zz_ef_cur_zone_step`, `zz_ef_mp_can_work` |
 | `global_var:money_value_<cur>_global_var` | курс валюты `<cur>` | E&F | `money_value_<cur>` |
 | `global_var:money_value_median` | медиана E&F | E&F | `zz_ef_value_to_parity` (запасной путь), `is_reference_currency` |

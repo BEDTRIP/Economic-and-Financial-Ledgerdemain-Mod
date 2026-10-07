@@ -22,7 +22,7 @@
 | `regen_ef_bond_tables` | `common/scripted_guis/ld_bond_tables.txt`, `common/script_values/ld_bond_tables_values.txt`, `localization/<lang>/ld_bond_tables_l_<lang>.yml` | — |
 | `regen_ef_cb_loan` | `common/script_values/ld_cb_loan_values.txt`, `localization/<lang>/replace/ld_cb_loan_replace_l_<lang>.yml` | — |
 | `regen_ef_cb_rate_gui` | `gui/ld_cb_rate_panel.gui` | `gui/ld_cb_rate_panel.gui` / E&F-оригинал (ПК) |
-| `regen_ld_currency_data` | `common/scripted_effects/ld_currency_var.txt`, `on_activate` законов `common/laws/01_ef_currency_type.txt`, `currency_name` / `currency_symbol` / `currency_symbol_generic` / `currency_symbol_<cur>` в `common/customizable_localization/00_ef_localization_ custom.txt`, `docs/currency-table.md` | законы, история и локализация валют форка |
+| `regen_ld_currency_data` | `common/scripted_effects/ld_currency_var.txt`, `on_activate` законов `common/laws/01_ef_currency_type.txt`, `currency_name` / `currency_symbol` / `currency_symbol_generic` / `currency_symbol_<cur>` в `common/customizable_localization/00_ef_localization_ custom.txt`, `common/script_values/ld_currency_values.txt`, оценка валют в `zz_ef_fx_reserves_metal` (`ld_fx_reserves_values.txt`), `docs/currency-table.md` | законы, история и локализация валют форка |
 | `regen_ef_cb_rate_loc` | `localization/<lang>/ld_cb_rate_panel_l_<lang>.yml` | — |
 | `regen_ef_clearing` | `common/scripted_effects/ld_clearing.txt`, `common/script_values/ld_clearing_values.txt`, `common/scripted_guis/ld_cbfx.txt`, `localization/<lang>/ld_cbfx_l_<lang>.yml` | список валют (`ld_reserve_trade_values.txt`) |
 | `regen_ef_customs_union` | `common/script_values/ld_customs_union_values.txt`, `common/scripted_triggers/ld_customs_union_triggers.txt` | ванильные товары (ПК) |
