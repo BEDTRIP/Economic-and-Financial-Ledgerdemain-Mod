@@ -168,13 +168,6 @@ zz_ef_sav_norm = {
 	min = 0
 	multiply = zz_ef_sav_norm_gdp
 }
-zz_ef_sav_speed = 0.1
-zz_ef_sav_to_wealth = {
-	value = zz_ef_pop_savings
-	subtract = zz_ef_sav_norm
-	multiply = zz_ef_sav_speed
-	min = 0
-}
 
 # ---- steps 4, 5, 7: what was bought and sold this week, goods a week ------------
 # The CB's building(s): the method's input (1 gold / 10 silver per workforce) x (1 + our percent, zz_ef_cb_metal_buy).
@@ -538,12 +531,6 @@ zz_ef_wm_total_gold_eq = {
 	add = zz_ef_wm_clr_pot
 }
 
-# ---- the cards (tools/regen_ef_money_supply_loc.py) ---------------------------------------
-# the savings over their norm that left the money at the last receiver (rolled to zz_ef_w_ at the step)
-zz_ef_v_w_sav_wealth = {
-	value = 0
-	if = { limit = { has_variable = zz_ef_w_sav_wealth } value = var:zz_ef_w_sav_wealth }
-}
 # the CB's buy-back of the pops' metal this week, in money (new money into their savings)
 zz_ef_v_f_buyback_m = {
 	value = 0

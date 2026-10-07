@@ -145,7 +145,7 @@ GUI-тип регистрирует первый файл по имени (ASCII
 пула (пул + кредиты + облигации − вклады − кредит ЦБ − вклады чужих ЦБ), т. е. капитал банков учёта
 (`var:zz_ef_bank_capital`, `money-model.md`) + «прочее».
 <!-- vitrine -->
-Сгенерировано `../vic3_mods/tools/ld_vitrine.py --write`. Имён 592: переменных 11, значений-витрины 162, вычисляемых при перерисовке 419; файлов 13.
+Сгенерировано `../vic3_mods/tools/ld_vitrine.py --write`. Имён 589: переменных 11, значений-витрины 160, вычисляемых при перерисовке 418; файлов 13.
 
 | имя | класс | где читается |
 | --- | --- | --- |
@@ -697,7 +697,6 @@ GUI-тип регистрирует первый файл по имени (ASCII
 | `zz_ef_v_f_bl_redeem` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_f_bl_sold` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_f_buyback_m` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
-| `zz_ef_v_f_buyout` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_f_cb_borrow` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_f_cb_hume_m` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_f_cb_interest` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
@@ -726,7 +725,6 @@ GUI-тип регистрирует первый файл по имени (ASCII
 | `zz_ef_v_f_trade` | vit | `gui/ld_economy_panel.gui` |
 | `zz_ef_v_f_transfer` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_fx_metal` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
-| `zz_ef_v_w_buyout` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_w_cc_int` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_w_cc_issue` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_w_cc_repay` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
@@ -739,6 +737,5 @@ GUI-тип регистрирует первый файл по имени (ASCII
 | `zz_ef_v_w_hume_money` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_w_inflow` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_w_nr_dep` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
-| `zz_ef_v_w_sav_wealth` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_value_in_silver` | calc | `localization/english/01_ef_tooltips_localization_l_english.yml` |
 <!-- /vitrine -->

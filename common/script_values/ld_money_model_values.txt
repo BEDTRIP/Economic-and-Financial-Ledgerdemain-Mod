@@ -661,22 +661,6 @@ zz_ef_dep_interest = {
 		min = 0
 	}
 }
-# В1.2 (3.10): the pool's unexplained loss is companies buying building
-# levels from aristocrats and capitalists (manors, financial districts) at the
-# privatization price -- the engine's company privatization of privately
-# owned levels: VC's PRIVATIZATION_PER_LEVEL_COST 150 x MIN_FAKE_CONSTRUCTION_
-# COST 100 = 15 000 a level. Saves of the night-Г run 4 (1839.1 -> 1841.1,
-# levels moved without the building changing): 130-190 levels a half-year in
-# the world go from manors / financial districts / foreign pops to companies,
-# the state sells 6-49. The engine pays the sellers nothing (pops hold no
-# money, manors have no cash): the sellers get it in their savings -- the
-# receiver of money the engine loses. The buyer's country's savings (a seller
-# abroad -- rare -- is not told apart).
-zz_ef_v_f_buyout = {
-	value = zz_ef_v_f_pool_other
-	max = 0
-	multiply = -1
-}
 zz_ef_v_f_inflow = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_f_inflow } value = var:zz_ef_f_inflow }
@@ -2673,11 +2657,6 @@ zz_ef_cbm_v = {
 zz_ef_fdi_mod_v = {
 	value = 0
 	if = { limit = { has_modifier = interest_from_foreign_debt_investment } value = 1 }
-}
-# В1.6 / ИВ.1 (5.10 evening): the week's event money between the treasury and pops' savings (+ to the savings)
-zz_ef_v_f_event_sav = {
-	value = 0
-	if = { limit = { has_variable = zz_ef_f_event_sav } value = var:zz_ef_f_event_sav }
 }
 # В4.2 (5.10 evening): the engine's factor on the government's rate (1 until measured)
 zz_ef_gr_k_v = {

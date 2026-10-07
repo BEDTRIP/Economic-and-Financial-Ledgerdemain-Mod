@@ -1,0 +1,18 @@
+# Cut from common/script_values/ld_metal_accounts_values.txt (R1а, 8.10.2026).
+
+zz_ef_sav_to_wealth = {
+	value = zz_ef_pop_savings
+	subtract = zz_ef_sav_norm
+	multiply = zz_ef_sav_speed
+	min = 0
+}
+
+zz_ef_sav_speed = 0.1
+
+# ---- the cards (tools/regen_ef_money_supply_loc.py) ---------------------------------------
+# the savings over their norm that left the money at the last receiver (rolled to zz_ef_w_ at the step)
+zz_ef_v_w_sav_wealth = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_w_sav_wealth } value = var:zz_ef_w_sav_wealth }
+}
+

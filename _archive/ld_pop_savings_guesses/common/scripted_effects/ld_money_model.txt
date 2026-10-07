@@ -1,0 +1,58 @@
+# Cut from common/scripted_effects/ld_money_model.txt (R1а, 8.10.2026).
+
+# --- zz_ef_pop_savings_step, the three blocks:
+	# В1.2 (3.10): levels sold to companies -- the price to the sellers' savings
+	# (zz_ef_v_f_buyout); the pool's loss stays out of the leak.
+	set_variable = { name = zz_ef_f_buyout_got value = 0 }
+	if = {
+		limit = {
+			has_variable = zz_ef_weeks_run
+			var:zz_ef_weeks_run >= 3
+		}
+		set_variable = { name = zz_ef_f_buyout_got value = zz_ef_v_f_buyout }
+		change_variable = { name = zz_ef_pop_savings add = var:zz_ef_f_buyout_got }
+	}
+
+	# В1.6 / ИВ.1 (the user 5.10 evening, (a)): the treasury's event spending and income (the budget's additional
+	# expenses / income -- expeditions, "developing the can opener", DLC events; E&F's interest to its own CB not
+	# counted) pair with pops' savings: what the treasury spent on an event is an order at home -- into the savings;
+	# what it got from one -- out of them (at most what they hold). The engine itself only destroys / creates it.
+	set_variable = { name = zz_ef_f_event_sav value = 0 }
+	if = {
+		limit = {
+			has_variable = zz_ef_weeks_run
+			var:zz_ef_weeks_run >= 3
+		}
+		set_variable = {
+			name = zz_ef_f_event_sav
+			value = {
+				value = zz_ef_v_f_aint
+				multiply = -1
+				min = {
+					value = var:zz_ef_pop_savings
+					min = 0
+					multiply = -1
+				}
+			}
+		}
+		change_variable = { name = zz_ef_pop_savings add = var:zz_ef_f_event_sav }
+	}
+	# Stage 2, step 6 (Д2.20, Д2.22 в, 6.10): savings over their norm (0.3..0.6 GDP by the deposit rate) -- 10% of the
+	# excess a week leaves the money into wealth; the deposits follow the cash norm inside what is left
+	set_variable = { name = zz_ef_f_sav_wealth value = 0 }
+	if = {
+		limit = {
+			has_variable = zz_ef_weeks_run
+			var:zz_ef_weeks_run >= 3
+		}
+		set_variable = { name = zz_ef_f_sav_wealth value = zz_ef_sav_to_wealth }
+		change_variable = { name = zz_ef_pop_savings subtract = var:zz_ef_f_sav_wealth }
+	}
+
+# --- zz_ef_money_model_step, the window rolls:
+	zz_ef_money_window_roll = { F = buyout_got }
+	zz_ef_money_window_roll = { F = sav_wealth }
+
+# --- the EFR log line (zz_ef_bridge_apply), the field:
+# |event_sav [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_event_sav')|0]
+# |sav_wealth [THIS.GetCountry.MakeScope.Var('zz_ef_f_sav_wealth').GetValue|0]
