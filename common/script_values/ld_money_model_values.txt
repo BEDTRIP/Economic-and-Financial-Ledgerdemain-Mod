@@ -769,15 +769,7 @@ zz_ef_cb_cover = {
 		divide = zz_ef_metal_per_money
 	}
 }
-# ---- the CB's reserves: interventions and mining (the user, 1.10 night) ---
-# E&F's interventions (scripted_effects/zz_ef_fx_deals.txt, generated): a
-# deal is 2% of the issuer's M2 in its currency (was a random 1-10 million
-# units, E&F's money scale).
-zz_ef_fx_deal_size = {
-	value = zz_ef_agg_m2
-	multiply = 0.02
-	min = 1
-}
+# ---- the CB's reserves: mining (the user, 1.10 night) ---
 zz_ef_gold_mined_week = {
 	value = 0
 	every_scope_state = {

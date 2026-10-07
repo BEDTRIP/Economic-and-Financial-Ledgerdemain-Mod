@@ -592,42 +592,6 @@ is_in_large_monetary_policy_trigger = {
 
 #####################################################################################################################################################
 
-buy_currency_1 = {
-	#has_central_bank_SS_BS_GS_GES_NISO = yes #? why not -> deja atribué pour etre dans la liste
-	money_value_in_gold < money_value_target_real_below_25  #la monaie sous evalué à plus de 10% de la money_value
-	not = {  #pas d'achat sisujet , a le modifier d'echnge monetaire, a la loi isolationniste
-		has_law = law_type:law_gold_exchange_standard # le GSE n'est plus réguler par les autre pays dans le future ajouter des méchanique pour que le pays ne puisse pas vendre la devise de référence et qui s'equilibre avec en l'achetant avec le reste d'or
-		or = { #ce n'est pas le role de cette effecte donc ne fait rien avec pays qui ont ces modifier
-			has_modifier = economic_instability
-			var:currency_crisis = 1
-			var:central_bank_bankruptcy = 1
-			infamy >= infamy_threshold:pariah
-			has_modifier = foreign_exchange_controls
-		}
-	}
-}
-sell_currency_1 = {
-	#has_central_bank_SS_BS_GS_GES_NISO = yes #? why not -> deja atribué pour etre dans la liste
-
-	money_value_in_gold > money_value_target_real_above_25 #- soit la valeur doit etre equilibré car le pays qui rachete sa devise est sur-évaluée
-	not = {  #pas d'achat sisujet , a le modifier d'echnge monetaire, a la loi isolationniste
-		has_law = law_type:law_gold_exchange_standard # le GSE n'est plus réguler par les autre pays dans le future ajouter des méchanique pour que le pays ne puisse pas vendre la devise de référence et qui s'equilibre avec en l'achetant avec le reste d'or
-		or = { #ce n'est pas le role de cette effecte donc ne fait rien avec pays qui ont ces modifier
-			has_modifier = economic_instability
-			var:currency_crisis = 1
-			var:central_bank_bankruptcy = 1
-			infamy >= infamy_threshold:pariah
-			has_modifier = foreign_exchange_controls
-		}
-	}
-
-	# OR = { #pas sa place ici
-	# 	#seller_root
-	# 	scope:seller_root.trade_balance_in_currency < 0 #- soit le pays vendeur à un deficite à comblé est a besoins d'or donc il vent sont exédent
-	# 	scope:seller_root.central_bank_metal_reserves_state < 0
-	# 	scope:seller_root.central_bank_metal_reserves_state_to_ensure_the_conversion_pourcent < 0.75
-	# }
-}
 sell_currency_crisis_1 = {
 	# or  = {
 	# 	has_modifier = economic_instability

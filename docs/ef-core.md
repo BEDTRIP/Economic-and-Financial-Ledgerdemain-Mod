@@ -55,18 +55,18 @@
 | 41512–42367 | `devaluation_on`, `revaluation_on`, `set_reset_monetary_system_status`, `on_activate_*_law` | — |
 | 41765 | `trade_balance` (388) | да (месячный) |
 | 42367–42720 | `stockpiling_currency`, `stockpiling_currency_type_1` | да |
-| 42720–91109 | 95×3 `buy_<cur>_currency`, `sell_<cur>_currency`, `sell_<cur>_currency_crisis` (по ~510 строк на валюту) | да, из `ai_buy_sell_currency`; `_crisis` — из `00_on_action_main.txt:7924` и др.; пишут `gold_state_1`/`silver_state_1` |
+| 42720–91109 | 95 `sell_<cur>_currency_crisis` (`buy_/sell_<cur>_currency` ИИ-форекса — в `_archive/ef_ai_forex/`) | да, из `all_currency_resold`; пишут `gold_state_1`/`silver_state_1` |
 | 91172–92241 | `private_bank_arbitrage_gold_drain`/`_silver_drain` | арбитраж живой (годовой, биметаллизм до 1873) |
 | 92575, 104603 | `reset_debt_in_national_currency[_player]` (2×2 тыс. строк) | да (GUI/смена закона) |
 | 94692–99107 | `stockpiling_capital_state_transfert`, `..._financial_center_place`, `enemy_capital_is_occuped` (1,8 тыс.), `enemy_stats_is_occuped` | да (месячный, решение ИИ, бой) |
 | 99199–104511 | `central_bank_production_methods`, `_3`, `_4` — пустые определения (тела в `_archive/ef_central_bank_pm_consuption/`) | пусто |
 | 106713–107610 | `remove_suject_currency`, `subject_currency` | живые (подданные) |
-Внутри E&F-тел встроены вызовы модели: `zz_ef_cb_rate_step`, `zz_ef_std_switch_*`, `zz_ef_mp_init/_clear`, `zz_ef_crisis_redeem` (95), `zz_ef_cb_cover`, `zz_ef_fx_deal_size`, `zz_ef_cover_normal` (по 95 валютам в `buy_/sell_`).
+Внутри E&F-тел встроены вызовы модели: `zz_ef_cb_rate_step`, `zz_ef_std_switch_*`, `zz_ef_mp_init/_clear`, `zz_ef_crisis_redeem` (95), `zz_ef_cb_cover`, `zz_ef_cover_normal` (по 95 валютам в `sell_<cur>_currency_crisis`).
 
 ## Переменные
 | имя | смысл | пишет | читает |
 |---|---|---|---|
-| `gold_state_1`, `silver_state_1` (штат) | запас металла штата (ЦБ-штат — резерв ЦБ; в модели `ld_*` — резерв ЦБ) | history, `buy_/sell_<cur>_currency`, арбитраж, `enemy_capital_is_occuped`, `zz_ef_*` | `gold_state_native_for_stockpile`, `zz_ef_cbm_gold/silver` |
+| `gold_state_1`, `silver_state_1` (штат) | запас металла штата (ЦБ-штат — резерв ЦБ; в модели `ld_*` — резерв ЦБ) | history, `sell_<cur>_currency_crisis`, кнопки форекса, арбитраж, `enemy_capital_is_occuped`, `zz_ef_*` | `gold_state_native_for_stockpile`, `zz_ef_cbm_gold/silver` |
 | `money_value_<cur>` / `money_value_target_<cur>` / `money_value_in_gold_<cur>` (глобальные) | курс валюты, цель и в золоте по каждой из 95 валют | `money_value[_target|_in_gold]_<cur>_global_var` | инфляция, GUI |
 | `base_rate_percentage`, `rise_base_rate`, `down_base_rate` | ставка ЦБ; модификаторы направления | `zz_ef_cb_rate_step` | `central_bank_ef_on_monthly_pulse_country`, PSC |
 | `speculative_share_1` / `_2` | пузырь / индекс перестройки | `ld_bubble`, `ld_pb_overbuild_counter` | JE `financial_center_je_2` |
