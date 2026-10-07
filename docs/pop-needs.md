@@ -9,7 +9,7 @@
 - `common/goods/ef_00_goods.txt` — товары E&F: `INJECT:gold` (торгуемый, `fixed_price = no`, `traded_quantity = 5`), `silver`, `bond`, `manufacture_stock`, `agricultural_stock`, `mining_stock`, `railroad_stock`, `mutual_funds` (не торгуется, фикс. цена 250), `local_currency` (`tradeable = no`, `local = no`), `liquidity_currency` (торгуемый).
 - `common/goods/PSC_goods.txt` — PSC: `wood_construction`, `iron_construction`, `steel_construction`, `arc_welded_construction`.
 - `common/named_colors/00_ef_goods_colors.txt` — цвета товаров для GUI: `silver`, `bond`, `manufacture_stock`, `agricultural_stock`, `mining_stock`.
-- `common/prestige_goods/00_ef_prestige_goods.txt`, `00_ef_prestige_goods_2.txt` — 14 престижных вариантов товаров (`prestige_good_mexican_silver`, `prestige_good_russian_gold`, `prestige_good_usa_oil`, `manufacture_stock_{construction,gbr,gbr_2}` (`manufacture_stock_usa` выключен: предел движка — три на товар), `agricultural_stock_rus`, `mining_stock_{usa,aus}`, `railroad_stock_{usa,fra,ger,rus}`); подключаются в `common/company_types/00_ef_companies.txt` (`possible_prestige_goods`).
+- `common/prestige_goods/00_ef_prestige_goods.txt`, `00_ef_prestige_goods_2.txt` — 13 престижных вариантов товаров (`prestige_good_mexican_silver`, `prestige_good_russian_gold`, `prestige_good_usa_oil`, `manufacture_stock_{construction,gbr,gbr_2}` (`manufacture_stock_usa` выключен: предел движка — три на товар), `agricultural_stock_rus`, `mining_stock_{usa,aus}`, `railroad_stock_{usa,fra,ger,rus}`); подключаются в `common/company_types/00_ef_companies.txt` (`possible_prestige_goods`).
 
 ## Поток / порядок
 Расчёта по on_action нет: движок каждую неделю считает покупки попов по пакету их уровня достатка. Строка `wealth_N` содержит записи:

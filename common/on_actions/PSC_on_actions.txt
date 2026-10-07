@@ -15,14 +15,12 @@ set_construction_country = {
 	effect = {
         if = {
             limit = {
-                OR = {
-                    NOT = {
-                        has_variable = last_construction_run
-                    }
-                    game_date != var:last_construction_run
-                }
+                # once a day: game_date != var:… is not read by the engine (a date is not taken from a variable,
+                # error.log) -- a variable that lives one day instead
+                NOT = { has_variable = psc_construction_ran_today }
             }
 		    set_construction_point_demand = yes
+            set_variable = { name = psc_construction_ran_today value = yes days = 1 }
             set_variable = {
                 name = last_construction_run
                 value = game_date

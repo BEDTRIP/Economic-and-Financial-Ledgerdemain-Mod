@@ -215,7 +215,7 @@
 | Товары-финпродукты E&F (`bond`, `manufacture_stock`, `agricultural_stock`, `mining_stock`, `railroad_stock`, `mutual_funds`) | живой | common/goods/ef_00_goods.txt:35-103 | refs: bond 1854, manufacture_stock 154 …; PM фин. центра потребляют/производят | —; GUI рынка, цвета `common/named_colors/00_ef_goods_colors.txt:2-6` |
 | `INJECT:gold` (торгуемый, `traded_quantity=5`) и `silver` | живой | common/goods/ef_00_goods.txt:8-33 | gold refs=41721; silver refs=2502 | — |
 | Товары `local_currency` и `liquidity_currency` | живой | common/goods/ef_00_goods.txt:112-135 | `liquidity_currency` refs=318 (банки, здания, попы); `local_currency` refs=14, без производителей | — |
-| Престижные товары E&F (14 вариантов; `manufacture_stock_usa` закомментирован — предел 3 на товар) | живой | common/prestige_goods/00_ef_prestige_goods.txt:5-90 | имена упомянуты в `common/company_types/00_ef_companies.txt` (`possible_prestige_goods`) | — (карточка компании) |
+| Престижные товары E&F (13 вариантов; `manufacture_stock_usa` и `railroad_stock_rus` закомментированы — предел 3 на товар) | живой | common/prestige_goods/00_ef_prestige_goods.txt:5-90 | имена упомянуты в `common/company_types/00_ef_companies.txt` (`possible_prestige_goods`) | — (карточка компании) |
 | Строительные товары PSC (`wood/iron/steel/arc_welded_construction`) | живой | common/goods/PSC_goods.txt:1-31 | refs 60+; потребность `popneed_household_construction` (ld) тянет их в 99 строк buy_packages | — (описана в PSC) |
 
 ## Точки входа (`entry-points.md`)
