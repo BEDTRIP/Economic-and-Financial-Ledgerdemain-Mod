@@ -1,0 +1,79 @@
+# R2, steps 1-2 (Д.R2.2, Д.R2.14, 8.10): the player's forex buttons of E&F (<cur>_buy_in_gold / <cur>_sell_in_gold,
+# scripted_guis/00_economic_scripted_guis.txt) through the ledger. The button's own code stays; around it:
+#   * the metal both CBs moved (the issuer's and the player's) is a known move of the CB's metal reconciliation
+#     (var:zz_ef_mt_fx_g / _s, zz_ef_metal_reconcile), not «прочее»;
+#   * the issuer's own currency at its CB (E&F's stock, untouched by the model) is put back; the currency the player's CB
+#     bought is a deposit in the issuer's banks: var:zz_ef_nr_fx_pend of the issuer, taken by its next zz_ef_nr_dep_step
+#     as the clearing's posting is (the pool and the register zz_ef_nr_dep together), a sale -- the deposit back.
+# The holder's stock (stockpiling_<cur>_state_1 of the player's CB) is the button's, as before: the register mirrors it.
+# Called in the button's effect: root = the issuer, the player = every_country with is_player (as E&F finds it).
+
+zz_ef_fxb_before = {
+	every_country = {
+		limit = { is_player = yes }
+		save_scope_as = zz_fxb_player
+	}
+	root = {
+		set_variable = { name = zz_ef_fxb_g0 value = gold_state_native_for_stockpile }
+		set_variable = { name = zz_ef_fxb_s0 value = silver_state_native_for_stockpile }
+		set_variable = { name = zz_ef_fxb_own0 value = stockpiling_$CUR$_state }
+	}
+	if = {
+		limit = {
+			exists = scope:zz_fxb_player
+			NOT = { scope:zz_fxb_player = root }
+		}
+		scope:zz_fxb_player = {
+			set_variable = { name = zz_ef_fxb_g0 value = gold_state_native_for_stockpile }
+			set_variable = { name = zz_ef_fxb_s0 value = silver_state_native_for_stockpile }
+		}
+	}
+}
+
+zz_ef_fxb_after = {
+	root = {
+		zz_ef_fxb_metal_known = yes
+		# the issuer's own currency: back to what it was; the change is the deposit of the buyer's CB in our banks
+		set_variable = {
+			name = zz_ef_fxb_d
+			value = {
+				value = stockpiling_$CUR$_state
+				subtract = var:zz_ef_fxb_own0
+			}
+		}
+		if = {
+			limit = { NOT = { var:zz_ef_fxb_d = 0 } }
+			random_scope_state = {
+				limit = {
+					has_modifier = central_bank_historic_place
+					is_capital = yes
+				}
+				if = { limit = { NOT = { has_variable = stockpiling_$CUR$_state_1 } } set_variable = { name = stockpiling_$CUR$_state_1 value = 0 } }
+				change_variable = { name = stockpiling_$CUR$_state_1 subtract = owner.var:zz_ef_fxb_d }
+			}
+			if = { limit = { NOT = { has_variable = zz_ef_nr_fx_pend } } set_variable = { name = zz_ef_nr_fx_pend value = 0 } }
+			change_variable = { name = zz_ef_nr_fx_pend subtract = var:zz_ef_fxb_d }
+		}
+		remove_variable = zz_ef_fxb_d
+		remove_variable = zz_ef_fxb_own0
+	}
+	if = {
+		limit = {
+			exists = scope:zz_fxb_player
+			NOT = { scope:zz_fxb_player = root }
+		}
+		scope:zz_fxb_player = { zz_ef_fxb_metal_known = yes }
+	}
+}
+
+# Country scope: the CB's metal moved since zz_ef_fxb_before -- a known move of the reconciliation.
+zz_ef_fxb_metal_known = {
+	if = { limit = { NOT = { has_variable = zz_ef_mt_fx_g } } set_variable = { name = zz_ef_mt_fx_g value = 0 } }
+	if = { limit = { NOT = { has_variable = zz_ef_mt_fx_s } } set_variable = { name = zz_ef_mt_fx_s value = 0 } }
+	change_variable = { name = zz_ef_mt_fx_g add = gold_state_native_for_stockpile }
+	change_variable = { name = zz_ef_mt_fx_g subtract = var:zz_ef_fxb_g0 }
+	change_variable = { name = zz_ef_mt_fx_s add = silver_state_native_for_stockpile }
+	change_variable = { name = zz_ef_mt_fx_s subtract = var:zz_ef_fxb_s0 }
+	remove_variable = zz_ef_fxb_g0
+	remove_variable = zz_ef_fxb_s0
+}

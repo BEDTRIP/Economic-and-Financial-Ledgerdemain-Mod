@@ -239,9 +239,9 @@ zz_ef_wm_add = {
 # keeps the CB's change for its card (UI.11).
 zz_ef_metal_week_step = {
 	# В3 (the user, 7.10): the CB's metal against its known moves since last week's step -- what is left (oth) moved
-	# without the market or our pairs (E&F's forex, crisis redemption, arbitrage with its private banks, a standard
-	# switch...). Known: the clearing at the last receiver (var:zz_ef_f_hume, the standard's metal), the start's recount
-	# (var:zz_ef_mt_start_adj_*); this week's own purchases come after the snapshot. EFQ line when it is not ~0.
+	# without the market or our pairs (crisis redemption, a standard switch...). Known: the clearing at the last receiver
+	# (var:zz_ef_f_hume, the standard's metal), the start's recount (var:zz_ef_mt_start_adj_*), the player's forex buttons
+	# (var:zz_ef_mt_fx_*, R2); this week's own purchases come after the snapshot. EFQ line when it is not ~0.
 	zz_ef_metal_reconcile = yes
 	# what was bought / sold this week
 	# the CB's and the banks' input (goods) once each: the pops' part below is the states' consumption less these two
@@ -517,6 +517,12 @@ zz_ef_metal_reconcile = {
 			change_variable = { name = zz_ef_f_mt_oth_g subtract = var:zz_ef_mt_start_adj_g }
 			change_variable = { name = zz_ef_f_mt_oth_s subtract = var:zz_ef_mt_start_adj_s }
 		}
+		# R2 (8.10): the player's forex buttons -- the metal both CBs moved (scripted_effects/ld_fx_buttons.txt)
+		if = {
+			limit = { has_variable = zz_ef_mt_fx_g }
+			change_variable = { name = zz_ef_f_mt_oth_g subtract = var:zz_ef_mt_fx_g }
+			change_variable = { name = zz_ef_f_mt_oth_s subtract = var:zz_ef_mt_fx_s }
+		}
 		zz_ef_wm_add = { KEY = oth_gold VALUE = var:zz_ef_f_mt_oth_g }
 		zz_ef_wm_add = { KEY = oth_silver VALUE = var:zz_ef_f_mt_oth_s }
 		if = {
@@ -533,4 +539,6 @@ zz_ef_metal_reconcile = {
 	}
 	set_variable = { name = zz_ef_mt_start_adj_g value = 0 }
 	set_variable = { name = zz_ef_mt_start_adj_s value = 0 }
+	if = { limit = { has_variable = zz_ef_mt_fx_g } remove_variable = zz_ef_mt_fx_g }
+	if = { limit = { has_variable = zz_ef_mt_fx_s } remove_variable = zz_ef_mt_fx_s }
 }

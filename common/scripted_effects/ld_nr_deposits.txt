@@ -142,6 +142,12 @@ zz_ef_nr_dep_step = {
 		set_variable = { name = zz_ef_f_nr_dep value = 0 }
 		if = { limit = { has_variable = zz_ef_f_clr_cur_out } change_variable = { name = zz_ef_f_nr_dep add = var:zz_ef_f_clr_cur_out } }
 		if = { limit = { has_variable = zz_ef_f_clr_own_back } change_variable = { name = zz_ef_f_nr_dep subtract = var:zz_ef_f_clr_own_back } }
+		# R2 (8.10): the player's forex buttons since the last step -- bought from / sold back to our CB (ld_fx_buttons.txt)
+		if = {
+			limit = { has_variable = zz_ef_nr_fx_pend }
+			change_variable = { name = zz_ef_f_nr_dep add = var:zz_ef_nr_fx_pend }
+			remove_variable = zz_ef_nr_fx_pend
+		}
 		if = {
 			limit = { var:zz_ef_f_nr_dep < 0 }
 			set_variable = {
