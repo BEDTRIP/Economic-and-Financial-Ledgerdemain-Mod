@@ -146,7 +146,7 @@ zz_ef_money_model_step = {
 	set_variable = { name = zz_ef_f_budget value = zz_ef_budget_week }
 	set_variable = { name = zz_ef_f_contrib value = investment_pool_gross_income }
 	set_variable = { name = zz_ef_f_transfer value = zz_ef_pool_transfer_week }
-	# R1а.4: B steps every 4 weeks -- the flows measured for one week x the weeks the step covers
+	# R1а.4: a step after a gap -- the flows measured for one week x the weeks the step covers
 	zz_ef_sw = { F = contrib }
 	zz_ef_sw = { F = transfer }
 
@@ -361,12 +361,23 @@ zz_ef_money_model_step = {
 	zz_ef_money_window_roll = { F = clr_own_back }
 	if = { limit = { has_variable = zz_ef_f_ext } remove_variable = zz_ef_f_ext }
 	if = { limit = { has_variable = zz_ef_f_leak } remove_variable = zz_ef_f_leak }
-	set_variable = { name = zz_ef_hook_pending value = yes days = 6 }
+	# R1б (В6, 8.10): B steps weekly, its bridge stays every 4th week (its phase); the step takes the latest numbers
 	if = {
 		limit = {
-			NOT = { is_target_in_global_variable_list = { name = zz_ef_hook_countries target = this } }
+			OR = {
+				NOT = { zz_ef_role_is_b = yes }
+				NOT = { has_variable = zz_ef_week_phase }
+				NOT = { has_variable = zz_ef_hk_date_week }
+				var:zz_ef_week_phase = zz_ef_sched_week_mod4
+			}
 		}
-		add_to_global_variable_list = { name = zz_ef_hook_countries target = this days = 6 }
+		set_variable = { name = zz_ef_hook_pending value = yes days = 6 }
+		if = {
+			limit = {
+				NOT = { is_target_in_global_variable_list = { name = zz_ef_hook_countries target = this } }
+			}
+			add_to_global_variable_list = { name = zz_ef_hook_countries target = this days = 6 }
+		}
 	}
 	# R1а.8: the bridge's part of the step, on its latest numbers
 	zz_ef_bridge_apply = yes
@@ -421,7 +432,7 @@ zz_ef_bridge_apply = {
 	set_variable = { name = zz_ef_f_pool_other value = zz_ef_pool_other_week }
 	set_variable = { name = zz_ef_f_tr_other value = zz_ef_other_treasury_budget }
 	set_variable = { name = zz_ef_f_abr value = zz_ef_v_hk_abr }
-	# R1а.4: B steps every 4 weeks -- the flows measured for one week x the weeks the step covers
+	# R1а.4: a step after a gap -- the flows measured for one week x the weeks the step covers
 	zz_ef_sw = { F = ext }
 	zz_ef_sw = { F = abr }
 	# П.17 (4.10): additional income - expenses (bond interest, events), the BoP's primary income
@@ -1261,7 +1272,7 @@ zz_ef_business_credit_step = {
 	set_variable = { name = zz_ef_f_bc_int value = zz_ef_bc_interest }
 	set_variable = { name = zz_ef_f_bc_due value = zz_ef_bc_due }
 	set_variable = { name = zz_ef_f_bc_paid value = zz_ef_bc_paid }
-	# R1а.4: B steps every 4 weeks -- the flows measured for one week x the weeks the step covers
+	# R1а.4: a step after a gap -- the flows measured for one week x the weeks the step covers
 	if = {
 		limit = { var:zz_ef_step_weeks > 1 }
 		zz_ef_sw = { F = bc_int }

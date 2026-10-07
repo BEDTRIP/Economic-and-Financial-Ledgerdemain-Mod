@@ -7,9 +7,10 @@
 #   * global_var:zz_ef_sched_d -- the day of the week 0..6 (0 = the budget tick's day), zz_ef_sched_week -- the
 #     week's number; zz_ef_dom -- the day of the month (0 at on_monthly_pulse), zz_ef_month_n -- the month's number;
 #   * every country of role A or B (scripted_triggers/ld_roles_triggers.txt) has its day var:zz_ef_week_slot 0..6 and
-#     its phase var:zz_ef_week_phase 0..3 (countries counted modulo 7, then modulo 4); A steps every week on its day,
-#     B every 4th week (the week's number modulo 4 = its phase) -- the same accounts, the flows of the weeks since
-#     its last step in one posting (var:zz_ef_step_weeks, zz_ef_sw);
+#     its phase var:zz_ef_week_phase 0..3 (countries counted modulo 7, then modulo 4); A and B step every week on
+#     their day (R1б, В6, 8.10: B's step every 4th week summed one week's snapshot x 4 and ran the per-step speeds 4
+#     times slower); the phase sets B's bridge week (every 4th, zz_ef_money_model_step) and the monthly day. A step
+#     after a gap (a role change, a restarted chain) covers the weeks since the last one (var:zz_ef_step_weeks, zz_ef_sw);
 #   * the monthly steps (E&F's monthly hub and the ld_* ones) -- once a calendar month, on the day of the month
 #     var:zz_ef_m_offset = slot + 7 x phase (0..27): spread as the engine's pulse was, in a fixed order;
 #   * the world pass -- at the end of day 6: the world line and the clearing house open their next window
@@ -118,12 +119,8 @@ zz_ef_sched_country_day = {
 	if = {
 		limit = {
 			var:zz_ef_week_slot = global_var:zz_ef_sched_d
-			OR = {
-				zz_ef_role_is_a = yes
-				var:zz_ef_week_phase = zz_ef_sched_week_mod4
-			}
 		}
-		# the weeks since this country's last step (B: 4; a role change or a restarted chain: what it is, 1..8)
+		# the weeks since this country's last step (1; a gap -- a role change, a restarted chain: what it is, 1..8)
 		set_variable = { name = zz_ef_step_weeks value = 1 }
 		if = {
 			limit = { has_variable = zz_ef_last_step_week }
@@ -136,10 +133,6 @@ zz_ef_sched_country_day = {
 					max = 8
 				}
 			}
-		}
-		else_if = {
-			limit = { zz_ef_role_is_b = yes }
-			set_variable = { name = zz_ef_step_weeks value = 4 }
 		}
 		set_variable = { name = zz_ef_last_step_week value = global_var:zz_ef_sched_week }
 		# its own on_action: the step's code reads root (bond ledger, metal modifiers) -- inside every_country of the
@@ -206,7 +199,7 @@ zz_ef_world_week_close = {
 	zz_ef_other_world_log = yes
 }
 
-# Country scope: var:zz_ef_f_$F$ x the weeks since the last step (a flow measured for one week, B's step covers 4).
+# Country scope: var:zz_ef_f_$F$ x the weeks since the last step (a flow measured for one week; > 1 only after a gap).
 zz_ef_sw = {
 	if = {
 		limit = {
