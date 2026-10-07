@@ -61,14 +61,11 @@ privatisation_spending_percent_weekly = {
 }
 
 state_construction_spending_allocation = {
-	owner = {
-		value = var:total_construction_spending
-	}
-	owner = {
-		divide = {
-			value = var:weighted_total
-			min = 0.1
-		}
+	# ФК2 (7.10): the same arithmetic without scope-change blocks (owner = { value = … } gave 'none', error.log)
+	value = owner.var:total_construction_spending
+	divide = {
+		value = owner.var:weighted_total
+		min = 0.1
 	}
 	if = {
 		#in a case of no production, demand half the remaining demand to get construction to build
