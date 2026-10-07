@@ -2458,3 +2458,12 @@
 			railroad_stock_variable_list = yes
 		}
 	}
+
+# from common/scripted_guis/09_ef_other.txt, lines 1325-1331 (cut 7.10.2026: var gold_0_silver_0 never set, no GUI calls it)
+gold_0_silver_0 = {
+	scope = country
+	is_shown = {
+		has_variable = gold_0_silver_0
+		var:gold_0_silver_0 = 1
+	}
+}

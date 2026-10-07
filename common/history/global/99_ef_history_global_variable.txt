@@ -70,48 +70,6 @@
 				}
 			}
 		}
-		if = {
-			limit = {
-				c:USA ?= this
-			}
-			var:financial_center_location ?= {
-				set_variable = {
-					name = stockpiling_bond_var_state_1
-					value = 0
-					value = {
-						add = 100
-						multiply = total_urbanization
-						multiply = 5
-					}
-				}
-				set_variable = {
-					name = stockpiling_manufacture_stock_var_state_1
-					value = 0
-					value = {
-						add = 50
-						multiply = total_urbanization
-						multiply = 2
-					}
-				}
-				set_variable = {
-					name = stockpiling_agricultural_stock_var_state_1
-					value = {
-						add = 50
-						multiply = total_urbanization
-						multiply = 1.5
-					}
-				}
-				set_variable = {
-					name = stockpiling_mining_stock_var_state_1
-					value = 0
-					value = {
-						add = 50
-						multiply = total_urbanization
-						multiply = 0.5
-					}
-				}
-			}
-		}
 
 		###########################
 		#Major

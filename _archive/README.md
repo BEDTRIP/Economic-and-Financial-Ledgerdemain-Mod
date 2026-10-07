@@ -72,3 +72,6 @@ _archive/<механизм>/
 | Стартовые условия для Historical Map Mod (ветка `always = no`) | `ef_hmm_history/` | блок ~6000 строк в `99_ef_history_global_variable.txt` |
 | Устаревшие копии ванильных GUI (`maj/NonEssential` ×5, `frontend/shared/lists.gui`) | `ef_outdated_vanilla_gui/` | файлы целиком — грузятся ванильные 1.13 |
 | Миграции старых сейвов хотфикса (кольцо M3 → кольцо денег в обращении; старые базы индекса) | `ef_old_save_migrations/` | два блока: `ld_money_model.txt` (`zz_ef_m3_q*`), `ld_capitalization_average.txt` (`zz_ef_cap_ref0`, `zz_ef_cap_index0`) |
+| Значения склада `<товар>_month_choise` (29, никто не читает, переменная не ставится) | `ef_stockpile_month_choise/` | 29 определений в `00_stockpile_scripted_value.txt` |
+| Очистка 15 списков покупателей / продавцов облигаций, которые никто не заполняет | `ef_never_filled_lists/` | 15 строк `clear_variable_list` в `01_financial_scripted_effects.txt` |
+| Историческое создание финцентра `initialize_historic_macro_facilities_fc` (не вызывался) и запасы финцентра США по `financial_center_location` | `ef_fc_historic_init/` | эффект в `09_introduction_building_lvl.txt`, блок США в `99_ef_history_global_variable.txt` |

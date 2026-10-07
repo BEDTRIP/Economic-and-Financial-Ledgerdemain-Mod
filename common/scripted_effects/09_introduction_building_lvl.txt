@@ -23521,30 +23521,6 @@ initialize_historic_macro_facilities_bc = { #history
 	}
 	central_bank_modifier = yes
 }
-initialize_historic_macro_facilities_fc = { #history
-	add_technology_researched = financial_center
-	add_technology_researched = stock_exchange
-
-	$FIN_CENT_SITE$ = {
-		create_building = {
-			building = $FIN_BLDG_TYPE$
-			level    = $FC_SIZE$
-			reserves = 0
-		}
-		owner = {
-			add_modifier = {
-				name = has_financial_center
-			}
-			set_variable = {
-				name = financial_center_location
-				value = $FIN_CENT_SITE$
-			}
-		}
-	}
-	#update_modifiers_bc_fc_ns = yes
-	financial_center_modifier = yes
-
-}
 
 #####################################################################################################################################################
 #####################################################################################################################################################

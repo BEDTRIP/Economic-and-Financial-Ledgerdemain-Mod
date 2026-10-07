@@ -13,7 +13,7 @@
 - `common/script_values/ld_bank_values.txt` — `zz_ef_bank_tc_levels` (уровни торговых центров штата, веса посева), `zz_ef_bank_levels` (уровни банков).
 - `common/on_actions/ld_bank_on_actions.txt` — `on_monthly_pulse_country` → `zz_ef_bank_monthly` → `zz_ef_bank_seed_step`.
 - `common/scripted_effects/ld_bank_seed.txt` — генерат: `zz_ef_bank_seed_step` (страна-владелец рынка, один раз, флаг `zz_ef_bank_seeded`), `zz_ef_bank_seed_state` (по штату), `zz_ef_bank_seed_company` (по банковской компании E&F, `$COMPANY$`), `zz_ef_bank_seed_state_owned` (запасной вариант — 100% государству).
-- `common/scripted_effects/ld_cm_bank_ownership.txt` — `zz_ef_cm_create_owned_bank` (строит/доращивает ЦБ до размера `$CB_SIZE$`, государственный, резервы 0); зовут спавнеры E&F в `09_introduction_building_lvl.txt:23501…23639`.
+- `common/scripted_effects/ld_cm_bank_ownership.txt` — `zz_ef_cm_create_owned_bank` (строит/доращивает ЦБ до размера `$CB_SIZE$`, государственный, резервы 0); зовут спавнеры E&F в `09_introduction_building_lvl.txt:23501…23614`.
 - `common/buildings/ef_15_bank.txt` — `building_bank` (ЦБ E&F: `buildable = no`, PMG `pmg_minting_type`, `pmg_monetary_policy`).
 - `common/production_method_groups/15_ef_bank.txt`, `common/production_methods/15_ef_bank.txt` — методы ЦБ по валютным стандартам (`pm_*_standard_bank_money_currency`: `country_minting_add`, выпуск облигаций `goods_output_bond_add`), `pm_revaluation`/`pm_devaluation`.
 - `common/scripted_effects/ld_nr_deposits.txt` — генерат: `zz_ef_fx_liab_trim` (обрезка чужих запасов валюты эмитента до `zz_ef_fx_start_cap` × базы), `zz_ef_nr_dep_step` (недельный шаг у эмитента: вклады, проценты, `add_investment_pool`, модификатор `zz_ef_fx_holders_demand`).

@@ -23,7 +23,7 @@
 - `common/treaty_articles/15_supply_agreement.txt` — `material_supply` (поставки со склада, подсистема запасов; валют не касается).
 - `common/scripted_triggers/00_ef_custom_trigger.txt` — `is_reference_currency` (:597), `is_reference_currency_no` (:602), `is_strong/balanced/weak_currency` (:607-:637, тело E&F, сравнение с `zz_ef_currency_strength` вместо медианы), `is_extreme_weak_currency` (:638), `law_currency_enacted` (:1154), `market_goods_is_currency` (:1443).
 - `common/scripted_effects/08_list_effect.txt` :202 `national_capacity_variable_list` — раз в год (`ef_on_yearly_pulse_country`, `on_actions/00_ef_on_action.txt:173`) выбор эталона: кандидаты `zz_ef_reference_candidate`, по `national_capacity_in_gold`, позиция 0 → модификатор `global_monetary_reference`; лог `EFE|`.
-- Прочее E&F: `common/scripted_effects/09_introduction_building_lvl.txt:34444` `introduction_new_currency` (выдача валюты/паритета при исследовании; зовёт `zz_ef_cur_zone_step` через `ld_currency_intro_metal.txt:75`).
+- Прочее E&F: `common/scripted_effects/09_introduction_building_lvl.txt:34419` `introduction_new_currency` (выдача валюты/паритета при исследовании; зовёт `zz_ef_cur_zone_step` через `ld_currency_intro_metal.txt:75`).
 
 ### Индекс `01_economic_currency_scripted_value.txt` (на каждую валюту `<cur>`)
 - :228-:294 общие `base_demande_currency*`, `target_demand_currency*`, `enough_foreign_currrency`.

@@ -19,3 +19,5 @@
 `gdp_sort_by_country_gdp`, `si_sort_by_country_indice`.
 
 **Вернуть:** вставить определения обратно в исходные файлы.
+
+**Дополнено 7.10:** `gold_0_silver_0` (`09_ef_other.txt`, `is_shown` по переменной `gold_0_silver_0`, которую никто не ставит; вызовов нет).
