@@ -36,6 +36,7 @@
 | вклады чужих ЦБ | `zz_ef_nr_dep` | заграница | `ld_nr_deposits.txt`; проценты — из капитала банков (`zz_ef_post`) |
 | кредит ЦБ банкам | `zz_ef_bank_cb_debt` | ЦБ | недельный шаг; только при ЦБ (`has_central_bank`: без ЦБ цель `zz_ef_cb_credit_target` = 0, долг гасится из пула) |
 | деньги казны в банках | `zz_ef_bank_gov_dep` | казна | излишек казны сверх предела (`zz_ef_f_tr_pool`) |
+| кредит ЦБ казне | `credit_at_central_bank` (E&F, деньги движка; `government_loan` — зеркало в валюте E&F) | ЦБ (актив), долг казны | заём / возврат — кнопки `set_debt_issued`, `refund_credit_at_central_bank(_all)`, ИИ `ai_credit_at_central_bank` / `ai_refund_central_bank`: казна ↔ счёт (`zz_ef_eng_add/sub_treasury`); прощение без денег (ИИ) — списание ЦБ `zz_ef_cb_writeoff` |
 | капитал банков | `zz_ef_bank_capital` | банки (агрегат) | первая сверка (пул − остальные счета), проценты ЦБ (`zz_ef_post_eng_paid`), проценты вкладам населения и чужих ЦБ (`zz_ef_post`) |
 | потреб- / бизнес-кредит | `zz_ef_cc_debt`, `zz_ef_bc_debt` | банки (актив) | `zz_ef_consumer_credit_step`, `zz_ef_business_credit_step` |
 | требования населения | `zz_ef_pop_claims_stocks`, `_bonds`, `_private` | население | по нулям (R6, R7) |

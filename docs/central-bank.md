@@ -40,7 +40,7 @@
 | `zz_ef_risk_fx_pen`, `zz_ef_risk_fx_step`, `zz_ef_risk_susp` | штраф за манипуляцию паритетом / приостановку обмена, затухание 60 мес. | `zz_ef_risk_fx_add`, `zz_ef_risk_monthly` | `zz_ef_risk_fx` |
 | `zz_ef_risk_bal_avg` | скользящее (12 мес.) сальдо бюджета / ВВП | `zz_ef_risk_monthly` | `zz_ef_risk_balance_avg` |
 | `zz_ef_cb_bond_low`, `zz_ef_cb_bond_high` | множители выпуска облигаций | `zz_ef_cb_bond_issuance_update` | то же (`owner.var:`) |
-| `credit_at_central_bank`, `government_loan`, `debt_issued_relative_GDP(_percentage)` | долг перед ЦБ, заём, размер займа | `set_debt_issued` (E&F) | `zz_ef_cb_loan_*`, `zz_ef_cb_bond_debt_pct`, `ld_money_model_values.txt:301` |
+| `credit_at_central_bank`, `government_loan`, `debt_issued_relative_GDP(_percentage)`, `zz_ef_cb_writeoff` | долг казны перед ЦБ — счёт реестра (деньги движка; `government_loan` — то же в валюте E&F), размер займа, списанное ЦБ без денег | `set_debt_issued`, `refund_credit_at_central_bank(_all)`, ИИ `ai_credit_at_central_bank` / `ai_refund_central_bank` — проводками (деньги казны помечены `zz_ef_tr_mark`) | `zz_ef_cb_loan_*`, `zz_ef_cb_bond_debt_pct`, `ld_money_model_values.txt:301` |
 | `country_credit_note_fixe` | рейтинг E&F 0..12.5 | E&F | `zz_ef_cb_rule_rating`, `zz_ef_reference_candidate` |
 
 ## Вызовы и связи

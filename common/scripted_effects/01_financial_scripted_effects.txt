@@ -655,9 +655,10 @@ ai_credit_at_central_bank = {
 			gold_reserve_compared_gold_reserves_limit < 0.1
 			is_at_war = no
 		}
-		add_treasury = {
-			add = national_debt_allowed_in_gold
-		}
+		# R2, step 8 (Д.R2.8): the CB's loan to the treasury -- credit_at_central_bank is the ledger's account, the
+		# treasury's money is ours (marked); the amount is fixed first (it reads the treasury)
+		set_variable = { name = zz_ef_t_cbl value = national_debt_allowed_in_gold }
+		zz_ef_eng_add_treasury = { V = var:zz_ef_t_cbl }
 		every_scope_state = {
 			if = {
 				limit = {
@@ -675,17 +676,17 @@ ai_credit_at_central_bank = {
 		}
 		change_variable = {
 			name = credit_at_central_bank
-			add = national_debt_allowed_in_gold
+			add = var:zz_ef_t_cbl
 		}
+		remove_variable = zz_ef_t_cbl
 	}
 	if = {
 		limit  = { #pays en guerre avec reserve inf à 25%, a bessoin d'un coup de mains equivalent la dif pour atteindre 25% + 25% -> pas de limite donc possibilité de faire des 100ain% de dette
 			gold_reserve_compared_gold_reserves_limit < 0.15
 			is_at_war = yes
 		}
-		add_treasury = {
-			add = national_debt_allowed_in_gold_war
-		}
+		set_variable = { name = zz_ef_t_cbl value = national_debt_allowed_in_gold_war }
+		zz_ef_eng_add_treasury = { V = var:zz_ef_t_cbl }
 		every_scope_state = {
 			if = {
 				limit = {
@@ -703,8 +704,9 @@ ai_credit_at_central_bank = {
 		}
 		change_variable = {
 			name = credit_at_central_bank
-			add = national_debt_allowed_in_gold_war
+			add = var:zz_ef_t_cbl
 		}
+		remove_variable = zz_ef_t_cbl
 	}
 }
 ai_refund_central_bank = {
@@ -715,12 +717,12 @@ ai_refund_central_bank = {
 			var:credit_at_central_bank > national_debt_allowed_in_gold
 			is_at_war = no
 		}
-		add_treasury = {
-			subtract = national_debt_unauthorized
-		}
+		# R2, step 8: the repayment -- the treasury -> the CB's loan (marked); the amount is fixed first
+		set_variable = { name = zz_ef_t_cbl value = national_debt_unauthorized }
+		zz_ef_eng_sub_treasury = { V = var:zz_ef_t_cbl }
 		change_variable = {
 			name = government_loan
-			subtract = national_debt_unauthorized
+			subtract = var:zz_ef_t_cbl
 		}
 		if = {
 			limit = {
@@ -734,8 +736,9 @@ ai_refund_central_bank = {
 
 		change_variable = {
 			name = credit_at_central_bank
-			subtract = national_debt_unauthorized
+			subtract = var:zz_ef_t_cbl
 		}
+		remove_variable = zz_ef_t_cbl
 	}
 	if  = {
 		limit  = {
@@ -746,9 +749,13 @@ ai_refund_central_bank = {
 		# add_treasury = {
 		# 	subtract = national_debt_unauthorized #ai_cheat ?
 		# }
+		# R2, step 8: E&F forgives this part with no money -- the CB writes it off (its loss, var:zz_ef_cb_writeoff)
+		set_variable = { name = zz_ef_t_cbl value = national_debt_refund_more_25_at_refund }
+		if = { limit = { NOT = { has_variable = zz_ef_cb_writeoff } } set_variable = { name = zz_ef_cb_writeoff value = 0 } }
+		zz_ef_post = { FROM = credit_at_central_bank TO = zz_ef_cb_writeoff V = var:zz_ef_t_cbl }
 		change_variable = {
 			name = government_loan
-			subtract = national_debt_refund_more_25_at_refund
+			subtract = var:zz_ef_t_cbl
 		}
 		if = {
 			limit = {
@@ -760,10 +767,7 @@ ai_refund_central_bank = {
 			}
 		}
 
-		change_variable = {
-			name = credit_at_central_bank
-			subtract = national_debt_refund_more_25_at_refund
-		}
+		remove_variable = zz_ef_t_cbl
 	}
 }
 
