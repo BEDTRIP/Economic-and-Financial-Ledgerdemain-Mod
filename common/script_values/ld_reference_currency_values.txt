@@ -162,32 +162,124 @@ zz_ef_v_d_deposits_neg = {
 
 # UI.8 (4.10, Budget -> Economy, regen_ef_economy_panel_gui.py): the market's imports and exports of the
 # week at the goods' base prices (В1.6, 5.10: one price, as zz_ef_trade_net_week), the market owner's; others 0
+# the 53 vanilla goods by key: the goods link of every_market_goods is invalid in a script value (as in ld_customs_union_values)
 zz_ef_trade_exports_week = {
 	value = 0
 	if = {
 		limit = { exists = market market.owner = this }
-		market = {
-			every_market_goods = {
-				add = {
-					value = market_goods_exports
-					multiply = goods.base_price
-				}
-			}
-		}
+		add = { value = market.mg:ammunition.market_goods_exports multiply = g:ammunition.base_price }
+		add = { value = market.mg:small_arms.market_goods_exports multiply = g:small_arms.base_price }
+		add = { value = market.mg:artillery.market_goods_exports multiply = g:artillery.base_price }
+		add = { value = market.mg:tanks.market_goods_exports multiply = g:tanks.base_price }
+		add = { value = market.mg:aeroplanes.market_goods_exports multiply = g:aeroplanes.base_price }
+		add = { value = market.mg:manowars.market_goods_exports multiply = g:manowars.base_price }
+		add = { value = market.mg:ironclads.market_goods_exports multiply = g:ironclads.base_price }
+		add = { value = market.mg:grain.market_goods_exports multiply = g:grain.base_price }
+		add = { value = market.mg:fish.market_goods_exports multiply = g:fish.base_price }
+		add = { value = market.mg:fabric.market_goods_exports multiply = g:fabric.base_price }
+		add = { value = market.mg:wood.market_goods_exports multiply = g:wood.base_price }
+		add = { value = market.mg:groceries.market_goods_exports multiply = g:groceries.base_price }
+		add = { value = market.mg:clothes.market_goods_exports multiply = g:clothes.base_price }
+		add = { value = market.mg:furniture.market_goods_exports multiply = g:furniture.base_price }
+		add = { value = market.mg:paper.market_goods_exports multiply = g:paper.base_price }
+		add = { value = market.mg:services.market_goods_exports multiply = g:services.base_price }
+		add = { value = market.mg:transportation.market_goods_exports multiply = g:transportation.base_price }
+		add = { value = market.mg:electricity.market_goods_exports multiply = g:electricity.base_price }
+		add = { value = market.mg:merchant_marine.market_goods_exports multiply = g:merchant_marine.base_price }
+		add = { value = market.mg:clippers.market_goods_exports multiply = g:clippers.base_price }
+		add = { value = market.mg:steamers.market_goods_exports multiply = g:steamers.base_price }
+		add = { value = market.mg:silk.market_goods_exports multiply = g:silk.base_price }
+		add = { value = market.mg:dye.market_goods_exports multiply = g:dye.base_price }
+		add = { value = market.mg:sulfur.market_goods_exports multiply = g:sulfur.base_price }
+		add = { value = market.mg:coal.market_goods_exports multiply = g:coal.base_price }
+		add = { value = market.mg:iron.market_goods_exports multiply = g:iron.base_price }
+		add = { value = market.mg:lead.market_goods_exports multiply = g:lead.base_price }
+		add = { value = market.mg:hardwood.market_goods_exports multiply = g:hardwood.base_price }
+		add = { value = market.mg:rubber.market_goods_exports multiply = g:rubber.base_price }
+		add = { value = market.mg:oil.market_goods_exports multiply = g:oil.base_price }
+		add = { value = market.mg:engines.market_goods_exports multiply = g:engines.base_price }
+		add = { value = market.mg:steel.market_goods_exports multiply = g:steel.base_price }
+		add = { value = market.mg:glass.market_goods_exports multiply = g:glass.base_price }
+		add = { value = market.mg:fertilizer.market_goods_exports multiply = g:fertilizer.base_price }
+		add = { value = market.mg:tools.market_goods_exports multiply = g:tools.base_price }
+		add = { value = market.mg:explosives.market_goods_exports multiply = g:explosives.base_price }
+		add = { value = market.mg:porcelain.market_goods_exports multiply = g:porcelain.base_price }
+		add = { value = market.mg:meat.market_goods_exports multiply = g:meat.base_price }
+		add = { value = market.mg:fruit.market_goods_exports multiply = g:fruit.base_price }
+		add = { value = market.mg:liquor.market_goods_exports multiply = g:liquor.base_price }
+		add = { value = market.mg:wine.market_goods_exports multiply = g:wine.base_price }
+		add = { value = market.mg:tea.market_goods_exports multiply = g:tea.base_price }
+		add = { value = market.mg:coffee.market_goods_exports multiply = g:coffee.base_price }
+		add = { value = market.mg:sugar.market_goods_exports multiply = g:sugar.base_price }
+		add = { value = market.mg:tobacco.market_goods_exports multiply = g:tobacco.base_price }
+		add = { value = market.mg:opium.market_goods_exports multiply = g:opium.base_price }
+		add = { value = market.mg:automobiles.market_goods_exports multiply = g:automobiles.base_price }
+		add = { value = market.mg:telephones.market_goods_exports multiply = g:telephones.base_price }
+		add = { value = market.mg:radios.market_goods_exports multiply = g:radios.base_price }
+		add = { value = market.mg:luxury_clothes.market_goods_exports multiply = g:luxury_clothes.base_price }
+		add = { value = market.mg:luxury_furniture.market_goods_exports multiply = g:luxury_furniture.base_price }
+		add = { value = market.mg:gold.market_goods_exports multiply = g:gold.base_price }
+		add = { value = market.mg:fine_art.market_goods_exports multiply = g:fine_art.base_price }
 	}
 }
+# the 53 vanilla goods by key: the goods link of every_market_goods is invalid in a script value (as in ld_customs_union_values)
 zz_ef_trade_imports_week = {
 	value = 0
 	if = {
 		limit = { exists = market market.owner = this }
-		market = {
-			every_market_goods = {
-				add = {
-					value = market_goods_imports
-					multiply = goods.base_price
-				}
-			}
-		}
+		add = { value = market.mg:ammunition.market_goods_imports multiply = g:ammunition.base_price }
+		add = { value = market.mg:small_arms.market_goods_imports multiply = g:small_arms.base_price }
+		add = { value = market.mg:artillery.market_goods_imports multiply = g:artillery.base_price }
+		add = { value = market.mg:tanks.market_goods_imports multiply = g:tanks.base_price }
+		add = { value = market.mg:aeroplanes.market_goods_imports multiply = g:aeroplanes.base_price }
+		add = { value = market.mg:manowars.market_goods_imports multiply = g:manowars.base_price }
+		add = { value = market.mg:ironclads.market_goods_imports multiply = g:ironclads.base_price }
+		add = { value = market.mg:grain.market_goods_imports multiply = g:grain.base_price }
+		add = { value = market.mg:fish.market_goods_imports multiply = g:fish.base_price }
+		add = { value = market.mg:fabric.market_goods_imports multiply = g:fabric.base_price }
+		add = { value = market.mg:wood.market_goods_imports multiply = g:wood.base_price }
+		add = { value = market.mg:groceries.market_goods_imports multiply = g:groceries.base_price }
+		add = { value = market.mg:clothes.market_goods_imports multiply = g:clothes.base_price }
+		add = { value = market.mg:furniture.market_goods_imports multiply = g:furniture.base_price }
+		add = { value = market.mg:paper.market_goods_imports multiply = g:paper.base_price }
+		add = { value = market.mg:services.market_goods_imports multiply = g:services.base_price }
+		add = { value = market.mg:transportation.market_goods_imports multiply = g:transportation.base_price }
+		add = { value = market.mg:electricity.market_goods_imports multiply = g:electricity.base_price }
+		add = { value = market.mg:merchant_marine.market_goods_imports multiply = g:merchant_marine.base_price }
+		add = { value = market.mg:clippers.market_goods_imports multiply = g:clippers.base_price }
+		add = { value = market.mg:steamers.market_goods_imports multiply = g:steamers.base_price }
+		add = { value = market.mg:silk.market_goods_imports multiply = g:silk.base_price }
+		add = { value = market.mg:dye.market_goods_imports multiply = g:dye.base_price }
+		add = { value = market.mg:sulfur.market_goods_imports multiply = g:sulfur.base_price }
+		add = { value = market.mg:coal.market_goods_imports multiply = g:coal.base_price }
+		add = { value = market.mg:iron.market_goods_imports multiply = g:iron.base_price }
+		add = { value = market.mg:lead.market_goods_imports multiply = g:lead.base_price }
+		add = { value = market.mg:hardwood.market_goods_imports multiply = g:hardwood.base_price }
+		add = { value = market.mg:rubber.market_goods_imports multiply = g:rubber.base_price }
+		add = { value = market.mg:oil.market_goods_imports multiply = g:oil.base_price }
+		add = { value = market.mg:engines.market_goods_imports multiply = g:engines.base_price }
+		add = { value = market.mg:steel.market_goods_imports multiply = g:steel.base_price }
+		add = { value = market.mg:glass.market_goods_imports multiply = g:glass.base_price }
+		add = { value = market.mg:fertilizer.market_goods_imports multiply = g:fertilizer.base_price }
+		add = { value = market.mg:tools.market_goods_imports multiply = g:tools.base_price }
+		add = { value = market.mg:explosives.market_goods_imports multiply = g:explosives.base_price }
+		add = { value = market.mg:porcelain.market_goods_imports multiply = g:porcelain.base_price }
+		add = { value = market.mg:meat.market_goods_imports multiply = g:meat.base_price }
+		add = { value = market.mg:fruit.market_goods_imports multiply = g:fruit.base_price }
+		add = { value = market.mg:liquor.market_goods_imports multiply = g:liquor.base_price }
+		add = { value = market.mg:wine.market_goods_imports multiply = g:wine.base_price }
+		add = { value = market.mg:tea.market_goods_imports multiply = g:tea.base_price }
+		add = { value = market.mg:coffee.market_goods_imports multiply = g:coffee.base_price }
+		add = { value = market.mg:sugar.market_goods_imports multiply = g:sugar.base_price }
+		add = { value = market.mg:tobacco.market_goods_imports multiply = g:tobacco.base_price }
+		add = { value = market.mg:opium.market_goods_imports multiply = g:opium.base_price }
+		add = { value = market.mg:automobiles.market_goods_imports multiply = g:automobiles.base_price }
+		add = { value = market.mg:telephones.market_goods_imports multiply = g:telephones.base_price }
+		add = { value = market.mg:radios.market_goods_imports multiply = g:radios.base_price }
+		add = { value = market.mg:luxury_clothes.market_goods_imports multiply = g:luxury_clothes.base_price }
+		add = { value = market.mg:luxury_furniture.market_goods_imports multiply = g:luxury_furniture.base_price }
+		add = { value = market.mg:gold.market_goods_imports multiply = g:gold.base_price }
+		add = { value = market.mg:fine_art.market_goods_imports multiply = g:fine_art.base_price }
 	}
 }
 

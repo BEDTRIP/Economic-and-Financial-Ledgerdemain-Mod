@@ -22275,12 +22275,17 @@ financial_center_modifier = {
 					name = gdp_view_fc
 					value = scope:financial_center_country.var:gdp_view_fc
 				}
+				# max_building_financial_center_by_number_in_market counts the country's centres (any_scope_state): country scope only
+				set_variable = {
+					name = gdp_view_fc_by_num
+					value = scope:financial_center_country.max_building_financial_center_by_number_in_market
+				}
 			}
 			if = {
-				limit = { has_variable = gdp_view_fc }
+				limit = { has_variable = gdp_view_fc_by_num }
 				add_modifier = {
 					name = financial_center_place_spe
-					multiplier = max_building_financial_center_by_number_in_market # var:gdp_view_fc
+					multiplier = var:gdp_view_fc_by_num
 				}
 			}
 			if = {
