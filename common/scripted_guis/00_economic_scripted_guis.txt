@@ -335,7 +335,7 @@ fiat_standard_law = {
 		money_value_target_pre_set = yes
 		activate_law = law_type:law_fiat_standard
 		central_bank_production_methods = yes
-		remove_modifier = foreign_exchange_controls
+		if = { limit = { has_modifier = foreign_exchange_controls } remove_modifier = foreign_exchange_controls }
 		add_modifier = {
 			name = foreign_exchange_controls
 		}
@@ -344,7 +344,7 @@ fiat_standard_law = {
 			value = money_value_target_pre_set
 		}
 		trade_balance = yes
-		remove_modifier = monetary_systeme_transition
+		if = { limit = { has_modifier = monetary_systeme_transition } remove_modifier = monetary_systeme_transition }
 		add_modifier = {
 			name = monetary_systeme_transition
 			months = 12
@@ -937,7 +937,7 @@ set_money_value_target = {
 			name = money_value_target_time
 			value = 1
 		}
-		remove_modifier = foreign_exchange_controls
+		if = { limit = { has_modifier = foreign_exchange_controls } remove_modifier = foreign_exchange_controls }
 		add_modifier = {
 			name = foreign_exchange_controls
 			months = 12
@@ -949,7 +949,7 @@ set_money_value_target = {
 			limit = {
 				var:money_value_target_1_old > var:money_value_target_1
 			}
-			remove_modifier = devaluation_currency_target
+			if = { limit = { has_modifier = devaluation_currency_target } remove_modifier = devaluation_currency_target }
 			add_modifier = {
 				name = devaluation_currency_target
 				months = 12
@@ -959,7 +959,7 @@ set_money_value_target = {
 			limit = {
 				var:money_value_target_1_old < var:money_value_target_1
 			}
-			remove_modifier = revaluation_currency_target
+			if = { limit = { has_modifier = revaluation_currency_target } remove_modifier = revaluation_currency_target }
 			add_modifier = {
 				name = revaluation_currency_target
 				months = 12
@@ -1053,7 +1053,7 @@ set_money_value_target_with_the_reference_currency = {
 			name = amount_reference_currency_to_ensure_parity_fixe #quantité de valeur de référence nécessaire pour assurer la parité
 			value = amount_reference_currency_to_ensure_parity
 		}
-		remove_modifier = foreign_exchange_controls
+		if = { limit = { has_modifier = foreign_exchange_controls } remove_modifier = foreign_exchange_controls }
 		add_modifier = {
 			name = foreign_exchange_controls
 			months = 12
@@ -1064,7 +1064,7 @@ set_money_value_target_with_the_reference_currency = {
 			limit = {
 				var:money_value_target_1_old > var:money_value_target_1
 			}
-			remove_modifier = devaluation_currency_target
+			if = { limit = { has_modifier = devaluation_currency_target } remove_modifier = devaluation_currency_target }
 			add_modifier = {
 				name = devaluation_currency_target
 				months = 12
@@ -1074,7 +1074,7 @@ set_money_value_target_with_the_reference_currency = {
 			limit = {
 				var:money_value_target_1_old < var:money_value_target_1
 			}
-			remove_modifier = revaluation_currency_target
+			if = { limit = { has_modifier = revaluation_currency_target } remove_modifier = revaluation_currency_target }
 			add_modifier = {
 				name = revaluation_currency_target
 				months = 12
@@ -1160,7 +1160,7 @@ currency_introduction = {
 			name = new_currency_count
 			add = 1 #0
 		}
-		remove_modifier = new_currency
+		if = { limit = { has_modifier = new_currency } remove_modifier = new_currency }
 		add_modifier = {
 			name = new_currency
 			months = 60

@@ -122,12 +122,12 @@ zz_ef_bubble_monthly = {
 			}
 			post_notification = zz_ef_bubble_rising
 		}
-		remove_modifier = speculative_bubble_modifier
+		if = { limit = { has_modifier = speculative_bubble_modifier } remove_modifier = speculative_bubble_modifier }
 		every_scope_character = {
 			limit = {
 				has_role = character_role_executive ### EF.18 v2: 1.13 role key
 			}
-			remove_modifier = speculative_bubble_character_modifier
+			if = { limit = { has_modifier = speculative_bubble_character_modifier } remove_modifier = speculative_bubble_character_modifier }
 		}
 		if = {
 			limit = {

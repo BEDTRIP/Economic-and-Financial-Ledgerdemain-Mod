@@ -72,8 +72,8 @@ zz_pb_ef_overbuild_counter = {
 				limit = { has_building = building_construction_sector }
 				every_scope_building = {
 					limit = { is_building_type = building_construction_sector }
-					remove_modifier = overbuilt_economy_modifier
-					remove_modifier = zz_pb_ef_overbuilt_brake
+					if = { limit = { has_modifier = overbuilt_economy_modifier } remove_modifier = overbuilt_economy_modifier }
+					if = { limit = { has_modifier = zz_pb_ef_overbuilt_brake } remove_modifier = zz_pb_ef_overbuilt_brake }
 				}
 			}
 		}
@@ -89,7 +89,7 @@ zz_pb_ef_overbuild_counter = {
 			change_variable = { name = speculative_share_2 add = zz_pb_ef_overbuild_step }
 			clamp_variable = { name = speculative_share_2 min = 0 max = 100 }
 
-			remove_modifier = zz_pb_ef_overbuilt_economy
+			if = { limit = { has_modifier = zz_pb_ef_overbuilt_economy } remove_modifier = zz_pb_ef_overbuilt_economy }
 			if = {
 				limit = { var:speculative_share_2 > 0 }
 				add_modifier = {

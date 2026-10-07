@@ -36,7 +36,7 @@ zz_ef_capitalization_monthly = {
 		zz_ef_cap_monthly_crash_check = yes
 
 		### EF.25
-		remove_modifier = zz_ef_mass_shareholding
+		if = { limit = { has_modifier = zz_ef_mass_shareholding } remove_modifier = zz_ef_mass_shareholding }
 		set_variable = {
 			name = zz_ef_msh_points
 			value = zz_ef_mass_shareholding_points

@@ -8193,6 +8193,10 @@ economic_sentiment_index_base_JE_fixe_half_year_pulse = {
 }
 #is_at_war_monthly_pulse
 is_at_war_monthly_pulse = {
+	if = { # страна без начальной переменной (10_new_country_var не прошёл) — как у остальных, с 0
+		limit = { NOT = { has_variable = is_at_war_monthly_pulse } }
+		set_variable = { name = is_at_war_monthly_pulse value = 0 }
+	}
 	if = {
 		limit = {
 			is_at_war = yes
@@ -8245,6 +8249,10 @@ is_in_revolution_monthly_pulse = {
 }
 #maximum_number_companies_exceeded_monthly_pulse
 maximum_number_companies_exceeded_monthly_pulse = {
+	if = { # страна без начальной переменной (10_new_country_var не прошёл) — как у остальных, с 0
+		limit = { NOT = { has_variable = maximum_number_companies_exceeded_monthly_pulse } }
+		set_variable = { name = maximum_number_companies_exceeded_monthly_pulse value = 0 }
+	}
 	if = {
 		limit = {
 			maximum_number_companies_exceeded_monthly_pulse < 0
@@ -8306,7 +8314,7 @@ law_no_monetary_system = {
 				}
 			}
 		}
-		remove_modifier = no_money_production
+		if = { limit = { has_modifier = no_money_production } remove_modifier = no_money_production }
 		add_modifier = {
 			name = no_money_production
 		}
@@ -8333,7 +8341,7 @@ leading_producer_of_oil = {
 		limit = {
 			leading_producer_of_oil = 1
 		}
-		remove_modifier = leading_producer_of_oil
+		if = { limit = { has_modifier = leading_producer_of_oil } remove_modifier = leading_producer_of_oil }
 		add_modifier = {
 			name = leading_producer_of_oil
 		}

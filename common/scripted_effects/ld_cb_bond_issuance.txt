@@ -29,8 +29,8 @@ zz_ef_cb_bond_issuance_update = {
 		limit = { has_building = building_bank }
 		every_scope_building = {
 			limit = { is_building_type = building_bank }
-			remove_modifier = zz_ef_cb_bond_issuance_low
-			remove_modifier = zz_ef_cb_bond_issuance_high
+			if = { limit = { has_modifier = zz_ef_cb_bond_issuance_low } remove_modifier = zz_ef_cb_bond_issuance_low }
+			if = { limit = { has_modifier = zz_ef_cb_bond_issuance_high } remove_modifier = zz_ef_cb_bond_issuance_high }
 			if = {
 				limit = { owner.var:zz_ef_cb_bond_low > 0 }
 				add_modifier = {

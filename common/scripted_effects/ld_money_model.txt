@@ -997,7 +997,7 @@ zz_ef_pop_extra_income_step = {
 			has_variable = zz_ef_dependents
 			var:zz_ef_dependents > 0
 		}
-		remove_modifier = zz_ef_consumer_credit
+		if = { limit = { has_modifier = zz_ef_consumer_credit } remove_modifier = zz_ef_consumer_credit }
 		add_modifier = {
 			name = zz_ef_consumer_credit
 			multiplier = zz_ef_cc_wage_add
@@ -1059,7 +1059,7 @@ zz_ef_money_model_monthly_step = {
 	# REPLACE of private_construction_increase adds it back from the variable
 	# (СТР.5, script_values/zz_ef_psc_private_allocation.txt).
 	set_variable = { name = zz_ef_rate_constr_applied value = zz_ef_rate_construction_mult }
-	remove_modifier = zz_ef_rate_private_construction
+	if = { limit = { has_modifier = zz_ef_rate_private_construction } remove_modifier = zz_ef_rate_private_construction }
 	add_modifier = {
 		name = zz_ef_rate_private_construction
 		multiplier = var:zz_ef_rate_constr_applied
@@ -1369,7 +1369,7 @@ zz_ef_business_credit_step = {
 		}
 		change_variable = { name = zz_ef_bc_svc subtract = 1 }
 	}
-	remove_modifier = zz_ef_debt_service
+	if = { limit = { has_modifier = zz_ef_debt_service } remove_modifier = zz_ef_debt_service }
 	if = {
 		limit = { var:zz_ef_bc_svc > 0 }
 		add_modifier = {
@@ -1393,8 +1393,8 @@ zz_ef_gov_rate_step = {
 	# the engine's own factor (zz_ef_gr_k, weekly: its yearly rate / the adds).
 	change_variable = { name = zz_ef_gr_add_new divide = zz_ef_gr_k_v }
 	change_variable = { name = zz_ef_gr_add_new subtract = zz_ef_gov_rate_add_other }
-	remove_modifier = zz_ef_gov_rate_mult
-	remove_modifier = zz_ef_gov_rate_add
+	if = { limit = { has_modifier = zz_ef_gov_rate_mult } remove_modifier = zz_ef_gov_rate_mult }
+	if = { limit = { has_modifier = zz_ef_gov_rate_add } remove_modifier = zz_ef_gov_rate_add }
 	set_variable = { name = zz_ef_gr_mult value = var:zz_ef_gr_mult_new }
 	set_variable = { name = zz_ef_gr_add value = var:zz_ef_gr_add_new }
 	set_variable = { name = zz_ef_gr_mult_units value = var:zz_ef_gr_mult }

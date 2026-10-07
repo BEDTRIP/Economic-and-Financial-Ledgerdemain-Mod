@@ -71,7 +71,7 @@ zz_ef_stock_issue_update = {
 			max = 1
 		}
 	}
-	remove_modifier = zz_ef_stock_issue_literacy
+	if = { limit = { has_modifier = zz_ef_stock_issue_literacy } remove_modifier = zz_ef_stock_issue_literacy }
 	set_variable = {
 		name = zz_ef_stock_issue_cut
 		value = zz_ef_stock_issue_cut_points

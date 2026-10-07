@@ -40,14 +40,14 @@ zz_ef_cb_rate_step = {
 
 		if = {
 			limit = { var:base_rate_percentage_old > var:base_rate_percentage }
-			remove_modifier = rise_base_rate
-			remove_modifier = down_base_rate
+			if = { limit = { has_modifier = rise_base_rate } remove_modifier = rise_base_rate }
+			if = { limit = { has_modifier = down_base_rate } remove_modifier = down_base_rate }
 			add_modifier = { name = down_base_rate months = 3 }
 		}
 		else_if = {
 			limit = { var:base_rate_percentage_old < var:base_rate_percentage }
-			remove_modifier = down_base_rate
-			remove_modifier = rise_base_rate
+			if = { limit = { has_modifier = down_base_rate } remove_modifier = down_base_rate }
+			if = { limit = { has_modifier = rise_base_rate } remove_modifier = rise_base_rate }
 			add_modifier = { name = rise_base_rate months = 3 }
 		}
 	}

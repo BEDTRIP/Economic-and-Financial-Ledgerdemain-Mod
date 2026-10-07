@@ -764,7 +764,7 @@
 			#money_value_target_pre_set = yes
 			activate_law = law_type:law_gold_standard
 			central_bank_production_methods = yes
-			remove_modifier = foreign_exchange_controls
+			if = { limit = { has_modifier = foreign_exchange_controls } remove_modifier = foreign_exchange_controls }
 			add_modifier = {
 				name = foreign_exchange_controls
 				months = 12
@@ -825,7 +825,7 @@
 			#money_value_target_pre_set = yes
 			activate_law = law_type:law_gold_standard
 			central_bank_production_methods = yes
-			remove_modifier = foreign_exchange_controls
+			if = { limit = { has_modifier = foreign_exchange_controls } remove_modifier = foreign_exchange_controls }
 			add_modifier = {
 				name = foreign_exchange_controls
 				months = 12

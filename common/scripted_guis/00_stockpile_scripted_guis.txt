@@ -10655,8 +10655,8 @@ set_ammunition_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_ammunition
-				remove_modifier = releasing_ammunition
+				if = { limit = { has_modifier = storing_ammunition } remove_modifier = storing_ammunition }
+				if = { limit = { has_modifier = releasing_ammunition } remove_modifier = releasing_ammunition }
 			}
 		}
 		set_variable = {
@@ -10725,7 +10725,7 @@ set_store_ammunition = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_ammunition #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_ammunition } remove_modifier = storing_ammunition } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -10770,7 +10770,7 @@ set_store_ammunition_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_ammunition
+			if = { limit = { has_modifier = storing_ammunition } remove_modifier = storing_ammunition }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -10833,7 +10833,7 @@ set_release_ammunition = {
 			value = ammunition_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_ammunition
+			if = { limit = { has_modifier = releasing_ammunition } remove_modifier = releasing_ammunition }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -11071,8 +11071,8 @@ set_small_arms_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_small_arms
-				remove_modifier = releasing_small_arms
+				if = { limit = { has_modifier = storing_small_arms } remove_modifier = storing_small_arms }
+				if = { limit = { has_modifier = releasing_small_arms } remove_modifier = releasing_small_arms }
 			}
 		}
 		set_variable = {
@@ -11137,7 +11137,7 @@ set_store_small_arms = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_small_arms #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_small_arms } remove_modifier = storing_small_arms } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -11178,7 +11178,7 @@ set_store_small_arms_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_small_arms
+			if = { limit = { has_modifier = storing_small_arms } remove_modifier = storing_small_arms }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -11241,7 +11241,7 @@ set_release_small_arms = {
 			value = small_arms_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_small_arms
+			if = { limit = { has_modifier = releasing_small_arms } remove_modifier = releasing_small_arms }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -11479,8 +11479,8 @@ set_artillery_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_artillery
-				remove_modifier = releasing_artillery
+				if = { limit = { has_modifier = storing_artillery } remove_modifier = storing_artillery }
+				if = { limit = { has_modifier = releasing_artillery } remove_modifier = releasing_artillery }
 			}
 		}
 		set_variable = {
@@ -11549,7 +11549,7 @@ set_store_artillery = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_artillery #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_artillery } remove_modifier = storing_artillery } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -11594,7 +11594,7 @@ set_store_artillery_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_artillery
+			if = { limit = { has_modifier = storing_artillery } remove_modifier = storing_artillery }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -11657,7 +11657,7 @@ set_release_artillery = {
 			value = artillery_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_artillery
+			if = { limit = { has_modifier = releasing_artillery } remove_modifier = releasing_artillery }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -11895,8 +11895,8 @@ set_tanks_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_tanks
-				remove_modifier = releasing_tanks
+				if = { limit = { has_modifier = storing_tanks } remove_modifier = storing_tanks }
+				if = { limit = { has_modifier = releasing_tanks } remove_modifier = releasing_tanks }
 			}
 		}
 		set_variable = {
@@ -11961,7 +11961,7 @@ set_store_tanks = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_tanks #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_tanks } remove_modifier = storing_tanks } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -12002,7 +12002,7 @@ set_store_tanks_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_tanks
+			if = { limit = { has_modifier = storing_tanks } remove_modifier = storing_tanks }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -12065,7 +12065,7 @@ set_release_tanks = {
 			value = tanks_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_tanks
+			if = { limit = { has_modifier = releasing_tanks } remove_modifier = releasing_tanks }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -12303,8 +12303,8 @@ set_aeroplanes_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_aeroplanes
-				remove_modifier = releasing_aeroplanes
+				if = { limit = { has_modifier = storing_aeroplanes } remove_modifier = storing_aeroplanes }
+				if = { limit = { has_modifier = releasing_aeroplanes } remove_modifier = releasing_aeroplanes }
 			}
 		}
 		set_variable = {
@@ -12369,7 +12369,7 @@ set_store_aeroplanes = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_aeroplanes #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_aeroplanes } remove_modifier = storing_aeroplanes } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -12410,7 +12410,7 @@ set_store_aeroplanes_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_aeroplanes
+			if = { limit = { has_modifier = storing_aeroplanes } remove_modifier = storing_aeroplanes }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -12473,7 +12473,7 @@ set_release_aeroplanes = {
 			value = aeroplanes_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_aeroplanes
+			if = { limit = { has_modifier = releasing_aeroplanes } remove_modifier = releasing_aeroplanes }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -12711,8 +12711,8 @@ set_grain_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_grain
-				remove_modifier = releasing_grain
+				if = { limit = { has_modifier = storing_grain } remove_modifier = storing_grain }
+				if = { limit = { has_modifier = releasing_grain } remove_modifier = releasing_grain }
 			}
 		}
 		set_variable = {
@@ -12777,7 +12777,7 @@ set_store_grain = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_grain #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_grain } remove_modifier = storing_grain } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -12818,7 +12818,7 @@ set_store_grain_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_grain
+			if = { limit = { has_modifier = storing_grain } remove_modifier = storing_grain }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -12881,7 +12881,7 @@ set_release_grain = {
 			value = grain_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_grain
+			if = { limit = { has_modifier = releasing_grain } remove_modifier = releasing_grain }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -13119,8 +13119,8 @@ set_fabric_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_fabric
-				remove_modifier = releasing_fabric
+				if = { limit = { has_modifier = storing_fabric } remove_modifier = storing_fabric }
+				if = { limit = { has_modifier = releasing_fabric } remove_modifier = releasing_fabric }
 			}
 		}
 		set_variable = {
@@ -13185,7 +13185,7 @@ set_store_fabric = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_fabric #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_fabric } remove_modifier = storing_fabric } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -13226,7 +13226,7 @@ set_store_fabric_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_fabric
+			if = { limit = { has_modifier = storing_fabric } remove_modifier = storing_fabric }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -13289,7 +13289,7 @@ set_release_fabric = {
 			value = fabric_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_fabric
+			if = { limit = { has_modifier = releasing_fabric } remove_modifier = releasing_fabric }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -13527,8 +13527,8 @@ set_wood_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_wood
-				remove_modifier = releasing_wood
+				if = { limit = { has_modifier = storing_wood } remove_modifier = storing_wood }
+				if = { limit = { has_modifier = releasing_wood } remove_modifier = releasing_wood }
 			}
 		}
 		set_variable = {
@@ -13593,7 +13593,7 @@ set_store_wood = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_wood #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_wood } remove_modifier = storing_wood } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -13634,7 +13634,7 @@ set_store_wood_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_wood
+			if = { limit = { has_modifier = storing_wood } remove_modifier = storing_wood }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -13697,7 +13697,7 @@ set_release_wood = {
 			value = wood_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_wood
+			if = { limit = { has_modifier = releasing_wood } remove_modifier = releasing_wood }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -13935,8 +13935,8 @@ set_groceries_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_groceries
-				remove_modifier = releasing_groceries
+				if = { limit = { has_modifier = storing_groceries } remove_modifier = storing_groceries }
+				if = { limit = { has_modifier = releasing_groceries } remove_modifier = releasing_groceries }
 			}
 		}
 		set_variable = {
@@ -14001,7 +14001,7 @@ set_store_groceries = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_groceries #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_groceries } remove_modifier = storing_groceries } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -14042,7 +14042,7 @@ set_store_groceries_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_groceries
+			if = { limit = { has_modifier = storing_groceries } remove_modifier = storing_groceries }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -14105,7 +14105,7 @@ set_release_groceries = {
 			value = groceries_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_groceries
+			if = { limit = { has_modifier = releasing_groceries } remove_modifier = releasing_groceries }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -14343,8 +14343,8 @@ set_clothes_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_clothes
-				remove_modifier = releasing_clothes
+				if = { limit = { has_modifier = storing_clothes } remove_modifier = storing_clothes }
+				if = { limit = { has_modifier = releasing_clothes } remove_modifier = releasing_clothes }
 			}
 		}
 		set_variable = {
@@ -14413,7 +14413,7 @@ set_store_clothes = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_clothes #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_clothes } remove_modifier = storing_clothes } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -14458,7 +14458,7 @@ set_store_clothes_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_clothes
+			if = { limit = { has_modifier = storing_clothes } remove_modifier = storing_clothes }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -14521,7 +14521,7 @@ set_release_clothes = {
 			value = clothes_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_clothes
+			if = { limit = { has_modifier = releasing_clothes } remove_modifier = releasing_clothes }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -14759,8 +14759,8 @@ set_paper_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_paper
-				remove_modifier = releasing_paper
+				if = { limit = { has_modifier = storing_paper } remove_modifier = storing_paper }
+				if = { limit = { has_modifier = releasing_paper } remove_modifier = releasing_paper }
 			}
 		}
 		set_variable = {
@@ -14825,7 +14825,7 @@ set_store_paper = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_paper #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_paper } remove_modifier = storing_paper } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -14866,7 +14866,7 @@ set_store_paper_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_paper
+			if = { limit = { has_modifier = storing_paper } remove_modifier = storing_paper }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -14929,7 +14929,7 @@ set_release_paper = {
 			value = paper_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_paper
+			if = { limit = { has_modifier = releasing_paper } remove_modifier = releasing_paper }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -15167,8 +15167,8 @@ set_silk_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_silk
-				remove_modifier = releasing_silk
+				if = { limit = { has_modifier = storing_silk } remove_modifier = storing_silk }
+				if = { limit = { has_modifier = releasing_silk } remove_modifier = releasing_silk }
 			}
 		}
 		set_variable = {
@@ -15233,7 +15233,7 @@ set_store_silk = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_silk #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_silk } remove_modifier = storing_silk } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -15274,7 +15274,7 @@ set_store_silk_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_silk
+			if = { limit = { has_modifier = storing_silk } remove_modifier = storing_silk }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -15337,7 +15337,7 @@ set_release_silk = {
 			value = silk_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_silk
+			if = { limit = { has_modifier = releasing_silk } remove_modifier = releasing_silk }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -15575,8 +15575,8 @@ set_dye_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_dye
-				remove_modifier = releasing_dye
+				if = { limit = { has_modifier = storing_dye } remove_modifier = storing_dye }
+				if = { limit = { has_modifier = releasing_dye } remove_modifier = releasing_dye }
 			}
 		}
 		set_variable = {
@@ -15645,7 +15645,7 @@ set_store_dye = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_dye #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_dye } remove_modifier = storing_dye } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -15690,7 +15690,7 @@ set_store_dye_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_dye
+			if = { limit = { has_modifier = storing_dye } remove_modifier = storing_dye }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -15753,7 +15753,7 @@ set_release_dye = {
 			value = dye_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_dye
+			if = { limit = { has_modifier = releasing_dye } remove_modifier = releasing_dye }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -15991,8 +15991,8 @@ set_sulfur_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_sulfur
-				remove_modifier = releasing_sulfur
+				if = { limit = { has_modifier = storing_sulfur } remove_modifier = storing_sulfur }
+				if = { limit = { has_modifier = releasing_sulfur } remove_modifier = releasing_sulfur }
 			}
 		}
 		set_variable = {
@@ -16057,7 +16057,7 @@ set_store_sulfur = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_sulfur #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_sulfur } remove_modifier = storing_sulfur } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -16098,7 +16098,7 @@ set_store_sulfur_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_sulfur
+			if = { limit = { has_modifier = storing_sulfur } remove_modifier = storing_sulfur }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -16161,7 +16161,7 @@ set_release_sulfur = {
 			value = sulfur_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_sulfur
+			if = { limit = { has_modifier = releasing_sulfur } remove_modifier = releasing_sulfur }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -16399,8 +16399,8 @@ set_coal_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_coal
-				remove_modifier = releasing_coal
+				if = { limit = { has_modifier = storing_coal } remove_modifier = storing_coal }
+				if = { limit = { has_modifier = releasing_coal } remove_modifier = releasing_coal }
 			}
 		}
 		set_variable = {
@@ -16465,7 +16465,7 @@ set_store_coal = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_coal #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_coal } remove_modifier = storing_coal } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -16506,7 +16506,7 @@ set_store_coal_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_coal
+			if = { limit = { has_modifier = storing_coal } remove_modifier = storing_coal }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -16569,7 +16569,7 @@ set_release_coal = {
 			value = coal_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_coal
+			if = { limit = { has_modifier = releasing_coal } remove_modifier = releasing_coal }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -16807,8 +16807,8 @@ set_iron_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_iron
-				remove_modifier = releasing_iron
+				if = { limit = { has_modifier = storing_iron } remove_modifier = storing_iron }
+				if = { limit = { has_modifier = releasing_iron } remove_modifier = releasing_iron }
 			}
 		}
 		set_variable = {
@@ -16873,7 +16873,7 @@ set_store_iron = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_iron #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_iron } remove_modifier = storing_iron } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -16914,7 +16914,7 @@ set_store_iron_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_iron
+			if = { limit = { has_modifier = storing_iron } remove_modifier = storing_iron }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -16977,7 +16977,7 @@ set_release_iron = {
 			value = iron_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_iron
+			if = { limit = { has_modifier = releasing_iron } remove_modifier = releasing_iron }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -17215,8 +17215,8 @@ set_lead_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_lead
-				remove_modifier = releasing_lead
+				if = { limit = { has_modifier = storing_lead } remove_modifier = storing_lead }
+				if = { limit = { has_modifier = releasing_lead } remove_modifier = releasing_lead }
 			}
 		}
 		set_variable = {
@@ -17285,7 +17285,7 @@ set_store_lead = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_lead #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_lead } remove_modifier = storing_lead } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -17330,7 +17330,7 @@ set_store_lead_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_lead
+			if = { limit = { has_modifier = storing_lead } remove_modifier = storing_lead }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -17393,7 +17393,7 @@ set_release_lead = {
 			value = lead_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_lead
+			if = { limit = { has_modifier = releasing_lead } remove_modifier = releasing_lead }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -17631,8 +17631,8 @@ set_hardwood_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_hardwood
-				remove_modifier = releasing_hardwood
+				if = { limit = { has_modifier = storing_hardwood } remove_modifier = storing_hardwood }
+				if = { limit = { has_modifier = releasing_hardwood } remove_modifier = releasing_hardwood }
 			}
 		}
 		set_variable = {
@@ -17701,7 +17701,7 @@ set_store_hardwood = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_hardwood #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_hardwood } remove_modifier = storing_hardwood } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -17746,7 +17746,7 @@ set_store_hardwood_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_hardwood
+			if = { limit = { has_modifier = storing_hardwood } remove_modifier = storing_hardwood }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -17809,7 +17809,7 @@ set_release_hardwood = {
 			value = hardwood_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_hardwood
+			if = { limit = { has_modifier = releasing_hardwood } remove_modifier = releasing_hardwood }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -18047,8 +18047,8 @@ set_rubber_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_rubber
-				remove_modifier = releasing_rubber
+				if = { limit = { has_modifier = storing_rubber } remove_modifier = storing_rubber }
+				if = { limit = { has_modifier = releasing_rubber } remove_modifier = releasing_rubber }
 			}
 		}
 		set_variable = {
@@ -18113,7 +18113,7 @@ set_store_rubber = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_rubber #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_rubber } remove_modifier = storing_rubber } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -18154,7 +18154,7 @@ set_store_rubber_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_rubber
+			if = { limit = { has_modifier = storing_rubber } remove_modifier = storing_rubber }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -18217,7 +18217,7 @@ set_release_rubber = {
 			value = rubber_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_rubber
+			if = { limit = { has_modifier = releasing_rubber } remove_modifier = releasing_rubber }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -18455,8 +18455,8 @@ set_oil_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_oil
-				remove_modifier = releasing_oil
+				if = { limit = { has_modifier = storing_oil } remove_modifier = storing_oil }
+				if = { limit = { has_modifier = releasing_oil } remove_modifier = releasing_oil }
 			}
 		}
 		set_variable = {
@@ -18521,7 +18521,7 @@ set_store_oil = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_oil #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_oil } remove_modifier = storing_oil } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -18562,7 +18562,7 @@ set_store_oil_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_oil
+			if = { limit = { has_modifier = storing_oil } remove_modifier = storing_oil }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -18625,7 +18625,7 @@ set_release_oil = {
 			value = oil_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_oil
+			if = { limit = { has_modifier = releasing_oil } remove_modifier = releasing_oil }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -18863,8 +18863,8 @@ set_engines_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_engines
-				remove_modifier = releasing_engines
+				if = { limit = { has_modifier = storing_engines } remove_modifier = storing_engines }
+				if = { limit = { has_modifier = releasing_engines } remove_modifier = releasing_engines }
 			}
 		}
 		set_variable = {
@@ -18929,7 +18929,7 @@ set_store_engines = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_engines #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_engines } remove_modifier = storing_engines } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -18970,7 +18970,7 @@ set_store_engines_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_engines
+			if = { limit = { has_modifier = storing_engines } remove_modifier = storing_engines }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -19033,7 +19033,7 @@ set_release_engines = {
 			value = engines_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_engines
+			if = { limit = { has_modifier = releasing_engines } remove_modifier = releasing_engines }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -19271,8 +19271,8 @@ set_steel_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_steel
-				remove_modifier = releasing_steel
+				if = { limit = { has_modifier = storing_steel } remove_modifier = storing_steel }
+				if = { limit = { has_modifier = releasing_steel } remove_modifier = releasing_steel }
 			}
 		}
 		set_variable = {
@@ -19337,7 +19337,7 @@ set_store_steel = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_steel #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_steel } remove_modifier = storing_steel } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -19378,7 +19378,7 @@ set_store_steel_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_steel
+			if = { limit = { has_modifier = storing_steel } remove_modifier = storing_steel }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -19441,7 +19441,7 @@ set_release_steel = {
 			value = steel_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_steel
+			if = { limit = { has_modifier = releasing_steel } remove_modifier = releasing_steel }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -19679,8 +19679,8 @@ set_fertilizer_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_fertilizer
-				remove_modifier = releasing_fertilizer
+				if = { limit = { has_modifier = storing_fertilizer } remove_modifier = storing_fertilizer }
+				if = { limit = { has_modifier = releasing_fertilizer } remove_modifier = releasing_fertilizer }
 			}
 		}
 		set_variable = {
@@ -19745,7 +19745,7 @@ set_store_fertilizer = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_fertilizer #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_fertilizer } remove_modifier = storing_fertilizer } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -19786,7 +19786,7 @@ set_store_fertilizer_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_fertilizer
+			if = { limit = { has_modifier = storing_fertilizer } remove_modifier = storing_fertilizer }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -19849,7 +19849,7 @@ set_release_fertilizer = {
 			value = fertilizer_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_fertilizer
+			if = { limit = { has_modifier = releasing_fertilizer } remove_modifier = releasing_fertilizer }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -20087,8 +20087,8 @@ set_tools_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_tools
-				remove_modifier = releasing_tools
+				if = { limit = { has_modifier = storing_tools } remove_modifier = storing_tools }
+				if = { limit = { has_modifier = releasing_tools } remove_modifier = releasing_tools }
 			}
 		}
 		set_variable = {
@@ -20153,7 +20153,7 @@ set_store_tools = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_tools #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_tools } remove_modifier = storing_tools } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -20194,7 +20194,7 @@ set_store_tools_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_tools
+			if = { limit = { has_modifier = storing_tools } remove_modifier = storing_tools }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -20257,7 +20257,7 @@ set_release_tools = {
 			value = tools_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_tools
+			if = { limit = { has_modifier = releasing_tools } remove_modifier = releasing_tools }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -20495,8 +20495,8 @@ set_explosives_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_explosives
-				remove_modifier = releasing_explosives
+				if = { limit = { has_modifier = storing_explosives } remove_modifier = storing_explosives }
+				if = { limit = { has_modifier = releasing_explosives } remove_modifier = releasing_explosives }
 			}
 		}
 		set_variable = {
@@ -20561,7 +20561,7 @@ set_store_explosives = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_explosives #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_explosives } remove_modifier = storing_explosives } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -20602,7 +20602,7 @@ set_store_explosives_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_explosives
+			if = { limit = { has_modifier = storing_explosives } remove_modifier = storing_explosives }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -20665,7 +20665,7 @@ set_release_explosives = {
 			value = explosives_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_explosives
+			if = { limit = { has_modifier = releasing_explosives } remove_modifier = releasing_explosives }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -20903,8 +20903,8 @@ set_automobiles_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_automobiles
-				remove_modifier = releasing_automobiles
+				if = { limit = { has_modifier = storing_automobiles } remove_modifier = storing_automobiles }
+				if = { limit = { has_modifier = releasing_automobiles } remove_modifier = releasing_automobiles }
 			}
 		}
 		set_variable = {
@@ -20969,7 +20969,7 @@ set_store_automobiles = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_automobiles #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_automobiles } remove_modifier = storing_automobiles } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -21010,7 +21010,7 @@ set_store_automobiles_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_automobiles
+			if = { limit = { has_modifier = storing_automobiles } remove_modifier = storing_automobiles }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -21073,7 +21073,7 @@ set_release_automobiles = {
 			value = automobiles_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_automobiles
+			if = { limit = { has_modifier = releasing_automobiles } remove_modifier = releasing_automobiles }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -21311,8 +21311,8 @@ set_telephones_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_telephones
-				remove_modifier = releasing_telephones
+				if = { limit = { has_modifier = storing_telephones } remove_modifier = storing_telephones }
+				if = { limit = { has_modifier = releasing_telephones } remove_modifier = releasing_telephones }
 			}
 		}
 		set_variable = {
@@ -21377,7 +21377,7 @@ set_store_telephones = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_telephones #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_telephones } remove_modifier = storing_telephones } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -21418,7 +21418,7 @@ set_store_telephones_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_telephones
+			if = { limit = { has_modifier = storing_telephones } remove_modifier = storing_telephones }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -21481,7 +21481,7 @@ set_release_telephones = {
 			value = telephones_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_telephones
+			if = { limit = { has_modifier = releasing_telephones } remove_modifier = releasing_telephones }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -21719,8 +21719,8 @@ set_radios_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_radios
-				remove_modifier = releasing_radios
+				if = { limit = { has_modifier = storing_radios } remove_modifier = storing_radios }
+				if = { limit = { has_modifier = releasing_radios } remove_modifier = releasing_radios }
 			}
 		}
 		set_variable = {
@@ -21785,7 +21785,7 @@ set_store_radios = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_radios #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_radios } remove_modifier = storing_radios } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -21826,7 +21826,7 @@ set_store_radios_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_radios
+			if = { limit = { has_modifier = storing_radios } remove_modifier = storing_radios }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -21889,7 +21889,7 @@ set_release_radios = {
 			value = radios_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_radios
+			if = { limit = { has_modifier = releasing_radios } remove_modifier = releasing_radios }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -22127,8 +22127,8 @@ set_opium_0 = {
 					has_modifier = central_bank_historic_place
 					is_capital = yes
 				}
-				remove_modifier = storing_opium
-				remove_modifier = releasing_opium
+				if = { limit = { has_modifier = storing_opium } remove_modifier = storing_opium }
+				if = { limit = { has_modifier = releasing_opium } remove_modifier = releasing_opium }
 			}
 		}
 		set_variable = {
@@ -22193,7 +22193,7 @@ set_store_opium = {
 		}
 
 		every_scope_state = {
-			remove_modifier = storing_opium #netoyage general des modifier de stock/rerlase
+			if = { limit = { has_modifier = storing_opium } remove_modifier = storing_opium } #netoyage general des modifier de stock/rerlase
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -22234,7 +22234,7 @@ set_store_opium_infinit = {
 			value = 1000
 		}
 		every_scope_state = {
-			remove_modifier = storing_opium
+			if = { limit = { has_modifier = storing_opium } remove_modifier = storing_opium }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -22297,7 +22297,7 @@ set_release_opium = {
 			value = opium_release_predicted
 		}
 		every_scope_state = {
-			remove_modifier = releasing_opium
+			if = { limit = { has_modifier = releasing_opium } remove_modifier = releasing_opium }
 			if = {
 				limit = {
 					has_modifier = central_bank_historic_place

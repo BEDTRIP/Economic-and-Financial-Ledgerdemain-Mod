@@ -22072,7 +22072,6 @@ central_bank_modifier = {
 						has_modifier = central_bank_place
 					}
 				}
-				remove_modifier = central_bank_place
 				add_modifier = {
 					name = central_bank_place
 				}
@@ -22082,7 +22081,7 @@ central_bank_modifier = {
 				limit = {
 					has_modifier = central_bank_place
 				}
-				remove_modifier = central_bank_historic_place
+				if = { limit = { has_modifier = central_bank_historic_place } remove_modifier = central_bank_historic_place }
 				add_modifier = {
 					name = central_bank_historic_place
 				}
@@ -22097,11 +22096,11 @@ central_bank_modifier = {
 				# 	has_modifier = has_central_bank
 				# }
 			}
-			remove_modifier = has_central_bank
+			if = { limit = { has_modifier = has_central_bank } remove_modifier = has_central_bank }
 			add_modifier = {
 				name = has_central_bank
 			}
-			remove_modifier = central_bank_metal_purchases
+			if = { limit = { has_modifier = central_bank_metal_purchases } remove_modifier = central_bank_metal_purchases }
 			add_modifier = {
 				name = central_bank_metal_purchases
 				multiplier = central_bank_metal_purchases
@@ -22135,7 +22134,7 @@ central_bank_modifier = {
 					central_bank_modifier_fixed_var = yes
 				}
 
-				remove_modifier = currency_demande
+				if = { limit = { has_modifier = currency_demande } remove_modifier = currency_demande }
 				add_modifier = {
 					name = currency_demande
 					multiplier = target_demand_currency_for_modifier
@@ -22186,7 +22185,6 @@ financial_center_modifier = {
 						has_modifier = financial_center_place
 					}
 				}
-				remove_modifier = financial_center_place
 				add_modifier = {
 					name = financial_center_place
 					multiplier = var:gdp_view_fc
@@ -22201,7 +22199,6 @@ financial_center_modifier = {
 						}
 					}
 				}
-				remove_modifier = financial_center_historic_place
 				add_modifier = {
 					name = financial_center_historic_place
 				}
@@ -22302,7 +22299,6 @@ financial_center_modifier = {
 						}
 					}
 				}
-				remove_modifier = financial_center_historic_place
 				add_modifier = {
 					name = financial_center_historic_place
 				}
@@ -22442,7 +22438,7 @@ financial_center_modifier = {
 				has_building = building_financial_centre_sax
 			}
 		}
-		remove_modifier = has_financial_center
+		if = { limit = { has_modifier = has_financial_center } remove_modifier = has_financial_center }
         add_modifier = {
             name = has_financial_center
 			multiplier = value_for_has_financial_center
@@ -22467,33 +22463,33 @@ financial_center_modifier = {
 				financial_center_modifier_fixed_var = yes
 			}
 
-			remove_modifier = bond_deemande
+			if = { limit = { has_modifier = bond_deemande } remove_modifier = bond_deemande }
 			add_modifier = {
 				name = bond_deemande
 				multiplier = target_demand_bond_for_modifier
 			}
-			remove_modifier = manufacture_stock_deemande
+			if = { limit = { has_modifier = manufacture_stock_deemande } remove_modifier = manufacture_stock_deemande }
 			add_modifier = {
 				name = manufacture_stock_deemande
 				multiplier = target_demand_manufacture_stock_for_modifier
 			}
-			remove_modifier = agricultural_stock_deemande
+			if = { limit = { has_modifier = agricultural_stock_deemande } remove_modifier = agricultural_stock_deemande }
 			add_modifier = {
 				name = agricultural_stock_deemande
 				multiplier = target_demand_agricultural_stock_for_modifier
 			}
-			remove_modifier = mining_stock_deemande
+			if = { limit = { has_modifier = mining_stock_deemande } remove_modifier = mining_stock_deemande }
 			add_modifier = {
 				name = mining_stock_deemande
 				multiplier = target_demand_mining_stock_for_modifier
 			}
-			remove_modifier = railroad_stock_deemande
+			if = { limit = { has_modifier = railroad_stock_deemande } remove_modifier = railroad_stock_deemande }
 			add_modifier = {
 				name = railroad_stock_deemande
 				multiplier = target_demand_railroad_stock_for_modifier
 			}
 
-			remove_modifier = mutual_fund_supply
+			if = { limit = { has_modifier = mutual_fund_supply } remove_modifier = mutual_fund_supply }
 			add_modifier = {
 				name = mutual_fund_supply
 				multiplier = target_supply_mutual_fund_for_modifier
@@ -22543,33 +22539,33 @@ financial_center_modifier = {
 				financial_center_modifier_fixed_var = yes
 			}
 
-			remove_modifier = bond_deemande
+			if = { limit = { has_modifier = bond_deemande } remove_modifier = bond_deemande }
 			add_modifier = {
 				name = bond_deemande
 				multiplier = target_demand_bond_for_modifier
 			}
-			remove_modifier = manufacture_stock_deemande
+			if = { limit = { has_modifier = manufacture_stock_deemande } remove_modifier = manufacture_stock_deemande }
 			add_modifier = {
 				name = manufacture_stock_deemande
 				multiplier = target_demand_manufacture_stock_for_modifier
 			}
-			remove_modifier = agricultural_stock_deemande
+			if = { limit = { has_modifier = agricultural_stock_deemande } remove_modifier = agricultural_stock_deemande }
 			add_modifier = {
 				name = agricultural_stock_deemande
 				multiplier = target_demand_agricultural_stock_for_modifier
 			}
-			remove_modifier = mining_stock_deemande
+			if = { limit = { has_modifier = mining_stock_deemande } remove_modifier = mining_stock_deemande }
 			add_modifier = {
 				name = mining_stock_deemande
 				multiplier = target_demand_mining_stock_for_modifier
 			}
-			remove_modifier = railroad_stock_deemande
+			if = { limit = { has_modifier = railroad_stock_deemande } remove_modifier = railroad_stock_deemande }
 			add_modifier = {
 				name = railroad_stock_deemande
 				multiplier = target_demand_railroad_stock_for_modifier
 			}
 
-			remove_modifier = mutual_fund_supply
+			if = { limit = { has_modifier = mutual_fund_supply } remove_modifier = mutual_fund_supply }
 			add_modifier = {
 				name = mutual_fund_supply
 				multiplier = target_supply_mutual_fund_for_modifier
@@ -22792,7 +22788,6 @@ national_stockpile_modifier = {
 					has_modifier = national_stockpile_place
 				}
 			}
-			remove_modifier = national_stockpile_place
 			add_modifier = {
 				name = national_stockpile_place
 			}
@@ -22802,7 +22797,7 @@ national_stockpile_modifier = {
 			limit = {
 				has_modifier = national_stockpile_place
 			}
-			remove_modifier = national_stockpile_historic_place
+			if = { limit = { has_modifier = national_stockpile_historic_place } remove_modifier = national_stockpile_historic_place }
 			add_modifier = {
 				name = national_stockpile_historic_place
 			}
@@ -22846,7 +22841,7 @@ remove_country_building_modifier = { #country
 				}
 			}
 		}
-		remove_modifier = has_central_bank
+		if = { limit = { has_modifier = has_central_bank } remove_modifier = has_central_bank }
 	}
 	if = {
 		limit = {
@@ -22900,7 +22895,7 @@ remove_country_building_modifier = { #country
 				}
 			}
 		}
-		remove_modifier = has_financial_center
+		if = { limit = { has_modifier = has_financial_center } remove_modifier = has_financial_center }
 	}
 	if = {
 		limit = {
@@ -22909,7 +22904,7 @@ remove_country_building_modifier = { #country
 				has_technology_researched = national_stockpile #has_building = building_old_national_stockpile
 			}
 		}
-		remove_modifier = has_national_stockpile
+		if = { limit = { has_modifier = has_national_stockpile } remove_modifier = has_national_stockpile }
 	}
 }
 reset_building = {

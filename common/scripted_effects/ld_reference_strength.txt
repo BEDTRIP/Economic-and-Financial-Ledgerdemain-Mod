@@ -13,7 +13,7 @@ zz_ef_reference_strength_step = {
 # Е.10 (5.10, Д.5): the trade modifier of the currency's strength (static_modifiers/zz_ef_currency_trade.txt).
 # Monthly, after the reference's step; countries with a central bank, not the reference.
 zz_ef_currency_trade_step = {
-	remove_modifier = zz_ef_currency_trade
+	if = { limit = { has_modifier = zz_ef_currency_trade } remove_modifier = zz_ef_currency_trade }
 	if = {
 		limit = {
 			has_modifier = has_central_bank

@@ -15,7 +15,7 @@
 #############################################
 
 zz_ef_rate_policy_costs = {
-	remove_modifier = zz_ef_rate_policy_authority
+	if = { limit = { has_modifier = zz_ef_rate_policy_authority } remove_modifier = zz_ef_rate_policy_authority }
 	if = {
 		limit = { zz_ef_rate_policy_steps > 0 }
 		add_modifier = {
@@ -24,8 +24,8 @@ zz_ef_rate_policy_costs = {
 		}
 	}
 	every_interest_group = {
-		remove_modifier = zz_ef_rate_policy_hard_money
-		remove_modifier = zz_ef_rate_policy_soft_money
+		if = { limit = { has_modifier = zz_ef_rate_policy_hard_money } remove_modifier = zz_ef_rate_policy_hard_money }
+		if = { limit = { has_modifier = zz_ef_rate_policy_soft_money } remove_modifier = zz_ef_rate_policy_soft_money }
 	}
 	if = {
 		limit = { zz_ef_rate_policy_steps > 0 }

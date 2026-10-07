@@ -30,13 +30,13 @@ zz_ef_mp_init = {
 # Back to no policy: our state and every E&F modifier of the 25/50/75 buttons go (the pace stays,
 # it is the player's setting).
 zz_ef_mp_clear = {
-	remove_modifier = devaluation_currency_25
-	remove_modifier = devaluation_currency_50
-	remove_modifier = devaluation_currency_75
-	remove_modifier = devaluation_currency_100
-	remove_modifier = revaluation_currency_25
-	remove_modifier = revaluation_currency_50
-	remove_modifier = revaluation_currency_75
+	if = { limit = { has_modifier = devaluation_currency_25 } remove_modifier = devaluation_currency_25 }
+	if = { limit = { has_modifier = devaluation_currency_50 } remove_modifier = devaluation_currency_50 }
+	if = { limit = { has_modifier = devaluation_currency_75 } remove_modifier = devaluation_currency_75 }
+	if = { limit = { has_modifier = devaluation_currency_100 } remove_modifier = devaluation_currency_100 }
+	if = { limit = { has_modifier = revaluation_currency_25 } remove_modifier = revaluation_currency_25 }
+	if = { limit = { has_modifier = revaluation_currency_50 } remove_modifier = revaluation_currency_50 }
+	if = { limit = { has_modifier = revaluation_currency_75 } remove_modifier = revaluation_currency_75 }
 	if = { limit = { has_variable = zz_ef_mp_start } remove_variable = zz_ef_mp_start }
 	if = { limit = { has_variable = zz_ef_mp_target } remove_variable = zz_ef_mp_target }
 	if = { limit = { has_variable = zz_ef_mp_prev } remove_variable = zz_ef_mp_prev }

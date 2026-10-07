@@ -1723,7 +1723,7 @@ is_treaty_port_disable_pm_market_liquidity = {
 			limit = {
 				is_treaty_port = yes
 			}
-			remove_modifier = offshore_port
+			if = { limit = { has_modifier = offshore_port } remove_modifier = offshore_port }
 			add_modifier = offshore_port
 		}
 	}
@@ -10110,14 +10110,14 @@ global_monetary_reference_reset = {
 			limit = {
 				is_building_group = bg_bank
 			}
-			remove_modifier = devaluation_currency_25
-			remove_modifier = devaluation_currency_50
-			remove_modifier = devaluation_currency_75
-			remove_modifier = devaluation_currency_100
-			remove_modifier = revaluation_currency_25
-			remove_modifier = revaluation_currency_50
-			remove_modifier = revaluation_currency_75
-			remove_modifier = revaluation_currency_100
+			if = { limit = { has_modifier = devaluation_currency_25 } remove_modifier = devaluation_currency_25 }
+			if = { limit = { has_modifier = devaluation_currency_50 } remove_modifier = devaluation_currency_50 }
+			if = { limit = { has_modifier = devaluation_currency_75 } remove_modifier = devaluation_currency_75 }
+			if = { limit = { has_modifier = devaluation_currency_100 } remove_modifier = devaluation_currency_100 }
+			if = { limit = { has_modifier = revaluation_currency_25 } remove_modifier = revaluation_currency_25 }
+			if = { limit = { has_modifier = revaluation_currency_50 } remove_modifier = revaluation_currency_50 }
+			if = { limit = { has_modifier = revaluation_currency_75 } remove_modifier = revaluation_currency_75 }
+			if = { limit = { has_modifier = revaluation_currency_100 } remove_modifier = revaluation_currency_100 }
 		}
 	}
 	monetary_policy_inflation_base_rate = {
@@ -10684,7 +10684,7 @@ global_monetary_reference_reset = {
 					trigger_event = 00_ef_economic_event.31
 				}
 
-				remove_modifier = devaluation_currency_target
+				if = { limit = { has_modifier = devaluation_currency_target } remove_modifier = devaluation_currency_target }
 				add_modifier = {
 					name = devaluation_currency_target
 					months = 12
@@ -10718,7 +10718,7 @@ global_monetary_reference_reset = {
 					trigger_event = 00_ef_economic_event.32
 				}
 
-				remove_modifier = revaluation_currency_target
+				if = { limit = { has_modifier = revaluation_currency_target } remove_modifier = revaluation_currency_target }
 				add_modifier = {
 					name = revaluation_currency_target
 					months = 12
@@ -31775,7 +31775,7 @@ on_activate_monetary_system_law = {
 		zz_ef_std_switch_before = yes
 		money_value_target_pre_set = yes
 		central_bank_production_methods = yes
-		remove_modifier = foreign_exchange_controls
+		if = { limit = { has_modifier = foreign_exchange_controls } remove_modifier = foreign_exchange_controls }
 		add_modifier = {
 			name = foreign_exchange_controls
 			months = 12
@@ -31786,7 +31786,7 @@ on_activate_monetary_system_law = {
 		}
 		zz_ef_std_switch_after = yes
 		trade_balance = yes
-		remove_modifier = monetary_systeme_transition
+		if = { limit = { has_modifier = monetary_systeme_transition } remove_modifier = monetary_systeme_transition }
 		add_modifier = {
 			name = monetary_systeme_transition
 			months = 12
@@ -31800,16 +31800,16 @@ on_activate_law_no_monetary_policy = {
 }
 
 on_activate_law_revaluation = {
-	remove_modifier = devaluation_currency_25
-	remove_modifier = revaluation_currency_25
+	if = { limit = { has_modifier = devaluation_currency_25 } remove_modifier = devaluation_currency_25 }
+	if = { limit = { has_modifier = revaluation_currency_25 } remove_modifier = revaluation_currency_25 }
 	add_modifier = {
 		name = revaluation_currency_25
 	}
 	zz_ef_mp_init = yes
 }
 on_activate_law_devaluation = {
-	remove_modifier = revaluation_currency_25
-	remove_modifier = devaluation_currency_25
+	if = { limit = { has_modifier = revaluation_currency_25 } remove_modifier = revaluation_currency_25 }
+	if = { limit = { has_modifier = devaluation_currency_25 } remove_modifier = devaluation_currency_25 }
 	add_modifier = {
 		name = devaluation_currency_25
 	}
@@ -85362,11 +85362,11 @@ stockpiling_capital_state_transfert = {
 				#modifier
 				#####################
 
-				remove_modifier = central_bank_place
-				remove_modifier = central_bank_historic_place
+				if = { limit = { has_modifier = central_bank_place } remove_modifier = central_bank_place }
+				if = { limit = { has_modifier = central_bank_historic_place } remove_modifier = central_bank_historic_place }
 
-				remove_modifier = national_stockpile_place
-				remove_modifier = national_stockpile_historic_place
+				if = { limit = { has_modifier = national_stockpile_place } remove_modifier = national_stockpile_place }
+				if = { limit = { has_modifier = national_stockpile_historic_place } remove_modifier = national_stockpile_historic_place }
 
 				add_modifier = {
 					name = looted_state
@@ -87316,7 +87316,7 @@ enemy_capital_is_occuped = {
 			limit = {
 				is_building_group = bg_bank
 			}
-			remove_modifier = modifier_desactive_bank
+			if = { limit = { has_modifier = modifier_desactive_bank } remove_modifier = modifier_desactive_bank }
 			add_modifier = {
 				name = modifier_desactive_bank
 				months = 12
@@ -87351,7 +87351,7 @@ enemy_stats_is_occuped = {
 				limit = {
 					controller = ROOT
 				}
-				remove_modifier = modifier_desactive_building
+				if = { limit = { has_modifier = modifier_desactive_building } remove_modifier = modifier_desactive_building }
 				add_modifier = {
 					name = modifier_desactive_building
 					months = 6

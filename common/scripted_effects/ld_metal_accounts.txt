@@ -303,8 +303,8 @@ zz_ef_metal_week_step = {
 		limit = { var:zz_ef_mt_bank_levels > 0 }
 		every_scope_building = {
 			limit = { is_building_type = building_zz_ef_bank }
-			remove_modifier = zz_ef_bank_gold_buy
-			remove_modifier = zz_ef_bank_silver_buy
+			if = { limit = { has_modifier = zz_ef_bank_gold_buy } remove_modifier = zz_ef_bank_gold_buy }
+			if = { limit = { has_modifier = zz_ef_bank_silver_buy } remove_modifier = zz_ef_bank_silver_buy }
 			add_modifier = {
 				name = zz_ef_bank_gold_buy
 				multiplier = root.var:zz_ef_mt_bank_mult_g
@@ -340,9 +340,9 @@ zz_ef_metal_week_step = {
 	}
 	every_scope_building = {
 		limit = { is_building_type = building_bank }
-		remove_modifier = zz_ef_cb_metal_buy
-		remove_modifier = zz_ef_cb_gold_sell
-		remove_modifier = zz_ef_cb_silver_sell
+		if = { limit = { has_modifier = zz_ef_cb_metal_buy } remove_modifier = zz_ef_cb_metal_buy }
+		if = { limit = { has_modifier = zz_ef_cb_gold_sell } remove_modifier = zz_ef_cb_gold_sell }
+		if = { limit = { has_modifier = zz_ef_cb_silver_sell } remove_modifier = zz_ef_cb_silver_sell }
 		if = {
 			limit = { NOT = { root.var:zz_ef_mt_cb_mult = 0 } }
 			add_modifier = {
