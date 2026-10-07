@@ -89,7 +89,8 @@ GUI-тип регистрирует первый файл по имени (ASCII
 - Группы: `00_ef_gui_localization_*` (12 351 строка: подписи панелей), `01_ef_*` (здания, компании, понятия, валюты, события,
   товары, законы, модификаторы, технологии, подсказки), `PSC_*`, `ld_*` (`ld_missing_keys` — литеральные ключи из `.gui`/`custom_description`, не определённые в других файлах; `ld_cb_rate_panel`, `ld_economy_panel`, `ld_cbfx`,
   `ld_bond_tables`, `ld_monetary_policy`, `ld_currency_trade`, …), `replace/ld_*` (REPLACE-ключи: `ld_money_supply_replace`,
-  `ld_cb_loan_replace`, `ld_pb_psc`, `ld_tgr_private_ownership_stock`, `ld_psc_modifiers`).
+  `ld_cb_loan_replace`, `ld_pb_psc`, `ld_tgr_private_ownership_stock`, `ld_psc_modifiers`; только русская — `ld_vanilla_fix`: ключ
+  `INSTITUTION_NEW_EFFECT` с `[INSTITUTION.GetName]` вместо ошибочного ванильного `[INSTITUTION_TYPE.GetName]`).
 
 ## Поток / порядок
 - Регистрация GUI-типов — при загрузке; победитель по правилу выше. Типы `ld_*` и `ld_currency_symbol_fix` не имеют

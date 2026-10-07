@@ -76,7 +76,6 @@ types zz_ef_economy_panel
 				icon = {
 					position = { 0 0 }
 					size = { 200 200 }
-					align = left|nobaseline
 
 					texture = "gfx/interface/icons/building_icons/banks/central_bank.dds"
 				}
@@ -91,7 +90,6 @@ types zz_ef_economy_panel
 					minimumsize = { 330 40 }
 					maximumsize = { 330 -1 }
 					allow_outside = yes
-					ignoreinvisible = yes
 				}
 
 			}
@@ -678,7 +676,6 @@ types zz_ef_economy_panel
 										autoresize = yes
 										fontsize = 28
 										allow_outside = yes
-										ignoreinvisible = yes
 									}
 
 									flag_icon = {
@@ -693,8 +690,6 @@ types zz_ef_economy_panel
 										onclick = "[GetVariableSystem.Clear('international_open')]"
 
 										parentanchor = left|vcenter
-										align = left|vcenter
-										elide = right
 									}
 								}
 								flowcontainer = {
@@ -708,7 +703,6 @@ types zz_ef_economy_panel
 										autoresize = yes
 										fontsize = 28
 										allow_outside = yes
-										ignoreinvisible = yes
 										minimumsize = { 201 40 }
 										maximumsize = { 201 -1 }
 										elide = right
@@ -721,7 +715,6 @@ types zz_ef_economy_panel
 										autoresize = yes
 										fontsize = 28
 										allow_outside = yes
-										ignoreinvisible = yes
 									}
 								}
 							}
@@ -757,7 +750,6 @@ types zz_ef_economy_panel
 											autoresize = yes
 											fontsize = 15
 											allow_outside = yes
-											ignoreinvisible = yes
 										}
 
 										flag_icon = {
@@ -773,8 +765,6 @@ types zz_ef_economy_panel
 											onclick = "[GetVariableSystem.Clear('international_open')]"
 
 											parentanchor = left
-											align = left|nobaseline
-											elide = right
 										}
 									}
 									flowcontainer = {
@@ -788,7 +778,6 @@ types zz_ef_economy_panel
 											autoresize = yes
 											fontsize = 15
 											allow_outside = yes
-											ignoreinvisible = yes
 											# minimumsize = { 250 40 }
 											# maximumsize = { 250 -1 }
 											# elide = right
@@ -801,7 +790,6 @@ types zz_ef_economy_panel
 											autoresize = yes
 											fontsize = 15
 											allow_outside = yes
-											ignoreinvisible = yes
 										}
 									}
 								}
@@ -830,7 +818,6 @@ types zz_ef_economy_panel
 											autoresize = yes
 											fontsize = 15
 											allow_outside = yes
-											ignoreinvisible = yes
 										}
 
 										flag_icon = {
@@ -846,8 +833,6 @@ types zz_ef_economy_panel
 											onclick = "[GetVariableSystem.Clear('international_open')]"
 
 											parentanchor = left
-											align = left|nobaseline
-											elide = right
 										}
 									}
 									flowcontainer = {
@@ -861,7 +846,6 @@ types zz_ef_economy_panel
 											autoresize = yes
 											fontsize = 15
 											allow_outside = yes
-											ignoreinvisible = yes
 											# minimumsize = { 250 40 }
 											# maximumsize = { 250 -1 }
 											# elide = right
@@ -874,7 +858,6 @@ types zz_ef_economy_panel
 											autoresize = yes
 											fontsize = 15
 											allow_outside = yes
-											ignoreinvisible = yes
 										}
 									}
 								}
@@ -902,7 +885,6 @@ types zz_ef_economy_panel
  									autoresize = yes
 									fontsize = 20
 									allow_outside = yes
-									ignoreinvisible = yes
 									multiline = yes
 
 									minimumsize = { 500 30 }
@@ -950,8 +932,6 @@ types zz_ef_economy_panel
 											frame = "[Country.GetFlag.GetMediumFlagFrame]"
 										}
 
-										align = hcenter|nobaseline
-										elide = right
 										parentanchor = hcenter
 									}
 
@@ -1027,8 +1007,6 @@ types zz_ef_economy_panel
 											frame = "[GetPlayer.GetFlag.GetMediumFlagFrame]"
 										}
 
-										align = hcenter|nobaseline
-										elide = right
 										parentanchor = hcenter
 									}
 
@@ -1150,7 +1128,6 @@ types zz_ef_economy_panel
 								autoresize = yes
 								fontsize = 35
 								allow_outside = yes
-								ignoreinvisible = yes 
 							}
 							icon = {
 								size = { 36 36 }
@@ -1511,7 +1488,6 @@ types zz_ef_economy_panel
 									autoresize = yes
 									fontsize = 30
 									allow_outside = yes
-									ignoreinvisible = yes
 								}
 
 								vertical_divider = {}
@@ -1528,7 +1504,6 @@ types zz_ef_economy_panel
 									autoresize = yes
 									fontsize = 30
 									allow_outside = yes
-									ignoreinvisible = yes
 
 									position = { 75 8 }
 								}
@@ -1553,7 +1528,6 @@ types zz_ef_economy_panel
 									autoresize = yes
 									fontsize = 25
 									allow_outside = yes
-									ignoreinvisible = yes
 								}
 
 								vertical_divider = {}
@@ -1570,7 +1544,6 @@ types zz_ef_economy_panel
 									autoresize = yes
 									fontsize = 25
 									allow_outside = yes
-									ignoreinvisible = yes
 
 									position = { 75 8 }
 								}
@@ -2451,7 +2424,6 @@ types zz_ef_economy_panel
 									autoresize = yes
 									fontsize = 20
 									allow_outside = no
-									ignoreinvisible = yes
 									multiline = yes
 									minimumsize = { 500 40 }
 									maximumsize = { 500 -1 }
@@ -2592,7 +2564,6 @@ types zz_ef_economy_panel
 								autoresize = yes
 								fontsize = 25
 								allow_outside = no
-								ignoreinvisible = yes 
 							}
 						} 
 						
@@ -2677,7 +2648,6 @@ types zz_ef_economy_panel
 									autoresize = yes
 									fontsize = 30
 									allow_outside = yes
-									ignoreinvisible = yes
 								}
 
 								vertical_divider = {}
@@ -2695,7 +2665,6 @@ types zz_ef_economy_panel
 									autoresize = yes
 									fontsize = 30
 									allow_outside = yes
-									ignoreinvisible = yes
 
 									position = { 75 8 }
 								}
@@ -2719,7 +2688,6 @@ types zz_ef_economy_panel
 									autoresize = yes
 									fontsize = 25
 									allow_outside = yes
-									ignoreinvisible = yes
 								}
 
 								vertical_divider = {}
@@ -2736,7 +2704,6 @@ types zz_ef_economy_panel
 									autoresize = yes
 									fontsize = 25
 									allow_outside = yes
-									ignoreinvisible = yes
 
 									position = { 75 8 }
 								}
@@ -2802,7 +2769,6 @@ types zz_ef_economy_panel
 										autoresize = yes
 										fontsize = 19
 										allow_outside = yes
-										ignoreinvisible = yes
 									}
 
 									#fix_import
@@ -2819,7 +2785,6 @@ types zz_ef_economy_panel
 										autoresize = yes
 										fontsize = 19
 										allow_outside = yes
-										ignoreinvisible = yes
 
 										position = { 75 8 }
 									}
@@ -2837,7 +2802,6 @@ types zz_ef_economy_panel
 										autoresize = yes
 										fontsize = 19
 										allow_outside = yes
-										ignoreinvisible = yes
 
 										position = { 75 8 }
 									}
@@ -2878,7 +2842,6 @@ types zz_ef_economy_panel
 										autoresize = yes
 										fontsize = 19
 										allow_outside = yes
-										ignoreinvisible = yes
 
 										position = { 75 8 }
 
@@ -2898,7 +2861,6 @@ types zz_ef_economy_panel
 										autoresize = yes
 										fontsize = 19
 										allow_outside = yes
-										ignoreinvisible = yes
 
 										position = { 75 8 }
 									}
@@ -2917,7 +2879,6 @@ types zz_ef_economy_panel
 										autoresize = yes
 										fontsize = 19
 										allow_outside = yes
-										ignoreinvisible = yes
 
 										position = { 75 8 }
 									}
@@ -3477,7 +3438,6 @@ types zz_ef_economy_panel
 										autoresize = yes
 										fontsize = 20
 										allow_outside = yes
-										ignoreinvisible = yes
 										multiline = yes
 
 										minimumsize = { 0 0 }
@@ -3759,7 +3719,6 @@ types zz_ef_economy_panel
 										autoresize = yes
 										fontsize = 20
 										allow_outside = yes
-										ignoreinvisible = yes
 										multiline = yes
 
 										minimumsize = { 0 0 }
@@ -4149,7 +4108,6 @@ types zz_ef_economy_panel
 										autoresize = yes
 										fontsize = 19
 										allow_outside = yes
-										ignoreinvisible = yes
 									}
 
 									#icon
@@ -4163,7 +4121,6 @@ types zz_ef_economy_panel
 										autoresize = yes
 										fontsize = 35
 										allow_outside = yes
-										ignoreinvisible = yes
 									}
 
 									#law_monetary_policy
@@ -4177,7 +4134,6 @@ types zz_ef_economy_panel
 										autoresize = yes
 										fontsize = 19
 										allow_outside = yes
-										ignoreinvisible = yes
 									}
 								}
 							}
@@ -4983,7 +4939,6 @@ types zz_ef_economy_panel
 											autoresize = yes
 											fontsize = 20
 											allow_outside = yes
-											ignoreinvisible = yes
 											multiline = yes
 
 											minimumsize = { 0 0 }
@@ -5001,7 +4956,6 @@ types zz_ef_economy_panel
 											autoresize = yes
 											fontsize = 55
 											allow_outside = yes
-											ignoreinvisible = yes
 										}
 
 										flowcontainer  = {
@@ -5115,7 +5069,6 @@ types zz_ef_economy_panel
 										autoresize = yes
 										fontsize = 20
 										allow_outside = yes
-										ignoreinvisible = yes
 									}
 								}   
 
@@ -5321,7 +5274,6 @@ types zz_ef_economy_panel
 											autoresize = yes
 											fontsize = 20
 											allow_outside = yes
-											ignoreinvisible = yes
 											multiline = yes
 
 											minimumsize = { 0 0 }
@@ -5339,7 +5291,6 @@ types zz_ef_economy_panel
 											autoresize = yes
 											fontsize = 50
 											allow_outside = yes
-											ignoreinvisible = yes
 										}
 
 										flowcontainer  = {
@@ -5452,7 +5403,6 @@ types zz_ef_economy_panel
 										autoresize = yes
 										fontsize = 20
 										allow_outside = yes
-										ignoreinvisible = yes
 									}
 								} 
 							}
@@ -5483,7 +5433,6 @@ types zz_ef_economy_panel
 									autoresize = yes
 									fontsize = 20
 									allow_outside = no
-									ignoreinvisible = yes
 									multiline = yes
 									minimumsize = { 500 40 }
 									maximumsize = { 500 -1 }
@@ -5716,7 +5665,6 @@ types zz_ef_economy_panel
 						autoresize = yes
 						fontsize = 40
 						allow_outside = no
-						ignoreinvisible = yes
 					}
 					textbox = {
 						raw_text = "1 [GetPlayer.GetCustom('currency_ISO_4217')] ([GetPlayer.GetCustom('currency_symbol')]) =  [GetPlayer.MakeScope.ScriptValue('money_value_target_2_in_gold')|D] @gold!"
@@ -5729,7 +5677,6 @@ types zz_ef_economy_panel
 						autoresize = yes
 						fontsize = 20
 						allow_outside = no
-						ignoreinvisible = yes
 					}
 
 					flowcontainer = {
@@ -5806,7 +5753,6 @@ types zz_ef_economy_panel
 						autoresize = yes
 						fontsize = 20
 						allow_outside = yes
-						ignoreinvisible = yes
 					}
 				}
 			}
@@ -5913,7 +5859,6 @@ types zz_ef_economy_panel
 										autoresize = yes
 										fontsize = 35
 										allow_outside = yes
-										ignoreinvisible = yes
 									}
 
 									icon = {
@@ -6107,7 +6052,6 @@ types zz_ef_economy_panel
 						autoresize = yes
 						fontsize = 40
 						allow_outside = no
-						ignoreinvisible = yes
 					}
 					textbox = {
 						text = "reference_currency_parity_with_national_currency_2"
@@ -6120,7 +6064,6 @@ types zz_ef_economy_panel
 						autoresize = yes
 						fontsize = 20
 						allow_outside = no
-						ignoreinvisible = yes
 
 
 					}
@@ -6134,7 +6077,6 @@ types zz_ef_economy_panel
 						autoresize = yes
 						fontsize = 20
 						allow_outside = no
-						ignoreinvisible = yes
 					}
 					flowcontainer = {
 						margin_top = 10
@@ -6171,7 +6113,6 @@ types zz_ef_economy_panel
 							autoresize = yes
 							fontsize = 20
 							allow_outside = yes
-							ignoreinvisible = yes
 						}
 						### EXPAND
 						button_icon_plus_action = {
@@ -6208,7 +6149,6 @@ types zz_ef_economy_panel
 						autoresize = yes
 						fontsize = 20
 						allow_outside = yes
-						ignoreinvisible = yes
 					}
 				}
 			}
@@ -6543,7 +6483,6 @@ types zz_ef_economy_panel
 						autoresize = yes
 						fontsize = 30
 						allow_outside = no
-						ignoreinvisible = yes
 					}
 
 					flowcontainer = {
@@ -9341,7 +9280,6 @@ types zz_ef_economy_panel
 										autoresize = yes
 										fontsize = 25
 										allow_outside = yes
-										ignoreinvisible = yes
 									}
 
 									flag_icon = {
@@ -9357,8 +9295,6 @@ types zz_ef_economy_panel
 										onclick = "[GetVariableSystem.Clear('international_open')]"
 
 										parentanchor = left
-										align = left|nobaseline
-										elide = right
 									}
 								}
 								flowcontainer = {
@@ -9372,7 +9308,6 @@ types zz_ef_economy_panel
 										autoresize = yes
 										fontsize = 25
 										allow_outside = yes
-										ignoreinvisible = yes
 										minimumsize = { 201 40 }
 										maximumsize = { 201 -1 }
 										elide = right
@@ -9385,7 +9320,6 @@ types zz_ef_economy_panel
 										autoresize = yes
 										fontsize = 25
 										allow_outside = yes
-										ignoreinvisible = yes
 									}
 								}
 							}
@@ -9421,7 +9355,6 @@ types zz_ef_economy_panel
 											autoresize = yes
 											fontsize = 15
 											allow_outside = yes
-											ignoreinvisible = yes
 										}
 
 										flag_icon = {
@@ -9437,8 +9370,6 @@ types zz_ef_economy_panel
 											onclick = "[GetVariableSystem.Clear('international_open')]"
 
 											parentanchor = left
-											align = left|nobaseline
-											elide = right
 										}
 									}
 									flowcontainer = {
@@ -9452,7 +9383,6 @@ types zz_ef_economy_panel
 											autoresize = yes
 											fontsize = 15
 											allow_outside = yes
-											ignoreinvisible = yes
 											# minimumsize = { 250 40 }
 											# maximumsize = { 250 -1 }
 											# elide = right
@@ -9465,7 +9395,6 @@ types zz_ef_economy_panel
 											autoresize = yes
 											fontsize = 15
 											allow_outside = yes
-											ignoreinvisible = yes
 										}
 									}
 								}
@@ -9495,7 +9424,6 @@ types zz_ef_economy_panel
 											autoresize = yes
 											fontsize = 15
 											allow_outside = yes
-											ignoreinvisible = yes
 										}
 
 										flag_icon = {
@@ -9511,8 +9439,6 @@ types zz_ef_economy_panel
 											onclick = "[GetVariableSystem.Clear('international_open')]"
 
 											parentanchor = left
-											align = left|nobaseline
-											elide = right
 										}
 									}
 									flowcontainer = {
@@ -9526,7 +9452,6 @@ types zz_ef_economy_panel
 											autoresize = yes
 											fontsize = 15
 											allow_outside = yes
-											ignoreinvisible = yes
 											# minimumsize = { 250 40 }
 											# maximumsize = { 250 -1 }
 											# elide = right
@@ -9539,7 +9464,6 @@ types zz_ef_economy_panel
 											autoresize = yes
 											fontsize = 15
 											allow_outside = yes
-											ignoreinvisible = yes
 										}
 									}
 								}
@@ -9567,7 +9491,6 @@ types zz_ef_economy_panel
  									autoresize = yes
 									fontsize = 20
 									allow_outside = yes
-									ignoreinvisible = yes
 									multiline = yes
 
 									minimumsize = { 520 30 }
