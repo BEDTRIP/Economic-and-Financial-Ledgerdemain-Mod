@@ -20,7 +20,6 @@ GUI-тип регистрирует первый файл по имени (ASCII
 - `gui/companies_panel.gui` — ванильная + `ef_company_type_row` / `ef_established_company_row`, флаг `ef_companies_compact`
   (сжатый список непостроенных компаний).
 - `gui/construction_panel.gui` — заглушка (3 строки, комментарий): не даёт загрузиться ванильному; типы стройки — в PSC-файле.
-- `gui/frontend/shared/lists.gui` — копия ванильного (`dropdown_menu_standard`, `scrollbox`); E&F-вставок нет.
 - `gui/texticons.gui` (309 текстиконок) — копия ванильного; 30 имён иконок повторены в `gui/00_ef_texticons.gui` (249).
 
 ### Файлы E&F
@@ -39,8 +38,9 @@ GUI-тип регистрирует первый файл по имени (ASCII
 - `gui/ef_dev_and_custom_windows/maj/Essential/*.gui` (5) — `building_browser_panel`, `building_details_panel` (в корне мода одноимённого
   нет: подменяет ванильный, `00_MPM_building_details_panel.gui` объявляет только 3 типа из 50), `goods_panel`, `goods_state_panel`,
   `production_methods` — подмены ванильных по имени.
-- `gui/ef_dev_and_custom_windows/maj/NonEssential/*.gui` (18) — копии ванильных (`custom_tooltip`, `right_click_menu`,
-  `map_list_panel`, `map_markers`, `military_formation_panel`, `popups`, `outliner_pinnable_types`, `graph_tooltips`, …).
+- `gui/ef_dev_and_custom_windows/maj/NonEssential/*.gui` (13) — копии ванильных (`map_list_panel`, `outliner_pinnable_types`,
+  `graph_tooltips`, …); устаревшие копии без правок E&F (`map_markers`, `custom_tooltip`, `military_formation_panel`, `popups`,
+  `right_click_menu`, `frontend/shared/lists.gui`) — в `_archive/ef_outdated_vanilla_gui/`, грузятся ванильные 1.13.
 
 ### Файлы проекта (`ld_*`, переопределяют типы E&F; грузятся раньше или вместо оригинала)
 - `gui/ld_economy_panel.gui` (генерат. `regen_ef_economy_panel_gui.py`) — `budget_panel_economy_panel_content` (:10,
@@ -127,10 +127,6 @@ GUI-тип регистрирует первый файл по имени (ASCII
   (кнопки секций в `ld_cb_rate_panel.gui`; файл ведёт генератор `regen_ef_cb_rate_gui`; определён только `world_currency_…` в `09_ef_other.txt`),
   9 вызовов `gdpg_sort_by_country_gdp` (там же; sgui — `gdp_sort_by_country_gdp`), `je_meiji_restoration_get_faction_sgui` (`states_panel.gui`, ванильное имя). Клик не выполняет эффекта (ожидается ошибка поиска sgui в `error.log`; в игре не проверено).
 - `topbar.gui` → `currency_symbol_top_bar` (96 `GetCustom('currency_symbol_<cur>')`, считаются каждый кадр).
-- Подкаталог мода выигрывает у ванили: в `maj/NonEssential/{map_markers,custom_tooltip,military_formation_panel,popups,right_click_menu}.gui`
-  и `frontend/shared/lists.gui` отсутствуют имена, которых нет в копиях E&F, но есть в ванили 1.13 (`enemy_naval_mission_marker`,
-  `coastal_building_marker`, `naval_mission_marker_tooltip_fleet`, `military_formation_cancel_invasion_button`,
-  `decommission_supply_ships_window`, `enemy_fleets_on_mission_in_sea_region`, `dropdown_menu_round`) — проверить `gui.log`/`error.log`.
 - Комментарий в `common/game_concepts/ld_cb_rate_concepts.txt` называет `zz_ef_cb_rate_panel_l_*.yml`; файлы локализации — `ld_cb_rate_panel_l_*.yml`.
 
 ## Логи

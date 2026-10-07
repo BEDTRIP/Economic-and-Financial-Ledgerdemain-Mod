@@ -70,3 +70,4 @@ _archive/<механизм>/
 | Строка расходов эмитента `zz_ef_foreign_bond_interest` | `ef_foreign_bond_interest/` | снятие модификатора в `ld_bond_ledger.txt` (и генераторе), значение `zz_ef_bond_interest_due_week` |
 | Значения покупки металла населением `zz_ef_pop_gold_goods` / `_silver_goods` | `ef_pop_metal_goods_values/` | ничего — формула перенесена в `zz_ef_metal_week_step` (оптимизация) |
 | Стартовые условия для Historical Map Mod (ветка `always = no`) | `ef_hmm_history/` | блок ~6000 строк в `99_ef_history_global_variable.txt` |
+| Устаревшие копии ванильных GUI (`maj/NonEssential` ×5, `frontend/shared/lists.gui`) | `ef_outdated_vanilla_gui/` | файлы целиком — грузятся ванильные 1.13 |
