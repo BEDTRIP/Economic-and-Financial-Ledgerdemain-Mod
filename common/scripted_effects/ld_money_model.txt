@@ -90,6 +90,16 @@ zz_ef_money_model_step = {
 		set_variable = { name = zz_ef_cb_start_due value = yes }
 	}
 	zz_ef_cb_metal_start_step = yes
+	# the start's window: a CB not on a metal standard half a year in (a subject outside a zone, Bavaria's CB with no
+	# standard) takes no start metal later -- a standard adopted years on buys its metal (accepted at night 8.10, check)
+	if = {
+		limit = {
+			has_variable = zz_ef_cb_start_due
+			NOT = { zz_ef_cb_metal_standard = yes }
+			var:zz_ef_weeks_run >= 26
+		}
+		remove_variable = zz_ef_cb_start_due
+	}
 	# R1б.2: the country's currency as data, at its first step (then by the laws and every January)
 	if = {
 		limit = { NOT = { has_variable = zz_ef_cur_init } }

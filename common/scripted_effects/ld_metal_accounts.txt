@@ -22,12 +22,15 @@ zz_ef_metal_start_step = {
 	zz_ef_metal_start_cb_before = yes
 	set_variable = { name = zz_ef_ms_ef_g value = 0 }
 	set_variable = { name = zz_ef_ms_ef_s value = 0 }
+	# the CB's 40% comes once the money exists and the country is a CB on a metal standard (zz_ef_cb_metal_start_step) --
+	# a subject joins its overlord's standard through the currency zone after its first step, E&F writes its metal
+	# again then (r1007_204439: the Dutch East Indies 1.8 bn silver, Finland, New South Wales, Hanover)
 	if = {
-		limit = { zz_ef_cb_metal_standard = yes }
-		# the CB's 40% comes once the money exists (zz_ef_cb_metal_start_step)
+		limit = { has_modifier = has_central_bank }
 		set_variable = { name = zz_ef_cb_start_due value = yes }
 	}
-	else = {
+	if = {
+		limit = { NOT = { zz_ef_cb_metal_standard = yes } }
 		# В4: E&F's metal of a country that is not a CB on a metal standard -- the pops'
 		set_variable = { name = zz_ef_ms_ef_g value = gold_state_native_for_stockpile }
 		set_variable = { name = zz_ef_ms_ef_s value = silver_state_native_for_stockpile }
@@ -74,6 +77,7 @@ zz_ef_cb_metal_start_step = {
 	if = {
 		limit = {
 			has_variable = zz_ef_cb_start_due
+			zz_ef_cb_metal_standard = yes
 			# after the first receiver: the start deposits are in M2 (r1007_200927: at the first step the cover was set to
 			# 40% before them, and read 0.27-0.30 once they came in)
 			has_variable = zz_ef_pop_savings
