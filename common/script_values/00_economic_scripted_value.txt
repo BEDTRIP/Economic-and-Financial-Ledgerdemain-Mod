@@ -5316,16 +5316,22 @@ gold_loaned_to_central_bank_in_national_metal = {
 }
 
 gold_loaned_to_central_bank_in_national_metal_silver = {
-	value = var:gold_loaned_to_central_bank_fix
+	# R3.6 (8.10): 0 when the variable is not set (was «Value of wrong type ... none», money_value_target_pre_set)
+	value = 0
+	if = { limit = { has_variable = gold_loaned_to_central_bank_fix } value = var:gold_loaned_to_central_bank_fix }
 	multiply = gold_to_silver_rate
 }
 
 gold_loaned_to_central_bank_in_national_metal_bimetalic = {
-	value = var:gold_loaned_to_central_bank_fix
+	# R3.6 (8.10): 0 when the variable is not set (was «Value of wrong type ... none», money_value_target_pre_set)
+	value = 0
+	if = { limit = { has_variable = gold_loaned_to_central_bank_fix } value = var:gold_loaned_to_central_bank_fix }
 }
 
 gold_loaned_to_central_bank_in_national_metal_gold = {
-	value = var:gold_loaned_to_central_bank_fix
+	# R3.6 (8.10): 0 when the variable is not set (was «Value of wrong type ... none», money_value_target_pre_set)
+	value = 0
+	if = { limit = { has_variable = gold_loaned_to_central_bank_fix } value = var:gold_loaned_to_central_bank_fix }
 }
 
 ############################################################################################################################################################
@@ -5541,7 +5547,7 @@ central_bank_reserves_silver_standard = {
 		limit = {
 			var:law_silver_standard = 1
 		}
-		add = var:trade_balance_in_gold_fixe
+		if = { limit = { has_variable = trade_balance_in_gold_fixe } add = var:trade_balance_in_gold_fixe }
 	}
 	if = {
 		limit = {
@@ -5562,7 +5568,7 @@ central_bank_reserves_silver_standard = {
 central_bank_reserves_silver_standard_in_gold = {
 	value = central_bank_metal_reserves_state_silver_standard
 	add = gold_loaned_to_central_bank_in_national_metal_silver
-	add = var:trade_balance_in_gold_fixe
+	if = { limit = { has_variable = trade_balance_in_gold_fixe } add = var:trade_balance_in_gold_fixe }
 	multiply = silver_to_gold_rate
 }
 money_value_silver_standard = {
@@ -5646,7 +5652,7 @@ central_bank_reserves_bimetallism_standard = {
 			# has_law = law_type:law_bimetallism_standard
 			var:law_bimetallism_standard = 1
 		}
-		add = var:trade_balance_in_gold_fixe
+		if = { limit = { has_variable = trade_balance_in_gold_fixe } add = var:trade_balance_in_gold_fixe }
 	}
 	if = {
 		limit = {
@@ -5657,13 +5663,13 @@ central_bank_reserves_bimetallism_standard = {
 				var:law_gold_exchange_standard = 1
 			}
 		}
-		add = var:trade_balance_in_gold_fixe #trade_balance_gold_to_bimetallic
+		if = { limit = { has_variable = trade_balance_in_gold_fixe } add = var:trade_balance_in_gold_fixe } #trade_balance_gold_to_bimetallic
 	}
 }
 central_bank_reserves_bimetallism_standard_in_gold = {
 	value = central_bank_reserves_bimetallism_standard
 	add = gold_loaned_to_central_bank_in_national_metal_bimetalic
-	add = var:trade_balance_in_gold_fixe
+	if = { limit = { has_variable = trade_balance_in_gold_fixe } add = var:trade_balance_in_gold_fixe }
 	#multiply = bimetallic_rate_silver_to_gold
 }
 money_value_bimetallism_standard = { #valeur utiliser pour definir la money valu tareget et qui change car on change de loi avant de faire le calcule
@@ -5733,7 +5739,7 @@ central_bank_reserves_gold_standard = {
 		limit = {
 			var:law_bimetallism_standard = 1
 		}
-		add = var:trade_balance_in_gold_fixe
+		if = { limit = { has_variable = trade_balance_in_gold_fixe } add = var:trade_balance_in_gold_fixe }
 	}
 	if = {
 		limit = {
@@ -5742,7 +5748,7 @@ central_bank_reserves_gold_standard = {
 				var:law_gold_exchange_standard = 1
 			}
 		}
-		add = var:trade_balance_in_gold_fixe
+		if = { limit = { has_variable = trade_balance_in_gold_fixe } add = var:trade_balance_in_gold_fixe }
 	}
 }
 
@@ -5967,7 +5973,7 @@ central_bank_metal_reserves_state_100 = {
 }
 central_bank_equity = {
 	add = central_bank_reserves #en fonction du type de metal
-	add = var:trade_balance_in_gold_fixe
+	if = { limit = { has_variable = trade_balance_in_gold_fixe } add = var:trade_balance_in_gold_fixe }
 }
 central_bank_debt_compared_gdp = {
 	value = central_bank_debt
