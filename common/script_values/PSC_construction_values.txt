@@ -98,11 +98,15 @@ state_construction_spending_allocation = {
 			#Add at most one level's production over the limit
 			add = {
 				value = var:state_construction_production
-				b:building_construction_sector = {
-					divide = {
-						value = level
-						multiply = occupancy
-						min = 0.001
+				# ФК2 (7.10): a state without the construction sector -- the building link is empty ('none' in error.log)
+				if = {
+					limit = { has_building = building_construction_sector }
+					b:building_construction_sector = {
+						divide = {
+							value = level
+							multiply = occupancy
+							min = 0.001
+						}
 					}
 				}
 			}
