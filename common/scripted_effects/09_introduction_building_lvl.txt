@@ -22282,10 +22282,11 @@ financial_center_modifier = {
 				}
 			}
 			if = {
-				limit = { has_variable = gdp_view_fc_by_num }
+				limit = { has_variable = gdp_view_fc_by_num exists = scope:financial_center_country }
 				add_modifier = {
 					name = financial_center_place_spe
-					multiplier = var:gdp_view_fc_by_num
+					# the multiplier is not evaluated in the state's scope (hotfix README, EF.36): a saved scope works anywhere
+					multiplier = scope:financial_center_country.max_building_financial_center_by_number_in_market
 				}
 			}
 			if = {
