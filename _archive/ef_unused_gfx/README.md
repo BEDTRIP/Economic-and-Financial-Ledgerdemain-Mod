@@ -3,12 +3,16 @@
 **Что это.** Картинки форка, на которые не ссылается ни один файл мода (`common/`, `events/`, `gui/`, локализация,
 `.gfx` / `.asset`) ни по пути, ни через сборку пути в GUI: заготовки и старые версии автора (папки `OLD/`, `old/`,
 `unuse/`, `unused/`, `Other/`), картинки событий, которых в моде нет (в т. ч. вынесенных раньше в `_archive/`: `.97`–`.105` и др.), PNG-заготовки
-нейросети (`Gemini_Generated_Image_*`), архив `gfx/map/city_data.7z`. Ревизия графики R0.5 (7.10): 258 файлов,
-253 МБ.
+нейросети (`Gemini_Generated_Image_*`), архив `gfx/map/city_data.7z`. Ревизия графики R0.5 (7.10): 253 файлов,
+244 МБ.
 
-**Не вынесено, хотя ссылок по пути нет:** `gfx/loadingscreens/` (движок выбирает загрузочный экран перебором папки) и
-`gfx/map/city_data/city_types/*.txt` (данные карты, читаются папкой). Совпадения имён файлов со словами в коде проверены —
-случайные (ключи модификаторов, законов, локализации; пути движок берёт из определений целиком).
+**Не вынесено, хотя ссылок по пути нет:** `gfx/loadingscreens/` (движок выбирает загрузочный экран перебором папки),
+`gfx/map/city_data/city_types/*.txt` (данные карты, читаются папкой), `dlc_icons/dlc_ef.dds` (иконку DLC
+`dlc_metadata/ef_dlc_metadata.txt` движок берёт по ключу — без неё «Could not find texture … dlc_ef.dds»), и 4 файла,
+лежащие по ванильному пути, — подмена ванильной картинки (на них ссылается ваниль): `ideology_icons/abolitionist.dds`,
+`topbar/income_power_icon.dds`, `illustrations/institutions/police.dds`, `institution_image_mask.dds`. Остальные
+совпадения имён файлов со словами в коде проверены — случайные (ключи модификаторов, законов, локализации); пути с
+подстановкой в GUI — только геттеры движка по определениям.
 
 **Кто ссылался.** Никто: ни живой код форка, ни моды пачки в `vic3_mods` (проверено по путям 7.10).
 
@@ -20,7 +24,6 @@
 | `gfx/event_pictures/` | 7 | 39.3 |
 | `gfx/interface/icons/production_method_icons/` | 8 | 22.3 |
 | `gfx/interface/icons/law_icons/unuse/` | 16 | 8.5 |
-| `gfx/interface/illustrations/institutions/` | 2 | 8.2 |
 | `gfx/interface/icons/company_icons/bank/` | 19 | 7.7 |
 | `gfx/interface/icons/production_method_icons/unuse/` | 60 | 7.5 |
 | `gfx/interface/icons/` | 3 | 6.5 |
@@ -42,10 +45,7 @@
 | `gfx/interface/icons/law_icons/` | 1 | 0.3 |
 | `gfx/interface/icons/goods_icons/` | 1 | 0.3 |
 | `gfx/interface/icons/generic_icons/` | 1 | 0.3 |
-| `gfx/interface/icons/ideology_icons/` | 1 | 0.3 |
-| `gfx/interface/icons/dlc_icons/` | 1 | 0.2 |
 | `gfx/interface/icons/currency_icon/` | 4 | 0.2 |
 | `gfx/interface/buttons/button_icons/` | 2 | 0.1 |
-| `gfx/interface/icons/topbar/` | 1 | 0.1 |
 | `gfx/interface/icons/notification_icons/unuse/` | 1 | 0.0 |
 | `gfx/map/` | 1 | 0.0 |
