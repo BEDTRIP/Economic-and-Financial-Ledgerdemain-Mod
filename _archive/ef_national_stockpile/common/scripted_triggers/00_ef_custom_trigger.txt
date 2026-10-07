@@ -1,0 +1,24 @@
+﻿# из common/scripted_triggers/00_ef_custom_trigger.txt, строки 436–440 (на 2026-10-07)
+#####################################################################################################################################################
+has_national_stockpile = {
+	has_modifier = has_national_stockpile
+	market_owner_is_root = yes
+}
+
+# из common/scripted_triggers/00_ef_custom_trigger.txt, строки 969–973 (на 2026-10-07)
+country_already_national_stockpile = {
+	root = {
+		var:country_already_national_stockpile = 1
+	}
+}
+
+# из common/scripted_triggers/00_ef_custom_trigger.txt, строки 437–445 (на 2026-10-07)
+#####################################################################################################################################################
+ai_set_stockpile_reserve_limit_spe_country = {
+	root = {
+		OR = {
+			c:CHI ?= this
+			c:BIC ?= this
+		}
+	}
+}

@@ -212,26 +212,6 @@ types budget
 					text = "FINANCE"
 				}
 
-				# stockpile
-				blockoverride "fifth_button" {
-					text = "STOCKPILE"
-				}
-				blockoverride "fifth_button_tooltip" {
-					tooltip = "STOCKPILE"
-				}
-				blockoverride "fifth_button_click" {
-					onclick = "[InformationPanel.SelectTab('stockpile')]"
-				}
-				blockoverride "fifth_button_visibility" {
-					visible = "[InformationPanel.IsTabSelected('stockpile')]"
-				}
-				blockoverride "fifth_button_visibility_checked" {
-					visible = "[Not( InformationPanel.IsTabSelected('stockpile') )]"
-				}
-				blockoverride "fifth_button_selected" {
-					text = "STOCKPILE"
-				}
-
 				############################################################################################################################################################
 				############################################################################################################################################################
 				############################################################################################################################################################
@@ -1521,10 +1501,6 @@ types budget
 			}
 			budget_panel_financial_panel_content = {
 				visible = "[InformationPanel.IsTabSelected('finance')]"
-				using = default_fade_in_out
-			}
-			budget_panel_stockpile_panel_content = {
-				visible = "[InformationPanel.IsTabSelected('stockpile')]"
 				using = default_fade_in_out
 			}
 

@@ -5,7 +5,7 @@
 # backfills ~34000 lines of country/state variables -- base_rate_percentage among
 # them -- for any country missing them. But its only caller is
 # ef_on_monthly_pulse_recurence (00_on_action_main.txt:63/106), gated behind
-# `not = { has_variable = coal_release_quantity } }`, which is E&F's own
+# `not = { has_variable = zz_ef_country_vars_set } }`, which is E&F's own
 # "already initialized" flag, set at the end of new_country_var_ef itself.
 #
 # That means a country goes uninitialized from the moment it appears on the map
@@ -53,7 +53,7 @@ zz_ef_newcountry_on_country_formed = {
 	effect = {
 		if = {
 			limit = {
-				not = { has_variable = coal_release_quantity }
+				not = { has_variable = zz_ef_country_vars_set }
 			}
 			new_country_var_ef = yes
 		}
@@ -68,7 +68,7 @@ zz_ef_newcountry_on_become_independent = {
 	effect = {
 		if = {
 			limit = {
-				not = { has_variable = coal_release_quantity }
+				not = { has_variable = zz_ef_country_vars_set }
 			}
 			new_country_var_ef = yes
 		}

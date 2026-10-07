@@ -1,0 +1,30 @@
+﻿# из common/technology/technologies/ef_technology.txt, строки 324–352 (на 2026-10-07)
+stockpiling_goods = {
+	era = era_1
+	texture = "gfx/interface/icons/invention_icons/stockpiling_goods.dds"
+	category = society
+
+	unlocking_technologies = {
+		urban_planning
+	}
+
+	ai_weight = {
+		value = 0.25
+	}
+}
+national_stockpile = {
+	era = era_1
+	texture = "gfx/interface/icons/invention_icons/national_stockpile.dds"
+	category = society
+
+	unlocking_technologies = {
+		stockpiling_goods
+	}
+	# on_researched = {
+	# 	macro_facilities_on_action_ns = yes
+	# }
+
+	ai_weight = {
+		value = 0.25
+	}
+}

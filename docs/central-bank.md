@@ -15,11 +15,11 @@
 - Облигации ЦБ: `common/script_values/ld_cb_bond_issuance_values.txt`, `common/scripted_effects/ld_cb_bond_issuance.txt` (`zz_ef_cb_bond_issuance_update`), `common/static_modifiers/ld_cb_bond_issuance.txt` (`zz_ef_cb_bond_issuance_low/_high`, `goods_output_bond_mult` ±0.01 за единицу).
 - Премия за риск: `common/script_values/ld_risk_premium_values.txt`, `common/scripted_effects/ld_risk_premium.txt`.
 - ЖЗ: `common/journal_entries/00_ef_bank_central_je.txt` — `bank_je_central_1`: игроку без ЦБ; ежемесячно ставит индикаторы и выдаёт технологии `banking` + `currency_standards` при ВВП ≥ 2.5 млн, `central_banking` при ≥ 5 млн; по завершении `bank_je_central_2`.
-- Связанные файлы E&F с правкой в теле: `scripted_effects/01_economic_scripted_effects.txt` (`on_activate_law_revaluation/devaluation/no_monetary_policy` :35349-:42350 зовут `zz_ef_mp_init/_clear`; идеология «большая денежная политика» в `monetary_policy_ideology_dynamic` (:34557-:41604) учитывает `zz_ef_rate_policy_steps`), `scripted_effects/00_on_action_main.txt` (:18418 `update_modifiers_bc_fc_ns` → `zz_ef_cb_bond_issuance_update`).
+- Связанные файлы E&F с правкой в теле: `scripted_effects/01_economic_scripted_effects.txt` (`on_activate_law_revaluation/devaluation/no_monetary_policy` :35349-:42350 зовут `zz_ef_mp_init/_clear`; идеология «большая денежная политика» в `monetary_policy_ideology_dynamic` (:34557-:41604) учитывает `zz_ef_rate_policy_steps`), `scripted_effects/00_on_action_main.txt` (:17170 `update_modifiers_bc_fc_ns` → `zz_ef_cb_bond_issuance_update`).
 
 ## Поток / порядок
 1. Месяц, `on_monthly_pulse_country` → `zz_ef_cb_rate_monthly`: `zz_ef_risk_monthly`; задаёт `zz_ef_rate_bias = 0`, если нет; счётчик `zz_ef_cb_rate_month` 1,2,3; на 3 — сброс и `zz_ef_cb_rate_step`.
-2. `zz_ef_cb_rate_step`: `base_rate_percentage += zz_ef_cb_rate_next_step`; ставит `rise_base_rate`/`down_base_rate` на 3 мес. (E&F читает их для арбитража, `00_on_action_main.txt:446`).
+2. `zz_ef_cb_rate_step`: `base_rate_percentage += zz_ef_cb_rate_next_step`; ставит `rise_base_rate`/`down_base_rate` на 3 мес. (E&F читает их для арбитража, `00_on_action_main.txt:336`).
 3. Цель: `zz_ef_cb_rate_rating_target` = нейтраль (3% металл / 2.5% фиат) + инфляция (фиат) + рост денег − ВВП (±) + покрытие (металл); коридор 2..12% металл, 0.5..25% фиат (`zz_ef_cb_rate_floor/ceiling`). `zz_ef_cb_rate_target` = правило + `var:zz_ef_rate_bias`. Шаг 0.5 пп (1 пп при разрыве > 5 пп). Страны без ЦБ — 6.5%.
 4. Месячный шаг денежной модели (`ld_money_model.txt`): `zz_ef_rate_policy_costs` (:1043), `zz_ef_mp_step` (:1050), стройка (:1059), ставка госзаймов (:1393).
 5. Девальвация/ревальвация: закон → `zz_ef_mp_init` (старт = цель = покрытие). Игрок двигает `zz_ef_mp_target` кнопками (взвод `zz_ef_mp_armed`); `zz_ef_mp_step` ежемесячно: девальвация печатает `add_treasury` (`zz_ef_mp_issue`), ревальвация изымает (`zz_ef_mp_withdraw`); цель достигнута → `zz_ef_mp_complete` (паритет × покрытие / стартовое, пауза 730 дней, `zz_ef_risk_parity_changed`, закон → `law_no_monetary_policy`). ИИ без закона: покрытие < 25% или > 80% 24 месяца → паритет × `zz_ef_mp_ai_parity_step` (±25%), пауза 5 лет.
@@ -33,7 +33,7 @@
 | `base_rate_percentage_old` | ставка до шага | `zz_ef_cb_rate_step` | он же |
 | `zz_ef_rate_bias` | политика игрока, ±0.02, шаг 0.005 | `base_rate_increase/reduce`, `zz_ef_cb_rate_monthly` (init 0) | `zz_ef_cb_rate_target`, `zz_ef_rate_policy_steps` |
 | `zz_ef_cb_rate_month` | счётчик 0..2 до шага | `zz_ef_cb_rate_monthly` | `zz_ef_cb_rate_months_to_step` |
-| `rise_base_rate`, `down_base_rate` | модификаторы направления шага (3 мес.) | `zz_ef_cb_rate_step` | E&F (`00_on_action_main.txt:446`, :10134) |
+| `rise_base_rate`, `down_base_rate` | модификаторы направления шага (3 мес.) | `zz_ef_cb_rate_step` | E&F (`00_on_action_main.txt:336`, :8886) |
 | `zz_ef_mp_start/target/prev/dyn/flow/cum/pace/armed/cooldown` | состояние девальвации/ревальвации | `zz_ef_mp_*`, кнопки | `zz_ef_mp_*_v`, панель |
 | `zz_ef_mp_parity_before` | паритет до изменения | `zz_ef_mp_complete`, ИИ-блок `zz_ef_mp_step` | `zz_ef_risk_fx_parity_pen` |
 | `zz_ef_mp_low_months`, `zz_ef_mp_high_months` | счётчики ИИ-правила | `zz_ef_mp_step` | он же |

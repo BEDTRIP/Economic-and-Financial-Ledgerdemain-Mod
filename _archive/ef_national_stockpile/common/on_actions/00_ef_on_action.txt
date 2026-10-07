@@ -1,0 +1,95 @@
+﻿# из common/on_actions/00_ef_on_action.txt, строки 51–56 (на 2026-10-07), вызовы запаса в пульсах E&F; on_action ef_on_decade_pulse_country целиком
+
+on_decade_pulse_country = {
+	on_actions = {
+    	ef_on_decade_pulse_country
+    }
+}
+
+# из common/on_actions/00_ef_on_action.txt, строки 94–94 (на 2026-10-07), вызовы запаса в пульсах E&F; on_action ef_on_decade_pulse_country целиком
+		# - stockpiling_goods -> réservé au marrket owner
+
+# из common/on_actions/00_ef_on_action.txt, строки 105–122 (на 2026-10-07), вызовы запаса в пульсах E&F; on_action ef_on_decade_pulse_country целиком
+
+		#has_financial_center
+		if  = {
+			limit  = {
+				has_modifier = has_financial_center
+				market_owner_is_root  = yes
+			}
+			financial_center_ef_on_monthly_pulse_country = yes
+		}
+
+		#stockpiling_goods
+		if  = {
+			limit  = {
+				has_technology_researched = stockpiling_goods
+				market_owner_is_root = yes
+			}
+			national_stockpile_ef_on_monthly_pulse_country = yes
+		}
+
+# из common/on_actions/00_ef_on_action.txt, строки 146–153 (на 2026-10-07), вызовы запаса в пульсах E&F; on_action ef_on_decade_pulse_country целиком
+ 
+		#has_national_stockpile
+		if  = {
+			limit  = {
+				has_modifier = has_national_stockpile
+			}
+			national_stockpile_ef_on_half_yearly_pulse_country = yes
+		}  
+
+# из common/on_actions/00_ef_on_action.txt, строки 198–235 (на 2026-10-07), вызовы запаса в пульсах E&F; on_action ef_on_decade_pulse_country целиком
+
+		#has_national_stockpile
+		if = {
+			limit = {
+        has_modifier = has_national_stockpile
+				market_owner_is_root  = yes
+				is_ai = yes
+			}
+			buy_sell_ammunition_on_international_market = yes
+			buy_sell_small_arms_on_international_market = yes
+			buy_sell_artillery_on_international_market = yes
+			buy_sell_tanks_on_international_market = yes
+			buy_sell_aeroplanes_on_international_market = yes
+			buy_sell_grain_on_international_market = yes
+			buy_sell_fabric_on_international_market = yes
+			buy_sell_wood_on_international_market = yes
+			buy_sell_groceries_on_international_market = yes
+			buy_sell_clothes_on_international_market = yes
+			buy_sell_paper_on_international_market = yes
+			buy_sell_silk_on_international_market = yes
+			buy_sell_dye_on_international_market = yes
+			buy_sell_sulfur_on_international_market = yes
+			buy_sell_coal_on_international_market = yes
+			buy_sell_iron_on_international_market = yes
+			buy_sell_lead_on_international_market = yes
+			buy_sell_hardwood_on_international_market = yes
+			buy_sell_rubber_on_international_market = yes
+			buy_sell_oil_on_international_market = yes
+			buy_sell_engines_on_international_market = yes
+			buy_sell_steel_on_international_market = yes
+			buy_sell_fertilizer_on_international_market = yes
+			buy_sell_tools_on_international_market = yes
+			buy_sell_explosives_on_international_market = yes
+			buy_sell_automobiles_on_international_market = yes
+			buy_sell_telephones_on_international_market = yes
+			buy_sell_radios_on_international_market = yes
+			buy_sell_opium_on_international_market = yes
+		}
+
+# из common/on_actions/00_ef_on_action.txt, строки 282–294 (на 2026-10-07), вызовы запаса в пульсах E&F; on_action ef_on_decade_pulse_country целиком
+
+ef_on_decade_pulse_country = {
+	effect = {
+		if = {
+			limit = {
+        		has_modifier = has_national_stockpile
+				market_owner_is_root  = yes
+				is_ai = yes
+			}
+			ai_set_stockpile_reserve_limit = yes
+		}
+	}
+}

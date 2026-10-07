@@ -8,7 +8,7 @@
 | подсистема | документ | главные файлы |
 | --- | --- | --- |
 | Точки входа: история, on_actions, порядок шагов, логи `EF*` | `entry-points.md` | `common/on_actions/`, `common/scripted_effects/00_on_action_main.txt`, `common/history/` |
-| Денежная модель и счета: M0–M3, пул, касса, металл ЦБ / банков / населения, нацзапас E&F | `money-model.md` | `common/scripted_effects/ld_money_model.txt`, `common/scripted_effects/ld_metal_accounts.txt`, `common/scripted_effects/01_stockpile_scripted_effects.txt` |
+| Денежная модель и счета: M0–M3, пул, касса, металл ЦБ / банков / населения | `money-model.md` | `common/scripted_effects/ld_money_model.txt`, `common/scripted_effects/ld_metal_accounts.txt` |
 | Валюты, законы, стандарты, эталон, валютные зоны и союзы | `currencies.md` | `common/laws/01_ef_currency_type.txt`, `common/script_values/01_economic_currency_scripted_value.txt`, `common/scripted_effects/ld_standard_switch.txt` |
 | ЦБ: ставка, денежная политика, кредит ЦБ, облигации ЦБ, премия за риск | `central-bank.md` | `common/script_values/ld_cb_rate_values.txt`, `common/scripted_effects/ld_monetary_policy.txt` |
 | Банки и вклады | `banks.md` | `common/buildings/ld_bank.txt`, `common/scripted_effects/ld_bank_seed.txt`, `common/scripted_effects/ld_nr_deposits.txt` |
@@ -26,9 +26,9 @@
 - **Старт игры:** `common/history/buildings/` → `common/history/global/` (по имени файла) → `common/history/states/`; после
   лобби — верхняя панель E&F и проход по штатам для старых сейвов; PSC запускает стройку событием.
 - **Новая страна:** `new_country_var_ef` (`common/scripted_effects/10_new_country_var.txt`) — из `common/on_actions/ld_new_country_immediate_init.txt`
-  и страховкой из месячного пульса; признак готовности — `var:coal_release_quantity`.
-- **Месяц** (`on_monthly_pulse_country`, страны размазаны по дням): E&F `ef_on_monthly_pulse_country` (ЦБ, инфляция,
-  нацзапас) и on_action'ы `ld_*` — банки, пузырь, капитализация, ставка ЦБ (шаг раз в 3 месяца), месячный шаг модели
+  и страховкой из месячного пульса; признак готовности — `var:zz_ef_country_vars_set`.
+- **Месяц** (`on_monthly_pulse_country`, страны размазаны по дням): E&F `ef_on_monthly_pulse_country` (ЦБ, инфляция)
+  и on_action'ы `ld_*` — банки, пузырь, капитализация, ставка ЦБ (шаг раз в 3 месяца), месячный шаг модели
   денег, перестройка PSC. Порядок между файлами on_actions движок не гарантирует.
 - **Неделя:** цепочка модели денег `zz_ef_money_week_start` → зонд бюджетного тика → `zz_ef_money_model_step` (металл,
   клиринг, облигации, консоли, кредит, M0–M3, лог `EFW`) → перезапуск через 7 дней. Мост GUI → скрипт

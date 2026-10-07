@@ -433,21 +433,7 @@ has_central_bank_FS_NISO = {
 has_financial_center = {
 	has_modifier = has_financial_center
 }
-#####################################################################################################################################################
-has_national_stockpile = {
-	has_modifier = has_national_stockpile
-	market_owner_is_root = yes
-}
 
-#####################################################################################################################################################
-ai_set_stockpile_reserve_limit_spe_country = {
-	root = {
-		OR = {
-			c:CHI ?= this
-			c:BIC ?= this
-		}
-	}
-}
 #####################################################################################################################################################
 
 #####################################################################################################################################################
@@ -964,11 +950,6 @@ country_already_central_bank = {
 country_already_financial_center = {
 	root = {
 		var:country_already_financial_center = 1
-	}
-}
-country_already_national_stockpile = {
-	root = {
-		var:country_already_national_stockpile = 1
 	}
 }
 

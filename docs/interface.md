@@ -10,8 +10,8 @@ GUI-тип регистрирует первый файл по имени (ASCII
 с тем же именем (так «потерянные» типы в `maj/*` ломали ваниль).
 
 ### Заменяют ванильный файл по пути (копия ванили + вставки E&F)
-- `gui/budget_panel.gui` — `budget_panel` (2186 строк); вкладки вставляют типы `budget_panel_economy_panel_content` (:1518),
-  `budget_panel_financial_panel_content` (:1522), `budget_panel_stockpile_panel_content` (:1526); `@money!` вместо символа валюты.
+- `gui/budget_panel.gui` — `budget_panel` (2186 строк); вкладки вставляют типы `budget_panel_economy_panel_content` (:1497),
+  `budget_panel_financial_panel_content` (:1522); `@money!` вместо символа валюты.
 - `gui/market_panel.gui` — `market_panel`; блок «E&F» с `market_global_panel_content` (:949), кнопки
   `market_gui_market_currency_list` / `market_gui_market_financial_product_list` (:52, :1212-1403).
 - `gui/states_panel.gui` — `states_panel`; `state_panel_currency_panel_content` (:1459).
@@ -23,9 +23,9 @@ GUI-тип регистрирует первый файл по имени (ASCII
 - `gui/texticons.gui` (309 текстиконок) — копия ванильного; 30 имён иконок повторены в `gui/00_ef_texticons.gui` (249).
 
 ### Файлы E&F
-- `gui/00_ef_deported_gui_1.gui` (197 тыс. строк) — 4 типа: `market_global_panel_content` (:37, рынок валют: купить/продать
-  по каждой валюте), `budget_panel_stockpile_panel_content` (:131694, запасы/резервы), `country_panel_currency_panel_content`
-  (:180607), `state_panel_currency_panel_content` (:180730). Шесть пустых `types market_states_panel`-обёрток. Повтор блока по валютам.
+- `gui/00_ef_deported_gui_1.gui` (97 тыс. строк) — 3 типа: `market_global_panel_content` (:37, рынок валют: купить/продать
+  по каждой валюте; облигации финцентра), `country_panel_currency_panel_content` (:87901), `state_panel_currency_panel_content`
+  (:88024). Две пустые `types market_states_panel`-обёртки. Повтор блока по валютам.
 - `gui/00_ef_deported_gui_2.gui` (11906 строк) — 205 типов: 191 `ef_bp_*_piechart` (круговые диаграммы запасов/денег по
   валютам; данные из `GetGlobalList('..._variable_list_ordered_N')`), `currency_symbol_top_bar` (:8567, 96 текстбоксов
   символов), `ef_economy_N_formwork`/`ef_financial_N_formwork` (:9289-10680), `vo_plotline_minting` (:10984).
@@ -49,7 +49,7 @@ GUI-тип регистрирует первый файл по имени (ASCII
 - `gui/ld_cb_rate_panel.gui` (генерат. `regen_ef_cb_rate_gui.py`) — `budget_panel_financial_panel_content` (:10): ключевая ставка,
   ЦБ, облигации, таблицы держателей (`zz_ef_bt_in_list`/`zz_ef_bt_out_list`), `mp_row` политики.
 - `gui/ld_currency_symbol_fix.gui` — единственное определение `currency_symbol_country_panel` (один текстбокс
-  `GetCustom('currency_symbol')`). Используется 5 раз в `00_ef_deported_gui_1.gui:180607…`.
+  `GetCustom('currency_symbol')`). Используется 5 раз в `00_ef_deported_gui_1.gui:87912…`.
 - `gui/ld_national_capacity_chart.gui` — единственное определение `ef_bp_national_capacity_piechart` (используется
   `ld_economy_panel.gui:8273`); ряд в металле стандарта, доли — в золотом эквиваленте.
 - `gui/ld_money_hook.gui` — мост «бюджет → скрипт» (см. ниже); регистрация `gui/scripted_widgets/ld_money_hook.txt`.
@@ -66,7 +66,7 @@ GUI-тип регистрирует первый файл по имени (ASCII
 - `common/scripted_guis/00_economic_scripted_guis.txt` — выбор валюты `choose_currency_type_<cur>`
   (+`_visible`), `<cur>_buy_in_gold`/`_sell_in_gold`, девальвация/ревальвация
   (`devaluation_*`, `revaluation_*`, `set_*_rate`), `currency_quantity_increase/_reduce`, `is_ai`/`not_is_ai`, законы стандартов.
-- `common/scripted_guis/00_stockpile_scripted_guis.txt` — запасы по валютам, `set_store_<товар>_enabled`, `trade_<товар>_budget_panel*`.
+- `common/scripted_guis/00_stockpile_scripted_guis.txt` — переключатели покупки/продажи валют `<cur>_buy_on`/`_sell_on` (+`_v`).
 - `common/scripted_guis/00_financial_scripted_guis.txt` — облигации, кредит ЦБ, `speculative_share_N_button` (sgui),
   `transfert_currency_to_investement_pool_*`, `global_player_help_*`.
 - `common/scripted_guis/09_ef_other.txt` — `EF_room_gui_N`/`EF_current_room_gui_N` (100+100; панель `gold_reserve_window`),
@@ -119,7 +119,7 @@ GUI-тип регистрирует первый файл по имени (ASCII
 | `zz_ef_bt_in_list`, `zz_ef_bt_out_list` | таблицы облигаций | `ld_bond_tables.txt` | `gui/ld_cb_rate_panel.gui` |
 | `national_capacity_variable_list_ordered_1` | порядок кругов резервов | `common/scripted_effects/08_list_effect.txt` | `gui/ld_national_capacity_chart.gui` |
 | `EF_gui_room_brut` | число открытых «комнат» окна резервов | `common/script_values/00_economic_scripted_value.txt` | `EF_room_gui_N` |
-| GUI-флаги (`GetVariableSystem`) | `stockpile_panel`, `currency_reserves`, `seller_country`, `ai_seller`, `national_debt`, `small_monetary_policy`, `ef_companies_compact`, `hide_current_companies`, `zz_pb_ef_fso_overcap_closed`, `zz_pb_ef_fso_bubble_closed`, `gold_reserve_window` | GUI | GUI |
+| GUI-флаги (`GetVariableSystem`) | `currency_reserves`, `seller_country`, `ai_seller`, `national_debt`, `small_monetary_policy`, `ef_companies_compact`, `hide_current_companies`, `zz_pb_ef_fso_overcap_closed`, `zz_pb_ef_fso_bubble_closed`, `gold_reserve_window` | GUI | GUI |
 
 ## Вызовы и связи
 - Панели, зависящие от других подсистем (описаны там): деньги — `ld_money_model.txt`; ставка/ЦБ — `ld_cb_rate_*`; валютный клиринг — `ld_cbfx`;
