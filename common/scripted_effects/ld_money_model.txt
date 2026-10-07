@@ -401,14 +401,16 @@ zz_ef_money_model_step = {
 		}
 		add_to_global_variable_list = { name = zz_ef_hook_countries target = this days = 6 }
 	}
+	# R1а.8: the bridge's part of the step, on its latest numbers
+	zz_ef_bridge_apply = yes
 }
 
-# Called by the GUI bridge with scope:ext = the week's budget lines outside
-# the accounts (settled, GetTrendValue). Once per week: the pending var is
-# consumed (on_start may fire twice). The leak = what left the engine's
-# money unexplained: the change of M2 minus the outside lines, the CB's
-# credit and the private banks' foreign bonds. Negative = money went to pops
-# (their income left over, wealth) or abroad inside the market.
+# R1а.8 (Р8, Р9, Р15; схема 4.3): the GUI bridge is transport only. Called by the bridge (gui/ld_money_hook.gui) with
+# the GUI-only numbers: scope:ext = the week's budget lines outside the accounts (settled, GetTrendValue), scope:abr =
+# their part with other countries, scope:g_* = the engine's values the GUI alone sees. Once per queued step (the
+# pending var is consumed; on_start may fire twice). It only writes them into the country's variables
+# (var:zz_ef_hk_*, var:zz_ef_g_*); every calculation is the scheduler's step (zz_ef_bridge_apply), which takes the
+# latest numbers received -- a week without the bridge (minimized window, multiplayer) reuses the last ones.
 zz_ef_money_hook_receive = {
 	# Diagnostics: every call, also the ones that find nothing pending.
 	if = {
@@ -420,13 +422,10 @@ zz_ef_money_hook_receive = {
 		limit = { has_variable = zz_ef_hook_pending }
 		remove_variable = zz_ef_hook_pending
 		remove_list_global_variable = { name = zz_ef_hook_countries target = this }
-		set_variable = { name = zz_ef_f_ext value = scope:ext }
-		set_variable = { name = zz_ef_f_pool_other value = zz_ef_pool_other_week }
-		set_variable = { name = zz_ef_f_tr_other value = zz_ef_other_treasury_budget }
-		set_variable = { name = zz_ef_f_abr value = scope:abr }
-		# R1а.4: B steps every 4 weeks -- the flows measured for one week x the weeks the step covers
-		zz_ef_sw = { F = ext }
-		zz_ef_sw = { F = abr }
+		set_variable = { name = zz_ef_hk_ext value = scope:ext }
+		set_variable = { name = zz_ef_hk_abr value = scope:abr }
+		set_variable = { name = zz_ef_hk_aint value = scope:g_aint }
+		set_variable = { name = zz_ef_hk_tfees value = scope:g_tfees }
 		set_variable = { name = zz_ef_g_imp value = scope:g_imp }
 		set_variable = { name = zz_ef_g_exp value = scope:g_exp }
 		set_variable = { name = zz_ef_g_surplus value = scope:g_surplus }
@@ -441,73 +440,89 @@ zz_ef_money_hook_receive = {
 		set_variable = { name = zz_ef_g_ipay value = scope:g_ipay }
 		set_variable = { name = zz_ef_g_sdebt value = scope:g_sdebt }
 		set_variable = { name = zz_ef_g_sdebtf value = scope:g_sdebtf }
-		# П.17 (4.10): additional income - expenses (bond interest, events), the BoP's primary income
-		# В4.2: the engine's factor on the government's rate -- its yearly rate over the adds it is given (smoothed)
-		if = {
-			limit = {
-				zz_ef_ir_add > 0.005
-				zz_ef_v_g_grate > 0
-			}
-			set_variable = {
-				name = zz_ef_gr_k_now
-				value = {
-					value = zz_ef_v_g_grate
-					divide = zz_ef_ir_add
-					min = 0.5
-					max = 1.5
-				}
-			}
-			if = {
-				limit = { NOT = { has_variable = zz_ef_gr_k } }
-				set_variable = { name = zz_ef_gr_k value = var:zz_ef_gr_k_now }
-			}
-			change_variable = { name = zz_ef_gr_k multiply = 0.5 }
-			change_variable = { name = zz_ef_gr_k add = { value = var:zz_ef_gr_k_now multiply = 0.5 } }
-			remove_variable = zz_ef_gr_k_now
+		set_variable = { name = zz_ef_hk_date_week value = global_var:zz_ef_sched_week }
+	}
+}
+
+# R1а.8: what the receiver did before, at the end of the scheduler's step, on the latest numbers of the bridge (0
+# before the first): the leak, the gov rate's factor, the pops' savings, the clearing and the world's sums, the
+# foreign CBs' deposits, the consumer credit, the logs EFA / EFR / EFO. The model lives without the bridge (R0.8).
+# The leak = what left the engine's money unexplained this step (the change of M2 minus the outside lines, the CB's
+# credit, the foreign bonds ...) -- since R1а.6 a part of «прочее», not savings.
+zz_ef_bridge_apply = {
+	set_variable = { name = zz_ef_f_ext value = zz_ef_v_hk_ext }
+	set_variable = { name = zz_ef_f_pool_other value = zz_ef_pool_other_week }
+	set_variable = { name = zz_ef_f_tr_other value = zz_ef_other_treasury_budget }
+	set_variable = { name = zz_ef_f_abr value = zz_ef_v_hk_abr }
+	# R1а.4: B steps every 4 weeks -- the flows measured for one week x the weeks the step covers
+	zz_ef_sw = { F = ext }
+	zz_ef_sw = { F = abr }
+	# П.17 (4.10): additional income - expenses (bond interest, events), the BoP's primary income
+	# В4.2: the engine's factor on the government's rate -- its yearly rate over the adds it is given (smoothed)
+	if = {
+		limit = {
+			zz_ef_ir_add > 0.005
+			zz_ef_v_g_grate > 0
 		}
-		set_variable = { name = zz_ef_f_aint value = scope:g_aint }
-		# В5.4 (5.10): the interest to our own CB is not a payment abroad
-		change_variable = { name = zz_ef_f_aint add = zz_ef_v_cbl_int }
-		zz_ef_sw = { F = aint }
-		# В1.6 (5.10 evening): who has additional income - expenses (the world sum +0.25-0.75M a month, run s1g)
-		if = {
-			limit = {
-				OR = {
-					var:zz_ef_f_aint > 1000
-					var:zz_ef_f_aint < -1000
-				}
+		set_variable = {
+			name = zz_ef_gr_k_now
+			value = {
+				value = zz_ef_v_g_grate
+				divide = zz_ef_ir_add
+				min = 0.5
+				max = 1.5
 			}
-			if = { limit = { zz_ef_logs_on = yes } debug_log = "EFA|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|aint [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_aint')|0]|cbl_int [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_cbl_int')|0]|cbm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cbm_v')|0]|fdi [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fdi_mod_v')|0]" }
 		}
-		# R1а.7: the trade -- measured once at the step (zz_ef_trade_step: var:zz_ef_f_trade / _imp / _exp), read here
-		# by the clearing and the balance of payments; the treasury's trade fees from the bridge
-		set_variable = { name = zz_ef_f_tfees value = scope:g_tfees }
-		zz_ef_sw = { F = tfees }
-		set_variable = { name = zz_ef_f_trade_fin value = zz_ef_trade_fin_week }
-		set_variable = { name = zz_ef_f_div value = zz_ef_div_net_week }
-		zz_ef_sw = { F = trade_fin }
-		zz_ef_sw = { F = div }
-		set_variable = { name = zz_ef_f_leak value = zz_ef_leak_week }
-		zz_ef_pop_savings_step = yes
-		zz_ef_cb_hume_step = yes
-		# Д2.30 (6.10 day): our currency held by other CBs lies in our banks (zz_ef_nr_deposits.txt)
-		zz_ef_nr_dep_step = yes
-		zz_ef_consumer_credit_step = yes
-		zz_ef_pop_extra_income_step = yes
 		if = {
-			limit = {
-				OR = {
-					is_player = yes
-					gdp > 20000000
-					zz_ef_cu_member = yes
-				}
-			}
-			if = { limit = { zz_ef_logs_on = yes } debug_log = "EFR|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|ext [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_ext')|0]|leak [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_leak')|0]|savings [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_savings')|0]|deposits [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_deposits')|0]|inflow [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_inflow')|0]|dep_in [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_dep_in')|0]|dep_out [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_dep_out')|0]|dep_int [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_dep_int')|0]|pool [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pool')|0]|abr [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_abr')|0]|ext_net [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_ext_net')|0]|hume [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_hume')|0]|metal [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_metal')|0]|mv0 [THIS.GetCountry.MakeScope.ScriptValue('money_value_0')|2]|pool_other [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_pool_other')|0]|tr_other [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_tr_other')|0]|bc_debt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bc_debt')|0]|cc_debt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cc_debt')|0]|cc_net [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_cc_net')|0]|cc_wage [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cc_wage_add')|2]|dependents [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_dependents')|0]|d_tc [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_d_tc')|0]|tc [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_tc_cash')|0]|norm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_cash_norm')|0]|g_imp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_imp')|0]|g_exp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_exp')|0]|g_surplus [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_surplus')|0]|g_fown [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_fown')|0]|g_aown [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_aown')|0]|g_poolchg [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_poolchg')|0]|g_pcons [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_pcons')|0]|g_grate [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_grate')|4]|g_maxcred [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_maxcred')|0]|g_wgdp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_wgdp')|0]|cpi [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_price_index')|2]|mint [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_mint')|0]|mint_tr [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_mint_tr')|0]|gmined [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gold_mined_week')|1]|fx [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fx_reserves_metal')|0]|bc_new [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_bc_new')|0]|bc_paid [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_bc_paid')|0]|svc [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_bc_svc')|0]|trade [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_trade')|0]|tfin [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_trade_fin')|0]|div [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_div')|0]|profit [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_profit_week')|0]|wrate [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_wrate')|5]|ipay [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_ipay')|0]|sdebt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_sdebt')|0]|sdebtf [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_sdebtf')|3]|principal [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_debt_principal')|0]|ir_add [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_ir_add')|4]|ir_mult [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_ir_mult')|4]|grt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gov_rate_target')|4]|govlv [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gov_levels')|1]|privlv [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_priv_levels')|1]|d_govlv [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_d_govlv')|1]|fxm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_fx_metal')|0]|s2g [THIS.GetCountry.MakeScope.ScriptValue('silver_to_gold_rate')|5]|csub [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_clr_sub')|0]|csent [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_clr_sent')|0]|gpm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_gold_per_money')|5]|event_sav [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_event_sav')|0]|gr_k [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gr_k_v')|3]|sav_wealth [THIS.GetCountry.MakeScope.Var('zz_ef_f_sav_wealth').GetValue|0]|sav_norm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_sav_norm')|0]|buyback_m [THIS.GetCountry.MakeScope.Var('zz_ef_f_mt_buyback_money').GetValue|0]|nr_dep [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_nr_dep_v')|0]|f_nr_dep [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_nr_dep')|0]|liab_all [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fx_liab_all')|0]|nr_int [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_nr_int')|0]|hdem [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fx_holders_demand_m')|1]" }
-			# UI.7 (3.10): the "прочее" of each account card (zz_ef_money_log_rest.txt,
-			# generated) -- here, after the receiver set the week's pool_other, tr_other,
-			# inflow and abr: at the step the log read last week's (run e0_4)
-			if = { limit = { zz_ef_logs_on = yes } zz_ef_money_log_rest = yes }
+			limit = { NOT = { has_variable = zz_ef_gr_k } }
+			set_variable = { name = zz_ef_gr_k value = var:zz_ef_gr_k_now }
 		}
+		change_variable = { name = zz_ef_gr_k multiply = 0.5 }
+		change_variable = { name = zz_ef_gr_k add = { value = var:zz_ef_gr_k_now multiply = 0.5 } }
+		remove_variable = zz_ef_gr_k_now
+	}
+	set_variable = { name = zz_ef_f_aint value = zz_ef_v_hk_aint }
+	# В5.4 (5.10): the interest to our own CB is not a payment abroad
+	change_variable = { name = zz_ef_f_aint add = zz_ef_v_cbl_int }
+	zz_ef_sw = { F = aint }
+	# В1.6 (5.10 evening): who has additional income - expenses (the world sum +0.25-0.75M a month, run s1g)
+	if = {
+		limit = {
+			OR = {
+				var:zz_ef_f_aint > 1000
+				var:zz_ef_f_aint < -1000
+			}
+		}
+		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFA|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|aint [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_aint')|0]|cbl_int [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_cbl_int')|0]|cbm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cbm_v')|0]|fdi [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fdi_mod_v')|0]" }
+	}
+	# R1а.7: the trade -- measured once at the step (zz_ef_trade_step: var:zz_ef_f_trade / _imp / _exp), read here
+	# by the clearing and the balance of payments; the treasury's trade fees from the bridge
+	set_variable = { name = zz_ef_f_tfees value = zz_ef_v_hk_tfees }
+	zz_ef_sw = { F = tfees }
+	set_variable = { name = zz_ef_f_trade_fin value = zz_ef_trade_fin_week }
+	set_variable = { name = zz_ef_f_div value = zz_ef_div_net_week }
+	zz_ef_sw = { F = trade_fin }
+	zz_ef_sw = { F = div }
+	set_variable = { name = zz_ef_f_leak value = zz_ef_leak_week }
+	zz_ef_pop_savings_step = yes
+	zz_ef_cb_hume_step = yes
+	# Д2.30 (6.10 day): our currency held by other CBs lies in our banks (zz_ef_nr_deposits.txt)
+	zz_ef_nr_dep_step = yes
+	zz_ef_consumer_credit_step = yes
+	zz_ef_pop_extra_income_step = yes
+	if = {
+		limit = {
+			OR = {
+				is_player = yes
+				gdp > 20000000
+				zz_ef_cu_member = yes
+			}
+		}
+		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFR|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|ext [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_ext')|0]|leak [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_leak')|0]|savings [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_savings')|0]|deposits [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_deposits')|0]|inflow [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_inflow')|0]|dep_in [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_dep_in')|0]|dep_out [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_dep_out')|0]|dep_int [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_dep_int')|0]|pool [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pool')|0]|abr [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_abr')|0]|ext_net [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_ext_net')|0]|hume [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_hume')|0]|metal [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_metal')|0]|mv0 [THIS.GetCountry.MakeScope.ScriptValue('money_value_0')|2]|pool_other [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_pool_other')|0]|tr_other [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_tr_other')|0]|bc_debt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bc_debt')|0]|cc_debt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cc_debt')|0]|cc_net [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_cc_net')|0]|cc_wage [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cc_wage_add')|2]|dependents [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_dependents')|0]|d_tc [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_d_tc')|0]|tc [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_tc_cash')|0]|norm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_cash_norm')|0]|g_imp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_imp')|0]|g_exp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_exp')|0]|g_surplus [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_surplus')|0]|g_fown [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_fown')|0]|g_aown [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_aown')|0]|g_poolchg [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_poolchg')|0]|g_pcons [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_pcons')|0]|g_grate [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_grate')|4]|g_maxcred [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_maxcred')|0]|g_wgdp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_wgdp')|0]|cpi [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_price_index')|2]|mint [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_mint')|0]|mint_tr [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_mint_tr')|0]|gmined [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gold_mined_week')|1]|fx [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fx_reserves_metal')|0]|bc_new [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_bc_new')|0]|bc_paid [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_bc_paid')|0]|svc [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_bc_svc')|0]|trade [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_trade')|0]|tfin [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_trade_fin')|0]|div [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_div')|0]|profit [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_profit_week')|0]|wrate [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_wrate')|5]|ipay [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_ipay')|0]|sdebt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_sdebt')|0]|sdebtf [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_sdebtf')|3]|principal [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_debt_principal')|0]|ir_add [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_ir_add')|4]|ir_mult [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_ir_mult')|4]|grt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gov_rate_target')|4]|govlv [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gov_levels')|1]|privlv [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_priv_levels')|1]|d_govlv [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_d_govlv')|1]|fxm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_fx_metal')|0]|s2g [THIS.GetCountry.MakeScope.ScriptValue('silver_to_gold_rate')|5]|csub [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_clr_sub')|0]|csent [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_clr_sent')|0]|gpm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_gold_per_money')|5]|event_sav [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_event_sav')|0]|gr_k [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gr_k_v')|3]|sav_wealth [THIS.GetCountry.MakeScope.Var('zz_ef_f_sav_wealth').GetValue|0]|sav_norm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_sav_norm')|0]|buyback_m [THIS.GetCountry.MakeScope.Var('zz_ef_f_mt_buyback_money').GetValue|0]|nr_dep [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_nr_dep_v')|0]|f_nr_dep [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_nr_dep')|0]|liab_all [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fx_liab_all')|0]|nr_int [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_nr_int')|0]|hdem [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fx_holders_demand_m')|1]" }
+		# UI.7 (3.10): the "прочее" of each account card (zz_ef_money_log_rest.txt,
+		# generated) -- here, after the receiver set the week's pool_other, tr_other,
+		# inflow and abr: at the step the log read last week's (run e0_4)
+		if = { limit = { zz_ef_logs_on = yes } zz_ef_money_log_rest = yes }
 	}
 }
 

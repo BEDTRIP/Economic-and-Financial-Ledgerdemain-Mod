@@ -29,3 +29,12 @@ zz_ef_money_hook_probe_sg = {
 		change_global_variable = { name = zz_ef_hook_probe_calls add = 1 }
 	}
 }
+
+# R1а.8 (Р15): the bridge's root here is the player's country (GetPlayer) -- it takes role A at once (the engine has no
+# on_action for a tag switch; the monthly role pass would take up to a month).
+zz_ef_player_sg = {
+	scope = country
+	effect = {
+		zz_ef_role_player_now = yes
+	}
+}

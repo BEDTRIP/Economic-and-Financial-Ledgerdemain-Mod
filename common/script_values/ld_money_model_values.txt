@@ -2684,3 +2684,21 @@ zz_ef_gr_k_v = {
 	value = 1
 	if = { limit = { has_variable = zz_ef_gr_k } value = var:zz_ef_gr_k }
 }
+
+# R1а.8: the bridge's latest numbers (var:zz_ef_hk_*, the receiver writes them), 0 before the first
+zz_ef_v_hk_ext = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_hk_ext } value = var:zz_ef_hk_ext }
+}
+zz_ef_v_hk_abr = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_hk_abr } value = var:zz_ef_hk_abr }
+}
+zz_ef_v_hk_aint = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_hk_aint } value = var:zz_ef_hk_aint }
+}
+zz_ef_v_hk_tfees = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_hk_tfees } value = var:zz_ef_hk_tfees }
+}

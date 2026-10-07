@@ -156,3 +156,16 @@ zz_ef_role_change = {
 	set_variable = { name = zz_ef_role value = local_var:zz_ef_role_new }
 	set_variable = { name = zz_ef_role_months value = 0 }
 }
+
+# Country scope (the player's, from the GUI bridge -- scripted_guis/ld_money_hook.txt): role A at once.
+zz_ef_role_player_now = {
+	if = {
+		limit = {
+			is_player = yes
+			NOT = { zz_ef_role_is_a = yes }
+			NOT = { is_country_type = decentralized }
+		}
+		set_local_variable = { name = zz_ef_role_new value = 1 }
+		zz_ef_role_change = yes
+	}
+}

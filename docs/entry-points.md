@@ -127,8 +127,8 @@ PSC-хук: `on_production_method_changed`, `on_building_built`, `on_acquired_te
 | EFN | `common/scripted_effects/ld_nr_deposits.txt:118` | обрезка обязательств иностранных вкладов (`trim`) | `zz_ef_fx_liab_trim` |
 | EFW | `common/scripted_effects/ld_money_model.txt:392` | M0..M3, оборот, ЦБ, заграница, дельты (только игрок или ВВП > 20 млн) | недельный `zz_ef_money_model_step` |
 | EFG | `common/scripted_effects/ld_money_model.txt:743` | WORLD: потоки валюты по миру, клиринг | недельный (через `zz_ef_world_acc`) |
-| EFA | `common/scripted_effects/ld_money_model.txt:504` | проценты, ЦБ, прямые инвестиции | `zz_ef_money_hook_receive` |
-| EFR | `common/scripted_effects/ld_money_model.txt:540` | внешние потоки, сбережения, депозиты, пул банков | `zz_ef_money_hook_receive` |
+| EFA | `common/scripted_effects/ld_money_model.txt:504` | проценты, ЦБ, прямые инвестиции | `zz_ef_bridge_apply` (недельный шаг) |
+| EFR | `common/scripted_effects/ld_money_model.txt:540` | внешние потоки, сбережения, депозиты, пул банков | `zz_ef_bridge_apply` (недельный шаг; числа моста — `zz_ef_money_hook_receive`` |
 | EFX | `common/scripted_effects/ld_money_model.txt:1033` | стандарт, ЦБ, `money_value_0`, цель, покрытие, металл, M2 | месячный `zz_ef_money_model_monthly_step` |
 | EFJ | `common/scripted_effects/ld_ledger.txt` | сверка по запасам: «прочее» страны (запас, изменение, пул, книга банков, капитал, вклады, недель в шаге, роль); `WORLD` — сумма изменений «прочего» за неделю, сумма модулей, число стран | недельный шаг (`zz_ef_reconcile`), мировой проход (`zz_ef_other_world_log`) |
 | EFY | `common/scripted_effects/ld_roles.txt` | WORLD: число стран по ролям А / Б / В, смен за месяц, ВВП 40-й и 50-й страны; строка `move` — смена роли страны (прежняя роль, месяцев в ней, месяцев ниже 50-го места, ВВП) | месячный проход `zz_ef_roles_world_pass` |

@@ -97,9 +97,10 @@ GUI-тип регистрирует первый файл по имени (ASCII
   оригиналов в `00_ef_deported_gui_*` (оригиналы удалены), конфликтов нет.
 - Виджет моста `zz_ef_money_hook` (HUD) постоянно живёт; для каждой страны из глобального списка `zz_ef_hook_countries`
   (её ставит недельный шаг денег, `common/scripted_effects/ld_money_model.txt`) состояние `trigger_when = [Scope.IsSet]`
-  вызывает `zz_ef_money_hook_probe_sg` и `zz_ef_money_hook_sg` с областями `ext`, `abr` и ~20 `g_*` (данные, которые скрипт не
-  видит: тренды дохода/расхода, торговый баланс, самодолг). Приёмник `zz_ef_money_hook_receive` (`ld_money_model.txt:440`)
-  забирает `var:zz_ef_hook_pending` и снимает страну со списка. Мост работает только при открытом/созданном HUD.
+  вызывает `zz_ef_money_hook_probe_sg`, `zz_ef_player_sg` (корень `GetPlayer` — роль А игроку) и `zz_ef_money_hook_sg` с областями `ext`, `abr` и ~20 `g_*` (данные, которые скрипт не
+  видит: тренды дохода/расхода, торговый баланс, самодолг). Приёмник `zz_ef_money_hook_receive` (`ld_money_model.txt`)
+  забирает `var:zz_ef_hook_pending`, снимает страну со списка и только пишет числа в переменные (`zz_ef_hk_*`, `zz_ef_g_*`);
+  расчёт по ним — `zz_ef_bridge_apply` в недельном шаге (`money-model.md`). Мост работает только при открытом/созданном HUD.
 - Клик по кнопке: `onclick = [GetScriptedGui('<имя>').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]`; видимость/доступность:
   `.IsShown(...)` / `.IsValid(...)`; параметры — `.AddScope('имя', MakeScopeValue(...))`. Корень — игрок, рынок (`Market.MakeScope`) или страна.
 - Списки панелей: `GetGlobalList('<имя>')` в `datamodel` (список заполняет эффект/sgui при открытии секции; `*_list_gerenation_ordered` определён только `world_currency_…`).

@@ -49,7 +49,7 @@
 | `global_var:zz_ef_ref_vtp` | value_to_parity эталона | `zz_ef_reference_strength_step` | `zz_ef_currency_strength` |
 | `zz_ef_std_old`, `zz_ef_std_parity_old/_new` | старый стандарт (1 серебро, 2 би, 3 золото) и паритет при смене | `zz_ef_std_switch_*` | они же |
 | `zz_ef_cur_zone` | сюзерен, чью зону держит страна | `zz_ef_cur_zone_step` | `zz_ef_mp_can_work` |
-| `zz_ef_member_trade` | торговый счёт члена ТС за неделю | приёмник денег (`ld_money_model.txt`) | `zz_ef_members_trade_sum` |
+| `zz_ef_member_trade` | торговый счёт члена ТС за неделю | `zz_ef_trade_step` (`ld_money_model.txt`) | `zz_ef_members_trade_sum` |
 | `global_monetary_reference` | модификатор эталона | `08_list_effect.txt:300-306` | `zz_ef_currency_trade_step`, `is_*_currency` |
 | `zz_ef_currency_trade` | модификатор торговли от силы (`static_modifiers/ld_currency_trade.txt`), множитель `zz_ef_currency_trade_m` = (1 − сила)×40, в −10..10 | `zz_ef_currency_trade_step` | движок |
 
