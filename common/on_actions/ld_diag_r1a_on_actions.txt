@@ -1,0 +1,37 @@
+#############################################
+# ВРЕМЕННО, диагностика R1а (Р10, 7.10.2026) -- только в ветке проверки, не в master.
+# Каждая страна с первого месячного пульса 42 дня подряд пишет строку EFD, если её казна
+# (zz_ef_budget_position) изменилась за день: видно, в какие дни у стран бюджетный тик.
+#############################################
+
+on_monthly_pulse_country = {
+	on_actions = {
+		zz_ef_diag_tick_start
+	}
+}
+
+zz_ef_diag_tick_start = {
+	effect = {
+		if = {
+			limit = { NOT = { has_variable = zz_ef_diag_tick_n } }
+			set_variable = { name = zz_ef_diag_tick_n value = 0 }
+			set_variable = { name = zz_ef_diag_tick_v value = zz_ef_budget_position }
+			trigger_event = { on_action = zz_ef_diag_tick_day days = 1 }
+		}
+	}
+}
+
+zz_ef_diag_tick_day = {
+	effect = {
+		if = {
+			limit = { NOT = { zz_ef_budget_position = var:zz_ef_diag_tick_v } }
+			debug_log = "EFD|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|was [THIS.GetCountry.MakeScope.Var('zz_ef_diag_tick_v').GetValue|0]|now [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_budget_position')|0]"
+		}
+		set_variable = { name = zz_ef_diag_tick_v value = zz_ef_budget_position }
+		change_variable = { name = zz_ef_diag_tick_n add = 1 }
+		if = {
+			limit = { var:zz_ef_diag_tick_n < 42 }
+			trigger_event = { on_action = zz_ef_diag_tick_day days = 1 }
+		}
+	}
+}
