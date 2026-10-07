@@ -96,6 +96,6 @@
   `common/static_modifiers/00_ef_dynamic_modifier_building.txt`, `common/static_modifiers/00_ef_dynamic_modifier_state.txt`.
 - `common/defines/zzzz_ef_credit_def.txt` — `NEconomy.COUNTRY_MIN_CREDIT_SCALED`.
 - `common/decisions/00_ef_ai_loooting.txt` — решения ИИ с ЦБ (грабёж резервов).
-- `common/prestige_goods/00_ef_prestige_goods_2.txt` — престижный товар `manufacture_stock_usa`.
+- `common/prestige_goods/00_ef_prestige_goods_2.txt` — пусто: `manufacture_stock_usa` выключен (у `manufacture_stock` уже три престижных товара — предел движка).
 - `common/customizable_localization/00_ef_localization_ custom.txt` — имя валюты страны (`currency_name` и др.; пробел в имени
   файла — авторский).
