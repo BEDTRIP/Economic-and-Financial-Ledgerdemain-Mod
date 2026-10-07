@@ -18,9 +18,9 @@ E&F `trade_balance` отключён. Ключи `ld_*` — с префиксо�
 - `common/production_methods/00_ef_market_liquidity.txt` — `pm_no_market_liquidity`, `pm_market_liquidity_currency` (вход `goods_input_liquidity_currency_add = 28` — бизнесы покупают услугу расчётов у банков), далее методы военных заказов (`pm_government_aid_*`).
 - E&F, форекс и арбитраж:
   - `common/scripted_effects/00_on_action_main.txt`: `ai_buy_sell_currency` (:5687; по каждой валюте с `money_value_<cur> > 0`: `buy_<cur>_currency` если валюта не слабая, `sell_<cur>_currency` если запас > 1 000 000 и `purchase_cycle = 0`), вызов из `central_bank_ef_on_yearly_pulse_country` (:954), `monetary_systeme_transition`; арбитражи — см. поток.
-  - `common/scripted_effects/01_economic_scripted_effects.txt`: `buy_<cur>_currency`/`sell_<cur>_currency` (:42720…, по эффекту на валюту; запись `gold_state_1`/`silver_state_1` и `stockpiling_<cur>_state_1` столицы ЦБ), `private_bank_arbitrage_gold_drain` (:91721), `private_bank_arbitrage_silver_drain` (:91979), `private_bank_gold_lose` (:106832), `trade_balance` (:41765).
+  - `common/scripted_effects/01_economic_scripted_effects.txt`: `buy_<cur>_currency`/`sell_<cur>_currency` (:35740…, по эффекту на валюту; запись `gold_state_1`/`silver_state_1` и `stockpiling_<cur>_state_1` столицы ЦБ), `private_bank_arbitrage_gold_drain` (:84733), `private_bank_arbitrage_silver_drain` (:84991), `private_bank_gold_lose` (:99844), `trade_balance` (:34785).
   - `common/scripted_guis/00_economic_scripted_guis.txt`: `<cur>_buy_in_gold`/`<cur>_sell_in_gold` — кнопки игрока (окно в `gui/00_ef_deported_gui_1.gui`); `09_ef_other.txt:2190` `trade_balance_actualized`, `:5283` `trade_balance_0`.
-  - `common/script_values/00_economic_scripted_value.txt:5924-6176` — `trade_balance_*` значения; `01_economic_currency_scripted_value.txt:287334…` — `trade_balance_in_gold*`.
+  - `common/script_values/00_economic_scripted_value.txt:5924-6176` — `trade_balance_*` значения; `01_economic_currency_scripted_value.txt:287339…` — `trade_balance_in_gold*`.
 
 ## Поток / порядок
 - Неделя (`zz_ef_money_model_step`, `ld_money_model.txt:101`): `zz_ef_fx_metal_update` (:114) → `zz_ef_cbfx_week_step` (:116) → … → `zz_ef_cb_hume_step` (:552) → `zz_ef_clr_step` (:705): взнос членов зоны глава-стране (`zz_ef_clr_sub_g`), у страны с ЦБ — окно, `zz_ef_clr_pay` при `zz_ef_f_clr_net < 0` (долг в золоте × `zz_ef_clr_pay_ratio_v`; металл ≤ металла ЦБ, остальное своей валютой `zz_ef_f_clr_cur_out`), `zz_ef_clr_receive` при `> 0` (доля палаты: металл + валюты, своя валюта погашается, чужая → запас ЦБ `zz_ef_f_clr_fx_in`); страна без ЦБ платит только валютой. Результаты в `zz_ef_f_hume`, `zz_ef_f_clr_*`. Затем `zz_ef_nr_dep_step` (:554).
@@ -49,7 +49,7 @@ E&F `trade_balance` отключён. Ключи `ld_*` — с префиксо�
 ## Вызовы и связи
 - `zz_ef_clr_gold_per_money` и `zz_ef_rc_currency_value` читают клиринг, таблицы облигаций (`ld_bond_tables.txt`), модель денег.
 - `zz_ef_fx_liab`/`zz_ef_fx_liab_all` — вклады (`banks.md`).
-- Интерфейс: `gui/ld_economy_panel.gui` (кнопки `zz_ef_cbfx_update_sorted`, `zz_ef_holders_update` :3011-3012, диаграммы :9832, :9874; кнопка `trade_balance_actualized` :2802, :3016); `gui/00_ef_deported_gui_1.gui` — окно покупки/продажи валют и облигаций E&F.
+- Интерфейс: `gui/ld_economy_panel.gui` (кнопки `zz_ef_cbfx_update_sorted`, `zz_ef_holders_update` :2971-3012, диаграммы :9754, :9796; кнопка `trade_balance_actualized` :2768, :2976); `gui/00_ef_deported_gui_1.gui` — окно покупки/продажи валют и облигаций E&F.
 - Модификатор `zz_ef_currency_trade` — на стране (импорт/экспорт).
 
 ## Логи

@@ -933,10 +933,6 @@ set_money_value_target = {
 			name = money_value_target_1
 			value = var:money_value_target_2
 		}
-		set_variable = {
-			name = money_value_target_time
-			value = 1
-		}
 		if = { limit = { has_modifier = foreign_exchange_controls } remove_modifier = foreign_exchange_controls }
 		add_modifier = {
 			name = foreign_exchange_controls
@@ -1048,10 +1044,6 @@ set_money_value_target_with_the_reference_currency = {
 		set_variable = {
 			name = money_value_target_1
 			value = var:money_value_target_with_the_reference_currency_effective
-		}
-		set_variable = {
-			name = amount_reference_currency_to_ensure_parity_fixe #quantité de valeur de référence nécessaire pour assurer la parité
-			value = amount_reference_currency_to_ensure_parity
 		}
 		if = { limit = { has_modifier = foreign_exchange_controls } remove_modifier = foreign_exchange_controls }
 		add_modifier = {

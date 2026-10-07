@@ -7,7 +7,7 @@
 ## Файлы
 - `common/law_groups/01_ef_laws.txt` — группы законов: `lawgroup_monetary_policy`, `lawgroup_monetary_system`, `lawgroup_currency_type`, `lawgroup_bimetalism_ratio` (группа ратио биметаллизма; видимость по биметаллизму не задана).
 - `common/laws/01_ef_currency_type.txt` — 95 законов `law_<cur>_currency` + `law_no_market_liquidity` (нет валюты). Одинаковая форма: `can_enact` = `has_modifier = has_central_bank` + список тегов, которым E&F выдаёт валюту в истории; 39 законов с `always = no` (товар закомментирован / вырезан под лимит 128 товаров); `unlocking_technologies = currency_standards`.
-- `common/laws/01_ef_monetary_system.txt` — `law_no_monetary_system`, `law_fiat_standard`, `law_silver_standard`, `law_bimetallism_standard`, `law_gold_standard`, `law_gold_exchange_standard`, `law_external_exchange_standard`; `on_activate` зовёт `on_activate_monetary_system_law` (01_economic_scripted_effects.txt:34937, тело E&F + `zz_ef_std_switch_before/_after`).
+- `common/laws/01_ef_monetary_system.txt` — `law_no_monetary_system`, `law_fiat_standard`, `law_silver_standard`, `law_bimetallism_standard`, `law_gold_standard`, `law_gold_exchange_standard`, `law_external_exchange_standard`; `on_activate` зовёт `on_activate_monetary_system_law` (01_economic_scripted_effects.txt:27957, тело E&F + `zz_ef_std_switch_before/_after`).
 - `common/laws/01_ef_bimetalism_ratio.txt` — `law_bimetallic_ratio_no/10/15/20` (соотношение золото:серебро).
 - `common/laws/01_ef_monetary_policy.txt` — `law_no_monetary_policy`, `law_revaluation`, `law_devaluation`, `law_large_monetary_policy` (на уровне ЦБ: `central-bank.md`).
 - `common/script_values/01_economic_currency_scripted_value.txt` (294 тыс. строк, 93 повтора на валюту; индекс ниже).
@@ -23,11 +23,11 @@
 - `common/treaty_articles/15_supply_agreement.txt` — `material_supply` (поставки со склада, подсистема запасов; валют не касается).
 - `common/scripted_triggers/00_ef_custom_trigger.txt` — `is_reference_currency` (:597), `is_reference_currency_no` (:602), `is_strong/balanced/weak_currency` (:607-:637, тело E&F, сравнение с `zz_ef_currency_strength` вместо медианы), `is_extreme_weak_currency` (:638), `law_currency_enacted` (:1154), `market_goods_is_currency` (:1443).
 - `common/scripted_effects/08_list_effect.txt` :202 `national_capacity_variable_list` — раз в год (`ef_on_yearly_pulse_country`, `on_actions/00_ef_on_action.txt:173`) выбор эталона: кандидаты `zz_ef_reference_candidate`, по `national_capacity_in_gold`, позиция 0 → модификатор `global_monetary_reference`; лог `EFE|`.
-- Прочее E&F: `common/scripted_effects/09_introduction_building_lvl.txt:34449` `introduction_new_currency` (выдача валюты/паритета при исследовании; зовёт `zz_ef_cur_zone_step` через `ld_currency_intro_metal.txt:75`).
+- Прочее E&F: `common/scripted_effects/09_introduction_building_lvl.txt:34444` `introduction_new_currency` (выдача валюты/паритета при исследовании; зовёт `zz_ef_cur_zone_step` через `ld_currency_intro_metal.txt:75`).
 
 ### Индекс `01_economic_currency_scripted_value.txt` (на каждую валюту `<cur>`)
 - :228-:294 общие `base_demande_currency*`, `target_demand_currency*`, `enough_foreign_currrency`.
-- :1926 `leading_currency_type`; :2800.. `currency_of_player_is_<cur>` = `global_var:currency_of_player_is_<cur>` (это script_value, не триггер; глобальные переменные обнуляются в `common/history/global/00_ef_economic_global_variable.txt:38438..`); :3181 `currency_of_player` (сумма).
+- :1926 `leading_currency_type`; :2800.. `currency_of_player_is_<cur>` = `global_var:currency_of_player_is_<cur>` (это script_value, не триггер; глобальные переменные обнуляются в `common/history/global/00_ef_economic_global_variable.txt:31602..`); :2996 `currency_of_player` (сумма).
 - :3306.. `money_value_<cur>` = `global_var:money_value_<cur>_global_var`; `money_value_<cur>_target`, `money_value_in_gold_<cur>`, `money_value_<cur>_related_to_country_law` (:4854, пересчёт под стандарт).
 - :7788 `is_reference_type`; :8476 `money_supply_state` (+`_monthly`, `_market_panel`, `_market_owner`) — цепочка `if has_law <cur>_currency add stockpiling_<cur>_state`.
 - :8871 `pop_savings`, :9066 `pop_savings_monthly`; :15013.. `<cur>_c_market_goods_*`, `stockpiling_<cur>_state/_private_bank`, `<cur>_c_total/global_stokpile`; `buy_/sell_<cur>_in_gold_market_panel`.

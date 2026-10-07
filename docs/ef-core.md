@@ -55,7 +55,7 @@
 | 41512–42367 | `devaluation_on`, `revaluation_on`, `set_reset_monetary_system_status`, `on_activate_*_law` | — |
 | 41765 | `trade_balance` (388) | да (месячный) |
 | 42367–42720 | `stockpiling_currency`, `stockpiling_currency_type_1` | да |
-| 42720–91109 | 95×3 `buy_<cur>_currency`, `sell_<cur>_currency`, `sell_<cur>_currency_crisis` (по ~510 строк на валюту) | да, из `ai_buy_sell_currency`; `_crisis` — из `00_on_action_main.txt:9164` и др.; пишут `gold_state_1`/`silver_state_1` |
+| 42720–91109 | 95×3 `buy_<cur>_currency`, `sell_<cur>_currency`, `sell_<cur>_currency_crisis` (по ~510 строк на валюту) | да, из `ai_buy_sell_currency`; `_crisis` — из `00_on_action_main.txt:9172` и др.; пишут `gold_state_1`/`silver_state_1` |
 | 91172–92241 | `private_bank_arbitrage_gold_drain`/`_silver_drain` | арбитраж живой (годовой, биметаллизм до 1873) |
 | 92575, 104603 | `reset_debt_in_national_currency[_player]` (2×2 тыс. строк) | да (GUI/смена закона) |
 | 94692–99107 | `stockpiling_capital_state_transfert`, `..._financial_center_place`, `enemy_capital_is_occuped` (1,8 тыс.), `enemy_stats_is_occuped` | да (месячный, решение ИИ, бой) |

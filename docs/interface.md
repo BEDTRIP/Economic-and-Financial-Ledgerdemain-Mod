@@ -49,9 +49,9 @@ GUI-тип регистрирует первый файл по имени (ASCII
 - `gui/ld_cb_rate_panel.gui` (генерат. `regen_ef_cb_rate_gui.py`) — `budget_panel_financial_panel_content` (:10): ключевая ставка,
   ЦБ, облигации, таблицы держателей (`zz_ef_bt_in_list`/`zz_ef_bt_out_list`), `mp_row` политики.
 - `gui/ld_currency_symbol_fix.gui` — единственное определение `currency_symbol_country_panel` (один текстбокс
-  `GetCustom('currency_symbol')`). Используется 5 раз в `00_ef_deported_gui_1.gui:180618…`.
+  `GetCustom('currency_symbol')`). Используется 5 раз в `00_ef_deported_gui_1.gui:180607…`.
 - `gui/ld_national_capacity_chart.gui` — единственное определение `ef_bp_national_capacity_piechart` (используется
-  `ld_economy_panel.gui:8335`); ряд в металле стандарта, доли — в золотом эквиваленте.
+  `ld_economy_panel.gui:8273`); ряд в металле стандарта, доли — в золотом эквиваленте.
 - `gui/ld_money_hook.gui` — мост «бюджет → скрипт» (см. ниже); регистрация `gui/scripted_widgets/ld_money_hook.txt`.
 - `gui/scripted_widgets/ld_pb_fso_widgets.gui` — журнальные виджеты `zz_pb_ef_fso_bubble_widget`, `zz_pb_ef_fso_overcap_widget`,
   `zz_pb_ef_fso_hide_bars_widget` (подключены `common/journal_entries/00_ef_financial_center_je.txt:184-199`).

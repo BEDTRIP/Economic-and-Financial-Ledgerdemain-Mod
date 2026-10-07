@@ -56,11 +56,11 @@ E&F. Игрок видит результат в карточках денежн
 
 ## Вызовы и связи
 - Из модели вызываются другие подсистемы: `zz_ef_cur_zone_step`, `zz_ef_silver_rate_update`, `zz_ef_reference_strength_step`, `zz_ef_currency_trade_step`, `zz_ef_rate_policy_costs`, `zz_ef_mp_step`, `zz_ef_clr_step`, `zz_ef_nr_dep_step`, `zz_ef_fx_liab_trim`, `zz_ef_consol_step`, `zz_ef_bond_ledger_step`, `zz_ef_cbfx_week_step` (клиринг, облигации, зона валюты, денежная политика).
-- Модель вызывается: `zz_ef_cur_intro_before/after` из `common/scripted_effects/09_introduction_building_lvl.txt:34453/34584` (обёртка `introduction_new_currency`).
+- Модель вызывается: `zz_ef_cur_intro_before/after` из `common/scripted_effects/09_introduction_building_lvl.txt:34448/34579` (обёртка `introduction_new_currency`).
 - Значения модели читают GUI и локализация: `gui/ld_economy_panel.gui`, `localization/<язык>/replace/ld_money_supply_replace_l_<язык>.yml`, `ld_cb_rate_panel_*`, `ld_monetary_policy_*`; `gui/ld_money_hook.gui` — единственный GUI-узел модели (виджет `zz_ef_money_hook`, скрытый, на `GetGlobalList('zz_ef_hook_countries')`).
 - Металл ЦБ меняется только покупкой зданием ЦБ (`zz_ef_cb_metal_buy`): раздачи металла E&F из рынка в `gold_state_1` нет.
 - Ручные операции E&F, меняющие счета мимо недельной записи (попадают в «прочее»/невязку `EFQ`): forex-кнопки `<cur>_buy/sell_in_gold` (`gold_state_1`), `stockpiling_currency_type_1` (девальвация/ревальвация: металл ↔ валютный запас), арбитраж частных банков (`private_bank_arbitrage_gold_drain`), `reset_law_event_currency` (пул −`private_bank_funds`, `government_loan` = 0), `global_monetary_reference_reset`, `transfer_gold_to_central_bank_metal_reserves`.
-- Национальный запас товаров E&F (`has_national_stockpile`): `national_stockpile_ef_on_monthly_pulse_country` → `flow_storing_on_action`, `storing_releasing_on_action` (`00_on_action_main.txt:16353`); ИИ раз в год `buy_sell_<g>_on_international_market` (`00_ef_on_action.txt:207`); казну не трогают — все 58 `add_treasury` в этом файле закомментированы.
+- Национальный запас товаров E&F (`has_national_stockpile`): `national_stockpile_ef_on_monthly_pulse_country` → `flow_storing_on_action`, `storing_releasing_on_action` (`00_on_action_main.txt:16361`); ИИ раз в год `buy_sell_<g>_on_international_market` (`00_ef_on_action.txt:207`); казну не трогают — все 58 `add_treasury` в этом файле закомментированы.
 
 ## Логи
 - `EFW` — недельная строка страны: M0..M3, счета (игрок и страны с ВВП > 20 млн).

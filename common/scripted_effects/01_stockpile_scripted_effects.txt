@@ -1335,10 +1335,6 @@ storing_artillery_1 = {
 			value = 0
 		}
 		set_variable = {
-			name = artillery_store_quantity_1_year
-			value = 0
-		}
-		set_variable = {
 			name = release_artillery_var_1
 			value = 0
 		}
@@ -1510,10 +1506,6 @@ storing_tanks_1 = {
 		}
 		set_variable = {
 			name = store_tanks_time
-			value = 0
-		}
-		set_variable = {
-			name = tanks_store_quantity_1_year
 			value = 0
 		}
 		set_variable = {
@@ -1862,10 +1854,6 @@ storing_grain_1 = {
 		}
 		set_variable = {
 			name = store_grain_time
-			value = 0
-		}
-		set_variable = {
-			name = grain_store_quantity_1_year
 			value = 0
 		}
 		set_variable = {
@@ -2391,10 +2379,6 @@ storing_groceries_1 = {
 			value = 0
 		}
 		set_variable = {
-			name = groceries_store_quantity_1_year
-			value = 0
-		}
-		set_variable = {
 			name = release_groceries_var_1
 			value = 0
 		}
@@ -2569,10 +2553,6 @@ storing_clothes_1 = {
 			value = 0
 		}
 		set_variable = {
-			name = clothes_store_quantity_1_year
-			value = 0
-		}
-		set_variable = {
 			name = release_clothes_var_1
 			value = 0
 		}
@@ -2744,10 +2724,6 @@ storing_paper_1 = {
 		}
 		set_variable = {
 			name = store_paper_time
-			value = 0
-		}
-		set_variable = {
-			name = paper_store_quantity_1_year
 			value = 0
 		}
 		set_variable = {
@@ -3621,10 +3597,6 @@ storing_iron_1 = {
 			value = 0
 		}
 		set_variable = {
-			name = iron_store_quantity_1_year
-			value = 0
-		}
-		set_variable = {
 			name = release_iron_var_1
 			value = 0
 		}
@@ -3970,10 +3942,6 @@ storing_hardwood_1 = {
 		}
 		set_variable = {
 			name = store_hardwood_time
-			value = 0
-		}
-		set_variable = {
-			name = hardwood_store_quantity_1_year
 			value = 0
 		}
 		set_variable = {
@@ -4496,10 +4464,6 @@ storing_engines_1 = {
 		}
 		set_variable = {
 			name = store_engines_time
-			value = 0
-		}
-		set_variable = {
-			name = engines_store_quantity_1_year
 			value = 0
 		}
 		set_variable = {
@@ -6024,10 +5988,6 @@ buy_sell_ammunition_on_international_market = {
 			name = buy_ammunition_on_international_market_1
 			value = quantity_ammunition_buy_on_global_market #quel quantité peut acheter le pays avec 10% de la gold reserve
 		}
-		change_global_variable = {
-			name = stockpiling_ammunition_var_global
-			subtract = var:buy_ammunition_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -6074,10 +6034,6 @@ buy_sell_ammunition_on_international_market = {
 			name = sell_ammunition_on_international_market_1
 			value = sell_ammunition_on_international_market_1_sc
 		}
-		change_global_variable = {
-			name = stockpiling_ammunition_var_global
-			add = var:sell_ammunition_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -6113,10 +6069,6 @@ buy_sell_small_arms_on_international_market = {
 		set_variable = {
 			name = buy_small_arms_on_international_market_1
 			value = quantity_small_arms_buy_on_global_market #quel quantité peut acheter le pays avec 10% de la gold reserve
-		}
-		change_global_variable = {
-			name = stockpiling_small_arms_var_global
-			subtract = var:buy_small_arms_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -6164,10 +6116,6 @@ buy_sell_small_arms_on_international_market = {
 			name = sell_small_arms_on_international_market_1
 			value = sell_small_arms_on_international_market_1_sc
 		}
-		change_global_variable = {
-			name = stockpiling_small_arms_var_global
-			add = var:sell_small_arms_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -6203,10 +6151,6 @@ buy_sell_artillery_on_international_market = {
 		set_variable = {
 			name = buy_artillery_on_international_market_1
 			value = quantity_artillery_buy_on_global_market #quel quantité peut acheter le pays avec 10% de la gold reserve
-		}
-		change_global_variable = {
-			name = stockpiling_artillery_var_global
-			subtract = var:buy_artillery_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -6254,10 +6198,6 @@ buy_sell_artillery_on_international_market = {
 			name = sell_artillery_on_international_market_1
 			value = sell_artillery_on_international_market_1_sc
 		}
-		change_global_variable = {
-			name = stockpiling_artillery_var_global
-			add = var:sell_artillery_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -6293,10 +6233,6 @@ buy_sell_tanks_on_international_market = {
 		set_variable = {
 			name = buy_tanks_on_international_market_1
 			value = quantity_tanks_buy_on_global_market #quel quantité peut acheter le pays avec 10% de la gold reserve
-		}
-		change_global_variable = {
-			name = stockpiling_tanks_var_global
-			subtract = var:buy_tanks_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -6344,10 +6280,6 @@ buy_sell_tanks_on_international_market = {
 			name = sell_tanks_on_international_market_1
 			value = sell_tanks_on_international_market_1_sc
 		}
-		change_global_variable = {
-			name = stockpiling_tanks_var_global
-			add = var:sell_tanks_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -6383,10 +6315,6 @@ buy_sell_aeroplanes_on_international_market = {
 		set_variable = {
 			name = buy_aeroplanes_on_international_market_1
 			value = quantity_aeroplanes_buy_on_global_market #quel quantité peut acheter le pays avec 10% de la gold reserve
-		}
-		change_global_variable = {
-			name = stockpiling_aeroplanes_var_global
-			subtract = var:buy_aeroplanes_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -6434,10 +6362,6 @@ buy_sell_aeroplanes_on_international_market = {
 			name = sell_aeroplanes_on_international_market_1
 			value = sell_aeroplanes_on_international_market_1_sc
 		}
-		change_global_variable = {
-			name = stockpiling_aeroplanes_var_global
-			add = var:sell_aeroplanes_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -6473,10 +6397,6 @@ buy_sell_grain_on_international_market = {
 		set_variable = {
 			name = buy_grain_on_international_market_1
 			value = quantity_grain_buy_on_global_market #quel quantité peut acheter le pays avec 10% de la gold reserve
-		}
-		change_global_variable = {
-			name = stockpiling_grain_var_global
-			subtract = var:buy_grain_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -6523,10 +6443,6 @@ buy_sell_grain_on_international_market = {
 		set_variable = {
 			name = sell_grain_on_international_market_1
 			value = sell_grain_on_international_market_1_sc
-		}
-		change_global_variable = {
-			name = stockpiling_grain_var_global
-			add = var:sell_grain_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -6646,10 +6562,6 @@ buy_sell_wood_on_international_market = {
 			name = buy_wood_on_international_market_1
 			value = quantity_wood_buy_on_global_market #quel quantité peut acheter le pays avec 10% de la gold reserve
 		}
-		change_global_variable = {
-			name = stockpiling_wood_var_global
-			subtract = var:buy_wood_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -6695,10 +6607,6 @@ buy_sell_wood_on_international_market = {
 		set_variable = {
 			name = sell_wood_on_international_market_1
 			value = sell_wood_on_international_market_1_sc
-		}
-		change_global_variable = {
-			name = stockpiling_wood_var_global
-			add = var:sell_wood_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -6818,10 +6726,6 @@ buy_sell_clothes_on_international_market = {
 			name = buy_clothes_on_international_market_1
 			value = quantity_clothes_buy_on_global_market #quel quantité peut acheter le pays avec 10% de la gold reserve
 		}
-		change_global_variable = {
-			name = stockpiling_clothes_var_global
-			subtract = var:buy_clothes_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -6867,10 +6771,6 @@ buy_sell_clothes_on_international_market = {
 		set_variable = {
 			name = sell_clothes_on_international_market_1
 			value = sell_clothes_on_international_market_1_sc
-		}
-		change_global_variable = {
-			name = stockpiling_clothes_var_global
-			add = var:sell_clothes_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -6990,10 +6890,6 @@ buy_sell_silk_on_international_market = {
 			name = buy_silk_on_international_market_1
 			value = quantity_silk_buy_on_global_market #quel quantité peut acheter le pays avec 10% de la gold reserve
 		}
-		change_global_variable = {
-			name = stockpiling_silk_var_global
-			subtract = var:buy_silk_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -7040,10 +6936,6 @@ buy_sell_silk_on_international_market = {
 			name = sell_silk_on_international_market_1
 			value = sell_silk_on_international_market_1_sc
 		}
-		change_global_variable = {
-			name = stockpiling_silk_var_global
-			add = var:sell_silk_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -7079,10 +6971,6 @@ buy_sell_dye_on_international_market = {
 		set_variable = {
 			name = buy_dye_on_international_market_1
 			value = quantity_dye_buy_on_global_market #quel quantité peut acheter le pays avec 10% de la gold reserve
-		}
-		change_global_variable = {
-			name = stockpiling_dye_var_global
-			subtract = var:buy_dye_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -7130,10 +7018,6 @@ buy_sell_dye_on_international_market = {
 			name = sell_dye_on_international_market_1
 			value = sell_dye_on_international_market_1_sc
 		}
-		change_global_variable = {
-			name = stockpiling_dye_var_global
-			add = var:sell_dye_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -7169,10 +7053,6 @@ buy_sell_sulfur_on_international_market = {
 		set_variable = {
 			name = buy_sulfur_on_international_market_1
 			value = quantity_sulfur_buy_on_global_market #quel quantité peut acheter le pays avec 10% de la gold reserve
-		}
-		change_global_variable = {
-			name = stockpiling_sulfur_var_global
-			subtract = var:buy_sulfur_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -7220,10 +7100,6 @@ buy_sell_sulfur_on_international_market = {
 			name = sell_sulfur_on_international_market_1
 			value = sell_sulfur_on_international_market_1_sc
 		}
-		change_global_variable = {
-			name = stockpiling_sulfur_var_global
-			add = var:sell_sulfur_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -7259,10 +7135,6 @@ buy_sell_coal_on_international_market = {
 		set_variable = {
 			name = buy_coal_on_international_market_1
 			value = quantity_coal_buy_on_global_market #quel quantité peut acheter le pays avec 10% de la gold reserve
-		}
-		change_global_variable = {
-			name = stockpiling_coal_var_global
-			subtract = var:buy_coal_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -7310,10 +7182,6 @@ buy_sell_coal_on_international_market = {
 			name = sell_coal_on_international_market_1
 			value = sell_coal_on_international_market_1_sc
 		}
-		change_global_variable = {
-			name = stockpiling_coal_var_global
-			add = var:sell_coal_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -7349,10 +7217,6 @@ buy_sell_iron_on_international_market = {
 		set_variable = {
 			name = buy_iron_on_international_market_1
 			value = quantity_iron_buy_on_global_market #quel quantité peut acheter le pays avec 10% de la gold reserve
-		}
-		change_global_variable = {
-			name = stockpiling_iron_var_global
-			subtract = var:buy_iron_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -7400,10 +7264,6 @@ buy_sell_iron_on_international_market = {
 			name = sell_iron_on_international_market_1
 			value = sell_iron_on_international_market_1_sc
 		}
-		change_global_variable = {
-			name = stockpiling_iron_var_global
-			add = var:sell_iron_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -7439,10 +7299,6 @@ buy_sell_lead_on_international_market = {
 		set_variable = {
 			name = buy_lead_on_international_market_1
 			value = quantity_lead_buy_on_global_market #quel quantité peut acheter le pays avec 10% de la gold reserve
-		}
-		change_global_variable = {
-			name = stockpiling_lead_var_global
-			subtract = var:buy_lead_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -7489,10 +7345,6 @@ buy_sell_lead_on_international_market = {
 		set_variable = {
 			name = sell_lead_on_international_market_1
 			value = sell_lead_on_international_market_1_sc
-		}
-		change_global_variable = {
-			name = stockpiling_lead_var_global
-			add = var:sell_lead_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -7612,10 +7464,6 @@ buy_sell_rubber_on_international_market = {
 			name = buy_rubber_on_international_market_1
 			value = quantity_rubber_buy_on_global_market #quel quantité peut acheter le pays avec 10% de la gold reserve
 		}
-		change_global_variable = {
-			name = stockpiling_rubber_var_global
-			subtract = var:buy_rubber_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -7662,10 +7510,6 @@ buy_sell_rubber_on_international_market = {
 			name = sell_rubber_on_international_market_1
 			value = sell_rubber_on_international_market_1_sc
 		}
-		change_global_variable = {
-			name = stockpiling_rubber_var_global
-			add = var:sell_rubber_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -7701,10 +7545,6 @@ buy_sell_oil_on_international_market = {
 		set_variable = {
 			name = buy_oil_on_international_market_1
 			value = quantity_oil_buy_on_global_market #quel quantité peut acheter le pays avec 10% de la gold reserve
-		}
-		change_global_variable = {
-			name = stockpiling_oil_var_global
-			subtract = var:buy_oil_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -7752,10 +7592,6 @@ buy_sell_oil_on_international_market = {
 			name = sell_oil_on_international_market_1
 			value = sell_oil_on_international_market_1_sc
 		}
-		change_global_variable = {
-			name = stockpiling_oil_var_global
-			add = var:sell_oil_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -7791,10 +7627,6 @@ buy_sell_engines_on_international_market = {
 		set_variable = {
 			name = buy_engines_on_international_market_1
 			value = quantity_engines_buy_on_global_market #quel quantité peut acheter le pays avec 10% de la gold reserve
-		}
-		change_global_variable = {
-			name = stockpiling_engines_var_global
-			subtract = var:buy_engines_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -7841,10 +7673,6 @@ buy_sell_engines_on_international_market = {
 		set_variable = {
 			name = sell_engines_on_international_market_1
 			value = sell_engines_on_international_market_1_sc
-		}
-		change_global_variable = {
-			name = stockpiling_engines_var_global
-			add = var:sell_engines_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -7964,10 +7792,6 @@ buy_sell_fertilizer_on_international_market = {
 			name = buy_fertilizer_on_international_market_1
 			value = quantity_fertilizer_buy_on_global_market #quel quantité peut acheter le pays avec 10% de la gold reserve
 		}
-		change_global_variable = {
-			name = stockpiling_fertilizer_var_global
-			subtract = var:buy_fertilizer_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -8013,10 +7837,6 @@ buy_sell_fertilizer_on_international_market = {
 		set_variable = {
 			name = sell_fertilizer_on_international_market_1
 			value = sell_fertilizer_on_international_market_1_sc
-		}
-		change_global_variable = {
-			name = stockpiling_fertilizer_var_global
-			add = var:sell_fertilizer_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -8382,10 +8202,6 @@ buy_sell_radios_on_international_market = {
 			name = buy_radios_on_international_market_1
 			value = quantity_radios_buy_on_global_market #quel quantité peut acheter le pays avec 10% de la gold reserve
 		}
-		change_global_variable = {
-			name = stockpiling_radios_var_global
-			subtract = var:buy_radios_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -8432,10 +8248,6 @@ buy_sell_radios_on_international_market = {
 			name = sell_radios_on_international_market_1
 			value = sell_radios_on_international_market_1_sc
 		}
-		change_global_variable = {
-			name = stockpiling_radios_var_global
-			add = var:sell_radios_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -8471,10 +8283,6 @@ buy_sell_opium_on_international_market = {
 		set_variable = {
 			name = buy_opium_on_international_market_1
 			value = quantity_opium_buy_on_global_market #quel quantité peut acheter le pays avec 10% de la gold reserve
-		}
-		change_global_variable = {
-			name = stockpiling_opium_var_global
-			subtract = var:buy_opium_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -8522,10 +8330,6 @@ buy_sell_opium_on_international_market = {
 			name = sell_opium_on_international_market_1
 			value = sell_opium_on_international_market_1_sc
 		}
-		change_global_variable = {
-			name = stockpiling_opium_var_global
-			add = var:sell_opium_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -8564,10 +8368,6 @@ REPLACE:buy_sell_ammunition_on_international_market = {
 		set_variable = {
 			name = buy_ammunition_on_international_market_1
 			value = quantity_ammunition_buy_on_global_market
-		}
-		change_global_variable = {
-			name = stockpiling_ammunition_var_global
-			subtract = var:buy_ammunition_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -8614,10 +8414,6 @@ REPLACE:buy_sell_ammunition_on_international_market = {
 			name = sell_ammunition_on_international_market_1
 			value = sell_ammunition_on_international_market_1_sc
 		}
-		change_global_variable = {
-			name = stockpiling_ammunition_var_global
-			add = var:sell_ammunition_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -8651,10 +8447,6 @@ REPLACE:buy_sell_tanks_on_international_market = {
 		set_variable = {
 			name = buy_tanks_on_international_market_1
 			value = quantity_tanks_buy_on_global_market
-		}
-		change_global_variable = {
-			name = stockpiling_tanks_var_global
-			subtract = var:buy_tanks_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -8701,10 +8493,6 @@ REPLACE:buy_sell_tanks_on_international_market = {
 			name = sell_tanks_on_international_market_1
 			value = sell_tanks_on_international_market_1_sc
 		}
-		change_global_variable = {
-			name = stockpiling_tanks_var_global
-			add = var:sell_tanks_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -8738,10 +8526,6 @@ REPLACE:buy_sell_aeroplanes_on_international_market = {
 		set_variable = {
 			name = buy_aeroplanes_on_international_market_1
 			value = quantity_aeroplanes_buy_on_global_market
-		}
-		change_global_variable = {
-			name = stockpiling_aeroplanes_var_global
-			subtract = var:buy_aeroplanes_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -8788,10 +8572,6 @@ REPLACE:buy_sell_aeroplanes_on_international_market = {
 			name = sell_aeroplanes_on_international_market_1
 			value = sell_aeroplanes_on_international_market_1_sc
 		}
-		change_global_variable = {
-			name = stockpiling_aeroplanes_var_global
-			add = var:sell_aeroplanes_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -8825,10 +8605,6 @@ REPLACE:buy_sell_silk_on_international_market = {
 		set_variable = {
 			name = buy_silk_on_international_market_1
 			value = quantity_silk_buy_on_global_market
-		}
-		change_global_variable = {
-			name = stockpiling_silk_var_global
-			subtract = var:buy_silk_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -8875,10 +8651,6 @@ REPLACE:buy_sell_silk_on_international_market = {
 			name = sell_silk_on_international_market_1
 			value = sell_silk_on_international_market_1_sc
 		}
-		change_global_variable = {
-			name = stockpiling_silk_var_global
-			add = var:sell_silk_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -8912,10 +8684,6 @@ REPLACE:buy_sell_dye_on_international_market = {
 		set_variable = {
 			name = buy_dye_on_international_market_1
 			value = quantity_dye_buy_on_global_market
-		}
-		change_global_variable = {
-			name = stockpiling_dye_var_global
-			subtract = var:buy_dye_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -8962,10 +8730,6 @@ REPLACE:buy_sell_dye_on_international_market = {
 			name = sell_dye_on_international_market_1
 			value = sell_dye_on_international_market_1_sc
 		}
-		change_global_variable = {
-			name = stockpiling_dye_var_global
-			add = var:sell_dye_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -8999,10 +8763,6 @@ REPLACE:buy_sell_rubber_on_international_market = {
 		set_variable = {
 			name = buy_rubber_on_international_market_1
 			value = quantity_rubber_buy_on_global_market
-		}
-		change_global_variable = {
-			name = stockpiling_rubber_var_global
-			subtract = var:buy_rubber_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -9049,10 +8809,6 @@ REPLACE:buy_sell_rubber_on_international_market = {
 			name = sell_rubber_on_international_market_1
 			value = sell_rubber_on_international_market_1_sc
 		}
-		change_global_variable = {
-			name = stockpiling_rubber_var_global
-			add = var:sell_rubber_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -9086,10 +8842,6 @@ REPLACE:buy_sell_oil_on_international_market = {
 		set_variable = {
 			name = buy_oil_on_international_market_1
 			value = quantity_oil_buy_on_global_market
-		}
-		change_global_variable = {
-			name = stockpiling_oil_var_global
-			subtract = var:buy_oil_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -9136,10 +8888,6 @@ REPLACE:buy_sell_oil_on_international_market = {
 			name = sell_oil_on_international_market_1
 			value = sell_oil_on_international_market_1_sc
 		}
-		change_global_variable = {
-			name = stockpiling_oil_var_global
-			add = var:sell_oil_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -9173,10 +8921,6 @@ REPLACE:buy_sell_engines_on_international_market = {
 		set_variable = {
 			name = buy_engines_on_international_market_1
 			value = quantity_engines_buy_on_global_market
-		}
-		change_global_variable = {
-			name = stockpiling_engines_var_global
-			subtract = var:buy_engines_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -9222,10 +8966,6 @@ REPLACE:buy_sell_engines_on_international_market = {
 		set_variable = {
 			name = sell_engines_on_international_market_1
 			value = sell_engines_on_international_market_1_sc
-		}
-		change_global_variable = {
-			name = stockpiling_engines_var_global
-			add = var:sell_engines_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -9340,10 +9080,6 @@ REPLACE:buy_sell_fertilizer_on_international_market = {
 			name = buy_fertilizer_on_international_market_1
 			value = quantity_fertilizer_buy_on_global_market
 		}
-		change_global_variable = {
-			name = stockpiling_fertilizer_var_global
-			subtract = var:buy_fertilizer_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -9388,10 +9124,6 @@ REPLACE:buy_sell_fertilizer_on_international_market = {
 		set_variable = {
 			name = sell_fertilizer_on_international_market_1
 			value = sell_fertilizer_on_international_market_1_sc
-		}
-		change_global_variable = {
-			name = stockpiling_fertilizer_var_global
-			add = var:sell_fertilizer_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -9664,10 +9396,6 @@ REPLACE:buy_sell_radios_on_international_market = {
 			name = buy_radios_on_international_market_1
 			value = quantity_radios_buy_on_global_market
 		}
-		change_global_variable = {
-			name = stockpiling_radios_var_global
-			subtract = var:buy_radios_on_international_market_1
-		}
 		every_scope_state = {
 			if = {
 				limit = {
@@ -9712,10 +9440,6 @@ REPLACE:buy_sell_radios_on_international_market = {
 		set_variable = {
 			name = sell_radios_on_international_market_1
 			value = sell_radios_on_international_market_1_sc
-		}
-		change_global_variable = {
-			name = stockpiling_radios_var_global
-			add = var:sell_radios_on_international_market_1
 		}
 		every_scope_state = {
 			if = {
@@ -9794,10 +9518,6 @@ ef_ai_ammunition_store_release = {
 		set_variable = {
 			name = ammunition_store_status
 			value = 1
-		}
-		set_variable = {
-			name = store_ammunition_var_1
-			value = ammunition_store_quantity_1_week
 		}
 		set_variable = {
 			name = ammunition_store_month_fixe
@@ -10066,10 +9786,6 @@ ef_ai_artillery_store_release = {
 		set_variable = {
 			name = artillery_store_status
 			value = 1
-		}
-		set_variable = {
-			name = store_artillery_var_1
-			value = artillery_store_quantity_1_week
 		}
 		set_variable = {
 			name = artillery_store_month_fixe
@@ -11010,10 +10726,6 @@ ef_ai_clothes_store_release = {
 			value = 1
 		}
 		set_variable = {
-			name = store_clothes_var_1
-			value = clothes_store_quantity_1_week
-		}
-		set_variable = {
 			name = clothes_store_month_fixe
 			value = var:clothes_store_month
 		}
@@ -11414,10 +11126,6 @@ ef_ai_dye_store_release = {
 		set_variable = {
 			name = dye_store_status
 			value = 1
-		}
-		set_variable = {
-			name = store_dye_var_1
-			value = dye_store_quantity_1_week
 		}
 		set_variable = {
 			name = dye_store_month_fixe
@@ -11956,10 +11664,6 @@ ef_ai_lead_store_release = {
 			value = 1
 		}
 		set_variable = {
-			name = store_lead_var_1
-			value = lead_store_quantity_1_week
-		}
-		set_variable = {
 			name = lead_store_month_fixe
 			value = var:lead_store_month
 		}
@@ -12092,10 +11796,6 @@ ef_ai_hardwood_store_release = {
 		set_variable = {
 			name = hardwood_store_status
 			value = 1
-		}
-		set_variable = {
-			name = store_hardwood_var_1
-			value = hardwood_store_quantity_1_week
 		}
 		set_variable = {
 			name = hardwood_store_month_fixe
