@@ -580,14 +580,19 @@ zz_ef_pop_start_deposits = {
 	value = zz_ef_pop_start_savings
 	# R1б.1: out of the pool as it is; Хвост R1 (the user, 8.10): at most zz_ef_dep_start_pool_share of it -- the rest is
 	# the banks' own capital (was: the norm, 0.3-0.6 GDP, took the whole pool, the capital started at ~0 and the deposits'
-	# interest ran it negative)
+	# interest ran it negative). The pool less the book's other claims on it: at the first step the treasury's surplus is
+	# already in the pool as its deposit (zz_ef_bank_gov_dep; r1008_001240: Switzerland 182k of 183.5k, Britain 2.4M of
+	# 2.5M) -- 90% of the whole pool left the capital at -2.3M (Britain), -2.8M (Russia), -7.9M (Qing)
 	max = {
 		value = investment_pool
+		subtract = zz_ef_bank_book_v
+		if = { limit = { has_variable = zz_ef_bank_capital } add = var:zz_ef_bank_capital }
 		min = 0
 		multiply = zz_ef_dep_start_pool_share
 	}
 }
-# Хвост R1: the share of the pool the pops' start deposits may take; the rest stays the banks' capital
+# Хвост R1: the share of the pool (its own part, less the other claims of the book) the pops' start deposits may take;
+# the rest stays the banks' capital
 zz_ef_dep_start_pool_share = 0.9
 # ---- pops' deposits (the receiver) -------
 # Deposit rate: the key rate - 1.5 pp, at least 0.5% (the banks' margin).
