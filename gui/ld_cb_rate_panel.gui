@@ -423,7 +423,7 @@ types zz_ef_cb_rate_panel
 
 					blockoverride "onclick" {
 						onclick = "[GetVariableSystem.Toggle('info_finance_main')]"
-						onclick = "[GetScriptedGui('info_finance_main_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+						# onclick = "[GetScriptedGui('info_finance_main_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"  # ФК2: scripted gui нет в моде
 
 					}
 
@@ -919,7 +919,7 @@ types zz_ef_cb_rate_panel
 
 					blockoverride "onclick" {
 						onclick = "[GetVariableSystem.Toggle('info_finance_detailed')]"
-						onclick = "[GetScriptedGui('info_finance_detailed_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+						# onclick = "[GetScriptedGui('info_finance_detailed_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"  # ФК2: scripted gui нет в моде
 
 					}
 
@@ -1533,40 +1533,40 @@ types zz_ef_cb_rate_panel
 							size = { 60 20 }
 							align = hcenter|nobaseline
 							text = "FP_TITEL"
-							datacontext = "[GetScriptedGui('gdpg_sort_by_country_gdp')]"
-							onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"
+							# datacontext = "[GetScriptedGui('gdpg_sort_by_country_gdp')]"  # ФК2: scripted gui нет в моде
+							# onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"  # ФК2: scripted gui нет в моде
 						}
 						sort_button = {
 							layoutpolicy_horizontal = preferred
 							size = { 200 20 }
 							align = hcenter|nobaseline
 							text = "FP_NAME"
-							datacontext = "[GetScriptedGui('gdpg_sort_by_country_gdp')]"
-							onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"
+							# datacontext = "[GetScriptedGui('gdpg_sort_by_country_gdp')]"  # ФК2: scripted gui нет в моде
+							# onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"  # ФК2: scripted gui нет в моде
 						}
 						sort_button = {
 							layoutpolicy_horizontal = preferred
 							size = { 120 20 }
 							align = hcenter|nobaseline
 							text = "FP_QTT"
-							datacontext = "[GetScriptedGui('gdpg_sort_by_country_gdp')]"
-							onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"
+							# datacontext = "[GetScriptedGui('gdpg_sort_by_country_gdp')]"  # ФК2: scripted gui нет в моде
+							# onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"  # ФК2: scripted gui нет в моде
 						}
 						sort_button = {
 							layoutpolicy_horizontal = preferred
 							size = { 120 20 }
 							align = hcenter|nobaseline
 							text = "FP_PRICE"
-							datacontext = "[GetScriptedGui('gdpg_sort_by_country_gdp')]"
-							onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"
+							# datacontext = "[GetScriptedGui('gdpg_sort_by_country_gdp')]"  # ФК2: scripted gui нет в моде
+							# onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"  # ФК2: scripted gui нет в моде
 						}
 						sort_button = {
 							layoutpolicy_horizontal = preferred
 							size = { 120 20 }
 							align = hcenter|nobaseline
 							text = "FP_CAP"
-							datacontext = "[GetScriptedGui('gdpg_sort_by_country_gdp')]"
-							onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"
+							# datacontext = "[GetScriptedGui('gdpg_sort_by_country_gdp')]"  # ФК2: scripted gui нет в моде
+							# onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"  # ФК2: scripted gui нет в моде
 						}
 					}
 				}
@@ -1711,8 +1711,8 @@ types zz_ef_cb_rate_panel
 								size = { 190 20 }
 								align = hcenter|nobaseline
 								text = "COUNTRY_TITLE"
-								datacontext = "[GetScriptedGui('gdpg_sort_by_country_gdp')]"
-								onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"
+								# datacontext = "[GetScriptedGui('gdpg_sort_by_country_gdp')]"  # ФК2: scripted gui нет в моде
+								# onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"  # ФК2: scripted gui нет в моде
 							}
 							sort_button = {
 								layoutpolicy_horizontal = preferred
@@ -1896,8 +1896,8 @@ types zz_ef_cb_rate_panel
 								size = { 120 20 }
 								align = hcenter|nobaseline
 								text = "COUNTRY_TITLE"
-								datacontext = "[GetScriptedGui('gdpg_sort_by_country_gdp')]"
-								onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"
+								# datacontext = "[GetScriptedGui('gdpg_sort_by_country_gdp')]"  # ФК2: scripted gui нет в моде
+								# onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"  # ФК2: scripted gui нет в моде
 							}
 							sort_button = {
 								layoutpolicy_horizontal = preferred
@@ -2370,8 +2370,8 @@ types zz_ef_cb_rate_panel
 									size = { 180 20 }
 									align = hcenter|nobaseline
 									text = "privat_bank"
-									datacontext = "[GetScriptedGui('gdpg_sort_by_country_gdp')]"
-									onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"
+									# datacontext = "[GetScriptedGui('gdpg_sort_by_country_gdp')]"  # ФК2: scripted gui нет в моде
+									# onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"  # ФК2: scripted gui нет в моде
 								}
 								sort_button = {
 									layoutpolicy_horizontal = preferred
@@ -2609,7 +2609,7 @@ types zz_ef_cb_rate_panel
 
 					blockoverride "onclick" {
 						onclick = "[GetVariableSystem.Toggle('ai_privat_bank_seller_country_general')]"
-						onclick = "[GetScriptedGui('ai_privat_bank_seller_country_general_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+						# onclick = "[GetScriptedGui('ai_privat_bank_seller_country_general_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"  # ФК2: scripted gui нет в моде
 
 					}
 
@@ -10113,7 +10113,7 @@ types zz_ef_cb_rate_panel
 
 					blockoverride "onclick" {
 						onclick = "[GetVariableSystem.Toggle('GOLD_BALANCE_BY_COUNTRY_TITLE')]"
-						onclick = "[GetScriptedGui('GOLD_BALANCE_BY_COUNTRY_TITLE_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+						# onclick = "[GetScriptedGui('GOLD_BALANCE_BY_COUNTRY_TITLE_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"  # ФК2: scripted gui нет в моде
 						onclick = "[GetScriptedGui('actualise_trade_balance_value_for_comparaison').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 					}
 
@@ -10547,7 +10547,7 @@ types zz_ef_cb_rate_panel
 
 					blockoverride "onclick" {
 						onclick = "[GetVariableSystem.Toggle('GDP_GROWTH_RATE_TITLE')]"
-						onclick = "[GetScriptedGui('GDP_GROWTH_RATE_TITLE_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+						# onclick = "[GetScriptedGui('GDP_GROWTH_RATE_TITLE_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"  # ФК2: scripted gui нет в моде
 
 					}
 
@@ -10579,8 +10579,8 @@ types zz_ef_cb_rate_panel
 									size = { 110 20 }
 									align = hcenter|nobaseline
 									text = "COUNTRY_TITLE"
-									datacontext = "[GetScriptedGui('gdpg_sort_by_country_gdp')]"
-									onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"
+									# datacontext = "[GetScriptedGui('gdpg_sort_by_country_gdp')]"  # ФК2: scripted gui нет в моде
+									# onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"  # ФК2: scripted gui нет в моде
 								}
 								sort_button = {
 									layoutpolicy_horizontal = preferred
@@ -11354,7 +11354,7 @@ types zz_ef_cb_rate_panel
 
 								blockoverride "onclick" {
 									onclick = "[GetVariableSystem.Toggle('your_interest')]"
-									onclick = "[GetScriptedGui('your_interest_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									# onclick = "[GetScriptedGui('your_interest_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"  # ФК2: scripted gui нет в моде
 									#onclick = "[GetScriptedGui('country_credit_rating_actualized').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 
@@ -11808,7 +11808,7 @@ types zz_ef_cb_rate_panel
 
 								blockoverride "onclick" {
 									onclick = "[GetVariableSystem.Toggle('COUNTRY_RATING_TITLE')]"
-									onclick = "[GetScriptedGui('COUNTRY_RATING_TITLE_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+									# onclick = "[GetScriptedGui('COUNTRY_RATING_TITLE_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"  # ФК2: scripted gui нет в моде
 									onclick = "[GetScriptedGui('country_credit_rating_actualized').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								}
 
@@ -12579,7 +12579,7 @@ types zz_ef_cb_rate_panel
 
 							blockoverride "onclick" {
 								onclick = "[GetVariableSystem.Toggle('seller_country')]"
-								onclick = "[GetScriptedGui('seller_country_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								# onclick = "[GetScriptedGui('seller_country_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"  # ФК2: scripted gui нет в моде
 
 							}
 
@@ -15450,7 +15450,7 @@ types zz_ef_cb_rate_panel
 
 							blockoverride "onclick" {
 								onclick = "[GetVariableSystem.Toggle('ai_seller_country_general')]"
-								onclick = "[GetScriptedGui('ai_seller_country_general_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								# onclick = "[GetScriptedGui('ai_seller_country_general_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"  # ФК2: scripted gui нет в моде
 
 							}
 
@@ -17173,7 +17173,7 @@ types zz_ef_cb_rate_panel
 
 							blockoverride "onclick" {
 								onclick = "[GetVariableSystem.Toggle('national_debt')]"
-								onclick = "[GetScriptedGui('national_debt_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								# onclick = "[GetScriptedGui('national_debt_list_gerenation_ordered').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"  # ФК2: scripted gui нет в моде
 
 							}
 
