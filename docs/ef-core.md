@@ -51,7 +51,7 @@
 | 7956–10161 | `fluctuations_*`, `cumulative_inflation_*`, 5 групп `inflation_on_<type>_market_value_fluctuations` + `_rolling_inflation_6_months_effect` + `reset_*` | да (месячный/годовой) |
 | 10024–10161 | `monetary_policy_inflation[_reset|_reset_law|_base_rate]` | да (игрок) |
 | 10161–11434 | `currency_strength_modifier`, `inflation_modifier`, `money_value_target_modification`, `devaluation/revaluation_money_value_target*` | да |
-| 14606–17370 | `extreme_weak_currency_solution[_player]`, `reset_balance`, `reset_law_event_currency`, `reset_debt_in_currency`, `reset_debt_currency_reserve_and_export_value` (24 тыс. строк) | да — из scripted_guis (кнопки смены закона) |
+| 14606–17370 | `extreme_weak_currency_solution[_player]` (счётчик; ветка денежной реформы, `reset_balance`, `reset_law_event_currency`, `reset_debt_currency_reserve_and_export_value` — в `_archive/ef_currency_reform/`, R2), `reset_debt_in_currency` | да — из scripted_guis (кнопки смены закона) |
 | 41512–42367 | `devaluation_on`, `revaluation_on`, `set_reset_monetary_system_status`, `on_activate_*_law` | — |
 | 41765 | `trade_balance` (388) | да (месячный) |
 | 42367–42720 | `stockpiling_currency`, `stockpiling_currency_type_1` | да |

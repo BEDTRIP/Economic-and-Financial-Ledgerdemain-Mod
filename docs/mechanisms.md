@@ -8,7 +8,7 @@
 коэффициент, закомментированный вызов); `мёртвый` — ни откуда не вызывается; `дубль` — считает то же или пишет те же
 счета, что модель `ld_*`. Строки файлов — на момент записи, при правке файла сдвигаются: искать по имени.
 
-Итого: мёртвый 4, выключен 0, дубль 4, живой 223.
+Итого: мёртвый 4, выключен 0, дубль 4, живой 222.
 
 ## Денежная модель и металл (`money-model.md`)
 
@@ -38,7 +38,6 @@
 | Сид переменных запасов на регионах (7 переменных) | живой | common/scripted_effects/ld_stockpile_state_var_seed.txt:38-92; common/on_actions/ld_stockpile_state_var_init.txt; common/history/global/zz_ef_init_stockpiling_state_vars.txt | on_game_started_after_lobby + месячная страховка по глобальной zz_ef_stockpile_state_vars_seeded | — |
 | E&F: арбитраж частных банков (private_bank_arbitrage_gold_drain, gold_state_1_fix) | живой | common/scripted_effects/00_on_action_main.txt:954-1036; common/scripted_effects/01_economic_scripted_effects.txt (private_bank_arbitrage_gold_drain) | годовой central_bank_ef_on_yearly_pulse_country меняет gold_state_1/silver_state_1 мимо недельной записи; сверка помечает как oth (EFQ) | — |
 | E&F: forex ЦБ за золото (<cur>_buy_in_gold / <cur>_sell_in_gold, 95 валют) | живой | common/scripted_guis/00_economic_scripted_guis.txt:1643,1749,2048 | кнопки пишут gold_state_1/silver_state_1 и валютные запасы; в недельной сверке попадают в oth (EFQ) | окно валют E&F |
-| E&F: reset_law_event_currency (сброс валюты после кризиса) | живой | common/scripted_effects/01_economic_scripted_effects.txt:13770 | тихо делает add_investment_pool -private_bank_funds, government_loan = 0, stockpiling_<cur>_state_1 = 0 (пул и запас валюты мимо модели) | — |
 | E&F: <cur>_c_no_own (запас валюты минус money_supply, 95 валют) | живой | common/script_values/01_economic_currency_scripted_value.txt:14334; currency_no_own :11085 | читается только currency_no_own → gui/ld_economy_panel.gui:6975; счета не пишет; прежняя сумма в money_supply_stockpile_by_other_country заменена на zz_ef_fx_liab_all | ld_economy_panel.gui (строка currency_no_own) |
 
 ## Валюты и стандарты (`currencies.md`)

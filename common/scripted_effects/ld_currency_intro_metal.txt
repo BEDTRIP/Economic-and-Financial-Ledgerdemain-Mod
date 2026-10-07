@@ -1,8 +1,8 @@
 ﻿# В2.4 (decided 4.10, М.10 а; 5.10): E&F's metal "from nothing" at a currency's introduction is switched off.
 # E&F's introduction_of_<currency> (95 effects, 09_introduction_building_lvl.txt, ~190 edits) adds to the capital's
 # gold_state_1 / silver_state_1 (money in E&F's count + its stock + building savings) x the new parity -- a cover far
-# over 100% out of nowhere; reset_law_event_currency (the currency's reset after a crisis) zeroes the metal
-# (scripted_effects/zz_ef_currency_reset_keep_metal.txt keeps it now). Wrapped around introduction_new_currency
+# over 100% out of nowhere (E&F's currency reform after a crisis, reset_law_event_currency, is off until R3). Wrapped
+# around introduction_new_currency
 # (zz_ef_cm_bank_spawn.txt):
 #   * before the country's first step (var:zz_ef_metal_started): untouched -- E&F's start, which the first step takes;
 #   * later: the capital's metal is put back as it was before the call; a new CB starts with no metal and buys it on

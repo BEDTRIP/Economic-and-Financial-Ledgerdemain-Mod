@@ -139,7 +139,7 @@ on_action — `common/on_actions/ld_roles_on_actions.txt`): глобальные
 - Модель вызывается: `zz_ef_cur_intro_before/after` из `common/scripted_effects/09_introduction_building_lvl.txt:34332/34463` (обёртка `introduction_new_currency`).
 - Значения модели читают GUI и локализация: `gui/ld_economy_panel.gui`, `localization/<язык>/replace/ld_money_supply_replace_l_<язык>.yml`, `ld_cb_rate_panel_*`, `ld_monetary_policy_*`; `gui/ld_money_hook.gui` — единственный GUI-узел модели (виджет `zz_ef_money_hook`, скрытый, на `GetGlobalList('zz_ef_hook_countries')`).
 - Металл ЦБ меняется только покупкой зданием ЦБ (`zz_ef_cb_metal_buy`): раздачи металла E&F из рынка в `gold_state_1` нет.
-- Ручные операции E&F, меняющие счета мимо недельной записи (попадают в «прочее»/невязку `EFQ`): forex-кнопки `<cur>_buy/sell_in_gold` (`gold_state_1`), `stockpiling_currency_type_1` (девальвация/ревальвация: металл ↔ валютный запас), арбитраж частных банков (`private_bank_arbitrage_gold_drain`), `reset_law_event_currency` (пул −`private_bank_funds`, `government_loan` = 0), `global_monetary_reference_reset`, `transfer_gold_to_central_bank_metal_reserves`.
+- Ручные операции E&F, меняющие счета мимо недельной записи (попадают в «прочее»/невязку `EFQ`): forex-кнопки `<cur>_buy/sell_in_gold` (`gold_state_1`), `stockpiling_currency_type_1` (девальвация/ревальвация: металл ↔ валютный запас), арбитраж частных банков (`private_bank_arbitrage_gold_drain`), `global_monetary_reference_reset`, `transfer_gold_to_central_bank_metal_reserves`.
 
 ## Логи
 - `EFW` — недельная строка страны: M0..M3, счета (игрок и страны с ВВП > 20 млн).

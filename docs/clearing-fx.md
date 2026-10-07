@@ -18,7 +18,7 @@ E&F `trade_balance` отключён. Ключи `ld_*` — с префиксо�
 - `common/production_methods/00_ef_market_liquidity.txt` — `pm_no_market_liquidity`, `pm_market_liquidity_currency` (вход `goods_input_liquidity_currency_add = 28` — бизнесы покупают услугу расчётов у банков), далее методы военных заказов (`pm_government_aid_*`).
 - E&F, форекс и арбитраж:
   - ИИ-форекс E&F (`ai_buy_sell_currency` → `buy_/sell_<cur>_currency`) — в `_archive/ef_ai_forex/` (R2, Д.R2.2; форекс ЦБ сделками — R8); в `central_bank_ef_on_yearly_pulse_country` остался `monetary_systeme_transition`; арбитражи — см. поток.
-  - `common/scripted_effects/01_economic_scripted_effects.txt`: `sell_<cur>_currency_crisis` (кризисная продажа, из `all_currency_resold`), `private_bank_arbitrage_gold_drain` (:31006), `private_bank_arbitrage_silver_drain` (:31264), `trade_balance` (:24251).
+  - `common/scripted_effects/01_economic_scripted_effects.txt`: `sell_<cur>_currency_crisis` (кризисная продажа, из `all_currency_resold`), `private_bank_arbitrage_gold_drain` (:17959), `private_bank_arbitrage_silver_drain` (:18217), `trade_balance` (:11204).
   - `common/scripted_guis/00_economic_scripted_guis.txt`: `<cur>_buy_in_gold`/`<cur>_sell_in_gold` — кнопки игрока (окно в `gui/00_ef_deported_gui_1.gui`); `09_ef_other.txt:2182` `trade_balance_actualized`, `:5283` `trade_balance_0`.
   - `common/script_values/00_economic_scripted_value.txt:5661-5913` — `trade_balance_*` значения; `01_economic_currency_scripted_value.txt:285996…` — `trade_balance_in_gold*`.
 
