@@ -23,11 +23,11 @@
 - `common/treaty_articles/15_supply_agreement.txt` — `material_supply` (поставки со склада, подсистема запасов; валют не касается).
 - `common/scripted_triggers/00_ef_custom_trigger.txt` — `is_reference_currency` (:597), `is_reference_currency_no` (:602), `is_strong/balanced/weak_currency` (:607-:637, тело E&F, сравнение с `zz_ef_currency_strength` вместо медианы), `is_extreme_weak_currency` (:638), `law_currency_enacted` (:1154), `market_goods_is_currency` (:1443).
 - `common/scripted_effects/08_list_effect.txt` :202 `national_capacity_variable_list` — раз в год (`ef_on_yearly_pulse_country`, `on_actions/00_ef_on_action.txt:173`) выбор эталона: кандидаты `zz_ef_reference_candidate`, по `national_capacity_in_gold`, позиция 0 → модификатор `global_monetary_reference`; лог `EFE|`.
-- Прочее E&F: `common/scripted_effects/09_introduction_building_lvl.txt:34419` `introduction_new_currency` (выдача валюты/паритета при исследовании; зовёт `zz_ef_cur_zone_step` через `ld_currency_intro_metal.txt:75`).
+- Прочее E&F: `common/scripted_effects/09_introduction_building_lvl.txt:34414` `introduction_new_currency` (выдача валюты/паритета при исследовании; зовёт `zz_ef_cur_zone_step` через `ld_currency_intro_metal.txt:75`).
 
 ### Индекс `01_economic_currency_scripted_value.txt` (на каждую валюту `<cur>`)
 - :228-:294 общие `base_demande_currency*`, `target_demand_currency*`, `enough_foreign_currrency`.
-- :1926 `leading_currency_type`; :2800.. `currency_of_player_is_<cur>` = `global_var:currency_of_player_is_<cur>` (это script_value, не триггер; глобальные переменные обнуляются в `common/history/global/00_ef_economic_global_variable.txt:31602..`); :2996 `currency_of_player` (сумма).
+- :1926 `leading_currency_type`; :2800.. `currency_of_player_is_<cur>` = `global_var:currency_of_player_is_<cur>` (это script_value, не триггер; глобальные переменные обнуляются в `common/history/global/00_ef_economic_global_variable.txt:31573..`); :2971 `currency_of_player` (сумма).
 - :3306.. `money_value_<cur>` = `global_var:money_value_<cur>_global_var`; `money_value_<cur>_target`, `money_value_in_gold_<cur>`, `money_value_<cur>_related_to_country_law` (:4854, пересчёт под стандарт).
 - :7788 `is_reference_type`; :8476 `money_supply_state` (+`_monthly`, `_market_panel`, `_market_owner`) — цепочка `if has_law <cur>_currency add stockpiling_<cur>_state`.
 - :8871 `pop_savings`, :9066 `pop_savings_monthly`; :15013.. `<cur>_c_market_goods_*`, `stockpiling_<cur>_state/_private_bank`, `<cur>_c_total/global_stokpile`; `buy_/sell_<cur>_in_gold_market_panel`.
@@ -36,7 +36,7 @@
 
 ## Поток / порядок
 - Старт: `99_ef_history_global_variable.txt` выдаёт законы валют → `zz_ef_currency_fix.txt` правит WUR и 13 стран.
-- Раз в месяц (`zz_ef_money_model_monthly_step`, `ld_money_model.txt:1007..`): `zz_ef_cur_zone_step`; `zz_ef_reference_strength_step`; `zz_ef_currency_trade_step` (после шага эталона; только страны с ЦБ, не эталон).
+- Раз в месяц (`zz_ef_money_model_monthly_step`, `ld_money_model.txt:1005..`): `zz_ef_cur_zone_step`; `zz_ef_reference_strength_step`; `zz_ef_currency_trade_step` (после шага эталона; только страны с ЦБ, не эталон).
 - Раз в год (`ef_on_yearly_pulse_country`, `on_actions/00_ef_on_action.txt:173`, зовёт страна-эталон): `national_capacity_variable_list` → пересев эталона. Кандидат: великая держава, ЦБ, рейтинг ≥ 6 (BBB), металлический/золотодевизный стандарт, нет дефолта ЦБ, покрытие ≥ 25%.
 - Смена закона стандарта: `on_activate_monetary_system_law` → `zz_ef_std_switch_before` (запомнить стандарт и паритет) → тело E&F → `zz_ef_std_switch_after` (пересчёт паритета по `silver_to_gold_rate`/`gold_to_silver_rate`, перевод запасов `silver_state_1`↔`gold_state_1` в столичных штатах с `central_bank_historic_place`).
 - Зона: подданный (≥13 недель `zz_ef_weeks_run`), сюзерен с ЦБ, металл. стандарт и валюта → подданный получает стандарт, валюту и паритет сюзерена, `monetary_systeme_transition` на 2 мес. Иначе `zz_ef_cur_zone` снимается.

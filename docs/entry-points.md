@@ -119,19 +119,19 @@ PSC-хук: `on_production_method_changed`, `on_building_built`, `on_acquired_te
 | EFM | `common/scripted_effects/ld_standard_switch.txt:130` | смена денежного стандарта: старый/новый паритет | на смене закона, `zz_ef_std_switch_after` (из `01_economic_scripted_effects.txt:27974`) |
 | EFM | `common/scripted_effects/ld_metal_accounts.txt:126` | `metal_start`: начальный металл ЦБ, что сделано | недельный, `zz_ef_metal_start_log` |
 | EFM | `common/scripted_effects/ld_subject_metal.txt:40` | `cb_state_lost` (ЦБ-штат потерян) | недельный `zz_ef_cb_state_owner_step` |
-| EFM | `common/scripted_effects/ld_currency_intro_metal.txt:62` | `cur_intro`: ввод новой валюты, металл | `zz_ef_cur_intro_after` (из `09_introduction_building_lvl.txt:34554`) |
+| EFM | `common/scripted_effects/ld_currency_intro_metal.txt:62` | `cur_intro`: ввод новой валюты, металл | `zz_ef_cur_intro_after` (из `09_introduction_building_lvl.txt:34549`) |
 | EFT | `common/scripted_effects/ld_metal_accounts.txt:351` | потоки металла ЦБ/банков/населения за неделю | недельный `zz_ef_metal_week_step` |
-| EFV | `common/scripted_effects/ld_metal_accounts.txt:358` | WORLD: суммы металла по ЦБ/банкам/населению, баланс закупок/продаж | недельный `zz_ef_world_metal_log` (из `ld_money_model.txt:744`) |
+| EFV | `common/scripted_effects/ld_metal_accounts.txt:358` | WORLD: суммы металла по ЦБ/банкам/населению, баланс закупок/продаж | недельный `zz_ef_world_metal_log` (из `ld_money_model.txt:742`) |
 | EFQ | `common/scripted_effects/ld_metal_accounts.txt:400` | сверка металла (`oth_g/oth_s`, ЦБ, стандарт) | `zz_ef_metal_reconcile` |
-| EFB | `common/scripted_effects/ld_bond_ledger.txt:97` | книга облигаций страны: принципал, на руках, проценты, погашение, списание | недельный `zz_ef_bond_ledger_step` |
-| EFP | `common/scripted_effects/ld_bond_ledger.txt:573` | слот облигаций без продавца (`no_seller`) | `zz_ef_pb_no_seller` (слот `$N$`) |
+| EFB | `common/scripted_effects/ld_bond_ledger.txt:95` | книга облигаций страны: принципал, на руках, проценты, погашение, списание | недельный `zz_ef_bond_ledger_step` |
+| EFP | `common/scripted_effects/ld_bond_ledger.txt:571` | слот облигаций без продавца (`no_seller`) | `zz_ef_pb_no_seller` (слот `$N$`) |
 | EFS | `common/scripted_effects/ld_consols.txt:52` | консоли: долг, продажа, проценты, цена, цель ставки | недельный `zz_ef_consol_step` |
 | EFN | `common/scripted_effects/ld_nr_deposits.txt:118` | обрезка обязательств иностранных вкладов (`trim`) | `zz_ef_fx_liab_trim` |
-| EFW | `common/scripted_effects/ld_money_model.txt:394` | M0..M3, оборот, ЦБ, заграница, дельты (только игрок или ВВП > 20 млн) | недельный `zz_ef_money_model_step` |
-| EFG | `common/scripted_effects/ld_money_model.txt:745` | WORLD: потоки валюты по миру, клиринг | недельный (через `zz_ef_world_acc`) |
-| EFA | `common/scripted_effects/ld_money_model.txt:506` | проценты, ЦБ, прямые инвестиции | `zz_ef_money_hook_receive` |
-| EFR | `common/scripted_effects/ld_money_model.txt:542` | внешние потоки, сбережения, депозиты, пул банков | `zz_ef_money_hook_receive` |
-| EFX | `common/scripted_effects/ld_money_model.txt:1035` | стандарт, ЦБ, `money_value_0`, цель, покрытие, металл, M2 | месячный `zz_ef_money_model_monthly_step` |
-| EFC | `common/scripted_effects/ld_money_model.txt:1307,1309` | кризисный выкуп валюты: должно/выплачено; эмитент | `zz_ef_crisis_redeem` (из `buy_/sell_<cur>_currency_crisis`) |
-| EFO / EFF | `common/scripted_effects/ld_money_log_rest.txt:5` / `6–10` | остаток баланса / статьи по зданиям, банкам, заграничные, казна, ЦБ | недельный `zz_ef_money_log_rest` (из `ld_money_model.txt:546`) |
+| EFW | `common/scripted_effects/ld_money_model.txt:392` | M0..M3, оборот, ЦБ, заграница, дельты (только игрок или ВВП > 20 млн) | недельный `zz_ef_money_model_step` |
+| EFG | `common/scripted_effects/ld_money_model.txt:743` | WORLD: потоки валюты по миру, клиринг | недельный (через `zz_ef_world_acc`) |
+| EFA | `common/scripted_effects/ld_money_model.txt:504` | проценты, ЦБ, прямые инвестиции | `zz_ef_money_hook_receive` |
+| EFR | `common/scripted_effects/ld_money_model.txt:540` | внешние потоки, сбережения, депозиты, пул банков | `zz_ef_money_hook_receive` |
+| EFX | `common/scripted_effects/ld_money_model.txt:1033` | стандарт, ЦБ, `money_value_0`, цель, покрытие, металл, M2 | месячный `zz_ef_money_model_monthly_step` |
+| EFC | `common/scripted_effects/ld_money_model.txt:1305,1307` | кризисный выкуп валюты: должно/выплачено; эмитент | `zz_ef_crisis_redeem` (из `buy_/sell_<cur>_currency_crisis`) |
+| EFO / EFF | `common/scripted_effects/ld_money_log_rest.txt:5` / `6–10` | остаток баланса / статьи по зданиям, банкам, заграничные, казна, ЦБ | недельный `zz_ef_money_log_rest` (из `ld_money_model.txt:544`) |
 Других `debug_log` в `common/` и `events/` нет (grep по `debug_log` и `log =`).

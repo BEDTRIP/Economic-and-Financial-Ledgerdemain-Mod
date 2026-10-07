@@ -7,7 +7,6 @@
 zz_ef_bond_ledger_step = {
 	# E&F's income modifier is gone (the holder is paid by the ledger)
 	if = { limit = { has_modifier = interest_from_foreign_debt_investment } remove_modifier = interest_from_foreign_debt_investment }
-	set_variable = { name = zz_ef_f_bond_int value = 0 }
 	# --- as a seller ---
 	zz_ef_bl_roll = { F = sold }
 	zz_ef_bl_roll = { F = int_out }

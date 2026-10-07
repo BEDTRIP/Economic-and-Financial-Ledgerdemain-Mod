@@ -98,7 +98,7 @@ GUI-тип регистрирует первый файл по имени (ASCII
 - Виджет моста `zz_ef_money_hook` (HUD) постоянно живёт; для каждой страны из глобального списка `zz_ef_hook_countries`
   (её ставит недельный шаг денег, `common/scripted_effects/ld_money_model.txt`) состояние `trigger_when = [Scope.IsSet]`
   вызывает `zz_ef_money_hook_probe_sg` и `zz_ef_money_hook_sg` с областями `ext`, `abr` и ~20 `g_*` (данные, которые скрипт не
-  видит: тренды дохода/расхода, торговый баланс, самодолг). Приёмник `zz_ef_money_hook_receive` (`ld_money_model.txt:442`)
+  видит: тренды дохода/расхода, торговый баланс, самодолг). Приёмник `zz_ef_money_hook_receive` (`ld_money_model.txt:440`)
   забирает `var:zz_ef_hook_pending` и снимает страну со списка. Мост работает только при открытом/созданном HUD.
 - Клик по кнопке: `onclick = [GetScriptedGui('<имя>').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]`; видимость/доступность:
   `.IsShown(...)` / `.IsValid(...)`; параметры — `.AddScope('имя', MakeScopeValue(...))`. Корень — игрок, рынок (`Market.MakeScope`) или страна.
