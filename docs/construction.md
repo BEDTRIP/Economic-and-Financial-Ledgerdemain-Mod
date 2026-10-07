@@ -43,7 +43,7 @@
 - `common/buildings/ef_11_private_infrastructure.txt` — не здание: `INJECT` PMG (`pmg_market_liquidity`, `pmg_private_ownership_*`) в порт/железную дорогу/торговый центр и `investment_scores` в `building_financial_district` (`bg_construction_score` живой, `bg_ef_private_construction_score` — в группу без зданий).
 - `common/script_values/00_financial_scripted_value.txt:123-190` — переопределены: `building_urban_center_lvl_by_base_rate` (лимит), `building_ef_private_construction_lvl` (= сумма уровней `building_construction_sector`), `..._lvl_to_build`, `..._lvl_state`.
 - `common/scripted_effects/09_introduction_building_lvl.txt` — ~50 тыс. строк: валюты/центробанк/ФЦ, не стройка.
-- `common/history/buildings/00_ef_building.txt` — стартовые `create_building building_construction_sector` (221 `create_building`, ~28 — сектор) с владельцами-банками/компаниями; `00_a_ef_history_var_init.txt` — предзапись переменных (стройки не касается).
+- `common/history/buildings/00_ef_building.txt` — стартовые `create_building building_construction_sector` (213 `create_building`, ~28 — сектор; рудники — не выше того, что держит ресурс штата) с владельцами-банками/компаниями; `00_a_ef_history_var_init.txt` — предзапись переменных (стройки не касается).
 - `common/defines/zz_ef_reinvestment_defines.txt` — `REINVESTMENT_SUBSISTENCE_FRACTION_REDUCTION = 0`, `OWNER_COMPANY_PRIVATIZATION_CHANCE_MULTIPLIER = 0.4`; `zzzz_ef_credit_def.txt` (кредитный лимит) и `00_ef_defines.txt` (приватизация закомментирована) со стройкой не связаны.
 - `common/scripted_guis/00_financial_scripted_guis.txt:5948-6110` — кнопки стимула `speculative_share_9..12_button` (ставят `var:zz_pb_ef_stimulus_mult` на 1080 дней, +10..+40 к `speculative_share_2`).
 
