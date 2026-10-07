@@ -23,8 +23,8 @@ E&F `trade_balance` отключён. Ключи `ld_*` — с префиксо�
   - `common/script_values/00_economic_scripted_value.txt:5924-6176` — `trade_balance_*` значения; `01_economic_currency_scripted_value.txt:287339…` — `trade_balance_in_gold*`.
 
 ## Поток / порядок
-- Неделя (`zz_ef_money_model_step`, `ld_money_model.txt:101`): `zz_ef_fx_metal_update` (:114) → `zz_ef_cbfx_week_step` (:116) → … → `zz_ef_cb_hume_step` (:552) → `zz_ef_clr_step` (:705): взнос членов зоны глава-стране (`zz_ef_clr_sub_g`), у страны с ЦБ — окно, `zz_ef_clr_pay` при `zz_ef_f_clr_net < 0` (долг в золоте × `zz_ef_clr_pay_ratio_v`; металл ≤ металла ЦБ, остальное своей валютой `zz_ef_f_clr_cur_out`), `zz_ef_clr_receive` при `> 0` (доля палаты: металл + валюты, своя валюта погашается, чужая → запас ЦБ `zz_ef_f_clr_fx_in`); страна без ЦБ платит только валютой. Результаты в `zz_ef_f_hume`, `zz_ef_f_clr_*`. Затем `zz_ef_nr_dep_step` (:554).
-- Месяц (`zz_ef_money_model_monthly_step`, `ld_money_model.txt:1027`): `zz_ef_currency_trade_step` (:1036).
+- Неделя (`zz_ef_money_model_step`, `ld_money_model.txt:101`): `zz_ef_fx_metal_update` (:114) → `zz_ef_cbfx_week_step` (:116) → … → `zz_ef_cb_hume_step` (:529) → `zz_ef_clr_step` (:682): взнос членов зоны глава-стране (`zz_ef_clr_sub_g`), у страны с ЦБ — окно, `zz_ef_clr_pay` при `zz_ef_f_clr_net < 0` (долг в золоте × `zz_ef_clr_pay_ratio_v`; металл ≤ металла ЦБ, остальное своей валютой `zz_ef_f_clr_cur_out`), `zz_ef_clr_receive` при `> 0` (доля палаты: металл + валюты, своя валюта погашается, чужая → запас ЦБ `zz_ef_f_clr_fx_in`); страна без ЦБ платит только валютой. Результаты в `zz_ef_f_hume`, `zz_ef_f_clr_*`. Затем `zz_ef_nr_dep_step` (:531).
+- Месяц (`zz_ef_money_model_monthly_step`, `ld_money_model.txt:1004`): `zz_ef_currency_trade_step` (:1013).
 - Год (`central_bank_ef_on_yearly_pulse_country`, `00_on_action_main.txt:919`, `on_actions/00_ef_on_action.txt:189`): для ИИ-владельца рынка с ЦБ `SS/BS/GS/NISO` — `ai_buy_sell_currency` (:954) и `monetary_systeme_transition`; сделка = `zz_ef_fx_deal_size` (2% M2 эмитента, `ld_money_model_values.txt:987`). Арбитраж биметаллизма (:1050-1170, до 1873, закон `law_bimetallism_standard`, перекос ≥ 0.05): металл ЦБ меняет золото на серебро (`gold_state_1`/`silver_state_1`), доля у случайного частного банка (`private_bank_arbitrage_*_drain` → `company_*_gold_stockpile_fix`), событие `00_ef_economic_event.95` игроку.
 - Метал-сверка: `zz_ef_metal_reconcile` (`ld_metal_accounts.txt:149`) относит движение металла ЦБ, не покрытое нашими парами (форекс E&F, арбитраж, смена стандарта), в «oth» (лог `EFQ`).
 
@@ -53,7 +53,7 @@ E&F `trade_balance` отключён. Ключи `ld_*` — с префиксо�
 - Модификатор `zz_ef_currency_trade` — на стране (импорт/экспорт).
 
 ## Логи
-- `EFX|` — месячная строка по валютам/стандарту (`ld_money_model.txt:1058`).
-- `EFR|` — недельное состояние внешних счетов страны (клиринг, вклады: `ld_money_model.txt:565`).
+- `EFX|` — месячная строка по валютам/стандарту (`ld_money_model.txt:1035`).
+- `EFR|` — недельное состояние внешних счетов страны (клиринг, вклады: `ld_money_model.txt:542`).
 - `EFQ` — «oth» сверки металла ЦБ (`ld_metal_accounts.txt`).
 - Файлы `ld_clearing.txt`, `ld_cbfx.txt` своих `debug_log` не имеют.

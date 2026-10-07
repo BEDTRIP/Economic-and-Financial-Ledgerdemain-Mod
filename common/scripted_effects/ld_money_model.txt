@@ -303,28 +303,6 @@ zz_ef_money_model_step = {
 		set_variable = { name = zz_ef_ring_q value = 0 }
 		set_variable = { name = zz_ef_ring_r value = 0 }
 	}
-	# Once: the year ring of the money in circulation takes over the old M3
-	# ring (until 1.10 day M3 was the same sum: businesses' cash + the pool +
-	# savings at hand), so the inflation does not start from zero again.
-	if = {
-		limit = {
-			has_variable = zz_ef_m3_q1
-			NOT = { has_variable = zz_ef_circ_q1 }
-		}
-		if = { limit = { has_variable = zz_ef_m3_q1 } set_variable = { name = zz_ef_circ_q1 value = var:zz_ef_m3_q1 } }
-		if = { limit = { has_variable = zz_ef_m3_q2 } set_variable = { name = zz_ef_circ_q2 value = var:zz_ef_m3_q2 } }
-		if = { limit = { has_variable = zz_ef_m3_q3 } set_variable = { name = zz_ef_circ_q3 value = var:zz_ef_m3_q3 } }
-		if = { limit = { has_variable = zz_ef_m3_q4 } set_variable = { name = zz_ef_circ_q4 value = var:zz_ef_m3_q4 } }
-		if = { limit = { has_variable = zz_ef_m3_q5 } set_variable = { name = zz_ef_circ_q5 value = var:zz_ef_m3_q5 } }
-		if = { limit = { has_variable = zz_ef_m3_q6 } set_variable = { name = zz_ef_circ_q6 value = var:zz_ef_m3_q6 } }
-		if = { limit = { has_variable = zz_ef_m3_q7 } set_variable = { name = zz_ef_circ_q7 value = var:zz_ef_m3_q7 } }
-		if = { limit = { has_variable = zz_ef_m3_q8 } set_variable = { name = zz_ef_circ_q8 value = var:zz_ef_m3_q8 } }
-		if = { limit = { has_variable = zz_ef_m3_q9 } set_variable = { name = zz_ef_circ_q9 value = var:zz_ef_m3_q9 } }
-		if = { limit = { has_variable = zz_ef_m3_q10 } set_variable = { name = zz_ef_circ_q10 value = var:zz_ef_m3_q10 } }
-		if = { limit = { has_variable = zz_ef_m3_q11 } set_variable = { name = zz_ef_circ_q11 value = var:zz_ef_m3_q11 } }
-		if = { limit = { has_variable = zz_ef_m3_q12 } set_variable = { name = zz_ef_circ_q12 value = var:zz_ef_m3_q12 } }
-		if = { limit = { has_variable = zz_ef_m3_q13 } set_variable = { name = zz_ef_circ_q13 value = var:zz_ef_m3_q13 } }
-	}
 	zz_ef_ring_w_push = { M = agg0 }
 	zz_ef_ring_w_push = { M = agg1 }
 	zz_ef_ring_w_push = { M = agg2 }

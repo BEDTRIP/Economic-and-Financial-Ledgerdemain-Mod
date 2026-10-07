@@ -32,7 +32,7 @@
 - `common/static_modifiers/ld_pb_overbuild_modifiers.txt` — `zz_pb_ef_overbuilt_economy` (`building_construction_sector_throughput_add`), `zz_pb_ef_overbuilt_brake`; `common/messages/ld_pb_overbuild_messages.txt` — `zz_pb_ef_overbuild_rising`.
 - `common/scripted_buttons/ld_pb_css_private_ban_buttons.txt` — AI-кнопки запрета/разрешения частных секторов; `common/scripted_guis/ld_pb_fso_sguis.txt` — видимость секций журнала и те же ban/allow для игрока.
 - `gui/scripted_widgets/ld_pb_fso_widgets.gui` — пересобранный журнал «Financial Stability Office» (`financial_center_je_2`): секции пузыря и перепроизводства; `gui/ld_national_capacity_chart.gui` — копия диаграммы E&F (не стройка, лишь в списке подсистемы).
-- `common/static_modifiers/ld_rate_private_construction.txt` (+ `zz_ef_rate_construction_mult` в `ld_money_model_values.txt`, запись в `ld_money_model.txt:1083`) — вклад ставки ЦБ в долю частной стройки.
+- `common/static_modifiers/ld_rate_private_construction.txt` (+ `zz_ef_rate_construction_mult` в `ld_money_model_values.txt`, запись в `ld_money_model.txt:1060`) — вклад ставки ЦБ в долю частной стройки.
 
 **Домохозяйства**
 - `common/pop_needs/ld_household_construction.txt` — `popneed_household_construction` (4 стройтовара); подключён в `common/buy_packages/00_ef_buy_packages.txt` (`wealth_1..9`).
@@ -79,7 +79,7 @@
 | `zz_pb_ef_css_private_ban`, `..._cooldown` | запрет частных секторов (6 мес. перерыв) | ban/allow-кнопки и sgui | `can_build_private`, `ai_nationalization_desire` (10 при запрете) |
 | `zz_pb_ef_ai_downsize_timer` | период сноса ИИ | downsize | downsize |
 | `base_rate_percentage` (E&F) | ставка (доля) | E&F/ld_money_model | лимит, counter, downsize |
-| `zz_ef_rate_constr_applied` | вклад ставки в долю, % | `ld_money_model.txt:1083` | `zz_ef_psc_rate_share` |
+| `zz_ef_rate_constr_applied` | вклад ставки в долю, % | `ld_money_model.txt:1060` | `zz_ef_psc_rate_share` |
 
 ## Вызовы и связи
 - Лимит секторов: `building_urban_center_lvl_by_base_rate` = (уровни `building_urban_center` x `zz_pb_ef_css_rate_factor` + x0.25), min 1. Тот же ключ читают E&F-кнопки/GUI (`building_ef_private_construction_lvl > ...`) и `zz_pb_ef_overbuild_pct`.

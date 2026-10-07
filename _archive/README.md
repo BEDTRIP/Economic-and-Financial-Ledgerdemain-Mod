@@ -71,3 +71,4 @@ _archive/<механизм>/
 | Значения покупки металла населением `zz_ef_pop_gold_goods` / `_silver_goods` | `ef_pop_metal_goods_values/` | ничего — формула перенесена в `zz_ef_metal_week_step` (оптимизация) |
 | Стартовые условия для Historical Map Mod (ветка `always = no`) | `ef_hmm_history/` | блок ~6000 строк в `99_ef_history_global_variable.txt` |
 | Устаревшие копии ванильных GUI (`maj/NonEssential` ×5, `frontend/shared/lists.gui`) | `ef_outdated_vanilla_gui/` | файлы целиком — грузятся ванильные 1.13 |
+| Миграции старых сейвов хотфикса (кольцо M3 → кольцо денег в обращении; старые базы индекса) | `ef_old_save_migrations/` | два блока: `ld_money_model.txt` (`zz_ef_m3_q*`), `ld_capitalization_average.txt` (`zz_ef_cap_ref0`, `zz_ef_cap_index0`) |

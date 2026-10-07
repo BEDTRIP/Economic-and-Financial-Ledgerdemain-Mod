@@ -55,7 +55,6 @@
 | `zz_ef_msh_points` | пункты `building_company_worker_dividends_add` | `zz_ef_capitalization_monthly` | модификатор |
 | `speculative_share_1` | пузырь 0..100 | `zz_ef_bubble_monthly`, кнопки `speculative_share_N_button` (E&F) | JE, `ld_pb_fso_sguis.txt`, `zz_ef_bubble_step_eff` |
 | `zz_ef_bb_old` | пузырь до шага (для уведомления) | `zz_ef_bubble_monthly` | `zz_ef_bb_band_old` |
-| `zz_ef_cap_ref0`, `zz_ef_cap_index0` | старые базы индекса (24–25.09) | не пишутся, удаляются | — |
 | локальные `zz_lst_*`, `zz_s_*`, `zz_lr_*` | счётчики внутри эффектов | listing/average/issue | они же |
 
 ## Вызовы и связи

@@ -54,7 +54,7 @@ GUI-тип регистрирует первый файл по имени (ASCII
   `ld_economy_panel.gui:8273`); ряд в металле стандарта, доли — в золотом эквиваленте.
 - `gui/ld_money_hook.gui` — мост «бюджет → скрипт» (см. ниже); регистрация `gui/scripted_widgets/ld_money_hook.txt`.
 - `gui/scripted_widgets/ld_pb_fso_widgets.gui` — журнальные виджеты `zz_pb_ef_fso_bubble_widget`, `zz_pb_ef_fso_overcap_widget`,
-  `zz_pb_ef_fso_hide_bars_widget` (подключены `common/journal_entries/00_ef_financial_center_je.txt:184-199`).
+  `zz_pb_ef_fso_hide_bars_widget` (подключены `common/journal_entries/00_ef_financial_center_je.txt:187-202`).
 
 ### PSC
 - `gui/PSC_construction_panel.gui` (`construction_panel*`, `ship_construction_*`), `gui/PSC_states_panel_buildings.gui`
@@ -98,7 +98,7 @@ GUI-тип регистрирует первый файл по имени (ASCII
 - Виджет моста `zz_ef_money_hook` (HUD) постоянно живёт; для каждой страны из глобального списка `zz_ef_hook_countries`
   (её ставит недельный шаг денег, `common/scripted_effects/ld_money_model.txt`) состояние `trigger_when = [Scope.IsSet]`
   вызывает `zz_ef_money_hook_probe_sg` и `zz_ef_money_hook_sg` с областями `ext`, `abr` и ~20 `g_*` (данные, которые скрипт не
-  видит: тренды дохода/расхода, торговый баланс, самодолг). Приёмник `zz_ef_money_hook_receive` (`ld_money_model.txt:465`)
+  видит: тренды дохода/расхода, торговый баланс, самодолг). Приёмник `zz_ef_money_hook_receive` (`ld_money_model.txt:442`)
   забирает `var:zz_ef_hook_pending` и снимает страну со списка. Мост работает только при открытом/созданном HUD.
 - Клик по кнопке: `onclick = [GetScriptedGui('<имя>').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]`; видимость/доступность:
   `.IsShown(...)` / `.IsValid(...)`; параметры — `.AddScope('имя', MakeScopeValue(...))`. Корень — игрок, рынок (`Market.MakeScope`) или страна.

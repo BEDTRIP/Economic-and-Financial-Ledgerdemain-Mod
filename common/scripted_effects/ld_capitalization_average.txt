@@ -11,8 +11,7 @@
 #   zz_ef_cap_avg_ms/_as/_mn/_rr  each stock's value, moving average, weight 1/12
 #   zz_ef_cap_half                all four together, weight 1/6 (crash check)
 #   zz_ef_cap_idx_prev, zz_ef_cap_idx_timer  the index at the last yearly
-#                                 mark (points a year); zz_ef_cap_ref0 and
-#                                 zz_ef_cap_index0 (the 24.09 base) are removed
+#                                 mark (points a year)
 # avg = avg + weight x (snapshot - avg). A new average starts at the first
 # snapshot, not at 0 -- no warm-up, and no false crash on old saves.
 #
@@ -187,12 +186,6 @@ zz_ef_cap_monthly_update = {
 				name = zz_ef_cap_idx_timer
 				months = 12
 			}
-		}
-		### Old level-index bases (24.09-25.09), no longer read.
-		if = {
-			limit = { has_variable = zz_ef_cap_ref0 }
-			remove_variable = zz_ef_cap_ref0
-			remove_variable = zz_ef_cap_index0
 		}
 	}
 }
