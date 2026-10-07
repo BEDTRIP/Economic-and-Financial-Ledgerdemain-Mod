@@ -8,13 +8,12 @@
 коэффициент, закомментированный вызов); `мёртвый` — ни откуда не вызывается; `дубль` — считает то же или пишет те же
 счета, что модель `ld_*`. Строки файлов — на момент записи, при правке файла сдвигаются: искать по имени.
 
-Итого: мёртвый 4, выключен 0, дубль 4, живой 218.
+Итого: мёртвый 4, выключен 0, дубль 3, живой 218.
 
 ## Денежная модель и металл (`money-model.md`)
 
 | механизм | статус | где | доказательство | интерфейс |
 | --- | --- | --- | --- | --- |
-| E&F: запасы валют регионов ЦБ (stockpiling_currency → stockpiling_currency_type_1 ×95) | дубль | common/scripted_effects/01_economic_scripted_effects.txt:28023,28127; вызов 00_on_action_main.txt:318 | ежемесячно пишет stockpiling_<cur>_state_1 из рынка валютного товара ×4 и gold_state_1 при девальвации/ревальвации; те же счета (запас валюты ЦБ, металл), что zz_ef_fx_* и zz_ef_metal_week_step; trade_balance обнулён | карточка валют ЦБ |
 | Планировщик модели денег (одна глобальная цепочка: зонд тика → день → шаги стран А / Б, месячные шаги, мировой проход) | живой | common/scripted_effects/ld_scheduler.txt; common/on_actions/ld_scheduler_on_actions.txt | on_game_started_after_lobby / on_monthly_pulse → zz_ef_sched_ensure; zz_ef_sched_day перезапускает себя days = 1 | карточки денежной массы (через переменные zz_ef_*) |
 | Роли стран А / Б / В (`var:zz_ef_role`, месячный проход по миру) | живой | common/scripted_effects/ld_roles.txt; common/on_actions/ld_roles_on_actions.txt; common/scripted_triggers/ld_roles_triggers.txt | on_monthly_pulse → zz_ef_roles_world_pass; роль В снимает месячный шаг и цепочку модели | — |
 | Реестр счетов, проводка, сверка по запасам («прочее» `zz_ef_other` = пул + казна) | живой | common/scripted_effects/ld_ledger.txt; common/script_values/ld_ledger_values.txt | zz_ef_registry_init и zz_ef_reconcile в недельном шаге; zz_ef_post* — проводки (проценты ЦБ, излишек казны); zz_ef_tr_mark / _unmark — пометка наших add_treasury для сверки казны | — |
@@ -218,7 +217,7 @@
 | Исторические здания (ЦБ `building_bank`, финцентры, шахты) через `create_building` | живой | common/history/buildings/00_ef_building.txt (221 `create_building`; `financial_center_modifier` :2987) | `BUILDINGS = every_country`; ЦБ создаётся владельцем-компанией (`zz_ef_cm_create_owned_bank`) | здания ЦБ/ФЦ |
 | Предзапись `country_already_financial_center` / `gdp_view_fc` до history/global | живой | common/history/buildings/00_a_ef_history_var_init.txt | history/buildings читается до history/global; охрана `has_variable` | — |
 | Бонус серебряной шахты по штатам | живой | common/history/states/01_ef_states.txt:6-195 (60 `s:STATE_X` → `add_modifier silver_mine_max_level`) | модификатор разрешает `building_silver_mine` (`buildings/ef_03_mines.txt:53`) | шахта серебра в списке построек |
-| Месячный ЦБ: инфляция, `currency_strength_modifier`, `government_loan_month`, `trade_balance`, `stockpiling_currency` | живой | common/scripted_effects/00_on_action_main.txt:144-377 | `central_bank_ef_on_monthly_pulse_country` по `has_modifier = has_central_bank` | инфляция, баланс торговли, панель ЦБ |
+| Месячный ЦБ: инфляция, `currency_strength_modifier`, `government_loan_month`, `trade_balance` | живой | common/scripted_effects/00_on_action_main.txt:144-377 | `central_bank_ef_on_monthly_pulse_country` по `has_modifier = has_central_bank` | инфляция, баланс торговли, панель ЦБ |
 | Месячный ЦБ: `monetary_policy_inflation*` (только игрок) | живой | common/scripted_effects/00_on_action_main.txt:258-300 | гейт `is_player = yes` | панель денежной политики |
 | Кризисная продажа валюты `sell_<cur>_currency_crisis` (95 валют) | живой | common/scripted_effects/01_economic_scripted_effects.txt; вызов `all_currency_resold` (00_on_action_main.txt) | `all_currency_resold` зовут кнопка `00_economic_scripted_guis.txt`, `01_economic_scripted_effects.txt` (2 места), `01_financial_scripted_effects.txt`; меняют `gold_state_1`/`silver_state_1` и `stockpiling_<cur>_state_1`, зовут `zz_ef_crisis_redeem` | сообщение `your_currency_are_sell_message` |
 | `central_bank_production_methods`, `_3`, `_4` (пустые определения; тела — `_archive/ef_central_bank_pm_consuption/`) | пустой | common/scripted_effects/01_economic_scripted_effects.txt | вызовы остались (годовой, история, события, sgui) | — |

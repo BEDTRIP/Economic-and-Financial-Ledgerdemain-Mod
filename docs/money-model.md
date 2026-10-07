@@ -22,7 +22,7 @@
 - `common/static_modifiers/ld_metal_trade.txt` — модификаторы зданий: покупка металла банками/ЦБ, продажа ЦБ (`zz_ef_bank_gold_buy`, `zz_ef_bank_silver_buy`, `zz_ef_cb_metal_buy`, `zz_ef_cb_gold_sell`, `zz_ef_cb_silver_sell`).
 - `common/static_modifiers/ld_consumer_credit.txt` — `zz_ef_consumer_credit` (`state_dependent_wage_add`).
 - `common/static_modifiers/ld_debt_service.txt` — `zz_ef_debt_service` (+1% взноса в пул у слоёв).
-- E&F вне списка, но пишут те же счета: `common/scripted_effects/01_economic_scripted_effects.txt` (`stockpiling_currency` → `stockpiling_currency_type_1` ×95), `common/scripted_effects/00_on_action_main.txt` (месячный запуск запасов валют).
+- E&F вне списка, но пишут те же счета: `common/scripted_effects/01_economic_scripted_effects.txt` (`sell_<cur>_currency_crisis`, кризисная продажа валют); месячный пересчёт запасов `stockpiling_currency_type_1` — в `_archive/ef_stockpiling_currency/` (R2).
 
 ## Реестр счетов, проводка, сверка (R1а.5)
 Файлы: `common/scripted_effects/ld_ledger.txt`, `common/script_values/ld_ledger_values.txt`.
@@ -124,14 +124,14 @@ on_action — `common/on_actions/ld_roles_on_actions.txt`): глобальные
 | `zz_ef_t_led` | временная: значение счёта, посчитанное один раз в `zz_ef_money_ledger_delta` (снимается там же) | `zz_ef_money_ledger_delta` | оно же |
 | `zz_ef_bcash`, `zz_ef_bkcash` | наличные бизнеса и банков за неделю | `zz_ef_money_model_step` | `zz_ef_building_cash`, `zz_ef_agg_m0..m3` |
 | `zz_ef_parity_version`, `zz_ef_cb_start_due`, `zz_ef_metal_started` | версия старта (9 — новая игра R1б.1; старые сейвы — прежняя), ЦБ ждёт стартового металла (40 % M2, когда M2 / ВВП > 0,1 и страна — ЦБ на металле: подданный входит в зону сюзерена после первого шага; не на металле полгода — ожидание снимается), флаг первого шага металла | `zz_ef_money_model_step`, `zz_ef_metal_start_step`, `zz_ef_cb_metal_start_step` | правила металла ЦБ (`zz_ef_cb_buy_mult`, `zz_ef_cb_sell_units`, `zz_ef_cb_buyback_units`), ИИ-политика курса (`ld_monetary_policy.txt`), `zz_ef_cur_intro_after` |
-| `gold_state_1`, `silver_state_1` (регион ЦБ с `central_bank_historic_place`) | металл ЦБ (переменные E&F) | `zz_ef_metal_week_step`, `zz_ef_cb_metal_start_step`, `zz_ef_metal_start_step`, `zz_ef_cb_state_owner_step`, `zz_ef_cur_intro_after`; E&F: forex-GUI `<cur>_buy/sell_in_gold` (`00_economic_scripted_guis.txt`), `stockpiling_currency_type_1`, арбитраж частных банков (`00_on_action_main.txt:954-1036`), `introduction_*` | `gold_state_native_for_stockpile`, `central_bank_reserves`, `zz_ef_cbm_gold/silver`, `zz_ef_cb_cover` |
+| `gold_state_1`, `silver_state_1` (регион ЦБ с `central_bank_historic_place`) | металл ЦБ (переменные E&F) | `zz_ef_metal_week_step`, `zz_ef_cb_metal_start_step`, `zz_ef_metal_start_step`, `zz_ef_cb_state_owner_step`, `zz_ef_cur_intro_after`; E&F: forex-GUI `<cur>_buy/sell_in_gold` (`00_economic_scripted_guis.txt`), `introduction_*` | `gold_state_native_for_stockpile`, `central_bank_reserves`, `zz_ef_cbm_gold/silver`, `zz_ef_cb_cover` |
 | `zz_ef_popm_gold/silver`, `zz_ef_bankm_gold/silver` | металл населения и банков (единицы резерва) | `zz_ef_metal_start_step`, `zz_ef_metal_start_banks`, `zz_ef_metal_week_step` | `zz_ef_popm_money`, `zz_ef_bankm_money`, `zz_ef_wm_sum_*` |
 | `zz_ef_f_mt_<cb_in/cb_out/bank_in/pop_in>_<g/s>`, `zz_ef_f_mt_buyback(_money)`, `zz_ef_f_mt_oth_<g/s>`, `zz_ef_mt_prev_<g/s>`, `zz_ef_mt_start_adj_<g/s>`, `zz_ef_cb_stock_acc` | покупки/продажи недели, выкуп, невязка сверки, снимок, поправка старта, изменение резервов ЦБ | `zz_ef_metal_week_step`, `zz_ef_metal_reconcile`, `zz_ef_metal_start_cb_after` | сверка следующей недели, карточка ЦБ (`zz_ef_v_f_cb_stock`) |
 | `zz_ef_t_cb_in_<g/s>`, `zz_ef_t_bank_in_<g/s>` | временные: вход зданий ЦБ и банков (товары), посчитанный один раз за шаг; из них `zz_ef_f_mt_cb_in/bank_in` и часть населения (потребление штатов − они, не ниже 0; та же формула, что `zz_ef_pop_<gold/silver>_goods`) | `zz_ef_metal_week_step` | он же |
 | `zz_ef_mt_bank_mult_g/s`, `zz_ef_mt_cb_mult`, `zz_ef_mt_cb_sell` | множители модификаторов `ld_metal_trade` на следующую неделю | `zz_ef_metal_week_step` | `add_modifier` на зданиях `building_zz_ef_bank` (только при `zz_ef_mt_bank_levels > 0`) / `building_bank` |
 | глобальные `zz_ef_wm_<start/buy/sell/oth>_<gold/silver>` | мировая линия металла (накопительно) | `zz_ef_wm_add` | `zz_ef_wm_v_*`, `zz_ef_wm_rest_*`, лог `EFV` |
 | глобальные `zz_ef_hook_countries` (список), `zz_ef_hook_calls`, `zz_ef_hook_probe_calls` | очередь моста, счётчики вызовов | `zz_ef_money_model_step`, `zz_ef_money_hook_receive`, `zz_ef_money_hook_probe_sg` | `gui/ld_money_hook.gui`, `zz_ef_hook_ok` |
-| `stockpiling_<cur>_state_1`, `stockpiling_<cur>_reserve_currency_state_1` (регион, E&F) | запас валюты `<cur>` в регионе ЦБ | E&F `stockpiling_currency_type_1`, `buy_/sell_<g>_order_in_currency` | `money_supply_state`, `zz_ef_fx_reserves_metal`, `zz_ef_fx_liab_all` |
+| `stockpiling_<cur>_state_1`, `stockpiling_<cur>_reserve_currency_state_1` (регион, E&F) | запас валюты `<cur>` в регионе ЦБ | история E&F, кнопки форекса `<cur>_buy/sell_in_gold`, клиринг (`ld_clearing.txt`), `sell_<cur>_currency_crisis` | `money_supply_state`, `zz_ef_fx_reserves_metal`, `zz_ef_fx_liab_all` |
 | `<cur>_c_no_own` (значение, 95 валют) | запас валюты минус `money_supply` | — (значения) | `currency_no_own` → `gui/ld_economy_panel.gui` (текст «currency_no_own») |
 
 ## Вызовы и связи
@@ -139,7 +139,7 @@ on_action — `common/on_actions/ld_roles_on_actions.txt`): глобальные
 - Модель вызывается: `zz_ef_cur_intro_before/after` из `common/scripted_effects/09_introduction_building_lvl.txt:34332/34463` (обёртка `introduction_new_currency`).
 - Значения модели читают GUI и локализация: `gui/ld_economy_panel.gui`, `localization/<язык>/replace/ld_money_supply_replace_l_<язык>.yml`, `ld_cb_rate_panel_*`, `ld_monetary_policy_*`; `gui/ld_money_hook.gui` — единственный GUI-узел модели (виджет `zz_ef_money_hook`, скрытый, на `GetGlobalList('zz_ef_hook_countries')`).
 - Металл ЦБ меняется только покупкой зданием ЦБ (`zz_ef_cb_metal_buy`): раздачи металла E&F из рынка в `gold_state_1` нет.
-- Ручные операции E&F, меняющие счета мимо недельной записи (попадают в «прочее»/невязку `EFQ`): forex-кнопки `<cur>_buy/sell_in_gold` (`gold_state_1`), `stockpiling_currency_type_1` (девальвация/ревальвация: металл ↔ валютный запас), арбитраж частных банков (`private_bank_arbitrage_gold_drain`), `global_monetary_reference_reset`, `transfer_gold_to_central_bank_metal_reserves`.
+- Ручные операции E&F, меняющие счета мимо недельной записи (попадают в «прочее»/невязку `EFQ`): forex-кнопки `<cur>_buy/sell_in_gold` (`gold_state_1`), `global_monetary_reference_reset`, `transfer_gold_to_central_bank_metal_reserves`.
 
 ## Логи
 - `EFW` — недельная строка страны: M0..M3, счета (игрок и страны с ВВП > 20 млн).

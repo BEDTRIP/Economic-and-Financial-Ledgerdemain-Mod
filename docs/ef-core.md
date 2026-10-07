@@ -54,7 +54,7 @@
 | 14606–17370 | `extreme_weak_currency_solution[_player]` (счётчик; ветка денежной реформы, `reset_balance`, `reset_law_event_currency`, `reset_debt_currency_reserve_and_export_value` — в `_archive/ef_currency_reform/`, R2), `reset_debt_in_currency` | да — из scripted_guis (кнопки смены закона) |
 | 41512–42367 | `devaluation_on`, `revaluation_on`, `set_reset_monetary_system_status`, `on_activate_*_law` | — |
 | 41765 | `trade_balance` (388) | да (месячный) |
-| 42367–42720 | `stockpiling_currency`, `stockpiling_currency_type_1` | да |
+| — | `stockpiling_currency`, `stockpiling_currency_type_1` — в `_archive/ef_stockpiling_currency/` (R2) | — |
 | 42720–91109 | 95 `sell_<cur>_currency_crisis` (`buy_/sell_<cur>_currency` ИИ-форекса — в `_archive/ef_ai_forex/`) | да, из `all_currency_resold`; пишут `gold_state_1`/`silver_state_1` |
 | 92575, 104603 | `reset_debt_in_national_currency[_player]` (2×2 тыс. строк) | да (GUI/смена закона) |
 | 94692–99107 | `stockpiling_capital_state_transfert`, `..._financial_center_place`, `enemy_capital_is_occuped` (1,8 тыс.), `enemy_stats_is_occuped` | да (месячный, решение ИИ, бой) |
