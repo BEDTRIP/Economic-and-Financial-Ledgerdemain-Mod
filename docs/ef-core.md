@@ -56,7 +56,6 @@
 | 41765 | `trade_balance` (388) | да (месячный) |
 | 42367–42720 | `stockpiling_currency`, `stockpiling_currency_type_1` | да |
 | 42720–91109 | 95 `sell_<cur>_currency_crisis` (`buy_/sell_<cur>_currency` ИИ-форекса — в `_archive/ef_ai_forex/`) | да, из `all_currency_resold`; пишут `gold_state_1`/`silver_state_1` |
-| 91172–92241 | `private_bank_arbitrage_gold_drain`/`_silver_drain` | арбитраж живой (годовой, биметаллизм до 1873) |
 | 92575, 104603 | `reset_debt_in_national_currency[_player]` (2×2 тыс. строк) | да (GUI/смена закона) |
 | 94692–99107 | `stockpiling_capital_state_transfert`, `..._financial_center_place`, `enemy_capital_is_occuped` (1,8 тыс.), `enemy_stats_is_occuped` | да (месячный, решение ИИ, бой) |
 | 99199–104511 | `central_bank_production_methods`, `_3`, `_4` — пустые определения (тела в `_archive/ef_central_bank_pm_consuption/`) | пусто |
@@ -66,7 +65,7 @@
 ## Переменные
 | имя | смысл | пишет | читает |
 |---|---|---|---|
-| `gold_state_1`, `silver_state_1` (штат) | запас металла штата (ЦБ-штат — резерв ЦБ; в модели `ld_*` — резерв ЦБ) | history, `sell_<cur>_currency_crisis`, кнопки форекса, арбитраж, `enemy_capital_is_occuped`, `zz_ef_*` | `gold_state_native_for_stockpile`, `zz_ef_cbm_gold/silver` |
+| `gold_state_1`, `silver_state_1` (штат) | запас металла штата (ЦБ-штат — резерв ЦБ; в модели `ld_*` — резерв ЦБ) | history, `sell_<cur>_currency_crisis`, кнопки форекса, `enemy_capital_is_occuped`, `zz_ef_*` | `gold_state_native_for_stockpile`, `zz_ef_cbm_gold/silver` |
 | `money_value_<cur>` / `money_value_target_<cur>` / `money_value_in_gold_<cur>` (глобальные) | курс валюты, цель и в золоте по каждой из 95 валют | `money_value[_target|_in_gold]_<cur>_global_var` | инфляция, GUI |
 | `base_rate_percentage`, `rise_base_rate`, `down_base_rate` | ставка ЦБ; модификаторы направления | `zz_ef_cb_rate_step` | `central_bank_ef_on_monthly_pulse_country`, PSC |
 | `speculative_share_1` / `_2` | пузырь / индекс перестройки | `ld_bubble`, `ld_pb_overbuild_counter` | JE `financial_center_je_2` |
@@ -77,7 +76,7 @@
 - Законы: 95 `law_<cur>_currency` (`laws/01_ef_currency_type.txt`), `law_*_standard`, `lawgroup_monetary_policy`, `lawgroup_bimetalism_ratio` — триггеры `law_<cur>_monetary_system_*_trigger` (customizable_localization `00_ef_localization_ custom.txt`, GUI).
 - Здания ↔ PM ↔ товары: `pmg_market_liquidity` вставлена в ванильные здания (`goods_input_liquidity_currency_add = 28`); PM «частного владения» производят акции; фин. центр потребляет акции/облигации и производит `mutual_funds`; банк `ld_bank` производит `liquidity_currency`.
 - Решения: `00_ef_ai_loooting_decisions_1` (ИИ при `enemy_capital_is_occuped >= 1`) → `enemy_capital_is_occuped` + событие `00_ef_economic_event.35`.
-- События `00_ef_economic_event.1..35, 56..65, 95, 96, 106, 107` — из `ef_on_yearly_pulse_event_at_date`, `enemy_capital_is_occuped`, арбитража (`.95/.96`), решений; сообщения `00_ef_economic_event_<N>_message`.
+- События `00_ef_economic_event.1..35, 56..65, 95, 96, 106, 107` — из `ef_on_yearly_pulse_event_at_date`, `enemy_capital_is_occuped`, решений (`.95/.96` звал арбитраж — в `_archive/ef_bimetallic_arbitrage/`, сейчас без вызова); сообщения `00_ef_economic_event_<N>_message`.
 - Алерты (`alert_types`) движок обходит сам: регистрация по папке, `valid` определяет показ; в `trigger`/GUI на них ссылок нет, это норма.
 - Идеологии: `ideology_monetary_*` раздаются ИГ в `99_ef_history_global_variable.txt:~8000` (`add_ideology`), оценки законов читает движок.
 

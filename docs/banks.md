@@ -22,11 +22,10 @@
 - `common/static_modifiers/ld_fx_holders_demand.txt` — `zz_ef_fx_holders_demand` (`state_export_advantage_mult = 0.01` на единицу множителя).
 - E&F, банковская часть (огромные файлы, смотреть `grep -n`):
   - `common/scripted_effects/01_financial_scripted_effects.txt`: `establish_bank_and_ef_compagnie` (:13164, ИИ раз в год получает банковские компании), `ai_privat_bank_bond_1..25` (:4130…, покупка облигаций частными банками), `private_ownership_production_stocks`, `financial_center_production_methods`.
-  - `common/scripted_effects/08_list_effect.txt`: `privat_bank_variable_list` (:1748, список банковских компаний, `privat_bank_variable_list_ordered`), список `global_arbitrage_bank_variable_list_ordered` (:2209, по `gdp_var`).
+  - `common/scripted_effects/08_list_effect.txt`: `privat_bank_variable_list` (:1748, список банковских компаний, `privat_bank_variable_list_ordered`), список `global_arbitrage_bank_variable_list_ordered` (:2209, по `gdp_var`; читатель — арбитраж — в `_archive/ef_bimetallic_arbitrage/`).
   - `common/script_values/00_financial_scripted_value.txt` — значения для интерфейса/ИИ покупок облигаций; `common/script_values/00_economic_scripted_value.txt:5335-6745` — `private_bank_funds*` (`private_bank_funds` = `investment_pool`, :6246); `01_economic_company_value.txt:29` `total_privat_bank`.
   - `common/scripted_guis/00_financial_scripted_guis.txt` — только облигационные/кредитные кнопки (см. `bonds.md`); банковских кнопок нет.
   - `common/history/global/00_ef_financial_global_variable.txt` — стартовые переменные стран E&F (`speculative_share_*`, бонды); счёта частных банков не создаёт.
-  - `common/scripted_effects/01_economic_scripted_effects.txt:17959…18473` — арбитражи частных банков (см. `clearing-fx.md`, реестр).
 
 ## Поток / порядок
 - Месяц (`on_monthly_pulse_country`): `zz_ef_bank_seed_step` — у владельца рынка, если нет `zz_ef_bank_seeded`: уровни = (заказы на покупку `liquidity_currency` × 1.2 − заказы на продажу) / 500, распределяются по штатам стран рынка весом `zz_ef_bank_tc_levels`; в штате `zz_ef_bank_seed_state` создаёт здание (если `zz_ef_bank_n ≥ 1`), долевая собственность с компанией E&F владельца из жёсткого списка (`zz_ef_bank_seed_company`), иначе государству. Лог `EFK|`.
@@ -46,7 +45,7 @@
 | `zz_ef_nr_started` | вклады запущены | `zz_ef_nr_dep_step` | он же |
 | `zz_ef_bkcash` | наличность банков | `ld_money_model.txt:108` | модель денег |
 | `ai_privat_bank_bond_value_N`, `ai_privat_bank_buyer_slot_N`, `ai_privat_bank_seller_country_general_N` | облигации частных банков (E&F) | `ai_privat_bank_bond_N` | `zz_ef_bank_bonds` (`ld_money_model_values.txt:249`), `ld_bond_ledger.txt` (`zz_ef_pb_slot_N`) |
-| `company_<Банк>_gold_stockpile_fix`, `_silver_stockpile_fix` (глобальные) | металл частного банка E&F | арбитраж (`private_bank_arbitrage_*`) | GUI E&F (`private_bank_gold_reserve_per_bank_gui`); модель `ld_*` их не читает |
+| `company_<Банк>_gold_stockpile_fix`, `_silver_stockpile_fix` (глобальные) | металл частного банка E&F | история (арбитраж `private_bank_arbitrage_*` — в `_archive/ef_bimetallic_arbitrage/`) | GUI E&F (`private_bank_gold_reserve_per_bank_gui`); модель `ld_*` их не читает |
 
 ## Вызовы и связи
 - ЦБ создаётся спавнерами E&F через `zz_ef_cm_create_owned_bank` (`09_introduction_building_lvl.txt`, `history/buildings/00_ef_building.txt:16`).

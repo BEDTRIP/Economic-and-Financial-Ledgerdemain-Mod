@@ -22,7 +22,7 @@
 - `common/static_modifiers/ld_metal_trade.txt` — модификаторы зданий: покупка металла банками/ЦБ, продажа ЦБ (`zz_ef_bank_gold_buy`, `zz_ef_bank_silver_buy`, `zz_ef_cb_metal_buy`, `zz_ef_cb_gold_sell`, `zz_ef_cb_silver_sell`).
 - `common/static_modifiers/ld_consumer_credit.txt` — `zz_ef_consumer_credit` (`state_dependent_wage_add`).
 - `common/static_modifiers/ld_debt_service.txt` — `zz_ef_debt_service` (+1% взноса в пул у слоёв).
-- E&F вне списка, но пишут те же счета: `common/scripted_effects/01_economic_scripted_effects.txt` (`stockpiling_currency` → `stockpiling_currency_type_1` ×95), `common/scripted_effects/00_on_action_main.txt` (месячный запуск запасов валют, арбитраж частных банков).
+- E&F вне списка, но пишут те же счета: `common/scripted_effects/01_economic_scripted_effects.txt` (`stockpiling_currency` → `stockpiling_currency_type_1` ×95), `common/scripted_effects/00_on_action_main.txt` (месячный запуск запасов валют).
 
 ## Реестр счетов, проводка, сверка (R1а.5)
 Файлы: `common/scripted_effects/ld_ledger.txt`, `common/script_values/ld_ledger_values.txt`.

@@ -1,0 +1,519 @@
+﻿# Вырезано из common/scripted_effects/01_economic_scripted_effects.txt; строки — до выреза.
+# строки 17959-18216: private_bank_arbitrage_gold_drain
+private_bank_arbitrage_gold_drain = {
+	#company_Rothschild_Bank_gbr
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_Rothschild_Bank_gbr
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_gbr_gold_stockpile_fix
+			add = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_gbr_silver_stockpile_fix
+			subtract = var:silver_state_1_fix
+		}
+	}
+	#company_Rothschild_Bank_fra
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_Rothschild_Bank_fra
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_fra_gold_stockpile_fix
+			add = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_fra_silver_stockpile_fix
+			subtract = var:silver_state_1_fix
+		}
+	}
+	#company_Rothschild_Bank_ger
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_Rothschild_Bank_ger
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_ger_gold_stockpile_fix
+			add = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_ger_silver_stockpile_fix
+			subtract = var:silver_state_1_fix
+		}
+	}
+	#company_Rothschild_Bank_aus
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_Rothschild_Bank_aus
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_aus_gold_stockpile_fix
+			add = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_aus_silver_stockpile_fix
+			subtract = var:silver_state_1_fix
+		}
+	}
+	#company_Rothschild_Bank_ita
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_Rothschild_Bank_ita
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_ita_gold_stockpile_fix
+			add = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_ita_silver_stockpile_fix
+			subtract = var:silver_state_1_fix
+		}
+	}
+	#company_BanqueDeParisEtDesPaysBas
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_BanqueDeParisEtDesPaysBas
+			}
+		}
+		change_global_variable = {
+			name = company_BanqueDeParisEtDesPaysBas_gold_stockpile_fix
+			add = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_BanqueDeParisEtDesPaysBas_silver_stockpile_fix
+			subtract = var:silver_state_1_fix
+		}
+	}
+	#company_BankJPMorgan
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_BankJPMorgan
+			}
+		}
+		change_global_variable = {
+			name = company_BankJPMorgan_gold_stockpile_fix
+			add = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_BankJPMorgan_silver_stockpile_fix
+			subtract = var:silver_state_1_fix
+		}
+	}
+	#company_DeutscheBank
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_DeutscheBank
+			}
+		}
+		change_global_variable = {
+			name = company_DeutscheBank_gold_stockpile_fix
+			add = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_DeutscheBank_silver_stockpile_fix
+			subtract = var:silver_state_1_fix
+		}
+	}
+	#company_BankHSBC
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_BankHSBC
+			}
+		}
+		change_global_variable = {
+			name = company_BankHSBC_gold_stockpile_fix
+			add = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_BankHSBC_silver_stockpile_fix
+			subtract = var:silver_state_1_fix
+		}
+	}
+	#company_Bankenverein
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_Bankenverein
+			}
+		}
+		change_global_variable = {
+			name = company_Bankenverein_gold_stockpile_fix
+			add = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_Bankenverein_silver_stockpile_fix
+			subtract = var:silver_state_1_fix
+		}
+	}
+	#company_BancaCommercialeItaliana
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_BancaCommercialeItaliana
+			}
+		}
+		change_global_variable = {
+			name = company_BancaCommercialeItaliana_gold_stockpile_fix
+			add = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_BancaCommercialeItaliana_silver_stockpile_fix
+			subtract = var:silver_state_1_fix
+		}
+	}
+	#company_DeNederlandscheBank
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_DeNederlandscheBank
+			}
+		}
+		change_global_variable = {
+			name = company_DeNederlandscheBank_gold_stockpile_fix
+			add = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_DeNederlandscheBank_silver_stockpile_fix
+			subtract = var:silver_state_1_fix
+		}
+	}
+	#company_amsterdamschebank
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_amsterdamschebank
+			}
+		}
+		change_global_variable = {
+			name = company_amsterdamschebank_gold_stockpile_fix
+			add = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_amsterdamschebank_silver_stockpile_fix
+			subtract = var:silver_state_1_fix
+		}
+	}
+	#company_RotterdamscheBankvereeniging
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_RotterdamscheBankvereeniging
+			}
+		}
+		change_global_variable = {
+			name = company_RotterdamscheBankvereeniging_gold_stockpile_fix
+			add = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_RotterdamscheBankvereeniging_silver_stockpile_fix
+			subtract = var:silver_state_1_fix
+		}
+	}
+	#company_BankIBC
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_BankIBC
+			}
+		}
+		change_global_variable = {
+			name = company_BankIBC_gold_stockpile_fix
+			add = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_BankIBC_silver_stockpile_fix
+			subtract = var:silver_state_1_fix
+		}
+	}
+	#company_Mitsubishiexchangehousebank
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_Mitsubishiexchangehousebank
+			}
+		}
+		change_global_variable = {
+			name = company_Mitsubishiexchangehousebank_gold_stockpile_fix
+			add = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_Mitsubishiexchangehousebank_silver_stockpile_fix
+			subtract = var:silver_state_1_fix
+		}
+	}
+}
+# строки 17959-18216: private_bank_arbitrage_silver_drain
+private_bank_arbitrage_silver_drain = {
+	#company_Rothschild_Bank_gbr
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_Rothschild_Bank_gbr
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_gbr_gold_stockpile_fix
+			subtract = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_gbr_silver_stockpile_fix
+			add = var:silver_state_1_fix
+		}
+	}
+	#company_Rothschild_Bank_fra
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_Rothschild_Bank_fra
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_fra_gold_stockpile_fix
+			subtract = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_fra_silver_stockpile_fix
+			add = var:silver_state_1_fix
+		}
+	}
+	#company_Rothschild_Bank_ger
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_Rothschild_Bank_ger
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_ger_gold_stockpile_fix
+			subtract = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_ger_silver_stockpile_fix
+			add = var:silver_state_1_fix
+		}
+	}
+	#company_Rothschild_Bank_aus
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_Rothschild_Bank_aus
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_aus_gold_stockpile_fix
+			subtract = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_aus_silver_stockpile_fix
+			add = var:silver_state_1_fix
+		}
+	}
+	#company_Rothschild_Bank_ita
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_Rothschild_Bank_ita
+			}
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_ita_gold_stockpile_fix
+			subtract = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_Rothschild_Bank_ita_silver_stockpile_fix
+			add = var:silver_state_1_fix
+		}
+	}
+	#company_BanqueDeParisEtDesPaysBas
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_BanqueDeParisEtDesPaysBas
+			}
+		}
+		change_global_variable = {
+			name = company_BanqueDeParisEtDesPaysBas_gold_stockpile_fix
+			subtract = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_BanqueDeParisEtDesPaysBas_silver_stockpile_fix
+			add = var:silver_state_1_fix
+		}
+	}
+	#company_BankJPMorgan
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_BankJPMorgan
+			}
+		}
+		change_global_variable = {
+			name = company_BankJPMorgan_gold_stockpile_fix
+			subtract = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_BankJPMorgan_silver_stockpile_fix
+			add = var:silver_state_1_fix
+		}
+	}
+	#company_DeutscheBank
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_DeutscheBank
+			}
+		}
+		change_global_variable = {
+			name = company_DeutscheBank_gold_stockpile_fix
+			subtract = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_DeutscheBank_silver_stockpile_fix
+			add = var:silver_state_1_fix
+		}
+	}
+	#company_BankHSBC
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_BankHSBC
+			}
+		}
+		change_global_variable = {
+			name = company_BankHSBC_gold_stockpile_fix
+			subtract = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_BankHSBC_silver_stockpile_fix
+			add = var:silver_state_1_fix
+		}
+	}
+	#company_Bankenverein
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_Bankenverein
+			}
+		}
+		change_global_variable = {
+			name = company_Bankenverein_gold_stockpile_fix
+			subtract = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_Bankenverein_silver_stockpile_fix
+			add = var:silver_state_1_fix
+		}
+	}
+	#company_BancaCommercialeItaliana
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_BancaCommercialeItaliana
+			}
+		}
+		change_global_variable = {
+			name = company_BancaCommercialeItaliana_gold_stockpile_fix
+			subtract = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_BancaCommercialeItaliana_silver_stockpile_fix
+			add = var:silver_state_1_fix
+		}
+	}
+	#company_DeNederlandscheBank
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_DeNederlandscheBank
+			}
+		}
+		change_global_variable = {
+			name = company_DeNederlandscheBank_gold_stockpile_fix
+			subtract = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_DeNederlandscheBank_silver_stockpile_fix
+			add = var:silver_state_1_fix
+		}
+	}
+	#company_amsterdamschebank
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_amsterdamschebank
+			}
+		}
+		change_global_variable = {
+			name = company_amsterdamschebank_gold_stockpile_fix
+			subtract = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_amsterdamschebank_silver_stockpile_fix
+			add = var:silver_state_1_fix
+		}
+	}
+	#company_RotterdamscheBankvereeniging
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_RotterdamscheBankvereeniging
+			}
+		}
+		change_global_variable = {
+			name = company_RotterdamscheBankvereeniging_gold_stockpile_fix
+			subtract = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_RotterdamscheBankvereeniging_silver_stockpile_fix
+			add = var:silver_state_1_fix
+		}
+	}
+	#company_BankIBC
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_BankIBC
+			}
+		}
+		change_global_variable = {
+			name = company_BankIBC_gold_stockpile_fix
+			subtract = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_BankIBC_silver_stockpile_fix
+			add = var:silver_state_1_fix
+		}
+	}
+	#company_Mitsubishiexchangehousebank
+	if = {
+		limit = {
+			scope:arbitrage_privat_bank = {
+				is_company_type = company_type:company_Mitsubishiexchangehousebank
+			}
+		}
+		change_global_variable = {
+			name = company_Mitsubishiexchangehousebank_gold_stockpile_fix
+			subtract = var:gold_state_1_fix
+		}
+		change_global_variable = {
+			name = company_Mitsubishiexchangehousebank_silver_stockpile_fix
+			add = var:silver_state_1_fix
+		}
+	}
+}
