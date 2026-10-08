@@ -21,7 +21,6 @@
 | `regen_ef_bond_ledger` | `common/scripted_effects/ld_bond_ledger.txt`, `common/script_values/ld_bond_ledger_values.txt` | — |
 | `regen_ef_bond_tables` | `common/scripted_guis/ld_bond_tables.txt`, `common/script_values/ld_bond_tables_values.txt`, `localization/<lang>/ld_bond_tables_l_<lang>.yml` | — |
 | `regen_ef_cb_loan` | `common/script_values/ld_cb_loan_values.txt`, `localization/<lang>/replace/ld_cb_loan_replace_l_<lang>.yml` | — |
-| `regen_ef_cb_rate_gui` | `gui/ld_cb_rate_panel.gui` | `gui/ld_cb_rate_panel.gui` / E&F-оригинал (ПК) |
 | `regen_ld_currency_data` | `common/scripted_effects/ld_currency_var.txt` (`zz_ef_cur_set`, `zz_ef_cur_names`, `zz_ef_cur_name_set` — слово валюты закона E&F), `on_activate` законов `common/laws/01_ef_currency_type.txt`, `currency_name` / `currency_symbol` / `currency_symbol_generic` / `currency_symbol_<cur>` в `common/customizable_localization/00_ef_localization_ custom.txt`, `common/script_values/ld_currency_values.txt`, оценка валют в `zz_ef_fx_reserves_metal` (`ld_fx_reserves_values.txt`), `docs/currency-table.md` | законы, история и локализация валют форка |
 | `regen_ld_currency_national` | `common/scripted_effects/ld_currency_national.txt` (`zz_ef_cur_noun_set` — национальное слово: культура → язык → наследие), `localization/english/ld_currency_national_l_english.yml`, `localization/russian/ld_currency_national_l_russian.yml` — `zz_ef_cur_nat_<слово>` «<прилагательное страны> <слово>» для всех слов (национальных и валют E&F, `LAW_NOUN`; рус. — окончание по роду) | данные игры — `tools/data/vic3_heritages.json`, `tools/data/vic3_cultures.json` |
 | `regen_ef_cb_rate_loc` | `localization/<lang>/ld_cb_rate_panel_l_<lang>.yml` | — |
@@ -38,6 +37,8 @@
 | `regen_ef_reserve_trade` | `common/script_values/ld_reserve_trade_values.txt` | `common/scripted_effects/01_economic_scripted_effects.txt` (валюты) |
 
 Генератор ведёт только записи, которые есть в его файлах; в файле могут быть и рукописные записи. Законы денежной
-политики, кнопки кредита ЦБ, панель экономики, сделки форекса и прочие места в файлах E&F правятся руками.
+политики, кнопки кредита ЦБ, панель экономики (`gui/ld_economy_panel.gui`), панель ставки (`gui/ld_cb_rate_panel.gui`),
+зона валюты подданного (`ld_currency_zone.txt`, `ld_currency_zone_triggers.txt`), сделки форекса
+(`ld_fx_reserves_values.txt`, кроме оценки валют) и прочие места в файлах E&F правятся руками.
 
 Не относятся к форку: `regen_ef_cmf_gui` (компач E&F × CMF), `regen_ef_tr_copies` (компач с T&R).
