@@ -11200,10 +11200,14 @@ trade_balance = {
 }
 
 money_value_target_pre_set = {
-	# R3.6: a new country (Peru-Bolivia, r1008_074100) has no money yet -- money_value_*_standard divide by money_supply = 0
-	# ("Value of wrong type ... none"); the target stays as it was until there is money
+	# R3.6: a new country without E&F's variables yet ("Value of wrong type ... none" in money_value_*_standard: they read
+	# var:law_* of E&F) -- a revolutionary (r1008_094935: 653 errors; new_country_var_ef runs at once only for formed and
+	# released countries, ld_new_country_immediate_init.txt), Peru-Bolivia (r1008_074100); the target stays as it was
 	if = {
-		limit = { money_supply > 0 }
+		limit = {
+			has_variable = zz_ef_country_vars_set
+			money_supply > 0
+		}
 		# Si standard argent
 		if = {
 			limit = {
