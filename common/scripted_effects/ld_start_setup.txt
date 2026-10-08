@@ -53,6 +53,7 @@ zz_ef_start_setup_year = {
 	if = {
 		limit = {
 			has_modifier = has_central_bank
+			is_subject = yes
 			NOT = { market ?= { exists = owner owner = root } }
 		}
 		subject_currency = yes

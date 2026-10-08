@@ -24,7 +24,10 @@ ef_on_monthly_pulse_recurence = {
 	if  = {
 		limit = {
 			has_modifier = has_central_bank
-			market_owner_is_root = yes
+			OR = {
+				market_owner_is_root = yes
+				is_subject = no
+			}
 			or = {
 				market_owner_is_root_univ_with_buiding = yes
 				has_law = law_type:law_external_exchange_standard
@@ -33,10 +36,13 @@ ef_on_monthly_pulse_recurence = {
 		}
 		remove_suject_currency = yes
  	}
+	# a subject's CB on a foreign market takes the external exchange standard; a country that is not a subject keeps its
+	# own monetary system on a foreign market (Д.R8а.3)
 	if  = {
 		limit = {
 			has_modifier = has_central_bank
 			market_owner_is_root = no
+			is_subject = yes
 			or = {
 				bank_central_buiding_no_external_currency_consuption = yes
 				not = {

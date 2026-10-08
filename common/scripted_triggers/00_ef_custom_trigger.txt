@@ -469,18 +469,6 @@ is_subject_custom_trigger = {
 		}
 	#}
 }
-is_not_market_owner = {
-	# true only for a market that exists and is someone else's: the engine checks the laws' can_enact when it loads the
-	# game, before the markets exist -- with "no market" counted as "not the owner" ~26 countries got "not permitted to
-	# retain law" for their start standard; a country
-	# without a market or a market without an owner (a revolutionary) -- no error either
-	root = {
-		market ?= {
-			exists = owner
-			NOT = { owner = root }
-		}
-	}
-}
 
 market_owner_is_root = {
 	market.owner = root

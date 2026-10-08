@@ -59,7 +59,7 @@
 | 92195, 104223 | `reset_debt_in_national_currency[_player]` (2×2 тыс. строк) | да (GUI/смена закона) |
 | 94312–98727 | `stockpiling_capital_state_transfert`, `..._financial_center_place`, `enemy_capital_is_occuped` (1,8 тыс.), `enemy_stats_is_occuped` | да (месячный, решение ИИ, бой) |
 | 98819–104131 | `central_bank_production_methods`, `_3`, `_4` — пустые определения (тела в `_archive/ef_central_bank_pm_consuption/`) | пусто |
-| 106333–107230 | `remove_suject_currency`, `subject_currency` | живые (подданные) |
+| 106333–107230 | `remove_suject_currency`, `subject_currency` | живые (подданные; неподданный на чужом рынке — со своей системой, Д.R8а.3) |
 Внутри E&F-тел встроены вызовы модели: `zz_ef_cb_rate_step`, `zz_ef_std_switch_*`, `zz_ef_mp_init/_clear`, `zz_ef_crisis_redeem` (95), `zz_ef_cb_cover`, `zz_ef_cover_normal` (по 95 валютам в `sell_<cur>_currency_crisis`).
 
 ## Переменные
