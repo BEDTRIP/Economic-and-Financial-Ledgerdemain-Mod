@@ -2710,7 +2710,6 @@ types zz_ef_economy_panel
 
 							blockoverride "onclick" {
 								onclick = "[GetVariableSystem.Toggle('import_export_value_in_currency')]"
-								onclick = "[GetScriptedGui('update_import_export_value_in_currency_liste').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								onclick = "[GetScriptedGui('trade_balance_actualized').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 								onclick = "[GetScriptedGui('update_currency_liste').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 							}

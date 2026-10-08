@@ -1699,7 +1699,6 @@ silver_gui_6 = {
 	market_gui_market_currency_list = {
 		saved_scopes = { list_order list_filter }
 		effect = {
-			clear_global_variable_list = gui_market_currency_list
 			if = {
 				limit = {
 					exists = scope:list_filter
@@ -1777,7 +1776,6 @@ silver_gui_6 = {
 				}
 
 				min = 0
-				add_to_global_variable_list = { name = gui_market_currency_list target = THIS }
 			}
 		}
 	}

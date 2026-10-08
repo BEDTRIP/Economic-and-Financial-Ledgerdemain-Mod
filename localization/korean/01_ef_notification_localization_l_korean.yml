@@ -21,20 +21,13 @@
   #regulard
   ################################
   #Buy message
-  notification_your_currency_are_buy_message_name: "[SCOPE.sCountry('buyer').GetName] buy your Currency"
 
-  notification_your_currency_are_buy_message_desc: "[SCOPE.sCountry('buyer').GetName] buy [SCOPE.sCountry('buyer').MakeScope.Var('stockpiling_undervalued_quantity_var').GetValue|+D] [SCOPE.sCountry('undervalued_currency_country_owner').GetCustom('stockpiling_undervalued_quantity_var')] [SCOPE.sCountry('undervalued_currency_country_owner').GetCustom('currency_symbol')] [SCOPE.sCountry('undervalued_currency_country_owner').GetCustom('currency_name')] for [SCOPE.sCountry('buyer').MakeScope.Var('stockpiling_undervalued_currency_state_1_buyer_in_metal').GetValue|+D] [GetPlayer.GetCustom('monetary_system_partiel')]."
 
-  #notification_your_currency_are_buy_message_desc: "[SCOPE.sCountry('buyer').GetName] buy [SCOPE.sCountry('buyer').MakeScope.Var('stockpiling_undervalued_quantity_var').GetValue|+D] [SCOPE.sCountry('undervalued_currency_country_owner').GetCustom('stockpiling_undervalued_currency_state_1_buyer_in_gold')] [SCOPE.sCountry('undervalued_currency_country_owner').GetCustom('currency_symbol')] [SCOPE.sCountry('undervalued_currency_country_owner').GetCustom('currency_name')]."
 
-  notification_your_currency_are_buy_message_tooltip: "#header $notification_your_currency_are_buy_message_name$#!\n$TOOLTIP_DELIMITER$\n$notification_your_currency_are_buy_message_desc$"
 
   #Sell message
-  notification_your_currency_are_sell_message_name: "[SCOPE.sCountry('seller_root').GetName] selll your Currency"
 
-  notification_your_currency_are_sell_message_desc: "[SCOPE.sCountry('seller_root').GetName] sell [SCOPE.sCountry('seller_root').MakeScope.Var('stockpiling_overrated_quantity_var').GetValue|+D] [SCOPE.sCountry('overrated_currency_country_owner').GetCustom('currency_name')] [SCOPE.sCountry('overrated_currency_country_owner').GetCustom('currency_symbol')] for [SCOPE.sCountry('seller_root').MakeScope.Var('stockpiling_overrated_currency_state_1_buy_in_metal').GetValue|+D] [GetPlayer.GetCustom('monetary_system_partiel')]."
 
-  notification_your_currency_are_sell_message_tooltip: "#header $notification_your_currency_are_sell_message_name$#!\n$TOOLTIP_DELIMITER$\n$notification_your_currency_are_sell_message_desc$"
 
   ################################
   #maturity_arrives_message

@@ -45,7 +45,6 @@ E&F `trade_balance` отключён. Ключи `ld_*` — с префиксо�
 | `zz_ef_cbfx_d_<cur>`, `zz_ef_cbfx_p_<cur>` | дельта и прошлое значение запаса | `zz_ef_cbfx_week_step` | таблица ЦБ |
 | `zz_ef_holds_pc`, список `zz_ef_holders_list` | сколько нашей валюты у держателя | `zz_ef_holders_update` | GUI |
 | `trade_balance_in_gold_fixe` | счётчик торгового баланса E&F (держится 0) | `trade_balance`, кнопка `trade_balance_actualized` | `central_bank_reserves_*` E&F |
-| `purchase_cycle` | признак покупки за цикл ИИ-форекса (ставят история и `10_new_country_var.txt`; читатель — в `_archive/ef_ai_forex/`) | история | — |
 
 ## Вызовы и связи
 - `zz_ef_clr_gold_per_money` и `zz_ef_rc_currency_value` читают клиринг, таблицы облигаций (`ld_bond_tables.txt`), модель денег.
