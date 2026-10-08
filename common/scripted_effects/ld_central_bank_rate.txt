@@ -1,5 +1,5 @@
 ﻿#############################################
-# EF.30 + EF.26 (2026-09-30, v2 same day) -- the central bank sets the rate.
+# EF.30 + EF.26 -- the central bank sets the rate.
 #
 # WHAT E&F DOES (4.1.7)
 # base_rate_change (E&F, since removed) was the AI-only
@@ -12,15 +12,15 @@
 # WHAT THIS DOES
 # base_rate_change (the effect and its call) is removed.
 # zz_ef_cb_rate_step moves the rate by zz_ef_cb_rate_next_step
-# (script_values/zz_ef_cb_rate_values.txt) -- towards the target from the
+# (script_values/ld_cb_rate_values.txt) -- towards the target from the
 # credit rating -- for every country, AI and player alike, every 3 months
-# (on_actions/zz_ef_cb_rate_on_actions.txt).
+# (on_actions/ld_cb_rate_on_actions.txt).
 #
 # rise_base_rate / down_base_rate are NOT empty labels: E&F reads them monthly
 # for private-bank currency arbitrage (00_on_action_main.txt:446) and for the
 # inflation policy (01_economic_scripted_effects.txt:10126). A step sets the
 # matching one for 3 months, as a rate change did in E&F. The player's buttons
-# no longer check them (free, no cooldown since 2026-09-30), so the bank's
+# no longer check them, so the bank's
 # steps do not lock the buttons.
 #
 #############################################

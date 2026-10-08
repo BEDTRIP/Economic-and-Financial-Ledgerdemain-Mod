@@ -1,6 +1,6 @@
 ﻿#############################################
-# EF.18 v2 (2026-09-24) -- overbuilt economy under PSC: the numbers.
-# The mechanism: common/on_actions/zz_pb_ef_overbuild_counter.txt.
+# overbuilt economy under PSC: the numbers.
+# The mechanism: common/on_actions/ld_pb_overbuild_counter.txt.
 #
 # COUNTRY scope throughout. Sums go per STATE through b: -- E&F's versions walk
 # every building of the country, and these run monthly for every country.
@@ -13,9 +13,9 @@
 # 1% -> 95% of urban centres, 6.57% (Britain 1840) -> 67%, 12% (E&F's
 # ceiling) -> 40%, 20% -> 0. E&F's own factor was 1 - (rate - 1%) / 11%,
 # i.e. 49% at 6.57%.
-# STR.4 (night G, 2026-10-03): the stimulus buttons 9-12 lower the 5 to 4 / 3.5 /
+# the stimulus buttons 9-12 lower the 5 to 4 / 3.5 /
 # 3 / 2.5 for 36 months (var:zz_pb_ef_stimulus_mult, timed; scripted_guis/
-# zz_pb_ef_speculative_pcs_sguis.txt). Without it -- 5.
+# scripted_guis/00_financial_scripted_guis.txt). Without it -- 5.
 zz_pb_ef_css_rate_mult_base = 5
 zz_pb_ef_css_rate_mult = {
 	value = zz_pb_ef_css_rate_mult_base
@@ -25,11 +25,11 @@ zz_pb_ef_css_rate_mult = {
 	}
 }
 
-# STR.3 / D.9 (night G, 2026-10-03): households and urban centres now buy
+# households and urban centres now buy
 # construction goods too (tools/regen_ef_household_construction.py), so the limit
 # carries extra sectors for that demand -- else the penalty punishes sectors the
 # country needs. Natural economies cover the countryside; what is left is the
-# cities', so the extra is per urban centre level. 1837 (run 1, world): 424 urban
+# cities', so the extra is per urban centre level. 1837: 424 urban
 # centre levels, ~1 000 construction goods a week of urban household + upkeep demand,
 # ~20 goods per sector level -> ~0.12 sectors per urban level; 0.25 leaves room for
 # growth with wealth. !! TUNING !! (D.8: raise if industrial countries choke).
@@ -71,7 +71,7 @@ zz_pb_ef_overbuild_pct = {
 	divide = building_urban_center_lvl_by_base_rate
 }
 
-# Sectors in percent of the limit, for the journal table (2026-09-25):
+# Sectors in percent of the limit, for the journal table:
 # 100 = at the limit, over 100 = overcapacity. The limit is at least 1.
 zz_pb_ef_overcap_ratio_pct = {
 	value = zz_pb_ef_css_levels
@@ -138,9 +138,9 @@ zz_pb_ef_overbuild_step_eff = {
 	max = 100
 	subtract = var:speculative_share_2
 }
-# Bands of 10 for the "rising" notification (on_actions/zz_pb_ef_overbuild_counter.txt):
+# Bands of 10 for the "rising" notification (on_actions/ld_pb_overbuild_counter.txt):
 # a message only when the counter enters a new band upwards. The bubble's own
-# are in the E&F hotfix since 2026-09-25 (EF.29, zz_ef_bubble_values.txt).
+# are in the E&F hotfix since 2026-09-25 (EF.29, ld_bubble_values.txt).
 zz_pb_ef_ob_band_new = {
 	value = var:speculative_share_2
 	divide = 10
@@ -152,8 +152,8 @@ zz_pb_ef_ob_band_old = {
 	floor = yes
 }
 
-# STR.2 (night G, 2026-10-03): STATE scope -- levels of the state's construction
-# sector, the order of on_actions/zz_pb_ef_ai_sector_downsize.txt (biggest first).
+# STATE scope -- levels of the state's construction
+# sector, the order of on_actions/ld_pb_ai_sector_downsize.txt (biggest first).
 zz_pb_ef_state_css_level = {
 	value = 0
 	if = {
@@ -162,7 +162,7 @@ zz_pb_ef_state_css_level = {
 	}
 }
 
-# STR.2 (2026-10-03, the user: the state buys out before it pulls down): price of
+# price of
 # one private level of a construction sector. The engine's own buyout in this set
 # is PRIVATIZATION_PER_LEVEL_COST 150 (VC) x MIN_FAKE_CONSTRUCTION_COST 100 = 15 000
 # a level (В1.2: the pool loses multiples of 15 000). !! TUNING !!

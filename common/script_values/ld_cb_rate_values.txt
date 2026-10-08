@@ -1,8 +1,8 @@
 ﻿#############################################
-# EF.30 (2026-09-30, v2 same day) -- the central bank's rate, as values.
+# the central bank's rate, as values.
 # Rates are fractions (0.05 = 5%), as E&F's var:base_rate_percentage.
 #
-# TARGET (EF.45 + EF.43, 2026-09-30, replaces the rating-only 12%..2%).
+# TARGET.
 # A Fisher-style rule, decided by the user (План проекта.md, EF.39/EF.45):
 #   rule rate = neutral real rate 2.5%
 #             + inflation: E&F's consumer goods inflation, 6-month rolling,
@@ -24,7 +24,7 @@
 # on top; policy may take the target 2 pp under the corridor's floor, never
 # below 0.5%.
 #
-# STEP. Every 3 months (on_actions/zz_ef_cb_rate_on_actions.txt) the rate
+# STEP. Every 3 months (on_actions/ld_cb_rate_on_actions.txt) the rate
 # moves towards the target by at most 0.5 pp, or 1 pp when the gap is over
 # 5 pp.
 #############################################
@@ -46,7 +46,7 @@ zz_ef_cb_rate_is_fiat = {
 		value = 1
 	}
 }
-# R3.3 (Д.R3.3, ДС.1, 8.10): a dependent standard (gold exchange, external exchange) has no policy of its own -- its
+# (Д.R3.3) a dependent standard (gold exchange, external exchange) has no policy of its own -- its
 # corridor follows the reference currency's CB rate (global_var:zz_ef_ref_rate, set monthly by the reference): from it
 # to it + 4 pp (the colony pays a premium over the metropolis), within the metal corridor 2..12%.
 zz_ef_cb_rate_is_dependent = {
@@ -92,7 +92,7 @@ zz_ef_cb_rate_ceiling = {
 }
 
 # Parts of the rule, as fractions (shown in the rule box tooltip).
-# 1.10 evening (the user, run 15): the CB reads the money system, not the
+# 1.10 evening: the CB reads the money system, not the
 # rating. Metal standards (the Bank of England's practice: the rate set by
 # its reserves): 3% + the cover term + the money growth term. Fiat (the Taylor
 # rule): 2.5% + inflation (consumer prices) + 0.5 x (inflation - 2%) + the
@@ -106,8 +106,8 @@ zz_ef_cb_rule_neutral = {
 		value = 0.03
 	}
 }
-# EF.48 item 12 (1.10): the inflation from the money accounting (a year,
-# zz_ef_inflation in zz_ef_money_model_values.txt) replaces E&F's consumer
+# the inflation from the money accounting (a year,
+# zz_ef_inflation in ld_money_model_values.txt) replaces E&F's consumer
 # goods inflation x2.
 zz_ef_cb_rule_inflation = {
 	value = 0
@@ -123,7 +123,7 @@ zz_ef_cb_rule_inflation = {
 }
 # +0.5 pp per pp the money in circulation (M2) grows faster than GDP in a
 # year (zz_ef_circ_growth_year - zz_ef_gdp_growth_year), -2..+3 pp; every
-# standard since the inflation comes from prices (1.10 night).
+# standard since the inflation comes from prices.
 zz_ef_cb_rule_money = {
 	value = zz_ef_circ_growth_year
 	subtract = zz_ef_gdp_growth_year
@@ -142,13 +142,13 @@ zz_ef_cb_rule_rating = {
 	min = 0
 	max = 0.06
 }
-# EF.43 item 14 (1.10): the risk premium beyond E&F's rating, which bunches
+# the risk premium beyond E&F's rating, which bunches
 # the big countries together (Russia = France = 8.6 in 1836, while history
 # had Russia borrowing 2-7 pp dearer): a default +3 pp; instability -- the
 # radicals' share x 20 (up to +4 pp), legitimacy under 50 +1 / under 25
 # +2 pp, war +1 pp; an illiterate state collects its taxes and keeps its
 # books worse -- (40% - literacy) x 5, up to +2 pp. Weights doubled 4.10
-# (EF.43, decided by the user, D.1 b): with the 1.10 weights Russia, France
+#: with the 1.10 weights Russia, France
 # and Austria still came out within 1 pp of each other.
 zz_ef_cb_rule_stability = {
 	value = 0
@@ -180,8 +180,8 @@ zz_ef_cb_rule_stability = {
 		min = 0
 		max = 0.02
 	}
-	# EF.43 + В4.3 (5.10): the currency (parity changes, suspended redemption, fading over 5 years) and debt and
-	# deficits (script_values/zz_ef_risk_premium_values.txt)
+	# EF.43 + В4.3: the currency (parity changes, suspended redemption, fading over 5 years) and debt and
+	# deficits (script_values/ld_risk_premium_values.txt)
 	add = zz_ef_risk_fx
 	add = zz_ef_risk_debt
 	add = zz_ef_risk_deficit
@@ -194,9 +194,9 @@ zz_ef_cb_rule_risk = {
 	max = 0.08
 }
 # Metal standards: our cover (the metal at parity against M2, normal 40%):
-# +1 pp per 5 pp under the norm (up to +8; В1, 7.10), -0.5 pp per 10 pp over it
+# +1 pp per 5 pp under the norm, -0.5 pp per 10 pp over it
 # (down to -2).
-# В1 (the user, 7.10): +1 pp per 5 pp under the norm (was per 10 pp, at most +5): run r1006_141714 -- Britain's rate
+# +1 pp per 5 pp under the norm: run r1006_141714 -- Britain's rate
 # stayed 6.5-7% while its cover went 0.39 -> 0.006; now up to +8 pp at no cover (the corridor's ceiling 12% holds).
 zz_ef_cb_rule_cover = {
 	value = 0
@@ -219,7 +219,6 @@ zz_ef_cb_rule_cover = {
 # government's discretionary adjustment. Kept apart from the rate the bank
 # steers to (zz_ef_cb_rate_target = rule + adjustment): penalties for the gap
 # between the actual rate and this one come later (EF.31).
-# (The name stays from v1, when it was read off the rating alone.)
 zz_ef_cb_rate_rating_target = {
 	value = 0.065
 	if = {
@@ -357,7 +356,7 @@ zz_ef_cb_rule_money_pp = {
 	multiply = 100
 }
 
-# ---- EF.31 items 8-9 (1.10): the price of the government's policy ---------
+# ---- EF.31 items 8-9: the price of the government's policy ---------
 zz_ef_rate_bias_signed = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_rate_bias } value = var:zz_ef_rate_bias }

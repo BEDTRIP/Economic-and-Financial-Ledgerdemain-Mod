@@ -5,8 +5,8 @@ REPLACE:building_construction_sector = {
 	city_type = city
 	levels_per_mesh = 5
 	
-	# EF.18 v2: while the country bans private construction sectors
-	# (zz_pb_ef_css_private_ban_buttons.txt) the AI government does not
+	# while the country bans private construction sectors
+	# (ld_pb_css_private_ban_buttons.txt) the AI government does not
 	# privatize its own. A script value here is per the engine docs
 	# (buildings.md: "scope is country the building is located in"); nobody
 	# in the set uses the block form yet -- if debug.log complains about this
@@ -75,16 +75,12 @@ REPLACE:building_construction_sector = {
 		}
 
 		# `exists = owner` first: ai_value is evaluated for unowned states too, and
-		# `owner` comes back as none there ->
-		#   Value of wrong type in 'zz_pb_ef_construction_sector.txt:86'. Got value of type 'none'
-		# 24.09.2026: the same base_rate_percentage race as the ZZ FIX below --
-		# a country younger than its first E&F pulse has no such variable, the
-		# ceiling comes back none and this line logged
-		#   Value of wrong type in 'zz_pb_ef_construction_sector.txt:90'. Got value of type 'none'
-		# Such a country simply gets no AI penalty until it is backfilled.
-		# STR.2 (night G, 2026-10-03, D.12): at or over the limit the AI does not
-		# build sectors at all (was: ai_value / 2 over it); it also takes the
-		# excess down (on_actions/zz_pb_ef_ai_sector_downsize.txt).
+		# `owner` comes back as none there ("Value of wrong type … Got value of type 'none'").
+		# The same base_rate_percentage race as the ZZ FIX below: a country without
+		# the variable yet gets no AI penalty.
+		# at or over the limit the AI does not
+		# build sectors at all; it also takes the
+		# excess down (on_actions/ld_pb_ai_sector_downsize.txt).
 		if = {
 			limit = {
 				exists = owner
@@ -103,8 +99,7 @@ REPLACE:building_construction_sector = {
 	# We rely on E&F script_values; in pb+ef we remap `building_ef_private_construction_lvl` to sum `building_construction_sector`.
 	#
 	# `owner ?= { }` rather than `owner.x <= owner.y`: this is also evaluated for
-	# states with no owner, where the plain form logs
-	#   Value of wrong type in 'zz_pb_ef_construction_sector.txt:99'. Got value of type 'none'
+	# states with no owner, where the plain form logs "Value of wrong type … 'none'".
 	# The safe form skips the check there, which is the right answer anyway --
 	# nobody is privately funding a building in a state nobody owns.
 	#
@@ -113,14 +108,12 @@ REPLACE:building_construction_sector = {
 	# first monthly pulse (new_country_var_ef, called from ef_on_monthly_pulse_recurence).
 	# A state whose owner is younger than that first pulse (freshly released/formed/
 	# independent) has no such variable yet, so building_urban_center_lvl_by_base_rate
-	# itself comes back none and the comparison below used to throw
-	#   Value of wrong type in 'zz_pb_ef_construction_sector.txt:110'. Got value of type 'none'
-	# on every evaluation -- thousands of times per session on a save with several
-	# young countries on the map. has_variable gates on readiness; the un-adjusted PSC
+	# itself comes back none and the comparison below would throw "Value of wrong
+	# type … 'none'" on every evaluation. has_variable gates on readiness; the un-adjusted PSC
 	# cap (building_urban_center_lvl) covers a country that hasn't been backfilled yet.
 	can_build_private = {
 		owner ?= {
-			# EF.18 v2: the country banned private construction sectors.
+			# the country banned private construction sectors.
 			NOT = { has_variable = zz_pb_ef_css_private_ban }
 			# a trigger has no if/else here ("Unknown trigger type: if", error.log) -- the same choice with OR / AND
 			OR = {

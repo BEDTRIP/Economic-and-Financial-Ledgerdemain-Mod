@@ -1,4 +1,4 @@
-﻿# R1а.5: the ledger's values (scripted_effects/ld_ledger.txt).
+﻿# the ledger's values (scripted_effects/ld_ledger.txt).
 # The banks' book -- our accounts of the pool: liabilities (deposits of pops and of other CBs, the CB's credit,
 # the treasury's money, capital) less the loans (consumer, business). Before the first reconciliation the capital is 0.
 zz_ef_bank_book_v = {
@@ -10,7 +10,7 @@ zz_ef_bank_book_v = {
 	if = { limit = { has_variable = zz_ef_bank_capital } add = var:zz_ef_bank_capital }
 	if = { limit = { has_variable = zz_ef_cc_debt } subtract = var:zz_ef_cc_debt }
 	if = { limit = { has_variable = zz_ef_bc_debt } subtract = var:zz_ef_bc_debt }
-	# R2, step 7 (Д.R2.7): the banks' parts of foreign bonds (E&F's ai_privat_bank_bond_value_N) -- their asset
+	# (Д.R2.7) the banks' parts of foreign bonds (E&F's ai_privat_bank_bond_value_N) -- their asset
 	subtract = zz_ef_bank_bonds
 }
 zz_ef_ledger_deposits_v = {
@@ -26,7 +26,7 @@ zz_ef_f_other_abs_v = {
 		if = { limit = { var:zz_ef_f_other < 0 } multiply = -1 }
 	}
 }
-# R2, steps 10 and 12 (8.10, (б)): the engine's price of a privatized building level is 250 x its construction points
+# steps 10 and 12: the engine's price of a privatized building level is 250 x its construction points
 # (PRIVATIZATION_PER_LEVEL_COST), the points a multiple of 100 -- the unit of the reconciliation's line «выкуп уровней»
 zz_ef_lvl_unit = 25000
 # 1 if var:zz_ef_t_lvl (a step's change, the pool's sign) is a whole negative multiple of the unit (within 1, the engine's
@@ -60,7 +60,7 @@ zz_ef_v_f_other = {
 zz_ef_wld_other_v = { value = global_var:zz_ef_wld_other }
 zz_ef_wld_other_abs_v = { value = global_var:zz_ef_wld_other_abs }
 zz_ef_wld_other_n_v = { value = global_var:zz_ef_wld_other_n }
-# R1б (В5): the treasury net of its debt (the engine's gold_reserves - principal), the engine's budget of the weeks the
+# the treasury net of its debt (the engine's gold_reserves - principal), the engine's budget of the weeks the
 # step covers, our postings to the treasury since the last reconciliation (scripted_effects/ld_ledger.txt)
 zz_ef_treasury_net_v = {
 	value = gold_reserves

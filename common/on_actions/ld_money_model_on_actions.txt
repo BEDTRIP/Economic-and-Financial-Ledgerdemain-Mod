@@ -1,13 +1,13 @@
 ﻿#############################################
-# EF.39 / EF.48 (2026-09-30) -- the money model's steps
+# the money model's steps
 # (scripted_effects/ld_money_model.txt). Roles A and B; the global scheduler
 # (scripted_effects/ld_scheduler.txt) runs the monthly step and the weekly one.
 #############################################
 
-# R1а.4 (Д.4): run by the scheduler (scripted_effects/ld_scheduler.txt, zz_ef_sched_monthly), not on on_monthly_pulse_country.
+# run by the scheduler (scripted_effects/ld_scheduler.txt, zz_ef_sched_monthly), not on on_monthly_pulse_country.
 
 zz_ef_money_model_monthly = {
-	# R1а.3 (Д.2): role V (decentralized) is outside the money model
+	# role V (decentralized) is outside the money model
 	trigger = {
 		NOT = { zz_ef_role_is_v = yes }
 	}

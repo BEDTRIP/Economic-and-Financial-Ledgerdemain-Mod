@@ -61,7 +61,7 @@ privatisation_spending_percent_weekly = {
 }
 
 state_construction_spending_allocation = {
-	# ФК2 (7.10): the same arithmetic without scope-change blocks (owner = { value = … } gave 'none', error.log)
+	# the same arithmetic without scope-change blocks (owner = { value = … } gave 'none', error.log)
 	value = owner.var:total_construction_spending
 	divide = {
 		value = owner.var:weighted_total
@@ -98,7 +98,7 @@ state_construction_spending_allocation = {
 			#Add at most one level's production over the limit
 			add = {
 				value = var:state_construction_production
-				# ФК2 (7.10): a state without the construction sector -- the building link is empty ('none' in error.log)
+				# a state without the construction sector -- the building link is empty ('none' in error.log)
 				if = {
 					limit = { has_building = building_construction_sector }
 					b:building_construction_sector = {

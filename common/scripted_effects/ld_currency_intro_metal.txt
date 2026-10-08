@@ -1,12 +1,11 @@
-﻿# В2.4 (decided 4.10, М.10 а; 5.10): E&F's metal "from nothing" at a currency's introduction is switched off.
+﻿# E&F's metal "from nothing" at a currency's introduction is switched off.
 # E&F's introduction_of_<currency> (95 effects, 09_introduction_building_lvl.txt, ~190 edits) adds to the capital's
 # gold_state_1 / silver_state_1 (money in E&F's count + its stock + building savings) x the new parity -- a cover far
 # over 100% out of nowhere (E&F's currency reform after a crisis, reset_law_event_currency, is off until R3). Wrapped
-# around introduction_new_currency
-# (zz_ef_cm_bank_spawn.txt):
+# around introduction_new_currency (09_introduction_building_lvl.txt):
 #   * before the country's first step (var:zz_ef_metal_started): untouched -- E&F's start, which the first step takes;
 #   * later: the capital's metal is put back as it was before the call; a new CB starts with no metal and buys it on
-#     the market (М, 6.10; logged EFM|...|cur_intro, the norm field 0).
+#     the market.
 
 zz_ef_cur_intro_before = {
 	# 5.10 (run s1b): history can call it for a country with no capital yet
@@ -33,11 +32,11 @@ zz_ef_cur_intro_before = {
 }
 
 zz_ef_cur_intro_after = {
-	# R1б.2: the new currency as data (scripted_effects/ld_currency_var.txt)
+	# the new currency as data (scripted_effects/ld_currency_var.txt)
 	zz_ef_cur_set = yes
 	if = {
 		limit = { exists = capital }
-		# 6.10 (stage 2, run r1006_132739): from the country's first step on -- E&F's metal at an introduction in the first
+		# 6.10: from the country's first step on -- E&F's metal at an introduction in the first
 		# 13 weeks was left to the week-12 rescale, and the world line of metal read +370M gold and +4.4 bn silver from
 		# nothing in one week (17.2.1836); before the first step it is E&F's start, which the first step takes as stock
 		if = {
@@ -53,7 +52,7 @@ zz_ef_cur_intro_after = {
 				set_variable = { name = gold_state_1 value = var:zz_ef_cur_intro_gold }
 				set_variable = { name = silver_state_1 value = var:zz_ef_cur_intro_silver }
 			}
-			# М (the user, 6.10): a first currency got 40% of its M2 in metal from nothing (the norm) -- removed; its CB
+			# a first currency got 40% of its M2 in metal from nothing (the norm) -- removed; its CB
 			# buys metal on the market like every CB (its building's input, zz_ef_cb_metal_purchase_step)
 			set_variable = { name = zz_ef_cur_intro_norm value = 0 }
 			if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|cur_intro|first [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cur_intro_first_v')|0]|gold_ef [THIS.GetCountry.GetCapital.MakeScope.Var('zz_ef_cur_intro_g_ef').GetValue|0]|gold_kept [THIS.GetCountry.GetCapital.MakeScope.Var('zz_ef_cur_intro_gold').GetValue|0]|norm [THIS.GetCountry.MakeScope.Var('zz_ef_cur_intro_norm').GetValue|0]|parity [THIS.GetCountry.MakeScope.Var('money_value_target_1').GetValue|4]" }
@@ -66,7 +65,7 @@ zz_ef_cur_intro_after = {
 			if = { limit = { has_variable = zz_ef_cur_intro_silver } remove_variable = zz_ef_cur_intro_silver }
 		}
 		if = { limit = { has_variable = zz_ef_cur_intro_first } remove_variable = zz_ef_cur_intro_first }
-		# В3.2 (5.10): E&F just gave a subject its own currency -- back to the overlord's zone
+		# E&F just gave a subject its own currency -- back to the overlord's zone
 		if = {
 			limit = { is_subject = yes }
 			zz_ef_cur_zone_step = yes

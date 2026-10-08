@@ -1,12 +1,12 @@
 ﻿#############################################
-# R1а.5 (схема 3.1; R0.8: Р4, Р5, Р12, Р13): the ledger -- the registry of accounts, the posting, the reconciliation
+# the ledger -- the registry of accounts, the posting, the reconciliation
 # by stocks. The list of accounts and their variables: docs/money-model.md, «Реестр счетов».
 #
 # Posting: one effect with a pair of accounts, the same amount out of one and into the other. Our accounts are
 # country variables (their names are the accounts' names, zz_ef_*); the engine's accounts are the treasury and the
 # pool (ENG = treasury | pool), moved by add_treasury / add_investment_pool. $V$ -- one token (var:x, a script value).
 #
-# Reconciliation by stocks (decided 7.10, R0.8): the engine's money on the date (treasury + buildings' cash + pool)
+# Reconciliation by stocks: the engine's money on the date (treasury + buildings' cash + pool)
 # against the sum of our accounts on it. The treasury and the buildings' cash are the state's and the businesses'
 # own accounts, read from the engine; the pool is the banks' cash, and our accounts say whose it is
 # (zz_ef_bank_book_v): deposits of pops and of other CBs, the CB's credit to the banks, the treasury's money in the
@@ -73,7 +73,7 @@ zz_ef_eng_sub_treasury = {
 	add_treasury = { value = $V$ multiply = -1 }
 	zz_ef_tr_unmark = { V = $V$ }
 }
-# R1б (В5, 8.10): every add_treasury of ours is marked (var:zz_ef_tr_posted, zeroed by the reconciliation), so the
+# every add_treasury of ours is marked (var:zz_ef_tr_posted, zeroed by the reconciliation), so the
 # treasury's «прочее» is its change less the engine's budget less our postings -- what E&F and the rest wrote.
 zz_ef_tr_mark = {
 	if = { limit = { NOT = { has_variable = zz_ef_tr_posted } } set_variable = { name = zz_ef_tr_posted value = 0 } }
@@ -103,7 +103,7 @@ zz_ef_reconcile = {
 		set_variable = { name = zz_ef_other value = 0 }
 	}
 	set_variable = { name = zz_ef_other_prev value = var:zz_ef_other }
-	# R2, steps 10 and 12 (the user, 8.10, (б); R6 -- a posting): the engine's privatization of building levels (250 x the
+	# steps 10 and 12: the engine's privatization of building levels (250 x the
 	# level's construction points, a multiple of zz_ef_lvl_unit) -- the pool pays, a state seller's treasury gets it; the
 	# script has no hook. A step's change of the pool's part that is a whole negative multiple of the unit is this line, not
 	# «прочее» (zz_ef_lvl_buy_pool, summed); the treasury's positive multiples -- zz_ef_lvl_buy_tr. Mixed with other

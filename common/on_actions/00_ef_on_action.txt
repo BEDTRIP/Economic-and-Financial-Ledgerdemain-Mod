@@ -27,7 +27,7 @@ on_game_started_after_lobby = {
 
 on_monthly_pulse_country = {
 	on_actions = {
-		# R1а.4 (Д.4): the monthly hub runs from the scheduler for roles A / B (ld_scheduler.txt, zz_ef_sched_monthly);
+		# the monthly hub runs from the scheduler for roles A / B (ld_scheduler.txt, zz_ef_sched_monthly);
 		# the engine's pulse -- only for the countries outside it (zz_ef_monthly_unscheduled, ld_scheduler_on_actions.txt)
     	zz_ef_monthly_unscheduled
     }
@@ -83,14 +83,14 @@ on_battle_ended = {
 ############################################################################################################################################################
 
 ef_on_monthly_pulse_country = {
-	trigger = { zz_ef_game_started = yes } # R3а: not before the start (scripted_triggers/ld_start_triggers.txt)
+	trigger = { zz_ef_game_started = yes } # not before the start (scripted_triggers/ld_start_triggers.txt)
     effect = {
 		###NOTE:
 		# - has_central_bank -> réservé au pays possédant une bank centrrale avec des particularité en fonction
 		# - has_financial_center -> réservé au pays possédant un centre financier uniqement
 
 		ef_on_monthly_pulse_recurence = yes
-		# R3.2 (8.10): the central bank law follows the CB (scripted_effects/ld_cb_law.txt)
+		# the central bank law follows the CB (scripted_effects/ld_cb_law.txt)
 		zz_ef_cb_law_sync = yes
 
 		#has_central_bank
@@ -104,8 +104,8 @@ ef_on_monthly_pulse_country = {
 }
 
 ef_on_half_yearly_pulse_country = {
-	trigger = { # R3а: not before the start (scripted_triggers/ld_start_triggers.txt); a country E&F has not set up yet waits for
-		# its monthly hub (new_country_var_ef) -- a country made by an event (r1008_155810: gdp_fixe_var_1_5Y ... not set)
+	trigger = { # not before the start (scripted_triggers/ld_start_triggers.txt); a country E&F has not set up yet waits for
+		# its monthly hub (new_country_var_ef) -- a country made by an event
 		zz_ef_game_started = yes
 		has_variable = zz_ef_country_vars_set
 	}
@@ -140,8 +140,8 @@ ef_on_half_yearly_pulse_country = {
 }
 
 ef_on_yearly_pulse_country = {
-	trigger = { # R3а: not before the start (scripted_triggers/ld_start_triggers.txt); a country E&F has not set up yet waits for
-		# its monthly hub (new_country_var_ef) -- a country made by an event (r1008_155810: gdp_fixe_var_1_5Y ... not set)
+	trigger = { # not before the start (scripted_triggers/ld_start_triggers.txt); a country E&F has not set up yet waits for
+		# its monthly hub (new_country_var_ef) -- a country made by an event
 		zz_ef_game_started = yes
 		has_variable = zz_ef_country_vars_set
 	}
@@ -205,8 +205,8 @@ ef_on_yearly_pulse_country = {
 }
 
 ef_on_five_year_pulse_country = {
-	trigger = { # R3а: not before the start (scripted_triggers/ld_start_triggers.txt); a country E&F has not set up yet waits for
-		# its monthly hub (new_country_var_ef) -- a country made by an event (r1008_155810: gdp_fixe_var_1_5Y ... not set)
+	trigger = { # not before the start (scripted_triggers/ld_start_triggers.txt); a country E&F has not set up yet waits for
+		# its monthly hub (new_country_var_ef) -- a country made by an event
 		zz_ef_game_started = yes
 		has_variable = zz_ef_country_vars_set
 	}
@@ -334,7 +334,7 @@ ef_on_battle_ended = {
 
 ef_on_production_method_changed = {
 	effect = {
-		# R1а.2 (Д.1): only the building that changed its method (scope -- building); the country-wide sweep
+		# only the building that changed its method (scope -- building); the country-wide sweep
 		# private_ownership_production_stocks stays in the yearly pulse. Rules and the financial centre call --
 		# zz_ef_pm_stock_building (common/scripted_effects/ld_pm_stock_hook.txt).
 		zz_ef_pm_stock_building = yes

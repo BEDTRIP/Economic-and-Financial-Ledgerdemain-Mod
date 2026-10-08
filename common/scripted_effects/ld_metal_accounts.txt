@@ -1,18 +1,18 @@
 ﻿#############################################
 # Stage 2, night 6.10 (Ф1 + Ф2) -- the metal accounts: the start, the purchases, the world line.
-# Values and units: script_values/zz_ef_metal_accounts_values.txt. Called from the money model's weekly step
-# (scripted_effects/zz_ef_money_model.txt).
+# Values and units: script_values/ld_metal_accounts_values.txt. Called from the money model's weekly step
+# (scripted_effects/ld_money_model.txt).
 #############################################
 
 # ---- the start in balance (R1б.1: Д.1, Д.2, В4) -----------------------------
-# Country scope, the first step of a new game, once (the user, 7.10: "in balance from the first day"):
+# Country scope, the first step of a new game, once:
 #   * the parity stays E&F's historical one (Д.1: the pound 7.32, the franc 0.75 -- the rate between currencies and the
 #     labels in national units); the engine's money is one unit for every country and the metal is counted in it at a
 #     fixed rate (zz_ef_metal_per_money: 1 gold unit per unit of money, a silver standard -- silver at the market rate);
 #   * the CB's metal (a metal standard with a CB) = 40% of M2 -- once, at the first step where the engine has filled
 #     the buildings' cash (zz_ef_cb_metal_start_step, var:zz_ef_cb_start_due); E&F's metal from history is not taken
 #     (its scale is ~10 times our money); until then the CB does not trade metal (Д.2);
-#   * В4 (the user, 8.10): E&F's metal of a country with a CB stays in its CB states, also when the country has no metal
+#   * В4: E&F's metal of a country with a CB stays in its CB states, also when the country has no metal
 #     standard yet (a subject joins its overlord's through the currency zone after its first step -- Hanover, Lower
 #     Canada, Finland got 44-132 GDP of it as the pops' metal, r1008_062130); the CB's start scales it to 40% of M2 (the
 #     currency at its E&F parity), gold and silver by one factor (E&F's ratio). A country without a CB: its CB states'
@@ -29,14 +29,14 @@ zz_ef_metal_start_step = {
 	set_variable = { name = zz_ef_ms_ef_s value = 0 }
 	# the CB's 40% comes once the money exists and the country is a CB on a metal standard (zz_ef_cb_metal_start_step) --
 	# a subject joins its overlord's standard through the currency zone after its first step, E&F writes its metal
-	# again then (r1007_204439: the Dutch East Indies 1.8 bn silver, Finland, New South Wales, Hanover)
+	# again then
 	if = {
 		limit = { has_modifier = has_central_bank }
 		set_variable = { name = zz_ef_cb_start_due value = yes }
 	}
 	if = {
 		limit = { NOT = { has_modifier = has_central_bank } }
-		# В4: E&F's metal of a country without a CB -- the pops' (with a CB it waits for the CB's start, above)
+		# E&F's metal of a country without a CB -- the pops' (with a CB it waits for the CB's start, above)
 		set_variable = { name = zz_ef_ms_ef_g value = gold_state_native_for_stockpile }
 		set_variable = { name = zz_ef_ms_ef_s value = silver_state_native_for_stockpile }
 		every_scope_state = {
@@ -45,11 +45,11 @@ zz_ef_metal_start_step = {
 			if = { limit = { has_variable = silver_state_1 } set_variable = { name = silver_state_1 value = 0 } }
 		}
 	}
-	# Д.R1.1 (8.10): E&F's metal outside a CB state -- history writes it into var:central_bank_location before the
+	# Д.R1.1: E&F's metal outside a CB state -- history writes it into var:central_bank_location before the
 	# country has a CB (r1008_001240: Bavaria 37.1M gold in a state with no central_bank_historic_place; the first step
 	# did not see it, the CB made later counted it as its metal from nothing) -- the pops' too (В4), and 0. Only a
 	# country with no metal standard: on a metal standard the CB made in the first month gets that state and the CB's
-	# start scales it to 40% of M2 (zz_ef_cb_metal_start_step; r1008_005426: taken for all, the pops got 111 bn silver)
+	# start scales it to 40% of M2
 	every_scope_state = {
 		limit = {
 			NOT = { has_modifier = central_bank_historic_place }
@@ -196,7 +196,7 @@ zz_ef_metal_start_cb_after = {
 	change_variable = { name = zz_ef_ms_g1 subtract = var:zz_ef_ms_g0 }
 	set_variable = { name = zz_ef_ms_s1 value = silver_state_native_for_stockpile }
 	change_variable = { name = zz_ef_ms_s1 subtract = var:zz_ef_ms_s0 }
-	# В3: the recount is known to the reconciliation of the CB's metal
+	# the recount is known to the reconciliation of the CB's metal
 	if = { limit = { NOT = { has_variable = zz_ef_mt_start_adj_g } } set_variable = { name = zz_ef_mt_start_adj_g value = 0 } }
 	if = { limit = { NOT = { has_variable = zz_ef_mt_start_adj_s } } set_variable = { name = zz_ef_mt_start_adj_s value = 0 } }
 	change_variable = { name = zz_ef_mt_start_adj_g add = var:zz_ef_ms_g1 }
@@ -257,7 +257,7 @@ zz_ef_wm_add = {
 # var:zz_ef_f_mt_<what>_<metal>: units this week (cb_in, cb_out, bank_in, pop_in, buyback); var:zz_ef_cb_stock_acc
 # keeps the CB's change for its card (UI.11).
 zz_ef_metal_week_step = {
-	# В3 (the user, 7.10): the CB's metal against its known moves since last week's step -- what is left (oth) moved
+	# the CB's metal against its known moves since last week's step -- what is left (oth) moved
 	# without the market or our pairs (crisis redemption, a standard switch...). Known: the clearing at the last receiver
 	# (var:zz_ef_f_hume, the standard's metal), the start's recount (var:zz_ef_mt_start_adj_*), the player's forex buttons
 	# (var:zz_ef_mt_fx_*, R2); this week's own purchases come after the snapshot. EFQ line when it is not ~0.
@@ -269,7 +269,7 @@ zz_ef_metal_week_step = {
 	set_variable = { name = zz_ef_t_cb_in_s value = zz_ef_cb_in_silver_goods }
 	set_variable = { name = zz_ef_t_bank_in_g value = zz_ef_bank_in_gold_goods }
 	set_variable = { name = zz_ef_t_bank_in_s value = zz_ef_bank_in_silver_goods }
-	# R1а.4: a step after a gap -- the buildings' input of the weeks the step covers
+	# a step after a gap -- the buildings' input of the weeks the step covers
 	change_variable = { name = zz_ef_t_cb_in_g multiply = zz_ef_step_weeks_v }
 	change_variable = { name = zz_ef_t_cb_in_s multiply = zz_ef_step_weeks_v }
 	change_variable = { name = zz_ef_t_bank_in_g multiply = zz_ef_step_weeks_v }
@@ -362,7 +362,7 @@ zz_ef_metal_week_step = {
 	zz_ef_wm_add = { KEY = sell_gold VALUE = var:zz_ef_f_mt_cb_out_g }
 	zz_ef_wm_add = { KEY = sell_silver VALUE = var:zz_ef_f_mt_cb_out_s }
 
-	# step 7: the CB buys back from the pops under 40% cover (a pair: metal pops -> CB, new money -> their savings)
+	# the CB buys back from the pops under 40% cover (a pair: metal pops -> CB, new money -> their savings)
 	set_variable = { name = zz_ef_f_mt_buyback value = 0 }
 	set_variable = { name = zz_ef_f_mt_buyback_money value = 0 }
 	if = {
@@ -401,7 +401,7 @@ zz_ef_metal_week_step = {
 			change_variable = { name = zz_ef_popm_gold subtract = var:zz_ef_f_mt_buyback }
 		}
 		change_variable = { name = zz_ef_pop_savings add = var:zz_ef_f_mt_buyback_money }
-		# R1б (В3, 8.10): paid in new banknotes -- the CB's debt to the pops
+		# paid in new banknotes -- the CB's debt to the pops
 		change_variable = { name = zz_ef_notes add = var:zz_ef_f_mt_buyback_money }
 	}
 	# the CB card (UI.11): its reserves' change by purchases, sales and the buy-back
@@ -413,7 +413,7 @@ zz_ef_metal_week_step = {
 	change_variable = { name = zz_ef_cb_stock_acc subtract = var:zz_ef_cb_stock_before }
 	remove_variable = zz_ef_cb_stock_before
 
-	# В3: the snapshot after this week's own moves
+	# the snapshot after this week's own moves
 	set_variable = { name = zz_ef_mt_prev_g value = gold_state_native_for_stockpile }
 	set_variable = { name = zz_ef_mt_prev_s value = silver_state_native_for_stockpile }
 	# the modifiers for the coming week
@@ -505,7 +505,7 @@ zz_ef_world_metal_log = {
 	if = { limit = { zz_ef_logs_on = yes } debug_log = "EFV|[TimeKeeper.GetCurrentDate.GetString]|WORLD|cb_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wm_sum_cb_gold')|0]|bank_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wm_sum_bank_gold')|0]|pop_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wm_sum_pop_gold')|0]|start_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wm_v_start_gold')|0]|buy_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wm_v_buy_gold')|0]|sell_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wm_v_sell_gold')|0]|rest_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wm_rest_gold')|0]|cb_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wm_sum_cb_silver')|0]|bank_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wm_sum_bank_silver')|0]|pop_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wm_sum_pop_silver')|0]|start_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wm_v_start_silver')|0]|buy_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wm_v_buy_silver')|0]|sell_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wm_v_sell_silver')|0]|rest_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wm_rest_silver')|0]|clr_pot_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wm_clr_pot')|0]|rest_ge [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wm_rest_gold_eq')|0]|total_ge [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wm_total_gold_eq')|0]|s2g [THIS.GetCountry.MakeScope.ScriptValue('silver_to_gold_rate')|5]|oth_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wm_v_oth_gold')|0]|oth_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wm_v_oth_silver')|0]" }
 }
 
-# В3 (7.10): the CB's metal now minus last week's snapshot minus the known moves (see zz_ef_metal_week_step).
+# the CB's metal now minus last week's snapshot minus the known moves (see zz_ef_metal_week_step).
 # var:zz_ef_f_mt_oth_g / _s: this week's rest; logged per country (EFQ) over 1 000 gold / 10 000 silver units, and summed
 # into global_var:zz_ef_wm_oth_gold / _silver for the world line.
 zz_ef_metal_reconcile = {
@@ -533,7 +533,7 @@ zz_ef_metal_reconcile = {
 			change_variable = { name = zz_ef_f_mt_oth_g subtract = var:zz_ef_mt_start_adj_g }
 			change_variable = { name = zz_ef_f_mt_oth_s subtract = var:zz_ef_mt_start_adj_s }
 		}
-		# R2 (8.10): the player's forex buttons -- the metal both CBs moved (scripted_effects/ld_fx_buttons.txt)
+		# the player's forex buttons -- the metal both CBs moved (scripted_effects/ld_fx_buttons.txt)
 		if = {
 			limit = { has_variable = zz_ef_mt_fx_g }
 			change_variable = { name = zz_ef_f_mt_oth_g subtract = var:zz_ef_mt_fx_g }

@@ -1,5 +1,5 @@
 ﻿#############################################
-# EF.24 (2026-09-24) -- stock index change and crash: the half-year average
+# stock index change and crash: the half-year average
 # now against the same average exactly 12 months ago, checked every month
 #
 # WHAT E&F DOES
@@ -22,10 +22,10 @@
 # -90% cash reserves and -25 standard of living for 23 months. So a false
 # crash from a noisy snapshot is a real problem -- hence the averages.
 #
-# WHAT THIS DOES (decided 2026-09-24)
+# WHAT THIS DOES
 #   marks    zz_ef_cap_m1 .. zz_ef_cap_m12: zz_ef_cap_half (all four stocks,
 #            moving average ~ the last half year, updated monthly in
-#            zz_ef_capitalization_average.txt) 1 .. 12 months ago. Shifted
+#            ld_capitalization_average.txt) 1.. 12 months ago. Shifted
 #            once a month. Chosen over two half-yearly marks so the check
 #            runs every month against exactly a year ago: no waiting for the
 #            pulse, up to 6 months earlier. Cost: 12 variable copies a month
@@ -35,7 +35,7 @@
 #            the menu shows it next to the index and in the country list, and
 #            financial_crash reads it for the investment-pool loss and the
 #            size of financial_crash_country. (Points a year, base_index_value_dif,
-#            are written in zz_ef_capitalization_average.txt since 2026-09-25.)
+#            are written in ld_capitalization_average.txt since 2026-09-25.)
 #   crash    change < -50%, equity above zz_ef_crash_floor, and no crash in
 #            the last 15 months. The cooldown is required: after a fall the
 #            year-ago mark stays from before it for 12 months, so without it
@@ -60,7 +60,7 @@
 #############################################
 
 ### COUNTRY scope, monthly, after zz_ef_cap_monthly_update
-### (on_actions/zz_ef_capitalization_on_actions.txt).
+### (on_actions/ld_capitalization_on_actions.txt).
 zz_ef_cap_monthly_crash_check = {
 	if = {
 		limit = {

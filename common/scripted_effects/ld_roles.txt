@@ -1,11 +1,11 @@
 ﻿#############################################
-# R1а.3 (Д.2, Д.3; схема 4.2): the countries' roles in the money model, var:zz_ef_role.
+# the countries' roles in the money model, var:zz_ef_role.
 #   A (1) -- the full step every week: the player (at once), every country with a central bank, the first 40 by GDP;
 #           out of A only below the 50th place by GDP 6 months running (not the player, not a CB country).
 #   B (2) -- the same accounts and the same weekly step (R1б, В6); the bridge every 4 weeks; banks and companies as aggregates (R4 / R6).
 #   V (3) -- decentralized countries (country_type decentralized, 158 in 1836): no monthly step, no weekly chain,
-#           no GUI bridge, no world account (they have no trade -- check 7.10). every_country does not iterate them
-#           (r1007_180243: 284 = 442 - 158 countries counted), so they get no role var at all: outside the scheduler,
+#           no GUI bridge, no world account. every_country does not iterate them
+#, so they get no role var at all: outside the scheduler,
 #           only E&F's monthly hub (zz_ef_monthly_unscheduled); the V branch catches a country that turns decentralized.
 # A role holds at least 12 months after a change (not for the player and a new CB): no flapping at the 40th place.
 # Once a month, one pass for the whole world (on_monthly_pulse: on_actions/ld_roles_on_actions.txt): the GDP of the

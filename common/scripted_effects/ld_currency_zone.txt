@@ -5,8 +5,7 @@ zz_ef_cur_zone_step = {
 	if = {
 		limit = {
 			is_subject = yes
-			# R1б.1 (8.10): after the subject's first step -- its start cut its currency held abroad as an issuer
-			# (r1007_203105: Hanover in Britain's zone before it, its thalers uncut -- 8.8M in Britain's reserves)
+			# after the subject's first step -- its start cut its currency held abroad as an issuer
 			has_variable = zz_ef_model_started
 			overlord = {
 				has_modifier = has_central_bank
@@ -21,7 +20,7 @@ zz_ef_cur_zone_step = {
 			}
 		}
 		set_variable = { name = zz_ef_cur_zone value = overlord }
-		# run s1b (5.10): E&F's monetary_systeme_transition put the subjects back on their own standard every
+		# run s1b: E&F's monetary_systeme_transition put the subjects back on their own standard every
 		# month (Hanover, the Canadas, Finland: std_switch monthly, each with 12 months of foreign_exchange_controls);
 		# its own block flag (an empty modifier) keeps it off the zone
 		if = { limit = { has_modifier = monetary_systeme_transition } remove_modifier = monetary_systeme_transition }

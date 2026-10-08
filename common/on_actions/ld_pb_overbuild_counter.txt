@@ -1,7 +1,5 @@
 ﻿#############################################
-# EF.18 v2 (2026-09-24) -- overbuilt economy under PSC: counter and penalty
-# (was zz_pb_ef_psc_overbuilt_off.txt: v0 held E&F's counter at zero, v1 of
-# 2026-09-24 added our own brake on the sectors' throughput)
+# overbuilt economy under PSC: counter and penalty
 #
 # WHAT E&F DOES
 # financial_center_je_2 (journal_entries/00_ef_financial_center_je.txt:115)
@@ -19,10 +17,10 @@
 # overbuild on the sectors, was mostly eaten by economies of scale and company
 # bonuses (Britain 1840: +1% net instead of +51%).
 #
-# WHAT THIS DOES (design decided 2026-09-24)
+# WHAT THIS DOES
 #   limit     = urban centre levels x (1 - 5 x central bank rate)
 #               (building_urban_center_lvl_by_base_rate, re-issued in
-#               script_values/zz_pb_ef_overbuild_values.txt)
+#               script_values/ld_pb_overbuild_values.txt)
 #   target    = round(100 x (1 - limit / sectors)) when over the limit, else 0
 #               -- the throughput cut that brings the sectors' output down to
 #               what the limit would produce (redesigned 2026-09-25; the first
@@ -30,9 +28,9 @@
 #   index     moves to the target: 2 a month while the gap is over 10, then 1
 #   penalty   = zz_pb_ef_overbuilt_economy x index: -1% throughput of every
 #               construction sector per point
-#               (static_modifiers/zz_pb_ef_overbuild_modifiers.txt)
+#               (static_modifiers/ld_pb_overbuild_modifiers.txt)
 # The counter is ours now: the journal is re-issued without its construction
-# part (journal_entries/zz_pb_ef_financial_center_je.txt) and only draws the
+# part (journal_entries/00_ef_financial_center_je.txt) and only draws the
 # bar. One writer, one pulse -- no blinking. It also runs for countries without
 # a stock exchange (the journal only runs where one exists): overbuilding is
 # about construction sectors, not about the exchange.
@@ -45,14 +43,14 @@
 # limit reads the rate.
 #
 # NOTIFICATION: a feed message to the player when the counter rises into a
-# new band of 10 (common/messages/zz_pb_ef_overbuild_messages.txt). Monthly
+# new band of 10 (common/messages/ld_pb_overbuild_messages.txt). Monthly
 # messages for every +1 would be spam.
 #
 # Cost per country and month: two per-state sums (sectors, urban centres) and
 # one modifier refresh.
 #############################################
 
-# R1а.4 (Д.4): run by the scheduler (scripted_effects/ld_scheduler.txt, zz_ef_sched_monthly), not on on_monthly_pulse_country.
+# run by the scheduler (scripted_effects/ld_scheduler.txt, zz_ef_sched_monthly), not on on_monthly_pulse_country.
 
 zz_pb_ef_overbuild_counter = {
 	effect = {

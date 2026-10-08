@@ -190,7 +190,7 @@ set_construction_point_demand = {
             name = total_construction_spending
             value = calculate_total_construction_spending
         }
-        # ФК2 (7.10): the remainder is a country variable -- a local variable set in the country scope is not seen from
+        # the remainder is a country variable -- a local variable set in the country scope is not seen from
         # the states inside ordered_scope_state (error.log: state_construction_spending_allocation came out 'none')
         set_variable = {
             name = psc_remaining_construction_spending

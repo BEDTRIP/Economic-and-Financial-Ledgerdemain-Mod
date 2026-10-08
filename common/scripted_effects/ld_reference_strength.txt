@@ -1,18 +1,18 @@
 ﻿#############################################
-# М.9 (4.10): the reference currency keeps its value / parity for everyone's strength
-# (script_values/zz_ef_reference_currency_values.txt). Monthly, from the money model's monthly step.
+# the reference currency keeps its value / parity for everyone's strength
+# (script_values/ld_reference_currency_values.txt). Monthly, from the money model's monthly step.
 #############################################
 
 zz_ef_reference_strength_step = {
 	if = {
 		limit = { has_modifier = global_monetary_reference }
 		set_global_variable = { name = zz_ef_ref_vtp value = zz_ef_value_to_parity }
-		# R3.3: the reference's CB rate for the dependent standards' corridor (zz_ef_cb_rate_floor / _ceiling)
+		# the reference's CB rate for the dependent standards' corridor (zz_ef_cb_rate_floor / _ceiling)
 		if = {
 			limit = { has_variable = base_rate_percentage }
 			set_global_variable = { name = zz_ef_ref_rate value = var:base_rate_percentage }
 		}
-		# R3.4: the reference's price index for the real rate (zz_ef_currency_trade_m)
+		# the reference's price index for the real rate (zz_ef_currency_trade_m)
 		if = {
 			limit = { has_variable = zz_ef_prev_price }
 			set_global_variable = { name = zz_ef_ref_cpi value = var:zz_ef_prev_price }
@@ -20,7 +20,7 @@ zz_ef_reference_strength_step = {
 	}
 }
 
-# Е.10 (5.10, Д.5): the trade modifier of the currency's strength (static_modifiers/zz_ef_currency_trade.txt).
+# the trade modifier of the currency's strength (static_modifiers/ld_currency_trade.txt).
 # Monthly, after the reference's step; countries with a central bank, not the reference.
 zz_ef_currency_trade_step = {
 	if = { limit = { has_modifier = zz_ef_currency_trade } remove_modifier = zz_ef_currency_trade }

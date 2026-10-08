@@ -352,7 +352,7 @@ central_bank_ef_on_half_yearly_pulse_country = {
 }
 ### E&F's half-yearly financial-centre effect without the snapshot pair.
 financial_center_ef_on_half_yearly_pulse_country = {
-	### EF.24: the crash check and the index change are monthly now
+	### the crash check and the index change are monthly now
 	### (zz_ef_cap_monthly_crash_check above).
 	if  = {
 		limit  = {
@@ -644,7 +644,7 @@ central_bank_ef_on_yearly_pulse_country = {
 	central_bank_interest_refund_per_year_in_gold = yes
 	####
 
-	# R1б (В7, 8.10): investement_pool_borrowing (private banks' bond interest into the pool) -- _archive/ld_privbank_interest/
+	# investement_pool_borrowing (private banks' bond interest into the pool) -- _archive/ld_privbank_interest/
 
 
 	if  = {
@@ -4223,8 +4223,8 @@ update_modifiers_bc_fc_ns = {
 			}
 		}
 		central_bank_modifier = yes
-		### EF.15: bond output of the central bank follows debt/GDP.
-		### zz_ef_cb_bond_issuance.txt
+		### bond output of the central bank follows debt/GDP.
+		### ld_cb_bond_issuance.txt
 		zz_ef_cb_bond_issuance_update = yes
 		set_variable = { name = zz_ef_bcfcns_ran value = 1 }
 	}

@@ -626,7 +626,7 @@ sovereign_bond_yields = {
 #########################################################################################################################################################################################
 #########################################################################################################################################################################################
 
-# В5.4 (5.10): the interest on the treasury's loan from its OWN central bank (E&F's "credit at the central bank":
+# the interest on the treasury's loan from its OWN central bank (E&F's "credit at the central bank":
 # the player's button, zz_ef_cb_loan, and ai_credit_at_central_bank) is E&F's modifier interest_at_the_central_bank,
 # country_expenses_add x the multiplier, a week -- the budget's "additional expenses". The money model took the
 # additional income - expenses whole as primary income with abroad (zz_ef_f_aint, the bridge's g_aint): a payment to
@@ -655,7 +655,7 @@ ai_credit_at_central_bank = {
 			gold_reserve_compared_gold_reserves_limit < 0.1
 			is_at_war = no
 		}
-		# R2, step 8 (Д.R2.8): the CB's loan to the treasury -- credit_at_central_bank is the ledger's account, the
+		# (Д.R2.8) the CB's loan to the treasury -- credit_at_central_bank is the ledger's account, the
 		# treasury's money is ours (marked); the amount is fixed first (it reads the treasury)
 		set_variable = { name = zz_ef_t_cbl value = national_debt_allowed_in_gold }
 		zz_ef_eng_add_treasury = { V = var:zz_ef_t_cbl }
@@ -717,7 +717,7 @@ ai_refund_central_bank = {
 			var:credit_at_central_bank > national_debt_allowed_in_gold
 			is_at_war = no
 		}
-		# R2, step 8: the repayment -- the treasury -> the CB's loan (marked); the amount is fixed first
+		# the repayment -- the treasury -> the CB's loan (marked); the amount is fixed first
 		set_variable = { name = zz_ef_t_cbl value = national_debt_unauthorized }
 		zz_ef_eng_sub_treasury = { V = var:zz_ef_t_cbl }
 		change_variable = {
@@ -749,7 +749,7 @@ ai_refund_central_bank = {
 		# add_treasury = {
 		# 	subtract = national_debt_unauthorized #ai_cheat ?
 		# }
-		# R2, step 8: E&F forgives this part with no money -- the CB writes it off (its loss, var:zz_ef_cb_writeoff)
+		# E&F forgives this part with no money -- the CB writes it off (its loss, var:zz_ef_cb_writeoff)
 		set_variable = { name = zz_ef_t_cbl value = national_debt_refund_more_25_at_refund }
 		if = { limit = { NOT = { has_variable = zz_ef_cb_writeoff } } set_variable = { name = zz_ef_cb_writeoff value = 0 } }
 		zz_ef_post = { FROM = credit_at_central_bank TO = zz_ef_cb_writeoff V = var:zz_ef_t_cbl }
@@ -921,7 +921,7 @@ ai_buy_bond_1 = {
                         add_treasury = {
                             subtract = var:ai_total_bond_value_1
                         }
-                        # R2, step 7: the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
+                        # the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
                         zz_ef_tr_unmark = { V = var:ai_total_bond_value_1 }
 
                         interest_per_month_from_foreign_debt_investment = yes
@@ -1050,7 +1050,7 @@ ai_buy_bond_1 = {
                         add_treasury = {
                             subtract = var:ai_total_bond_value_1
                         }
-                        # R2, step 7: the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
+                        # the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
                         zz_ef_tr_unmark = { V = var:ai_total_bond_value_1 }
 
                         interest_per_month_from_foreign_debt_investment = yes
@@ -1227,7 +1227,7 @@ ai_buy_bond_2 = {
                         add_treasury = {
                             subtract = var:ai_total_bond_value_2
                         }
-                        # R2, step 7: the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
+                        # the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
                         zz_ef_tr_unmark = { V = var:ai_total_bond_value_2 }
 
                         interest_per_month_from_foreign_debt_investment = yes
@@ -1356,7 +1356,7 @@ ai_buy_bond_2 = {
                         add_treasury = {
                             subtract = var:ai_total_bond_value_2
                         }
-                        # R2, step 7: the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
+                        # the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
                         zz_ef_tr_unmark = { V = var:ai_total_bond_value_2 }
 
                         interest_per_month_from_foreign_debt_investment = yes
@@ -1533,7 +1533,7 @@ ai_buy_bond_3 = {
                         add_treasury = {
                             subtract = var:ai_total_bond_value_3
                         }
-                        # R2, step 7: the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
+                        # the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
                         zz_ef_tr_unmark = { V = var:ai_total_bond_value_3 }
 
                         interest_per_month_from_foreign_debt_investment = yes
@@ -1662,7 +1662,7 @@ ai_buy_bond_3 = {
                         add_treasury = {
                             subtract = var:ai_total_bond_value_3
                         }
-                        # R2, step 7: the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
+                        # the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
                         zz_ef_tr_unmark = { V = var:ai_total_bond_value_3 }
 
                         interest_per_month_from_foreign_debt_investment = yes
@@ -1839,7 +1839,7 @@ ai_buy_bond_4 = {
                         add_treasury = {
                             subtract = var:ai_total_bond_value_4
                         }
-                        # R2, step 7: the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
+                        # the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
                         zz_ef_tr_unmark = { V = var:ai_total_bond_value_4 }
 
                         interest_per_month_from_foreign_debt_investment = yes
@@ -1968,7 +1968,7 @@ ai_buy_bond_4 = {
                         add_treasury = {
                             subtract = var:ai_total_bond_value_4
                         }
-                        # R2, step 7: the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
+                        # the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
                         zz_ef_tr_unmark = { V = var:ai_total_bond_value_4 }
 
                         interest_per_month_from_foreign_debt_investment = yes
@@ -2145,7 +2145,7 @@ ai_buy_bond_5 = {
                         add_treasury = {
                             subtract = var:ai_total_bond_value_5
                         }
-                        # R2, step 7: the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
+                        # the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
                         zz_ef_tr_unmark = { V = var:ai_total_bond_value_5 }
 
                         interest_per_month_from_foreign_debt_investment = yes
@@ -2274,7 +2274,7 @@ ai_buy_bond_5 = {
                         add_treasury = {
                             subtract = var:ai_total_bond_value_5
                         }
-                        # R2, step 7: the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
+                        # the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
                         zz_ef_tr_unmark = { V = var:ai_total_bond_value_5 }
 
                         interest_per_month_from_foreign_debt_investment = yes
@@ -2451,7 +2451,7 @@ ai_buy_bond_6 = {
                         add_treasury = {
                             subtract = var:ai_total_bond_value_6
                         }
-                        # R2, step 7: the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
+                        # the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
                         zz_ef_tr_unmark = { V = var:ai_total_bond_value_6 }
 
                         interest_per_month_from_foreign_debt_investment = yes
@@ -2580,7 +2580,7 @@ ai_buy_bond_6 = {
                         add_treasury = {
                             subtract = var:ai_total_bond_value_6
                         }
-                        # R2, step 7: the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
+                        # the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
                         zz_ef_tr_unmark = { V = var:ai_total_bond_value_6 }
 
                         interest_per_month_from_foreign_debt_investment = yes
@@ -2757,7 +2757,7 @@ ai_buy_bond_7 = {
                         add_treasury = {
                             subtract = var:ai_total_bond_value_7
                         }
-                        # R2, step 7: the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
+                        # the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
                         zz_ef_tr_unmark = { V = var:ai_total_bond_value_7 }
 
                         interest_per_month_from_foreign_debt_investment = yes
@@ -2886,7 +2886,7 @@ ai_buy_bond_7 = {
                         add_treasury = {
                             subtract = var:ai_total_bond_value_7
                         }
-                        # R2, step 7: the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
+                        # the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
                         zz_ef_tr_unmark = { V = var:ai_total_bond_value_7 }
 
                         interest_per_month_from_foreign_debt_investment = yes
@@ -3063,7 +3063,7 @@ ai_buy_bond_8 = {
                         add_treasury = {
                             subtract = var:ai_total_bond_value_8
                         }
-                        # R2, step 7: the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
+                        # the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
                         zz_ef_tr_unmark = { V = var:ai_total_bond_value_8 }
 
                         interest_per_month_from_foreign_debt_investment = yes
@@ -3192,7 +3192,7 @@ ai_buy_bond_8 = {
                         add_treasury = {
                             subtract = var:ai_total_bond_value_8
                         }
-                        # R2, step 7: the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
+                        # the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
                         zz_ef_tr_unmark = { V = var:ai_total_bond_value_8 }
 
                         interest_per_month_from_foreign_debt_investment = yes
@@ -3369,7 +3369,7 @@ ai_buy_bond_9 = {
                         add_treasury = {
                             subtract = var:ai_total_bond_value_9
                         }
-                        # R2, step 7: the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
+                        # the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
                         zz_ef_tr_unmark = { V = var:ai_total_bond_value_9 }
 
                         interest_per_month_from_foreign_debt_investment = yes
@@ -3498,7 +3498,7 @@ ai_buy_bond_9 = {
                         add_treasury = {
                             subtract = var:ai_total_bond_value_9
                         }
-                        # R2, step 7: the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
+                        # the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
                         zz_ef_tr_unmark = { V = var:ai_total_bond_value_9 }
 
                         interest_per_month_from_foreign_debt_investment = yes
@@ -3675,7 +3675,7 @@ ai_buy_bond_10 = {
                         add_treasury = {
                             subtract = var:ai_total_bond_value_10
                         }
-                        # R2, step 7: the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
+                        # the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
                         zz_ef_tr_unmark = { V = var:ai_total_bond_value_10 }
 
                         interest_per_month_from_foreign_debt_investment = yes
@@ -3804,7 +3804,7 @@ ai_buy_bond_10 = {
                         add_treasury = {
                             subtract = var:ai_total_bond_value_10
                         }
-                        # R2, step 7: the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
+                        # the treasury's purchase of a foreign bond -- ours (the ledger registers the part)
                         zz_ef_tr_unmark = { V = var:ai_total_bond_value_10 }
 
                         interest_per_month_from_foreign_debt_investment = yes
@@ -9823,7 +9823,7 @@ ai_privat_bank_bond_1_renforcement = {
 	random_in_list = {
 		variable = ai_privat_bank_seller_country_general_1
 		save_scope_as = seller_1
-		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller (r1008_134657: 'Undefined event target seller')
+		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller
 	}
 
 	#renforcement
@@ -9947,7 +9947,7 @@ ai_privat_bank_bond_2_renforcement = {
 	random_in_list = {
 		variable = ai_privat_bank_seller_country_general_2
 		save_scope_as = seller_2
-		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller (r1008_134657: 'Undefined event target seller')
+		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller
 	}
 
 	#renforcement
@@ -10071,7 +10071,7 @@ ai_privat_bank_bond_3_renforcement = {
 	random_in_list = {
 		variable = ai_privat_bank_seller_country_general_3
 		save_scope_as = seller_3
-		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller (r1008_134657: 'Undefined event target seller')
+		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller
 	}
 
 	#renforcement
@@ -10195,7 +10195,7 @@ ai_privat_bank_bond_4_renforcement = {
 	random_in_list = {
 		variable = ai_privat_bank_seller_country_general_4
 		save_scope_as = seller_4
-		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller (r1008_134657: 'Undefined event target seller')
+		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller
 	}
 
 	#renforcement
@@ -10319,7 +10319,7 @@ ai_privat_bank_bond_5_renforcement = {
 	random_in_list = {
 		variable = ai_privat_bank_seller_country_general_5
 		save_scope_as = seller_5
-		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller (r1008_134657: 'Undefined event target seller')
+		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller
 	}
 
 	#renforcement
@@ -10443,7 +10443,7 @@ ai_privat_bank_bond_6_renforcement = {
 	random_in_list = {
 		variable = ai_privat_bank_seller_country_general_6
 		save_scope_as = seller_6
-		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller (r1008_134657: 'Undefined event target seller')
+		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller
 	}
 
 	#renforcement
@@ -10567,7 +10567,7 @@ ai_privat_bank_bond_7_renforcement = {
 	random_in_list = {
 		variable = ai_privat_bank_seller_country_general_7
 		save_scope_as = seller_7
-		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller (r1008_134657: 'Undefined event target seller')
+		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller
 	}
 
 	#renforcement
@@ -10691,7 +10691,7 @@ ai_privat_bank_bond_8_renforcement = {
 	random_in_list = {
 		variable = ai_privat_bank_seller_country_general_8
 		save_scope_as = seller_8
-		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller (r1008_134657: 'Undefined event target seller')
+		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller
 	}
 
 	#renforcement
@@ -10815,7 +10815,7 @@ ai_privat_bank_bond_9_renforcement = {
 	random_in_list = {
 		variable = ai_privat_bank_seller_country_general_9
 		save_scope_as = seller_9
-		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller (r1008_134657: 'Undefined event target seller')
+		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller
 	}
 
 	#renforcement
@@ -10939,7 +10939,7 @@ ai_privat_bank_bond_10_renforcement = {
 	random_in_list = {
 		variable = ai_privat_bank_seller_country_general_10
 		save_scope_as = seller_10
-		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller (r1008_134657: 'Undefined event target seller')
+		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller
 	}
 
 	#renforcement
@@ -11063,7 +11063,7 @@ ai_privat_bank_bond_11_renforcement = {
 	random_in_list = {
 		variable = ai_privat_bank_seller_country_general_11
 		save_scope_as = seller_11
-		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller (r1008_134657: 'Undefined event target seller')
+		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller
 	}
 
 	#renforcement
@@ -11187,7 +11187,7 @@ ai_privat_bank_bond_12_renforcement = {
 	random_in_list = {
 		variable = ai_privat_bank_seller_country_general_12
 		save_scope_as = seller_12
-		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller (r1008_134657: 'Undefined event target seller')
+		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller
 	}
 
 	#renforcement
@@ -11311,7 +11311,7 @@ ai_privat_bank_bond_13_renforcement = {
 	random_in_list = {
 		variable = ai_privat_bank_seller_country_general_13
 		save_scope_as = seller_13
-		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller (r1008_134657: 'Undefined event target seller')
+		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller
 	}
 
 	#renforcement
@@ -11435,7 +11435,7 @@ ai_privat_bank_bond_14_renforcement = {
 	random_in_list = {
 		variable = ai_privat_bank_seller_country_general_14
 		save_scope_as = seller_14
-		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller (r1008_134657: 'Undefined event target seller')
+		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller
 	}
 
 	#renforcement
@@ -11559,7 +11559,7 @@ ai_privat_bank_bond_15_renforcement = {
 	random_in_list = {
 		variable = ai_privat_bank_seller_country_general_15
 		save_scope_as = seller_15
-		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller (r1008_134657: 'Undefined event target seller')
+		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller
 	}
 
 	#renforcement
@@ -11683,7 +11683,7 @@ ai_privat_bank_bond_16_renforcement = {
 	random_in_list = {
 		variable = ai_privat_bank_seller_country_general_16
 		save_scope_as = seller_16
-		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller (r1008_134657: 'Undefined event target seller')
+		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller
 	}
 
 	#renforcement
@@ -11807,7 +11807,7 @@ ai_privat_bank_bond_17_renforcement = {
 	random_in_list = {
 		variable = ai_privat_bank_seller_country_general_17
 		save_scope_as = seller_17
-		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller (r1008_134657: 'Undefined event target seller')
+		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller
 	}
 
 	#renforcement
@@ -11931,7 +11931,7 @@ ai_privat_bank_bond_18_renforcement = {
 	random_in_list = {
 		variable = ai_privat_bank_seller_country_general_18
 		save_scope_as = seller_18
-		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller (r1008_134657: 'Undefined event target seller')
+		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller
 	}
 
 	#renforcement
@@ -12055,7 +12055,7 @@ ai_privat_bank_bond_19_renforcement = {
 	random_in_list = {
 		variable = ai_privat_bank_seller_country_general_19
 		save_scope_as = seller_19
-		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller (r1008_134657: 'Undefined event target seller')
+		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller
 	}
 
 	#renforcement
@@ -12179,7 +12179,7 @@ ai_privat_bank_bond_20_renforcement = {
 	random_in_list = {
 		variable = ai_privat_bank_seller_country_general_20
 		save_scope_as = seller_20
-		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller (r1008_134657: 'Undefined event target seller')
+		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller
 	}
 
 	#renforcement
@@ -12303,7 +12303,7 @@ ai_privat_bank_bond_21_renforcement = {
 	random_in_list = {
 		variable = ai_privat_bank_seller_country_general_21
 		save_scope_as = seller_21
-		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller (r1008_134657: 'Undefined event target seller')
+		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller
 	}
 
 	#renforcement
@@ -12427,7 +12427,7 @@ ai_privat_bank_bond_22_renforcement = {
 	random_in_list = {
 		variable = ai_privat_bank_seller_country_general_22
 		save_scope_as = seller_22
-		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller (r1008_134657: 'Undefined event target seller')
+		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller
 	}
 
 	#renforcement
@@ -12551,7 +12551,7 @@ ai_privat_bank_bond_23_renforcement = {
 	random_in_list = {
 		variable = ai_privat_bank_seller_country_general_23
 		save_scope_as = seller_23
-		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller (r1008_134657: 'Undefined event target seller')
+		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller
 	}
 
 	#renforcement
@@ -12675,7 +12675,7 @@ ai_privat_bank_bond_24_renforcement = {
 	random_in_list = {
 		variable = ai_privat_bank_seller_country_general_24
 		save_scope_as = seller_24
-		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller (r1008_134657: 'Undefined event target seller')
+		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller
 	}
 
 	#renforcement
@@ -12799,7 +12799,7 @@ ai_privat_bank_bond_25_renforcement = {
 	random_in_list = {
 		variable = ai_privat_bank_seller_country_general_25
 		save_scope_as = seller_25
-		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller (r1008_134657: 'Undefined event target seller')
+		save_scope_as = seller # bond_quantity_scripted_privat_bank and the price read scope:seller
 	}
 
 	#renforcement
@@ -19099,7 +19099,7 @@ ai_bond_maturity_1 = {
 			}
 		}
 
-		# В5.5: the payout from nobody removed -- the ledger buys the part back
+		# the payout from nobody removed -- the ledger buys the part back
 
 		#Reset variable
 		set_variable = {
@@ -19182,7 +19182,7 @@ ai_bond_maturity_2 = {
 			}
 		}
 
-		# В5.5: the payout from nobody removed -- the ledger buys the part back
+		# the payout from nobody removed -- the ledger buys the part back
 
 		#Reset variable
 		set_variable = {
@@ -19265,7 +19265,7 @@ ai_bond_maturity_3 = {
 			}
 		}
 
-		# В5.5: the payout from nobody removed -- the ledger buys the part back
+		# the payout from nobody removed -- the ledger buys the part back
 
 		#Reset variable
 		set_variable = {
@@ -19348,7 +19348,7 @@ ai_bond_maturity_4 = {
 			}
 		}
 
-		# В5.5: the payout from nobody removed -- the ledger buys the part back
+		# the payout from nobody removed -- the ledger buys the part back
 
 		#Reset variable
 		set_variable = {
@@ -19431,7 +19431,7 @@ ai_bond_maturity_5 = {
 			}
 		}
 
-		# В5.5: the payout from nobody removed -- the ledger buys the part back
+		# the payout from nobody removed -- the ledger buys the part back
 
 		#Reset variable
 		set_variable = {
@@ -19514,7 +19514,7 @@ ai_bond_maturity_6 = {
 			}
 		}
 
-		# В5.5: the payout from nobody removed -- the ledger buys the part back
+		# the payout from nobody removed -- the ledger buys the part back
 
 		#Reset variable
 		set_variable = {
@@ -19597,7 +19597,7 @@ ai_bond_maturity_7 = {
 			}
 		}
 
-		# В5.5: the payout from nobody removed -- the ledger buys the part back
+		# the payout from nobody removed -- the ledger buys the part back
 
 		#Reset variable
 		set_variable = {
@@ -19680,7 +19680,7 @@ ai_bond_maturity_8 = {
 			}
 		}
 
-		# В5.5: the payout from nobody removed -- the ledger buys the part back
+		# the payout from nobody removed -- the ledger buys the part back
 
 		#Reset variable
 		set_variable = {
@@ -19763,7 +19763,7 @@ ai_bond_maturity_9 = {
 			}
 		}
 
-		# В5.5: the payout from nobody removed -- the ledger buys the part back
+		# the payout from nobody removed -- the ledger buys the part back
 
 		#Reset variable
 		set_variable = {
@@ -19846,7 +19846,7 @@ ai_bond_maturity_10 = {
 			}
 		}
 
-		# В5.5: the payout from nobody removed -- the ledger buys the part back
+		# the payout from nobody removed -- the ledger buys the part back
 
 		#Reset variable
 		set_variable = {

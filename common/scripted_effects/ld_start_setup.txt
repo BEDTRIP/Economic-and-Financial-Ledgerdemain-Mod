@@ -1,12 +1,12 @@
-﻿# «Настройка старта E&F — с первого дня» (the user, 8.10): what E&F does as the game's start setup in its first month and
-# first year runs once at a new game's start -- the first budget tick (R3а (б), the user 8.10), before the money
+﻿# «Настройка старта E&F — с первого дня»: what E&F does as the game's start setup in its first month and
+# first year runs once at a new game's start -- the first budget tick, before the money
 # model's first step (called by zz_ef_sched_probe_step, ld_scheduler.txt; the first day of steps -- the next day).
 # Without it the engine's pulses spread it over the year: the yearly pulse of a
 # country (a random day) builds its CB by GDP and its financial centres, the monthly hub moves a subject to its
 # overlord's currency and writes the CB's metal -- and the start in balance (ld_metal_accounts.txt, the first step) saw a
-# country half set up (r1008_100702: Hanover's 50.7M gold went to the pops, its CB came on the 4th week).
+# country half set up.
 # Country scope: E&F's code compares with root as the country, and on_game_started_after_lobby has no root
-# (r1008_104019: 24k "Invalid right side during comparison 'root'") -- so each country runs it in its own hidden
+# -- so each country runs it in its own hidden
 # event (events/ld_start_setup_events.txt): .1 -- the yearly pulse's facilities for all, then the world's part of the
 # monthly hub once (ld_world_month.1), then .2 -- the countries' monthly hub.
 # Only the setup: the yearly pulse's AI decisions (standard transitions, the value target, production methods) and

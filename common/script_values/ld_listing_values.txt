@@ -1,19 +1,19 @@
 ﻿#############################################
-# Д2.10 (5.10.2026, decided by the user) -- the stock market's capitalization = the value of what is listed:
+# the stock market's capitalization = the value of what is listed:
 # the listed companies' yearly dividends / (the government's rate + an equity risk premium ~4 pp). The target
-# (the user): about 0.3 GDP for Britain in the 1840s and ~1.0 by 1913 by itself, without steering the index.
+#: about 0.3 GDP for Britain in the 1840s and ~1.0 by 1913 by itself, without steering the index.
 # E&F's stock goods (manufacture / agricultural / mining / railroad stock) are the exchange's turnover, not its
 # capitalization: until 5.10 the capitalization was their weekly output x 520 x price (EF.24).
 #
 # Listed = company headquarters with the "publicly traded" method (EF.22, switched by script monthly, Д2.11:
-# scripted_effects/zz_ef_listing.txt). A company's dividends are its headquarters' profit (the save: the HQ's
+# scripted_effects/ld_listing.txt). A company's dividends are its headquarters' profit (the save: the HQ's
 # profit_after_reserves = dividends = its ownership income less taxes; one HQ type per company,
 # building_company_<key>, group bg_company_headquarter): listed dividends a year = the public HQs' weekly_profit x 52.
 # Without an exchange nothing is listed: capitalization 0, burnt through the yearly average (Д2.12, EF.47).
 # COUNTRY scope.
 #############################################
 
-# !! TUNING !! the equity risk premium over the government's rate (the user: ~4 pp)
+# !! TUNING !! the equity risk premium over the government's rate
 zz_ef_equity_premium = 0.04
 
 zz_ef_hq_levels = {

@@ -1,4 +1,4 @@
-﻿# R1а.4 (Д.4): the money model's global scheduler (scripted_effects/ld_scheduler.txt).
+﻿# the money model's global scheduler (scripted_effects/ld_scheduler.txt).
 on_game_started_after_lobby = {
 	on_actions = {
 		zz_ef_sched_start
@@ -37,7 +37,7 @@ zz_ef_sched_day = {
 # country while the chain is not running -- all its monthly steps (and the scheduler skips its month).
 zz_ef_monthly_unscheduled = {
 	trigger = {
-		zz_ef_game_started = yes # R3а: not before the start
+		zz_ef_game_started = yes # not before the start
 		NOT = {
 			AND = {
 				has_global_variable = zz_ef_sched_alive

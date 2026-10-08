@@ -1,5 +1,5 @@
 ﻿#############################################
-# EF.29 (2026-09-25) -- the speculative bubble's monthly update, out of the journal
+# the speculative bubble's monthly update, out of the journal
 #
 # E&F moves the bubble (var:speculative_share_1, 0..100) in the monthly pulse
 # of its Financial Stability Office journal (financial_center_je_2,
@@ -8,23 +8,18 @@
 # capitalization, EF.28 issuance), so the hotfix owns the bubble too:
 #   - this on_action runs E&F's code line for line, for countries whose
 #     journal is active (the same condition the journal's pulse had);
-#   - journal_entries/zz_pb_ef_financial_center_je.txt re-issues E&F's journal
-#     without that part (since 2026-10-02 the only copy: the hotfix's own
-#     zz_ef_financial_center_je.txt was dropped when the E&F x PSC compatch
-#     moved in, СТР.6);
+#   - journal_entries/00_ef_financial_center_je.txt has E&F's journal without
+#     that part;
 #   - changes to E&F's code, marked ###: `has_role = executive` ->
 #     `character_role_executive` (the 1.13 key; E&F's line fails PostValidate
 #     and the executives' malus misfires), a feed notification when the bubble
-#     enters a new band of 10 upwards (common/messages/zz_ef_bubble_messages.txt);
-#   - the bubble's modifier no longer slows construction
-#     (static_modifiers/zz_ef_bubble_no_construction.txt).
-# Behaviour is unchanged from the E&F x PSC compatch of 24-25.09, where all of
-# this lived until now.
+#     enters a new band of 10 upwards (common/messages/ld_bubble_messages.txt);
+#   - the bubble's modifier does not slow construction.
 #
 # !! MAINTENANCE !! Re-diff against E&F's journal pulse after every E&F update.
 #############################################
 
-# R1а.4 (Д.4): run by the scheduler (scripted_effects/ld_scheduler.txt, zz_ef_sched_monthly), not on on_monthly_pulse_country.
+# run by the scheduler (scripted_effects/ld_scheduler.txt, zz_ef_sched_monthly), not on on_monthly_pulse_country.
 
 zz_ef_bubble_monthly = {
 	trigger = {
@@ -34,7 +29,7 @@ zz_ef_bubble_monthly = {
 	effect = {
 		####################################################################################
 		#Fiancial part
-		### EF.18 v2: remember the bubble before the change, for the notification.
+		### remember the bubble before the change, for the notification.
 		set_variable = { name = zz_ef_bb_old value = var:speculative_share_1 }
 		if = {
 			limit = {
@@ -110,7 +105,7 @@ zz_ef_bubble_monthly = {
 				name = speculative_share_progress_bar
 			}
 		}
-		### EF.18 v2: feed message when the bubble enters a new band of 10 upwards.
+		### feed message when the bubble enters a new band of 10 upwards.
 		if = {
 			limit = {
 				var:speculative_share_1 > var:zz_ef_bb_old
@@ -121,7 +116,7 @@ zz_ef_bubble_monthly = {
 		if = { limit = { has_modifier = speculative_bubble_modifier } remove_modifier = speculative_bubble_modifier }
 		every_scope_character = {
 			limit = {
-				has_role = character_role_executive ### EF.18 v2: 1.13 role key
+				has_role = character_role_executive ### 1.13 role key
 			}
 			if = { limit = { has_modifier = speculative_bubble_character_modifier } remove_modifier = speculative_bubble_character_modifier }
 		}
@@ -136,7 +131,7 @@ zz_ef_bubble_monthly = {
 			}
 			every_scope_character = {
 				limit = {
-					has_role = character_role_executive ### EF.18 v2: 1.13 role key
+					has_role = character_role_executive ### 1.13 role key
 				}
 				add_modifier = {
 					name = speculative_bubble_character_modifier

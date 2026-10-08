@@ -1,7 +1,7 @@
 ﻿#############################################
-# Д2.7б (5.10.2026) -- consols: the treasury's perpetual debt to the population for the CB's bonds sold. The
-# why and the numbers: script_values/zz_ef_consols_values.txt. Called from the weekly step
-# (scripted_effects/zz_ef_money_model.txt, zz_ef_money_model_step) before the treasury's surplus goes to the pool
+# consols: the treasury's perpetual debt to the population for the CB's bonds sold. The
+# why and the numbers: script_values/ld_consols_values.txt. Called from the weekly step
+# (scripted_effects/ld_money_model.txt, zz_ef_money_model_step) before the treasury's surplus goes to the pool
 # and before the ledger's week-on-week changes. COUNTRY scope.
 #############################################
 
@@ -19,18 +19,18 @@ zz_ef_consol_step = {
 	if = {
 		limit = { has_variable = zz_ef_pop_savings }
 		set_variable = { name = zz_ef_f_cons_int value = zz_ef_consol_interest_week }
-		# R1а.4: the interest of the weeks the step covers
+		# the interest of the weeks the step covers
 		zz_ef_sw = { F = cons_int }
 		set_variable = { name = zz_ef_f_cons_buy value = zz_ef_consol_buyback_week }
 		if = {
 			limit = { var:zz_ef_f_cons_int > 0 }
-			# R1б (В3): the treasury's money -> the pops' banknotes (the CB's debt to them)
+			# the treasury's money -> the pops' banknotes (the CB's debt to them)
 			zz_ef_post_from_eng = { ENG = treasury TO = zz_ef_notes V = var:zz_ef_f_cons_int }
 			change_variable = { name = zz_ef_pop_savings add = var:zz_ef_f_cons_int }
 		}
 		if = {
 			limit = { var:zz_ef_f_cons_buy > 0 }
-			# R1б (В3): the treasury's money -> the pops' banknotes (the CB's debt to them)
+			# the treasury's money -> the pops' banknotes (the CB's debt to them)
 			zz_ef_post_from_eng = { ENG = treasury TO = zz_ef_notes V = var:zz_ef_f_cons_buy }
 			change_variable = { name = zz_ef_pop_savings add = var:zz_ef_f_cons_buy }
 			change_variable = { name = zz_ef_consol_debt subtract = var:zz_ef_f_cons_buy }

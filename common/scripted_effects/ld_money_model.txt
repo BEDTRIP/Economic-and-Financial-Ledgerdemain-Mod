@@ -1,11 +1,11 @@
 ﻿#############################################
-# EF.39 / EF.48 (2026-09-30) -- the money model, in the engine's money, on
+# the money model, in the engine's money, on
 # the budget's own rhythm: a WEEKLY step (bank credit from the central bank
 # at the key rate, its interest to the treasury, the ledger of each account's
 # change, M0/M1/M2 history) and a monthly one (E&F's currency good, which
 # E&F moves monthly; EF.31's modifier). Numbers and the why:
-# script_values/zz_ef_money_model_values.txt. Started from
-# on_actions/zz_ef_money_model_on_actions.txt.
+# script_values/ld_money_model_values.txt. Started from
+# on_actions/ld_money_model_on_actions.txt.
 #
 # The engine has no weekly pulse for countries (script_docs on_actions.log:
 # monthly and slower only), so the week is a chain: the weekly on_action
@@ -19,8 +19,8 @@
 # private banks' interest on foreign bonds into the pool) -- _archive/ld_privbank_interest/ (R1б, В7).
 #############################################
 
-# Е.5 (5.10, Д.2): the issuer paid the interest on its bonds held by other treasuries as an expense line -- replaced
-# by the bond ledger (В5.5, 5.10: scripted_effects/zz_ef_bond_ledger.txt), which pays the holder out of the issuer's pool.
+# the issuer paid the interest on its bonds held by other treasuries as an expense line -- replaced
+# by the bond ledger, which pays the holder out of the issuer's pool.
 
 # ---- the weekly step --------------------------------------------------------
 
@@ -29,13 +29,13 @@ zz_ef_money_model_step = {
 	# estimate from the credit limit -- credit - base - 1.7 x GDP -- swung by
 	# millions a week, M2 by +-30%).
 	set_variable = { name = zz_ef_bcash value = zz_ef_building_cash_sum }
-	# В2 (7.10): the Banks' cash -- the banks' own money, out of M1 / M2
+	# the Banks' cash -- the banks' own money, out of M1 / M2
 	set_variable = { name = zz_ef_bkcash value = zz_ef_bank_cash_sum }
-	# R1а.7 (Д.5): the trade, one measure, once a step
+	# the trade, one measure, once a step
 	zz_ef_trade_step = yes
-	# UI.7 (3.10): the CB's metal rescaled this step, in money -- 0 since R1б.1 (no rescale; the CB card's line)
+	# the CB's metal rescaled this step, in money -- 0 since R1б.1 (no rescale; the CB card's line)
 	set_variable = { name = zz_ef_f_cb_rescale value = 0 }
-	# foreign currency in the reserves (night 2, item 2), before the rescale
+	# foreign currency in the reserves, before the rescale
 	zz_ef_fx_metal_update = yes
 	# each foreign currency's weekly change -- read only by the «+X a week» of the CB currencies table (ld_clearing.txt):
 	# the vitrine, players only (Д.R3б.3)
@@ -43,10 +43,10 @@ zz_ef_money_model_step = {
 		limit = { is_player = yes }
 		zz_ef_cbfx_week_step = yes
 	}
-	# В2.5 (4.10): CB states taken from a country send their metal back to it
+	# CB states taken from a country send their metal back to it
 	zz_ef_cb_state_owner_step = yes
-	# Е.5 (5.10, Д.2): the issuer pays the week's interest to the treasuries holding its bonds
-	# В5.5 (5.10): bonds as parts of the engine's debt (generated, scripted_effects/zz_ef_bond_ledger.txt); replaces
+	# the issuer pays the week's interest to the treasuries holding its bonds
+	# bonds as parts of the engine's debt (generated, scripted_effects/ld_bond_ledger.txt); replaces
 	# Е.5's issuer-pays expense line (zz_ef_bond_interest_step)
 	zz_ef_bond_ledger_step = yes
 	if = {
@@ -57,7 +57,7 @@ zz_ef_money_model_step = {
 		limit = { var:zz_ef_weeks_run < 100 }
 		change_variable = { name = zz_ef_weeks_run add = zz_ef_step_weeks_v }
 	}
-	# R1б.1 (Д.1, Д.2, 8.10): the start in balance, once (scripted_effects/ld_metal_accounts.txt) -- the parity stays
+	# the start in balance, once (scripted_effects/ld_metal_accounts.txt) -- the parity stays
 	# E&F's historical one (the rate between currencies, the labels), the money is the engine's (one unit for every
 	# country); the pops' and CB-less countries' metal now, the CB's 40% of M2 once the money exists. No CB holds a
 	# foreign currency at the start (ld_nr_deposits.txt). zz_ef_model_started -- the country's first step is done.
@@ -65,13 +65,13 @@ zz_ef_money_model_step = {
 		limit = { NOT = { has_variable = zz_ef_model_started } }
 		set_variable = zz_ef_model_started
 		zz_ef_metal_start_step = yes
-		# R3а (б): a subject joins its overlord's currency zone (standard, currency, target) now, not at its first month --
-		# the CB's start metal the same day needs the metal standard (r1008_120257: Hanover, the Canadas -- 29.1-6.2)
+		# a subject joins its overlord's currency zone (standard, currency, target) now, not at its first month --
+		# the CB's start metal the same day needs the metal standard
 		zz_ef_cur_zone_step = yes
 	}
 	zz_ef_cb_metal_start_step = yes
 	# the start's window: a CB not on a metal standard half a year in (a subject outside a zone, Bavaria's CB with no
-	# standard) takes no start metal later -- a standard adopted years on buys its metal (accepted at night 8.10, check)
+	# standard) takes no start metal later -- a standard adopted years on buys its metal
 	if = {
 		limit = {
 			has_variable = zz_ef_cb_start_due
@@ -85,12 +85,12 @@ zz_ef_money_model_step = {
 	set_variable = { name = zz_ef_f_budget value = zz_ef_budget_week }
 	set_variable = { name = zz_ef_f_contrib value = investment_pool_gross_income }
 	set_variable = { name = zz_ef_f_transfer value = zz_ef_pool_transfer_week }
-	# R1а.4: a step after a gap -- the flows measured for one week x the weeks the step covers
+	# a step after a gap -- the flows measured for one week x the weeks the step covers
 	zz_ef_sw = { F = contrib }
 	zz_ef_sw = { F = transfer }
 
 	# Bank credit from the central bank: the debt goes to GDP x a share by the
-	# rate (zz_ef_cb_credit_target, 1.10 evening), repaid from the pool when
+	# rate, repaid from the pool when
 	# over it (at most the debt); interest at the key rate goes
 	# pool -> CB -> treasury (the CB's profit).
 	if = {
@@ -108,32 +108,32 @@ zz_ef_money_model_step = {
 		multiply = -1
 	}
 	change_variable = { name = zz_ef_bank_cb_debt subtract = var:zz_ef_f_cb_repay }
-	# R1а.5: the interest -- the banks pay it (their capital) to the CB, the CB's profit to the treasury
+	# the interest -- the banks pay it (their capital) to the CB, the CB's profit to the treasury
 	zz_ef_post_eng_paid = { FROM = pool TO = treasury PAYER = zz_ef_bank_capital V = var:zz_ef_f_cb_interest }
 
-	# Д2.7б (5.10): consols -- the CB's bonds sold are the treasury's perpetual debt to pops: interest treasury -> pops'
-	# savings, buy-back out of the surplus over the engine's limit first (scripted_effects/zz_ef_consols.txt)
+	# consols -- the CB's bonds sold are the treasury's perpetual debt to pops: interest treasury -> pops'
+	# savings, buy-back out of the surplus over the engine's limit first (scripted_effects/ld_consols.txt)
 	zz_ef_consol_step = yes
 
-	# R2 closing (the user, 8.10): the treasury's surplus over the engine's limit no longer goes into the pool by itself
+	# R2 closing: the treasury's surplus over the engine's limit no longer goes into the pool by itself
 	# (Д4.5 removed): the private sector builds on its own and the banks' money; the state adds to
 	# the pool by its own decision (E&F's transfert_currency_to_investement_pool_button -- a posting in R4). The flow stays 0.
 	set_variable = { name = zz_ef_f_tr_pool value = 0 }
-	# EF.48 item 5 (business credit; repayment in money, 1.10 evening).
+	# EF.48 item 5.
 	zz_ef_business_credit_step = yes
-	# R1а.6 (Д.6): the pops' deposits = their contributions to the pool by the engine
+	# the pops' deposits = their contributions to the pool by the engine
 	zz_ef_pop_deposits_step = yes
 
-	# The CB coined half of the mined gold / silver (1.10 night) -- removed (М, the user 6.10): metal is taken from
+	# The CB coined half of the mined gold / silver -- removed: metal is taken from
 	# the market only; the mines sell all of it, and whoever needs metal buys it (CB, banks, pops). The mint's log
 	# keys (EFR mint / mint_tr) stay 0.
 	set_variable = { name = zz_ef_f_mint value = 0 }
 	set_variable = { name = zz_ef_f_mint_tr value = 0 }
 	# Stage 2, night 6.10 (steps 4, 5, 7): the metal accounts -- the week's purchases of the CB, the banks and the pops,
-	# the CB's sale and buy-back, the buildings' modifiers for the coming week (scripted_effects/zz_ef_metal_accounts.txt)
+	# the CB's sale and buy-back, the buildings' modifiers for the coming week (scripted_effects/ld_metal_accounts.txt)
 	zz_ef_metal_week_step = yes
 
-	# History rings (1.10, the user's M0..M3 -- var:zz_ef_agg0..3): a week ago
+	# History rings: a week ago
 	# (w1..4), 13 blocks of 4 weeks (q1..13, a year), 20 blocks of 13 weeks
 	# (r1..20, 5 years); plus the money in circulation and GDP for the inflation
 	# (q only). Filled from last week's value; each macro skips a quantity not
@@ -175,11 +175,11 @@ zz_ef_money_model_step = {
 		zz_ef_ring_r_push = { M = agg3 }
 	}
 
-	# UI.7 (3.10): what moves the CB's account (its metal at parity), for the
+	# what moves the CB's account (its metal at parity), for the
 	# CB card -- each a week, in money; the rest is E&F's own metal operations.
 	# Revaluation: the reserves of last step at the new parity minus at the old
 	# one = cbm_prev x (parity_prev / parity_now - 1) -- devaluation laws and
-	# re-anchors (run e0_3: the USA 2.06 -> 11.8 -> 29.9, cbm +99M / -86M).
+	# re-anchors.
 	# Hume: the metal zz_ef_cb_hume_step added last week (after last week's
 	# ledger, so it is in this week's change), at the parity.
 	set_variable = { name = zz_ef_f_cb_reval value = 0 }
@@ -208,8 +208,7 @@ zz_ef_money_model_step = {
 			set_variable = { name = zz_ef_f_cb_hume_m value = var:zz_ef_f_hume }
 			change_variable = { name = zz_ef_f_cb_hume_m divide = zz_ef_cb_valuation }
 		}
-		# UI.11 (5.10): E&F's CB building stored metal since the last step (its monthly stockpiling,
-		# scripted_effects/zz_ef_cb_stockpile_track.txt), at the parity -- a line of the CB card
+		# E&F's CB building stored metal since the last step (its monthly stockpiling), at the parity -- a line of the CB card
 		if = {
 			limit = { has_variable = zz_ef_cb_stock_acc }
 			set_variable = { name = zz_ef_f_cb_stock value = var:zz_ef_cb_stock_acc }
@@ -234,7 +233,7 @@ zz_ef_money_model_step = {
 	zz_ef_money_ledger_delta = { ACC = tbonds VALUE = zz_ef_treasury_bonds }
 	zz_ef_money_ledger_delta = { ACC = m2 VALUE = zz_ef_m2 }
 	zz_ef_money_ledger_delta = { ACC = cbm VALUE = zz_ef_cb_money }
-	# П.7 (4.10, В.4): abroad = the net foreign position (bonds + the CB's foreign currency - our currency abroad)
+	# abroad = the net foreign position (bonds + the CB's foreign currency - our currency abroad)
 	zz_ef_money_ledger_delta = { ACC = abroad VALUE = zz_ef_abroad_net }
 	zz_ef_money_ledger_delta = { ACC = agg0 VALUE = zz_ef_agg_m0 }
 	zz_ef_money_ledger_delta = { ACC = agg1 VALUE = zz_ef_agg_m1 }
@@ -243,12 +242,12 @@ zz_ef_money_model_step = {
 	zz_ef_money_ledger_delta = { ACC = circ VALUE = zz_ef_circulation }
 	zz_ef_money_ledger_delta = { ACC = gdp VALUE = gdp }
 	zz_ef_money_ledger_delta = { ACC = price VALUE = zz_ef_price_index }
-	# night 2, item 6: building levels the government owns (privatization)
+	# building levels the government owns (privatization)
 	zz_ef_money_ledger_delta = { ACC = govlv VALUE = zz_ef_gov_levels }
 	# 4.10 (the money tooltip): pops' savings and deposits, for the cash-at-hand and deposits lines
 	zz_ef_money_ledger_delta = { ACC = savings VALUE = zz_ef_pop_savings }
 	zz_ef_money_ledger_delta = { ACC = deposits VALUE = zz_ef_pop_deposits }
-	# R1а.5: the reconciliation by stocks -- «прочее» (scripted_effects/ld_ledger.txt)
+	# the reconciliation by stocks -- «прочее» (scripted_effects/ld_ledger.txt)
 	zz_ef_reconcile = yes
 
 	# Sandbox log (tools/run_vic3_sandbox.ps1 reads debug.log): one line a
@@ -264,7 +263,7 @@ zz_ef_money_model_step = {
 	# the accounts (minting, additional income and expenses, diplomacy,
 	# treaties, power bloc, supply network fees, tolls, piracy) are GUI-only;
 	# the hook reads them for every country in the list and hands them back
-	# through scripted_guis/zz_ef_money_hook.txt, which computes the leak.
+	# through scripted_guis/ld_money_hook.txt, which computes the leak.
 	# Last week's values are dropped, so a week without the GUI reads 0.
 	# The deposit operations the receiver made after the previous step fell
 	# into the window just closed: moved to var:zz_ef_w_dep_* for the leak.
@@ -274,18 +273,18 @@ zz_ef_money_model_step = {
 	zz_ef_money_window_roll = { F = cc_int }
 	zz_ef_money_window_roll = { F = cc_net }
 	zz_ef_money_window_roll = { F = hume_money }
-	# Д2.30 (6.10 day): other CBs' deposits put into / drawn out of the pool
+	# other CBs' deposits put into / drawn out of the pool
 	zz_ef_money_window_roll = { F = nr_dep }
 	# 4.10 (the cash-at-hand card): what went into pops' savings at the last receiver -- the window the
 	# ledger's change of M0 / savings / deposits covers
 	zz_ef_money_window_roll = { F = inflow }
-	# П.6 / П.7 (4.10): the clearing's currency at the last receiver, for the abroad card
+	# the clearing's currency at the last receiver, for the abroad card
 	zz_ef_money_window_roll = { F = clr_cur_out }
 	zz_ef_money_window_roll = { F = clr_fx_in }
 	zz_ef_money_window_roll = { F = clr_own_back }
 	if = { limit = { has_variable = zz_ef_f_ext } remove_variable = zz_ef_f_ext }
 	if = { limit = { has_variable = zz_ef_f_leak } remove_variable = zz_ef_f_leak }
-	# R1б (В6, 8.10): B steps weekly, its bridge stays every 4th week (its phase); the step takes the latest numbers
+	# B steps weekly, its bridge stays every 4th week (its phase); the step takes the latest numbers
 	if = {
 		limit = {
 			OR = {
@@ -303,11 +302,11 @@ zz_ef_money_model_step = {
 			add_to_global_variable_list = { name = zz_ef_hook_countries target = this days = 6 }
 		}
 	}
-	# R1а.8: the bridge's part of the step, on its latest numbers
+	# the bridge's part of the step, on its latest numbers
 	zz_ef_bridge_apply = yes
 }
 
-# R1а.8 (Р8, Р9, Р15; схема 4.3): the GUI bridge is transport only. Called by the bridge (gui/ld_money_hook.gui) with
+# the GUI bridge is transport only. Called by the bridge (gui/ld_money_hook.gui) with
 # the GUI-only numbers: scope:ext = the week's budget lines outside the accounts (settled, GetTrendValue), scope:abr =
 # their part with other countries, scope:g_* = the engine's values the GUI alone sees. Once per queued step (the
 # pending var is consumed; on_start may fire twice). It only writes them into the country's variables
@@ -367,7 +366,7 @@ zz_ef_money_hook_receive = {
 	}
 }
 
-# R1а.8: what the receiver did before, at the end of the scheduler's step, on the latest numbers of the bridge (0
+# what the receiver did before, at the end of the scheduler's step, on the latest numbers of the bridge (0
 # before the first): the leak, the gov rate's factor, the pops' savings, the clearing and the world's sums, the
 # foreign CBs' deposits, the consumer credit, the logs EFA / EFR / EFO. The model lives without the bridge (R0.8).
 # The leak = what left the engine's money unexplained this step (the change of M2 minus the outside lines, the CB's
@@ -377,11 +376,11 @@ zz_ef_bridge_apply = {
 	set_variable = { name = zz_ef_f_pool_other value = zz_ef_pool_other_week }
 	set_variable = { name = zz_ef_f_tr_other value = zz_ef_other_treasury_budget }
 	set_variable = { name = zz_ef_f_abr value = zz_ef_v_hk_abr }
-	# R1а.4: a step after a gap -- the flows measured for one week x the weeks the step covers
+	# a step after a gap -- the flows measured for one week x the weeks the step covers
 	zz_ef_sw = { F = ext }
 	zz_ef_sw = { F = abr }
-	# П.17 (4.10): additional income - expenses (bond interest, events), the BoP's primary income
-	# В4.2: the engine's factor on the government's rate -- its yearly rate over the adds it is given (smoothed)
+	# additional income - expenses (bond interest, events), the BoP's primary income
+	# the engine's factor on the government's rate -- its yearly rate over the adds it is given (smoothed)
 	if = {
 		limit = {
 			zz_ef_ir_add > 0.005
@@ -405,10 +404,10 @@ zz_ef_bridge_apply = {
 		remove_variable = zz_ef_gr_k_now
 	}
 	set_variable = { name = zz_ef_f_aint value = zz_ef_v_hk_aint }
-	# В5.4 (5.10): the interest to our own CB is not a payment abroad
+	# the interest to our own CB is not a payment abroad
 	change_variable = { name = zz_ef_f_aint add = zz_ef_v_cbl_int }
 	zz_ef_sw = { F = aint }
-	# В1.6 (5.10 evening): who has additional income - expenses (the world sum +0.25-0.75M a month, run s1g)
+	# who has additional income - expenses (the world sum +0.25-0.75M a month, run s1g)
 	if = {
 		limit = {
 			OR = {
@@ -418,7 +417,7 @@ zz_ef_bridge_apply = {
 		}
 		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFA|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|aint [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_aint')|0]|cbl_int [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_cbl_int')|0]|cbm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cbm_v')|0]|fdi [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fdi_mod_v')|0]" }
 	}
-	# R1а.7: the trade -- measured once at the step (zz_ef_trade_step: var:zz_ef_f_trade / _imp / _exp), read here
+	# the trade -- measured once at the step (zz_ef_trade_step: var:zz_ef_f_trade / _imp / _exp), read here
 	# by the clearing and the balance of payments; the treasury's trade fees from the bridge
 	set_variable = { name = zz_ef_f_tfees value = zz_ef_v_hk_tfees }
 	zz_ef_sw = { F = tfees }
@@ -428,11 +427,11 @@ zz_ef_bridge_apply = {
 	zz_ef_sw = { F = div }
 	set_variable = { name = zz_ef_f_leak value = zz_ef_leak_week }
 	zz_ef_pop_savings_step = yes
-	# R3а (б), the user 8.10: the CB's start metal the same day as the start deposits (40% of M2 needs them) -- not a week
+	# the user 8.10: the CB's start metal the same day as the start deposits (40% of M2 needs them) -- not a week
 	# later at the next step (it stays there too, for a CB that is not ready yet)
 	zz_ef_cb_metal_start_step = yes
 	zz_ef_cb_hume_step = yes
-	# Д2.30 (6.10 day): our currency held by other CBs lies in our banks (zz_ef_nr_deposits.txt)
+	# our currency held by other CBs lies in our banks (ld_nr_deposits.txt)
 	zz_ef_nr_dep_step = yes
 	zz_ef_consumer_credit_step = yes
 	zz_ef_pop_extra_income_step = yes
@@ -444,14 +443,14 @@ zz_ef_bridge_apply = {
 			}
 		}
 		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFR|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|ext [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_ext')|0]|leak [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_leak')|0]|savings [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_savings')|0]|deposits [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_deposits')|0]|notes [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_cash')|0]|inflow [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_inflow')|0]|dep_int [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_dep_int')|0]|pool [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pool')|0]|abr [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_abr')|0]|ext_net [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_ext_net')|0]|hume [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_hume')|0]|metal [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_metal')|0]|mv0 [THIS.GetCountry.MakeScope.ScriptValue('money_value_0')|2]|pool_other [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_pool_other')|0]|tr_other [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_tr_other')|0]|bc_debt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bc_debt')|0]|cc_debt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cc_debt')|0]|cc_net [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_cc_net')|0]|cc_wage [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cc_wage_add')|2]|dependents [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_dependents')|0]|d_tc [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_d_tc')|0]|tc [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_tc_cash')|0]|g_imp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_imp')|0]|g_exp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_exp')|0]|g_surplus [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_surplus')|0]|g_fown [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_fown')|0]|g_aown [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_aown')|0]|g_poolchg [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_poolchg')|0]|g_pcons [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_pcons')|0]|g_grate [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_grate')|4]|g_maxcred [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_maxcred')|0]|g_wgdp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_wgdp')|0]|cpi [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_price_index')|2]|mint [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_mint')|0]|mint_tr [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_mint_tr')|0]|gmined [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gold_mined_week')|1]|fx [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fx_reserves_metal')|0]|bc_new [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_bc_new')|0]|bc_paid [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_bc_paid')|0]|svc [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_bc_svc')|0]|trade [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_trade')|0]|tfin [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_trade_fin')|0]|div [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_div')|0]|profit [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_profit_week')|0]|wrate [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_wrate')|5]|ipay [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_ipay')|0]|sdebt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_sdebt')|0]|sdebtf [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_sdebtf')|3]|principal [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_debt_principal')|0]|ir_add [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_ir_add')|4]|ir_mult [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_ir_mult')|4]|grt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gov_rate_target')|4]|govlv [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gov_levels')|1]|privlv [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_priv_levels')|1]|d_govlv [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_d_govlv')|1]|fxm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_fx_metal')|0]|s2g [THIS.GetCountry.MakeScope.ScriptValue('silver_to_gold_rate')|5]|csub [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_clr_sub')|0]|csent [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_clr_sent')|0]|gpm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_gold_per_money')|5]|gr_k [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gr_k_v')|3]|sav_norm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_sav_norm')|0]|buyback_m [THIS.GetCountry.MakeScope.Var('zz_ef_f_mt_buyback_money').GetValue|0]|nr_dep [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_nr_dep_v')|0]|f_nr_dep [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_nr_dep')|0]|liab_all [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fx_liab_all')|0]|nr_int [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_nr_int')|0]|nr_oth [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_nr_oth')|0]|hdem [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fx_holders_demand_m')|1]" }
-		# UI.7 (3.10): the "прочее" of each account card (zz_ef_money_log_rest.txt,
+		# the "прочее" of each account card (ld_money_log_rest.txt,
 		# generated) -- here, after the receiver set the week's pool_other, tr_other,
 		# inflow and abr: at the step the log read last week's (run e0_4)
 		if = { limit = { zz_ef_logs_on = yes } zz_ef_money_log_rest = yes }
 	}
 }
 
-# R1а.7 (Д.5, Р2; схема 3.1): the trade -- ONE posting a step, the market's trade at the goods' base prices
+# the trade -- ONE posting a step, the market's trade at the goods' base prices
 # (zz_ef_trade_net_week). Exports and imports are summed once into var:zz_ef_f_exp / _imp (53 goods each; was 3-4
 # passes a week -- the receiver's net, imports, exports, the world line), the net from them into var:zz_ef_f_trade;
 # the clearing (zz_ef_ext_net_week), the balance of payments and the world trade pool read these variables. The
@@ -464,7 +463,7 @@ zz_ef_trade_step = {
 	zz_ef_sw = { F = trade }
 	zz_ef_sw = { F = imp }
 	zz_ef_sw = { F = exp }
-	# В3.3: a customs union member's account, for the market owner's side
+	# a customs union member's account, for the market owner's side
 	if = {
 		limit = { zz_ef_cu_member = yes }
 		set_variable = { name = zz_ef_member_trade value = var:zz_ef_f_trade }
@@ -496,9 +495,9 @@ zz_ef_money_window_roll = {
 zz_ef_pop_savings_step = {
 	if = {
 		limit = { NOT = { has_variable = zz_ef_pop_savings } }
-		# the pops' start savings (zz_ef_pop_start_savings) are deposits only: R1б (В3, 8.10) -- the banknotes in
+		# the pops' start savings (zz_ef_pop_start_savings) are deposits only: R1б -- the banknotes in
 		# circulation (M0, var:zz_ef_notes) start at 0
-		# R1б.1 (8.10): the deposits are the pool as it is (no money into it) -- the norm, at most 90% of the pool
+		# the deposits are the pool as it is (no money into it) -- the norm, at most 90% of the pool
 		# (Хвост R1: the rest is the banks' capital); out of the
 		# banks' capital the first reconciliation set (the pool less the book)
 		set_variable = { name = zz_ef_pop_deposits value = 0 }
@@ -507,28 +506,28 @@ zz_ef_pop_savings_step = {
 		remove_variable = zz_ef_t_dep0
 		set_variable = { name = zz_ef_pop_savings value = var:zz_ef_pop_deposits }
 		set_variable = { name = zz_ef_notes value = 0 }
-		# stage 2, step 3 (6.10): the banks' start metal by the reserve norm (scripted_effects/zz_ef_metal_accounts.txt)
+		# the banks' start metal by the reserve norm (scripted_effects/ld_metal_accounts.txt)
 		zz_ef_metal_start_banks = yes
 	}
-	# R1а.6 (Д.6): the leak no longer goes into the savings (it is «прочее»)
-	# R1а (8.10, the user): three guesses of the hotfix removed (_archive/ld_pop_savings_guesses/) -- the pool's
+	# the leak no longer goes into the savings (it is «прочее»)
+	# three guesses of the hotfix removed (_archive/ld_pop_savings_guesses/) -- the pool's
 	# unexplained loss credited to the pops' savings as "levels sold", the treasury's event spending as savings, 10% a
 	# week of the savings over a norm written off "into wealth"; with the deposits = the engine's contributions there is
 	# nothing to drain, and an unexplained change is «прочее».
-	# R1б (В3, 8.10): cash <-> deposits by the cash norm -- _archive/ld_cash_norm/ (behaviour -- R7)
+	# cash <-> deposits by the cash norm -- _archive/ld_cash_norm/ (behaviour -- R7)
 
 	set_variable = { name = zz_ef_f_dep_int value = zz_ef_dep_interest }
 	zz_ef_sw = { F = dep_int }
-	# R1а.6: credited to the deposits, paid by the banks' capital (no cash leaves the pool)
+	# credited to the deposits, paid by the banks' capital (no cash leaves the pool)
 	zz_ef_post = { FROM = zz_ef_bank_capital TO = zz_ef_pop_deposits V = var:zz_ef_f_dep_int }
 	change_variable = { name = zz_ef_pop_savings add = var:zz_ef_f_dep_int }
 }
 
-# R1а.6 (Д.6), at the step after the business credit: the pops' contributions to the pool (the engine's gross income
+# at the step after the business credit: the pops' contributions to the pool (the engine's gross income
 # of the pool, x the weeks of the step) are their deposits -- less the part that services the business credit (it
 # repays the banks' loans, zz_ef_f_bc_paid). The pool's private construction (its transfer to the treasury) less the
 # banks' new business credit is paid out of the deposits for building levels: deposits -> the private sector
-# (zz_ef_pop_claims_private; accepted at night 7.10, check). The planned economy has no pool -- no deposits.
+#. The planned economy has no pool -- no deposits.
 zz_ef_pop_deposits_step = {
 	set_variable = { name = zz_ef_f_dep_contrib value = 0 }
 	set_variable = { name = zz_ef_f_dep_build value = 0 }
@@ -567,7 +566,7 @@ zz_ef_pop_deposits_step = {
 	change_variable = { name = zz_ef_f_inflow subtract = var:zz_ef_f_dep_build }
 }
 
-# EF.48 item 6 (the user, 1.10): the CB and abroad are one account -- the CB
+# the CB and abroad are one account -- the CB
 # settles every payment abroad. Its reserves: metal (E&F's var:gold_state_1 /
 # silver_state_1 on the CB's state, re-read by E&F's storing_gold_1 every
 # month, so a change there stays) and E&F's currency-good stock. The week's
@@ -581,29 +580,29 @@ zz_ef_cb_hume_step = {
 	set_variable = { name = zz_ef_f_ext_net value = zz_ef_ext_net_week }
 	set_variable = { name = zz_ef_f_hume value = 0 }
 	set_variable = { name = zz_ef_f_hume_money value = 0 }
-	# П.6 (the user, 4.10, В.2 / В.3): the world clearing -- the outflow pays the house in metal (by trust in
+	# the world clearing -- the outflow pays the house in metal (by trust in
 	# the currency) and in the own currency, the inflow takes a slice of what the house holds; every country
 	# with a CB, fiat too (pays in currency). Was: the metal moved by the country's own flow with nobody on the
-	# other side (generated, scripted_effects/zz_ef_clearing.txt; sets var:zz_ef_f_hume, the CB's metal, native).
+	# other side (generated, scripted_effects/ld_clearing.txt; sets var:zz_ef_f_hume, the CB's metal, native).
 	zz_ef_clr_step = yes
-	# В1.6 (5.10): the world's sums of the week (the EFG line)
+	# the world's sums of the week (the EFG line)
 	zz_ef_world_acc = yes
 }
 
-# В1.6 (5.10): the world line. Every country's receiver adds its week to global sums in GOLD (the flow x
+# the world line. Every country's receiver adds its week to global sums in GOLD (the flow x
 # zz_ef_clr_gold_per_money; a country with no value of its money counts in n0 only); the first receiver of the
 # next 7-day window writes them (EFG|date|WORLD|..., tools/check_flows.py) and zeroes them. Keys: in / out -- the
 # net inflows / outflows with abroad (zz_ef_f_ext_net) of all countries; nocl -- |flow| of the countries outside
 # the clearing (no CB); subj_in / subj_out -- the subjects' part (В1.7); hume -- the CBs' metal moved by the
 # clearing, + in / - out, signed sum and |sum|; n / n0 -- countries counted / with no gold value. In the engine's
-# money (5.10): in_m / out_m; trade_m, abr_m, div_m, bond_m -- the signed world sums of the flow's parts (bond_m:
+# money: in_m / out_m; trade_m, abr_m, div_m, bond_m -- the signed world sums of the flow's parts (bond_m:
 # the rest -- bonds and the bond ledger); sub -- the members' flows settled by their heads (В1.7), gold.
-# R1а.4 (Д.4): the world line's next window -- opened by the scheduler at the end of the week (zz_ef_world_week_close,
+# the world line's next window -- opened by the scheduler at the end of the week (zz_ef_world_week_close,
 # ld_scheduler.txt); the first receiver opens it only if the scheduler is lost (the window var lives 9 days).
 zz_ef_world_window_open = {
 	if = {
 		limit = { has_global_variable = zz_ef_wld_n }
-		# stage 2, step 8 (6.10): the world line of metal (scripted_effects/zz_ef_metal_accounts.txt)
+		# the world line of metal (scripted_effects/ld_metal_accounts.txt)
 		zz_ef_world_metal_log = yes
 		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFG|[TimeKeeper.GetCurrentDate.GetString]|WORLD|in [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_in_v')|0]|out [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_out_v')|0]|nocl [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_nocl_v')|0]|subj_in [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_subj_in_v')|0]|subj_out [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_subj_out_v')|0]|hume [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_hume_v')|0]|hume_abs [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_hume_abs_v')|0]|n [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_n_v')|0]|n0 [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_n0_v')|0]|clr_in [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_in_last_v')|0]|clr_out [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_out_last_v')|0]|clr_pot [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_pot_value')|0]|in_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_in_m_v')|0]|out_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_out_m_v')|0]|trade_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_trade_m_v')|0]|abr_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_abr_m_v')|0]|div_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_div_m_v')|0]|bond_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_bond_m_v')|0]|sub [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_sub_v')|0]|gpm_avg [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_gpm_avg_v')|5]|wexp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_wexp_v')|0]|wimp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_wimp_v')|0]|wfee [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_wfee_v')|0]|waint [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_waint_v')|0]|kr [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wtr_kr_v')|4]|kp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wtr_kp_v')|4]|waown [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_waown_v')|0]|wfown [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_wfown_v')|0]|dkr [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wdv_kr_v')|4]|dkp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wdv_kp_v')|4]" }
 	}
@@ -621,7 +620,7 @@ zz_ef_world_window_open = {
 			}
 		}
 	}
-	# В1.6: the world trade pool's ratios for the next window
+	# the world trade pool's ratios for the next window
 	set_global_variable = { name = zz_ef_wtr_kr value = 1 }
 	set_global_variable = { name = zz_ef_wtr_kp value = 1 }
 	if = {
@@ -653,7 +652,7 @@ zz_ef_world_window_open = {
 			}
 		}
 	}
-	# В1.6: the world dividends pool's ratios (the GDP owned abroad against the foreign-owned)
+	# the world dividends pool's ratios (the GDP owned abroad against the foreign-owned)
 	set_global_variable = { name = zz_ef_wdv_kr value = 1 }
 	set_global_variable = { name = zz_ef_wdv_kp value = 1 }
 	if = {
@@ -729,7 +728,7 @@ zz_ef_world_acc = {
 		limit = { zz_ef_logs_on = yes }
 		change_global_variable = { name = zz_ef_wld_n add = 1 }
 		change_global_variable = { name = zz_ef_wld_waint add = zz_ef_v_f_aint }
-		# В1.6 item 5 (5.10): the same in the engine's money, every country (its payments abroad are in it), and the
+		# the same in the engine's money, every country (its payments abroad are in it), and the
 		# signed sums of the flow's parts -- a part whose world sum is not ~0 has a payment without a counterpart
 		if = {
 			limit = { var:zz_ef_f_ext_net > 0 }
@@ -751,7 +750,7 @@ zz_ef_world_acc = {
 				subtract = zz_ef_v_f_div
 			}
 		}
-		# В1.7: the members' flows (gold) their heads settled this week
+		# the members' flows (gold) their heads settled this week
 		change_global_variable = { name = zz_ef_wld_sub add = zz_ef_v_f_clr_sub }
 		# the world's average (set by the window block above) is final for this receiver: one pass of the price chain
 		set_variable = { name = zz_ef_t_gpm value = zz_ef_clr_gold_per_money }
@@ -808,9 +807,9 @@ zz_ef_world_acc = {
 	}
 }
 
-# EF.48 item 4: consumer credit, in the receiver after the savings (its pool
+# consumer credit, in the receiver after the savings (its pool
 # operations fall into the next week's window, like the deposits). Values:
-# script_values/zz_ef_money_model_values.txt.
+# script_values/ld_money_model_values.txt.
 zz_ef_consumer_credit_step = {
 	if = {
 		limit = {
@@ -828,7 +827,7 @@ zz_ef_consumer_credit_step = {
 		zz_ef_sw = { F = cc_issue }
 		zz_ef_sw = { F = cc_repay }
 		zz_ef_sw = { F = cc_int }
-		# R1а.6: the interest due is the banks' income (paid now, or added to the debt below) -- their capital
+		# the interest due is the banks' income (paid now, or added to the debt below) -- their capital
 		change_variable = { name = zz_ef_bank_capital add = var:zz_ef_f_cc_int }
 		set_variable = { name = zz_ef_f_cc_net value = var:zz_ef_f_cc_issue }
 		change_variable = { name = zz_ef_f_cc_net subtract = var:zz_ef_f_cc_repay }
@@ -882,18 +881,18 @@ zz_ef_pop_extra_income_step = {
 # ---- the monthly step -------------------------------------------------------
 
 zz_ef_money_model_monthly_step = {
-	# В3.2 (5.10): a subject of a metal-standard overlord takes its standard, currency and parity
-	# (scripted_effects/zz_ef_currency_zone.txt, generated)
+	# a subject of a metal-standard overlord takes its standard, currency and parity
+	# (scripted_effects/ld_currency_zone.txt, generated)
 	zz_ef_cur_zone_step = yes
-	# night 2, item 1: the silver-to-gold rate from market prices
+	# the silver-to-gold rate from market prices
 	zz_ef_silver_rate_update = yes
-	# М.9 (4.10): the reference currency's value / parity for the strength of the others
+	# the reference currency's value / parity for the strength of the others
 	zz_ef_reference_strength_step = yes
-	# Е.10 (5.10, Д.5): the strength's trade modifier, against the reference
+	# the strength's trade modifier, against the reference
 	zz_ef_currency_trade_step = yes
-	# Д2.7а (5.10): the CB's metal = what its building bought -- weekly since 6.10 (zz_ef_metal_week_step)
-	# R1б (В7, 8.10): Ф.2's January interest to foreign private banks -- _archive/ld_privbank_interest/
-	# R1б.2: the country's currency as data, every January (a culture changed, a law taken without on_activate); the
+	# the CB's metal = what its building bought -- weekly since 6.10 (zz_ef_metal_week_step)
+	# Ф.2's January interest to foreign private banks -- _archive/ld_privbank_interest/
+	# the country's currency as data, every January (a culture changed, a law taken without on_activate); the
 	# issuer's parity in gold for the reserves' value (Д.1) -- every month
 	if = {
 		limit = { month = 0 }
@@ -902,11 +901,11 @@ zz_ef_money_model_monthly_step = {
 	else = {
 		zz_ef_cur_par_update = yes
 	}
-	# В2.1: AI central banks on the forex monthly was tried and taken back
-	# (run 24, 2.10): every E&F purchase is at parity, twelve a year blew the
+	# AI central banks on the forex monthly was tried and taken back
+	#: every E&F purchase is at parity, twelve a year blew the
 	# reserves up (France's cover 64% -> 436%, Russia's currency 1.2 billion
 	# silver in 2.5 years). E&F's yearly AI forex is archived too (R2, Д.R2.2).
-	# night 2: every currency once a month (Hanover's thaler, silver rates)
+	# every currency once a month (Hanover's thaler, silver rates)
 	if = {
 		limit = {
 			has_variable = money_value_target_1
@@ -914,29 +913,29 @@ zz_ef_money_model_monthly_step = {
 		}
 		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFX|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|std [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_std_code')|0]|cb [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_has_cb')|0]|mv0 [THIS.GetCountry.MakeScope.ScriptValue('money_value_0')|3]|target1 [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_valuation')|3]|gpu [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gold_per_unit')|4]|subj [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_is_subject')|0]|cover [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_cover')|3]|gold [THIS.GetCountry.MakeScope.ScriptValue('gold_state_native_for_stockpile')|0]|silver [THIS.GetCountry.MakeScope.ScriptValue('silver_state_native_for_stockpile')|0]|fxm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_fx_metal')|0]|own [THIS.GetCountry.MakeScope.ScriptValue('money_supply_state')|0]|m2 [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_agg_m2')|0]|crisis [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_crisis_flag')|0]|s2g [THIS.GetCountry.MakeScope.ScriptValue('silver_to_gold_rate')|5]|median [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_money_median')|3]|gdp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_raw_gdp')|0]|liab [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fx_liab_all')|0]|clr_ratio [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_ratio_v')|3]|clr_pot [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_pot_value')|0]|clr_pay [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_pay_ratio_v')|3]|clr_in [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_in_last_v')|0]|clr_out [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_out_last_v')|0]|clr_hume [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_hume')|0]|clr_cur_out [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_w_clr_cur_out')|0]|clr_fx_in [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_w_clr_fx_in_money')|0]|clr_back [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_w_clr_own_back')|0]|share [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_metal_share')|2]|strength [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_currency_strength')|3]|extn [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_ext_net')|0]|gpm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_gold_per_money')|5]|trade [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_trade')|0]|mtrade [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_members_trade_sum')|0]|cum [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cu_member_v')|0]" }
 	}
-	# EF.48 item 4: dependents for the surcharge (consumer credit; since 1.10
+	# dependents for the surcharge (consumer credit; since 1.10
 	# evening also the savings spent -- every country).
 	set_variable = { name = zz_ef_dependents value = zz_ef_dependents_count }
 
 	# E&F's currency good moves monthly (stockpile_currency_type_1).
 	zz_ef_money_ledger_delta = { ACC = cb VALUE = money_supply_state }
 
-	# EF.31 items 8-9: the price of the government's rate policy.
+	# the price of the government's rate policy.
 	zz_ef_rate_policy_costs = yes
 
-	# night 2, item 5: the government's rate
+	# the government's rate
 	zz_ef_gov_rate_step = yes
 
-	# В4.1 (2.10): devaluation / revaluation towards a cover target
-	# (generated, scripted_effects/zz_ef_monetary_policy.txt)
+	# devaluation / revaluation towards a cover target
+	# (generated, scripted_effects/ld_monetary_policy.txt)
 	zz_ef_mp_step = yes
 
 	# СТР.5 (CB company dividends -> treasury) removed 5.10 (Д2.5): the central bank is the state's again.
 
-	# EF.31: the rate's share of private construction. PSC rewrites the whole
+	# the rate's share of private construction. PSC rewrites the whole
 	# private share every week; it keeps this line only because our
 	# REPLACE of private_construction_increase adds it back from the variable
-	# (СТР.5, script_values/zz_ef_psc_private_allocation.txt).
+	# (СТР.5, script_values/ld_psc_private_allocation.txt).
 	set_variable = { name = zz_ef_rate_constr_applied value = zz_ef_rate_construction_mult }
 	if = { limit = { has_modifier = zz_ef_rate_private_construction } remove_modifier = zz_ef_rate_private_construction }
 	add_modifier = {
@@ -1020,7 +1019,7 @@ zz_ef_money_ledger_delta = {
 	remove_variable = zz_ef_t_led
 }
 
-# Night 2, item 2 (2.10): foreign currency in the CB's reserves, kept weekly
+# Night 2, item 2: foreign currency in the CB's reserves, kept weekly
 # (zz_ef_fx_reserves_metal walks 95 currencies x the CB states; the national
 # capacity reads it hundreds of times a month). E&F values it in gold
 # (money_value_target_real_in_gold of the issuer); a silver standard holds
@@ -1033,9 +1032,8 @@ zz_ef_fx_metal_update = {
 	}
 }
 
-# Night 2, item 3 (2.10): a seller redeems a currency in crisis for the
-# issuer's metal (generated sell_<currency>_currency_crisis,
-# scripted_effects/zz_ef_fx_crisis.txt). SELLER scope; var:zz_ef_crisis_due =
+# A seller redeems a currency in crisis for the
+# issuer's metal (sell_<currency>_currency_crisis, 01_economic_scripted_effects.txt). SELLER scope; var:zz_ef_crisis_due =
 # the holdings at the issuer's parity, in the issuer's metal. The issuer pays
 # from its CB capital's stock, at most what it holds; the seller gets it in
 # its own standard's metal at the market rate (silver_to_gold_rate). Was:
@@ -1113,7 +1111,7 @@ zz_ef_crisis_redeem = {
 	}
 }
 
-# Night 2, item 1 (2.10, the user): the silver-to-gold rate from the metals'
+# Night 2, item 1: the silver-to-gold rate from the metals'
 # market prices (values file, zz_ef_silver_to_gold_market), once a month by
 # the first country of the month (a 25-day global flag).
 zz_ef_silver_rate_update = {
@@ -1124,7 +1122,7 @@ zz_ef_silver_rate_update = {
 	}
 }
 
-# EF.48 item 5 -- business credit with repayment (the user, 1.10 evening:
+# business credit with repayment (the user, 1.10 evening:
 # "repayment in any case, the point is a realistic money turnover"). Until
 # now only values existed and the debt was never kept (always 0). Private
 # construction paid with the banks' borrowed money (the CB's credit and pops'
@@ -1148,7 +1146,7 @@ zz_ef_business_credit_step = {
 	set_variable = { name = zz_ef_f_bc_int value = zz_ef_bc_interest }
 	set_variable = { name = zz_ef_f_bc_due value = zz_ef_bc_due }
 	set_variable = { name = zz_ef_f_bc_paid value = zz_ef_bc_paid }
-	# R1а.4: a step after a gap -- the flows measured for one week x the weeks the step covers
+	# a step after a gap -- the flows measured for one week x the weeks the step covers
 	if = {
 		limit = { var:zz_ef_step_weeks > 1 }
 		zz_ef_sw = { F = bc_int }
@@ -1157,7 +1155,7 @@ zz_ef_business_credit_step = {
 	}
 	change_variable = { name = zz_ef_bc_debt add = var:zz_ef_f_bc_new }
 	change_variable = { name = zz_ef_bc_debt add = var:zz_ef_f_bc_int }
-	# R1а.6: the interest accrues -- the banks' claim grows, so does their capital (ld_ledger.txt, the banks' book)
+	# the interest accrues -- the banks' claim grows, so does their capital (ld_ledger.txt, the banks' book)
 	change_variable = { name = zz_ef_bank_capital add = var:zz_ef_f_bc_int }
 	change_variable = { name = zz_ef_bc_debt subtract = var:zz_ef_f_bc_paid }
 	if = {
@@ -1189,15 +1187,15 @@ zz_ef_business_credit_step = {
 	}
 }
 
-# Night 2, item 5 (2.10): the government's rate to key + premium (static_
-# modifiers/zz_ef_gov_rate.txt, values file). Ours cancels the other
+# Night 2, item 5: the government's rate to key + premium (static_
+# modifiers/ld_gov_rate.txt, values file). Ours cancels the other
 # multipliers (total 1) and tops the adds up to the target.
 zz_ef_gov_rate_step = {
 	set_variable = { name = zz_ef_gr_target value = zz_ef_gov_rate_target }
 	set_variable = { name = zz_ef_gr_mult_new value = zz_ef_gov_rate_mult_other }
 	change_variable = { name = zz_ef_gr_mult_new multiply = -1 }
 	set_variable = { name = zz_ef_gr_add_new value = var:zz_ef_gr_target }
-	# В4.2 (5.10 evening, run r1005_163333): the engine's rate stayed 11-18% under the target for France and Russia
+	# the engine's rate stayed 11-18% under the target for France and Russia
 	# (0.0727 at grt 0.0873) while modifier:country_loan_interest_rate_mult read 0 -- something the script does not see
 	# (E&F's banks' prosperity modifiers, -0.05 each?) scales the whole rate. Calibrated by the fact: the target over
 	# the engine's own factor (zz_ef_gr_k, weekly: its yearly rate / the adds).

@@ -1,7 +1,7 @@
 ﻿#############################################
 # 7h. The seed itself, and a backstop for it
 #
-# Companion to common/on_actions/zz_ef_stockpile_state_var_init.txt. That file
+# Companion to common/on_actions/ld_stockpile_state_var_init.txt. That file
 # hangs this off on_game_started_after_lobby; this one also gets called once
 # from the monthly pulse behind a global flag, because the first run of the
 # on_action version did not clear the errors it was written for.
@@ -18,9 +18,8 @@
 #      does on a new campaign. -> zz_ef_seed_stockpile_state_vars_backstop
 #      runs from on_monthly_pulse_country, once ever, behind a global flag.
 #      One pass, then never again -- for the states that exist at that moment.
-#      (Written 12.09 as "states do not appear or vanish in Vic3". Wrong: a
-#      split state region gets a new state object. Those are now seeded from
-#      the monthly transfert path, see 7i in zz_ef_monthly_pulse_dedup.txt.)
+#      A split state region gets a new state object: those are seeded from
+#      the monthly transfert path (00_on_action_main.txt).
 #
 #   2. `every_state` may not reach every state the gate walks. The gate is
 #      `any_scope_state` on a COUNTRY, so the set that matters is exactly

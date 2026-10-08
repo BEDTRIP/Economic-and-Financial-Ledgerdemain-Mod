@@ -1,5 +1,5 @@
-﻿# EF.43 + В4.3 (decided by the user 5.10): two more factors of the risk premium (zz_ef_cb_rule_stability,
-# zz_ef_cb_rate_values.txt). E&F's rating does not tell Russia, France and Austria apart (premium 3.7 / 3.8 / 3.6 pp,
+﻿# EF.43 + В4.3: two more factors of the risk premium (zz_ef_cb_rule_stability,
+# ld_cb_rate_values.txt). E&F's rating does not tell Russia, France and Austria apart (premium 3.7 / 3.8 / 3.6 pp,
 # run n0_4 1844).
 #   currency -- "manipulating the convertibility": a parity change (the AI's rule, the player's devaluation /
 #     revaluation law) and the suspension of redemption (the cover falls under 25%) add a penalty that fades out
@@ -7,8 +7,8 @@
 #     13 weeks, the rescale is not a parity change). It is also the rating's downgrade for manipulation.
 #   debt and deficits -- the engine's debt to GDP over 25%, and a chronic deficit (the budget's balance to GDP,
 #     a 12-month moving average) over 1% of GDP.
-# Not taken (the user): the form of government, the budget's transparency.
-# Monthly upkeep: scripted_effects/zz_ef_risk_premium.txt (zz_ef_risk_monthly, from zz_ef_cb_rate_monthly).
+# Not taken: the form of government, the budget's transparency.
+# Monthly upkeep: scripted_effects/ld_risk_premium.txt (zz_ef_risk_monthly, from zz_ef_cb_rate_monthly).
 
 # a parity change: 8 pp per 100% of the move (a 25% step -> 2 pp), 0.5..2 pp
 zz_ef_risk_fx_parity_pen = {

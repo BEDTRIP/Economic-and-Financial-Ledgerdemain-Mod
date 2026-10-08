@@ -3,7 +3,7 @@
 ### Additive: on_actions stack, nothing here overrides E&F.
 ###
 ### The writes themselves and the full reasoning live in
-### common/scripted_effects/zz_ef_stockpile_state_var_seed.txt (7h).
+### common/scripted_effects/ld_stockpile_state_var_seed.txt (7h).
 ### This file is only the two hooks.
 ###
 ### THE ERRORS, first measured in a 1858 save on 2026-09-12:
@@ -45,7 +45,7 @@ on_game_started_after_lobby = {
 	}
 }
 
-# R1а.4 (Д.4): run by the scheduler (scripted_effects/ld_scheduler.txt, zz_ef_sched_monthly), not on on_monthly_pulse_country.
+# run by the scheduler (scripted_effects/ld_scheduler.txt, zz_ef_sched_monthly), not on on_monthly_pulse_country.
 
 zz_ef_init_stockpile_state_vars = {
 	effect = {

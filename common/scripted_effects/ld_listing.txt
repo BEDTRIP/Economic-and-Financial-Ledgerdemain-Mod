@@ -1,18 +1,18 @@
 ﻿#############################################
-# Д2.11 / Д2.12 (5.10.2026, decided by the user) -- the "publicly traded" method of company headquarters
-# (EF.22, production_methods/zz_ef_company_hq_publicly_traded.txt) is switched by script, monthly, not by hand
-# (the user: "this method must become very important and be switched by script"):
-#   * allowed (scripted_triggers/zz_ef_listing_triggers.txt: an exchange, joint-stock law, the technology) --
+# the "publicly traded" method of company headquarters
+# (EF.22, production_methods/ld_company_hq_publicly_traded.txt) is switched by script, monthly, not by hand
+#:
+#   * allowed (scripted_triggers/ld_listing_triggers.txt: an exchange, joint-stock law, the technology) --
 #     the largest headquarters go public until their levels reach the country's share = the literacy of the
 #     rich (var:zz_ef_rich_literacy, zz_ef_stock_issue_update): reading a prospectus took literate investors;
 #     the rest are private;
 #   * not allowed (no exchange, traditionalism...) -- every public headquarters goes back to private.
-# 6.10 (run r1006_003421: no headquarters found -- hq 0 everywhere): every company has its own headquarters
+# 6.10: every company has its own headquarters
 # type, building_company_<key>, group bg_company_headquarter; activate_production_method takes the type as a
-# literal, so the switch is a generated dispatcher (scripted_effects/zz_ef_listing_switch.txt,
+# literal, so the switch is a generated dispatcher (scripted_effects/ld_listing_switch.txt,
 # tools/regen_ef_listing.py: the capitalist-owned companies of vanilla and E&F).
 # Logged for big economies: EFL|date|country|hq H|listed L|share S|lit R|cap C|div D|cap_gdp G.
-# COUNTRY scope, from on_actions/zz_ef_capitalization_on_actions.txt before the capitalization update.
+# COUNTRY scope, from on_actions/ld_capitalization_on_actions.txt before the capitalization update.
 #############################################
 
 zz_ef_listing_update = {

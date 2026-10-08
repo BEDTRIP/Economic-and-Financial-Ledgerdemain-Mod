@@ -1,6 +1,6 @@
 ﻿#############################################
-# Stage 2, night 6.10 (Ф1 + Ф2; the user's decisions М, Д2.13, Д2.20-Д2.29) -- the metal accounts.
-# Effects: scripted_effects/zz_ef_metal_accounts.txt. Every unit of metal on an account was bought on the market
+# Stage 2, night 6.10 -- the metal accounts.
+# Effects: scripted_effects/ld_metal_accounts.txt. Every unit of metal on an account was bought on the market
 # (or is the start's stock, logged as such): the CB (var:gold_state_1 / silver_state_1 of its CB states, E&F's
 # reserves), the banks (var:zz_ef_bankm_gold / _silver, one per country -- by company in Ф3) and the pops
 # (var:zz_ef_popm_gold / _silver).
@@ -9,13 +9,13 @@
 # counts it against gold by WEIGHT, 1:15.5 (silver_to_gold_rate, ours: the market prices / 15.5), so one silver
 # good (base price 50 = half a gold good) is 50 gold units = 50 x 15.5 = 775 silver units -- the value in the
 # reserves equals the market value at any prices. Was x 100 for silver too (Д2.7а): a silver standard's CB got
-# 7.75 times less cover than it paid for (accepted at night 6.10, check).
+# 7.75 times less cover than it paid for.
 #############################################
 
 zz_ef_gold_units_per_good = 100
 zz_ef_silver_units_per_good = 775
 
-# R1б.1 (Д.1, 8.10): the engine's money is one unit for every country -- 1 unit of money = 1 gold unit of the reserves
+# the engine's money is one unit for every country -- 1 unit of money = 1 gold unit of the reserves
 # at the base price (gold costs 100 = one good). The metal is counted in it at a fixed rate, the parity is not in it
 # (the parity -- var:money_value_target_1, E&F's historical one -- sets only the rate between currencies and the labels
 # in national units). Native metal units per unit of money: gold and bimetallism (counted in gold) 1, a silver
@@ -127,7 +127,7 @@ zz_ef_reserve_norm = {
 
 # The ceiling of the banks' credit (Д2.26 а, Д2.27 а): business credit + consumer credit <= the banks' metal at
 # parity / the reserve norm, times the cover's credit multiplier (1 at 40% cover, 0 at 20%). The room under it is
-# what the banks may lend more: the CB's credit to them and the new consumer credit stop at it (repayment as was).
+# what the banks may lend more: the CB's credit to them and the new consumer credit stop at it.
 zz_ef_credit_now = {
 	value = zz_ef_bc_debt
 	add = zz_ef_cc_debt
@@ -362,7 +362,7 @@ zz_ef_cb_sell_units = {
 		multiply = money_supply
 		multiply = zz_ef_cb_valuation
 		multiply = 0.02
-		# Д2.34 (the user, 6.10 day): over 100% cover another 5% of that excess a week (run r1006_162423: the
+		# over 100% cover another 5% of that excess a week (run r1006_162423: the
 		# surplus countries' cover 2-3.6 -- the US 2.9, Belgium 3.6 -- the 2% did not hold it)
 		if = {
 			limit = { zz_ef_cb_cover > zz_ef_cb_sell_cover_high }
@@ -498,9 +498,9 @@ zz_ef_wm_rest_silver = {
 	add = zz_ef_wm_v_sell_silver
 }
 
-# The world clearing (scripted_effects/zz_ef_clearing.txt) keeps its pot in GOLD: a silver country pays silver turned to
+# The world clearing (scripted_effects/ld_clearing.txt) keeps its pot in GOLD: a silver country pays silver turned to
 # gold at silver_to_gold_rate, a receiver on silver takes gold turned to silver -- gold and silver are not conserved
-# apart through it, only their sum in gold (run r1006_135058: rest_g -2.8M, rest_s +133M by 1838). The pot itself and
+# apart through it, only their sum in gold. The pot itself and
 # the rest in gold (silver at today's rate) for the world line:
 zz_ef_wm_clr_pot = {
 	value = 0

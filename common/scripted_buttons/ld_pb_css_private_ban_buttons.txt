@@ -1,19 +1,19 @@
 ﻿#############################################
-# EF.18 v2 (2026-09-24) -- "ban private construction sectors" toggle
+# "ban private construction sectors" toggle
 #
 # Two journal buttons (financial_center_je_2, re-issued in
-# journal_entries/zz_pb_ef_financial_center_je.txt), shown one at a time,
+# journal_entries/00_ef_financial_center_je.txt), shown one at a time,
 # AI ONLY (is_ai = yes, as E&F does with its own journal buttons): the
 # player gets the same two as widget buttons inside the construction section
-# (scripted_guis/zz_pb_ef_fso_sguis.txt), next to E&F's buttons 9-12.
+# (scripted_guis/ld_pb_fso_sguis.txt), next to E&F's buttons 9-12.
 #
-# What the flag zz_pb_ef_css_private_ban does (buildings/zz_pb_ef_construction_sector.txt):
+# What the flag zz_pb_ef_css_private_ban does (buildings/zz_PSC_construction.txt):
 #   - can_build_private is false: investors start no new construction sector;
 #   - ai_nationalization_desire of the sector goes up, so an AI government
 #     stops privatizing its own sectors.
 # What it cannot do: stop a PLAYER from privatizing -- the engine has no
 # trigger on privatization, only the AI's desire. Nationalization and
-# demolition buttons were considered and dropped (2026-09-24): the engine has
+# demolition buttons were considered and dropped: the engine has
 # no nationalization effect, and add_building_level with a negative level
 # does not let us choose whose levels go.
 #

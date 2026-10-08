@@ -5197,12 +5197,12 @@ money_supply_montly = {
 # money_supply (script_values/00_economic_scripted_value.txt). E&F's
 # money_supply = money_supply_state (goods) + money_circulating (pop savings
 # counter + pool + credit limit + government_loan counter).
-# The money in circulation (the user, 1.10 day: M2 - M0): businesses' cash +
+# The money in circulation: businesses' cash +
 # the pool + pops' savings at hand. The treasury and the CB are out of it
 # (EF.48 item 11: hoarding deflates, spending inflates). The currency's value
 # (E&F money_value_0 = national capacity / money_supply) and the inflation
 # read it.
-# 1.10 evening (the user, run 12): the money in circulation is M2 -- pops'
+# 1.10 evening: the money in circulation is M2 -- pops'
 # cash, business cash and pops' deposits (zz_ef_agg_m2). The pool beyond the
 # deposits (the CB's credit, contributions not yet spent) becomes money when
 # the banks spend it.
@@ -5274,7 +5274,7 @@ national_capacity = {
 			}
 		}
 		add = central_bank_reserves
-		# night 2, item 2 (2.10): foreign currency in the reserves, in the
+		# foreign currency in the reserves, in the
 		# standard's metal (var:zz_ef_fx_metal, kept weekly by the step)
 		add = zz_ef_v_fx_metal
 		multiply = zz_ef_capacity_per_metal
@@ -5316,20 +5316,20 @@ gold_loaned_to_central_bank_in_national_metal = {
 }
 
 gold_loaned_to_central_bank_in_national_metal_silver = {
-	# R3.6 (8.10): 0 when the variable is not set (was «Value of wrong type ... none», money_value_target_pre_set)
+	# 0 when the variable is not set
 	value = 0
 	if = { limit = { has_variable = gold_loaned_to_central_bank_fix } value = var:gold_loaned_to_central_bank_fix }
 	multiply = gold_to_silver_rate
 }
 
 gold_loaned_to_central_bank_in_national_metal_bimetalic = {
-	# R3.6 (8.10): 0 when the variable is not set (was «Value of wrong type ... none», money_value_target_pre_set)
+	# 0 when the variable is not set
 	value = 0
 	if = { limit = { has_variable = gold_loaned_to_central_bank_fix } value = var:gold_loaned_to_central_bank_fix }
 }
 
 gold_loaned_to_central_bank_in_national_metal_gold = {
-	# R3.6 (8.10): 0 when the variable is not set (was «Value of wrong type ... none», money_value_target_pre_set)
+	# 0 when the variable is not set
 	value = 0
 	if = { limit = { has_variable = gold_loaned_to_central_bank_fix } value = var:gold_loaned_to_central_bank_fix }
 }
@@ -6138,12 +6138,12 @@ silver_market_goods_sell_orders = {
 	}
 }
 debt_in_gold_sc = {
-	# R3.6 (8.10): 0 when the variable is not set (money_value_target_pre_set: «Value of wrong type ... none»)
+	# 0 when the variable is not set (money_value_target_pre_set: «Value of wrong type... none»)
 	value = 0
 	if = { limit = { has_variable = debt_in_gold } value = var:debt_in_gold }
 }
 excess_in_gold_sc = {
-	# R3.6 (8.10): 0 when the variable is not set (money_value_target_pre_set: «Value of wrong type ... none»)
+	# 0 when the variable is not set (money_value_target_pre_set: «Value of wrong type... none»)
 	value = 0
 	if = { limit = { has_variable = excess_in_gold } value = var:excess_in_gold }
 }
@@ -6555,7 +6555,7 @@ rate_by_law_metal_type_2_FRA = {
 }
 
 #gold_drain	gold_to_silver_rate > bimetallic_rate_gold_to_silver
-# В3 (the user, 6.10 day): the yearly bimetallic arbitrage is off. E&F's private bank took the undervalued metal
+# the yearly bimetallic arbitrage is off. E&F's private bank took the undervalued metal
 # out of a bimetallic CB and paid the other one from its own stock (00_on_action_main.txt:1065-1202, before 1873) --
 # the bank's metal is in none of the money model's accounts, so the CB's metal appeared / vanished: run r1006_162423,
 # the world's "other" metal at the turn of the year, 1837.12 -1.8M gold, 1838.12 +9.2M silver. The branch runs only

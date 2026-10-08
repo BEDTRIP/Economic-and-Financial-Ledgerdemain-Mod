@@ -11196,9 +11196,9 @@ trade_balance = {
 }
 
 money_value_target_pre_set = {
-	# R3.6: a new country without E&F's variables yet ("Value of wrong type ... none" in money_value_*_standard: they read
+	# a new country without E&F's variables yet ("Value of wrong type... none" in money_value_*_standard: they read
 	# var:law_* of E&F) -- a revolutionary (r1008_094935: 653 errors; new_country_var_ef runs at once only for formed and
-	# released countries, ld_new_country_immediate_init.txt), Peru-Bolivia (r1008_074100); the target stays as it was
+	# released countries, ld_new_country_immediate_init.txt), Peru-Bolivia; the target stays as it was
 	if = {
 		limit = {
 			has_variable = zz_ef_country_vars_set
@@ -23860,7 +23860,7 @@ enemy_stats_is_occuped = {
 ###########################################################################################################################################################################################
 ###########################################################################################################################################################################################
 
-# R1б (В7, 8.10): investement_pool_borrowing -- _archive/ld_privbank_interest/
+# investement_pool_borrowing -- _archive/ld_privbank_interest/
 
 ###########################################################################################################################################################################################
 ###########################################################################################################################################################################################
@@ -26112,9 +26112,9 @@ remove_suject_currency = {
 		central_bank_production_methods_4 = yes
 	}
 }
-# В3.2 (5.10, runs s1b / s1c): E&F's monthly pulse (ef_on_monthly_pulse_recurence) puts a subject with a CB inside its
+# E&F's monthly pulse (ef_on_monthly_pulse_recurence) puts a subject with a CB inside its
 # overlord's market on law_external_exchange_standard (subject_currency) every month it is not on it; the currency
-# zone (zz_ef_currency_zone.txt) then put it back on the overlord's standard -- a standard switch every month for
+# zone (ld_currency_zone.txt) then put it back on the overlord's standard -- a standard switch every month for
 # Hanover, the Canadas, Finland, the Dutch East Indies... (each with E&F's 12 months of foreign_exchange_controls).
 # A subject in the zone (var:zz_ef_cur_zone) is skipped here; any other -- E&F's body as is.
 # !! MAINTENANCE !! Key-level REPLACE_OR_CREATE of E&F's subject_currency (01_economic_scripted_effects.txt):

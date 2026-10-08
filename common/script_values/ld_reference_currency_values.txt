@@ -1,6 +1,6 @@
 ﻿#############################################
-# М.9 (the user, 4.10): a currency's strength against the reference currency (see
-# scripted_triggers/zz_ef_reference_currency_triggers.txt). COUNTRY scope.
+# a currency's strength against the reference currency (see
+# scripted_triggers/ld_reference_currency_triggers.txt). COUNTRY scope.
 # zz_ef_value_to_parity: under a metal standard with a parity -- the value / the parity (1 at the
 # parity; M.2); else E&F's own measure -- the value in gold / the median of all currencies.
 # The reference's own value_to_parity is kept monthly in global_var:zz_ef_ref_vtp by the reference
@@ -40,10 +40,10 @@ zz_ef_currency_strength = {
 		divide = global_var:zz_ef_ref_vtp
 	}
 }
-# R3.4 (Д.R3.4, 8.10): the trade modifier's multiplier from the REAL rate's skew against the reference --
+# (Д.R3.4) the trade modifier's multiplier from the REAL rate's skew against the reference --
 # b = (1 / strength) x (the reference's price index / ours): a devaluation (strength down) makes our goods cheaper
 # abroad, the export bonus; as our prices rise after it, b falls back and the bonus melts. (b - 1) x 40 (the slope of
-# Е.10: 1% of trade per 2.5% of skew), within -50..50 (the user: a cap of +-50%). The price indices are the ones the
+# 1% of trade per 2.5% of skew), within -50..50. The price indices are the ones the
 # weekly step keeps (var:zz_ef_prev_price; the reference's -- global_var:zz_ef_ref_cpi), 100 before the first step.
 # Was (Е.10): (1 - strength) x 40 within -10..10, prices not counted.
 zz_ef_currency_trade_m = {
@@ -70,7 +70,7 @@ zz_ef_currency_trade_m = {
 
 
 
-# Ф.1 (4.10, В7.3): the banks' balance sheet -- assets (the pool as their reserves, business and
+# Ф.1: the banks' balance sheet -- assets (the pool as their reserves, business and
 # consumer credit, bonds) minus liabilities (pops' deposits, debt to the CB); shown in the banks' card.
 zz_ef_bank_capital = {
 	value = zz_ef_pool
@@ -79,7 +79,7 @@ zz_ef_bank_capital = {
 	add = zz_ef_bank_bonds
 	subtract = zz_ef_pop_deposits
 	subtract = zz_ef_bank_cb_debt
-	# Д2.30 (6.10 day): other CBs' deposits (our currency they hold)
+	# other CBs' deposits (our currency they hold)
 	subtract = zz_ef_nr_dep_v
 }
 
@@ -143,8 +143,8 @@ zz_ef_v_d_deposits_neg = {
 	multiply = -1
 }
 
-# UI.8 (4.10, Budget -> Economy, regen_ef_economy_panel_gui.py): the market's imports and exports of the
-# week at the goods' base prices (В1.6, 5.10: one price, as zz_ef_trade_net_week), the market owner's; others 0
+# the market's imports and exports of the
+# week at the goods' base prices, the market owner's; others 0
 # the 53 vanilla goods by key: the goods link of every_market_goods is invalid in a script value (as in ld_customs_union_values)
 zz_ef_trade_exports_week = {
 	value = 0
@@ -266,7 +266,7 @@ zz_ef_trade_imports_week = {
 	}
 }
 
-# 6.10 day: the EFP line of the yearly reference pick (zz_ef_reference_currency.txt)
+# the EFP line of the yearly reference pick
 zz_ef_has_cb_v = {
 	value = 0
 	if = { limit = { has_modifier = has_central_bank } value = 1 }

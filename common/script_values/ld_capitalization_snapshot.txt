@@ -1,5 +1,5 @@
 ﻿#############################################
-# EF.24 (2026-09-24) -- capitalization: this week's issuance, averaged over
+# capitalization: this week's issuance, averaged over
 # about a year, instead of a running total since 1836
 #
 # WHAT E&F DOES
@@ -21,7 +21,7 @@
 #               Capitalization shown = an exponential moving average of the
 #               monthly snapshots with weight 1/12 -- "about the last year":
 #               recent months weigh more, older ones fade, one number per stock
-#               (scripted_effects/zz_ef_capitalization_average.txt, monthly).
+#               (scripted_effects/ld_capitalization_average.txt, monthly).
 #               Decided 2026-09-24 instead of a buffer of 12-18 monthly
 #               snapshots per stock: 5 averages + 12 monthly marks of one of
 #               them per country instead of 18-72 snapshots, and no
@@ -47,10 +47,8 @@
 # price_in_gold gives the average converted at today's rate. Before the first
 # monthly update (no variable yet) the quantity is this week's snapshot.
 #
-# The monthly accumulation is switched off
-# (scripted_effects/zz_ef_capitalization_accumulation_off.txt, formerly
-# EF.23's zz_ef_capitalization_decay.txt, now an empty
-# stockpile_finacial_product). E&F still writes its counters from
+# The monthly accumulation is switched off (stockpile_finacial_product is
+# empty). E&F still writes its counters from
 # ai_credit_at_central_bank and moves them between states on relocation;
 # harmless, nothing reads the result.
 #
@@ -73,12 +71,12 @@
 zz_ef_cap_weeks = 520
 
 # Weights of the moving averages: 1/12 ~ the last year (shown capitalization),
-# 1/6 ~ the last half year (crash check, zz_ef_capitalization_crash.txt).
+# 1/6 ~ the last half year (crash check, ld_capitalization_crash.txt).
 zz_ef_cap_weight_year = 0.0833
 zz_ef_cap_weight_half = 0.1667
 
 # Equity below this is too small for E&F's half-yearly index and crash
-# (was E&F's 5000000 on country_indice; zz_ef_capitalization_crash.txt).
+#.
 zz_ef_crash_floor = 5000000
 
 ### Per-state weekly output of each stock. STATE scope.

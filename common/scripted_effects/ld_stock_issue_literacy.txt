@@ -1,5 +1,5 @@
 ﻿#############################################
-# EF.28 (2026-09-25) -- stock issuance follows the country's literate rich
+# stock issuance follows the country's literate rich
 #
 # WHY
 # Stocks are a free by-product of private buildings (E&F's
@@ -28,7 +28,7 @@
 # !! TUNING !! zz_ef_stock_issue_reference_share, the wealth threshold 15.
 #############################################
 
-# COUNTRY scope, monthly, from on_actions/zz_ef_capitalization_on_actions.txt.
+# COUNTRY scope, monthly, from on_actions/ld_capitalization_on_actions.txt.
 # One walk over the country's pops; sums in local variables.
 zz_ef_stock_issue_update = {
 	set_local_variable = { name = zz_lr_all value = 0 }
@@ -58,8 +58,8 @@ zz_ef_stock_issue_update = {
 			}
 		}
 	}
-	# Д2.11 (5.10): the literacy of the rich themselves (literate rich / all rich), 0..1 -- the share of the
-	# companies' levels that go public (scripted_effects/zz_ef_listing.txt)
+	# the literacy of the rich themselves (literate rich / all rich), 0..1 -- the share of the
+	# companies' levels that go public (scripted_effects/ld_listing.txt)
 	set_variable = {
 		name = zz_ef_rich_literacy
 		value = {

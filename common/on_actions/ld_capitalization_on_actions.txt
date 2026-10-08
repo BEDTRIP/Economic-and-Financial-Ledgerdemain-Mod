@@ -1,13 +1,12 @@
 ﻿#############################################
-# EF.24 + EF.25 (2026-09-24), EF.28 (2026-09-25) -- monthly, per country:
+# EF.24 + EF.25, EF.28 -- monthly, per country:
 #   0. the share of literate rich pops and the stock issuance cut (EF.28);
 #   1. capitalization averages and the stock index
-#      (scripted_effects/zz_ef_capitalization_average.txt), then the
-#      12 monthly marks and the crash check (zz_ef_capitalization_crash.txt);
+#      (scripted_effects/ld_capitalization_average.txt), then the
+#      12 monthly marks and the crash check (ld_capitalization_crash.txt);
 #   2. mass shareholding, which reads the updated averages
-#      (script_values/zz_ef_mass_shareholding_values.txt).
-# One on_action, so the order is guaranteed. (Was
-# zz_ef_mass_shareholding_on_actions.txt, EF.25 alone.)
+#      (script_values/ld_mass_shareholding_values.txt).
+# One on_action, so the order is guaranteed.
 #
 # Additive: our own on_action listed under on_monthly_pulse_country, never a
 # bare `effect` in the vanilla one (an on_action holds one effect and the
@@ -18,14 +17,14 @@
 # the effect (rules, section 2).
 #############################################
 
-# R1а.4 (Д.4): run by the scheduler (scripted_effects/ld_scheduler.txt, zz_ef_sched_monthly), not on on_monthly_pulse_country.
+# run by the scheduler (scripted_effects/ld_scheduler.txt, zz_ef_sched_monthly), not on on_monthly_pulse_country.
 
 zz_ef_capitalization_monthly = {
 	effect = {
-		### EF.28: stock issuance by the share of literate rich pops
-		### (scripted_effects/zz_ef_stock_issue_literacy.txt).
+		### stock issuance by the share of literate rich pops
+		### (scripted_effects/ld_stock_issue_literacy.txt).
 		zz_ef_stock_issue_update = yes
-		### Д2.11 (5.10): listed companies -- the "publicly traded" HQ method by script (zz_ef_listing.txt)
+		### listed companies -- the "publicly traded" HQ method by script (ld_listing.txt)
 		zz_ef_listing_update = yes
 		zz_ef_cap_monthly_update = yes
 		zz_ef_listing_log = yes

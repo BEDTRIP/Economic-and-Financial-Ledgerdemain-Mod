@@ -1,5 +1,5 @@
 ﻿#############################################
-# EF.48 (2026-09-30) -- the GUI bridge's receiver. The hook
+# the GUI bridge's receiver. The hook
 # (gui/ld_money_hook.gui) executes it once per queued country with
 # scope:ext = the budget's lines outside the accounts and scope:abr = the
 # part of them with other countries (EF.48 item 6), read by GUI data
@@ -33,7 +33,7 @@ zz_ef_money_hook_probe_sg = {
 	}
 }
 
-# R1а.8 (Р15): the bridge's root here is the player's country (GetPlayer) -- it takes role A at once (the engine has no
+# the bridge's root here is the player's country (GetPlayer) -- it takes role A at once (the engine has no
 # on_action for a tag switch; the monthly role pass would take up to a month).
 zz_ef_player_sg = {
 	scope = country

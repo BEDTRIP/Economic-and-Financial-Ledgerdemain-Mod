@@ -1,6 +1,6 @@
 ﻿#############################################
-# Д2.7б (5.10.2026, decided by the user) -- the central bank's bonds are the treasury's perpetual loan from the
-# population ("consols"). The CB building (state-owned, buildings/zz_ef_cm_bank.txt) makes E&F's good `bond`
+# the central bank's bonds are the treasury's perpetual loan from the
+# population ("consols"). The CB building (state-owned, buildings/ef_15_bank.txt) makes E&F's good `bond`
 # (goods_output_bond_add, EF.15's multiplier by the debt / GDP) and sells it to pops and exchanges; the revenue
 # reaches the treasury by the engine itself. Here the claim that sale creates:
 #   * debt   var:zz_ef_consol_debt += the week's sale = the country's bond output (sum over its states,
@@ -11,8 +11,8 @@
 #            EF.38 / Д4.5): the excess buys consols back first (treasury -> pops' savings, the debt falls), the rest
 #            goes into the pool as before.
 # Both payments are taken out of the treasury's "other" and of the leak (the money left the engine's money for pops'
-# savings by our rule, not unexplained) -- script_values/zz_ef_money_model_values.txt.
-# COUNTRY scope. Numbers accepted at night -- check (the user may adjust).
+# savings by our rule, not unexplained) -- script_values/ld_money_model_values.txt.
+# COUNTRY scope. Numbers accepted at night -- check.
 #############################################
 
 # The week's sale, money: the bonds the country's CB made x their price.

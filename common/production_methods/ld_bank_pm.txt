@@ -1,8 +1,8 @@
 ﻿#############################################
-# Д2.4 (5.10.2026) -- the private bank's methods by era. The user: "services everywhere, and more" -- every method
+# the private bank's methods by era. The user: "services everywhere, and more" -- every method
 # buys services (premises, couriers, guards, lawyers); a bank spends little on goods, mostly on people.
 #
-# One level: 1000 clerks, no capitalists (Д2.8, 5.10: capitalists are not hired into a bank; vanilla scale, as a trade centre). Settlement services = liquidity_currency, base
+# One level: 1000 clerks, no capitalists. Settlement services = liquidity_currency, base
 # price 1; paper and services ~30 each. Inputs ~40-45% of the output's value; each era gives more services per
 # worker, so the services get cheaper over time.
 #   method                 tech                          input                                       output
@@ -15,16 +15,16 @@
 # base of the banks' metal purchase; the week's quantity is set by a percent modifier (zz_ef_bank_metal_buy, as E&F
 # steers its exchanges' inputs): -100% (none) when the reserves are at their norm.
 # Demand: ~5% of GDP (Д2.2). !! TUNING !! the outputs, with the businesses' input
-# (zz_ef_market_liquidity_input.txt) and the seed (script_values/zz_ef_bank_values.txt: GDP / 520000).
+# (production_methods/00_ef_market_liquidity.txt) and the seed (script_values/ld_bank_values.txt: GDP / 520000).
 #############################################
 
-# The user (5.10): "the cheapest variant first, services only -- minors have no paper".
+# The user: "the cheapest variant first, services only -- minors have no paper".
 pm_zz_ef_bank_money_changer = {
 	texture = "gfx/interface/icons/production_method_icons/market_trade.dds"
 
 	building_modifiers = {
 		workforce_scaled = {
-			# stage 2 (6.10, Д2.25): a base of metal for the reserves, steered by zz_ef_bank_metal_buy (-100%..+25000%)
+			# a base of metal for the reserves, steered by zz_ef_bank_metal_buy (-100%..+25000%)
 			goods_input_gold_add = 0.01
 			goods_input_silver_add = 0.02
 			goods_input_services_add = 4
@@ -41,7 +41,7 @@ pm_zz_ef_bank_counting_house = {
 
 	building_modifiers = {
 		workforce_scaled = {
-			# stage 2 (6.10, Д2.25): a base of metal for the reserves, steered by zz_ef_bank_metal_buy (-100%..+25000%)
+			# a base of metal for the reserves, steered by zz_ef_bank_metal_buy (-100%..+25000%)
 			goods_input_gold_add = 0.01
 			goods_input_silver_add = 0.02
 			goods_input_paper_add = 2
@@ -63,7 +63,7 @@ pm_zz_ef_bank_joint_stock = {
 
 	building_modifiers = {
 		workforce_scaled = {
-			# stage 2 (6.10, Д2.25): a base of metal for the reserves, steered by zz_ef_bank_metal_buy (-100%..+25000%)
+			# a base of metal for the reserves, steered by zz_ef_bank_metal_buy (-100%..+25000%)
 			goods_input_gold_add = 0.01
 			goods_input_silver_add = 0.02
 			goods_input_paper_add = 3
@@ -85,7 +85,7 @@ pm_zz_ef_bank_telegraph = {
 
 	building_modifiers = {
 		workforce_scaled = {
-			# stage 2 (6.10, Д2.25): a base of metal for the reserves, steered by zz_ef_bank_metal_buy (-100%..+25000%)
+			# a base of metal for the reserves, steered by zz_ef_bank_metal_buy (-100%..+25000%)
 			goods_input_gold_add = 0.01
 			goods_input_silver_add = 0.02
 			goods_input_paper_add = 3
@@ -107,7 +107,7 @@ pm_zz_ef_bank_modern = {
 
 	building_modifiers = {
 		workforce_scaled = {
-			# stage 2 (6.10, Д2.25): a base of metal for the reserves, steered by zz_ef_bank_metal_buy (-100%..+25000%)
+			# a base of metal for the reserves, steered by zz_ef_bank_metal_buy (-100%..+25000%)
 			goods_input_gold_add = 0.01
 			goods_input_silver_add = 0.02
 			goods_input_paper_add = 2

@@ -2175,7 +2175,7 @@ set_debt_issued = {
 	effect = {
 		if = {
 			limit = { zz_ef_cb_loan_after_to_gdp <= 0.5 }
-			# R2, step 8 (Д.R2.8): the CB's loan to the treasury -- credit_at_central_bank is the ledger's account (the CB's
+			# (Д.R2.8) the CB's loan to the treasury -- credit_at_central_bank is the ledger's account (the CB's
 			# asset, the treasury's debt), the treasury's money is ours (marked): no «прочее»
 			set_variable = { name = zz_ef_t_cbl value = debt_issued_relative_GDP }
 			change_variable = {
@@ -2264,7 +2264,7 @@ refund_credit_at_central_bank = {
 		var:refund_credit_at_central_bank < gold_reserves_var
 	}
 	effect = {
-		# R2, step 8: the repayment -- the treasury -> the CB's loan (marked)
+		# the repayment -- the treasury -> the CB's loan (marked)
 		zz_ef_eng_sub_treasury = { V = var:refund_credit_at_central_bank }
 		change_variable = {
 			name = credit_at_central_bank
@@ -2309,7 +2309,7 @@ refund_credit_at_central_bank_all = {
 		var:credit_at_central_bank > 0
 	}
 	effect = {
-		# R2, step 8: the repayment of the whole loan -- the treasury -> the CB's loan (marked)
+		# the repayment of the whole loan -- the treasury -> the CB's loan (marked)
 		zz_ef_eng_sub_treasury = { V = var:credit_at_central_bank }
 		change_variable = {
 			name = government_loan

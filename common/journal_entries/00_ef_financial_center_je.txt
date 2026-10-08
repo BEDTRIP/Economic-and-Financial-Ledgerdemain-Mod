@@ -175,14 +175,14 @@ financial_center_je_2 = {
 		}
 	}
 
-	### EF.18 v2: both bars on again (2026-09-25) -- the outliner shows a
+	### both bars on again -- the outliner shows a
 	### journal entry's scripted bars and nothing else. In the journal panel
 	### they are hidden by the CMF hook widget below: the sections draw their own.
 	scripted_progress_bar = speculative_share_progress_bar
 	scripted_progress_bar = overbuilt_economy_progress_bar
 
 	widget = {
-		### EF.18 v2: our rebuilt sections (gui/scripted_widgets/ld_pb_fso_widgets.gui).
+		### our rebuilt sections (gui/scripted_widgets/ld_pb_fso_widgets.gui).
 		gui = "gui/scripted_widgets/ld_pb_fso_widgets.gui"
 		name = "zz_pb_ef_fso_bubble_widget"
 		container = "custom_widget_container_3"
@@ -195,7 +195,7 @@ financial_center_je_2 = {
 	}
 
 	widget = {
-		### CMF hook (2026-09-25): any widget in this container turns off CMF's
+		### CMF hook: any widget in this container turns off CMF's
 		### default scripted progress bars for this journal (CMF,
 		### gui/com_gui_journal_entry.gui). The widget itself is empty.
 		gui = "gui/scripted_widgets/ld_pb_fso_widgets.gui"
@@ -213,10 +213,10 @@ financial_center_je_2 = {
 	scripted_button = speculative_share_7_button
 	scripted_button = speculative_share_8_button
 
-	### EF.18 v2: speculative_share_13_button removed -- it demolishes
+	### speculative_share_13_button removed -- it demolishes
 	### building_ef_private_construction, which does not exist under PSC.
-	### EF.18 v2: ban / allow private construction sectors
-	### (scripted_buttons/zz_pb_ef_css_private_ban_buttons.txt).
+	### ban / allow private construction sectors
+	### (scripted_buttons/ld_pb_css_private_ban_buttons.txt).
 	scripted_button = zz_pb_ef_css_private_ban_button
 	scripted_button = zz_pb_ef_css_private_allow_button
 

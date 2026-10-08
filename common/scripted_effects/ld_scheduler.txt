@@ -1,7 +1,7 @@
 ﻿#############################################
-# R1а.4 (Д.4; схема 4.3, «Глобальный календарь»): the money model's scheduler -- ONE global chain.
+# the money model's scheduler -- ONE global chain.
 #
-# The engine's budget tick is the same day of the week for every country (check Р10, 7.10: 280 of 289), so one
+# The engine's budget tick is the same day of the week for every country, so one
 # probe for the world is enough. The chain lives on an anchor country (the largest economy when it starts; the
 # engine has no global delayed on_action) and steps once a day:
 #   * global_var:zz_ef_sched_d -- the day of the week 0..6 (0 = the budget tick's day), zz_ef_sched_week -- the
@@ -53,7 +53,7 @@ zz_ef_sched_ensure = {
 
 # Anchor country: daily until its treasury changes (the budget tick), at most 8 days; then day 0 of the week.
 zz_ef_sched_probe_step = {
-	# R3а (б), the user 8.10: a new game starts after its first full week -- the engine has run all its weekly
+	# the user 8.10: a new game starts after its first full week -- the engine has run all its weekly
 	# calculations (budget, buildings' cash, prices); the ticks before 1836.1.8 are let pass
 	if = {
 		limit = {
@@ -76,7 +76,7 @@ zz_ef_sched_probe_step = {
 		remove_global_variable = zz_ef_sched_probing
 		set_global_variable = { name = zz_ef_sched_d value = 0 }
 		set_global_variable = { name = zz_ef_sched_alive value = yes days = 3 }
-		# R3а (б), the user 8.10: the game's start is the first budget tick after the first week -- E&F's start setup now
+		# the user 8.10: the game's start is the first budget tick after the first week -- E&F's start setup now
 		# (it needs the engine's GDP), the model's first steps from the next day (they see it done; ld_start_setup.txt)
 		if = {
 			limit = {
@@ -159,7 +159,7 @@ zz_ef_sched_country_day = {
 		}
 		set_variable = { name = zz_ef_last_step_week value = global_var:zz_ef_sched_week }
 		# its own on_action: the step's code reads root (bond ledger, metal modifiers) -- inside every_country of the
-		# anchor's chain root would be the anchor (r1007_180243: 2600 errors in ld_bond_ledger.txt / ld_metal_accounts.txt)
+		# anchor's chain root would be the anchor
 		trigger_event = { on_action = zz_ef_sched_step }
 	}
 }
@@ -220,7 +220,7 @@ zz_ef_world_week_close = {
 	zz_ef_world_window_open = yes
 	if = { limit = { has_global_variable = zz_ef_clr_window } remove_global_variable = zz_ef_clr_window }
 	zz_ef_clr_window_roll = yes
-	# R1а.5: the world's «прочее» of the week (EFJ|WORLD)
+	# the world's «прочее» of the week (EFJ|WORLD)
 	zz_ef_other_world_log = yes
 }
 

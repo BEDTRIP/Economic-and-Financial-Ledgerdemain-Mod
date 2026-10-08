@@ -1,5 +1,5 @@
-﻿# EF.43 + В4.3 (5.10): the currency and debt factors of the risk premium -- see
-# script_values/zz_ef_risk_premium_values.txt.
+﻿# EF.43 + В4.3: the currency and debt factors of the risk premium -- see
+# script_values/ld_risk_premium_values.txt.
 
 # A parity change by policy (the AI's rule, the player's law completed), after the change; var:zz_ef_mp_parity_before
 # holds the parity before it.
@@ -9,7 +9,7 @@ zz_ef_risk_parity_changed = {
 
 # The penalty grows by $PEN$ (at most zz_ef_risk_fx_max) and fades out over 5 years from now.
 zz_ef_risk_fx_add = {
-	# R1б.1 (8.10): from the first day (was: from week 13 -- the start re-anchored the parities)
+	# from the first day
 	if = {
 		limit = { NOT = { has_variable = zz_ef_risk_fx_pen } }
 		set_variable = { name = zz_ef_risk_fx_pen value = 0 }

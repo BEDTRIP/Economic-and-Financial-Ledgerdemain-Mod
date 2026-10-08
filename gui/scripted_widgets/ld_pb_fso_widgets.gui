@@ -1,5 +1,5 @@
 ﻿#############################################
-# EF.18 v2 (2026-09-24) -- the two sections of E&F's Financial Stability Office
+# the two sections of E&F's Financial Stability Office
 # journal (financial_center_je_2), rebuilt. Came from the E&F x PSC compatch,
 # which lives inside this hotfix since 2026-10-02 (СТР.6).
 #
@@ -17,7 +17,7 @@
 #             (over the limit, index rising), green = good;
 #   buttons   bubble: E&F's 1-8 unchanged. Overcapacity: ban / allow private
 #             sectors first, then E&F's 9-12, always shown
-#             (scripted_guis/zz_pb_ef_fso_sguis.txt); E&F's 13 dropped (it
+#             (scripted_guis/ld_pb_fso_sguis.txt); E&F's 13 dropped (it
 #             demolished a building PSC does not have);
 #   headers   both sections open by default (E&F's start closed);
 #   text      the explanation of each mechanism, inside its own section, so it
@@ -55,7 +55,7 @@ flowcontainer = {
 				text = "fc_fso_situation"
 			}
 
-			### pb+ef: open by default (2026-09-25) -- the variable now means "closed".
+			### pb+ef: open by default -- the variable now means "closed".
 			blockoverride "onclick" {
 				onclick = "[GetVariableSystem.Toggle('zz_pb_ef_fso_bubble_closed')]"
 			}
@@ -485,7 +485,7 @@ flowcontainer = {
 				text = "pcs_fso_situation"
 			}
 
-			### pb+ef: open by default (2026-09-25) -- the variable now means "closed".
+			### pb+ef: open by default -- the variable now means "closed".
 			blockoverride "onclick" {
 				onclick = "[GetVariableSystem.Toggle('zz_pb_ef_fso_overcap_closed')]"
 			}

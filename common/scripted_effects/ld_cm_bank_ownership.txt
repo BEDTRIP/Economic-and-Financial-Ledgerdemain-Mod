@@ -1,12 +1,10 @@
 ﻿### E&F central bank: how it is built -- hand-maintained.
 ###
-### Д2.5 (5.10.2026): the central bank is the state's again (buildings/zz_ef_cm_bank.txt). Until then this file
-### built the bank already owned by a bank company (EF.4: 145 company branches, a rebuild to hand the bank over,
-### the company monopoly and charters) -- all of that is gone with the companies; the history is in git.
+### the central bank is the state's (buildings/ef_15_bank.txt).
 ###
-### What stays: E&F's spawners (zz_ef_cm_bank_spawn.txt, REPLACE_OR_CREATE of three E&F effects) call this with
+### E&F's spawners (introduction_new_currency and the others in 09_introduction_building_lvl.txt) call this with
 ### the size E&F wants, and the bank is built or grown to that size, state-owned, with an empty cash register
-### (В1.3, 3.10: reserves = 0 -- E&F had 1). E&F calls its spawners on a pulse with a size growing with gdp_view;
+###. E&F calls its spawners on a pulse with a size growing with gdp_view;
 ### a bank that is already big enough is left alone.
 ###
 ### State scope. $BANK_BLDG_TYPE$ is passed by every caller and must be used: an unused macro argument is a
