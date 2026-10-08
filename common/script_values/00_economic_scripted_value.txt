@@ -6574,14 +6574,6 @@ misalignment_rate_silver_drain = {
 silver_lost = {
 	value = silver_state_native_for_stockpile
 	multiply = misalignment_rate_silver_drain
-	if = {
-		limit = { exists = scope:arbitrage_privat_bank }
-		max = {
-			value = scope:arbitrage_privat_bank.private_bank_gold_reserve_per_bank_gui
-			multiply = gold_to_silver_rate
-			min = 0
-		}
-	}
 	min = 0
 }
 gold_gained = {

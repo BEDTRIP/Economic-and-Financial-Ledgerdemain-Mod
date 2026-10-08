@@ -12,6 +12,7 @@
 | `common/scripted_effects/ld_money_model.txt` | в логе `EFX` поля `rcin`, `rcback`, `rcmetal` | их переменные `zz_ef_rc_fx_in`, `zz_ef_rc_back`, `zz_ef_rc_metal_out` писал шаг `zz_ef_rc_step`, он в `_archive/ef_reserve_trade_step/` |
 | `common/script_values/ld_reserve_trade_values.txt` (и `../vic3_mods/tools/regen_ef_reserve_trade.py`, `VALUES`) | `zz_ef_v_rc_fx_in`, `zz_ef_v_rc_back`, `zz_ef_v_rc_metal_out` | то же |
 | `common/script_values/PSC_construction_values.txt` | тело `construction_demand_ratio` (чтение `nominal_construction_demand` × очки / `national_production`); теперь `value = 0` | `nominal_construction_demand` PSC не задаёт; читатель — алерт `PSC_alert_types.txt` (не срабатывал) |
+| `common/script_values/00_economic_scripted_value.txt` | в `silver_lost` — `if exists = scope:arbitrage_privat_bank` (потолок по резерву частного банка) | цель задавал арбитраж частных банков, он в `_archive/ef_privat_bank_arbitrage/` |
 | `common/scripted_effects/09_introduction_building_lvl.txt` | 190 блоков `#Currency recreat` (`if has_variable = new_currency_recreat` → снять, `capital_state`, `target_country`) в эффектах ввода валют | `new_currency_recreat` E&F нигде не задаёт |
 
 Текст — в файлах по исходным путям здесь.

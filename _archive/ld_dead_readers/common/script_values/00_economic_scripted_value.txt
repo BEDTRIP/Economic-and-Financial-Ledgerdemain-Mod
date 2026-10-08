@@ -1,0 +1,11 @@
+# Вырезано 8.10.2026 из common/script_values/00_economic_scripted_value.txt, значение silver_lost (R3а, разбор логов:
+# цель scope:arbitrage_privat_bank нигде не задаётся — арбитраж частных банков в _archive/ef_privat_bank_arbitrage/)
+
+	if = {
+		limit = { exists = scope:arbitrage_privat_bank }
+		max = {
+			value = scope:arbitrage_privat_bank.private_bank_gold_reserve_per_bank_gui
+			multiply = gold_to_silver_rate
+			min = 0
+		}
+	}
