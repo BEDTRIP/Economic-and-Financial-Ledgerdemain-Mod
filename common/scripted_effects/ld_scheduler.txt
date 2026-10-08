@@ -53,7 +53,18 @@ zz_ef_sched_ensure = {
 
 # Anchor country: daily until its treasury changes (the budget tick), at most 8 days; then day 0 of the week.
 zz_ef_sched_probe_step = {
+	# R3а (б), the user 8.10: a new game starts after its first full week -- the engine has run all its weekly
+	# calculations (budget, buildings' cash, prices); the ticks before 1836.1.8 are let pass
 	if = {
+		limit = {
+			NOT = { has_global_variable = zz_ef_start_setup_done }
+			game_date < 1836.1.8
+		}
+		set_global_variable = { name = zz_ef_sched_probing value = yes days = 12 }
+		set_variable = { name = zz_ef_sched_probe_value value = zz_ef_budget_position }
+		trigger_event = { on_action = zz_ef_sched_probe days = 1 }
+	}
+	else_if = {
 		limit = {
 			OR = {
 				NOT = { zz_ef_budget_position = var:zz_ef_sched_probe_value }
@@ -65,8 +76,8 @@ zz_ef_sched_probe_step = {
 		remove_global_variable = zz_ef_sched_probing
 		set_global_variable = { name = zz_ef_sched_d value = 0 }
 		set_global_variable = { name = zz_ef_sched_alive value = yes days = 3 }
-		# R3а (б), the user 8.10: the game's start is the first budget tick -- E&F's start setup now (it needs the engine's
-		# GDP), the model's first steps from the next day (they see it done; scripted_effects/ld_start_setup.txt)
+		# R3а (б), the user 8.10: the game's start is the first budget tick after the first week -- E&F's start setup now
+		# (it needs the engine's GDP), the model's first steps from the next day (they see it done; ld_start_setup.txt)
 		if = {
 			limit = {
 				NOT = { has_global_variable = zz_ef_start_setup_done }
