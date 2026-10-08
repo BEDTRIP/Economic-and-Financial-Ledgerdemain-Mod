@@ -1,12 +1,8 @@
 ﻿# R3а (the user 8.10): the game has started -- the start setup at the first budget tick after the first week is done
 # (scripted_effects/ld_start_setup.txt). Before it E&F's pulses and the model's monthly steps wait: they read what the
 # start sets up (r1008_132604: 54 "country_credit_note_fixe not set" from half-yearly pulses in the first week).
-# Saves from before it have no flag -- the date lets them through.
 zz_ef_game_started = {
-	OR = {
-		has_global_variable = zz_ef_start_setup_done
-		game_date >= 1836.3.1
-	}
+	has_global_variable = zz_ef_start_setup_done
 }
 
 # R3.5 (8.10): the monetary laws' can_enact -- a crisis or a transition of the monetary system. The engine checks the

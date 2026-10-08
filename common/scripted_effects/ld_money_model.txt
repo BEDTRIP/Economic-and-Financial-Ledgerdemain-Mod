@@ -27,14 +27,6 @@
 zz_ef_money_model_step = {
 	# R1а.5: the registry's accounts exist from the first step (scripted_effects/ld_ledger.txt)
 	zz_ef_registry_init = yes
-	# R1б (В3, 8.10): a save from before has the pops' cash S - D and no banknotes account -- they are that cash
-	if = {
-		limit = {
-			has_variable = zz_ef_pop_savings
-			NOT = { has_variable = zz_ef_notes }
-		}
-		set_variable = { name = zz_ef_notes value = { value = var:zz_ef_pop_savings subtract = zz_ef_pop_deposits min = 0 } }
-	}
 	# Business cash: the sum over the buildings, once a week (run 15: the
 	# estimate from the credit limit -- credit - base - 1.7 x GDP -- swung by
 	# millions a week, M2 by +-30%).
@@ -66,11 +58,10 @@ zz_ef_money_model_step = {
 	# R1б.1 (Д.1, Д.2, 8.10): the start in balance, once (scripted_effects/ld_metal_accounts.txt) -- the parity stays
 	# E&F's historical one (the rate between currencies, the labels), the money is the engine's (one unit for every
 	# country); the pops' and CB-less countries' metal now, the CB's 40% of M2 once the money exists. No CB holds a
-	# foreign currency at the start (Хвост R1, 8.10: E&F's history no longer gives them; ld_nr_deposits.txt).
-	# Version 9; older saves keep their parity and finish a start in progress with the CB's 40%.
+	# foreign currency at the start (ld_nr_deposits.txt). zz_ef_model_started -- the country's first step is done.
 	if = {
-		limit = { NOT = { has_variable = zz_ef_parity_version } }
-		set_variable = { name = zz_ef_parity_version value = 9 }
+		limit = { NOT = { has_variable = zz_ef_model_started } }
+		set_variable = zz_ef_model_started
 		zz_ef_metal_start_step = yes
 		# R3а (б): a subject joins its overlord's currency zone (standard, currency, target) now, not at its first month --
 		# the CB's start metal the same day needs the metal standard (r1008_120257: Hanover, the Canadas -- 29.1-6.2)
@@ -92,22 +83,6 @@ zz_ef_money_model_step = {
 		limit = { NOT = { has_variable = zz_ef_cur_init } }
 		set_variable = { name = zz_ef_cur_init value = yes }
 		zz_ef_cur_set = yes
-	}
-	if = {
-		limit = { var:zz_ef_parity_version < 6 }
-		set_variable = { name = zz_ef_parity_version value = 6 }
-		if = {
-			limit = {
-				has_modifier = has_central_bank
-				has_variable = money_value_target_1
-				OR = {
-					has_law = law_type:law_gold_standard
-					has_law = law_type:law_silver_standard
-					has_law = law_type:law_bimetallism_standard
-				}
-			}
-			set_variable = { name = money_value_target_1 value = money_value_0 }
-		}
 	}
 
 	# The budget's week, as the engine counted it at its last tick.
@@ -166,8 +141,7 @@ zz_ef_money_model_step = {
 	# (w1..4), 13 blocks of 4 weeks (q1..13, a year), 20 blocks of 13 weeks
 	# (r1..20, 5 years); plus the money in circulation and GDP for the inflation
 	# (q only). Filled from last week's value; each macro skips a quantity not
-	# yet recorded. The old m0/m1/m2 rings (definitions before 1.10) are left
-	# to rot in old saves.
+	# yet recorded.
 	if = {
 		limit = { NOT = { has_variable = zz_ef_ring_q } }
 		set_variable = { name = zz_ef_ring_q value = 0 }

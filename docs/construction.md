@@ -29,7 +29,7 @@
 - `common/script_values/ld_pb_remap_pcs_values.txt` — `pcs_construction_sector_headroom_by_base_rate`; `ld_pb_ai_construction_values.txt` — бонус ИИ от дороговизны стройтоваров.
 - `common/on_actions/ld_pb_overbuild_counter.txt` — месячный счётчик перестройки (`zz_pb_ef_overbuild_counter`).
 - `common/on_actions/ld_pb_ai_sector_downsize.txt` + `common/scripted_effects/ld_pb_ai_sector_downsize_effects.txt` — ИИ сносит по уровню (`zz_pb_ef_css_downsize_one`); выкуп частных уровней — проводка казна → пул, получатель — вклады населения (`zz_ef_post_eng`, `CLAIM = zz_ef_pop_deposits`).
-- `common/static_modifiers/ld_pb_overbuild_modifiers.txt` — `zz_pb_ef_overbuilt_economy` (`building_construction_sector_throughput_add`), `zz_pb_ef_overbuilt_brake`; `common/messages/ld_pb_overbuild_messages.txt` — `zz_pb_ef_overbuild_rising`.
+- `common/static_modifiers/ld_pb_overbuild_modifiers.txt` — `zz_pb_ef_overbuilt_economy` (`building_construction_sector_throughput_add`); `common/messages/ld_pb_overbuild_messages.txt` — `zz_pb_ef_overbuild_rising`.
 - `common/scripted_buttons/ld_pb_css_private_ban_buttons.txt` — AI-кнопки запрета/разрешения частных секторов; `common/scripted_guis/ld_pb_fso_sguis.txt` — видимость секций журнала и те же ban/allow для игрока.
 - `gui/scripted_widgets/ld_pb_fso_widgets.gui` — пересобранный журнал «Financial Stability Office» (`financial_center_je_2`): секции пузыря и перепроизводства; `gui/ld_national_capacity_chart.gui` — копия диаграммы E&F (не стройка, лишь в списке подсистемы).
 - `common/static_modifiers/ld_rate_private_construction.txt` (+ `zz_ef_rate_construction_mult` в `ld_money_model_values.txt`, запись в `ld_money_model.txt:1058`) — вклад ставки ЦБ в долю частной стройки.
@@ -74,7 +74,7 @@
 | `national_production`, `weighted_total`, `state_construction_production` | производство стройтоваров (страна/штат) | `set_construction_point_demand` | аллокации |
 | `week_count` (штат) | счётчик сноса лишнего регулятора | `set_construction_regulator_level` | оно же |
 | `speculative_share_2` | штраф перестройки 0..100 (общая с E&F-кнопками/журналом) | `zz_pb_ef_overbuild_counter`, кнопки 9..12 | downsize, ban-кнопки, `speculative_share_2_penality`, JE-бар |
-| `zz_pb_ef_ob_old`, `zz_pb_ef_overbuild_v2` | прошлое значение / метка миграции | counter | counter |
+| `zz_pb_ef_ob_old` | прошлое значение | counter | counter |
 | `zz_pb_ef_stimulus_mult` (таймер 1080 дн.) | множитель ставки в лимите вместо 5 | `speculative_share_9..12_button` | `zz_pb_ef_css_rate_mult` |
 | `zz_pb_ef_css_private_ban`, `..._cooldown` | запрет частных секторов (6 мес. перерыв) | ban/allow-кнопки и sgui | `can_build_private`, `ai_nationalization_desire` (10 при запрете) |
 | `zz_pb_ef_ai_downsize_timer` | период сноса ИИ | downsize | downsize |

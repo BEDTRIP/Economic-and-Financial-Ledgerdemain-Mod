@@ -1,4 +1,4 @@
-# from common/scripted_effects/ld_money_model.txt, zz_ef_money_model_step, lines 306-327 (cut 7.10.2026)
+﻿# from common/scripted_effects/ld_money_model.txt, zz_ef_money_model_step, lines 306-327 (cut 7.10.2026)
 	# Once: the year ring of the money in circulation takes over the old M3
 	# ring (until 1.10 day M3 was the same sum: businesses' cash + the pool +
 	# savings at hand), so the inflation does not start from zero again.
@@ -20,4 +20,33 @@
 		if = { limit = { has_variable = zz_ef_m3_q11 } set_variable = { name = zz_ef_circ_q11 value = var:zz_ef_m3_q11 } }
 		if = { limit = { has_variable = zz_ef_m3_q12 } set_variable = { name = zz_ef_circ_q12 value = var:zz_ef_m3_q12 } }
 		if = { limit = { has_variable = zz_ef_m3_q13 } set_variable = { name = zz_ef_circ_q13 value = var:zz_ef_m3_q13 } }
+	}
+
+# --- R3б.3 (В1): from common/scripted_effects/ld_money_model.txt, zz_ef_money_model_step ---
+# at the start of the step, after zz_ef_registry_init:
+	# R1б (В3, 8.10): a save from before has the pops' cash S - D and no banknotes account -- they are that cash
+	if = {
+		limit = {
+			has_variable = zz_ef_pop_savings
+			NOT = { has_variable = zz_ef_notes }
+		}
+		set_variable = { name = zz_ef_notes value = { value = var:zz_ef_pop_savings subtract = zz_ef_pop_deposits min = 0 } }
+	}
+
+# after the zz_ef_cur_init block; the start block before it set zz_ef_parity_version = 9 (now the flag zz_ef_model_started):
+	if = {
+		limit = { var:zz_ef_parity_version < 6 }
+		set_variable = { name = zz_ef_parity_version value = 6 }
+		if = {
+			limit = {
+				has_modifier = has_central_bank
+				has_variable = money_value_target_1
+				OR = {
+					has_law = law_type:law_gold_standard
+					has_law = law_type:law_silver_standard
+					has_law = law_type:law_bimetallism_standard
+				}
+			}
+			set_variable = { name = money_value_target_1 value = money_value_0 }
+		}
 	}

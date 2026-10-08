@@ -1,0 +1,15 @@
+﻿# From common/on_actions/ld_pb_overbuild_counter.txt, zz_pb_ef_overbuild_counter, the first block of effect = { }.
+		### Old saves: leftovers of v0/v1, once.
+		if = {
+			limit = { NOT = { has_variable = zz_pb_ef_overbuild_v2 } }
+			set_variable = zz_pb_ef_overbuild_v2
+			every_scope_state = {
+				limit = { has_building = building_construction_sector }
+				every_scope_building = {
+					limit = { is_building_type = building_construction_sector }
+					if = { limit = { has_modifier = overbuilt_economy_modifier } remove_modifier = overbuilt_economy_modifier }
+					if = { limit = { has_modifier = zz_pb_ef_overbuilt_brake } remove_modifier = zz_pb_ef_overbuilt_brake }
+				}
+			}
+		}
+
