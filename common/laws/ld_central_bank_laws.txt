@@ -7,7 +7,7 @@ law_ld_cb_state = {
 	progressiveness = 0
 	on_activate = { set_variable = { name = zz_ef_cb_kind value = flag:state } }
 	can_enact = { always = no }
-	ai_will_do = { value = 0 }
+	ai_will_do = { always = no }
 }
 law_ld_cb_private = {
 	group = lawgroup_ld_central_bank
@@ -15,7 +15,7 @@ law_ld_cb_private = {
 	progressiveness = 0
 	on_activate = { set_variable = { name = zz_ef_cb_kind value = flag:private } }
 	can_enact = { always = no }
-	ai_will_do = { value = 0 }
+	ai_will_do = { always = no }
 }
 law_ld_cb_none = {
 	group = lawgroup_ld_central_bank
@@ -23,5 +23,5 @@ law_ld_cb_none = {
 	progressiveness = 0
 	on_activate = { set_variable = { name = zz_ef_cb_kind value = flag:none } }
 	can_enact = { always = no }
-	ai_will_do = { value = 0 }
+	ai_will_do = { always = no }
 }
