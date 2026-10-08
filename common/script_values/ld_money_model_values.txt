@@ -1027,12 +1027,16 @@ zz_ef_bc_debt = {
 	if = { limit = { has_variable = zz_ef_bc_debt } value = var:zz_ef_bc_debt }
 	min = 0
 }
+# R2 closing (the user, 8.10): the treasury's surplus in the pool (zz_ef_bank_gov_dep) is the banks' borrowed money too --
+# construction on it is the businesses' debt to the banks, not a gift of the treasury (r1008_093105: Qing, deposits ~0,
+# the pool's construction on the treasury's 7.9M went past the ledger, «прочее» -10.2M)
 zz_ef_bc_borrowed_share = {
 	value = 0
 	if = {
 		limit = { investment_pool > 0 }
 		value = zz_ef_bank_cb_debt
 		add = zz_ef_pop_deposits
+		if = { limit = { has_variable = zz_ef_bank_gov_dep } add = var:zz_ef_bank_gov_dep }
 		divide = investment_pool
 	}
 	min = 0
