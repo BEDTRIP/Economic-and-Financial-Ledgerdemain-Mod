@@ -103,11 +103,39 @@ zz_ef_reconcile = {
 		set_variable = { name = zz_ef_other value = 0 }
 	}
 	set_variable = { name = zz_ef_other_prev value = var:zz_ef_other }
+	# R2, steps 10 and 12 (the user, 8.10, (б); R6 -- a posting): the engine's privatization of building levels (250 x the
+	# level's construction points, a multiple of zz_ef_lvl_unit) -- the pool pays, a state seller's treasury gets it; the
+	# script has no hook. A step's change of the pool's part that is a whole negative multiple of the unit is this line, not
+	# «прочее» (zz_ef_lvl_buy_pool, summed); the treasury's positive multiples -- zz_ef_lvl_buy_tr. Mixed with other
+	# money in the same step it stays «прочее».
+	if = { limit = { NOT = { has_variable = zz_ef_lvl_buy_pool } } set_variable = { name = zz_ef_lvl_buy_pool value = 0 } }
+	if = { limit = { NOT = { has_variable = zz_ef_lvl_buy_tr } } set_variable = { name = zz_ef_lvl_buy_tr value = 0 } }
+	set_variable = { name = zz_ef_f_lvl_buy_pool value = 0 }
+	set_variable = { name = zz_ef_f_lvl_buy_tr value = 0 }
+	if = {
+		limit = { has_variable = zz_ef_other_pool }
+		set_variable = {
+			name = zz_ef_t_lvl
+			value = {
+				value = investment_pool
+				subtract = zz_ef_bank_book_v
+				subtract = var:zz_ef_lvl_buy_pool
+				subtract = var:zz_ef_other_pool
+			}
+		}
+		if = {
+			limit = { zz_ef_lvl_is_buy_v = 1 }
+			set_variable = { name = zz_ef_f_lvl_buy_pool value = var:zz_ef_t_lvl }
+			change_variable = { name = zz_ef_lvl_buy_pool add = var:zz_ef_t_lvl }
+		}
+		remove_variable = zz_ef_t_lvl
+	}
 	set_variable = {
 		name = zz_ef_other_pool
 		value = {
 			value = investment_pool
 			subtract = zz_ef_bank_book_v
+			subtract = var:zz_ef_lvl_buy_pool
 		}
 	}
 	# the treasury's part: from the second reconciliation on (the first one takes the snapshot)
@@ -120,6 +148,15 @@ zz_ef_reconcile = {
 		change_variable = { name = zz_ef_f_other_tr subtract = var:zz_ef_tr_prev }
 		change_variable = { name = zz_ef_f_other_tr subtract = zz_ef_budget_steps_v }
 		change_variable = { name = zz_ef_f_other_tr subtract = zz_ef_tr_posted_v }
+		# a state seller of building levels (see above)
+		set_variable = { name = zz_ef_t_lvl value = { value = var:zz_ef_f_other_tr multiply = -1 } }
+		if = {
+			limit = { zz_ef_lvl_is_buy_v = 1 }
+			set_variable = { name = zz_ef_f_lvl_buy_tr value = var:zz_ef_f_other_tr }
+			change_variable = { name = zz_ef_lvl_buy_tr add = var:zz_ef_f_other_tr }
+			set_variable = { name = zz_ef_f_other_tr value = 0 }
+		}
+		remove_variable = zz_ef_t_lvl
 		change_variable = { name = zz_ef_other_tr add = var:zz_ef_f_other_tr }
 	}
 	set_variable = { name = zz_ef_tr_prev value = var:zz_ef_t_trnet }
@@ -151,7 +188,7 @@ zz_ef_reconcile = {
 				gdp > 20000000
 			}
 		}
-		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|other [THIS.GetCountry.MakeScope.Var('zz_ef_other').GetValue|0]|d_other [THIS.GetCountry.MakeScope.Var('zz_ef_f_other').GetValue|0]|pool [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_raw_pool')|0]|book [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bank_book_v')|0]|other_pool [THIS.GetCountry.MakeScope.Var('zz_ef_other_pool').GetValue|0]|other_tr [THIS.GetCountry.MakeScope.Var('zz_ef_other_tr').GetValue|0]|d_other_tr [THIS.GetCountry.MakeScope.Var('zz_ef_f_other_tr').GetValue|0]|trnet [THIS.GetCountry.MakeScope.Var('zz_ef_tr_prev').GetValue|0]|budget [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_budget_steps_v')|0]|capital [THIS.GetCountry.MakeScope.Var('zz_ef_bank_capital').GetValue|0]|dep [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_deposits')|0]|weeks [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_step_weeks_v')|0]|role [THIS.GetCountry.MakeScope.Var('zz_ef_role').GetValue|0]"
+		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|other [THIS.GetCountry.MakeScope.Var('zz_ef_other').GetValue|0]|d_other [THIS.GetCountry.MakeScope.Var('zz_ef_f_other').GetValue|0]|pool [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_raw_pool')|0]|book [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bank_book_v')|0]|other_pool [THIS.GetCountry.MakeScope.Var('zz_ef_other_pool').GetValue|0]|other_tr [THIS.GetCountry.MakeScope.Var('zz_ef_other_tr').GetValue|0]|lvl_pool [THIS.GetCountry.MakeScope.Var('zz_ef_lvl_buy_pool').GetValue|0]|lvl_tr [THIS.GetCountry.MakeScope.Var('zz_ef_lvl_buy_tr').GetValue|0]|d_other_tr [THIS.GetCountry.MakeScope.Var('zz_ef_f_other_tr').GetValue|0]|trnet [THIS.GetCountry.MakeScope.Var('zz_ef_tr_prev').GetValue|0]|budget [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_budget_steps_v')|0]|capital [THIS.GetCountry.MakeScope.Var('zz_ef_bank_capital').GetValue|0]|dep [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_deposits')|0]|weeks [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_step_weeks_v')|0]|role [THIS.GetCountry.MakeScope.Var('zz_ef_role').GetValue|0]"
 	}
 }
 

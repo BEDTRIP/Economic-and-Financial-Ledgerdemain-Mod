@@ -26,6 +26,29 @@ zz_ef_f_other_abs_v = {
 		if = { limit = { var:zz_ef_f_other < 0 } multiply = -1 }
 	}
 }
+# R2, steps 10 and 12 (8.10, (б)): the engine's price of a privatized building level is 250 x its construction points
+# (PRIVATIZATION_PER_LEVEL_COST), the points a multiple of 100 -- the unit of the reconciliation's line «выкуп уровней»
+zz_ef_lvl_unit = 25000
+# 1 if var:zz_ef_t_lvl (a step's change, the pool's sign) is a whole negative multiple of the unit (within 1, the engine's
+# fixed point), else 0
+zz_ef_lvl_is_buy_v = {
+	value = 0
+	if = {
+		limit = {
+			var:zz_ef_t_lvl <= -24999
+			zz_ef_lvl_rest_v <= 1
+			zz_ef_lvl_rest_v >= -1
+		}
+		value = 1
+	}
+}
+zz_ef_lvl_rest_v = {
+	value = var:zz_ef_t_lvl
+	divide = zz_ef_lvl_unit
+	round = yes
+	multiply = zz_ef_lvl_unit
+	subtract = var:zz_ef_t_lvl
+}
 zz_ef_v_other = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_other } value = var:zz_ef_other }
