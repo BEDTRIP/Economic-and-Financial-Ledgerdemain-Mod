@@ -1,0 +1,67 @@
+# Старт игры — что, где и когда выполняется
+
+Новая игра с 1836 года. Пять слоёв по порядку; внутри слоя — по порядку файлов. Переделка в два слоя — этап R3а
+(план `../vic3_mods`, раздел «R3а — старт игры»).
+
+## Порядок
+
+1. История движка (ванильная): страны, штаты, население, здания, законы, технологии. Форк её не правит.
+2. История форка (E&F, PSC, `ld_*`): `common/history/buildings/` → `common/history/global/` (по имени файла) →
+   `common/history/states/`. Здания идут раньше глобальной (`00_a_ef_history_var_init.txt` — заглушка для этого).
+3. После лобби — `on_game_started_after_lobby`: верхняя панель E&F, засев переменных штатов, настройка старта E&F
+   (`zz_ef_start_setup` — скрытые события странам), запуск планировщика.
+4. Первые шаги модели (планировщик ждёт бюджетный тик, ≤ 8 дней): старт в балансе — часть в первый шаг, часть позже.
+5. Пульсы E&F (месяц, полгода, год, 5 лет) — работа по ходу игры; часть того, что они делают, — разовая настройка.
+
+## 2. История форка
+
+| файл | что делает | разовое / данные |
+| --- | --- | --- |
+| `buildings/00_a_ef_history_var_init.txt` | заводит `country_already_financial_center`, `gdp_view_fc` до `00_ef_building.txt` (иначе модификатор финцентра без масштаба) | заглушка порядка |
+| `buildings/00_ef_building.txt` (4236 строк) | компании и банки E&F (`establish_bank_and_ef_compagnie`); **ЦБ** — `initialize_historic_macro_facilities_bc` у 26 стран (размер 5) и 8 крупных + `is_valid_country_hmm` (20): технологии `banking`, `currency_standards`, `central_banking`, `metalique_standard`, здание `building_bank` компанией, модификатор `has_central_bank`, `var:central_bank_location`; модификатор `UNI_modifier_1`; финцентры по штатам (`building_financial_centre_*`), технологии `financial_center`, `stock_exchange`, `financial_center_modifier`; торговые центры, железные дороги, рудники золота и серебра, сектор стройки PSC | данные + технологии |
+| `buildings/PSC_buildings.txt` | регулятор стройки в каждом штате при `urbanization`, метод пересчёта очков | данные |
+| `global/00_ef_economic_global_variable.txt` (40 тыс. строк) | начальные значения E&F: 2579 переменных страны, 3853 глобальных (валюты, компании) | данные |
+| `global/00_ef_financial_global_variable.txt` | 263 переменных страны (финансы E&F) | данные |
+| `global/00_ef_stockpile_global_variable.txt` | `looting_1_year`, признак `zz_ef_country_vars_set` | данные |
+| `global/01_ef_state_global_variable.txt` | 323 переменных штата (`gold_state_1`, `silver_state_1` = 0 и др.) | данные |
+| `global/99_ef_history_global_variable.txt` | **законы валют и стандартов** по странам (75 `activate_law`: серебро 31, биметалл 3, золото — Британия; соотношение биметалла), паритеты `money_value_target_1`, эталон `global_monetary_reference`, `global_financial_power`; в конце всем: `country_credit_rating`, `sovereign_bond_yields`, методы ЦБ, **валюта подданного** (`subject_currency` — ЦБ и чужой рынок), методы финцентра, **`add_treasury = gold_reserves_limit`** (казна до предела резервов), `currency_law_list`, статус денежной системы | данные + разовая настройка + деньги |
+| `global/PSC_global.txt` | событие `set_construction_start` (стройка PSC) | запуск |
+| `global/ld_central_bank_law.txt` | закон группы «Центральный банк» по ЦБ (`zz_ef_cb_law_sync`) | настройка |
+| `global/zz_ef_currency_fix.txt` | закон валюты WUR (опечатка E&F), 13 стран без валюты → `law_no_market_liquidity`, `currency_standards` странам с подушным налогом | поправки |
+| `global/zz_ef_init_stockpiling_state_vars.txt` | 7 переменных запасов штатов, которые E&F читает, но не задаёт | заглушка |
+| `states/01_ef_states.txt` | `silver_mine_max_level` 60 штатам (месторождения серебра) | данные |
+
+Проверка законов движком («not permitted to retain law») не видит технологий, выданных скриптом истории: у ~26 стран
+закон стандарта требует `metalique_standard`, и предупреждение есть, хотя технология выдана в `history/buildings` до
+закона в `history/global`. Законы при этом остаются.
+
+## 3. После лобби (`on_game_started_after_lobby`)
+
+| on_action | файл | что делает |
+| --- | --- | --- |
+| `com_topbar_setup_ef` | `on_actions/00_ef_on_action.txt` | 7 элементов верхней панели E&F всем странам |
+| `zz_ef_init_stockpile_state_vars` | `on_actions/ld_stockpile_state_var_init.txt` | проход по штатам для старых сейвов (и месячная страховка) |
+| `zz_ef_sched_start` | `on_actions/ld_scheduler_on_actions.txt` | `zz_ef_start_setup` (`ld_start_setup.txt`): каждой стране скрытые события — `ld_start_setup.1` (из годового пульса: ступени ВВП, ЦБ и финцентры по ВВП, рейтинг, списки эталона), `ld_start_setup.2` (месячный хаб E&F целиком: валюта подданных, переменные новых стран, закон ЦБ, металл и модификаторы ЦБ); затем `zz_ef_sched_ensure`: роли стран (`zz_ef_roles_world_pass`), зонд бюджетного тика |
+
+## 4. Первые шаги модели (`zz_ef_money_model_step`)
+
+| когда | что | где |
+| --- | --- | --- |
+| первый шаг страны | реестр счетов (`zz_ef_registry_init`), банкноты 0 | `ld_ledger.txt`, `ld_money_model.txt` |
+| первый шаг | старт в балансе, версия 9 (`zz_ef_parity_version`): металл населения по норме, металл E&F стран без ЦБ — населению, у страны с ЦБ — ждёт старта ЦБ (`zz_ef_cb_start_due`) | `zz_ef_metal_start_step`, `ld_metal_accounts.txt` |
+| первый шаг | валюта страны как данные (`zz_ef_cur_init`) | `ld_money_model.txt` |
+| первый приёмник моста (конец первого шага) | стартовые вклады (доля пула движка, капитал — остаток), металл банков по норме резервов | `zz_ef_pop_savings_step`, `zz_ef_metal_start_banks` |
+| первая сверка | капитал банков += пул − книга | `zz_ef_reconcile`, `ld_ledger.txt` |
+| 2–5-я неделя | металл ЦБ = 40 % M2, один раз — когда M2 / ВВП > 0,1 (движок наполняет кассы зданий первые недели) и есть штат ЦБ; полгода без металлического стандарта — не берёт | `zz_ef_cb_metal_start_step` |
+| первые 2 месяца | индекс цен не пишется (цены оседают) | кольца `zz_ef_ring_*` |
+
+## 5. Пульсы E&F — что в них разовое
+
+| пульс | разовое по смыслу | остальное (работа по ходу игры) |
+| --- | --- | --- |
+| месяц (`ef_on_monthly_pulse_country`; страны А / Б — из планировщика в свой день, В — пульс движка) | переменные новой страны (`new_country_var_ef`), валюта подданного / снятие (`subject_currency`, `remove_suject_currency`), закон ЦБ | инфляция, сила валюты, торговый баланс, политика игрока |
+| год (`ef_on_yearly_pulse_country`, у каждой страны — свой день года) | ступени ВВП, ЦБ по ВВП (`macro_facilities_on_action_bc`; размер растёт с ВВП), ЦБ при технологии / законе валюты без здания, финцентры, рейтинг, списки эталона | переходы стандартов ИИ, цель курса, методы ЦБ, кредит ЦБ, счётчики |
+| дата | исторические события E&F (`ef_on_yearly_pulse_event_at_date`: Германия, Италия, 1873 и др.) | — |
+
+Технология `central_banking` при изучении сама строит ЦБ и вводит валюту по культуре (`introduction_new_currency`,
+`ef_technology.txt`); журнал `bank_je_central_1` ведёт игрока без ЦБ к нему.

@@ -7,6 +7,7 @@
 ## Подсистемы
 | подсистема | документ | главные файлы |
 | --- | --- | --- |
+| Старт игры: история, хук после лобби, первые шаги модели, разовое в пульсах E&F | `game-start.md` | `common/history/`, `common/scripted_effects/ld_start_setup.txt`, `common/scripted_effects/ld_metal_accounts.txt` |
 | Точки входа: история, on_actions, порядок шагов, логи `EF*` | `entry-points.md` | `common/on_actions/`, `common/scripted_effects/00_on_action_main.txt`, `common/history/` |
 | Денежная модель и счета: M0–M3, пул, касса, металл ЦБ / банков / населения | `money-model.md` | `common/scripted_effects/ld_money_model.txt`, `common/scripted_effects/ld_metal_accounts.txt` |
 | Валюты, законы, стандарты, эталон, валютные зоны и союзы; таблица валют | `currencies.md`, `currency-table.md` | `common/laws/01_ef_currency_type.txt`, `common/script_values/01_economic_currency_scripted_value.txt`, `common/scripted_effects/ld_standard_switch.txt` |
@@ -23,8 +24,9 @@
 | **Реестр механизмов** — живой / выключен / мёртвый / дубль | `mechanisms.md` | — |
 
 ## Порядок шага (кратко; подробно — `entry-points.md`)
-- **Старт игры:** `common/history/buildings/` → `common/history/global/` (по имени файла) → `common/history/states/`; после
-  лобби — верхняя панель E&F и проход по штатам для старых сейвов; PSC запускает стройку событием.
+- **Старт игры** (`game-start.md`): `common/history/buildings/` → `common/history/global/` (по имени файла) →
+  `common/history/states/`; после лобби — верхняя панель E&F, проход по штатам, настройка старта E&F (`zz_ef_start_setup`),
+  планировщик; PSC запускает стройку событием.
 - **Новая страна:** `new_country_var_ef` (`common/scripted_effects/10_new_country_var.txt`) — из `common/on_actions/ld_new_country_immediate_init.txt`
   и страховкой из месячного пульса; признак готовности — `var:zz_ef_country_vars_set`.
 - **Роли и планировщик** (`money-model.md`): роль страны А / Б / В — раз в месяц (`on_monthly_pulse` →
