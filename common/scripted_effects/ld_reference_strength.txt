@@ -7,6 +7,11 @@ zz_ef_reference_strength_step = {
 	if = {
 		limit = { has_modifier = global_monetary_reference }
 		set_global_variable = { name = zz_ef_ref_vtp value = zz_ef_value_to_parity }
+		# R3.3: the reference's CB rate for the dependent standards' corridor (zz_ef_cb_rate_floor / _ceiling)
+		if = {
+			limit = { has_variable = base_rate_percentage }
+			set_global_variable = { name = zz_ef_ref_rate value = var:base_rate_percentage }
+		}
 		# R3.4: the reference's price index for the real rate (zz_ef_currency_trade_m)
 		if = {
 			limit = { has_variable = zz_ef_prev_price }
