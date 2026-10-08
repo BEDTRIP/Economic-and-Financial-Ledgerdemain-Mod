@@ -26,8 +26,93 @@ currency_name = {
 	# E&F's currency by culture per call
 	#generic
 	text = {
-		trigger = { NOT = { has_variable = zz_ef_cur } }
+		trigger = { NOT = { has_variable = zz_ef_cur } NOT = { has_variable = zz_ef_cur_noun } }
 		localization_key = spe_uni
+	}
+	#national pound
+	text = {
+		trigger = { NOT = { has_variable = zz_ef_cur } var:zz_ef_cur_noun ?= flag:pound }
+		localization_key = zz_ef_cur_nat_pound
+	}
+	#national franc
+	text = {
+		trigger = { NOT = { has_variable = zz_ef_cur } var:zz_ef_cur_noun ?= flag:franc }
+		localization_key = zz_ef_cur_nat_franc
+	}
+	#national guilder
+	text = {
+		trigger = { NOT = { has_variable = zz_ef_cur } var:zz_ef_cur_noun ?= flag:guilder }
+		localization_key = zz_ef_cur_nat_guilder
+	}
+	#national mark
+	text = {
+		trigger = { NOT = { has_variable = zz_ef_cur } var:zz_ef_cur_noun ?= flag:mark }
+		localization_key = zz_ef_cur_nat_mark
+	}
+	#national peseta
+	text = {
+		trigger = { NOT = { has_variable = zz_ef_cur } var:zz_ef_cur_noun ?= flag:peseta }
+		localization_key = zz_ef_cur_nat_peseta
+	}
+	#national lira
+	text = {
+		trigger = { NOT = { has_variable = zz_ef_cur } var:zz_ef_cur_noun ?= flag:lira }
+		localization_key = zz_ef_cur_nat_lira
+	}
+	#national krona
+	text = {
+		trigger = { NOT = { has_variable = zz_ef_cur } var:zz_ef_cur_noun ?= flag:krona }
+		localization_key = zz_ef_cur_nat_krona
+	}
+	#national ruble
+	text = {
+		trigger = { NOT = { has_variable = zz_ef_cur } var:zz_ef_cur_noun ?= flag:ruble }
+		localization_key = zz_ef_cur_nat_ruble
+	}
+	#national piastre
+	text = {
+		trigger = { NOT = { has_variable = zz_ef_cur } var:zz_ef_cur_noun ?= flag:piastre }
+		localization_key = zz_ef_cur_nat_piastre
+	}
+	#national toman
+	text = {
+		trigger = { NOT = { has_variable = zz_ef_cur } var:zz_ef_cur_noun ?= flag:toman }
+		localization_key = zz_ef_cur_nat_toman
+	}
+	#national rupee
+	text = {
+		trigger = { NOT = { has_variable = zz_ef_cur } var:zz_ef_cur_noun ?= flag:rupee }
+		localization_key = zz_ef_cur_nat_rupee
+	}
+	#national tical
+	text = {
+		trigger = { NOT = { has_variable = zz_ef_cur } var:zz_ef_cur_noun ?= flag:tical }
+		localization_key = zz_ef_cur_nat_tical
+	}
+	#national tael
+	text = {
+		trigger = { NOT = { has_variable = zz_ef_cur } var:zz_ef_cur_noun ?= flag:tael }
+		localization_key = zz_ef_cur_nat_tael
+	}
+	#national yen
+	text = {
+		trigger = { NOT = { has_variable = zz_ef_cur } var:zz_ef_cur_noun ?= flag:yen }
+		localization_key = zz_ef_cur_nat_yen
+	}
+	#national dollar
+	text = {
+		trigger = { NOT = { has_variable = zz_ef_cur } var:zz_ef_cur_noun ?= flag:dollar }
+		localization_key = zz_ef_cur_nat_dollar
+	}
+	#national peso
+	text = {
+		trigger = { NOT = { has_variable = zz_ef_cur } var:zz_ef_cur_noun ?= flag:peso }
+		localization_key = zz_ef_cur_nat_peso
+	}
+	#national real
+	text = {
+		trigger = { NOT = { has_variable = zz_ef_cur } var:zz_ef_cur_noun ?= flag:real }
+		localization_key = zz_ef_cur_nat_real
 	}
 	#dinar
 	text = {
@@ -2261,7 +2346,11 @@ currency_symbol = {
 	# E&F's currency by culture per call
 	#generic
 	text = {
-		trigger = { NOT = { has_variable = zz_ef_cur } }
+		trigger = { NOT = { has_variable = zz_ef_cur } NOT = { has_variable = zz_ef_cur_noun } }
+		localization_key = spe_uni_texture
+	}
+	text = {
+		trigger = { NOT = { has_variable = zz_ef_cur } has_variable = zz_ef_cur_noun }
 		localization_key = spe_uni_texture
 	}
 	#dinar

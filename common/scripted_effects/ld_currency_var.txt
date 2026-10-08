@@ -195,6 +195,8 @@ zz_ef_cur_set = {
 	else_if = { limit = { currency_identifiers_thaler_prussian_thaler = 1 } set_variable = { name = zz_ef_cur value = flag:thaler_prussian_thaler } }
 	else_if = { limit = { currency_identifiers_thaler_saxon_thaler = 1 } set_variable = { name = zz_ef_cur value = flag:thaler_saxon_thaler } }
 	else_if = { limit = { has_variable = zz_ef_cur } remove_variable = zz_ef_cur }
+	if = { limit = { NOT = { has_variable = zz_ef_cur } } zz_ef_cur_noun_set = yes }
+	else_if = { limit = { has_variable = zz_ef_cur_noun } remove_variable = zz_ef_cur_noun }
 	zz_ef_cur_par_update = yes
 }
 
