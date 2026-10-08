@@ -52,7 +52,7 @@ law»; модификаторы кризиса денежной системы (
 | --- | --- | --- |
 | `com_topbar_setup_ef` | `on_actions/00_ef_on_action.txt` | 7 элементов верхней панели E&F всем странам |
 | `zz_ef_init_stockpile_state_vars` | `on_actions/ld_stockpile_state_var_init.txt` | проход по штатам для старых сейвов (и месячная страховка) |
-| `zz_ef_cur_names_start` | `on_actions/ld_currency_name_on_actions.txt` | название валюты всем странам — слово и эмитент (`zz_ef_cur_names`, `docs/currencies.md`) |
+| `zz_ef_cur_names_start` | `on_actions/ld_currency_name_on_actions.txt` | название валюты всем странам — слово (`zz_ef_cur_names`, `docs/currencies.md`) |
 | `zz_ef_sched_start` | `on_actions/ld_scheduler_on_actions.txt` | `zz_ef_sched_ensure`: роли стран (`zz_ef_roles_world_pass`), зонд бюджетного тика |
 
 ## 4. Старт — первый бюджетный тик после первой недели
