@@ -2439,11 +2439,6 @@ bond_market_goods_sell_orders = {
 		add = market.mg:bond.market_goods_sell_orders
 	}
 }
-bond_market_goods_buy_orders = {
-	value = {
-		add = market.mg:bond.market_goods_buy_orders
-	}
-}
 # var:credit_at_central_bank is only set once a country has touched E&F's
 # credit effects; without the guard every other country logs
 # "Failed to fetch variable" (same guard as EF.15).
@@ -2464,11 +2459,6 @@ stockpiling_bond_var_state = {
 manufacture_stock_market_goods_sell_orders = {
 	value = {
 		add = market.mg:manufacture_stock.market_goods_sell_orders
-	}
-}
-manufacture_stock_market_goods_buy_orders = {
-	value = {
-		add = market.mg:manufacture_stock.market_goods_buy_orders
 	}
 }
 ### Quantities read by every E&F formula: the yearly average / today's price.
@@ -2514,11 +2504,6 @@ agricultural_stock_market_goods_sell_orders = {
 		add = market.mg:agricultural_stock.market_goods_sell_orders
 	}
 }
-agricultural_stock_market_goods_buy_orders = {
-	value = {
-		add = market.mg:agricultural_stock.market_goods_buy_orders
-	}
-}
 stockpiling_agricultural_stock_var_state = {
 	if = {
 		limit = { has_variable = zz_ef_cap_avg_as }
@@ -2561,11 +2546,6 @@ railroad_stock_market_goods_sell_orders = {
 		add = market.mg:railroad_stock.market_goods_sell_orders
 	}
 }
-railroad_stock_market_goods_buy_orders = {
-	value = {
-		add = market.mg:railroad_stock.market_goods_buy_orders
-	}
-}
 stockpiling_railroad_stock_var_state = {
 	if = {
 		limit = { has_variable = zz_ef_cap_avg_rr }
@@ -2606,11 +2586,6 @@ railroad_stock_index_in_gold = {
 mining_stock_market_goods_sell_orders = {
 	value = {
 		add = market.mg:mining_stock.market_goods_sell_orders
-	}
-}
-mining_stock_market_goods_buy_orders = {
-	value = {
-		add = market.mg:mining_stock.market_goods_buy_orders
 	}
 }
 stockpiling_mining_stock_var_state = {

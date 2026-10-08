@@ -858,3 +858,33 @@ buy_bond_order = {
 	add = var:buy_bond_9_on
 	add = var:buy_bond_10_on
 }
+# строки 2442-2446 (проход 2): bond_market_goods_buy_orders
+bond_market_goods_buy_orders = {
+	value = {
+		add = market.mg:bond.market_goods_buy_orders
+	}
+}
+# строки 2469-2473 (проход 2): manufacture_stock_market_goods_buy_orders
+manufacture_stock_market_goods_buy_orders = {
+	value = {
+		add = market.mg:manufacture_stock.market_goods_buy_orders
+	}
+}
+# строки 2517-2521 (проход 2): agricultural_stock_market_goods_buy_orders
+agricultural_stock_market_goods_buy_orders = {
+	value = {
+		add = market.mg:agricultural_stock.market_goods_buy_orders
+	}
+}
+# строки 2564-2568 (проход 2): railroad_stock_market_goods_buy_orders
+railroad_stock_market_goods_buy_orders = {
+	value = {
+		add = market.mg:railroad_stock.market_goods_buy_orders
+	}
+}
+# строки 2611-2615 (проход 2): mining_stock_market_goods_buy_orders
+mining_stock_market_goods_buy_orders = {
+	value = {
+		add = market.mg:mining_stock.market_goods_buy_orders
+	}
+}

@@ -79,3 +79,124 @@ inflation_on_military_equipment_market_value_abs = {
 		subtract = inflation_on_military_equipment_market_value
 	}
 }
+# строки 5859-5862 (проход 2): gold_reserves_var_02
+gold_reserves_var_02 = {
+	value = gold_reserves_var
+	multiply = 0.02
+}
+# строки 5863-5866 (проход 2): gold_reserves_var_03
+gold_reserves_var_03 = {
+	value = gold_reserves_var
+	multiply = 0.03
+}
+# строки 5867-5870 (проход 2): gold_reserves_var_04
+gold_reserves_var_04 = {
+	value = gold_reserves_var
+	multiply = 0.04
+}
+# строки 5871-5874 (проход 2): gold_reserves_var_05
+gold_reserves_var_05 = {
+	value = gold_reserves_var
+	multiply = 0.05
+}
+# строки 5875-5878 (проход 2): gold_reserves_var_06
+gold_reserves_var_06 = {
+	value = gold_reserves_var
+	multiply = 0.06
+}
+# строки 5879-5882 (проход 2): gold_reserves_var_07
+gold_reserves_var_07 = {
+	value = gold_reserves_var
+	multiply = 0.07
+}
+# строки 5883-5886 (проход 2): gold_reserves_var_08
+gold_reserves_var_08 = {
+	value = gold_reserves_var
+	multiply = 0.08
+}
+# строки 5887-5890 (проход 2): gold_reserves_var_09
+gold_reserves_var_09 = {
+	value = gold_reserves_var
+	multiply = 0.09
+}
+# строки 5903-5906 (проход 2): gold_reserves_20
+gold_reserves_20 = {
+	value = gold_reserves_limit
+	multiply = 0.20
+}
+# строки 5907-5910 (проход 2): gold_reserves_30
+gold_reserves_30 = {
+	value = gold_reserves_limit
+	multiply = 0.23
+}
+# строки 5911-5914 (проход 2): gold_reserves_40
+gold_reserves_40 = {
+	value = gold_reserves_limit
+	multiply = 0.40
+}
+# строки 5915-5918 (проход 2): gold_reserves_50
+gold_reserves_50 = {
+	value = gold_reserves_limit
+	multiply = 0.50
+}
+# строки 5919-5922 (проход 2): gold_reserves_60
+gold_reserves_60 = {
+	value = gold_reserves_limit
+	multiply = 0.60
+}
+# строки 5923-5926 (проход 2): gold_reserves_70
+gold_reserves_70 = {
+	value = gold_reserves_limit
+	multiply = 0.70
+}
+# строки 5927-5930 (проход 2): gold_reserves_80
+gold_reserves_80 = {
+	value = gold_reserves_limit
+	multiply = 0.80
+}
+# строки 5931-5934 (проход 2): gold_reserves_90
+gold_reserves_90 = {
+	value = gold_reserves_limit
+	multiply = 0.90
+}
+# строки 6436-6445 (проход 2): gold_to_silver_law
+gold_to_silver_law = {
+	value = 1
+	if = {
+		limit = {
+			has_law = law_type:law_silver_standard
+		}
+		add = gold_to_silver_rate
+	}
+	min = 0
+}
+# строки 6447-6455 (проход 2): bimetallic_rate_gold_to_silver_law
+bimetallic_rate_gold_to_silver_law = {
+	value = 1
+	if = {
+		limit = {
+			has_law = law_type:law_bimetallism_standard
+		}
+		add = bimetallic_rate_gold_to_silver
+	}
+}
+# строки 6890-6892 (проход 2): inflation_on_consumer_goods_market_value
+inflation_on_consumer_goods_market_value = {
+	add = market.inflation_on_consumer_goods
+}
+# строки 7051-7053 (проход 2): inflation_on_energy_market_value
+inflation_on_energy_market_value = {
+	add = market.inflation_on_energy
+}
+# строки 7094-7096 (проход 2): inflation_on_raw_material_market_value
+inflation_on_raw_material_market_value = {
+	add = market.inflation_on_raw_material
+}
+# строки 7151-7153 (проход 2): inflation_on_manufactured_goods_market_value
+inflation_on_manufactured_goods_market_value = {
+	add = market.inflation_on_manufactured_goods
+}
+# строки 7223-7225 (проход 2): inflation_on_military_equipment_market_value
+inflation_on_military_equipment_market_value = {
+	add = market.inflation_on_military_equipment
+}
