@@ -186,10 +186,7 @@ zz_ef_reconcile = {
 	if = {
 		limit = {
 			zz_ef_logs_on = yes
-			OR = {
-				is_player = yes
-				gdp > 20000000
-			}
+			zz_ef_log_country = yes
 		}
 		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|other [THIS.GetCountry.MakeScope.Var('zz_ef_other').GetValue|0]|d_other [THIS.GetCountry.MakeScope.Var('zz_ef_f_other').GetValue|0]|pool [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_raw_pool')|0]|book [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bank_book_v')|0]|other_pool [THIS.GetCountry.MakeScope.Var('zz_ef_other_pool').GetValue|0]|other_tr [THIS.GetCountry.MakeScope.Var('zz_ef_other_tr').GetValue|0]|lvl_pool [THIS.GetCountry.MakeScope.Var('zz_ef_lvl_buy_pool').GetValue|0]|lvl_tr [THIS.GetCountry.MakeScope.Var('zz_ef_lvl_buy_tr').GetValue|0]|d_other_tr [THIS.GetCountry.MakeScope.Var('zz_ef_f_other_tr').GetValue|0]|trnet [THIS.GetCountry.MakeScope.Var('zz_ef_tr_prev').GetValue|0]|budget [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_budget_steps_v')|0]|capital [THIS.GetCountry.MakeScope.Var('zz_ef_bank_capital').GetValue|0]|dep [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_deposits')|0]|weeks [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_step_weeks_v')|0]|role [THIS.GetCountry.MakeScope.Var('zz_ef_role').GetValue|0]"
 	}

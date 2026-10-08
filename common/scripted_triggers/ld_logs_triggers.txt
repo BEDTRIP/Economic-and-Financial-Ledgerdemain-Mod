@@ -8,3 +8,22 @@ zz_ef_logs_on = {
 		has_global_variable = zz_ef_logs_on
 	}
 }
+
+# Country scope: the countries the per-country logs follow -- the player and the big economies (GDP over 20M).
+zz_ef_log_country = {
+	OR = {
+		is_player = yes
+		gdp > 20000000
+	}
+}
+
+# Country scope: the CB's metal moved this week without a known posting (var:zz_ef_f_mt_oth_g / _s, ld_metal_accounts.txt)
+# by more than the log's noise: 1 000 gold units or 10 000 silver units either way (EFQ).
+zz_ef_metal_rest_logged = {
+	OR = {
+		var:zz_ef_f_mt_oth_g > 1000
+		var:zz_ef_f_mt_oth_g < -1000
+		var:zz_ef_f_mt_oth_s > 10000
+		var:zz_ef_f_mt_oth_s < -10000
+	}
+}

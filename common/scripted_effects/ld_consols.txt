@@ -38,10 +38,7 @@ zz_ef_consol_step = {
 	}
 	if = {
 		limit = {
-			OR = {
-				is_player = yes
-				gdp > 20000000
-			}
+			zz_ef_log_country = yes
 			OR = {
 				var:zz_ef_consol_debt > 0
 				var:zz_ef_f_cons_sale > 0

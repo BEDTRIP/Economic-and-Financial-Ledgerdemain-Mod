@@ -119,26 +119,26 @@ PSC-хук: `on_production_method_changed`, `on_building_built`, `on_acquired_te
 | префикс | файл:строка | что пишет | шаг |
 |---|---|---|---|
 | EFE | `common/scripted_effects/08_list_effect.txt:210,267,288` | великие державы: рейтинг (`country_credit_note_fixe`), покрытие, резервы в золоте; кандидаты на эталонную валюту; выбранная (`pick`) | годовой, `national_capacity_variable_list` (держатель `global_monetary_reference`) |
-| EFL | `common/scripted_effects/ld_listing.txt:79` | уровни HQ, доля листинговых, дивиденды, капитализация, `cap_gdp`, дисконт | месячный `zz_ef_capitalization_monthly` → `zz_ef_listing_log` |
+| EFL | `common/scripted_effects/ld_listing.txt:76` | уровни HQ, доля листинговых, дивиденды, капитализация, `cap_gdp`, дисконт | месячный `zz_ef_capitalization_monthly` → `zz_ef_listing_log` |
 | — (`ZZEF crash`) | `common/scripted_effects/ld_capitalization_crash.txt:112` | `debug_log` + `debug_log_scopes`: капитал упал более чем вдвое за год | месячный `zz_ef_cap_monthly_crash_check` |
 | EFK | `common/scripted_effects/ld_bank_seed.txt:36` | рынок: уровни банков (`zz_ef_bank_l`), `tc` (`zz_ef_bank_w`) | месячный `zz_ef_bank_seed_step` |
 | EFK | `common/scripted_effects/ld_bank_seed.txt:570` | штат: желаемое число банков (`zz_ef_bank_n`) | `zz_ef_bank_seed_state` |
 | EFM | `common/scripted_effects/ld_monetary_policy.txt:65,130,179` | `done` (завершение девальвации/ревальвации: покрытие, цель), `step` (шаг: направление, взведён ли), `ai_parity` (ИИ меняет паритет) | месячный `zz_ef_mp_step`; `zz_ef_mp_complete` |
 | EFM | `common/scripted_effects/ld_standard_switch.txt:130` | смена денежного стандарта: старый/новый паритет | на смене закона, `zz_ef_std_switch_after` (из `01_economic_scripted_effects.txt:27594`) |
-| EFM | `common/scripted_effects/ld_metal_accounts.txt:126` | `metal_start`: начальный металл ЦБ, что сделано | недельный, `zz_ef_metal_start_log` |
+| EFM | `common/scripted_effects/ld_metal_accounts.txt:235` | `metal_start`: начальный металл ЦБ, что сделано | недельный, `zz_ef_metal_start_log` |
 | EFM | `common/scripted_effects/ld_subject_metal.txt:40` | `cb_state_lost` (ЦБ-штат потерян) | недельный `zz_ef_cb_state_owner_step` |
-| EFM | `common/scripted_effects/ld_currency_intro_metal.txt:62` | `cur_intro`: ввод новой валюты, металл | `zz_ef_cur_intro_after` (из `09_introduction_building_lvl.txt:34454`) |
-| EFT | `common/scripted_effects/ld_metal_accounts.txt:351` | потоки металла ЦБ/банков/населения за неделю | недельный `zz_ef_metal_week_step` |
-| EFV | `common/scripted_effects/ld_metal_accounts.txt:358` | WORLD: суммы металла по ЦБ/банкам/населению, баланс закупок/продаж | недельный `zz_ef_world_metal_log` (из `ld_money_model.txt:742`) |
-| EFQ | `common/scripted_effects/ld_metal_accounts.txt:400` | сверка металла (`oth_g/oth_s`, ЦБ, стандарт) | `zz_ef_metal_reconcile` |
-| EFB | `common/scripted_effects/ld_bond_ledger.txt:95` | книга облигаций страны: принципал, на руках, проценты, погашение, списание | недельный `zz_ef_bond_ledger_step` |
-| EFP | `common/scripted_effects/ld_bond_ledger.txt:571` | слот облигаций без продавца (`no_seller`) | `zz_ef_pb_no_seller` (слот `$N$`) |
-| EFS | `common/scripted_effects/ld_consols.txt:52` | консоли: долг, продажа, проценты, цена, цель ставки | недельный `zz_ef_consol_step` |
-| EFW | `common/scripted_effects/ld_money_model.txt:392` | M0..M3, оборот, ЦБ, заграница, дельты (только игрок или ВВП > 20 млн) | недельный `zz_ef_money_model_step` |
-| EFG | `common/scripted_effects/ld_money_model.txt:743` | WORLD: потоки валюты по миру, клиринг | недельный (через `zz_ef_world_acc`) |
-| EFA | `common/scripted_effects/ld_money_model.txt:504` | проценты, ЦБ, прямые инвестиции | `zz_ef_bridge_apply` (недельный шаг) |
-| EFR | `common/scripted_effects/ld_money_model.txt:540` | внешние потоки, сбережения, депозиты, пул банков | `zz_ef_bridge_apply` (недельный шаг; числа моста — `zz_ef_money_hook_receive`` |
-| EFX | `common/scripted_effects/ld_money_model.txt:1033` | стандарт, ЦБ, `money_value_0`, цель, покрытие, металл, M2 | месячный `zz_ef_money_model_monthly_step` |
+| EFM | `common/scripted_effects/ld_currency_intro_metal.txt:59` | `cur_intro`: ввод новой валюты, металл | `zz_ef_cur_intro_after` (из `09_introduction_building_lvl.txt:34454`) |
+| EFT | `common/scripted_effects/ld_metal_accounts.txt:498` | потоки металла ЦБ/банков/населения за неделю | недельный `zz_ef_metal_week_step` |
+| EFV | `common/scripted_effects/ld_metal_accounts.txt:505` | WORLD: суммы металла по ЦБ/банкам/населению, баланс закупок/продаж | недельный `zz_ef_world_metal_log` (из `ld_money_model.txt:742`) |
+| EFQ | `common/scripted_effects/ld_metal_accounts.txt:546` | сверка металла (`oth_g/oth_s`, ЦБ, стандарт) | `zz_ef_metal_reconcile` |
+| EFB | `common/scripted_effects/ld_bond_ledger.txt:94` | книга облигаций страны: принципал, на руках, проценты, погашение, списание | недельный `zz_ef_bond_ledger_step` |
+| EFP | `common/scripted_effects/ld_bond_ledger.txt:592` | слот облигаций без продавца (`no_seller`) | `zz_ef_pb_no_seller` (слот `$N$`) |
+| EFS | `common/scripted_effects/ld_consols.txt:47` | консоли: долг, продажа, проценты, цена, цель ставки | недельный `zz_ef_consol_step` |
+| EFW | `common/scripted_effects/ld_money_model.txt:260` | M0..M3, оборот, ЦБ, заграница, дельты (только игрок или ВВП > 20 млн) | недельный `zz_ef_money_model_step` |
+| EFG | `common/scripted_effects/ld_money_model.txt:608` | WORLD: потоки валюты по миру, клиринг | недельный (через `zz_ef_world_acc`) |
+| EFA | `common/scripted_effects/ld_money_model.txt:419` | проценты, ЦБ, прямые инвестиции | `zz_ef_bridge_apply` (недельный шаг) |
+| EFR | `common/scripted_effects/ld_money_model.txt:446` | внешние потоки, сбережения, депозиты, пул банков | `zz_ef_bridge_apply` (недельный шаг; числа моста — `zz_ef_money_hook_receive`` |
+| EFX | `common/scripted_effects/ld_money_model.txt:915` | стандарт, ЦБ, `money_value_0`, цель, покрытие, металл, M2 | месячный `zz_ef_money_model_monthly_step` |
 | EFJ | `common/scripted_effects/ld_ledger.txt` | сверка по запасам: «прочее» страны (запас, изменение, часть пула, часть казны и её изменение, казна за вычетом долга, бюджет недели, пул, книга банков, капитал, вклады, недель в шаге, роль); `WORLD` — сумма изменений «прочего» за неделю, из них казна, сумма модулей, число стран | недельный шаг (`zz_ef_reconcile`), мировой проход (`zz_ef_other_world_log`) |
 | EFY | `common/scripted_effects/ld_roles.txt` | WORLD: число стран по ролям А / Б / В, смен за месяц, ВВП 40-й и 50-й страны; строка `move` — смена роли страны (прежняя роль, месяцев в ней, месяцев ниже 50-го места, ВВП) | месячный проход `zz_ef_roles_world_pass` |
 | EFC | `common/scripted_effects/ld_money_model.txt:1110,1112` | кризисный выкуп валюты: должно/выплачено; эмитент | `zz_ef_crisis_redeem` (из `buy_/sell_<cur>_currency_crisis`) |

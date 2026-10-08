@@ -71,10 +71,7 @@ zz_ef_listing_update = {
 zz_ef_listing_log = {
 	if = {
 		limit = {
-			OR = {
-				is_player = yes
-				gdp > 20000000
-			}
+			zz_ef_log_country = yes
 		}
 		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFL|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|hq [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_hq_levels')|1]|listed [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_listed_hq_levels')|1]|lshare [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_listed_share')|3]|nhq [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_hq_count')|0]|hqdiv [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_hq_div_week')|0]|lit [THIS.GetCountry.MakeScope.Var('zz_ef_rich_literacy').GetValue|3]|div [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_listed_div_year')|0]|snap [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cap_listed_snapshot')|0]|cap [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_equity_capitalization')|0]|cap_gdp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cap_to_gdp')|3]|disc [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cap_discount')|4]" }
 	}
