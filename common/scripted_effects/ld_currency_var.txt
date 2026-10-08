@@ -299,7 +299,7 @@ zz_ef_cur_name_set = {
 	else_if = { limit = { var:zz_ef_cur ?= flag:thaler_hannoveraner_thaler } set_variable = { name = zz_ef_cur_noun value = flag:thaler } }
 	else_if = { limit = { var:zz_ef_cur ?= flag:thaler_prussian_thaler } set_variable = { name = zz_ef_cur_noun value = flag:thaler } }
 	else_if = { limit = { var:zz_ef_cur ?= flag:thaler_saxon_thaler } set_variable = { name = zz_ef_cur_noun value = flag:thaler } }
-	else_if = { limit = { has_variable = zz_ef_cur_noun } remove_variable = zz_ef_cur_noun }
+	else = { zz_ef_cur_noun_set = yes }
 }
 
 # The issuer (var:zz_ef_cur_issuer, read by the name's adjective): the leading country of an E&F currency (its
@@ -395,7 +395,6 @@ zz_ef_cur_issuer_set = {
 	if = { limit = { var:zz_ef_cur ?= flag:spe_lithuanian_litas any_country = { has_modifier = spe_lithuanian_litas_leading_currency_type } } random_country = { limit = { has_modifier = spe_lithuanian_litas_leading_currency_type } save_temporary_scope_as = zz_ef_cur_iss } set_variable = { name = zz_ef_cur_issuer value = scope:zz_ef_cur_iss } }
 	if = { limit = { var:zz_ef_cur ?= flag:spe_peseta any_country = { has_modifier = spe_peseta_leading_currency_type } } random_country = { limit = { has_modifier = spe_peseta_leading_currency_type } save_temporary_scope_as = zz_ef_cur_iss } set_variable = { name = zz_ef_cur_issuer value = scope:zz_ef_cur_iss } }
 	if = { limit = { var:zz_ef_cur ?= flag:spe_ruble any_country = { has_modifier = spe_ruble_leading_currency_type } } random_country = { limit = { has_modifier = spe_ruble_leading_currency_type } save_temporary_scope_as = zz_ef_cur_iss } set_variable = { name = zz_ef_cur_issuer value = scope:zz_ef_cur_iss } }
-	if = { limit = { var:zz_ef_cur ?= flag:spe_uni any_country = { has_modifier = spe_uni_leading_currency_type } } random_country = { limit = { has_modifier = spe_uni_leading_currency_type } save_temporary_scope_as = zz_ef_cur_iss } set_variable = { name = zz_ef_cur_issuer value = scope:zz_ef_cur_iss } }
 	if = { limit = { var:zz_ef_cur ?= flag:spe_yen any_country = { has_modifier = spe_yen_leading_currency_type } } random_country = { limit = { has_modifier = spe_yen_leading_currency_type } save_temporary_scope_as = zz_ef_cur_iss } set_variable = { name = zz_ef_cur_issuer value = scope:zz_ef_cur_iss } }
 	if = { limit = { var:zz_ef_cur ?= flag:spe_yuan any_country = { has_modifier = spe_yuan_leading_currency_type } } random_country = { limit = { has_modifier = spe_yuan_leading_currency_type } save_temporary_scope_as = zz_ef_cur_iss } set_variable = { name = zz_ef_cur_issuer value = scope:zz_ef_cur_iss } }
 	if = { limit = { var:zz_ef_cur ?= flag:spe_zloti any_country = { has_modifier = spe_zloti_leading_currency_type } } random_country = { limit = { has_modifier = spe_zloti_leading_currency_type } save_temporary_scope_as = zz_ef_cur_iss } set_variable = { name = zz_ef_cur_issuer value = scope:zz_ef_cur_iss } }
