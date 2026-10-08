@@ -1,8 +1,7 @@
 ﻿#############################################
 # a currency's strength against the reference currency (see
 # scripted_triggers/ld_reference_currency_triggers.txt). COUNTRY scope.
-# zz_ef_value_to_parity: under a metal standard with a parity -- the value / the parity (1 at the
-# parity; M.2); else E&F's own measure -- the value in gold / the median of all currencies.
+# zz_ef_value_to_parity: a unit of the country's money against its parity (Д.R8а.4) -- see below.
 # The reference's own value_to_parity is kept monthly in global_var:zz_ef_ref_vtp by the reference
 # country (zz_ef_reference_strength_step, the money model's monthly step).
 # !! MAINTENANCE !! Key-level REPLACE_OR_CREATE of E&F's difference_with_average_gold_exchange_
@@ -11,26 +10,46 @@
 # they drive E&F's trade-route modifiers and the tooltip's "+15% against the average".
 #############################################
 
-zz_ef_value_to_parity = {
+# Д.R8а.4: 1 under a metal or exchange standard and with no monetary system (the market will move around the parity
+# with the exchange, R8б); a fiat currency floats -- 1 at the transition, then x (the reference's prices / its own) since
+# then (var:zz_ef_fiat_p0 / _r0, scripted_effects/ld_standard_switch.txt); an external exchange standard -- its anchor's
+# (the overlord, else the market's owner).
+zz_ef_value_to_parity_own = {
 	value = 1
-	# metal standards first: money_value_in_gold (a chain over 95 currencies) is not evaluated for them
 	if = {
 		limit = {
-			has_variable = money_value_target_1
-			var:money_value_target_1 > 0
-			OR = {
-				has_law = law_type:law_gold_standard
-				has_law = law_type:law_silver_standard
-				has_law = law_type:law_bimetallism_standard
-			}
+			has_law = law_type:law_fiat_standard
+			has_variable = zz_ef_fiat_p0
+			has_variable = zz_ef_fiat_r0
+			var:zz_ef_fiat_r0 > 0
+			has_variable = zz_ef_prev_price
+			var:zz_ef_prev_price > 0
+			has_global_variable = zz_ef_ref_cpi
 		}
-		value = money_value_0
-		divide = var:money_value_target_1
+		value = var:zz_ef_fiat_p0
+		divide = var:zz_ef_prev_price
+		multiply = global_var:zz_ef_ref_cpi
+		divide = var:zz_ef_fiat_r0
+		min = 0.01
+		max = 100
+	}
+}
+zz_ef_value_to_parity = {
+	value = zz_ef_value_to_parity_own
+	if = {
+		limit = {
+			has_law = law_type:law_external_exchange_standard
+			is_subject = yes
+		}
+		value = overlord.zz_ef_value_to_parity_own
 	}
 	else_if = {
-		limit = { has_global_variable = money_value_median global_var:money_value_median > 0 }
-		value = money_value_in_gold
-		divide = global_var:money_value_median
+		limit = {
+			has_law = law_type:law_external_exchange_standard
+			exists = market.owner
+			NOT = { market.owner = this }
+		}
+		value = market.owner.zz_ef_value_to_parity_own
 	}
 }
 zz_ef_currency_strength = {
