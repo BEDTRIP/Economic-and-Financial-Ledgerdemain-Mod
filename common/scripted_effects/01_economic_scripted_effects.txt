@@ -11200,55 +11200,60 @@ trade_balance = {
 }
 
 money_value_target_pre_set = {
-	# Si standard argent
+	# R3.6: a new country (Peru-Bolivia, r1008_074100) has no money yet -- money_value_*_standard divide by money_supply = 0
+	# ("Value of wrong type ... none"); the target stays as it was until there is money
 	if = {
-		limit = {
-			#has_law = law_type:law_silver_standard
-			var:law_silver_standard ?= 1
+		limit = { money_supply > 0 }
+		# Si standard argent
+		if = {
+			limit = {
+				#has_law = law_type:law_silver_standard
+				var:law_silver_standard ?= 1
+			}
+			#bimetalique
+			set_variable = {
+				name = money_value_target_1_bimetallic
+				value = money_value_bimetallism_standard
+			}
+			#gold
+			set_variable = {
+				name = money_value_target_1_gold
+				value = money_value_gold_standard
+			}
 		}
-		#bimetalique
-		set_variable = {
-			name = money_value_target_1_bimetallic
-			value = money_value_bimetallism_standard
+		# Si standard bimétallique
+		if = {
+			limit = {
+				#has_law = law_type:law_bimetallism_standard
+				var:law_bimetallism_standard ?= 1
+			}
+			#silver
+			set_variable = {
+				name = money_value_target_1_silver
+				value = money_value_silver_standard
+			}
+			#gold
+			set_variable = {
+				name = money_value_target_1_gold
+				value = money_value_gold_standard
+			}
 		}
-		#gold
-		set_variable = {
-			name = money_value_target_1_gold
-			value = money_value_gold_standard
-		}
-	}
-	# Si standard bimétallique
-	if = {
-		limit = {
-			#has_law = law_type:law_bimetallism_standard
-			var:law_bimetallism_standard ?= 1
-		}
-		#silver
-		set_variable = {
-			name = money_value_target_1_silver
-			value = money_value_silver_standard
-		}
-		#gold
-		set_variable = {
-			name = money_value_target_1_gold
-			value = money_value_gold_standard
-		}
-	}
-	# Si standard or
-	if = {
-		limit = {
-			#has_law = law_type:law_gold_standard
-			var:law_gold_standard ?= 1
-		}
-		#silver
-		set_variable = {
-			name = money_value_target_1_silver
-			value = money_value_silver_standard
-		}
-		#bimetalique
-		set_variable = {
-			name = money_value_target_1_bimetallic
-			value = money_value_bimetallism_standard
+		# Si standard or
+		if = {
+			limit = {
+				#has_law = law_type:law_gold_standard
+				var:law_gold_standard ?= 1
+			}
+			#silver
+			set_variable = {
+				name = money_value_target_1_silver
+				value = money_value_silver_standard
+			}
+			#bimetalique
+			set_variable = {
+				name = money_value_target_1_bimetallic
+				value = money_value_bimetallism_standard
+			}
 		}
 	}
 }
