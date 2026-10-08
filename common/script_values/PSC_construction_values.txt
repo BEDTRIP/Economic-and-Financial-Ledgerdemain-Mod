@@ -213,20 +213,8 @@ ai_construction_demand = {
 }
 
 construction_demand_ratio = {
-	if = {
-		limit = {
-			AND = {
-				has_variable = nominal_construction_demand
-				has_variable = national_production
-			}
-		}
-		value = var:nominal_construction_demand
-		multiply = construction_goods_per_point
-		divide = {
-			value = var:national_production
-			min = 0.1
-		}
-	}
+	# PSC sets no nominal construction demand -- the alert reads 0
+	value = 0
 }
 
 construction_regulator_level = {

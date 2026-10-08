@@ -1,0 +1,16 @@
+# Вырезано 8.10.2026 из common/scripted_effects/ld_money_model.txt (R3а, разбор логов: переменная читается, но нигде не задаётся)
+
+# R1а.4 (Д.4): the per-country chain (zz_ef_money_week_start, its daily probe, the day slot) is replaced by the
+# global scheduler (scripted_effects/ld_scheduler.txt); its on_actions call this for old saves' queued calls.
+zz_ef_money_week_retire = {
+	if = { limit = { has_variable = zz_ef_week_alive } remove_variable = zz_ef_week_alive }
+
+# ----
+	else_if = {
+		limit = { has_variable = zz_ef_metal_rescale_due }
+		remove_variable = zz_ef_metal_rescale_due
+		set_variable = { name = zz_ef_cb_start_due value = yes }
+	}
+
+# ----
+|rcin [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_rc_fx_in')|0]|rcback [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_rc_back')|0]|rcmetal [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_rc_metal_out')|0]

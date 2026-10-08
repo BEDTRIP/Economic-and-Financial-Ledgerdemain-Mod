@@ -11,7 +11,7 @@ E&F `trade_balance` отключён. Ключи `ld_*` — с префиксо�
 - `common/scripted_guis/ld_cbfx.txt` — `zz_ef_cbfx_update_sorted` (таблица валют ЦБ, список `zz_ef_cbfx_list`), `zz_ef_holders_update` (кто держит нашу валюту: `zz_ef_holds_pc`, `zz_ef_holders_list`, `zz_ef_bank_holders_list`).
 - `common/script_values/ld_fx_reserves_values.txt` — `zz_ef_fx_reserves_metal` (чужая валюта в резервах ЦБ в золоте: `stockpiling_<cur>_state_1` × стоимость валюты).
 - `common/scripted_effects/ld_stockpile_state_var_seed.txt` — смежный учётный файл.
-- `common/script_values/ld_reserve_trade_values.txt` (генерат) — `zz_ef_rc_currency_value` (стоимость валюты, живое — читает клиринг), `zz_ef_fx_liab` (чужие запасы нашей валюты у держателей, живое), `zz_ef_v_rc_*` (поля лога `EFX`, всегда 0).
+- `common/script_values/ld_reserve_trade_values.txt` (генерат) — `zz_ef_rc_currency_value` (стоимость валюты, живое — читает клиринг), `zz_ef_fx_liab` (чужие запасы нашей валюты у держателей, живое).
 - `common/scripted_effects/ld_reference_strength.txt` — `zz_ef_currency_trade_step` (месяц: накладывает `zz_ef_currency_trade` по силе валюты), `zz_ef_reference_strength_step`.
 - `common/static_modifiers/ld_currency_trade.txt` — `zz_ef_currency_trade` (импорт / экспорт от реального перекоса курса к эталону, ±50 % потолок, R3.4), плюс E&F `strong_currency`/`weak_currency` без торговых полей.
 - `common/static_modifiers/ld_fx_holders_demand.txt` — экспортное преимущество от валюты за рубежом (см. `banks.md`).

@@ -1,0 +1,15 @@
+# Вырезано 8.10.2026 из common/script_values/ld_reserve_trade_values.txt (R3а, разбор логов: переменная читается, но нигде не задаётся)
+
+# Log helpers (0 if unset).
+zz_ef_v_rc_fx_in = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_rc_fx_in } value = var:zz_ef_rc_fx_in }
+}
+zz_ef_v_rc_back = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_rc_back } value = var:zz_ef_rc_back }
+}
+zz_ef_v_rc_metal_out = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_rc_metal_out } value = var:zz_ef_rc_metal_out }
+}

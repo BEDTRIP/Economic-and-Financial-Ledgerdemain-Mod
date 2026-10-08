@@ -1,0 +1,18 @@
+# Вырезано 8.10.2026 из common/scripted_effects/09_introduction_building_lvl.txt (R3а, разбор логов: переменная читается, но нигде не задаётся)
+
+			#Currency recreat
+			if = {
+				limit = {
+					has_variable = new_currency_recreat
+				}
+				remove_variable = new_currency_recreat
+ 				if = {
+ 					limit = { exists = capital }
+ 					capital= {
+ 						save_scope_as = capital_state
+ 					}
+ 				}
+				save_scope_as = target_country
+
+			}
+(x190)

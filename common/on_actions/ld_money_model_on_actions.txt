@@ -16,16 +16,3 @@ zz_ef_money_model_monthly = {
 	}
 }
 
-# R1а.4 (Д.4): the per-country weekly chain (a daily probe of each country's budget tick, a 7-day self-renewing step,
-# a day slot per country) is replaced by the global scheduler (scripted_effects/ld_scheduler.txt). The two on_actions
-# stay for old saves' queued calls: they clear the chain's variables and stop.
-zz_ef_money_week_probe = {
-	effect = {
-		zz_ef_money_week_retire = yes
-	}
-}
-zz_ef_money_model_weekly = {
-	effect = {
-		zz_ef_money_week_retire = yes
-	}
-}

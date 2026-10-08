@@ -1,0 +1,18 @@
+# Вырезано 8.10.2026 из common/script_values/PSC_construction_values.txt (R3а, разбор логов: переменная читается, но нигде не задаётся)
+
+construction_demand_ratio = {
+	if = {
+		limit = {
+			AND = {
+				has_variable = nominal_construction_demand
+				has_variable = national_production
+			}
+		}
+		value = var:nominal_construction_demand
+		multiply = construction_goods_per_point
+		divide = {
+			value = var:national_production
+			min = 0.1
+		}
+	}
+}
