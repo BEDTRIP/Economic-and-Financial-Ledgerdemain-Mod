@@ -464,7 +464,12 @@ is_subject_custom_trigger = {
 is_not_market_owner = {
 	root = {
 		NOT = {
-			market.owner = root
+			# a country without a market or a market without an owner (a revolutionary, a dead country -- the laws'
+			# can_enact read it): r1008_122252, 48 "Event target link 'market' / 'owner' returned an invalid object"
+			market ?= {
+				exists = owner
+				owner = root
+			}
 		}
 	}
 }

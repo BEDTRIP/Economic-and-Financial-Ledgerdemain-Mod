@@ -6,7 +6,7 @@ on_revolution_end = {
 zz_ef_rv_on_revolution_end = {
 	effect = {
 		scope:target ?= { set_variable = { name = zz_ef_rv_from value = root } }
-		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFV|[TimeKeeper.GetCurrentDate.GetString]|[ROOT.GetCountry.GetNameNoFormatting]|rev_end|root_rev [ROOT.GetCountry.MakeScope.ScriptValue('zz_ef_rv_is_rev_v')|0]|target [SCOPE.sC('target').GetNameNoFormatting]|target_rev [SCOPE.sC('target').MakeScope.ScriptValue('zz_ef_rv_is_rev_v')|0]" }
+		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFV|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|rev_end|root_rev [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rv_is_rev_v')|0]|target [SCOPE.sC('target').GetNameNoFormatting]|target_rev [SCOPE.sC('target').MakeScope.ScriptValue('zz_ef_rv_is_rev_v')|0]" }
 	}
 }
 on_revolution_start = {
@@ -31,7 +31,7 @@ on_secession_end = {
 zz_ef_rv_on_secession_end = {
 	effect = {
 		scope:target ?= { set_variable = { name = zz_ef_sec_from value = root } }
-		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFV|[TimeKeeper.GetCurrentDate.GetString]|[ROOT.GetCountry.GetNameNoFormatting]|sec_end|target [SCOPE.sC('target').GetNameNoFormatting]" }
+		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFV|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|sec_end|target [SCOPE.sC('target').GetNameNoFormatting]" }
 	}
 }
 on_civil_war_won = {
@@ -39,6 +39,6 @@ on_civil_war_won = {
 }
 zz_ef_rv_on_civil_war_won = {
 	effect = {
-		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFV|[TimeKeeper.GetCurrentDate.GetString]|[ROOT.GetCountry.GetNameNoFormatting]|cw_won|root_rev [ROOT.GetCountry.MakeScope.ScriptValue('zz_ef_rv_is_rev_v')|0]|has_from [ROOT.GetCountry.MakeScope.ScriptValue('zz_ef_rv_has_from_v')|0]|from_alive [ROOT.GetCountry.MakeScope.ScriptValue('zz_ef_rv_from_alive_v')|0]|sec [ROOT.GetCountry.MakeScope.ScriptValue('zz_ef_rv_has_sec_v')|0]|std [ROOT.GetCountry.MakeScope.ScriptValue('zz_ef_std_code')|0]|cb [ROOT.GetCountry.MakeScope.ScriptValue('zz_ef_has_cb')|0]" }
+		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFV|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|cw_won|root_rev [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rv_is_rev_v')|0]|has_from [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rv_has_from_v')|0]|from_alive [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rv_from_alive_v')|0]|sec [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rv_has_sec_v')|0]|std [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_std_code')|0]|cb [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_has_cb')|0]" }
 	}
 }
