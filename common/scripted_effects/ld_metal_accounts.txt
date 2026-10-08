@@ -239,11 +239,15 @@ zz_ef_metal_start_log = {
 # global_var:zz_ef_wm_<KEY> += VALUE -- cumulative since the start (never reset): start_* the start's stock,
 # buy_* bought on the market, sell_* sold to it; written by zz_ef_world_acc with the accounts' sums (EFG).
 zz_ef_wm_add = {
+	# the log's line (EFV) only -- with the logs on (В4)
 	if = {
-		limit = { NOT = { has_global_variable = zz_ef_wm_$KEY$ } }
-		set_global_variable = { name = zz_ef_wm_$KEY$ value = 0 }
+		limit = { zz_ef_logs_on = yes }
+		if = {
+			limit = { NOT = { has_global_variable = zz_ef_wm_$KEY$ } }
+			set_global_variable = { name = zz_ef_wm_$KEY$ value = 0 }
+		}
+		change_global_variable = { name = zz_ef_wm_$KEY$ add = $VALUE$ }
 	}
-	change_global_variable = { name = zz_ef_wm_$KEY$ add = $VALUE$ }
 }
 
 # ---- steps 4, 5, 7: the week's purchases and sales ---------------------------------

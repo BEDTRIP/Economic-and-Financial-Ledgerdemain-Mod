@@ -18,15 +18,18 @@ zz_ef_money_hook_sg = {
 	}
 }
 
-# Probe: counts launches of the hook's items, no value passed.
+# Probe for the log: counts launches of the hook's items, no value passed.
 zz_ef_money_hook_probe_sg = {
 	scope = country
 	effect = {
 		if = {
-			limit = { NOT = { has_global_variable = zz_ef_hook_probe_calls } }
-			set_global_variable = { name = zz_ef_hook_probe_calls value = 0 }
+			limit = { zz_ef_logs_on = yes }
+			if = {
+				limit = { NOT = { has_global_variable = zz_ef_hook_probe_calls } }
+				set_global_variable = { name = zz_ef_hook_probe_calls value = 0 }
+			}
+			change_global_variable = { name = zz_ef_hook_probe_calls add = 1 }
 		}
-		change_global_variable = { name = zz_ef_hook_probe_calls add = 1 }
 	}
 }
 
