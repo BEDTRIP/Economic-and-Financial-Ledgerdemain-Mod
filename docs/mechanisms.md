@@ -8,7 +8,7 @@
 коэффициент, закомментированный вызов); `мёртвый` — ни откуда не вызывается; `дубль` — считает то же или пишет те же
 счета, что модель `ld_*`. Строки файлов — на момент записи, при правке файла сдвигаются: искать по имени.
 
-Итого: мёртвый 4, выключен 0, дубль 3, живой 219.
+Итого: мёртвый 4, выключен 0, дубль 3, живой 217.
 
 ## Денежная модель и металл (`money-model.md`)
 
@@ -124,7 +124,6 @@
 
 | механизм | статус | где | доказательство | интерфейс |
 | --- | --- | --- | --- | --- |
-| Валютные запасы частных банков stockpiling_<cur>_company_<Bank>_fixe | живой | common/history/global/00_ef_economic_global_variable.txt; common/script_values/ld_clearing_values.txt:387… | переменные задаются историей (старт) и читаются значениями zz_ef_bank_holds_* и диаграммой; без инициализации показ изменился бы | диаграмма «банки держат нашу валюту» (ld_economy_panel.gui:9797) |
 | E&F trade_balance (счётчики *_fix, trade_balance_in_gold_fixe) | живой | common/scripted_effects/01_economic_scripted_effects.txt:27045-27428; вызовы 00_economic_scripted_guis.txt:422, 1_economic_scripted_effects.txt:14791,41371,42319 | вызывается из месячного ЦБ, окон, событий; обнуляет `trade_balance_in_gold_fixe`, которую пишут `reset_debt_in_currency*` и кнопка `trade_balance_actualized`, читают ~15 значений `00_economic_scripted_value.txt` и строка ld_economy_panel.gui:550 | показатели торгового баланса E&F |
 | Мировой клиринг zz_ef_clr_step (pay/receive/put_own/take_all) | живой | common/scripted_effects/ld_clearing.txt:70-2063; вызов ld_money_model.txt:680 из zz_ef_cb_hume_step | недельный; пишет gold_state_1/silver_state_1 и stockpiling_<cur>_state_1 столицы ЦБ, глобалки zz_ef_clr_*; счета модели ld_* по замыслу | карточка платёжного баланса/резервы в ld_economy_panel.gui |
 | Окно палаты zz_ef_clr_window_roll | живой | common/scripted_effects/ld_clearing.txt:5 | refs=2; вызывается из zz_ef_clr_step | тултип окна |
@@ -163,7 +162,6 @@
 | Журнал financial_center_je_2 (шкала пузыря, кнопки доли) | живой | common/journal_entries/00_ef_financial_center_je.txt:118 | on_complete из je_1; пульс пуст, логику ведёт on_action пузыря | журнал, виджеты, кнопки speculative_share_N_button |
 | Расчёты-ликвидность 60 на торговом центре | живой | common/production_methods/ld_trade_center_settlements.txt:15,23 | INJECT в pm_trade_center и pm_trade_center_principle_external_trade_2: goods_output_liquidity_currency_add=60 — пишет товар liquidity_currency, который читают банковские/денежные счета ld | панель торгового центра |
 | Компании E&F (105 типов, в основном банки) | живой | common/company_types/00_ef_companies.txt:23 | ключи в 105 типов используются в is_company_type (01_economic_company_value.txt), диспетчере и bankrupt_company | панель компаний (gui/companies_panel.gui) |
-| Фонды частных банков company_<банк>_fund, ai_privat_bank_*_from_list | живой | common/script_values/01_economic_company_value.txt:18,47,47625 | refs=1+ в index.tsv; считают вложения иностранных долгов по списку покупателей; подсистема банков | окно частных банков/долга |
 | bankrupt_company и список ключей компаний (удаление при prosperity<100) | живой | common/scripted_effects/01_financial_scripted_effects.txt:34099 | зовётся из financial_crash_consequences; содержит ключи не из 00_ef_companies.txt (сотни; несуществующие в ванили/CMF/ETF/форке убраны) | — |
 | Подмена старых ключей компаний через replaces_company (Rothschild_Bank_Europe, SgdB, Bank_SBRE, Bank_IBP) | живой | common/company_types/00_ef_companies.txt:759,1552,2564,3660 | replaces_company указывает на ключи вне файла: подозрение на подмену компаний мода «unique companies banks» | — |
 
@@ -274,7 +272,7 @@
 | Символ валюты страны currency_symbol_country_panel (один текстбокс) | живой | gui/ld_currency_symbol_fix.gui:12; gui/00_ef_deported_gui_1.gui:87912 | единственное определение типа; 5 вызовов `currency_symbol_country_panel = {}`; ~220 текстбоксов E&F удалены | панель страны (валюта), топбар |
 | Символ валюты в топбаре currency_symbol_top_bar (96 текстбоксов) | живой | gui/00_ef_deported_gui_2.gui:8567-9267; gui/topbar.gui:540 | 96 `GetCustom('currency_symbol_<cur>')` считаются каждый кадр — каждый одно сравнение var:zz_ef_cur (R1б.2); одна строка `currency_symbol` справилась бы | топбар (кнопка денег) |
 | Круг национального капитала ef_bp_national_capacity_piechart (ld-копия) | живой | gui/ld_national_capacity_chart.gui:12; gui/ld_economy_panel.gui:8273 | единственное определение; E&F-копия в 00_ef_deported_gui_2.gui отсутствует; ряд в металле стандарта | вкладка Экономика |
-| Круги держателей zz_ef_holders_piechart / zz_ef_bank_holders_piechart | живой | gui/ld_economy_panel.gui:9755,9797,2994-2995; common/scripted_guis/ld_cbfx.txt:410 | вызов в ld_economy_panel.gui:2994; список zz_ef_holders_list | вкладка Экономика |
+| Круг держателей zz_ef_holders_piechart | живой | gui/ld_economy_panel.gui; common/scripted_guis/ld_cbfx.txt:410 | вызов в ld_economy_panel.gui:2994; список zz_ef_holders_list | вкладка Экономика |
 | Таблица валют ЦБ (zz_ef_cbfx_update_sorted) | живой | common/scripted_guis/ld_cbfx.txt:106; gui/ld_economy_panel.gui:2971 | onclick GetScriptedGui('zz_ef_cbfx_update_sorted') | вкладка Экономика |
 | Таблицы держателей облигаций zz_ef_bt_in_list / zz_ef_bt_out_list | живой | common/scripted_guis/ld_bond_tables.txt; gui/ld_cb_rate_panel.gui | глобальные списки читаются GUI | вкладка Финансы |
 | Рынок валют: market_global_panel_content (купить/продать по валютам, 91 блок) | живой | gui/00_ef_deported_gui_1.gui:37-87835; gui/market_panel.gui:949 | вызов в market_panel.gui:949; кнопки зовут `<cur>_buy_in_gold`/`_sell_in_gold` (денежная логика — другие агенты) | панель рынка |

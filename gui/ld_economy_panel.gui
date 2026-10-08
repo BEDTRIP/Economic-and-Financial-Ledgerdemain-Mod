@@ -2936,7 +2936,6 @@ types zz_ef_economy_panel
 							direction = vertical
 
 							zz_ef_holders_piechart = {}
-							zz_ef_bank_holders_piechart = {}
 
 							widget = {
 								size = { @panel_width 30 }
@@ -6816,38 +6815,6 @@ types zz_ef_economy_panel
 									parentanchor = hcenter
 
 
-									flowcontainer = {
-										direction = vertical
-
-										spacing = 5
-
-										parentanchor = hcenter
-
-										textbox = {
-											using = fontsize_large
-											autoresize = yes
-											text = "total_currency_product"
-											parentanchor = hcenter
-											align = hcenter
-											multiline = yes
-											maximumsize = { 150 -1 }
-
-										}
-										textbox = {
-											using = fontsize_large
-											autoresize = yes
-											raw_text = "[GetPlayer.MakeScope.ScriptValue('currency_global_stokpile')|+D] [GetPlayer.GetCustom('currency_good')]"
-											parentanchor = hcenter
-											align = hcenter
-
-										}
-										background = {
-											using = entry_bg_simple
-											margin = { 10 10 }
-										}
-										minimumsize = { 230 40 }
-										maximumsize = { 230 100 }
-									}
 
 									flowcontainer = {
 										direction = vertical
@@ -6923,37 +6890,6 @@ types zz_ef_economy_panel
 										maximumsize = { 230 100 }
 									}
 
-									flowcontainer = {
-										direction = vertical
-
-										spacing = 5
-
-										textbox = {
-											using = fontsize_large
-											autoresize = yes
-											text = "currency_own_by_private_bank"
-											parentanchor = hcenter
-											align = hcenter
-											multiline = yes
-											maximumsize = { 225 -1 }
-
-
-										}
-										textbox = {
-											using = fontsize_large
-											autoresize = yes
-											raw_text = "[GetPlayer.MakeScope.ScriptValue('currency_own_by_private_bank')|+D] [GetPlayer.GetCustom('currency_good')]"
-											parentanchor = hcenter
-											align = hcenter
-
-										}
-										background = {
-											using = entry_bg_simple
-											margin = { 10 10 }
-										}
-										minimumsize = { 230 40 }
-										maximumsize = { 230 100 }
-									}
 								}
 							}
 
@@ -6975,7 +6911,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_dinar_c_global_stokpile_piechart = {}
-									ef_bp_dinar_c_private_bank_stokpile_piechart = {}
 								}
 								#dinar_algerian_dinar
 								flowcontainer = {
@@ -6986,7 +6921,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_dinar_algerian_dinar_c_global_stokpile_piechart = {}
-									ef_bp_dinar_algerian_dinar_c_private_bank_stokpile_piechart = {}
 								}
 								#dinar_iraqi_dinar
 								flowcontainer = {
@@ -6997,7 +6931,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_dinar_iraqi_dinar_c_global_stokpile_piechart = {}
-									ef_bp_dinar_iraqi_dinar_c_private_bank_stokpile_piechart = {}
 								}
 								#dinar_libyan_dinar
 								flowcontainer = {
@@ -7008,7 +6941,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_dinar_libyan_dinar_c_global_stokpile_piechart = {}
-									ef_bp_dinar_libyan_dinar_c_private_bank_stokpile_piechart = {}
 								}
 								#dinar_moroccan_dirham
 								flowcontainer = {
@@ -7019,7 +6951,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_dinar_moroccan_dirham_c_global_stokpile_piechart = {}
-									ef_bp_dinar_moroccan_dirham_c_private_bank_stokpile_piechart = {}
 								}
 								#dinar_omanian_rial
 								flowcontainer = {
@@ -7030,7 +6961,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_dinar_omanian_rial_c_global_stokpile_piechart = {}
-									ef_bp_dinar_omanian_rial_c_private_bank_stokpile_piechart = {}
 								}
 								#dinar_qiran
 								flowcontainer = {
@@ -7041,7 +6971,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_dinar_qiran_c_global_stokpile_piechart = {}
-									ef_bp_dinar_qiran_c_private_bank_stokpile_piechart = {}
 								}
 								#dinar_saudi_riyal
 								flowcontainer = {
@@ -7052,7 +6981,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_dinar_saudi_riyal_c_global_stokpile_piechart = {}
-									ef_bp_dinar_saudi_riyal_c_private_bank_stokpile_piechart = {}
 								}
 								#dinar_serbian_dinar
 								flowcontainer = {
@@ -7063,7 +6991,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_dinar_serbian_dinar_c_global_stokpile_piechart = {}
-									ef_bp_dinar_serbian_dinar_c_private_bank_stokpile_piechart = {}
 								}
 								#dinar_tunisian_dinar
 								flowcontainer = {
@@ -7074,7 +7001,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_dinar_tunisian_dinar_c_global_stokpile_piechart = {}
-									ef_bp_dinar_tunisian_dinar_c_private_bank_stokpile_piechart = {}
 								}
 								#dinar_yugoslav_dinar
 								flowcontainer = {
@@ -7085,7 +7011,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_dinar_yugoslav_dinar_c_global_stokpile_piechart = {}
-									ef_bp_dinar_yugoslav_dinar_c_private_bank_stokpile_piechart = {}
 								}
 								#dollar_australian_dollar
 								flowcontainer = {
@@ -7096,7 +7021,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_dollar_australian_dollar_c_global_stokpile_piechart = {}
-									ef_bp_dollar_australian_dollar_c_private_bank_stokpile_piechart = {}
 								}
 								#dollar_canadian_dollar
 								flowcontainer = {
@@ -7107,7 +7031,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_dollar_canadian_dollar_c_global_stokpile_piechart = {}
-									ef_bp_dollar_canadian_dollar_c_private_bank_stokpile_piechart = {}
 								}
 								#dollar_caribbean_dollar
 								flowcontainer = {
@@ -7118,7 +7041,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_dollar_caribbean_dollar_c_global_stokpile_piechart = {}
-									ef_bp_dollar_caribbean_dollar_c_private_bank_stokpile_piechart = {}
 								}
 								#dollar_confederate_states_dollar
 								flowcontainer = {
@@ -7129,7 +7051,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_dollar_confederate_states_dollar_c_global_stokpile_piechart = {}
-									ef_bp_dollar_confederate_states_dollar_c_private_bank_stokpile_piechart = {}
 								}
 								#dollar_liberian_dollar
 								flowcontainer = {
@@ -7140,7 +7061,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_dollar_liberian_dollar_c_global_stokpile_piechart = {}
-									ef_bp_dollar_liberian_dollar_c_private_bank_stokpile_piechart = {}
 								}
 								#dollar_new_zealand_dollar
 								flowcontainer = {
@@ -7151,7 +7071,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_dollar_new_zealand_dollar_c_global_stokpile_piechart = {}
-									ef_bp_dollar_new_zealand_dollar_c_private_bank_stokpile_piechart = {}
 								}
 								#dollar_sierra_leonean_dollar
 								flowcontainer = {
@@ -7162,7 +7081,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_dollar_sierra_leonean_dollar_c_global_stokpile_piechart = {}
-									ef_bp_dollar_sierra_leonean_dollar_c_private_bank_stokpile_piechart = {}
 								}
 								#dollar_united_states_dollar
 								flowcontainer = {
@@ -7173,7 +7091,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_dollar_united_states_dollar_c_global_stokpile_piechart = {}
-									ef_bp_dollar_united_states_dollar_c_private_bank_stokpile_piechart = {}
 								}
 								#eco_ariary
 								flowcontainer = {
@@ -7184,7 +7101,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_eco_ariary_c_global_stokpile_piechart = {}
-									ef_bp_eco_ariary_c_private_bank_stokpile_piechart = {}
 								}
 								#eco_central_african_eco
 								flowcontainer = {
@@ -7195,7 +7111,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_eco_central_african_eco_c_global_stokpile_piechart = {}
-									ef_bp_eco_central_african_eco_c_private_bank_stokpile_piechart = {}
 								}
 								#eco_east_african_eco
 								flowcontainer = {
@@ -7206,7 +7121,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_eco_east_african_eco_c_global_stokpile_piechart = {}
-									ef_bp_eco_east_african_eco_c_private_bank_stokpile_piechart = {}
 								}
 								#eco_ethiopian_birr
 								flowcontainer = {
@@ -7217,7 +7131,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_eco_ethiopian_birr_c_global_stokpile_piechart = {}
-									ef_bp_eco_ethiopian_birr_c_private_bank_stokpile_piechart = {}
 								}
 								#eco_ghanaian_pound
 								flowcontainer = {
@@ -7228,7 +7141,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_eco_ghanaian_pound_c_global_stokpile_piechart = {}
-									ef_bp_eco_ghanaian_pound_c_private_bank_stokpile_piechart = {}
 								}
 								#eco_nigerian_naira
 								flowcontainer = {
@@ -7239,7 +7151,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_eco_nigerian_naira_c_global_stokpile_piechart = {}
-									ef_bp_eco_nigerian_naira_c_private_bank_stokpile_piechart = {}
 								}
 								#eco_south_african_rand
 								flowcontainer = {
@@ -7250,7 +7161,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_eco_south_african_rand_c_global_stokpile_piechart = {}
-									ef_bp_eco_south_african_rand_c_private_bank_stokpile_piechart = {}
 								}
 								#eco_tuareg_ouguiya
 								flowcontainer = {
@@ -7261,7 +7171,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_eco_tuareg_ouguiya_c_global_stokpile_piechart = {}
-									ef_bp_eco_tuareg_ouguiya_c_private_bank_stokpile_piechart = {}
 								}
 								#eco_west_african_eco
 								flowcontainer = {
@@ -7272,7 +7181,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_eco_west_african_eco_c_global_stokpile_piechart = {}
-									ef_bp_eco_west_african_eco_c_private_bank_stokpile_piechart = {}
 								}
 								#franc_belgian_franc
 								flowcontainer = {
@@ -7283,7 +7191,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_franc_belgian_franc_c_global_stokpile_piechart = {}
-									ef_bp_franc_belgian_franc_c_private_bank_stokpile_piechart = {}
 								}
 								#franc_french_franc
 								flowcontainer = {
@@ -7294,7 +7201,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_franc_french_franc_c_global_stokpile_piechart = {}
-									ef_bp_franc_french_franc_c_private_bank_stokpile_piechart = {}
 								}
 								#franc_luxembourgish_franc
 								flowcontainer = {
@@ -7305,7 +7211,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_franc_luxembourgish_franc_c_global_stokpile_piechart = {}
-									ef_bp_franc_luxembourgish_franc_c_private_bank_stokpile_piechart = {}
 								}
 								#franc_swiss_franc
 								flowcontainer = {
@@ -7316,7 +7221,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_franc_swiss_franc_c_global_stokpile_piechart = {}
-									ef_bp_franc_swiss_franc_c_private_bank_stokpile_piechart = {}
 								}
 								#gulden
 								flowcontainer = {
@@ -7327,7 +7231,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_gulden_c_global_stokpile_piechart = {}
-									ef_bp_gulden_c_private_bank_stokpile_piechart = {}
 								}
 								#gulden_bavarian_gulden
 								flowcontainer = {
@@ -7338,7 +7241,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_gulden_bavarian_gulden_c_global_stokpile_piechart = {}
-									ef_bp_gulden_bavarian_gulden_c_private_bank_stokpile_piechart = {}
 								}
 								#gulden_florin
 								flowcontainer = {
@@ -7349,7 +7251,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_gulden_florin_c_global_stokpile_piechart = {}
-									ef_bp_gulden_florin_c_private_bank_stokpile_piechart = {}
 								}
 								#gulden_hungarian_forint
 								flowcontainer = {
@@ -7360,7 +7261,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_gulden_hungarian_forint_c_global_stokpile_piechart = {}
-									ef_bp_gulden_hungarian_forint_c_private_bank_stokpile_piechart = {}
 								}
 								#gulden_indies_guilder
 								flowcontainer = {
@@ -7371,7 +7271,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_gulden_indies_guilder_c_global_stokpile_piechart = {}
-									ef_bp_gulden_indies_guilder_c_private_bank_stokpile_piechart = {}
 								}
 								#gulden_south_german_gulden
 								flowcontainer = {
@@ -7382,7 +7281,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_gulden_south_german_gulden_c_global_stokpile_piechart = {}
-									ef_bp_gulden_south_german_gulden_c_private_bank_stokpile_piechart = {}
 								}
 								#krone_czech_koruna
 								flowcontainer = {
@@ -7393,7 +7291,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_krone_czech_koruna_c_global_stokpile_piechart = {}
-									ef_bp_krone_czech_koruna_c_private_bank_stokpile_piechart = {}
 								}
 								#krone_danish_krone
 								flowcontainer = {
@@ -7404,7 +7301,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_krone_danish_krone_c_global_stokpile_piechart = {}
-									ef_bp_krone_danish_krone_c_private_bank_stokpile_piechart = {}
 								}
 								#krone_estonian_kroon
 								flowcontainer = {
@@ -7415,7 +7311,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_krone_estonian_kroon_c_global_stokpile_piechart = {}
-									ef_bp_krone_estonian_kroon_c_private_bank_stokpile_piechart = {}
 								}
 								#krone_icelandic_krona
 								flowcontainer = {
@@ -7426,7 +7321,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_krone_icelandic_krona_c_global_stokpile_piechart = {}
-									ef_bp_krone_icelandic_krona_c_private_bank_stokpile_piechart = {}
 								}
 								#krone_norwegian_krone
 								flowcontainer = {
@@ -7437,7 +7331,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_krone_norwegian_krone_c_global_stokpile_piechart = {}
-									ef_bp_krone_norwegian_krone_c_private_bank_stokpile_piechart = {}
 								}
 								#krone_slovak_koruna
 								flowcontainer = {
@@ -7448,7 +7341,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_krone_slovak_koruna_c_global_stokpile_piechart = {}
-									ef_bp_krone_slovak_koruna_c_private_bank_stokpile_piechart = {}
 								}
 								#krone_swedish_krona
 								flowcontainer = {
@@ -7459,7 +7351,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_krone_swedish_krona_c_global_stokpile_piechart = {}
-									ef_bp_krone_swedish_krona_c_private_bank_stokpile_piechart = {}
 								}
 								#leon_leu
 								flowcontainer = {
@@ -7470,7 +7361,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_leon_leu_c_global_stokpile_piechart = {}
-									ef_bp_leon_leu_c_private_bank_stokpile_piechart = {}
 								}
 								#leon_lev
 								flowcontainer = {
@@ -7481,7 +7371,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_leon_lev_c_global_stokpile_piechart = {}
-									ef_bp_leon_lev_c_private_bank_stokpile_piechart = {}
 								}
 								#lira
 								flowcontainer = {
@@ -7492,7 +7381,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_lira_c_global_stokpile_piechart = {}
-									ef_bp_lira_c_private_bank_stokpile_piechart = {}
 								}
 								#lira_ducato
 								flowcontainer = {
@@ -7503,7 +7391,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_lira_ducato_c_global_stokpile_piechart = {}
-									ef_bp_lira_ducato_c_private_bank_stokpile_piechart = {}
 								}
 								#lira_ottoman_lira
 								flowcontainer = {
@@ -7514,7 +7401,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_lira_ottoman_lira_c_global_stokpile_piechart = {}
-									ef_bp_lira_ottoman_lira_c_private_bank_stokpile_piechart = {}
 								}
 								#lira_scudo_pontificio
 								flowcontainer = {
@@ -7525,7 +7411,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_lira_scudo_pontificio_c_global_stokpile_piechart = {}
-									ef_bp_lira_scudo_pontificio_c_private_bank_stokpile_piechart = {}
 								}
 								#lira_scudo_sardo
 								flowcontainer = {
@@ -7536,7 +7421,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_lira_scudo_sardo_c_global_stokpile_piechart = {}
-									ef_bp_lira_scudo_sardo_c_private_bank_stokpile_piechart = {}
 								}
 								#lira_toscane_lira
 								flowcontainer = {
@@ -7547,7 +7431,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_lira_toscane_lira_c_global_stokpile_piechart = {}
-									ef_bp_lira_toscane_lira_c_private_bank_stokpile_piechart = {}
 								}
 								#mark
 								flowcontainer = {
@@ -7558,7 +7441,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_mark_c_global_stokpile_piechart = {}
-									ef_bp_mark_c_private_bank_stokpile_piechart = {}
 								}
 								#mark_finnish_markka
 								flowcontainer = {
@@ -7569,7 +7451,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_mark_finnish_markka_c_global_stokpile_piechart = {}
-									ef_bp_mark_finnish_markka_c_private_bank_stokpile_piechart = {}
 								}
 								#peso
 								flowcontainer = {
@@ -7580,7 +7461,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_peso_c_global_stokpile_piechart = {}
-									ef_bp_peso_c_private_bank_stokpile_piechart = {}
 								}
 								#peso_argentine_peso
 								flowcontainer = {
@@ -7591,7 +7471,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_peso_argentine_peso_c_global_stokpile_piechart = {}
-									ef_bp_peso_argentine_peso_c_private_bank_stokpile_piechart = {}
 								}
 								#peso_bolivien_peso
 								flowcontainer = {
@@ -7602,7 +7481,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_peso_bolivien_peso_c_global_stokpile_piechart = {}
-									ef_bp_peso_bolivien_peso_c_private_bank_stokpile_piechart = {}
 								}
 								#peso_chilean_peso
 								flowcontainer = {
@@ -7613,7 +7491,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_peso_chilean_peso_c_global_stokpile_piechart = {}
-									ef_bp_peso_chilean_peso_c_private_bank_stokpile_piechart = {}
 								}
 								#peso_colombian_peso
 								flowcontainer = {
@@ -7624,7 +7501,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_peso_colombian_peso_c_global_stokpile_piechart = {}
-									ef_bp_peso_colombian_peso_c_private_bank_stokpile_piechart = {}
 								}
 								#peso_costa_rican_colon
 								flowcontainer = {
@@ -7635,7 +7511,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_peso_costa_rican_colon_c_global_stokpile_piechart = {}
-									ef_bp_peso_costa_rican_colon_c_private_bank_stokpile_piechart = {}
 								}
 								#peso_cuban_peso
 								flowcontainer = {
@@ -7646,7 +7521,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_peso_cuban_peso_c_global_stokpile_piechart = {}
-									ef_bp_peso_cuban_peso_c_private_bank_stokpile_piechart = {}
 								}
 								#peso_ecuadorian_peso
 								flowcontainer = {
@@ -7657,7 +7531,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_peso_ecuadorian_peso_c_global_stokpile_piechart = {}
-									ef_bp_peso_ecuadorian_peso_c_private_bank_stokpile_piechart = {}
 								}
 								#peso_el_salvador_colon
 								flowcontainer = {
@@ -7668,7 +7541,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_peso_el_salvador_colon_c_global_stokpile_piechart = {}
-									ef_bp_peso_el_salvador_colon_c_private_bank_stokpile_piechart = {}
 								}
 								#peso_guatemalan_quetzal
 								flowcontainer = {
@@ -7679,7 +7551,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_peso_guatemalan_quetzal_c_global_stokpile_piechart = {}
-									ef_bp_peso_guatemalan_quetzal_c_private_bank_stokpile_piechart = {}
 								}
 								#peso_honduran_lempira
 								flowcontainer = {
@@ -7690,7 +7561,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_peso_honduran_lempira_c_global_stokpile_piechart = {}
-									ef_bp_peso_honduran_lempira_c_private_bank_stokpile_piechart = {}
 								}
 								#peso_mexican_peso
 								flowcontainer = {
@@ -7701,7 +7571,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_peso_mexican_peso_c_global_stokpile_piechart = {}
-									ef_bp_peso_mexican_peso_c_private_bank_stokpile_piechart = {}
 								}
 								#peso_nicaraguan_cordoba
 								flowcontainer = {
@@ -7712,7 +7581,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_peso_nicaraguan_cordoba_c_global_stokpile_piechart = {}
-									ef_bp_peso_nicaraguan_cordoba_c_private_bank_stokpile_piechart = {}
 								}
 								#peso_paraguayan_peso
 								flowcontainer = {
@@ -7723,7 +7591,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_peso_paraguayan_peso_c_global_stokpile_piechart = {}
-									ef_bp_peso_paraguayan_peso_c_private_bank_stokpile_piechart = {}
 								}
 								#peso_philippine_peso
 								flowcontainer = {
@@ -7734,7 +7601,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_peso_philippine_peso_c_global_stokpile_piechart = {}
-									ef_bp_peso_philippine_peso_c_private_bank_stokpile_piechart = {}
 								}
 								#peso_sol_de_oro
 								flowcontainer = {
@@ -7745,7 +7611,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_peso_sol_de_oro_c_global_stokpile_piechart = {}
-									ef_bp_peso_sol_de_oro_c_private_bank_stokpile_piechart = {}
 								}
 								#peso_uruguayan_peso
 								flowcontainer = {
@@ -7756,7 +7621,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_peso_uruguayan_peso_c_global_stokpile_piechart = {}
-									ef_bp_peso_uruguayan_peso_c_private_bank_stokpile_piechart = {}
 								}
 								#peso_venezuelan_peso
 								flowcontainer = {
@@ -7767,7 +7631,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_peso_venezuelan_peso_c_global_stokpile_piechart = {}
-									ef_bp_peso_venezuelan_peso_c_private_bank_stokpile_piechart = {}
 								}
 								#pound_egyptian_pound
 								flowcontainer = {
@@ -7778,7 +7641,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_pound_egyptian_pound_c_global_stokpile_piechart = {}
-									ef_bp_pound_egyptian_pound_c_private_bank_stokpile_piechart = {}
 								}
 								#pound_irish_pound
 								flowcontainer = {
@@ -7789,7 +7651,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_pound_irish_pound_c_global_stokpile_piechart = {}
-									ef_bp_pound_irish_pound_c_private_bank_stokpile_piechart = {}
 								}
 								#pound_sterling
 								flowcontainer = {
@@ -7800,7 +7661,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_pound_sterling_c_global_stokpile_piechart = {}
-									ef_bp_pound_sterling_c_private_bank_stokpile_piechart = {}
 								}
 								#real
 								flowcontainer = {
@@ -7811,7 +7671,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_real_c_global_stokpile_piechart = {}
-									ef_bp_real_c_private_bank_stokpile_piechart = {}
 								}
 								#real_brazilian_real
 								flowcontainer = {
@@ -7822,7 +7681,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_real_brazilian_real_c_global_stokpile_piechart = {}
-									ef_bp_real_brazilian_real_c_private_bank_stokpile_piechart = {}
 								}
 								#rupee_indian_rupee
 								flowcontainer = {
@@ -7833,7 +7691,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_rupee_indian_rupee_c_global_stokpile_piechart = {}
-									ef_bp_rupee_indian_rupee_c_private_bank_stokpile_piechart = {}
 								}
 								#rupee_indonesian_rupiah
 								flowcontainer = {
@@ -7844,7 +7701,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_rupee_indonesian_rupiah_c_global_stokpile_piechart = {}
-									ef_bp_rupee_indonesian_rupiah_c_private_bank_stokpile_piechart = {}
 								}
 								#spe_baht
 								flowcontainer = {
@@ -7855,7 +7711,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_spe_baht_c_global_stokpile_piechart = {}
-									ef_bp_spe_baht_c_private_bank_stokpile_piechart = {}
 								}
 								#spe_dong
 								flowcontainer = {
@@ -7866,7 +7721,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_spe_dong_c_global_stokpile_piechart = {}
-									ef_bp_spe_dong_c_private_bank_stokpile_piechart = {}
 								}
 								#spe_drachma
 								flowcontainer = {
@@ -7877,7 +7731,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_spe_drachma_c_global_stokpile_piechart = {}
-									ef_bp_spe_drachma_c_private_bank_stokpile_piechart = {}
 								}
 								#spe_korean_won
 								flowcontainer = {
@@ -7888,7 +7741,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_spe_korean_won_c_global_stokpile_piechart = {}
-									ef_bp_spe_korean_won_c_private_bank_stokpile_piechart = {}
 								}
 								#spe_latvian_lats
 								flowcontainer = {
@@ -7899,7 +7751,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_spe_latvian_lats_c_global_stokpile_piechart = {}
-									ef_bp_spe_latvian_lats_c_private_bank_stokpile_piechart = {}
 								}
 								#spe_lithuanian_litas
 								flowcontainer = {
@@ -7910,7 +7761,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_spe_lithuanian_litas_c_global_stokpile_piechart = {}
-									ef_bp_spe_lithuanian_litas_c_private_bank_stokpile_piechart = {}
 								}
 								#spe_peseta
 								flowcontainer = {
@@ -7921,7 +7771,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_spe_peseta_c_global_stokpile_piechart = {}
-									ef_bp_spe_peseta_c_private_bank_stokpile_piechart = {}
 								}
 								#spe_ruble
 								flowcontainer = {
@@ -7932,7 +7781,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_spe_ruble_c_global_stokpile_piechart = {}
-									ef_bp_spe_ruble_c_private_bank_stokpile_piechart = {}
 								}
 								#spe_uni
 								flowcontainer = {
@@ -7943,7 +7791,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_spe_uni_c_global_stokpile_piechart = {}
-									ef_bp_spe_uni_c_private_bank_stokpile_piechart = {}
 								}
 								#spe_yen
 								flowcontainer = {
@@ -7954,7 +7801,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_spe_yen_c_global_stokpile_piechart = {}
-									ef_bp_spe_yen_c_private_bank_stokpile_piechart = {}
 								}
 								#spe_yuan
 								flowcontainer = {
@@ -7965,7 +7811,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_spe_yuan_c_global_stokpile_piechart = {}
-									ef_bp_spe_yuan_c_private_bank_stokpile_piechart = {}
 								}
 								#spe_zloti
 								flowcontainer = {
@@ -7976,7 +7821,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_spe_zloti_c_global_stokpile_piechart = {}
-									ef_bp_spe_zloti_c_private_bank_stokpile_piechart = {}
 								}
 								#thaler_hannoveraner_thaler
 								flowcontainer = {
@@ -7987,7 +7831,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_thaler_hannoveraner_thaler_c_global_stokpile_piechart = {}
-									ef_bp_thaler_hannoveraner_thaler_c_private_bank_stokpile_piechart = {}
 								}
 								#thaler_prussian_thaler
 								flowcontainer = {
@@ -7998,7 +7841,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_thaler_prussian_thaler_c_global_stokpile_piechart = {}
-									ef_bp_thaler_prussian_thaler_c_private_bank_stokpile_piechart = {}
 								}
 								#thaler_saxon_thaler
 								flowcontainer = {
@@ -8009,7 +7851,6 @@ types zz_ef_economy_panel
 									spacing = 5
 
 									ef_bp_thaler_saxon_thaler_c_global_stokpile_piechart = {}
-									ef_bp_thaler_saxon_thaler_c_private_bank_stokpile_piechart = {}
 								}
 							}
 						}
@@ -9692,45 +9533,4 @@ types zz_ef_economy_panel
 		}
 	}
 
-	# Е.2 (5.10): E&F's private banks holding our currency (zz_ef_holders_update, company var:zz_ef_bank_holds_pc)
-	type zz_ef_bank_holders_piechart = chart {
-		blockoverride "datamodel" {
-			datamodel = "[GetGlobalList('zz_ef_bank_holders_list')]"
-		}
-		blockoverride "heading" {
-			text = "zz_ef_ep_bank_holders_title"
-		}
-		blockoverride "pieslice" {
-			# a float, as vanilla's charts (GetCloutAsFloat); a formatted string drew nothing (run clr3) -- E&F's own pies
-			# pass one too and drew a red square
-			value = "[FixedPointToFloat(Scope.GetCompany.MakeScope.Var('zz_ef_bank_holds_pc').GetValue)]"
-		}
-		blockoverride "color" {
-			color = "[Scope.GetCompany.GetCountry.GetMapColor]"
-		}
-		blockoverride "leftside_info" {
-			raw_text = "[Scope.GetCompany.GetNameNoIcon]"
-		}
-		blockoverride "rightside1_info" {
-			raw_text = "#bold [Scope.GetCompany.MakeScope.Var('zz_ef_bank_holds_pc').GetValue|D]#! [GetPlayer.GetCustom('currency_symbol')]"
-		}
-		blockoverride "rightside2_info" {
-			raw_text = ""
-		}
-		blockoverride "pie_item_goto_button" {
-			button = {
-				using = clean_button
-				size = { 100% 100% }
-			}
-		}
-		blockoverride "piechartsize" {
-			size = { 200 200 }
-		}
-		blockoverride "minimumsize" {
-			minimumsize = { 100 -1 }
-		}
-		blockoverride "maxverticalslots" {
-			maxverticalslots = 10
-		}
-	}
 }

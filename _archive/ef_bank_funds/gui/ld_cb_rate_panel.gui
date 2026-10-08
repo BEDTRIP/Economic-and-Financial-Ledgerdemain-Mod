@@ -1,0 +1,4560 @@
+﻿# From gui/ld_cb_rate_panel.gui.
+
+# --- Finances, private banks: summary box «private_bank_bond_holdings»
+							flowcontainer = {
+								spacing = 5
+								direction = vertical
+
+								textbox = {
+									autoresize = yes
+									text = "private_bank_bond_holdings"
+									fontsize = 15
+
+									align = hcenter
+									parentanchor = hcenter
+									multiline = yes
+									minimumsize = { 150 40 }
+									maximumsize = { 150 -1 }
+									default_format = "#white #bold"
+								}
+
+								textbox = {
+									autoresize = yes
+									raw_text = "[GetPlayer.MakeScope.ScriptValue('funds_from_foreign_debt_total')|D] [GetPlayer.GetCustom('monetary_system')]"
+									align = nobaseline
+									parentanchor = Hcenter
+									fontsize = 20
+									default_format = "#white #bold"
+								}
+
+								background = {
+									using = entry_bg_simple
+									margin = { 10 10 }
+								}
+
+								minimumsize = { 150 40 }
+								maximumsize = { 150 -1 }
+							}
+
+# --- Finances, private banks: summary box «private_bank_foreign_reserves»
+							flowcontainer = {
+								spacing = 5
+								direction = vertical
+
+								textbox = {
+									autoresize = yes
+									text = "private_bank_foreign_reserves"
+									fontsize = 15
+
+									align = hcenter
+									parentanchor = hcenter
+									multiline = yes
+									minimumsize = { 150 40 }
+									maximumsize = { 150 -1 }
+									default_format = "#white #bold"
+								}
+
+								textbox = {
+									autoresize = yes
+									raw_text = "[GetPlayer.MakeScope.ScriptValue('private_bank_foreign_reserves_per_bank')|D] @gold!"
+									align = nobaseline
+									parentanchor = Hcenter
+									fontsize = 20
+									default_format = "#white #bold"
+								}
+
+								background = {
+									using = entry_bg_simple
+									margin = { 10 10 }
+								}
+
+								minimumsize = { 150 40 }
+								maximumsize = { 150 -1 }
+							}
+
+# --- Finances, private banks table row: funds textbox
+											textbox = {
+												datacontext = "[Scope.GetCompany]"
+
+												raw_text = "@bond! [Company.MakeScope.ScriptValue('funds_from_foreign_debt')|D] @gold!"
+
+												fontsize = 18
+												default_format = "#white #bold"
+												margin_left = 0
+												margin_bottom = 1
+												elide = right
+												align = Hcenter|nobaseline
+												parentanchor = left
+												alwaystransparent = yes
+											}
+
+# --- Finances, private banks table row: foreign currency textbox
+											textbox = {
+												datacontext = "[Scope.GetCompany]"
+
+												raw_text = "@spe_uni_c! [Company.MakeScope.ScriptValue('private_bank_foreign_reserves_per_bank_gui')|D] @gold!"
+
+												fontsize = 18
+												default_format = "#white #bold"
+												margin_left = 0
+												margin_bottom = 1
+												elide = right
+												align = Hcenter|nobaseline
+												parentanchor = left
+												alwaystransparent = yes
+											}
+
+# --- Finances: company_Rothschild_Bank_gbr — its currencies, header
+				#company_Rothschild_Bank_gbr
+				section_header_button = {
+					visible = "[GetScriptedGui('company_Rothschild_Bank_gbr_privat_bank_foreign_reserves_visible').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					#visible = "[GetVariableSystem.Exists('is_ai')]"
+
+					blockoverride "left_text" {
+						text = "company_Rothschild_Bank_gbr_privat_bank_foreign_reserves"
+					}
+
+					blockoverride "onclick" {
+						onclick = "[GetVariableSystem.Toggle('company_Rothschild_Bank_gbr_privat_bank_foreign_reserves')]"
+						onclick = "[GetScriptedGui('update_company_Rothschild_Bank_gbr_currency_stored_liste').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					}
+
+					blockoverride "onclick_showmore" {
+						visible = "[Not(GetVariableSystem.Exists('company_Rothschild_Bank_gbr_privat_bank_foreign_reserves'))]"
+					}
+
+					blockoverride "onclick_showless" {
+						visible = "[GetVariableSystem.Exists('company_Rothschild_Bank_gbr_privat_bank_foreign_reserves')]"
+					}
+				}
+
+# --- Finances: company_Rothschild_Bank_gbr — its currencies, list
+					flowcontainer = {
+						direction = vertical
+						datamodel = "[GetGlobalList('company_Rothschild_Bank_gbr_privat_bank_stored_currency')]"
+
+						item = {
+							button = {
+								using = default_button
+								size = { @panel_width 40 }
+
+								hbox = {
+									margin = { 12 0 }
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_name_currency'))]"
+
+										#margin_bottom = -17
+										#fontsize = 17
+										margin_left = 0
+										elide = right
+										align = left|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 1
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_money_value_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+								}
+							}
+						}
+					}
+
+# --- Finances: company_Rothschild_Bank_fra — its currencies, header
+				#company_Rothschild_Bank_fra
+				section_header_button = {
+					visible = "[GetScriptedGui('company_Rothschild_Bank_fra_privat_bank_foreign_reserves_visible').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					#visible = "[GetVariableSystem.Exists('is_ai')]"
+
+					blockoverride "left_text" {
+						text = "company_Rothschild_Bank_fra_privat_bank_foreign_reserves"
+					}
+
+					blockoverride "onclick" {
+						onclick = "[GetVariableSystem.Toggle('company_Rothschild_Bank_fra_privat_bank_foreign_reserves')]"
+						onclick = "[GetScriptedGui('update_company_Rothschild_Bank_fra_currency_stored_liste').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					}
+
+					blockoverride "onclick_showmore" {
+						visible = "[Not(GetVariableSystem.Exists('company_Rothschild_Bank_fra_privat_bank_foreign_reserves'))]"
+					}
+
+					blockoverride "onclick_showless" {
+						visible = "[GetVariableSystem.Exists('company_Rothschild_Bank_fra_privat_bank_foreign_reserves')]"
+					}
+				}
+
+# --- Finances: company_Rothschild_Bank_fra — its currencies, list
+					flowcontainer = {
+						direction = vertical
+						datamodel = "[GetGlobalList('company_Rothschild_Bank_fra_privat_bank_stored_currency')]"
+
+						item = {
+							button = {
+								using = default_button
+								size = { @panel_width 40 }
+
+								hbox = {
+									margin = { 12 0 }
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_name_currency'))]"
+
+										#margin_bottom = -17
+										#fontsize = 17
+										margin_left = 0
+										elide = right
+										align = left|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 1
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_money_value_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+								}
+							}
+						}
+					}
+
+# --- Finances: company_Rothschild_Bank_ger — its currencies, header
+				#company_Rothschild_Bank_ger
+				section_header_button = {
+					visible = "[GetScriptedGui('company_Rothschild_Bank_ger_privat_bank_foreign_reserves_visible').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					#visible = "[GetVariableSystem.Exists('is_ai')]"
+
+					blockoverride "left_text" {
+						text = "company_Rothschild_Bank_ger_privat_bank_foreign_reserves"
+					}
+
+					blockoverride "onclick" {
+						onclick = "[GetVariableSystem.Toggle('company_Rothschild_Bank_ger_privat_bank_foreign_reserves')]"
+						onclick = "[GetScriptedGui('update_company_Rothschild_Bank_ger_currency_stored_liste').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					}
+
+					blockoverride "onclick_showmore" {
+						visible = "[Not(GetVariableSystem.Exists('company_Rothschild_Bank_ger_privat_bank_foreign_reserves'))]"
+					}
+
+					blockoverride "onclick_showless" {
+						visible = "[GetVariableSystem.Exists('company_Rothschild_Bank_ger_privat_bank_foreign_reserves')]"
+					}
+				}
+
+# --- Finances: company_Rothschild_Bank_ger — its currencies, list
+					flowcontainer = {
+						direction = vertical
+						datamodel = "[GetGlobalList('company_Rothschild_Bank_ger_privat_bank_stored_currency')]"
+
+						item = {
+							button = {
+								using = default_button
+								size = { @panel_width 40 }
+
+								hbox = {
+									margin = { 12 0 }
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_name_currency'))]"
+
+										#margin_bottom = -17
+										#fontsize = 17
+										margin_left = 0
+										elide = right
+										align = left|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 1
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_money_value_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+								}
+							}
+						}
+					}
+
+# --- Finances: company_Rothschild_Bank_aus — its currencies, header
+				#company_Rothschild_Bank_aus
+				section_header_button = {
+					visible = "[GetScriptedGui('company_Rothschild_Bank_aus_privat_bank_foreign_reserves_visible').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					#visible = "[GetVariableSystem.Exists('is_ai')]"
+
+					blockoverride "left_text" {
+						text = "company_Rothschild_Bank_aus_privat_bank_foreign_reserves"
+					}
+
+					blockoverride "onclick" {
+						onclick = "[GetVariableSystem.Toggle('company_Rothschild_Bank_aus_privat_bank_foreign_reserves')]"
+						onclick = "[GetScriptedGui('update_company_Rothschild_Bank_aus_currency_stored_liste').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					}
+
+					blockoverride "onclick_showmore" {
+						visible = "[Not(GetVariableSystem.Exists('company_Rothschild_Bank_aus_privat_bank_foreign_reserves'))]"
+					}
+
+					blockoverride "onclick_showless" {
+						visible = "[GetVariableSystem.Exists('company_Rothschild_Bank_aus_privat_bank_foreign_reserves')]"
+					}
+				}
+
+# --- Finances: company_Rothschild_Bank_aus — its currencies, list
+					flowcontainer = {
+						direction = vertical
+						datamodel = "[GetGlobalList('company_Rothschild_Bank_aus_privat_bank_stored_currency')]"
+
+						item = {
+							button = {
+								using = default_button
+								size = { @panel_width 40 }
+
+								hbox = {
+									margin = { 12 0 }
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_name_currency'))]"
+
+										#margin_bottom = -17
+										#fontsize = 17
+										margin_left = 0
+										elide = right
+										align = left|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 1
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_money_value_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+								}
+							}
+						}
+					}
+
+# --- Finances: company_Rothschild_Bank_ita — its currencies, header
+				#company_Rothschild_Bank_ita
+				section_header_button = {
+					visible = "[GetScriptedGui('company_Rothschild_Bank_ita_privat_bank_foreign_reserves_visible').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					#visible = "[GetVariableSystem.Exists('is_ai')]"
+
+					blockoverride "left_text" {
+						text = "company_Rothschild_Bank_ita_privat_bank_foreign_reserves"
+					}
+
+					blockoverride "onclick" {
+						onclick = "[GetVariableSystem.Toggle('company_Rothschild_Bank_ita_privat_bank_foreign_reserves')]"
+						onclick = "[GetScriptedGui('update_company_Rothschild_Bank_ita_currency_stored_liste').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					}
+
+					blockoverride "onclick_showmore" {
+						visible = "[Not(GetVariableSystem.Exists('company_Rothschild_Bank_ita_privat_bank_foreign_reserves'))]"
+					}
+
+					blockoverride "onclick_showless" {
+						visible = "[GetVariableSystem.Exists('company_Rothschild_Bank_ita_privat_bank_foreign_reserves')]"
+					}
+				}
+
+# --- Finances: company_Rothschild_Bank_ita — its currencies, list
+					flowcontainer = {
+						direction = vertical
+						datamodel = "[GetGlobalList('company_Rothschild_Bank_ita_privat_bank_stored_currency')]"
+
+						item = {
+							button = {
+								using = default_button
+								size = { @panel_width 40 }
+
+								hbox = {
+									margin = { 12 0 }
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_name_currency'))]"
+
+										#margin_bottom = -17
+										#fontsize = 17
+										margin_left = 0
+										elide = right
+										align = left|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 1
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_money_value_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+								}
+							}
+						}
+					}
+
+# --- Finances: company_BanqueDeParisEtDesPaysBas — its currencies, header
+				#company_BanqueDeParisEtDesPaysBas
+				section_header_button = {
+					visible = "[GetScriptedGui('company_BanqueDeParisEtDesPaysBas_privat_bank_foreign_reserves_visible').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					#visible = "[GetVariableSystem.Exists('is_ai')]"
+
+					blockoverride "left_text" {
+						text = "company_BanqueDeParisEtDesPaysBas_privat_bank_foreign_reserves"
+					}
+
+					blockoverride "onclick" {
+						onclick = "[GetVariableSystem.Toggle('company_BanqueDeParisEtDesPaysBas_privat_bank_foreign_reserves')]"
+						onclick = "[GetScriptedGui('update_company_BanqueDeParisEtDesPaysBas_currency_stored_liste').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					}
+
+					blockoverride "onclick_showmore" {
+						visible = "[Not(GetVariableSystem.Exists('company_BanqueDeParisEtDesPaysBas_privat_bank_foreign_reserves'))]"
+					}
+
+					blockoverride "onclick_showless" {
+						visible = "[GetVariableSystem.Exists('company_BanqueDeParisEtDesPaysBas_privat_bank_foreign_reserves')]"
+					}
+				}
+
+# --- Finances: company_BanqueDeParisEtDesPaysBas — its currencies, list
+					flowcontainer = {
+						direction = vertical
+						datamodel = "[GetGlobalList('company_BanqueDeParisEtDesPaysBas_privat_bank_stored_currency')]"
+
+						item = {
+							button = {
+								using = default_button
+								size = { @panel_width 40 }
+
+								hbox = {
+									margin = { 12 0 }
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_name_currency'))]"
+
+										#margin_bottom = -17
+										#fontsize = 17
+										margin_left = 0
+										elide = right
+										align = left|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 1
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_money_value_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+								}
+							}
+						}
+					}
+
+# --- Finances: company_BankJPMorgan — its currencies, header
+				#company_BankJPMorgan
+				section_header_button = {
+					visible = "[GetScriptedGui('company_BankJPMorgan_privat_bank_foreign_reserves_visible').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					#visible = "[GetVariableSystem.Exists('is_ai')]"
+
+					blockoverride "left_text" {
+						text = "company_BankJPMorgan_privat_bank_foreign_reserves"
+					}
+
+					blockoverride "onclick" {
+						onclick = "[GetVariableSystem.Toggle('company_BankJPMorgan_privat_bank_foreign_reserves')]"
+						onclick = "[GetScriptedGui('update_company_BankJPMorgan_currency_stored_liste').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					}
+
+					blockoverride "onclick_showmore" {
+						visible = "[Not(GetVariableSystem.Exists('company_BankJPMorgan_privat_bank_foreign_reserves'))]"
+					}
+
+					blockoverride "onclick_showless" {
+						visible = "[GetVariableSystem.Exists('company_BankJPMorgan_privat_bank_foreign_reserves')]"
+					}
+				}
+
+# --- Finances: company_BankJPMorgan — its currencies, list
+					flowcontainer = {
+						direction = vertical
+						datamodel = "[GetGlobalList('company_BankJPMorgan_privat_bank_stored_currency')]"
+
+						item = {
+							button = {
+								using = default_button
+								size = { @panel_width 40 }
+
+								hbox = {
+									margin = { 12 0 }
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_name_currency'))]"
+
+										#margin_bottom = -17
+										#fontsize = 17
+										margin_left = 0
+										elide = right
+										align = left|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 1
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_money_value_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+								}
+							}
+						}
+					}
+
+# --- Finances: company_DeutscheBank — its currencies, header
+				#company_DeutscheBank
+				section_header_button = {
+					visible = "[GetScriptedGui('company_DeutscheBank_privat_bank_foreign_reserves_visible').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					#visible = "[GetVariableSystem.Exists('is_ai')]"
+
+					blockoverride "left_text" {
+						text = "company_DeutscheBank_privat_bank_foreign_reserves"
+					}
+
+					blockoverride "onclick" {
+						onclick = "[GetVariableSystem.Toggle('company_DeutscheBank_privat_bank_foreign_reserves')]"
+						onclick = "[GetScriptedGui('update_company_DeutscheBank_currency_stored_liste').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					}
+
+					blockoverride "onclick_showmore" {
+						visible = "[Not(GetVariableSystem.Exists('company_DeutscheBank_privat_bank_foreign_reserves'))]"
+					}
+
+					blockoverride "onclick_showless" {
+						visible = "[GetVariableSystem.Exists('company_DeutscheBank_privat_bank_foreign_reserves')]"
+					}
+				}
+
+# --- Finances: company_DeutscheBank — its currencies, list
+					flowcontainer = {
+						direction = vertical
+						datamodel = "[GetGlobalList('company_DeutscheBank_privat_bank_stored_currency')]"
+
+						item = {
+							button = {
+								using = default_button
+								size = { @panel_width 40 }
+
+								hbox = {
+									margin = { 12 0 }
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_name_currency'))]"
+
+										#margin_bottom = -17
+										#fontsize = 17
+										margin_left = 0
+										elide = right
+										align = left|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 1
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_money_value_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+								}
+							}
+						}
+					}
+
+# --- Finances: company_BankHSBC — its currencies, header
+				#company_BankHSBC
+				section_header_button = {
+					visible = "[GetScriptedGui('company_BankHSBC_privat_bank_foreign_reserves_visible').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					#visible = "[GetVariableSystem.Exists('is_ai')]"
+
+					blockoverride "left_text" {
+						text = "company_BankHSBC_privat_bank_foreign_reserves"
+					}
+
+					blockoverride "onclick" {
+						onclick = "[GetVariableSystem.Toggle('company_BankHSBC_privat_bank_foreign_reserves')]"
+						onclick = "[GetScriptedGui('update_company_BankHSBC_currency_stored_liste').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					}
+
+					blockoverride "onclick_showmore" {
+						visible = "[Not(GetVariableSystem.Exists('company_BankHSBC_privat_bank_foreign_reserves'))]"
+					}
+
+					blockoverride "onclick_showless" {
+						visible = "[GetVariableSystem.Exists('company_BankHSBC_privat_bank_foreign_reserves')]"
+					}
+				}
+
+# --- Finances: company_BankHSBC — its currencies, list
+					flowcontainer = {
+						direction = vertical
+						datamodel = "[GetGlobalList('company_BankHSBC_privat_bank_stored_currency')]"
+
+						item = {
+							button = {
+								using = default_button
+								size = { @panel_width 40 }
+
+								hbox = {
+									margin = { 12 0 }
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_name_currency'))]"
+
+										#margin_bottom = -17
+										#fontsize = 17
+										margin_left = 0
+										elide = right
+										align = left|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 1
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_money_value_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+								}
+							}
+						}
+					}
+
+# --- Finances: company_Bankenverein — its currencies, header
+				#company_Bankenverein
+				section_header_button = {
+					visible = "[GetScriptedGui('company_Bankenverein_privat_bank_foreign_reserves_visible').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					#visible = "[GetVariableSystem.Exists('is_ai')]"
+
+					blockoverride "left_text" {
+						text = "company_Bankenverein_privat_bank_foreign_reserves"
+					}
+
+					blockoverride "onclick" {
+						onclick = "[GetVariableSystem.Toggle('company_Bankenverein_privat_bank_foreign_reserves')]"
+						onclick = "[GetScriptedGui('update_company_Bankenverein_currency_stored_liste').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					}
+
+					blockoverride "onclick_showmore" {
+						visible = "[Not(GetVariableSystem.Exists('company_Bankenverein_privat_bank_foreign_reserves'))]"
+					}
+
+					blockoverride "onclick_showless" {
+						visible = "[GetVariableSystem.Exists('company_Bankenverein_privat_bank_foreign_reserves')]"
+					}
+				}
+
+# --- Finances: company_Bankenverein — its currencies, list
+					flowcontainer = {
+						direction = vertical
+						datamodel = "[GetGlobalList('company_Bankenverein_privat_bank_stored_currency')]"
+
+						item = {
+							button = {
+								using = default_button
+								size = { @panel_width 40 }
+
+								hbox = {
+									margin = { 12 0 }
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_name_currency'))]"
+
+										#margin_bottom = -17
+										#fontsize = 17
+										margin_left = 0
+										elide = right
+										align = left|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 1
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_money_value_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+								}
+							}
+						}
+					}
+
+# --- Finances: company_BancaCommercialeItaliana — its currencies, header
+				#company_BancaCommercialeItaliana
+				section_header_button = {
+					visible = "[GetScriptedGui('company_BancaCommercialeItaliana_privat_bank_foreign_reserves_visible').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					#visible = "[GetVariableSystem.Exists('is_ai')]"
+
+					blockoverride "left_text" {
+						text = "company_BancaCommercialeItaliana_privat_bank_foreign_reserves"
+					}
+
+					blockoverride "onclick" {
+						onclick = "[GetVariableSystem.Toggle('company_BancaCommercialeItaliana_privat_bank_foreign_reserves')]"
+						onclick = "[GetScriptedGui('update_company_BancaCommercialeItaliana_currency_stored_liste').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					}
+
+					blockoverride "onclick_showmore" {
+						visible = "[Not(GetVariableSystem.Exists('company_BancaCommercialeItaliana_privat_bank_foreign_reserves'))]"
+					}
+
+					blockoverride "onclick_showless" {
+						visible = "[GetVariableSystem.Exists('company_BancaCommercialeItaliana_privat_bank_foreign_reserves')]"
+					}
+				}
+
+# --- Finances: company_BancaCommercialeItaliana — its currencies, list
+					flowcontainer = {
+						direction = vertical
+						datamodel = "[GetGlobalList('company_BancaCommercialeItaliana_privat_bank_stored_currency')]"
+
+						item = {
+							button = {
+								using = default_button
+								size = { @panel_width 40 }
+
+								hbox = {
+									margin = { 12 0 }
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_name_currency'))]"
+
+										#margin_bottom = -17
+										#fontsize = 17
+										margin_left = 0
+										elide = right
+										align = left|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 1
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_money_value_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+								}
+							}
+						}
+					}
+
+# --- Finances: company_DeNederlandscheBank — its currencies, header
+				#company_DeNederlandscheBank
+				section_header_button = {
+					visible = "[GetScriptedGui('company_DeNederlandscheBank_privat_bank_foreign_reserves_visible').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					#visible = "[GetVariableSystem.Exists('is_ai')]"
+
+					blockoverride "left_text" {
+						text = "company_DeNederlandscheBank_privat_bank_foreign_reserves"
+					}
+
+					blockoverride "onclick" {
+						onclick = "[GetVariableSystem.Toggle('company_DeNederlandscheBank_privat_bank_foreign_reserves')]"
+						onclick = "[GetScriptedGui('update_company_DeNederlandscheBank_currency_stored_liste').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					}
+
+					blockoverride "onclick_showmore" {
+						visible = "[Not(GetVariableSystem.Exists('company_DeNederlandscheBank_privat_bank_foreign_reserves'))]"
+					}
+
+					blockoverride "onclick_showless" {
+						visible = "[GetVariableSystem.Exists('company_DeNederlandscheBank_privat_bank_foreign_reserves')]"
+					}
+				}
+
+# --- Finances: company_DeNederlandscheBank — its currencies, list
+					flowcontainer = {
+						direction = vertical
+						datamodel = "[GetGlobalList('company_DeNederlandscheBank_privat_bank_stored_currency')]"
+
+						item = {
+							button = {
+								using = default_button
+								size = { @panel_width 40 }
+
+								hbox = {
+									margin = { 12 0 }
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_name_currency'))]"
+
+										#margin_bottom = -17
+										#fontsize = 17
+										margin_left = 0
+										elide = right
+										align = left|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 1
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_money_value_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+								}
+							}
+						}
+					}
+
+# --- Finances: company_amsterdamschebank — its currencies, header
+				#company_amsterdamschebank
+				section_header_button = {
+					visible = "[GetScriptedGui('company_amsterdamschebank_privat_bank_foreign_reserves_visible').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					#visible = "[GetVariableSystem.Exists('is_ai')]"
+
+					blockoverride "left_text" {
+						text = "company_amsterdamschebank_privat_bank_foreign_reserves"
+					}
+
+					blockoverride "onclick" {
+						onclick = "[GetVariableSystem.Toggle('company_amsterdamschebank_privat_bank_foreign_reserves')]"
+						onclick = "[GetScriptedGui('update_company_amsterdamschebank_currency_stored_liste').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					}
+
+					blockoverride "onclick_showmore" {
+						visible = "[Not(GetVariableSystem.Exists('company_amsterdamschebank_privat_bank_foreign_reserves'))]"
+					}
+
+					blockoverride "onclick_showless" {
+						visible = "[GetVariableSystem.Exists('company_amsterdamschebank_privat_bank_foreign_reserves')]"
+					}
+				}
+
+# --- Finances: company_amsterdamschebank — its currencies, list
+					flowcontainer = {
+						direction = vertical
+						datamodel = "[GetGlobalList('company_amsterdamschebank_privat_bank_stored_currency')]"
+
+						item = {
+							button = {
+								using = default_button
+								size = { @panel_width 40 }
+
+								hbox = {
+									margin = { 12 0 }
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_name_currency'))]"
+
+										#margin_bottom = -17
+										#fontsize = 17
+										margin_left = 0
+										elide = right
+										align = left|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 1
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_money_value_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+								}
+							}
+						}
+					}
+
+# --- Finances: company_RotterdamscheBankvereeniging — its currencies, header
+				#company_RotterdamscheBankvereeniging
+				section_header_button = {
+					visible = "[GetScriptedGui('company_RotterdamscheBankvereeniging_privat_bank_foreign_reserves_visible').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					#visible = "[GetVariableSystem.Exists('is_ai')]"
+
+					blockoverride "left_text" {
+						text = "company_RotterdamscheBankvereeniging_privat_bank_foreign_reserves"
+					}
+
+					blockoverride "onclick" {
+						onclick = "[GetVariableSystem.Toggle('company_RotterdamscheBankvereeniging_privat_bank_foreign_reserves')]"
+						onclick = "[GetScriptedGui('update_company_RotterdamscheBankvereeniging_currency_stored_liste').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					}
+
+					blockoverride "onclick_showmore" {
+						visible = "[Not(GetVariableSystem.Exists('company_RotterdamscheBankvereeniging_privat_bank_foreign_reserves'))]"
+					}
+
+					blockoverride "onclick_showless" {
+						visible = "[GetVariableSystem.Exists('company_RotterdamscheBankvereeniging_privat_bank_foreign_reserves')]"
+					}
+				}
+
+# --- Finances: company_RotterdamscheBankvereeniging — its currencies, list
+					flowcontainer = {
+						direction = vertical
+						datamodel = "[GetGlobalList('company_RotterdamscheBankvereeniging_privat_bank_stored_currency')]"
+
+						item = {
+							button = {
+								using = default_button
+								size = { @panel_width 40 }
+
+								hbox = {
+									margin = { 12 0 }
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_name_currency'))]"
+
+										#margin_bottom = -17
+										#fontsize = 17
+										margin_left = 0
+										elide = right
+										align = left|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 1
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_money_value_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+								}
+							}
+						}
+					}
+
+# --- Finances: company_BankIBC — its currencies, header
+				#company_BankIBC
+				section_header_button = {
+					visible = "[GetScriptedGui('company_BankIBC_privat_bank_foreign_reserves_visible').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					#visible = "[GetVariableSystem.Exists('is_ai')]"
+
+					blockoverride "left_text" {
+						text = "company_BankIBC_privat_bank_foreign_reserves"
+					}
+
+					blockoverride "onclick" {
+						onclick = "[GetVariableSystem.Toggle('company_BankIBC_privat_bank_foreign_reserves')]"
+						onclick = "[GetScriptedGui('update_company_BankIBC_currency_stored_liste').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					}
+
+					blockoverride "onclick_showmore" {
+						visible = "[Not(GetVariableSystem.Exists('company_BankIBC_privat_bank_foreign_reserves'))]"
+					}
+
+					blockoverride "onclick_showless" {
+						visible = "[GetVariableSystem.Exists('company_BankIBC_privat_bank_foreign_reserves')]"
+					}
+				}
+
+# --- Finances: company_BankIBC — its currencies, list
+					flowcontainer = {
+						direction = vertical
+						datamodel = "[GetGlobalList('company_BankIBC_privat_bank_stored_currency')]"
+
+						item = {
+							button = {
+								using = default_button
+								size = { @panel_width 40 }
+
+								hbox = {
+									margin = { 12 0 }
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_name_currency'))]"
+
+										#margin_bottom = -17
+										#fontsize = 17
+										margin_left = 0
+										elide = right
+										align = left|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 1
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_money_value_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+								}
+							}
+						}
+					}
+
+# --- Finances: company_Mitsubishiexchangehousebank — its currencies, header
+				#company_Mitsubishiexchangehousebank
+				section_header_button = {
+					visible = "[GetScriptedGui('company_Mitsubishiexchangehousebank_privat_bank_foreign_reserves_visible').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					#visible = "[GetVariableSystem.Exists('is_ai')]"
+
+					blockoverride "left_text" {
+						text = "company_Mitsubishiexchangehousebank_privat_bank_foreign_reserves"
+					}
+
+					blockoverride "onclick" {
+						onclick = "[GetVariableSystem.Toggle('company_Mitsubishiexchangehousebank_privat_bank_foreign_reserves')]"
+						onclick = "[GetScriptedGui('update_company_Mitsubishiexchangehousebank_currency_stored_liste').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+					}
+
+					blockoverride "onclick_showmore" {
+						visible = "[Not(GetVariableSystem.Exists('company_Mitsubishiexchangehousebank_privat_bank_foreign_reserves'))]"
+					}
+
+					blockoverride "onclick_showless" {
+						visible = "[GetVariableSystem.Exists('company_Mitsubishiexchangehousebank_privat_bank_foreign_reserves')]"
+					}
+				}
+
+# --- Finances: company_Mitsubishiexchangehousebank — its currencies, list
+					flowcontainer = {
+						direction = vertical
+						datamodel = "[GetGlobalList('company_Mitsubishiexchangehousebank_privat_bank_stored_currency')]"
+
+						item = {
+							button = {
+								using = default_button
+								size = { @panel_width 40 }
+
+								hbox = {
+									margin = { 12 0 }
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_name_currency'))]"
+
+										#margin_bottom = -17
+										#fontsize = 17
+										margin_left = 0
+										elide = right
+										align = left|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 1
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_money_value_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+
+									vertical_divider = {}
+
+									textbox = {
+										layoutstretchfactor_horizontal = 2
+										layoutpolicy_horizontal = preferred
+										datacontext = "[Scope.GetCountry]"
+
+										raw_text = "[Localize(Concatenate(Scope.GetFlagName,'_accumulated_in_gold'))]"
+
+										margin_left = 0
+										margin_bottom = 0
+										elide = right
+										align = Hcenter|nobaseline
+										parentanchor = left
+										alwaystransparent = yes
+										default_format = "#white #bold"
+									}
+
+								}
+							}
+						}
+					}
+
+# --- Finances: the banks' currency sections, outer containers
+				flowcontainer = {
+					using = default_list_position
+					direction = vertical
+					visible = "[GetVariableSystem.Exists('company_Rothschild_Bank_gbr_privat_bank_foreign_reserves')]"
+					#margin_top = 10
+					#margin_bottom = 10
+
+
+				}
+
+# --- Finances: the banks' currency sections, outer containers
+				flowcontainer = {
+					using = default_list_position
+					direction = vertical
+					visible = "[GetVariableSystem.Exists('company_Rothschild_Bank_fra_privat_bank_foreign_reserves')]"
+					#margin_top = 10
+					#margin_bottom = 10
+
+
+				}
+
+# --- Finances: the banks' currency sections, outer containers
+				flowcontainer = {
+					using = default_list_position
+					direction = vertical
+					visible = "[GetVariableSystem.Exists('company_Rothschild_Bank_ger_privat_bank_foreign_reserves')]"
+					#margin_top = 10
+					#margin_bottom = 10
+
+
+				}
+
+# --- Finances: the banks' currency sections, outer containers
+				flowcontainer = {
+					using = default_list_position
+					direction = vertical
+					visible = "[GetVariableSystem.Exists('company_Rothschild_Bank_aus_privat_bank_foreign_reserves')]"
+					#margin_top = 10
+					#margin_bottom = 10
+
+
+				}
+
+# --- Finances: the banks' currency sections, outer containers
+				flowcontainer = {
+					using = default_list_position
+					direction = vertical
+					visible = "[GetVariableSystem.Exists('company_Rothschild_Bank_ita_privat_bank_foreign_reserves')]"
+					#margin_top = 10
+					#margin_bottom = 10
+
+
+				}
+
+# --- Finances: the banks' currency sections, outer containers
+				flowcontainer = {
+					using = default_list_position
+					direction = vertical
+					visible = "[GetVariableSystem.Exists('company_BanqueDeParisEtDesPaysBas_privat_bank_foreign_reserves')]"
+					#margin_top = 10
+					#margin_bottom = 10
+
+
+				}
+
+# --- Finances: the banks' currency sections, outer containers
+				flowcontainer = {
+					using = default_list_position
+					direction = vertical
+					visible = "[GetVariableSystem.Exists('company_BankJPMorgan_privat_bank_foreign_reserves')]"
+					#margin_top = 10
+					#margin_bottom = 10
+
+
+				}
+
+# --- Finances: the banks' currency sections, outer containers
+				flowcontainer = {
+					using = default_list_position
+					direction = vertical
+					visible = "[GetVariableSystem.Exists('company_DeutscheBank_privat_bank_foreign_reserves')]"
+					#margin_top = 10
+					#margin_bottom = 10
+
+
+				}
+
+# --- Finances: the banks' currency sections, outer containers
+				flowcontainer = {
+					using = default_list_position
+					direction = vertical
+					visible = "[GetVariableSystem.Exists('company_BankHSBC_privat_bank_foreign_reserves')]"
+					#margin_top = 10
+					#margin_bottom = 10
+
+
+				}
+
+# --- Finances: the banks' currency sections, outer containers
+				flowcontainer = {
+					using = default_list_position
+					direction = vertical
+					visible = "[GetVariableSystem.Exists('company_Bankenverein_privat_bank_foreign_reserves')]"
+					#margin_top = 10
+					#margin_bottom = 10
+
+
+				}
+
+# --- Finances: the banks' currency sections, outer containers
+				flowcontainer = {
+					using = default_list_position
+					direction = vertical
+					visible = "[GetVariableSystem.Exists('company_BancaCommercialeItaliana_privat_bank_foreign_reserves')]"
+					#margin_top = 10
+					#margin_bottom = 10
+
+
+				}
+
+# --- Finances: the banks' currency sections, outer containers
+				flowcontainer = {
+					using = default_list_position
+					direction = vertical
+					visible = "[GetVariableSystem.Exists('company_DeNederlandscheBank_privat_bank_foreign_reserves')]"
+					#margin_top = 10
+					#margin_bottom = 10
+
+
+				}
+
+# --- Finances: the banks' currency sections, outer containers
+				flowcontainer = {
+					using = default_list_position
+					direction = vertical
+					visible = "[GetVariableSystem.Exists('company_amsterdamschebank_privat_bank_foreign_reserves')]"
+					#margin_top = 10
+					#margin_bottom = 10
+
+
+				}
+
+# --- Finances: the banks' currency sections, outer containers
+				flowcontainer = {
+					using = default_list_position
+					direction = vertical
+					visible = "[GetVariableSystem.Exists('company_RotterdamscheBankvereeniging_privat_bank_foreign_reserves')]"
+					#margin_top = 10
+					#margin_bottom = 10
+
+
+				}
+
+# --- Finances: the banks' currency sections, outer containers
+				flowcontainer = {
+					using = default_list_position
+					direction = vertical
+					visible = "[GetVariableSystem.Exists('company_BankIBC_privat_bank_foreign_reserves')]"
+					#margin_top = 10
+					#margin_bottom = 10
+
+
+				}
+
+# --- Finances: the banks' currency sections, outer containers
+				flowcontainer = {
+					using = default_list_position
+					direction = vertical
+					visible = "[GetVariableSystem.Exists('company_Mitsubishiexchangehousebank_privat_bank_foreign_reserves')]"
+					#margin_top = 10
+					#margin_bottom = 10
+
+
+				} 
+
+# --- Finances, bonds: «see_buyer_private_bank» header
+						#buyer_private_bank
+						section_header_button = {
+							#visible = "[Not(IsDataModelEmpty(AccessPlayer.GetAvailableCompanies))]"
+
+							blockoverride "left_text" {
+								text = "see_buyer_private_bank"
+							}
+
+							blockoverride "onclick" {
+								onclick = "[GetVariableSystem.Toggle('buyer_private_bank')]"
+								onclick = "[GetScriptedGui('central_bank_debt_buyer_list_clear').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+							}
+
+							blockoverride "onclick_showmore" {
+								visible = "[Not(GetVariableSystem.Exists('buyer_private_bank'))]"
+							}
+
+							blockoverride "onclick_showless" {
+								visible = "[GetVariableSystem.Exists('buyer_private_bank')]"
+							}
+						}
+
+# --- Finances, bonds: the buyer banks of each slot (ai_privat_bank_*_N_from_list)
+						flowcontainer = {
+							using = default_list_position
+							direction = vertical
+							visible = "[GetVariableSystem.Exists('buyer_private_bank')]"
+							#margin_top = 10
+							#margin_bottom = 10
+
+							#buyer_private_bank
+							flowcontainer = {
+								margin_right = 0
+								margin_bottom = 0
+								margin_left = 0
+								margin_top = -10
+
+								direction = vertical
+								parentanchor = hcenter
+
+								spacing = 10
+
+								widget = {
+									size = { @panel_width 30 }
+
+									hbox = {
+										sort_button = {
+											layoutstretchfactor_horizontal = 4
+											layoutpolicy_horizontal = preferred
+											size = { 40 20 }
+											align = hcenter|nobaseline
+											text = "privat_bank"
+											datacontext = "[GetScriptedGui('cv_sort_by_country_gdp')]"
+											onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"
+										}
+										sort_button = {
+											layoutstretchfactor_horizontal = 2
+											layoutpolicy_horizontal = preferred
+											size = { 75 20 }
+											align = hcenter|nobaseline
+											text = "quantity"
+											datacontext = "[GetScriptedGui('cv_sort_by_country_gdp')]"
+											onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"
+										}
+										sort_button = {
+											layoutstretchfactor_horizontal = 2
+											layoutpolicy_horizontal = preferred
+											align = hcenter|nobaseline
+											size = { 75 20 }
+											text = "total"
+											datacontext = "[GetScriptedGui('cv_sort_by_money_supply')]"
+											onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"
+										}
+										sort_button = {
+											layoutstretchfactor_horizontal = 2
+											layoutpolicy_horizontal = preferred
+											align = hcenter|nobaseline
+											size = { 75 20 }
+											text = "interest_sort"
+											datacontext = "[GetScriptedGui('cv_sort_by_inflation_value')]"
+											onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"
+										}
+									}
+								}
+
+								#central_bank_debt_buyer
+								flowcontainer = {
+									direction = vertical
+
+									spacing = 0
+
+
+									#central_bank_debt_privat_bank_buyer_list_1
+									flowcontainer = {
+										direction = vertical
+										datamodel = "[GetPlayer.MakeScope.GetList('ù')]"
+
+
+										#visible = "[GetScriptedGui('ai_quantity_purchasing_1_visibility').IsShown( GuiScope.SetRoot(Country.MakeScope).End)]"
+
+										item = {
+											button = {
+												using = default_button
+												size = { @panel_width 40 }
+
+												hbox = {
+													margin = { 12 0 }
+
+													flowcontainer = {
+														layoutstretchfactor_horizontal = 2
+														layoutpolicy_horizontal = expanding
+
+														direction = horizontal
+														spacing = 5
+
+														textbox = {
+														datacontext = "[Scope.GetCompany]"
+															autoresize = yes
+
+															raw_text = "[Company.GetName]"
+
+															fontsize = 18
+
+															align = left|vcenter
+															parentanchor = left|vcenter
+															elide = right
+															minimumsize = { 200 40 }
+															maximumsize = { 200 -1 }
+														}
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_quantity_1_from_list')|D] @bond!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_value_1_from_list')|D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_interest_calculated_1_from_list')|-=D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+												}
+											}
+										}
+									}
+									#central_bank_debt_privat_bank_buyer_list_2
+									flowcontainer = {
+										direction = vertical
+										datamodel = "[GetPlayer.MakeScope.GetList('central_bank_debt_privat_bank_buyer_list_2_clear')]"
+
+
+										#visible = "[GetScriptedGui('ai_quantity_purchasing_2_visibility').IsShown( GuiScope.SetRoot(Country.MakeScope).End)]"
+
+										item = {
+											button = {
+												using = default_button
+												size = { @panel_width 40 }
+
+												hbox = {
+													margin = { 12 0 }
+
+													flowcontainer = {
+														layoutstretchfactor_horizontal = 2
+														layoutpolicy_horizontal = expanding
+
+														direction = horizontal
+														spacing = 5
+
+														textbox = {
+														datacontext = "[Scope.GetCompany]"
+															autoresize = yes
+
+															raw_text = "[Company.GetName]"
+
+															fontsize = 18
+
+															align = left|vcenter
+															parentanchor = left|vcenter
+															elide = right
+															minimumsize = { 200 40 }
+															maximumsize = { 200 -1 }
+														}
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_quantity_2_from_list')|D] @bond!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_value_2_from_list')|D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_interest_calculated_2_from_list')|-=D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+												}
+											}
+										}
+									}
+									#central_bank_debt_privat_bank_buyer_list_3
+									flowcontainer = {
+										direction = vertical
+										datamodel = "[GetPlayer.MakeScope.GetList('central_bank_debt_privat_bank_buyer_list_3_clear')]"
+
+
+										#visible = "[GetScriptedGui('ai_quantity_purchasing_3_visibility').IsShown( GuiScope.SetRoot(Country.MakeScope).End)]"
+
+										item = {
+											button = {
+												using = default_button
+												size = { @panel_width 40 }
+
+												hbox = {
+													margin = { 12 0 }
+
+													flowcontainer = {
+														layoutstretchfactor_horizontal = 2
+														layoutpolicy_horizontal = expanding
+
+														direction = horizontal
+														spacing = 5
+
+														textbox = {
+														datacontext = "[Scope.GetCompany]"
+															autoresize = yes
+
+															raw_text = "[Company.GetName]"
+
+															fontsize = 18
+
+															align = left|vcenter
+															parentanchor = left|vcenter
+															elide = right
+															minimumsize = { 200 40 }
+															maximumsize = { 200 -1 }
+														}
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_quantity_3_from_list')|D] @bond!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_value_3_from_list')|D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_interest_calculated_3_from_list')|-=D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+												}
+											}
+										}
+									}
+									#central_bank_debt_privat_bank_buyer_list_4
+									flowcontainer = {
+										direction = vertical
+										datamodel = "[GetPlayer.MakeScope.GetList('central_bank_debt_privat_bank_buyer_list_4_clear')]"
+
+
+										#visible = "[GetScriptedGui('ai_quantity_purchasing_4_visibility').IsShown( GuiScope.SetRoot(Country.MakeScope).End)]"
+
+										item = {
+											button = {
+												using = default_button
+												size = { @panel_width 40 }
+
+												hbox = {
+													margin = { 12 0 }
+
+													flowcontainer = {
+														layoutstretchfactor_horizontal = 2
+														layoutpolicy_horizontal = expanding
+
+														direction = horizontal
+														spacing = 5
+
+														textbox = {
+														datacontext = "[Scope.GetCompany]"
+															autoresize = yes
+
+															raw_text = "[Company.GetName]"
+
+															fontsize = 18
+
+															align = left|vcenter
+															parentanchor = left|vcenter
+															elide = right
+															minimumsize = { 200 40 }
+															maximumsize = { 200 -1 }
+														}
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_quantity_4_from_list')|D] @bond!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_value_4_from_list')|D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_interest_calculated_4_from_list')|-=D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+												}
+											}
+										}
+									}
+									#central_bank_debt_privat_bank_buyer_list_5
+									flowcontainer = {
+										direction = vertical
+										datamodel = "[GetPlayer.MakeScope.GetList('central_bank_debt_privat_bank_buyer_list_5_clear')]"
+
+
+										#visible = "[GetScriptedGui('ai_quantity_purchasing_5_visibility').IsShown( GuiScope.SetRoot(Country.MakeScope).End)]"
+
+										item = {
+											button = {
+												using = default_button
+												size = { @panel_width 40 }
+
+												hbox = {
+													margin = { 12 0 }
+
+													flowcontainer = {
+														layoutstretchfactor_horizontal = 2
+														layoutpolicy_horizontal = expanding
+
+														direction = horizontal
+														spacing = 5
+
+														textbox = {
+														datacontext = "[Scope.GetCompany]"
+															autoresize = yes
+
+															raw_text = "[Company.GetName]"
+
+															fontsize = 18
+
+															align = left|vcenter
+															parentanchor = left|vcenter
+															elide = right
+															minimumsize = { 200 40 }
+															maximumsize = { 200 -1 }
+														}
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_quantity_5_from_list')|D] @bond!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_value_5_from_list')|D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_interest_calculated_5_from_list')|-=D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+												}
+											}
+										}
+									}
+									#central_bank_debt_privat_bank_buyer_list_6
+									flowcontainer = {
+										direction = vertical
+										datamodel = "[GetPlayer.MakeScope.GetList('central_bank_debt_privat_bank_buyer_list_6_clear')]"
+
+
+										#visible = "[GetScriptedGui('ai_quantity_purchasing_6_visibility').IsShown( GuiScope.SetRoot(Country.MakeScope).End)]"
+
+										item = {
+											button = {
+												using = default_button
+												size = { @panel_width 40 }
+
+												hbox = {
+													margin = { 12 0 }
+
+													flowcontainer = {
+														layoutstretchfactor_horizontal = 2
+														layoutpolicy_horizontal = expanding
+
+														direction = horizontal
+														spacing = 5
+
+														textbox = {
+														datacontext = "[Scope.GetCompany]"
+															autoresize = yes
+
+															raw_text = "[Company.GetName]"
+
+															fontsize = 18
+
+															align = left|vcenter
+															parentanchor = left|vcenter
+															elide = right
+															minimumsize = { 200 40 }
+															maximumsize = { 200 -1 }
+														}
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_quantity_6_from_list')|D] @bond!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_value_6_from_list')|D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_interest_calculated_6_from_list')|-=D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+												}
+											}
+										}
+									}
+									#central_bank_debt_privat_bank_buyer_list_7
+									flowcontainer = {
+										direction = vertical
+										datamodel = "[GetPlayer.MakeScope.GetList('central_bank_debt_privat_bank_buyer_list_7_clear')]"
+
+
+										#visible = "[GetScriptedGui('ai_quantity_purchasing_7_visibility').IsShown( GuiScope.SetRoot(Country.MakeScope).End)]"
+
+										item = {
+											button = {
+												using = default_button
+												size = { @panel_width 40 }
+
+												hbox = {
+													margin = { 12 0 }
+
+													flowcontainer = {
+														layoutstretchfactor_horizontal = 2
+														layoutpolicy_horizontal = expanding
+
+														direction = horizontal
+														spacing = 5
+
+														textbox = {
+														datacontext = "[Scope.GetCompany]"
+															autoresize = yes
+
+															raw_text = "[Company.GetName]"
+
+															fontsize = 18
+
+															align = left|vcenter
+															parentanchor = left|vcenter
+															elide = right
+															minimumsize = { 200 40 }
+															maximumsize = { 200 -1 }
+														}
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_quantity_7_from_list')|D] @bond!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_value_7_from_list')|D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_interest_calculated_7_from_list')|-=D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+												}
+											}
+										}
+									}
+									#central_bank_debt_privat_bank_buyer_list_8
+									flowcontainer = {
+										direction = vertical
+										datamodel = "[GetPlayer.MakeScope.GetList('central_bank_debt_privat_bank_buyer_list_8_clear')]"
+
+
+										#visible = "[GetScriptedGui('ai_quantity_purchasing_8_visibility').IsShown( GuiScope.SetRoot(Country.MakeScope).End)]"
+
+										item = {
+											button = {
+												using = default_button
+												size = { @panel_width 40 }
+
+												hbox = {
+													margin = { 12 0 }
+
+													flowcontainer = {
+														layoutstretchfactor_horizontal = 2
+														layoutpolicy_horizontal = expanding
+
+														direction = horizontal
+														spacing = 5
+
+														textbox = {
+														datacontext = "[Scope.GetCompany]"
+															autoresize = yes
+
+															raw_text = "[Company.GetName]"
+
+															fontsize = 18
+
+															align = left|vcenter
+															parentanchor = left|vcenter
+															elide = right
+															minimumsize = { 200 40 }
+															maximumsize = { 200 -1 }
+														}
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_quantity_8_from_list')|D] @bond!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_value_8_from_list')|D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_interest_calculated_8_from_list')|-=D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+												}
+											}
+										}
+									}
+									#central_bank_debt_privat_bank_buyer_list_9
+									flowcontainer = {
+										direction = vertical
+										datamodel = "[GetPlayer.MakeScope.GetList('central_bank_debt_privat_bank_buyer_list_9_clear')]"
+
+
+										#visible = "[GetScriptedGui('ai_quantity_purchasing_9_visibility').IsShown( GuiScope.SetRoot(Country.MakeScope).End)]"
+
+										item = {
+											button = {
+												using = default_button
+												size = { @panel_width 40 }
+
+												hbox = {
+													margin = { 12 0 }
+
+													flowcontainer = {
+														layoutstretchfactor_horizontal = 2
+														layoutpolicy_horizontal = expanding
+
+														direction = horizontal
+														spacing = 5
+
+														textbox = {
+														datacontext = "[Scope.GetCompany]"
+															autoresize = yes
+
+															raw_text = "[Company.GetName]"
+
+															fontsize = 18
+
+															align = left|vcenter
+															parentanchor = left|vcenter
+															elide = right
+															minimumsize = { 200 40 }
+															maximumsize = { 200 -1 }
+														}
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_quantity_9_from_list')|D] @bond!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_value_9_from_list')|D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_interest_calculated_9_from_list')|-=D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+												}
+											}
+										}
+									}
+									#central_bank_debt_privat_bank_buyer_list_10
+									flowcontainer = {
+										direction = vertical
+										datamodel = "[GetPlayer.MakeScope.GetList('central_bank_debt_privat_bank_buyer_list_10_clear')]"
+
+
+										#visible = "[GetScriptedGui('ai_quantity_purchasing_10_visibility').IsShown( GuiScope.SetRoot(Country.MakeScope).End)]"
+
+										item = {
+											button = {
+												using = default_button
+												size = { @panel_width 40 }
+
+												hbox = {
+													margin = { 12 0 }
+
+													flowcontainer = {
+														layoutstretchfactor_horizontal = 2
+														layoutpolicy_horizontal = expanding
+
+														direction = horizontal
+														spacing = 5
+
+														textbox = {
+														datacontext = "[Scope.GetCompany]"
+															autoresize = yes
+
+															raw_text = "[Company.GetName]"
+
+															fontsize = 18
+
+															align = left|vcenter
+															parentanchor = left|vcenter
+															elide = right
+															minimumsize = { 200 40 }
+															maximumsize = { 200 -1 }
+														}
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_quantity_10_from_list')|D] @bond!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_value_10_from_list')|D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_interest_calculated_10_from_list')|-=D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+												}
+											}
+										}
+									}
+									#central_bank_debt_privat_bank_buyer_list_11
+									flowcontainer = {
+										direction = vertical
+										datamodel = "[GetPlayer.MakeScope.GetList('central_bank_debt_privat_bank_buyer_list_11_clear')]"
+
+
+										#visible = "[GetScriptedGui('ai_quantity_purchasing_11_visibility').IsShown( GuiScope.SetRoot(Country.MakeScope).End)]"
+
+										item = {
+											button = {
+												using = default_button
+												size = { @panel_width 40 }
+
+												hbox = {
+													margin = { 12 0 }
+
+													flowcontainer = {
+														layoutstretchfactor_horizontal = 2
+														layoutpolicy_horizontal = expanding
+
+														direction = horizontal
+														spacing = 5
+
+														textbox = {
+														datacontext = "[Scope.GetCompany]"
+															autoresize = yes
+
+															raw_text = "[Company.GetName]"
+
+															fontsize = 18
+
+															align = left|vcenter
+															parentanchor = left|vcenter
+															elide = right
+															minimumsize = { 200 40 }
+															maximumsize = { 200 -1 }
+														}
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_quantity_11_from_list')|D] @bond!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_value_11_from_list')|D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_interest_calculated_11_from_list')|-=D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+												}
+											}
+										}
+									}
+									#central_bank_debt_privat_bank_buyer_list_12
+									flowcontainer = {
+										direction = vertical
+										datamodel = "[GetPlayer.MakeScope.GetList('central_bank_debt_privat_bank_buyer_list_12_clear')]"
+
+
+										#visible = "[GetScriptedGui('ai_quantity_purchasing_12_visibility').IsShown( GuiScope.SetRoot(Country.MakeScope).End)]"
+
+										item = {
+											button = {
+												using = default_button
+												size = { @panel_width 40 }
+
+												hbox = {
+													margin = { 12 0 }
+
+													flowcontainer = {
+														layoutstretchfactor_horizontal = 2
+														layoutpolicy_horizontal = expanding
+
+														direction = horizontal
+														spacing = 5
+
+														textbox = {
+														datacontext = "[Scope.GetCompany]"
+															autoresize = yes
+
+															raw_text = "[Company.GetName]"
+
+															fontsize = 18
+
+															align = left|vcenter
+															parentanchor = left|vcenter
+															elide = right
+															minimumsize = { 200 40 }
+															maximumsize = { 200 -1 }
+														}
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_quantity_12_from_list')|D] @bond!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_value_12_from_list')|D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_interest_calculated_12_from_list')|-=D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+												}
+											}
+										}
+									}
+									#central_bank_debt_privat_bank_buyer_list_13
+									flowcontainer = {
+										direction = vertical
+										datamodel = "[GetPlayer.MakeScope.GetList('central_bank_debt_privat_bank_buyer_list_13_clear')]"
+
+
+										#visible = "[GetScriptedGui('ai_quantity_purchasing_13_visibility').IsShown( GuiScope.SetRoot(Country.MakeScope).End)]"
+
+										item = {
+											button = {
+												using = default_button
+												size = { @panel_width 40 }
+
+												hbox = {
+													margin = { 12 0 }
+
+													flowcontainer = {
+														layoutstretchfactor_horizontal = 2
+														layoutpolicy_horizontal = expanding
+
+														direction = horizontal
+														spacing = 5
+
+														textbox = {
+														datacontext = "[Scope.GetCompany]"
+															autoresize = yes
+
+															raw_text = "[Company.GetName]"
+
+															fontsize = 18
+
+															align = left|vcenter
+															parentanchor = left|vcenter
+															elide = right
+															minimumsize = { 200 40 }
+															maximumsize = { 200 -1 }
+														}
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_quantity_13_from_list')|D] @bond!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_value_13_from_list')|D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_interest_calculated_13_from_list')|-=D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+												}
+											}
+										}
+									}
+									#central_bank_debt_privat_bank_buyer_list_14
+									flowcontainer = {
+										direction = vertical
+										datamodel = "[GetPlayer.MakeScope.GetList('central_bank_debt_privat_bank_buyer_list_14_clear')]"
+
+
+										#visible = "[GetScriptedGui('ai_quantity_purchasing_14_visibility').IsShown( GuiScope.SetRoot(Country.MakeScope).End)]"
+
+										item = {
+											button = {
+												using = default_button
+												size = { @panel_width 40 }
+
+												hbox = {
+													margin = { 12 0 }
+
+													flowcontainer = {
+														layoutstretchfactor_horizontal = 2
+														layoutpolicy_horizontal = expanding
+
+														direction = horizontal
+														spacing = 5
+
+														textbox = {
+														datacontext = "[Scope.GetCompany]"
+															autoresize = yes
+
+															raw_text = "[Company.GetName]"
+
+															fontsize = 18
+
+															align = left|vcenter
+															parentanchor = left|vcenter
+															elide = right
+															minimumsize = { 200 40 }
+															maximumsize = { 200 -1 }
+														}
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_quantity_14_from_list')|D] @bond!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_value_14_from_list')|D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_interest_calculated_14_from_list')|-=D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+												}
+											}
+										}
+									}
+									#central_bank_debt_privat_bank_buyer_list_15
+									flowcontainer = {
+										direction = vertical
+										datamodel = "[GetPlayer.MakeScope.GetList('central_bank_debt_privat_bank_buyer_list_15_clear')]"
+
+
+										#visible = "[GetScriptedGui('ai_quantity_purchasing_15_visibility').IsShown( GuiScope.SetRoot(Country.MakeScope).End)]"
+
+										item = {
+											button = {
+												using = default_button
+												size = { @panel_width 40 }
+
+												hbox = {
+													margin = { 12 0 }
+
+													flowcontainer = {
+														layoutstretchfactor_horizontal = 2
+														layoutpolicy_horizontal = expanding
+
+														direction = horizontal
+														spacing = 5
+
+														textbox = {
+														datacontext = "[Scope.GetCompany]"
+															autoresize = yes
+
+															raw_text = "[Company.GetName]"
+
+															fontsize = 18
+
+															align = left|vcenter
+															parentanchor = left|vcenter
+															elide = right
+															minimumsize = { 200 40 }
+															maximumsize = { 200 -1 }
+														}
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_quantity_15_from_list')|D] @bond!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_value_15_from_list')|D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_interest_calculated_15_from_list')|-=D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+												}
+											}
+										}
+									}
+									#central_bank_debt_privat_bank_buyer_list_16
+									flowcontainer = {
+										direction = vertical
+										datamodel = "[GetPlayer.MakeScope.GetList('central_bank_debt_privat_bank_buyer_list_16_clear')]"
+
+
+										#visible = "[GetScriptedGui('ai_quantity_purchasing_16_visibility').IsShown( GuiScope.SetRoot(Country.MakeScope).End)]"
+
+										item = {
+											button = {
+												using = default_button
+												size = { @panel_width 40 }
+
+												hbox = {
+													margin = { 12 0 }
+
+													flowcontainer = {
+														layoutstretchfactor_horizontal = 2
+														layoutpolicy_horizontal = expanding
+
+														direction = horizontal
+														spacing = 5
+
+														textbox = {
+														datacontext = "[Scope.GetCompany]"
+															autoresize = yes
+
+															raw_text = "[Company.GetName]"
+
+															fontsize = 18
+
+															align = left|vcenter
+															parentanchor = left|vcenter
+															elide = right
+															minimumsize = { 200 40 }
+															maximumsize = { 200 -1 }
+														}
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_quantity_16_from_list')|D] @bond!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_value_16_from_list')|D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_interest_calculated_16_from_list')|-=D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+												}
+											}
+										}
+									}
+									#central_bank_debt_privat_bank_buyer_list_17
+									flowcontainer = {
+										direction = vertical
+										datamodel = "[GetPlayer.MakeScope.GetList('central_bank_debt_privat_bank_buyer_list_17_clear')]"
+
+
+										#visible = "[GetScriptedGui('ai_quantity_purchasing_17_visibility').IsShown( GuiScope.SetRoot(Country.MakeScope).End)]"
+
+										item = {
+											button = {
+												using = default_button
+												size = { @panel_width 40 }
+
+												hbox = {
+													margin = { 12 0 }
+
+													flowcontainer = {
+														layoutstretchfactor_horizontal = 2
+														layoutpolicy_horizontal = expanding
+
+														direction = horizontal
+														spacing = 5
+
+														textbox = {
+														datacontext = "[Scope.GetCompany]"
+															autoresize = yes
+
+															raw_text = "[Company.GetName]"
+
+															fontsize = 18
+
+															align = left|vcenter
+															parentanchor = left|vcenter
+															elide = right
+															minimumsize = { 200 40 }
+															maximumsize = { 200 -1 }
+														}
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_quantity_17_from_list')|D] @bond!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_value_17_from_list')|D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_interest_calculated_17_from_list')|-=D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+												}
+											}
+										}
+									}
+									#central_bank_debt_privat_bank_buyer_list_18
+									flowcontainer = {
+										direction = vertical
+										datamodel = "[GetPlayer.MakeScope.GetList('central_bank_debt_privat_bank_buyer_list_18_clear')]"
+
+
+										#visible = "[GetScriptedGui('ai_quantity_purchasing_18_visibility').IsShown( GuiScope.SetRoot(Country.MakeScope).End)]"
+
+										item = {
+											button = {
+												using = default_button
+												size = { @panel_width 40 }
+
+												hbox = {
+													margin = { 12 0 }
+
+													flowcontainer = {
+														layoutstretchfactor_horizontal = 2
+														layoutpolicy_horizontal = expanding
+
+														direction = horizontal
+														spacing = 5
+
+														textbox = {
+														datacontext = "[Scope.GetCompany]"
+															autoresize = yes
+
+															raw_text = "[Company.GetName]"
+
+															fontsize = 18
+
+															align = left|vcenter
+															parentanchor = left|vcenter
+															elide = right
+															minimumsize = { 200 40 }
+															maximumsize = { 200 -1 }
+														}
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_quantity_18_from_list')|D] @bond!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_value_18_from_list')|D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_interest_calculated_18_from_list')|-=D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+												}
+											}
+										}
+									}
+									#central_bank_debt_privat_bank_buyer_list_19
+									flowcontainer = {
+										direction = vertical
+										datamodel = "[GetPlayer.MakeScope.GetList('central_bank_debt_privat_bank_buyer_list_19_clear')]"
+
+
+										#visible = "[GetScriptedGui('ai_quantity_purchasing_19_visibility').IsShown( GuiScope.SetRoot(Country.MakeScope).End)]"
+
+										item = {
+											button = {
+												using = default_button
+												size = { @panel_width 40 }
+
+												hbox = {
+													margin = { 12 0 }
+
+													flowcontainer = {
+														layoutstretchfactor_horizontal = 2
+														layoutpolicy_horizontal = expanding
+
+														direction = horizontal
+														spacing = 5
+
+														textbox = {
+														datacontext = "[Scope.GetCompany]"
+															autoresize = yes
+
+															raw_text = "[Company.GetName]"
+
+															fontsize = 18
+
+															align = left|vcenter
+															parentanchor = left|vcenter
+															elide = right
+															minimumsize = { 200 40 }
+															maximumsize = { 200 -1 }
+														}
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_quantity_19_from_list')|D] @bond!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_value_19_from_list')|D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_interest_calculated_19_from_list')|-=D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+												}
+											}
+										}
+									}
+									#central_bank_debt_privat_bank_buyer_list_20
+									flowcontainer = {
+										direction = vertical
+										datamodel = "[GetPlayer.MakeScope.GetList('central_bank_debt_privat_bank_buyer_list_20_clear')]"
+
+
+										#visible = "[GetScriptedGui('ai_quantity_purchasing_20_visibility').IsShown( GuiScope.SetRoot(Country.MakeScope).End)]"
+
+										item = {
+											button = {
+												using = default_button
+												size = { @panel_width 40 }
+
+												hbox = {
+													margin = { 12 0 }
+
+													flowcontainer = {
+														layoutstretchfactor_horizontal = 2
+														layoutpolicy_horizontal = expanding
+
+														direction = horizontal
+														spacing = 5
+
+														textbox = {
+														datacontext = "[Scope.GetCompany]"
+															autoresize = yes
+
+															raw_text = "[Company.GetName]"
+
+															fontsize = 18
+
+															align = left|vcenter
+															parentanchor = left|vcenter
+															elide = right
+															minimumsize = { 200 40 }
+															maximumsize = { 200 -1 }
+														}
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_quantity_20_from_list')|D] @bond!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_value_20_from_list')|D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_interest_calculated_20_from_list')|-=D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+												}
+											}
+										}
+									}
+									#central_bank_debt_privat_bank_buyer_list_21
+									flowcontainer = {
+										direction = vertical
+										datamodel = "[GetPlayer.MakeScope.GetList('central_bank_debt_privat_bank_buyer_list_21_clear')]"
+
+
+										#visible = "[GetScriptedGui('ai_quantity_purchasing_21_visibility').IsShown( GuiScope.SetRoot(Country.MakeScope).End)]"
+
+										item = {
+											button = {
+												using = default_button
+												size = { @panel_width 40 }
+
+												hbox = {
+													margin = { 12 0 }
+
+													flowcontainer = {
+														layoutstretchfactor_horizontal = 2
+														layoutpolicy_horizontal = expanding
+
+														direction = horizontal
+														spacing = 5
+
+														textbox = {
+														datacontext = "[Scope.GetCompany]"
+															autoresize = yes
+
+															raw_text = "[Company.GetName]"
+
+															fontsize = 18
+
+															align = left|vcenter
+															parentanchor = left|vcenter
+															elide = right
+															minimumsize = { 200 40 }
+															maximumsize = { 200 -1 }
+														}
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_quantity_21_from_list')|D] @bond!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_value_21_from_list')|D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_interest_calculated_21_from_list')|-=D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+												}
+											}
+										}
+									}
+									#central_bank_debt_privat_bank_buyer_list_22
+									flowcontainer = {
+										direction = vertical
+										datamodel = "[GetPlayer.MakeScope.GetList('central_bank_debt_privat_bank_buyer_list_22_clear')]"
+
+
+										#visible = "[GetScriptedGui('ai_quantity_purchasing_22_visibility').IsShown( GuiScope.SetRoot(Country.MakeScope).End)]"
+
+										item = {
+											button = {
+												using = default_button
+												size = { @panel_width 40 }
+
+												hbox = {
+													margin = { 12 0 }
+
+													flowcontainer = {
+														layoutstretchfactor_horizontal = 2
+														layoutpolicy_horizontal = expanding
+
+														direction = horizontal
+														spacing = 5
+
+														textbox = {
+														datacontext = "[Scope.GetCompany]"
+															autoresize = yes
+
+															raw_text = "[Company.GetName]"
+
+															fontsize = 18
+
+															align = left|vcenter
+															parentanchor = left|vcenter
+															elide = right
+															minimumsize = { 200 40 }
+															maximumsize = { 200 -1 }
+														}
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_quantity_22_from_list')|D] @bond!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_value_22_from_list')|D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_interest_calculated_22_from_list')|-=D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+												}
+											}
+										}
+									}
+									#central_bank_debt_privat_bank_buyer_list_23
+									flowcontainer = {
+										direction = vertical
+										datamodel = "[GetPlayer.MakeScope.GetList('central_bank_debt_privat_bank_buyer_list_23_clear')]"
+
+
+										#visible = "[GetScriptedGui('ai_quantity_purchasing_23_visibility').IsShown( GuiScope.SetRoot(Country.MakeScope).End)]"
+
+										item = {
+											button = {
+												using = default_button
+												size = { @panel_width 40 }
+
+												hbox = {
+													margin = { 12 0 }
+
+													flowcontainer = {
+														layoutstretchfactor_horizontal = 2
+														layoutpolicy_horizontal = expanding
+
+														direction = horizontal
+														spacing = 5
+
+														textbox = {
+														datacontext = "[Scope.GetCompany]"
+															autoresize = yes
+
+															raw_text = "[Company.GetName]"
+
+															fontsize = 18
+
+															align = left|vcenter
+															parentanchor = left|vcenter
+															elide = right
+															minimumsize = { 200 40 }
+															maximumsize = { 200 -1 }
+														}
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_quantity_23_from_list')|D] @bond!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_value_23_from_list')|D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_interest_calculated_23_from_list')|-=D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+												}
+											}
+										}
+									}
+									#central_bank_debt_privat_bank_buyer_list_24
+									flowcontainer = {
+										direction = vertical
+										datamodel = "[GetPlayer.MakeScope.GetList('central_bank_debt_privat_bank_buyer_list_24_clear')]"
+
+
+										#visible = "[GetScriptedGui('ai_quantity_purchasing_24_visibility').IsShown( GuiScope.SetRoot(Country.MakeScope).End)]"
+
+										item = {
+											button = {
+												using = default_button
+												size = { @panel_width 40 }
+
+												hbox = {
+													margin = { 12 0 }
+
+													flowcontainer = {
+														layoutstretchfactor_horizontal = 2
+														layoutpolicy_horizontal = expanding
+
+														direction = horizontal
+														spacing = 5
+
+														textbox = {
+														datacontext = "[Scope.GetCompany]"
+															autoresize = yes
+
+															raw_text = "[Company.GetName]"
+
+															fontsize = 18
+
+															align = left|vcenter
+															parentanchor = left|vcenter
+															elide = right
+															minimumsize = { 200 40 }
+															maximumsize = { 200 -1 }
+														}
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_quantity_24_from_list')|D] @bond!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_value_24_from_list')|D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_interest_calculated_24_from_list')|-=D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+												}
+											}
+										}
+									}
+									#central_bank_debt_privat_bank_buyer_list_25
+									flowcontainer = {
+										direction = vertical
+										datamodel = "[GetPlayer.MakeScope.GetList('central_bank_debt_privat_bank_buyer_list_25_clear')]"
+
+
+										#visible = "[GetScriptedGui('ai_quantity_purchasing_25_visibility').IsShown( GuiScope.SetRoot(Country.MakeScope).End)]"
+
+										item = {
+											button = {
+												using = default_button
+												size = { @panel_width 40 }
+
+												hbox = {
+													margin = { 12 0 }
+
+													flowcontainer = {
+														layoutstretchfactor_horizontal = 2
+														layoutpolicy_horizontal = expanding
+
+														direction = horizontal
+														spacing = 5
+
+														textbox = {
+														datacontext = "[Scope.GetCompany]"
+															autoresize = yes
+
+															raw_text = "[Company.GetName]"
+
+															fontsize = 18
+
+															align = left|vcenter
+															parentanchor = left|vcenter
+															elide = right
+															minimumsize = { 200 40 }
+															maximumsize = { 200 -1 }
+														}
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_quantity_25_from_list')|D] @bond!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_bond_value_25_from_list')|D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+
+													vertical_divider = {}
+
+													textbox = {
+														layoutstretchfactor_horizontal = 1
+														layoutpolicy_horizontal = expanding
+													datacontext = "[Scope.GetCompany]"
+
+														raw_text = "[Company.MakeScope.ScriptValue('ai_privat_bank_interest_calculated_25_from_list')|-=D] @gold!"
+
+														margin_left = 12
+														margin_bottom = 1
+														elide = right
+														align = left|nobaseline
+														parentanchor = left
+														alwaystransparent = yes
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}

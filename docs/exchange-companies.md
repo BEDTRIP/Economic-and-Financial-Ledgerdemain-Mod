@@ -8,7 +8,7 @@
 Все ключи `ld_*` файлов начинаются с `zz_ef_` (имя файла `ld_`, ключ `zz_ef_`); комментарии внутри ссылаются на старые имена файлов `zz_ef_*.txt`.
 - `common/company_types/00_ef_companies.txt` — 105 типов компаний E&F (банки по странам + `company_PennsylvaniaRailroad`, `company_standard_oil`, `company_private_construction`, `company_basic_gold_and_silver_mining_2`, `company_basic_gold_mining_rus`, `company_basic_silver_mining_mex`); `replaces_company` — подмена старых ключей; `building_types` — `building_zz_ef_bank` (98 раз, `common/buildings/ld_bank.txt`) или `building_financial_centre_<код>`.
 - `common/game_rules/00_EF_unique_companies_game_rules.txt` — правила `unique_companies_banks`/`unique_companies_newspapers` (по умолчанию `*_disabled`, флаги).
-- `common/script_values/01_economic_company_value.txt` (99849 строк) — НЕ биржа, а фонды частных банков: `total_bank_funds`, `funds_from_foreign_debt(_total)`, `company_<банк>_fund` (99 штук, по одному на банк), `private_bank_*_reserve*`, `ai_privat_bank_{bond_quantity,bond_value,interest_calculated}_<1..25>_from_list` (по ~700 строк на шаблон). Подсистема банков; здесь — только связь.
+- `common/script_values/01_economic_company_value.txt` — НЕ биржа, а частные банки: `total_bank_funds`, `private_bank_*_reserve*` (фонды банков E&F — в `_archive/ef_bank_funds/`). Подсистема банков; здесь — только связь.
 - `common/scripted_effects/ld_listing.txt` — `zz_ef_listing_update` (месячный перевод ШК в «публичные/частные»), `zz_ef_listing_log` (лог `EFL|`).
 - `common/scripted_effects/ld_listing_switch.txt` — ГЕНЕРИРУЕТСЯ (`tools/regen_ef_listing.py` в vic3_mods): `zz_ef_listing_go_public`, `zz_ef_listing_go_private` — диспетчер по 271 типу ШК (`building_company_*` ванили и E&F; `activate_production_method` берёт тип литералом).
 - `common/script_values/ld_listing_values.txt` — `zz_ef_hq_levels/_count/_div_week`, `zz_ef_listed_hq_levels`, `zz_ef_listed_share`, `zz_ef_listed_div_year`, `zz_ef_equity_premium` (0.04), `zz_ef_cap_discount`, `zz_ef_cap_listed_snapshot`, `zz_ef_cap_to_gdp`.
@@ -62,7 +62,6 @@
 - Пишет в чужое: `has_financial_center` (слоты), `financial_crash`/`economic_instability` (E&F), `building_company_worker_dividends_add` и выпуск акций на всю страну.
 - `stockpiling_<вид>_var_state` (`00_financial_scripted_value.txt:2904`…) переведены с накопления на `zz_ef_cap_avg_*` / цену — их читают `country_indice`, меню E&F, рейтинг финансовой мощи.
 - GUI: `gui/ld_cb_rate_panel.gui` (`stock_market_index`, `country_indice`, `value_for_has_financial_center`), `gui/ef_dev_and_custom_windows/ef_custom_windows.gui`, `gui/scripted_widgets/ld_pb_fso_widgets.gui` (пузырь), `common/scripted_guis/ld_pb_fso_sguis.txt`; панель компаний `gui/companies_panel.gui` (интерфейс-агент).
-- Подсистема банков читает `company_<банк>_fund` и `ai_privat_bank_*_from_list` из `01_economic_company_value.txt`.
 
 ## Логи
 - `EFL|дата|страна|hq|listed|lshare|nhq|hqdiv|lit|div|snap|cap|cap_gdp|disc` — `zz_ef_listing_log` (игрок или ВВП > 20 млн).

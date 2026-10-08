@@ -22,7 +22,7 @@
 - `common/static_modifiers/ld_fx_holders_demand.txt` — `zz_ef_fx_holders_demand` (`state_export_advantage_mult = 0.01` на единицу множителя).
 - E&F, банковская часть (огромные файлы, смотреть `grep -n`):
   - `common/scripted_effects/01_financial_scripted_effects.txt`: `establish_bank_and_ef_compagnie` (:13164, ИИ раз в год получает банковские компании), `ai_privat_bank_bond_1..25` (:4130…, покупка облигаций частными банками), `private_ownership_production_stocks`, `financial_center_production_methods`.
-  - `common/scripted_effects/08_list_effect.txt`: `privat_bank_variable_list` (:1748, список банковских компаний, `privat_bank_variable_list_ordered`), список `global_arbitrage_bank_variable_list_ordered` (:2209, по `gdp_var`; читатель — арбитраж — в `_archive/ef_bimetallic_arbitrage/`).
+  - `common/scripted_effects/08_list_effect.txt`: `privat_bank_variable_list` (список банковских компаний; `privat_bank_variable_list_ordered` — те же банки без сортировки, из него `ai_privat_bank_bond_N` берёт случайного покупателя облигаций), список `global_arbitrage_bank_variable_list_ordered` (:2209, по `gdp_var`; читатель — арбитраж — в `_archive/ef_bimetallic_arbitrage/`).
   - `common/script_values/00_financial_scripted_value.txt` — значения для интерфейса/ИИ покупок облигаций; `common/script_values/00_economic_scripted_value.txt:5335-6745` — `private_bank_funds*` (`private_bank_funds` = `investment_pool`, :6246); `01_economic_company_value.txt:29` `total_privat_bank`.
   - `common/scripted_guis/00_financial_scripted_guis.txt` — только облигационные/кредитные кнопки (см. `bonds.md`); банковских кнопок нет.
   - `common/history/global/00_ef_financial_global_variable.txt` — стартовые переменные стран E&F (`speculative_share_*`, бонды); счёта частных банков не создаёт.
@@ -52,7 +52,7 @@
 - `zz_ef_bank_levels` и `building_zz_ef_bank` читают `ld_metal_accounts_values.txt:230-278`, `ld_money_model_values.txt:2144-2150`.
 - Компании-владельцы: `common/company_types/00_ef_companies.txt` (`building_zz_ef_bank` в списках разрешённых зданий, 98 компаний).
 - Вклады входят в позицию «за рубежом» и пул: `ld_reference_currency_values.txt:142,204`; модель денег пишет `EFW`/`EFR` строки.
-- Интерфейс: `gui/ld_economy_panel.gui` — круговая диаграмма банков-держателей валюты `zz_ef_bank_holders_piechart` (:9797, список `zz_ef_bank_holders_list`, заполняет `zz_ef_holders_update` в `scripted_guis/ld_cbfx.txt`); `gui/ld_cb_rate_panel.gui` — панель ставки/ЦБ. Здание «Банк» — стандартная панель здания.
+- Интерфейс: `gui/ld_cb_rate_panel.gui` — панель ставки/ЦБ; таблица частных банков вкладки «Финансы» — банк, тип, доля пула страны на банк (`private_bank_funds_per_private_bank`), металл банка; сводка — `total_bank_funds` (пул + металл банков). Фонды банков E&F (чужие облигации и валюты по банкам) — в `_archive/ef_bank_funds/`, заново — R4. Здание «Банк» — стандартная панель здания.
 
 ## Логи
 - `EFK|` — посев банков в штате/по рынку (`ld_bank_seed.txt`).

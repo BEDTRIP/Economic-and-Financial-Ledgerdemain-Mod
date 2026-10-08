@@ -45,7 +45,7 @@ GUI-тип регистрирует первый файл по имени (ASCII
 ### Файлы проекта (`ld_*`, переопределяют типы E&F; грузятся раньше или вместо оригинала)
 - `gui/ld_economy_panel.gui` (генерат. `regen_ef_economy_panel_gui.py`) — `budget_panel_economy_panel_content` (:10,
   оригинал из `00_ef_deported_gui_1.gui` удалён), торговый баланс в модели денег,
-  `zz_ef_holders_piechart`, `zz_ef_bank_holders_piechart`, `vo_plotline_minting` (вызов :4143).
+  `zz_ef_holders_piechart`, `vo_plotline_minting` (вызов :4143).
 - `gui/ld_cb_rate_panel.gui` (генерат. `regen_ef_cb_rate_gui.py`) — `budget_panel_financial_panel_content` (:10): ключевая ставка,
   ЦБ, облигации, таблицы держателей (`zz_ef_bt_in_list`/`zz_ef_bt_out_list`), `mp_row` политики.
 - `gui/ld_currency_symbol_fix.gui` — единственное определение `currency_symbol_country_panel` (один текстбокс
@@ -116,7 +116,7 @@ GUI-тип регистрирует первый файл по имени (ASCII
 | `choose_currency_type_<cur>` (страна) | выбранная в панели валюта | sgui `choose_currency_type_<cur>` | `choose_currency_type_<cur>_visible` |
 | `zz_ef_hook_countries` (глобальный список), `zz_ef_hook_pending` | очередь моста | `ld_money_model.txt` | `gui/ld_money_hook.gui`, `zz_ef_money_hook_receive` |
 | `zz_ef_hook_probe_calls` (глобальная) | счётчик запусков моста | `zz_ef_money_hook_probe_sg` | `common/script_values/ld_money_model_values.txt` |
-| `zz_ef_cbfx_list`, `zz_ef_holders_list`, `zz_ef_bank_holders_list` | таблицы валют ЦБ и держателей | `ld_cbfx.txt` | `gui/ld_economy_panel.gui` |
+| `zz_ef_cbfx_list`, `zz_ef_holders_list` | таблицы валют ЦБ и держателей | `ld_cbfx.txt` | `gui/ld_economy_panel.gui` |
 | `zz_ef_bt_in_list`, `zz_ef_bt_out_list` | таблицы облигаций | `ld_bond_tables.txt` | `gui/ld_cb_rate_panel.gui` |
 | `national_capacity_variable_list_ordered_1` | порядок кругов резервов | `common/scripted_effects/08_list_effect.txt` | `gui/ld_national_capacity_chart.gui` |
 | `EF_gui_room_brut` | число открытых «комнат» окна резервов | `common/script_values/00_economic_scripted_value.txt` | `EF_room_gui_N` |
@@ -174,7 +174,6 @@ GUI-тип регистрирует первый файл по имени (ASCII
 | `zz_ef_bank_capital` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_bank_cash` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_bank_cb_debt` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
-| `zz_ef_bank_holds_pc` | var | `gui/ld_economy_panel.gui` |
 | `zz_ef_bank_liabilities` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_bank_loans` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_bankm_money` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
