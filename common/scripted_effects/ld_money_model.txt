@@ -568,6 +568,7 @@ zz_ef_pop_savings_step = {
 zz_ef_pop_deposits_step = {
 	set_variable = { name = zz_ef_f_dep_contrib value = 0 }
 	set_variable = { name = zz_ef_f_dep_build value = 0 }
+	set_variable = { name = zz_ef_f_gov_build value = 0 }
 	if = {
 		limit = {
 			has_variable = zz_ef_pop_savings
@@ -597,6 +598,23 @@ zz_ef_pop_deposits_step = {
 		}
 		zz_ef_post = { FROM = zz_ef_pop_deposits TO = zz_ef_pop_claims_private V = var:zz_ef_f_dep_build }
 		change_variable = { name = zz_ef_pop_savings subtract = var:zz_ef_f_dep_build }
+		# R2 closing (the user, 8.10): the construction over the deposits is paid by the treasury's surplus in the pool
+		# (zz_ef_f_tr_pool, its claim zz_ef_bank_gov_dep) -- built levels are private, the treasury's claim on the banks
+		# shrinks (r1008_093105: Qing, deposits ~0, the pool's construction on 7.9M of the treasury -- «прочее» -10.2M)
+		set_variable = {
+			name = zz_ef_f_gov_build
+			value = {
+				value = zz_ef_v_f_transfer
+				subtract = zz_ef_v_f_bc_new
+				subtract = var:zz_ef_f_dep_build
+				min = 0
+				max = {
+					value = var:zz_ef_bank_gov_dep
+					min = 0
+				}
+			}
+		}
+		zz_ef_post = { FROM = zz_ef_bank_gov_dep TO = zz_ef_pop_claims_private V = var:zz_ef_f_gov_build }
 	}
 	# what entered the pops' savings this step (the cash-at-hand card: zz_ef_v_w_inflow)
 	set_variable = { name = zz_ef_f_inflow value = var:zz_ef_f_dep_contrib }
