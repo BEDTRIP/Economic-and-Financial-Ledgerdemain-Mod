@@ -53,5 +53,4 @@ zz_ef_cur_noun_set = {
 	else_if = { limit = { any_primary_culture = { OR = { has_discrimination_trait = heritage_vietnamese } } } set_variable = { name = zz_ef_cur_noun value = flag:dong } }
 	else_if = { limit = { any_primary_culture = { OR = { has_discrimination_trait = heritage_west_slavic } } } set_variable = { name = zz_ef_cur_noun value = flag:zloty } }
 	else_if = { limit = { has_variable = zz_ef_cur_noun } remove_variable = zz_ef_cur_noun }
-	if = { limit = { zz_ef_logs_on = yes has_variable = zz_ef_cur_noun } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|cur_nat|[THIS.GetCountry.GetCustom('currency_name')]" }
 }
