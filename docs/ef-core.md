@@ -70,7 +70,7 @@
 | `base_rate_percentage`, `rise_base_rate`, `down_base_rate` | ставка ЦБ; модификаторы направления | `zz_ef_cb_rate_step` | `central_bank_ef_on_monthly_pulse_country`, PSC |
 | `speculative_share_1` / `_2` | пузырь / индекс перестройки | `ld_bubble`, `ld_pb_overbuild_counter` | JE `financial_center_je_2` |
 | `looting_1_year` | флаг грабежа | `enemy_capital_is_occuped`, годовой пульс | `ef_on_yearly_pulse_reset` |
-| `global_var:money_value_median` | медиана курсов | `median_currency_value` | `central_bank_ef_on_monthly_pulse_country` |
+| `global_var:money_value_median` | медиана курсов | `median_currency_value` (`zz_ef_world_month_ef`, `ld_world_month.txt`) | `is_reference_currency`, `zz_ef_value_to_parity` |
 
 ## Вызовы и связи
 - Законы: 95 `law_<cur>_currency` (`laws/01_ef_currency_type.txt`), `law_*_standard`, `lawgroup_monetary_policy`, `lawgroup_bimetalism_ratio` — триггеры `law_<cur>_monetary_system_*_trigger` (customizable_localization `00_ef_localization_ custom.txt`, GUI).

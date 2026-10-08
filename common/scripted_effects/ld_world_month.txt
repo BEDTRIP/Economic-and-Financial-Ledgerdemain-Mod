@@ -1,0 +1,31 @@
+﻿# E&F's world numbers of the month, once for the whole world (Д.R3б.4), not in every central bank's monthly hub:
+# the world's gold and silver production -> silver_to_gold_rate (one price of the month for all), the reference
+# country's data, the median's insurance at the start (money_value_median 0 or 1).
+# Country scope, root -- the country ranked first (the currency law lists are kept on root): the event ld_world_month.1,
+# from on_monthly_pulse (on_actions/ld_roles_on_actions.txt) and from the start setup (ld_start_setup.txt).
+zz_ef_world_month_ef = {
+	global_gold_silver_production = yes
+	if = {
+		limit = {
+			or = {
+				global_var:money_value_median = 0
+				global_var:money_value_median = 1
+			}
+		}
+		currency_law_list = yes
+		money_value_global_var = yes
+		median_currency_value = yes
+	}
+	every_country = {
+		limit = { has_modifier = global_monetary_reference }
+		global_monetary_reference_global_var_fixe = yes
+	}
+}
+
+# Any scope: the event on the country ranked first.
+zz_ef_world_month_fire = {
+	every_country = {
+		limit = { global_country_ranking = 1 }
+		trigger_event = { id = ld_world_month.1 days = 0 }
+	}
+}

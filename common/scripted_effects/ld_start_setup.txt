@@ -7,7 +7,8 @@
 # country half set up (r1008_100702: Hanover's 50.7M gold went to the pops, its CB came on the 4th week).
 # Country scope: E&F's code compares with root as the country, and on_game_started_after_lobby has no root
 # (r1008_104019: 24k "Invalid right side during comparison 'root'") -- so each country runs it in its own hidden
-# event (events/ld_start_setup_events.txt): .1 -- the yearly pulse's facilities for all, then .2 -- the monthly hub.
+# event (events/ld_start_setup_events.txt): .1 -- the yearly pulse's facilities for all, then the world's part of the
+# monthly hub once (ld_world_month.1), then .2 -- the countries' monthly hub.
 # Only the setup: the yearly pulse's AI decisions (standard transitions, the value target, production methods) and
 # counters stay with the pulse. Each piece is E&F's own effect, safe to repeat (its pulse runs it again later).
 zz_ef_start_setup = {
@@ -15,6 +16,8 @@ zz_ef_start_setup = {
 		limit = { NOT = { has_global_variable = zz_ef_start_setup_done } }
 		set_global_variable = zz_ef_start_setup_done
 		every_country = { trigger_event = { id = ld_start_setup.1 days = 0 } }
+		# the world's part of the monthly hub, once, before the countries' hubs (ld_world_month.txt)
+		zz_ef_world_month_fire = yes
 		every_country = { trigger_event = { id = ld_start_setup.2 days = 0 } }
 	}
 }

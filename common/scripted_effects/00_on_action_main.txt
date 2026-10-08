@@ -153,30 +153,8 @@ central_bank_ef_on_monthly_pulse_country = {
 	inflation_on_military_equipment_market_value_fluctuations = yes
 	money_value_dif_01_market_value_fluctuations = yes
 
-	every_country = {
-		limit = {
-			global_country_ranking = 1
-		}
-		global_gold_silver_production = yes
-		if = {
-			limit = {
-				or = {
-					global_var:money_value_median = 0
-					global_var:money_value_median = 1
-				}
-			}
-			currency_law_list = yes
-			money_value_global_var = yes
-			median_currency_value = yes
-		}
-	}
-
-	every_country = {
-		limit = {
-			has_modifier = global_monetary_reference
-		}
-		global_monetary_reference_global_var_fixe = yes
-	}
+	# the world's part (gold and silver production, the reference's data, the median's insurance) -- once a month for
+	# all: zz_ef_world_month_ef (scripted_effects/ld_world_month.txt)
 
  	# if = { #obcolète le pays otient la loi métalique quand il otient l'event avant çà rese en fiat ou no sys
 	# 	limit = {
