@@ -57,6 +57,7 @@ zz_ef_newcountry_on_country_formed = {
 			}
 			new_country_var_ef = yes
 			country_credit_rating = yes # its variable is read by every country's pulses (r1008_141823: a revolution, 18 "country_credit_note_fixe not set")
+			zz_ef_cur_set = yes # its currency as data (a national one if none)
 		}
 		# R3, step 7 (Д.R3.7): the historical currency of the new tag -- an event with a choice
 		# (events/ld_currency_formed_events.txt)
@@ -83,6 +84,7 @@ zz_ef_newcountry_on_become_independent = {
 			}
 			new_country_var_ef = yes
 			country_credit_rating = yes # its variable is read by every country's pulses (r1008_141823: a revolution, 18 "country_credit_note_fixe not set")
+			zz_ef_cur_set = yes # its currency as data (a national one if none)
 		}
 	}
 }
