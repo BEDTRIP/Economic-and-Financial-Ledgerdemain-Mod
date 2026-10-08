@@ -334,12 +334,7 @@ metalique_standard = {
 		country_institution_economic_central_bank_max_investment_add = 1
 	}
 	on_researched = {
-		# R3.5 (8.10): given at the start to the countries on a metal standard (history/global/zz_ef_currency_fix.txt) --
-		# no fiat then
-		if = {
-			limit = { NOT = { has_variable = zz_ef_start_metalique } }
-			activate_law = law_type:law_fiat_standard
-		}
+		activate_law = law_type:law_fiat_standard
 		# if = {
 		# 	limit = {
 		# 		or = {

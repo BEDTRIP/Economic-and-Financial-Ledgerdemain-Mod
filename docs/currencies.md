@@ -37,7 +37,7 @@
 Таблица 95 валют (название, символ, ISO, страны и паритет на 1836) — `currency-table.md` (генерируется).
 
 ## Поток / порядок
-- Старт: `99_ef_history_global_variable.txt` выдаёт законы валют и стандартов → `zz_ef_currency_fix.txt` правит WUR и 13 стран. Перед каждым `activate_law` стандарта — `metalique_standard`, валюты — `currency_standards` (метки `zz_ef_start_metalique`, `zz_ef_start_currency_standards`; `on_researched` E&F с ними фиат не включает): иначе законы ставятся без технологий, которые E&F выдаёт позже в истории зданий, — «not permitted to retain law».
+- Старт: `99_ef_history_global_variable.txt` выдаёт законы валют → `zz_ef_currency_fix.txt` правит WUR и 13 стран.
 - Раз в месяц (`zz_ef_money_model_monthly_step`, `ld_money_model.txt:1005..`): `zz_ef_cur_zone_step`; `zz_ef_reference_strength_step`; `zz_ef_currency_trade_step` (после шага эталона; только страны с ЦБ, не эталон).
 - Раз в год (`ef_on_yearly_pulse_country`, `on_actions/00_ef_on_action.txt:139`, зовёт страна-эталон): `national_capacity_variable_list` → пересев эталона. Кандидат: великая держава, ЦБ, рейтинг ≥ 6 (BBB), металлический/золотодевизный стандарт, нет дефолта ЦБ, покрытие ≥ 25%.
 - Смена закона стандарта: `on_activate_monetary_system_law` → `zz_ef_std_switch_before` (запомнить стандарт и паритет) → тело E&F → `zz_ef_std_switch_after` (пересчёт паритета по `silver_to_gold_rate`/`gold_to_silver_rate`, перевод запасов `silver_state_1`↔`gold_state_1` в столичных штатах с `central_bank_historic_place`).
