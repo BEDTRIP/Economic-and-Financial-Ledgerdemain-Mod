@@ -7765,10 +7765,9 @@ global_monetary_reference_reset = {
 				name = GDP_dif_1
 				subtract = var:GDP_var_half_1_year
 			}
-			change_variable = {
-				name = GDP_dif_1
-				divide = var:GDP_var_half_1_year
-			}
+			# no GDP half a period ago (new country): no change, not division by zero
+			if = { limit = { var:GDP_var_half_1_year = 0 } set_variable = { name = GDP_dif_1 value = 0 } }
+			else = { change_variable = { name = GDP_dif_1 divide = var:GDP_var_half_1_year } }
 
 			set_variable = {
 				name = gdp_fixe_var_1_1Y
@@ -7823,10 +7822,9 @@ global_monetary_reference_reset = {
 				name = GDP_dif_5
 				subtract = var:GDP_var_half_5_year
 			}
-			change_variable = {
-				name = GDP_dif_5
-				divide = var:GDP_var_half_5_year
-			}
+			# no GDP half a period ago (new country): no change, not division by zero
+			if = { limit = { var:GDP_var_half_5_year = 0 } set_variable = { name = GDP_dif_5 value = 0 } }
+			else = { change_variable = { name = GDP_dif_5 divide = var:GDP_var_half_5_year } }
 
 			set_variable = {
 				name = gdp_fixe_var_1_5Y
@@ -7869,10 +7867,9 @@ global_monetary_reference_reset = {
 				name = GDP_dif_10
 				subtract = var:GDP_var_half_10_year
 			}
-			change_variable = {
-				name = GDP_dif_10
-				divide = var:GDP_var_half_10_year
-			}
+			# no GDP half a period ago (new country): no change, not division by zero
+			if = { limit = { var:GDP_var_half_10_year = 0 } set_variable = { name = GDP_dif_10 value = 0 } }
+			else = { change_variable = { name = GDP_dif_10 divide = var:GDP_var_half_10_year } }
 
 			set_variable = {
 				name = gdp_fixe_var_1_10Y

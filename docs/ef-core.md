@@ -48,18 +48,18 @@
 | 480–1336 | `currency_of_player` (857) | `currency_of_player` — GUI; `currency_of_player_reset` — `_archive/ef_dead_effects_8_10/` |
 | 1380–5967 | 3×95 эффектов `money_value[_target|_in_gold]_<cur>_global_var` | да, через `money_value_global_var` и др. |
 | 5967–7574 | `global_monetary_reference_1/_2/_gui/_reset`, список эталонной валюты | да (годовой) |
-| 7574–9779 | `fluctuations_*`, `cumulative_inflation_*`, 5 групп `inflation_on_<type>_market_value_fluctuations` + `_rolling_inflation_6_months_effect` + `reset_*` | да (месячный/годовой) |
-| 9642–9779 | `monetary_policy_inflation[_reset|_reset_law|_base_rate]` | да (игрок) |
-| 9779–11052 | `currency_strength_modifier`, `inflation_modifier`, `money_value_target_modification`, `devaluation/revaluation_money_value_target*` | да |
-| 14224–16988 | `extreme_weak_currency_solution[_player]` (счётчик; ветка денежной реформы, `reset_balance`, `reset_law_event_currency`, `reset_debt_currency_reserve_and_export_value` — в `_archive/ef_currency_reform/`, R2), `reset_debt_in_currency` | да — из scripted_guis (кнопки смены закона) |
-| 41130–41985 | `devaluation_on`, `revaluation_on`, `set_reset_monetary_system_status`, `on_activate_*_law` | — |
-| 41383 | `trade_balance` (388) | да (месячный) |
+| 7574–9776 | `fluctuations_*`, `cumulative_inflation_*`, 5 групп `inflation_on_<type>_market_value_fluctuations` + `_rolling_inflation_6_months_effect` + `reset_*` | да (месячный/годовой) |
+| 9639–9776 | `monetary_policy_inflation[_reset|_reset_law|_base_rate]` | да (игрок) |
+| 9776–11049 | `currency_strength_modifier`, `inflation_modifier`, `money_value_target_modification`, `devaluation/revaluation_money_value_target*` | да |
+| 14221–16985 | `extreme_weak_currency_solution[_player]` (счётчик; ветка денежной реформы, `reset_balance`, `reset_law_event_currency`, `reset_debt_currency_reserve_and_export_value` — в `_archive/ef_currency_reform/`, R2), `reset_debt_in_currency` | да — из scripted_guis (кнопки смены закона) |
+| 41127–41982 | `devaluation_on`, `revaluation_on`, `set_reset_monetary_system_status`, `on_activate_*_law` | — |
+| 41380 | `trade_balance` (388) | да (месячный) |
 | — | `stockpiling_currency`, `stockpiling_currency_type_1` — в `_archive/ef_stockpiling_currency/` (R2) | — |
-| 42338–90727 | 95 `sell_<cur>_currency_crisis` (`buy_/sell_<cur>_currency` ИИ-форекса — в `_archive/ef_ai_forex/`) | да, из `all_currency_resold`; пишут `gold_state_1`/`silver_state_1` |
-| 92193, 104221 | `reset_debt_in_national_currency[_player]` (2×2 тыс. строк) | да (GUI/смена закона) |
-| 94310–98725 | `stockpiling_capital_state_transfert`, `..._financial_center_place`, `enemy_capital_is_occuped` (1,8 тыс.), `enemy_stats_is_occuped` | да (месячный, решение ИИ, бой) |
-| 98817–104129 | `central_bank_production_methods`, `_3`, `_4` — пустые определения (тела в `_archive/ef_central_bank_pm_consuption/`) | пусто |
-| 106331–107228 | `remove_suject_currency`, `subject_currency` | живые (подданные) |
+| 42335–90724 | 95 `sell_<cur>_currency_crisis` (`buy_/sell_<cur>_currency` ИИ-форекса — в `_archive/ef_ai_forex/`) | да, из `all_currency_resold`; пишут `gold_state_1`/`silver_state_1` |
+| 92190, 104218 | `reset_debt_in_national_currency[_player]` (2×2 тыс. строк) | да (GUI/смена закона) |
+| 94307–98722 | `stockpiling_capital_state_transfert`, `..._financial_center_place`, `enemy_capital_is_occuped` (1,8 тыс.), `enemy_stats_is_occuped` | да (месячный, решение ИИ, бой) |
+| 98814–104126 | `central_bank_production_methods`, `_3`, `_4` — пустые определения (тела в `_archive/ef_central_bank_pm_consuption/`) | пусто |
+| 106328–107225 | `remove_suject_currency`, `subject_currency` | живые (подданные) |
 Внутри E&F-тел встроены вызовы модели: `zz_ef_cb_rate_step`, `zz_ef_std_switch_*`, `zz_ef_mp_init/_clear`, `zz_ef_crisis_redeem` (95), `zz_ef_cb_cover`, `zz_ef_cover_normal` (по 95 валютам в `sell_<cur>_currency_crisis`).
 
 ## Переменные
