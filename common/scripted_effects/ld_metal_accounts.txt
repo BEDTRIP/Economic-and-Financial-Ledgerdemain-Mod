@@ -12,7 +12,11 @@
 #   * the CB's metal (a metal standard with a CB) = 40% of M2 -- once, at the first step where the engine has filled
 #     the buildings' cash (zz_ef_cb_metal_start_step, var:zz_ef_cb_start_due); E&F's metal from history is not taken
 #     (its scale is ~10 times our money); until then the CB does not trade metal (Д.2);
-#   * a country without a CB on a metal standard: E&F's metal of its CB states goes to the pops (В4), not to nobody;
+#   * В4 (the user, 8.10): E&F's metal of a country with a CB stays in its CB states, also when the country has no metal
+#     standard yet (a subject joins its overlord's through the currency zone after its first step -- Hanover, Lower
+#     Canada, Finland got 44-132 GDP of it as the pops' metal, r1008_062130); the CB's start scales it to 40% of M2 (the
+#     currency at its E&F parity), gold and silver by one factor (E&F's ratio). A country without a CB: its CB states'
+#     metal goes to the pops;
 #   * E&F's metal outside a CB state (history writes it before the country has a CB -- Bavaria) -- the pops' too (Д.R1.1);
 #   * the pops' metal: 5% of GDP with a CB, 20% without (В4: a traditional economy saves in metal), or E&F's metal of a
 #     CB-less country if more; once;
@@ -31,8 +35,8 @@ zz_ef_metal_start_step = {
 		set_variable = { name = zz_ef_cb_start_due value = yes }
 	}
 	if = {
-		limit = { NOT = { zz_ef_cb_metal_standard = yes } }
-		# В4: E&F's metal of a country that is not a CB on a metal standard -- the pops'
+		limit = { NOT = { has_modifier = has_central_bank } }
+		# В4: E&F's metal of a country without a CB -- the pops' (with a CB it waits for the CB's start, above)
 		set_variable = { name = zz_ef_ms_ef_g value = gold_state_native_for_stockpile }
 		set_variable = { name = zz_ef_ms_ef_s value = silver_state_native_for_stockpile }
 		every_scope_state = {
