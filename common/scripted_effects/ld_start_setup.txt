@@ -27,10 +27,9 @@ zz_ef_start_setup_year = {
 	gdp_view_on_action_fc = yes
 	has_tech_financial_center_but_no_building_financial_center = yes
 	has_second_financial_center = yes
-	if = {
-		limit = { country_rank >= rank_value:unrecognized_power }
-		country_credit_rating = yes
-	}
+	# every country, as E&F's history did (its yearly pulse -- from unrecognized powers up): the rating's variable is read
+	# by all (national_debt_allowed_relative_gdp)
+	country_credit_rating = yes
 	if = {
 		limit = { has_modifier = global_monetary_reference }
 		national_capacity_variable_list = yes
