@@ -65,7 +65,19 @@ zz_ef_sched_probe_step = {
 		remove_global_variable = zz_ef_sched_probing
 		set_global_variable = { name = zz_ef_sched_d value = 0 }
 		set_global_variable = { name = zz_ef_sched_alive value = yes days = 3 }
-		zz_ef_sched_day_step = yes
+		# R3а (б), the user 8.10: the game's start is the first budget tick -- E&F's start setup now (it needs the engine's
+		# GDP), the model's first steps from the next day (they see it done; scripted_effects/ld_start_setup.txt)
+		if = {
+			limit = {
+				NOT = { has_global_variable = zz_ef_start_setup_done }
+				game_date < 1836.3.1
+			}
+			zz_ef_start_setup = yes
+			trigger_event = { on_action = zz_ef_sched_day days = 1 }
+		}
+		else = {
+			zz_ef_sched_day_step = yes
+		}
 	}
 	else = {
 		change_variable = { name = zz_ef_sched_probe add = 1 }

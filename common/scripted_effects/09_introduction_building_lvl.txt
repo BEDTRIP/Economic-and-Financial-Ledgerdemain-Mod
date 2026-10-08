@@ -23413,10 +23413,8 @@ central_bank_modifier_fixed_var = {
 #####################################################################################################################################################
 
 initialize_historic_macro_facilities_bc = { #history
-	add_technology_researched = banking
-	add_technology_researched = currency_standards
-	add_technology_researched = central_banking
-	add_technology_researched = metalique_standard
+	# R3а (а): the technologies -- in the countries' history (history/countries/ld_start_technologies.txt), the engine's law
+	# check sees them there
 
 	$CTRL_BANK_SITE$ = {
 		zz_ef_cm_create_owned_bank = { BANK_BLDG_TYPE = $BANK_BLDG_TYPE$ CB_SIZE = $CB_SIZE$ }

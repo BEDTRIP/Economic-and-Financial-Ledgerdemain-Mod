@@ -452,6 +452,9 @@ zz_ef_bridge_apply = {
 	zz_ef_sw = { F = div }
 	set_variable = { name = zz_ef_f_leak value = zz_ef_leak_week }
 	zz_ef_pop_savings_step = yes
+	# R3а (б), the user 8.10: the CB's start metal the same day as the start deposits (40% of M2 needs them) -- not a week
+	# later at the next step (it stays there too, for a CB that is not ready yet)
+	zz_ef_cb_metal_start_step = yes
 	zz_ef_cb_hume_step = yes
 	# Д2.30 (6.10 day): our currency held by other CBs lies in our banks (zz_ef_nr_deposits.txt)
 	zz_ef_nr_dep_step = yes
