@@ -357,6 +357,24 @@ zz_ef_money_hook_receive = {
 		limit = { has_variable = zz_ef_hook_pending }
 		remove_variable = zz_ef_hook_pending
 		remove_list_global_variable = { name = zz_ef_hook_countries target = this }
+		# the bridge's numbers default to 0 here; the widget's AddScope overrides them (the engine's check sees no setter of a
+		# scope the GUI passes -- "Event target 'g_…' is used but is never set")
+		if = { limit = { NOT = { exists = scope:g_aint } } save_scope_value_as = { name = g_aint value = 0 } }
+		if = { limit = { NOT = { exists = scope:g_tfees } } save_scope_value_as = { name = g_tfees value = 0 } }
+		if = { limit = { NOT = { exists = scope:g_imp } } save_scope_value_as = { name = g_imp value = 0 } }
+		if = { limit = { NOT = { exists = scope:g_exp } } save_scope_value_as = { name = g_exp value = 0 } }
+		if = { limit = { NOT = { exists = scope:g_surplus } } save_scope_value_as = { name = g_surplus value = 0 } }
+		if = { limit = { NOT = { exists = scope:g_fown } } save_scope_value_as = { name = g_fown value = 0 } }
+		if = { limit = { NOT = { exists = scope:g_aown } } save_scope_value_as = { name = g_aown value = 0 } }
+		if = { limit = { NOT = { exists = scope:g_poolchg } } save_scope_value_as = { name = g_poolchg value = 0 } }
+		if = { limit = { NOT = { exists = scope:g_pcons } } save_scope_value_as = { name = g_pcons value = 0 } }
+		if = { limit = { NOT = { exists = scope:g_grate } } save_scope_value_as = { name = g_grate value = 0 } }
+		if = { limit = { NOT = { exists = scope:g_maxcred } } save_scope_value_as = { name = g_maxcred value = 0 } }
+		if = { limit = { NOT = { exists = scope:g_wgdp } } save_scope_value_as = { name = g_wgdp value = 0 } }
+		if = { limit = { NOT = { exists = scope:g_wrate } } save_scope_value_as = { name = g_wrate value = 0 } }
+		if = { limit = { NOT = { exists = scope:g_ipay } } save_scope_value_as = { name = g_ipay value = 0 } }
+		if = { limit = { NOT = { exists = scope:g_sdebt } } save_scope_value_as = { name = g_sdebt value = 0 } }
+		if = { limit = { NOT = { exists = scope:g_sdebtf } } save_scope_value_as = { name = g_sdebtf value = 0 } }
 		set_variable = { name = zz_ef_hk_ext value = scope:ext }
 		set_variable = { name = zz_ef_hk_abr value = scope:abr }
 		set_variable = { name = zz_ef_hk_aint value = scope:g_aint }
