@@ -44,6 +44,16 @@ zz_ef_start_setup_year = {
 		limit = { has_modifier = has_central_bank }
 		central_bank_production_methods = yes
 	}
+	# a subject with a CB on its overlord's market takes the overlord's currency -- E&F's history condition, not the
+	# monthly hub's (it misses the Canadas, Hanover, New South Wales...: they then switched the standard at their first
+	# step through the zone and the CB's metal was rewritten past the start -- r1008_132604, the world's gold 153M off)
+	if = {
+		limit = {
+			has_modifier = has_central_bank
+			NOT = { market ?= { exists = owner owner = root } }
+		}
+		subject_currency = yes
+	}
 	if = {
 		limit = { has_modifier = has_financial_center }
 		private_ownership_production_stocks = yes
