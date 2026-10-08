@@ -55,10 +55,13 @@ law_silver_standard = {
 	unlocking_technologies = {
 		metalique_standard
 	}
-	can_enact = { # R3.5 PROBE 4 (8.10): market + isolationism -- reverted after the run
-		NOT = { is_not_market_owner = yes }
-		NOT = { has_law = law_type:law_isolationism }
-	}
+	can_enact = {
+		NOT = { 
+			is_not_market_owner = yes
+			has_law = law_type:law_isolationism
+			zz_ef_monetary_crisis_now = yes
+		}
+	} 
  
 	on_activate = {
 		activate_law = law_type:law_bimetallic_ratio_no
@@ -88,9 +91,7 @@ law_bimetallism_standard = {
 		NOT = { 
 			is_not_market_owner = yes
 			has_law = law_type:law_isolationism
-			has_modifier = central_bank_bankruptcy_country
-			has_modifier = currency_crisis_country
-			has_modifier = monetary_systeme_transition
+			zz_ef_monetary_crisis_now = yes
 		}
 	} 
 
@@ -153,9 +154,7 @@ law_gold_standard = {
 		NOT = { 
 			is_not_market_owner = yes
 			has_law = law_type:law_isolationism
-			has_modifier = central_bank_bankruptcy_country
-			has_modifier = currency_crisis_country
-			has_modifier = monetary_systeme_transition
+			zz_ef_monetary_crisis_now = yes
 		}
 	} 
 	on_activate = {

@@ -8,3 +8,16 @@ zz_ef_game_started = {
 		game_date >= 1836.3.1
 	}
 }
+
+# R3.5 (8.10): the monetary laws' can_enact -- a crisis or a transition of the monetary system. The engine checks the
+# laws when it loads the game and reads these modifiers there as set (the probes r1008_154708 / r1008_155413: the
+# market check alone -- no "not permitted to retain law" for the market owners; with these three -- for all); at
+# the start there is no crisis, so they are read from the second day on.
+zz_ef_monetary_crisis_now = {
+	game_date > 1836.1.1
+	OR = {
+		has_modifier = central_bank_bankruptcy_country
+		has_modifier = currency_crisis_country
+		has_modifier = monetary_systeme_transition
+	}
+}
