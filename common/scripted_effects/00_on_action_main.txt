@@ -4639,6 +4639,8 @@ is_at_war_monthly_pulse = {
 }
 #is_in_revolution_monthly_pulse
 is_in_revolution_monthly_pulse = {
+	# a new revolutionary country can lack the variable ("Variable not of the value scope type"): 0 first
+	if = { limit = { NOT = { has_variable = is_in_revolution_monthly_pulse } } set_variable = { name = is_in_revolution_monthly_pulse value = 0 } }
 	if = {
 		limit = {
 			is_revolutionary = yes
