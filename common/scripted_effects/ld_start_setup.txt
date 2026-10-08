@@ -36,10 +36,23 @@ zz_ef_start_setup_year = {
 		national_capacity_variable_list = yes
 		country_index_variable_list = yes
 		central_bank_debt_variable_list = yes
-		currency_law_list = yes
 		median_currency_value = yes
 		global_monetary_reference_1 = yes
 	}
+	# from the end of E&F's history (history/global/99_ef_history_global_variable.txt, R3а: history is data only)
+	sovereign_bond_yields = yes
+	if = {
+		limit = { has_modifier = has_central_bank }
+		central_bank_production_methods = yes
+	}
+	if = {
+		limit = { has_modifier = has_financial_center }
+		private_ownership_production_stocks = yes
+		financial_center_production_methods = yes
+	}
+	currency_law_list = yes
+	set_reset_monetary_system_status = yes
+	law_no_monetary_system_with_tech_currency_standards = yes
 }
 # the monthly hub (ef_on_monthly_pulse_country): a subject's currency, a new country's variables, the CB law, the CB's
 # modifiers and metal

@@ -26,7 +26,7 @@
 | `global/00_ef_financial_global_variable.txt` | 263 переменных страны (финансы E&F) | данные |
 | `global/00_ef_stockpile_global_variable.txt` | `looting_1_year`, признак `zz_ef_country_vars_set` | данные |
 | `global/01_ef_state_global_variable.txt` | 323 переменных штата (`gold_state_1`, `silver_state_1` = 0 и др.) | данные |
-| `global/99_ef_history_global_variable.txt` | **законы валют и стандартов** по странам (75 `activate_law`: серебро 31, биметалл 3, золото — Британия; соотношение биметалла), паритеты `money_value_target_1`, эталон `global_monetary_reference`, `global_financial_power`; в конце всем: `country_credit_rating`, `sovereign_bond_yields`, методы ЦБ, **валюта подданного** (`subject_currency` — ЦБ и чужой рынок), методы финцентра, **`add_treasury = gold_reserves_limit`** (казна до предела резервов), `currency_law_list`, статус денежной системы (казну до предела резервов не пополняет) | данные + разовая настройка |
+| `global/99_ef_history_global_variable.txt` | **законы валют и стандартов** по странам (75 `activate_law`: серебро 31, биметалл 3, золото — Британия; соотношение биметалла), паритеты `money_value_target_1`, эталон `global_monetary_reference`, `global_financial_power`; разовой настройки и пополнения казны нет (настройка — в шаге старта) | данные |
 | `global/PSC_global.txt` | событие `set_construction_start` (стройка PSC) | запуск |
 | `global/ld_central_bank_law.txt` | закон группы «Центральный банк» по ЦБ (`zz_ef_cb_law_sync`) | настройка |
 | `global/zz_ef_currency_fix.txt` | закон валюты WUR (опечатка E&F), 13 стран без валюты → `law_no_market_liquidity`, `currency_standards` странам с подушным налогом | поправки |
@@ -48,7 +48,7 @@
 ## 4. Старт — первый бюджетный тик после первой недели
 
 Зонд (`zz_ef_sched_probe_step`, `ld_scheduler.txt`) пропускает тики до 8.1 (движок прогоняет первую неделю: бюджет, кассы зданий, цены), на первом тике после (до 1836.3, один раз — `zz_ef_start_setup_done`):
-`zz_ef_start_setup` (`ld_start_setup.txt`) — каждой стране скрытые события — `ld_start_setup.1` (из годового пульса: ступени ВВП, ЦБ и финцентры по ВВП, рейтинг, списки эталона), `ld_start_setup.2` (месячный хаб E&F целиком: валюта подданных, переменные новых стран, закон ЦБ, металл и модификаторы ЦБ); первый день
+`zz_ef_start_setup` (`ld_start_setup.txt`) — каждой стране скрытые события — `ld_start_setup.1` (из годового пульса: ступени ВВП, ЦБ и финцентры по ВВП, рейтинг, списки эталона; из конца истории E&F: доходность облигаций, методы ЦБ и финцентра, список законов валют, статус денежной системы), `ld_start_setup.2` (месячный хаб E&F целиком: валюта подданных, переменные новых стран, закон ЦБ, металл и модификаторы ЦБ); первый день
 шагов модели — на следующий день.
 
 ### Первые шаги модели (`zz_ef_money_model_step`)

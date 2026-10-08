@@ -2051,37 +2051,9 @@
         ################################################################################################################################
         ################################################################################################################################
 
-		country_credit_rating = yes
-		sovereign_bond_yields = yes
-
-		if = {
-			limit = {
-				has_modifier = has_central_bank
-			}
-			central_bank_production_methods = yes
-		}
-		if = {
-			limit = {
-				has_modifier = has_central_bank
-				not   = {
-					market.owner = this
-				}
-			}
-			subject_currency = yes
-		}
- 		if  = {
-			limit  = {
-				has_modifier = has_financial_center
-			}
-			private_ownership_production_stocks = yes
-			financial_center_production_methods = yes
-		}
-		# R3а (в), the user 8.10: no top-up of the treasury to the reserves' limit -- the treasury as in the engine's history
-		# ai_build_privat_building_silver_mine = yes
-		# ai_build_privat_building_gold_mine = yes
-		currency_law_list = yes
-		set_reset_monetary_system_status = yes
-		law_no_monetary_system_with_tech_currency_standards = yes
+		# R3а (the user 8.10): history is data only -- E&F's start setup that was here (credit rating, bond yields, CB and
+		# financial-centre methods, a subject's currency, the currency law list, the monetary system's status) runs in
+		# zz_ef_start_setup (scripted_effects/ld_start_setup.txt) at the start; no treasury top-up to the reserves' limit
 	}
 }
 
