@@ -145,20 +145,6 @@ base_rate_to_pcs_factor = {
     max = 1
 }
 
-building_ef_private_construction_max_level_var = {
-	value = var:gdp_view_fc
-	divide = 10
-	multiply = {
-		value = {
-		 	add = 10
-		 	subtract = base_rate_percentage_decimal
-		}
-		divide = 9
-	}
-
-	min = 1
-	round = yes
-}
 
 building_ef_private_construction_lvl_state = {
 	value = b:building_construction_sector.level
@@ -350,366 +336,46 @@ building_financial_num = {
 #bondinput_bond
 #brand
 	#arg
-	financial_centre_arg_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_arg
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#aus
-	financial_centre_aus_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_aus
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#bav
-	financial_centre_bav_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_bav
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#bel
-	financial_centre_bel_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_bel
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#bic
-	financial_centre_bic_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_bic
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#brz
-	financial_centre_brz_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_brz
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#chi
-	financial_centre_chi_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_chi
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#chl
-	financial_centre_chl_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_chl
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#den
-	financial_centre_den_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_den
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#dei
-	financial_centre_dei_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_dei
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#egy
-	financial_centre_egy_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_egy
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#fra
 	#frm
-	financial_centre_frm_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_frm
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#gbr
-	financial_centre_gbr_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_gbr
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#gbr_2
-	financial_centre_gbr_2_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_gbr_2
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#gre
-	financial_centre_gre_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_gre
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#hkh
-	financial_centre_hkh_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_hkh
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#han
-	financial_centre_han_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_han
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#ita
-	financial_centre_ita_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_ita
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#jap
-	financial_centre_jap_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_jap
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#mex
-	financial_centre_mex_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_mex
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#net
-	financial_centre_net_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_net
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#nsw
-	financial_centre_nsw_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_nsw
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#ont
-	financial_centre_ont_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_ont
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#peu
-	financial_centre_peu_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_peu
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#por
-	financial_centre_por_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_por
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#pru
-	financial_centre_pru_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_pru
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#que
-	financial_centre_que_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_que
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#rus
-	financial_centre_rus_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_rus
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#saf
-	financial_centre_saf_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_saf
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#sar
-	financial_centre_sar_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_sar
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#sic
-	financial_centre_sic_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_sic
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#spa
-	financial_centre_spa_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_spa
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#swe
-	financial_centre_swe_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_swe
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#swi
-	financial_centre_swi_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_swi
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#tus
-	financial_centre_tus_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_tus
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#tur
-	financial_centre_tur_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_tur
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#uru
-	financial_centre_uru_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_uru
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#usa
-	financial_centre_usa_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_usa
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#usa_2
-	financial_centre_usa_2_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_usa_2
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 	#sax
-	financial_centre_sax_input_bond = {
-		every_scope_building = {
-			limit = {
-				is_building_type = building_financial_centre_sax
-			}
-			add = modifier:goods_input_bond_add
-		}
-	}
 
 #brand
 
@@ -794,9 +460,6 @@ pop_capital_loss = {
 		add = pop_savings
 		multiply = var:country_indice_value_dif_01
 	}
-}
-prosperity_100 = {
-	value = prosperity
 }
 
 
@@ -2224,14 +1887,6 @@ country_credit_rating_tax_level_value = {
 	}
 }
 
-country_credit_rating_national_debt_compared_gdp_1_5 = {
-	value = country_credit_rating_national_debt_compared_gdp
-	multiply = 1.5
-}
-country_credit_rating_tax_level_value_1_5 = {
-	value = country_credit_rating_tax_level_value
-	multiply = 1.5
-}
 
 ########################################################################################################################################
 ########################################################################################################################################
@@ -2447,37 +2102,6 @@ economic_sentiment_index = {
 			}
 		}
 		multiply = 0.5
-	}
-}
-economic_sentiment_index_no_malus = {
-	value = 0
-	if = {
-		limit = {
-			has_financial_center = yes
-		}
-
-		#15 -> 15 x 1 = 15
-		add = economic_sentiment_index_base_rate_1_5
-
-		#10 -> 10 x 2 = 20
-		add = economic_sentiment_index_stock_market_performance #10
-		add = economic_sentiment_index_investement_pool_ratio #10
-
-		#7.5 -> 7.5 x 2 = 15
-		add =  country_credit_rating_tax_level_value_0_75
-		add =  country_credit_rating_national_debt_compared_gdp_0_75
-
-		#10 -> 10 x 10 = 50
-		add =  country_credit_rating_ratio_gdp_per_capital_0_5
-		add =  country_credit_rating_GDP_grow_0_5
-		add = country_credit_rating_money_value_0_5
-		add = country_credit_rating_inflation_0_5
-		add = country_credit_rating_ratio_with_national_capacity_reference_currency_0_5
-		add = country_credit_rating_ratio_with_country_indice_reference_currency_0_5
-		add = country_credit_rating_infamy_0_5
-		add = country_credit_rating_government_legitimacy_0_5
-		add = country_credit_rating_government_wage_level_value_0_5
-		add = country_credit_rating_military_wage_level_value_0_5
 	}
 }
 economic_sentiment_index_investement_pool_ratio = {
@@ -2820,16 +2444,6 @@ bond_market_goods_buy_orders = {
 		add = market.mg:bond.market_goods_buy_orders
 	}
 }
-bond_market_goods_delta = {
-	value = bond_market_goods_sell_orders
-	subtract = bond_market_goods_buy_orders
-}
-stockpiling_bond_var_1 = {
-	value = 0
-}
-releasing_bond_var_1 = {
-	value = 0
-}
 # var:credit_at_central_bank is only set once a country has touched E&F's
 # credit effects; without the guard every other country logs
 # "Failed to fetch variable" (same guard as EF.15).
@@ -2856,10 +2470,6 @@ manufacture_stock_market_goods_buy_orders = {
 	value = {
 		add = market.mg:manufacture_stock.market_goods_buy_orders
 	}
-}
-manufacture_stock_market_goods_delta = {
-	value = manufacture_stock_market_goods_sell_orders
-	subtract = manufacture_stock_market_goods_buy_orders
 }
 ### Quantities read by every E&F formula: the yearly average / today's price.
 stockpiling_manufacture_stock_var_state = {
@@ -2909,10 +2519,6 @@ agricultural_stock_market_goods_buy_orders = {
 		add = market.mg:agricultural_stock.market_goods_buy_orders
 	}
 }
-agricultural_stock_market_goods_delta = {
-	value = agricultural_stock_market_goods_sell_orders
-	subtract = agricultural_stock_market_goods_buy_orders
-}
 stockpiling_agricultural_stock_var_state = {
 	if = {
 		limit = { has_variable = zz_ef_cap_avg_as }
@@ -2960,10 +2566,6 @@ railroad_stock_market_goods_buy_orders = {
 		add = market.mg:railroad_stock.market_goods_buy_orders
 	}
 }
-railroad_stock_market_goods_delta = {
-	value = railroad_stock_market_goods_sell_orders
-	subtract = railroad_stock_market_goods_buy_orders
-}
 stockpiling_railroad_stock_var_state = {
 	if = {
 		limit = { has_variable = zz_ef_cap_avg_rr }
@@ -3010,10 +2612,6 @@ mining_stock_market_goods_buy_orders = {
 	value = {
 		add = market.mg:mining_stock.market_goods_buy_orders
 	}
-}
-mining_stock_market_goods_delta = {
-	value = mining_stock_market_goods_sell_orders
-	subtract = mining_stock_market_goods_buy_orders
 }
 stockpiling_mining_stock_var_state = {
 	if = {
@@ -3124,11 +2722,6 @@ bond_by_price_in_gold = {
 	value = stockpiling_bond_var_state
 	multiply = bond_price_in_gold
 }
-bond_interest_rate_payable = {
-	value = stockpiling_bond_var_state
-	multiply = bond_price
-	multiply = 1 #country_loan_interest_rate
-}
 bond_price_in_gold = {
 	value = bond_price
 	if = {
@@ -3167,30 +2760,6 @@ central_bank_debt_by_tech = {
 	multiply = central_bank_debt_by_tech_ratio_decimal
 
 	#add = central_bank_debt # deja à 75% max 25% du coverage -> je monte au max si le pays dois assurer sa valeur mais qu'il ne peut pas les pret etranger sont une soure de regule +++ aevec pour cible 75% de la valeur couvete
-}
-central_bank_debt_by_tech_ratio = {
-	value = 0
-	#15%
-	if = {
-		limit = {
-			has_technology_researched = central_banking
-		}
-		add = 15
-	}
-	#30%
-	if = {
-		limit = {
-			has_technology_researched = private_liquidity_provision
-		}
-		add = 15
-	}
-	#45%
-	if = {
-		limit = {
-			has_technology_researched = advanced_interbank_refinancing
-		}
-		add = 15
-	}
 }
 central_bank_debt_by_tech_ratio_decimal = {
 	value = 0
@@ -3477,10 +3046,6 @@ total_cost_fcc = {
 	add = agricultural_stock_price_by_demand_fc
 	add = mining_stock_price_by_demand_fc
 	add = railroad_stock_price_by_demand_fc
-}
-base_supply_mutual_fund = {
-    value = bg_financial_centre_lvl
-    multiply = 1
 }
 base_supply_mutual_fund_fix = {
 	value = var:base_demande_bond_fix
@@ -3819,28 +3384,6 @@ railroad_stock_market_goods_sell_orders_ratio = {
 ###########################################################################################################################################################################################
 ###########################################################################################################################################################################################
 
-building_financial_district_lvl = {
-    value = 0
-    every_scope_building = {
-        limit = {
-            is_building_type = building_financial_district
-        }
-        add = level
-    }
-}
-building_railway_lvl_X = { #mee donnee si unn bbanntimeent lamhbda eest détennue à une part
-    value = 0
-	if = {
-		limit = {
-			any_scope_building = {
-				level > 0
-				private_ownership_fraction > 0
-				is_building_type = building_railway
-			}
-		}
-		add = 1
-	}
-}
 
 ###########################################################################################################################################################################################
 ###########################################################################################################################################################################################
@@ -4031,10 +3574,6 @@ interest_purchasing_gui = {
 		add = interest_value_10Y
 	}
 }
-total_at_term_gui = {
-	value = bond_final_interest_in_currency_gui
-	add = price_bond_gui
-}
 bond_monthly_interest_gui = {
 	value = bond_final_interest_in_currency_gui
 	if = {
@@ -4049,10 +3588,6 @@ bond_monthly_interest_gui = {
 		}
 		divide = 120
 	}
-}
-bond_weekly_interest_gui = {
-	value = bond_monthly_interest_gui
-	divide = 4
 }
 maturity_time_gui = {
 	value = 0
@@ -5118,96 +4653,6 @@ ai_central_bank_debt_privat_bank_gold_loaned_10 = {
 		add = owner.var:ai_privat_bank_bond_value_10
 	}
 }
-ai_central_bank_debt_privat_bank_gold_loaned_11 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_11
-		add = owner.var:ai_privat_bank_bond_value_11
-	}
-}
-ai_central_bank_debt_privat_bank_gold_loaned_12 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_12
-		add = owner.var:ai_privat_bank_bond_value_12
-	}
-}
-ai_central_bank_debt_privat_bank_gold_loaned_13 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_13
-		add = owner.var:ai_privat_bank_bond_value_13
-	}
-}
-ai_central_bank_debt_privat_bank_gold_loaned_14 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_14
-		add = owner.var:ai_privat_bank_bond_value_14
-	}
-}
-ai_central_bank_debt_privat_bank_gold_loaned_15 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_15
-		add = owner.var:ai_privat_bank_bond_value_15
-	}
-}
-ai_central_bank_debt_privat_bank_gold_loaned_16 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_16
-		add = owner.var:ai_privat_bank_bond_value_16
-	}
-}
-ai_central_bank_debt_privat_bank_gold_loaned_17 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_17
-		add = owner.var:ai_privat_bank_bond_value_17
-	}
-}
-ai_central_bank_debt_privat_bank_gold_loaned_18 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_18
-		add = owner.var:ai_privat_bank_bond_value_18
-	}
-}
-ai_central_bank_debt_privat_bank_gold_loaned_19 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_19
-		add = owner.var:ai_privat_bank_bond_value_19
-	}
-}
-ai_central_bank_debt_privat_bank_gold_loaned_20 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_20
-		add = owner.var:ai_privat_bank_bond_value_20
-	}
-}
-ai_central_bank_debt_privat_bank_gold_loaned_21 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_21
-		add = owner.var:ai_privat_bank_bond_value_21
-	}
-}
-ai_central_bank_debt_privat_bank_gold_loaned_22 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_22
-		add = owner.var:ai_privat_bank_bond_value_22
-	}
-}
-ai_central_bank_debt_privat_bank_gold_loaned_23 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_23
-		add = owner.var:ai_privat_bank_bond_value_23
-	}
-}
-ai_central_bank_debt_privat_bank_gold_loaned_24 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_24
-		add = owner.var:ai_privat_bank_bond_value_24
-	}
-}
-ai_central_bank_debt_privat_bank_gold_loaned_25 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_25
-		add = owner.var:ai_privat_bank_bond_value_25
-	}
-}
 
 
 ai_entral_bank_debt_privat_bank_interest_refund_per_year_1 = {
@@ -5270,96 +4715,6 @@ ai_entral_bank_debt_privat_bank_interest_refund_per_year_10 = {
 		add = owner.var:ai_privat_bank_interest_calculated_10
 	}
 }
-ai_entral_bank_debt_privat_bank_interest_refund_per_year_11 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_11
-		add = owner.var:ai_privat_bank_interest_calculated_11
-	}
-}
-ai_entral_bank_debt_privat_bank_interest_refund_per_year_12 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_12
-		add = owner.var:ai_privat_bank_interest_calculated_12
-	}
-}
-ai_entral_bank_debt_privat_bank_interest_refund_per_year_13 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_13
-		add = owner.var:ai_privat_bank_interest_calculated_13
-	}
-}
-ai_entral_bank_debt_privat_bank_interest_refund_per_year_14 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_14
-		add = owner.var:ai_privat_bank_interest_calculated_14
-	}
-}
-ai_entral_bank_debt_privat_bank_interest_refund_per_year_15 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_15
-		add = owner.var:ai_privat_bank_interest_calculated_15
-	}
-}
-ai_entral_bank_debt_privat_bank_interest_refund_per_year_16 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_16
-		add = owner.var:ai_privat_bank_interest_calculated_16
-	}
-}
-ai_entral_bank_debt_privat_bank_interest_refund_per_year_17 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_17
-		add = owner.var:ai_privat_bank_interest_calculated_17
-	}
-}
-ai_entral_bank_debt_privat_bank_interest_refund_per_year_18 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_18
-		add = owner.var:ai_privat_bank_interest_calculated_18
-	}
-}
-ai_entral_bank_debt_privat_bank_interest_refund_per_year_19 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_19
-		add = owner.var:ai_privat_bank_interest_calculated_19
-	}
-}
-ai_entral_bank_debt_privat_bank_interest_refund_per_year_20 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_20
-		add = owner.var:ai_privat_bank_interest_calculated_20
-	}
-}
-ai_entral_bank_debt_privat_bank_interest_refund_per_year_21 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_21
-		add = owner.var:ai_privat_bank_interest_calculated_21
-	}
-}
-ai_entral_bank_debt_privat_bank_interest_refund_per_year_22 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_22
-		add = owner.var:ai_privat_bank_interest_calculated_22
-	}
-}
-ai_entral_bank_debt_privat_bank_interest_refund_per_year_23 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_23
-		add = owner.var:ai_privat_bank_interest_calculated_23
-	}
-}
-ai_entral_bank_debt_privat_bank_interest_refund_per_year_24 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_24
-		add = owner.var:ai_privat_bank_interest_calculated_24
-	}
-}
-ai_entral_bank_debt_privat_bank_interest_refund_per_year_25 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_25
-		add = owner.var:ai_privat_bank_interest_calculated_25
-	}
-}
 
 ########################################################################################################################################
 ########################################################################################################################################
@@ -5405,115 +4760,6 @@ bond_quantity_scripted = {
 			value = 0
 			add = gold_reserves_var_10
 			divide = scope:seller.bond_price
-		}
-	}
-}
-bond_quantity_scripted_all = {
-	value = 0
-	add = {
-		value = 0
-		add = scope:seller.central_bank_debt
-		divide = scope:seller.bond_price
-	}
-}
-bond_quantity_scripted_test = {
-	value = 0
-	if  = {
-		limit  = {
-			gold_reserves > gold_reserves_10
-			gold_reserves < gold_reserves_20
-		}
-		add = {
-			value = 0
-			add = gold_reserves_var_02
-			#divide = scope:seller.bond_price
-		}
-	}
-	if  = {
-		limit  = {
-			gold_reserves > gold_reserves_20
-			gold_reserves < gold_reserves_30
-		}
-		add = {
-			value = 0
-			add = gold_reserves_var_03
-			#divide = scope:seller.bond_price
-		}
-	}
-	if  = {
-		limit  = {
-			gold_reserves > gold_reserves_30
-			gold_reserves < gold_reserves_40
-		}
-		add = {
-			value = 0
-			add = gold_reserves_var_04
-			#divide = scope:seller.bond_price
-		}
-	}
-	if  = {
-		limit  = {
-			gold_reserves > gold_reserves_40
-			gold_reserves < gold_reserves_50
-		}
-		add = {
-			value = 0
-			add = gold_reserves_var_05
-			#divide = scope:seller.bond_price
-		}
-	}
-	if  = {
-		limit  = {
-			gold_reserves > gold_reserves_50
-			gold_reserves < gold_reserves_60
-		}
-		add = {
-			value = 0
-			add = gold_reserves_var_06
-			#divide = scope:seller.bond_price
-		}
-	}
-	if  = {
-		limit  = {
-			gold_reserves > gold_reserves_60
-			gold_reserves < gold_reserves_70
-		}
-		add = {
-			value = 0
-			add = gold_reserves_var_07
-			#divide = scope:seller.bond_price
-		}
-	}
-	if  = {
-		limit  = {
-			gold_reserves > gold_reserves_70
-			gold_reserves < gold_reserves_80
-		}
-		add = {
-			value = 0
-			add = gold_reserves_var_08
-			#divide = scope:seller.bond_price
-		}
-	}
-	if  = {
-		limit  = {
-			gold_reserves > gold_reserves_80
-			gold_reserves < gold_reserves_90
-		}
-		add = {
-			value = 0
-			add = gold_reserves_var_09
-			#divide = scope:seller.bond_price
-		}
-	}
-	if  = {
-		limit  = {
-			gold_reserves > gold_reserves_90
-		}
-		add = {
-			value = 0
-			add = gold_reserves_var_10
-			#divide = scope:seller.bond_price
 		}
 	}
 }
@@ -5605,19 +4851,6 @@ position_regulator = {
 ########################################################################################################################################
 ########################################################################################################################################
 
-buy_bond_order = {
-	value = 0
-	add = var:buy_bond_1_on
-	add = var:buy_bond_2_on
-	add = var:buy_bond_3_on
-	add = var:buy_bond_4_on
-	add = var:buy_bond_5_on
-	add = var:buy_bond_6_on
-	add = var:buy_bond_7_on
-	add = var:buy_bond_8_on
-	add = var:buy_bond_9_on
-	add = var:buy_bond_10_on
-}
 buy_bond_order_valid_10Y = {
 	value = 5
 	subtract = var:buy_bond_1_on

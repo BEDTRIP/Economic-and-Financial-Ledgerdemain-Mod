@@ -1,0 +1,81 @@
+﻿# Вырезано из common/script_values/00_economic_scripted_value.txt: значения без ссылок (ld_index 8.10, и в тексте модов — только определение); строки — до выреза.
+# строки 7049-7063: inflation_on_consumer_goods_market_value_abs
+inflation_on_consumer_goods_market_value_abs = {
+	value = 1
+	if = {
+		limit = {
+			inflation_on_consumer_goods_market_value > 0
+		}
+		add = inflation_on_consumer_goods_market_value
+	}
+	if = {
+		limit = {
+			inflation_on_consumer_goods_market_value < 0
+		}
+		subtract = inflation_on_consumer_goods_market_value
+	}
+}
+# строки 7107-7121: inflation_on_energy_market_value_abs
+inflation_on_energy_market_value_abs = {
+	value = 1
+	if = {
+		limit = {
+			inflation_on_energy_market_value > 0
+		}
+		add = inflation_on_energy_market_value
+	}
+	if = {
+		limit = {
+			inflation_on_energy_market_value < 0
+		}
+		subtract = inflation_on_energy_market_value
+	}
+}
+# строки 7179-7193: inflation_on_raw_material_market_value_abs
+inflation_on_raw_material_market_value_abs = {
+	value = 1
+	if = {
+		limit = {
+			inflation_on_raw_material_market_value > 0
+		}
+		add = inflation_on_raw_material_market_value
+	}
+	if = {
+		limit = {
+			inflation_on_raw_material_market_value < 0
+		}
+		subtract = inflation_on_raw_material_market_value
+	}
+}
+# строки 7266-7280: inflation_on_manufactured_goods_market_value_abs
+inflation_on_manufactured_goods_market_value_abs = {
+	value = 1
+	if = {
+		limit = {
+			inflation_on_manufactured_goods_market_value > 0
+		}
+		add = inflation_on_manufactured_goods_market_value
+	}
+	if = {
+		limit = {
+			inflation_on_manufactured_goods_market_value < 0
+		}
+		subtract = inflation_on_manufactured_goods_market_value
+	}
+}
+# строки 7345-7359: inflation_on_military_equipment_market_value_abs
+inflation_on_military_equipment_market_value_abs = {
+	value = 1
+	if = {
+		limit = {
+			inflation_on_military_equipment_market_value > 0
+		}
+		add = inflation_on_military_equipment_market_value
+	}
+	if = {
+		limit = {
+			inflation_on_military_equipment_market_value < 0
+		}
+		subtract = inflation_on_military_equipment_market_value
+	}
+}

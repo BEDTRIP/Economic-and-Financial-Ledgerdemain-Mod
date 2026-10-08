@@ -7046,21 +7046,6 @@ inflation_on_consumer_goods = {
 		add = market.mg:fine_art.market_goods_buy_orders
 	}
 }
-inflation_on_consumer_goods_market_value_abs = {
-	value = 1
-	if = {
-		limit = {
-			inflation_on_consumer_goods_market_value > 0
-		}
-		add = inflation_on_consumer_goods_market_value
-	}
-	if = {
-		limit = {
-			inflation_on_consumer_goods_market_value < 0
-		}
-		subtract = inflation_on_consumer_goods_market_value
-	}
-}
 
 #inflation_on_energy
 inflation_on_energy_market_value = {
@@ -7102,21 +7087,6 @@ inflation_on_energy = {
 		add = market.mg:hardwood.market_goods_buy_orders
 		add = market.mg:coal.market_goods_buy_orders
 		add = market.mg:oil.market_goods_buy_orders
-	}
-}
-inflation_on_energy_market_value_abs = {
-	value = 1
-	if = {
-		limit = {
-			inflation_on_energy_market_value > 0
-		}
-		add = inflation_on_energy_market_value
-	}
-	if = {
-		limit = {
-			inflation_on_energy_market_value < 0
-		}
-		subtract = inflation_on_energy_market_value
 	}
 }
 
@@ -7174,21 +7144,6 @@ inflation_on_raw_material = {
 		add = market.mg:iron.market_goods_buy_orders
 		add = market.mg:lead.market_goods_buy_orders
 		add = market.mg:rubber.market_goods_buy_orders
-	}
-}
-inflation_on_raw_material_market_value_abs = {
-	value = 1
-	if = {
-		limit = {
-			inflation_on_raw_material_market_value > 0
-		}
-		add = inflation_on_raw_material_market_value
-	}
-	if = {
-		limit = {
-			inflation_on_raw_material_market_value < 0
-		}
-		subtract = inflation_on_raw_material_market_value
 	}
 }
 
@@ -7263,21 +7218,6 @@ inflation_on_manufactured_goods = {
 		add = market.mg:explosives.market_goods_buy_orders
 	}
 }
-inflation_on_manufactured_goods_market_value_abs = {
-	value = 1
-	if = {
-		limit = {
-			inflation_on_manufactured_goods_market_value > 0
-		}
-		add = inflation_on_manufactured_goods_market_value
-	}
-	if = {
-		limit = {
-			inflation_on_manufactured_goods_market_value < 0
-		}
-		subtract = inflation_on_manufactured_goods_market_value
-	}
-}
 
 #inflation_on_military_equipment
 inflation_on_military_equipment_market_value = {
@@ -7340,21 +7280,6 @@ inflation_on_military_equipment = {
 		add = market.mg:aeroplanes.market_goods_buy_orders
 		add = market.mg:manowars.market_goods_buy_orders
 		add = market.mg:ironclads.market_goods_buy_orders
-	}
-}
-inflation_on_military_equipment_market_value_abs = {
-	value = 1
-	if = {
-		limit = {
-			inflation_on_military_equipment_market_value > 0
-		}
-		add = inflation_on_military_equipment_market_value
-	}
-	if = {
-		limit = {
-			inflation_on_military_equipment_market_value < 0
-		}
-		subtract = inflation_on_military_equipment_market_value
 	}
 }
 

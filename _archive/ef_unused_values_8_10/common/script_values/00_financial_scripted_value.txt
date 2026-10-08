@@ -1,0 +1,860 @@
+﻿# Вырезано из common/script_values/00_financial_scripted_value.txt: значения без ссылок (ld_index 8.10, и в тексте модов — только определение); строки — до выреза.
+# строки 148-161: building_ef_private_construction_max_level_var
+building_ef_private_construction_max_level_var = {
+	value = var:gdp_view_fc
+	divide = 10
+	multiply = {
+		value = {
+		 	add = 10
+		 	subtract = base_rate_percentage_decimal
+		}
+		divide = 9
+	}
+
+	min = 1
+	round = yes
+}
+# строки 353-360: financial_centre_arg_input_bond
+	financial_centre_arg_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_arg
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 362-369: financial_centre_aus_input_bond
+	financial_centre_aus_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_aus
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 371-378: financial_centre_bav_input_bond
+	financial_centre_bav_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_bav
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 380-387: financial_centre_bel_input_bond
+	financial_centre_bel_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_bel
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 389-396: financial_centre_bic_input_bond
+	financial_centre_bic_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_bic
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 398-405: financial_centre_brz_input_bond
+	financial_centre_brz_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_brz
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 407-414: financial_centre_chi_input_bond
+	financial_centre_chi_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_chi
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 416-423: financial_centre_chl_input_bond
+	financial_centre_chl_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_chl
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 425-432: financial_centre_den_input_bond
+	financial_centre_den_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_den
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 434-441: financial_centre_dei_input_bond
+	financial_centre_dei_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_dei
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 443-450: financial_centre_egy_input_bond
+	financial_centre_egy_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_egy
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 453-460: financial_centre_frm_input_bond
+	financial_centre_frm_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_frm
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 462-469: financial_centre_gbr_input_bond
+	financial_centre_gbr_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_gbr
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 471-478: financial_centre_gbr_2_input_bond
+	financial_centre_gbr_2_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_gbr_2
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 480-487: financial_centre_gre_input_bond
+	financial_centre_gre_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_gre
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 489-496: financial_centre_hkh_input_bond
+	financial_centre_hkh_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_hkh
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 498-505: financial_centre_han_input_bond
+	financial_centre_han_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_han
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 507-514: financial_centre_ita_input_bond
+	financial_centre_ita_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_ita
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 516-523: financial_centre_jap_input_bond
+	financial_centre_jap_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_jap
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 525-532: financial_centre_mex_input_bond
+	financial_centre_mex_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_mex
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 534-541: financial_centre_net_input_bond
+	financial_centre_net_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_net
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 543-550: financial_centre_nsw_input_bond
+	financial_centre_nsw_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_nsw
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 552-559: financial_centre_ont_input_bond
+	financial_centre_ont_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_ont
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 561-568: financial_centre_peu_input_bond
+	financial_centre_peu_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_peu
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 570-577: financial_centre_por_input_bond
+	financial_centre_por_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_por
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 579-586: financial_centre_pru_input_bond
+	financial_centre_pru_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_pru
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 588-595: financial_centre_que_input_bond
+	financial_centre_que_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_que
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 597-604: financial_centre_rus_input_bond
+	financial_centre_rus_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_rus
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 606-613: financial_centre_saf_input_bond
+	financial_centre_saf_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_saf
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 615-622: financial_centre_sar_input_bond
+	financial_centre_sar_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_sar
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 624-631: financial_centre_sic_input_bond
+	financial_centre_sic_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_sic
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 633-640: financial_centre_spa_input_bond
+	financial_centre_spa_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_spa
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 642-649: financial_centre_swe_input_bond
+	financial_centre_swe_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_swe
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 651-658: financial_centre_swi_input_bond
+	financial_centre_swi_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_swi
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 660-667: financial_centre_tus_input_bond
+	financial_centre_tus_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_tus
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 669-676: financial_centre_tur_input_bond
+	financial_centre_tur_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_tur
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 678-685: financial_centre_uru_input_bond
+	financial_centre_uru_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_uru
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 687-694: financial_centre_usa_input_bond
+	financial_centre_usa_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_usa
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 696-703: financial_centre_usa_2_input_bond
+	financial_centre_usa_2_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_usa_2
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 705-712: financial_centre_sax_input_bond
+	financial_centre_sax_input_bond = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_financial_centre_sax
+			}
+			add = modifier:goods_input_bond_add
+		}
+	}
+# строки 798-800: prosperity_100
+prosperity_100 = {
+	value = prosperity
+}
+# строки 2227-2230: country_credit_rating_national_debt_compared_gdp_1_5
+country_credit_rating_national_debt_compared_gdp_1_5 = {
+	value = country_credit_rating_national_debt_compared_gdp
+	multiply = 1.5
+}
+# строки 2231-2234: country_credit_rating_tax_level_value_1_5
+country_credit_rating_tax_level_value_1_5 = {
+	value = country_credit_rating_tax_level_value
+	multiply = 1.5
+}
+# строки 2452-2482: economic_sentiment_index_no_malus
+economic_sentiment_index_no_malus = {
+	value = 0
+	if = {
+		limit = {
+			has_financial_center = yes
+		}
+
+		#15 -> 15 x 1 = 15
+		add = economic_sentiment_index_base_rate_1_5
+
+		#10 -> 10 x 2 = 20
+		add = economic_sentiment_index_stock_market_performance #10
+		add = economic_sentiment_index_investement_pool_ratio #10
+
+		#7.5 -> 7.5 x 2 = 15
+		add =  country_credit_rating_tax_level_value_0_75
+		add =  country_credit_rating_national_debt_compared_gdp_0_75
+
+		#10 -> 10 x 10 = 50
+		add =  country_credit_rating_ratio_gdp_per_capital_0_5
+		add =  country_credit_rating_GDP_grow_0_5
+		add = country_credit_rating_money_value_0_5
+		add = country_credit_rating_inflation_0_5
+		add = country_credit_rating_ratio_with_national_capacity_reference_currency_0_5
+		add = country_credit_rating_ratio_with_country_indice_reference_currency_0_5
+		add = country_credit_rating_infamy_0_5
+		add = country_credit_rating_government_legitimacy_0_5
+		add = country_credit_rating_government_wage_level_value_0_5
+		add = country_credit_rating_military_wage_level_value_0_5
+	}
+}
+# строки 2823-2826: bond_market_goods_delta
+bond_market_goods_delta = {
+	value = bond_market_goods_sell_orders
+	subtract = bond_market_goods_buy_orders
+}
+# строки 2827-2829: stockpiling_bond_var_1
+stockpiling_bond_var_1 = {
+	value = 0
+}
+# строки 2830-2832: releasing_bond_var_1
+releasing_bond_var_1 = {
+	value = 0
+}
+# строки 2860-2863: manufacture_stock_market_goods_delta
+manufacture_stock_market_goods_delta = {
+	value = manufacture_stock_market_goods_sell_orders
+	subtract = manufacture_stock_market_goods_buy_orders
+}
+# строки 2912-2915: agricultural_stock_market_goods_delta
+agricultural_stock_market_goods_delta = {
+	value = agricultural_stock_market_goods_sell_orders
+	subtract = agricultural_stock_market_goods_buy_orders
+}
+# строки 2963-2966: railroad_stock_market_goods_delta
+railroad_stock_market_goods_delta = {
+	value = railroad_stock_market_goods_sell_orders
+	subtract = railroad_stock_market_goods_buy_orders
+}
+# строки 3014-3017: mining_stock_market_goods_delta
+mining_stock_market_goods_delta = {
+	value = mining_stock_market_goods_sell_orders
+	subtract = mining_stock_market_goods_buy_orders
+}
+# строки 3127-3131: bond_interest_rate_payable
+bond_interest_rate_payable = {
+	value = stockpiling_bond_var_state
+	multiply = bond_price
+	multiply = 1 #country_loan_interest_rate
+}
+# строки 3171-3194: central_bank_debt_by_tech_ratio
+central_bank_debt_by_tech_ratio = {
+	value = 0
+	#15%
+	if = {
+		limit = {
+			has_technology_researched = central_banking
+		}
+		add = 15
+	}
+	#30%
+	if = {
+		limit = {
+			has_technology_researched = private_liquidity_provision
+		}
+		add = 15
+	}
+	#45%
+	if = {
+		limit = {
+			has_technology_researched = advanced_interbank_refinancing
+		}
+		add = 15
+	}
+}
+# строки 3481-3484: base_supply_mutual_fund
+base_supply_mutual_fund = {
+    value = bg_financial_centre_lvl
+    multiply = 1
+}
+# строки 3822-3830: building_financial_district_lvl
+building_financial_district_lvl = {
+    value = 0
+    every_scope_building = {
+        limit = {
+            is_building_type = building_financial_district
+        }
+        add = level
+    }
+}
+# строки 3831-3843: building_railway_lvl_X
+building_railway_lvl_X = { #mee donnee si unn bbanntimeent lamhbda eest détennue à une part
+    value = 0
+	if = {
+		limit = {
+			any_scope_building = {
+				level > 0
+				private_ownership_fraction > 0
+				is_building_type = building_railway
+			}
+		}
+		add = 1
+	}
+}
+# строки 4034-4037: total_at_term_gui
+total_at_term_gui = {
+	value = bond_final_interest_in_currency_gui
+	add = price_bond_gui
+}
+# строки 4053-4056: bond_weekly_interest_gui
+bond_weekly_interest_gui = {
+	value = bond_monthly_interest_gui
+	divide = 4
+}
+# строки 5121-5126: ai_central_bank_debt_privat_bank_gold_loaned_11
+ai_central_bank_debt_privat_bank_gold_loaned_11 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_11
+		add = owner.var:ai_privat_bank_bond_value_11
+	}
+}
+# строки 5127-5132: ai_central_bank_debt_privat_bank_gold_loaned_12
+ai_central_bank_debt_privat_bank_gold_loaned_12 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_12
+		add = owner.var:ai_privat_bank_bond_value_12
+	}
+}
+# строки 5133-5138: ai_central_bank_debt_privat_bank_gold_loaned_13
+ai_central_bank_debt_privat_bank_gold_loaned_13 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_13
+		add = owner.var:ai_privat_bank_bond_value_13
+	}
+}
+# строки 5139-5144: ai_central_bank_debt_privat_bank_gold_loaned_14
+ai_central_bank_debt_privat_bank_gold_loaned_14 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_14
+		add = owner.var:ai_privat_bank_bond_value_14
+	}
+}
+# строки 5145-5150: ai_central_bank_debt_privat_bank_gold_loaned_15
+ai_central_bank_debt_privat_bank_gold_loaned_15 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_15
+		add = owner.var:ai_privat_bank_bond_value_15
+	}
+}
+# строки 5151-5156: ai_central_bank_debt_privat_bank_gold_loaned_16
+ai_central_bank_debt_privat_bank_gold_loaned_16 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_16
+		add = owner.var:ai_privat_bank_bond_value_16
+	}
+}
+# строки 5157-5162: ai_central_bank_debt_privat_bank_gold_loaned_17
+ai_central_bank_debt_privat_bank_gold_loaned_17 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_17
+		add = owner.var:ai_privat_bank_bond_value_17
+	}
+}
+# строки 5163-5168: ai_central_bank_debt_privat_bank_gold_loaned_18
+ai_central_bank_debt_privat_bank_gold_loaned_18 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_18
+		add = owner.var:ai_privat_bank_bond_value_18
+	}
+}
+# строки 5169-5174: ai_central_bank_debt_privat_bank_gold_loaned_19
+ai_central_bank_debt_privat_bank_gold_loaned_19 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_19
+		add = owner.var:ai_privat_bank_bond_value_19
+	}
+}
+# строки 5175-5180: ai_central_bank_debt_privat_bank_gold_loaned_20
+ai_central_bank_debt_privat_bank_gold_loaned_20 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_20
+		add = owner.var:ai_privat_bank_bond_value_20
+	}
+}
+# строки 5181-5186: ai_central_bank_debt_privat_bank_gold_loaned_21
+ai_central_bank_debt_privat_bank_gold_loaned_21 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_21
+		add = owner.var:ai_privat_bank_bond_value_21
+	}
+}
+# строки 5187-5192: ai_central_bank_debt_privat_bank_gold_loaned_22
+ai_central_bank_debt_privat_bank_gold_loaned_22 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_22
+		add = owner.var:ai_privat_bank_bond_value_22
+	}
+}
+# строки 5193-5198: ai_central_bank_debt_privat_bank_gold_loaned_23
+ai_central_bank_debt_privat_bank_gold_loaned_23 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_23
+		add = owner.var:ai_privat_bank_bond_value_23
+	}
+}
+# строки 5199-5204: ai_central_bank_debt_privat_bank_gold_loaned_24
+ai_central_bank_debt_privat_bank_gold_loaned_24 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_24
+		add = owner.var:ai_privat_bank_bond_value_24
+	}
+}
+# строки 5205-5210: ai_central_bank_debt_privat_bank_gold_loaned_25
+ai_central_bank_debt_privat_bank_gold_loaned_25 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_25
+		add = owner.var:ai_privat_bank_bond_value_25
+	}
+}
+# строки 5273-5278: ai_entral_bank_debt_privat_bank_interest_refund_per_year_11
+ai_entral_bank_debt_privat_bank_interest_refund_per_year_11 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_11
+		add = owner.var:ai_privat_bank_interest_calculated_11
+	}
+}
+# строки 5279-5284: ai_entral_bank_debt_privat_bank_interest_refund_per_year_12
+ai_entral_bank_debt_privat_bank_interest_refund_per_year_12 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_12
+		add = owner.var:ai_privat_bank_interest_calculated_12
+	}
+}
+# строки 5285-5290: ai_entral_bank_debt_privat_bank_interest_refund_per_year_13
+ai_entral_bank_debt_privat_bank_interest_refund_per_year_13 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_13
+		add = owner.var:ai_privat_bank_interest_calculated_13
+	}
+}
+# строки 5291-5296: ai_entral_bank_debt_privat_bank_interest_refund_per_year_14
+ai_entral_bank_debt_privat_bank_interest_refund_per_year_14 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_14
+		add = owner.var:ai_privat_bank_interest_calculated_14
+	}
+}
+# строки 5297-5302: ai_entral_bank_debt_privat_bank_interest_refund_per_year_15
+ai_entral_bank_debt_privat_bank_interest_refund_per_year_15 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_15
+		add = owner.var:ai_privat_bank_interest_calculated_15
+	}
+}
+# строки 5303-5308: ai_entral_bank_debt_privat_bank_interest_refund_per_year_16
+ai_entral_bank_debt_privat_bank_interest_refund_per_year_16 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_16
+		add = owner.var:ai_privat_bank_interest_calculated_16
+	}
+}
+# строки 5309-5314: ai_entral_bank_debt_privat_bank_interest_refund_per_year_17
+ai_entral_bank_debt_privat_bank_interest_refund_per_year_17 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_17
+		add = owner.var:ai_privat_bank_interest_calculated_17
+	}
+}
+# строки 5315-5320: ai_entral_bank_debt_privat_bank_interest_refund_per_year_18
+ai_entral_bank_debt_privat_bank_interest_refund_per_year_18 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_18
+		add = owner.var:ai_privat_bank_interest_calculated_18
+	}
+}
+# строки 5321-5326: ai_entral_bank_debt_privat_bank_interest_refund_per_year_19
+ai_entral_bank_debt_privat_bank_interest_refund_per_year_19 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_19
+		add = owner.var:ai_privat_bank_interest_calculated_19
+	}
+}
+# строки 5327-5332: ai_entral_bank_debt_privat_bank_interest_refund_per_year_20
+ai_entral_bank_debt_privat_bank_interest_refund_per_year_20 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_20
+		add = owner.var:ai_privat_bank_interest_calculated_20
+	}
+}
+# строки 5333-5338: ai_entral_bank_debt_privat_bank_interest_refund_per_year_21
+ai_entral_bank_debt_privat_bank_interest_refund_per_year_21 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_21
+		add = owner.var:ai_privat_bank_interest_calculated_21
+	}
+}
+# строки 5339-5344: ai_entral_bank_debt_privat_bank_interest_refund_per_year_22
+ai_entral_bank_debt_privat_bank_interest_refund_per_year_22 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_22
+		add = owner.var:ai_privat_bank_interest_calculated_22
+	}
+}
+# строки 5345-5350: ai_entral_bank_debt_privat_bank_interest_refund_per_year_23
+ai_entral_bank_debt_privat_bank_interest_refund_per_year_23 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_23
+		add = owner.var:ai_privat_bank_interest_calculated_23
+	}
+}
+# строки 5351-5356: ai_entral_bank_debt_privat_bank_interest_refund_per_year_24
+ai_entral_bank_debt_privat_bank_interest_refund_per_year_24 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_24
+		add = owner.var:ai_privat_bank_interest_calculated_24
+	}
+}
+# строки 5357-5362: ai_entral_bank_debt_privat_bank_interest_refund_per_year_25
+ai_entral_bank_debt_privat_bank_interest_refund_per_year_25 = {
+	every_in_list = {
+		variable = central_bank_debt_privat_bank_buyer_list_25
+		add = owner.var:ai_privat_bank_interest_calculated_25
+	}
+}
+# строки 5411-5418: bond_quantity_scripted_all
+bond_quantity_scripted_all = {
+	value = 0
+	add = {
+		value = 0
+		add = scope:seller.central_bank_debt
+		divide = scope:seller.bond_price
+	}
+}
+# строки 5419-5519: bond_quantity_scripted_test
+bond_quantity_scripted_test = {
+	value = 0
+	if  = {
+		limit  = {
+			gold_reserves > gold_reserves_10
+			gold_reserves < gold_reserves_20
+		}
+		add = {
+			value = 0
+			add = gold_reserves_var_02
+			#divide = scope:seller.bond_price
+		}
+	}
+	if  = {
+		limit  = {
+			gold_reserves > gold_reserves_20
+			gold_reserves < gold_reserves_30
+		}
+		add = {
+			value = 0
+			add = gold_reserves_var_03
+			#divide = scope:seller.bond_price
+		}
+	}
+	if  = {
+		limit  = {
+			gold_reserves > gold_reserves_30
+			gold_reserves < gold_reserves_40
+		}
+		add = {
+			value = 0
+			add = gold_reserves_var_04
+			#divide = scope:seller.bond_price
+		}
+	}
+	if  = {
+		limit  = {
+			gold_reserves > gold_reserves_40
+			gold_reserves < gold_reserves_50
+		}
+		add = {
+			value = 0
+			add = gold_reserves_var_05
+			#divide = scope:seller.bond_price
+		}
+	}
+	if  = {
+		limit  = {
+			gold_reserves > gold_reserves_50
+			gold_reserves < gold_reserves_60
+		}
+		add = {
+			value = 0
+			add = gold_reserves_var_06
+			#divide = scope:seller.bond_price
+		}
+	}
+	if  = {
+		limit  = {
+			gold_reserves > gold_reserves_60
+			gold_reserves < gold_reserves_70
+		}
+		add = {
+			value = 0
+			add = gold_reserves_var_07
+			#divide = scope:seller.bond_price
+		}
+	}
+	if  = {
+		limit  = {
+			gold_reserves > gold_reserves_70
+			gold_reserves < gold_reserves_80
+		}
+		add = {
+			value = 0
+			add = gold_reserves_var_08
+			#divide = scope:seller.bond_price
+		}
+	}
+	if  = {
+		limit  = {
+			gold_reserves > gold_reserves_80
+			gold_reserves < gold_reserves_90
+		}
+		add = {
+			value = 0
+			add = gold_reserves_var_09
+			#divide = scope:seller.bond_price
+		}
+	}
+	if  = {
+		limit  = {
+			gold_reserves > gold_reserves_90
+		}
+		add = {
+			value = 0
+			add = gold_reserves_var_10
+			#divide = scope:seller.bond_price
+		}
+	}
+}
+# строки 5608-5620: buy_bond_order
+buy_bond_order = {
+	value = 0
+	add = var:buy_bond_1_on
+	add = var:buy_bond_2_on
+	add = var:buy_bond_3_on
+	add = var:buy_bond_4_on
+	add = var:buy_bond_5_on
+	add = var:buy_bond_6_on
+	add = var:buy_bond_7_on
+	add = var:buy_bond_8_on
+	add = var:buy_bond_9_on
+	add = var:buy_bond_10_on
+}
