@@ -11,6 +11,7 @@
 - `common/history/global/*.txt`, `common/history/states/01_ef_states.txt`, `common/history/buildings/*.txt` — стартовые данные (см. «Старт игры»).
 - `events/ld_currency_formed_events.txt` — `ld_currency_formed.1`: валюта формируемой страны (R3.7, `currencies.md`).
 - `events/ld_new_country_immediate_init_events.txt` — скрытое событие `zz_ef_newcountry.1` (root — страна для `zz_ef_country_vars_init`).
+- `events/ld_world_month_events.txt` — скрытое событие `ld_world_month.1` (мировое E&F месяца у страны №1 по рангу, `ld_world_month.txt`).
 - `events/ld_start_setup_events.txt` — скрытые события `ld_start_setup.1` / `.2` (настройка старта E&F каждой стране при новой игре, root — страна).
 - `events/00_ef_economic_event.txt` — события E&F (запускаются из `ef_on_yearly_pulse_event_at_date` и эффектов); описаны в подсистеме ef-core.
 
