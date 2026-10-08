@@ -7,6 +7,11 @@ zz_ef_reference_strength_step = {
 	if = {
 		limit = { has_modifier = global_monetary_reference }
 		set_global_variable = { name = zz_ef_ref_vtp value = zz_ef_value_to_parity }
+		# R3.4: the reference's price index for the real rate (zz_ef_currency_trade_m)
+		if = {
+			limit = { has_variable = zz_ef_prev_price }
+			set_global_variable = { name = zz_ef_ref_cpi value = var:zz_ef_prev_price }
+		}
 	}
 }
 

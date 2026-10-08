@@ -55,7 +55,7 @@
 | `zz_ef_cur_zone` | сюзерен, чью зону держит страна | `zz_ef_cur_zone_step` | `zz_ef_mp_can_work` |
 | `zz_ef_member_trade` | торговый счёт члена ТС за неделю | `zz_ef_trade_step` (`ld_money_model.txt`) | `zz_ef_members_trade_sum` |
 | `global_monetary_reference` | модификатор эталона | `08_list_effect.txt:300-306` | `zz_ef_currency_trade_step`, `is_*_currency` |
-| `zz_ef_currency_trade` | модификатор торговли от силы (`static_modifiers/ld_currency_trade.txt`), множитель `zz_ef_currency_trade_m` = (1 − сила)×40, в −10..10 | `zz_ef_currency_trade_step` | движок |
+| `zz_ef_currency_trade` | модификатор торговли от силы (`static_modifiers/ld_currency_trade.txt`), множитель `zz_ef_currency_trade_m` — реальный перекос курса: b = (1 / сила) × (индекс цен эталона `global_var:zz_ef_ref_cpi` / свой `var:zz_ef_prev_price`), (b − 1) × 40, в −50..50 (R3.4) | `zz_ef_currency_trade_step` | движок |
 
 ## Вызовы и связи
 - Сила: `zz_ef_currency_strength` = `zz_ef_value_to_parity` / `global_var:zz_ef_ref_vtp`; пороги 1.25 / 0.75 (`is_strong/weak_currency`). Подмена E&F: `difference_with_average_gold_exchange_rate_currencies`, `money_value_median_and_money_value_in_gold_ratio` (`00_economic_scripted_value.txt:4707, 8279`).

@@ -40,15 +40,32 @@ zz_ef_currency_strength = {
 		divide = global_var:zz_ef_ref_vtp
 	}
 }
-# Е.10 (5.10, Д.5): the trade modifier's multiplier: (1 - strength) x 40, within -10..10 -- +10 (export +10%,
-# import -10%) at strength 0.75, -10 at 1.25, 0 at the reference's level. Beyond the band it stays at 10
-# (taken at night: the user named +-10% at 1.25 / 0.75, the clamp is a guess -- check).
+# R3.4 (Д.R3.4, 8.10): the trade modifier's multiplier from the REAL rate's skew against the reference --
+# b = (1 / strength) x (the reference's price index / ours): a devaluation (strength down) makes our goods cheaper
+# abroad, the export bonus; as our prices rise after it, b falls back and the bonus melts. (b - 1) x 40 (the slope of
+# Е.10: 1% of trade per 2.5% of skew), within -50..50 (the user: a cap of +-50%). The price indices are the ones the
+# weekly step keeps (var:zz_ef_prev_price; the reference's -- global_var:zz_ef_ref_cpi), 100 before the first step.
+# Was (Е.10): (1 - strength) x 40 within -10..10, prices not counted.
 zz_ef_currency_trade_m = {
 	value = 1
-	subtract = zz_ef_currency_strength
+	if = {
+		limit = { zz_ef_currency_strength > 0.01 }
+		divide = zz_ef_currency_strength
+	}
+	if = {
+		limit = {
+			has_global_variable = zz_ef_ref_cpi
+			global_var:zz_ef_ref_cpi > 0
+			has_variable = zz_ef_prev_price
+			var:zz_ef_prev_price > 0
+		}
+		multiply = global_var:zz_ef_ref_cpi
+		divide = var:zz_ef_prev_price
+	}
+	subtract = 1
 	multiply = 40
-	max = 10
-	min = -10
+	max = 50
+	min = -50
 }
 
 
