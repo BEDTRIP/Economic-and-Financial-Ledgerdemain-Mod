@@ -7,7 +7,7 @@
 ## Файлы
 - `common/law_groups/01_ef_laws.txt` — группы законов: `lawgroup_monetary_policy`, `lawgroup_monetary_system`, `lawgroup_currency_type`, `lawgroup_bimetalism_ratio` (группа ратио биметаллизма; видимость по биметаллизму не задана).
 - `common/laws/01_ef_currency_type.txt` — 95 законов `law_<cur>_currency` + `law_no_market_liquidity` (нет валюты). Одинаковая форма: `can_enact` = `has_modifier = has_central_bank` + список тегов, которым E&F выдаёт валюту в истории; 39 законов с `always = no` (товар закомментирован / вырезан под лимит 128 товаров); `unlocking_technologies = currency_standards`.
-- `common/laws/01_ef_monetary_system.txt` — `law_no_monetary_system`, `law_fiat_standard`, `law_silver_standard`, `law_bimetallism_standard`, `law_gold_standard`, `law_gold_exchange_standard`, `law_external_exchange_standard`; `on_activate` зовёт `on_activate_monetary_system_law` (01_economic_scripted_effects.txt:27957, тело E&F + `zz_ef_std_switch_before/_after`).
+- `common/laws/01_ef_monetary_system.txt` — `law_no_monetary_system`, `law_fiat_standard`, `law_silver_standard`, `law_bimetallism_standard`, `law_gold_standard`, `law_gold_exchange_standard`, `law_external_exchange_standard`; `on_activate` зовёт `on_activate_monetary_system_law` (01_economic_scripted_effects.txt:27575, тело E&F + `zz_ef_std_switch_before/_after`).
 - `common/laws/01_ef_bimetalism_ratio.txt` — `law_bimetallic_ratio_no/10/15/20` (соотношение золото:серебро).
 - `common/laws/01_ef_monetary_policy.txt` — `law_no_monetary_policy`, `law_revaluation`, `law_devaluation`, `law_large_monetary_policy` (на уровне ЦБ: `central-bank.md`).
 - `common/script_values/01_economic_currency_scripted_value.txt` (294 тыс. строк, 93 повтора на валюту; индекс ниже).
@@ -22,7 +22,7 @@
 - `common/treaty_articles/16_latin_monetary_union_treaty.txt`, `common/treaty_articles/17_scandinavian_monetary_union_treaty.txt` — статьи договоров (флаги, `can_ratify`, `on_entry_into_force` только лоббийное умиротворение). Денежных эффектов нет.
 - `common/scripted_triggers/00_ef_custom_trigger.txt` — `is_reference_currency` (:582), `is_reference_currency_no` (:587), `is_strong/balanced/weak_currency` (:592-:637, тело E&F, сравнение с `zz_ef_currency_strength` вместо медианы), `is_extreme_weak_currency` (:623), `law_currency_enacted` (:1134), `market_goods_is_currency` (:1423).
 - `common/scripted_effects/08_list_effect.txt` :202 `national_capacity_variable_list` — раз в год (`ef_on_yearly_pulse_country`, `on_actions/00_ef_on_action.txt:139`) выбор эталона: кандидаты `zz_ef_reference_candidate`, по `national_capacity_in_gold`, позиция 0 → модификатор `global_monetary_reference`; лог `EFE|`.
-- Прочее E&F: `common/scripted_effects/09_introduction_building_lvl.txt:34328` `introduction_new_currency` (выдача валюты/паритета при исследовании; зовёт `zz_ef_cur_zone_step` через `ld_currency_intro_metal.txt:75`).
+- Прочее E&F: `common/scripted_effects/09_introduction_building_lvl.txt:34319` `introduction_new_currency` (выдача валюты/паритета при исследовании; зовёт `zz_ef_cur_zone_step` через `ld_currency_intro_metal.txt:75`).
 
 ### Индекс `01_economic_currency_scripted_value.txt` (на каждую валюту `<cur>`)
 - :228-:294 общие `base_demande_currency*`, `target_demand_currency*`, `enough_foreign_currrency`.
