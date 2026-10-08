@@ -1,0 +1,14 @@
+﻿# R3 (8.10): a won revolution -- probe values for the EFV log (on_actions/ld_revolution_on_actions.txt).
+zz_ef_rv_is_rev_v = {
+	value = 0
+	if = { limit = { is_revolutionary = yes } value = 1 }
+}
+zz_ef_rv_has_from_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_rv_from } value = 1 }
+}
+zz_ef_rv_from_alive_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_rv_from exists = var:zz_ef_rv_from } value = 1 }
+	if = { limit = { has_variable = zz_ef_rv_from exists = var:zz_ef_rv_from var:zz_ef_rv_from = { any_scope_state = { always = yes } } } value = 2 }
+}

@@ -1,0 +1,19 @@
+﻿# R3 (the user, 8.10): a won revolution -- the winner takes the same monetary system (План проекта, «Денежная система
+# при победе революции»). Step 0: a probe -- what exists when (EFV log).
+on_revolution_end = {
+	on_actions = { zz_ef_rv_on_revolution_end }
+}
+zz_ef_rv_on_revolution_end = {
+	effect = {
+		scope:target ?= { set_variable = { name = zz_ef_rv_from value = root } }
+		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFV|[TimeKeeper.GetCurrentDate.GetString]|[ROOT.GetCountry.GetNameNoFormatting]|rev_end|root_rev [ROOT.GetCountry.MakeScope.ScriptValue('zz_ef_rv_is_rev_v')|0]|target [SCOPE.sC('target').GetNameNoFormatting]|target_rev [SCOPE.sC('target').MakeScope.ScriptValue('zz_ef_rv_is_rev_v')|0]" }
+	}
+}
+on_civil_war_won = {
+	on_actions = { zz_ef_rv_on_civil_war_won }
+}
+zz_ef_rv_on_civil_war_won = {
+	effect = {
+		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFV|[TimeKeeper.GetCurrentDate.GetString]|[ROOT.GetCountry.GetNameNoFormatting]|cw_won|root_rev [ROOT.GetCountry.MakeScope.ScriptValue('zz_ef_rv_is_rev_v')|0]|has_from [ROOT.GetCountry.MakeScope.ScriptValue('zz_ef_rv_has_from_v')|0]|from_alive [ROOT.GetCountry.MakeScope.ScriptValue('zz_ef_rv_from_alive_v')|0]" }
+	}
+}
