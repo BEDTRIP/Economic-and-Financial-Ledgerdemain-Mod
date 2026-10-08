@@ -12,3 +12,7 @@ zz_ef_rv_from_alive_v = {
 	if = { limit = { has_variable = zz_ef_rv_from exists = var:zz_ef_rv_from } value = 1 }
 	if = { limit = { has_variable = zz_ef_rv_from exists = var:zz_ef_rv_from var:zz_ef_rv_from = { any_scope_state = { always = yes } } } value = 2 }
 }
+zz_ef_rv_has_sec_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_sec_from } value = 1 }
+}
