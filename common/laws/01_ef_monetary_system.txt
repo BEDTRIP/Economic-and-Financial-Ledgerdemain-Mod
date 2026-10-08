@@ -55,12 +55,9 @@ law_silver_standard = {
 	unlocking_technologies = {
 		metalique_standard
 	}
-	can_enact = { # R3.5 PROBE 3 (8.10): each part its own NOT -- reverted after the run
+	can_enact = { # R3.5 PROBE 4 (8.10): market + isolationism -- reverted after the run
 		NOT = { is_not_market_owner = yes }
 		NOT = { has_law = law_type:law_isolationism }
-		NOT = { has_modifier = central_bank_bankruptcy_country }
-		NOT = { has_modifier = currency_crisis_country }
-		NOT = { has_modifier = monetary_systeme_transition }
 	}
  
 	on_activate = {
