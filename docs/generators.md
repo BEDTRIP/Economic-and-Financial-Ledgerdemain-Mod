@@ -12,6 +12,8 @@
   `zz_pb_ef_X` → `ld_pb_X`, `00_00_ef_X` → `ld_X` (`ld_gen.fork_rel`).
 - Запуск из `vic3_mods`: `python tools/<генератор>.py` — запись; `--check` — только сверка, код выхода 1 при
   расхождении. После генератора, который менял английскую локализацию, — `python tools/ld_loc_langs.py`.
+- Список валют — один модуль `tools/ld_curdata.py`: ключи законов `law_<cur>_currency` из
+  `common/laws/01_ef_currency_type.txt`, в порядке файла; им пользуются генераторы и анализаторы (`ld_cur_families`, `ld_smells`).
 - Часть генераторов читает ваниль из `vic3_mods_out/.vanillaVIC3` — запускаются только на ПК.
 
 ## Список
@@ -24,17 +26,17 @@
 | `regen_ld_currency_data` | `common/scripted_effects/ld_currency_var.txt` (`zz_ef_cur_set`, `zz_ef_cur_names`, `zz_ef_cur_name_set` — слово валюты закона E&F), `on_activate` законов `common/laws/01_ef_currency_type.txt`, `currency_name` / `currency_symbol` / `currency_symbol_generic` / `currency_symbol_<cur>` в `common/customizable_localization/00_ef_localization_ custom.txt`, `common/script_values/ld_currency_values.txt`, оценка валют в `zz_ef_fx_reserves_metal` (`ld_fx_reserves_values.txt`), `docs/currency-table.md` | законы, история и локализация валют форка |
 | `regen_ld_currency_national` | `common/scripted_effects/ld_currency_national.txt` (`zz_ef_cur_noun_set` — национальное слово: культура → язык → наследие), `localization/english/ld_currency_national_l_english.yml`, `localization/russian/ld_currency_national_l_russian.yml` — `zz_ef_cur_nat_<слово>` «<прилагательное страны> <слово>» для всех слов (национальных и валют E&F, `LAW_NOUN`; рус. — окончание по роду) | данные игры — `tools/data/vic3_heritages.json`, `tools/data/vic3_cultures.json` |
 | `regen_ef_cb_rate_loc` | `localization/<lang>/ld_cb_rate_panel_l_<lang>.yml` | — |
-| `regen_ef_clearing` | `common/scripted_effects/ld_clearing.txt`, `common/script_values/ld_clearing_values.txt`, `common/scripted_guis/ld_cbfx.txt`, `localization/<lang>/ld_cbfx_l_<lang>.yml` | список валют (`ld_reserve_trade_values.txt`) |
+| `regen_ef_clearing` | `common/scripted_effects/ld_clearing.txt`, `common/script_values/ld_clearing_values.txt`, `common/scripted_guis/ld_cbfx.txt`, `localization/<lang>/ld_cbfx_l_<lang>.yml` | список валют (`ld_curdata`) |
 | `regen_ef_customs_union` | `common/script_values/ld_customs_union_values.txt`, `common/scripted_triggers/ld_customs_union_triggers.txt` | ванильные товары (ПК) |
 | `regen_ef_household_construction` | `common/pop_needs/ld_household_construction.txt`, `common/production_methods/ld_household_construction_pms.txt`, локализация | ванильные PM городского центра (ПК) |
 | `regen_ef_listing` | `common/scripted_effects/ld_listing_switch.txt` | компании ванили (ПК) и `00_ef_companies.txt` |
 | `regen_ef_metal_hoard` | `common/pop_needs/ld_metal_hoard.txt`, `localization/<lang>/ld_metal_hoard_l_<lang>.yml` | — |
 | `regen_ef_monetary_policy` | `common/scripted_effects/ld_monetary_policy.txt`, `common/script_values/ld_monetary_policy_values.txt`, `common/scripted_triggers/ld_monetary_policy_triggers.txt`, `common/scripted_guis/ld_monetary_policy_buttons.txt`, `localization/<lang>/ld_monetary_policy_l_<lang>.yml` | — |
 | `regen_ef_money_supply_loc` | `localization/<lang>/replace/ld_money_supply_replace_l_<lang>.yml`, `gui/ld_money_hook.gui`, `common/scripted_effects/ld_money_log_rest.txt` | — |
-| `regen_ef_nr_deposits` | `common/scripted_effects/ld_nr_deposits.txt`, `common/script_values/ld_nr_deposits_values.txt`, `common/scripted_triggers/ld_nr_deposits_triggers.txt`, `common/static_modifiers/ld_fx_holders_demand.txt` | список валют (`ld_reserve_trade_values.txt`) |
+| `regen_ef_nr_deposits` | `common/scripted_effects/ld_nr_deposits.txt`, `common/script_values/ld_nr_deposits_values.txt`, `common/scripted_triggers/ld_nr_deposits_triggers.txt`, `common/static_modifiers/ld_fx_holders_demand.txt` | список валют (`ld_curdata`) |
 | `regen_ef_pm_stock_hook` | `common/scripted_effects/ld_pm_stock_hook.txt` | `common/scripted_effects/01_financial_scripted_effects.txt` (`private_ownership_production_stocks` — правила) |
 | `regen_ef_currency_formed` | `common/scripted_effects/ld_currency_formed.txt` (кроме `zz_ef_cf_reform`), `common/customizable_localization/ld_currency_formed_loc.txt` | `common/laws/01_ef_currency_type.txt` (теги `can_enact`), `common/scripted_effects/09_introduction_building_lvl.txt` (паритеты `introduction_of_<валюта>`) |
-| `regen_ef_reserve_trade` | `common/script_values/ld_reserve_trade_values.txt` | `common/scripted_effects/01_economic_scripted_effects.txt` (валюты) |
+| `regen_ef_reserve_trade` | `common/script_values/ld_reserve_trade_values.txt` | список валют (`ld_curdata`) |
 
 Генератор ведёт только записи, которые есть в его файлах; в файле могут быть и рукописные записи. Законы денежной
 политики, кнопки кредита ЦБ, панель экономики (`gui/ld_economy_panel.gui`), панель ставки (`gui/ld_cb_rate_panel.gui`),
