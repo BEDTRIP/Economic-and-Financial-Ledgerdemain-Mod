@@ -1,0 +1,47 @@
+﻿# «Настройка старта E&F — с первого дня» (the user, 8.10): what E&F does as the game's start setup in its first month and
+# first year runs once at a new game's start, before the money model's first step (called by zz_ef_sched_start,
+# on_actions/ld_scheduler_on_actions.txt). Without it the engine's pulses spread it over the year: the yearly pulse of a
+# country (a random day) builds its CB by GDP and its financial centres, the monthly hub moves a subject to its
+# overlord's currency and writes the CB's metal -- and the start in balance (ld_metal_accounts.txt, the first step) saw a
+# country half set up (r1008_100702: Hanover's 50.7M gold went to the pops, its CB came on the 4th week).
+# Only the setup: the yearly pulse's AI decisions (standard transitions, the value target, production methods) and
+# counters stay with the pulse. Each piece is E&F's own effect, safe to repeat (its pulse runs it again later).
+zz_ef_start_setup = {
+	if = {
+		limit = { NOT = { has_global_variable = zz_ef_start_setup_done } }
+		set_global_variable = zz_ef_start_setup_done
+		# the yearly pulse's facilities (ef_on_yearly_pulse_country, on_actions/00_ef_on_action.txt)
+		every_country = {
+			gdp_view_on_action = yes
+			macro_facilities_on_action_bc = yes
+			has_tech_central_bank_but_no_building_central_bank = yes
+			has_currency_law_but_no_building_central_bank = yes
+			gdp_view_on_action_fc = yes
+			has_tech_financial_center_but_no_building_financial_center = yes
+			has_second_financial_center = yes
+			if = {
+				limit = { country_rank >= rank_value:unrecognized_power }
+				country_credit_rating = yes
+			}
+		}
+		every_country = {
+			limit = { has_modifier = global_monetary_reference }
+			national_capacity_variable_list = yes
+			country_index_variable_list = yes
+			central_bank_debt_variable_list = yes
+			currency_law_list = yes
+			median_currency_value = yes
+			global_monetary_reference_1 = yes
+		}
+		# the monthly hub (ef_on_monthly_pulse_country): a subject's currency, a new country's variables, the CB law,
+		# the CB's modifiers and metal
+		every_country = {
+			ef_on_monthly_pulse_recurence = yes
+			zz_ef_cb_law_sync = yes
+			if = {
+				limit = { has_modifier = has_central_bank }
+				central_bank_ef_on_monthly_pulse_country = yes
+			}
+		}
+	}
+}

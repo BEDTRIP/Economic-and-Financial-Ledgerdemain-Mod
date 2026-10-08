@@ -7,6 +7,8 @@ on_game_started_after_lobby = {
 
 zz_ef_sched_start = {
 	effect = {
+		# E&F's start setup first -- the model's first step sees it done (scripted_effects/ld_start_setup.txt)
+		zz_ef_start_setup = yes
 		zz_ef_sched_ensure = yes
 	}
 }

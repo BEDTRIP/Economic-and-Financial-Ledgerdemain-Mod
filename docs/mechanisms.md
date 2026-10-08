@@ -8,7 +8,7 @@
 коэффициент, закомментированный вызов); `мёртвый` — ни откуда не вызывается; `дубль` — считает то же или пишет те же
 счета, что модель `ld_*`. Строки файлов — на момент записи, при правке файла сдвигаются: искать по имени.
 
-Итого: мёртвый 4, выключен 0, дубль 3, живой 218.
+Итого: мёртвый 4, выключен 0, дубль 3, живой 219.
 
 ## Денежная модель и металл (`money-model.md`)
 
@@ -57,7 +57,8 @@
 | Валютная зона подданных zz_ef_cur_zone_step / _currency / zz_ef_cur_zone_has_currency | живой | common/scripted_effects/ld_currency_zone.txt:5,60; common/scripted_triggers/ld_currency_zone_triggers.txt:5 | вызовы ld_money_model.txt:1005, ld_currency_intro_metal.txt:75; активирует законы стандарта и валюты, пишет money_value_target_1 | — |
 | Валюта члена таможенного союза zz_ef_cu_member / zz_ef_currency_own | живой | common/scripted_triggers/ld_customs_union_triggers.txt:6,14 | refs=8 и 3: ld_money_model, ld_clearing_values, 00_economic_scripted_value.txt | — |
 | Торговый счёт члена ТС zz_ef_member_goods_net / zz_ef_members_trade_sum | живой | common/script_values/ld_customs_union_values.txt:8,333 | используются ld_money_model_values.txt и ld_money_model.txt | — |
-| Выдача стартовых валют (zz_ef_currency_fix.txt) | живой | common/history/global/zz_ef_currency_fix.txt:7-75 | activate_law на старте для WUR и 13 стран; currency_standards странам с подушным налогом; п.4 (начальная ликвидность) удалён | — |
+| Выдача стартовых валют (zz_ef_currency_fix.txt) | живой | common/history/global/zz_ef_currency_fix.txt:7-75 | activate_law на старте для WUR и 13 стран; currency_standards странам с подушным налогом и законом валюты, metalique_standard — с металлическим стандартом; п.4 (начальная ликвидность) удалён | — |
+| Настройка старта E&F с первого дня (`zz_ef_start_setup`: из годового пульса — ступени ВВП, ЦБ и финцентры по ВВП, рейтинг, списки эталона; месячный хаб целиком) | живой | common/scripted_effects/ld_start_setup.txt | `on_game_started_after_lobby` → `zz_ef_sched_start` до планировщика, один раз (`global_var zz_ef_start_setup_done`) | — |
 | Статья Латинский валютный союз latin_monetary_union_treaty | живой | common/treaty_articles/16_latin_monetary_union_treaty.txt | создаётся событием 00_ef_economic_event.txt:499, ЖЗ 00_ef_divers_je.txt:210; денежных эффектов в статье нет (только лоббийное умиротворение) | окно договоров |
 | Триггеры is_reference_currency(_no)/is_extreme_weak_currency/law_currency_enacted/market_goods_is_currency | живой | common/scripted_triggers/00_ef_custom_trigger.txt:582-623,1134,1423 | refs 3, 3, 100, 1, 1 | — |
 
