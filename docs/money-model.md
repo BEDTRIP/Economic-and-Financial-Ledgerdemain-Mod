@@ -7,7 +7,7 @@
 ## Файлы
 - `common/on_actions/ld_money_model_on_actions.txt` — месячный шаг `zz_ef_money_model_monthly` (зовёт планировщик); заглушки прежней цепочки `zz_ef_money_week_probe` / `zz_ef_money_model_weekly` для старых сейвов (`zz_ef_money_week_retire`).
 - `common/scripted_effects/ld_scheduler.txt`, `common/on_actions/ld_scheduler_on_actions.txt`, `common/script_values/ld_scheduler_values.txt` — планировщик (ниже).
-- `common/scripted_effects/ld_start_setup.txt` — `zz_ef_start_setup`: настройка старта E&F с первого дня (из годового пульса — ступени ВВП, ЦБ и финцентры по ВВП, рейтинг, списки эталона; месячный хаб целиком), один раз до планировщика.
+- `common/scripted_effects/ld_start_setup.txt`, `events/ld_start_setup_events.txt` — `zz_ef_start_setup` (события `ld_start_setup.1` / `.2` каждой стране, root — страна): настройка старта E&F с первого дня (из годового пульса — ступени ВВП, ЦБ и финцентры по ВВП, рейтинг, списки эталона; месячный хаб целиком), один раз до планировщика.
 - `common/scripted_effects/ld_money_model.txt` — недельный шаг, приёмник GUI-моста, ежемесячный шаг, сбережения/вклады, кредиты, кольца истории, ставка правительства, стартовый металл ЦБ (`ld_metal_accounts.txt`), выкуп валюты в кризис, зонды.
 - `common/script_values/ld_money_model_values.txt` — все формулы: счета, M0–M3, кредитные лимиты, ставки, платёжный баланс, кольца роста (почти все ключи `zz_ef_*`).
 - `common/scripted_effects/ld_metal_accounts.txt` — старт металла, недельные покупки/продажи ЦБ/банков/населения, выкуп у населения, сверка металла ЦБ, мировая линия металла.

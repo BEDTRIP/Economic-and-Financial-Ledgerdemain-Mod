@@ -10,6 +10,7 @@
 - `common/history/global/*.txt`, `common/history/states/01_ef_states.txt`, `common/history/buildings/*.txt` — стартовые данные (см. «Старт игры»).
 - `events/ld_currency_formed_events.txt` — `ld_currency_formed.1`: валюта формируемой страны (R3.7, `currencies.md`).
 - `events/ld_new_country_immediate_init_events.txt` — скрытое событие `zz_ef_newcountry.1` (контекст для `new_country_var_ef` у освобождённой страны).
+- `events/ld_start_setup_events.txt` — скрытые события `ld_start_setup.1` / `.2` (настройка старта E&F каждой стране при новой игре, root — страна).
 - `events/00_ef_economic_event.txt` — события E&F (запускаются из `ef_on_yearly_pulse_event_at_date` и эффектов); описаны в подсистеме ef-core.
 
 ## Поток / порядок
@@ -32,7 +33,7 @@
 | 10 | `history/global/zz_ef_currency_fix.txt` | после 99: валюта WUR; страны без валюты → `law_no_market_liquidity`; `currency_standards` странам с подушным налогом и с законом валюты, `metalique_standard` — с металлическим стандартом (до проверки законов движком) |
 | 11 | `history/global/zz_ef_init_stockpiling_state_vars.txt` | заводит 7 переменных `stockpiling_*_var_state_1` штатам (охрана `has_variable`) |
 | 12 | `history/states/01_ef_states.txt` | `s:STATE_X = add_modifier silver_mine_max_level` (60 штатов, множитель = макс. уровень серебряной шахты) |
-После лобби `on_game_started_after_lobby`: `com_topbar_setup_ef` (E&F: добавляет 7 элементов верхней панели `com_topbar_element_inflation / law_*_standard / law_subject` и ставит их всем странам в `com_topbar_second_line`) `zz_ef_sched_start` (`ld_scheduler_on_actions.txt`: сначала `zz_ef_start_setup` — настройка старта E&F один раз, `ld_start_setup.txt`, затем планировщик) и `zz_ef_init_stockpile_state_vars` (`ld_stockpile_state_var_init.txt`: `zz_ef_seed_stockpile_state_vars` — проход `every_state` для старых сейвов). PSC: `set_construction_start` (из history) → `set_construction_weekly_on_action` + `set_construction_country` для каждой страны.
+После лобби `on_game_started_after_lobby`: `com_topbar_setup_ef` (E&F: добавляет 7 элементов верхней панели `com_topbar_element_inflation / law_*_standard / law_subject` и ставит их всем странам в `com_topbar_second_line`) `zz_ef_sched_start` (`ld_scheduler_on_actions.txt`: сначала `zz_ef_start_setup` — настройка старта E&F один раз: каждой стране скрытые события `ld_start_setup.1` (из годового пульса) и `.2` (месячный хаб), `ld_start_setup.txt`, `events/ld_start_setup_events.txt`; затем планировщик) и `zz_ef_init_stockpile_state_vars` (`ld_stockpile_state_var_init.txt`: `zz_ef_seed_stockpile_state_vars` — проход `every_state` для старых сейвов). PSC: `set_construction_start` (из history) → `set_construction_weekly_on_action` + `set_construction_country` для каждой страны.
 
 ### При создании страны
 | ванильный хук | эффекты | подсистема |

@@ -1,0 +1,20 @@
+﻿namespace = ld_start_setup
+
+# «Настройка старта E&F — с первого дня» (scripted_effects/ld_start_setup.txt): fired on every country by
+# zz_ef_start_setup at a new game's start, so that root inside E&F's code is the country.
+ld_start_setup.1 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		zz_ef_start_setup_year = yes
+	}
+}
+ld_start_setup.2 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		zz_ef_start_setup_month = yes
+	}
+}
