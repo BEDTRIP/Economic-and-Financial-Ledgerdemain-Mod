@@ -36,6 +36,7 @@
 | `regen_ef_nr_deposits` | `common/scripted_effects/ld_nr_deposits.txt`, `common/script_values/ld_nr_deposits_values.txt`, `common/scripted_triggers/ld_nr_deposits_triggers.txt`, `common/static_modifiers/ld_fx_holders_demand.txt` | список валют (`ld_curdata`) |
 | `regen_ef_pm_stock_hook` | `common/scripted_effects/ld_pm_stock_hook.txt` | `common/scripted_effects/01_financial_scripted_effects.txt` (`private_ownership_production_stocks` — правила) |
 | `regen_ef_currency_formed` | `common/scripted_effects/ld_currency_formed.txt` (кроме `zz_ef_cf_reform`), `common/customizable_localization/ld_currency_formed_loc.txt` | `common/laws/01_ef_currency_type.txt` (теги `can_enact`), `common/scripted_effects/09_introduction_building_lvl.txt` (паритеты `introduction_of_<валюта>`) |
+| `regen_ld_start_technologies` | `common/history/countries/ld_start_technologies.txt` | ЦБ истории (`common/history/buildings/00_ef_building.txt`), законы стандартов и валют (`common/history/global/99_ef_history_global_variable.txt`) |
 | `regen_ef_reserve_trade` | `common/script_values/ld_reserve_trade_values.txt` | список валют (`ld_curdata`) |
 
 Генератор ведёт только записи, которые есть в его файлах; в файле могут быть и рукописные записи. Законы денежной

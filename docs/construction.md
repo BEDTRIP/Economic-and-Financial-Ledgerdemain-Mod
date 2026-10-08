@@ -45,7 +45,7 @@
 - `common/scripted_effects/09_introduction_building_lvl.txt` — ~50 тыс. строк: валюты/центробанк/ФЦ, не стройка.
 - `common/history/buildings/00_ef_building.txt` — стартовые `create_building building_construction_sector` (213 `create_building`, ~28 — сектор; рудники — не выше того, что держит ресурс штата) с владельцами-банками/компаниями; `00_a_ef_history_var_init.txt` — предзапись переменных (стройки не касается).
 - `common/defines/zz_ef_reinvestment_defines.txt` — `REINVESTMENT_SUBSISTENCE_FRACTION_REDUCTION = 0`, `OWNER_COMPANY_PRIVATIZATION_CHANCE_MULTIPLIER = 0.4`; `zzzz_ef_credit_def.txt` (кредитный лимит) и `00_ef_defines.txt` (приватизация закомментирована) со стройкой не связаны.
-- `common/scripted_guis/00_financial_scripted_guis.txt:5948-6110` — кнопки стимула `speculative_share_9..12_button` (ставят `var:zz_pb_ef_stimulus_mult` на 1080 дней, +10..+40 к `speculative_share_2`).
+- `common/scripted_guis/00_financial_scripted_guis.txt:3997-4152` — кнопки стимула `speculative_share_9..12_button` (ставят `var:zz_pb_ef_stimulus_mult` на 1080 дней, +10..+40 к `speculative_share_2`).
 
 ## Поток / порядок
 1. `history/global/PSC_global.txt` -> `set_construction_start`: запуск `set_construction_weekly_on_action` и `set_construction_country` для всех стран.
