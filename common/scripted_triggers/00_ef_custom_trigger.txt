@@ -462,14 +462,14 @@ is_subject_custom_trigger = {
 	#}
 }
 is_not_market_owner = {
+	# true only for a market that exists and is someone else's: the engine checks the laws' can_enact when it loads the
+	# game, before the markets exist -- with "no market" counted as "not the owner" ~26 countries got "not permitted to
+	# retain law" for their start standard (R3.5; the probe r1008_153203: can_enact always yes -- gone); a country
+	# without a market or a market without an owner (a revolutionary) -- no error either (r1008_122252)
 	root = {
-		NOT = {
-			# a country without a market or a market without an owner (a revolutionary, a dead country -- the laws'
-			# can_enact read it): r1008_122252, 48 "Event target link 'market' / 'owner' returned an invalid object"
-			market ?= {
-				exists = owner
-				owner = root
-			}
+		market ?= {
+			exists = owner
+			NOT = { owner = root }
 		}
 	}
 }

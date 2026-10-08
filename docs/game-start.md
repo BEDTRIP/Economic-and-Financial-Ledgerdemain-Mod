@@ -36,8 +36,10 @@
 | `states/01_ef_states.txt` | `silver_mine_max_level` 60 штатам (месторождения серебра) | данные |
 
 Технологии стартовых денежных законов (стандарты — `metalique_standard`, валюты — `currency_standards`) — в истории стран
-(`history/countries/ld_start_technologies.txt`, 36 стран): проверка законов движком («not permitted to retain law») не
-видит технологий, выданных скриптом истории (`history/buildings`, `history/global`).
+(`history/countries/ld_start_technologies.txt`, 36 стран). Движок на загрузке проверяет и условия принятия закона
+(`can_enact`) — до того, как появились рынки: триггер E&F `is_not_market_owner` (`00_ef_custom_trigger.txt`) истинен
+только для существующего чужого рынка, иначе стандарты стран без рынка на момент проверки — «not permitted to retain
+law». Законы валют WUR и NPU требуют ЦБ (`has_central_bank`), которого у WUR в истории нет.
 
 ## 3. После лобби (`on_game_started_after_lobby`)
 
