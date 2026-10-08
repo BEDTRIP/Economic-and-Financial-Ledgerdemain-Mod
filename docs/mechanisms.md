@@ -8,7 +8,7 @@
 коэффициент, закомментированный вызов); `мёртвый` — ни откуда не вызывается; `дубль` — считает то же или пишет те же
 счета, что модель `ld_*`. Строки файлов — на момент записи, при правке файла сдвигаются: искать по имени.
 
-Итого: мёртвый 4, выключен 0, дубль 3, живой 219.
+Итого: мёртвый 4, выключен 0, дубль 3, живой 218.
 
 ## Денежная модель и металл (`money-model.md`)
 
@@ -16,7 +16,7 @@
 | --- | --- | --- | --- | --- |
 | Планировщик модели денег (одна глобальная цепочка: зонд тика → день → шаги стран А / Б, месячные шаги, мировой проход) | живой | common/scripted_effects/ld_scheduler.txt; common/on_actions/ld_scheduler_on_actions.txt | on_game_started_after_lobby / on_monthly_pulse → zz_ef_sched_ensure; zz_ef_sched_day перезапускает себя days = 1 | карточки денежной массы (через переменные zz_ef_*) |
 | Роли стран А / Б / В (`var:zz_ef_role`, месячный проход по миру) | живой | common/scripted_effects/ld_roles.txt; common/on_actions/ld_roles_on_actions.txt; common/scripted_triggers/ld_roles_triggers.txt | on_monthly_pulse → zz_ef_roles_world_pass; роль В снимает месячный шаг и цепочку модели | — |
-| Реестр счетов, проводка, сверка по запасам («прочее» `zz_ef_other` = пул + казна) | живой | common/scripted_effects/ld_ledger.txt; common/script_values/ld_ledger_values.txt | zz_ef_registry_init и zz_ef_reconcile в недельном шаге; zz_ef_post* — проводки (проценты ЦБ, излишек казны); zz_ef_tr_mark / _unmark — пометка наших add_treasury для сверки казны | — |
+| Реестр счетов, проводка, сверка по запасам («прочее» `zz_ef_other` = пул + казна) | живой | common/scripted_effects/ld_ledger.txt; common/script_values/ld_ledger_values.txt | zz_ef_registry_init и zz_ef_reconcile в недельном шаге; zz_ef_post* — проводки (проценты ЦБ); zz_ef_tr_mark / _unmark — пометка наших add_treasury для сверки казны | — |
 | Мост GUI → скрипт: приёмник пишет числа (zz_ef_hk_*, zz_ef_g_*), расчёт — zz_ef_bridge_apply в шаге; роль А игроку (zz_ef_player_sg) | живой | common/scripted_effects/ld_money_model.txt; gui/ld_money_hook.gui; common/scripted_guis/ld_money_hook.txt | Execute zz_ef_money_hook_sg по trigger_when на глобальном списке zz_ef_hook_countries; zz_ef_bridge_apply в конце zz_ef_money_model_step | виджет zz_ef_money_hook (скрытый) |
 | Проба вызовов моста zz_ef_money_hook_probe_sg | живой | common/scripted_guis/ld_money_hook.txt:22; gui/ld_money_hook.gui | считает вызовы в global var zz_ef_hook_probe_calls; читает zz_ef_hook_ok | — |
 | Кредит ЦБ банкам, проценты в казну (пул ↔ ЦБ ↔ казна) | живой | common/scripted_effects/ld_money_model.txt:~205-225; common/script_values/ld_money_model_values.txt:172-250 | add_investment_pool / add_treasury по zz_ef_cb_borrow/repay/interest в недельном шаге; только при has_central_bank (цель 0 без ЦБ) | карточки пула и ЦБ |
@@ -25,7 +25,6 @@
 | Потребительский кредит + модификатор zz_ef_consumer_credit | живой | common/scripted_effects/ld_money_model.txt:937-1001; common/static_modifiers/ld_consumer_credit.txt | zz_ef_consumer_credit_step и zz_ef_pop_extra_income_step вызываются из zz_ef_bridge_apply (шаг) | — |
 | Бизнес-кредит + модификатор zz_ef_debt_service | живой | common/scripted_effects/ld_money_model.txt:1334-1381; common/static_modifiers/ld_debt_service.txt | zz_ef_business_credit_step вызывается в недельном шаге | — |
 | Ставка правительства (zz_ef_gov_rate_mult/add) | живой | common/scripted_effects/ld_money_model.txt:1382-1420; common/static_modifiers/ld_gov_rate.txt | zz_ef_gov_rate_step в месячном шаге | ставка в экране бюджета/ЦБ |
-| Излишек казны сверх gold_reserves_limit → пул | живой | common/scripted_effects/ld_money_model.txt:244-254 | блок if gold_reserves > gold_reserves_limit в недельном шаге | карточки казны/пула |
 | Старт в балансе: металл населения и стран без ЦБ на первом шаге, металл ЦБ = 40% M2 один раз (когда M2 / ВВП > 0,1), банков — на первом приёмнике | живой | common/scripted_effects/ld_metal_accounts.txt (zz_ef_metal_start_step, zz_ef_cb_metal_start_step, zz_ef_metal_start_banks) | zz_ef_parity_version (9), zz_ef_cb_start_due в недельном шаге | карточка ЦБ |
 | Недельные покупки/продажи металла ЦБ, банков, населения через модификаторы зданий | живой | common/scripted_effects/ld_metal_accounts.txt:146-362; common/static_modifiers/ld_metal_trade.txt | zz_ef_metal_week_step в недельном шаге; add_modifier на building_zz_ef_bank / building_bank | карточка ЦБ, здание ЦБ |
 | Выкуп металла ЦБ у населения при покрытии < 40% | живой | common/scripted_effects/ld_metal_accounts.txt:~246-285; common/script_values/ld_metal_accounts_values.txt:430-460 | ветка step 7 в zz_ef_metal_week_step (пишет gold_state_1, zz_ef_popm_*, zz_ef_pop_savings) | карточка населения |

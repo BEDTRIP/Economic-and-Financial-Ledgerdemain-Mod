@@ -1,0 +1,19 @@
+# Вырезано 8.10.2026 из common/scripted_effects/ld_money_model.txt, zz_ef_money_model_step, строки 159–176 (после zz_ef_consol_step).
+	# Д4.5 / EF.38 (the user, 4.10): the treasury over the engine's limit (gold_reserves_limit; over it
+	# the engine's returns fall off and the surplus burns, E&F GOLD_RESERVE_RETURNS_FACTOR) buys the
+	# banks' bonds -- the excess goes into the pool (stays in circulation as bank money). Before the
+	# ledger: a known flow treasury -> pool (zz_ef_v_f_tr_pool in both accounts' "other").
+	set_variable = { name = zz_ef_f_tr_pool value = 0 }
+	# Хвост R1 (the user, 8.10, (а)): not at the country's first step -- the start deposits (zz_ef_pop_savings_step, below)
+	# take a share of the pool, and the treasury's surplus in it made the banks' capital negative; from the next step on
+	# the surplus comes in with its claim (zz_ef_bank_gov_dep), the capital unchanged
+	if = {
+		limit = {
+			has_variable = zz_ef_pop_savings
+			gold_reserves > gold_reserves_limit
+		}
+		set_variable = { name = zz_ef_f_tr_pool value = gold_reserves }
+		change_variable = { name = zz_ef_f_tr_pool subtract = gold_reserves_limit }
+		# R1а.5: a posting -- the treasury's money into the banks, its claim on them
+		zz_ef_post_eng = { FROM = treasury TO = pool CLAIM = zz_ef_bank_gov_dep V = var:zz_ef_f_tr_pool }
+	}
