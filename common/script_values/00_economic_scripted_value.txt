@@ -6202,10 +6202,14 @@ silver_market_goods_sell_orders = {
 	}
 }
 debt_in_gold_sc = {
-	value = var:debt_in_gold
+	# R3.6 (8.10): 0 when the variable is not set (money_value_target_pre_set: «Value of wrong type ... none»)
+	value = 0
+	if = { limit = { has_variable = debt_in_gold } value = var:debt_in_gold }
 }
 excess_in_gold_sc = {
-	value = var:excess_in_gold
+	# R3.6 (8.10): 0 when the variable is not set (money_value_target_pre_set: «Value of wrong type ... none»)
+	value = 0
+	if = { limit = { has_variable = excess_in_gold } value = var:excess_in_gold }
 }
 delta_in_gold_sc = {
 	value = excess_in_gold_sc
