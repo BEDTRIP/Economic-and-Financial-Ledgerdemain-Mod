@@ -57,6 +57,16 @@ zz_ef_newcountry_on_country_formed = {
 			}
 			new_country_var_ef = yes
 		}
+		# R3, step 7 (Д.R3.7): the historical currency of the new tag -- an event with a choice
+		# (events/ld_currency_formed_events.txt)
+		if = {
+			limit = { has_modifier = has_central_bank }
+			zz_ef_cf_find = yes
+			if = {
+				limit = { has_variable = zz_ef_cf_target }
+				trigger_event = { id = ld_currency_formed.1 days = 1 }
+			}
+		}
 	}
 }
 

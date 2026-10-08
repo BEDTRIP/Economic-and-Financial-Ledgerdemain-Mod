@@ -1,0 +1,44 @@
+﻿namespace = ld_currency_formed
+
+# R3, step 7 (Д.R3.7, the user 8.10, (а)): a formed country with a CB and a currency law, and a historical currency for
+# its new tag (zz_ef_cf_find, scripted_effects/ld_currency_formed.txt) -- introduce it (a reform at parity,
+# zz_ef_cf_reform) or keep the old one. Fired from on_country_formed (on_actions/ld_new_country_immediate_init.txt).
+ld_currency_formed.1 = {
+	type = country_event
+	placement = root
+
+	title = ld_currency_formed.1.t
+	desc = ld_currency_formed.1.d
+	flavor = ld_currency_formed.1.f
+
+	duration = 3
+
+	event_image = {
+		texture = "gfx/event_pictures/00_ef_economic_event_1.dds"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	trigger = {
+		has_variable = zz_ef_cf_target
+	}
+
+	option = {
+		name = ld_currency_formed.1.a
+		default_option = yes
+		zz_ef_cf_reform = yes
+		ai_chance = {
+			base = 3
+		}
+	}
+
+	option = {
+		name = ld_currency_formed.1.b
+		remove_variable = zz_ef_cf_target
+		ai_chance = {
+			base = 1
+		}
+	}
+}

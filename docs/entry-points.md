@@ -8,6 +8,7 @@
 - `common/scripted_effects/00_on_action_main.txt` — 15 тыс. строк: все эффекты, которые зовут `ef_on_*`: пульсы ЦБ/ФЦ, ИИ-торговля валютой, ИИ-стройка, инфляция, исторические события по датам, сбросы счётчиков кризисов.
 - `common/scripted_effects/10_new_country_var.txt` — `new_country_var_ef`: заводит все переменные страны и её штатов (34 тыс. строк).
 - `common/history/global/*.txt`, `common/history/states/01_ef_states.txt`, `common/history/buildings/*.txt` — стартовые данные (см. «Старт игры»).
+- `events/ld_currency_formed_events.txt` — `ld_currency_formed.1`: валюта формируемой страны (R3.7, `currencies.md`).
 - `events/ld_new_country_immediate_init_events.txt` — скрытое событие `zz_ef_newcountry.1` (контекст для `new_country_var_ef` у освобождённой страны).
 - `events/00_ef_economic_event.txt` — события E&F (запускаются из `ef_on_yearly_pulse_event_at_date` и эффектов); описаны в подсистеме ef-core.
 
@@ -37,6 +38,7 @@
 | ванильный хук | эффекты | подсистема |
 |---|---|---|
 | `on_country_formed`, `on_become_independent` | `zz_ef_newcountry_on_*` → если нет `var:zz_ef_country_vars_set` → `new_country_var_ef` | инициализация переменных |
+| `on_country_formed` (тот же on_action) | у страны с ЦБ `zz_ef_cf_find` → есть `var:zz_ef_cf_target` → событие `ld_currency_formed.1` через день | валюта формируемой страны (R3.7, `currencies.md`) |
 | `on_country_released_as_independent / _own_subject / _company_subject / _overlord_subject` | `zz_ef_newcountry_on_*` → `scope:target = trigger_event zz_ef_newcountry.1` (скрытое событие, ROOT = новая страна) → `new_country_var_ef` | то же (в событии, чтобы ROOT был новой страной, а не сюзереном) |
 | месячный пульс (страховка) | `ef_on_monthly_pulse_recurence` (строки 20–242 `00_on_action_main.txt`): для не инициализированной страны (нет `zz_ef_country_vars_set`) → `new_country_var_ef`; при отсутствии банка — `law_no_monetary_system` + `law_no_market_liquidity`; при наличии — `remove_building building_bank`, `central_bank_modifier`, те же законы; `foreign_exchange_controls` на 23 месяца. Для `is_revolutionary` — такой же блок первым | инициализация / валютный режим |
 Идемпотентность: все вызовы защищены `not has_variable = zz_ef_country_vars_set` (флаг ставит сам `new_country_var_ef`). Порядок внутри `new_country_var_ef`: состояния, экономика, финансы, грабёж (`looting_1_year`).
