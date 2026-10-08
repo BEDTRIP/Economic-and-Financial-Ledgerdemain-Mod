@@ -195,11 +195,17 @@ zz_ef_cur_set = {
 	else_if = { limit = { currency_identifiers_thaler_prussian_thaler = 1 } set_variable = { name = zz_ef_cur value = flag:thaler_prussian_thaler } }
 	else_if = { limit = { currency_identifiers_thaler_saxon_thaler = 1 } set_variable = { name = zz_ef_cur value = flag:thaler_saxon_thaler } }
 	else_if = { limit = { has_variable = zz_ef_cur } remove_variable = zz_ef_cur }
+	zz_ef_cur_names = yes
+	if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|cur_nat|[THIS.GetCountry.GetCustom('currency_name')]" }
+	zz_ef_cur_par_update = yes
+}
+
+# The currency's name: its word and issuer. Every country at the game's load (on_game_started_after_lobby,
+# on_actions/ld_currency_name_on_actions.txt), then with zz_ef_cur_set and the currency laws' on_activate.
+zz_ef_cur_names = {
 	if = { limit = { NOT = { has_variable = zz_ef_cur } } zz_ef_cur_noun_set = yes }
 	else = { zz_ef_cur_name_set = yes }
 	zz_ef_cur_issuer_set = yes
-	if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|cur_nat|[THIS.GetCountry.GetCustom('currency_name')]" }
-	zz_ef_cur_par_update = yes
 }
 
 # The user (8.10): every currency is named «<the issuer's adjective> <word>» -- «Russian ruble, British pound».

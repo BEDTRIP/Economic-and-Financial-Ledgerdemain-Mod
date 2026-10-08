@@ -24,11 +24,6 @@ currency_name = {
 
 	# R1б.2: the country's currency from var:zz_ef_cur (scripted_effects/ld_currency_var.txt); was 95 checks of
 	# E&F's currency by culture per call
-	#generic
-	text = {
-		trigger = { OR = { NOT = { has_variable = zz_ef_cur_noun } NOT = { has_variable = zz_ef_cur_issuer } } }
-		localization_key = zz_ef_cur_nat_generic
-	}
 	#hryvnia
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:hryvnia has_variable = zz_ef_cur_issuer }

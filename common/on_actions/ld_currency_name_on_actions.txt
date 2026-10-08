@@ -1,0 +1,13 @@
+﻿# The currency name of every country from the game's load (the user, 8.10: no default names): its word and issuer
+# (zz_ef_cur_names, scripted_effects/ld_currency_var.txt) -- before the start setup a week later.
+on_game_started_after_lobby = {
+	on_actions = {
+		zz_ef_cur_names_start
+	}
+}
+
+zz_ef_cur_names_start = {
+	effect = {
+		every_country = { zz_ef_cur_names = yes }
+	}
+}
