@@ -40,7 +40,7 @@
 ### При создании страны
 | ванильный хук | эффекты | подсистема |
 |---|---|---|
-| `on_country_formed`, `on_become_independent` | `zz_ef_newcountry_on_*` → если нет `var:zz_ef_country_vars_set` → `new_country_var_ef` | инициализация переменных |
+| `on_country_formed`, `on_become_independent` | `zz_ef_newcountry_on_*` → если нет `var:zz_ef_country_vars_set` → `new_country_var_ef` и рейтинг `country_credit_rating` | инициализация переменных |
 | `on_revolution_start/_end`, `on_secession_start/_end`, `on_civil_war_won` | `common/on_actions/ld_revolution_on_actions.txt`: на старте революции / отделения восставшей сразу переменные E&F (`zz_ef_newcountry.1` → `new_country_var_ef`); восставшей — `var:zz_ef_rv_from` (революция) / `var:zz_ef_sec_from` (отделение) = страна; лог `EFV` (проба: что существует в какой момент; значения `common/script_values/ld_revolution_values.txt`) | победа революции — та же денежная система (в работе) |
 | `on_country_formed` (тот же on_action) | у страны с ЦБ `zz_ef_cf_find` → есть `var:zz_ef_cf_target` → событие `ld_currency_formed.1` через день | валюта формируемой страны (R3.7, `currencies.md`) |
 | `on_country_released_as_independent / _own_subject / _company_subject / _overlord_subject` | `zz_ef_newcountry_on_*` → `scope:target = trigger_event zz_ef_newcountry.1` (скрытое событие, ROOT = новая страна) → `new_country_var_ef` | то же (в событии, чтобы ROOT был новой страной, а не сюзереном) |
