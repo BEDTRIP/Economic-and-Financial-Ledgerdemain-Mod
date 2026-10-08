@@ -27,7 +27,7 @@ GUI-тип регистрирует первый файл по имени (ASCII
   по каждой валюте; облигации финцентра), `country_panel_currency_panel_content` (:87901), `state_panel_currency_panel_content`
   (:88024). Две пустые `types market_states_panel`-обёртки. Повтор блока по валютам.
 - `gui/00_ef_deported_gui_2.gui` (11906 строк) — 205 типов: 191 `ef_bp_*_piechart` (круговые диаграммы запасов/денег по
-  валютам; данные из `GetGlobalList('..._variable_list_ordered_N')`), `currency_symbol_top_bar` (:8567, 96 текстбоксов
+  валютам; данные из `GetGlobalList('..._variable_list_ordered_N')`), `currency_symbol_top_bar` (один текстбокс `currency_symbol`
   символов), `ef_economy_N_formwork`/`ef_financial_N_formwork` (:9289-10680), `vo_plotline_minting` (:10984).
 - `gui/00_ef_texticons.gui` — иконки текста E&F. `gui/00_MPM_building_details_panel.gui` — MPM: `condensed_building_information*`.
 - `gui/scripted_widgets/00_ef_custom_widgets.gui` — виджеты журнала: `widget_je_ef_efcc_situation` (используется
@@ -128,7 +128,7 @@ GUI-тип регистрирует первый файл по имени (ASCII
 - GUI ссылается на 2757 имён `GetScriptedGui('…')`; не определены в `common/scripted_guis`: 10 живых вызовов `*_list_gerenation_ordered`
   (кнопки секций в `ld_cb_rate_panel.gui`; файл ведёт генератор `regen_ef_cb_rate_gui`; определён только `world_currency_…` в `09_ef_other.txt`),
   9 вызовов `gdpg_sort_by_country_gdp` (там же; sgui — `gdp_sort_by_country_gdp`), `je_meiji_restoration_get_faction_sgui` (`states_panel.gui`, ванильное имя). Клик не выполняет эффекта (ожидается ошибка поиска sgui в `error.log`; в игре не проверено).
-- `topbar.gui` → `currency_symbol_top_bar` (96 `GetCustom('currency_symbol_<cur>')`, считаются каждый кадр; каждый — одно сравнение `var:zz_ef_cur`, `currencies.md`).
+- `topbar.gui` → `currency_symbol_top_bar` (один `GetCustom('currency_symbol')` — валюта `var:zz_ef_cur` или общий символ, `currencies.md`).
 - Комментарий в `common/game_concepts/ld_cb_rate_concepts.txt` называет `zz_ef_cb_rate_panel_l_*.yml`; файлы локализации — `ld_cb_rate_panel_l_*.yml`.
 
 ## Логи

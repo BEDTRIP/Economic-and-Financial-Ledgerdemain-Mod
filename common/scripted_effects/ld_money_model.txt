@@ -37,8 +37,12 @@ zz_ef_money_model_step = {
 	set_variable = { name = zz_ef_f_cb_rescale value = 0 }
 	# foreign currency in the reserves (night 2, item 2), before the rescale
 	zz_ef_fx_metal_update = yes
-	# П.8 (4.10): each foreign currency's weekly change, for E&F's table (generated, zz_ef_clearing.txt)
-	zz_ef_cbfx_week_step = yes
+	# each foreign currency's weekly change -- read only by the «+X a week» of the CB currencies table (ld_clearing.txt):
+	# the vitrine, players only (Д.R3б.3)
+	if = {
+		limit = { is_player = yes }
+		zz_ef_cbfx_week_step = yes
+	}
 	# В2.5 (4.10): CB states taken from a country send their metal back to it
 	zz_ef_cb_state_owner_step = yes
 	# Е.5 (5.10, Д.2): the issuer pays the week's interest to the treasuries holding its bonds
