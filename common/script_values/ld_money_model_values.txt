@@ -668,6 +668,20 @@ zz_ef_v_w_dep_int = {
 zz_ef_cover_normal = 0.4
 zz_ef_capacity_per_metal = 1
 
+# Д.R8а.5: all the CB's reserves in gold -- its gold, its silver at the world price of the month, the foreign currency
+# (var:zz_ef_fx_metal, kept weekly in the standard's metal). Read by national_capacity (the cover).
+zz_ef_reserves_in_gold = {
+	value = gold_state_native_for_stockpile
+	add = silver_state_native_for_stockpile_in_gold
+	if = {
+		limit = { has_law = law_type:law_silver_standard }
+		add = { value = zz_ef_v_fx_metal multiply = silver_to_gold_rate }
+	}
+	else = {
+		add = zz_ef_v_fx_metal
+	}
+}
+
 # M.2: under a metal standard the currency is worth its parity (the mint par:
 # metal per unit, var:money_value_target_1) within +-2% while the cover is 25%+ -- notes are
 # redeemed in metal, arbitrage holds the value; the band leans with the cover (+-0.1 x the gap to

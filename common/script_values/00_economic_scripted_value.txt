@@ -5264,19 +5264,20 @@ national_capacity_in_gold = {
 }
 
 national_capacity = {
+	# Д.R8а.5: the cover is one number -- all the CB's reserves at the market in the standard's metal: both metals
+	# (the other one at the world price of the month) and the foreign currency (zz_ef_reserves_in_gold,
+	# ld_money_model_values.txt); a standard without a metal of its own (fiat, exchange) -- in gold
 	value = 1
 	if = {
 		limit = {
-			or = {
-				has_law = law_type:law_silver_standard
-				has_law = law_type:law_bimetallism_standard
-				has_law = law_type:law_gold_standard
-			}
+			has_modifier = has_central_bank
+			NOT = { has_law = law_type:law_no_monetary_system }
 		}
-		add = central_bank_reserves
-		# foreign currency in the reserves, in the
-		# standard's metal (var:zz_ef_fx_metal, kept weekly by the step)
-		add = zz_ef_v_fx_metal
+		value = zz_ef_reserves_in_gold
+		if = {
+			limit = { has_law = law_type:law_silver_standard }
+			multiply = gold_to_silver_rate
+		}
 		multiply = zz_ef_capacity_per_metal
 	}
 	min = 0.01
