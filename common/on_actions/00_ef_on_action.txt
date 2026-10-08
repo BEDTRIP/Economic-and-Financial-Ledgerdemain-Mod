@@ -104,7 +104,11 @@ ef_on_monthly_pulse_country = {
 }
 
 ef_on_half_yearly_pulse_country = {
-	trigger = { zz_ef_game_started = yes } # R3а: not before the start (scripted_triggers/ld_start_triggers.txt)
+	trigger = { # R3а: not before the start (scripted_triggers/ld_start_triggers.txt); a country E&F has not set up yet waits for
+		# its monthly hub (new_country_var_ef) -- a country made by an event (r1008_155810: gdp_fixe_var_1_5Y ... not set)
+		zz_ef_game_started = yes
+		has_variable = zz_ef_country_vars_set
+	}
 	effect = {
 		ef_on_half_yearly_pulse_recurence = yes
 		# ef_on_half_yearly_pulse_reset = yes
@@ -136,7 +140,11 @@ ef_on_half_yearly_pulse_country = {
 }
 
 ef_on_yearly_pulse_country = {
-	trigger = { zz_ef_game_started = yes } # R3а: not before the start (scripted_triggers/ld_start_triggers.txt)
+	trigger = { # R3а: not before the start (scripted_triggers/ld_start_triggers.txt); a country E&F has not set up yet waits for
+		# its monthly hub (new_country_var_ef) -- a country made by an event (r1008_155810: gdp_fixe_var_1_5Y ... not set)
+		zz_ef_game_started = yes
+		has_variable = zz_ef_country_vars_set
+	}
 	effect = {
 		#liste actualized by 1 country
 		if = {
@@ -197,7 +205,11 @@ ef_on_yearly_pulse_country = {
 }
 
 ef_on_five_year_pulse_country = {
-	trigger = { zz_ef_game_started = yes } # R3а: not before the start (scripted_triggers/ld_start_triggers.txt)
+	trigger = { # R3а: not before the start (scripted_triggers/ld_start_triggers.txt); a country E&F has not set up yet waits for
+		# its monthly hub (new_country_var_ef) -- a country made by an event (r1008_155810: gdp_fixe_var_1_5Y ... not set)
+		zz_ef_game_started = yes
+		has_variable = zz_ef_country_vars_set
+	}
 	effect = {
 
 		#has_central_bank
