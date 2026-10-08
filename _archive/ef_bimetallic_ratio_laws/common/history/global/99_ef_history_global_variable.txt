@@ -1,0 +1,33 @@
+﻿# From common/history/global/99_ef_history_global_variable.txt.
+		if = {
+			limit = {
+				NOR = {
+					has_law = law_type:law_bimetallic_ratio_no
+					has_law = law_type:law_bimetallic_ratio_10
+					has_law = law_type:law_bimetallic_ratio_15
+					has_law = law_type:law_bimetallic_ratio_20
+				}
+			}
+			activate_law = law_type:law_bimetallic_ratio_no
+		}
+
+			active_law:lawgroup_bimetalism_ratio ?= {
+				add_amendment = {
+					type = amendment_bimetallic_ratio_15_5_fra
+					sponsor = PREV.ig:ig_industrialists #PREV.ig:ig_rural_folk
+				}
+			}
+
+			active_law:lawgroup_bimetalism_ratio ?= {
+				add_amendment = {
+					type = amendment_usa_bimetallic_ratio_1834
+					sponsor = PREV.ig:ig_rural_folk
+				}
+			}
+
+			active_law:lawgroup_bimetalism_ratio ?= {
+				add_amendment = {
+					type = amendment_netherlands_bimetallic_ratio
+					sponsor = PREV.ig:ig_industrialists
+				}
+			}

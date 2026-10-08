@@ -753,13 +753,7 @@
 				}	
 
 				#a test
-				activate_law = law_type:law_bimetallic_ratio_15
-				active_law:lawgroup_bimetalism_ratio ?= {
-					add_amendment = {
-						type = amendment_bimetallic_ratio_15_5_latine_union
-						sponsor = PREV.ig:ig_industrialists
-					}
-				}  
+				set_variable = { name = zz_ef_bimet_ratio value = 15.5 }  
 			}
 		}
 		set_global_variable = 00_ef_economic_event_8

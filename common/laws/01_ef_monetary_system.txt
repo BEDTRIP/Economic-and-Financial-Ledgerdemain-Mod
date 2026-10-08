@@ -8,7 +8,6 @@
 	} 
 
 	on_enact = { 
-		activate_law = law_type:law_bimetallic_ratio_no 
 	}
 	progressiveness = 50
 
@@ -36,7 +35,6 @@ law_fiat_standard = {
 	# 	}
 	# }
 	on_activate = { #on_enact = { 
-		activate_law = law_type:law_bimetallic_ratio_no
 		on_activate_monetary_system_law = yes
 	}
 	progressiveness = 50
@@ -62,7 +60,6 @@ law_silver_standard = {
 	} 
  
 	on_activate = {
-		activate_law = law_type:law_bimetallic_ratio_no
 		on_activate_monetary_system_law = yes
 	}
 	progressiveness = 50
@@ -93,7 +90,11 @@ law_bimetallism_standard = {
 	} 
 
 	on_activate = {
-		activate_law = law_type:law_bimetallic_ratio_15 
+		# the legal ratio gold : silver (Д.R8а.11) -- the country's own if it had one, else 15
+		if = {
+			limit = { NOT = { has_variable = zz_ef_bimet_ratio } }
+			set_variable = { name = zz_ef_bimet_ratio value = 15 }
+		}
 		on_activate_monetary_system_law = yes  
 
 		every_country = { 
@@ -154,7 +155,6 @@ law_gold_standard = {
 		}
 	} 
 	on_activate = {
-		activate_law = law_type:law_bimetallic_ratio_no
 		on_activate_monetary_system_law = yes 
 
 		
@@ -211,7 +211,6 @@ law_gold_exchange_standard = {
 	}
 
 	on_enact = {
-		activate_law = law_type:law_bimetallic_ratio_no
 		on_activate_monetary_system_law = yes
 	}
 	progressiveness = 10
@@ -232,7 +231,6 @@ law_external_exchange_standard = {
 	}
 
 	on_enact = {
-		activate_law = law_type:law_bimetallic_ratio_no
 		# on_activate_monetary_system_law = yes
 	}
 	progressiveness = 10

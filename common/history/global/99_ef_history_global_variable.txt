@@ -1,16 +1,5 @@
 ﻿GLOBAL = {
 	every_country = {
-		if = {
-			limit = {
-				NOR = {
-					has_law = law_type:law_bimetallic_ratio_no
-					has_law = law_type:law_bimetallic_ratio_10
-					has_law = law_type:law_bimetallic_ratio_15
-					has_law = law_type:law_bimetallic_ratio_20
-				}
-			}
-			activate_law = law_type:law_bimetallic_ratio_no
-		}
 		################################################################################################################################
 		################################################################################################################################
 		################################################################################################################################
@@ -158,7 +147,6 @@
 			}
 			activate_law = law_type:law_franc_french_franc_currency
 			activate_law = law_type:law_bimetallism_standard
-			activate_law = law_type:law_bimetallic_ratio_15
 			set_variable = {
 				name = money_value_target_1
                 value = 0.75 #{ 1 12 }
@@ -205,12 +193,7 @@
 				name = base_index_value
 				value = 250
 			}
-			active_law:lawgroup_bimetalism_ratio ?= {
-				add_amendment = {
-					type = amendment_bimetallic_ratio_15_5_fra
-					sponsor = PREV.ig:ig_industrialists #PREV.ig:ig_rural_folk
-				}
-			}
+			set_variable = { name = zz_ef_bimet_ratio value = 15.5 }
 		}
 		#dollar_united_states_dollar
 		if = {
@@ -219,7 +202,6 @@
 			}
 			activate_law = law_type:law_dollar_united_states_dollar_currency
 			activate_law = law_type:law_bimetallism_standard
-			activate_law = law_type:law_bimetallic_ratio_15
 			set_variable = {
 				name = money_value_target_1
                 value = 5
@@ -283,12 +265,7 @@
 				name = base_index_value
 				value = 330
 			}
-			active_law:lawgroup_bimetalism_ratio ?= {
-				add_amendment = {
-					type = amendment_usa_bimetallic_ratio_1834
-					sponsor = PREV.ig:ig_rural_folk
-				}
-			}
+			set_variable = { name = zz_ef_bimet_ratio value = 16.1 }
 		}
 		#gulden_florin
 		if = {
@@ -297,8 +274,6 @@
 			}
 			activate_law = law_type:law_gulden_florin_currency
 			activate_law = law_type:law_bimetallism_standard
-			activate_law = law_type:law_bimetallic_ratio_15
-			activate_law = law_type:law_bimetallic_ratio_15
 			set_variable = {
 				name = money_value_target_1
                 value = 10.61 #{ 10 20 }
@@ -354,12 +329,7 @@
 				institution = institution_economic_central_bank
 				level = 3
 			}
-			active_law:lawgroup_bimetalism_ratio ?= {
-				add_amendment = {
-					type = amendment_netherlands_bimetallic_ratio
-					sponsor = PREV.ig:ig_industrialists
-				}
-			}
+			set_variable = { name = zz_ef_bimet_ratio value = 15.6 }
 		}
 
 		#Silver standart

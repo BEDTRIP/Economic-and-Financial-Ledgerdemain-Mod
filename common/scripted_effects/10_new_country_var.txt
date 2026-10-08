@@ -2,17 +2,6 @@
 # (common/history/global/00_ef_economic_global_variable.txt, 00_ef_financial_, 00_ef_stockpile_, 01_ef_state_),
 # a new country the whole (zz_ef_country_init, scripted_effects/ld_country_init.txt).
 new_country_var_ef = {
-	if = {
-		limit = {
-			NOR = {
-				has_law = law_type:law_bimetallic_ratio_no
-				has_law = law_type:law_bimetallic_ratio_10
-				has_law = law_type:law_bimetallic_ratio_15
-				has_law = law_type:law_bimetallic_ratio_20
-			}
-		}
-		activate_law = law_type:law_bimetallic_ratio_no
-	}
 	every_scope_state = {
 		new_country_var_ef_state = yes
 	}

@@ -5,10 +5,10 @@
 Таможенный союз даёт члену свою валюту на чужом рынке. Деньги-как-товар (`<cur>_c`, 57 валют) — в других подсистемах; здесь только определения E&F.
 
 ## Файлы
-- `common/law_groups/01_ef_laws.txt` — группы законов: `lawgroup_monetary_policy`, `lawgroup_monetary_system`, `lawgroup_currency_type`, `lawgroup_bimetalism_ratio` (группа ратио биметаллизма; видимость по биметаллизму не задана).
+- `common/law_groups/01_ef_laws.txt` — группы законов: `lawgroup_monetary_policy`, `lawgroup_monetary_system`, `lawgroup_currency_type`.
 - `common/laws/01_ef_currency_type.txt` — 95 законов `law_<cur>_currency` + `law_no_market_liquidity` (нет валюты). Одинаковая форма: `can_enact` = `has_modifier = has_central_bank` + список тегов, которым E&F выдаёт валюту в истории; 39 законов с `always = no` (товар закомментирован / вырезан под лимит 128 товаров); `unlocking_technologies = currency_standards`.
 - `common/laws/01_ef_monetary_system.txt` — `law_no_monetary_system`, `law_fiat_standard`, `law_silver_standard`, `law_bimetallism_standard`, `law_gold_standard`, `law_gold_exchange_standard`, `law_external_exchange_standard`; `on_activate` зовёт `on_activate_monetary_system_law` (01_economic_scripted_effects.txt:27577, тело E&F + `zz_ef_std_switch_before/_after`).
-- `common/laws/01_ef_bimetalism_ratio.txt` — `law_bimetallic_ratio_no/10/15/20` (соотношение золото:серебро).
+- Соотношение биметаллизма — параметр страны `var:zz_ef_bimet_ratio` (Д.R8а.11; группа законов E&F и поправки — в `_archive/ef_bimetallic_ratio_laws/`): старт — история (`99_ef_history_global_variable.txt`: FRA 15,5, USA 16,1, NET 15,6), латинский союз (`00_ef_divers_je.txt`) — 15,5, переход на биметаллизм без своего — 15; читает `bimetallic_rate_gold_to_silver` (`00_economic_scripted_value.txt`; у остальных стандартов — рыночный курс `gold_to_silver_rate`). Смена денежной властью — R4 / R10.
 - `common/laws/01_ef_monetary_policy.txt` — `law_no_monetary_policy`, `law_revaluation`, `law_devaluation`, `law_large_monetary_policy` (три последних — с технологией `monetary_policy_tools`, не `central_banking`; на уровне ЦБ: `central-bank.md`).
 - `common/script_values/01_economic_currency_scripted_value.txt` (294 тыс. строк, 93 повтора на валюту; индекс ниже).
 - `common/script_values/ld_reference_currency_values.txt` — сила валюты к эталону, торговый множитель, металл в золоте, учётные значения для карточек банка (`zz_ef_bank_capital`, `zz_ef_v_d_*`, `zz_ef_fx_money`, `zz_ef_bank_assets/liabilities`), торговля неделя.

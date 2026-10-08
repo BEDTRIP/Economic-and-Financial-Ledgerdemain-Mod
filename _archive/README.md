@@ -99,3 +99,4 @@ _archive/<механизм>/
 | Символ валюты в верхней панели — 96 текстбоксов (по закону валюты и общий) | `ef_topbar_currency_symbols/` | тело типа `currency_symbol_top_bar` заменено одним текстбоксом `currency_symbol` |
 | Запрет стандартов на чужом рынке (`is_not_market_owner`) | `ef_market_owner_ban/` | строка `is_not_market_owner = yes` в `can_enact` трёх законов стандартов и `is_valid` трёх кнопок смены стандарта |
 | Валюта формируемой страны E&F (марка из талеров, R3.7) | `ef_currency_formed/` | вызов `zz_ef_cf_find` и событие `ld_currency_formed.1` в `zz_ef_newcountry_on_country_formed` |
+| Соотношение биметаллизма — группа законов и поправки E&F | `ef_bimetallic_ratio_laws/` | включение законов группы в `on_activate` стандартов, условия по ним в `money_value_target_pre_set` и `set_reset_monetary_system_status`, поправки в истории и журнале латинского союза, блоки идеологий — заменены параметром `zz_ef_bimet_ratio` |

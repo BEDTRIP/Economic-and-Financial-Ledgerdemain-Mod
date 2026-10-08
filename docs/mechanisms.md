@@ -8,7 +8,7 @@
 коэффициент, закомментированный вызов); `мёртвый` — ни откуда не вызывается; `дубль` — считает то же или пишет те же
 счета, что модель `ld_*`. Строки файлов — на момент записи, при правке файла сдвигаются: искать по имени.
 
-Итого: мёртвый 4, выключен 0, дубль 3, живой 216.
+Итого: мёртвый 4, выключен 0, дубль 3, живой 214.
 
 ## Денежная модель и металл (`money-model.md`)
 
@@ -46,7 +46,6 @@
 | Валюта-эталон по E&F: money_value_median, weighted_average_currency_value(_test), is_reference_type | дубль | common/script_values/01_economic_currency_scripted_value.txt:1,8,7788; common/script_values/ld_reference_currency_values.txt:14 | «эталон» и «сила» теперь по zz_ef_currency_strength; медиана E&F осталась запасным путём в zz_ef_value_to_parity и в is_reference_currency | — |
 | Законы валют law_<cur>_currency (95) | живой | common/laws/01_ef_currency_type.txt:1-2028 | есть вызовы activate_law из introduction_new_currency и истории; 39 законов с always = no (товар вырезан), остальные ограничены тегами E&F + has_central_bank | окно законов (группа lawgroup_currency_type) |
 | Законы денежной системы (серебро/би/золото/золотодевиз/фиат/внешний) | живой | common/laws/01_ef_monetary_system.txt:1-251 | on_activate зовёт on_activate_monetary_system_law (01_economic_scripted_effects.txt:27577) | окно законов |
-| Соотношение биметаллизма law_bimetallic_ratio_* | живой | common/laws/01_ef_bimetalism_ratio.txt; common/law_groups/01_ef_laws.txt:20 | группа видна при биметаллизме; law_bimetallic_ratio_no активируется из on_activate фиата и др. | окно законов |
 | Валюта-товар money_value_<cur>, money_value_in_gold_<cur>, currency_of_player_is_<cur> (93 шт., script_values) | живой | common/script_values/01_economic_currency_scripted_value.txt:2800-4900 | refs 238 для money_value_<cur>; currency_of_player_is_<cur> — script_value поверх global_var, не триггер; переменные заданы в 00_ef_economic_global_variable.txt:31568 | — |
 | Цепочка money_supply_state / stockpiling_<cur>_state (деньги в обороте по законам валют) | живой | common/script_values/01_economic_currency_scripted_value.txt:8476, 14361 | money_supply_state refs=109, stockpiling_<cur>_state refs=51 | карточки денег, биржа валют |
 | Сила валюты к эталону zz_ef_currency_strength / zz_ef_value_to_parity | живой | common/script_values/ld_reference_currency_values.txt:14-45 | refs=33; подменяет is_strong/balanced/weak_currency (00_ef_custom_trigger.txt:592-622) и E&F-значения медианы | панель ставки, подсказки валюты |
@@ -248,7 +247,6 @@
 | Идеологии `ideology_monetary_{moderate,conservative,left}`, `ideology_monetary_policy` | живой | common/ideologies/00_ef_ig_ideologies.txt:1-111; common/history/global/99_ef_history_global_variable.txt:~8020 | `add_ideology` в history | идеологии ИГ |
 | `INJECT` оценок законов в 9 ванильных идеологий (`laissez_faire … socialist`) | живой | common/ideologies/00_ef_ig_ideologies.txt:112-291 | INJECT ванильных ключей; refs=0 — ожидаемо. Оценки законов валютной системы — по именам `law_bimetallism_standard`, `law_gold_exchange_standard` | отношение ИГ к законам |
 | Институт `institution_economic_central_bank` | живой | common/institutions/00_ef_institutions.txt | refs=36 | институт «Центробанк» |
-| Поправки `amendment_*_bimetallic_ratio*` (7) | живой | common/amendments/00_ef_amendments.txt | `add_amendment` в `99_ef_history_global_variable.txt:196,274,345`; refs 11-14 | закон «биметаллический коэффициент» |
 | Технологии E&F (10 REPLACE + 9 своих) | живой | common/technology/technologies/ef_technology.txt | refs: central_banking 1042, financial_center 93; `corporate_charters` refs=0 (REPLACE ванильной) | дерево технологий |
 | Журнальные записи E&F (7) | живой | common/journal_entries/00_ef_*.txt | `financial_center_je_2` — ld (`ld_bubble`,`ld_pb_overbuild_counter`); `silver_crisis_je_1` — `00_on_action_main.txt:1188`; остальные активируются игроком (`is_shown_when_inactive`) | журнал |
 | События E&F .1–.35, .56–.65, .95, .96 (запускаются кодом) | живой | events/00_ef_economic_event.txt | `trigger_event`/`id =` из `00_on_action_main.txt`, решения; `.95/.96` без вызова (арбитраж — в `_archive/ef_bimetallic_arbitrage/`) | события игроку |

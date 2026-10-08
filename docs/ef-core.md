@@ -31,7 +31,6 @@
 - `common/decisions/00_ef_ai_loooting.txt` (ИИ-грабёж центробанка столицы).
 - `common/ideologies/00_ef_ig_ideologies.txt` — 4 новые идеологии (`ideology_monetary_{moderate,conservative,left}`, `ideology_monetary_policy`) + `INJECT` оценок законов в 9 ванильных (`laissez_faire … socialist`).
 - `common/institutions/00_ef_institutions.txt` — `institution_economic_central_bank`.
-- `common/amendments/00_ef_amendments.txt` — 7 поправок закона `lawgroup_bimetalism_ratio` (коэффициент FRA/латинский союз/USA 1834 и 1873/ESP/GER/NET).
 - `common/technology/technologies/ef_technology.txt` — 10 `REPLACE:` ванильных финтехнологий (`banking`, `currency_standards`, `central_banking`, `mutual_funds`, `corporate_charters`, `investment_banks`, `international_exchange_standards`, `joint_stock_companies`, `postal_savings`, `modern_financial_instruments`) и 7 своих (`debt_currency_exchange_regime`, `gold_exchange_standard`, `metalique_standard`, `financial_center`, `monetary_policy_tools`, `private_liquidity_provision`, `advanced_interbank_refinancing`).
 - `common/messages/00_ef_messages.txt` (+ `ld_bubble_messages.txt`, `ld_pb_overbuild_messages.txt`) — 10 сообщений событий, `maturity_arrives_message`, `ai_selle_bond_maturity_1..10_message`, 4×8 `ai_privat_bank_*_bond_maturity_N_message`.
 - `common/alert_types/00_ef_alert_types.txt` — 3 алерта: `fso_alert`, `selle_bond_maturity_yers_time_5_Y/_10_Y`; `PSC_alert_types.txt` — PSC.
@@ -73,7 +72,7 @@
 | `global_var:money_value_median` | медиана курсов | `median_currency_value` (`zz_ef_world_month_ef`, `ld_world_month.txt`) | `is_reference_currency`, `zz_ef_value_to_parity` |
 
 ## Вызовы и связи
-- Законы: 95 `law_<cur>_currency` (`laws/01_ef_currency_type.txt`), `law_*_standard`, `lawgroup_monetary_policy`, `lawgroup_bimetalism_ratio` — триггеры `law_<cur>_monetary_system_*_trigger` (customizable_localization `00_ef_localization_ custom.txt`, GUI).
+- Законы: 95 `law_<cur>_currency` (`laws/01_ef_currency_type.txt`), `law_*_standard`, `lawgroup_monetary_policy`, соотношение биметаллизма `zz_ef_bimet_ratio` — триггеры `law_<cur>_monetary_system_*_trigger` (customizable_localization `00_ef_localization_ custom.txt`, GUI).
 - Здания ↔ PM ↔ товары: `pmg_market_liquidity` вставлена в ванильные здания (`goods_input_liquidity_currency_add = 28`); PM «частного владения» производят акции; фин. центр потребляет акции/облигации и производит `mutual_funds`; банк `ld_bank` производит `liquidity_currency`.
 - Решения: `00_ef_ai_loooting_decisions_1` (ИИ при `enemy_capital_is_occuped >= 1`) → `enemy_capital_is_occuped` + событие `00_ef_economic_event.35`.
 - События `00_ef_economic_event.1..35, 56..65, 95, 96, 106, 107` — из `ef_on_yearly_pulse_event_at_date`, `enemy_capital_is_occuped`, решений (`.95/.96` звал арбитраж — в `_archive/ef_bimetallic_arbitrage/`, сейчас без вызова); сообщения `00_ef_economic_event_<N>_message`.
