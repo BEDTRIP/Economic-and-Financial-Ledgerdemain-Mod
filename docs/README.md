@@ -27,8 +27,9 @@
 - **Старт игры** (`game-start.md`): `common/history/buildings/` → `common/history/global/` (по имени файла) →
   `common/history/states/`; после лобби — верхняя панель E&F, проход по штатам, настройка старта E&F (`zz_ef_start_setup`),
   планировщик; PSC запускает стройку событием.
-- **Новая страна:** `new_country_var_ef` (`common/scripted_effects/10_new_country_var.txt`) — из `common/on_actions/ld_new_country_immediate_init.txt`
-  и страховкой из месячного пульса; признак готовности — `var:zz_ef_country_vars_set`.
+- **Новая страна:** одна точка — `zz_ef_country_init` (`common/scripted_effects/ld_country_init.txt`): переменные E&F
+  (`new_country_var_ef`, через скрытое событие `zz_ef_newcountry.1`), рейтинг, валюта, реестр счетов — из хуков новой
+  страны и первого захода планировщика; страна без хука — месячный хаб E&F; признак готовности — `var:zz_ef_country_vars_set`.
 - **Роли и планировщик** (`money-model.md`): роль страны А / Б / В — раз в месяц (`on_monthly_pulse` →
   `zz_ef_roles_world_pass`); одна глобальная цепочка `zz_ef_sched_day` от дня бюджетного тика ведёт все шаги модели.
 - **Месяц** (страны А / Б — из планировщика, раз в календарный месяц, в свой день, порядок фиксирован): E&F

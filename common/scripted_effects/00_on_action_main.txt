@@ -52,58 +52,15 @@ ef_on_monthly_pulse_recurence = {
 	is_in_revolution_monthly_pulse = yes
 	maximum_number_companies_exceeded_monthly_pulse = yes
 
-	#for new country by revolution
-	if = {
-		limit = {
-			is_revolutionary = yes
-			not  = {
-				has_variable = zz_ef_country_vars_set
-			}
-		}
-		new_country_var_ef = yes
-
-		if = {
-			limit = {
-				not = {
-					any_scope_state = {
-						has_building = building_bank
-					}
-				}
-			}
-			activate_law = law_type:law_no_monetary_system
-			activate_law = law_type:law_no_market_liquidity
- 		}
-		if = {
-			limit = {
-				any_scope_state = {
-					has_building = building_bank
-				}
-			}
-			every_scope_state = {
-				if = {
-					limit = {
-						has_building = building_bank
-					}
-					remove_building = building_bank
-				}
-			}
-			central_bank_modifier = yes
-			activate_law = law_type:law_no_monetary_system
-			activate_law = law_type:law_no_market_liquidity
- 		}
-		add_modifier = {
-			name = foreign_exchange_controls
-			months = 23
-		}
-	}
-	#new country
+	# a country without a hook (made by an event; scripted_effects/ld_country_init.txt): its setup and E&F's
+	# laws of a new country -- no monetary system, no bank, foreign exchange controls
 	if = {
 		limit = {
 			not  = {
 				has_variable = zz_ef_country_vars_set
 			}
 		}
-		new_country_var_ef = yes
+		zz_ef_country_vars_init = yes
 
 		if = {
 			limit = {

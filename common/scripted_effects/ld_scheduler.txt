@@ -164,8 +164,10 @@ zz_ef_sched_country_day = {
 	}
 }
 
-# Country scope: the day of the week, the phase of the 4 weeks and the day of the month, once.
+# Country scope: the day of the week, the phase of the 4 weeks and the day of the month, once; the country's setup
+# before its first step (zz_ef_country_init).
 zz_ef_sched_slot_assign = {
+	zz_ef_country_init = yes
 	if = {
 		limit = { NOT = { has_global_variable = zz_ef_week_slot_n } }
 		set_global_variable = { name = zz_ef_week_slot_n value = 0 }

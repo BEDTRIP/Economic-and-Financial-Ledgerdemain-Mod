@@ -14,14 +14,8 @@ on_revolution_start = {
 }
 zz_ef_rv_on_revolution_start = {
 	effect = {
-		# E&F's variables of the new country at once (new_country_var_ef in its own event, root -- the country): its pulses
-		# came before E&F's monthly hub set them up -- r1008_135719: "sell_limit_var_1", "looting_1_year" ... not set
-		scope:target ?= {
-			if = {
-				limit = { NOT = { has_variable = zz_ef_country_vars_set } }
-				trigger_event = { id = zz_ef_newcountry.1 days = 0 }
-			}
-		}
+		# the new country is set up at once: its pulses come before E&F's monthly hub (scripted_effects/ld_country_init.txt)
+		scope:target ?= { zz_ef_country_init = yes }
 		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFV|[TimeKeeper.GetCurrentDate.GetString]||rev_start|target [SCOPE.sC('target').GetNameNoFormatting]|target_rev [SCOPE.sC('target').MakeScope.ScriptValue('zz_ef_rv_is_rev_v')|0]|target_std [SCOPE.sC('target').MakeScope.ScriptValue('zz_ef_std_code')|0]|target_cb [SCOPE.sC('target').MakeScope.ScriptValue('zz_ef_has_cb')|0]" }
 	}
 }
@@ -30,14 +24,8 @@ on_secession_start = {
 }
 zz_ef_rv_on_secession_start = {
 	effect = {
-		# E&F's variables of the new country at once (new_country_var_ef in its own event, root -- the country): its pulses
-		# came before E&F's monthly hub set them up -- r1008_135719: "sell_limit_var_1", "looting_1_year" ... not set
-		scope:target ?= {
-			if = {
-				limit = { NOT = { has_variable = zz_ef_country_vars_set } }
-				trigger_event = { id = zz_ef_newcountry.1 days = 0 }
-			}
-		}
+		# the new country is set up at once: its pulses come before E&F's monthly hub (scripted_effects/ld_country_init.txt)
+		scope:target ?= { zz_ef_country_init = yes }
 		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFV|[TimeKeeper.GetCurrentDate.GetString]||sec_start|target [SCOPE.sC('target').GetNameNoFormatting]|target_std [SCOPE.sC('target').MakeScope.ScriptValue('zz_ef_std_code')|0]|target_cb [SCOPE.sC('target').MakeScope.ScriptValue('zz_ef_has_cb')|0]" }
 	}
 }

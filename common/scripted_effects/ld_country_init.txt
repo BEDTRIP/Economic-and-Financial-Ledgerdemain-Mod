@@ -1,0 +1,25 @@
+﻿# A country's setup, one entry point. Each part once: E&F's variables (zz_ef_country_vars_set), the credit
+# rating and the currency as data with them; the registry's accounts (zz_ef_registry). A country of the history has
+# its variables from the history (new_country_var_ef_* in common/history/global/) and its currency from the start
+# setup (ld_start_setup.txt).
+#
+# Any scope, any root: new_country_var_ef and the rating read root, so the variables go through the hidden event
+# zz_ef_newcountry.1 on the country (its own root; events/ld_new_country_immediate_init_events.txt).
+# Callers: the new-country hooks (on_actions/ld_new_country_immediate_init.txt, ld_revolution_on_actions.txt), the
+# scheduler's first entry of the country (zz_ef_sched_slot_assign); E&F's monthly hub sets up a country without a
+# hook (ef_on_monthly_pulse_recurence, 00_on_action_main.txt).
+zz_ef_country_init = {
+	if = {
+		limit = { NOT = { has_variable = zz_ef_country_vars_set } }
+		trigger_event = { id = zz_ef_newcountry.1 days = 0 }
+	}
+	zz_ef_registry_init = yes
+}
+
+# Country scope, root -- the country: E&F's variables, the credit rating (its variable is read by every country's
+# pulses), the currency as data (a national one if none).
+zz_ef_country_vars_init = {
+	new_country_var_ef = yes
+	country_credit_rating = yes
+	zz_ef_cur_set = yes
+}

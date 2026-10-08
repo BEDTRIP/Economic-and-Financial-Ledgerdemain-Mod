@@ -1,48 +1,13 @@
 ﻿#############################################
-# New-country variable init, run immediately instead of waiting a month
+# A new country is set up the moment it exists (zz_ef_country_init, scripted_effects/ld_country_init.txt), not at
+# its first monthly pulse: E&F's and our scripts read its variables before that.
 #
-# E&F's own new_country_var_ef (common/scripted_effects/10_new_country_var.txt)
-# backfills ~34000 lines of country/state variables -- base_rate_percentage among
-# them -- for any country missing them. But its only caller is
-# ef_on_monthly_pulse_recurence (00_on_action_main.txt:63/106), gated behind
-# `not = { has_variable = zz_ef_country_vars_set } }`, which is E&F's own
-# "already initialized" flag, set at the end of new_country_var_ef itself.
+# On on_country_formed / on_become_independent root is the new country; the four on_country_released_as_* fire with
+# root -- the overlord and scope:target -- the new country. zz_ef_country_init works in any of them.
 #
-# That means a country goes uninitialized from the moment it appears on the map
-# until its first monthly pulse -- up to ~30 days. Any E&F/ComPatch script that
-# reads one of those variables on such a country during that window gets `none`
-# back (see zz_pb_ef_construction_sector.txt's ZZ FIX comment for the specific
-# case this was diagnosed from: 4700+ "Value of wrong type" errors in a single
-# session, scaling with how many young countries exist -- i.e. worse the longer
-# a campaign runs and the more nations form/release/gain independence).
-#
-# Fix: call new_country_var_ef the moment the country exists instead of waiting
-# for the pulse. It is idempotent (same has_variable guard E&F uses), so calling
-# it here and then again on the monthly pulse is harmless -- the second call is
-# always a no-op.
-#
-# on_country_formed / on_become_independent fire with ROOT already the new
-# country, so new_country_var_ef (which reads ROOT internally via
-# `every_state = { limit = { owner = ROOT } }`) can be called directly.
-#
-# The four on_country_released_as_* actions fire with ROOT = the overlord and
-# scope:target = the new country. new_country_var_ef can't simply be called
-# inside `scope:target = { }` -- ROOT does not follow a scope change, it stays
-# the overlord, which would misfile the state-variable half of the backfill onto
-# the OVERLORD's own (already-initialized) states instead of the new country's.
-# Those four route through zz_ef_newcountry.1 (common/events/
-# zz_ef_new_country_immediate_init_events.txt) instead: firing a hidden event on
-# scope:target gives that event its own execution context with ROOT genuinely
-# equal to the new country.
-#
-# ADDITIVE, 2026-09-24. This file used to put an `effect = { }` straight into
-# the six vanilla on_actions. An on_action holds ONE effect; the most recent
-# definition wins (debug.log: "There is more than one 'effect' defined using
-# most recent: common/on_actions/zz_ef_new_country_immediate_init.txt:78").
-# Loading last, ours silently replaced the effects vanilla
-# (00_code_on_actions.txt), Morgenroete, Grey's Soft Pop / USU / Subject Suite
-# and ETF put there for released and formed countries. Now each vanilla
-# on_action only lists our own on_action, which carries the effect.
+# Each vanilla on_action only lists our own on_action, which carries the effect: an on_action holds one effect, and
+# the most recent definition wins (debug.log: "There is more than one 'effect' defined") -- an effect of ours put
+# straight into the vanilla on_action would replace vanilla's and other mods'.
 #############################################
 
 on_country_formed = {
@@ -51,14 +16,7 @@ on_country_formed = {
 
 zz_ef_newcountry_on_country_formed = {
 	effect = {
-		if = {
-			limit = {
-				not = { has_variable = zz_ef_country_vars_set }
-			}
-			new_country_var_ef = yes
-			country_credit_rating = yes # its variable is read by every country's pulses (r1008_141823: a revolution, 18 "country_credit_note_fixe not set")
-			zz_ef_cur_set = yes # its currency as data (a national one if none)
-		}
+		zz_ef_country_init = yes
 		# R3, step 7 (Д.R3.7): the historical currency of the new tag -- an event with a choice
 		# (events/ld_currency_formed_events.txt)
 		if = {
@@ -78,14 +36,7 @@ on_become_independent = {
 
 zz_ef_newcountry_on_become_independent = {
 	effect = {
-		if = {
-			limit = {
-				not = { has_variable = zz_ef_country_vars_set }
-			}
-			new_country_var_ef = yes
-			country_credit_rating = yes # its variable is read by every country's pulses (r1008_141823: a revolution, 18 "country_credit_note_fixe not set")
-			zz_ef_cur_set = yes # its currency as data (a national one if none)
-		}
+		zz_ef_country_init = yes
 	}
 }
 
@@ -95,9 +46,7 @@ on_country_released_as_independent = {
 
 zz_ef_newcountry_on_country_released_as_independent = {
 	effect = {
-		scope:target = {
-			trigger_event = { id = zz_ef_newcountry.1 days = 0 }
-		}
+		scope:target = { zz_ef_country_init = yes }
 	}
 }
 
@@ -107,9 +56,7 @@ on_country_released_as_own_subject = {
 
 zz_ef_newcountry_on_country_released_as_own_subject = {
 	effect = {
-		scope:target = {
-			trigger_event = { id = zz_ef_newcountry.1 days = 0 }
-		}
+		scope:target = { zz_ef_country_init = yes }
 	}
 }
 
@@ -119,9 +66,7 @@ on_country_released_as_company_subject = {
 
 zz_ef_newcountry_on_country_released_as_company_subject = {
 	effect = {
-		scope:target = {
-			trigger_event = { id = zz_ef_newcountry.1 days = 0 }
-		}
+		scope:target = { zz_ef_country_init = yes }
 	}
 }
 
@@ -131,8 +76,6 @@ on_country_released_as_overlord_subject = {
 
 zz_ef_newcountry_on_country_released_as_overlord_subject = {
 	effect = {
-		scope:target = {
-			trigger_event = { id = zz_ef_newcountry.1 days = 0 }
-		}
+		scope:target = { zz_ef_country_init = yes }
 	}
 }

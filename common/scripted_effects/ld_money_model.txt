@@ -25,8 +25,6 @@
 # ---- the weekly step --------------------------------------------------------
 
 zz_ef_money_model_step = {
-	# R1а.5: the registry's accounts exist from the first step (scripted_effects/ld_ledger.txt)
-	zz_ef_registry_init = yes
 	# Business cash: the sum over the buildings, once a week (run 15: the
 	# estimate from the credit limit -- credit - base - 1.7 x GDP -- swung by
 	# millions a week, M2 by +-30%).
@@ -77,12 +75,6 @@ zz_ef_money_model_step = {
 			var:zz_ef_weeks_run >= 26
 		}
 		remove_variable = zz_ef_cb_start_due
-	}
-	# R1б.2: the country's currency as data, at its first step (then by the laws and every January)
-	if = {
-		limit = { NOT = { has_variable = zz_ef_cur_init } }
-		set_variable = { name = zz_ef_cur_init value = yes }
-		zz_ef_cur_set = yes
 	}
 
 	# The budget's week, as the engine counted it at its last tick.
