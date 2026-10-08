@@ -4,6 +4,9 @@
 # global scheduler (scripted_effects/ld_scheduler.txt); its on_actions call this for old saves' queued calls.
 zz_ef_money_week_retire = {
 	if = { limit = { has_variable = zz_ef_week_alive } remove_variable = zz_ef_week_alive }
+	if = { limit = { has_variable = zz_ef_week_probe } remove_variable = zz_ef_week_probe }
+	if = { limit = { has_variable = zz_ef_week_probe_value } remove_variable = zz_ef_week_probe_value }
+}
 
 # ----
 	else_if = {

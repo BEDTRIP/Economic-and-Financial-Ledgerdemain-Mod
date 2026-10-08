@@ -22,12 +22,6 @@
 # Е.5 (5.10, Д.2): the issuer paid the interest on its bonds held by other treasuries as an expense line -- replaced
 # by the bond ledger (В5.5, 5.10: scripted_effects/zz_ef_bond_ledger.txt), which pays the holder out of the issuer's pool.
 
-# ---- the weekly chain -------------------------------------------------------
-
-	if = { limit = { has_variable = zz_ef_week_probe } remove_variable = zz_ef_week_probe }
-	if = { limit = { has_variable = zz_ef_week_probe_value } remove_variable = zz_ef_week_probe_value }
-}
-
 # ---- the weekly step --------------------------------------------------------
 
 zz_ef_money_model_step = {
