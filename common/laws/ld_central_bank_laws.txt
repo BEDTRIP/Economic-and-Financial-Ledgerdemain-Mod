@@ -1,11 +1,13 @@
 ﻿# R3.2 (Д.R3.2, 8.10): the central bank group (law_groups/ld_central_bank.txt). Set by the script, not enacted: the law
 # follows the CB (zz_ef_cb_law_sync, monthly) until R4 gives the kinds their behaviour (a private CB, founding and
-# closing a CB by law).
+# closing a CB by law). The state and the private CB -- with the technology central_banking (the user, 8.10); none --
+# always.
 law_ld_cb_state = {
 	group = lawgroup_ld_central_bank
 	icon = "gfx/interface/icons/law_icons/gold_standard.dds"
 	progressiveness = 0
 	on_activate = { set_variable = { name = zz_ef_cb_kind value = flag:state } }
+	unlocking_technologies = { central_banking }
 	can_enact = { always = no }
 	ai_will_do = { always = no }
 }
@@ -14,6 +16,7 @@ law_ld_cb_private = {
 	icon = "gfx/interface/icons/law_icons/large_monetary_policy.dds"
 	progressiveness = 0
 	on_activate = { set_variable = { name = zz_ef_cb_kind value = flag:private } }
+	unlocking_technologies = { central_banking }
 	can_enact = { always = no }
 	ai_will_do = { always = no }
 }

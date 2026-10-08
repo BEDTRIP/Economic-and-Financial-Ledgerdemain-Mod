@@ -21,8 +21,9 @@ law_revaluation = {
 		law_isolationism
 		law_large_monetary_policy
 	} 
+	# R3 (the user, 8.10): the monetary policy laws -- with monetary_policy_tools, not central_banking
 	unlocking_technologies = {
-		central_banking
+		monetary_policy_tools
 	}
 	on_activate = {  
 		on_activate_law_revaluation = yes
@@ -43,7 +44,7 @@ law_devaluation = {
 		law_large_monetary_policy
 	} 
 	unlocking_technologies = {
-		central_banking
+		monetary_policy_tools
 	}
 	on_activate = { 
  		on_activate_law_devaluation = yes
@@ -66,7 +67,6 @@ law_large_monetary_policy = {
 		law_devaluation
 	} 
 	unlocking_technologies = {
-		central_banking
 		monetary_policy_tools
 	}
 	on_activate = { 

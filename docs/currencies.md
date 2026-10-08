@@ -9,7 +9,7 @@
 - `common/laws/01_ef_currency_type.txt` — 95 законов `law_<cur>_currency` + `law_no_market_liquidity` (нет валюты). Одинаковая форма: `can_enact` = `has_modifier = has_central_bank` + список тегов, которым E&F выдаёт валюту в истории; 39 законов с `always = no` (товар закомментирован / вырезан под лимит 128 товаров); `unlocking_technologies = currency_standards`.
 - `common/laws/01_ef_monetary_system.txt` — `law_no_monetary_system`, `law_fiat_standard`, `law_silver_standard`, `law_bimetallism_standard`, `law_gold_standard`, `law_gold_exchange_standard`, `law_external_exchange_standard`; `on_activate` зовёт `on_activate_monetary_system_law` (01_economic_scripted_effects.txt:27577, тело E&F + `zz_ef_std_switch_before/_after`).
 - `common/laws/01_ef_bimetalism_ratio.txt` — `law_bimetallic_ratio_no/10/15/20` (соотношение золото:серебро).
-- `common/laws/01_ef_monetary_policy.txt` — `law_no_monetary_policy`, `law_revaluation`, `law_devaluation`, `law_large_monetary_policy` (на уровне ЦБ: `central-bank.md`).
+- `common/laws/01_ef_monetary_policy.txt` — `law_no_monetary_policy`, `law_revaluation`, `law_devaluation`, `law_large_monetary_policy` (три последних — с технологией `monetary_policy_tools`, не `central_banking`; на уровне ЦБ: `central-bank.md`).
 - `common/script_values/01_economic_currency_scripted_value.txt` (294 тыс. строк, 93 повтора на валюту; индекс ниже).
 - `common/script_values/ld_reference_currency_values.txt` — сила валюты к эталону, торговый множитель, металл в золоте, учётные значения для карточек банка (`zz_ef_bank_capital`, `zz_ef_v_d_*`, `zz_ef_fx_money`, `zz_ef_bank_assets/liabilities`), торговля неделя.
 - `common/scripted_triggers/ld_reference_currency_triggers.txt` — `zz_ef_reference_candidate`.
