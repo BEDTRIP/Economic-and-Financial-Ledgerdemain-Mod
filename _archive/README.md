@@ -98,3 +98,4 @@ _archive/<механизм>/
 | Переменные без читателя и читатели без писателя E&F (`<cur>_quantity`, покупатели облигаций, списки окон, сообщения `your_currency_are_*`) | `ef_dead_vars/` | строка `onclick` секции «import_export_value_in_currency_panel» (`ld_economy_panel.gui`), локализация `<good>_flag_red_arow_bellow` и сообщений — список в README |
 | Символ валюты в верхней панели — 96 текстбоксов (по закону валюты и общий) | `ef_topbar_currency_symbols/` | тело типа `currency_symbol_top_bar` заменено одним текстбоксом `currency_symbol` |
 | Запрет стандартов на чужом рынке (`is_not_market_owner`) | `ef_market_owner_ban/` | строка `is_not_market_owner = yes` в `can_enact` трёх законов стандартов и `is_valid` трёх кнопок смены стандарта |
+| Валюта формируемой страны E&F (марка из талеров, R3.7) | `ef_currency_formed/` | вызов `zz_ef_cf_find` и событие `ld_currency_formed.1` в `zz_ef_newcountry_on_country_formed` |

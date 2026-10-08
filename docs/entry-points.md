@@ -9,7 +9,6 @@
 - `common/scripted_effects/10_new_country_var.txt` — `new_country_var_ef`: заводит все переменные страны и её штатов (15 тыс. строк); части — `new_country_var_ef_state` (штат; только не заданное), `_economy`, `_financial`, `_stockpile` — их же вызывает история.
 - `common/scripted_effects/ld_country_init.txt` — `zz_ef_country_init` (одна точка «страна появилась», любой root), `zz_ef_country_vars_init` (root — страна).
 - `common/history/global/*.txt`, `common/history/states/01_ef_states.txt`, `common/history/buildings/*.txt` — стартовые данные (см. «Старт игры»).
-- `events/ld_currency_formed_events.txt` — `ld_currency_formed.1`: валюта формируемой страны (R3.7, `currencies.md`).
 - `events/ld_new_country_immediate_init_events.txt` — скрытое событие `zz_ef_newcountry.1` (root — страна для `zz_ef_country_vars_init`).
 - `events/ld_world_month_events.txt` — скрытое событие `ld_world_month.1` (мировое E&F месяца у страны №1 по рангу, `ld_world_month.txt`).
 - `events/ld_start_setup_events.txt` — скрытые события `ld_start_setup.1` / `.2` (настройка старта E&F каждой стране при новой игре, root — страна).
@@ -44,7 +43,6 @@
 |---|---|---|
 | `on_country_formed`, `on_become_independent` | `zz_ef_newcountry_on_*` → `zz_ef_country_init` | инициализация страны |
 | `on_revolution_start/_end`, `on_secession_start/_end`, `on_civil_war_won` | `common/on_actions/ld_revolution_on_actions.txt`: на старте революции / отделения восставшей сразу `zz_ef_country_init`; восставшей — `var:zz_ef_rv_from` (революция) / `var:zz_ef_sec_from` (отделение) = страна; лог `EFV` (проба: что существует в какой момент; значения `common/script_values/ld_revolution_values.txt`) | победа революции — та же денежная система (в работе) |
-| `on_country_formed` (тот же on_action) | у страны с ЦБ `zz_ef_cf_find` → есть `var:zz_ef_cf_target` → событие `ld_currency_formed.1` через день | валюта формируемой страны (R3.7, `currencies.md`) |
 | `on_country_released_as_independent / _own_subject / _company_subject / _overlord_subject` | `zz_ef_newcountry_on_*` → `scope:target = { zz_ef_country_init }` | то же (root здесь — сюзерен; переменные — в событии, root — новая страна) |
 | первый заход планировщика (страны А / Б) | `zz_ef_sched_slot_assign` → `zz_ef_country_init` (реестр счетов; переменные, если их нет) | инициализация страны |
 | месячный пульс (страна без хука — создана событием) | `ef_on_monthly_pulse_recurence` (`00_on_action_main.txt`): нет `zz_ef_country_vars_set` → `zz_ef_country_vars_init`; при отсутствии банка — `law_no_monetary_system` + `law_no_market_liquidity`; при наличии — `remove_building building_bank`, `central_bank_modifier`, те же законы; `foreign_exchange_controls` на 23 месяца | инициализация / валютный режим |
