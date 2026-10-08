@@ -82,6 +82,9 @@ zz_ef_money_model_step = {
 		limit = { NOT = { has_variable = zz_ef_parity_version } }
 		set_variable = { name = zz_ef_parity_version value = 9 }
 		zz_ef_metal_start_step = yes
+		# R3а (б): a subject joins its overlord's currency zone (standard, currency, target) now, not at its first month --
+		# the CB's start metal the same day needs the metal standard (r1008_120257: Hanover, the Canadas -- 29.1-6.2)
+		zz_ef_cur_zone_step = yes
 	}
 	else_if = {
 		limit = { has_variable = zz_ef_metal_rescale_due }
