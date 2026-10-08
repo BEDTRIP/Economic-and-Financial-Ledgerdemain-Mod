@@ -43,9 +43,20 @@ zz_ef_metal_start_step = {
 	}
 	# Д.R1.1 (8.10): E&F's metal outside a CB state -- history writes it into var:central_bank_location before the
 	# country has a CB (r1008_001240: Bavaria 37.1M gold in a state with no central_bank_historic_place; the first step
-	# did not see it, the CB made later counted it as its metal from nothing) -- the pops' too (В4), and 0
+	# did not see it, the CB made later counted it as its metal from nothing) -- the pops' too (В4), and 0. Only a
+	# country with no metal standard: on a metal standard the CB made in the first month gets that state and the CB's
+	# start scales it to 40% of M2 (zz_ef_cb_metal_start_step; r1008_005426: taken for all, the pops got 111 bn silver)
 	every_scope_state = {
-		limit = { NOT = { has_modifier = central_bank_historic_place } }
+		limit = {
+			NOT = { has_modifier = central_bank_historic_place }
+			owner = {
+				NOR = {
+					has_law = law_type:law_gold_standard
+					has_law = law_type:law_silver_standard
+					has_law = law_type:law_bimetallism_standard
+				}
+			}
+		}
 		if = {
 			limit = { has_variable = gold_state_1 }
 			owner = { change_variable = { name = zz_ef_ms_ef_g add = PREV.var:gold_state_1 } }
