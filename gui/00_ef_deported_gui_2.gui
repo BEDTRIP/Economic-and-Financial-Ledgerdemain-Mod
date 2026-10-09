@@ -4384,15 +4384,16 @@ types market_states_panel
 
 types market_states_panel
 {
-	# the country's currency symbol (custom loc currency_symbol: var:zz_ef_cur, or the generic one)
+	# the country's currency symbol (custom loc currency_symbol: «<two letters of the country> <sign>», Д.R8а.8);
+	# smaller and to the left -- the treasury's number starts at x 35
 	type currency_symbol_top_bar = flowcontainer {
 		icon = {
 			size = { 36 36 }
 			name = dip_power_icon
 
 			textbox = {
-				position = { 0 -2 }
-				fontsize = 25
+				position = { -10 -2 }
+				fontsize = 18
 				text = "[Country.GetCustom('currency_symbol')]"
 				parentanchor = vcenter
 			}
