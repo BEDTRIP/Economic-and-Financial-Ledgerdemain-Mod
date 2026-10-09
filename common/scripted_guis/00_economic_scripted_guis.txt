@@ -1148,17 +1148,6 @@ parity_scaled_by_the_overlord_reduce = {
 ################################################################################################
 
 
-purchase_of_bond_debt_visibility = {
-	is_shown = {
-		has_modifier = has_financial_center
-		not = {
-			or  = {
-				has_law = law_type:law_isolationism
-				#has_modifier = extreme_weak_currency
-			}
-		}
-	}
-}
 interest_rate_policy_on = {
 	is_valid = {
 		Not = { var:interest_rate_policy_on = 1 }

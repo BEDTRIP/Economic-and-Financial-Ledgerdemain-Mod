@@ -4241,18 +4241,6 @@ value_for_has_financial_center = {
 num_states_var = {
 	add = root.num_states
 }
-import_export_disable = {
-	value = 0
-	if = {
-		limit = {
-			or = {
-				has_modifier = country_credit_rating_D
-				has_modifier = extreme_weak_currency
-			}
-		}
-		add = 1
-	}
-}
 
 enemy_capital_is_occuped = {
 	value = 0

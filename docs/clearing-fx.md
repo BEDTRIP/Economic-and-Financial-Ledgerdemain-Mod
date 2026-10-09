@@ -20,7 +20,7 @@ E&F `trade_balance` отключён. Ключи `ld_*` — с префиксо�
   - ИИ-форекс E&F (`ai_buy_sell_currency` → `buy_/sell_<cur>_currency`) — в `_archive/ef_ai_forex/` (R2, Д.R2.2; форекс ЦБ сделками — R8); в `central_bank_ef_on_yearly_pulse_country` остался `monetary_systeme_transition`; арбитражи — см. поток.
   - `common/scripted_effects/01_economic_scripted_effects.txt`: `sell_<cur>_currency_crisis` (кризисная продажа, из `all_currency_resold`), `trade_balance` (:11204).
   - Окно обмена валют игрока (вкладка рынка «global», кнопки `<cur>_buy_in_gold` / `<cur>_sell_in_gold`, проводка `zz_ef_fxb_*`) — в `_archive/ef_forex_windows/` (Д.R8а, п. 8).
-  - `common/scripted_guis/09_ef_other.txt`: `trade_balance_actualized`, `trade_balance_0`.
+  - `common/scripted_guis/09_ef_other.txt`: `trade_balance_actualized`.
   - `common/script_values/00_economic_scripted_value.txt:5661-5913` — `trade_balance_*` значения; `01_economic_currency_scripted_value.txt:285996…` — `trade_balance_in_gold*`.
 
 ## Поток / порядок

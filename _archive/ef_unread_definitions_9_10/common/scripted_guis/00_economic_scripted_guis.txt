@@ -1,0 +1,13 @@
+﻿# From common/scripted_guis/00_economic_scripted_guis.txt.
+
+purchase_of_bond_debt_visibility = {
+	is_shown = {
+		has_modifier = has_financial_center
+		not = {
+			or  = {
+				has_law = law_type:law_isolationism
+				#has_modifier = extreme_weak_currency
+			}
+		}
+	}
+}

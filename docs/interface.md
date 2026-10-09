@@ -69,7 +69,7 @@ GUI-тип регистрирует первый файл по имени (ASCII
 - `common/scripted_guis/00_financial_scripted_guis.txt` — облигации, кредит ЦБ, `speculative_share_N_button` (sgui),
   `transfert_currency_to_investement_pool_*`, `global_player_help_*`.
 - `common/scripted_guis/09_ef_other.txt` — `EF_room_gui_N`/`EF_current_room_gui_N` (100+100; панель `gold_reserve_window`),
-  `*_list_gerenation_ordered` (2 шт.), `gold_gui_N`/`silver_gui_N`, `gdp_sort_by_country_gdp`, `si_sort_by_country_indice`.
+  `*_list_gerenation_ordered` (2 шт.), `gold_gui_N`/`silver_gui_N`, `gdp_sort_by_country_gdp`.
 - `common/scripted_guis/PSC_construction_sguis.txt` (9) — `psc_button_*_sgui`, `psc_save_real_construction_cost`, `psc_test_show`.
 - `common/scripted_guis/ld_*.txt` — `ld_money_hook` (приёмник моста), `ld_cb_rate_buttons` (кнопки ставки), `ld_monetary_policy_buttons`
   (девальвация/ревальвация как инструмент ЦБ), `ld_bond_tables` (заполнение таблиц держателей), `ld_cbfx` (`zz_ef_cbfx_update_sorted`,

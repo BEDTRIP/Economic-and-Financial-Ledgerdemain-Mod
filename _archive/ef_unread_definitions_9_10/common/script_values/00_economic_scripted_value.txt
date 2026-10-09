@@ -1,0 +1,14 @@
+﻿# From common/script_values/00_economic_scripted_value.txt.
+
+import_export_disable = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				has_modifier = country_credit_rating_D
+				has_modifier = extreme_weak_currency
+			}
+		}
+		add = 1
+	}
+}

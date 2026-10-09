@@ -58,7 +58,7 @@
 | Выдача стартовых валют (zz_ef_currency_fix.txt) | живой | common/history/global/zz_ef_currency_fix.txt:7-75 | activate_law на старте для WUR и 13 стран; currency_standards странам с подушным налогом; п.4 (начальная ликвидность) удалён | — |
 | Настройка старта E&F с первого дня (`zz_ef_start_setup`: из годового пульса — ступени ВВП, ЦБ и финцентры по ВВП, рейтинг, списки эталона; из конца истории E&F — доходность облигаций, методы ЦБ и финцентра, список законов валют, статус денежной системы; месячный хаб целиком) | живой | common/scripted_effects/ld_start_setup.txt; events/ld_start_setup_events.txt | первый бюджетный тик после первой недели (`zz_ef_sched_probe_step`, `ld_scheduler.txt`), до шагов модели, один раз (`global_var zz_ef_start_setup_done`, до 1836.3): события `ld_start_setup.1` / `.2` каждой стране (root — страна) | — |
 | Статья Латинский валютный союз latin_monetary_union_treaty | живой | common/treaty_articles/16_latin_monetary_union_treaty.txt | создаётся событием 00_ef_economic_event.txt:499, ЖЗ 00_ef_divers_je.txt:210; денежных эффектов в статье нет (только лоббийное умиротворение) | окно договоров |
-| Триггеры is_reference_currency(_no)/is_extreme_weak_currency/law_currency_enacted/market_goods_is_currency | живой | common/scripted_triggers/00_ef_custom_trigger.txt:582-623,1134,1423 | refs 3, 3, 100, 1, 1 | — |
+| Триггеры is_reference_currency(_no)/is_extreme_weak_currency/market_goods_is_currency | живой | common/scripted_triggers/00_ef_custom_trigger.txt:582-623,1134,1423 | refs 3, 3, 100, 1 | — |
 
 ## ЦБ и ставка (`central-bank.md`)
 
@@ -132,7 +132,7 @@
 | Сила валюты → торговля zz_ef_currency_trade_step | живой | common/scripted_effects/ld_reference_strength.txt:15; вызов ld_money_model.txt:1011 | месяц; add_modifier zz_ef_currency_trade (static_modifiers/ld_currency_trade.txt) | модификатор страны |
 | Объявление state_sell_orders_liquidity_currency_add | живой | common/modifier_type_definitions/ld_liquidity_currency_sell_orders.txt:21 | refs=12 (модификаторы местной валюты) | — |
 | Спрос бизнеса на услугу расчётов pm_market_liquidity_currency | живой | common/production_methods/00_ef_market_liquidity.txt:36 | refs=14; вход liquidity_currency 28 на рабочего; покупает у банков zz_ef_bank | рынок «расчёты банков» |
-| Кнопка trade_balance_actualized (и trade_balance_0) | живой | common/scripted_guis/09_ef_other.txt:2182,5275 | пишет trade_balance_in_gold_fixe = trade_balance_in_gold и *_fix при нажатии игроком (кнопки ld_economy_panel.gui:2768,2976); модель ld держит var=0 и не читает, но E&F central_bank_reserves_* читает — расхождение | таблица торгового баланса |
+| Кнопка trade_balance_actualized | живой | common/scripted_guis/09_ef_other.txt:2182,5275 | пишет trade_balance_in_gold_fixe = trade_balance_in_gold и *_fix при нажатии игроком (кнопки ld_economy_panel.gui:2768,2976); модель ld держит var=0 и не читает, но E&F central_bank_reserves_* читает — расхождение | таблица торгового баланса |
 | Пары/валютные значения trade_balance_* (script_values) | живой | common/script_values/00_economic_scripted_value.txt:5661-5913; 01_economic_currency_scripted_value.txt:285996-286038 | refs 2-34; trade_balance_bimetallic_rate_gold_to_silver refs=0 | — |
 
 ## Биржа и компании (`exchange-companies.md`)
