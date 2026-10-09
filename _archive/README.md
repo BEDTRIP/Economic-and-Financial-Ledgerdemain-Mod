@@ -110,3 +110,4 @@ _archive/<механизм>/
 | Проба R8б, шаг 0: доли ВВП у чужих владельцев `ld_probe_gdpown.1` | `ld_probe_gdpown/` | итоги — в README пробы и в очереди R8б плана |
 | Торговля в разрезе 95 валют: записи `import/export_in_<cur>_in_gold_fix` кнопки `trade_balance_actualized` и подписи `<cur>_03_*` без читателя — R8а, п. 8 | `ef_trade_by_currency/` | 190 блоков из кнопки, 384 ключа локализации |
 | Валютная зона подданного `zz_ef_cur_zone` (стандарт, валюта и паритет сюзерена, блокиратор) — R8а.5, В-R8а.1 | `ld_currency_zone/` | подданный — внешневалютный стандарт со своей валютой и металлом |
+| Правки законов валют на старте `zz_ef_currency_fix.txt` (WUR, 12 стран → `law_no_market_liquidity`) — пустые, R8а.2 | `ef_start_currency_fix/` | блоки п. 1–3; файл переименован в `ld_start_currency_standards.txt` (остался блок `currency_standards`) |

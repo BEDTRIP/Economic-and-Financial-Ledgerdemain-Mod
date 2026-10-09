@@ -3,10 +3,10 @@
 # deposits count it in the engine's money), in gold: its issuer's value against the parity (global_var:zz_ef_fxvtp_<cur>,
 # scripted_effects/ld_currency_var.txt; Д.R8а.4) -- 1 for a metal or exchange standard, a fiat currency floats; 1
 # before the issuer's first month. Read by zz_ef_fx_reserves_metal (ld_fx_reserves_values.txt).
-# The issuer's parity in gold: a silver standard's parity is in silver.
+# The issuer's parity in gold: a silver standard's parity is in silver (an exchange standard -- in its metal).
 zz_ef_parity_gold = {
 	value = var:money_value_target_1
-	if = { limit = { has_law = law_type:law_silver_standard } multiply = silver_to_gold_rate }
+	if = { limit = { zz_ef_metal_silver = yes } multiply = silver_to_gold_rate }
 }
 zz_ef_fx_gold_dinar = {
 	value = 1

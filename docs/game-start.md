@@ -32,7 +32,7 @@
 | `global/99_ef_history_global_variable.txt` | **законы валют и стандартов** по странам (75 `activate_law`: серебро 31, биметалл 3, золото — Британия; соотношение биметалла), паритеты `money_value_target_1`, эталон `global_monetary_reference`, `global_financial_power`; разовой настройки и пополнения казны нет (настройка — в шаге старта) | данные |
 | `global/PSC_global.txt` | событие `set_construction_start` (стройка PSC) | запуск |
 | `global/ld_central_bank_law.txt` | закон группы «Центральный банк» по ЦБ (`zz_ef_cb_law_sync`) | настройка |
-| `global/zz_ef_currency_fix.txt` | закон валюты WUR (опечатка E&F), 13 стран без валюты → `law_no_market_liquidity`, `currency_standards` странам с подушным налогом | поправки |
+| `global/ld_start_currency_standards.txt` | `currency_standards` странам с подушным налогом | поправки |
 | `global/zz_ef_init_stockpiling_state_vars.txt` | 7 переменных запасов штатов, которые E&F читает, но не задаёт | заглушка |
 | `states/01_ef_states.txt` | `silver_mine_max_level` 60 штатам (месторождения серебра) | данные |
 

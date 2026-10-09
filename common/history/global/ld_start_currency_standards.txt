@@ -1,0 +1,21 @@
+﻿### The start: the vanilla technology currency_standards for countries with per-capita taxation.
+### GLOBAL blocks under common/history/global/ stack; "ld_" runs after "99_ef_history_global_variable.txt".
+
+GLOBAL = {
+	every_country = {
+		########################################################################
+		# per-capita taxation needs the vanilla technology
+		#    currency_standards; E&F moved it to era 2 behind banking, so ~30
+		#    countries without a central bank start with the law but not the
+		#    technology ("not permitted to retain law", game.log). Give it to
+		#    them; the marker keeps E&F's on_researched from switching to fiat.
+		if = {
+			limit = {
+				has_law = law_type:law_per_capita_based_taxation
+				NOT = { has_technology_researched = currency_standards }
+			}
+			set_variable = zz_ef_start_currency_standards
+			add_technology_researched = currency_standards
+		}
+	}
+}

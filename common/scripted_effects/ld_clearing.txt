@@ -345,101 +345,101 @@ zz_ef_clr_receive = {
 
 # The payer's own currency into the house: var:zz_ef_clr_units of its money.
 zz_ef_clr_put_own = {
-	if = { limit = { has_law = law_type:law_dinar_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dinar } } set_global_variable = { name = zz_ef_clr_c_dinar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dinar add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_dinar_algerian_dinar_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dinar_algerian_dinar } } set_global_variable = { name = zz_ef_clr_c_dinar_algerian_dinar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dinar_algerian_dinar add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_dinar_iraqi_dinar_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dinar_iraqi_dinar } } set_global_variable = { name = zz_ef_clr_c_dinar_iraqi_dinar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dinar_iraqi_dinar add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_dinar_libyan_dinar_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dinar_libyan_dinar } } set_global_variable = { name = zz_ef_clr_c_dinar_libyan_dinar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dinar_libyan_dinar add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_dinar_moroccan_dirham_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dinar_moroccan_dirham } } set_global_variable = { name = zz_ef_clr_c_dinar_moroccan_dirham value = 0 } } change_global_variable = { name = zz_ef_clr_c_dinar_moroccan_dirham add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_dinar_omanian_rial_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dinar_omanian_rial } } set_global_variable = { name = zz_ef_clr_c_dinar_omanian_rial value = 0 } } change_global_variable = { name = zz_ef_clr_c_dinar_omanian_rial add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_dinar_qiran_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dinar_qiran } } set_global_variable = { name = zz_ef_clr_c_dinar_qiran value = 0 } } change_global_variable = { name = zz_ef_clr_c_dinar_qiran add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_dinar_saudi_riyal_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dinar_saudi_riyal } } set_global_variable = { name = zz_ef_clr_c_dinar_saudi_riyal value = 0 } } change_global_variable = { name = zz_ef_clr_c_dinar_saudi_riyal add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_dinar_serbian_dinar_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dinar_serbian_dinar } } set_global_variable = { name = zz_ef_clr_c_dinar_serbian_dinar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dinar_serbian_dinar add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_dinar_tunisian_dinar_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dinar_tunisian_dinar } } set_global_variable = { name = zz_ef_clr_c_dinar_tunisian_dinar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dinar_tunisian_dinar add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_dinar_yugoslav_dinar_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dinar_yugoslav_dinar } } set_global_variable = { name = zz_ef_clr_c_dinar_yugoslav_dinar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dinar_yugoslav_dinar add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_dollar_australian_dollar_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dollar_australian_dollar } } set_global_variable = { name = zz_ef_clr_c_dollar_australian_dollar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dollar_australian_dollar add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_dollar_canadian_dollar_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dollar_canadian_dollar } } set_global_variable = { name = zz_ef_clr_c_dollar_canadian_dollar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dollar_canadian_dollar add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_dollar_caribbean_dollar_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dollar_caribbean_dollar } } set_global_variable = { name = zz_ef_clr_c_dollar_caribbean_dollar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dollar_caribbean_dollar add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_dollar_confederate_states_dollar_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dollar_confederate_states_dollar } } set_global_variable = { name = zz_ef_clr_c_dollar_confederate_states_dollar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dollar_confederate_states_dollar add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_dollar_liberian_dollar_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dollar_liberian_dollar } } set_global_variable = { name = zz_ef_clr_c_dollar_liberian_dollar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dollar_liberian_dollar add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_dollar_new_zealand_dollar_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dollar_new_zealand_dollar } } set_global_variable = { name = zz_ef_clr_c_dollar_new_zealand_dollar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dollar_new_zealand_dollar add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_dollar_sierra_leonean_dollar_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dollar_sierra_leonean_dollar } } set_global_variable = { name = zz_ef_clr_c_dollar_sierra_leonean_dollar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dollar_sierra_leonean_dollar add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_dollar_united_states_dollar_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dollar_united_states_dollar } } set_global_variable = { name = zz_ef_clr_c_dollar_united_states_dollar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dollar_united_states_dollar add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_eco_ariary_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_eco_ariary } } set_global_variable = { name = zz_ef_clr_c_eco_ariary value = 0 } } change_global_variable = { name = zz_ef_clr_c_eco_ariary add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_eco_central_african_eco_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_eco_central_african_eco } } set_global_variable = { name = zz_ef_clr_c_eco_central_african_eco value = 0 } } change_global_variable = { name = zz_ef_clr_c_eco_central_african_eco add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_eco_east_african_eco_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_eco_east_african_eco } } set_global_variable = { name = zz_ef_clr_c_eco_east_african_eco value = 0 } } change_global_variable = { name = zz_ef_clr_c_eco_east_african_eco add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_eco_ethiopian_birr_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_eco_ethiopian_birr } } set_global_variable = { name = zz_ef_clr_c_eco_ethiopian_birr value = 0 } } change_global_variable = { name = zz_ef_clr_c_eco_ethiopian_birr add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_eco_ghanaian_pound_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_eco_ghanaian_pound } } set_global_variable = { name = zz_ef_clr_c_eco_ghanaian_pound value = 0 } } change_global_variable = { name = zz_ef_clr_c_eco_ghanaian_pound add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_eco_nigerian_naira_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_eco_nigerian_naira } } set_global_variable = { name = zz_ef_clr_c_eco_nigerian_naira value = 0 } } change_global_variable = { name = zz_ef_clr_c_eco_nigerian_naira add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_eco_south_african_rand_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_eco_south_african_rand } } set_global_variable = { name = zz_ef_clr_c_eco_south_african_rand value = 0 } } change_global_variable = { name = zz_ef_clr_c_eco_south_african_rand add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_eco_tuareg_ouguiya_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_eco_tuareg_ouguiya } } set_global_variable = { name = zz_ef_clr_c_eco_tuareg_ouguiya value = 0 } } change_global_variable = { name = zz_ef_clr_c_eco_tuareg_ouguiya add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_eco_west_african_eco_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_eco_west_african_eco } } set_global_variable = { name = zz_ef_clr_c_eco_west_african_eco value = 0 } } change_global_variable = { name = zz_ef_clr_c_eco_west_african_eco add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_franc_belgian_franc_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_franc_belgian_franc } } set_global_variable = { name = zz_ef_clr_c_franc_belgian_franc value = 0 } } change_global_variable = { name = zz_ef_clr_c_franc_belgian_franc add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_franc_french_franc_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_franc_french_franc } } set_global_variable = { name = zz_ef_clr_c_franc_french_franc value = 0 } } change_global_variable = { name = zz_ef_clr_c_franc_french_franc add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_franc_luxembourgish_franc_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_franc_luxembourgish_franc } } set_global_variable = { name = zz_ef_clr_c_franc_luxembourgish_franc value = 0 } } change_global_variable = { name = zz_ef_clr_c_franc_luxembourgish_franc add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_franc_swiss_franc_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_franc_swiss_franc } } set_global_variable = { name = zz_ef_clr_c_franc_swiss_franc value = 0 } } change_global_variable = { name = zz_ef_clr_c_franc_swiss_franc add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_gulden_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_gulden } } set_global_variable = { name = zz_ef_clr_c_gulden value = 0 } } change_global_variable = { name = zz_ef_clr_c_gulden add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_gulden_bavarian_gulden_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_gulden_bavarian_gulden } } set_global_variable = { name = zz_ef_clr_c_gulden_bavarian_gulden value = 0 } } change_global_variable = { name = zz_ef_clr_c_gulden_bavarian_gulden add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_gulden_florin_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_gulden_florin } } set_global_variable = { name = zz_ef_clr_c_gulden_florin value = 0 } } change_global_variable = { name = zz_ef_clr_c_gulden_florin add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_gulden_hungarian_forint_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_gulden_hungarian_forint } } set_global_variable = { name = zz_ef_clr_c_gulden_hungarian_forint value = 0 } } change_global_variable = { name = zz_ef_clr_c_gulden_hungarian_forint add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_gulden_indies_guilder_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_gulden_indies_guilder } } set_global_variable = { name = zz_ef_clr_c_gulden_indies_guilder value = 0 } } change_global_variable = { name = zz_ef_clr_c_gulden_indies_guilder add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_gulden_south_german_gulden_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_gulden_south_german_gulden } } set_global_variable = { name = zz_ef_clr_c_gulden_south_german_gulden value = 0 } } change_global_variable = { name = zz_ef_clr_c_gulden_south_german_gulden add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_krone_czech_koruna_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_krone_czech_koruna } } set_global_variable = { name = zz_ef_clr_c_krone_czech_koruna value = 0 } } change_global_variable = { name = zz_ef_clr_c_krone_czech_koruna add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_krone_danish_krone_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_krone_danish_krone } } set_global_variable = { name = zz_ef_clr_c_krone_danish_krone value = 0 } } change_global_variable = { name = zz_ef_clr_c_krone_danish_krone add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_krone_estonian_kroon_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_krone_estonian_kroon } } set_global_variable = { name = zz_ef_clr_c_krone_estonian_kroon value = 0 } } change_global_variable = { name = zz_ef_clr_c_krone_estonian_kroon add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_krone_icelandic_krona_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_krone_icelandic_krona } } set_global_variable = { name = zz_ef_clr_c_krone_icelandic_krona value = 0 } } change_global_variable = { name = zz_ef_clr_c_krone_icelandic_krona add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_krone_norwegian_krone_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_krone_norwegian_krone } } set_global_variable = { name = zz_ef_clr_c_krone_norwegian_krone value = 0 } } change_global_variable = { name = zz_ef_clr_c_krone_norwegian_krone add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_krone_slovak_koruna_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_krone_slovak_koruna } } set_global_variable = { name = zz_ef_clr_c_krone_slovak_koruna value = 0 } } change_global_variable = { name = zz_ef_clr_c_krone_slovak_koruna add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_krone_swedish_krona_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_krone_swedish_krona } } set_global_variable = { name = zz_ef_clr_c_krone_swedish_krona value = 0 } } change_global_variable = { name = zz_ef_clr_c_krone_swedish_krona add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_leon_leu_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_leon_leu } } set_global_variable = { name = zz_ef_clr_c_leon_leu value = 0 } } change_global_variable = { name = zz_ef_clr_c_leon_leu add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_leon_lev_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_leon_lev } } set_global_variable = { name = zz_ef_clr_c_leon_lev value = 0 } } change_global_variable = { name = zz_ef_clr_c_leon_lev add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_lira_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_lira } } set_global_variable = { name = zz_ef_clr_c_lira value = 0 } } change_global_variable = { name = zz_ef_clr_c_lira add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_lira_ducato_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_lira_ducato } } set_global_variable = { name = zz_ef_clr_c_lira_ducato value = 0 } } change_global_variable = { name = zz_ef_clr_c_lira_ducato add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_lira_ottoman_lira_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_lira_ottoman_lira } } set_global_variable = { name = zz_ef_clr_c_lira_ottoman_lira value = 0 } } change_global_variable = { name = zz_ef_clr_c_lira_ottoman_lira add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_lira_scudo_pontificio_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_lira_scudo_pontificio } } set_global_variable = { name = zz_ef_clr_c_lira_scudo_pontificio value = 0 } } change_global_variable = { name = zz_ef_clr_c_lira_scudo_pontificio add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_lira_scudo_sardo_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_lira_scudo_sardo } } set_global_variable = { name = zz_ef_clr_c_lira_scudo_sardo value = 0 } } change_global_variable = { name = zz_ef_clr_c_lira_scudo_sardo add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_lira_toscane_lira_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_lira_toscane_lira } } set_global_variable = { name = zz_ef_clr_c_lira_toscane_lira value = 0 } } change_global_variable = { name = zz_ef_clr_c_lira_toscane_lira add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_mark_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_mark } } set_global_variable = { name = zz_ef_clr_c_mark value = 0 } } change_global_variable = { name = zz_ef_clr_c_mark add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_mark_finnish_markka_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_mark_finnish_markka } } set_global_variable = { name = zz_ef_clr_c_mark_finnish_markka value = 0 } } change_global_variable = { name = zz_ef_clr_c_mark_finnish_markka add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_peso_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso } } set_global_variable = { name = zz_ef_clr_c_peso value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_peso_argentine_peso_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_argentine_peso } } set_global_variable = { name = zz_ef_clr_c_peso_argentine_peso value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_argentine_peso add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_peso_bolivien_peso_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_bolivien_peso } } set_global_variable = { name = zz_ef_clr_c_peso_bolivien_peso value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_bolivien_peso add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_peso_chilean_peso_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_chilean_peso } } set_global_variable = { name = zz_ef_clr_c_peso_chilean_peso value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_chilean_peso add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_peso_colombian_peso_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_colombian_peso } } set_global_variable = { name = zz_ef_clr_c_peso_colombian_peso value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_colombian_peso add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_peso_costa_rican_colon_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_costa_rican_colon } } set_global_variable = { name = zz_ef_clr_c_peso_costa_rican_colon value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_costa_rican_colon add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_peso_cuban_peso_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_cuban_peso } } set_global_variable = { name = zz_ef_clr_c_peso_cuban_peso value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_cuban_peso add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_peso_ecuadorian_peso_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_ecuadorian_peso } } set_global_variable = { name = zz_ef_clr_c_peso_ecuadorian_peso value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_ecuadorian_peso add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_peso_el_salvador_colon_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_el_salvador_colon } } set_global_variable = { name = zz_ef_clr_c_peso_el_salvador_colon value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_el_salvador_colon add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_peso_guatemalan_quetzal_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_guatemalan_quetzal } } set_global_variable = { name = zz_ef_clr_c_peso_guatemalan_quetzal value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_guatemalan_quetzal add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_peso_honduran_lempira_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_honduran_lempira } } set_global_variable = { name = zz_ef_clr_c_peso_honduran_lempira value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_honduran_lempira add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_peso_mexican_peso_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_mexican_peso } } set_global_variable = { name = zz_ef_clr_c_peso_mexican_peso value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_mexican_peso add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_peso_nicaraguan_cordoba_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_nicaraguan_cordoba } } set_global_variable = { name = zz_ef_clr_c_peso_nicaraguan_cordoba value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_nicaraguan_cordoba add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_peso_paraguayan_peso_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_paraguayan_peso } } set_global_variable = { name = zz_ef_clr_c_peso_paraguayan_peso value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_paraguayan_peso add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_peso_philippine_peso_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_philippine_peso } } set_global_variable = { name = zz_ef_clr_c_peso_philippine_peso value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_philippine_peso add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_peso_sol_de_oro_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_sol_de_oro } } set_global_variable = { name = zz_ef_clr_c_peso_sol_de_oro value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_sol_de_oro add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_peso_uruguayan_peso_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_uruguayan_peso } } set_global_variable = { name = zz_ef_clr_c_peso_uruguayan_peso value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_uruguayan_peso add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_peso_venezuelan_peso_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_venezuelan_peso } } set_global_variable = { name = zz_ef_clr_c_peso_venezuelan_peso value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_venezuelan_peso add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_pound_egyptian_pound_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_pound_egyptian_pound } } set_global_variable = { name = zz_ef_clr_c_pound_egyptian_pound value = 0 } } change_global_variable = { name = zz_ef_clr_c_pound_egyptian_pound add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_pound_irish_pound_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_pound_irish_pound } } set_global_variable = { name = zz_ef_clr_c_pound_irish_pound value = 0 } } change_global_variable = { name = zz_ef_clr_c_pound_irish_pound add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_pound_sterling_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_pound_sterling } } set_global_variable = { name = zz_ef_clr_c_pound_sterling value = 0 } } change_global_variable = { name = zz_ef_clr_c_pound_sterling add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_real_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_real } } set_global_variable = { name = zz_ef_clr_c_real value = 0 } } change_global_variable = { name = zz_ef_clr_c_real add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_real_brazilian_real_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_real_brazilian_real } } set_global_variable = { name = zz_ef_clr_c_real_brazilian_real value = 0 } } change_global_variable = { name = zz_ef_clr_c_real_brazilian_real add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_rupee_indian_rupee_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_rupee_indian_rupee } } set_global_variable = { name = zz_ef_clr_c_rupee_indian_rupee value = 0 } } change_global_variable = { name = zz_ef_clr_c_rupee_indian_rupee add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_rupee_indonesian_rupiah_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_rupee_indonesian_rupiah } } set_global_variable = { name = zz_ef_clr_c_rupee_indonesian_rupiah value = 0 } } change_global_variable = { name = zz_ef_clr_c_rupee_indonesian_rupiah add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_spe_baht_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_spe_baht } } set_global_variable = { name = zz_ef_clr_c_spe_baht value = 0 } } change_global_variable = { name = zz_ef_clr_c_spe_baht add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_spe_dong_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_spe_dong } } set_global_variable = { name = zz_ef_clr_c_spe_dong value = 0 } } change_global_variable = { name = zz_ef_clr_c_spe_dong add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_spe_drachma_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_spe_drachma } } set_global_variable = { name = zz_ef_clr_c_spe_drachma value = 0 } } change_global_variable = { name = zz_ef_clr_c_spe_drachma add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_spe_korean_won_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_spe_korean_won } } set_global_variable = { name = zz_ef_clr_c_spe_korean_won value = 0 } } change_global_variable = { name = zz_ef_clr_c_spe_korean_won add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_spe_latvian_lats_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_spe_latvian_lats } } set_global_variable = { name = zz_ef_clr_c_spe_latvian_lats value = 0 } } change_global_variable = { name = zz_ef_clr_c_spe_latvian_lats add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_spe_lithuanian_litas_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_spe_lithuanian_litas } } set_global_variable = { name = zz_ef_clr_c_spe_lithuanian_litas value = 0 } } change_global_variable = { name = zz_ef_clr_c_spe_lithuanian_litas add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_spe_peseta_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_spe_peseta } } set_global_variable = { name = zz_ef_clr_c_spe_peseta value = 0 } } change_global_variable = { name = zz_ef_clr_c_spe_peseta add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_spe_ruble_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_spe_ruble } } set_global_variable = { name = zz_ef_clr_c_spe_ruble value = 0 } } change_global_variable = { name = zz_ef_clr_c_spe_ruble add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_spe_uni_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_spe_uni } } set_global_variable = { name = zz_ef_clr_c_spe_uni value = 0 } } change_global_variable = { name = zz_ef_clr_c_spe_uni add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_spe_yen_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_spe_yen } } set_global_variable = { name = zz_ef_clr_c_spe_yen value = 0 } } change_global_variable = { name = zz_ef_clr_c_spe_yen add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_spe_yuan_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_spe_yuan } } set_global_variable = { name = zz_ef_clr_c_spe_yuan value = 0 } } change_global_variable = { name = zz_ef_clr_c_spe_yuan add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_spe_zloti_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_spe_zloti } } set_global_variable = { name = zz_ef_clr_c_spe_zloti value = 0 } } change_global_variable = { name = zz_ef_clr_c_spe_zloti add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_thaler_hannoveraner_thaler_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_thaler_hannoveraner_thaler } } set_global_variable = { name = zz_ef_clr_c_thaler_hannoveraner_thaler value = 0 } } change_global_variable = { name = zz_ef_clr_c_thaler_hannoveraner_thaler add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_thaler_prussian_thaler_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_thaler_prussian_thaler } } set_global_variable = { name = zz_ef_clr_c_thaler_prussian_thaler value = 0 } } change_global_variable = { name = zz_ef_clr_c_thaler_prussian_thaler add = var:zz_ef_clr_units } }
-	else_if = { limit = { has_law = law_type:law_thaler_saxon_thaler_currency } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_thaler_saxon_thaler } } set_global_variable = { name = zz_ef_clr_c_thaler_saxon_thaler value = 0 } } change_global_variable = { name = zz_ef_clr_c_thaler_saxon_thaler add = var:zz_ef_clr_units } }
+	if = { limit = { var:zz_ef_cur ?= flag:dinar } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dinar } } set_global_variable = { name = zz_ef_clr_c_dinar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dinar add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:dinar_algerian_dinar } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dinar_algerian_dinar } } set_global_variable = { name = zz_ef_clr_c_dinar_algerian_dinar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dinar_algerian_dinar add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:dinar_iraqi_dinar } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dinar_iraqi_dinar } } set_global_variable = { name = zz_ef_clr_c_dinar_iraqi_dinar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dinar_iraqi_dinar add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:dinar_libyan_dinar } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dinar_libyan_dinar } } set_global_variable = { name = zz_ef_clr_c_dinar_libyan_dinar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dinar_libyan_dinar add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:dinar_moroccan_dirham } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dinar_moroccan_dirham } } set_global_variable = { name = zz_ef_clr_c_dinar_moroccan_dirham value = 0 } } change_global_variable = { name = zz_ef_clr_c_dinar_moroccan_dirham add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:dinar_omanian_rial } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dinar_omanian_rial } } set_global_variable = { name = zz_ef_clr_c_dinar_omanian_rial value = 0 } } change_global_variable = { name = zz_ef_clr_c_dinar_omanian_rial add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:dinar_qiran } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dinar_qiran } } set_global_variable = { name = zz_ef_clr_c_dinar_qiran value = 0 } } change_global_variable = { name = zz_ef_clr_c_dinar_qiran add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:dinar_saudi_riyal } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dinar_saudi_riyal } } set_global_variable = { name = zz_ef_clr_c_dinar_saudi_riyal value = 0 } } change_global_variable = { name = zz_ef_clr_c_dinar_saudi_riyal add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:dinar_serbian_dinar } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dinar_serbian_dinar } } set_global_variable = { name = zz_ef_clr_c_dinar_serbian_dinar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dinar_serbian_dinar add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:dinar_tunisian_dinar } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dinar_tunisian_dinar } } set_global_variable = { name = zz_ef_clr_c_dinar_tunisian_dinar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dinar_tunisian_dinar add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:dinar_yugoslav_dinar } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dinar_yugoslav_dinar } } set_global_variable = { name = zz_ef_clr_c_dinar_yugoslav_dinar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dinar_yugoslav_dinar add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:dollar_australian_dollar } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dollar_australian_dollar } } set_global_variable = { name = zz_ef_clr_c_dollar_australian_dollar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dollar_australian_dollar add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:dollar_canadian_dollar } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dollar_canadian_dollar } } set_global_variable = { name = zz_ef_clr_c_dollar_canadian_dollar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dollar_canadian_dollar add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:dollar_caribbean_dollar } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dollar_caribbean_dollar } } set_global_variable = { name = zz_ef_clr_c_dollar_caribbean_dollar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dollar_caribbean_dollar add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:dollar_confederate_states_dollar } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dollar_confederate_states_dollar } } set_global_variable = { name = zz_ef_clr_c_dollar_confederate_states_dollar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dollar_confederate_states_dollar add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:dollar_liberian_dollar } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dollar_liberian_dollar } } set_global_variable = { name = zz_ef_clr_c_dollar_liberian_dollar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dollar_liberian_dollar add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:dollar_new_zealand_dollar } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dollar_new_zealand_dollar } } set_global_variable = { name = zz_ef_clr_c_dollar_new_zealand_dollar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dollar_new_zealand_dollar add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:dollar_sierra_leonean_dollar } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dollar_sierra_leonean_dollar } } set_global_variable = { name = zz_ef_clr_c_dollar_sierra_leonean_dollar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dollar_sierra_leonean_dollar add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:dollar_united_states_dollar } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_dollar_united_states_dollar } } set_global_variable = { name = zz_ef_clr_c_dollar_united_states_dollar value = 0 } } change_global_variable = { name = zz_ef_clr_c_dollar_united_states_dollar add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:eco_ariary } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_eco_ariary } } set_global_variable = { name = zz_ef_clr_c_eco_ariary value = 0 } } change_global_variable = { name = zz_ef_clr_c_eco_ariary add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:eco_central_african_eco } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_eco_central_african_eco } } set_global_variable = { name = zz_ef_clr_c_eco_central_african_eco value = 0 } } change_global_variable = { name = zz_ef_clr_c_eco_central_african_eco add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:eco_east_african_eco } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_eco_east_african_eco } } set_global_variable = { name = zz_ef_clr_c_eco_east_african_eco value = 0 } } change_global_variable = { name = zz_ef_clr_c_eco_east_african_eco add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:eco_ethiopian_birr } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_eco_ethiopian_birr } } set_global_variable = { name = zz_ef_clr_c_eco_ethiopian_birr value = 0 } } change_global_variable = { name = zz_ef_clr_c_eco_ethiopian_birr add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:eco_ghanaian_pound } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_eco_ghanaian_pound } } set_global_variable = { name = zz_ef_clr_c_eco_ghanaian_pound value = 0 } } change_global_variable = { name = zz_ef_clr_c_eco_ghanaian_pound add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:eco_nigerian_naira } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_eco_nigerian_naira } } set_global_variable = { name = zz_ef_clr_c_eco_nigerian_naira value = 0 } } change_global_variable = { name = zz_ef_clr_c_eco_nigerian_naira add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:eco_south_african_rand } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_eco_south_african_rand } } set_global_variable = { name = zz_ef_clr_c_eco_south_african_rand value = 0 } } change_global_variable = { name = zz_ef_clr_c_eco_south_african_rand add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:eco_tuareg_ouguiya } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_eco_tuareg_ouguiya } } set_global_variable = { name = zz_ef_clr_c_eco_tuareg_ouguiya value = 0 } } change_global_variable = { name = zz_ef_clr_c_eco_tuareg_ouguiya add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:eco_west_african_eco } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_eco_west_african_eco } } set_global_variable = { name = zz_ef_clr_c_eco_west_african_eco value = 0 } } change_global_variable = { name = zz_ef_clr_c_eco_west_african_eco add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:franc_belgian_franc } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_franc_belgian_franc } } set_global_variable = { name = zz_ef_clr_c_franc_belgian_franc value = 0 } } change_global_variable = { name = zz_ef_clr_c_franc_belgian_franc add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:franc_french_franc } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_franc_french_franc } } set_global_variable = { name = zz_ef_clr_c_franc_french_franc value = 0 } } change_global_variable = { name = zz_ef_clr_c_franc_french_franc add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:franc_luxembourgish_franc } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_franc_luxembourgish_franc } } set_global_variable = { name = zz_ef_clr_c_franc_luxembourgish_franc value = 0 } } change_global_variable = { name = zz_ef_clr_c_franc_luxembourgish_franc add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:franc_swiss_franc } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_franc_swiss_franc } } set_global_variable = { name = zz_ef_clr_c_franc_swiss_franc value = 0 } } change_global_variable = { name = zz_ef_clr_c_franc_swiss_franc add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:gulden } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_gulden } } set_global_variable = { name = zz_ef_clr_c_gulden value = 0 } } change_global_variable = { name = zz_ef_clr_c_gulden add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:gulden_bavarian_gulden } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_gulden_bavarian_gulden } } set_global_variable = { name = zz_ef_clr_c_gulden_bavarian_gulden value = 0 } } change_global_variable = { name = zz_ef_clr_c_gulden_bavarian_gulden add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:gulden_florin } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_gulden_florin } } set_global_variable = { name = zz_ef_clr_c_gulden_florin value = 0 } } change_global_variable = { name = zz_ef_clr_c_gulden_florin add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:gulden_hungarian_forint } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_gulden_hungarian_forint } } set_global_variable = { name = zz_ef_clr_c_gulden_hungarian_forint value = 0 } } change_global_variable = { name = zz_ef_clr_c_gulden_hungarian_forint add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:gulden_indies_guilder } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_gulden_indies_guilder } } set_global_variable = { name = zz_ef_clr_c_gulden_indies_guilder value = 0 } } change_global_variable = { name = zz_ef_clr_c_gulden_indies_guilder add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:gulden_south_german_gulden } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_gulden_south_german_gulden } } set_global_variable = { name = zz_ef_clr_c_gulden_south_german_gulden value = 0 } } change_global_variable = { name = zz_ef_clr_c_gulden_south_german_gulden add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:krone_czech_koruna } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_krone_czech_koruna } } set_global_variable = { name = zz_ef_clr_c_krone_czech_koruna value = 0 } } change_global_variable = { name = zz_ef_clr_c_krone_czech_koruna add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:krone_danish_krone } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_krone_danish_krone } } set_global_variable = { name = zz_ef_clr_c_krone_danish_krone value = 0 } } change_global_variable = { name = zz_ef_clr_c_krone_danish_krone add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:krone_estonian_kroon } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_krone_estonian_kroon } } set_global_variable = { name = zz_ef_clr_c_krone_estonian_kroon value = 0 } } change_global_variable = { name = zz_ef_clr_c_krone_estonian_kroon add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:krone_icelandic_krona } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_krone_icelandic_krona } } set_global_variable = { name = zz_ef_clr_c_krone_icelandic_krona value = 0 } } change_global_variable = { name = zz_ef_clr_c_krone_icelandic_krona add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:krone_norwegian_krone } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_krone_norwegian_krone } } set_global_variable = { name = zz_ef_clr_c_krone_norwegian_krone value = 0 } } change_global_variable = { name = zz_ef_clr_c_krone_norwegian_krone add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:krone_slovak_koruna } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_krone_slovak_koruna } } set_global_variable = { name = zz_ef_clr_c_krone_slovak_koruna value = 0 } } change_global_variable = { name = zz_ef_clr_c_krone_slovak_koruna add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:krone_swedish_krona } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_krone_swedish_krona } } set_global_variable = { name = zz_ef_clr_c_krone_swedish_krona value = 0 } } change_global_variable = { name = zz_ef_clr_c_krone_swedish_krona add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:leon_leu } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_leon_leu } } set_global_variable = { name = zz_ef_clr_c_leon_leu value = 0 } } change_global_variable = { name = zz_ef_clr_c_leon_leu add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:leon_lev } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_leon_lev } } set_global_variable = { name = zz_ef_clr_c_leon_lev value = 0 } } change_global_variable = { name = zz_ef_clr_c_leon_lev add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:lira } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_lira } } set_global_variable = { name = zz_ef_clr_c_lira value = 0 } } change_global_variable = { name = zz_ef_clr_c_lira add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:lira_ducato } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_lira_ducato } } set_global_variable = { name = zz_ef_clr_c_lira_ducato value = 0 } } change_global_variable = { name = zz_ef_clr_c_lira_ducato add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:lira_ottoman_lira } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_lira_ottoman_lira } } set_global_variable = { name = zz_ef_clr_c_lira_ottoman_lira value = 0 } } change_global_variable = { name = zz_ef_clr_c_lira_ottoman_lira add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:lira_scudo_pontificio } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_lira_scudo_pontificio } } set_global_variable = { name = zz_ef_clr_c_lira_scudo_pontificio value = 0 } } change_global_variable = { name = zz_ef_clr_c_lira_scudo_pontificio add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:lira_scudo_sardo } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_lira_scudo_sardo } } set_global_variable = { name = zz_ef_clr_c_lira_scudo_sardo value = 0 } } change_global_variable = { name = zz_ef_clr_c_lira_scudo_sardo add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:lira_toscane_lira } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_lira_toscane_lira } } set_global_variable = { name = zz_ef_clr_c_lira_toscane_lira value = 0 } } change_global_variable = { name = zz_ef_clr_c_lira_toscane_lira add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:mark } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_mark } } set_global_variable = { name = zz_ef_clr_c_mark value = 0 } } change_global_variable = { name = zz_ef_clr_c_mark add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:mark_finnish_markka } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_mark_finnish_markka } } set_global_variable = { name = zz_ef_clr_c_mark_finnish_markka value = 0 } } change_global_variable = { name = zz_ef_clr_c_mark_finnish_markka add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:peso } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso } } set_global_variable = { name = zz_ef_clr_c_peso value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:peso_argentine_peso } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_argentine_peso } } set_global_variable = { name = zz_ef_clr_c_peso_argentine_peso value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_argentine_peso add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:peso_bolivien_peso } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_bolivien_peso } } set_global_variable = { name = zz_ef_clr_c_peso_bolivien_peso value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_bolivien_peso add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:peso_chilean_peso } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_chilean_peso } } set_global_variable = { name = zz_ef_clr_c_peso_chilean_peso value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_chilean_peso add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:peso_colombian_peso } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_colombian_peso } } set_global_variable = { name = zz_ef_clr_c_peso_colombian_peso value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_colombian_peso add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:peso_costa_rican_colon } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_costa_rican_colon } } set_global_variable = { name = zz_ef_clr_c_peso_costa_rican_colon value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_costa_rican_colon add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:peso_cuban_peso } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_cuban_peso } } set_global_variable = { name = zz_ef_clr_c_peso_cuban_peso value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_cuban_peso add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:peso_ecuadorian_peso } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_ecuadorian_peso } } set_global_variable = { name = zz_ef_clr_c_peso_ecuadorian_peso value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_ecuadorian_peso add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:peso_el_salvador_colon } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_el_salvador_colon } } set_global_variable = { name = zz_ef_clr_c_peso_el_salvador_colon value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_el_salvador_colon add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:peso_guatemalan_quetzal } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_guatemalan_quetzal } } set_global_variable = { name = zz_ef_clr_c_peso_guatemalan_quetzal value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_guatemalan_quetzal add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:peso_honduran_lempira } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_honduran_lempira } } set_global_variable = { name = zz_ef_clr_c_peso_honduran_lempira value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_honduran_lempira add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:peso_mexican_peso } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_mexican_peso } } set_global_variable = { name = zz_ef_clr_c_peso_mexican_peso value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_mexican_peso add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:peso_nicaraguan_cordoba } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_nicaraguan_cordoba } } set_global_variable = { name = zz_ef_clr_c_peso_nicaraguan_cordoba value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_nicaraguan_cordoba add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:peso_paraguayan_peso } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_paraguayan_peso } } set_global_variable = { name = zz_ef_clr_c_peso_paraguayan_peso value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_paraguayan_peso add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:peso_philippine_peso } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_philippine_peso } } set_global_variable = { name = zz_ef_clr_c_peso_philippine_peso value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_philippine_peso add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:peso_sol_de_oro } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_sol_de_oro } } set_global_variable = { name = zz_ef_clr_c_peso_sol_de_oro value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_sol_de_oro add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:peso_uruguayan_peso } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_uruguayan_peso } } set_global_variable = { name = zz_ef_clr_c_peso_uruguayan_peso value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_uruguayan_peso add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:peso_venezuelan_peso } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_peso_venezuelan_peso } } set_global_variable = { name = zz_ef_clr_c_peso_venezuelan_peso value = 0 } } change_global_variable = { name = zz_ef_clr_c_peso_venezuelan_peso add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:pound_egyptian_pound } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_pound_egyptian_pound } } set_global_variable = { name = zz_ef_clr_c_pound_egyptian_pound value = 0 } } change_global_variable = { name = zz_ef_clr_c_pound_egyptian_pound add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:pound_irish_pound } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_pound_irish_pound } } set_global_variable = { name = zz_ef_clr_c_pound_irish_pound value = 0 } } change_global_variable = { name = zz_ef_clr_c_pound_irish_pound add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:pound_sterling } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_pound_sterling } } set_global_variable = { name = zz_ef_clr_c_pound_sterling value = 0 } } change_global_variable = { name = zz_ef_clr_c_pound_sterling add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:real } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_real } } set_global_variable = { name = zz_ef_clr_c_real value = 0 } } change_global_variable = { name = zz_ef_clr_c_real add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:real_brazilian_real } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_real_brazilian_real } } set_global_variable = { name = zz_ef_clr_c_real_brazilian_real value = 0 } } change_global_variable = { name = zz_ef_clr_c_real_brazilian_real add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:rupee_indian_rupee } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_rupee_indian_rupee } } set_global_variable = { name = zz_ef_clr_c_rupee_indian_rupee value = 0 } } change_global_variable = { name = zz_ef_clr_c_rupee_indian_rupee add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:rupee_indonesian_rupiah } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_rupee_indonesian_rupiah } } set_global_variable = { name = zz_ef_clr_c_rupee_indonesian_rupiah value = 0 } } change_global_variable = { name = zz_ef_clr_c_rupee_indonesian_rupiah add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:spe_baht } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_spe_baht } } set_global_variable = { name = zz_ef_clr_c_spe_baht value = 0 } } change_global_variable = { name = zz_ef_clr_c_spe_baht add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:spe_dong } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_spe_dong } } set_global_variable = { name = zz_ef_clr_c_spe_dong value = 0 } } change_global_variable = { name = zz_ef_clr_c_spe_dong add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:spe_drachma } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_spe_drachma } } set_global_variable = { name = zz_ef_clr_c_spe_drachma value = 0 } } change_global_variable = { name = zz_ef_clr_c_spe_drachma add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:spe_korean_won } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_spe_korean_won } } set_global_variable = { name = zz_ef_clr_c_spe_korean_won value = 0 } } change_global_variable = { name = zz_ef_clr_c_spe_korean_won add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:spe_latvian_lats } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_spe_latvian_lats } } set_global_variable = { name = zz_ef_clr_c_spe_latvian_lats value = 0 } } change_global_variable = { name = zz_ef_clr_c_spe_latvian_lats add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:spe_lithuanian_litas } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_spe_lithuanian_litas } } set_global_variable = { name = zz_ef_clr_c_spe_lithuanian_litas value = 0 } } change_global_variable = { name = zz_ef_clr_c_spe_lithuanian_litas add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:spe_peseta } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_spe_peseta } } set_global_variable = { name = zz_ef_clr_c_spe_peseta value = 0 } } change_global_variable = { name = zz_ef_clr_c_spe_peseta add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:spe_ruble } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_spe_ruble } } set_global_variable = { name = zz_ef_clr_c_spe_ruble value = 0 } } change_global_variable = { name = zz_ef_clr_c_spe_ruble add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:spe_uni } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_spe_uni } } set_global_variable = { name = zz_ef_clr_c_spe_uni value = 0 } } change_global_variable = { name = zz_ef_clr_c_spe_uni add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:spe_yen } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_spe_yen } } set_global_variable = { name = zz_ef_clr_c_spe_yen value = 0 } } change_global_variable = { name = zz_ef_clr_c_spe_yen add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:spe_yuan } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_spe_yuan } } set_global_variable = { name = zz_ef_clr_c_spe_yuan value = 0 } } change_global_variable = { name = zz_ef_clr_c_spe_yuan add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:spe_zloti } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_spe_zloti } } set_global_variable = { name = zz_ef_clr_c_spe_zloti value = 0 } } change_global_variable = { name = zz_ef_clr_c_spe_zloti add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:thaler_hannoveraner_thaler } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_thaler_hannoveraner_thaler } } set_global_variable = { name = zz_ef_clr_c_thaler_hannoveraner_thaler value = 0 } } change_global_variable = { name = zz_ef_clr_c_thaler_hannoveraner_thaler add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:thaler_prussian_thaler } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_thaler_prussian_thaler } } set_global_variable = { name = zz_ef_clr_c_thaler_prussian_thaler value = 0 } } change_global_variable = { name = zz_ef_clr_c_thaler_prussian_thaler add = var:zz_ef_clr_units } }
+	else_if = { limit = { var:zz_ef_cur ?= flag:thaler_saxon_thaler } if = { limit = { NOT = { has_global_variable = zz_ef_clr_c_thaler_saxon_thaler } } set_global_variable = { name = zz_ef_clr_c_thaler_saxon_thaler value = 0 } } change_global_variable = { name = zz_ef_clr_c_thaler_saxon_thaler add = var:zz_ef_clr_units } }
 }
 
 # scope:clr_rcv (the receiver), var:zz_ef_clr_g = its slice: each currency of the house -- its own
@@ -450,7 +450,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_dinar multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_dinar subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_dinar_currency }
+			limit = { var:zz_ef_cur ?= flag:dinar }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -467,7 +467,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_dinar_algerian_dinar multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_dinar_algerian_dinar subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_dinar_algerian_dinar_currency }
+			limit = { var:zz_ef_cur ?= flag:dinar_algerian_dinar }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -484,7 +484,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_dinar_iraqi_dinar multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_dinar_iraqi_dinar subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_dinar_iraqi_dinar_currency }
+			limit = { var:zz_ef_cur ?= flag:dinar_iraqi_dinar }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -501,7 +501,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_dinar_libyan_dinar multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_dinar_libyan_dinar subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_dinar_libyan_dinar_currency }
+			limit = { var:zz_ef_cur ?= flag:dinar_libyan_dinar }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -518,7 +518,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_dinar_moroccan_dirham multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_dinar_moroccan_dirham subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_dinar_moroccan_dirham_currency }
+			limit = { var:zz_ef_cur ?= flag:dinar_moroccan_dirham }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -535,7 +535,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_dinar_omanian_rial multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_dinar_omanian_rial subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_dinar_omanian_rial_currency }
+			limit = { var:zz_ef_cur ?= flag:dinar_omanian_rial }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -552,7 +552,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_dinar_qiran multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_dinar_qiran subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_dinar_qiran_currency }
+			limit = { var:zz_ef_cur ?= flag:dinar_qiran }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -569,7 +569,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_dinar_saudi_riyal multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_dinar_saudi_riyal subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_dinar_saudi_riyal_currency }
+			limit = { var:zz_ef_cur ?= flag:dinar_saudi_riyal }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -586,7 +586,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_dinar_serbian_dinar multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_dinar_serbian_dinar subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_dinar_serbian_dinar_currency }
+			limit = { var:zz_ef_cur ?= flag:dinar_serbian_dinar }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -603,7 +603,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_dinar_tunisian_dinar multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_dinar_tunisian_dinar subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_dinar_tunisian_dinar_currency }
+			limit = { var:zz_ef_cur ?= flag:dinar_tunisian_dinar }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -620,7 +620,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_dinar_yugoslav_dinar multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_dinar_yugoslav_dinar subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_dinar_yugoslav_dinar_currency }
+			limit = { var:zz_ef_cur ?= flag:dinar_yugoslav_dinar }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -637,7 +637,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_dollar_australian_dollar multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_dollar_australian_dollar subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_dollar_australian_dollar_currency }
+			limit = { var:zz_ef_cur ?= flag:dollar_australian_dollar }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -654,7 +654,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_dollar_canadian_dollar multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_dollar_canadian_dollar subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_dollar_canadian_dollar_currency }
+			limit = { var:zz_ef_cur ?= flag:dollar_canadian_dollar }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -671,7 +671,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_dollar_caribbean_dollar multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_dollar_caribbean_dollar subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_dollar_caribbean_dollar_currency }
+			limit = { var:zz_ef_cur ?= flag:dollar_caribbean_dollar }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -688,7 +688,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_dollar_confederate_states_dollar multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_dollar_confederate_states_dollar subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_dollar_confederate_states_dollar_currency }
+			limit = { var:zz_ef_cur ?= flag:dollar_confederate_states_dollar }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -705,7 +705,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_dollar_liberian_dollar multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_dollar_liberian_dollar subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_dollar_liberian_dollar_currency }
+			limit = { var:zz_ef_cur ?= flag:dollar_liberian_dollar }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -722,7 +722,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_dollar_new_zealand_dollar multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_dollar_new_zealand_dollar subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_dollar_new_zealand_dollar_currency }
+			limit = { var:zz_ef_cur ?= flag:dollar_new_zealand_dollar }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -739,7 +739,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_dollar_sierra_leonean_dollar multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_dollar_sierra_leonean_dollar subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_dollar_sierra_leonean_dollar_currency }
+			limit = { var:zz_ef_cur ?= flag:dollar_sierra_leonean_dollar }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -756,7 +756,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_dollar_united_states_dollar multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_dollar_united_states_dollar subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_dollar_united_states_dollar_currency }
+			limit = { var:zz_ef_cur ?= flag:dollar_united_states_dollar }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -773,7 +773,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_eco_ariary multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_eco_ariary subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_eco_ariary_currency }
+			limit = { var:zz_ef_cur ?= flag:eco_ariary }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -790,7 +790,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_eco_central_african_eco multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_eco_central_african_eco subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_eco_central_african_eco_currency }
+			limit = { var:zz_ef_cur ?= flag:eco_central_african_eco }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -807,7 +807,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_eco_east_african_eco multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_eco_east_african_eco subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_eco_east_african_eco_currency }
+			limit = { var:zz_ef_cur ?= flag:eco_east_african_eco }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -824,7 +824,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_eco_ethiopian_birr multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_eco_ethiopian_birr subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_eco_ethiopian_birr_currency }
+			limit = { var:zz_ef_cur ?= flag:eco_ethiopian_birr }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -841,7 +841,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_eco_ghanaian_pound multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_eco_ghanaian_pound subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_eco_ghanaian_pound_currency }
+			limit = { var:zz_ef_cur ?= flag:eco_ghanaian_pound }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -858,7 +858,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_eco_nigerian_naira multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_eco_nigerian_naira subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_eco_nigerian_naira_currency }
+			limit = { var:zz_ef_cur ?= flag:eco_nigerian_naira }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -875,7 +875,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_eco_south_african_rand multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_eco_south_african_rand subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_eco_south_african_rand_currency }
+			limit = { var:zz_ef_cur ?= flag:eco_south_african_rand }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -892,7 +892,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_eco_tuareg_ouguiya multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_eco_tuareg_ouguiya subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_eco_tuareg_ouguiya_currency }
+			limit = { var:zz_ef_cur ?= flag:eco_tuareg_ouguiya }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -909,7 +909,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_eco_west_african_eco multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_eco_west_african_eco subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_eco_west_african_eco_currency }
+			limit = { var:zz_ef_cur ?= flag:eco_west_african_eco }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -926,7 +926,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_franc_belgian_franc multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_franc_belgian_franc subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_franc_belgian_franc_currency }
+			limit = { var:zz_ef_cur ?= flag:franc_belgian_franc }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -943,7 +943,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_franc_french_franc multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_franc_french_franc subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_franc_french_franc_currency }
+			limit = { var:zz_ef_cur ?= flag:franc_french_franc }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -960,7 +960,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_franc_luxembourgish_franc multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_franc_luxembourgish_franc subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_franc_luxembourgish_franc_currency }
+			limit = { var:zz_ef_cur ?= flag:franc_luxembourgish_franc }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -977,7 +977,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_franc_swiss_franc multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_franc_swiss_franc subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_franc_swiss_franc_currency }
+			limit = { var:zz_ef_cur ?= flag:franc_swiss_franc }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -994,7 +994,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_gulden multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_gulden subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_gulden_currency }
+			limit = { var:zz_ef_cur ?= flag:gulden }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1011,7 +1011,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_gulden_bavarian_gulden multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_gulden_bavarian_gulden subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_gulden_bavarian_gulden_currency }
+			limit = { var:zz_ef_cur ?= flag:gulden_bavarian_gulden }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1028,7 +1028,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_gulden_florin multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_gulden_florin subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_gulden_florin_currency }
+			limit = { var:zz_ef_cur ?= flag:gulden_florin }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1045,7 +1045,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_gulden_hungarian_forint multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_gulden_hungarian_forint subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_gulden_hungarian_forint_currency }
+			limit = { var:zz_ef_cur ?= flag:gulden_hungarian_forint }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1062,7 +1062,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_gulden_indies_guilder multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_gulden_indies_guilder subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_gulden_indies_guilder_currency }
+			limit = { var:zz_ef_cur ?= flag:gulden_indies_guilder }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1079,7 +1079,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_gulden_south_german_gulden multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_gulden_south_german_gulden subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_gulden_south_german_gulden_currency }
+			limit = { var:zz_ef_cur ?= flag:gulden_south_german_gulden }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1096,7 +1096,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_krone_czech_koruna multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_krone_czech_koruna subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_krone_czech_koruna_currency }
+			limit = { var:zz_ef_cur ?= flag:krone_czech_koruna }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1113,7 +1113,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_krone_danish_krone multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_krone_danish_krone subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_krone_danish_krone_currency }
+			limit = { var:zz_ef_cur ?= flag:krone_danish_krone }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1130,7 +1130,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_krone_estonian_kroon multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_krone_estonian_kroon subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_krone_estonian_kroon_currency }
+			limit = { var:zz_ef_cur ?= flag:krone_estonian_kroon }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1147,7 +1147,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_krone_icelandic_krona multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_krone_icelandic_krona subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_krone_icelandic_krona_currency }
+			limit = { var:zz_ef_cur ?= flag:krone_icelandic_krona }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1164,7 +1164,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_krone_norwegian_krone multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_krone_norwegian_krone subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_krone_norwegian_krone_currency }
+			limit = { var:zz_ef_cur ?= flag:krone_norwegian_krone }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1181,7 +1181,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_krone_slovak_koruna multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_krone_slovak_koruna subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_krone_slovak_koruna_currency }
+			limit = { var:zz_ef_cur ?= flag:krone_slovak_koruna }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1198,7 +1198,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_krone_swedish_krona multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_krone_swedish_krona subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_krone_swedish_krona_currency }
+			limit = { var:zz_ef_cur ?= flag:krone_swedish_krona }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1215,7 +1215,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_leon_leu multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_leon_leu subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_leon_leu_currency }
+			limit = { var:zz_ef_cur ?= flag:leon_leu }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1232,7 +1232,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_leon_lev multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_leon_lev subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_leon_lev_currency }
+			limit = { var:zz_ef_cur ?= flag:leon_lev }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1249,7 +1249,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_lira multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_lira subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_lira_currency }
+			limit = { var:zz_ef_cur ?= flag:lira }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1266,7 +1266,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_lira_ducato multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_lira_ducato subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_lira_ducato_currency }
+			limit = { var:zz_ef_cur ?= flag:lira_ducato }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1283,7 +1283,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_lira_ottoman_lira multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_lira_ottoman_lira subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_lira_ottoman_lira_currency }
+			limit = { var:zz_ef_cur ?= flag:lira_ottoman_lira }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1300,7 +1300,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_lira_scudo_pontificio multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_lira_scudo_pontificio subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_lira_scudo_pontificio_currency }
+			limit = { var:zz_ef_cur ?= flag:lira_scudo_pontificio }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1317,7 +1317,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_lira_scudo_sardo multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_lira_scudo_sardo subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_lira_scudo_sardo_currency }
+			limit = { var:zz_ef_cur ?= flag:lira_scudo_sardo }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1334,7 +1334,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_lira_toscane_lira multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_lira_toscane_lira subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_lira_toscane_lira_currency }
+			limit = { var:zz_ef_cur ?= flag:lira_toscane_lira }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1351,7 +1351,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_mark multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_mark subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_mark_currency }
+			limit = { var:zz_ef_cur ?= flag:mark }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1368,7 +1368,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_mark_finnish_markka multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_mark_finnish_markka subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_mark_finnish_markka_currency }
+			limit = { var:zz_ef_cur ?= flag:mark_finnish_markka }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1385,7 +1385,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_peso multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_peso subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_peso_currency }
+			limit = { var:zz_ef_cur ?= flag:peso }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1402,7 +1402,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_peso_argentine_peso multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_peso_argentine_peso subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_peso_argentine_peso_currency }
+			limit = { var:zz_ef_cur ?= flag:peso_argentine_peso }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1419,7 +1419,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_peso_bolivien_peso multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_peso_bolivien_peso subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_peso_bolivien_peso_currency }
+			limit = { var:zz_ef_cur ?= flag:peso_bolivien_peso }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1436,7 +1436,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_peso_chilean_peso multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_peso_chilean_peso subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_peso_chilean_peso_currency }
+			limit = { var:zz_ef_cur ?= flag:peso_chilean_peso }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1453,7 +1453,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_peso_colombian_peso multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_peso_colombian_peso subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_peso_colombian_peso_currency }
+			limit = { var:zz_ef_cur ?= flag:peso_colombian_peso }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1470,7 +1470,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_peso_costa_rican_colon multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_peso_costa_rican_colon subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_peso_costa_rican_colon_currency }
+			limit = { var:zz_ef_cur ?= flag:peso_costa_rican_colon }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1487,7 +1487,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_peso_cuban_peso multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_peso_cuban_peso subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_peso_cuban_peso_currency }
+			limit = { var:zz_ef_cur ?= flag:peso_cuban_peso }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1504,7 +1504,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_peso_ecuadorian_peso multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_peso_ecuadorian_peso subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_peso_ecuadorian_peso_currency }
+			limit = { var:zz_ef_cur ?= flag:peso_ecuadorian_peso }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1521,7 +1521,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_peso_el_salvador_colon multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_peso_el_salvador_colon subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_peso_el_salvador_colon_currency }
+			limit = { var:zz_ef_cur ?= flag:peso_el_salvador_colon }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1538,7 +1538,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_peso_guatemalan_quetzal multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_peso_guatemalan_quetzal subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_peso_guatemalan_quetzal_currency }
+			limit = { var:zz_ef_cur ?= flag:peso_guatemalan_quetzal }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1555,7 +1555,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_peso_honduran_lempira multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_peso_honduran_lempira subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_peso_honduran_lempira_currency }
+			limit = { var:zz_ef_cur ?= flag:peso_honduran_lempira }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1572,7 +1572,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_peso_mexican_peso multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_peso_mexican_peso subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_peso_mexican_peso_currency }
+			limit = { var:zz_ef_cur ?= flag:peso_mexican_peso }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1589,7 +1589,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_peso_nicaraguan_cordoba multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_peso_nicaraguan_cordoba subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_peso_nicaraguan_cordoba_currency }
+			limit = { var:zz_ef_cur ?= flag:peso_nicaraguan_cordoba }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1606,7 +1606,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_peso_paraguayan_peso multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_peso_paraguayan_peso subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_peso_paraguayan_peso_currency }
+			limit = { var:zz_ef_cur ?= flag:peso_paraguayan_peso }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1623,7 +1623,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_peso_philippine_peso multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_peso_philippine_peso subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_peso_philippine_peso_currency }
+			limit = { var:zz_ef_cur ?= flag:peso_philippine_peso }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1640,7 +1640,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_peso_sol_de_oro multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_peso_sol_de_oro subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_peso_sol_de_oro_currency }
+			limit = { var:zz_ef_cur ?= flag:peso_sol_de_oro }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1657,7 +1657,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_peso_uruguayan_peso multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_peso_uruguayan_peso subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_peso_uruguayan_peso_currency }
+			limit = { var:zz_ef_cur ?= flag:peso_uruguayan_peso }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1674,7 +1674,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_peso_venezuelan_peso multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_peso_venezuelan_peso subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_peso_venezuelan_peso_currency }
+			limit = { var:zz_ef_cur ?= flag:peso_venezuelan_peso }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1691,7 +1691,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_pound_egyptian_pound multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_pound_egyptian_pound subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_pound_egyptian_pound_currency }
+			limit = { var:zz_ef_cur ?= flag:pound_egyptian_pound }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1708,7 +1708,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_pound_irish_pound multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_pound_irish_pound subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_pound_irish_pound_currency }
+			limit = { var:zz_ef_cur ?= flag:pound_irish_pound }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1725,7 +1725,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_pound_sterling multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_pound_sterling subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_pound_sterling_currency }
+			limit = { var:zz_ef_cur ?= flag:pound_sterling }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1742,7 +1742,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_real multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_real subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_real_currency }
+			limit = { var:zz_ef_cur ?= flag:real }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1759,7 +1759,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_real_brazilian_real multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_real_brazilian_real subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_real_brazilian_real_currency }
+			limit = { var:zz_ef_cur ?= flag:real_brazilian_real }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1776,7 +1776,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_rupee_indian_rupee multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_rupee_indian_rupee subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_rupee_indian_rupee_currency }
+			limit = { var:zz_ef_cur ?= flag:rupee_indian_rupee }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1793,7 +1793,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_rupee_indonesian_rupiah multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_rupee_indonesian_rupiah subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_rupee_indonesian_rupiah_currency }
+			limit = { var:zz_ef_cur ?= flag:rupee_indonesian_rupiah }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1810,7 +1810,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_spe_baht multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_spe_baht subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_spe_baht_currency }
+			limit = { var:zz_ef_cur ?= flag:spe_baht }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1827,7 +1827,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_spe_dong multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_spe_dong subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_spe_dong_currency }
+			limit = { var:zz_ef_cur ?= flag:spe_dong }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1844,7 +1844,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_spe_drachma multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_spe_drachma subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_spe_drachma_currency }
+			limit = { var:zz_ef_cur ?= flag:spe_drachma }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1861,7 +1861,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_spe_korean_won multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_spe_korean_won subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_spe_korean_won_currency }
+			limit = { var:zz_ef_cur ?= flag:spe_korean_won }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1878,7 +1878,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_spe_latvian_lats multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_spe_latvian_lats subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_spe_latvian_lats_currency }
+			limit = { var:zz_ef_cur ?= flag:spe_latvian_lats }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1895,7 +1895,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_spe_lithuanian_litas multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_spe_lithuanian_litas subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_spe_lithuanian_litas_currency }
+			limit = { var:zz_ef_cur ?= flag:spe_lithuanian_litas }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1912,7 +1912,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_spe_peseta multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_spe_peseta subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_spe_peseta_currency }
+			limit = { var:zz_ef_cur ?= flag:spe_peseta }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1929,7 +1929,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_spe_ruble multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_spe_ruble subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_spe_ruble_currency }
+			limit = { var:zz_ef_cur ?= flag:spe_ruble }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1946,7 +1946,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_spe_uni multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_spe_uni subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_spe_uni_currency }
+			limit = { var:zz_ef_cur ?= flag:spe_uni }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1963,7 +1963,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_spe_yen multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_spe_yen subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_spe_yen_currency }
+			limit = { var:zz_ef_cur ?= flag:spe_yen }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1980,7 +1980,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_spe_yuan multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_spe_yuan subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_spe_yuan_currency }
+			limit = { var:zz_ef_cur ?= flag:spe_yuan }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -1997,7 +1997,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_spe_zloti multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_spe_zloti subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_spe_zloti_currency }
+			limit = { var:zz_ef_cur ?= flag:spe_zloti }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -2014,7 +2014,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_thaler_hannoveraner_thaler multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_thaler_hannoveraner_thaler subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_thaler_hannoveraner_thaler_currency }
+			limit = { var:zz_ef_cur ?= flag:thaler_hannoveraner_thaler }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -2031,7 +2031,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_thaler_prussian_thaler multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_thaler_prussian_thaler subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_thaler_prussian_thaler_currency }
+			limit = { var:zz_ef_cur ?= flag:thaler_prussian_thaler }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
@@ -2048,7 +2048,7 @@ zz_ef_clr_take_all = {
 		set_variable = { name = zz_ef_clr_u value = { value = global_var:zz_ef_clr_c_thaler_saxon_thaler multiply = var:zz_ef_clr_g } }
 		change_global_variable = { name = zz_ef_clr_c_thaler_saxon_thaler subtract = var:zz_ef_clr_u }
 		if = {
-			limit = { has_law = law_type:law_thaler_saxon_thaler_currency }
+			limit = { var:zz_ef_cur ?= flag:thaler_saxon_thaler }
 			change_variable = { name = zz_ef_f_clr_own_back add = var:zz_ef_clr_u }
 		}
 		else = {
