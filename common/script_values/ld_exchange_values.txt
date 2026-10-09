@@ -1,0 +1,28 @@
+﻿# The exchange (scripted_effects/ld_exchange.txt).
+# the base fee of a deal, a share of its value (Д.R8.5: 0.5 %)
+zz_ef_xch_fee_base = 0.005
+# the route for the logs: 1 own, 2 the market owner's, 3 the bloc leader's, 4 the strongest bloc's, 5 the world's, 0 none
+zz_ef_xch_how_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_xch_how } value = var:zz_ef_xch_how }
+}
+zz_ef_xch_n_1_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_xch_n_1 } value = global_var:zz_ef_xch_n_1 }
+}
+zz_ef_xch_n_2_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_xch_n_2 } value = global_var:zz_ef_xch_n_2 }
+}
+zz_ef_xch_n_3_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_xch_n_3 } value = global_var:zz_ef_xch_n_3 }
+}
+zz_ef_xch_n_4_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_xch_n_4 } value = global_var:zz_ef_xch_n_4 }
+}
+zz_ef_xch_n_5_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_xch_n_5 } value = global_var:zz_ef_xch_n_5 }
+}

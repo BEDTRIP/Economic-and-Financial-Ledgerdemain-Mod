@@ -20,6 +20,8 @@ zz_ef_world_month_ef = {
 		limit = { has_modifier = global_monetary_reference }
 		global_monetary_reference_global_var_fixe = yes
 	}
+	# the world's exchange for the countries with no other (ld_exchange.txt)
+	zz_ef_xch_world_set = yes
 	# the register of claims adds up (ld_claims.txt, the EFI line) -- a check for the logs only
 	if = {
 		limit = { zz_ef_logs_on = yes }
@@ -29,7 +31,19 @@ zz_ef_world_month_ef = {
 			limit = { zz_ef_has_exchange = yes }
 			change_global_variable = { name = zz_ef_fc_world_n add = 1 }
 		}
-		debug_log = "EFH|[TimeKeeper.GetCurrentDate.GetString]|WORLD|exchanges [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fc_world_n_v')|0]"
+		set_global_variable = { name = zz_ef_xch_n_1 value = 0 }
+		set_global_variable = { name = zz_ef_xch_n_2 value = 0 }
+		set_global_variable = { name = zz_ef_xch_n_3 value = 0 }
+		set_global_variable = { name = zz_ef_xch_n_4 value = 0 }
+		set_global_variable = { name = zz_ef_xch_n_5 value = 0 }
+		every_country = {
+			if = { limit = { var:zz_ef_xch_how ?= 1 } change_global_variable = { name = zz_ef_xch_n_1 add = 1 } }
+			else_if = { limit = { var:zz_ef_xch_how ?= 2 } change_global_variable = { name = zz_ef_xch_n_2 add = 1 } }
+			else_if = { limit = { var:zz_ef_xch_how ?= 3 } change_global_variable = { name = zz_ef_xch_n_3 add = 1 } }
+			else_if = { limit = { var:zz_ef_xch_how ?= 4 } change_global_variable = { name = zz_ef_xch_n_4 add = 1 } }
+			else_if = { limit = { var:zz_ef_xch_how ?= 5 } change_global_variable = { name = zz_ef_xch_n_5 add = 1 } }
+		}
+		debug_log = "EFH|[TimeKeeper.GetCurrentDate.GetString]|WORLD|exchanges [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fc_world_n_v')|0]|own [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xch_n_1_v')|0]|market [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xch_n_2_v')|0]|bloc [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xch_n_3_v')|0]|lever [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xch_n_4_v')|0]|world [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xch_n_5_v')|0]"
 	}
 }
 
