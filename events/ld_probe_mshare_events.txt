@@ -1,0 +1,293 @@
+﻿namespace = ld_probe_mshare
+
+# R8в.1 probe: a member's share of its market's production and consumption, by a ladder of 20 comparisons (5 %
+# steps) -- do the members' shares add up to 1, and the cost over every country. Console only; EFZ lines in debug.log.
+ld_probe_mshare.1 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		c:GBR.market = { save_scope_as = zz_ef_pm }
+		set_variable = { name = zz_ef_ps_p value = 0 }
+		set_variable = { name = zz_ef_ps_c value = 0 }
+		every_country = {
+			limit = { market = scope:zz_ef_pm }
+			save_scope_as = zz_ef_pc
+			root = {
+				set_variable = { name = zz_ef_ps_p1 value = 0 }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.05 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.10 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.15 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.20 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.25 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.30 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.35 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.40 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.45 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.50 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.55 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.60 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.65 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.70 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.75 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.80 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.85 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.90 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.95 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 1.00 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				set_variable = { name = zz_ef_ps_c1 value = 0 }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.05 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.10 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.15 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.20 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.25 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.30 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.35 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.40 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.45 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.50 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.55 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.60 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.65 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.70 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.75 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.80 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.85 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.90 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.95 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 1.00 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				change_variable = { name = zz_ef_ps_p add = var:zz_ef_ps_p1 }
+				change_variable = { name = zz_ef_ps_c add = var:zz_ef_ps_c1 }
+				debug_log = "EFZ|GBR|member|[SCOPE.sCountry('zz_ef_pc').GetNameNoFormatting]|prod [THIS.GetCountry.MakeScope.Var('zz_ef_ps_p1').GetValue|2]|cons [THIS.GetCountry.MakeScope.Var('zz_ef_ps_c1').GetValue|2]"
+			}
+		}
+		debug_log = "EFZ|GBR|sum|prod [THIS.GetCountry.MakeScope.Var('zz_ef_ps_p').GetValue|2]|cons [THIS.GetCountry.MakeScope.Var('zz_ef_ps_c').GetValue|2]"
+		c:RUS.market = { save_scope_as = zz_ef_pm }
+		set_variable = { name = zz_ef_ps_p value = 0 }
+		set_variable = { name = zz_ef_ps_c value = 0 }
+		every_country = {
+			limit = { market = scope:zz_ef_pm }
+			save_scope_as = zz_ef_pc
+			root = {
+				set_variable = { name = zz_ef_ps_p1 value = 0 }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.05 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.10 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.15 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.20 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.25 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.30 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.35 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.40 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.45 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.50 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.55 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.60 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.65 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.70 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.75 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.80 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.85 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.90 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.95 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 1.00 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				set_variable = { name = zz_ef_ps_c1 value = 0 }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.05 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.10 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.15 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.20 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.25 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.30 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.35 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.40 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.45 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.50 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.55 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.60 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.65 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.70 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.75 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.80 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.85 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.90 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.95 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 1.00 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				change_variable = { name = zz_ef_ps_p add = var:zz_ef_ps_p1 }
+				change_variable = { name = zz_ef_ps_c add = var:zz_ef_ps_c1 }
+				debug_log = "EFZ|RUS|member|[SCOPE.sCountry('zz_ef_pc').GetNameNoFormatting]|prod [THIS.GetCountry.MakeScope.Var('zz_ef_ps_p1').GetValue|2]|cons [THIS.GetCountry.MakeScope.Var('zz_ef_ps_c1').GetValue|2]"
+			}
+		}
+		debug_log = "EFZ|RUS|sum|prod [THIS.GetCountry.MakeScope.Var('zz_ef_ps_p').GetValue|2]|cons [THIS.GetCountry.MakeScope.Var('zz_ef_ps_c').GetValue|2]"
+		c:TUR.market = { save_scope_as = zz_ef_pm }
+		set_variable = { name = zz_ef_ps_p value = 0 }
+		set_variable = { name = zz_ef_ps_c value = 0 }
+		every_country = {
+			limit = { market = scope:zz_ef_pm }
+			save_scope_as = zz_ef_pc
+			root = {
+				set_variable = { name = zz_ef_ps_p1 value = 0 }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.05 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.10 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.15 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.20 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.25 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.30 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.35 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.40 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.45 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.50 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.55 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.60 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.65 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.70 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.75 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.80 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.85 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.90 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.95 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 1.00 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				set_variable = { name = zz_ef_ps_c1 value = 0 }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.05 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.10 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.15 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.20 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.25 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.30 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.35 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.40 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.45 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.50 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.55 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.60 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.65 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.70 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.75 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.80 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.85 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.90 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.95 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 1.00 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				change_variable = { name = zz_ef_ps_p add = var:zz_ef_ps_p1 }
+				change_variable = { name = zz_ef_ps_c add = var:zz_ef_ps_c1 }
+				debug_log = "EFZ|TUR|member|[SCOPE.sCountry('zz_ef_pc').GetNameNoFormatting]|prod [THIS.GetCountry.MakeScope.Var('zz_ef_ps_p1').GetValue|2]|cons [THIS.GetCountry.MakeScope.Var('zz_ef_ps_c1').GetValue|2]"
+			}
+		}
+		debug_log = "EFZ|TUR|sum|prod [THIS.GetCountry.MakeScope.Var('zz_ef_ps_p').GetValue|2]|cons [THIS.GetCountry.MakeScope.Var('zz_ef_ps_c').GetValue|2]"
+		c:AUS.market = { save_scope_as = zz_ef_pm }
+		set_variable = { name = zz_ef_ps_p value = 0 }
+		set_variable = { name = zz_ef_ps_c value = 0 }
+		every_country = {
+			limit = { market = scope:zz_ef_pm }
+			save_scope_as = zz_ef_pc
+			root = {
+				set_variable = { name = zz_ef_ps_p1 value = 0 }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.05 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.10 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.15 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.20 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.25 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.30 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.35 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.40 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.45 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.50 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.55 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.60 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.65 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.70 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.75 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.80 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.85 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.90 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.95 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 1.00 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+				set_variable = { name = zz_ef_ps_c1 value = 0 }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.05 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.10 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.15 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.20 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.25 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.30 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.35 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.40 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.45 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.50 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.55 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.60 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.65 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.70 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.75 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.80 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.85 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.90 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.95 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 1.00 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				change_variable = { name = zz_ef_ps_p add = var:zz_ef_ps_p1 }
+				change_variable = { name = zz_ef_ps_c add = var:zz_ef_ps_c1 }
+				debug_log = "EFZ|AUS|member|[SCOPE.sCountry('zz_ef_pc').GetNameNoFormatting]|prod [THIS.GetCountry.MakeScope.Var('zz_ef_ps_p1').GetValue|2]|cons [THIS.GetCountry.MakeScope.Var('zz_ef_ps_c1').GetValue|2]"
+			}
+		}
+		debug_log = "EFZ|AUS|sum|prod [THIS.GetCountry.MakeScope.Var('zz_ef_ps_p').GetValue|2]|cons [THIS.GetCountry.MakeScope.Var('zz_ef_ps_c').GetValue|2]"
+	}
+}
+
+# the cost: 20 passes of the two ladders over every country (its own market)
+ld_probe_mshare.2 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		debug_log = "EFZ|cost_start"
+		while = {
+			count = 20
+			every_country = {
+				save_scope_as = zz_ef_pc
+				market = { save_scope_as = zz_ef_pm }
+				root = {
+					set_variable = { name = zz_ef_ps_p1 value = 0 }
+					if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.05 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.10 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.15 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.20 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.25 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.30 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.35 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.40 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.45 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.50 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.55 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.60 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.65 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.70 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.75 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.80 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.85 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.90 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 0.95 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_production_share = { target = scope:zz_ef_pc value > 1.00 } } } change_variable = { name = zz_ef_ps_p1 add = 0.05 } }
+					set_variable = { name = zz_ef_ps_c1 value = 0 }
+					if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.05 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.10 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.15 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.20 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.25 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.30 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.35 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.40 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.45 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.50 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.55 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.60 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.65 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.70 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.75 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.80 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.85 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.90 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 0.95 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+					if = { limit = { scope:zz_ef_pm = { market_consumption_share = { target = scope:zz_ef_pc value > 1.00 } } } change_variable = { name = zz_ef_ps_c1 add = 0.05 } }
+				}
+			}
+		}
+		debug_log = "EFZ|cost_done"
+	}
+}
