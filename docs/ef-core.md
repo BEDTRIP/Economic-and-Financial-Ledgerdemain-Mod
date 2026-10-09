@@ -43,7 +43,7 @@
 Расчёт — по пульсам (см. `entry-points`): `ef_on_*_pulse_country` зовёт эффекты из `00_on_action_main.txt`, а те — эффекты `01_economic_scripted_effects.txt`. Оглавление `01_economic_scripted_effects.txt` (строка; эффект; кто живой):
 | строки | группа | живое? |
 |---|---|---|
-| 18–470 | `global_monetary_reference_global_var_fixe`, `reference_currency_in_gold_fixe`, `median_currency_value`, `choose_currency_type_reset_all`, `global_gold_silver_production` | да (пульсы) |
+| 18–470 | `global_monetary_reference_global_var_fixe`, `reference_currency_in_gold_fixe`, `median_currency_value`, `global_gold_silver_production` | да (пульсы) |
 | 480–1336 | `currency_of_player` (857) | `currency_of_player` — GUI; `currency_of_player_reset` — `_archive/ef_dead_effects_8_10/` |
 | 1380–5967 | 3×95 эффектов `money_value[_target|_in_gold]_<cur>_global_var` | да, через `money_value_global_var` и др. |
 | 5967–7574 | `global_monetary_reference_1/_2/_gui/_reset`, список эталонной валюты | да (годовой) |

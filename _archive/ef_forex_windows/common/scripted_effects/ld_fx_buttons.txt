@@ -1,4 +1,5 @@
-﻿# steps 1-2 (Д.R2.2, Д.R2.14): the player's forex buttons of E&F (<cur>_buy_in_gold / <cur>_sell_in_gold,
+﻿# From common/scripted_effects/ld_fx_buttons.txt.
+# steps 1-2 (Д.R2.2, Д.R2.14): the player's forex buttons of E&F (<cur>_buy_in_gold / <cur>_sell_in_gold,
 # scripted_guis/00_economic_scripted_guis.txt) through the ledger. The button's own code stays; around it:
 #   * the metal both CBs moved (the issuer's and the player's) is a known move of the CB's metal reconciliation
 #     (var:zz_ef_mt_fx_g / _s, zz_ef_metal_reconcile), not «прочее»;
@@ -8,27 +9,6 @@
 # The holder's stock (stockpiling_<cur>_state_1 of the player's CB) is the button's, as before: the register mirrors it.
 # Called in the button's effect: root = the issuer, the player = every_country with is_player (as E&F finds it).
 
-zz_ef_fxb_before = {
-	every_country = {
-		limit = { is_player = yes }
-		save_scope_as = zz_fxb_player
-	}
-	root = {
-		set_variable = { name = zz_ef_fxb_g0 value = gold_state_native_for_stockpile }
-		set_variable = { name = zz_ef_fxb_s0 value = silver_state_native_for_stockpile }
-		set_variable = { name = zz_ef_fxb_own0 value = stockpiling_$CUR$_state }
-	}
-	if = {
-		limit = {
-			exists = scope:zz_fxb_player
-			NOT = { scope:zz_fxb_player = root }
-		}
-		scope:zz_fxb_player = {
-			set_variable = { name = zz_ef_fxb_g0 value = gold_state_native_for_stockpile }
-			set_variable = { name = zz_ef_fxb_s0 value = silver_state_native_for_stockpile }
-		}
-	}
-}
 
 zz_ef_fxb_after = {
 	root = {
@@ -76,4 +56,26 @@ zz_ef_fxb_metal_known = {
 	change_variable = { name = zz_ef_mt_fx_s subtract = var:zz_ef_fxb_s0 }
 	remove_variable = zz_ef_fxb_g0
 	remove_variable = zz_ef_fxb_s0
+}
+
+zz_ef_fxb_before = {
+	every_country = {
+		limit = { is_player = yes }
+		save_scope_as = zz_fxb_player
+	}
+	root = {
+		set_variable = { name = zz_ef_fxb_g0 value = gold_state_native_for_stockpile }
+		set_variable = { name = zz_ef_fxb_s0 value = silver_state_native_for_stockpile }
+		set_variable = { name = zz_ef_fxb_own0 value = stockpiling_$CUR$_state }
+	}
+	if = {
+		limit = {
+			exists = scope:zz_fxb_player
+			NOT = { scope:zz_fxb_player = root }
+		}
+		scope:zz_fxb_player = {
+			set_variable = { name = zz_ef_fxb_g0 value = gold_state_native_for_stockpile }
+			set_variable = { name = zz_ef_fxb_s0 value = silver_state_native_for_stockpile }
+		}
+	}
 }

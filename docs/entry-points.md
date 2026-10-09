@@ -108,7 +108,7 @@ PSC-хук: `on_production_method_changed`, `on_building_built`, `on_acquired_te
 
 ## Вызовы и связи
 - Модель денег `ld_*`: месячные хуки зовут эффекты из `common/scripted_effects/ld_*.txt`; из тел E&F зовутся `zz_ef_cb_rate_step`, `zz_ef_std_switch_before/after`, `zz_ef_mp_init/_clear`, `zz_ef_crisis_redeem` (в `01_economic_scripted_effects.txt`), `zz_ef_cur_intro_after` (в `09_introduction_building_lvl.txt`).
-- Эффекты E&F, пишущие `gold_state_1` / `silver_state_1` ЦБ-штата (счета модели): `enemy_capital_is_occuped`, кнопки форекса `<cur>_buy/sell_in_gold`, `sell_<cur>_currency_crisis` (через `all_currency_resold`), стартовые значения `99_ef_history_global_variable.txt`.
+- Эффекты E&F, пишущие `gold_state_1` / `silver_state_1` ЦБ-штата (счета модели): `enemy_capital_is_occuped`, `sell_<cur>_currency_crisis` (через `all_currency_resold`), стартовые значения `99_ef_history_global_variable.txt`.
 - GUI: верхняя панель — `com_topbar_setup_ef`; пульсы GUI не вызывают, но scripted_guis зовут `reset_*`, `stockpiling_capital_state_transfert`, `reset_debt_in_national_currency_player`.
 
 ## Логи

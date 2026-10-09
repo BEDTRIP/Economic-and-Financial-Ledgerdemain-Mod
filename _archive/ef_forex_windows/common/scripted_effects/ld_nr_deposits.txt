@@ -1,0 +1,8 @@
+# From common/scripted_effects/ld_nr_deposits.txt (generator ../vic3_mods/tools/regen_ef_nr_deposits.py): zz_ef_nr_dep_step,
+# after the line with zz_ef_f_clr_own_back.
+		# the player's forex buttons since the last step -- bought from / sold back to our CB (ld_fx_buttons.txt)
+		if = {
+			limit = { has_variable = zz_ef_nr_fx_pend }
+			change_variable = { name = zz_ef_f_nr_dep add = var:zz_ef_nr_fx_pend }
+			remove_variable = zz_ef_nr_fx_pend
+		}

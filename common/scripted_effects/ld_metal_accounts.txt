@@ -533,12 +533,6 @@ zz_ef_metal_reconcile = {
 			change_variable = { name = zz_ef_f_mt_oth_g subtract = var:zz_ef_mt_start_adj_g }
 			change_variable = { name = zz_ef_f_mt_oth_s subtract = var:zz_ef_mt_start_adj_s }
 		}
-		# the player's forex buttons -- the metal both CBs moved (scripted_effects/ld_fx_buttons.txt)
-		if = {
-			limit = { has_variable = zz_ef_mt_fx_g }
-			change_variable = { name = zz_ef_f_mt_oth_g subtract = var:zz_ef_mt_fx_g }
-			change_variable = { name = zz_ef_f_mt_oth_s subtract = var:zz_ef_mt_fx_s }
-		}
 		zz_ef_wm_add = { KEY = oth_gold VALUE = var:zz_ef_f_mt_oth_g }
 		zz_ef_wm_add = { KEY = oth_silver VALUE = var:zz_ef_f_mt_oth_s }
 		if = {
@@ -548,6 +542,4 @@ zz_ef_metal_reconcile = {
 	}
 	set_variable = { name = zz_ef_mt_start_adj_g value = 0 }
 	set_variable = { name = zz_ef_mt_start_adj_s value = 0 }
-	if = { limit = { has_variable = zz_ef_mt_fx_g } remove_variable = zz_ef_mt_fx_g }
-	if = { limit = { has_variable = zz_ef_mt_fx_s } remove_variable = zz_ef_mt_fx_s }
 }

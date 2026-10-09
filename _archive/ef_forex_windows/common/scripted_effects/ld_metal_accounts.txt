@@ -1,0 +1,12 @@
+# From common/scripted_effects/ld_metal_accounts.txt: zz_ef_metal_reconcile, after the block zz_ef_mt_start_adj_g (1);
+# at the end of the effect, after set_variable zz_ef_mt_start_adj_s (2).
+# (1)
+		# the player's forex buttons -- the metal both CBs moved (scripted_effects/ld_fx_buttons.txt)
+		if = {
+			limit = { has_variable = zz_ef_mt_fx_g }
+			change_variable = { name = zz_ef_f_mt_oth_g subtract = var:zz_ef_mt_fx_g }
+			change_variable = { name = zz_ef_f_mt_oth_s subtract = var:zz_ef_mt_fx_s }
+		}
+# (2)
+	if = { limit = { has_variable = zz_ef_mt_fx_g } remove_variable = zz_ef_mt_fx_g }
+	if = { limit = { has_variable = zz_ef_mt_fx_s } remove_variable = zz_ef_mt_fx_s }

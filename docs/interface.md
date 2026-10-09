@@ -12,7 +12,7 @@ GUI-тип регистрирует первый файл по имени (ASCII
 ### Заменяют ванильный файл по пути (копия ванили + вставки E&F)
 - `gui/budget_panel.gui` — `budget_panel` (2186 строк); вкладки вставляют типы `budget_panel_economy_panel_content` (:1497),
   `budget_panel_financial_panel_content` (:1522); `@money!` вместо символа валюты.
-- `gui/market_panel.gui` — `market_panel`; блок «E&F» с `market_global_panel_content` (:949), кнопки
+- `gui/market_panel.gui` — `market_panel`; вкладка «global» (`'msa'`) с `market_global_panel_content` (:949), кнопки
   `market_gui_market_currency_list` / `market_gui_market_financial_product_list` (:52, :1212-1403).
 - `gui/states_panel.gui` — `states_panel`; `state_panel_currency_panel_content` (:1459).
 - `gui/country_panel.gui` — `country_panel`; `country_panel_currency_panel_content` (:968).
@@ -23,9 +23,10 @@ GUI-тип регистрирует первый файл по имени (ASCII
 - `gui/texticons.gui` (309 текстиконок) — копия ванильного; 30 имён иконок повторены в `gui/00_ef_texticons.gui` (249).
 
 ### Файлы E&F
-- `gui/00_ef_deported_gui_1.gui` (97 тыс. строк) — 3 типа: `market_global_panel_content` (:37, рынок валют: купить/продать
-  по каждой валюте; облигации финцентра), `country_panel_currency_panel_content` (:87901), `state_panel_currency_panel_content`
-  (:88024). Две пустые `types market_states_panel`-обёртки. Повтор блока по валютам.
+- `gui/00_ef_deported_gui_1.gui` (16 тыс. строк) — 3 типа: `market_global_panel_content` (:37, сравнение страны игрока и
+  владельца рынка; покупка облигаций владельца рынка), `country_panel_currency_panel_content` (:6988),
+  `state_panel_currency_panel_content` (:7111). Две пустые `types market_states_panel`-обёртки. Обмен валют по 95 валютам —
+  в `_archive/ef_forex_windows/`.
 - `gui/00_ef_deported_gui_2.gui` (11906 строк) — 205 типов: 191 `ef_bp_*_piechart` (круговые диаграммы запасов/денег по
   валютам; данные из `GetGlobalList('..._variable_list_ordered_N')`), `currency_symbol_top_bar` (один текстбокс `currency_symbol`
   символов), `ef_economy_N_formwork`/`ef_financial_N_formwork` (:9289-10680), `vo_plotline_minting` (:10984).
@@ -63,10 +64,8 @@ GUI-тип регистрирует первый файл по имени (ASCII
   `gui/PSC_goods_texticons.gui` (4 иконки строительных товаров).
 
 ### Скриптовые GUI / кнопки / прогресс-бары / понятия
-- `common/scripted_guis/00_economic_scripted_guis.txt` — выбор валюты `choose_currency_type_<cur>`
-  (+`_visible`), `<cur>_buy_in_gold`/`_sell_in_gold`, девальвация/ревальвация
-  (`devaluation_*`, `revaluation_*`, `set_*_rate`), `currency_quantity_increase/_reduce`, `is_ai`/`not_is_ai`, законы стандартов.
-- `common/scripted_guis/00_stockpile_scripted_guis.txt` — переключатели покупки/продажи валют `<cur>_buy_on`/`_sell_on` (+`_v`).
+- `common/scripted_guis/00_economic_scripted_guis.txt` — девальвация/ревальвация
+  (`devaluation_*`, `revaluation_*`, `set_*_rate`), `is_ai`/`not_is_ai`, законы стандартов.
 - `common/scripted_guis/00_financial_scripted_guis.txt` — облигации, кредит ЦБ, `speculative_share_N_button` (sgui),
   `transfert_currency_to_investement_pool_*`, `global_player_help_*`.
 - `common/scripted_guis/09_ef_other.txt` — `EF_room_gui_N`/`EF_current_room_gui_N` (100+100; панель `gold_reserve_window`),
@@ -107,13 +106,10 @@ GUI-тип регистрирует первый файл по имени (ASCII
 - Открытие секций/окон: `GetVariableSystem.Toggle('<флаг>')` (чисто GUI, скрипт не видит). Окно резервов: ещё
   `ExecuteConsoleCommand('gui.createwidget gui/ef_dev_and_custom_windows/ef_custom_windows.gui gold_reserve_window')`.
 - Журналы: `scripted_button`/`scripted_progress_bar`/`widget = { gui = …; name = …; container = … }` в `common/journal_entries/*`.
-- Выбор валюты в панели рынка: sgui `choose_currency_type_<cur>` обнуляет переменные `choose_currency_type_*` страны и ставит
-  свою в 1; `choose_currency_type_<cur>_visible` показывает блок.
 
 ## Переменные
 | имя | смысл | пишет | читает |
 |---|---|---|---|
-| `choose_currency_type_<cur>` (страна) | выбранная в панели валюта | sgui `choose_currency_type_<cur>` | `choose_currency_type_<cur>_visible` |
 | `zz_ef_hook_countries` (глобальный список), `zz_ef_hook_pending` | очередь моста | `ld_money_model.txt` | `gui/ld_money_hook.gui`, `zz_ef_money_hook_receive` |
 | `zz_ef_hook_probe_calls` (глобальная) | счётчик запусков моста | `zz_ef_money_hook_probe_sg` | `common/script_values/ld_money_model_values.txt` |
 | `zz_ef_cbfx_list`, `zz_ef_holders_list` | таблицы валют ЦБ и держателей | `ld_cbfx.txt` | `gui/ld_economy_panel.gui` |

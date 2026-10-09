@@ -8,7 +8,7 @@
 коэффициент, закомментированный вызов); `мёртвый` — ни откуда не вызывается; `дубль` — считает то же или пишет те же
 счета, что модель `ld_*`. Строки файлов — на момент записи, при правке файла сдвигаются: искать по имени.
 
-Итого: мёртвый 4, выключен 0, дубль 3, живой 214.
+Итого: мёртвый 4, выключен 0, дубль 3, живой 210.
 
 ## Денежная модель и металл (`money-model.md`)
 
@@ -34,7 +34,6 @@
 | Возврат металла ушедшего ЦБ-региона zz_ef_cb_state_owner_step | живой | common/scripted_effects/ld_subject_metal.txt:82; вызов ld_money_model.txt:118 | вызов в недельном шаге | — |
 | Обёртка введения валюты (металл столицы возвращается) | живой | common/scripted_effects/ld_currency_intro_metal.txt:16,40; вызовы 09_introduction_building_lvl.txt:34323,34454 | zz_ef_cur_intro_before/after зовёт introduction_new_currency | — |
 | Сид переменных запасов на регионах (7 переменных) | живой | common/scripted_effects/ld_stockpile_state_var_seed.txt:38-92; common/on_actions/ld_stockpile_state_var_init.txt; common/history/global/zz_ef_init_stockpiling_state_vars.txt | on_game_started_after_lobby + месячная страховка по глобальной zz_ef_stockpile_state_vars_seeded | — |
-| E&F: forex ЦБ за золото (<cur>_buy_in_gold / <cur>_sell_in_gold, 95 валют) | живой | common/scripted_guis/00_economic_scripted_guis.txt:1643,1749,2048 | кнопки пишут gold_state_1/silver_state_1 и валютные запасы; обёрнуты `zz_ef_fxb_before/_after` (`ld_fx_buttons.txt`, R2): металл обоих ЦБ — известное движение сверки (`zz_ef_mt_fx_*`), своя валюта эмитента возвращается, купленное — вклад в банках эмитента (`zz_ef_nr_fx_pend` → `zz_ef_nr_dep_step`) | окно валют E&F |
 | E&F: <cur>_c_no_own (запас валюты минус money_supply, 95 валют) | живой | common/script_values/01_economic_currency_scripted_value.txt:14334; currency_no_own :11085 | читается только currency_no_own → gui/ld_economy_panel.gui:6975; счета не пишет; прежняя сумма в money_supply_stockpile_by_other_country заменена на zz_ef_fx_liab_all | ld_economy_panel.gui (строка currency_no_own) |
 
 ## Валюты и стандарты (`currencies.md`)
@@ -133,7 +132,6 @@
 | Сила валюты → торговля zz_ef_currency_trade_step | живой | common/scripted_effects/ld_reference_strength.txt:15; вызов ld_money_model.txt:1011 | месяц; add_modifier zz_ef_currency_trade (static_modifiers/ld_currency_trade.txt) | модификатор страны |
 | Объявление state_sell_orders_liquidity_currency_add | живой | common/modifier_type_definitions/ld_liquidity_currency_sell_orders.txt:21 | refs=12 (модификаторы местной валюты) | — |
 | Спрос бизнеса на услугу расчётов pm_market_liquidity_currency | живой | common/production_methods/00_ef_market_liquidity.txt:36 | refs=14; вход liquidity_currency 28 на рабочего; покупает у банков zz_ef_bank | рынок «расчёты банков» |
-| Форекс игрока <cur>_buy_in_gold / <cur>_sell_in_gold | живой | common/scripted_guis/00_economic_scripted_guis.txt:1643… | кнопки gui/00_ef_deported_gui_1.gui:1068…; пишут те же gold_state_1/stockpiling_<cur>_state_1 — проводкой через `ld_fx_buttons.txt` (строка выше) | окно покупки/продажи валют E&F |
 | Кнопка trade_balance_actualized (и trade_balance_0) | живой | common/scripted_guis/09_ef_other.txt:2182,5275 | пишет trade_balance_in_gold_fixe = trade_balance_in_gold и *_fix при нажатии игроком (кнопки ld_economy_panel.gui:2768,2976); модель ld держит var=0 и не читает, но E&F central_bank_reserves_* читает — расхождение | таблица торгового баланса |
 | Пары/валютные значения trade_balance_* (script_values) | живой | common/script_values/00_economic_scripted_value.txt:5661-5913; 01_economic_currency_scripted_value.txt:285996-286038 | refs 2-34; trade_balance_bimetallic_rate_gold_to_silver refs=0 | — |
 
@@ -272,9 +270,7 @@
 | Круг держателей zz_ef_holders_piechart | живой | gui/ld_economy_panel.gui; common/scripted_guis/ld_cbfx.txt:410 | вызов в ld_economy_panel.gui:2994; список zz_ef_holders_list | вкладка Экономика |
 | Таблица валют ЦБ (zz_ef_cbfx_update_sorted) | живой | common/scripted_guis/ld_cbfx.txt:106; gui/ld_economy_panel.gui:2971 | onclick GetScriptedGui('zz_ef_cbfx_update_sorted') | вкладка Экономика |
 | Таблицы держателей облигаций zz_ef_bt_in_list / zz_ef_bt_out_list | живой | common/scripted_guis/ld_bond_tables.txt; gui/ld_cb_rate_panel.gui | глобальные списки читаются GUI | вкладка Финансы |
-| Рынок валют: market_global_panel_content (купить/продать по валютам, 91 блок) | живой | gui/00_ef_deported_gui_1.gui:37-87835; gui/market_panel.gui:949 | вызов в market_panel.gui:949; кнопки зовут `<cur>_buy_in_gold`/`_sell_in_gold` (денежная логика — другие агенты) | панель рынка |
 | Резервы: country_/state_panel_currency_panel_content | живой | gui/00_ef_deported_gui_1.gui:87901,88024; country_panel.gui:968; states_panel.gui:1459 | вызовы в панелях | страна, штат |
-| Выбор валюты choose_currency_type_<cur> (+_visible) | живой | common/scripted_guis/00_economic_scripted_guis.txt:40536+; gui/00_ef_deported_gui_1.gui:444 | GetScriptedGui('choose_currency_type_<cur>_visible') в GUI | панель рынка (валюты) |
 | Окно резервов gold_reserve_window (+EF_room_gui_N) | живой | gui/ef_dev_and_custom_windows/ef_custom_windows.gui:2; gui/ld_economy_panel.gui:2554-2560; common/scripted_guis/09_ef_other.txt:15 | Toggle('gold_reserve_window') в ld_economy_panel.gui:2560 | окно резервов |
 | Подмены ванили maj/NonEssential/* и maj/Essential/{building_browser_panel,building_details_panel,goods_panel,goods_state_panel,production_methods}.gui | живой | gui/ef_dev_and_custom_windows/maj/ | подкаталог мода выигрывает у ванильных файлов с тем же именем; у `building_details_panel.gui` нет одноимённого в корне мода, `00_MPM_building_details_panel.gui` объявляет только 3 типа из 50; копии устарели относительно ванили 1.13 (нет enemy_naval_mission_marker, coastal_building_marker и др.) | карта, подсказки, правый клик, военные панели |
 | Журнальный виджет widget_je_ef_efcc_situation | живой | gui/scripted_widgets/00_ef_custom_widgets.gui:686; common/journal_entries/00_ef_divers_je.txt:1662 | подключён в журнале | журнал «efcc» |
