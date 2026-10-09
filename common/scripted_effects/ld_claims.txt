@@ -208,7 +208,8 @@ zz_ef_rq_crisis_resell = {
 			zz_ef_crisis_redeem = yes
 		}
 		zz_ef_rq_get = { MAP = zz_ef_rq_cb_m D = scope:target_country }
-		zz_ef_rq_add = { H = cb K = m D = scope:target_country V = { value = var:zz_ef_rq_h multiply = -1 } }
+		set_variable = { name = zz_ef_rq_neg value = { value = var:zz_ef_rq_h multiply = -1 } }
+		zz_ef_rq_add = { H = cb K = m D = scope:target_country V = var:zz_ef_rq_neg }
 		# the deposits cancelled against D's metal: D's banks owe them no more (their capital, the pool unchanged)
 		scope:target_country = {
 			if = { limit = { NOT = { has_variable = zz_ef_bank_capital } } set_variable = { name = zz_ef_bank_capital value = 0 } }
@@ -247,7 +248,10 @@ zz_ef_rq_world_check = {
 		save_temporary_scope_as = zz_ef_rq_k
 		set_global_variable = { name = zz_ef_rq_t value = "global_variable_map(zz_ef_clr_pot|scope:zz_ef_rq_k)" }
 		change_global_variable = { name = zz_ef_rq_w_pot add = global_var:zz_ef_rq_t }
-		scope:zz_ef_rq_k = { change_variable = { name = zz_ef_rq_chk_m subtract = global_var:zz_ef_rq_t } }
+		scope:zz_ef_rq_k = {
+			if = { limit = { NOT = { has_variable = zz_ef_rq_chk_m } } set_variable = { name = zz_ef_rq_chk_m value = 0 } }
+			change_variable = { name = zz_ef_rq_chk_m subtract = global_var:zz_ef_rq_t }
+		}
 	}
 	every_country = {
 		limit = { OR = { has_variable = zz_ef_rq_out_m has_variable = zz_ef_rq_out_b has_variable = zz_ef_rq_pot } }
@@ -290,6 +294,7 @@ zz_ef_rq_check_map = {
 			save_temporary_scope_as = zz_ef_rq_k
 			save_temporary_scope_as = zz_ef_rq_key
 			scope:zz_ef_rq_hd = { $MAP$_read = yes set_variable = { name = zz_ef_rq_t value = var:zz_ef_rq_h } }
+			if = { limit = { NOT = { has_variable = zz_ef_rq_chk_$K$ } } set_variable = { name = zz_ef_rq_chk_$K$ value = 0 } }
 			change_variable = { name = zz_ef_rq_chk_$K$ add = scope:zz_ef_rq_hd.var:zz_ef_rq_t }
 			change_global_variable = { name = zz_ef_rq_w_n_$K$ add = 1 }
 		}

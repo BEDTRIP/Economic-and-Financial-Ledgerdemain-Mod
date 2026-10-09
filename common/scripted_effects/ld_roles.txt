@@ -25,11 +25,18 @@ zz_ef_roles_world_pass = {
 		limit = {
 			OR = {
 				NOT = { has_global_variable = zz_ef_role_year_next }
-				global_var:zz_ef_month_n >= global_var:zz_ef_role_year_next
+				AND = {
+					has_global_variable = zz_ef_month_n
+					global_var:zz_ef_month_n >= global_var:zz_ef_role_year_next
+				}
 			}
 		}
 		set_global_variable = { name = zz_ef_role_yearly value = yes }
-		set_global_variable = { name = zz_ef_role_year_next value = { value = global_var:zz_ef_month_n add = 12 } }
+		set_global_variable = { name = zz_ef_role_year_next value = 12 }
+		if = {
+			limit = { has_global_variable = zz_ef_month_n }
+			set_global_variable = { name = zz_ef_role_year_next value = { value = global_var:zz_ef_month_n add = 12 } }
+		}
 		# the world's GDP and trade (the week's exports + imports of the countries in the model)
 		set_global_variable = { name = zz_ef_role_w_gdp value = 0 }
 		set_global_variable = { name = zz_ef_role_w_trade value = 0 }
