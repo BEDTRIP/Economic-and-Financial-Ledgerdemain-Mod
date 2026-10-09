@@ -37,8 +37,10 @@ zz_ef_metal_gold = {
 		has_law = law_type:law_gold_standard
 		AND = {
 			zz_ef_exchange_std = yes
-			NOT = { var:zz_ef_xmetal ?= flag:silver }
-			NOT = { var:zz_ef_xmetal ?= flag:bimet }
+			OR = {
+				var:zz_ef_xmetal ?= flag:gold
+				NOT = { has_variable = zz_ef_xmetal }
+			}
 		}
 	}
 }
