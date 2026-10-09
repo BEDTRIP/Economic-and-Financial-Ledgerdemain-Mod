@@ -1,7 +1,56 @@
-﻿# the role pass's world numbers for its log line (EFY), read in a country scope.
+﻿# Category A's thresholds (Д.R8.1): a share of the world's GDP / of the world's trade (exports + imports of the
+# countries in the model) that makes a country significant; picked so that A holds ~25-35 countries.
+zz_ef_role_a_gdp_share = 0.01
+zz_ef_role_a_trade_share = 0.015
+# the country's week of trade (exports + imports), for the yearly pass's world sum
+zz_ef_role_trade_v = {
+	value = zz_ef_v_f_exp
+	add = zz_ef_v_f_imp
+	min = 0
+}
+# the country's shares against the last yearly pass's world sums
+zz_ef_role_gdp_share = {
+	value = 0
+	if = {
+		limit = {
+			has_global_variable = zz_ef_role_w_gdp
+			global_var:zz_ef_role_w_gdp > 0
+		}
+		value = gdp
+		divide = global_var:zz_ef_role_w_gdp
+	}
+}
+zz_ef_role_trade_share = {
+	value = 0
+	if = {
+		limit = {
+			has_global_variable = zz_ef_role_w_trade
+			global_var:zz_ef_role_w_trade > 0
+		}
+		value = zz_ef_role_trade_v
+		divide = global_var:zz_ef_role_w_trade
+	}
+}
+# the rank for the log: 3 -- a great power, 2 -- a major power, 0 -- lower
+zz_ef_role_rank_v = {
+	value = 0
+	if = { limit = { country_rank >= rank_value:great_power } value = 3 }
+	else_if = { limit = { country_rank >= rank_value:major_power } value = 2 }
+}
+# the role pass's world numbers for its log line (EFY), read in a country scope.
 zz_ef_role_n_a_v = { value = global_var:zz_ef_role_n_a }
 zz_ef_role_n_b_v = { value = global_var:zz_ef_role_n_b }
 zz_ef_role_n_v_v = { value = global_var:zz_ef_role_n_v }
 zz_ef_role_n_moves_v = { value = global_var:zz_ef_role_n_moves }
-zz_ef_role_gdp40_v = { value = global_var:zz_ef_role_gdp40 }
-zz_ef_role_gdp50_v = { value = global_var:zz_ef_role_gdp50 }
+zz_ef_role_yearly_v = {
+	value = 0
+	if = { limit = { global_var:zz_ef_role_yearly = yes } value = 1 }
+}
+zz_ef_role_w_gdp_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_role_w_gdp } value = global_var:zz_ef_role_w_gdp }
+}
+zz_ef_role_w_trade_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_role_w_trade } value = global_var:zz_ef_role_w_trade }
+}

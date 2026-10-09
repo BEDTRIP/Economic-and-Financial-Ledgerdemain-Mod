@@ -16,3 +16,14 @@ zz_ef_role_is_v = {
 	has_variable = zz_ef_role
 	var:zz_ef_role = 3
 }
+
+# Category A (Д.R8.1): the player, the great and the major powers, a share of the world's GDP or trade at least the
+# threshold (the world's sums -- the last yearly pass, ld_roles.txt).
+zz_ef_role_significant = {
+	OR = {
+		is_player = yes
+		country_rank >= rank_value:major_power
+		zz_ef_role_gdp_share >= zz_ef_role_a_gdp_share
+		zz_ef_role_trade_share >= zz_ef_role_a_trade_share
+	}
+}

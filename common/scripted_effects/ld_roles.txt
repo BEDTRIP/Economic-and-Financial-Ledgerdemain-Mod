@@ -1,40 +1,43 @@
 ﻿#############################################
-# the countries' roles in the money model, var:zz_ef_role.
-#   A (1) -- the full step every week: the player (at once), every country with a central bank, the first 40 by GDP;
-#           out of A only below the 50th place by GDP 6 months running (not the player, not a CB country).
-#   B (2) -- the same accounts and the same weekly step (R1б, В6); the bridge every 4 weeks; banks and companies as aggregates (R4 / R6).
-#   V (3) -- decentralized countries (country_type decentralized, 158 in 1836): no monthly step, no weekly chain,
-#           no GUI bridge, no world account. every_country does not iterate them
-#, so they get no role var at all: outside the scheduler,
+# the countries' roles in the money model, var:zz_ef_role (понятие «Категория А»; Д.R8.1, Д.R8.2, Д.R8.4).
+#   A (1) -- the economically significant: the player (at once), the great and the major powers, and a country whose
+#           share of the world's GDP or of the world's trade is at least the threshold (zz_ef_role_a_gdp_share,
+#           zz_ef_role_a_trade_share; picked so that A holds ~25-35 countries). Decided once a year by the year's
+#           results; no time in a role, no «6 months below».
+#   B (2) -- the rest; the same accounts and the same weekly step (R1б, В6), the bridge every 4 weeks; a country with a
+#           CB outside A is B with its CB (Д.R8.2).
+#   V (3) -- decentralized countries (country_type decentralized): no monthly step, no weekly chain, no GUI bridge, no
+#           world account. every_country does not iterate them, so they get no role var at all: outside the scheduler,
 #           only E&F's monthly hub (zz_ef_monthly_unscheduled); the V branch catches a country that turns decentralized.
-# A role holds at least 12 months after a change (not for the player and a new CB): no flapping at the 40th place.
-# Once a month, one pass for the whole world (on_monthly_pulse: on_actions/ld_roles_on_actions.txt): the GDP of the
-# 40th and the 50th country, then every country. A change of role moves the balances by a posting
-# (zz_ef_role_change: A and B keep the same country accounts today, so nothing moves yet -- the banks' and the
-# companies' own accounts come in R4 / R6 and their split / merge with them).
+# Monthly, one pass for the whole world (on_monthly_pulse: on_actions/ld_roles_on_actions.txt): the yearly decision in
+# its month (global_var:zz_ef_role_year_next), else only the countries with no role yet and those turning V.
 #############################################
 
 # Global scope (on_monthly_pulse).
 zz_ef_roles_world_pass = {
 	set_global_variable = { name = zz_ef_roles_done value = yes }
-	set_global_variable = { name = zz_ef_role_gdp40 value = 0 }
-	set_global_variable = { name = zz_ef_role_gdp50 value = 0 }
-	ordered_country = {
-		order_by = gdp
-		position = 39
-		check_range_bounds = no
-		set_global_variable = { name = zz_ef_role_gdp40 value = gdp }
-	}
-	ordered_country = {
-		order_by = gdp
-		position = 49
-		check_range_bounds = no
-		set_global_variable = { name = zz_ef_role_gdp50 value = gdp }
-	}
 	set_global_variable = { name = zz_ef_role_n_a value = 0 }
 	set_global_variable = { name = zz_ef_role_n_b value = 0 }
 	set_global_variable = { name = zz_ef_role_n_v value = 0 }
 	set_global_variable = { name = zz_ef_role_n_moves value = 0 }
+	set_global_variable = { name = zz_ef_role_yearly value = no }
+	if = {
+		limit = {
+			OR = {
+				NOT = { has_global_variable = zz_ef_role_year_next }
+				global_var:zz_ef_month_n >= global_var:zz_ef_role_year_next
+			}
+		}
+		set_global_variable = { name = zz_ef_role_yearly value = yes }
+		set_global_variable = { name = zz_ef_role_year_next value = { value = global_var:zz_ef_month_n add = 12 } }
+		# the world's GDP and trade (the week's exports + imports of the countries in the model)
+		set_global_variable = { name = zz_ef_role_w_gdp value = 0 }
+		set_global_variable = { name = zz_ef_role_w_trade value = 0 }
+		every_country = {
+			change_global_variable = { name = zz_ef_role_w_gdp add = { value = gdp min = 0 } }
+			change_global_variable = { name = zz_ef_role_w_trade add = zz_ef_role_trade_v }
+		}
+	}
 	every_country = {
 		zz_ef_role_update = yes
 	}
@@ -43,96 +46,55 @@ zz_ef_roles_world_pass = {
 		ordered_country = {
 			order_by = gdp
 			max = 1
-			debug_log = "EFY|[TimeKeeper.GetCurrentDate.GetString]|WORLD|a [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_n_a_v')|0]|b [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_n_b_v')|0]|v [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_n_v_v')|0]|moves [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_n_moves_v')|0]|gdp40 [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_gdp40_v')|0]|gdp50 [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_gdp50_v')|0]"
+			debug_log = "EFY|[TimeKeeper.GetCurrentDate.GetString]|WORLD|a [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_n_a_v')|0]|b [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_n_b_v')|0]|v [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_n_v_v')|0]|moves [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_n_moves_v')|0]|yearly [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_yearly_v')|0]|w_gdp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_w_gdp_v')|0]|w_trade [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_w_trade_v')|0]"
 		}
 	}
 }
 
-# Country scope. var:zz_ef_role_months -- months in the role; var:zz_ef_role_low -- months running below the 50th.
+# Country scope: the role by the rule -- in the yearly month for every country, otherwise only with no role yet, for a
+# player and for a country turning V or back.
 zz_ef_role_update = {
-	if = {
-		limit = { NOT = { has_variable = zz_ef_role_low } }
-		set_variable = { name = zz_ef_role_low value = 0 }
-	}
-	if = {
-		limit = { gdp < global_var:zz_ef_role_gdp50 }
-		change_variable = { name = zz_ef_role_low add = 1 }
-	}
-	else = {
-		set_variable = { name = zz_ef_role_low value = 0 }
-	}
-	if = {
-		limit = { NOT = { has_variable = zz_ef_role_months } }
-		set_variable = { name = zz_ef_role_months value = 0 }
-	}
-	# the new role
 	set_local_variable = { name = zz_ef_role_new value = 2 }
 	if = {
 		limit = { is_country_type = decentralized }
 		set_local_variable = { name = zz_ef_role_new value = 3 }
 	}
 	else_if = {
-		limit = {
-			OR = {
-				is_player = yes
-				has_modifier = has_central_bank
-			}
-		}
+		limit = { zz_ef_role_significant = yes }
 		set_local_variable = { name = zz_ef_role_new value = 1 }
-	}
-	else_if = {
-		limit = { zz_ef_role_is_a = yes }
-		# out of A: below the 50th place 6 months running, at least 12 months in A
-		set_local_variable = { name = zz_ef_role_new value = 1 }
-		if = {
-			limit = {
-				var:zz_ef_role_low >= 6
-				var:zz_ef_role_months >= 12
-			}
-			set_local_variable = { name = zz_ef_role_new value = 2 }
-		}
-	}
-	else_if = {
-		limit = { zz_ef_role_is_b = yes }
-		# into A: the first 40 by GDP, at least 12 months in B
-		if = {
-			limit = {
-				gdp >= global_var:zz_ef_role_gdp40
-				global_var:zz_ef_role_gdp40 > 0
-				var:zz_ef_role_months >= 12
-			}
-			set_local_variable = { name = zz_ef_role_new value = 1 }
-		}
-	}
-	else = {
-		# the first assignment (or out of V): by GDP at once
-		if = {
-			limit = {
-				gdp >= global_var:zz_ef_role_gdp40
-				global_var:zz_ef_role_gdp40 > 0
-			}
-			set_local_variable = { name = zz_ef_role_new value = 1 }
-		}
 	}
 	if = {
 		limit = {
-			has_variable = zz_ef_role
-			var:zz_ef_role = local_var:zz_ef_role_new
+			OR = {
+				global_var:zz_ef_role_yearly = yes
+				NOT = { has_variable = zz_ef_role }
+				local_var:zz_ef_role_new = 3
+				zz_ef_role_is_v = yes
+				AND = {
+					is_player = yes
+					local_var:zz_ef_role_new = 1
+				}
+			}
+			OR = {
+				NOT = { has_variable = zz_ef_role }
+				NOT = { var:zz_ef_role = local_var:zz_ef_role_new }
+			}
 		}
-		if = {
-			limit = { var:zz_ef_role_months < 120 }
-			change_variable = { name = zz_ef_role_months add = 1 }
-		}
-	}
-	else = {
 		zz_ef_role_change = yes
 	}
 	if = {
-		limit = { var:zz_ef_role = 1 }
+		limit = { var:zz_ef_role ?= 1 }
 		change_global_variable = { name = zz_ef_role_n_a add = 1 }
+		if = {
+			limit = {
+				global_var:zz_ef_role_yearly = yes
+				zz_ef_logs_on = yes
+			}
+			debug_log = "EFY|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|a|gdp_sh [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_gdp_share')|3]|trade_sh [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_trade_share')|3]|rank [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_rank_v')|0]"
+		}
 	}
 	else_if = {
-		limit = { var:zz_ef_role = 2 }
+		limit = { var:zz_ef_role ?= 2 }
 		change_global_variable = { name = zz_ef_role_n_b add = 1 }
 	}
 	else = {
@@ -141,7 +103,7 @@ zz_ef_role_update = {
 }
 
 # Country scope, local_var:zz_ef_role_new set. The posting of the balances between the roles' accounts goes here
-# (схема 4.1, п. 5): A and B hold the same country accounts in R1а -- nothing to move; into V the chain stops itself
+# (схема 4.1, п. 5): A and B hold the same country accounts -- nothing to move; into V the chain stops itself
 # (zz_ef_money_model_weekly) and the accounts stay frozen until the country leaves V.
 zz_ef_role_change = {
 	if = {
@@ -152,11 +114,10 @@ zz_ef_role_change = {
 				zz_ef_logs_on = yes
 				NOT = { local_var:zz_ef_role_new = 3 }
 			}
-			debug_log = "EFY|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|move|from [THIS.GetCountry.MakeScope.Var('zz_ef_role').GetValue|0]|months [THIS.GetCountry.MakeScope.Var('zz_ef_role_months').GetValue|0]|low [THIS.GetCountry.MakeScope.Var('zz_ef_role_low').GetValue|0]|gdp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_raw_gdp')|0]"
+			debug_log = "EFY|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|move|from [THIS.GetCountry.MakeScope.Var('zz_ef_role').GetValue|0]|gdp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_raw_gdp')|0]"
 		}
 	}
 	set_variable = { name = zz_ef_role value = local_var:zz_ef_role_new }
-	set_variable = { name = zz_ef_role_months value = 0 }
 }
 
 # Country scope (the player's, from the GUI bridge -- scripted_guis/ld_money_hook.txt): role A at once.

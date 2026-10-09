@@ -104,20 +104,23 @@
 клиринг (`zz_ef_ext_net_week`), платёжный баланс и мировой пул торговли читают эти переменные. Касса торговых центров
 (`zz_ef_tc_cash`, счёт `tc`) — часть кассы бизнеса (M1), за границу не вычитается.
 
-## Роли стран (R1а.3)
+## Роли стран (R1а.3, R8б.3)
 `var:zz_ef_role`: 1 — **А** (полный шаг каждую неделю), 2 — **Б** (тот же недельный шаг, мост раз в 4 недели; агрегаты субъектов — R4 / R6), 3 — **В**
 (`is_country_type = decentralized`: ни месячного шага модели, ни недельной цепочки, ни моста; счетов нет). `every_country`
 децентрализованные не перебирает (прогон r1007_180243: 284 = 442 − 158), так что переменной роли у них нет — вне планировщика,
-только хаб E&F через `zz_ef_monthly_unscheduled`. Пересчёт раз в
-месяц одним проходом по миру: `on_monthly_pulse` → `zz_ef_roles_world_pass` (`common/scripted_effects/ld_roles.txt`,
-on_action — `common/on_actions/ld_roles_on_actions.txt`): глобальные `zz_ef_role_gdp40` / `zz_ef_role_gdp50` — ВВП 40-й и
-50-й страны (`ordered_country`), затем `zz_ef_role_update` у каждой страны. А — игрок, страны с ЦБ (`has_central_bank`),
-первые 40 по ВВП; выход из А — ниже 50-го места 6 месяцев подряд (`zz_ef_role_low`) и не меньше 12 месяцев в роли
-(`zz_ef_role_months`); вход Б → А по ВВП — тоже после 12 месяцев в Б; первое назначение — сразу. Смена роли —
-`zz_ef_role_change` (место проводки переноса остатков; в R1а у А и Б одни и те же счета страны — переносить нечего).
-Триггеры `zz_ef_role_is_a/b/v` — `common/scripted_triggers/ld_roles_triggers.txt` (нет роли — ни одна, шаг как прежде);
-числа для лога `EFY` — `common/script_values/ld_roles_values.txt`. Роль В снимает месячный шаг (`trigger` у
-`zz_ef_money_model_monthly`) и недельный (планировщик шагает только А и Б).
+только хаб E&F через `zz_ef_monthly_unscheduled`. Проход по миру — раз в месяц: `on_monthly_pulse` →
+`zz_ef_roles_world_pass` (`common/scripted_effects/ld_roles.txt`, on_action — `common/on_actions/ld_roles_on_actions.txt`).
+Раз в 12 месяцев (`global_var:zz_ef_role_year_next` против номера месяца `zz_ef_month_n`; первый — на старте) —
+решение года: мировые суммы ВВП и торговли (`zz_ef_role_w_gdp`, `zz_ef_role_w_trade` — экспорт + импорт недели
+стран модели), затем каждой стране — А, если категория А (`zz_ef_role_significant`, `ld_roles_triggers.txt`: игрок,
+великая или крупная держава, доля мирового ВВП ≥ `zz_ef_role_a_gdp_share` или торговли ≥ `zz_ef_role_a_trade_share`,
+`ld_roles_values.txt`; Д.R8.1, Д.R8.4), иначе Б; ЦБ роли не даёт (Б с ЦБ, Д.R8.2). В остальные месяцы — только страна
+без роли, игрок (сразу А) и переход в В / из В. Смена роли — `zz_ef_role_change` (место проводки переноса остатков; у
+А и Б одни и те же счета страны — переносить нечего). Триггеры `zz_ef_role_is_a/b/v` —
+`common/scripted_triggers/ld_roles_triggers.txt` (нет роли — ни одна, шаг как прежде); числа для лога `EFY` —
+`common/script_values/ld_roles_values.txt` (строка `EFY|…|<страна>|a|gdp_sh|trade_sh|rank` — каждая страна А в месяц
+решения). Роль В снимает месячный шаг (`trigger` у `zz_ef_money_model_monthly`) и недельный (планировщик шагает
+только А и Б).
 
 ## Поток / порядок
 0. **Планировщик** (R1а.4): одна глобальная цепочка на «якорной» стране (крупнейшая по ВВП на момент старта; у движка нет глобального отложенного on_action). Старт — `on_game_started_after_lobby` (`zz_ef_sched_start`; на первом бюджетном тике после первой недели (не раньше 8.1) — настройка старта E&F один раз, `zz_ef_start_setup`, `ld_start_setup.txt`, шаги — со следующего дня: ЦБ и финцентры по ВВП, валюта подданных, металл ЦБ — первый шаг модели видит страну настроенной) и месячный `on_monthly_pulse` (`zz_ef_sched_ensure`, если цепочка потеряна: нет `global_var:zz_ef_sched_alive`, 3 дня): зонд якоря `zz_ef_sched_probe` ждёт смены казны (бюджетный тик, один день недели у всех стран — проверка Р10), ≤8 дней; дальше `zz_ef_sched_day` раз в день. День: `zz_ef_dom` + 1 (день месяца, 0 на `on_monthly_pulse`), у каждой страны роли А / Б — `zz_ef_sched_country_day`; в конце дня 6 — мировой проход `zz_ef_world_week_close` (окно мировой строки `zz_ef_world_window_open` и палаты клиринга `zz_ef_clr_window_roll`; их глобалки живут 9 дней — запасной путь, если планировщик потерян); `zz_ef_sched_d` 0..6, `zz_ef_sched_week` + 1. Страна: при первом заходе `zz_ef_sched_slot_assign` — `zz_ef_week_slot` (счётчик `zz_ef_week_slot_n` по модулю 7), `zz_ef_week_phase` (/7 по модулю 4), `zz_ef_m_offset` = слот + 7 × фаза; **месячные шаги** — раз в календарный месяц (`zz_ef_m_done` против `zz_ef_month_n`), когда `zz_ef_dom` > смещения: `zz_ef_sched_monthly` по порядку — хаб E&F `ef_on_monthly_pulse_country`, `zz_ef_money_model_monthly`, `zz_ef_bank_monthly`, `zz_ef_cb_rate_monthly`, `zz_ef_capitalization_monthly`, `zz_ef_bubble_monthly`, `zz_pb_ef_overbuild_counter`, `zz_pb_ef_ai_sector_downsize`, `zz_ef_init_stockpile_state_vars_monthly_backstop` (с `on_monthly_pulse_country` они сняты); **недельный шаг** — в свой день, своим on_action `zz_ef_sched_step` (чтобы `root` был страной, а не якорем): А и Б — каждую неделю (В6); `zz_ef_step_weeks` — недель с прошлого шага (`zz_ef_last_step_week`, 1..8; > 1 только после разрыва — смена роли, перезапуск цепочки), `zz_ef_sw` умножает на него потоки, измеренные за одну неделю (взносы и перевод пула, проценты ЦБ / вкладов / потребкредита / бизнес-кредита / консолей / облигаций держателя, строки моста `ext`, `abr`, `aint`, торговля, сборы, дивиденды, вход металла зданий и потребление штатов), счётчики `zz_ef_weeks_run` и колец — на столько же. Страны вне планировщика (В, без роли, цепочка не запущена) получают месячный пульс движка через `zz_ef_monthly_unscheduled` (вместо `ef_on_monthly_pulse_country` в `00_ef_on_action.txt`): В и без роли — только хаб E&F; А / Б при потерянной цепочке — все месячные шаги.
