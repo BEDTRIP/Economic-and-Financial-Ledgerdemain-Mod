@@ -18,22 +18,27 @@ ld_probe_map.1 = {
 		if = { limit = { variable_map_size = { name = zz_ef_pm_n value = 4 } } debug_log = "EFZ|size_n|4" }
 		if = { limit = { variable_map_size = { name = zz_ef_pm_s value = 4 } } debug_log = "EFZ|size_s|4" }
 		if = { limit = { is_key_in_variable_map = { name = zz_ef_pm_n target = c:GBR } } debug_log = "EFZ|key_gbr|yes" }
-		set_variable = { name = zz_ef_pm_r1 value = variable_map(zz_ef_pm_n|c:GBR) }
+		set_variable = { name = zz_ef_pm_r1 value = "variable_map(zz_ef_pm_n|c:GBR)" }
 		debug_log = "EFZ|read_gbr|[ROOT.GetCountry.MakeScope.Var('zz_ef_pm_r1').GetValue]"
 		add_to_variable_map = { name = zz_ef_pm_n key = c:GBR value = 7 }
-		set_variable = { name = zz_ef_pm_r2 value = variable_map(zz_ef_pm_n|c:GBR) }
+		set_variable = { name = zz_ef_pm_r2 value = "variable_map(zz_ef_pm_n|c:GBR)" }
 		debug_log = "EFZ|read_gbr_after_7|[ROOT.GetCountry.MakeScope.Var('zz_ef_pm_r2').GetValue]"
 		remove_from_variable_map = { name = zz_ef_pm_n key = c:RUS }
 		if = { limit = { variable_map_size = { name = zz_ef_pm_n value = 3 } } debug_log = "EFZ|size_after_remove|3" }
 		every_key_in_variable_map = {
 			variable = zz_ef_pm_n
-			debug_log = "EFZ|iter_n|[THIS.GetCountry.GetNameNoFormatting]"
+			save_temporary_scope_as = zz_ef_pk
+			root = { set_variable = { name = zz_ef_pm_it value = "variable_map(zz_ef_pm_n|scope:zz_ef_pk)" } }
+			debug_log = "EFZ|iter_n|[THIS.GetCountry.GetNameNoFormatting]|[ROOT.GetCountry.MakeScope.Var('zz_ef_pm_it').GetValue]"
 		}
+		add_to_variable_map = { name = zz_ef_pm_g key = c:USA value = c:USA.gdp }
+		set_variable = { name = zz_ef_pm_r4 value = "variable_map(zz_ef_pm_g|c:USA)" }
+		debug_log = "EFZ|gdp_usa|[ROOT.GetCountry.MakeScope.Var('zz_ef_pm_r4').GetValue]|[c:USA.GetGDP]"
 		every_key_in_variable_map = {
 			variable = zz_ef_pm_s
 			debug_log = "EFZ|iter_s|[THIS.GetCountry.GetNameNoFormatting]"
 		}
-		set_variable = { name = zz_ef_pm_r3 value = variable_map(zz_ef_pm_s|c:USA) }
+		set_variable = { name = zz_ef_pm_r3 value = "variable_map(zz_ef_pm_s|c:USA)" }
 		debug_log = "EFZ|read_s_usa|[ROOT.GetCountry.MakeScope.Var('zz_ef_pm_r3').GetCountry.GetNameNoFormatting]"
 	}
 }
