@@ -1,8 +1,10 @@
 # Документация мода — карта
 
-Для агента, который правит мод. Читать этот файл первым, дальше — документ нужной подсистемы. Документы описывают
-текущее состояние: правка мода, которая меняет описанное, правит документ в том же коммите (`CLAUDE.md` форка).
-Игра `docs/` не читает.
+Для агента, который правит мод: **код** — где лежит, какие переменные и вызовы. **Что это и зачем** — заметки
+`понятия/` ([[_Карта понятий]]): одно понятие — одна заметка; **почему так** — `решения.md`; **что дальше** — `план.md`.
+Читать этот файл первым, дальше — документ нужной подсистемы; каждый документ начинается со смысла и ссылок на понятия.
+Документы описывают текущее состояние: правка мода, которая меняет описанное, правит документ и заметку понятия в том же
+коммите (`CLAUDE.md` форка). Игра `docs/` не читает. Ключи в файлах `ld_*` — с префиксом `zz_ef_`.
 
 ## Подсистемы
 | подсистема | документ | главные файлы |
@@ -10,7 +12,7 @@
 | Старт игры: история, хук после лобби, первые шаги модели, разовое в пульсах E&F | `game-start.md` | `common/history/`, `common/scripted_effects/ld_start_setup.txt`, `common/scripted_effects/ld_metal_accounts.txt` |
 | Точки входа: история, on_actions, порядок шагов, логи `EF*` | `entry-points.md` | `common/on_actions/`, `common/scripted_effects/00_on_action_main.txt`, `common/history/` |
 | Денежная модель и счета: M0–M3, пул, касса, металл ЦБ / банков / населения | `money-model.md` | `common/scripted_effects/ld_money_model.txt`, `common/scripted_effects/ld_metal_accounts.txt` |
-| Валюты, законы, стандарты, эталон, валютные зоны и союзы; таблица валют | `currencies.md`, `currency-table.md` | `common/laws/01_ef_currency_type.txt`, `common/script_values/01_economic_currency_scripted_value.txt`, `common/scripted_effects/ld_standard_switch.txt` |
+| Валюты, законы, стандарты, эталон, союзы; таблица валют | `currencies.md`, `currency-table.md` | `common/laws/01_ef_currency_type.txt`, `common/script_values/01_economic_currency_scripted_value.txt`, `common/scripted_effects/ld_standard_switch.txt` |
 | ЦБ: ставка, денежная политика, кредит ЦБ, облигации ЦБ, премия за риск | `central-bank.md` | `common/script_values/ld_cb_rate_values.txt`, `common/scripted_effects/ld_monetary_policy.txt` |
 | Банки и вклады | `banks.md` | `common/buildings/ld_bank.txt`, `common/scripted_effects/ld_bank_seed.txt`, `common/scripted_effects/ld_nr_deposits.txt` |
 | Облигации и консоли | `bonds.md` | `common/scripted_effects/ld_bond_ledger.txt`, `common/scripted_effects/ld_consols.txt` |
