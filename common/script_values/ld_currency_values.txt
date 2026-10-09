@@ -388,3 +388,385 @@ zz_ef_fx_gold_thaler_saxon_thaler = {
 	value = 1
 	if = { limit = { has_global_variable = zz_ef_fxvtp_thaler_saxon_thaler } value = global_var:zz_ef_fxvtp_thaler_saxon_thaler }
 }
+# a unit of a currency in an exchange standard's cover: its value if the issuer redeems in metal (last month's
+# global_var:zz_ef_fxconv_<cur>), else 0 (Д.R8а.5). Read by zz_ef_fx_reserves_metal (ld_fx_reserves_values.txt).
+zz_ef_fx_cover_dinar = {
+	value = zz_ef_fx_gold_dinar
+	if = { limit = { global_var:zz_ef_fxconv_dinar ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_dinar_algerian_dinar = {
+	value = zz_ef_fx_gold_dinar_algerian_dinar
+	if = { limit = { global_var:zz_ef_fxconv_dinar_algerian_dinar ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_dinar_iraqi_dinar = {
+	value = zz_ef_fx_gold_dinar_iraqi_dinar
+	if = { limit = { global_var:zz_ef_fxconv_dinar_iraqi_dinar ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_dinar_libyan_dinar = {
+	value = zz_ef_fx_gold_dinar_libyan_dinar
+	if = { limit = { global_var:zz_ef_fxconv_dinar_libyan_dinar ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_dinar_moroccan_dirham = {
+	value = zz_ef_fx_gold_dinar_moroccan_dirham
+	if = { limit = { global_var:zz_ef_fxconv_dinar_moroccan_dirham ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_dinar_omanian_rial = {
+	value = zz_ef_fx_gold_dinar_omanian_rial
+	if = { limit = { global_var:zz_ef_fxconv_dinar_omanian_rial ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_dinar_qiran = {
+	value = zz_ef_fx_gold_dinar_qiran
+	if = { limit = { global_var:zz_ef_fxconv_dinar_qiran ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_dinar_saudi_riyal = {
+	value = zz_ef_fx_gold_dinar_saudi_riyal
+	if = { limit = { global_var:zz_ef_fxconv_dinar_saudi_riyal ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_dinar_serbian_dinar = {
+	value = zz_ef_fx_gold_dinar_serbian_dinar
+	if = { limit = { global_var:zz_ef_fxconv_dinar_serbian_dinar ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_dinar_tunisian_dinar = {
+	value = zz_ef_fx_gold_dinar_tunisian_dinar
+	if = { limit = { global_var:zz_ef_fxconv_dinar_tunisian_dinar ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_dinar_yugoslav_dinar = {
+	value = zz_ef_fx_gold_dinar_yugoslav_dinar
+	if = { limit = { global_var:zz_ef_fxconv_dinar_yugoslav_dinar ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_dollar_australian_dollar = {
+	value = zz_ef_fx_gold_dollar_australian_dollar
+	if = { limit = { global_var:zz_ef_fxconv_dollar_australian_dollar ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_dollar_canadian_dollar = {
+	value = zz_ef_fx_gold_dollar_canadian_dollar
+	if = { limit = { global_var:zz_ef_fxconv_dollar_canadian_dollar ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_dollar_caribbean_dollar = {
+	value = zz_ef_fx_gold_dollar_caribbean_dollar
+	if = { limit = { global_var:zz_ef_fxconv_dollar_caribbean_dollar ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_dollar_confederate_states_dollar = {
+	value = zz_ef_fx_gold_dollar_confederate_states_dollar
+	if = { limit = { global_var:zz_ef_fxconv_dollar_confederate_states_dollar ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_dollar_liberian_dollar = {
+	value = zz_ef_fx_gold_dollar_liberian_dollar
+	if = { limit = { global_var:zz_ef_fxconv_dollar_liberian_dollar ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_dollar_new_zealand_dollar = {
+	value = zz_ef_fx_gold_dollar_new_zealand_dollar
+	if = { limit = { global_var:zz_ef_fxconv_dollar_new_zealand_dollar ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_dollar_sierra_leonean_dollar = {
+	value = zz_ef_fx_gold_dollar_sierra_leonean_dollar
+	if = { limit = { global_var:zz_ef_fxconv_dollar_sierra_leonean_dollar ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_dollar_united_states_dollar = {
+	value = zz_ef_fx_gold_dollar_united_states_dollar
+	if = { limit = { global_var:zz_ef_fxconv_dollar_united_states_dollar ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_eco_ariary = {
+	value = zz_ef_fx_gold_eco_ariary
+	if = { limit = { global_var:zz_ef_fxconv_eco_ariary ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_eco_central_african_eco = {
+	value = zz_ef_fx_gold_eco_central_african_eco
+	if = { limit = { global_var:zz_ef_fxconv_eco_central_african_eco ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_eco_east_african_eco = {
+	value = zz_ef_fx_gold_eco_east_african_eco
+	if = { limit = { global_var:zz_ef_fxconv_eco_east_african_eco ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_eco_ethiopian_birr = {
+	value = zz_ef_fx_gold_eco_ethiopian_birr
+	if = { limit = { global_var:zz_ef_fxconv_eco_ethiopian_birr ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_eco_ghanaian_pound = {
+	value = zz_ef_fx_gold_eco_ghanaian_pound
+	if = { limit = { global_var:zz_ef_fxconv_eco_ghanaian_pound ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_eco_nigerian_naira = {
+	value = zz_ef_fx_gold_eco_nigerian_naira
+	if = { limit = { global_var:zz_ef_fxconv_eco_nigerian_naira ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_eco_south_african_rand = {
+	value = zz_ef_fx_gold_eco_south_african_rand
+	if = { limit = { global_var:zz_ef_fxconv_eco_south_african_rand ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_eco_tuareg_ouguiya = {
+	value = zz_ef_fx_gold_eco_tuareg_ouguiya
+	if = { limit = { global_var:zz_ef_fxconv_eco_tuareg_ouguiya ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_eco_west_african_eco = {
+	value = zz_ef_fx_gold_eco_west_african_eco
+	if = { limit = { global_var:zz_ef_fxconv_eco_west_african_eco ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_franc_belgian_franc = {
+	value = zz_ef_fx_gold_franc_belgian_franc
+	if = { limit = { global_var:zz_ef_fxconv_franc_belgian_franc ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_franc_french_franc = {
+	value = zz_ef_fx_gold_franc_french_franc
+	if = { limit = { global_var:zz_ef_fxconv_franc_french_franc ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_franc_luxembourgish_franc = {
+	value = zz_ef_fx_gold_franc_luxembourgish_franc
+	if = { limit = { global_var:zz_ef_fxconv_franc_luxembourgish_franc ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_franc_swiss_franc = {
+	value = zz_ef_fx_gold_franc_swiss_franc
+	if = { limit = { global_var:zz_ef_fxconv_franc_swiss_franc ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_gulden = {
+	value = zz_ef_fx_gold_gulden
+	if = { limit = { global_var:zz_ef_fxconv_gulden ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_gulden_bavarian_gulden = {
+	value = zz_ef_fx_gold_gulden_bavarian_gulden
+	if = { limit = { global_var:zz_ef_fxconv_gulden_bavarian_gulden ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_gulden_florin = {
+	value = zz_ef_fx_gold_gulden_florin
+	if = { limit = { global_var:zz_ef_fxconv_gulden_florin ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_gulden_hungarian_forint = {
+	value = zz_ef_fx_gold_gulden_hungarian_forint
+	if = { limit = { global_var:zz_ef_fxconv_gulden_hungarian_forint ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_gulden_indies_guilder = {
+	value = zz_ef_fx_gold_gulden_indies_guilder
+	if = { limit = { global_var:zz_ef_fxconv_gulden_indies_guilder ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_gulden_south_german_gulden = {
+	value = zz_ef_fx_gold_gulden_south_german_gulden
+	if = { limit = { global_var:zz_ef_fxconv_gulden_south_german_gulden ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_krone_czech_koruna = {
+	value = zz_ef_fx_gold_krone_czech_koruna
+	if = { limit = { global_var:zz_ef_fxconv_krone_czech_koruna ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_krone_danish_krone = {
+	value = zz_ef_fx_gold_krone_danish_krone
+	if = { limit = { global_var:zz_ef_fxconv_krone_danish_krone ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_krone_estonian_kroon = {
+	value = zz_ef_fx_gold_krone_estonian_kroon
+	if = { limit = { global_var:zz_ef_fxconv_krone_estonian_kroon ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_krone_icelandic_krona = {
+	value = zz_ef_fx_gold_krone_icelandic_krona
+	if = { limit = { global_var:zz_ef_fxconv_krone_icelandic_krona ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_krone_norwegian_krone = {
+	value = zz_ef_fx_gold_krone_norwegian_krone
+	if = { limit = { global_var:zz_ef_fxconv_krone_norwegian_krone ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_krone_slovak_koruna = {
+	value = zz_ef_fx_gold_krone_slovak_koruna
+	if = { limit = { global_var:zz_ef_fxconv_krone_slovak_koruna ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_krone_swedish_krona = {
+	value = zz_ef_fx_gold_krone_swedish_krona
+	if = { limit = { global_var:zz_ef_fxconv_krone_swedish_krona ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_leon_leu = {
+	value = zz_ef_fx_gold_leon_leu
+	if = { limit = { global_var:zz_ef_fxconv_leon_leu ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_leon_lev = {
+	value = zz_ef_fx_gold_leon_lev
+	if = { limit = { global_var:zz_ef_fxconv_leon_lev ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_lira = {
+	value = zz_ef_fx_gold_lira
+	if = { limit = { global_var:zz_ef_fxconv_lira ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_lira_ducato = {
+	value = zz_ef_fx_gold_lira_ducato
+	if = { limit = { global_var:zz_ef_fxconv_lira_ducato ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_lira_ottoman_lira = {
+	value = zz_ef_fx_gold_lira_ottoman_lira
+	if = { limit = { global_var:zz_ef_fxconv_lira_ottoman_lira ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_lira_scudo_pontificio = {
+	value = zz_ef_fx_gold_lira_scudo_pontificio
+	if = { limit = { global_var:zz_ef_fxconv_lira_scudo_pontificio ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_lira_scudo_sardo = {
+	value = zz_ef_fx_gold_lira_scudo_sardo
+	if = { limit = { global_var:zz_ef_fxconv_lira_scudo_sardo ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_lira_toscane_lira = {
+	value = zz_ef_fx_gold_lira_toscane_lira
+	if = { limit = { global_var:zz_ef_fxconv_lira_toscane_lira ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_mark = {
+	value = zz_ef_fx_gold_mark
+	if = { limit = { global_var:zz_ef_fxconv_mark ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_mark_finnish_markka = {
+	value = zz_ef_fx_gold_mark_finnish_markka
+	if = { limit = { global_var:zz_ef_fxconv_mark_finnish_markka ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_peso = {
+	value = zz_ef_fx_gold_peso
+	if = { limit = { global_var:zz_ef_fxconv_peso ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_peso_argentine_peso = {
+	value = zz_ef_fx_gold_peso_argentine_peso
+	if = { limit = { global_var:zz_ef_fxconv_peso_argentine_peso ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_peso_bolivien_peso = {
+	value = zz_ef_fx_gold_peso_bolivien_peso
+	if = { limit = { global_var:zz_ef_fxconv_peso_bolivien_peso ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_peso_chilean_peso = {
+	value = zz_ef_fx_gold_peso_chilean_peso
+	if = { limit = { global_var:zz_ef_fxconv_peso_chilean_peso ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_peso_colombian_peso = {
+	value = zz_ef_fx_gold_peso_colombian_peso
+	if = { limit = { global_var:zz_ef_fxconv_peso_colombian_peso ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_peso_costa_rican_colon = {
+	value = zz_ef_fx_gold_peso_costa_rican_colon
+	if = { limit = { global_var:zz_ef_fxconv_peso_costa_rican_colon ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_peso_cuban_peso = {
+	value = zz_ef_fx_gold_peso_cuban_peso
+	if = { limit = { global_var:zz_ef_fxconv_peso_cuban_peso ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_peso_ecuadorian_peso = {
+	value = zz_ef_fx_gold_peso_ecuadorian_peso
+	if = { limit = { global_var:zz_ef_fxconv_peso_ecuadorian_peso ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_peso_el_salvador_colon = {
+	value = zz_ef_fx_gold_peso_el_salvador_colon
+	if = { limit = { global_var:zz_ef_fxconv_peso_el_salvador_colon ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_peso_guatemalan_quetzal = {
+	value = zz_ef_fx_gold_peso_guatemalan_quetzal
+	if = { limit = { global_var:zz_ef_fxconv_peso_guatemalan_quetzal ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_peso_honduran_lempira = {
+	value = zz_ef_fx_gold_peso_honduran_lempira
+	if = { limit = { global_var:zz_ef_fxconv_peso_honduran_lempira ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_peso_mexican_peso = {
+	value = zz_ef_fx_gold_peso_mexican_peso
+	if = { limit = { global_var:zz_ef_fxconv_peso_mexican_peso ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_peso_nicaraguan_cordoba = {
+	value = zz_ef_fx_gold_peso_nicaraguan_cordoba
+	if = { limit = { global_var:zz_ef_fxconv_peso_nicaraguan_cordoba ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_peso_paraguayan_peso = {
+	value = zz_ef_fx_gold_peso_paraguayan_peso
+	if = { limit = { global_var:zz_ef_fxconv_peso_paraguayan_peso ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_peso_philippine_peso = {
+	value = zz_ef_fx_gold_peso_philippine_peso
+	if = { limit = { global_var:zz_ef_fxconv_peso_philippine_peso ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_peso_sol_de_oro = {
+	value = zz_ef_fx_gold_peso_sol_de_oro
+	if = { limit = { global_var:zz_ef_fxconv_peso_sol_de_oro ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_peso_uruguayan_peso = {
+	value = zz_ef_fx_gold_peso_uruguayan_peso
+	if = { limit = { global_var:zz_ef_fxconv_peso_uruguayan_peso ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_peso_venezuelan_peso = {
+	value = zz_ef_fx_gold_peso_venezuelan_peso
+	if = { limit = { global_var:zz_ef_fxconv_peso_venezuelan_peso ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_pound_egyptian_pound = {
+	value = zz_ef_fx_gold_pound_egyptian_pound
+	if = { limit = { global_var:zz_ef_fxconv_pound_egyptian_pound ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_pound_irish_pound = {
+	value = zz_ef_fx_gold_pound_irish_pound
+	if = { limit = { global_var:zz_ef_fxconv_pound_irish_pound ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_pound_sterling = {
+	value = zz_ef_fx_gold_pound_sterling
+	if = { limit = { global_var:zz_ef_fxconv_pound_sterling ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_real = {
+	value = zz_ef_fx_gold_real
+	if = { limit = { global_var:zz_ef_fxconv_real ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_real_brazilian_real = {
+	value = zz_ef_fx_gold_real_brazilian_real
+	if = { limit = { global_var:zz_ef_fxconv_real_brazilian_real ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_rupee_indian_rupee = {
+	value = zz_ef_fx_gold_rupee_indian_rupee
+	if = { limit = { global_var:zz_ef_fxconv_rupee_indian_rupee ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_rupee_indonesian_rupiah = {
+	value = zz_ef_fx_gold_rupee_indonesian_rupiah
+	if = { limit = { global_var:zz_ef_fxconv_rupee_indonesian_rupiah ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_spe_baht = {
+	value = zz_ef_fx_gold_spe_baht
+	if = { limit = { global_var:zz_ef_fxconv_spe_baht ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_spe_dong = {
+	value = zz_ef_fx_gold_spe_dong
+	if = { limit = { global_var:zz_ef_fxconv_spe_dong ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_spe_drachma = {
+	value = zz_ef_fx_gold_spe_drachma
+	if = { limit = { global_var:zz_ef_fxconv_spe_drachma ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_spe_korean_won = {
+	value = zz_ef_fx_gold_spe_korean_won
+	if = { limit = { global_var:zz_ef_fxconv_spe_korean_won ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_spe_latvian_lats = {
+	value = zz_ef_fx_gold_spe_latvian_lats
+	if = { limit = { global_var:zz_ef_fxconv_spe_latvian_lats ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_spe_lithuanian_litas = {
+	value = zz_ef_fx_gold_spe_lithuanian_litas
+	if = { limit = { global_var:zz_ef_fxconv_spe_lithuanian_litas ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_spe_peseta = {
+	value = zz_ef_fx_gold_spe_peseta
+	if = { limit = { global_var:zz_ef_fxconv_spe_peseta ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_spe_ruble = {
+	value = zz_ef_fx_gold_spe_ruble
+	if = { limit = { global_var:zz_ef_fxconv_spe_ruble ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_spe_uni = {
+	value = zz_ef_fx_gold_spe_uni
+	if = { limit = { global_var:zz_ef_fxconv_spe_uni ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_spe_yen = {
+	value = zz_ef_fx_gold_spe_yen
+	if = { limit = { global_var:zz_ef_fxconv_spe_yen ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_spe_yuan = {
+	value = zz_ef_fx_gold_spe_yuan
+	if = { limit = { global_var:zz_ef_fxconv_spe_yuan ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_spe_zloti = {
+	value = zz_ef_fx_gold_spe_zloti
+	if = { limit = { global_var:zz_ef_fxconv_spe_zloti ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_thaler_hannoveraner_thaler = {
+	value = zz_ef_fx_gold_thaler_hannoveraner_thaler
+	if = { limit = { global_var:zz_ef_fxconv_thaler_hannoveraner_thaler ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_thaler_prussian_thaler = {
+	value = zz_ef_fx_gold_thaler_prussian_thaler
+	if = { limit = { global_var:zz_ef_fxconv_thaler_prussian_thaler ?= 0 } value = 0 }
+}
+zz_ef_fx_cover_thaler_saxon_thaler = {
+	value = zz_ef_fx_gold_thaler_saxon_thaler
+	if = { limit = { global_var:zz_ef_fxconv_thaler_saxon_thaler ?= 0 } value = 0 }
+}

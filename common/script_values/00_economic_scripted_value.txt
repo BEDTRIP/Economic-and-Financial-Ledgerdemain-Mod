@@ -4905,15 +4905,11 @@ money_value_0 = {
 				has_law = law_type:law_silver_standard
 				has_law = law_type:law_bimetallism_standard
 				has_law = law_type:law_gold_standard
+				# an exchange standard -- as a metal one, its cover with the convertible foreign currency (Д.R8а.6)
+				zz_ef_exchange_std = yes
 			}
 		}
 		value = zz_ef_metal_value
-	}
-	if = {
-		limit = {
-			zz_ef_exchange_std = yes
-		}
-		add = money_value_by_reference_currency
 	}
 	# the external exchange standard: its parity (in the anchor's metal) at the anchor's rate (Д.R8а.3, Д.R8а.4) --
 	# without it a pegged subject's own currency is worth 0 and E&F reads the fall as a currency crisis
@@ -5261,9 +5257,9 @@ national_capacity_in_gold = {
 }
 
 national_capacity = {
-	# Д.R8а.5: the cover is one number -- all the CB's reserves at the market in the standard's metal: both metals
-	# (the other one at the world price of the month) and the foreign currency (zz_ef_reserves_in_gold,
-	# ld_money_model_values.txt); a standard without a metal of its own (fiat, exchange) -- in gold
+	# Д.R8а.5: the cover is one number -- the CB's reserves at the market in the standard's metal: both metals (the
+	# other one at the world price of the month) and, on an exchange standard, the convertible foreign currency
+	# (zz_ef_reserves_in_gold, ld_money_model_values.txt); fiat -- in gold
 	value = 1
 	if = {
 		limit = {
@@ -5272,7 +5268,7 @@ national_capacity = {
 		}
 		value = zz_ef_reserves_in_gold
 		if = {
-			limit = { has_law = law_type:law_silver_standard }
+			limit = { zz_ef_metal_silver = yes }
 			multiply = gold_to_silver_rate
 		}
 		multiply = zz_ef_capacity_per_metal

@@ -8282,7 +8282,18 @@ global_monetary_reference_reset = {
 				is_monetary_systeme_transition_valid_country_to_gold_exchange_standard = yes
 			}
 			money_value_target_pre_set = yes
-			activate_law = law_type:law_gold_exchange_standard
+			# the exchange standard of its metal (Д.R8а.6)
+			if = {
+				limit = { has_law = law_type:law_silver_standard }
+				activate_law = law_type:law_silver_exchange_standard
+			}
+			else_if = {
+				limit = { has_law = law_type:law_bimetallism_standard }
+				activate_law = law_type:law_bimetallism_exchange_standard
+			}
+			else = {
+				activate_law = law_type:law_gold_exchange_standard
+			}
 			# central_bank_production_methods = yes
 			# central_bank_production_methods_3 = yes
 			# remove_modifier = foreign_exchange_controls

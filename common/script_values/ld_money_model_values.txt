@@ -668,30 +668,51 @@ zz_ef_v_w_dep_int = {
 zz_ef_cover_normal = 0.4
 zz_ef_capacity_per_metal = 1
 
-# Д.R8а.5: all the CB's reserves in gold -- its gold, its silver at the world price of the month, the foreign currency
-# (var:zz_ef_fx_metal, kept weekly in the standard's metal). Read by national_capacity (the cover).
+# Д.R8а.5: the CB's reserves in gold -- its gold, its silver at the world price of the month; the foreign currency of
+# convertible issuers (var:zz_ef_fx_metal, kept weekly in the standard's metal) -- not on a metal standard (only its own
+# metal covers it), on an exchange one it does (Д.R8а.6). Read by national_capacity (the cover).
 zz_ef_reserves_in_gold = {
 	value = gold_state_native_for_stockpile
 	add = silver_state_native_for_stockpile_in_gold
 	if = {
-		limit = { zz_ef_metal_silver = yes }
-		add = { value = zz_ef_v_fx_metal multiply = silver_to_gold_rate }
-	}
-	else = {
-		add = zz_ef_v_fx_metal
+		limit = {
+			NOT = {
+				has_law = law_type:law_gold_standard
+				has_law = law_type:law_silver_standard
+				has_law = law_type:law_bimetallism_standard
+			}
+		}
+		if = {
+			limit = { zz_ef_metal_silver = yes }
+			add = { value = zz_ef_v_fx_metal multiply = silver_to_gold_rate }
+		}
+		else = {
+			add = zz_ef_v_fx_metal
+		}
 	}
 }
 
 # M.2: under a metal standard the currency is worth its parity (the mint par:
 # metal per unit, var:money_value_target_1) within +-2% while the cover is 25%+ -- notes are
 # redeemed in metal, arbitrage holds the value; the band leans with the cover (+-0.1 x the gap to
-# 40%). Under 25% redemption is suspended and the value = parity x cover / 40%. Fiat and the gold
-# exchange standard: E&F's formula (fiat 0.01 -- E&F's own money_value then; gold exchange by the
-# reference currency). Was (E&F, and ours with x 2.5): value = capacity / money -- the value
-# swung with every week's metal and money, and the AI's devaluation chased it.
+# 40%). Under 25% redemption is suspended and the value = parity x cover / 40%. An exchange standard -- the
+# same (its cover counts the convertible foreign currency, zz_ef_reserves_in_gold; Д.R8а.5, Д.R8а.6). Fiat: E&F's
+# formula (0.01 -- E&F's own money_value then).
 # !! MAINTENANCE !! Key-level REPLACE_OR_CREATE of E&F's money_value_0
 # (script_values/00_economic_scripted_value.txt:5408).
 zz_ef_value_floor_cover = 0.25
+# 1 if the CB redeems its notes in metal: a standard with metal and the cover 25%+ (Д.R8а.5) -- its currency then
+# counts in an exchange standard's cover (global_var:zz_ef_fxconv_<cur>, zz_ef_cur_par_update)
+zz_ef_convertible_v = {
+	value = 0
+	if = {
+		limit = {
+			zz_ef_cb_metal_standard = yes
+			zz_ef_cb_cover >= zz_ef_value_floor_cover
+		}
+		value = 1
+	}
+}
 zz_ef_value_band = 0.02
 
 zz_ef_metal_value = {
@@ -2066,22 +2087,16 @@ zz_ef_v_d_abroad = {
 # silver converted by E&F's silver_to_gold_rate, from world production).
 # E&F's money_value_in_gold goes through the market owner for subjects; read
 # weekly for every country it ended in a stack overflow
-# crash -- so it is not read here. An exchange standard's money_value_0 is E&F's, by the reference
-# currency, already in gold; the external one's -- its parity in the anchor's metal. 0 without a central bank on a
-# metal standard.
+# crash -- so it is not read here. money_value_0 is in the standard's metal (the external one's -- the anchor's).
+# 0 without a central bank on a standard with metal.
 zz_ef_gold_per_unit = {
 	value = 0
 	if = {
 		limit = {
 			has_modifier = has_central_bank
 			OR = {
-				has_law = law_type:law_gold_standard
-				has_law = law_type:law_bimetallism_standard
-				zz_ef_exchange_std = yes
-				AND = {
-					zz_ef_anchored = yes
-					OR = { zz_ef_metal_gold = yes zz_ef_metal_bimet = yes }
-				}
+				zz_ef_metal_gold = yes
+				zz_ef_metal_bimet = yes
 			}
 		}
 		value = money_value_0
@@ -2089,10 +2104,7 @@ zz_ef_gold_per_unit = {
 	else_if = {
 		limit = {
 			has_modifier = has_central_bank
-			OR = {
-				has_law = law_type:law_silver_standard
-				AND = { zz_ef_anchored = yes zz_ef_metal_silver = yes }
-			}
+			zz_ef_metal_silver = yes
 		}
 		value = money_value_0
 		multiply = silver_to_gold_rate

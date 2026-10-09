@@ -46,21 +46,24 @@ zz_ef_cb_rate_is_fiat = {
 		value = 1
 	}
 }
-# (Д.R3.3) a dependent standard (gold exchange, external exchange) has no policy of its own -- its
-# corridor follows the reference currency's CB rate (global_var:zz_ef_ref_rate, set monthly by the reference): from it
-# to it + 4 pp (the colony pays a premium over the metropolis), within the metal corridor 2..12%.
+# (Д.R3.3, Д.R8а.6) the external exchange standard (a subject pegged to its anchor) has no policy of its own -- its
+# corridor follows its anchor's CB rate (var:zz_ef_anchor, ld_anchor.txt): from it to it + 4 pp (the colony pays a
+# premium over the metropolis), within the metal corridor 2..12%.
 zz_ef_cb_rate_is_dependent = {
 	value = 0
 	if = {
 		limit = {
-			OR = {
-				zz_ef_exchange_std = yes
-				has_law = law_type:law_external_exchange_standard
-			}
-			has_global_variable = zz_ef_ref_rate
-			NOT = { has_modifier = global_monetary_reference }
+			zz_ef_anchored = yes
+			var:zz_ef_anchor = { has_variable = base_rate_percentage }
 		}
 		value = 1
+	}
+}
+zz_ef_cb_rate_anchor = {
+	value = 0.02
+	if = {
+		limit = { zz_ef_cb_rate_is_dependent = 1 }
+		value = var:zz_ef_anchor.var:base_rate_percentage
 	}
 }
 zz_ef_cb_rate_floor = {
@@ -71,7 +74,7 @@ zz_ef_cb_rate_floor = {
 	}
 	else_if = {
 		limit = { zz_ef_cb_rate_is_dependent = 1 }
-		value = global_var:zz_ef_ref_rate
+		value = zz_ef_cb_rate_anchor
 		min = 0.02
 		max = 0.08
 	}
@@ -84,7 +87,7 @@ zz_ef_cb_rate_ceiling = {
 	}
 	else_if = {
 		limit = { zz_ef_cb_rate_is_dependent = 1 }
-		value = global_var:zz_ef_ref_rate
+		value = zz_ef_cb_rate_anchor
 		add = 0.04
 		min = 0.06
 		max = 0.12
