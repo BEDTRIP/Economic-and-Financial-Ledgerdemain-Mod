@@ -1,0 +1,28 @@
+﻿namespace = ld_probe_mapsave
+
+# R8б step 0 probe: does a variable map survive a save and its load. .1 writes (a map on the player's country and a
+# global one), .2 -- after loading the autosave -- reads them. Console only; EFZ lines in debug.log.
+ld_probe_mapsave.1 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		add_to_variable_map = { name = zz_ef_pms key = c:GBR value = 11 }
+		add_to_variable_map = { name = zz_ef_pms key = c:FRA value = 22 }
+		add_to_global_variable_map = { name = zz_ef_pms_g key = c:RUS value = 33 }
+		debug_log = "EFZ|save_written"
+	}
+}
+
+ld_probe_mapsave.2 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		if = { limit = { has_variable_map = zz_ef_pms } debug_log = "EFZ|after_load|country map exists" }
+		if = { limit = { has_global_variable_map = zz_ef_pms_g } debug_log = "EFZ|after_load|global map exists" }
+		if = { limit = { has_variable_map = zz_ef_pms } set_variable = { name = zz_ef_pms_r value = "variable_map(zz_ef_pms|c:FRA)" } }
+		if = { limit = { has_global_variable_map = zz_ef_pms_g } set_variable = { name = zz_ef_pms_rg value = "global_variable_map(zz_ef_pms_g|c:RUS)" } }
+		debug_log = "EFZ|after_load|fra [THIS.GetCountry.MakeScope.Var('zz_ef_pms_r').GetValue|0]|rus [THIS.GetCountry.MakeScope.Var('zz_ef_pms_rg').GetValue|0]"
+	}
+}
