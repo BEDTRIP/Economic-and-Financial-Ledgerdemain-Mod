@@ -2993,9 +2993,7 @@ types zz_ef_economy_panel
 												layoutstretchfactor_horizontal = 2
 												layoutpolicy_horizontal = preferred
 
-												datacontext = "[Scope.GetCountry]"
-
-												text = "[Localize(Concatenate(Scope.GetFlagName,'_name_currency'))]"
+												raw_text = "[Scope.GetCountry.GetCustom('currency_name')] ([Scope.GetCountry.GetName])"
 
 												#margin_bottom = -17
 												#fontsize = 17
@@ -3011,8 +3009,7 @@ types zz_ef_economy_panel
 											textbox = {
 												layoutstretchfactor_horizontal = 1
 												layoutpolicy_horizontal = preferred
-												datacontext = "[Scope.GetCountry]"
-												text = "[Localize(Concatenate(Scope.GetFlagName,'_zz_cbfx_units'))]"
+												raw_text = "#v [Scope.GetCountry.MakeScope.Var('zz_ef_cbfx_u').GetValue|D]#! [Scope.GetCountry.GetCustom('currency_symbol')]"
 
 												margin_left = 0
 												margin_bottom = 0
@@ -3027,9 +3024,7 @@ types zz_ef_economy_panel
 											textbox = {
 												layoutstretchfactor_horizontal = 2
 												layoutpolicy_horizontal = preferred
-												datacontext = "[Scope.GetCountry]"
-
-												text = "[Localize(Concatenate(Scope.GetFlagName,'_zz_cbfx_money'))]"
+												raw_text = "[Scope.GetCountry.MakeScope.Var('zz_ef_cbfx_mn').GetValue|D] [GetPlayer.GetCustom('currency_symbol')]"
 
 												margin_left = 0
 												margin_bottom = 0
@@ -3044,9 +3039,7 @@ types zz_ef_economy_panel
 											textbox = {
 												layoutstretchfactor_horizontal = 2
 												layoutpolicy_horizontal = preferred
-												datacontext = "[Scope.GetCountry]"
-
-												text = "[Localize(Concatenate(Scope.GetFlagName,'_zz_cbfx_gold'))]"
+												raw_text = "[Scope.GetCountry.MakeScope.Var('zz_ef_cbfx_g').GetValue|D] @gold! ([Scope.GetCountry.MakeScope.Var('zz_ef_cbfx_dd').GetValue|+D] [Localize('zz_ef_cbfx_week')])"
 
 												margin_left = 0
 												margin_bottom = 0

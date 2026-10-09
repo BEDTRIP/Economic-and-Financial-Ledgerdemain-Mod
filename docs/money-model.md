@@ -29,7 +29,7 @@
 - `common/static_modifiers/ld_metal_trade.txt` — модификаторы зданий: покупка металла банками/ЦБ, продажа ЦБ (`zz_ef_bank_gold_buy`, `zz_ef_bank_silver_buy`, `zz_ef_cb_metal_buy`, `zz_ef_cb_gold_sell`, `zz_ef_cb_silver_sell`).
 - `common/static_modifiers/ld_consumer_credit.txt` — `zz_ef_consumer_credit` (`state_dependent_wage_add`).
 - `common/static_modifiers/ld_debt_service.txt` — `zz_ef_debt_service` (+1% взноса в пул у слоёв).
-- E&F вне списка, но пишут те же счета: `common/scripted_effects/01_economic_scripted_effects.txt` (`sell_<cur>_currency_crisis`, кризисная продажа валют); месячный пересчёт запасов `stockpiling_currency_type_1` — в `_archive/ef_stockpiling_currency/` (R2).
+- E&F вне списка, но пишут те же счета: `common/scripted_effects/ld_claims.txt` (`zz_ef_rq_crisis_resell`, кризисная продажа валют); месячный пересчёт запасов `stockpiling_currency_type_1` — в `_archive/ef_stockpiling_currency/` (R2).
 
 ## Реестр счетов, проводка, сверка (R1а.5)
 Файлы: `common/scripted_effects/ld_ledger.txt`, `common/script_values/ld_ledger_values.txt`.
@@ -147,7 +147,7 @@ on_action — `common/on_actions/ld_roles_on_actions.txt`): глобальные
 | `zz_ef_mt_bank_mult_g/s`, `zz_ef_mt_cb_mult`, `zz_ef_mt_cb_sell` | множители модификаторов `ld_metal_trade` на следующую неделю | `zz_ef_metal_week_step` | `add_modifier` на зданиях `building_zz_ef_bank` (только при `zz_ef_mt_bank_levels > 0`) / `building_bank` |
 | глобальные `zz_ef_wm_<start/buy/sell/oth>_<gold/silver>` | мировая линия металла (накопительно; только при `zz_ef_logs_on`) | `zz_ef_wm_add` | `zz_ef_wm_v_*`, `zz_ef_wm_rest_*`, лог `EFV` |
 | глобальные `zz_ef_hook_countries` (список), `zz_ef_hook_calls`, `zz_ef_hook_probe_calls` | очередь моста, счётчики вызовов (счётчики — только при `zz_ef_logs_on`) | `zz_ef_money_model_step`, `zz_ef_money_hook_receive`, `zz_ef_money_hook_probe_sg` | `gui/ld_money_hook.gui`, `zz_ef_hook_ok` |
-| `stockpiling_<cur>_state_1`, `stockpiling_<cur>_reserve_currency_state_1` (регион, E&F) | запас валюты `<cur>` в регионе ЦБ | история E&F, клиринг (`ld_clearing.txt`), `sell_<cur>_currency_crisis` | `money_supply_state`, `zz_ef_fx_reserves_metal`, `zz_ef_fx_liab_all` |
+| `stockpiling_<cur>_state_1`, `stockpiling_<cur>_reserve_currency_state_1` (регион, E&F) | собственный запас валюты ЦБ (E&F); чужие деньги ЦБ — карта `zz_ef_rq_cb_m` (`claims.md`) | история и ввод валют E&F | `money_supply_state` |
 | `<cur>_c_no_own` (значение, 95 валют) | запас валюты минус `money_supply` | — (значения) | `currency_no_own` → `gui/ld_economy_panel.gui` (текст «currency_no_own») |
 
 ## Вызовы и связи

@@ -1,0 +1,282 @@
+﻿# The register of claims (R8б.1, Д.R8.8, Д.R8.9; понятия «Требование», «Словарь требований»): «D owes the holder».
+# A holder keeps a variable map per kind of claim, key -- the debtor country, value -- the amount in the debtor's money;
+# no slots, no limit on the debtors. The debtor keeps the total of each kind held abroad (var:zz_ef_rq_out_<kind>), so
+# «who holds our money» is one variable, not a pass over the world.
+#   maps (on the holder country)       kind   holder
+#   zz_ef_rq_cb_m                      m      the CB: foreign money (deposits in the issuer's banks)
+#   zz_ef_rq_bk_m / zz_ef_rq_pp_m      m      the banks / the pops: foreign money
+#   zz_ef_rq_tr_b / zz_ef_rq_bk_b      b      the treasury / the banks: bonds (own and foreign)
+#   zz_ef_rq_pp_b / zz_ef_rq_cb_b      b      the pops / the CB: bonds
+#   the clearing house: global map zz_ef_clr_pot (kind m) -- a payer's money waiting in the house (zz_ef_rq_pot_add)
+# A map's value cannot be overwritten by its key (probe ld_probe_map): remove the key and add it again. Iterating a
+# map while changing it is not done here: the keys go to a variable list first (zz_ef_rq_keys_take).
+
+# HOLDER (country) scope. MAP -- the holder's map, K -- its kind (m | b), D -- the debtor (a saved country scope,
+# scope:x), V -- the change in the debtor's money (+ got / - gave up); the holding stays >= 0 and the debtor's total
+# of the kind moves by what the holding actually changed (var:zz_ef_rq_dlt, left on the holder for the caller).
+zz_ef_rq_add = {
+	save_temporary_scope_as = zz_ef_rq_ha
+	set_variable = { name = zz_ef_rq_old value = 0 }
+	if = {
+		limit = { is_key_in_variable_map = { name = $MAP$ target = $D$ } }
+		set_variable = { name = zz_ef_rq_old value = "variable_map($MAP$|$D$)" }
+		remove_from_variable_map = { name = $MAP$ key = $D$ }
+	}
+	set_variable = {
+		name = zz_ef_rq_dlt
+		value = {
+			value = var:zz_ef_rq_old
+			add = $V$
+			min = 0
+		}
+	}
+	if = {
+		limit = { var:zz_ef_rq_dlt > 0 }
+		add_to_variable_map = { name = $MAP$ key = $D$ value = var:zz_ef_rq_dlt }
+	}
+	change_variable = { name = zz_ef_rq_dlt subtract = var:zz_ef_rq_old }
+	$D$ = {
+		if = {
+			limit = { NOT = { has_variable = zz_ef_rq_out_$K$ } }
+			set_variable = { name = zz_ef_rq_out_$K$ value = 0 }
+		}
+		change_variable = { name = zz_ef_rq_out_$K$ add = scope:zz_ef_rq_ha.var:zz_ef_rq_dlt }
+	}
+	remove_variable = zz_ef_rq_old
+}
+
+# HOLDER scope: the holding of MAP on D into var:zz_ef_rq_h (0 if none).
+zz_ef_rq_get = {
+	set_variable = { name = zz_ef_rq_h value = 0 }
+	if = {
+		limit = { is_key_in_variable_map = { name = $MAP$ target = $D$ } }
+		set_variable = { name = zz_ef_rq_h value = "variable_map($MAP$|$D$)" }
+	}
+}
+
+# Any scope: the clearing house's holding of D's money changes by V (global map zz_ef_clr_pot, >= 0); D's money in the
+# house is a claim on D too (var:zz_ef_rq_pot on D, part of its debt abroad). The change actually made --
+# global_var:zz_ef_rq_pdlt.
+zz_ef_rq_pot_add = {
+	set_global_variable = { name = zz_ef_rq_pold value = 0 }
+	if = {
+		limit = { is_key_in_global_variable_map = { name = zz_ef_clr_pot target = $D$ } }
+		set_global_variable = { name = zz_ef_rq_pold value = "global_variable_map(zz_ef_clr_pot|$D$)" }
+		remove_from_global_variable_map = { name = zz_ef_clr_pot key = $D$ }
+	}
+	set_global_variable = {
+		name = zz_ef_rq_pdlt
+		value = {
+			value = global_var:zz_ef_rq_pold
+			add = $V$
+			min = 0
+		}
+	}
+	if = {
+		limit = { global_var:zz_ef_rq_pdlt > 0 }
+		add_to_global_variable_map = { name = zz_ef_clr_pot key = $D$ value = global_var:zz_ef_rq_pdlt }
+	}
+	change_global_variable = { name = zz_ef_rq_pdlt subtract = global_var:zz_ef_rq_pold }
+	$D$ = {
+		if = {
+			limit = { NOT = { has_variable = zz_ef_rq_pot } }
+			set_variable = { name = zz_ef_rq_pot value = 0 }
+		}
+		change_variable = { name = zz_ef_rq_pot add = global_var:zz_ef_rq_pdlt }
+	}
+}
+
+# HOLDER scope: the keys of MAP into the variable list zz_ef_rq_keys (cleared first), to change the map key by key.
+zz_ef_rq_keys_take = {
+	clear_variable_list = zz_ef_rq_keys
+	save_temporary_scope_as = zz_ef_rq_hd
+	every_key_in_variable_map = {
+		variable = $MAP$
+		save_temporary_scope_as = zz_ef_rq_k
+		scope:zz_ef_rq_hd = { add_to_variable_list = { name = zz_ef_rq_keys target = scope:zz_ef_rq_k } }
+	}
+}
+
+# HOLDER scope: the value of MAP in gold into var:zz_ef_rq_gold -- each holding at its debtor's gold a unit
+# (zz_ef_rq_gpm_v); with CONV = yes only the debtors whose money counts in a cover (zz_ef_rq_conv_v, Д.R8а.5).
+zz_ef_rq_value_gold = {
+	set_variable = { name = zz_ef_rq_gold value = 0 }
+	save_temporary_scope_as = zz_ef_rq_hd
+	every_key_in_variable_map = {
+		variable = $MAP$
+		save_temporary_scope_as = zz_ef_rq_k
+		scope:zz_ef_rq_hd = {
+			set_variable = { name = zz_ef_rq_t value = "variable_map($MAP$|scope:zz_ef_rq_k)" }
+			change_variable = { name = zz_ef_rq_t multiply = scope:zz_ef_rq_k.zz_ef_rq_gpm_v }
+			if = {
+				limit = { always = $CONV$ }
+				change_variable = { name = zz_ef_rq_t multiply = scope:zz_ef_rq_k.zz_ef_rq_conv_v }
+			}
+			change_variable = { name = zz_ef_rq_gold add = var:zz_ef_rq_t }
+		}
+	}
+	remove_variable = zz_ef_rq_t
+}
+
+# HOLDER scope (a CB), weekly from zz_ef_nr_dep_step: the interest on the foreign money it holds -- a deposit in the
+# issuer's banks earns the issuer's deposit rate (var:zz_ef_rq_rate_w on the issuer, a week's), credited as more
+# deposit; the issuer pays it out of its banks' capital at its own step (var:zz_ef_rq_int_due).
+zz_ef_rq_interest_step = {
+	if = {
+		limit = { has_variable_map = zz_ef_rq_cb_m }
+		zz_ef_rq_keys_take = { MAP = zz_ef_rq_cb_m }
+		save_temporary_scope_as = zz_ef_rq_hi
+		every_in_list = {
+			variable = zz_ef_rq_keys
+			save_temporary_scope_as = zz_ef_rq_d
+			if = {
+				limit = { has_variable = zz_ef_rq_rate_w var:zz_ef_rq_rate_w > 0 }
+				scope:zz_ef_rq_hi = {
+					zz_ef_rq_get = { MAP = zz_ef_rq_cb_m D = scope:zz_ef_rq_d }
+					change_variable = { name = zz_ef_rq_h multiply = scope:zz_ef_rq_d.var:zz_ef_rq_rate_w }
+					zz_ef_rq_add = { MAP = zz_ef_rq_cb_m K = m D = scope:zz_ef_rq_d V = var:zz_ef_rq_h }
+				}
+				if = {
+					limit = { NOT = { has_variable = zz_ef_rq_int_due } }
+					set_variable = { name = zz_ef_rq_int_due value = 0 }
+				}
+				change_variable = { name = zz_ef_rq_int_due add = scope:zz_ef_rq_hi.var:zz_ef_rq_dlt }
+			}
+		}
+		clear_variable_list = zz_ef_rq_keys
+	}
+}
+
+# The crisis of D's currency (E&F's currency crisis / the CB's bankruptcy, D = scope:target_country; the callers --
+# global_monetary_reference_reset, economic_instability): every CB holding D's money sells all of it to D for D's metal
+# at the parity, as far as D's metal goes (zz_ef_crisis_redeem); the holding is gone either way.
+zz_ef_rq_crisis_resell = {
+	scope:target_country = {
+		save_scope_as = overrated_currency_country_owner
+		every_scope_state = {
+			limit = {
+				has_modifier = central_bank_historic_place
+				is_capital = yes
+			}
+			save_scope_as = central_bank_site_overrated_currency_owner
+		}
+	}
+	every_country = {
+		limit = {
+			has_modifier = has_central_bank
+			NOT = { this = scope:target_country }
+			has_variable_map = zz_ef_rq_cb_m
+			is_key_in_variable_map = { name = zz_ef_rq_cb_m target = scope:target_country }
+		}
+		save_scope_as = seller_root
+		every_scope_state = {
+			limit = {
+				has_modifier = central_bank_historic_place
+				is_capital = yes
+			}
+			save_scope_as = central_bank_site_root
+		}
+		if = {
+			limit = {
+				exists = scope:central_bank_site_root
+				exists = scope:central_bank_site_overrated_currency_owner
+			}
+			zz_ef_rq_get = { MAP = zz_ef_rq_cb_m D = scope:target_country }
+			set_variable = {
+				name = zz_ef_crisis_due
+				value = {
+					value = var:zz_ef_rq_h
+					multiply = scope:target_country.money_value_target_real
+					min = 0
+				}
+			}
+			zz_ef_crisis_redeem = yes
+		}
+		zz_ef_rq_get = { MAP = zz_ef_rq_cb_m D = scope:target_country }
+		zz_ef_rq_add = { MAP = zz_ef_rq_cb_m K = m D = scope:target_country V = { value = var:zz_ef_rq_h multiply = -1 } }
+		# the deposits cancelled against D's metal: D's banks owe them no more (their capital, the pool unchanged)
+		scope:target_country = {
+			if = { limit = { NOT = { has_variable = zz_ef_bank_capital } } set_variable = { name = zz_ef_bank_capital value = 0 } }
+			change_variable = { name = zz_ef_bank_capital subtract = scope:seller_root.var:zz_ef_rq_dlt }
+		}
+	}
+}
+
+# Any scope, monthly with the logs on (zz_ef_world_month_ef): the register adds up -- for every debtor the sum of the
+# holders' maps (and the house) against its totals; EFI|date|WORLD|… (n_m -- holdings of money, out_m -- the debtors'
+# totals, bad_m -- debtors off by more than 1, the same for bonds; pot -- the house).
+zz_ef_rq_world_check = {
+	every_country = {
+		limit = { OR = { has_variable = zz_ef_rq_out_m has_variable = zz_ef_rq_out_b has_variable = zz_ef_rq_pot } }
+		set_variable = { name = zz_ef_rq_chk_m value = 0 }
+		set_variable = { name = zz_ef_rq_chk_b value = 0 }
+	}
+	set_global_variable = { name = zz_ef_rq_w_n_m value = 0 }
+	set_global_variable = { name = zz_ef_rq_w_n_b value = 0 }
+	set_global_variable = { name = zz_ef_rq_w_out_m value = 0 }
+	set_global_variable = { name = zz_ef_rq_w_out_b value = 0 }
+	set_global_variable = { name = zz_ef_rq_w_bad_m value = 0 }
+	set_global_variable = { name = zz_ef_rq_w_bad_b value = 0 }
+	set_global_variable = { name = zz_ef_rq_w_pot value = 0 }
+	every_country = {
+		zz_ef_rq_check_map = { MAP = zz_ef_rq_cb_m K = m }
+		zz_ef_rq_check_map = { MAP = zz_ef_rq_bk_m K = m }
+		zz_ef_rq_check_map = { MAP = zz_ef_rq_pp_m K = m }
+		zz_ef_rq_check_map = { MAP = zz_ef_rq_tr_b K = b }
+		zz_ef_rq_check_map = { MAP = zz_ef_rq_bk_b K = b }
+		zz_ef_rq_check_map = { MAP = zz_ef_rq_pp_b K = b }
+		zz_ef_rq_check_map = { MAP = zz_ef_rq_cb_b K = b }
+	}
+	every_key_in_global_variable_map = {
+		variable = zz_ef_clr_pot
+		save_temporary_scope_as = zz_ef_rq_k
+		set_global_variable = { name = zz_ef_rq_t value = "global_variable_map(zz_ef_clr_pot|scope:zz_ef_rq_k)" }
+		change_global_variable = { name = zz_ef_rq_w_pot add = global_var:zz_ef_rq_t }
+		scope:zz_ef_rq_k = { change_variable = { name = zz_ef_rq_chk_m subtract = global_var:zz_ef_rq_t } }
+	}
+	every_country = {
+		limit = { OR = { has_variable = zz_ef_rq_out_m has_variable = zz_ef_rq_out_b has_variable = zz_ef_rq_pot } }
+		# money: the holders' maps = the total; the house = var:zz_ef_rq_pot
+		if = {
+			limit = { has_variable = zz_ef_rq_out_m }
+			change_global_variable = { name = zz_ef_rq_w_out_m add = var:zz_ef_rq_out_m }
+			change_variable = { name = zz_ef_rq_chk_m subtract = var:zz_ef_rq_out_m }
+		}
+		if = {
+			limit = { has_variable = zz_ef_rq_pot }
+			change_variable = { name = zz_ef_rq_chk_m add = var:zz_ef_rq_pot }
+		}
+		if = {
+			limit = { OR = { var:zz_ef_rq_chk_m > 1 var:zz_ef_rq_chk_m < -1 } }
+			change_global_variable = { name = zz_ef_rq_w_bad_m add = 1 }
+			if = { limit = { zz_ef_logs_on = yes } debug_log = "EFI|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|bad_m|diff [THIS.GetCountry.MakeScope.Var('zz_ef_rq_chk_m').GetValue|0]|out [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_out_m_v')|0]" }
+		}
+		if = {
+			limit = { has_variable = zz_ef_rq_out_b }
+			change_global_variable = { name = zz_ef_rq_w_out_b add = var:zz_ef_rq_out_b }
+			change_variable = { name = zz_ef_rq_chk_b subtract = var:zz_ef_rq_out_b }
+		}
+		if = {
+			limit = { OR = { var:zz_ef_rq_chk_b > 1 var:zz_ef_rq_chk_b < -1 } }
+			change_global_variable = { name = zz_ef_rq_w_bad_b add = 1 }
+		}
+		remove_variable = zz_ef_rq_chk_m
+		remove_variable = zz_ef_rq_chk_b
+	}
+	if = { limit = { zz_ef_logs_on = yes } debug_log = "EFI|[TimeKeeper.GetCurrentDate.GetString]|WORLD|n_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_n_m_v')|0]|out_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_out_m_v')|0]|bad_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_bad_m_v')|0]|pot [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_pot_v')|0]|n_b [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_n_b_v')|0]|out_b [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_out_b_v')|0]|bad_b [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_bad_b_v')|0]" }
+}
+# HOLDER scope: each holding of MAP added to its debtor's var:zz_ef_rq_chk_<K> (zz_ef_rq_world_check).
+zz_ef_rq_check_map = {
+	if = {
+		limit = { has_variable_map = $MAP$ }
+		save_temporary_scope_as = zz_ef_rq_hd
+		every_key_in_variable_map = {
+			variable = $MAP$
+			save_temporary_scope_as = zz_ef_rq_k
+			scope:zz_ef_rq_hd = { set_variable = { name = zz_ef_rq_t value = "variable_map($MAP$|scope:zz_ef_rq_k)" } }
+			change_variable = { name = zz_ef_rq_chk_$K$ add = scope:zz_ef_rq_hd.var:zz_ef_rq_t }
+			change_global_variable = { name = zz_ef_rq_w_n_$K$ add = 1 }
+		}
+		remove_variable = zz_ef_rq_t
+	}
+}

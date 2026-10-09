@@ -20,6 +20,11 @@ zz_ef_world_month_ef = {
 		limit = { has_modifier = global_monetary_reference }
 		global_monetary_reference_global_var_fixe = yes
 	}
+	# the register of claims adds up (ld_claims.txt, the EFI line) -- a check for the logs only
+	if = {
+		limit = { zz_ef_logs_on = yes }
+		zz_ef_rq_world_check = yes
+	}
 }
 
 # Any scope: the event on the country ranked first.

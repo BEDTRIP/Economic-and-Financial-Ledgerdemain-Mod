@@ -16,6 +16,7 @@
 | ЦБ: ставка, денежная политика, кредит ЦБ, облигации ЦБ, премия за риск | `central-bank.md` | `common/script_values/ld_cb_rate_values.txt`, `common/scripted_effects/ld_monetary_policy.txt` |
 | Банки и вклады | `banks.md` | `common/buildings/ld_bank.txt`, `common/scripted_effects/ld_bank_seed.txt`, `common/scripted_effects/ld_nr_deposits.txt` |
 | Облигации и консоли | `bonds.md` | `common/scripted_effects/ld_bond_ledger.txt`, `common/scripted_effects/ld_consols.txt` |
+| Реестр требований: словари держателей «должник → сумма», итоги должников, сверка | `claims.md` | `common/scripted_effects/ld_claims.txt`, `common/script_values/ld_claims_values.txt` |
 | Клиринг, форекс, резервы | `clearing-fx.md` | `common/scripted_effects/ld_clearing.txt`, `common/scripted_guis/ld_cbfx.txt` |
 | Биржа, компании, финансовый центр | `exchange-companies.md` | `common/company_types/00_ef_companies.txt`, `common/scripted_effects/ld_listing.txt`, `common/script_values/ld_capitalization_snapshot.txt` |
 | Стройка: PSC, домохозяйства, перестройка, ИИ | `construction.md` | `common/scripted_effects/PSC_scripted_effects.txt`, `common/script_values/ld_pb_overbuild_values.txt` |

@@ -5,17 +5,17 @@
 [[Биржа]]. **Решения:** Д.R0.8.4, Д.R3.4, Д.R8в.1, Д.R8в.2 (`решения.md`).
 
 Мировой клиринг платежей с заграницей (каждую неделю чистый внешний поток страны проходит через «клиринговую палату»: плательщик платит
-золотом/металлом по доверию к валюте и своей валютой, получатель забирает долю содержимого палаты). Форекс E&F (ИИ-сделки и окно обмена игрока) — в
+золотом/металлом по доверию к валюте и своими деньгами, получатель забирает долю содержимого палаты; деньги в палате и у ЦБ-получателей —
+требования реестра, `claims.md`). Форекс E&F (ИИ-сделки и окно обмена игрока) — в
 `_archive/` (`ef_ai_forex/`, `ef_forex_windows/`); заявки игрока — биржей (R8б). Валютные запасы ЦБ показываются таблицей и диаграммой держателей. Сила валюты двигает торговлю.
 E&F `trade_balance` отключён. Ключи `ld_*` — с префиксом `zz_ef_`.
 
 ## Файлы
-- `common/scripted_effects/ld_clearing.txt` — генерат (`tools/regen_ef_clearing.py`): `zz_ef_clr_window_roll` (окно 7 дней, глобалки `zz_ef_clr_window`, `zz_ef_clr_in_acc`, `zz_ef_clr_out_acc`), `zz_ef_clr_step` (страна, недельный), `zz_ef_clr_head_find` (кто платит за нас: сюзерен внешневалютного подданного / владелец рынка), `zz_ef_clr_pay`, `zz_ef_clr_receive`, `zz_ef_clr_put_own` (своя валюта в палату), `zz_ef_clr_take_all` (по 95 валютам, 1617 строк), `zz_ef_cbfx_week_step` (недельная дельта запасов каждой валюты `zz_ef_cbfx_d_<cur>`).
-- `common/script_values/ld_clearing_values.txt` — доля металла плательщика `zz_ef_clr_metal_share` (0.75…1.25 → 100%…30%), золото за единицу денег `zz_ef_clr_gold_per_money` (+`_gpm_head`, `_gpm_own`), `zz_ef_clr_pot_value` (всё в палате в золоте; валюты — по курсу эмитента `zz_ef_fx_gold_<cur>`, как своя единица `zz_ef_clr_gpm_own`), `zz_ef_clr_pay_ratio_v`, `zz_ef_clr_ratio_v`, потоки `zz_ef_v_f_clr_*`, `zz_ef_bank_holds_<Bank>` (валюта страны у частных банков E&F, из `stockpiling_<cur>_company_<Bank>_fixe`), `zz_ef_cbfx_<cur>` (запас валюты ЦБ).
-- `common/scripted_guis/ld_cbfx.txt` — `zz_ef_cbfx_update_sorted` (таблица валют ЦБ, список `zz_ef_cbfx_list`), `zz_ef_holders_update` (какие ЦБ держат нашу валюту: `zz_ef_holds_pc`, `zz_ef_holders_list`).
-- `common/script_values/ld_fx_reserves_values.txt` — `zz_ef_fx_reserves_metal` (чужая валюта в резервах ЦБ в золоте: `stockpiling_<cur>_state_1` × стоимость валюты).
+- `common/scripted_effects/ld_clearing.txt` — генерат (`tools/regen_ef_clearing.py`): `zz_ef_clr_window_roll` (окно 7 дней, глобалки `zz_ef_clr_window`, `zz_ef_clr_in_acc`, `zz_ef_clr_out_acc`), `zz_ef_clr_step` (страна, недельный), `zz_ef_clr_head_find` (кто платит за нас: сюзерен внешневалютного подданного / владелец рынка), `zz_ef_clr_pay`, `zz_ef_clr_receive`, `zz_ef_clr_put_own` (свои деньги в палату — требование на плательщика в глобальной карте `zz_ef_clr_pot`), `zz_ef_clr_take_all` (доля палаты по ключам карты: свои деньги погашаются, чужие — в карту ЦБ `zz_ef_rq_cb_m`), `zz_ef_clr_pot_value_set` (палата в золоте → `global_var:zz_ef_clr_pot_g`), `zz_ef_cbfx_week_step` (недельное изменение чужих денег ЦБ по эмитентам — карты `zz_ef_cbfx_d`, `zz_ef_cbfx_p`).
+- `common/script_values/ld_clearing_values.txt` — доля металла плательщика `zz_ef_clr_metal_share` (0.75…1.25 → 100%…30%), золото за единицу денег `zz_ef_clr_gold_per_money` (+`_gpm_head`, `_gpm_own`), `zz_ef_clr_pot_value` (всё в палате в золоте: металл + деньги эмитентов по `zz_ef_rq_gpm_v`), `zz_ef_clr_pay_ratio_v`, `zz_ef_clr_ratio_v`, потоки `zz_ef_v_f_clr_*`, `zz_ef_cbfx_g_v` (порядок строк таблицы).
+- `common/scripted_guis/ld_cbfx.txt` — `zz_ef_cbfx_update_sorted` (таблица чужих денег ЦБ по эмитентам: список `zz_ef_cbfx_list`, строка — переменные эмитента `zz_ef_cbfx_u/_g/_mn/_dd`), `zz_ef_holders_update` (какие ЦБ держат наши деньги: `zz_ef_holds_pc`, `zz_ef_holders_list`).
+- `common/script_values/ld_fx_reserves_values.txt` — `zz_ef_fx_reserves_metal` (чужие деньги в резервах ЦБ, которые идут в покрытие, в золоте: `var:zz_ef_fx_res_gold`, `zz_ef_fx_metal_update`).
 - `common/scripted_effects/ld_stockpile_state_var_seed.txt` — смежный учётный файл.
-- `common/script_values/ld_reserve_trade_values.txt` (генерат) — `zz_ef_fx_liab` (чужие запасы нашей валюты у держателей, живое).
 - `common/scripted_effects/ld_reference_strength.txt` — `zz_ef_currency_trade_step` (месяц: накладывает `zz_ef_currency_trade` по силе валюты), `zz_ef_reference_strength_step`.
 - `common/static_modifiers/ld_currency_trade.txt` — `zz_ef_currency_trade` (импорт / экспорт от реального перекоса курса к эталону, ±50 % потолок, R3.4), плюс E&F `strong_currency`/`weak_currency` без торговых полей.
 - `common/static_modifiers/ld_fx_holders_demand.txt` — экспортное преимущество от валюты за рубежом (см. `banks.md`).
@@ -23,7 +23,7 @@ E&F `trade_balance` отключён. Ключи `ld_*` — с префиксо�
 - `common/production_methods/00_ef_market_liquidity.txt` — `pm_no_market_liquidity` (по закону «без денежной системы», Д.R8а.2), `pm_market_liquidity_currency` (вход `goods_input_liquidity_currency_add = 28` — бизнесы покупают услугу расчётов у банков), далее методы военных заказов (`pm_government_aid_*`).
 - E&F, форекс:
   - ИИ-форекс E&F (`ai_buy_sell_currency` → `buy_/sell_<cur>_currency`) — в `_archive/ef_ai_forex/` (R2, Д.R2.2; форекс ЦБ сделками — R8); в `central_bank_ef_on_yearly_pulse_country` остался `monetary_systeme_transition`; арбитражи — см. поток.
-  - `common/scripted_effects/01_economic_scripted_effects.txt`: `sell_<cur>_currency_crisis` (кризисная продажа, из `all_currency_resold`), `trade_balance` (:11204).
+  - `common/scripted_effects/01_economic_scripted_effects.txt`: `trade_balance` (:11204).
   - Окно обмена валют игрока (вкладка рынка «global», кнопки `<cur>_buy_in_gold` / `<cur>_sell_in_gold`, проводка `zz_ef_fxb_*`) — в `_archive/ef_forex_windows/` (Д.R8а, п. 8).
   - `common/scripted_guis/09_ef_other.txt`: `trade_balance_actualized`.
   - `common/script_values/00_economic_scripted_value.txt:5661-5913` — `trade_balance_*` значения; `01_economic_currency_scripted_value.txt:285996…` — `trade_balance_in_gold*`.
@@ -46,14 +46,16 @@ E&F `trade_balance` отключён. Ключи `ld_*` — с префиксо�
 | `zz_ef_f_clr_cur_out`, `_fx_in`, `_own_back` | потоки валюты | `zz_ef_clr_*` | карточка платёжного баланса, лог |
 | глобалки `zz_ef_clr_window`, `zz_ef_clr_in_acc`, `zz_ef_clr_out_acc` | окно палаты, требования и платежи (золото) | `zz_ef_clr_window_roll`, `_pay`, `_receive` | `zz_ef_clr_pay_ratio_v` |
 | `gold_state_1`, `silver_state_1` (штат столицы ЦБ) | металл ЦБ | клиринг, `ld_metal_accounts.txt` | вся модель металла |
-| `stockpiling_<cur>_state_1` (штат ЦБ) | запас валюты `<cur>` в ЦБ, единицы | клиринг, кнопки игрока, `sell_<cur>_currency_crisis` | `zz_ef_cbfx_<cur>`, `zz_ef_fx_reserves_metal` |
-| `zz_ef_cbfx_d_<cur>`, `zz_ef_cbfx_p_<cur>` | дельта и прошлое значение запаса | `zz_ef_cbfx_week_step` | таблица ЦБ |
+| карта `zz_ef_rq_cb_m` (страна) | чужие деньги ЦБ по эмитентам, в их деньгах (`claims.md`) | `zz_ef_clr_take_all`, `zz_ef_rq_interest_step`, `zz_ef_rq_crisis_resell` | таблица ЦБ, `zz_ef_fx_metal_update` |
+| глобальная карта `zz_ef_clr_pot` | деньги плательщиков в палате, по эмитентам | `zz_ef_clr_put_own`, `zz_ef_clr_take_all` | `zz_ef_clr_pot_value_set` |
+| `stockpiling_<cur>_state_1` (штат ЦБ) | E&F: собственный запас валюты ЦБ (невыпущенные деньги); чужих денег здесь больше нет | история и ввод валют E&F | значения E&F |
+| карты `zz_ef_cbfx_d`, `zz_ef_cbfx_p` (игрок) | изменение за неделю и прошлое значение по эмитентам | `zz_ef_cbfx_week_step` | таблица ЦБ |
 | `zz_ef_holds_pc`, список `zz_ef_holders_list` | сколько нашей валюты у держателя | `zz_ef_holders_update` | GUI |
 | `trade_balance_in_gold_fixe` | счётчик торгового баланса E&F (держится 0) | `trade_balance`, кнопка `trade_balance_actualized` | `central_bank_reserves_*` E&F |
 
 ## Вызовы и связи
 - `zz_ef_clr_gold_per_money` (золото на единицу денег: своя — `zz_ef_clr_gpm_own` = `zz_ef_value_to_parity`, Д.R8а.4; без денежной системы — хозяина рынка) читают клиринг, таблицы облигаций (`ld_bond_tables.txt`), модель денег.
-- `zz_ef_fx_liab`/`zz_ef_fx_liab_all` — вклады (`banks.md`).
+- `zz_ef_fx_liab_all` = `zz_ef_nr_dep_v` — наши деньги за границей (`banks.md`).
 - Интерфейс: `gui/ld_economy_panel.gui` (кнопки `zz_ef_cbfx_update_sorted`, `zz_ef_holders_update` :2971-3012, диаграммы :9754, :9796; кнопка `trade_balance_actualized` :2768, :2976); `gui/00_ef_deported_gui_1.gui` — окно покупки/продажи валют и облигаций E&F.
 - Модификатор `zz_ef_currency_trade` — на стране (импорт/экспорт).
 

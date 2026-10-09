@@ -58,12 +58,11 @@
 | 41132–41987 | `devaluation_on`, `revaluation_on`, `set_reset_monetary_system_status`, `on_activate_*_law` | — |
 | 41385 | `trade_balance` (388) | да (месячный) |
 | — | `stockpiling_currency`, `stockpiling_currency_type_1` — в `_archive/ef_stockpiling_currency/` (R2) | — |
-| 42340–90729 | 95 `sell_<cur>_currency_crisis` (`buy_/sell_<cur>_currency` ИИ-форекса — в `_archive/ef_ai_forex/`) | да, из `all_currency_resold`; пишут `gold_state_1`/`silver_state_1` |
 | 92195, 104223 | `reset_debt_in_national_currency[_player]` (2×2 тыс. строк) | да (GUI/смена закона) |
 | 94312–98727 | `stockpiling_capital_state_transfert`, `..._financial_center_place`, `enemy_capital_is_occuped` (1,8 тыс.), `enemy_stats_is_occuped` | да (месячный, решение ИИ, бой) |
 | 98819–104131 | `central_bank_production_methods`, `_3`, `_4` — пустые определения (тела в `_archive/ef_central_bank_pm_consuption/`) | пусто |
 | 106333–107230 | `remove_suject_currency`, `subject_currency` | живые (подданные; неподданный на чужом рынке — со своей системой, Д.R8а.3) |
-Внутри E&F-тел встроены вызовы модели: `zz_ef_cb_rate_step`, `zz_ef_std_switch_*`, `zz_ef_mp_init/_clear`, `zz_ef_crisis_redeem` (95), `zz_ef_cb_cover`, `zz_ef_cover_normal` (по 95 валютам в `sell_<cur>_currency_crisis`).
+Внутри E&F-тел встроены вызовы модели: `zz_ef_cb_rate_step`, `zz_ef_std_switch_*`, `zz_ef_mp_init/_clear`, `zz_ef_cb_cover`, `zz_ef_cover_normal`; кризис валюты — `zz_ef_rq_crisis_resell` (`claims.md`) вместо `all_currency_resold` E&F (в `_archive/ef_currency_crisis_resold/`).
 
 ## Переменные
 | имя | смысл | пишет | читает |

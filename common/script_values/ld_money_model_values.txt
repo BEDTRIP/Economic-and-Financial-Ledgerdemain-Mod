@@ -701,7 +701,7 @@ zz_ef_reserves_in_gold = {
 # (script_values/00_economic_scripted_value.txt:5408).
 zz_ef_value_floor_cover = 0.25
 # 1 if the CB redeems its notes in metal: a standard with metal and the cover 25%+ (Д.R8а.5) -- its currency then
-# counts in an exchange standard's cover (global_var:zz_ef_fxconv_<cur>, zz_ef_cur_par_update)
+# counts in an exchange standard's cover (var:zz_ef_rq_conv of the issuer, zz_ef_cur_par_update)
 zz_ef_convertible_v = {
 	value = 0
 	if = {
@@ -1693,23 +1693,18 @@ zz_ef_treasury_bonds = {
 	# the treasury's parts of other countries' engine debt (the bond ledger), not E&F's prices
 	value = zz_ef_bl_parts
 }
-# Claims on abroad in M3: the banks' and the treasury's foreign bonds. E&F's
-# trade account (var:trade_balance_in_gold_fixe, a counter of cumulative trade
-# in gold -- 12.6 billion for Belgium at M2 182M, runs 8-9) is gone with В2.1
-#: the trade moves the CB's metal (Hume) and, for a share, the
-# importer's currency (zz_ef_rc_step); the currency held abroad is
-# zz_ef_fx_liab (the log's liab).
+# Claims on abroad in M3: the banks' and the treasury's foreign bonds; our money held abroad -- zz_ef_fx_liab_all
+# (the log's liab).
 zz_ef_foreign_assets = {
 	value = zz_ef_bank_bonds
 	add = zz_ef_treasury_bonds
 }
 # the account "abroad" = the country's net foreign position, in its money -- the
 # claims (other countries' bonds of the banks and the treasury, the CB's foreign currency) minus the debt (our
-# currency held by other CBs and waiting in the clearing house, П.6). The CB's foreign currency counts in the
-# cover too (national_capacity); in the tooltip it is here, not in the CB's reserves (metal only).
+# money held abroad and waiting in the clearing house -- the register of claims, zz_ef_nr_dep_v). The CB's foreign
+# currency counts in the cover too (national_capacity); in the tooltip it is here, not in the CB's reserves (metal only).
 zz_ef_fx_liab_all = {
-	value = zz_ef_fx_liab
-	add = zz_ef_clr_own_in_pot
+	value = zz_ef_nr_dep_v
 }
 # the balance of payments of the week, recorded at the receiver with the net flow (zz_ef_ext_net_week):
 # current account = goods trade + primary income (dividends, bond interest) + secondary income (the other budget

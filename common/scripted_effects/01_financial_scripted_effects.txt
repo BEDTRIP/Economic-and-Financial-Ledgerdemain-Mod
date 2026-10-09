@@ -28631,19 +28631,7 @@ economic_instability = {
 						has_modifier = central_bank_bankruptcy_country
 					}
 				}
-				every_country = {
-					if = {
-						limit  = {
-							has_modifier = has_central_bank
-							not = {
-								this = root
-								#is_subject = yes #à voir car  il faut  que  tout  soit  vendu
-							}
-						}
-						save_scope_as = seller
-						all_currency_resold = yes
-					}
-				}
+				zz_ef_rq_crisis_resell = yes
 			}
 
 			#-> création d'hyper inflation scripté

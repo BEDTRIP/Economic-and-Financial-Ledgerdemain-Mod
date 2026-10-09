@@ -1,0 +1,57 @@
+﻿# The register of claims (scripted_effects/ld_claims.txt; docs/claims.md).
+
+# A unit of the scope country's money held abroad, in gold: its value against the parity (zz_ef_value_to_parity,
+# Д.R8а.4), kept on the issuer monthly (zz_ef_cur_par_update) and at each payment into the clearing house; 1 before.
+zz_ef_rq_gpm_v = {
+	value = 1
+	if = { limit = { has_variable = zz_ef_rq_gpm } value = var:zz_ef_rq_gpm }
+}
+# 1 if the scope country's money counts in an exchange standard's cover -- its issuer redeems in metal (last month's
+# zz_ef_convertible_v, Д.R8а.5)
+zz_ef_rq_conv_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_rq_conv } value = var:zz_ef_rq_conv }
+}
+# The scope country's money held abroad: by the holders (var:zz_ef_rq_out_m) and waiting in the clearing house
+# (var:zz_ef_rq_pot), in its money.
+zz_ef_rq_out_m_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_rq_out_m } value = var:zz_ef_rq_out_m }
+}
+zz_ef_rq_pot_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_rq_pot } value = var:zz_ef_rq_pot }
+}
+zz_ef_rq_out_b_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_rq_out_b } value = var:zz_ef_rq_out_b }
+}
+# the monthly check's world sums (zz_ef_rq_world_check, the EFI line)
+zz_ef_rq_w_n_m_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_rq_w_n_m } value = global_var:zz_ef_rq_w_n_m }
+}
+zz_ef_rq_w_out_m_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_rq_w_out_m } value = global_var:zz_ef_rq_w_out_m }
+}
+zz_ef_rq_w_bad_m_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_rq_w_bad_m } value = global_var:zz_ef_rq_w_bad_m }
+}
+zz_ef_rq_w_pot_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_rq_w_pot } value = global_var:zz_ef_rq_w_pot }
+}
+zz_ef_rq_w_n_b_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_rq_w_n_b } value = global_var:zz_ef_rq_w_n_b }
+}
+zz_ef_rq_w_out_b_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_rq_w_out_b } value = global_var:zz_ef_rq_w_out_b }
+}
+zz_ef_rq_w_bad_b_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_rq_w_bad_b } value = global_var:zz_ef_rq_w_bad_b }
+}

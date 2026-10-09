@@ -111,7 +111,7 @@ PSC-хук: `on_production_method_changed`, `on_building_built`, `on_acquired_te
 
 ## Вызовы и связи
 - Модель денег `ld_*`: месячные хуки зовут эффекты из `common/scripted_effects/ld_*.txt`; из тел E&F зовутся `zz_ef_cb_rate_step`, `zz_ef_std_switch_before/after`, `zz_ef_mp_init/_clear`, `zz_ef_crisis_redeem` (в `01_economic_scripted_effects.txt`), `zz_ef_cur_intro_after` (в `09_introduction_building_lvl.txt`).
-- Эффекты E&F, пишущие `gold_state_1` / `silver_state_1` ЦБ-штата (счета модели): `enemy_capital_is_occuped`, `sell_<cur>_currency_crisis` (через `all_currency_resold`), стартовые значения `99_ef_history_global_variable.txt`.
+- Эффекты E&F, пишущие `gold_state_1` / `silver_state_1` ЦБ-штата (счета модели): `enemy_capital_is_occuped`, `zz_ef_crisis_redeem` (через `zz_ef_rq_crisis_resell`), стартовые значения `99_ef_history_global_variable.txt`.
 - GUI: верхняя панель — `com_topbar_setup_ef`; пульсы GUI не вызывают, но scripted_guis зовут `reset_*`, `stockpiling_capital_state_transfert`, `reset_debt_in_national_currency_player`.
 
 ## Логи
@@ -144,6 +144,7 @@ PSC-хук: `on_production_method_changed`, `on_building_built`, `on_acquired_te
 | EFX | `common/scripted_effects/ld_money_model.txt:915` | стандарт, ЦБ, `money_value_0`, цель, покрытие, металл, M2 | месячный `zz_ef_money_model_monthly_step` |
 | EFJ | `common/scripted_effects/ld_ledger.txt` | сверка по запасам: «прочее» страны (запас, изменение, часть пула, часть казны и её изменение, казна за вычетом долга, бюджет недели, пул, книга банков, капитал, вклады, недель в шаге, роль); `WORLD` — сумма изменений «прочего» за неделю, из них казна, сумма модулей, число стран | недельный шаг (`zz_ef_reconcile`), мировой проход (`zz_ef_other_world_log`) |
 | EFY | `common/scripted_effects/ld_roles.txt` | WORLD: число стран по ролям А / Б / В, смен за месяц, ВВП 40-й и 50-й страны; строка `move` — смена роли страны (прежняя роль, месяцев в ней, месяцев ниже 50-го места, ВВП) | месячный проход `zz_ef_roles_world_pass` |
-| EFC | `common/scripted_effects/ld_money_model.txt:1110,1112` | кризисный выкуп валюты: должно/выплачено; эмитент | `zz_ef_crisis_redeem` (из `buy_/sell_<cur>_currency_crisis`) |
+| EFI | `common/scripted_effects/ld_claims.txt` | WORLD: число требований, итоги должников, расхождения (деньги, облигации), деньги в палате; страна — расхождение по должнику | `zz_ef_rq_world_check` из `zz_ef_world_month_ef` (месяц, при логах) |
+| EFC | `common/scripted_effects/ld_money_model.txt:1110,1112` | кризисный выкуп валюты: должно/выплачено; эмитент | `zz_ef_crisis_redeem` (из `zz_ef_rq_crisis_resell`) |
 | EFO / EFF | `common/scripted_effects/ld_money_log_rest.txt:5` / `6–10` | остаток баланса / статьи по зданиям, банкам, заграничные, казна, ЦБ | недельный `zz_ef_money_log_rest` (из `ld_money_model.txt:544`) |
 Других `debug_log` в `common/` и `events/` нет (grep по `debug_log` и `log =`).
