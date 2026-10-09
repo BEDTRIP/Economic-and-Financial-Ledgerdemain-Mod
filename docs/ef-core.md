@@ -65,7 +65,7 @@
 | имя | смысл | пишет | читает |
 |---|---|---|---|
 | `gold_state_1`, `silver_state_1` (штат) | запас металла штата (ЦБ-штат — резерв ЦБ; в модели `ld_*` — резерв ЦБ) | history, `sell_<cur>_currency_crisis`, кнопки форекса, `enemy_capital_is_occuped`, `zz_ef_*` | `gold_state_native_for_stockpile`, `zz_ef_cbm_gold/silver` |
-| `money_value_<cur>` / `money_value_target_<cur>` / `money_value_in_gold_<cur>` (глобальные) | курс валюты, цель и в золоте по каждой из 95 валют | `money_value[_target|_in_gold]_<cur>_global_var` | инфляция, GUI |
+| `money_value_<cur>` / `money_value_in_gold_<cur>` (глобальные) | курс валюты и в золоте по каждой из 95 валют | `money_value[_in_gold]_<cur>_global_var` | инфляция, GUI |
 | `base_rate_percentage`, `rise_base_rate`, `down_base_rate` | ставка ЦБ; модификаторы направления | `zz_ef_cb_rate_step` | `central_bank_ef_on_monthly_pulse_country`, PSC |
 | `speculative_share_1` / `_2` | пузырь / индекс перестройки | `ld_bubble`, `ld_pb_overbuild_counter` | JE `financial_center_je_2` |
 | `looting_1_year` | флаг грабежа | `enemy_capital_is_occuped`, годовой пульс | `ef_on_yearly_pulse_reset` |

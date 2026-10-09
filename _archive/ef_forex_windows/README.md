@@ -53,5 +53,13 @@ custom loc → локализация).
   `market_owner_no_currency_exchange_panel_visibility`, `player_no_currency_exchange_panel_visibility`;
   `01_ef_currency_name_localization_l_<язык>.yml`: `dollar_united_states_dollar_short`, `gulden_south_german_gulden_short`.
 
+- Писатели переменных, которые читало только окно (после выреза — «set but never used»):
+  `common/scripted_effects/01_economic_scripted_effects.txt` — 95 эффектов `money_value_target_<cur>_global_var` (перебор
+  `every_country` на каждый), их вызовы в `common/scripted_effects/00_on_action_main.txt` (95 строк
+  `money_value_target_<cur>_global_var = yes` после `money_value_<cur>_global_var`) и стартовые нули в
+  `common/history/global/00_ef_economic_global_variable.txt`; в `10_new_country_var.txt` (`new_country_var_ef_economy`) —
+  `set_variable` `trade_<cur>_var` (95), `currency_quantity`, `sell_in_gold_on`, `sell_in_currency_on`; sgui `sell_in_gold_on`,
+  `sell_in_currency_on` (`00_economic_scripted_guis.txt`).
+
 **Вернуть:** вставить блок GUI на место, определения — в те же файлы; в `zz_ef_metal_reconcile` и генератор
 `regen_ef_nr_deposits.py` — чтения `zz_ef_mt_fx_*` / `zz_ef_nr_fx_pend`; переменные выбора — в `new_country_var_ef_economy`.

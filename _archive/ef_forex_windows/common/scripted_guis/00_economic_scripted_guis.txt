@@ -77305,3 +77305,28 @@ choose_currency_type_thaler_saxon_thaler = {
 		}
 	}
 }
+
+sell_in_gold_on = {
+	effect  = {
+		set_variable = {
+			name = sell_in_gold_on
+			value = 1
+		}
+		set_variable = {
+			name = sell_in_currency_on
+			value = 0
+		}
+	}
+}
+sell_in_currency_on = {
+	effect  = {
+		set_variable = {
+			name = sell_in_currency_on
+			value = 1
+		}
+		set_variable = {
+			name = sell_in_gold_on
+			value = 0
+		}
+	}
+}
