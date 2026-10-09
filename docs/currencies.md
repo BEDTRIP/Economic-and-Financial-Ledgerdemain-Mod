@@ -15,14 +15,12 @@
 - `common/scripted_triggers/ld_reference_currency_triggers.txt` — `zz_ef_reference_candidate`.
 - `common/scripted_effects/ld_reference_strength.txt` — `zz_ef_reference_strength_step`, `zz_ef_currency_trade_step`.
 - `common/scripted_effects/ld_standard_switch.txt` — `zz_ef_std_switch_before/_after`: смена стандарта сохраняет стоимость денег в золоте.
-- `common/scripted_effects/ld_currency_zone.txt` (рукописный) — `zz_ef_cur_zone_step`, `zz_ef_cur_zone_currency` (667 строк: цепочка `else_if` по 95 законам).
-- `common/scripted_triggers/ld_currency_zone_triggers.txt` — `zz_ef_cur_zone_has_currency` (OR по 95 законам).
 - `common/script_values/ld_customs_union_values.txt`, `common/scripted_triggers/ld_customs_union_triggers.txt` (генерируются `tools/regen_ef_customs_union.py`) — `zz_ef_cu_member`, `zz_ef_currency_own`, `zz_ef_member_goods_net` (по товарам, 324 строки), `zz_ef_members_trade_sum`.
 - `common/history/global/zz_ef_currency_fix.txt` — старт: опечатка WUR (`law_gulden_south_german_gulden_currency`), 13 стран без валюты → `law_no_market_liquidity`; страны с подушным налогом без технологии `currency_standards` (E&F перенёс её в эру 2) получают её (метка `zz_ef_start_currency_standards` — `on_researched` E&F не переводит их в фиат). Грузится после `99_ef_history_global_variable.txt`.
 - `common/treaty_articles/16_latin_monetary_union_treaty.txt`, `common/treaty_articles/17_scandinavian_monetary_union_treaty.txt` — статьи договоров (флаги, `can_ratify`, `on_entry_into_force` только лоббийное умиротворение). Денежных эффектов нет.
 - `common/scripted_triggers/00_ef_custom_trigger.txt` — `is_reference_currency` (:582), `is_reference_currency_no` (:587), `is_strong/balanced/weak_currency` (:592-:637, тело E&F, сравнение с `zz_ef_currency_strength` вместо медианы), `is_extreme_weak_currency` (:623), `market_goods_is_currency` (:1423).
 - `common/scripted_effects/08_list_effect.txt` :202 `national_capacity_variable_list` — раз в год (`ef_on_yearly_pulse_country`, `on_actions/00_ef_on_action.txt:139`) выбор эталона: кандидаты `zz_ef_reference_candidate`, по `national_capacity_in_gold`, позиция 0 → модификатор `global_monetary_reference`; лог `EFE|`.
-- Прочее E&F: `common/scripted_effects/09_introduction_building_lvl.txt:34319` `introduction_new_currency` (выдача валюты/паритета при исследовании; зовёт `zz_ef_cur_zone_step` через `ld_currency_intro_metal.txt:75`).
+- Прочее E&F: `common/scripted_effects/09_introduction_building_lvl.txt:34319` `introduction_new_currency` (выдача валюты/паритета при исследовании; обёртка металла — `ld_currency_intro_metal.txt`).
 
 ### Индекс `01_economic_currency_scripted_value.txt` (на каждую валюту `<cur>`)
 - :228-:294 общие `base_demande_currency*`, `target_demand_currency*`, `enough_foreign_currrency`.
@@ -37,10 +35,10 @@
 
 ## Поток / порядок
 - Старт: `99_ef_history_global_variable.txt` выдаёт законы валют → `zz_ef_currency_fix.txt` правит WUR и 13 стран.
-- Раз в месяц (`zz_ef_money_model_monthly_step`, `ld_money_model.txt:1005..`) и на первом шаге страны сразу после старта в балансе: `zz_ef_cur_zone_step`; `zz_ef_reference_strength_step`; `zz_ef_currency_trade_step` (после шага эталона; только страны с ЦБ, не эталон).
+- Раз в месяц (`zz_ef_money_model_monthly_step`, `ld_money_model.txt:1005..`) и на первом шаге страны сразу после старта в балансе: `zz_ef_reference_strength_step`; `zz_ef_currency_trade_step` (после шага эталона; только страны с ЦБ, не эталон).
 - Раз в год (`ef_on_yearly_pulse_country`, `on_actions/00_ef_on_action.txt:139`, зовёт страна-эталон): `national_capacity_variable_list` → пересев эталона. Кандидат: великая держава, ЦБ, рейтинг ≥ 6 (BBB), металлический/золотодевизный стандарт, нет дефолта ЦБ, покрытие ≥ 25%.
 - Смена закона стандарта: `on_activate_monetary_system_law` → `zz_ef_std_switch_before` (запомнить стандарт и паритет) → тело E&F → `zz_ef_std_switch_after` (пересчёт паритета по `silver_to_gold_rate`/`gold_to_silver_rate`, перевод запасов `silver_state_1`↔`gold_state_1` в столичных штатах с `central_bank_historic_place`).
-- Зона: подданный (после своего первого шага — старт срезал его валюту за границей), сюзерен с ЦБ, металл. стандарт и валюта → подданный получает стандарт, валюту и паритет сюзерена, `monetary_systeme_transition` на 2 мес. Иначе `zz_ef_cur_zone` снимается.
+- Подданный с ЦБ на чужом рынке — на внешневалютном стандарте (`law_external_exchange_standard`, E&F `subject_currency` на старте и в месячном пульсе): своя валюта, курс — якоря (`zz_ef_value_to_parity`), металл ЦБ — свой и в покрытии (`zz_ef_cb_metal_standard`), в клиринге рассчитывается через сюзерена, эмитентом вкладов и курса валюты не считается (Д.R8а.3, В-R8а.1).
 
 ## Переменные
 | имя | смысл | пишет | читает |
@@ -49,12 +47,11 @@
 | `var:zz_ef_cur_noun` | название валюты у **всех** стран: «<прилагательное страны> <слово>» («Британский фунт», «Российский рубль»); эмитент валюты страны — сама страна (Верхняя Канада на фунте — «Верхнеканадский фунт»).  Слово `flag:<слово>`: валюта закона / культуры E&F — слово валюты (`zz_ef_cur_name_set`, `ld_currency_var.txt`; `spe_uni` — национальное); без `zz_ef_cur` — национальное по основной культуре: сперва культура (все основные — одной: гривна, крона, лит, лат, манат), затем язык (все основные — одного: марка, лев, лек, така, ринггит, толар), затем наследие любой основной (на все 110 наследий; `zz_ef_cur_noun_set`, `ld_currency_national.txt`). Название — `currency_name`: без денежной системы — «металл по весу» (`zz_ef_cur_none`, Д.R8а.2: своей валюты нет), иначе `zz_ef_cur_nat_<слово>` (`localization/*/ld_currency_national_l_*.yml`; рус. — основа прилагательного игры + окончание по роду слова; названий E&F по ключу валюты и запасных в `currency_name` нет — слово у всех стран с загрузки игры); лог `EFM|…|cur_nat` | `zz_ef_cur_names` (всем странам на загрузке — `on_actions/ld_currency_name_on_actions.txt`), `zz_ef_cur_set` (шаг старта — всем странам, новая страна, январь у А / Б), `on_activate` законов валют | `currency_name` |
 | `global_var:zz_ef_fxvtp_<cur>` | курс эмитента к паритету (`zz_ef_value_to_parity`) по валюте — ЦБ с законом валюты вне чужой зоны | `zz_ef_cur_par_update` (`ld_currency_var.txt`): месячный шаг, `zz_ef_cur_set` | `zz_ef_fx_gold_<cur>` (`ld_currency_values.txt`): единица валюты в резервах ЦБ в золоте по деньгам движка (1 до первого месяца эмитента) → `zz_ef_fx_reserves_metal` |
 | `zz_ef_value_to_parity` (значение) | курс единицы денег страны к паритету (Д.R8а.4): металлический, обменный стандарт и «без системы» — 1 (рынок вокруг паритета — R8б); фиат — плавающий: 1 на день перехода, дальше × (цены эталона / свои) с тех пор (`var:zz_ef_fiat_p0`, `_r0` — `zz_ef_std_switch_after`); внешневалютный — у якоря (сюзерен, иначе хозяин рынка; `zz_ef_value_to_parity_own`) | `ld_reference_currency_values.txt` | сила валюты, `zz_ef_fx_gold_<cur>` |
-| `var:money_value_target_1` | паритет (металл на единицу) | история E&F, `zz_ef_std_switch_after`, `zz_ef_cur_zone_step`, `zz_ef_mp_complete` | `zz_ef_value_to_parity`, `zz_ef_metal_target_in_gold`, `zz_ef_cur_zone_step`, `zz_ef_mp_can_work` |
+| `var:money_value_target_1` | паритет (металл на единицу) | история E&F, `zz_ef_std_switch_after`, `zz_ef_mp_complete` | `zz_ef_value_to_parity`, `zz_ef_metal_target_in_gold`, `zz_ef_mp_can_work` |
 | `global_var:money_value_<cur>_global_var` | курс валюты `<cur>` | E&F | `money_value_<cur>` |
 | `global_var:money_value_median` | медиана E&F | E&F | `is_reference_currency` (E&F) |
 | `global_var:zz_ef_ref_vtp` | value_to_parity эталона | `zz_ef_reference_strength_step` | `zz_ef_currency_strength` |
 | `zz_ef_std_old`, `zz_ef_std_parity_old/_new` | старый стандарт (1 серебро, 2 би, 3 золото) и паритет при смене | `zz_ef_std_switch_*` | они же |
-| `zz_ef_cur_zone` | сюзерен, чью зону держит страна | `zz_ef_cur_zone_step` | `zz_ef_mp_can_work` |
 | `zz_ef_member_trade` | торговый счёт члена ТС за неделю | `zz_ef_trade_step` (`ld_money_model.txt`) | `zz_ef_members_trade_sum` |
 | `global_monetary_reference` | модификатор эталона | `08_list_effect.txt:300-306` | `zz_ef_currency_trade_step`, `is_*_currency` |
 | `zz_ef_currency_trade` | модификатор торговли от силы (`static_modifiers/ld_currency_trade.txt`), множитель `zz_ef_currency_trade_m` — реальный перекос курса: b = (1 / сила) × (индекс цен эталона `global_var:zz_ef_ref_cpi` / свой `var:zz_ef_prev_price`), (b − 1) × 40, в −50..50 (R3.4) | `zz_ef_currency_trade_step` | движок |

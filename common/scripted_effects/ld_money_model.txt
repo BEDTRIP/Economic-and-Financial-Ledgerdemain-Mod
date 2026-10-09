@@ -65,13 +65,10 @@ zz_ef_money_model_step = {
 		limit = { NOT = { has_variable = zz_ef_model_started } }
 		set_variable = zz_ef_model_started
 		zz_ef_metal_start_step = yes
-		# a subject joins its overlord's currency zone (standard, currency, target) now, not at its first month --
-		# the CB's start metal the same day needs the metal standard
-		zz_ef_cur_zone_step = yes
 	}
 	zz_ef_cb_metal_start_step = yes
-	# the start's window: a CB not on a metal standard half a year in (a subject outside a zone, Bavaria's CB with no
-	# standard) takes no start metal later -- a standard adopted years on buys its metal
+	# the start's window: a CB not on a metal-backed standard half a year in (a CB with no monetary standard) takes no
+	# start metal later -- a standard adopted years on buys its metal
 	if = {
 		limit = {
 			has_variable = zz_ef_cb_start_due
@@ -881,9 +878,6 @@ zz_ef_pop_extra_income_step = {
 # ---- the monthly step -------------------------------------------------------
 
 zz_ef_money_model_monthly_step = {
-	# a subject of a metal-standard overlord takes its standard, currency and parity
-	# (scripted_effects/ld_currency_zone.txt, generated)
-	zz_ef_cur_zone_step = yes
 	# the silver-to-gold rate from market prices
 	zz_ef_silver_rate_update = yes
 	# the reference currency's value / parity for the strength of the others

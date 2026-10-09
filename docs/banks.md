@@ -18,7 +18,7 @@
 - `common/production_method_groups/15_ef_bank.txt`, `common/production_methods/15_ef_bank.txt` — методы ЦБ по валютным стандартам (`pm_*_standard_bank_money_currency`: `country_minting_add`, выпуск облигаций `goods_output_bond_add`), `pm_revaluation`/`pm_devaluation`.
 - `common/scripted_effects/ld_nr_deposits.txt` — генерат: `zz_ef_nr_dep_step` (недельный шаг у эмитента: вклады, проценты, проводка клиринга `add_investment_pool`, модификатор `zz_ef_fx_holders_demand`).
 - `common/script_values/ld_nr_deposits_values.txt` — `zz_ef_nr_dep_v`, `zz_ef_v_f_nr_dep`, `zz_ef_v_w_nr_dep`, `zz_ef_v_f_nr_oth`, `zz_ef_nr_int_week`, `zz_ef_v_f_nr_int`, `zz_ef_fx_holders_demand_m` (до 20).
-- `common/scripted_triggers/ld_nr_deposits_triggers.txt` — `zz_ef_nr_issuer` (есть `has_central_bank`, нет `zz_ef_cur_zone`).
+- `common/scripted_triggers/ld_nr_deposits_triggers.txt` — `zz_ef_nr_issuer` (есть `has_central_bank`, не внешневалютный стандарт).
 - `common/static_modifiers/ld_fx_holders_demand.txt` — `zz_ef_fx_holders_demand` (`state_export_advantage_mult = 0.01` на единицу множителя).
 - E&F, банковская часть (огромные файлы, смотреть `grep -n`):
   - `common/scripted_effects/01_financial_scripted_effects.txt`: `establish_bank_and_ef_compagnie` (:13164, ИИ раз в год получает банковские компании), `ai_privat_bank_bond_1..25` (:4130…, покупка облигаций частными банками), `private_ownership_production_stocks`, `financial_center_production_methods`.

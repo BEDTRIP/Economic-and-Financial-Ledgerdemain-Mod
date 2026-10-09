@@ -8,7 +8,7 @@
 коэффициент, закомментированный вызов); `мёртвый` — ни откуда не вызывается; `дубль` — считает то же или пишет те же
 счета, что модель `ld_*`. Строки файлов — на момент записи, при правке файла сдвигаются: искать по имени.
 
-Итого: мёртвый 4, выключен 0, дубль 3, живой 210.
+Итого: мёртвый 4, выключен 0, дубль 3, живой 209.
 
 ## Денежная модель и металл (`money-model.md`)
 
@@ -41,7 +41,7 @@
 | механизм | статус | где | доказательство | интерфейс |
 | --- | --- | --- | --- | --- |
 | Статья Скандинавский валютный союз scandinavian_monetary_union_treaty | живой | common/treaty_articles/17_scandinavian_monetary_union_treaty.txt | создаётся событием 00_ef_economic_event.23 (`articles_to_create`), ЖЗ scandinavian_monetary_union_je_1 (00_ef_divers_je.txt:967) проверяет статью, кнопки союза и переменные scandinavian_monetary_union_* подключены; денежных эффектов в статье нет (только лоббийное умиротворение) | окно договоров, журнал союза |
-| Флаг-модификатор monetary_systeme_transition (блокирует переход E&F на другой стандарт) | живой | common/scripted_effects/ld_currency_zone.txt:20-28; 01_economic_scripted_effects.txt:10024, 27863; 0_ef_economic_event.23 | ставится на 2 мес. каждый месяц зоной подданных, на 12 мес. после смены закона стандарта, на 120 мес. событием союза; читается условиями законов стандарта (01_ef_monetary_system.txt:64,98,163) и эффектами перехода E&F | модификатор страны |
+| Флаг-модификатор monetary_systeme_transition (блокирует переход E&F на другой стандарт) | живой | 01_economic_scripted_effects.txt:10024, 27863; 0_ef_economic_event.23 | ставится на 12 мес. после смены закона стандарта, на 120 мес. событием союза; читается условиями законов стандарта (01_ef_monetary_system.txt:64,98,163) и эффектами перехода E&F | модификатор страны |
 | Валюта-эталон по E&F: money_value_median, weighted_average_currency_value(_test), is_reference_type | дубль | common/script_values/01_economic_currency_scripted_value.txt:1,8,7788; common/script_values/ld_reference_currency_values.txt:14 | «эталон» и «сила» теперь по zz_ef_currency_strength; медиана E&F осталась запасным путём в zz_ef_value_to_parity и в is_reference_currency | — |
 | Законы валют law_<cur>_currency (95) | живой | common/laws/01_ef_currency_type.txt:1-2028 | есть вызовы activate_law из introduction_new_currency и истории; 39 законов с always = no (товар вырезан), остальные ограничены тегами E&F + has_central_bank | окно законов (группа lawgroup_currency_type) |
 | Законы денежной системы (серебро/би/золото/золотодевиз/фиат/внешний) | живой | common/laws/01_ef_monetary_system.txt:1-251 | on_activate зовёт on_activate_monetary_system_law (01_economic_scripted_effects.txt:27577) | окно законов |
@@ -52,7 +52,6 @@
 | Шаг силы эталона zz_ef_reference_strength_step | живой | common/scripted_effects/ld_reference_strength.txt:6 | вызов из ld_money_model.txt (refs=1) | — |
 | Торговый модификатор от силы валюты zz_ef_currency_trade_step | живой | common/scripted_effects/ld_reference_strength.txt:15; common/static_modifiers/ld_currency_trade.txt | вызов из ld_money_model.txt; множитель в −10..10, зажим помечен «угадан» в комментарии | модификатор страны (торговля) |
 | Смена стандарта с сохранением стоимости в золоте (zz_ef_std_switch_before/after) | живой | common/scripted_effects/ld_standard_switch.txt:25,52; 01_economic_scripted_effects.txt:27582,27594 | вызовы внутри on_activate_monetary_system_law; пишет паритет и запасы gold_state_1/silver_state_1 в столичных штатах с central_bank_historic_place (счета запасов модели) | — |
-| Валютная зона подданных zz_ef_cur_zone_step / _currency / zz_ef_cur_zone_has_currency | живой | common/scripted_effects/ld_currency_zone.txt:5,60; common/scripted_triggers/ld_currency_zone_triggers.txt:5 | вызовы ld_money_model.txt:1005, ld_currency_intro_metal.txt:75; активирует законы стандарта и валюты, пишет money_value_target_1 | — |
 | Валюта члена таможенного союза zz_ef_cu_member / zz_ef_currency_own | живой | common/scripted_triggers/ld_customs_union_triggers.txt:6,14 | refs=8 и 3: ld_money_model, ld_clearing_values, 00_economic_scripted_value.txt | — |
 | Торговый счёт члена ТС zz_ef_member_goods_net / zz_ef_members_trade_sum | живой | common/script_values/ld_customs_union_values.txt:8,333 | используются ld_money_model_values.txt и ld_money_model.txt | — |
 | Выдача стартовых валют (zz_ef_currency_fix.txt) | живой | common/history/global/zz_ef_currency_fix.txt:7-75 | activate_law на старте для WUR и 13 стран; currency_standards странам с подушным налогом; п.4 (начальная ликвидность) удалён | — |

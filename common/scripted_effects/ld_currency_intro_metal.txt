@@ -65,10 +65,5 @@ zz_ef_cur_intro_after = {
 			if = { limit = { has_variable = zz_ef_cur_intro_silver } remove_variable = zz_ef_cur_intro_silver }
 		}
 		if = { limit = { has_variable = zz_ef_cur_intro_first } remove_variable = zz_ef_cur_intro_first }
-		# E&F just gave a subject its own currency -- back to the overlord's zone
-		if = {
-			limit = { is_subject = yes }
-			zz_ef_cur_zone_step = yes
-		}
 	}
 }
