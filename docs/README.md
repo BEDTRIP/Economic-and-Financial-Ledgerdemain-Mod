@@ -21,7 +21,7 @@
 | Стройка: PSC, домохозяйства, перестройка, ИИ | `construction.md` | `common/scripted_effects/PSC_scripted_effects.txt`, `common/script_values/ld_pb_overbuild_values.txt` |
 | Потребности населения и товары | `pop-needs.md` | `common/pop_needs/00_ef_pop_needs.txt`, `common/buy_packages/00_ef_buy_packages.txt`, `common/goods/ef_00_goods.txt` |
 | Ядро E&F: здания и PM, модификаторы, триггеры, решения, события, журналы | `ef-core.md` | `common/scripted_effects/01_economic_scripted_effects.txt`, `common/scripted_triggers/00_ef_custom_trigger.txt` |
-| Интерфейс: панели, мост GUI → скрипт, отладочные окна, локализация | `interface.md` | `gui/00_ef_deported_gui_1.gui`, `common/scripted_guis/00_economic_scripted_guis.txt`, `gui/ld_money_hook.gui` |
+| Интерфейс: панели, мост GUI → скрипт, отладочные окна, локализация; список имён витрины — генерат `vitrine.md` | `interface.md`, `vitrine.md` | `gui/00_ef_deported_gui_1.gui`, `common/scripted_guis/00_economic_scripted_guis.txt`, `gui/ld_money_hook.gui` |
 | Генераторы файлов `ld_*` | `generators.md` | `../vic3_mods/tools/regen_ef_*.py` |
 | **Реестр механизмов** — живой / выключен / мёртвый / дубль | `mechanisms.md` | — |
 
