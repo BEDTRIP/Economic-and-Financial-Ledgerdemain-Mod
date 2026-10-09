@@ -7519,6 +7519,44 @@ types zz_ef_cb_rate_panel
 										}
 									}
 								}
+								### Д.R8а.11: the legal ratio gold : silver of a bimetallic standard (common/scripted_guis/ld_bimet_ratio_buttons.txt)
+								flowcontainer = {
+									visible = "[GetScriptedGui('zz_ef_bimet_ratio_minus').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End )]"
+									spacing = 5
+									direction = horizontal
+									parentanchor = hcenter
+									margin_top = 6
+									tooltip = "zz_ef_bimet_ratio_tt"
+									using = tooltip_below
+									textbox = {
+										autoresize = yes
+										text = "zz_ef_bimet_ratio_label"
+										align = nobaseline
+										parentanchor = vcenter
+									}
+									button_icon_minus_action = {
+										size = { 30 30 }
+										parentanchor = vcenter
+										using = tooltip_below
+										tooltip = "[GetScriptedGui('zz_ef_bimet_ratio_minus').BuildTooltip( GuiScope.SetRoot(GetPlayer.MakeScope).End )]"
+										onclick = "[GetScriptedGui('zz_ef_bimet_ratio_minus').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End )]"
+										enabled = "[GetScriptedGui('zz_ef_bimet_ratio_minus').IsValid( GuiScope.SetRoot(GetPlayer.MakeScope).End )]"
+									}
+									textbox = {
+										autoresize = yes
+										text = "zz_ef_bimet_ratio_value"
+										align = nobaseline
+										parentanchor = vcenter
+									}
+									button_icon_plus_action = {
+										size = { 30 30 }
+										parentanchor = vcenter
+										using = tooltip_below
+										tooltip = "[GetScriptedGui('zz_ef_bimet_ratio_plus').BuildTooltip( GuiScope.SetRoot(GetPlayer.MakeScope).End )]"
+										onclick = "[GetScriptedGui('zz_ef_bimet_ratio_plus').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End )]"
+										enabled = "[GetScriptedGui('zz_ef_bimet_ratio_plus').IsValid( GuiScope.SetRoot(GetPlayer.MakeScope).End )]"
+									}
+								}
 								flowcontainer  = {
 									margin_top = 0
 									margin_right = 0

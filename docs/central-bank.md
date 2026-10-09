@@ -11,6 +11,7 @@
 - Ставка госзаймов: `common/static_modifiers/ld_gov_rate.txt` (`zz_ef_gov_rate_mult`, `zz_ef_gov_rate_add`; ставит `ld_money_model.txt:1393`).
 - Ставка → частная стройка: `common/static_modifiers/ld_rate_private_construction.txt` (множитель `zz_ef_rate_construction_mult`, `ld_money_model_values.txt:283`; ставит `ld_money_model.txt:1059`).
 - Девальвация/ревальвация (генерируются `tools/regen_ef_monetary_policy.py`): `common/scripted_effects/ld_monetary_policy.txt` (`zz_ef_mp_init/_clear/_complete/_step`), `common/script_values/ld_monetary_policy_values.txt` (константы `zz_ef_mp_*`, выпуск/изъятие), `common/scripted_guis/ld_monetary_policy_buttons.txt` (`zz_ef_mp_visible`, `zz_ef_mp_target_m5/m1/p1/p5`, `zz_ef_mp_pace_minus/plus`), `common/scripted_triggers/ld_monetary_policy_triggers.txt` (`zz_ef_mp_can_work`, `zz_ef_mp_law_on`); законы `common/laws/01_ef_monetary_policy.txt`.
+- Соотношение биметаллизма (Д.R8а.11, руками): `common/scripted_triggers/ld_bimet_ratio_triggers.txt` — `zz_ef_can_bimet_ratio` (кто двигает рычаг: биметаллизм, ЦБ, `var:zz_ef_bimet_ratio`; условие — только здесь), `common/scripted_guis/ld_bimet_ratio_buttons.txt` — `zz_ef_bimet_ratio_minus/_plus` (±0,5, от 10 до 25), строка «Золото : серебро» в `gui/ld_cb_rate_panel.gui` после строки девальвации/ревальвации; читает `bimetallic_rate_gold_to_silver` (`00_economic_scripted_value.txt`). ИИ соотношение не двигает.
 - Кредит ЦБ: `common/script_values/ld_cb_loan_values.txt` (`zz_ef_cb_loan_after_to_gdp`, `_now_to_gdp`); кнопка `set_debt_issued` — `00_financial_scripted_guis.txt:2294` (лимит 50% ВВП), `debt_issued_relative_GDP_reduce` (:2270).
 - Облигации ЦБ: `common/script_values/ld_cb_bond_issuance_values.txt`, `common/scripted_effects/ld_cb_bond_issuance.txt` (`zz_ef_cb_bond_issuance_update`), `common/static_modifiers/ld_cb_bond_issuance.txt` (`zz_ef_cb_bond_issuance_low/_high`, `goods_output_bond_mult` ±0.01 за единицу).
 - Премия за риск: `common/script_values/ld_risk_premium_values.txt`, `common/scripted_effects/ld_risk_premium.txt`.
@@ -38,6 +39,7 @@
 | `zz_ef_mp_start/target/prev/dyn/flow/cum/pace/armed/cooldown` | состояние девальвации/ревальвации | `zz_ef_mp_*`, кнопки | `zz_ef_mp_*_v`, панель |
 | `zz_ef_mp_parity_before` | паритет до изменения | `zz_ef_mp_complete`, ИИ-блок `zz_ef_mp_step` | `zz_ef_risk_fx_parity_pen` |
 | `zz_ef_mp_low_months`, `zz_ef_mp_high_months` | счётчики ИИ-правила | `zz_ef_mp_step` | он же |
+| `zz_ef_bimet_ratio` | законное соотношение золото : серебро биметаллизма | история (FRA 15,5, USA 16,1, NET 15,6), `on_activate` биметаллизма (15, если нет), `zz_ef_bimet_ratio_minus/_plus` | `bimetallic_rate_gold_to_silver`, строка окна ставки ЦБ |
 | `zz_ef_risk_fx_pen`, `zz_ef_risk_fx_step`, `zz_ef_risk_susp` | штраф за манипуляцию паритетом / приостановку обмена, затухание 60 мес. | `zz_ef_risk_fx_add`, `zz_ef_risk_monthly` | `zz_ef_risk_fx` |
 | `zz_ef_risk_bal_avg` | скользящее (12 мес.) сальдо бюджета / ВВП | `zz_ef_risk_monthly` | `zz_ef_risk_balance_avg` |
 | `zz_ef_cb_bond_low`, `zz_ef_cb_bond_high` | множители выпуска облигаций | `zz_ef_cb_bond_issuance_update` | то же (`owner.var:`) |

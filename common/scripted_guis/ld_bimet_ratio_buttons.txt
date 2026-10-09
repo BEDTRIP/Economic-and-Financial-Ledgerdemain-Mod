@@ -1,0 +1,32 @@
+﻿# The ratio row of the CB rate window (gui/ld_cb_rate_panel.gui, after the monetary policy row): gold : silver by
+# 0.5, from 10 to 25 (Д.R8а.11; the ratio is read by bimetallic_rate_gold_to_silver).
+zz_ef_bimet_ratio_minus = {
+	is_shown = { zz_ef_can_bimet_ratio = yes }
+	is_valid = {
+		custom_tooltip = {
+			text = zz_ef_bimet_ratio_tt_range
+			var:zz_ef_bimet_ratio > 10
+		}
+	}
+	effect = {
+		custom_tooltip = zz_ef_bimet_ratio_minus_effect
+		hidden_effect = {
+			change_variable = { name = zz_ef_bimet_ratio subtract = 0.5 }
+		}
+	}
+}
+zz_ef_bimet_ratio_plus = {
+	is_shown = { zz_ef_can_bimet_ratio = yes }
+	is_valid = {
+		custom_tooltip = {
+			text = zz_ef_bimet_ratio_tt_range
+			var:zz_ef_bimet_ratio < 25
+		}
+	}
+	effect = {
+		custom_tooltip = zz_ef_bimet_ratio_plus_effect
+		hidden_effect = {
+			change_variable = { name = zz_ef_bimet_ratio add = 0.5 }
+		}
+	}
+}
