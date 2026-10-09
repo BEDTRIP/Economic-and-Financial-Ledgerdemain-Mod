@@ -44,3 +44,37 @@ ld_probe_map.1 = {
 		debug_log = "EFZ|read_s_usa|[THIS.GetCountry.MakeScope.Var('zz_ef_pm_r3').GetCountry.GetNameNoFormatting]"
 	}
 }
+
+# The cost: a map over every country, 2000 passes reading each value by its key, against 2000 passes of every_country
+# reading a variable; the seconds -- the debug.log timestamps of the EFZ lines.
+ld_probe_map.2 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		every_country = {
+			save_temporary_scope_as = zz_ef_pk
+			set_variable = { name = zz_ef_pm_v value = 1 }
+			root = { add_to_variable_map = { name = zz_ef_pm_all key = scope:zz_ef_pk value = 1 } }
+		}
+		debug_log = "EFZ|cost_start|map size [THIS.GetCountry.MakeScope.Var('zz_ef_pm_sum').GetValue|0]"
+		set_variable = { name = zz_ef_pm_sum value = 0 }
+		while = {
+			count = 2000
+			every_key_in_variable_map = {
+				variable = zz_ef_pm_all
+				save_temporary_scope_as = zz_ef_pk
+				root = { change_variable = { name = zz_ef_pm_sum add = "variable_map(zz_ef_pm_all|scope:zz_ef_pk)" } }
+			}
+		}
+		debug_log = "EFZ|cost_map_done|[THIS.GetCountry.MakeScope.Var('zz_ef_pm_sum').GetValue]"
+		set_variable = { name = zz_ef_pm_sum value = 0 }
+		while = {
+			count = 2000
+			every_country = {
+				root = { change_variable = { name = zz_ef_pm_sum add = prev.var:zz_ef_pm_v } }
+			}
+		}
+		debug_log = "EFZ|cost_every_country_done|[THIS.GetCountry.MakeScope.Var('zz_ef_pm_sum').GetValue]"
+	}
+}
