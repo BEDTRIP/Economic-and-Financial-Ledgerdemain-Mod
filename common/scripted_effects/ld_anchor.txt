@@ -1,0 +1,61 @@
+﻿# The external exchange standard's anchor (Д.R8а.3, Д.R8а.6): a subject with a CB on a foreign market is pegged to its
+# overlord's currency -- var:zz_ef_anchor = the issuer (the overlord; an overlord itself pegged -- its anchor). The
+# subject's metal is the anchor's law's (ld_metal_triggers.txt; an anchor on fiat -- none, the rate floats with the
+# anchor's, zz_ef_value_to_parity). Called by subject_currency and monthly (zz_ef_money_model_monthly_step).
+zz_ef_anchor_update = {
+	if = {
+		limit = {
+			has_law = law_type:law_external_exchange_standard
+			is_subject = yes
+		}
+		if = {
+			limit = { overlord = { zz_ef_anchored = yes } }
+			set_variable = { name = zz_ef_anchor value = overlord.var:zz_ef_anchor }
+		}
+		else = {
+			set_variable = { name = zz_ef_anchor value = overlord }
+		}
+		zz_ef_anchor_metal_step = yes
+	}
+	else_if = {
+		limit = { has_variable = zz_ef_anchor }
+		remove_variable = zz_ef_anchor
+	}
+}
+
+# The CB's reserves into the anchor's metal, as on a change of standard (ld_standard_switch.txt): gold -- the silver
+# into gold at silver_to_gold_rate, silver -- the gold into silver; bimetallism and no metal -- as they are.
+zz_ef_anchor_metal_step = {
+	if = {
+		limit = { zz_ef_metal_gold = yes }
+		every_scope_state = {
+			limit = {
+				has_modifier = central_bank_historic_place
+				has_variable = silver_state_1
+				var:silver_state_1 > 0
+			}
+			if = {
+				limit = { NOT = { has_variable = gold_state_1 } }
+				set_variable = { name = gold_state_1 value = 0 }
+			}
+			change_variable = { name = gold_state_1 add = { value = var:silver_state_1 multiply = silver_to_gold_rate } }
+			set_variable = { name = silver_state_1 value = 0 }
+		}
+	}
+	else_if = {
+		limit = { zz_ef_metal_silver = yes }
+		every_scope_state = {
+			limit = {
+				has_modifier = central_bank_historic_place
+				has_variable = gold_state_1
+				var:gold_state_1 > 0
+			}
+			if = {
+				limit = { NOT = { has_variable = silver_state_1 } }
+				set_variable = { name = silver_state_1 value = 0 }
+			}
+			change_variable = { name = silver_state_1 add = { value = var:gold_state_1 multiply = gold_to_silver_rate } }
+			set_variable = { name = gold_state_1 value = 0 }
+		}
+	}
+}

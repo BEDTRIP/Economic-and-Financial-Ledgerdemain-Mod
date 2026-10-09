@@ -384,7 +384,7 @@ has_central_bank_SS_BS_GS_GES_NISO = {
 		has_law = law_type:law_silver_standard
 		has_law = law_type:law_bimetallism_standard
 		has_law = law_type:law_gold_standard
-		has_law = law_type:law_gold_exchange_standard
+		zz_ef_exchange_std = yes
 		has_law = law_type:law_external_exchange_standard
 	}
 	# not = { #test pour voir si un pays est sujet et isolationiste ce qui ce apsse
@@ -398,7 +398,7 @@ has_central_bank_FS_SS_BS_GS_GES = {
 		has_law = law_type:law_silver_standard
 		has_law = law_type:law_bimetallism_standard
 		has_law = law_type:law_gold_standard
-		has_law = law_type:law_gold_exchange_standard
+		zz_ef_exchange_std = yes
 		has_law = law_type:law_external_exchange_standard
 	}
 }
@@ -409,7 +409,7 @@ has_central_bank_FS_SS_BS_GS_GES_NISO = {
 		has_law = law_type:law_silver_standard
 		has_law = law_type:law_bimetallism_standard
 		has_law = law_type:law_gold_standard
-		has_law = law_type:law_gold_exchange_standard
+		zz_ef_exchange_std = yes
 		has_law = law_type:law_external_exchange_standard
 	}
 	not = {
@@ -418,7 +418,7 @@ has_central_bank_FS_SS_BS_GS_GES_NISO = {
 }
 has_central_bank_GES = {
 	has_modifier = has_central_bank
-	has_law = law_type:law_gold_exchange_standard
+	zz_ef_exchange_std = yes
 }
 has_central_bank_SS_BS_GS_GES = {
 	has_modifier = has_central_bank
@@ -426,7 +426,7 @@ has_central_bank_SS_BS_GS_GES = {
 		has_law = law_type:law_silver_standard
 		has_law = law_type:law_bimetallism_standard
 		has_law = law_type:law_gold_standard
-		has_law = law_type:law_gold_exchange_standard
+		zz_ef_exchange_std = yes
 		has_law = law_type:law_external_exchange_standard
 	}
 }
@@ -596,7 +596,7 @@ sell_currency_crisis_1 = {
 	# 	var:central_bank_bankruptcy = 1
 	# }
 	not = { #ce n'est pas le role de cette effecte donc ne fait rien avec pays qui ont ces modifier
-		has_law = law_type:law_gold_exchange_standard
+		zz_ef_exchange_std = yes
 	}
 
 	#test à voir si secure

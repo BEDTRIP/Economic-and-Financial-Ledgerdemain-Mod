@@ -1,7 +1,7 @@
-﻿# Д.R8а.11: the legal ratio gold : silver of a bimetallic standard (var:zz_ef_bimet_ratio) is the monetary authority's
+﻿# Д.R8а.11: the legal ratio gold : silver of a bimetallic standard (bimetallism or bimetallic exchange) (var:zz_ef_bimet_ratio) is the monetary authority's
 # lever, next to the parity. Who may move it -- this one trigger (the rules of R8а: R11 changes the condition here).
 zz_ef_can_bimet_ratio = {
-	has_law = law_type:law_bimetallism_standard
+	zz_ef_metal_bimet_law = yes
 	has_modifier = has_central_bank
 	has_variable = zz_ef_bimet_ratio
 }

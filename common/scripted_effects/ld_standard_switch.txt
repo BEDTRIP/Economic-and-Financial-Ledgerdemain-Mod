@@ -10,20 +10,21 @@
 #   bimetallism -> gold:     gold += silver x s2g, silver = 0;  parity as it was (gold)
 #   gold / bimetallism -> silver: silver += gold / s2g, gold = 0; parity / s2g
 #   gold -> bimetallism:     nothing to convert, parity as it was
-# An exchange standard (gold exchange, external) is counted in the metal of the standard it came
-# from (var:zz_ef_xmetal, ld_metal_triggers.txt; Д.R8а.6): to or from it the same rules by metal,
-# and between the same metal nothing changes.
+# The rules go by the metal of the standard (ld_metal_triggers.txt, Д.R8а.6): an exchange standard
+# (gold / silver / bimetallic exchange) is counted in its metal, so between standards of one metal
+# nothing changes.
 # Parities: silver in silver per unit, gold and bimetallism in gold per unit (as the
 # reserves are counted: central_bank_metal_reserves_state). To or from fiat / no system, and a
 # standard taken without a parity before: E&F's as it was.
 # E&F's status vars var:law_<standard> still hold the OLD standard here (set_reset_monetary_
 # system_status clears them at the end of the effect).
 # !! MAINTENANCE !! Key-level REPLACE_OR_CREATE of E&F's on_activate_monetary_system_law
-# (scripted_effects/01_economic_scripted_effects.txt:55352): E&F's body, line for line, plus
+# (scripted_effects/01_economic_scripted_effects.txt:9540): E&F's body, line for line, plus
 # zz_ef_std_switch_before / _after.
 #############################################
 
-# The old parity and the old standard (1 silver, 2 bimetallism, 3 gold), before E&F rewrites them.
+# The old parity and the old metal (1 silver, 2 bimetallism, 3 gold; an exchange standard -- its metal), before E&F
+# rewrites them.
 zz_ef_std_switch_before = {
 	if = { limit = { has_variable = zz_ef_std_old } remove_variable = zz_ef_std_old }
 	if = { limit = { has_variable = zz_ef_std_parity_old } remove_variable = zz_ef_std_parity_old }
@@ -32,29 +33,31 @@ zz_ef_std_switch_before = {
 			has_variable = money_value_target_1
 			var:money_value_target_1 > 0
 		}
-		# from an exchange standard: its metal (var:zz_ef_xmetal is kept only while on one)
 		if = {
-			limit = { var:zz_ef_xmetal ?= flag:silver }
+			limit = {
+				OR = {
+					var:law_silver_standard ?= 1
+					var:law_silver_exchange_standard ?= 1
+				}
+			}
 			set_variable = { name = zz_ef_std_old value = 1 }
 		}
 		else_if = {
-			limit = { var:zz_ef_xmetal ?= flag:bimet }
+			limit = {
+				OR = {
+					var:law_bimetallism_standard ?= 1
+					var:law_bimetallism_exchange_standard ?= 1
+				}
+			}
 			set_variable = { name = zz_ef_std_old value = 2 }
 		}
 		else_if = {
-			limit = { has_variable = zz_ef_xmetal }
-			set_variable = { name = zz_ef_std_old value = 3 }
-		}
-		else_if = {
-			limit = { has_variable = law_silver_standard var:law_silver_standard = 1 }
-			set_variable = { name = zz_ef_std_old value = 1 }
-		}
-		else_if = {
-			limit = { has_variable = law_bimetallism_standard var:law_bimetallism_standard = 1 }
-			set_variable = { name = zz_ef_std_old value = 2 }
-		}
-		else_if = {
-			limit = { has_variable = law_gold_standard var:law_gold_standard = 1 }
+			limit = {
+				OR = {
+					var:law_gold_standard ?= 1
+					var:law_gold_exchange_standard ?= 1
+				}
+			}
 			set_variable = { name = zz_ef_std_old value = 3 }
 		}
 		if = {
@@ -76,30 +79,6 @@ zz_ef_std_switch_after = {
 	else = {
 		if = { limit = { has_variable = zz_ef_fiat_p0 } remove_variable = zz_ef_fiat_p0 }
 		if = { limit = { has_variable = zz_ef_fiat_r0 } remove_variable = zz_ef_fiat_r0 }
-	}
-	# an exchange standard keeps the metal of the standard it came from (Д.R8а.6); none known -- gold
-	if = {
-		limit = { zz_ef_exchange_std = yes }
-		if = {
-			limit = { var:zz_ef_std_old ?= 1 }
-			set_variable = { name = zz_ef_xmetal value = flag:silver }
-		}
-		else_if = {
-			limit = { var:zz_ef_std_old ?= 2 }
-			set_variable = { name = zz_ef_xmetal value = flag:bimet }
-		}
-		else_if = {
-			limit = { var:zz_ef_std_old ?= 3 }
-			set_variable = { name = zz_ef_xmetal value = flag:gold }
-		}
-		else_if = {
-			limit = { NOT = { has_variable = zz_ef_xmetal } }
-			set_variable = { name = zz_ef_xmetal value = flag:gold }
-		}
-	}
-	else_if = {
-		limit = { has_variable = zz_ef_xmetal }
-		remove_variable = zz_ef_xmetal
 	}
 	if = {
 		limit = { has_variable = zz_ef_std_old }

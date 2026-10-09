@@ -13,7 +13,7 @@
 # Д.R8а.4: 1 under a metal or exchange standard and with no monetary system (the market will move around the parity
 # with the exchange, R8б); a fiat currency floats -- 1 at the transition, then x (the reference's prices / its own) since
 # then (var:zz_ef_fiat_p0 / _r0, scripted_effects/ld_standard_switch.txt); an external exchange standard -- its anchor's
-# (the overlord, else the market's owner).
+# (var:zz_ef_anchor, scripted_effects/ld_anchor.txt; an anchor on fiat floats, and the subject with it).
 zz_ef_value_to_parity_own = {
 	value = 1
 	if = {
@@ -37,19 +37,8 @@ zz_ef_value_to_parity_own = {
 zz_ef_value_to_parity = {
 	value = zz_ef_value_to_parity_own
 	if = {
-		limit = {
-			has_law = law_type:law_external_exchange_standard
-			is_subject = yes
-		}
-		value = overlord.zz_ef_value_to_parity_own
-	}
-	else_if = {
-		limit = {
-			has_law = law_type:law_external_exchange_standard
-			exists = market.owner
-			NOT = { market.owner = this }
-		}
-		value = market.owner.zz_ef_value_to_parity_own
+		limit = { zz_ef_anchored = yes }
+		value = var:zz_ef_anchor.zz_ef_value_to_parity_own
 	}
 }
 zz_ef_currency_strength = {

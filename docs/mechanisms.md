@@ -8,7 +8,7 @@
 коэффициент, закомментированный вызов); `мёртвый` — ни откуда не вызывается; `дубль` — считает то же или пишет те же
 счета, что модель `ld_*`. Строки файлов — на момент записи, при правке файла сдвигаются: искать по имени.
 
-Итого: мёртвый 4, выключен 0, дубль 3, живой 209.
+Итого: мёртвый 4, выключен 0, дубль 3, живой 210.
 
 ## Денежная модель и металл (`money-model.md`)
 
@@ -51,7 +51,8 @@
 | Выбор эталона (national_capacity_variable_list + zz_ef_reference_candidate) | живой | common/scripted_effects/08_list_effect.txt:202-310; common/scripted_triggers/ld_reference_currency_triggers.txt:17 | вызов из ef_on_yearly_pulse_country (on_actions/00_ef_on_action.txt:139); лог EFE\|cand/pick | — |
 | Шаг силы эталона zz_ef_reference_strength_step | живой | common/scripted_effects/ld_reference_strength.txt:6 | вызов из ld_money_model.txt (refs=1) | — |
 | Торговый модификатор от силы валюты zz_ef_currency_trade_step | живой | common/scripted_effects/ld_reference_strength.txt:15; common/static_modifiers/ld_currency_trade.txt | вызов из ld_money_model.txt; множитель в −10..10, зажим помечен «угадан» в комментарии | модификатор страны (торговля) |
-| Смена стандарта с сохранением стоимости в золоте (zz_ef_std_switch_before/after) | живой | common/scripted_effects/ld_standard_switch.txt:27,67; 01_economic_scripted_effects.txt:9548,9560 | вызовы внутри on_activate_monetary_system_law; пишет паритет и запасы gold_state_1/silver_state_1 в столичных штатах с central_bank_historic_place (счета запасов модели) | — |
+| Смена стандарта с сохранением стоимости в золоте (zz_ef_std_switch_before/after) | живой | common/scripted_effects/ld_standard_switch.txt:28,70; 01_economic_scripted_effects.txt:9553,9565 | вызовы внутри on_activate_monetary_system_law; пишет паритет и запасы gold_state_1/silver_state_1 в столичных штатах с central_bank_historic_place (счета запасов модели) | — |
+| Якорь внешневалютного стандарта и металл подданного (zz_ef_anchor_update, zz_ef_anchor_metal_step) | живой | common/scripted_effects/ld_anchor.txt:5,28 | subject_currency и месячный шаг модели; var:zz_ef_anchor; запасы gold_state_1/silver_state_1 ЦБ подданного — в металл якоря | — |
 | Валюта члена таможенного союза zz_ef_cu_member / zz_ef_currency_own | живой | common/scripted_triggers/ld_customs_union_triggers.txt:6,14 | refs=8 и 3: ld_money_model, ld_clearing_values, 00_economic_scripted_value.txt | — |
 | Торговый счёт члена ТС zz_ef_member_goods_net / zz_ef_members_trade_sum | живой | common/script_values/ld_customs_union_values.txt:8,333 | используются ld_money_model_values.txt и ld_money_model.txt | — |
 | Технология currency_standards на старте (ld_start_currency_standards.txt) | живой | common/history/global/ld_start_currency_standards.txt:4-20 | странам с подушным налогом без технологии; метка zz_ef_start_currency_standards | — |

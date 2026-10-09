@@ -4871,7 +4871,7 @@ money_value_target_2_in_gold = {
 		limit = {
 			or = {
 				has_law = law_type:law_gold_standard
-				has_law = law_type:law_gold_exchange_standard
+				zz_ef_exchange_std = yes
 			}
 		}
 		add = var:money_value_target_2
@@ -4911,7 +4911,7 @@ money_value_0 = {
 	}
 	if = {
 		limit = {
-			has_law = law_type:law_gold_exchange_standard
+			zz_ef_exchange_std = yes
 		}
 		add = money_value_by_reference_currency
 	}
@@ -4926,7 +4926,7 @@ money_value_in_gold = {
 			market_owner_is_root_4 = yes
 			or = {
 				has_law = law_type:law_gold_standard
-				has_law = law_type:law_gold_exchange_standard
+				zz_ef_exchange_std = yes
 			}
 		}
 		add = money_value
@@ -5335,7 +5335,7 @@ central_bank_metal_reserves_state = {
 		limit = {
 			or = {
 				has_law = law_type:law_gold_standard
-				has_law = law_type:law_gold_exchange_standard
+				zz_ef_exchange_std = yes
 			}
 		}
 		add = gold_state_native_for_stockpile
@@ -5359,7 +5359,7 @@ central_bank_metal_reserves_state_per_month = {
 		limit = {
 			or = {
 				has_law = law_type:law_gold_standard
-				has_law = law_type:law_gold_exchange_standard
+				zz_ef_exchange_std = yes
 			}
 		}
 		add = stockpiling_central_bank_metal_reserves_gold_standard
@@ -6242,14 +6242,22 @@ bimetallic_rate_silver_to_gold = {
 	divide = bimetallic_rate_gold_to_silver
 }
 bimetallic_rate_gold_to_silver = {
-	# the legal ratio of a bimetallic standard (var:zz_ef_bimet_ratio, Д.R8а.11), else the market's
+	# the legal ratio of a bimetallic standard (var:zz_ef_bimet_ratio, Д.R8а.11; the external standard -- its anchor's),
+	# else the market's
 	value = gold_to_silver_rate
 	if = {
 		limit = {
-			has_law = law_type:law_bimetallism_standard
+			zz_ef_metal_bimet_law = yes
 			has_variable = zz_ef_bimet_ratio
 		}
 		value = var:zz_ef_bimet_ratio
+	}
+	else_if = {
+		limit = {
+			zz_ef_anchored = yes
+			var:zz_ef_anchor = { zz_ef_metal_bimet_law = yes has_variable = zz_ef_bimet_ratio }
+		}
+		value = var:zz_ef_anchor.var:zz_ef_bimet_ratio
 	}
 	min = 0.0001
 }
@@ -6260,7 +6268,7 @@ rate_by_law_metal_type = {
 		limit = {
 			or = {
 				has_law = law_type:law_gold_standard
-				has_law = law_type:law_gold_exchange_standard
+				zz_ef_exchange_std = yes
 			}
 		}
 		add = 1
@@ -6292,7 +6300,7 @@ rate_by_law_metal_type_2 = {
 				any_overlord_or_above = {
 					or = {
 						has_law = law_type:law_gold_standard
-						has_law = law_type:law_gold_exchange_standard
+						zz_ef_exchange_std = yes
 					}
 				}
 			}
@@ -6325,7 +6333,7 @@ rate_by_law_metal_type_2 = {
 				limit = {
 					or = {
 						has_law = law_type:law_gold_standard
-						has_law = law_type:law_gold_exchange_standard
+						zz_ef_exchange_std = yes
 					}
 				}
 				add = 1
@@ -6387,7 +6395,7 @@ rate_by_law_metal_type_FRA = {
 			limit = {
 				or = {
 					has_law = law_type:law_gold_standard
-					has_law = law_type:law_gold_exchange_standard
+					zz_ef_exchange_std = yes
 				}
 			}
 			add = 1
@@ -6414,7 +6422,7 @@ rate_by_law_metal_type_2_FRA = {
 			limit = {
 				or = {
 					has_law = law_type:law_gold_standard
-					has_law = law_type:law_gold_exchange_standard
+					zz_ef_exchange_std = yes
 				}
 			}
 			add = 1

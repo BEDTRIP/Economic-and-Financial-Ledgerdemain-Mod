@@ -9476,6 +9476,8 @@ set_reset_monetary_system_status = {
 		name = law_gold_exchange_standard
 		value = 0
 	}
+	set_variable = { name = law_silver_exchange_standard value = 0 }
+	set_variable = { name = law_bimetallism_exchange_standard value = 0 }
 
 	###########################################################################################################################################################################################
 	###########################################################################################################################################################################################
@@ -9536,6 +9538,9 @@ set_reset_monetary_system_status = {
 			value = 1
 		}
 	}
+	# the exchange standards by metal (Д.R8а.6): zz_ef_std_switch_before reads the old one
+	if = { limit = { has_law = law_type:law_silver_exchange_standard } set_variable = { name = law_silver_exchange_standard value = 1 } }
+	if = { limit = { has_law = law_type:law_bimetallism_exchange_standard } set_variable = { name = law_bimetallism_exchange_standard value = 1 } }
 }
 on_activate_monetary_system_law = {
 	if = {
@@ -22200,36 +22205,18 @@ remove_suject_currency = {
 	if = {
 		limit = {
 			not = {
-				has_law = law_type:law_gold_exchange_standard
+				zz_ef_exchange_std = yes
 			}
 		}
 		central_bank_production_methods_4 = yes
 	}
 }
 # E&F's monthly pulse (ef_on_monthly_pulse_recurence) and the start (ld_start_setup.txt) put a subject with a CB
-# on a foreign market on law_external_exchange_standard -- pegged to its overlord, with its own currency and its own
-# CB metal in its cover (Д.R8а.3, В-R8а.1). The law's on_enact does not run on_activate_monetary_system_law, so the
-# metal of the standard it came from (Д.R8а.6) is kept here; from fiat or no system -- gold.
+# on a foreign market on law_external_exchange_standard -- pegged to its overlord's currency, with its own currency;
+# its metal is the anchor's (zz_ef_anchor_update, ld_anchor.txt; Д.R8а.3, Д.R8а.6, В-R8а.1).
 subject_currency = {
-	if = {
-		limit = { zz_ef_exchange_std = no }
-		if = {
-			limit = { zz_ef_metal_silver = yes }
-			set_variable = { name = zz_ef_xmetal value = flag:silver }
-		}
-		else_if = {
-			limit = { zz_ef_metal_bimet = yes }
-			set_variable = { name = zz_ef_xmetal value = flag:bimet }
-		}
-		else = {
-			set_variable = { name = zz_ef_xmetal value = flag:gold }
-		}
-	}
-	else_if = {
-		limit = { NOT = { has_variable = zz_ef_xmetal } }
-		set_variable = { name = zz_ef_xmetal value = flag:gold }
-	}
 	activate_law = law_type:law_external_exchange_standard
+	zz_ef_anchor_update = yes
 	money_value_target_modification = yes
 	capital = {
 		save_scope_as = capital_state

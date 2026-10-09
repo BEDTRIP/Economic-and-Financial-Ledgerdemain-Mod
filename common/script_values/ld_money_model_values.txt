@@ -2225,7 +2225,7 @@ zz_ef_v_crisis_paid = {
 }
 
 # The monthly currency line (EFX): standard (1 gold, 2 silver, 3 bimetallism,
-# 4 gold exchange, 5 fiat, 6 external exchange, 0 none), CB, subject, E&F's crisis flags.
+# 4 gold exchange, 5 fiat, 6 external exchange, 7 silver exchange, 8 bimetallic exchange, 0 none), CB, subject, E&F's crisis flags.
 zz_ef_std_code = {
 	value = 0
 	if = { limit = { has_law = law_type:law_gold_standard } value = 1 }
@@ -2234,6 +2234,8 @@ zz_ef_std_code = {
 	else_if = { limit = { has_law = law_type:law_gold_exchange_standard } value = 4 }
 	else_if = { limit = { has_law = law_type:law_fiat_standard } value = 5 }
 	else_if = { limit = { has_law = law_type:law_external_exchange_standard } value = 6 }
+	else_if = { limit = { has_law = law_type:law_silver_exchange_standard } value = 7 }
+	else_if = { limit = { has_law = law_type:law_bimetallism_exchange_standard } value = 8 }
 }
 zz_ef_has_cb = {
 	value = 0
