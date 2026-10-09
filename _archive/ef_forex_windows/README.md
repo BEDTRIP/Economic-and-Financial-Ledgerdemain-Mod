@@ -61,5 +61,11 @@ custom loc → локализация).
   `set_variable` `trade_<cur>_var` (95), `currency_quantity`, `sell_in_gold_on`, `sell_in_currency_on`; sgui `sell_in_gold_on`,
   `sell_in_currency_on` (`00_economic_scripted_guis.txt`).
 
+- Выпадающий список валют окна: в `common/history/global/00_ef_economic_global_variable.txt` — 95 `set_global_variable`
+  `currency_dropdown_<cur>_01 = flag:<cur>_01` и 95 `add_to_global_variable_list` `dropdown_menu_currency`; в sgui
+  `update_currency_liste` (`00_economic_scripted_guis.txt`, кнопка в `gui/ld_economy_panel.gui`) — `clear_global_variable_list
+  = dropdown_menu_currency` и 95 `if` с добавлением в список (после `median_currency_value = yes`); в `10_new_country_var.txt`
+  — `set_variable` `currency_selection = flag:select_currency`.
+
 **Вернуть:** вставить блок GUI на место, определения — в те же файлы; в `zz_ef_metal_reconcile` и генератор
 `regen_ef_nr_deposits.py` — чтения `zz_ef_mt_fx_*` / `zz_ef_nr_fx_pend`; переменные выбора — в `new_country_var_ef_economy`.
