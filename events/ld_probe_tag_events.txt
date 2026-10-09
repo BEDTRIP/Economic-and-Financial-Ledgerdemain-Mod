@@ -1,0 +1,14 @@
+﻿namespace = ld_probe_tag
+
+# R8а.7 probe: Country.GetTagName and Localize(Concatenate(...)) in a debug_log; fired from the console.
+ld_probe_tag.1 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		every_country = {
+			limit = { OR = { c:GBR ?= this c:RUS ?= this c:SWI ?= this c:USA ?= this } }
+			debug_log = "EFZ|[THIS.GetCountry.GetTagName]|[THIS.GetCountry.GetNameNoFormatting]|[Concatenate('a', 'b')]|[Localize(Concatenate('zz_ef_iso2_', THIS.GetCountry.GetTagName))]|"
+		}
+	}
+}
