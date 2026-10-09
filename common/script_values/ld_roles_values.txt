@@ -44,7 +44,15 @@ zz_ef_role_n_v_v = { value = global_var:zz_ef_role_n_v }
 zz_ef_role_n_moves_v = { value = global_var:zz_ef_role_n_moves }
 zz_ef_role_yearly_v = {
 	value = 0
-	if = { limit = { global_var:zz_ef_role_yearly = yes } value = 1 }
+	if = { limit = { has_global_variable = zz_ef_role_yearly } value = global_var:zz_ef_role_yearly }
+}
+zz_ef_role_month_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_month_n } value = global_var:zz_ef_month_n }
+}
+zz_ef_role_next_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_role_year_next } value = global_var:zz_ef_role_year_next }
 }
 zz_ef_role_w_gdp_v = {
 	value = 0

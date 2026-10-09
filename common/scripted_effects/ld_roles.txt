@@ -20,7 +20,7 @@ zz_ef_roles_world_pass = {
 	set_global_variable = { name = zz_ef_role_n_b value = 0 }
 	set_global_variable = { name = zz_ef_role_n_v value = 0 }
 	set_global_variable = { name = zz_ef_role_n_moves value = 0 }
-	set_global_variable = { name = zz_ef_role_yearly value = no }
+	set_global_variable = { name = zz_ef_role_yearly value = 0 }
 	if = {
 		limit = {
 			OR = {
@@ -31,7 +31,7 @@ zz_ef_roles_world_pass = {
 				}
 			}
 		}
-		set_global_variable = { name = zz_ef_role_yearly value = yes }
+		set_global_variable = { name = zz_ef_role_yearly value = 1 }
 		set_global_variable = { name = zz_ef_role_year_next value = 12 }
 		if = {
 			limit = { has_global_variable = zz_ef_month_n }
@@ -53,7 +53,7 @@ zz_ef_roles_world_pass = {
 		ordered_country = {
 			order_by = gdp
 			max = 1
-			debug_log = "EFY|[TimeKeeper.GetCurrentDate.GetString]|WORLD|a [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_n_a_v')|0]|b [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_n_b_v')|0]|v [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_n_v_v')|0]|moves [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_n_moves_v')|0]|yearly [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_yearly_v')|0]|w_gdp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_w_gdp_v')|0]|w_trade [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_w_trade_v')|0]"
+			debug_log = "EFY|[TimeKeeper.GetCurrentDate.GetString]|WORLD|a [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_n_a_v')|0]|b [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_n_b_v')|0]|v [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_n_v_v')|0]|moves [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_n_moves_v')|0]|yearly [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_yearly_v')|0]|w_gdp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_w_gdp_v')|0]|w_trade [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_w_trade_v')|0]|month [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_month_v')|0]|next [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_next_v')|0]"
 		}
 	}
 }
@@ -73,7 +73,7 @@ zz_ef_role_update = {
 	if = {
 		limit = {
 			OR = {
-				global_var:zz_ef_role_yearly = yes
+				global_var:zz_ef_role_yearly = 1
 				NOT = { has_variable = zz_ef_role }
 				local_var:zz_ef_role_new = 3
 				zz_ef_role_is_v = yes
@@ -94,7 +94,7 @@ zz_ef_role_update = {
 		change_global_variable = { name = zz_ef_role_n_a add = 1 }
 		if = {
 			limit = {
-				global_var:zz_ef_role_yearly = yes
+				global_var:zz_ef_role_yearly = 1
 				zz_ef_logs_on = yes
 			}
 			debug_log = "EFY|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|a|gdp_sh [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_gdp_share')|3]|trade_sh [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_trade_share')|3]|rank [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_role_rank_v')|0]"
