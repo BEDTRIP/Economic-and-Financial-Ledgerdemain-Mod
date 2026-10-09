@@ -126,7 +126,6 @@ PSC-хук: `on_production_method_changed`, `on_building_built`, `on_acquired_te
 | EFM | `common/scripted_effects/ld_metal_accounts.txt:235` | `metal_start`: начальный металл ЦБ, что сделано | недельный, `zz_ef_metal_start_log` |
 | EFM | `common/scripted_effects/ld_subject_metal.txt:40` | `cb_state_lost` (ЦБ-штат потерян) | недельный `zz_ef_cb_state_owner_step` |
 | EFM | `common/scripted_effects/ld_currency_intro_metal.txt:59` | `cur_intro`: ввод новой валюты, металл | `zz_ef_cur_intro_after` (из `09_introduction_building_lvl.txt:34454`) |
-| EFZ | `events/ld_probe_mapsave_events.txt` | проба R8б, шаг 0: карта переменных после сейва и загрузки | только из консоли: `event ld_probe_mapsave.1`, `.2` |
 | EFT | `common/scripted_effects/ld_metal_accounts.txt:498` | потоки металла ЦБ/банков/населения за неделю | недельный `zz_ef_metal_week_step` |
 | EFV | `common/scripted_effects/ld_metal_accounts.txt:505` | WORLD: суммы металла по ЦБ/банкам/населению, баланс закупок/продаж | недельный `zz_ef_world_metal_log` (из `ld_money_model.txt:742`) |
 | EFQ | `common/scripted_effects/ld_metal_accounts.txt:546` | сверка металла (`oth_g/oth_s`, ЦБ, стандарт) | `zz_ef_metal_reconcile` |

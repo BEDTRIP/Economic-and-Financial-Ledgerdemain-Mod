@@ -16,6 +16,8 @@
 - Цена: карта всех стран, 2000 проходов с чтением по ключу (570 тыс. чтений) — ~2 с; столько же — 2000 `every_country` с
   чтением переменной страны (~3,5 мкс на чтение).
 - В строке `debug_log` консольного события `ROOT` пуст — выводить через `THIS`.
-- Не проверено: сохранение карты в сейве и чтение после загрузки.
+- Сейв: карта на стране и глобальная (`add_to_global_variable_map`, чтение `"global_variable_map(X|c:RUS)"`)
+  переживают автосейв и его загрузку (`ld_probe_mapsave.1` → r1009_041518, `.2` после загрузки → r1009_041941: FRA 22,
+  RUS 33, `has_variable_map` / `has_global_variable_map` — да).
 
-**Вырезано:** `events/ld_probe_map_events.txt` (здесь), строка `EFZ` таблицы логов `docs/entry-points.md`.
+**Вырезано:** `events/ld_probe_map_events.txt`, `events/ld_probe_mapsave_events.txt` (здесь), строка `EFZ` таблицы логов `docs/entry-points.md`.
