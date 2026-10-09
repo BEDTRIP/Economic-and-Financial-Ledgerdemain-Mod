@@ -482,7 +482,7 @@ zz_ef_money_window_roll = {
 }
 
 # Pops' savings: var:zz_ef_pop_savings (S) = the banknotes they hold (var:zz_ef_notes, M0, the CB's debt -- R1б, В3)
-# + their deposits var:zz_ef_pop_deposits (D). R1а.6 (Д.6, the user 7.10: "the pool is money in the bank, a contribution
+# + their deposits var:zz_ef_pop_deposits (D). R1а.6 (Д.R1а.6, the user 7.10: "the pool is money in the bank, a contribution
 # to the pool is putting money into a deposit"): the deposits are the pops' contributions to the pool by the engine
 # (zz_ef_pop_deposits_step, at the step) -- no money of ours is added to the pool for them (the probe 7.10: our
 # add_investment_pool is not in investment_pool_gross_income). The banknotes move only by postings: the consols, the
@@ -887,7 +887,7 @@ zz_ef_money_model_monthly_step = {
 	# the CB's metal = what its building bought -- weekly since 6.10 (zz_ef_metal_week_step)
 	# Ф.2's January interest to foreign private banks -- _archive/ld_privbank_interest/
 	# the country's currency as data, every January (a culture changed, a law taken without on_activate); the
-	# issuer's parity in gold for the reserves' value (Д.1) -- every month
+	# issuer's parity in gold for the reserves' value (Д.R1б.1) -- every month
 	if = {
 		limit = { month = 0 }
 		zz_ef_cur_set = yes

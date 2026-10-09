@@ -27,7 +27,7 @@ zz_ef_metal_per_money = {
 		value = gold_to_silver_rate
 	}
 }
-# Gold per unit of money: 1 (Д.1); was the parity, ~1 since Д2.13.
+# Gold per unit of money: 1 (Д.R1б.1).
 zz_ef_gold_per_money_par = 1
 
 # The country keeps its metal in silver (silver standard; no CB and no gold / bimetallic standard -- Asia's silver
@@ -339,7 +339,7 @@ zz_ef_cb_buy_mult = {
 	multiply = 5000
 	min = -100
 	max = 1000
-	# until the CB's start metal (Д.2, var:zz_ef_cb_start_due): the method's own -- r1006_141026, the start's cover read
+	# until the CB's start metal (Д.R1б.2, var:zz_ef_cb_start_due): the method's own -- r1006_141026, the start's cover read
 	# 0.33 for its first weeks, the CB bought +355..+491% and gold in London went to 161
 	if = {
 		limit = { has_variable = zz_ef_cb_start_due }
@@ -353,7 +353,7 @@ zz_ef_cb_sell_units = {
 	if = {
 		limit = {
 			zz_ef_cb_cover > zz_ef_cb_sell_cover
-			# not before the CB's start metal (Д.2: r1006_135058, the first step read 0.75 cover before the engine filled
+			# not before the CB's start metal (Д.R1б.2: r1006_135058, the first step read 0.75 cover before the engine filled
 			# the business cash, and Britain sold 440 gold)
 			NOT = { has_variable = zz_ef_cb_start_due }
 		}

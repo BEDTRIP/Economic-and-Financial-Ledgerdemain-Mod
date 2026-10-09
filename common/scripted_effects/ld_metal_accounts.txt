@@ -4,14 +4,14 @@
 # (scripted_effects/ld_money_model.txt).
 #############################################
 
-# ---- the start in balance (R1б.1: Д.1, Д.2, В4) -----------------------------
+# ---- the start in balance (Д.R1б.1, Д.R1б.2, В.R1б.4) -----------------------------
 # Country scope, the first step of a new game, once:
-#   * the parity stays E&F's historical one (Д.1: the pound 7.32, the franc 0.75 -- the rate between currencies and the
+#   * the parity stays E&F's historical one (Д.R1б.1: the pound 7.32, the franc 0.75 -- the rate between currencies and the
 #     labels in national units); the engine's money is one unit for every country and the metal is counted in it at a
 #     fixed rate (zz_ef_metal_per_money: 1 gold unit per unit of money, a silver standard -- silver at the market rate);
 #   * the CB's metal (a metal standard with a CB) = 40% of M2 -- once, at the first step where the engine has filled
 #     the buildings' cash (zz_ef_cb_metal_start_step, var:zz_ef_cb_start_due); E&F's metal from history is not taken
-#     (its scale is ~10 times our money); until then the CB does not trade metal (Д.2);
+#     (its scale is ~10 times our money); until then the CB does not trade metal (Д.R1б.2);
 #   * В4: E&F's metal of a country with a CB stays in its CB states, also when the country has no metal
 #     standard yet (a subject joins its overlord's through the currency zone after its first step -- Hanover, Lower
 #     Canada, Finland got 44-132 GDP of it as the pops' metal, r1008_062130); the CB's start scales it to 40% of M2 (the
@@ -102,7 +102,7 @@ zz_ef_metal_start_step = {
 	remove_variable = zz_ef_ms_ef_s
 }
 
-# Д.2: the CB's metal = 40% of M2, once, at the first step after the start deposits where M2 is over 10% of GDP (the
+# Д.R1б.2: the CB's metal = 40% of M2, once, at the first step after the start deposits where M2 is over 10% of GDP (the
 # engine fills the buildings' cash in the first weeks). E&F's metal from history is scaled to it (with the foreign currency in the reserves, so
 # the cover reads 40%); a CB with no metal gets it in a CB state. The change is the start's stock (world line).
 zz_ef_cb_metal_start_step = {
