@@ -1,0 +1,29 @@
+﻿namespace = ld_probe_gdpown
+
+# R8б step 0 / Д.R8а.9 probe: who owns a share of whose GDP at the start (gdp_ownership_ratio, a ladder 1 / 5 / 10 / 25 / 50 %),
+# and the cost of the double loop over every country. Console only; EFZ lines in debug.log.
+ld_probe_gdpown.1 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		debug_log = "EFZ|gdpown_start"
+		every_country = {
+			save_scope_as = zz_ef_ph
+			every_country = {
+				limit = { NOT = { this = scope:zz_ef_ph } }
+				save_scope_as = zz_ef_po
+				if = {
+					limit = { scope:zz_ef_ph = { gdp_ownership_ratio = { target = scope:zz_ef_po value > 0.01 } } }
+					set_variable = { name = zz_ef_pg value = 1 }
+					if = { limit = { scope:zz_ef_ph = { gdp_ownership_ratio = { target = scope:zz_ef_po value > 0.05 } } } set_variable = { name = zz_ef_pg value = 5 } }
+					if = { limit = { scope:zz_ef_ph = { gdp_ownership_ratio = { target = scope:zz_ef_po value > 0.10 } } } set_variable = { name = zz_ef_pg value = 10 } }
+					if = { limit = { scope:zz_ef_ph = { gdp_ownership_ratio = { target = scope:zz_ef_po value > 0.25 } } } set_variable = { name = zz_ef_pg value = 25 } }
+					if = { limit = { scope:zz_ef_ph = { gdp_ownership_ratio = { target = scope:zz_ef_po value > 0.50 } } } set_variable = { name = zz_ef_pg value = 50 } }
+					debug_log = "EFZ|gdpown|host [SCOPE.sCountry('zz_ef_ph').GetNameNoFormatting]|owner [THIS.GetCountry.GetNameNoFormatting]|> [THIS.GetCountry.MakeScope.Var('zz_ef_pg').GetValue|0] %"
+				}
+			}
+		}
+		debug_log = "EFZ|gdpown_done"
+	}
+}
