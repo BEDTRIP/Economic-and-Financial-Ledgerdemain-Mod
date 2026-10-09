@@ -105,3 +105,4 @@ _archive/<механизм>/
 | Символ валюты по закону — купюра E&F (`currency_symbol_generic`, `currency_symbol_<cur>`) — Д.R8а.8 | `ef_currency_banknote_symbols/` | 96 custom loc без ссылок; символ — `currency_symbol` генератора `regen_ld_currency_symbol` |
 | Проба R8а.7 `ld_probe_tag.1` (тег страны, `Localize(Concatenate(...))`) | `ld_probe_tag/` | событие и ключи `zz_ef_iso2_*` пробы |
 | Проба R8б, шаг 0: карта переменных `ld_probe_map.1`, `.2` | `ld_probe_map/` | итоги — в README пробы и в очереди R8б плана |
+| Проба R8в.1 `ld_probe_mshare.1`, `.2` (доли членов рынка) | `ld_probe_mshare/` | итоги — в README пробы и в очереди R8в плана |
