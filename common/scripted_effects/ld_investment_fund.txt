@@ -1,0 +1,73 @@
+﻿# The investment fund (R8б, шаг 6; понятие «Инвестиционный фонд»; Д.R8б.2, Д.R8б.4, Д.R8б.5, Д.R8б.16): the building
+# «Инвестиционный фонд» by each exchange (buildings/ld_investment_fund.txt) makes the fund's shares (mutual_funds); the
+# pops (their need of financial products) and the banks (their method «Паи фондов») buy them -- a share is a claim on
+# the fund (kind f, maps zz_ef_rq_pp_f / zz_ef_rq_bk_f, the debtor -- the fund's country); the purchase is paid in by
+# the engine (the buyer's money -> the fund building's cash), here only its record: the fund's capital
+# (var:zz_ef_fd_capital on the fund's country).
+
+# Country scope (an exchange country): the fund's building in the exchange's state, if there is none
+# (zz_ef_fc_found, zz_ef_fc_bind).
+zz_ef_fund_found = {
+	if = {
+		limit = {
+			has_variable = zz_ef_fc_state
+			var:zz_ef_fc_state = { NOT = { has_building = building_ld_investment_fund } }
+		}
+		var:zz_ef_fc_state = {
+			create_building = { building = building_ld_investment_fund level = 1 }
+		}
+	}
+}
+
+# Country scope, monthly (zz_ef_money_model_monthly_step): the banks' method «Паи фондов» on where the market sells a
+# fund's shares, off elsewhere (a missing input would cut the banks' output); var:zz_ef_bank_funds_on.
+zz_ef_fund_bank_pm_step = {
+	if = {
+		limit = {
+			exists = market
+			market = { mg:mutual_funds = { market_goods_sell_orders > 0 } }
+		}
+		if = {
+			limit = { NOT = { has_variable = zz_ef_bank_funds_on } }
+			set_variable = zz_ef_bank_funds_on
+			activate_production_method = { building_type = building_zz_ef_bank production_method = pm_zz_ef_bank_funds }
+		}
+	}
+	else_if = {
+		limit = { has_variable = zz_ef_bank_funds_on }
+		remove_variable = zz_ef_bank_funds_on
+		activate_production_method = { building_type = building_zz_ef_bank production_method = pm_zz_ef_bank_no_funds }
+	}
+}
+
+# Country scope, weekly (zz_ef_money_model_step): the fund's shares the country's pops and banks bought this week
+# (the states' consumption of mutual_funds x its price), from the fund of its exchange (var:zz_ef_xch): the banks' part
+# -- their method's input, the rest -- the pops'. Claims on the fund's country; its capital up by the whole.
+zz_ef_fund_shares_step = {
+	set_variable = { name = zz_ef_f_fd_pp value = 0 }
+	set_variable = { name = zz_ef_f_fd_bk value = 0 }
+	if = {
+		limit = {
+			has_variable = zz_ef_xch
+			zz_ef_fund_bought_week > 0
+		}
+		set_variable = { name = zz_ef_f_fd_bk value = zz_ef_fund_bank_week }
+		set_variable = { name = zz_ef_f_fd_pp value = zz_ef_fund_bought_week }
+		change_variable = { name = zz_ef_f_fd_pp subtract = var:zz_ef_f_fd_bk }
+		save_temporary_scope_as = zz_ef_fd_h
+		var:zz_ef_xch = { save_temporary_scope_as = zz_ef_fd_c }
+		if = {
+			limit = { var:zz_ef_f_fd_pp > 0 }
+			zz_ef_rq_add = { H = pp K = f D = scope:zz_ef_fd_c V = var:zz_ef_f_fd_pp }
+		}
+		if = {
+			limit = { var:zz_ef_f_fd_bk > 0 }
+			zz_ef_rq_add = { H = bk K = f D = scope:zz_ef_fd_c V = var:zz_ef_f_fd_bk }
+		}
+		scope:zz_ef_fd_c = {
+			if = { limit = { NOT = { has_variable = zz_ef_fd_capital } } set_variable = { name = zz_ef_fd_capital value = 0 } }
+			change_variable = { name = zz_ef_fd_capital add = scope:zz_ef_fd_h.var:zz_ef_f_fd_pp }
+			change_variable = { name = zz_ef_fd_capital add = scope:zz_ef_fd_h.var:zz_ef_f_fd_bk }
+		}
+	}
+}

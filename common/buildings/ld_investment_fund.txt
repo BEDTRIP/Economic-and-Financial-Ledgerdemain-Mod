@@ -1,0 +1,41 @@
+﻿#############################################
+# R8б, шаг 6 (Д.R8б.2, Д.R8б.4, Д.R8б.16; понятие «Инвестиционный фонд»): «Инвестиционный фонд» / «Investment Fund».
+# The exchange's fund: in the state of the country's exchange (zz_ef_fc_possible), founded with the exchange
+# (zz_ef_fc_found, zz_ef_fc_bind), grows by private construction; its levels -- the fund's capacity. It makes the fund's
+# shares (mutual_funds, the method pm_bond_exchange: bonds in, shares out): the pops buy them by their need
+# (popneed_financial_products), the banks -- by their method «Паи фондов» (production_methods/ld_bank_pm.txt); the
+# accounting -- scripted_effects/ld_investment_fund.txt.
+#############################################
+
+building_ld_investment_fund = {
+	building_group = bg_zz_ef_banking
+	icon = "gfx/interface/icons/invention_icons/mutual_funds.dds"
+	city_type = city
+	levels_per_mesh = 50
+	required_construction = construction_cost_low
+
+	unlocking_technologies = {
+		financial_center
+	}
+
+	production_method_groups = {
+		pmg_bond_exchange
+	}
+
+	possible = {
+		zz_ef_fc_possible = yes
+	}
+
+	can_build_government = {
+		always = no
+	}
+	can_build_private = {
+		always = yes
+	}
+	downsizeable = no
+
+	ai_nationalization_desire = -1
+	ownership_type = self
+
+	background = "gfx/interface/icons/building_icons/backgrounds/building_panel_bg_monuments.dds"
+}

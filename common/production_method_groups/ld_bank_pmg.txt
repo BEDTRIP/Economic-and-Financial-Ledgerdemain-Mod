@@ -11,3 +11,14 @@ pmg_zz_ef_bank_base = {
 		pm_zz_ef_bank_modern
 	}
 }
+
+# the banks' shares of the investment funds (R8б.6, Д.R8б.16): on where the market has a fund's shares for sale
+# (zz_ef_fund_bank_pm_step, scripted_effects/ld_investment_fund.txt) -- a missing input would cut the bank's output.
+pmg_zz_ef_bank_funds = {
+	texture = "gfx/interface/icons/generic_icons/mixed_icon_base.dds"
+
+	production_methods = {
+		pm_zz_ef_bank_no_funds
+		pm_zz_ef_bank_funds
+	}
+}

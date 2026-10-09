@@ -1,0 +1,59 @@
+﻿# The investment fund (scripted_effects/ld_investment_fund.txt).
+# the price of a fund's share (goods mutual_funds, fixed_price, common/goods/ef_00_goods.txt)
+zz_ef_fund_share_price = 250
+# the banks' method «Паи фондов»: shares a workforce unit buys a week (production_methods/ld_bank_pm.txt) and the
+# workforce of a «Банк» level (its clerks)
+zz_ef_bank_fund_shares_per_unit = 0.04
+zz_ef_bank_workforce_per_level = 1000
+# the week's purchases of the fund's shares by the country (pops and buildings), money
+zz_ef_fund_bought_week = {
+	value = 0
+	every_scope_state = { add = sg:mutual_funds.state_goods_consumption }
+	multiply = zz_ef_fund_share_price
+}
+# ... of it the banks' (their method's input, at most the whole)
+zz_ef_fund_bank_week = {
+	value = 0
+	if = {
+		limit = { has_variable = zz_ef_bank_funds_on }
+		value = zz_ef_bank_levels
+		multiply = zz_ef_bank_workforce_per_level
+		multiply = zz_ef_bank_fund_shares_per_unit
+		multiply = zz_ef_fund_share_price
+		max = zz_ef_fund_bought_week
+	}
+}
+# The fund as a dealer (Д.R8б.5): its capacity -- the levels of its building (a level holds this many of claims, money);
+# its spread -- from the key rate of its country (the dearer to hold the stock, the wider: half the key rate)
+zz_ef_fd_capacity_per_level = 100000
+zz_ef_fd_spread_of_rate = 0.5
+zz_ef_fd_capacity = {
+	value = 0
+	every_scope_building = {
+		limit = { is_building_type = building_ld_investment_fund }
+		add = level
+	}
+	multiply = zz_ef_fd_capacity_per_level
+}
+zz_ef_fd_spread = {
+	value = zz_ef_money_rate
+	multiply = zz_ef_fd_spread_of_rate
+}
+zz_ef_fd_capital_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_fd_capital } value = var:zz_ef_fd_capital }
+}
+# The fair price of a claim on the scope country, in gold a unit of its money (the quotes, Д.R8б.5): money -- its value
+# against the parity (zz_ef_rq_gpm_v); a bid / an ask of a fund -- the fair price -/+ half the fund's spread.
+zz_ef_q_fair_m = {
+	value = zz_ef_rq_gpm_v
+}
+# the week's shares bought, for the logs
+zz_ef_v_f_fd_pp = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_fd_pp } value = var:zz_ef_f_fd_pp }
+}
+zz_ef_v_f_fd_bk = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_fd_bk } value = var:zz_ef_f_fd_bk }
+}

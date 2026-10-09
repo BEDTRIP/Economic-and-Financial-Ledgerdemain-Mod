@@ -23,6 +23,7 @@ zz_ef_fc_bind = {
 			}
 		}
 		var:zz_ef_fc_state = { zz_ef_fc_variant_set = yes }
+		zz_ef_fund_found = yes
 		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFH|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|bind|state [THIS.GetCountry.MakeScope.Var('zz_ef_fc_state').GetState.GetName]" }
 	}
 }

@@ -22,6 +22,10 @@ zz_ef_rq_pot_v = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_rq_pot } value = var:zz_ef_rq_pot }
 }
+zz_ef_rq_out_f_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_rq_out_f } value = var:zz_ef_rq_out_f }
+}
 zz_ef_rq_out_b_v = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_rq_out_b } value = var:zz_ef_rq_out_b }
@@ -60,4 +64,12 @@ zz_ef_rq_w_out_b_v = {
 zz_ef_rq_w_bad_b_v = {
 	value = 0
 	if = { limit = { has_global_variable = zz_ef_rq_w_bad_b } value = global_var:zz_ef_rq_w_bad_b }
+}
+zz_ef_rq_w_n_f_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_rq_w_n_f } value = global_var:zz_ef_rq_w_n_f }
+}
+zz_ef_rq_w_out_f_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_rq_w_out_f } value = global_var:zz_ef_rq_w_out_f }
 }

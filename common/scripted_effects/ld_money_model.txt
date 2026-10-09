@@ -49,6 +49,8 @@ zz_ef_money_model_step = {
 	# bonds as parts of the engine's debt (generated, scripted_effects/ld_bond_ledger.txt); replaces
 	# Е.5's issuer-pays expense line (zz_ef_bond_interest_step)
 	zz_ef_bond_ledger_step = yes
+	# the investment fund's shares bought this week (ld_investment_fund.txt)
+	zz_ef_fund_shares_step = yes
 	if = {
 		limit = { NOT = { has_variable = zz_ef_weeks_run } }
 		set_variable = { name = zz_ef_weeks_run value = 0 }
@@ -899,6 +901,8 @@ zz_ef_money_model_monthly_step = {
 	zz_ef_anchor_update = yes
 	# the exchange the country trades on and, for an exchange country, its fees (ld_exchange.txt)
 	zz_ef_xch_route = yes
+	# the banks' method «Паи фондов» -- where the market sells a fund's shares (ld_investment_fund.txt)
+	zz_ef_fund_bank_pm_step = yes
 	# AI central banks on the forex monthly was tried and taken back
 	#: every E&F purchase is at parity, twelve a year blew the
 	# reserves up (France's cover 64% -> 436%, Russia's currency 1.2 billion

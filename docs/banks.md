@@ -14,7 +14,7 @@ R4. **Понятия:** [[Банки]], [[Инвестиционный пул|П
 ## Файлы
 - `common/buildings/ld_bank.txt` — `building_zz_ef_bank` (группа `bg_zz_ef_banking`, PMG `pmg_zz_ef_bank_base`, `ownership_type = self`, `ai_nationalization_desire = -5`).
 - `common/building_groups/ld_banking_group.txt` — `bg_zz_ef_banking` (дочерняя `bg_trade`).
-- `common/production_method_groups/ld_bank_pmg.txt` — `pmg_zz_ef_bank_base` (5 методов по эпохам).
+- `common/production_method_groups/ld_bank_pmg.txt` — `pmg_zz_ef_bank_base` (5 методов по эпохам), `pmg_zz_ef_bank_funds` (`pm_zz_ef_bank_no_funds` / `pm_zz_ef_bank_funds` — вход паёв `mutual_funds` 0,04 на работника; включает `zz_ef_fund_bank_pm_step`, где на рынке продаются паи фонда, R8б.6).
 - `common/production_methods/ld_bank_pm.txt` — `pm_zz_ef_bank_money_changer … _modern`: выход `goods_output_liquidity_currency_add` 300…1600, вход services/paper/telephones/electricity + базовые 0.01 золота и 0.02 серебра на рабочего (покупку металла регулируют модификаторы `zz_ef_bank_gold_buy`/`zz_ef_bank_silver_buy`, см. `ld_metal_accounts.txt:281-289`, `static_modifiers/ld_metal_trade.txt`). Комментарии называют их `zz_ef_bank_metal_buy` — такого ключа нет.
 - `common/script_values/ld_bank_values.txt` — `zz_ef_bank_tc_levels` (уровни торговых центров штата, веса посева), `zz_ef_bank_levels` (уровни банков).
 - `common/on_actions/ld_bank_on_actions.txt` — `on_monthly_pulse_country` → `zz_ef_bank_monthly` → `zz_ef_bank_seed_step`.

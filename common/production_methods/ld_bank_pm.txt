@@ -121,3 +121,20 @@ pm_zz_ef_bank_modern = {
 		}
 	}
 }
+
+# R8б.6 (Д.R8б.16): the banks put a part of their money into the investment funds' shares (mutual_funds, price 250).
+# !! TUNING !! the share (R11): 0.04 per workforce unit (~10 a unit, ~3 % of a counting house's output); the accounting
+# reads the same number as zz_ef_bank_fund_shares_per_unit (script_values/ld_investment_fund_values.txt).
+pm_zz_ef_bank_no_funds = {
+	texture = "gfx/interface/icons/production_method_icons/market_trade.dds"
+	is_default = yes
+}
+pm_zz_ef_bank_funds = {
+	texture = "gfx/interface/icons/invention_icons/mutual_funds.dds"
+
+	building_modifiers = {
+		workforce_scaled = {
+			goods_input_mutual_funds_add = 0.04
+		}
+	}
+}
