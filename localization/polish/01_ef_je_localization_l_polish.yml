@@ -28,8 +28,8 @@
   bank_je_central_1:0 "Central Bank Foundation Act"
   bank_je_central_1_reason:0 "A central bank allows the unification and centralization of coin and banknote production — a key milestone in the economic development of any nation.\n \n A central bank will automatically appear once the country’s GDP exceeds 5 million, or when the Central Bank technology is discovered."
 
-  financial_center_je_1:0 "Authorization of the Stock Exchange"
-  financial_center_je_1_reason:0 "A central bank allows the unification and centralization of coin and banknote production — a key milestone in the economic development of any nation.\n \n A central bank will automatically appear once the country’s GDP exceeds 5 million, or when the Central Bank technology is discovered."
+  financial_center_je_1:0 "Founding a Stock Exchange"
+  financial_center_je_1_reason:0 "A financial centre is the building of a country's stock exchange, one per country. An economically significant country (category A) with the financial centre technology, a monetary system of its own and developed banks can found it. The exchange appears in the state region of the national financial centre if it is yours, else in the capital; afterwards it can only be expanded."
 
 ##########################
 #financial_center_je
@@ -155,9 +155,9 @@
   # status_financial_center_10: "A full-scale financial collapse looms. Panic grips investors, credit has dried up, and the economic system teeters on the brink of failure."
 
 
-  status_financial_center_je_1: "Without the Stock Exchange technology, the nation’s financial system remains primitive, with only a handful of private companies operating under joint-stock principles"
+  status_financial_center_je_1: "Founding an exchange needs: the financial centre technology, a place among the economically significant countries (category A), a monetary system of its own and banks of at least [GetPlayer.MakeScope.ScriptValue('zz_ef_fc_bank_levels_min')|0] levels."
 
-  status_financial_center_je_2: "An increasing number of private companies now rely on issuing shares to finance their ventures. A [GetBuildingType('building_financial_centre').GetName] would provide the ideal place for entrepreneurs and investors to meet and exchange capital."
+  status_financial_center_je_2: "All conditions are met — the exchange will be founded."
 
   currency_standards_progress_bar: "Unlock [GetTechnology('currency_standards').GetName|l] technology"
   currency_standards_progress_bar_desc: "Unlock [GetTechnology('currency_standards').GetName|l] technology: #v [JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)|%]#! ([JournalEntry.GetCurrentBarValue(ScriptedProgressBar.Self)|D] @gdp! /2.5M @gdp!)"

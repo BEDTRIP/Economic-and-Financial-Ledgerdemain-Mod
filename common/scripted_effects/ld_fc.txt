@@ -1,0 +1,28 @@
+﻿# The exchange of a country (R8б.4; scripted_triggers/ld_fc_triggers.txt): the history's financial centres at the start;
+# a new one -- the journal «Учреждение биржи» (zz_ef_fc_found, ld_fc_types.txt).
+
+# Country scope, the start (zz_ef_start_setup_year, ld_start_setup.txt): the history's centre is the country's exchange
+# (Д.R8б.14) -- the state of its national variant first, else any state with a centre.
+zz_ef_fc_bind = {
+	if = {
+		limit = {
+			NOT = { has_variable = zz_ef_fc_state }
+			any_scope_state = { building_financial_centre_any = yes }
+		}
+		if = {
+			limit = { any_scope_state = { building_financial_centre_spe = yes } }
+			random_scope_state = {
+				limit = { building_financial_centre_spe = yes }
+				owner = { set_variable = { name = zz_ef_fc_state value = prev } }
+			}
+		}
+		else = {
+			random_scope_state = {
+				limit = { building_financial_centre_any = yes }
+				owner = { set_variable = { name = zz_ef_fc_state value = prev } }
+			}
+		}
+		var:zz_ef_fc_state = { zz_ef_fc_variant_set = yes }
+		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFH|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|bind|state [THIS.GetCountry.MakeScope.Var('zz_ef_fc_state').GetState.GetName]" }
+	}
+}

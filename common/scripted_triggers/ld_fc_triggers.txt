@@ -1,0 +1,29 @@
+﻿# The exchange of a country (R8б.4, Д.R8.7): one per country -- the financial centre in the state of
+# var:zz_ef_fc_state (set at the start for the history's centres, by the journal «Учреждение биржи» for a new one;
+# scripted_effects/ld_fc_types.txt, ld_fc.txt). A centre in any other state (a conquered one) is no exchange of its owner.
+
+# State scope (the financial centre's possible): only the owner's exchange grows.
+zz_ef_fc_possible = {
+	exists = owner
+	owner = { has_variable = zz_ef_fc_state }
+	owner.var:zz_ef_fc_state = this
+}
+
+# Country scope: the country has its exchange -- the state is still its own and holds a financial centre.
+zz_ef_has_exchange = {
+	has_variable = zz_ef_fc_state
+	var:zz_ef_fc_state = {
+		owner ?= prev
+		any_scope_building = { is_building_group = bg_financial_centre }
+	}
+}
+
+# Country scope: a new exchange can be founded (the journal «Учреждение биржи», Д.R8б.1): the technology, category A, a
+# monetary system of its own, banks of zz_ef_fc_bank_levels_min levels at least.
+zz_ef_fc_can_found = {
+	NOT = { zz_ef_has_exchange = yes }
+	has_technology_researched = financial_center
+	zz_ef_role_is_a = yes
+	NOT = { has_law = law_type:law_no_monetary_system }
+	zz_ef_bank_levels >= zz_ef_fc_bank_levels_min
+}

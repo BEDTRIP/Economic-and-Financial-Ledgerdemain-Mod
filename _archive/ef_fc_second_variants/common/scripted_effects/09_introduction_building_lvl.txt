@@ -1,0 +1,59 @@
+﻿# From common/scripted_effects/09_introduction_building_lvl.txt.
+
+	macro_facilities_fc_gbr_2 = {
+		if = {
+			limit = {
+				has_technology_researched = financial_center
+				#has_financial_center = no
+			}
+			every_scope_state = {
+				limit = {
+					this = { state_region = s:STATE_LANCASHIRE }
+				}
+				create_building = {
+					building = building_financial_centre_gbr_2
+					level    = 5
+					reserves=0
+				}
+			}
+			financial_center_modifier = yes
+		}
+	}
+	macro_facilities_fc_hkh = {
+		if = {
+			limit = {
+				has_technology_researched = financial_center
+				#has_financial_center = no
+			}
+			every_scope_state = {
+				limit = {
+					this = { state_region = s:STATE_SHAOZHOU }
+				}
+				create_building = {
+					building = building_financial_centre_hkh
+					level    = 5
+					reserves=0
+				}
+			}
+			financial_center_modifier = yes
+		}
+	}
+	macro_facilities_fc_usa_2 = {
+		if = {
+			limit = {
+				has_technology_researched = financial_center
+				#has_financial_center = no
+			}
+			every_scope_state = {
+				limit = {
+					this = { state_region = s:STATE_ILLINOIS }
+				}
+				create_building = {
+					building = building_financial_centre_usa_2
+					level    = 5
+					reserves=0
+				}
+			}
+			financial_center_modifier = yes
+		}
+	}

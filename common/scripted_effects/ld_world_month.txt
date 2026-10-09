@@ -24,6 +24,12 @@ zz_ef_world_month_ef = {
 	if = {
 		limit = { zz_ef_logs_on = yes }
 		zz_ef_rq_world_check = yes
+		set_global_variable = { name = zz_ef_fc_world_n value = 0 }
+		every_country = {
+			limit = { zz_ef_has_exchange = yes }
+			change_global_variable = { name = zz_ef_fc_world_n add = 1 }
+		}
+		debug_log = "EFH|[TimeKeeper.GetCurrentDate.GetString]|WORLD|exchanges [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fc_world_n_v')|0]"
 	}
 }
 

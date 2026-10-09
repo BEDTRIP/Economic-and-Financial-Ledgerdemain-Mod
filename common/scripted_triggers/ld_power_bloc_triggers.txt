@@ -1,0 +1,22 @@
+﻿# !! MAINTENANCE !! Key-level REPLACE_OR_CREATE of vanilla's country_can_form_power_bloc
+# (game/common/scripted_triggers/00_scripted_triggers.txt; read by the scripted rule of forming a power bloc): vanilla's
+# conditions and the country's own exchange (R8б.4, Д.R8.7 -- a power bloc only with its own financial centre).
+REPLACE_OR_CREATE:country_can_form_power_bloc = {
+	AND = {
+		trigger_if = {
+			limit = {
+				is_country_type = decentralized
+			}
+			NOT = { is_country_type = decentralized }
+		}
+		trigger_if = {
+			limit = {
+				is_revolutionary = yes
+			}
+			is_revolutionary = no
+		}
+		country_rank >= rank_value:unrecognized_major_power
+		NOT = { has_law_or_variant = law_type:law_isolationism }
+		zz_ef_has_exchange = yes
+	}
+}

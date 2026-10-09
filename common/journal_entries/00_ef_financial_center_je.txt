@@ -1,110 +1,41 @@
-﻿financial_center_je_1 = {
+﻿# «Учреждение биржи» (R8б.4, Д.R8.7, Д.R8б.1): the only way to a new exchange, for every country (the player and the AI):
+# the technology financial_center, category A, a monetary system of its own and banks of zz_ef_fc_bank_levels_min levels
+# at least (zz_ef_fc_can_found, scripted_triggers/ld_fc_triggers.txt). The exchange -- the country's variant in its state
+# region, else the common one in the capital (zz_ef_fc_found, scripted_effects/ld_fc_types.txt); E&F's gift of the
+# technologies by GDP is gone.
+financial_center_je_1 = {
 	icon = "gfx/interface/icons/event_icons/financial_center.dds"
 
 	group = je_group_ef
 	should_be_pinned_by_default_uninvolved_or_context = yes
 
 	is_shown_when_inactive = {
-		not = {
-			has_financial_center = yes
-		}
+		NOT = { zz_ef_has_exchange = yes }
 	}
 	possible = {
-		is_player = yes
-		not = {
-			has_financial_center = yes
-		}
+		NOT = { zz_ef_has_exchange = yes }
 	}
 
 	status_desc = {
 		first_valid = {
-			triggered_desc = { # Cementing the Rightful Dynasty is active
+			triggered_desc = {
 				desc = status_financial_center_je_1
-				trigger = {
-					not  = {
-						has_technology_researched = stock_exchange
-					}
-				}
+				trigger = { NOT = { zz_ef_fc_can_found = yes } }
 			}
-			triggered_desc = { # Cementing the Rightful Dynasty is active
+			triggered_desc = {
 				desc = status_financial_center_je_2
-				trigger = {
-					has_technology_researched = stock_exchange
-				}
+				trigger = { zz_ef_fc_can_found = yes }
 			}
 		}
 	}
 
 	complete = {
-		has_technology_researched = stock_exchange
-		has_technology_researched = financial_center
-		any_scope_state = {
-			any_scope_building = {
-				is_building_group = bg_financial_centre
-			}
-		}
+		zz_ef_fc_can_found = yes
 	}
 
-	scripted_progress_bar = stock_exchange_progress_bar
-	scripted_progress_bar = financial_center_progress_bar
-
-	#progressbar and var
-	on_monthly_pulse = {
-		effect = {
-			je:financial_center_je_1 ?= {
-				if = {
-					limit = {
-						owner = {
-							has_technology_researched = stock_exchange
-						}
-					}
-					set_bar_progress = {
-						value = 2500000
-						name = stock_exchange_progress_bar
-					}
-				}
-				if = {
-					limit = {
-						not = {
-							owner = {
-								has_technology_researched = stock_exchange
-							}
-						}
-					}
-					set_bar_progress = {
-						value = owner.gdp_var
-						name = stock_exchange_progress_bar
-					}
-				}
-				set_bar_progress = {
-					value = owner.gdp_var
-					name = financial_center_progress_bar
-				}
-			}
-			#stock_exchange
-			if = {
-				limit = {
-					gdp_var >= 2500000
-					not  = {
-						has_technology_researched = stock_exchange
-					}
-				}
-				add_technology_researched = stock_exchange
-			}
-			#financial_center
-			if = {
-				limit = {
-					gdp_var >= 5000000
-					not  = {
-						has_technology_researched = financial_center
-					}
-				}
-				add_technology_researched = financial_center
-			}
-		}
-	}
-
- 	on_complete = {
+	on_complete = {
+		zz_ef_fc_found = yes
+		financial_center_modifier = yes
 		if = {
 			limit = { NOT = { has_journal_entry = financial_center_je_2 } }
 			add_journal_entry = {

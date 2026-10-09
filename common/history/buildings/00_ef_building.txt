@@ -1596,20 +1596,9 @@ BUILDINGS = {
 		}
 	} 
    
-	#AUS
+	#AUS -- its exchange is Vienna (R8б.4: one per country)
 	s:STATE_LOMBARDY={
 		region_state:AUS={
-			create_building={
-				building="building_financial_centre_ita"
-				add_ownership={
-					company={
-						type=company_Rothschild_Bank_aus
-						country="c:AUS"
-						levels=1
-					}
-				}
-				reserves=1
-			}
 			create_building={
 				building="building_construction_sector"
 				add_ownership={
@@ -2077,6 +2066,22 @@ BUILDINGS = {
 	#Divers
 	################## 
 
+	#TUR -- the Ottoman exchange in Constantinople (R8б.4)
+	s:STATE_EASTERN_THRACE={
+		region_state:TUR={
+			create_building={
+				building="building_financial_centre_tur"
+				add_ownership={
+					country={
+						country="c:TUR"
+						levels=1
+					}
+				}
+				reserves=1
+			}
+		}
+	}
+
 	#AUS
 	s:STATE_AUSTRIA={
 		region_state:AUS={
@@ -2533,48 +2538,17 @@ BUILDINGS = {
 
 		s:STATE_SHAOZHOU ={
 			region_state:GBR={
-				create_building={
-					building="building_financial_centre_hkh"
-					add_ownership={
-						building={
-							type="building_financial_district"
-							country="c:GBR"
-							levels=3
-							region="STATE_LANCASHIRE"
-						}
-					}  
-					reserves=1
-				} 
+ 
 			}
 		} 
 		s:STATE_LANCASHIRE={
 			region_state:GBR={
-				create_building={
-					building="building_financial_centre_gbr_2"
-					add_ownership={
-						company={
-							type=company_Rothschild_Bank_gbr
-							country="c:GBR"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
+ 
 			}
 		}
 		s:STATE_ILLINOIS={
 			region_state:USA={
-				create_building={
-					building="building_financial_centre_usa_2"
-					add_ownership={
-						company={
-							type=company_BankJPMorgan
-							country="c:USA"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
+ 
 			}
 		}
 		s:STATE_LOWER_EGYPT={
@@ -2629,48 +2603,17 @@ BUILDINGS = {
    
 		s:STATE_SHAOZHOU ={
 			region_state:GBR={
-				create_building={
-					building="building_financial_centre_hkh"
-					add_ownership={
-						building={
-							type="building_financial_district"
-							country="c:GBR"
-							levels=3
-							region="STATE_LANCASHIRE"
-						}
-					}  
-					reserves=1
-				} 
+ 
 			}
 		} 
 		s:STATE_LANCASHIRE={
 			region_state:GBR={
-				create_building={
-					building="building_financial_centre_gbr_2"
-					add_ownership={
-						company={
-							type=company_Rothschild_Bank_gbr
-							country="c:GBR"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
+ 
 			}
 		}
 		s:STATE_ILLINOIS={
 			region_state:USA={
-				create_building={
-					building="building_financial_centre_usa_2"
-					add_ownership={
-						company={
-							type=company_BankJPMorgan
-							country="c:USA"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
+ 
 			}
 		}
 		s:STATE_EASTERN_THRACE={
@@ -2815,48 +2758,17 @@ BUILDINGS = {
 		} 
 		s:STATE_SHAOZHOU ={
 			region_state:GBR={
-				create_building={
-					building="building_financial_centre_hkh"
-					add_ownership={
-						building={
-							type="building_financial_district"
-							country="c:GBR"
-							levels=3
-							region="STATE_LANCASHIRE"
-						}
-					}  
-					reserves=1
-				} 
+ 
 			}
 		} 
 		s:STATE_LANCASHIRE={
 			region_state:GBR={
-				create_building={
-					building="building_financial_centre_gbr_2"
-					add_ownership={
-						company={
-							type=company_Rothschild_Bank_gbr
-							country="c:GBR"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
+ 
 			}
 		}
 		s:STATE_ILLINOIS={
 			region_state:USA={
-				create_building={
-					building="building_financial_centre_usa_2"
-					add_ownership={
-						company={
-							type=company_BankJPMorgan
-							country="c:USA"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
+ 
 			}
 		}
 		s:STATE_EASTERN_THRACE={

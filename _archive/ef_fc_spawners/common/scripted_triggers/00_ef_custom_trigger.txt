@@ -1,0 +1,18 @@
+﻿# From common/scripted_triggers/00_ef_custom_trigger.txt.
+
+macro_facilities_on_action_fc_limit = {
+	has_technology_researched = financial_center
+	is_revolutionary = no
+	or = {
+		is_invalid_country = no
+		is_player = yes
+	}
+	or = {
+		AND = {
+			has_variable = gdp_view
+			var:gdp_view >= 1 #AI que à partir de 5M  GDP
+		}
+		country_already_financial_center = yes
+		is_player = yes
+	}
+}

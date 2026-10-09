@@ -9195,257 +9195,163 @@ stock_exchange_name = {
 	type = country
 	log_loc_errors = no
 
+	# the exchange's name by the country's variant (var:zz_ef_fc_variant, scripted_effects/ld_fc_types.txt);
+	# the common one -- its generic name
 	text = {
-		trigger = {
-			has_building_financial_centre_custom_location = 1
-		}
-		localization_key  = building_financial_centre_scripted
+		trigger = { NOT = { has_variable = zz_ef_fc_variant } }
+		localization_key = building_financial_centre_scripted
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_arg_custom_location = 1
-		}
-		localization_key  = building_financial_centre_arg
+		trigger = { var:zz_ef_fc_variant ?= flag:arg }
+		localization_key = building_financial_centre_arg
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_aus_custom_location = 1
-		}
-		localization_key  = building_financial_centre_aus
+		trigger = { var:zz_ef_fc_variant ?= flag:aus }
+		localization_key = building_financial_centre_aus
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_bav_custom_location = 1
-		}
-		localization_key  = building_financial_centre_bav
+		trigger = { var:zz_ef_fc_variant ?= flag:bav }
+		localization_key = building_financial_centre_bav
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_bel_custom_location = 1
-		}
-		localization_key  = building_financial_centre_bel
+		trigger = { var:zz_ef_fc_variant ?= flag:bel }
+		localization_key = building_financial_centre_bel
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_bic_custom_location = 1
-		}
-		localization_key  = building_financial_centre_bic
+		trigger = { var:zz_ef_fc_variant ?= flag:bic }
+		localization_key = building_financial_centre_bic
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_brz_custom_location = 1
-		}
-		localization_key  = building_financial_centre_brz
+		trigger = { var:zz_ef_fc_variant ?= flag:brz }
+		localization_key = building_financial_centre_brz
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_chi_custom_location = 1
-		}
-		localization_key  = building_financial_centre_chi
+		trigger = { var:zz_ef_fc_variant ?= flag:chi }
+		localization_key = building_financial_centre_chi
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_chl_custom_location = 1
-		}
-		localization_key  = building_financial_centre_chl
+		trigger = { var:zz_ef_fc_variant ?= flag:chl }
+		localization_key = building_financial_centre_chl
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_den_custom_location = 1
-		}
-		localization_key  = building_financial_centre_den
+		trigger = { var:zz_ef_fc_variant ?= flag:den }
+		localization_key = building_financial_centre_den
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_dei_custom_location = 1
-		}
-		localization_key  = building_financial_centre_dei
+		trigger = { var:zz_ef_fc_variant ?= flag:dei }
+		localization_key = building_financial_centre_dei
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_egy_custom_location = 1
-		}
-		localization_key  = building_financial_centre_egy
+		trigger = { var:zz_ef_fc_variant ?= flag:egy }
+		localization_key = building_financial_centre_egy
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_fra_custom_location = 1
-		}
-		localization_key  = building_financial_centre_fra
+		trigger = { var:zz_ef_fc_variant ?= flag:fra }
+		localization_key = building_financial_centre_fra
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_frm_custom_location = 1
-		}
-		localization_key  = building_financial_centre_frm
+		trigger = { var:zz_ef_fc_variant ?= flag:frm }
+		localization_key = building_financial_centre_frm
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_gbr_custom_location = 1
-		}
-		localization_key  = building_financial_centre_gbr
+		trigger = { var:zz_ef_fc_variant ?= flag:gbr }
+		localization_key = building_financial_centre_gbr
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_gbr_2_custom_location = 1
-		}
-		localization_key  = building_financial_centre_gbr_2
+		trigger = { var:zz_ef_fc_variant ?= flag:gre }
+		localization_key = building_financial_centre_gre
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_gre_custom_location = 1
-		}
-		localization_key  = building_financial_centre_gre
+		trigger = { var:zz_ef_fc_variant ?= flag:han }
+		localization_key = building_financial_centre_han
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_hkh_custom_location = 1
-		}
-		localization_key  = building_financial_centre_hkh
+		trigger = { var:zz_ef_fc_variant ?= flag:ita }
+		localization_key = building_financial_centre_ita
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_han_custom_location = 1
-		}
-		localization_key  = building_financial_centre_han
+		trigger = { var:zz_ef_fc_variant ?= flag:jap }
+		localization_key = building_financial_centre_jap
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_ita_custom_location = 1
-		}
-		localization_key  = building_financial_centre_ita
+		trigger = { var:zz_ef_fc_variant ?= flag:mex }
+		localization_key = building_financial_centre_mex
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_jap_custom_location = 1
-		}
-		localization_key  = building_financial_centre_jap
+		trigger = { var:zz_ef_fc_variant ?= flag:net }
+		localization_key = building_financial_centre_net
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_mex_custom_location = 1
-		}
-		localization_key  = building_financial_centre_mex
+		trigger = { var:zz_ef_fc_variant ?= flag:nsw }
+		localization_key = building_financial_centre_nsw
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_net_custom_location = 1
-		}
-		localization_key  = building_financial_centre_net
+		trigger = { var:zz_ef_fc_variant ?= flag:ont }
+		localization_key = building_financial_centre_ont
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_nsw_custom_location = 1
-		}
-		localization_key  = building_financial_centre_nsw
+		trigger = { var:zz_ef_fc_variant ?= flag:peu }
+		localization_key = building_financial_centre_peu
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_ont_custom_location = 1
-		}
-		localization_key  = building_financial_centre_ont
+		trigger = { var:zz_ef_fc_variant ?= flag:por }
+		localization_key = building_financial_centre_por
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_peu_custom_location = 1
-		}
-		localization_key  = building_financial_centre_peu
+		trigger = { var:zz_ef_fc_variant ?= flag:pru }
+		localization_key = building_financial_centre_pru
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_por_custom_location = 1
-		}
-		localization_key  = building_financial_centre_por
+		trigger = { var:zz_ef_fc_variant ?= flag:que }
+		localization_key = building_financial_centre_que
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_pru_custom_location = 1
-		}
-		localization_key  = building_financial_centre_pru
+		trigger = { var:zz_ef_fc_variant ?= flag:rus }
+		localization_key = building_financial_centre_rus
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_que_custom_location = 1
-		}
-		localization_key  = building_financial_centre_que
+		trigger = { var:zz_ef_fc_variant ?= flag:saf }
+		localization_key = building_financial_centre_saf
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_rus_custom_location = 1
-		}
-		localization_key  = building_financial_centre_rus
+		trigger = { var:zz_ef_fc_variant ?= flag:sar }
+		localization_key = building_financial_centre_sar
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_saf_custom_location = 1
-		}
-		localization_key  = building_financial_centre_saf
+		trigger = { var:zz_ef_fc_variant ?= flag:sic }
+		localization_key = building_financial_centre_sic
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_sar_custom_location = 1
-		}
-		localization_key  = building_financial_centre_sar
+		trigger = { var:zz_ef_fc_variant ?= flag:spa }
+		localization_key = building_financial_centre_spa
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_sic_custom_location = 1
-		}
-		localization_key  = building_financial_centre_sic
+		trigger = { var:zz_ef_fc_variant ?= flag:swe }
+		localization_key = building_financial_centre_swe
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_spa_custom_location = 1
-		}
-		localization_key  = building_financial_centre_spa
+		trigger = { var:zz_ef_fc_variant ?= flag:swi }
+		localization_key = building_financial_centre_swi
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_swe_custom_location = 1
-		}
-		localization_key  = building_financial_centre_swe
+		trigger = { var:zz_ef_fc_variant ?= flag:tus }
+		localization_key = building_financial_centre_tus
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_swi_custom_location = 1
-		}
-		localization_key  = building_financial_centre_swi
+		trigger = { var:zz_ef_fc_variant ?= flag:tur }
+		localization_key = building_financial_centre_tur
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_tus_custom_location = 1
-		}
-		localization_key  = building_financial_centre_tus
+		trigger = { var:zz_ef_fc_variant ?= flag:uru }
+		localization_key = building_financial_centre_uru
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_tur_custom_location = 1
-		}
-		localization_key  = building_financial_centre_tur
+		trigger = { var:zz_ef_fc_variant ?= flag:usa }
+		localization_key = building_financial_centre_usa
 	}
 	text = {
-		trigger = {
-			has_building_financial_centre_uru_custom_location = 1
-		}
-		localization_key  = building_financial_centre_uru
-	}
-	text = {
-		trigger = {
-			has_building_financial_centre_usa_custom_location = 1
-		}
-		localization_key  = building_financial_centre_usa
-	}
-	text = {
-		trigger = {
-			has_building_financial_centre_usa_2_custom_location = 1
-		}
-		localization_key  = building_financial_centre_usa_2
-	}
-	text = {
-		trigger = {
-			has_building_financial_centre_sax_custom_location = 1
-		}
-		localization_key  = building_financial_centre_sax
+		trigger = { var:zz_ef_fc_variant ?= flag:sax }
+		localization_key = building_financial_centre_sax
 	}
 }
 

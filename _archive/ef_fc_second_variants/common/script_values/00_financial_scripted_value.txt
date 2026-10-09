@@ -1,0 +1,83 @@
+﻿# From common/script_values/00_financial_scripted_value.txt.
+
+#building_financial_centre_gbr_2
+has_building_financial_centre_gbr_2 = {
+	value = 0
+	if = {
+		limit = {
+			exists = this
+			any_scope_state = {
+				has_building = building_financial_centre_gbr_2
+			}
+		}
+		add = 1
+	}
+}
+#building_financial_centre_hkh
+has_building_financial_centre_hkh = {
+	value = 0
+	if = {
+		limit = {
+			exists = this
+			any_scope_state = {
+				has_building = building_financial_centre_hkh
+			}
+		}
+		add = 1
+	}
+}
+#building_financial_centre_usa_2
+has_building_financial_centre_usa_2 = {
+	value = 0
+	if = {
+		limit = {
+			exists = this
+			any_scope_state = {
+				has_building = building_financial_centre_usa_2
+			}
+		}
+		add = 1
+	}
+}
+#building_financial_centre_gbr_2
+has_building_financial_centre_gbr_2_custom_location = {
+	value = 0
+	if = {
+		limit = {
+			exists = this
+			any_scope_state = {
+				has_building = building_financial_centre_gbr_2
+ 				has_modifier = financial_center_place_main_stock_exchange
+			}
+		}
+		add = 1
+	}
+}
+#building_financial_centre_hkh
+has_building_financial_centre_hkh_custom_location = {
+	value = 0
+	if = {
+		limit = {
+			exists = this
+			any_scope_state = {
+				has_building = building_financial_centre_hkh
+ 				has_modifier = financial_center_place_main_stock_exchange
+			}
+		}
+		add = 1
+	}
+}
+#building_financial_centre_usa_2
+has_building_financial_centre_usa_2_custom_location = {
+	value = 0
+	if = {
+		limit = {
+			exists = this
+			any_scope_state = {
+				has_building = building_financial_centre_usa_2
+ 				has_modifier = financial_center_place_main_stock_exchange
+			}
+		}
+		add = 1
+	}
+}

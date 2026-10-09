@@ -1,0 +1,18 @@
+﻿# The banks a country needs to found an exchange (the journal «Учреждение биржи», Д.R8б.1): levels of «Банк» buildings
+# (zz_ef_bank_levels).
+zz_ef_fc_bank_levels_min = 5
+# 1 if the country has its exchange (zz_ef_has_exchange), for the logs (EFY, EFH)
+zz_ef_fc_has_v = {
+	value = 0
+	if = { limit = { zz_ef_has_exchange = yes } value = 1 }
+}
+# the world's exchanges, counted monthly with the logs on (zz_ef_world_month_ef)
+zz_ef_fc_world_n_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_fc_world_n } value = global_var:zz_ef_fc_world_n }
+}
+# 1 if the country can found an exchange now (zz_ef_fc_can_found), for the log EFY
+zz_ef_fc_can_v = {
+	value = 0
+	if = { limit = { zz_ef_fc_can_found = yes } value = 1 }
+}
