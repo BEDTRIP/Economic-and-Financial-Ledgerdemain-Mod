@@ -790,7 +790,7 @@ zz_ef_world_acc = {
 			}
 			set_variable = { name = zz_ef_wld_g value = var:zz_ef_f_hume }
 			if = {
-				limit = { has_law = law_type:law_silver_standard }
+				limit = { zz_ef_metal_silver = yes }
 				change_variable = { name = zz_ef_wld_g multiply = silver_to_gold_rate }
 			}
 			change_global_variable = { name = zz_ef_wld_hume add = var:zz_ef_wld_g }
@@ -1021,7 +1021,7 @@ zz_ef_money_ledger_delta = {
 zz_ef_fx_metal_update = {
 	set_variable = { name = zz_ef_fx_metal value = zz_ef_fx_reserves_metal }
 	if = {
-		limit = { has_law = law_type:law_silver_standard }
+		limit = { zz_ef_metal_silver = yes }
 		change_variable = { name = zz_ef_fx_metal multiply = gold_to_silver_rate }
 	}
 }
@@ -1037,7 +1037,7 @@ zz_ef_crisis_redeem = {
 	set_variable = { name = zz_ef_crisis_got value = 0 }
 	if = {
 		limit = {
-			scope:overrated_currency_country_owner = { has_law = law_type:law_silver_standard }
+			scope:overrated_currency_country_owner = { zz_ef_metal_silver = yes }
 			scope:central_bank_site_overrated_currency_owner = { has_variable = silver_state_1 }
 		}
 		set_variable = {
@@ -1053,7 +1053,7 @@ zz_ef_crisis_redeem = {
 		}
 		set_variable = { name = zz_ef_crisis_got value = var:zz_ef_crisis_paid }
 		if = {
-			limit = { NOT = { has_law = law_type:law_silver_standard } }
+			limit = { NOT = { zz_ef_metal_silver = yes } }
 			change_variable = { name = zz_ef_crisis_got multiply = silver_to_gold_rate }
 		}
 	}
@@ -1075,13 +1075,13 @@ zz_ef_crisis_redeem = {
 		}
 		set_variable = { name = zz_ef_crisis_got value = var:zz_ef_crisis_paid }
 		if = {
-			limit = { has_law = law_type:law_silver_standard }
+			limit = { zz_ef_metal_silver = yes }
 			change_variable = { name = zz_ef_crisis_got multiply = gold_to_silver_rate }
 		}
 	}
 	scope:central_bank_site_root = {
 		if = {
-			limit = { owner = { has_law = law_type:law_silver_standard } }
+			limit = { owner = { zz_ef_metal_silver = yes } }
 			if = {
 				limit = { NOT = { has_variable = silver_state_1 } }
 				set_variable = { name = silver_state_1 value = 0 }

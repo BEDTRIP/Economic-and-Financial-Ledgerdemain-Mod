@@ -23,7 +23,7 @@ zz_ef_silver_units_per_good = 775
 zz_ef_metal_per_money = {
 	value = 1
 	if = {
-		limit = { has_law = law_type:law_silver_standard }
+		limit = { zz_ef_metal_silver = yes }
 		value = gold_to_silver_rate
 	}
 }
@@ -37,11 +37,11 @@ zz_ef_metal_is_silver = {
 	if = {
 		limit = {
 			OR = {
-				has_law = law_type:law_silver_standard
+				zz_ef_metal_silver = yes
 				AND = {
 					NOT = { has_modifier = has_central_bank }
-					NOT = { has_law = law_type:law_gold_standard }
-					NOT = { has_law = law_type:law_bimetallism_standard }
+					NOT = { zz_ef_metal_gold = yes }
+					NOT = { zz_ef_metal_bimet = yes }
 				}
 			}
 		}
@@ -51,7 +51,7 @@ zz_ef_metal_is_silver = {
 zz_ef_metal_silver_share = {
 	value = zz_ef_metal_is_silver
 	if = {
-		limit = { has_law = law_type:law_bimetallism_standard }
+		limit = { zz_ef_metal_bimet = yes }
 		value = 0.5
 	}
 }
@@ -404,7 +404,7 @@ zz_ef_cb_buyback_units = {
 		multiply = money_supply
 		multiply = zz_ef_cb_valuation
 		if = {
-			limit = { has_law = law_type:law_silver_standard }
+			limit = { zz_ef_metal_silver = yes }
 			max = {
 				value = zz_ef_popm_silver
 				multiply = 0.01

@@ -10,3 +10,35 @@ zz_ef_cb_metal_standard = {
 		has_law = law_type:law_external_exchange_standard
 	}
 }
+
+# The metal of the standard (Д.R8а.6): a metal standard's own; an exchange standard (gold exchange, external exchange)
+# keeps the metal of the standard it came from -- var:zz_ef_xmetal (flag:gold / silver / bimet; none -- gold), set by
+# zz_ef_std_switch_after and subject_currency.
+zz_ef_exchange_std = {
+	OR = {
+		has_law = law_type:law_gold_exchange_standard
+		has_law = law_type:law_external_exchange_standard
+	}
+}
+zz_ef_metal_silver = {
+	OR = {
+		has_law = law_type:law_silver_standard
+		AND = { zz_ef_exchange_std = yes var:zz_ef_xmetal ?= flag:silver }
+	}
+}
+zz_ef_metal_bimet = {
+	OR = {
+		has_law = law_type:law_bimetallism_standard
+		AND = { zz_ef_exchange_std = yes var:zz_ef_xmetal ?= flag:bimet }
+	}
+}
+zz_ef_metal_gold = {
+	OR = {
+		has_law = law_type:law_gold_standard
+		AND = {
+			zz_ef_exchange_std = yes
+			NOT = { var:zz_ef_xmetal ?= flag:silver }
+			NOT = { var:zz_ef_xmetal ?= flag:bimet }
+		}
+	}
+}

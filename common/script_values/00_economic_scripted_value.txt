@@ -4997,27 +4997,25 @@ gold_value_rapported_inflation = {
 money_value_target_real = {
 	add = var:money_value_target_1
 }
+# the parity is in the metal of the standard (an exchange standard -- the metal it came from, Д.R8а.6)
 money_value_target_real_in_gold = {
 	min = 0.0001
 	if = {
 		limit = {
-			or = {
-				has_law = law_type:law_gold_standard
-				has_law = law_type:law_gold_exchange_standard
-			}
+			zz_ef_metal_gold = yes
 		}
 		add = money_value_target_real
 	}
 	if = {
 		limit = {
-			has_law = law_type:law_silver_standard
+			zz_ef_metal_silver = yes
 		}
 		value = money_value_target_real
 		multiply = silver_to_gold_rate
 	}
 	if = {
 		limit = {
-			has_law = law_type:law_bimetallism_standard
+			zz_ef_metal_bimet = yes
 		}
 		value = money_value_target_real
 		#multiply = bimetallic_rate_silver_to_gold #bimetallic_rate

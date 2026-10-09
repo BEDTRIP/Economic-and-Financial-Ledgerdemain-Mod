@@ -22208,8 +22208,27 @@ remove_suject_currency = {
 }
 # E&F's monthly pulse (ef_on_monthly_pulse_recurence) and the start (ld_start_setup.txt) put a subject with a CB
 # on a foreign market on law_external_exchange_standard -- pegged to its overlord, with its own currency and its own
-# CB metal in its cover (Д.R8а.3, В-R8а.1).
+# CB metal in its cover (Д.R8а.3, В-R8а.1). The law's on_enact does not run on_activate_monetary_system_law, so the
+# metal of the standard it came from (Д.R8а.6) is kept here; from fiat or no system -- gold.
 subject_currency = {
+	if = {
+		limit = { zz_ef_exchange_std = no }
+		if = {
+			limit = { zz_ef_metal_silver = yes }
+			set_variable = { name = zz_ef_xmetal value = flag:silver }
+		}
+		else_if = {
+			limit = { zz_ef_metal_bimet = yes }
+			set_variable = { name = zz_ef_xmetal value = flag:bimet }
+		}
+		else = {
+			set_variable = { name = zz_ef_xmetal value = flag:gold }
+		}
+	}
+	else_if = {
+		limit = { NOT = { has_variable = zz_ef_xmetal } }
+		set_variable = { name = zz_ef_xmetal value = flag:gold }
+	}
 	activate_law = law_type:law_external_exchange_standard
 	money_value_target_modification = yes
 	capital = {

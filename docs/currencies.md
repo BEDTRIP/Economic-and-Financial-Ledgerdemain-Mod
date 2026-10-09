@@ -7,7 +7,7 @@
 ## Файлы
 - `common/law_groups/01_ef_laws.txt` — группы законов: `lawgroup_monetary_policy`, `lawgroup_monetary_system`, `lawgroup_currency_type`.
 - `common/laws/01_ef_currency_type.txt` — 95 законов `law_<cur>_currency` + `law_no_market_liquidity` (нет валюты). Одинаковая форма: `can_enact` = `has_modifier = has_central_bank` + список тегов, которым E&F выдаёт валюту в истории; 39 законов с `always = no` (товар закомментирован / вырезан под лимит 128 товаров); `unlocking_technologies = currency_standards`.
-- `common/laws/01_ef_monetary_system.txt` — `law_no_monetary_system`, `law_fiat_standard`, `law_silver_standard`, `law_bimetallism_standard`, `law_gold_standard`, `law_gold_exchange_standard`, `law_external_exchange_standard`; `on_activate` зовёт `on_activate_monetary_system_law` (01_economic_scripted_effects.txt:27577, тело E&F + `zz_ef_std_switch_before/_after`).
+- `common/laws/01_ef_monetary_system.txt` — `law_no_monetary_system`, `law_fiat_standard`, `law_silver_standard`, `law_bimetallism_standard`, `law_gold_standard`, `law_gold_exchange_standard`, `law_external_exchange_standard`; `on_activate` зовёт `on_activate_monetary_system_law` (01_economic_scripted_effects.txt:9540, тело E&F + `zz_ef_std_switch_before/_after`).
 - Соотношение биметаллизма — параметр страны `var:zz_ef_bimet_ratio` (Д.R8а.11; группа законов E&F и поправки — в `_archive/ef_bimetallic_ratio_laws/`): старт — история (`99_ef_history_global_variable.txt`: FRA 15,5, USA 16,1, NET 15,6), латинский союз (`00_ef_divers_je.txt`) — 15,5, переход на биметаллизм без своего — 15; читает `bimetallic_rate_gold_to_silver` (`00_economic_scripted_value.txt`; у остальных стандартов — рыночный курс `gold_to_silver_rate`). Смена денежной властью — R4 / R10.
 - `common/laws/01_ef_monetary_policy.txt` — `law_no_monetary_policy`, `law_revaluation`, `law_devaluation`, `law_large_monetary_policy` (три последних — с технологией `monetary_policy_tools`, не `central_banking`; на уровне ЦБ: `central-bank.md`).
 - `common/script_values/01_economic_currency_scripted_value.txt` (294 тыс. строк, 93 повтора на валюту; индекс ниже).
@@ -37,7 +37,8 @@
 - Старт: `99_ef_history_global_variable.txt` выдаёт законы валют → `zz_ef_currency_fix.txt` правит WUR и 13 стран.
 - Раз в месяц (`zz_ef_money_model_monthly_step`, `ld_money_model.txt:1005..`) и на первом шаге страны сразу после старта в балансе: `zz_ef_reference_strength_step`; `zz_ef_currency_trade_step` (после шага эталона; только страны с ЦБ, не эталон).
 - Раз в год (`ef_on_yearly_pulse_country`, `on_actions/00_ef_on_action.txt:139`, зовёт страна-эталон): `national_capacity_variable_list` → пересев эталона. Кандидат: великая держава, ЦБ, рейтинг ≥ 6 (BBB), металлический/золотодевизный стандарт, нет дефолта ЦБ, покрытие ≥ 25%.
-- Смена закона стандарта: `on_activate_monetary_system_law` → `zz_ef_std_switch_before` (запомнить стандарт и паритет) → тело E&F → `zz_ef_std_switch_after` (пересчёт паритета по `silver_to_gold_rate`/`gold_to_silver_rate`, перевод запасов `silver_state_1`↔`gold_state_1` в столичных штатах с `central_bank_historic_place`).
+- Смена закона стандарта: `on_activate_monetary_system_law` → `zz_ef_std_switch_before` (запомнить стандарт и паритет) → тело E&F → `zz_ef_std_switch_after` (пересчёт паритета по `silver_to_gold_rate`/`gold_to_silver_rate`, перевод запасов `silver_state_1`↔`gold_state_1` в столичных штатах с `central_bank_historic_place`). Пересчёт — по металлу стандарта (`zz_ef_metal_gold/_silver/_bimet`), не по закону.
+- Обменный стандарт (`law_gold_exchange_standard` — «Обменный стандарт», открыт из любого металлического; `law_external_exchange_standard`) — в металле стандарта, с которого пришли (Д.R8а.6): `var:zz_ef_xmetal` (`flag:gold/silver/bimet`; нет — золото) ставят `zz_ef_std_switch_after` и `subject_currency`, снимает `zz_ef_std_switch_after` при уходе с обменного. Триггеры металла (`ld_metal_triggers.txt`): `zz_ef_exchange_std`, `zz_ef_metal_gold/_silver/_bimet` — металл ЦБ, паритет, покрытие, клиринг, `money_value_target_real_in_gold` читают их; переход между стандартами одного металла запасы и паритет не меняет. `money_value_0` обменного стандарта — E&F (по эталонной валюте).
 - Подданный с ЦБ на чужом рынке — на внешневалютном стандарте (`law_external_exchange_standard`, E&F `subject_currency` на старте и в месячном пульсе): своя валюта, курс — якоря (`zz_ef_value_to_parity`), металл ЦБ — свой и в покрытии (`zz_ef_cb_metal_standard`), в клиринге рассчитывается через сюзерена, эмитентом вкладов и курса валюты не считается (Д.R8а.3, В-R8а.1).
 
 ## Переменные
@@ -51,7 +52,8 @@
 | `global_var:money_value_<cur>_global_var` | курс валюты `<cur>` | E&F | `money_value_<cur>` |
 | `global_var:money_value_median` | медиана E&F | E&F | `is_reference_currency` (E&F) |
 | `global_var:zz_ef_ref_vtp` | value_to_parity эталона | `zz_ef_reference_strength_step` | `zz_ef_currency_strength` |
-| `zz_ef_std_old`, `zz_ef_std_parity_old/_new` | старый стандарт (1 серебро, 2 би, 3 золото) и паритет при смене | `zz_ef_std_switch_*` | они же |
+| `zz_ef_std_old`, `zz_ef_std_parity_old/_new` | старый стандарт по металлу (1 серебро, 2 би, 3 золото; с обменного — по `zz_ef_xmetal`) и паритет при смене | `zz_ef_std_switch_*` | они же |
+| `var:zz_ef_xmetal` | металл обменного стандарта (`flag:gold/silver/bimet`), есть только на обменном | `zz_ef_std_switch_after`, `subject_currency` | `zz_ef_metal_*`, `zz_ef_std_switch_before` |
 | `zz_ef_member_trade` | торговый счёт члена ТС за неделю | `zz_ef_trade_step` (`ld_money_model.txt`) | `zz_ef_members_trade_sum` |
 | `global_monetary_reference` | модификатор эталона | `08_list_effect.txt:300-306` | `zz_ef_currency_trade_step`, `is_*_currency` |
 | `zz_ef_currency_trade` | модификатор торговли от силы (`static_modifiers/ld_currency_trade.txt`), множитель `zz_ef_currency_trade_m` — реальный перекос курса: b = (1 / сила) × (индекс цен эталона `global_var:zz_ef_ref_cpi` / свой `var:zz_ef_prev_price`), (b − 1) × 40, в −50..50 (R3.4) | `zz_ef_currency_trade_step` | движок |
@@ -64,5 +66,5 @@
 - GUI: биржа валют (`buy_sell_currency_in_metal_market_panel`, `buy_/sell_<cur>_in_gold_market_panel`), карточки банка (значения `zz_ef_v_*`), панель ставки (`gui/ld_cb_rate_panel.gui`, другой документ).
 
 ## Логи
-- `EFM|…|std_switch|old …` — смена стандарта (`ld_standard_switch.txt:130`).
+- `EFM|…|std_switch|old …` — смена стандарта (`ld_standard_switch.txt:181`).
 - `EFE|…|note…|cover…|std…|cb…|ref…`, `EFE|…|cand`, `EFE|…|pick` — кандидаты и выбор эталона (`08_list_effect.txt:210`).

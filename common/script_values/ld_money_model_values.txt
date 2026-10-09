@@ -674,7 +674,7 @@ zz_ef_reserves_in_gold = {
 	value = gold_state_native_for_stockpile
 	add = silver_state_native_for_stockpile_in_gold
 	if = {
-		limit = { has_law = law_type:law_silver_standard }
+		limit = { zz_ef_metal_silver = yes }
 		add = { value = zz_ef_v_fx_metal multiply = silver_to_gold_rate }
 	}
 	else = {
@@ -732,7 +732,7 @@ zz_ef_metal_value = {
 zz_ef_cb_metal = {
 	value = gold_state_native_for_stockpile
 	if = {
-		limit = { has_law = law_type:law_silver_standard }
+		limit = { zz_ef_metal_silver = yes }
 		value = silver_state_native_for_stockpile
 	}
 }
@@ -836,9 +836,9 @@ zz_ef_cb_cover_credit_mult = {
 			has_modifier = has_central_bank
 			has_variable = money_value_target_1
 			OR = {
-				has_law = law_type:law_gold_standard
-				has_law = law_type:law_silver_standard
-				has_law = law_type:law_bimetallism_standard
+				zz_ef_metal_gold = yes
+				zz_ef_metal_silver = yes
+				zz_ef_metal_bimet = yes
 			}
 		}
 		value = zz_ef_cb_cover
@@ -2066,8 +2066,8 @@ zz_ef_v_d_abroad = {
 # silver converted by E&F's silver_to_gold_rate, from world production).
 # E&F's money_value_in_gold goes through the market owner for subjects; read
 # weekly for every country it ended in a stack overflow
-# crash -- so it is not read here. 0 without a central bank on a metal
-# standard.
+# crash -- so it is not read here. An exchange standard's money_value_0 is E&F's, by the reference
+# currency, already in gold. 0 without a central bank on a metal standard.
 zz_ef_gold_per_unit = {
 	value = 0
 	if = {
@@ -2076,6 +2076,7 @@ zz_ef_gold_per_unit = {
 			OR = {
 				has_law = law_type:law_gold_standard
 				has_law = law_type:law_bimetallism_standard
+				zz_ef_exchange_std = yes
 			}
 		}
 		value = money_value_0
@@ -2224,7 +2225,7 @@ zz_ef_v_crisis_paid = {
 }
 
 # The monthly currency line (EFX): standard (1 gold, 2 silver, 3 bimetallism,
-# 4 gold exchange, 5 fiat, 0 none), CB, subject, E&F's crisis flags.
+# 4 gold exchange, 5 fiat, 6 external exchange, 0 none), CB, subject, E&F's crisis flags.
 zz_ef_std_code = {
 	value = 0
 	if = { limit = { has_law = law_type:law_gold_standard } value = 1 }
@@ -2232,6 +2233,7 @@ zz_ef_std_code = {
 	else_if = { limit = { has_law = law_type:law_bimetallism_standard } value = 3 }
 	else_if = { limit = { has_law = law_type:law_gold_exchange_standard } value = 4 }
 	else_if = { limit = { has_law = law_type:law_fiat_standard } value = 5 }
+	else_if = { limit = { has_law = law_type:law_external_exchange_standard } value = 6 }
 }
 zz_ef_has_cb = {
 	value = 0

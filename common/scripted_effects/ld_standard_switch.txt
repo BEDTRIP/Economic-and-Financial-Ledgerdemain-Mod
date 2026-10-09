@@ -2,8 +2,7 @@
 # M.10 -- a change of the metal standard keeps the money's worth in gold.
 #
 # E&F, on a new standard law (on_activate_monetary_system_law), sets the parity to
-# money_value_target_pre_set -- a value from its own scale -- and leaves the CB's metal as it was
-#. Now: the
+# money_value_target_pre_set -- a value from its own scale -- and leaves the CB's metal as it was. Here the
 # reserves are converted at the market rate of silver to gold (silver_to_gold_rate) and the parity
 # follows in the same metal, so the value in gold does not jump:
 #   silver -> gold:          gold += silver x s2g, silver = 0;  parity x s2g
@@ -11,7 +10,10 @@
 #   bimetallism -> gold:     gold += silver x s2g, silver = 0;  parity as it was (gold)
 #   gold / bimetallism -> silver: silver += gold / s2g, gold = 0; parity / s2g
 #   gold -> bimetallism:     nothing to convert, parity as it was
-# Parities: silver standard in silver per unit, gold and bimetallism in gold per unit (as the
+# An exchange standard (gold exchange, external) is counted in the metal of the standard it came
+# from (var:zz_ef_xmetal, ld_metal_triggers.txt; Д.R8а.6): to or from it the same rules by metal,
+# and between the same metal nothing changes.
+# Parities: silver in silver per unit, gold and bimetallism in gold per unit (as the
 # reserves are counted: central_bank_metal_reserves_state). To or from fiat / no system, and a
 # standard taken without a parity before: E&F's as it was.
 # E&F's status vars var:law_<standard> still hold the OLD standard here (set_reset_monetary_
@@ -30,7 +32,20 @@ zz_ef_std_switch_before = {
 			has_variable = money_value_target_1
 			var:money_value_target_1 > 0
 		}
+		# from an exchange standard: its metal (var:zz_ef_xmetal is kept only while on one)
 		if = {
+			limit = { var:zz_ef_xmetal ?= flag:silver }
+			set_variable = { name = zz_ef_std_old value = 1 }
+		}
+		else_if = {
+			limit = { var:zz_ef_xmetal ?= flag:bimet }
+			set_variable = { name = zz_ef_std_old value = 2 }
+		}
+		else_if = {
+			limit = { has_variable = zz_ef_xmetal }
+			set_variable = { name = zz_ef_std_old value = 3 }
+		}
+		else_if = {
 			limit = { has_variable = law_silver_standard var:law_silver_standard = 1 }
 			set_variable = { name = zz_ef_std_old value = 1 }
 		}
@@ -62,6 +77,30 @@ zz_ef_std_switch_after = {
 		if = { limit = { has_variable = zz_ef_fiat_p0 } remove_variable = zz_ef_fiat_p0 }
 		if = { limit = { has_variable = zz_ef_fiat_r0 } remove_variable = zz_ef_fiat_r0 }
 	}
+	# an exchange standard keeps the metal of the standard it came from (Д.R8а.6); none known -- gold
+	if = {
+		limit = { zz_ef_exchange_std = yes }
+		if = {
+			limit = { var:zz_ef_std_old ?= 1 }
+			set_variable = { name = zz_ef_xmetal value = flag:silver }
+		}
+		else_if = {
+			limit = { var:zz_ef_std_old ?= 2 }
+			set_variable = { name = zz_ef_xmetal value = flag:bimet }
+		}
+		else_if = {
+			limit = { var:zz_ef_std_old ?= 3 }
+			set_variable = { name = zz_ef_xmetal value = flag:gold }
+		}
+		else_if = {
+			limit = { NOT = { has_variable = zz_ef_xmetal } }
+			set_variable = { name = zz_ef_xmetal value = flag:gold }
+		}
+	}
+	else_if = {
+		limit = { has_variable = zz_ef_xmetal }
+		remove_variable = zz_ef_xmetal
+	}
 	if = {
 		limit = { has_variable = zz_ef_std_old }
 		set_variable = { name = zz_ef_std_parity_new value = var:zz_ef_std_parity_old }
@@ -70,8 +109,8 @@ zz_ef_std_switch_after = {
 			limit = {
 				var:zz_ef_std_old = 1
 				OR = {
-					has_law = law_type:law_gold_standard
-					has_law = law_type:law_bimetallism_standard
+					zz_ef_metal_gold = yes
+					zz_ef_metal_bimet = yes
 				}
 			}
 			change_variable = { name = zz_ef_std_parity_new multiply = silver_to_gold_rate }
@@ -80,13 +119,13 @@ zz_ef_std_switch_after = {
 		if = {
 			limit = {
 				var:zz_ef_std_old > 1
-				has_law = law_type:law_silver_standard
+				zz_ef_metal_silver = yes
 			}
 			change_variable = { name = zz_ef_std_parity_new multiply = gold_to_silver_rate }
 		}
 		# the reserves: into gold for the gold standard, into silver for the silver one
 		if = {
-			limit = { has_law = law_type:law_gold_standard }
+			limit = { zz_ef_metal_gold = yes }
 			every_scope_state = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -108,7 +147,7 @@ zz_ef_std_switch_after = {
 			}
 		}
 		else_if = {
-			limit = { has_law = law_type:law_silver_standard }
+			limit = { zz_ef_metal_silver = yes }
 			every_scope_state = {
 				limit = {
 					has_modifier = central_bank_historic_place
@@ -132,9 +171,9 @@ zz_ef_std_switch_after = {
 		if = {
 			limit = {
 				OR = {
-					has_law = law_type:law_gold_standard
-					has_law = law_type:law_silver_standard
-					has_law = law_type:law_bimetallism_standard
+					zz_ef_metal_gold = yes
+					zz_ef_metal_silver = yes
+					zz_ef_metal_bimet = yes
 				}
 			}
 			set_variable = { name = money_value_target_1 value = var:zz_ef_std_parity_new }

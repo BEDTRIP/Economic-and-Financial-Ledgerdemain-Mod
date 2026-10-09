@@ -11,7 +11,7 @@
 - `common/scripted_effects/ld_money_model.txt` — недельный шаг, приёмник GUI-моста, ежемесячный шаг, сбережения/вклады, кредиты, кольца истории, ставка правительства, стартовый металл ЦБ (`ld_metal_accounts.txt`), выкуп валюты в кризис, зонды.
 - `common/script_values/ld_money_model_values.txt` — все формулы: счета, M0–M3, кредитные лимиты, ставки, платёжный баланс, кольца роста (почти все ключи `zz_ef_*`).
 - `common/scripted_effects/ld_metal_accounts.txt` — старт металла, недельные покупки/продажи ЦБ/банков/населения, выкуп у населения, сверка металла ЦБ, мировая линия металла.
-- `common/scripted_triggers/ld_metal_triggers.txt` — `zz_ef_cb_metal_standard` (ЦБ на металлическом стандарте).
+- `common/scripted_triggers/ld_metal_triggers.txt` — `zz_ef_cb_metal_standard` (ЦБ на металлическом или обменном стандарте); `zz_ef_exchange_std`, `zz_ef_metal_gold/_silver/_bimet` — металл стандарта, у обменного — `var:zz_ef_xmetal` (Д.R8а.6).
 - `common/script_values/ld_metal_accounts_values.txt` — единицы металла, нормы резерва, покупки через модификаторы зданий, продажа ЦБ, выкуп, мировые суммы.
 - `common/scripted_effects/ld_money_log_rest.txt` — сгенерированный `debug_log` «прочее» карточек (`EFO`); не править (генератор `tools/regen_ef_money_supply_loc.py`).
 - `common/scripted_guis/ld_money_hook.txt` + `gui/ld_money_hook.gui` — мост GUI→скрипт: строки бюджета, доступные только GUI, передаются в `zz_ef_money_hook_receive`.

@@ -55,9 +55,9 @@ zz_ef_metal_start_step = {
 			NOT = { has_modifier = central_bank_historic_place }
 			owner = {
 				NOR = {
-					has_law = law_type:law_gold_standard
-					has_law = law_type:law_silver_standard
-					has_law = law_type:law_bimetallism_standard
+					zz_ef_metal_gold = yes
+					zz_ef_metal_silver = yes
+					zz_ef_metal_bimet = yes
 				}
 			}
 		}
@@ -157,7 +157,7 @@ zz_ef_cb_metal_start_step = {
 			random_scope_state = {
 				limit = { has_modifier = central_bank_historic_place }
 				if = {
-					limit = { owner = { has_law = law_type:law_silver_standard } }
+					limit = { owner = { zz_ef_metal_silver = yes } }
 					if = { limit = { NOT = { has_variable = silver_state_1 } } set_variable = { name = silver_state_1 value = 0 } }
 					change_variable = { name = silver_state_1 add = owner.var:zz_ef_metal_rescale }
 				}
@@ -371,9 +371,9 @@ zz_ef_metal_week_step = {
 			has_variable = money_value_target_1
 			var:money_value_target_1 > 0
 			OR = {
-				has_law = law_type:law_gold_standard
-				has_law = law_type:law_silver_standard
-				has_law = law_type:law_bimetallism_standard
+				zz_ef_metal_gold = yes
+				zz_ef_metal_silver = yes
+				zz_ef_metal_bimet = yes
 			}
 			has_variable = zz_ef_pop_savings
 			any_scope_state = { has_modifier = central_bank_historic_place }
@@ -386,7 +386,7 @@ zz_ef_metal_week_step = {
 		random_scope_state = {
 			limit = { has_modifier = central_bank_historic_place }
 			if = {
-				limit = { owner = { has_law = law_type:law_silver_standard } }
+				limit = { owner = { zz_ef_metal_silver = yes } }
 				change_variable = { name = silver_state_1 add = owner.var:zz_ef_f_mt_buyback }
 			}
 			else = {
@@ -394,7 +394,7 @@ zz_ef_metal_week_step = {
 			}
 		}
 		if = {
-			limit = { has_law = law_type:law_silver_standard }
+			limit = { zz_ef_metal_silver = yes }
 			change_variable = { name = zz_ef_popm_silver subtract = var:zz_ef_f_mt_buyback }
 		}
 		else = {
@@ -447,15 +447,15 @@ zz_ef_metal_week_step = {
 			has_variable = money_value_target_1
 			var:money_value_target_1 > 0
 			OR = {
-				has_law = law_type:law_gold_standard
-				has_law = law_type:law_silver_standard
-				has_law = law_type:law_bimetallism_standard
+				zz_ef_metal_gold = yes
+				zz_ef_metal_silver = yes
+				zz_ef_metal_bimet = yes
 			}
 		}
 		set_variable = { name = zz_ef_mt_cb_mult value = zz_ef_cb_buy_mult }
 		set_variable = { name = zz_ef_mt_cb_sell value = zz_ef_cb_sell_units }
 		if = {
-			limit = { has_law = law_type:law_silver_standard }
+			limit = { zz_ef_metal_silver = yes }
 			change_variable = { name = zz_ef_mt_cb_sell divide = zz_ef_silver_units_per_good }
 		}
 		else = {
@@ -477,7 +477,7 @@ zz_ef_metal_week_step = {
 		if = {
 			limit = { root.var:zz_ef_mt_cb_sell > 0 }
 			if = {
-				limit = { root = { has_law = law_type:law_silver_standard } }
+				limit = { root = { zz_ef_metal_silver = yes } }
 				add_modifier = {
 					name = zz_ef_cb_silver_sell
 					multiplier = root.var:zz_ef_mt_cb_sell
@@ -521,7 +521,7 @@ zz_ef_metal_reconcile = {
 		if = {
 			limit = { has_variable = zz_ef_f_hume }
 			if = {
-				limit = { has_law = law_type:law_silver_standard }
+				limit = { zz_ef_metal_silver = yes }
 				change_variable = { name = zz_ef_f_mt_oth_s subtract = var:zz_ef_f_hume }
 			}
 			else = {
