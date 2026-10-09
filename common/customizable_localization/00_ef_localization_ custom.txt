@@ -24,6 +24,11 @@ currency_name = {
 
 	# the country's currency from var:zz_ef_cur (scripted_effects/ld_currency_var.txt); was 95 checks of
 	# E&F's currency by culture per call
+	#no monetary system
+	text = {
+		trigger = { has_law = law_type:law_no_monetary_system }
+		localization_key = zz_ef_cur_none
+	}
 	#hryvnia
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:hryvnia }
