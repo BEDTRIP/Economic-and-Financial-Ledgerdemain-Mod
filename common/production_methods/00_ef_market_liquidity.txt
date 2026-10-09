@@ -22,11 +22,12 @@
 ########################################################################################################################################
 ########################################################################################################################################
 
+# Д.R8а.2: the banks' settlement services follow the monetary system -- without one there is no money of its own
 pm_no_market_liquidity = {
 	texture = "gfx/interface/icons/production_method_icons/revaluation.dds"
 
 	unlocking_laws = {
-        law_no_market_liquidity
+        law_no_monetary_system
     }
 	building_modifiers = {
 		workforce_scaled = {
@@ -37,7 +38,7 @@ pm_market_liquidity_currency = {
 	texture = "gfx/interface/icons/production_method_icons/market_trade.dds"
 
 	disallowing_laws = {
-		law_no_market_liquidity
+		law_no_monetary_system
 	}
 
 	building_modifiers = {

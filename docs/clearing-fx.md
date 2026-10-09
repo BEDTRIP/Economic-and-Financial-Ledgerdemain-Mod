@@ -16,7 +16,7 @@ E&F `trade_balance` отключён. Ключи `ld_*` — с префиксо�
 - `common/static_modifiers/ld_currency_trade.txt` — `zz_ef_currency_trade` (импорт / экспорт от реального перекоса курса к эталону, ±50 % потолок, R3.4), плюс E&F `strong_currency`/`weak_currency` без торговых полей.
 - `common/static_modifiers/ld_fx_holders_demand.txt` — экспортное преимущество от валюты за рубежом (см. `banks.md`).
 - `common/modifier_type_definitions/ld_liquidity_currency_sell_orders.txt` — объявляет `state_sell_orders_liquidity_currency_add` (модификатора с ним больше нет).
-- `common/production_methods/00_ef_market_liquidity.txt` — `pm_no_market_liquidity`, `pm_market_liquidity_currency` (вход `goods_input_liquidity_currency_add = 28` — бизнесы покупают услугу расчётов у банков), далее методы военных заказов (`pm_government_aid_*`).
+- `common/production_methods/00_ef_market_liquidity.txt` — `pm_no_market_liquidity` (по закону «без денежной системы», Д.R8а.2), `pm_market_liquidity_currency` (вход `goods_input_liquidity_currency_add = 28` — бизнесы покупают услугу расчётов у банков), далее методы военных заказов (`pm_government_aid_*`).
 - E&F, форекс:
   - ИИ-форекс E&F (`ai_buy_sell_currency` → `buy_/sell_<cur>_currency`) — в `_archive/ef_ai_forex/` (R2, Д.R2.2; форекс ЦБ сделками — R8); в `central_bank_ef_on_yearly_pulse_country` остался `monetary_systeme_transition`; арбитражи — см. поток.
   - `common/scripted_effects/01_economic_scripted_effects.txt`: `sell_<cur>_currency_crisis` (кризисная продажа, из `all_currency_resold`), `trade_balance` (:11204).
