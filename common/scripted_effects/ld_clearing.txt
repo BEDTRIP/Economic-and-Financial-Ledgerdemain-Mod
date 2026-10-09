@@ -251,7 +251,7 @@ zz_ef_clr_pay = {
 		set_global_variable = { name = zz_ef_clr_gold value = 0 }
 	}
 	change_global_variable = { name = zz_ef_clr_gold add = var:zz_ef_clr_mgold }
-	# the rest in the own currency, units of its money at E&F's value in gold
+	# the rest in the own currency, units of its engine money at its gold per unit (zz_ef_clr_gpm_own)
 	set_variable = { name = zz_ef_clr_units value = 0 }
 	if = {
 		limit = {
@@ -260,7 +260,7 @@ zz_ef_clr_pay = {
 		}
 		set_variable = { name = zz_ef_clr_units value = var:zz_ef_clr_due }
 		change_variable = { name = zz_ef_clr_units subtract = var:zz_ef_clr_mgold }
-		change_variable = { name = zz_ef_clr_units divide = zz_ef_rc_currency_value }
+		change_variable = { name = zz_ef_clr_units divide = zz_ef_clr_gpm_own }
 		zz_ef_clr_put_own = yes
 	}
 	set_variable = { name = zz_ef_f_clr_cur_out value = var:zz_ef_clr_units }

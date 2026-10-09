@@ -11,7 +11,7 @@ E&F `trade_balance` отключён. Ключи `ld_*` — с префиксо�
 - `common/scripted_guis/ld_cbfx.txt` — `zz_ef_cbfx_update_sorted` (таблица валют ЦБ, список `zz_ef_cbfx_list`), `zz_ef_holders_update` (какие ЦБ держат нашу валюту: `zz_ef_holds_pc`, `zz_ef_holders_list`).
 - `common/script_values/ld_fx_reserves_values.txt` — `zz_ef_fx_reserves_metal` (чужая валюта в резервах ЦБ в золоте: `stockpiling_<cur>_state_1` × стоимость валюты).
 - `common/scripted_effects/ld_stockpile_state_var_seed.txt` — смежный учётный файл.
-- `common/script_values/ld_reserve_trade_values.txt` (генерат) — `zz_ef_rc_currency_value` (стоимость валюты, живое — читает клиринг), `zz_ef_fx_liab` (чужие запасы нашей валюты у держателей, живое).
+- `common/script_values/ld_reserve_trade_values.txt` (генерат) — `zz_ef_fx_liab` (чужие запасы нашей валюты у держателей, живое).
 - `common/scripted_effects/ld_reference_strength.txt` — `zz_ef_currency_trade_step` (месяц: накладывает `zz_ef_currency_trade` по силе валюты), `zz_ef_reference_strength_step`.
 - `common/static_modifiers/ld_currency_trade.txt` — `zz_ef_currency_trade` (импорт / экспорт от реального перекоса курса к эталону, ±50 % потолок, R3.4), плюс E&F `strong_currency`/`weak_currency` без торговых полей.
 - `common/static_modifiers/ld_fx_holders_demand.txt` — экспортное преимущество от валюты за рубежом (см. `banks.md`).
@@ -47,7 +47,7 @@ E&F `trade_balance` отключён. Ключи `ld_*` — с префиксо�
 | `trade_balance_in_gold_fixe` | счётчик торгового баланса E&F (держится 0) | `trade_balance`, кнопка `trade_balance_actualized` | `central_bank_reserves_*` E&F |
 
 ## Вызовы и связи
-- `zz_ef_clr_gold_per_money` и `zz_ef_rc_currency_value` читают клиринг, таблицы облигаций (`ld_bond_tables.txt`), модель денег.
+- `zz_ef_clr_gold_per_money` (золото на единицу денег: своя — `zz_ef_clr_gpm_own` = `zz_ef_value_to_parity`, Д.R8а.4; без денежной системы — хозяина рынка) читают клиринг, таблицы облигаций (`ld_bond_tables.txt`), модель денег.
 - `zz_ef_fx_liab`/`zz_ef_fx_liab_all` — вклады (`banks.md`).
 - Интерфейс: `gui/ld_economy_panel.gui` (кнопки `zz_ef_cbfx_update_sorted`, `zz_ef_holders_update` :2971-3012, диаграммы :9754, :9796; кнопка `trade_balance_actualized` :2768, :2976); `gui/00_ef_deported_gui_1.gui` — окно покупки/продажи валют и облигаций E&F.
 - Модификатор `zz_ef_currency_trade` — на стране (импорт/экспорт).

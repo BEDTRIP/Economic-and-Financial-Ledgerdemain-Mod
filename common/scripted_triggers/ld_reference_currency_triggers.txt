@@ -31,8 +31,7 @@ zz_ef_reference_candidate = {
 	zz_ef_cb_cover >= zz_ef_value_floor_cover
 }
 
-# Country scope: the country's currency has a value in gold (E&F's money_value_<currency>, zz_ef_rc_currency_value) --
-# above the noise of a currency without a market (0.0002).
+# Country scope: the country has money of its own -- a monetary standard (Д.R8а.2: no monetary system -- no currency).
 zz_ef_has_currency_value = {
-	zz_ef_rc_currency_value > 0.0002
+	NOT = { has_law = law_type:law_no_monetary_system }
 }
