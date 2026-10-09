@@ -1,0 +1,39 @@
+﻿namespace = ld_probe_map
+
+# R8б step 0 probe: a variable map with country keys and number values -- write, read by key, change, remove, iterate.
+# Fired from the console only (event ld_probe_map.1); writes EFZ lines to debug.log.
+ld_probe_map.1 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		every_country = {
+			limit = { OR = { c:GBR ?= this c:RUS ?= this c:SWI ?= this c:USA ?= this } }
+			save_temporary_scope_as = zz_ef_pk
+			root = {
+				add_to_variable_map = { name = zz_ef_pm_n key = scope:zz_ef_pk value = 5 }
+				add_to_variable_map = { name = zz_ef_pm_s key = scope:zz_ef_pk value = scope:zz_ef_pk }
+			}
+		}
+		if = { limit = { variable_map_size = { name = zz_ef_pm_n value = 4 } } debug_log = "EFZ|size_n|4" }
+		if = { limit = { variable_map_size = { name = zz_ef_pm_s value = 4 } } debug_log = "EFZ|size_s|4" }
+		if = { limit = { is_key_in_variable_map = { name = zz_ef_pm_n target = c:GBR } } debug_log = "EFZ|key_gbr|yes" }
+		set_variable = { name = zz_ef_pm_r1 value = variable_map(zz_ef_pm_n|c:GBR) }
+		debug_log = "EFZ|read_gbr|[ROOT.GetCountry.MakeScope.Var('zz_ef_pm_r1').GetValue]"
+		add_to_variable_map = { name = zz_ef_pm_n key = c:GBR value = 7 }
+		set_variable = { name = zz_ef_pm_r2 value = variable_map(zz_ef_pm_n|c:GBR) }
+		debug_log = "EFZ|read_gbr_after_7|[ROOT.GetCountry.MakeScope.Var('zz_ef_pm_r2').GetValue]"
+		remove_from_variable_map = { name = zz_ef_pm_n key = c:RUS }
+		if = { limit = { variable_map_size = { name = zz_ef_pm_n value = 3 } } debug_log = "EFZ|size_after_remove|3" }
+		every_key_in_variable_map = {
+			variable = zz_ef_pm_n
+			debug_log = "EFZ|iter_n|[THIS.GetCountry.GetNameNoFormatting]"
+		}
+		every_key_in_variable_map = {
+			variable = zz_ef_pm_s
+			debug_log = "EFZ|iter_s|[THIS.GetCountry.GetNameNoFormatting]"
+		}
+		set_variable = { name = zz_ef_pm_r3 value = variable_map(zz_ef_pm_s|c:USA) }
+		debug_log = "EFZ|read_s_usa|[ROOT.GetCountry.MakeScope.Var('zz_ef_pm_r3').GetCountry.GetNameNoFormatting]"
+	}
+}
