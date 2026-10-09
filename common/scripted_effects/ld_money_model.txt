@@ -1102,7 +1102,7 @@ zz_ef_crisis_redeem = {
 		limit = { var:zz_ef_crisis_due > 0 }
 		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFC|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|due [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_crisis_due')|0]|paid [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_crisis_paid')|0]" }
 		scope:overrated_currency_country_owner = {
-			if = { limit = { zz_ef_logs_on = yes } debug_log = "EFC|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|issuer" }
+			if = { limit = { zz_ef_logs_on = yes } debug_log = "EFC|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|issuer|crisis [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_crisis_flag')|0]|std [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_std_code')|0]|mv [THIS.GetCountry.MakeScope.ScriptValue('money_value')|4]|mv0 [THIS.GetCountry.MakeScope.ScriptValue('money_value_0')|4]|vtp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_value_to_parity')|3]|cover [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_cover')|3]" }
 		}
 	}
 }
