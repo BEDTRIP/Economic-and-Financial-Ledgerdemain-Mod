@@ -6,7 +6,7 @@ E&F `trade_balance` отключён. Ключи `ld_*` — с префиксо�
 
 ## Файлы
 - `common/scripted_effects/ld_clearing.txt` — генерат (`tools/regen_ef_clearing.py`): `zz_ef_clr_window_roll` (окно 7 дней, глобалки `zz_ef_clr_window`, `zz_ef_clr_in_acc`, `zz_ef_clr_out_acc`), `zz_ef_clr_step` (страна, недельный), `zz_ef_clr_head_find` (кто платит за нас: хозяин валютной зоны `zz_ef_cur_zone` / владелец рынка), `zz_ef_clr_pay`, `zz_ef_clr_receive`, `zz_ef_clr_put_own` (своя валюта в палату), `zz_ef_clr_take_all` (по 95 валютам, 1617 строк), `zz_ef_cbfx_week_step` (недельная дельта запасов каждой валюты `zz_ef_cbfx_d_<cur>`).
-- `common/script_values/ld_clearing_values.txt` — доля металла плательщика `zz_ef_clr_metal_share` (0.75…1.25 → 100%…30%), золото за единицу денег `zz_ef_clr_gold_per_money` (+`_gpm_head`, `_gpm_own`), `zz_ef_clr_pot_value` (всё в палате в золоте, по валютам), `zz_ef_clr_pay_ratio_v`, `zz_ef_clr_ratio_v`, потоки `zz_ef_v_f_clr_*`, `zz_ef_bank_holds_<Bank>` (валюта страны у частных банков E&F, из `stockpiling_<cur>_company_<Bank>_fixe`), `zz_ef_cbfx_<cur>` (запас валюты ЦБ).
+- `common/script_values/ld_clearing_values.txt` — доля металла плательщика `zz_ef_clr_metal_share` (0.75…1.25 → 100%…30%), золото за единицу денег `zz_ef_clr_gold_per_money` (+`_gpm_head`, `_gpm_own`), `zz_ef_clr_pot_value` (всё в палате в золоте; валюты — по курсу эмитента `zz_ef_fx_gold_<cur>`, как своя единица `zz_ef_clr_gpm_own`), `zz_ef_clr_pay_ratio_v`, `zz_ef_clr_ratio_v`, потоки `zz_ef_v_f_clr_*`, `zz_ef_bank_holds_<Bank>` (валюта страны у частных банков E&F, из `stockpiling_<cur>_company_<Bank>_fixe`), `zz_ef_cbfx_<cur>` (запас валюты ЦБ).
 - `common/scripted_guis/ld_cbfx.txt` — `zz_ef_cbfx_update_sorted` (таблица валют ЦБ, список `zz_ef_cbfx_list`), `zz_ef_holders_update` (какие ЦБ держат нашу валюту: `zz_ef_holds_pc`, `zz_ef_holders_list`).
 - `common/script_values/ld_fx_reserves_values.txt` — `zz_ef_fx_reserves_metal` (чужая валюта в резервах ЦБ в золоте: `stockpiling_<cur>_state_1` × стоимость валюты).
 - `common/scripted_effects/ld_stockpile_state_var_seed.txt` — смежный учётный файл.
@@ -40,7 +40,7 @@ E&F `trade_balance` отключён. Ключи `ld_*` — с префиксо�
 | `zz_ef_f_hume` | металл ЦБ за неделю (native, +вход/−выход) | `zz_ef_clr_pay/receive` | `zz_ef_metal_reconcile` |
 | `zz_ef_f_clr_cur_out`, `_fx_in`, `_own_back` | потоки валюты | `zz_ef_clr_*` | карточка платёжного баланса, лог |
 | глобалки `zz_ef_clr_window`, `zz_ef_clr_in_acc`, `zz_ef_clr_out_acc` | окно палаты, требования и платежи (золото) | `zz_ef_clr_window_roll`, `_pay`, `_receive` | `zz_ef_clr_pay_ratio_v` |
-| `gold_state_1`, `silver_state_1` (штат столицы ЦБ) | металл ЦБ | клиринг, кнопки форекса E&F, `ld_metal_accounts.txt` | вся модель металла |
+| `gold_state_1`, `silver_state_1` (штат столицы ЦБ) | металл ЦБ | клиринг, `ld_metal_accounts.txt` | вся модель металла |
 | `stockpiling_<cur>_state_1` (штат ЦБ) | запас валюты `<cur>` в ЦБ, единицы | клиринг, кнопки игрока, `sell_<cur>_currency_crisis` | `zz_ef_cbfx_<cur>`, `zz_ef_fx_reserves_metal` |
 | `zz_ef_cbfx_d_<cur>`, `zz_ef_cbfx_p_<cur>` | дельта и прошлое значение запаса | `zz_ef_cbfx_week_step` | таблица ЦБ |
 | `zz_ef_holds_pc`, список `zz_ef_holders_list` | сколько нашей валюты у держателя | `zz_ef_holders_update` | GUI |

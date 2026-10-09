@@ -76,7 +76,7 @@ zz_ef_clr_step = {
 	set_variable = { name = zz_ef_f_clr_sub value = 0 }
 	set_variable = { name = zz_ef_f_clr_sent value = 0 }
 	# the head's price of gold per unit, one pass of the 95-branch chain for the whole step (and zz_ef_clr_pay / _receive):
-	# nothing in the step changes its inputs (the laws, the parity, money_value_*, the zone, the world's average)
+	# nothing in the step changes its inputs (the laws, the parity, the currencies' values, the zone, the world's average)
 	set_variable = { name = zz_ef_t_gpm value = zz_ef_clr_gold_per_money }
 	# the members' flows sent since our last step
 	if = {
@@ -459,7 +459,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_dinar_state_1 } } set_variable = { name = stockpiling_dinar_state_1 value = 0 } }
 				change_variable = { name = stockpiling_dinar_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_dinar } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_dinar } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -476,7 +476,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_dinar_algerian_dinar_state_1 } } set_variable = { name = stockpiling_dinar_algerian_dinar_state_1 value = 0 } }
 				change_variable = { name = stockpiling_dinar_algerian_dinar_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_dinar_algerian_dinar } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_dinar_algerian_dinar } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -493,7 +493,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_dinar_iraqi_dinar_state_1 } } set_variable = { name = stockpiling_dinar_iraqi_dinar_state_1 value = 0 } }
 				change_variable = { name = stockpiling_dinar_iraqi_dinar_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_dinar_iraqi_dinar } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_dinar_iraqi_dinar } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -510,7 +510,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_dinar_libyan_dinar_state_1 } } set_variable = { name = stockpiling_dinar_libyan_dinar_state_1 value = 0 } }
 				change_variable = { name = stockpiling_dinar_libyan_dinar_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_dinar_libyan_dinar } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_dinar_libyan_dinar } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -527,7 +527,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_dinar_moroccan_dirham_state_1 } } set_variable = { name = stockpiling_dinar_moroccan_dirham_state_1 value = 0 } }
 				change_variable = { name = stockpiling_dinar_moroccan_dirham_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_dinar_moroccan_dirham } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_dinar_moroccan_dirham } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -544,7 +544,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_dinar_omanian_rial_state_1 } } set_variable = { name = stockpiling_dinar_omanian_rial_state_1 value = 0 } }
 				change_variable = { name = stockpiling_dinar_omanian_rial_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_dinar_omanian_rial } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_dinar_omanian_rial } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -561,7 +561,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_dinar_qiran_state_1 } } set_variable = { name = stockpiling_dinar_qiran_state_1 value = 0 } }
 				change_variable = { name = stockpiling_dinar_qiran_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_dinar_qiran } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_dinar_qiran } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -578,7 +578,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_dinar_saudi_riyal_state_1 } } set_variable = { name = stockpiling_dinar_saudi_riyal_state_1 value = 0 } }
 				change_variable = { name = stockpiling_dinar_saudi_riyal_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_dinar_saudi_riyal } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_dinar_saudi_riyal } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -595,7 +595,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_dinar_serbian_dinar_state_1 } } set_variable = { name = stockpiling_dinar_serbian_dinar_state_1 value = 0 } }
 				change_variable = { name = stockpiling_dinar_serbian_dinar_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_dinar_serbian_dinar } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_dinar_serbian_dinar } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -612,7 +612,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_dinar_tunisian_dinar_state_1 } } set_variable = { name = stockpiling_dinar_tunisian_dinar_state_1 value = 0 } }
 				change_variable = { name = stockpiling_dinar_tunisian_dinar_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_dinar_tunisian_dinar } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_dinar_tunisian_dinar } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -629,7 +629,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_dinar_yugoslav_dinar_state_1 } } set_variable = { name = stockpiling_dinar_yugoslav_dinar_state_1 value = 0 } }
 				change_variable = { name = stockpiling_dinar_yugoslav_dinar_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_dinar_yugoslav_dinar } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_dinar_yugoslav_dinar } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -646,7 +646,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_dollar_australian_dollar_state_1 } } set_variable = { name = stockpiling_dollar_australian_dollar_state_1 value = 0 } }
 				change_variable = { name = stockpiling_dollar_australian_dollar_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_dollar_australian_dollar } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_dollar_australian_dollar } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -663,7 +663,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_dollar_canadian_dollar_state_1 } } set_variable = { name = stockpiling_dollar_canadian_dollar_state_1 value = 0 } }
 				change_variable = { name = stockpiling_dollar_canadian_dollar_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_dollar_canadian_dollar } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_dollar_canadian_dollar } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -680,7 +680,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_dollar_caribbean_dollar_state_1 } } set_variable = { name = stockpiling_dollar_caribbean_dollar_state_1 value = 0 } }
 				change_variable = { name = stockpiling_dollar_caribbean_dollar_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_dollar_caribbean_dollar } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_dollar_caribbean_dollar } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -697,7 +697,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_dollar_confederate_states_dollar_state_1 } } set_variable = { name = stockpiling_dollar_confederate_states_dollar_state_1 value = 0 } }
 				change_variable = { name = stockpiling_dollar_confederate_states_dollar_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_dollar_confederate_states_dollar } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_dollar_confederate_states_dollar } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -714,7 +714,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_dollar_liberian_dollar_state_1 } } set_variable = { name = stockpiling_dollar_liberian_dollar_state_1 value = 0 } }
 				change_variable = { name = stockpiling_dollar_liberian_dollar_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_dollar_liberian_dollar } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_dollar_liberian_dollar } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -731,7 +731,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_dollar_new_zealand_dollar_state_1 } } set_variable = { name = stockpiling_dollar_new_zealand_dollar_state_1 value = 0 } }
 				change_variable = { name = stockpiling_dollar_new_zealand_dollar_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_dollar_new_zealand_dollar } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_dollar_new_zealand_dollar } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -748,7 +748,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_dollar_sierra_leonean_dollar_state_1 } } set_variable = { name = stockpiling_dollar_sierra_leonean_dollar_state_1 value = 0 } }
 				change_variable = { name = stockpiling_dollar_sierra_leonean_dollar_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_dollar_sierra_leonean_dollar } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_dollar_sierra_leonean_dollar } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -765,7 +765,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_dollar_united_states_dollar_state_1 } } set_variable = { name = stockpiling_dollar_united_states_dollar_state_1 value = 0 } }
 				change_variable = { name = stockpiling_dollar_united_states_dollar_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_dollar_united_states_dollar } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_dollar_united_states_dollar } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -782,7 +782,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_eco_ariary_state_1 } } set_variable = { name = stockpiling_eco_ariary_state_1 value = 0 } }
 				change_variable = { name = stockpiling_eco_ariary_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_eco_ariary } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_eco_ariary } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -799,7 +799,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_eco_central_african_eco_state_1 } } set_variable = { name = stockpiling_eco_central_african_eco_state_1 value = 0 } }
 				change_variable = { name = stockpiling_eco_central_african_eco_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_eco_central_african_eco } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_eco_central_african_eco } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -816,7 +816,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_eco_east_african_eco_state_1 } } set_variable = { name = stockpiling_eco_east_african_eco_state_1 value = 0 } }
 				change_variable = { name = stockpiling_eco_east_african_eco_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_eco_east_african_eco } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_eco_east_african_eco } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -833,7 +833,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_eco_ethiopian_birr_state_1 } } set_variable = { name = stockpiling_eco_ethiopian_birr_state_1 value = 0 } }
 				change_variable = { name = stockpiling_eco_ethiopian_birr_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_eco_ethiopian_birr } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_eco_ethiopian_birr } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -850,7 +850,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_eco_ghanaian_pound_state_1 } } set_variable = { name = stockpiling_eco_ghanaian_pound_state_1 value = 0 } }
 				change_variable = { name = stockpiling_eco_ghanaian_pound_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_eco_ghanaian_pound } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_eco_ghanaian_pound } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -867,7 +867,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_eco_nigerian_naira_state_1 } } set_variable = { name = stockpiling_eco_nigerian_naira_state_1 value = 0 } }
 				change_variable = { name = stockpiling_eco_nigerian_naira_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_eco_nigerian_naira } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_eco_nigerian_naira } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -884,7 +884,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_eco_south_african_rand_state_1 } } set_variable = { name = stockpiling_eco_south_african_rand_state_1 value = 0 } }
 				change_variable = { name = stockpiling_eco_south_african_rand_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_eco_south_african_rand } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_eco_south_african_rand } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -901,7 +901,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_eco_tuareg_ouguiya_state_1 } } set_variable = { name = stockpiling_eco_tuareg_ouguiya_state_1 value = 0 } }
 				change_variable = { name = stockpiling_eco_tuareg_ouguiya_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_eco_tuareg_ouguiya } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_eco_tuareg_ouguiya } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -918,7 +918,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_eco_west_african_eco_state_1 } } set_variable = { name = stockpiling_eco_west_african_eco_state_1 value = 0 } }
 				change_variable = { name = stockpiling_eco_west_african_eco_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_eco_west_african_eco } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_eco_west_african_eco } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -935,7 +935,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_franc_belgian_franc_state_1 } } set_variable = { name = stockpiling_franc_belgian_franc_state_1 value = 0 } }
 				change_variable = { name = stockpiling_franc_belgian_franc_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_franc_belgian_franc } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_franc_belgian_franc } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -952,7 +952,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_franc_french_franc_state_1 } } set_variable = { name = stockpiling_franc_french_franc_state_1 value = 0 } }
 				change_variable = { name = stockpiling_franc_french_franc_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_franc_french_franc } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_franc_french_franc } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -969,7 +969,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_franc_luxembourgish_franc_state_1 } } set_variable = { name = stockpiling_franc_luxembourgish_franc_state_1 value = 0 } }
 				change_variable = { name = stockpiling_franc_luxembourgish_franc_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_franc_luxembourgish_franc } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_franc_luxembourgish_franc } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -986,7 +986,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_franc_swiss_franc_state_1 } } set_variable = { name = stockpiling_franc_swiss_franc_state_1 value = 0 } }
 				change_variable = { name = stockpiling_franc_swiss_franc_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_franc_swiss_franc } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_franc_swiss_franc } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1003,7 +1003,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_gulden_state_1 } } set_variable = { name = stockpiling_gulden_state_1 value = 0 } }
 				change_variable = { name = stockpiling_gulden_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_gulden } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_gulden } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1020,7 +1020,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_gulden_bavarian_gulden_state_1 } } set_variable = { name = stockpiling_gulden_bavarian_gulden_state_1 value = 0 } }
 				change_variable = { name = stockpiling_gulden_bavarian_gulden_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_gulden_bavarian_gulden } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_gulden_bavarian_gulden } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1037,7 +1037,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_gulden_florin_state_1 } } set_variable = { name = stockpiling_gulden_florin_state_1 value = 0 } }
 				change_variable = { name = stockpiling_gulden_florin_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_gulden_florin } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_gulden_florin } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1054,7 +1054,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_gulden_hungarian_forint_state_1 } } set_variable = { name = stockpiling_gulden_hungarian_forint_state_1 value = 0 } }
 				change_variable = { name = stockpiling_gulden_hungarian_forint_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_gulden_hungarian_forint } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_gulden_hungarian_forint } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1071,7 +1071,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_gulden_indies_guilder_state_1 } } set_variable = { name = stockpiling_gulden_indies_guilder_state_1 value = 0 } }
 				change_variable = { name = stockpiling_gulden_indies_guilder_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_gulden_indies_guilder } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_gulden_indies_guilder } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1088,7 +1088,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_gulden_south_german_gulden_state_1 } } set_variable = { name = stockpiling_gulden_south_german_gulden_state_1 value = 0 } }
 				change_variable = { name = stockpiling_gulden_south_german_gulden_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_gulden_south_german_gulden } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_gulden_south_german_gulden } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1105,7 +1105,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_krone_czech_koruna_state_1 } } set_variable = { name = stockpiling_krone_czech_koruna_state_1 value = 0 } }
 				change_variable = { name = stockpiling_krone_czech_koruna_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_krone_czech_koruna } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_krone_czech_koruna } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1122,7 +1122,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_krone_danish_krone_state_1 } } set_variable = { name = stockpiling_krone_danish_krone_state_1 value = 0 } }
 				change_variable = { name = stockpiling_krone_danish_krone_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_krone_danish_krone } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_krone_danish_krone } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1139,7 +1139,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_krone_estonian_kroon_state_1 } } set_variable = { name = stockpiling_krone_estonian_kroon_state_1 value = 0 } }
 				change_variable = { name = stockpiling_krone_estonian_kroon_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_krone_estonian_kroon } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_krone_estonian_kroon } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1156,7 +1156,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_krone_icelandic_krona_state_1 } } set_variable = { name = stockpiling_krone_icelandic_krona_state_1 value = 0 } }
 				change_variable = { name = stockpiling_krone_icelandic_krona_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_krone_icelandic_krona } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_krone_icelandic_krona } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1173,7 +1173,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_krone_norwegian_krone_state_1 } } set_variable = { name = stockpiling_krone_norwegian_krone_state_1 value = 0 } }
 				change_variable = { name = stockpiling_krone_norwegian_krone_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_krone_norwegian_krone } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_krone_norwegian_krone } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1190,7 +1190,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_krone_slovak_koruna_state_1 } } set_variable = { name = stockpiling_krone_slovak_koruna_state_1 value = 0 } }
 				change_variable = { name = stockpiling_krone_slovak_koruna_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_krone_slovak_koruna } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_krone_slovak_koruna } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1207,7 +1207,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_krone_swedish_krona_state_1 } } set_variable = { name = stockpiling_krone_swedish_krona_state_1 value = 0 } }
 				change_variable = { name = stockpiling_krone_swedish_krona_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_krone_swedish_krona } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_krone_swedish_krona } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1224,7 +1224,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_leon_leu_state_1 } } set_variable = { name = stockpiling_leon_leu_state_1 value = 0 } }
 				change_variable = { name = stockpiling_leon_leu_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_leon_leu } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_leon_leu } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1241,7 +1241,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_leon_lev_state_1 } } set_variable = { name = stockpiling_leon_lev_state_1 value = 0 } }
 				change_variable = { name = stockpiling_leon_lev_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_leon_lev } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_leon_lev } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1258,7 +1258,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_lira_state_1 } } set_variable = { name = stockpiling_lira_state_1 value = 0 } }
 				change_variable = { name = stockpiling_lira_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_lira } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_lira } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1275,7 +1275,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_lira_ducato_state_1 } } set_variable = { name = stockpiling_lira_ducato_state_1 value = 0 } }
 				change_variable = { name = stockpiling_lira_ducato_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_lira_ducato } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_lira_ducato } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1292,7 +1292,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_lira_ottoman_lira_state_1 } } set_variable = { name = stockpiling_lira_ottoman_lira_state_1 value = 0 } }
 				change_variable = { name = stockpiling_lira_ottoman_lira_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_lira_ottoman_lira } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_lira_ottoman_lira } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1309,7 +1309,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_lira_scudo_pontificio_state_1 } } set_variable = { name = stockpiling_lira_scudo_pontificio_state_1 value = 0 } }
 				change_variable = { name = stockpiling_lira_scudo_pontificio_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_lira_scudo_pontificio } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_lira_scudo_pontificio } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1326,7 +1326,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_lira_scudo_sardo_state_1 } } set_variable = { name = stockpiling_lira_scudo_sardo_state_1 value = 0 } }
 				change_variable = { name = stockpiling_lira_scudo_sardo_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_lira_scudo_sardo } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_lira_scudo_sardo } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1343,7 +1343,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_lira_toscane_lira_state_1 } } set_variable = { name = stockpiling_lira_toscane_lira_state_1 value = 0 } }
 				change_variable = { name = stockpiling_lira_toscane_lira_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_lira_toscane_lira } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_lira_toscane_lira } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1360,7 +1360,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_mark_state_1 } } set_variable = { name = stockpiling_mark_state_1 value = 0 } }
 				change_variable = { name = stockpiling_mark_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_mark } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_mark } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1377,7 +1377,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_mark_finnish_markka_state_1 } } set_variable = { name = stockpiling_mark_finnish_markka_state_1 value = 0 } }
 				change_variable = { name = stockpiling_mark_finnish_markka_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_mark_finnish_markka } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_mark_finnish_markka } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1394,7 +1394,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_peso_state_1 } } set_variable = { name = stockpiling_peso_state_1 value = 0 } }
 				change_variable = { name = stockpiling_peso_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_peso } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_peso } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1411,7 +1411,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_peso_argentine_peso_state_1 } } set_variable = { name = stockpiling_peso_argentine_peso_state_1 value = 0 } }
 				change_variable = { name = stockpiling_peso_argentine_peso_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_peso_argentine_peso } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_peso_argentine_peso } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1428,7 +1428,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_peso_bolivien_peso_state_1 } } set_variable = { name = stockpiling_peso_bolivien_peso_state_1 value = 0 } }
 				change_variable = { name = stockpiling_peso_bolivien_peso_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_peso_bolivien_peso } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_peso_bolivien_peso } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1445,7 +1445,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_peso_chilean_peso_state_1 } } set_variable = { name = stockpiling_peso_chilean_peso_state_1 value = 0 } }
 				change_variable = { name = stockpiling_peso_chilean_peso_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_peso_chilean_peso } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_peso_chilean_peso } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1462,7 +1462,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_peso_colombian_peso_state_1 } } set_variable = { name = stockpiling_peso_colombian_peso_state_1 value = 0 } }
 				change_variable = { name = stockpiling_peso_colombian_peso_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_peso_colombian_peso } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_peso_colombian_peso } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1479,7 +1479,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_peso_costa_rican_colon_state_1 } } set_variable = { name = stockpiling_peso_costa_rican_colon_state_1 value = 0 } }
 				change_variable = { name = stockpiling_peso_costa_rican_colon_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_peso_costa_rican_colon } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_peso_costa_rican_colon } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1496,7 +1496,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_peso_cuban_peso_state_1 } } set_variable = { name = stockpiling_peso_cuban_peso_state_1 value = 0 } }
 				change_variable = { name = stockpiling_peso_cuban_peso_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_peso_cuban_peso } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_peso_cuban_peso } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1513,7 +1513,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_peso_ecuadorian_peso_state_1 } } set_variable = { name = stockpiling_peso_ecuadorian_peso_state_1 value = 0 } }
 				change_variable = { name = stockpiling_peso_ecuadorian_peso_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_peso_ecuadorian_peso } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_peso_ecuadorian_peso } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1530,7 +1530,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_peso_el_salvador_colon_state_1 } } set_variable = { name = stockpiling_peso_el_salvador_colon_state_1 value = 0 } }
 				change_variable = { name = stockpiling_peso_el_salvador_colon_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_peso_el_salvador_colon } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_peso_el_salvador_colon } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1547,7 +1547,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_peso_guatemalan_quetzal_state_1 } } set_variable = { name = stockpiling_peso_guatemalan_quetzal_state_1 value = 0 } }
 				change_variable = { name = stockpiling_peso_guatemalan_quetzal_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_peso_guatemalan_quetzal } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_peso_guatemalan_quetzal } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1564,7 +1564,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_peso_honduran_lempira_state_1 } } set_variable = { name = stockpiling_peso_honduran_lempira_state_1 value = 0 } }
 				change_variable = { name = stockpiling_peso_honduran_lempira_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_peso_honduran_lempira } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_peso_honduran_lempira } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1581,7 +1581,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_peso_mexican_peso_state_1 } } set_variable = { name = stockpiling_peso_mexican_peso_state_1 value = 0 } }
 				change_variable = { name = stockpiling_peso_mexican_peso_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_peso_mexican_peso } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_peso_mexican_peso } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1598,7 +1598,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_peso_nicaraguan_cordoba_state_1 } } set_variable = { name = stockpiling_peso_nicaraguan_cordoba_state_1 value = 0 } }
 				change_variable = { name = stockpiling_peso_nicaraguan_cordoba_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_peso_nicaraguan_cordoba } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_peso_nicaraguan_cordoba } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1615,7 +1615,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_peso_paraguayan_peso_state_1 } } set_variable = { name = stockpiling_peso_paraguayan_peso_state_1 value = 0 } }
 				change_variable = { name = stockpiling_peso_paraguayan_peso_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_peso_paraguayan_peso } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_peso_paraguayan_peso } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1632,7 +1632,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_peso_philippine_peso_state_1 } } set_variable = { name = stockpiling_peso_philippine_peso_state_1 value = 0 } }
 				change_variable = { name = stockpiling_peso_philippine_peso_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_peso_philippine_peso } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_peso_philippine_peso } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1649,7 +1649,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_peso_sol_de_oro_state_1 } } set_variable = { name = stockpiling_peso_sol_de_oro_state_1 value = 0 } }
 				change_variable = { name = stockpiling_peso_sol_de_oro_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_peso_sol_de_oro } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_peso_sol_de_oro } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1666,7 +1666,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_peso_uruguayan_peso_state_1 } } set_variable = { name = stockpiling_peso_uruguayan_peso_state_1 value = 0 } }
 				change_variable = { name = stockpiling_peso_uruguayan_peso_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_peso_uruguayan_peso } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_peso_uruguayan_peso } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1683,7 +1683,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_peso_venezuelan_peso_state_1 } } set_variable = { name = stockpiling_peso_venezuelan_peso_state_1 value = 0 } }
 				change_variable = { name = stockpiling_peso_venezuelan_peso_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_peso_venezuelan_peso } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_peso_venezuelan_peso } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1700,7 +1700,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_pound_egyptian_pound_state_1 } } set_variable = { name = stockpiling_pound_egyptian_pound_state_1 value = 0 } }
 				change_variable = { name = stockpiling_pound_egyptian_pound_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_pound_egyptian_pound } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_pound_egyptian_pound } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1717,7 +1717,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_pound_irish_pound_state_1 } } set_variable = { name = stockpiling_pound_irish_pound_state_1 value = 0 } }
 				change_variable = { name = stockpiling_pound_irish_pound_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_pound_irish_pound } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_pound_irish_pound } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1734,7 +1734,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_pound_sterling_state_1 } } set_variable = { name = stockpiling_pound_sterling_state_1 value = 0 } }
 				change_variable = { name = stockpiling_pound_sterling_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_pound_sterling } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_pound_sterling } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1751,7 +1751,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_real_state_1 } } set_variable = { name = stockpiling_real_state_1 value = 0 } }
 				change_variable = { name = stockpiling_real_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_real } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_real } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1768,7 +1768,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_real_brazilian_real_state_1 } } set_variable = { name = stockpiling_real_brazilian_real_state_1 value = 0 } }
 				change_variable = { name = stockpiling_real_brazilian_real_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_real_brazilian_real } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_real_brazilian_real } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1785,7 +1785,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_rupee_indian_rupee_state_1 } } set_variable = { name = stockpiling_rupee_indian_rupee_state_1 value = 0 } }
 				change_variable = { name = stockpiling_rupee_indian_rupee_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_rupee_indian_rupee } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_rupee_indian_rupee } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1802,7 +1802,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_rupee_indonesian_rupiah_state_1 } } set_variable = { name = stockpiling_rupee_indonesian_rupiah_state_1 value = 0 } }
 				change_variable = { name = stockpiling_rupee_indonesian_rupiah_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_rupee_indonesian_rupiah } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_rupee_indonesian_rupiah } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1819,7 +1819,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_spe_baht_state_1 } } set_variable = { name = stockpiling_spe_baht_state_1 value = 0 } }
 				change_variable = { name = stockpiling_spe_baht_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_spe_baht } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_spe_baht } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1836,7 +1836,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_spe_dong_state_1 } } set_variable = { name = stockpiling_spe_dong_state_1 value = 0 } }
 				change_variable = { name = stockpiling_spe_dong_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_spe_dong } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_spe_dong } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1853,7 +1853,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_spe_drachma_state_1 } } set_variable = { name = stockpiling_spe_drachma_state_1 value = 0 } }
 				change_variable = { name = stockpiling_spe_drachma_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_spe_drachma } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_spe_drachma } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1870,7 +1870,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_spe_korean_won_state_1 } } set_variable = { name = stockpiling_spe_korean_won_state_1 value = 0 } }
 				change_variable = { name = stockpiling_spe_korean_won_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_spe_korean_won } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_spe_korean_won } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1887,7 +1887,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_spe_latvian_lats_state_1 } } set_variable = { name = stockpiling_spe_latvian_lats_state_1 value = 0 } }
 				change_variable = { name = stockpiling_spe_latvian_lats_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_spe_latvian_lats } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_spe_latvian_lats } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1904,7 +1904,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_spe_lithuanian_litas_state_1 } } set_variable = { name = stockpiling_spe_lithuanian_litas_state_1 value = 0 } }
 				change_variable = { name = stockpiling_spe_lithuanian_litas_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_spe_lithuanian_litas } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_spe_lithuanian_litas } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1921,7 +1921,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_spe_peseta_state_1 } } set_variable = { name = stockpiling_spe_peseta_state_1 value = 0 } }
 				change_variable = { name = stockpiling_spe_peseta_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_spe_peseta } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_spe_peseta } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1938,7 +1938,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_spe_ruble_state_1 } } set_variable = { name = stockpiling_spe_ruble_state_1 value = 0 } }
 				change_variable = { name = stockpiling_spe_ruble_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_spe_ruble } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_spe_ruble } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1955,7 +1955,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_spe_uni_state_1 } } set_variable = { name = stockpiling_spe_uni_state_1 value = 0 } }
 				change_variable = { name = stockpiling_spe_uni_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_spe_uni } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_spe_uni } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1972,7 +1972,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_spe_yen_state_1 } } set_variable = { name = stockpiling_spe_yen_state_1 value = 0 } }
 				change_variable = { name = stockpiling_spe_yen_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_spe_yen } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_spe_yen } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -1989,7 +1989,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_spe_yuan_state_1 } } set_variable = { name = stockpiling_spe_yuan_state_1 value = 0 } }
 				change_variable = { name = stockpiling_spe_yuan_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_spe_yuan } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_spe_yuan } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -2006,7 +2006,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_spe_zloti_state_1 } } set_variable = { name = stockpiling_spe_zloti_state_1 value = 0 } }
 				change_variable = { name = stockpiling_spe_zloti_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_spe_zloti } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_spe_zloti } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -2023,7 +2023,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_thaler_hannoveraner_thaler_state_1 } } set_variable = { name = stockpiling_thaler_hannoveraner_thaler_state_1 value = 0 } }
 				change_variable = { name = stockpiling_thaler_hannoveraner_thaler_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_thaler_hannoveraner_thaler } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_thaler_hannoveraner_thaler } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -2040,7 +2040,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_thaler_prussian_thaler_state_1 } } set_variable = { name = stockpiling_thaler_prussian_thaler_state_1 value = 0 } }
 				change_variable = { name = stockpiling_thaler_prussian_thaler_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_thaler_prussian_thaler } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_thaler_prussian_thaler } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
@@ -2057,7 +2057,7 @@ zz_ef_clr_take_all = {
 				if = { limit = { NOT = { has_variable = stockpiling_thaler_saxon_thaler_state_1 } } set_variable = { name = stockpiling_thaler_saxon_thaler_state_1 value = 0 } }
 				change_variable = { name = stockpiling_thaler_saxon_thaler_state_1 add = scope:clr_rcv.var:zz_ef_clr_u }
 			}
-			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = money_value_thaler_saxon_thaler } }
+			change_variable = { name = zz_ef_f_clr_fx_in add = { value = var:zz_ef_clr_u multiply = zz_ef_fx_gold_thaler_saxon_thaler } }
 		}
 		remove_variable = zz_ef_clr_u
 	}
