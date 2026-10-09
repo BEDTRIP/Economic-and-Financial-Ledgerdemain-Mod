@@ -11,30 +11,40 @@
 # A map's value cannot be overwritten by its key (probe ld_probe_map): remove the key and add it again. Iterating a
 # map while changing it is not done here: the keys go to a variable list first (zz_ef_rq_keys_take).
 
-# HOLDER (country) scope. MAP -- the holder's map, K -- its kind (m | b), D -- the debtor (a saved country scope,
-# scope:x), V -- the change in the debtor's money (+ got / - gave up); the holding stays >= 0 and the debtor's total
-# of the kind moves by what the holding actually changed (var:zz_ef_rq_dlt, left on the holder for the caller).
+# HOLDER (country) scope. H -- the holder (cb | bk | pp | tr), K -- the kind (m | b): the map zz_ef_rq_<H>_<K>;
+# D -- the debtor (a saved country scope, scope:x), V -- the change in the debtor's money (+ got / - gave up). The
+# holding stays >= 0; the debtor's total of the kind (var:zz_ef_rq_out_<K>) and the holder's total of the map
+# (var:zz_ef_rq_tot_<H>_<K>) move by what the holding actually changed (var:zz_ef_rq_dlt, left for the caller).
 zz_ef_rq_add = {
 	save_temporary_scope_as = zz_ef_rq_ha
+	set_variable = { name = zz_ef_rq_v value = $V$ }
 	set_variable = { name = zz_ef_rq_old value = 0 }
 	if = {
-		limit = { is_key_in_variable_map = { name = $MAP$ target = $D$ } }
-		set_variable = { name = zz_ef_rq_old value = "variable_map($MAP$|$D$)" }
-		remove_from_variable_map = { name = $MAP$ key = $D$ }
+		limit = { is_key_in_variable_map = { name = zz_ef_rq_$H$_$K$ target = $D$ } }
+		$D$ = { save_temporary_scope_as = zz_ef_rq_key }
+		zz_ef_rq_$H$_$K$_read = yes
+		set_variable = { name = zz_ef_rq_old value = var:zz_ef_rq_h }
+		remove_from_variable_map = { name = zz_ef_rq_$H$_$K$ key = $D$ }
 	}
 	set_variable = {
 		name = zz_ef_rq_dlt
 		value = {
 			value = var:zz_ef_rq_old
-			add = $V$
+			add = var:zz_ef_rq_v
 			min = 0
 		}
 	}
 	if = {
 		limit = { var:zz_ef_rq_dlt > 0 }
-		add_to_variable_map = { name = $MAP$ key = $D$ value = var:zz_ef_rq_dlt }
+		add_to_variable_map = { name = zz_ef_rq_$H$_$K$ key = $D$ value = zz_ef_rq_dlt_v }
 	}
 	change_variable = { name = zz_ef_rq_dlt subtract = var:zz_ef_rq_old }
+	remove_variable = zz_ef_rq_v
+	if = {
+		limit = { NOT = { has_variable = zz_ef_rq_tot_$H$_$K$ } }
+		set_variable = { name = zz_ef_rq_tot_$H$_$K$ value = 0 }
+	}
+	change_variable = { name = zz_ef_rq_tot_$H$_$K$ add = var:zz_ef_rq_dlt }
 	$D$ = {
 		if = {
 			limit = { NOT = { has_variable = zz_ef_rq_out_$K$ } }
@@ -50,7 +60,8 @@ zz_ef_rq_get = {
 	set_variable = { name = zz_ef_rq_h value = 0 }
 	if = {
 		limit = { is_key_in_variable_map = { name = $MAP$ target = $D$ } }
-		set_variable = { name = zz_ef_rq_h value = "variable_map($MAP$|$D$)" }
+		$D$ = { save_temporary_scope_as = zz_ef_rq_key }
+		$MAP$_read = yes
 	}
 }
 
@@ -58,23 +69,25 @@ zz_ef_rq_get = {
 # house is a claim on D too (var:zz_ef_rq_pot on D, part of its debt abroad). The change actually made --
 # global_var:zz_ef_rq_pdlt.
 zz_ef_rq_pot_add = {
+	set_global_variable = { name = zz_ef_rq_pv value = $V$ }
 	set_global_variable = { name = zz_ef_rq_pold value = 0 }
 	if = {
 		limit = { is_key_in_global_variable_map = { name = zz_ef_clr_pot target = $D$ } }
-		set_global_variable = { name = zz_ef_rq_pold value = "global_variable_map(zz_ef_clr_pot|$D$)" }
+		$D$ = { save_temporary_scope_as = zz_ef_rq_key }
+		zz_ef_clr_pot_read = yes
 		remove_from_global_variable_map = { name = zz_ef_clr_pot key = $D$ }
 	}
 	set_global_variable = {
 		name = zz_ef_rq_pdlt
 		value = {
 			value = global_var:zz_ef_rq_pold
-			add = $V$
+			add = global_var:zz_ef_rq_pv
 			min = 0
 		}
 	}
 	if = {
 		limit = { global_var:zz_ef_rq_pdlt > 0 }
-		add_to_global_variable_map = { name = zz_ef_clr_pot key = $D$ value = global_var:zz_ef_rq_pdlt }
+		add_to_global_variable_map = { name = zz_ef_clr_pot key = $D$ value = zz_ef_rq_pdlt_v }
 	}
 	change_global_variable = { name = zz_ef_rq_pdlt subtract = global_var:zz_ef_rq_pold }
 	$D$ = {
@@ -106,7 +119,9 @@ zz_ef_rq_value_gold = {
 		variable = $MAP$
 		save_temporary_scope_as = zz_ef_rq_k
 		scope:zz_ef_rq_hd = {
-			set_variable = { name = zz_ef_rq_t value = "variable_map($MAP$|scope:zz_ef_rq_k)" }
+			scope:zz_ef_rq_k = { save_temporary_scope_as = zz_ef_rq_key }
+			$MAP$_read = yes
+			set_variable = { name = zz_ef_rq_t value = var:zz_ef_rq_h }
 			change_variable = { name = zz_ef_rq_t multiply = scope:zz_ef_rq_k.zz_ef_rq_gpm_v }
 			if = {
 				limit = { always = $CONV$ }
@@ -134,7 +149,7 @@ zz_ef_rq_interest_step = {
 				scope:zz_ef_rq_hi = {
 					zz_ef_rq_get = { MAP = zz_ef_rq_cb_m D = scope:zz_ef_rq_d }
 					change_variable = { name = zz_ef_rq_h multiply = scope:zz_ef_rq_d.var:zz_ef_rq_rate_w }
-					zz_ef_rq_add = { MAP = zz_ef_rq_cb_m K = m D = scope:zz_ef_rq_d V = var:zz_ef_rq_h }
+					zz_ef_rq_add = { H = cb K = m D = scope:zz_ef_rq_d V = var:zz_ef_rq_h }
 				}
 				if = {
 					limit = { NOT = { has_variable = zz_ef_rq_int_due } }
@@ -193,7 +208,7 @@ zz_ef_rq_crisis_resell = {
 			zz_ef_crisis_redeem = yes
 		}
 		zz_ef_rq_get = { MAP = zz_ef_rq_cb_m D = scope:target_country }
-		zz_ef_rq_add = { MAP = zz_ef_rq_cb_m K = m D = scope:target_country V = { value = var:zz_ef_rq_h multiply = -1 } }
+		zz_ef_rq_add = { H = cb K = m D = scope:target_country V = { value = var:zz_ef_rq_h multiply = -1 } }
 		# the deposits cancelled against D's metal: D's banks owe them no more (their capital, the pool unchanged)
 		scope:target_country = {
 			if = { limit = { NOT = { has_variable = zz_ef_bank_capital } } set_variable = { name = zz_ef_bank_capital value = 0 } }
@@ -273,10 +288,86 @@ zz_ef_rq_check_map = {
 		every_key_in_variable_map = {
 			variable = $MAP$
 			save_temporary_scope_as = zz_ef_rq_k
-			scope:zz_ef_rq_hd = { set_variable = { name = zz_ef_rq_t value = "variable_map($MAP$|scope:zz_ef_rq_k)" } }
+			save_temporary_scope_as = zz_ef_rq_key
+			scope:zz_ef_rq_hd = { $MAP$_read = yes set_variable = { name = zz_ef_rq_t value = var:zz_ef_rq_h } }
 			change_variable = { name = zz_ef_rq_chk_$K$ add = scope:zz_ef_rq_hd.var:zz_ef_rq_t }
 			change_global_variable = { name = zz_ef_rq_w_n_$K$ add = 1 }
 		}
 		remove_variable = zz_ef_rq_t
+	}
+}
+
+# Readers, one per map: the holding of the scope's map on scope:zz_ef_rq_key into var:zz_ef_rq_h (0 if none). A
+# parameter inside the quoted «variable_map(…|…)» is mangled by the engine (the «|» is taken for a parameter's default,
+# run r1009_221452) -- the map's name is written out here, the key is a saved scope.
+zz_ef_rq_cb_m_read = {
+	set_variable = { name = zz_ef_rq_h value = 0 }
+	if = {
+		limit = { is_key_in_variable_map = { name = zz_ef_rq_cb_m target = scope:zz_ef_rq_key } }
+		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_rq_cb_m|scope:zz_ef_rq_key)" }
+	}
+}
+zz_ef_rq_bk_m_read = {
+	set_variable = { name = zz_ef_rq_h value = 0 }
+	if = {
+		limit = { is_key_in_variable_map = { name = zz_ef_rq_bk_m target = scope:zz_ef_rq_key } }
+		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_rq_bk_m|scope:zz_ef_rq_key)" }
+	}
+}
+zz_ef_rq_pp_m_read = {
+	set_variable = { name = zz_ef_rq_h value = 0 }
+	if = {
+		limit = { is_key_in_variable_map = { name = zz_ef_rq_pp_m target = scope:zz_ef_rq_key } }
+		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_rq_pp_m|scope:zz_ef_rq_key)" }
+	}
+}
+zz_ef_rq_tr_b_read = {
+	set_variable = { name = zz_ef_rq_h value = 0 }
+	if = {
+		limit = { is_key_in_variable_map = { name = zz_ef_rq_tr_b target = scope:zz_ef_rq_key } }
+		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_rq_tr_b|scope:zz_ef_rq_key)" }
+	}
+}
+zz_ef_rq_bk_b_read = {
+	set_variable = { name = zz_ef_rq_h value = 0 }
+	if = {
+		limit = { is_key_in_variable_map = { name = zz_ef_rq_bk_b target = scope:zz_ef_rq_key } }
+		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_rq_bk_b|scope:zz_ef_rq_key)" }
+	}
+}
+zz_ef_rq_pp_b_read = {
+	set_variable = { name = zz_ef_rq_h value = 0 }
+	if = {
+		limit = { is_key_in_variable_map = { name = zz_ef_rq_pp_b target = scope:zz_ef_rq_key } }
+		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_rq_pp_b|scope:zz_ef_rq_key)" }
+	}
+}
+zz_ef_rq_cb_b_read = {
+	set_variable = { name = zz_ef_rq_h value = 0 }
+	if = {
+		limit = { is_key_in_variable_map = { name = zz_ef_rq_cb_b target = scope:zz_ef_rq_key } }
+		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_rq_cb_b|scope:zz_ef_rq_key)" }
+	}
+}
+zz_ef_cbfx_d_read = {
+	set_variable = { name = zz_ef_rq_h value = 0 }
+	if = {
+		limit = { is_key_in_variable_map = { name = zz_ef_cbfx_d target = scope:zz_ef_rq_key } }
+		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_cbfx_d|scope:zz_ef_rq_key)" }
+	}
+}
+zz_ef_cbfx_p_read = {
+	set_variable = { name = zz_ef_rq_h value = 0 }
+	if = {
+		limit = { is_key_in_variable_map = { name = zz_ef_cbfx_p target = scope:zz_ef_rq_key } }
+		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_cbfx_p|scope:zz_ef_rq_key)" }
+	}
+}
+# the clearing house's holding of scope:zz_ef_rq_key's money into global_var:zz_ef_rq_pold
+zz_ef_clr_pot_read = {
+	set_global_variable = { name = zz_ef_rq_pold value = 0 }
+	if = {
+		limit = { is_key_in_global_variable_map = { name = zz_ef_clr_pot target = scope:zz_ef_rq_key } }
+		set_global_variable = { name = zz_ef_rq_pold value = "global_variable_map(zz_ef_clr_pot|scope:zz_ef_rq_key)" }
 	}
 }

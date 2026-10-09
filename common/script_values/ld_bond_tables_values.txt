@@ -4,18 +4,12 @@
 zz_ef_bt_in_key = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_bt_t_amt } add = var:zz_ef_bt_t_amt }
-	if = {
-		limit = { has_variable = zz_ef_bt_b_amt has_global_variable = zz_ef_bt_gpm global_var:zz_ef_bt_gpm > 0 }
-		add = { value = var:zz_ef_bt_b_amt divide = global_var:zz_ef_bt_gpm }
-	}
+	if = { limit = { has_variable = zz_ef_bt_b_amt } add = var:zz_ef_bt_b_amt }
 }
 zz_ef_bt_out_key = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_bto_t_amt } add = var:zz_ef_bto_t_amt }
-	if = {
-		limit = { has_variable = zz_ef_bto_b_amt has_global_variable = zz_ef_bt_gpm global_var:zz_ef_bt_gpm > 0 }
-		add = { value = var:zz_ef_bto_b_amt divide = global_var:zz_ef_bt_gpm }
-	}
+	if = { limit = { has_variable = zz_ef_bto_b_amt } add = var:zz_ef_bto_b_amt }
 }
 # the row's yearly rate on the treasury's bonds (interest a week x 52 / sum)
 zz_ef_bt_t_rate = {

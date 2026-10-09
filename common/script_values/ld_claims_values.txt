@@ -26,6 +26,12 @@ zz_ef_rq_out_b_v = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_rq_out_b } value = var:zz_ef_rq_out_b }
 }
+# A map's value is written from a script value: add_to_variable_map takes «value = var:x» for a scope (the map then
+# reads back empty, run r1009_221452) -- these read the effects' temporaries.
+zz_ef_rq_dlt_v = { value = var:zz_ef_rq_dlt }
+zz_ef_rq_pdlt_v = { value = global_var:zz_ef_rq_pdlt }
+zz_ef_rq_h_v = { value = var:zz_ef_rq_h }
+zz_ef_cbfx_t_v = { value = var:zz_ef_cbfx_t }
 # the monthly check's world sums (zz_ef_rq_world_check, the EFI line)
 zz_ef_rq_w_n_m_v = {
 	value = 0

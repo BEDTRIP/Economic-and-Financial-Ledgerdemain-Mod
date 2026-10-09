@@ -239,36 +239,9 @@ zz_ef_cb_interest = {
 	min = 0
 }
 
-# Private banks' foreign bonds (E&F ai_privat_bank_bond_1..25: bought straight
-# from the pool, add_investment_pool = -bond value). The weekly change of
-# the sum is the bonds bought (+) or run off (-).
+# Private banks' bonds -- their parts of the debt of other countries in the register (the bond ledger, ld_claims.txt).
 zz_ef_bank_bonds = {
-	value = 0
-	if = { limit = { has_variable = ai_privat_bank_bond_value_1 } add = var:ai_privat_bank_bond_value_1 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_2 } add = var:ai_privat_bank_bond_value_2 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_3 } add = var:ai_privat_bank_bond_value_3 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_4 } add = var:ai_privat_bank_bond_value_4 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_5 } add = var:ai_privat_bank_bond_value_5 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_6 } add = var:ai_privat_bank_bond_value_6 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_7 } add = var:ai_privat_bank_bond_value_7 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_8 } add = var:ai_privat_bank_bond_value_8 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_9 } add = var:ai_privat_bank_bond_value_9 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_10 } add = var:ai_privat_bank_bond_value_10 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_11 } add = var:ai_privat_bank_bond_value_11 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_12 } add = var:ai_privat_bank_bond_value_12 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_13 } add = var:ai_privat_bank_bond_value_13 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_14 } add = var:ai_privat_bank_bond_value_14 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_15 } add = var:ai_privat_bank_bond_value_15 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_16 } add = var:ai_privat_bank_bond_value_16 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_17 } add = var:ai_privat_bank_bond_value_17 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_18 } add = var:ai_privat_bank_bond_value_18 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_19 } add = var:ai_privat_bank_bond_value_19 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_20 } add = var:ai_privat_bank_bond_value_20 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_21 } add = var:ai_privat_bank_bond_value_21 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_22 } add = var:ai_privat_bank_bond_value_22 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_23 } add = var:ai_privat_bank_bond_value_23 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_24 } add = var:ai_privat_bank_bond_value_24 }
-	if = { limit = { has_variable = ai_privat_bank_bond_value_25 } add = var:ai_privat_bank_bond_value_25 }
+	value = zz_ef_bl_bank_parts
 }
 
 # ---- EF.31: the rate moves private construction ---------------------------
