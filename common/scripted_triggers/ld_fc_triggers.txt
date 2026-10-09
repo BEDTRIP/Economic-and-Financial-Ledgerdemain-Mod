@@ -27,3 +27,22 @@ zz_ef_fc_can_found = {
 	NOT = { has_law = law_type:law_no_monetary_system }
 	zz_ef_bank_levels >= zz_ef_fc_bank_levels_min
 }
+
+# Country scope (the buyer), D -- the debtor: a claim on D bears no surcharge (Д.R8б.18) -- one's own, an overlord and its
+# subject, one market, the treaty of foreign investment rights.
+zz_ef_xch_free_with = {
+	OR = {
+		this = $D$
+		AND = { is_subject = yes overlord = $D$ }
+		$D$ = { is_subject = yes overlord = prev }
+		AND = { exists = market $D$ = { exists = market } market = $D$.market }
+		has_treaty_foreign_investment_rights_with = { TARGET = $D$ }
+	}
+}
+# Country scope: no capital in or out (Д.R8б.18) -- isolationism of the buyer or of the debtor (scope:zz_ef_xch_d).
+zz_ef_xch_banned = {
+	OR = {
+		has_law_or_variant = law_type:law_isolationism
+		scope:zz_ef_xch_d = { has_law_or_variant = law_type:law_isolationism }
+	}
+}

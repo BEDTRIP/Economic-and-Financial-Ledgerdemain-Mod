@@ -92,10 +92,11 @@ zz_ef_xch_route = {
 	}
 }
 
-# Country scope (an exchange country), monthly: its fees by kind of claim (понятие «Комиссия биржи», Д.R8.5) -- the
-# base for now; the technologies and the trade policy's surcharge -- шаг 8.
+# Country scope (an exchange country), monthly: its fees by kind of claim (понятие «Комиссия биржи», Д.R8.5) -- the base,
+# lower with the exchange's financial technologies (zz_ef_xch_fee_v); the surcharge on foreign claims -- the buyer's
+# trade policy (zz_ef_xch_surcharge_v, Д.R8б.18).
 zz_ef_xch_fees_set = {
-	set_variable = { name = zz_ef_xch_fee_m value = zz_ef_xch_fee_base }
-	set_variable = { name = zz_ef_xch_fee_b value = zz_ef_xch_fee_base }
-	set_variable = { name = zz_ef_xch_fee_f value = zz_ef_xch_fee_base }
+	set_variable = { name = zz_ef_xch_fee_m value = zz_ef_xch_fee_v }
+	set_variable = { name = zz_ef_xch_fee_b value = zz_ef_xch_fee_v }
+	set_variable = { name = zz_ef_xch_fee_f value = zz_ef_xch_fee_v }
 }

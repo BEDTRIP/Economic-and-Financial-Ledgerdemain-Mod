@@ -1,6 +1,38 @@
 ﻿# The exchange (scripted_effects/ld_exchange.txt).
-# the base fee of a deal, a share of its value (Д.R8.5: 0.5 %)
+# the base fee of a deal, a share of its value (Д.R8.5: 0.5 %); each financial technology of the exchange's country
+# takes zz_ef_xch_fee_tech_cut of the base off, down to zz_ef_xch_fee_min of it
 zz_ef_xch_fee_base = 0.005
+zz_ef_xch_fee_tech_cut = 0.15
+zz_ef_xch_fee_min = 0.1
+zz_ef_xch_fee_v = {
+	value = 1
+	if = { limit = { has_technology_researched = stock_exchange } subtract = zz_ef_xch_fee_tech_cut }
+	if = { limit = { has_technology_researched = joint_stock_companies } subtract = zz_ef_xch_fee_tech_cut }
+	if = { limit = { has_technology_researched = investment_banks } subtract = zz_ef_xch_fee_tech_cut }
+	if = { limit = { has_technology_researched = mutual_funds } subtract = zz_ef_xch_fee_tech_cut }
+	if = { limit = { has_technology_researched = international_exchange_standards } subtract = zz_ef_xch_fee_tech_cut }
+	if = { limit = { has_technology_researched = modern_financial_instruments } subtract = zz_ef_xch_fee_tech_cut }
+	min = zz_ef_xch_fee_min
+	multiply = zz_ef_xch_fee_base
+}
+# The surcharge on a claim on another country (Д.R8б.18): the scope -- the buyer, scope:zz_ef_xch_d -- the debtor. None
+# for one's own, between an overlord and its subject, in one market and with the treaty of foreign investment rights;
+# otherwise by the buyer's trade policy: free trade 0.5 %, mercantilism 1 %, protectionism 2 %, the canton system 3 %
+# (isolationism -- no deal at all, zz_ef_xch_banned).
+zz_ef_xch_sur_free_trade = 0.005
+zz_ef_xch_sur_mercantilism = 0.01
+zz_ef_xch_sur_protectionism = 0.02
+zz_ef_xch_sur_canton = 0.03
+zz_ef_xch_surcharge_v = {
+	value = 0
+	if = {
+		limit = { NOT = { zz_ef_xch_free_with = { D = scope:zz_ef_xch_d } } }
+		if = { limit = { has_law_or_variant = law_type:law_free_trade } value = zz_ef_xch_sur_free_trade }
+		else_if = { limit = { has_law_or_variant = law_type:law_mercantilism } value = zz_ef_xch_sur_mercantilism }
+		else_if = { limit = { has_law_or_variant = law_type:law_protectionism } value = zz_ef_xch_sur_protectionism }
+		else_if = { limit = { has_law_or_variant = law_type:law_canton_system } value = zz_ef_xch_sur_canton }
+	}
+}
 # the route for the logs: 1 own, 2 the market owner's, 3 the bloc leader's, 4 the strongest bloc's, 5 the world's, 0 none
 zz_ef_xch_how_v = {
 	value = 0

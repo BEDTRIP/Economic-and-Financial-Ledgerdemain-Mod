@@ -2185,6 +2185,31 @@ zz_ef_world_silver_orders = {
 		add = mg:silver.market_goods_buy_orders
 	}
 }
+# the world's silver price in gold (zz_ef_silver_rate_update): the markets' ratio x (1 + elasticity x (the silver share of
+# the metal standards' money - its first month's)), within E&F's bounds
+zz_ef_silver_demand_elasticity = 1
+zz_ef_silver_to_gold_world = {
+	value = zz_ef_silver_to_gold_market
+	if = {
+		limit = {
+			has_global_variable = zz_ef_silver_share
+			has_global_variable = zz_ef_silver_share0
+		}
+		multiply = {
+			value = global_var:zz_ef_silver_share
+			subtract = global_var:zz_ef_silver_share0
+			multiply = zz_ef_silver_demand_elasticity
+			add = 1
+			min = 0.2
+		}
+	}
+	max = 0.2
+	min = 0.01563
+}
+zz_ef_silver_share_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_silver_share } value = global_var:zz_ef_silver_share }
+}
 zz_ef_silver_to_gold_market = {
 	value = zz_ef_world_silver_price_mult
 	divide = zz_ef_world_gold_price_mult
