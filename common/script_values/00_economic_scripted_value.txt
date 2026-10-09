@@ -4915,6 +4915,17 @@ money_value_0 = {
 		}
 		add = money_value_by_reference_currency
 	}
+	# the external exchange standard: its parity (in the anchor's metal) at the anchor's rate (Д.R8а.3, Д.R8а.4) --
+	# without it a pegged subject's own currency is worth 0 and E&F reads the fall as a currency crisis
+	if = {
+		limit = {
+			zz_ef_anchored = yes
+			has_variable = money_value_target_1
+			var:money_value_target_1 > 0
+		}
+		value = var:money_value_target_1
+		multiply = var:zz_ef_anchor.zz_ef_value_to_parity_own
+	}
 }
 # E&F's money_value_in_gold: the owner's branches as E&F has them; a customs union member converts its own
 # money_value by its own standard (silver at the silver-to-gold rate; bimetallism and gold as they are, as

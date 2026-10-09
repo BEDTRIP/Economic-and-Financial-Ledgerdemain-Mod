@@ -2067,7 +2067,8 @@ zz_ef_v_d_abroad = {
 # E&F's money_value_in_gold goes through the market owner for subjects; read
 # weekly for every country it ended in a stack overflow
 # crash -- so it is not read here. An exchange standard's money_value_0 is E&F's, by the reference
-# currency, already in gold. 0 without a central bank on a metal standard.
+# currency, already in gold; the external one's -- its parity in the anchor's metal. 0 without a central bank on a
+# metal standard.
 zz_ef_gold_per_unit = {
 	value = 0
 	if = {
@@ -2077,6 +2078,10 @@ zz_ef_gold_per_unit = {
 				has_law = law_type:law_gold_standard
 				has_law = law_type:law_bimetallism_standard
 				zz_ef_exchange_std = yes
+				AND = {
+					zz_ef_anchored = yes
+					OR = { zz_ef_metal_gold = yes zz_ef_metal_bimet = yes }
+				}
 			}
 		}
 		value = money_value_0
@@ -2084,7 +2089,10 @@ zz_ef_gold_per_unit = {
 	else_if = {
 		limit = {
 			has_modifier = has_central_bank
-			has_law = law_type:law_silver_standard
+			OR = {
+				has_law = law_type:law_silver_standard
+				AND = { zz_ef_anchored = yes zz_ef_metal_silver = yes }
+			}
 		}
 		value = money_value_0
 		multiply = silver_to_gold_rate
