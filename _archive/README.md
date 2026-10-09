@@ -124,3 +124,4 @@ _archive/<механизм>/
 | Вторые биржи страны — Манчестер, Чикаго, Гонконг (`building_financial_centre_gbr_2`, `_usa_2`, `_hkh`) | `ef_fc_second_variants/` | история поздних стартов, типы компаний, значки и виджеты GUI, строки модификатора, локализация — список в README |
 | Самосоздание финцентров E&F (`macro_facilities_on_action_fc`, `macro_facilities_fc_<x>`, `has_second_financial_center`, `has_tech_financial_center_but_no_building_financial_center`) | `ef_fc_spawners/` | вызовы в старте, годовом пульсе, технологии, `reset_building`, после краха |
 | Значения финцентра по видам `has_building_financial_centre_<x>(_custom_location)` | `ef_fc_type_values/` | ничего — читатели переписаны |
+| Объекты валют таблицы ЦБ E&F `currency_import_export_value_<cur>_03` | `ef_cbfx_currency_objects/` | 95 блоков `set_global_variable` в истории |

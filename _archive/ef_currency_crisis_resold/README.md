@@ -8,8 +8,7 @@
 
 **Почему вынуто (R8б, шаг 2):** чужие деньги ЦБ — реестр требований (карта `zz_ef_rq_cb_m`, `docs/claims.md`), а не
 запасы E&F в ЦБ-штатах; продажа держателей — `zz_ef_rq_crisis_resell` (`common/scripted_effects/ld_claims.txt`).
-`reset_debt_in_national_currency` из тела `sell_<cur>_currency_crisis` новым кодом не зовётся (долг E&F в нацвалюте
-модель не ведёт).
+`reset_debt_in_national_currency` (звали только `sell_<cur>_currency_crisis`) — тоже здесь: долг E&F в нацвалюте модель не ведёт.
 
 **Удалено из живых файлов:**
 - `common/scripted_effects/00_on_action_main.txt` — `all_currency_resold` (здесь);
@@ -18,3 +17,5 @@
   `common/scripted_effects/01_financial_scripted_effects.txt`, `economic_instability` — блок
   `every_country = { if = { limit = { has_modifier = has_central_bank not = { this = root } } save_scope_as = seller all_currency_resold = yes } }`
   заменён на `zz_ef_rq_crisis_resell = yes`.
+- `common/scripted_effects/01_economic_scripted_effects.txt` — `reset_debt_in_national_currency` (здесь): звали только
+  `sell_<cur>_currency_crisis`; читателей не осталось (снят следом, R8б).

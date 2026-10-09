@@ -43,7 +43,7 @@ zz_ef_world_month_ef = {
 			else_if = { limit = { var:zz_ef_xch_how ?= 4 } change_global_variable = { name = zz_ef_xch_n_4 add = 1 } }
 			else_if = { limit = { var:zz_ef_xch_how ?= 5 } change_global_variable = { name = zz_ef_xch_n_5 add = 1 } }
 		}
-		debug_log = "EFH|[TimeKeeper.GetCurrentDate.GetString]|WORLD|exchanges [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fc_world_n_v')|0]|own [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xch_n_1_v')|0]|market [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xch_n_2_v')|0]|bloc [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xch_n_3_v')|0]|lever [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xch_n_4_v')|0]|world [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xch_n_5_v')|0]"
+		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFH|[TimeKeeper.GetCurrentDate.GetString]|WORLD|exchanges [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fc_world_n_v')|0]|own [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xch_n_1_v')|0]|market [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xch_n_2_v')|0]|bloc [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xch_n_3_v')|0]|lever [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xch_n_4_v')|0]|world [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xch_n_5_v')|0]" }
 	}
 }
 
