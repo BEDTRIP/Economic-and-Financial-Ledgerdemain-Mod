@@ -1936,491 +1936,375 @@ currency_symbol = {
 	type = country
 	log_loc_errors = no
 
-	# the country's currency from var:zz_ef_cur (scripted_effects/ld_currency_var.txt); was 95 checks of
-	# E&F's currency by culture per call
-	#generic
+	# «<two letters of the country> <the sign of its currency's word>» (Д.R8а.8, tools/regen_ld_currency_symbol.py)
+	#no monetary system
 	text = {
-		trigger = { NOT = { has_variable = zz_ef_cur } NOT = { has_variable = zz_ef_cur_noun } }
-		localization_key = spe_uni_texture
-	}
-	text = {
-		trigger = { NOT = { has_variable = zz_ef_cur } has_variable = zz_ef_cur_noun }
-		localization_key = spe_uni_texture
-	}
-	#dinar
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dinar }
-		localization_key = dinar_texture
-	}
-	#dinar_algerian_dinar
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dinar_algerian_dinar }
-		localization_key = dinar_algerian_dinar_texture
-	}
-	#dinar_iraqi_dinar
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dinar_iraqi_dinar }
-		localization_key = dinar_iraqi_dinar_texture
-	}
-	#dinar_libyan_dinar
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dinar_libyan_dinar }
-		localization_key = dinar_libyan_dinar_texture
-	}
-	#dinar_moroccan_dirham
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dinar_moroccan_dirham }
-		localization_key = dinar_moroccan_dirham_texture
-	}
-	#dinar_omanian_rial
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dinar_omanian_rial }
-		localization_key = dinar_omanian_rial_texture
-	}
-	#dinar_qiran
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dinar_qiran }
-		localization_key = dinar_qiran_texture
-	}
-	#dinar_saudi_riyal
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dinar_saudi_riyal }
-		localization_key = dinar_saudi_riyal_texture
-	}
-	#dinar_serbian_dinar
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dinar_serbian_dinar }
-		localization_key = dinar_serbian_dinar_texture
-	}
-	#dinar_tunisian_dinar
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dinar_tunisian_dinar }
-		localization_key = dinar_tunisian_dinar_texture
-	}
-	#dinar_yugoslav_dinar
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dinar_yugoslav_dinar }
-		localization_key = dinar_yugoslav_dinar_texture
-	}
-	#dollar_australian_dollar
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dollar_australian_dollar }
-		localization_key = dollar_australian_dollar_texture
-	}
-	#dollar_canadian_dollar
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dollar_canadian_dollar }
-		localization_key = dollar_canadian_dollar_texture
-	}
-	#dollar_caribbean_dollar
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dollar_caribbean_dollar }
-		localization_key = dollar_caribbean_dollar_texture
-	}
-	#dollar_confederate_states_dollar
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dollar_confederate_states_dollar }
-		localization_key = dollar_confederate_states_dollar_texture
-	}
-	#dollar_liberian_dollar
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dollar_liberian_dollar }
-		localization_key = dollar_liberian_dollar_texture
-	}
-	#dollar_new_zealand_dollar
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dollar_new_zealand_dollar }
-		localization_key = dollar_new_zealand_dollar_texture
-	}
-	#dollar_sierra_leonean_dollar
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dollar_sierra_leonean_dollar }
-		localization_key = dollar_sierra_leonean_dollar_texture
-	}
-	#dollar_united_states_dollar
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dollar_united_states_dollar }
-		localization_key = dollar_united_states_dollar_texture
-	}
-	#eco_ariary
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:eco_ariary }
-		localization_key = eco_ariary_texture
-	}
-	#eco_central_african_eco
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:eco_central_african_eco }
-		localization_key = eco_central_african_eco_texture
-	}
-	#eco_east_african_eco
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:eco_east_african_eco }
-		localization_key = eco_east_african_eco_texture
-	}
-	#eco_ethiopian_birr
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:eco_ethiopian_birr }
-		localization_key = eco_ethiopian_birr_texture
-	}
-	#eco_ghanaian_pound
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:eco_ghanaian_pound }
-		localization_key = eco_ghanaian_pound_texture
-	}
-	#eco_nigerian_naira
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:eco_nigerian_naira }
-		localization_key = eco_nigerian_naira_texture
-	}
-	#eco_south_african_rand
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:eco_south_african_rand }
-		localization_key = eco_south_african_rand_texture
-	}
-	#eco_tuareg_ouguiya
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:eco_tuareg_ouguiya }
-		localization_key = eco_tuareg_ouguiya_texture
-	}
-	#eco_west_african_eco
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:eco_west_african_eco }
-		localization_key = eco_west_african_eco_texture
-	}
-	#franc_belgian_franc
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:franc_belgian_franc }
-		localization_key = franc_belgian_franc_texture
-	}
-	#franc_french_franc
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:franc_french_franc }
-		localization_key = franc_french_franc_texture
-	}
-	#franc_luxembourgish_franc
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:franc_luxembourgish_franc }
-		localization_key = franc_luxembourgish_franc_texture
-	}
-	#franc_swiss_franc
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:franc_swiss_franc }
-		localization_key = franc_swiss_franc_texture
-	}
-	#gulden
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:gulden }
-		localization_key = gulden_texture
-	}
-	#gulden_bavarian_gulden
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:gulden_bavarian_gulden }
-		localization_key = gulden_bavarian_gulden_texture
-	}
-	#gulden_florin
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:gulden_florin }
-		localization_key = gulden_florin_texture
-	}
-	#gulden_hungarian_forint
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:gulden_hungarian_forint }
-		localization_key = gulden_hungarian_forint_texture
-	}
-	#gulden_indies_guilder
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:gulden_indies_guilder }
-		localization_key = gulden_indies_guilder_texture
-	}
-	#gulden_south_german_gulden
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:gulden_south_german_gulden }
-		localization_key = gulden_south_german_gulden_texture
-	}
-	#krone_czech_koruna
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:krone_czech_koruna }
-		localization_key = krone_czech_koruna_texture
-	}
-	#krone_danish_krone
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:krone_danish_krone }
-		localization_key = krone_danish_krone_texture
-	}
-	#krone_estonian_kroon
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:krone_estonian_kroon }
-		localization_key = krone_estonian_kroon_texture
-	}
-	#krone_icelandic_krona
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:krone_icelandic_krona }
-		localization_key = krone_icelandic_krona_texture
-	}
-	#krone_norwegian_krone
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:krone_norwegian_krone }
-		localization_key = krone_norwegian_krone_texture
-	}
-	#krone_slovak_koruna
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:krone_slovak_koruna }
-		localization_key = krone_slovak_koruna_texture
-	}
-	#krone_swedish_krona
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:krone_swedish_krona }
-		localization_key = krone_swedish_krona_texture
-	}
-	#leon_leu
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:leon_leu }
-		localization_key = leon_leu_texture
-	}
-	#leon_lev
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:leon_lev }
-		localization_key = leon_lev_texture
-	}
-	#lira
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:lira }
-		localization_key = lira_texture
-	}
-	#lira_ducato
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:lira_ducato }
-		localization_key = lira_ducato_texture
+		trigger = { has_law = law_type:law_no_monetary_system }
+		localization_key = zz_ef_sym_none
 	}
 	#lira_ottoman_lira
 	text = {
 		trigger = { var:zz_ef_cur ?= flag:lira_ottoman_lira }
-		localization_key = lira_ottoman_lira_texture
-	}
-	#lira_scudo_pontificio
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:lira_scudo_pontificio }
-		localization_key = lira_scudo_pontificio_texture
-	}
-	#lira_scudo_sardo
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:lira_scudo_sardo }
-		localization_key = lira_scudo_sardo_texture
-	}
-	#lira_toscane_lira
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:lira_toscane_lira }
-		localization_key = lira_toscane_lira_texture
-	}
-	#mark
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:mark }
-		localization_key = mark_texture
-	}
-	#mark_finnish_markka
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:mark_finnish_markka }
-		localization_key = mark_finnish_markka_texture
-	}
-	#peso
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso }
-		localization_key = peso_texture
-	}
-	#peso_argentine_peso
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_argentine_peso }
-		localization_key = peso_argentine_peso_texture
-	}
-	#peso_bolivien_peso
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_bolivien_peso }
-		localization_key = peso_bolivien_peso_texture
-	}
-	#peso_chilean_peso
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_chilean_peso }
-		localization_key = peso_chilean_peso_texture
-	}
-	#peso_colombian_peso
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_colombian_peso }
-		localization_key = peso_colombian_peso_texture
-	}
-	#peso_costa_rican_colon
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_costa_rican_colon }
-		localization_key = peso_costa_rican_colon_texture
-	}
-	#peso_cuban_peso
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_cuban_peso }
-		localization_key = peso_cuban_peso_texture
-	}
-	#peso_ecuadorian_peso
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_ecuadorian_peso }
-		localization_key = peso_ecuadorian_peso_texture
-	}
-	#peso_el_salvador_colon
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_el_salvador_colon }
-		localization_key = peso_el_salvador_colon_texture
-	}
-	#peso_guatemalan_quetzal
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_guatemalan_quetzal }
-		localization_key = peso_guatemalan_quetzal_texture
-	}
-	#peso_honduran_lempira
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_honduran_lempira }
-		localization_key = peso_honduran_lempira_texture
-	}
-	#peso_mexican_peso
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_mexican_peso }
-		localization_key = peso_mexican_peso_texture
-	}
-	#peso_nicaraguan_cordoba
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_nicaraguan_cordoba }
-		localization_key = peso_nicaraguan_cordoba_texture
-	}
-	#peso_paraguayan_peso
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_paraguayan_peso }
-		localization_key = peso_paraguayan_peso_texture
+		localization_key = zz_ef_sym_cur_lira_ottoman_lira
 	}
 	#peso_philippine_peso
 	text = {
 		trigger = { var:zz_ef_cur ?= flag:peso_philippine_peso }
-		localization_key = peso_philippine_peso_texture
+		localization_key = zz_ef_sym_cur_peso_philippine_peso
 	}
-	#peso_sol_de_oro
+	#abazi
 	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_sol_de_oro }
-		localization_key = peso_sol_de_oro_texture
+		trigger = { var:zz_ef_cur_noun ?= flag:abazi }
+		localization_key = zz_ef_sym_abazi
 	}
-	#peso_uruguayan_peso
+	#ariary
 	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_uruguayan_peso }
-		localization_key = peso_uruguayan_peso_texture
+		trigger = { var:zz_ef_cur_noun ?= flag:ariary }
+		localization_key = zz_ef_sym_ariary
 	}
-	#peso_venezuelan_peso
+	#baht
 	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_venezuelan_peso }
-		localization_key = peso_venezuelan_peso_texture
+		trigger = { var:zz_ef_cur_noun ?= flag:baht }
+		localization_key = zz_ef_sym_baht
 	}
-	#pound_egyptian_pound
+	#birr
 	text = {
-		trigger = { var:zz_ef_cur ?= flag:pound_egyptian_pound }
-		localization_key = pound_egyptian_pound_texture
+		trigger = { var:zz_ef_cur_noun ?= flag:birr }
+		localization_key = zz_ef_sym_birr
 	}
-	#pound_irish_pound
+	#colon
 	text = {
-		trigger = { var:zz_ef_cur ?= flag:pound_irish_pound }
-		localization_key = pound_irish_pound_texture
+		trigger = { var:zz_ef_cur_noun ?= flag:colon }
+		localization_key = zz_ef_sym_colon
 	}
-	#pound_sterling
+	#cordoba
 	text = {
-		trigger = { var:zz_ef_cur ?= flag:pound_sterling }
-		localization_key = pound_sterling_texture
+		trigger = { var:zz_ef_cur_noun ?= flag:cordoba }
+		localization_key = zz_ef_sym_cordoba
+	}
+	#cowrie
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:cowrie }
+		localization_key = zz_ef_sym_cowrie
+	}
+	#dinar
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:dinar }
+		localization_key = zz_ef_sym_dinar
+	}
+	#dirham
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:dirham }
+		localization_key = zz_ef_sym_dirham
+	}
+	#dollar
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:dollar }
+		localization_key = zz_ef_sym_dollar
+	}
+	#dong
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:dong }
+		localization_key = zz_ef_sym_dong
+	}
+	#drachma
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:drachma }
+		localization_key = zz_ef_sym_drachma
+	}
+	#dram
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:dram }
+		localization_key = zz_ef_sym_dram
+	}
+	#ducat
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:ducat }
+		localization_key = zz_ef_sym_ducat
+	}
+	#eco
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:eco }
+		localization_key = zz_ef_sym_eco
+	}
+	#florin
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:florin }
+		localization_key = zz_ef_sym_florin
+	}
+	#forint
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:forint }
+		localization_key = zz_ef_sym_forint
+	}
+	#franc
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:franc }
+		localization_key = zz_ef_sym_franc
+	}
+	#guilder
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:guilder }
+		localization_key = zz_ef_sym_guilder
+	}
+	#gulden
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:gulden }
+		localization_key = zz_ef_sym_gulden
+	}
+	#hryvnia
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:hryvnia }
+		localization_key = zz_ef_sym_hryvnia
+	}
+	#kip
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:kip }
+		localization_key = zz_ef_sym_kip
+	}
+	#koruna
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:koruna }
+		localization_key = zz_ef_sym_koruna
+	}
+	#krona
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:krona }
+		localization_key = zz_ef_sym_krona
+	}
+	#krone
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:krone }
+		localization_key = zz_ef_sym_krone
+	}
+	#kroon
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:kroon }
+		localization_key = zz_ef_sym_kroon
+	}
+	#kyat
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:kyat }
+		localization_key = zz_ef_sym_kyat
+	}
+	#lats
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:lats }
+		localization_key = zz_ef_sym_lats
+	}
+	#lek
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:lek }
+		localization_key = zz_ef_sym_lek
+	}
+	#lempira
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:lempira }
+		localization_key = zz_ef_sym_lempira
+	}
+	#leu
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:leu }
+		localization_key = zz_ef_sym_leu
+	}
+	#lev
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:lev }
+		localization_key = zz_ef_sym_lev
+	}
+	#lira
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:lira }
+		localization_key = zz_ef_sym_lira
+	}
+	#litas
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:litas }
+		localization_key = zz_ef_sym_litas
+	}
+	#manat
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:manat }
+		localization_key = zz_ef_sym_manat
+	}
+	#mark
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:mark }
+		localization_key = zz_ef_sym_mark
+	}
+	#markka
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:markka }
+		localization_key = zz_ef_sym_markka
+	}
+	#naira
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:naira }
+		localization_key = zz_ef_sym_naira
+	}
+	#ouguiya
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:ouguiya }
+		localization_key = zz_ef_sym_ouguiya
+	}
+	#peseta
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:peseta }
+		localization_key = zz_ef_sym_peseta
+	}
+	#peso
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:peso }
+		localization_key = zz_ef_sym_peso
+	}
+	#piastre
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:piastre }
+		localization_key = zz_ef_sym_piastre
+	}
+	#pound
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:pound }
+		localization_key = zz_ef_sym_pound
+	}
+	#qiran
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:qiran }
+		localization_key = zz_ef_sym_qiran
+	}
+	#quetzal
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:quetzal }
+		localization_key = zz_ef_sym_quetzal
+	}
+	#rand
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:rand }
+		localization_key = zz_ef_sym_rand
 	}
 	#real
 	text = {
-		trigger = { var:zz_ef_cur ?= flag:real }
-		localization_key = real_texture
+		trigger = { var:zz_ef_cur_noun ?= flag:real }
+		localization_key = zz_ef_sym_real
 	}
-	#real_brazilian_real
+	#riel
 	text = {
-		trigger = { var:zz_ef_cur ?= flag:real_brazilian_real }
-		localization_key = real_brazilian_real_texture
+		trigger = { var:zz_ef_cur_noun ?= flag:riel }
+		localization_key = zz_ef_sym_riel
 	}
-	#rupee_indian_rupee
+	#ringgit
 	text = {
-		trigger = { var:zz_ef_cur ?= flag:rupee_indian_rupee }
-		localization_key = rupee_indian_rupee_texture
+		trigger = { var:zz_ef_cur_noun ?= flag:ringgit }
+		localization_key = zz_ef_sym_ringgit
 	}
-	#rupee_indonesian_rupiah
+	#riyal
 	text = {
-		trigger = { var:zz_ef_cur ?= flag:rupee_indonesian_rupiah }
-		localization_key = rupee_indonesian_rupiah_texture
+		trigger = { var:zz_ef_cur_noun ?= flag:riyal }
+		localization_key = zz_ef_sym_riyal
 	}
-	#spe_baht
+	#ruble
 	text = {
-		trigger = { var:zz_ef_cur ?= flag:spe_baht }
-		localization_key = spe_baht_texture
+		trigger = { var:zz_ef_cur_noun ?= flag:ruble }
+		localization_key = zz_ef_sym_ruble
 	}
-	#spe_dong
+	#rupee
 	text = {
-		trigger = { var:zz_ef_cur ?= flag:spe_dong }
-		localization_key = spe_dong_texture
+		trigger = { var:zz_ef_cur_noun ?= flag:rupee }
+		localization_key = zz_ef_sym_rupee
 	}
-	#spe_drachma
+	#rupiah
 	text = {
-		trigger = { var:zz_ef_cur ?= flag:spe_drachma }
-		localization_key = spe_drachma_texture
+		trigger = { var:zz_ef_cur_noun ?= flag:rupiah }
+		localization_key = zz_ef_sym_rupiah
 	}
-	#spe_korean_won
+	#scudo
 	text = {
-		trigger = { var:zz_ef_cur ?= flag:spe_korean_won }
-		localization_key = spe_korean_won_texture
+		trigger = { var:zz_ef_cur_noun ?= flag:scudo }
+		localization_key = zz_ef_sym_scudo
 	}
-	#spe_latvian_lats
+	#shilling
 	text = {
-		trigger = { var:zz_ef_cur ?= flag:spe_latvian_lats }
-		localization_key = spe_latvian_lats_texture
+		trigger = { var:zz_ef_cur_noun ?= flag:shilling }
+		localization_key = zz_ef_sym_shilling
 	}
-	#spe_lithuanian_litas
+	#sol
 	text = {
-		trigger = { var:zz_ef_cur ?= flag:spe_lithuanian_litas }
-		localization_key = spe_lithuanian_litas_texture
+		trigger = { var:zz_ef_cur_noun ?= flag:sol }
+		localization_key = zz_ef_sym_sol
 	}
-	#spe_peseta
+	#tael
 	text = {
-		trigger = { var:zz_ef_cur ?= flag:spe_peseta }
-		localization_key = spe_peseta_texture
+		trigger = { var:zz_ef_cur_noun ?= flag:tael }
+		localization_key = zz_ef_sym_tael
 	}
-	#spe_ruble
+	#taka
 	text = {
-		trigger = { var:zz_ef_cur ?= flag:spe_ruble }
-		localization_key = spe_ruble_texture
+		trigger = { var:zz_ef_cur_noun ?= flag:taka }
+		localization_key = zz_ef_sym_taka
 	}
-	#spe_uni
+	#talari
 	text = {
-		trigger = { var:zz_ef_cur ?= flag:spe_uni }
-		localization_key = spe_uni_texture
+		trigger = { var:zz_ef_cur_noun ?= flag:talari }
+		localization_key = zz_ef_sym_talari
 	}
-	#spe_yen
+	#tangka
 	text = {
-		trigger = { var:zz_ef_cur ?= flag:spe_yen }
-		localization_key = spe_yen_texture
+		trigger = { var:zz_ef_cur_noun ?= flag:tangka }
+		localization_key = zz_ef_sym_tangka
 	}
-	#spe_yuan
+	#tenge
 	text = {
-		trigger = { var:zz_ef_cur ?= flag:spe_yuan }
-		localization_key = spe_yuan_texture
+		trigger = { var:zz_ef_cur_noun ?= flag:tenge }
+		localization_key = zz_ef_sym_tenge
 	}
-	#spe_zloti
+	#thaler
 	text = {
-		trigger = { var:zz_ef_cur ?= flag:spe_zloti }
-		localization_key = spe_zloti_texture
+		trigger = { var:zz_ef_cur_noun ?= flag:thaler }
+		localization_key = zz_ef_sym_thaler
 	}
-	#thaler_hannoveraner_thaler
+	#tical
 	text = {
-		trigger = { var:zz_ef_cur ?= flag:thaler_hannoveraner_thaler }
-		localization_key = thaler_hannoveraner_thaler_texture
+		trigger = { var:zz_ef_cur_noun ?= flag:tical }
+		localization_key = zz_ef_sym_tical
 	}
-	#thaler_prussian_thaler
+	#tolar
 	text = {
-		trigger = { var:zz_ef_cur ?= flag:thaler_prussian_thaler }
-		localization_key = thaler_prussian_thaler_texture
+		trigger = { var:zz_ef_cur_noun ?= flag:tolar }
+		localization_key = zz_ef_sym_tolar
 	}
-	#thaler_saxon_thaler
+	#toman
 	text = {
-		trigger = { var:zz_ef_cur ?= flag:thaler_saxon_thaler }
-		localization_key = thaler_saxon_thaler_texture
+		trigger = { var:zz_ef_cur_noun ?= flag:toman }
+		localization_key = zz_ef_sym_toman
+	}
+	#tugrik
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:tugrik }
+		localization_key = zz_ef_sym_tugrik
+	}
+	#won
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:won }
+		localization_key = zz_ef_sym_won
+	}
+	#yen
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:yen }
+		localization_key = zz_ef_sym_yen
+	}
+	#yuan
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:yuan }
+		localization_key = zz_ef_sym_yuan
+	}
+	#zloty
+	text = {
+		trigger = { var:zz_ef_cur_noun ?= flag:zloty }
+		localization_key = zz_ef_sym_zloty
+	}
+	#generic
+	text = {
+		localization_key = zz_ef_sym_generic
 	}
 }
 
@@ -2448,969 +2332,7 @@ currency_symbol = {
 ############################################################################################################################################################
 ############################################################################################################################################################
 
-#generic
-currency_symbol_generic = {
-	type = country
-	log_loc_errors = no
 
-	# no var:zz_ef_cur -- the generic symbol
-	text = {
-		trigger = { NOT = { has_variable = zz_ef_cur } }
-		localization_key = spe_uni_texture
-	}
-}
-
-#begin_tag_5
-#dinar
-currency_symbol_dinar = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dinar }
-		localization_key = dinar_texture
-	}
-}
-#dinar_algerian_dinar
-currency_symbol_dinar_algerian_dinar = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dinar_algerian_dinar }
-		localization_key = dinar_algerian_dinar_texture
-	}
-}
-#dinar_iraqi_dinar
-currency_symbol_dinar_iraqi_dinar = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dinar_iraqi_dinar }
-		localization_key = dinar_iraqi_dinar_texture
-	}
-}
-#dinar_libyan_dinar
-currency_symbol_dinar_libyan_dinar = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dinar_libyan_dinar }
-		localization_key = dinar_libyan_dinar_texture
-	}
-}
-#dinar_moroccan_dirham
-currency_symbol_dinar_moroccan_dirham = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dinar_moroccan_dirham }
-		localization_key = dinar_moroccan_dirham_texture
-	}
-}
-#dinar_omanian_rial
-currency_symbol_dinar_omanian_rial = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dinar_omanian_rial }
-		localization_key = dinar_omanian_rial_texture
-	}
-}
-#dinar_qiran
-currency_symbol_dinar_qiran = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dinar_qiran }
-		localization_key = dinar_qiran_texture
-	}
-}
-#dinar_saudi_riyal
-currency_symbol_dinar_saudi_riyal = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dinar_saudi_riyal }
-		localization_key = dinar_saudi_riyal_texture
-	}
-}
-#dinar_serbian_dinar
-currency_symbol_dinar_serbian_dinar = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dinar_serbian_dinar }
-		localization_key = dinar_serbian_dinar_texture
-	}
-}
-#dinar_tunisian_dinar
-currency_symbol_dinar_tunisian_dinar = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dinar_tunisian_dinar }
-		localization_key = dinar_tunisian_dinar_texture
-	}
-}
-#dinar_yugoslav_dinar
-currency_symbol_dinar_yugoslav_dinar = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dinar_yugoslav_dinar }
-		localization_key = dinar_yugoslav_dinar_texture
-	}
-}
-#dollar_australian_dollar
-currency_symbol_dollar_australian_dollar = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dollar_australian_dollar }
-		localization_key = dollar_australian_dollar_texture
-	}
-}
-#dollar_canadian_dollar
-currency_symbol_dollar_canadian_dollar = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dollar_canadian_dollar }
-		localization_key = dollar_canadian_dollar_texture
-	}
-}
-#dollar_caribbean_dollar
-currency_symbol_dollar_caribbean_dollar = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dollar_caribbean_dollar }
-		localization_key = dollar_caribbean_dollar_texture
-	}
-}
-#dollar_confederate_states_dollar
-currency_symbol_dollar_confederate_states_dollar = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dollar_confederate_states_dollar }
-		localization_key = dollar_confederate_states_dollar_texture
-	}
-}
-#dollar_liberian_dollar
-currency_symbol_dollar_liberian_dollar = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dollar_liberian_dollar }
-		localization_key = dollar_liberian_dollar_texture
-	}
-}
-#dollar_new_zealand_dollar
-currency_symbol_dollar_new_zealand_dollar = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dollar_new_zealand_dollar }
-		localization_key = dollar_new_zealand_dollar_texture
-	}
-}
-#dollar_sierra_leonean_dollar
-currency_symbol_dollar_sierra_leonean_dollar = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dollar_sierra_leonean_dollar }
-		localization_key = dollar_sierra_leonean_dollar_texture
-	}
-}
-#dollar_united_states_dollar
-currency_symbol_dollar_united_states_dollar = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:dollar_united_states_dollar }
-		localization_key = dollar_united_states_dollar_texture
-	}
-}
-#eco_ariary
-currency_symbol_eco_ariary = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:eco_ariary }
-		localization_key = eco_ariary_texture
-	}
-}
-#eco_central_african_eco
-currency_symbol_eco_central_african_eco = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:eco_central_african_eco }
-		localization_key = eco_central_african_eco_texture
-	}
-}
-#eco_east_african_eco
-currency_symbol_eco_east_african_eco = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:eco_east_african_eco }
-		localization_key = eco_east_african_eco_texture
-	}
-}
-#eco_ethiopian_birr
-currency_symbol_eco_ethiopian_birr = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:eco_ethiopian_birr }
-		localization_key = eco_ethiopian_birr_texture
-	}
-}
-#eco_ghanaian_pound
-currency_symbol_eco_ghanaian_pound = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:eco_ghanaian_pound }
-		localization_key = eco_ghanaian_pound_texture
-	}
-}
-#eco_nigerian_naira
-currency_symbol_eco_nigerian_naira = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:eco_nigerian_naira }
-		localization_key = eco_nigerian_naira_texture
-	}
-}
-#eco_south_african_rand
-currency_symbol_eco_south_african_rand = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:eco_south_african_rand }
-		localization_key = eco_south_african_rand_texture
-	}
-}
-#eco_tuareg_ouguiya
-currency_symbol_eco_tuareg_ouguiya = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:eco_tuareg_ouguiya }
-		localization_key = eco_tuareg_ouguiya_texture
-	}
-}
-#eco_west_african_eco
-currency_symbol_eco_west_african_eco = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:eco_west_african_eco }
-		localization_key = eco_west_african_eco_texture
-	}
-}
-#franc_belgian_franc
-currency_symbol_franc_belgian_franc = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:franc_belgian_franc }
-		localization_key = franc_belgian_franc_texture
-	}
-}
-#franc_french_franc
-currency_symbol_franc_french_franc = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:franc_french_franc }
-		localization_key = franc_french_franc_texture
-	}
-}
-#franc_luxembourgish_franc
-currency_symbol_franc_luxembourgish_franc = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:franc_luxembourgish_franc }
-		localization_key = franc_luxembourgish_franc_texture
-	}
-}
-#franc_swiss_franc
-currency_symbol_franc_swiss_franc = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:franc_swiss_franc }
-		localization_key = franc_swiss_franc_texture
-	}
-}
-#gulden
-currency_symbol_gulden = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:gulden }
-		localization_key = gulden_texture
-	}
-}
-#gulden_bavarian_gulden
-currency_symbol_gulden_bavarian_gulden = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:gulden_bavarian_gulden }
-		localization_key = gulden_bavarian_gulden_texture
-	}
-}
-#gulden_florin
-currency_symbol_gulden_florin = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:gulden_florin }
-		localization_key = gulden_florin_texture
-	}
-}
-#gulden_hungarian_forint
-currency_symbol_gulden_hungarian_forint = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:gulden_hungarian_forint }
-		localization_key = gulden_hungarian_forint_texture
-	}
-}
-#gulden_indies_guilder
-currency_symbol_gulden_indies_guilder = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:gulden_indies_guilder }
-		localization_key = gulden_indies_guilder_texture
-	}
-}
-#gulden_south_german_gulden
-currency_symbol_gulden_south_german_gulden = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:gulden_south_german_gulden }
-		localization_key = gulden_south_german_gulden_texture
-	}
-}
-#krone_czech_koruna
-currency_symbol_krone_czech_koruna = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:krone_czech_koruna }
-		localization_key = krone_czech_koruna_texture
-	}
-}
-#krone_danish_krone
-currency_symbol_krone_danish_krone = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:krone_danish_krone }
-		localization_key = krone_danish_krone_texture
-	}
-}
-#krone_estonian_kroon
-currency_symbol_krone_estonian_kroon = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:krone_estonian_kroon }
-		localization_key = krone_estonian_kroon_texture
-	}
-}
-#krone_icelandic_krona
-currency_symbol_krone_icelandic_krona = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:krone_icelandic_krona }
-		localization_key = krone_icelandic_krona_texture
-	}
-}
-#krone_norwegian_krone
-currency_symbol_krone_norwegian_krone = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:krone_norwegian_krone }
-		localization_key = krone_norwegian_krone_texture
-	}
-}
-#krone_slovak_koruna
-currency_symbol_krone_slovak_koruna = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:krone_slovak_koruna }
-		localization_key = krone_slovak_koruna_texture
-	}
-}
-#krone_swedish_krona
-currency_symbol_krone_swedish_krona = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:krone_swedish_krona }
-		localization_key = krone_swedish_krona_texture
-	}
-}
-#leon_leu
-currency_symbol_leon_leu = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:leon_leu }
-		localization_key = leon_leu_texture
-	}
-}
-#leon_lev
-currency_symbol_leon_lev = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:leon_lev }
-		localization_key = leon_lev_texture
-	}
-}
-#lira
-currency_symbol_lira = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:lira }
-		localization_key = lira_texture
-	}
-}
-#lira_ducato
-currency_symbol_lira_ducato = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:lira_ducato }
-		localization_key = lira_ducato_texture
-	}
-}
-#lira_ottoman_lira
-currency_symbol_lira_ottoman_lira = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:lira_ottoman_lira }
-		localization_key = lira_ottoman_lira_texture
-	}
-}
-#lira_scudo_pontificio
-currency_symbol_lira_scudo_pontificio = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:lira_scudo_pontificio }
-		localization_key = lira_scudo_pontificio_texture
-	}
-}
-#lira_scudo_sardo
-currency_symbol_lira_scudo_sardo = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:lira_scudo_sardo }
-		localization_key = lira_scudo_sardo_texture
-	}
-}
-#lira_toscane_lira
-currency_symbol_lira_toscane_lira = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:lira_toscane_lira }
-		localization_key = lira_toscane_lira_texture
-	}
-}
-#mark
-currency_symbol_mark = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:mark }
-		localization_key = mark_texture
-	}
-}
-#mark_finnish_markka
-currency_symbol_mark_finnish_markka = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:mark_finnish_markka }
-		localization_key = mark_finnish_markka_texture
-	}
-}
-#peso
-currency_symbol_peso = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso }
-		localization_key = peso_texture
-	}
-}
-#peso_argentine_peso
-currency_symbol_peso_argentine_peso = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_argentine_peso }
-		localization_key = peso_argentine_peso_texture
-	}
-}
-#peso_bolivien_peso
-currency_symbol_peso_bolivien_peso = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_bolivien_peso }
-		localization_key = peso_bolivien_peso_texture
-	}
-}
-#peso_chilean_peso
-currency_symbol_peso_chilean_peso = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_chilean_peso }
-		localization_key = peso_chilean_peso_texture
-	}
-}
-#peso_colombian_peso
-currency_symbol_peso_colombian_peso = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_colombian_peso }
-		localization_key = peso_colombian_peso_texture
-	}
-}
-#peso_costa_rican_colon
-currency_symbol_peso_costa_rican_colon = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_costa_rican_colon }
-		localization_key = peso_costa_rican_colon_texture
-	}
-}
-#peso_cuban_peso
-currency_symbol_peso_cuban_peso = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_cuban_peso }
-		localization_key = peso_cuban_peso_texture
-	}
-}
-#peso_ecuadorian_peso
-currency_symbol_peso_ecuadorian_peso = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_ecuadorian_peso }
-		localization_key = peso_ecuadorian_peso_texture
-	}
-}
-#peso_el_salvador_colon
-currency_symbol_peso_el_salvador_colon = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_el_salvador_colon }
-		localization_key = peso_el_salvador_colon_texture
-	}
-}
-#peso_guatemalan_quetzal
-currency_symbol_peso_guatemalan_quetzal = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_guatemalan_quetzal }
-		localization_key = peso_guatemalan_quetzal_texture
-	}
-}
-#peso_honduran_lempira
-currency_symbol_peso_honduran_lempira = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_honduran_lempira }
-		localization_key = peso_honduran_lempira_texture
-	}
-}
-#peso_mexican_peso
-currency_symbol_peso_mexican_peso = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_mexican_peso }
-		localization_key = peso_mexican_peso_texture
-	}
-}
-#peso_nicaraguan_cordoba
-currency_symbol_peso_nicaraguan_cordoba = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_nicaraguan_cordoba }
-		localization_key = peso_nicaraguan_cordoba_texture
-	}
-}
-#peso_paraguayan_peso
-currency_symbol_peso_paraguayan_peso = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_paraguayan_peso }
-		localization_key = peso_paraguayan_peso_texture
-	}
-}
-#peso_philippine_peso
-currency_symbol_peso_philippine_peso = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_philippine_peso }
-		localization_key = peso_philippine_peso_texture
-	}
-}
-#peso_sol_de_oro
-currency_symbol_peso_sol_de_oro = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_sol_de_oro }
-		localization_key = peso_sol_de_oro_texture
-	}
-}
-#peso_uruguayan_peso
-currency_symbol_peso_uruguayan_peso = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_uruguayan_peso }
-		localization_key = peso_uruguayan_peso_texture
-	}
-}
-#peso_venezuelan_peso
-currency_symbol_peso_venezuelan_peso = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_venezuelan_peso }
-		localization_key = peso_venezuelan_peso_texture
-	}
-}
-#pound_egyptian_pound
-currency_symbol_pound_egyptian_pound = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:pound_egyptian_pound }
-		localization_key = pound_egyptian_pound_texture
-	}
-}
-#pound_irish_pound
-currency_symbol_pound_irish_pound = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:pound_irish_pound }
-		localization_key = pound_irish_pound_texture
-	}
-}
-#pound_sterling
-currency_symbol_pound_sterling = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:pound_sterling }
-		localization_key = pound_sterling_texture
-	}
-}
-#real
-currency_symbol_real = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:real }
-		localization_key = real_texture
-	}
-}
-#real_brazilian_real
-currency_symbol_real_brazilian_real = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:real_brazilian_real }
-		localization_key = real_brazilian_real_texture
-	}
-}
-#rupee_indian_rupee
-currency_symbol_rupee_indian_rupee = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:rupee_indian_rupee }
-		localization_key = rupee_indian_rupee_texture
-	}
-}
-#rupee_indonesian_rupiah
-currency_symbol_rupee_indonesian_rupiah = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:rupee_indonesian_rupiah }
-		localization_key = rupee_indonesian_rupiah_texture
-	}
-}
-#spe_baht
-currency_symbol_spe_baht = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:spe_baht }
-		localization_key = spe_baht_texture
-	}
-}
-#spe_dong
-currency_symbol_spe_dong = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:spe_dong }
-		localization_key = spe_dong_texture
-	}
-}
-#spe_drachma
-currency_symbol_spe_drachma = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:spe_drachma }
-		localization_key = spe_drachma_texture
-	}
-}
-#spe_korean_won
-currency_symbol_spe_korean_won = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:spe_korean_won }
-		localization_key = spe_korean_won_texture
-	}
-}
-#spe_latvian_lats
-currency_symbol_spe_latvian_lats = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:spe_latvian_lats }
-		localization_key = spe_latvian_lats_texture
-	}
-}
-#spe_lithuanian_litas
-currency_symbol_spe_lithuanian_litas = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:spe_lithuanian_litas }
-		localization_key = spe_lithuanian_litas_texture
-	}
-}
-#spe_peseta
-currency_symbol_spe_peseta = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:spe_peseta }
-		localization_key = spe_peseta_texture
-	}
-}
-#spe_ruble
-currency_symbol_spe_ruble = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:spe_ruble }
-		localization_key = spe_ruble_texture
-	}
-}
-#spe_uni
-currency_symbol_spe_uni = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:spe_uni }
-		localization_key = spe_uni_texture
-	}
-}
-#spe_yen
-currency_symbol_spe_yen = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:spe_yen }
-		localization_key = spe_yen_texture
-	}
-}
-#spe_yuan
-currency_symbol_spe_yuan = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:spe_yuan }
-		localization_key = spe_yuan_texture
-	}
-}
-#spe_zloti
-currency_symbol_spe_zloti = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:spe_zloti }
-		localization_key = spe_zloti_texture
-	}
-}
-#thaler_hannoveraner_thaler
-currency_symbol_thaler_hannoveraner_thaler = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:thaler_hannoveraner_thaler }
-		localization_key = thaler_hannoveraner_thaler_texture
-	}
-}
-#thaler_prussian_thaler
-currency_symbol_thaler_prussian_thaler = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:thaler_prussian_thaler }
-		localization_key = thaler_prussian_thaler_texture
-	}
-}
-#thaler_saxon_thaler
-currency_symbol_thaler_saxon_thaler = {
-	type = country
-	log_loc_errors = no
-
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:thaler_saxon_thaler }
-		localization_key = thaler_saxon_thaler_texture
-	}
-}
 #end_tag_5
 
 ############################################################################################################################################################
