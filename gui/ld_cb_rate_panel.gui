@@ -10350,8 +10350,8 @@ types zz_ef_cb_rate_panel
 			############################################################################################################################################################
 			############################################################################################################################################################
 
-			# the exchange (R8б, шаг 8; понятие «Биржа»): quotes of our exchange and the player's order into the book of the
-			# nearest week (common/scripted_guis/ld_exchange_window.txt)
+			# the exchange (R8б, шаги 8, 12; понятие «Биржа»): two tables -- what we hold («Продать») and what is on our
+			# exchange («Купить»); the order goes into the book of the nearest week (common/scripted_guis/ld_exchange_window.txt)
 			default_header = {
 				blockoverride "text" {
 					text = "zz_ef_xwin_title"
@@ -10416,43 +10416,197 @@ types zz_ef_cb_rate_panel
 					text = "zz_ef_xwin_head_b"
 				}
 				textbox = {
-					visible = "[IsDataModelEmpty(GetGlobalList('zz_ef_xwin_list'))]"
+					autoresize = yes
+					margin_top = 6
+					text = "zz_ef_xwin_own_title"
+					tooltip = "zz_ef_xwin_own_title_tt"
+				}
+				flowcontainer = {
+					direction = horizontal
+					spacing = 4
+					textbox = {
+						size = { 170 26 }
+						align = left|nobaseline
+						elide = right
+						default_format = "#bold"
+						text = "zz_ef_xwin_col_country"
+						tooltip = "zz_ef_xwin_col_country_tt"
+					}
+					textbox = {
+						size = { 95 26 }
+						align = right|nobaseline
+						elide = right
+						default_format = "#bold"
+						text = "zz_ef_xwin_col_hold"
+						tooltip = "zz_ef_xwin_col_hold_tt"
+					}
+					textbox = {
+						size = { 80 26 }
+						align = right|nobaseline
+						elide = right
+						default_format = "#bold"
+						text = "zz_ef_xwin_col_fair"
+						tooltip = "zz_ef_xwin_col_fair_tt"
+					}
+					textbox = {
+						size = { 95 26 }
+						align = right|nobaseline
+						elide = right
+						default_format = "#bold"
+						text = "zz_ef_xwin_col_gold"
+						tooltip = "zz_ef_xwin_col_gold_tt"
+					}
+					widget = { size = { 70 26 } }
+				}
+				textbox = {
+					visible = "[IsDataModelEmpty(GetGlobalList('zz_ef_xwin_own'))]"
 					autoresize = yes
 					text = "zz_ef_xwin_empty"
 				}
 				flowcontainer = {
 					direction = vertical
 					spacing = 2
-					datamodel = "[GetGlobalList('zz_ef_xwin_list')]"
+					datamodel = "[GetGlobalList('zz_ef_xwin_own')]"
 					item = {
 						flowcontainer = {
 							direction = horizontal
-							spacing = 6
+							spacing = 4
 							textbox = {
-								autoresize = yes
-								minimumsize = { 150 -1 }
-								raw_text = "[Scope.GetCountry.GetFlagTextIcon] #b [Scope.GetCountry.GetName]#!"
+								size = { 170 26 }
+								align = left|nobaseline
+								elide = right
+								raw_text = "[Scope.GetCountry.GetFlagTextIcon] [Scope.GetCountry.GetName]"
 							}
 							textbox = {
-								autoresize = yes
-								minimumsize = { 230 -1 }
-								text = "zz_ef_xwin_row"
+								size = { 95 26 }
+								align = right|nobaseline
+								elide = right
+								raw_text = "[Scope.GetCountry.MakeScope.Var('zz_ef_xwin_hold').GetValue|D]"
+							}
+							textbox = {
+								size = { 80 26 }
+								align = right|nobaseline
+								elide = right
+								raw_text = "[Scope.GetCountry.MakeScope.Var('zz_ef_xwin_fair').GetValue|3]"
+							}
+							textbox = {
+								size = { 95 26 }
+								align = right|nobaseline
+								elide = right
+								raw_text = "[Scope.GetCountry.MakeScope.Var('zz_ef_xwin_gold').GetValue|D]"
 							}
 							button = {
 								using = default_button
-								size = { 60 26 }
-								text = "zz_ef_xwin_buy"
-								tooltip = "[GetScriptedGui('zz_ef_xwin_buy').BuildTooltip( GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('target', Scope.GetCountry.MakeScope).End )]"
-								enabled = "[GetScriptedGui('zz_ef_xwin_buy').IsValid( GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('target', Scope.GetCountry.MakeScope).End )]"
-								onclick = "[GetScriptedGui('zz_ef_xwin_buy').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('target', Scope.GetCountry.MakeScope).End )]"
-							}
-							button = {
-								using = default_button
-								size = { 60 26 }
+								size = { 70 26 }
 								text = "zz_ef_xwin_sell"
 								tooltip = "[GetScriptedGui('zz_ef_xwin_sell').BuildTooltip( GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('target', Scope.GetCountry.MakeScope).End )]"
 								enabled = "[GetScriptedGui('zz_ef_xwin_sell').IsValid( GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('target', Scope.GetCountry.MakeScope).End )]"
 								onclick = "[GetScriptedGui('zz_ef_xwin_sell').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('target', Scope.GetCountry.MakeScope).End )]"
+							}
+						}
+					}
+				}
+				textbox = {
+					autoresize = yes
+					margin_top = 6
+					text = "zz_ef_xwin_book_title"
+					tooltip = "zz_ef_xwin_book_title_tt"
+				}
+				flowcontainer = {
+					direction = horizontal
+					spacing = 4
+					textbox = {
+						size = { 150 26 }
+						align = left|nobaseline
+						elide = right
+						default_format = "#bold"
+						text = "zz_ef_xwin_col_country"
+						tooltip = "zz_ef_xwin_col_country_tt"
+					}
+					textbox = {
+						size = { 70 26 }
+						align = right|nobaseline
+						elide = right
+						default_format = "#bold"
+						text = "zz_ef_xwin_col_fair"
+						tooltip = "zz_ef_xwin_col_fair_tt"
+					}
+					textbox = {
+						size = { 70 26 }
+						align = right|nobaseline
+						elide = right
+						default_format = "#bold"
+						text = "zz_ef_xwin_col_last"
+						tooltip = "zz_ef_xwin_col_last_tt"
+					}
+					textbox = {
+						size = { 70 26 }
+						align = right|nobaseline
+						elide = right
+						default_format = "#bold"
+						text = "zz_ef_xwin_col_bid"
+						tooltip = "zz_ef_xwin_col_bid_tt"
+					}
+					textbox = {
+						size = { 70 26 }
+						align = right|nobaseline
+						elide = right
+						default_format = "#bold"
+						text = "zz_ef_xwin_col_ask"
+						tooltip = "zz_ef_xwin_col_ask_tt"
+					}
+					widget = { size = { 70 26 } }
+				}
+				textbox = {
+					visible = "[IsDataModelEmpty(GetGlobalList('zz_ef_xwin_book'))]"
+					autoresize = yes
+					text = "zz_ef_xwin_empty"
+				}
+				flowcontainer = {
+					direction = vertical
+					spacing = 2
+					datamodel = "[GetGlobalList('zz_ef_xwin_book')]"
+					item = {
+						flowcontainer = {
+							direction = horizontal
+							spacing = 4
+							textbox = {
+								size = { 150 26 }
+								align = left|nobaseline
+								elide = right
+								raw_text = "[Scope.GetCountry.GetFlagTextIcon] [Scope.GetCountry.GetName]"
+							}
+							textbox = {
+								size = { 70 26 }
+								align = right|nobaseline
+								elide = right
+								raw_text = "[Scope.GetCountry.MakeScope.Var('zz_ef_xwin_fair').GetValue|3]"
+							}
+							textbox = {
+								size = { 70 26 }
+								align = right|nobaseline
+								elide = right
+								raw_text = "[Scope.GetCountry.MakeScope.Var('zz_ef_xwin_last').GetValue|3]"
+							}
+							textbox = {
+								size = { 70 26 }
+								align = right|nobaseline
+								elide = right
+								raw_text = "[Scope.GetCountry.MakeScope.Var('zz_ef_xwin_bid').GetValue|3]"
+							}
+							textbox = {
+								size = { 70 26 }
+								align = right|nobaseline
+								elide = right
+								raw_text = "[Scope.GetCountry.MakeScope.Var('zz_ef_xwin_ask').GetValue|3]"
+							}
+							button = {
+								using = default_button
+								size = { 70 26 }
+								text = "zz_ef_xwin_buy"
+								tooltip = "[GetScriptedGui('zz_ef_xwin_buy').BuildTooltip( GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('target', Scope.GetCountry.MakeScope).End )]"
+								enabled = "[GetScriptedGui('zz_ef_xwin_buy').IsValid( GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('target', Scope.GetCountry.MakeScope).End )]"
+								onclick = "[GetScriptedGui('zz_ef_xwin_buy').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('target', Scope.GetCountry.MakeScope).End )]"
 							}
 						}
 					}

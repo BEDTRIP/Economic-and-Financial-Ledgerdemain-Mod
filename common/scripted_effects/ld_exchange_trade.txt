@@ -348,14 +348,16 @@ zz_ef_xpl_buy_b_read = {
 	}
 }
 
-# Player scope (the window's «update»): the rows of the kind -- our holdings, our buyers' short list; on each row country
-# the fair price in gold a unit, last week's price on our exchange in gold (0 -- no deal), our holding; on the player the
-# exchange's fee and the fund's bid / ask as shares of the fair price, our requests' count.
+# Player scope (the window's «update»): two tables of the kind. «Ours» (global list zz_ef_xwin_own) -- what we hold;
+# «the exchange» (zz_ef_xwin_book) -- the assets cleared on our exchange last week and our buyers' short list (our
+# market's owner, our bloc's leader, the reference, the deepest markets). On each row country: the fair price in gold a
+# unit, last week's price on our exchange (0 -- no deal), the fund's bid / ask in gold, our holding and its worth in gold.
 zz_ef_xwin_fill = {
 	save_temporary_scope_as = zz_ef_xw_root
 	if = { limit = { NOT = { has_variable = zz_ef_xpl_kind } } set_variable = { name = zz_ef_xpl_kind value = 0 } }
 	if = { limit = { NOT = { has_variable = zz_ef_xpl_sum } } set_variable = { name = zz_ef_xpl_sum value = zz_ef_xwin_sum_start } }
-	clear_global_variable_list = zz_ef_xwin_list
+	clear_global_variable_list = zz_ef_xwin_own
+	clear_global_variable_list = zz_ef_xwin_book
 	if = {
 		limit = {
 			zz_ef_xwin_kind_is_money = yes
@@ -363,7 +365,7 @@ zz_ef_xwin_fill = {
 		}
 		every_key_in_variable_map = {
 			variable = zz_ef_rq_cb_m
-			add_to_global_variable_list = { name = zz_ef_xwin_list target = this }
+			add_to_global_variable_list = { name = zz_ef_xwin_own target = this }
 		}
 	}
 	else_if = {
@@ -373,7 +375,37 @@ zz_ef_xwin_fill = {
 		}
 		every_key_in_variable_map = {
 			variable = zz_ef_rq_tr_b
-			add_to_global_variable_list = { name = zz_ef_xwin_list target = this }
+			add_to_global_variable_list = { name = zz_ef_xwin_own target = this }
+		}
+	}
+	if = {
+		limit = { has_variable = zz_ef_xch }
+		var:zz_ef_xch = { save_temporary_scope_as = zz_ef_xch_e }
+		if = {
+			limit = {
+				zz_ef_xwin_kind_is_money = yes
+				scope:zz_ef_xch_e = { has_variable_map = zz_ef_xr_m_c }
+			}
+			scope:zz_ef_xch_e = {
+				every_key_in_variable_map = {
+					variable = zz_ef_xr_m_c
+					save_temporary_scope_as = zz_ef_xw_c
+					scope:zz_ef_xw_root = { zz_ef_xwin_row_add = yes }
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = { zz_ef_xwin_kind_is_money = yes }
+				scope:zz_ef_xch_e = { has_variable_map = zz_ef_xr_b_c }
+			}
+			scope:zz_ef_xch_e = {
+				every_key_in_variable_map = {
+					variable = zz_ef_xr_b_c
+					save_temporary_scope_as = zz_ef_xw_c
+					scope:zz_ef_xw_root = { zz_ef_xwin_row_add = yes }
+				}
+			}
 		}
 	}
 	if = {
@@ -397,66 +429,81 @@ zz_ef_xwin_fill = {
 		save_temporary_scope_as = zz_ef_xw_c
 		scope:zz_ef_xw_root = { zz_ef_xwin_row_add = yes }
 	}
-	if = {
-		limit = { has_variable = zz_ef_xch }
-		var:zz_ef_xch = { save_temporary_scope_as = zz_ef_xch_e }
+	every_in_global_list = {
+		variable = zz_ef_xwin_own
+		zz_ef_xwin_row_set = yes
 	}
 	every_in_global_list = {
-		variable = zz_ef_xwin_list
-		save_temporary_scope_as = zz_ef_rq_key
-		set_variable = { name = zz_ef_xwin_hold value = 0 }
-		set_variable = { name = zz_ef_xwin_last value = 0 }
-		scope:zz_ef_xw_root = {
-			if = {
-				limit = { zz_ef_xwin_kind_is_money = yes }
-				zz_ef_rq_cb_m_read = yes
-			}
-			else = {
-				zz_ef_rq_tr_b_read = yes
-			}
-		}
-		set_variable = { name = zz_ef_xwin_hold value = scope:zz_ef_xw_root.var:zz_ef_rq_h }
+		variable = zz_ef_xwin_book
+		limit = { NOT = { is_target_in_global_variable_list = { name = zz_ef_xwin_own target = this } } }
+		zz_ef_xwin_row_set = yes
+	}
+}
+# Row country scope, scope:zz_ef_xw_root (the player), scope:zz_ef_xch_e (its exchange, if any): the row's numbers
+zz_ef_xwin_row_set = {
+	save_temporary_scope_as = zz_ef_rq_key
+	set_variable = { name = zz_ef_xwin_hold value = 0 }
+	set_variable = { name = zz_ef_xwin_last value = 0 }
+	scope:zz_ef_xw_root = {
 		if = {
-			limit = { scope:zz_ef_xw_root = { zz_ef_xwin_kind_is_money = yes } }
-			set_variable = { name = zz_ef_xwin_fair value = zz_ef_xq_gold_m }
-			if = {
-				limit = { exists = scope:zz_ef_xch_e }
-				scope:zz_ef_xch_e = { zz_ef_xr_m_c_read = yes }
-			}
+			limit = { zz_ef_xwin_kind_is_money = yes }
+			zz_ef_rq_cb_m_read = yes
 		}
 		else = {
-			set_variable = { name = zz_ef_xwin_fair value = zz_ef_xq_gold_b }
-			if = {
-				limit = { exists = scope:zz_ef_xch_e }
-				scope:zz_ef_xch_e = { zz_ef_xr_b_c_read = yes }
-			}
+			zz_ef_rq_tr_b_read = yes
 		}
+	}
+	set_variable = { name = zz_ef_xwin_hold value = scope:zz_ef_xw_root.var:zz_ef_rq_h }
+	if = {
+		limit = { scope:zz_ef_xw_root = { zz_ef_xwin_kind_is_money = yes } }
+		set_variable = { name = zz_ef_xwin_fair value = zz_ef_xq_gold_m }
 		if = {
-			limit = {
-				exists = scope:zz_ef_xch_e
-				scope:zz_ef_xch_e.var:zz_ef_rq_h > 0
-			}
-			set_variable = {
-				name = zz_ef_xwin_last
-				value = {
-					value = scope:zz_ef_xch_e.var:zz_ef_rq_h
-					subtract = zz_ef_xq_mid
-					multiply = zz_ef_xq_w
-					add = 1
-					multiply = var:zz_ef_xwin_fair
-				}
+			limit = { exists = scope:zz_ef_xch_e }
+			scope:zz_ef_xch_e = { zz_ef_xr_m_c_read = yes }
+		}
+	}
+	else = {
+		set_variable = { name = zz_ef_xwin_fair value = zz_ef_xq_gold_b }
+		if = {
+			limit = { exists = scope:zz_ef_xch_e }
+			scope:zz_ef_xch_e = { zz_ef_xr_b_c_read = yes }
+		}
+	}
+	if = {
+		limit = {
+			exists = scope:zz_ef_xch_e
+			scope:zz_ef_xch_e.var:zz_ef_rq_h > 0
+		}
+		set_variable = {
+			name = zz_ef_xwin_last
+			value = {
+				value = scope:zz_ef_xch_e.var:zz_ef_rq_h
+				subtract = zz_ef_xq_mid
+				multiply = zz_ef_xq_w
+				add = 1
+				multiply = var:zz_ef_xwin_fair
 			}
 		}
 	}
+	set_variable = { name = zz_ef_xwin_gold value = { value = var:zz_ef_xwin_hold multiply = var:zz_ef_xwin_fair } }
+	# the fund holds money only: bonds -- no quotes
+	set_variable = { name = zz_ef_xwin_bid value = 0 }
+	set_variable = { name = zz_ef_xwin_ask value = 0 }
+	if = {
+		limit = { scope:zz_ef_xw_root = { zz_ef_xwin_kind_is_money = yes } }
+		set_variable = { name = zz_ef_xwin_bid value = { value = var:zz_ef_xwin_fair multiply = scope:zz_ef_xw_root.zz_ef_xwin_bid_v } }
+		set_variable = { name = zz_ef_xwin_ask value = { value = var:zz_ef_xwin_fair multiply = scope:zz_ef_xw_root.zz_ef_xwin_ask_v } }
+	}
 }
-# Player scope, scope:zz_ef_xw_c: a row of the window, once
+# Player scope, scope:zz_ef_xw_c: a row of the exchange's table, once
 zz_ef_xwin_row_add = {
 	if = {
 		limit = {
+			NOT = { scope:zz_ef_xw_c = this }
 			scope:zz_ef_xw_c = { zz_ef_has_currency_value = yes }
-			NOT = { is_target_in_global_variable_list = { name = zz_ef_xwin_list target = scope:zz_ef_xw_c } }
+			NOT = { is_target_in_global_variable_list = { name = zz_ef_xwin_book target = scope:zz_ef_xw_c } }
 		}
-		add_to_global_variable_list = { name = zz_ef_xwin_list target = scope:zz_ef_xw_c }
+		add_to_global_variable_list = { name = zz_ef_xwin_book target = scope:zz_ef_xw_c }
 	}
 }
 
