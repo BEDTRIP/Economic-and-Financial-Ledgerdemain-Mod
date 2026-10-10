@@ -2,28 +2,50 @@
 **Смысл.** Где мод входит в движок: хуки `on_actions`, история, планировщик, порядок шагов, логи. **Понятия:**
 [[Планировщик]], [[Старт игры]], [[Новая страна]], [[Мост GUI]], [[Роли стран]].
 
-Мод подключается к движку через ванильные хуки `on_actions` (месячный/полугодовой/годовой/5-летний пульс страны, старт игры, создание страны, смена PM, бой) и через GLOBAL-блоки `common/history/*`. E&F вешает на хуки по одному «корневому» on_action, `ld_*` и PSC добавляют свои. Недельного пульса страны в движке нет: недельную цепочку модели денег ведёт самовозобновляемый on_action (`trigger_event = { on_action = ... days = 7 }`).
+Мод подключается к движку через ванильные хуки `on_actions` (месячный/полугодовой/годовой/5-летний пульс страны, старт
+игры, создание страны, смена PM, бой) и через GLOBAL-блоки `common/history/*`. E&F вешает на хуки по одному «корневому»
+on_action, `ld_*` и PSC добавляют свои. Недельного пульса страны в движке нет: недельную цепочку модели денег ведёт
+самовозобновляемый on_action (`trigger_event = { on_action = ... days = 7 }`).
 
 ## Файлы
-- `common/on_actions/00_ef_on_action.txt` — корневые on_action E&F (`ef_on_*_pulse_country`, `ef_on_production_method_changed`, `ef_on_battle_ended`, `com_topbar_setup_ef`).
-- `common/on_actions/PSC_on_actions.txt` — PSC: распределение очков стройки по дням месяца, пересчёт метода конверсии при смене PM/технологии/постройке сектора.
-- `common/on_actions/ld_*_on_actions.txt` — `ld_bank`, `ld_bubble`, `ld_capitalization`, `ld_cb_rate`, `ld_money_model` — месячные хуки модели; `common/on_actions/ld_new_country_immediate_init.txt`, `ld_stockpile_state_var_init` — инициализация переменных; `ld_pb_ai_sector_downsize`, `ld_pb_overbuild_counter` — штраф перестройки (PSC). Имена on_action и эффектов внутри сохранили префикс `zz_ef_*` / `zz_pb_ef_*`.
-- `common/scripted_effects/00_on_action_main.txt` — 15 тыс. строк: все эффекты, которые зовут `ef_on_*`: пульсы ЦБ/ФЦ, ИИ-торговля валютой, ИИ-стройка, инфляция, исторические события по датам, сбросы счётчиков кризисов.
-- `common/scripted_effects/10_new_country_var.txt` — `new_country_var_ef`: заводит все переменные страны и её штатов (15 тыс. строк); части — `new_country_var_ef_state` (штат; только не заданное), `_economy`, `_financial`, `_stockpile` — их же вызывает история.
-- `common/scripted_effects/ld_country_init.txt` — `zz_ef_country_init` (одна точка «страна появилась», любой root), `zz_ef_country_vars_init` (root — страна).
-- `common/history/global/*.txt`, `common/history/states/01_ef_states.txt`, `common/history/buildings/*.txt` — стартовые данные (см. «Старт игры»).
-- `events/ld_new_country_immediate_init_events.txt` — скрытое событие `zz_ef_newcountry.1` (root — страна для `zz_ef_country_vars_init`).
-- `events/ld_world_month_events.txt` — скрытое событие `ld_world_month.1` (мировое E&F месяца у страны №1 по рангу, `ld_world_month.txt`).
-- `events/ld_start_setup_events.txt` — скрытые события `ld_start_setup.1` / `.2` (настройка старта E&F каждой стране при новой игре, root — страна).
-- `events/00_ef_economic_event.txt` — события E&F (запускаются из `ef_on_yearly_pulse_event_at_date` и эффектов); описаны в подсистеме ef-core.
+- `common/on_actions/00_ef_on_action.txt` — корневые on_action E&F (`ef_on_*_pulse_country`,
+  `ef_on_production_method_changed`, `ef_on_battle_ended`, `com_topbar_setup_ef`).
+- `common/on_actions/PSC_on_actions.txt` — PSC: распределение очков стройки по дням месяца, пересчёт метода конверсии
+  при смене PM/технологии/постройке сектора.
+- `common/on_actions/ld_*_on_actions.txt` — `ld_bank`, `ld_bubble`, `ld_capitalization`, `ld_cb_rate`, `ld_money_model`
+  — месячные хуки модели; `common/on_actions/ld_new_country_immediate_init.txt`, `ld_stockpile_state_var_init` —
+  инициализация переменных; `ld_pb_ai_sector_downsize`, `ld_pb_overbuild_counter` — штраф перестройки (PSC). Имена
+  on_action и эффектов внутри сохранили префикс `zz_ef_*` / `zz_pb_ef_*`.
+- `common/scripted_effects/00_on_action_main.txt` — 15 тыс. строк: все эффекты, которые зовут `ef_on_*`: пульсы ЦБ/ФЦ,
+  ИИ-торговля валютой, ИИ-стройка, инфляция, исторические события по датам, сбросы счётчиков кризисов.
+- `common/scripted_effects/10_new_country_var.txt` — `new_country_var_ef`: заводит все переменные страны и её штатов (15
+  тыс. строк); части — `new_country_var_ef_state` (штат; только не заданное), `_economy`, `_financial`, `_stockpile` —
+  их же вызывает история.
+- `common/scripted_effects/ld_country_init.txt` — `zz_ef_country_init` (одна точка «страна появилась», любой root),
+  `zz_ef_country_vars_init` (root — страна).
+- `common/history/global/*.txt`, `common/history/states/01_ef_states.txt`, `common/history/buildings/*.txt` — стартовые
+  данные (см. «Старт игры»).
+- `events/ld_new_country_immediate_init_events.txt` — скрытое событие `zz_ef_newcountry.1` (root — страна для
+  `zz_ef_country_vars_init`).
+- `events/ld_world_month_events.txt` — скрытое событие `ld_world_month.1` (мировое E&F месяца у страны №1 по рангу,
+  `ld_world_month.txt`).
+- `events/ld_start_setup_events.txt` — скрытые события `ld_start_setup.1` / `.2` (настройка старта E&F каждой стране при
+  новой игре, root — страна).
+- `events/00_ef_economic_event.txt` — события E&F (запускаются из `ef_on_yearly_pulse_event_at_date` и эффектов);
+  описаны в подсистеме ef-core.
 
 ## Поток / порядок
-Все хуки списочные: порядок выполнения on_action из разных файлов не гарантирован (имена файлов не задают порядок; `ld_capitalization_on_actions.txt` собирает шаги в ОДИН on_action именно ради порядка). Пульсы размазаны по дням: месячный пересчитывает ~1/30 стран в день, годовой — ~1/365.
+Все хуки списочные: порядок выполнения on_action из разных файлов не гарантирован (имена файлов не задают порядок;
+`ld_capitalization_on_actions.txt` собирает шаги в ОДИН on_action именно ради порядка). Пульсы размазаны по дням:
+месячный пересчитывает ~1/30 стран в день, годовой — ~1/365.
 
 ### При старте игры (новая кампания)
-Порядок обработки: `common/history/countries/*` (технологии) → `common/history/buildings/*` (до global!) → `history/global/*` (по имени файла) → `history/states`.
+Порядок обработки: `common/history/countries/*` (технологии) → `common/history/buildings/*` (до global!) →
+`history/global/*` (по имени файла) → `history/states`.
 
-`history/countries/ld_start_technologies.txt` — технологии стартовых денежных законов 36 стран (34 ЦБ истории: `banking`, `currency_standards`, `central_banking`, `metalique_standard`; PBC, WUR — без `central_banking`): проверка законов движком видит технологии истории стран, а не выданные скриптом истории.
+`history/countries/ld_start_technologies.txt` — технологии стартовых денежных законов 36 стран (34 ЦБ истории:
+`banking`, `currency_standards`, `central_banking`, `metalique_standard`; PBC, WUR — без `central_banking`): проверка
+законов движком видит технологии истории стран, а не выданные скриптом истории.
 | шаг | файл | что делает |
 |---|---|---|
 | 1 | `history/buildings/00_a_ef_history_var_init.txt` | заводит `country_already_financial_center=0`, `gdp_view_fc=5`, пока global ещё не отработал (иначе `financial_center_modifier` читает пустую переменную) |
@@ -39,7 +61,14 @@
 | 10 | `history/global/ld_start_currency_standards.txt` | после 99: `currency_standards` странам с подушным налогом |
 | 11 | `history/global/zz_ef_init_stockpiling_state_vars.txt` | заводит 7 переменных `stockpiling_*_var_state_1` штатам (охрана `has_variable`) |
 | 12 | `history/states/01_ef_states.txt` | `s:STATE_X = add_modifier silver_mine_max_level` (60 штатов, множитель = макс. уровень серебряной шахты) |
-После лобби `on_game_started_after_lobby`: `com_topbar_setup_ef` (E&F: добавляет 7 элементов верхней панели `com_topbar_element_inflation / law_*_standard / law_subject` и ставит их всем странам в `com_topbar_second_line`) `zz_ef_sched_start` (`ld_scheduler_on_actions.txt`: планировщик — зонд бюджетного тика; на первом тике после первой недели (не раньше 8.1) `zz_ef_sched_probe_step` делает настройку старта E&F один раз — каждой стране скрытые события `ld_start_setup.1` (из годового пульса) и `.2` (месячный хаб), `ld_start_setup.txt`, `events/ld_start_setup_events.txt`, — шаги модели со следующего дня) и `zz_ef_init_stockpile_state_vars` (`ld_stockpile_state_var_init.txt`: `zz_ef_seed_stockpile_state_vars` — проход `every_state` для старых сейвов). PSC: `set_construction_start` (из history) → `set_construction_weekly_on_action` + `set_construction_country` для каждой страны.
+После лобби `on_game_started_after_lobby`: `com_topbar_setup_ef` (E&F: добавляет 7 элементов верхней панели
+`com_topbar_element_inflation / law_*_standard / law_subject` и ставит их всем странам в `com_topbar_second_line`)
+`zz_ef_sched_start` (`ld_scheduler_on_actions.txt`: планировщик — зонд бюджетного тика; на первом тике после первой
+недели (не раньше 8.1) `zz_ef_sched_probe_step` делает настройку старта E&F один раз — каждой стране скрытые события
+`ld_start_setup.1` (из годового пульса) и `.2` (месячный хаб), `ld_start_setup.txt`, `events/ld_start_setup_events.txt`,
+— шаги модели со следующего дня) и `zz_ef_init_stockpile_state_vars` (`ld_stockpile_state_var_init.txt`:
+`zz_ef_seed_stockpile_state_vars` — проход `every_state` для старых сейвов). PSC: `set_construction_start` (из history)
+→ `set_construction_weekly_on_action` + `set_construction_country` для каждой страны.
 
 ### При создании страны
 | ванильный хук | эффекты | подсистема |
@@ -49,10 +78,13 @@
 | `on_country_released_as_independent / _own_subject / _company_subject / _overlord_subject` | `zz_ef_newcountry_on_*` → `scope:target = { zz_ef_country_init }` | то же (root здесь — сюзерен; переменные — в событии, root — новая страна) |
 | первый заход планировщика (страны А / Б) | `zz_ef_sched_slot_assign` → `zz_ef_country_init` (реестр счетов; переменные, если их нет) | инициализация страны |
 | месячный пульс (страна без хука — создана событием) | `ef_on_monthly_pulse_recurence` (`00_on_action_main.txt`): нет `zz_ef_country_vars_set` → `zz_ef_country_vars_init`; при отсутствии банка — `law_no_monetary_system` + `law_no_market_liquidity`; при наличии — `remove_building building_bank`, `central_bank_modifier`, те же законы; `foreign_exchange_controls` на 23 месяца | инициализация / валютный режим |
-Идемпотентность: переменные — по `zz_ef_country_vars_set` (флаг ставит сам `new_country_var_ef`), реестр — по `zz_ef_registry`. Порядок внутри `new_country_var_ef`: состояния, экономика, финансы, грабёж (`looting_1_year`).
+Идемпотентность: переменные — по `zz_ef_country_vars_set` (флаг ставит сам `new_country_var_ef`), реестр — по
+`zz_ef_registry`. Порядок внутри `new_country_var_ef`: состояния, экономика, финансы, грабёж (`looting_1_year`).
 
 ### Месячный пульс страны (`on_monthly_pulse_country`)
-На хуке — только `zz_ef_monthly_unscheduled` (`ld_scheduler_on_actions.txt`, вместо `ef_on_monthly_pulse_country` в `00_ef_on_action.txt`): страны вне планировщика (В, без роли, цепочка не запущена). Страны А / Б получают месячные шаги из планировщика (`zz_ef_sched_monthly`) в порядке таблицы ниже, раз в календарный месяц, в свой день месяца:
+На хуке — только `zz_ef_monthly_unscheduled` (`ld_scheduler_on_actions.txt`, вместо `ef_on_monthly_pulse_country` в
+`00_ef_on_action.txt`): страны вне планировщика (В, без роли, цепочка не запущена). Страны А / Б получают месячные шаги
+из планировщика (`zz_ef_sched_monthly`) в порядке таблицы ниже, раз в календарный месяц, в свой день месяца:
 | on_action | эффекты по порядку | подсистема |
 |---|---|---|
 | `ef_on_monthly_pulse_country` (E&F) | 1) `ef_on_monthly_pulse_recurence`: `update_modifiers_bc_fc_ns`, `com_topbar_save_game_compatibility_EF`, `remove_suject_currency`/`subject_currency` (валюта сюзерена для подданных), `is_at_war_monthly_pulse`, `is_in_revolution_monthly_pulse`, `maximum_number_companies_exceeded_monthly_pulse`, блоки «новая страна» (см. выше); 2) если `has_central_bank`: `central_bank_ef_on_monthly_pulse_country` (ниже) | ядро E&F |
@@ -66,11 +98,22 @@
 | `zz_pb_ef_ai_sector_downsize` (`ld_pb_ai_sector_downsize`; условие: ИИ, `base_rate_percentage`) | таймер `zz_pb_ef_ai_downsize_timer`, раз в 3 мес. при `speculative_share_2>=10` и избытке секторов — `zz_pb_ef_css_downsize_one` | PSC: перестройка |
 | `zz_pb_ef_overbuild_counter` (`ld_pb_overbuild_counter`) | индекс `speculative_share_2` (шаг `zz_pb_ef_overbuild_step`), модификатор `zz_pb_ef_overbuilt_economy`, уведомление `zz_pb_ef_overbuild_rising`, полоса JE | PSC: перестройка |
 | `zz_ef_init_stockpile_state_vars_monthly_backstop` (`ld_stockpile_state_var_init`) | `zz_ef_seed_stockpile_state_vars_backstop` — один проход за игру по глобальной переменной | инициализация |
-Хук `on_monthly_pulse` (не страновый) — роли стран `zz_ef_roles_monthly` (`common/on_actions/ld_roles_on_actions.txt` → `zz_ef_roles_world_pass`, `money-model.md`, «Роли»); PSC: `set_construction_weekly_on_action` (раскладывает `set_construction_country` и `set_spending_value` по дням месяца через `delay_event_switch`).
+Хук `on_monthly_pulse` (не страновый) — роли стран `zz_ef_roles_monthly` (`common/on_actions/ld_roles_on_actions.txt` →
+`zz_ef_roles_world_pass`, `money-model.md`, «Роли»); PSC: `set_construction_weekly_on_action` (раскладывает
+`set_construction_country` и `set_spending_value` по дням месяца через `delay_event_switch`).
 
 ### Планировщик модели денег (недельные и месячные шаги)
-Одна глобальная цепочка `zz_ef_sched_day` (`common/on_actions/ld_scheduler_on_actions.txt`, `common/scripted_effects/ld_scheduler.txt`) на якорной стране от дня бюджетного тика: день недели `zz_ef_sched_d`, номер недели `zz_ef_sched_week`; А — недельный шаг `zz_ef_money_model_step` в свой день `zz_ef_week_slot`, Б — тоже каждую неделю (фаза `zz_ef_week_phase` задаёт неделю моста у Б — раз в 4 — и день месячных шагов); месячные шаги (хаб E&F и `ld_*`) — раз в календарный месяц в свой день месяца `zz_ef_m_offset`, порядок фиксирован (`zz_ef_sched_monthly`); мировой проход (окна мировой строки и клиринга) — в конце дня 6. Подробно — `money-model.md`, «Поток / порядок», п. 0. Порядок в `zz_ef_money_model_step` (`ld_money_model.txt`): `zz_ef_probe_newyear_cash`, `zz_ef_fx_metal_update`, `zz_ef_cbfx_week_step`, `zz_ef_cb_state_owner_step`, `zz_ef_bond_ledger_step`, `zz_ef_metal_start_step` (+ `_cb_before`, `_cb_after`, `zz_ef_metal_start_log`), `zz_ef_cb_metal_start_step`, `zz_ef_consol_step`, `zz_ef_business_credit_step`, `zz_ef_metal_week_step`, далее агрегаты M0..M3 и лог EFW; `zz_ef_money_hook_receive` вызывается из моста GUI.
-PSC-хук: `on_production_method_changed`, `on_building_built`, `on_acquired_technology` (см. PSC).
+Одна глобальная цепочка `zz_ef_sched_day` (`common/on_actions/ld_scheduler_on_actions.txt`,
+`common/scripted_effects/ld_scheduler.txt`) на якорной стране от дня бюджетного тика: день недели `zz_ef_sched_d`, номер
+недели `zz_ef_sched_week`; А — недельный шаг `zz_ef_money_model_step` в свой день `zz_ef_week_slot`, Б — тоже каждую
+неделю (фаза `zz_ef_week_phase` задаёт неделю моста у Б — раз в 4 — и день месячных шагов); месячные шаги (хаб E&F и
+`ld_*`) — раз в календарный месяц в свой день месяца `zz_ef_m_offset`, порядок фиксирован (`zz_ef_sched_monthly`);
+мировой проход (окна мировой строки и клиринга) — в конце дня 6. Подробно — `money-model.md`, «Поток / порядок», п. 0.
+Порядок в `zz_ef_money_model_step` (`ld_money_model.txt`): `zz_ef_probe_newyear_cash`, `zz_ef_fx_metal_update`,
+`zz_ef_cbfx_week_step`, `zz_ef_cb_state_owner_step`, `zz_ef_bond_ledger_step`, `zz_ef_metal_start_step` (+ `_cb_before`,
+`_cb_after`, `zz_ef_metal_start_log`), `zz_ef_cb_metal_start_step`, `zz_ef_consol_step`, `zz_ef_business_credit_step`,
+`zz_ef_metal_week_step`, далее агрегаты M0..M3 и лог EFW; `zz_ef_money_hook_receive` вызывается из моста GUI. PSC-хук:
+`on_production_method_changed`, `on_building_built`, `on_acquired_technology` (см. PSC).
 
 ### Полугодовой пульс (`on_half_yearly_pulse_country`)
 `ef_on_half_yearly_pulse_country`:
@@ -82,10 +125,28 @@ PSC-хук: `on_production_method_changed`, `on_building_built`, `on_acquired_te
 | `global_monetary_reference` | `money_value_global_var` |
 
 ### Годовой пульс (`on_yearly_pulse_country`)
-`ef_on_yearly_pulse_country` по порядку: (держатель `global_monetary_reference`) `national_capacity_variable_list`, `country_index_variable_list`, `central_bank_debt_variable_list`, `currency_law_list`, `median_currency_value`, `global_monetary_reference_1` → `ef_on_yearly_pulse_recurence` (`fluctuations_gdp_5_year`, `_10_year`, `is_at_war_years_pulse`) → `ef_on_yearly_pulse_reset` (сбросы лимитов, `looting_1_year_on_action` — `common/scripted_effects/01_stockpile_scripted_effects.txt`, обнуление годового счётчика грабежа, 29× `clear_<good>_contract_1_year`) → `central_bank_ef_on_yearly_pulse_country` (проценты ЦБ в золоте, накопленная инфляция, `monetary_systeme_transition` для ИИ, `credit_at_central_bank_interest_per_week[_off]`, `central_bank_production_methods`, `_3` для золотого обменного стандарта, `money_value_target_modification`, `extreme_weak_currency_solution[_player]`, `establish_bank_and_ef_compagnie` для ИИ, `*_count_reset_condition`, арбитраж биметаллизма до 1873 `private_bank_arbitrage_gold_drain/_silver_drain`) → `financial_center_ef_on_yearly_pulse_country` (`private_ownership_production_stocks`, `financial_center_production_methods`, `ai_buy_central_bank_debt`, `sovereign_bond_yields`, `bond_maturity_on_action`, `financial_crash_count_reset_condition`) → `country_credit_rating` (ранг ≥ unrecognized_power) → `gdp_view_on_action`, `macro_facilities_on_action_bc`, `has_tech_central_bank_but_no_building_central_bank`, `has_currency_law_but_no_building_central_bank`, `gdp_view_on_action_fc`, `has_tech_financial_center_but_no_building_financial_center`, `has_second_financial_center` → `ef_on_yearly_pulse_event_at_date` (исторические события по датам: объединение Германии/Италии, события `00_ef_economic_event.5..65`, `silver_crisis_progress`).
+`ef_on_yearly_pulse_country` по порядку: (держатель `global_monetary_reference`) `national_capacity_variable_list`,
+`country_index_variable_list`, `central_bank_debt_variable_list`, `currency_law_list`, `median_currency_value`,
+`global_monetary_reference_1` → `ef_on_yearly_pulse_recurence` (`fluctuations_gdp_5_year`, `_10_year`,
+`is_at_war_years_pulse`) → `ef_on_yearly_pulse_reset` (сбросы лимитов, `looting_1_year_on_action` —
+`common/scripted_effects/01_stockpile_scripted_effects.txt`, обнуление годового счётчика грабежа, 29×
+`clear_<good>_contract_1_year`) → `central_bank_ef_on_yearly_pulse_country` (проценты ЦБ в золоте, накопленная инфляция,
+`monetary_systeme_transition` для ИИ, `credit_at_central_bank_interest_per_week[_off]`,
+`central_bank_production_methods`, `_3` для золотого обменного стандарта, `money_value_target_modification`,
+`extreme_weak_currency_solution[_player]`, `establish_bank_and_ef_compagnie` для ИИ, `*_count_reset_condition`, арбитраж
+биметаллизма до 1873 `private_bank_arbitrage_gold_drain/_silver_drain`) → `financial_center_ef_on_yearly_pulse_country`
+(`private_ownership_production_stocks`, `financial_center_production_methods`, `ai_buy_central_bank_debt`,
+`sovereign_bond_yields`, `bond_maturity_on_action`, `financial_crash_count_reset_condition`) → `country_credit_rating`
+(ранг ≥ unrecognized_power) → `gdp_view_on_action`, `macro_facilities_on_action_bc`,
+`has_tech_central_bank_but_no_building_central_bank`, `has_currency_law_but_no_building_central_bank`,
+`gdp_view_on_action_fc`, `has_tech_financial_center_but_no_building_financial_center`, `has_second_financial_center` →
+`ef_on_yearly_pulse_event_at_date` (исторические события по датам: объединение Германии/Италии, события
+`00_ef_economic_event.5..65`, `silver_crisis_progress`).
 
 ### 5-летний пульс
-- `on_five_year_pulse_country` → `ef_on_five_year_pulse_country`: ЦБ — `central_bank_ef_on_five_year_pulse_country` (ИИ не подданный: `money_value_target_modification`; страна №1: `scandinavian_leader_list_1_list`); ФЦ — `fiancial_center_ef_on_five_year_pulse_country` (`position_regulator`).
+- `on_five_year_pulse_country` → `ef_on_five_year_pulse_country`: ЦБ — `central_bank_ef_on_five_year_pulse_country` (ИИ
+  не подданный: `money_value_target_modification`; страна №1: `scandinavian_leader_list_1_list`); ФЦ —
+  `fiancial_center_ef_on_five_year_pulse_country` (`position_regulator`).
 
 ### Прочие хуки
 | хук | on_action → эффекты |
@@ -110,14 +171,32 @@ PSC-хук: `on_production_method_changed`, `on_building_built`, `on_acquired_te
 | `global_monetary_reference` (модификатор) | единственная страна — держатель общих списков/медианы | `global_monetary_reference_1` | `ef_on_*` гейты |
 
 ## Вызовы и связи
-- Модель денег `ld_*`: месячные хуки зовут эффекты из `common/scripted_effects/ld_*.txt`; из тел E&F зовутся `zz_ef_cb_rate_step`, `zz_ef_std_switch_before/after`, `zz_ef_mp_init/_clear`, `zz_ef_crisis_redeem` (в `01_economic_scripted_effects.txt`), `zz_ef_cur_intro_after` (в `09_introduction_building_lvl.txt`).
-- Эффекты E&F, пишущие `gold_state_1` / `silver_state_1` ЦБ-штата (счета модели): `enemy_capital_is_occuped`, `zz_ef_crisis_redeem` (через `zz_ef_rq_crisis_resell`), стартовые значения `99_ef_history_global_variable.txt`.
-- GUI: верхняя панель — `com_topbar_setup_ef`; пульсы GUI не вызывают, но scripted_guis зовут `reset_*`, `stockpiling_capital_state_transfert`, `reset_debt_in_national_currency_player`.
+- Модель денег `ld_*`: месячные хуки зовут эффекты из `common/scripted_effects/ld_*.txt`; из тел E&F зовутся
+  `zz_ef_cb_rate_step`, `zz_ef_std_switch_before/after`, `zz_ef_mp_init/_clear`, `zz_ef_crisis_redeem` (в
+  `01_economic_scripted_effects.txt`), `zz_ef_cur_intro_after` (в `09_introduction_building_lvl.txt`).
+- Эффекты E&F, пишущие `gold_state_1` / `silver_state_1` ЦБ-штата (счета модели): `enemy_capital_is_occuped`,
+  `zz_ef_crisis_redeem` (через `zz_ef_rq_crisis_resell`), стартовые значения `99_ef_history_global_variable.txt`.
+- GUI: верхняя панель — `com_topbar_setup_ef`; пульсы GUI не вызывают, но scripted_guis зовут `reset_*`,
+  `stockpiling_capital_state_transfert`, `reset_debt_in_national_currency_player`.
 
 ## Логи
-Логи пишутся `debug_log` в `game.log`/`debug.log`, формат `EFx|дата|страна|метка|поле значение|…`. **Все записи — только при условии `zz_ef_logs_on`** (`common/scripted_triggers/ld_logs_triggers.txt`): правило игры «Ledgerdemain: отладочные журналы» (`common/game_rules/ld_game_rules.txt`, по умолчанию выключено; локализация `ld_game_rules_l_*.yml`) или глобальная переменная `zz_ef_logs_on` — её ставит игра в режиме отладки (`-debug_mode`: в интерфейсе есть `[InDebugMode]`, в скрипте нет — скрытый виджет `gui/ld_logs_hook.gui`, регистрация `gui/scripted_widgets/ld_logs_hook.txt`, приёмник `zz_ef_logs_debug_sg` в `common/scripted_guis/ld_logs_debug.txt`) или скрытое событие `zz_ef_logs.1` (`events/ld_logs_events.txt`, консоль `event zz_ef_logs.1`; скрипт прогона песочницы шлёт его сам). Событие `zz_ef_logs.2` выключает логи до конца партии и ставит `zz_ef_logs_off` — режим отладки их больше не включает (замер скорости без логов, `-NoModLogs`). Каждая строка обёрнута: `if = { limit = { zz_ef_logs_on = yes } debug_log = "…" }`; эффект `zz_ef_money_log_rest` (только строки лога) — условием в месте вызова. Гейтов-флагов нет, кроме отмеченных. Эффекты ниже — единицы кода, на каком шаге вызываются указано в колонке «шаг».
-Накопители, которые читают только логи, тоже копятся только при `zz_ef_logs_on`: мировые суммы `EFG` (`zz_ef_wld_in`, `_out`, `_nocl`, `_subj_in/_out`, `_hume(_abs)`, `_n`, `_n0`, `_in_m`, `_out_m`, `_trade_m`, `_abr_m`, `_div_m`, `_bond_m`, `_sub`, `_waint` — `zz_ef_world_acc`), «прочее» мира `EFJ|WORLD` (`zz_ef_wld_other*`, `ld_ledger.txt`), мировая линия металла `EFV` (`zz_ef_wm_*`, `zz_ef_wm_add`), счётчики моста (`zz_ef_hook_calls`, `zz_ef_hook_probe_calls`). Модель читает и копит всегда: `zz_ef_wld_gpm_*`, `zz_ef_wld_wexp/wimp/wfee`, `zz_ef_wld_waown/wfown`.
-В строке лога страну выводить через `THIS`: `SCOPE.sCountry('…')` в `debug_log` выводит пусто.
+Логи пишутся `debug_log` в `game.log`/`debug.log`, формат `EFx|дата|страна|метка|поле значение|…`. **Все записи — только
+при условии `zz_ef_logs_on`** (`common/scripted_triggers/ld_logs_triggers.txt`): правило игры «Ledgerdemain: отладочные
+журналы» (`common/game_rules/ld_game_rules.txt`, по умолчанию выключено; локализация `ld_game_rules_l_*.yml`) или
+глобальная переменная `zz_ef_logs_on` — её ставит игра в режиме отладки (`-debug_mode`: в интерфейсе есть
+`[InDebugMode]`, в скрипте нет — скрытый виджет `gui/ld_logs_hook.gui`, регистрация
+`gui/scripted_widgets/ld_logs_hook.txt`, приёмник `zz_ef_logs_debug_sg` в `common/scripted_guis/ld_logs_debug.txt`) или
+скрытое событие `zz_ef_logs.1` (`events/ld_logs_events.txt`, консоль `event zz_ef_logs.1`; скрипт прогона песочницы шлёт
+его сам). Событие `zz_ef_logs.2` выключает логи до конца партии и ставит `zz_ef_logs_off` — режим отладки их больше не
+включает (замер скорости без логов, `-NoModLogs`). Каждая строка обёрнута:
+`if = { limit = { zz_ef_logs_on = yes } debug_log = "…" }`; эффект `zz_ef_money_log_rest` (только строки лога) —
+условием в месте вызова. Гейтов-флагов нет, кроме отмеченных. Эффекты ниже — единицы кода, на каком шаге вызываются
+указано в колонке «шаг». Накопители, которые читают только логи, тоже копятся только при `zz_ef_logs_on`: мировые суммы
+`EFG` (`zz_ef_wld_in`, `_out`, `_nocl`, `_subj_in/_out`, `_hume(_abs)`, `_n`, `_n0`, `_in_m`, `_out_m`, `_trade_m`,
+`_abr_m`, `_div_m`, `_bond_m`, `_sub`, `_waint` — `zz_ef_world_acc`), «прочее» мира `EFJ|WORLD` (`zz_ef_wld_other*`,
+`ld_ledger.txt`), мировая линия металла `EFV` (`zz_ef_wm_*`, `zz_ef_wm_add`), счётчики моста (`zz_ef_hook_calls`,
+`zz_ef_hook_probe_calls`). Модель читает и копит всегда: `zz_ef_wld_gpm_*`, `zz_ef_wld_wexp/wimp/wfee`,
+`zz_ef_wld_waown/wfown`. В строке лога страну выводить через `THIS`: `SCOPE.sCountry('…')` в `debug_log` выводит пусто.
 
 | префикс | файл:строка | что пишет | шаг |
 |---|---|---|---|
@@ -138,13 +217,14 @@ PSC-хук: `on_production_method_changed`, `on_building_built`, `on_acquired_te
 | EFP | `common/scripted_effects/ld_bond_ledger.txt:592` | слот облигаций без продавца (`no_seller`) | `zz_ef_pb_no_seller` (слот `$N$`) |
 | EFS | `common/scripted_effects/ld_consols.txt:47` | консоли: долг, продажа, проценты, цена, цель ставки | недельный `zz_ef_consol_step` |
 | EFW | `common/scripted_effects/ld_money_model.txt:260` | M0..M3, оборот, ЦБ, заграница, дельты (только игрок или ВВП > 20 млн) | недельный `zz_ef_money_model_step` |
-| EFG | `common/scripted_effects/ld_money_model.txt:608` | WORLD: потоки валюты по миру, клиринг | недельный (через `zz_ef_world_acc`) |
+| EFG | `common/scripted_effects/ld_money_model.txt:608` | WORLD: потоки валюты по миру | недельный (через `zz_ef_world_acc`) |
+| EFC | `common/scripted_effects/ld_clearing.txt` | WORLD: расчёт клиринга недели — сведено внутри групп металла и между ними, комиссия, не сведено миром, металлом, долгом недели, мировая строка | `zz_ef_clr_settle` (конец недели, при логах) |
 | EFA | `common/scripted_effects/ld_money_model.txt:419` | проценты, ЦБ, прямые инвестиции | `zz_ef_bridge_apply` (недельный шаг) |
 | EFR | `common/scripted_effects/ld_money_model.txt:446` | внешние потоки, сбережения, депозиты, пул банков | `zz_ef_bridge_apply` (недельный шаг; числа моста — `zz_ef_money_hook_receive`` |
 | EFX | `common/scripted_effects/ld_money_model.txt:915` | стандарт, ЦБ, `money_value_0`, цель, покрытие, металл, M2 | месячный `zz_ef_money_model_monthly_step` |
 | EFJ | `common/scripted_effects/ld_ledger.txt` | сверка по запасам: «прочее» страны (запас, изменение, часть пула, часть казны и её изменение, казна за вычетом долга, бюджет недели, пул, книга банков, капитал, вклады, недель в шаге, роль); `WORLD` — сумма изменений «прочего» за неделю, из них казна, сумма модулей, число стран | недельный шаг (`zz_ef_reconcile`), мировой проход (`zz_ef_other_world_log`) |
 | EFY | `common/scripted_effects/ld_roles.txt` | WORLD: число стран по ролям А / Б / В, смен за месяц, ВВП 40-й и 50-й страны; строка `move` — смена роли страны (прежняя роль, месяцев в ней, месяцев ниже 50-го места, ВВП) | месячный проход `zz_ef_roles_world_pass` |
-| EFI | `common/scripted_effects/ld_claims.txt` | WORLD: число требований, итоги должников, расхождения (деньги, облигации, паи), деньги в палате; страна — расхождение по должнику | `zz_ef_rq_world_check` из `zz_ef_world_month_ef` (месяц, при логах) |
+| EFI | `common/scripted_effects/ld_claims.txt` | WORLD: число требований, итоги должников, расхождения (деньги, облигации, паи); страна — расхождение по должнику | `zz_ef_rq_world_check` из `zz_ef_world_month_ef` (месяц, при логах) |
 | EFD | `common/scripted_effects/ld_exchange_trade.txt` | биржа: строка страны биржи за неделю (активов в стакане, шаги bid / ask фонда, его место); строка должника по активу со сделками (`asset|kind` 1 — деньги, 2 — облигации; множители `mul_m` / `mul_b`; шаг цены расчёта, сведено, взял / отдал фонд, всего продаж и покупок); `player|side|kind|amount` — заявка игрока (сторона 1 — покупка, 2 — продажа); `arb` — арбитраж биметаллизма ЦБ (законное и мировое соотношения, золото и серебро ЦБ, прибыль фонда, комиссия); `WORLD` за месяц — заявки, активы, сделки, стоимость в золоте (аукцион, покупки и продажи фондов, ЦБ-эмитенты в валютных точках `cb_buy_g` / `cb_sell_g`, между биржами `cross_g`), металл обменных ЦБ, их валюта в покрытии, множитель пирамиды резервов, чужие деньги, взаимные остатки и их доля, золото арбитража | неделя: `zz_ef_xch_clear_exchange` (мировой проход); месяц: `zz_ef_xch_month_log` из `zz_ef_world_month_ef` (при логах) |
 | EFU | `common/scripted_effects/ld_investment_fund.txt` | фонд биржи: вклад, капитал, паёв на руках (итог вида f), приток из-за границы за неделю, стартовый вклад, проценты, ёмкость; доход страны с комиссий биржи и деньги казны с биржи за последний шаг | `zz_ef_fund_log` из `zz_ef_world_month_ef` (месяц, при логах) |
 | EFH | `common/scripted_effects/ld_world_month.txt`, `common/scripted_effects/ld_fc.txt` | WORLD: число бирж мира и стран по маршрутам (`own`, `market`, `bloc`, `lever`, `world`; месяц, при логах); страна — `bind`: штат биржи из истории (старт) | `zz_ef_world_month_ef`, `zz_ef_fc_bind` |

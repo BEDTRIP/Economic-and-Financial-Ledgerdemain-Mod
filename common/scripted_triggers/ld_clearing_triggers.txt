@@ -1,0 +1,18 @@
+﻿# The clearing (scripted_effects/ld_clearing.txt).
+
+# The country's monetary authority is its CB: the CB and its capital's CB state (its metal); else the banks.
+zz_ef_clr_cb_ok = {
+	has_modifier = has_central_bank
+	any_scope_state = {
+		has_modifier = central_bank_historic_place
+		is_capital = yes
+	}
+}
+# A metal standard (not an exchange one) takes the rest of a payment in metal (Д.R8в.11).
+zz_ef_clr_wants_metal = {
+	OR = {
+		has_law = law_type:law_gold_standard
+		has_law = law_type:law_silver_standard
+		has_law = law_type:law_bimetallism_standard
+	}
+}

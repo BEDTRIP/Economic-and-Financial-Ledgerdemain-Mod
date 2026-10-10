@@ -214,12 +214,12 @@ zz_ef_sched_monthly = {
 	trigger_event = { on_action = zz_ef_init_stockpile_state_vars_monthly_backstop }
 }
 
-# Anchor country, the end of day 6: the world's next window (world line EFG, clearing ratios).
+# Anchor country, the end of day 6: the world's next window (world line EFG), the clearing's settlement.
 zz_ef_world_week_close = {
 	if = { limit = { has_global_variable = zz_ef_wld_window } remove_global_variable = zz_ef_wld_window }
 	zz_ef_world_window_open = yes
-	if = { limit = { has_global_variable = zz_ef_clr_window } remove_global_variable = zz_ef_clr_window }
-	zz_ef_clr_window_roll = yes
+	# the clearing: the week's positions settled (ld_clearing.txt)
+	zz_ef_clr_settle = yes
 	# the world's «прочее» of the week (EFJ|WORLD)
 	zz_ef_other_world_log = yes
 	# the exchanges' books cleared (ld_exchange_trade.txt)

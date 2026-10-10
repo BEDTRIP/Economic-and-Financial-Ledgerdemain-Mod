@@ -209,7 +209,7 @@
  zz_ef_ms_abroad_39:0 "    #grey −$zz_ef_ms_x_expr_30$ $zz_ef_ms_cur$ [concept_budget_treaties]#!"
  zz_ef_ms_abroad_40:0 "    #grey −$zz_ef_ms_x_expr_31$ $zz_ef_ms_cur$ [concept_budget_power_bloc]#!"
  zz_ef_ms_abroad_41:0 "    #grey +$zz_ef_ms_x_v_f_bl_int_in$ $zz_ef_ms_cur$ проценты по облигациям других стран (наша часть их госдолга)#!"
- zz_ef_ms_abroad_42:0 "Клиринг: при оттоке металлом платится $zz_ef_ms_x_clr_metal_share$ — по доверию к валюте (сила к эталону $zz_ef_ms_x_currency_strength$), остальное нашей валютой; мир: получатели берут $zz_ef_ms_x_clr_ratio_v$ притока, плательщики платят $zz_ef_ms_x_clr_pay_ratio_v$; в клиринге $zz_ef_ms_x_clr_pot_value$ @gold!"
+ zz_ef_ms_abroad_42:0 "Клиринг: платёж — набор: $zz_ef_ms_x_clr_own_share$ нашей валютой — по доверию к ней (сила к эталону $zz_ef_ms_x_currency_strength$), остальное по стандарту получателя — металлом, его валютой из наших резервов или нашим долгом; за неделю заплачено $zz_ef_ms_x_v_f_clr_paid$ @gold!, получено $zz_ef_ms_x_v_f_clr_got$ @gold!"
  zz_ef_ms_abroad_43:0 "Запас счёта — чистая международная позиция: облигации других стран и чужая валюта в ЦБ минус наша валюта у других ЦБ. Платежи с заграницей сводит мировой клиринг: отток оплачивается металлом ЦБ (доля — по доверию к валюте) и нашей валютой, приток — долей металла и валют, собранных с плательщиков. Наша валюта у чужих ЦБ лежит вкладами в наших банках ($zz_ef_ms_x_nr_dep_v$) — деньги работают дома."
 
  # ---- treasury ----
@@ -549,10 +549,9 @@
  zz_ef_ms_x_expr_30:0 "[Abs_CFixedPoint(GetTrendValue(Country.GetTreatiesExpenseTrend))|D]"
  zz_ef_ms_x_expr_31:0 "[Abs_CFixedPoint(GetTrendValue(Country.GetPowerBlocExpenseTrend))|D]"
  zz_ef_ms_x_v_f_bl_int_in:0 "[Max_CFixedPoint(Country.MakeScope.ScriptValue('zz_ef_v_f_bl_int_in'), '(CFixedPoint)0')|D]"
- zz_ef_ms_x_clr_metal_share:0 "[Country.MakeScope.ScriptValue('zz_ef_clr_metal_share')|%0]"
- zz_ef_ms_x_clr_ratio_v:0 "[Country.MakeScope.ScriptValue('zz_ef_clr_ratio_v')|%0]"
- zz_ef_ms_x_clr_pay_ratio_v:0 "[Country.MakeScope.ScriptValue('zz_ef_clr_pay_ratio_v')|%0]"
- zz_ef_ms_x_clr_pot_value:0 "[Country.MakeScope.ScriptValue('zz_ef_clr_pot_value')|D]"
+ zz_ef_ms_x_clr_own_share:0 "[Country.MakeScope.ScriptValue('zz_ef_clr_own_share')|%0]"
+ zz_ef_ms_x_v_f_clr_paid:0 "[Country.MakeScope.ScriptValue('zz_ef_v_f_clr_paid')|D]"
+ zz_ef_ms_x_v_f_clr_got:0 "[Country.MakeScope.ScriptValue('zz_ef_v_f_clr_got')|D]"
  zz_ef_ms_x_expr_32:0 "[Abs_CFixedPoint(GetTrendValue(Country.GetMintingTrend))|D]"
  zz_ef_ms_x_v_cbl_int:0 "[Max_CFixedPoint(Country.MakeScope.ScriptValue('zz_ef_v_cbl_int'), '(CFixedPoint)0')|D]"
  zz_ef_ms_x_tr_to_cb_neg:0 "[Max_CFixedPoint(Negate_CFixedPoint(Country.MakeScope.ScriptValue('zz_ef_tr_to_cb')), '(CFixedPoint)0')|D]"

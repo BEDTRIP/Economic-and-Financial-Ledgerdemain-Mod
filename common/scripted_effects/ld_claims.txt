@@ -9,7 +9,6 @@
 #   zz_ef_rq_pp_b / zz_ef_rq_cb_b      b      the pops / the CB: bonds
 #   zz_ef_rq_pp_f / zz_ef_rq_bk_f      f      the pops / the banks: shares of the investment fund (the debtor -- its country)
 #   zz_ef_rq_fd_m / zz_ef_rq_fd_b      m, b   the investment fund of the country's exchange: its stock (ld_investment_fund.txt)
-#   the clearing house: global map zz_ef_clr_pot (kind m) -- a payer's money waiting in the house (zz_ef_rq_pot_add)
 # A map's value cannot be overwritten by its key (probe ld_probe_map): remove the key and add it again. Iterating a
 # map while changing it is not done here: the keys go to a variable list first (zz_ef_rq_keys_take).
 
@@ -67,39 +66,6 @@ zz_ef_rq_get = {
 	}
 }
 
-# Any scope: the clearing house's holding of D's money changes by V (global map zz_ef_clr_pot, >= 0); D's money in the
-# house is a claim on D too (var:zz_ef_rq_pot on D, part of its debt abroad). The change actually made --
-# global_var:zz_ef_rq_pdlt.
-zz_ef_rq_pot_add = {
-	set_global_variable = { name = zz_ef_rq_pv value = $V$ }
-	set_global_variable = { name = zz_ef_rq_pold value = 0 }
-	if = {
-		limit = { is_key_in_global_variable_map = { name = zz_ef_clr_pot target = $D$ } }
-		$D$ = { save_temporary_scope_as = zz_ef_rq_key }
-		zz_ef_clr_pot_read = yes
-		remove_from_global_variable_map = { name = zz_ef_clr_pot key = $D$ }
-	}
-	set_global_variable = {
-		name = zz_ef_rq_pdlt
-		value = {
-			value = global_var:zz_ef_rq_pold
-			add = global_var:zz_ef_rq_pv
-			min = 0
-		}
-	}
-	if = {
-		limit = { global_var:zz_ef_rq_pdlt > 0 }
-		add_to_global_variable_map = { name = zz_ef_clr_pot key = $D$ value = zz_ef_rq_pdlt_v }
-	}
-	change_global_variable = { name = zz_ef_rq_pdlt subtract = global_var:zz_ef_rq_pold }
-	$D$ = {
-		if = {
-			limit = { NOT = { has_variable = zz_ef_rq_pot } }
-			set_variable = { name = zz_ef_rq_pot value = 0 }
-		}
-		change_variable = { name = zz_ef_rq_pot add = global_var:zz_ef_rq_pdlt }
-	}
-}
 
 # HOLDER scope: the keys of MAP into the variable list zz_ef_rq_keys (cleared first), to change the map key by key.
 zz_ef_rq_keys_take = {
@@ -221,11 +187,11 @@ zz_ef_rq_crisis_resell = {
 }
 
 # Any scope, monthly with the logs on (zz_ef_world_month_ef): the register adds up -- for every debtor the sum of the
-# holders' maps (and the house) against its totals; EFI|date|WORLD|… (n_m -- holdings of money, out_m -- the debtors'
-# totals, bad_m -- debtors off by more than 1, the same for bonds; pot -- the house).
+# holders' maps against its totals; EFI|date|WORLD|… (n_m -- holdings of money, out_m -- the debtors'
+# totals, bad_m -- debtors off by more than 1, the same for bonds).
 zz_ef_rq_world_check = {
 	every_country = {
-		limit = { OR = { has_variable = zz_ef_rq_out_m has_variable = zz_ef_rq_out_b has_variable = zz_ef_rq_out_f has_variable = zz_ef_rq_pot } }
+		limit = { OR = { has_variable = zz_ef_rq_out_m has_variable = zz_ef_rq_out_b has_variable = zz_ef_rq_out_f } }
 		set_variable = { name = zz_ef_rq_chk_m value = 0 }
 		set_variable = { name = zz_ef_rq_chk_b value = 0 }
 		set_variable = { name = zz_ef_rq_chk_f value = 0 }
@@ -236,7 +202,6 @@ zz_ef_rq_world_check = {
 	set_global_variable = { name = zz_ef_rq_w_out_b value = 0 }
 	set_global_variable = { name = zz_ef_rq_w_bad_m value = 0 }
 	set_global_variable = { name = zz_ef_rq_w_bad_b value = 0 }
-	set_global_variable = { name = zz_ef_rq_w_pot value = 0 }
 	set_global_variable = { name = zz_ef_rq_w_n_f value = 0 }
 	set_global_variable = { name = zz_ef_rq_w_out_f value = 0 }
 	set_global_variable = { name = zz_ef_rq_w_bad_f value = 0 }
@@ -253,27 +218,13 @@ zz_ef_rq_world_check = {
 		zz_ef_rq_check_map = { MAP = zz_ef_rq_fd_m K = m }
 		zz_ef_rq_check_map = { MAP = zz_ef_rq_fd_b K = b }
 	}
-	every_key_in_global_variable_map = {
-		variable = zz_ef_clr_pot
-		save_temporary_scope_as = zz_ef_rq_k
-		set_global_variable = { name = zz_ef_rq_t value = "global_variable_map(zz_ef_clr_pot|scope:zz_ef_rq_k)" }
-		change_global_variable = { name = zz_ef_rq_w_pot add = global_var:zz_ef_rq_t }
-		scope:zz_ef_rq_k = {
-			if = { limit = { NOT = { has_variable = zz_ef_rq_chk_m } } set_variable = { name = zz_ef_rq_chk_m value = 0 } }
-			change_variable = { name = zz_ef_rq_chk_m subtract = global_var:zz_ef_rq_t }
-		}
-	}
 	every_country = {
-		limit = { OR = { has_variable = zz_ef_rq_out_m has_variable = zz_ef_rq_out_b has_variable = zz_ef_rq_out_f has_variable = zz_ef_rq_pot } }
-		# money: the holders' maps = the total; the house = var:zz_ef_rq_pot
+		limit = { OR = { has_variable = zz_ef_rq_out_m has_variable = zz_ef_rq_out_b has_variable = zz_ef_rq_out_f } }
+		# money: the holders' maps = the total
 		if = {
 			limit = { has_variable = zz_ef_rq_out_m }
 			change_global_variable = { name = zz_ef_rq_w_out_m add = var:zz_ef_rq_out_m }
 			change_variable = { name = zz_ef_rq_chk_m subtract = var:zz_ef_rq_out_m }
-		}
-		if = {
-			limit = { has_variable = zz_ef_rq_pot }
-			change_variable = { name = zz_ef_rq_chk_m add = var:zz_ef_rq_pot }
 		}
 		if = {
 			limit = { OR = { var:zz_ef_rq_chk_m > 1 var:zz_ef_rq_chk_m < -1 } }
@@ -302,7 +253,7 @@ zz_ef_rq_world_check = {
 		remove_variable = zz_ef_rq_chk_b
 		remove_variable = zz_ef_rq_chk_f
 	}
-	if = { limit = { zz_ef_logs_on = yes } debug_log = "EFI|[TimeKeeper.GetCurrentDate.GetString]|WORLD|n_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_n_m_v')|0]|out_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_out_m_v')|0]|bad_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_bad_m_v')|0]|pot [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_pot_v')|0]|n_b [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_n_b_v')|0]|out_b [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_out_b_v')|0]|bad_b [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_bad_b_v')|0]|n_f [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_n_f_v')|0]|out_f [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_out_f_v')|0]|bad_f [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_bad_f_v')|0]" }
+	if = { limit = { zz_ef_logs_on = yes } debug_log = "EFI|[TimeKeeper.GetCurrentDate.GetString]|WORLD|n_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_n_m_v')|0]|out_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_out_m_v')|0]|bad_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_bad_m_v')|0]|n_b [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_n_b_v')|0]|out_b [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_out_b_v')|0]|bad_b [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_bad_b_v')|0]|n_f [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_n_f_v')|0]|out_f [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_out_f_v')|0]|bad_f [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_bad_f_v')|0]" }
 }
 # HOLDER scope: each holding of MAP added to its debtor's var:zz_ef_rq_chk_<K> (zz_ef_rq_world_check).
 zz_ef_rq_check_map = {
@@ -386,14 +337,6 @@ zz_ef_cbfx_p_read = {
 	if = {
 		limit = { is_key_in_variable_map = { name = zz_ef_cbfx_p target = scope:zz_ef_rq_key } }
 		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_cbfx_p|scope:zz_ef_rq_key)" }
-	}
-}
-# the clearing house's holding of scope:zz_ef_rq_key's money into global_var:zz_ef_rq_pold
-zz_ef_clr_pot_read = {
-	set_global_variable = { name = zz_ef_rq_pold value = 0 }
-	if = {
-		limit = { is_key_in_global_variable_map = { name = zz_ef_clr_pot target = scope:zz_ef_rq_key } }
-		set_global_variable = { name = zz_ef_rq_pold value = "global_variable_map(zz_ef_clr_pot|scope:zz_ef_rq_key)" }
 	}
 }
 zz_ef_rq_pp_f_read = {

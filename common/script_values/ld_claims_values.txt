@@ -12,15 +12,10 @@ zz_ef_rq_conv_v = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_rq_conv } value = var:zz_ef_rq_conv }
 }
-# The scope country's money held abroad: by the holders (var:zz_ef_rq_out_m) and waiting in the clearing house
-# (var:zz_ef_rq_pot), in its money.
+# The scope country's money held abroad (var:zz_ef_rq_out_m), in its money.
 zz_ef_rq_out_m_v = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_rq_out_m } value = var:zz_ef_rq_out_m }
-}
-zz_ef_rq_pot_v = {
-	value = 0
-	if = { limit = { has_variable = zz_ef_rq_pot } value = var:zz_ef_rq_pot }
 }
 zz_ef_rq_out_f_v = {
 	value = 0
@@ -33,7 +28,6 @@ zz_ef_rq_out_b_v = {
 # A map's value is written from a script value: add_to_variable_map takes «value = var:x» for a scope (the map then
 # reads back empty, run r1009_221452) -- these read the effects' temporaries.
 zz_ef_rq_dlt_v = { value = var:zz_ef_rq_dlt }
-zz_ef_rq_pdlt_v = { value = global_var:zz_ef_rq_pdlt }
 zz_ef_rq_h_v = { value = var:zz_ef_rq_h }
 zz_ef_cbfx_t_v = { value = var:zz_ef_cbfx_t }
 # the monthly check's world sums (zz_ef_rq_world_check, the EFI line)
@@ -48,10 +42,6 @@ zz_ef_rq_w_out_m_v = {
 zz_ef_rq_w_bad_m_v = {
 	value = 0
 	if = { limit = { has_global_variable = zz_ef_rq_w_bad_m } value = global_var:zz_ef_rq_w_bad_m }
-}
-zz_ef_rq_w_pot_v = {
-	value = 0
-	if = { limit = { has_global_variable = zz_ef_rq_w_pot } value = global_var:zz_ef_rq_w_pot }
 }
 zz_ef_rq_w_n_b_v = {
 	value = 0

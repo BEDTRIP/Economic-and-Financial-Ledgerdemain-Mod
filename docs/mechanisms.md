@@ -8,7 +8,7 @@
 коэффициент, закомментированный вызов); `мёртвый` — ни откуда не вызывается; `дубль` — считает то же или пишет те же
 счета, что модель `ld_*`. Строки файлов — на момент записи, при правке файла сдвигаются: искать по имени.
 
-Итого: мёртвый 4, выключен 0, дубль 3, живой 210. Разделы — по подсистемам: читать раздел своей подсистемы, а не весь реестр.
+Итого: мёртвый 4, выключен 0, дубль 3, живой 209. Разделы — по подсистемам: читать раздел своей подсистемы, а не весь реестр.
 
 ## Денежная модель и металл (`money-model.md`)
 
@@ -123,8 +123,7 @@
 | механизм | статус | где | доказательство | интерфейс |
 | --- | --- | --- | --- | --- |
 | E&F trade_balance (счётчики *_fix, trade_balance_in_gold_fixe) | живой | common/scripted_effects/01_economic_scripted_effects.txt:27045-27428; вызовы 00_economic_scripted_guis.txt:422, 1_economic_scripted_effects.txt:14791,41371,42319 | вызывается из месячного ЦБ, окон, событий; обнуляет `trade_balance_in_gold_fixe`, которую пишут `reset_debt_in_currency*` и кнопка `trade_balance_actualized`, читают ~15 значений `00_economic_scripted_value.txt` и строка ld_economy_panel.gui:550 | показатели торгового баланса E&F |
-| Мировой клиринг zz_ef_clr_step (pay/receive/put_own/take_all) | живой | common/scripted_effects/ld_clearing.txt; вызов zz_ef_cb_hume_step (ld_money_model.txt) | недельный; пишет gold_state_1/silver_state_1 столицы ЦБ, карту палаты zz_ef_clr_pot и карты ЦБ zz_ef_rq_cb_m (реестр требований), глобалки zz_ef_clr_* | карточка платёжного баланса |
-| Окно палаты zz_ef_clr_window_roll | живой | common/scripted_effects/ld_clearing.txt:5 | refs=2; вызывается из zz_ef_clr_step | тултип окна |
+| Клиринг zz_ef_clr_step / zz_ef_clr_settle (позиции недели, зачёт по группам металла, платёж-набор; Д.R8в.4, Д.R8в.11) | живой | common/scripted_effects/ld_clearing.txt | zz_ef_clr_step из zz_ef_cb_hume_step (недельный шаг); zz_ef_clr_settle из zz_ef_world_week_close (ld_scheduler.txt); пишет gold_state_1/silver_state_1 ЦБ, металл банков, требования cb / bk; лог EFC | карточка заграницы |
 | Недельная дельта чужих денег ЦБ zz_ef_cbfx_week_step | живой | common/scripted_effects/ld_clearing.txt; вызов ld_money_model.txt (только у игроков — витрина, Д.R3б.3) | карты zz_ef_cbfx_d / zz_ef_cbfx_p по эмитентам | таблица резервов ЦБ |
 | Таблица резервов ЦБ zz_ef_cbfx_update_sorted / zz_ef_holders_update | живой | common/scripted_guis/ld_cbfx.txt | кнопки gui/ld_economy_panel.gui; строки — эмитенты из карты zz_ef_rq_cb_m | таблица чужих денег ЦБ, диаграмма держателей |
 | Резервы валюты в золоте zz_ef_fx_reserves_metal | живой | common/script_values/ld_fx_reserves_values.txt; zz_ef_fx_metal_update (ld_money_model.txt) | неделя: карта zz_ef_rq_cb_m в золоте, только эмитенты с разменом (Д.R8а.5) | покрытие, карточка резервов |

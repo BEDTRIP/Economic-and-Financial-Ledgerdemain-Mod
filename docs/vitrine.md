@@ -9,7 +9,7 @@
 (`var:zz_ef_bank_capital`, `money-model.md`) + «прочее». Окна и файлы — `interface.md`.
 
 <!-- vitrine -->
-Сгенерировано `../vic3_mods/tools/ld_vitrine.py --write`. Имён 586: переменных 11, значений-витрины 159, вычисляемых при перерисовке 416; файлов 14.
+Сгенерировано `../vic3_mods/tools/ld_vitrine.py --write`. Имён 585: переменных 11, значений-витрины 161, вычисляемых при перерисовке 413; файлов 14.
 
 | имя | класс | где читается |
 | --- | --- | --- |
@@ -470,10 +470,7 @@
 | `zz_ef_cc_rate` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_circ_business_cash` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_circ_growth_year` | calc | `localization/english/01_ef_tooltips_localization_l_english.yml`, `localization/english/replace/ld_money_supply_replace_l_english.yml` |
-| `zz_ef_clr_metal_share` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
-| `zz_ef_clr_pay_ratio_v` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
-| `zz_ef_clr_pot_value` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
-| `zz_ef_clr_ratio_v` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
+| `zz_ef_clr_own_share` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_credit_limit` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_credit_now` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_credit_to_gdp` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
@@ -567,6 +564,8 @@
 | `zz_ef_v_f_cb_rescale` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_f_cb_reval` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_f_cb_stock` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
+| `zz_ef_v_f_clr_got` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
+| `zz_ef_v_f_clr_paid` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_f_clr_fx_money` | calc | `localization/english/ld_economy_panel_l_english.yml`, `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_f_clr_metal_money` | calc | `localization/english/ld_economy_panel_l_english.yml`, `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_f_clr_reserves_money` | calc | `localization/english/ld_economy_panel_l_english.yml`, `localization/english/replace/ld_money_supply_replace_l_english.yml` |

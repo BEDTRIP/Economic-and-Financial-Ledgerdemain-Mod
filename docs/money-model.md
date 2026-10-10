@@ -72,7 +72,7 @@
 | потреб- / бизнес-кредит | `zz_ef_cc_debt`, `zz_ef_bc_debt` | банки (актив) | `zz_ef_consumer_credit_step`, `zz_ef_business_credit_step` |
 | доли банков в чужих облигациях | `zz_ef_bank_bonds` (= Σ `ai_privat_bank_bond_value_N` E&F) | банки (актив) | покупка E&F `ai_privat_bank_bond_N` (пул → доля), реестр облигаций (`ld_bond_ledger.txt`: возврат лишнего — пул, выкуп — пул, списание и недоплата продавца — из капитала банков) |
 | требования населения | `zz_ef_pop_claims_stocks`, `_bonds`, `_private` | население | по нулям (R6, R7) |
-| позиция к палате клиринга | `zz_ef_clr_position` | страна | по нулям (R8) |
+| позиция клиринга недели | `zz_ef_clr_pos` (золото) | страна | `zz_ef_clr_step`, снимается расчётом `zz_ef_clr_settle` (`clearing-fx.md`) |
 | металл ЦБ / банков / населения | `gold_state_1` / `silver_state_1` штата ЦБ, `zz_ef_bankm_*`, `zz_ef_popm_*` | — | `ld_metal_accounts.txt`; у ЦБ биметаллизма — арбитраж через биржу (`zz_ef_f_mt_arb_g/_s`, `exchange-companies.md`) |
 Счета, которых нет, заводит `zz_ef_registry_init` из `zz_ef_country_init` — первый заход планировщика (раз за игру,
 признак `zz_ef_registry`).
@@ -163,23 +163,22 @@
    `global_var:zz_ef_sched_alive`, 3 дня): зонд якоря `zz_ef_sched_probe` ждёт смены казны (бюджетный тик, один день
    недели у всех стран — проверка Р10), ≤8 дней; дальше `zz_ef_sched_day` раз в день. День: `zz_ef_dom` + 1 (день
    месяца, 0 на `on_monthly_pulse`), у каждой страны роли А / Б — `zz_ef_sched_country_day`; в конце дня 6 — мировой
-   проход `zz_ef_world_week_close` (окно мировой строки `zz_ef_world_window_open` и палаты клиринга
-   `zz_ef_clr_window_roll`; их глобалки живут 9 дней — запасной путь, если планировщик потерян); `zz_ef_sched_d` 0..6,
-   `zz_ef_sched_week` + 1. Страна: при первом заходе `zz_ef_sched_slot_assign` — `zz_ef_week_slot` (счётчик
-   `zz_ef_week_slot_n` по модулю 7), `zz_ef_week_phase` (/7 по модулю 4), `zz_ef_m_offset` = слот + 7 × фаза; **месячные
-   шаги** — раз в календарный месяц (`zz_ef_m_done` против `zz_ef_month_n`), когда `zz_ef_dom` > смещения:
-   `zz_ef_sched_monthly` по порядку — хаб E&F `ef_on_monthly_pulse_country`, `zz_ef_money_model_monthly`,
-   `zz_ef_bank_monthly`, `zz_ef_cb_rate_monthly`, `zz_ef_capitalization_monthly`, `zz_ef_bubble_monthly`,
-   `zz_pb_ef_overbuild_counter`, `zz_pb_ef_ai_sector_downsize`, `zz_ef_init_stockpile_state_vars_monthly_backstop` (с
-   `on_monthly_pulse_country` они сняты); **недельный шаг** — в свой день, своим on_action `zz_ef_sched_step` (чтобы
-   `root` был страной, а не якорем): А и Б — каждую неделю (В6); `zz_ef_step_weeks` — недель с прошлого шага
-   (`zz_ef_last_step_week`, 1..8; > 1 только после разрыва — смена роли, перезапуск цепочки), `zz_ef_sw` умножает на
-   него потоки, измеренные за одну неделю (взносы и перевод пула, проценты ЦБ / вкладов / потребкредита / бизнес-кредита
-   / консолей / облигаций держателя, строки моста `ext`, `abr`, `aint`, торговля, сборы, дивиденды, вход металла зданий
-   и потребление штатов), счётчики `zz_ef_weeks_run` и колец — на столько же. Страны вне планировщика (В, без роли,
-   цепочка не запущена) получают месячный пульс движка через `zz_ef_monthly_unscheduled` (вместо
-   `ef_on_monthly_pulse_country` в `00_ef_on_action.txt`): В и без роли — только хаб E&F; А / Б при потерянной цепочке —
-   все месячные шаги.
+   проход `zz_ef_world_week_close` (окно мировой строки `zz_ef_world_window_open` и расчёт клиринга `zz_ef_clr_settle`;
+   глобалка окна живёт 9 дней — запасной путь, если планировщик потерян); `zz_ef_sched_d` 0..6, `zz_ef_sched_week` + 1.
+   Страна: при первом заходе `zz_ef_sched_slot_assign` — `zz_ef_week_slot` (счётчик `zz_ef_week_slot_n` по модулю 7),
+   `zz_ef_week_phase` (/7 по модулю 4), `zz_ef_m_offset` = слот + 7 × фаза; **месячные шаги** — раз в календарный месяц
+   (`zz_ef_m_done` против `zz_ef_month_n`), когда `zz_ef_dom` > смещения: `zz_ef_sched_monthly` по порядку — хаб E&F
+   `ef_on_monthly_pulse_country`, `zz_ef_money_model_monthly`, `zz_ef_bank_monthly`, `zz_ef_cb_rate_monthly`,
+   `zz_ef_capitalization_monthly`, `zz_ef_bubble_monthly`, `zz_pb_ef_overbuild_counter`, `zz_pb_ef_ai_sector_downsize`,
+   `zz_ef_init_stockpile_state_vars_monthly_backstop` (с `on_monthly_pulse_country` они сняты); **недельный шаг** — в
+   свой день, своим on_action `zz_ef_sched_step` (чтобы `root` был страной, а не якорем): А и Б — каждую неделю (В6);
+   `zz_ef_step_weeks` — недель с прошлого шага (`zz_ef_last_step_week`, 1..8; > 1 только после разрыва — смена роли,
+   перезапуск цепочки), `zz_ef_sw` умножает на него потоки, измеренные за одну неделю (взносы и перевод пула, проценты
+   ЦБ / вкладов / потребкредита / бизнес-кредита / консолей / облигаций держателя, строки моста `ext`, `abr`, `aint`,
+   торговля, сборы, дивиденды, вход металла зданий и потребление штатов), счётчики `zz_ef_weeks_run` и колец — на
+   столько же. Страны вне планировщика (В, без роли, цепочка не запущена) получают месячный пульс движка через
+   `zz_ef_monthly_unscheduled` (вместо `ef_on_monthly_pulse_country` в `00_ef_on_action.txt`): В и без роли — только хаб
+   E&F; А / Б при потерянной цепочке — все месячные шаги.
 1. **Месяц** (`zz_ef_sched_monthly`): `zz_ef_money_model_monthly` → `zz_ef_money_model_monthly_step` (якорь
    внешневалютного, курс серебра, сила валюты, торговый модификатор, `zz_ef_dependents`,
    `zz_ef_money_ledger_delta ACC=cb`, цена политики ставки, ставка правительства `zz_ef_gov_rate_step`, `zz_ef_mp_step`,
