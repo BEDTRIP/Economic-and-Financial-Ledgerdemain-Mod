@@ -1529,6 +1529,10 @@ zz_ef_xch_points_set_m = {
 zz_ef_xch_issuer_rest = {
 	set_variable = { name = zz_ef_t_is value = 0 }
 	set_variable = { name = zz_ef_t_ib value = 0 }
+	zz_ef_xch_issuer_rest_$K$ = yes
+}
+zz_ef_xch_issuer_rest_b = { }
+zz_ef_xch_issuer_rest_m = {
 	if = {
 		limit = { var:zz_ef_t_plo > 0 }
 		set_variable = { name = zz_ef_t_ir value = { value = var:zz_ef_t_rs multiply = var:zz_ef_t_fs multiply = -1 add = var:zz_ef_t_r2s } }
