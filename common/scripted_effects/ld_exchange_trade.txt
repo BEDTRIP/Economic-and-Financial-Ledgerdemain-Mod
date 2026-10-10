@@ -916,7 +916,13 @@ zz_ef_xch_settle_one = {
 
 # Holder scope, a sell order's rest after the funds between the exchanges: the cheap rest bought by another exchange's
 # fund (money only; Д.R8б.36)
-zz_ef_xch_settle_cheap_b = { }
+# (bonds: nothing; the holder's parameter must be read, or the engine drops the call)
+zz_ef_xch_settle_cheap_b = {
+	if = {
+		limit = { always = no }
+		zz_ef_xch_pay_$T$_b = yes
+	}
+}
 zz_ef_xch_settle_cheap_m = {
 	scope:zz_ef_xch_e = { zz_ef_xr_m_xf_read = yes }
 	set_variable = { name = zz_ef_xo_xf value = scope:zz_ef_xch_e.var:zz_ef_rq_h }
