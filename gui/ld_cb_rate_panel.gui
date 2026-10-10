@@ -10416,6 +10416,93 @@ types zz_ef_cb_rate_panel
 					text = "zz_ef_xwin_head_b"
 				}
 				textbox = {
+					visible = "[Not(IsDataModelEmpty(GetGlobalList('zz_ef_xwin_ord')))]"
+					autoresize = yes
+					margin_top = 6
+					text = "zz_ef_xwin_ord_title"
+					tooltip = "zz_ef_xwin_ord_title_tt"
+				}
+				flowcontainer = {
+					visible = "[Not(IsDataModelEmpty(GetGlobalList('zz_ef_xwin_ord')))]"
+					direction = horizontal
+					spacing = 4
+					textbox = {
+						size = { 170 26 }
+						align = left|nobaseline
+						elide = right
+						default_format = "#bold"
+						text = "zz_ef_xwin_col_country"
+						tooltip = "zz_ef_xwin_col_country_tt"
+					}
+					textbox = {
+						size = { 100 26 }
+						align = left|nobaseline
+						elide = right
+						default_format = "#bold"
+						text = "zz_ef_xwin_col_side"
+						tooltip = "zz_ef_xwin_col_side_tt"
+					}
+					textbox = {
+						size = { 150 26 }
+						align = right|nobaseline
+						elide = right
+						default_format = "#bold"
+						text = "zz_ef_xwin_col_left"
+						tooltip = "zz_ef_xwin_col_left_tt"
+					}
+					widget = { size = { 90 26 } }
+				}
+				flowcontainer = {
+					direction = vertical
+					spacing = 2
+					datamodel = "[GetGlobalList('zz_ef_xwin_ord')]"
+					item = {
+						flowcontainer = {
+							direction = horizontal
+							spacing = 4
+							textbox = {
+								size = { 170 26 }
+								align = left|nobaseline
+								elide = right
+								raw_text = "[Scope.GetCountry.GetFlagTextIcon] [Scope.GetCountry.GetName]"
+							}
+							textbox = {
+								size = { 100 26 }
+								align = left|nobaseline
+								visible = "[GreaterThan_CFixedPoint(Scope.GetCountry.MakeScope.Var('zz_ef_xwin_os').GetValue, '(CFixedPoint)0')]"
+								text = "zz_ef_xwin_side_sell"
+							}
+							textbox = {
+								size = { 100 26 }
+								align = left|nobaseline
+								visible = "[Not(GreaterThan_CFixedPoint(Scope.GetCountry.MakeScope.Var('zz_ef_xwin_os').GetValue, '(CFixedPoint)0'))]"
+								text = "zz_ef_xwin_side_buy"
+							}
+							textbox = {
+								size = { 150 26 }
+								align = right|nobaseline
+								elide = right
+								visible = "[GreaterThan_CFixedPoint(Scope.GetCountry.MakeScope.Var('zz_ef_xwin_os').GetValue, '(CFixedPoint)0')]"
+								text = "zz_ef_xwin_ord_all"
+							}
+							textbox = {
+								size = { 150 26 }
+								align = right|nobaseline
+								elide = right
+								visible = "[Not(GreaterThan_CFixedPoint(Scope.GetCountry.MakeScope.Var('zz_ef_xwin_os').GetValue, '(CFixedPoint)0'))]"
+								text = "zz_ef_xwin_ord_left"
+							}
+							button = {
+								using = default_button
+								size = { 90 26 }
+								text = "zz_ef_xwin_cancel"
+								tooltip = "[GetScriptedGui('zz_ef_xwin_cancel').BuildTooltip( GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('target', Scope.GetCountry.MakeScope).End )]"
+								onclick = "[GetScriptedGui('zz_ef_xwin_cancel').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('target', Scope.GetCountry.MakeScope).End )]"
+							}
+						}
+					}
+				}
+				textbox = {
 					autoresize = yes
 					margin_top = 6
 					text = "zz_ef_xwin_own_title"
@@ -10481,13 +10568,13 @@ types zz_ef_cb_rate_panel
 								size = { 95 26 }
 								align = right|nobaseline
 								elide = right
-								raw_text = "[Scope.GetCountry.MakeScope.Var('zz_ef_xwin_hold').GetValue|D]"
+								raw_text = "[Scope.GetCountry.MakeScope.Var('zz_ef_xwin_holdc').GetValue|D]"
 							}
 							textbox = {
 								size = { 80 26 }
 								align = right|nobaseline
 								elide = right
-								raw_text = "[Scope.GetCountry.MakeScope.Var('zz_ef_xwin_fair').GetValue|3]"
+								raw_text = "[Scope.GetCountry.MakeScope.Var('zz_ef_xwin_fair').GetValue|4]"
 							}
 							textbox = {
 								size = { 95 26 }
@@ -10580,25 +10667,25 @@ types zz_ef_cb_rate_panel
 								size = { 80 26 }
 								align = right|nobaseline
 								elide = right
-								raw_text = "[Scope.GetCountry.MakeScope.Var('zz_ef_xwin_fair').GetValue|3]"
+								raw_text = "[Scope.GetCountry.MakeScope.Var('zz_ef_xwin_fair').GetValue|4]"
 							}
 							textbox = {
 								size = { 80 26 }
 								align = right|nobaseline
 								elide = right
-								raw_text = "[Scope.GetCountry.MakeScope.Var('zz_ef_xwin_last').GetValue|3]"
+								raw_text = "[Scope.GetCountry.MakeScope.Var('zz_ef_xwin_last').GetValue|4]"
 							}
 							textbox = {
 								size = { 80 26 }
 								align = right|nobaseline
 								elide = right
-								raw_text = "[Scope.GetCountry.MakeScope.Var('zz_ef_xwin_bid').GetValue|3]"
+								raw_text = "[Scope.GetCountry.MakeScope.Var('zz_ef_xwin_bid').GetValue|4]"
 							}
 							textbox = {
 								size = { 80 26 }
 								align = right|nobaseline
 								elide = right
-								raw_text = "[Scope.GetCountry.MakeScope.Var('zz_ef_xwin_ask').GetValue|3]"
+								raw_text = "[Scope.GetCountry.MakeScope.Var('zz_ef_xwin_ask').GetValue|4]"
 							}
 							button = {
 								using = default_button

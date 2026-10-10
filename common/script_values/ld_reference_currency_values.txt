@@ -16,7 +16,7 @@
 # fiat too (global_var:zz_ef_ref_vtp); the fiat reference itself (Д.R8б.28) -- its purchasing power: its prices at the
 # transition over its prices now (var:zz_ef_fiat_p0 / var:zz_ef_prev_price). An external exchange
 # standard -- its anchor's (var:zz_ef_anchor, scripted_effects/ld_anchor.txt; an anchor on fiat floats, and the subject
-# with it).
+# with it). x the money's market multiplier on the exchanges (var:zz_ef_xmul_m, Д.R8б.33).
 zz_ef_value_to_parity_own = {
 	value = 1
 	if = {
@@ -56,6 +56,8 @@ zz_ef_value_to_parity_own = {
 		min = 0.01
 		max = 100
 	}
+	# the exchange's multiplier of the money (Д.R8б.33): the rate depends on the cover and on the exchange
+	multiply = zz_ef_xmul_m_v
 }
 zz_ef_value_to_parity = {
 	value = zz_ef_value_to_parity_own

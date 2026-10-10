@@ -5,7 +5,7 @@
 zz_ef_xq_w = 0.005
 zz_ef_xq_mid = 5
 zz_ef_xq_top = 9
-# a position under this share of the holder's portfolio is offered at the lowest step -- to the fund (Д.R8б.22)
+# a position under this share of the holder's portfolio is offered at the lowest step -- it goes first (Д.R8б.22)
 zz_ef_xch_small_share = 0.01
 # a holder's buying budget of a week, a share of its free money: the CB -- of its metal in money, the banks -- of their
 # capital (for money and for bonds each), the pops -- of their deposits; the banks and the pops -- at most this share
@@ -20,21 +20,50 @@ zz_ef_xch_exit_metal_mult = 2
 zz_ef_xch_exit_trade_cut = 0.5
 zz_ef_xch_exit_depth_cut = 0.5
 
-# Debtor scope: the fair price of its bonds a unit of principal -- the coupon (the interest a part earns) over the yield
-# of its debt (the government's rate: the key rate + the risk premium), 0.5..1.5; its money -- 1 (the parity)
+# The asset's market multiplier (Д.R8б.33): one per debtor and kind in the world (var:zz_ef_xmul_m / _b), moved weekly
+# by the unfilled demand or supply of its books against the depth of its market (zz_ef_xch_mul_move); money's -- inside
+# the money's rate (zz_ef_value_to_parity_own), a convertible one between its currency points (Д.R8б.34)
+zz_ef_xmul_step = 0.01
+zz_ef_xmul_lo = 0.5
+zz_ef_xmul_hi = 2
+# Debtor scope: the distance of its currency points from the parity -- its exchange's fee (the base without one)
+zz_ef_xch_point_v = {
+	value = zz_ef_xch_fee_base
+	if = {
+		limit = {
+			has_variable = zz_ef_xch
+			var:zz_ef_xch = { has_variable = zz_ef_xch_fee_m }
+		}
+		value = var:zz_ef_xch.var:zz_ef_xch_fee_m
+	}
+}
+zz_ef_xmul_m_v = {
+	value = 1
+	if = { limit = { has_variable = zz_ef_xmul_m } value = var:zz_ef_xmul_m }
+}
+zz_ef_xmul_b_v = {
+	value = 1
+	if = { limit = { has_variable = zz_ef_xmul_b } value = var:zz_ef_xmul_b }
+}
+# a bond's average life left, in years: a part is repaid evenly over zz_ef_bl_term_weeks -- half of it on average
+zz_ef_xq_life_b = 3.75
+# Debtor scope: the fair price of its bonds a unit of principal -- what is still paid on it: 1 + (the coupon - the
+# yield of its debt) x the average life left (the coupon -- the interest a part earns a year, the yield -- the
+# government's rate: the key rate + the risk premium), x its multiplier, 0.3..2; its money -- its rate (with the
+# multiplier)
 zz_ef_xq_fair_b = {
 	value = 1
 	if = {
-		limit = {
-			zz_ef_bl_principal > 0
-			zz_ef_gov_rate_target > 0
-		}
+		limit = { zz_ef_bl_principal > 0 }
 		value = zz_ef_bl_int_per_part
 		multiply = 52
-		divide = zz_ef_gov_rate_target
-		min = 0.5
-		max = 1.5
+		subtract = zz_ef_gov_rate_target
+		multiply = zz_ef_xq_life_b
+		add = 1
 	}
+	multiply = zz_ef_xmul_b_v
+	min = 0.3
+	max = 2
 }
 # Debtor scope: gold a unit of the claim at the fair price
 zz_ef_xq_gold_m = { value = zz_ef_xch_gpm_v }
@@ -111,6 +140,52 @@ zz_ef_xch_trade_share_v = {
 		max = 1
 		min = 0
 	}
+}
+# Holder scope, scope:zz_ef_xch_e: the trade with the exchange's country, a share of ours (as zz_ef_xch_trade_share_v)
+zz_ef_xch_trade_share_e_v = {
+	value = 0
+	if = {
+		limit = {
+			exists = market
+			scope:zz_ef_xch_e = { exists = market }
+			market = scope:zz_ef_xch_e.market
+		}
+		value = 1
+	}
+	else_if = {
+		limit = {
+			exists = market
+			scope:zz_ef_xch_e = { exists = market }
+		}
+		value = "mutual_trade_value_with_country(scope:zz_ef_xch_e)"
+		divide = {
+			value = zz_ef_v_f_exp
+			add = zz_ef_v_f_imp
+			min = 1
+		}
+		max = 1
+		min = 0
+	}
+}
+# a non-resident's fee on top (Д.R8б.35): the exchange's fee again, less up to this share for the trade with the
+# exchange's country
+zz_ef_xch_nonres_trade_cut = 0.5
+zz_ef_xch_nonres_v = {
+	value = 0
+	if = {
+		limit = { NOT = { scope:zz_ef_xch_e = this } }
+		value = zz_ef_xch_trade_share_e_v
+		multiply = { value = zz_ef_xch_nonres_trade_cut multiply = -1 }
+		add = 1
+		multiply = zz_ef_xch_fee_e_v
+	}
+}
+# the costs of buying a share of the price: the exchange's fee, the trade policy's surcharge (Д.R8б.18), a
+# non-resident's fee
+zz_ef_xch_fee_buy_v = {
+	value = zz_ef_xch_fee_e_v
+	add = zz_ef_xch_surcharge_v
+	add = zz_ef_xch_nonres_v
 }
 # the cost of leaving the claim, a share of its price
 zz_ef_xch_exit_v = {
@@ -240,11 +315,6 @@ zz_ef_xch_fund_bid_step_v = {
 zz_ef_xch_fund_ask_step_v = {
 	value = zz_ef_xq_mid
 	add = zz_ef_xch_fund_half_v
-}
-# the room left after the last clearing (none yet -- some)
-zz_ef_xch_fund_room_left_v = {
-	value = 1
-	if = { limit = { has_variable = zz_ef_xr_room } value = var:zz_ef_xr_room }
 }
 zz_ef_xch_fund_room_v = {
 	value = zz_ef_fd_capacity
@@ -410,6 +480,8 @@ zz_ef_v_f_xch_fee = {
 }
 # The player's window (common/scripted_guis/ld_exchange_window.txt): the sum of an order -- from this, halved / doubled
 # by the buttons within the bounds
+# a player's buy request with less than this left is done
+zz_ef_xpl_left_min = 100
 zz_ef_xwin_sum_start = 10000
 zz_ef_xwin_sum_min = 1000
 zz_ef_xwin_sum_max = 10000000
@@ -448,3 +520,10 @@ zz_ef_xl_code_m = 1
 zz_ef_xl_code_b = 2
 zz_ef_xl_code_buy = 1
 zz_ef_xl_code_sell = 2
+
+# Country scope: units of the engine's money in one unit of its currency -- its value in gold (E&F's money_value_in_gold,
+# the currencies' table); the window shows the prices of money in the buyer's currency a unit of the debtor's
+zz_ef_cur_unit_v = {
+	value = money_value_in_gold
+	min = 0.0001
+}

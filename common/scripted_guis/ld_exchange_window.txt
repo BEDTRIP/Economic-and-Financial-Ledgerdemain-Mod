@@ -1,8 +1,8 @@
-﻿# The player's window of the exchange (R8б, шаг 8; понятие «Биржа»; Д.R8б.13 -- the minimal one, the full -- R10): in
-# Budget -> Finances (gui/ld_cb_rate_panel.gui). The kind (money / bonds), the sum of an order; the rows -- what we hold
-# of the kind and our buyers' short list (scripted_effects/ld_exchange_trade.txt), with the fair price, last week's price
-# of the deal on our exchange and our holding; «buy» puts the sum in, «sell» -- all we hold; the order goes into the
-# book of the nearest week at our step (zz_ef_xch_post_player): money -- the CB's, bonds -- the treasury's.
+﻿# The player's window of the exchange (R8б, шаги 8, 12–14; понятие «Биржа»; Д.R8б.13, Д.R8б.35 -- the minimal one, the
+# full -- R10): in Budget -> Finances (gui/ld_cb_rate_panel.gui). The kind (money / bonds), the sum of an order; the
+# tables (scripted_effects/ld_exchange_trade.txt, zz_ef_xwin_fill): our requests («cancel»), our assets («sell» -- all we
+# hold), the offers on our exchange («buy» -- the sum). A request goes into the book of the nearest week at our step and
+# stays until filled or cancelled (zz_ef_xch_post_player): money -- the CB's, bonds -- the treasury's.
 zz_ef_xwin_update = {
 	effect = {
 		zz_ef_xwin_fill = yes
@@ -69,6 +69,7 @@ zz_ef_xwin_buy = {
 			else = {
 				zz_ef_xmap_set = { MAP = zz_ef_xpl_buy_b }
 			}
+			zz_ef_xwin_fill = yes
 		}
 	}
 }
@@ -91,6 +92,37 @@ zz_ef_xwin_sell = {
 			else = {
 				zz_ef_xmap_set = { MAP = zz_ef_xpl_sell_b }
 			}
+			zz_ef_xwin_fill = yes
+		}
+	}
+}
+# our request on scope:target of the shown kind cancelled (Д.R8б.35)
+zz_ef_xwin_cancel = {
+	effect = {
+		custom_tooltip = zz_ef_xwin_cancel_effect
+		hidden_effect = {
+			if = {
+				limit = { zz_ef_xwin_kind_is_money = yes }
+				if = {
+					limit = { is_key_in_variable_map = { name = zz_ef_xpl_buy_m target = scope:target } }
+					remove_from_variable_map = { name = zz_ef_xpl_buy_m key = scope:target }
+				}
+				if = {
+					limit = { is_key_in_variable_map = { name = zz_ef_xpl_sell_m target = scope:target } }
+					remove_from_variable_map = { name = zz_ef_xpl_sell_m key = scope:target }
+				}
+			}
+			else = {
+				if = {
+					limit = { is_key_in_variable_map = { name = zz_ef_xpl_buy_b target = scope:target } }
+					remove_from_variable_map = { name = zz_ef_xpl_buy_b key = scope:target }
+				}
+				if = {
+					limit = { is_key_in_variable_map = { name = zz_ef_xpl_sell_b target = scope:target } }
+					remove_from_variable_map = { name = zz_ef_xpl_sell_b key = scope:target }
+				}
+			}
+			zz_ef_xwin_fill = yes
 		}
 	}
 }
