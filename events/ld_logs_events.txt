@@ -8,5 +8,19 @@ zz_ef_logs.1 = {
 
 	immediate = {
 		set_global_variable = zz_ef_logs_on
+		if = { limit = { has_global_variable = zz_ef_logs_off } remove_global_variable = zz_ef_logs_off }
+	}
+}
+
+# Console: "event zz_ef_logs.2" -- switches the EF* logs off for this game and keeps debug mode from switching them on
+# again (gui/ld_logs_hook.gui); the sandbox's speed runs without logs send it.
+zz_ef_logs.2 = {
+	type = country_event
+	hidden = yes
+	orphan = yes # only the console calls it
+
+	immediate = {
+		if = { limit = { has_global_variable = zz_ef_logs_on } remove_global_variable = zz_ef_logs_on }
+		set_global_variable = zz_ef_logs_off
 	}
 }

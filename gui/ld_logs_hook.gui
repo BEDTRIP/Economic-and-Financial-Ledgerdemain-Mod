@@ -1,0 +1,17 @@
+﻿# Logs in debug mode: the game started with -debug_mode turns the EF* logs on by itself (global_var:zz_ef_logs_on,
+# scripted_triggers/ld_logs_triggers.txt). Script has no trigger for debug mode, the GUI has [InDebugMode]: a hidden
+# widget of real size fires the scripted GUI once when it is true (the pattern of gui/ld_money_hook.gui).
+widget = {
+	name = zz_ef_logs_hook
+	datacontext = "[GetMetaPlayer.GetPlayedOrObservedCountry]"
+	visible = "[And( InDebugMode, GetMetaPlayer.GetPlayedOrObservedCountry.IsValid )]"
+	size = { 10 10 }
+	allow_outside = yes
+	alwaystransparent = yes
+	alpha = 1
+
+	state = {
+		trigger_when = "[InDebugMode]"
+		on_finish = "[GetScriptedGui('zz_ef_logs_debug_sg').Execute( GuiScope.SetRoot( GetMetaPlayer.GetPlayedOrObservedCountry.MakeScope ).End )]"
+	}
+}

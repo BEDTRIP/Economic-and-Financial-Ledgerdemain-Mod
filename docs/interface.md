@@ -58,6 +58,8 @@ GUI-тип регистрирует первый файл по имени (ASCII
 - `gui/ld_national_capacity_chart.gui` — единственное определение `ef_bp_national_capacity_piechart` (используется
   `ld_economy_panel.gui:8273`); ряд в металле стандарта, доли — в золотом эквиваленте.
 - `gui/ld_money_hook.gui` — мост «бюджет → скрипт» (см. ниже); регистрация `gui/scripted_widgets/ld_money_hook.txt`.
+- `gui/ld_logs_hook.gui` — в режиме отладки включает логи `EF*` (`zz_ef_logs_debug_sg`; `docs/entry-points.md`, «Логи»); регистрация
+  `gui/scripted_widgets/ld_logs_hook.txt`.
 - `gui/scripted_widgets/ld_pb_fso_widgets.gui` — журнальные виджеты `zz_pb_ef_fso_bubble_widget`, `zz_pb_ef_fso_overcap_widget`,
   `zz_pb_ef_fso_hide_bars_widget` (подключены `common/journal_entries/00_ef_financial_center_je.txt:187-202`).
 
