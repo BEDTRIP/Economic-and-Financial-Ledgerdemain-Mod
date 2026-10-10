@@ -85,13 +85,17 @@ zz_ef_xch_step = {
 
 # Holder scope, scope:zz_ef_xch_d, scope:zz_ef_xch_e: the gain of holding a claim of kind K on the debtor --
 # var:zz_ef_xe_base (the yield less the risk premium and the cost of leaving), var:zz_ef_xe_r / var:zz_ef_xe_rcb (the
-# key rate to beat for others / for the CB: 0 for a claim in its cover), var:zz_ef_xe_fee (the costs of buying).
+# rate to beat: the pops' and the banks' -- the deposit rate at home, the treasury's -- var:zz_ef_xe_rtr, the CB's -- 0 for
+# a claim in its cover), var:zz_ef_xe_fee (the costs of buying).
 zz_ef_xch_eval = {
 	zz_ef_xch_eval_y_$K$ = yes
 	change_variable = { name = zz_ef_xe_base subtract = scope:zz_ef_xch_d.zz_ef_gov_rate_premium }
 	change_variable = { name = zz_ef_xe_base subtract = zz_ef_xch_exit_v }
 	set_variable = { name = zz_ef_xe_fee value = zz_ef_xch_fee_buy_v }
-	set_variable = { name = zz_ef_xe_r value = zz_ef_money_rate }
+	# the rate to beat (Д.R8б.40): the pops and the banks -- the deposit rate at home (where the money would lie
+	# otherwise), the treasury -- the key rate, the CB -- the key rate (0 for a claim in its cover)
+	set_variable = { name = zz_ef_xe_r value = zz_ef_deposit_rate }
+	set_variable = { name = zz_ef_xe_rtr value = zz_ef_money_rate }
 	set_variable = { name = zz_ef_xe_rcb value = zz_ef_money_rate }
 	zz_ef_xch_eval_cov_$K$ = yes
 }
@@ -111,7 +115,7 @@ zz_ef_xch_eval_cov_b = { }
 zz_ef_xch_g_cb = { set_variable = { name = zz_ef_xe_g value = { value = var:zz_ef_xe_base subtract = var:zz_ef_xe_rcb } } }
 zz_ef_xch_g_bk = { set_variable = { name = zz_ef_xe_g value = { value = var:zz_ef_xe_base subtract = var:zz_ef_xe_r } } }
 zz_ef_xch_g_pp = { set_variable = { name = zz_ef_xe_g value = { value = var:zz_ef_xe_base subtract = var:zz_ef_xe_r } } }
-zz_ef_xch_g_tr = { set_variable = { name = zz_ef_xe_g value = { value = var:zz_ef_xe_base subtract = var:zz_ef_xe_r } } }
+zz_ef_xch_g_tr = { set_variable = { name = zz_ef_xe_g value = { value = var:zz_ef_xe_base subtract = var:zz_ef_xe_rtr } } }
 
 # Holder scope, scope:zz_ef_xch_e: the sell orders of the holder T for its claims of kind K.
 zz_ef_xch_post_sells = {
@@ -606,9 +610,9 @@ zz_ef_xch_post_buys = {
 	set_variable = { name = zz_ef_xo_bv_bk_m value = 0 }
 	set_variable = { name = zz_ef_xo_bv_pp_m value = 0 }
 	set_variable = { name = zz_ef_xo_bv_bk_b value = 0 }
-	# the lowest rate to beat: 0 for a CB of an exchange standard (a claim in its cover), else our key rate; a candidate
-	# whose yield is not over it is not weighed
-	set_variable = { name = zz_ef_xo_rmin value = zz_ef_money_rate }
+	# the lowest rate to beat: 0 for a CB of an exchange standard (a claim in its cover), else our deposit rate (the
+	# pops' and the banks', Д.R8б.40); a candidate whose yield is not over it is not weighed
+	set_variable = { name = zz_ef_xo_rmin value = zz_ef_deposit_rate }
 	if = {
 		limit = {
 			has_modifier = has_central_bank
@@ -639,7 +643,7 @@ zz_ef_xch_post_buys = {
 				if = {
 					limit = {
 						scope:zz_ef_xch_d = { zz_ef_bl_principal > 0 }
-						scope:zz_ef_xch_d.zz_ef_gov_rate_target > zz_ef_money_rate
+						scope:zz_ef_xch_d.zz_ef_gov_rate_target > zz_ef_deposit_rate
 					}
 					zz_ef_xch_eval = { K = b }
 					zz_ef_xch_best = { T = bk K = b }
