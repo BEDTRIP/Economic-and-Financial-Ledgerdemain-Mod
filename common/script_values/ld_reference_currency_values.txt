@@ -2,8 +2,8 @@
 # a currency's strength against the reference currency (see
 # scripted_triggers/ld_reference_currency_triggers.txt). COUNTRY scope.
 # zz_ef_value_to_parity: a unit of the country's money against its parity (Д.R8а.4) -- see below.
-# The reference's own value_to_parity is kept monthly in global_var:zz_ef_ref_vtp by the reference
-# country (zz_ef_reference_strength_step, the money model's monthly step).
+# The reference's own value_to_parity is kept monthly in global_var:zz_ef_ref_vtp, its price index in
+# global_var:zz_ef_ref_cpi (zz_ef_reference_strength_step, the world's monthly pass).
 # !! MAINTENANCE !! Key-level REPLACE_OR_CREATE of E&F's difference_with_average_gold_exchange_
 # rate_currencies and money_value_median_and_money_value_in_gold_ratio (script_values/
 # 00_economic_scripted_value.txt:4970, 8542): our strength instead of the value / the median --
@@ -11,12 +11,28 @@
 #############################################
 
 # Д.R8а.4: 1 under a metal or exchange standard and with no monetary system (the market will move around the parity
-# with the exchange, R8б); a fiat currency floats -- 1 at the transition, then x (the reference's prices / its own) since
-# then (var:zz_ef_fiat_p0 / _r0, scripted_effects/ld_standard_switch.txt); an external exchange standard -- its anchor's
-# (var:zz_ef_anchor, scripted_effects/ld_anchor.txt; an anchor on fiat floats, and the subject with it).
+# with the exchange); a fiat currency floats -- 1 at the transition, then x (the reference's prices / its own) since then
+# (var:zz_ef_fiat_p0 / _r0, scripted_effects/ld_standard_switch.txt), x the reference's own value when the reference is
+# fiat too (global_var:zz_ef_ref_vtp); the fiat reference itself (Д.R8б.28) -- the price of gold on its market at the
+# transition over its price now (var:zz_ef_fiat_g0): gold dearer, every fiat money cheaper in gold. An external exchange
+# standard -- its anchor's (var:zz_ef_anchor, scripted_effects/ld_anchor.txt; an anchor on fiat floats, and the subject
+# with it).
 zz_ef_value_to_parity_own = {
 	value = 1
 	if = {
+		limit = {
+			has_law = law_type:law_fiat_standard
+			has_modifier = global_monetary_reference
+			has_variable = zz_ef_fiat_g0
+			var:zz_ef_fiat_g0 > 0
+			zz_ef_gold_price_here_v > 0
+		}
+		value = var:zz_ef_fiat_g0
+		divide = zz_ef_gold_price_here_v
+		min = 0.01
+		max = 100
+	}
+	else_if = {
 		limit = {
 			has_law = law_type:law_fiat_standard
 			has_variable = zz_ef_fiat_p0
@@ -30,8 +46,24 @@ zz_ef_value_to_parity_own = {
 		divide = var:zz_ef_prev_price
 		multiply = global_var:zz_ef_ref_cpi
 		divide = var:zz_ef_fiat_r0
+		if = {
+			limit = {
+				has_global_variable = zz_ef_ref_vtp
+				global_var:zz_ef_ref_vtp > 0
+			}
+			multiply = global_var:zz_ef_ref_vtp
+		}
 		min = 0.01
 		max = 100
+	}
+}
+# Country scope: the price of gold on its market against the base price (1 -- the base; 0 without a market)
+zz_ef_gold_price_here_v = {
+	value = 0
+	if = {
+		limit = { exists = market }
+		value = market.mg:gold.market_goods_pricier
+		add = 1
 	}
 }
 zz_ef_value_to_parity = {

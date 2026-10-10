@@ -1,13 +1,22 @@
 ﻿#############################################
 # the reference currency keeps its value / parity for everyone's strength
-# (script_values/ld_reference_currency_values.txt). Monthly, from the money model's monthly step.
+# (script_values/ld_reference_currency_values.txt). Monthly, the world's pass (zz_ef_world_month_ef), whatever the
+# reference's standard and role.
 #############################################
 
 zz_ef_reference_strength_step = {
-	if = {
+	every_country = {
 		limit = { has_modifier = global_monetary_reference }
+		# a fiat reference without the gold price of its transition: from now
+		if = {
+			limit = {
+				has_law = law_type:law_fiat_standard
+				NOT = { has_variable = zz_ef_fiat_g0 }
+			}
+			set_variable = { name = zz_ef_fiat_g0 value = zz_ef_gold_price_here_v }
+		}
 		set_global_variable = { name = zz_ef_ref_vtp value = zz_ef_value_to_parity }
-		# the reference's price index for the real rate (zz_ef_currency_trade_m)
+		# the reference's price index for the real rate (zz_ef_currency_trade_m) and the fiat currencies
 		if = {
 			limit = { has_variable = zz_ef_prev_price }
 			set_global_variable = { name = zz_ef_ref_cpi value = var:zz_ef_prev_price }

@@ -202,9 +202,9 @@ money_supply_variable_list = {
 national_capacity_variable_list = {
 	clear_variable_list = national_capacity_variable_list
 	clear_variable_list = reference_currency_list_1
-	# 6.10 day (В1 check): the yearly pick's great powers, for the log -- E&F's rating note (candidate: 6+), cover
-	# (candidate: 0.25+), reserves in gold (the order), standard (1 gold, 2 silver, 3 bimetallism, 4 gold exchange),
-	# the reference now. Line EFE.
+	# the yearly pick's great powers, for the log -- E&F's rating note (candidate: 6+), cover (candidate: 0.25+),
+	# reserves in gold (the order), standard (1 gold, 2 silver, 3 bimetallism, 4 gold exchange), the reference now. Line
+	# EFE.
 	every_country = {
 		limit = { country_rank >= rank_value:great_power }
 		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFE|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|note [THIS.GetCountry.MakeScope.Var('country_credit_note_fixe').GetValue|0]|cover [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_cover')|3]|cap_g [THIS.GetCountry.MakeScope.ScriptValue('national_capacity_in_gold')|0]|std [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_std_code')|0]|cb [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_has_cb_v')|0]|ref [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_is_reference_v')|0]" }
@@ -260,8 +260,7 @@ national_capacity_variable_list = {
                 }
             }
             clear_variable_list = reference_currency_country_1
-            # 6.10 day: France (rating 7, cover 0.46, reserves 15.3M) and Russia (13.1M) were candidates
-            # at 1837.12.29, Britain 10.1M, and the reference stayed with Britain -- the log of the candidates and the pick
+            # the log of the candidates and the pick (EFE)
             every_in_list = {
                 variable = reference_currency_list_1
                 if = { limit = { zz_ef_logs_on = yes } debug_log = "EFE|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|cand|cap_g [THIS.GetCountry.MakeScope.ScriptValue('national_capacity_in_gold')|0]" }
@@ -269,10 +268,7 @@ national_capacity_variable_list = {
             ordered_in_list = {
                 variable = reference_currency_list_1
                 order_by = national_capacity_in_gold
-                # the FIRST -- positions count from 0 (vanilla: position = 0 for the top); E&F's 1 took the
-                # second biggest reserves, and with one candidate nobody, so the reference never moved (France, AA,
-                # cover 0.4-0.6, stayed behind Britain at 0.006 cover through 1842 in run r1006_141714)
-                # 6.10 day: position alone (vanilla's form for the top); was with min = 0 / max = 1 as well -- a range
+                # the first -- positions count from 0, position alone (vanilla's form for the top)
                 position = 0
                 check_range_bounds = no
                 root = {
@@ -327,6 +323,28 @@ national_capacity_variable_list = {
 				} 
 			}
             }
+			# no candidate (Д.R8б.27): the reference stays with its country, fiat too, while it exists; with no
+			# reference at all -- the biggest great power with a CB by its reserves in gold, any standard
+			else_if = {
+				limit = { NOT = { any_country = { has_modifier = global_monetary_reference } } }
+				ordered_country = {
+					limit = {
+						country_rank >= rank_value:great_power
+						has_modifier = has_central_bank
+					}
+					order_by = national_capacity_in_gold
+					max = 1
+					check_range_bounds = no
+					add_modifier = { name = global_monetary_reference }
+					if = { limit = { zz_ef_logs_on = yes } debug_log = "EFE|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|pick|no_candidate_no_reference|std [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_std_code')|0]" }
+				}
+			}
+			else = {
+				every_country = {
+					limit = { has_modifier = global_monetary_reference }
+					if = { limit = { zz_ef_logs_on = yes } debug_log = "EFE|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|keep|no_candidate|std [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_std_code')|0]" }
+				}
+			}
         }
     }
 }

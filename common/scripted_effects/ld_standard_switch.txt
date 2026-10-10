@@ -68,17 +68,20 @@ zz_ef_std_switch_before = {
 }
 
 zz_ef_std_switch_after = {
-	# a fiat currency floats from the transition (zz_ef_value_to_parity_own, Д.R8а.4): the prices then, ours and the reference's
+	# a fiat currency floats from the transition (zz_ef_value_to_parity_own, Д.R8а.4): the prices then, ours and the
+	# reference's, and the price of gold on our market (a fiat reference's value in gold, Д.R8б.28)
 	if = {
 		limit = { has_law = law_type:law_fiat_standard }
 		set_variable = { name = zz_ef_fiat_p0 value = 100 }
 		if = { limit = { has_variable = zz_ef_prev_price var:zz_ef_prev_price > 0 } set_variable = { name = zz_ef_fiat_p0 value = var:zz_ef_prev_price } }
 		set_variable = { name = zz_ef_fiat_r0 value = 100 }
 		if = { limit = { has_global_variable = zz_ef_ref_cpi global_var:zz_ef_ref_cpi > 0 } set_variable = { name = zz_ef_fiat_r0 value = global_var:zz_ef_ref_cpi } }
+		set_variable = { name = zz_ef_fiat_g0 value = zz_ef_gold_price_here_v }
 	}
 	else = {
 		if = { limit = { has_variable = zz_ef_fiat_p0 } remove_variable = zz_ef_fiat_p0 }
 		if = { limit = { has_variable = zz_ef_fiat_r0 } remove_variable = zz_ef_fiat_r0 }
+		if = { limit = { has_variable = zz_ef_fiat_g0 } remove_variable = zz_ef_fiat_g0 }
 	}
 	if = {
 		limit = { has_variable = zz_ef_std_old }
