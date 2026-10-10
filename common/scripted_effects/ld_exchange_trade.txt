@@ -250,7 +250,10 @@ zz_ef_xch_post_player = {
 zz_ef_xch_player_buy = {
 	if = {
 		limit = {
-			NOT = { scope:zz_ef_xch_d = this }
+			OR = {
+				NOT = { scope:zz_ef_xch_d = this }
+				zz_ef_xch_own_ok_$K$ = yes
+			}
 			NOT = { zz_ef_xch_banned = yes }
 		}
 		scope:zz_ef_xch_d = { save_temporary_scope_as = zz_ef_rq_key }
@@ -437,6 +440,14 @@ zz_ef_xwin_fill = {
 		limit = { NOT = { this = scope:zz_ef_xw_root } }
 		save_temporary_scope_as = zz_ef_xw_c
 		scope:zz_ef_xw_root = { zz_ef_xwin_row_add = yes }
+	}
+	# our own bonds -- the buyback (Д.R8б.37)
+	if = {
+		limit = {
+			NOT = { zz_ef_xwin_kind_is_money = yes }
+			zz_ef_bl_principal > 0
+		}
+		add_to_global_variable_list = { name = zz_ef_xwin_book target = this }
 	}
 	every_in_global_list = {
 		variable = zz_ef_xwin_own
@@ -642,6 +653,36 @@ zz_ef_xch_post_buys = {
 	zz_ef_xch_buy_put = { T = bk K = m }
 	zz_ef_xch_buy_put = { T = pp K = m }
 	zz_ef_xch_buy_put = { T = bk K = b }
+	zz_ef_xch_buyback = yes
+}
+# Holder scope, scope:zz_ef_xch_e: the treasury buys back its own bonds when they stand below the principal and the
+# treasury has money (Д.R8б.37) -- a buy order at the fair price for its week's budget; bought parts are extinguished
+# (zz_ef_xch_deal)
+zz_ef_xch_buyback = {
+	if = {
+		limit = {
+			is_player = no
+			zz_ef_xch_budget_tr > 0
+			zz_ef_xq_fair_b < 1
+			NOT = { is_key_in_variable_map = { name = zz_ef_xa_tr_b target = this } }
+		}
+		save_temporary_scope_as = zz_ef_xch_d
+		set_variable = { name = zz_ef_xo_s value = zz_ef_xq_mid }
+		set_variable = {
+			name = zz_ef_xo_a
+			value = {
+				value = zz_ef_xch_budget_tr
+				divide = {
+					value = zz_ef_xq_fair_b
+					min = 0.001
+				}
+			}
+		}
+		if = {
+			limit = { var:zz_ef_xo_a > 0 }
+			zz_ef_xch_order_put = { T = tr K = b SIDE = b }
+		}
+	}
 }
 zz_ef_xch_best = {
 	zz_ef_xch_g_$T$ = yes
@@ -736,6 +777,20 @@ zz_ef_xch_settle_one = {
 	set_variable = { name = zz_ef_xo_fs value = scope:zz_ef_xch_e.var:zz_ef_rq_h }
 	scope:zz_ef_xch_e = { zz_ef_xr_$K$_fb_read = yes }
 	set_variable = { name = zz_ef_xo_fb value = scope:zz_ef_xch_e.var:zz_ef_rq_h }
+	scope:zz_ef_xch_e = { zz_ef_xr_$K$_is_read = yes }
+	set_variable = { name = zz_ef_xo_is value = scope:zz_ef_xch_e.var:zz_ef_rq_h }
+	scope:zz_ef_xch_e = { zz_ef_xr_$K$_ib_read = yes }
+	set_variable = { name = zz_ef_xo_ib value = scope:zz_ef_xch_e.var:zz_ef_rq_h }
+	set_variable = { name = zz_ef_xo_pt value = scope:zz_ef_xch_d.zz_ef_xch_point_steps_v }
+	set_variable = { name = zz_ef_xo_plo value = { value = zz_ef_xq_mid subtract = var:zz_ef_xo_pt } }
+	set_variable = { name = zz_ef_xo_phi value = { value = zz_ef_xq_mid add = var:zz_ef_xo_pt } }
+	scope:zz_ef_xch_e = { zz_ef_xr_$K$_xs_read = yes }
+	set_variable = { name = zz_ef_xo_xs value = scope:zz_ef_xch_e.var:zz_ef_rq_h }
+	scope:zz_ef_xch_e = { zz_ef_xr_$K$_xb_read = yes }
+	set_variable = { name = zz_ef_xo_xb value = scope:zz_ef_xch_e.var:zz_ef_rq_h }
+	scope:zz_ef_xch_e = { zz_ef_xr_$K$_xf_read = yes }
+	set_variable = { name = zz_ef_xo_xf value = scope:zz_ef_xch_e.var:zz_ef_rq_h }
+	set_variable = { name = zz_ef_xo_a3 value = 0 }
 	set_variable = { name = zz_ef_xo_a1 value = 0 }
 	set_variable = { name = zz_ef_xo_a2 value = 0 }
 	if = {
@@ -769,6 +824,49 @@ zz_ef_xch_settle_one = {
 			set_variable = { name = zz_ef_xd_f value = 1 }
 			zz_ef_xch_deal = { T = $T$ K = $K$ }
 		}
+		# the issuer's CB at its lower point
+		if = {
+			limit = {
+				var:zz_ef_xo_is > 0
+				var:zz_ef_xo_pt > 0
+				var:zz_ef_xo_p <= var:zz_ef_xo_plo
+			}
+			set_variable = { name = zz_ef_xo_a3 value = { value = var:zz_ef_xo_a subtract = var:zz_ef_xo_a1 subtract = var:zz_ef_xo_a2 multiply = var:zz_ef_xo_is } }
+			if = {
+				limit = { var:zz_ef_xo_a3 > 0 }
+				set_variable = { name = zz_ef_xd_a value = { value = var:zz_ef_xo_a3 multiply = -1 } }
+				set_variable = { name = zz_ef_xd_s value = var:zz_ef_xo_plo }
+				set_variable = { name = zz_ef_xd_f value = 2 }
+				zz_ef_xch_deal = { T = $T$ K = $K$ }
+			}
+		}
+		# the funds between the exchanges (Д.R8б.36): the rest at the fair price and below matched on another exchange,
+		# then the cheap rest bought by another exchange's fund
+		if = {
+			limit = { var:zz_ef_xo_p <= zz_ef_xq_mid }
+			set_variable = { name = zz_ef_xo_a4 value = { value = var:zz_ef_xo_a subtract = var:zz_ef_xo_a1 subtract = var:zz_ef_xo_a2 subtract = var:zz_ef_xo_a3 multiply = var:zz_ef_xo_xs } }
+			if = {
+				limit = { var:zz_ef_xo_a4 > 0 }
+				set_variable = { name = zz_ef_xd_a value = { value = var:zz_ef_xo_a4 multiply = -1 } }
+				set_variable = { name = zz_ef_xd_s value = zz_ef_xq_mid }
+				set_variable = { name = zz_ef_xd_f value = 3 }
+				zz_ef_xch_deal = { T = $T$ K = $K$ }
+			}
+			if = {
+				limit = {
+					var:zz_ef_xo_xf > 0
+					var:zz_ef_xo_p <= scope:zz_ef_xch_e.var:zz_ef_xr_ib
+					scope:zz_ef_xch_d = { has_variable = zz_ef_xcf_$K$ }
+				}
+				set_variable = { name = zz_ef_xd_a value = { value = var:zz_ef_xo_a subtract = var:zz_ef_xo_a1 subtract = var:zz_ef_xo_a2 subtract = var:zz_ef_xo_a3 subtract = var:zz_ef_xo_a4 multiply = var:zz_ef_xo_xf multiply = -1 } }
+				if = {
+					limit = { var:zz_ef_xd_a < 0 }
+					set_variable = { name = zz_ef_xd_s value = scope:zz_ef_xch_d.var:zz_ef_xcf_$K$.var:zz_ef_xr_ib }
+					set_variable = { name = zz_ef_xd_f value = 4 }
+					zz_ef_xch_deal = { T = $T$ K = $K$ }
+				}
+			}
+		}
 	}
 	else = {
 		change_variable = { name = zz_ef_xo_p subtract = 10 }
@@ -801,13 +899,42 @@ zz_ef_xch_settle_one = {
 			set_variable = { name = zz_ef_xd_f value = 1 }
 			zz_ef_xch_deal = { T = $T$ K = $K$ }
 		}
+		# the issuer's CB at its upper point
+		if = {
+			limit = {
+				var:zz_ef_xo_ib > 0
+				var:zz_ef_xo_pt > 0
+				var:zz_ef_xo_p >= var:zz_ef_xo_phi
+			}
+			set_variable = { name = zz_ef_xo_a3 value = { value = var:zz_ef_xo_a subtract = var:zz_ef_xo_a1 subtract = var:zz_ef_xo_a2 multiply = var:zz_ef_xo_ib } }
+			if = {
+				limit = { var:zz_ef_xo_a3 > 0 }
+				set_variable = { name = zz_ef_xd_a value = var:zz_ef_xo_a3 }
+				set_variable = { name = zz_ef_xd_s value = var:zz_ef_xo_phi }
+				set_variable = { name = zz_ef_xd_f value = 2 }
+				zz_ef_xch_deal = { T = $T$ K = $K$ }
+			}
+		}
+		# the funds between the exchanges: the rest at the fair price and over matched on another exchange
+		if = {
+			limit = { var:zz_ef_xo_p >= zz_ef_xq_mid }
+			set_variable = { name = zz_ef_xd_a value = { value = var:zz_ef_xo_a subtract = var:zz_ef_xo_a1 subtract = var:zz_ef_xo_a2 subtract = var:zz_ef_xo_a3 multiply = var:zz_ef_xo_xb } }
+			if = {
+				limit = { var:zz_ef_xd_a > 0 }
+				set_variable = { name = zz_ef_xd_s value = zz_ef_xq_mid }
+				set_variable = { name = zz_ef_xd_f value = 3 }
+				zz_ef_xch_deal = { T = $T$ K = $K$ }
+			}
+		}
 	}
 }
 
 # Holder scope, scope:zz_ef_xch_d, scope:zz_ef_xch_e; var:zz_ef_xd_a -- the claims bought (+) / sold (-), var:zz_ef_xd_s --
-# the price step, var:zz_ef_xd_f -- 1 if the other side is the exchange's fund. The claims change hands, the price in
-# gold (var:zz_ef_xd_g) is paid in each side's money out of its account (zz_ef_xch_pay_<T>_<K>; the fund -- its deposit
-# and the pool of its country); a side abroad of the exchange's country -- a flow abroad of both.
+# the price step, var:zz_ef_xd_f -- the other side: 0 the auction (the exchange's country settles), 1 the exchange's fund,
+# 2 the issuer's CB at its currency points (Д.R8б.34), 3 the funds between the exchanges (the rest matched on another
+# exchange, Д.R8б.36), 4 another exchange's fund (var:zz_ef_xcf_<K> of the debtor). The claims change hands, the price in
+# gold (var:zz_ef_xd_g) is paid in each side's money out of its account (zz_ef_xch_pay_<T>_<K>; a fund -- its deposit and
+# the pool of its country); a side abroad -- a flow abroad of both.
 zz_ef_xch_deal = {
 	save_temporary_scope_as = zz_ef_xo_h
 	# the fund sells: out of its stock first (it may hold less)
@@ -822,10 +949,27 @@ zz_ef_xch_deal = {
 		}
 		set_variable = { name = zz_ef_xd_a value = { value = scope:zz_ef_xch_e.var:zz_ef_rq_dlt multiply = -1 } }
 	}
-	zz_ef_rq_add = { H = $T$ K = $K$ D = scope:zz_ef_xch_d V = var:zz_ef_xd_a }
+	# our own bonds bought back -- not held: the engine's debt is cleared by them (Д.R8б.37)
+	if = {
+		limit = { scope:zz_ef_xch_d = this }
+		set_variable = { name = zz_ef_rq_dlt value = var:zz_ef_xd_a }
+	}
+	else = {
+		zz_ef_rq_add = { H = $T$ K = $K$ D = scope:zz_ef_xch_d V = var:zz_ef_xd_a }
+	}
 	set_variable = { name = zz_ef_xd_a value = var:zz_ef_rq_dlt }
 	if = {
 		limit = { NOT = { var:zz_ef_xd_a = 0 } }
+		if = {
+			limit = {
+				scope:zz_ef_xch_d = this
+				var:zz_ef_xd_a > 0
+				credit > 0
+			}
+			set_variable = { name = zz_ef_t_cd value = { value = var:zz_ef_xd_a divide = credit } }
+			clear_scaled_debt = var:zz_ef_t_cd
+			remove_variable = zz_ef_t_cd
+		}
 		set_variable = {
 			name = zz_ef_xd_g
 			value = {
@@ -834,26 +978,29 @@ zz_ef_xch_deal = {
 				multiply = scope:zz_ef_xch_d.zz_ef_xq_gold_$K$
 			}
 		}
-		# the buyer pays the exchange's fee, its trade policy's surcharge and a non-resident's fee on top (Д.R8.5, Д.R8б.18,
-		# Д.R8б.35): to the owners of
-		# the exchange's financial centre (var:zz_ef_xch_fee_acc of its country, zz_ef_xch_fee_pay)
+		# the buyer pays on top the exchange's fee, its trade policy's surcharge and a non-resident's fee (Д.R8.5,
+		# Д.R8б.18, Д.R8б.35) -- to the owners of the exchange's financial centre (var:zz_ef_xch_fee_acc, zz_ef_xch_fee_pay);
+		# matched on another exchange -- the exchange's fee once more, to the fund that did it (var:zz_ef_xd_cf)
 		set_variable = { name = zz_ef_xd_fee value = 0 }
+		set_variable = { name = zz_ef_xd_cf value = 0 }
 		if = {
 			limit = { var:zz_ef_xd_a > 0 }
-			set_variable = {
-				name = zz_ef_xd_fee
-				value = {
-					value = zz_ef_xch_fee_buy_v
-					multiply = var:zz_ef_xd_g
-				}
-			}
+			set_variable = { name = zz_ef_xd_fee value = { value = zz_ef_xch_fee_buy_v multiply = var:zz_ef_xd_g } }
 			scope:zz_ef_xch_e = {
 				if = { limit = { NOT = { has_variable = zz_ef_xch_fee_acc } } set_variable = { name = zz_ef_xch_fee_acc value = 0 } }
 				change_variable = { name = zz_ef_xch_fee_acc add = { value = scope:zz_ef_xo_h.var:zz_ef_xd_fee divide = zz_ef_xch_gpm_v } }
 			}
+			if = {
+				limit = { var:zz_ef_xd_f = 3 }
+				set_variable = { name = zz_ef_xd_cf value = { value = zz_ef_xch_fee_e_v multiply = var:zz_ef_xd_g } }
+				scope:zz_ef_xch_e = {
+					set_variable = { name = zz_ef_xd_xe value = { value = scope:zz_ef_xo_h.var:zz_ef_xd_cf divide = zz_ef_xch_gpm_v } }
+					zz_ef_xch_fund_cash = yes
+				}
+			}
 		}
 		# what we pay (+) / get (-) in our money
-		set_variable = { name = zz_ef_xd_x value = { value = var:zz_ef_xd_g add = var:zz_ef_xd_fee divide = zz_ef_xch_gpm_v } }
+		set_variable = { name = zz_ef_xd_x value = { value = var:zz_ef_xd_g add = var:zz_ef_xd_fee add = var:zz_ef_xd_cf divide = zz_ef_xch_gpm_v } }
 		zz_ef_xch_pay_$T$_$K$ = yes
 		if = {
 			limit = {
@@ -862,30 +1009,60 @@ zz_ef_xch_deal = {
 			}
 			zz_ef_xpl_paid = { K = $K$ }
 		}
+		# the side that settles the price: the exchange's country (0, 1), the issuer (2), another exchange's fund (4);
+		# between the exchanges (3) -- the buyers' and the sellers' flows abroad meet in the clearing
 		if = {
-			limit = { NOT = { scope:zz_ef_xch_e = this } }
-			change_variable = { name = zz_ef_f_xch_net subtract = var:zz_ef_xd_x }
-			scope:zz_ef_xch_e = {
-				set_variable = { name = zz_ef_xd_xe value = { value = scope:zz_ef_xo_h.var:zz_ef_xd_g add = scope:zz_ef_xo_h.var:zz_ef_xd_fee divide = zz_ef_xch_gpm_v } }
-				if = { limit = { NOT = { has_variable = zz_ef_xch_ext_acc } } set_variable = { name = zz_ef_xch_ext_acc value = 0 } }
-				change_variable = { name = zz_ef_xch_ext_acc add = var:zz_ef_xd_xe }
-			}
+			limit = { var:zz_ef_xd_f = 2 }
+			scope:zz_ef_xch_d = { save_temporary_scope_as = zz_ef_xd_o }
+		}
+		else_if = {
+			limit = { var:zz_ef_xd_f = 4 }
+			scope:zz_ef_xch_d.var:zz_ef_xcf_$K$ = { save_temporary_scope_as = zz_ef_xd_o }
+		}
+		else_if = {
+			limit = { NOT = { var:zz_ef_xd_f = 3 } }
+			scope:zz_ef_xch_e = { save_temporary_scope_as = zz_ef_xd_o }
 		}
 		if = {
-			limit = { var:zz_ef_xd_f = 1 }
-			scope:zz_ef_xch_e = {
+			limit = { var:zz_ef_xd_f = 3 }
+			change_variable = { name = zz_ef_f_xch_net subtract = { value = var:zz_ef_xd_g divide = zz_ef_xch_gpm_v } }
+		}
+		else_if = {
+			limit = { NOT = { scope:zz_ef_xd_o = this } }
+			change_variable = { name = zz_ef_f_xch_net subtract = { value = var:zz_ef_xd_g divide = zz_ef_xch_gpm_v } }
+			scope:zz_ef_xd_o = {
 				set_variable = { name = zz_ef_xd_xe value = { value = scope:zz_ef_xo_h.var:zz_ef_xd_g divide = zz_ef_xch_gpm_v } }
-				# the fund buys: our claims into its stock
+				zz_ef_xch_ext_in = yes
+			}
+		}
+		# the fees -- to the exchange's country
+		if = {
+			limit = {
+				NOT = { scope:zz_ef_xch_e = this }
+				var:zz_ef_xd_a > 0
+			}
+			change_variable = { name = zz_ef_f_xch_net subtract = { value = var:zz_ef_xd_fee add = var:zz_ef_xd_cf divide = zz_ef_xch_gpm_v } }
+			scope:zz_ef_xch_e = {
+				set_variable = { name = zz_ef_xd_xe value = { value = scope:zz_ef_xo_h.var:zz_ef_xd_fee add = scope:zz_ef_xo_h.var:zz_ef_xd_cf divide = zz_ef_xch_gpm_v } }
+				zz_ef_xch_ext_in = yes
+			}
+		}
+		# a fund on the other side (1 -- the exchange's, 4 -- another's): our claims into its stock, its money paid
+		if = {
+			limit = {
+				OR = {
+					var:zz_ef_xd_f = 1
+					var:zz_ef_xd_f = 4
+				}
+			}
+			scope:zz_ef_xd_o = {
+				set_variable = { name = zz_ef_xd_xe value = { value = scope:zz_ef_xo_h.var:zz_ef_xd_g divide = zz_ef_xch_gpm_v } }
 				if = {
 					limit = { scope:zz_ef_xo_h.var:zz_ef_xd_a < 0 }
 					set_variable = { name = zz_ef_rq_neg value = { value = scope:zz_ef_xo_h.var:zz_ef_xd_a multiply = -1 } }
 					zz_ef_rq_add = { H = fd K = $K$ D = scope:zz_ef_xch_d V = var:zz_ef_rq_neg }
 				}
-				# its money: what we pay into its deposit and its country's pool, what we get out of them
-				zz_ef_fd_dep_add = { V = var:zz_ef_xd_xe }
-				add_investment_pool = var:zz_ef_xd_xe
-				if = { limit = { NOT = { has_variable = zz_ef_xch_pool_acc } } set_variable = { name = zz_ef_xch_pool_acc value = 0 } }
-				change_variable = { name = zz_ef_xch_pool_acc add = var:zz_ef_xd_xe }
+				zz_ef_xch_fund_cash = yes
 			}
 		}
 		if = {
@@ -893,6 +1070,18 @@ zz_ef_xch_deal = {
 			zz_ef_xch_deal_count = yes
 		}
 	}
+}
+# Country scope, var:zz_ef_xd_xe: a flow from abroad into the country's step (its flows abroad, zz_ef_xch_step)
+zz_ef_xch_ext_in = {
+	if = { limit = { NOT = { has_variable = zz_ef_xch_ext_acc } } set_variable = { name = zz_ef_xch_ext_acc value = 0 } }
+	change_variable = { name = zz_ef_xch_ext_acc add = var:zz_ef_xd_xe }
+}
+# Country scope (a fund's exchange), var:zz_ef_xd_xe: into the fund's deposit and its country's pool (out of them, if < 0)
+zz_ef_xch_fund_cash = {
+	zz_ef_fd_dep_add = { V = var:zz_ef_xd_xe }
+	add_investment_pool = var:zz_ef_xd_xe
+	if = { limit = { NOT = { has_variable = zz_ef_xch_pool_acc } } set_variable = { name = zz_ef_xch_pool_acc value = 0 } }
+	change_variable = { name = zz_ef_xch_pool_acc add = var:zz_ef_xd_xe }
 }
 # Holder scope, var:zz_ef_xd_x -- what we pay (+) / get (-), var:zz_ef_xd_a -- the claims bought (+) / sold (-): out of
 # the account of the holder (Д.R8б.21) -- the pops' deposits, the banks' capital, the treasury; the CB's money is its
@@ -1074,11 +1263,147 @@ zz_ef_xch_week_close = {
 		}
 		zz_ef_xch_clear_exchange = yes
 	}
+	zz_ef_xch_cross = { K = m }
+	zz_ef_xch_cross = { K = b }
 	# the players' exchange tables -- fresh after the week's clearing (the window's «update» does the same at once)
 	every_country = {
 		limit = { is_player = yes }
 		zz_ef_xwin_fill = yes
 	}
+}
+
+# The world's pass at the week's close, after every exchange's clearing (Д.R8б.36): the funds work between the exchanges.
+# For each asset of kind K left over somewhere (global list zz_ef_xcross_<K>): the rest of the sells at the fair price
+# and below on one exchange meets the rest of the buys at it and over on another -- the shares xs / xb of each
+# exchange's rest, at the fair price, the buyer paying the exchange's fee once more to its fund; then the cheap rest
+# (at the fund's bid and below; money only) is bought by the fund with the most room left -- the share xf, that fund --
+# var:zz_ef_xcf_<K> of the debtor. The deals settle at the holders' next steps (zz_ef_xch_settle_one).
+zz_ef_xch_cross = {
+	every_in_global_list = {
+		variable = zz_ef_xcross_$K$
+		save_temporary_scope_as = zz_ef_rq_key
+		set_variable = { name = zz_ef_t_xs value = 0 }
+		set_variable = { name = zz_ef_t_xb value = 0 }
+		every_country = {
+			limit = { has_variable = zz_ef_xr_on }
+			zz_ef_xr_$K$_ls_read = yes
+			scope:zz_ef_rq_key = { change_variable = { name = zz_ef_t_xs add = prev.var:zz_ef_rq_h } }
+			zz_ef_xr_$K$_lb_read = yes
+			scope:zz_ef_rq_key = { change_variable = { name = zz_ef_t_xb add = prev.var:zz_ef_rq_h } }
+		}
+		# matched -> the shares of each side's rest
+		set_variable = { name = zz_ef_t_xm value = { value = var:zz_ef_t_xs max = var:zz_ef_t_xb } }
+		if = {
+			limit = {
+				var:zz_ef_t_xm > 0
+				var:zz_ef_t_xs > 0
+				var:zz_ef_t_xb > 0
+			}
+			set_variable = { name = zz_ef_t_xs value = { value = var:zz_ef_t_xm divide = var:zz_ef_t_xs } }
+			set_variable = { name = zz_ef_t_xb value = { value = var:zz_ef_t_xm divide = var:zz_ef_t_xb } }
+			save_temporary_scope_as = zz_ef_xc_d
+			every_country = {
+				limit = { has_variable = zz_ef_xr_on }
+				zz_ef_xr_$K$_ls_read = yes
+				if = {
+					limit = { var:zz_ef_rq_h > 0 }
+					set_variable = { name = zz_ef_xm_v value = scope:zz_ef_xc_d.var:zz_ef_t_xs }
+					zz_ef_xmap_set = { MAP = zz_ef_xr_$K$_xs }
+				}
+				zz_ef_xr_$K$_lb_read = yes
+				if = {
+					limit = { var:zz_ef_rq_h > 0 }
+					set_variable = { name = zz_ef_xm_v value = scope:zz_ef_xc_d.var:zz_ef_t_xb }
+					zz_ef_xmap_set = { MAP = zz_ef_xr_$K$_xb }
+				}
+			}
+			if = {
+				limit = { zz_ef_logs_on = yes }
+				set_variable = { name = zz_ef_t_xg value = { value = var:zz_ef_t_xm multiply = zz_ef_xq_gold_$K$ } }
+				zz_ef_xw_add = { N = cross V = var:zz_ef_t_xg }
+				remove_variable = zz_ef_t_xg
+			}
+		}
+		else = {
+			set_variable = { name = zz_ef_t_xs value = 0 }
+		}
+		zz_ef_xch_cross_fund_$K$ = yes
+		remove_variable = zz_ef_t_xs
+		remove_variable = zz_ef_t_xb
+		remove_variable = zz_ef_t_xm
+	}
+	clear_global_variable_list = zz_ef_xcross_$K$
+}
+zz_ef_xch_cross_fund_b = { }
+# Debtor scope (scope:zz_ef_rq_key), var:zz_ef_t_xs -- the share matched between the exchanges: the cheap rest left after
+# it on every exchange, in gold at the fair price, is bought by the fund with the most room left, as far as its room goes
+zz_ef_xch_cross_fund_m = {
+	if = { limit = { has_variable = zz_ef_xcf_m } remove_variable = zz_ef_xcf_m }
+	set_variable = { name = zz_ef_t_xc value = 0 }
+	save_temporary_scope_as = zz_ef_xc_d
+	every_country = {
+		limit = { has_variable = zz_ef_xr_on }
+		zz_ef_xr_m_lc_read = yes
+		if = {
+			limit = { var:zz_ef_rq_h > 0 }
+			scope:zz_ef_xc_d = {
+				change_variable = { name = zz_ef_t_xc add = { value = 1 subtract = var:zz_ef_t_xs multiply = prev.var:zz_ef_rq_h } }
+			}
+		}
+	}
+	if = {
+		limit = { var:zz_ef_t_xc > 0 }
+		ordered_country = {
+			limit = {
+				has_variable = zz_ef_xr_on
+				has_variable = zz_ef_xr_room
+				var:zz_ef_xr_room > 0
+			}
+			order_by = var:zz_ef_xr_room
+			# the room in gold at its bid against the rest's value
+			set_variable = {
+				name = zz_ef_t_xf
+				value = {
+					value = var:zz_ef_xr_room
+					multiply = zz_ef_xch_gpm_v
+					divide = {
+						value = scope:zz_ef_xc_d.var:zz_ef_t_xc
+						multiply = scope:zz_ef_xc_d.zz_ef_xq_gold_m
+						multiply = zz_ef_xr_bid_ratio_v
+						min = 0.001
+					}
+					max = 1
+					min = 0
+				}
+			}
+			if = {
+				limit = { var:zz_ef_t_xf > 0 }
+				scope:zz_ef_xc_d = { set_variable = { name = zz_ef_xcf_m value = prev } }
+				change_variable = {
+					name = zz_ef_xr_room
+					subtract = {
+						value = scope:zz_ef_xc_d.var:zz_ef_t_xc
+						multiply = scope:zz_ef_xc_d.zz_ef_xq_gold_m
+						multiply = zz_ef_xr_bid_ratio_v
+						divide = zz_ef_xch_gpm_v
+						multiply = var:zz_ef_t_xf
+					}
+				}
+				save_temporary_scope_as = zz_ef_xc_f
+				every_country = {
+					limit = { has_variable = zz_ef_xr_on }
+					zz_ef_xr_m_lc_read = yes
+					if = {
+						limit = { var:zz_ef_rq_h > 0 }
+						set_variable = { name = zz_ef_xm_v value = scope:zz_ef_xc_f.var:zz_ef_t_xf }
+						zz_ef_xmap_set = { MAP = zz_ef_xr_m_xf }
+					}
+				}
+			}
+			remove_variable = zz_ef_t_xf
+		}
+	}
+	remove_variable = zz_ef_t_xc
 }
 
 # Exchange scope: last week's results emptied; this week's books cleared asset by asset (the fund's quotes and room
@@ -1182,6 +1507,94 @@ zz_ef_xch_fund_rest_m = {
 		}
 	}
 }
+# Exchange scope, scope:zz_ef_rq_key (Д.R8б.34): the issuer's currency points as steps of the book -> var:zz_ef_t_plo /
+# var:zz_ef_t_phi (0 -- none: bonds, an inconvertible money, no CB)
+zz_ef_xch_points_set = {
+	set_variable = { name = zz_ef_t_plo value = 0 }
+	set_variable = { name = zz_ef_t_phi value = 0 }
+	zz_ef_xch_points_set_$K$ = yes
+}
+zz_ef_xch_points_set_b = { }
+zz_ef_xch_points_set_m = {
+	if = {
+		limit = { scope:zz_ef_rq_key.zz_ef_xch_point_steps_v > 0 }
+		set_variable = { name = zz_ef_t_plo value = { value = zz_ef_xq_mid subtract = scope:zz_ef_rq_key.zz_ef_xch_point_steps_v } }
+		set_variable = { name = zz_ef_t_phi value = { value = zz_ef_xq_mid add = scope:zz_ef_rq_key.zz_ef_xch_point_steps_v } }
+	}
+}
+# Exchange scope, scope:zz_ef_rq_key, after the fund: the issuer's CB takes what is left of the sells at or below its
+# lower point (var:zz_ef_t_r2s less the fund's share) as far as its metal goes -- the share var:zz_ef_t_is; it gives
+# what is left of the buys at or above its upper point (var:zz_ef_t_r2b less the fund's) -- var:zz_ef_t_ib, all of it
+# (it issues its money). Its side settles through the clearing like any deal's (zz_ef_xch_deal).
+zz_ef_xch_issuer_rest = {
+	set_variable = { name = zz_ef_t_is value = 0 }
+	set_variable = { name = zz_ef_t_ib value = 0 }
+	if = {
+		limit = { var:zz_ef_t_plo > 0 }
+		set_variable = { name = zz_ef_t_ir value = { value = var:zz_ef_t_rs multiply = var:zz_ef_t_fs multiply = -1 add = var:zz_ef_t_r2s } }
+		if = {
+			limit = { var:zz_ef_t_ir > 0 }
+			set_variable = {
+				name = zz_ef_t_is
+				value = {
+					value = scope:zz_ef_rq_key.zz_ef_xch_cb_metal_gold_v
+					divide = {
+						value = var:zz_ef_t_ir
+						multiply = scope:zz_ef_rq_key.zz_ef_xq_gold_m
+						min = 0.001
+					}
+					max = 1
+					min = 0
+				}
+			}
+		}
+		set_variable = { name = zz_ef_t_ir value = { value = var:zz_ef_t_rb multiply = var:zz_ef_t_fb multiply = -1 add = var:zz_ef_t_r2b } }
+		if = {
+			limit = { var:zz_ef_t_ir > 0 }
+			set_variable = { name = zz_ef_t_ib value = 1 }
+		}
+		remove_variable = zz_ef_t_ir
+	}
+}
+# Exchange scope, scope:zz_ef_rq_key, after the issuer (Д.R8б.36): what is left for the funds between the exchanges --
+# var:zz_ef_t_ls (sells at the fair price and below), var:zz_ef_t_lb (buys at it and over), var:zz_ef_t_lc (sells at the
+# fund's bid and below); the asset into the week's list for the world's pass (zz_ef_xch_cross)
+zz_ef_xch_left_set = {
+	set_variable = { name = zz_ef_t_l1 value = { value = var:zz_ef_t_rs multiply = var:zz_ef_t_fs } }
+	set_variable = { name = zz_ef_t_ls value = { value = var:zz_ef_t_r2s subtract = var:zz_ef_t_l1 multiply = var:zz_ef_t_is min = 0 } }
+	set_variable = { name = zz_ef_t_ls value = { value = var:zz_ef_t_r3s subtract = var:zz_ef_t_l1 subtract = var:zz_ef_t_ls min = 0 } }
+	set_variable = { name = zz_ef_t_lc value = { value = var:zz_ef_t_rs subtract = var:zz_ef_t_l1 } }
+	set_variable = { name = zz_ef_t_lc value = { value = var:zz_ef_t_lc subtract = { value = var:zz_ef_t_lc multiply = var:zz_ef_t_is } min = 0 } }
+	set_variable = { name = zz_ef_t_l1 value = { value = var:zz_ef_t_rb multiply = var:zz_ef_t_fb } }
+	set_variable = { name = zz_ef_t_lb value = { value = var:zz_ef_t_r2b subtract = var:zz_ef_t_l1 multiply = var:zz_ef_t_ib min = 0 } }
+	set_variable = { name = zz_ef_t_lb value = { value = var:zz_ef_t_r3b subtract = var:zz_ef_t_l1 subtract = var:zz_ef_t_lb min = 0 } }
+	if = {
+		limit = {
+			OR = {
+				var:zz_ef_t_ls > 0
+				var:zz_ef_t_lb > 0
+			}
+		}
+		zz_ef_xch_cross_list_$K$ = yes
+	}
+	remove_variable = zz_ef_t_l1
+	remove_variable = zz_ef_t_r2s
+	remove_variable = zz_ef_t_r2b
+	remove_variable = zz_ef_t_r3s
+	remove_variable = zz_ef_t_r3b
+}
+zz_ef_xch_cross_list_m = {
+	if = {
+		limit = { NOT = { is_target_in_global_variable_list = { name = zz_ef_xcross_m target = scope:zz_ef_rq_key } } }
+		add_to_global_variable_list = { name = zz_ef_xcross_m target = scope:zz_ef_rq_key }
+	}
+}
+zz_ef_xch_cross_list_b = {
+	if = {
+		limit = { NOT = { is_target_in_global_variable_list = { name = zz_ef_xcross_b target = scope:zz_ef_rq_key } } }
+		add_to_global_variable_list = { name = zz_ef_xcross_b target = scope:zz_ef_rq_key }
+	}
+}
 # Exchange scope, scope:zz_ef_rq_key, after the fund (Д.R8б.33): the asset's multiplier moves by what is left unfilled
 # -- the buys over the sells (var:zz_ef_t_rb, var:zz_ef_t_rs less the fund's shares) against the depth of its market (its
 # money held abroad / its bonds' principal), at most zz_ef_xmul_step a clearing, within zz_ef_xmul_lo..hi; a
@@ -1265,6 +1678,10 @@ zz_ef_xch_results_set = {
 				var:zz_ef_t_m > 0
 				var:zz_ef_t_fs > 0
 				var:zz_ef_t_fb > 0
+				var:zz_ef_t_is > 0
+				var:zz_ef_t_ib > 0
+				var:zz_ef_t_ls > 0
+				var:zz_ef_t_lb > 0
 			}
 		}
 		set_variable = { name = zz_ef_xm_v value = var:zz_ef_t_c }
@@ -1277,6 +1694,16 @@ zz_ef_xch_results_set = {
 		zz_ef_xmap_set = { MAP = zz_ef_xr_$K$_fs }
 		set_variable = { name = zz_ef_xm_v value = var:zz_ef_t_fb }
 		zz_ef_xmap_set = { MAP = zz_ef_xr_$K$_fb }
+		set_variable = { name = zz_ef_xm_v value = var:zz_ef_t_is }
+		zz_ef_xmap_set = { MAP = zz_ef_xr_$K$_is }
+		set_variable = { name = zz_ef_xm_v value = var:zz_ef_t_ib }
+		zz_ef_xmap_set = { MAP = zz_ef_xr_$K$_ib }
+		set_variable = { name = zz_ef_xm_v value = var:zz_ef_t_ls }
+		zz_ef_xmap_set = { MAP = zz_ef_xr_$K$_ls }
+		set_variable = { name = zz_ef_xm_v value = var:zz_ef_t_lb }
+		zz_ef_xmap_set = { MAP = zz_ef_xr_$K$_lb }
+		set_variable = { name = zz_ef_xm_v value = var:zz_ef_t_lc }
+		zz_ef_xmap_set = { MAP = zz_ef_xr_$K$_lc }
 		if = {
 			limit = { zz_ef_logs_on = yes }
 			zz_ef_xw_add = { N = assets V = 1 }
@@ -1324,7 +1751,12 @@ zz_ef_xch_deal_count = {
 	set_variable = { name = zz_ef_xd_ga value = var:zz_ef_xd_g }
 	if = { limit = { var:zz_ef_xd_ga < 0 } change_variable = { name = zz_ef_xd_ga multiply = -1 } }
 	if = {
-		limit = { var:zz_ef_xd_f = 1 }
+		limit = {
+			OR = {
+				var:zz_ef_xd_f = 1
+				var:zz_ef_xd_f = 4
+			}
+		}
 		if = {
 			limit = { var:zz_ef_xd_a < 0 }
 			zz_ef_xw_add = { N = fund_buy V = var:zz_ef_xd_ga }
@@ -1334,7 +1766,20 @@ zz_ef_xch_deal_count = {
 		}
 	}
 	else_if = {
-		limit = { var:zz_ef_xd_a > 0 }
+		limit = { var:zz_ef_xd_f = 2 }
+		if = {
+			limit = { var:zz_ef_xd_a < 0 }
+			zz_ef_xw_add = { N = cb_buy V = var:zz_ef_xd_ga }
+		}
+		else = {
+			zz_ef_xw_add = { N = cb_sell V = var:zz_ef_xd_ga }
+		}
+	}
+	else_if = {
+		limit = {
+			var:zz_ef_xd_a > 0
+			var:zz_ef_xd_f = 0
+		}
 		zz_ef_xw_add = { N = auction V = var:zz_ef_xd_ga }
 	}
 	zz_ef_xw_add = { N = deals V = 1 }
@@ -1387,12 +1832,15 @@ zz_ef_xch_month_log = {
 		}
 	}
 	change_global_variable = { name = zz_ef_xw_mut divide = 2 }
-	debug_log = "EFD|[TimeKeeper.GetCurrentDate.GetString]|WORLD|orders [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_orders_v')|0]|assets [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_assets_v')|0]|deals [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_deals_v')|0]|auction_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_auction_v')|0]|fund_buy_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_fund_buy_v')|0]|fund_sell_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_fund_sell_v')|0]|metal_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_metal_v')|0]|cover_fx_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_cov_v')|0]|pyramid [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_pyramid_v')|3]|fx_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_fx_v')|0]|mutual_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_mut_v')|0]|mutual_share [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_mut_share_v')|3]|arb_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_arb_v')|0]"
+	debug_log = "EFD|[TimeKeeper.GetCurrentDate.GetString]|WORLD|orders [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_orders_v')|0]|assets [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_assets_v')|0]|deals [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_deals_v')|0]|auction_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_auction_v')|0]|fund_buy_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_fund_buy_v')|0]|fund_sell_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_fund_sell_v')|0]|cb_buy_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_cb_buy_v')|0]|cb_sell_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_cb_sell_v')|0]|cross_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_cross_v')|0]|metal_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_metal_v')|0]|cover_fx_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_cov_v')|0]|pyramid [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_pyramid_v')|3]|fx_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_fx_v')|0]|mutual_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_mut_v')|0]|mutual_share [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_mut_share_v')|3]|arb_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xw_arb_v')|0]"
 	set_global_variable = { name = zz_ef_xw_orders value = 0 }
 	set_global_variable = { name = zz_ef_xw_assets value = 0 }
 	set_global_variable = { name = zz_ef_xw_deals value = 0 }
 	set_global_variable = { name = zz_ef_xw_auction value = 0 }
 	set_global_variable = { name = zz_ef_xw_fund_buy value = 0 }
+	set_global_variable = { name = zz_ef_xw_cb_buy value = 0 }
+	set_global_variable = { name = zz_ef_xw_cb_sell value = 0 }
+	set_global_variable = { name = zz_ef_xw_cross value = 0 }
 	set_global_variable = { name = zz_ef_xw_fund_sell value = 0 }
 	set_global_variable = { name = zz_ef_xw_arb value = 0 }
 }

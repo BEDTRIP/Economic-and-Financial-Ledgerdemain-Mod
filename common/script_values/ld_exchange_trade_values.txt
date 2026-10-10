@@ -37,6 +37,21 @@ zz_ef_xch_point_v = {
 		value = var:zz_ef_xch.var:zz_ef_xch_fee_m
 	}
 }
+# Debtor scope: its currency points in steps of the book from the fair price (Д.R8б.34) -- a convertible money of a
+# country with a CB; 0 -- none
+zz_ef_xch_point_steps_v = {
+	value = 0
+	if = {
+		limit = {
+			zz_ef_rq_conv_v > 0
+			has_modifier = has_central_bank
+		}
+		value = zz_ef_xch_point_v
+		divide = zz_ef_xq_w
+		ceiling = yes
+		max = 4
+	}
+}
 zz_ef_xmul_m_v = {
 	value = 1
 	if = { limit = { has_variable = zz_ef_xmul_m } value = var:zz_ef_xmul_m }
@@ -266,6 +281,21 @@ zz_ef_xo_small_lim_v = {
 	multiply = zz_ef_xch_small_share
 }
 # the week's budgets, in the holder's money
+# the treasury's buyback of its own bonds (Д.R8б.37): a share of the treasury's money a week, while the money is over 0,
+# the debt is there and its bonds stand below the principal
+zz_ef_xch_buy_share_tr = 0.01
+zz_ef_xch_budget_tr = {
+	value = 0
+	if = {
+		limit = {
+			money > 0
+			zz_ef_bl_principal > 0
+		}
+		value = money
+		multiply = zz_ef_xch_buy_share_tr
+		max = zz_ef_bl_principal
+	}
+}
 zz_ef_xch_budget_cb = {
 	value = 0
 	if = {
@@ -384,6 +414,20 @@ zz_ef_xw_deals_v = {
 zz_ef_xw_auction_v = {
 	value = 0
 	if = { limit = { has_global_variable = zz_ef_xw_auction } value = global_var:zz_ef_xw_auction }
+}
+# the issuers' CBs at their currency points: bought / sold their money, in gold (Д.R8б.34)
+zz_ef_xw_cb_buy_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_xw_cb_buy } value = global_var:zz_ef_xw_cb_buy }
+}
+zz_ef_xw_cb_sell_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_xw_cb_sell } value = global_var:zz_ef_xw_cb_sell }
+}
+# matched between the exchanges by the funds, in gold (Д.R8б.36)
+zz_ef_xw_cross_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_xw_cross } value = global_var:zz_ef_xw_cross }
 }
 zz_ef_xw_fund_buy_v = {
 	value = 0
