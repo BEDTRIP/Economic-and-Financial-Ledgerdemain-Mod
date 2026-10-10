@@ -1020,6 +1020,11 @@ zz_ef_xch_week_close = {
 		}
 		zz_ef_xch_clear_exchange = yes
 	}
+	# the players' exchange tables -- fresh after the week's clearing (the window's «update» does the same at once)
+	every_country = {
+		limit = { is_player = yes }
+		zz_ef_xwin_fill = yes
+	}
 }
 
 # Exchange scope: last week's results emptied; this week's books cleared asset by asset (the fund's quotes and room
