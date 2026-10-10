@@ -421,3 +421,24 @@ zz_ef_xwin_kind_v = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_xpl_kind } value = var:zz_ef_xpl_kind }
 }
+# the window's head, live: our exchange's fee, its fund's bid / ask as shares of the fair price (0 -- no exchange)
+zz_ef_xwin_fee_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_xch } value = var:zz_ef_xch.zz_ef_xch_fee_v }
+}
+zz_ef_xwin_bid_v = {
+	value = 0
+	if = {
+		limit = { has_variable = zz_ef_xch }
+		value = 1
+		subtract = { value = var:zz_ef_xch.zz_ef_xch_fund_half_v multiply = zz_ef_xq_w }
+	}
+}
+zz_ef_xwin_ask_v = {
+	value = 0
+	if = {
+		limit = { has_variable = zz_ef_xch }
+		value = 1
+		add = { value = var:zz_ef_xch.zz_ef_xch_fund_half_v multiply = zz_ef_xq_w }
+	}
+}

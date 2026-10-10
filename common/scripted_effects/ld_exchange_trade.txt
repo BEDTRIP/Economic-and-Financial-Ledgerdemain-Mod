@@ -397,15 +397,9 @@ zz_ef_xwin_fill = {
 		save_temporary_scope_as = zz_ef_xw_c
 		scope:zz_ef_xw_root = { zz_ef_xwin_row_add = yes }
 	}
-	set_variable = { name = zz_ef_xwin_fee value = 0 }
-	set_variable = { name = zz_ef_xwin_bid value = 0 }
-	set_variable = { name = zz_ef_xwin_ask value = 0 }
 	if = {
 		limit = { has_variable = zz_ef_xch }
 		var:zz_ef_xch = { save_temporary_scope_as = zz_ef_xch_e }
-		set_variable = { name = zz_ef_xwin_fee value = scope:zz_ef_xch_e.zz_ef_xch_fee_v }
-		set_variable = { name = zz_ef_xwin_bid value = { value = 1 subtract = { value = scope:zz_ef_xch_e.zz_ef_xch_fund_half_v multiply = zz_ef_xq_w } } }
-		set_variable = { name = zz_ef_xwin_ask value = { value = 1 add = { value = scope:zz_ef_xch_e.zz_ef_xch_fund_half_v multiply = zz_ef_xq_w } } }
 	}
 	every_in_global_list = {
 		variable = zz_ef_xwin_list
