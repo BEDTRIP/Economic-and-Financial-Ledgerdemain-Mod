@@ -166,6 +166,13 @@ zz_ef_xr_m_fb_read = {
 		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_xr_m_fb|scope:zz_ef_rq_key)" }
 	}
 }
+zz_ef_xbi_m_read = {
+	set_variable = { name = zz_ef_rq_h value = 0 }
+	if = {
+		limit = { is_key_in_variable_map = { name = zz_ef_xbi_m target = scope:zz_ef_rq_key } }
+		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_xbi_m|scope:zz_ef_rq_key)" }
+	}
+}
 zz_ef_xs_b_1_read = {
 	set_variable = { name = zz_ef_rq_h value = 0 }
 	if = {
@@ -325,6 +332,13 @@ zz_ef_xr_b_fb_read = {
 	if = {
 		limit = { is_key_in_variable_map = { name = zz_ef_xr_b_fb target = scope:zz_ef_rq_key } }
 		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_xr_b_fb|scope:zz_ef_rq_key)" }
+	}
+}
+zz_ef_xbi_b_read = {
+	set_variable = { name = zz_ef_rq_h value = 0 }
+	if = {
+		limit = { is_key_in_variable_map = { name = zz_ef_xbi_b target = scope:zz_ef_rq_key } }
+		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_xbi_b|scope:zz_ef_rq_key)" }
 	}
 }
 zz_ef_xa_cb_m_read = {
@@ -941,11 +955,13 @@ zz_ef_xch_results_empty = {
 	clear_variable_map = zz_ef_xr_m_pb
 	clear_variable_map = zz_ef_xr_m_fs
 	clear_variable_map = zz_ef_xr_m_fb
+	clear_variable_map = zz_ef_xbi_m
 	clear_variable_map = zz_ef_xr_b_c
 	clear_variable_map = zz_ef_xr_b_ps
 	clear_variable_map = zz_ef_xr_b_pb
 	clear_variable_map = zz_ef_xr_b_fs
 	clear_variable_map = zz_ef_xr_b_fb
+	clear_variable_map = zz_ef_xbi_b
 }
 zz_ef_xch_orders_empty = {
 	clear_variable_map = zz_ef_xa_cb_m

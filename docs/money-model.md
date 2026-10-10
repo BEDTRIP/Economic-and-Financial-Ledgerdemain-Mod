@@ -50,7 +50,7 @@
 | доли банков в чужих облигациях | `zz_ef_bank_bonds` (= Σ `ai_privat_bank_bond_value_N` E&F) | банки (актив) | покупка E&F `ai_privat_bank_bond_N` (пул → доля), реестр облигаций (`ld_bond_ledger.txt`: возврат лишнего — пул, выкуп — пул, списание и недоплата продавца — из капитала банков) |
 | требования населения | `zz_ef_pop_claims_stocks`, `_bonds`, `_private` | население | по нулям (R6, R7) |
 | позиция к палате клиринга | `zz_ef_clr_position` | страна | по нулям (R8) |
-| металл ЦБ / банков / населения | `gold_state_1` / `silver_state_1` штата ЦБ, `zz_ef_bankm_*`, `zz_ef_popm_*` | — | `ld_metal_accounts.txt` |
+| металл ЦБ / банков / населения | `gold_state_1` / `silver_state_1` штата ЦБ, `zz_ef_bankm_*`, `zz_ef_popm_*` | — | `ld_metal_accounts.txt`; у ЦБ биметаллизма — арбитраж через биржу (`zz_ef_f_mt_arb_g/_s`, `exchange-companies.md`) |
 Счета, которых нет, заводит `zz_ef_registry_init` из `zz_ef_country_init` — первый заход планировщика (раз за игру, признак `zz_ef_registry`).
 
 **Проводка** — пара счетов, одна сумма: `zz_ef_post = { FROM TO V }` (наш → наш), `zz_ef_post_from_eng = { ENG TO V }`,

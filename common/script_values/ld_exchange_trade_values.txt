@@ -330,6 +330,10 @@ zz_ef_xw_fx_v = {
 	value = 0
 	if = { limit = { has_global_variable = zz_ef_xw_fx } value = global_var:zz_ef_xw_fx }
 }
+zz_ef_xw_arb_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_xw_arb } value = global_var:zz_ef_xw_arb }
+}
 zz_ef_xw_mut_v = {
 	value = 0
 	if = { limit = { has_global_variable = zz_ef_xw_mut } value = global_var:zz_ef_xw_mut }
@@ -352,4 +356,50 @@ zz_ef_xw_mut_share_v = {
 		value = zz_ef_xw_mut_v
 		divide = zz_ef_xw_fx_v
 	}
+}
+# The owners of the exchange's financial centre (zz_ef_xch_fee_pay): the state's share of the building (the engine's
+# private_ownership_fraction is a comparison only -- by quarters); 1 without a building
+zz_ef_xch_fc_state_share_v = {
+	value = 1
+	if = {
+		limit = { has_variable = zz_ef_fc_state }
+		value = var:zz_ef_fc_state.zz_ef_xch_fc_state_share_here_v
+	}
+}
+zz_ef_xch_fc_state_share_here_v = {
+	value = 1
+	every_scope_building = {
+		limit = { is_building_group = bg_financial_centre }
+		value = 1
+		if = { limit = { private_ownership_fraction > 0.125 } value = 0.75 }
+		if = { limit = { private_ownership_fraction > 0.375 } value = 0.5 }
+		if = { limit = { private_ownership_fraction > 0.625 } value = 0.25 }
+		if = { limit = { private_ownership_fraction > 0.875 } value = 0 }
+	}
+}
+# The arbitrage of bimetallism (zz_ef_xch_bimet_arb; Д.R8.10): the gap -- (the world's gold in silver - the legal) / the
+# world's, + silver overvalued by the law; the net gain after the exchange's fee on both legs; the week's share of the
+# CB's undervalued metal per unit of the net gain, at most the cap
+zz_ef_xch_arb_speed = 2
+zz_ef_xch_arb_cap = 0.05
+zz_ef_xch_arb_gap_v = {
+	value = gold_to_silver_rate
+	subtract = bimetallic_rate_gold_to_silver
+	divide = gold_to_silver_rate
+}
+zz_ef_xch_arb_net_v = {
+	value = zz_ef_xch_arb_gap_v
+	if = { limit = { zz_ef_xch_arb_gap_v < 0 } multiply = -1 }
+	subtract = {
+		value = zz_ef_xch_fee_base
+		if = {
+			limit = { has_variable = zz_ef_xch }
+			value = var:zz_ef_xch.zz_ef_xch_fee_v
+		}
+		multiply = 2
+	}
+}
+zz_ef_v_f_xch_fee = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_xch_fee } value = var:zz_ef_f_xch_fee }
 }

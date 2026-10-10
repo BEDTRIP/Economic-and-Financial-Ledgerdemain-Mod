@@ -184,10 +184,11 @@ zz_ef_fd_capital_update = {
 }
 
 # Any scope, monthly with the logs on (zz_ef_world_month_ef): a line per fund (EFU) -- its deposit, capital, shares
-# outstanding (the debtor's total of kind f), the week's money from abroad, the start's deposit, its levels' room.
+# outstanding (the debtor's total of kind f), the week's money from abroad, the start's deposit, its levels' room; the
+# exchange's fee income of the country's last step and its treasury's money from the exchange.
 zz_ef_fund_log = {
 	every_country = {
 		limit = { has_variable = zz_ef_fd_dep }
-		debug_log = "EFU|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|dep [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fd_dep_v')|0]|capital [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fd_capital_v')|0]|shares [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_out_f_v')|0]|in_abroad [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_fd_in')|0]|start [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_fd_start')|0]|interest [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_fd_int')|0]|room [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fd_capacity')|0]"
+		debug_log = "EFU|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|dep [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fd_dep_v')|0]|capital [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fd_capital_v')|0]|shares [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_out_f_v')|0]|in_abroad [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_fd_in')|0]|start [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_fd_start')|0]|interest [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_fd_int')|0]|room [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fd_capacity')|0]|xch_fee [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_xch_fee')|0]|xch_tr [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_xch_tr')|0]"
 	}
 }

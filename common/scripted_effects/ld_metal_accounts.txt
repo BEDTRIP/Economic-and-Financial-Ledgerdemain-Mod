@@ -533,6 +533,12 @@ zz_ef_metal_reconcile = {
 			change_variable = { name = zz_ef_f_mt_oth_g subtract = var:zz_ef_mt_start_adj_g }
 			change_variable = { name = zz_ef_f_mt_oth_s subtract = var:zz_ef_mt_start_adj_s }
 		}
+		# the arbitrage of bimetallism through the exchange (ld_exchange_trade.txt)
+		if = {
+			limit = { has_variable = zz_ef_f_mt_arb_g }
+			change_variable = { name = zz_ef_f_mt_oth_g subtract = var:zz_ef_f_mt_arb_g }
+			change_variable = { name = zz_ef_f_mt_oth_s subtract = var:zz_ef_f_mt_arb_s }
+		}
 		zz_ef_wm_add = { KEY = oth_gold VALUE = var:zz_ef_f_mt_oth_g }
 		zz_ef_wm_add = { KEY = oth_silver VALUE = var:zz_ef_f_mt_oth_s }
 		if = {
