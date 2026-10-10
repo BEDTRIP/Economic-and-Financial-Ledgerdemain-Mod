@@ -1,8 +1,20 @@
 ﻿namespace = ld_mu_probe
 
-# R8в.4 probe (console only, `event ld_mu_probe.1`): Belgium, Switzerland and Sardinia join France's currency union as
+# R8в.4 probe (console only, `event ld_mu_probe.0`): Belgium, Switzerland and Sardinia join France's currency union as
 # their treaties would (zz_ef_mu_join); 120 days on France takes the gold standard (its followers must follow); 240 days on
 # Switzerland's treaty breaks (it leaves alone). Logs: EFM|...|mu_*, EFZ|mu_probe.
+# the entry from the console: the probe itself 45 days on, once the start has set the central banks up
+ld_mu_probe.0 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		if = {
+			limit = { NOT = { has_global_variable = zz_ef_mu_probe_on } }
+			set_global_variable = zz_ef_mu_probe_on
+			trigger_event = { id = ld_mu_probe.1 days = 45 }
+		}
+	}
+}
 ld_mu_probe.1 = {
 	type = country_event
 	hidden = yes
