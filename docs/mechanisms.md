@@ -8,7 +8,7 @@
 коэффициент, закомментированный вызов); `мёртвый` — ни откуда не вызывается; `дубль` — считает то же или пишет те же
 счета, что модель `ld_*`. Строки файлов — на момент записи, при правке файла сдвигаются: искать по имени.
 
-Итого: мёртвый 4, выключен 0, дубль 3, живой 209. Разделы — по подсистемам: читать раздел своей подсистемы, а не весь реестр.
+Итого: мёртвый 4, выключен 0, дубль 3, живой 207. Разделы — по подсистемам: читать раздел своей подсистемы, а не весь реестр.
 
 ## Денежная модель и металл (`money-model.md`)
 
@@ -40,7 +40,6 @@
 
 | механизм | статус | где | доказательство | интерфейс |
 | --- | --- | --- | --- | --- |
-| Статья Скандинавский валютный союз scandinavian_monetary_union_treaty | живой | common/treaty_articles/17_scandinavian_monetary_union_treaty.txt | создаётся событием 00_ef_economic_event.23 (`articles_to_create`), ЖЗ scandinavian_monetary_union_je_1 (00_ef_divers_je.txt:967) проверяет статью, кнопки союза и переменные scandinavian_monetary_union_* подключены; денежных эффектов в статье нет (только лоббийное умиротворение) | окно договоров, журнал союза |
 | Флаг-модификатор monetary_systeme_transition (блокирует переход E&F на другой стандарт) | живой | 01_economic_scripted_effects.txt:10024, 27863; 0_ef_economic_event.23 | ставится на 12 мес. после смены закона стандарта, на 120 мес. событием союза; читается условиями законов стандарта (01_ef_monetary_system.txt:64,98,163) и эффектами перехода E&F | модификатор страны |
 | Валюта-эталон по E&F: money_value_median, weighted_average_currency_value(_test), is_reference_type | дубль | common/script_values/01_economic_currency_scripted_value.txt:1,8,7788; common/script_values/ld_reference_currency_values.txt:14 | «эталон» и «сила» теперь по zz_ef_currency_strength; медиана E&F осталась запасным путём в zz_ef_value_to_parity и в is_reference_currency | — |
 | Законы валют law_<cur>_currency (95) | живой | common/laws/01_ef_currency_type.txt:1-2028 | есть вызовы activate_law из introduction_new_currency и истории; 39 законов с always = no (товар вырезан), остальные ограничены тегами E&F + has_central_bank | окно законов (группа lawgroup_currency_type) |
@@ -57,7 +56,6 @@
 | Доли стран одного рынка zz_ef_msh_world_step / zz_ef_msh_read (Д.R8в.1) | живой | common/scripted_effects/ld_market_shares.txt | вызов из мирового прохода месяца ld_world_month.txt; читает zz_ef_trade_net_week (ld_money_model_values.txt); лог EFX msh_p / msh_c | — |
 | Технология currency_standards на старте (ld_start_currency_standards.txt) | живой | common/history/global/ld_start_currency_standards.txt:4-20 | странам с подушным налогом без технологии; метка zz_ef_start_currency_standards | — |
 | Настройка старта E&F с первого дня (`zz_ef_start_setup`: из годового пульса — ступени ВВП, ЦБ и финцентры по ВВП, рейтинг, списки эталона; из конца истории E&F — доходность облигаций, методы ЦБ и финцентра, список законов валют, статус денежной системы; месячный хаб целиком) | живой | common/scripted_effects/ld_start_setup.txt; events/ld_start_setup_events.txt | первый бюджетный тик после первой недели (`zz_ef_sched_probe_step`, `ld_scheduler.txt`), до шагов модели, один раз (`global_var zz_ef_start_setup_done`, до 1836.3): события `ld_start_setup.1` / `.2` каждой стране (root — страна) | — |
-| Статья Латинский валютный союз latin_monetary_union_treaty | живой | common/treaty_articles/16_latin_monetary_union_treaty.txt | создаётся событием 00_ef_economic_event.txt:499, ЖЗ 00_ef_divers_je.txt:210; денежных эффектов в статье нет (только лоббийное умиротворение) | окно договоров |
 | Триггеры is_reference_currency(_no)/is_extreme_weak_currency/market_goods_is_currency | живой | common/scripted_triggers/00_ef_custom_trigger.txt:582-623,1134,1423 | refs 3, 3, 100, 1 | — |
 
 ## ЦБ и ставка (`central-bank.md`)
@@ -124,6 +122,7 @@
 | --- | --- | --- | --- | --- |
 | E&F trade_balance (счётчики *_fix, trade_balance_in_gold_fixe) | живой | common/scripted_effects/01_economic_scripted_effects.txt:27045-27428; вызовы 00_economic_scripted_guis.txt:422, 1_economic_scripted_effects.txt:14791,41371,42319 | вызывается из месячного ЦБ, окон, событий; обнуляет `trade_balance_in_gold_fixe`, которую пишут `reset_debt_in_currency*` и кнопка `trade_balance_actualized`, читают ~15 значений `00_economic_scripted_value.txt` и строка ld_economy_panel.gui:550 | показатели торгового баланса E&F |
 | Клиринг zz_ef_clr_step / zz_ef_clr_settle (позиции недели, зачёт по группам металла, платёж-набор; Д.R8в.4, Д.R8в.11) | живой | common/scripted_effects/ld_clearing.txt | zz_ef_clr_step из zz_ef_cb_hume_step (недельный шаг); zz_ef_clr_settle из zz_ef_world_week_close (ld_scheduler.txt); пишет gold_state_1/silver_state_1 ЦБ, металл банков, требования cb / bk; лог EFN | карточка заграницы |
+| Валютные союзы zz_ef_mu_* (статья ld_monetary_integration, глава, последователи, покрытие союза, записи дневника; Д.R8в.5, Д.R8в.13–19) | живой | common/scripted_effects/ld_monetary_union.txt; common/treaty_articles/ld_monetary_integration.txt; common/journal_entries/ld_monetary_union_je.txt | статья договора (on_entry_into_force / on_withdrawal); zz_ef_mu_world_step из мирового прохода месяца; zz_ef_mu_head_law_changed из on_activate законов; лог EFM mu_* | окно договоров, записи дневника |
 | Недельная дельта чужих денег ЦБ zz_ef_cbfx_week_step | живой | common/scripted_effects/ld_clearing.txt; вызов ld_money_model.txt (только у игроков — витрина, Д.R3б.3) | карты zz_ef_cbfx_d / zz_ef_cbfx_p по эмитентам | таблица резервов ЦБ |
 | Таблица резервов ЦБ zz_ef_cbfx_update_sorted / zz_ef_holders_update | живой | common/scripted_guis/ld_cbfx.txt | кнопки gui/ld_economy_panel.gui; строки — эмитенты из карты zz_ef_rq_cb_m | таблица чужих денег ЦБ, диаграмма держателей |
 | Резервы валюты в золоте zz_ef_fx_reserves_metal | живой | common/script_values/ld_fx_reserves_values.txt; zz_ef_fx_metal_update (ld_money_model.txt) | неделя: карта zz_ef_rq_cb_m в золоте, только эмитенты с разменом (Д.R8а.5) | покрытие, карточка резервов |
@@ -277,7 +276,6 @@
 | Виджеты журнала финцентра zz_pb_ef_fso_bubble/overcap/hide_bars | живой | gui/scripted_widgets/ld_pb_fso_widgets.gui:46,477,1047; common/journal_entries/00_ef_financial_center_je.txt:187-202; common/scripted_guis/ld_pb_fso_sguis.txt | подключены в журнале, sgui показа строк | журнал финцентра |
 | Кнопки журналов speculative_share_1..13_button (scripted_buttons) | живой | common/scripted_buttons/00_ef_buttons.txt:163-2618; common/journal_entries/00_ef_financial_center_je.txt:206-219 | подключены `scripted_button =` (refs=31); gui/scripted_widgets/00_ef_custom_widgets.gui:142,282 вызывают одноимённые sgui | журнал финцентра |
 | Кнопки ИИ zz_pb_ef_css_private_ban/_allow_button | живой | common/scripted_buttons/ld_pb_css_private_ban_buttons.txt; common/journal_entries/00_ef_financial_center_je.txt:225-226 | подключены в журнале, нажимает ИИ | журнал финцентра |
-| Кнопки валютных союзов latin_/scandinavian_monetary_union_1/2_button | живой | common/scripted_buttons/00_ef_buttons.txt:2654-2719; common/journal_entries/00_ef_divers_je.txt:218-219,976-977 | подключены `scripted_button =` | журнал союза |
 | Прогресс-бары журналов (currency_standards, central_banking, stock_exchange, financial_center, speculative_share, overbuilt_economy, *_monetary_union, silver_crisis, je_efcc) | живой | common/scripted_progress_bars/00_ef_progressbar.txt:1-165 | refs 13-24 в index.tsv | журналы |
 | Игровые понятия E&F (75 concept_*) и ld_cb_rate_concepts (2) | живой | common/game_concepts/00_ef_game_concepts.txt; common/game_concepts/ld_cb_rate_concepts.txt | используются из локализации и панелей | подсказки-ссылки |
 | Компактный список компаний (ef_company_type_row, ef_companies_compact) | живой | gui/companies_panel.gui:343-389 | вставка в ванильную панель компаний, флаг GetVariableSystem | панель компаний |

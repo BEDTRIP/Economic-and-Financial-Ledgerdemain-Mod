@@ -1,0 +1,77 @@
+# from common/script_values/00_economic_scripted_value.txt: latin_monetary_union_country_in_debat, scandinavian_monetary_union_country_in_debat
+latin_monetary_union_country_in_debat = {
+	every_country = {
+		limit = {
+			var:latin_monetary_union_on_discution = 1
+		}
+		add = 1
+	}
+}
+
+scandinavian_monetary_union_country_in_debat = {
+	every_country = {
+		limit = {
+			var:scandinavian_monetary_union_on_discution = 1
+		}
+		add = 1
+	}
+}
+
+# from common/script_values/00_economic_scripted_value.txt (read only by the archived union: rate_by_law_metal_type_2_FRA, rate_by_law_metal_type_FRA)
+rate_by_law_metal_type_2_FRA = {
+	value = 0
+	c:FRA = {
+		if = {
+			limit = {
+				or = {
+					has_law = law_type:law_gold_standard
+					zz_ef_exchange_std = yes
+				}
+			}
+			add = 1
+		}
+		if = {
+			limit = {
+				has_law = law_type:law_silver_standard
+			}
+			add = silver_to_gold_rate
+		}
+		if = {
+			limit = {
+				has_law = law_type:law_bimetallism_standard
+			}
+			add = bimetallic_rate_silver_to_gold
+		}
+	}
+	min = 0.0001
+}
+
+rate_by_law_metal_type_FRA = {
+	value = 0
+
+	c:FRA = {
+		if = {
+			limit = {
+				or = {
+					has_law = law_type:law_gold_standard
+					zz_ef_exchange_std = yes
+				}
+			}
+			add = 1
+		}
+		if = {
+			limit = {
+				has_law = law_type:law_silver_standard
+			}
+			add = gold_to_silver_rate
+		}
+		if = {
+			limit = {
+				has_law = law_type:law_bimetallism_standard
+			}
+			add = bimetallic_rate_gold_to_silver
+		}
+	}
+	min = 0.0001
+}
+

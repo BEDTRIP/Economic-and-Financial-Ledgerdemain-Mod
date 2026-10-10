@@ -1,0 +1,608 @@
+# from events/00_ef_economic_event.txt: 00_ef_economic_event.10, 00_ef_economic_event.11, 00_ef_economic_event.12, 00_ef_economic_event.19, 00_ef_economic_event.20, 00_ef_economic_event.21, 00_ef_economic_event.22, 00_ef_economic_event.23, 00_ef_economic_event.24, 00_ef_economic_event.8, 00_ef_economic_event.9
+# 00_ef_economic_event.10.t:0 #Avancement du déabt à 4ans
+00_ef_economic_event.10 = { #image ok text en
+	type = country_event
+	placement = scope:capital_state
+
+	#hidden = yes
+
+	title = 00_ef_economic_event.10.t
+	desc = 00_ef_economic_event.10.d
+	flavor = 00_ef_economic_event.10.f
+
+	dlc = dlc_ef
+	duration = 3 #0 pas de duration
+
+	event_image = {
+		texture = "gfx/event_pictures/00_ef_economic_event_10.dds"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/latin_monetary_union.dds"
+
+	trigger = {
+	}
+
+	immediate = { 
+	}
+ 
+	option = {
+		name = 00_ef_economic_event.10.a  
+		trigger = {
+			not = {
+				or = {
+					market_owner_is_root_univ_with_buiding = yes
+					is_subject_custom_trigger = yes
+				}
+			}
+			or = {
+				is_in_geographic_region = geographic_region_europe
+				"relations(scope:target_country)" > relations_threshold:cordial
+			} 
+		} 
+		add_journal_entry = {
+			type = latin_monetary_union_je_1
+		}
+		set_variable = { 
+			name = latin_monetary_union_on_discution
+			value = 1
+		} 
+	}
+	option = {
+		name = 00_ef_economic_event.10.b
+		default_option = yes
+	} 
+}
+
+#Country in union #trigger à chaque pays rejoingant les diiscution
+00_ef_economic_event.11 = { #image ok text en
+	type = country_event
+	placement = scope:capital_state
+
+	#hidden = yes
+
+	title = 00_ef_economic_event.11.t
+	desc = 00_ef_economic_event.11.d
+	flavor = 00_ef_economic_event.11.f
+
+	dlc = dlc_ef
+	duration = 3 #0 pas de duration
+
+	event_image = {
+		texture = "gfx/event_pictures/00_ef_economic_event_11.dds"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/latin_monetary_union.dds"
+
+	trigger = {
+	}
+
+	immediate = { 
+	}
+
+	option = {
+		name = 00_ef_economic_event.11.a
+		default_option = yes
+	}  
+}
+
+#Country signature et treaty #Final et fin de la serie 
+00_ef_economic_event.12 = { #image ok text en
+	type = country_event
+	placement = scope:capital_state
+
+	#hidden = yes
+
+	title = 00_ef_economic_event.12.t
+	desc = 00_ef_economic_event.12.d
+	flavor = 00_ef_economic_event.12.f
+
+	dlc = dlc_ef
+	duration = 3 #0 pas de duration
+
+	event_image = {
+		texture = "gfx/event_pictures/00_ef_economic_event_12.dds"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/latin_monetary_union.dds"
+
+	trigger = {
+	}
+
+	immediate = {  
+		create_treaty = {
+			name = treaty_name_union_latine
+			first_country = scope:target_country
+			second_country = c:FRA 
+
+			is_draft = no 
+			binding_period = { years = 20 } 
+
+			articles_to_create = {
+				{ # latin_monetary_union_treaty
+					article = latin_monetary_union_treaty
+				}
+			}
+		}
+	}
+
+	option = {
+		name = 00_ef_economic_event.12.a
+		default_option = yes
+
+		#ajouter +5% de prestige
+	}  
+}
+
+# 19 à 28
+# 00_ef_economic_event.19.t:0 #event initial déclanché quand la x pays débloque le JE 
+00_ef_economic_event.19 = { #image no text en
+	type = country_event
+	placement = scope:capital_state
+
+	#hidden = yes
+
+	title = 00_ef_economic_event.19.t
+	desc = 00_ef_economic_event.19.d
+	flavor = 00_ef_economic_event.19.f
+
+	dlc = dlc_ef
+	duration = 3 #0 pas de duration
+
+	event_image = {
+		texture = "gfx/event_pictures/00_ef_economic_event_19.dds"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/scandinavian_monetary_union.dds"
+
+	trigger = {
+	}
+
+	immediate = { 
+	}
+
+	option = {
+		name = 00_ef_economic_event.19.a     
+		trigger = {
+			or = {
+				country_has_primary_culture = cu:danish
+				country_has_primary_culture = cu:swedish
+				country_has_primary_culture = cu:norwegian  
+			} 
+			not = {
+				has_journal_entry = scandinavian_monetary_union_je_1 
+				or = {
+					market_owner_is_root_univ_with_buiding = yes
+					is_subject_custom_trigger = yes
+				}
+			} 
+		} 
+		add_journal_entry = {
+			type = scandinavian_monetary_union_je_1
+		}
+		set_variable = { 
+			name = scandinavian_monetary_union_on_discution
+			value = 1
+		} 
+	}
+	option = {
+		name = 00_ef_economic_event.19.b
+		default_option = yes
+	}  
+}
+
+# 00_ef_economic_event.20.t:0 #Avancement du déabt à 1ans
+00_ef_economic_event.20 = { #image no text en
+	type = country_event
+	placement = scope:capital_state
+
+	#hidden = yes
+
+	title = 00_ef_economic_event.20.t
+	desc = 00_ef_economic_event.20.d
+	flavor = 00_ef_economic_event.20.f
+
+	dlc = dlc_ef
+	duration = 3 #0 pas de duration
+
+	event_image = {
+		texture = "gfx/event_pictures/00_ef_economic_event_20.dds"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/scandinavian_monetary_union.dds"
+
+	trigger = {
+	}
+
+	immediate = { 
+	}
+
+	option = {
+		name = 00_ef_economic_event.20.a  
+		trigger = {
+			or = {
+				country_has_primary_culture = cu:danish
+				country_has_primary_culture = cu:swedish
+				country_has_primary_culture = cu:norwegian  
+			} 
+			not = {
+				has_journal_entry = scandinavian_monetary_union_je_1 
+				or = {
+					market_owner_is_root_univ_with_buiding = yes
+					is_subject_custom_trigger = yes
+				}
+			} 
+		} 
+		add_journal_entry = {
+			type = latin_monetary_union_je_1
+		}
+		set_variable = { 
+			name = scandinavian_monetary_union_on_discution
+			value = 1
+		} 
+	}
+	option = {
+		name = 00_ef_economic_event.20.b
+		default_option = yes
+	} 
+}
+
+# 00_ef_economic_event.21.t:0 #Avancement du déabt à 2ans
+00_ef_economic_event.21 = { #image no text en
+	type = country_event
+	placement = scope:capital_state
+
+	#hidden = yes
+
+	title = 00_ef_economic_event.21.t
+	desc = 00_ef_economic_event.21.d
+	flavor = 00_ef_economic_event.21.f
+
+	dlc = dlc_ef
+	duration = 3 #0 pas de duration
+
+	event_image = {
+		texture = "gfx/event_pictures/00_ef_economic_event_21.dds"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/scandinavian_monetary_union.dds"
+
+	trigger = {
+	}
+
+	immediate = { 
+	}
+ 
+	option = {
+		name = 00_ef_economic_event.21.a  
+		trigger = {
+			or = {
+				country_has_primary_culture = cu:danish
+				country_has_primary_culture = cu:swedish
+				country_has_primary_culture = cu:norwegian  
+			} 
+			not = {
+				has_journal_entry = scandinavian_monetary_union_je_1 
+				or = {
+					market_owner_is_root_univ_with_buiding = yes
+					is_subject_custom_trigger = yes
+				}
+			} 
+		} 
+		add_journal_entry = {
+			type = latin_monetary_union_je_1
+		}
+		set_variable = { 
+			name = scandinavian_monetary_union_on_discution
+			value = 1
+		} 
+	}
+	option = {
+		name = 00_ef_economic_event.21.b
+		default_option = yes
+	} 
+}
+
+#Country in union #trigger à chaque pays rejoingant les diiscution
+00_ef_economic_event.22 = { #image no text en
+	type = country_event
+	placement = scope:capital_state
+
+	#hidden = yes
+
+	title = 00_ef_economic_event.22.t
+	desc = 00_ef_economic_event.22.d
+	flavor = 00_ef_economic_event.22.f
+
+	dlc = dlc_ef
+	duration = 3 #0 pas de duration
+
+	event_image = {
+		texture = "gfx/event_pictures/00_ef_economic_event_22.dds"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/scandinavian_monetary_union.dds"
+
+	trigger = {
+	}
+
+	immediate = { 
+	}
+
+	option = {
+		name = 00_ef_economic_event.22.a
+		default_option = yes
+	}  
+}
+
+#Country signature et treaty #Final et fin de la serie 
+00_ef_economic_event.23 = { #image ok text en
+	type = country_event
+	placement = scope:capital_state
+
+	#hidden = yes
+
+	title = 00_ef_economic_event.23.t
+	desc = 00_ef_economic_event.23.d
+	flavor = 00_ef_economic_event.23.f
+
+	dlc = dlc_ef
+	duration = 3 #0 pas de duration
+
+	event_image = {
+		texture = "gfx/event_pictures/00_ef_economic_event_23.dds"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/scandinavian_monetary_union.dds"
+
+	trigger = {
+	}
+
+	immediate = {  
+		create_treaty = {
+			name = treaty_name_scandinavian_monetary_union
+			first_country = scope:target_country
+			second_country = scope:scandinavian_monetary_union_initiator 
+
+			is_draft = no 
+			binding_period = { years = 20 } 
+
+			articles_to_create = {
+				{ 	#scandinavian_monetary_union_treaty
+					article = scandinavian_monetary_union_treaty
+				}
+			}
+		}
+		#law and money value target modification
+		every_country = {
+			limit = {
+				var:scandinavian_monetary_union_on_discution = 1 
+			}   
+			#money_value_target_pre_set = yes
+			activate_law = law_type:law_gold_standard
+			central_bank_production_methods = yes
+			if = { limit = { has_modifier = foreign_exchange_controls } remove_modifier = foreign_exchange_controls }
+			add_modifier = {
+				name = foreign_exchange_controls
+				months = 12
+			}
+			reset_debt_in_currency_for_monetary_systeme_transition = yes
+			set_variable = {
+				name = money_value_target_1
+				value = global_var:money_value_median
+			}
+			trade_balance = yes
+			add_modifier = {
+				name = monetary_systeme_transition
+				months = 120
+			} 
+		}
+
+		#set le money value
+		#changer le standart
+	} 
+
+	option = {
+		name = 00_ef_economic_event.23.a
+		default_option = yes
+
+		#ajouter +5% de prestige
+	}  
+}
+
+00_ef_economic_event.24 = { #image ok text en
+	type = country_event
+	placement = scope:capital_state
+
+	hidden = yes #natif
+
+	title = 00_ef_economic_event.24.t
+	desc = 00_ef_economic_event.24.d
+	flavor = 00_ef_economic_event.24.f
+
+	dlc = dlc_ef
+	duration = 3 #0 pas de duration
+
+	event_image = {
+		texture = "gfx/event_pictures/00_ef_economic_event_27.dds"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/scandinavian_monetary_union.dds"
+
+	trigger = {
+	}
+
+	immediate = {   
+		#law and money value target modification
+		every_country = {
+			limit = {
+				var:scandinavian_monetary_union_on_discution = 1 
+			}   
+			#money_value_target_pre_set = yes
+			activate_law = law_type:law_gold_standard
+			central_bank_production_methods = yes
+			if = { limit = { has_modifier = foreign_exchange_controls } remove_modifier = foreign_exchange_controls }
+			add_modifier = {
+				name = foreign_exchange_controls
+				months = 12
+			}
+			reset_debt_in_currency_for_monetary_systeme_transition = yes
+			set_variable = {
+				name = money_value_target_1
+				value = global_var:money_value_median
+			}
+			trade_balance = yes
+			add_modifier = {
+				name = monetary_systeme_transition
+				months = 120
+			} 
+		} 
+	}  
+}
+
+# 00_ef_economic_event.8.t:0 #event initial déclanché quand la france débloque le traiter
+00_ef_economic_event.8 = { #image ok text en
+	type = country_event
+	placement = scope:capital_state
+
+	#hidden = yes
+
+	title = 00_ef_economic_event.8.t
+	desc = 00_ef_economic_event.8.d
+	 
+	# desc = {
+	# 	first_valid = {
+	# 		triggered_desc = {
+	# 			desc = dual_monarchy.1.d
+	# 			trigger = {
+	# 				NOT = { has_variable = dual_monarchy_fail }
+	# 			}
+	# 		}
+	# 		triggered_desc = {
+	# 			desc = dual_monarchy.1.d2
+	# 			trigger = {
+	# 				has_variable = dual_monarchy_fail
+	# 			}
+	# 		}
+	# 	}
+	# }
+
+	flavor = 00_ef_economic_event.8.f
+	dlc = dlc_ef 
+	duration = 3 #0 pas de duration
+
+	event_image = {
+		texture = "gfx/event_pictures/00_ef_economic_event_8.dds"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/latin_monetary_union.dds"
+
+	trigger = {
+	}
+
+	immediate = { 
+	}
+
+	option = {
+		name = 00_ef_economic_event.8.a     
+		trigger = {
+			not = {
+				or = {
+					market_owner_is_root_univ_with_buiding = yes
+					is_subject_custom_trigger = yes
+				}
+			}
+			or = {
+				is_in_geographic_region = geographic_region_europe
+				"relations(scope:target_country)" > relations_threshold:cordial
+			} 
+		} 
+		add_journal_entry = {
+			type = latin_monetary_union_je_1
+		}
+		set_variable = { 
+			name = latin_monetary_union_on_discution
+			value = 1
+		} 
+	}
+	option = {
+		name = 00_ef_economic_event.8.b
+		default_option = yes
+	}  
+}
+
+# 00_ef_economic_event.9.t:0 #Avancement du déabt à 2ans
+00_ef_economic_event.9 = { #image ok text en
+	type = country_event
+	placement = scope:capital_state
+
+	#hidden = yes
+
+	title = 00_ef_economic_event.9.t
+	desc = 00_ef_economic_event.9.d
+	flavor = 00_ef_economic_event.9.f
+
+	dlc = dlc_ef
+	duration = 3 #0 pas de duration
+
+	event_image = {
+		texture = "gfx/event_pictures/00_ef_economic_event_9.dds"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/latin_monetary_union.dds"
+
+	trigger = {
+	}
+
+	immediate = { 
+	}
+
+	option = {
+		name = 00_ef_economic_event.9.a  
+		trigger = {
+			not = {
+				or = {
+					market_owner_is_root_univ_with_buiding = yes
+					is_subject_custom_trigger = yes
+				}
+			}
+			or = {
+				is_in_geographic_region = geographic_region_europe
+				"relations(scope:target_country)" > relations_threshold:cordial
+			} 
+		} 
+		add_journal_entry = {
+			type = latin_monetary_union_je_1
+		}
+		set_variable = { 
+			name = latin_monetary_union_on_discution
+			value = 1
+		} 
+	}
+	option = {
+		name = 00_ef_economic_event.9.b
+		default_option = yes
+	} 
+}
+

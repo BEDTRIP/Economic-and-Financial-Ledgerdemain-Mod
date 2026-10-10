@@ -208,69 +208,24 @@
   # latin_monetary_union_je_1: "Конвенция Латинского монетного союза"
   # latin_monetary_union_je_1_reason: "The Convention on the Latin Union Latine a pour objectif l’établissement d’une alliance monétaire régionale, fondée par la France, la Belgique, la Suisse et l’Italie.\n Cet accord instaure des standards communs pour les pièces d’or et d’argent, permettant aux monnaies des États membres de circuler librement dans l’ensemble de l’Union.\n\n Une fois l’entrée au journal complétée, l’objectif final est la signature d’un traité monétaire d’une durée de vingt ans entre #v la France#!, puissance initiatrice, et les #v pays participants#!.\n\n Ce traité établit un cadre monétaire commun dans lequel les États s’engagent à respecter les normes définies par la France.\n\n les pays signatére du traiter verons:\n - le taux de change or/argent fixé selon les valeur en vigeur en france\n - le standart monetaire sera fixé sur le standart monetaire français (peut importe le standart actuel)\n\n afin avec les année la valeur de la monaie de ces different pays tendron vers une valeur commune. \n\n Nombre actuel de pays dans la convention: #p [GetPlayer.MakeScope.ScriptValue('latin_monetary_union_country_in_debat')+]#!"
 
-  latin_monetary_union_je_1: "Конвенция Латинского монетного союза"
-  latin_monetary_union_je_1_reason: "Конвенция Латинского союза направлена на создание регионального валютного альянса, основанного Францией, Бельгией, Швейцарией и Италией.\n Это соглашение устанавливает единые стандарты для золотых и серебряных монет, позволяя валютам государств-участников свободно обращаться по всей территории Союза.\n\n После завершения этой записи журнала конечной целью станет подписание двадцатилетнего валютного договора между #v Францией#!, державой-инициатором, и #v странами-участницами#!.\n\n Этот договор задаёт единые денежные рамки, в которых государства обязуются соблюдать стандарты, определённые Францией.\n\n Страны, подписывающие договор, получат:\n - соотношение обмена золото/серебро, фиксированное по значениям, действующим во Франции\n - денежный стандарт, приведённый в соответствие с французским денежным стандартом (независимо от текущего стандарта)\n\n таким образом, с годами стоимость валют этих разных стран будет стремиться к общему значению.\n\n Текущее количество стран в конвенции: #p [GetPlayer.MakeScope.ScriptValue('latin_monetary_union_country_in_debat')+]#!"
 
-  latin_monetary_union_je_1_desc.1: "Франция инициировала обсуждения Латинского союза"
-  latin_monetary_union_je_1_desc.2: "конвенция длилась более 6 лет"
-  latin_monetary_union_je_1_desc.3: "[SCOPE.sC('target_country').GetName] подписывает #v Договор Латинского монетного союза.#!"
 
-  status_latin_monetary_union_je_1: "В настоящее время к конвенции присоединились:"
-  status_latin_monetary_union_je_2: "#v $FRA$#!"
-  status_latin_monetary_union_je_3: "- #v $BEL$#!"
-  status_latin_monetary_union_je_4: "- #v $SWI$#!"
-  status_latin_monetary_union_je_5: "- #v $SAR$#!"
-  status_latin_monetary_union_je_6: "- #v $PAR$#!"
-  status_latin_monetary_union_je_7: "- #v $MOD$#!"
-  status_latin_monetary_union_je_8: "- #v $LUC$#!"
-  status_latin_monetary_union_je_9: "- #v $TUS$#!"
-  status_latin_monetary_union_je_10: "- #v $PAP$#!"
-  status_latin_monetary_union_je_11: "- #v $SIC$#!"
-  status_latin_monetary_union_je_12: "- #v $GRE$#!"
-  status_latin_monetary_union_je_13: "- #v $ITA$#!"
-  status_latin_monetary_union_je_14: "- #v [ROOT.GetCountry.GetNameNoFormatting]#!"
 
-latin_monetary_union_progress_bar: "Количество лет дебатов"
-latin_monetary_union_progress_bar_desc: "Количество лет дебатов: [JournalEntry.GetCurrentBarValue(ScriptedProgressBar.Self)] Год(лет) / 6 лет — [JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)|%]"
 
-latin_monetary_union_1_button: "Выйти из конвенции"
-latin_monetary_union_1_button_desc: "Вы выходите из конвенции. Вы по-прежнему сможете наблюдать за ходом формирования валютного союза, но больше не будете считаться среди стран-подписантов, когда переговоры подойдут к завершению."
 
-latin_monetary_union_2_button: "Снова вступить в конвенцию"
-latin_monetary_union_2_button_desc: "Вы решаете снова вступить в конвенцию и быть засчитанным среди стран-подписантов по её завершении."
 
   #####################
   #scandinavian_monetary_union
   #####################
 
-  scandinavian_monetary_union_je_1: "Конвенция Скандинавского монетного союза"
-  scandinavian_monetary_union_je_1_reason: "Конвенция Скандинавского монетного союза направлена на создание регионального валютного альянса, построенного вокруг общего золотого стандарта.\n Это соглашение стремится ввести единые спецификации для чеканки монет и денежно-кредитной политики, позволяя валютам подписавших государств постепенно сближаться к единой системе.\n\n После завершения этой записи журнала конечной целью станет подписание долгосрочного валютного договора между #v державой-инициатором#! и #v участвующими государствами#!.\n\n В рамках этого договора страны-подписанты обязуются принять закон #v [GetLawType('law_gold_standard').GetName]#! и [concept_money_value_target_real], определённый инициатором конвенции.\n\n Государства-подписанты будут:\n – принимать коэффициент конвертации в золото ([concept_money_value_target_real]), установленный инициатором;\n – приводить свою денежную систему к стандарту инициатора (#v Закон [GetLawType('law_gold_standard').GetName]#!), независимо от прежнего режима.\n\n Со временем стоимость их валют будет сходиться к общему золотому ориентиру.\n\n Текущее количество стран, участвующих в конвенции: #p [GetPlayer.MakeScope.ScriptValue('scandinavian_monetary_union_country_in_debat')+]#!"
 
   #scandinavian_monetary_union_je_1_desc.1: ""
-  scandinavian_monetary_union_je_1_desc.2: "конвенция длилась более 3 лет"
-  scandinavian_monetary_union_je_1_desc.3: "[SCOPE.sC('target_country').GetName] подписывает #v Договор Скандинавского монетного союза.#!"
-  scandinavian_monetary_union_je_1_desc.4: "Больше не существует действительного инициатора, способного довести конвенцию до завершения"
-  scandinavian_monetary_union_je_1_desc.5: "Если переговоры провалятся, они завершатся, и вы потеряете статус инициатора."
 
-  status_scandinavian_monetary_union_je_1: "В настоящее время к конвенции присоединились:"
-  status_scandinavian_monetary_union_je_2: "#v $SWE$#!"
-  status_scandinavian_monetary_union_je_3: "#v $DEN$#!"
-  status_scandinavian_monetary_union_je_4: "#v $NOR$#!"
 
-  status_scandinavian_monetary_union_je_5: "- #v $SWE$#!"
-  status_scandinavian_monetary_union_je_6: "- #v $DEN$#!"
-  status_scandinavian_monetary_union_je_7: "- #v $NOR$#!"
 
-  status_scandinavian_monetary_union_je_8: "- #v [ROOT.GetCountry.GetNameNoFormatting]#!"
 
-  scandinavian_monetary_union_progress_bar: "Количество лет дебатов"
-  scandinavian_monetary_union_progress_bar_desc: "Количество лет дебатов: [JournalEntry.GetCurrentBarValue(ScriptedProgressBar.Self)] Год(лет)/3 года - [JournalEntry.GetCurrentBarProgress(ScriptedProgressBar.Self)|%]"
 
-  scandinavian_monetary_union_1_button: "Выйти из конвенции"
-  scandinavian_monetary_union_1_button_desc: "Вы выходите из конвенции: вы всё ещё сможете видеть ход формирования валютного союза, но больше не будете среди стран-подписантов, когда конвенция достигнет завершения."
 
-  scandinavian_monetary_union_2_button: "Снова вступить в конвенцию"
-  scandinavian_monetary_union_2_button_desc: "Вы решаете снова вступить в конвенцию и быть засчитанным среди стран-подписантов по её завершении."
 
 
   silver_crisis_progress_bar:0 "Длительность серебряного кризиса"

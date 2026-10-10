@@ -46,9 +46,6 @@
 - `common/history/global/ld_start_currency_standards.txt` — старт: страны с подушным налогом без технологии
   `currency_standards` (E&F перенёс её в эру 2) получают её (метка `zz_ef_start_currency_standards` — `on_researched`
   E&F не переводит их в фиат). Грузится после `99_ef_history_global_variable.txt`.
-- `common/treaty_articles/16_latin_monetary_union_treaty.txt`,
-  `common/treaty_articles/17_scandinavian_monetary_union_treaty.txt` — статьи договоров (флаги, `can_ratify`,
-  `on_entry_into_force` только лоббийное умиротворение). Денежных эффектов нет.
 - `common/scripted_triggers/00_ef_custom_trigger.txt` — `is_reference_currency` (:582), `is_reference_currency_no`
   (:587), `is_strong/balanced/weak_currency` (:592-:637, тело E&F, сравнение с `zz_ef_currency_strength` вместо
   медианы), `is_extreme_weak_currency` (:623), `market_goods_is_currency` (:1423).
@@ -145,8 +142,7 @@
   раз в месяц — у двух стран, держащих валюту друг друга, расчёт не зацикливается).
 - Членство в ТС: `zz_ef_cu_member` читают `ld_money_model.txt`, `ld_clearing_values.txt`,
   `00_economic_scripted_value.txt` (`money_value`/`money_value_in_gold` для члена).
-- Договоры: `latin_monetary_union_treaty` создаётся событием `events/00_ef_economic_event.txt:499`, ЖЗ
-  `latin_monetary_union_je_1` (`journal_entries/00_ef_divers_je.txt:1`) проверяет статью.
+- Валютные союзы — ниже, «Валютные союзы»; союзы E&F (Латинский, Скандинавский) — `_archive/ef_monetary_unions/`.
 - GUI: биржа валют (`buy_sell_currency_in_metal_market_panel`, `buy_/sell_<cur>_in_gold_market_panel`), карточки банка
   (значения `zz_ef_v_*`), панель ставки (`gui/ld_cb_rate_panel.gui`, другой документ).
 
