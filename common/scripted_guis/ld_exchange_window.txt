@@ -1,0 +1,96 @@
+﻿# The player's window of the exchange (R8б, шаг 8; понятие «Биржа»; Д.R8б.13 -- the minimal one, the full -- R10): in
+# Budget -> Finances (gui/ld_cb_rate_panel.gui). The kind (money / bonds), the sum of an order; the rows -- what we hold
+# of the kind and our buyers' short list (scripted_effects/ld_exchange_trade.txt), with the fair price, last week's price
+# of the deal on our exchange and our holding; «buy» puts the sum in, «sell» -- all we hold; the order goes into the
+# book of the nearest week at our step (zz_ef_xch_post_player): money -- the CB's, bonds -- the treasury's.
+zz_ef_xwin_update = {
+	effect = {
+		zz_ef_xwin_fill = yes
+	}
+}
+zz_ef_xwin_kind = {
+	effect = {
+		custom_tooltip = zz_ef_xwin_kind_effect
+		hidden_effect = {
+			if = {
+				limit = { has_variable = zz_ef_xpl_kind var:zz_ef_xpl_kind = 1 }
+				set_variable = { name = zz_ef_xpl_kind value = 0 }
+			}
+			else = {
+				set_variable = { name = zz_ef_xpl_kind value = 1 }
+			}
+			zz_ef_xwin_fill = yes
+		}
+	}
+}
+zz_ef_xwin_less = {
+	is_valid = { zz_ef_xwin_sum_v > zz_ef_xwin_sum_min }
+	effect = {
+		custom_tooltip = zz_ef_xwin_less_effect
+		hidden_effect = { set_variable = { name = zz_ef_xpl_sum value = { value = zz_ef_xwin_sum_v divide = 2 } } }
+	}
+}
+zz_ef_xwin_more = {
+	is_valid = { zz_ef_xwin_sum_v < zz_ef_xwin_sum_max }
+	effect = {
+		custom_tooltip = zz_ef_xwin_more_effect
+		hidden_effect = { set_variable = { name = zz_ef_xpl_sum value = { value = zz_ef_xwin_sum_v multiply = 2 } } }
+	}
+}
+zz_ef_xwin_buy = {
+	is_valid = {
+		custom_tooltip = {
+			text = zz_ef_xwin_tt_no_exchange
+			has_variable = zz_ef_xch
+		}
+		custom_tooltip = {
+			text = zz_ef_xwin_tt_who
+			OR = {
+				AND = {
+					zz_ef_xwin_kind_is_money = yes
+					has_modifier = has_central_bank
+				}
+				AND = {
+					NOT = { zz_ef_xwin_kind_is_money = yes }
+					scope:target = { zz_ef_bl_principal > 0 }
+				}
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = zz_ef_xwin_buy_effect
+		hidden_effect = {
+			scope:target = { save_temporary_scope_as = zz_ef_rq_key }
+			set_variable = { name = zz_ef_xm_v value = zz_ef_xwin_sum_v }
+			if = {
+				limit = { zz_ef_xwin_kind_is_money = yes }
+				zz_ef_xmap_set = { MAP = zz_ef_xpl_buy_m }
+			}
+			else = {
+				zz_ef_xmap_set = { MAP = zz_ef_xpl_buy_b }
+			}
+		}
+	}
+}
+zz_ef_xwin_sell = {
+	is_valid = {
+		custom_tooltip = {
+			text = zz_ef_xwin_tt_nothing
+			scope:target = { var:zz_ef_xwin_hold > 0 }
+		}
+	}
+	effect = {
+		custom_tooltip = zz_ef_xwin_sell_effect
+		hidden_effect = {
+			scope:target = { save_temporary_scope_as = zz_ef_rq_key }
+			set_variable = { name = zz_ef_xm_v value = 1 }
+			if = {
+				limit = { zz_ef_xwin_kind_is_money = yes }
+				zz_ef_xmap_set = { MAP = zz_ef_xpl_sell_m }
+			}
+			else = {
+				zz_ef_xmap_set = { MAP = zz_ef_xpl_sell_b }
+			}
+		}
+	}
+}

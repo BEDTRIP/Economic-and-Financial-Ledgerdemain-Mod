@@ -241,6 +241,11 @@ zz_ef_xch_fund_ask_step_v = {
 	value = zz_ef_xq_mid
 	add = zz_ef_xch_fund_half_v
 }
+# the room left after the last clearing (none yet -- some)
+zz_ef_xch_fund_room_left_v = {
+	value = 1
+	if = { limit = { has_variable = zz_ef_xr_room } value = var:zz_ef_xr_room }
+}
 zz_ef_xch_fund_room_v = {
 	value = zz_ef_fd_capacity
 	subtract = {
@@ -380,8 +385,8 @@ zz_ef_xch_fc_state_share_here_v = {
 # The arbitrage of bimetallism (zz_ef_xch_bimet_arb; Д.R8.10): the gap -- (the world's gold in silver - the legal) / the
 # world's, + silver overvalued by the law; the net gain after the exchange's fee on both legs; the week's share of the
 # CB's undervalued metal per unit of the net gain, at most the cap
-zz_ef_xch_arb_speed = 2
-zz_ef_xch_arb_cap = 0.05
+zz_ef_xch_arb_speed = 0.5
+zz_ef_xch_arb_cap = 0.01
 zz_ef_xch_arb_gap_v = {
 	value = gold_to_silver_rate
 	subtract = bimetallic_rate_gold_to_silver
@@ -402,4 +407,17 @@ zz_ef_xch_arb_net_v = {
 zz_ef_v_f_xch_fee = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_f_xch_fee } value = var:zz_ef_f_xch_fee }
+}
+# The player's window (common/scripted_guis/ld_exchange_window.txt): the sum of an order -- from this, halved / doubled
+# by the buttons within the bounds
+zz_ef_xwin_sum_start = 10000
+zz_ef_xwin_sum_min = 1000
+zz_ef_xwin_sum_max = 10000000
+zz_ef_xwin_sum_v = {
+	value = zz_ef_xwin_sum_start
+	if = { limit = { has_variable = zz_ef_xpl_sum } value = var:zz_ef_xpl_sum }
+}
+zz_ef_xwin_kind_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_xpl_kind } value = var:zz_ef_xpl_kind }
 }

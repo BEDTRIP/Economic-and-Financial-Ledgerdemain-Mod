@@ -10350,6 +10350,115 @@ types zz_ef_cb_rate_panel
 			############################################################################################################################################################
 			############################################################################################################################################################
 
+			# the exchange (R8б, шаг 8; понятие «Биржа»): quotes of our exchange and the player's order into the book of the
+			# nearest week (common/scripted_guis/ld_exchange_window.txt)
+			default_header = {
+				blockoverride "text" {
+					text = "zz_ef_xwin_title"
+				}
+			}
+			flowcontainer = {
+				parentanchor = hcenter
+				direction = vertical
+				margin_top = 10
+				spacing = 4
+				flowcontainer = {
+					direction = horizontal
+					spacing = 6
+					parentanchor = hcenter
+					button = {
+						using = default_button
+						size = { 120 30 }
+						text = "zz_ef_xwin_update"
+						tooltip = "zz_ef_xwin_update_tt"
+						onclick = "[GetScriptedGui('zz_ef_xwin_update').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End )]"
+					}
+					button = {
+						using = default_button
+						size = { 120 30 }
+						text = "zz_ef_xwin_kind_button"
+						tooltip = "[GetScriptedGui('zz_ef_xwin_kind').BuildTooltip( GuiScope.SetRoot(GetPlayer.MakeScope).End )]"
+						onclick = "[GetScriptedGui('zz_ef_xwin_kind').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End )]"
+					}
+					button = {
+						using = default_button
+						size = { 36 30 }
+						text = "zz_ef_xwin_less"
+						tooltip = "[GetScriptedGui('zz_ef_xwin_less').BuildTooltip( GuiScope.SetRoot(GetPlayer.MakeScope).End )]"
+						enabled = "[GetScriptedGui('zz_ef_xwin_less').IsValid( GuiScope.SetRoot(GetPlayer.MakeScope).End )]"
+						onclick = "[GetScriptedGui('zz_ef_xwin_less').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End )]"
+					}
+					textbox = {
+						autoresize = yes
+						text = "zz_ef_xwin_sum"
+					}
+					button = {
+						using = default_button
+						size = { 36 30 }
+						text = "zz_ef_xwin_more"
+						tooltip = "[GetScriptedGui('zz_ef_xwin_more').BuildTooltip( GuiScope.SetRoot(GetPlayer.MakeScope).End )]"
+						enabled = "[GetScriptedGui('zz_ef_xwin_more').IsValid( GuiScope.SetRoot(GetPlayer.MakeScope).End )]"
+						onclick = "[GetScriptedGui('zz_ef_xwin_more').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End )]"
+					}
+				}
+				textbox = {
+					visible = "[Not(GreaterThan_CFixedPoint(GetPlayer.MakeScope.ScriptValue('zz_ef_xwin_kind_v'), '(CFixedPoint)0'))]"
+					autoresize = yes
+					multiline = yes
+					max_width = 520
+					text = "zz_ef_xwin_head_m"
+				}
+				textbox = {
+					visible = "[GreaterThan_CFixedPoint(GetPlayer.MakeScope.ScriptValue('zz_ef_xwin_kind_v'), '(CFixedPoint)0')]"
+					autoresize = yes
+					multiline = yes
+					max_width = 520
+					text = "zz_ef_xwin_head_b"
+				}
+				textbox = {
+					visible = "[IsDataModelEmpty(GetGlobalList('zz_ef_xwin_list'))]"
+					autoresize = yes
+					text = "zz_ef_xwin_empty"
+				}
+				flowcontainer = {
+					direction = vertical
+					spacing = 2
+					datamodel = "[GetGlobalList('zz_ef_xwin_list')]"
+					item = {
+						flowcontainer = {
+							direction = horizontal
+							spacing = 6
+							textbox = {
+								autoresize = yes
+								minimumsize = { 150 -1 }
+								raw_text = "[Scope.GetCountry.GetFlagTextIcon] #b [Scope.GetCountry.GetName]#!"
+							}
+							textbox = {
+								autoresize = yes
+								minimumsize = { 230 -1 }
+								text = "zz_ef_xwin_row"
+							}
+							button = {
+								using = default_button
+								size = { 60 26 }
+								text = "zz_ef_xwin_buy"
+								tooltip = "[GetScriptedGui('zz_ef_xwin_buy').BuildTooltip( GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('target', Scope.GetCountry.MakeScope).End )]"
+								enabled = "[GetScriptedGui('zz_ef_xwin_buy').IsValid( GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('target', Scope.GetCountry.MakeScope).End )]"
+								onclick = "[GetScriptedGui('zz_ef_xwin_buy').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('target', Scope.GetCountry.MakeScope).End )]"
+							}
+							button = {
+								using = default_button
+								size = { 60 26 }
+								text = "zz_ef_xwin_sell"
+								tooltip = "[GetScriptedGui('zz_ef_xwin_sell').BuildTooltip( GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('target', Scope.GetCountry.MakeScope).End )]"
+								enabled = "[GetScriptedGui('zz_ef_xwin_sell').IsValid( GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('target', Scope.GetCountry.MakeScope).End )]"
+								onclick = "[GetScriptedGui('zz_ef_xwin_sell').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('target', Scope.GetCountry.MakeScope).End )]"
+							}
+						}
+					}
+				}
+			}
+
 			#gold_lent_to_other
 			default_header = {
 				#visible = "[GetScriptedGui('has_financial_center_tech_visibility').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"

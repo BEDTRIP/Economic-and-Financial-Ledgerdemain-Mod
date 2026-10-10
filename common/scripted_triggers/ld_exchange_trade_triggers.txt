@@ -57,3 +57,10 @@ zz_ef_xch_same_metal = {
 		}
 	}
 }
+# Player scope: the window of the exchange shows money (not bonds)
+zz_ef_xwin_kind_is_money = {
+	OR = {
+		NOT = { has_variable = zz_ef_xpl_kind }
+		var:zz_ef_xpl_kind = 0
+	}
+}
