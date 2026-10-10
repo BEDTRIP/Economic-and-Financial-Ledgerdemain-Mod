@@ -55,8 +55,11 @@
   кандидатов нет (Д.R8б.27) — эталон остаётся у прежнего, фиатного тоже, пока страна есть (лог `EFE|…|keep`), эталона
   нет совсем — крупнейшая по `national_capacity_in_gold` великая держава с ЦБ при любом стандарте
   (`EFE|…|pick|no_candidate_no_reference`); лог `EFE|`.
-- Прочее E&F: `common/scripted_effects/09_introduction_building_lvl.txt:34319` `introduction_new_currency` (выдача
-  валюты/паритета при исследовании; обёртка металла — `ld_currency_intro_metal.txt`).
+- Прочее E&F: `common/scripted_effects/09_introduction_building_lvl.txt` `introduction_new_currency` (выдача
+  валюты/паритета при исследовании; обёртка — `ld_currency_intro_metal.txt`: металл столицы возвращается; Д.R8в.7 —
+  страна с паритетом больше `zz_ef_cur_intro_par_min` (0,011, заглушка фиата E&F — 0,01) сохраняет закон стандарта и
+  паритет (`zz_ef_cur_intro_law_back`); без паритета — паритет хозяина рынка × его курс к паритету, в металле нового
+  стандарта; лог `EFM|…|cur_intro_parity`).
 
 ### Индекс `01_economic_currency_scripted_value.txt` (на каждую валюту `<cur>`)
 - :228-:294 общие `base_demande_currency*`, `target_demand_currency*`, `enough_foreign_currrency`.

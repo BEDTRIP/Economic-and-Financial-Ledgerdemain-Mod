@@ -37,7 +37,8 @@
 - `common/scripted_guis/ld_money_hook.txt` + `gui/ld_money_hook.gui` — мост GUI→скрипт: строки бюджета, доступные только
   GUI, передаются в `zz_ef_money_hook_receive`.
 - `common/scripted_effects/ld_currency_intro_metal.txt` — обёртка вокруг введения валюты E&F
-  (`introduction_new_currency`): металл столицы возвращается как был.
+  (`introduction_new_currency`): металл столицы возвращается как был; страна с паритетом сохраняет стандарт и паритет
+  (Д.R8в.7, `docs/currencies.md`).
 - `common/scripted_effects/ld_subject_metal.txt` — `zz_ef_cb_state_owner_step` (металл ушедшего ЦБ-региона возвращается
   прежнему владельцу).
 - `common/scripted_effects/ld_stockpile_state_var_seed.txt`, `common/on_actions/ld_stockpile_state_var_init.txt`,
