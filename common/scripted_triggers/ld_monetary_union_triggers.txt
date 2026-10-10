@@ -18,9 +18,10 @@ zz_ef_mu_follower = {
 zz_ef_mu_tech = {
 	has_technology_researched = central_banking
 }
-# a country with a central bank by law (Д.R8в.19: the head is always one)
+# a country with a central bank -- E&F's bank or the law (Д.R8в.19: the head is always one)
 zz_ef_mu_cb = {
 	OR = {
+		has_modifier = has_central_bank
 		has_law = law_type:law_ld_cb_state
 		has_law = law_type:law_ld_cb_private
 	}
@@ -77,8 +78,8 @@ zz_ef_mu_scand_list = {
 # the country leads a historic union's journal entry (its AI looks for the treaty)
 zz_ef_mu_historic_head = {
 	OR = {
-		has_journal_entry = je:ld_latin_union_je
-		has_journal_entry = je:ld_scandinavian_union_je
+		has_journal_entry = ld_latin_union_je
+		has_journal_entry = ld_scandinavian_union_je
 	}
 }
 # the source country of a treaty is on the list of its target's historic union
@@ -86,11 +87,11 @@ zz_ef_mu_historic_member = {
 	OR = {
 		AND = {
 			zz_ef_mu_latin_list = yes
-			scope:target_country = { has_journal_entry = je:ld_latin_union_je }
+			scope:target_country = { has_journal_entry = ld_latin_union_je }
 		}
 		AND = {
 			zz_ef_mu_scand_list = yes
-			scope:target_country = { has_journal_entry = je:ld_scandinavian_union_je }
+			scope:target_country = { has_journal_entry = ld_scandinavian_union_je }
 		}
 	}
 }

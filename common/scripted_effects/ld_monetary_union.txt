@@ -286,7 +286,14 @@ zz_ef_mu_world_step = {
 		}
 		remove_variable = zz_ef_mu_num
 		remove_variable = zz_ef_mu_den
-		zz_ef_mu_struggle = yes
+		# a head that lost its CB gives way at once; else the power struggle
+		if = {
+			limit = { NOT = { zz_ef_mu_cb = yes } }
+			zz_ef_mu_head_pick = yes
+		}
+		else = {
+			zz_ef_mu_struggle = yes
+		}
 	}
 	every_country = {
 		limit = { zz_ef_mu_follower = yes }
