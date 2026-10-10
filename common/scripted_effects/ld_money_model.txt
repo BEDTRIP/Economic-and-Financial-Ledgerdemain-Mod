@@ -53,6 +53,8 @@ zz_ef_money_model_step = {
 	# interest, capital (ld_investment_fund.txt)
 	zz_ef_fund_shares_step = yes
 	zz_ef_fund_week_step = yes
+	# the exchange: last week's orders settled, this week's into the book (ld_exchange_trade.txt)
+	zz_ef_xch_step = yes
 	if = {
 		limit = { NOT = { has_variable = zz_ef_weeks_run } }
 		set_variable = { name = zz_ef_weeks_run value = 0 }

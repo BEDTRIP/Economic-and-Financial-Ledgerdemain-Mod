@@ -1,0 +1,50 @@
+﻿# The exchange's trading (scripted_effects/ld_exchange_trade.txt; понятия «Биржа», «Решение держателя»).
+
+# who buys what (the bonds: the bond register serves the treasury's and the banks' parts; the treasury buys them in
+# E&F's slots)
+zz_ef_xch_buys_cb_m = { always = yes }
+zz_ef_xch_buys_bk_m = { always = yes }
+zz_ef_xch_buys_pp_m = { always = yes }
+zz_ef_xch_buys_bk_b = { always = yes }
+zz_ef_xch_buys_tr_b = { always = no }
+# a CB on a metal-backed standard with its cover under the floor of redemption (25 %) sells foreign money that is not in
+# its cover for metal (Д.R8б.26)
+zz_ef_xch_dump_cb_m = {
+	zz_ef_cb_metal_standard = yes
+	var:zz_ef_xe_rcb > 0
+	zz_ef_cb_cover < zz_ef_value_floor_cover
+}
+zz_ef_xch_dump_bk_m = { always = no }
+zz_ef_xch_dump_pp_m = { always = no }
+zz_ef_xch_dump_bk_b = { always = no }
+zz_ef_xch_dump_tr_b = { always = no }
+
+# Holder scope, scope:zz_ef_xch_d: the debtor is of our metal group (Д.R8б.15) -- gold, silver, bimetallic (an exchange
+# standard -- its metal's group, the external one -- its anchor's), or neither (fiat, none): its money is cheaper to
+# leave.
+zz_ef_xch_same_metal = {
+	OR = {
+		AND = {
+			zz_ef_metal_gold = yes
+			scope:zz_ef_xch_d = { zz_ef_metal_gold = yes }
+		}
+		AND = {
+			zz_ef_metal_silver = yes
+			scope:zz_ef_xch_d = { zz_ef_metal_silver = yes }
+		}
+		AND = {
+			zz_ef_metal_bimet = yes
+			scope:zz_ef_xch_d = { zz_ef_metal_bimet = yes }
+		}
+		AND = {
+			NOT = { zz_ef_metal_gold = yes }
+			NOT = { zz_ef_metal_silver = yes }
+			NOT = { zz_ef_metal_bimet = yes }
+			scope:zz_ef_xch_d = {
+				NOT = { zz_ef_metal_gold = yes }
+				NOT = { zz_ef_metal_silver = yes }
+				NOT = { zz_ef_metal_bimet = yes }
+			}
+		}
+	}
+}

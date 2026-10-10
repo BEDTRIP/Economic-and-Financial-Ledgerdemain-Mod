@@ -3,8 +3,9 @@
 # our money waiting in the clearing house -- var:zz_ef_rq_pot; deposits appear only by a posting (Д2.30, Хвост R1).
 
 # COUNTRY scope, weekly after the clearing (zz_ef_bridge_apply, after zz_ef_cb_hume_step).
-#   * as a holder: the interest on the foreign money our CB holds -- each issuer's weekly deposit rate, credited as more
-#     deposit (zz_ef_rq_interest_step); the issuer pays it out of its banks' capital at its own step;
+#   * as a holder: the interest on the foreign money our CB, banks, pops and fund hold -- each issuer's weekly deposit
+#     rate, credited as more deposit (zz_ef_rq_interest_step); the issuer pays it out of its banks' capital at its own
+#     step;
 #   * as an issuer: the clearing's posting -- our money paid out (var:zz_ef_f_clr_cur_out) less the one redeemed
 #     (var:zz_ef_f_clr_own_back): money the engine already took for the imports, into / out of the pool as deposits
 #     (var:zz_ef_f_nr_dep, at most the pool on the way out); the holders' interest credited since our last step out of
@@ -15,8 +16,11 @@ zz_ef_nr_dep_step = {
 	set_variable = { name = zz_ef_f_nr_int value = 0 }
 	if = {
 		limit = { has_modifier = has_central_bank }
-		zz_ef_rq_interest_step = yes
+		zz_ef_rq_interest_step = { H = cb }
 	}
+	zz_ef_rq_interest_step = { H = bk }
+	zz_ef_rq_interest_step = { H = pp }
+	zz_ef_rq_interest_step = { H = fd }
 	if = {
 		limit = {
 			zz_ef_nr_issuer = yes

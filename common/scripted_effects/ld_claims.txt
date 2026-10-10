@@ -135,13 +135,13 @@ zz_ef_rq_value_gold = {
 	remove_variable = zz_ef_rq_t
 }
 
-# HOLDER scope (a CB), weekly from zz_ef_nr_dep_step: the interest on the foreign money it holds -- a deposit in the
-# issuer's banks earns the issuer's deposit rate (var:zz_ef_rq_rate_w on the issuer, a week's), credited as more
-# deposit; the issuer pays it out of its banks' capital at its own step (var:zz_ef_rq_int_due).
+# HOLDER scope, weekly from zz_ef_nr_dep_step: the interest on the foreign money the holder H (cb | bk | pp | fd) holds
+# -- a deposit in the issuer's banks earns the issuer's deposit rate (var:zz_ef_rq_rate_w on the issuer, a week's),
+# credited as more deposit; the issuer pays it out of its banks' capital at its own step (var:zz_ef_rq_int_due).
 zz_ef_rq_interest_step = {
 	if = {
-		limit = { has_variable_map = zz_ef_rq_cb_m }
-		zz_ef_rq_keys_take = { MAP = zz_ef_rq_cb_m }
+		limit = { has_variable_map = zz_ef_rq_$H$_m }
+		zz_ef_rq_keys_take = { MAP = zz_ef_rq_$H$_m }
 		save_temporary_scope_as = zz_ef_rq_hi
 		every_in_list = {
 			variable = zz_ef_rq_keys
@@ -149,9 +149,9 @@ zz_ef_rq_interest_step = {
 			if = {
 				limit = { has_variable = zz_ef_rq_rate_w var:zz_ef_rq_rate_w > 0 }
 				scope:zz_ef_rq_hi = {
-					zz_ef_rq_get = { MAP = zz_ef_rq_cb_m D = scope:zz_ef_rq_d }
+					zz_ef_rq_get = { MAP = zz_ef_rq_$H$_m D = scope:zz_ef_rq_d }
 					change_variable = { name = zz_ef_rq_h multiply = scope:zz_ef_rq_d.var:zz_ef_rq_rate_w }
-					zz_ef_rq_add = { H = cb K = m D = scope:zz_ef_rq_d V = var:zz_ef_rq_h }
+					zz_ef_rq_add = { H = $H$ K = m D = scope:zz_ef_rq_d V = var:zz_ef_rq_h }
 				}
 				if = {
 					limit = { NOT = { has_variable = zz_ef_rq_int_due } }

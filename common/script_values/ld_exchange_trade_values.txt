@@ -1,0 +1,355 @@
+﻿# The exchange's trading (scripted_effects/ld_exchange_trade.txt; понятия «Биржа», «Решение держателя»).
+
+# The price grid of the book (Д.R8б.19): a step is this share of the fair price, steps 1..zz_ef_xq_top, the fair price --
+# step zz_ef_xq_mid (the book's maps -- scripted_effects/ld_exchange_book.txt, generated)
+zz_ef_xq_w = 0.005
+zz_ef_xq_mid = 5
+zz_ef_xq_top = 9
+# a position under this share of the holder's portfolio is offered at the lowest step -- to the fund (Д.R8б.22)
+zz_ef_xch_small_share = 0.01
+# a holder's buying budget of a week, a share of its free money: the CB -- of its metal in money, the banks -- of their
+# capital (for money and for bonds each), the pops -- of their deposits; the banks and the pops -- at most this share
+# of the pool
+zz_ef_xch_buy_share_cb = 0.01
+zz_ef_xch_buy_share_bk = 0.01
+zz_ef_xch_buy_share_pp = 0.005
+zz_ef_xch_buy_pool_cap = 0.1
+# the cost of leaving a claim (Д.R8б.20): a round trip of the exchange's fee, x this for a debtor of another metal group
+# (Д.R8б.15), less up to this share for the trade with the debtor (Д.R8.3) and this share for the depth of its market
+zz_ef_xch_exit_metal_mult = 2
+zz_ef_xch_exit_trade_cut = 0.5
+zz_ef_xch_exit_depth_cut = 0.5
+
+# Debtor scope: the fair price of its bonds a unit of principal -- the coupon (the interest a part earns) over the yield
+# of its debt (the government's rate: the key rate + the risk premium), 0.5..1.5; its money -- 1 (the parity)
+zz_ef_xq_fair_b = {
+	value = 1
+	if = {
+		limit = {
+			zz_ef_bl_principal > 0
+			zz_ef_gov_rate_target > 0
+		}
+		value = zz_ef_bl_int_per_part
+		multiply = 52
+		divide = zz_ef_gov_rate_target
+		min = 0.5
+		max = 1.5
+	}
+}
+# Debtor scope: gold a unit of the claim at the fair price
+zz_ef_xq_gold_m = { value = zz_ef_xch_gpm_v }
+zz_ef_xq_gold_b = {
+	value = zz_ef_xch_gpm_v
+	multiply = zz_ef_xq_fair_b
+}
+# Country scope: gold a unit of its money (zz_ef_rq_gpm_v; 1 without one)
+zz_ef_xch_gpm_v = {
+	value = 1
+	if = {
+		limit = {
+			has_variable = zz_ef_rq_gpm
+			var:zz_ef_rq_gpm > 0
+		}
+		value = var:zz_ef_rq_gpm
+	}
+}
+# Debtor scope: its money held abroad, in gold -- the depth of its market; its share of the world's (the week's close)
+zz_ef_xch_out_gold_v = {
+	value = 0
+	if = {
+		limit = { has_variable = zz_ef_rq_out_m }
+		value = var:zz_ef_rq_out_m
+		multiply = zz_ef_xch_gpm_v
+		min = 0
+	}
+}
+zz_ef_xch_depth_v = {
+	value = 0
+	if = {
+		limit = {
+			has_global_variable = zz_ef_xw_out_g
+			global_var:zz_ef_xw_out_g > 0
+		}
+		value = zz_ef_xch_out_gold_v
+		divide = global_var:zz_ef_xw_out_g
+		max = 1
+	}
+}
+
+# Holder scope, scope:zz_ef_xch_d -- the debtor, scope:zz_ef_xch_e -- the exchange:
+# the exchange's fee (zz_ef_xch_fees_set; the base without it)
+zz_ef_xch_fee_e_v = {
+	value = zz_ef_xch_fee_base
+	if = {
+		limit = { scope:zz_ef_xch_e = { has_variable = zz_ef_xch_fee_m } }
+		value = scope:zz_ef_xch_e.var:zz_ef_xch_fee_m
+	}
+}
+# the trade with the debtor, a share of ours: one market -- 1; else the trade between the two markets over our week's
+# exports and imports
+zz_ef_xch_trade_share_v = {
+	value = 0
+	if = {
+		limit = {
+			exists = market
+			scope:zz_ef_xch_d = { exists = market }
+			market = scope:zz_ef_xch_d.market
+		}
+		value = 1
+	}
+	else_if = {
+		limit = {
+			exists = market
+			scope:zz_ef_xch_d = { exists = market }
+		}
+		value = "mutual_trade_value_with_country(scope:zz_ef_xch_d)"
+		divide = {
+			value = zz_ef_v_f_exp
+			add = zz_ef_v_f_imp
+			min = 1
+		}
+		max = 1
+		min = 0
+	}
+}
+# the cost of leaving the claim, a share of its price
+zz_ef_xch_exit_v = {
+	value = zz_ef_xch_fee_e_v
+	multiply = 2
+	if = {
+		limit = { NOT = { zz_ef_xch_same_metal = yes } }
+		multiply = zz_ef_xch_exit_metal_mult
+	}
+	multiply = {
+		value = 1
+		subtract = {
+			value = zz_ef_xch_trade_share_v
+			multiply = zz_ef_xch_exit_trade_cut
+		}
+	}
+	multiply = {
+		value = 1
+		subtract = {
+			value = scope:zz_ef_xch_d.zz_ef_xch_depth_v
+			multiply = zz_ef_xch_exit_depth_cut
+		}
+	}
+}
+# the price of a step as a share of the fair price: the order's step (var:zz_ef_xo_s), the deal's (var:zz_ef_xd_s)
+zz_ef_xq_ratio_v = {
+	value = var:zz_ef_xo_s
+	subtract = zz_ef_xq_mid
+	multiply = zz_ef_xq_w
+	add = 1
+}
+zz_ef_xd_ratio_v = {
+	value = var:zz_ef_xd_s
+	subtract = zz_ef_xq_mid
+	multiply = zz_ef_xq_w
+	add = 1
+}
+# a sell order's step: the fair price x (1 + the gain of holding, not under 0), rounded up
+zz_ef_xch_ask_step_v = {
+	value = var:zz_ef_xe_g
+	min = 0
+	divide = zz_ef_xq_w
+	ceiling = yes
+	add = zz_ef_xq_mid
+}
+# a buy order's step: the fair price x (1 + the gain less the costs of buying), rounded down
+zz_ef_xch_bid_step_v = {
+	value = var:zz_ef_xo_net
+	divide = zz_ef_xq_w
+	floor = yes
+	add = zz_ef_xq_mid
+	max = zz_ef_xq_top
+}
+# the holder's portfolio of each kind of holder, in money (the totals of its maps), for the 1 % rule
+zz_ef_xch_portfolio_cb = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_rq_tot_cb_m } add = var:zz_ef_rq_tot_cb_m }
+	if = { limit = { has_variable = zz_ef_rq_tot_cb_b } add = var:zz_ef_rq_tot_cb_b }
+}
+zz_ef_xch_portfolio_bk = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_rq_tot_bk_m } add = var:zz_ef_rq_tot_bk_m }
+	if = { limit = { has_variable = zz_ef_rq_tot_bk_b } add = var:zz_ef_rq_tot_bk_b }
+	if = { limit = { has_variable = zz_ef_rq_tot_bk_f } add = var:zz_ef_rq_tot_bk_f }
+}
+zz_ef_xch_portfolio_pp = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_rq_tot_pp_m } add = var:zz_ef_rq_tot_pp_m }
+	if = { limit = { has_variable = zz_ef_rq_tot_pp_b } add = var:zz_ef_rq_tot_pp_b }
+	if = { limit = { has_variable = zz_ef_rq_tot_pp_f } add = var:zz_ef_rq_tot_pp_f }
+}
+zz_ef_xch_portfolio_tr = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_rq_tot_tr_b } add = var:zz_ef_rq_tot_tr_b }
+}
+zz_ef_xo_small_lim_v = {
+	value = var:zz_ef_xo_pf
+	multiply = zz_ef_xch_small_share
+}
+# the week's budgets, in the holder's money
+zz_ef_xch_budget_cb = {
+	value = 0
+	if = {
+		limit = { has_modifier = has_central_bank }
+		value = zz_ef_cb_metal_money
+		multiply = zz_ef_xch_buy_share_cb
+		min = 0
+	}
+}
+zz_ef_xch_budget_bk = {
+	value = 0
+	if = {
+		limit = { has_variable = zz_ef_bank_capital }
+		value = var:zz_ef_bank_capital
+		multiply = zz_ef_xch_buy_share_bk
+		max = {
+			value = investment_pool
+			multiply = zz_ef_xch_buy_pool_cap
+		}
+		min = 0
+	}
+}
+zz_ef_xch_budget_pp = {
+	value = zz_ef_pop_deposits
+	multiply = zz_ef_xch_buy_share_pp
+	max = {
+		value = investment_pool
+		multiply = zz_ef_xch_buy_pool_cap
+	}
+	min = 0
+}
+
+# Exchange scope: the fund's quotes in steps -- its bid the fair price less half its spread (rounded out), its ask plus
+# it; its room for the week's buying, in the country's money: its capacity less its stock, at most its deposit
+zz_ef_xch_fund_half_v = {
+	value = zz_ef_fd_spread
+	divide = 2
+	divide = zz_ef_xq_w
+	ceiling = yes
+	min = 1
+	max = 4
+}
+zz_ef_xch_fund_bid_step_v = {
+	value = zz_ef_xq_mid
+	subtract = zz_ef_xch_fund_half_v
+}
+zz_ef_xch_fund_ask_step_v = {
+	value = zz_ef_xq_mid
+	add = zz_ef_xch_fund_half_v
+}
+zz_ef_xch_fund_room_v = {
+	value = zz_ef_fd_capacity
+	subtract = {
+		value = zz_ef_fd_capital_v
+		subtract = zz_ef_fd_dep_v
+	}
+	max = zz_ef_fd_dep_v
+	min = 0
+}
+zz_ef_xr_bid_ratio_v = {
+	value = var:zz_ef_xr_ib
+	subtract = zz_ef_xq_mid
+	multiply = zz_ef_xq_w
+	add = 1
+}
+
+# A CB's metal in gold (the pyramid of reserves, the EFD line)
+zz_ef_xch_cb_metal_gold_v = {
+	value = gold_state_native_for_stockpile
+	add = {
+		value = silver_state_native_for_stockpile
+		multiply = silver_to_gold_rate
+	}
+}
+# the map helpers' values (a value into a map is written from a script value)
+zz_ef_xm_v_v = { value = var:zz_ef_xm_v }
+# the week's deals for the cards and the logs (0 if unset)
+zz_ef_v_f_xch_net = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_xch_net } value = var:zz_ef_f_xch_net }
+}
+zz_ef_v_f_xch_pool = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_xch_pool } value = var:zz_ef_f_xch_pool }
+}
+zz_ef_v_f_xch_pp = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_xch_pp } value = var:zz_ef_f_xch_pp }
+}
+zz_ef_v_f_xch_tr = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_xch_tr } value = var:zz_ef_f_xch_tr }
+}
+# the exchange's assets in its book this week (the EFD line)
+zz_ef_xk_n_m_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_xk_n_m } value = var:zz_ef_xk_n_m }
+}
+zz_ef_xk_n_b_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_xk_n_b } value = var:zz_ef_xk_n_b }
+}
+# the world's sums of the month (the EFD|WORLD line)
+zz_ef_xw_orders_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_xw_orders } value = global_var:zz_ef_xw_orders }
+}
+zz_ef_xw_assets_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_xw_assets } value = global_var:zz_ef_xw_assets }
+}
+zz_ef_xw_deals_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_xw_deals } value = global_var:zz_ef_xw_deals }
+}
+zz_ef_xw_auction_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_xw_auction } value = global_var:zz_ef_xw_auction }
+}
+zz_ef_xw_fund_buy_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_xw_fund_buy } value = global_var:zz_ef_xw_fund_buy }
+}
+zz_ef_xw_fund_sell_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_xw_fund_sell } value = global_var:zz_ef_xw_fund_sell }
+}
+zz_ef_xw_metal_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_xw_metal } value = global_var:zz_ef_xw_metal }
+}
+zz_ef_xw_cov_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_xw_cov } value = global_var:zz_ef_xw_cov }
+}
+zz_ef_xw_fx_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_xw_fx } value = global_var:zz_ef_xw_fx }
+}
+zz_ef_xw_mut_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_xw_mut } value = global_var:zz_ef_xw_mut }
+}
+# the pyramid of reserves: the exchange-standard CBs' cover (metal + foreign money in it) over their metal
+zz_ef_xw_pyramid_v = {
+	value = 0
+	if = {
+		limit = { zz_ef_xw_metal_v > 0 }
+		value = zz_ef_xw_metal_v
+		add = zz_ef_xw_cov_v
+		divide = zz_ef_xw_metal_v
+	}
+}
+# their mutual holdings over their foreign money
+zz_ef_xw_mut_share_v = {
+	value = 0
+	if = {
+		limit = { zz_ef_xw_fx_v > 0 }
+		value = zz_ef_xw_mut_v
+		divide = zz_ef_xw_fx_v
+	}
+}
