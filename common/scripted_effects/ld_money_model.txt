@@ -931,6 +931,11 @@ zz_ef_money_model_monthly_step = {
 	if = {
 		limit = { month = 0 }
 		zz_ef_cur_set = yes
+		# a follower of a currency union -- its head's currency (ld_monetary_union.txt)
+		if = {
+			limit = { zz_ef_mu_follower = yes }
+			zz_ef_mu_sync = yes
+		}
 	}
 	else = {
 		zz_ef_cur_par_update = yes

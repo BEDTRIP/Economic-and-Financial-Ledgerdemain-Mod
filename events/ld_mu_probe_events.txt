@@ -1,0 +1,41 @@
+﻿namespace = ld_mu_probe
+
+# R8в.4 probe (console only, `event ld_mu_probe.1`): Belgium, Switzerland and Sardinia join France's currency union as
+# their treaties would (zz_ef_mu_join); 120 days on France takes the gold standard (its followers must follow); 240 days on
+# Switzerland's treaty breaks (it leaves alone). Logs: EFM|...|mu_*, EFZ|mu_probe.
+ld_mu_probe.1 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		c:FRA = { save_scope_as = zz_ef_mu_t }
+		c:BEL = { save_scope_as = zz_ef_mu_j }
+		zz_ef_mu_join = yes
+		c:FRA = { save_scope_as = zz_ef_mu_t }
+		c:SWI = { save_scope_as = zz_ef_mu_j }
+		zz_ef_mu_join = yes
+		c:BEL = { save_scope_as = zz_ef_mu_t }
+		c:SAR = { save_scope_as = zz_ef_mu_j }
+		zz_ef_mu_join = yes
+		debug_log = "EFZ|[TimeKeeper.GetCurrentDate.GetString]|mu_probe|1"
+		trigger_event = { id = ld_mu_probe.2 days = 120 }
+	}
+}
+ld_mu_probe.2 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		c:FRA = { activate_law = law_type:law_gold_standard }
+		debug_log = "EFZ|[TimeKeeper.GetCurrentDate.GetString]|mu_probe|2"
+		trigger_event = { id = ld_mu_probe.3 days = 120 }
+	}
+}
+ld_mu_probe.3 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		c:SWI = { save_scope_as = zz_ef_mu_j }
+		c:FRA = { save_scope_as = zz_ef_mu_t }
+		zz_ef_mu_split = yes
+		debug_log = "EFZ|[TimeKeeper.GetCurrentDate.GetString]|mu_probe|3"
+	}
+}

@@ -1,0 +1,107 @@
+﻿# Currency unions' journal entries (R8в, шаг 4; Д.R8в.16, Д.R8в.18; понятие «Валютные союзы»; ld_monetary_union.txt).
+
+# A power bloc's leader with the technology of the unions: what a union is, the bloc's members in it; half of the bloc in
+# the leader's union -- prestige. The AI's principles keep their weights (Д.R8в.18).
+ld_monetary_union_je = {
+	icon = "gfx/interface/icons/event_icons/latin_monetary_union.dds"
+	group = je_group_ef
+
+	is_shown_when_inactive = {
+		is_power_bloc_leader = yes
+		zz_ef_mu_tech = yes
+	}
+	possible = {
+		is_power_bloc_leader = yes
+		zz_ef_mu_tech = yes
+		zz_ef_mu_cb = yes
+	}
+	complete = {
+		custom_tooltip = {
+			text = ld_monetary_union_je_goal
+			zz_ef_mu_bloc_half = yes
+		}
+	}
+	on_complete = {
+		add_modifier = {
+			name = ld_mu_union_prestige
+			months = 120
+		}
+	}
+	invalid = {
+		NOT = { is_power_bloc_leader = yes }
+	}
+	weight = 50
+	should_be_pinned_by_default_uninvolved_or_context = no
+}
+
+# France: the Latin union -- half of the list in its union; a country of the list in another union, or 25 years -- failed.
+ld_latin_union_je = {
+	icon = "gfx/interface/icons/event_icons/latin_monetary_union.dds"
+	group = je_group_ef
+
+	is_shown_when_inactive = {
+		c:FRA ?= this
+	}
+	possible = {
+		zz_ef_mu_tech = yes
+		zz_ef_mu_cb = yes
+	}
+	complete = {
+		custom_tooltip = {
+			text = ld_latin_union_je_goal
+			zz_ef_mu_latin_half = yes
+		}
+	}
+	on_complete = {
+		add_modifier = {
+			name = ld_mu_historic_prestige
+			months = 240
+		}
+	}
+	fail = {
+		custom_tooltip = {
+			text = ld_mu_historic_lost
+			zz_ef_mu_latin_lost = yes
+		}
+	}
+	# 25 years (Д.R8в.16)
+	timeout = 9125
+	weight = 100
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+# Sweden: the Scandinavian union -- the same with Denmark and Norway.
+ld_scandinavian_union_je = {
+	icon = "gfx/interface/icons/event_icons/scandinavian_monetary_union.dds"
+	group = je_group_ef
+
+	is_shown_when_inactive = {
+		c:SWE ?= this
+	}
+	possible = {
+		zz_ef_mu_tech = yes
+		zz_ef_mu_cb = yes
+	}
+	complete = {
+		custom_tooltip = {
+			text = ld_scandinavian_union_je_goal
+			zz_ef_mu_scand_half = yes
+		}
+	}
+	on_complete = {
+		add_modifier = {
+			name = ld_mu_historic_prestige
+			months = 240
+		}
+	}
+	fail = {
+		custom_tooltip = {
+			text = ld_mu_historic_lost
+			zz_ef_mu_scand_lost = yes
+		}
+	}
+	# 25 years (Д.R8в.16)
+	timeout = 9125
+	weight = 100
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}

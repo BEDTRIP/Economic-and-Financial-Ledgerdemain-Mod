@@ -1,0 +1,241 @@
+﻿# «Monetary integration» (R8в, шаг 4; Д.R8в.13, Д.R8в.15, Д.R8в.17, Д.R8в.19; понятие «Валютные союзы»): the source country
+# joins the currency union of the target -- its head; neither in a union -- the two found one (its head -- the one with a
+# CB and the more prestige). Bargained as any treaty: with laws, states, money. The treaty broken -- the source and all
+# who held to the union through it leave together (scripted_effects/ld_monetary_union.txt). The numbers of the AI's
+# acceptance -- «принято ночью», R11.
+ld_monetary_integration = {
+	kind = directed
+	cost = 25
+
+	relations_progress_per_day = 1
+	relations_improvement_max = 60
+
+	icon = "gfx/interface/icons/diplomatic_treaties_articles_icons/latin_monetary_union_treaty.dds"
+
+	maintenance_paid_by = source_country
+	usage_limit = once_per_treaty
+
+	# the technology of the unions (Д.R8в.17) -- both must have it (can_ratify)
+	unlocked_by_technologies = {
+		central_banking
+	}
+
+	visible = {
+	}
+
+	possible = {
+	}
+
+	# a union of a power bloc (its leader heads it): a member that left the bloc leaves the union too (Д.R8в.13 (в))
+	requirement_to_maintain = {
+		trigger = {
+			custom_tooltip = {
+				text = zz_ef_mu_tt_bloc_kept
+				OR = {
+					NOT = { scope:target_country = { zz_ef_mu_bloc_head = yes } }
+					scope:source_country = { is_in_same_power_bloc = scope:target_country }
+				}
+			}
+		}
+	}
+
+	can_ratify = {
+		scope:source_country = {
+			custom_tooltip = {
+				text = zz_ef_mu_tt_tech
+				zz_ef_mu_tech = yes
+			}
+			custom_tooltip = {
+				text = zz_ef_mu_tt_source_free
+				NOT = { zz_ef_mu_member = yes }
+			}
+		}
+		scope:target_country = {
+			custom_tooltip = {
+				text = zz_ef_mu_tt_tech
+				zz_ef_mu_tech = yes
+			}
+			custom_tooltip = {
+				text = zz_ef_mu_tt_target_head
+				OR = {
+					NOT = { zz_ef_mu_member = yes }
+					zz_ef_mu_is_head = yes
+				}
+			}
+			"relations(scope:source_country)" >= relations_threshold:cordial
+		}
+		custom_tooltip = {
+			text = zz_ef_mu_tt_cb
+			OR = {
+				scope:target_country = { zz_ef_mu_cb = yes }
+				AND = {
+					scope:target_country = { NOT = { zz_ef_mu_member = yes } }
+					scope:source_country = { zz_ef_mu_cb = yes }
+				}
+			}
+		}
+	}
+
+	on_entry_into_force = {
+		scope:article_options.source_country = { save_scope_as = zz_ef_mu_j }
+		scope:article_options.target_country = { save_scope_as = zz_ef_mu_t }
+		zz_ef_mu_join = yes
+	}
+
+	# whichever side leaves, the branch of the one that joined through the other goes (zz_ef_mu_split acts on the side
+	# whose link is the other)
+	on_withdrawal = {
+		scope:withdrawing_country = { save_scope_as = zz_ef_mu_j }
+		scope:non_withdrawing_country = { save_scope_as = zz_ef_mu_t }
+		zz_ef_mu_split = yes
+		scope:non_withdrawing_country = { save_scope_as = zz_ef_mu_j }
+		scope:withdrawing_country = { save_scope_as = zz_ef_mu_t }
+		zz_ef_mu_split = yes
+	}
+	on_break = {
+		scope:withdrawing_country = {
+			change_relations = { country = scope:non_withdrawing_country value = -10 }
+		}
+	}
+
+	ai = {
+		treaty_categories = {
+			economy
+		}
+
+		article_ai_usage = {
+			offer
+			request
+		}
+
+		# rare by itself; the historic unions' lists and a bloc of «Market unification» 3 look for it (Д.R8в.16, Д.R8в.18)
+		evaluation_chance = {
+			value = 0.02
+			if = {
+				limit = { zz_ef_mu_historic_head = yes }
+				value = 0.5
+			}
+			else_if = {
+				limit = {
+					is_power_bloc_leader = yes
+					power_bloc ?= { has_principle = principle:principle_market_unification_3 }
+				}
+				value = 0.2
+			}
+		}
+
+		inherent_accept_score = {
+			value = 0
+			if = {
+				# the joining side weighs giving up its money
+				limit = { scope:source_country ?= this }
+				add = {
+					desc = "DIPLOMATIC_ACCEPTANCE_BASE_ADDITIONAL"
+					value = -25
+				}
+				add = {
+					desc = "zz_ef_mu_acc_relations"
+					value = "relations(scope:target_country)"
+					multiply = 0.25
+					max = 20
+					min = -20
+				}
+				# a stronger money to take
+				add = {
+					desc = "zz_ef_mu_acc_strength"
+					value = 0
+					scope:target_country = { add = zz_ef_currency_strength }
+					subtract = zz_ef_currency_strength
+					multiply = 40
+					max = 20
+					min = -20
+				}
+				if = {
+					limit = { zz_ef_mu_same_metal = yes }
+					add = {
+						desc = "zz_ef_mu_acc_metal"
+						value = 10
+					}
+				}
+				if = {
+					limit = { market = scope:target_country.market }
+					add = {
+						desc = "zz_ef_mu_acc_market"
+						value = 10
+					}
+				}
+				if = {
+					limit = { country_rank = rank_value:great_power }
+					add = {
+						desc = "zz_ef_mu_acc_great_power"
+						value = -40
+					}
+				}
+				if = {
+					limit = {
+						is_in_same_power_bloc = scope:target_country
+						power_bloc ?= { has_principle = principle:principle_market_unification_3 }
+					}
+					add = {
+						desc = "zz_ef_mu_acc_bloc"
+						value = 30
+					}
+				}
+				if = {
+					limit = { zz_ef_mu_historic_member = yes }
+					add = {
+						desc = "zz_ef_mu_acc_historic"
+						value = 20
+					}
+				}
+			}
+			else = {
+				# the head (or the founder) weighs a new member
+				add = {
+					desc = "DIPLOMATIC_ACCEPTANCE_BASE_ADDITIONAL"
+					value = -10
+				}
+				add = {
+					desc = "zz_ef_mu_acc_relations"
+					value = "relations(scope:source_country)"
+					multiply = 0.25
+					max = 20
+					min = -20
+				}
+				# a weak money brings its debts into the union
+				add = {
+					desc = "zz_ef_mu_acc_strength"
+					value = -1
+					scope:source_country = { add = zz_ef_currency_strength }
+					multiply = 40
+					max = 10
+					min = -30
+				}
+				if = {
+					limit = { scope:source_country = { zz_ef_mu_same_metal = yes } }
+					add = {
+						desc = "zz_ef_mu_acc_metal"
+						value = 10
+					}
+				}
+				if = {
+					limit = {
+						is_in_same_power_bloc = scope:source_country
+						power_bloc ?= { has_principle = principle:principle_market_unification_3 }
+					}
+					add = {
+						desc = "zz_ef_mu_acc_bloc"
+						value = 30
+					}
+				}
+				if = {
+					limit = { scope:source_country = { zz_ef_mu_historic_member = yes } }
+					add = {
+						desc = "zz_ef_mu_acc_historic"
+						value = 20
+					}
+				}
+			}
+		}
+	}
+}

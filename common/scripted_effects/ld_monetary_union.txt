@@ -1,0 +1,365 @@
+﻿# Currency unions (R8в, шаг 4; понятие «Валютные союзы»; Д.R8в.5, Д.R8в.13, Д.R8в.15, Д.R8в.19). A union is linked
+# treaties «Monetary integration» (common/treaty_articles/ld_monetary_integration.txt): each member keeps its treaty with
+# the one it joined through (var:zz_ef_mu_link; the first of the union has none). On every member:
+#   var:zz_ef_mu_id   -- the union's number (global_var:zz_ef_mu_n counts them);
+#   var:zz_ef_mu_head -- the head: the member with a CB and the most prestige; in a union of a power bloc -- its leader;
+#                        a challenger takes over as in a bloc's power struggle (1.2 x the head's prestige for 12 months,
+#                        falls under 1.15 -- fails; NPowerBlocs);
+# the head's currency is the union's: every follower takes its standard and monetary policy (laws), its currency
+# (var:zz_ef_cur, the noun), its parity and key rate (zz_ef_mu_sync); the cover is the union's (var:zz_ef_mu_cover --
+# the metal of all the CBs over the money of all, zz_ef_cb_cover); payments between members -- in the one money, no
+# metal, no exchange (the clearing: one group, ld_clearing.txt). A treaty broken -- the members who held to the union
+# through the leaver go with it: two or more -- a union of their own, one -- its own currency at the union's parity.
+# Monthly -- zz_ef_mu_world_step (the world's monthly pass, ld_world_month.txt). Log EFM|...|mu_*.
+
+# ---- joining and leaving ---------------------------------------------------------------------------------------------
+
+# Any scope: scope:zz_ef_mu_j joins through its treaty with scope:zz_ef_mu_t (on_entry_into_force); neither in a union
+# -- the two found one.
+zz_ef_mu_join = {
+	if = {
+		limit = { scope:zz_ef_mu_t = { zz_ef_mu_member = yes } }
+		scope:zz_ef_mu_j = {
+			set_variable = { name = zz_ef_mu_id value = scope:zz_ef_mu_t.var:zz_ef_mu_id }
+			set_variable = { name = zz_ef_mu_head value = scope:zz_ef_mu_t.var:zz_ef_mu_head }
+		}
+	}
+	else = {
+		if = {
+			limit = { NOT = { has_global_variable = zz_ef_mu_n } }
+			set_global_variable = { name = zz_ef_mu_n value = 0 }
+		}
+		change_global_variable = { name = zz_ef_mu_n add = 1 }
+		scope:zz_ef_mu_t = { set_variable = { name = zz_ef_mu_id value = global_var:zz_ef_mu_n } }
+		scope:zz_ef_mu_j = { set_variable = { name = zz_ef_mu_id value = global_var:zz_ef_mu_n } }
+	}
+	scope:zz_ef_mu_j = { set_variable = { name = zz_ef_mu_link value = scope:zz_ef_mu_t } }
+	scope:zz_ef_mu_t = {
+		set_global_variable = { name = zz_ef_mu_t_id value = var:zz_ef_mu_id }
+	}
+	zz_ef_mu_head_pick = yes
+	scope:zz_ef_mu_j = {
+		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|mu_join|union [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mu_id_v')|0]|head [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mu_is_head_v')|0]" }
+	}
+	scope:zz_ef_mu_t = {
+		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|mu_join_through|union [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mu_id_v')|0]|head [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mu_is_head_v')|0]" }
+	}
+}
+
+# Any scope, global_var:zz_ef_mu_t_id: the union's head (Д.R8в.15) -- in a union with a power bloc's leader and another
+# member of its bloc, the leader; else the member with a CB and the most prestige; then every follower syncs to it.
+zz_ef_mu_head_pick = {
+	if = {
+		limit = {
+			any_country = {
+				var:zz_ef_mu_id ?= global_var:zz_ef_mu_t_id
+				zz_ef_mu_cb = yes
+			}
+		}
+		ordered_country = {
+			limit = {
+				var:zz_ef_mu_id ?= global_var:zz_ef_mu_t_id
+				zz_ef_mu_cb = yes
+			}
+			order_by = zz_ef_mu_head_score
+			save_temporary_scope_as = zz_ef_mu_h
+		}
+		every_country = {
+			limit = { var:zz_ef_mu_id ?= global_var:zz_ef_mu_t_id }
+			set_variable = { name = zz_ef_mu_head value = scope:zz_ef_mu_h }
+		}
+		scope:zz_ef_mu_h = {
+			if = { limit = { has_variable = zz_ef_mu_ch } remove_variable = zz_ef_mu_ch }
+			if = { limit = { has_variable = zz_ef_mu_ch_m } remove_variable = zz_ef_mu_ch_m }
+		}
+		every_country = {
+			limit = {
+				var:zz_ef_mu_id ?= global_var:zz_ef_mu_t_id
+				zz_ef_mu_follower = yes
+			}
+			zz_ef_mu_sync = yes
+		}
+	}
+	# no member with a CB -- no union (the treaty needs one; a split part without one falls apart)
+	else = {
+		every_country = {
+			limit = { var:zz_ef_mu_id ?= global_var:zz_ef_mu_t_id }
+			zz_ef_mu_leave = yes
+		}
+	}
+}
+
+# A country leaves its union: its own currency at the union's parity (its standard and policy stay as they are).
+zz_ef_mu_leave = {
+	if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|mu_leave|union [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mu_id_v')|0]|parity [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_valuation')|4]" }
+	remove_variable = zz_ef_mu_id
+	if = { limit = { has_variable = zz_ef_mu_head } remove_variable = zz_ef_mu_head }
+	if = { limit = { has_variable = zz_ef_mu_link } remove_variable = zz_ef_mu_link }
+	if = { limit = { has_variable = zz_ef_mu_cover } remove_variable = zz_ef_mu_cover }
+	if = { limit = { has_variable = zz_ef_mu_ch } remove_variable = zz_ef_mu_ch }
+	if = { limit = { has_variable = zz_ef_mu_ch_m } remove_variable = zz_ef_mu_ch_m }
+	# its own currency back (the January's data, ld_currency_var.txt); the parity is the union's
+	zz_ef_cur_set = yes
+	zz_ef_cur_name_set = yes
+}
+
+# Any scope: the treaty of scope:zz_ef_mu_j with scope:zz_ef_mu_t is gone (on_withdrawal / on_break / its requirement):
+# scope:zz_ef_mu_j and every member that held to the union through it (its links lead to it) leave together -- two or
+# more found a union of their own (its head by the same rule), one is alone; the rest keep theirs (its head again).
+zz_ef_mu_split = {
+	if = {
+		limit = {
+			scope:zz_ef_mu_j = {
+				zz_ef_mu_member = yes
+				var:zz_ef_mu_link ?= scope:zz_ef_mu_t
+			}
+		}
+		set_global_variable = { name = zz_ef_mu_t_id value = scope:zz_ef_mu_j.var:zz_ef_mu_id }
+		# the branch: the leaver and everyone whose link leads to it (a union is no deeper than its members)
+		scope:zz_ef_mu_j = { set_variable = zz_ef_mu_br }
+		while = {
+			limit = {
+				any_country = {
+					var:zz_ef_mu_id ?= global_var:zz_ef_mu_t_id
+					NOT = { has_variable = zz_ef_mu_br }
+					has_variable = zz_ef_mu_link
+					var:zz_ef_mu_link = { has_variable = zz_ef_mu_br }
+				}
+			}
+			every_country = {
+				limit = {
+					var:zz_ef_mu_id ?= global_var:zz_ef_mu_t_id
+					NOT = { has_variable = zz_ef_mu_br }
+					has_variable = zz_ef_mu_link
+					var:zz_ef_mu_link = { has_variable = zz_ef_mu_br }
+				}
+				set_variable = zz_ef_mu_br
+			}
+		}
+		scope:zz_ef_mu_j = { remove_variable = zz_ef_mu_link }
+		change_global_variable = { name = zz_ef_mu_n add = 1 }
+		every_country = {
+			limit = { has_variable = zz_ef_mu_br }
+			set_variable = { name = zz_ef_mu_id value = global_var:zz_ef_mu_n }
+			remove_variable = zz_ef_mu_br
+		}
+		# the part left behind -- its head again; then the branch: alone -- leaves, else its own union
+		zz_ef_mu_head_pick = yes
+		set_global_variable = { name = zz_ef_mu_t_id value = global_var:zz_ef_mu_n }
+		if = {
+			limit = {
+				any_country = {
+					count < 2
+					var:zz_ef_mu_id ?= global_var:zz_ef_mu_t_id
+				}
+			}
+			every_country = {
+				limit = { var:zz_ef_mu_id ?= global_var:zz_ef_mu_t_id }
+				zz_ef_mu_leave = yes
+			}
+		}
+		else = {
+			zz_ef_mu_head_pick = yes
+		}
+		# what is left of the old union -- alone, it is no union
+		set_global_variable = { name = zz_ef_mu_t_id value = scope:zz_ef_mu_t.var:zz_ef_mu_id }
+		if = {
+			limit = {
+				scope:zz_ef_mu_t = { zz_ef_mu_member = yes }
+				any_country = {
+					count < 2
+					var:zz_ef_mu_id ?= global_var:zz_ef_mu_t_id
+				}
+			}
+			scope:zz_ef_mu_t = { zz_ef_mu_leave = yes }
+		}
+	}
+}
+
+# ---- the follower ----------------------------------------------------------------------------------------------------
+
+# FOLLOWER scope: the head's laws of the monetary system and policy (Д.R8в.19; activate_law runs the laws' on_activate --
+# the standard's switch keeps the money's worth in gold), its currency, parity, legal ratio and key rate.
+zz_ef_mu_sync = {
+	var:zz_ef_mu_head = { save_temporary_scope_as = zz_ef_mu_h }
+	set_variable = { name = zz_ef_mu_par_old value = 0 }
+	if = { limit = { has_variable = money_value_target_1 } set_variable = { name = zz_ef_mu_par_old value = var:money_value_target_1 } }
+	zz_ef_mu_law = { L = law_no_monetary_system }
+	zz_ef_mu_law = { L = law_fiat_standard }
+	zz_ef_mu_law = { L = law_silver_standard }
+	zz_ef_mu_law = { L = law_bimetallism_standard }
+	zz_ef_mu_law = { L = law_gold_standard }
+	zz_ef_mu_law = { L = law_gold_exchange_standard }
+	zz_ef_mu_law = { L = law_silver_exchange_standard }
+	zz_ef_mu_law = { L = law_bimetallism_exchange_standard }
+	zz_ef_mu_law = { L = law_external_exchange_standard }
+	zz_ef_mu_law = { L = law_no_monetary_policy }
+	zz_ef_mu_law = { L = law_revaluation }
+	zz_ef_mu_law = { L = law_devaluation }
+	zz_ef_mu_law = { L = law_large_monetary_policy }
+	if = {
+		limit = { scope:zz_ef_mu_h = { has_variable = zz_ef_cur } }
+		set_variable = { name = zz_ef_cur value = scope:zz_ef_mu_h.var:zz_ef_cur }
+	}
+	if = {
+		limit = { scope:zz_ef_mu_h = { has_variable = zz_ef_cur_noun } }
+		set_variable = { name = zz_ef_cur_noun value = scope:zz_ef_mu_h.var:zz_ef_cur_noun }
+	}
+	if = {
+		limit = { scope:zz_ef_mu_h = { has_variable = money_value_target_1 } }
+		set_variable = { name = money_value_target_1 value = scope:zz_ef_mu_h.var:money_value_target_1 }
+	}
+	if = {
+		limit = { scope:zz_ef_mu_h = { has_variable = zz_ef_bimet_ratio } }
+		set_variable = { name = zz_ef_bimet_ratio value = scope:zz_ef_mu_h.var:zz_ef_bimet_ratio }
+	}
+	if = {
+		limit = { scope:zz_ef_mu_h = { has_variable = base_rate_percentage } }
+		set_variable = { name = base_rate_percentage value = scope:zz_ef_mu_h.var:base_rate_percentage }
+	}
+	if = {
+		limit = {
+			zz_ef_logs_on = yes
+			NOT = { var:zz_ef_mu_par_old = var:money_value_target_1 }
+		}
+		debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|mu_sync|union [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mu_id_v')|0]|parity_old [THIS.GetCountry.MakeScope.Var('zz_ef_mu_par_old').GetValue|4]|parity [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_valuation')|4]|std [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_std_code')|0]"
+	}
+	remove_variable = zz_ef_mu_par_old
+}
+zz_ef_mu_law = {
+	if = {
+		limit = {
+			scope:zz_ef_mu_h = { has_law = law_type:$L$ }
+			NOT = { has_law = law_type:$L$ }
+		}
+		activate_law = law_type:$L$
+	}
+}
+
+# COUNTRY scope, after one of its laws of the monetary system or policy took effect (on_activate_monetary_system_law,
+# the monetary policy's laws): a head's followers take it at once.
+zz_ef_mu_head_law_changed = {
+	if = {
+		limit = { zz_ef_mu_is_head = yes }
+		set_global_variable = { name = zz_ef_mu_t_id value = var:zz_ef_mu_id }
+		every_country = {
+			limit = {
+				var:zz_ef_mu_id ?= global_var:zz_ef_mu_t_id
+				zz_ef_mu_follower = yes
+			}
+			zz_ef_mu_sync = yes
+		}
+	}
+}
+
+# ---- the month -------------------------------------------------------------------------------------------------------
+
+# World scope, the world's monthly pass: each union's cover, its head's challenger, its members' sync (the key rate the
+# head's monthly step moved).
+zz_ef_mu_world_step = {
+	every_country = {
+		limit = { zz_ef_mu_is_head = yes }
+		set_global_variable = { name = zz_ef_mu_t_id value = var:zz_ef_mu_id }
+		save_temporary_scope_as = zz_ef_mu_h
+		# the cover of the union: the metal of all the CBs over the money of all
+		set_variable = { name = zz_ef_mu_num value = 0 }
+		set_variable = { name = zz_ef_mu_den value = 0 }
+		every_country = {
+			limit = { var:zz_ef_mu_id ?= global_var:zz_ef_mu_t_id }
+			set_variable = { name = zz_ef_mu_tn value = zz_ef_mu_cover_num }
+			set_variable = { name = zz_ef_mu_td value = zz_ef_mu_cover_den }
+			scope:zz_ef_mu_h = {
+				change_variable = { name = zz_ef_mu_num add = prev.var:zz_ef_mu_tn }
+				change_variable = { name = zz_ef_mu_den add = prev.var:zz_ef_mu_td }
+			}
+			remove_variable = zz_ef_mu_tn
+			remove_variable = zz_ef_mu_td
+		}
+		set_variable = { name = zz_ef_mu_cover value = 0 }
+		if = {
+			limit = { var:zz_ef_mu_den > 0 }
+			set_variable = { name = zz_ef_mu_cover value = { value = var:zz_ef_mu_num divide = var:zz_ef_mu_den } }
+		}
+		every_country = {
+			limit = { var:zz_ef_mu_id ?= global_var:zz_ef_mu_t_id }
+			set_variable = { name = zz_ef_mu_cover value = scope:zz_ef_mu_h.var:zz_ef_mu_cover }
+		}
+		remove_variable = zz_ef_mu_num
+		remove_variable = zz_ef_mu_den
+		zz_ef_mu_struggle = yes
+	}
+	every_country = {
+		limit = { zz_ef_mu_follower = yes }
+		zz_ef_mu_sync = yes
+	}
+	if = {
+		limit = { zz_ef_logs_on = yes }
+		every_country = {
+			limit = { zz_ef_mu_member = yes }
+			debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|mu|union [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mu_id_v')|0]|head [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mu_is_head_v')|0]|cover [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_cover')|3]|parity [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_valuation')|4]|std [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_std_code')|0]|prestige [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mu_prestige_v')|0]"
+		}
+	}
+}
+
+# HEAD scope, scope:zz_ef_mu_h = this, global_var:zz_ef_mu_t_id: the power struggle (Д.R8в.15) -- the member with a CB
+# and the most prestige over the head's x zz_ef_mu_struggle_start is the challenger; after zz_ef_mu_struggle_months it
+# heads the union; under the head's x zz_ef_mu_struggle_fail -- the struggle fails. A union of a power bloc's leader keeps
+# its leader.
+zz_ef_mu_struggle = {
+	if = {
+		limit = {
+			NOT = { zz_ef_mu_bloc_head = yes }
+			any_country = {
+				var:zz_ef_mu_id ?= global_var:zz_ef_mu_t_id
+				NOT = { this = scope:zz_ef_mu_h }
+				zz_ef_mu_cb = yes
+			}
+		}
+		ordered_country = {
+			limit = {
+				var:zz_ef_mu_id ?= global_var:zz_ef_mu_t_id
+				NOT = { this = scope:zz_ef_mu_h }
+				zz_ef_mu_cb = yes
+			}
+			order_by = prestige
+			save_temporary_scope_as = zz_ef_mu_c
+		}
+		if = {
+			limit = {
+				has_variable = zz_ef_mu_ch
+				var:zz_ef_mu_ch = scope:zz_ef_mu_c
+				scope:zz_ef_mu_c.prestige >= zz_ef_mu_struggle_fail_v
+			}
+			change_variable = { name = zz_ef_mu_ch_m add = 1 }
+			if = {
+				limit = { var:zz_ef_mu_ch_m >= zz_ef_mu_struggle_months }
+				# the new head: the union takes its currency, standard and parity
+				every_country = {
+					limit = { var:zz_ef_mu_id ?= global_var:zz_ef_mu_t_id }
+					set_variable = { name = zz_ef_mu_head value = scope:zz_ef_mu_c }
+				}
+				remove_variable = zz_ef_mu_ch
+				remove_variable = zz_ef_mu_ch_m
+				scope:zz_ef_mu_c = {
+					if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|mu_head|union [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mu_id_v')|0]" }
+				}
+				every_country = {
+					limit = {
+						var:zz_ef_mu_id ?= global_var:zz_ef_mu_t_id
+						zz_ef_mu_follower = yes
+					}
+					zz_ef_mu_sync = yes
+				}
+			}
+		}
+		else_if = {
+			limit = { scope:zz_ef_mu_c.prestige >= zz_ef_mu_struggle_start_v }
+			set_variable = { name = zz_ef_mu_ch value = scope:zz_ef_mu_c }
+			set_variable = { name = zz_ef_mu_ch_m value = 0 }
+		}
+		else = {
+			if = { limit = { has_variable = zz_ef_mu_ch } remove_variable = zz_ef_mu_ch }
+			if = { limit = { has_variable = zz_ef_mu_ch_m } remove_variable = zz_ef_mu_ch_m }
+		}
+	}
+}

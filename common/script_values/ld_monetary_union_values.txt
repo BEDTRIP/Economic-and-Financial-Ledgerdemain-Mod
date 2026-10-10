@@ -1,0 +1,134 @@
+﻿# Currency unions (scripted_effects/ld_monetary_union.txt; Д.R8в.15).
+
+zz_ef_mu_id_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_mu_id } value = var:zz_ef_mu_id }
+}
+zz_ef_mu_is_head_v = {
+	value = 0
+	if = { limit = { zz_ef_mu_is_head = yes } value = 1 }
+}
+zz_ef_mu_prestige_v = { value = prestige }
+# the head's order: a power bloc's leader with another member of the union in its bloc first, then prestige
+zz_ef_mu_bloc_first = 1000000
+zz_ef_mu_head_score = {
+	value = prestige
+	if = {
+		limit = { zz_ef_mu_bloc_head = yes }
+		add = zz_ef_mu_bloc_first
+	}
+}
+# the power struggle of a bloc (NPowerBlocs: POWER_STRUGGLE_PRESTIGE_THRESHOLD_START / _FAIL,
+# POWER_STRUGGLE_DURATION_SUCCESS_MONTHS); HEAD scope -- the challenger's prestige to start / to keep the struggle
+zz_ef_mu_struggle_start = 1.2
+zz_ef_mu_struggle_fail = 1.15
+zz_ef_mu_struggle_months = 12
+zz_ef_mu_struggle_start_v = {
+	value = prestige
+	multiply = zz_ef_mu_struggle_start
+}
+zz_ef_mu_struggle_fail_v = {
+	value = prestige
+	multiply = zz_ef_mu_struggle_fail
+}
+# the union's cover (Д.R8в.5): the metal of every CB at the fixed rate over the money of every member -- the parts of
+# zz_ef_cb_cover summed over the members
+zz_ef_mu_cover_num = {
+	value = 0
+	if = {
+		limit = { has_modifier = has_central_bank }
+		value = national_capacity
+		divide = zz_ef_capacity_per_metal
+		divide = zz_ef_metal_per_money
+	}
+}
+zz_ef_mu_cover_den = {
+	value = money_supply
+	min = 0
+}
+# the journal entries (Д.R8в.16, Д.R8в.18): members of the country's power bloc / of the historic list in its union, and
+# half of them
+zz_ef_mu_bloc_in_v = {
+	value = 0
+	if = {
+		limit = { is_in_power_bloc = yes zz_ef_mu_member = yes }
+		every_country = {
+			limit = {
+				is_in_same_power_bloc = prev
+				var:zz_ef_mu_id ?= prev.var:zz_ef_mu_id
+			}
+			add = 1
+		}
+	}
+}
+zz_ef_mu_bloc_all_v = {
+	value = 0
+	if = {
+		limit = { is_in_power_bloc = yes }
+		every_country = {
+			limit = { is_in_same_power_bloc = prev }
+			add = 1
+		}
+	}
+}
+zz_ef_mu_bloc_half_v = {
+	value = zz_ef_mu_bloc_all_v
+	divide = 2
+	add = 0.5
+	floor = yes
+	min = 2
+}
+zz_ef_mu_latin_in_v = {
+	value = 0
+	if = {
+		limit = { zz_ef_mu_member = yes }
+		every_country = {
+			limit = {
+				zz_ef_mu_latin_list = yes
+				var:zz_ef_mu_id ?= prev.var:zz_ef_mu_id
+			}
+			add = 1
+		}
+	}
+}
+zz_ef_mu_latin_all_v = {
+	value = 0
+	every_country = {
+		limit = { zz_ef_mu_latin_list = yes }
+		add = 1
+	}
+}
+zz_ef_mu_latin_half_v = {
+	value = zz_ef_mu_latin_all_v
+	divide = 2
+	add = 0.5
+	floor = yes
+	min = 1
+}
+zz_ef_mu_scand_in_v = {
+	value = 0
+	if = {
+		limit = { zz_ef_mu_member = yes }
+		every_country = {
+			limit = {
+				zz_ef_mu_scand_list = yes
+				var:zz_ef_mu_id ?= prev.var:zz_ef_mu_id
+			}
+			add = 1
+		}
+	}
+}
+zz_ef_mu_scand_all_v = {
+	value = 0
+	every_country = {
+		limit = { zz_ef_mu_scand_list = yes }
+		add = 1
+	}
+}
+zz_ef_mu_scand_half_v = {
+	value = zz_ef_mu_scand_all_v
+	divide = 2
+	add = 0.5
+	floor = yes
+	min = 1
+}

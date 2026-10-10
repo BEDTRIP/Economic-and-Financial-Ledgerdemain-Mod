@@ -70,10 +70,16 @@ zz_ef_clr_step = {
 }
 
 # The group of metal (Д.R8в.2): 1 gold, 2 silver, 4 fiat (no metal), 100 + 10 x the legal ratio -- bimetallism (one
-# ratio, one group). An exchange standard -- its metal's group; the external one -- its anchor's.
+# ratio, one group). An exchange standard -- its metal's group; the external one -- its anchor's. A currency union --
+# 10000 + its number.
 zz_ef_clr_group_set = {
 	set_variable = { name = zz_ef_clr_gc value = 4 }
+	# a currency union -- a group of its own (ld_monetary_union.txt)
 	if = {
+		limit = { zz_ef_mu_member = yes }
+		set_variable = { name = zz_ef_clr_gc value = { value = var:zz_ef_mu_id add = 10000 } }
+	}
+	else_if = {
 		limit = { zz_ef_metal_gold = yes }
 		set_variable = { name = zz_ef_clr_gc value = 1 }
 	}
@@ -416,6 +422,14 @@ zz_ef_clr_pair = {
 	zz_ef_clr_acc = { N = paid V = var:zz_ef_clr_a }
 	scope:zz_ef_clr_r = { zz_ef_clr_acc = { N = got V = scope:zz_ef_clr_p.var:zz_ef_clr_a } }
 	set_variable = { name = zz_ef_clr_x value = { value = var:zz_ef_clr_a multiply = var:zz_ef_clr_n } }
+	# between members of a currency union -- the one money, as inside a country (Д.R8в.5)
+	if = {
+		limit = {
+			has_variable = zz_ef_mu_id
+			scope:zz_ef_clr_r = { var:zz_ef_mu_id ?= scope:zz_ef_clr_p.var:zz_ef_mu_id }
+		}
+		set_variable = { name = zz_ef_clr_x value = var:zz_ef_clr_a }
+	}
 	set_variable = { name = zz_ef_clr_rest value = { value = var:zz_ef_clr_a subtract = var:zz_ef_clr_x } }
 	if = {
 		limit = { var:zz_ef_clr_x > 0 }

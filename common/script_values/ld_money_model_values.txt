@@ -46,10 +46,18 @@ zz_ef_weeks_per_month = 4.333
 # The rate the model reads: the central bank's, else E&F's neutral 6.5%.
 zz_ef_money_rate = {
 	value = 0.065
-	# exists = this: history/buildings evaluates this in an empty scope (no variables there)
+	# exists = this: history/buildings evaluates this in an empty scope (no variables there); a follower of a currency
+	# union -- its head's (Д.R8в.5)
 	if = {
 		limit = { exists = this }
 		if = {
+			limit = {
+				zz_ef_mu_follower = yes
+				var:zz_ef_mu_head = { has_variable = base_rate_percentage }
+			}
+			value = var:zz_ef_mu_head.var:base_rate_percentage
+		}
+		else_if = {
 			limit = { has_variable = base_rate_percentage }
 			value = var:base_rate_percentage
 		}
@@ -767,9 +775,15 @@ zz_ef_ext_net_week = {
 }
 # Metal cover: the metal at parity against the money in circulation (1 =
 # 100%; 40% at the start, zz_ef_cover_normal).
+# A member of a currency union -- the union's (var:zz_ef_mu_cover, monthly: the metal of all its CBs over the money of
+# all, Д.R8в.5).
 zz_ef_cb_cover = {
 	value = 0
 	if = {
+		limit = { has_variable = zz_ef_mu_cover }
+		value = var:zz_ef_mu_cover
+	}
+	else_if = {
 		limit = {
 			has_variable = money_value_target_1
 			var:money_value_target_1 > 0

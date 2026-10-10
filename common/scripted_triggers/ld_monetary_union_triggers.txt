@@ -1,0 +1,125 @@
+﻿# Currency unions (scripted_effects/ld_monetary_union.txt; понятие «Валютные союзы»; Д.R8в.5, Д.R8в.13, Д.R8в.15, Д.R8в.19).
+
+# a member of a currency union (its head too)
+zz_ef_mu_member = {
+	has_variable = zz_ef_mu_id
+}
+# the union's head
+zz_ef_mu_is_head = {
+	has_variable = zz_ef_mu_id
+	var:zz_ef_mu_head ?= this
+}
+# a member that follows its head (its standard, policy, currency, rate)
+zz_ef_mu_follower = {
+	has_variable = zz_ef_mu_id
+	NOT = { var:zz_ef_mu_head ?= this }
+}
+# the technology of the unions (Д.R8в.17: central_banking -- «принято ночью», the final one -- R11)
+zz_ef_mu_tech = {
+	has_technology_researched = central_banking
+}
+# a country with a central bank by law (Д.R8в.19: the head is always one)
+zz_ef_mu_cb = {
+	OR = {
+		has_law = law_type:law_ld_cb_state
+		has_law = law_type:law_ld_cb_private
+	}
+}
+# a law of the monetary system or the monetary policy can be changed by the country itself (not a union's follower)
+zz_ef_mu_own_laws = {
+	custom_tooltip = {
+		text = zz_ef_mu_follower_tt
+		NOT = { zz_ef_mu_follower = yes }
+	}
+}
+# HEAD (any member) scope: a power bloc's leader with another member of its union in its bloc -- the union of the bloc,
+# its leader heads it
+zz_ef_mu_bloc_head = {
+	has_variable = zz_ef_mu_id
+	is_power_bloc_leader = yes
+	any_country = {
+		NOT = { this = prev }
+		var:zz_ef_mu_id ?= prev.var:zz_ef_mu_id
+		is_in_same_power_bloc = prev
+	}
+}
+# the source country of a treaty and its target (scope:target_country) -- one metal of the standard
+zz_ef_mu_same_metal = {
+	OR = {
+		AND = { zz_ef_metal_gold = yes scope:target_country = { zz_ef_metal_gold = yes } }
+		AND = { zz_ef_metal_silver = yes scope:target_country = { zz_ef_metal_silver = yes } }
+		AND = { zz_ef_metal_bimet = yes scope:target_country = { zz_ef_metal_bimet = yes } }
+	}
+}
+# the historic unions (Д.R8в.16): the Latin -- France and Belgium, Switzerland, the Italian states or Italy, Greece; the
+# Scandinavian -- Sweden and Denmark, Norway
+zz_ef_mu_latin_list = {
+	OR = {
+		c:BEL ?= this
+		c:SWI ?= this
+		c:SAR ?= this
+		c:TUS ?= this
+		c:PAP ?= this
+		c:SIC ?= this
+		c:PAR ?= this
+		c:MOD ?= this
+		c:LUC ?= this
+		c:ITA ?= this
+		c:GRE ?= this
+	}
+}
+zz_ef_mu_scand_list = {
+	OR = {
+		c:DEN ?= this
+		c:NOR ?= this
+	}
+}
+# the country leads a historic union's journal entry (its AI looks for the treaty)
+zz_ef_mu_historic_head = {
+	OR = {
+		has_journal_entry = je:ld_latin_union_je
+		has_journal_entry = je:ld_scandinavian_union_je
+	}
+}
+# the source country of a treaty is on the list of its target's historic union
+zz_ef_mu_historic_member = {
+	OR = {
+		AND = {
+			zz_ef_mu_latin_list = yes
+			scope:target_country = { has_journal_entry = je:ld_latin_union_je }
+		}
+		AND = {
+			zz_ef_mu_scand_list = yes
+			scope:target_country = { has_journal_entry = je:ld_scandinavian_union_je }
+		}
+	}
+}
+# a power bloc's leader: half of its bloc (itself too) in its union (Д.R8в.18)
+zz_ef_mu_bloc_half = {
+	zz_ef_mu_member = yes
+	zz_ef_mu_bloc_in_v >= zz_ef_mu_bloc_half_v
+}
+# France / Sweden: half of the list in its union (Д.R8в.16)
+zz_ef_mu_latin_half = {
+	zz_ef_mu_member = yes
+	zz_ef_mu_latin_in_v >= zz_ef_mu_latin_half_v
+}
+zz_ef_mu_scand_half = {
+	zz_ef_mu_member = yes
+	zz_ef_mu_scand_in_v >= zz_ef_mu_scand_half_v
+}
+# a country of the list in another union -- the historic union failed
+zz_ef_mu_latin_lost = {
+	any_country = {
+		zz_ef_mu_latin_list = yes
+		zz_ef_mu_member = yes
+		NOT = { var:zz_ef_mu_id ?= prev.var:zz_ef_mu_id }
+	}
+}
+zz_ef_mu_scand_lost = {
+	any_country = {
+		zz_ef_mu_scand_list = yes
+		zz_ef_mu_member = yes
+		NOT = { var:zz_ef_mu_id ?= prev.var:zz_ef_mu_id }
+	}
+}
