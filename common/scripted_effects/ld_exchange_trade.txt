@@ -1642,7 +1642,14 @@ zz_ef_xch_mul_move = {
 	remove_variable = zz_ef_t_mv
 }
 # Debtor scope: the depth of the asset's market -> var:zz_ef_t_md
-zz_ef_xch_mul_depth_m = { set_variable = { name = zz_ef_t_md value = zz_ef_rq_out_m_v } }
+# (money: at least zz_ef_xmul_depth_m2 of its money supply -- a few units sold out of a small market do not crash it)
+zz_ef_xch_mul_depth_m = {
+	set_variable = { name = zz_ef_t_md value = { value = zz_ef_agg_m2 multiply = zz_ef_xmul_depth_m2 } }
+	if = {
+		limit = { zz_ef_rq_out_m_v > var:zz_ef_t_md }
+		set_variable = { name = zz_ef_t_md value = zz_ef_rq_out_m_v }
+	}
+}
 zz_ef_xch_mul_depth_b = { set_variable = { name = zz_ef_t_md value = zz_ef_bl_principal } }
 # Debtor scope, var:zz_ef_t_md -- the new multiplier: a convertible money within its currency points
 zz_ef_xch_mul_points_m = {

@@ -26,6 +26,8 @@ zz_ef_xch_exit_depth_cut = 0.5
 zz_ef_xmul_step = 0.01
 zz_ef_xmul_lo = 0.5
 zz_ef_xmul_hi = 2
+# the depth of a money's market for its multiplier: its money held abroad, at least this share of its money supply (M2)
+zz_ef_xmul_depth_m2 = 0.01
 # Debtor scope: the distance of its currency points from the parity -- its exchange's fee (the base without one)
 zz_ef_xch_point_v = {
 	value = zz_ef_xch_fee_base
@@ -566,8 +568,14 @@ zz_ef_xl_code_buy = 1
 zz_ef_xl_code_sell = 2
 
 # Country scope: units of the engine's money in one unit of its currency -- its value in gold (E&F's money_value_in_gold,
-# the currencies' table); the window shows the prices of money in the buyer's currency a unit of the debtor's
+# the currencies' table; without a market -- 1); the window shows the prices of money in the buyer's currency a unit of
+# the debtor's
 zz_ef_cur_unit_v = {
-	value = money_value_in_gold
-	min = 0.0001
+	value = 1
+	# E&F's value reads the country's market: none (a country without one) -- 1
+	if = {
+		limit = { exists = market }
+		value = money_value_in_gold
+		min = 0.0001
+	}
 }
