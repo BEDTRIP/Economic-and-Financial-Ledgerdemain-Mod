@@ -164,6 +164,11 @@ zz_ef_clr_w_debt_v = { value = global_var:zz_ef_clr_w_debt }
 zz_ef_clr_wl_v = { value = global_var:zz_ef_clr_wl }
 zz_ef_clr_rp_v = { value = global_var:zz_ef_clr_rp }
 zz_ef_clr_rm_v = { value = global_var:zz_ef_clr_rm }
+zz_ef_clr_w_corr_v = { value = global_var:zz_ef_clr_w_corr }
+zz_ef_wld_mid_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_wld_mid } value = global_var:zz_ef_wld_mid }
+}
 # for the monthly log: 1 for a customs union member (В3.3)
 zz_ef_cu_member_v = {
 	value = 0

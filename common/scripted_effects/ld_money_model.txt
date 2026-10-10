@@ -464,29 +464,52 @@ zz_ef_bridge_apply = {
 zz_ef_trade_step = {
 	set_variable = { name = zz_ef_f_exp value = zz_ef_trade_exports_week }
 	set_variable = { name = zz_ef_f_imp value = zz_ef_trade_imports_week }
-	# the owner of a market of two countries or more (Д.R8в.1, ld_market_shares.txt): the market's sales and purchases
-	# abroad as the world trade pool settles them, and the turnover inside (production less exports) -- the members
-	# take their shares of these (zz_ef_trade_net_week)
+	# the country's part of its market (Д.R8в.1, ld_market_shares.txt): alone in it -- the market's sales and purchases
+	# abroad; in a market of two countries or more -- its shares p / c of them and of the turnover inside (production
+	# less exports), the owner's numbers of its last step
+	set_variable = { name = zz_ef_f_exp_my value = var:zz_ef_f_exp }
+	set_variable = { name = zz_ef_f_imp_my value = var:zz_ef_f_imp }
+	set_variable = { name = zz_ef_f_tin value = 0 }
 	if = {
-		limit = {
-			has_variable = zz_ef_msh_p
-			market.owner = this
-		}
-		set_variable = { name = zz_ef_mk_x value = { value = var:zz_ef_f_exp multiply = zz_ef_wtr_kr_v } }
-		set_variable = { name = zz_ef_mk_m value = { value = var:zz_ef_f_imp multiply = zz_ef_wtr_kp_v } }
-		set_variable = {
-			name = zz_ef_mk_t
-			value = {
-				value = zz_ef_trade_production_week
-				subtract = var:zz_ef_f_exp
-				min = 0
+		limit = { has_variable = zz_ef_msh_p }
+		if = {
+			limit = { market.owner = this }
+			set_variable = { name = zz_ef_mk_xr value = var:zz_ef_f_exp }
+			set_variable = { name = zz_ef_mk_mr value = var:zz_ef_f_imp }
+			set_variable = {
+				name = zz_ef_mk_t
+				value = {
+					value = zz_ef_trade_production_week
+					subtract = var:zz_ef_f_exp
+					min = 0
+				}
 			}
+		}
+		if = {
+			limit = { market.owner = { has_variable = zz_ef_mk_t } }
+			set_variable = { name = zz_ef_f_exp_my value = { value = var:zz_ef_msh_p multiply = market.owner.var:zz_ef_mk_xr } }
+			set_variable = { name = zz_ef_f_imp_my value = { value = var:zz_ef_msh_c multiply = market.owner.var:zz_ef_mk_mr } }
+			set_variable = {
+				name = zz_ef_f_tin
+				value = {
+					value = var:zz_ef_msh_p
+					subtract = var:zz_ef_msh_c
+					multiply = market.owner.var:zz_ef_mk_t
+				}
+			}
+		}
+		else = {
+			set_variable = { name = zz_ef_f_exp_my value = 0 }
+			set_variable = { name = zz_ef_f_imp_my value = 0 }
 		}
 	}
 	set_variable = { name = zz_ef_f_trade value = zz_ef_trade_net_week }
 	zz_ef_sw = { F = trade }
 	zz_ef_sw = { F = imp }
 	zz_ef_sw = { F = exp }
+	zz_ef_sw = { F = imp_my }
+	zz_ef_sw = { F = exp_my }
+	zz_ef_sw = { F = tin }
 }
 
 # var:zz_ef_w_<F> = var:zz_ef_f_<F> (0 if unset); var:zz_ef_f_<F> = 0.
@@ -616,7 +639,7 @@ zz_ef_world_window_open = {
 		limit = { has_global_variable = zz_ef_wld_n }
 		# the world line of metal (scripted_effects/ld_metal_accounts.txt)
 		zz_ef_world_metal_log = yes
-		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFG|[TimeKeeper.GetCurrentDate.GetString]|WORLD|in [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_in_v')|0]|out [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_out_v')|0]|nocl [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_nocl_v')|0]|subj_in [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_subj_in_v')|0]|subj_out [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_subj_out_v')|0]|hume [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_hume_v')|0]|hume_abs [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_hume_abs_v')|0]|n [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_n_v')|0]|n0 [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_n0_v')|0]|in_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_in_m_v')|0]|out_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_out_m_v')|0]|trade_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_trade_m_v')|0]|abr_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_abr_m_v')|0]|div_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_div_m_v')|0]|bond_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_bond_m_v')|0]|gpm_avg [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_gpm_avg_v')|5]|wexp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_wexp_v')|0]|wimp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_wimp_v')|0]|wfee [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_wfee_v')|0]|waint [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_waint_v')|0]|kr [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wtr_kr_v')|4]|kp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wtr_kp_v')|4]|waown [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_waown_v')|0]|wfown [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_wfown_v')|0]|dkr [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wdv_kr_v')|4]|dkp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wdv_kp_v')|4]" }
+		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFG|[TimeKeeper.GetCurrentDate.GetString]|WORLD|in [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_in_v')|0]|out [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_out_v')|0]|nocl [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_nocl_v')|0]|subj_in [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_subj_in_v')|0]|subj_out [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_subj_out_v')|0]|hume [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_hume_v')|0]|hume_abs [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_hume_abs_v')|0]|n [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_n_v')|0]|n0 [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_n0_v')|0]|in_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_in_m_v')|0]|out_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_out_m_v')|0]|trade_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_trade_m_v')|0]|abr_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_abr_m_v')|0]|div_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_div_m_v')|0]|bond_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_bond_m_v')|0]|gpm_avg [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_gpm_avg_v')|5]|wexp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_wexp_v')|0]|wimp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_wimp_v')|0]|wfee [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_wfee_v')|0]|waint [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_waint_v')|0]|kr [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wtr_kr_v')|4]|kp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wtr_kp_v')|4]|waown [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_waown_v')|0]|wdpay [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_wdpay_v')|0]|dr [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wdv_r_v')|5]" }
 	}
 	# the world's average value of money in gold, weighted by GDP (the price of a market with no currency)
 	if = {
@@ -629,6 +652,24 @@ zz_ef_world_window_open = {
 			value = {
 				value = global_var:zz_ef_wld_gpm_wsum
 				divide = global_var:zz_ef_wld_gpm_w
+			}
+		}
+	}
+	# the ratios the closing week was stepped with -- the clearing settles the week with its own (zz_ef_clr_settle)
+	set_global_variable = { name = zz_ef_wtr_kr_used value = zz_ef_wtr_kr_v }
+	set_global_variable = { name = zz_ef_wtr_kp_used value = zz_ef_wtr_kp_v }
+	set_global_variable = { name = zz_ef_wdv_r_used value = zz_ef_wdv_r_v }
+	# the market as a go-between: what the world's exporters and the fees' receivers sold beyond what its importers
+	# bought (goods between the hubs of the world market), gold -- the share the pool's ratios take from them
+	set_global_variable = { name = zz_ef_wld_mid value = 0 }
+	if = {
+		limit = { has_global_variable = zz_ef_wld_wexp }
+		set_global_variable = {
+			name = zz_ef_wld_mid
+			value = {
+				value = global_var:zz_ef_wld_wexp
+				add = global_var:zz_ef_wld_wfee
+				subtract = global_var:zz_ef_wld_wimp
 			}
 		}
 	}
@@ -664,34 +705,23 @@ zz_ef_world_window_open = {
 			}
 		}
 	}
-	# the world dividends pool's ratios (the GDP owned abroad against the foreign-owned)
-	set_global_variable = { name = zz_ef_wdv_kr value = 1 }
-	set_global_variable = { name = zz_ef_wdv_kp value = 1 }
+	# the world dividends pool: what the world paid a week for the GDP owned abroad (Д.R8в.6)
+	set_global_variable = { name = zz_ef_wdv_r value = 0 }
 	if = {
 		limit = {
 			has_global_variable = zz_ef_wld_waown
 			global_var:zz_ef_wld_waown > 0
-			global_var:zz_ef_wld_wfown > 0
 		}
 		set_global_variable = {
-			name = zz_ef_wdv_kr
+			name = zz_ef_wdv_r
 			value = {
-				value = global_var:zz_ef_wld_wfown
+				value = global_var:zz_ef_wld_wdpay
 				divide = global_var:zz_ef_wld_waown
-				max = 1
-			}
-		}
-		set_global_variable = {
-			name = zz_ef_wdv_kp
-			value = {
-				value = global_var:zz_ef_wld_waown
-				divide = global_var:zz_ef_wld_wfown
-				max = 1
 			}
 		}
 	}
 	set_global_variable = { name = zz_ef_wld_waown value = 0 }
-	set_global_variable = { name = zz_ef_wld_wfown value = 0 }
+	set_global_variable = { name = zz_ef_wld_wdpay value = 0 }
 	set_global_variable = { name = zz_ef_wld_wexp value = 0 }
 	set_global_variable = { name = zz_ef_wld_wimp value = 0 }
 	set_global_variable = { name = zz_ef_wld_wfee value = 0 }
@@ -722,7 +752,7 @@ zz_ef_world_acc = {
 		zz_ef_world_window_open = yes
 	}
 	change_global_variable = { name = zz_ef_wld_waown add = zz_ef_v_g_aown }
-	change_global_variable = { name = zz_ef_wld_wfown add = zz_ef_v_g_fown }
+	change_global_variable = { name = zz_ef_wld_wdpay add = zz_ef_div_pay_week }
 	change_global_variable = { name = zz_ef_wld_wexp add = zz_ef_v_f_exp }
 	change_global_variable = { name = zz_ef_wld_wimp add = zz_ef_v_f_imp }
 	change_global_variable = { name = zz_ef_wld_wfee add = zz_ef_v_f_tfees }
@@ -923,6 +953,8 @@ zz_ef_money_model_monthly_step = {
 		}
 		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFX|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|std [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_std_code')|0]|cb [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_has_cb')|0]|mv0 [THIS.GetCountry.MakeScope.ScriptValue('money_value_0')|3]|target1 [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_valuation')|3]|gpu [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gold_per_unit')|4]|subj [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_is_subject')|0]|cover [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_cover')|3]|gold [THIS.GetCountry.MakeScope.ScriptValue('gold_state_native_for_stockpile')|0]|silver [THIS.GetCountry.MakeScope.ScriptValue('silver_state_native_for_stockpile')|0]|fxm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_fx_metal')|0]|own [THIS.GetCountry.MakeScope.ScriptValue('money_supply_state')|0]|m2 [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_agg_m2')|0]|crisis [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_crisis_flag')|0]|s2g [THIS.GetCountry.MakeScope.ScriptValue('silver_to_gold_rate')|5]|median [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_money_median')|3]|gdp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_raw_gdp')|0]|liab [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fx_liab_all')|0]|clr_hume [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_hume')|0]|clr_paid [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_clr_paid')|0]|clr_got [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_clr_got')|0]|clr_debt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_clr_debt')|0]|clr_unm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_clr_unm')|0]|clr_metal [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_clr_metal_g')|0]|clr_cur_out [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_w_clr_cur_out')|0]|clr_fx_in [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_w_clr_fx_in_money')|0]|clr_back [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_w_clr_own_back')|0]|share [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_metal_share')|2]|strength [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_currency_strength')|3]|extn [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_ext_net')|0]|gpm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_gold_per_money')|5]|trade [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_trade')|0]|msh_p [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_msh_p_v')|4]|msh_c [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_msh_c_v')|4]|cum [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cu_member_v')|0]|ssh [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_silver_share_v')|3]|xch [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xch_how_v')|0]|fd_cap [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fd_capital_v')|0]|fee [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xch_fee_v')|4]" }
 	}
+	# the yield of the capital here for the dividends abroad (Д.R8в.6): the buildings' profit of a year over the GDP
+	set_variable = { name = zz_ef_div_y value = zz_ef_div_yield_now }
 	# dependents for the surcharge (consumer credit; since 1.10
 	# evening also the savings spent -- every country).
 	set_variable = { name = zz_ef_dependents value = zz_ef_dependents_count }

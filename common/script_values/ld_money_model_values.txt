@@ -2282,39 +2282,20 @@ zz_ef_money_median = {
 # (zz_ef_wtr_kp); the fees' part not covered goes off the flow (zz_ef_tfees_cut). From the step's exports / imports
 # (var:zz_ef_f_exp / _imp, zz_ef_trade_step).
 # A market of two countries or more (Д.R8в.1, ld_market_shares.txt): each country -- its shares of the market (monthly),
-# p x (X + T) - c x (M + T): X / M -- the market's sales / purchases abroad as the pool settles them, T -- the turnover
-# inside; the owner's are its own of this step, a member reads its owner's last.
+# p x X + (p - c) x T - c x M: X / M -- the market's sales / purchases abroad, T -- the turnover inside (var:zz_ef_f_exp_my,
+# _imp_my, _tin, zz_ef_trade_step). The pool's ratios -- of the window before; the clearing settles with the week's own
+# (zz_ef_clr_settle).
 zz_ef_trade_net_week = {
 	value = 0
 	if = {
-		limit = { has_variable = zz_ef_msh_p }
-		if = {
-			limit = { market.owner = this }
-			value = var:zz_ef_msh_p
-			multiply = { value = var:zz_ef_mk_x add = var:zz_ef_mk_t }
-			subtract = {
-				value = var:zz_ef_msh_c
-				multiply = { value = var:zz_ef_mk_m add = var:zz_ef_mk_t }
-			}
-		}
-		else_if = {
-			limit = { market.owner = { has_variable = zz_ef_mk_t } }
-			value = var:zz_ef_msh_p
-			multiply = { value = market.owner.var:zz_ef_mk_x add = market.owner.var:zz_ef_mk_t }
-			subtract = {
-				value = var:zz_ef_msh_c
-				multiply = { value = market.owner.var:zz_ef_mk_m add = market.owner.var:zz_ef_mk_t }
-			}
-		}
-	}
-	else_if = {
-		limit = { exists = market market.owner = this }
-		value = zz_ef_v_f_exp
+		limit = { has_variable = zz_ef_f_exp_my }
+		value = var:zz_ef_f_exp_my
 		multiply = zz_ef_wtr_kr_v
 		subtract = {
-			value = zz_ef_v_f_imp
+			value = var:zz_ef_f_imp_my
 			multiply = zz_ef_wtr_kp_v
 		}
+		add = var:zz_ef_f_tin
 	}
 }
 # the country's shares of its market's production / consumption (Д.R8в.1), for the log; 0 alone in its market
@@ -2355,25 +2336,36 @@ zz_ef_profit_week = {
 		}
 	}
 }
-# M.6 / В1.4: dividends and interest from abroad,
-# net -- (GDP owned in foreign countries - GDP foreign-owned here, the engine's yearly numbers from
-# the GUI bridge) x the owners' yield, a week. Was: x the buildings' profit / GDP -- the profit of a
-# year came out at ~1 GDP (Britain +11..25M a year, run e0_7), in the log only. The yield 15% of the
-# GDP owned (capital's share of value added ~30-40%, half of it paid out) -- decided at night,
-# check. Now in the flow abroad (zz_ef_ext_net_week): it moves the metal (Hume).
-zz_ef_div_yield = 0.15
-# the engine's GDP owned abroad and foreign-owned do not add up over the world (dividends
-# -0.1..-0.5M a month without a counterpart) -- a pool as the world trade's: the receivers get x zz_ef_wdv_kr =
-# min(1, world paid / world claimed), the payers pay x zz_ef_wdv_kp = min(1, claimed / paid) of the window before.
+# Dividends across the border (Д.R8в.6): the GDP owned here by foreigners (the engine's yearly number from the GUI bridge,
+# var:zz_ef_g_fown) x the yield of the capital here -- the buildings' profit of a year over the GDP (var:zz_ef_div_y,
+# monthly) -- is paid abroad; the GDP our owners hold abroad (var:zz_ef_g_aown) gets the world's paid over the world's
+# owned of the window before (global_var:zz_ef_wdv_r) -- the hosts of our buildings are not known one by one. The
+# clearing settles with the week's own ratio (zz_ef_clr_settle).
+zz_ef_div_yield_max = 0.5
+zz_ef_div_yield_now = {
+	value = 0
+	if = {
+		limit = { gdp > 0 }
+		value = zz_ef_profit_week
+		multiply = 52
+		divide = gdp
+	}
+	max = zz_ef_div_yield_max
+	min = 0
+}
+zz_ef_div_y_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_div_y } value = var:zz_ef_div_y }
+}
+zz_ef_div_pay_week = {
+	value = zz_ef_v_g_fown
+	multiply = zz_ef_div_y_v
+	divide = 52
+}
 zz_ef_div_net_week = {
 	value = zz_ef_v_g_aown
-	multiply = zz_ef_wdv_kr_v
-	subtract = {
-		value = zz_ef_v_g_fown
-		multiply = zz_ef_wdv_kp_v
-	}
-	multiply = zz_ef_div_yield
-	divide = 52
+	multiply = zz_ef_wdv_r_v
+	subtract = zz_ef_div_pay_week
 }
 zz_ef_v_f_trade = {
 	value = 0
@@ -2569,21 +2561,17 @@ zz_ef_wld_waint_v = {
 	value = 0
 	if = { limit = { has_global_variable = zz_ef_wld_waint } value = global_var:zz_ef_wld_waint }
 }
-zz_ef_wdv_kr_v = {
-	value = 1
-	if = { limit = { has_global_variable = zz_ef_wdv_kr } value = global_var:zz_ef_wdv_kr }
-}
-zz_ef_wdv_kp_v = {
-	value = 1
-	if = { limit = { has_global_variable = zz_ef_wdv_kp } value = global_var:zz_ef_wdv_kp }
+zz_ef_wdv_r_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_wdv_r } value = global_var:zz_ef_wdv_r }
 }
 zz_ef_wld_waown_v = {
 	value = 0
 	if = { limit = { has_global_variable = zz_ef_wld_waown } value = global_var:zz_ef_wld_waown }
 }
-zz_ef_wld_wfown_v = {
+zz_ef_wld_wdpay_v = {
 	value = 0
-	if = { limit = { has_global_variable = zz_ef_wld_wfown } value = global_var:zz_ef_wld_wfown }
+	if = { limit = { has_global_variable = zz_ef_wld_wdpay } value = global_var:zz_ef_wld_wdpay }
 }
 zz_ef_wtr_kr_v = {
 	value = 1

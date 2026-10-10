@@ -39,6 +39,15 @@ zz_ef_clr_step = {
 			}
 		}
 		zz_ef_clr_group_set = yes
+		# the parts the world's pools scale (trade, the fees, the dividends from abroad), gold -- settled with the
+		# week's own ratios
+		set_variable = { name = zz_ef_clr_x value = { value = var:zz_ef_f_exp_my add = zz_ef_v_f_tfees multiply = var:zz_ef_clr_gpm } }
+		zz_ef_clr_add = { N = ce V = var:zz_ef_clr_x }
+		set_variable = { name = zz_ef_clr_x value = { value = var:zz_ef_f_imp_my multiply = var:zz_ef_clr_gpm } }
+		zz_ef_clr_add = { N = ci V = var:zz_ef_clr_x }
+		set_variable = { name = zz_ef_clr_x value = { value = zz_ef_v_g_aown multiply = var:zz_ef_clr_gpm } }
+		zz_ef_clr_add = { N = ca V = var:zz_ef_clr_x }
+		remove_variable = zz_ef_clr_x
 		if = {
 			limit = { NOT = { is_target_in_global_variable_list = { name = zz_ef_clr_list target = this } } }
 			add_to_global_variable_list = { name = zz_ef_clr_list target = this }
@@ -117,6 +126,14 @@ zz_ef_clr_take = {
 		remove_variable = zz_ef_clr_a_$N$
 	}
 }
+# COUNTRY scope: var:zz_ef_clr_$N$ += $V$
+zz_ef_clr_add = {
+	if = {
+		limit = { NOT = { has_variable = zz_ef_clr_$N$ } }
+		set_variable = { name = zz_ef_clr_$N$ value = 0 }
+	}
+	change_variable = { name = zz_ef_clr_$N$ add = $V$ }
+}
 # COUNTRY scope: var:zz_ef_clr_a_$N$ += $V$
 zz_ef_clr_acc = {
 	if = {
@@ -147,6 +164,39 @@ zz_ef_clr_settle = {
 	}
 	clear_global_variable_list = zz_ef_clr_reps
 	clear_global_variable_list = zz_ef_clr_rr
+	# 0. the week's own ratios of the world's pools (zz_ef_world_window_open has just set them from this week's sums) in
+	# place of those the countries' steps used (Ч4)
+	set_global_variable = { name = zz_ef_clr_w_corr value = 0 }
+	every_in_global_list = {
+		variable = zz_ef_clr_list
+		limit = { has_variable = zz_ef_clr_pos }
+		set_variable = {
+			name = zz_ef_clr_x
+			value = {
+				value = zz_ef_wtr_kr_v
+				subtract = global_var:zz_ef_wtr_kr_used
+				multiply = var:zz_ef_clr_ce
+			}
+		}
+		change_variable = {
+			name = zz_ef_clr_x
+			subtract = {
+				value = zz_ef_wtr_kp_v
+				subtract = global_var:zz_ef_wtr_kp_used
+				multiply = var:zz_ef_clr_ci
+			}
+		}
+		change_variable = {
+			name = zz_ef_clr_x
+			add = {
+				value = zz_ef_wdv_r_v
+				subtract = global_var:zz_ef_wdv_r_used
+				multiply = var:zz_ef_clr_ca
+			}
+		}
+		change_variable = { name = zz_ef_clr_pos add = var:zz_ef_clr_x }
+		change_global_variable = { name = zz_ef_clr_w_corr add = var:zz_ef_clr_x }
+	}
 	# 1. the groups: the first country of a group is its record (var:zz_ef_clr_gp / _gm -- the group's receipts and
 	# payments, list zz_ef_clr_grl -- its receivers)
 	every_in_global_list = {
@@ -337,7 +387,7 @@ zz_ef_clr_settle = {
 	}
 	if = {
 		limit = { zz_ef_logs_on = yes }
-		debug_log = "EFC|[TimeKeeper.GetCurrentDate.GetString]|WORLD|n [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_w_n_v')|0]|groups [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_w_ng_v')|0]|grp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_w_grp_v')|0]|x [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_w_x_v')|0]|fee [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_w_fee_v')|0]|unpaid [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_w_unp_v')|0]|unrec [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_w_unr_v')|0]|metal [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_w_metal_v')|0]|debt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_w_debt_v')|0]|wl [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_wl_v')|0]|rp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_rp_v')|0]|rm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_rm_v')|0]"
+		debug_log = "EFC|[TimeKeeper.GetCurrentDate.GetString]|WORLD|n [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_w_n_v')|0]|groups [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_w_ng_v')|0]|grp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_w_grp_v')|0]|x [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_w_x_v')|0]|fee [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_w_fee_v')|0]|unpaid [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_w_unp_v')|0]|unrec [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_w_unr_v')|0]|metal [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_w_metal_v')|0]|debt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_w_debt_v')|0]|wl [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_wl_v')|0]|rp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_rp_v')|0]|rm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_rm_v')|0]|corr [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_w_corr_v')|0]|mid [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_wld_mid_v')|0]"
 	}
 	# 4. the week is closed
 	every_in_global_list = {
@@ -348,6 +398,9 @@ zz_ef_clr_settle = {
 		if = { limit = { has_variable = zz_ef_clr_res } remove_variable = zz_ef_clr_res }
 		if = { limit = { has_variable = zz_ef_clr_a } remove_variable = zz_ef_clr_a }
 		if = { limit = { has_variable = zz_ef_clr_x } remove_variable = zz_ef_clr_x }
+		if = { limit = { has_variable = zz_ef_clr_ce } remove_variable = zz_ef_clr_ce }
+		if = { limit = { has_variable = zz_ef_clr_ci } remove_variable = zz_ef_clr_ci }
+		if = { limit = { has_variable = zz_ef_clr_ca } remove_variable = zz_ef_clr_ca }
 	}
 	clear_global_variable_list = zz_ef_clr_list
 	clear_global_variable_list = zz_ef_clr_rr
