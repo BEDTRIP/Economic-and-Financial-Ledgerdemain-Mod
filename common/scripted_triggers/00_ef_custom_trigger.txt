@@ -1303,8 +1303,8 @@ is_monetary_systeme_transition_valid_country_to_bimetalisme = {
 					c:RUS ?= this
 					c:JAP ?= this
 
-					has_law = law_type:law_peso_bolivien_peso_currency
-					has_law = law_type:law_peso_sol_de_oro_currency
+					var:zz_ef_cur ?= flag:peso_bolivien_peso
+					var:zz_ef_cur ?= flag:peso_sol_de_oro
 				}
 			}
 		}
@@ -1327,7 +1327,7 @@ is_monetary_systeme_transition_valid_country_to_bimetalisme = {
 			# this = c:GER ?= this
 			# this = c:ITA ?= this
 
-			has_law = law_type:law_lira_toscane_lira_currency
+			var:zz_ef_cur ?= flag:lira_toscane_lira
 		}
 	}
 }
@@ -1483,13 +1483,13 @@ is_valid_country_bimetalisme = {
 }
 is_valid_country_BOL_bimetalisme = {
 	root = {
-		has_law = law_type:law_peso_bolivien_peso_currency
+		var:zz_ef_cur ?= flag:peso_bolivien_peso
 		game_date > 1900.1.1
 	}
 }
 is_valid_country_PEU_bimetalisme = {
 	root = {
-		has_law = law_type:law_peso_sol_de_oro_currency
+		var:zz_ef_cur ?= flag:peso_sol_de_oro
 		game_date > 1898.1.1
 	}
 }

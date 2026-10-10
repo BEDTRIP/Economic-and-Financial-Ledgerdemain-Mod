@@ -98,7 +98,7 @@ global_gold_silver_production = {
 currency_of_player = {
 	if = {
 		limit = {
-			has_law = law_type:law_dinar_currency
+			var:zz_ef_cur ?= flag:dinar
 		}
 		set_global_variable = {
 			name = currency_of_player_is_dinar
@@ -107,7 +107,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_dinar_algerian_dinar_currency
+			var:zz_ef_cur ?= flag:dinar_algerian_dinar
 		}
 		set_global_variable = {
 			name = currency_of_player_is_dinar_algerian_dinar
@@ -116,7 +116,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_dinar_iraqi_dinar_currency
+			var:zz_ef_cur ?= flag:dinar_iraqi_dinar
 		}
 		set_global_variable = {
 			name = currency_of_player_is_dinar_iraqi_dinar
@@ -125,7 +125,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_dinar_libyan_dinar_currency
+			var:zz_ef_cur ?= flag:dinar_libyan_dinar
 		}
 		set_global_variable = {
 			name = currency_of_player_is_dinar_libyan_dinar
@@ -134,7 +134,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_dinar_moroccan_dirham_currency
+			var:zz_ef_cur ?= flag:dinar_moroccan_dirham
 		}
 		set_global_variable = {
 			name = currency_of_player_is_dinar_moroccan_dirham
@@ -143,7 +143,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_dinar_omanian_rial_currency
+			var:zz_ef_cur ?= flag:dinar_omanian_rial
 		}
 		set_global_variable = {
 			name = currency_of_player_is_dinar_omanian_rial
@@ -152,7 +152,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_dinar_qiran_currency
+			var:zz_ef_cur ?= flag:dinar_qiran
 		}
 		set_global_variable = {
 			name = currency_of_player_is_dinar_qiran
@@ -161,7 +161,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_dinar_saudi_riyal_currency
+			var:zz_ef_cur ?= flag:dinar_saudi_riyal
 		}
 		set_global_variable = {
 			name = currency_of_player_is_dinar_saudi_riyal
@@ -170,7 +170,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_dinar_serbian_dinar_currency
+			var:zz_ef_cur ?= flag:dinar_serbian_dinar
 		}
 		set_global_variable = {
 			name = currency_of_player_is_dinar_serbian_dinar
@@ -179,7 +179,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_dinar_tunisian_dinar_currency
+			var:zz_ef_cur ?= flag:dinar_tunisian_dinar
 		}
 		set_global_variable = {
 			name = currency_of_player_is_dinar_tunisian_dinar
@@ -188,7 +188,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_dinar_yugoslav_dinar_currency
+			var:zz_ef_cur ?= flag:dinar_yugoslav_dinar
 		}
 		set_global_variable = {
 			name = currency_of_player_is_dinar_yugoslav_dinar
@@ -197,7 +197,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_dollar_australian_dollar_currency
+			var:zz_ef_cur ?= flag:dollar_australian_dollar
 		}
 		set_global_variable = {
 			name = currency_of_player_is_dollar_australian_dollar
@@ -206,7 +206,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_dollar_canadian_dollar_currency
+			var:zz_ef_cur ?= flag:dollar_canadian_dollar
 		}
 		set_global_variable = {
 			name = currency_of_player_is_dollar_canadian_dollar
@@ -215,7 +215,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_dollar_caribbean_dollar_currency
+			var:zz_ef_cur ?= flag:dollar_caribbean_dollar
 		}
 		set_global_variable = {
 			name = currency_of_player_is_dollar_caribbean_dollar
@@ -224,7 +224,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_dollar_confederate_states_dollar_currency
+			var:zz_ef_cur ?= flag:dollar_confederate_states_dollar
 		}
 		set_global_variable = {
 			name = currency_of_player_is_dollar_confederate_states_dollar
@@ -233,7 +233,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_dollar_liberian_dollar_currency
+			var:zz_ef_cur ?= flag:dollar_liberian_dollar
 		}
 		set_global_variable = {
 			name = currency_of_player_is_dollar_liberian_dollar
@@ -242,7 +242,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_dollar_new_zealand_dollar_currency
+			var:zz_ef_cur ?= flag:dollar_new_zealand_dollar
 		}
 		set_global_variable = {
 			name = currency_of_player_is_dollar_new_zealand_dollar
@@ -251,7 +251,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_dollar_sierra_leonean_dollar_currency
+			var:zz_ef_cur ?= flag:dollar_sierra_leonean_dollar
 		}
 		set_global_variable = {
 			name = currency_of_player_is_dollar_sierra_leonean_dollar
@@ -260,7 +260,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_dollar_united_states_dollar_currency
+			var:zz_ef_cur ?= flag:dollar_united_states_dollar
 		}
 		set_global_variable = {
 			name = currency_of_player_is_dollar_united_states_dollar
@@ -269,7 +269,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_eco_ariary_currency
+			var:zz_ef_cur ?= flag:eco_ariary
 		}
 		set_global_variable = {
 			name = currency_of_player_is_eco_ariary
@@ -278,7 +278,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_eco_central_african_eco_currency
+			var:zz_ef_cur ?= flag:eco_central_african_eco
 		}
 		set_global_variable = {
 			name = currency_of_player_is_eco_central_african_eco
@@ -287,7 +287,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_eco_east_african_eco_currency
+			var:zz_ef_cur ?= flag:eco_east_african_eco
 		}
 		set_global_variable = {
 			name = currency_of_player_is_eco_east_african_eco
@@ -296,7 +296,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_eco_ethiopian_birr_currency
+			var:zz_ef_cur ?= flag:eco_ethiopian_birr
 		}
 		set_global_variable = {
 			name = currency_of_player_is_eco_ethiopian_birr
@@ -305,7 +305,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_eco_ghanaian_pound_currency
+			var:zz_ef_cur ?= flag:eco_ghanaian_pound
 		}
 		set_global_variable = {
 			name = currency_of_player_is_eco_ghanaian_pound
@@ -314,7 +314,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_eco_nigerian_naira_currency
+			var:zz_ef_cur ?= flag:eco_nigerian_naira
 		}
 		set_global_variable = {
 			name = currency_of_player_is_eco_nigerian_naira
@@ -323,7 +323,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_eco_south_african_rand_currency
+			var:zz_ef_cur ?= flag:eco_south_african_rand
 		}
 		set_global_variable = {
 			name = currency_of_player_is_eco_south_african_rand
@@ -332,7 +332,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_eco_tuareg_ouguiya_currency
+			var:zz_ef_cur ?= flag:eco_tuareg_ouguiya
 		}
 		set_global_variable = {
 			name = currency_of_player_is_eco_tuareg_ouguiya
@@ -341,7 +341,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_eco_west_african_eco_currency
+			var:zz_ef_cur ?= flag:eco_west_african_eco
 		}
 		set_global_variable = {
 			name = currency_of_player_is_eco_west_african_eco
@@ -350,7 +350,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_franc_belgian_franc_currency
+			var:zz_ef_cur ?= flag:franc_belgian_franc
 		}
 		set_global_variable = {
 			name = currency_of_player_is_franc_belgian_franc
@@ -359,7 +359,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_franc_french_franc_currency
+			var:zz_ef_cur ?= flag:franc_french_franc
 		}
 		set_global_variable = {
 			name = currency_of_player_is_franc_french_franc
@@ -368,7 +368,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_franc_luxembourgish_franc_currency
+			var:zz_ef_cur ?= flag:franc_luxembourgish_franc
 		}
 		set_global_variable = {
 			name = currency_of_player_is_franc_luxembourgish_franc
@@ -377,7 +377,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_franc_swiss_franc_currency
+			var:zz_ef_cur ?= flag:franc_swiss_franc
 		}
 		set_global_variable = {
 			name = currency_of_player_is_franc_swiss_franc
@@ -386,7 +386,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_gulden_currency
+			var:zz_ef_cur ?= flag:gulden
 		}
 		set_global_variable = {
 			name = currency_of_player_is_gulden
@@ -395,7 +395,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_gulden_bavarian_gulden_currency
+			var:zz_ef_cur ?= flag:gulden_bavarian_gulden
 		}
 		set_global_variable = {
 			name = currency_of_player_is_gulden_bavarian_gulden
@@ -404,7 +404,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_gulden_florin_currency
+			var:zz_ef_cur ?= flag:gulden_florin
 		}
 		set_global_variable = {
 			name = currency_of_player_is_gulden_florin
@@ -413,7 +413,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_gulden_hungarian_forint_currency
+			var:zz_ef_cur ?= flag:gulden_hungarian_forint
 		}
 		set_global_variable = {
 			name = currency_of_player_is_gulden_hungarian_forint
@@ -422,7 +422,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_gulden_indies_guilder_currency
+			var:zz_ef_cur ?= flag:gulden_indies_guilder
 		}
 		set_global_variable = {
 			name = currency_of_player_is_gulden_indies_guilder
@@ -431,7 +431,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_gulden_south_german_gulden_currency
+			var:zz_ef_cur ?= flag:gulden_south_german_gulden
 		}
 		set_global_variable = {
 			name = currency_of_player_is_gulden_south_german_gulden
@@ -440,7 +440,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_krone_czech_koruna_currency
+			var:zz_ef_cur ?= flag:krone_czech_koruna
 		}
 		set_global_variable = {
 			name = currency_of_player_is_krone_czech_koruna
@@ -449,7 +449,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_krone_danish_krone_currency
+			var:zz_ef_cur ?= flag:krone_danish_krone
 		}
 		set_global_variable = {
 			name = currency_of_player_is_krone_danish_krone
@@ -458,7 +458,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_krone_estonian_kroon_currency
+			var:zz_ef_cur ?= flag:krone_estonian_kroon
 		}
 		set_global_variable = {
 			name = currency_of_player_is_krone_estonian_kroon
@@ -467,7 +467,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_krone_icelandic_krona_currency
+			var:zz_ef_cur ?= flag:krone_icelandic_krona
 		}
 		set_global_variable = {
 			name = currency_of_player_is_krone_icelandic_krona
@@ -476,7 +476,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_krone_norwegian_krone_currency
+			var:zz_ef_cur ?= flag:krone_norwegian_krone
 		}
 		set_global_variable = {
 			name = currency_of_player_is_krone_norwegian_krone
@@ -485,7 +485,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_krone_slovak_koruna_currency
+			var:zz_ef_cur ?= flag:krone_slovak_koruna
 		}
 		set_global_variable = {
 			name = currency_of_player_is_krone_slovak_koruna
@@ -494,7 +494,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_krone_swedish_krona_currency
+			var:zz_ef_cur ?= flag:krone_swedish_krona
 		}
 		set_global_variable = {
 			name = currency_of_player_is_krone_swedish_krona
@@ -503,7 +503,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_leon_leu_currency
+			var:zz_ef_cur ?= flag:leon_leu
 		}
 		set_global_variable = {
 			name = currency_of_player_is_leon_leu
@@ -512,7 +512,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_leon_lev_currency
+			var:zz_ef_cur ?= flag:leon_lev
 		}
 		set_global_variable = {
 			name = currency_of_player_is_leon_lev
@@ -521,7 +521,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_lira_currency
+			var:zz_ef_cur ?= flag:lira
 		}
 		set_global_variable = {
 			name = currency_of_player_is_lira
@@ -530,7 +530,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_lira_ducato_currency
+			var:zz_ef_cur ?= flag:lira_ducato
 		}
 		set_global_variable = {
 			name = currency_of_player_is_lira_ducato
@@ -539,7 +539,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_lira_ottoman_lira_currency
+			var:zz_ef_cur ?= flag:lira_ottoman_lira
 		}
 		set_global_variable = {
 			name = currency_of_player_is_lira_ottoman_lira
@@ -548,7 +548,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_lira_scudo_pontificio_currency
+			var:zz_ef_cur ?= flag:lira_scudo_pontificio
 		}
 		set_global_variable = {
 			name = currency_of_player_is_lira_scudo_pontificio
@@ -557,7 +557,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_lira_scudo_sardo_currency
+			var:zz_ef_cur ?= flag:lira_scudo_sardo
 		}
 		set_global_variable = {
 			name = currency_of_player_is_lira_scudo_sardo
@@ -566,7 +566,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_lira_toscane_lira_currency
+			var:zz_ef_cur ?= flag:lira_toscane_lira
 		}
 		set_global_variable = {
 			name = currency_of_player_is_lira_toscane_lira
@@ -575,7 +575,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_mark_currency
+			var:zz_ef_cur ?= flag:mark
 		}
 		set_global_variable = {
 			name = currency_of_player_is_mark
@@ -584,7 +584,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_mark_finnish_markka_currency
+			var:zz_ef_cur ?= flag:mark_finnish_markka
 		}
 		set_global_variable = {
 			name = currency_of_player_is_mark_finnish_markka
@@ -593,7 +593,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_peso_currency
+			var:zz_ef_cur ?= flag:peso
 		}
 		set_global_variable = {
 			name = currency_of_player_is_peso
@@ -602,7 +602,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_peso_argentine_peso_currency
+			var:zz_ef_cur ?= flag:peso_argentine_peso
 		}
 		set_global_variable = {
 			name = currency_of_player_is_peso_argentine_peso
@@ -611,7 +611,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_peso_bolivien_peso_currency
+			var:zz_ef_cur ?= flag:peso_bolivien_peso
 		}
 		set_global_variable = {
 			name = currency_of_player_is_peso_bolivien_peso
@@ -620,7 +620,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_peso_chilean_peso_currency
+			var:zz_ef_cur ?= flag:peso_chilean_peso
 		}
 		set_global_variable = {
 			name = currency_of_player_is_peso_chilean_peso
@@ -629,7 +629,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_peso_colombian_peso_currency
+			var:zz_ef_cur ?= flag:peso_colombian_peso
 		}
 		set_global_variable = {
 			name = currency_of_player_is_peso_colombian_peso
@@ -638,7 +638,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_peso_costa_rican_colon_currency
+			var:zz_ef_cur ?= flag:peso_costa_rican_colon
 		}
 		set_global_variable = {
 			name = currency_of_player_is_peso_costa_rican_colon
@@ -647,7 +647,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_peso_cuban_peso_currency
+			var:zz_ef_cur ?= flag:peso_cuban_peso
 		}
 		set_global_variable = {
 			name = currency_of_player_is_peso_cuban_peso
@@ -656,7 +656,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_peso_ecuadorian_peso_currency
+			var:zz_ef_cur ?= flag:peso_ecuadorian_peso
 		}
 		set_global_variable = {
 			name = currency_of_player_is_peso_ecuadorian_peso
@@ -665,7 +665,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_peso_el_salvador_colon_currency
+			var:zz_ef_cur ?= flag:peso_el_salvador_colon
 		}
 		set_global_variable = {
 			name = currency_of_player_is_peso_el_salvador_colon
@@ -674,7 +674,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_peso_guatemalan_quetzal_currency
+			var:zz_ef_cur ?= flag:peso_guatemalan_quetzal
 		}
 		set_global_variable = {
 			name = currency_of_player_is_peso_guatemalan_quetzal
@@ -683,7 +683,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_peso_honduran_lempira_currency
+			var:zz_ef_cur ?= flag:peso_honduran_lempira
 		}
 		set_global_variable = {
 			name = currency_of_player_is_peso_honduran_lempira
@@ -692,7 +692,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_peso_mexican_peso_currency
+			var:zz_ef_cur ?= flag:peso_mexican_peso
 		}
 		set_global_variable = {
 			name = currency_of_player_is_peso_mexican_peso
@@ -701,7 +701,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_peso_nicaraguan_cordoba_currency
+			var:zz_ef_cur ?= flag:peso_nicaraguan_cordoba
 		}
 		set_global_variable = {
 			name = currency_of_player_is_peso_nicaraguan_cordoba
@@ -710,7 +710,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_peso_paraguayan_peso_currency
+			var:zz_ef_cur ?= flag:peso_paraguayan_peso
 		}
 		set_global_variable = {
 			name = currency_of_player_is_peso_paraguayan_peso
@@ -719,7 +719,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_peso_philippine_peso_currency
+			var:zz_ef_cur ?= flag:peso_philippine_peso
 		}
 		set_global_variable = {
 			name = currency_of_player_is_peso_philippine_peso
@@ -728,7 +728,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_peso_sol_de_oro_currency
+			var:zz_ef_cur ?= flag:peso_sol_de_oro
 		}
 		set_global_variable = {
 			name = currency_of_player_is_peso_sol_de_oro
@@ -737,7 +737,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_peso_uruguayan_peso_currency
+			var:zz_ef_cur ?= flag:peso_uruguayan_peso
 		}
 		set_global_variable = {
 			name = currency_of_player_is_peso_uruguayan_peso
@@ -746,7 +746,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_peso_venezuelan_peso_currency
+			var:zz_ef_cur ?= flag:peso_venezuelan_peso
 		}
 		set_global_variable = {
 			name = currency_of_player_is_peso_venezuelan_peso
@@ -755,7 +755,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_pound_egyptian_pound_currency
+			var:zz_ef_cur ?= flag:pound_egyptian_pound
 		}
 		set_global_variable = {
 			name = currency_of_player_is_pound_egyptian_pound
@@ -764,7 +764,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_pound_irish_pound_currency
+			var:zz_ef_cur ?= flag:pound_irish_pound
 		}
 		set_global_variable = {
 			name = currency_of_player_is_pound_irish_pound
@@ -773,7 +773,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_pound_sterling_currency
+			var:zz_ef_cur ?= flag:pound_sterling
 		}
 		set_global_variable = {
 			name = currency_of_player_is_pound_sterling
@@ -782,7 +782,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_real_currency
+			var:zz_ef_cur ?= flag:real
 		}
 		set_global_variable = {
 			name = currency_of_player_is_real
@@ -791,7 +791,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_real_brazilian_real_currency
+			var:zz_ef_cur ?= flag:real_brazilian_real
 		}
 		set_global_variable = {
 			name = currency_of_player_is_real_brazilian_real
@@ -800,7 +800,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_rupee_indian_rupee_currency
+			var:zz_ef_cur ?= flag:rupee_indian_rupee
 		}
 		set_global_variable = {
 			name = currency_of_player_is_rupee_indian_rupee
@@ -809,7 +809,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_rupee_indonesian_rupiah_currency
+			var:zz_ef_cur ?= flag:rupee_indonesian_rupiah
 		}
 		set_global_variable = {
 			name = currency_of_player_is_rupee_indonesian_rupiah
@@ -818,7 +818,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_spe_baht_currency
+			var:zz_ef_cur ?= flag:spe_baht
 		}
 		set_global_variable = {
 			name = currency_of_player_is_spe_baht
@@ -827,7 +827,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_spe_dong_currency
+			var:zz_ef_cur ?= flag:spe_dong
 		}
 		set_global_variable = {
 			name = currency_of_player_is_spe_dong
@@ -836,7 +836,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_spe_drachma_currency
+			var:zz_ef_cur ?= flag:spe_drachma
 		}
 		set_global_variable = {
 			name = currency_of_player_is_spe_drachma
@@ -845,7 +845,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_spe_korean_won_currency
+			var:zz_ef_cur ?= flag:spe_korean_won
 		}
 		set_global_variable = {
 			name = currency_of_player_is_spe_korean_won
@@ -854,7 +854,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_spe_latvian_lats_currency
+			var:zz_ef_cur ?= flag:spe_latvian_lats
 		}
 		set_global_variable = {
 			name = currency_of_player_is_spe_latvian_lats
@@ -863,7 +863,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_spe_lithuanian_litas_currency
+			var:zz_ef_cur ?= flag:spe_lithuanian_litas
 		}
 		set_global_variable = {
 			name = currency_of_player_is_spe_lithuanian_litas
@@ -872,7 +872,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_spe_peseta_currency
+			var:zz_ef_cur ?= flag:spe_peseta
 		}
 		set_global_variable = {
 			name = currency_of_player_is_spe_peseta
@@ -881,7 +881,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_spe_ruble_currency
+			var:zz_ef_cur ?= flag:spe_ruble
 		}
 		set_global_variable = {
 			name = currency_of_player_is_spe_ruble
@@ -890,7 +890,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_spe_uni_currency
+			var:zz_ef_cur ?= flag:spe_uni
 		}
 		set_global_variable = {
 			name = currency_of_player_is_spe_uni
@@ -899,7 +899,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_spe_yen_currency
+			var:zz_ef_cur ?= flag:spe_yen
 		}
 		set_global_variable = {
 			name = currency_of_player_is_spe_yen
@@ -908,7 +908,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_spe_yuan_currency
+			var:zz_ef_cur ?= flag:spe_yuan
 		}
 		set_global_variable = {
 			name = currency_of_player_is_spe_yuan
@@ -917,7 +917,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_spe_zloti_currency
+			var:zz_ef_cur ?= flag:spe_zloti
 		}
 		set_global_variable = {
 			name = currency_of_player_is_spe_zloti
@@ -926,7 +926,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_thaler_hannoveraner_thaler_currency
+			var:zz_ef_cur ?= flag:thaler_hannoveraner_thaler
 		}
 		set_global_variable = {
 			name = currency_of_player_is_thaler_hannoveraner_thaler
@@ -935,7 +935,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_thaler_prussian_thaler_currency
+			var:zz_ef_cur ?= flag:thaler_prussian_thaler
 		}
 		set_global_variable = {
 			name = currency_of_player_is_thaler_prussian_thaler
@@ -944,7 +944,7 @@ currency_of_player = {
 	}
 	else_if = {
 		limit = {
-			has_law = law_type:law_thaler_saxon_thaler_currency
+			var:zz_ef_cur ?= flag:thaler_saxon_thaler
 		}
 		set_global_variable = {
 			name = currency_of_player_is_thaler_saxon_thaler
@@ -4171,7 +4171,7 @@ global_monetary_reference_1 = {
 	if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_dinar_currency
+			var:zz_ef_cur ?= flag:dinar
 		}
 		set_global_variable = {
 			name = global_monetary_reference_dinar
@@ -4182,7 +4182,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_dinar_algerian_dinar_currency
+			var:zz_ef_cur ?= flag:dinar_algerian_dinar
 		}
 		set_global_variable = {
 			name = global_monetary_reference_dinar_algerian_dinar
@@ -4193,7 +4193,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_dinar_iraqi_dinar_currency
+			var:zz_ef_cur ?= flag:dinar_iraqi_dinar
 		}
 		set_global_variable = {
 			name = global_monetary_reference_dinar_iraqi_dinar
@@ -4204,7 +4204,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_dinar_libyan_dinar_currency
+			var:zz_ef_cur ?= flag:dinar_libyan_dinar
 		}
 		set_global_variable = {
 			name = global_monetary_reference_dinar_libyan_dinar
@@ -4215,7 +4215,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_dinar_moroccan_dirham_currency
+			var:zz_ef_cur ?= flag:dinar_moroccan_dirham
 		}
 		set_global_variable = {
 			name = global_monetary_reference_dinar_moroccan_dirham
@@ -4226,7 +4226,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_dinar_omanian_rial_currency
+			var:zz_ef_cur ?= flag:dinar_omanian_rial
 		}
 		set_global_variable = {
 			name = global_monetary_reference_dinar_omanian_rial
@@ -4237,7 +4237,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_dinar_qiran_currency
+			var:zz_ef_cur ?= flag:dinar_qiran
 		}
 		set_global_variable = {
 			name = global_monetary_reference_dinar_qiran
@@ -4248,7 +4248,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_dinar_saudi_riyal_currency
+			var:zz_ef_cur ?= flag:dinar_saudi_riyal
 		}
 		set_global_variable = {
 			name = global_monetary_reference_dinar_saudi_riyal
@@ -4259,7 +4259,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_dinar_serbian_dinar_currency
+			var:zz_ef_cur ?= flag:dinar_serbian_dinar
 		}
 		set_global_variable = {
 			name = global_monetary_reference_dinar_serbian_dinar
@@ -4270,7 +4270,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_dinar_tunisian_dinar_currency
+			var:zz_ef_cur ?= flag:dinar_tunisian_dinar
 		}
 		set_global_variable = {
 			name = global_monetary_reference_dinar_tunisian_dinar
@@ -4281,7 +4281,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_dinar_yugoslav_dinar_currency
+			var:zz_ef_cur ?= flag:dinar_yugoslav_dinar
 		}
 		set_global_variable = {
 			name = global_monetary_reference_dinar_yugoslav_dinar
@@ -4292,7 +4292,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_dollar_australian_dollar_currency
+			var:zz_ef_cur ?= flag:dollar_australian_dollar
 		}
 		set_global_variable = {
 			name = global_monetary_reference_dollar_australian_dollar
@@ -4303,7 +4303,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_dollar_canadian_dollar_currency
+			var:zz_ef_cur ?= flag:dollar_canadian_dollar
 		}
 		set_global_variable = {
 			name = global_monetary_reference_dollar_canadian_dollar
@@ -4314,7 +4314,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_dollar_caribbean_dollar_currency
+			var:zz_ef_cur ?= flag:dollar_caribbean_dollar
 		}
 		set_global_variable = {
 			name = global_monetary_reference_dollar_caribbean_dollar
@@ -4325,7 +4325,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_dollar_confederate_states_dollar_currency
+			var:zz_ef_cur ?= flag:dollar_confederate_states_dollar
 		}
 		set_global_variable = {
 			name = global_monetary_reference_dollar_confederate_states_dollar
@@ -4336,7 +4336,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_dollar_liberian_dollar_currency
+			var:zz_ef_cur ?= flag:dollar_liberian_dollar
 		}
 		set_global_variable = {
 			name = global_monetary_reference_dollar_liberian_dollar
@@ -4347,7 +4347,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_dollar_new_zealand_dollar_currency
+			var:zz_ef_cur ?= flag:dollar_new_zealand_dollar
 		}
 		set_global_variable = {
 			name = global_monetary_reference_dollar_new_zealand_dollar
@@ -4358,7 +4358,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_dollar_sierra_leonean_dollar_currency
+			var:zz_ef_cur ?= flag:dollar_sierra_leonean_dollar
 		}
 		set_global_variable = {
 			name = global_monetary_reference_dollar_sierra_leonean_dollar
@@ -4369,7 +4369,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_dollar_united_states_dollar_currency
+			var:zz_ef_cur ?= flag:dollar_united_states_dollar
 		}
 		set_global_variable = {
 			name = global_monetary_reference_dollar_united_states_dollar
@@ -4380,7 +4380,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_eco_ariary_currency
+			var:zz_ef_cur ?= flag:eco_ariary
 		}
 		set_global_variable = {
 			name = global_monetary_reference_eco_ariary
@@ -4391,7 +4391,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_eco_central_african_eco_currency
+			var:zz_ef_cur ?= flag:eco_central_african_eco
 		}
 		set_global_variable = {
 			name = global_monetary_reference_eco_central_african_eco
@@ -4402,7 +4402,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_eco_east_african_eco_currency
+			var:zz_ef_cur ?= flag:eco_east_african_eco
 		}
 		set_global_variable = {
 			name = global_monetary_reference_eco_east_african_eco
@@ -4413,7 +4413,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_eco_ethiopian_birr_currency
+			var:zz_ef_cur ?= flag:eco_ethiopian_birr
 		}
 		set_global_variable = {
 			name = global_monetary_reference_eco_ethiopian_birr
@@ -4424,7 +4424,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_eco_ghanaian_pound_currency
+			var:zz_ef_cur ?= flag:eco_ghanaian_pound
 		}
 		set_global_variable = {
 			name = global_monetary_reference_eco_ghanaian_pound
@@ -4435,7 +4435,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_eco_nigerian_naira_currency
+			var:zz_ef_cur ?= flag:eco_nigerian_naira
 		}
 		set_global_variable = {
 			name = global_monetary_reference_eco_nigerian_naira
@@ -4446,7 +4446,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_eco_south_african_rand_currency
+			var:zz_ef_cur ?= flag:eco_south_african_rand
 		}
 		set_global_variable = {
 			name = global_monetary_reference_eco_south_african_rand
@@ -4457,7 +4457,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_eco_tuareg_ouguiya_currency
+			var:zz_ef_cur ?= flag:eco_tuareg_ouguiya
 		}
 		set_global_variable = {
 			name = global_monetary_reference_eco_tuareg_ouguiya
@@ -4468,7 +4468,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_eco_west_african_eco_currency
+			var:zz_ef_cur ?= flag:eco_west_african_eco
 		}
 		set_global_variable = {
 			name = global_monetary_reference_eco_west_african_eco
@@ -4479,7 +4479,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_franc_belgian_franc_currency
+			var:zz_ef_cur ?= flag:franc_belgian_franc
 		}
 		set_global_variable = {
 			name = global_monetary_reference_franc_belgian_franc
@@ -4490,7 +4490,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_franc_french_franc_currency
+			var:zz_ef_cur ?= flag:franc_french_franc
 		}
 		set_global_variable = {
 			name = global_monetary_reference_franc_french_franc
@@ -4501,7 +4501,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_franc_luxembourgish_franc_currency
+			var:zz_ef_cur ?= flag:franc_luxembourgish_franc
 		}
 		set_global_variable = {
 			name = global_monetary_reference_franc_luxembourgish_franc
@@ -4512,7 +4512,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_franc_swiss_franc_currency
+			var:zz_ef_cur ?= flag:franc_swiss_franc
 		}
 		set_global_variable = {
 			name = global_monetary_reference_franc_swiss_franc
@@ -4523,7 +4523,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_gulden_currency
+			var:zz_ef_cur ?= flag:gulden
 		}
 		set_global_variable = {
 			name = global_monetary_reference_gulden
@@ -4534,7 +4534,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_gulden_bavarian_gulden_currency
+			var:zz_ef_cur ?= flag:gulden_bavarian_gulden
 		}
 		set_global_variable = {
 			name = global_monetary_reference_gulden_bavarian_gulden
@@ -4545,7 +4545,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_gulden_florin_currency
+			var:zz_ef_cur ?= flag:gulden_florin
 		}
 		set_global_variable = {
 			name = global_monetary_reference_gulden_florin
@@ -4556,7 +4556,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_gulden_hungarian_forint_currency
+			var:zz_ef_cur ?= flag:gulden_hungarian_forint
 		}
 		set_global_variable = {
 			name = global_monetary_reference_gulden_hungarian_forint
@@ -4567,7 +4567,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_gulden_indies_guilder_currency
+			var:zz_ef_cur ?= flag:gulden_indies_guilder
 		}
 		set_global_variable = {
 			name = global_monetary_reference_gulden_indies_guilder
@@ -4578,7 +4578,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_gulden_south_german_gulden_currency
+			var:zz_ef_cur ?= flag:gulden_south_german_gulden
 		}
 		set_global_variable = {
 			name = global_monetary_reference_gulden_south_german_gulden
@@ -4589,7 +4589,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_krone_czech_koruna_currency
+			var:zz_ef_cur ?= flag:krone_czech_koruna
 		}
 		set_global_variable = {
 			name = global_monetary_reference_krone_czech_koruna
@@ -4600,7 +4600,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_krone_danish_krone_currency
+			var:zz_ef_cur ?= flag:krone_danish_krone
 		}
 		set_global_variable = {
 			name = global_monetary_reference_krone_danish_krone
@@ -4611,7 +4611,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_krone_estonian_kroon_currency
+			var:zz_ef_cur ?= flag:krone_estonian_kroon
 		}
 		set_global_variable = {
 			name = global_monetary_reference_krone_estonian_kroon
@@ -4622,7 +4622,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_krone_icelandic_krona_currency
+			var:zz_ef_cur ?= flag:krone_icelandic_krona
 		}
 		set_global_variable = {
 			name = global_monetary_reference_krone_icelandic_krona
@@ -4633,7 +4633,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_krone_norwegian_krone_currency
+			var:zz_ef_cur ?= flag:krone_norwegian_krone
 		}
 		set_global_variable = {
 			name = global_monetary_reference_krone_norwegian_krone
@@ -4644,7 +4644,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_krone_slovak_koruna_currency
+			var:zz_ef_cur ?= flag:krone_slovak_koruna
 		}
 		set_global_variable = {
 			name = global_monetary_reference_krone_slovak_koruna
@@ -4655,7 +4655,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_krone_swedish_krona_currency
+			var:zz_ef_cur ?= flag:krone_swedish_krona
 		}
 		set_global_variable = {
 			name = global_monetary_reference_krone_swedish_krona
@@ -4666,7 +4666,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_leon_leu_currency
+			var:zz_ef_cur ?= flag:leon_leu
 		}
 		set_global_variable = {
 			name = global_monetary_reference_leon_leu
@@ -4677,7 +4677,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_leon_lev_currency
+			var:zz_ef_cur ?= flag:leon_lev
 		}
 		set_global_variable = {
 			name = global_monetary_reference_leon_lev
@@ -4688,7 +4688,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_lira_currency
+			var:zz_ef_cur ?= flag:lira
 		}
 		set_global_variable = {
 			name = global_monetary_reference_lira
@@ -4699,7 +4699,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_lira_ducato_currency
+			var:zz_ef_cur ?= flag:lira_ducato
 		}
 		set_global_variable = {
 			name = global_monetary_reference_lira_ducato
@@ -4710,7 +4710,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_lira_ottoman_lira_currency
+			var:zz_ef_cur ?= flag:lira_ottoman_lira
 		}
 		set_global_variable = {
 			name = global_monetary_reference_lira_ottoman_lira
@@ -4721,7 +4721,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_lira_scudo_pontificio_currency
+			var:zz_ef_cur ?= flag:lira_scudo_pontificio
 		}
 		set_global_variable = {
 			name = global_monetary_reference_lira_scudo_pontificio
@@ -4732,7 +4732,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_lira_scudo_sardo_currency
+			var:zz_ef_cur ?= flag:lira_scudo_sardo
 		}
 		set_global_variable = {
 			name = global_monetary_reference_lira_scudo_sardo
@@ -4743,7 +4743,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_lira_toscane_lira_currency
+			var:zz_ef_cur ?= flag:lira_toscane_lira
 		}
 		set_global_variable = {
 			name = global_monetary_reference_lira_toscane_lira
@@ -4754,7 +4754,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_mark_currency
+			var:zz_ef_cur ?= flag:mark
 		}
 		set_global_variable = {
 			name = global_monetary_reference_mark
@@ -4765,7 +4765,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_mark_finnish_markka_currency
+			var:zz_ef_cur ?= flag:mark_finnish_markka
 		}
 		set_global_variable = {
 			name = global_monetary_reference_mark_finnish_markka
@@ -4776,7 +4776,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_peso_currency
+			var:zz_ef_cur ?= flag:peso
 		}
 		set_global_variable = {
 			name = global_monetary_reference_peso
@@ -4787,7 +4787,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_peso_argentine_peso_currency
+			var:zz_ef_cur ?= flag:peso_argentine_peso
 		}
 		set_global_variable = {
 			name = global_monetary_reference_peso_argentine_peso
@@ -4798,7 +4798,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_peso_bolivien_peso_currency
+			var:zz_ef_cur ?= flag:peso_bolivien_peso
 		}
 		set_global_variable = {
 			name = global_monetary_reference_peso_bolivien_peso
@@ -4809,7 +4809,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_peso_chilean_peso_currency
+			var:zz_ef_cur ?= flag:peso_chilean_peso
 		}
 		set_global_variable = {
 			name = global_monetary_reference_peso_chilean_peso
@@ -4820,7 +4820,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_peso_colombian_peso_currency
+			var:zz_ef_cur ?= flag:peso_colombian_peso
 		}
 		set_global_variable = {
 			name = global_monetary_reference_peso_colombian_peso
@@ -4831,7 +4831,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_peso_costa_rican_colon_currency
+			var:zz_ef_cur ?= flag:peso_costa_rican_colon
 		}
 		set_global_variable = {
 			name = global_monetary_reference_peso_costa_rican_colon
@@ -4842,7 +4842,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_peso_cuban_peso_currency
+			var:zz_ef_cur ?= flag:peso_cuban_peso
 		}
 		set_global_variable = {
 			name = global_monetary_reference_peso_cuban_peso
@@ -4853,7 +4853,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_peso_ecuadorian_peso_currency
+			var:zz_ef_cur ?= flag:peso_ecuadorian_peso
 		}
 		set_global_variable = {
 			name = global_monetary_reference_peso_ecuadorian_peso
@@ -4864,7 +4864,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_peso_el_salvador_colon_currency
+			var:zz_ef_cur ?= flag:peso_el_salvador_colon
 		}
 		set_global_variable = {
 			name = global_monetary_reference_peso_el_salvador_colon
@@ -4875,7 +4875,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_peso_guatemalan_quetzal_currency
+			var:zz_ef_cur ?= flag:peso_guatemalan_quetzal
 		}
 		set_global_variable = {
 			name = global_monetary_reference_peso_guatemalan_quetzal
@@ -4886,7 +4886,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_peso_honduran_lempira_currency
+			var:zz_ef_cur ?= flag:peso_honduran_lempira
 		}
 		set_global_variable = {
 			name = global_monetary_reference_peso_honduran_lempira
@@ -4897,7 +4897,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_peso_mexican_peso_currency
+			var:zz_ef_cur ?= flag:peso_mexican_peso
 		}
 		set_global_variable = {
 			name = global_monetary_reference_peso_mexican_peso
@@ -4908,7 +4908,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_peso_nicaraguan_cordoba_currency
+			var:zz_ef_cur ?= flag:peso_nicaraguan_cordoba
 		}
 		set_global_variable = {
 			name = global_monetary_reference_peso_nicaraguan_cordoba
@@ -4919,7 +4919,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_peso_paraguayan_peso_currency
+			var:zz_ef_cur ?= flag:peso_paraguayan_peso
 		}
 		set_global_variable = {
 			name = global_monetary_reference_peso_paraguayan_peso
@@ -4930,7 +4930,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_peso_philippine_peso_currency
+			var:zz_ef_cur ?= flag:peso_philippine_peso
 		}
 		set_global_variable = {
 			name = global_monetary_reference_peso_philippine_peso
@@ -4941,7 +4941,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_peso_sol_de_oro_currency
+			var:zz_ef_cur ?= flag:peso_sol_de_oro
 		}
 		set_global_variable = {
 			name = global_monetary_reference_peso_sol_de_oro
@@ -4952,7 +4952,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_peso_uruguayan_peso_currency
+			var:zz_ef_cur ?= flag:peso_uruguayan_peso
 		}
 		set_global_variable = {
 			name = global_monetary_reference_peso_uruguayan_peso
@@ -4963,7 +4963,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_peso_venezuelan_peso_currency
+			var:zz_ef_cur ?= flag:peso_venezuelan_peso
 		}
 		set_global_variable = {
 			name = global_monetary_reference_peso_venezuelan_peso
@@ -4974,7 +4974,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_pound_egyptian_pound_currency
+			var:zz_ef_cur ?= flag:pound_egyptian_pound
 		}
 		set_global_variable = {
 			name = global_monetary_reference_pound_egyptian_pound
@@ -4985,7 +4985,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_pound_irish_pound_currency
+			var:zz_ef_cur ?= flag:pound_irish_pound
 		}
 		set_global_variable = {
 			name = global_monetary_reference_pound_irish_pound
@@ -4996,7 +4996,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_pound_sterling_currency
+			var:zz_ef_cur ?= flag:pound_sterling
 		}
 		set_global_variable = {
 			name = global_monetary_reference_pound_sterling
@@ -5007,7 +5007,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_real_currency
+			var:zz_ef_cur ?= flag:real
 		}
 		set_global_variable = {
 			name = global_monetary_reference_real
@@ -5018,7 +5018,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_real_brazilian_real_currency
+			var:zz_ef_cur ?= flag:real_brazilian_real
 		}
 		set_global_variable = {
 			name = global_monetary_reference_real_brazilian_real
@@ -5029,7 +5029,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_rupee_indian_rupee_currency
+			var:zz_ef_cur ?= flag:rupee_indian_rupee
 		}
 		set_global_variable = {
 			name = global_monetary_reference_rupee_indian_rupee
@@ -5040,7 +5040,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_rupee_indonesian_rupiah_currency
+			var:zz_ef_cur ?= flag:rupee_indonesian_rupiah
 		}
 		set_global_variable = {
 			name = global_monetary_reference_rupee_indonesian_rupiah
@@ -5051,7 +5051,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_spe_baht_currency
+			var:zz_ef_cur ?= flag:spe_baht
 		}
 		set_global_variable = {
 			name = global_monetary_reference_spe_baht
@@ -5062,7 +5062,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_spe_dong_currency
+			var:zz_ef_cur ?= flag:spe_dong
 		}
 		set_global_variable = {
 			name = global_monetary_reference_spe_dong
@@ -5073,7 +5073,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_spe_drachma_currency
+			var:zz_ef_cur ?= flag:spe_drachma
 		}
 		set_global_variable = {
 			name = global_monetary_reference_spe_drachma
@@ -5084,7 +5084,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_spe_korean_won_currency
+			var:zz_ef_cur ?= flag:spe_korean_won
 		}
 		set_global_variable = {
 			name = global_monetary_reference_spe_korean_won
@@ -5095,7 +5095,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_spe_latvian_lats_currency
+			var:zz_ef_cur ?= flag:spe_latvian_lats
 		}
 		set_global_variable = {
 			name = global_monetary_reference_spe_latvian_lats
@@ -5106,7 +5106,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_spe_lithuanian_litas_currency
+			var:zz_ef_cur ?= flag:spe_lithuanian_litas
 		}
 		set_global_variable = {
 			name = global_monetary_reference_spe_lithuanian_litas
@@ -5117,7 +5117,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_spe_peseta_currency
+			var:zz_ef_cur ?= flag:spe_peseta
 		}
 		set_global_variable = {
 			name = global_monetary_reference_spe_peseta
@@ -5128,7 +5128,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_spe_ruble_currency
+			var:zz_ef_cur ?= flag:spe_ruble
 		}
 		set_global_variable = {
 			name = global_monetary_reference_spe_ruble
@@ -5139,7 +5139,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_spe_uni_currency
+			var:zz_ef_cur ?= flag:spe_uni
 		}
 		set_global_variable = {
 			name = global_monetary_reference_spe_uni
@@ -5150,7 +5150,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_spe_yen_currency
+			var:zz_ef_cur ?= flag:spe_yen
 		}
 		set_global_variable = {
 			name = global_monetary_reference_spe_yen
@@ -5161,7 +5161,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_spe_yuan_currency
+			var:zz_ef_cur ?= flag:spe_yuan
 		}
 		set_global_variable = {
 			name = global_monetary_reference_spe_yuan
@@ -5172,7 +5172,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_spe_zloti_currency
+			var:zz_ef_cur ?= flag:spe_zloti
 		}
 		set_global_variable = {
 			name = global_monetary_reference_spe_zloti
@@ -5183,7 +5183,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_thaler_hannoveraner_thaler_currency
+			var:zz_ef_cur ?= flag:thaler_hannoveraner_thaler
 		}
 		set_global_variable = {
 			name = global_monetary_reference_thaler_hannoveraner_thaler
@@ -5194,7 +5194,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_thaler_prussian_thaler_currency
+			var:zz_ef_cur ?= flag:thaler_prussian_thaler
 		}
 		set_global_variable = {
 			name = global_monetary_reference_thaler_prussian_thaler
@@ -5205,7 +5205,7 @@ global_monetary_reference_1 = {
 	else_if = {
 		limit = {
 			has_modifier = global_monetary_reference
-			has_law = law_type:law_thaler_saxon_thaler_currency
+			var:zz_ef_cur ?= flag:thaler_saxon_thaler
 		}
 		set_global_variable = {
 			name = global_monetary_reference_thaler_saxon_thaler

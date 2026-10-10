@@ -8,7 +8,7 @@
 коэффициент, закомментированный вызов); `мёртвый` — ни откуда не вызывается; `дубль` — считает то же или пишет те же
 счета, что модель `ld_*`. Строки файлов — на момент записи, при правке файла сдвигаются: искать по имени.
 
-Итого: мёртвый 4, выключен 0, дубль 3, живой 207. Разделы — по подсистемам: читать раздел своей подсистемы, а не весь реестр.
+Итого: мёртвый 4, выключен 0, дубль 3, живой 206. Разделы — по подсистемам: читать раздел своей подсистемы, а не весь реестр.
 
 ## Денежная модель и металл (`money-model.md`)
 
@@ -42,7 +42,6 @@
 | --- | --- | --- | --- | --- |
 | Флаг-модификатор monetary_systeme_transition (блокирует переход E&F на другой стандарт) | живой | 01_economic_scripted_effects.txt:10024, 27863; 0_ef_economic_event.23 | ставится на 12 мес. после смены закона стандарта, на 120 мес. событием союза; читается условиями законов стандарта (01_ef_monetary_system.txt:64,98,163) и эффектами перехода E&F | модификатор страны |
 | Валюта-эталон по E&F: money_value_median, weighted_average_currency_value(_test), is_reference_type | дубль | common/script_values/01_economic_currency_scripted_value.txt:1,8,7788; common/script_values/ld_reference_currency_values.txt:14 | «эталон» и «сила» теперь по zz_ef_currency_strength; медиана E&F осталась запасным путём в zz_ef_value_to_parity и в is_reference_currency | — |
-| Законы валют law_<cur>_currency (95) | живой | common/laws/01_ef_currency_type.txt:1-2028 | есть вызовы activate_law из introduction_new_currency и истории; 39 законов с always = no (товар вырезан), остальные ограничены тегами E&F + has_central_bank | окно законов (группа lawgroup_currency_type) |
 | Законы денежной системы (серебро/би/золото/золотодевиз/фиат/внешний) | живой | common/laws/01_ef_monetary_system.txt:1-251 | on_activate зовёт on_activate_monetary_system_law (01_economic_scripted_effects.txt:27577) | окно законов |
 | Валюта-товар money_value_<cur>, money_value_in_gold_<cur>, currency_of_player_is_<cur> (93 шт., script_values) | живой | common/script_values/01_economic_currency_scripted_value.txt:2800-4900 | refs 238 для money_value_<cur>; currency_of_player_is_<cur> — script_value поверх global_var, не триггер; переменные заданы в 00_ef_economic_global_variable.txt:31568 | — |
 | Цепочка money_supply_state / stockpiling_<cur>_state (деньги в обороте по законам валют) | живой | common/script_values/01_economic_currency_scripted_value.txt:8476, 14361 | money_supply_state refs=109, stockpiling_<cur>_state refs=51 | карточки денег, биржа валют |

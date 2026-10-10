@@ -138,7 +138,7 @@
 | `global_var:money_value_median` | медиана курсов | `median_currency_value` (`zz_ef_world_month_ef`, `ld_world_month.txt`) | `is_reference_currency` |
 
 ## Вызовы и связи
-- Законы: 95 `law_<cur>_currency` (`laws/01_ef_currency_type.txt`), `law_*_standard`, `lawgroup_monetary_policy`,
+- Законы: (95 законов валют — в `_archive/ef_currency_laws/`, R8в), `law_*_standard`, `lawgroup_monetary_policy`,
   соотношение биметаллизма `zz_ef_bimet_ratio` — триггеры `law_<cur>_monetary_system_*_trigger`
   (customizable_localization `00_ef_localization_ custom.txt`, GUI).
 - Здания ↔ PM ↔ товары: `pmg_market_liquidity` вставлена в ванильные здания (`goods_input_liquidity_currency_add = 28`);

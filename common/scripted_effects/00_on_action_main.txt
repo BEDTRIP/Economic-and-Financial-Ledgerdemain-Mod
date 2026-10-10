@@ -59,7 +59,7 @@ ef_on_monthly_pulse_recurence = {
 	maximum_number_companies_exceeded_monthly_pulse = yes
 
 	# a country without a hook (made by an event; scripted_effects/ld_country_init.txt): its setup and E&F's
-	# laws of a new country -- no monetary system, no bank, foreign exchange controls
+	# laws of a new country -- no monetary system, no currency, no bank, foreign exchange controls
 	if = {
 		limit = {
 			not  = {
@@ -77,7 +77,9 @@ ef_on_monthly_pulse_recurence = {
 				}
 			}
 			activate_law = law_type:law_no_monetary_system
-			activate_law = law_type:law_no_market_liquidity
+			# no currency of its own (var:zz_ef_cur, ld_currency_var.txt)
+			if = { limit = { has_variable = zz_ef_cur } remove_variable = zz_ef_cur }
+			zz_ef_cur_set = yes
  		}
 		if = {
 			limit = {
@@ -95,7 +97,9 @@ ef_on_monthly_pulse_recurence = {
 			}
 			central_bank_modifier = yes
 			activate_law = law_type:law_no_monetary_system
-			activate_law = law_type:law_no_market_liquidity
+			# no currency of its own (var:zz_ef_cur, ld_currency_var.txt)
+			if = { limit = { has_variable = zz_ef_cur } remove_variable = zz_ef_cur }
+			zz_ef_cur_set = yes
  		}
 		add_modifier = {
 			name = foreign_exchange_controls

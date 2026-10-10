@@ -89,7 +89,8 @@ zz_ef_mu_head_pick = {
 	}
 }
 
-# A country leaves its union: its own currency at the union's parity (its standard and policy stay as they are).
+# A country leaves its union: its own currency (var:zz_ef_mu_cur_own) at the union's parity (its standard and policy stay as
+# they are).
 zz_ef_mu_leave = {
 	if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|mu_leave|union [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mu_id_v')|0]|parity [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_valuation')|4]" }
 	remove_variable = zz_ef_mu_id
@@ -98,9 +99,19 @@ zz_ef_mu_leave = {
 	if = { limit = { has_variable = zz_ef_mu_cover } remove_variable = zz_ef_mu_cover }
 	if = { limit = { has_variable = zz_ef_mu_ch } remove_variable = zz_ef_mu_ch }
 	if = { limit = { has_variable = zz_ef_mu_ch_m } remove_variable = zz_ef_mu_ch_m }
-	# its own currency back (the January's data, ld_currency_var.txt); the parity is the union's
+	# its own currency back (kept at its first sync); the parity is the union's
+	if = {
+		limit = { has_variable = zz_ef_mu_cur_own }
+		if = {
+			limit = { var:zz_ef_mu_cur_own = flag:none }
+			if = { limit = { has_variable = zz_ef_cur } remove_variable = zz_ef_cur }
+		}
+		else = {
+			set_variable = { name = zz_ef_cur value = var:zz_ef_mu_cur_own }
+		}
+		remove_variable = zz_ef_mu_cur_own
+	}
 	zz_ef_cur_set = yes
-	zz_ef_cur_name_set = yes
 }
 
 # Any scope: the treaty of scope:zz_ef_mu_j with scope:zz_ef_mu_t is gone (on_withdrawal / on_break / its requirement):
@@ -197,6 +208,12 @@ zz_ef_mu_sync = {
 	zz_ef_mu_law = { L = law_revaluation }
 	zz_ef_mu_law = { L = law_devaluation }
 	zz_ef_mu_law = { L = law_large_monetary_policy }
+	# its own currency, kept for leaving (var:zz_ef_mu_cur_own; none -- flag:none)
+	if = {
+		limit = { NOT = { has_variable = zz_ef_mu_cur_own } }
+		set_variable = { name = zz_ef_mu_cur_own value = flag:none }
+		if = { limit = { has_variable = zz_ef_cur } set_variable = { name = zz_ef_mu_cur_own value = var:zz_ef_cur } }
+	}
 	if = {
 		limit = { scope:zz_ef_mu_h = { has_variable = zz_ef_cur } }
 		set_variable = { name = zz_ef_cur value = scope:zz_ef_mu_h.var:zz_ef_cur }

@@ -22014,7 +22014,7 @@ buy_bond_in_currrency_var = {
 	scope:seller = {
 		if = {
 			limit = {
-				has_law = law_type:law_dinar_currency
+				var:zz_ef_cur ?= flag:dinar
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22027,7 +22027,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_dinar_algerian_dinar_currency
+				var:zz_ef_cur ?= flag:dinar_algerian_dinar
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22040,7 +22040,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_dinar_iraqi_dinar_currency
+				var:zz_ef_cur ?= flag:dinar_iraqi_dinar
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22053,7 +22053,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_dinar_libyan_dinar_currency
+				var:zz_ef_cur ?= flag:dinar_libyan_dinar
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22066,7 +22066,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_dinar_moroccan_dirham_currency
+				var:zz_ef_cur ?= flag:dinar_moroccan_dirham
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22079,7 +22079,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_dinar_omanian_rial_currency
+				var:zz_ef_cur ?= flag:dinar_omanian_rial
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22092,7 +22092,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_dinar_qiran_currency
+				var:zz_ef_cur ?= flag:dinar_qiran
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22105,7 +22105,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_dinar_saudi_riyal_currency
+				var:zz_ef_cur ?= flag:dinar_saudi_riyal
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22118,7 +22118,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_dinar_serbian_dinar_currency
+				var:zz_ef_cur ?= flag:dinar_serbian_dinar
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22131,7 +22131,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_dinar_tunisian_dinar_currency
+				var:zz_ef_cur ?= flag:dinar_tunisian_dinar
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22144,7 +22144,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_dinar_yugoslav_dinar_currency
+				var:zz_ef_cur ?= flag:dinar_yugoslav_dinar
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22157,7 +22157,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_dollar_australian_dollar_currency
+				var:zz_ef_cur ?= flag:dollar_australian_dollar
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22170,7 +22170,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_dollar_canadian_dollar_currency
+				var:zz_ef_cur ?= flag:dollar_canadian_dollar
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22183,7 +22183,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_dollar_caribbean_dollar_currency
+				var:zz_ef_cur ?= flag:dollar_caribbean_dollar
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22196,7 +22196,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_dollar_confederate_states_dollar_currency
+				var:zz_ef_cur ?= flag:dollar_confederate_states_dollar
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22209,7 +22209,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_dollar_liberian_dollar_currency
+				var:zz_ef_cur ?= flag:dollar_liberian_dollar
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22222,7 +22222,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_dollar_new_zealand_dollar_currency
+				var:zz_ef_cur ?= flag:dollar_new_zealand_dollar
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22235,7 +22235,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_dollar_sierra_leonean_dollar_currency
+				var:zz_ef_cur ?= flag:dollar_sierra_leonean_dollar
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22248,7 +22248,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_dollar_united_states_dollar_currency
+				var:zz_ef_cur ?= flag:dollar_united_states_dollar
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22261,7 +22261,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_eco_ariary_currency
+				var:zz_ef_cur ?= flag:eco_ariary
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22274,7 +22274,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_eco_central_african_eco_currency
+				var:zz_ef_cur ?= flag:eco_central_african_eco
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22287,7 +22287,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_eco_east_african_eco_currency
+				var:zz_ef_cur ?= flag:eco_east_african_eco
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22300,7 +22300,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_eco_ethiopian_birr_currency
+				var:zz_ef_cur ?= flag:eco_ethiopian_birr
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22313,7 +22313,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_eco_ghanaian_pound_currency
+				var:zz_ef_cur ?= flag:eco_ghanaian_pound
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22326,7 +22326,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_eco_nigerian_naira_currency
+				var:zz_ef_cur ?= flag:eco_nigerian_naira
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22339,7 +22339,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_eco_south_african_rand_currency
+				var:zz_ef_cur ?= flag:eco_south_african_rand
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22352,7 +22352,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_eco_tuareg_ouguiya_currency
+				var:zz_ef_cur ?= flag:eco_tuareg_ouguiya
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22365,7 +22365,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_eco_west_african_eco_currency
+				var:zz_ef_cur ?= flag:eco_west_african_eco
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22378,7 +22378,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_franc_belgian_franc_currency
+				var:zz_ef_cur ?= flag:franc_belgian_franc
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22391,7 +22391,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_franc_french_franc_currency
+				var:zz_ef_cur ?= flag:franc_french_franc
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22404,7 +22404,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_franc_luxembourgish_franc_currency
+				var:zz_ef_cur ?= flag:franc_luxembourgish_franc
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22417,7 +22417,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_franc_swiss_franc_currency
+				var:zz_ef_cur ?= flag:franc_swiss_franc
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22430,7 +22430,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_gulden_currency
+				var:zz_ef_cur ?= flag:gulden
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22443,7 +22443,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_gulden_bavarian_gulden_currency
+				var:zz_ef_cur ?= flag:gulden_bavarian_gulden
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22456,7 +22456,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_gulden_florin_currency
+				var:zz_ef_cur ?= flag:gulden_florin
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22469,7 +22469,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_gulden_hungarian_forint_currency
+				var:zz_ef_cur ?= flag:gulden_hungarian_forint
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22482,7 +22482,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_gulden_indies_guilder_currency
+				var:zz_ef_cur ?= flag:gulden_indies_guilder
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22495,7 +22495,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_gulden_south_german_gulden_currency
+				var:zz_ef_cur ?= flag:gulden_south_german_gulden
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22508,7 +22508,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_krone_czech_koruna_currency
+				var:zz_ef_cur ?= flag:krone_czech_koruna
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22521,7 +22521,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_krone_danish_krone_currency
+				var:zz_ef_cur ?= flag:krone_danish_krone
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22534,7 +22534,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_krone_estonian_kroon_currency
+				var:zz_ef_cur ?= flag:krone_estonian_kroon
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22547,7 +22547,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_krone_icelandic_krona_currency
+				var:zz_ef_cur ?= flag:krone_icelandic_krona
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22560,7 +22560,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_krone_norwegian_krone_currency
+				var:zz_ef_cur ?= flag:krone_norwegian_krone
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22573,7 +22573,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_krone_slovak_koruna_currency
+				var:zz_ef_cur ?= flag:krone_slovak_koruna
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22586,7 +22586,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_krone_swedish_krona_currency
+				var:zz_ef_cur ?= flag:krone_swedish_krona
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22599,7 +22599,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_leon_leu_currency
+				var:zz_ef_cur ?= flag:leon_leu
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22612,7 +22612,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_leon_lev_currency
+				var:zz_ef_cur ?= flag:leon_lev
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22625,7 +22625,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_lira_currency
+				var:zz_ef_cur ?= flag:lira
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22638,7 +22638,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_lira_ducato_currency
+				var:zz_ef_cur ?= flag:lira_ducato
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22651,7 +22651,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_lira_ottoman_lira_currency
+				var:zz_ef_cur ?= flag:lira_ottoman_lira
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22664,7 +22664,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_lira_scudo_pontificio_currency
+				var:zz_ef_cur ?= flag:lira_scudo_pontificio
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22677,7 +22677,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_lira_scudo_sardo_currency
+				var:zz_ef_cur ?= flag:lira_scudo_sardo
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22690,7 +22690,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_lira_toscane_lira_currency
+				var:zz_ef_cur ?= flag:lira_toscane_lira
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22703,7 +22703,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_mark_currency
+				var:zz_ef_cur ?= flag:mark
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22716,7 +22716,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_mark_finnish_markka_currency
+				var:zz_ef_cur ?= flag:mark_finnish_markka
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22729,7 +22729,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_peso_currency
+				var:zz_ef_cur ?= flag:peso
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22742,7 +22742,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_peso_argentine_peso_currency
+				var:zz_ef_cur ?= flag:peso_argentine_peso
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22755,7 +22755,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_peso_bolivien_peso_currency
+				var:zz_ef_cur ?= flag:peso_bolivien_peso
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22768,7 +22768,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_peso_chilean_peso_currency
+				var:zz_ef_cur ?= flag:peso_chilean_peso
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22781,7 +22781,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_peso_colombian_peso_currency
+				var:zz_ef_cur ?= flag:peso_colombian_peso
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22794,7 +22794,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_peso_costa_rican_colon_currency
+				var:zz_ef_cur ?= flag:peso_costa_rican_colon
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22807,7 +22807,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_peso_cuban_peso_currency
+				var:zz_ef_cur ?= flag:peso_cuban_peso
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22820,7 +22820,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_peso_ecuadorian_peso_currency
+				var:zz_ef_cur ?= flag:peso_ecuadorian_peso
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22833,7 +22833,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_peso_el_salvador_colon_currency
+				var:zz_ef_cur ?= flag:peso_el_salvador_colon
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22846,7 +22846,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_peso_guatemalan_quetzal_currency
+				var:zz_ef_cur ?= flag:peso_guatemalan_quetzal
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22859,7 +22859,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_peso_honduran_lempira_currency
+				var:zz_ef_cur ?= flag:peso_honduran_lempira
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22872,7 +22872,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_peso_mexican_peso_currency
+				var:zz_ef_cur ?= flag:peso_mexican_peso
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22885,7 +22885,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_peso_nicaraguan_cordoba_currency
+				var:zz_ef_cur ?= flag:peso_nicaraguan_cordoba
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22898,7 +22898,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_peso_paraguayan_peso_currency
+				var:zz_ef_cur ?= flag:peso_paraguayan_peso
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22911,7 +22911,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_peso_philippine_peso_currency
+				var:zz_ef_cur ?= flag:peso_philippine_peso
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22924,7 +22924,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_peso_sol_de_oro_currency
+				var:zz_ef_cur ?= flag:peso_sol_de_oro
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22937,7 +22937,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_peso_uruguayan_peso_currency
+				var:zz_ef_cur ?= flag:peso_uruguayan_peso
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22950,7 +22950,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_peso_venezuelan_peso_currency
+				var:zz_ef_cur ?= flag:peso_venezuelan_peso
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22963,7 +22963,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_pound_egyptian_pound_currency
+				var:zz_ef_cur ?= flag:pound_egyptian_pound
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22976,7 +22976,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_pound_irish_pound_currency
+				var:zz_ef_cur ?= flag:pound_irish_pound
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -22989,7 +22989,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_pound_sterling_currency
+				var:zz_ef_cur ?= flag:pound_sterling
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -23002,7 +23002,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_real_currency
+				var:zz_ef_cur ?= flag:real
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -23015,7 +23015,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_real_brazilian_real_currency
+				var:zz_ef_cur ?= flag:real_brazilian_real
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -23028,7 +23028,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_rupee_indian_rupee_currency
+				var:zz_ef_cur ?= flag:rupee_indian_rupee
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -23041,7 +23041,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_rupee_indonesian_rupiah_currency
+				var:zz_ef_cur ?= flag:rupee_indonesian_rupiah
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -23054,7 +23054,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_spe_baht_currency
+				var:zz_ef_cur ?= flag:spe_baht
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -23067,7 +23067,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_spe_dong_currency
+				var:zz_ef_cur ?= flag:spe_dong
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -23080,7 +23080,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_spe_drachma_currency
+				var:zz_ef_cur ?= flag:spe_drachma
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -23093,7 +23093,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_spe_korean_won_currency
+				var:zz_ef_cur ?= flag:spe_korean_won
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -23106,7 +23106,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_spe_latvian_lats_currency
+				var:zz_ef_cur ?= flag:spe_latvian_lats
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -23119,7 +23119,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_spe_lithuanian_litas_currency
+				var:zz_ef_cur ?= flag:spe_lithuanian_litas
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -23132,7 +23132,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_spe_peseta_currency
+				var:zz_ef_cur ?= flag:spe_peseta
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -23145,7 +23145,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_spe_ruble_currency
+				var:zz_ef_cur ?= flag:spe_ruble
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -23158,7 +23158,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_spe_uni_currency
+				var:zz_ef_cur ?= flag:spe_uni
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -23171,7 +23171,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_spe_yen_currency
+				var:zz_ef_cur ?= flag:spe_yen
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -23184,7 +23184,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_spe_yuan_currency
+				var:zz_ef_cur ?= flag:spe_yuan
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -23197,7 +23197,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_spe_zloti_currency
+				var:zz_ef_cur ?= flag:spe_zloti
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -23210,7 +23210,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_thaler_hannoveraner_thaler_currency
+				var:zz_ef_cur ?= flag:thaler_hannoveraner_thaler
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -23223,7 +23223,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_thaler_prussian_thaler_currency
+				var:zz_ef_cur ?= flag:thaler_prussian_thaler
 			}
 			scope:buyer = {
 				scope:central_bank_site = {
@@ -23236,7 +23236,7 @@ buy_bond_in_currrency_var = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_thaler_saxon_thaler_currency
+				var:zz_ef_cur ?= flag:thaler_saxon_thaler
 			}
 			scope:buyer = {
 				scope:central_bank_site = {

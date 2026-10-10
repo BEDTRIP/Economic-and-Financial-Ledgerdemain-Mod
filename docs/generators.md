@@ -1,20 +1,21 @@
 # Генераторы
 **Смысл.** Какие файлы `ld_*` строят генераторы `../vic3_mods/tools/` и что в них править нельзя руками.
 
-Часть файлов `ld_*` строится скриптами Python проекта (`../vic3_mods/tools/regen_ef_*.py`), а не пишется руками.
-Такой файл (или его записи) **руками не править**: правка теряется при следующем запуске генератора. Правится
-генератор, потом он запускается.
+Часть файлов `ld_*` строится скриптами Python проекта (`../vic3_mods/tools/regen_ef_*.py`), а не пишется руками. Такой
+файл (или его записи) **руками не править**: правка теряется при следующем запуске генератора. Правится генератор, потом
+он запускается.
 
 ## Как работают
-- Общий модуль — `tools/ld_gen.py`: `emit(путь, текст)` вписывает вывод в файл форка **по ключам записей**
-  (запись есть — заменяется на месте, нет — пропускается и попадает в отчёт `absent`; записи файла, которых генератор
-  не выдал, не трогаются — рукописные). Локализация — по ключам строк, пишутся только `english` и `russian`.
+- Общий модуль — `tools/ld_gen.py`: `emit(путь, текст)` вписывает вывод в файл форка **по ключам записей** (запись есть
+  — заменяется на месте, нет — пропускается и попадает в отчёт `absent`; записи файла, которых генератор не выдал, не
+  трогаются — рукописные). Локализация — по ключам строк, пишутся только `english` и `russian`.
 - Ключи записей внутри файлов `ld_*` сохранили имена `zz_ef_*` / `zz_pb_ef_*`; путь генератора `zz_ef_X` → `ld_X`,
   `zz_pb_ef_X` → `ld_pb_X`, `00_00_ef_X` → `ld_X` (`ld_gen.fork_rel`).
 - Запуск из `vic3_mods`: `python tools/<генератор>.py` — запись; `--check` — только сверка, код выхода 1 при
   расхождении. После генератора, который менял английскую локализацию, — `python tools/ld_loc_langs.py`.
-- Список валют — один модуль `tools/ld_curdata.py`: ключи законов `law_<cur>_currency` из
-  `common/laws/01_ef_currency_type.txt`, в порядке файла; им пользуются генераторы и анализаторы (`ld_cur_families`, `ld_smells`).
+- Список валют — один модуль `tools/ld_curdata.py`: ключи из `tools/data/ld_currencies.txt` (ключи 95 законов валют E&F,
+  законы — в `_archive/ef_currency_laws/`), в порядке файла законов; им пользуются генераторы и анализаторы
+  (`ld_cur_families`, `ld_smells`).
 - Часть генераторов читает ваниль из `vic3_mods_out/.vanillaVIC3` — запускаются только на ПК.
 
 ## Список
@@ -24,7 +25,7 @@
 | `regen_ef_bond_ledger` | `common/scripted_effects/ld_bond_ledger.txt`, `common/script_values/ld_bond_ledger_values.txt` | — |
 | `regen_ef_bond_tables` | `common/scripted_guis/ld_bond_tables.txt`, `common/script_values/ld_bond_tables_values.txt`, `localization/<lang>/ld_bond_tables_l_<lang>.yml` | — |
 | `regen_ef_cb_loan` | `common/script_values/ld_cb_loan_values.txt`, `localization/<lang>/replace/ld_cb_loan_replace_l_<lang>.yml` | — |
-| `regen_ld_currency_data` | `common/scripted_effects/ld_currency_var.txt` (`zz_ef_cur_set`, `zz_ef_cur_names`, `zz_ef_cur_name_set` — слово валюты закона E&F), `on_activate` законов `common/laws/01_ef_currency_type.txt`, `currency_name` в `common/customizable_localization/00_ef_localization_ custom.txt`, `zz_ef_cur_par_update` (оценка денег эмитента для реестра требований), `docs/currency-table.md` | законы, история и локализация валют форка |
+| `regen_ld_currency_data` | `common/scripted_effects/ld_currency_var.txt` (`zz_ef_cur_set`, `zz_ef_cur_names`, `zz_ef_cur_name_set` — слово валюты E&F), `currency_name` в `common/customizable_localization/00_ef_localization_ custom.txt`, `zz_ef_cur_par_update` (оценка денег эмитента для реестра требований), `docs/currency-table.md` | список валют `tools/data/ld_currencies.txt`, история и локализация валют форка |
 | `regen_ld_financial_centres` | `common/buildings/ef_16_financial_centre.txt`, `common/scripted_effects/ld_fc_types.txt` (целиком), `stock_exchange_name` в `common/customizable_localization/00_ef_localization_ custom.txt` | таблица вариантов генератора (`VARIANTS`) |
 | `regen_ld_currency_symbol` | `currency_symbol` в `common/customizable_localization/00_ef_localization_ custom.txt` (ветки по `var:zz_ef_cur_noun`, без системы — `zz_ef_sym_none`), `localization/english/ld_currency_symbol_l_english.yml` и русская (`zz_ef_iso2_<тег>` — две буквы страны, `zz_ef_sym_*` — «[две буквы] <знак>» через `Localize(Concatenate('zz_ef_iso2_', ROOT.GetCountry.GetTagName))`) | теги ванили `tools/data/vic3_country_tags.json`, слова `regen_ld_currency_national`, таблицы `ISO`, `SIGN`, `CUR_SIGN` генератора |
 | `regen_ld_currency_national` | `common/scripted_effects/ld_currency_national.txt` (`zz_ef_cur_noun_set` — национальное слово: культура → язык → наследие), `localization/english/ld_currency_national_l_english.yml`, `localization/russian/ld_currency_national_l_russian.yml` — `zz_ef_cur_nat_<слово>` «<прилагательное страны> <слово>» для всех слов (национальных и валют E&F, `LAW_NOUN`; рус. — окончание по роду) | данные игры — `tools/data/vic3_heritages.json`, `tools/data/vic3_cultures.json` |
@@ -42,7 +43,7 @@
 
 Генератор ведёт только записи, которые есть в его файлах; в файле могут быть и рукописные записи. Законы денежной
 политики, кнопки кредита ЦБ, панель экономики (`gui/ld_economy_panel.gui`), панель ставки (`gui/ld_cb_rate_panel.gui`),
-резервы в покрытии
-(`ld_fx_reserves_values.txt`), вклады нерезидентов (`ld_nr_deposits*.txt`), реестр требований (`ld_claims*.txt`) и прочие места в файлах E&F правятся руками.
+резервы в покрытии (`ld_fx_reserves_values.txt`), вклады нерезидентов (`ld_nr_deposits*.txt`), реестр требований
+(`ld_claims*.txt`) и прочие места в файлах E&F правятся руками.
 
 Не относятся к форку: `regen_ef_cmf_gui` (компач E&F × CMF), `regen_ef_tr_copies` (компач с T&R).
