@@ -4893,11 +4893,21 @@ money_value_target_2_in_gold = {
 }
 money_value_0 = {
 	value = 0
+	# fiat: its worth in gold at the transition x its rate since (zz_ef_value_to_parity_own: the reference's purchasing
+	# power, the others' against the reference -- Д.R8б.29); no worth at the transition -- E&F's 0.01
 	if = {
 		limit = {
 			has_law = law_type:law_fiat_standard
 		}
 		value = 0.01
+		if = {
+			limit = {
+				has_variable = zz_ef_fiat_v0
+				var:zz_ef_fiat_v0 > 0
+			}
+			value = var:zz_ef_fiat_v0
+			multiply = zz_ef_value_to_parity_own
+		}
 	}
 	if = {
 		limit = {
@@ -4934,6 +4944,8 @@ money_value_in_gold = {
 			or = {
 				has_law = law_type:law_gold_standard
 				zz_ef_exchange_std = yes
+				# fiat money_value is in gold (money_value_0)
+				has_law = law_type:law_fiat_standard
 			}
 		}
 		add = money_value

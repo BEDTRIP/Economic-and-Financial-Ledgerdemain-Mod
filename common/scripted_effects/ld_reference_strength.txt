@@ -5,16 +5,17 @@
 #############################################
 
 zz_ef_reference_strength_step = {
+	# a fiat currency of an older save without its worth at the transition
+	every_country = {
+		limit = {
+			has_law = law_type:law_fiat_standard
+			NOT = { has_variable = zz_ef_fiat_v0 }
+			has_variable = zz_ef_std_parity_new
+		}
+		zz_ef_fiat_v0_set = yes
+	}
 	every_country = {
 		limit = { has_modifier = global_monetary_reference }
-		# a fiat reference without the gold price of its transition: from now
-		if = {
-			limit = {
-				has_law = law_type:law_fiat_standard
-				NOT = { has_variable = zz_ef_fiat_g0 }
-			}
-			set_variable = { name = zz_ef_fiat_g0 value = zz_ef_gold_price_here_v }
-		}
 		set_global_variable = { name = zz_ef_ref_vtp value = zz_ef_value_to_parity }
 		# the reference's price index for the real rate (zz_ef_currency_trade_m) and the fiat currencies
 		if = {

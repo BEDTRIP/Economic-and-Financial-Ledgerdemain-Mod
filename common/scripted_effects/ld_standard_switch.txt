@@ -69,19 +69,18 @@ zz_ef_std_switch_before = {
 
 zz_ef_std_switch_after = {
 	# a fiat currency floats from the transition (zz_ef_value_to_parity_own, Д.R8а.4): the prices then, ours and the
-	# reference's, and the price of gold on our market (a fiat reference's value in gold, Д.R8б.28)
+	# reference's; its worth in gold then -- zz_ef_fiat_v0_set at the end
 	if = {
 		limit = { has_law = law_type:law_fiat_standard }
 		set_variable = { name = zz_ef_fiat_p0 value = 100 }
 		if = { limit = { has_variable = zz_ef_prev_price var:zz_ef_prev_price > 0 } set_variable = { name = zz_ef_fiat_p0 value = var:zz_ef_prev_price } }
 		set_variable = { name = zz_ef_fiat_r0 value = 100 }
 		if = { limit = { has_global_variable = zz_ef_ref_cpi global_var:zz_ef_ref_cpi > 0 } set_variable = { name = zz_ef_fiat_r0 value = global_var:zz_ef_ref_cpi } }
-		set_variable = { name = zz_ef_fiat_g0 value = zz_ef_gold_price_here_v }
 	}
 	else = {
 		if = { limit = { has_variable = zz_ef_fiat_p0 } remove_variable = zz_ef_fiat_p0 }
 		if = { limit = { has_variable = zz_ef_fiat_r0 } remove_variable = zz_ef_fiat_r0 }
-		if = { limit = { has_variable = zz_ef_fiat_g0 } remove_variable = zz_ef_fiat_g0 }
+		if = { limit = { has_variable = zz_ef_fiat_v0 } remove_variable = zz_ef_fiat_v0 }
 	}
 	if = {
 		limit = { has_variable = zz_ef_std_old }
@@ -161,5 +160,27 @@ zz_ef_std_switch_after = {
 			set_variable = { name = money_value_target_1 value = var:zz_ef_std_parity_new }
 		}
 		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|std_switch|old [THIS.GetCountry.MakeScope.Var('zz_ef_std_old').GetValue|0]|parity_old [THIS.GetCountry.MakeScope.Var('zz_ef_std_parity_old').GetValue|4]|parity [THIS.GetCountry.MakeScope.Var('money_value_target_1').GetValue|4]|cover [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_cover')|3]" }
+	}
+	if = {
+		limit = { has_law = law_type:law_fiat_standard }
+		zz_ef_fiat_v0_set = yes
+	}
+}
+
+# var:zz_ef_fiat_v0 -- a fiat currency's worth in gold at the transition (money_value_0, Д.R8б.29): the old parity, a
+# silver one at the market rate; no metal parity before -- unset (E&F's 0.01 stays).
+zz_ef_fiat_v0_set = {
+	if = { limit = { has_variable = zz_ef_fiat_v0 } remove_variable = zz_ef_fiat_v0 }
+	if = {
+		limit = {
+			has_variable = zz_ef_std_old
+			has_variable = zz_ef_std_parity_new
+			var:zz_ef_std_parity_new > 0
+		}
+		set_variable = { name = zz_ef_fiat_v0 value = var:zz_ef_std_parity_new }
+		if = {
+			limit = { var:zz_ef_std_old ?= 1 }
+			change_variable = { name = zz_ef_fiat_v0 multiply = silver_to_gold_rate }
+		}
 	}
 }
