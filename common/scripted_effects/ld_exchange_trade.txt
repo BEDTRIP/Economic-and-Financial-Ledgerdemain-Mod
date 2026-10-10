@@ -788,8 +788,6 @@ zz_ef_xch_settle_one = {
 	set_variable = { name = zz_ef_xo_xs value = scope:zz_ef_xch_e.var:zz_ef_rq_h }
 	scope:zz_ef_xch_e = { zz_ef_xr_$K$_xb_read = yes }
 	set_variable = { name = zz_ef_xo_xb value = scope:zz_ef_xch_e.var:zz_ef_rq_h }
-	scope:zz_ef_xch_e = { zz_ef_xr_$K$_xf_read = yes }
-	set_variable = { name = zz_ef_xo_xf value = scope:zz_ef_xch_e.var:zz_ef_rq_h }
 	set_variable = { name = zz_ef_xo_a3 value = 0 }
 	set_variable = { name = zz_ef_xo_a1 value = 0 }
 	set_variable = { name = zz_ef_xo_a2 value = 0 }
@@ -852,20 +850,7 @@ zz_ef_xch_settle_one = {
 				set_variable = { name = zz_ef_xd_f value = 3 }
 				zz_ef_xch_deal = { T = $T$ K = $K$ }
 			}
-			if = {
-				limit = {
-					var:zz_ef_xo_xf > 0
-					var:zz_ef_xo_p <= scope:zz_ef_xch_e.var:zz_ef_xr_ib
-					scope:zz_ef_xch_d = { has_variable = zz_ef_xcf_$K$ }
-				}
-				set_variable = { name = zz_ef_xd_a value = { value = var:zz_ef_xo_a subtract = var:zz_ef_xo_a1 subtract = var:zz_ef_xo_a2 subtract = var:zz_ef_xo_a3 subtract = var:zz_ef_xo_a4 multiply = var:zz_ef_xo_xf multiply = -1 } }
-				if = {
-					limit = { var:zz_ef_xd_a < 0 }
-					set_variable = { name = zz_ef_xd_s value = scope:zz_ef_xch_d.var:zz_ef_xcf_$K$.var:zz_ef_xr_ib }
-					set_variable = { name = zz_ef_xd_f value = 4 }
-					zz_ef_xch_deal = { T = $T$ K = $K$ }
-				}
-			}
+			zz_ef_xch_settle_cheap_$K$ = { T = $T$ }
 		}
 	}
 	else = {
@@ -929,6 +914,27 @@ zz_ef_xch_settle_one = {
 	}
 }
 
+# Holder scope, a sell order's rest after the funds between the exchanges: the cheap rest bought by another exchange's
+# fund (money only; Д.R8б.36)
+zz_ef_xch_settle_cheap_b = { }
+zz_ef_xch_settle_cheap_m = {
+	scope:zz_ef_xch_e = { zz_ef_xr_m_xf_read = yes }
+	set_variable = { name = zz_ef_xo_xf value = scope:zz_ef_xch_e.var:zz_ef_rq_h }
+	if = {
+		limit = {
+			var:zz_ef_xo_xf > 0
+			var:zz_ef_xo_p <= scope:zz_ef_xch_e.var:zz_ef_xr_ib
+			scope:zz_ef_xch_d = { has_variable = zz_ef_xcf_m }
+		}
+		set_variable = { name = zz_ef_xd_a value = { value = var:zz_ef_xo_a subtract = var:zz_ef_xo_a1 subtract = var:zz_ef_xo_a2 subtract = var:zz_ef_xo_a3 subtract = var:zz_ef_xo_a4 multiply = var:zz_ef_xo_xf multiply = -1 } }
+		if = {
+			limit = { var:zz_ef_xd_a < 0 }
+			set_variable = { name = zz_ef_xd_s value = scope:zz_ef_xch_d.var:zz_ef_xcf_m.var:zz_ef_xr_ib }
+			set_variable = { name = zz_ef_xd_f value = 4 }
+			zz_ef_xch_deal = { T = $T$ K = m }
+		}
+	}
+}
 # Holder scope, scope:zz_ef_xch_d, scope:zz_ef_xch_e; var:zz_ef_xd_a -- the claims bought (+) / sold (-), var:zz_ef_xd_s --
 # the price step, var:zz_ef_xd_f -- the other side: 0 the auction (the exchange's country settles), 1 the exchange's fund,
 # 2 the issuer's CB at its currency points (Д.R8б.34), 3 the funds between the exchanges (the rest matched on another
@@ -1017,7 +1023,7 @@ zz_ef_xch_deal = {
 		}
 		else_if = {
 			limit = { var:zz_ef_xd_f = 4 }
-			scope:zz_ef_xch_d.var:zz_ef_xcf_$K$ = { save_temporary_scope_as = zz_ef_xd_o }
+			zz_ef_xch_deal_fund_o_$K$ = yes
 		}
 		else_if = {
 			limit = { NOT = { var:zz_ef_xd_f = 3 } }
@@ -1071,6 +1077,9 @@ zz_ef_xch_deal = {
 		}
 	}
 }
+# Holder scope: the other exchange's fund that bought the cheap rest (money only) -> scope:zz_ef_xd_o
+zz_ef_xch_deal_fund_o_m = { scope:zz_ef_xch_d.var:zz_ef_xcf_m = { save_temporary_scope_as = zz_ef_xd_o } }
+zz_ef_xch_deal_fund_o_b = { }
 # Country scope, var:zz_ef_xd_xe: a flow from abroad into the country's step (its flows abroad, zz_ef_xch_step)
 zz_ef_xch_ext_in = {
 	if = { limit = { NOT = { has_variable = zz_ef_xch_ext_acc } } set_variable = { name = zz_ef_xch_ext_acc value = 0 } }
