@@ -218,7 +218,7 @@ on_action, `ld_*` и PSC добавляют свои. Недельного пу�
 | EFS | `common/scripted_effects/ld_consols.txt:47` | консоли: долг, продажа, проценты, цена, цель ставки | недельный `zz_ef_consol_step` |
 | EFW | `common/scripted_effects/ld_money_model.txt:260` | M0..M3, оборот, ЦБ, заграница, дельты (только игрок или ВВП > 20 млн) | недельный `zz_ef_money_model_step` |
 | EFG | `common/scripted_effects/ld_money_model.txt:608` | WORLD: потоки валюты по миру | недельный (через `zz_ef_world_acc`) |
-| EFC | `common/scripted_effects/ld_clearing.txt` | WORLD: расчёт клиринга недели — сведено внутри групп металла и между ними, комиссия, не сведено миром, металлом, долгом недели, мировая строка | `zz_ef_clr_settle` (конец недели, при логах) |
+| EFN | `common/scripted_effects/ld_clearing.txt` | WORLD: расчёт клиринга недели — сведено внутри групп металла и между ними, комиссия, не сведено миром, металлом, долгом недели, мировая строка | `zz_ef_clr_settle` (конец недели, при логах) |
 | EFA | `common/scripted_effects/ld_money_model.txt:419` | проценты, ЦБ, прямые инвестиции | `zz_ef_bridge_apply` (недельный шаг) |
 | EFR | `common/scripted_effects/ld_money_model.txt:446` | внешние потоки, сбережения, депозиты, пул банков | `zz_ef_bridge_apply` (недельный шаг; числа моста — `zz_ef_money_hook_receive`` |
 | EFX | `common/scripted_effects/ld_money_model.txt:915` | стандарт, ЦБ, `money_value_0`, цель, покрытие, металл, M2 | месячный `zz_ef_money_model_monthly_step` |
