@@ -327,8 +327,13 @@ zz_ef_xch_player_log = {
 		save_temporary_scope_as = zz_ef_xo_h
 		scope:zz_ef_xch_d = {
 			set_variable = { name = zz_ef_xl_m value = scope:zz_ef_xo_h.var:zz_ef_xo_a }
-			debug_log = "EFD|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|player_$SIDE$|$K$|amount [THIS.GetCountry.MakeScope.Var('zz_ef_xl_m').GetValue|0]"
+			# a parameter inside the log's text comes out broken: the side and the kind as numbers
+			set_variable = { name = zz_ef_xl_sd value = zz_ef_xl_code_$SIDE$ }
+			set_variable = { name = zz_ef_xl_k value = zz_ef_xl_code_$K$ }
+			debug_log = "EFD|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|player|side [THIS.GetCountry.MakeScope.Var('zz_ef_xl_sd').GetValue|0]|kind [THIS.GetCountry.MakeScope.Var('zz_ef_xl_k').GetValue|0]|amount [THIS.GetCountry.MakeScope.Var('zz_ef_xl_m').GetValue|0]"
 			remove_variable = zz_ef_xl_m
+			remove_variable = zz_ef_xl_sd
+			remove_variable = zz_ef_xl_k
 		}
 	}
 }
@@ -1159,13 +1164,15 @@ zz_ef_xch_results_set = {
 			zz_ef_xw_add = { N = assets V = 1 }
 			save_temporary_scope_as = zz_ef_xc_e
 			scope:zz_ef_rq_key = {
+				set_variable = { name = zz_ef_xl_k value = zz_ef_xl_code_$K$ }
 				set_variable = { name = zz_ef_xl_c value = scope:zz_ef_xc_e.var:zz_ef_t_c }
 				set_variable = { name = zz_ef_xl_m value = scope:zz_ef_xc_e.var:zz_ef_t_m }
 				set_variable = { name = zz_ef_xl_fs value = { value = scope:zz_ef_xc_e.var:zz_ef_t_rs multiply = scope:zz_ef_xc_e.var:zz_ef_t_fs } }
 				set_variable = { name = zz_ef_xl_fb value = { value = scope:zz_ef_xc_e.var:zz_ef_t_rb multiply = scope:zz_ef_xc_e.var:zz_ef_t_fb } }
 				set_variable = { name = zz_ef_xl_s value = scope:zz_ef_xc_e.var:zz_ef_t_cs9 }
 				set_variable = { name = zz_ef_xl_b value = scope:zz_ef_xc_e.var:zz_ef_t_cb1 }
-				debug_log = "EFD|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|$K$|step [THIS.GetCountry.MakeScope.Var('zz_ef_xl_c').GetValue|0]|matched [THIS.GetCountry.MakeScope.Var('zz_ef_xl_m').GetValue|0]|fund_buy [THIS.GetCountry.MakeScope.Var('zz_ef_xl_fs').GetValue|0]|fund_sell [THIS.GetCountry.MakeScope.Var('zz_ef_xl_fb').GetValue|0]|sells [THIS.GetCountry.MakeScope.Var('zz_ef_xl_s').GetValue|0]|buys [THIS.GetCountry.MakeScope.Var('zz_ef_xl_b').GetValue|0]"
+				debug_log = "EFD|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|asset|kind [THIS.GetCountry.MakeScope.Var('zz_ef_xl_k').GetValue|0]|step [THIS.GetCountry.MakeScope.Var('zz_ef_xl_c').GetValue|0]|matched [THIS.GetCountry.MakeScope.Var('zz_ef_xl_m').GetValue|0]|fund_buy [THIS.GetCountry.MakeScope.Var('zz_ef_xl_fs').GetValue|0]|fund_sell [THIS.GetCountry.MakeScope.Var('zz_ef_xl_fb').GetValue|0]|sells [THIS.GetCountry.MakeScope.Var('zz_ef_xl_s').GetValue|0]|buys [THIS.GetCountry.MakeScope.Var('zz_ef_xl_b').GetValue|0]"
+				remove_variable = zz_ef_xl_k
 				remove_variable = zz_ef_xl_c
 				remove_variable = zz_ef_xl_m
 				remove_variable = zz_ef_xl_fs
