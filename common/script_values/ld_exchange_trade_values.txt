@@ -290,10 +290,10 @@ zz_ef_xch_budget_tr = {
 	value = 0
 	if = {
 		limit = {
-			money > 0
+			gold_reserves > 0
 			zz_ef_bl_principal > 0
 		}
-		value = money
+		value = gold_reserves
 		multiply = zz_ef_xch_buy_share_tr
 		max = zz_ef_bl_principal
 	}
