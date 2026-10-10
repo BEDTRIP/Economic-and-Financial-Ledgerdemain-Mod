@@ -118,7 +118,8 @@ zz_ef_fd_dep_add = {
 # Country scope, weekly (zz_ef_money_model_step, after the shares): the fund of this country's exchange --
 # what buyers abroad paid in (into the pool and the deposit; a flow from abroad, var:zz_ef_f_fd_in), the banks' share of
 # their capital put into a new fund (zz_ef_fd_start_share_of_capital, once, after the start's deposits), the deposit's
-# interest at the deposit rate out of the banks' capital (as the pops' deposits), the fund's capital.
+# interest at the deposit rate out of the banks' capital (as the pops' deposits), the fund's capital (its stock
+# re-valued every 4th week).
 zz_ef_fund_week_step = {
 	set_variable = { name = zz_ef_f_fd_in value = 0 }
 	set_variable = { name = zz_ef_f_fd_start value = 0 }
@@ -159,7 +160,16 @@ zz_ef_fund_week_step = {
 		}
 		set_variable = { name = zz_ef_f_fd_int value = zz_ef_fd_dep_interest }
 		zz_ef_post = { FROM = zz_ef_bank_capital TO = zz_ef_fd_dep V = var:zz_ef_f_fd_int }
-		zz_ef_fd_capital_update = yes
+		# the capital: the deposit now, the stock re-valued every 4th week (its phase)
+		if = {
+			limit = {
+				OR = {
+					NOT = { has_variable = zz_ef_fd_capital }
+					zz_ef_xch_phase_week = yes
+				}
+			}
+			zz_ef_fd_capital_update = yes
+		}
 	}
 }
 

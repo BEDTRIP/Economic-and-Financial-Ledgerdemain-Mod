@@ -40,7 +40,8 @@ zz_ef_xmap_set = {
 # ---- a holder's step -------------------------------------------------------------------------------------------------
 
 # Country scope, weekly (zz_ef_money_model_step, after the fund): what others' deals moved here since our last step (as
-# the exchange's country), last week's orders settled, this week's put into the book of our exchange.
+# the exchange's country), last week's orders settled, this week's put into the book of our exchange (a B country --
+# every 4th week, its phase).
 zz_ef_xch_step = {
 	set_variable = { name = zz_ef_f_xch_net value = 0 }
 	set_variable = { name = zz_ef_f_xch_pool value = 0 }
@@ -60,8 +61,10 @@ zz_ef_xch_step = {
 	zz_ef_xch_settle = yes
 	zz_ef_xch_fee_pay = yes
 	zz_ef_xch_bimet_arb = yes
+	# the orders: A every week, B every 4th (its phase, as its bridge)
 	if = {
 		limit = {
+			zz_ef_xch_posts_this_week = yes
 			has_variable = zz_ef_xch
 			has_variable = zz_ef_pop_savings
 			has_global_variable = zz_ef_sched_week
@@ -199,7 +202,7 @@ zz_ef_xch_order_put = {
 		set_variable = { name = zz_ef_xm_v value = scope:zz_ef_xo_h.var:zz_ef_xo_a }
 		set_variable = { name = zz_ef_xm_s value = scope:zz_ef_xo_h.var:zz_ef_xo_s }
 		zz_ef_xch_book_add_$K$_$SIDE$ = yes
-		zz_ef_xch_interest_$SIDE$ = { K = $K$ }
+		zz_ef_xch_interest_$SIDE$_$K$ = yes
 		if = {
 			limit = { NOT = { is_target_in_variable_list = { name = zz_ef_xk_$K$ target = scope:zz_ef_xch_d } } }
 			add_to_variable_list = { name = zz_ef_xk_$K$ target = scope:zz_ef_xch_d }
@@ -217,10 +220,15 @@ zz_ef_xch_order_put = {
 zz_ef_xch_code_s = { }
 zz_ef_xch_code_b = { change_variable = { name = zz_ef_xm_v add = 10 } }
 # Exchange scope, key scope:zz_ef_rq_key: a buy order -- the asset has a buyer this week (zz_ef_xbi_<K>)
-zz_ef_xch_interest_s = { }
-zz_ef_xch_interest_b = {
+zz_ef_xch_interest_s_m = { }
+zz_ef_xch_interest_s_b = { }
+zz_ef_xch_interest_b_m = {
 	set_variable = { name = zz_ef_xm_v value = 1 }
-	zz_ef_xmap_set = { MAP = zz_ef_xbi_$K$ }
+	zz_ef_xmap_set = { MAP = zz_ef_xbi_m }
+}
+zz_ef_xch_interest_b_b = {
+	set_variable = { name = zz_ef_xm_v value = 1 }
+	zz_ef_xmap_set = { MAP = zz_ef_xbi_b }
 }
 
 # Holder scope, scope:zz_ef_xch_e: the player's orders from the window (common/scripted_guis/ld_exchange_window.txt),

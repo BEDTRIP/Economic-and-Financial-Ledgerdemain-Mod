@@ -64,3 +64,19 @@ zz_ef_xwin_kind_is_money = {
 		var:zz_ef_xpl_kind = 0
 	}
 }
+# Country scope: the country puts orders in this week -- A every week, B every 4th week (its phase, as its GUI bridge,
+# ld_money_model.txt)
+zz_ef_xch_posts_this_week = {
+	OR = {
+		NOT = { zz_ef_role_is_b = yes }
+		NOT = { has_variable = zz_ef_week_phase }
+		var:zz_ef_week_phase = zz_ef_sched_week_mod4
+	}
+}
+# Country scope: its week of the 4 (its phase): the fund's capital re-valued
+zz_ef_xch_phase_week = {
+	OR = {
+		NOT = { has_variable = zz_ef_week_phase }
+		var:zz_ef_week_phase = zz_ef_sched_week_mod4
+	}
+}
