@@ -1,9 +1,12 @@
-﻿# The investment fund (R8б, шаг 6; понятие «Инвестиционный фонд»; Д.R8б.2, Д.R8б.4, Д.R8б.5, Д.R8б.16): the building
+﻿# The investment fund (понятие «Инвестиционный фонд»; Д.R8б.2, Д.R8б.4, Д.R8б.5, Д.R8б.16, Д.R8б.21): the building
 # «Инвестиционный фонд» by each exchange (buildings/ld_investment_fund.txt) makes the fund's shares (mutual_funds); the
 # pops (their need of financial products) and the banks (their method «Паи фондов») buy them -- a share is a claim on
-# the fund (kind f, maps zz_ef_rq_pp_f / zz_ef_rq_bk_f, the debtor -- the fund's country); the purchase is paid in by
-# the engine (the buyer's money -> the fund building's cash), here only its record: the fund's capital
-# (var:zz_ef_fd_capital on the fund's country).
+# the fund (kind f, maps zz_ef_rq_pp_f / zz_ef_rq_bk_f, the debtor -- the fund's country). The engine has already moved
+# the buyer's money into the fund building's cash; the model records the purchase as a posting: the pops pay out of
+# their deposits, the banks out of their capital, into the fund's deposit in the banks of its country
+# (var:zz_ef_fd_dep -- the banks' liability, in their book). A buyer abroad pays out of its pool, the fund's banks get
+# it into theirs -- a flow abroad of both, settled by the clearing (zz_ef_ext_net_week). The fund's own claims -- maps
+# zz_ef_rq_fd_m / zz_ef_rq_fd_b (holder fd); its capital = the deposit + the claims at their value.
 
 # Country scope (an exchange country): the fund's building in the exchange's state, if there is none
 # (zz_ef_fc_found, zz_ef_fc_bind).
@@ -16,6 +19,8 @@ zz_ef_fund_found = {
 		var:zz_ef_fc_state = {
 			create_building = { building = building_ld_investment_fund level = 1 }
 		}
+		# the banks of the exchange put a share of their capital into the new fund (zz_ef_fund_week_step)
+		set_variable = zz_ef_fd_start_due
 	}
 }
 
@@ -42,20 +47,46 @@ zz_ef_fund_bank_pm_step = {
 
 # Country scope, weekly (zz_ef_money_model_step): the fund's shares the country's pops and banks bought this week
 # (the states' consumption of mutual_funds x its price), from the fund of its exchange (var:zz_ef_xch): the banks' part
-# -- their method's input, the rest -- the pops'. Claims on the fund's country; its capital up by the whole.
+# -- their method's input, the rest -- the pops', as far as their deposits go. Paid: the pops' deposits and the banks'
+# capital -> the fund's deposit; to a fund abroad -- out of the pool, var:zz_ef_fd_in_for of the fund's country (its
+# step takes it into its pool and the deposit). Claims on the fund's country.
 zz_ef_fund_shares_step = {
 	set_variable = { name = zz_ef_f_fd_pp value = 0 }
 	set_variable = { name = zz_ef_f_fd_bk value = 0 }
+	set_variable = { name = zz_ef_f_fd_out value = 0 }
 	if = {
 		limit = {
 			has_variable = zz_ef_xch
+			has_variable = zz_ef_pop_savings
 			zz_ef_fund_bought_week > 0
 		}
 		set_variable = { name = zz_ef_f_fd_bk value = zz_ef_fund_bank_week }
-		set_variable = { name = zz_ef_f_fd_pp value = zz_ef_fund_bought_week }
-		change_variable = { name = zz_ef_f_fd_pp subtract = var:zz_ef_f_fd_bk }
+		set_variable = {
+			name = zz_ef_f_fd_pp
+			value = {
+				value = zz_ef_fund_bought_week
+				subtract = var:zz_ef_f_fd_bk
+				max = zz_ef_pop_deposits
+				min = 0
+			}
+		}
 		save_temporary_scope_as = zz_ef_fd_h
 		var:zz_ef_xch = { save_temporary_scope_as = zz_ef_fd_c }
+		# a fund abroad: the money leaves the pool, as far as it goes (the banks' part first)
+		if = {
+			limit = { NOT = { scope:zz_ef_fd_c = this } }
+			set_variable = { name = zz_ef_t_fd_room value = { value = investment_pool min = 0 } }
+			set_variable = { name = zz_ef_f_fd_bk value = { value = var:zz_ef_f_fd_bk max = var:zz_ef_t_fd_room } }
+			change_variable = { name = zz_ef_t_fd_room subtract = var:zz_ef_f_fd_bk }
+			set_variable = { name = zz_ef_f_fd_pp value = { value = var:zz_ef_f_fd_pp max = var:zz_ef_t_fd_room } }
+			remove_variable = zz_ef_t_fd_room
+			set_variable = { name = zz_ef_f_fd_out value = var:zz_ef_f_fd_pp }
+			change_variable = { name = zz_ef_f_fd_out add = var:zz_ef_f_fd_bk }
+			zz_ef_eng_sub_pool = { V = var:zz_ef_f_fd_out }
+		}
+		change_variable = { name = zz_ef_pop_deposits subtract = var:zz_ef_f_fd_pp }
+		change_variable = { name = zz_ef_pop_savings subtract = var:zz_ef_f_fd_pp }
+		change_variable = { name = zz_ef_bank_capital subtract = var:zz_ef_f_fd_bk }
 		if = {
 			limit = { var:zz_ef_f_fd_pp > 0 }
 			zz_ef_rq_add = { H = pp K = f D = scope:zz_ef_fd_c V = var:zz_ef_f_fd_pp }
@@ -65,9 +96,98 @@ zz_ef_fund_shares_step = {
 			zz_ef_rq_add = { H = bk K = f D = scope:zz_ef_fd_c V = var:zz_ef_f_fd_bk }
 		}
 		scope:zz_ef_fd_c = {
-			if = { limit = { NOT = { has_variable = zz_ef_fd_capital } } set_variable = { name = zz_ef_fd_capital value = 0 } }
-			change_variable = { name = zz_ef_fd_capital add = scope:zz_ef_fd_h.var:zz_ef_f_fd_pp }
-			change_variable = { name = zz_ef_fd_capital add = scope:zz_ef_fd_h.var:zz_ef_f_fd_bk }
+			if = {
+				limit = { scope:zz_ef_fd_h = this }
+				zz_ef_fd_dep_add = { V = scope:zz_ef_fd_h.var:zz_ef_f_fd_pp }
+				zz_ef_fd_dep_add = { V = scope:zz_ef_fd_h.var:zz_ef_f_fd_bk }
+			}
+			else = {
+				if = { limit = { NOT = { has_variable = zz_ef_fd_in_for } } set_variable = { name = zz_ef_fd_in_for value = 0 } }
+				change_variable = { name = zz_ef_fd_in_for add = scope:zz_ef_fd_h.var:zz_ef_f_fd_out }
+			}
 		}
+	}
+}
+
+# Country scope (the fund's country): the fund's deposit up by V (one token).
+zz_ef_fd_dep_add = {
+	if = { limit = { NOT = { has_variable = zz_ef_fd_dep } } set_variable = { name = zz_ef_fd_dep value = 0 } }
+	change_variable = { name = zz_ef_fd_dep add = $V$ }
+}
+
+# Country scope, weekly (zz_ef_money_model_step, after the shares): the fund of this country's exchange --
+# what buyers abroad paid in (into the pool and the deposit; a flow from abroad, var:zz_ef_f_fd_in), the banks' share of
+# their capital put into a new fund (zz_ef_fd_start_share_of_capital, once, after the start's deposits), the deposit's
+# interest at the deposit rate out of the banks' capital (as the pops' deposits), the fund's capital.
+zz_ef_fund_week_step = {
+	set_variable = { name = zz_ef_f_fd_in value = 0 }
+	set_variable = { name = zz_ef_f_fd_start value = 0 }
+	set_variable = { name = zz_ef_f_fd_int value = 0 }
+	if = {
+		limit = { has_variable = zz_ef_fd_in_for }
+		set_variable = { name = zz_ef_f_fd_in value = var:zz_ef_fd_in_for }
+		remove_variable = zz_ef_fd_in_for
+		zz_ef_eng_add_pool = { V = var:zz_ef_f_fd_in }
+		zz_ef_fd_dep_add = { V = var:zz_ef_f_fd_in }
+	}
+	if = {
+		limit = {
+			has_variable = zz_ef_fd_start_due
+			has_variable = zz_ef_pop_savings
+			has_variable = zz_ef_bank_capital
+		}
+		remove_variable = zz_ef_fd_start_due
+		if = {
+			limit = { var:zz_ef_bank_capital > 0 }
+			set_variable = {
+				name = zz_ef_f_fd_start
+				value = {
+					value = var:zz_ef_bank_capital
+					multiply = zz_ef_fd_start_share_of_capital
+				}
+			}
+			change_variable = { name = zz_ef_bank_capital subtract = var:zz_ef_f_fd_start }
+			zz_ef_fd_dep_add = { V = var:zz_ef_f_fd_start }
+			save_temporary_scope_as = zz_ef_fd_c
+			zz_ef_rq_add = { H = bk K = f D = scope:zz_ef_fd_c V = var:zz_ef_f_fd_start }
+		}
+	}
+	if = {
+		limit = {
+			has_variable = zz_ef_fd_dep
+			var:zz_ef_fd_dep > 0
+		}
+		set_variable = { name = zz_ef_f_fd_int value = zz_ef_fd_dep_interest }
+		zz_ef_post = { FROM = zz_ef_bank_capital TO = zz_ef_fd_dep V = var:zz_ef_f_fd_int }
+		zz_ef_fd_capital_update = yes
+	}
+}
+
+# Country scope (a fund's country): var:zz_ef_fd_capital = the deposit + the fund's claims at their value in gold, in the
+# country's money (zz_ef_rq_gpm_v).
+zz_ef_fd_capital_update = {
+	set_variable = { name = zz_ef_fd_capital value = zz_ef_fd_dep_v }
+	set_variable = { name = zz_ef_t_fd_gold value = 0 }
+	if = {
+		limit = { has_variable_map = zz_ef_rq_fd_m }
+		zz_ef_rq_value_gold = { MAP = zz_ef_rq_fd_m CONV = no }
+		change_variable = { name = zz_ef_t_fd_gold add = var:zz_ef_rq_gold }
+	}
+	if = {
+		limit = { has_variable_map = zz_ef_rq_fd_b }
+		zz_ef_rq_value_gold = { MAP = zz_ef_rq_fd_b CONV = no }
+		change_variable = { name = zz_ef_t_fd_gold add = var:zz_ef_rq_gold }
+	}
+	change_variable = { name = zz_ef_t_fd_gold divide = zz_ef_rq_gpm_v }
+	change_variable = { name = zz_ef_fd_capital add = var:zz_ef_t_fd_gold }
+	remove_variable = zz_ef_t_fd_gold
+}
+
+# Any scope, monthly with the logs on (zz_ef_world_month_ef): a line per fund (EFU) -- its deposit, capital, shares
+# outstanding (the debtor's total of kind f), the week's money from abroad, the start's deposit, its levels' room.
+zz_ef_fund_log = {
+	every_country = {
+		limit = { has_variable = zz_ef_fd_dep }
+		debug_log = "EFU|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|dep [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fd_dep_v')|0]|capital [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fd_capital_v')|0]|shares [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_out_f_v')|0]|in_abroad [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_fd_in')|0]|start [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_fd_start')|0]|interest [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_fd_int')|0]|room [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fd_capacity')|0]"
 	}
 }

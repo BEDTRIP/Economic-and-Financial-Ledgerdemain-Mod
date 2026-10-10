@@ -49,8 +49,10 @@ zz_ef_money_model_step = {
 	# bonds as parts of the engine's debt (generated, scripted_effects/ld_bond_ledger.txt); replaces
 	# Е.5's issuer-pays expense line (zz_ef_bond_interest_step)
 	zz_ef_bond_ledger_step = yes
-	# the investment fund's shares bought this week (ld_investment_fund.txt)
+	# the investment fund's shares bought this week, then this country's fund: paid in from abroad, the start's deposit,
+	# interest, capital (ld_investment_fund.txt)
 	zz_ef_fund_shares_step = yes
+	zz_ef_fund_week_step = yes
 	if = {
 		limit = { NOT = { has_variable = zz_ef_weeks_run } }
 		set_variable = { name = zz_ef_weeks_run value = 0 }

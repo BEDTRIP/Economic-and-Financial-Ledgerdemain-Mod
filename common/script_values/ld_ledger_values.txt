@@ -1,9 +1,11 @@
 ﻿# the ledger's values (scripted_effects/ld_ledger.txt).
-# The banks' book -- our accounts of the pool: liabilities (deposits of pops and of other CBs, the CB's credit,
-# the treasury's money, capital) less the loans (consumer, business). Before the first reconciliation the capital is 0.
+# The banks' book -- our accounts of the pool: liabilities (deposits of pops, of the investment fund and of other CBs,
+# the CB's credit, the treasury's money, capital) less the loans (consumer, business). Before the first reconciliation
+# the capital is 0.
 zz_ef_bank_book_v = {
 	value = 0
 	add = zz_ef_ledger_deposits_v
+	add = zz_ef_fd_dep_v
 	add = zz_ef_nr_dep_v
 	if = { limit = { has_variable = zz_ef_bank_cb_debt } add = var:zz_ef_bank_cb_debt }
 	if = { limit = { has_variable = zz_ef_bank_gov_dep } add = var:zz_ef_bank_gov_dep }

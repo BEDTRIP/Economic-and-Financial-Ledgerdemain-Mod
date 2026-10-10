@@ -759,6 +759,9 @@ zz_ef_ext_net_week = {
 	subtract = zz_ef_v_f_bl_redeem
 	add = zz_ef_v_f_bl_int_in
 	subtract = zz_ef_v_f_bl_lost
+	# the investment fund's shares across the border: paid to a fund abroad, paid into ours from abroad
+	subtract = zz_ef_v_f_fd_out
+	add = zz_ef_v_f_fd_in
 }
 # Metal cover: the metal at parity against the money in circulation (1 =
 # 100%; 40% at the start, zz_ef_cover_normal).
@@ -1833,6 +1836,8 @@ zz_ef_agg_m2 = {
 		value = zz_ef_pop_deposits
 		min = 0
 	}
+	# the investment fund's deposit (ld_investment_fund.txt) -- a deposit in the banks, as the pops'
+	add = zz_ef_fd_dep_v
 }
 # Shares of a year's GDP, for the tooltip (the norm: Britain 1830s M2 ~45%).
 zz_ef_agg_m0_to_gdp = {

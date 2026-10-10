@@ -43,6 +43,20 @@ zz_ef_fd_capital_v = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_fd_capital } value = var:zz_ef_fd_capital }
 }
+# The fund's money (Д.R8б.21): its deposit in the banks of its country (the banks' liability, zz_ef_bank_book_v); a new
+# fund gets this share of the banks' capital (Д.R8б.16), its deposit earns the deposit rate
+zz_ef_fd_start_share_of_capital = 0.1
+zz_ef_fd_dep_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_fd_dep } value = var:zz_ef_fd_dep }
+}
+zz_ef_fd_dep_interest = {
+	value = zz_ef_fd_dep_v
+	min = 0
+	multiply = zz_ef_deposit_rate
+	divide = 52
+	multiply = zz_ef_step_weeks_v
+}
 # The fair price of a claim on the scope country, in gold a unit of its money (the quotes, Д.R8б.5): money -- its value
 # against the parity (zz_ef_rq_gpm_v); a bid / an ask of a fund -- the fair price -/+ half the fund's spread.
 zz_ef_q_fair_m = {
@@ -56,4 +70,22 @@ zz_ef_v_f_fd_pp = {
 zz_ef_v_f_fd_bk = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_f_fd_bk } value = var:zz_ef_f_fd_bk }
+}
+# the week's payments for the shares across the border: paid by our pool to a fund abroad / paid into our fund's pool
+# from abroad (the clearing's flow, zz_ef_ext_net_week); the start's deposit and the deposit's interest
+zz_ef_v_f_fd_out = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_fd_out } value = var:zz_ef_f_fd_out }
+}
+zz_ef_v_f_fd_in = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_fd_in } value = var:zz_ef_f_fd_in }
+}
+zz_ef_v_f_fd_start = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_fd_start } value = var:zz_ef_f_fd_start }
+}
+zz_ef_v_f_fd_int = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_fd_int } value = var:zz_ef_f_fd_int }
 }
