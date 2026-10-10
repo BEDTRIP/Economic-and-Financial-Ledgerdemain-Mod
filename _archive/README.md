@@ -77,6 +77,7 @@ _archive/<механизм>/
 | Месячный торговый резерв `zz_ef_rc_step` | `ef_reserve_trade_step/` | закомментированный вызов в `ld_money_model.txt`; эффекты и 6 значений из генератора `regen_ef_reserve_trade` |
 | Несортированная таблица валют ЦБ `zz_ef_cbfx_update` | `ef_cbfx_update/` | определение в `ld_cbfx.txt` и генераторе `regen_ef_clearing` |
 | Строка расходов эмитента `zz_ef_foreign_bond_interest` | `ef_foreign_bond_interest/` | снятие модификатора в `ld_bond_ledger.txt` (и генераторе), значение `zz_ef_bond_interest_due_week` |
+| Торговый счёт члена таможенного союза по товарам его штатов `zz_ef_member_goods_net`, сумма у владельца `zz_ef_members_trade_sum` | `ld_member_goods_net/` | файл `ld_customs_union_values.txt` (генерат `regen_ef_customs_union`); переменная `zz_ef_member_trade` в `zz_ef_trade_step`; вычитание и ветка члена в `zz_ef_trade_net_week`; поле `mtrade` лога `EFX` |
 | Значения покупки металла населением `zz_ef_pop_gold_goods` / `_silver_goods` | `ef_pop_metal_goods_values/` | ничего — формула перенесена в `zz_ef_metal_week_step` (оптимизация) |
 | Стартовые условия для Historical Map Mod (ветка `always = no`) | `ef_hmm_history/` | блок ~6000 строк в `99_ef_history_global_variable.txt` |
 | Устаревшие копии ванильных GUI (`maj/NonEssential` ×5, `frontend/shared/lists.gui`) | `ef_outdated_vanilla_gui/` | файлы целиком — грузятся ванильные 1.13 |

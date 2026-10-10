@@ -30,7 +30,8 @@
 | `regen_ld_currency_national` | `common/scripted_effects/ld_currency_national.txt` (`zz_ef_cur_noun_set` — национальное слово: культура → язык → наследие), `localization/english/ld_currency_national_l_english.yml`, `localization/russian/ld_currency_national_l_russian.yml` — `zz_ef_cur_nat_<слово>` «<прилагательное страны> <слово>» для всех слов (национальных и валют E&F, `LAW_NOUN`; рус. — окончание по роду) | данные игры — `tools/data/vic3_heritages.json`, `tools/data/vic3_cultures.json` |
 | `regen_ef_cb_rate_loc` | `localization/<lang>/ld_cb_rate_panel_l_<lang>.yml` | — |
 | `regen_ef_clearing` | `common/scripted_effects/ld_clearing.txt`, `common/script_values/ld_clearing_values.txt`, `common/scripted_guis/ld_cbfx.txt`, `localization/<lang>/ld_cbfx_l_<lang>.yml` | — |
-| `regen_ef_customs_union` | `common/script_values/ld_customs_union_values.txt`, `common/scripted_triggers/ld_customs_union_triggers.txt` | ванильные товары (ПК) |
+| `regen_ef_customs_union` | `common/scripted_triggers/ld_customs_union_triggers.txt` | — |
+| `regen_ld_market_shares` | `common/scripted_effects/ld_market_shares.txt` (`zz_ef_msh_read` — двоичный поиск доли страны в производстве / потреблении рынка по 127 порогам; `zz_ef_msh_world_step` в том же файле — рукописный) | — |
 | `regen_ef_household_construction` | `common/pop_needs/ld_household_construction.txt`, `common/production_methods/ld_household_construction_pms.txt`, локализация | ванильные PM городского центра (ПК) |
 | `regen_ef_listing` | `common/scripted_effects/ld_listing_switch.txt` | компании ванили (ПК) и `00_ef_companies.txt` |
 | `regen_ef_metal_hoard` | `common/pop_needs/ld_metal_hoard.txt`, `localization/<lang>/ld_metal_hoard_l_<lang>.yml` | — |

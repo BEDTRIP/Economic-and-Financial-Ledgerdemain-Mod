@@ -22,7 +22,7 @@
 - `common/scripted_triggers/ld_reference_currency_triggers.txt` — `zz_ef_reference_candidate`.
 - `common/scripted_effects/ld_reference_strength.txt` — `zz_ef_reference_strength_step`, `zz_ef_currency_trade_step`.
 - `common/scripted_effects/ld_standard_switch.txt` — `zz_ef_std_switch_before/_after`: смена стандарта сохраняет стоимость денег в золоте.
-- `common/script_values/ld_customs_union_values.txt`, `common/scripted_triggers/ld_customs_union_triggers.txt` (генерируются `tools/regen_ef_customs_union.py`) — `zz_ef_cu_member`, `zz_ef_currency_own`, `zz_ef_member_goods_net` (по товарам, 324 строки), `zz_ef_members_trade_sum`.
+- `common/scripted_triggers/ld_customs_union_triggers.txt` (генерируется `tools/regen_ef_customs_union.py`) — `zz_ef_cu_member`, `zz_ef_currency_own`. Торговля стран одного рынка — `money-model.md`, «Торговля — одна проводка».
 - `common/history/global/ld_start_currency_standards.txt` — старт: страны с подушным налогом без технологии `currency_standards` (E&F перенёс её в эру 2) получают её (метка `zz_ef_start_currency_standards` — `on_researched` E&F не переводит их в фиат). Грузится после `99_ef_history_global_variable.txt`.
 - `common/treaty_articles/16_latin_monetary_union_treaty.txt`, `common/treaty_articles/17_scandinavian_monetary_union_treaty.txt` — статьи договоров (флаги, `can_ratify`, `on_entry_into_force` только лоббийное умиротворение). Денежных эффектов нет.
 - `common/scripted_triggers/00_ef_custom_trigger.txt` — `is_reference_currency` (:582), `is_reference_currency_no` (:587), `is_strong/balanced/weak_currency` (:592-:637, тело E&F, сравнение с `zz_ef_currency_strength` вместо медианы), `is_extreme_weak_currency` (:623), `market_goods_is_currency` (:1423).
@@ -62,7 +62,6 @@
 | `var:zz_ef_fiat_v0` | стоимость фиатных денег в золоте в день перехода: старый паритет, серебряный × `silver_to_gold_rate` (Д.R8б.29) | `zz_ef_fiat_v0_set` — `zz_ef_std_switch_after`; старые сейвы — `zz_ef_reference_strength_step` | `money_value_0` (E&F, фиат: × `zz_ef_value_to_parity_own`; без неё — 0,01), `money_value_in_gold` |
 | `zz_ef_std_old`, `zz_ef_std_parity_old/_new` | старый металл (1 серебро, 2 би, 3 золото; обменный — по своему металлу, из `var:law_<закон>` E&F) и паритет при смене | `zz_ef_std_switch_*` | они же |
 | `var:zz_ef_anchor` | якорь внешневалютного стандарта (страна-эмитент) | `zz_ef_anchor_update` | `zz_ef_metal_*`, `zz_ef_value_to_parity`, `bimetallic_rate_gold_to_silver` |
-| `zz_ef_member_trade` | торговый счёт члена ТС за неделю | `zz_ef_trade_step` (`ld_money_model.txt`) | `zz_ef_members_trade_sum` |
 | `global_monetary_reference` | модификатор эталона | `08_list_effect.txt:300-306` | `zz_ef_currency_trade_step`, `is_*_currency` |
 | `zz_ef_currency_trade` | модификатор торговли от силы (`static_modifiers/ld_currency_trade.txt`), множитель `zz_ef_currency_trade_m` — реальный перекос курса: b = (1 / сила) × (индекс цен эталона `global_var:zz_ef_ref_cpi` / свой `var:zz_ef_prev_price`), (b − 1) × 40, в −50..50 (R3.4) | `zz_ef_currency_trade_step` | движок |
 

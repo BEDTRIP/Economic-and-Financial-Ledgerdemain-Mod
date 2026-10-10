@@ -299,6 +299,67 @@ zz_ef_trade_imports_week = {
 		add = { value = market.mg:fine_art.market_goods_imports multiply = g:fine_art.base_price }
 	}
 }
+# the market's production of the week at the goods' base prices, for the turnover inside a market of two countries or
+# more (zz_ef_trade_step, the market owner's)
+zz_ef_trade_production_week = {
+	value = 0
+	if = {
+		limit = { exists = market market.owner = this }
+		add = { value = market.mg:ammunition.market_goods_production multiply = g:ammunition.base_price }
+		add = { value = market.mg:small_arms.market_goods_production multiply = g:small_arms.base_price }
+		add = { value = market.mg:artillery.market_goods_production multiply = g:artillery.base_price }
+		add = { value = market.mg:tanks.market_goods_production multiply = g:tanks.base_price }
+		add = { value = market.mg:aeroplanes.market_goods_production multiply = g:aeroplanes.base_price }
+		add = { value = market.mg:manowars.market_goods_production multiply = g:manowars.base_price }
+		add = { value = market.mg:ironclads.market_goods_production multiply = g:ironclads.base_price }
+		add = { value = market.mg:grain.market_goods_production multiply = g:grain.base_price }
+		add = { value = market.mg:fish.market_goods_production multiply = g:fish.base_price }
+		add = { value = market.mg:fabric.market_goods_production multiply = g:fabric.base_price }
+		add = { value = market.mg:wood.market_goods_production multiply = g:wood.base_price }
+		add = { value = market.mg:groceries.market_goods_production multiply = g:groceries.base_price }
+		add = { value = market.mg:clothes.market_goods_production multiply = g:clothes.base_price }
+		add = { value = market.mg:furniture.market_goods_production multiply = g:furniture.base_price }
+		add = { value = market.mg:paper.market_goods_production multiply = g:paper.base_price }
+		add = { value = market.mg:services.market_goods_production multiply = g:services.base_price }
+		add = { value = market.mg:transportation.market_goods_production multiply = g:transportation.base_price }
+		add = { value = market.mg:electricity.market_goods_production multiply = g:electricity.base_price }
+		add = { value = market.mg:merchant_marine.market_goods_production multiply = g:merchant_marine.base_price }
+		add = { value = market.mg:clippers.market_goods_production multiply = g:clippers.base_price }
+		add = { value = market.mg:steamers.market_goods_production multiply = g:steamers.base_price }
+		add = { value = market.mg:silk.market_goods_production multiply = g:silk.base_price }
+		add = { value = market.mg:dye.market_goods_production multiply = g:dye.base_price }
+		add = { value = market.mg:sulfur.market_goods_production multiply = g:sulfur.base_price }
+		add = { value = market.mg:coal.market_goods_production multiply = g:coal.base_price }
+		add = { value = market.mg:iron.market_goods_production multiply = g:iron.base_price }
+		add = { value = market.mg:lead.market_goods_production multiply = g:lead.base_price }
+		add = { value = market.mg:hardwood.market_goods_production multiply = g:hardwood.base_price }
+		add = { value = market.mg:rubber.market_goods_production multiply = g:rubber.base_price }
+		add = { value = market.mg:oil.market_goods_production multiply = g:oil.base_price }
+		add = { value = market.mg:engines.market_goods_production multiply = g:engines.base_price }
+		add = { value = market.mg:steel.market_goods_production multiply = g:steel.base_price }
+		add = { value = market.mg:glass.market_goods_production multiply = g:glass.base_price }
+		add = { value = market.mg:fertilizer.market_goods_production multiply = g:fertilizer.base_price }
+		add = { value = market.mg:tools.market_goods_production multiply = g:tools.base_price }
+		add = { value = market.mg:explosives.market_goods_production multiply = g:explosives.base_price }
+		add = { value = market.mg:porcelain.market_goods_production multiply = g:porcelain.base_price }
+		add = { value = market.mg:meat.market_goods_production multiply = g:meat.base_price }
+		add = { value = market.mg:fruit.market_goods_production multiply = g:fruit.base_price }
+		add = { value = market.mg:liquor.market_goods_production multiply = g:liquor.base_price }
+		add = { value = market.mg:wine.market_goods_production multiply = g:wine.base_price }
+		add = { value = market.mg:tea.market_goods_production multiply = g:tea.base_price }
+		add = { value = market.mg:coffee.market_goods_production multiply = g:coffee.base_price }
+		add = { value = market.mg:sugar.market_goods_production multiply = g:sugar.base_price }
+		add = { value = market.mg:tobacco.market_goods_production multiply = g:tobacco.base_price }
+		add = { value = market.mg:opium.market_goods_production multiply = g:opium.base_price }
+		add = { value = market.mg:automobiles.market_goods_production multiply = g:automobiles.base_price }
+		add = { value = market.mg:telephones.market_goods_production multiply = g:telephones.base_price }
+		add = { value = market.mg:radios.market_goods_production multiply = g:radios.base_price }
+		add = { value = market.mg:luxury_clothes.market_goods_production multiply = g:luxury_clothes.base_price }
+		add = { value = market.mg:luxury_furniture.market_goods_production multiply = g:luxury_furniture.base_price }
+		add = { value = market.mg:gold.market_goods_production multiply = g:gold.base_price }
+		add = { value = market.mg:fine_art.market_goods_production multiply = g:fine_art.base_price }
+	}
+}
 
 # the EFP line of the yearly reference pick
 zz_ef_has_cb_v = {

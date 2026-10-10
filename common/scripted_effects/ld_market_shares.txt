@@ -1,0 +1,815 @@
+﻿# R8в.1 (Д.R8в.1, Д.R8в.8): the countries of one market. The engine's market is one -- its prices and goods; the money
+# and the accounts are each country's. Once a month (zz_ef_msh_world_step, the world's monthly pass ld_world_month.txt)
+# every country of a market of two or more gets its share of the market's production and consumption
+# (var:zz_ef_msh_p / var:zz_ef_msh_c); the owner -- what the others leave (1 - their sum), so the shares add up to 1.
+# The week's trade of a member (zz_ef_trade_net_week, ld_money_model_values.txt) is its share of the market's sales
+# abroad and of its internal turnover less its share of the purchases: p x (X + T) - c x (M + T); the members' trade
+# adds up to the market's. Between the monthly reads -- the last shares. A country alone in its market has no shares
+# and takes the market's trade whole.
+
+# World scope (the monthly pass): the shares of every country in a market it does not own, and its owner's rest.
+# One pass over the countries (no market has a list of its members).
+zz_ef_msh_world_step = {
+	every_country = {
+		limit = { has_variable = zz_ef_msh_p }
+		remove_variable = zz_ef_msh_p
+		remove_variable = zz_ef_msh_c
+	}
+	every_country = {
+		limit = {
+			exists = market
+			NOT = { market.owner = this }
+		}
+		save_scope_as = zz_ef_msh_who
+		market = { save_scope_as = zz_ef_msh_mk }
+		zz_ef_msh_read = { S = production V = zz_ef_msh_p }
+		zz_ef_msh_read = { S = consumption V = zz_ef_msh_c }
+		market.owner = {
+			if = {
+				limit = { NOT = { has_variable = zz_ef_msh_p } }
+				set_variable = { name = zz_ef_msh_p value = 1 }
+				set_variable = { name = zz_ef_msh_c value = 1 }
+			}
+			change_variable = { name = zz_ef_msh_p subtract = scope:zz_ef_msh_who.var:zz_ef_msh_p }
+			change_variable = { name = zz_ef_msh_c subtract = scope:zz_ef_msh_who.var:zz_ef_msh_c }
+		}
+	}
+	# an owner's rest is not below 0 (the members' shares are read within a step of the search)
+	every_country = {
+		limit = {
+			has_variable = zz_ef_msh_p
+			market.owner = this
+		}
+		if = { limit = { var:zz_ef_msh_p < 0 } set_variable = { name = zz_ef_msh_p value = 0 } }
+		if = { limit = { var:zz_ef_msh_c < 0 } set_variable = { name = zz_ef_msh_c value = 0 } }
+	}
+}
+
+# GENERATED part (zz_ef_msh_read) by tools/regen_ld_market_shares.py -- do not edit by hand.
+# The share of scope:zz_ef_msh_mk's $S$ (production / consumption) coming from scope:zz_ef_msh_who, into
+# var:$V$ of the current scope: a binary search over 127 thresholds (7 comparisons).
+zz_ef_msh_read = {
+	if = {
+		limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.36 } } }
+		if = {
+			limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.68 } } }
+			if = {
+				limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.84 } } }
+				if = {
+					limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.92 } } }
+					if = {
+						limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.96 } } }
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.98 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.99 } } }
+								set_variable = { name = $V$ value = 0.995 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.985 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.97 } } }
+								set_variable = { name = $V$ value = 0.975 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.965 }
+							}
+						}
+					}
+					else = {
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.94 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.95 } } }
+								set_variable = { name = $V$ value = 0.955 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.945 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.93 } } }
+								set_variable = { name = $V$ value = 0.935 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.925 }
+							}
+						}
+					}
+				}
+				else = {
+					if = {
+						limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.88 } } }
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.9 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.91 } } }
+								set_variable = { name = $V$ value = 0.915 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.905 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.89 } } }
+								set_variable = { name = $V$ value = 0.895 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.885 }
+							}
+						}
+					}
+					else = {
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.86 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.87 } } }
+								set_variable = { name = $V$ value = 0.875 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.865 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.85 } } }
+								set_variable = { name = $V$ value = 0.855 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.845 }
+							}
+						}
+					}
+				}
+			}
+			else = {
+				if = {
+					limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.76 } } }
+					if = {
+						limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.8 } } }
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.82 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.83 } } }
+								set_variable = { name = $V$ value = 0.835 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.825 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.81 } } }
+								set_variable = { name = $V$ value = 0.815 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.805 }
+							}
+						}
+					}
+					else = {
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.78 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.79 } } }
+								set_variable = { name = $V$ value = 0.795 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.785 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.77 } } }
+								set_variable = { name = $V$ value = 0.775 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.765 }
+							}
+						}
+					}
+				}
+				else = {
+					if = {
+						limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.72 } } }
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.74 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.75 } } }
+								set_variable = { name = $V$ value = 0.755 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.745 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.73 } } }
+								set_variable = { name = $V$ value = 0.735 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.725 }
+							}
+						}
+					}
+					else = {
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.7 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.71 } } }
+								set_variable = { name = $V$ value = 0.715 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.705 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.69 } } }
+								set_variable = { name = $V$ value = 0.695 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.685 }
+							}
+						}
+					}
+				}
+			}
+		}
+		else = {
+			if = {
+				limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.52 } } }
+				if = {
+					limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.6 } } }
+					if = {
+						limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.64 } } }
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.66 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.67 } } }
+								set_variable = { name = $V$ value = 0.675 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.665 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.65 } } }
+								set_variable = { name = $V$ value = 0.655 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.645 }
+							}
+						}
+					}
+					else = {
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.62 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.63 } } }
+								set_variable = { name = $V$ value = 0.635 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.625 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.61 } } }
+								set_variable = { name = $V$ value = 0.615 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.605 }
+							}
+						}
+					}
+				}
+				else = {
+					if = {
+						limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.56 } } }
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.58 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.59 } } }
+								set_variable = { name = $V$ value = 0.595 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.585 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.57 } } }
+								set_variable = { name = $V$ value = 0.575 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.565 }
+							}
+						}
+					}
+					else = {
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.54 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.55 } } }
+								set_variable = { name = $V$ value = 0.555 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.545 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.53 } } }
+								set_variable = { name = $V$ value = 0.535 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.525 }
+							}
+						}
+					}
+				}
+			}
+			else = {
+				if = {
+					limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.44 } } }
+					if = {
+						limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.48 } } }
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.5 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.51 } } }
+								set_variable = { name = $V$ value = 0.515 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.505 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.49 } } }
+								set_variable = { name = $V$ value = 0.495 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.485 }
+							}
+						}
+					}
+					else = {
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.46 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.47 } } }
+								set_variable = { name = $V$ value = 0.475 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.465 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.45 } } }
+								set_variable = { name = $V$ value = 0.455 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.445 }
+							}
+						}
+					}
+				}
+				else = {
+					if = {
+						limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.4 } } }
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.42 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.43 } } }
+								set_variable = { name = $V$ value = 0.435 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.425 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.41 } } }
+								set_variable = { name = $V$ value = 0.415 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.405 }
+							}
+						}
+					}
+					else = {
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.38 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.39 } } }
+								set_variable = { name = $V$ value = 0.395 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.385 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.37 } } }
+								set_variable = { name = $V$ value = 0.375 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.365 }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	else = {
+		if = {
+			limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.04208 } } }
+			if = {
+				limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.2 } } }
+				if = {
+					limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.28 } } }
+					if = {
+						limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.32 } } }
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.34 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.35 } } }
+								set_variable = { name = $V$ value = 0.355 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.345 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.33 } } }
+								set_variable = { name = $V$ value = 0.335 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.325 }
+							}
+						}
+					}
+					else = {
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.3 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.31 } } }
+								set_variable = { name = $V$ value = 0.315 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.305 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.29 } } }
+								set_variable = { name = $V$ value = 0.295 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.285 }
+							}
+						}
+					}
+				}
+				else = {
+					if = {
+						limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.24 } } }
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.26 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.27 } } }
+								set_variable = { name = $V$ value = 0.275 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.265 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.25 } } }
+								set_variable = { name = $V$ value = 0.255 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.245 }
+							}
+						}
+					}
+					else = {
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.22 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.23 } } }
+								set_variable = { name = $V$ value = 0.235 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.225 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.21 } } }
+								set_variable = { name = $V$ value = 0.215 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.205 }
+							}
+						}
+					}
+				}
+			}
+			else = {
+				if = {
+					limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.12 } } }
+					if = {
+						limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.16 } } }
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.18 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.19 } } }
+								set_variable = { name = $V$ value = 0.195 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.185 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.17 } } }
+								set_variable = { name = $V$ value = 0.175 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.165 }
+							}
+						}
+					}
+					else = {
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.14 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.15 } } }
+								set_variable = { name = $V$ value = 0.155 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.145 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.13 } } }
+								set_variable = { name = $V$ value = 0.135 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.125 }
+							}
+						}
+					}
+				}
+				else = {
+					if = {
+						limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.08 } } }
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.1 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.11 } } }
+								set_variable = { name = $V$ value = 0.115 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.105 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.09 } } }
+								set_variable = { name = $V$ value = 0.095 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.085 }
+							}
+						}
+					}
+					else = {
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.06 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.07 } } }
+								set_variable = { name = $V$ value = 0.075 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.065 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.05 } } }
+								set_variable = { name = $V$ value = 0.055 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.04604 }
+							}
+						}
+					}
+				}
+			}
+		}
+		else = {
+			if = {
+				limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.00266 } } }
+				if = {
+					limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.01058 } } }
+					if = {
+						limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.0211 } } }
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.0298 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.03541 } } }
+								set_variable = { name = $V$ value = 0.03875 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.0326 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.02507 } } }
+								set_variable = { name = $V$ value = 0.02744 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.02309 }
+							}
+						}
+					}
+					else = {
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.01494 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.01776 } } }
+								set_variable = { name = $V$ value = 0.01943 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.01635 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.01257 } } }
+								set_variable = { name = $V$ value = 0.01375 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.01158 }
+							}
+						}
+					}
+				}
+				else = {
+					if = {
+						limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.00531 } } }
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.00749 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.0089 } } }
+								set_variable = { name = $V$ value = 0.00974 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.0082 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.00631 } } }
+								set_variable = { name = $V$ value = 0.0069 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.00581 }
+							}
+						}
+					}
+					else = {
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.00376 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.00447 } } }
+								set_variable = { name = $V$ value = 0.00489 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.00411 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.00316 } } }
+								set_variable = { name = $V$ value = 0.00346 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.00291 }
+							}
+						}
+					}
+				}
+			}
+			else = {
+				if = {
+					limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.00067 } } }
+					if = {
+						limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.00133 } } }
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.00188 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.00224 } } }
+								set_variable = { name = $V$ value = 0.00245 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.00206 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.00159 } } }
+								set_variable = { name = $V$ value = 0.00173 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.00146 }
+							}
+						}
+					}
+					else = {
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.00095 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.00112 } } }
+								set_variable = { name = $V$ value = 0.00122 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.00103 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.0008 } } }
+								set_variable = { name = $V$ value = 0.00088 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.00073 }
+							}
+						}
+					}
+				}
+				else = {
+					if = {
+						limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.00034 } } }
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.00047 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.00056 } } }
+								set_variable = { name = $V$ value = 0.00061 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.00051 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.0004 } } }
+								set_variable = { name = $V$ value = 0.00044 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.00037 }
+							}
+						}
+					}
+					else = {
+						if = {
+							limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.00024 } } }
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.00028 } } }
+								set_variable = { name = $V$ value = 0.00031 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.00026 }
+							}
+						}
+						else = {
+							if = {
+								limit = { scope:zz_ef_msh_mk = { market_$S$_share = { target = scope:zz_ef_msh_who value > 0.0002 } } }
+								set_variable = { name = $V$ value = 0.00022 }
+							}
+							else = {
+								set_variable = { name = $V$ value = 0.0001 }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

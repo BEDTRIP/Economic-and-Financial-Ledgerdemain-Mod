@@ -2274,25 +2274,40 @@ zz_ef_money_median = {
 	if = { limit = { has_global_variable = money_value_median } value = global_var:money_value_median }
 }
 
-# Item 4: the trade balance from the engine's data. The
-# engine counts imports and exports in units of goods; in money: the
-# market's exports - imports of every good x its price there (base price x (1 +
-# market_goods_pricier)), a week. Trade is the market's: the market owner
-# holds it, the other members 0. All goods, the financial ones (E&F's bonds,
-# stocks, funds, currency) too -- a payment abroad either way; they are also
-# shown apart (zz_ef_trade_fin_week).
-# at ONE price -- the good's base price, not the market's (base x (1 + pricier)). A good
-# leaving one market and entering another was counted at two prices, the importer's and the exporter's, so the
-# world's trade did not add up (run s1b, 1839: +32M gold a year without a counterpart).
-# at one price the world's exports were still over its imports by 1-4M a month (the
-# world market of 1.13 holds goods between its hubs), and the treasuries' market fees, tolls and piracy (abr, +0.5-1.5M)
-# have no payer's line. The world market is a pool: what the importers pay is shared by the exporters and the fees'
-# receivers (zz_ef_wtr_kr: min(1, imports / (exports + fees)) of the window before); if they claim less, the importers
-# pay as much (zz_ef_wtr_kp). The fees' part not covered goes off the flow (zz_ef_tfees_cut).
-# from the step's exports / imports (var:zz_ef_f_exp / _imp, zz_ef_trade_step), not summed again.
+# The week's trade abroad from the engine's data: the market's exports - imports of every good (units) x its base
+# price -- one price for a good leaving one market and entering another, so the world's trade adds up. All goods, the
+# financial ones (E&F's bonds, stocks, funds, currency) too; they are also shown apart (zz_ef_trade_fin_week). The
+# world market is a pool: what the importers pay is shared by the exporters and the fees' receivers (zz_ef_wtr_kr:
+# min(1, imports / (exports + fees)) of the window before); if they claim less, the importers pay as much
+# (zz_ef_wtr_kp); the fees' part not covered goes off the flow (zz_ef_tfees_cut). From the step's exports / imports
+# (var:zz_ef_f_exp / _imp, zz_ef_trade_step).
+# A market of two countries or more (Д.R8в.1, ld_market_shares.txt): each country -- its shares of the market (monthly),
+# p x (X + T) - c x (M + T): X / M -- the market's sales / purchases abroad as the pool settles them, T -- the turnover
+# inside; the owner's are its own of this step, a member reads its owner's last.
 zz_ef_trade_net_week = {
 	value = 0
 	if = {
+		limit = { has_variable = zz_ef_msh_p }
+		if = {
+			limit = { market.owner = this }
+			value = var:zz_ef_msh_p
+			multiply = { value = var:zz_ef_mk_x add = var:zz_ef_mk_t }
+			subtract = {
+				value = var:zz_ef_msh_c
+				multiply = { value = var:zz_ef_mk_m add = var:zz_ef_mk_t }
+			}
+		}
+		else_if = {
+			limit = { market.owner = { has_variable = zz_ef_mk_t } }
+			value = var:zz_ef_msh_p
+			multiply = { value = market.owner.var:zz_ef_mk_x add = market.owner.var:zz_ef_mk_t }
+			subtract = {
+				value = var:zz_ef_msh_c
+				multiply = { value = market.owner.var:zz_ef_mk_m add = market.owner.var:zz_ef_mk_t }
+			}
+		}
+	}
+	else_if = {
 		limit = { exists = market market.owner = this }
 		value = zz_ef_v_f_exp
 		multiply = zz_ef_wtr_kr_v
@@ -2300,15 +2315,16 @@ zz_ef_trade_net_week = {
 			value = zz_ef_v_f_imp
 			multiply = zz_ef_wtr_kp_v
 		}
-		# customs union members with their own currency settle
-		# their sales inside the market with the owner (generated,
-		# ld_customs_union_values.txt)
-		subtract = zz_ef_members_trade_sum
 	}
-	else_if = {
-		limit = { zz_ef_cu_member = yes }
-		value = zz_ef_member_goods_net
-	}
+}
+# the country's shares of its market's production / consumption (Д.R8в.1), for the log; 0 alone in its market
+zz_ef_msh_p_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_msh_p } value = var:zz_ef_msh_p }
+}
+zz_ef_msh_c_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_msh_c } value = var:zz_ef_msh_c }
 }
 zz_ef_trade_fin_week = {
 	value = 0
