@@ -67,5 +67,9 @@ custom loc → локализация).
   = dropdown_menu_currency` и 95 `if` с добавлением в список (после `median_currency_value = yes`); в `10_new_country_var.txt`
   — `set_variable` `currency_selection = flag:select_currency`.
 
+- R8в, шаг 6: подписи кнопок форекса — 950 записей пользовательской локализации `buy_<cur>_1`…`_5`, `sell_<cur>_1`…`_5`
+  (`common/customizable_localization/00_ef_localization_ custom.txt`, «заявка на покупку / продажу» по `player.var:…`;
+  ни одно окно их уже не вызывало) и 950 переменных-флагов с теми же именами в `10_new_country_var.txt`.
+
 **Вернуть:** вставить блок GUI на место, определения — в те же файлы; в `zz_ef_metal_reconcile` и генератор
 `regen_ef_nr_deposits.py` — чтения `zz_ef_mt_fx_*` / `zz_ef_nr_fx_pend`; переменные выбора — в `new_country_var_ef_economy`.
