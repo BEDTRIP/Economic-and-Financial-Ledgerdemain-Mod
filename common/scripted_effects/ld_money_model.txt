@@ -41,9 +41,6 @@ zz_ef_money_model_step = {
 	# Business cash: the sum over the buildings, once a week (run 15: the
 	# estimate from the credit limit -- credit - base - 1.7 x GDP -- swung by
 	# millions a week, M2 by +-30%).
-	# Business cash: the sum over the buildings, once a week (run 15: the
-	# estimate from the credit limit -- credit - base - 1.7 x GDP -- swung by
-	# millions a week, M2 by +-30%).
 	set_variable = { name = zz_ef_bcash value = zz_ef_building_cash_sum }
 	# the Banks' cash -- the banks' own money, out of M1 / M2
 	set_variable = { name = zz_ef_bkcash value = zz_ef_bank_cash_sum }
@@ -110,8 +107,7 @@ zz_ef_money_model_step = {
 
 	# Bank credit from the central bank: the debt goes to GDP x a share by the
 	# rate, repaid from the pool when
-	# over it (at most the debt); interest at the key rate goes
-	# pool -> CB -> treasury (the CB's profit).
+	# over it (at most the debt); interest at the key rate -- the CB's profit (below).
 	if = {
 		limit = { NOT = { has_variable = zz_ef_bank_cb_debt } }
 		set_variable = { name = zz_ef_bank_cb_debt value = 0 }
@@ -127,8 +123,17 @@ zz_ef_money_model_step = {
 		multiply = -1
 	}
 	change_variable = { name = zz_ef_bank_cb_debt subtract = var:zz_ef_f_cb_repay }
-	# the interest -- the banks pay it (their capital) to the CB, the CB's profit to the treasury
-	zz_ef_post_eng_paid = { FROM = pool TO = treasury PAYER = zz_ef_bank_capital V = var:zz_ef_f_cb_interest }
+	# the interest -- the banks pay it (their capital) to the CB; the CB's profit (Д.R4а.5): a state CB's -- the
+	# treasury's, a private one's -- its owners', the capitalists' deposits (no company of the CB: the probe Р25)
+	if = {
+		limit = { has_law = law_type:law_ld_cb_private }
+		zz_ef_post = { FROM = zz_ef_bank_capital TO = zz_ef_pop_deposits V = var:zz_ef_f_cb_interest }
+		if = { limit = { NOT = { has_variable = zz_ef_pop_savings } } set_variable = { name = zz_ef_pop_savings value = 0 } }
+		change_variable = { name = zz_ef_pop_savings add = var:zz_ef_f_cb_interest }
+	}
+	else = {
+		zz_ef_post_eng_paid = { FROM = pool TO = treasury PAYER = zz_ef_bank_capital V = var:zz_ef_f_cb_interest }
+	}
 
 	# consols -- the CB's bonds sold are the treasury's perpetual debt to pops: interest treasury -> pops'
 	# savings, buy-back out of the surplus over the engine's limit first (scripted_effects/ld_consols.txt)

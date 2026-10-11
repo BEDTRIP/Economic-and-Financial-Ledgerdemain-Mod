@@ -1,5 +1,20 @@
 ﻿# every country starts with a law of the central bank group (scripted_effects/ld_cb_law.txt).
 GLOBAL = {
+	# Д.R4а.5: the private CBs of 1836 -- the Bank of England, the Banque de France, the Second Bank of the United States,
+	# the Austrian National Bank, De Nederlandsche Bank; the rest with a CB -- state ones (zz_ef_cb_law_sync)
+	every_country = {
+		limit = {
+			has_modifier = has_central_bank
+			OR = {
+				this = c:GBR
+				this = c:FRA
+				this = c:USA
+				this = c:AUS
+				this = c:NET
+			}
+		}
+		activate_law = law_type:law_ld_cb_private
+	}
 	every_country = {
 		zz_ef_cb_law_sync = yes
 	}

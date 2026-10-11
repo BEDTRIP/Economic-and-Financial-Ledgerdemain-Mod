@@ -2168,13 +2168,13 @@ set_debt_issued = {
 	is_valid = {
 		custom_tooltip = {
 			text = zz_ef_loan_tt_cap
-			zz_ef_cb_loan_after_to_gdp <= 0.5
+			zz_ef_cb_loan_after_to_gdp <= zz_ef_cb_loan_cap
 		}
 	}
 	# E&F's "take" button has no enabled = IsValid binding: the cap is checked in the effect too
 	effect = {
 		if = {
-			limit = { zz_ef_cb_loan_after_to_gdp <= 0.5 }
+			limit = { zz_ef_cb_loan_after_to_gdp <= zz_ef_cb_loan_cap }
 			# (Д.R2.8) the CB's loan to the treasury -- credit_at_central_bank is the ledger's account (the CB's
 			# asset, the treasury's debt), the treasury's money is ours (marked): no «прочее»
 			set_variable = { name = zz_ef_t_cbl value = debt_issued_relative_GDP }

@@ -654,6 +654,8 @@ ai_credit_at_central_bank = {
 			national_debt_compared_gdp < national_debt_allowed_relative_gdp
 			gold_reserve_compared_gold_reserves_limit < 0.1
 			is_at_war = no
+			# Д.R4а.5: the CB lends the treasury within its cap (a private one less)
+			zz_ef_cb_loan_now_to_gdp < zz_ef_cb_loan_cap
 		}
 		# (Д.R2.8) the CB's loan to the treasury -- credit_at_central_bank is the ledger's account, the
 		# treasury's money is ours (marked); the amount is fixed first (it reads the treasury): the treasury up to

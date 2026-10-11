@@ -214,6 +214,22 @@ zz_ef_cb_rule_cover = {
 	}
 }
 
+# Д.R4а.5: the kind of the CB weighs the rule -- a private one holds the money's value (the cover, the prices) harder,
+# a state one softer (growth and the treasury first)
+zz_ef_cb_kind_w_private = 1.5
+zz_ef_cb_kind_w_state = 0.75
+zz_ef_cb_kind_w_value = {
+	value = 1
+	if = {
+		limit = { has_law = law_type:law_ld_cb_private }
+		value = zz_ef_cb_kind_w_private
+	}
+	else_if = {
+		limit = { has_law = law_type:law_ld_cb_state }
+		value = zz_ef_cb_kind_w_state
+	}
+}
+
 # The bank's own rate (the "policy rule rate",
 # concept_zz_ef_policy_rule_rate): what the bank computes, WITHOUT the
 # government's discretionary adjustment. Kept apart from the rate the bank
@@ -224,9 +240,15 @@ zz_ef_cb_rate_rating_target = {
 	if = {
 		limit = { has_modifier = has_central_bank }
 		value = zz_ef_cb_rule_neutral
-		add = zz_ef_cb_rule_inflation
+		add = {
+			value = zz_ef_cb_rule_inflation
+			multiply = zz_ef_cb_kind_w_value
+		}
 		add = zz_ef_cb_rule_money
-		add = zz_ef_cb_rule_cover
+		add = {
+			value = zz_ef_cb_rule_cover
+			multiply = zz_ef_cb_kind_w_value
+		}
 		min = zz_ef_cb_rate_floor
 		max = zz_ef_cb_rate_ceiling
 	}

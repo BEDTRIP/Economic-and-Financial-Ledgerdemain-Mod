@@ -17,3 +17,15 @@ zz_ef_cb_loan_now_to_gdp = {
 		min = 1
 	}
 }
+
+zz_ef_cb_loan_cap = {
+	value = 0.5
+	if = {
+		limit = { has_law = law_type:law_ld_cb_private }
+		value = 0.15
+	}
+	else_if = {
+		limit = { has_law = law_type:law_fiat_standard }
+		value = 100
+	}
+}

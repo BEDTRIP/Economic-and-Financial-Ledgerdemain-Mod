@@ -49,8 +49,13 @@
   `flag:state/private/none`; не принимаются — `can_enact = { always = no }`; государственный и частный — с технологией
   `central_banking`), `common/scripted_effects/ld_cb_law.txt` (`zz_ef_cb_law_sync`: есть `has_central_bank` →
   государственный, нет → «без ЦБ»; частный не трогает), зовут `common/history/global/ld_central_bank_law.txt` (старт) и
-  хаб E&F `ef_on_monthly_pulse_country` (`on_actions/00_ef_on_action.txt`, месяц); локализация `ld_cb_law_l_*.yml`.
-  Поведение видов ЦБ — R4.
+  хаб E&F `ef_on_monthly_pulse_country` (`on_actions/00_ef_on_action.txt`, месяц); локализация `ld_cb_law_l_*.yml`. Виды
+  ЦБ (Д.R4а.5): прибыль ЦБ (проценты банков по кредиту ЦБ) — государственного в казну, частного — владельцам
+  (капиталистам: во вклады населения, `ld_money_model.txt`); кредит казне — предел `zz_ef_cb_loan_cap` (государственный
+  50 % ВВП, при фиате без предела, частный 15 %; `ld_cb_loan_values.txt`, генератор `regen_ef_cb_loan.py`; кнопка и ИИ
+  `ai_credit_at_central_bank`); правило ставки — вес покрытия и инфляции `zz_ef_cb_kind_w_value` (частный 1,5,
+  государственный 0,75). Частные на старте — Великобритания, Франция, США, Австрия, Нидерланды
+  (`history/global/ld_central_bank_law.txt`).
 - ЖЗ: `common/journal_entries/00_ef_bank_central_je.txt` — `bank_je_central_1`: игроку без ЦБ; ежемесячно ставит
   индикаторы и выдаёт технологии `banking` + `currency_standards` при ВВП ≥ 2.5 млн, `central_banking` при ≥ 5 млн; по
   завершении `bank_je_central_2`.
