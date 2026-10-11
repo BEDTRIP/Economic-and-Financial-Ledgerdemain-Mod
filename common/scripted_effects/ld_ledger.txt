@@ -107,7 +107,7 @@ zz_ef_reconcile = {
 	# level's construction points, a multiple of zz_ef_lvl_unit) -- the pool pays, a state seller's treasury gets it; the
 	# script has no hook. A step's change of the pool's part within zz_ef_lvl_tolerance of a whole negative multiple of the
 	# unit: the multiple is this line, not «прочее» (zz_ef_lvl_buy_pool, summed), the rest stays «прочее»; the treasury's
-	# positive multiples -- zz_ef_lvl_buy_tr.
+	# multiples -- zz_ef_lvl_buy_tr: positive -- the state sold levels, negative -- the state bought them (nationalization).
 	if = { limit = { NOT = { has_variable = zz_ef_lvl_buy_pool } } set_variable = { name = zz_ef_lvl_buy_pool value = 0 } }
 	if = { limit = { NOT = { has_variable = zz_ef_lvl_buy_tr } } set_variable = { name = zz_ef_lvl_buy_tr value = 0 } }
 	set_variable = { name = zz_ef_f_lvl_buy_pool value = 0 }
@@ -152,6 +152,13 @@ zz_ef_reconcile = {
 		set_variable = { name = zz_ef_t_lvl value = { value = var:zz_ef_f_other_tr multiply = -1 } }
 		if = {
 			limit = { zz_ef_lvl_is_buy_v = 1 }
+			set_variable = { name = zz_ef_f_lvl_buy_tr value = { value = zz_ef_lvl_mult_v multiply = -1 } }
+			change_variable = { name = zz_ef_lvl_buy_tr add = var:zz_ef_f_lvl_buy_tr }
+			change_variable = { name = zz_ef_f_other_tr subtract = var:zz_ef_f_lvl_buy_tr }
+		}
+		# the state as the buyer (the engine's nationalization: the treasury pays a multiple of the unit)
+		else_if = {
+			limit = { zz_ef_lvl_is_nat_v = 1 }
 			set_variable = { name = zz_ef_f_lvl_buy_tr value = { value = zz_ef_lvl_mult_v multiply = -1 } }
 			change_variable = { name = zz_ef_lvl_buy_tr add = var:zz_ef_f_lvl_buy_tr }
 			change_variable = { name = zz_ef_f_other_tr subtract = var:zz_ef_f_lvl_buy_tr }

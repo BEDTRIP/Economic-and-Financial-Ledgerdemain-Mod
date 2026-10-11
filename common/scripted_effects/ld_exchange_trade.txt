@@ -985,7 +985,12 @@ zz_ef_xch_deal = {
 				credit > 0
 			}
 			set_variable = { name = zz_ef_t_cd value = { value = var:zz_ef_xd_a divide = credit } }
+			# the principal the engine cleared is ours (the treasury's net rises by it): marked for the reconciliation
+			set_variable = { name = zz_ef_t_pr value = principal }
 			clear_scaled_debt = var:zz_ef_t_cd
+			change_variable = { name = zz_ef_t_pr subtract = principal }
+			zz_ef_tr_mark = { V = var:zz_ef_t_pr }
+			remove_variable = zz_ef_t_pr
 			remove_variable = zz_ef_t_cd
 		}
 		set_variable = {

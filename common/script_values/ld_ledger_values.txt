@@ -47,6 +47,19 @@ zz_ef_lvl_is_buy_v = {
 		value = 1
 	}
 }
+# 1 if var:zz_ef_t_lvl is within zz_ef_lvl_tolerance of a whole positive multiple of the unit (the treasury's sign
+# turned: the state paid -- the engine's nationalization of building levels), else 0
+zz_ef_lvl_is_nat_v = {
+	value = 0
+	if = {
+		limit = {
+			zz_ef_lvl_mult_v >= 24999
+			zz_ef_lvl_rest_v <= zz_ef_lvl_tolerance
+			zz_ef_lvl_rest_v >= zz_ef_lvl_tolerance_neg
+		}
+		value = 1
+	}
+}
 zz_ef_lvl_tolerance_neg = {
 	value = zz_ef_lvl_tolerance
 	multiply = -1
