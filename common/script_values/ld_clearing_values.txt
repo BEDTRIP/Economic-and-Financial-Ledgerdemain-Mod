@@ -26,6 +26,22 @@ zz_ef_clr_metal_share = {
 		limit = { has_modifier = global_monetary_reference }
 		value = zz_ef_clr_metal_share_ref
 	}
+	# the payer keeps its metal as its cover falls (Д.R8в.28): x zz_ef_clr_cover_keep
+	multiply = zz_ef_clr_cover_keep
+}
+# Д.R8в.28: how much of the metal share a CB on a metal standard still pays by its cover -- all at the target
+# (zz_ef_cover_normal) and over, nothing at half of it, linear between; the rest of the payment -- a claim on it. No CB
+# (the banks' metal) -- all.
+zz_ef_clr_cover_keep = {
+	value = 1
+	if = {
+		limit = { zz_ef_clr_cb_ok = yes }
+		value = zz_ef_cb_cover
+		subtract = { value = zz_ef_cover_normal multiply = 0.5 }
+		divide = { value = zz_ef_cover_normal multiply = 0.5 }
+		min = 0
+		max = 1
+	}
 }
 zz_ef_clr_own_share = {
 	value = 1

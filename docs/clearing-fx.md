@@ -19,18 +19,21 @@
   `var:zz_ef_clr_gp` / `_gm` и список получателей `zz_ef_clr_grl`; доли зачёта `zz_ef_clr_kp` / `_kr`; остатки мира
   `global_var:zz_ef_clr_rp` / `_rm`, доли `_xp` / `_xr`; пары внутри группы, затем между группами за вычетом комиссии
   биржи плательщика `zz_ef_xch_fee_v`), `zz_ef_clr_pair` (платёж-набор), `zz_ef_clr_give_claim` (требование получателя
-  на плательщика: `zz_ef_rq_add`, держатель cb / bk), `zz_ef_clr_give_metal` / `zz_ef_clr_metal_move` (металл ЦБ — в
-  столичном штате ЦБ, металл своего стандарта; без ЦБ — металл банков `var:zz_ef_bankm_gold` / `_silver`),
+  на плательщика: `zz_ef_rq_add`, держатель cb / bk), `zz_ef_clr_give_metal`: `zz_ef_clr_metal_out` у плательщика (ЦБ —
+  металл своего стандарта из столичного штата ЦБ; без ЦБ — банки, сначала золото, потом серебро; что ушло золотом /
+  серебром — `var:zz_ef_clr_out_g` / `_s`) и `zz_ef_clr_metal_in` у получателя — тот же металл, без перевода серебра в
+  золото (Д.R8в.28; ЦБ — `zz_ef_clr_cb_metal_add` в столичный штат ЦБ, банки — `var:zz_ef_bankm_gold` / `_silver`),
   `zz_ef_clr_give_back` (валюта получателя из резервов плательщика возвращается эмитенту), `zz_ef_clr_need_add` (долг
   недели в валюте получателя — карта `zz_ef_clr_need`), `zz_ef_clr_post_needs` (на шаге биржи плательщика — заявка на
   покупку этой валюты по верхнему шагу, `zz_ef_xch_order_put`), `zz_ef_clr_take_acc` / `zz_ef_clr_take_hume` (итоги
   расчёта — в недельные `zz_ef_f_clr_*`, металл ЦБ — до сверки металла), `zz_ef_cbfx_week_step` (недельное изменение
   чужих денег ЦБ по эмитентам — карты `zz_ef_cbfx_d`, `zz_ef_cbfx_p`).
 - `common/script_values/ld_clearing_values.txt` (рукописный) — доля металла `zz_ef_clr_metal_share` (сила 0,75…1,25 →
-  100 %…30 %, эталон — 15 %), доля своей валютой `zz_ef_clr_own_share` = 1 − она, золото за единицу денег
-  `zz_ef_clr_gold_per_money` (своё, без своих денег — среднее мира) и `zz_ef_clr_gpm_own`, металл к оплате
-  `zz_ef_clr_metal_av_g`, итоги недели `zz_ef_v_f_clr_*` (карточка заграницы), мировые суммы `zz_ef_clr_w_*_v` (лог
-  `EFN`), `zz_ef_cbfx_g_v` (порядок строк таблицы).
+  100 %…30 %, эталон — 15 %; × `zz_ef_clr_cover_keep` — у ЦБ вся при покрытии на цели и выше, 0 при половине цели,
+  Д.R8в.28), доля своей валютой `zz_ef_clr_own_share` = 1 − она, золото за единицу денег `zz_ef_clr_gold_per_money`
+  (своё, без своих денег — среднее мира) и `zz_ef_clr_gpm_own`, металл к оплате `zz_ef_clr_metal_av_g`, итоги недели
+  `zz_ef_v_f_clr_*` (карточка заграницы), мировые суммы `zz_ef_clr_w_*_v` (лог `EFN`), `zz_ef_cbfx_g_v` (порядок строк
+  таблицы).
 - `common/scripted_triggers/ld_clearing_triggers.txt` — `zz_ef_clr_cb_ok` (денежная власть — ЦБ: ЦБ и столичный штат ЦБ;
   иначе — банки), `zz_ef_clr_wants_metal` (металлический стандарт, не обменный).
 - `common/scripted_guis/ld_cbfx.txt` — `zz_ef_cbfx_update_sorted` (таблица чужих денег ЦБ по эмитентам: список
@@ -97,7 +100,8 @@
 | `zz_ef_clr_rep`, `zz_ef_clr_gp`, `_gm`, `_gn`, `_kp`, `_kr`, список `zz_ef_clr_grl` | группа страны и суммы группы (на первой стране группы) | `zz_ef_clr_settle` | он же |
 | глобальные `zz_ef_clr_list`, `zz_ef_clr_reps`, `zz_ef_clr_rr`, `zz_ef_clr_rp`, `_rm`, `_xm`, `_xp`, `_xr` | участники недели, группы, получатели остатков, остатки мира и доли их сведения | `zz_ef_clr_step`, `zz_ef_clr_settle` | `zz_ef_clr_settle` |
 | `zz_ef_clr_a_<n>` → `zz_ef_f_clr_<n>` (n: `cur_out`, `fx_in`, `own_back`, `fx_out`, `metal_g`, `paid`, `got`, `debt`, `unm`, `fee`) | итоги расчёта с прошлого шага: наша валюта за границу (ед.), чужая получена (золото), своя вернулась (ед.), чужая отдана (золото), металл (золото, ±), заплачено, получено, долг недели, не сведено миром (±), комиссия (золото) | `zz_ef_clr_settle` → `zz_ef_clr_take_acc` | `zz_ef_v_f_clr_*`, карточка заграницы, лог `EFX` |
-| `zz_ef_clr_a_hume` → `zz_ef_f_hume` | металл ЦБ, сдвинутый расчётом (свой металл стандарта, + вход / − выход) | `zz_ef_clr_metal_move` → `zz_ef_clr_take_hume` | `zz_ef_metal_reconcile` |
+| `zz_ef_clr_a_hume` → `zz_ef_f_hume` | металл ЦБ, сдвинутый расчётом, в металле стандарта (+ вход / − выход) | `zz_ef_clr_cb_metal_add` → `zz_ef_clr_take_hume` | проводка денег ЦБ, мировая строка |
+| `zz_ef_clr_a_hume_g` / `_s` → `zz_ef_f_clr_hume_g` / `_s` | то же по металлам, в их единицах | `zz_ef_clr_cb_metal_add` → `zz_ef_clr_take_hume` | `zz_ef_metal_reconcile` |
 | карта `zz_ef_clr_need` (плательщик) | долг недели в валюте получателя, ед. | `zz_ef_clr_need_add` | `zz_ef_clr_post_needs` (заявка на бирже, карта очищается) |
 | `global_var:zz_ef_clr_wl` | мировая строка: поток стран без своих денег за неделю, золото | `zz_ef_clr_step` | лог `EFN` (обнуляется в расчёте) |
 | `gold_state_1`, `silver_state_1` (штат столицы ЦБ) | металл ЦБ | клиринг, `ld_metal_accounts.txt` | вся модель металла |
@@ -122,6 +126,6 @@
 - `EFX|` — месячная строка по валютам/стандарту (`ld_money_model.txt:1033`).
 - `EFR|` — недельное состояние внешних счетов страны (клиринг, вклады: `ld_money_model.txt:540`).
 - `EFQ` — «oth» сверки металла ЦБ (`ld_metal_accounts.txt`).
-- `EFN|дата|WORLD|n|groups|grp|x|fee|unpaid|unrec|metal|debt|wl|rp|rm|corr|mid` — расчёт недели (`zz_ef_clr_settle`): участников,
-  групп; сведено внутри групп и между группами, комиссия, не заплачено и не получено (мир не совпал), металлом, долгом
-  недели; мировая строка; остатки групп к получению / к оплате (золото).
+- `EFN|дата|WORLD|n|groups|grp|x|fee|unpaid|unrec|metal|debt|wl|rp|rm|corr|mid` — расчёт недели (`zz_ef_clr_settle`):
+  участников, групп; сведено внутри групп и между группами, комиссия, не заплачено и не получено (мир не совпал),
+  металлом, долгом недели; мировая строка; остатки групп к получению / к оплате (золото).

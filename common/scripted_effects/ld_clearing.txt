@@ -123,6 +123,9 @@ zz_ef_clr_take_hume = {
 		set_variable = { name = zz_ef_f_hume value = var:zz_ef_clr_a_hume }
 		remove_variable = zz_ef_clr_a_hume
 	}
+	# the same by metal, in its own units (the reconciliation of each metal, ld_metal_accounts.txt)
+	zz_ef_clr_take = { N = hume_g }
+	zz_ef_clr_take = { N = hume_s }
 }
 zz_ef_clr_take = {
 	set_variable = { name = zz_ef_f_clr_$N$ value = 0 }
@@ -476,8 +479,9 @@ zz_ef_clr_give_claim = {
 	remove_variable = zz_ef_clr_u
 }
 
-# Metal out of the payer's reserves (gold value var:zz_ef_clr_mg, at most what it has) into the receiver's, each in its
-# own metal at the world's price (silver_to_gold_rate).
+# Metal out of the payer's reserves (gold value var:zz_ef_clr_mg, at most what it has) into the receiver's -- the same
+# metal the payer gave (Д.R8в.28): silver stays silver, the receiver's cover counts it at the world's price
+# (zz_ef_reserves_in_gold).
 zz_ef_clr_give_metal = {
 	set_variable = {
 		name = zz_ef_clr_mg
@@ -489,13 +493,19 @@ zz_ef_clr_give_metal = {
 	}
 	if = {
 		limit = { var:zz_ef_clr_mg > 0 }
-		zz_ef_clr_metal_move = { SIGN = -1 }
+		zz_ef_clr_metal_out = yes
 		scope:zz_ef_clr_r = {
 			set_variable = { name = zz_ef_clr_mg value = scope:zz_ef_clr_p.var:zz_ef_clr_mg }
-			zz_ef_clr_metal_move = { SIGN = 1 }
+			set_variable = { name = zz_ef_clr_out_g value = scope:zz_ef_clr_p.var:zz_ef_clr_out_g }
+			set_variable = { name = zz_ef_clr_out_s value = scope:zz_ef_clr_p.var:zz_ef_clr_out_s }
+			zz_ef_clr_metal_in = yes
 			zz_ef_clr_acc = { N = metal_g V = var:zz_ef_clr_mg }
 			remove_variable = zz_ef_clr_mg
+			remove_variable = zz_ef_clr_out_g
+			remove_variable = zz_ef_clr_out_s
 		}
+		remove_variable = zz_ef_clr_out_g
+		remove_variable = zz_ef_clr_out_s
 		change_global_variable = { name = zz_ef_clr_w_metal add = var:zz_ef_clr_mg }
 		set_variable = { name = zz_ef_clr_x value = { value = var:zz_ef_clr_mg multiply = -1 } }
 		zz_ef_clr_acc = { N = metal_g V = var:zz_ef_clr_x }
@@ -503,39 +513,22 @@ zz_ef_clr_give_metal = {
 	}
 	remove_variable = zz_ef_clr_mg
 }
-# COUNTRY scope: var:zz_ef_clr_mg gold of metal in ($SIGN$ = 1) / out (-1). The CB -- its standard's metal in its
-# capital's CB state (silver for silver, else gold); the banks -- gold first out, their standard's metal in.
-zz_ef_clr_metal_move = {
+# PAYER (COUNTRY scope): var:zz_ef_clr_mg gold of metal out -- the CB: its standard's metal in its capital's CB state
+# (silver for silver, else gold); the banks: gold first, then silver. What went as gold / as silver (gold value) --
+# var:zz_ef_clr_out_g / _s, for the receiver.
+zz_ef_clr_metal_out = {
+	set_variable = { name = zz_ef_clr_out_g value = 0 }
+	set_variable = { name = zz_ef_clr_out_s value = 0 }
 	if = {
 		limit = { zz_ef_clr_cb_ok = yes }
-		set_variable = { name = zz_ef_clr_mn value = { value = var:zz_ef_clr_mg multiply = $SIGN$ } }
 		if = {
 			limit = { zz_ef_metal_silver = yes }
-			change_variable = { name = zz_ef_clr_mn multiply = gold_to_silver_rate }
+			set_variable = { name = zz_ef_clr_out_s value = var:zz_ef_clr_mg }
 		}
-		every_scope_state = {
-			limit = {
-				has_modifier = central_bank_historic_place
-				is_capital = yes
-			}
-			if = {
-				limit = { owner = { zz_ef_metal_silver = yes } }
-				if = {
-					limit = { NOT = { has_variable = silver_state_1 } }
-					set_variable = { name = silver_state_1 value = 0 }
-				}
-				change_variable = { name = silver_state_1 add = owner.var:zz_ef_clr_mn }
-			}
-			else = {
-				if = {
-					limit = { NOT = { has_variable = gold_state_1 } }
-					set_variable = { name = gold_state_1 value = 0 }
-				}
-				change_variable = { name = gold_state_1 add = owner.var:zz_ef_clr_mn }
-			}
+		else = {
+			set_variable = { name = zz_ef_clr_out_g value = var:zz_ef_clr_mg }
 		}
-		zz_ef_clr_acc = { N = hume V = var:zz_ef_clr_mn }
-		remove_variable = zz_ef_clr_mn
+		zz_ef_clr_cb_metal_add = { SIGN = -1 }
 	}
 	else = {
 		if = {
@@ -546,32 +539,75 @@ zz_ef_clr_metal_move = {
 			limit = { NOT = { has_variable = zz_ef_bankm_silver } }
 			set_variable = { name = zz_ef_bankm_silver value = 0 }
 		}
-		set_variable = { name = zz_ef_clr_mn value = $SIGN$ }
+		set_variable = { name = zz_ef_clr_out_g value = { value = var:zz_ef_clr_mg max = var:zz_ef_bankm_gold min = 0 } }
+		set_variable = { name = zz_ef_clr_out_s value = { value = var:zz_ef_clr_mg subtract = var:zz_ef_clr_out_g } }
+		change_variable = { name = zz_ef_bankm_gold subtract = var:zz_ef_clr_out_g }
+		change_variable = { name = zz_ef_bankm_silver subtract = { value = var:zz_ef_clr_out_s multiply = gold_to_silver_rate } }
+	}
+}
+# RECEIVER (COUNTRY scope): var:zz_ef_clr_out_g / _s (gold value) in, as the metal they came in -- the CB into its
+# capital's CB state, the banks into their accounts.
+zz_ef_clr_metal_in = {
+	if = {
+		limit = { zz_ef_clr_cb_ok = yes }
+		zz_ef_clr_cb_metal_add = { SIGN = 1 }
+	}
+	else = {
 		if = {
-			limit = { var:zz_ef_clr_mn > 0 }
-			if = {
-				limit = { zz_ef_metal_silver = yes }
-				change_variable = { name = zz_ef_bankm_silver add = { value = var:zz_ef_clr_mg multiply = gold_to_silver_rate } }
-			}
-			else = {
-				change_variable = { name = zz_ef_bankm_gold add = var:zz_ef_clr_mg }
-			}
-			remove_variable = zz_ef_clr_mn
+			limit = { NOT = { has_variable = zz_ef_bankm_gold } }
+			set_variable = { name = zz_ef_bankm_gold value = 0 }
 		}
-		else = {
-			set_variable = { name = zz_ef_clr_mn value = { value = var:zz_ef_clr_mg max = var:zz_ef_bankm_gold } }
-			change_variable = { name = zz_ef_bankm_gold subtract = var:zz_ef_clr_mn }
-			change_variable = {
-				name = zz_ef_bankm_silver
-				subtract = {
-					value = var:zz_ef_clr_mg
-					subtract = var:zz_ef_clr_mn
-					multiply = gold_to_silver_rate
-				}
-			}
-			remove_variable = zz_ef_clr_mn
+		if = {
+			limit = { NOT = { has_variable = zz_ef_bankm_silver } }
+			set_variable = { name = zz_ef_bankm_silver value = 0 }
+		}
+		change_variable = { name = zz_ef_bankm_gold add = var:zz_ef_clr_out_g }
+		change_variable = { name = zz_ef_bankm_silver add = { value = var:zz_ef_clr_out_s multiply = gold_to_silver_rate } }
+	}
+}
+# COUNTRY scope with a CB: var:zz_ef_clr_out_g gold and var:zz_ef_clr_out_s (gold value) of silver in ($SIGN$ = 1) / out
+# (-1) of its capital's CB state. hume -- in the standard's metal (the money posting, the world line), hume_g / hume_s --
+# each metal in its units (the reconciliation).
+zz_ef_clr_cb_metal_add = {
+	set_variable = { name = zz_ef_clr_mn_g value = { value = var:zz_ef_clr_out_g multiply = $SIGN$ } }
+	set_variable = {
+		name = zz_ef_clr_mn_s
+		value = { value = var:zz_ef_clr_out_s multiply = gold_to_silver_rate multiply = $SIGN$ }
+	}
+	every_scope_state = {
+		limit = {
+			has_modifier = central_bank_historic_place
+			is_capital = yes
+		}
+		if = {
+			limit = { NOT = { has_variable = gold_state_1 } }
+			set_variable = { name = gold_state_1 value = 0 }
+		}
+		if = {
+			limit = { NOT = { has_variable = silver_state_1 } }
+			set_variable = { name = silver_state_1 value = 0 }
+		}
+		change_variable = { name = gold_state_1 add = owner.var:zz_ef_clr_mn_g }
+		change_variable = { name = silver_state_1 add = owner.var:zz_ef_clr_mn_s }
+	}
+	zz_ef_clr_acc = { N = hume_g V = var:zz_ef_clr_mn_g }
+	zz_ef_clr_acc = { N = hume_s V = var:zz_ef_clr_mn_s }
+	set_variable = {
+		name = zz_ef_clr_mn
+		value = {
+			value = var:zz_ef_clr_out_g
+			add = var:zz_ef_clr_out_s
+			multiply = $SIGN$
 		}
 	}
+	if = {
+		limit = { zz_ef_metal_silver = yes }
+		change_variable = { name = zz_ef_clr_mn multiply = gold_to_silver_rate }
+	}
+	zz_ef_clr_acc = { N = hume V = var:zz_ef_clr_mn }
+	remove_variable = zz_ef_clr_mn
+	remove_variable = zz_ef_clr_mn_g
+	remove_variable = zz_ef_clr_mn_s
 }
 
 # The receiver's money out of the payer's reserves: its claim comes home to the receiver and is gone.

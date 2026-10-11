@@ -517,16 +517,14 @@ zz_ef_metal_reconcile = {
 		change_variable = { name = zz_ef_f_mt_oth_g subtract = var:zz_ef_mt_prev_g }
 		set_variable = { name = zz_ef_f_mt_oth_s value = silver_state_native_for_stockpile }
 		change_variable = { name = zz_ef_f_mt_oth_s subtract = var:zz_ef_mt_prev_s }
-		# the clearing at the last receiver, in the standard's metal (gold for gold and bimetallism)
+		# the clearing at the last receiver, each metal as it moved (Д.R8в.28)
 		if = {
-			limit = { has_variable = zz_ef_f_hume }
-			if = {
-				limit = { zz_ef_metal_silver = yes }
-				change_variable = { name = zz_ef_f_mt_oth_s subtract = var:zz_ef_f_hume }
-			}
-			else = {
-				change_variable = { name = zz_ef_f_mt_oth_g subtract = var:zz_ef_f_hume }
-			}
+			limit = { has_variable = zz_ef_f_clr_hume_g }
+			change_variable = { name = zz_ef_f_mt_oth_g subtract = var:zz_ef_f_clr_hume_g }
+		}
+		if = {
+			limit = { has_variable = zz_ef_f_clr_hume_s }
+			change_variable = { name = zz_ef_f_mt_oth_s subtract = var:zz_ef_f_clr_hume_s }
 		}
 		if = {
 			limit = { has_variable = zz_ef_mt_start_adj_g }
