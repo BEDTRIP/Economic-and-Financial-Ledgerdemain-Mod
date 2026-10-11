@@ -35,8 +35,9 @@ zz_ef_f_other_abs_v = {
 # (PRIVATIZATION_PER_LEVEL_COST), the points a multiple of 100 -- the unit of the reconciliation's line «выкуп уровней»
 zz_ef_lvl_unit = 25000
 # a step's change within this of a whole multiple of the unit: the multiple is levels bought, the rest -- other money of
-# the same step (it stays «прочее»)
-zz_ef_lvl_tolerance = 1000
+# the same step (it stays «прочее»); the pool's other moves of a week reach ~5 000 in a large country (a railway level,
+# 200 000, comes with them), a quarter of the unit keeps a clear margin
+zz_ef_lvl_tolerance = 6000
 # 1 if var:zz_ef_t_lvl (a step's change, the pool's sign) is within zz_ef_lvl_tolerance of a whole negative multiple of
 # the unit, else 0
 zz_ef_lvl_is_buy_v = {
