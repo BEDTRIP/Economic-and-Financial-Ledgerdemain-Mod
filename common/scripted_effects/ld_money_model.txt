@@ -529,21 +529,26 @@ zz_ef_money_window_roll = {
 # add_investment_pool is not in investment_pool_gross_income). The banknotes move only by postings: the consols, the
 # CB's buy-back of the pops' metal. The leak (the reconciliation's rest of the week) is «прочее» (ld_ledger.txt), not
 # savings. Interest on deposits: the banks' capital -> D. The start (once): the deposits out of the pool as it is,
-# the banknotes 0, the banks' metal by their reserve norm.
+# the banknotes up to the savings' norm, the banks' metal by their reserve norm.
 zz_ef_pop_savings_step = {
 	if = {
 		limit = { NOT = { has_variable = zz_ef_pop_savings } }
-		# the pops' start savings (zz_ef_pop_start_savings) are deposits only: R1б -- the banknotes in
-		# circulation (M0, var:zz_ef_notes) start at 0
-		# the deposits are the pool as it is (no money into it) -- the norm, at most 90% of the pool
-		# (Хвост R1: the rest is the banks' capital); out of the
-		# banks' capital the first reconciliation set (the pool less the book)
+		# the pops' start savings are at their norm (zz_ef_pop_start_savings, Д.R8в.25): the deposits are the pool as it
+		# is (no money into it) -- at most 90% of the pool (the rest is the banks' capital), out of the banks' capital
+		# the first reconciliation set (the pool less the book); the pops' metal (zz_ef_metal_start_step) is part of
+		# the norm; the rest -- the banknotes (M0, var:zz_ef_notes), the CB's debt to them
 		set_variable = { name = zz_ef_pop_deposits value = 0 }
 		set_variable = { name = zz_ef_t_dep0 value = zz_ef_pop_start_deposits }
 		zz_ef_post = { FROM = zz_ef_bank_capital TO = zz_ef_pop_deposits V = var:zz_ef_t_dep0 }
 		remove_variable = zz_ef_t_dep0
-		set_variable = { name = zz_ef_pop_savings value = var:zz_ef_pop_deposits }
-		set_variable = { name = zz_ef_notes value = 0 }
+		set_variable = { name = zz_ef_notes value = zz_ef_pop_start_notes }
+		set_variable = {
+			name = zz_ef_pop_savings
+			value = {
+				value = var:zz_ef_pop_deposits
+				add = var:zz_ef_notes
+			}
+		}
 		# the banks' start metal by the reserve norm (scripted_effects/ld_metal_accounts.txt)
 		zz_ef_metal_start_banks = yes
 	}

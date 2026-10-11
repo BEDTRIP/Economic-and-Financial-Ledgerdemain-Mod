@@ -536,30 +536,17 @@ zz_ef_tr_other_net = {
 
 # ---- pops' savings and deposits (the receiver, zz_ef_pop_savings_step) --------
 
-# Pops' savings at the first step (1.10 evening, the user's M0 = cash at
-# hand): 15% of a year's GDP -- coin and notes in Britain in the 1830s were
-# ~11% of GDP, and part of the savings goes to deposits. Not engine money
-# (pops hold none): the share deposited enters the pool as new money --
-# check.
-# the start puts M2 at the model's norm, 45% of a year's GDP (Britain 1830s): the pops'
-# savings = 45% of GDP - the business cash (M2 = cash at hand + business cash + deposits), not under the
-# cash norm; over the norm they are deposits at once (zz_ef_pop_start_deposits), as the weekly step settles
-# them by the deposit rate. Was 15% of GDP with no deposits: the banks started empty and the first years went
-# to filling the norm.
-# Stage 2, night 6.10: the savings start AT their norm (zz_ef_sav_norm, 0.3-0.6 GDP by the deposit
-# rate, Д2.22) -- was 45% of GDP minus the business cash (Britain 3.2M against a norm of 14.6M): the first year the
-# savings grew to the norm, M2 doubled (18 -> 38M) and the cover halved; the user: "in equilibrium from the first day".
-# the pops' cash at hand (M0) is the CB's banknotes (var:zz_ef_notes) and starts at 0 -- the savings
-# start as deposits only
+# Pops' savings start at their norm (zz_ef_sav_norm, 0.3-0.6 of a year's GDP by the deposit rate, Д2.22): in
+# equilibrium from the first day. Not engine money (pops hold none). Split: deposits out of the pool, the pops' metal,
+# the rest -- banknotes (Д.R8в.25).
 zz_ef_pop_start_savings = {
 	value = zz_ef_sav_norm
 	min = 0
 }
 zz_ef_pop_start_deposits = {
 	value = zz_ef_pop_start_savings
-	# out of the pool as it is; Хвост R1: at most zz_ef_dep_start_pool_share of it -- the rest is
-	# the banks' own capital (was: the norm, 0.3-0.6 GDP, took the whole pool, the capital started at ~0 and the deposits'
-	# interest ran it negative)
+	# out of the pool as it is: at most zz_ef_dep_start_pool_share of it -- the rest is the banks' own capital (with the
+	# whole pool the capital starts at ~0 and the deposits' interest runs it negative)
 	max = {
 		value = investment_pool
 		min = 0
@@ -568,6 +555,14 @@ zz_ef_pop_start_deposits = {
 }
 # the share of the pool the pops' start deposits may take; the rest stays the banks' capital
 zz_ef_dep_start_pool_share = 0.9
+# the pops' start banknotes (Д.R8в.25): the savings' norm less the start deposits and the pops' start metal
+# (zz_ef_popm_start_money, ld_metal_accounts_values.txt)
+zz_ef_pop_start_notes = {
+	value = zz_ef_pop_start_savings
+	subtract = zz_ef_pop_start_deposits
+	subtract = zz_ef_popm_start_money
+	min = 0
+}
 # ---- pops' deposits (the receiver) -------
 # Deposit rate: the key rate - 1.5 pp, at least 0.5% (the banks' margin).
 # The banks' margin (1.10 evening, the user: cash and deposits move with the
