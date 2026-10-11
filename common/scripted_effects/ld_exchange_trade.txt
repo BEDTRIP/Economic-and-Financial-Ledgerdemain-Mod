@@ -1398,13 +1398,16 @@ zz_ef_xch_cross_fund_m = {
 	}
 	if = {
 		limit = { var:zz_ef_t_xc > 0 }
-		ordered_country = {
+		ordered_in_global_list = {
+			variable = zz_ef_xr_list
 			limit = {
-				has_variable = zz_ef_xr_on
 				has_variable = zz_ef_xr_room
 				var:zz_ef_xr_room > 0
 			}
 			order_by = var:zz_ef_xr_room
+			# one fund -- without max the body runs for every one in the order (an engine fact)
+			max = 1
+			check_range_bounds = no
 			# the room in gold at its bid against the rest's value
 			set_variable = {
 				name = zz_ef_t_xf
