@@ -1105,12 +1105,12 @@ zz_ef_fx_metal_update = {
 # A seller redeems a currency in crisis for the
 # issuer's metal (sell_<currency>_currency_crisis, 01_economic_scripted_effects.txt). SELLER scope; var:zz_ef_crisis_due =
 # the holdings at the issuer's parity, in the issuer's metal. The issuer pays
-# from its CB capital's stock, at most what it holds; the seller gets it in
-# its own standard's metal at the market rate (silver_to_gold_rate). Was:
-# the issuer's metal set to 0, the sellers' stocks to 0, nobody paid.
+# from its CB capital's stock, at most what it holds; the seller gets the same metal (Д.R8в.28: metal does not turn
+# into the other -- its cover counts both at the world's price).
 zz_ef_crisis_redeem = {
 	set_variable = { name = zz_ef_crisis_paid value = 0 }
-	set_variable = { name = zz_ef_crisis_got value = 0 }
+	set_variable = { name = zz_ef_crisis_got_s value = 0 }
+	set_variable = { name = zz_ef_crisis_got_g value = 0 }
 	if = {
 		limit = {
 			scope:overrated_currency_country_owner = { zz_ef_metal_silver = yes }
@@ -1127,11 +1127,7 @@ zz_ef_crisis_redeem = {
 		scope:central_bank_site_overrated_currency_owner = {
 			change_variable = { name = silver_state_1 subtract = scope:seller_root.var:zz_ef_crisis_paid }
 		}
-		set_variable = { name = zz_ef_crisis_got value = var:zz_ef_crisis_paid }
-		if = {
-			limit = { NOT = { zz_ef_metal_silver = yes } }
-			change_variable = { name = zz_ef_crisis_got multiply = silver_to_gold_rate }
-		}
+		set_variable = { name = zz_ef_crisis_got_s value = var:zz_ef_crisis_paid }
 	}
 	else_if = {
 		limit = {
@@ -1149,29 +1145,22 @@ zz_ef_crisis_redeem = {
 		scope:central_bank_site_overrated_currency_owner = {
 			change_variable = { name = gold_state_1 subtract = scope:seller_root.var:zz_ef_crisis_paid }
 		}
-		set_variable = { name = zz_ef_crisis_got value = var:zz_ef_crisis_paid }
-		if = {
-			limit = { zz_ef_metal_silver = yes }
-			change_variable = { name = zz_ef_crisis_got multiply = gold_to_silver_rate }
-		}
+		set_variable = { name = zz_ef_crisis_got_g value = var:zz_ef_crisis_paid }
 	}
 	scope:central_bank_site_root = {
 		if = {
-			limit = { owner = { zz_ef_metal_silver = yes } }
-			if = {
-				limit = { NOT = { has_variable = silver_state_1 } }
-				set_variable = { name = silver_state_1 value = 0 }
-			}
-			change_variable = { name = silver_state_1 add = scope:seller_root.var:zz_ef_crisis_got }
+			limit = { NOT = { has_variable = silver_state_1 } }
+			set_variable = { name = silver_state_1 value = 0 }
 		}
-		else = {
-			if = {
-				limit = { NOT = { has_variable = gold_state_1 } }
-				set_variable = { name = gold_state_1 value = 0 }
-			}
-			change_variable = { name = gold_state_1 add = scope:seller_root.var:zz_ef_crisis_got }
+		if = {
+			limit = { NOT = { has_variable = gold_state_1 } }
+			set_variable = { name = gold_state_1 value = 0 }
 		}
+		change_variable = { name = silver_state_1 add = scope:seller_root.var:zz_ef_crisis_got_s }
+		change_variable = { name = gold_state_1 add = scope:seller_root.var:zz_ef_crisis_got_g }
 	}
+	remove_variable = zz_ef_crisis_got_s
+	remove_variable = zz_ef_crisis_got_g
 	if = {
 		limit = { var:zz_ef_crisis_due > 0 }
 		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFC|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|due [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_crisis_due')|0]|paid [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_crisis_paid')|0]" }

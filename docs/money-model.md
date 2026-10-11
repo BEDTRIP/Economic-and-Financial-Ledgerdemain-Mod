@@ -28,8 +28,8 @@
 - `common/scripted_triggers/ld_metal_triggers.txt` — `zz_ef_cb_metal_standard` (ЦБ на стандарте с металлом);
   `zz_ef_metal_gold/_silver/_bimet` — металл стандарта по закону (у внешневалютного — по закону якоря
   `var:zz_ef_anchor`), `zz_ef_exchange_std` (Д.R8а.6).
-- `common/scripted_effects/ld_anchor.txt` — `zz_ef_anchor_update` (якорь внешневалютного), `zz_ef_anchor_metal_step`
-  (запасы ЦБ — в металл якоря).
+- `common/scripted_effects/ld_anchor.txt` — `zz_ef_anchor_update` (якорь внешневалютного; запасы ЦБ подданного остаются
+  как есть, Д.R8в.28).
 - `common/script_values/ld_metal_accounts_values.txt` — единицы металла, нормы резерва, покупки через модификаторы
   зданий, продажа ЦБ, выкуп, мировые суммы.
 - `common/scripted_effects/ld_money_log_rest.txt` — сгенерированный `debug_log` «прочее» карточек (`EFO`); не править

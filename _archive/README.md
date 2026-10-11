@@ -133,3 +133,4 @@ _archive/<механизм>/
 | Самосоздание финцентров E&F (`macro_facilities_on_action_fc`, `macro_facilities_fc_<x>`, `has_second_financial_center`, `has_tech_financial_center_but_no_building_financial_center`) | `ef_fc_spawners/` | вызовы в старте, годовом пульсе, технологии, `reset_building`, после краха |
 | Значения финцентра по видам `has_building_financial_centre_<x>(_custom_location)` | `ef_fc_type_values/` | ничего — читатели переписаны |
 | Объекты валют таблицы ЦБ E&F `currency_import_export_value_<cur>_03` | `ef_cbfx_currency_objects/` | 95 блоков `set_global_variable` в истории |
+| Пересчёт резервов подданного в металл якоря `zz_ef_anchor_metal_step` | `ld_anchor_metal_conversion/` | определение и вызов в `zz_ef_anchor_update` (`ld_anchor.txt`) |
