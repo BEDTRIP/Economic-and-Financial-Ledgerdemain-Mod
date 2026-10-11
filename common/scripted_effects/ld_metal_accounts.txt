@@ -89,13 +89,13 @@ zz_ef_metal_start_step = {
 		limit = { var:zz_ef_ms_ef > var:zz_ef_ms_pop }
 		set_variable = { name = zz_ef_ms_pop value = var:zz_ef_ms_ef }
 	}
-	set_variable = { name = zz_ef_popm_gold value = var:zz_ef_ms_pop }
-	change_variable = { name = zz_ef_popm_gold multiply = { value = 1 subtract = zz_ef_metal_silver_share } }
-	set_variable = { name = zz_ef_popm_silver value = var:zz_ef_ms_pop }
-	change_variable = { name = zz_ef_popm_silver multiply = zz_ef_metal_silver_share }
-	change_variable = { name = zz_ef_popm_silver multiply = gold_to_silver_rate }
-	zz_ef_wm_add = { KEY = start_gold VALUE = var:zz_ef_popm_gold }
-	zz_ef_wm_add = { KEY = start_silver VALUE = var:zz_ef_popm_silver }
+	# added to what the accounts hold: a country that inherited metal before its own start keeps it (ld_subject_metal.txt)
+	set_variable = { name = zz_ef_ms_g value = var:zz_ef_ms_pop }
+	change_variable = { name = zz_ef_ms_g multiply = { value = 1 subtract = zz_ef_metal_silver_share } }
+	set_variable = { name = zz_ef_ms_s value = var:zz_ef_ms_pop }
+	change_variable = { name = zz_ef_ms_s multiply = zz_ef_metal_silver_share }
+	change_variable = { name = zz_ef_ms_s multiply = gold_to_silver_rate }
+	zz_ef_metal_start_add = { ACC = popm }
 	set_variable = { name = zz_ef_ms_what value = 1 }
 	zz_ef_metal_start_log = yes
 	remove_variable = zz_ef_ms_pop
@@ -217,19 +217,31 @@ zz_ef_metal_start_cb_after = {
 }
 
 # The first receiver, after the start deposits (zz_ef_pop_savings_step): the banks' metal = the reserve norm x the
+# Country scope: the start's metal var:zz_ef_ms_g / _s into the accounts zz_ef_$ACC$_gold / _silver (added) and the
+# world's start line.
+zz_ef_metal_start_add = {
+	if = { limit = { NOT = { has_variable = zz_ef_$ACC$_gold } } set_variable = { name = zz_ef_$ACC$_gold value = 0 } }
+	if = { limit = { NOT = { has_variable = zz_ef_$ACC$_silver } } set_variable = { name = zz_ef_$ACC$_silver value = 0 } }
+	change_variable = { name = zz_ef_$ACC$_gold add = var:zz_ef_ms_g }
+	change_variable = { name = zz_ef_$ACC$_silver add = var:zz_ef_ms_s }
+	zz_ef_wm_add = { KEY = start_gold VALUE = var:zz_ef_ms_g }
+	zz_ef_wm_add = { KEY = start_silver VALUE = var:zz_ef_ms_s }
+	remove_variable = zz_ef_ms_g
+	remove_variable = zz_ef_ms_s
+}
+
 # deposits, in the standard's metal.
 zz_ef_metal_start_banks = {
 	set_variable = { name = zz_ef_ms_bank value = zz_ef_pop_deposits }
 	change_variable = { name = zz_ef_ms_bank multiply = zz_ef_reserve_norm }
 	change_variable = { name = zz_ef_ms_bank multiply = zz_ef_gold_per_money_par }
-	set_variable = { name = zz_ef_bankm_gold value = var:zz_ef_ms_bank }
-	change_variable = { name = zz_ef_bankm_gold multiply = { value = 1 subtract = zz_ef_metal_silver_share } }
-	set_variable = { name = zz_ef_bankm_silver value = var:zz_ef_ms_bank }
-	change_variable = { name = zz_ef_bankm_silver multiply = zz_ef_metal_silver_share }
-	change_variable = { name = zz_ef_bankm_silver multiply = gold_to_silver_rate }
+	set_variable = { name = zz_ef_ms_g value = var:zz_ef_ms_bank }
+	change_variable = { name = zz_ef_ms_g multiply = { value = 1 subtract = zz_ef_metal_silver_share } }
+	set_variable = { name = zz_ef_ms_s value = var:zz_ef_ms_bank }
+	change_variable = { name = zz_ef_ms_s multiply = zz_ef_metal_silver_share }
+	change_variable = { name = zz_ef_ms_s multiply = gold_to_silver_rate }
 	remove_variable = zz_ef_ms_bank
-	zz_ef_wm_add = { KEY = start_gold VALUE = var:zz_ef_bankm_gold }
-	zz_ef_wm_add = { KEY = start_silver VALUE = var:zz_ef_bankm_silver }
+	zz_ef_metal_start_add = { ACC = bankm }
 	set_variable = { name = zz_ef_ms_what value = 2 }
 	zz_ef_metal_start_log = yes
 }
