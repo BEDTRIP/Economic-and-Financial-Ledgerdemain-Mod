@@ -573,10 +573,28 @@ zz_ef_deposit_margin = {
 	multiply = 0.01
 	add = 0.015
 }
+# Д.R4а.7: the deposits earn at most what the banks earn on them -- the loans' interest (consumer and business credit at
+# zz_ef_cc_rate) over the deposits, less zz_ef_deposit_income_margin; the banks' capital does not go under 0 paying it
 zz_ef_deposit_rate = {
 	value = zz_ef_money_rate
 	subtract = zz_ef_deposit_margin
+	max = {
+		value = zz_ef_bank_loan_yield
+		subtract = zz_ef_deposit_income_margin
+	}
 	min = 0
+}
+zz_ef_deposit_income_margin = 0.01
+# the banks' interest income a year per unit of deposits (0 without deposits -- nothing to pay then)
+zz_ef_bank_loan_yield = {
+	value = 0
+	if = {
+		limit = { zz_ef_pop_deposits > 0 }
+		value = zz_ef_cc_debt
+		add = zz_ef_bc_debt
+		multiply = zz_ef_cc_rate
+		divide = zz_ef_pop_deposits
+	}
 }
 zz_ef_pop_savings = {
 	value = 0
