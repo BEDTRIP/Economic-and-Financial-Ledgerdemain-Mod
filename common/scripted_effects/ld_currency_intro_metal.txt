@@ -85,7 +85,7 @@ zz_ef_cur_intro_after = {
 			change_variable = { name = money_value_target_1 multiply = silver_to_gold_rate }
 		}
 	}
-	if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|cur_intro_parity|std_before [THIS.GetCountry.MakeScope.Var('zz_ef_cur_intro_std').GetValue|0]|par_before [THIS.GetCountry.MakeScope.Var('zz_ef_cur_intro_par').GetValue|4]|std [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_std_code')|0]|parity [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_valuation')|4]" }
+	if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|cur_intro_parity|std_before [THIS.GetCountry.MakeScope.Var('zz_ef_cur_intro_std').GetValue|0]|par_before [THIS.GetCountry.MakeScope.Var('zz_ef_cur_intro_par').GetValue|4]|std [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_std_code')|0]|parity [THIS.GetCountry.MakeScope.Var('money_value_target_1').GetValue|4]" }
 	remove_variable = zz_ef_cur_intro_std
 	remove_variable = zz_ef_cur_intro_par
 	# the new currency as data (scripted_effects/ld_currency_var.txt)

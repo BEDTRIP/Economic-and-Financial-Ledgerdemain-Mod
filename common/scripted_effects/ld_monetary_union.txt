@@ -62,6 +62,7 @@ zz_ef_mu_head_pick = {
 				zz_ef_mu_cb = yes
 			}
 			order_by = zz_ef_mu_head_score
+			max = 1
 			save_temporary_scope_as = zz_ef_mu_h
 		}
 		every_country = {
@@ -92,7 +93,7 @@ zz_ef_mu_head_pick = {
 # A country leaves its union: its own currency (var:zz_ef_mu_cur_own) at the union's parity (its standard and policy stay as
 # they are).
 zz_ef_mu_leave = {
-	if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|mu_leave|union [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mu_id_v')|0]|parity [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_valuation')|4]" }
+	if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|mu_leave|union [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mu_id_v')|0]|parity [THIS.GetCountry.MakeScope.Var('money_value_target_1').GetValue|4]" }
 	remove_variable = zz_ef_mu_id
 	if = { limit = { has_variable = zz_ef_mu_head } remove_variable = zz_ef_mu_head }
 	if = { limit = { has_variable = zz_ef_mu_link } remove_variable = zz_ef_mu_link }
@@ -239,7 +240,7 @@ zz_ef_mu_sync = {
 			zz_ef_logs_on = yes
 			NOT = { var:zz_ef_mu_par_old = var:money_value_target_1 }
 		}
-		debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|mu_sync|union [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mu_id_v')|0]|parity_old [THIS.GetCountry.MakeScope.Var('zz_ef_mu_par_old').GetValue|4]|parity [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_valuation')|4]|std [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_std_code')|0]"
+		debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|mu_sync|union [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mu_id_v')|0]|parity_old [THIS.GetCountry.MakeScope.Var('zz_ef_mu_par_old').GetValue|4]|parity [THIS.GetCountry.MakeScope.Var('money_value_target_1').GetValue|4]|std [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_std_code')|0]"
 	}
 	remove_variable = zz_ef_mu_par_old
 }
@@ -320,7 +321,7 @@ zz_ef_mu_world_step = {
 		limit = { zz_ef_logs_on = yes }
 		every_country = {
 			limit = { zz_ef_mu_member = yes }
-			debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|mu|union [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mu_id_v')|0]|head [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mu_is_head_v')|0]|cover [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_cover')|3]|parity [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_valuation')|4]|std [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_std_code')|0]|prestige [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mu_prestige_v')|0]"
+			debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|mu|union [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mu_id_v')|0]|head [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mu_is_head_v')|0]|cover [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_cover')|3]|parity [THIS.GetCountry.MakeScope.Var('money_value_target_1').GetValue|4]|std [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_std_code')|0]|prestige [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mu_prestige_v')|0]"
 		}
 	}
 }
@@ -346,6 +347,7 @@ zz_ef_mu_struggle = {
 				zz_ef_mu_cb = yes
 			}
 			order_by = prestige
+			max = 1
 			save_temporary_scope_as = zz_ef_mu_c
 		}
 		if = {
