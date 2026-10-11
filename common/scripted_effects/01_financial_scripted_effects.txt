@@ -656,8 +656,10 @@ ai_credit_at_central_bank = {
 			is_at_war = no
 		}
 		# (Д.R2.8) the CB's loan to the treasury -- credit_at_central_bank is the ledger's account, the
-		# treasury's money is ours (marked); the amount is fixed first (it reads the treasury)
-		set_variable = { name = zz_ef_t_cbl value = national_debt_allowed_in_gold }
+		# treasury's money is ours (marked); the amount is fixed first (it reads the treasury): the treasury up to
+		# zz_ef_cbl_target_share of its reserve limit, within the debt allowed (Д.R8в.23) -- the engine burns money
+		# above the limit
+		set_variable = { name = zz_ef_t_cbl value = zz_ef_cbl_take_v }
 		zz_ef_eng_add_treasury = { V = var:zz_ef_t_cbl }
 		every_scope_state = {
 			if = {
@@ -666,13 +668,19 @@ ai_credit_at_central_bank = {
 				}
 				change_variable = {
 					name = stockpiling_bond_var_state_1
-					add = owner.bond_producted
+					add = {
+						value = owner.var:zz_ef_t_cbl
+						divide = owner.bond_price
+					}
 				}
 			}
 		}
 		change_variable = {
 			name = government_loan
-			add = national_debt_allowed_in_currency
+			add = {
+				value = var:zz_ef_t_cbl
+				divide = money_value_rapported_inflation
+			}
 		}
 		change_variable = {
 			name = credit_at_central_bank
