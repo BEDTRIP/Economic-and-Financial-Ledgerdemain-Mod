@@ -438,33 +438,37 @@ zz_ef_wm_sum_cb_silver = {
 zz_ef_wm_sum_bank_gold = {
 	value = 0
 	every_country = { add = zz_ef_bankm_gold }
-	every_state = {
-		limit = { zz_ef_mh_gone_mark = yes }
-		var:zz_ef_mh_owner = { add = zz_ef_bankm_gold }
+	every_in_global_list = {
+		variable = zz_ef_mh_list
+		limit = { is_country_alive = no }
+		add = zz_ef_bankm_gold
 	}
 }
 zz_ef_wm_sum_bank_silver = {
 	value = 0
 	every_country = { add = zz_ef_bankm_silver }
-	every_state = {
-		limit = { zz_ef_mh_gone_mark = yes }
-		var:zz_ef_mh_owner = { add = zz_ef_bankm_silver }
+	every_in_global_list = {
+		variable = zz_ef_mh_list
+		limit = { is_country_alive = no }
+		add = zz_ef_bankm_silver
 	}
 }
 zz_ef_wm_sum_pop_gold = {
 	value = 0
 	every_country = { add = zz_ef_popm_gold }
-	every_state = {
-		limit = { zz_ef_mh_gone_mark = yes }
-		var:zz_ef_mh_owner = { add = zz_ef_popm_gold }
+	every_in_global_list = {
+		variable = zz_ef_mh_list
+		limit = { is_country_alive = no }
+		add = zz_ef_popm_gold
 	}
 }
 zz_ef_wm_sum_pop_silver = {
 	value = 0
 	every_country = { add = zz_ef_popm_silver }
-	every_state = {
-		limit = { zz_ef_mh_gone_mark = yes }
-		var:zz_ef_mh_owner = { add = zz_ef_popm_silver }
+	every_in_global_list = {
+		variable = zz_ef_mh_list
+		limit = { is_country_alive = no }
+		add = zz_ef_popm_silver
 	}
 }
 zz_ef_wm_v_start_gold = {

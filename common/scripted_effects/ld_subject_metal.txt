@@ -50,30 +50,39 @@ zz_ef_cb_state_owner_step = {
 # (var:zz_ef_popm_* / zz_ef_bankm_*) -- a country that is gone (annexed, a revolt put down, a union) took them with it,
 # and the world's line of metal lost them (r1011_173236: 7 jumps of silver, each the week after a country was gone).
 # No on_action marks a country gone, but a gone country stays an object with its variables (exists = yes,
-# is_country_alive = no): every living country marks its capital (var:zz_ef_mh_owner), and the owner of a marked state
-# whose country is gone takes that country's accounts as they are and zeroes them. In the world's pass, not the
+# is_country_alive = no). Every living country is in global list zz_ef_mh_list and keeps its capital's state region
+# (var:zz_ef_mh_region -- a region stays, a state may not: annexation merges split states); a gone one's accounts go,
+# as they are, to the owner of a state of that region (zeroed with the gone one). In the world's pass, not the
 # countries' steps: a country of role V does not step, as keeper or as heir.
 zz_ef_metal_heir_world = {
-	every_state = {
-		limit = { has_variable = zz_ef_mh_owner }
+	every_in_global_list = {
+		variable = zz_ef_mh_list
+		limit = { is_country_alive = no }
+		save_scope_as = zz_ef_mh_dead
 		if = {
-			limit = { zz_ef_mh_gone_mark = yes }
-			var:zz_ef_mh_owner = { save_scope_as = zz_ef_mh_dead }
-			owner = {
-				zz_ef_metal_heir_take = { V = popm_gold }
-				zz_ef_metal_heir_take = { V = popm_silver }
-				zz_ef_metal_heir_take = { V = bankm_gold }
-				zz_ef_metal_heir_take = { V = bankm_silver }
-				if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|metal_heir|pop_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_popm_gold')|0]|pop_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_popm_silver')|0]|bank_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bankm_gold')|0]|bank_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bankm_silver')|0]" }
+			limit = { has_variable = zz_ef_mh_region }
+			var:zz_ef_mh_region = {
+				random_scope_state = {
+					owner = {
+						zz_ef_metal_heir_take = { V = popm_gold }
+						zz_ef_metal_heir_take = { V = popm_silver }
+						zz_ef_metal_heir_take = { V = bankm_gold }
+						zz_ef_metal_heir_take = { V = bankm_silver }
+						if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|metal_heir|pop_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_popm_gold')|0]|pop_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_popm_silver')|0]|bank_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bankm_gold')|0]|bank_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bankm_silver')|0]" }
+					}
+				}
 			}
 		}
-		# one mark a country, on its capital (below)
-		remove_variable = zz_ef_mh_owner
+		# taken -- or no heir to take it (the region has no state); a country brought back (released) comes back in below
+		remove_list_global_variable = { name = zz_ef_mh_list target = scope:zz_ef_mh_dead }
 	}
 	every_country = {
 		limit = { exists = capital }
-		save_scope_as = zz_ef_mh_keeper
-		capital = { set_variable = { name = zz_ef_mh_owner value = scope:zz_ef_mh_keeper } }
+		set_variable = { name = zz_ef_mh_region value = capital.state_region }
+		if = {
+			limit = { NOT = { is_target_in_global_variable_list = { name = zz_ef_mh_list target = this } } }
+			add_to_global_variable_list = { name = zz_ef_mh_list target = this }
+		}
 	}
 }
 # Country scope (the heir), scope:zz_ef_mh_dead -- the gone country: var:zz_ef_$V$ += its account, the account -> 0.
