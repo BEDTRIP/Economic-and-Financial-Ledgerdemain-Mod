@@ -126,9 +126,15 @@ zz_ef_money_model_step = {
 	# the interest -- the banks pay it (their capital) to the CB; the CB's profit (Д.R4а.5): a state CB's -- the
 	# treasury's, a private one's -- its owners', the capitalists' deposits (no company of the CB: the probe Р25)
 	if = {
-		limit = { has_law = law_type:law_ld_cb_private }
+		limit = {
+			has_law = law_type:law_ld_cb_private
+			# after the pops' savings start (zz_ef_pop_savings_step): before it the deposits do not exist, and a
+			# change_variable of a missing variable leaves it empty for good (an engine fact); var:zz_ef_pop_savings is
+			# also the start's own "not yet" mark
+			has_variable = zz_ef_pop_savings
+			has_variable = zz_ef_pop_deposits
+		}
 		zz_ef_post = { FROM = zz_ef_bank_capital TO = zz_ef_pop_deposits V = var:zz_ef_f_cb_interest }
-		if = { limit = { NOT = { has_variable = zz_ef_pop_savings } } set_variable = { name = zz_ef_pop_savings value = 0 } }
 		change_variable = { name = zz_ef_pop_savings add = var:zz_ef_f_cb_interest }
 	}
 	else = {
