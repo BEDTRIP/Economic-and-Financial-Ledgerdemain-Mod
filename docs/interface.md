@@ -150,7 +150,7 @@ GUI-тип регистрирует первый файл по имени (ASCII
   определён только `world_currency_…` в `09_ef_other.txt`), 9 вызовов `gdpg_sort_by_country_gdp` (там же; sgui —
   `gdp_sort_by_country_gdp`), `je_meiji_restoration_get_faction_sgui` (`states_panel.gui`, ванильное имя). Клик не
   выполняет эффекта (ожидается ошибка поиска sgui в `error.log`; в игре не проверено).
-- `topbar.gui` → `currency_symbol_top_bar` (один `GetCustom('currency_symbol')` — «<две буквы страны> <знак слова>»,
+- `topbar.gui` → `currency_symbol_top_bar` (один `GetCustom('currency_symbol')` — знак или код валюты, Д.R8в.20,
   `currencies.md`).
 - Комментарий в `common/game_concepts/ld_cb_rate_concepts.txt` называет `zz_ef_cb_rate_panel_l_*.yml`; файлы локализации
   — `ld_cb_rate_panel_l_*.yml`.

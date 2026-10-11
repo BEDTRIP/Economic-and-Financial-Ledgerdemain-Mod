@@ -706,7 +706,7 @@ types zz_ef_economy_panel
 									textbox = {
 										datacontext = "[Scope.GetCountry]"
 
-										raw_text = "1 [Country.GetCustom('currency_ISO_4217')]([Country.GetCustom('currency_symbol')]) = [Country.MakeScope.ScriptValue('money_value_rapported_inflation')|+D] #! [Country.GetCustom('monetary_system')]"
+										raw_text = "1 [Country.GetCustom('currency_symbol')] = [Country.MakeScope.ScriptValue('money_value_rapported_inflation')|+D] #! [Country.GetCustom('monetary_system')]"
 										default_format = "#white #bold"
 										autoresize = yes
 										fontsize = 28
@@ -779,7 +779,7 @@ types zz_ef_economy_panel
 										textbox = {
 											datacontext = "[Scope.GetCountry]"
 
-											raw_text = "1 [Country.GetCustom('currency_ISO_4217')]([Country.GetCustom('currency_symbol')]) = [Country.MakeScope.ScriptValue('money_value_rapported_inflation')|+D] #! [Country.GetCustom('monetary_system')]"
+											raw_text = "1 [Country.GetCustom('currency_symbol')] = [Country.MakeScope.ScriptValue('money_value_rapported_inflation')|+D] #! [Country.GetCustom('monetary_system')]"
 											default_format = "#white #bold"
 											autoresize = yes
 											fontsize = 15
@@ -845,7 +845,7 @@ types zz_ef_economy_panel
 										textbox = {
 											datacontext = "[Scope.GetCountry]"
 
-											raw_text = "1 [Country.GetCustom('currency_ISO_4217')]([Country.GetCustom('currency_symbol')]) = [Country.MakeScope.ScriptValue('money_value_rapported_inflation')|+D] #! [Country.GetCustom('monetary_system')]"
+											raw_text = "1 [Country.GetCustom('currency_symbol')] = [Country.MakeScope.ScriptValue('money_value_rapported_inflation')|+D] #! [Country.GetCustom('monetary_system')]"
 											default_format = "#white #bold"
 											autoresize = yes
 											fontsize = 15
@@ -945,7 +945,7 @@ types zz_ef_economy_panel
 									textbox = {
 										using = fontsize_large
 										autoresize = yes
-										raw_text = "1 [Country.GetCustom('currency_ISO_4217')]([Country.GetCustom('currency_symbol')]) = [Country.MakeScope.ScriptValue('money_value_rapported_inflation')|+D] #! [Country.GetCustom('monetary_system')]"
+										raw_text = "1 [Country.GetCustom('currency_symbol')] = [Country.MakeScope.ScriptValue('money_value_rapported_inflation')|+D] #! [Country.GetCustom('monetary_system')]"
 										align = hcenter|nobaseline
 										elide = right
 										parentanchor = hcenter
@@ -954,7 +954,7 @@ types zz_ef_economy_panel
 									textbox = {
 										using = fontsize_large
 										autoresize = yes
-										raw_text = "1 [Country.GetCustom('currency_ISO_4217')] ([Country.GetCustom('currency_symbol')]) = #v [Country.MakeScope.ScriptValue('exchange_rate_for_international_trade_buy_for_target_market_panel')|+D] #! [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_ISO_4217')] ([GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_symbol')])"
+										raw_text = "1 [Country.GetCustom('currency_symbol')] = #v [Country.MakeScope.ScriptValue('exchange_rate_for_international_trade_buy_for_target_market_panel')|+D] #! [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_symbol')]"
 										align = hcenter|nobaseline
 										elide = right
 										parentanchor = hcenter
@@ -1020,7 +1020,7 @@ types zz_ef_economy_panel
 									textbox = {
 										using = fontsize_large
 										autoresize = yes
-										raw_text = " 1 [GetPlayer.GetCustom('currency_ISO_4217')] ([GetPlayer.GetCustom('currency_symbol')]) = [GetPlayer.MakeScope.ScriptValue('money_value_rapported_inflation')|+D] [GetPlayer.GetCustom('monetary_system')]"
+										raw_text = " 1 [GetPlayer.GetCustom('currency_symbol')] = [GetPlayer.MakeScope.ScriptValue('money_value_rapported_inflation')|+D] [GetPlayer.GetCustom('monetary_system')]"
 										align = hcenter|nobaseline
 										elide = right
 										parentanchor = hcenter
@@ -1029,7 +1029,7 @@ types zz_ef_economy_panel
 									textbox = {
 										using = fontsize_large
 										autoresize = yes
-										raw_text = "1 [GetPlayer.GetCustom('currency_ISO_4217')] ([GetPlayer.GetCustom('currency_symbol')]) = #v [Country.MakeScope.ScriptValue('exchange_rate_for_international_trade_buy_market_panel')|+D] #! [Country.GetCustom('currency_ISO_4217')]([Country.GetCustom('currency_symbol')])"
+										raw_text = "1 [GetPlayer.GetCustom('currency_symbol')] = #v [Country.MakeScope.ScriptValue('exchange_rate_for_international_trade_buy_market_panel')|+D] #! [Country.GetCustom('currency_symbol')]"
 										align = hcenter|nobaseline
 										elide = right
 										parentanchor = hcenter
@@ -1272,7 +1272,7 @@ types zz_ef_economy_panel
 								}
 								textbox = {
 									autoresize = yes
-									text = "[GetPlayer.GetCustom('currency_ISO_4217')]" 
+									text = "[GetPlayer.GetCustom('currency_symbol')]" 
 									default_format = "#white #bold"
 									align = hcenter
 									parentanchor = hcenter
@@ -5637,7 +5637,7 @@ types zz_ef_economy_panel
 					parentanchor = hcenter
 
 					textbox = {
-						raw_text = "1 [GetPlayer.GetCustom('currency_ISO_4217')] ([GetPlayer.GetCustom('currency_symbol')]) = [GetPlayer.MakeScope.Var('money_value_target_2').GetValue] [GetPlayer.GetCustom('monetary_system')]"
+						raw_text = "1 [GetPlayer.GetCustom('currency_symbol')] = [GetPlayer.MakeScope.Var('money_value_target_2').GetValue] [GetPlayer.GetCustom('monetary_system')]"
 
 						parentanchor = hcenter
 						align = hcenter|nobaseline
@@ -5649,7 +5649,7 @@ types zz_ef_economy_panel
 						allow_outside = no
 					}
 					textbox = {
-						raw_text = "1 [GetPlayer.GetCustom('currency_ISO_4217')] ([GetPlayer.GetCustom('currency_symbol')]) =  [GetPlayer.MakeScope.ScriptValue('money_value_target_2_in_gold')|D] @gold!"
+						raw_text = "1 [GetPlayer.GetCustom('currency_symbol')] =  [GetPlayer.MakeScope.ScriptValue('money_value_target_2_in_gold')|D] @gold!"
 
 						parentanchor = hcenter
 						align = hcenter|nobaseline
@@ -6454,7 +6454,7 @@ types zz_ef_economy_panel
 					parentanchor = hcenter
 
 					textbox = {
-						raw_text = "1 [GetPlayer.GetCustom('currency_ISO_4217')] ([GetPlayer.GetCustom('currency_symbol')]) = #p 1#!/#p [GetPlayer.MakeScope.Var('parity_scaled_by_the_overlord').GetValue]#! @parity!"
+						raw_text = "1 [GetPlayer.GetCustom('currency_symbol')] = #p 1#!/#p [GetPlayer.MakeScope.Var('parity_scaled_by_the_overlord').GetValue]#! @parity!"
 						parentanchor = hcenter
 						align = hcenter|nobaseline
 
@@ -8946,7 +8946,7 @@ types zz_ef_economy_panel
 										layoutpolicy_horizontal = preferred
 										align = hcenter|nobaseline
 										size = { 105 20 }
-										raw_text = "[GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_ISO_4217')]/XXX"
+										raw_text = "[GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_code')]/XXX"
 										datacontext = "[GetScriptedGui('cv_sort_by_money_supply')]"
 										onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"
 									}
@@ -8954,7 +8954,7 @@ types zz_ef_economy_panel
 										layoutpolicy_horizontal = preferred
 										align = hcenter|nobaseline
 										size = { 105 20 }
-										raw_text = "XXX/[GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_ISO_4217')]"
+										raw_text = "XXX/[GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_code')]"
 										datacontext = "[GetScriptedGui('cv_sort_by_national_capacity')]"
 										onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"
 									}
@@ -8998,7 +8998,7 @@ types zz_ef_economy_panel
 
 												datacontext = "[Scope.GetCountry]"
 
-												raw_text = " 1 [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_ISO_4217')] = #v [Country.MakeScope.ScriptValue('exchange_rate_1_XXX')|3+] #! [Country.GetCustom('currency_ISO_4217')]"
+												raw_text = " 1 [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_symbol')] = #v [Country.MakeScope.ScriptValue('exchange_rate_1_XXX')|3+] #! [Country.GetCustom('currency_symbol')]"
 												margin_left = 12
 												margin_bottom = 1
 												elide = right
@@ -9015,7 +9015,7 @@ types zz_ef_economy_panel
 
 												datacontext = "[Scope.GetCountry]"
 
-												raw_text = "1 [Country.GetCustom('currency_ISO_4217')] = #v [Country.MakeScope.ScriptValue('exchange_rate_XXX_1')|3+] #! [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_ISO_4217')]"
+												raw_text = "1 [Country.GetCustom('currency_symbol')] = #v [Country.MakeScope.ScriptValue('exchange_rate_XXX_1')|3+] #! [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_symbol')]"
 												margin_left = 12
 												margin_bottom = 1
 												elide = right

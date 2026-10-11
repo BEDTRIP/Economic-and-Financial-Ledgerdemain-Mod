@@ -479,9 +479,9 @@ alert_fso_alert_name:0 "Доступно действие в Управлени�
 
   monetary_parity_is:0 "Монетарный [concept_parity]: [GetPlayer.MakeScope.ScriptValue('money_value_raported_to_overrlord')|D]" # [GetPlayer.GetOverlord.MakeScope.Var('parity_scaled_by_the_overlord').GetValue]#! @parity!
 
-  monetary_parity_1:0 " 1 [GetPlayer.GetCustom('currency_ISO_4217')] ([GetPlayer.GetCustom('currency_symbol')]) = [GetPlayer.MakeScope.ScriptValue('money_value_raported_to_overrlord')|D] [GetPlayer.GetMarket.GetOwner.GetCustom('currency_ISO_4217')]([GetPlayer.GetMarket.GetOwner.GetCustom('currency_symbol')])"
+  monetary_parity_1:0 " 1 [GetPlayer.GetCustom('currency_symbol')] = [GetPlayer.MakeScope.ScriptValue('money_value_raported_to_overrlord')|D] [GetPlayer.GetMarket.GetOwner.GetCustom('currency_symbol')]"
 
-  monetary_parity_2:0 "1 [GetPlayer.GetMarket.GetOwner.GetCustom('currency_ISO_4217')]([GetPlayer.GetMarket.GetOwner.GetCustom('currency_symbol')]) = [GetPlayer.MakeScope.ScriptValue('overrlord_money_value_in_subject_currency')|D] [GetPlayer.GetCustom('currency_ISO_4217')] ([GetPlayer.GetCustom('currency_symbol')])"
+  monetary_parity_2:0 "1 [GetPlayer.GetMarket.GetOwner.GetCustom('currency_symbol')] = [GetPlayer.MakeScope.ScriptValue('overrlord_money_value_in_subject_currency')|D] [GetPlayer.GetCustom('currency_symbol')]"
 
   currency_parity_laws:0 "Законы валютного [concept_parity]:"
   real_monetary_parity_after_inflation:0 "Денежный [concept_parity] после инфляции:"
@@ -707,7 +707,7 @@ alert_fso_alert_name:0 "Доступно действие в Управлени�
   currency_reference_in_gold_1:0 "Требуется для паритета"
   currency_reference_in_gold_2:0 "#T [GetPlayer.MakeScope.ScriptValue('amount_reference_currency_to_ensure_parity')|D] [GetPlayer.GetCustom('global_monetary_reference_currency_good')]#!"
 
-  national_currency_parity_with_global_monetary_reference:0 "1 [GetPlayer.GetCustom('currency_ISO_4217')] ([Country.GetCustom('currency_symbol')]) = #v [GetPlayer.MakeScope.Var('money_value_exchange_rate_with_reference_currency_fixe').GetValue|3+] #! [GetPlayer.GetCustom('global_monetary_reference_currency_ISO_4217')] ([GetPlayer.GetCustom('global_monetary_reference_texture')])"
+  national_currency_parity_with_global_monetary_reference:0 "1 [GetPlayer.GetCustom('currency_symbol')] = #v [GetPlayer.MakeScope.Var('money_value_exchange_rate_with_reference_currency_fixe').GetValue|3+] #! [GetPlayer.GetCustom('global_monetary_reference_currency_ISO_4217')] ([GetPlayer.GetCustom('global_monetary_reference_texture')])"
 
 
 
@@ -719,7 +719,7 @@ alert_fso_alert_name:0 "Доступно действие в Управлени�
 
   reference_currency_parity_with_national_currency_2:0 "1 [GetPlayer.GetCustom('global_monetary_reference_currency_ISO_4217')] ([GetPlayer.GetCustom('global_monetary_reference_texture')]) = [GetPlayer.MakeScope.ScriptValue('global_monetary_reference')|+D] @gold!"
 
-  reference_currency_parity_with_national_currency_3:0 "1 [GetPlayer.GetCustom('currency_ISO_4217')] ([Country.GetCustom('currency_symbol')]) = [GetPlayer.MakeScope.ScriptValue('money_value_target_with_the_reference_currency')|+D] @gold!"
+  reference_currency_parity_with_national_currency_3:0 "1 [GetPlayer.GetCustom('currency_symbol')] = [GetPlayer.MakeScope.ScriptValue('money_value_target_with_the_reference_currency')|+D] @gold!"
 
   after_new_money_value_target_set:0 "Изменение приведёт к валютному контролю на 2 года."
   after_new_money_value_target_set_1_year:0 "Смена денежного стандарта введёт валютный контроль и запретит дальнейшие изменения стандарта на 1 год."

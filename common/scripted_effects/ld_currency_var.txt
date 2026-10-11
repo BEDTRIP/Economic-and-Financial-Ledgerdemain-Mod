@@ -6,7 +6,7 @@
 # the model's per-currency ladders and currency_name / currency_symbol. Table: docs/currency-table.md.
 zz_ef_cur_set = {
 	zz_ef_cur_names = yes
-	if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|cur_nat|[THIS.GetCountry.GetCustom('currency_name')]" }
+	if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|cur_nat|[THIS.GetCountry.GetCustom('currency_name')]|code [THIS.GetCountry.GetCustom('currency_code')]|sign [THIS.GetCountry.GetCustom('currency_symbol')]" }
 	zz_ef_cur_par_update = yes
 }
 

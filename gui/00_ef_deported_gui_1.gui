@@ -128,7 +128,7 @@ types market_states_panel
 						textbox = {
 							using = fontsize_large
 							autoresize = yes
-							raw_text = "1 [GetPlayer.GetCustom('currency_ISO_4217')] ([GetPlayer.GetCustom('currency_symbol')]) = [GetPlayer.MakeScope.ScriptValue('money_value_rapported_inflation')|+D] @gold!"
+							raw_text = "1 [GetPlayer.GetCustom('currency_symbol')] = [GetPlayer.MakeScope.ScriptValue('money_value_rapported_inflation')|+D] @gold!"
 							align = Hcenter
 							elide = right
 							parentanchor = center
@@ -137,7 +137,7 @@ types market_states_panel
 						textbox = {
 							using = fontsize_large
 							autoresize = yes
-							raw_text = "1 [GetPlayer.GetCustom('currency_ISO_4217')] ([GetPlayer.GetCustom('currency_symbol')]) = #v [Market.GetOwner.MakeScope.ScriptValue('exchange_rate_for_international_trade_buy_market_panel')|+D] #! [Market.GetOwner.GetCustom('currency_ISO_4217')]([Market.GetOwner.GetCustom('currency_symbol')])"
+							raw_text = "1 [GetPlayer.GetCustom('currency_symbol')] = #v [Market.GetOwner.MakeScope.ScriptValue('exchange_rate_for_international_trade_buy_market_panel')|+D] #! [Market.GetOwner.GetCustom('currency_symbol')]"
 							align = Hcenter
 							elide = right
 							parentanchor = center
@@ -197,7 +197,7 @@ types market_states_panel
 						textbox = {
 							using = fontsize_large
 							autoresize = yes
-							raw_text = "1 [Market.GetOwner.GetCustom('currency_ISO_4217')]([Market.GetOwner.GetCustom('currency_symbol')]) = [Market.GetOwner.MakeScope.ScriptValue('money_value_rapported_inflation')|+D] #! [Market.GetOwner.GetCustom('monetary_system')]"
+							raw_text = "1 [Market.GetOwner.GetCustom('currency_symbol')] = [Market.GetOwner.MakeScope.ScriptValue('money_value_rapported_inflation')|+D] #! [Market.GetOwner.GetCustom('monetary_system')]"
 							align = Hcenter
 							elide = right
 							parentanchor = center
@@ -205,7 +205,7 @@ types market_states_panel
 						textbox = {
 							using = fontsize_large
 							autoresize = yes
-							raw_text = "1 [Market.GetOwner.GetCustom('currency_ISO_4217')] ([Market.GetOwner.GetCustom('currency_symbol')]) = #v [Market.GetOwner.MakeScope.ScriptValue('exchange_rate_for_international_trade_buy_for_target_market_panel')|+D] #! [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_ISO_4217')] ([GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_symbol')])"
+							raw_text = "1 [Market.GetOwner.GetCustom('currency_symbol')] = #v [Market.GetOwner.MakeScope.ScriptValue('exchange_rate_for_international_trade_buy_for_target_market_panel')|+D] #! [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_symbol')]"
 							align = Hcenter
 							elide = right
 							parentanchor = center
@@ -854,7 +854,7 @@ types market_states_panel
 											textbox = {
 												using = fontsize_large
 												autoresize = yes
-												raw_text = "1 [GetPlayer.GetCustom('currency_ISO_4217')] ([GetPlayer.GetCustom('currency_symbol')]) = #v [GetPlayer.MakeScope.ScriptValue('money_value_in_gold')|D] @gold! #!"
+												raw_text = "1 [GetPlayer.GetCustom('currency_symbol')] = #v [GetPlayer.MakeScope.ScriptValue('money_value_in_gold')|D] @gold! #!"
 												parentanchor = hcenter
 												align = left
 												default_format = "#white #bold"
@@ -863,7 +863,7 @@ types market_states_panel
 											textbox = {
 												using = fontsize_large
 												autoresize = yes
-												raw_text = "1 @gold! = #v [GetPlayer.MakeScope.ScriptValue('gold_to_currency_rate')|D]#! [GetPlayer.GetCustom('currency_ISO_4217')] ([GetPlayer.GetCustom('currency_symbol')])"
+												raw_text = "1 @gold! = #v [GetPlayer.MakeScope.ScriptValue('gold_to_currency_rate')|D]#! [GetPlayer.GetCustom('currency_symbol')]"
 												parentanchor = hcenter
 												align = left
 												default_format = "#white #bold"
@@ -1299,9 +1299,9 @@ types market_states_panel
 											textbox = {
 												using = fontsize_large
 												autoresize = yes
-												raw_text = "[Market.GetOwner.MakeScope.ScriptValue('enough_foreign_currrency')|+D] [Market.GetOwner.GetCustom('currency_good')] - 1 [Market.GetOwner.GetCustom('currency_ISO_4217')] ([Market.GetOwner.GetCustom('currency_symbol')]) = #v [Market.GetOwner.MakeScope.ScriptValue('exchange_rate_for_international_trade_buy_for_target_market_panel')|+D] #! [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_ISO_4217')] ([GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_symbol')])"
+												raw_text = "[Market.GetOwner.MakeScope.ScriptValue('enough_foreign_currrency')|+D] [Market.GetOwner.GetCustom('currency_good')] - 1 [Market.GetOwner.GetCustom('currency_symbol')] = #v [Market.GetOwner.MakeScope.ScriptValue('exchange_rate_for_international_trade_buy_for_target_market_panel')|+D] #! [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_symbol')]"
 
-												#text = "[Market.GetOwner.MakeScope.ScriptValue('enough_foreign_currrency')|+D] [Market.GetOwner.GetCustom('currency_good')] - 1 [Market.GetOwner.GetCustom('currency_ISO_4217')] ([Market.GetOwner.GetCustom('currency_symbol')]) = #v [Market.GetOwner.MakeScope.ScriptValue('money_value')|+D] #![Market.GetOwner.GetCustom('monetary_system_partiel')]"
+												#text = "[Market.GetOwner.MakeScope.ScriptValue('enough_foreign_currrency')|+D] [Market.GetOwner.GetCustom('currency_good')] - 1 [Market.GetOwner.GetCustom('currency_symbol')] = #v [Market.GetOwner.MakeScope.ScriptValue('money_value')|+D] #![Market.GetOwner.GetCustom('monetary_system_partiel')]"
 												parentanchor = hcenter
 												align = left
 												default_format = "#white #bold"
@@ -1776,7 +1776,7 @@ types market_states_panel
 											textbox = {
 												using = fontsize_large
 												autoresize = yes
-												raw_text = "1 [GetPlayer.GetCustom('currency_ISO_4217')] ([GetPlayer.GetCustom('currency_symbol')]) = #v [GetPlayer.MakeScope.ScriptValue('money_value_in_gold')|D] @gold! #!"
+												raw_text = "1 [GetPlayer.GetCustom('currency_symbol')] = #v [GetPlayer.MakeScope.ScriptValue('money_value_in_gold')|D] @gold! #!"
 												parentanchor = hcenter
 												align = left
 												default_format = "#white #bold"
@@ -1785,7 +1785,7 @@ types market_states_panel
 											textbox = {
 												using = fontsize_large
 												autoresize = yes
-												raw_text = "1 @gold! = #v [GetPlayer.MakeScope.ScriptValue('gold_to_currency_rate')|D]#! [GetPlayer.GetCustom('currency_ISO_4217')] ([GetPlayer.GetCustom('currency_symbol')])"
+												raw_text = "1 @gold! = #v [GetPlayer.MakeScope.ScriptValue('gold_to_currency_rate')|D]#! [GetPlayer.GetCustom('currency_symbol')]"
 												parentanchor = hcenter
 												align = left
 												default_format = "#white #bold"
@@ -2219,9 +2219,9 @@ types market_states_panel
 											textbox = {
 												using = fontsize_large
 												autoresize = yes
-												raw_text = "[Market.GetOwner.MakeScope.ScriptValue('enough_foreign_currrency')|+D] [Market.GetOwner.GetCustom('currency_good')] - 1 [Market.GetOwner.GetCustom('currency_ISO_4217')] ([Market.GetOwner.GetCustom('currency_symbol')]) = #v [Market.GetOwner.MakeScope.ScriptValue('exchange_rate_for_international_trade_buy_for_target_market_panel')|+D] #! [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_ISO_4217')] ([GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_symbol')])"
+												raw_text = "[Market.GetOwner.MakeScope.ScriptValue('enough_foreign_currrency')|+D] [Market.GetOwner.GetCustom('currency_good')] - 1 [Market.GetOwner.GetCustom('currency_symbol')] = #v [Market.GetOwner.MakeScope.ScriptValue('exchange_rate_for_international_trade_buy_for_target_market_panel')|+D] #! [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_symbol')]"
 
-												#text = "[Market.GetOwner.MakeScope.ScriptValue('enough_foreign_currrency')|+D] [Market.GetOwner.GetCustom('currency_good')] - 1 [Market.GetOwner.GetCustom('currency_ISO_4217')] ([Market.GetOwner.GetCustom('currency_symbol')]) = #v [Market.GetOwner.MakeScope.ScriptValue('money_value')|+D] #![Market.GetOwner.GetCustom('monetary_system_partiel')]"
+												#text = "[Market.GetOwner.MakeScope.ScriptValue('enough_foreign_currrency')|+D] [Market.GetOwner.GetCustom('currency_good')] - 1 [Market.GetOwner.GetCustom('currency_symbol')] = #v [Market.GetOwner.MakeScope.ScriptValue('money_value')|+D] #![Market.GetOwner.GetCustom('monetary_system_partiel')]"
 												parentanchor = hcenter
 												align = left
 												default_format = "#white #bold"

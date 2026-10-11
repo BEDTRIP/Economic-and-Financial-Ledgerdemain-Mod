@@ -1156,1155 +1156,3897 @@ currency_good = {
 	}
 	#end_tag_2
 }
-currency_ISO_4217 = {
+zz_ef_cur_iso2 = {
 	type = country
 	log_loc_errors = no
 
-	#generic
-	text = {
-		trigger = {
-			NOT = { zz_ef_has_currency_identifier = yes }
-		}
-
-		localization_key = spe_uni_ISO_4217
-	}
-
-	#begin_tag_2
-	#dinar
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:dinar
-		}
-
-		localization_key = dinar_ISO_4217
-	}
-	#dinar_algerian_dinar
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:dinar_algerian_dinar
-		}
-
-		localization_key = dinar_algerian_dinar_ISO_4217
-	}
-	#dinar_iraqi_dinar
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:dinar_iraqi_dinar
-		}
-
-		localization_key = dinar_iraqi_dinar_ISO_4217
-	}
-	#dinar_libyan_dinar
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:dinar_libyan_dinar
-		}
-
-		localization_key = dinar_libyan_dinar_ISO_4217
-	}
-	#dinar_moroccan_dirham
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:dinar_moroccan_dirham
-		}
-
-		localization_key = dinar_moroccan_dirham_ISO_4217
-	}
-	#dinar_omanian_rial
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:dinar_omanian_rial
-		}
-
-		localization_key = dinar_omanian_rial_ISO_4217
-	}
-	#dinar_qiran
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:dinar_qiran
-		}
-
-		localization_key = dinar_qiran_ISO_4217
-	}
-	#dinar_saudi_riyal
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:dinar_saudi_riyal
-		}
-
-		localization_key = dinar_saudi_riyal_ISO_4217
-	}
-	#dinar_serbian_dinar
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:dinar_serbian_dinar
-		}
-
-		localization_key = dinar_serbian_dinar_ISO_4217
-	}
-	#dinar_tunisian_dinar
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:dinar_tunisian_dinar
-		}
-
-		localization_key = dinar_tunisian_dinar_ISO_4217
-	}
-	#dinar_yugoslav_dinar
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:dinar_yugoslav_dinar
-		}
-
-		localization_key = dinar_yugoslav_dinar_ISO_4217
-	}
-	#dollar_australian_dollar
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:dollar_australian_dollar
-		}
-
-		localization_key = dollar_australian_dollar_ISO_4217
-	}
-	#dollar_canadian_dollar
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:dollar_canadian_dollar
-		}
-
-		localization_key = dollar_canadian_dollar_ISO_4217
-	}
-	#dollar_caribbean_dollar
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:dollar_caribbean_dollar
-		}
-
-		localization_key = dollar_caribbean_dollar_ISO_4217
-	}
-	#dollar_confederate_states_dollar
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:dollar_confederate_states_dollar
-		}
-
-		localization_key = dollar_confederate_states_dollar_ISO_4217
-	}
-	#dollar_liberian_dollar
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:dollar_liberian_dollar
-		}
-
-		localization_key = dollar_liberian_dollar_ISO_4217
-	}
-	#dollar_new_zealand_dollar
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:dollar_new_zealand_dollar
-		}
-
-		localization_key = dollar_new_zealand_dollar_ISO_4217
-	}
-	#dollar_sierra_leonean_dollar
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:dollar_sierra_leonean_dollar
-		}
-
-		localization_key = dollar_sierra_leonean_dollar_ISO_4217
-	}
-	#dollar_united_states_dollar
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:dollar_united_states_dollar
-		}
-
-		localization_key = dollar_united_states_dollar_ISO_4217
-	}
-	#eco_ariary
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:eco_ariary
-		}
-
-		localization_key = eco_ariary_ISO_4217
-	}
-	#eco_central_african_eco
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:eco_central_african_eco
-		}
-
-		localization_key = eco_central_african_eco_ISO_4217
-	}
-	#eco_east_african_eco
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:eco_east_african_eco
-		}
-
-		localization_key = eco_east_african_eco_ISO_4217
-	}
-	#eco_ethiopian_birr
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:eco_ethiopian_birr
-		}
-
-		localization_key = eco_ethiopian_birr_ISO_4217
-	}
-	#eco_ghanaian_pound
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:eco_ghanaian_pound
-		}
-
-		localization_key = eco_ghanaian_pound_ISO_4217
-	}
-	#eco_nigerian_naira
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:eco_nigerian_naira
-		}
-
-		localization_key = eco_nigerian_naira_ISO_4217
-	}
-	#eco_south_african_rand
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:eco_south_african_rand
-		}
-
-		localization_key = eco_south_african_rand_ISO_4217
-	}
-	#eco_tuareg_ouguiya
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:eco_tuareg_ouguiya
-		}
-
-		localization_key = eco_tuareg_ouguiya_ISO_4217
-	}
-	#eco_west_african_eco
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:eco_west_african_eco
-		}
-
-		localization_key = eco_west_african_eco_ISO_4217
-	}
-	#franc_belgian_franc
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:franc_belgian_franc
-		}
-
-		localization_key = franc_belgian_franc_ISO_4217
-	}
-	#franc_french_franc
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:franc_french_franc
-		}
-
-		localization_key = franc_french_franc_ISO_4217
-	}
-	#franc_luxembourgish_franc
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:franc_luxembourgish_franc
-		}
-
-		localization_key = franc_luxembourgish_franc_ISO_4217
-	}
-	#franc_swiss_franc
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:franc_swiss_franc
-		}
-
-		localization_key = franc_swiss_franc_ISO_4217
-	}
-	#gulden
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:gulden
-		}
-
-		localization_key = gulden_ISO_4217
-	}
-	#gulden_bavarian_gulden
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:gulden_bavarian_gulden
-		}
-
-		localization_key = gulden_bavarian_gulden_ISO_4217
-	}
-	#gulden_florin
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:gulden_florin
-		}
-
-		localization_key = gulden_florin_ISO_4217
-	}
-	#gulden_hungarian_forint
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:gulden_hungarian_forint
-		}
-
-		localization_key = gulden_hungarian_forint_ISO_4217
-	}
-	#gulden_indies_guilder
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:gulden_indies_guilder
-		}
-
-		localization_key = gulden_indies_guilder_ISO_4217
-	}
-	#gulden_south_german_gulden
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:gulden_south_german_gulden
-		}
-
-		localization_key = gulden_south_german_gulden_ISO_4217
-	}
-	#krone_czech_koruna
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:krone_czech_koruna
-		}
-
-		localization_key = krone_czech_koruna_ISO_4217
-	}
-	#krone_danish_krone
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:krone_danish_krone
-		}
-
-		localization_key = krone_danish_krone_ISO_4217
-	}
-	#krone_estonian_kroon
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:krone_estonian_kroon
-		}
-
-		localization_key = krone_estonian_kroon_ISO_4217
-	}
-	#krone_icelandic_krona
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:krone_icelandic_krona
-		}
-
-		localization_key = krone_icelandic_krona_ISO_4217
-	}
-	#krone_norwegian_krone
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:krone_norwegian_krone
-		}
-
-		localization_key = krone_norwegian_krone_ISO_4217
-	}
-	#krone_slovak_koruna
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:krone_slovak_koruna
-		}
-
-		localization_key = krone_slovak_koruna_ISO_4217
-	}
-	#krone_swedish_krona
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:krone_swedish_krona
-		}
-
-		localization_key = krone_swedish_krona_ISO_4217
-	}
-	#leon_leu
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:leon_leu
-		}
-
-		localization_key = leon_leu_ISO_4217
-	}
-	#leon_lev
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:leon_lev
-		}
-
-		localization_key = leon_lev_ISO_4217
-	}
-	#lira
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:lira
-		}
-
-		localization_key = lira_ISO_4217
-	}
-	#lira_ducato
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:lira_ducato
-		}
-
-		localization_key = lira_ducato_ISO_4217
-	}
-	#lira_ottoman_lira
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:lira_ottoman_lira
-		}
-
-		localization_key = lira_ottoman_lira_ISO_4217
-	}
-	#lira_scudo_pontificio
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:lira_scudo_pontificio
-		}
-
-		localization_key = lira_scudo_pontificio_ISO_4217
-	}
-	#lira_scudo_sardo
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:lira_scudo_sardo
-		}
-
-		localization_key = lira_scudo_sardo_ISO_4217
-	}
-	#lira_toscane_lira
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:lira_toscane_lira
-		}
-
-		localization_key = lira_toscane_lira_ISO_4217
-	}
-	#mark
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:mark
-		}
-
-		localization_key = mark_ISO_4217
-	}
-	#mark_finnish_markka
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:mark_finnish_markka
-		}
-
-		localization_key = mark_finnish_markka_ISO_4217
-	}
-	#peso
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:peso
-		}
-
-		localization_key = peso_ISO_4217
-	}
-	#peso_argentine_peso
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:peso_argentine_peso
-		}
-
-		localization_key = peso_argentine_peso_ISO_4217
-	}
-	#peso_bolivien_peso
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:peso_bolivien_peso
-		}
-
-		localization_key = peso_bolivien_peso_ISO_4217
-	}
-	#peso_chilean_peso
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:peso_chilean_peso
-		}
-
-		localization_key = peso_chilean_peso_ISO_4217
-	}
-	#peso_colombian_peso
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:peso_colombian_peso
-		}
-
-		localization_key = peso_colombian_peso_ISO_4217
-	}
-	#peso_costa_rican_colon
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:peso_costa_rican_colon
-		}
-
-		localization_key = peso_costa_rican_colon_ISO_4217
-	}
-	#peso_cuban_peso
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:peso_cuban_peso
-		}
-
-		localization_key = peso_cuban_peso_ISO_4217
-	}
-	#peso_ecuadorian_peso
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:peso_ecuadorian_peso
-		}
-
-		localization_key = peso_ecuadorian_peso_ISO_4217
-	}
-	#peso_el_salvador_colon
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:peso_el_salvador_colon
-		}
-
-		localization_key = peso_el_salvador_colon_ISO_4217
-	}
-	#peso_guatemalan_quetzal
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:peso_guatemalan_quetzal
-		}
-
-		localization_key = peso_guatemalan_quetzal_ISO_4217
-	}
-	#peso_honduran_lempira
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:peso_honduran_lempira
-		}
-
-		localization_key = peso_honduran_lempira_ISO_4217
-	}
-	#peso_mexican_peso
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:peso_mexican_peso
-		}
-
-		localization_key = peso_mexican_peso_ISO_4217
-	}
-	#peso_nicaraguan_cordoba
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:peso_nicaraguan_cordoba
-		}
-
-		localization_key = peso_nicaraguan_cordoba_ISO_4217
-	}
-	#peso_paraguayan_peso
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:peso_paraguayan_peso
-		}
-
-		localization_key = peso_paraguayan_peso_ISO_4217
-	}
-	#peso_philippine_peso
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:peso_philippine_peso
-		}
-
-		localization_key = peso_philippine_peso_ISO_4217
-	}
-	#peso_sol_de_oro
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:peso_sol_de_oro
-		}
-
-		localization_key = peso_sol_de_oro_ISO_4217
-	}
-	#peso_uruguayan_peso
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:peso_uruguayan_peso
-		}
-
-		localization_key = peso_uruguayan_peso_ISO_4217
-	}
-	#peso_venezuelan_peso
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:peso_venezuelan_peso
-		}
-
-		localization_key = peso_venezuelan_peso_ISO_4217
-	}
-	#pound_egyptian_pound
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:pound_egyptian_pound
-		}
-
-		localization_key = pound_egyptian_pound_ISO_4217
-	}
-	#pound_irish_pound
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:pound_irish_pound
-		}
-
-		localization_key = pound_irish_pound_ISO_4217
-	}
-	#pound_sterling
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:pound_sterling
-		}
-
-		localization_key = pound_sterling_ISO_4217
-	}
-	#real
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:real
-		}
-
-		localization_key = real_ISO_4217
-	}
-	#real_brazilian_real
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:real_brazilian_real
-		}
-
-		localization_key = real_brazilian_real_ISO_4217
-	}
-	#rupee_indian_rupee
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:rupee_indian_rupee
-		}
-
-		localization_key = rupee_indian_rupee_ISO_4217
-	}
-	#rupee_indonesian_rupiah
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:rupee_indonesian_rupiah
-		}
-
-		localization_key = rupee_indonesian_rupiah_ISO_4217
-	}
-	#spe_baht
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:spe_baht
-		}
-
-		localization_key = spe_baht_ISO_4217
-	}
-	#spe_dong
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:spe_dong
-		}
-
-		localization_key = spe_dong_ISO_4217
-	}
-	#spe_drachma
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:spe_drachma
-		}
-
-		localization_key = spe_drachma_ISO_4217
-	}
-	#spe_korean_won
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:spe_korean_won
-		}
-
-		localization_key = spe_korean_won_ISO_4217
-	}
-	#spe_latvian_lats
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:spe_latvian_lats
-		}
-
-		localization_key = spe_latvian_lats_ISO_4217
-	}
-	#spe_lithuanian_litas
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:spe_lithuanian_litas
-		}
-
-		localization_key = spe_lithuanian_litas_ISO_4217
-	}
-	#spe_peseta
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:spe_peseta
-		}
-
-		localization_key = spe_peseta_ISO_4217
-	}
-	#spe_ruble
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:spe_ruble
-		}
-
-		localization_key = spe_ruble_ISO_4217
-	}
-	#spe_uni
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:spe_uni
-		}
-
-		localization_key = spe_uni_ISO_4217
-	}
-	#spe_yen
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:spe_yen
-		}
-
-		localization_key = spe_yen_ISO_4217
-	}
-	#spe_yuan
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:spe_yuan
-		}
-
-		localization_key = spe_yuan_ISO_4217
-	}
-	#spe_zloti
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:spe_zloti
-		}
-
-		localization_key = spe_zloti_ISO_4217
-	}
-	#thaler_hannoveraner_thaler
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:thaler_hannoveraner_thaler
-		}
-
-		localization_key = thaler_hannoveraner_thaler_ISO_4217
-	}
-	#thaler_prussian_thaler
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:thaler_prussian_thaler
-		}
-
-		localization_key = thaler_prussian_thaler_ISO_4217
-	}
-	#thaler_saxon_thaler
-	text = {
-		trigger = {
-			var:zz_ef_cur ?= flag:thaler_saxon_thaler
-		}
-
-		localization_key = thaler_saxon_thaler_ISO_4217
-	}
-	#end_tag_2
+	# the two letters of the currency's code: the country's own, a currency union's follower -- its head's
+	# (Д.R8в.20, tools/regen_ld_currency_symbol.py)
+	text = {
+		trigger = { NOT = { zz_ef_mu_follower = yes } }
+		localization_key = zz_ef_iso2_self
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ABK }
+		localization_key = zz_ef_iso2_ABK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ABS }
+		localization_key = zz_ef_iso2_ABS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ABU }
+		localization_key = zz_ef_iso2_ABU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ACE }
+		localization_key = zz_ef_iso2_ACE
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ACH }
+		localization_key = zz_ef_iso2_ACH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ADG }
+		localization_key = zz_ef_iso2_ADG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ADR }
+		localization_key = zz_ef_iso2_ADR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:AFG }
+		localization_key = zz_ef_iso2_AFG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:AFS }
+		localization_key = zz_ef_iso2_AFS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:AGC }
+		localization_key = zz_ef_iso2_AGC
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:AGJ }
+		localization_key = zz_ef_iso2_AGJ
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:AHG }
+		localization_key = zz_ef_iso2_AHG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:AHU }
+		localization_key = zz_ef_iso2_AHU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:AIN }
+		localization_key = zz_ef_iso2_AIN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:AIR }
+		localization_key = zz_ef_iso2_AIR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:AIT }
+		localization_key = zz_ef_iso2_AIT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:AJJ }
+		localization_key = zz_ef_iso2_AJJ
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:AJR }
+		localization_key = zz_ef_iso2_AJR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ALA }
+		localization_key = zz_ef_iso2_ALA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ALB }
+		localization_key = zz_ef_iso2_ALB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ALD }
+		localization_key = zz_ef_iso2_ALD
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ALI }
+		localization_key = zz_ef_iso2_ALI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ALK }
+		localization_key = zz_ef_iso2_ALK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ALT }
+		localization_key = zz_ef_iso2_ALT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ALW }
+		localization_key = zz_ef_iso2_ALW
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:AMZ }
+		localization_key = zz_ef_iso2_AMZ
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ANH }
+		localization_key = zz_ef_iso2_ANH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ANK }
+		localization_key = zz_ef_iso2_ANK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ANL }
+		localization_key = zz_ef_iso2_ANL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ANU }
+		localization_key = zz_ef_iso2_ANU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:AOT }
+		localization_key = zz_ef_iso2_AOT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:APC }
+		localization_key = zz_ef_iso2_APC
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ARA }
+		localization_key = zz_ef_iso2_ARA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ARB }
+		localization_key = zz_ef_iso2_ARB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ARG }
+		localization_key = zz_ef_iso2_ARG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ARH }
+		localization_key = zz_ef_iso2_ARH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ARK }
+		localization_key = zz_ef_iso2_ARK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ARM }
+		localization_key = zz_ef_iso2_ARM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ARN }
+		localization_key = zz_ef_iso2_ARN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ARP }
+		localization_key = zz_ef_iso2_ARP
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ARR }
+		localization_key = zz_ef_iso2_ARR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ARS }
+		localization_key = zz_ef_iso2_ARS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ASA }
+		localization_key = zz_ef_iso2_ASA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ASH }
+		localization_key = zz_ef_iso2_ASH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ASM }
+		localization_key = zz_ef_iso2_ASM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ASS }
+		localization_key = zz_ef_iso2_ASS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:AST }
+		localization_key = zz_ef_iso2_AST
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ASU }
+		localization_key = zz_ef_iso2_ASU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ATB }
+		localization_key = zz_ef_iso2_ATB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ATL }
+		localization_key = zz_ef_iso2_ATL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ATR }
+		localization_key = zz_ef_iso2_ATR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:AUL }
+		localization_key = zz_ef_iso2_AUL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:AUS }
+		localization_key = zz_ef_iso2_AUS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:AWA }
+		localization_key = zz_ef_iso2_AWA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:AWS }
+		localization_key = zz_ef_iso2_AWS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:AYI }
+		localization_key = zz_ef_iso2_AYI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:AYM }
+		localization_key = zz_ef_iso2_AYM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:AZB }
+		localization_key = zz_ef_iso2_AZB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BAD }
+		localization_key = zz_ef_iso2_BAD
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BAG }
+		localization_key = zz_ef_iso2_BAG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BAH }
+		localization_key = zz_ef_iso2_BAH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BAL }
+		localization_key = zz_ef_iso2_BAL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BAS }
+		localization_key = zz_ef_iso2_BAS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BAV }
+		localization_key = zz_ef_iso2_BAV
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BCE }
+		localization_key = zz_ef_iso2_BCE
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BEI }
+		localization_key = zz_ef_iso2_BEI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BEL }
+		localization_key = zz_ef_iso2_BEL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BEN }
+		localization_key = zz_ef_iso2_BEN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BER }
+		localization_key = zz_ef_iso2_BER
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BGI }
+		localization_key = zz_ef_iso2_BGI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BGL }
+		localization_key = zz_ef_iso2_BGL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BGM }
+		localization_key = zz_ef_iso2_BGM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BHI }
+		localization_key = zz_ef_iso2_BHI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BHN }
+		localization_key = zz_ef_iso2_BHN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BHO }
+		localization_key = zz_ef_iso2_BHO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BHT }
+		localization_key = zz_ef_iso2_BHT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BHU }
+		localization_key = zz_ef_iso2_BHU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BHV }
+		localization_key = zz_ef_iso2_BHV
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BHW }
+		localization_key = zz_ef_iso2_BHW
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BIC }
+		localization_key = zz_ef_iso2_BIC
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BIH }
+		localization_key = zz_ef_iso2_BIH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BIK }
+		localization_key = zz_ef_iso2_BIK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BJA }
+		localization_key = zz_ef_iso2_BJA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BKR }
+		localization_key = zz_ef_iso2_BKR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BLA }
+		localization_key = zz_ef_iso2_BLA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BLE }
+		localization_key = zz_ef_iso2_BLE
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BLF }
+		localization_key = zz_ef_iso2_BLF
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BLG }
+		localization_key = zz_ef_iso2_BLG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BLH }
+		localization_key = zz_ef_iso2_BLH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BMB }
+		localization_key = zz_ef_iso2_BMB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BMM }
+		localization_key = zz_ef_iso2_BMM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BND }
+		localization_key = zz_ef_iso2_BND
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BNG }
+		localization_key = zz_ef_iso2_BNG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BNJ }
+		localization_key = zz_ef_iso2_BNJ
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BNN }
+		localization_key = zz_ef_iso2_BNN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BNT }
+		localization_key = zz_ef_iso2_BNT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BNY }
+		localization_key = zz_ef_iso2_BNY
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BOB }
+		localization_key = zz_ef_iso2_BOB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BOH }
+		localization_key = zz_ef_iso2_BOH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BOL }
+		localization_key = zz_ef_iso2_BOL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BOR }
+		localization_key = zz_ef_iso2_BOR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BOS }
+		localization_key = zz_ef_iso2_BOS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BRA }
+		localization_key = zz_ef_iso2_BRA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BRD }
+		localization_key = zz_ef_iso2_BRD
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BRE }
+		localization_key = zz_ef_iso2_BRE
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BRG }
+		localization_key = zz_ef_iso2_BRG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BRI }
+		localization_key = zz_ef_iso2_BRI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BRK }
+		localization_key = zz_ef_iso2_BRK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BRN }
+		localization_key = zz_ef_iso2_BRN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BRU }
+		localization_key = zz_ef_iso2_BRU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BRY }
+		localization_key = zz_ef_iso2_BRY
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BRZ }
+		localization_key = zz_ef_iso2_BRZ
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BSS }
+		localization_key = zz_ef_iso2_BSS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BST }
+		localization_key = zz_ef_iso2_BST
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BTG }
+		localization_key = zz_ef_iso2_BTG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BTN }
+		localization_key = zz_ef_iso2_BTN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BUG }
+		localization_key = zz_ef_iso2_BUG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BUK }
+		localization_key = zz_ef_iso2_BUK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BUL }
+		localization_key = zz_ef_iso2_BUL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BUN }
+		localization_key = zz_ef_iso2_BUN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BUR }
+		localization_key = zz_ef_iso2_BUR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BYE }
+		localization_key = zz_ef_iso2_BYE
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:BYZ }
+		localization_key = zz_ef_iso2_BYZ
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CAL }
+		localization_key = zz_ef_iso2_CAL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CAM }
+		localization_key = zz_ef_iso2_CAM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CAN }
+		localization_key = zz_ef_iso2_CAN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CAR }
+		localization_key = zz_ef_iso2_CAR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CAS }
+		localization_key = zz_ef_iso2_CAS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CAT }
+		localization_key = zz_ef_iso2_CAT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CAU }
+		localization_key = zz_ef_iso2_CAU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CAY }
+		localization_key = zz_ef_iso2_CAY
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CCM }
+		localization_key = zz_ef_iso2_CCM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CEY }
+		localization_key = zz_ef_iso2_CEY
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CHC }
+		localization_key = zz_ef_iso2_CHC
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CHE }
+		localization_key = zz_ef_iso2_CHE
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CHI }
+		localization_key = zz_ef_iso2_CHI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CHK }
+		localization_key = zz_ef_iso2_CHK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CHL }
+		localization_key = zz_ef_iso2_CHL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CHP }
+		localization_key = zz_ef_iso2_CHP
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CHT }
+		localization_key = zz_ef_iso2_CHT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CHV }
+		localization_key = zz_ef_iso2_CHV
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CHW }
+		localization_key = zz_ef_iso2_CHW
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CIR }
+		localization_key = zz_ef_iso2_CIR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CKC }
+		localization_key = zz_ef_iso2_CKC
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CLI }
+		localization_key = zz_ef_iso2_CLI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CLM }
+		localization_key = zz_ef_iso2_CLM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CMB }
+		localization_key = zz_ef_iso2_CMB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CMI }
+		localization_key = zz_ef_iso2_CMI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CNG }
+		localization_key = zz_ef_iso2_CNG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CNW }
+		localization_key = zz_ef_iso2_CNW
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:COB }
+		localization_key = zz_ef_iso2_COB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:COC }
+		localization_key = zz_ef_iso2_COC
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:COL }
+		localization_key = zz_ef_iso2_COL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:COM }
+		localization_key = zz_ef_iso2_COM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CON }
+		localization_key = zz_ef_iso2_CON
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:COO }
+		localization_key = zz_ef_iso2_COO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:COR }
+		localization_key = zz_ef_iso2_COR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:COS }
+		localization_key = zz_ef_iso2_COS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CRE }
+		localization_key = zz_ef_iso2_CRE
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CRI }
+		localization_key = zz_ef_iso2_CRI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CRO }
+		localization_key = zz_ef_iso2_CRO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CSA }
+		localization_key = zz_ef_iso2_CSA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CSC }
+		localization_key = zz_ef_iso2_CSC
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CTF }
+		localization_key = zz_ef_iso2_CTF
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CTR }
+		localization_key = zz_ef_iso2_CTR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CUB }
+		localization_key = zz_ef_iso2_CUB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CYP }
+		localization_key = zz_ef_iso2_CYP
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CYR }
+		localization_key = zz_ef_iso2_CYR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:CZH }
+		localization_key = zz_ef_iso2_CZH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D00 }
+		localization_key = zz_ef_iso2_D00
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D01 }
+		localization_key = zz_ef_iso2_D01
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D02 }
+		localization_key = zz_ef_iso2_D02
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D03 }
+		localization_key = zz_ef_iso2_D03
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D04 }
+		localization_key = zz_ef_iso2_D04
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D05 }
+		localization_key = zz_ef_iso2_D05
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D06 }
+		localization_key = zz_ef_iso2_D06
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D07 }
+		localization_key = zz_ef_iso2_D07
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D08 }
+		localization_key = zz_ef_iso2_D08
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D09 }
+		localization_key = zz_ef_iso2_D09
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D10 }
+		localization_key = zz_ef_iso2_D10
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D11 }
+		localization_key = zz_ef_iso2_D11
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D12 }
+		localization_key = zz_ef_iso2_D12
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D13 }
+		localization_key = zz_ef_iso2_D13
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D14 }
+		localization_key = zz_ef_iso2_D14
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D15 }
+		localization_key = zz_ef_iso2_D15
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D16 }
+		localization_key = zz_ef_iso2_D16
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D17 }
+		localization_key = zz_ef_iso2_D17
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D18 }
+		localization_key = zz_ef_iso2_D18
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D19 }
+		localization_key = zz_ef_iso2_D19
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D20 }
+		localization_key = zz_ef_iso2_D20
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D21 }
+		localization_key = zz_ef_iso2_D21
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D22 }
+		localization_key = zz_ef_iso2_D22
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D23 }
+		localization_key = zz_ef_iso2_D23
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D24 }
+		localization_key = zz_ef_iso2_D24
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D25 }
+		localization_key = zz_ef_iso2_D25
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D26 }
+		localization_key = zz_ef_iso2_D26
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D27 }
+		localization_key = zz_ef_iso2_D27
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D28 }
+		localization_key = zz_ef_iso2_D28
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D29 }
+		localization_key = zz_ef_iso2_D29
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D30 }
+		localization_key = zz_ef_iso2_D30
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D31 }
+		localization_key = zz_ef_iso2_D31
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D32 }
+		localization_key = zz_ef_iso2_D32
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D33 }
+		localization_key = zz_ef_iso2_D33
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D34 }
+		localization_key = zz_ef_iso2_D34
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D35 }
+		localization_key = zz_ef_iso2_D35
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D36 }
+		localization_key = zz_ef_iso2_D36
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D37 }
+		localization_key = zz_ef_iso2_D37
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D38 }
+		localization_key = zz_ef_iso2_D38
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D39 }
+		localization_key = zz_ef_iso2_D39
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D40 }
+		localization_key = zz_ef_iso2_D40
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D41 }
+		localization_key = zz_ef_iso2_D41
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D42 }
+		localization_key = zz_ef_iso2_D42
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D43 }
+		localization_key = zz_ef_iso2_D43
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D44 }
+		localization_key = zz_ef_iso2_D44
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D45 }
+		localization_key = zz_ef_iso2_D45
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D46 }
+		localization_key = zz_ef_iso2_D46
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D47 }
+		localization_key = zz_ef_iso2_D47
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D48 }
+		localization_key = zz_ef_iso2_D48
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D49 }
+		localization_key = zz_ef_iso2_D49
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D50 }
+		localization_key = zz_ef_iso2_D50
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D51 }
+		localization_key = zz_ef_iso2_D51
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D52 }
+		localization_key = zz_ef_iso2_D52
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D53 }
+		localization_key = zz_ef_iso2_D53
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D54 }
+		localization_key = zz_ef_iso2_D54
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D55 }
+		localization_key = zz_ef_iso2_D55
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D56 }
+		localization_key = zz_ef_iso2_D56
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D57 }
+		localization_key = zz_ef_iso2_D57
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D58 }
+		localization_key = zz_ef_iso2_D58
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D59 }
+		localization_key = zz_ef_iso2_D59
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D60 }
+		localization_key = zz_ef_iso2_D60
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D61 }
+		localization_key = zz_ef_iso2_D61
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D62 }
+		localization_key = zz_ef_iso2_D62
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D63 }
+		localization_key = zz_ef_iso2_D63
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D64 }
+		localization_key = zz_ef_iso2_D64
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D65 }
+		localization_key = zz_ef_iso2_D65
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D66 }
+		localization_key = zz_ef_iso2_D66
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D67 }
+		localization_key = zz_ef_iso2_D67
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D68 }
+		localization_key = zz_ef_iso2_D68
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D69 }
+		localization_key = zz_ef_iso2_D69
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D70 }
+		localization_key = zz_ef_iso2_D70
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D71 }
+		localization_key = zz_ef_iso2_D71
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D72 }
+		localization_key = zz_ef_iso2_D72
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D73 }
+		localization_key = zz_ef_iso2_D73
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D74 }
+		localization_key = zz_ef_iso2_D74
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D75 }
+		localization_key = zz_ef_iso2_D75
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D76 }
+		localization_key = zz_ef_iso2_D76
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D77 }
+		localization_key = zz_ef_iso2_D77
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D78 }
+		localization_key = zz_ef_iso2_D78
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D79 }
+		localization_key = zz_ef_iso2_D79
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D80 }
+		localization_key = zz_ef_iso2_D80
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D81 }
+		localization_key = zz_ef_iso2_D81
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D82 }
+		localization_key = zz_ef_iso2_D82
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D83 }
+		localization_key = zz_ef_iso2_D83
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D84 }
+		localization_key = zz_ef_iso2_D84
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D85 }
+		localization_key = zz_ef_iso2_D85
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D86 }
+		localization_key = zz_ef_iso2_D86
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D87 }
+		localization_key = zz_ef_iso2_D87
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D88 }
+		localization_key = zz_ef_iso2_D88
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D89 }
+		localization_key = zz_ef_iso2_D89
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D90 }
+		localization_key = zz_ef_iso2_D90
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D91 }
+		localization_key = zz_ef_iso2_D91
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D92 }
+		localization_key = zz_ef_iso2_D92
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D93 }
+		localization_key = zz_ef_iso2_D93
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D94 }
+		localization_key = zz_ef_iso2_D94
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D95 }
+		localization_key = zz_ef_iso2_D95
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D96 }
+		localization_key = zz_ef_iso2_D96
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D97 }
+		localization_key = zz_ef_iso2_D97
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D98 }
+		localization_key = zz_ef_iso2_D98
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:D99 }
+		localization_key = zz_ef_iso2_D99
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:DAG }
+		localization_key = zz_ef_iso2_DAG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:DAH }
+		localization_key = zz_ef_iso2_DAH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:DAI }
+		localization_key = zz_ef_iso2_DAI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:DAK }
+		localization_key = zz_ef_iso2_DAK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:DEI }
+		localization_key = zz_ef_iso2_DEI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:DEN }
+		localization_key = zz_ef_iso2_DEN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:DES }
+		localization_key = zz_ef_iso2_DES
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:DFR }
+		localization_key = zz_ef_iso2_DFR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:DFT }
+		localization_key = zz_ef_iso2_DFT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:DGR }
+		localization_key = zz_ef_iso2_DGR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:DHA }
+		localization_key = zz_ef_iso2_DHA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:DIN }
+		localization_key = zz_ef_iso2_DIN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:DIO }
+		localization_key = zz_ef_iso2_DIO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:DIR }
+		localization_key = zz_ef_iso2_DIR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:DKT }
+		localization_key = zz_ef_iso2_DKT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:DLA }
+		localization_key = zz_ef_iso2_DLA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:DLM }
+		localization_key = zz_ef_iso2_DLM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:DLY }
+		localization_key = zz_ef_iso2_DLY
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:DNK }
+		localization_key = zz_ef_iso2_DNK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:DOM }
+		localization_key = zz_ef_iso2_DOM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:DON }
+		localization_key = zz_ef_iso2_DON
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:DRA }
+		localization_key = zz_ef_iso2_DRA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:DYB }
+		localization_key = zz_ef_iso2_DYB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:DZG }
+		localization_key = zz_ef_iso2_DZG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ECU }
+		localization_key = zz_ef_iso2_ECU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:EDE }
+		localization_key = zz_ef_iso2_EDE
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:EGY }
+		localization_key = zz_ef_iso2_EGY
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ELS }
+		localization_key = zz_ef_iso2_ELS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ENG }
+		localization_key = zz_ef_iso2_ENG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:EOT }
+		localization_key = zz_ef_iso2_EOT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:EQT }
+		localization_key = zz_ef_iso2_EQT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:EQU }
+		localization_key = zz_ef_iso2_EQU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:EST }
+		localization_key = zz_ef_iso2_EST
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ETH }
+		localization_key = zz_ef_iso2_ETH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:EWE }
+		localization_key = zz_ef_iso2_EWE
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:EZO }
+		localization_key = zz_ef_iso2_EZO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:FER }
+		localization_key = zz_ef_iso2_FER
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:FIN }
+		localization_key = zz_ef_iso2_FIN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:FJI }
+		localization_key = zz_ef_iso2_FJI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:FLA }
+		localization_key = zz_ef_iso2_FLA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:FLR }
+		localization_key = zz_ef_iso2_FLR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:FND }
+		localization_key = zz_ef_iso2_FND
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:FNG }
+		localization_key = zz_ef_iso2_FNG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:FRA }
+		localization_key = zz_ef_iso2_FRA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:FRM }
+		localization_key = zz_ef_iso2_FRM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:FRS }
+		localization_key = zz_ef_iso2_FRS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:FSA }
+		localization_key = zz_ef_iso2_FSA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:FTJ }
+		localization_key = zz_ef_iso2_FTJ
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:FTR }
+		localization_key = zz_ef_iso2_FTR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:FZN }
+		localization_key = zz_ef_iso2_FZN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:GAL }
+		localization_key = zz_ef_iso2_GAL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:GAM }
+		localization_key = zz_ef_iso2_GAM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:GAO }
+		localization_key = zz_ef_iso2_GAO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:GAR }
+		localization_key = zz_ef_iso2_GAR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:GBR }
+		localization_key = zz_ef_iso2_GBR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:GCO }
+		localization_key = zz_ef_iso2_GCO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:GEO }
+		localization_key = zz_ef_iso2_GEO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:GER }
+		localization_key = zz_ef_iso2_GER
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:GGO }
+		localization_key = zz_ef_iso2_GGO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:GJM }
+		localization_key = zz_ef_iso2_GJM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:GLC }
+		localization_key = zz_ef_iso2_GLC
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:GLD }
+		localization_key = zz_ef_iso2_GLD
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:GLI }
+		localization_key = zz_ef_iso2_GLI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:GML }
+		localization_key = zz_ef_iso2_GML
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:GNG }
+		localization_key = zz_ef_iso2_GNG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:GNI }
+		localization_key = zz_ef_iso2_GNI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:GRE }
+		localization_key = zz_ef_iso2_GRE
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:GRG }
+		localization_key = zz_ef_iso2_GRG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:GRI }
+		localization_key = zz_ef_iso2_GRI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:GRN }
+		localization_key = zz_ef_iso2_GRN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:GRW }
+		localization_key = zz_ef_iso2_GRW
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:GUA }
+		localization_key = zz_ef_iso2_GUA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:GUI }
+		localization_key = zz_ef_iso2_GUI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:GUJ }
+		localization_key = zz_ef_iso2_GUJ
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:GWA }
+		localization_key = zz_ef_iso2_GWA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:GZA }
+		localization_key = zz_ef_iso2_GZA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HAI }
+		localization_key = zz_ef_iso2_HAI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HAM }
+		localization_key = zz_ef_iso2_HAM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HAN }
+		localization_key = zz_ef_iso2_HAN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HAR }
+		localization_key = zz_ef_iso2_HAR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HAU }
+		localization_key = zz_ef_iso2_HAU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HAW }
+		localization_key = zz_ef_iso2_HAW
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HBC }
+		localization_key = zz_ef_iso2_HBC
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HDJ }
+		localization_key = zz_ef_iso2_HDJ
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HDY }
+		localization_key = zz_ef_iso2_HDY
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HEK }
+		localization_key = zz_ef_iso2_HEK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HER }
+		localization_key = zz_ef_iso2_HER
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HES }
+		localization_key = zz_ef_iso2_HES
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HHE }
+		localization_key = zz_ef_iso2_HHE
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HLA }
+		localization_key = zz_ef_iso2_HLA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HMB }
+		localization_key = zz_ef_iso2_HMB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HNA }
+		localization_key = zz_ef_iso2_HNA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HND }
+		localization_key = zz_ef_iso2_HND
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HOB }
+		localization_key = zz_ef_iso2_HOB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HOH }
+		localization_key = zz_ef_iso2_HOH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HOL }
+		localization_key = zz_ef_iso2_HOL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HON }
+		localization_key = zz_ef_iso2_HON
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HRE }
+		localization_key = zz_ef_iso2_HRE
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HRO }
+		localization_key = zz_ef_iso2_HRO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HTH }
+		localization_key = zz_ef_iso2_HTH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HUN }
+		localization_key = zz_ef_iso2_HUN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HYD }
+		localization_key = zz_ef_iso2_HYD
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:HZJ }
+		localization_key = zz_ef_iso2_HZJ
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:IBE }
+		localization_key = zz_ef_iso2_IBE
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:IBL }
+		localization_key = zz_ef_iso2_IBL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:IBO }
+		localization_key = zz_ef_iso2_IBO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ICL }
+		localization_key = zz_ef_iso2_ICL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:IDA }
+		localization_key = zz_ef_iso2_IDA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:IDN }
+		localization_key = zz_ef_iso2_IDN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:IDS }
+		localization_key = zz_ef_iso2_IDS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:IND }
+		localization_key = zz_ef_iso2_IND
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ION }
+		localization_key = zz_ef_iso2_ION
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:IQU }
+		localization_key = zz_ef_iso2_IQU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:IRC }
+		localization_key = zz_ef_iso2_IRC
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:IRE }
+		localization_key = zz_ef_iso2_IRE
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:IRO }
+		localization_key = zz_ef_iso2_IRO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:IRQ }
+		localization_key = zz_ef_iso2_IRQ
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ISQ }
+		localization_key = zz_ef_iso2_ISQ
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ISR }
+		localization_key = zz_ef_iso2_ISR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ITA }
+		localization_key = zz_ef_iso2_ITA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:IUS }
+		localization_key = zz_ef_iso2_IUS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:JAB }
+		localization_key = zz_ef_iso2_JAB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:JAI }
+		localization_key = zz_ef_iso2_JAI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:JAM }
+		localization_key = zz_ef_iso2_JAM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:JAN }
+		localization_key = zz_ef_iso2_JAN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:JAP }
+		localization_key = zz_ef_iso2_JAP
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:JAS }
+		localization_key = zz_ef_iso2_JAS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:JAV }
+		localization_key = zz_ef_iso2_JAV
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:JEY }
+		localization_key = zz_ef_iso2_JEY
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:JHN }
+		localization_key = zz_ef_iso2_JHN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:JLF }
+		localization_key = zz_ef_iso2_JLF
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:JMB }
+		localization_key = zz_ef_iso2_JMB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:JOD }
+		localization_key = zz_ef_iso2_JOD
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:JOH }
+		localization_key = zz_ef_iso2_JOH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:JRR }
+		localization_key = zz_ef_iso2_JRR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:JUN }
+		localization_key = zz_ef_iso2_JUN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KAB }
+		localization_key = zz_ef_iso2_KAB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KAF }
+		localization_key = zz_ef_iso2_KAF
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KAL }
+		localization_key = zz_ef_iso2_KAL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KAN }
+		localization_key = zz_ef_iso2_KAN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KAS }
+		localization_key = zz_ef_iso2_KAS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KAT }
+		localization_key = zz_ef_iso2_KAT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KAU }
+		localization_key = zz_ef_iso2_KAU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KAZ }
+		localization_key = zz_ef_iso2_KAZ
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KBA }
+		localization_key = zz_ef_iso2_KBA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KBD }
+		localization_key = zz_ef_iso2_KBD
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KBU }
+		localization_key = zz_ef_iso2_KBU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KFA }
+		localization_key = zz_ef_iso2_KFA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KHI }
+		localization_key = zz_ef_iso2_KHI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KHM }
+		localization_key = zz_ef_iso2_KHM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KHN }
+		localization_key = zz_ef_iso2_KHN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KHP }
+		localization_key = zz_ef_iso2_KHP
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KHR }
+		localization_key = zz_ef_iso2_KHR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KKI }
+		localization_key = zz_ef_iso2_KKI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KKT }
+		localization_key = zz_ef_iso2_KKT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KKY }
+		localization_key = zz_ef_iso2_KKY
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KLM }
+		localization_key = zz_ef_iso2_KLM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KLN }
+		localization_key = zz_ef_iso2_KLN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KLO }
+		localization_key = zz_ef_iso2_KLO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KLT }
+		localization_key = zz_ef_iso2_KLT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KMC }
+		localization_key = zz_ef_iso2_KMC
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KNC }
+		localization_key = zz_ef_iso2_KNC
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KNG }
+		localization_key = zz_ef_iso2_KNG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KNK }
+		localization_key = zz_ef_iso2_KNK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KNO }
+		localization_key = zz_ef_iso2_KNO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KNT }
+		localization_key = zz_ef_iso2_KNT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KOK }
+		localization_key = zz_ef_iso2_KOK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KON }
+		localization_key = zz_ef_iso2_KON
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KOR }
+		localization_key = zz_ef_iso2_KOR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KOT }
+		localization_key = zz_ef_iso2_KOT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KPR }
+		localization_key = zz_ef_iso2_KPR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KRA }
+		localization_key = zz_ef_iso2_KRA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KRG }
+		localization_key = zz_ef_iso2_KRG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KRI }
+		localization_key = zz_ef_iso2_KRI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KRL }
+		localization_key = zz_ef_iso2_KRL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KRN }
+		localization_key = zz_ef_iso2_KRN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KRT }
+		localization_key = zz_ef_iso2_KRT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KRU }
+		localization_key = zz_ef_iso2_KRU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KSN }
+		localization_key = zz_ef_iso2_KSN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KSS }
+		localization_key = zz_ef_iso2_KSS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KTI }
+		localization_key = zz_ef_iso2_KTI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KTU }
+		localization_key = zz_ef_iso2_KTU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KUK }
+		localization_key = zz_ef_iso2_KUK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KUN }
+		localization_key = zz_ef_iso2_KUN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KUR }
+		localization_key = zz_ef_iso2_KUR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KUT }
+		localization_key = zz_ef_iso2_KUT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KYN }
+		localization_key = zz_ef_iso2_KYN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KYR }
+		localization_key = zz_ef_iso2_KYR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KZH }
+		localization_key = zz_ef_iso2_KZH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:KZM }
+		localization_key = zz_ef_iso2_KZM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LAD }
+		localization_key = zz_ef_iso2_LAD
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LAH }
+		localization_key = zz_ef_iso2_LAH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LAN }
+		localization_key = zz_ef_iso2_LAN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LAO }
+		localization_key = zz_ef_iso2_LAO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LAT }
+		localization_key = zz_ef_iso2_LAT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LBA }
+		localization_key = zz_ef_iso2_LBA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LBL }
+		localization_key = zz_ef_iso2_LBL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LBY }
+		localization_key = zz_ef_iso2_LBY
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LEB }
+		localization_key = zz_ef_iso2_LEB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LEO }
+		localization_key = zz_ef_iso2_LEO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LGA }
+		localization_key = zz_ef_iso2_LGA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LIB }
+		localization_key = zz_ef_iso2_LIB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LIM }
+		localization_key = zz_ef_iso2_LIM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LIP }
+		localization_key = zz_ef_iso2_LIP
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LIT }
+		localization_key = zz_ef_iso2_LIT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LKT }
+		localization_key = zz_ef_iso2_LKT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LMW }
+		localization_key = zz_ef_iso2_LMW
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LND }
+		localization_key = zz_ef_iso2_LND
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LNG }
+		localization_key = zz_ef_iso2_LNG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LOM }
+		localization_key = zz_ef_iso2_LOM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LOU }
+		localization_key = zz_ef_iso2_LOU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LRR }
+		localization_key = zz_ef_iso2_LRR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LUA }
+		localization_key = zz_ef_iso2_LUA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LUB }
+		localization_key = zz_ef_iso2_LUB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LUC }
+		localization_key = zz_ef_iso2_LUC
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LUO }
+		localization_key = zz_ef_iso2_LUO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LUR }
+		localization_key = zz_ef_iso2_LUR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LUX }
+		localization_key = zz_ef_iso2_LUX
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:LZO }
+		localization_key = zz_ef_iso2_LZO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MAD }
+		localization_key = zz_ef_iso2_MAD
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MAH }
+		localization_key = zz_ef_iso2_MAH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MAI }
+		localization_key = zz_ef_iso2_MAI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MAK }
+		localization_key = zz_ef_iso2_MAK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MAL }
+		localization_key = zz_ef_iso2_MAL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MAS }
+		localization_key = zz_ef_iso2_MAS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MAY }
+		localization_key = zz_ef_iso2_MAY
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MAZ }
+		localization_key = zz_ef_iso2_MAZ
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MBS }
+		localization_key = zz_ef_iso2_MBS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MCH }
+		localization_key = zz_ef_iso2_MCH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MCO }
+		localization_key = zz_ef_iso2_MCO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MCR }
+		localization_key = zz_ef_iso2_MCR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MDI }
+		localization_key = zz_ef_iso2_MDI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MDK }
+		localization_key = zz_ef_iso2_MDK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MEC }
+		localization_key = zz_ef_iso2_MEC
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MEI }
+		localization_key = zz_ef_iso2_MEI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MEW }
+		localization_key = zz_ef_iso2_MEW
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MEX }
+		localization_key = zz_ef_iso2_MEX
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MGB }
+		localization_key = zz_ef_iso2_MGB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MGD }
+		localization_key = zz_ef_iso2_MGD
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MGH }
+		localization_key = zz_ef_iso2_MGH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MGL }
+		localization_key = zz_ef_iso2_MGL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MHR }
+		localization_key = zz_ef_iso2_MHR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MJK }
+		localization_key = zz_ef_iso2_MJK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MJT }
+		localization_key = zz_ef_iso2_MJT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MKT }
+		localization_key = zz_ef_iso2_MKT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MKU }
+		localization_key = zz_ef_iso2_MKU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MLD }
+		localization_key = zz_ef_iso2_MLD
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MLT }
+		localization_key = zz_ef_iso2_MLT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MNB }
+		localization_key = zz_ef_iso2_MNB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MNC }
+		localization_key = zz_ef_iso2_MNC
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MND }
+		localization_key = zz_ef_iso2_MND
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MNG }
+		localization_key = zz_ef_iso2_MNG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MNP }
+		localization_key = zz_ef_iso2_MNP
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MOD }
+		localization_key = zz_ef_iso2_MOD
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MOL }
+		localization_key = zz_ef_iso2_MOL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MON }
+		localization_key = zz_ef_iso2_MON
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MOR }
+		localization_key = zz_ef_iso2_MOR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MOS }
+		localization_key = zz_ef_iso2_MOS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MPH }
+		localization_key = zz_ef_iso2_MPH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MRA }
+		localization_key = zz_ef_iso2_MRA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MRD }
+		localization_key = zz_ef_iso2_MRD
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MRI }
+		localization_key = zz_ef_iso2_MRI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MRN }
+		localization_key = zz_ef_iso2_MRN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MRV }
+		localization_key = zz_ef_iso2_MRV
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MSC }
+		localization_key = zz_ef_iso2_MSC
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MSH }
+		localization_key = zz_ef_iso2_MSH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MSI }
+		localization_key = zz_ef_iso2_MSI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MSK }
+		localization_key = zz_ef_iso2_MSK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MSN }
+		localization_key = zz_ef_iso2_MSN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MST }
+		localization_key = zz_ef_iso2_MST
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MTB }
+		localization_key = zz_ef_iso2_MTB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MTC }
+		localization_key = zz_ef_iso2_MTC
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MTP }
+		localization_key = zz_ef_iso2_MTP
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MUG }
+		localization_key = zz_ef_iso2_MUG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MUI }
+		localization_key = zz_ef_iso2_MUI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MYB }
+		localization_key = zz_ef_iso2_MYB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MYI }
+		localization_key = zz_ef_iso2_MYI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MYS }
+		localization_key = zz_ef_iso2_MYS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:MZB }
+		localization_key = zz_ef_iso2_MZB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NAG }
+		localization_key = zz_ef_iso2_NAG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NAH }
+		localization_key = zz_ef_iso2_NAH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NAL }
+		localization_key = zz_ef_iso2_NAL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NAM }
+		localization_key = zz_ef_iso2_NAM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NAR }
+		localization_key = zz_ef_iso2_NAR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NAS }
+		localization_key = zz_ef_iso2_NAS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NAV }
+		localization_key = zz_ef_iso2_NAV
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NAW }
+		localization_key = zz_ef_iso2_NAW
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NBA }
+		localization_key = zz_ef_iso2_NBA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NBS }
+		localization_key = zz_ef_iso2_NBS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NCA }
+		localization_key = zz_ef_iso2_NCA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NCR }
+		localization_key = zz_ef_iso2_NCR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NEJ }
+		localization_key = zz_ef_iso2_NEJ
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NEN }
+		localization_key = zz_ef_iso2_NEN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NEP }
+		localization_key = zz_ef_iso2_NEP
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NET }
+		localization_key = zz_ef_iso2_NET
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NEW }
+		localization_key = zz_ef_iso2_NEW
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NGA }
+		localization_key = zz_ef_iso2_NGA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NGF }
+		localization_key = zz_ef_iso2_NGF
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NGU }
+		localization_key = zz_ef_iso2_NGU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NIC }
+		localization_key = zz_ef_iso2_NIC
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NNG }
+		localization_key = zz_ef_iso2_NNG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NNV }
+		localization_key = zz_ef_iso2_NNV
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NOR }
+		localization_key = zz_ef_iso2_NOR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NPU }
+		localization_key = zz_ef_iso2_NPU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NRU }
+		localization_key = zz_ef_iso2_NRU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NSW }
+		localization_key = zz_ef_iso2_NSW
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NTO }
+		localization_key = zz_ef_iso2_NTO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NTU }
+		localization_key = zz_ef_iso2_NTU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NUE }
+		localization_key = zz_ef_iso2_NUE
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NVJ }
+		localization_key = zz_ef_iso2_NVJ
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NVL }
+		localization_key = zz_ef_iso2_NVL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NVS }
+		localization_key = zz_ef_iso2_NVS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NYL }
+		localization_key = zz_ef_iso2_NYL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NYM }
+		localization_key = zz_ef_iso2_NYM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NYP }
+		localization_key = zz_ef_iso2_NYP
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NYR }
+		localization_key = zz_ef_iso2_NYR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NZL }
+		localization_key = zz_ef_iso2_NZL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:NZP }
+		localization_key = zz_ef_iso2_NZP
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:OAX }
+		localization_key = zz_ef_iso2_OAX
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:OCC }
+		localization_key = zz_ef_iso2_OCC
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:OGD }
+		localization_key = zz_ef_iso2_OGD
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:OLD }
+		localization_key = zz_ef_iso2_OLD
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:OMA }
+		localization_key = zz_ef_iso2_OMA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:OMO }
+		localization_key = zz_ef_iso2_OMO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ONT }
+		localization_key = zz_ef_iso2_ONT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ORA }
+		localization_key = zz_ef_iso2_ORA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ORG }
+		localization_key = zz_ef_iso2_ORG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ORI }
+		localization_key = zz_ef_iso2_ORI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ORM }
+		localization_key = zz_ef_iso2_ORM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ORN }
+		localization_key = zz_ef_iso2_ORN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:OUA }
+		localization_key = zz_ef_iso2_OUA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:OVB }
+		localization_key = zz_ef_iso2_OVB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:OVM }
+		localization_key = zz_ef_iso2_OVM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:OYO }
+		localization_key = zz_ef_iso2_OYO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:OZH }
+		localization_key = zz_ef_iso2_OZH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PAA }
+		localization_key = zz_ef_iso2_PAA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PAK }
+		localization_key = zz_ef_iso2_PAK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PAL }
+		localization_key = zz_ef_iso2_PAL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PAN }
+		localization_key = zz_ef_iso2_PAN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PAP }
+		localization_key = zz_ef_iso2_PAP
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PAR }
+		localization_key = zz_ef_iso2_PAR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PAT }
+		localization_key = zz_ef_iso2_PAT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PAU }
+		localization_key = zz_ef_iso2_PAU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PBC }
+		localization_key = zz_ef_iso2_PBC
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PCO }
+		localization_key = zz_ef_iso2_PCO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PDI }
+		localization_key = zz_ef_iso2_PDI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PER }
+		localization_key = zz_ef_iso2_PER
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PEU }
+		localization_key = zz_ef_iso2_PEU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PHI }
+		localization_key = zz_ef_iso2_PHI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PHL }
+		localization_key = zz_ef_iso2_PHL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PLC }
+		localization_key = zz_ef_iso2_PLC
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PLP }
+		localization_key = zz_ef_iso2_PLP
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PLT }
+		localization_key = zz_ef_iso2_PLT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PLY }
+		localization_key = zz_ef_iso2_PLY
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PMA }
+		localization_key = zz_ef_iso2_PMA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PNI }
+		localization_key = zz_ef_iso2_PNI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PNM }
+		localization_key = zz_ef_iso2_PNM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PNS }
+		localization_key = zz_ef_iso2_PNS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:POL }
+		localization_key = zz_ef_iso2_POL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:POM }
+		localization_key = zz_ef_iso2_POM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PON }
+		localization_key = zz_ef_iso2_PON
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:POR }
+		localization_key = zz_ef_iso2_POR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PPU }
+		localization_key = zz_ef_iso2_PPU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PRA }
+		localization_key = zz_ef_iso2_PRA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PRC }
+		localization_key = zz_ef_iso2_PRC
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PRG }
+		localization_key = zz_ef_iso2_PRG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PRK }
+		localization_key = zz_ef_iso2_PRK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PRM }
+		localization_key = zz_ef_iso2_PRM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PRU }
+		localization_key = zz_ef_iso2_PRU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PTA }
+		localization_key = zz_ef_iso2_PTA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PTN }
+		localization_key = zz_ef_iso2_PTN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PUD }
+		localization_key = zz_ef_iso2_PUD
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PUE }
+		localization_key = zz_ef_iso2_PUE
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:PWN }
+		localization_key = zz_ef_iso2_PWN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:QIA }
+		localization_key = zz_ef_iso2_QIA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:QUE }
+		localization_key = zz_ef_iso2_QUE
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:QWR }
+		localization_key = zz_ef_iso2_QWR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:RAJ }
+		localization_key = zz_ef_iso2_RAJ
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:RGB }
+		localization_key = zz_ef_iso2_RGB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:RHE }
+		localization_key = zz_ef_iso2_RHE
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:RHN }
+		localization_key = zz_ef_iso2_RHN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:RIO }
+		localization_key = zz_ef_iso2_RIO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ROM }
+		localization_key = zz_ef_iso2_ROM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:RSM }
+		localization_key = zz_ef_iso2_RSM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:RUS }
+		localization_key = zz_ef_iso2_RUS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:RWD }
+		localization_key = zz_ef_iso2_RWD
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:RYU }
+		localization_key = zz_ef_iso2_RYU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SAF }
+		localization_key = zz_ef_iso2_SAF
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SAH }
+		localization_key = zz_ef_iso2_SAH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SAK }
+		localization_key = zz_ef_iso2_SAK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SAN }
+		localization_key = zz_ef_iso2_SAN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SAR }
+		localization_key = zz_ef_iso2_SAR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SAS }
+		localization_key = zz_ef_iso2_SAS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SAT }
+		localization_key = zz_ef_iso2_SAT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SAV }
+		localization_key = zz_ef_iso2_SAV
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SAX }
+		localization_key = zz_ef_iso2_SAX
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SC1 }
+		localization_key = zz_ef_iso2_SC1
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SC2 }
+		localization_key = zz_ef_iso2_SC2
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SC3 }
+		localization_key = zz_ef_iso2_SC3
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SC4 }
+		localization_key = zz_ef_iso2_SC4
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SCA }
+		localization_key = zz_ef_iso2_SCA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SCH }
+		localization_key = zz_ef_iso2_SCH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SCM }
+		localization_key = zz_ef_iso2_SCM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SCN }
+		localization_key = zz_ef_iso2_SCN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SCO }
+		localization_key = zz_ef_iso2_SCO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SCR }
+		localization_key = zz_ef_iso2_SCR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SCT }
+		localization_key = zz_ef_iso2_SCT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SCW }
+		localization_key = zz_ef_iso2_SCW
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SDM }
+		localization_key = zz_ef_iso2_SDM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SEL }
+		localization_key = zz_ef_iso2_SEL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SEQ }
+		localization_key = zz_ef_iso2_SEQ
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SER }
+		localization_key = zz_ef_iso2_SER
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SGF }
+		localization_key = zz_ef_iso2_SGF
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SGU }
+		localization_key = zz_ef_iso2_SGU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SHA }
+		localization_key = zz_ef_iso2_SHA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SHN }
+		localization_key = zz_ef_iso2_SHN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SHS }
+		localization_key = zz_ef_iso2_SHS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SHW }
+		localization_key = zz_ef_iso2_SHW
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SIA }
+		localization_key = zz_ef_iso2_SIA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SIB }
+		localization_key = zz_ef_iso2_SIB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SIC }
+		localization_key = zz_ef_iso2_SIC
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SIH }
+		localization_key = zz_ef_iso2_SIH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SIK }
+		localization_key = zz_ef_iso2_SIK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SIL }
+		localization_key = zz_ef_iso2_SIL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SIN }
+		localization_key = zz_ef_iso2_SIN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SKH }
+		localization_key = zz_ef_iso2_SKH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SKM }
+		localization_key = zz_ef_iso2_SKM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SKY }
+		localization_key = zz_ef_iso2_SKY
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SLK }
+		localization_key = zz_ef_iso2_SLK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SLO }
+		localization_key = zz_ef_iso2_SLO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SLS }
+		localization_key = zz_ef_iso2_SLS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SLV }
+		localization_key = zz_ef_iso2_SLV
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SLW }
+		localization_key = zz_ef_iso2_SLW
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SMB }
+		localization_key = zz_ef_iso2_SMB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SMI }
+		localization_key = zz_ef_iso2_SMI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SML }
+		localization_key = zz_ef_iso2_SML
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SNA }
+		localization_key = zz_ef_iso2_SNA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SNG }
+		localization_key = zz_ef_iso2_SNG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SOK }
+		localization_key = zz_ef_iso2_SOK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SPA }
+		localization_key = zz_ef_iso2_SPA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SPC }
+		localization_key = zz_ef_iso2_SPC
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SPU }
+		localization_key = zz_ef_iso2_SPU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SRA }
+		localization_key = zz_ef_iso2_SRA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SRB }
+		localization_key = zz_ef_iso2_SRB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SRK }
+		localization_key = zz_ef_iso2_SRK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SRR }
+		localization_key = zz_ef_iso2_SRR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SSU }
+		localization_key = zz_ef_iso2_SSU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:STG }
+		localization_key = zz_ef_iso2_STG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SUD }
+		localization_key = zz_ef_iso2_SUD
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SUL }
+		localization_key = zz_ef_iso2_SUL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SUR }
+		localization_key = zz_ef_iso2_SUR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SWE }
+		localization_key = zz_ef_iso2_SWE
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SWI }
+		localization_key = zz_ef_iso2_SWI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SWT }
+		localization_key = zz_ef_iso2_SWT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SWZ }
+		localization_key = zz_ef_iso2_SWZ
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:SYR }
+		localization_key = zz_ef_iso2_SYR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TAR }
+		localization_key = zz_ef_iso2_TAR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TAS }
+		localization_key = zz_ef_iso2_TAS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TBI }
+		localization_key = zz_ef_iso2_TBI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TEK }
+		localization_key = zz_ef_iso2_TEK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TEX }
+		localization_key = zz_ef_iso2_TEX
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TGI }
+		localization_key = zz_ef_iso2_TGI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TGR }
+		localization_key = zz_ef_iso2_TGR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:THL }
+		localization_key = zz_ef_iso2_THL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TIB }
+		localization_key = zz_ef_iso2_TIB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TID }
+		localization_key = zz_ef_iso2_TID
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TIP }
+		localization_key = zz_ef_iso2_TIP
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TIR }
+		localization_key = zz_ef_iso2_TIR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TIS }
+		localization_key = zz_ef_iso2_TIS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TIV }
+		localization_key = zz_ef_iso2_TIV
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TJI }
+		localization_key = zz_ef_iso2_TJI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TKE }
+		localization_key = zz_ef_iso2_TKE
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TMN }
+		localization_key = zz_ef_iso2_TMN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TNG }
+		localization_key = zz_ef_iso2_TNG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TNS }
+		localization_key = zz_ef_iso2_TNS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TOB }
+		localization_key = zz_ef_iso2_TOB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TPG }
+		localization_key = zz_ef_iso2_TPG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TPI }
+		localization_key = zz_ef_iso2_TPI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TPS }
+		localization_key = zz_ef_iso2_TPS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TRA }
+		localization_key = zz_ef_iso2_TRA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TRC }
+		localization_key = zz_ef_iso2_TRC
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TRE }
+		localization_key = zz_ef_iso2_TRE
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TRH }
+		localization_key = zz_ef_iso2_TRH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TRI }
+		localization_key = zz_ef_iso2_TRI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TRK }
+		localization_key = zz_ef_iso2_TRK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TRM }
+		localization_key = zz_ef_iso2_TRM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TRN }
+		localization_key = zz_ef_iso2_TRN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TRS }
+		localization_key = zz_ef_iso2_TRS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TRZ }
+		localization_key = zz_ef_iso2_TRZ
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TSW }
+		localization_key = zz_ef_iso2_TSW
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TUA }
+		localization_key = zz_ef_iso2_TUA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TUG }
+		localization_key = zz_ef_iso2_TUG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TUN }
+		localization_key = zz_ef_iso2_TUN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TUR }
+		localization_key = zz_ef_iso2_TUR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TUS }
+		localization_key = zz_ef_iso2_TUS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TUV }
+		localization_key = zz_ef_iso2_TUV
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:TWT }
+		localization_key = zz_ef_iso2_TWT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:UBD }
+		localization_key = zz_ef_iso2_UBD
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:UCA }
+		localization_key = zz_ef_iso2_UCA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:UDM }
+		localization_key = zz_ef_iso2_UDM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:UKR }
+		localization_key = zz_ef_iso2_UKR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ULR }
+		localization_key = zz_ef_iso2_ULR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ULS }
+		localization_key = zz_ef_iso2_ULS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ULT }
+		localization_key = zz_ef_iso2_ULT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:UNL }
+		localization_key = zz_ef_iso2_UNL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:UNT }
+		localization_key = zz_ef_iso2_UNT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:UOM }
+		localization_key = zz_ef_iso2_UOM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:URL }
+		localization_key = zz_ef_iso2_URL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:URU }
+		localization_key = zz_ef_iso2_URU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:USA }
+		localization_key = zz_ef_iso2_USA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:UTE }
+		localization_key = zz_ef_iso2_UTE
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:UTR }
+		localization_key = zz_ef_iso2_UTR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:UYA }
+		localization_key = zz_ef_iso2_UYA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:UZB }
+		localization_key = zz_ef_iso2_UZB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:UZH }
+		localization_key = zz_ef_iso2_UZH
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:VEN }
+		localization_key = zz_ef_iso2_VEN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:VIE }
+		localization_key = zz_ef_iso2_VIE
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:VND }
+		localization_key = zz_ef_iso2_VND
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:VNT }
+		localization_key = zz_ef_iso2_VNT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:VNZ }
+		localization_key = zz_ef_iso2_VNZ
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:WAD }
+		localization_key = zz_ef_iso2_WAD
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:WAL }
+		localization_key = zz_ef_iso2_WAL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:WAS }
+		localization_key = zz_ef_iso2_WAS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:WBL }
+		localization_key = zz_ef_iso2_WBL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:WDJ }
+		localization_key = zz_ef_iso2_WDJ
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:WEI }
+		localization_key = zz_ef_iso2_WEI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:WES }
+		localization_key = zz_ef_iso2_WES
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:WIN }
+		localization_key = zz_ef_iso2_WIN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:WKB }
+		localization_key = zz_ef_iso2_WKB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:WLD }
+		localization_key = zz_ef_iso2_WLD
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:WLG }
+		localization_key = zz_ef_iso2_WLG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:WLL }
+		localization_key = zz_ef_iso2_WLL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:WLO }
+		localization_key = zz_ef_iso2_WLO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:WLS }
+		localization_key = zz_ef_iso2_WLS
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:WLT }
+		localization_key = zz_ef_iso2_WLT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:WRD }
+		localization_key = zz_ef_iso2_WRD
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:WRR }
+		localization_key = zz_ef_iso2_WRR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:WSG }
+		localization_key = zz_ef_iso2_WSG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:WTI }
+		localization_key = zz_ef_iso2_WTI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:WTU }
+		localization_key = zz_ef_iso2_WTU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:WUR }
+		localization_key = zz_ef_iso2_WUR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:WYU }
+		localization_key = zz_ef_iso2_WYU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:XHO }
+		localization_key = zz_ef_iso2_XHO
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:XIB }
+		localization_key = zz_ef_iso2_XIB
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:XIN }
+		localization_key = zz_ef_iso2_XIN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:YAK }
+		localization_key = zz_ef_iso2_YAK
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:YEM }
+		localization_key = zz_ef_iso2_YEM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:YGU }
+		localization_key = zz_ef_iso2_YGU
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:YKA }
+		localization_key = zz_ef_iso2_YKA
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:YOG }
+		localization_key = zz_ef_iso2_YOG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:YUC }
+		localization_key = zz_ef_iso2_YUC
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:YUE }
+		localization_key = zz_ef_iso2_YUE
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:YUG }
+		localization_key = zz_ef_iso2_YUG
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:YUN }
+		localization_key = zz_ef_iso2_YUN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:YUR }
+		localization_key = zz_ef_iso2_YUR
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:YUZ }
+		localization_key = zz_ef_iso2_YUZ
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:YYT }
+		localization_key = zz_ef_iso2_YYT
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ZAI }
+		localization_key = zz_ef_iso2_ZAI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ZAN }
+		localization_key = zz_ef_iso2_ZAN
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ZHI }
+		localization_key = zz_ef_iso2_ZHI
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ZIM }
+		localization_key = zz_ef_iso2_ZIM
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ZND }
+		localization_key = zz_ef_iso2_ZND
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ZUL }
+		localization_key = zz_ef_iso2_ZUL
+	}
+	text = {
+		trigger = { var:zz_ef_mu_head ?= c:ZWY }
+		localization_key = zz_ef_iso2_ZWY
+	}
+	text = {
+		localization_key = zz_ef_iso2_self
+	}
 }
-currency_symbol = {
+
+currency_code = {
 	type = country
 	log_loc_errors = no
 
-	# «<two letters of the country> <the sign of its currency's word>» (Д.R8а.8, tools/regen_ld_currency_symbol.py)
+	# «<two letters of the country> <the first letter of its currency's word>» (Д.R8в.20)
 	#no monetary system
 	text = {
 		trigger = { has_law = law_type:law_no_monetary_system }
 		localization_key = zz_ef_sym_none
 	}
-	#lira_ottoman_lira
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:lira_ottoman_lira }
-		localization_key = zz_ef_sym_cur_lira_ottoman_lira
-	}
-	#peso_philippine_peso
-	text = {
-		trigger = { var:zz_ef_cur ?= flag:peso_philippine_peso }
-		localization_key = zz_ef_sym_cur_peso_philippine_peso
-	}
 	#abazi
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:abazi }
-		localization_key = zz_ef_sym_abazi
+		localization_key = zz_ef_code_abazi
 	}
 	#ariary
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:ariary }
-		localization_key = zz_ef_sym_ariary
+		localization_key = zz_ef_code_ariary
 	}
 	#baht
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:baht }
-		localization_key = zz_ef_sym_baht
+		localization_key = zz_ef_code_baht
 	}
 	#birr
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:birr }
-		localization_key = zz_ef_sym_birr
+		localization_key = zz_ef_code_birr
 	}
 	#colon
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:colon }
-		localization_key = zz_ef_sym_colon
+		localization_key = zz_ef_code_colon
 	}
 	#cordoba
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:cordoba }
-		localization_key = zz_ef_sym_cordoba
+		localization_key = zz_ef_code_cordoba
 	}
 	#cowrie
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:cowrie }
-		localization_key = zz_ef_sym_cowrie
+		localization_key = zz_ef_code_cowrie
 	}
 	#dinar
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:dinar }
-		localization_key = zz_ef_sym_dinar
+		localization_key = zz_ef_code_dinar
 	}
 	#dirham
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:dirham }
-		localization_key = zz_ef_sym_dirham
+		localization_key = zz_ef_code_dirham
 	}
 	#dollar
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:dollar }
-		localization_key = zz_ef_sym_dollar
+		localization_key = zz_ef_code_dollar
 	}
 	#dong
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:dong }
-		localization_key = zz_ef_sym_dong
+		localization_key = zz_ef_code_dong
 	}
 	#drachma
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:drachma }
-		localization_key = zz_ef_sym_drachma
+		localization_key = zz_ef_code_drachma
 	}
 	#dram
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:dram }
-		localization_key = zz_ef_sym_dram
+		localization_key = zz_ef_code_dram
 	}
 	#ducat
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:ducat }
-		localization_key = zz_ef_sym_ducat
+		localization_key = zz_ef_code_ducat
 	}
 	#eco
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:eco }
-		localization_key = zz_ef_sym_eco
+		localization_key = zz_ef_code_eco
 	}
 	#florin
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:florin }
-		localization_key = zz_ef_sym_florin
+		localization_key = zz_ef_code_florin
 	}
 	#forint
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:forint }
-		localization_key = zz_ef_sym_forint
+		localization_key = zz_ef_code_forint
 	}
 	#franc
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:franc }
-		localization_key = zz_ef_sym_franc
+		localization_key = zz_ef_code_franc
 	}
 	#guilder
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:guilder }
-		localization_key = zz_ef_sym_guilder
+		localization_key = zz_ef_code_guilder
 	}
 	#gulden
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:gulden }
-		localization_key = zz_ef_sym_gulden
+		localization_key = zz_ef_code_gulden
 	}
 	#hryvnia
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:hryvnia }
-		localization_key = zz_ef_sym_hryvnia
+		localization_key = zz_ef_code_hryvnia
 	}
 	#kip
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:kip }
-		localization_key = zz_ef_sym_kip
+		localization_key = zz_ef_code_kip
 	}
 	#koruna
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:koruna }
-		localization_key = zz_ef_sym_koruna
+		localization_key = zz_ef_code_koruna
 	}
 	#krona
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:krona }
-		localization_key = zz_ef_sym_krona
+		localization_key = zz_ef_code_krona
 	}
 	#krone
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:krone }
-		localization_key = zz_ef_sym_krone
+		localization_key = zz_ef_code_krone
 	}
 	#kroon
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:kroon }
-		localization_key = zz_ef_sym_kroon
+		localization_key = zz_ef_code_kroon
 	}
 	#kyat
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:kyat }
-		localization_key = zz_ef_sym_kyat
+		localization_key = zz_ef_code_kyat
 	}
 	#lats
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:lats }
-		localization_key = zz_ef_sym_lats
+		localization_key = zz_ef_code_lats
 	}
 	#lek
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:lek }
-		localization_key = zz_ef_sym_lek
+		localization_key = zz_ef_code_lek
 	}
 	#lempira
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:lempira }
-		localization_key = zz_ef_sym_lempira
+		localization_key = zz_ef_code_lempira
 	}
 	#leu
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:leu }
-		localization_key = zz_ef_sym_leu
+		localization_key = zz_ef_code_leu
 	}
 	#lev
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:lev }
-		localization_key = zz_ef_sym_lev
+		localization_key = zz_ef_code_lev
 	}
 	#lira
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:lira }
-		localization_key = zz_ef_sym_lira
+		localization_key = zz_ef_code_lira
 	}
 	#litas
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:litas }
-		localization_key = zz_ef_sym_litas
+		localization_key = zz_ef_code_litas
 	}
 	#manat
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:manat }
-		localization_key = zz_ef_sym_manat
+		localization_key = zz_ef_code_manat
 	}
 	#mark
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:mark }
-		localization_key = zz_ef_sym_mark
+		localization_key = zz_ef_code_mark
 	}
 	#markka
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:markka }
-		localization_key = zz_ef_sym_markka
+		localization_key = zz_ef_code_markka
 	}
 	#naira
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:naira }
-		localization_key = zz_ef_sym_naira
+		localization_key = zz_ef_code_naira
 	}
 	#ouguiya
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:ouguiya }
-		localization_key = zz_ef_sym_ouguiya
+		localization_key = zz_ef_code_ouguiya
 	}
 	#peseta
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:peseta }
-		localization_key = zz_ef_sym_peseta
+		localization_key = zz_ef_code_peseta
 	}
 	#peso
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:peso }
-		localization_key = zz_ef_sym_peso
+		localization_key = zz_ef_code_peso
 	}
 	#piastre
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:piastre }
-		localization_key = zz_ef_sym_piastre
+		localization_key = zz_ef_code_piastre
 	}
 	#pound
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:pound }
-		localization_key = zz_ef_sym_pound
+		localization_key = zz_ef_code_pound
 	}
 	#qiran
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:qiran }
-		localization_key = zz_ef_sym_qiran
+		localization_key = zz_ef_code_qiran
 	}
 	#quetzal
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:quetzal }
-		localization_key = zz_ef_sym_quetzal
+		localization_key = zz_ef_code_quetzal
 	}
 	#rand
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:rand }
-		localization_key = zz_ef_sym_rand
+		localization_key = zz_ef_code_rand
 	}
 	#real
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:real }
-		localization_key = zz_ef_sym_real
+		localization_key = zz_ef_code_real
 	}
 	#riel
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:riel }
-		localization_key = zz_ef_sym_riel
+		localization_key = zz_ef_code_riel
 	}
 	#ringgit
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:ringgit }
-		localization_key = zz_ef_sym_ringgit
+		localization_key = zz_ef_code_ringgit
 	}
 	#riyal
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:riyal }
-		localization_key = zz_ef_sym_riyal
+		localization_key = zz_ef_code_riyal
 	}
 	#ruble
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:ruble }
-		localization_key = zz_ef_sym_ruble
+		localization_key = zz_ef_code_ruble
 	}
 	#rupee
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:rupee }
-		localization_key = zz_ef_sym_rupee
+		localization_key = zz_ef_code_rupee
 	}
 	#rupiah
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:rupiah }
-		localization_key = zz_ef_sym_rupiah
+		localization_key = zz_ef_code_rupiah
 	}
 	#scudo
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:scudo }
-		localization_key = zz_ef_sym_scudo
+		localization_key = zz_ef_code_scudo
 	}
 	#shilling
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:shilling }
-		localization_key = zz_ef_sym_shilling
+		localization_key = zz_ef_code_shilling
 	}
 	#sol
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:sol }
-		localization_key = zz_ef_sym_sol
+		localization_key = zz_ef_code_sol
 	}
 	#tael
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:tael }
-		localization_key = zz_ef_sym_tael
+		localization_key = zz_ef_code_tael
 	}
 	#taka
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:taka }
-		localization_key = zz_ef_sym_taka
+		localization_key = zz_ef_code_taka
 	}
 	#talari
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:talari }
-		localization_key = zz_ef_sym_talari
+		localization_key = zz_ef_code_talari
 	}
 	#tangka
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:tangka }
-		localization_key = zz_ef_sym_tangka
+		localization_key = zz_ef_code_tangka
 	}
 	#tenge
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:tenge }
-		localization_key = zz_ef_sym_tenge
+		localization_key = zz_ef_code_tenge
 	}
 	#thaler
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:thaler }
-		localization_key = zz_ef_sym_thaler
+		localization_key = zz_ef_code_thaler
 	}
 	#tical
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:tical }
-		localization_key = zz_ef_sym_tical
+		localization_key = zz_ef_code_tical
 	}
 	#tolar
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:tolar }
-		localization_key = zz_ef_sym_tolar
+		localization_key = zz_ef_code_tolar
 	}
 	#toman
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:toman }
-		localization_key = zz_ef_sym_toman
+		localization_key = zz_ef_code_toman
 	}
 	#tugrik
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:tugrik }
-		localization_key = zz_ef_sym_tugrik
+		localization_key = zz_ef_code_tugrik
 	}
 	#won
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:won }
-		localization_key = zz_ef_sym_won
+		localization_key = zz_ef_code_won
 	}
 	#yen
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:yen }
-		localization_key = zz_ef_sym_yen
+		localization_key = zz_ef_code_yen
 	}
 	#yuan
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:yuan }
-		localization_key = zz_ef_sym_yuan
+		localization_key = zz_ef_code_yuan
 	}
 	#zloty
 	text = {
 		trigger = { var:zz_ef_cur_noun ?= flag:zloty }
-		localization_key = zz_ef_sym_zloty
+		localization_key = zz_ef_code_zloty
 	}
 	#generic
 	text = {
-		localization_key = zz_ef_sym_generic
+		localization_key = zz_ef_sym_none
+	}
+}
+
+currency_symbol = {
+	type = country
+	log_loc_errors = no
+
+	# the sign of the codes that have one, else the code (Д.R8в.20)
+	#no monetary system
+	text = {
+		trigger = { has_law = law_type:law_no_monetary_system }
+		localization_key = zz_ef_sym_none
+	}
+	#DEM
+	text = {
+		trigger = {
+			var:zz_ef_cur_noun ?= flag:mark
+			OR = {
+				AND = { NOT = { zz_ef_mu_follower = yes } c:GER ?= this }
+				var:zz_ef_mu_head ?= c:GER
+			}
+		}
+		localization_key = zz_ef_sym_code_DEM
+	}
+	#ESP
+	text = {
+		trigger = {
+			var:zz_ef_cur_noun ?= flag:peseta
+			OR = {
+				AND = { NOT = { zz_ef_mu_follower = yes } c:SPA ?= this }
+				var:zz_ef_mu_head ?= c:SPA
+			}
+		}
+		localization_key = zz_ef_sym_code_ESP
+	}
+	#FRF
+	text = {
+		trigger = {
+			var:zz_ef_cur_noun ?= flag:franc
+			OR = {
+				AND = { NOT = { zz_ef_mu_follower = yes } c:FRA ?= this }
+				var:zz_ef_mu_head ?= c:FRA
+			}
+		}
+		localization_key = zz_ef_sym_code_FRF
+	}
+	#GBP
+	text = {
+		trigger = {
+			var:zz_ef_cur_noun ?= flag:pound
+			OR = {
+				AND = { NOT = { zz_ef_mu_follower = yes } c:GBR ?= this }
+				var:zz_ef_mu_head ?= c:GBR
+			}
+		}
+		localization_key = zz_ef_sym_code_GBP
+	}
+	#GRD
+	text = {
+		trigger = {
+			var:zz_ef_cur_noun ?= flag:drachma
+			OR = {
+				AND = { NOT = { zz_ef_mu_follower = yes } c:GRI ?= this }
+				var:zz_ef_mu_head ?= c:GRI
+			}
+		}
+		localization_key = zz_ef_sym_code_GRD
+	}
+	#INR
+	text = {
+		trigger = {
+			var:zz_ef_cur_noun ?= flag:rupee
+			OR = {
+				AND = { NOT = { zz_ef_mu_follower = yes } c:HND ?= this }
+				var:zz_ef_mu_head ?= c:HND
+			}
+		}
+		localization_key = zz_ef_sym_code_INR
+	}
+	#JPY
+	text = {
+		trigger = {
+			var:zz_ef_cur_noun ?= flag:yen
+			OR = {
+				AND = { NOT = { zz_ef_mu_follower = yes } c:JAP ?= this }
+				var:zz_ef_mu_head ?= c:JAP
+			}
+		}
+		localization_key = zz_ef_sym_code_JPY
+	}
+	#KRW
+	text = {
+		trigger = {
+			var:zz_ef_cur_noun ?= flag:won
+			OR = {
+				AND = { NOT = { zz_ef_mu_follower = yes } c:KRN ?= this }
+				var:zz_ef_mu_head ?= c:KRN
+			}
+		}
+		localization_key = zz_ef_sym_code_KRW
+	}
+	#PHP
+	text = {
+		trigger = {
+			var:zz_ef_cur_noun ?= flag:peso
+			OR = {
+				AND = { NOT = { zz_ef_mu_follower = yes } c:PHI ?= this }
+				var:zz_ef_mu_head ?= c:PHI
+			}
+		}
+		localization_key = zz_ef_sym_code_PHP
+	}
+	#RUR
+	text = {
+		trigger = {
+			var:zz_ef_cur_noun ?= flag:ruble
+			OR = {
+				AND = { NOT = { zz_ef_mu_follower = yes } c:RUS ?= this }
+				var:zz_ef_mu_head ?= c:RUS
+			}
+		}
+		localization_key = zz_ef_sym_code_RUR
+	}
+	#THB
+	text = {
+		trigger = {
+			var:zz_ef_cur_noun ?= flag:baht
+			OR = {
+				AND = { NOT = { zz_ef_mu_follower = yes } c:SIA ?= this }
+				var:zz_ef_mu_head ?= c:SIA
+			}
+		}
+		localization_key = zz_ef_sym_code_THB
+	}
+	#TRL
+	text = {
+		trigger = {
+			var:zz_ef_cur_noun ?= flag:lira
+			OR = {
+				AND = { NOT = { zz_ef_mu_follower = yes } c:TRH ?= this }
+				var:zz_ef_mu_head ?= c:TRH
+			}
+		}
+		localization_key = zz_ef_sym_code_TRL
+	}
+	#UAH
+	text = {
+		trigger = {
+			var:zz_ef_cur_noun ?= flag:hryvnia
+			OR = {
+				AND = { NOT = { zz_ef_mu_follower = yes } c:UKR ?= this }
+				var:zz_ef_mu_head ?= c:UKR
+			}
+		}
+		localization_key = zz_ef_sym_code_UAH
+	}
+	#USD
+	text = {
+		trigger = {
+			var:zz_ef_cur_noun ?= flag:dollar
+			OR = {
+				AND = { NOT = { zz_ef_mu_follower = yes } c:USA ?= this }
+				var:zz_ef_mu_head ?= c:USA
+			}
+		}
+		localization_key = zz_ef_sym_code_USD
+	}
+	#VND
+	text = {
+		trigger = {
+			var:zz_ef_cur_noun ?= flag:dong
+			OR = {
+				AND = { NOT = { zz_ef_mu_follower = yes } c:DAI ?= this }
+				var:zz_ef_mu_head ?= c:DAI
+			}
+		}
+		localization_key = zz_ef_sym_code_VND
+	}
+	#the code
+	text = {
+		localization_key = zz_ef_sym_code
 	}
 }
 

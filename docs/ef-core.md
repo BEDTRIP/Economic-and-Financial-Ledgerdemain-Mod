@@ -175,6 +175,7 @@
 - `common/prestige_goods/00_ef_prestige_goods_2.txt` — пусто: `manufacture_stock_usa` выключен (у `manufacture_stock`
   уже три престижных товара — предел движка).
 - `common/customizable_localization/00_ef_localization_ custom.txt` — имя валюты страны (`currency_name` — по
-  `var:zz_ef_cur_noun`, «<прилагательное страны> <слово>»; `currency_symbol` — «<две буквы страны> <знак слова>»
-  (`zz_ef_iso2_<тег>`, `zz_ef_sym_<слово>` в `localization/*/ld_currency_symbol_l_*.yml`), генератор
+  `var:zz_ef_cur_noun`, «<прилагательное страны> <слово>»; `currency_code` — две буквы страны (`zz_ef_cur_iso2`: свои или главы
+  союза) + первая буква слова, `currency_symbol` — знак кода из таблицы генератора, иначе код (`zz_ef_iso2_<тег>`,
+  `zz_ef_code_<слово>`, `zz_ef_sym_code_<код>` в `localization/*/ld_currency_symbol_l_*.yml`; Д.R8в.20), генератор
   `regen_ld_currency_symbol`; пробел в имени файла — авторский).
