@@ -94,6 +94,21 @@ zz_ef_clr_gpm_own = {
 }
 # The metal the payer's monetary authority can pay, in gold: the CB -- its standard's metal (zz_ef_cb_metal), the banks
 # -- their gold and silver.
+# Д.R8в.30: the floor of a CB's cover the clearing does not take its metal under -- half the target; the share of its
+# reserves over it.
+zz_ef_clr_cover_floor = {
+	value = zz_ef_cover_normal
+	multiply = 0.5
+}
+zz_ef_clr_over_floor = {
+	value = 0
+	if = {
+		limit = { zz_ef_cb_cover > zz_ef_clr_cover_floor }
+		value = zz_ef_cb_cover
+		subtract = zz_ef_clr_cover_floor
+		divide = zz_ef_cb_cover
+	}
+}
 zz_ef_clr_metal_av_g = {
 	value = 0
 	if = {
@@ -103,6 +118,9 @@ zz_ef_clr_metal_av_g = {
 			limit = { zz_ef_metal_silver = yes }
 			multiply = silver_to_gold_rate
 		}
+		# only the metal over the floor of the cover (Д.R8в.30): below it the payer pays in claims, as a CB suspending
+		# redemption would
+		multiply = zz_ef_clr_over_floor
 	}
 	else = {
 		value = zz_ef_bankm_gold
