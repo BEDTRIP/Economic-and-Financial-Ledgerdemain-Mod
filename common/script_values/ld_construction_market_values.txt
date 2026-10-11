@@ -122,3 +122,17 @@ zz_ef_reg_base_mix = {
 # The regulator's staffing counted at least this in its throughput (PSC_scripted_effects.txt): an empty regulator does
 # not get a throughput of thousands for the week its workers come
 zz_ef_reg_occupancy_floor = 0.1
+
+# Scope: state. The regulator's staffing in the states' weights for the spending (Д.R8в.27): the regulator pays the
+# government wage, and where jobs pay more no one comes (a worker moves for +10%) -- an empty regulator buys nothing, the
+# spending goes to the staffed ones; at least zz_ef_reg_staff_floor, so an empty one gets enough to hire for
+zz_ef_reg_staff_floor = 0.05
+zz_ef_reg_staff_weight = {
+	value = 0
+	if = {
+		limit = { has_building = building_construction_regulator }
+		b:building_construction_regulator = { add = occupancy }
+	}
+	min = zz_ef_reg_staff_floor
+	max = 1
+}

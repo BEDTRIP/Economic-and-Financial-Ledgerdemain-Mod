@@ -125,7 +125,8 @@
    - `privatisation_percent_estimate` (сглаживание по `privatisation_percent_weeks`), обнуляет
      `national_production`/`weighted_total`, по штатам — доли закупки регулятора (`zz_ef_reg_market_step`), затем
      производство `*_construction` (`sum_construction_types_production`) и вес штата — производство × базовая цена смеси
-     (Д.R8в.27);
+     × укомплектованность регулятора `zz_ef_reg_staff_weight` (не меньше `zz_ef_reg_staff_floor` = 0,05: регулятор
+     платит государственную зарплату и пустует, где работа платит больше; деньги — укомплектованным; Д.R8в.27);
    - `corrected_private_allocation` -> `max_government_construction_spending` -> `check_construction_spending_level`
      (игрок 0.25 по умолчанию; ИИ = `ai_construction_demand` / макс) -> `limited_government_construction_spending`;
    - `private_construction_increase` (в форке = `zz_ef_psc_private_target - corrected_private_allocation`) кладётся
