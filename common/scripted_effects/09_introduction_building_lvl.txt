@@ -31595,13 +31595,11 @@ economic_crisis_destroy_central_bank = {
 ###########################################################################################################################################################################################
 ###########################################################################################################################################################################################
 
-# the country's currency: zz_ef_cur_intro_before / zz_ef_cur_intro / zz_ef_cur_intro_after
-# (scripted_effects/ld_currency_intro.txt, Д.R8в.7)
+# the country's currency: zz_ef_cur_intro (scripted_effects/ld_currency_intro.txt, Д.R8в.7)
 introduction_new_currency = {
 	#objectif de cet effect doit etre de réinitialiser à 100% la currency d'un pays comme si il venais d'avoir la tech
 	#ce qui n'ai pas le cas car les pret étranger ne sont pas reset
 	#doit utiliser le activate_law = law_type:law_no_market_liquidity avant d'appler l'effet si on veut un reset
-	zz_ef_cur_intro_before = yes
 
 	if = {
 		limit = {
@@ -31628,20 +31626,6 @@ introduction_new_currency = {
 	}
 
 	zz_ef_cur_intro = yes
-
-	if = { #super important car des pays peuvent trigger la bc ect et etre en isolationiste, ducoup tout ce set pui le fiat standart revient pour bloquer les échage - c'est parfait
-		limit = {
-			has_law = law_type:law_isolationism
-			market_owner_is_root = yes #pas de switch vers Fiat standart loi si le pays est sujet et isolationiste, ce qui veux dire que il est en currency obligatoirement ouvert si il est sujet, ce qui pose pas de probleme puisque il est dans le marché du overlord -> quand devien independent la boucle reprend ici pour appliquer le fiat standart et donc fermer le marcher
-		}
-		activate_law = law_type:law_fiat_standard
-		set_variable = {
-			name = money_value_target_1
-			value = 0.01
-		}
-		money_value_global_var = yes
-	}
-	zz_ef_cur_intro_after = yes
 }
 
 ###########################################################################################################################################################################################

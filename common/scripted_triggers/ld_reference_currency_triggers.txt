@@ -45,3 +45,16 @@ zz_ef_cur_leader = {
 	market_owner_is_root_univ_with_buiding = no
 	NOT = { zz_ef_mu_follower = yes }
 }
+
+# E&F's placeholder of a currency: fiat at a parity of 0.01 or none (a country with no money system gets it with the
+# technology, law_no_monetary_system_with_tech_currency_standards) -- the currency's introduction gives it a standard
+# (ld_currency_intro.txt, Д.R8в.7)
+zz_ef_cur_placeholder = {
+	has_law = law_type:law_fiat_standard
+	NOT = {
+		AND = {
+			has_variable = money_value_target_1
+			var:money_value_target_1 > zz_ef_cur_intro_par_min
+		}
+	}
+}

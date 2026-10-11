@@ -6784,9 +6784,14 @@ on_activate_monetary_system_law = {
 			name = foreign_exchange_controls
 			months = 12
 		}
-		set_variable = {
-			name = money_value_target_1
-			value = money_value_target_pre_set
+		# the parity: a metal one before, a metal standard now -- the old one in the new metal, the reserves converted
+		# (scripted_effects/ld_standard_switch.txt); else E&F's
+		if = {
+			limit = { NOT = { zz_ef_std_switch_metal = yes } }
+			set_variable = {
+				name = money_value_target_1
+				value = money_value_target_pre_set
+			}
 		}
 		zz_ef_std_switch_after = yes
 		trade_balance = yes

@@ -173,7 +173,7 @@ on_action, `ld_*` и PSC добавляют свои. Недельного пу�
 ## Вызовы и связи
 - Модель денег `ld_*`: месячные хуки зовут эффекты из `common/scripted_effects/ld_*.txt`; из тел E&F зовутся
   `zz_ef_cb_rate_step`, `zz_ef_std_switch_before/after`, `zz_ef_mp_init/_clear`, `zz_ef_crisis_redeem` (в
-  `01_economic_scripted_effects.txt`), `zz_ef_cur_intro_before`, `zz_ef_cur_intro`, `zz_ef_cur_intro_after` (в `09_introduction_building_lvl.txt`).
+  `01_economic_scripted_effects.txt`), `zz_ef_cur_intro` (в `09_introduction_building_lvl.txt`).
 - Эффекты E&F, пишущие `gold_state_1` / `silver_state_1` ЦБ-штата (счета модели): `enemy_capital_is_occuped`,
   `zz_ef_crisis_redeem` (через `zz_ef_rq_crisis_resell`), стартовые значения `99_ef_history_global_variable.txt`.
 - GUI: верхняя панель — `com_topbar_setup_ef`; пульсы GUI не вызывают, но scripted_guis зовут `reset_*`,
@@ -206,10 +206,10 @@ on_action, `ld_*` и PSC добавляют свои. Недельного пу�
 | EFK | `common/scripted_effects/ld_bank_seed.txt:36` | рынок: уровни банков (`zz_ef_bank_l`), `tc` (`zz_ef_bank_w`) | месячный `zz_ef_bank_seed_step` |
 | EFK | `common/scripted_effects/ld_bank_seed.txt:570` | штат: желаемое число банков (`zz_ef_bank_n`) | `zz_ef_bank_seed_state` |
 | EFM | `common/scripted_effects/ld_monetary_policy.txt:65,130,179` | `done` (завершение девальвации/ревальвации: покрытие, цель), `step` (шаг: направление, взведён ли), `ai_parity` (ИИ меняет паритет) | месячный `zz_ef_mp_step`; `zz_ef_mp_complete` |
-| EFM | `common/scripted_effects/ld_standard_switch.txt:160` | смена денежного стандарта: старый/новый паритет | на смене закона, `zz_ef_std_switch_after` (из `01_economic_scripted_effects.txt:9565`) |
+| EFM | `common/scripted_effects/ld_standard_switch.txt:150` | смена денежного стандарта: старый/новый паритет | на смене закона, `zz_ef_std_switch_after` (из `01_economic_scripted_effects.txt:9565`) |
 | EFM | `common/scripted_effects/ld_metal_accounts.txt:235` | `metal_start`: начальный металл ЦБ, что сделано | недельный, `zz_ef_metal_start_log` |
 | EFM | `common/scripted_effects/ld_subject_metal.txt:40` | `cb_state_lost` (ЦБ-штат потерян) | недельный `zz_ef_cb_state_owner_step` |
-| EFM | `common/scripted_effects/ld_currency_intro.txt` | `cur_intro_parity`: ввод валюты — стандарт и паритет до и после | `zz_ef_cur_intro_after` (из `introduction_new_currency`) |
+| EFM | `common/scripted_effects/ld_currency_intro.txt` | `cur_intro_parity`: ввод валюты — стандарт и паритет до и после | `zz_ef_cur_intro` (из `introduction_new_currency`) |
 | EFT | `common/scripted_effects/ld_metal_accounts.txt:498` | потоки металла ЦБ/банков/населения за неделю | недельный `zz_ef_metal_week_step` |
 | EFV | `common/scripted_effects/ld_metal_accounts.txt:505` | WORLD: суммы металла по ЦБ/банкам/населению, баланс закупок/продаж | недельный `zz_ef_world_metal_log` (из `ld_money_model.txt:742`) |
 | EFQ | `common/scripted_effects/ld_metal_accounts.txt:546` | сверка металла (`oth_g/oth_s`, ЦБ, стандарт) | `zz_ef_metal_reconcile` |

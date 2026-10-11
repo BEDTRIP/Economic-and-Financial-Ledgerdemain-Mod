@@ -1,28 +1,28 @@
 ﻿# A currency of its own (Д.R8в.7; понятие «Валюта страны»): the technology currency_standards and the central bank's
-# building call introduction_new_currency (09_introduction_building_lvl.txt), which calls the three effects here.
-# A country with money and a parity of its own keeps them: its standard's law and parity are put back as they were before
-# the call (Hanover leaving a union stays at its 3.32). A country on E&F's placeholder (no money system -> fiat at 0.01,
-# law_no_monetary_system_with_tech_currency_standards) takes a metallic standard -- silver before 1873, gold after (E&F's
-# dates) -- and a parity: from the money that went on its land -- its market owner's parity x the owner's money against
-# its parity (in the new standard's metal); no such money -- zz_ef_cur_intro_par_silver / _gold. Its name -- the
-# country's own (zz_ef_cur_set, Д.R8а.3). No metal comes with it: the new central bank buys it on the market like every
-# central bank (zz_ef_cb_metal_purchase_step).
-
-zz_ef_cur_intro_before = {
+# building call introduction_new_currency (09_introduction_building_lvl.txt), which calls zz_ef_cur_intro.
+# A country with money and a parity of its own keeps them (Hanover leaving a union stays at its 3.32). A country on E&F's
+# placeholder (no money system -> fiat at 0.01, law_no_monetary_system_with_tech_currency_standards) takes a metallic
+# standard -- silver before 1873, gold after (E&F's dates) -- and a parity: from the money that went on its land -- its
+# market owner's parity x the owner's money against its parity (in the new standard's metal); no such money --
+# zz_ef_cur_intro_par_silver / _gold. An isolationist market owner stays on fiat (E&F: its market closed to exchange).
+# Its name -- the country's own (zz_ef_cur_set, Д.R8а.3). No metal comes with it: the new central bank buys it on the
+# market like every central bank (zz_ef_cb_metal_purchase_step).
+zz_ef_cur_intro = {
 	set_variable = { name = zz_ef_cur_intro_std value = zz_ef_std_code }
 	set_variable = { name = zz_ef_cur_intro_par value = 0 }
 	if = {
 		limit = { has_variable = money_value_target_1 }
 		set_variable = { name = zz_ef_cur_intro_par value = var:money_value_target_1 }
 	}
-}
-
-# A country on the fiat placeholder takes a metallic standard.
-zz_ef_cur_intro = {
 	if = {
 		limit = {
-			has_law = law_type:law_fiat_standard
-			NOT = { var:zz_ef_cur_intro_par > zz_ef_cur_intro_par_min }
+			zz_ef_cur_placeholder = yes
+			NOT = {
+				AND = {
+					has_law = law_type:law_isolationism
+					market_owner_is_root = yes
+				}
+			}
 		}
 		if = {
 			limit = { game_date < 1873.1.1 }
@@ -33,6 +33,7 @@ zz_ef_cur_intro = {
 			activate_law = law_type:law_gold_standard
 			set_variable = { name = money_value_target_1 value = zz_ef_cur_intro_par_gold }
 		}
+		zz_ef_cur_intro_par_from_market = yes
 		# the players' message: a new central bank and a new currency (events/00_ef_economic_events.txt)
 		if = {
 			limit = { NOT = { has_variable = country_already_central_bank } }
@@ -48,17 +49,17 @@ zz_ef_cur_intro = {
 			}
 		}
 	}
+	if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|cur_intro_parity|std_before [THIS.GetCountry.MakeScope.Var('zz_ef_cur_intro_std').GetValue|0]|par_before [THIS.GetCountry.MakeScope.Var('zz_ef_cur_intro_par').GetValue|4]|std [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_std_code')|0]|parity [THIS.GetCountry.MakeScope.Var('money_value_target_1').GetValue|4]" }
+	remove_variable = zz_ef_cur_intro_std
+	remove_variable = zz_ef_cur_intro_par
+	# the new currency as data (scripted_effects/ld_currency_var.txt)
+	zz_ef_cur_set = yes
 }
 
-zz_ef_cur_intro_after = {
-	# a country with money and a parity: its standard and parity back
+# The parity from the money that went on the country's land: its market owner's x the owner's money against its parity,
+# in the country's metal.
+zz_ef_cur_intro_par_from_market = {
 	if = {
-		limit = { var:zz_ef_cur_intro_par > zz_ef_cur_intro_par_min }
-		zz_ef_cur_intro_law_back = yes
-		set_variable = { name = money_value_target_1 value = var:zz_ef_cur_intro_par }
-	}
-	# no parity before: the money that went on its land -- its market owner's
-	else_if = {
 		limit = {
 			exists = market
 			NOT = { market.owner = this }
@@ -93,25 +94,5 @@ zz_ef_cur_intro_after = {
 			}
 			change_variable = { name = money_value_target_1 multiply = silver_to_gold_rate }
 		}
-	}
-	if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|cur_intro_parity|std_before [THIS.GetCountry.MakeScope.Var('zz_ef_cur_intro_std').GetValue|0]|par_before [THIS.GetCountry.MakeScope.Var('zz_ef_cur_intro_par').GetValue|4]|std [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_std_code')|0]|parity [THIS.GetCountry.MakeScope.Var('money_value_target_1').GetValue|4]" }
-	remove_variable = zz_ef_cur_intro_std
-	remove_variable = zz_ef_cur_intro_par
-	# the new currency as data (scripted_effects/ld_currency_var.txt)
-	zz_ef_cur_set = yes
-}
-
-# The standard's law of var:zz_ef_cur_intro_std (zz_ef_std_code) back, if the introduction changed it.
-zz_ef_cur_intro_law_back = {
-	if = {
-		limit = { NOT = { zz_ef_std_code = var:zz_ef_cur_intro_std } }
-		if = { limit = { var:zz_ef_cur_intro_std = 1 } activate_law = law_type:law_gold_standard }
-		else_if = { limit = { var:zz_ef_cur_intro_std = 2 } activate_law = law_type:law_silver_standard }
-		else_if = { limit = { var:zz_ef_cur_intro_std = 3 } activate_law = law_type:law_bimetallism_standard }
-		else_if = { limit = { var:zz_ef_cur_intro_std = 4 } activate_law = law_type:law_gold_exchange_standard }
-		else_if = { limit = { var:zz_ef_cur_intro_std = 5 } activate_law = law_type:law_fiat_standard }
-		else_if = { limit = { var:zz_ef_cur_intro_std = 6 } activate_law = law_type:law_external_exchange_standard }
-		else_if = { limit = { var:zz_ef_cur_intro_std = 7 } activate_law = law_type:law_silver_exchange_standard }
-		else_if = { limit = { var:zz_ef_cur_intro_std = 8 } activate_law = law_type:law_bimetallism_exchange_standard }
 	}
 }

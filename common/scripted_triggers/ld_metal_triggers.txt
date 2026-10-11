@@ -64,3 +64,14 @@ zz_ef_cb_metal_standard = {
 		zz_ef_metal_bimet = yes
 	}
 }
+
+# A change of the standard keeps the parity in the new metal (scripted_effects/ld_standard_switch.txt): a metal parity
+# before (var:zz_ef_std_old, zz_ef_std_switch_before), a metal standard now.
+zz_ef_std_switch_metal = {
+	has_variable = zz_ef_std_old
+	OR = {
+		zz_ef_metal_gold = yes
+		zz_ef_metal_silver = yes
+		zz_ef_metal_bimet = yes
+	}
+}

@@ -1,10 +1,9 @@
 ﻿#############################################
 # M.10 -- a change of the metal standard keeps the money's worth in gold.
 #
-# E&F, on a new standard law (on_activate_monetary_system_law), sets the parity to
-# money_value_target_pre_set -- a value from its own scale -- and leaves the CB's metal as it was. Here the
-# reserves are converted at the market rate of silver to gold (silver_to_gold_rate) and the parity
-# follows in the same metal, so the value in gold does not jump:
+# On a new standard law (on_activate_monetary_system_law, 01_economic_scripted_effects.txt) the CB's reserves are
+# converted at the market rate of silver to gold (silver_to_gold_rate) and the parity follows in the same metal, so the
+# value in gold does not jump:
 #   silver -> gold:          gold += silver x s2g, silver = 0;  parity x s2g
 #   silver -> bimetallism:   metals stay (bimetallism counts silver in gold); parity x s2g
 #   bimetallism -> gold:     gold += silver x s2g, silver = 0;  parity as it was (gold)
@@ -14,17 +13,12 @@
 # (gold / silver / bimetallic exchange) is counted in its metal, so between standards of one metal
 # nothing changes.
 # Parities: silver in silver per unit, gold and bimetallism in gold per unit (as the
-# reserves are counted: central_bank_metal_reserves_state). To or from fiat / no system, and a
-# standard taken without a parity before: E&F's as it was.
-# E&F's status vars var:law_<standard> still hold the OLD standard here (set_reset_monetary_
-# system_status clears them at the end of the effect).
-# !! MAINTENANCE !! Key-level REPLACE_OR_CREATE of E&F's on_activate_monetary_system_law
-# (scripted_effects/01_economic_scripted_effects.txt:9540): E&F's body, line for line, plus
-# zz_ef_std_switch_before / _after.
+# reserves are counted: central_bank_metal_reserves_state). To fiat / no system, and a standard taken without a metal
+# parity before: E&F's parity (money_value_target_pre_set). E&F's status vars var:law_<standard> still hold the OLD
+# standard here (set_reset_monetary_system_status clears them at the end of the law's effect).
 #############################################
 
-# The old parity and the old metal (1 silver, 2 bimetallism, 3 gold; an exchange standard -- its metal), before E&F
-# rewrites them.
+# The old parity and the old metal (1 silver, 2 bimetallism, 3 gold; an exchange standard -- its metal).
 zz_ef_std_switch_before = {
 	if = { limit = { has_variable = zz_ef_std_old } remove_variable = zz_ef_std_old }
 	if = { limit = { has_variable = zz_ef_std_parity_old } remove_variable = zz_ef_std_parity_old }
@@ -150,13 +144,7 @@ zz_ef_std_switch_after = {
 			}
 		}
 		if = {
-			limit = {
-				OR = {
-					zz_ef_metal_gold = yes
-					zz_ef_metal_silver = yes
-					zz_ef_metal_bimet = yes
-				}
-			}
+			limit = { zz_ef_std_switch_metal = yes }
 			set_variable = { name = money_value_target_1 value = var:zz_ef_std_parity_new }
 		}
 		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|std_switch|old [THIS.GetCountry.MakeScope.Var('zz_ef_std_old').GetValue|0]|parity_old [THIS.GetCountry.MakeScope.Var('zz_ef_std_parity_old').GetValue|4]|parity [THIS.GetCountry.MakeScope.Var('money_value_target_1').GetValue|4]|cover [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_cover')|3]" }

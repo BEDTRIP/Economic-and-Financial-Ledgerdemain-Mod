@@ -260,7 +260,7 @@
   месяц)), `zz_ef_silver_to_gold_world`, R8б.9), `zz_ef_reference_strength_step`, `zz_ef_currency_trade_step`,
   `zz_ef_rate_policy_costs`, `zz_ef_mp_step`, `zz_ef_clr_step`, `zz_ef_nr_dep_step`, `zz_ef_consol_step`,
   `zz_ef_bond_ledger_step`, `zz_ef_cbfx_week_step` (клиринг, облигации, зона валюты, денежная политика).
-- Модель вызывается: `zz_ef_cur_intro_before`, `zz_ef_cur_intro`, `zz_ef_cur_intro_after` из
+- Модель вызывается: `zz_ef_cur_intro` из
   `introduction_new_currency` (`common/scripted_effects/09_introduction_building_lvl.txt`).
 - Значения модели читают GUI и локализация: `gui/ld_economy_panel.gui`,
   `localization/<язык>/replace/ld_money_supply_replace_l_<язык>.yml`, `ld_cb_rate_panel_*`, `ld_monetary_policy_*`;

@@ -57,9 +57,9 @@
   нет совсем — крупнейшая по `national_capacity_in_gold` великая держава с ЦБ при любом стандарте
   (`EFE|…|pick|no_candidate_no_reference`); лог `EFE|`.
 - Ввод валюты (Д.R8в.7): технология `currency_standards` и здание ЦБ зовут `introduction_new_currency`
-  (`09_introduction_building_lvl.txt`: строит ЦБ, если банка нет), тот — `zz_ef_cur_intro_before`, `zz_ef_cur_intro`,
-  `zz_ef_cur_intro_after` (`ld_currency_intro.txt`). Страна с паритетом больше `zz_ef_cur_intro_par_min` (0,011,
-  заглушка фиата E&F — 0,01) сохраняет закон стандарта и паритет (`zz_ef_cur_intro_law_back`); на заглушке фиата —
+  (`09_introduction_building_lvl.txt`: строит ЦБ, если банка нет), тот — `zz_ef_cur_intro`
+  (`ld_currency_intro.txt`). Страна с паритетом больше `zz_ef_cur_intro_par_min` (0,011, заглушка фиата E&F — 0,01) не
+  меняется; на заглушке фиата (`zz_ef_cur_placeholder`), кроме изоляциониста — хозяина рынка (остаётся на фиате) —
   серебряный стандарт до 1873, золотой после; паритет — хозяина рынка × его курс к паритету, в металле нового стандарта,
   без хозяина рынка — `zz_ef_cur_intro_par_silver` (22,5) / `_gold` (1,5) («принято, проверить», R11). Металла ввод не
   даёт — новый ЦБ покупает его на рынке. Название — своё (`zz_ef_cur_set`); валюта по культуре E&F
@@ -102,7 +102,8 @@
   `national_capacity_variable_list` → пересев эталона. Кандидат: великая держава, ЦБ, рейтинг ≥ 6 (BBB),
   металлический/золотодевизный стандарт, нет дефолта ЦБ, покрытие ≥ 25%.
 - Смена закона стандарта: `on_activate_monetary_system_law` → `zz_ef_std_switch_before` (запомнить стандарт и паритет) →
-  тело E&F → `zz_ef_std_switch_after` (пересчёт паритета по `silver_to_gold_rate`/`gold_to_silver_rate`, перевод запасов
+  тело E&F (паритет E&F `money_value_target_pre_set` — только если `zz_ef_std_switch_metal` нет: прежнего металлического
+  паритета нет или новый стандарт не металлический) → `zz_ef_std_switch_after` (пересчёт паритета по `silver_to_gold_rate`/`gold_to_silver_rate`, перевод запасов
   `silver_state_1`↔`gold_state_1` в столичных штатах с `central_bank_historic_place`). Пересчёт — по металлу стандарта
   (`zz_ef_metal_gold/_silver/_bimet`), не по закону.
 - Обменные стандарты (Д.R8а.6) — три закона по металлу: золотой, серебряный и биметаллический обменный (технология
@@ -193,5 +194,5 @@
   покрытие, паритет, стандарт, престиж).
 
 ## Логи
-- `EFM|…|std_switch|old …` — смена стандарта (`ld_standard_switch.txt:160`).
+- `EFM|…|std_switch|old …` — смена стандарта (`ld_standard_switch.txt:150`).
 - `EFE|…|note…|cover…|std…|cb…|ref…`, `EFE|…|cand`, `EFE|…|pick` — кандидаты и выбор эталона (`08_list_effect.txt:210`).
