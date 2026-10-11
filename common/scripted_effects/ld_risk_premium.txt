@@ -28,6 +28,16 @@ zz_ef_risk_fx_add = {
 
 # Monthly, every country (zz_ef_cb_rate_monthly): the suspension's start, the fade, the deficit's average.
 zz_ef_risk_monthly = {
+	# the legitimacy's part of the premium (zz_ef_cb_rule_stability): under 25 +2 pp, under 50 +1 pp
+	set_variable = { name = zz_ef_risk_legit value = 0 }
+	if = {
+		limit = { legitimacy < 25 }
+		set_variable = { name = zz_ef_risk_legit value = 0.02 }
+	}
+	else_if = {
+		limit = { legitimacy < 50 }
+		set_variable = { name = zz_ef_risk_legit value = 0.01 }
+	}
 	if = {
 		limit = { zz_ef_risk_fx_suspended = 1 }
 		if = {

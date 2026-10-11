@@ -164,13 +164,10 @@ zz_ef_cb_rule_stability = {
 		multiply = 0.2
 		max = 0.04
 	}
+	# the legitimacy's part -- once a month (zz_ef_risk_monthly): the trigger is dear, this value is read weekly
 	if = {
-		limit = { legitimacy < 25 }
-		add = 0.02
-	}
-	else_if = {
-		limit = { legitimacy < 50 }
-		add = 0.01
+		limit = { has_variable = zz_ef_risk_legit }
+		add = var:zz_ef_risk_legit
 	}
 	if = {
 		limit = { is_at_war = yes }
