@@ -207,12 +207,12 @@ on_action, `ld_*` и PSC добавляют свои. Недельного пу�
 | EFK | `common/scripted_effects/ld_bank_seed.txt:570` | штат: желаемое число банков (`zz_ef_bank_n`) | `zz_ef_bank_seed_state` |
 | EFM | `common/scripted_effects/ld_monetary_policy.txt:65,130,179` | `done` (завершение девальвации/ревальвации: покрытие, цель), `step` (шаг: направление, взведён ли), `ai_parity` (ИИ меняет паритет) | месячный `zz_ef_mp_step`; `zz_ef_mp_complete` |
 | EFM | `common/scripted_effects/ld_standard_switch.txt:107` | смена денежного стандарта: старый/новый паритет | на смене закона, `zz_ef_std_switch_after` (из `01_economic_scripted_effects.txt:9565`) |
-| EFM | `common/scripted_effects/ld_metal_accounts.txt:235` | `metal_start`: начальный металл ЦБ, что сделано | недельный, `zz_ef_metal_start_log` |
+| EFM | `common/scripted_effects/ld_metal_accounts.txt:251` | `metal_start`: начальный металл ЦБ, что сделано | недельный, `zz_ef_metal_start_log` |
 | EFM | `common/scripted_effects/ld_subject_metal.txt:40`, `:68` | `cb_state_lost` (ЦБ-штат потерян); `metal_heir` (металл населения и банков исчезнувшей страны перешёл владельцу её столицы — итоги наследника) | недельный `zz_ef_cb_state_owner_step`; мировой проход недели `zz_ef_metal_heir_world` |
 | EFM | `common/scripted_effects/ld_currency_intro.txt` | `cur_intro_parity`: ввод валюты — стандарт и паритет до и после | `zz_ef_cur_intro` (из `introduction_new_currency`) |
-| EFT | `common/scripted_effects/ld_metal_accounts.txt:498` | потоки металла ЦБ/банков/населения за неделю | недельный `zz_ef_metal_week_step` |
-| EFV | `common/scripted_effects/ld_metal_accounts.txt:505` | WORLD: суммы металла по ЦБ/банкам/населению, баланс закупок/продаж | недельный `zz_ef_world_metal_log` (из `ld_money_model.txt:742`) |
-| EFQ | `common/scripted_effects/ld_metal_accounts.txt:546` | сверка металла (`oth_g/oth_s`, ЦБ, стандарт) | `zz_ef_metal_reconcile` |
+| EFT | `common/scripted_effects/ld_metal_accounts.txt:514` | потоки металла ЦБ/банков/населения за неделю | недельный `zz_ef_metal_week_step` |
+| EFV | `common/scripted_effects/ld_metal_accounts.txt:521` | WORLD: суммы металла по ЦБ/банкам/населению, баланс закупок/продаж | недельный `zz_ef_world_metal_log` (из `ld_money_model.txt:742`) |
+| EFQ | `common/scripted_effects/ld_metal_accounts.txt:580` | сверка металла (`oth_g/oth_s`, ЦБ, стандарт) | `zz_ef_metal_reconcile` |
 | EFB | `common/scripted_effects/ld_bond_ledger.txt:94` | книга облигаций страны: принципал, на руках, проценты, погашение, списание | недельный `zz_ef_bond_ledger_step` |
 | EFP | `common/scripted_effects/ld_bond_ledger.txt:592` | слот облигаций без продавца (`no_seller`) | `zz_ef_pb_no_seller` (слот `$N$`) |
 | EFS | `common/scripted_effects/ld_consols.txt:47` | консоли: долг, продажа, проценты, цена, цель ставки | недельный `zz_ef_consol_step` |
@@ -229,6 +229,6 @@ on_action, `ld_*` и PSC добавляют свои. Недельного пу�
 | EFU | `common/scripted_effects/ld_investment_fund.txt` | фонд биржи: вклад, капитал, паёв на руках (итог вида f), приток из-за границы за неделю, стартовый вклад, проценты, ёмкость; доход страны с комиссий биржи и деньги казны с биржи за последний шаг | `zz_ef_fund_log` из `zz_ef_world_month_ef` (месяц, при логах) |
 | EFH | `common/scripted_effects/ld_world_month.txt`, `common/scripted_effects/ld_fc.txt`, `common/scripted_effects/ld_exchange.txt` | WORLD: число бирж мира и стран по маршрутам (`own`, `market`, `bloc`, `lever`, `world`; месяц, при логах); страна — `bind`: штат биржи из истории (старт); `route`: маршрут биржи страны логов (`how` — 1 своя, 2 хозяин рынка, 3 свой блок, 4 сильнейший блок, 5 мировая; `exchange`) | `zz_ef_world_month_ef`, `zz_ef_fc_bind`, `zz_ef_xch_route` |
 | EFZ | `common/scripted_effects/ld_psc_log.txt` | стройка PSC за неделю: траты, роздано штатам, очки, остаток, выпуск стройтоваров (`construction.md`, «Логи») | `zz_ef_psc_log` |
-| EFC | `common/scripted_effects/ld_money_model.txt:1110,1112` | кризисный выкуп валюты: должно/выплачено; эмитент | `zz_ef_crisis_redeem` (из `zz_ef_rq_crisis_resell`) |
+| EFC | `common/scripted_effects/ld_money_model.txt:1177,1179` | кризисный выкуп валюты: должно/выплачено; эмитент | `zz_ef_crisis_redeem` (из `zz_ef_rq_crisis_resell`) |
 | EFO / EFF | `common/scripted_effects/ld_money_log_rest.txt:5` / `6–10` | остаток баланса / статьи по зданиям, банкам, заграничные, казна, ЦБ | недельный `zz_ef_money_log_rest` (из `ld_money_model.txt:544`) |
 Других `debug_log` в `common/` и `events/` нет (grep по `debug_log` и `log =`).

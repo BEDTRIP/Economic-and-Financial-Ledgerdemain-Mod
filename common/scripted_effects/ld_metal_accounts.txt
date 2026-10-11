@@ -274,9 +274,9 @@ zz_ef_wm_add = {
 # keeps the CB's change for its card (UI.11).
 zz_ef_metal_week_step = {
 	# the CB's metal against its known moves since last week's step -- what is left (oth) moved
-	# without the market or our pairs (crisis redemption, a standard switch...). Known: the clearing at the last receiver
-	# (var:zz_ef_f_hume, the standard's metal), the start's recount (var:zz_ef_mt_start_adj_*), the player's forex buttons
-	# (var:zz_ef_mt_fx_*, R2); this week's own purchases come after the snapshot. EFQ line when it is not ~0.
+	# without the market or our pairs. Known: the clearing (var:zz_ef_f_clr_hume_g / _s, each metal), the crisis
+	# redemption (var:zz_ef_mt_known_g / _s), the start's recount (var:zz_ef_mt_start_adj_*), the bimetallic
+	# arbitrage (var:zz_ef_f_mt_arb_*); this week's own purchases come after the snapshot. EFQ line when it is not ~0.
 	zz_ef_metal_reconcile = yes
 	# what was bought / sold this week
 	# the CB's and the banks' input (goods) once each: the pops' part below is the states' consumption less these two
@@ -524,6 +524,15 @@ zz_ef_world_metal_log = {
 # the CB's metal now minus last week's snapshot minus the known moves (see zz_ef_metal_week_step).
 # var:zz_ef_f_mt_oth_g / _s: this week's rest; logged per country (EFQ) over 1 000 gold / 10 000 silver units, and summed
 # into global_var:zz_ef_wm_oth_gold / _silver for the world line.
+# COUNTRY scope: var:zz_ef_mt_known_$M$ += $V$ -- a move of this CB's metal made outside its own step, in the metal's
+# units ($M$ = g / s), known to the reconciliation.
+zz_ef_mt_known_add = {
+	if = {
+		limit = { NOT = { has_variable = zz_ef_mt_known_$M$ } }
+		set_variable = { name = zz_ef_mt_known_$M$ value = 0 }
+	}
+	change_variable = { name = zz_ef_mt_known_$M$ add = $V$ }
+}
 zz_ef_metal_reconcile = {
 	set_variable = { name = zz_ef_f_mt_oth_g value = 0 }
 	set_variable = { name = zz_ef_f_mt_oth_s value = 0 }
@@ -546,6 +555,17 @@ zz_ef_metal_reconcile = {
 			limit = { has_variable = zz_ef_mt_start_adj_g }
 			change_variable = { name = zz_ef_f_mt_oth_g subtract = var:zz_ef_mt_start_adj_g }
 			change_variable = { name = zz_ef_f_mt_oth_s subtract = var:zz_ef_mt_start_adj_s }
+		}
+		# other countries' moves of our CB's metal since the snapshot (crisis redemption)
+		if = {
+			limit = { has_variable = zz_ef_mt_known_g }
+			change_variable = { name = zz_ef_f_mt_oth_g subtract = var:zz_ef_mt_known_g }
+			remove_variable = zz_ef_mt_known_g
+		}
+		if = {
+			limit = { has_variable = zz_ef_mt_known_s }
+			change_variable = { name = zz_ef_f_mt_oth_s subtract = var:zz_ef_mt_known_s }
+			remove_variable = zz_ef_mt_known_s
 		}
 		# the arbitrage of bimetallism through the exchange (ld_exchange_trade.txt)
 		if = {

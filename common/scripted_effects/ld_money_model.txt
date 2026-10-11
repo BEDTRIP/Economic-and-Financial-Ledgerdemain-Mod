@@ -1147,6 +1147,17 @@ zz_ef_crisis_redeem = {
 		}
 		set_variable = { name = zz_ef_crisis_got_g value = var:zz_ef_crisis_paid }
 	}
+	# both CBs' known moves for their metal reconciliation (zz_ef_metal_reconcile)
+	set_variable = { name = zz_ef_crisis_out_g value = { value = var:zz_ef_crisis_got_g multiply = -1 } }
+	set_variable = { name = zz_ef_crisis_out_s value = { value = var:zz_ef_crisis_got_s multiply = -1 } }
+	scope:overrated_currency_country_owner = {
+		zz_ef_mt_known_add = { M = g V = scope:seller_root.var:zz_ef_crisis_out_g }
+		zz_ef_mt_known_add = { M = s V = scope:seller_root.var:zz_ef_crisis_out_s }
+	}
+	remove_variable = zz_ef_crisis_out_g
+	remove_variable = zz_ef_crisis_out_s
+	zz_ef_mt_known_add = { M = g V = var:zz_ef_crisis_got_g }
+	zz_ef_mt_known_add = { M = s V = var:zz_ef_crisis_got_s }
 	scope:central_bank_site_root = {
 		if = {
 			limit = { NOT = { has_variable = silver_state_1 } }
