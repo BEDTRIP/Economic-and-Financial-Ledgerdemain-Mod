@@ -53,7 +53,7 @@
 
 **Ledgerdemain (`ld_*`) над PSC**
 - `common/scripted_effects/ld_construction_market.txt`, `common/script_values/ld_construction_market_values.txt`,
-  `common/static_modifiers/ld_construction_market_modifiers.txt` — закупка регулятора по рынку (Д.R8в.24):
+  `common/static_modifiers/ld_construction_market_modifiers.txt`, `common/modifier_type_definitions/ld_construction_market_modifier_types.txt` (типы `goods_input_<товар>_construction_mult` — у модовых товаров движок их не создаёт) — закупка регулятора по рынку (Д.R8в.24):
   `zz_ef_reg_market_step` (штат, раз в неделю в цикле PSC после уровня регулятора): местная цена товара
   `zz_ef_reg_p_<товар>` = база × (1 + `state_goods_pricier`), предложение `zz_ef_reg_supply_<товар>` = заявки на продажу
   рынка штата, вес = предложение × (`zz_ef_reg_pmin` / цена)², доли `var:zz_ef_reg_s_<товар>` идут к весам шагом
