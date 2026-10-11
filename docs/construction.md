@@ -77,9 +77,9 @@
 - `common/pop_needs/ld_household_construction.txt` — `popneed_household_construction` (4 стройтовара); подключён в
   `common/buy_packages/00_ef_buy_packages.txt` (`wealth_1..9`).
 - `common/production_methods/ld_household_construction_pms.txt` — 10 `INJECT:` в натуральные PM
-  (`pm_home_workshops_*_subsistence_*`: +0.15/0.3 `wood_construction`) и 4 `REPLACE:` ванильных PM городского центра
-  (`pm_market_stalls/squares/covered_markets/arcades`: вход — стройтовар). Ключи — ванильные имена, поэтому refs=0 в
-  индексе.
+  (`pm_home_workshops_*_subsistence_*`: +0.06 `wood_construction`, рисовые — 0.12; Д.Г.7) и 4 `REPLACE:` ванильных PM
+  городского центра (`pm_market_stalls/squares/covered_markets/arcades`: вход — стройтовар). Ключи — ванильные имена,
+  поэтому refs=0 в индексе.
 
 **E&F**
 - `common/building_groups/00_ef_building_groups.txt:123` — группа `bg_ef_private_construction` (зданий в ней нет; на неё
