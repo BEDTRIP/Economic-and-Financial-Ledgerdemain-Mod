@@ -105,9 +105,9 @@ zz_ef_reconcile = {
 	set_variable = { name = zz_ef_other_prev value = var:zz_ef_other }
 	# steps 10 and 12: the engine's privatization of building levels (250 x the
 	# level's construction points, a multiple of zz_ef_lvl_unit) -- the pool pays, a state seller's treasury gets it; the
-	# script has no hook. A step's change of the pool's part that is a whole negative multiple of the unit is this line, not
-	# «прочее» (zz_ef_lvl_buy_pool, summed); the treasury's positive multiples -- zz_ef_lvl_buy_tr. Mixed with other
-	# money in the same step it stays «прочее».
+	# script has no hook. A step's change of the pool's part within zz_ef_lvl_tolerance of a whole negative multiple of the
+	# unit: the multiple is this line, not «прочее» (zz_ef_lvl_buy_pool, summed), the rest stays «прочее»; the treasury's
+	# positive multiples -- zz_ef_lvl_buy_tr.
 	if = { limit = { NOT = { has_variable = zz_ef_lvl_buy_pool } } set_variable = { name = zz_ef_lvl_buy_pool value = 0 } }
 	if = { limit = { NOT = { has_variable = zz_ef_lvl_buy_tr } } set_variable = { name = zz_ef_lvl_buy_tr value = 0 } }
 	set_variable = { name = zz_ef_f_lvl_buy_pool value = 0 }
@@ -125,8 +125,8 @@ zz_ef_reconcile = {
 		}
 		if = {
 			limit = { zz_ef_lvl_is_buy_v = 1 }
-			set_variable = { name = zz_ef_f_lvl_buy_pool value = var:zz_ef_t_lvl }
-			change_variable = { name = zz_ef_lvl_buy_pool add = var:zz_ef_t_lvl }
+			set_variable = { name = zz_ef_f_lvl_buy_pool value = zz_ef_lvl_mult_v }
+			change_variable = { name = zz_ef_lvl_buy_pool add = var:zz_ef_f_lvl_buy_pool }
 		}
 		remove_variable = zz_ef_t_lvl
 	}
@@ -152,9 +152,9 @@ zz_ef_reconcile = {
 		set_variable = { name = zz_ef_t_lvl value = { value = var:zz_ef_f_other_tr multiply = -1 } }
 		if = {
 			limit = { zz_ef_lvl_is_buy_v = 1 }
-			set_variable = { name = zz_ef_f_lvl_buy_tr value = var:zz_ef_f_other_tr }
-			change_variable = { name = zz_ef_lvl_buy_tr add = var:zz_ef_f_other_tr }
-			set_variable = { name = zz_ef_f_other_tr value = 0 }
+			set_variable = { name = zz_ef_f_lvl_buy_tr value = { value = zz_ef_lvl_mult_v multiply = -1 } }
+			change_variable = { name = zz_ef_lvl_buy_tr add = var:zz_ef_f_lvl_buy_tr }
+			change_variable = { name = zz_ef_f_other_tr subtract = var:zz_ef_f_lvl_buy_tr }
 		}
 		remove_variable = zz_ef_t_lvl
 		change_variable = { name = zz_ef_other_tr add = var:zz_ef_f_other_tr }

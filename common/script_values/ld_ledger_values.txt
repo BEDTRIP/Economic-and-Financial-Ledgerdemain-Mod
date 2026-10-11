@@ -31,18 +31,32 @@ zz_ef_f_other_abs_v = {
 # steps 10 and 12: the engine's price of a privatized building level is 250 x its construction points
 # (PRIVATIZATION_PER_LEVEL_COST), the points a multiple of 100 -- the unit of the reconciliation's line «выкуп уровней»
 zz_ef_lvl_unit = 25000
-# 1 if var:zz_ef_t_lvl (a step's change, the pool's sign) is a whole negative multiple of the unit (within 1, the engine's
-# fixed point), else 0
+# a step's change within this of a whole multiple of the unit: the multiple is levels bought, the rest -- other money of
+# the same step (it stays «прочее»)
+zz_ef_lvl_tolerance = 1000
+# 1 if var:zz_ef_t_lvl (a step's change, the pool's sign) is within zz_ef_lvl_tolerance of a whole negative multiple of
+# the unit, else 0
 zz_ef_lvl_is_buy_v = {
 	value = 0
 	if = {
 		limit = {
-			var:zz_ef_t_lvl <= -24999
-			zz_ef_lvl_rest_v <= 1
-			zz_ef_lvl_rest_v >= -1
+			zz_ef_lvl_mult_v <= -24999
+			zz_ef_lvl_rest_v <= zz_ef_lvl_tolerance
+			zz_ef_lvl_rest_v >= zz_ef_lvl_tolerance_neg
 		}
 		value = 1
 	}
+}
+zz_ef_lvl_tolerance_neg = {
+	value = zz_ef_lvl_tolerance
+	multiply = -1
+}
+# the whole multiple of the unit nearest to var:zz_ef_t_lvl
+zz_ef_lvl_mult_v = {
+	value = var:zz_ef_t_lvl
+	divide = zz_ef_lvl_unit
+	round = yes
+	multiply = zz_ef_lvl_unit
 }
 zz_ef_lvl_rest_v = {
 	value = var:zz_ef_t_lvl
