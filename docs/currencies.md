@@ -17,7 +17,7 @@
 - `common/law_groups/01_ef_laws.txt` — группы законов: `lawgroup_monetary_policy`, `lawgroup_monetary_system`.
 - Законы валют E&F (95 `law_<cur>_currency`, `law_no_market_liquidity`, группа `lawgroup_currency_type`) — в
   `_archive/ef_currency_laws/` (R8в, шаг 5): валюта — `var:zz_ef_cur = flag:<cur>`; ставят история E&F
-  (`99_ef_history_global_variable.txt`), ввод валюты (`introduction_of_<cur>`, `09_introduction_building_lvl.txt`), союз
+  (`99_ef_history_global_variable.txt`), союз
   (`ld_monetary_union.txt`); новая страна без банка — без валюты (`00_on_action_main.txt`); все проверки валюты E&F
   (`has_law = law_type:law_<cur>_currency`, 2190 мест) — `var:zz_ef_cur ?= flag:<cur>`. Список валют для генераторов —
   `../vic3_mods/tools/data/ld_currencies.txt`.
@@ -56,11 +56,15 @@
   кандидатов нет (Д.R8б.27) — эталон остаётся у прежнего, фиатного тоже, пока страна есть (лог `EFE|…|keep`), эталона
   нет совсем — крупнейшая по `national_capacity_in_gold` великая держава с ЦБ при любом стандарте
   (`EFE|…|pick|no_candidate_no_reference`); лог `EFE|`.
-- Прочее E&F: `common/scripted_effects/09_introduction_building_lvl.txt` `introduction_new_currency` (выдача
-  валюты/паритета при исследовании; обёртка — `ld_currency_intro_metal.txt`: металл столицы возвращается; Д.R8в.7 —
-  страна с паритетом больше `zz_ef_cur_intro_par_min` (0,011, заглушка фиата E&F — 0,01) сохраняет закон стандарта и
-  паритет (`zz_ef_cur_intro_law_back`); без паритета — паритет хозяина рынка × его курс к паритету, в металле нового
-  стандарта; лог `EFM|…|cur_intro_parity`).
+- Ввод валюты (Д.R8в.7): технология `currency_standards` и здание ЦБ зовут `introduction_new_currency`
+  (`09_introduction_building_lvl.txt`: строит ЦБ, если банка нет), тот — `zz_ef_cur_intro_before`, `zz_ef_cur_intro`,
+  `zz_ef_cur_intro_after` (`ld_currency_intro.txt`). Страна с паритетом больше `zz_ef_cur_intro_par_min` (0,011,
+  заглушка фиата E&F — 0,01) сохраняет закон стандарта и паритет (`zz_ef_cur_intro_law_back`); на заглушке фиата —
+  серебряный стандарт до 1873, золотой после; паритет — хозяина рынка × его курс к паритету, в металле нового стандарта,
+  без хозяина рынка — `zz_ef_cur_intro_par_silver` (22,5) / `_gold` (1,5) («принято, проверить», R11). Металла ввод не
+  даёт — новый ЦБ покупает его на рынке. Название — своё (`zz_ef_cur_set`); валюта по культуре E&F
+  (`currency_identifiers_<cur>`) и 95 копий ввода (`introduction_of_<cur>`) — `_archive/ef_currency_introduction/`.
+  Лог `EFM|…|cur_intro_parity`.
 
 ### Индекс `01_economic_currency_scripted_value.txt` (на каждую валюту `<cur>`)
 - :228-:294 общие `base_demande_currency*`, `target_demand_currency*`, `enough_foreign_currrency`.

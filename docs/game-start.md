@@ -79,5 +79,5 @@
 | год (`ef_on_yearly_pulse_country`, у каждой страны — свой день года) | ступени ВВП, ЦБ по ВВП (`macro_facilities_on_action_bc`; размер растёт с ВВП), ЦБ при технологии / законе валюты без здания, финцентры, рейтинг, списки эталона | переходы стандартов ИИ, цель курса, методы ЦБ, кредит ЦБ, счётчики |
 | дата | исторические события E&F (`ef_on_yearly_pulse_event_at_date`: Германия, Италия, 1873 и др.) | — |
 
-Технология `central_banking` при изучении сама строит ЦБ и вводит валюту по культуре (`introduction_new_currency`,
-`ef_technology.txt`); журнал `bank_je_central_1` ведёт игрока без ЦБ к нему.
+Технология `central_banking` при изучении сама строит ЦБ и вводит валюту (`introduction_new_currency`,
+`ef_technology.txt`; `docs/currencies.md`); журнал `bank_je_central_1` ведёт игрока без ЦБ к нему.

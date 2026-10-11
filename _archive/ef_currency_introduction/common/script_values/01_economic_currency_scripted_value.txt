@@ -1,0 +1,2270 @@
+﻿# From common/script_values/01_economic_currency_scripted_value.txt.
+
+#dinar
+currency_identifiers_dinar = {
+	value = 0
+	if = {
+		limit = {
+					OR = {
+						#country_has_primary_culture = cu:avadhi
+						# country_has_primary_culture = cu:sindi
+						# country_has_primary_culture = cu:baluchi
+						# country_has_primary_culture = cu:bengali
+						#country_has_primary_culture = cu:burmese
+						# country_has_primary_culture = cu:kachin
+						country_has_primary_culture = cu:kashmiri 
+						# country_has_primary_culture = cu:assamese
+						# country_has_primary_culture = cu:oriya
+						# country_has_primary_culture = cu:gujarati
+						# country_has_primary_culture = cu:rajput
+						# country_has_primary_culture = cu:marathi
+						# country_has_primary_culture = cu:bihari
+						# country_has_primary_culture = cu:tamil
+						# country_has_primary_culture = cu:kanauji
+						# country_has_primary_culture = cu:sinhala
+						# country_has_primary_culture = cu:malayalam
+						# country_has_primary_culture = cu:kannada
+						# country_has_primary_culture = cu:telegu
+						country_has_primary_culture = cu:kanuri
+						country_has_primary_culture = cu:baguirmi
+						country_has_primary_culture = cu:fur
+						country_has_primary_culture = cu:teda
+						country_has_primary_culture = cu:bedouin
+						country_has_primary_culture = cu:maghrebi
+						country_has_primary_culture = cu:berber 
+						country_has_primary_culture = cu:mashriqi
+					} 
+					NOT = {
+						AND = {
+							exists = c:ALD
+							this = c:ALD
+						} 
+						AND = {
+							exists = c:IRQ
+							this = c:IRQ
+						}
+						AND = {
+							exists = c:EOT
+							this = c:EOT
+						}
+						AND = {
+							exists = c:TRI
+							this = c:TRI
+						}
+						AND = {
+							exists = c:SER
+							this = c:SER
+						}
+						AND = {
+							exists = c:SER
+							this = c:SER
+						}
+						AND = {
+							exists = c:TUN
+							this = c:TUN
+						}
+						AND = {
+							exists = c:YUG
+							this = c:YUG
+						}
+						AND = {
+							country_has_primary_culture = cu:tuareg
+						}
+						AND = {
+							country_has_primary_culture = cu:bidan
+						}
+						AND = {
+							exists = c:MOR
+							this = c:MOR
+						}
+						AND = {
+							exists = c:OMA
+							this = c:OMA
+						}
+						AND = {
+							exists = c:NEJ
+							this = c:NEJ
+						}
+						AND = {
+							exists = c:HDJ
+							this = c:HDJ
+						}
+						AND = {
+							exists = c:JAB
+							this = c:JAB
+						}
+						AND = {
+							exists = c:ALD
+							this = c:ALD
+						}
+						AND = {
+							exists = c:MAS
+							this = c:MAS
+						}
+						AND = {
+							exists = c:CON
+							this = c:CON
+						}
+						AND = {
+							exists = c:TUG
+							this = c:TUG
+						}
+						AND = {
+							exists = c:AIT
+							this = c:AIT
+						}
+					}
+			 
+		}
+		add = 1
+	}
+}
+#dinar_algerian_dinar
+currency_identifiers_dinar_algerian_dinar = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					exists = c:ALD
+					this = c:ALD
+				}
+				AND = {
+					exists = c:MAS
+					this = c:MAS
+				}
+				AND = {
+					exists = c:CON
+					this = c:CON
+				}
+				AND = {
+					exists = c:TUG
+					this = c:TUG
+				}
+				AND = {
+					exists = c:AIT
+					this = c:AIT
+				}
+			}
+			 
+		}
+		add = 1
+	}
+}
+#dinar_iraqi_dinar
+currency_identifiers_dinar_iraqi_dinar = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:IRQ
+			this = c:IRQ 
+		}
+		add = 1
+	}
+}
+#dinar_libyan_dinar
+currency_identifiers_dinar_libyan_dinar = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:TRI
+			this = c:TRI 
+		}
+		add = 1
+	}
+}
+#dinar_moroccan_dirham
+currency_identifiers_dinar_moroccan_dirham = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:MOR
+			this = c:MOR 
+		}
+		add = 1
+	}
+}
+#dinar_omanian_rial
+currency_identifiers_dinar_omanian_rial = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:OMA
+			this = c:OMA 
+		}
+		add = 1
+	}
+}
+#dinar_qiran
+currency_identifiers_dinar_qiran = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:PER
+			this = c:PER  
+		}
+		add = 1
+	}
+}
+#dinar_saudi_riyal
+currency_identifiers_dinar_saudi_riyal = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					exists = c:NEJ
+					this = c:NEJ
+				}
+				AND = {
+					exists = c:HDJ
+					this = c:HDJ
+				}
+				AND = {
+					exists = c:JAB
+					this = c:JAB
+				}
+			} 
+		}
+		add = 1
+	}
+}
+#dinar_serbian_dinar
+currency_identifiers_dinar_serbian_dinar = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:SER
+			this = c:SER
+		}
+		add = 1
+	}
+}
+#dinar_tunisian_dinar
+currency_identifiers_dinar_tunisian_dinar = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:TUN
+			this = c:TUN 
+		}
+		add = 1
+	}
+}
+#dinar_yugoslav_dinar
+currency_identifiers_dinar_yugoslav_dinar = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					exists = c:YUG
+					this = c:YUG
+				}
+				AND = {
+					country_has_primary_culture = cu:slovene
+				}
+				AND = {
+					country_has_primary_culture = cu:croat
+				}
+				AND = {
+					country_has_primary_culture = cu:serb
+				}
+				AND = {
+					country_has_primary_culture = cu:bosniak
+				}
+			}
+			NOT = {
+				AND = {
+					exists = c:SER
+					this = c:SER
+				}
+				AND = { exists = c:HRE this = c:HRE } 
+			} 
+		}
+		add = 1
+	}
+}
+#dollar_australian_dollar
+currency_identifiers_dollar_australian_dollar = {
+	value = 0
+	if = {
+		limit = {
+			country_has_primary_culture = cu:australian
+			NOT = {
+				#exists = c:NZL
+				c:NZL ?= this 
+			} 
+		}
+		add = 1
+	}
+}
+#dollar_canadian_dollar
+currency_identifiers_dollar_canadian_dollar = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					country_has_primary_culture = cu:anglo_canadian
+				}
+				AND = {
+					country_has_primary_culture = cu:franco_canadian
+				}
+			} 
+		}
+		add = 1
+	}
+}
+#dollar_caribbean_dollar
+currency_identifiers_dollar_caribbean_dollar = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					exists = c:HAI
+					this = c:HAI
+				}
+				AND = {
+					country_has_primary_culture = cu:caribeno
+				}
+				AND = {
+					country_has_primary_culture = cu:afro_caribeno
+				}
+				AND = {
+					country_has_primary_culture = cu:afro_antillean
+				}
+				AND = {
+					country_has_primary_culture = cu:afro_american
+				}
+				AND = {
+					country_has_primary_culture = cu:afro_caribbean
+				}
+			}
+			not = {
+				AND = {
+					exists = c:CUB
+					this = c:CUB
+				}
+				AND = {
+					exists = c:SIL
+					this = c:SIL
+				}
+				AND = {
+					exists = c:USA
+					this = c:USA
+				}
+				AND = {
+					exists = c:LIB
+					this = c:LIB
+				}
+			} 
+		}
+		add = 1
+	}
+}
+#dollar_confederate_states_dollar
+currency_identifiers_dollar_confederate_states_dollar = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					exists = c:CSA
+					this = c:CSA
+				}
+				AND = {
+					country_has_primary_culture = cu:dixie
+				}
+			}
+			not = {
+				AND = {
+					exists = c:USA
+					this = c:USA
+				}
+			} 
+		}
+		add = 1
+	}
+}
+#dollar_liberian_dollar
+currency_identifiers_dollar_liberian_dollar = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:LIB
+			this = c:LIB
+			 
+		}
+		add = 1
+	}
+}
+#dollar_new_zealand_dollar
+currency_identifiers_dollar_new_zealand_dollar = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					exists = c:NZL
+					this = c:NZL
+				}
+				AND = {
+					exists = c:UNT
+					this = c:UNT
+				}
+			}
+		}
+		add = 1
+	}
+}
+#dollar_sierra_leonean_dollar
+currency_identifiers_dollar_sierra_leonean_dollar = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:SIL
+			this = c:SIL
+		}
+		add = 1
+	}
+}
+#dollar_united_states_dollar
+currency_identifiers_dollar_united_states_dollar = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					exists = c:USA
+					this = c:USA
+				}
+				AND = {
+					country_has_primary_culture = cu:yankee
+				}
+			}
+			not = {
+				AND = {
+					exists = c:CSA
+					this = c:CSA
+				}
+				AND = {
+					exists = c:ORG
+					this = c:ORG
+				}
+			}
+		}
+		add = 1
+	}
+}
+#eco_ariary
+currency_identifiers_eco_ariary = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:MAD
+			this = c:MAD
+		}
+		add = 1
+	}
+}
+#eco_central_african_eco
+currency_identifiers_eco_central_african_eco = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = { country_has_primary_culture = cu:equatorial_bantu }
+				AND = { country_has_primary_culture = cu:fang }
+				AND = { country_has_primary_culture = cu:mongo }
+				AND = { country_has_primary_culture = cu:bakongo }
+				AND = { country_has_primary_culture = cu:lunda }
+				AND = { country_has_primary_culture = cu:ovimbundu }
+				AND = { country_has_primary_culture = cu:kavango_bantu }
+				AND = { country_has_primary_culture = cu:luba }
+				AND = { country_has_primary_culture = cu:azande }
+				AND = { country_has_primary_culture = cu:fluvian_bantu }
+				AND = { country_has_primary_culture = cu:dinka }
+				AND = { country_has_primary_culture = cu:nuer }
+			}
+			NOT = {
+				AND = { exists = c:SIL this = c:SIL }
+				AND = { exists = c:ASH this = c:ASH }
+				AND = { country_has_primary_culture = cu:akan }
+				AND = { exists = c:SOK this = c:SOK }
+			}
+		}
+		add = 1
+	}
+}
+#eco_east_african_eco
+currency_identifiers_eco_east_african_eco = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = { country_has_primary_culture = cu:shona }
+				AND = { country_has_primary_culture = cu:yao }
+				AND = { country_has_primary_culture = cu:swahili }
+				AND = { country_has_primary_culture = cu:lacustrine_bantu }
+				AND = { country_has_primary_culture = cu:nilotic }
+				AND = { country_has_primary_culture = cu:kikuyu }
+				AND = { country_has_primary_culture = cu:maasai }
+				AND = { country_has_primary_culture = cu:baganda }
+				AND = { country_has_primary_culture = cu:ruanda }
+				AND = { country_has_primary_culture = cu:rundi }
+				AND = { country_has_primary_culture = cu:nyamwezi }
+				AND = { country_has_primary_culture = cu:chewa }
+			}
+		}
+		add = 1
+	}
+}
+#eco_ethiopian_birr
+currency_identifiers_eco_ethiopian_birr = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = { exists = c:ETH this = c:ETH }
+				AND = { country_has_primary_culture = cu:somali }
+				AND = { country_has_primary_culture = cu:oromo }
+				AND = { country_has_primary_culture = cu:amhara }
+				AND = { country_has_primary_culture = cu:tigray }
+				AND = { country_has_primary_culture = cu:sidama }
+			}
+		}
+		add = 1
+	}
+}
+#eco_ghanaian_pound
+currency_identifiers_eco_ghanaian_pound = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = { exists = c:ASH this = c:ASH }
+				AND = { country_has_primary_culture = cu:akan }
+			}
+		}
+		add = 1
+	}
+}
+#eco_nigerian_naira
+currency_identifiers_eco_nigerian_naira = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = { exists = c:SOK this = c:SOK }
+				AND = { country_has_primary_culture = cu:hausa }
+				AND = { country_has_primary_culture = cu:edo }
+				AND = { country_has_primary_culture = cu:ibo }
+				AND = { country_has_primary_culture = cu:yoruba }
+			}
+		}
+		add = 1
+	}
+}
+#eco_south_african_rand
+currency_identifiers_eco_south_african_rand = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = { exists = c:SAF this = c:SAF }
+				AND = { country_has_primary_culture = cu:boer }
+				AND = { country_has_primary_culture = cu:sotho }
+				AND = { country_has_primary_culture = cu:tswana }
+				AND = { country_has_primary_culture = cu:khoisan }
+				AND = { country_has_primary_culture = cu:xhosa }
+				AND = { country_has_primary_culture = cu:zulu }
+				AND = { country_has_primary_culture = cu:nguni }
+			}
+		}
+		add = 1
+	}
+}
+#eco_tuareg_ouguiya
+currency_identifiers_eco_tuareg_ouguiya = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = { country_has_primary_culture = cu:tuareg }
+				AND = { country_has_primary_culture = cu:bidan }
+			}
+		}
+		add = 1
+	}
+}
+#eco_west_african_eco
+currency_identifiers_eco_west_african_eco = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = { country_has_primary_culture = cu:fulbe }
+				AND = { country_has_primary_culture = cu:wolof }
+				AND = { country_has_primary_culture = cu:mande }
+				AND = { country_has_primary_culture = cu:dyula }
+				AND = { country_has_primary_culture = cu:kru }
+				AND = { country_has_primary_culture = cu:senufo }
+				AND = { country_has_primary_culture = cu:bambara }
+				AND = { country_has_primary_culture = cu:mossi }
+				AND = { country_has_primary_culture = cu:fon }
+			}
+			NOT = {
+				AND = { exists = c:SIL this = c:SIL }
+				AND = { exists = c:ASH this = c:ASH }
+				AND = { country_has_primary_culture = cu:akan }
+				AND = { exists = c:SOK this = c:SOK }
+			}
+		}
+		add = 1
+	}
+}
+#franc_belgian_franc
+currency_identifiers_franc_belgian_franc = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:BEL
+			this = c:BEL 
+		}
+		add = 1
+	}
+}
+#franc_french_franc
+currency_identifiers_franc_french_franc = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					exists = c:FRA
+					this = c:FRA
+				}
+				AND = {
+					country_has_primary_culture = cu:french
+				}
+				AND = {
+					country_has_primary_culture = cu:occitan
+				}
+				AND = {
+					country_has_primary_culture = cu:breton
+				}
+				AND = {
+					country_has_primary_culture = cu:corsican
+				}
+			} 
+		}
+		add = 1
+	}
+}
+#franc_luxembourgish_franc
+currency_identifiers_franc_luxembourgish_franc = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:LUX
+			this = c:LUX 
+		}
+		add = 1
+	}
+}
+#franc_swiss_franc
+currency_identifiers_franc_swiss_franc = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				and = {
+					country_has_primary_culture = cu:alemannic
+				}
+				and = {
+					country_has_primary_culture = cu:francoprovencal
+				}
+			} 
+			NOT = {
+				AND = { exists = c:FRA this = c:FRA } 
+				AND = { exists = c:HRE this = c:HRE } 
+			}
+		}
+		add = 1
+	}
+}
+#gulden
+currency_identifiers_gulden = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					exists = c:AUS
+					this = c:AUS
+				}
+			} 
+		}
+		add = 1
+	}
+}
+#gulden_bavarian_gulden
+currency_identifiers_gulden_bavarian_gulden = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:BAV
+			this = c:BAV 
+		}
+		add = 1
+	}
+}
+#gulden_florin
+currency_identifiers_gulden_florin = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					exists = c:NET
+					this = c:NET 
+				}
+				AND = {
+					country_has_primary_culture = cu:dutch
+				}
+			}
+			NOT = { 
+				AND = {
+					exists = c:HRE
+					this = c:HRE
+				}
+				AND = {
+					exists = c:DEI
+					this = c:DEI
+				}
+			} 
+		}
+		add = 1
+	}
+}
+#gulden_hungarian_forint
+currency_identifiers_gulden_hungarian_forint = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:HUN
+			this = c:HUN 
+		}
+		add = 1
+	}
+}
+#gulden_indies_guilder
+currency_identifiers_gulden_indies_guilder = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:DEI
+			this = c:DEI 
+		}
+		add = 1
+	}
+}
+#gulden_south_german_gulden
+currency_identifiers_gulden_south_german_gulden = {
+	value = 0
+	if = {
+		limit = {
+			country_has_primary_culture = cu:south_german
+			NOT = {
+				AND = {
+					exists = c:AUS
+					this = c:AUS
+				}
+				AND = {
+					exists = c:BAV
+					this = c:BAV
+				}
+				AND = {
+					exists = c:GER
+					this = c:GER
+				}
+				AND = {
+					exists = c:PRU
+					this = c:PRU
+				}
+				AND = {
+					exists = c:HRE
+					this = c:HRE
+				}
+			} 
+		}
+		add = 1
+	}
+}
+#krone_czech_koruna
+currency_identifiers_krone_czech_koruna = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					exists = c:CZH
+					this = c:CZH
+				}
+				AND = {
+					country_has_primary_culture = cu:czech
+				}
+			} 
+			NOT = { 
+				AND = {
+					exists = c:HRE
+					this = c:HRE
+				}
+			} 
+		}
+		add = 1
+	}
+}
+#krone_danish_krone
+currency_identifiers_krone_danish_krone = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:DEN
+			this = c:DEN 
+		}
+		add = 1
+	}
+}
+#krone_estonian_kroon
+currency_identifiers_krone_estonian_kroon = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:EST
+			this = c:EST 
+		}
+		add = 1
+	}
+}
+#krone_icelandic_krona
+currency_identifiers_krone_icelandic_krona = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:ICL
+			this = c:ICL 
+		}
+		add = 1
+	}
+}
+#krone_norwegian_krone
+currency_identifiers_krone_norwegian_krone = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:NOR
+			this = c:NOR 
+		}
+		add = 1
+	}
+}
+#krone_slovak_koruna
+currency_identifiers_krone_slovak_koruna = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					exists = c:SLV
+					this = c:SLV
+				}
+				AND = {
+					country_has_primary_culture = cu:slovak
+				}
+			} 
+		}
+		add = 1
+	}
+}
+#krone_swedish_krona
+currency_identifiers_krone_swedish_krona = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					exists = c:SWE
+					this = c:SWE
+				}
+				AND = {
+					exists = c:SCA
+					this = c:SCA
+				} 
+			} 
+		}
+		add = 1
+	}
+}
+#leon_leu
+currency_identifiers_leon_leu = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					exists = c:ROM
+					this = c:ROM
+				}
+				AND = {
+					exists = c:MOL
+					this = c:MOL
+				}
+				AND = {
+					exists = c:WAL
+					this = c:WAL
+				}
+				AND = {
+					country_has_primary_culture = cu:romanian
+				}
+			} 
+		}
+		add = 1
+	}
+}
+#leon_lev
+currency_identifiers_leon_lev = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:BUL
+			this = c:BUL 
+		}
+		add = 1
+	}
+}
+#lira
+currency_identifiers_lira = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					exists = c:ITA
+					this = c:ITA
+				}
+				AND = {
+					country_has_primary_culture = cu:north_italian
+				}
+				AND = {
+					country_has_primary_culture = cu:south_italian
+				}
+			}
+			not = {
+				or = {
+					AND = {
+						exists = c:SAR
+						this = c:SAR
+					}
+					AND = {
+						exists = c:PAR
+						this = c:PAR
+					}
+					AND = {
+						exists = c:MOD
+						this = c:MOD
+					}
+					AND = {
+						exists = c:LUC
+						this = c:LUC
+					}
+					AND = {
+						exists = c:TUS
+						this = c:TUS
+					}
+					AND = {
+						exists = c:PAP
+						this = c:PAP
+					}
+					AND = {
+						exists = c:SIC
+						this = c:SIC
+					} 
+					AND = { exists = c:HRE this = c:HRE } 
+				}
+			} 
+		}
+		add = 1
+	}
+}
+#lira_ducato
+currency_identifiers_lira_ducato = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:SIC
+			this = c:SIC 
+		}
+		add = 1
+	}
+}
+#lira_ottoman_lira
+currency_identifiers_lira_ottoman_lira = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:TUR
+			this = c:TUR 
+		}
+		add = 1
+	}
+}
+#lira_scudo_pontificio
+currency_identifiers_lira_scudo_pontificio = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:PAP
+			this = c:PAP 
+		}
+		add = 1
+	}
+}
+#lira_scudo_sardo
+currency_identifiers_lira_scudo_sardo = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:SAR
+			this = c:SAR 
+		}
+		add = 1
+	}
+}
+#lira_toscane_lira
+currency_identifiers_lira_toscane_lira = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					exists = c:PAR
+					this = c:PAR
+				}
+				AND = {
+					exists = c:MOD
+					this = c:MOD
+				}
+				AND = {
+					exists = c:LUC
+					this = c:LUC
+				}
+				AND = {
+					exists = c:TUS
+					this = c:TUS
+				}
+			} 
+		}
+		add = 1
+	}
+}
+#mark
+currency_identifiers_mark = {
+	value = 0
+	if = {
+		limit = {
+			OR = {
+				AND = {
+					exists = c:GER
+					this = c:GER
+				}
+				AND = {
+					exists = c:HRE
+					this = c:HRE
+				}
+				#AND = {
+				#	country_has_primary_culture = cu:north_german
+				#}
+			}
+			NOT = {
+				AND = {
+					exists = c:HAN
+					this = c:HAN
+				}
+				AND = {
+					exists = c:SAX
+					this = c:SAX
+				}
+				AND = {
+					exists = c:PRU
+					this = c:PRU
+				}
+				AND = {
+					exists = c:NGF
+					this = c:NGF
+				}
+			} 
+		}
+		add = 1
+	}
+}
+#mark_finnish_markka
+currency_identifiers_mark_finnish_markka = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:FIN
+			this = c:FIN 
+		}
+		add = 1
+	}
+}
+#peso
+currency_identifiers_peso = {
+	value = 0
+	if = {
+		limit = {
+			OR = {
+				country_has_primary_culture = cu:mexican
+				country_has_primary_culture = cu:central_american
+				country_has_primary_culture = cu:north_andean
+				country_has_primary_culture = cu:south_andean
+				country_has_primary_culture = cu:platinean
+				country_has_primary_culture = cu:caribeno
+				country_has_primary_culture = cu:filipino
+
+				country_has_primary_culture = cu:peruvian
+				country_has_primary_culture = cu:bolivian
+				country_has_primary_culture = cu:ecuadorian
+				country_has_primary_culture = cu:chilean
+				country_has_primary_culture = cu:venezuelan
+				country_has_primary_culture = cu:argentine
+				country_has_primary_culture = cu:uruguayan
+				country_has_primary_culture = cu:paraguayan
+				country_has_primary_culture = cu:colombian
+			}
+			NOT = {
+				AND = {
+					exists = c:VNZ
+					this = c:VNZ
+				}
+				AND = {
+					exists = c:PRG
+					this = c:PRG
+				}
+				AND = {
+					exists = c:BOL
+					this = c:BOL
+				}
+				AND = {
+					exists = c:ECU
+					this = c:ECU
+				}
+				AND = {
+					exists = c:MEX
+					this = c:MEX
+				}
+				AND = {
+					exists = c:PHI
+					this = c:PHI
+				}
+				AND = {
+					exists = c:ARG
+					this = c:ARG
+				}
+				AND = {
+					exists = c:CHL
+					this = c:CHL
+				}
+				AND = {
+					exists = c:CLM
+					this = c:CLM
+				}
+				AND = {
+					exists = c:CUB
+					this = c:CUB
+				}
+				AND = {
+					exists = c:DOM
+					this = c:DOM
+				}
+				AND = {
+					exists = c:URU
+					this = c:URU
+				}
+				AND = {
+					exists = c:COS
+					this = c:COS
+				}
+				AND = {
+					exists = c:ELS
+					this = c:ELS
+				}
+				AND = {
+					exists = c:HON
+					this = c:HON
+				}
+				AND = {
+					exists = c:NIC
+					this = c:NIC
+				}
+				AND = {
+					exists = c:GUA
+					this = c:GUA
+				}
+				AND = {
+					exists = c:PBC
+					this = c:PBC
+				}
+				AND = {
+					exists = c:PEU
+					this = c:PEU
+				}
+				AND = {
+					exists = c:BOL
+					this = c:BOL
+				}
+				AND = {
+					exists = c:NPU
+					this = c:NPU
+				} 
+				AND = {
+					exists = c:SPU
+					this = c:SPU
+				} 
+			} 
+		}
+		add = 1
+	}
+}
+#peso_argentine_peso
+currency_identifiers_peso_argentine_peso = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:ARG
+			this = c:ARG 
+		}
+		add = 1
+	}
+}
+#peso_bolivien_peso
+currency_identifiers_peso_bolivien_peso = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					exists = c:BOL
+					this = c:BOL
+				}
+				AND = {
+					exists = c:PBC
+					this = c:PBC
+				}
+			} 
+		}
+		add = 1
+	}
+}
+#peso_chilean_peso
+currency_identifiers_peso_chilean_peso = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:CHL
+			this = c:CHL 
+		}
+		add = 1
+	}
+}
+#peso_colombian_peso
+currency_identifiers_peso_colombian_peso = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:CLM
+			this = c:CLM 
+		}
+		add = 1
+	}
+}
+#peso_costa_rican_colon
+currency_identifiers_peso_costa_rican_colon = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:COS
+			this = c:COS 
+		}
+		add = 1
+	}
+}
+#peso_cuban_peso
+currency_identifiers_peso_cuban_peso = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:CUB
+			this = c:CUB 
+		}
+		add = 1
+	}
+}
+#peso_ecuadorian_peso
+currency_identifiers_peso_ecuadorian_peso = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:ECU
+			this = c:ECU 
+		}
+		add = 1
+	}
+}
+#peso_el_salvador_colon
+currency_identifiers_peso_el_salvador_colon = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:ELS
+			this = c:ELS 
+		}
+		add = 1
+	}
+}
+#peso_guatemalan_quetzal
+currency_identifiers_peso_guatemalan_quetzal = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:GUA
+			this = c:GUA 
+		}
+		add = 1
+	}
+}
+#peso_honduran_lempira
+currency_identifiers_peso_honduran_lempira = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:HON
+			this = c:HON 
+		}
+		add = 1
+	}
+}
+#peso_mexican_peso
+currency_identifiers_peso_mexican_peso = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:MEX
+			this = c:MEX 
+		}
+		add = 1
+	}
+}
+#peso_nicaraguan_cordoba
+currency_identifiers_peso_nicaraguan_cordoba = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:NIC
+			this = c:NIC 
+		}
+		add = 1
+	}
+}
+#peso_paraguayan_peso
+currency_identifiers_peso_paraguayan_peso = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:PRG
+			this = c:PRG 
+		}
+		add = 1
+	}
+}
+#peso_philippine_peso
+currency_identifiers_peso_philippine_peso = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:PHI
+			this = c:PHI 
+		}
+		add = 1
+	}
+}
+#peso_sol_de_oro
+currency_identifiers_peso_sol_de_oro = {
+	value = 0
+	if = {
+		limit = { 
+			OR = {
+				AND = {
+					exists = c:PEU
+					this = c:PEU 
+				}
+				AND = {
+					exists = c:NPU
+					this = c:NPU
+				} 
+				AND = {
+					exists = c:SPU
+					this = c:SPU
+				} 
+			} 
+		}
+		add = 1
+	}
+}
+#peso_uruguayan_peso
+currency_identifiers_peso_uruguayan_peso = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:URU
+			this = c:URU 
+		}
+		add = 1
+	}
+}
+#peso_venezuelan_peso
+currency_identifiers_peso_venezuelan_peso = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:VNZ
+			this = c:VNZ 
+		}
+		add = 1
+	}
+}
+#pound_egyptian_pound
+currency_identifiers_pound_egyptian_pound = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:EGY
+			this = c:EGY 
+		}
+		add = 1
+	}
+}
+#pound_irish_pound
+currency_identifiers_pound_irish_pound = {
+	value = 0
+	if = {
+		limit = {
+			country_has_primary_culture = cu:irish 
+		}
+		add = 1
+	}
+}
+#pound_sterling
+currency_identifiers_pound_sterling = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					exists = c:GBR
+					this = c:GBR
+				}
+				AND = {
+					country_has_primary_culture = cu:british
+				}
+				AND = {
+					country_has_primary_culture = cu:welsh
+				}
+				AND = {
+					country_has_primary_culture = cu:scottish
+				}
+			}
+			NOT = {
+				or = {
+					AND = {
+						exists = c:BIC
+						this = c:BIC
+					}
+					AND = {
+						country_has_primary_culture = cu:irish
+					}
+					AND = {
+						exists = c:SAF
+						this = c:SAF
+					}
+					AND = {
+						country_has_primary_culture = cu:boer
+					}
+					AND = {
+						country_has_primary_culture = cu:sotho
+					}
+					AND = {
+						country_has_primary_culture = cu:tswana
+					}
+					AND = {
+						country_has_primary_culture = cu:khoisan
+					}
+					AND = {
+						country_has_primary_culture = cu:xhosa
+					}
+					AND = {
+						country_has_primary_culture = cu:zulu
+					}
+					AND = {
+						country_has_primary_culture = cu:nguni
+					}
+				}
+			}
+			 
+		}
+		add = 1
+	}
+}
+#real
+currency_identifiers_real = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:POR
+			this = c:POR 
+		}
+		add = 1
+	}
+}
+#real_brazilian_real
+currency_identifiers_real_brazilian_real = {
+	value = 0
+	if = {
+		limit = {
+			OR = {
+				AND = {
+					exists = c:BRZ
+					this = c:BRZ
+				}
+				AND = {
+					country_has_primary_culture = cu:afro_brazilian
+				}
+			} 
+		}
+		add = 1
+	}
+}
+#rupee_indian_rupee
+currency_identifiers_rupee_indian_rupee = {
+	value = 0
+	if = {
+		limit = { 
+			OR = {
+				c:BIC ?= this
+				country_has_primary_culture = cu:avadhi
+				country_has_primary_culture = cu:sindi
+				country_has_primary_culture = cu:pashtun
+				country_has_primary_culture = cu:baluchi
+				country_has_primary_culture = cu:bengali
+				country_has_primary_culture = cu:burmese
+				country_has_primary_culture = cu:kachin
+				country_has_primary_culture = cu:kashmiri
+				country_has_primary_culture = cu:nepali
+				country_has_primary_culture = cu:assamese
+				country_has_primary_culture = cu:oriya
+				country_has_primary_culture = cu:gujarati
+				country_has_primary_culture = cu:rajput
+				country_has_primary_culture = cu:marathi
+				country_has_primary_culture = cu:bihari
+				country_has_primary_culture = cu:tamil
+				country_has_primary_culture = cu:sinhala
+				country_has_primary_culture = cu:malayalam
+				country_has_primary_culture = cu:kannada
+				country_has_primary_culture = cu:panjabi
+				country_has_primary_culture = cu:telegu
+
+				country_has_primary_culture = cu:deccani
+				country_has_primary_culture = cu:chhattisgarhi
+				country_has_primary_culture = cu:gondi
+				country_has_primary_culture = cu:pahari
+				country_has_primary_culture = cu:hindustani
+				country_has_primary_culture = cu:lushai
+				country_has_primary_culture = cu:naga
+				country_has_primary_culture = cu:kho
+			} 
+			NOT = {
+				AND = {
+					exists = c:PAK
+					this = c:PAK
+				} 
+
+			}
+		}
+		add = 1
+	}
+}
+#rupee_indonesian_rupiah
+currency_identifiers_rupee_indonesian_rupiah = {
+	value = 0
+	if = {
+		limit = {
+			OR = {
+
+				and = {
+					country_has_primary_culture = cu:batak
+				}
+				and = {
+					country_has_primary_culture = cu:dayak
+				}
+				and = {
+					country_has_primary_culture = cu:moro
+				}
+				and = {
+					country_has_primary_culture = cu:javan
+				}
+				and = {
+					country_has_primary_culture = cu:moluccan
+				}
+				and = {
+					country_has_primary_culture = cu:bornean
+				}
+				and = {
+					country_has_primary_culture = cu:sumatran
+				}
+				and = {
+					country_has_primary_culture = cu:balinese
+				} 
+				and = {
+					country_has_primary_culture = cu:malay
+				} 
+			}
+			 
+		}
+		add = 1
+	}
+}
+#spe_baht
+currency_identifiers_spe_baht = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					exists = c:SIA
+					this = c:SIA
+				}
+				AND = {
+					country_has_primary_culture = cu:thai
+				}
+				AND = {
+					country_has_primary_culture = cu:shan
+				}
+			}
+			 
+		}
+		add = 1
+	}
+}
+#spe_dong
+currency_identifiers_spe_dong = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					exists = c:DAI
+					this = c:DAI
+				}
+				AND = {
+					country_has_primary_culture = cu:lao
+				}
+				AND = {
+					country_has_primary_culture = cu:khmer
+				}
+			}
+			 
+		}
+		add = 1
+	}
+}
+#spe_drachma
+currency_identifiers_spe_drachma = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					country_has_primary_culture = cu:greek
+				}
+				AND = {
+					exists = c:GRE
+					this = c:GRE 
+				}
+				AND = {
+					exists = c:BYZ
+					this = c:BYZ
+				}
+			}
+		}
+		add = 1
+	}
+}
+#spe_korean_won
+currency_identifiers_spe_korean_won = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:KOR
+			this = c:KOR
+			 
+		}
+		add = 1
+	}
+}
+#spe_latvian_lats
+currency_identifiers_spe_latvian_lats = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					exists = c:LAT
+					this = c:LAT
+				}
+				AND = {
+					exists = c:UBD
+					this = c:UBD
+				}
+			} 
+		}
+		add = 1
+	}
+}
+#spe_lithuanian_litas
+currency_identifiers_spe_lithuanian_litas = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:LIT
+			this = c:LIT 
+		}
+		add = 1
+	}
+}
+#spe_peseta
+currency_identifiers_spe_peseta = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					exists = c:SPA
+					this = c:SPA
+				}
+				AND = {
+					country_has_primary_culture = cu:spanish
+				}
+			}
+			not  = {
+				AND = {
+					exists = c:PHI
+					this = c:PHI
+				}
+			} 
+		}
+		add = 1
+	}
+}
+#spe_ruble
+currency_identifiers_spe_ruble = {
+	value = 0
+	if = {
+		limit = {
+			OR = {
+				country_has_primary_culture = cu:russian
+				country_has_primary_culture = cu:ukrainian
+				country_has_primary_culture = cu:kazak
+				country_has_primary_culture = cu:uzbek
+				country_has_primary_culture = cu:turkmen
+				country_has_primary_culture = cu:kalmyk
+				country_has_primary_culture = cu:north_caucasian
+				country_has_primary_culture = cu:georgian
+				country_has_primary_culture = cu:armenian
+				country_has_primary_culture = cu:azerbaijani
+				country_has_primary_culture = cu:tatar
+				country_has_primary_culture = cu:byelorussian
+				# country_has_primary_culture = cu:estonian
+				# country_has_primary_culture = cu:latvian
+				# country_has_primary_culture = cu:lithuanian
+				country_has_primary_culture = cu:kirgiz
+			}
+			not  = {
+				AND = {
+					exists = c:PER
+					this = c:PER
+				}
+				AND = {
+					exists = c:UBD
+					this = c:UBD
+				}
+			} 
+		}
+		add = 1
+	}
+}
+#spe_uni
+currency_identifiers_spe_uni = {
+	value = 0
+	if = {
+		limit = { 
+			not = {
+				or = {
+					
+					country_has_primary_culture = cu:brazilian
+					country_has_primary_culture = cu:slovak
+					country_has_primary_culture = cu:icelandic
+
+
+
+
+					country_has_primary_culture = cu:avadhi
+					country_has_primary_culture = cu:sindi
+					country_has_primary_culture = cu:baluchi
+					country_has_primary_culture = cu:bengali
+					country_has_primary_culture = cu:kachin
+					country_has_primary_culture = cu:kashmiri
+					country_has_primary_culture = cu:nepali
+					country_has_primary_culture = cu:assamese
+					country_has_primary_culture = cu:oriya
+					country_has_primary_culture = cu:gujarati
+					country_has_primary_culture = cu:rajput
+					country_has_primary_culture = cu:marathi
+					country_has_primary_culture = cu:bihari
+					country_has_primary_culture = cu:tamil
+					country_has_primary_culture = cu:sinhala
+					country_has_primary_culture = cu:malayalam
+					country_has_primary_culture = cu:kannada
+					country_has_primary_culture = cu:panjabi
+					country_has_primary_culture = cu:telegu
+					country_has_primary_culture = cu:dutch
+					country_has_primary_culture = cu:korean
+
+					country_has_primary_culture = cu:deccani
+					country_has_primary_culture = cu:chhattisgarhi
+					country_has_primary_culture = cu:gondi
+					country_has_primary_culture = cu:pahari
+					country_has_primary_culture = cu:hindustani
+					country_has_primary_culture = cu:lushai
+
+					country_has_primary_culture = cu:alemannic
+
+					country_has_primary_culture = cu:kanuri
+					country_has_primary_culture = cu:baguirmi
+					country_has_primary_culture = cu:fur
+					country_has_primary_culture = cu:teda
+
+					country_has_primary_culture = cu:bedouin
+					country_has_primary_culture = cu:maghrebi
+					country_has_primary_culture = cu:slovene
+					country_has_primary_culture = cu:croat
+					country_has_primary_culture = cu:serb
+					country_has_primary_culture = cu:bosniak
+					country_has_primary_culture = cu:franco_canadian
+					country_has_primary_culture = cu:anglo_canadian
+					country_has_primary_culture = cu:afro_antillean
+					country_has_primary_culture = cu:afro_caribeno
+					country_has_primary_culture = cu:afro_caribbean
+
+
+					country_has_primary_culture = cu:caribeno
+					country_has_primary_culture = cu:yankee
+					country_has_primary_culture = cu:dixie
+
+					country_has_primary_culture = cu:equatorial_bantu
+					country_has_primary_culture = cu:fang
+					country_has_primary_culture = cu:mongo
+					country_has_primary_culture = cu:bakongo
+					country_has_primary_culture = cu:lunda
+					country_has_primary_culture = cu:ovimbundu
+					country_has_primary_culture = cu:kavango_bantu
+					country_has_primary_culture = cu:luba
+					country_has_primary_culture = cu:azande
+					country_has_primary_culture = cu:fluvian_bantu
+					country_has_primary_culture = cu:dinka
+					country_has_primary_culture = cu:nuer
+					country_has_primary_culture = cu:portuguese
+
+					country_has_primary_culture = cu:danish
+
+					country_has_primary_culture = cu:danish
+					country_has_primary_culture = cu:swedish
+					country_has_primary_culture = cu:norwegian
+					country_has_primary_culture = cu:romanian
+
+					country_has_primary_culture = cu:turkish
+					country_has_primary_culture = cu:greek
+					country_has_primary_culture = cu:persian
+					country_has_primary_culture = cu:vietnamese
+
+
+					country_has_primary_culture = cu:australian
+					country_has_primary_culture = cu:afro_american
+					country_has_primary_culture = cu:fulbe
+
+					country_has_primary_culture = cu:wolof
+
+					country_has_primary_culture = cu:mande
+
+					country_has_primary_culture = cu:dyula
+
+					country_has_primary_culture = cu:kru
+
+					country_has_primary_culture = cu:senufo
+
+					country_has_primary_culture = cu:bambara
+
+					country_has_primary_culture = cu:mossi
+					country_has_primary_culture = cu:misri
+
+					country_has_primary_culture = cu:fon
+					country_has_primary_culture = cu:somali
+					country_has_primary_culture = cu:oromo
+					country_has_primary_culture = cu:amhara
+					country_has_primary_culture = cu:tigray
+					country_has_primary_culture = cu:sidama
+					country_has_primary_culture = cu:hausa
+
+					country_has_primary_culture = cu:edo
+
+					country_has_primary_culture = cu:ibo
+
+					country_has_primary_culture = cu:yoruba
+					country_has_primary_culture = cu:akan
+					country_has_primary_culture = cu:boer
+
+					country_has_primary_culture = cu:sotho
+
+					country_has_primary_culture = cu:tswana
+
+					country_has_primary_culture = cu:khoisan
+
+					country_has_primary_culture = cu:xhosa
+
+					country_has_primary_culture = cu:zulu
+
+					country_has_primary_culture = cu:shona
+					country_has_primary_culture = cu:yao
+					country_has_primary_culture = cu:swahili
+					country_has_primary_culture = cu:lacustrine_bantu
+					country_has_primary_culture = cu:nilotic
+					country_has_primary_culture = cu:kikuyu
+					country_has_primary_culture = cu:maasai
+					country_has_primary_culture = cu:baganda
+					country_has_primary_culture = cu:ruanda
+					country_has_primary_culture = cu:rundi
+
+					country_has_primary_culture = cu:berber
+
+					country_has_primary_culture = cu:chewa
+
+					country_has_primary_culture = cu:nyamwezi
+
+
+
+					country_has_primary_culture = cu:nguni
+					country_has_primary_culture = cu:tuareg
+					country_has_primary_culture = cu:bidan
+					country_has_primary_culture = cu:fulbe
+
+					country_has_primary_culture = cu:wolof
+
+					country_has_primary_culture = cu:mande
+
+					country_has_primary_culture = cu:dyula
+
+					country_has_primary_culture = cu:kru
+
+					country_has_primary_culture = cu:senufo
+
+					country_has_primary_culture = cu:bambara
+
+					country_has_primary_culture = cu:mossi
+
+					country_has_primary_culture = cu:fon
+					country_has_primary_culture = cu:akan
+					country_has_primary_culture = cu:corsican
+					country_has_primary_culture = cu:breton
+					country_has_primary_culture = cu:occitan
+					country_has_primary_culture = cu:french
+					country_has_primary_culture = cu:south_german
+					country_has_primary_culture = cu:north_italian
+					country_has_primary_culture = cu:south_italian
+					country_has_primary_culture = cu:north_german
+
+					country_has_primary_culture = cu:mexican
+					country_has_primary_culture = cu:central_american
+					country_has_primary_culture = cu:north_andean
+					country_has_primary_culture = cu:south_andean
+					country_has_primary_culture = cu:platinean
+					country_has_primary_culture = cu:caribeno
+					country_has_primary_culture = cu:filipino
+
+					country_has_primary_culture = cu:peruvian
+					country_has_primary_culture = cu:bolivian
+					country_has_primary_culture = cu:ecuadorian
+					country_has_primary_culture = cu:chilean
+					country_has_primary_culture = cu:venezuelan
+					country_has_primary_culture = cu:argentine
+					country_has_primary_culture = cu:uruguayan
+					country_has_primary_culture = cu:paraguayan
+					country_has_primary_culture = cu:colombian
+					country_has_primary_culture = cu:british
+					country_has_primary_culture = cu:welsh
+					country_has_primary_culture = cu:scottish
+					country_has_primary_culture = cu:irish
+					country_has_primary_culture = cu:boer
+					country_has_primary_culture = cu:sotho
+					country_has_primary_culture = cu:tswana
+					country_has_primary_culture = cu:khoisan
+					country_has_primary_culture = cu:xhosa
+					country_has_primary_culture = cu:zulu
+					country_has_primary_culture = cu:nguni
+					country_has_primary_culture = cu:afro_brazilian
+
+					country_has_primary_culture = cu:sindi
+					country_has_primary_culture = cu:pashtun
+					country_has_primary_culture = cu:baluchi
+					country_has_primary_culture = cu:bengali
+					country_has_primary_culture = cu:burmese
+					country_has_primary_culture = cu:kachin
+					country_has_primary_culture = cu:kashmiri
+					country_has_primary_culture = cu:nepali
+					country_has_primary_culture = cu:assamese
+					country_has_primary_culture = cu:oriya
+					country_has_primary_culture = cu:gujarati
+					country_has_primary_culture = cu:rajput
+					country_has_primary_culture = cu:marathi
+					country_has_primary_culture = cu:bihari
+					country_has_primary_culture = cu:tamil
+					country_has_primary_culture = cu:sinhala
+					country_has_primary_culture = cu:malayalam
+					country_has_primary_culture = cu:kannada
+					country_has_primary_culture = cu:panjabi
+					country_has_primary_culture = cu:telegu
+					country_has_primary_culture = cu:batak
+					country_has_primary_culture = cu:dayak
+					country_has_primary_culture = cu:moro
+					country_has_primary_culture = cu:javan
+					country_has_primary_culture = cu:moluccan
+					country_has_primary_culture = cu:sumatran
+					country_has_primary_culture = cu:bornean
+					country_has_primary_culture = cu:sumatran
+					country_has_primary_culture = cu:balinese
+					country_has_primary_culture = cu:malay
+					country_has_primary_culture = cu:sumatran
+					country_has_primary_culture = cu:thai
+					country_has_primary_culture = cu:shan
+					country_has_primary_culture = cu:lao
+					country_has_primary_culture = cu:khmer
+
+					country_has_primary_culture = cu:spanish
+
+					country_has_primary_culture = cu:russian
+					country_has_primary_culture = cu:kazak
+					country_has_primary_culture = cu:uzbek
+					country_has_primary_culture = cu:turkmen
+					country_has_primary_culture = cu:kalmyk
+					country_has_primary_culture = cu:north_caucasian
+					country_has_primary_culture = cu:georgian
+					country_has_primary_culture = cu:armenian
+					country_has_primary_culture = cu:azerbaijani
+					country_has_primary_culture = cu:tatar
+					country_has_primary_culture = cu:byelorussian
+					country_has_primary_culture = cu:estonian
+					country_has_primary_culture = cu:latvian
+					country_has_primary_culture = cu:lithuanian
+					country_has_primary_culture = cu:kirgiz
+					country_has_primary_culture = cu:japanese
+					country_has_primary_culture = cu:ukrainian
+
+					country_has_primary_culture = cu:flemish
+					country_has_primary_culture = cu:wallonian
+					country_has_primary_culture = cu:hungarian
+					country_has_primary_culture = cu:malagasy
+
+					country_has_primary_culture = cu:yue
+					country_has_primary_culture = cu:manchu
+					country_has_primary_culture = cu:han
+					country_has_primary_culture = cu:hakka
+					country_has_primary_culture = cu:uighur
+					country_has_primary_culture = cu:mongol
+
+					country_has_primary_culture = cu:slovak
+					country_has_primary_culture = cu:czech
+
+					country_has_primary_culture = cu:maori
+					country_has_primary_culture = cu:polish
+					country_has_primary_culture = cu:mashriqi
+					country_has_primary_culture = cu:bulgarian 
+					country_has_primary_culture = cu:naga
+					country_has_primary_culture = cu:tibetan
+					country_has_primary_culture = cu:kho 
+				}
+			}
+		}
+		add = 1
+	}
+}
+#spe_yen
+currency_identifiers_spe_yen = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:JAP
+			this = c:JAP  
+		}
+		add = 1
+	}
+}
+#spe_yuan
+currency_identifiers_spe_yuan = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					exists = c:CHI
+					this = c:CHI
+				}
+				AND = {
+					exists = c:TPG
+					this = c:TPG
+				}
+				AND = {
+					exists = c:MGL
+					this = c:MGL
+				}
+				AND = {
+					exists = c:TIB
+					this = c:TIB
+				}
+				AND = {
+					exists = c:BHU
+					this = c:BHU
+				}
+				AND = {
+					exists = c:SIK
+					this = c:SIK
+				}
+				AND = {
+					country_has_primary_culture = cu:manchu
+				}
+				AND = {
+					country_has_primary_culture = cu:han
+				}
+				AND = {
+					country_has_primary_culture = cu:hakka
+				}
+				AND = {
+					country_has_primary_culture = cu:uighur
+				}
+				AND = {
+					country_has_primary_culture = cu:mongol
+				}
+				AND = {
+					country_has_primary_culture = cu:yue
+				}
+				AND = {
+					country_has_primary_culture = cu:tibetan
+				}
+			}
+		}
+		add = 1
+	}
+}
+#spe_zloti
+currency_identifiers_spe_zloti = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					exists = c:POL
+					this = c:POL 
+				} 
+				AND = {
+					country_has_primary_culture = cu:polish
+				}
+			}
+		}
+		add = 1
+	}
+}
+#thaler_hannoveraner_thaler
+currency_identifiers_thaler_hannoveraner_thaler = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:HAN
+			this = c:HAN 
+		}
+		add = 1
+	}
+}
+#thaler_prussian_thaler
+currency_identifiers_thaler_prussian_thaler = {
+	value = 0
+	if = {
+		limit = {
+			or = {
+				AND = {
+					exists = c:PRU
+					this = c:PRU
+				}
+				AND = {
+					country_has_primary_culture = cu:north_german
+				}
+			}
+			NOT = { 
+				or = {
+					AND = {
+						exists = c:GER
+						this = c:GER
+					} 
+					AND = {
+						exists = c:HAN
+						this = c:HAN
+					} 
+					AND = {
+						exists = c:SAX
+						this = c:SAX
+					} 
+					AND = {
+						exists = c:LUX
+						this = c:LUX
+					} 
+					AND = {
+						exists = c:UBD
+						this = c:UBD
+					}  
+					AND = { exists = c:HRE this = c:HRE } 
+				}  
+			} 
+		}
+		add = 1
+	}
+}
+#thaler_saxon_thaler
+currency_identifiers_thaler_saxon_thaler = {
+	value = 0
+	if = {
+		limit = {
+			exists = c:SAX
+			this = c:SAX 
+		}
+		add = 1
+	}
+}
