@@ -45,3 +45,56 @@ zz_ef_cb_state_owner_step = {
 		set_variable = { name = zz_ef_cb_owner value = owner }
 	}
 }
+
+# Country scope, weekly: the pops' and the banks' metal are the country's accounts (var:zz_ef_popm_* / zz_ef_bankm_*) --
+# a country that is gone (annexed, a revolt put down, a union) takes them with it, and the world's line of metal lost
+# them (r1011_173236: 7 jumps of silver, each the week after a country was gone -- Peru's three states 27.9.1838,
+# -7.6M). No on_action marks a country gone: each country keeps its accounts on its capital (var:zz_ef_mh_*), and the
+# owner of a state whose keeper is no more takes them in.
+zz_ef_metal_heir_step = {
+	every_scope_state = {
+		limit = {
+			has_variable = zz_ef_mh_owner
+			NOT = { var:zz_ef_mh_owner = owner }
+		}
+		if = {
+			limit = { NOT = { exists = var:zz_ef_mh_owner } }
+			save_scope_as = zz_ef_mh_state
+			owner = {
+				zz_ef_metal_heir_take = { V = popm_gold }
+				zz_ef_metal_heir_take = { V = popm_silver }
+				zz_ef_metal_heir_take = { V = bankm_gold }
+				zz_ef_metal_heir_take = { V = bankm_silver }
+				if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|metal_heir|pop_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_popm_gold')|0]|pop_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_popm_silver')|0]|bank_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bankm_gold')|0]|bank_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bankm_silver')|0]" }
+			}
+		}
+		# taken from a country that lives on: its accounts are with it, the copy here is stale
+		remove_variable = zz_ef_mh_owner
+		remove_variable = zz_ef_mh_popm_gold
+		remove_variable = zz_ef_mh_popm_silver
+		remove_variable = zz_ef_mh_bankm_gold
+		remove_variable = zz_ef_mh_bankm_silver
+	}
+	if = {
+		limit = { exists = capital }
+		save_scope_as = zz_ef_mh_keeper
+		capital = {
+			set_variable = { name = zz_ef_mh_owner value = scope:zz_ef_mh_keeper }
+			set_variable = { name = zz_ef_mh_popm_gold value = scope:zz_ef_mh_keeper.zz_ef_popm_gold }
+			set_variable = { name = zz_ef_mh_popm_silver value = scope:zz_ef_mh_keeper.zz_ef_popm_silver }
+			set_variable = { name = zz_ef_mh_bankm_gold value = scope:zz_ef_mh_keeper.zz_ef_bankm_gold }
+			set_variable = { name = zz_ef_mh_bankm_silver value = scope:zz_ef_mh_keeper.zz_ef_bankm_silver }
+		}
+	}
+}
+# Country scope (the heir), scope:zz_ef_mh_state -- the gone country's capital: var:zz_ef_$V$ += its copy.
+zz_ef_metal_heir_take = {
+	if = {
+		limit = { scope:zz_ef_mh_state = { has_variable = zz_ef_mh_$V$ } }
+		if = {
+			limit = { NOT = { has_variable = zz_ef_$V$ } }
+			set_variable = { name = zz_ef_$V$ value = 0 }
+		}
+		change_variable = { name = zz_ef_$V$ add = scope:zz_ef_mh_state.var:zz_ef_mh_$V$ }
+	}
+}

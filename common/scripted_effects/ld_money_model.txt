@@ -45,6 +45,8 @@ zz_ef_money_model_step = {
 	}
 	# CB states taken from a country send their metal back to it
 	zz_ef_cb_state_owner_step = yes
+	# the pops' and banks' metal of a country that is gone goes to its capital's new owner (ld_subject_metal.txt)
+	zz_ef_metal_heir_step = yes
 	# the issuer pays the week's interest to the treasuries holding its bonds
 	# bonds as parts of the engine's debt (generated, scripted_effects/ld_bond_ledger.txt); replaces
 	# Е.5's issuer-pays expense line (zz_ef_bond_interest_step)

@@ -40,7 +40,9 @@
   сохраняет стандарт и паритет, страна на заглушке фиата берёт металлический стандарт и паритет; металла ввод не даёт
   (Д.R8в.7, `docs/currencies.md`).
 - `common/scripted_effects/ld_subject_metal.txt` — `zz_ef_cb_state_owner_step` (металл ушедшего ЦБ-региона возвращается
-  прежнему владельцу).
+  прежнему владельцу); `zz_ef_metal_heir_step` (неделя: страна держит копию своих счетов металла населения и банков на
+  столице, `var:zz_ef_mh_*`; владелец штата, чей хранитель исчез — аннексия, подавленный мятеж, объединение, — забирает
+  их себе: иначе металл уходил из мировой линии вместе со страной; лог `EFM|metal_heir`)
 - `common/scripted_effects/ld_stockpile_state_var_seed.txt`, `common/on_actions/ld_stockpile_state_var_init.txt`,
   `common/history/global/zz_ef_init_stockpiling_state_vars.txt` — засев 5 переменных `stockpiling_*_var_state_1` и двух
   вспомогательных на регионах (`financial_center_site_var`, `looted_state`); GLOBAL-блок истории (новая кампания),

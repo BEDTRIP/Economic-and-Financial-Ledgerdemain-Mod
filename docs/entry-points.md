@@ -208,7 +208,7 @@ on_action, `ld_*` и PSC добавляют свои. Недельного пу�
 | EFM | `common/scripted_effects/ld_monetary_policy.txt:65,130,179` | `done` (завершение девальвации/ревальвации: покрытие, цель), `step` (шаг: направление, взведён ли), `ai_parity` (ИИ меняет паритет) | месячный `zz_ef_mp_step`; `zz_ef_mp_complete` |
 | EFM | `common/scripted_effects/ld_standard_switch.txt:107` | смена денежного стандарта: старый/новый паритет | на смене закона, `zz_ef_std_switch_after` (из `01_economic_scripted_effects.txt:9565`) |
 | EFM | `common/scripted_effects/ld_metal_accounts.txt:235` | `metal_start`: начальный металл ЦБ, что сделано | недельный, `zz_ef_metal_start_log` |
-| EFM | `common/scripted_effects/ld_subject_metal.txt:40` | `cb_state_lost` (ЦБ-штат потерян) | недельный `zz_ef_cb_state_owner_step` |
+| EFM | `common/scripted_effects/ld_subject_metal.txt:40`, `:68` | `cb_state_lost` (ЦБ-штат потерян); `metal_heir` (металл населения и банков исчезнувшей страны перешёл владельцу её столицы — итоги наследника) | недельные `zz_ef_cb_state_owner_step`, `zz_ef_metal_heir_step` |
 | EFM | `common/scripted_effects/ld_currency_intro.txt` | `cur_intro_parity`: ввод валюты — стандарт и паритет до и после | `zz_ef_cur_intro` (из `introduction_new_currency`) |
 | EFT | `common/scripted_effects/ld_metal_accounts.txt:498` | потоки металла ЦБ/банков/населения за неделю | недельный `zz_ef_metal_week_step` |
 | EFV | `common/scripted_effects/ld_metal_accounts.txt:505` | WORLD: суммы металла по ЦБ/банкам/населению, баланс закупок/продаж | недельный `zz_ef_world_metal_log` (из `ld_money_model.txt:742`) |
