@@ -423,12 +423,12 @@ zz_ef_clr_settle = {
 zz_ef_clr_pair = {
 	zz_ef_clr_acc = { N = paid V = var:zz_ef_clr_a }
 	scope:zz_ef_clr_r = { zz_ef_clr_acc = { N = got V = scope:zz_ef_clr_p.var:zz_ef_clr_a } }
-	# the balance of the receiver's demand and the payer's offer, weighted by the two currencies' strength (Д.R8в.29)
+	# the balance of the receiver's demand and the payer's offer, weighted by the two economies' GDP (Д.R8в.29)
 	set_variable = { name = zz_ef_clr_dm value = zz_ef_clr_metal_share }
-	set_variable = { name = zz_ef_clr_sp value = { value = zz_ef_currency_strength min = 0.01 } }
+	set_variable = { name = zz_ef_clr_sp value = { value = gdp min = 1 } }
 	scope:zz_ef_clr_r = {
 		set_variable = { name = zz_ef_clr_t_boost value = zz_ef_clr_recv_boost }
-		set_variable = { name = zz_ef_clr_t_sr value = { value = zz_ef_currency_strength min = 0.01 } }
+		set_variable = { name = zz_ef_clr_t_sr value = { value = gdp min = 1 } }
 	}
 	change_variable = { name = zz_ef_clr_dm multiply = scope:zz_ef_clr_r.var:zz_ef_clr_t_boost }
 	clamp_variable = { name = zz_ef_clr_dm max = 1 }

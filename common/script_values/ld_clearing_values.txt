@@ -7,7 +7,8 @@
 #   (zz_ef_clr_metal_share, payer scope); a metal standard's CB under its cover target wants more of it
 #   (zz_ef_clr_recv_boost);
 #   the payer's offer -- by its cover (zz_ef_clr_cover_keep);
-#   share = demand x w + offer x (1 - w), w = the receiver's strength / the sum of both.
+#   share = demand x w + offer x (1 - w), w = the receiver's GDP / the sum of both (the bigger economy has its way).
+#   The currencies' strength is no weight: on metal it stays ~1 for all.
 zz_ef_clr_metal_share_low = 0.75
 zz_ef_clr_metal_share_high = 1.25
 zz_ef_clr_metal_share_min = 0.3
@@ -32,15 +33,16 @@ zz_ef_clr_metal_share = {
 		value = zz_ef_clr_metal_share_ref
 	}
 }
-# Payer scope: how much it is willing to pay other than its money, by its cover (Д.R8в.28) -- all at the target
-# (zz_ef_cover_normal) and over, nothing at half of it, linear between. No CB (the banks' metal) -- all.
+# Payer scope: how much it is willing to pay other than its money, by its cover (Д.R8в.28, Д.R8в.29) -- only its
+# metal over the target: nothing at the target (zz_ef_cover_normal), all at twice it, linear between. No CB (the
+# banks' metal) -- all.
 zz_ef_clr_cover_keep = {
 	value = 1
 	if = {
 		limit = { zz_ef_clr_cb_ok = yes }
 		value = zz_ef_cb_cover
-		subtract = { value = zz_ef_cover_normal multiply = 0.5 }
-		divide = { value = zz_ef_cover_normal multiply = 0.5 }
+		subtract = zz_ef_cover_normal
+		divide = zz_ef_cover_normal
 		min = 0
 		max = 1
 	}

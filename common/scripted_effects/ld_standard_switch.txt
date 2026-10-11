@@ -98,51 +98,8 @@ zz_ef_std_switch_after = {
 			}
 			change_variable = { name = zz_ef_std_parity_new multiply = gold_to_silver_rate }
 		}
-		# the reserves: into gold for the gold standard, into silver for the silver one
-		if = {
-			limit = { zz_ef_metal_gold = yes }
-			every_scope_state = {
-				limit = {
-					has_modifier = central_bank_historic_place
-					has_variable = silver_state_1
-					var:silver_state_1 > 0
-				}
-				if = {
-					limit = { NOT = { has_variable = gold_state_1 } }
-					set_variable = { name = gold_state_1 value = 0 }
-				}
-				change_variable = {
-					name = gold_state_1
-					add = {
-						value = var:silver_state_1
-						multiply = silver_to_gold_rate
-					}
-				}
-				set_variable = { name = silver_state_1 value = 0 }
-			}
-		}
-		else_if = {
-			limit = { zz_ef_metal_silver = yes }
-			every_scope_state = {
-				limit = {
-					has_modifier = central_bank_historic_place
-					has_variable = gold_state_1
-					var:gold_state_1 > 0
-				}
-				if = {
-					limit = { NOT = { has_variable = silver_state_1 } }
-					set_variable = { name = silver_state_1 value = 0 }
-				}
-				change_variable = {
-					name = silver_state_1
-					add = {
-						value = var:gold_state_1
-						multiply = gold_to_silver_rate
-					}
-				}
-				set_variable = { name = gold_state_1 value = 0 }
-			}
-		}
+		# the reserves stay as they are: the CB keeps both metals, its cover counts them at the world's price
+		# (zz_ef_reserves_in_gold; Д.R8в.28 -- metal does not turn into the other)
 		if = {
 			limit = { zz_ef_std_switch_metal = yes }
 			set_variable = { name = money_value_target_1 value = var:zz_ef_std_parity_new }
