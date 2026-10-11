@@ -10,8 +10,7 @@ on_action, `ld_*` и PSC добавляют свои. Недельного пу�
 ## Файлы
 - `common/on_actions/00_ef_on_action.txt` — корневые on_action E&F (`ef_on_*_pulse_country`,
   `ef_on_production_method_changed`, `ef_on_battle_ended`, `com_topbar_setup_ef`).
-- `common/on_actions/PSC_on_actions.txt` — PSC: распределение очков стройки по дням месяца, пересчёт метода конверсии
-  при смене PM/технологии/постройке сектора.
+- `common/on_actions/PSC_on_actions.txt` — PSC: распределение очков стройки по дням месяца.
 - `common/on_actions/ld_*_on_actions.txt` — `ld_bank`, `ld_bubble`, `ld_capitalization`, `ld_cb_rate`, `ld_money_model`
   — месячные хуки модели; `common/on_actions/ld_new_country_immediate_init.txt`, `ld_stockpile_state_var_init` —
   инициализация переменных; `ld_pb_ai_sector_downsize`, `ld_pb_overbuild_counter` — штраф перестройки (PSC). Имена
@@ -51,7 +50,7 @@ on_action, `ld_*` и PSC добавляют свои. Недельного пу�
 | 1 | `history/buildings/00_a_ef_history_var_init.txt` | заводит `country_already_financial_center=0`, `gdp_view_fc=5`, пока global ещё не отработал (иначе `financial_center_modifier` читает пустую переменную) |
 | 1а | `central_bank_modifier`, `financial_center_modifier` (`09_introduction_building_lvl.txt`) | вызываются из истории до global: `central_bank_modifier` в историческом вызове не делает ничего, пока нет `base_demande_currency_fix` (модификаторы ставит первый месячный пульс `update_modifiers_bc_fc_ns`); `financial_center_modifier` вызывает `*_fixed_var` через сохранённую страну `scope:financial_center_country` (в истории `root` пуст) |
 | 2 | `history/buildings/00_ef_building.txt` (4250 строк) | `BUILDINGS = { every_country }`: сначала `establish_bank_and_ef_compagnie` (компании-банки до центробанков), затем 221 `create_building` (ЦБ `building_bank` — `initialize_historic_macro_facilities_bc`, без технологий; финцентры, шахты), `financial_center_modifier`, `is_valid_country_hmm`; PM исторических шахт (`pm_no_explosives`, `pm_no_steam_automation`) |
-| 3 | `history/buildings/PSC_buildings.txt` | при технологии `urbanization` — `building_construction_regulator` в каждом штате, `set_point_conversion_method_from_tech` |
+| 3 | `history/buildings/PSC_buildings.txt` | при технологии `urbanization` — `building_construction_regulator` в каждом штате (один метод, закупка по рынку — `construction.md`) |
 | 4 | `history/global/00_ef_economic_global_variable.txt` (55 тыс.) | `GLOBAL = every_country`: ~6300 `set_variable` на страну (тестовые, золото/серебро, инфляция, кредитный рейтинг, переменные по каждой из 95 валют `<cur>`), ~3900 `set_global_variable` (флаги валют, `<cur>_global_monetary_reference_order_limitation`), ~1800 `add_to_global_variable_list` (`monetary_systeme_list`, `financial_product_list`, списки по валютам). Переменные стран — вызов `new_country_var_ef_economy` (`10_new_country_var.txt`), после него — глобальные |
 | 5 | `history/global/00_ef_financial_global_variable.txt` | `new_country_var_ef_financial`: переменные облигаций/акций/займов по странам (436 `set_variable`) |
 | 6 | `history/global/00_ef_stockpile_global_variable.txt` | `new_country_var_ef_stockpile`: `looting_1_year` (счётчик грабежа ЦБ), `zz_ef_country_vars_set` (признак «страна уже инициализирована») |
@@ -112,8 +111,7 @@ on_action, `ld_*` и PSC добавляют свои. Недельного пу�
 Порядок в `zz_ef_money_model_step` (`ld_money_model.txt`): `zz_ef_probe_newyear_cash`, `zz_ef_fx_metal_update`,
 `zz_ef_cbfx_week_step`, `zz_ef_cb_state_owner_step`, `zz_ef_bond_ledger_step`, `zz_ef_metal_start_step` (+ `_cb_before`,
 `_cb_after`, `zz_ef_metal_start_log`), `zz_ef_cb_metal_start_step`, `zz_ef_consol_step`, `zz_ef_business_credit_step`,
-`zz_ef_metal_week_step`, далее агрегаты M0..M3 и лог EFW; `zz_ef_money_hook_receive` вызывается из моста GUI. PSC-хук:
-`on_production_method_changed`, `on_building_built`, `on_acquired_technology` (см. PSC).
+`zz_ef_metal_week_step`, далее агрегаты M0..M3 и лог EFW; `zz_ef_money_hook_receive` вызывается из моста GUI.
 
 ### Полугодовой пульс (`on_half_yearly_pulse_country`)
 `ef_on_half_yearly_pulse_country`:
@@ -151,10 +149,8 @@ on_action, `ld_*` и PSC добавляют свои. Недельного пу�
 ### Прочие хуки
 | хук | on_action → эффекты |
 |---|---|
-| `on_production_method_changed` | `ef_on_production_method_changed` → `zz_ef_pm_stock_building` (`common/scripted_effects/ld_pm_stock_hook.txt`, генератор): только здание, сменившее метод, — его метод «акций» (4 группы: промышленность / сельское хозяйство / добыча / железная дорога, 48 типов) по `private_ownership_fraction` (> 0,5 — `pm_private_ownership_majority_*_stock`, ≤ 0,5 — `pm_no_private_ownership_*_stock`), после переключения — `financial_center_production_methods` владельца (если ФЦ); переключение снова зовёт хук для того же здания, оно уже согласовано — вложенности нет. Перебор всей страны (`private_ownership_production_stocks`) — только годовой; PSC `on_construction_sector_method_changed` → `set_new_point_conversion_method` (если сектор) |
+| `on_production_method_changed` | `ef_on_production_method_changed` → `zz_ef_pm_stock_building` (`common/scripted_effects/ld_pm_stock_hook.txt`, генератор): только здание, сменившее метод, — его метод «акций» (4 группы: промышленность / сельское хозяйство / добыча / железная дорога, 48 типов) по `private_ownership_fraction` (> 0,5 — `pm_private_ownership_majority_*_stock`, ≤ 0,5 — `pm_no_private_ownership_*_stock`), после переключения — `financial_center_production_methods` владельца (если ФЦ); переключение снова зовёт хук для того же здания, оно уже согласовано — вложенности нет. Перебор всей страны (`private_ownership_production_stocks`) — только годовой |
 | `on_battle_ended` | `ef_on_battle_ended` → `enemy_stats_is_occuped` при `enemy_stats_is_occuped >= 1` |
-| `on_acquired_technology` (PSC) | `on_acquired_construction_tech` → `set_point_conversion_method_from_tech` |
-| `on_building_built` (PSC) | `on_construction_sector_built` → `set_new_point_conversion_method` |
 | решение `00_ai_loooting_decisions_1` (ИИ) | `enemy_capital_is_occuped` (грабёж ЦБ-штата), событие `00_ef_economic_event.35` игрокам; `looting_1_year_on_action` годом |
 
 ## Переменные

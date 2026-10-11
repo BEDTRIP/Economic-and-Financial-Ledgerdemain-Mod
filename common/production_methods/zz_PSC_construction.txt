@@ -143,9 +143,14 @@ REPLACE_OR_CREATE:pm_wood_point_conversion = {
 		}
 	}
 
+	# the regulator's only method: 10 units of each construction good a point, cut to the good's share of the purchase by
+	# zz_ef_reg_in_<good> (Д.R8в.24, scripted_effects/ld_construction_market.txt) -- 10 units a point in all
 	building_modifiers = {
 		workforce_scaled = {
 			goods_input_wood_construction_add = 10
+			goods_input_iron_construction_add = 10
+			goods_input_steel_construction_add = 10
+			goods_input_arc_welded_construction_add = 10
 		}
 		level_scaled = {
 			building_employment_bureaucrats_add = 20
@@ -156,74 +161,3 @@ REPLACE_OR_CREATE:pm_wood_point_conversion = {
 	}
 }
 
-REPLACE_OR_CREATE:pm_iron_point_conversion = {
-	texture = "gfx/interface/icons/production_method_icons/iron_frame_buildings.dds"
-	is_hidden_when_unavailable = yes
-
-	country_modifiers = {
-		workforce_scaled = {
-			country_construction_add = 1
-		}
-	}
-
-	building_modifiers = {
-		workforce_scaled = {
-			goods_input_iron_construction_add = 10
-		}
-		level_scaled = {
-			building_employment_bureaucrats_add = 20
-		}
-	}
-
-	unlocking_production_methods = {
-		pm_iron_point_conversion
-	}
-}
-
-REPLACE_OR_CREATE:pm_steel_point_conversion = {
-	texture = "gfx/interface/icons/production_method_icons/steel_frame_buildings.dds"
-	is_hidden_when_unavailable = yes
-
-	country_modifiers = {
-		workforce_scaled = {
-			country_construction_add = 1
-		}
-	}
-
-	building_modifiers = {
-		workforce_scaled = {
-			goods_input_steel_construction_add = 10
-		}
-		level_scaled = {
-			building_employment_bureaucrats_add = 20
-		}
-	}
-
-	unlocking_production_methods = {
-		pm_steel_point_conversion
-	}
-}
-
-REPLACE_OR_CREATE:pm_arc_welded_point_conversion = {
-	texture = "gfx/interface/icons/production_method_icons/arc_welded_buildings.dds"
-	is_hidden_when_unavailable = yes
-
-	country_modifiers = {
-		workforce_scaled = {
-			country_construction_add = 1
-		}
-	}
-
-	building_modifiers = {
-		workforce_scaled = {
-			goods_input_arc_welded_construction_add = 10
-		}
-		level_scaled = {
-			building_employment_bureaucrats_add = 20
-		}
-	}
-
-	unlocking_production_methods = {
-		pm_arc_welded_point_conversion
-	}
-}

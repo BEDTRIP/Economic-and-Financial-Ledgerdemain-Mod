@@ -17,10 +17,9 @@
 - `common/law_groups/01_ef_laws.txt` — группы законов: `lawgroup_monetary_policy`, `lawgroup_monetary_system`.
 - Законы валют E&F (95 `law_<cur>_currency`, `law_no_market_liquidity`, группа `lawgroup_currency_type`) — в
   `_archive/ef_currency_laws/` (R8в, шаг 5): валюта — `var:zz_ef_cur = flag:<cur>`; ставят история E&F
-  (`99_ef_history_global_variable.txt`), союз
-  (`ld_monetary_union.txt`); новая страна без банка — без валюты (`00_on_action_main.txt`); все проверки валюты E&F
-  (`has_law = law_type:law_<cur>_currency`, 2190 мест) — `var:zz_ef_cur ?= flag:<cur>`. Список валют для генераторов —
-  `../vic3_mods/tools/data/ld_currencies.txt`.
+  (`99_ef_history_global_variable.txt`), союз (`ld_monetary_union.txt`); новая страна без банка — без валюты
+  (`00_on_action_main.txt`); все проверки валюты E&F (`has_law = law_type:law_<cur>_currency`, 2190 мест) —
+  `var:zz_ef_cur ?= flag:<cur>`. Список валют для генераторов — `../vic3_mods/tools/data/ld_currencies.txt`.
 - `common/laws/01_ef_monetary_system.txt` — `law_no_monetary_system`, `law_fiat_standard`, `law_silver_standard`,
   `law_bimetallism_standard`, `law_gold_standard`, обменные `law_gold_exchange_standard`,
   `law_silver_exchange_standard`, `law_bimetallism_exchange_standard`, `law_external_exchange_standard`; `on_activate` /
@@ -57,14 +56,13 @@
   нет совсем — крупнейшая по `national_capacity_in_gold` великая держава с ЦБ при любом стандарте
   (`EFE|…|pick|no_candidate_no_reference`); лог `EFE|`.
 - Ввод валюты (Д.R8в.7): технология `currency_standards` и здание ЦБ зовут `introduction_new_currency`
-  (`09_introduction_building_lvl.txt`: строит ЦБ, если банка нет), тот — `zz_ef_cur_intro`
-  (`ld_currency_intro.txt`). Страна с паритетом больше `zz_ef_cur_intro_par_min` (0,011, заглушка фиата E&F — 0,01) не
-  меняется; на заглушке фиата (`zz_ef_cur_placeholder`), кроме изоляциониста — хозяина рынка (остаётся на фиате) —
-  серебряный стандарт до 1873, золотой после; паритет — хозяина рынка × его курс к паритету, в металле нового стандарта,
-  без хозяина рынка — `zz_ef_cur_intro_par_silver` (22,5) / `_gold` (1,5) («принято, проверить», R11). Металла ввод не
-  даёт — новый ЦБ покупает его на рынке. Название — своё (`zz_ef_cur_set`); валюта по культуре E&F
-  (`currency_identifiers_<cur>`) и 95 копий ввода (`introduction_of_<cur>`) — `_archive/ef_currency_introduction/`.
-  Лог `EFM|…|cur_intro_parity`.
+  (`09_introduction_building_lvl.txt`: строит ЦБ, если банка нет), тот — `zz_ef_cur_intro` (`ld_currency_intro.txt`).
+  Страна с паритетом больше `zz_ef_cur_intro_par_min` (0,011, заглушка фиата E&F — 0,01) не меняется; на заглушке фиата
+  (`zz_ef_cur_placeholder`), кроме изоляциониста — хозяина рынка (остаётся на фиате) — серебряный стандарт до 1873,
+  золотой после; паритет — хозяина рынка × его курс к паритету, в металле нового стандарта, без хозяина рынка —
+  `zz_ef_cur_intro_par_silver` (22,5) / `_gold` (1,5) («принято, проверить», R11). Металла ввод не даёт — новый ЦБ
+  покупает его на рынке. Название — своё (`zz_ef_cur_set`); валюта по культуре E&F (`currency_identifiers_<cur>`) и 95
+  копий ввода (`introduction_of_<cur>`) — `_archive/ef_currency_introduction/`. Лог `EFM|…|cur_intro_parity`.
 
 ### Индекс `01_economic_currency_scripted_value.txt` (на каждую валюту `<cur>`)
 - :228-:294 общие `base_demande_currency*`, `target_demand_currency*`, `enough_foreign_currrency`.
@@ -72,14 +70,13 @@
   привязан банком к чужой валюте, не последователь союза); `leading_currency_type` (число лидеров),
   `weighted_average_currency_value` (среднее `money_value_in_gold` лидеров → `money_value_median`), `is_reference_type`
   — в `ld_reference_currency_values.txt`; 95 списков и модификаторов лидера E&F — `_archive/ef_currency_leaders/`.
-- `currency_of_player_is_<cur>` = `global_var:currency_of_player_is_<cur>` (это
-  script_value, не триггер; глобальные переменные обнуляются в
-  `common/history/global/00_ef_economic_global_variable.txt:2713..`); :2966 `currency_of_player` (сумма).
+- `currency_of_player_is_<cur>` = `global_var:currency_of_player_is_<cur>` (это script_value, не триггер; глобальные
+  переменные обнуляются в `common/history/global/00_ef_economic_global_variable.txt:1859..`); `currency_of_player`
+  (сумма) — `01_economic_currency_scripted_value.txt:2107`.
 - `money_value_<cur>` = `global_var:money_value_<cur>_global_var` (его ставит `money_value_<cur>_global_var`,
-  `01_economic_scripted_effects.txt`: значение лидера валюты с наибольшей `national_capacity_in_gold`); `money_value_in_gold_<cur>`,
-  `money_value_<cur>_related_to_country_law` (:4854, пересчёт под стандарт).
-- `money_supply_state` (+`_monthly`) — цепочка
-  `if has_law <cur>_currency add stockpiling_<cur>_state`.
+  `01_economic_scripted_effects.txt`: значение лидера валюты с наибольшей `national_capacity_in_gold`);
+  `money_value_in_gold_<cur>`, `money_value_<cur>_related_to_country_law` (:4854, пересчёт под стандарт).
+- `money_supply_state` (+`_monthly`) — цепочка `if has_law <cur>_currency add stockpiling_<cur>_state`.
 - :8871 `pop_savings`, :9066 `pop_savings_monthly`; :15013.. `<cur>_c_market_goods_*`,
   `stockpiling_<cur>_state/_private_bank`, `<cur>_c_total/global_stokpile`; `buy_/sell_<cur>_in_gold_market_panel`.
 - :24090 `buy_sell_currency_in_metal_market_panel` (его читает GUI биржи валют).
@@ -103,9 +100,9 @@
   металлический/золотодевизный стандарт, нет дефолта ЦБ, покрытие ≥ 25%.
 - Смена закона стандарта: `on_activate_monetary_system_law` → `zz_ef_std_switch_before` (запомнить стандарт и паритет) →
   тело E&F (паритет E&F `money_value_target_pre_set` — только если `zz_ef_std_switch_metal` нет: прежнего металлического
-  паритета нет или новый стандарт не металлический) → `zz_ef_std_switch_after` (пересчёт паритета по `silver_to_gold_rate`/`gold_to_silver_rate`, перевод запасов
-  `silver_state_1`↔`gold_state_1` в столичных штатах с `central_bank_historic_place`). Пересчёт — по металлу стандарта
-  (`zz_ef_metal_gold/_silver/_bimet`), не по закону.
+  паритета нет или новый стандарт не металлический) → `zz_ef_std_switch_after` (пересчёт паритета по
+  `silver_to_gold_rate`/`gold_to_silver_rate`, перевод запасов `silver_state_1`↔`gold_state_1` в столичных штатах с
+  `central_bank_historic_place`). Пересчёт — по металлу стандарта (`zz_ef_metal_gold/_silver/_bimet`), не по закону.
 - Обменные стандарты (Д.R8а.6) — три закона по металлу: золотой, серебряный и биметаллический обменный (технология
   `gold_exchange_standard`; открыты с любого металлического и друг с друга, с них — золотой и биметаллизм). Это
   металлический стандарт с бонусом: покрытие — свой металл **и** валюты обменоспособных эмитентов (ниже); ценность
