@@ -1,0 +1,28 @@
+# R4а.1 probe (Р25), events/ld_probe_cb_events.txt. Country scope: EFZ|date|country|cb_probe|$WHAT$|has|n|max|lv|pr.
+ld_probe_cb_log = {
+	set_variable = { name = zz_ef_cbp_n value = 0 }
+	every_company = { prev = { change_variable = { name = zz_ef_cbp_n add = 1 } } }
+	set_variable = { name = zz_ef_cbp_max value = 0 }
+	if = { limit = { max_num_companies > 0 } set_variable = { name = zz_ef_cbp_max value = 1 } }
+	if = { limit = { max_num_companies > 1 } set_variable = { name = zz_ef_cbp_max value = 2 } }
+	if = { limit = { max_num_companies > 2 } set_variable = { name = zz_ef_cbp_max value = 3 } }
+	if = { limit = { max_num_companies > 3 } set_variable = { name = zz_ef_cbp_max value = 4 } }
+	if = { limit = { max_num_companies > 4 } set_variable = { name = zz_ef_cbp_max value = 5 } }
+	if = { limit = { max_num_companies > 5 } set_variable = { name = zz_ef_cbp_max value = 6 } }
+	if = { limit = { max_num_companies > 6 } set_variable = { name = zz_ef_cbp_max value = 7 } }
+	if = { limit = { max_num_companies > 7 } set_variable = { name = zz_ef_cbp_max value = 8 } }
+	if = { limit = { max_num_companies > 8 } set_variable = { name = zz_ef_cbp_max value = 9 } }
+	if = { limit = { max_num_companies > 9 } set_variable = { name = zz_ef_cbp_max value = 10 } }
+	set_variable = { name = zz_ef_cbp_has value = 0 }
+	set_variable = { name = zz_ef_cbp_lv value = 0 }
+	if = {
+		limit = { has_company = company_type:company_ld_probe_cb }
+		set_variable = { name = zz_ef_cbp_has value = 1 }
+		company:company_ld_probe_cb = {
+			if = { limit = { company_owned_levels > 0 } prev = { set_variable = { name = zz_ef_cbp_lv value = 1 } } }
+			if = { limit = { company_owned_levels > 4 } prev = { set_variable = { name = zz_ef_cbp_lv value = 5 } } }
+			if = { limit = { company_owned_levels > 19 } prev = { set_variable = { name = zz_ef_cbp_lv value = 20 } } }
+		}
+	}
+	debug_log = "EFZ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|cb_probe|$WHAT$|has [THIS.GetCountry.MakeScope.Var('zz_ef_cbp_has').GetValue|0]|n [THIS.GetCountry.MakeScope.Var('zz_ef_cbp_n').GetValue|0]|max [THIS.GetCountry.MakeScope.Var('zz_ef_cbp_max').GetValue|0]|lv [THIS.GetCountry.MakeScope.Var('zz_ef_cbp_lv').GetValue|0]"
+}

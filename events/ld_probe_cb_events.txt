@@ -1,0 +1,58 @@
+namespace = ld_probe_cb
+
+# R4а.1 probe (Р25, console only: `event ld_probe_cb.0`): 30 days on Great Britain, Russia, France and Sweden get the
+# company company_ld_probe_cb by add_company (a CB's sign, Д.R4а.2); then monthly, for two years: whether they keep it,
+# their companies against the limit, its levels and prosperity. Log: EFZ|...|cb_probe|...
+ld_probe_cb.0 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		if = {
+			limit = { NOT = { has_global_variable = zz_ef_cb_probe_on } }
+			set_global_variable = { name = zz_ef_cb_probe_on value = 0 }
+			trigger_event = { id = ld_probe_cb.1 days = 30 }
+		}
+	}
+}
+ld_probe_cb.1 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		every_country = {
+			limit = {
+				OR = {
+					this = c:GBR
+					this = c:RUS
+					this = c:FRA
+					this = c:SWE
+				}
+			}
+			ld_probe_cb_log = { WHAT = before }
+			add_company = company_type:company_ld_probe_cb
+			ld_probe_cb_log = { WHAT = after }
+		}
+		trigger_event = { id = ld_probe_cb.2 days = 30 }
+	}
+}
+ld_probe_cb.2 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		change_global_variable = { name = zz_ef_cb_probe_on add = 1 }
+		every_country = {
+			limit = {
+				OR = {
+					this = c:GBR
+					this = c:RUS
+					this = c:FRA
+					this = c:SWE
+				}
+			}
+			ld_probe_cb_log = { WHAT = month }
+		}
+		if = {
+			limit = { global_var:zz_ef_cb_probe_on < 24 }
+			trigger_event = { id = ld_probe_cb.2 days = 30 }
+		}
+	}
+}
