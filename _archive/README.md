@@ -119,6 +119,7 @@ _archive/<механизм>/
 | Проба R8а.7 `ld_probe_tag.1` (тег страны, `Localize(Concatenate(...))`) | `ld_probe_tag/` | событие и ключи `zz_ef_iso2_*` пробы |
 | Проба R8б, шаг 0: карта переменных `ld_probe_map.1`, `.2` | `ld_probe_map/` | итоги — в README пробы и в очереди R8б плана |
 | Проба R8в.1 `ld_probe_mshare.1`, `.2` (доли членов рынка) | `ld_probe_mshare/` | итоги — в README пробы и в очереди R8в плана |
+| Проба R8в.4 `ld_mu_probe.0`–`.3` (валютный союз: вступление, стандарт главы, разрыв) | `ld_probe_mu/` | итоги — в README пробы и в очереди R8в |
 | Определения E&F без ссылок, ночь 9.10 (`trade_balance_0`, `law_currency_enacted`, `prosperity_*` и др., 10 записей) | `ef_unread_definitions_9_10/` | ссылок не было — только комментарии |
 | Проба R8б, шаг 0: доли ВВП у чужих владельцев `ld_probe_gdpown.1` | `ld_probe_gdpown/` | итоги — в README пробы и в очереди R8б плана |
 | Торговля в разрезе 95 валют: записи `import/export_in_<cur>_in_gold_fix` кнопки `trade_balance_actualized` и подписи `<cur>_03_*` без читателя — R8а, п. 8 | `ef_trade_by_currency/` | 190 блоков из кнопки, 384 ключа локализации |
