@@ -53,8 +53,10 @@
 
 **Ledgerdemain (`ld_*`) над PSC**
 - `common/scripted_effects/ld_construction_market.txt`, `common/script_values/ld_construction_market_values.txt`,
-  `common/static_modifiers/ld_construction_market_modifiers.txt`, `common/modifier_type_definitions/ld_construction_market_modifier_types.txt` (типы `goods_input_<товар>_construction_mult` — у модовых товаров движок их не создаёт) — закупка регулятора по рынку (Д.R8в.24):
-  `zz_ef_reg_market_step` (штат, раз в неделю в цикле PSC после уровня регулятора): местная цена товара
+  `common/static_modifiers/ld_construction_market_modifiers.txt`,
+  `common/modifier_type_definitions/ld_construction_market_modifier_types.txt` (типы
+  `goods_input_<товар>_construction_mult` — у модовых товаров движок их не создаёт) — закупка регулятора по рынку
+  (Д.R8в.24): `zz_ef_reg_market_step` (штат, раз в неделю в цикле PSC после уровня регулятора): местная цена товара
   `zz_ef_reg_p_<товар>` = база × (1 + `state_goods_pricier`), предложение `zz_ef_reg_supply_<товар>` = заявки на продажу
   рынка штата, вес = предложение × (`zz_ef_reg_pmin` / цена)², доли `var:zz_ef_reg_s_<товар>` идут к весам шагом
   `zz_ef_reg_step` = 0,5 (без предложения — всё древесные), модификатор `zz_ef_reg_in_<товар>` на регуляторе × (доля −
@@ -181,7 +183,10 @@
 - ИИ-цены: `ai_construction_sector_price_pressure_bonus` в `ai_value` сектора.
 
 ## Логи
-`debug_log` в подсистеме нет. Уведомление игроку: `zz_pb_ef_overbuild_rising` (рост полосы `speculative_share_2` на 10).
+`EFC` (при логах, раз в неделю PSC на страну, `zz_ef_reg_log`): `total` — траты на стройку, `alloc` — роздано штатам,
+`pts` — очки, купленные на них, `rest` — не роздано, `prod` — выпуск стройтоваров страны, `gov` — государственная часть
+трат, `wtot` — сумма выпуск / базовая цена по штатам. Уведомление игроку: `zz_pb_ef_overbuild_rising` (рост полосы
+`speculative_share_2` на 10).
 
 ## Прочие файлы
 - `common/script_values/PSC_set_values.txt` — константы PSC (`privatisation_percent_weeks`, цены строительных товаров,

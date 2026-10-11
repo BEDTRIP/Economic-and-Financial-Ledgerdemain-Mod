@@ -196,6 +196,8 @@ set_construction_point_demand = {
             name = psc_remaining_construction_spending
             value = var:total_construction_spending
         }
+        set_variable = { name = zz_ef_c_alloc value = 0 }
+        set_variable = { name = zz_ef_c_pts value = 0 }
         ordered_scope_state = {
             order_by = construction_ordering
             min = 0
@@ -226,12 +228,21 @@ set_construction_point_demand = {
                 }
             }
             remove_variable = psc_state_spending
+            set_variable = { name = psc_state_spending_log value = local_var:state_construction_spending }
 
             set_state_construction_efficiency = yes
             set_local_variable = {
                 name = state_construction
                 value = state_construction_allocation
             }
+            # the week's sums for the log EFC (ld_construction_market.txt)
+            set_variable = { name = psc_state_points value = local_var:state_construction }
+            owner = {
+                change_variable = { name = zz_ef_c_alloc add = scope:psc_state.var:psc_state_spending_log }
+                change_variable = { name = zz_ef_c_pts add = scope:psc_state.var:psc_state_points }
+            }
+            remove_variable = psc_state_points
+            remove_variable = psc_state_spending_log
             b:building_construction_regulator = {
                 if = {
                     limit = {
@@ -259,6 +270,7 @@ set_construction_point_demand = {
             }
         }
 
+        zz_ef_reg_log = yes
         remove_variable = psc_remaining_construction_spending
         set_variable = {
             name = prev_estimated_investment_pool
