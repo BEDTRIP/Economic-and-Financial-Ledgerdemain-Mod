@@ -47,19 +47,19 @@ zz_ef_xch_banned = {
 	}
 }
 
-# COUNTRY scope (scope:zz_ef_xch_c), after zz_ef_xch_strong_bloc_find: the bloc scope:zz_ef_xch_b -- of the most influence
-# on the country among the blocs whose leader has an exchange -- is strictly ahead of every other bloc (so it has
-# influence at all; Д.R8в.22)
+# COUNTRY scope (scope:zz_ef_xch_c), after zz_ef_xch_strong_bloc_find: a bloc of the most influence on the country among
+# the blocs with influence whose leader has an exchange was found (Д.R8в.22)
 zz_ef_xch_strong_bloc = {
 	exists = scope:zz_ef_xch_b
 	has_variable = zz_ef_xch_blev
+}
+# POWER BLOC scope: it has influence on scope:zz_ef_xch_c -- the engine gives 0 advantage to a bloc with none (a bloc with
+# influence has 0 only at an exact tie)
+zz_ef_xch_bloc_has_influence = {
 	NOT = {
-		any_power_bloc = {
-			NOT = { this = scope:zz_ef_xch_b }
-			leverage_advantage = {
-				target = scope:zz_ef_xch_c
-				value >= scope:zz_ef_xch_c.var:zz_ef_xch_blev
-			}
+		leverage_advantage = {
+			target = scope:zz_ef_xch_c
+			value = 0
 		}
 	}
 }
