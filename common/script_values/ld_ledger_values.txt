@@ -83,3 +83,14 @@ zz_ef_wld_other_tr_v = {
 
 # the EFJ line of a country outside the log countries: its «прочее» of the week above this (money, the log only)
 zz_ef_other_log_min = 20000
+# an unexplained move of the treasury in a step above this is logged with the engine's numbers (EFJ|…|tr_jump, the log only)
+zz_ef_other_tr_jump_min = 300000
+zz_ef_other_tr_jump_min_neg = -300000
+zz_ef_gold_reserves_v = { value = gold_reserves }
+zz_ef_gold_limit_v = { value = gold_reserves_limit }
+zz_ef_principal_v = { value = principal }
+zz_ef_credit_v = { value = credit }
+zz_ef_at_war_v = {
+	value = 0
+	if = { limit = { is_at_war = yes } value = 1 }
+}

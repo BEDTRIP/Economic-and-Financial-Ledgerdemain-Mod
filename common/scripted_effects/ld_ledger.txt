@@ -159,6 +159,17 @@ zz_ef_reconcile = {
 		remove_variable = zz_ef_t_lvl
 		change_variable = { name = zz_ef_other_tr add = var:zz_ef_f_other_tr }
 	}
+	# a large unexplained move of the treasury -- the engine's numbers around it (the log only)
+	if = {
+		limit = {
+			zz_ef_logs_on = yes
+			OR = {
+				var:zz_ef_f_other_tr > zz_ef_other_tr_jump_min
+				var:zz_ef_f_other_tr < zz_ef_other_tr_jump_min_neg
+			}
+		}
+		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|tr_jump|d [THIS.GetCountry.MakeScope.Var('zz_ef_f_other_tr').GetValue|0]|gold [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gold_reserves_v')|0]|limit [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gold_limit_v')|0]|principal [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_principal_v')|0]|credit [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_credit_v')|0]|pool [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_raw_pool')|0]|prev [THIS.GetCountry.MakeScope.Var('zz_ef_tr_prev').GetValue|0]|at_war [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_at_war_v')|0]"
+	}
 	set_variable = { name = zz_ef_tr_prev value = var:zz_ef_t_trnet }
 	set_variable = { name = zz_ef_tr_posted value = 0 }
 	remove_variable = zz_ef_t_trnet
