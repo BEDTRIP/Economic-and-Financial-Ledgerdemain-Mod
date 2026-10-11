@@ -215,7 +215,7 @@
    `zz_ef_cb_metal_start_step`, сразу после стартовых вкладов (в `zz_ef_bridge_apply` того же шага, и запасным вызовом в
    следующих шагах), где M2 / ВВП > 0,1 и у страны есть штат ЦБ — настройка старта E&F на первом тике строит ЦБ и пишет
    туда металл, старт его масштабирует) → снимок бюджета → кредит ЦБ банкам (`zz_ef_cb_borrow/repay/interest` в пул и
-   `zz_ef_bank_cb_debt`, проценты в казну) → `zz_ef_consol_step` → `zz_ef_business_credit_step` →
+   `zz_ef_bank_cb_debt`, проценты — казне у государственного ЦБ, во вклады у частного) → `zz_ef_consol_step` → `zz_ef_business_credit_step` →
    **`zz_ef_metal_week_step`** (счета металла, модификаторы зданий на следующую неделю) → кольца истории M0–M3 (w1..4,
    q1..13, r1..20) → поток ЦБ (переоценка, Юм, запас) → `zz_ef_money_ledger_delta` по каждому счёту → строка `EFW` →
    окна `zz_ef_money_window_roll` → постановка страны в глобальный список `zz_ef_hook_countries` (у Б — раз в 4 недели,
@@ -247,7 +247,7 @@
 | `zz_ef_week_slot`, `zz_ef_week_phase`, `zz_ef_m_offset`, `zz_ef_m_done`, `zz_ef_last_step_week`, `zz_ef_step_weeks` | день недели и фаза 4 недель страны, день месяца её месячных шагов, месяц последнего, неделя последнего шага, недель в шаге | `zz_ef_sched_slot_assign`, `zz_ef_sched_country_day` | планировщик, `zz_ef_sw`, `zz_ef_step_weeks_v` |
 | `zz_ef_weeks_run` | недель модели (до 100) | `zz_ef_money_model_step` | кольцо цен (с 9-й недели — статистика) |
 | `zz_ef_pop_savings`, `zz_ef_pop_deposits`, `zz_ef_notes` | сбережения населения (S), вклады в банках (D), банкноты (M0); S = банкноты + D | `zz_ef_pop_deposits_step` (взносы, стройка), `zz_ef_pop_savings_step`, `zz_ef_metal_week_step` (выкуп), `ld_consols.txt` | `zz_ef_pop_cash`, M0–M3, карточки, книга банков |
-| `zz_ef_bank_cb_debt` | долг банков перед ЦБ | `zz_ef_money_model_step` | `zz_ef_cb_credit_target`, кредитные лимиты |
+| `zz_ef_bank_cb_debt` | долг банков перед ЦБ | `zz_ef_money_model_step`; кнопка E&F «валюта в пул» (`transfert_currency_to_investement_pool_button`) | `zz_ef_cb_credit_target`, кредитные лимиты |
 | `zz_ef_cc_debt`, `zz_ef_bc_debt`, `zz_ef_bc_svc` | потребительский / бизнес-долг, обслуживание | `zz_ef_consumer_credit_step`, `zz_ef_business_credit_step` | значения `zz_ef_cc_*`, `zz_ef_bc_*`, модификатор `zz_ef_debt_service` |
 | `zz_ef_f_<F>` (`budget`, `contrib`, `transfer`, `cb_borrow`, `cb_repay`, `cb_interest`, `tr_pool`, `ext`, `abr`, `leak`, `inflow`, `dep_int`, `trade`, `div`, …) | поток недели по статье | недельный шаг и приёмник | `zz_ef_v_f_<F>` (значения для GUI), окна `zz_ef_w_<F>` (`zz_ef_money_window_roll`) |
 | `zz_ef_prev_<ACC>`, `zz_ef_<ACC>_w1..4/q1..13/r1..20` | прошлая неделя и кольца истории счета (`pool`, `buildings`, `tc`, `treasury`, `bonds`, `tbonds`, `m2`, `cbm`, `abroad`, `agg0..3`, `circ`, `gdp`, `price`, `govlv`, `savings`, `deposits`, `cb`) | `zz_ef_money_ledger_delta`, `zz_ef_ring_*_push` | `zz_ef_v_d_<ACC>`, `zz_ef_agg<N>_pct_*`, `zz_ef_circ_growth_year`, `zz_ef_price_index` |

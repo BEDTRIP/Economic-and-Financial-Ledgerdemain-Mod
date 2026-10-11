@@ -2389,9 +2389,13 @@ transfert_currency_to_investement_pool_button = {
 		money_supply_state > var:transfert_currency_to_investement_pool_percentage
 	}
 	effect = {
+		# the CB lends it to the banks: the pool gets the money, the banks owe it to the CB (their CB credit, a posting --
+		# not «прочее»; the weekly step repays what is over the credit's target)
 		add_investment_pool = {
 			add = var:transfert_currency_to_investement_pool_percentage
 		}
+		if = { limit = { NOT = { has_variable = zz_ef_bank_cb_debt } } set_variable = { name = zz_ef_bank_cb_debt value = 0 } }
+		change_variable = { name = zz_ef_bank_cb_debt add = var:transfert_currency_to_investement_pool_percentage }
 		every_scope_state = {
 			if = {
 				limit = {

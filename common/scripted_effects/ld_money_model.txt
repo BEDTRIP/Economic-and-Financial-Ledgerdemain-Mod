@@ -141,7 +141,8 @@ zz_ef_money_model_step = {
 
 	# R2 closing: the treasury's surplus over the engine's limit no longer goes into the pool by itself
 	# (Д4.5 removed): the private sector builds on its own and the banks' money; the state adds to
-	# the pool by its own decision (E&F's transfert_currency_to_investement_pool_button -- a posting in R4). The flow stays 0.
+	# the pool by its own decision (E&F's transfert_currency_to_investement_pool_button -- the CB's credit to the banks).
+	# The flow stays 0.
 	set_variable = { name = zz_ef_f_tr_pool value = 0 }
 	# EF.48 item 5.
 	zz_ef_business_credit_step = yes
