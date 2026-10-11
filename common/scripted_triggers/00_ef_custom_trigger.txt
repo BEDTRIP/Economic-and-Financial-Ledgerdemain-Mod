@@ -508,16 +508,16 @@ is_weak_currency = {
 	money_value_in_gold > 0.01
 	var:central_bank_bankruptcy = 0
 }
+# Д.R4а.6: by the model's rules -- the money far under its parity with the CB's cover nearly gone (no E&F bankruptcy of
+# the CB that holds the country in it for good)
 is_extreme_weak_currency = {
 	has_modifier = has_central_bank
 	not = {
 		has_modifier = global_monetary_reference
 		is_subject = yes
 	}
-	OR = {
-		money_value_in_gold < 0.01
-		var:central_bank_bankruptcy >= 1
-	}
+	zz_ef_value_to_parity < zz_ef_cb_crisis_vtp
+	zz_ef_cb_cover < zz_ef_cb_crisis_cover
 }
 
 #####################################################################################################################################################

@@ -4736,20 +4736,6 @@ global_monetary_reference_reset = {
 
 		#################################################################
 
-		#central_bank_bankruptcy
-		if = {
-			limit  = {
-				#Valeur de la monaie <0.01 = definition crash BC
-				has_modifier = extreme_weak_currency #çà veux dire çà money_value_in_gold < 0.01
-				#on exclu les pays qui sont deja entré dans la bankruptcy :
-				has_central_bank_SS_BS_GS_GES = yes #un  pays  en  fiat  standart  à cause  d'une première  crise ne refera pas de crise en boucle, il sera bloqué en fiat  standart
-				not  = {
-					var:central_bank_bankruptcy = 1 #trigger uniquement pour pays pas deja dans le bankruptcy
-					var:extreme_weak_currency_solution_count > 1 #idem sachant que ce code est directement ap ce qui va attribué le modifier extreme_weak_currency -> pas le temps encore de compter
-				}
-			}
-			central_bank_bankruptcy = yes
-		}
 
 		#country_bankruptcy
 		if = {

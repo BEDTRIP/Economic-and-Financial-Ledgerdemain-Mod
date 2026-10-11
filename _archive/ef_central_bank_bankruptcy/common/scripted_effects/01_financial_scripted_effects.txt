@@ -1,0 +1,29 @@
+# from common/scripted_effects/01_financial_scripted_effects.txt (before economic_instability... country_bankruptcy)
+central_bank_bankruptcy = {
+	capital= {
+		save_scope_as = capital_state
+	}
+	save_scope_as = target_country
+
+	if = {
+		limit  = {
+			or = {
+				var:economic_instability_count = 0
+				var:central_bank_bankruptcy = 0
+			}
+		}
+		change_variable = {
+			name = money_value_target_1
+			divide = 2
+		}
+		trade_balance = yes #j'actualisa la trade balance direct car des le mois suivant le central_bank_bankruptcy va retrigger si le pats est toujour en extreme weak
+	}
+
+	set_variable = {
+		name = central_bank_bankruptcy
+		value = 1
+	}
+	central_bank_bankruptcy_count_reset = yes
+	#country_credit_rating = yes
+	economic_instability = yes
+} #-> revante devise en mass + pas de rachat si foreign_exchange_controls

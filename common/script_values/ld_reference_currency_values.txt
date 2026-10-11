@@ -67,6 +67,9 @@ zz_ef_value_to_parity_own = {
 	# the exchange's multiplier of the money (Д.R8б.33): the rate depends on the cover and on the exchange
 	multiply = zz_ef_xmul_m_v
 }
+# Д.R4а.6: the currency's extreme weakness (is_extreme_weak_currency) -- under half its parity with under 10% cover
+zz_ef_cb_crisis_vtp = 0.5
+zz_ef_cb_crisis_cover = 0.1
 zz_ef_value_to_parity = {
 	value = zz_ef_value_to_parity_own
 	if = {
