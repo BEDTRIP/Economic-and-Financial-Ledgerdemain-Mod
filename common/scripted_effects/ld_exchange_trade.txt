@@ -1301,6 +1301,13 @@ zz_ef_xch_week_close = {
 		}
 		zz_ef_xch_clear_exchange = yes
 	}
+	# the exchanges cleared this week -- one list for the world's passes over them (zz_ef_xch_cross: an every_country
+	# with this filter per asset was a profile leaf)
+	clear_global_variable_list = zz_ef_xr_list
+	every_country = {
+		limit = { has_variable = zz_ef_xr_on }
+		add_to_global_variable_list = { name = zz_ef_xr_list target = this }
+	}
 	zz_ef_xch_cross = { K = m }
 	zz_ef_xch_cross = { K = b }
 	# the players' exchange tables -- fresh after the week's clearing (the window's «update» does the same at once)
@@ -1322,8 +1329,8 @@ zz_ef_xch_cross = {
 		save_temporary_scope_as = zz_ef_rq_key
 		set_variable = { name = zz_ef_t_xs value = 0 }
 		set_variable = { name = zz_ef_t_xb value = 0 }
-		every_country = {
-			limit = { has_variable = zz_ef_xr_on }
+		every_in_global_list = {
+			variable = zz_ef_xr_list
 			zz_ef_xr_$K$_ls_read = yes
 			scope:zz_ef_rq_key = { change_variable = { name = zz_ef_t_xs add = prev.var:zz_ef_rq_h } }
 			zz_ef_xr_$K$_lb_read = yes
@@ -1340,8 +1347,8 @@ zz_ef_xch_cross = {
 			set_variable = { name = zz_ef_t_xs value = { value = var:zz_ef_t_xm divide = var:zz_ef_t_xs } }
 			set_variable = { name = zz_ef_t_xb value = { value = var:zz_ef_t_xm divide = var:zz_ef_t_xb } }
 			save_temporary_scope_as = zz_ef_xc_d
-			every_country = {
-				limit = { has_variable = zz_ef_xr_on }
+			every_in_global_list = {
+				variable = zz_ef_xr_list
 				zz_ef_xr_$K$_ls_read = yes
 				if = {
 					limit = { var:zz_ef_rq_h > 0 }
@@ -1379,8 +1386,8 @@ zz_ef_xch_cross_fund_m = {
 	if = { limit = { has_variable = zz_ef_xcf_m } remove_variable = zz_ef_xcf_m }
 	set_variable = { name = zz_ef_t_xc value = 0 }
 	save_temporary_scope_as = zz_ef_xc_d
-	every_country = {
-		limit = { has_variable = zz_ef_xr_on }
+	every_in_global_list = {
+		variable = zz_ef_xr_list
 		zz_ef_xr_m_lc_read = yes
 		if = {
 			limit = { var:zz_ef_rq_h > 0 }
@@ -1428,8 +1435,8 @@ zz_ef_xch_cross_fund_m = {
 					}
 				}
 				save_temporary_scope_as = zz_ef_xc_f
-				every_country = {
-					limit = { has_variable = zz_ef_xr_on }
+				every_in_global_list = {
+					variable = zz_ef_xr_list
 					zz_ef_xr_m_lc_read = yes
 					if = {
 						limit = { var:zz_ef_rq_h > 0 }
