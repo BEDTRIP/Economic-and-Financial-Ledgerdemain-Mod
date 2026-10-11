@@ -125,7 +125,9 @@ zz_ef_cb_metal_start_step = {
 			limit = {
 				zz_ef_cb_metal_standard = yes
 				zz_ef_cb_cover > 0
-				central_bank_reserves > 1
+				# both metals, as the cover counts them: E&F writes gold into a silver standard's CB too (the East India
+				# Company: 162M gold, its silver reserves 0, the cover 1 300 %)
+				zz_ef_reserves_in_gold > 1
 			}
 			set_variable = { name = zz_ef_metal_rescale value = zz_ef_cover_normal }
 			change_variable = { name = zz_ef_metal_rescale divide = zz_ef_cb_cover }
