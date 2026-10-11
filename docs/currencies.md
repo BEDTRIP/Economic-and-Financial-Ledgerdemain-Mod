@@ -68,12 +68,17 @@
 
 ### Индекс `01_economic_currency_scripted_value.txt` (на каждую валюту `<cur>`)
 - :228-:294 общие `base_demande_currency*`, `target_demand_currency*`, `enough_foreign_currrency`.
-- :1926 `leading_currency_type`; :2800.. `currency_of_player_is_<cur>` = `global_var:currency_of_player_is_<cur>` (это
+- лидер валюты — триггер `zz_ef_cur_leader` (`ld_reference_currency_triggers.txt`, Д.R8в.21: ЦБ на стандарте, не
+  привязан банком к чужой валюте, не последователь союза); `leading_currency_type` (число лидеров),
+  `weighted_average_currency_value` (среднее `money_value_in_gold` лидеров → `money_value_median`), `is_reference_type`
+  — в `ld_reference_currency_values.txt`; 95 списков и модификаторов лидера E&F — `_archive/ef_currency_leaders/`.
+- `currency_of_player_is_<cur>` = `global_var:currency_of_player_is_<cur>` (это
   script_value, не триггер; глобальные переменные обнуляются в
   `common/history/global/00_ef_economic_global_variable.txt:2713..`); :2966 `currency_of_player` (сумма).
-- :3306.. `money_value_<cur>` = `global_var:money_value_<cur>_global_var`; `money_value_in_gold_<cur>`,
+- `money_value_<cur>` = `global_var:money_value_<cur>_global_var` (его ставит `money_value_<cur>_global_var`,
+  `01_economic_scripted_effects.txt`: значение лидера валюты с наибольшей `national_capacity_in_gold`); `money_value_in_gold_<cur>`,
   `money_value_<cur>_related_to_country_law` (:4854, пересчёт под стандарт).
-- :7788 `is_reference_type`; :8476 `money_supply_state` (+`_monthly`) — цепочка
+- `money_supply_state` (+`_monthly`) — цепочка
   `if has_law <cur>_currency add stockpiling_<cur>_state`.
 - :8871 `pop_savings`, :9066 `pop_savings_monthly`; :15013.. `<cur>_c_market_goods_*`,
   `stockpiling_<cur>_state/_private_bank`, `<cur>_c_total/global_stokpile`; `buy_/sell_<cur>_in_gold_market_panel`.

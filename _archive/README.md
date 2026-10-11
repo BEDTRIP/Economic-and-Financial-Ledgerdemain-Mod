@@ -122,6 +122,7 @@ _archive/<механизм>/
 | Проба R8в.4 `ld_mu_probe.0`–`.3` (валютный союз: вступление, стандарт главы, разрыв) | `ld_probe_mu/` | итоги — в README пробы и в очереди R8в |
 | Ввод валюты E&F по культуре: `introduction_of_<cur>`, `currency_identifiers_<cur>` (95 + 95) — Д.R8в.7, Д.R8а.3 | `ef_currency_introduction/` | один `zz_ef_cur_intro` (`ld_currency_intro.txt`); проверки культуры — `var:zz_ef_cur` |
 | Код валюты E&F `currency_ISO_4217` (по 95 валютам E&F) — Д.R8в.20 | `ef_currency_iso_code/` | `currency_code` генератора `regen_ld_currency_symbol`; в окнах — `currency_symbol` |
+| Лидер валюты E&F: `<cur>_currency_law_list`, `<cur>_leading_currency_type`, медиана по 95 валютам — Д.R8в.21 | `ef_currency_leaders/` | триггер `zz_ef_cur_leader`, медиана и число лидеров — `ld_reference_currency_values.txt` |
 | Определения E&F без ссылок, ночь 9.10 (`trade_balance_0`, `law_currency_enacted`, `prosperity_*` и др., 10 записей) | `ef_unread_definitions_9_10/` | ссылок не было — только комментарии |
 | Проба R8б, шаг 0: доли ВВП у чужих владельцев `ld_probe_gdpown.1` | `ld_probe_gdpown/` | итоги — в README пробы и в очереди R8б плана |
 | Торговля в разрезе 95 валют: записи `import/export_in_<cur>_in_gold_fix` кнопки `trade_balance_actualized` и подписи `<cur>_03_*` без читателя — R8а, п. 8 | `ef_trade_by_currency/` | 190 блоков из кнопки, 384 ключа локализации |

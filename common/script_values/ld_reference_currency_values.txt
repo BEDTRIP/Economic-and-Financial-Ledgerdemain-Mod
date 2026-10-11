@@ -378,3 +378,31 @@ zz_ef_is_reference_v = {
 	value = 0
 	if = { limit = { has_modifier = global_monetary_reference } value = 1 }
 }
+
+# E&F's world average of money (money_value_median, median_currency_value): the mean value in gold of a unit of money
+# over the currencies' leaders (zz_ef_cur_leader, Д.R8в.21)
+weighted_average_currency_value = {
+	value = 0
+	every_country = {
+		limit = { zz_ef_cur_leader = yes }
+		add = money_value_in_gold
+	}
+	divide = leading_currency_type
+}
+# the number of the currencies' leaders (at least one)
+leading_currency_type = {
+	value = 0
+	every_country = {
+		limit = { zz_ef_cur_leader = yes }
+		add = 1
+	}
+	min = 1
+}
+# 1 for a currency's leader (E&F's list of the money supply, money_supply_variable_list)
+is_reference_type = {
+	value = 0
+	if = {
+		limit = { zz_ef_cur_leader = yes }
+		value = 1
+	}
+}

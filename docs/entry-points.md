@@ -126,7 +126,7 @@ on_action, `ld_*` и PSC добавляют свои. Недельного пу�
 
 ### Годовой пульс (`on_yearly_pulse_country`)
 `ef_on_yearly_pulse_country` по порядку: (держатель `global_monetary_reference`) `national_capacity_variable_list`,
-`country_index_variable_list`, `central_bank_debt_variable_list`, `currency_law_list`, `median_currency_value`,
+`country_index_variable_list`, `central_bank_debt_variable_list`, `median_currency_value`,
 `global_monetary_reference_1` → `ef_on_yearly_pulse_recurence` (`fluctuations_gdp_5_year`, `_10_year`,
 `is_at_war_years_pulse`) → `ef_on_yearly_pulse_reset` (сбросы лимитов, `looting_1_year_on_action` —
 `common/scripted_effects/01_stockpile_scripted_effects.txt`, обнуление годового счётчика грабежа, 29×

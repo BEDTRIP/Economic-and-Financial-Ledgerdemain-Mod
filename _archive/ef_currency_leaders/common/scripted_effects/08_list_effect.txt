@@ -1,0 +1,6653 @@
+﻿# From common/scripted_effects/08_list_effect.txt.
+
+#begin_tag_2
+#dinar
+dinar_currency_law_list = {
+	clear_variable_list = dinar_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:dinar
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = dinar_leading_currency_type } remove_modifier = dinar_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = dinar_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = dinar_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = dinar_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = dinar_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = dinar_currency_law_list_ordered_1
+					if = { limit = { has_modifier = dinar_leading_currency_type } remove_modifier = dinar_leading_currency_type }
+					add_modifier = {
+						name = dinar_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = dinar_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:dinar
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = dinar_leading_currency_type } remove_modifier = dinar_leading_currency_type }
+		}
+	}
+}
+#dinar_algerian_dinar
+dinar_algerian_dinar_currency_law_list = {
+	clear_variable_list = dinar_algerian_dinar_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:dinar_algerian_dinar
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = dinar_algerian_dinar_leading_currency_type } remove_modifier = dinar_algerian_dinar_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = dinar_algerian_dinar_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = dinar_algerian_dinar_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = dinar_algerian_dinar_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = dinar_algerian_dinar_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = dinar_algerian_dinar_currency_law_list_ordered_1
+					if = { limit = { has_modifier = dinar_algerian_dinar_leading_currency_type } remove_modifier = dinar_algerian_dinar_leading_currency_type }
+					add_modifier = {
+						name = dinar_algerian_dinar_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = dinar_algerian_dinar_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:dinar_algerian_dinar
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = dinar_algerian_dinar_leading_currency_type } remove_modifier = dinar_algerian_dinar_leading_currency_type }
+		}
+	}
+}
+#dinar_iraqi_dinar
+dinar_iraqi_dinar_currency_law_list = {
+	clear_variable_list = dinar_iraqi_dinar_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:dinar_iraqi_dinar
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = dinar_iraqi_dinar_leading_currency_type } remove_modifier = dinar_iraqi_dinar_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = dinar_iraqi_dinar_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = dinar_iraqi_dinar_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = dinar_iraqi_dinar_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = dinar_iraqi_dinar_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = dinar_iraqi_dinar_currency_law_list_ordered_1
+					if = { limit = { has_modifier = dinar_iraqi_dinar_leading_currency_type } remove_modifier = dinar_iraqi_dinar_leading_currency_type }
+					add_modifier = {
+						name = dinar_iraqi_dinar_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = dinar_iraqi_dinar_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:dinar_iraqi_dinar
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = dinar_iraqi_dinar_leading_currency_type } remove_modifier = dinar_iraqi_dinar_leading_currency_type }
+		}
+	}
+}
+#dinar_libyan_dinar
+dinar_libyan_dinar_currency_law_list = {
+	clear_variable_list = dinar_libyan_dinar_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:dinar_libyan_dinar
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = dinar_libyan_dinar_leading_currency_type } remove_modifier = dinar_libyan_dinar_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = dinar_libyan_dinar_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = dinar_libyan_dinar_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = dinar_libyan_dinar_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = dinar_libyan_dinar_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = dinar_libyan_dinar_currency_law_list_ordered_1
+					if = { limit = { has_modifier = dinar_libyan_dinar_leading_currency_type } remove_modifier = dinar_libyan_dinar_leading_currency_type }
+					add_modifier = {
+						name = dinar_libyan_dinar_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = dinar_libyan_dinar_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:dinar_libyan_dinar
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = dinar_libyan_dinar_leading_currency_type } remove_modifier = dinar_libyan_dinar_leading_currency_type }
+		}
+	}
+}
+#dinar_moroccan_dirham
+dinar_moroccan_dirham_currency_law_list = {
+	clear_variable_list = dinar_moroccan_dirham_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:dinar_moroccan_dirham
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = dinar_moroccan_dirham_leading_currency_type } remove_modifier = dinar_moroccan_dirham_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = dinar_moroccan_dirham_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = dinar_moroccan_dirham_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = dinar_moroccan_dirham_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = dinar_moroccan_dirham_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = dinar_moroccan_dirham_currency_law_list_ordered_1
+					if = { limit = { has_modifier = dinar_moroccan_dirham_leading_currency_type } remove_modifier = dinar_moroccan_dirham_leading_currency_type }
+					add_modifier = {
+						name = dinar_moroccan_dirham_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = dinar_moroccan_dirham_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:dinar_moroccan_dirham
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = dinar_moroccan_dirham_leading_currency_type } remove_modifier = dinar_moroccan_dirham_leading_currency_type }
+		}
+	}
+}
+#dinar_omanian_rial
+dinar_omanian_rial_currency_law_list = {
+	clear_variable_list = dinar_omanian_rial_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:dinar_omanian_rial
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = dinar_omanian_rial_leading_currency_type } remove_modifier = dinar_omanian_rial_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = dinar_omanian_rial_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = dinar_omanian_rial_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = dinar_omanian_rial_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = dinar_omanian_rial_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = dinar_omanian_rial_currency_law_list_ordered_1
+					if = { limit = { has_modifier = dinar_omanian_rial_leading_currency_type } remove_modifier = dinar_omanian_rial_leading_currency_type }
+					add_modifier = {
+						name = dinar_omanian_rial_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = dinar_omanian_rial_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:dinar_omanian_rial
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = dinar_omanian_rial_leading_currency_type } remove_modifier = dinar_omanian_rial_leading_currency_type }
+		}
+	}
+}
+#dinar_qiran
+dinar_qiran_currency_law_list = {
+	clear_variable_list = dinar_qiran_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:dinar_qiran
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = dinar_qiran_leading_currency_type } remove_modifier = dinar_qiran_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = dinar_qiran_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = dinar_qiran_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = dinar_qiran_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = dinar_qiran_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = dinar_qiran_currency_law_list_ordered_1
+					if = { limit = { has_modifier = dinar_qiran_leading_currency_type } remove_modifier = dinar_qiran_leading_currency_type }
+					add_modifier = {
+						name = dinar_qiran_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = dinar_qiran_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:dinar_qiran
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = dinar_qiran_leading_currency_type } remove_modifier = dinar_qiran_leading_currency_type }
+		}
+	}
+}
+#dinar_saudi_riyal
+dinar_saudi_riyal_currency_law_list = {
+	clear_variable_list = dinar_saudi_riyal_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:dinar_saudi_riyal
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = dinar_saudi_riyal_leading_currency_type } remove_modifier = dinar_saudi_riyal_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = dinar_saudi_riyal_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = dinar_saudi_riyal_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = dinar_saudi_riyal_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = dinar_saudi_riyal_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = dinar_saudi_riyal_currency_law_list_ordered_1
+					if = { limit = { has_modifier = dinar_saudi_riyal_leading_currency_type } remove_modifier = dinar_saudi_riyal_leading_currency_type }
+					add_modifier = {
+						name = dinar_saudi_riyal_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = dinar_saudi_riyal_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:dinar_saudi_riyal
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = dinar_saudi_riyal_leading_currency_type } remove_modifier = dinar_saudi_riyal_leading_currency_type }
+		}
+	}
+}
+#dinar_serbian_dinar
+dinar_serbian_dinar_currency_law_list = {
+	clear_variable_list = dinar_serbian_dinar_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:dinar_serbian_dinar
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = dinar_serbian_dinar_leading_currency_type } remove_modifier = dinar_serbian_dinar_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = dinar_serbian_dinar_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = dinar_serbian_dinar_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = dinar_serbian_dinar_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = dinar_serbian_dinar_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = dinar_serbian_dinar_currency_law_list_ordered_1
+					if = { limit = { has_modifier = dinar_serbian_dinar_leading_currency_type } remove_modifier = dinar_serbian_dinar_leading_currency_type }
+					add_modifier = {
+						name = dinar_serbian_dinar_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = dinar_serbian_dinar_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:dinar_serbian_dinar
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = dinar_serbian_dinar_leading_currency_type } remove_modifier = dinar_serbian_dinar_leading_currency_type }
+		}
+	}
+}
+#dinar_tunisian_dinar
+dinar_tunisian_dinar_currency_law_list = {
+	clear_variable_list = dinar_tunisian_dinar_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:dinar_tunisian_dinar
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = dinar_tunisian_dinar_leading_currency_type } remove_modifier = dinar_tunisian_dinar_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = dinar_tunisian_dinar_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = dinar_tunisian_dinar_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = dinar_tunisian_dinar_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = dinar_tunisian_dinar_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = dinar_tunisian_dinar_currency_law_list_ordered_1
+					if = { limit = { has_modifier = dinar_tunisian_dinar_leading_currency_type } remove_modifier = dinar_tunisian_dinar_leading_currency_type }
+					add_modifier = {
+						name = dinar_tunisian_dinar_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = dinar_tunisian_dinar_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:dinar_tunisian_dinar
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = dinar_tunisian_dinar_leading_currency_type } remove_modifier = dinar_tunisian_dinar_leading_currency_type }
+		}
+	}
+}
+#dinar_yugoslav_dinar
+dinar_yugoslav_dinar_currency_law_list = {
+	clear_variable_list = dinar_yugoslav_dinar_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:dinar_yugoslav_dinar
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = dinar_yugoslav_dinar_leading_currency_type } remove_modifier = dinar_yugoslav_dinar_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = dinar_yugoslav_dinar_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = dinar_yugoslav_dinar_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = dinar_yugoslav_dinar_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = dinar_yugoslav_dinar_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = dinar_yugoslav_dinar_currency_law_list_ordered_1
+					if = { limit = { has_modifier = dinar_yugoslav_dinar_leading_currency_type } remove_modifier = dinar_yugoslav_dinar_leading_currency_type }
+					add_modifier = {
+						name = dinar_yugoslav_dinar_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = dinar_yugoslav_dinar_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:dinar_yugoslav_dinar
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = dinar_yugoslav_dinar_leading_currency_type } remove_modifier = dinar_yugoslav_dinar_leading_currency_type }
+		}
+	}
+}
+#dollar_australian_dollar
+dollar_australian_dollar_currency_law_list = {
+	clear_variable_list = dollar_australian_dollar_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:dollar_australian_dollar
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = dollar_australian_dollar_leading_currency_type } remove_modifier = dollar_australian_dollar_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = dollar_australian_dollar_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = dollar_australian_dollar_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = dollar_australian_dollar_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = dollar_australian_dollar_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = dollar_australian_dollar_currency_law_list_ordered_1
+					if = { limit = { has_modifier = dollar_australian_dollar_leading_currency_type } remove_modifier = dollar_australian_dollar_leading_currency_type }
+					add_modifier = {
+						name = dollar_australian_dollar_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = dollar_australian_dollar_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:dollar_australian_dollar
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = dollar_australian_dollar_leading_currency_type } remove_modifier = dollar_australian_dollar_leading_currency_type }
+		}
+	}
+}
+#dollar_canadian_dollar
+dollar_canadian_dollar_currency_law_list = {
+	clear_variable_list = dollar_canadian_dollar_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:dollar_canadian_dollar
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = dollar_canadian_dollar_leading_currency_type } remove_modifier = dollar_canadian_dollar_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = dollar_canadian_dollar_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = dollar_canadian_dollar_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = dollar_canadian_dollar_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = dollar_canadian_dollar_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = dollar_canadian_dollar_currency_law_list_ordered_1
+					if = { limit = { has_modifier = dollar_canadian_dollar_leading_currency_type } remove_modifier = dollar_canadian_dollar_leading_currency_type }
+					add_modifier = {
+						name = dollar_canadian_dollar_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = dollar_canadian_dollar_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:dollar_canadian_dollar
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = dollar_canadian_dollar_leading_currency_type } remove_modifier = dollar_canadian_dollar_leading_currency_type }
+		}
+	}
+}
+#dollar_caribbean_dollar
+dollar_caribbean_dollar_currency_law_list = {
+	clear_variable_list = dollar_caribbean_dollar_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:dollar_caribbean_dollar
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = dollar_caribbean_dollar_leading_currency_type } remove_modifier = dollar_caribbean_dollar_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = dollar_caribbean_dollar_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = dollar_caribbean_dollar_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = dollar_caribbean_dollar_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = dollar_caribbean_dollar_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = dollar_caribbean_dollar_currency_law_list_ordered_1
+					if = { limit = { has_modifier = dollar_caribbean_dollar_leading_currency_type } remove_modifier = dollar_caribbean_dollar_leading_currency_type }
+					add_modifier = {
+						name = dollar_caribbean_dollar_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = dollar_caribbean_dollar_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:dollar_caribbean_dollar
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = dollar_caribbean_dollar_leading_currency_type } remove_modifier = dollar_caribbean_dollar_leading_currency_type }
+		}
+	}
+}
+#dollar_confederate_states_dollar
+dollar_confederate_states_dollar_currency_law_list = {
+	clear_variable_list = dollar_confederate_states_dollar_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:dollar_confederate_states_dollar
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = dollar_confederate_states_dollar_leading_currency_type } remove_modifier = dollar_confederate_states_dollar_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = dollar_confederate_states_dollar_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = dollar_confederate_states_dollar_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = dollar_confederate_states_dollar_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = dollar_confederate_states_dollar_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = dollar_confederate_states_dollar_currency_law_list_ordered_1
+					if = { limit = { has_modifier = dollar_confederate_states_dollar_leading_currency_type } remove_modifier = dollar_confederate_states_dollar_leading_currency_type }
+					add_modifier = {
+						name = dollar_confederate_states_dollar_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = dollar_confederate_states_dollar_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:dollar_confederate_states_dollar
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = dollar_confederate_states_dollar_leading_currency_type } remove_modifier = dollar_confederate_states_dollar_leading_currency_type }
+		}
+	}
+}
+#dollar_liberian_dollar
+dollar_liberian_dollar_currency_law_list = {
+	clear_variable_list = dollar_liberian_dollar_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:dollar_liberian_dollar
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = dollar_liberian_dollar_leading_currency_type } remove_modifier = dollar_liberian_dollar_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = dollar_liberian_dollar_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = dollar_liberian_dollar_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = dollar_liberian_dollar_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = dollar_liberian_dollar_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = dollar_liberian_dollar_currency_law_list_ordered_1
+					if = { limit = { has_modifier = dollar_liberian_dollar_leading_currency_type } remove_modifier = dollar_liberian_dollar_leading_currency_type }
+					add_modifier = {
+						name = dollar_liberian_dollar_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = dollar_liberian_dollar_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:dollar_liberian_dollar
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = dollar_liberian_dollar_leading_currency_type } remove_modifier = dollar_liberian_dollar_leading_currency_type }
+		}
+	}
+}
+#dollar_new_zealand_dollar
+dollar_new_zealand_dollar_currency_law_list = {
+	clear_variable_list = dollar_new_zealand_dollar_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:dollar_new_zealand_dollar
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = dollar_new_zealand_dollar_leading_currency_type } remove_modifier = dollar_new_zealand_dollar_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = dollar_new_zealand_dollar_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = dollar_new_zealand_dollar_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = dollar_new_zealand_dollar_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = dollar_new_zealand_dollar_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = dollar_new_zealand_dollar_currency_law_list_ordered_1
+					if = { limit = { has_modifier = dollar_new_zealand_dollar_leading_currency_type } remove_modifier = dollar_new_zealand_dollar_leading_currency_type }
+					add_modifier = {
+						name = dollar_new_zealand_dollar_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = dollar_new_zealand_dollar_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:dollar_new_zealand_dollar
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = dollar_new_zealand_dollar_leading_currency_type } remove_modifier = dollar_new_zealand_dollar_leading_currency_type }
+		}
+	}
+}
+#dollar_sierra_leonean_dollar
+dollar_sierra_leonean_dollar_currency_law_list = {
+	clear_variable_list = dollar_sierra_leonean_dollar_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:dollar_sierra_leonean_dollar
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = dollar_sierra_leonean_dollar_leading_currency_type } remove_modifier = dollar_sierra_leonean_dollar_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = dollar_sierra_leonean_dollar_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = dollar_sierra_leonean_dollar_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = dollar_sierra_leonean_dollar_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = dollar_sierra_leonean_dollar_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = dollar_sierra_leonean_dollar_currency_law_list_ordered_1
+					if = { limit = { has_modifier = dollar_sierra_leonean_dollar_leading_currency_type } remove_modifier = dollar_sierra_leonean_dollar_leading_currency_type }
+					add_modifier = {
+						name = dollar_sierra_leonean_dollar_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = dollar_sierra_leonean_dollar_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:dollar_sierra_leonean_dollar
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = dollar_sierra_leonean_dollar_leading_currency_type } remove_modifier = dollar_sierra_leonean_dollar_leading_currency_type }
+		}
+	}
+}
+#dollar_united_states_dollar
+dollar_united_states_dollar_currency_law_list = {
+	clear_variable_list = dollar_united_states_dollar_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:dollar_united_states_dollar
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = dollar_united_states_dollar_leading_currency_type } remove_modifier = dollar_united_states_dollar_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = dollar_united_states_dollar_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = dollar_united_states_dollar_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = dollar_united_states_dollar_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = dollar_united_states_dollar_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = dollar_united_states_dollar_currency_law_list_ordered_1
+					if = { limit = { has_modifier = dollar_united_states_dollar_leading_currency_type } remove_modifier = dollar_united_states_dollar_leading_currency_type }
+					add_modifier = {
+						name = dollar_united_states_dollar_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = dollar_united_states_dollar_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:dollar_united_states_dollar
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = dollar_united_states_dollar_leading_currency_type } remove_modifier = dollar_united_states_dollar_leading_currency_type }
+		}
+	}
+}
+#eco_ariary
+eco_ariary_currency_law_list = {
+	clear_variable_list = eco_ariary_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:eco_ariary
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = eco_ariary_leading_currency_type } remove_modifier = eco_ariary_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = eco_ariary_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = eco_ariary_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = eco_ariary_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = eco_ariary_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = eco_ariary_currency_law_list_ordered_1
+					if = { limit = { has_modifier = eco_ariary_leading_currency_type } remove_modifier = eco_ariary_leading_currency_type }
+					add_modifier = {
+						name = eco_ariary_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = eco_ariary_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:eco_ariary
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = eco_ariary_leading_currency_type } remove_modifier = eco_ariary_leading_currency_type }
+		}
+	}
+}
+#eco_central_african_eco
+eco_central_african_eco_currency_law_list = {
+	clear_variable_list = eco_central_african_eco_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:eco_central_african_eco
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = eco_central_african_eco_leading_currency_type } remove_modifier = eco_central_african_eco_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = eco_central_african_eco_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = eco_central_african_eco_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = eco_central_african_eco_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = eco_central_african_eco_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = eco_central_african_eco_currency_law_list_ordered_1
+					if = { limit = { has_modifier = eco_central_african_eco_leading_currency_type } remove_modifier = eco_central_african_eco_leading_currency_type }
+					add_modifier = {
+						name = eco_central_african_eco_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = eco_central_african_eco_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:eco_central_african_eco
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = eco_central_african_eco_leading_currency_type } remove_modifier = eco_central_african_eco_leading_currency_type }
+		}
+	}
+}
+#eco_east_african_eco
+eco_east_african_eco_currency_law_list = {
+	clear_variable_list = eco_east_african_eco_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:eco_east_african_eco
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = eco_east_african_eco_leading_currency_type } remove_modifier = eco_east_african_eco_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = eco_east_african_eco_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = eco_east_african_eco_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = eco_east_african_eco_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = eco_east_african_eco_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = eco_east_african_eco_currency_law_list_ordered_1
+					if = { limit = { has_modifier = eco_east_african_eco_leading_currency_type } remove_modifier = eco_east_african_eco_leading_currency_type }
+					add_modifier = {
+						name = eco_east_african_eco_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = eco_east_african_eco_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:eco_east_african_eco
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = eco_east_african_eco_leading_currency_type } remove_modifier = eco_east_african_eco_leading_currency_type }
+		}
+	}
+}
+#eco_ethiopian_birr
+eco_ethiopian_birr_currency_law_list = {
+	clear_variable_list = eco_ethiopian_birr_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:eco_ethiopian_birr
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = eco_ethiopian_birr_leading_currency_type } remove_modifier = eco_ethiopian_birr_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = eco_ethiopian_birr_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = eco_ethiopian_birr_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = eco_ethiopian_birr_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = eco_ethiopian_birr_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = eco_ethiopian_birr_currency_law_list_ordered_1
+					if = { limit = { has_modifier = eco_ethiopian_birr_leading_currency_type } remove_modifier = eco_ethiopian_birr_leading_currency_type }
+					add_modifier = {
+						name = eco_ethiopian_birr_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = eco_ethiopian_birr_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:eco_ethiopian_birr
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = eco_ethiopian_birr_leading_currency_type } remove_modifier = eco_ethiopian_birr_leading_currency_type }
+		}
+	}
+}
+#eco_ghanaian_pound
+eco_ghanaian_pound_currency_law_list = {
+	clear_variable_list = eco_ghanaian_pound_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:eco_ghanaian_pound
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = eco_ghanaian_pound_leading_currency_type } remove_modifier = eco_ghanaian_pound_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = eco_ghanaian_pound_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = eco_ghanaian_pound_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = eco_ghanaian_pound_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = eco_ghanaian_pound_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = eco_ghanaian_pound_currency_law_list_ordered_1
+					if = { limit = { has_modifier = eco_ghanaian_pound_leading_currency_type } remove_modifier = eco_ghanaian_pound_leading_currency_type }
+					add_modifier = {
+						name = eco_ghanaian_pound_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = eco_ghanaian_pound_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:eco_ghanaian_pound
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = eco_ghanaian_pound_leading_currency_type } remove_modifier = eco_ghanaian_pound_leading_currency_type }
+		}
+	}
+}
+#eco_nigerian_naira
+eco_nigerian_naira_currency_law_list = {
+	clear_variable_list = eco_nigerian_naira_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:eco_nigerian_naira
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = eco_nigerian_naira_leading_currency_type } remove_modifier = eco_nigerian_naira_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = eco_nigerian_naira_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = eco_nigerian_naira_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = eco_nigerian_naira_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = eco_nigerian_naira_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = eco_nigerian_naira_currency_law_list_ordered_1
+					if = { limit = { has_modifier = eco_nigerian_naira_leading_currency_type } remove_modifier = eco_nigerian_naira_leading_currency_type }
+					add_modifier = {
+						name = eco_nigerian_naira_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = eco_nigerian_naira_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:eco_nigerian_naira
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = eco_nigerian_naira_leading_currency_type } remove_modifier = eco_nigerian_naira_leading_currency_type }
+		}
+	}
+}
+#eco_south_african_rand
+eco_south_african_rand_currency_law_list = {
+	clear_variable_list = eco_south_african_rand_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:eco_south_african_rand
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = eco_south_african_rand_leading_currency_type } remove_modifier = eco_south_african_rand_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = eco_south_african_rand_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = eco_south_african_rand_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = eco_south_african_rand_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = eco_south_african_rand_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = eco_south_african_rand_currency_law_list_ordered_1
+					if = { limit = { has_modifier = eco_south_african_rand_leading_currency_type } remove_modifier = eco_south_african_rand_leading_currency_type }
+					add_modifier = {
+						name = eco_south_african_rand_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = eco_south_african_rand_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:eco_south_african_rand
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = eco_south_african_rand_leading_currency_type } remove_modifier = eco_south_african_rand_leading_currency_type }
+		}
+	}
+}
+#eco_tuareg_ouguiya
+eco_tuareg_ouguiya_currency_law_list = {
+	clear_variable_list = eco_tuareg_ouguiya_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:eco_tuareg_ouguiya
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = eco_tuareg_ouguiya_leading_currency_type } remove_modifier = eco_tuareg_ouguiya_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = eco_tuareg_ouguiya_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = eco_tuareg_ouguiya_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = eco_tuareg_ouguiya_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = eco_tuareg_ouguiya_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = eco_tuareg_ouguiya_currency_law_list_ordered_1
+					if = { limit = { has_modifier = eco_tuareg_ouguiya_leading_currency_type } remove_modifier = eco_tuareg_ouguiya_leading_currency_type }
+					add_modifier = {
+						name = eco_tuareg_ouguiya_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = eco_tuareg_ouguiya_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:eco_tuareg_ouguiya
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = eco_tuareg_ouguiya_leading_currency_type } remove_modifier = eco_tuareg_ouguiya_leading_currency_type }
+		}
+	}
+}
+#eco_west_african_eco
+eco_west_african_eco_currency_law_list = {
+	clear_variable_list = eco_west_african_eco_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:eco_west_african_eco
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = eco_west_african_eco_leading_currency_type } remove_modifier = eco_west_african_eco_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = eco_west_african_eco_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = eco_west_african_eco_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = eco_west_african_eco_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = eco_west_african_eco_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = eco_west_african_eco_currency_law_list_ordered_1
+					if = { limit = { has_modifier = eco_west_african_eco_leading_currency_type } remove_modifier = eco_west_african_eco_leading_currency_type }
+					add_modifier = {
+						name = eco_west_african_eco_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = eco_west_african_eco_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:eco_west_african_eco
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = eco_west_african_eco_leading_currency_type } remove_modifier = eco_west_african_eco_leading_currency_type }
+		}
+	}
+}
+#franc_belgian_franc
+franc_belgian_franc_currency_law_list = {
+	clear_variable_list = franc_belgian_franc_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:franc_belgian_franc
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = franc_belgian_franc_leading_currency_type } remove_modifier = franc_belgian_franc_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = franc_belgian_franc_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = franc_belgian_franc_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = franc_belgian_franc_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = franc_belgian_franc_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = franc_belgian_franc_currency_law_list_ordered_1
+					if = { limit = { has_modifier = franc_belgian_franc_leading_currency_type } remove_modifier = franc_belgian_franc_leading_currency_type }
+					add_modifier = {
+						name = franc_belgian_franc_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = franc_belgian_franc_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:franc_belgian_franc
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = franc_belgian_franc_leading_currency_type } remove_modifier = franc_belgian_franc_leading_currency_type }
+		}
+	}
+}
+#franc_french_franc
+franc_french_franc_currency_law_list = {
+	clear_variable_list = franc_french_franc_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:franc_french_franc
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = franc_french_franc_leading_currency_type } remove_modifier = franc_french_franc_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = franc_french_franc_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = franc_french_franc_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = franc_french_franc_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = franc_french_franc_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = franc_french_franc_currency_law_list_ordered_1
+					if = { limit = { has_modifier = franc_french_franc_leading_currency_type } remove_modifier = franc_french_franc_leading_currency_type }
+					add_modifier = {
+						name = franc_french_franc_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = franc_french_franc_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:franc_french_franc
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = franc_french_franc_leading_currency_type } remove_modifier = franc_french_franc_leading_currency_type }
+		}
+	}
+}
+#franc_luxembourgish_franc
+franc_luxembourgish_franc_currency_law_list = {
+	clear_variable_list = franc_luxembourgish_franc_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:franc_luxembourgish_franc
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = franc_luxembourgish_franc_leading_currency_type } remove_modifier = franc_luxembourgish_franc_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = franc_luxembourgish_franc_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = franc_luxembourgish_franc_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = franc_luxembourgish_franc_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = franc_luxembourgish_franc_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = franc_luxembourgish_franc_currency_law_list_ordered_1
+					if = { limit = { has_modifier = franc_luxembourgish_franc_leading_currency_type } remove_modifier = franc_luxembourgish_franc_leading_currency_type }
+					add_modifier = {
+						name = franc_luxembourgish_franc_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = franc_luxembourgish_franc_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:franc_luxembourgish_franc
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = franc_luxembourgish_franc_leading_currency_type } remove_modifier = franc_luxembourgish_franc_leading_currency_type }
+		}
+	}
+}
+#franc_swiss_franc
+franc_swiss_franc_currency_law_list = {
+	clear_variable_list = franc_swiss_franc_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:franc_swiss_franc
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = franc_swiss_franc_leading_currency_type } remove_modifier = franc_swiss_franc_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = franc_swiss_franc_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = franc_swiss_franc_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = franc_swiss_franc_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = franc_swiss_franc_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = franc_swiss_franc_currency_law_list_ordered_1
+					if = { limit = { has_modifier = franc_swiss_franc_leading_currency_type } remove_modifier = franc_swiss_franc_leading_currency_type }
+					add_modifier = {
+						name = franc_swiss_franc_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = franc_swiss_franc_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:franc_swiss_franc
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = franc_swiss_franc_leading_currency_type } remove_modifier = franc_swiss_franc_leading_currency_type }
+		}
+	}
+}
+#gulden
+gulden_currency_law_list = {
+	clear_variable_list = gulden_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:gulden
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = gulden_leading_currency_type } remove_modifier = gulden_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = gulden_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = gulden_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = gulden_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = gulden_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = gulden_currency_law_list_ordered_1
+					if = { limit = { has_modifier = gulden_leading_currency_type } remove_modifier = gulden_leading_currency_type }
+					add_modifier = {
+						name = gulden_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = gulden_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:gulden
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = gulden_leading_currency_type } remove_modifier = gulden_leading_currency_type }
+		}
+	}
+}
+#gulden_bavarian_gulden
+gulden_bavarian_gulden_currency_law_list = {
+	clear_variable_list = gulden_bavarian_gulden_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:gulden_bavarian_gulden
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = gulden_bavarian_gulden_leading_currency_type } remove_modifier = gulden_bavarian_gulden_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = gulden_bavarian_gulden_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = gulden_bavarian_gulden_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = gulden_bavarian_gulden_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = gulden_bavarian_gulden_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = gulden_bavarian_gulden_currency_law_list_ordered_1
+					if = { limit = { has_modifier = gulden_bavarian_gulden_leading_currency_type } remove_modifier = gulden_bavarian_gulden_leading_currency_type }
+					add_modifier = {
+						name = gulden_bavarian_gulden_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = gulden_bavarian_gulden_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:gulden_bavarian_gulden
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = gulden_bavarian_gulden_leading_currency_type } remove_modifier = gulden_bavarian_gulden_leading_currency_type }
+		}
+	}
+}
+#gulden_florin
+gulden_florin_currency_law_list = {
+	clear_variable_list = gulden_florin_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:gulden_florin
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = gulden_florin_leading_currency_type } remove_modifier = gulden_florin_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = gulden_florin_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = gulden_florin_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = gulden_florin_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = gulden_florin_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = gulden_florin_currency_law_list_ordered_1
+					if = { limit = { has_modifier = gulden_florin_leading_currency_type } remove_modifier = gulden_florin_leading_currency_type }
+					add_modifier = {
+						name = gulden_florin_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = gulden_florin_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:gulden_florin
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = gulden_florin_leading_currency_type } remove_modifier = gulden_florin_leading_currency_type }
+		}
+	}
+}
+#gulden_hungarian_forint
+gulden_hungarian_forint_currency_law_list = {
+	clear_variable_list = gulden_hungarian_forint_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:gulden_hungarian_forint
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = gulden_hungarian_forint_leading_currency_type } remove_modifier = gulden_hungarian_forint_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = gulden_hungarian_forint_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = gulden_hungarian_forint_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = gulden_hungarian_forint_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = gulden_hungarian_forint_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = gulden_hungarian_forint_currency_law_list_ordered_1
+					if = { limit = { has_modifier = gulden_hungarian_forint_leading_currency_type } remove_modifier = gulden_hungarian_forint_leading_currency_type }
+					add_modifier = {
+						name = gulden_hungarian_forint_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = gulden_hungarian_forint_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:gulden_hungarian_forint
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = gulden_hungarian_forint_leading_currency_type } remove_modifier = gulden_hungarian_forint_leading_currency_type }
+		}
+	}
+}
+#gulden_indies_guilder
+gulden_indies_guilder_currency_law_list = {
+	clear_variable_list = gulden_indies_guilder_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:gulden_indies_guilder
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = gulden_indies_guilder_leading_currency_type } remove_modifier = gulden_indies_guilder_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = gulden_indies_guilder_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = gulden_indies_guilder_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = gulden_indies_guilder_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = gulden_indies_guilder_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = gulden_indies_guilder_currency_law_list_ordered_1
+					if = { limit = { has_modifier = gulden_indies_guilder_leading_currency_type } remove_modifier = gulden_indies_guilder_leading_currency_type }
+					add_modifier = {
+						name = gulden_indies_guilder_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = gulden_indies_guilder_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:gulden_indies_guilder
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = gulden_indies_guilder_leading_currency_type } remove_modifier = gulden_indies_guilder_leading_currency_type }
+		}
+	}
+}
+#gulden_south_german_gulden
+gulden_south_german_gulden_currency_law_list = {
+	clear_variable_list = gulden_south_german_gulden_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:gulden_south_german_gulden
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = gulden_south_german_gulden_leading_currency_type } remove_modifier = gulden_south_german_gulden_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = gulden_south_german_gulden_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = gulden_south_german_gulden_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = gulden_south_german_gulden_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = gulden_south_german_gulden_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = gulden_south_german_gulden_currency_law_list_ordered_1
+					if = { limit = { has_modifier = gulden_south_german_gulden_leading_currency_type } remove_modifier = gulden_south_german_gulden_leading_currency_type }
+					add_modifier = {
+						name = gulden_south_german_gulden_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = gulden_south_german_gulden_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:gulden_south_german_gulden
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = gulden_south_german_gulden_leading_currency_type } remove_modifier = gulden_south_german_gulden_leading_currency_type }
+		}
+	}
+}
+#krone_czech_koruna
+krone_czech_koruna_currency_law_list = {
+	clear_variable_list = krone_czech_koruna_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:krone_czech_koruna
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = krone_czech_koruna_leading_currency_type } remove_modifier = krone_czech_koruna_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = krone_czech_koruna_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = krone_czech_koruna_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = krone_czech_koruna_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = krone_czech_koruna_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = krone_czech_koruna_currency_law_list_ordered_1
+					if = { limit = { has_modifier = krone_czech_koruna_leading_currency_type } remove_modifier = krone_czech_koruna_leading_currency_type }
+					add_modifier = {
+						name = krone_czech_koruna_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = krone_czech_koruna_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:krone_czech_koruna
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = krone_czech_koruna_leading_currency_type } remove_modifier = krone_czech_koruna_leading_currency_type }
+		}
+	}
+}
+#krone_danish_krone
+krone_danish_krone_currency_law_list = {
+	clear_variable_list = krone_danish_krone_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:krone_danish_krone
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = krone_danish_krone_leading_currency_type } remove_modifier = krone_danish_krone_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = krone_danish_krone_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = krone_danish_krone_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = krone_danish_krone_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = krone_danish_krone_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = krone_danish_krone_currency_law_list_ordered_1
+					if = { limit = { has_modifier = krone_danish_krone_leading_currency_type } remove_modifier = krone_danish_krone_leading_currency_type }
+					add_modifier = {
+						name = krone_danish_krone_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = krone_danish_krone_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:krone_danish_krone
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = krone_danish_krone_leading_currency_type } remove_modifier = krone_danish_krone_leading_currency_type }
+		}
+	}
+}
+#krone_estonian_kroon
+krone_estonian_kroon_currency_law_list = {
+	clear_variable_list = krone_estonian_kroon_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:krone_estonian_kroon
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = krone_estonian_kroon_leading_currency_type } remove_modifier = krone_estonian_kroon_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = krone_estonian_kroon_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = krone_estonian_kroon_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = krone_estonian_kroon_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = krone_estonian_kroon_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = krone_estonian_kroon_currency_law_list_ordered_1
+					if = { limit = { has_modifier = krone_estonian_kroon_leading_currency_type } remove_modifier = krone_estonian_kroon_leading_currency_type }
+					add_modifier = {
+						name = krone_estonian_kroon_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = krone_estonian_kroon_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:krone_estonian_kroon
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = krone_estonian_kroon_leading_currency_type } remove_modifier = krone_estonian_kroon_leading_currency_type }
+		}
+	}
+}
+#krone_icelandic_krona
+krone_icelandic_krona_currency_law_list = {
+	clear_variable_list = krone_icelandic_krona_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:krone_icelandic_krona
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = krone_icelandic_krona_leading_currency_type } remove_modifier = krone_icelandic_krona_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = krone_icelandic_krona_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = krone_icelandic_krona_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = krone_icelandic_krona_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = krone_icelandic_krona_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = krone_icelandic_krona_currency_law_list_ordered_1
+					if = { limit = { has_modifier = krone_icelandic_krona_leading_currency_type } remove_modifier = krone_icelandic_krona_leading_currency_type }
+					add_modifier = {
+						name = krone_icelandic_krona_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = krone_icelandic_krona_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:krone_icelandic_krona
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = krone_icelandic_krona_leading_currency_type } remove_modifier = krone_icelandic_krona_leading_currency_type }
+		}
+	}
+}
+#krone_norwegian_krone
+krone_norwegian_krone_currency_law_list = {
+	clear_variable_list = krone_norwegian_krone_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:krone_norwegian_krone
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = krone_norwegian_krone_leading_currency_type } remove_modifier = krone_norwegian_krone_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = krone_norwegian_krone_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = krone_norwegian_krone_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = krone_norwegian_krone_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = krone_norwegian_krone_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = krone_norwegian_krone_currency_law_list_ordered_1
+					if = { limit = { has_modifier = krone_norwegian_krone_leading_currency_type } remove_modifier = krone_norwegian_krone_leading_currency_type }
+					add_modifier = {
+						name = krone_norwegian_krone_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = krone_norwegian_krone_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:krone_norwegian_krone
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = krone_norwegian_krone_leading_currency_type } remove_modifier = krone_norwegian_krone_leading_currency_type }
+		}
+	}
+}
+#krone_slovak_koruna
+krone_slovak_koruna_currency_law_list = {
+	clear_variable_list = krone_slovak_koruna_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:krone_slovak_koruna
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = krone_slovak_koruna_leading_currency_type } remove_modifier = krone_slovak_koruna_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = krone_slovak_koruna_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = krone_slovak_koruna_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = krone_slovak_koruna_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = krone_slovak_koruna_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = krone_slovak_koruna_currency_law_list_ordered_1
+					if = { limit = { has_modifier = krone_slovak_koruna_leading_currency_type } remove_modifier = krone_slovak_koruna_leading_currency_type }
+					add_modifier = {
+						name = krone_slovak_koruna_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = krone_slovak_koruna_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:krone_slovak_koruna
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = krone_slovak_koruna_leading_currency_type } remove_modifier = krone_slovak_koruna_leading_currency_type }
+		}
+	}
+}
+#krone_swedish_krona
+krone_swedish_krona_currency_law_list = {
+	clear_variable_list = krone_swedish_krona_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:krone_swedish_krona
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = krone_swedish_krona_leading_currency_type } remove_modifier = krone_swedish_krona_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = krone_swedish_krona_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = krone_swedish_krona_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = krone_swedish_krona_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = krone_swedish_krona_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = krone_swedish_krona_currency_law_list_ordered_1
+					if = { limit = { has_modifier = krone_swedish_krona_leading_currency_type } remove_modifier = krone_swedish_krona_leading_currency_type }
+					add_modifier = {
+						name = krone_swedish_krona_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = krone_swedish_krona_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:krone_swedish_krona
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = krone_swedish_krona_leading_currency_type } remove_modifier = krone_swedish_krona_leading_currency_type }
+		}
+	}
+}
+#leon_leu
+leon_leu_currency_law_list = {
+	clear_variable_list = leon_leu_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:leon_leu
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = leon_leu_leading_currency_type } remove_modifier = leon_leu_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = leon_leu_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = leon_leu_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = leon_leu_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = leon_leu_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = leon_leu_currency_law_list_ordered_1
+					if = { limit = { has_modifier = leon_leu_leading_currency_type } remove_modifier = leon_leu_leading_currency_type }
+					add_modifier = {
+						name = leon_leu_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = leon_leu_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:leon_leu
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = leon_leu_leading_currency_type } remove_modifier = leon_leu_leading_currency_type }
+		}
+	}
+}
+#leon_lev
+leon_lev_currency_law_list = {
+	clear_variable_list = leon_lev_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:leon_lev
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = leon_lev_leading_currency_type } remove_modifier = leon_lev_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = leon_lev_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = leon_lev_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = leon_lev_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = leon_lev_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = leon_lev_currency_law_list_ordered_1
+					if = { limit = { has_modifier = leon_lev_leading_currency_type } remove_modifier = leon_lev_leading_currency_type }
+					add_modifier = {
+						name = leon_lev_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = leon_lev_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:leon_lev
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = leon_lev_leading_currency_type } remove_modifier = leon_lev_leading_currency_type }
+		}
+	}
+}
+#lira
+lira_currency_law_list = {
+	clear_variable_list = lira_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:lira
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = lira_leading_currency_type } remove_modifier = lira_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = lira_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = lira_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = lira_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = lira_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = lira_currency_law_list_ordered_1
+					if = { limit = { has_modifier = lira_leading_currency_type } remove_modifier = lira_leading_currency_type }
+					add_modifier = {
+						name = lira_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = lira_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:lira
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = lira_leading_currency_type } remove_modifier = lira_leading_currency_type }
+		}
+	}
+}
+#lira_ducato
+lira_ducato_currency_law_list = {
+	clear_variable_list = lira_ducato_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:lira_ducato
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = lira_ducato_leading_currency_type } remove_modifier = lira_ducato_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = lira_ducato_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = lira_ducato_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = lira_ducato_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = lira_ducato_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = lira_ducato_currency_law_list_ordered_1
+					if = { limit = { has_modifier = lira_ducato_leading_currency_type } remove_modifier = lira_ducato_leading_currency_type }
+					add_modifier = {
+						name = lira_ducato_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = lira_ducato_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:lira_ducato
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = lira_ducato_leading_currency_type } remove_modifier = lira_ducato_leading_currency_type }
+		}
+	}
+}
+#lira_ottoman_lira
+lira_ottoman_lira_currency_law_list = {
+	clear_variable_list = lira_ottoman_lira_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:lira_ottoman_lira
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = lira_ottoman_lira_leading_currency_type } remove_modifier = lira_ottoman_lira_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = lira_ottoman_lira_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = lira_ottoman_lira_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = lira_ottoman_lira_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = lira_ottoman_lira_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = lira_ottoman_lira_currency_law_list_ordered_1
+					if = { limit = { has_modifier = lira_ottoman_lira_leading_currency_type } remove_modifier = lira_ottoman_lira_leading_currency_type }
+					add_modifier = {
+						name = lira_ottoman_lira_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = lira_ottoman_lira_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:lira_ottoman_lira
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = lira_ottoman_lira_leading_currency_type } remove_modifier = lira_ottoman_lira_leading_currency_type }
+		}
+	}
+}
+#lira_scudo_pontificio
+lira_scudo_pontificio_currency_law_list = {
+	clear_variable_list = lira_scudo_pontificio_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:lira_scudo_pontificio
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = lira_scudo_pontificio_leading_currency_type } remove_modifier = lira_scudo_pontificio_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = lira_scudo_pontificio_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = lira_scudo_pontificio_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = lira_scudo_pontificio_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = lira_scudo_pontificio_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = lira_scudo_pontificio_currency_law_list_ordered_1
+					if = { limit = { has_modifier = lira_scudo_pontificio_leading_currency_type } remove_modifier = lira_scudo_pontificio_leading_currency_type }
+					add_modifier = {
+						name = lira_scudo_pontificio_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = lira_scudo_pontificio_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:lira_scudo_pontificio
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = lira_scudo_pontificio_leading_currency_type } remove_modifier = lira_scudo_pontificio_leading_currency_type }
+		}
+	}
+}
+#lira_scudo_sardo
+lira_scudo_sardo_currency_law_list = {
+	clear_variable_list = lira_scudo_sardo_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:lira_scudo_sardo
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = lira_scudo_sardo_leading_currency_type } remove_modifier = lira_scudo_sardo_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = lira_scudo_sardo_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = lira_scudo_sardo_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = lira_scudo_sardo_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = lira_scudo_sardo_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = lira_scudo_sardo_currency_law_list_ordered_1
+					if = { limit = { has_modifier = lira_scudo_sardo_leading_currency_type } remove_modifier = lira_scudo_sardo_leading_currency_type }
+					add_modifier = {
+						name = lira_scudo_sardo_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = lira_scudo_sardo_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:lira_scudo_sardo
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = lira_scudo_sardo_leading_currency_type } remove_modifier = lira_scudo_sardo_leading_currency_type }
+		}
+	}
+}
+#lira_toscane_lira
+lira_toscane_lira_currency_law_list = {
+	clear_variable_list = lira_toscane_lira_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:lira_toscane_lira
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = lira_toscane_lira_leading_currency_type } remove_modifier = lira_toscane_lira_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = lira_toscane_lira_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = lira_toscane_lira_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = lira_toscane_lira_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = lira_toscane_lira_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = lira_toscane_lira_currency_law_list_ordered_1
+					if = { limit = { has_modifier = lira_toscane_lira_leading_currency_type } remove_modifier = lira_toscane_lira_leading_currency_type }
+					add_modifier = {
+						name = lira_toscane_lira_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = lira_toscane_lira_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:lira_toscane_lira
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = lira_toscane_lira_leading_currency_type } remove_modifier = lira_toscane_lira_leading_currency_type }
+		}
+	}
+}
+#mark
+mark_currency_law_list = {
+	clear_variable_list = mark_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:mark
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = mark_leading_currency_type } remove_modifier = mark_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = mark_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = mark_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = mark_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = mark_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = mark_currency_law_list_ordered_1
+					if = { limit = { has_modifier = mark_leading_currency_type } remove_modifier = mark_leading_currency_type }
+					add_modifier = {
+						name = mark_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = mark_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:mark
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = mark_leading_currency_type } remove_modifier = mark_leading_currency_type }
+		}
+	}
+}
+#mark_finnish_markka
+mark_finnish_markka_currency_law_list = {
+	clear_variable_list = mark_finnish_markka_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:mark_finnish_markka
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = mark_finnish_markka_leading_currency_type } remove_modifier = mark_finnish_markka_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = mark_finnish_markka_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = mark_finnish_markka_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = mark_finnish_markka_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = mark_finnish_markka_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = mark_finnish_markka_currency_law_list_ordered_1
+					if = { limit = { has_modifier = mark_finnish_markka_leading_currency_type } remove_modifier = mark_finnish_markka_leading_currency_type }
+					add_modifier = {
+						name = mark_finnish_markka_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = mark_finnish_markka_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:mark_finnish_markka
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = mark_finnish_markka_leading_currency_type } remove_modifier = mark_finnish_markka_leading_currency_type }
+		}
+	}
+}
+#peso
+peso_currency_law_list = {
+	clear_variable_list = peso_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:peso
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = peso_leading_currency_type } remove_modifier = peso_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = peso_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = peso_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = peso_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = peso_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = peso_currency_law_list_ordered_1
+					if = { limit = { has_modifier = peso_leading_currency_type } remove_modifier = peso_leading_currency_type }
+					add_modifier = {
+						name = peso_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = peso_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:peso
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = peso_leading_currency_type } remove_modifier = peso_leading_currency_type }
+		}
+	}
+}
+#peso_argentine_peso
+peso_argentine_peso_currency_law_list = {
+	clear_variable_list = peso_argentine_peso_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:peso_argentine_peso
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = peso_argentine_peso_leading_currency_type } remove_modifier = peso_argentine_peso_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = peso_argentine_peso_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = peso_argentine_peso_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = peso_argentine_peso_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = peso_argentine_peso_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = peso_argentine_peso_currency_law_list_ordered_1
+					if = { limit = { has_modifier = peso_argentine_peso_leading_currency_type } remove_modifier = peso_argentine_peso_leading_currency_type }
+					add_modifier = {
+						name = peso_argentine_peso_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = peso_argentine_peso_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:peso_argentine_peso
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = peso_argentine_peso_leading_currency_type } remove_modifier = peso_argentine_peso_leading_currency_type }
+		}
+	}
+}
+#peso_bolivien_peso
+peso_bolivien_peso_currency_law_list = {
+	clear_variable_list = peso_bolivien_peso_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:peso_bolivien_peso
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = peso_bolivien_peso_leading_currency_type } remove_modifier = peso_bolivien_peso_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = peso_bolivien_peso_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = peso_bolivien_peso_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = peso_bolivien_peso_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = peso_bolivien_peso_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = peso_bolivien_peso_currency_law_list_ordered_1
+					if = { limit = { has_modifier = peso_bolivien_peso_leading_currency_type } remove_modifier = peso_bolivien_peso_leading_currency_type }
+					add_modifier = {
+						name = peso_bolivien_peso_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = peso_bolivien_peso_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:peso_bolivien_peso
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = peso_bolivien_peso_leading_currency_type } remove_modifier = peso_bolivien_peso_leading_currency_type }
+		}
+	}
+}
+#peso_chilean_peso
+peso_chilean_peso_currency_law_list = {
+	clear_variable_list = peso_chilean_peso_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:peso_chilean_peso
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = peso_chilean_peso_leading_currency_type } remove_modifier = peso_chilean_peso_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = peso_chilean_peso_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = peso_chilean_peso_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = peso_chilean_peso_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = peso_chilean_peso_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = peso_chilean_peso_currency_law_list_ordered_1
+					if = { limit = { has_modifier = peso_chilean_peso_leading_currency_type } remove_modifier = peso_chilean_peso_leading_currency_type }
+					add_modifier = {
+						name = peso_chilean_peso_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = peso_chilean_peso_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:peso_chilean_peso
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = peso_chilean_peso_leading_currency_type } remove_modifier = peso_chilean_peso_leading_currency_type }
+		}
+	}
+}
+#peso_colombian_peso
+peso_colombian_peso_currency_law_list = {
+	clear_variable_list = peso_colombian_peso_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:peso_colombian_peso
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = peso_colombian_peso_leading_currency_type } remove_modifier = peso_colombian_peso_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = peso_colombian_peso_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = peso_colombian_peso_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = peso_colombian_peso_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = peso_colombian_peso_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = peso_colombian_peso_currency_law_list_ordered_1
+					if = { limit = { has_modifier = peso_colombian_peso_leading_currency_type } remove_modifier = peso_colombian_peso_leading_currency_type }
+					add_modifier = {
+						name = peso_colombian_peso_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = peso_colombian_peso_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:peso_colombian_peso
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = peso_colombian_peso_leading_currency_type } remove_modifier = peso_colombian_peso_leading_currency_type }
+		}
+	}
+}
+#peso_costa_rican_colon
+peso_costa_rican_colon_currency_law_list = {
+	clear_variable_list = peso_costa_rican_colon_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:peso_costa_rican_colon
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = peso_costa_rican_colon_leading_currency_type } remove_modifier = peso_costa_rican_colon_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = peso_costa_rican_colon_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = peso_costa_rican_colon_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = peso_costa_rican_colon_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = peso_costa_rican_colon_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = peso_costa_rican_colon_currency_law_list_ordered_1
+					if = { limit = { has_modifier = peso_costa_rican_colon_leading_currency_type } remove_modifier = peso_costa_rican_colon_leading_currency_type }
+					add_modifier = {
+						name = peso_costa_rican_colon_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = peso_costa_rican_colon_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:peso_costa_rican_colon
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = peso_costa_rican_colon_leading_currency_type } remove_modifier = peso_costa_rican_colon_leading_currency_type }
+		}
+	}
+}
+#peso_cuban_peso
+peso_cuban_peso_currency_law_list = {
+	clear_variable_list = peso_cuban_peso_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:peso_cuban_peso
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = peso_cuban_peso_leading_currency_type } remove_modifier = peso_cuban_peso_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = peso_cuban_peso_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = peso_cuban_peso_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = peso_cuban_peso_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = peso_cuban_peso_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = peso_cuban_peso_currency_law_list_ordered_1
+					if = { limit = { has_modifier = peso_cuban_peso_leading_currency_type } remove_modifier = peso_cuban_peso_leading_currency_type }
+					add_modifier = {
+						name = peso_cuban_peso_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = peso_cuban_peso_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:peso_cuban_peso
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = peso_cuban_peso_leading_currency_type } remove_modifier = peso_cuban_peso_leading_currency_type }
+		}
+	}
+}
+#peso_ecuadorian_peso
+peso_ecuadorian_peso_currency_law_list = {
+	clear_variable_list = peso_ecuadorian_peso_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:peso_ecuadorian_peso
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = peso_ecuadorian_peso_leading_currency_type } remove_modifier = peso_ecuadorian_peso_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = peso_ecuadorian_peso_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = peso_ecuadorian_peso_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = peso_ecuadorian_peso_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = peso_ecuadorian_peso_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = peso_ecuadorian_peso_currency_law_list_ordered_1
+					if = { limit = { has_modifier = peso_ecuadorian_peso_leading_currency_type } remove_modifier = peso_ecuadorian_peso_leading_currency_type }
+					add_modifier = {
+						name = peso_ecuadorian_peso_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = peso_ecuadorian_peso_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:peso_ecuadorian_peso
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = peso_ecuadorian_peso_leading_currency_type } remove_modifier = peso_ecuadorian_peso_leading_currency_type }
+		}
+	}
+}
+#peso_el_salvador_colon
+peso_el_salvador_colon_currency_law_list = {
+	clear_variable_list = peso_el_salvador_colon_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:peso_el_salvador_colon
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = peso_el_salvador_colon_leading_currency_type } remove_modifier = peso_el_salvador_colon_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = peso_el_salvador_colon_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = peso_el_salvador_colon_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = peso_el_salvador_colon_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = peso_el_salvador_colon_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = peso_el_salvador_colon_currency_law_list_ordered_1
+					if = { limit = { has_modifier = peso_el_salvador_colon_leading_currency_type } remove_modifier = peso_el_salvador_colon_leading_currency_type }
+					add_modifier = {
+						name = peso_el_salvador_colon_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = peso_el_salvador_colon_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:peso_el_salvador_colon
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = peso_el_salvador_colon_leading_currency_type } remove_modifier = peso_el_salvador_colon_leading_currency_type }
+		}
+	}
+}
+#peso_guatemalan_quetzal
+peso_guatemalan_quetzal_currency_law_list = {
+	clear_variable_list = peso_guatemalan_quetzal_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:peso_guatemalan_quetzal
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = peso_guatemalan_quetzal_leading_currency_type } remove_modifier = peso_guatemalan_quetzal_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = peso_guatemalan_quetzal_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = peso_guatemalan_quetzal_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = peso_guatemalan_quetzal_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = peso_guatemalan_quetzal_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = peso_guatemalan_quetzal_currency_law_list_ordered_1
+					if = { limit = { has_modifier = peso_guatemalan_quetzal_leading_currency_type } remove_modifier = peso_guatemalan_quetzal_leading_currency_type }
+					add_modifier = {
+						name = peso_guatemalan_quetzal_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = peso_guatemalan_quetzal_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:peso_guatemalan_quetzal
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = peso_guatemalan_quetzal_leading_currency_type } remove_modifier = peso_guatemalan_quetzal_leading_currency_type }
+		}
+	}
+}
+#peso_honduran_lempira
+peso_honduran_lempira_currency_law_list = {
+	clear_variable_list = peso_honduran_lempira_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:peso_honduran_lempira
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = peso_honduran_lempira_leading_currency_type } remove_modifier = peso_honduran_lempira_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = peso_honduran_lempira_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = peso_honduran_lempira_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = peso_honduran_lempira_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = peso_honduran_lempira_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = peso_honduran_lempira_currency_law_list_ordered_1
+					if = { limit = { has_modifier = peso_honduran_lempira_leading_currency_type } remove_modifier = peso_honduran_lempira_leading_currency_type }
+					add_modifier = {
+						name = peso_honduran_lempira_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = peso_honduran_lempira_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:peso_honduran_lempira
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = peso_honduran_lempira_leading_currency_type } remove_modifier = peso_honduran_lempira_leading_currency_type }
+		}
+	}
+}
+#peso_mexican_peso
+peso_mexican_peso_currency_law_list = {
+	clear_variable_list = peso_mexican_peso_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:peso_mexican_peso
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = peso_mexican_peso_leading_currency_type } remove_modifier = peso_mexican_peso_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = peso_mexican_peso_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = peso_mexican_peso_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = peso_mexican_peso_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = peso_mexican_peso_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = peso_mexican_peso_currency_law_list_ordered_1
+					if = { limit = { has_modifier = peso_mexican_peso_leading_currency_type } remove_modifier = peso_mexican_peso_leading_currency_type }
+					add_modifier = {
+						name = peso_mexican_peso_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = peso_mexican_peso_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:peso_mexican_peso
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = peso_mexican_peso_leading_currency_type } remove_modifier = peso_mexican_peso_leading_currency_type }
+		}
+	}
+}
+#peso_nicaraguan_cordoba
+peso_nicaraguan_cordoba_currency_law_list = {
+	clear_variable_list = peso_nicaraguan_cordoba_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:peso_nicaraguan_cordoba
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = peso_nicaraguan_cordoba_leading_currency_type } remove_modifier = peso_nicaraguan_cordoba_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = peso_nicaraguan_cordoba_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = peso_nicaraguan_cordoba_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = peso_nicaraguan_cordoba_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = peso_nicaraguan_cordoba_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = peso_nicaraguan_cordoba_currency_law_list_ordered_1
+					if = { limit = { has_modifier = peso_nicaraguan_cordoba_leading_currency_type } remove_modifier = peso_nicaraguan_cordoba_leading_currency_type }
+					add_modifier = {
+						name = peso_nicaraguan_cordoba_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = peso_nicaraguan_cordoba_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:peso_nicaraguan_cordoba
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = peso_nicaraguan_cordoba_leading_currency_type } remove_modifier = peso_nicaraguan_cordoba_leading_currency_type }
+		}
+	}
+}
+#peso_paraguayan_peso
+peso_paraguayan_peso_currency_law_list = {
+	clear_variable_list = peso_paraguayan_peso_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:peso_paraguayan_peso
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = peso_paraguayan_peso_leading_currency_type } remove_modifier = peso_paraguayan_peso_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = peso_paraguayan_peso_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = peso_paraguayan_peso_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = peso_paraguayan_peso_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = peso_paraguayan_peso_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = peso_paraguayan_peso_currency_law_list_ordered_1
+					if = { limit = { has_modifier = peso_paraguayan_peso_leading_currency_type } remove_modifier = peso_paraguayan_peso_leading_currency_type }
+					add_modifier = {
+						name = peso_paraguayan_peso_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = peso_paraguayan_peso_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:peso_paraguayan_peso
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = peso_paraguayan_peso_leading_currency_type } remove_modifier = peso_paraguayan_peso_leading_currency_type }
+		}
+	}
+}
+#peso_philippine_peso
+peso_philippine_peso_currency_law_list = {
+	clear_variable_list = peso_philippine_peso_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:peso_philippine_peso
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = peso_philippine_peso_leading_currency_type } remove_modifier = peso_philippine_peso_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = peso_philippine_peso_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = peso_philippine_peso_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = peso_philippine_peso_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = peso_philippine_peso_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = peso_philippine_peso_currency_law_list_ordered_1
+					if = { limit = { has_modifier = peso_philippine_peso_leading_currency_type } remove_modifier = peso_philippine_peso_leading_currency_type }
+					add_modifier = {
+						name = peso_philippine_peso_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = peso_philippine_peso_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:peso_philippine_peso
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = peso_philippine_peso_leading_currency_type } remove_modifier = peso_philippine_peso_leading_currency_type }
+		}
+	}
+}
+#peso_sol_de_oro
+peso_sol_de_oro_currency_law_list = {
+	clear_variable_list = peso_sol_de_oro_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:peso_sol_de_oro
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = peso_sol_de_oro_leading_currency_type } remove_modifier = peso_sol_de_oro_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = peso_sol_de_oro_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = peso_sol_de_oro_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = peso_sol_de_oro_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = peso_sol_de_oro_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = peso_sol_de_oro_currency_law_list_ordered_1
+					if = { limit = { has_modifier = peso_sol_de_oro_leading_currency_type } remove_modifier = peso_sol_de_oro_leading_currency_type }
+					add_modifier = {
+						name = peso_sol_de_oro_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = peso_sol_de_oro_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:peso_sol_de_oro
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = peso_sol_de_oro_leading_currency_type } remove_modifier = peso_sol_de_oro_leading_currency_type }
+		}
+	}
+}
+#peso_uruguayan_peso
+peso_uruguayan_peso_currency_law_list = {
+	clear_variable_list = peso_uruguayan_peso_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:peso_uruguayan_peso
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = peso_uruguayan_peso_leading_currency_type } remove_modifier = peso_uruguayan_peso_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = peso_uruguayan_peso_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = peso_uruguayan_peso_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = peso_uruguayan_peso_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = peso_uruguayan_peso_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = peso_uruguayan_peso_currency_law_list_ordered_1
+					if = { limit = { has_modifier = peso_uruguayan_peso_leading_currency_type } remove_modifier = peso_uruguayan_peso_leading_currency_type }
+					add_modifier = {
+						name = peso_uruguayan_peso_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = peso_uruguayan_peso_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:peso_uruguayan_peso
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = peso_uruguayan_peso_leading_currency_type } remove_modifier = peso_uruguayan_peso_leading_currency_type }
+		}
+	}
+}
+#peso_venezuelan_peso
+peso_venezuelan_peso_currency_law_list = {
+	clear_variable_list = peso_venezuelan_peso_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:peso_venezuelan_peso
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = peso_venezuelan_peso_leading_currency_type } remove_modifier = peso_venezuelan_peso_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = peso_venezuelan_peso_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = peso_venezuelan_peso_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = peso_venezuelan_peso_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = peso_venezuelan_peso_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = peso_venezuelan_peso_currency_law_list_ordered_1
+					if = { limit = { has_modifier = peso_venezuelan_peso_leading_currency_type } remove_modifier = peso_venezuelan_peso_leading_currency_type }
+					add_modifier = {
+						name = peso_venezuelan_peso_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = peso_venezuelan_peso_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:peso_venezuelan_peso
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = peso_venezuelan_peso_leading_currency_type } remove_modifier = peso_venezuelan_peso_leading_currency_type }
+		}
+	}
+}
+#pound_egyptian_pound
+pound_egyptian_pound_currency_law_list = {
+	clear_variable_list = pound_egyptian_pound_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:pound_egyptian_pound
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = pound_egyptian_pound_leading_currency_type } remove_modifier = pound_egyptian_pound_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = pound_egyptian_pound_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = pound_egyptian_pound_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = pound_egyptian_pound_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = pound_egyptian_pound_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = pound_egyptian_pound_currency_law_list_ordered_1
+					if = { limit = { has_modifier = pound_egyptian_pound_leading_currency_type } remove_modifier = pound_egyptian_pound_leading_currency_type }
+					add_modifier = {
+						name = pound_egyptian_pound_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = pound_egyptian_pound_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:pound_egyptian_pound
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = pound_egyptian_pound_leading_currency_type } remove_modifier = pound_egyptian_pound_leading_currency_type }
+		}
+	}
+}
+#pound_irish_pound
+pound_irish_pound_currency_law_list = {
+	clear_variable_list = pound_irish_pound_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:pound_irish_pound
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = pound_irish_pound_leading_currency_type } remove_modifier = pound_irish_pound_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = pound_irish_pound_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = pound_irish_pound_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = pound_irish_pound_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = pound_irish_pound_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = pound_irish_pound_currency_law_list_ordered_1
+					if = { limit = { has_modifier = pound_irish_pound_leading_currency_type } remove_modifier = pound_irish_pound_leading_currency_type }
+					add_modifier = {
+						name = pound_irish_pound_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = pound_irish_pound_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:pound_irish_pound
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = pound_irish_pound_leading_currency_type } remove_modifier = pound_irish_pound_leading_currency_type }
+		}
+	}
+}
+#pound_sterling
+pound_sterling_currency_law_list = {
+	clear_variable_list = pound_sterling_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:pound_sterling
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = pound_sterling_leading_currency_type } remove_modifier = pound_sterling_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = pound_sterling_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = pound_sterling_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = pound_sterling_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = pound_sterling_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = pound_sterling_currency_law_list_ordered_1
+					if = { limit = { has_modifier = pound_sterling_leading_currency_type } remove_modifier = pound_sterling_leading_currency_type }
+					add_modifier = {
+						name = pound_sterling_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = pound_sterling_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:pound_sterling
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = pound_sterling_leading_currency_type } remove_modifier = pound_sterling_leading_currency_type }
+		}
+	}
+}
+#real
+real_currency_law_list = {
+	clear_variable_list = real_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:real
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = real_leading_currency_type } remove_modifier = real_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = real_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = real_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = real_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = real_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = real_currency_law_list_ordered_1
+					if = { limit = { has_modifier = real_leading_currency_type } remove_modifier = real_leading_currency_type }
+					add_modifier = {
+						name = real_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = real_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:real
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = real_leading_currency_type } remove_modifier = real_leading_currency_type }
+		}
+	}
+}
+#real_brazilian_real
+real_brazilian_real_currency_law_list = {
+	clear_variable_list = real_brazilian_real_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:real_brazilian_real
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = real_brazilian_real_leading_currency_type } remove_modifier = real_brazilian_real_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = real_brazilian_real_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = real_brazilian_real_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = real_brazilian_real_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = real_brazilian_real_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = real_brazilian_real_currency_law_list_ordered_1
+					if = { limit = { has_modifier = real_brazilian_real_leading_currency_type } remove_modifier = real_brazilian_real_leading_currency_type }
+					add_modifier = {
+						name = real_brazilian_real_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = real_brazilian_real_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:real_brazilian_real
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = real_brazilian_real_leading_currency_type } remove_modifier = real_brazilian_real_leading_currency_type }
+		}
+	}
+}
+#rupee_indian_rupee
+rupee_indian_rupee_currency_law_list = {
+	clear_variable_list = rupee_indian_rupee_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:rupee_indian_rupee
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = rupee_indian_rupee_leading_currency_type } remove_modifier = rupee_indian_rupee_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = rupee_indian_rupee_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = rupee_indian_rupee_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = rupee_indian_rupee_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = rupee_indian_rupee_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = rupee_indian_rupee_currency_law_list_ordered_1
+					if = { limit = { has_modifier = rupee_indian_rupee_leading_currency_type } remove_modifier = rupee_indian_rupee_leading_currency_type }
+					add_modifier = {
+						name = rupee_indian_rupee_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = rupee_indian_rupee_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:rupee_indian_rupee
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = rupee_indian_rupee_leading_currency_type } remove_modifier = rupee_indian_rupee_leading_currency_type }
+		}
+	}
+}
+#rupee_indonesian_rupiah
+rupee_indonesian_rupiah_currency_law_list = {
+	clear_variable_list = rupee_indonesian_rupiah_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:rupee_indonesian_rupiah
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = rupee_indonesian_rupiah_leading_currency_type } remove_modifier = rupee_indonesian_rupiah_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = rupee_indonesian_rupiah_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = rupee_indonesian_rupiah_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = rupee_indonesian_rupiah_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = rupee_indonesian_rupiah_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = rupee_indonesian_rupiah_currency_law_list_ordered_1
+					if = { limit = { has_modifier = rupee_indonesian_rupiah_leading_currency_type } remove_modifier = rupee_indonesian_rupiah_leading_currency_type }
+					add_modifier = {
+						name = rupee_indonesian_rupiah_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = rupee_indonesian_rupiah_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:rupee_indonesian_rupiah
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = rupee_indonesian_rupiah_leading_currency_type } remove_modifier = rupee_indonesian_rupiah_leading_currency_type }
+		}
+	}
+}
+#spe_baht
+spe_baht_currency_law_list = {
+	clear_variable_list = spe_baht_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:spe_baht
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = spe_baht_leading_currency_type } remove_modifier = spe_baht_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = spe_baht_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = spe_baht_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = spe_baht_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = spe_baht_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = spe_baht_currency_law_list_ordered_1
+					if = { limit = { has_modifier = spe_baht_leading_currency_type } remove_modifier = spe_baht_leading_currency_type }
+					add_modifier = {
+						name = spe_baht_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = spe_baht_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:spe_baht
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = spe_baht_leading_currency_type } remove_modifier = spe_baht_leading_currency_type }
+		}
+	}
+}
+#spe_dong
+spe_dong_currency_law_list = {
+	clear_variable_list = spe_dong_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:spe_dong
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = spe_dong_leading_currency_type } remove_modifier = spe_dong_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = spe_dong_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = spe_dong_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = spe_dong_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = spe_dong_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = spe_dong_currency_law_list_ordered_1
+					if = { limit = { has_modifier = spe_dong_leading_currency_type } remove_modifier = spe_dong_leading_currency_type }
+					add_modifier = {
+						name = spe_dong_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = spe_dong_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:spe_dong
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = spe_dong_leading_currency_type } remove_modifier = spe_dong_leading_currency_type }
+		}
+	}
+}
+#spe_drachma
+spe_drachma_currency_law_list = {
+	clear_variable_list = spe_drachma_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:spe_drachma
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = spe_drachma_leading_currency_type } remove_modifier = spe_drachma_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = spe_drachma_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = spe_drachma_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = spe_drachma_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = spe_drachma_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = spe_drachma_currency_law_list_ordered_1
+					if = { limit = { has_modifier = spe_drachma_leading_currency_type } remove_modifier = spe_drachma_leading_currency_type }
+					add_modifier = {
+						name = spe_drachma_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = spe_drachma_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:spe_drachma
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = spe_drachma_leading_currency_type } remove_modifier = spe_drachma_leading_currency_type }
+		}
+	}
+}
+#spe_korean_won
+spe_korean_won_currency_law_list = {
+	clear_variable_list = spe_korean_won_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:spe_korean_won
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = spe_korean_won_leading_currency_type } remove_modifier = spe_korean_won_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = spe_korean_won_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = spe_korean_won_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = spe_korean_won_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = spe_korean_won_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = spe_korean_won_currency_law_list_ordered_1
+					if = { limit = { has_modifier = spe_korean_won_leading_currency_type } remove_modifier = spe_korean_won_leading_currency_type }
+					add_modifier = {
+						name = spe_korean_won_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = spe_korean_won_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:spe_korean_won
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = spe_korean_won_leading_currency_type } remove_modifier = spe_korean_won_leading_currency_type }
+		}
+	}
+}
+#spe_latvian_lats
+spe_latvian_lats_currency_law_list = {
+	clear_variable_list = spe_latvian_lats_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:spe_latvian_lats
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = spe_latvian_lats_leading_currency_type } remove_modifier = spe_latvian_lats_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = spe_latvian_lats_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = spe_latvian_lats_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = spe_latvian_lats_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = spe_latvian_lats_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = spe_latvian_lats_currency_law_list_ordered_1
+					if = { limit = { has_modifier = spe_latvian_lats_leading_currency_type } remove_modifier = spe_latvian_lats_leading_currency_type }
+					add_modifier = {
+						name = spe_latvian_lats_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = spe_latvian_lats_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:spe_latvian_lats
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = spe_latvian_lats_leading_currency_type } remove_modifier = spe_latvian_lats_leading_currency_type }
+		}
+	}
+}
+#spe_lithuanian_litas
+spe_lithuanian_litas_currency_law_list = {
+	clear_variable_list = spe_lithuanian_litas_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:spe_lithuanian_litas
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = spe_lithuanian_litas_leading_currency_type } remove_modifier = spe_lithuanian_litas_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = spe_lithuanian_litas_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = spe_lithuanian_litas_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = spe_lithuanian_litas_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = spe_lithuanian_litas_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = spe_lithuanian_litas_currency_law_list_ordered_1
+					if = { limit = { has_modifier = spe_lithuanian_litas_leading_currency_type } remove_modifier = spe_lithuanian_litas_leading_currency_type }
+					add_modifier = {
+						name = spe_lithuanian_litas_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = spe_lithuanian_litas_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:spe_lithuanian_litas
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = spe_lithuanian_litas_leading_currency_type } remove_modifier = spe_lithuanian_litas_leading_currency_type }
+		}
+	}
+}
+#spe_peseta
+spe_peseta_currency_law_list = {
+	clear_variable_list = spe_peseta_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:spe_peseta
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = spe_peseta_leading_currency_type } remove_modifier = spe_peseta_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = spe_peseta_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = spe_peseta_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = spe_peseta_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = spe_peseta_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = spe_peseta_currency_law_list_ordered_1
+					if = { limit = { has_modifier = spe_peseta_leading_currency_type } remove_modifier = spe_peseta_leading_currency_type }
+					add_modifier = {
+						name = spe_peseta_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = spe_peseta_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:spe_peseta
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = spe_peseta_leading_currency_type } remove_modifier = spe_peseta_leading_currency_type }
+		}
+	}
+}
+#spe_ruble
+spe_ruble_currency_law_list = {
+	clear_variable_list = spe_ruble_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:spe_ruble
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = spe_ruble_leading_currency_type } remove_modifier = spe_ruble_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = spe_ruble_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = spe_ruble_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = spe_ruble_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = spe_ruble_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = spe_ruble_currency_law_list_ordered_1
+					if = { limit = { has_modifier = spe_ruble_leading_currency_type } remove_modifier = spe_ruble_leading_currency_type }
+					add_modifier = {
+						name = spe_ruble_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = spe_ruble_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:spe_ruble
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = spe_ruble_leading_currency_type } remove_modifier = spe_ruble_leading_currency_type }
+		}
+	}
+}
+#spe_uni
+spe_uni_currency_law_list = {
+	clear_variable_list = spe_uni_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:spe_uni
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = spe_uni_leading_currency_type } remove_modifier = spe_uni_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = spe_uni_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = spe_uni_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = spe_uni_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = spe_uni_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = spe_uni_currency_law_list_ordered_1
+					if = { limit = { has_modifier = spe_uni_leading_currency_type } remove_modifier = spe_uni_leading_currency_type }
+					add_modifier = {
+						name = spe_uni_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = spe_uni_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:spe_uni
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = spe_uni_leading_currency_type } remove_modifier = spe_uni_leading_currency_type }
+		}
+	}
+}
+#spe_yen
+spe_yen_currency_law_list = {
+	clear_variable_list = spe_yen_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:spe_yen
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = spe_yen_leading_currency_type } remove_modifier = spe_yen_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = spe_yen_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = spe_yen_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = spe_yen_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = spe_yen_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = spe_yen_currency_law_list_ordered_1
+					if = { limit = { has_modifier = spe_yen_leading_currency_type } remove_modifier = spe_yen_leading_currency_type }
+					add_modifier = {
+						name = spe_yen_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = spe_yen_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:spe_yen
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = spe_yen_leading_currency_type } remove_modifier = spe_yen_leading_currency_type }
+		}
+	}
+}
+#spe_yuan
+spe_yuan_currency_law_list = {
+	clear_variable_list = spe_yuan_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:spe_yuan
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = spe_yuan_leading_currency_type } remove_modifier = spe_yuan_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = spe_yuan_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = spe_yuan_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = spe_yuan_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = spe_yuan_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = spe_yuan_currency_law_list_ordered_1
+					if = { limit = { has_modifier = spe_yuan_leading_currency_type } remove_modifier = spe_yuan_leading_currency_type }
+					add_modifier = {
+						name = spe_yuan_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = spe_yuan_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:spe_yuan
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = spe_yuan_leading_currency_type } remove_modifier = spe_yuan_leading_currency_type }
+		}
+	}
+}
+#spe_zloti
+spe_zloti_currency_law_list = {
+	clear_variable_list = spe_zloti_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:spe_zloti
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = spe_zloti_leading_currency_type } remove_modifier = spe_zloti_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = spe_zloti_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = spe_zloti_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = spe_zloti_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = spe_zloti_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = spe_zloti_currency_law_list_ordered_1
+					if = { limit = { has_modifier = spe_zloti_leading_currency_type } remove_modifier = spe_zloti_leading_currency_type }
+					add_modifier = {
+						name = spe_zloti_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = spe_zloti_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:spe_zloti
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = spe_zloti_leading_currency_type } remove_modifier = spe_zloti_leading_currency_type }
+		}
+	}
+}
+#thaler_hannoveraner_thaler
+thaler_hannoveraner_thaler_currency_law_list = {
+	clear_variable_list = thaler_hannoveraner_thaler_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:thaler_hannoveraner_thaler
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = thaler_hannoveraner_thaler_leading_currency_type } remove_modifier = thaler_hannoveraner_thaler_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = thaler_hannoveraner_thaler_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = thaler_hannoveraner_thaler_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = thaler_hannoveraner_thaler_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = thaler_hannoveraner_thaler_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = thaler_hannoveraner_thaler_currency_law_list_ordered_1
+					if = { limit = { has_modifier = thaler_hannoveraner_thaler_leading_currency_type } remove_modifier = thaler_hannoveraner_thaler_leading_currency_type }
+					add_modifier = {
+						name = thaler_hannoveraner_thaler_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = thaler_hannoveraner_thaler_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:thaler_hannoveraner_thaler
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = thaler_hannoveraner_thaler_leading_currency_type } remove_modifier = thaler_hannoveraner_thaler_leading_currency_type }
+		}
+	}
+}
+#thaler_prussian_thaler
+thaler_prussian_thaler_currency_law_list = {
+	clear_variable_list = thaler_prussian_thaler_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:thaler_prussian_thaler
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = thaler_prussian_thaler_leading_currency_type } remove_modifier = thaler_prussian_thaler_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = thaler_prussian_thaler_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = thaler_prussian_thaler_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = thaler_prussian_thaler_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = thaler_prussian_thaler_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = thaler_prussian_thaler_currency_law_list_ordered_1
+					if = { limit = { has_modifier = thaler_prussian_thaler_leading_currency_type } remove_modifier = thaler_prussian_thaler_leading_currency_type }
+					add_modifier = {
+						name = thaler_prussian_thaler_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = thaler_prussian_thaler_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:thaler_prussian_thaler
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = thaler_prussian_thaler_leading_currency_type } remove_modifier = thaler_prussian_thaler_leading_currency_type }
+		}
+	}
+}
+#thaler_saxon_thaler
+thaler_saxon_thaler_currency_law_list = {
+	clear_variable_list = thaler_saxon_thaler_currency_law_list
+	every_country = {
+		limit = {
+			var:zz_ef_cur ?= flag:thaler_saxon_thaler
+			has_central_bank_SS_BS_GS_GES_NISO = yes
+			market_owner_is_root_univ_with_buiding = no
+		}
+		if = { limit = { has_modifier = thaler_saxon_thaler_leading_currency_type } remove_modifier = thaler_saxon_thaler_leading_currency_type }
+		if = {
+			limit = { exists = root }
+			root = {
+				add_to_variable_list = {
+					name = thaler_saxon_thaler_currency_law_list
+					target = prev
+				}
+			}
+		}
+	}
+	if = {
+		limit = { exists = root }
+		root  = {
+			if = {
+				clear_variable_list = list_before_order
+				every_in_list = {
+					variable = thaler_saxon_thaler_currency_law_list
+					root = {
+						add_to_variable_list = {
+							name = list_before_order
+							target = prev
+						}
+					}
+				}
+				clear_global_variable_list = thaler_saxon_thaler_currency_law_list_ordered_1
+				if = {
+					ordered_in_list = {
+						variable = list_before_order
+						order_by = national_capacity_in_gold
+						max = 1
+						check_range_bounds = no
+						root = {
+							add_to_global_variable_list = {
+								name = thaler_saxon_thaler_currency_law_list_ordered_1
+								target = prev
+							}
+						}
+					}
+				}
+				every_in_global_list = {
+					variable = thaler_saxon_thaler_currency_law_list_ordered_1
+					if = { limit = { has_modifier = thaler_saxon_thaler_leading_currency_type } remove_modifier = thaler_saxon_thaler_leading_currency_type }
+					add_modifier = {
+						name = thaler_saxon_thaler_leading_currency_type
+					}
+				}
+			}
+			#clear_variable_list = thaler_saxon_thaler_currency_list
+		}
+	}
+	if = {
+		every_country = {
+			limit = {
+				var:zz_ef_cur ?= flag:thaler_saxon_thaler
+				market_owner_is_root_univ_with_buiding = yes
+			}
+			if = { limit = { has_modifier = thaler_saxon_thaler_leading_currency_type } remove_modifier = thaler_saxon_thaler_leading_currency_type }
+		}
+	}
+}

@@ -35,3 +35,13 @@ zz_ef_reference_candidate = {
 zz_ef_has_currency_value = {
 	NOT = { has_law = law_type:law_no_monetary_system }
 }
+
+# The leader of its currency (Д.R8в.21): a country that issues its money -- a central bank on a standard (E&F's
+# has_central_bank_SS_BS_GS_GES_NISO), not tied to a foreign currency by its bank (market_owner_is_root_univ_with_buiding),
+# not a currency union's follower (its head leads). Read by E&F's world average (money_value_median) and the value of an
+# E&F currency (money_value_<cur>_global_var -- the leader with the most capacity among those with the currency).
+zz_ef_cur_leader = {
+	has_central_bank_SS_BS_GS_GES_NISO = yes
+	market_owner_is_root_univ_with_buiding = no
+	NOT = { zz_ef_mu_follower = yes }
+}

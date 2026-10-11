@@ -41,7 +41,7 @@
 | механизм | статус | где | доказательство | интерфейс |
 | --- | --- | --- | --- | --- |
 | Флаг-модификатор monetary_systeme_transition (блокирует переход E&F на другой стандарт) | живой | 01_economic_scripted_effects.txt:10024, 27863; 0_ef_economic_event.23 | ставится на 12 мес. после смены закона стандарта, на 120 мес. событием союза; читается условиями законов стандарта (01_ef_monetary_system.txt:64,98,163) и эффектами перехода E&F | модификатор страны |
-| Валюта-эталон по E&F: money_value_median, weighted_average_currency_value(_test), is_reference_type | дубль | common/script_values/01_economic_currency_scripted_value.txt:1,8,7788; common/script_values/ld_reference_currency_values.txt:14 | «эталон» и «сила» теперь по zz_ef_currency_strength; медиана E&F осталась запасным путём в zz_ef_value_to_parity и в is_reference_currency | — |
+| Средняя валюта E&F: money_value_median = weighted_average_currency_value (среднее по лидерам валют `zz_ef_cur_leader`, Д.R8в.21), is_reference_type | живой | common/script_values/ld_reference_currency_values.txt; common/scripted_triggers/ld_reference_currency_triggers.txt | «эталон» и «сила» — по zz_ef_currency_strength; медиана — цели девальвации/ревальвации E&F и is_reference_currency | — |
 | Законы денежной системы (серебро/би/золото/золотодевиз/фиат/внешний) | живой | common/laws/01_ef_monetary_system.txt:1-251 | on_activate зовёт on_activate_monetary_system_law (01_economic_scripted_effects.txt:27577) | окно законов |
 | Валюта-товар money_value_<cur>, money_value_in_gold_<cur>, currency_of_player_is_<cur> (93 шт., script_values) | живой | common/script_values/01_economic_currency_scripted_value.txt:2800-4900 | refs 238 для money_value_<cur>; currency_of_player_is_<cur> — script_value поверх global_var, не триггер; переменные заданы в 00_ef_economic_global_variable.txt:31568 | — |
 | Цепочка money_supply_state / stockpiling_<cur>_state (деньги в обороте по законам валют) | живой | common/script_values/01_economic_currency_scripted_value.txt:8476, 14361 | money_supply_state refs=109, stockpiling_<cur>_state refs=51 | карточки денег, биржа валют |
@@ -249,7 +249,7 @@
 | Сообщения E&F | живой | common/messages/00_ef_messages.txt | 15 событийных (-1) + `ai_*_bond_maturity_*` (`your_currency_are_buy/sell_message` не постились — `_archive/ef_dead_vars/`) | лента сообщений |
 | Правила игры `unique_companies_banks`/`_newspapers` (TRY_REPLACE, по умолчанию disabled) | живой | common/game_rules/00_EF_unique_companies_game_rules.txt:1-19 | TRY_REPLACE ванильных правил; флаги `banks_disabled`/`newspapers_disabled` читают ванильные компании-банки и газеты (E&F по умолчанию их выключает — свои банки); кодом мода не читаются | настройки игры |
 | Дефайны E&F `NEconomy` (PRICE_RANGE 0.99 и др.), `REINVESTMENT_SUBSISTENCE_FRACTION_REDUCTION`, `COUNTRY_MIN_CREDIT_SCALED` | живой | common/defines/00_ef_defines.txt:10-30; zz_ef_reinvestment_defines.txt; zzzz_ef_credit_def.txt | дефайны читает движок | — |
-| `list`-эффекты `*_variable_list`, `<cur>_currency_law_list`, `<cur>_c_global_variable_list` | живой | common/scripted_effects/08_list_effect.txt | `currency_law_list`, `national_capacity_variable_list` и др. зовутся годовым пульсом/месячной ветвью | таблицы рейтингов E&F (scripted_guis) |
+| `list`-эффекты `*_variable_list`, `<cur>_c_global_variable_list` | живой | common/scripted_effects/08_list_effect.txt | `national_capacity_variable_list` и др. зовутся годовым пульсом/месячной ветвью | таблицы рейтингов E&F (scripted_guis) |
 
 ## Интерфейс (`interface.md`)
 

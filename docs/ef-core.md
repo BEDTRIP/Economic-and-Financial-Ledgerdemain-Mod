@@ -68,7 +68,7 @@
 - `common/scripted_effects/01_economic_scripted_effects.txt` — 100 тыс. строк, 36 эффектов (оглавление ниже).
 - `common/scripted_effects/08_list_effect.txt` — 373 эффекта-построителя списков: `*_variable_list` рейтингов/ВВП/долгов
   (для GUI таблиц), `central_bank_debt_buyer_list_N_clear`, `central_bank_debt_privat_bank_buyer_list_N_clear` (25),
-  `<cur>_currency_law_list` и `<cur>_c_global_variable_list` (по 95 валютам), `com_topbar_save_game_compatibility_EF`.
+  `<cur>_c_global_variable_list` (по 95 валютам; списки лидеров валют — в архиве, `zz_ef_cur_leader`), `com_topbar_save_game_compatibility_EF`.
 - `common/script_values/00_economic_scripted_value.txt` — 486 значений: `money_value`, `bimetallic_rate_gold_to_silver`,
   `central_bank_overlord_currency_purchases` (1333 строки), инфляция, цели девальвации/ревальвации.
 - `common/scripted_triggers/00_ef_custom_trigger.txt` — 665 триггеров: `has_central_bank_*`, `is_valid_country_*`,
