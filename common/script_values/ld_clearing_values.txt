@@ -1,8 +1,13 @@
 ﻿# The clearing of payments with abroad (scripted_effects/ld_clearing.txt; Д.R8в.4, Д.R8в.11). docs/clearing-fx.md.
 
-# Д.R8в.11: the share of a payment in the payer's own money -- 1 - the metal share by trust in its currency, its strength
-# against the reference (zz_ef_currency_strength): metal 100 % under 0.75, 30 % at 1.25 and over, linear between; the
-# reference's money is taken abroad most readily -- 15 %.
+# Д.R8в.29: the share of a payment not in the payer's money (metal to a metal standard, else the receiver's money) is a
+# balance of two wishes, weighted by the strength of the two currencies (zz_ef_clr_pair):
+#   the receiver's demand -- by its trust in the payer's money, the payer's strength against the reference
+#   (zz_ef_currency_strength): 100 % under 0.75, 30 % at 1.25 and over, linear between, the reference's money 15 %
+#   (zz_ef_clr_metal_share, payer scope); a metal standard's CB under its cover target wants more of it
+#   (zz_ef_clr_recv_boost);
+#   the payer's offer -- by its cover (zz_ef_clr_cover_keep);
+#   share = demand x w + offer x (1 - w), w = the receiver's strength / the sum of both.
 zz_ef_clr_metal_share_low = 0.75
 zz_ef_clr_metal_share_high = 1.25
 zz_ef_clr_metal_share_min = 0.3
@@ -26,12 +31,9 @@ zz_ef_clr_metal_share = {
 		limit = { has_modifier = global_monetary_reference }
 		value = zz_ef_clr_metal_share_ref
 	}
-	# the payer keeps its metal as its cover falls (Д.R8в.28): x zz_ef_clr_cover_keep
-	multiply = zz_ef_clr_cover_keep
 }
-# Д.R8в.28: how much of the metal share a CB on a metal standard still pays by its cover -- all at the target
-# (zz_ef_cover_normal) and over, nothing at half of it, linear between; the rest of the payment -- a claim on it. No CB
-# (the banks' metal) -- all.
+# Payer scope: how much it is willing to pay other than its money, by its cover (Д.R8в.28) -- all at the target
+# (zz_ef_cover_normal) and over, nothing at half of it, linear between. No CB (the banks' metal) -- all.
 zz_ef_clr_cover_keep = {
 	value = 1
 	if = {
@@ -43,9 +45,29 @@ zz_ef_clr_cover_keep = {
 		max = 1
 	}
 }
+# Receiver scope: its demand for metal x this -- a CB on a metal standard under its cover target wants more (x2 at a
+# cover of 0); else 1.
+zz_ef_clr_recv_boost = {
+	value = 1
+	if = {
+		limit = {
+			zz_ef_clr_cb_ok = yes
+			zz_ef_clr_wants_metal = yes
+			zz_ef_cb_cover < zz_ef_cover_normal
+		}
+		value = zz_ef_cover_normal
+		subtract = zz_ef_cb_cover
+		divide = zz_ef_cover_normal
+		add = 1
+	}
+}
+# Payer scope, the payer's own view for the log (EFX share): its trust curve x its offer
 zz_ef_clr_own_share = {
 	value = 1
-	subtract = zz_ef_clr_metal_share
+	subtract = {
+		value = zz_ef_clr_metal_share
+		multiply = zz_ef_clr_cover_keep
+	}
 }
 # Gold a unit of the scope country's money pays / claims abroad: its money against the parity (zz_ef_clr_gpm_own); no
 # money of its own -- the world's average, weighted by GDP (zz_ef_world_acc).

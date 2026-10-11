@@ -26,7 +26,6 @@ zz_ef_clr_step = {
 	if = {
 		limit = { zz_ef_clr_gpm_own > 0 }
 		set_variable = { name = zz_ef_clr_gpm value = zz_ef_clr_gpm_own }
-		set_variable = { name = zz_ef_clr_n value = zz_ef_clr_own_share }
 		if = {
 			limit = { NOT = { has_variable = zz_ef_clr_pos } }
 			set_variable = { name = zz_ef_clr_pos value = 0 }
@@ -419,12 +418,62 @@ zz_ef_clr_settle = {
 # ---- a payment -------------------------------------------------------------------------------------------------------
 
 # PAYER scope (scope:zz_ef_clr_p), scope:zz_ef_clr_r -- the receiver; var:zz_ef_clr_a -- the payment, gold. The set
-# (Д.R8в.11): n in the payer's money; the rest -- metal to a metal standard, the receiver's money out of the payer's
+# (Д.R8в.11, Д.R8в.29): n in the payer's money, n -- the balance of the receiver's demand and the payer's offer; the rest -- metal to a metal standard, the receiver's money out of the payer's
 # reserves, the week's debt.
 zz_ef_clr_pair = {
 	zz_ef_clr_acc = { N = paid V = var:zz_ef_clr_a }
 	scope:zz_ef_clr_r = { zz_ef_clr_acc = { N = got V = scope:zz_ef_clr_p.var:zz_ef_clr_a } }
-	set_variable = { name = zz_ef_clr_x value = { value = var:zz_ef_clr_a multiply = var:zz_ef_clr_n } }
+	# the balance of the receiver's demand and the payer's offer, weighted by the two currencies' strength (Д.R8в.29)
+	set_variable = { name = zz_ef_clr_dm value = zz_ef_clr_metal_share }
+	set_variable = { name = zz_ef_clr_sp value = { value = zz_ef_currency_strength min = 0.01 } }
+	scope:zz_ef_clr_r = {
+		set_variable = { name = zz_ef_clr_t_boost value = zz_ef_clr_recv_boost }
+		set_variable = { name = zz_ef_clr_t_sr value = { value = zz_ef_currency_strength min = 0.01 } }
+	}
+	change_variable = { name = zz_ef_clr_dm multiply = scope:zz_ef_clr_r.var:zz_ef_clr_t_boost }
+	clamp_variable = { name = zz_ef_clr_dm max = 1 }
+	set_variable = {
+		name = zz_ef_clr_w
+		value = {
+			value = scope:zz_ef_clr_r.var:zz_ef_clr_t_sr
+			divide = {
+				value = scope:zz_ef_clr_r.var:zz_ef_clr_t_sr
+				add = var:zz_ef_clr_sp
+			}
+		}
+	}
+	set_variable = {
+		name = zz_ef_clr_m
+		value = {
+			value = zz_ef_clr_cover_keep
+			multiply = {
+				value = 1
+				subtract = var:zz_ef_clr_w
+			}
+			add = {
+				value = var:zz_ef_clr_dm
+				multiply = var:zz_ef_clr_w
+			}
+			min = 0
+			max = 1
+		}
+	}
+	set_variable = {
+		name = zz_ef_clr_x
+		value = {
+			value = 1
+			subtract = var:zz_ef_clr_m
+			multiply = var:zz_ef_clr_a
+		}
+	}
+	scope:zz_ef_clr_r = {
+		remove_variable = zz_ef_clr_t_boost
+		remove_variable = zz_ef_clr_t_sr
+	}
+	remove_variable = zz_ef_clr_dm
+	remove_variable = zz_ef_clr_sp
+	remove_variable = zz_ef_clr_w
+	remove_variable = zz_ef_clr_m
 	# between members of a currency union -- the one money, as inside a country (Д.R8в.5)
 	if = {
 		limit = {
