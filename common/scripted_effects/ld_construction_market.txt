@@ -84,9 +84,10 @@ zz_ef_reg_input_set = {
 	}
 	add_modifier = {
 		name = zz_ef_reg_in_$G$
+		# the state's variable through the link: a script value of the state inside a scope block reads an empty scope
 		multiplier = {
-			value = -1
-			state = { add = zz_ef_reg_s_$G$_v }
+			value = state.var:zz_ef_reg_s_$G$
+			subtract = 1
 		}
 	}
 }
