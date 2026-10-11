@@ -112,6 +112,8 @@ set_construction_point_demand = {
             value = 0
         }
         every_scope_state = {
+            # the regulator's mix first: the weights and the allocation read the same base price (Д.R8в.27)
+            zz_ef_reg_market_step = yes
             save_temporary_scope_value_as = {
                 name = temp_production
                 value = sum_construction_types_production
@@ -133,9 +135,10 @@ set_construction_point_demand = {
             owner = {
                 change_variable = {
                     name = weighted_total
+                    # by the value of the state's output (Д.R8в.27)
                     add = {
                         value = scope:temp_production
-                        divide = scope:state_base_price
+                        multiply = scope:state_base_price
                     }
                 }
             }
@@ -204,10 +207,10 @@ set_construction_point_demand = {
             max = 1000
             check_range_bounds = no
             set_construction_regulator_level = yes
-            # what the regulator buys and the price it counts by (Д.R8в.24)
+            # the regulator's input of each good by the mix (Д.R8в.24)
             if = {
                 limit = { has_building = building_construction_regulator }
-                zz_ef_reg_market_step = yes
+                zz_ef_reg_inputs_set = yes
             }
 
             set_local_variable = {
@@ -254,9 +257,14 @@ set_construction_point_demand = {
                 set_local_variable = {
                     name = modifier_mult
                     value = {
+                        # per staffed level: the regulator's input and points scale with its workforce (Д.R8в.27)
                         value = local_var:state_construction
                         divide = {
                             value = level
+                            multiply = {
+                                value = occupancy
+                                min = zz_ef_reg_occupancy_floor
+                            }
                             min = 1
                         }
                         subtract = 1
@@ -289,35 +297,8 @@ set_construction_regulator_level = {
         name = regulator_level
         value = construction_regulator_level
     }
-    if = {
-        limit = {
-                state_has_building_type_levels = {
-                    target = bt:building_construction_regulator
-                    value > local_var:regulator_level
-                }
-        }
-        if = {
-            limit = {
-                OR = {
-                    NOT = {
-                        has_variable = week_count
-                    }
-                    var:week_count >= 4  
-                }
-            }
-            remove_building = "building_construction_regulator"
-            set_variable = {
-                name = week_count
-                value = 0
-            }
-        }
-        else = {
-            change_variable = {
-                name = week_count
-                add = 1
-            }
-        }
-    }
+    # the regulator only grows: removed it came back empty and took weeks to hire (Д.R8в.27); its spare levels are
+    # covered by the throughput, which counts per staffed level
     if = {
         limit = {
             state_has_building_type_levels = {

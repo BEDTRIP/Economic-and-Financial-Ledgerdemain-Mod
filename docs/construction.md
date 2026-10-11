@@ -1,7 +1,7 @@
 # Стройка (PSC + E&F private construction + лимит секторов)
 **Смысл.** Стройка — PSC внутри форка: частный сектор и казна платят за строительные товары, частная стройка — кредит
 банков из пула, рычаг — ставка. **Понятия:** [[Строительство|Стройка]], [[Инвестиционный пул|Пул]], [[Ставка ЦБ]],
-[[Рычаги на движок]]. **Решения:** Д.R3.7, Д.R2.13, Д.Г.6, Д.Г.7, Д.R8в.24 (`решения.md`).
+[[Рычаги на движок]]. **Решения:** Д.R3.7, Д.R2.13, Д.Г.6, Д.Г.7, Д.R8в.24, Д.R8в.26, Д.R8в.27 (`решения.md`).
 
 Частный сектор строит через здание `building_construction_sector` (PSC), казна платит остаток через регулятор очков
 `building_construction_regulator`: он покупает все четыре стройматериала по местной цене штата (10 единиц любого —
@@ -57,11 +57,12 @@
   `common/static_modifiers/ld_construction_market_modifiers.txt`,
   `common/modifier_type_definitions/ld_construction_market_modifier_types.txt` (типы
   `goods_input_<товар>_construction_mult` — у модовых товаров движок их не создаёт) — закупка регулятора по рынку
-  (Д.R8в.24): `zz_ef_reg_market_step` (штат, раз в неделю в цикле PSC после уровня регулятора): местная цена товара
+  (Д.R8в.24): `zz_ef_reg_market_step` (штат, раз в неделю первым в цикле PSC, до весов штатов): местная цена товара
   `zz_ef_reg_p_<товар>` = база × (1 + `state_goods_pricier`), предложение `zz_ef_reg_supply_<товар>` = заявки на продажу
   рынка штата, вес = предложение × (`zz_ef_reg_pmin` / цена)², доли `var:zz_ef_reg_s_<товар>` идут к весам шагом
   `zz_ef_reg_step` = 0,5 (без предложения — всё древесные), модификатор `zz_ef_reg_in_<товар>` на регуляторе × (доля −
-  1); базовая цена смеси `zz_ef_reg_base_mix` — для модели цены PSC.
+  1) ставит `zz_ef_reg_inputs_set` (после уровня регулятора); базовая цена смеси `zz_ef_reg_base_mix` — для модели цены
+  PSC.
 - `common/script_values/ld_psc_private_allocation.txt` — REPLACE `private_construction_increase` (цель
   `zz_ef_psc_private_target`: доход + простаивающий пул + ставка).
 - `common/script_values/ld_pb_overbuild_values.txt` — лимит и перестройка: `zz_pb_ef_css_levels`,
@@ -122,22 +123,25 @@
    `urbanization`):
    - снимает старый модификатор `country_private_construction_allocation_add`;
    - `privatisation_percent_estimate` (сглаживание по `privatisation_percent_weeks`), обнуляет
-     `national_production`/`weighted_total`, по штатам суммирует производство `*_construction`
-     (`sum_construction_types_production`);
+     `national_production`/`weighted_total`, по штатам — доли закупки регулятора (`zz_ef_reg_market_step`), затем
+     производство `*_construction` (`sum_construction_types_production`) и вес штата — производство × базовая цена смеси
+     (Д.R8в.27);
    - `corrected_private_allocation` -> `max_government_construction_spending` -> `check_construction_spending_level`
      (игрок 0.25 по умолчанию; ИИ = `ai_construction_demand` / макс) -> `limited_government_construction_spending`;
    - `private_construction_increase` (в форке = `zz_ef_psc_private_target - corrected_private_allocation`) кладётся
      модификатором `country_private_construction_allocation_add`;
    - `total_construction_spending` и по штатам в порядке `construction_ordering` (`ordered_scope_state`: `min = 0`,
-     `max = 1000`, `check_range_bounds = no` — все штаты): `set_construction_regulator_level` (подгон уровня регулятора,
-     `week_count` 4), `zz_ef_reg_market_step` (доли и цена закупки), `state_construction_spending_allocation` (доля
-     штата, не больше остатка трат страны `var:psc_remaining_construction_spending` — переменная страны, уменьшается
-     после каждого штата и снимается после цикла), `set_state_construction_efficiency` (модификатор на сектор),
-     `state_construction_allocation` -> `construction_throughput_mult` на регуляторе;
+     `max = 1000`, `check_range_bounds = no` — все штаты): `set_construction_regulator_level` (регулятор только растёт
+     до уровня сектора, Д.R8в.27), `zz_ef_reg_inputs_set` (вход по долям), `state_construction_spending_allocation`
+     (доля штата по стоимости выпуска, не ниже 0; в штате без выпуска — не больше остатка трат страны
+     `var:psc_remaining_construction_spending` — переменная страны, уменьшается после каждого штата и снимается после
+     цикла), `set_state_construction_efficiency` (модификатор на сектор), `state_construction_allocation` ->
+     `construction_throughput_mult` на регуляторе (очки на укомплектованный уровень: делится на уровень × занятость, не
+     меньше `zz_ef_reg_occupancy_floor` = 0,1; Д.R8в.27);
    - `prev_estimated_investment_pool = investment_pool + investment_pool_net_income`.
 4. `set_spending_value` (только игрок) -> `set_government_construction_spending`.
-5. Закупка регулятора (в шаге 3, по штатам после `set_construction_regulator_level`): `zz_ef_reg_market_step` — доли
-   четырёх стройтоваров (`ld_construction_market.txt`); очки штата — модель цены PSC по базовой цене смеси.
+5. Закупка регулятора (в шаге 3): доли четырёх стройтоваров — `zz_ef_reg_market_step`, вход регулятора —
+   `zz_ef_reg_inputs_set` (`ld_construction_market.txt`); очки штата — модель цены PSC по базовой цене смеси.
 6. `on_monthly_pulse_country`: `zz_pb_ef_overbuild_counter` (месяц: `speculative_share_2` += шаг к цели
    `zz_pb_ef_overcap_target`, модификатор `zz_pb_ef_overbuilt_economy` x значение, уведомление, бар
    `financial_center_je_2`) и `zz_pb_ef_ai_sector_downsize` (ИИ; раз в 3 месяца: если `speculative_share_2 >= 10` и
@@ -156,7 +160,6 @@
 | `corrected_private_allocation`, `prev_construction_allocation`, `weekly_income_multiplier` | поправка долей | `set_construction_point_demand` | `private_construction_increase`, `calculate_max_government_construction_spending` |
 | `national_production`, `weighted_total`, `state_construction_production` | производство стройтоваров (страна/штат) | `set_construction_point_demand` | аллокации |
 | `zz_ef_reg_s_wood/iron/steel/arc` (штат) | доли стройтоваров в закупке регулятора | `zz_ef_reg_market_step` | модификаторы `zz_ef_reg_in_<товар>`, `zz_ef_reg_base_mix` (базовая цена смеси) |
-| `week_count` (штат) | счётчик сноса лишнего регулятора | `set_construction_regulator_level` | оно же |
 | `speculative_share_2` | штраф перестройки 0..100 (общая с E&F-кнопками/журналом) | `zz_pb_ef_overbuild_counter`, кнопки 9..12 | downsize, ban-кнопки, `speculative_share_2_penality`, JE-бар |
 | `zz_pb_ef_ob_old` | прошлое значение | counter | counter |
 | `zz_pb_ef_stimulus_mult` (таймер 1080 дн.) | множитель ставки в лимите вместо 5 | `speculative_share_9..12_button` | `zz_pb_ef_css_rate_mult` |

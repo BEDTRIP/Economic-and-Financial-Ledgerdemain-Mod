@@ -118,3 +118,7 @@ zz_ef_reg_base_mix = {
 	add = { value = zz_ef_reg_s_arc_v multiply = arc_welded_construction_good_base_price }
 	min = 1
 }
+
+# The regulator's staffing counted at least this in its throughput (PSC_scripted_effects.txt): an empty regulator does
+# not get a throughput of thousands for the week its workers come
+zz_ef_reg_occupancy_floor = 0.1

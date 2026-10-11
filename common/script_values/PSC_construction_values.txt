@@ -87,8 +87,9 @@ state_construction_spending_allocation = {
 		max = owner.var:psc_remaining_construction_spending
 	}
 	else = {
+		# by the value of the state's output, as the weights (Д.R8в.27)
 		multiply = var:state_construction_production
-		divide = local_var:state_construction_base_price
+		multiply = local_var:state_construction_base_price
 
 		# demand only a limited amount more than is possible in this state
 		max = {
@@ -119,6 +120,8 @@ state_construction_spending_allocation = {
 			}
 		}
 	}
+	# the rest of the country's spending can run below 0 after the states before: no negative spending (Д.R8в.27)
+	min = 0
 }
 
 construction_ordering = {
