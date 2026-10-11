@@ -103,11 +103,12 @@ zz_ef_reconcile = {
 		set_variable = { name = zz_ef_other value = 0 }
 	}
 	set_variable = { name = zz_ef_other_prev value = var:zz_ef_other }
-	# steps 10 and 12: the engine's privatization of building levels (250 x the
-	# level's construction points, a multiple of zz_ef_lvl_unit) -- the pool pays, a state seller's treasury gets it; the
-	# script has no hook. A step's change of the pool's part within zz_ef_lvl_tolerance of a whole negative multiple of the
-	# unit: the multiple is this line, not «прочее» (zz_ef_lvl_buy_pool, summed), the rest stays «прочее»; the treasury's
-	# multiples -- zz_ef_lvl_buy_tr: positive -- the state sold levels, negative -- the state bought them (nationalization).
+	# the engine's privatization of building levels (250 x the level's construction points, a multiple of
+	# zz_ef_lvl_unit) -- the pool pays, a state seller's treasury gets it; the script has no hook. A step's change of the
+	# pool's part within zz_ef_lvl_tolerance of a whole negative multiple of the unit: the multiple is this line, not
+	# «прочее» (zz_ef_lvl_buy_pool, summed), the rest stays «прочее»; the treasury's multiples -- zz_ef_lvl_buy_tr:
+	# positive -- the state sold levels (our pool bought them, if its own week missed the unit), negative -- the state
+	# bought them (nationalization).
 	if = { limit = { NOT = { has_variable = zz_ef_lvl_buy_pool } } set_variable = { name = zz_ef_lvl_buy_pool value = 0 } }
 	if = { limit = { NOT = { has_variable = zz_ef_lvl_buy_tr } } set_variable = { name = zz_ef_lvl_buy_tr value = 0 } }
 	set_variable = { name = zz_ef_f_lvl_buy_pool value = 0 }
@@ -155,6 +156,14 @@ zz_ef_reconcile = {
 			set_variable = { name = zz_ef_f_lvl_buy_tr value = { value = zz_ef_lvl_mult_v multiply = -1 } }
 			change_variable = { name = zz_ef_lvl_buy_tr add = var:zz_ef_f_lvl_buy_tr }
 			change_variable = { name = zz_ef_f_other_tr subtract = var:zz_ef_f_lvl_buy_tr }
+			# the buyer is our pool (the engine privatizes to the country's investors): the same amount out of the pool's
+			# part, when the pool's own week was off the unit by the other moves of the week
+			if = {
+				limit = { var:zz_ef_f_lvl_buy_pool = 0 }
+				set_variable = { name = zz_ef_f_lvl_buy_pool value = { value = var:zz_ef_f_lvl_buy_tr multiply = -1 } }
+				change_variable = { name = zz_ef_lvl_buy_pool add = var:zz_ef_f_lvl_buy_pool }
+				change_variable = { name = zz_ef_other_pool subtract = var:zz_ef_f_lvl_buy_pool }
+			}
 		}
 		# the state as the buyer (the engine's nationalization: the treasury pays a multiple of the unit)
 		else_if = {

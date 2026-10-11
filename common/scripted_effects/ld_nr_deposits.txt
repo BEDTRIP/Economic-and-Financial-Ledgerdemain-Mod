@@ -9,8 +9,8 @@
 #   * as an issuer: the holders' interest credited since our last step out of the banks' capital (var:zz_ef_f_nr_int);
 #     our weekly rate for the holders (var:zz_ef_rq_rate_w);
 #   * every country: the clearing's posting -- our money paid out (var:zz_ef_f_clr_cur_out) less the one redeemed
-#     (var:zz_ef_f_clr_own_back): money the engine already took for the imports, into / out of the pool as deposits
-#     (var:zz_ef_f_nr_dep, at most the pool on the way out);
+#     (var:zz_ef_f_clr_own_back), and the exchange's deals in our money (var:zz_ef_xch_nr_acc): money the engine already
+#     took for the imports, into / out of the pool as deposits (var:zz_ef_f_nr_dep, at most the pool on the way out);
 #   * the holders spend our money on our goods (Д2.33): an export advantage by our money held abroad.
 zz_ef_nr_dep_step = {
 	set_variable = { name = zz_ef_f_nr_dep value = 0 }
@@ -49,6 +49,12 @@ zz_ef_nr_dep_step = {
 		limit = { has_variable = zz_ef_model_started }
 		if = { limit = { has_variable = zz_ef_f_clr_cur_out } change_variable = { name = zz_ef_f_nr_dep add = var:zz_ef_f_clr_cur_out } }
 		if = { limit = { has_variable = zz_ef_f_clr_own_back } change_variable = { name = zz_ef_f_nr_dep subtract = var:zz_ef_f_clr_own_back } }
+		# the exchange's deals in our money since our last step (zz_ef_xch_nr_after_m)
+		if = {
+			limit = { has_variable = zz_ef_xch_nr_acc }
+			change_variable = { name = zz_ef_f_nr_dep add = var:zz_ef_xch_nr_acc }
+			remove_variable = zz_ef_xch_nr_acc
+		}
 		if = {
 			limit = { var:zz_ef_f_nr_dep < 0 }
 			set_variable = {

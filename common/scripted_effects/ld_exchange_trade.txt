@@ -955,6 +955,7 @@ zz_ef_xch_settle_cheap_m = {
 # the pool of its country); a side abroad -- a flow abroad of both.
 zz_ef_xch_deal = {
 	save_temporary_scope_as = zz_ef_xo_h
+	zz_ef_xch_nr_before_$K$ = yes
 	# the fund sells: out of its stock first (it may hold less)
 	if = {
 		limit = {
@@ -1093,7 +1094,25 @@ zz_ef_xch_deal = {
 			zz_ef_xch_deal_count = yes
 		}
 	}
+	zz_ef_xch_nr_after_$K$ = yes
 }
+# Holder scope, around a deal: the change of the claims on the debtor's money held abroad (var:zz_ef_rq_out_m) the deal
+# made -- sold to its CB at a currency point, to its residents at the auction, between the exchanges -- is the
+# non-residents' deposits leaving (-) / entering (+) its pool, posted at its step with the clearing's
+# (var:zz_ef_xch_nr_acc -> zz_ef_nr_dep_step). Between two holders it is 0. Bonds -- the bond ledger's.
+zz_ef_xch_nr_before_m = {
+	set_variable = { name = zz_ef_xd_om0 value = scope:zz_ef_xch_d.zz_ef_rq_out_m_v }
+}
+zz_ef_xch_nr_after_m = {
+	scope:zz_ef_xch_d = {
+		if = { limit = { NOT = { has_variable = zz_ef_xch_nr_acc } } set_variable = { name = zz_ef_xch_nr_acc value = 0 } }
+		change_variable = { name = zz_ef_xch_nr_acc add = zz_ef_rq_out_m_v }
+		change_variable = { name = zz_ef_xch_nr_acc subtract = scope:zz_ef_xo_h.var:zz_ef_xd_om0 }
+	}
+	remove_variable = zz_ef_xd_om0
+}
+zz_ef_xch_nr_before_b = { }
+zz_ef_xch_nr_after_b = { }
 # Holder scope: the other exchange's fund that bought the cheap rest (money only) -> scope:zz_ef_xd_o
 zz_ef_xch_deal_fund_o_m = { scope:zz_ef_xch_d.var:zz_ef_xcf_m = { save_temporary_scope_as = zz_ef_xd_o } }
 zz_ef_xch_deal_fund_o_b = { }
