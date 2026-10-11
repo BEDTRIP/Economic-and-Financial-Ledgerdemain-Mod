@@ -23,6 +23,8 @@
   зонды.
 - `common/script_values/ld_money_model_values.txt` — все формулы: счета, M0–M3, кредитные лимиты, ставки, платёжный
   баланс, кольца роста (почти все ключи `zz_ef_*`).
+- `common/scripted_triggers/ld_monetary_authority_triggers.txt` — `zz_ef_am_holder`: держит ли страна металл денежной
+  власти (ЦБ); счета `zz_ef_am_*`, `zz_ef_am_init`, недельный `zz_ef_am_sweep` — в `ld_metal_accounts.txt` (Д.R4а.2).
 - `common/scripted_effects/ld_metal_accounts.txt` — старт металла, недельные покупки/продажи ЦБ/банков/населения, выкуп
   у населения, сверка металла ЦБ, мировая линия металла.
 - `common/scripted_triggers/ld_metal_triggers.txt` — `zz_ef_cb_metal_standard` (ЦБ на стандарте с металлом);
@@ -39,13 +41,12 @@
 - `common/scripted_effects/ld_currency_intro.txt` — ввод валюты (`introduction_new_currency`): страна с паритетом
   сохраняет стандарт и паритет, страна на заглушке фиата берёт металлический стандарт и паритет; металла ввод не даёт
   (Д.R8в.7, `docs/currencies.md`).
-- `common/scripted_effects/ld_subject_metal.txt` — `zz_ef_cb_state_owner_step` (металл ушедшего ЦБ-региона возвращается
-  прежнему владельцу); `zz_ef_metal_heir_world` (мировой проход недели `zz_ef_world_week_close`, не шаг страны — страны
-  роли V не шагают: каждая живая страна — в глобальном списке `zz_ef_mh_list` и держит регион своей столицы
-  `var:zz_ef_mh_region` (регион постоянен, штат — нет: аннексия сливает разделённые штаты); счета металла населения и
-  банков страны, которой нет на карте (`is_country_alive = no`, исчезнувшая страна остаётся объектом с переменными), —
-  как есть владельцу штата этого региона, не децентрализованному (Д.R8в.31), у неё обнуляются; пока не забраны, мировая
-  линия считает их по списку; лог `EFM|metal_heir`)
+- `common/scripted_effects/ld_subject_metal.txt` — `zz_ef_metal_heir_world` (мировой проход недели
+  `zz_ef_world_week_close`, не шаг страны — страны роли V не шагают: каждая живая страна — в глобальном списке
+  `zz_ef_mh_list` и держит регион своей столицы `var:zz_ef_mh_region` (регион постоянен, штат — нет: аннексия сливает
+  разделённые штаты); счета металла населения и банков страны, которой нет на карте (`is_country_alive = no`,
+  исчезнувшая страна остаётся объектом с переменными), — как есть владельцу штата этого региона, не децентрализованному
+  (Д.R8в.31), у неё обнуляются; пока не забраны, мировая линия считает их по списку; лог `EFM|metal_heir`)
 - `common/scripted_effects/ld_stockpile_state_var_seed.txt`, `common/on_actions/ld_stockpile_state_var_init.txt`,
   `common/history/global/zz_ef_init_stockpiling_state_vars.txt` — засев 5 переменных `stockpiling_*_var_state_1` и двух
   вспомогательных на регионах (`financial_center_site_var`, `looted_state`); GLOBAL-блок истории (новая кампания),
@@ -79,7 +80,7 @@
 | доли банков в чужих облигациях | `zz_ef_bank_bonds` (= Σ `ai_privat_bank_bond_value_N` E&F) | банки (актив) | покупка E&F `ai_privat_bank_bond_N` (пул → доля), реестр облигаций (`ld_bond_ledger.txt`: возврат лишнего — пул, выкуп — пул, списание и недоплата продавца — из капитала банков) |
 | требования населения | `zz_ef_pop_claims_stocks`, `_bonds`, `_private` | население | по нулям (R6, R7) |
 | позиция клиринга недели | `zz_ef_clr_pos` (золото) | страна | `zz_ef_clr_step`, снимается расчётом `zz_ef_clr_settle` (`clearing-fx.md`) |
-| металл ЦБ / банков / населения | `gold_state_1` / `silver_state_1` штата ЦБ, `zz_ef_bankm_*`, `zz_ef_popm_*` | — | `ld_metal_accounts.txt`; у ЦБ биметаллизма — арбитраж через биржу (`zz_ef_f_mt_arb_g/_s`, `exchange-companies.md`) |
+| металл денежной власти / банков / населения | `zz_ef_am_gold` / `zz_ef_am_silver` (Д.R4а.2), `zz_ef_bankm_*`, `zz_ef_popm_*` | — | `ld_metal_accounts.txt`; у ЦБ биметаллизма — арбитраж через биржу (`zz_ef_f_mt_arb_g/_s`, `exchange-companies.md`) |
 Счета, которых нет, заводит `zz_ef_registry_init` из `zz_ef_country_init` — первый заход планировщика (раз за игру,
 признак `zz_ef_registry`).
 
@@ -203,22 +204,22 @@
    `zz_ef_money_ledger_delta ACC=cb`, цена политики ставки, ставка правительства `zz_ef_gov_rate_step`, `zz_ef_mp_step`,
    модификатор частного строительства).
 3. **Неделя** `zz_ef_money_model_step` (из планировщика): суммы наличных зданий и банков → обновление валютных резервов
-   (`zz_ef_fx_metal_update`, `zz_ef_cbfx_week_step`) → `zz_ef_cb_state_owner_step` → `zz_ef_bond_ledger_step` → паи и
-   вклад инвестиционного фонда (`zz_ef_fund_shares_step`, `zz_ef_fund_week_step`) → биржа: расчёт прошлой недели и
-   заявки (`zz_ef_xch_step`, `exchange-companies.md`) → счётчик недель → старт в балансе (один раз, версия 9: металл
-   населения и стран без ЦБ `zz_ef_metal_start_step` (у страны с ЦБ металл E&F остаётся в ЦБ и при старте ЦБ
-   масштабируется до 40 % M2 — курс по паритету, золото и серебро одним множителем; если металлического стандарта нет 26
-   недель — остаётся как есть) — туда же у стран без металлического стандарта металл E&F вне мест ЦБ, который история
-   пишет в `central_bank_location` до ЦБ (Бавария), штаты — в ноль (на металле его масштабирует старт ЦБ); чужой валюты
-   у ЦБ на старте нет; металл ЦБ = 40 % M2 (оба металла, как их считает покрытие) — `zz_ef_cb_metal_start_step`, сразу
-   после стартовых вкладов (в `zz_ef_bridge_apply` того же шага, и запасным вызовом в следующих шагах), где M2 / ВВП >
-   0,1 и у страны есть штат ЦБ — настройка старта E&F на первом тике строит ЦБ и пишет туда металл, старт его
-   масштабирует) → снимок бюджета → кредит ЦБ банкам (`zz_ef_cb_borrow/repay/interest` в пул и `zz_ef_bank_cb_debt`,
-   проценты в казну) → `zz_ef_consol_step` → `zz_ef_business_credit_step` → **`zz_ef_metal_week_step`** (счета металла,
-   модификаторы зданий на следующую неделю) → кольца истории M0–M3 (w1..4, q1..13, r1..20) → поток ЦБ (переоценка, Юм,
-   запас) → `zz_ef_money_ledger_delta` по каждому счёту → строка `EFW` → окна `zz_ef_money_window_roll` → постановка
-   страны в глобальный список `zz_ef_hook_countries` (у Б — раз в 4 недели, когда номер недели по модулю 4 = фаза
-   `zz_ef_week_phase`, и до первых чисел моста).
+   (`zz_ef_fx_metal_update`, `zz_ef_cbfx_week_step`) → `zz_ef_am_sweep` (металл E&F из штата ЦБ — на счёт страны) →
+   `zz_ef_bond_ledger_step` → паи и вклад инвестиционного фонда (`zz_ef_fund_shares_step`, `zz_ef_fund_week_step`) →
+   биржа: расчёт прошлой недели и заявки (`zz_ef_xch_step`, `exchange-companies.md`) → счётчик недель → старт в балансе
+   (один раз, версия 9: металл населения и стран без ЦБ `zz_ef_metal_start_step` (у страны с ЦБ металл E&F остаётся в ЦБ
+   и при старте ЦБ масштабируется до 40 % M2 — курс по паритету, золото и серебро одним множителем; если металлического
+   стандарта нет 26 недель — остаётся как есть) — туда же у стран без металлического стандарта металл E&F вне мест ЦБ,
+   который история пишет в `central_bank_location` до ЦБ (Бавария), штаты — в ноль (на металле его масштабирует старт
+   ЦБ); чужой валюты у ЦБ на старте нет; металл ЦБ = 40 % M2 (оба металла, как их считает покрытие) —
+   `zz_ef_cb_metal_start_step`, сразу после стартовых вкладов (в `zz_ef_bridge_apply` того же шага, и запасным вызовом в
+   следующих шагах), где M2 / ВВП > 0,1 и у страны есть штат ЦБ — настройка старта E&F на первом тике строит ЦБ и пишет
+   туда металл, старт его масштабирует) → снимок бюджета → кредит ЦБ банкам (`zz_ef_cb_borrow/repay/interest` в пул и
+   `zz_ef_bank_cb_debt`, проценты в казну) → `zz_ef_consol_step` → `zz_ef_business_credit_step` →
+   **`zz_ef_metal_week_step`** (счета металла, модификаторы зданий на следующую неделю) → кольца истории M0–M3 (w1..4,
+   q1..13, r1..20) → поток ЦБ (переоценка, Юм, запас) → `zz_ef_money_ledger_delta` по каждому счёту → строка `EFW` →
+   окна `zz_ef_money_window_roll` → постановка страны в глобальный список `zz_ef_hook_countries` (у Б — раз в 4 недели,
+   когда номер недели по модулю 4 = фаза `zz_ef_week_phase`, и до первых чисел моста).
 4. **Мост GUI — только транспорт** (R1а.8): приёмник `zz_ef_money_hook_receive` (числа `g_*` сначала 0, виджет
    переписывает их своими; из `gui/ld_money_hook.gui` по `trigger_when`, раз на шаг страны — `zz_ef_hook_pending`)
    только пишет числа: `zz_ef_hk_ext`, `zz_ef_hk_abr`, `zz_ef_hk_aint`, `zz_ef_hk_tfees`, `zz_ef_g_*`, неделю получения
@@ -253,7 +254,7 @@
 | `zz_ef_t_led` | временная: значение счёта, посчитанное один раз в `zz_ef_money_ledger_delta` (снимается там же) | `zz_ef_money_ledger_delta` | оно же |
 | `zz_ef_bcash`, `zz_ef_bkcash` | наличные бизнеса и банков за неделю | `zz_ef_money_model_step` | `zz_ef_building_cash`, `zz_ef_agg_m0..m3` |
 | `zz_ef_model_started`, `zz_ef_cb_start_due`, `zz_ef_metal_started` | первый шаг страны сделан (читают вклады нерезидентов, ИИ-политика курса), ЦБ ждёт стартового металла (40 % M2, когда M2 / ВВП > 0,1 и страна — ЦБ на металле: подданный входит в зону сюзерена после первого шага; не на металле полгода — ожидание снимается), флаг первого шага металла | `zz_ef_money_model_step`, `zz_ef_metal_start_step`, `zz_ef_cb_metal_start_step` | правила металла ЦБ (`zz_ef_cb_buy_mult`, `zz_ef_cb_sell_units`, `zz_ef_cb_buyback_units`), ИИ-политика курса (`ld_monetary_policy.txt`), `zz_ef_cur_intro_after` |
-| `gold_state_1`, `silver_state_1` (регион ЦБ с `central_bank_historic_place`) | металл ЦБ (переменные E&F) | `zz_ef_metal_week_step`, `zz_ef_cb_metal_start_step`, `zz_ef_metal_start_step`, `zz_ef_cb_state_owner_step`, `zz_ef_cur_intro_after`; E&F: `introduction_*` | `gold_state_native_for_stockpile`, `central_bank_reserves`, `zz_ef_cbm_gold/silver`, `zz_ef_cb_cover` |
+| `zz_ef_am_gold`, `zz_ef_am_silver` (страна) | металл денежной власти (Д.R4а.2; есть ли держатель — `zz_ef_am_holder`: ЦБ) | `zz_ef_am_sweep` (из `gold_state_1` / `silver_state_1` штата ЦБ, куда пишет E&F), `zz_ef_metal_week_step`, `zz_ef_cb_metal_start_step`, `zz_ef_metal_start_step`, клиринг, биржа (арбитраж биметаллизма), кризисный выкуп, грабёж столицы, наследник | `gold_state_native_for_stockpile`, `central_bank_reserves`, `zz_ef_cbm_gold/silver`, `zz_ef_cb_cover`, `zz_ef_wm_sum_cb_*` |
 | `zz_ef_popm_gold/silver`, `zz_ef_bankm_gold/silver` | металл населения и банков (единицы резерва) | `zz_ef_metal_start_step`, `zz_ef_metal_start_banks`, `zz_ef_metal_week_step` | `zz_ef_popm_money`, `zz_ef_bankm_money`, `zz_ef_wm_sum_*` |
 | `zz_ef_f_mt_<cb_in/cb_out/bank_in/pop_in>_<g/s>`, `zz_ef_f_mt_buyback(_money)`, `zz_ef_f_mt_oth_<g/s>`, `zz_ef_mt_prev_<g/s>`, `zz_ef_mt_start_adj_<g/s>`, `zz_ef_cb_stock_acc` | покупки/продажи недели, выкуп, невязка сверки, снимок, поправка старта, изменение резервов ЦБ | `zz_ef_metal_week_step`, `zz_ef_metal_reconcile`, `zz_ef_metal_start_cb_after` | сверка следующей недели, карточка ЦБ (`zz_ef_v_f_cb_stock`) |
 | `zz_ef_t_cb_in_<g/s>`, `zz_ef_t_bank_in_<g/s>` | временные: вход зданий ЦБ и банков (товары), посчитанный один раз за шаг; из них `zz_ef_f_mt_cb_in/bank_in` и часть населения (потребление штатов − они, не ниже 0; та же формула, что `zz_ef_pop_<gold/silver>_goods`) | `zz_ef_metal_week_step` | он же |
@@ -275,8 +276,7 @@
   `localization/<язык>/replace/ld_money_supply_replace_l_<язык>.yml`, `ld_cb_rate_panel_*`, `ld_monetary_policy_*`;
   `gui/ld_money_hook.gui` — единственный GUI-узел модели (виджет `zz_ef_money_hook`, скрытый, на
   `GetGlobalList('zz_ef_hook_countries')`).
-- Металл ЦБ меняется только покупкой зданием ЦБ (`zz_ef_cb_metal_buy`): раздачи металла E&F из рынка в `gold_state_1`
-  нет.
+- Металл ЦБ меняется только покупкой зданием ЦБ (`zz_ef_cb_metal_buy`): раздачи металла E&F из рынка нет.
 - Ручные операции E&F, меняющие счета мимо недельной записи (попадают в «прочее»/невязку `EFQ`):
   `global_monetary_reference_reset`, `transfer_gold_to_central_bank_metal_reserves`.
 

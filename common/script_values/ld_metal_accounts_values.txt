@@ -1,8 +1,8 @@
 ﻿#############################################
 # Stage 2, night 6.10 -- the metal accounts.
 # Effects: scripted_effects/ld_metal_accounts.txt. Every unit of metal on an account was bought on the market
-# (or is the start's stock, logged as such): the CB (var:gold_state_1 / silver_state_1 of its CB states, E&F's
-# reserves), the banks (var:zz_ef_bankm_gold / _silver, one per country -- by company in Ф3) and the pops
+# (or is the start's stock, logged as such): the CB (the monetary authority's var:zz_ef_am_gold / zz_ef_am_silver,
+# Д.R4а.2), the banks (var:zz_ef_bankm_gold / _silver, one per country -- by company in Ф3) and the pops
 # (var:zz_ef_popm_gold / _silver).
 #
 # Units -- E&F's reserve units. Gold: a good x 100 (gold costs 100: 1 unit = 1 money at the base price). Silver: E&F
@@ -430,11 +430,27 @@ zz_ef_cb_buyback_premium = 1.02
 # system is closed (E&F's own metal operations with its private banks' metal would show here, Д3.5 / Ф3).
 zz_ef_wm_sum_cb_gold = {
 	value = 0
-	every_country = { add = gold_state_native_for_stockpile }
+	every_country = {
+		limit = { is_country_alive = yes }
+		add = gold_state_native_for_stockpile
+	}
+	every_in_global_list = {
+		variable = zz_ef_mh_list
+		limit = { is_country_alive = no }
+		add = gold_state_native_for_stockpile
+	}
 }
 zz_ef_wm_sum_cb_silver = {
 	value = 0
-	every_country = { add = silver_state_native_for_stockpile }
+	every_country = {
+		limit = { is_country_alive = yes }
+		add = silver_state_native_for_stockpile
+	}
+	every_in_global_list = {
+		variable = zz_ef_mh_list
+		limit = { is_country_alive = no }
+		add = silver_state_native_for_stockpile
+	}
 }
 zz_ef_wm_sum_bank_gold = {
 	value = 0

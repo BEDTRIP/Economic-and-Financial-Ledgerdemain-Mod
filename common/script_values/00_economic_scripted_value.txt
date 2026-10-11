@@ -5382,30 +5382,20 @@ central_bank_metal_reserves_state_per_month = {
 	}
 }
 
+# the monetary authority's gold, the country's account (Д.R4а.2, scripted_effects/ld_metal_accounts.txt)
 gold_state_native_for_stockpile = {
 	value = 0
-	add = {
-		every_scope_state = {
-			if = {
-				limit = {
-					has_modifier = central_bank_historic_place
-				}
-				add = var:gold_state_1
-			}
-		}
+	if = {
+		limit = { has_variable = zz_ef_am_gold }
+		add = var:zz_ef_am_gold
 	}
 }
+# the monetary authority's silver, the country's account (Д.R4а.2, scripted_effects/ld_metal_accounts.txt)
 silver_state_native_for_stockpile = {
 	value = 0
-	add = {
-		every_scope_state = {
-			if = {
-				limit = {
-					has_modifier = central_bank_historic_place
-				}
-				add = var:silver_state_1
-			}
-		}
+	if = {
+		limit = { has_variable = zz_ef_am_silver }
+		add = var:zz_ef_am_silver
 	}
 }
 bimetallic_state_native_for_stockpile = {

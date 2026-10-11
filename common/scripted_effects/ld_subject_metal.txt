@@ -1,53 +1,5 @@
-﻿#############################################
-# В2.5.
-#
-# a CB state that changed hands (the 1839 revolt in the Home Counties took Britain's CB
-# state: the metal 0, the value 0): its metal goes back to the old owner's capital, which becomes
-# a CB place (central_bank_historic_place) if it is not one. Weekly; every CB state remembers its
-# owner (var:zz_ef_cb_owner).
-#############################################
-
-# Country scope, weekly: CB states taken from us go back to us in metal (В2.5).
-zz_ef_cb_state_owner_step = {
-	every_scope_state = {
-		limit = { has_modifier = central_bank_historic_place }
-		if = {
-			limit = {
-				has_variable = zz_ef_cb_owner
-				NOT = { var:zz_ef_cb_owner = owner }
-				exists = var:zz_ef_cb_owner
-				var:zz_ef_cb_owner = { exists = capital }
-			}
-			save_scope_as = zz_ef_lost_cb_state
-			var:zz_ef_cb_owner = {
-				capital = {
-					if = {
-						limit = { NOT = { has_modifier = central_bank_historic_place } }
-						add_modifier = { name = central_bank_historic_place }
-					}
-					if = { limit = { NOT = { has_variable = gold_state_1 } } set_variable = { name = gold_state_1 value = 0 } }
-					if = { limit = { NOT = { has_variable = silver_state_1 } } set_variable = { name = silver_state_1 value = 0 } }
-					if = {
-						limit = { scope:zz_ef_lost_cb_state = { has_variable = gold_state_1 } }
-						change_variable = { name = gold_state_1 add = scope:zz_ef_lost_cb_state.var:gold_state_1 }
-					}
-					if = {
-						limit = { scope:zz_ef_lost_cb_state = { has_variable = silver_state_1 } }
-						change_variable = { name = silver_state_1 add = scope:zz_ef_lost_cb_state.var:silver_state_1 }
-					}
-					set_variable = { name = zz_ef_cb_owner value = owner }
-				}
-				if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|cb_state_lost" }
-			}
-			if = { limit = { has_variable = gold_state_1 } set_variable = { name = gold_state_1 value = 0 } }
-			if = { limit = { has_variable = silver_state_1 } set_variable = { name = silver_state_1 value = 0 } }
-		}
-		set_variable = { name = zz_ef_cb_owner value = owner }
-	}
-}
-
-# Any scope, the world's week (zz_ef_world_week_close): the pops' and the banks' metal are the country's accounts
-# (var:zz_ef_popm_* / zz_ef_bankm_*) -- a country that is gone (annexed, a revolt put down, a union) took them with it,
+﻿# Any scope, the world's week (zz_ef_world_week_close): the pops', the banks' and the monetary authority's metal are
+# the country's accounts (var:zz_ef_popm_* / zz_ef_bankm_* / zz_ef_am_*) -- a country that is gone (annexed, a revolt put down, a union) took them with it,
 # and the world's line of metal lost them.
 # No on_action marks a country gone, but a gone country stays an object with its variables (exists = yes,
 # is_country_alive = no). Every living country is in global list zz_ef_mh_list and keeps its capital's state region
@@ -76,6 +28,17 @@ zz_ef_metal_heir_world = {
 						zz_ef_metal_heir_take = { V = popm_silver }
 						zz_ef_metal_heir_take = { V = bankm_gold }
 						zz_ef_metal_heir_take = { V = bankm_silver }
+						# the authority's metal is a known move of the heir's reconciliation (zz_ef_metal_reconcile)
+						if = {
+							limit = { scope:zz_ef_mh_dead = { has_variable = zz_ef_am_gold } }
+							zz_ef_mt_known_add = { M = g V = scope:zz_ef_mh_dead.var:zz_ef_am_gold }
+						}
+						if = {
+							limit = { scope:zz_ef_mh_dead = { has_variable = zz_ef_am_silver } }
+							zz_ef_mt_known_add = { M = s V = scope:zz_ef_mh_dead.var:zz_ef_am_silver }
+						}
+						zz_ef_metal_heir_take = { V = am_gold }
+						zz_ef_metal_heir_take = { V = am_silver }
 						if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|metal_heir|pop_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_popm_gold')|0]|pop_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_popm_silver')|0]|bank_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bankm_gold')|0]|bank_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bankm_silver')|0]" }
 					}
 				}

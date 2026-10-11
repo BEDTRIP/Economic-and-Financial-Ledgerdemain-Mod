@@ -43,8 +43,8 @@ zz_ef_money_model_step = {
 		limit = { is_player = yes }
 		zz_ef_cbfx_week_step = yes
 	}
-	# CB states taken from a country send their metal back to it
-	zz_ef_cb_state_owner_step = yes
+	# the monetary authority's metal is the country's account: E&F's writes into a CB state come into it (Д.R4а.2)
+	zz_ef_am_sweep = yes
 	# the issuer pays the week's interest to the treasuries holding its bonds
 	# bonds as parts of the engine's debt (generated, scripted_effects/ld_bond_ledger.txt); replaces
 	# Е.5's issuer-pays expense line (zz_ef_bond_interest_step)
@@ -624,9 +624,8 @@ zz_ef_pop_deposits_step = {
 }
 
 # the CB and abroad are one account -- the CB
-# settles every payment abroad. Its reserves: metal (E&F's var:gold_state_1 /
-# silver_state_1 on the CB's state, re-read by E&F's storing_gold_1 every
-# month, so a change there stays) and E&F's currency-good stock. The week's
+# settles every payment abroad. Its reserves: metal (the monetary authority's
+# accounts var:zz_ef_am_gold / zz_ef_am_silver, Д.R4а.2) and E&F's currency-good stock. The week's
 # net flow abroad (zz_ef_ext_net_week: budget lines with other countries,
 # trade centres' cash, the pool's unexplained change, foreign bonds) moves
 # the metal at the currency's value (Hume's price-specie flow): an outflow
@@ -1105,7 +1104,8 @@ zz_ef_fx_metal_update = {
 # A seller redeems a currency in crisis for the
 # issuer's metal (sell_<currency>_currency_crisis, 01_economic_scripted_effects.txt). SELLER scope; var:zz_ef_crisis_due =
 # the holdings at the issuer's parity, in the issuer's metal. The issuer pays
-# from its CB capital's stock, at most what it holds; the seller gets the same metal (Д.R8в.28: metal does not turn
+# from its monetary authority's metal (the country's account), at most what it holds; the seller gets the same metal
+# (Д.R8в.28: metal does not turn
 # into the other -- its cover counts both at the world's price).
 zz_ef_crisis_redeem = {
 	set_variable = { name = zz_ef_crisis_paid value = 0 }
@@ -1114,36 +1114,36 @@ zz_ef_crisis_redeem = {
 	if = {
 		limit = {
 			scope:overrated_currency_country_owner = { zz_ef_metal_silver = yes }
-			scope:central_bank_site_overrated_currency_owner = { has_variable = silver_state_1 }
+			scope:overrated_currency_country_owner = { has_variable = zz_ef_am_silver }
 		}
 		set_variable = {
 			name = zz_ef_crisis_paid
 			value = {
 				value = var:zz_ef_crisis_due
-				max = scope:central_bank_site_overrated_currency_owner.var:silver_state_1
+				max = scope:overrated_currency_country_owner.var:zz_ef_am_silver
 				min = 0
 			}
 		}
-		scope:central_bank_site_overrated_currency_owner = {
-			change_variable = { name = silver_state_1 subtract = scope:seller_root.var:zz_ef_crisis_paid }
+		scope:overrated_currency_country_owner = {
+			change_variable = { name = zz_ef_am_silver subtract = scope:seller_root.var:zz_ef_crisis_paid }
 		}
 		set_variable = { name = zz_ef_crisis_got_s value = var:zz_ef_crisis_paid }
 	}
 	else_if = {
 		limit = {
 			scope:overrated_currency_country_owner = { NOT = { has_law = law_type:law_fiat_standard } }
-			scope:central_bank_site_overrated_currency_owner = { has_variable = gold_state_1 }
+			scope:overrated_currency_country_owner = { has_variable = zz_ef_am_gold }
 		}
 		set_variable = {
 			name = zz_ef_crisis_paid
 			value = {
 				value = var:zz_ef_crisis_due
-				max = scope:central_bank_site_overrated_currency_owner.var:gold_state_1
+				max = scope:overrated_currency_country_owner.var:zz_ef_am_gold
 				min = 0
 			}
 		}
-		scope:central_bank_site_overrated_currency_owner = {
-			change_variable = { name = gold_state_1 subtract = scope:seller_root.var:zz_ef_crisis_paid }
+		scope:overrated_currency_country_owner = {
+			change_variable = { name = zz_ef_am_gold subtract = scope:seller_root.var:zz_ef_crisis_paid }
 		}
 		set_variable = { name = zz_ef_crisis_got_g value = var:zz_ef_crisis_paid }
 	}
@@ -1158,18 +1158,9 @@ zz_ef_crisis_redeem = {
 	remove_variable = zz_ef_crisis_out_s
 	zz_ef_mt_known_add = { M = g V = var:zz_ef_crisis_got_g }
 	zz_ef_mt_known_add = { M = s V = var:zz_ef_crisis_got_s }
-	scope:central_bank_site_root = {
-		if = {
-			limit = { NOT = { has_variable = silver_state_1 } }
-			set_variable = { name = silver_state_1 value = 0 }
-		}
-		if = {
-			limit = { NOT = { has_variable = gold_state_1 } }
-			set_variable = { name = gold_state_1 value = 0 }
-		}
-		change_variable = { name = silver_state_1 add = scope:seller_root.var:zz_ef_crisis_got_s }
-		change_variable = { name = gold_state_1 add = scope:seller_root.var:zz_ef_crisis_got_g }
-	}
+	zz_ef_am_init = yes
+	change_variable = { name = zz_ef_am_silver add = var:zz_ef_crisis_got_s }
+	change_variable = { name = zz_ef_am_gold add = var:zz_ef_crisis_got_g }
 	remove_variable = zz_ef_crisis_got_s
 	remove_variable = zz_ef_crisis_got_g
 	if = {

@@ -101,7 +101,7 @@
 - Смена закона стандарта: `on_activate_monetary_system_law` → `zz_ef_std_switch_before` (запомнить стандарт и паритет) →
   тело E&F (паритет E&F `money_value_target_pre_set` — только если `zz_ef_std_switch_metal` нет: прежнего металлического
   паритета нет или новый стандарт не металлический) → `zz_ef_std_switch_after` (пересчёт паритета по
-  `silver_to_gold_rate`/`gold_to_silver_rate`; запасы `silver_state_1` / `gold_state_1` не переводятся — ЦБ держит оба
+  `silver_to_gold_rate`/`gold_to_silver_rate`; металл `zz_ef_am_silver` / `zz_ef_am_gold` не переводится — ЦБ держит оба
   металла, покрытие считает их по мировой цене, Д.R8в.28). Пересчёт — по металлу стандарта
   (`zz_ef_metal_gold/_silver/_bimet`), не по закону.
 - Обменные стандарты (Д.R8а.6) — три закона по металлу: золотой, серебряный и биметаллический обменный (технология

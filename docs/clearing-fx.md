@@ -108,7 +108,7 @@
 | `zz_ef_clr_a_hume_g` / `_s` → `zz_ef_f_clr_hume_g` / `_s` | то же по металлам, в их единицах | `zz_ef_clr_cb_metal_add` → `zz_ef_clr_take_hume` | `zz_ef_metal_reconcile` |
 | карта `zz_ef_clr_need` (плательщик) | долг недели в валюте получателя, ед. | `zz_ef_clr_need_add` | `zz_ef_clr_post_needs` (заявка на бирже, карта очищается) |
 | `global_var:zz_ef_clr_wl` | мировая строка: поток стран без своих денег за неделю, золото | `zz_ef_clr_step` | лог `EFN` (обнуляется в расчёте) |
-| `gold_state_1`, `silver_state_1` (штат столицы ЦБ) | металл ЦБ | клиринг, `ld_metal_accounts.txt` | вся модель металла |
+| `zz_ef_am_gold`, `zz_ef_am_silver` (страна) | металл денежной власти (Д.R4а.2) | клиринг, `ld_metal_accounts.txt` | вся модель металла |
 | карты `zz_ef_rq_cb_m`, `zz_ef_rq_bk_m` (страна) | чужие деньги ЦБ / банков по эмитентам, в их деньгах (`claims.md`) | `zz_ef_clr_give_claim`, `zz_ef_clr_give_back`, `zz_ef_rq_interest_step`, `zz_ef_rq_crisis_resell`, биржа | таблица ЦБ, `zz_ef_fx_metal_update` |
 | `stockpiling_<cur>_state_1` (штат ЦБ) | E&F: собственный запас валюты ЦБ (невыпущенные деньги); чужих денег здесь больше нет | история и ввод валют E&F | значения E&F |
 | карты `zz_ef_cbfx_d`, `zz_ef_cbfx_p` (игрок) | изменение за неделю и прошлое значение по эмитентам | `zz_ef_cbfx_week_step` | таблица ЦБ |

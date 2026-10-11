@@ -6970,26 +6970,7 @@ stockpiling_capital_state_transfert = {
 		#actual Capital
 		scope:central_bank_site_capital = {
 
-			#####################
-			#metal
-			#####################
-
-			change_variable = {
-				name = gold_state_1
-				add = {
-					scope:central_bank_site_no_capital = {
-						add = var:gold_state_1
-					}
-				}
-			}
-			change_variable = {
-				name = silver_state_1
-				add = {
-					scope:central_bank_site_no_capital = {
-						add = var:silver_state_1
-					}
-				}
-			}
+			# the metal is the country's account (Д.R4а.2): nothing to move
 
 			#####################
 			#Goods
@@ -8001,19 +7982,6 @@ stockpiling_capital_state_transfert = {
 					exists = scope:central_bank_site_no_capital
 				}
 
-				#####################
-				#metal
-				#####################
-
-				set_variable = {
-					name = gold_state_1
-					value = 0
-				}
-
-				set_variable = {
-					name = silver_state_1
-					value = 0
-				}
 
 				#####################
 				#goods
@@ -9469,27 +9437,12 @@ enemy_capital_is_occuped = {
 				change_infamy = 50
 			}
 
-			#####################
-			#gold
-			#####################
-
-			change_variable = {
-				name = gold_state_1
-				add = {
-					scope:occupied_capital = {
-						add = var:gold_state_1
-						multiply = 0.5
-					}
-				}
-			}
-			change_variable = {
-				name = silver_state_1
-				add = {
-					scope:occupied_capital = {
-						add = var:silver_state_1
-						multiply = 0.5
-					}
-				}
+			# half the enemy's metal -- the monetary authorities' accounts (Д.R4а.2)
+			owner = {
+				zz_ef_am_init = yes
+				scope:occupied_capital.owner = { zz_ef_am_init = yes }
+				change_variable = { name = zz_ef_am_gold add = { value = scope:occupied_capital.owner.var:zz_ef_am_gold multiply = 0.5 } }
+				change_variable = { name = zz_ef_am_silver add = { value = scope:occupied_capital.owner.var:zz_ef_am_silver multiply = 0.5 } }
 			}
 
 			#####################
@@ -10674,17 +10627,10 @@ enemy_capital_is_occuped = {
 					exists = scope:occupied_capital
 				}
 
-				#####################
-				#gold
-				#####################
-
-				change_variable = {
-					name = gold_state_1
-					divide = 2
-				}
-				change_variable = {
-					name = silver_state_1
-					divide = 2
+				owner = {
+					zz_ef_am_init = yes
+					change_variable = { name = zz_ef_am_gold divide = 2 }
+					change_variable = { name = zz_ef_am_silver divide = 2 }
 				}
 
 				#####################

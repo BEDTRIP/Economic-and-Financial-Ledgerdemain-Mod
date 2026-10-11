@@ -1,0 +1,49 @@
+# from common/scripted_effects/ld_subject_metal.txt, the head of the file (lines 1-46)
+#############################################
+# В2.5.
+#
+# a CB state that changed hands (the 1839 revolt in the Home Counties took Britain's CB
+# state: the metal 0, the value 0): its metal goes back to the old owner's capital, which becomes
+# a CB place (central_bank_historic_place) if it is not one. Weekly; every CB state remembers its
+# owner (var:zz_ef_cb_owner).
+#############################################
+
+# Country scope, weekly: CB states taken from us go back to us in metal (В2.5).
+zz_ef_cb_state_owner_step = {
+	every_scope_state = {
+		limit = { has_modifier = central_bank_historic_place }
+		if = {
+			limit = {
+				has_variable = zz_ef_cb_owner
+				NOT = { var:zz_ef_cb_owner = owner }
+				exists = var:zz_ef_cb_owner
+				var:zz_ef_cb_owner = { exists = capital }
+			}
+			save_scope_as = zz_ef_lost_cb_state
+			var:zz_ef_cb_owner = {
+				capital = {
+					if = {
+						limit = { NOT = { has_modifier = central_bank_historic_place } }
+						add_modifier = { name = central_bank_historic_place }
+					}
+					if = { limit = { NOT = { has_variable = gold_state_1 } } set_variable = { name = gold_state_1 value = 0 } }
+					if = { limit = { NOT = { has_variable = silver_state_1 } } set_variable = { name = silver_state_1 value = 0 } }
+					if = {
+						limit = { scope:zz_ef_lost_cb_state = { has_variable = gold_state_1 } }
+						change_variable = { name = gold_state_1 add = scope:zz_ef_lost_cb_state.var:gold_state_1 }
+					}
+					if = {
+						limit = { scope:zz_ef_lost_cb_state = { has_variable = silver_state_1 } }
+						change_variable = { name = silver_state_1 add = scope:zz_ef_lost_cb_state.var:silver_state_1 }
+					}
+					set_variable = { name = zz_ef_cb_owner value = owner }
+				}
+				if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|cb_state_lost" }
+			}
+			if = { limit = { has_variable = gold_state_1 } set_variable = { name = gold_state_1 value = 0 } }
+			if = { limit = { has_variable = silver_state_1 } set_variable = { name = silver_state_1 value = 0 } }
+		}
+		set_variable = { name = zz_ef_cb_owner value = owner }
+	}
+}
+

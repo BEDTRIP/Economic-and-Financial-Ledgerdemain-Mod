@@ -110,7 +110,7 @@ on_action, `ld_*` и PSC добавляют свои. Недельного пу�
 `ld_*`) — раз в календарный месяц в свой день месяца `zz_ef_m_offset`, порядок фиксирован (`zz_ef_sched_monthly`);
 мировой проход (окна мировой строки и клиринга) — в конце дня 6. Подробно — `money-model.md`, «Поток / порядок», п. 0.
 Порядок в `zz_ef_money_model_step` (`ld_money_model.txt`): `zz_ef_probe_newyear_cash`, `zz_ef_fx_metal_update`,
-`zz_ef_cbfx_week_step`, `zz_ef_cb_state_owner_step`, `zz_ef_bond_ledger_step`, `zz_ef_metal_start_step` (+ `_cb_before`,
+`zz_ef_cbfx_week_step`, `zz_ef_am_sweep`, `zz_ef_bond_ledger_step`, `zz_ef_metal_start_step` (+ `_cb_before`,
 `_cb_after`, `zz_ef_metal_start_log`), `zz_ef_cb_metal_start_step`, `zz_ef_consol_step`, `zz_ef_business_credit_step`,
 `zz_ef_metal_week_step`, далее агрегаты M0..M3 и лог EFW; `zz_ef_money_hook_receive` вызывается из моста GUI. PSC-хук:
 `on_production_method_changed`, `on_building_built`, `on_acquired_technology` (см. PSC).
@@ -126,9 +126,9 @@ on_action, `ld_*` и PSC добавляют свои. Недельного пу�
 
 ### Годовой пульс (`on_yearly_pulse_country`)
 `ef_on_yearly_pulse_country` по порядку: (держатель `global_monetary_reference`) `national_capacity_variable_list`,
-`country_index_variable_list`, `central_bank_debt_variable_list`, `median_currency_value`,
-`global_monetary_reference_1` → `ef_on_yearly_pulse_recurence` (`fluctuations_gdp_5_year`, `_10_year`,
-`is_at_war_years_pulse`) → `ef_on_yearly_pulse_reset` (сбросы лимитов, `looting_1_year_on_action` —
+`country_index_variable_list`, `central_bank_debt_variable_list`, `median_currency_value`, `global_monetary_reference_1`
+→ `ef_on_yearly_pulse_recurence` (`fluctuations_gdp_5_year`, `_10_year`, `is_at_war_years_pulse`) →
+`ef_on_yearly_pulse_reset` (сбросы лимитов, `looting_1_year_on_action` —
 `common/scripted_effects/01_stockpile_scripted_effects.txt`, обнуление годового счётчика грабежа, 29×
 `clear_<good>_contract_1_year`) → `central_bank_ef_on_yearly_pulse_country` (проценты ЦБ в золоте, накопленная инфляция,
 `monetary_systeme_transition` для ИИ, `credit_at_central_bank_interest_per_week[_off]`,
@@ -174,8 +174,10 @@ on_action, `ld_*` и PSC добавляют свои. Недельного пу�
 - Модель денег `ld_*`: месячные хуки зовут эффекты из `common/scripted_effects/ld_*.txt`; из тел E&F зовутся
   `zz_ef_cb_rate_step`, `zz_ef_std_switch_before/after`, `zz_ef_mp_init/_clear`, `zz_ef_crisis_redeem` (в
   `01_economic_scripted_effects.txt`), `zz_ef_cur_intro` (в `09_introduction_building_lvl.txt`).
-- Эффекты E&F, пишущие `gold_state_1` / `silver_state_1` ЦБ-штата (счета модели): `enemy_capital_is_occuped`,
-  `zz_ef_crisis_redeem` (через `zz_ef_rq_crisis_resell`), стартовые значения `99_ef_history_global_variable.txt`.
+- Эффекты E&F, меняющие металл денежной власти (`zz_ef_am_*` страны, Д.R4а.2): `enemy_capital_is_occuped`,
+  `zz_ef_crisis_redeem` (через `zz_ef_rq_crisis_resell`); в штат ЦБ (`gold_state_1` / `silver_state_1`, забирает
+  `zz_ef_am_sweep`) — стартовые значения `99_ef_history_global_variable.txt` и кнопка
+  `transfer_gold_to_central_bank_metal_reserves`.
 - GUI: верхняя панель — `com_topbar_setup_ef`; пульсы GUI не вызывают, но scripted_guis зовут `reset_*`,
   `stockpiling_capital_state_transfert`, `reset_debt_in_national_currency_player`.
 
@@ -208,7 +210,7 @@ on_action, `ld_*` и PSC добавляют свои. Недельного пу�
 | EFM | `common/scripted_effects/ld_monetary_policy.txt:65,130,179` | `done` (завершение девальвации/ревальвации: покрытие, цель), `step` (шаг: направление, взведён ли), `ai_parity` (ИИ меняет паритет) | месячный `zz_ef_mp_step`; `zz_ef_mp_complete` |
 | EFM | `common/scripted_effects/ld_standard_switch.txt:107` | смена денежного стандарта: старый/новый паритет | на смене закона, `zz_ef_std_switch_after` (из `01_economic_scripted_effects.txt:9565`) |
 | EFM | `common/scripted_effects/ld_metal_accounts.txt:251` | `metal_start`: начальный металл ЦБ, что сделано | недельный, `zz_ef_metal_start_log` |
-| EFM | `common/scripted_effects/ld_subject_metal.txt:40`, `:68` | `cb_state_lost` (ЦБ-штат потерян); `metal_heir` (металл населения и банков исчезнувшей страны перешёл владельцу её столицы — итоги наследника) | недельный `zz_ef_cb_state_owner_step`; мировой проход недели `zz_ef_metal_heir_world` |
+| EFM | `common/scripted_effects/ld_subject_metal.txt` | `metal_heir` (металл населения, банков и денежной власти исчезнувшей страны перешёл владельцу её столицы — итоги наследника) | мировой проход недели `zz_ef_metal_heir_world` |
 | EFM | `common/scripted_effects/ld_currency_intro.txt` | `cur_intro_parity`: ввод валюты — стандарт и паритет до и после | `zz_ef_cur_intro` (из `introduction_new_currency`) |
 | EFT | `common/scripted_effects/ld_metal_accounts.txt:514` | потоки металла ЦБ/банков/населения за неделю | недельный `zz_ef_metal_week_step` |
 | EFV | `common/scripted_effects/ld_metal_accounts.txt:521` | WORLD: суммы металла по ЦБ/банкам/населению, баланс закупок/продаж | недельный `zz_ef_world_metal_log` (из `ld_money_model.txt:742`) |

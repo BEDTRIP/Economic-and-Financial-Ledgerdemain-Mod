@@ -134,16 +134,7 @@ zz_ef_rq_interest_step = {
 # global_monetary_reference_reset, economic_instability): every CB holding D's money sells all of it to D for D's metal
 # at the parity, as far as D's metal goes (zz_ef_crisis_redeem); the holding is gone either way.
 zz_ef_rq_crisis_resell = {
-	scope:target_country = {
-		save_scope_as = overrated_currency_country_owner
-		every_scope_state = {
-			limit = {
-				has_modifier = central_bank_historic_place
-				is_capital = yes
-			}
-			save_scope_as = central_bank_site_overrated_currency_owner
-		}
-	}
+	scope:target_country = { save_scope_as = overrated_currency_country_owner }
 	every_country = {
 		limit = {
 			has_modifier = has_central_bank
@@ -152,17 +143,11 @@ zz_ef_rq_crisis_resell = {
 			is_key_in_variable_map = { name = zz_ef_rq_cb_m target = scope:target_country }
 		}
 		save_scope_as = seller_root
-		every_scope_state = {
-			limit = {
-				has_modifier = central_bank_historic_place
-				is_capital = yes
-			}
-			save_scope_as = central_bank_site_root
-		}
+		# both monetary authorities hold metal on their country's accounts (Д.R4а.2)
 		if = {
 			limit = {
-				exists = scope:central_bank_site_root
-				exists = scope:central_bank_site_overrated_currency_owner
+				zz_ef_am_holder = yes
+				scope:target_country = { zz_ef_am_holder = yes }
 			}
 			zz_ef_rq_get = { MAP = zz_ef_rq_cb_m D = scope:target_country }
 			set_variable = {

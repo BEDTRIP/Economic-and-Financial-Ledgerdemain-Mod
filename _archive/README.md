@@ -134,3 +134,4 @@ _archive/<механизм>/
 | Значения финцентра по видам `has_building_financial_centre_<x>(_custom_location)` | `ef_fc_type_values/` | ничего — читатели переписаны |
 | Объекты валют таблицы ЦБ E&F `currency_import_export_value_<cur>_03` | `ef_cbfx_currency_objects/` | 95 блоков `set_global_variable` в истории |
 | Пересчёт резервов подданного в металл якоря `zz_ef_anchor_metal_step` | `ld_anchor_metal_conversion/` | определение и вызов в `zz_ef_anchor_update` (`ld_anchor.txt`) |
+| Возврат металла ушедшего ЦБ-штата `zz_ef_cb_state_owner_step` (металл — счёт страны, Д.R4а.2) | `ld_cb_state_owner/` | определение и шапка `ld_subject_metal.txt`; вызов в `zz_ef_money_model_step` (`ld_money_model.txt`) |

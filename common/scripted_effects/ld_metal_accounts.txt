@@ -4,6 +4,42 @@
 # (scripted_effects/ld_money_model.txt).
 #############################################
 
+# ---- the monetary authority's accounts (Д.R4а.2) -------------------------------------
+# The CB's metal is the country's: var:zz_ef_am_gold (gold units) / zz_ef_am_silver (silver units); E&F's
+# gold_state_native_for_stockpile / silver_state_native_for_stockpile read them. Country scope.
+zz_ef_am_init = {
+	if = { limit = { NOT = { has_variable = zz_ef_am_gold } } set_variable = { name = zz_ef_am_gold value = 0 } }
+	if = { limit = { NOT = { has_variable = zz_ef_am_silver } } set_variable = { name = zz_ef_am_silver value = 0 } }
+}
+# Weekly, the country's step before its metal is read: E&F's writes into a CB state (its history's start formula, the
+# transfer button) come into the accounts. A state with metal outside a CB place keeps it for the start's rule
+# (zz_ef_metal_start_step).
+zz_ef_am_sweep = {
+	zz_ef_am_init = yes
+	every_scope_state = {
+		limit = {
+			has_modifier = central_bank_historic_place
+		}
+		# 0, not removed: E&F's history formula reads them
+		if = {
+			limit = {
+				has_variable = gold_state_1
+				NOT = { var:gold_state_1 = 0 }
+			}
+			owner = { change_variable = { name = zz_ef_am_gold add = PREV.var:gold_state_1 } }
+			set_variable = { name = gold_state_1 value = 0 }
+		}
+		if = {
+			limit = {
+				has_variable = silver_state_1
+				NOT = { var:silver_state_1 = 0 }
+			}
+			owner = { change_variable = { name = zz_ef_am_silver add = PREV.var:silver_state_1 } }
+			set_variable = { name = silver_state_1 value = 0 }
+		}
+	}
+}
+
 # ---- the start in balance (Д.R1б.1, Д.R1б.2, В.R1б.4) -----------------------------
 # Country scope, the first step of a new game, once:
 #   * the parity stays E&F's historical one (Д.R1б.1: the pound 7.32, the franc 0.75 -- the rate between currencies and the
@@ -41,11 +77,9 @@ zz_ef_metal_start_step = {
 		# E&F's metal of a country without a CB -- the pops' (with a CB it waits for the CB's start, above)
 		set_variable = { name = zz_ef_ms_ef_g value = gold_state_native_for_stockpile }
 		set_variable = { name = zz_ef_ms_ef_s value = silver_state_native_for_stockpile }
-		every_scope_state = {
-			limit = { has_modifier = central_bank_historic_place }
-			if = { limit = { has_variable = gold_state_1 } set_variable = { name = gold_state_1 value = 0 } }
-			if = { limit = { has_variable = silver_state_1 } set_variable = { name = silver_state_1 value = 0 } }
-		}
+		zz_ef_am_init = yes
+		set_variable = { name = zz_ef_am_gold value = 0 }
+		set_variable = { name = zz_ef_am_silver value = 0 }
 	}
 	# Д.R1.1: E&F's metal outside a CB state -- history writes it into var:central_bank_location before the
 	# country has a CB (r1008_001240: Bavaria 37.1M gold in a state with no central_bank_historic_place; the first step
@@ -116,10 +150,9 @@ zz_ef_cb_metal_start_step = {
 			# 40% before them, and read 0.27-0.30 once they came in)
 			has_variable = zz_ef_pop_savings
 			zz_ef_agg_m2_to_gdp > 0.1
-			# a CB state to hold the metal (E&F writes the CB's metal in the first month by its own formula -- r1007_200927:
-			# Denmark, Bolivia, Brazil, Qing... 0 at the first step, 22M gold + 344M silver a week later); the start scales
-			# what E&F wrote and counts it as the start's stock (below)
-			any_scope_state = { has_modifier = central_bank_historic_place }
+			# a CB to hold the metal (E&F writes the CB's metal into its CB state in the first month by its own formula, the
+			# sweep brings it into the accounts); the start scales what E&F wrote and counts it as the start's stock (below)
+			zz_ef_am_holder = yes
 		}
 		remove_variable = zz_ef_cb_start_due
 		zz_ef_metal_start_cb_before = yes
@@ -133,17 +166,9 @@ zz_ef_cb_metal_start_step = {
 			}
 			set_variable = { name = zz_ef_metal_rescale value = zz_ef_cover_normal }
 			change_variable = { name = zz_ef_metal_rescale divide = zz_ef_cb_cover }
-			every_scope_state = {
-				limit = { has_modifier = central_bank_historic_place }
-				if = {
-					limit = { has_variable = gold_state_1 }
-					change_variable = { name = gold_state_1 multiply = owner.var:zz_ef_metal_rescale }
-				}
-				if = {
-					limit = { has_variable = silver_state_1 }
-					change_variable = { name = silver_state_1 multiply = owner.var:zz_ef_metal_rescale }
-				}
-			}
+			zz_ef_am_init = yes
+			change_variable = { name = zz_ef_am_gold multiply = var:zz_ef_metal_rescale }
+			change_variable = { name = zz_ef_am_silver multiply = var:zz_ef_metal_rescale }
 			if = {
 				limit = { has_variable = zz_ef_fx_metal }
 				change_variable = { name = zz_ef_fx_metal multiply = var:zz_ef_metal_rescale }
@@ -153,22 +178,18 @@ zz_ef_cb_metal_start_step = {
 		else_if = {
 			limit = {
 				zz_ef_cb_metal_standard = yes
-				any_scope_state = { has_modifier = central_bank_historic_place }
+				zz_ef_am_holder = yes
 			}
 			set_variable = { name = zz_ef_metal_rescale value = zz_ef_agg_m2 }
 			change_variable = { name = zz_ef_metal_rescale multiply = zz_ef_cover_normal }
 			change_variable = { name = zz_ef_metal_rescale multiply = zz_ef_metal_per_money }
-			random_scope_state = {
-				limit = { has_modifier = central_bank_historic_place }
-				if = {
-					limit = { owner = { zz_ef_metal_silver = yes } }
-					if = { limit = { NOT = { has_variable = silver_state_1 } } set_variable = { name = silver_state_1 value = 0 } }
-					change_variable = { name = silver_state_1 add = owner.var:zz_ef_metal_rescale }
-				}
-				else = {
-					if = { limit = { NOT = { has_variable = gold_state_1 } } set_variable = { name = gold_state_1 value = 0 } }
-					change_variable = { name = gold_state_1 add = owner.var:zz_ef_metal_rescale }
-				}
+			zz_ef_am_init = yes
+			if = {
+				limit = { zz_ef_metal_silver = yes }
+				change_variable = { name = zz_ef_am_silver add = var:zz_ef_metal_rescale }
+			}
+			else = {
+				change_variable = { name = zz_ef_am_gold add = var:zz_ef_metal_rescale }
 			}
 			remove_variable = zz_ef_metal_rescale
 		}
@@ -337,21 +358,15 @@ zz_ef_metal_week_step = {
 	}
 	set_variable = { name = zz_ef_cb_stock_before value = central_bank_reserves }
 	if = {
-		limit = {
-			any_scope_state = { has_modifier = central_bank_historic_place }
-		}
-		random_scope_state = {
-			limit = { has_modifier = central_bank_historic_place }
-			if = { limit = { NOT = { has_variable = gold_state_1 } } set_variable = { name = gold_state_1 value = 0 } }
-			if = { limit = { NOT = { has_variable = silver_state_1 } } set_variable = { name = silver_state_1 value = 0 } }
-			change_variable = { name = gold_state_1 add = owner.var:zz_ef_f_mt_cb_in_g }
-			change_variable = { name = gold_state_1 subtract = owner.var:zz_ef_f_mt_cb_out_g }
-			change_variable = { name = silver_state_1 add = owner.var:zz_ef_f_mt_cb_in_s }
-			change_variable = { name = silver_state_1 subtract = owner.var:zz_ef_f_mt_cb_out_s }
-		}
+		limit = { zz_ef_am_holder = yes }
+		zz_ef_am_init = yes
+		change_variable = { name = zz_ef_am_gold add = var:zz_ef_f_mt_cb_in_g }
+		change_variable = { name = zz_ef_am_gold subtract = var:zz_ef_f_mt_cb_out_g }
+		change_variable = { name = zz_ef_am_silver add = var:zz_ef_f_mt_cb_in_s }
+		change_variable = { name = zz_ef_am_silver subtract = var:zz_ef_f_mt_cb_out_s }
 	}
 	else = {
-		# no CB state: what a building_bank bought has nowhere to go -- the pops' (logged as cb_in anyway)
+		# no CB: what a building_bank bought has nowhere to go -- the pops' (logged as cb_in anyway)
 		change_variable = { name = zz_ef_f_mt_pop_in_g add = var:zz_ef_f_mt_cb_in_g }
 		change_variable = { name = zz_ef_f_mt_pop_in_s add = var:zz_ef_f_mt_cb_in_s }
 		set_variable = { name = zz_ef_f_mt_cb_in_g value = 0 }
@@ -392,22 +407,20 @@ zz_ef_metal_week_step = {
 				zz_ef_metal_bimet = yes
 			}
 			has_variable = zz_ef_pop_savings
-			any_scope_state = { has_modifier = central_bank_historic_place }
+			zz_ef_am_holder = yes
 			zz_ef_cb_buyback_units > 0
 		}
 		set_variable = { name = zz_ef_f_mt_buyback value = zz_ef_cb_buyback_units }
 		set_variable = { name = zz_ef_f_mt_buyback_money value = var:zz_ef_f_mt_buyback }
 		change_variable = { name = zz_ef_f_mt_buyback_money divide = zz_ef_cb_valuation }
 		change_variable = { name = zz_ef_f_mt_buyback_money multiply = zz_ef_cb_buyback_premium }
-		random_scope_state = {
-			limit = { has_modifier = central_bank_historic_place }
-			if = {
-				limit = { owner = { zz_ef_metal_silver = yes } }
-				change_variable = { name = silver_state_1 add = owner.var:zz_ef_f_mt_buyback }
-			}
-			else = {
-				change_variable = { name = gold_state_1 add = owner.var:zz_ef_f_mt_buyback }
-			}
+		zz_ef_am_init = yes
+		if = {
+			limit = { zz_ef_metal_silver = yes }
+			change_variable = { name = zz_ef_am_silver add = var:zz_ef_f_mt_buyback }
+		}
+		else = {
+			change_variable = { name = zz_ef_am_gold add = var:zz_ef_f_mt_buyback }
 		}
 		if = {
 			limit = { zz_ef_metal_silver = yes }

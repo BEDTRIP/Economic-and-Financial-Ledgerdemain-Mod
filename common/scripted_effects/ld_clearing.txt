@@ -615,7 +615,7 @@ zz_ef_clr_metal_in = {
 	}
 }
 # COUNTRY scope with a CB: var:zz_ef_clr_out_g gold and var:zz_ef_clr_out_s (gold value) of silver in ($SIGN$ = 1) / out
-# (-1) of its capital's CB state. hume -- in the standard's metal (the money posting, the world line), hume_g / hume_s --
+# (-1) of its monetary authority's metal (Д.R4а.2). hume -- in the standard's metal (the money posting, the world line), hume_g / hume_s --
 # each metal in its units (the reconciliation).
 zz_ef_clr_cb_metal_add = {
 	set_variable = { name = zz_ef_clr_mn_g value = { value = var:zz_ef_clr_out_g multiply = $SIGN$ } }
@@ -623,22 +623,9 @@ zz_ef_clr_cb_metal_add = {
 		name = zz_ef_clr_mn_s
 		value = { value = var:zz_ef_clr_out_s multiply = gold_to_silver_rate multiply = $SIGN$ }
 	}
-	every_scope_state = {
-		limit = {
-			has_modifier = central_bank_historic_place
-			is_capital = yes
-		}
-		if = {
-			limit = { NOT = { has_variable = gold_state_1 } }
-			set_variable = { name = gold_state_1 value = 0 }
-		}
-		if = {
-			limit = { NOT = { has_variable = silver_state_1 } }
-			set_variable = { name = silver_state_1 value = 0 }
-		}
-		change_variable = { name = gold_state_1 add = owner.var:zz_ef_clr_mn_g }
-		change_variable = { name = silver_state_1 add = owner.var:zz_ef_clr_mn_s }
-	}
+	zz_ef_am_init = yes
+	change_variable = { name = zz_ef_am_gold add = var:zz_ef_clr_mn_g }
+	change_variable = { name = zz_ef_am_silver add = var:zz_ef_clr_mn_s }
 	zz_ef_clr_acc = { N = hume_g V = var:zz_ef_clr_mn_g }
 	zz_ef_clr_acc = { N = hume_s V = var:zz_ef_clr_mn_s }
 	set_variable = {

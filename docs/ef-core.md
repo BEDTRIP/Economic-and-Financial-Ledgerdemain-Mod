@@ -6,7 +6,8 @@
 Содержимое E&F вокруг денег: здания и методы производства (добыча серебра/золота, акции/облигации «частного владения»,
 рыночная ликвидность, фин. центры, ЦБ), законы-пакеты (денежные системы 95 валют), модификаторы, технологии, журнальные
 записи, события, решения. Ядро расчётов — гигантские `scripted_effects`/`script_values`/`scripted_triggers`, из которых
-модель `ld_*` отключила часть веток (пустые тела) и переиспользует счета `gold_state_1`/`silver_state_1`.
+модель `ld_*` отключила часть веток (пустые тела) ; металл ЦБ E&F (`gold_state_1`/`silver_state_1` штата) модель
+забирает на счета страны `zz_ef_am_*`.
 
 ## Файлы
 ### Здания и методы производства
@@ -68,7 +69,8 @@
 - `common/scripted_effects/01_economic_scripted_effects.txt` — 100 тыс. строк, 36 эффектов (оглавление ниже).
 - `common/scripted_effects/08_list_effect.txt` — 373 эффекта-построителя списков: `*_variable_list` рейтингов/ВВП/долгов
   (для GUI таблиц), `central_bank_debt_buyer_list_N_clear`, `central_bank_debt_privat_bank_buyer_list_N_clear` (25),
-  `<cur>_c_global_variable_list` (по 95 валютам; списки лидеров валют — в архиве, `zz_ef_cur_leader`), `com_topbar_save_game_compatibility_EF`.
+  `<cur>_c_global_variable_list` (по 95 валютам; списки лидеров валют — в архиве, `zz_ef_cur_leader`),
+  `com_topbar_save_game_compatibility_EF`.
 - `common/script_values/00_economic_scripted_value.txt` — 486 значений: `money_value`, `bimetallic_rate_gold_to_silver`,
   `central_bank_overlord_currency_purchases` (1333 строки), инфляция, цели девальвации/ревальвации.
 - `common/scripted_triggers/00_ef_custom_trigger.txt` — 665 триггеров: `has_central_bank_*`, `is_valid_country_*`,
@@ -130,7 +132,7 @@
 ## Переменные
 | имя | смысл | пишет | читает |
 |---|---|---|---|
-| `gold_state_1`, `silver_state_1` (штат) | запас металла штата (ЦБ-штат — резерв ЦБ; в модели `ld_*` — резерв ЦБ) | history, `sell_<cur>_currency_crisis`, кнопки форекса, `enemy_capital_is_occuped`, `zz_ef_*` | `gold_state_native_for_stockpile`, `zz_ef_cbm_gold/silver` |
+| `gold_state_1`, `silver_state_1` (штат) | металл, записанный E&F в штат ЦБ: стартовая формула истории, кнопка «золото в резервы ЦБ»; каждую неделю переходит на счёт страны `zz_ef_am_*` (`zz_ef_am_sweep`, Д.R4а.2) | history, `transfer_gold_to_central_bank_metal_reserves` | `zz_ef_am_sweep`; вне штата ЦБ — правило старта `zz_ef_metal_start_step` |
 | `money_value_<cur>` / `money_value_in_gold_<cur>` (глобальные) | курс валюты и в золоте по каждой из 95 валют | `money_value[_in_gold]_<cur>_global_var` | инфляция, GUI |
 | `base_rate_percentage`, `rise_base_rate`, `down_base_rate` | ставка ЦБ; модификаторы направления | `zz_ef_cb_rate_step` | `central_bank_ef_on_monthly_pulse_country`, PSC |
 | `speculative_share_1` / `_2` | пузырь / индекс перестройки | `ld_bubble`, `ld_pb_overbuild_counter` | JE `financial_center_je_2` |
@@ -175,7 +177,7 @@
 - `common/prestige_goods/00_ef_prestige_goods_2.txt` — пусто: `manufacture_stock_usa` выключен (у `manufacture_stock`
   уже три престижных товара — предел движка).
 - `common/customizable_localization/00_ef_localization_ custom.txt` — имя валюты страны (`currency_name` — по
-  `var:zz_ef_cur_noun`, «<прилагательное страны> <слово>»; `currency_code` — две буквы страны (`zz_ef_cur_iso2`: свои или главы
-  союза) + первая буква слова, `currency_symbol` — знак кода из таблицы генератора, иначе код (`zz_ef_iso2_<тег>`,
-  `zz_ef_code_<слово>`, `zz_ef_sym_code_<код>` в `localization/*/ld_currency_symbol_l_*.yml`; Д.R8в.20), генератор
-  `regen_ld_currency_symbol`; пробел в имени файла — авторский).
+  `var:zz_ef_cur_noun`, «<прилагательное страны> <слово>»; `currency_code` — две буквы страны (`zz_ef_cur_iso2`: свои
+  или главы союза) + первая буква слова, `currency_symbol` — знак кода из таблицы генератора, иначе код
+  (`zz_ef_iso2_<тег>`, `zz_ef_code_<слово>`, `zz_ef_sym_code_<код>` в `localization/*/ld_currency_symbol_l_*.yml`;
+  Д.R8в.20), генератор `regen_ld_currency_symbol`; пробел в имени файла — авторский).

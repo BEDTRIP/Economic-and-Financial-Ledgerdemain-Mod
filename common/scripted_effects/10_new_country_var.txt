@@ -19,6 +19,7 @@ new_country_var_ef_state = {
 		########################################################################################################################################
 		########################################################################################################################################
 
+		# E&F's history writes the CB's start metal here; the country's accounts take it (zz_ef_am_sweep, Д.R4а.2)
 		if  = { limit = { not = { is_set = var:gold_state_1 } } set_variable = { name = gold_state_1 value = 0 }} 
 		if  = { limit = { not = { is_set = var:silver_state_1 } } set_variable = { name = silver_state_1 value = 0 }} 
  
@@ -584,14 +585,6 @@ new_country_var_ef_economy = {
 			value = 0
 		}
 
-		set_variable = {
-			name = gold_state_1_fix
-			value = 0
-		}
-		set_variable = {
-			name = silver_state_1_fix
-			value = 0
-		}
 
 
 		set_variable = {
