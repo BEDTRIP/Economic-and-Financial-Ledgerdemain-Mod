@@ -1,0 +1,5546 @@
+﻿# From common/script_values/01_economic_currency_scripted_value.txt.
+
+#export to
+export_to_currency_sum = {
+	value = 0
+
+	#dinar
+	if = {
+		limit= {
+			money_value_dinar > 0
+		}
+		add = export_to_dinar
+	}
+	#dinar_algerian_dinar
+	if = {
+		limit= {
+			money_value_dinar_algerian_dinar > 0
+		}
+		add = export_to_dinar_algerian_dinar
+	}
+	#dinar_iraqi_dinar
+	if = {
+		limit= {
+			money_value_dinar_iraqi_dinar > 0
+		}
+		add = export_to_dinar_iraqi_dinar
+	}
+	#dinar_libyan_dinar
+	if = {
+		limit= {
+			money_value_dinar_libyan_dinar > 0
+		}
+		add = export_to_dinar_libyan_dinar
+	}
+	#dinar_moroccan_dirham
+	if = {
+		limit= {
+			money_value_dinar_moroccan_dirham > 0
+		}
+		add = export_to_dinar_moroccan_dirham
+	}
+	#dinar_omanian_rial
+	if = {
+		limit= {
+			money_value_dinar_omanian_rial > 0
+		}
+		add = export_to_dinar_omanian_rial
+	}
+	#dinar_qiran
+	if = {
+		limit= {
+			money_value_dinar_qiran > 0
+		}
+		add = export_to_dinar_qiran
+	}
+	#dinar_saudi_riyal
+	if = {
+		limit= {
+			money_value_dinar_saudi_riyal > 0
+		}
+		add = export_to_dinar_saudi_riyal
+	}
+	#dinar_serbian_dinar
+	if = {
+		limit= {
+			money_value_dinar_serbian_dinar > 0
+		}
+		add = export_to_dinar_serbian_dinar
+	}
+	#dinar_tunisian_dinar
+	if = {
+		limit= {
+			money_value_dinar_tunisian_dinar > 0
+		}
+		add = export_to_dinar_tunisian_dinar
+	}
+	#dinar_yugoslav_dinar
+	if = {
+		limit= {
+			money_value_dinar_yugoslav_dinar > 0
+		}
+		add = export_to_dinar_yugoslav_dinar
+	}
+	#dollar_australian_dollar
+	if = {
+		limit= {
+			money_value_dollar_australian_dollar > 0
+		}
+		add = export_to_dollar_australian_dollar
+	}
+	#dollar_canadian_dollar
+	if = {
+		limit= {
+			money_value_dollar_canadian_dollar > 0
+		}
+		add = export_to_dollar_canadian_dollar
+	}
+	#dollar_caribbean_dollar
+	if = {
+		limit= {
+			money_value_dollar_caribbean_dollar > 0
+		}
+		add = export_to_dollar_caribbean_dollar
+	}
+	#dollar_confederate_states_dollar
+	if = {
+		limit= {
+			money_value_dollar_confederate_states_dollar > 0
+		}
+		add = export_to_dollar_confederate_states_dollar
+	}
+	#dollar_liberian_dollar
+	if = {
+		limit= {
+			money_value_dollar_liberian_dollar > 0
+		}
+		add = export_to_dollar_liberian_dollar
+	}
+	#dollar_new_zealand_dollar
+	if = {
+		limit= {
+			money_value_dollar_new_zealand_dollar > 0
+		}
+		add = export_to_dollar_new_zealand_dollar
+	}
+	#dollar_sierra_leonean_dollar
+	if = {
+		limit= {
+			money_value_dollar_sierra_leonean_dollar > 0
+		}
+		add = export_to_dollar_sierra_leonean_dollar
+	}
+	#dollar_united_states_dollar
+	if = {
+		limit= {
+			money_value_dollar_united_states_dollar > 0
+		}
+		add = export_to_dollar_united_states_dollar
+	}
+	#eco_ariary
+	if = {
+		limit= {
+			money_value_eco_ariary > 0
+		}
+		add = export_to_eco_ariary
+	}
+	#eco_central_african_eco
+	if = {
+		limit= {
+			money_value_eco_central_african_eco > 0
+		}
+		add = export_to_eco_central_african_eco
+	}
+	#eco_east_african_eco
+	if = {
+		limit= {
+			money_value_eco_east_african_eco > 0
+		}
+		add = export_to_eco_east_african_eco
+	}
+	#eco_ethiopian_birr
+	if = {
+		limit= {
+			money_value_eco_ethiopian_birr > 0
+		}
+		add = export_to_eco_ethiopian_birr
+	}
+	#eco_ghanaian_pound
+	if = {
+		limit= {
+			money_value_eco_ghanaian_pound > 0
+		}
+		add = export_to_eco_ghanaian_pound
+	}
+	#eco_nigerian_naira
+	if = {
+		limit= {
+			money_value_eco_nigerian_naira > 0
+		}
+		add = export_to_eco_nigerian_naira
+	}
+	#eco_south_african_rand
+	if = {
+		limit= {
+			money_value_eco_south_african_rand > 0
+		}
+		add = export_to_eco_south_african_rand
+	}
+	#eco_tuareg_ouguiya
+	if = {
+		limit= {
+			money_value_eco_tuareg_ouguiya > 0
+		}
+		add = export_to_eco_tuareg_ouguiya
+	}
+	#eco_west_african_eco
+	if = {
+		limit= {
+			money_value_eco_west_african_eco > 0
+		}
+		add = export_to_eco_west_african_eco
+	}
+	#franc_belgian_franc
+	if = {
+		limit= {
+			money_value_franc_belgian_franc > 0
+		}
+		add = export_to_franc_belgian_franc
+	}
+	#franc_french_franc
+	if = {
+		limit= {
+			money_value_franc_french_franc > 0
+		}
+		add = export_to_franc_french_franc
+	}
+	#franc_luxembourgish_franc
+	if = {
+		limit= {
+			money_value_franc_luxembourgish_franc > 0
+		}
+		add = export_to_franc_luxembourgish_franc
+	}
+	#franc_swiss_franc
+	if = {
+		limit= {
+			money_value_franc_swiss_franc > 0
+		}
+		add = export_to_franc_swiss_franc
+	}
+	#gulden
+	if = {
+		limit= {
+			money_value_gulden > 0
+		}
+		add = export_to_gulden
+	}
+	#gulden_bavarian_gulden
+	if = {
+		limit= {
+			money_value_gulden_bavarian_gulden > 0
+		}
+		add = export_to_gulden_bavarian_gulden
+	}
+	#gulden_florin
+	if = {
+		limit= {
+			money_value_gulden_florin > 0
+		}
+		add = export_to_gulden_florin
+	}
+	#gulden_hungarian_forint
+	if = {
+		limit= {
+			money_value_gulden_hungarian_forint > 0
+		}
+		add = export_to_gulden_hungarian_forint
+	}
+	#gulden_indies_guilder
+	if = {
+		limit= {
+			money_value_gulden_indies_guilder > 0
+		}
+		add = export_to_gulden_indies_guilder
+	}
+	#gulden_south_german_gulden
+	if = {
+		limit= {
+			money_value_gulden_south_german_gulden > 0
+		}
+		add = export_to_gulden_south_german_gulden
+	}
+	#krone_czech_koruna
+	if = {
+		limit= {
+			money_value_krone_czech_koruna > 0
+		}
+		add = export_to_krone_czech_koruna
+	}
+	#krone_danish_krone
+	if = {
+		limit= {
+			money_value_krone_danish_krone > 0
+		}
+		add = export_to_krone_danish_krone
+	}
+	#krone_estonian_kroon
+	if = {
+		limit= {
+			money_value_krone_estonian_kroon > 0
+		}
+		add = export_to_krone_estonian_kroon
+	}
+	#krone_icelandic_krona
+	if = {
+		limit= {
+			money_value_krone_icelandic_krona > 0
+		}
+		add = export_to_krone_icelandic_krona
+	}
+	#krone_norwegian_krone
+	if = {
+		limit= {
+			money_value_krone_norwegian_krone > 0
+		}
+		add = export_to_krone_norwegian_krone
+	}
+	#krone_slovak_koruna
+	if = {
+		limit= {
+			money_value_krone_slovak_koruna > 0
+		}
+		add = export_to_krone_slovak_koruna
+	}
+	#krone_swedish_krona
+	if = {
+		limit= {
+			money_value_krone_swedish_krona > 0
+		}
+		add = export_to_krone_swedish_krona
+	}
+	#leon_leu
+	if = {
+		limit= {
+			money_value_leon_leu > 0
+		}
+		add = export_to_leon_leu
+	}
+	#leon_lev
+	if = {
+		limit= {
+			money_value_leon_lev > 0
+		}
+		add = export_to_leon_lev
+	}
+	#lira
+	if = {
+		limit= {
+			money_value_lira > 0
+		}
+		add = export_to_lira
+	}
+	#lira_ducato
+	if = {
+		limit= {
+			money_value_lira_ducato > 0
+		}
+		add = export_to_lira_ducato
+	}
+	#lira_ottoman_lira
+	if = {
+		limit= {
+			money_value_lira_ottoman_lira > 0
+		}
+		add = export_to_lira_ottoman_lira
+	}
+	#lira_scudo_pontificio
+	if = {
+		limit= {
+			money_value_lira_scudo_pontificio > 0
+		}
+		add = export_to_lira_scudo_pontificio
+	}
+	#lira_scudo_sardo
+	if = {
+		limit= {
+			money_value_lira_scudo_sardo > 0
+		}
+		add = export_to_lira_scudo_sardo
+	}
+	#lira_toscane_lira
+	if = {
+		limit= {
+			money_value_lira_toscane_lira > 0
+		}
+		add = export_to_lira_toscane_lira
+	}
+	#mark
+	if = {
+		limit= {
+			money_value_mark > 0
+		}
+		add = export_to_mark
+	}
+	#mark_finnish_markka
+	if = {
+		limit= {
+			money_value_mark_finnish_markka > 0
+		}
+		add = export_to_mark_finnish_markka
+	}
+	#peso
+	if = {
+		limit= {
+			money_value_peso > 0
+		}
+		add = export_to_peso
+	}
+	#peso_argentine_peso
+	if = {
+		limit= {
+			money_value_peso_argentine_peso > 0
+		}
+		add = export_to_peso_argentine_peso
+	}
+	#peso_bolivien_peso
+	if = {
+		limit= {
+			money_value_peso_bolivien_peso > 0
+		}
+		add = export_to_peso_bolivien_peso
+	}
+	#peso_chilean_peso
+	if = {
+		limit= {
+			money_value_peso_chilean_peso > 0
+		}
+		add = export_to_peso_chilean_peso
+	}
+	#peso_colombian_peso
+	if = {
+		limit= {
+			money_value_peso_colombian_peso > 0
+		}
+		add = export_to_peso_colombian_peso
+	}
+	#peso_costa_rican_colon
+	if = {
+		limit= {
+			money_value_peso_costa_rican_colon > 0
+		}
+		add = export_to_peso_costa_rican_colon
+	}
+	#peso_cuban_peso
+	if = {
+		limit= {
+			money_value_peso_cuban_peso > 0
+		}
+		add = export_to_peso_cuban_peso
+	}
+	#peso_ecuadorian_peso
+	if = {
+		limit= {
+			money_value_peso_ecuadorian_peso > 0
+		}
+		add = export_to_peso_ecuadorian_peso
+	}
+	#peso_el_salvador_colon
+	if = {
+		limit= {
+			money_value_peso_el_salvador_colon > 0
+		}
+		add = export_to_peso_el_salvador_colon
+	}
+	#peso_guatemalan_quetzal
+	if = {
+		limit= {
+			money_value_peso_guatemalan_quetzal > 0
+		}
+		add = export_to_peso_guatemalan_quetzal
+	}
+	#peso_honduran_lempira
+	if = {
+		limit= {
+			money_value_peso_honduran_lempira > 0
+		}
+		add = export_to_peso_honduran_lempira
+	}
+	#peso_mexican_peso
+	if = {
+		limit= {
+			money_value_peso_mexican_peso > 0
+		}
+		add = export_to_peso_mexican_peso
+	}
+	#peso_nicaraguan_cordoba
+	if = {
+		limit= {
+			money_value_peso_nicaraguan_cordoba > 0
+		}
+		add = export_to_peso_nicaraguan_cordoba
+	}
+	#peso_paraguayan_peso
+	if = {
+		limit= {
+			money_value_peso_paraguayan_peso > 0
+		}
+		add = export_to_peso_paraguayan_peso
+	}
+	#peso_philippine_peso
+	if = {
+		limit= {
+			money_value_peso_philippine_peso > 0
+		}
+		add = export_to_peso_philippine_peso
+	}
+	#peso_sol_de_oro
+	if = {
+		limit= {
+			money_value_peso_sol_de_oro > 0
+		}
+		add = export_to_peso_sol_de_oro
+	}
+	#peso_uruguayan_peso
+	if = {
+		limit= {
+			money_value_peso_uruguayan_peso > 0
+		}
+		add = export_to_peso_uruguayan_peso
+	}
+	#peso_venezuelan_peso
+	if = {
+		limit= {
+			money_value_peso_venezuelan_peso > 0
+		}
+		add = export_to_peso_venezuelan_peso
+	}
+	#pound_egyptian_pound
+	if = {
+		limit= {
+			money_value_pound_egyptian_pound > 0
+		}
+		add = export_to_pound_egyptian_pound
+	}
+	#pound_irish_pound
+	if = {
+		limit= {
+			money_value_pound_irish_pound > 0
+		}
+		add = export_to_pound_irish_pound
+	}
+	#pound_sterling
+	if = {
+		limit= {
+			money_value_pound_sterling > 0
+		}
+		add = export_to_pound_sterling
+	}
+	#real
+	if = {
+		limit= {
+			money_value_real > 0
+		}
+		add = export_to_real
+	}
+	#real_brazilian_real
+	if = {
+		limit= {
+			money_value_real_brazilian_real > 0
+		}
+		add = export_to_real_brazilian_real
+	}
+	#rupee_indian_rupee
+	if = {
+		limit= {
+			money_value_rupee_indian_rupee > 0
+		}
+		add = export_to_rupee_indian_rupee
+	}
+	#rupee_indonesian_rupiah
+	if = {
+		limit= {
+			money_value_rupee_indonesian_rupiah > 0
+		}
+		add = export_to_rupee_indonesian_rupiah
+	}
+	#spe_baht
+	if = {
+		limit= {
+			money_value_spe_baht > 0
+		}
+		add = export_to_spe_baht
+	}
+	#spe_dong
+	if = {
+		limit= {
+			money_value_spe_dong > 0
+		}
+		add = export_to_spe_dong
+	}
+	#spe_drachma
+	if = {
+		limit= {
+			money_value_spe_drachma > 0
+		}
+		add = export_to_spe_drachma
+	}
+	#spe_korean_won
+	if = {
+		limit= {
+			money_value_spe_korean_won > 0
+		}
+		add = export_to_spe_korean_won
+	}
+	#spe_latvian_lats
+	if = {
+		limit= {
+			money_value_spe_latvian_lats > 0
+		}
+		add = export_to_spe_latvian_lats
+	}
+	#spe_lithuanian_litas
+	if = {
+		limit= {
+			money_value_spe_lithuanian_litas > 0
+		}
+		add = export_to_spe_lithuanian_litas
+	}
+	#spe_peseta
+	if = {
+		limit= {
+			money_value_spe_peseta > 0
+		}
+		add = export_to_spe_peseta
+	}
+	#spe_ruble
+	if = {
+		limit= {
+			money_value_spe_ruble > 0
+		}
+		add = export_to_spe_ruble
+	}
+	#spe_uni
+	if = {
+		limit= {
+			money_value_spe_uni > 0
+		}
+		add = export_to_spe_uni
+	}
+	#spe_yen
+	if = {
+		limit= {
+			money_value_spe_yen > 0
+		}
+		add = export_to_spe_yen
+	}
+	#spe_yuan
+	if = {
+		limit= {
+			money_value_spe_yuan > 0
+		}
+		add = export_to_spe_yuan
+	}
+	#spe_zloti
+	if = {
+		limit= {
+			money_value_spe_zloti > 0
+		}
+		add = export_to_spe_zloti
+	}
+	#thaler_hannoveraner_thaler
+	if = {
+		limit= {
+			money_value_thaler_hannoveraner_thaler > 0
+		}
+		add = export_to_thaler_hannoveraner_thaler
+	}
+	#thaler_prussian_thaler
+	if = {
+		limit= {
+			money_value_thaler_prussian_thaler > 0
+		}
+		add = export_to_thaler_prussian_thaler
+	}
+	#thaler_saxon_thaler
+	if = {
+		limit= {
+			money_value_thaler_saxon_thaler > 0
+		}
+		add = export_to_thaler_saxon_thaler
+	}
+}
+#begin_tag_26  
+	#dinar						
+	export_to_dinar = {
+		value = 0
+		add = var:export_to_dinar_fix
+	}
+	#dinar_algerian_dinar						
+	export_to_dinar_algerian_dinar = {
+		value = 0
+		add = var:export_to_dinar_algerian_dinar_fix
+	}
+	#dinar_iraqi_dinar						
+	export_to_dinar_iraqi_dinar = {
+		value = 0
+		add = var:export_to_dinar_iraqi_dinar_fix
+	}
+	#dinar_libyan_dinar						
+	export_to_dinar_libyan_dinar = {
+		value = 0
+		add = var:export_to_dinar_libyan_dinar_fix
+	}
+	#dinar_moroccan_dirham						
+	export_to_dinar_moroccan_dirham = {
+		value = 0
+		add = var:export_to_dinar_moroccan_dirham_fix
+	}
+	#dinar_omanian_rial						
+	export_to_dinar_omanian_rial = {
+		value = 0
+		add = var:export_to_dinar_omanian_rial_fix
+	}
+	#dinar_qiran						
+	export_to_dinar_qiran = {
+		value = 0
+		add = var:export_to_dinar_qiran_fix
+	}
+	#dinar_saudi_riyal						
+	export_to_dinar_saudi_riyal = {
+		value = 0
+		add = var:export_to_dinar_saudi_riyal_fix
+	}
+	#dinar_serbian_dinar						
+	export_to_dinar_serbian_dinar = {
+		value = 0
+		add = var:export_to_dinar_serbian_dinar_fix
+	}
+	#dinar_tunisian_dinar						
+	export_to_dinar_tunisian_dinar = {
+		value = 0
+		add = var:export_to_dinar_tunisian_dinar_fix
+	}
+	#dinar_yugoslav_dinar						
+	export_to_dinar_yugoslav_dinar = {
+		value = 0
+		add = var:export_to_dinar_yugoslav_dinar_fix
+	}
+	#dollar_australian_dollar						
+	export_to_dollar_australian_dollar = {
+		value = 0
+		add = var:export_to_dollar_australian_dollar_fix
+	}
+	#dollar_canadian_dollar						
+	export_to_dollar_canadian_dollar = {
+		value = 0
+		add = var:export_to_dollar_canadian_dollar_fix
+	}
+	#dollar_caribbean_dollar						
+	export_to_dollar_caribbean_dollar = {
+		value = 0
+		add = var:export_to_dollar_caribbean_dollar_fix
+	}
+	#dollar_confederate_states_dollar						
+	export_to_dollar_confederate_states_dollar = {
+		value = 0
+		add = var:export_to_dollar_confederate_states_dollar_fix
+	}
+	#dollar_liberian_dollar						
+	export_to_dollar_liberian_dollar = {
+		value = 0
+		add = var:export_to_dollar_liberian_dollar_fix
+	}
+	#dollar_new_zealand_dollar						
+	export_to_dollar_new_zealand_dollar = {
+		value = 0
+		add = var:export_to_dollar_new_zealand_dollar_fix
+	}
+	#dollar_sierra_leonean_dollar						
+	export_to_dollar_sierra_leonean_dollar = {
+		value = 0
+		add = var:export_to_dollar_sierra_leonean_dollar_fix
+	}
+	#dollar_united_states_dollar						
+	export_to_dollar_united_states_dollar = {
+		value = 0
+		add = var:export_to_dollar_united_states_dollar_fix
+	}
+	#eco_ariary						
+	export_to_eco_ariary = {
+		value = 0
+		add = var:export_to_eco_ariary_fix
+	}
+	#eco_central_african_eco						
+	export_to_eco_central_african_eco = {
+		value = 0
+		add = var:export_to_eco_central_african_eco_fix
+	}
+	#eco_east_african_eco						
+	export_to_eco_east_african_eco = {
+		value = 0
+		add = var:export_to_eco_east_african_eco_fix
+	}
+	#eco_ethiopian_birr						
+	export_to_eco_ethiopian_birr = {
+		value = 0
+		add = var:export_to_eco_ethiopian_birr_fix
+	}
+	#eco_ghanaian_pound						
+	export_to_eco_ghanaian_pound = {
+		value = 0
+		add = var:export_to_eco_ghanaian_pound_fix
+	}
+	#eco_nigerian_naira						
+	export_to_eco_nigerian_naira = {
+		value = 0
+		add = var:export_to_eco_nigerian_naira_fix
+	}
+	#eco_south_african_rand						
+	export_to_eco_south_african_rand = {
+		value = 0
+		add = var:export_to_eco_south_african_rand_fix
+	}
+	#eco_tuareg_ouguiya						
+	export_to_eco_tuareg_ouguiya = {
+		value = 0
+		add = var:export_to_eco_tuareg_ouguiya_fix
+	}
+	#eco_west_african_eco						
+	export_to_eco_west_african_eco = {
+		value = 0
+		add = var:export_to_eco_west_african_eco_fix
+	}
+	#franc_belgian_franc						
+	export_to_franc_belgian_franc = {
+		value = 0
+		add = var:export_to_franc_belgian_franc_fix
+	}
+	#franc_french_franc						
+	export_to_franc_french_franc = {
+		value = 0
+		add = var:export_to_franc_french_franc_fix
+	}
+	#franc_luxembourgish_franc						
+	export_to_franc_luxembourgish_franc = {
+		value = 0
+		add = var:export_to_franc_luxembourgish_franc_fix
+	}
+	#franc_swiss_franc						
+	export_to_franc_swiss_franc = {
+		value = 0
+		add = var:export_to_franc_swiss_franc_fix
+	}
+	#gulden						
+	export_to_gulden = {
+		value = 0
+		add = var:export_to_gulden_fix
+	}
+	#gulden_bavarian_gulden						
+	export_to_gulden_bavarian_gulden = {
+		value = 0
+		add = var:export_to_gulden_bavarian_gulden_fix
+	}
+	#gulden_florin						
+	export_to_gulden_florin = {
+		value = 0
+		add = var:export_to_gulden_florin_fix
+	}
+	#gulden_hungarian_forint						
+	export_to_gulden_hungarian_forint = {
+		value = 0
+		add = var:export_to_gulden_hungarian_forint_fix
+	}
+	#gulden_indies_guilder						
+	export_to_gulden_indies_guilder = {
+		value = 0
+		add = var:export_to_gulden_indies_guilder_fix
+	}
+	#gulden_south_german_gulden						
+	export_to_gulden_south_german_gulden = {
+		value = 0
+		add = var:export_to_gulden_south_german_gulden_fix
+	}
+	#krone_czech_koruna						
+	export_to_krone_czech_koruna = {
+		value = 0
+		add = var:export_to_krone_czech_koruna_fix
+	}
+	#krone_danish_krone						
+	export_to_krone_danish_krone = {
+		value = 0
+		add = var:export_to_krone_danish_krone_fix
+	}
+	#krone_estonian_kroon						
+	export_to_krone_estonian_kroon = {
+		value = 0
+		add = var:export_to_krone_estonian_kroon_fix
+	}
+	#krone_icelandic_krona						
+	export_to_krone_icelandic_krona = {
+		value = 0
+		add = var:export_to_krone_icelandic_krona_fix
+	}
+	#krone_norwegian_krone						
+	export_to_krone_norwegian_krone = {
+		value = 0
+		add = var:export_to_krone_norwegian_krone_fix
+	}
+	#krone_slovak_koruna						
+	export_to_krone_slovak_koruna = {
+		value = 0
+		add = var:export_to_krone_slovak_koruna_fix
+	}
+	#krone_swedish_krona						
+	export_to_krone_swedish_krona = {
+		value = 0
+		add = var:export_to_krone_swedish_krona_fix
+	}
+	#leon_leu						
+	export_to_leon_leu = {
+		value = 0
+		add = var:export_to_leon_leu_fix
+	}
+	#leon_lev						
+	export_to_leon_lev = {
+		value = 0
+		add = var:export_to_leon_lev_fix
+	}
+	#lira						
+	export_to_lira = {
+		value = 0
+		add = var:export_to_lira_fix
+	}
+	#lira_ducato						
+	export_to_lira_ducato = {
+		value = 0
+		add = var:export_to_lira_ducato_fix
+	}
+	#lira_ottoman_lira						
+	export_to_lira_ottoman_lira = {
+		value = 0
+		add = var:export_to_lira_ottoman_lira_fix
+	}
+	#lira_scudo_pontificio						
+	export_to_lira_scudo_pontificio = {
+		value = 0
+		add = var:export_to_lira_scudo_pontificio_fix
+	}
+	#lira_scudo_sardo						
+	export_to_lira_scudo_sardo = {
+		value = 0
+		add = var:export_to_lira_scudo_sardo_fix
+	}
+	#lira_toscane_lira						
+	export_to_lira_toscane_lira = {
+		value = 0
+		add = var:export_to_lira_toscane_lira_fix
+	}
+	#mark						
+	export_to_mark = {
+		value = 0
+		add = var:export_to_mark_fix
+	}
+	#mark_finnish_markka						
+	export_to_mark_finnish_markka = {
+		value = 0
+		add = var:export_to_mark_finnish_markka_fix
+	}
+	#peso						
+	export_to_peso = {
+		value = 0
+		add = var:export_to_peso_fix
+	}
+	#peso_argentine_peso						
+	export_to_peso_argentine_peso = {
+		value = 0
+		add = var:export_to_peso_argentine_peso_fix
+	}
+	#peso_bolivien_peso						
+	export_to_peso_bolivien_peso = {
+		value = 0
+		add = var:export_to_peso_bolivien_peso_fix
+	}
+	#peso_chilean_peso						
+	export_to_peso_chilean_peso = {
+		value = 0
+		add = var:export_to_peso_chilean_peso_fix
+	}
+	#peso_colombian_peso						
+	export_to_peso_colombian_peso = {
+		value = 0
+		add = var:export_to_peso_colombian_peso_fix
+	}
+	#peso_costa_rican_colon						
+	export_to_peso_costa_rican_colon = {
+		value = 0
+		add = var:export_to_peso_costa_rican_colon_fix
+	}
+	#peso_cuban_peso						
+	export_to_peso_cuban_peso = {
+		value = 0
+		add = var:export_to_peso_cuban_peso_fix
+	}
+	#peso_ecuadorian_peso						
+	export_to_peso_ecuadorian_peso = {
+		value = 0
+		add = var:export_to_peso_ecuadorian_peso_fix
+	}
+	#peso_el_salvador_colon						
+	export_to_peso_el_salvador_colon = {
+		value = 0
+		add = var:export_to_peso_el_salvador_colon_fix
+	}
+	#peso_guatemalan_quetzal						
+	export_to_peso_guatemalan_quetzal = {
+		value = 0
+		add = var:export_to_peso_guatemalan_quetzal_fix
+	}
+	#peso_honduran_lempira						
+	export_to_peso_honduran_lempira = {
+		value = 0
+		add = var:export_to_peso_honduran_lempira_fix
+	}
+	#peso_mexican_peso						
+	export_to_peso_mexican_peso = {
+		value = 0
+		add = var:export_to_peso_mexican_peso_fix
+	}
+	#peso_nicaraguan_cordoba						
+	export_to_peso_nicaraguan_cordoba = {
+		value = 0
+		add = var:export_to_peso_nicaraguan_cordoba_fix
+	}
+	#peso_paraguayan_peso						
+	export_to_peso_paraguayan_peso = {
+		value = 0
+		add = var:export_to_peso_paraguayan_peso_fix
+	}
+	#peso_philippine_peso						
+	export_to_peso_philippine_peso = {
+		value = 0
+		add = var:export_to_peso_philippine_peso_fix
+	}
+	#peso_sol_de_oro						
+	export_to_peso_sol_de_oro = {
+		value = 0
+		add = var:export_to_peso_sol_de_oro_fix
+	}
+	#peso_uruguayan_peso						
+	export_to_peso_uruguayan_peso = {
+		value = 0
+		add = var:export_to_peso_uruguayan_peso_fix
+	}
+	#peso_venezuelan_peso						
+	export_to_peso_venezuelan_peso = {
+		value = 0
+		add = var:export_to_peso_venezuelan_peso_fix
+	}
+	#pound_egyptian_pound						
+	export_to_pound_egyptian_pound = {
+		value = 0
+		add = var:export_to_pound_egyptian_pound_fix
+	}
+	#pound_irish_pound						
+	export_to_pound_irish_pound = {
+		value = 0
+		add = var:export_to_pound_irish_pound_fix
+	}
+	#pound_sterling						
+	export_to_pound_sterling = {
+		value = 0
+		add = var:export_to_pound_sterling_fix
+	}
+	#real						
+	export_to_real = {
+		value = 0
+		add = var:export_to_real_fix
+	}
+	#real_brazilian_real						
+	export_to_real_brazilian_real = {
+		value = 0
+		add = var:export_to_real_brazilian_real_fix
+	}
+	#rupee_indian_rupee						
+	export_to_rupee_indian_rupee = {
+		value = 0
+		add = var:export_to_rupee_indian_rupee_fix
+	}
+	#rupee_indonesian_rupiah						
+	export_to_rupee_indonesian_rupiah = {
+		value = 0
+		add = var:export_to_rupee_indonesian_rupiah_fix
+	}
+	#spe_baht						
+	export_to_spe_baht = {
+		value = 0
+		add = var:export_to_spe_baht_fix
+	}
+	#spe_dong						
+	export_to_spe_dong = {
+		value = 0
+		add = var:export_to_spe_dong_fix
+	}
+	#spe_drachma						
+	export_to_spe_drachma = {
+		value = 0
+		add = var:export_to_spe_drachma_fix
+	}
+	#spe_korean_won						
+	export_to_spe_korean_won = {
+		value = 0
+		add = var:export_to_spe_korean_won_fix
+	}
+	#spe_latvian_lats						
+	export_to_spe_latvian_lats = {
+		value = 0
+		add = var:export_to_spe_latvian_lats_fix
+	}
+	#spe_lithuanian_litas						
+	export_to_spe_lithuanian_litas = {
+		value = 0
+		add = var:export_to_spe_lithuanian_litas_fix
+	}
+	#spe_peseta						
+	export_to_spe_peseta = {
+		value = 0
+		add = var:export_to_spe_peseta_fix
+	}
+	#spe_ruble						
+	export_to_spe_ruble = {
+		value = 0
+		add = var:export_to_spe_ruble_fix
+	}
+	#spe_uni						
+	export_to_spe_uni = {
+		value = 0
+		add = var:export_to_spe_uni_fix
+	}
+	#spe_yen						
+	export_to_spe_yen = {
+		value = 0
+		add = var:export_to_spe_yen_fix
+	}
+	#spe_yuan						
+	export_to_spe_yuan = {
+		value = 0
+		add = var:export_to_spe_yuan_fix
+	}
+	#spe_zloti						
+	export_to_spe_zloti = {
+		value = 0
+		add = var:export_to_spe_zloti_fix
+	}
+	#thaler_hannoveraner_thaler						
+	export_to_thaler_hannoveraner_thaler = {
+		value = 0
+		add = var:export_to_thaler_hannoveraner_thaler_fix
+	}
+	#thaler_prussian_thaler						
+	export_to_thaler_prussian_thaler = {
+		value = 0
+		add = var:export_to_thaler_prussian_thaler_fix
+	}
+	#thaler_saxon_thaler						
+	export_to_thaler_saxon_thaler = {
+		value = 0
+		add = var:export_to_thaler_saxon_thaler_fix
+	} 
+#begin_tag_27 
+	#dinar
+	export_in_dinar = {
+		value = 0
+		add = var:export_in_dinar_fix 
+	}
+	#dinar_algerian_dinar
+	export_in_dinar_algerian_dinar = {
+		value = 0
+		add = var:export_in_dinar_algerian_dinar_fix 
+	}
+	#dinar_iraqi_dinar
+	export_in_dinar_iraqi_dinar = {
+		value = 0
+		add = var:export_in_dinar_iraqi_dinar_fix 
+	}
+	#dinar_libyan_dinar
+	export_in_dinar_libyan_dinar = {
+		value = 0
+		add = var:export_in_dinar_libyan_dinar_fix 
+	}
+	#dinar_moroccan_dirham
+	export_in_dinar_moroccan_dirham = {
+		value = 0
+		add = var:export_in_dinar_moroccan_dirham_fix 
+	}
+	#dinar_omanian_rial
+	export_in_dinar_omanian_rial = {
+		value = 0
+		add = var:export_in_dinar_omanian_rial_fix 
+	}
+	#dinar_qiran
+	export_in_dinar_qiran = {
+		value = 0
+		add = var:export_in_dinar_qiran_fix 
+	}
+	#dinar_saudi_riyal
+	export_in_dinar_saudi_riyal = {
+		value = 0
+		add = var:export_in_dinar_saudi_riyal_fix 
+	}
+	#dinar_serbian_dinar
+	export_in_dinar_serbian_dinar = {
+		value = 0
+		add = var:export_in_dinar_serbian_dinar_fix 
+	}
+	#dinar_tunisian_dinar
+	export_in_dinar_tunisian_dinar = {
+		value = 0
+		add = var:export_in_dinar_tunisian_dinar_fix 
+	}
+	#dinar_yugoslav_dinar
+	export_in_dinar_yugoslav_dinar = {
+		value = 0
+		add = var:export_in_dinar_yugoslav_dinar_fix 
+	}
+	#dollar_australian_dollar
+	export_in_dollar_australian_dollar = {
+		value = 0
+		add = var:export_in_dollar_australian_dollar_fix 
+	}
+	#dollar_canadian_dollar
+	export_in_dollar_canadian_dollar = {
+		value = 0
+		add = var:export_in_dollar_canadian_dollar_fix 
+	}
+	#dollar_caribbean_dollar
+	export_in_dollar_caribbean_dollar = {
+		value = 0
+		add = var:export_in_dollar_caribbean_dollar_fix 
+	}
+	#dollar_confederate_states_dollar
+	export_in_dollar_confederate_states_dollar = {
+		value = 0
+		add = var:export_in_dollar_confederate_states_dollar_fix 
+	}
+	#dollar_liberian_dollar
+	export_in_dollar_liberian_dollar = {
+		value = 0
+		add = var:export_in_dollar_liberian_dollar_fix 
+	}
+	#dollar_new_zealand_dollar
+	export_in_dollar_new_zealand_dollar = {
+		value = 0
+		add = var:export_in_dollar_new_zealand_dollar_fix 
+	}
+	#dollar_sierra_leonean_dollar
+	export_in_dollar_sierra_leonean_dollar = {
+		value = 0
+		add = var:export_in_dollar_sierra_leonean_dollar_fix 
+	}
+	#dollar_united_states_dollar
+	export_in_dollar_united_states_dollar = {
+		value = 0
+		add = var:export_in_dollar_united_states_dollar_fix 
+	}
+	#eco_ariary
+	export_in_eco_ariary = {
+		value = 0
+		add = var:export_in_eco_ariary_fix 
+	}
+	#eco_central_african_eco
+	export_in_eco_central_african_eco = {
+		value = 0
+		add = var:export_in_eco_central_african_eco_fix 
+	}
+	#eco_east_african_eco
+	export_in_eco_east_african_eco = {
+		value = 0
+		add = var:export_in_eco_east_african_eco_fix 
+	}
+	#eco_ethiopian_birr
+	export_in_eco_ethiopian_birr = {
+		value = 0
+		add = var:export_in_eco_ethiopian_birr_fix 
+	}
+	#eco_ghanaian_pound
+	export_in_eco_ghanaian_pound = {
+		value = 0
+		add = var:export_in_eco_ghanaian_pound_fix 
+	}
+	#eco_nigerian_naira
+	export_in_eco_nigerian_naira = {
+		value = 0
+		add = var:export_in_eco_nigerian_naira_fix 
+	}
+	#eco_south_african_rand
+	export_in_eco_south_african_rand = {
+		value = 0
+		add = var:export_in_eco_south_african_rand_fix 
+	}
+	#eco_tuareg_ouguiya
+	export_in_eco_tuareg_ouguiya = {
+		value = 0
+		add = var:export_in_eco_tuareg_ouguiya_fix 
+	}
+	#eco_west_african_eco
+	export_in_eco_west_african_eco = {
+		value = 0
+		add = var:export_in_eco_west_african_eco_fix 
+	}
+	#franc_belgian_franc
+	export_in_franc_belgian_franc = {
+		value = 0
+		add = var:export_in_franc_belgian_franc_fix 
+	}
+	#franc_french_franc
+	export_in_franc_french_franc = {
+		value = 0
+		add = var:export_in_franc_french_franc_fix 
+	}
+	#franc_luxembourgish_franc
+	export_in_franc_luxembourgish_franc = {
+		value = 0
+		add = var:export_in_franc_luxembourgish_franc_fix 
+	}
+	#franc_swiss_franc
+	export_in_franc_swiss_franc = {
+		value = 0
+		add = var:export_in_franc_swiss_franc_fix 
+	}
+	#gulden
+	export_in_gulden = {
+		value = 0
+		add = var:export_in_gulden_fix 
+	}
+	#gulden_bavarian_gulden
+	export_in_gulden_bavarian_gulden = {
+		value = 0
+		add = var:export_in_gulden_bavarian_gulden_fix 
+	}
+	#gulden_florin
+	export_in_gulden_florin = {
+		value = 0
+		add = var:export_in_gulden_florin_fix 
+	}
+	#gulden_hungarian_forint
+	export_in_gulden_hungarian_forint = {
+		value = 0
+		add = var:export_in_gulden_hungarian_forint_fix 
+	}
+	#gulden_indies_guilder
+	export_in_gulden_indies_guilder = {
+		value = 0
+		add = var:export_in_gulden_indies_guilder_fix 
+	}
+	#gulden_south_german_gulden
+	export_in_gulden_south_german_gulden = {
+		value = 0
+		add = var:export_in_gulden_south_german_gulden_fix 
+	}
+	#krone_czech_koruna
+	export_in_krone_czech_koruna = {
+		value = 0
+		add = var:export_in_krone_czech_koruna_fix 
+	}
+	#krone_danish_krone
+	export_in_krone_danish_krone = {
+		value = 0
+		add = var:export_in_krone_danish_krone_fix 
+	}
+	#krone_estonian_kroon
+	export_in_krone_estonian_kroon = {
+		value = 0
+		add = var:export_in_krone_estonian_kroon_fix 
+	}
+	#krone_icelandic_krona
+	export_in_krone_icelandic_krona = {
+		value = 0
+		add = var:export_in_krone_icelandic_krona_fix 
+	}
+	#krone_norwegian_krone
+	export_in_krone_norwegian_krone = {
+		value = 0
+		add = var:export_in_krone_norwegian_krone_fix 
+	}
+	#krone_slovak_koruna
+	export_in_krone_slovak_koruna = {
+		value = 0
+		add = var:export_in_krone_slovak_koruna_fix 
+	}
+	#krone_swedish_krona
+	export_in_krone_swedish_krona = {
+		value = 0
+		add = var:export_in_krone_swedish_krona_fix 
+	}
+	#leon_leu
+	export_in_leon_leu = {
+		value = 0
+		add = var:export_in_leon_leu_fix 
+	}
+	#leon_lev
+	export_in_leon_lev = {
+		value = 0
+		add = var:export_in_leon_lev_fix 
+	}
+	#lira
+	export_in_lira = {
+		value = 0
+		add = var:export_in_lira_fix 
+	}
+	#lira_ducato
+	export_in_lira_ducato = {
+		value = 0
+		add = var:export_in_lira_ducato_fix 
+	}
+	#lira_ottoman_lira
+	export_in_lira_ottoman_lira = {
+		value = 0
+		add = var:export_in_lira_ottoman_lira_fix 
+	}
+	#lira_scudo_pontificio
+	export_in_lira_scudo_pontificio = {
+		value = 0
+		add = var:export_in_lira_scudo_pontificio_fix 
+	}
+	#lira_scudo_sardo
+	export_in_lira_scudo_sardo = {
+		value = 0
+		add = var:export_in_lira_scudo_sardo_fix 
+	}
+	#lira_toscane_lira
+	export_in_lira_toscane_lira = {
+		value = 0
+		add = var:export_in_lira_toscane_lira_fix 
+	}
+	#mark
+	export_in_mark = {
+		value = 0
+		add = var:export_in_mark_fix 
+	}
+	#mark_finnish_markka
+	export_in_mark_finnish_markka = {
+		value = 0
+		add = var:export_in_mark_finnish_markka_fix 
+	}
+	#peso
+	export_in_peso = {
+		value = 0
+		add = var:export_in_peso_fix 
+	}
+	#peso_argentine_peso
+	export_in_peso_argentine_peso = {
+		value = 0
+		add = var:export_in_peso_argentine_peso_fix 
+	}
+	#peso_bolivien_peso
+	export_in_peso_bolivien_peso = {
+		value = 0
+		add = var:export_in_peso_bolivien_peso_fix 
+	}
+	#peso_chilean_peso
+	export_in_peso_chilean_peso = {
+		value = 0
+		add = var:export_in_peso_chilean_peso_fix 
+	}
+	#peso_colombian_peso
+	export_in_peso_colombian_peso = {
+		value = 0
+		add = var:export_in_peso_colombian_peso_fix 
+	}
+	#peso_costa_rican_colon
+	export_in_peso_costa_rican_colon = {
+		value = 0
+		add = var:export_in_peso_costa_rican_colon_fix 
+	}
+	#peso_cuban_peso
+	export_in_peso_cuban_peso = {
+		value = 0
+		add = var:export_in_peso_cuban_peso_fix 
+	}
+	#peso_ecuadorian_peso
+	export_in_peso_ecuadorian_peso = {
+		value = 0
+		add = var:export_in_peso_ecuadorian_peso_fix 
+	}
+	#peso_el_salvador_colon
+	export_in_peso_el_salvador_colon = {
+		value = 0
+		add = var:export_in_peso_el_salvador_colon_fix 
+	}
+	#peso_guatemalan_quetzal
+	export_in_peso_guatemalan_quetzal = {
+		value = 0
+		add = var:export_in_peso_guatemalan_quetzal_fix 
+	}
+	#peso_honduran_lempira
+	export_in_peso_honduran_lempira = {
+		value = 0
+		add = var:export_in_peso_honduran_lempira_fix 
+	}
+	#peso_mexican_peso
+	export_in_peso_mexican_peso = {
+		value = 0
+		add = var:export_in_peso_mexican_peso_fix 
+	}
+	#peso_nicaraguan_cordoba
+	export_in_peso_nicaraguan_cordoba = {
+		value = 0
+		add = var:export_in_peso_nicaraguan_cordoba_fix 
+	}
+	#peso_paraguayan_peso
+	export_in_peso_paraguayan_peso = {
+		value = 0
+		add = var:export_in_peso_paraguayan_peso_fix 
+	}
+	#peso_philippine_peso
+	export_in_peso_philippine_peso = {
+		value = 0
+		add = var:export_in_peso_philippine_peso_fix 
+	}
+	#peso_sol_de_oro
+	export_in_peso_sol_de_oro = {
+		value = 0
+		add = var:export_in_peso_sol_de_oro_fix 
+	}
+	#peso_uruguayan_peso
+	export_in_peso_uruguayan_peso = {
+		value = 0
+		add = var:export_in_peso_uruguayan_peso_fix 
+	}
+	#peso_venezuelan_peso
+	export_in_peso_venezuelan_peso = {
+		value = 0
+		add = var:export_in_peso_venezuelan_peso_fix 
+	}
+	#pound_egyptian_pound
+	export_in_pound_egyptian_pound = {
+		value = 0
+		add = var:export_in_pound_egyptian_pound_fix 
+	}
+	#pound_irish_pound
+	export_in_pound_irish_pound = {
+		value = 0
+		add = var:export_in_pound_irish_pound_fix 
+	}
+	#pound_sterling
+	export_in_pound_sterling = {
+		value = 0
+		add = var:export_in_pound_sterling_fix 
+	}
+	#real
+	export_in_real = {
+		value = 0
+		add = var:export_in_real_fix 
+	}
+	#real_brazilian_real
+	export_in_real_brazilian_real = {
+		value = 0
+		add = var:export_in_real_brazilian_real_fix 
+	}
+	#rupee_indian_rupee
+	export_in_rupee_indian_rupee = {
+		value = 0
+		add = var:export_in_rupee_indian_rupee_fix 
+	}
+	#rupee_indonesian_rupiah
+	export_in_rupee_indonesian_rupiah = {
+		value = 0
+		add = var:export_in_rupee_indonesian_rupiah_fix 
+	}
+	#spe_baht
+	export_in_spe_baht = {
+		value = 0
+		add = var:export_in_spe_baht_fix 
+	}
+	#spe_dong
+	export_in_spe_dong = {
+		value = 0
+		add = var:export_in_spe_dong_fix 
+	}
+	#spe_drachma
+	export_in_spe_drachma = {
+		value = 0
+		add = var:export_in_spe_drachma_fix 
+	}
+	#spe_korean_won
+	export_in_spe_korean_won = {
+		value = 0
+		add = var:export_in_spe_korean_won_fix 
+	}
+	#spe_latvian_lats
+	export_in_spe_latvian_lats = {
+		value = 0
+		add = var:export_in_spe_latvian_lats_fix 
+	}
+	#spe_lithuanian_litas
+	export_in_spe_lithuanian_litas = {
+		value = 0
+		add = var:export_in_spe_lithuanian_litas_fix 
+	}
+	#spe_peseta
+	export_in_spe_peseta = {
+		value = 0
+		add = var:export_in_spe_peseta_fix 
+	}
+	#spe_ruble
+	export_in_spe_ruble = {
+		value = 0
+		add = var:export_in_spe_ruble_fix 
+	}
+	#spe_uni
+	export_in_spe_uni = {
+		value = 0
+		add = var:export_in_spe_uni_fix 
+	}
+	#spe_yen
+	export_in_spe_yen = {
+		value = 0
+		add = var:export_in_spe_yen_fix 
+	}
+	#spe_yuan
+	export_in_spe_yuan = {
+		value = 0
+		add = var:export_in_spe_yuan_fix 
+	}
+	#spe_zloti
+	export_in_spe_zloti = {
+		value = 0
+		add = var:export_in_spe_zloti_fix 
+	}
+	#thaler_hannoveraner_thaler
+	export_in_thaler_hannoveraner_thaler = {
+		value = 0
+		add = var:export_in_thaler_hannoveraner_thaler_fix 
+	}
+	#thaler_prussian_thaler
+	export_in_thaler_prussian_thaler = {
+		value = 0
+		add = var:export_in_thaler_prussian_thaler_fix 
+	}
+	#thaler_saxon_thaler
+	export_in_thaler_saxon_thaler = {
+		value = 0
+		add = var:export_in_thaler_saxon_thaler_fix 
+	}
+import_value_in_currency_week = {
+	value = 1
+	if = {
+		limit = {
+			not = {
+				is_subject_custom_trigger = yes
+			}
+		}
+		#begin_tag_14
+		#dinar
+		if = {
+			limit= {
+				money_value_dinar > 0
+			}
+			add = import_in_dinar
+		}
+		#dinar_algerian_dinar
+		if = {
+			limit= {
+				money_value_dinar_algerian_dinar > 0
+			}
+			add = import_in_dinar_algerian_dinar
+		}
+		#dinar_iraqi_dinar
+		if = {
+			limit= {
+				money_value_dinar_iraqi_dinar > 0
+			}
+			add = import_in_dinar_iraqi_dinar
+		}
+		#dinar_libyan_dinar
+		if = {
+			limit= {
+				money_value_dinar_libyan_dinar > 0
+			}
+			add = import_in_dinar_libyan_dinar
+		}
+		#dinar_moroccan_dirham
+		if = {
+			limit= {
+				money_value_dinar_moroccan_dirham > 0
+			}
+			add = import_in_dinar_moroccan_dirham
+		}
+		#dinar_omanian_rial
+		if = {
+			limit= {
+				money_value_dinar_omanian_rial > 0
+			}
+			add = import_in_dinar_omanian_rial
+		}
+		#dinar_qiran
+		if = {
+			limit= {
+				money_value_dinar_qiran > 0
+			}
+			add = import_in_dinar_qiran
+		}
+		#dinar_saudi_riyal
+		if = {
+			limit= {
+				money_value_dinar_saudi_riyal > 0
+			}
+			add = import_in_dinar_saudi_riyal
+		}
+		#dinar_serbian_dinar
+		if = {
+			limit= {
+				money_value_dinar_serbian_dinar > 0
+			}
+			add = import_in_dinar_serbian_dinar
+		}
+		#dinar_tunisian_dinar
+		if = {
+			limit= {
+				money_value_dinar_tunisian_dinar > 0
+			}
+			add = import_in_dinar_tunisian_dinar
+		}
+		#dinar_yugoslav_dinar
+		if = {
+			limit= {
+				money_value_dinar_yugoslav_dinar > 0
+			}
+			add = import_in_dinar_yugoslav_dinar
+		}
+		#dollar_australian_dollar
+		if = {
+			limit= {
+				money_value_dollar_australian_dollar > 0
+			}
+			add = import_in_dollar_australian_dollar
+		}
+		#dollar_canadian_dollar
+		if = {
+			limit= {
+				money_value_dollar_canadian_dollar > 0
+			}
+			add = import_in_dollar_canadian_dollar
+		}
+		#dollar_caribbean_dollar
+		if = {
+			limit= {
+				money_value_dollar_caribbean_dollar > 0
+			}
+			add = import_in_dollar_caribbean_dollar
+		}
+		#dollar_confederate_states_dollar
+		if = {
+			limit= {
+				money_value_dollar_confederate_states_dollar > 0
+			}
+			add = import_in_dollar_confederate_states_dollar
+		}
+		#dollar_liberian_dollar
+		if = {
+			limit= {
+				money_value_dollar_liberian_dollar > 0
+			}
+			add = import_in_dollar_liberian_dollar
+		}
+		#dollar_new_zealand_dollar
+		if = {
+			limit= {
+				money_value_dollar_new_zealand_dollar > 0
+			}
+			add = import_in_dollar_new_zealand_dollar
+		}
+		#dollar_sierra_leonean_dollar
+		if = {
+			limit= {
+				money_value_dollar_sierra_leonean_dollar > 0
+			}
+			add = import_in_dollar_sierra_leonean_dollar
+		}
+		#dollar_united_states_dollar
+		if = {
+			limit= {
+				money_value_dollar_united_states_dollar > 0
+			}
+			add = import_in_dollar_united_states_dollar
+		}
+		#eco_ariary
+		if = {
+			limit= {
+				money_value_eco_ariary > 0
+			}
+			add = import_in_eco_ariary
+		}
+		#eco_central_african_eco
+		if = {
+			limit= {
+				money_value_eco_central_african_eco > 0
+			}
+			add = import_in_eco_central_african_eco
+		}
+		#eco_east_african_eco
+		if = {
+			limit= {
+				money_value_eco_east_african_eco > 0
+			}
+			add = import_in_eco_east_african_eco
+		}
+		#eco_ethiopian_birr
+		if = {
+			limit= {
+				money_value_eco_ethiopian_birr > 0
+			}
+			add = import_in_eco_ethiopian_birr
+		}
+		#eco_ghanaian_pound
+		if = {
+			limit= {
+				money_value_eco_ghanaian_pound > 0
+			}
+			add = import_in_eco_ghanaian_pound
+		}
+		#eco_nigerian_naira
+		if = {
+			limit= {
+				money_value_eco_nigerian_naira > 0
+			}
+			add = import_in_eco_nigerian_naira
+		}
+		#eco_south_african_rand
+		if = {
+			limit= {
+				money_value_eco_south_african_rand > 0
+			}
+			add = import_in_eco_south_african_rand
+		}
+		#eco_tuareg_ouguiya
+		if = {
+			limit= {
+				money_value_eco_tuareg_ouguiya > 0
+			}
+			add = import_in_eco_tuareg_ouguiya
+		}
+		#eco_west_african_eco
+		if = {
+			limit= {
+				money_value_eco_west_african_eco > 0
+			}
+			add = import_in_eco_west_african_eco
+		}
+		#franc_belgian_franc
+		if = {
+			limit= {
+				money_value_franc_belgian_franc > 0
+			}
+			add = import_in_franc_belgian_franc
+		}
+		#franc_french_franc
+		if = {
+			limit= {
+				money_value_franc_french_franc > 0
+			}
+			add = import_in_franc_french_franc
+		}
+		#franc_luxembourgish_franc
+		if = {
+			limit= {
+				money_value_franc_luxembourgish_franc > 0
+			}
+			add = import_in_franc_luxembourgish_franc
+		}
+		#franc_swiss_franc
+		if = {
+			limit= {
+				money_value_franc_swiss_franc > 0
+			}
+			add = import_in_franc_swiss_franc
+		}
+		#gulden
+		if = {
+			limit= {
+				money_value_gulden > 0
+			}
+			add = import_in_gulden
+		}
+		#gulden_bavarian_gulden
+		if = {
+			limit= {
+				money_value_gulden_bavarian_gulden > 0
+			}
+			add = import_in_gulden_bavarian_gulden
+		}
+		#gulden_florin
+		if = {
+			limit= {
+				money_value_gulden_florin > 0
+			}
+			add = import_in_gulden_florin
+		}
+		#gulden_hungarian_forint
+		if = {
+			limit= {
+				money_value_gulden_hungarian_forint > 0
+			}
+			add = import_in_gulden_hungarian_forint
+		}
+		#gulden_indies_guilder
+		if = {
+			limit= {
+				money_value_gulden_indies_guilder > 0
+			}
+			add = import_in_gulden_indies_guilder
+		}
+		#gulden_south_german_gulden
+		if = {
+			limit= {
+				money_value_gulden_south_german_gulden > 0
+			}
+			add = import_in_gulden_south_german_gulden
+		}
+		#krone_czech_koruna
+		if = {
+			limit= {
+				money_value_krone_czech_koruna > 0
+			}
+			add = import_in_krone_czech_koruna
+		}
+		#krone_danish_krone
+		if = {
+			limit= {
+				money_value_krone_danish_krone > 0
+			}
+			add = import_in_krone_danish_krone
+		}
+		#krone_estonian_kroon
+		if = {
+			limit= {
+				money_value_krone_estonian_kroon > 0
+			}
+			add = import_in_krone_estonian_kroon
+		}
+		#krone_icelandic_krona
+		if = {
+			limit= {
+				money_value_krone_icelandic_krona > 0
+			}
+			add = import_in_krone_icelandic_krona
+		}
+		#krone_norwegian_krone
+		if = {
+			limit= {
+				money_value_krone_norwegian_krone > 0
+			}
+			add = import_in_krone_norwegian_krone
+		}
+		#krone_slovak_koruna
+		if = {
+			limit= {
+				money_value_krone_slovak_koruna > 0
+			}
+			add = import_in_krone_slovak_koruna
+		}
+		#krone_swedish_krona
+		if = {
+			limit= {
+				money_value_krone_swedish_krona > 0
+			}
+			add = import_in_krone_swedish_krona
+		}
+		#leon_leu
+		if = {
+			limit= {
+				money_value_leon_leu > 0
+			}
+			add = import_in_leon_leu
+		}
+		#leon_lev
+		if = {
+			limit= {
+				money_value_leon_lev > 0
+			}
+			add = import_in_leon_lev
+		}
+		#lira
+		if = {
+			limit= {
+				money_value_lira > 0
+			}
+			add = import_in_lira
+		}
+		#lira_ducato
+		if = {
+			limit= {
+				money_value_lira_ducato > 0
+			}
+			add = import_in_lira_ducato
+		}
+		#lira_ottoman_lira
+		if = {
+			limit= {
+				money_value_lira_ottoman_lira > 0
+			}
+			add = import_in_lira_ottoman_lira
+		}
+		#lira_scudo_pontificio
+		if = {
+			limit= {
+				money_value_lira_scudo_pontificio > 0
+			}
+			add = import_in_lira_scudo_pontificio
+		}
+		#lira_scudo_sardo
+		if = {
+			limit= {
+				money_value_lira_scudo_sardo > 0
+			}
+			add = import_in_lira_scudo_sardo
+		}
+		#lira_toscane_lira
+		if = {
+			limit= {
+				money_value_lira_toscane_lira > 0
+			}
+			add = import_in_lira_toscane_lira
+		}
+		#mark
+		if = {
+			limit= {
+				money_value_mark > 0
+			}
+			add = import_in_mark
+		}
+		#mark_finnish_markka
+		if = {
+			limit= {
+				money_value_mark_finnish_markka > 0
+			}
+			add = import_in_mark_finnish_markka
+		}
+		#peso
+		if = {
+			limit= {
+				money_value_peso > 0
+			}
+			add = import_in_peso
+		}
+		#peso_argentine_peso
+		if = {
+			limit= {
+				money_value_peso_argentine_peso > 0
+			}
+			add = import_in_peso_argentine_peso
+		}
+		#peso_bolivien_peso
+		if = {
+			limit= {
+				money_value_peso_bolivien_peso > 0
+			}
+			add = import_in_peso_bolivien_peso
+		}
+		#peso_chilean_peso
+		if = {
+			limit= {
+				money_value_peso_chilean_peso > 0
+			}
+			add = import_in_peso_chilean_peso
+		}
+		#peso_colombian_peso
+		if = {
+			limit= {
+				money_value_peso_colombian_peso > 0
+			}
+			add = import_in_peso_colombian_peso
+		}
+		#peso_costa_rican_colon
+		if = {
+			limit= {
+				money_value_peso_costa_rican_colon > 0
+			}
+			add = import_in_peso_costa_rican_colon
+		}
+		#peso_cuban_peso
+		if = {
+			limit= {
+				money_value_peso_cuban_peso > 0
+			}
+			add = import_in_peso_cuban_peso
+		}
+		#peso_ecuadorian_peso
+		if = {
+			limit= {
+				money_value_peso_ecuadorian_peso > 0
+			}
+			add = import_in_peso_ecuadorian_peso
+		}
+		#peso_el_salvador_colon
+		if = {
+			limit= {
+				money_value_peso_el_salvador_colon > 0
+			}
+			add = import_in_peso_el_salvador_colon
+		}
+		#peso_guatemalan_quetzal
+		if = {
+			limit= {
+				money_value_peso_guatemalan_quetzal > 0
+			}
+			add = import_in_peso_guatemalan_quetzal
+		}
+		#peso_honduran_lempira
+		if = {
+			limit= {
+				money_value_peso_honduran_lempira > 0
+			}
+			add = import_in_peso_honduran_lempira
+		}
+		#peso_mexican_peso
+		if = {
+			limit= {
+				money_value_peso_mexican_peso > 0
+			}
+			add = import_in_peso_mexican_peso
+		}
+		#peso_nicaraguan_cordoba
+		if = {
+			limit= {
+				money_value_peso_nicaraguan_cordoba > 0
+			}
+			add = import_in_peso_nicaraguan_cordoba
+		}
+		#peso_paraguayan_peso
+		if = {
+			limit= {
+				money_value_peso_paraguayan_peso > 0
+			}
+			add = import_in_peso_paraguayan_peso
+		}
+		#peso_philippine_peso
+		if = {
+			limit= {
+				money_value_peso_philippine_peso > 0
+			}
+			add = import_in_peso_philippine_peso
+		}
+		#peso_sol_de_oro
+		if = {
+			limit= {
+				money_value_peso_sol_de_oro > 0
+			}
+			add = import_in_peso_sol_de_oro
+		}
+		#peso_uruguayan_peso
+		if = {
+			limit= {
+				money_value_peso_uruguayan_peso > 0
+			}
+			add = import_in_peso_uruguayan_peso
+		}
+		#peso_venezuelan_peso
+		if = {
+			limit= {
+				money_value_peso_venezuelan_peso > 0
+			}
+			add = import_in_peso_venezuelan_peso
+		}
+		#pound_egyptian_pound
+		if = {
+			limit= {
+				money_value_pound_egyptian_pound > 0
+			}
+			add = import_in_pound_egyptian_pound
+		}
+		#pound_irish_pound
+		if = {
+			limit= {
+				money_value_pound_irish_pound > 0
+			}
+			add = import_in_pound_irish_pound
+		}
+		#pound_sterling
+		if = {
+			limit= {
+				money_value_pound_sterling > 0
+			}
+			add = import_in_pound_sterling
+		}
+		#real
+		if = {
+			limit= {
+				money_value_real > 0
+			}
+			add = import_in_real
+		}
+		#real_brazilian_real
+		if = {
+			limit= {
+				money_value_real_brazilian_real > 0
+			}
+			add = import_in_real_brazilian_real
+		}
+		#rupee_indian_rupee
+		if = {
+			limit= {
+				money_value_rupee_indian_rupee > 0
+			}
+			add = import_in_rupee_indian_rupee
+		}
+		#rupee_indonesian_rupiah
+		if = {
+			limit= {
+				money_value_rupee_indonesian_rupiah > 0
+			}
+			add = import_in_rupee_indonesian_rupiah
+		}
+		#spe_baht
+		if = {
+			limit= {
+				money_value_spe_baht > 0
+			}
+			add = import_in_spe_baht
+		}
+		#spe_dong
+		if = {
+			limit= {
+				money_value_spe_dong > 0
+			}
+			add = import_in_spe_dong
+		}
+		#spe_drachma
+		if = {
+			limit= {
+				money_value_spe_drachma > 0
+			}
+			add = import_in_spe_drachma
+		}
+		#spe_korean_won
+		if = {
+			limit= {
+				money_value_spe_korean_won > 0
+			}
+			add = import_in_spe_korean_won
+		}
+		#spe_latvian_lats
+		if = {
+			limit= {
+				money_value_spe_latvian_lats > 0
+			}
+			add = import_in_spe_latvian_lats
+		}
+		#spe_lithuanian_litas
+		if = {
+			limit= {
+				money_value_spe_lithuanian_litas > 0
+			}
+			add = import_in_spe_lithuanian_litas
+		}
+		#spe_peseta
+		if = {
+			limit= {
+				money_value_spe_peseta > 0
+			}
+			add = import_in_spe_peseta
+		}
+		#spe_ruble
+		if = {
+			limit= {
+				money_value_spe_ruble > 0
+			}
+			add = import_in_spe_ruble
+		}
+		#spe_uni
+		if = {
+			limit= {
+				money_value_spe_uni > 0
+			}
+			add = import_in_spe_uni
+		}
+		#spe_yen
+		if = {
+			limit= {
+				money_value_spe_yen > 0
+			}
+			add = import_in_spe_yen
+		}
+		#spe_yuan
+		if = {
+			limit= {
+				money_value_spe_yuan > 0
+			}
+			add = import_in_spe_yuan
+		}
+		#spe_zloti
+		if = {
+			limit= {
+				money_value_spe_zloti > 0
+			}
+			add = import_in_spe_zloti
+		}
+		#thaler_hannoveraner_thaler
+		if = {
+			limit= {
+				money_value_thaler_hannoveraner_thaler > 0
+			}
+			add = import_in_thaler_hannoveraner_thaler
+		}
+		#thaler_prussian_thaler
+		if = {
+			limit= {
+				money_value_thaler_prussian_thaler > 0
+			}
+			add = import_in_thaler_prussian_thaler
+		}
+		#thaler_saxon_thaler
+		if = {
+			limit= {
+				money_value_thaler_saxon_thaler > 0
+			}
+			add = import_in_thaler_saxon_thaler
+		}#end_tag_14
+	}
+}
+excess_foreign_state_currency_in_gold_week = {
+	value = 0
+	if = {
+		limit = {
+			not = {
+				is_subject_custom_trigger = yes
+			}
+		}
+		   		#dinar
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_dinar > 0
+						export_to_dinar > 0
+					}
+					add = export_in_dinar
+					multiply = money_value_dinar_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#dinar_algerian_dinar
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_dinar_algerian_dinar > 0
+						export_to_dinar_algerian_dinar > 0
+					}
+					add = export_in_dinar_algerian_dinar
+					multiply = money_value_dinar_algerian_dinar_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#dinar_iraqi_dinar
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_dinar_iraqi_dinar > 0
+						export_to_dinar_iraqi_dinar > 0
+					}
+					add = export_in_dinar_iraqi_dinar
+					multiply = money_value_dinar_iraqi_dinar_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#dinar_libyan_dinar
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_dinar_libyan_dinar > 0
+						export_to_dinar_libyan_dinar > 0
+					}
+					add = export_in_dinar_libyan_dinar
+					multiply = money_value_dinar_libyan_dinar_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#dinar_moroccan_dirham
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_dinar_moroccan_dirham > 0
+						export_to_dinar_moroccan_dirham > 0
+					}
+					add = export_in_dinar_moroccan_dirham
+					multiply = money_value_dinar_moroccan_dirham_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#dinar_omanian_rial
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_dinar_omanian_rial > 0
+						export_to_dinar_omanian_rial > 0
+					}
+					add = export_in_dinar_omanian_rial
+					multiply = money_value_dinar_omanian_rial_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#dinar_qiran
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_dinar_qiran > 0
+						export_to_dinar_qiran > 0
+					}
+					add = export_in_dinar_qiran
+					multiply = money_value_dinar_qiran_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#dinar_saudi_riyal
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_dinar_saudi_riyal > 0
+						export_to_dinar_saudi_riyal > 0
+					}
+					add = export_in_dinar_saudi_riyal
+					multiply = money_value_dinar_saudi_riyal_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#dinar_serbian_dinar
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_dinar_serbian_dinar > 0
+						export_to_dinar_serbian_dinar > 0
+					}
+					add = export_in_dinar_serbian_dinar
+					multiply = money_value_dinar_serbian_dinar_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#dinar_tunisian_dinar
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_dinar_tunisian_dinar > 0
+						export_to_dinar_tunisian_dinar > 0
+					}
+					add = export_in_dinar_tunisian_dinar
+					multiply = money_value_dinar_tunisian_dinar_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#dinar_yugoslav_dinar
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_dinar_yugoslav_dinar > 0
+						export_to_dinar_yugoslav_dinar > 0
+					}
+					add = export_in_dinar_yugoslav_dinar
+					multiply = money_value_dinar_yugoslav_dinar_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#dollar_australian_dollar
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_dollar_australian_dollar > 0
+						export_to_dollar_australian_dollar > 0
+					}
+					add = export_in_dollar_australian_dollar
+					multiply = money_value_dollar_australian_dollar_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#dollar_canadian_dollar
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_dollar_canadian_dollar > 0
+						export_to_dollar_canadian_dollar > 0
+					}
+					add = export_in_dollar_canadian_dollar
+					multiply = money_value_dollar_canadian_dollar_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#dollar_caribbean_dollar
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_dollar_caribbean_dollar > 0
+						export_to_dollar_caribbean_dollar > 0
+					}
+					add = export_in_dollar_caribbean_dollar
+					multiply = money_value_dollar_caribbean_dollar_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#dollar_confederate_states_dollar
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_dollar_confederate_states_dollar > 0
+						export_to_dollar_confederate_states_dollar > 0
+					}
+					add = export_in_dollar_confederate_states_dollar
+					multiply = money_value_dollar_confederate_states_dollar_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#dollar_liberian_dollar
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_dollar_liberian_dollar > 0
+						export_to_dollar_liberian_dollar > 0
+					}
+					add = export_in_dollar_liberian_dollar
+					multiply = money_value_dollar_liberian_dollar_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#dollar_new_zealand_dollar
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_dollar_new_zealand_dollar > 0
+						export_to_dollar_new_zealand_dollar > 0
+					}
+					add = export_in_dollar_new_zealand_dollar
+					multiply = money_value_dollar_new_zealand_dollar_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#dollar_sierra_leonean_dollar
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_dollar_sierra_leonean_dollar > 0
+						export_to_dollar_sierra_leonean_dollar > 0
+					}
+					add = export_in_dollar_sierra_leonean_dollar
+					multiply = money_value_dollar_sierra_leonean_dollar_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#dollar_united_states_dollar
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_dollar_united_states_dollar > 0
+						export_to_dollar_united_states_dollar > 0
+					}
+					add = export_in_dollar_united_states_dollar
+					multiply = money_value_dollar_united_states_dollar_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#eco_ariary
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_eco_ariary > 0
+						export_to_eco_ariary > 0
+					}
+					add = export_in_eco_ariary
+					multiply = money_value_eco_ariary_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#eco_central_african_eco
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_eco_central_african_eco > 0
+						export_to_eco_central_african_eco > 0
+					}
+					add = export_in_eco_central_african_eco
+					multiply = money_value_eco_central_african_eco_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#eco_east_african_eco
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_eco_east_african_eco > 0
+						export_to_eco_east_african_eco > 0
+					}
+					add = export_in_eco_east_african_eco
+					multiply = money_value_eco_east_african_eco_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#eco_ethiopian_birr
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_eco_ethiopian_birr > 0
+						export_to_eco_ethiopian_birr > 0
+					}
+					add = export_in_eco_ethiopian_birr
+					multiply = money_value_eco_ethiopian_birr_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#eco_ghanaian_pound
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_eco_ghanaian_pound > 0
+						export_to_eco_ghanaian_pound > 0
+					}
+					add = export_in_eco_ghanaian_pound
+					multiply = money_value_eco_ghanaian_pound_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#eco_nigerian_naira
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_eco_nigerian_naira > 0
+						export_to_eco_nigerian_naira > 0
+					}
+					add = export_in_eco_nigerian_naira
+					multiply = money_value_eco_nigerian_naira_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#eco_south_african_rand
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_eco_south_african_rand > 0
+						export_to_eco_south_african_rand > 0
+					}
+					add = export_in_eco_south_african_rand
+					multiply = money_value_eco_south_african_rand_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#eco_tuareg_ouguiya
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_eco_tuareg_ouguiya > 0
+						export_to_eco_tuareg_ouguiya > 0
+					}
+					add = export_in_eco_tuareg_ouguiya
+					multiply = money_value_eco_tuareg_ouguiya_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#eco_west_african_eco
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_eco_west_african_eco > 0
+						export_to_eco_west_african_eco > 0
+					}
+					add = export_in_eco_west_african_eco
+					multiply = money_value_eco_west_african_eco_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#franc_belgian_franc
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_franc_belgian_franc > 0
+						export_to_franc_belgian_franc > 0
+					}
+					add = export_in_franc_belgian_franc
+					multiply = money_value_franc_belgian_franc_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#franc_french_franc
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_franc_french_franc > 0
+						export_to_franc_french_franc > 0
+					}
+					add = export_in_franc_french_franc
+					multiply = money_value_franc_french_franc_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#franc_luxembourgish_franc
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_franc_luxembourgish_franc > 0
+						export_to_franc_luxembourgish_franc > 0
+					}
+					add = export_in_franc_luxembourgish_franc
+					multiply = money_value_franc_luxembourgish_franc_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#franc_swiss_franc
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_franc_swiss_franc > 0
+						export_to_franc_swiss_franc > 0
+					}
+					add = export_in_franc_swiss_franc
+					multiply = money_value_franc_swiss_franc_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#gulden
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_gulden > 0
+						export_to_gulden > 0
+					}
+					add = export_in_gulden
+					multiply = money_value_gulden_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#gulden_bavarian_gulden
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_gulden_bavarian_gulden > 0
+						export_to_gulden_bavarian_gulden > 0
+					}
+					add = export_in_gulden_bavarian_gulden
+					multiply = money_value_gulden_bavarian_gulden_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#gulden_florin
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_gulden_florin > 0
+						export_to_gulden_florin > 0
+					}
+					add = export_in_gulden_florin
+					multiply = money_value_gulden_florin_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#gulden_hungarian_forint
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_gulden_hungarian_forint > 0
+						export_to_gulden_hungarian_forint > 0
+					}
+					add = export_in_gulden_hungarian_forint
+					multiply = money_value_gulden_hungarian_forint_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#gulden_indies_guilder
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_gulden_indies_guilder > 0
+						export_to_gulden_indies_guilder > 0
+					}
+					add = export_in_gulden_indies_guilder
+					multiply = money_value_gulden_indies_guilder_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#gulden_south_german_gulden
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_gulden_south_german_gulden > 0
+						export_to_gulden_south_german_gulden > 0
+					}
+					add = export_in_gulden_south_german_gulden
+					multiply = money_value_gulden_south_german_gulden_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#krone_czech_koruna
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_krone_czech_koruna > 0
+						export_to_krone_czech_koruna > 0
+					}
+					add = export_in_krone_czech_koruna
+					multiply = money_value_krone_czech_koruna_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#krone_danish_krone
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_krone_danish_krone > 0
+						export_to_krone_danish_krone > 0
+					}
+					add = export_in_krone_danish_krone
+					multiply = money_value_krone_danish_krone_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#krone_estonian_kroon
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_krone_estonian_kroon > 0
+						export_to_krone_estonian_kroon > 0
+					}
+					add = export_in_krone_estonian_kroon
+					multiply = money_value_krone_estonian_kroon_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#krone_icelandic_krona
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_krone_icelandic_krona > 0
+						export_to_krone_icelandic_krona > 0
+					}
+					add = export_in_krone_icelandic_krona
+					multiply = money_value_krone_icelandic_krona_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#krone_norwegian_krone
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_krone_norwegian_krone > 0
+						export_to_krone_norwegian_krone > 0
+					}
+					add = export_in_krone_norwegian_krone
+					multiply = money_value_krone_norwegian_krone_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#krone_slovak_koruna
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_krone_slovak_koruna > 0
+						export_to_krone_slovak_koruna > 0
+					}
+					add = export_in_krone_slovak_koruna
+					multiply = money_value_krone_slovak_koruna_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#krone_swedish_krona
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_krone_swedish_krona > 0
+						export_to_krone_swedish_krona > 0
+					}
+					add = export_in_krone_swedish_krona
+					multiply = money_value_krone_swedish_krona_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#leon_leu
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_leon_leu > 0
+						export_to_leon_leu > 0
+					}
+					add = export_in_leon_leu
+					multiply = money_value_leon_leu_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#leon_lev
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_leon_lev > 0
+						export_to_leon_lev > 0
+					}
+					add = export_in_leon_lev
+					multiply = money_value_leon_lev_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#lira
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_lira > 0
+						export_to_lira > 0
+					}
+					add = export_in_lira
+					multiply = money_value_lira_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#lira_ducato
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_lira_ducato > 0
+						export_to_lira_ducato > 0
+					}
+					add = export_in_lira_ducato
+					multiply = money_value_lira_ducato_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#lira_ottoman_lira
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_lira_ottoman_lira > 0
+						export_to_lira_ottoman_lira > 0
+					}
+					add = export_in_lira_ottoman_lira
+					multiply = money_value_lira_ottoman_lira_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#lira_scudo_pontificio
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_lira_scudo_pontificio > 0
+						export_to_lira_scudo_pontificio > 0
+					}
+					add = export_in_lira_scudo_pontificio
+					multiply = money_value_lira_scudo_pontificio_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#lira_scudo_sardo
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_lira_scudo_sardo > 0
+						export_to_lira_scudo_sardo > 0
+					}
+					add = export_in_lira_scudo_sardo
+					multiply = money_value_lira_scudo_sardo_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#lira_toscane_lira
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_lira_toscane_lira > 0
+						export_to_lira_toscane_lira > 0
+					}
+					add = export_in_lira_toscane_lira
+					multiply = money_value_lira_toscane_lira_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#mark
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_mark > 0
+						export_to_mark > 0
+					}
+					add = export_in_mark
+					multiply = money_value_mark_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#mark_finnish_markka
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_mark_finnish_markka > 0
+						export_to_mark_finnish_markka > 0
+					}
+					add = export_in_mark_finnish_markka
+					multiply = money_value_mark_finnish_markka_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#peso
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_peso > 0
+						export_to_peso > 0
+					}
+					add = export_in_peso
+					multiply = money_value_peso_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#peso_argentine_peso
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_peso_argentine_peso > 0
+						export_to_peso_argentine_peso > 0
+					}
+					add = export_in_peso_argentine_peso
+					multiply = money_value_peso_argentine_peso_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#peso_bolivien_peso
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_peso_bolivien_peso > 0
+						export_to_peso_bolivien_peso > 0
+					}
+					add = export_in_peso_bolivien_peso
+					multiply = money_value_peso_bolivien_peso_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#peso_chilean_peso
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_peso_chilean_peso > 0
+						export_to_peso_chilean_peso > 0
+					}
+					add = export_in_peso_chilean_peso
+					multiply = money_value_peso_chilean_peso_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#peso_colombian_peso
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_peso_colombian_peso > 0
+						export_to_peso_colombian_peso > 0
+					}
+					add = export_in_peso_colombian_peso
+					multiply = money_value_peso_colombian_peso_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#peso_costa_rican_colon
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_peso_costa_rican_colon > 0
+						export_to_peso_costa_rican_colon > 0
+					}
+					add = export_in_peso_costa_rican_colon
+					multiply = money_value_peso_costa_rican_colon_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#peso_cuban_peso
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_peso_cuban_peso > 0
+						export_to_peso_cuban_peso > 0
+					}
+					add = export_in_peso_cuban_peso
+					multiply = money_value_peso_cuban_peso_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#peso_ecuadorian_peso
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_peso_ecuadorian_peso > 0
+						export_to_peso_ecuadorian_peso > 0
+					}
+					add = export_in_peso_ecuadorian_peso
+					multiply = money_value_peso_ecuadorian_peso_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#peso_el_salvador_colon
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_peso_el_salvador_colon > 0
+						export_to_peso_el_salvador_colon > 0
+					}
+					add = export_in_peso_el_salvador_colon
+					multiply = money_value_peso_el_salvador_colon_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#peso_guatemalan_quetzal
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_peso_guatemalan_quetzal > 0
+						export_to_peso_guatemalan_quetzal > 0
+					}
+					add = export_in_peso_guatemalan_quetzal
+					multiply = money_value_peso_guatemalan_quetzal_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#peso_honduran_lempira
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_peso_honduran_lempira > 0
+						export_to_peso_honduran_lempira > 0
+					}
+					add = export_in_peso_honduran_lempira
+					multiply = money_value_peso_honduran_lempira_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#peso_mexican_peso
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_peso_mexican_peso > 0
+						export_to_peso_mexican_peso > 0
+					}
+					add = export_in_peso_mexican_peso
+					multiply = money_value_peso_mexican_peso_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#peso_nicaraguan_cordoba
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_peso_nicaraguan_cordoba > 0
+						export_to_peso_nicaraguan_cordoba > 0
+					}
+					add = export_in_peso_nicaraguan_cordoba
+					multiply = money_value_peso_nicaraguan_cordoba_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#peso_paraguayan_peso
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_peso_paraguayan_peso > 0
+						export_to_peso_paraguayan_peso > 0
+					}
+					add = export_in_peso_paraguayan_peso
+					multiply = money_value_peso_paraguayan_peso_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#peso_philippine_peso
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_peso_philippine_peso > 0
+						export_to_peso_philippine_peso > 0
+					}
+					add = export_in_peso_philippine_peso
+					multiply = money_value_peso_philippine_peso_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#peso_sol_de_oro
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_peso_sol_de_oro > 0
+						export_to_peso_sol_de_oro > 0
+					}
+					add = export_in_peso_sol_de_oro
+					multiply = money_value_peso_sol_de_oro_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#peso_uruguayan_peso
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_peso_uruguayan_peso > 0
+						export_to_peso_uruguayan_peso > 0
+					}
+					add = export_in_peso_uruguayan_peso
+					multiply = money_value_peso_uruguayan_peso_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#peso_venezuelan_peso
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_peso_venezuelan_peso > 0
+						export_to_peso_venezuelan_peso > 0
+					}
+					add = export_in_peso_venezuelan_peso
+					multiply = money_value_peso_venezuelan_peso_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#pound_egyptian_pound
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_pound_egyptian_pound > 0
+						export_to_pound_egyptian_pound > 0
+					}
+					add = export_in_pound_egyptian_pound
+					multiply = money_value_pound_egyptian_pound_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#pound_irish_pound
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_pound_irish_pound > 0
+						export_to_pound_irish_pound > 0
+					}
+					add = export_in_pound_irish_pound
+					multiply = money_value_pound_irish_pound_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#pound_sterling
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_pound_sterling > 0
+						export_to_pound_sterling > 0
+					}
+					add = export_in_pound_sterling
+					multiply = money_value_pound_sterling_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#real
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_real > 0
+						export_to_real > 0
+					}
+					add = export_in_real
+					multiply = money_value_real_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#real_brazilian_real
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_real_brazilian_real > 0
+						export_to_real_brazilian_real > 0
+					}
+					add = export_in_real_brazilian_real
+					multiply = money_value_real_brazilian_real_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#rupee_indian_rupee
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_rupee_indian_rupee > 0
+						export_to_rupee_indian_rupee > 0
+					}
+					add = export_in_rupee_indian_rupee
+					multiply = money_value_rupee_indian_rupee_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#rupee_indonesian_rupiah
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_rupee_indonesian_rupiah > 0
+						export_to_rupee_indonesian_rupiah > 0
+					}
+					add = export_in_rupee_indonesian_rupiah
+					multiply = money_value_rupee_indonesian_rupiah_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#spe_baht
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_spe_baht > 0
+						export_to_spe_baht > 0
+					}
+					add = export_in_spe_baht
+					multiply = money_value_spe_baht_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#spe_dong
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_spe_dong > 0
+						export_to_spe_dong > 0
+					}
+					add = export_in_spe_dong
+					multiply = money_value_spe_dong_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#spe_drachma
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_spe_drachma > 0
+						export_to_spe_drachma > 0
+					}
+					add = export_in_spe_drachma
+					multiply = money_value_spe_drachma_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#spe_korean_won
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_spe_korean_won > 0
+						export_to_spe_korean_won > 0
+					}
+					add = export_in_spe_korean_won
+					multiply = money_value_spe_korean_won_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#spe_latvian_lats
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_spe_latvian_lats > 0
+						export_to_spe_latvian_lats > 0
+					}
+					add = export_in_spe_latvian_lats
+					multiply = money_value_spe_latvian_lats_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#spe_lithuanian_litas
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_spe_lithuanian_litas > 0
+						export_to_spe_lithuanian_litas > 0
+					}
+					add = export_in_spe_lithuanian_litas
+					multiply = money_value_spe_lithuanian_litas_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#spe_peseta
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_spe_peseta > 0
+						export_to_spe_peseta > 0
+					}
+					add = export_in_spe_peseta
+					multiply = money_value_spe_peseta_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#spe_ruble
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_spe_ruble > 0
+						export_to_spe_ruble > 0
+					}
+					add = export_in_spe_ruble
+					multiply = money_value_spe_ruble_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#spe_uni
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_spe_uni > 0
+						export_to_spe_uni > 0
+					}
+					add = export_in_spe_uni
+					multiply = money_value_spe_uni_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#spe_yen
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_spe_yen > 0
+						export_to_spe_yen > 0
+					}
+					add = export_in_spe_yen
+					multiply = money_value_spe_yen_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#spe_yuan
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_spe_yuan > 0
+						export_to_spe_yuan > 0
+					}
+					add = export_in_spe_yuan
+					multiply = money_value_spe_yuan_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#spe_zloti
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_spe_zloti > 0
+						export_to_spe_zloti > 0
+					}
+					add = export_in_spe_zloti
+					multiply = money_value_spe_zloti_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#thaler_hannoveraner_thaler
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_thaler_hannoveraner_thaler > 0
+						export_to_thaler_hannoveraner_thaler > 0
+					}
+					add = export_in_thaler_hannoveraner_thaler
+					multiply = money_value_thaler_hannoveraner_thaler_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#thaler_prussian_thaler
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_thaler_prussian_thaler > 0
+						export_to_thaler_prussian_thaler > 0
+					}
+					add = export_in_thaler_prussian_thaler
+					multiply = money_value_thaler_prussian_thaler_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		}
+   		#thaler_saxon_thaler
+		add = {
+			value = {
+				if = {
+					limit = {
+						money_value_thaler_saxon_thaler > 0
+						export_to_thaler_saxon_thaler > 0
+					}
+					add = export_in_thaler_saxon_thaler
+					multiply = money_value_thaler_saxon_thaler_related_to_country_law 						
+					if = {
+						limit = { has_law = law_type:law_silver_standard }
+						multiply = silver_crisis_multiplicator_factor
+					} 
+				}
+			}
+		} 
+    }
+}
+import_from_currency_sum = {
+	value = 0
+
+	#dinar
+	if = {
+		limit= {
+			money_value_dinar > 0
+		}
+		add = import_from_dinar
+	}
+	#dinar_algerian_dinar
+	if = {
+		limit= {
+			money_value_dinar_algerian_dinar > 0
+		}
+		add = import_from_dinar_algerian_dinar
+	}
+	#dinar_iraqi_dinar
+	if = {
+		limit= {
+			money_value_dinar_iraqi_dinar > 0
+		}
+		add = import_from_dinar_iraqi_dinar
+	}
+	#dinar_libyan_dinar
+	if = {
+		limit= {
+			money_value_dinar_libyan_dinar > 0
+		}
+		add = import_from_dinar_libyan_dinar
+	}
+	#dinar_moroccan_dirham
+	if = {
+		limit= {
+			money_value_dinar_moroccan_dirham > 0
+		}
+		add = import_from_dinar_moroccan_dirham
+	}
+	#dinar_omanian_rial
+	if = {
+		limit= {
+			money_value_dinar_omanian_rial > 0
+		}
+		add = import_from_dinar_omanian_rial
+	}
+	#dinar_qiran
+	if = {
+		limit= {
+			money_value_dinar_qiran > 0
+		}
+		add = import_from_dinar_qiran
+	}
+	#dinar_saudi_riyal
+	if = {
+		limit= {
+			money_value_dinar_saudi_riyal > 0
+		}
+		add = import_from_dinar_saudi_riyal
+	}
+	#dinar_serbian_dinar
+	if = {
+		limit= {
+			money_value_dinar_serbian_dinar > 0
+		}
+		add = import_from_dinar_serbian_dinar
+	}
+	#dinar_tunisian_dinar
+	if = {
+		limit= {
+			money_value_dinar_tunisian_dinar > 0
+		}
+		add = import_from_dinar_tunisian_dinar
+	}
+	#dinar_yugoslav_dinar
+	if = {
+		limit= {
+			money_value_dinar_yugoslav_dinar > 0
+		}
+		add = import_from_dinar_yugoslav_dinar
+	}
+	#dollar_australian_dollar
+	if = {
+		limit= {
+			money_value_dollar_australian_dollar > 0
+		}
+		add = import_from_dollar_australian_dollar
+	}
+	#dollar_canadian_dollar
+	if = {
+		limit= {
+			money_value_dollar_canadian_dollar > 0
+		}
+		add = import_from_dollar_canadian_dollar
+	}
+	#dollar_caribbean_dollar
+	if = {
+		limit= {
+			money_value_dollar_caribbean_dollar > 0
+		}
+		add = import_from_dollar_caribbean_dollar
+	}
+	#dollar_confederate_states_dollar
+	if = {
+		limit= {
+			money_value_dollar_confederate_states_dollar > 0
+		}
+		add = import_from_dollar_confederate_states_dollar
+	}
+	#dollar_liberian_dollar
+	if = {
+		limit= {
+			money_value_dollar_liberian_dollar > 0
+		}
+		add = import_from_dollar_liberian_dollar
+	}
+	#dollar_new_zealand_dollar
+	if = {
+		limit= {
+			money_value_dollar_new_zealand_dollar > 0
+		}
+		add = import_from_dollar_new_zealand_dollar
+	}
+	#dollar_sierra_leonean_dollar
+	if = {
+		limit= {
+			money_value_dollar_sierra_leonean_dollar > 0
+		}
+		add = import_from_dollar_sierra_leonean_dollar
+	}
+	#dollar_united_states_dollar
+	if = {
+		limit= {
+			money_value_dollar_united_states_dollar > 0
+		}
+		add = import_from_dollar_united_states_dollar
+	}
+	#eco_ariary
+	if = {
+		limit= {
+			money_value_eco_ariary > 0
+		}
+		add = import_from_eco_ariary
+	}
+	#eco_central_african_eco
+	if = {
+		limit= {
+			money_value_eco_central_african_eco > 0
+		}
+		add = import_from_eco_central_african_eco
+	}
+	#eco_east_african_eco
+	if = {
+		limit= {
+			money_value_eco_east_african_eco > 0
+		}
+		add = import_from_eco_east_african_eco
+	}
+	#eco_ethiopian_birr
+	if = {
+		limit= {
+			money_value_eco_ethiopian_birr > 0
+		}
+		add = import_from_eco_ethiopian_birr
+	}
+	#eco_ghanaian_pound
+	if = {
+		limit= {
+			money_value_eco_ghanaian_pound > 0
+		}
+		add = import_from_eco_ghanaian_pound
+	}
+	#eco_nigerian_naira
+	if = {
+		limit= {
+			money_value_eco_nigerian_naira > 0
+		}
+		add = import_from_eco_nigerian_naira
+	}
+	#eco_south_african_rand
+	if = {
+		limit= {
+			money_value_eco_south_african_rand > 0
+		}
+		add = import_from_eco_south_african_rand
+	}
+	#eco_tuareg_ouguiya
+	if = {
+		limit= {
+			money_value_eco_tuareg_ouguiya > 0
+		}
+		add = import_from_eco_tuareg_ouguiya
+	}
+	#eco_west_african_eco
+	if = {
+		limit= {
+			money_value_eco_west_african_eco > 0
+		}
+		add = import_from_eco_west_african_eco
+	}
+	#franc_belgian_franc
+	if = {
+		limit= {
+			money_value_franc_belgian_franc > 0
+		}
+		add = import_from_franc_belgian_franc
+	}
+	#franc_french_franc
+	if = {
+		limit= {
+			money_value_franc_french_franc > 0
+		}
+		add = import_from_franc_french_franc
+	}
+	#franc_luxembourgish_franc
+	if = {
+		limit= {
+			money_value_franc_luxembourgish_franc > 0
+		}
+		add = import_from_franc_luxembourgish_franc
+	}
+	#franc_swiss_franc
+	if = {
+		limit= {
+			money_value_franc_swiss_franc > 0
+		}
+		add = import_from_franc_swiss_franc
+	}
+	#gulden
+	if = {
+		limit= {
+			money_value_gulden > 0
+		}
+		add = import_from_gulden
+	}
+	#gulden_bavarian_gulden
+	if = {
+		limit= {
+			money_value_gulden_bavarian_gulden > 0
+		}
+		add = import_from_gulden_bavarian_gulden
+	}
+	#gulden_florin
+	if = {
+		limit= {
+			money_value_gulden_florin > 0
+		}
+		add = import_from_gulden_florin
+	}
+	#gulden_hungarian_forint
+	if = {
+		limit= {
+			money_value_gulden_hungarian_forint > 0
+		}
+		add = import_from_gulden_hungarian_forint
+	}
+	#gulden_indies_guilder
+	if = {
+		limit= {
+			money_value_gulden_indies_guilder > 0
+		}
+		add = import_from_gulden_indies_guilder
+	}
+	#gulden_south_german_gulden
+	if = {
+		limit= {
+			money_value_gulden_south_german_gulden > 0
+		}
+		add = import_from_gulden_south_german_gulden
+	}
+	#krone_czech_koruna
+	if = {
+		limit= {
+			money_value_krone_czech_koruna > 0
+		}
+		add = import_from_krone_czech_koruna
+	}
+	#krone_danish_krone
+	if = {
+		limit= {
+			money_value_krone_danish_krone > 0
+		}
+		add = import_from_krone_danish_krone
+	}
+	#krone_estonian_kroon
+	if = {
+		limit= {
+			money_value_krone_estonian_kroon > 0
+		}
+		add = import_from_krone_estonian_kroon
+	}
+	#krone_icelandic_krona
+	if = {
+		limit= {
+			money_value_krone_icelandic_krona > 0
+		}
+		add = import_from_krone_icelandic_krona
+	}
+	#krone_norwegian_krone
+	if = {
+		limit= {
+			money_value_krone_norwegian_krone > 0
+		}
+		add = import_from_krone_norwegian_krone
+	}
+	#krone_slovak_koruna
+	if = {
+		limit= {
+			money_value_krone_slovak_koruna > 0
+		}
+		add = import_from_krone_slovak_koruna
+	}
+	#krone_swedish_krona
+	if = {
+		limit= {
+			money_value_krone_swedish_krona > 0
+		}
+		add = import_from_krone_swedish_krona
+	}
+	#leon_leu
+	if = {
+		limit= {
+			money_value_leon_leu > 0
+		}
+		add = import_from_leon_leu
+	}
+	#leon_lev
+	if = {
+		limit= {
+			money_value_leon_lev > 0
+		}
+		add = import_from_leon_lev
+	}
+	#lira
+	if = {
+		limit= {
+			money_value_lira > 0
+		}
+		add = import_from_lira
+	}
+	#lira_ducato
+	if = {
+		limit= {
+			money_value_lira_ducato > 0
+		}
+		add = import_from_lira_ducato
+	}
+	#lira_ottoman_lira
+	if = {
+		limit= {
+			money_value_lira_ottoman_lira > 0
+		}
+		add = import_from_lira_ottoman_lira
+	}
+	#lira_scudo_pontificio
+	if = {
+		limit= {
+			money_value_lira_scudo_pontificio > 0
+		}
+		add = import_from_lira_scudo_pontificio
+	}
+	#lira_scudo_sardo
+	if = {
+		limit= {
+			money_value_lira_scudo_sardo > 0
+		}
+		add = import_from_lira_scudo_sardo
+	}
+	#lira_toscane_lira
+	if = {
+		limit= {
+			money_value_lira_toscane_lira > 0
+		}
+		add = import_from_lira_toscane_lira
+	}
+	#mark
+	if = {
+		limit= {
+			money_value_mark > 0
+		}
+		add = import_from_mark
+	}
+	#mark_finnish_markka
+	if = {
+		limit= {
+			money_value_mark_finnish_markka > 0
+		}
+		add = import_from_mark_finnish_markka
+	}
+	#peso
+	if = {
+		limit= {
+			money_value_peso > 0
+		}
+		add = import_from_peso
+	}
+	#peso_argentine_peso
+	if = {
+		limit= {
+			money_value_peso_argentine_peso > 0
+		}
+		add = import_from_peso_argentine_peso
+	}
+	#peso_bolivien_peso
+	if = {
+		limit= {
+			money_value_peso_bolivien_peso > 0
+		}
+		add = import_from_peso_bolivien_peso
+	}
+	#peso_chilean_peso
+	if = {
+		limit= {
+			money_value_peso_chilean_peso > 0
+		}
+		add = import_from_peso_chilean_peso
+	}
+	#peso_colombian_peso
+	if = {
+		limit= {
+			money_value_peso_colombian_peso > 0
+		}
+		add = import_from_peso_colombian_peso
+	}
+	#peso_costa_rican_colon
+	if = {
+		limit= {
+			money_value_peso_costa_rican_colon > 0
+		}
+		add = import_from_peso_costa_rican_colon
+	}
+	#peso_cuban_peso
+	if = {
+		limit= {
+			money_value_peso_cuban_peso > 0
+		}
+		add = import_from_peso_cuban_peso
+	}
+	#peso_ecuadorian_peso
+	if = {
+		limit= {
+			money_value_peso_ecuadorian_peso > 0
+		}
+		add = import_from_peso_ecuadorian_peso
+	}
+	#peso_el_salvador_colon
+	if = {
+		limit= {
+			money_value_peso_el_salvador_colon > 0
+		}
+		add = import_from_peso_el_salvador_colon
+	}
+	#peso_guatemalan_quetzal
+	if = {
+		limit= {
+			money_value_peso_guatemalan_quetzal > 0
+		}
+		add = import_from_peso_guatemalan_quetzal
+	}
+	#peso_honduran_lempira
+	if = {
+		limit= {
+			money_value_peso_honduran_lempira > 0
+		}
+		add = import_from_peso_honduran_lempira
+	}
+	#peso_mexican_peso
+	if = {
+		limit= {
+			money_value_peso_mexican_peso > 0
+		}
+		add = import_from_peso_mexican_peso
+	}
+	#peso_nicaraguan_cordoba
+	if = {
+		limit= {
+			money_value_peso_nicaraguan_cordoba > 0
+		}
+		add = import_from_peso_nicaraguan_cordoba
+	}
+	#peso_paraguayan_peso
+	if = {
+		limit= {
+			money_value_peso_paraguayan_peso > 0
+		}
+		add = import_from_peso_paraguayan_peso
+	}
+	#peso_philippine_peso
+	if = {
+		limit= {
+			money_value_peso_philippine_peso > 0
+		}
+		add = import_from_peso_philippine_peso
+	}
+	#peso_sol_de_oro
+	if = {
+		limit= {
+			money_value_peso_sol_de_oro > 0
+		}
+		add = import_from_peso_sol_de_oro
+	}
+	#peso_uruguayan_peso
+	if = {
+		limit= {
+			money_value_peso_uruguayan_peso > 0
+		}
+		add = import_from_peso_uruguayan_peso
+	}
+	#peso_venezuelan_peso
+	if = {
+		limit= {
+			money_value_peso_venezuelan_peso > 0
+		}
+		add = import_from_peso_venezuelan_peso
+	}
+	#pound_egyptian_pound
+	if = {
+		limit= {
+			money_value_pound_egyptian_pound > 0
+		}
+		add = import_from_pound_egyptian_pound
+	}
+	#pound_irish_pound
+	if = {
+		limit= {
+			money_value_pound_irish_pound > 0
+		}
+		add = import_from_pound_irish_pound
+	}
+	#pound_sterling
+	if = {
+		limit= {
+			money_value_pound_sterling > 0
+		}
+		add = import_from_pound_sterling
+	}
+	#real
+	if = {
+		limit= {
+			money_value_real > 0
+		}
+		add = import_from_real
+	}
+	#real_brazilian_real
+	if = {
+		limit= {
+			money_value_real_brazilian_real > 0
+		}
+		add = import_from_real_brazilian_real
+	}
+	#rupee_indian_rupee
+	if = {
+		limit= {
+			money_value_rupee_indian_rupee > 0
+		}
+		add = import_from_rupee_indian_rupee
+	}
+	#rupee_indonesian_rupiah
+	if = {
+		limit= {
+			money_value_rupee_indonesian_rupiah > 0
+		}
+		add = import_from_rupee_indonesian_rupiah
+	}
+	#spe_baht
+	if = {
+		limit= {
+			money_value_spe_baht > 0
+		}
+		add = import_from_spe_baht
+	}
+	#spe_dong
+	if = {
+		limit= {
+			money_value_spe_dong > 0
+		}
+		add = import_from_spe_dong
+	}
+	#spe_drachma
+	if = {
+		limit= {
+			money_value_spe_drachma > 0
+		}
+		add = import_from_spe_drachma
+	}
+	#spe_korean_won
+	if = {
+		limit= {
+			money_value_spe_korean_won > 0
+		}
+		add = import_from_spe_korean_won
+	}
+	#spe_latvian_lats
+	if = {
+		limit= {
+			money_value_spe_latvian_lats > 0
+		}
+		add = import_from_spe_latvian_lats
+	}
+	#spe_lithuanian_litas
+	if = {
+		limit= {
+			money_value_spe_lithuanian_litas > 0
+		}
+		add = import_from_spe_lithuanian_litas
+	}
+	#spe_peseta
+	if = {
+		limit= {
+			money_value_spe_peseta > 0
+		}
+		add = import_from_spe_peseta
+	}
+	#spe_ruble
+	if = {
+		limit= {
+			money_value_spe_ruble > 0
+		}
+		add = import_from_spe_ruble
+	}
+	#spe_uni
+	if = {
+		limit= {
+			money_value_spe_uni > 0
+		}
+		add = import_from_spe_uni
+	}
+	#spe_yen
+	if = {
+		limit= {
+			money_value_spe_yen > 0
+		}
+		add = import_from_spe_yen
+	}
+	#spe_yuan
+	if = {
+		limit= {
+			money_value_spe_yuan > 0
+		}
+		add = import_from_spe_yuan
+	}
+	#spe_zloti
+	if = {
+		limit= {
+			money_value_spe_zloti > 0
+		}
+		add = import_from_spe_zloti
+	}
+	#thaler_hannoveraner_thaler
+	if = {
+		limit= {
+			money_value_thaler_hannoveraner_thaler > 0
+		}
+		add = import_from_thaler_hannoveraner_thaler
+	}
+	#thaler_prussian_thaler
+	if = {
+		limit= {
+			money_value_thaler_prussian_thaler > 0
+		}
+		add = import_from_thaler_prussian_thaler
+	}
+	#thaler_saxon_thaler
+	if = {
+		limit= {
+			money_value_thaler_saxon_thaler > 0
+		}
+		add = import_from_thaler_saxon_thaler
+	}
+}
+#begin_tag_24
+	#dinar
+	import_from_dinar = {
+		value = 0
+		add = var:import_from_dinar_fix
+	}
+	#dinar_algerian_dinar
+	import_from_dinar_algerian_dinar = {
+		value = 0
+		add = var:import_from_dinar_algerian_dinar_fix
+	}
+	#dinar_iraqi_dinar
+	import_from_dinar_iraqi_dinar = {
+		value = 0
+		add = var:import_from_dinar_iraqi_dinar_fix
+	}
+	#dinar_libyan_dinar
+	import_from_dinar_libyan_dinar = {
+		value = 0
+		add = var:import_from_dinar_libyan_dinar_fix
+	}
+	#dinar_moroccan_dirham
+	import_from_dinar_moroccan_dirham = {
+		value = 0
+		add = var:import_from_dinar_moroccan_dirham_fix
+	}
+	#dinar_omanian_rial
+	import_from_dinar_omanian_rial = {
+		value = 0
+		add = var:import_from_dinar_omanian_rial_fix
+	}
+	#dinar_qiran
+	import_from_dinar_qiran = {
+		value = 0
+		add = var:import_from_dinar_qiran_fix
+	}
+	#dinar_saudi_riyal
+	import_from_dinar_saudi_riyal = {
+		value = 0
+		add = var:import_from_dinar_saudi_riyal_fix
+	}
+	#dinar_serbian_dinar
+	import_from_dinar_serbian_dinar = {
+		value = 0
+		add = var:import_from_dinar_serbian_dinar_fix
+	}
+	#dinar_tunisian_dinar
+	import_from_dinar_tunisian_dinar = {
+		value = 0
+		add = var:import_from_dinar_tunisian_dinar_fix
+	}
+	#dinar_yugoslav_dinar
+	import_from_dinar_yugoslav_dinar = {
+		value = 0
+		add = var:import_from_dinar_yugoslav_dinar_fix
+	}
+	#dollar_australian_dollar
+	import_from_dollar_australian_dollar = {
+		value = 0
+		add = var:import_from_dollar_australian_dollar_fix
+	}
+	#dollar_canadian_dollar
+	import_from_dollar_canadian_dollar = {
+		value = 0
+		add = var:import_from_dollar_canadian_dollar_fix
+	}
+	#dollar_caribbean_dollar
+	import_from_dollar_caribbean_dollar = {
+		value = 0
+		add = var:import_from_dollar_caribbean_dollar_fix
+	}
+	#dollar_confederate_states_dollar
+	import_from_dollar_confederate_states_dollar = {
+		value = 0
+		add = var:import_from_dollar_confederate_states_dollar_fix
+	}
+	#dollar_liberian_dollar
+	import_from_dollar_liberian_dollar = {
+		value = 0
+		add = var:import_from_dollar_liberian_dollar_fix
+	}
+	#dollar_new_zealand_dollar
+	import_from_dollar_new_zealand_dollar = {
+		value = 0
+		add = var:import_from_dollar_new_zealand_dollar_fix
+	}
+	#dollar_sierra_leonean_dollar
+	import_from_dollar_sierra_leonean_dollar = {
+		value = 0
+		add = var:import_from_dollar_sierra_leonean_dollar_fix
+	}
+	#dollar_united_states_dollar
+	import_from_dollar_united_states_dollar = {
+		value = 0
+		add = var:import_from_dollar_united_states_dollar_fix
+	}
+	#eco_ariary
+	import_from_eco_ariary = {
+		value = 0
+		add = var:import_from_eco_ariary_fix
+	}
+	#eco_central_african_eco
+	import_from_eco_central_african_eco = {
+		value = 0
+		add = var:import_from_eco_central_african_eco_fix
+	}
+	#eco_east_african_eco
+	import_from_eco_east_african_eco = {
+		value = 0
+		add = var:import_from_eco_east_african_eco_fix
+	}
+	#eco_ethiopian_birr
+	import_from_eco_ethiopian_birr = {
+		value = 0
+		add = var:import_from_eco_ethiopian_birr_fix
+	}
+	#eco_ghanaian_pound
+	import_from_eco_ghanaian_pound = {
+		value = 0
+		add = var:import_from_eco_ghanaian_pound_fix
+	}
+	#eco_nigerian_naira
+	import_from_eco_nigerian_naira = {
+		value = 0
+		add = var:import_from_eco_nigerian_naira_fix
+	}
+	#eco_south_african_rand
+	import_from_eco_south_african_rand = {
+		value = 0
+		add = var:import_from_eco_south_african_rand_fix
+	}
+	#eco_tuareg_ouguiya
+	import_from_eco_tuareg_ouguiya = {
+		value = 0
+		add = var:import_from_eco_tuareg_ouguiya_fix
+	}
+	#eco_west_african_eco
+	import_from_eco_west_african_eco = {
+		value = 0
+		add = var:import_from_eco_west_african_eco_fix
+	}
+	#franc_belgian_franc
+	import_from_franc_belgian_franc = {
+		value = 0
+		add = var:import_from_franc_belgian_franc_fix
+	}
+	#franc_french_franc
+	import_from_franc_french_franc = {
+		value = 0
+		add = var:import_from_franc_french_franc_fix
+	}
+	#franc_luxembourgish_franc
+	import_from_franc_luxembourgish_franc = {
+		value = 0
+		add = var:import_from_franc_luxembourgish_franc_fix
+	}
+	#franc_swiss_franc
+	import_from_franc_swiss_franc = {
+		value = 0
+		add = var:import_from_franc_swiss_franc_fix
+	}
+	#gulden
+	import_from_gulden = {
+		value = 0
+		add = var:import_from_gulden_fix
+	}
+	#gulden_bavarian_gulden
+	import_from_gulden_bavarian_gulden = {
+		value = 0
+		add = var:import_from_gulden_bavarian_gulden_fix
+	}
+	#gulden_florin
+	import_from_gulden_florin = {
+		value = 0
+		add = var:import_from_gulden_florin_fix
+	}
+	#gulden_hungarian_forint
+	import_from_gulden_hungarian_forint = {
+		value = 0
+		add = var:import_from_gulden_hungarian_forint_fix
+	}
+	#gulden_indies_guilder
+	import_from_gulden_indies_guilder = {
+		value = 0
+		add = var:import_from_gulden_indies_guilder_fix
+	}
+	#gulden_south_german_gulden
+	import_from_gulden_south_german_gulden = {
+		value = 0
+		add = var:import_from_gulden_south_german_gulden_fix
+	}
+	#krone_czech_koruna
+	import_from_krone_czech_koruna = {
+		value = 0
+		add = var:import_from_krone_czech_koruna_fix
+	}
+	#krone_danish_krone
+	import_from_krone_danish_krone = {
+		value = 0
+		add = var:import_from_krone_danish_krone_fix
+	}
+	#krone_estonian_kroon
+	import_from_krone_estonian_kroon = {
+		value = 0
+		add = var:import_from_krone_estonian_kroon_fix
+	}
+	#krone_icelandic_krona
+	import_from_krone_icelandic_krona = {
+		value = 0
+		add = var:import_from_krone_icelandic_krona_fix
+	}
+	#krone_norwegian_krone
+	import_from_krone_norwegian_krone = {
+		value = 0
+		add = var:import_from_krone_norwegian_krone_fix
+	}
+	#krone_slovak_koruna
+	import_from_krone_slovak_koruna = {
+		value = 0
+		add = var:import_from_krone_slovak_koruna_fix
+	}
+	#krone_swedish_krona
+	import_from_krone_swedish_krona = {
+		value = 0
+		add = var:import_from_krone_swedish_krona_fix
+	}
+	#leon_leu
+	import_from_leon_leu = {
+		value = 0
+		add = var:import_from_leon_leu_fix
+	}
+	#leon_lev
+	import_from_leon_lev = {
+		value = 0
+		add = var:import_from_leon_lev_fix
+	}
+	#lira
+	import_from_lira = {
+		value = 0
+		add = var:import_from_lira_fix
+	}
+	#lira_ducato
+	import_from_lira_ducato = {
+		value = 0
+		add = var:import_from_lira_ducato_fix
+	}
+	#lira_ottoman_lira
+	import_from_lira_ottoman_lira = {
+		value = 0
+		add = var:import_from_lira_ottoman_lira_fix
+	}
+	#lira_scudo_pontificio
+	import_from_lira_scudo_pontificio = {
+		value = 0
+		add = var:import_from_lira_scudo_pontificio_fix
+	}
+	#lira_scudo_sardo
+	import_from_lira_scudo_sardo = {
+		value = 0
+		add = var:import_from_lira_scudo_sardo_fix
+	}
+	#lira_toscane_lira
+	import_from_lira_toscane_lira = {
+		value = 0
+		add = var:import_from_lira_toscane_lira_fix
+	}
+	#mark
+	import_from_mark = {
+		value = 0
+		add = var:import_from_mark_fix
+	}
+	#mark_finnish_markka
+	import_from_mark_finnish_markka = {
+		value = 0
+		add = var:import_from_mark_finnish_markka_fix
+	}
+	#peso
+	import_from_peso = {
+		value = 0
+		add = var:import_from_peso_fix
+	}
+	#peso_argentine_peso
+	import_from_peso_argentine_peso = {
+		value = 0
+		add = var:import_from_peso_argentine_peso_fix
+	}
+	#peso_bolivien_peso
+	import_from_peso_bolivien_peso = {
+		value = 0
+		add = var:import_from_peso_bolivien_peso_fix
+	}
+	#peso_chilean_peso
+	import_from_peso_chilean_peso = {
+		value = 0
+		add = var:import_from_peso_chilean_peso_fix
+	}
+	#peso_colombian_peso
+	import_from_peso_colombian_peso = {
+		value = 0
+		add = var:import_from_peso_colombian_peso_fix
+	}
+	#peso_costa_rican_colon
+	import_from_peso_costa_rican_colon = {
+		value = 0
+		add = var:import_from_peso_costa_rican_colon_fix
+	}
+	#peso_cuban_peso
+	import_from_peso_cuban_peso = {
+		value = 0
+		add = var:import_from_peso_cuban_peso_fix
+	}
+	#peso_ecuadorian_peso
+	import_from_peso_ecuadorian_peso = {
+		value = 0
+		add = var:import_from_peso_ecuadorian_peso_fix
+	}
+	#peso_el_salvador_colon
+	import_from_peso_el_salvador_colon = {
+		value = 0
+		add = var:import_from_peso_el_salvador_colon_fix
+	}
+	#peso_guatemalan_quetzal
+	import_from_peso_guatemalan_quetzal = {
+		value = 0
+		add = var:import_from_peso_guatemalan_quetzal_fix
+	}
+	#peso_honduran_lempira
+	import_from_peso_honduran_lempira = {
+		value = 0
+		add = var:import_from_peso_honduran_lempira_fix
+	}
+	#peso_mexican_peso
+	import_from_peso_mexican_peso = {
+		value = 0
+		add = var:import_from_peso_mexican_peso_fix
+	}
+	#peso_nicaraguan_cordoba
+	import_from_peso_nicaraguan_cordoba = {
+		value = 0
+		add = var:import_from_peso_nicaraguan_cordoba_fix
+	}
+	#peso_paraguayan_peso
+	import_from_peso_paraguayan_peso = {
+		value = 0
+		add = var:import_from_peso_paraguayan_peso_fix
+	}
+	#peso_philippine_peso
+	import_from_peso_philippine_peso = {
+		value = 0
+		add = var:import_from_peso_philippine_peso_fix
+	}
+	#peso_sol_de_oro
+	import_from_peso_sol_de_oro = {
+		value = 0
+		add = var:import_from_peso_sol_de_oro_fix
+	}
+	#peso_uruguayan_peso
+	import_from_peso_uruguayan_peso = {
+		value = 0
+		add = var:import_from_peso_uruguayan_peso_fix
+	}
+	#peso_venezuelan_peso
+	import_from_peso_venezuelan_peso = {
+		value = 0
+		add = var:import_from_peso_venezuelan_peso_fix
+	}
+	#pound_egyptian_pound
+	import_from_pound_egyptian_pound = {
+		value = 0
+		add = var:import_from_pound_egyptian_pound_fix
+	}
+	#pound_irish_pound
+	import_from_pound_irish_pound = {
+		value = 0
+		add = var:import_from_pound_irish_pound_fix
+	}
+	#pound_sterling
+	import_from_pound_sterling = {
+		value = 0
+		add = var:import_from_pound_sterling_fix
+	}
+	#real
+	import_from_real = {
+		value = 0
+		add = var:import_from_real_fix
+	}
+	#real_brazilian_real
+	import_from_real_brazilian_real = {
+		value = 0
+		add = var:import_from_real_brazilian_real_fix
+	}
+	#rupee_indian_rupee
+	import_from_rupee_indian_rupee = {
+		value = 0
+		add = var:import_from_rupee_indian_rupee_fix
+	}
+	#rupee_indonesian_rupiah
+	import_from_rupee_indonesian_rupiah = {
+		value = 0
+		add = var:import_from_rupee_indonesian_rupiah_fix
+	}
+	#spe_baht
+	import_from_spe_baht = {
+		value = 0
+		add = var:import_from_spe_baht_fix
+	}
+	#spe_dong
+	import_from_spe_dong = {
+		value = 0
+		add = var:import_from_spe_dong_fix
+	}
+	#spe_drachma
+	import_from_spe_drachma = {
+		value = 0
+		add = var:import_from_spe_drachma_fix
+	}
+	#spe_korean_won
+	import_from_spe_korean_won = {
+		value = 0
+		add = var:import_from_spe_korean_won_fix
+	}
+	#spe_latvian_lats
+	import_from_spe_latvian_lats = {
+		value = 0
+		add = var:import_from_spe_latvian_lats_fix
+	}
+	#spe_lithuanian_litas
+	import_from_spe_lithuanian_litas = {
+		value = 0
+		add = var:import_from_spe_lithuanian_litas_fix
+	}
+	#spe_peseta
+	import_from_spe_peseta = {
+		value = 0
+		add = var:import_from_spe_peseta_fix
+	}
+	#spe_ruble
+	import_from_spe_ruble = {
+		value = 0
+		add = var:import_from_spe_ruble_fix
+	}
+	#spe_uni
+	import_from_spe_uni = {
+		value = 0
+		add = var:import_from_spe_uni_fix
+	}
+	#spe_yen
+	import_from_spe_yen = {
+		value = 0
+		add = var:import_from_spe_yen_fix
+	}
+	#spe_yuan
+	import_from_spe_yuan = {
+		value = 0
+		add = var:import_from_spe_yuan_fix
+	}
+	#spe_zloti
+	import_from_spe_zloti = {
+		value = 0
+		add = var:import_from_spe_zloti_fix
+	}
+	#thaler_hannoveraner_thaler
+	import_from_thaler_hannoveraner_thaler = {
+		value = 0
+		add = var:import_from_thaler_hannoveraner_thaler_fix
+	}
+	#thaler_prussian_thaler
+	import_from_thaler_prussian_thaler = {
+		value = 0
+		add = var:import_from_thaler_prussian_thaler_fix
+	}
+	#thaler_saxon_thaler
+	import_from_thaler_saxon_thaler = {
+		value = 0
+		add = var:import_from_thaler_saxon_thaler_fix
+	}
+#begin_tag_25
+	#dinar
+	import_in_dinar = {
+		value = 0
+		add = var:import_in_dinar_fix
+	}
+	#dinar_algerian_dinar
+	import_in_dinar_algerian_dinar = {
+		value = 0
+		add = var:import_in_dinar_algerian_dinar_fix
+	}
+	#dinar_iraqi_dinar
+	import_in_dinar_iraqi_dinar = {
+		value = 0
+		add = var:import_in_dinar_iraqi_dinar_fix
+	}
+	#dinar_libyan_dinar
+	import_in_dinar_libyan_dinar = {
+		value = 0
+		add = var:import_in_dinar_libyan_dinar_fix
+	}
+	#dinar_moroccan_dirham
+	import_in_dinar_moroccan_dirham = {
+		value = 0
+		add = var:import_in_dinar_moroccan_dirham_fix
+	}
+	#dinar_omanian_rial
+	import_in_dinar_omanian_rial = {
+		value = 0
+		add = var:import_in_dinar_omanian_rial_fix
+	}
+	#dinar_qiran
+	import_in_dinar_qiran = {
+		value = 0
+		add = var:import_in_dinar_qiran_fix
+	}
+	#dinar_saudi_riyal
+	import_in_dinar_saudi_riyal = {
+		value = 0
+		add = var:import_in_dinar_saudi_riyal_fix
+	}
+	#dinar_serbian_dinar
+	import_in_dinar_serbian_dinar = {
+		value = 0
+		add = var:import_in_dinar_serbian_dinar_fix
+	}
+	#dinar_tunisian_dinar
+	import_in_dinar_tunisian_dinar = {
+		value = 0
+		add = var:import_in_dinar_tunisian_dinar_fix
+	}
+	#dinar_yugoslav_dinar
+	import_in_dinar_yugoslav_dinar = {
+		value = 0
+		add = var:import_in_dinar_yugoslav_dinar_fix
+	}
+	#dollar_australian_dollar
+	import_in_dollar_australian_dollar = {
+		value = 0
+		add = var:import_in_dollar_australian_dollar_fix
+	}
+	#dollar_canadian_dollar
+	import_in_dollar_canadian_dollar = {
+		value = 0
+		add = var:import_in_dollar_canadian_dollar_fix
+	}
+	#dollar_caribbean_dollar
+	import_in_dollar_caribbean_dollar = {
+		value = 0
+		add = var:import_in_dollar_caribbean_dollar_fix
+	}
+	#dollar_confederate_states_dollar
+	import_in_dollar_confederate_states_dollar = {
+		value = 0
+		add = var:import_in_dollar_confederate_states_dollar_fix
+	}
+	#dollar_liberian_dollar
+	import_in_dollar_liberian_dollar = {
+		value = 0
+		add = var:import_in_dollar_liberian_dollar_fix
+	}
+	#dollar_new_zealand_dollar
+	import_in_dollar_new_zealand_dollar = {
+		value = 0
+		add = var:import_in_dollar_new_zealand_dollar_fix
+	}
+	#dollar_sierra_leonean_dollar
+	import_in_dollar_sierra_leonean_dollar = {
+		value = 0
+		add = var:import_in_dollar_sierra_leonean_dollar_fix
+	}
+	#dollar_united_states_dollar
+	import_in_dollar_united_states_dollar = {
+		value = 0
+		add = var:import_in_dollar_united_states_dollar_fix
+	}
+	#eco_ariary
+	import_in_eco_ariary = {
+		value = 0
+		add = var:import_in_eco_ariary_fix
+	}
+	#eco_central_african_eco
+	import_in_eco_central_african_eco = {
+		value = 0
+		add = var:import_in_eco_central_african_eco_fix
+	}
+	#eco_east_african_eco
+	import_in_eco_east_african_eco = {
+		value = 0
+		add = var:import_in_eco_east_african_eco_fix
+	}
+	#eco_ethiopian_birr
+	import_in_eco_ethiopian_birr = {
+		value = 0
+		add = var:import_in_eco_ethiopian_birr_fix
+	}
+	#eco_ghanaian_pound
+	import_in_eco_ghanaian_pound = {
+		value = 0
+		add = var:import_in_eco_ghanaian_pound_fix
+	}
+	#eco_nigerian_naira
+	import_in_eco_nigerian_naira = {
+		value = 0
+		add = var:import_in_eco_nigerian_naira_fix
+	}
+	#eco_south_african_rand
+	import_in_eco_south_african_rand = {
+		value = 0
+		add = var:import_in_eco_south_african_rand_fix
+	}
+	#eco_tuareg_ouguiya
+	import_in_eco_tuareg_ouguiya = {
+		value = 0
+		add = var:import_in_eco_tuareg_ouguiya_fix
+	}
+	#eco_west_african_eco
+	import_in_eco_west_african_eco = {
+		value = 0
+		add = var:import_in_eco_west_african_eco_fix
+	}
+	#franc_belgian_franc
+	import_in_franc_belgian_franc = {
+		value = 0
+		add = var:import_in_franc_belgian_franc_fix
+	}
+	#franc_french_franc
+	import_in_franc_french_franc = {
+		value = 0
+		add = var:import_in_franc_french_franc_fix
+	}
+	#franc_luxembourgish_franc
+	import_in_franc_luxembourgish_franc = {
+		value = 0
+		add = var:import_in_franc_luxembourgish_franc_fix
+	}
+	#franc_swiss_franc
+	import_in_franc_swiss_franc = {
+		value = 0
+		add = var:import_in_franc_swiss_franc_fix
+	}
+	#gulden
+	import_in_gulden = {
+		value = 0
+		add = var:import_in_gulden_fix
+	}
+	#gulden_bavarian_gulden
+	import_in_gulden_bavarian_gulden = {
+		value = 0
+		add = var:import_in_gulden_bavarian_gulden_fix
+	}
+	#gulden_florin
+	import_in_gulden_florin = {
+		value = 0
+		add = var:import_in_gulden_florin_fix
+	}
+	#gulden_hungarian_forint
+	import_in_gulden_hungarian_forint = {
+		value = 0
+		add = var:import_in_gulden_hungarian_forint_fix
+	}
+	#gulden_indies_guilder
+	import_in_gulden_indies_guilder = {
+		value = 0
+		add = var:import_in_gulden_indies_guilder_fix
+	}
+	#gulden_south_german_gulden
+	import_in_gulden_south_german_gulden = {
+		value = 0
+		add = var:import_in_gulden_south_german_gulden_fix
+	}
+	#krone_czech_koruna
+	import_in_krone_czech_koruna = {
+		value = 0
+		add = var:import_in_krone_czech_koruna_fix
+	}
+	#krone_danish_krone
+	import_in_krone_danish_krone = {
+		value = 0
+		add = var:import_in_krone_danish_krone_fix
+	}
+	#krone_estonian_kroon
+	import_in_krone_estonian_kroon = {
+		value = 0
+		add = var:import_in_krone_estonian_kroon_fix
+	}
+	#krone_icelandic_krona
+	import_in_krone_icelandic_krona = {
+		value = 0
+		add = var:import_in_krone_icelandic_krona_fix
+	}
+	#krone_norwegian_krone
+	import_in_krone_norwegian_krone = {
+		value = 0
+		add = var:import_in_krone_norwegian_krone_fix
+	}
+	#krone_slovak_koruna
+	import_in_krone_slovak_koruna = {
+		value = 0
+		add = var:import_in_krone_slovak_koruna_fix
+	}
+	#krone_swedish_krona
+	import_in_krone_swedish_krona = {
+		value = 0
+		add = var:import_in_krone_swedish_krona_fix
+	}
+	#leon_leu
+	import_in_leon_leu = {
+		value = 0
+		add = var:import_in_leon_leu_fix
+	}
+	#leon_lev
+	import_in_leon_lev = {
+		value = 0
+		add = var:import_in_leon_lev_fix
+	}
+	#lira
+	import_in_lira = {
+		value = 0
+		add = var:import_in_lira_fix
+	}
+	#lira_ducato
+	import_in_lira_ducato = {
+		value = 0
+		add = var:import_in_lira_ducato_fix
+	}
+	#lira_ottoman_lira
+	import_in_lira_ottoman_lira = {
+		value = 0
+		add = var:import_in_lira_ottoman_lira_fix
+	}
+	#lira_scudo_pontificio
+	import_in_lira_scudo_pontificio = {
+		value = 0
+		add = var:import_in_lira_scudo_pontificio_fix
+	}
+	#lira_scudo_sardo
+	import_in_lira_scudo_sardo = {
+		value = 0
+		add = var:import_in_lira_scudo_sardo_fix
+	}
+	#lira_toscane_lira
+	import_in_lira_toscane_lira = {
+		value = 0
+		add = var:import_in_lira_toscane_lira_fix
+	}
+	#mark
+	import_in_mark = {
+		value = 0
+		add = var:import_in_mark_fix
+	}
+	#mark_finnish_markka
+	import_in_mark_finnish_markka = {
+		value = 0
+		add = var:import_in_mark_finnish_markka_fix
+	}
+	#peso
+	import_in_peso = {
+		value = 0
+		add = var:import_in_peso_fix
+	}
+	#peso_argentine_peso
+	import_in_peso_argentine_peso = {
+		value = 0
+		add = var:import_in_peso_argentine_peso_fix
+	}
+	#peso_bolivien_peso
+	import_in_peso_bolivien_peso = {
+		value = 0
+		add = var:import_in_peso_bolivien_peso_fix
+	}
+	#peso_chilean_peso
+	import_in_peso_chilean_peso = {
+		value = 0
+		add = var:import_in_peso_chilean_peso_fix
+	}
+	#peso_colombian_peso
+	import_in_peso_colombian_peso = {
+		value = 0
+		add = var:import_in_peso_colombian_peso_fix
+	}
+	#peso_costa_rican_colon
+	import_in_peso_costa_rican_colon = {
+		value = 0
+		add = var:import_in_peso_costa_rican_colon_fix
+	}
+	#peso_cuban_peso
+	import_in_peso_cuban_peso = {
+		value = 0
+		add = var:import_in_peso_cuban_peso_fix
+	}
+	#peso_ecuadorian_peso
+	import_in_peso_ecuadorian_peso = {
+		value = 0
+		add = var:import_in_peso_ecuadorian_peso_fix
+	}
+	#peso_el_salvador_colon
+	import_in_peso_el_salvador_colon = {
+		value = 0
+		add = var:import_in_peso_el_salvador_colon_fix
+	}
+	#peso_guatemalan_quetzal
+	import_in_peso_guatemalan_quetzal = {
+		value = 0
+		add = var:import_in_peso_guatemalan_quetzal_fix
+	}
+	#peso_honduran_lempira
+	import_in_peso_honduran_lempira = {
+		value = 0
+		add = var:import_in_peso_honduran_lempira_fix
+	}
+	#peso_mexican_peso
+	import_in_peso_mexican_peso = {
+		value = 0
+		add = var:import_in_peso_mexican_peso_fix
+	}
+	#peso_nicaraguan_cordoba
+	import_in_peso_nicaraguan_cordoba = {
+		value = 0
+		add = var:import_in_peso_nicaraguan_cordoba_fix
+	}
+	#peso_paraguayan_peso
+	import_in_peso_paraguayan_peso = {
+		value = 0
+		add = var:import_in_peso_paraguayan_peso_fix
+	}
+	#peso_philippine_peso
+	import_in_peso_philippine_peso = {
+		value = 0
+		add = var:import_in_peso_philippine_peso_fix
+	}
+	#peso_sol_de_oro
+	import_in_peso_sol_de_oro = {
+		value = 0
+		add = var:import_in_peso_sol_de_oro_fix
+	}
+	#peso_uruguayan_peso
+	import_in_peso_uruguayan_peso = {
+		value = 0
+		add = var:import_in_peso_uruguayan_peso_fix
+	}
+	#peso_venezuelan_peso
+	import_in_peso_venezuelan_peso = {
+		value = 0
+		add = var:import_in_peso_venezuelan_peso_fix
+	}
+	#pound_egyptian_pound
+	import_in_pound_egyptian_pound = {
+		value = 0
+		add = var:import_in_pound_egyptian_pound_fix
+	}
+	#pound_irish_pound
+	import_in_pound_irish_pound = {
+		value = 0
+		add = var:import_in_pound_irish_pound_fix
+	}
+	#pound_sterling
+	import_in_pound_sterling = {
+		value = 0
+		add = var:import_in_pound_sterling_fix
+	}
+	#real
+	import_in_real = {
+		value = 0
+		add = var:import_in_real_fix
+	}
+	#real_brazilian_real
+	import_in_real_brazilian_real = {
+		value = 0
+		add = var:import_in_real_brazilian_real_fix
+	}
+	#rupee_indian_rupee
+	import_in_rupee_indian_rupee = {
+		value = 0
+		add = var:import_in_rupee_indian_rupee_fix
+	}
+	#rupee_indonesian_rupiah
+	import_in_rupee_indonesian_rupiah = {
+		value = 0
+		add = var:import_in_rupee_indonesian_rupiah_fix
+	}
+	#spe_baht
+	import_in_spe_baht = {
+		value = 0
+		add = var:import_in_spe_baht_fix
+	}
+	#spe_dong
+	import_in_spe_dong = {
+		value = 0
+		add = var:import_in_spe_dong_fix
+	}
+	#spe_drachma
+	import_in_spe_drachma = {
+		value = 0
+		add = var:import_in_spe_drachma_fix
+	}
+	#spe_korean_won
+	import_in_spe_korean_won = {
+		value = 0
+		add = var:import_in_spe_korean_won_fix
+	}
+	#spe_latvian_lats
+	import_in_spe_latvian_lats = {
+		value = 0
+		add = var:import_in_spe_latvian_lats_fix
+	}
+	#spe_lithuanian_litas
+	import_in_spe_lithuanian_litas = {
+		value = 0
+		add = var:import_in_spe_lithuanian_litas_fix
+	}
+	#spe_peseta
+	import_in_spe_peseta = {
+		value = 0
+		add = var:import_in_spe_peseta_fix
+	}
+	#spe_ruble
+	import_in_spe_ruble = {
+		value = 0
+		add = var:import_in_spe_ruble_fix
+	}
+	#spe_uni
+	import_in_spe_uni = {
+		value = 0
+		add = var:import_in_spe_uni_fix
+	}
+	#spe_yen
+	import_in_spe_yen = {
+		value = 0
+		add = var:import_in_spe_yen_fix
+	}
+	#spe_yuan
+	import_in_spe_yuan = {
+		value = 0
+		add = var:import_in_spe_yuan_fix
+	}
+	#spe_zloti
+	import_in_spe_zloti = {
+		value = 0
+		add = var:import_in_spe_zloti_fix
+	}
+	#thaler_hannoveraner_thaler
+	import_in_thaler_hannoveraner_thaler = {
+		value = 0
+		add = var:import_in_thaler_hannoveraner_thaler_fix
+	}
+	#thaler_prussian_thaler
+	import_in_thaler_prussian_thaler = {
+		value = 0
+		add = var:import_in_thaler_prussian_thaler_fix
+	}
+	#thaler_saxon_thaler
+	import_in_thaler_saxon_thaler = {
+		value = 0
+		add = var:import_in_thaler_saxon_thaler_fix
+	}
