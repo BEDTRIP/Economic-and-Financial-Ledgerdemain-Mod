@@ -114,13 +114,21 @@ zz_ef_mu_latin_lost = {
 	any_country = {
 		zz_ef_mu_latin_list = yes
 		zz_ef_mu_member = yes
-		NOT = { var:zz_ef_mu_id ?= prev.var:zz_ef_mu_id }
+		# the list's leader outside any union -- every union of the list is another one
+		OR = {
+			prev = { NOT = { has_variable = zz_ef_mu_id } }
+			NOT = { var:zz_ef_mu_id = prev.var:zz_ef_mu_id }
+		}
 	}
 }
 zz_ef_mu_scand_lost = {
 	any_country = {
 		zz_ef_mu_scand_list = yes
 		zz_ef_mu_member = yes
-		NOT = { var:zz_ef_mu_id ?= prev.var:zz_ef_mu_id }
+		# the list's leader outside any union -- every union of the list is another one
+		OR = {
+			prev = { NOT = { has_variable = zz_ef_mu_id } }
+			NOT = { var:zz_ef_mu_id = prev.var:zz_ef_mu_id }
+		}
 	}
 }
