@@ -136,3 +136,4 @@ _archive/<механизм>/
 | Пересчёт резервов подданного в металл якоря `zz_ef_anchor_metal_step` | `ld_anchor_metal_conversion/` | определение и вызов в `zz_ef_anchor_update` (`ld_anchor.txt`) |
 | Возврат металла ушедшего ЦБ-штата `zz_ef_cb_state_owner_step` (металл — счёт страны, Д.R4а.2) | `ld_cb_state_owner/` | определение и шапка `ld_subject_metal.txt`; вызов в `zz_ef_money_model_step` (`ld_money_model.txt`) |
 | Банкротство ЦБ E&F `central_bank_bankruptcy` (вечное: признак входил в своё же условие; Д.R4а.6) | `ef_central_bank_bankruptcy/` | определение из `01_financial_scripted_effects.txt`; блок вызова в `01_economic_scripted_effects.txt` |
+| Проба R4а.1 (Р25): компания скриптом `company_ld_probe_cb` | `ld_probe_cb/` | три файла пробы целиком; абзац в `docs/central-bank.md` |

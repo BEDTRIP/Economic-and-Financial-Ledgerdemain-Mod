@@ -59,11 +59,6 @@
   «большая денежная политика» в `monetary_policy_ideology_dynamic` (:34557-:41604) учитывает `zz_ef_rate_policy_steps`),
   `scripted_effects/00_on_action_main.txt` (:17170 `update_modifiers_bc_fc_ns` → `zz_ef_cb_bond_issuance_update`).
 
-- Проба Р25 (R4а шаг 1, на время пробы): `events/ld_probe_cb_events.txt` (`ld_probe_cb.0` из консоли),
-  `common/scripted_effects/ld_probe_cb.txt` (`ld_probe_cb_log`, лог `EFZ|…|cb_probe`),
-  `common/company_types/ld_probe_cb_company.txt` (`company_ld_probe_cb`) — компания `add_company` у Британии, России,
-  Франции, Швеции; держится ли, слоты, уровни.
-
 ## Поток / порядок
 1. Месяц, `on_monthly_pulse_country` → `zz_ef_cb_rate_monthly`: `zz_ef_risk_monthly`; задаёт `zz_ef_rate_bias = 0`, если
    нет; счётчик `zz_ef_cb_rate_month` 1,2,3; на 3 — сброс и `zz_ef_cb_rate_step`.
