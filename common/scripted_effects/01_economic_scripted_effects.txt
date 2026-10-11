@@ -9423,12 +9423,22 @@ enemy_capital_is_occuped = {
 				change_infamy = 50
 			}
 
-			# half the enemy's metal -- the monetary authorities' accounts (Д.R4а.2)
+			# half the enemy's metal -- the monetary authorities' accounts (Д.R4а.2); a known move of both reconciliations
 			owner = {
 				zz_ef_am_init = yes
-				scope:occupied_capital.owner = { zz_ef_am_init = yes }
-				change_variable = { name = zz_ef_am_gold add = { value = scope:occupied_capital.owner.var:zz_ef_am_gold multiply = 0.5 } }
-				change_variable = { name = zz_ef_am_silver add = { value = scope:occupied_capital.owner.var:zz_ef_am_silver multiply = 0.5 } }
+				scope:occupied_capital.owner = {
+					zz_ef_am_init = yes
+					set_variable = { name = zz_ef_t_loot_g value = { value = var:zz_ef_am_gold multiply = 0.5 } }
+					set_variable = { name = zz_ef_t_loot_s value = { value = var:zz_ef_am_silver multiply = 0.5 } }
+					set_variable = { name = zz_ef_t_loot_ng value = { value = var:zz_ef_t_loot_g multiply = -1 } }
+					set_variable = { name = zz_ef_t_loot_ns value = { value = var:zz_ef_t_loot_s multiply = -1 } }
+					zz_ef_mt_known_add = { M = g V = var:zz_ef_t_loot_ng }
+					zz_ef_mt_known_add = { M = s V = var:zz_ef_t_loot_ns }
+				}
+				change_variable = { name = zz_ef_am_gold add = scope:occupied_capital.owner.var:zz_ef_t_loot_g }
+				change_variable = { name = zz_ef_am_silver add = scope:occupied_capital.owner.var:zz_ef_t_loot_s }
+				zz_ef_mt_known_add = { M = g V = scope:occupied_capital.owner.var:zz_ef_t_loot_g }
+				zz_ef_mt_known_add = { M = s V = scope:occupied_capital.owner.var:zz_ef_t_loot_s }
 			}
 
 			#####################
@@ -10613,10 +10623,17 @@ enemy_capital_is_occuped = {
 					exists = scope:occupied_capital
 				}
 
+				# what the occupier took (above); without its CB nothing is taken -- the metal does not vanish
 				owner = {
-					zz_ef_am_init = yes
-					change_variable = { name = zz_ef_am_gold divide = 2 }
-					change_variable = { name = zz_ef_am_silver divide = 2 }
+					if = {
+						limit = { has_variable = zz_ef_t_loot_g }
+						change_variable = { name = zz_ef_am_gold subtract = var:zz_ef_t_loot_g }
+						change_variable = { name = zz_ef_am_silver subtract = var:zz_ef_t_loot_s }
+						remove_variable = zz_ef_t_loot_g
+						remove_variable = zz_ef_t_loot_s
+						remove_variable = zz_ef_t_loot_ng
+						remove_variable = zz_ef_t_loot_ns
+					}
 				}
 
 				#####################
