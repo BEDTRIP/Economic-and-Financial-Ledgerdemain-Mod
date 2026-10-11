@@ -56,6 +56,93 @@ zz_ef_rq_add = {
 	remove_variable = zz_ef_rq_old
 }
 
+# Д.R4а.8: a gone country's claims and the claims on it go to its heir (zz_ef_metal_heir_world, ld_subject_metal.txt).
+# HEIR (country) scope, scope:zz_ef_mh_dead -- the gone country. Its holdings of map zz_ef_rq_$H$_$K$ move to the heir's
+# map as they are (each in its debtor's money).
+zz_ef_rq_heir_holdings = {
+	save_temporary_scope_as = zz_ef_rq_he
+	scope:zz_ef_mh_dead = {
+		if = {
+			limit = { has_variable_map = zz_ef_rq_$H$_$K$ }
+			zz_ef_rq_keys_take = { MAP = zz_ef_rq_$H$_$K$ }
+			every_in_list = {
+				variable = zz_ef_rq_keys
+				save_temporary_scope_as = zz_ef_rq_d
+				scope:zz_ef_mh_dead = {
+					zz_ef_rq_get = { MAP = zz_ef_rq_$H$_$K$ D = scope:zz_ef_rq_d }
+					set_variable = { name = zz_ef_rq_neg value = { value = var:zz_ef_rq_h multiply = -1 } }
+					scope:zz_ef_rq_he = {
+						set_variable = { name = zz_ef_rq_mv value = scope:zz_ef_mh_dead.var:zz_ef_rq_h }
+						zz_ef_rq_add = { H = $H$ K = $K$ D = scope:zz_ef_rq_d V = var:zz_ef_rq_mv }
+						remove_variable = zz_ef_rq_mv
+					}
+					zz_ef_rq_add = { H = $H$ K = $K$ D = scope:zz_ef_rq_d V = var:zz_ef_rq_neg }
+				}
+			}
+			clear_variable_list = zz_ef_rq_keys
+		}
+	}
+}
+# HOLDER (country) scope, scope:zz_ef_mh_dead and scope:zz_ef_rq_he (the heir): the holder's gone country's money in
+# map zz_ef_rq_$H$_m becomes the heir's money at the day's rate (the gold a unit of each, zz_ef_rq_gpm_v).
+zz_ef_rq_heir_debtor = {
+	if = {
+		limit = { is_key_in_variable_map = { name = zz_ef_rq_$H$_m target = scope:zz_ef_mh_dead } }
+		zz_ef_rq_get = { MAP = zz_ef_rq_$H$_m D = scope:zz_ef_mh_dead }
+		set_variable = { name = zz_ef_rq_neg value = { value = var:zz_ef_rq_h multiply = -1 } }
+		set_variable = {
+			name = zz_ef_rq_mv
+			value = {
+				value = var:zz_ef_rq_h
+				multiply = scope:zz_ef_mh_dead.zz_ef_rq_gpm_v
+				divide = scope:zz_ef_rq_he.zz_ef_rq_gpm_v
+			}
+		}
+		zz_ef_rq_add = { H = $H$ K = m D = scope:zz_ef_mh_dead V = var:zz_ef_rq_neg }
+		zz_ef_rq_add = { H = $H$ K = m D = scope:zz_ef_rq_he V = var:zz_ef_rq_mv }
+		remove_variable = zz_ef_rq_mv
+	}
+}
+# HEIR scope, scope:zz_ef_mh_dead: all of it -- the gone country's every map to the heir; its money held by the world
+# (every holder's money maps) -> the heir's money. Bonds and fund shares ON the gone country stay (its bonds' engine debt
+# is gone -- R5; its exchange's fund -- R9а).
+zz_ef_rq_heir_take = {
+	zz_ef_rq_heir_holdings = { H = cb K = m }
+	zz_ef_rq_heir_holdings = { H = bk K = m }
+	zz_ef_rq_heir_holdings = { H = pp K = m }
+	zz_ef_rq_heir_holdings = { H = fd K = m }
+	zz_ef_rq_heir_holdings = { H = tr K = b }
+	zz_ef_rq_heir_holdings = { H = bk K = b }
+	zz_ef_rq_heir_holdings = { H = pp K = b }
+	zz_ef_rq_heir_holdings = { H = cb K = b }
+	zz_ef_rq_heir_holdings = { H = fd K = b }
+	zz_ef_rq_heir_holdings = { H = pp K = f }
+	zz_ef_rq_heir_holdings = { H = bk K = f }
+	save_temporary_scope_as = zz_ef_rq_he
+	if = {
+		limit = {
+			scope:zz_ef_mh_dead = {
+				has_variable = zz_ef_rq_out_m
+				var:zz_ef_rq_out_m > 0
+			}
+		}
+		every_country = {
+			limit = {
+				OR = {
+					has_variable_map = zz_ef_rq_cb_m
+					has_variable_map = zz_ef_rq_bk_m
+					has_variable_map = zz_ef_rq_pp_m
+					has_variable_map = zz_ef_rq_fd_m
+				}
+			}
+			zz_ef_rq_heir_debtor = { H = cb }
+			zz_ef_rq_heir_debtor = { H = bk }
+			zz_ef_rq_heir_debtor = { H = pp }
+			zz_ef_rq_heir_debtor = { H = fd }
+		}
+	}
+}
+
 # HOLDER scope: the holding of MAP on D into var:zz_ef_rq_h (0 if none).
 zz_ef_rq_get = {
 	set_variable = { name = zz_ef_rq_h value = 0 }

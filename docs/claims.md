@@ -11,7 +11,8 @@
   (прочитать), `zz_ef_rq_keys_take` (ключи карты — в список, чтобы менять карту по ключу), `zz_ef_rq_value_gold` (карта
   в золоте; с `CONV = yes` — только должники с разменом на металл), `zz_ef_rq_interest_step` (проценты по чужим деньгам
   держателя `H`), `zz_ef_rq_crisis_resell` (кризис валюты: держатели продают её эмитенту за металл),
-  `zz_ef_rq_world_check` и `zz_ef_rq_check_map` (сверка, лог `EFI`).
+  `zz_ef_rq_world_check` и `zz_ef_rq_check_map` (сверка, лог `EFI`), `zz_ef_rq_heir_take` (исчезнувшая страна —
+  наследнику, Д.R4а.8).
 - `common/script_values/ld_claims_values.txt` — `zz_ef_rq_gpm_v` (золото на единицу денег должника), `zz_ef_rq_conv_v`
   (размен на металл), итоги должника `zz_ef_rq_out_m_v`, `zz_ef_rq_out_b_v`, мировые суммы сверки.
 
@@ -53,6 +54,9 @@
   `zz_ef_fx_metal_update`.
 - Неделя, биржа (`exchange-companies.md`, `ld_exchange_trade.txt`): держатели продают и покупают требования стаканом.
 - Кризис валюты (E&F `global_monetary_reference_reset`, `economic_instability`): `zz_ef_rq_crisis_resell`.
+- Неделя мира, исчезнувшая страна (`zz_ef_metal_heir_world`, `ld_subject_metal.txt`): `zz_ef_rq_heir_take` — все её
+  карты переходят наследнику как есть; её деньги у держателей (карты `*_m`) — в деньги наследника по золоту единицы
+  (`zz_ef_rq_gpm_v` обоих); облигации и паи на неё остаются (R5, R9а) (Д.R4а.8).
 - Месяц, при логах: `zz_ef_rq_world_check` из `zz_ef_world_month_ef` — сумма карт на должника = его итог.
 
 ## Логи
