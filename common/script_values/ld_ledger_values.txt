@@ -20,6 +20,9 @@ zz_ef_ledger_deposits_v = {
 	if = { limit = { has_variable = zz_ef_pop_deposits } value = var:zz_ef_pop_deposits }
 }
 zz_ef_raw_pool = { value = investment_pool }
+# the engine's pool income this week, gross and net of its spending (the EFJ line)
+zz_ef_pool_gross_v = { value = investment_pool_gross_income }
+zz_ef_pool_net_v = { value = investment_pool_net_income }
 zz_ef_f_other_abs_v = {
 	value = 0
 	if = {
