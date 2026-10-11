@@ -76,15 +76,22 @@ zz_ef_xch_route = {
 		set_variable = { name = zz_ef_xch value = global_var:zz_ef_xch_world }
 		set_variable = { name = zz_ef_xch_how value = 5 }
 	}
-	if = { limit = { has_variable = zz_ef_xch_blev } remove_variable = zz_ef_xch_blev }
 	if = {
 		limit = {
 			zz_ef_logs_on = yes
 			zz_ef_log_country = yes
 			has_variable = zz_ef_xch
 		}
-		debug_log = "EFH|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|route|how [THIS.GetCountry.MakeScope.Var('zz_ef_xch_how').GetValue|0]|exchange [THIS.GetCountry.MakeScope.Var('zz_ef_xch').GetCountry.GetNameNoFormatting]"
+		debug_log = "EFH|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|route|how [THIS.GetCountry.MakeScope.Var('zz_ef_xch_how').GetValue|0]|exchange [THIS.GetCountry.MakeScope.Var('zz_ef_xch').GetCountry.GetNameNoFormatting]|blev [THIS.GetCountry.MakeScope.Var('zz_ef_xch_blev').GetValue|0]"
+		every_power_bloc = {
+			power_bloc_leader = {
+				set_variable = { name = zz_ef_xch_badv value = "prev.leverage_advantage(scope:zz_ef_xch_c)" }
+				debug_log = "EFH|[TimeKeeper.GetCurrentDate.GetString]|bloc|leader [THIS.GetCountry.GetNameNoFormatting]|adv [THIS.GetCountry.MakeScope.Var('zz_ef_xch_badv').GetValue|0]|exchange [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_has_exchange_v')|0]"
+				remove_variable = zz_ef_xch_badv
+			}
+		}
 	}
+	if = { limit = { has_variable = zz_ef_xch_blev } remove_variable = zz_ef_xch_blev }
 	if = {
 		limit = { zz_ef_has_exchange = yes }
 		zz_ef_xch_fees_set = yes

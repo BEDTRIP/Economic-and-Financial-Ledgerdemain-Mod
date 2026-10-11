@@ -64,3 +64,8 @@ zz_ef_xch_n_5_v = {
 zz_ef_xch_bloc_adv = {
 	value = "leverage_advantage(scope:zz_ef_xch_c)"
 }
+# 1 for a country with an exchange (the route's log)
+zz_ef_has_exchange_v = {
+	value = 0
+	if = { limit = { zz_ef_has_exchange = yes } value = 1 }
+}
