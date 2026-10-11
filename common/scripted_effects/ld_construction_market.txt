@@ -42,6 +42,12 @@ zz_ef_reg_market_step = {
 			}
 		}
 	}
+	# the multipliers are local variables of the state: the regulator's block reads them (as PSC's
+	# construction_throughput_mult); a script value or a variable of the state read from inside the building is 'none'
+	zz_ef_reg_mult_local = { G = wood }
+	zz_ef_reg_mult_local = { G = iron }
+	zz_ef_reg_mult_local = { G = steel }
+	zz_ef_reg_mult_local = { G = arc }
 	b:building_construction_regulator = {
 		zz_ef_reg_input_set = { G = wood }
 		zz_ef_reg_input_set = { G = iron }
@@ -76,6 +82,17 @@ zz_ef_reg_share_move = {
 	}
 }
 
+# Scope: state. The multiplier of $G$'s input: its share - 1.
+zz_ef_reg_mult_local = {
+	set_local_variable = {
+		name = zz_ef_reg_m_$G$
+		value = {
+			value = var:zz_ef_reg_s_$G$
+			subtract = 1
+		}
+	}
+}
+
 # Scope: the regulator. Its input of $G$ = the share x the method's 10 units a point.
 zz_ef_reg_input_set = {
 	if = {
@@ -84,10 +101,6 @@ zz_ef_reg_input_set = {
 	}
 	add_modifier = {
 		name = zz_ef_reg_in_$G$
-		# the state's variable through the link: a script value of the state inside a scope block reads an empty scope
-		multiplier = {
-			value = state.var:zz_ef_reg_s_$G$
-			subtract = 1
-		}
+		multiplier = local_var:zz_ef_reg_m_$G$
 	}
 }
