@@ -75,3 +75,10 @@ zz_ef_std_switch_metal = {
 		zz_ef_metal_bimet = yes
 	}
 }
+
+# State: the mark of a gone country whose accounts its heir has not yet taken (zz_ef_metal_heir_step)
+zz_ef_mh_gone_mark = {
+	has_variable = zz_ef_mh_owner
+	exists = var:zz_ef_mh_owner
+	var:zz_ef_mh_owner = { is_country_alive = no }
+}
