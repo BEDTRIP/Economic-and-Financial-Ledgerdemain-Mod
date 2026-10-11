@@ -39,9 +39,10 @@
 - `common/scripted_effects/PSC_delay_event_switch.txt`, `PSC_my_trigger_event.txt` — разнос запуска по дням недели.
 - `common/script_values/PSC_construction_values.txt` — расчёт трат/долей/эффективности (корень
   `calculate_total_construction_spending`, `privatisation_spending_percent`, `state_construction_spending_allocation`,
-  `state_construction_allocation` = траты штата / цена смеси регулятора / 10, `calculate_state_construction_base_price`
-  = базовая цена смеси, `construction_ordering`, `ai_construction_demand`, `construction_demand_ratio` = 0 — его
-  переменную никто не задаёт, `_archive/ld_dead_readers/`). Модель цены PSC (sqrt-рекурсия) и выбор метода регулятора —
+  `state_construction_allocation` — модель цены PSC: сколько заявок дают траты штата против его выпуска стройтоваров, по
+  базовой цене смеси регулятора (sqrt-рекурсия `calculate_sqrt`), `calculate_state_construction_base_price` = базовая
+  цена смеси, `construction_ordering`, `ai_construction_demand`, `construction_demand_ratio` = 0 — его переменную никто
+  не задаёт, `_archive/ld_dead_readers/`). Выбор метода регулятора по сектору и технологии —
   `_archive/psc_regulator_one_good/`. `PSC_set_values.txt` — константы; `PSC_event_values.txt` — календарь недели.
 - `common/scripted_guis/PSC_construction_sguis.txt` — кнопки уровня трат (`psc_button_*_sgui`),
   `psc_save_real_construction_cost`, `psc_test_show`.
@@ -60,7 +61,7 @@
   `zz_ef_reg_p_<товар>` = база × (1 + `state_goods_pricier`), предложение `zz_ef_reg_supply_<товар>` = заявки на продажу
   рынка штата, вес = предложение × (`zz_ef_reg_pmin` / цена)², доли `var:zz_ef_reg_s_<товар>` идут к весам шагом
   `zz_ef_reg_step` = 0,5 (без предложения — всё древесные), модификатор `zz_ef_reg_in_<товар>` на регуляторе × (доля −
-  1); цена, по которой считаются очки, `var:zz_ef_reg_price` — к цене смеси `zz_ef_reg_price_mix` тем же шагом.
+  1); базовая цена смеси `zz_ef_reg_base_mix` — для модели цены PSC.
 - `common/script_values/ld_psc_private_allocation.txt` — REPLACE `private_construction_increase` (цель
   `zz_ef_psc_private_target`: доход + простаивающий пул + ставка).
 - `common/script_values/ld_pb_overbuild_values.txt` — лимит и перестройка: `zz_pb_ef_css_levels`,
@@ -136,8 +137,7 @@
    - `prev_estimated_investment_pool = investment_pool + investment_pool_net_income`.
 4. `set_spending_value` (только игрок) -> `set_government_construction_spending`.
 5. Закупка регулятора (в шаге 3, по штатам после `set_construction_regulator_level`): `zz_ef_reg_market_step` — доли
-   четырёх стройтоваров и цена смеси (`ld_construction_market.txt`); очки штата = его траты / `var:zz_ef_reg_price` /
-   10.
+   четырёх стройтоваров (`ld_construction_market.txt`); очки штата — модель цены PSC по базовой цене смеси.
 6. `on_monthly_pulse_country`: `zz_pb_ef_overbuild_counter` (месяц: `speculative_share_2` += шаг к цели
    `zz_pb_ef_overcap_target`, модификатор `zz_pb_ef_overbuilt_economy` x значение, уведомление, бар
    `financial_center_je_2`) и `zz_pb_ef_ai_sector_downsize` (ИИ; раз в 3 месяца: если `speculative_share_2 >= 10` и
@@ -155,7 +155,7 @@
 | `privatisation_percent_estimate`, `prev_estimated_investment_pool` | доля пула, прошлая оценка | `set_construction_point_demand` | `privatisation_spending_percent*`, `zz_ef_psc_private_income` |
 | `corrected_private_allocation`, `prev_construction_allocation`, `weekly_income_multiplier` | поправка долей | `set_construction_point_demand` | `private_construction_increase`, `calculate_max_government_construction_spending` |
 | `national_production`, `weighted_total`, `state_construction_production` | производство стройтоваров (страна/штат) | `set_construction_point_demand` | аллокации |
-| `zz_ef_reg_s_wood/iron/steel/arc`, `zz_ef_reg_price` (штат) | доли стройтоваров в закупке регулятора, цена единицы смеси, по которой считаются очки | `zz_ef_reg_market_step` | модификаторы `zz_ef_reg_in_<товар>`, `state_construction_allocation`, `calculate_state_construction_base_price` |
+| `zz_ef_reg_s_wood/iron/steel/arc` (штат) | доли стройтоваров в закупке регулятора | `zz_ef_reg_market_step` | модификаторы `zz_ef_reg_in_<товар>`, `zz_ef_reg_base_mix` (базовая цена смеси) |
 | `week_count` (штат) | счётчик сноса лишнего регулятора | `set_construction_regulator_level` | оно же |
 | `speculative_share_2` | штраф перестройки 0..100 (общая с E&F-кнопками/журналом) | `zz_pb_ef_overbuild_counter`, кнопки 9..12 | downsize, ban-кнопки, `speculative_share_2_penality`, JE-бар |
 | `zz_pb_ef_ob_old` | прошлое значение | counter | counter |

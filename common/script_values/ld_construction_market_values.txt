@@ -1,6 +1,6 @@
-﻿# The construction regulator buys all four construction goods at the state's local prices (Д.R8в.24): 10 units of
-# any of them make a point (construction_goods_per_point); the split goes to what is offered on the market and is
-# cheaper. Effects -- scripted_effects/ld_construction_market.txt; docs/construction.md.
+﻿# The construction regulator buys all four construction goods (Д.R8в.24): 10 units of any of them make a point
+# (construction_goods_per_point); the split goes to what is offered on the market and is cheaper at the state's local
+# prices. Effects -- scripted_effects/ld_construction_market.txt; docs/construction.md.
 
 # Scope: state. Local price of a construction good: its base price x (1 + state_goods_pricier); the floor keeps a
 # division safe at the bottom of the engine's price range.
@@ -87,8 +87,8 @@ zz_ef_reg_w_arc = {
 	multiply = zz_ef_reg_supply_arc
 }
 
-# How far a week moves the shares and the price the regulator counts by toward the market's (the rest is last
-# week's): a step damps the swing of buying more of what got cheap
+# How far a week moves the shares toward the market's split (the rest is last week's): a step damps the swing of
+# buying more of what got cheap
 zz_ef_reg_step = 0.5
 
 # Scope: state. A share of the purchase (var:zz_ef_reg_s_<good>), 0 without the variable; wood is the default.
@@ -109,14 +109,7 @@ zz_ef_reg_s_arc_v = {
 	if = { limit = { has_variable = zz_ef_reg_s_arc } value = var:zz_ef_reg_s_arc }
 }
 
-# Scope: state. The mix's local price and base price, per unit.
-zz_ef_reg_price_mix = {
-	value = 0
-	add = { value = zz_ef_reg_s_wood_v multiply = zz_ef_reg_p_wood }
-	add = { value = zz_ef_reg_s_iron_v multiply = zz_ef_reg_p_iron }
-	add = { value = zz_ef_reg_s_steel_v multiply = zz_ef_reg_p_steel }
-	add = { value = zz_ef_reg_s_arc_v multiply = zz_ef_reg_p_arc }
-}
+# Scope: state. The base price of a unit of the mix (PSC's price model and the spending's split between the states).
 zz_ef_reg_base_mix = {
 	value = 0
 	add = { value = zz_ef_reg_s_wood_v multiply = wood_construction_good_base_price }
@@ -124,10 +117,4 @@ zz_ef_reg_base_mix = {
 	add = { value = zz_ef_reg_s_steel_v multiply = steel_construction_good_base_price }
 	add = { value = zz_ef_reg_s_arc_v multiply = arc_welded_construction_good_base_price }
 	min = 1
-}
-# Scope: state. The price the regulator counts by (var:zz_ef_reg_price), the mix's base price without it.
-zz_ef_reg_price_v = {
-	value = zz_ef_reg_base_mix
-	if = { limit = { has_variable = zz_ef_reg_price } value = var:zz_ef_reg_price }
-	min = 0.01
 }

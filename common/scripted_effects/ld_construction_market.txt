@@ -3,8 +3,8 @@
 
 # Scope: state with the regulator. Weekly, before the state's spending turns into points (set_construction_point_demand):
 # the shares of the four goods move toward the market's split (supply x (cheapest / price)^2), the regulator's input of
-# each good is its share of 10 units a point (the method takes 10 of each, goods_input_<good>_mult = share - 1), the
-# price it counts by moves toward the mix's local price.
+# each good is its share of 10 units a point (the method takes 10 of each, goods_input_<good>_mult = share - 1). The
+# points the state's spending buys -- PSC's price model at the mix's base price (state_construction_allocation).
 zz_ef_reg_market_step = {
 	save_temporary_scope_value_as = { name = zz_ef_reg_pmin value = zz_ef_reg_pmin }
 	set_local_variable = {
@@ -29,18 +29,6 @@ zz_ef_reg_market_step = {
 		set_variable = { name = zz_ef_reg_s_iron value = 0 }
 		set_variable = { name = zz_ef_reg_s_steel value = 0 }
 		set_variable = { name = zz_ef_reg_s_arc value = 0 }
-	}
-	set_variable = {
-		name = zz_ef_reg_price
-		value = {
-			value = zz_ef_reg_price_mix
-			if = {
-				limit = { has_variable = zz_ef_reg_price }
-				subtract = var:zz_ef_reg_price
-				multiply = zz_ef_reg_step
-				add = var:zz_ef_reg_price
-			}
-		}
 	}
 	# the multipliers are local variables of the state: the regulator's block reads them (as PSC's
 	# construction_throughput_mult); a script value or a variable of the state read from inside the building is 'none'
