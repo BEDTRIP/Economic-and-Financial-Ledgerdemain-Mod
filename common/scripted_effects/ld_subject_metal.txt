@@ -48,7 +48,7 @@ zz_ef_cb_state_owner_step = {
 
 # Any scope, the world's week (zz_ef_world_week_close): the pops' and the banks' metal are the country's accounts
 # (var:zz_ef_popm_* / zz_ef_bankm_*) -- a country that is gone (annexed, a revolt put down, a union) took them with it,
-# and the world's line of metal lost them (r1011_173236: 7 jumps of silver, each the week after a country was gone).
+# and the world's line of metal lost them.
 # No on_action marks a country gone, but a gone country stays an object with its variables (exists = yes,
 # is_country_alive = no). Every living country is in global list zz_ef_mh_list and keeps its capital's state region
 # (var:zz_ef_mh_region -- a region stays, a state may not: annexation merges split states); a gone one's accounts go,
@@ -59,10 +59,18 @@ zz_ef_metal_heir_world = {
 		variable = zz_ef_mh_list
 		limit = { is_country_alive = no }
 		save_scope_as = zz_ef_mh_dead
+		# the heir -- not a decentralized nation: the world's line does not see its accounts; none -- it waits (counted
+		# with the world as a gone one's)
 		if = {
-			limit = { has_variable = zz_ef_mh_region }
+			limit = {
+				has_variable = zz_ef_mh_region
+				var:zz_ef_mh_region = {
+					any_scope_state = { owner = { NOT = { is_country_type = decentralized } } }
+				}
+			}
 			var:zz_ef_mh_region = {
 				random_scope_state = {
+					limit = { owner = { NOT = { is_country_type = decentralized } } }
 					owner = {
 						zz_ef_metal_heir_take = { V = popm_gold }
 						zz_ef_metal_heir_take = { V = popm_silver }
@@ -72,9 +80,8 @@ zz_ef_metal_heir_world = {
 					}
 				}
 			}
+			remove_list_global_variable = { name = zz_ef_mh_list target = scope:zz_ef_mh_dead }
 		}
-		# taken -- or no heir to take it (the region has no state); a country brought back (released) comes back in below
-		remove_list_global_variable = { name = zz_ef_mh_list target = scope:zz_ef_mh_dead }
 	}
 	every_country = {
 		limit = { exists = capital }
@@ -82,8 +89,7 @@ zz_ef_metal_heir_world = {
 	}
 }
 # Country scope: in the list of the countries with metal accounts, its capital's region kept (zz_ef_metal_heir_world);
-# also at its metal start (ld_metal_accounts.txt) -- a country gone before the world's next pass (Nagpur: 1.9M silver
-# of its pops' at the start, gone the same week) is in the list.
+# also at its metal start (ld_metal_accounts.txt) -- a country gone before the world's next pass is in the list.
 zz_ef_mh_keep = {
 	if = {
 		limit = { exists = capital }
