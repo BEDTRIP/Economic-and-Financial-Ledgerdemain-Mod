@@ -1,8 +1,7 @@
-﻿# The exchange a country trades on (R8б, шаг 5; понятие «Биржа», Д.R8.6): its own (zz_ef_has_exchange); without one --
-# its market owner's, else its power bloc leader's, else the leader's of the bloc with the leverage advantage over it
-# (leverage_advantage > 0 -- the strongest influence), else the world's. Each country's exchange -- var:zz_ef_xch (a
-# country); kept monthly. The exchange's fees -- variables of the exchange country (zz_ef_xch_fees_set); the quotes --
-# variables of the debtor country (the funds, шаг 6).
+﻿# The exchange a country trades on (R8б, шаг 5; понятие «Биржа», Д.R8в.22): its own (zz_ef_has_exchange); without one --
+# its power bloc leader's, else the leader's of the bloc with the most influence on it, else its market owner's, else the
+# world's. Each country's exchange -- var:zz_ef_xch (a country); kept monthly. The exchange's fees -- variables of the
+# exchange country (zz_ef_xch_fees_set); the quotes -- variables of the debtor country (the funds, шаг 6).
 
 # Any scope, monthly (zz_ef_world_month_ef): the world's exchange -- the reference currency's country if it has an
 # exchange, else the largest economy that has one (global_var:zz_ef_xch_world).
@@ -36,21 +35,18 @@ zz_ef_xch_world_set = {
 
 # Country scope, monthly (zz_ef_money_model_monthly_step): var:zz_ef_xch -- the country whose exchange we trade on;
 # var:zz_ef_xch_how -- 1 own, 2 the market owner's, 3 the bloc leader's, 4 the strongest bloc's, 5 the world's.
+# The strongest bloc: the engine gives a bloc's influence on a country only as its advantage over the rest -- the other
+# blocs and the country's unclaimed leverage (leverage_advantage); the bloc with the most influence has the largest
+# advantage, negative too. It counts when it is strictly ahead of every other bloc (so it has influence at all).
 zz_ef_xch_route = {
 	if = { limit = { has_variable = zz_ef_xch } remove_variable = zz_ef_xch }
 	set_variable = { name = zz_ef_xch_how value = 0 }
+	save_temporary_scope_as = zz_ef_xch_c
+	zz_ef_xch_strong_bloc_find = yes
 	if = {
 		limit = { zz_ef_has_exchange = yes }
 		set_variable = { name = zz_ef_xch value = this }
 		set_variable = { name = zz_ef_xch_how value = 1 }
-	}
-	else_if = {
-		limit = {
-			exists = market
-			market.owner = { zz_ef_has_exchange = yes }
-		}
-		set_variable = { name = zz_ef_xch value = market.owner }
-		set_variable = { name = zz_ef_xch_how value = 2 }
 	}
 	else_if = {
 		limit = {
@@ -61,34 +57,53 @@ zz_ef_xch_route = {
 		set_variable = { name = zz_ef_xch value = scope:zz_ef_xch_s }
 		set_variable = { name = zz_ef_xch_how value = 3 }
 	}
-	else = {
-		save_temporary_scope_as = zz_ef_xch_c
-		if = {
-			limit = {
-				any_power_bloc = {
-					leverage_advantage = { target = scope:zz_ef_xch_c value > 0 }
-					power_bloc_leader = { zz_ef_has_exchange = yes }
-				}
-			}
-			random_power_bloc = {
-				limit = {
-					leverage_advantage = { target = scope:zz_ef_xch_c value > 0 }
-					power_bloc_leader = { zz_ef_has_exchange = yes }
-				}
-				power_bloc_leader = { save_temporary_scope_as = zz_ef_xch_s }
-			}
-			set_variable = { name = zz_ef_xch value = scope:zz_ef_xch_s }
-			set_variable = { name = zz_ef_xch_how value = 4 }
+	else_if = {
+		limit = { zz_ef_xch_strong_bloc = yes }
+		scope:zz_ef_xch_b = { power_bloc_leader = { save_temporary_scope_as = zz_ef_xch_s } }
+		set_variable = { name = zz_ef_xch value = scope:zz_ef_xch_s }
+		set_variable = { name = zz_ef_xch_how value = 4 }
+	}
+	else_if = {
+		limit = {
+			exists = market
+			market.owner = { zz_ef_has_exchange = yes }
 		}
-		else_if = {
-			limit = { has_global_variable = zz_ef_xch_world }
-			set_variable = { name = zz_ef_xch value = global_var:zz_ef_xch_world }
-			set_variable = { name = zz_ef_xch_how value = 5 }
+		set_variable = { name = zz_ef_xch value = market.owner }
+		set_variable = { name = zz_ef_xch_how value = 2 }
+	}
+	else_if = {
+		limit = { has_global_variable = zz_ef_xch_world }
+		set_variable = { name = zz_ef_xch value = global_var:zz_ef_xch_world }
+		set_variable = { name = zz_ef_xch_how value = 5 }
+	}
+	if = { limit = { has_variable = zz_ef_xch_blev } remove_variable = zz_ef_xch_blev }
+	if = {
+		limit = {
+			zz_ef_logs_on = yes
+			zz_ef_log_country = yes
+			has_variable = zz_ef_xch
 		}
+		debug_log = "EFH|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|route|how [THIS.GetCountry.MakeScope.Var('zz_ef_xch_how').GetValue|0]|exchange [THIS.GetCountry.MakeScope.Var('zz_ef_xch').GetCountry.GetNameNoFormatting]"
 	}
 	if = {
 		limit = { zz_ef_has_exchange = yes }
 		zz_ef_xch_fees_set = yes
+	}
+}
+
+# Country scope (scope:zz_ef_xch_c): the bloc of the most influence on the country among the blocs whose leader has an
+# exchange -- scope:zz_ef_xch_b, its advantage -- var:zz_ef_xch_blev (zz_ef_xch_strong_bloc checks it is ahead of all).
+zz_ef_xch_strong_bloc_find = {
+	if = { limit = { has_variable = zz_ef_xch_blev } remove_variable = zz_ef_xch_blev }
+	ordered_power_bloc = {
+		limit = { power_bloc_leader = { zz_ef_has_exchange = yes } }
+		order_by = zz_ef_xch_bloc_adv
+		max = 1
+		check_range_bounds = no
+		save_temporary_scope_as = zz_ef_xch_b
+		scope:zz_ef_xch_c = {
+			set_variable = { name = zz_ef_xch_blev value = "scope:zz_ef_xch_b.leverage_advantage(scope:zz_ef_xch_c)" }
+		}
 	}
 }
 

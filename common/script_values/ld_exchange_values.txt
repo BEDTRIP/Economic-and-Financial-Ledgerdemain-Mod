@@ -58,3 +58,9 @@ zz_ef_xch_n_5_v = {
 	value = 0
 	if = { limit = { has_global_variable = zz_ef_xch_n_5 } value = global_var:zz_ef_xch_n_5 }
 }
+
+# POWER BLOC scope: its advantage in influence on scope:zz_ef_xch_c (the exchange's route, ld_exchange.txt) -- its
+# influence over the most of the other blocs' and the country's unclaimed leverage
+zz_ef_xch_bloc_adv = {
+	value = "leverage_advantage(scope:zz_ef_xch_c)"
+}

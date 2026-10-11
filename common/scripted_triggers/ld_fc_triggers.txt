@@ -46,3 +46,20 @@ zz_ef_xch_banned = {
 		scope:zz_ef_xch_d = { has_law_or_variant = law_type:law_isolationism }
 	}
 }
+
+# COUNTRY scope (scope:zz_ef_xch_c), after zz_ef_xch_strong_bloc_find: the bloc scope:zz_ef_xch_b -- of the most influence
+# on the country among the blocs whose leader has an exchange -- is strictly ahead of every other bloc (so it has
+# influence at all; Д.R8в.22)
+zz_ef_xch_strong_bloc = {
+	exists = scope:zz_ef_xch_b
+	has_variable = zz_ef_xch_blev
+	NOT = {
+		any_power_bloc = {
+			NOT = { this = scope:zz_ef_xch_b }
+			leverage_advantage = {
+				target = scope:zz_ef_xch_c
+				value >= scope:zz_ef_xch_c.var:zz_ef_xch_blev
+			}
+		}
+	}
+}
