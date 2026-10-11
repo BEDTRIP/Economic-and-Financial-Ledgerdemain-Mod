@@ -57,8 +57,14 @@ zz_ef_metal_heir_step = {
 			has_variable = zz_ef_mh_owner
 			NOT = { var:zz_ef_mh_owner = owner }
 		}
+		# a gone country stays an object (exists = yes): is_country_alive -- it has a state on the map
 		if = {
-			limit = { NOT = { exists = var:zz_ef_mh_owner } }
+			limit = {
+				OR = {
+					NOT = { exists = var:zz_ef_mh_owner }
+					var:zz_ef_mh_owner = { is_country_alive = no }
+				}
+			}
 			save_scope_as = zz_ef_mh_state
 			owner = {
 				zz_ef_metal_heir_take = { V = popm_gold }
