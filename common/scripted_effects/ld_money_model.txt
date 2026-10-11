@@ -25,6 +25,22 @@
 # ---- the weekly step --------------------------------------------------------
 
 zz_ef_money_model_step = {
+	# the banks' capital: last step's change and its known lines, before this step moves them (the log only, EFJ|bank_cap)
+	if = {
+		limit = {
+			zz_ef_logs_on = yes
+			zz_ef_log_country = yes
+			has_variable = zz_ef_bank_capital
+		}
+		if = { limit = { NOT = { has_variable = zz_ef_bk_cap_prev } } set_variable = { name = zz_ef_bk_cap_prev value = var:zz_ef_bank_capital } }
+		set_variable = { name = zz_ef_bk_cap_d value = var:zz_ef_bank_capital }
+		change_variable = { name = zz_ef_bk_cap_d subtract = var:zz_ef_bk_cap_prev }
+		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|bank_cap|cap [THIS.GetCountry.MakeScope.Var('zz_ef_bank_capital').GetValue|0]|d [THIS.GetCountry.MakeScope.Var('zz_ef_bk_cap_d').GetValue|0]|dep_int [THIS.GetCountry.MakeScope.Var('zz_ef_f_dep_int').GetValue|0]|cc_int [THIS.GetCountry.MakeScope.Var('zz_ef_f_cc_int').GetValue|0]|bc_int [THIS.GetCountry.MakeScope.Var('zz_ef_f_bc_int').GetValue|0]|cb_int [THIS.GetCountry.MakeScope.Var('zz_ef_f_cb_interest').GetValue|0]|nr_int [THIS.GetCountry.MakeScope.Var('zz_ef_f_nr_int').GetValue|0]|fd_int [THIS.GetCountry.MakeScope.Var('zz_ef_f_fd_int').GetValue|0]|fd_bk [THIS.GetCountry.MakeScope.Var('zz_ef_f_fd_bk').GetValue|0]|deposits [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_deposits')|0]|yield [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bank_loan_yield')|4]|deprate [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_deposit_rate')|4]"
+		set_variable = { name = zz_ef_bk_cap_prev value = var:zz_ef_bank_capital }
+	}
+	# Business cash: the sum over the buildings, once a week (run 15: the
+	# estimate from the credit limit -- credit - base - 1.7 x GDP -- swung by
+	# millions a week, M2 by +-30%).
 	# Business cash: the sum over the buildings, once a week (run 15: the
 	# estimate from the credit limit -- credit - base - 1.7 x GDP -- swung by
 	# millions a week, M2 by +-30%).
