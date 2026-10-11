@@ -78,11 +78,20 @@ zz_ef_metal_heir_world = {
 	}
 	every_country = {
 		limit = { exists = capital }
+		zz_ef_mh_keep = yes
+	}
+}
+# Country scope: in the list of the countries with metal accounts, its capital's region kept (zz_ef_metal_heir_world);
+# also at its metal start (ld_metal_accounts.txt) -- a country gone before the world's next pass (Nagpur: 1.9M silver
+# of its pops' at the start, gone the same week) is in the list.
+zz_ef_mh_keep = {
+	if = {
+		limit = { exists = capital }
 		set_variable = { name = zz_ef_mh_region value = capital.state_region }
-		if = {
-			limit = { NOT = { is_target_in_global_variable_list = { name = zz_ef_mh_list target = this } } }
-			add_to_global_variable_list = { name = zz_ef_mh_list target = this }
-		}
+	}
+	if = {
+		limit = { NOT = { is_target_in_global_variable_list = { name = zz_ef_mh_list target = this } } }
+		add_to_global_variable_list = { name = zz_ef_mh_list target = this }
 	}
 }
 # Country scope (the heir), scope:zz_ef_mh_dead -- the gone country: var:zz_ef_$V$ += its account, the account -> 0.
