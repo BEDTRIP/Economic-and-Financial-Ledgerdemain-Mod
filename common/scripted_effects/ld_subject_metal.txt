@@ -46,14 +46,15 @@ zz_ef_cb_state_owner_step = {
 	}
 }
 
-# Country scope, weekly: the pops' and the banks' metal are the country's accounts (var:zz_ef_popm_* / zz_ef_bankm_*) --
-# a country that is gone (annexed, a revolt put down, a union) takes them with it, and the world's line of metal lost
-# them (r1011_173236: 7 jumps of silver, each the week after a country was gone). No on_action marks a country gone,
-# but a gone country stays an object with its variables (exists = yes, is_country_alive = no): each country marks its
-# capital (var:zz_ef_mh_owner), and the owner of a marked state whose country is not alive takes that country's
-# accounts as they are and zeroes them. A country of role V does not step -- the mark of its first step stays.
-zz_ef_metal_heir_step = {
-	every_scope_state = {
+# Any scope, the world's week (zz_ef_world_week_close): the pops' and the banks' metal are the country's accounts
+# (var:zz_ef_popm_* / zz_ef_bankm_*) -- a country that is gone (annexed, a revolt put down, a union) took them with it,
+# and the world's line of metal lost them (r1011_173236: 7 jumps of silver, each the week after a country was gone).
+# No on_action marks a country gone, but a gone country stays an object with its variables (exists = yes,
+# is_country_alive = no): every living country marks its capital (var:zz_ef_mh_owner), and the owner of a marked state
+# whose country is gone takes that country's accounts as they are and zeroes them. In the world's pass, not the
+# countries' steps: a country of role V does not step, as keeper or as heir.
+zz_ef_metal_heir_world = {
+	every_state = {
 		limit = { has_variable = zz_ef_mh_owner }
 		if = {
 			limit = { zz_ef_mh_gone_mark = yes }
@@ -66,10 +67,10 @@ zz_ef_metal_heir_step = {
 				if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|metal_heir|pop_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_popm_gold')|0]|pop_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_popm_silver')|0]|bank_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bankm_gold')|0]|bank_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bankm_silver')|0]" }
 			}
 		}
-		# taken from a country that lives on, or our own former capital: one mark a country, on its capital (below)
+		# one mark a country, on its capital (below)
 		remove_variable = zz_ef_mh_owner
 	}
-	if = {
+	every_country = {
 		limit = { exists = capital }
 		save_scope_as = zz_ef_mh_keeper
 		capital = { set_variable = { name = zz_ef_mh_owner value = scope:zz_ef_mh_keeper } }

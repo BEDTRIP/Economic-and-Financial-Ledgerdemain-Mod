@@ -40,10 +40,11 @@
   сохраняет стандарт и паритет, страна на заглушке фиата берёт металлический стандарт и паритет; металла ввод не даёт
   (Д.R8в.7, `docs/currencies.md`).
 - `common/scripted_effects/ld_subject_metal.txt` — `zz_ef_cb_state_owner_step` (металл ушедшего ЦБ-региона возвращается
-  прежнему владельцу); `zz_ef_metal_heir_step` (неделя: страна метит свою столицу `var:zz_ef_mh_owner`; владелец
-  помеченного штата, чья страна не жива — аннексия, подавленный мятеж, объединение; `is_country_alive = no`,
-  `zz_ef_mh_gone_mark`, — забирает её счета металла населения и банков как есть и обнуляет их (исчезнувшая страна
-  остаётся объектом с переменными); пока не забраны — мировая линия считает их сама; лог `EFM|metal_heir`)
+  прежнему владельцу); `zz_ef_metal_heir_world` (мировой проход недели `zz_ef_world_week_close`, не шаг страны — страны
+  роли V не шагают; каждая живая страна метит свою столицу `var:zz_ef_mh_owner`; владелец помеченного штата, чья страна
+  не жива — аннексия, подавленный мятеж, объединение; `is_country_alive = no`, `zz_ef_mh_gone_mark`, — забирает её счета
+  металла населения и банков как есть и обнуляет их (исчезнувшая страна остаётся объектом с переменными); пока не
+  забраны — мировая линия считает их сама; лог `EFM|metal_heir`)
 - `common/scripted_effects/ld_stockpile_state_var_seed.txt`, `common/on_actions/ld_stockpile_state_var_init.txt`,
   `common/history/global/zz_ef_init_stockpiling_state_vars.txt` — засев 5 переменных `stockpiling_*_var_state_1` и двух
   вспомогательных на регионах (`financial_center_site_var`, `looted_state`); GLOBAL-блок истории (новая кампания),
