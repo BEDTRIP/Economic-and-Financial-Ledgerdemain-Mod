@@ -119,6 +119,7 @@ zz_ef_rq_heir_take = {
 	zz_ef_rq_heir_holdings = { H = pp K = f }
 	zz_ef_rq_heir_holdings = { H = bk K = f }
 	save_temporary_scope_as = zz_ef_rq_he
+	set_variable = { name = zz_ef_t_om0 value = zz_ef_rq_out_m_v }
 	if = {
 		limit = {
 			scope:zz_ef_mh_dead = {
@@ -141,6 +142,17 @@ zz_ef_rq_heir_take = {
 			zz_ef_rq_heir_debtor = { H = fd }
 		}
 	}
+	# the gone country's money held abroad is now the heir's: its banks owe it as non-residents' deposits (the book), the
+	# gone country's pool did not come with it -- out of the heir banks' capital, so the pool's part of «прочее» does not
+	# move (Spain -1.1M the week the Carlists' country went, r1013_011039; accepted at night, check)
+	set_variable = { name = zz_ef_t_om0 value = { value = zz_ef_rq_out_m_v subtract = var:zz_ef_t_om0 } }
+	if = {
+		limit = { var:zz_ef_t_om0 > 0 }
+		if = { limit = { NOT = { has_variable = zz_ef_bank_capital } } set_variable = { name = zz_ef_bank_capital value = 0 } }
+		change_variable = { name = zz_ef_bank_capital subtract = var:zz_ef_t_om0 }
+		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFK|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|heir_liab|money [THIS.GetCountry.MakeScope.Var('zz_ef_t_om0').GetValue|0]" }
+	}
+	remove_variable = zz_ef_t_om0
 }
 
 # HOLDER scope: the holding of MAP on D into var:zz_ef_rq_h (0 if none).
