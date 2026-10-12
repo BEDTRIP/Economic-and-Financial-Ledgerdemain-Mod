@@ -448,3 +448,62 @@ zz_ef_bk_map_move = {
 		}
 	}
 }
+
+# Bankruptcy of a bank (Д.R4б.6; понятие «Банкротство»): once a month a company subject with capital < 0 and no credit
+# from the CB closes -- its depositors (pops and the investment fund) lose the hole pro rata, up to their deposits
+# (posting deposits -> capital); what it held goes back as the week's residual to the other banks of the country by their
+# shares (zz_ef_bk_book_step); the company is out of the subjects for zz_ef_bk_fail_days (its levels count with
+# «частные банкиры»), then a new subject with empty accounts. Принято ночью, проверить: the aggregates («госбанки»,
+# «частные банкиры») do not close; foreign CBs' and the treasury's deposits do not lose (their registers live elsewhere).
+# Log EFK|bank_fail. COUNTRY scope, its monthly pulse (zz_ef_bank_monthly).
+zz_ef_bk_fail_step = {
+	save_temporary_scope_as = zz_ef_bk_c
+	every_company = {
+		limit = {
+			has_variable = zz_ef_bk_box
+			var:zz_ef_bk_box = {
+				has_variable = zz_ef_bk_cap
+				var:zz_ef_bk_cap < 0
+				OR = {
+					NOT = { has_variable = zz_ef_bk_cbd }
+					var:zz_ef_bk_cbd <= 0
+				}
+			}
+		}
+		var:zz_ef_bk_box = {
+			set_variable = { name = zz_ef_bk_hole value = { value = var:zz_ef_bk_cap multiply = -1 } }
+			set_variable = { name = zz_ef_bk_liab value = 0 }
+			if = { limit = { has_variable = zz_ef_bk_dep } change_variable = { name = zz_ef_bk_liab add = var:zz_ef_bk_dep } }
+			if = { limit = { has_variable = zz_ef_bk_fdd } change_variable = { name = zz_ef_bk_liab add = var:zz_ef_bk_fdd } }
+			set_variable = { name = zz_ef_bk_loss value = { value = var:zz_ef_bk_hole max = var:zz_ef_bk_liab } }
+			set_variable = { name = zz_ef_bk_xd value = 0 }
+			set_variable = { name = zz_ef_bk_xf value = 0 }
+			if = {
+				limit = { var:zz_ef_bk_liab > 0 }
+				if = { limit = { has_variable = zz_ef_bk_dep } set_variable = { name = zz_ef_bk_xd value = { value = var:zz_ef_bk_loss multiply = var:zz_ef_bk_dep divide = var:zz_ef_bk_liab } } }
+				if = { limit = { has_variable = zz_ef_bk_fdd } set_variable = { name = zz_ef_bk_xf value = { value = var:zz_ef_bk_loss multiply = var:zz_ef_bk_fdd divide = var:zz_ef_bk_liab } } }
+			}
+			scope:zz_ef_bk_c = {
+				set_variable = { name = zz_ef_bk_fxd value = prev.var:zz_ef_bk_xd }
+				set_variable = { name = zz_ef_bk_fxf value = prev.var:zz_ef_bk_xf }
+				set_variable = { name = zz_ef_bk_fhole value = prev.var:zz_ef_bk_hole }
+				set_variable = { name = zz_ef_bk_fdep value = prev.var:zz_ef_bk_dep }
+				if = {
+					limit = { has_variable = zz_ef_pop_deposits }
+					zz_ef_post = { FROM = zz_ef_pop_deposits TO = zz_ef_bank_capital V = var:zz_ef_bk_fxd }
+				}
+				if = {
+					limit = { has_variable = zz_ef_fd_dep }
+					zz_ef_post = { FROM = zz_ef_fd_dep TO = zz_ef_bank_capital V = var:zz_ef_bk_fxf }
+				}
+			}
+		}
+		if = {
+			limit = { zz_ef_logs_on = yes }
+			debug_log = "EFK|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCompany.GetCountry.GetNameNoFormatting]|bank_fail|[THIS.GetCompany.GetNameNoFormatting]|hole [THIS.GetCompany.GetCountry.MakeScope.Var('zz_ef_bk_fhole').GetValue|0]|dep [THIS.GetCompany.GetCountry.MakeScope.Var('zz_ef_bk_fdep').GetValue|0]|pop_loss [THIS.GetCompany.GetCountry.MakeScope.Var('zz_ef_bk_fxd').GetValue|0]|fund_loss [THIS.GetCompany.GetCountry.MakeScope.Var('zz_ef_bk_fxf').GetValue|0]|levels [THIS.GetCompany.MakeScope.Var('zz_ef_bk_lv').GetValue|0]"
+		}
+		var:zz_ef_bk_box = { destroy_container = yes }
+		remove_variable = zz_ef_bk_box
+		set_variable = { name = zz_ef_bk_failed value = 1 days = zz_ef_bk_fail_days }
+	}
+}
