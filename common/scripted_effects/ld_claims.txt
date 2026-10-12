@@ -224,7 +224,7 @@ zz_ef_rq_crisis_resell = {
 	scope:target_country = { save_scope_as = overrated_currency_country_owner }
 	every_country = {
 		limit = {
-			has_modifier = has_central_bank
+			zz_ef_am_holder = yes
 			NOT = { this = scope:target_country }
 			has_variable_map = zz_ef_rq_cb_m
 			is_key_in_variable_map = { name = zz_ef_rq_cb_m target = scope:target_country }

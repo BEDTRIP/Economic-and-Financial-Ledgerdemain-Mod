@@ -235,19 +235,25 @@ zz_ef_cb_kind_w_value = {
 # government's discretionary adjustment. Kept apart from the rate the bank
 # steers to (zz_ef_cb_rate_target = rule + adjustment): penalties for the gap
 # between the actual rate and this one come later (EF.31).
+# The treasury as the authority (Д.R4а.11) -- the same rule without the cover; the banks of a metal standard without a
+# CB -- the constant zz_ef_rate_no_authority.
+zz_ef_rate_no_authority = 0.065
 zz_ef_cb_rate_rating_target = {
-	value = 0.065
+	value = zz_ef_rate_no_authority
 	if = {
-		limit = { has_modifier = has_central_bank }
+		limit = { zz_ef_am_holder = yes }
 		value = zz_ef_cb_rule_neutral
 		add = {
 			value = zz_ef_cb_rule_inflation
 			multiply = zz_ef_cb_kind_w_value
 		}
 		add = zz_ef_cb_rule_money
-		add = {
-			value = zz_ef_cb_rule_cover
-			multiply = zz_ef_cb_kind_w_value
+		if = {
+			limit = { has_modifier = has_central_bank }
+			add = {
+				value = zz_ef_cb_rule_cover
+				multiply = zz_ef_cb_kind_w_value
+			}
 		}
 		min = zz_ef_cb_rate_floor
 		max = zz_ef_cb_rate_ceiling

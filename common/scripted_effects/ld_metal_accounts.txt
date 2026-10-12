@@ -453,6 +453,24 @@ zz_ef_metal_week_step = {
 	change_variable = { name = zz_ef_cb_stock_acc subtract = var:zz_ef_cb_stock_before }
 	remove_variable = zz_ef_cb_stock_before
 
+	# the banks became the authority (a metal standard without a CB, Д.R4а.11): the authority's metal is theirs -- before
+	# the snapshot, so not a known move
+	if = {
+		limit = {
+			zz_ef_auth_banks = yes
+			has_variable = zz_ef_model_started
+			OR = {
+				gold_state_native_for_stockpile > 0
+				silver_state_native_for_stockpile > 0
+			}
+		}
+		zz_ef_am_init = yes
+		zz_ef_bankm_init = yes
+		change_variable = { name = zz_ef_bankm_gold add = var:zz_ef_am_gold }
+		change_variable = { name = zz_ef_bankm_silver add = var:zz_ef_am_silver }
+		set_variable = { name = zz_ef_am_gold value = 0 }
+		set_variable = { name = zz_ef_am_silver value = 0 }
+	}
 	# the snapshot after this week's own moves
 	set_variable = { name = zz_ef_mt_prev_g value = gold_state_native_for_stockpile }
 	set_variable = { name = zz_ef_mt_prev_s value = silver_state_native_for_stockpile }
@@ -465,7 +483,7 @@ zz_ef_metal_week_step = {
 	# a CB without Banks: the state puts up a level in the capital (Д.R4а.9)
 	if = {
 		limit = {
-			zz_ef_am_holder = yes
+			has_modifier = has_central_bank
 			exists = capital
 			NOT = { any_scope_building = { is_building_type = building_zz_ef_bank } }
 		}

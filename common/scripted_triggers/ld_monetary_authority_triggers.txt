@@ -1,9 +1,31 @@
 ﻿# The monetary authority (понятие «Денежная власть», Д.R4а.2): its metal -- the country's accounts var:zz_ef_am_gold /
 # zz_ef_am_silver (scripted_effects/ld_metal_accounts.txt).
 
-# Country scope: a CB holds the authority's metal and trades it for the country.
+# Country scope: the authority holds reserves on the country's accounts (metal zz_ef_am_*, foreign money -- the map
+# zz_ef_rq_cb_m) and settles the clearing for the country -- a CB, or without one the treasury on a fiat, exchange or
+# external standard (Д.R4а.11); on a metal standard without a CB the banks are the authority (their own accounts).
 zz_ef_am_holder = {
-	has_modifier = has_central_bank
+	OR = {
+		has_modifier = has_central_bank
+		zz_ef_auth_treasury = yes
+	}
+}
+# the treasury is the authority (Д.R4а.11): no CB, a monetary system, not a metal standard
+zz_ef_auth_treasury = {
+	NOT = { has_modifier = has_central_bank }
+	NOT = { has_law = law_type:law_no_monetary_system }
+	NOT = { zz_ef_metal_gold_law = yes }
+	NOT = { zz_ef_metal_silver_law = yes }
+	NOT = { zz_ef_metal_bimet_law = yes }
+}
+# the banks are the authority (Д.R4а.11): no CB, a metal standard of its own
+zz_ef_auth_banks = {
+	NOT = { has_modifier = has_central_bank }
+	OR = {
+		zz_ef_metal_gold_law = yes
+		zz_ef_metal_silver_law = yes
+		zz_ef_metal_bimet_law = yes
+	}
 }
 # the country's central bank law founds a CB (Д.R4а.3, laws/ld_central_bank_laws.txt)
 zz_ef_cb_law_has_cb = {

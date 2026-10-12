@@ -36,8 +36,8 @@
   `zz_ef_clr_gpm_own`, металл к оплате `zz_ef_clr_metal_av_g` (у ЦБ — только сверх пола покрытия `zz_ef_clr_cover_floor`
   = половина цели, доля `zz_ef_clr_over_floor`; Д.R8в.30), итоги недели `zz_ef_v_f_clr_*` (карточка заграницы), мировые
   суммы `zz_ef_clr_w_*_v` (лог `EFN`), `zz_ef_cbfx_g_v` (порядок строк таблицы).
-- `common/scripted_triggers/ld_clearing_triggers.txt` — `zz_ef_clr_cb_ok` (денежная власть — ЦБ: ЦБ и столичный штат ЦБ;
-  иначе — банки), `zz_ef_clr_wants_metal` (металлический стандарт, не обменный).
+- `common/scripted_triggers/ld_clearing_triggers.txt` — `zz_ef_clr_cb_ok` (денежная власть держит резервы — ЦБ или казна,
+  `zz_ef_am_holder`, Д.R4а.11; иначе — банки), `zz_ef_clr_wants_metal` (металлический стандарт, не обменный).
 - `common/scripted_guis/ld_cbfx.txt` — `zz_ef_cbfx_update_sorted` (таблица чужих денег ЦБ по эмитентам: список
   `zz_ef_cbfx_list`, строка — переменные эмитента `zz_ef_cbfx_u/_g/_mn/_dd`), `zz_ef_holders_update` (какие ЦБ держат
   наши деньги: `zz_ef_holds_pc`, `zz_ef_holders_list`).

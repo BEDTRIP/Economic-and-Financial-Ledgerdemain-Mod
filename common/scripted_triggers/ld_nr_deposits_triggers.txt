@@ -1,6 +1,6 @@
 ﻿# The issuer of its money (scripted_effects/ld_nr_deposits.txt): a CB not pegged to another's (the external exchange
 # standard, Д.R8а.3) -- a pegged subject settles through its overlord and is no issuer of deposits.
 zz_ef_nr_issuer = {
-	has_modifier = has_central_bank
+	zz_ef_am_holder = yes
 	NOT = { has_law = law_type:law_external_exchange_standard }
 }

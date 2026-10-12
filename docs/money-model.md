@@ -23,8 +23,13 @@
   зонды.
 - `common/script_values/ld_money_model_values.txt` — все формулы: счета, M0–M3, кредитные лимиты, ставки, платёжный
   баланс, кольца роста (почти все ключи `zz_ef_*`).
-- `common/scripted_triggers/ld_monetary_authority_triggers.txt` — `zz_ef_am_holder`: держит ли страна металл денежной
-  власти (ЦБ); счета `zz_ef_am_*`, `zz_ef_am_init`, недельный `zz_ef_am_sweep` — в `ld_metal_accounts.txt` (Д.R4а.2).
+- `common/scripted_triggers/ld_monetary_authority_triggers.txt` — денежная власть (Д.R4а.11): `zz_ef_am_holder` — власть
+  держит резервы на счетах страны (металл `zz_ef_am_*`, чужие деньги — карта `zz_ef_rq_cb_m`) и ведёт клиринг: ЦБ, без
+  ЦБ при фиате, обменном, внешневалютном — казна (`zz_ef_auth_treasury`); при своём металлическом стандарте без ЦБ —
+  банки (`zz_ef_auth_banks`: их металл `zz_ef_bankm_*`, металл власти переходит к ним в недельном шаге металла, цель
+  металла банков — ещё банкноты / `zz_ef_bank_notes_per_metal` = 3); `zz_ef_cb_law_has_cb`, `zz_ef_cb_ready` — закон и
+  готовность E&F к ЦБ (`ld_cb_law.txt`). Счета `zz_ef_am_*`, `zz_ef_am_init`, недельный `zz_ef_am_sweep` — в
+  `ld_metal_accounts.txt` (Д.R4а.2).
 - `common/scripted_effects/ld_metal_accounts.txt` — старт металла, недельные покупки/продажи ЦБ/банков/населения, выкуп
   у населения, сверка металла ЦБ, мировая линия металла.
 - `common/scripted_triggers/ld_metal_triggers.txt` — `zz_ef_cb_metal_standard` (ЦБ на стандарте с металлом);
@@ -261,7 +266,7 @@
 | `zz_ef_t_led` | временная: значение счёта, посчитанное один раз в `zz_ef_money_ledger_delta` (снимается там же) | `zz_ef_money_ledger_delta` | оно же |
 | `zz_ef_bcash`, `zz_ef_bkcash` | наличные бизнеса и банков за неделю | `zz_ef_money_model_step` | `zz_ef_building_cash`, `zz_ef_agg_m0..m3` |
 | `zz_ef_model_started`, `zz_ef_cb_start_due`, `zz_ef_metal_started` | первый шаг страны сделан (читают вклады нерезидентов, ИИ-политика курса), ЦБ ждёт стартового металла (40 % M2, когда M2 / ВВП > 0,1 и страна — ЦБ на металле: подданный входит в зону сюзерена после первого шага; не на металле полгода — ожидание снимается), флаг первого шага металла | `zz_ef_money_model_step`, `zz_ef_metal_start_step`, `zz_ef_cb_metal_start_step` | правила металла ЦБ (`zz_ef_cb_buy_mult`, `zz_ef_cb_sell_units`, `zz_ef_cb_buyback_units`), ИИ-политика курса (`ld_monetary_policy.txt`), `zz_ef_cur_intro_after` |
-| `zz_ef_am_gold`, `zz_ef_am_silver` (страна) | металл денежной власти (Д.R4а.2; есть ли держатель — `zz_ef_am_holder`: ЦБ) | `zz_ef_am_sweep` (из `gold_state_1` / `silver_state_1` штата ЦБ, куда пишет E&F), `zz_ef_metal_week_step`, `zz_ef_cb_metal_start_step`, `zz_ef_metal_start_step`, клиринг, биржа (арбитраж биметаллизма), кризисный выкуп, грабёж столицы, наследник | `gold_state_native_for_stockpile`, `central_bank_reserves`, `zz_ef_cbm_gold/silver`, `zz_ef_cb_cover`, `zz_ef_wm_sum_cb_*` |
+| `zz_ef_am_gold`, `zz_ef_am_silver` (страна) | металл денежной власти (Д.R4а.2; есть ли держатель — `zz_ef_am_holder`: ЦБ или казна, Д.R4а.11) | `zz_ef_am_sweep` (из `gold_state_1` / `silver_state_1` штата ЦБ, куда пишет E&F), `zz_ef_metal_week_step`, `zz_ef_cb_metal_start_step`, `zz_ef_metal_start_step`, клиринг, биржа (арбитраж биметаллизма), кризисный выкуп, грабёж столицы, наследник | `gold_state_native_for_stockpile`, `central_bank_reserves`, `zz_ef_cbm_gold/silver`, `zz_ef_cb_cover`, `zz_ef_wm_sum_cb_*` |
 | `zz_ef_popm_gold/silver`, `zz_ef_bankm_gold/silver` | металл населения и банков (единицы резерва) | `zz_ef_metal_start_step`, `zz_ef_metal_start_banks`, `zz_ef_metal_week_step` | `zz_ef_popm_money`, `zz_ef_bankm_money`, `zz_ef_wm_sum_*` |
 | `zz_ef_f_mt_<cb_in/cb_out/bank_in/pop_in>_<g/s>`, `zz_ef_f_mt_buyback(_money)`, `zz_ef_f_mt_oth_<g/s>`, `zz_ef_mt_prev_<g/s>`, `zz_ef_mt_start_adj_<g/s>`, `zz_ef_cb_stock_acc` | покупки/продажи недели, выкуп, невязка сверки, снимок, поправка старта, изменение резервов ЦБ | `zz_ef_metal_week_step`, `zz_ef_metal_reconcile`, `zz_ef_metal_start_cb_after` | сверка следующей недели, карточка ЦБ (`zz_ef_v_f_cb_stock`) |
 | `zz_ef_t_cb_in_<g/s>`, `zz_ef_t_bank_in_<g/s>` | временные: вход зданий ЦБ и банков (товары), посчитанный один раз за шаг; из них `zz_ef_f_mt_cb_in/bank_in` и часть населения (потребление штатов − они, не ниже 0; та же формула, что `zz_ef_pop_<gold/silver>_goods`) | `zz_ef_metal_week_step` | он же |

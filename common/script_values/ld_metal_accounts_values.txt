@@ -350,13 +350,26 @@ zz_ef_state_silver_cons = {
 }
 # ---- step 5: the banks' purchase for next week (Д2.25) ----------------------------
 # Target: the norm x the larger of the credit (+5% room to grow) and the deposits; 2% of the gap a week; a surplus
-# buys nothing (sold in Ф3). In the country's metal (zz_ef_metal_silver_share).
+# buys nothing (sold in Ф3). In the country's metal (zz_ef_metal_silver_share). The banks as the authority (a metal
+# standard without a CB, Д.R4а.11) also back their notes: at most zz_ef_bank_notes_per_metal of notes a unit of metal.
 zz_ef_bank_buy_speed = 0.02
+zz_ef_bank_notes_per_metal = 3
 zz_ef_bank_metal_target = {
 	value = zz_ef_credit_now
 	multiply = 1.05
 	min = zz_ef_pop_deposits
 	multiply = zz_ef_reserve_norm
+	if = {
+		limit = {
+			zz_ef_auth_banks = yes
+			has_variable = zz_ef_notes
+		}
+		add = {
+			value = var:zz_ef_notes
+			divide = zz_ef_bank_notes_per_metal
+			min = 0
+		}
+	}
 }
 zz_ef_bank_buy_money = {
 	value = zz_ef_bank_metal_target

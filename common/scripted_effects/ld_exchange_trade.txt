@@ -220,7 +220,7 @@ zz_ef_xch_post_player = {
 	if = {
 		limit = {
 			has_variable_map = zz_ef_xpl_buy_m
-			has_modifier = has_central_bank
+			zz_ef_am_holder = yes
 		}
 		every_key_in_variable_map = {
 			variable = zz_ef_xpl_buy_m
@@ -617,7 +617,7 @@ zz_ef_xch_post_buys = {
 	set_variable = { name = zz_ef_xo_rmin value = zz_ef_deposit_rate }
 	if = {
 		limit = {
-			has_modifier = has_central_bank
+			zz_ef_am_holder = yes
 			zz_ef_exchange_std = yes
 			zz_ef_xch_budget_cb > 0
 		}
@@ -1856,7 +1856,7 @@ zz_ef_xch_month_log = {
 	set_global_variable = { name = zz_ef_xw_mut value = 0 }
 	every_country = {
 		limit = {
-			has_modifier = has_central_bank
+			zz_ef_am_holder = yes
 			zz_ef_exchange_std = yes
 		}
 		save_temporary_scope_as = zz_ef_xy_a
@@ -1870,7 +1870,7 @@ zz_ef_xch_month_log = {
 			every_key_in_variable_map = {
 				variable = zz_ef_rq_cb_m
 				limit = {
-					has_modifier = has_central_bank
+					zz_ef_am_holder = yes
 					zz_ef_exchange_std = yes
 					has_variable_map = zz_ef_rq_cb_m
 					is_key_in_variable_map = { name = zz_ef_rq_cb_m target = scope:zz_ef_xy_a }

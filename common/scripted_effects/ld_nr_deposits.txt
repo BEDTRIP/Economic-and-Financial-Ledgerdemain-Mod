@@ -16,7 +16,7 @@ zz_ef_nr_dep_step = {
 	set_variable = { name = zz_ef_f_nr_dep value = 0 }
 	set_variable = { name = zz_ef_f_nr_int value = 0 }
 	if = {
-		limit = { has_modifier = has_central_bank }
+		limit = { zz_ef_am_holder = yes }
 		zz_ef_rq_interest_step = { H = cb }
 	}
 	zz_ef_rq_interest_step = { H = bk }
