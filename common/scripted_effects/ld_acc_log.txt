@@ -121,3 +121,19 @@ zz_ef_all_log = {
 		debug_log = "EFV|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|mkt|buyo_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mkt_buyo_g')|1]|sello_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mkt_sello_g')|1]|prod_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mkt_prod_g')|1]|cons_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mkt_cons_g')|1]|fill_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_metal_fill_gold')|3]|buyo_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mkt_buyo_s')|1]|sello_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mkt_sello_s')|1]|prod_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mkt_prod_s')|1]|cons_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mkt_cons_s')|1]|fill_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_metal_fill_silver')|3]|price_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gold_price')|1]|price_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_silver_price')|1]"
 	}
 }
+
+# Country scope, weekly with the EFO line (zz_ef_bridge_apply): the country's market (its owner's tag) and, for the
+# owner, the engine's balance of the market and its buy / sell orders (EFM). The business cash's «прочее» of the
+# market's members against the balance (R4б night: France's 61 weeks -4.67M against -4.98M); tools/ld_mkt_check.py.
+zz_ef_mkt_week_log = {
+	if = {
+		limit = { exists = market }
+		if = {
+			limit = { market.owner = this }
+			debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|tag [THIS.GetCountry.GetTagName]|mkt [THIS.GetCountry.GetMarket.GetOwner.GetTagName]|bal [THIS.GetCountry.GetMarket.GetBalance|0]|buy [THIS.GetCountry.GetMarket.GetTotalBuyOrders|0]|sell [THIS.GetCountry.GetMarket.GetTotalSellOrders|0]"
+		}
+		else = {
+			debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|tag [THIS.GetCountry.GetTagName]|mkt [THIS.GetCountry.GetMarket.GetOwner.GetTagName]"
+		}
+	}
+}
