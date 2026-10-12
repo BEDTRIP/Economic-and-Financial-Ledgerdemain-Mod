@@ -440,7 +440,8 @@ zz_ef_rq_fd_b_read = {
 	}
 }
 
-# Holder scope, in zz_ef_rq_interest_step after the interest var:zz_ef_rq_h (units of scope:zz_ef_rq_d's money) is credited:
+# Holder scope, in zz_ef_rq_interest_step after the interest is credited (zz_ef_rq_add's change var:zz_ef_rq_dlt, units of
+# scope:zz_ef_rq_d's money; var:zz_ef_rq_h holds the new total by then):
 # the CB's and the banks' foreign money is in the abroad account -- the interest in our money for its card
 # (var:zz_ef_f_fxint_abr, the window zz_ef_v_w_fxint_abr); the pops' and the fund's are not in it
 zz_ef_rq_int_abr = {
@@ -450,7 +451,7 @@ zz_ef_rq_int_abr = {
 		change_variable = {
 			name = zz_ef_f_fxint_abr
 			add = {
-				value = var:zz_ef_rq_h
+				value = var:zz_ef_rq_dlt
 				multiply = scope:zz_ef_rq_d.zz_ef_rq_gpm_v
 				divide = zz_ef_clr_gold_per_money
 			}
