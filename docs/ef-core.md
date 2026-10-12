@@ -36,8 +36,8 @@
 - `common/production_methods/15_ef_bank.txt` — 6 PM стандарта
   (`pm_<fiat|silver|bimetallism|gold|gold_exchange|external_exchange>_standard_bank_money_currency`: выход
   `goods_output_bond_add` и `country_minting_add`), `pm_no_monetary_policy`/`pm_revaluation`/`pm_devaluation`.
-- `common/production_methods/16_ef_financial_centre.txt` — `pm_bond_exchange` (выход `mutual_funds`, вход `bond`), 4
-  пары `pm_[no_]<kind>_stock_exchange` (вход акций).
+- `common/production_methods/16_ef_financial_centre.txt` — `pm_bond_exchange` (выход `mutual_funds`, вход `bond`);
+  методы бирж «акций» — в `_archive/ef_fc_stock_exchange_pm/` (Д.R4б.7).
 - `common/building_groups/00_ef_building_groups.txt` — `bg_bank`, `bg_financial_centre`, `bg_ef_private_construction`,
   `bg_silver_mining`.
 ### Модификаторы

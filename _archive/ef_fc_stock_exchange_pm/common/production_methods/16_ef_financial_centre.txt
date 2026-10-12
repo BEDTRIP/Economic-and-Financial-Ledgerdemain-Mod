@@ -1,0 +1,159 @@
+# from common/production_methods/16_ef_financial_centre.txt, lines 67-84
+pm_no_manufacture_stock_exchange = {
+	texture = "gfx/interface/icons/production_method_icons/no_manufacture_stock_exchange.dds" 
+   	is_default = yes
+
+	# unlocking_production_methods = {	
+	# 	pm_no_manufacture_stock_exchange
+	# }
+	building_modifiers = {
+		level_scaled = {
+		}
+		workforce_scaled = {
+		}
+	}
+	country_modifiers = {
+		workforce_scaled = {
+		}
+	}
+}
+
+# from common/production_methods/16_ef_financial_centre.txt, lines 85-103
+pm_manufacture_stock_exchange = {
+	texture = "gfx/interface/icons/production_method_icons/manufacture_stock_exchange.dds"
+
+	# unlocking_production_methods = {	
+	# 	pm_manufacture_stock_exchange
+	# }
+	unlocking_technologies = {
+		financial_center
+	}
+	building_modifiers = {
+		# level_scaled = {
+		# 	building_employment_clerks_add = 50
+        #     building_employment_bureaucrats_add = 100
+		# }
+		workforce_scaled = {
+			goods_input_manufacture_stock_add = 1 #50
+		}
+	}
+}
+
+# from common/production_methods/16_ef_financial_centre.txt, lines 105-121
+pm_no_agricultural_stock_exchange = {
+	texture = "gfx/interface/icons/production_method_icons/no_agricultural_stock_exchange.dds" 
+   
+	# unlocking_production_methods = {	
+	# 	pm_no_agricultural_stock_exchange
+	# }
+	building_modifiers = {
+		level_scaled = {
+		}
+		workforce_scaled = {
+		}
+	}
+	country_modifiers = {
+		workforce_scaled = {
+		}
+	}
+}
+
+# from common/production_methods/16_ef_financial_centre.txt, lines 122-140
+pm_agricultural_stock_exchange = {
+	texture = "gfx/interface/icons/production_method_icons/agricultural_stock_exchange.dds"
+
+	# unlocking_production_methods = {	
+	# 	pm_agricultural_stock_exchange
+	# }
+	unlocking_technologies = {
+		financial_center
+	}
+	building_modifiers = {
+		# level_scaled = {
+		# 	building_employment_clerks_add = 50
+        #     building_employment_bureaucrats_add = 100
+		# }
+		workforce_scaled = {
+			goods_input_agricultural_stock_add = 1 #50
+		}
+	}
+}
+
+# from common/production_methods/16_ef_financial_centre.txt, lines 142-158
+pm_no_mining_stock_exchange = {
+	texture = "gfx/interface/icons/production_method_icons/no_mining_stock_exchange.dds"
+
+	# unlocking_production_methods = {	
+	# 	pm_no_mining_stock_exchange
+	# }
+	building_modifiers = {
+		level_scaled = {
+		}
+		workforce_scaled = {
+		}
+	}
+	country_modifiers = {
+		workforce_scaled = {
+		}
+	}
+}
+
+# from common/production_methods/16_ef_financial_centre.txt, lines 159-177
+pm_mining_stock_exchange = {
+	texture = "gfx/interface/icons/production_method_icons/mining_stock_exchange.dds"
+
+	# unlocking_production_methods = {	
+	# 	pm_mining_stock_exchange
+	# }
+	unlocking_technologies = {
+		financial_center
+	}
+	building_modifiers = {
+		# level_scaled = {
+		# 	building_employment_clerks_add = 50
+        #     building_employment_bureaucrats_add = 100
+		# }
+		workforce_scaled = {
+			goods_input_mining_stock_add = 1 #50
+		}
+	}
+}
+
+# from common/production_methods/16_ef_financial_centre.txt, lines 179-193
+pm_no_railroad_stock_exchange = {
+	texture = "gfx/interface/icons/production_method_icons/no_railroad_stock_exchange.dds"
+
+	# unlocking_production_methods = {	
+	# 	pm_no_railroad_stock_exchange
+	# }
+	building_modifiers = {
+		workforce_scaled = {
+		}
+	}
+	country_modifiers = {
+		workforce_scaled = {
+		}
+	}
+}
+
+# from common/production_methods/16_ef_financial_centre.txt, lines 194-212
+pm_railroad_stock_exchange = {
+	texture = "gfx/interface/icons/production_method_icons/railroad_stock_exchange.dds"
+
+	# unlocking_production_methods = {	
+	# 	pm_railroad_stock_exchange
+	# }
+	unlocking_technologies = {
+		financial_center
+	}
+	building_modifiers = {
+		# level_scaled = {
+		# 	building_employment_clerks_add = 50
+        #     building_employment_bureaucrats_add = 100
+		# }
+		workforce_scaled = {
+			goods_input_railroad_stock_add = 1 #50
+		}
+	}
+}
+

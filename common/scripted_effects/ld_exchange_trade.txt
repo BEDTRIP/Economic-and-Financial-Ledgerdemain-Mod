@@ -1159,31 +1159,15 @@ zz_ef_xch_pool_pay = {
 }
 
 # Country scope (an exchange's country), at its step: the fees and surcharges its exchange took since its last step
-# (var:zz_ef_xch_fee_acc) to the owners of its financial centre -- the state's share of the building into the treasury,
-# the private one (capitalists, companies) into the pops' deposits (the money into the pool); var:zz_ef_f_xch_fee.
+# (var:zz_ef_xch_fee_acc) into the treasury -- the exchange is the state's infrastructure (Д.R4б.5); its financial centre
+# is a government building whose costs the budget pays (Д.R4б.7); var:zz_ef_f_xch_fee.
 zz_ef_xch_fee_pay = {
 	if = {
 		limit = { has_variable = zz_ef_xch_fee_acc }
 		set_variable = { name = zz_ef_f_xch_fee value = var:zz_ef_xch_fee_acc }
 		remove_variable = zz_ef_xch_fee_acc
-		set_variable = { name = zz_ef_t_fee_st value = { value = var:zz_ef_f_xch_fee multiply = zz_ef_xch_fc_state_share_v } }
-		set_variable = { name = zz_ef_t_fee_pr value = { value = var:zz_ef_f_xch_fee subtract = var:zz_ef_t_fee_st } }
-		zz_ef_eng_add_treasury = { V = var:zz_ef_t_fee_st }
-		change_variable = { name = zz_ef_f_xch_tr add = var:zz_ef_t_fee_st }
-		if = {
-			limit = { has_variable = zz_ef_pop_savings }
-			change_variable = { name = zz_ef_pop_deposits add = var:zz_ef_t_fee_pr }
-			change_variable = { name = zz_ef_pop_savings add = var:zz_ef_t_fee_pr }
-			change_variable = { name = zz_ef_f_xch_pp add = var:zz_ef_t_fee_pr }
-			zz_ef_eng_add_pool = { V = var:zz_ef_t_fee_pr }
-			change_variable = { name = zz_ef_f_xch_pool add = var:zz_ef_t_fee_pr }
-		}
-		else = {
-			zz_ef_eng_add_treasury = { V = var:zz_ef_t_fee_pr }
-			change_variable = { name = zz_ef_f_xch_tr add = var:zz_ef_t_fee_pr }
-		}
-		remove_variable = zz_ef_t_fee_st
-		remove_variable = zz_ef_t_fee_pr
+		zz_ef_eng_add_treasury = { V = var:zz_ef_f_xch_fee }
+		change_variable = { name = zz_ef_f_xch_tr add = var:zz_ef_f_xch_fee }
 	}
 }
 

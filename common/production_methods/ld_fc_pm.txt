@@ -1,0 +1,15 @@
+﻿# The financial centre's method (Д.R4б.7, production_method_groups/ld_fc_pmg.txt). Принято ночью, проверить: staff per
+# level and the services / paper it buys.
+pm_zz_ef_fc_exchange = {
+	texture = "gfx/interface/icons/production_method_icons/bond_exchange.dds"
+	building_modifiers = {
+		level_scaled = {
+			building_employment_clerks_add = 40
+			building_employment_bureaucrats_add = 10
+		}
+		workforce_scaled = {
+			goods_input_services_add = 10
+			goods_input_paper_add = 5
+		}
+	}
+}

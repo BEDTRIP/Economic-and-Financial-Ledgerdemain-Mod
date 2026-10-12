@@ -820,16 +820,11 @@ BUILDINGS = {
 		region_state:BAV={
 			create_building={
 				building="building_financial_centre_bav"
+				### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 				add_ownership={
-					company={
-						type=company_BayerischeHypothekenUndWechselBank
+					country={
 						country="c:BAV"
-						levels=5
-					}
-					company={
-						type=company_Rothschild_Bank_aus
-						country="c:AUS"
-						levels=1
+						levels=6
 					}
 				}
 				reserves=1
@@ -854,16 +849,11 @@ BUILDINGS = {
 			region_state:GER={
 				create_building={
 					building="building_financial_centre_bav"
+					### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 					add_ownership={
-						company={
-							type=company_BayerischeHypothekenUndWechselBank
+						country={
 							country="c:GER"
-							levels=5
-						}
-						company={
-							type=company_Rothschild_Bank_aus
-							country="c:AUS"
-							levels=1
+							levels=6
 						}
 					}
 					reserves=1
@@ -888,9 +878,9 @@ BUILDINGS = {
 		region_state:FRM={
 			create_building={
 				building="building_financial_centre_frm"
+				### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 				add_ownership={
-					company={
-						type=company_Rothschild_Bank_ger
+					country={
 						country="c:FRM"
 						levels=1
 					}
@@ -1022,9 +1012,9 @@ BUILDINGS = {
 			region_state:GER={
 				create_building={
 					building="building_financial_centre_frm"
+					### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 					add_ownership={
-						company={
-							type=company_Rothschild_Bank_ger
+						country={
 							country="c:GER"
 							levels=1
 						}
@@ -1178,9 +1168,9 @@ BUILDINGS = {
 			region_state:NGF={
 				create_building={
 					building="building_financial_centre_frm"
+					### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 					add_ownership={
-						company={
-							type=company_Rothschild_Bank_ger
+						country={
 							country="c:NGF"
 							levels=1
 						}
@@ -1333,9 +1323,9 @@ BUILDINGS = {
 		region_state:PRU={
 			create_building={
 				building="building_financial_centre_pru"
+				### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 				add_ownership={
-					company={
-						type=company_PreussischeSeehandlung
+					country={
 						country="c:PRU"
 						levels=1
 					}
@@ -1369,9 +1359,9 @@ BUILDINGS = {
 			region_state:NGF={
 				create_building={
 					building="building_financial_centre_pru"
+					### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 					add_ownership={
-						company={
-							type=company_PreussischeSeehandlung
+						country={
 							country="c:NGF"
 							levels=1
 						}
@@ -1405,65 +1395,21 @@ BUILDINGS = {
 			region_state:NGF={ 
 				create_building={
 					building="building_financial_centre_sax"
+					### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 					add_ownership={
-						building={
-							type="building_financial_district"
+						country={
 							country="c:NGF"
-							levels=3
-							region="STATE_SAXONY"
-						}
-					} 
-				}
-			}
-		}
-	}
-	s:STATE_HANNOVER={
-		if={
-			limit={ exists=c:NGF }
-			region_state:NGF={ 
-				create_building={
-					building="building_financial_centre_han"
-					add_ownership={
-						building={
-							type="building_financial_district"
-							country="c:NGF"
-							levels=3
-							region="STATE_HANNOVER"
-						}
-					} 
-				}
-			}
-		}
-	}
-	#GER
-	s:STATE_BRANDENBURG={
-		if={
-			limit={ exists=c:GER }
-			region_state:GER={ 
-				create_building={
-					building="building_railway"
-					add_ownership={
-						company={
-							type=company_PreussischeSeehandlung
-							country="c:GER"
 							levels=2
 						}
 					}
 				}
 				create_building={
 					building="building_financial_centre_pru"
+					### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 					add_ownership={
-						company={
-							type=company_PreussischeSeehandlung
+						country={
 							country="c:GER"
-							levels=1
-						}
-					} 
-					add_ownership={
-						company={
-							type=company_Rothschild_Bank_ger
-							country="c:GER"
-							levels=1
+							levels=2
 						}
 					}
 					reserves=1
@@ -1543,9 +1489,9 @@ BUILDINGS = {
 		region_state:SIC={
 			create_building={
 				building="building_financial_centre_sic"
+				### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 				add_ownership={
-					company={
-						type=company_Rothschild_Bank_ita
+					country={
 						country="c:SIC"
 						levels=5
 					}
@@ -1572,9 +1518,9 @@ BUILDINGS = {
 			region_state:ITA={
 				create_building={
 					building="building_financial_centre_sic"
+					### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 					add_ownership={
-						company={
-							type=company_Rothschild_Bank_ita
+						country={
 							country="c:ITA"
 							levels=5
 						}
@@ -1641,9 +1587,9 @@ BUILDINGS = {
 			region_state:ITA={
 				create_building={
 					building="building_financial_centre_ita"
+					### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 					add_ownership={
-						company={
-							type=company_Rothschild_Bank_aus
+						country={
 							country="c:AUS"
 							levels=1
 						}
@@ -1695,9 +1641,9 @@ BUILDINGS = {
 			region_state:ITA={
 				create_building={
 					building="building_financial_centre_tus"
+					### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 					add_ownership={
-						company={
-							type=company_Rothschild_Bank_ita
+						country={
 							country="c:ITA"
 							levels=5
 						}
@@ -1713,9 +1659,9 @@ BUILDINGS = {
 			region_state:ITA={
 				create_building={
 					building="building_financial_centre_sar"
+					### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 					add_ownership={
-						company={
-							type=company_CassaDiRisparmioDiTorino
+						country={
 							country="c:ITA"
 							levels=5
 						}
@@ -1735,9 +1681,9 @@ BUILDINGS = {
 		region_state:QUE={
 			create_building={
 				building="building_financial_centre_que"
+				### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 				add_ownership={
-					company={
-						type=company_barclaysBank
+					country={
 						country="c:GBR"
 						levels=1
 					}
@@ -1780,9 +1726,9 @@ BUILDINGS = {
 			region_state:CAN={
 				create_building={
 					building="building_financial_centre_que"
+					### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 					add_ownership={
-						company={
-							type=company_barclaysBank
+						country={
 							country="c:GBR"
 							levels=1
 						}
@@ -1836,9 +1782,9 @@ BUILDINGS = {
 			}
 			create_building={
 				building="building_financial_centre_ont"
+				### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 				add_ownership={
-					company={
-						type=company_barclaysBank
+					country={
 						country="c:GBR"
 						levels=1
 					}
@@ -1881,9 +1827,9 @@ BUILDINGS = {
 				}
 				create_building={
 					building="building_financial_centre_ont"
+					### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 					add_ownership={
-						company={
-							type=company_barclaysBank
+						country={
 							country="c:GBR"
 							levels=1
 						}
@@ -1923,16 +1869,11 @@ BUILDINGS = {
 		region_state:NSW={
 			create_building={
 				building="building_financial_centre_nsw"
+				### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 				add_ownership={
-					company={
-						type=company_barclaysBank
-						country="c:GBR"
-						levels=1
-					}
-					company={
-						type=company_ColonialBankOfAustralia
+					country={
 						country="c:NSW"
-						levels=1
+						levels=2
 					}
 				}
 				reserves=1
@@ -1973,16 +1914,11 @@ BUILDINGS = {
 			region_state:AST={
 				create_building={
 					building="building_financial_centre_nsw"
+					### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 					add_ownership={
-						company={
-							type=company_barclaysBank
-							country="c:GBR"
-							levels=1
-						}
-						company={
-							type=company_ColonialBankOfAustralia
+						country={
 							country="c:AST"
-							levels=1
+							levels=2
 						}
 					}
 					reserves=1
@@ -2087,16 +2023,11 @@ BUILDINGS = {
 		region_state:AUS={
 			create_building={
 				building="building_financial_centre_aus"
+				### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 				add_ownership={
-					company={
-						type=company_Rothschild_Bank_aus
+					country={
 						country="c:AUS"
-						levels=1
-					}
-					company={
-						type=company_OesterreichischeCreditAnstalt
-						country="c:AUS"
-						levels=1
+						levels=2
 					}
 				}
 				reserves=1
@@ -2161,9 +2092,9 @@ BUILDINGS = {
 		region_state:BEL={ 
 			create_building={
 				building="building_financial_centre_bel"
+				### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 				add_ownership={
-					company={
-						type=company_SocieteGeneraledeBelgique
+					country={
 						country="c:BEL"
 						levels=5
 					}
@@ -2189,9 +2120,9 @@ BUILDINGS = {
 		region_state:DEN={
 			create_building={
 				building="building_financial_centre_den"
+				### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 				add_ownership={
-					company={
-						type=company_Rothschild_Bank_gbr
+					country={
 						country="c:GBR"
 						levels=1
 					}
@@ -2217,16 +2148,11 @@ BUILDINGS = {
 		region_state:FRA={
 			create_building={
 				building="building_financial_centre_fra"
+				### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 				add_ownership={
-					company={
-						type=company_Rothschild_Bank_fra
+					country={
 						country="c:FRA"
-						levels=5
-					}
-					company={
-						type=company_BanqueDeFrance
-						country="c:FRA"
-						levels=5
+						levels=10
 					}
 				}
 				reserves=1
@@ -2250,36 +2176,11 @@ BUILDINGS = {
 		region_state:GBR={
 			create_building={
 				building="building_financial_centre_gbr"
+				### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 				add_ownership={
-					company={
-						type=company_BankofEngland
+					country={
 						country="c:GBR"
-						levels=5
-					}
-					company={
-						type=company_LloydsBank
-						country="c:GBR"
-						levels=5
-					}
-					company={
-						type=company_barclaysBank
-						country="c:GBR"
-						levels=5
-					}
-					company={
-						type=company_NationalWestminsterBank
-						country="c:GBR"
-						levels=5
-					}
-					company={
-						type=company_RoyalBankOfScotland
-						country="c:GBR"
-						levels=5
-					}
-					company={
-						type=company_Rothschild_Bank_gbr
-						country="c:GBR"
-						levels=5
+						levels=30
 					}
 				}
 				reserves=1
@@ -2303,9 +2204,9 @@ BUILDINGS = {
 		region_state:NET={
 			create_building={
 				building="building_financial_centre_net"
+				### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 				add_ownership={
-					company={
-						type=company_DeNederlandscheBank
+					country={
 						country="c:NET"
 						levels=11
 					}
@@ -2331,9 +2232,9 @@ BUILDINGS = {
 		region_state:POR={
 			create_building={
 				building="building_financial_centre_por"
+				### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 				add_ownership={
-					company={
-						type=company_Bank_Ultramarino
+					country={
 						country="c:POR"
 						levels=3
 					}
@@ -2359,9 +2260,9 @@ BUILDINGS = {
 		region_state:RUS={
 			create_building={
 				building="building_financial_centre_rus"
+				### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 				add_ownership={
-					company={
-						type=company_StateBankRussianEmpire
+					country={
 						country="c:RUS"
 						levels=3
 					}
@@ -2413,9 +2314,9 @@ BUILDINGS = {
 		region_state:SPA={
 			create_building={
 				building="building_financial_centre_spa"
+				### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 				add_ownership={
-					company={
-						type=company_BankofSpain
+					country={
 						country="c:SPA"
 						levels=5
 					}
@@ -2441,9 +2342,9 @@ BUILDINGS = {
 		region_state:USA={
 			create_building={
 				building="building_financial_centre_usa"
+				### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 				add_ownership={
-					company={
-						type=company_BankWellsFargo
+					country={
 						country="c:USA"
 						levels=3
 					}
@@ -2555,484 +2456,12 @@ BUILDINGS = {
 			region_state:EGY={
 				create_building={
 					building="building_financial_centre_egy"
+					### Д.R4б.5: the exchange is the state's -- the banks' levels go to the country
 					add_ownership={
-						company={
-							type=company_BanqueEgyptienne
+						country={
 							country="c:EGY"
-							levels=5
+							levels=110
 						}
-					} 
-					reserves=1
-				} 
-			}
-		} 
-		s:STATE_BUENOS_AIRES={
-			region_state:ARG={
-				create_building={
-					building="building_financial_centre_arg"
-					add_ownership={
-						company={
-							type=company_BancoProvincia
-							country="c:ARG"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
-			}
-		} 
-		s:STATE_RIO_DE_JANEIRO={ 
-			region_state:BRZ={
-				create_building={
-					building="building_financial_centre_brz"
-					add_ownership={
-						company={
-							type=company_BancoMercantil
-							country="c:BRZ"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
-			}
-		}  
-	} 
-	#1871
-	if = {
-		limit = { and = { game_date < 1872.1.1 game_date > 1870.1.1 } }
-   
-		s:STATE_SHAOZHOU ={
-			region_state:GBR={
- 
-			}
-		} 
-		s:STATE_LANCASHIRE={
-			region_state:GBR={
- 
-			}
-		}
-		s:STATE_ILLINOIS={
-			region_state:USA={
- 
-			}
-		}
-		s:STATE_EASTERN_THRACE={
-			region_state:TUR={
-				create_building={
-					building="building_financial_centre_tur"
-					add_ownership={
-						company={
-							type=company_OttomanBank
-							country="c:TUR"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
-			}
-		}  
-		s:STATE_BUENOS_AIRES={
-			region_state:ARG={
-				create_building={
-					building="building_financial_centre_arg"
-					add_ownership={
-						company={
-							type=company_BancoProvincia
-							country="c:ARG"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
-			}
-		} 
-		s:STATE_RIO_DE_JANEIRO={ 
-			region_state:BRZ={
-				create_building={
-					building="building_financial_centre_brz"
-					add_ownership={
-						company={
-							type=company_BancoMercantil
-							country="c:BRZ"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
-			}
-		}  
-		s:STATE_LOWER_EGYPT={
-			region_state:EGY={
-				create_building={
-					building="building_financial_centre_egy"
-					add_ownership={
-						company={
-							type=company_BanqueEgyptienne
-							country="c:EGY"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
-			}
-		} 
-		s:STATE_KANTO={ 
-			region_state:JAP={
-				create_building={
-					building="building_financial_centre_jap"
-					add_ownership={
-						company={
-							type=company_BankOfJapan
-							country="c:JAP"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
-			}
-		} 
-		s:STATE_MEXICO={ 
-			region_state:MEX={
-				create_building={
-					building="building_financial_centre_mex"
-					add_ownership={
-						company={
-							type=company_bancodelondresmexico
-							country="c:MEX"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
-			}
-		}  
-		s:STATE_CAPE_COLONY={
-			region_state:SAF={
-				create_building={
-					building="building_financial_centre_saf"
-					add_ownership={
-						company={
-							type=company_BankSBoBSA
-							country="c:SAF"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
-			}
-		} 
-		s:STATE_URUGUAY={ 
-			region_state:URU={
-				create_building={
-					building="building_financial_centre_uru"
-					add_ownership={
-						company={
-							type=company_BancoCentralDelUruguay
-							country="c:URU"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
-			}
-		} 
-	} 
-	#1890
-	if = {
-			limit = { and = { game_date < 1889.1.1 game_date > 1891.1.1 } }
- 
-		s:STATE_SUZHOU ={
-			region_state:CHI={
-				create_building={
-					building="building_financial_centre_chi"
-					add_ownership={
-						company={
-							type=company_BankIBC
-							country="c:CHI"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
-			}
-		} 
-		s:STATE_SHAOZHOU ={
-			region_state:GBR={
- 
-			}
-		} 
-		s:STATE_LANCASHIRE={
-			region_state:GBR={
- 
-			}
-		}
-		s:STATE_ILLINOIS={
-			region_state:USA={
- 
-			}
-		}
-		s:STATE_EASTERN_THRACE={
-			region_state:TUR={
-				create_building={
-					building="building_financial_centre_tur"
-					add_ownership={
-						company={
-							type=company_OttomanBank
-							country="c:TUR"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
-			}
-		} 
-		s:STATE_IRAKAJEMI={
-			region_state:PER={
-				create_building={
-					building="building_financial_centre"
-					add_ownership={
-						company={
-							type=company_ImperialBankofPersia
-							country="c:PER"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
-			}
-		} 
-		s:STATE_BUENOS_AIRES={
-			region_state:ARG={
-				create_building={
-					building="building_financial_centre_arg"
-					add_ownership={
-						company={
-							type=company_BancoProvincia
-							country="c:ARG"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
-			}
-		} 
-		s:STATE_RIO_DE_JANEIRO={ 
-			region_state:BRZ={
-				create_building={
-					building="building_financial_centre_brz"
-					add_ownership={
-						company={
-							type=company_BancoMercantil
-							country="c:BRZ"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
-			}
-		} 
-		s:STATE_SANTIAGO={
-			region_state:CHL={
-				create_building={
-					building="building_financial_centre_chl"
-					add_ownership={
-						company={
-							type=company_BancoDeChile
-							country="c:CHL"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
-			}
-		} 
-		s:STATE_LOWER_EGYPT={
-			region_state:EGY={
-				create_building={
-					building="building_financial_centre_egy"
-					add_ownership={
-						company={
-							type=company_BanqueEgyptienne
-							country="c:EGY"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
-			}
-		} 
-		s:STATE_KANTO={ 
-			region_state:JAP={
-				create_building={
-					building="building_financial_centre_jap"
-					add_ownership={
-						company={
-							type=company_BankOfJapan
-							country="c:JAP"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
-			}
-		} 
-		s:STATE_MEXICO={ 
-			region_state:MEX={
-				create_building={
-					building="building_financial_centre_mex"
-					add_ownership={
-						company={
-							type=company_bancodelondresmexico
-							country="c:MEX"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
-			}
-		} 
-		s:STATE_LIMA={
-			region_state:PEU={
-				create_building={
-					building="building_financial_centre_peu"
-					add_ownership={
-						building={
-							type="building_financial_district"
-							country="c:PEU"
-							levels=3
-							region="STATE_LIMA"
-						}
-					} 
-					reserves=1
-				} 
-			}
-		} 
-		s:STATE_CAPE_COLONY={
-			region_state:SAF={
-				create_building={
-					building="building_financial_centre_saf"
-					add_ownership={
-						company={
-							type=company_BankSBoBSA
-							country="c:SAF"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
-			}
-		} 
-		s:STATE_URUGUAY={ 
-			region_state:URU={
-				create_building={
-					building="building_financial_centre_uru"
-					add_ownership={
-						company={
-							type=company_BancoCentralDelUruguay
-							country="c:URU"
-							levels=5
-						}
-					} 
-					reserves=1
-				} 
-			}
-		} 
-	}
- 
-	##################
-	#Divers HMM end
-	##################
-
-	every_country = {
-		if = {
-			limit = {
-				or = {
-					is_valid_country_hmm = yes
-					c:FRM ?= this
-					c:TUS ?= this
-					c:FRA ?= this
-					c:GBR ?= this
-					c:AUS ?= this
-					c:SPA ?= this
-					c:POR ?= this
-					c:PRU ?= this
-					c:NET ?= this
-					c:BIC ?= this
-					c:CHI ?= this
-					c:SAR ?= this
-					c:PER ?= this
-					c:TUR ?= this
-					c:SWI ?= this
-					c:BEL ?= this
-					c:SWE ?= this
-					c:DEN ?= this
-					c:GRE ?= this
-					c:SAX ?= this
-					c:BAV ?= this
-					c:HAN ?= this
-					c:SIC ?= this
-					c:PAP ?= this
-					c:MEX ?= this
-					c:BRZ ?= this
-					c:QUE ?= this
-					c:ONT ?= this
-					c:FIN ?= this
-					c:DEI ?= this
-					c:NSW ?= this
-					c:USA ?= this
-					c:RUS ?= this
-
-
-					c:BOL ?= this
-					c:NPU ?= this
-
-					c:ARG ?= this
-					c:PER ?= this
-				}
-			}
-			add_technology_researched = financial_center
-			add_technology_researched = stock_exchange
-			financial_center_modifier = yes
-		}
-	}
- 
-	################################################################################################################################
-	################################################################################################################################
-	################################################################################################################################
-	################################################################################################################################
-
-	# ███╗   ███╗██╗███╗   ██╗███████╗███████╗
-	# ████╗ ████║██║████╗  ██║██╔════╝██╔════╝
-	# ██╔████╔██║██║██╔██╗ ██║█████╗  ███████╗
-	# ██║╚██╔╝██║██║██║╚██╗██║██╔══╝  ╚════██║
-	# ██║ ╚═╝ ██║██║██║ ╚████║███████╗███████║
-	# ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚══════╝╚══════╝
-
-	################################################################################################################################
-	################################################################################################################################
-	################################################################################################################################
-	################################################################################################################################
-
-	#GBR
-	s:STATE_NORTHERN_CAPE={
-		region_state:SAF={
-		}
-	}
-	s:STATE_ONTARIO={
-		region_state:HBC={
-		}
-		region_state:ONT={
-		}
-	}
-	s:STATE_MYSORE={
-		region_state:MYS={
-			create_building={
-				building="building_gold_mine"
-				add_ownership={
-					company={
-						type=company_basic_gold_and_silver_mining_2
-						country="c:GBR"
-						levels=1
 					}
 				}
 				reserves=1
