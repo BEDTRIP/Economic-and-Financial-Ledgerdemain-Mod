@@ -9,9 +9,11 @@ zz_ef_fc_possible = {
 	owner.var:zz_ef_fc_state = this
 }
 
-# Country scope: the country has its exchange -- the state is still its own and holds a financial centre.
+# Country scope: the country has its exchange -- the state still exists (a split or merged state goes), is its own and
+# holds a financial centre.
 zz_ef_has_exchange = {
 	has_variable = zz_ef_fc_state
+	exists = var:zz_ef_fc_state
 	var:zz_ef_fc_state = {
 		owner ?= prev
 		any_scope_building = { is_building_group = bg_financial_centre }
