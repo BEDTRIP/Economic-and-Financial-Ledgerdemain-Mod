@@ -53,6 +53,7 @@ zz_ef_money_rate = {
 		if = {
 			limit = {
 				zz_ef_mu_follower = yes
+				exists = var:zz_ef_mu_head
 				var:zz_ef_mu_head = { has_variable = base_rate_percentage }
 			}
 			value = var:zz_ef_mu_head.var:base_rate_percentage

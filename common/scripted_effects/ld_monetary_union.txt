@@ -275,6 +275,18 @@ zz_ef_mu_head_law_changed = {
 # World scope, the world's monthly pass: each union's cover, its head's challenger, its members' sync (the key rate the
 # head's monthly step moved).
 zz_ef_mu_world_step = {
+	# a union whose head is gone (annexed, a revolution's new tag in its place): a new head among the living members
+	every_country = {
+		limit = {
+			zz_ef_mu_follower = yes
+			OR = {
+				NOT = { exists = var:zz_ef_mu_head }
+				var:zz_ef_mu_head = { is_country_alive = no }
+			}
+		}
+		set_global_variable = { name = zz_ef_mu_t_id value = var:zz_ef_mu_id }
+		zz_ef_mu_head_pick = yes
+	}
 	every_country = {
 		limit = { zz_ef_mu_is_head = yes }
 		set_global_variable = { name = zz_ef_mu_t_id value = var:zz_ef_mu_id }
