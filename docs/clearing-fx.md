@@ -46,9 +46,6 @@
   Остальные чужие деньги, которыми платит клиринг (`zz_ef_clr_give_claim`): требования ЦБ к эмитентам без размена на
   металл и требования банков — `var:zz_ef_abr_rq_gold` (тот же `zz_ef_fx_metal_update`), в наших деньгах
   `zz_ef_abr_rq_money_v`; входят в запас счёта «Внешний сектор» (`zz_ef_abroad_net`), в покрытие — нет.
-  Их движение мимо клиринга — статьи той же карточки: сделки ЦБ и банков с чужой валютой на бирже (`zz_ef_xch_deal` →
-  `zz_ef_xch_abr_track_<T>_<K>`, `var:zz_ef_f_xch_abr`, окно `zz_ef_v_w_xch_abr`) и проценты по ней
-  (`zz_ef_rq_interest_step` → `zz_ef_rq_int_abr_<H>`, `var:zz_ef_f_fxint_abr`, окно `zz_ef_v_w_fxint_abr`).
 - `common/scripted_effects/ld_stockpile_state_var_seed.txt` — смежный учётный файл.
 - `common/scripted_effects/ld_reference_strength.txt` — `zz_ef_currency_trade_step` (месяц: накладывает
   `zz_ef_currency_trade` по силе валюты), `zz_ef_reference_strength_step`.
