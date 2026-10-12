@@ -162,41 +162,100 @@ zz_ef_sav_norm = {
 }
 
 # ---- steps 4, 5, 7: what was bought and sold this week, goods a week ------------
-# The CB's building(s): the method's input (1 gold / 10 silver per workforce) x (1 + our percent, zz_ef_cb_metal_buy).
-zz_ef_cb_in_gold_goods = {
+# The monetary authority buys its metal with the input of the country's Banks (Д.R4а.9, Д2.7а): their input is the
+# banks' purchase plus the authority's; what came in is split by last week's shares (var:zz_ef_mt_cb_share_g / _s).
+# The authority's base: E&F's CB building's method input (1 gold / 10 silver per workforce), kept in var:zz_ef_cb_base_g /
+# _s while the building stands; its own input is switched off (zz_ef_cb_metal_buy at -100).
+zz_ef_cb_bldg_base_gold_goods = {
 	value = 0
 	every_scope_building = {
 		limit = { is_building_type = building_bank }
-		add = {
-			value = modifier:goods_input_gold_add
-			multiply = {
-				value = modifier:goods_input_gold_mult
-				add = 1
-				min = 0
-			}
-		}
+		add = modifier:goods_input_gold_add
 	}
 	min = 0
 }
-zz_ef_cb_in_silver_goods = {
+zz_ef_cb_bldg_base_silver_goods = {
 	value = 0
 	every_scope_building = {
 		limit = { is_building_type = building_bank }
-		add = {
-			value = modifier:goods_input_silver_add
-			multiply = {
-				value = modifier:goods_input_silver_mult
-				add = 1
-				min = 0
-			}
-		}
+		add = modifier:goods_input_silver_add
 	}
 	min = 0
 }
+zz_ef_cb_base_gold_goods = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_cb_base_g } value = var:zz_ef_cb_base_g }
+}
+zz_ef_cb_base_silver_goods = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_cb_base_s } value = var:zz_ef_cb_base_s }
+}
+# E&F's CB building's input percent: off
+zz_ef_cb_bldg_buy_off = -100
+# the authority's purchase for next week: the base x (1 + the percent, var:zz_ef_mt_cb_mult); none without a holder
+zz_ef_cb_buy_gold_goods = {
+	value = 0
+	if = {
+		limit = { zz_ef_am_holder = yes }
+		value = zz_ef_cb_base_gold_goods
+		multiply = {
+			value = var:zz_ef_mt_cb_mult
+			divide = 100
+			add = 1
+			min = 0
+		}
+	}
+}
+zz_ef_cb_buy_silver_goods = {
+	value = 0
+	if = {
+		limit = { zz_ef_am_holder = yes }
+		value = zz_ef_cb_base_silver_goods
+		multiply = {
+			value = var:zz_ef_mt_cb_mult
+			divide = 100
+			add = 1
+			min = 0
+		}
+	}
+}
+zz_ef_cb_share_gold = {
+	value = 0
+	if = {
+		limit = {
+			OR = {
+				zz_ef_cb_buy_gold_goods > 0
+				zz_ef_bank_buy_gold_goods > 0
+			}
+		}
+		value = zz_ef_cb_buy_gold_goods
+		divide = {
+			value = zz_ef_cb_buy_gold_goods
+			add = zz_ef_bank_buy_gold_goods
+		}
+	}
+}
+zz_ef_cb_share_silver = {
+	value = 0
+	if = {
+		limit = {
+			OR = {
+				zz_ef_cb_buy_silver_goods > 0
+				zz_ef_bank_buy_silver_goods > 0
+			}
+		}
+		value = zz_ef_cb_buy_silver_goods
+		divide = {
+			value = zz_ef_cb_buy_silver_goods
+			add = zz_ef_bank_buy_silver_goods
+		}
+	}
+}
+# the authority's sale: an output modifier on one Banks building
 zz_ef_cb_out_gold_goods = {
 	value = 0
 	every_scope_building = {
-		limit = { is_building_type = building_bank }
+		limit = { is_building_type = building_zz_ef_bank }
 		add = modifier:goods_output_gold_add
 	}
 	min = 0
@@ -204,10 +263,29 @@ zz_ef_cb_out_gold_goods = {
 zz_ef_cb_out_silver_goods = {
 	value = 0
 	every_scope_building = {
-		limit = { is_building_type = building_bank }
+		limit = { is_building_type = building_zz_ef_bank }
 		add = modifier:goods_output_silver_add
 	}
 	min = 0
+}
+# the Banks pay for the authority's metal and get its sales: the net is paid back to the banks (the pool, their capital)
+zz_ef_cb_metal_net_cost = {
+	value = var:zz_ef_f_mt_cb_in_g
+	divide = zz_ef_gold_units_per_good
+	subtract = {
+		value = var:zz_ef_f_mt_cb_out_g
+		divide = zz_ef_gold_units_per_good
+	}
+	multiply = zz_ef_gold_price
+	add = {
+		value = var:zz_ef_f_mt_cb_in_s
+		divide = zz_ef_silver_units_per_good
+		subtract = {
+			value = var:zz_ef_f_mt_cb_out_s
+			divide = zz_ef_silver_units_per_good
+		}
+		multiply = zz_ef_silver_price
+	}
 }
 zz_ef_bank_in_gold_goods = {
 	value = 0
@@ -302,12 +380,14 @@ zz_ef_bank_buy_silver_goods = {
 	multiply = gold_to_silver_rate
 	divide = zz_ef_silver_units_per_good
 }
-# The percent for the banks' modifier: the purchase over the methods' base - 1, in percent, -100..+25000 (E&F's cap).
+# The percent for the banks' modifier: the banks' and the authority's purchase over the methods' base - 1, in percent,
+# -100..+25000 (E&F's cap).
 zz_ef_bank_mult_gold = {
 	value = -100
 	if = {
 		limit = { zz_ef_bank_base_gold_goods > 0 }
 		value = zz_ef_bank_buy_gold_goods
+		add = zz_ef_cb_buy_gold_goods
 		divide = zz_ef_bank_base_gold_goods
 		subtract = 1
 		multiply = 100
@@ -320,6 +400,7 @@ zz_ef_bank_mult_silver = {
 	if = {
 		limit = { zz_ef_bank_base_silver_goods > 0 }
 		value = zz_ef_bank_buy_silver_goods
+		add = zz_ef_cb_buy_silver_goods
 		divide = zz_ef_bank_base_silver_goods
 		subtract = 1
 		multiply = 100

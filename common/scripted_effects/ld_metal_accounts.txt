@@ -302,10 +302,17 @@ zz_ef_metal_week_step = {
 	# what was bought / sold this week
 	# the CB's and the banks' input (goods) once each: the pops' part below is the states' consumption less these two
 	# (= zz_ef_pop_<metal>_goods, with the same floor at 0)
-	set_variable = { name = zz_ef_t_cb_in_g value = zz_ef_cb_in_gold_goods }
-	set_variable = { name = zz_ef_t_cb_in_s value = zz_ef_cb_in_silver_goods }
+	# the Banks' input is the banks' and the authority's: split by last week's shares
+	if = { limit = { NOT = { has_variable = zz_ef_mt_cb_share_g } } set_variable = { name = zz_ef_mt_cb_share_g value = 0 } }
+	if = { limit = { NOT = { has_variable = zz_ef_mt_cb_share_s } } set_variable = { name = zz_ef_mt_cb_share_s value = 0 } }
 	set_variable = { name = zz_ef_t_bank_in_g value = zz_ef_bank_in_gold_goods }
 	set_variable = { name = zz_ef_t_bank_in_s value = zz_ef_bank_in_silver_goods }
+	set_variable = { name = zz_ef_t_cb_in_g value = var:zz_ef_t_bank_in_g }
+	change_variable = { name = zz_ef_t_cb_in_g multiply = var:zz_ef_mt_cb_share_g }
+	set_variable = { name = zz_ef_t_cb_in_s value = var:zz_ef_t_bank_in_s }
+	change_variable = { name = zz_ef_t_cb_in_s multiply = var:zz_ef_mt_cb_share_s }
+	change_variable = { name = zz_ef_t_bank_in_g subtract = var:zz_ef_t_cb_in_g }
+	change_variable = { name = zz_ef_t_bank_in_s subtract = var:zz_ef_t_cb_in_s }
 	# a step after a gap -- the buildings' input of the weeks the step covers
 	change_variable = { name = zz_ef_t_cb_in_g multiply = zz_ef_step_weeks_v }
 	change_variable = { name = zz_ef_t_cb_in_s multiply = zz_ef_step_weeks_v }
@@ -366,9 +373,9 @@ zz_ef_metal_week_step = {
 		change_variable = { name = zz_ef_am_silver subtract = var:zz_ef_f_mt_cb_out_s }
 	}
 	else = {
-		# no CB: what a building_bank bought has nowhere to go -- the pops' (logged as cb_in anyway)
-		change_variable = { name = zz_ef_f_mt_pop_in_g add = var:zz_ef_f_mt_cb_in_g }
-		change_variable = { name = zz_ef_f_mt_pop_in_s add = var:zz_ef_f_mt_cb_in_s }
+		# no holder (the authority lost its CB since last week): what it bought is the banks'
+		change_variable = { name = zz_ef_f_mt_bank_in_g add = var:zz_ef_f_mt_cb_in_g }
+		change_variable = { name = zz_ef_f_mt_bank_in_s add = var:zz_ef_f_mt_cb_in_s }
 		set_variable = { name = zz_ef_f_mt_cb_in_g value = 0 }
 		set_variable = { name = zz_ef_f_mt_cb_in_s value = 0 }
 		set_variable = { name = zz_ef_f_mt_cb_out_g value = 0 }
@@ -392,6 +399,10 @@ zz_ef_metal_week_step = {
 	zz_ef_wm_add = { KEY = buy_silver VALUE = var:zz_ef_f_mt_pop_in_s }
 	zz_ef_wm_add = { KEY = sell_gold VALUE = var:zz_ef_f_mt_cb_out_g }
 	zz_ef_wm_add = { KEY = sell_silver VALUE = var:zz_ef_f_mt_cb_out_s }
+	# the Banks paid for the authority's metal (and got its sales): paid back into the pool, the banks' capital
+	set_variable = { name = zz_ef_f_cb_metal_pay value = zz_ef_cb_metal_net_cost }
+	zz_ef_eng_add_pool = { V = var:zz_ef_f_cb_metal_pay }
+	change_variable = { name = zz_ef_bank_capital add = var:zz_ef_f_cb_metal_pay }
 
 	# the CB buys back from the pops under 40% cover (a pair: metal pops -> CB, new money -> their savings)
 	set_variable = { name = zz_ef_f_mt_buyback value = 0 }
@@ -445,28 +456,33 @@ zz_ef_metal_week_step = {
 	# the snapshot after this week's own moves
 	set_variable = { name = zz_ef_mt_prev_g value = gold_state_native_for_stockpile }
 	set_variable = { name = zz_ef_mt_prev_s value = silver_state_native_for_stockpile }
-	# the modifiers for the coming week
-	set_variable = { name = zz_ef_mt_bank_levels value = zz_ef_bank_levels }
-	set_variable = { name = zz_ef_mt_bank_g value = zz_ef_bank_buy_gold_goods }
-	set_variable = { name = zz_ef_mt_bank_s value = zz_ef_bank_buy_silver_goods }
-	set_variable = { name = zz_ef_mt_bank_mult_g value = zz_ef_bank_mult_gold }
-	set_variable = { name = zz_ef_mt_bank_mult_s value = zz_ef_bank_mult_silver }
-	# no bank levels -- no building of the type (a level-0 building is gone), so nothing to remove or add
+	# the authority's base: E&F's CB building's method input while it stands
 	if = {
-		limit = { var:zz_ef_mt_bank_levels > 0 }
-		every_scope_building = {
-			limit = { is_building_type = building_zz_ef_bank }
-			if = { limit = { has_modifier = zz_ef_bank_gold_buy } remove_modifier = zz_ef_bank_gold_buy }
-			if = { limit = { has_modifier = zz_ef_bank_silver_buy } remove_modifier = zz_ef_bank_silver_buy }
-			add_modifier = {
-				name = zz_ef_bank_gold_buy
-				multiplier = root.var:zz_ef_mt_bank_mult_g
-			}
-			add_modifier = {
-				name = zz_ef_bank_silver_buy
-				multiplier = root.var:zz_ef_mt_bank_mult_s
+		limit = { any_scope_building = { is_building_type = building_bank } }
+		set_variable = { name = zz_ef_cb_base_g value = zz_ef_cb_bldg_base_gold_goods }
+		set_variable = { name = zz_ef_cb_base_s value = zz_ef_cb_bldg_base_silver_goods }
+	}
+	# a CB without Banks: the state puts up a level in the capital (Д.R4а.9)
+	if = {
+		limit = {
+			zz_ef_am_holder = yes
+			exists = capital
+			NOT = { any_scope_building = { is_building_type = building_zz_ef_bank } }
+		}
+		save_scope_as = zz_ef_cbb_o
+		capital = {
+			create_building = {
+				building = building_zz_ef_bank
+				reserves = 0
+				add_ownership = {
+					country = {
+						country = scope:zz_ef_cbb_o
+						levels = 1
+					}
+				}
 			}
 		}
+		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFK|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|cb_bank|levels 1" }
 	}
 	set_variable = { name = zz_ef_mt_cb_mult value = 0 }
 	set_variable = { name = zz_ef_mt_cb_sell value = 0 }
@@ -491,20 +507,57 @@ zz_ef_metal_week_step = {
 			change_variable = { name = zz_ef_mt_cb_sell divide = zz_ef_gold_units_per_good }
 		}
 	}
+	# the modifiers for the coming week
+	set_variable = { name = zz_ef_mt_bank_levels value = zz_ef_bank_levels }
+	set_variable = { name = zz_ef_mt_bank_g value = zz_ef_bank_buy_gold_goods }
+	set_variable = { name = zz_ef_mt_bank_s value = zz_ef_bank_buy_silver_goods }
+	set_variable = { name = zz_ef_mt_bank_mult_g value = zz_ef_bank_mult_gold }
+	set_variable = { name = zz_ef_mt_bank_mult_s value = zz_ef_bank_mult_silver }
+	set_variable = { name = zz_ef_mt_cb_share_g value = zz_ef_cb_share_gold }
+	set_variable = { name = zz_ef_mt_cb_share_s value = zz_ef_cb_share_silver }
+	# no bank levels -- no building of the type (a level-0 building is gone), so nothing to remove or add
+	if = {
+		limit = { var:zz_ef_mt_bank_levels > 0 }
+		every_scope_building = {
+			limit = { is_building_type = building_zz_ef_bank }
+			if = { limit = { has_modifier = zz_ef_bank_gold_buy } remove_modifier = zz_ef_bank_gold_buy }
+			if = { limit = { has_modifier = zz_ef_bank_silver_buy } remove_modifier = zz_ef_bank_silver_buy }
+			add_modifier = {
+				name = zz_ef_bank_gold_buy
+				multiplier = root.var:zz_ef_mt_bank_mult_g
+			}
+			add_modifier = {
+				name = zz_ef_bank_silver_buy
+				multiplier = root.var:zz_ef_mt_bank_mult_s
+			}
+		}
+	}
+	# E&F's CB building buys nothing (its input switched off): the authority buys with the Banks
 	every_scope_building = {
 		limit = { is_building_type = building_bank }
 		if = { limit = { has_modifier = zz_ef_cb_metal_buy } remove_modifier = zz_ef_cb_metal_buy }
 		if = { limit = { has_modifier = zz_ef_cb_gold_sell } remove_modifier = zz_ef_cb_gold_sell }
 		if = { limit = { has_modifier = zz_ef_cb_silver_sell } remove_modifier = zz_ef_cb_silver_sell }
-		if = {
-			limit = { NOT = { root.var:zz_ef_mt_cb_mult = 0 } }
-			add_modifier = {
-				name = zz_ef_cb_metal_buy
-				multiplier = root.var:zz_ef_mt_cb_mult
-			}
+		add_modifier = {
+			name = zz_ef_cb_metal_buy
+			multiplier = zz_ef_cb_bldg_buy_off
 		}
-		if = {
-			limit = { root.var:zz_ef_mt_cb_sell > 0 }
+	}
+	# the authority's sale -- on one Banks building (an unscaled output: on every building it would count each time)
+	every_scope_building = {
+		limit = { is_building_type = building_zz_ef_bank }
+		if = { limit = { has_modifier = zz_ef_cb_gold_sell } remove_modifier = zz_ef_cb_gold_sell }
+		if = { limit = { has_modifier = zz_ef_cb_silver_sell } remove_modifier = zz_ef_cb_silver_sell }
+	}
+	if = {
+		limit = {
+			var:zz_ef_mt_cb_sell > 0
+			zz_ef_am_holder = yes
+		}
+		ordered_scope_building = {
+			limit = { is_building_type = building_zz_ef_bank }
+			order_by = level
+			max = 1
 			if = {
 				limit = { root = { zz_ef_metal_silver = yes } }
 				add_modifier = {
