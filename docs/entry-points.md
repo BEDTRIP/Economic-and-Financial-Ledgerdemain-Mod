@@ -133,7 +133,7 @@ on_action, `ld_*` и PSC добавляют свои. Недельного пу�
 `clear_<good>_contract_1_year`) → `central_bank_ef_on_yearly_pulse_country` (проценты ЦБ в золоте, накопленная инфляция,
 `monetary_systeme_transition` для ИИ, `credit_at_central_bank_interest_per_week[_off]`,
 `central_bank_production_methods`, `_3` для золотого обменного стандарта, `money_value_target_modification`,
-`extreme_weak_currency_solution[_player]`, `establish_bank_and_ef_compagnie` для ИИ, `*_count_reset_condition`, арбитраж
+`extreme_weak_currency_solution[_player]`, `*_count_reset_condition`, арбитраж
 биметаллизма до 1873 `private_bank_arbitrage_gold_drain/_silver_drain`) → `financial_center_ef_on_yearly_pulse_country`
 (`ai_buy_central_bank_debt`,
 `sovereign_bond_yields`, `bond_maturity_on_action`, `financial_crash_count_reset_condition`) → `country_credit_rating`

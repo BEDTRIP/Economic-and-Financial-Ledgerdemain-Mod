@@ -4,7 +4,7 @@
 страны — их сумма; вклады чужих ЦБ — регистр эмитента.
 **Понятия:** [[Банки]], [[Инвестиционный пул|Пул]], [[Вклады нерезидентов]], [[Металл]], [[Свободные банки]].
 **Решения:** Д2.15, Д2.16, Д2.25, Д2.26, Д.R0.8.Б1–Б5, В.R3б.2, Д.R4а.7, Д.R4б.1–2, Д.R0.8.7 (`решения.md`). **От E&F, не решалось:**
-`establish_bank_and_ef_compagnie` (ИИ получает банковские компании) — R4.
+`establish_bank_and_ef_compagnie` — стартовые компании E&F с подарком уровней (вопрос В.R4б.10).
 
 Частный «Банк» (`building_zz_ef_bank`) — здание-услуга: производит «расчёты» (товар `liquidity_currency`), покупает
 услуги, бумагу, немного золота/серебра. Стартовые банки сеются один раз по рынку страны (40% — банковская компания E&F
@@ -102,8 +102,8 @@
 - `common/static_modifiers/ld_fx_holders_demand.txt` — `zz_ef_fx_holders_demand` (`state_export_advantage_mult = 0.01`
   на единицу множителя).
 - E&F, банковская часть (огромные файлы, смотреть `grep -n`):
-  - `common/scripted_effects/01_financial_scripted_effects.txt`: `establish_bank_and_ef_compagnie` (:13164, ИИ раз в год
-    получает банковские компании), `ai_privat_bank_bond_1..25` (:4130…, покупка облигаций частными банками).
+  - `common/scripted_effects/01_financial_scripted_effects.txt`: `establish_bank_and_ef_compagnie` (стартовые
+    компании E&F с подарком уровней — зовёт история; ежегодная раздача ИИ — в архиве, Д.R4б.3), `ai_privat_bank_bond_1..25` (:4130…, покупка облигаций частными банками).
   - `common/scripted_effects/08_list_effect.txt`: `privat_bank_variable_list` (список банковских компаний;
     `privat_bank_variable_list_ordered` — те же банки без сортировки, из него `ai_privat_bank_bond_N` берёт случайного
     покупателя облигаций), список `global_arbitrage_bank_variable_list_ordered` (:2209, по `gdp_var`; читатель —
@@ -135,7 +135,8 @@
   эмитента. Старт: чужих денег у ЦБ нет (раздача истории E&F — в `_archive/ef_start_fx_reserves/`).
 - Банковская наличность (`zz_ef_bank_cash_sum`, `ld_money_model_values.txt:2147`) вынесена из M1/M2; металл банков (вход
   золота/серебра) — `ld_metal_accounts.txt` (`zz_ef_bank_in_gold_goods`, `zz_ef_mt_bank_*`).
-- Год (`central_bank_ef_on_yearly_pulse_country`, `00_on_action_main.txt:792`): ИИ — `establish_bank_and_ef_compagnie`;
+- Год (`central_bank_ef_on_yearly_pulse_country`, `00_on_action_main.txt`): ежегодной раздачи банковских компаний ИИ нет
+  (`_archive/ef_bank_company_yearly/`, Д.R4б.3);
   `financial_center_ef_on_yearly_pulse_country` (:1086): `ai_buy_central_bank_debt` (в т.ч. `ai_privat_bank_bond_N`).
 - Проценты частных банков по чужим облигациям не начисляются (обе половины — в `_archive/ld_privbank_interest/`; вернуть
   одной проводкой в реестре облигаций, R5).
