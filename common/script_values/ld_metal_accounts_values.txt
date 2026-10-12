@@ -706,3 +706,14 @@ zz_ef_v_f_buyback_m = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_f_mt_buyback_money } value = var:zz_ef_f_mt_buyback_money }
 }
+
+# The world's line of metal (EFV, zz_ef_world_metal_log): the markets' gold and silver this week in goods -- made,
+# consumed, bought and sold on orders -- to set the metal bought onto the accounts against what the mines made.
+zz_ef_wlog_prod_gold = { value = 0 every_market = { add = mg:gold.market_goods_production } }
+zz_ef_wlog_cons_gold = { value = 0 every_market = { add = mg:gold.market_goods_consumption } }
+zz_ef_wlog_buyo_gold = { value = 0 every_market = { add = mg:gold.market_goods_buy_orders } }
+zz_ef_wlog_sello_gold = { value = 0 every_market = { add = mg:gold.market_goods_sell_orders } }
+zz_ef_wlog_prod_silver = { value = 0 every_market = { add = mg:silver.market_goods_production } }
+zz_ef_wlog_cons_silver = { value = 0 every_market = { add = mg:silver.market_goods_consumption } }
+zz_ef_wlog_buyo_silver = { value = 0 every_market = { add = mg:silver.market_goods_buy_orders } }
+zz_ef_wlog_sello_silver = { value = 0 every_market = { add = mg:silver.market_goods_sell_orders } }

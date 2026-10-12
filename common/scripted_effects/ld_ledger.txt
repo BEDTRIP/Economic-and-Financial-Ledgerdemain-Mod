@@ -263,6 +263,18 @@ zz_ef_reconcile = {
 		if = { limit = { NOT = { has_global_variable = zz_ef_wld_other_tr } } set_global_variable = { name = zz_ef_wld_other_tr value = 0 } }
 		change_global_variable = { name = zz_ef_wld_other_tr add = var:zz_ef_f_other_tr }
 	}
+	# a step that classified levels bought or sold (the multiples of zz_ef_lvl_unit) -- with the change of the levels the
+	# government owns, to tell a real privatization from a multiple met by chance
+	if = {
+		limit = {
+			zz_ef_logs_on = yes
+			OR = {
+				NOT = { var:zz_ef_f_lvl_buy_pool = 0 }
+				NOT = { var:zz_ef_f_lvl_buy_tr = 0 }
+			}
+		}
+		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|lvl|pool [THIS.GetCountry.MakeScope.Var('zz_ef_f_lvl_buy_pool').GetValue|0]|tr [THIS.GetCountry.MakeScope.Var('zz_ef_f_lvl_buy_tr').GetValue|0]|d_govlv [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_d_govlv')|2]|weeks [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_step_weeks_v')|0]"
+	}
 	# the log countries, and any country with a large «прочее» of the week
 	if = {
 		limit = {

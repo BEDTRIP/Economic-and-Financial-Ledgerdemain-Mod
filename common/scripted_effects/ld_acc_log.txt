@@ -1,0 +1,103 @@
+﻿# The accounts of the money tooltip in the log (the analysis of runs, 12.10): every account the tooltip shows
+# (localization/*/replace/ld_money_supply_replace_l_*.yml), the trade with the rest of the world and «прочее», once a
+# month. Country line EFW|date|country|acc|... -- every country with the model's step (roles A and B), from
+# zz_ef_money_model_monthly_step; world line EFW|date|WORLD|acc|... -- their sums, from the world's month
+# (zz_ef_world_month_ef). Parsed by ../vic3_mods/tools/ld_run_series.py.
+
+# COUNTRY scope, monthly.
+zz_ef_acc_log = {
+	if = {
+		limit = { zz_ef_logs_on = yes }
+		debug_log = "EFW|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|acc|m0 [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_agg_m0')|0]|m1 [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_agg_m1')|0]|m2 [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_agg_m2')|0]|m3 [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_agg_m3')|0]|cash [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_cash_held')|0]|savings [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_savings')|0]|deposits [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_deposits')|0]|bcash [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_circ_business_cash')|0]|bkcash [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bank_cash')|0]|pool [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pool')|0]|cbdebt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bank_cb_debt')|0]|loans [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bank_loans')|0]|bkcap [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bk_c_cap_v')|0]|bkbonds [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bank_bonds')|0]|treasury [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_treasury')|0]|trbonds [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_treasury_bonds')|0]|abroad [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_abroad_net')|0]|fassets [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_foreign_assets')|0]|fxmoney [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fx_money')|0]|fxliab [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fx_liab_all')|0]|cbmoney [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_money')|0]|cover [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_cover')|3]|infl [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_inflation')|3]|price [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_price_index')|1]|gdp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_raw_gdp')|0]|exp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_exp')|0]|imp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_imp')|0]|surplus [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_g_surplus')|0]|other [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_other')|0]"
+	}
+}
+
+# COUNTRY scope (the world's month): the sums over the countries with the model (var:zz_ef_wa_<key> on this country).
+zz_ef_acc_world_log = {
+	if = {
+		limit = { zz_ef_logs_on = yes }
+		save_temporary_scope_as = zz_ef_wa_c
+		set_variable = { name = zz_ef_wa_m0 value = 0 }
+		set_variable = { name = zz_ef_wa_m1 value = 0 }
+		set_variable = { name = zz_ef_wa_m2 value = 0 }
+		set_variable = { name = zz_ef_wa_m3 value = 0 }
+		set_variable = { name = zz_ef_wa_cash value = 0 }
+		set_variable = { name = zz_ef_wa_savings value = 0 }
+		set_variable = { name = zz_ef_wa_deposits value = 0 }
+		set_variable = { name = zz_ef_wa_bcash value = 0 }
+		set_variable = { name = zz_ef_wa_bkcash value = 0 }
+		set_variable = { name = zz_ef_wa_pool value = 0 }
+		set_variable = { name = zz_ef_wa_cbdebt value = 0 }
+		set_variable = { name = zz_ef_wa_loans value = 0 }
+		set_variable = { name = zz_ef_wa_bkcap value = 0 }
+		set_variable = { name = zz_ef_wa_bkbonds value = 0 }
+		set_variable = { name = zz_ef_wa_treasury value = 0 }
+		set_variable = { name = zz_ef_wa_trbonds value = 0 }
+		set_variable = { name = zz_ef_wa_abroad value = 0 }
+		set_variable = { name = zz_ef_wa_fassets value = 0 }
+		set_variable = { name = zz_ef_wa_fxmoney value = 0 }
+		set_variable = { name = zz_ef_wa_fxliab value = 0 }
+		set_variable = { name = zz_ef_wa_cbmoney value = 0 }
+		set_variable = { name = zz_ef_wa_gdp value = 0 }
+		set_variable = { name = zz_ef_wa_exp value = 0 }
+		set_variable = { name = zz_ef_wa_imp value = 0 }
+		set_variable = { name = zz_ef_wa_surplus value = 0 }
+		set_variable = { name = zz_ef_wa_other value = 0 }
+		every_country = {
+			limit = { has_variable = zz_ef_registry }
+			scope:zz_ef_wa_c = { change_variable = { name = zz_ef_wa_m0 add = prev.zz_ef_agg_m0 } }
+			scope:zz_ef_wa_c = { change_variable = { name = zz_ef_wa_m1 add = prev.zz_ef_agg_m1 } }
+			scope:zz_ef_wa_c = { change_variable = { name = zz_ef_wa_m2 add = prev.zz_ef_agg_m2 } }
+			scope:zz_ef_wa_c = { change_variable = { name = zz_ef_wa_m3 add = prev.zz_ef_agg_m3 } }
+			scope:zz_ef_wa_c = { change_variable = { name = zz_ef_wa_cash add = prev.zz_ef_pop_cash_held } }
+			scope:zz_ef_wa_c = { change_variable = { name = zz_ef_wa_savings add = prev.zz_ef_pop_savings } }
+			scope:zz_ef_wa_c = { change_variable = { name = zz_ef_wa_deposits add = prev.zz_ef_pop_deposits } }
+			scope:zz_ef_wa_c = { change_variable = { name = zz_ef_wa_bcash add = prev.zz_ef_circ_business_cash } }
+			scope:zz_ef_wa_c = { change_variable = { name = zz_ef_wa_bkcash add = prev.zz_ef_bank_cash } }
+			scope:zz_ef_wa_c = { change_variable = { name = zz_ef_wa_pool add = prev.zz_ef_pool } }
+			scope:zz_ef_wa_c = { change_variable = { name = zz_ef_wa_cbdebt add = prev.zz_ef_bank_cb_debt } }
+			scope:zz_ef_wa_c = { change_variable = { name = zz_ef_wa_loans add = prev.zz_ef_bank_loans } }
+			scope:zz_ef_wa_c = { change_variable = { name = zz_ef_wa_bkcap add = prev.zz_ef_bk_c_cap_v } }
+			scope:zz_ef_wa_c = { change_variable = { name = zz_ef_wa_bkbonds add = prev.zz_ef_bank_bonds } }
+			scope:zz_ef_wa_c = { change_variable = { name = zz_ef_wa_treasury add = prev.zz_ef_treasury } }
+			scope:zz_ef_wa_c = { change_variable = { name = zz_ef_wa_trbonds add = prev.zz_ef_treasury_bonds } }
+			scope:zz_ef_wa_c = { change_variable = { name = zz_ef_wa_abroad add = prev.zz_ef_abroad_net } }
+			scope:zz_ef_wa_c = { change_variable = { name = zz_ef_wa_fassets add = prev.zz_ef_foreign_assets } }
+			scope:zz_ef_wa_c = { change_variable = { name = zz_ef_wa_fxmoney add = prev.zz_ef_fx_money } }
+			scope:zz_ef_wa_c = { change_variable = { name = zz_ef_wa_fxliab add = prev.zz_ef_fx_liab_all } }
+			scope:zz_ef_wa_c = { change_variable = { name = zz_ef_wa_cbmoney add = prev.zz_ef_cb_money } }
+			scope:zz_ef_wa_c = { change_variable = { name = zz_ef_wa_gdp add = prev.zz_ef_raw_gdp } }
+			scope:zz_ef_wa_c = { change_variable = { name = zz_ef_wa_exp add = prev.zz_ef_v_f_exp } }
+			scope:zz_ef_wa_c = { change_variable = { name = zz_ef_wa_imp add = prev.zz_ef_v_f_imp } }
+			scope:zz_ef_wa_c = { change_variable = { name = zz_ef_wa_surplus add = prev.zz_ef_v_g_surplus } }
+			scope:zz_ef_wa_c = { change_variable = { name = zz_ef_wa_other add = prev.zz_ef_v_other } }
+		}
+		debug_log = "EFW|[TimeKeeper.GetCurrentDate.GetString]|WORLD|acc|m0 [THIS.GetCountry.MakeScope.Var('zz_ef_wa_m0').GetValue|0]|m1 [THIS.GetCountry.MakeScope.Var('zz_ef_wa_m1').GetValue|0]|m2 [THIS.GetCountry.MakeScope.Var('zz_ef_wa_m2').GetValue|0]|m3 [THIS.GetCountry.MakeScope.Var('zz_ef_wa_m3').GetValue|0]|cash [THIS.GetCountry.MakeScope.Var('zz_ef_wa_cash').GetValue|0]|savings [THIS.GetCountry.MakeScope.Var('zz_ef_wa_savings').GetValue|0]|deposits [THIS.GetCountry.MakeScope.Var('zz_ef_wa_deposits').GetValue|0]|bcash [THIS.GetCountry.MakeScope.Var('zz_ef_wa_bcash').GetValue|0]|bkcash [THIS.GetCountry.MakeScope.Var('zz_ef_wa_bkcash').GetValue|0]|pool [THIS.GetCountry.MakeScope.Var('zz_ef_wa_pool').GetValue|0]|cbdebt [THIS.GetCountry.MakeScope.Var('zz_ef_wa_cbdebt').GetValue|0]|loans [THIS.GetCountry.MakeScope.Var('zz_ef_wa_loans').GetValue|0]|bkcap [THIS.GetCountry.MakeScope.Var('zz_ef_wa_bkcap').GetValue|0]|bkbonds [THIS.GetCountry.MakeScope.Var('zz_ef_wa_bkbonds').GetValue|0]|treasury [THIS.GetCountry.MakeScope.Var('zz_ef_wa_treasury').GetValue|0]|trbonds [THIS.GetCountry.MakeScope.Var('zz_ef_wa_trbonds').GetValue|0]|abroad [THIS.GetCountry.MakeScope.Var('zz_ef_wa_abroad').GetValue|0]|fassets [THIS.GetCountry.MakeScope.Var('zz_ef_wa_fassets').GetValue|0]|fxmoney [THIS.GetCountry.MakeScope.Var('zz_ef_wa_fxmoney').GetValue|0]|fxliab [THIS.GetCountry.MakeScope.Var('zz_ef_wa_fxliab').GetValue|0]|cbmoney [THIS.GetCountry.MakeScope.Var('zz_ef_wa_cbmoney').GetValue|0]|gdp [THIS.GetCountry.MakeScope.Var('zz_ef_wa_gdp').GetValue|0]|exp [THIS.GetCountry.MakeScope.Var('zz_ef_wa_exp').GetValue|0]|imp [THIS.GetCountry.MakeScope.Var('zz_ef_wa_imp').GetValue|0]|surplus [THIS.GetCountry.MakeScope.Var('zz_ef_wa_surplus').GetValue|0]|other [THIS.GetCountry.MakeScope.Var('zz_ef_wa_other').GetValue|0]"
+		remove_variable = zz_ef_wa_m0
+		remove_variable = zz_ef_wa_m1
+		remove_variable = zz_ef_wa_m2
+		remove_variable = zz_ef_wa_m3
+		remove_variable = zz_ef_wa_cash
+		remove_variable = zz_ef_wa_savings
+		remove_variable = zz_ef_wa_deposits
+		remove_variable = zz_ef_wa_bcash
+		remove_variable = zz_ef_wa_bkcash
+		remove_variable = zz_ef_wa_pool
+		remove_variable = zz_ef_wa_cbdebt
+		remove_variable = zz_ef_wa_loans
+		remove_variable = zz_ef_wa_bkcap
+		remove_variable = zz_ef_wa_bkbonds
+		remove_variable = zz_ef_wa_treasury
+		remove_variable = zz_ef_wa_trbonds
+		remove_variable = zz_ef_wa_abroad
+		remove_variable = zz_ef_wa_fassets
+		remove_variable = zz_ef_wa_fxmoney
+		remove_variable = zz_ef_wa_fxliab
+		remove_variable = zz_ef_wa_cbmoney
+		remove_variable = zz_ef_wa_gdp
+		remove_variable = zz_ef_wa_exp
+		remove_variable = zz_ef_wa_imp
+		remove_variable = zz_ef_wa_surplus
+		remove_variable = zz_ef_wa_other
+	}
+}
