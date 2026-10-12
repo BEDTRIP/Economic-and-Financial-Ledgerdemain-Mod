@@ -2337,7 +2337,7 @@ types zz_ef_cb_rate_panel
 										textbox = {
 											layoutstretchfactor_horizontal = 1
 											layoutpolicy_horizontal = expanding
-											raw_text = "[Localize('zz_ef_bk_lbl_levels')] [Scope.Var('zz_ef_bk_lv').GetValue|0] ([Scope.Var('zz_ef_bk_sh').GetValue|%0])\n[Localize('zz_ef_bk_lbl_rate')] [Scope.Var('zz_ef_bk_rate').GetValue|%1]"
+											raw_text = "[Localize('zz_ef_bk_lbl_levels')] [Scope.Var('zz_ef_bk_lv').GetValue|0] ([Scope.Var('zz_ef_bk_sh').GetValue|%0]) · [Localize('zz_ef_bk_lbl_rate')] [Scope.Var('zz_ef_bk_rate').GetValue|%1]"
 											fontsize = 16
 											default_format = "#white"
 											align = left|vcenter
@@ -2353,7 +2353,7 @@ types zz_ef_cb_rate_panel
 										textbox = {
 											layoutstretchfactor_horizontal = 2
 											layoutpolicy_horizontal = expanding
-											raw_text = "[Localize('zz_ef_bk_lbl_cap')] [Scope.Var('zz_ef_bk_cap').GetValue|D] [GetPlayer.GetCustom('currency_symbol')]\n[Localize('zz_ef_bk_lbl_dep')] [Scope.ScriptValue('zz_ef_bk_deposits_v')|D]\n[Localize('zz_ef_bk_lbl_loans')] [Scope.ScriptValue('zz_ef_bk_loans_v')|D]"
+											raw_text = "[Localize('zz_ef_bk_lbl_cap')] [Scope.Var('zz_ef_bk_cap').GetValue|D] [GetPlayer.GetCustom('currency_symbol')] · [Localize('zz_ef_bk_lbl_dep')] [Scope.ScriptValue('zz_ef_bk_deposits_v')|D] · [Localize('zz_ef_bk_lbl_loans')] [Scope.ScriptValue('zz_ef_bk_loans_v')|D]"
 											fontsize = 16
 											default_format = "#white"
 											align = left|vcenter
@@ -2369,7 +2369,7 @@ types zz_ef_cb_rate_panel
 										textbox = {
 											layoutstretchfactor_horizontal = 1
 											layoutpolicy_horizontal = expanding
-											raw_text = "[Scope.Var('zz_ef_bk_mg').GetValue|D] @gold!\n[Scope.Var('zz_ef_bk_ms').GetValue|D] @silver!"
+											raw_text = "[Scope.Var('zz_ef_bk_mg').GetValue|D] @gold! · [Scope.Var('zz_ef_bk_ms').GetValue|D] @silver!"
 											fontsize = 16
 											default_format = "#white"
 											align = left|vcenter

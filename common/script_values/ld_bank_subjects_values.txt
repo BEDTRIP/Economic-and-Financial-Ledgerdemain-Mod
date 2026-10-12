@@ -1,10 +1,15 @@
 ﻿# Subjects-banks of a country (Д.R4б.1, scripted_effects/ld_bank_subjects.txt).
 
-# COUNTRY scope: the country's "Bank" levels, and the part the government owns («госбанки»).
+# COUNTRY scope: the country's built "Bank" levels, and the part the government owns («госбанки»; the ownership trigger
+# fails on a building under construction).
 zz_ef_bk_levels_v = {
 	value = 0
 	every_scope_building = {
-		limit = { is_building_type = building_zz_ef_bank }
+		limit = {
+			is_building_type = building_zz_ef_bank
+			level > 0
+			NOT = { is_under_construction = yes }
+		}
 		add = level
 	}
 }
@@ -13,6 +18,8 @@ zz_ef_bk_gov_levels_v = {
 	every_scope_building = {
 		limit = {
 			is_building_type = building_zz_ef_bank
+			level > 0
+			NOT = { is_under_construction = yes }
 			country_ownership_fraction > 0
 		}
 		add = {
