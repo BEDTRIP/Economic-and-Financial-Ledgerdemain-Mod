@@ -5,7 +5,11 @@
 # State scope (the financial centre's possible): only the owner's exchange grows.
 zz_ef_fc_possible = {
 	exists = owner
-	owner = { has_variable = zz_ef_fc_state }
+	owner = {
+		has_variable = zz_ef_fc_state
+		# the exchange's state may be gone (split, merged): the variable then points at nothing
+		exists = var:zz_ef_fc_state
+	}
 	owner.var:zz_ef_fc_state = this
 }
 
