@@ -62,6 +62,8 @@ zz_ef_bk_share_v = {
 zz_ef_bk_prem_k = 0.25
 zz_ef_bk_prem_max = 0.01
 zz_ef_bk_appeal_k = 20
+# a bankrupt company is out of the subjects this long (days; принято ночью)
+zz_ef_bk_fail_days = 365
 
 # COUNTRY scope: the country's accounts the subjects' follow (those held as variables)
 zz_ef_bk_c_gvd_v = { value = 0 if = { limit = { has_variable = zz_ef_bank_gov_dep } value = var:zz_ef_bank_gov_dep } }
@@ -115,7 +117,7 @@ zz_ef_bk_prem_v = {
 }
 # weights of the residual: the share of levels; x the appeal of the rate (deposits, loans); the liquidity gap (debt to
 # the CB: earning assets above deposits and capital); earning assets (capital) -- each + the share, so a country whose
-# subjects have none still shares by levels
+# subjects have none still shares by levels; the gap is net of the CB debt the subject already has
 zz_ef_bk_w_lv_v = {
 	value = var:zz_ef_bk_sh
 }
@@ -133,6 +135,7 @@ zz_ef_bk_w_cbd_v = {
 	if = { limit = { has_variable = zz_ef_bk_nrd } subtract = var:zz_ef_bk_nrd }
 	if = { limit = { has_variable = zz_ef_bk_gvd } subtract = var:zz_ef_bk_gvd }
 	if = { limit = { has_variable = zz_ef_bk_cap } subtract = var:zz_ef_bk_cap }
+	if = { limit = { has_variable = zz_ef_bk_cbd } subtract = var:zz_ef_bk_cbd }
 	min = 0
 	add = var:zz_ef_bk_sh
 }
