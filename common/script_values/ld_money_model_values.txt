@@ -89,10 +89,9 @@ zz_ef_building_cash_estimate = {
 	}
 	min = 0
 }
-# Since run 15 the sum over the buildings, kept weekly in
-# var:zz_ef_bcash by the step (the estimate above swung by millions a week
-# once the GDP share of the credit limit became 1.7); the estimate until the
-# first step.
+# The sum over the buildings, kept weekly in var:zz_ef_bcash by the step (the
+# estimate above swings by millions a week with the GDP share of the credit
+# limit at 1.7); the estimate until the first step.
 zz_ef_building_cash_sum = {
 	value = 0
 	every_scope_building = {
@@ -150,9 +149,9 @@ zz_ef_pool_contrib_month = {
 	min = 0
 }
 # Banks' credit from the central bank, steered by the rate against GDP (the
-# user, 1.10 evening, run 10): with the target "pool = contributions x months"
-# the pool was almost always over it, and in 6 years the CB lent Britain 1.2M
-# at M2 ~300M -- the credit channel was off. Now the banks' debt to the CB goes
+# user's decision; a target "pool = contributions x months" leaves the pool
+# almost always over it and the credit channel off -- Britain 1.2M in 6 years
+# at M2 ~300M). The banks' debt to the CB goes
 # to GDP x share: 50% at a 2% key rate, 0 at 12%, linear (27.5% at E&F's
 # neutral 6.5%); the money comes into the pool and the engine spends it on
 # private construction (and the consumer credit lends from it). 1.10 evening,
@@ -177,8 +176,8 @@ zz_ef_cb_credit_target = {
 		value = 0
 	}
 }
-# What the banks need in the pool (1.10 evening, run 15: the pool piled up
-# to 0.9 GDP while the banks kept borrowing from the CB): 3 months of what it
+# What the banks need in the pool (without it the pool piles up to 0.9 GDP
+# while the banks keep borrowing from the CB): 3 months of what it
 # pays out -- the transfer for private construction or the contributions,
 # whichever is larger, at least 0.1% of GDP a week.
 zz_ef_pool_need = {
@@ -424,13 +423,12 @@ zz_ef_hook_ok = {
 }
 # the pool's change nobody explains -- the change minus
 # the contributions, minus the transfer to the treasury, the CB's credit and
-# interest, the deposits and the foreign bonds. About 0 in a normal week; in
-# the sandbox run lump drops of 0.8-1.7M a week (Britain, Nov 1836 - Feb
-# 1837), not E&F (no bonds, no bank currency purchases). Run 5: the
-# drops are multiples of 15 000 = VC's PRIVATIZATION_PER_LEVEL_COST 150 x
-# MIN_FAKE_CONSTRUCTION_COST 100 -- the pool buying building levels at the
-# privatization price; no treasury receives it. Shown as money leaving
-# circulation, kept out of the pops' savings and out of the CB's metal.
+# interest, the deposits and the foreign bonds. About 0 in a normal week; lump
+# drops are the pool buying building levels at the privatization price
+# (PRIVATIZATION_PER_LEVEL_COST x the level's construction points; the
+# reconciliation's line «выкуп уровней», ld_ledger_values.txt), no treasury
+# receives it. Shown as money leaving circulation, kept out of the pops'
+# savings and out of the CB's metal.
 zz_ef_pool_other_week = {
 	value = zz_ef_v_d_pool
 	subtract = zz_ef_v_f_contrib
@@ -463,9 +461,9 @@ zz_ef_pool_other_week = {
 # engine pays pops the same as the dependents' surcharge; what pops spend comes
 # back into business cash, both inside M2 -- the change of M2 is minus the
 # unspent part, which is exactly the savings. Taking it out
-# counted it into savings twice: run e0_6, Switzerland -- the business card's
-# "other" equal to last week's cc_net to the unit in 115 weeks of 119; pops'
-# savings grew by the whole consumer credit every week on top.
+# would count it into savings twice (the business card's "other" equal to last
+# week's consumer credit net to the unit; the pops' savings growing by the whole
+# consumer credit every week on top).
 zz_ef_leak_week = {
 	value = zz_ef_v_d_m2
 	subtract = zz_ef_v_f_ext
@@ -493,8 +491,8 @@ zz_ef_leak_week = {
 # The treasury's change beyond the week's budget and the CB's profit: E&F's
 # scripted moves on the treasury -- ai_refund_central_bank (the government
 # repays the CB from the treasury) and ai_buy_bond_N (the treasury buys other
-# countries' bonds), around 1 January: run 6, Russia 1840.1.2 -16.7M
-# with a budget of -17K, France -6.4M. Not pops' savings: shown as treasury
+# countries' bonds), around 1 January (Russia -16.7M with a budget of -17K,
+# France -6.4M). Not pops' savings: shown as treasury
 # -> the CB and abroad. Not in the CB's metal (a refund and a bond purchase
 # cannot be told apart -- check).
 zz_ef_v_f_tr_other = {
@@ -502,13 +500,11 @@ zz_ef_v_f_tr_other = {
 	if = { limit = { has_variable = zz_ef_f_tr_other } value = var:zz_ef_f_tr_other }
 }
 # Part of the treasury's E&F move the budget's lines with abroad already show
-# (scope:abr). Runs 10-11: every treasury bond purchase
-# (ai_buy_bond_N, a plain add_treasury) also came in abr at the same sum --
-# Russia 1837.12.28 -9.62M / -9.61M, Ottomans 1837.8.3 -27.8M both -- so it was
-# taken out of the leak twice (pops' savings -9.5M) and paid out of the CB's
-# metal twice. Which budget line shows it is not found yet (check in the game,
-# the budget tooltip in the bond week). The overlap: the same sign, the
-# smaller magnitude.
+# (scope:abr): a treasury bond purchase (ai_buy_bond_N, a plain add_treasury)
+# comes in abr at the same sum (Russia -9.62M / -9.61M, the Ottomans -27.8M
+# both), and counted twice it would come out of the leak and the CB's metal
+# twice. Which budget line shows it is not known (the budget tooltip in the
+# bond week). The overlap: the same sign, the smaller magnitude.
 zz_ef_tr_abr_overlap = {
 	value = 0
 	if = {
@@ -565,8 +561,7 @@ zz_ef_pop_start_notes = {
 }
 # ---- pops' deposits (the receiver) -------
 # Deposit rate: the key rate - 1.5 pp, at least 0.5% (the banks' margin).
-# The banks' margin (1.10 evening, the user: cash and deposits move with the
-# rates): 1.5 pp, + 1 pp per need of idle money in the pool -- banks with
+# The banks' margin (the user: cash and deposits move with the rates): 1.5 pp, + 1 pp per need of idle money in the pool -- banks with
 # money they cannot lend pay less for more of it.
 zz_ef_deposit_margin = {
 	value = zz_ef_pool_idle
@@ -761,7 +756,7 @@ zz_ef_cb_metal = {
 # (zz_ef_trade_net_week: exports - imports x price) instead of the trade
 # centres' cash (their cash is their profit and cash flow, not what the
 # country paid abroad). Not the dividends estimate (zz_ef_div_net_week, log
-# only): run 21 read the buildings' profit a year at ~1 GDP -- Britain
+# only): it reads the buildings' profit a year at ~1 GDP -- Britain would get
 # +220K a week from abroad, its metal 59 -> 458M in three years.
 zz_ef_ext_net_week = {
 	value = zz_ef_v_f_abr
@@ -959,7 +954,7 @@ zz_ef_cc_issue = {
 	subtract = zz_ef_cc_debt
 	multiply = zz_ef_cc_speed
 	min = 0
-	# new credit not past the banks' reserve ceiling; the rollover as was
+	# new credit not past the banks' reserve ceiling; the rollover as it is
 	max = zz_ef_credit_room
 	add = zz_ef_cc_rollover
 	max = {
@@ -982,9 +977,9 @@ zz_ef_cc_interest = {
 	multiply = zz_ef_cc_rate
 	divide = 52
 }
-# The engine never lets dependents' income go below 0 (the 1840.7.1 save of
-# run 6: Prussia's surcharge -0.27 a year per dependent, its dependents' income
-# 0 everywhere; Britain's base ~0.2 + -0.17 = 0.03): a repayment larger than
+# The engine never lets dependents' income go below 0 (Prussia's surcharge
+# -0.27 a year per dependent leaves its dependents' income 0 everywhere;
+# Britain's base ~0.2 + -0.17 = 0.03): a repayment larger than
 # their income would not be collected, while the pool got it. So pops pay at
 # most 0.1 a year per dependent net; the rest of the repayment waits, unpaid
 # interest is added to the debt.
@@ -1050,12 +1045,12 @@ zz_ef_v_dependents = {
 	if = { limit = { has_variable = zz_ef_dependents } value = var:zz_ef_dependents }
 }
 
-# ---- EF.48 item 5: business credit (the user, 1.10; repaid in money 1.10
-# evening -- scripted_effects/ld_money_model.txt, zz_ef_business_credit_step)
+# ---- EF.48 item 5: business credit, repaid in money (the user's decision --
+# scripted_effects/ld_money_model.txt, zz_ef_business_credit_step)
 # One debt per country (var:zz_ef_bc_debt). Private construction is paid from
 # the pool (the transfer to the treasury); the part of it that was the banks'
-# borrowed money -- the CB's credit and pops' deposits, by their share of the
-# pool -- becomes the businesses' debt. Interest at the consumer rate (key +
+# borrowed money (the CB's credit and pops' deposits, by their share of the
+# pool) becomes the businesses' debt. Interest at the consumer rate (key +
 # 3 pp), repaid over 5 years; both are
 # counted against the buildings' contributions to the pool -- no money moves.
 # What the contributions do not cover is added to the debt.
@@ -1066,8 +1061,8 @@ zz_ef_bc_debt = {
 	min = 0
 }
 # R2 closing: the treasury's surplus in the pool (zz_ef_bank_gov_dep) is the banks' borrowed money too --
-# construction on it is the businesses' debt to the banks, not a gift of the treasury (r1008_093105: Qing, deposits ~0,
-# the pool's construction on the treasury's 7.9M went past the ledger, «прочее» -10.2M)
+# construction on it is the businesses' debt to the banks, not a gift of the treasury (else Qing, deposits ~0, builds on
+# the treasury's 7.9M past the ledger, «прочее» -10.2M)
 zz_ef_bc_borrowed_share = {
 	value = 0
 	if = {
@@ -1592,9 +1587,8 @@ zz_ef_price_growth_year = {
 		multiply = 2.16667
 	}
 }
-# Inflation a year: the consumer price index's change (the user, 1.10 night;
-# until then money growth - nominal GDP growth, which measured the velocity
-# of money, not prices, and multiplied a month by 13 in the first year).
+# Inflation a year: the consumer price index's change (the user's decision;
+# money growth - nominal GDP growth measures the velocity of money, not prices).
 zz_ef_inflation = {
 	value = zz_ef_price_growth_year
 	min = -0.5
@@ -1649,11 +1643,10 @@ zz_ef_other_treasury_rest = {
 # the private banks and of the treasury). Deposits are part of the pool, so
 # pops' savings count only at hand.
 # The CB's metal and currency-good stock are its RESERVES -- the cover of the
-# money, not money: with them in M0 a payment
-# abroad was counted twice -- the money left the pool (or business cash) and
-# Hume's mechanism took the same sum off the CB's metal (Britain 1840.1.2:
-# bonds -7.7M from the pool, metal -7.4M, M2 -4.4% in a month). Now an outflow
-# lowers the money once and the cover by the same sum. The CB issues money
+# money, not money: with them in M0 a payment abroad would count twice -- the
+# money leaves the pool (or business cash) and Hume's mechanism takes the same
+# sum off the CB's metal. An outflow lowers the money once and the cover by the
+# same sum. The CB issues money
 # only as credit to banks; that money is in the pool (M1).
 
 # The central bank's reserves in money: its metal at parity (E&F's
@@ -1672,11 +1665,9 @@ zz_ef_cb_metal_money = {
 		divide = zz_ef_cb_valuation
 	}
 }
-# Metal per unit the CB's metal is valued at: the parity. Until version 7 it
-# was never under today's value (run 8: re-anchors after a collapse put the
-# parity at a tiny value -- Spain, Ottomans, Belgium -- the CB's money jumped
-# to billions); with the historical parity and 40% cover the
-# reserves at parity are the cover itself, so the floor is gone.
+# Metal per unit the CB's metal is valued at: the parity, without a floor at
+# today's value -- with the historical parity and 40% cover the reserves at
+# parity are the cover itself.
 # the metal per unit of the engine's money (zz_ef_metal_per_money), the parity is not in it.
 zz_ef_cb_valuation = {
 	value = zz_ef_metal_per_money
@@ -1836,8 +1827,7 @@ zz_ef_agg_m0 = {
 	value = zz_ef_pop_cash_held
 }
 # the Banks' cash (building_zz_ef_bank) is the banks' own money, not money in circulation -- out
-# of M1 / M2, shown with the banks (save 1842.1 of run r1006_141714: 38-47% of the business cash -- Britain 15.4M of 33.1M,
-# M2 ~1 GDP). The engine's money (zz_ef_m2, the leak) keeps the whole business cash.
+# of M1 / M2, shown with the banks (38-47% of the business cash -- Britain 15.4M of 33.1M, M2 ~1 GDP). The engine's money (zz_ef_m2, the leak) keeps the whole business cash.
 zz_ef_bank_cash_sum = {
 	value = 0
 	every_scope_building = {
@@ -2155,13 +2145,13 @@ zz_ef_v_g_wgdp = {
 	if = { limit = { has_variable = zz_ef_g_wgdp } value = var:zz_ef_g_wgdp }
 }
 
-# ---- night 2: currencies, the silver rate, reserves -----------------
+# ---- currencies, the silver rate, reserves -----------------
 
 # Item 1: the silver-to-gold rate (gold per unit of
 # silver, E&F's silver_to_gold_rate) from the metals' prices: (silver price /
 # gold price) x (gold base price / silver base price) / 15.5 -- 1:15.5 at the
 # base prices (the French legal ratio of 1803, near the 1830s market). E&F's
-# was world gold / silver production (global_var:global_*_production_fix, 2 /
+# ratio -- world gold / silver production (global_var:global_*_production_fix, 2 /
 # 13), clamped to 1:5 .. 1:64: silver currencies read ~3 times their gold
 # value, the "average value of money" followed them up and the pound read as
 # "weak, -55%". Prices over every market, weighted by the metal's
@@ -2353,7 +2343,7 @@ zz_ef_trade_fin_week = {
 # of the country's buildings (weekly_profit, losses not counted) x the share of
 # its GDP foreign owners hold (GetForeignOwnedGDP, the bridge) out; the same
 # profit rate x the GDP the country owns abroad (GetGDPOwnedInForeignCountries)
-# in. + in, - out. Accepted at night -- check against the budget tooltips.
+# in. + in, - out.
 zz_ef_profit_week = {
 	value = 0
 	every_scope_building = {
@@ -2491,9 +2481,8 @@ zz_ef_gov_rate_corr_pct = {
 	value = zz_ef_gov_rate_corr
 	multiply = 100
 }
-# Item 6, run 21: the pool's drops (multiples of 15 000) do not come with the
-# government's levels falling -- not a privatization from the state. Next
-# probe: the privately owned levels.
+# Item 6: the privately owned levels (the pool's drops by a privatization price do not come with the government's
+# levels falling).
 zz_ef_priv_levels = {
 	value = 0
 	every_scope_building = {
