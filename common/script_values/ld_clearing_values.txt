@@ -242,3 +242,37 @@ zz_ef_cbfx_g_v = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_cbfx_g } value = var:zz_ef_cbfx_g }
 }
+
+# the clearing's metal of the week the CB's reserves count (var:zz_ef_f_clr_hume_g / _s, each in its units), in the
+# units of central_bank_metal_reserves_state -- the CB card's clearing line (zz_ef_f_cb_hume_m)
+zz_ef_clr_hume_reserves_v = {
+	value = 0
+	if = {
+		limit = {
+			OR = {
+				has_law = law_type:law_gold_standard
+				zz_ef_exchange_std = yes
+			}
+			has_variable = zz_ef_f_clr_hume_g
+		}
+		add = var:zz_ef_f_clr_hume_g
+	}
+	if = {
+		limit = {
+			has_law = law_type:law_silver_standard
+			has_variable = zz_ef_f_clr_hume_s
+		}
+		add = var:zz_ef_f_clr_hume_s
+	}
+	if = {
+		limit = { has_law = law_type:law_bimetallism_standard }
+		if = { limit = { has_variable = zz_ef_f_clr_hume_g } add = var:zz_ef_f_clr_hume_g }
+		if = {
+			limit = { has_variable = zz_ef_f_clr_hume_s }
+			add = {
+				value = var:zz_ef_f_clr_hume_s
+				divide = gold_to_silver_rate
+			}
+		}
+	}
+}

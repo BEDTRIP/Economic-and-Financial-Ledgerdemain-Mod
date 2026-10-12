@@ -232,12 +232,13 @@ zz_ef_money_model_step = {
 			change_variable = { name = zz_ef_f_cb_reval subtract = 1 }
 			change_variable = { name = zz_ef_f_cb_reval multiply = var:zz_ef_prev_cbm }
 		}
+		# only the metal the CB's reserves count (central_bank_metal_reserves_state): gold on a gold or an exchange
+		# standard, silver on a silver one, both on bimetallism, none on a fiat (the treasury as the authority) -- the
+		# clearing's other metal moves the authority's account outside the reserves (the East India Company's fiat:
+		# the card's «прочее» = -its clearing metal; Britain's gold standard got silver too, r1013_021434)
 		if = {
-			limit = {
-				has_variable = zz_ef_f_hume
-				zz_ef_cb_metal_money > 0
-			}
-			set_variable = { name = zz_ef_f_cb_hume_m value = var:zz_ef_f_hume }
+			limit = { zz_ef_cb_metal_money > 0 }
+			set_variable = { name = zz_ef_f_cb_hume_m value = zz_ef_clr_hume_reserves_v }
 			change_variable = { name = zz_ef_f_cb_hume_m divide = zz_ef_cb_valuation }
 		}
 		# E&F's CB building stored metal since the last step (its monthly stockpiling), at the parity -- a line of the CB card
