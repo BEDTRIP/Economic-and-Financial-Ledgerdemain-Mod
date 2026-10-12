@@ -977,6 +977,7 @@ zz_ef_xch_deal = {
 		zz_ef_rq_add = { H = $T$ K = $K$ D = scope:zz_ef_xch_d V = var:zz_ef_xd_a }
 	}
 	set_variable = { name = zz_ef_xd_a value = var:zz_ef_rq_dlt }
+	zz_ef_xch_abr_track_$T$_$K$ = yes
 	if = {
 		limit = { NOT = { var:zz_ef_xd_a = 0 } }
 		if = {
@@ -1113,6 +1114,42 @@ zz_ef_xch_nr_after_m = {
 	remove_variable = zz_ef_xd_om0
 }
 zz_ef_xch_nr_before_b = { }
+# Holder scope, after the claims of a deal changed hands (var:zz_ef_xd_a, units of the debtor's money): the CB's and the
+# banks' foreign money is in the abroad account (zz_ef_abroad_net) -- the deal's change at the debtor's value, in our
+# money, for the abroad card (var:zz_ef_f_xch_abr, the window zz_ef_v_w_xch_abr); the other holders' are not in it
+zz_ef_xch_abr_track_m = {
+	if = {
+		limit = {
+			NOT = { scope:zz_ef_xch_d = this }
+			NOT = { var:zz_ef_xd_a = 0 }
+			zz_ef_clr_gold_per_money > 0
+		}
+		if = { limit = { NOT = { has_variable = zz_ef_f_xch_abr } } set_variable = { name = zz_ef_f_xch_abr value = 0 } }
+		change_variable = {
+			name = zz_ef_f_xch_abr
+			add = {
+				value = var:zz_ef_xd_a
+				multiply = scope:zz_ef_xch_d.zz_ef_rq_gpm_v
+				divide = zz_ef_clr_gold_per_money
+			}
+		}
+	}
+}
+zz_ef_xch_abr_track_cb_m = { zz_ef_xch_abr_track_m = yes }
+zz_ef_xch_abr_track_bk_m = { zz_ef_xch_abr_track_m = yes }
+zz_ef_xch_abr_track_pp_m = { }
+zz_ef_xch_abr_track_fd_m = { }
+zz_ef_xch_abr_track_tr_m = { }
+zz_ef_xch_abr_track_cb_b = { }
+zz_ef_xch_abr_track_bk_b = { }
+zz_ef_xch_abr_track_pp_b = { }
+zz_ef_xch_abr_track_fd_b = { }
+zz_ef_xch_abr_track_tr_b = { }
+zz_ef_xch_abr_track_cb_f = { }
+zz_ef_xch_abr_track_bk_f = { }
+zz_ef_xch_abr_track_pp_f = { }
+zz_ef_xch_abr_track_fd_f = { }
+zz_ef_xch_abr_track_tr_f = { }
 zz_ef_xch_nr_after_b = { }
 # Holder scope: the other exchange's fund that bought the cheap rest (money only) -> scope:zz_ef_xd_o
 zz_ef_xch_deal_fund_o_m = { scope:zz_ef_xch_d.var:zz_ef_xcf_m = { save_temporary_scope_as = zz_ef_xd_o } }

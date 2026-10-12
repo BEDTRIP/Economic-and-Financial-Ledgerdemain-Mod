@@ -1,0 +1,15 @@
+﻿# Probe (R4б night, the abroad remainder): the CB's and the banks' foreign money and what moves it -- the clearing, the
+# exchange's deals (var:zz_ef_f_xch_abr), the interest (var:zz_ef_f_fxint_abr) -- for Britain and the East India Company,
+# weekly after the EFO line (EFP|abr). Read by tools/ld_probe_leak.py.
+zz_ef_probe_leak = {
+	if = {
+		limit = {
+			OR = {
+				AND = { exists = c:GBR THIS = c:GBR }
+				AND = { exists = c:BIC THIS = c:BIC }
+			}
+		}
+		debug_log = "EFP|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|mkt|tag [THIS.GetCountry.GetTagName]"
+		debug_log = "EFP|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|abr|d_abroad [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_d_abroad')|0]|abroad [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_abroad_net')|0]|fxm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fx_money')|0]|abr_rq [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_abr_rq_money_v')|0]|liab [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fx_liab_all')|0]|fx_in [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_w_clr_fx_in_money')|0]|fx_out [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_w_clr_fx_out_money')|0]|cur_out [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_w_clr_cur_out')|0]|own_back [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_w_clr_own_back')|0]|nr_xch [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_w_nr_xch')|0]|xch_abr [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_w_xch_abr')|0]|fxint [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_w_fxint_abr')|0]|gpm [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_clr_gold_per_money')|6]|cbok [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_has_cb_v')|0]"
+	}
+}

@@ -321,6 +321,8 @@ zz_ef_money_model_step = {
 	zz_ef_money_window_roll = { F = clr_own_back }
 	zz_ef_money_window_roll = { F = clr_fx_out }
 	zz_ef_money_window_roll = { F = nr_xch }
+	zz_ef_money_window_roll = { F = xch_abr }
+	zz_ef_money_window_roll = { F = fxint_abr }
 	if = { limit = { has_variable = zz_ef_f_ext } remove_variable = zz_ef_f_ext }
 	if = { limit = { has_variable = zz_ef_f_leak } remove_variable = zz_ef_f_leak }
 	# B steps weekly, its bridge stays every 4th week (its phase); the step takes the latest numbers
@@ -487,6 +489,7 @@ zz_ef_bridge_apply = {
 		# inflow and abr (at the step it would read last week's)
 		if = { limit = { zz_ef_logs_on = yes } zz_ef_money_log_rest = yes }
 		if = { limit = { zz_ef_logs_on = yes } zz_ef_mkt_week_log = yes }
+		if = { limit = { zz_ef_logs_on = yes } zz_ef_probe_leak = yes }
 	}
 }
 
