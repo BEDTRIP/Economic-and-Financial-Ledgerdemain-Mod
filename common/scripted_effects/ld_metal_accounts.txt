@@ -511,11 +511,14 @@ zz_ef_metal_week_step = {
 		set_variable = { name = zz_ef_cb_base_g value = zz_ef_cb_bldg_base_gold_goods }
 		set_variable = { name = zz_ef_cb_base_s value = zz_ef_cb_bldg_base_silver_goods }
 	}
-	# a CB without Banks: the state puts up a level in the capital (Д.R4а.9)
+	# a CB without Banks: the state puts up a level in the capital (Д.R4а.9) -- after its market's banks are seeded
+	# (ld_bank_seed.txt, the market owner's first month)
 	if = {
 		limit = {
 			has_modifier = has_central_bank
 			exists = capital
+			exists = market
+			market.owner = { has_variable = zz_ef_bank_seeded }
 			NOT = { any_scope_building = { is_building_type = building_zz_ef_bank } }
 		}
 		save_scope_as = zz_ef_cbb_o
