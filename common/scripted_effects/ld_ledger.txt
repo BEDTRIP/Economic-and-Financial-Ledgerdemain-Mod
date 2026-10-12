@@ -199,6 +199,32 @@ zz_ef_reconcile = {
 			change_variable = { name = zz_ef_bk_woff add = var:zz_ef_f_bk_woff }
 			change_variable = { name = zz_ef_f_other_tr subtract = var:zz_ef_f_bk_woff }
 		}
+		# the debt of a gone country the engine handed over to its heir (zz_ef_metal_heir_world marks the heir for two
+		# steps): the principal's rise, at most the treasury part's fall -- its own line (zz_ef_heir_debt), not «прочее»
+		set_variable = { name = zz_ef_f_heir_debt value = 0 }
+		if = {
+			limit = { has_variable = zz_ef_heir_debt_steps }
+			if = {
+				limit = {
+					has_variable = zz_ef_rec_principal
+					principal > var:zz_ef_rec_principal
+					var:zz_ef_f_other_tr < 0
+				}
+				set_variable = {
+					name = zz_ef_f_heir_debt
+					value = {
+						value = var:zz_ef_f_other_tr
+						multiply = -1
+						max = { value = principal subtract = var:zz_ef_rec_principal }
+					}
+				}
+				if = { limit = { NOT = { has_variable = zz_ef_heir_debt } } set_variable = { name = zz_ef_heir_debt value = 0 } }
+				change_variable = { name = zz_ef_heir_debt add = var:zz_ef_f_heir_debt }
+				change_variable = { name = zz_ef_f_other_tr add = var:zz_ef_f_heir_debt }
+			}
+			change_variable = { name = zz_ef_heir_debt_steps subtract = 1 }
+			if = { limit = { var:zz_ef_heir_debt_steps < 1 } remove_variable = zz_ef_heir_debt_steps }
+		}
 		change_variable = { name = zz_ef_other_tr add = var:zz_ef_f_other_tr }
 	}
 	# a large unexplained move of the treasury -- the engine's numbers around it (the log only)
@@ -246,7 +272,7 @@ zz_ef_reconcile = {
 				zz_ef_f_other_abs_v > zz_ef_other_log_min
 			}
 		}
-		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|other [THIS.GetCountry.MakeScope.Var('zz_ef_other').GetValue|0]|d_other [THIS.GetCountry.MakeScope.Var('zz_ef_f_other').GetValue|0]|pool [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_raw_pool')|0]|book [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bank_book_v')|0]|other_pool [THIS.GetCountry.MakeScope.Var('zz_ef_other_pool').GetValue|0]|other_tr [THIS.GetCountry.MakeScope.Var('zz_ef_other_tr').GetValue|0]|lvl_pool [THIS.GetCountry.MakeScope.Var('zz_ef_lvl_buy_pool').GetValue|0]|lvl_tr [THIS.GetCountry.MakeScope.Var('zz_ef_lvl_buy_tr').GetValue|0]|bk_woff [THIS.GetCountry.MakeScope.Var('zz_ef_bk_woff').GetValue|0]|d_other_tr [THIS.GetCountry.MakeScope.Var('zz_ef_f_other_tr').GetValue|0]|trnet [THIS.GetCountry.MakeScope.Var('zz_ef_tr_prev').GetValue|0]|budget [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_budget_steps_v')|0]|capital [THIS.GetCountry.MakeScope.Var('zz_ef_bank_capital').GetValue|0]|dep [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_deposits')|0]|weeks [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_step_weeks_v')|0]|role [THIS.GetCountry.MakeScope.Var('zz_ef_role').GetValue|0]|d_pool [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_d_pool')|0]|contrib [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_contrib')|0]|transfer [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_transfer')|0]|bc_new [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_bc_new')|0]|bc_paid [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_bc_paid')|0]|dep_build [THIS.GetCountry.MakeScope.Var('zz_ef_f_dep_build').GetValue|0]|gross [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pool_gross_v')|0]|net [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pool_net_v')|0]"
+		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|other [THIS.GetCountry.MakeScope.Var('zz_ef_other').GetValue|0]|d_other [THIS.GetCountry.MakeScope.Var('zz_ef_f_other').GetValue|0]|pool [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_raw_pool')|0]|book [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bank_book_v')|0]|other_pool [THIS.GetCountry.MakeScope.Var('zz_ef_other_pool').GetValue|0]|other_tr [THIS.GetCountry.MakeScope.Var('zz_ef_other_tr').GetValue|0]|lvl_pool [THIS.GetCountry.MakeScope.Var('zz_ef_lvl_buy_pool').GetValue|0]|lvl_tr [THIS.GetCountry.MakeScope.Var('zz_ef_lvl_buy_tr').GetValue|0]|bk_woff [THIS.GetCountry.MakeScope.Var('zz_ef_bk_woff').GetValue|0]|heir_debt [THIS.GetCountry.MakeScope.Var('zz_ef_heir_debt').GetValue|0]|d_other_tr [THIS.GetCountry.MakeScope.Var('zz_ef_f_other_tr').GetValue|0]|trnet [THIS.GetCountry.MakeScope.Var('zz_ef_tr_prev').GetValue|0]|budget [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_budget_steps_v')|0]|capital [THIS.GetCountry.MakeScope.Var('zz_ef_bank_capital').GetValue|0]|dep [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_deposits')|0]|weeks [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_step_weeks_v')|0]|role [THIS.GetCountry.MakeScope.Var('zz_ef_role').GetValue|0]|d_pool [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_d_pool')|0]|contrib [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_contrib')|0]|transfer [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_transfer')|0]|bc_new [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_bc_new')|0]|bc_paid [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_bc_paid')|0]|dep_build [THIS.GetCountry.MakeScope.Var('zz_ef_f_dep_build').GetValue|0]|gross [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pool_gross_v')|0]|net [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pool_net_v')|0]"
 	}
 }
 

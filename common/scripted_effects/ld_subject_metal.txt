@@ -24,6 +24,9 @@ zz_ef_metal_heir_world = {
 				random_scope_state = {
 					limit = { owner = { NOT = { is_country_type = decentralized } } }
 					owner = {
+						# the engine hands the gone country's debt over too (a revolt put down): the heir's next two reconciliations
+						# take a rise of its debt as inherited, not «прочее» (zz_ef_reconcile)
+						set_variable = { name = zz_ef_heir_debt_steps value = 2 }
 						zz_ef_metal_heir_take = { V = popm_gold }
 						zz_ef_metal_heir_take = { V = popm_silver }
 						zz_ef_metal_heir_take = { V = bankm_gold }
