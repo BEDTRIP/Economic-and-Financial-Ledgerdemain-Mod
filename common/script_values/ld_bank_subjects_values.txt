@@ -48,7 +48,10 @@ zz_ef_bk_subj_n_v = {
 zz_ef_bk_share_v = {
 	value = 0
 	if = {
-		limit = { var:zz_ef_bk_cty.var:zz_ef_bk_t > 0 }
+		limit = {
+			exists = var:zz_ef_bk_cty
+			var:zz_ef_bk_cty.var:zz_ef_bk_t > 0
+		}
 		value = var:zz_ef_bk_lv
 		if = {
 			limit = { var:zz_ef_bk_kind ?= flag:company }

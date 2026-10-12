@@ -36,7 +36,12 @@ zz_ef_bk_subj_step = {
 				set_variable = { name = zz_ef_bk_box value = scope:zz_ef_bk_new }
 				var:zz_ef_bk_box = { set_variable = { name = zz_ef_bk_co value = prev } }
 			}
-			var:zz_ef_bk_box = { set_variable = { name = zz_ef_bk_lv value = prev.var:zz_ef_bk_lv } }
+			# its country now: a company passes with an annexed or split country, its subject with it (the books follow by
+			# the weekly allocation; the exceptional events -- R11)
+			var:zz_ef_bk_box = {
+				set_variable = { name = zz_ef_bk_lv value = prev.var:zz_ef_bk_lv }
+				set_variable = { name = zz_ef_bk_cty value = scope:zz_ef_bk_c }
+			}
 			scope:zz_ef_bk_c = {
 				add_to_variable_list = { name = zz_ef_bk_subj target = prev.var:zz_ef_bk_box }
 				change_variable = { name = zz_ef_bk_cl add = prev.var:zz_ef_bk_lv }
