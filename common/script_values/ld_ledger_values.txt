@@ -14,6 +14,8 @@ zz_ef_bank_book_v = {
 	if = { limit = { has_variable = zz_ef_bc_debt } subtract = var:zz_ef_bc_debt }
 	# (Д.R2.7) the banks' parts of foreign bonds (E&F's ai_privat_bank_bond_value_N) -- their asset
 	subtract = zz_ef_bank_bonds
+	# (Д.R4а.12) the fund's shares and the foreign money the banks bought -- their asset at its value
+	if = { limit = { has_variable = zz_ef_bank_inv } subtract = var:zz_ef_bank_inv }
 }
 zz_ef_ledger_deposits_v = {
 	value = 0

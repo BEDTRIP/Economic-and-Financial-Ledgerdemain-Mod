@@ -89,3 +89,15 @@ zz_ef_v_f_fd_int = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_f_fd_int } value = var:zz_ef_f_fd_int }
 }
+# a fund's share at its value (the fund's country scope): its capital over the shares out, 1 before it has any
+zz_ef_fd_nav_v = {
+	value = 1
+	if = {
+		limit = {
+			zz_ef_rq_out_f_v > 0
+			has_variable = zz_ef_fd_capital
+		}
+		value = zz_ef_fd_capital_v
+		divide = zz_ef_rq_out_f_v
+	}
+}

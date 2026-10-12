@@ -35,7 +35,7 @@ zz_ef_money_model_step = {
 		if = { limit = { NOT = { has_variable = zz_ef_bk_cap_prev } } set_variable = { name = zz_ef_bk_cap_prev value = var:zz_ef_bank_capital } }
 		set_variable = { name = zz_ef_bk_cap_d value = var:zz_ef_bank_capital }
 		change_variable = { name = zz_ef_bk_cap_d subtract = var:zz_ef_bk_cap_prev }
-		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|bank_cap|cap [THIS.GetCountry.MakeScope.Var('zz_ef_bank_capital').GetValue|0]|d [THIS.GetCountry.MakeScope.Var('zz_ef_bk_cap_d').GetValue|0]|dep_int [THIS.GetCountry.MakeScope.Var('zz_ef_f_dep_int').GetValue|0]|cc_int [THIS.GetCountry.MakeScope.Var('zz_ef_f_cc_int').GetValue|0]|bc_int [THIS.GetCountry.MakeScope.Var('zz_ef_f_bc_int').GetValue|0]|cb_int [THIS.GetCountry.MakeScope.Var('zz_ef_f_cb_interest').GetValue|0]|nr_int [THIS.GetCountry.MakeScope.Var('zz_ef_f_nr_int').GetValue|0]|fd_int [THIS.GetCountry.MakeScope.Var('zz_ef_f_fd_int').GetValue|0]|fd_bk [THIS.GetCountry.MakeScope.Var('zz_ef_f_fd_bk').GetValue|0]|deposits [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_deposits')|0]|yield [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bank_loan_yield')|4]|deprate [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_deposit_rate')|4]"
+		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|bank_cap|cap [THIS.GetCountry.MakeScope.Var('zz_ef_bank_capital').GetValue|0]|d [THIS.GetCountry.MakeScope.Var('zz_ef_bk_cap_d').GetValue|0]|dep_int [THIS.GetCountry.MakeScope.Var('zz_ef_f_dep_int').GetValue|0]|cc_int [THIS.GetCountry.MakeScope.Var('zz_ef_f_cc_int').GetValue|0]|bc_int [THIS.GetCountry.MakeScope.Var('zz_ef_f_bc_int').GetValue|0]|cb_int [THIS.GetCountry.MakeScope.Var('zz_ef_f_cb_interest').GetValue|0]|nr_int [THIS.GetCountry.MakeScope.Var('zz_ef_f_nr_int').GetValue|0]|fd_int [THIS.GetCountry.MakeScope.Var('zz_ef_f_fd_int').GetValue|0]|fd_bk [THIS.GetCountry.MakeScope.Var('zz_ef_f_fd_bk').GetValue|0]|deposits [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_deposits')|0]|yield [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bank_loan_yield')|4]|deprate [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_deposit_rate')|4]|reval [THIS.GetCountry.MakeScope.Var('zz_ef_f_bank_reval').GetValue|0]|inv [THIS.GetCountry.MakeScope.Var('zz_ef_bank_inv').GetValue|0]|cb_metal [THIS.GetCountry.MakeScope.Var('zz_ef_f_cb_metal_pay').GetValue|0]"
 		set_variable = { name = zz_ef_bk_cap_prev value = var:zz_ef_bank_capital }
 	}
 	# Business cash: the sum over the buildings, once a week (an estimate from the
@@ -279,6 +279,8 @@ zz_ef_money_model_step = {
 	# 4.10 (the money tooltip): pops' savings and deposits, for the cash-at-hand and deposits lines
 	zz_ef_money_ledger_delta = { ACC = savings VALUE = zz_ef_pop_savings }
 	zz_ef_money_ledger_delta = { ACC = deposits VALUE = zz_ef_pop_deposits }
+	# the banks' asset at its value (Д.R4а.12, ld_investment_fund.txt)
+	zz_ef_bank_inv_revalue = yes
 	# the reconciliation by stocks -- «прочее» (scripted_effects/ld_ledger.txt)
 	zz_ef_reconcile = yes
 

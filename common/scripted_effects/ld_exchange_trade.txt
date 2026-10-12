@@ -1129,7 +1129,7 @@ zz_ef_xch_fund_cash = {
 	change_variable = { name = zz_ef_xch_pool_acc add = var:zz_ef_xd_xe }
 }
 # Holder scope, var:zz_ef_xd_x -- what we pay (+) / get (-), var:zz_ef_xd_a -- the claims bought (+) / sold (-): out of
-# the account of the holder (Д.R8б.21) -- the pops' deposits, the banks' capital, the treasury; the CB's money is its
+# the account of the holder (Д.R8б.21) -- the pops' deposits, the banks' asset (zz_ef_bank_inv), the treasury; the CB's money is its
 # issue (the counterpart -- its metal through the clearing). The banks' and the pops' money is in the pool: it moves with
 # the account. The banks' bonds are in their book (zz_ef_bank_bonds): the capital moves by the price less the parts.
 zz_ef_xch_pay_cb_m = { }
@@ -1140,7 +1140,8 @@ zz_ef_xch_pay_pp_m = {
 	zz_ef_xch_pool_pay = yes
 }
 zz_ef_xch_pay_bk_m = {
-	change_variable = { name = zz_ef_bank_capital subtract = var:zz_ef_xd_x }
+	# the foreign money is the banks' asset (Д.R4а.12): the capital moves by its revaluation
+	zz_ef_bank_inv_add = { V = var:zz_ef_xd_x }
 	zz_ef_xch_pool_pay = yes
 }
 zz_ef_xch_pay_bk_b = {

@@ -86,7 +86,8 @@ zz_ef_fund_shares_step = {
 		}
 		change_variable = { name = zz_ef_pop_deposits subtract = var:zz_ef_f_fd_pp }
 		change_variable = { name = zz_ef_pop_savings subtract = var:zz_ef_f_fd_pp }
-		change_variable = { name = zz_ef_bank_capital subtract = var:zz_ef_f_fd_bk }
+		# the shares are the banks' asset (Д.R4а.12): the capital stays
+		zz_ef_bank_inv_add = { V = var:zz_ef_f_fd_bk }
 		if = {
 			limit = { var:zz_ef_f_fd_pp > 0 }
 			zz_ef_rq_add = { H = pp K = f D = scope:zz_ef_fd_c V = var:zz_ef_f_fd_pp }
@@ -147,7 +148,7 @@ zz_ef_fund_week_step = {
 					multiply = zz_ef_fd_start_share_of_capital
 				}
 			}
-			change_variable = { name = zz_ef_bank_capital subtract = var:zz_ef_f_fd_start }
+			zz_ef_bank_inv_add = { V = var:zz_ef_f_fd_start }
 			zz_ef_fd_dep_add = { V = var:zz_ef_f_fd_start }
 			save_temporary_scope_as = zz_ef_fd_c
 			zz_ef_rq_add = { H = bk K = f D = scope:zz_ef_fd_c V = var:zz_ef_f_fd_start }
@@ -200,5 +201,54 @@ zz_ef_fund_log = {
 	every_country = {
 		limit = { has_variable = zz_ef_fd_dep }
 		debug_log = "EFU|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|dep [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fd_dep_v')|0]|capital [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fd_capital_v')|0]|shares [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_out_f_v')|0]|in_abroad [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_fd_in')|0]|start [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_fd_start')|0]|interest [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_fd_int')|0]|room [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fd_capacity')|0]|xch_fee [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_xch_fee')|0]|xch_tr [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_xch_tr')|0]"
+	}
+}
+
+# Country scope: the banks' asset -- the fund's shares and the foreign money they bought (Д.R4а.12), var:zz_ef_bank_inv;
+# a purchase (V > 0, one token) adds its price, a sale takes the money out. The capital does not move with it.
+zz_ef_bank_inv_add = {
+	if = { limit = { NOT = { has_variable = zz_ef_bank_inv } } set_variable = { name = zz_ef_bank_inv value = 0 } }
+	change_variable = { name = zz_ef_bank_inv add = $V$ }
+}
+# Country scope, weekly before the reconciliation (zz_ef_money_model_step): the asset at its value -- a fund's share at
+# the fund's capital over its shares (zz_ef_fd_nav_v), foreign money at its gold a unit over ours; the change -- the
+# banks' capital (a gain or a loss of the revaluation; the book does not move).
+zz_ef_bank_inv_revalue = {
+	zz_ef_bank_inv_add = { V = 0 }
+	set_variable = { name = zz_ef_f_bank_reval value = 0 }
+	if = {
+		limit = {
+			has_variable = zz_ef_bank_capital
+			OR = {
+				NOT = { var:zz_ef_bank_inv = 0 }
+				has_variable_map = zz_ef_rq_bk_f
+				has_variable_map = zz_ef_rq_bk_m
+			}
+		}
+		set_variable = { name = zz_ef_t_bi value = 0 }
+		if = {
+			limit = { has_variable_map = zz_ef_rq_bk_f }
+			save_temporary_scope_as = zz_ef_bi_h
+			every_key_in_variable_map = {
+				variable = zz_ef_rq_bk_f
+				save_temporary_scope_as = zz_ef_bi_k
+				scope:zz_ef_bi_h = {
+					zz_ef_rq_get = { MAP = zz_ef_rq_bk_f D = scope:zz_ef_bi_k }
+					change_variable = { name = zz_ef_rq_h multiply = scope:zz_ef_bi_k.zz_ef_fd_nav_v }
+					change_variable = { name = zz_ef_t_bi add = var:zz_ef_rq_h }
+				}
+			}
+		}
+		if = {
+			limit = { has_variable_map = zz_ef_rq_bk_m }
+			zz_ef_rq_value_gold = { MAP = zz_ef_rq_bk_m CONV = no }
+			change_variable = { name = zz_ef_rq_gold divide = zz_ef_rq_gpm_v }
+			change_variable = { name = zz_ef_t_bi add = var:zz_ef_rq_gold }
+		}
+		set_variable = { name = zz_ef_f_bank_reval value = var:zz_ef_t_bi }
+		change_variable = { name = zz_ef_f_bank_reval subtract = var:zz_ef_bank_inv }
+		change_variable = { name = zz_ef_bank_capital add = var:zz_ef_f_bank_reval }
+		set_variable = { name = zz_ef_bank_inv value = var:zz_ef_t_bi }
+		remove_variable = zz_ef_t_bi
 	}
 }

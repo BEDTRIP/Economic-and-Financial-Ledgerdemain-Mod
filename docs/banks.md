@@ -17,6 +17,13 @@
 (`zz_ef_bank_loan_yield`) — минус `zz_ef_deposit_income_margin` (0,01); капитал банков не уходит в минус от процентов
 (Д.R4а.7).
 
+**Актив книги банков** (Д.R4а.12): паи фондов (`zz_ef_rq_bk_f`) и чужие деньги, купленные банками на бирже
+(`zz_ef_rq_bk_m`), — счёт `zz_ef_bank_inv` (книга `zz_ef_bank_book_v` его вычитает); покупка его пополняет
+(`zz_ef_bank_inv_add`: паи — `zz_ef_fund_shares_step`, старт фонда; деньги — `zz_ef_xch_pay_bk_m`), капитал при покупке
+не меняется. Раз в неделю перед сверкой — переоценка (`zz_ef_bank_inv_revalue`, `ld_investment_fund.txt`): пай — по
+капиталу фонда на пай (`zz_ef_fd_nav_v`), чужие деньги — по золоту единицы; разница — в капитал (`zz_ef_f_bank_reval`,
+лог `EFJ|bank_cap`: `reval`, `inv`, `cb_metal` — возмещение банкам металла ЦБ, Д.R4а.9).
+
 ## Файлы
 - `common/buildings/ld_bank.txt` — `building_zz_ef_bank` (группа `bg_zz_ef_banking`, PMG `pmg_zz_ef_bank_base`,
   `ownership_type = self`, `ai_nationalization_desire = -5`).
