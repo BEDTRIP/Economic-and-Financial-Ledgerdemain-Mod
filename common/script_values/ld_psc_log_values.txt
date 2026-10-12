@@ -1,0 +1,15 @@
+﻿# The PSC log (scripted_effects/ld_psc_log.txt). COUNTRY scope: the construction sectors' weekly profit and levels.
+zz_ef_csec_profit_v = {
+	value = 0
+	every_scope_building = {
+		limit = { is_building_type = building_construction_sector }
+		add = weekly_profit
+	}
+}
+zz_ef_csec_levels_v = {
+	value = 0
+	every_scope_building = {
+		limit = { is_building_type = building_construction_sector }
+		add = level
+	}
+}

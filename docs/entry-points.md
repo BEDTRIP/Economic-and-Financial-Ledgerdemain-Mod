@@ -9,7 +9,7 @@ on_action, `ld_*` и PSC добавляют свои. Недельного пу�
 
 ## Файлы
 - `common/on_actions/00_ef_on_action.txt` — корневые on_action E&F (`ef_on_*_pulse_country`,
-  `ef_on_production_method_changed`, `ef_on_battle_ended`, `com_topbar_setup_ef`).
+  `ef_on_battle_ended`, `com_topbar_setup_ef`).
 - `common/on_actions/PSC_on_actions.txt` — PSC: распределение очков стройки по дням месяца, пересчёт метода конверсии
   при смене PM/технологии/постройке сектора.
 - `common/on_actions/ld_*_on_actions.txt` — `ld_bank`, `ld_bubble`, `ld_capitalization`, `ld_cb_rate`, `ld_money_model`
@@ -135,7 +135,7 @@ on_action, `ld_*` и PSC добавляют свои. Недельного пу�
 `central_bank_production_methods`, `_3` для золотого обменного стандарта, `money_value_target_modification`,
 `extreme_weak_currency_solution[_player]`, `establish_bank_and_ef_compagnie` для ИИ, `*_count_reset_condition`, арбитраж
 биметаллизма до 1873 `private_bank_arbitrage_gold_drain/_silver_drain`) → `financial_center_ef_on_yearly_pulse_country`
-(`private_ownership_production_stocks`, `financial_center_production_methods`, `ai_buy_central_bank_debt`,
+(`ai_buy_central_bank_debt`,
 `sovereign_bond_yields`, `bond_maturity_on_action`, `financial_crash_count_reset_condition`) → `country_credit_rating`
 (ранг ≥ unrecognized_power) → `gdp_view_on_action`, `macro_facilities_on_action_bc`,
 `has_tech_central_bank_but_no_building_central_bank`, `has_currency_law_but_no_building_central_bank`,
@@ -151,7 +151,6 @@ on_action, `ld_*` и PSC добавляют свои. Недельного пу�
 ### Прочие хуки
 | хук | on_action → эффекты |
 |---|---|
-| `on_production_method_changed` | `ef_on_production_method_changed` → `zz_ef_pm_stock_building` (`common/scripted_effects/ld_pm_stock_hook.txt`, генератор): только здание, сменившее метод, — его метод «акций» (4 группы: промышленность / сельское хозяйство / добыча / железная дорога, 48 типов) по `private_ownership_fraction` (> 0,5 — `pm_private_ownership_majority_*_stock`, ≤ 0,5 — `pm_no_private_ownership_*_stock`), после переключения — `financial_center_production_methods` владельца (если ФЦ); переключение снова зовёт хук для того же здания, оно уже согласовано — вложенности нет. Перебор всей страны (`private_ownership_production_stocks`) — только годовой; PSC `on_construction_sector_method_changed` → `set_new_point_conversion_method` (если сектор) |
 | `on_battle_ended` | `ef_on_battle_ended` → `enemy_stats_is_occuped` при `enemy_stats_is_occuped >= 1` |
 | `on_acquired_technology` (PSC) | `on_acquired_construction_tech` → `set_point_conversion_method_from_tech` |
 | `on_building_built` (PSC) | `on_construction_sector_built` → `set_new_point_conversion_method` |
@@ -234,7 +233,7 @@ on_action, `ld_*` и PSC добавляют свои. Недельного пу�
 | EFD | `common/scripted_effects/ld_exchange_trade.txt` | биржа: строка страны биржи за неделю (активов в стакане, шаги bid / ask фонда, его место); строка должника по активу со сделками (`asset|kind` 1 — деньги, 2 — облигации; множители `mul_m` / `mul_b`; шаг цены расчёта, сведено, взял / отдал фонд, всего продаж и покупок); `player|side|kind|amount` — заявка игрока (сторона 1 — покупка, 2 — продажа); `arb` — арбитраж биметаллизма ЦБ (законное и мировое соотношения, золото и серебро ЦБ, прибыль фонда, комиссия); `WORLD` за месяц — заявки, активы, сделки, стоимость в золоте (аукцион, покупки и продажи фондов, ЦБ-эмитенты в валютных точках `cb_buy_g` / `cb_sell_g`, между биржами `cross_g`), металл обменных ЦБ, их валюта в покрытии, множитель пирамиды резервов, чужие деньги, взаимные остатки и их доля, золото арбитража | неделя: `zz_ef_xch_clear_exchange` (мировой проход); месяц: `zz_ef_xch_month_log` из `zz_ef_world_month_ef` (при логах) |
 | EFU | `common/scripted_effects/ld_investment_fund.txt` | фонд биржи: вклад, капитал, паёв на руках (итог вида f), приток из-за границы за неделю, стартовый вклад, проценты, ёмкость; доход страны с комиссий биржи и деньги казны с биржи за последний шаг | `zz_ef_fund_log` из `zz_ef_world_month_ef` (месяц, при логах) |
 | EFH | `common/scripted_effects/ld_world_month.txt`, `common/scripted_effects/ld_fc.txt`, `common/scripted_effects/ld_exchange.txt` | WORLD: число бирж мира и стран по маршрутам (`own`, `market`, `bloc`, `lever`, `world`; месяц, при логах); страна — `bind`: штат биржи из истории (старт); `route`: маршрут биржи страны логов (`how` — 1 своя, 2 хозяин рынка, 3 свой блок, 4 сильнейший блок, 5 мировая; `exchange`) | `zz_ef_world_month_ef`, `zz_ef_fc_bind`, `zz_ef_xch_route` |
-| EFZ | `common/scripted_effects/ld_psc_log.txt` | стройка PSC за неделю: траты, роздано штатам, очки, остаток, выпуск стройтоваров (`construction.md`, «Логи») | `zz_ef_psc_log` |
+| EFZ | `common/scripted_effects/ld_psc_log.txt` | стройка PSC за неделю: траты, роздано штатам, очки, остаток, выпуск стройтоваров, прибыль и уровни стройсекторов (`ld_psc_log_values.txt`) (`construction.md`, «Логи») | `zz_ef_psc_log` |
 | EFC | `common/scripted_effects/ld_money_model.txt:1177,1179` | кризисный выкуп валюты: должно/выплачено; эмитент | `zz_ef_crisis_redeem` (из `zz_ef_rq_crisis_resell`) |
 | EFO / EFF | `common/scripted_effects/ld_money_log_rest.txt:5` / `6–10` | остаток баланса / статьи по зданиям, банкам, заграничные, казна, ЦБ | недельный `zz_ef_money_log_rest` (из `ld_money_model.txt:544`) |
 Других `debug_log` в `common/` и `events/` нет (grep по `debug_log` и `log =`).
