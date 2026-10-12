@@ -1,6 +1,7 @@
 ﻿# Probe (R4б night, the leaks): what the engine does with money outside the budget. Weekly, after the EFO line, for
 # Great Britain and France only: the market's totals of buy and sell orders and its balance (EFP|mkt), the sum of the
-# buildings' weekly profit (EFP|bld), every pop's income, expenses and wealth (EFP|pop). Read by
+# buildings' weekly profit (EFP|bld), every pop's income, expenses and wealth (EFP|pop); Britain's every building:
+# revenue, materials, wages, income, expenses, cash (EFP|bld). Read by
 # tools/ld_probe_leak.py against EFO b_rest and EFR leak. Country scope.
 zz_ef_probe_leak = {
 	if = {
@@ -11,6 +12,12 @@ zz_ef_probe_leak = {
 			}
 		}
 		debug_log = "EFP|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|mkt|tag [THIS.GetCountry.GetTagName]|buy [THIS.GetCountry.GetMarket.GetTotalBuyOrders|0]|sell [THIS.GetCountry.GetMarket.GetTotalSellOrders|0]|bal [THIS.GetCountry.GetMarket.GetBalance|0]|bprofit [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_probe_bprofit')|0]|bcash [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_building_cash')|0]|gdpw [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gdp_week')|0]"
+		if = {
+			limit = { THIS = c:GBR }
+			every_scope_building = {
+				debug_log = "EFP|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetBuilding.GetOwner.GetNameNoFormatting]|bld|t [THIS.GetBuilding.GetNameNoFormatting]|rev [THIS.GetBuilding.GetLastRevenue|2]|mat [THIS.GetBuilding.GetLastMaterialExpenses|2]|wage [THIS.GetBuilding.GetLastWagesExpenses|2]|inc [THIS.GetBuilding.GetLastIncome|2]|texp [THIS.GetBuilding.GetTotalExpenses|2]|cash [THIS.GetBuilding.GetCurrentCashReserves|2]|maxc [THIS.GetBuilding.GetMaxCashReserves|2]|trade [THIS.GetBuilding.GetTradeRevenue|2]|tax [THIS.GetBuilding.GetTaxationRevenue|2]|gov [THIS.GetBuilding.GetGovernmentExpenses|2]|cg [THIS.GetBuilding.GetConstructionGoodsExpenses|2]|wp [THIS.GetBuilding.MakeScope.ScriptValue('zz_ef_probe_bld_profit')|2]"
+			}
+		}
 		every_scope_pop = {
 			debug_log = "EFP|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetPop.GetCountry.GetNameNoFormatting]|pop|size [THIS.GetPop.GetTotalSize]|inc [THIS.GetPop.GetIncome|2]|exp [THIS.GetPop.GetExpenses|2]|wexp [THIS.GetPop.GetWeeklyExpenses|2]|wp [THIS.GetPop.GetWealthProgression|3]|w [THIS.GetPop.GetCurrentWealth]"
 		}
