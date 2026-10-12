@@ -2261,40 +2261,42 @@ types zz_ef_cb_rate_panel
 						using = default_list_position
 						direction = vertical
 
+						# Д.R4б.4: the subjects-banks of the country (zz_ef_bk_subj, scripted_effects/ld_bank_subjects.txt) -- their own
+						# accounts: levels and share, deposit rate, capital, deposits, loans, metal
 						widget = {
 							size = { @panel_width 30 }
 
 							hbox = {
-								sort_button = {
+								textbox = {
 									layoutpolicy_horizontal = preferred
 									size = { 180 20 }
 									align = hcenter|nobaseline
 									text = "privat_bank"
-									# datacontext = "[GetScriptedGui('gdpg_sort_by_country_gdp')]"  # ФК2: scripted gui нет в моде
-									# onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"  # ФК2: scripted gui нет в моде
 								}
-								sort_button = {
+								textbox = {
 									layoutpolicy_horizontal = preferred
+									size = { 110 20 }
 									align = hcenter|nobaseline
-									size = { 40 20 }
-									text = "type"
-									datacontext = "[GetScriptedGui('si_sort_by_bond_market_index')]"
-									onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"
+									text = "zz_ef_bk_col_share"
 								}
-								sort_button = {
+								textbox = {
 									layoutpolicy_horizontal = preferred
+									size = { 170 20 }
 									align = hcenter|nobaseline
-									size = { 50 20 }
-									text = "total_bank_funds"
-									datacontext = "[GetScriptedGui('si_sort_by_bond_market_index')]"
-									onclick = "[ScriptedGui.Execute(GuiScope.AddScope('player_country', GetPlayer.MakeScope).End )]"
+									text = "zz_ef_bk_col_book"
+								}
+								textbox = {
+									layoutpolicy_horizontal = preferred
+									size = { 100 20 }
+									align = hcenter|nobaseline
+									text = "zz_ef_bk_col_metal"
 								}
 							}
 						}
 
 						flowcontainer = {
 							direction = vertical
-							datamodel = "[GetPlayer.MakeScope.GetList('privat_bank_variable_list_ordered')]"
+							datamodel = "[GetPlayer.MakeScope.GetList('zz_ef_bk_subj')]"
 
 							margin_top = 10
 
@@ -2307,31 +2309,20 @@ types zz_ef_cb_rate_panel
 										margin = { 12 0 }
 
 										flowcontainer = {
-											layoutstretchfactor_horizontal = 1
+											layoutstretchfactor_horizontal = 2
 											layoutpolicy_horizontal = expanding
-
 											direction = horizontal
 											spacing = 5
-
-											flowcontainer = {
-												datacontext = "[Scope.GetCompany]"
-
-
-												direction = vertical
+											icon = {
+												visible = "[EqualTo_string(Scope.Var('zz_ef_bk_kind').GetFlagName, 'company')]"
+												size = { 50 50 }
 												parentanchor = vcenter
-
-												icon = {
-													size = { 50 50 }
-													position = { 0 0 }
-													texture = "[Company.GetCompanyType.GetIcon]"
-												}
+												texture = "[Scope.Var('zz_ef_bk_co').GetCompany.GetCompanyType.GetIcon]"
 											}
 											textbox = {
-												datacontext = "[Scope.GetCompany]"
 												autoresize = yes
-												raw_text = "[Company.GetName]"
+												raw_text = "[SelectLocalization( EqualTo_string(Scope.Var('zz_ef_bk_kind').GetFlagName, 'company'), Scope.Var('zz_ef_bk_co').GetCompany.GetName, SelectLocalization( EqualTo_string(Scope.Var('zz_ef_bk_kind').GetFlagName, 'gov'), Localize('zz_ef_bk_gov_name'), Localize('zz_ef_bk_pri_name') ) )]"
 												fontsize = 18
-
 												align = left|vcenter
 												parentanchor = left|vcenter
 												elide = right
@@ -2346,24 +2337,15 @@ types zz_ef_cb_rate_panel
 										textbox = {
 											layoutstretchfactor_horizontal = 1
 											layoutpolicy_horizontal = expanding
-											datacontext = "[Scope.GetCompany]"
-
-											raw_text = "[Company.GetCustom('private_bank_type')]"
-
-
-											fontsize = 18
-											default_format = "#white #bold"
-											margin_left = 0
-											margin_bottom = 1
-											elide = right
-											align = Hcenter|nobaseline
+											raw_text = "[Localize('zz_ef_bk_lbl_levels')] [Scope.Var('zz_ef_bk_lv').GetValue|0] ([Scope.Var('zz_ef_bk_sh').GetValue|%0])\n[Localize('zz_ef_bk_lbl_rate')] [Scope.Var('zz_ef_bk_rate').GetValue|%1]"
+											fontsize = 16
+											default_format = "#white"
+											align = left|vcenter
 											parentanchor = left
 											alwaystransparent = yes
-
 											multiline = yes
-											minimumsize = { 125 80 }
-											maximumsize = { 125 80 }
-
+											minimumsize = { 110 90 }
+											maximumsize = { 110 90 }
 										}
 
 										vertical_divider = {}
@@ -2371,97 +2353,32 @@ types zz_ef_cb_rate_panel
 										textbox = {
 											layoutstretchfactor_horizontal = 2
 											layoutpolicy_horizontal = expanding
-											datacontext = "[Scope.GetCompany]"
-
-											raw_text = "[Company.GetCountry.MakeScope.ScriptValue('private_bank_funds_per_private_bank')|D] [Company.GetCountry.GetCustom('currency_symbol')]"
-
-											fontsize = 18
-											default_format = "#white #bold"
-											margin_left = 0
-											margin_bottom = 1
-											elide = right
-											align = Hcenter|nobaseline
+											raw_text = "[Localize('zz_ef_bk_lbl_cap')] [Scope.Var('zz_ef_bk_cap').GetValue|D] [GetPlayer.GetCustom('currency_symbol')]\n[Localize('zz_ef_bk_lbl_dep')] [Scope.ScriptValue('zz_ef_bk_deposits_v')|D]\n[Localize('zz_ef_bk_lbl_loans')] [Scope.ScriptValue('zz_ef_bk_loans_v')|D]"
+											fontsize = 16
+											default_format = "#white"
+											align = left|vcenter
 											parentanchor = left
 											alwaystransparent = yes
-
 											multiline = yes
-											minimumsize = { 100 80 }
-											maximumsize = { 100 80 }
+											minimumsize = { 170 90 }
+											maximumsize = { 170 90 }
 										}
 
 										vertical_divider = {}
 
-
-										vbox = {
+										textbox = {
 											layoutstretchfactor_horizontal = 1
 											layoutpolicy_horizontal = expanding
-
-											textbox = {
-												datacontext = "[Scope.GetCompany]"
-
-												raw_text = "[Company.MakeScope.ScriptValue('private_bank_gold_reserve_per_bank_gui')|D+] @gold!"
-
-												fontsize = 18
-												default_format = "#white #bold"
-												margin_left = 0
-												margin_bottom = 1
-												elide = right
-												align = Hcenter|nobaseline
-												parentanchor = left
-												alwaystransparent = yes
-											}
-											textbox = {
-												datacontext = "[Scope.GetCompany]"
-
-												raw_text = "[Company.MakeScope.ScriptValue('private_bank_silver_reserve_per_bank_gui')|D+] @silver!"
-
-												fontsize = 18
-												default_format = "#white #bold"
-												margin_left = 0
-												margin_bottom = 1
-												elide = right
-												align = Hcenter|nobaseline
-												parentanchor = left
-												alwaystransparent = yes
-											}
+											raw_text = "[Scope.Var('zz_ef_bk_mg').GetValue|D] @gold!\n[Scope.Var('zz_ef_bk_ms').GetValue|D] @silver!"
+											fontsize = 16
+											default_format = "#white"
+											align = left|vcenter
+											parentanchor = left
+											alwaystransparent = yes
+											multiline = yes
+											minimumsize = { 100 90 }
+											maximumsize = { 100 90 }
 										}
-										#vertical_divider = {}
-
-										# textbox = {
-										# 	layoutstretchfactor_horizontal = 1
-										# 	layoutpolicy_horizontal = expanding
-										# 	datacontext = "[Scope.GetCountry]"
-
-										# 	text = "[GetPlayer.MakeScope.ScriptValue('private_bank_funds_per_private_bank')|D] [GetPlayer.GetCustom('monetary_system')]"
-
-										# 	fontsize = 18
-										# 	default_format = "#white #bold"
-										# 	margin_left = 0
-										# 	margin_bottom = 1
-										# 	elide = right
-										# 	align = Hcenter|nobaseline
-										# 	parentanchor = left|nobaseline
-										# 	alwaystransparent = yes
-										# }
-
-										# vertical_divider = {}
-
-										# textbox = {
-										# 	layoutstretchfactor_horizontal = 1
-										# 	layoutpolicy_horizontal = expanding
-										# 	datacontext = "[Scope.GetCompany]"
-
-										# 	text = "[Company.MakeScope.ScriptValue('funds_from_foreign_debt')|D] "
-										# 	fontsize = 18
-										# 	default_format = "#white #bold"
-
-										# 	margin_left = 0
-										# 	margin_bottom = 1
-										# 	elide = right
-										# 	align = Hcenter|nobaseline
-										# 	parentanchor = left|nobaseline
-										# 	alwaystransparent = yes
-										# }
 									}
 								}
 							}
