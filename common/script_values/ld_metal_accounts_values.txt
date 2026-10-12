@@ -644,6 +644,21 @@ zz_ef_v_f_popm_bank = {
 # (cumulative globals, zz_ef_wm_add). The rest = what moved metal without the market or a pair -- 0 when the
 # system is closed (E&F's own metal operations with its private banks' metal would show here, Д3.5 / Ф3).
 # the state's: the authority's reserves and the treasury's hoard (Д.R4а.13)
+# the treasury's hoard alone (Д.R4а.13), within cb_* -- the report shows the CB and the hoard apart
+zz_ef_wm_sum_tr_gold = {
+	value = 0
+	every_country = {
+		limit = { is_country_alive = yes }
+		add = zz_ef_trm_gold_v
+	}
+}
+zz_ef_wm_sum_tr_silver = {
+	value = 0
+	every_country = {
+		limit = { is_country_alive = yes }
+		add = zz_ef_trm_silver_v
+	}
+}
 zz_ef_wm_sum_cb_gold = {
 	value = 0
 	every_country = {
