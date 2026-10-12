@@ -118,3 +118,37 @@ zz_ef_trm_market_net = {
 		multiply = zz_ef_silver_price
 	}
 }
+
+# The AI's hoard (Д.R4б.19): it buys when the treasury holds more than zz_ef_trm_ai_buy_weeks of expenses and the week
+# has no deficit -- zz_ef_trm_ai_rate of the surplus over that a week; it sells zz_ef_trm_ai_rate of the hoard a week
+# when the treasury holds less than zz_ef_trm_ai_sell_weeks of expenses
+zz_ef_trm_ai_buy_weeks = 26
+zz_ef_trm_ai_sell_weeks = 8
+zz_ef_trm_ai_rate = 0.05
+# the money of the week's purchase: the rate of the treasury over the buy threshold
+zz_ef_trm_ai_buy_money_v = {
+	value = gold_reserves
+	subtract = {
+		value = total_expenses
+		multiply = zz_ef_trm_ai_buy_weeks
+	}
+	multiply = zz_ef_trm_ai_rate
+	min = 0
+}
+# the same in goods of gold / silver at the market price
+zz_ef_trm_ai_buy_goods_g = {
+	value = 0
+	if = {
+		limit = { zz_ef_gold_price > 0 }
+		value = zz_ef_trm_ai_buy_money_v
+		divide = zz_ef_gold_price
+	}
+}
+zz_ef_trm_ai_buy_goods_s = {
+	value = 0
+	if = {
+		limit = { zz_ef_silver_price > 0 }
+		value = zz_ef_trm_ai_buy_money_v
+		divide = zz_ef_silver_price
+	}
+}

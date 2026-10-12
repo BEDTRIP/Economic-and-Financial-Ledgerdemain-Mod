@@ -180,19 +180,67 @@ zz_ef_trm_from_authority = {
 	}
 }
 
-# Country scope, weekly (zz_ef_metal_week_step): the AI sells its whole hoard to the authority when its treasury is in
-# debt (Д.R4а.13); the player decides with the buttons.
+# Country scope, weekly (zz_ef_metal_week_step): the AI's hoard, the player decides with the buttons. In debt the AI sells
+# its whole hoard to the authority (Д.R4а.13). Otherwise (Д.R4б.19) its market orders are set anew each week: a rich
+# treasury with no deficit buys the standard's metal (bimetallism or no metal
+# standard: half of each), a poor one sells
+# zz_ef_trm_ai_rate of the hoard of each metal.
 zz_ef_trm_ai_step = {
 	if = {
-		limit = {
-			is_player = no
-			gold_reserves < 0
-			zz_ef_trm_money_v > 0
+		limit = { is_player = no }
+		zz_ef_trm_init = yes
+		if = {
+			limit = {
+				gold_reserves < 0
+				zz_ef_trm_money_v > 0
+			}
+			set_variable = { name = zz_ef_trm_u value = zz_ef_trm_gold_v }
+			zz_ef_trm_to_authority = { M = g METAL = gold }
+			set_variable = { name = zz_ef_trm_u value = zz_ef_trm_silver_v }
+			zz_ef_trm_to_authority = { M = s METAL = silver }
+			remove_variable = zz_ef_trm_u
 		}
-		set_variable = { name = zz_ef_trm_u value = zz_ef_trm_gold_v }
-		zz_ef_trm_to_authority = { M = g METAL = gold }
-		set_variable = { name = zz_ef_trm_u value = zz_ef_trm_silver_v }
-		zz_ef_trm_to_authority = { M = s METAL = silver }
-		remove_variable = zz_ef_trm_u
+		else_if = {
+			limit = {
+				zz_ef_trm_ai_buy_money_v > 0
+				total_income >= total_expenses
+			}
+			set_variable = { name = zz_ef_trm_sell_g value = 0 }
+			set_variable = { name = zz_ef_trm_sell_s value = 0 }
+			if = {
+				limit = { zz_ef_metal_silver = yes }
+				set_variable = { name = zz_ef_trm_buy_s value = zz_ef_trm_ai_buy_goods_s }
+				set_variable = { name = zz_ef_trm_buy_g value = 0 }
+			}
+			else_if = {
+				limit = { zz_ef_metal_gold = yes }
+				set_variable = { name = zz_ef_trm_buy_g value = zz_ef_trm_ai_buy_goods_g }
+				set_variable = { name = zz_ef_trm_buy_s value = 0 }
+			}
+			# bimetallism and no metal standard: half of each (the metals are symmetric, Д.R8а.10)
+			else = {
+				set_variable = { name = zz_ef_trm_buy_g value = { value = zz_ef_trm_ai_buy_goods_g multiply = 0.5 } }
+				set_variable = { name = zz_ef_trm_buy_s value = { value = zz_ef_trm_ai_buy_goods_s multiply = 0.5 } }
+			}
+		}
+		else_if = {
+			limit = {
+				gold_reserves < {
+					value = total_expenses
+					multiply = zz_ef_trm_ai_sell_weeks
+				}
+				zz_ef_trm_money_v > 0
+			}
+			set_variable = { name = zz_ef_trm_buy_g value = 0 }
+			set_variable = { name = zz_ef_trm_buy_s value = 0 }
+			set_variable = { name = zz_ef_trm_sell_g value = { value = zz_ef_trm_gold_goods_v multiply = zz_ef_trm_ai_rate } }
+			set_variable = { name = zz_ef_trm_sell_s value = { value = zz_ef_trm_silver_goods_v multiply = zz_ef_trm_ai_rate } }
+		}
+		else = {
+			set_variable = { name = zz_ef_trm_buy_g value = 0 }
+			set_variable = { name = zz_ef_trm_buy_s value = 0 }
+			set_variable = { name = zz_ef_trm_sell_g value = 0 }
+			set_variable = { name = zz_ef_trm_sell_s value = 0 }
+		}
 	}
 }
