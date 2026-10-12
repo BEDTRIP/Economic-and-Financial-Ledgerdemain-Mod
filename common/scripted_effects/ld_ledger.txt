@@ -173,13 +173,16 @@ zz_ef_reconcile = {
 			change_variable = { name = zz_ef_f_other_tr subtract = var:zz_ef_f_lvl_buy_tr }
 		}
 		remove_variable = zz_ef_t_lvl
-		# the engine's declared bankruptcy writes the debt off: the treasury net of debt rises by the debt gone, nobody's
-		# money moves -- its own line (zz_ef_bk_woff), not «прочее»: the principal's fall since the last step, at most
-		# the treasury part's rise, in a step with the modifier
+		# the engine writes the debt off -- a declared bankruptcy, or a default cutting the debt down to the credit: the
+		# treasury net of debt rises by the debt gone, nobody's money moves -- its own line (zz_ef_bk_woff), not
+		# «прочее»: the principal's fall since the last step, at most the treasury part's rise
 		set_variable = { name = zz_ef_f_bk_woff value = 0 }
 		if = {
 			limit = {
-				has_modifier = declared_bankruptcy
+				OR = {
+					has_modifier = declared_bankruptcy
+					in_default = yes
+				}
 				has_variable = zz_ef_rec_principal
 				var:zz_ef_rec_principal > principal
 				var:zz_ef_f_other_tr > 0
