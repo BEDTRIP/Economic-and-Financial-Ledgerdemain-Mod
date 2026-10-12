@@ -113,6 +113,7 @@ zz_ef_reconcile = {
 	if = { limit = { NOT = { has_variable = zz_ef_lvl_buy_tr } } set_variable = { name = zz_ef_lvl_buy_tr value = 0 } }
 	set_variable = { name = zz_ef_f_lvl_buy_pool value = 0 }
 	set_variable = { name = zz_ef_f_lvl_buy_tr value = 0 }
+	set_variable = { name = zz_ef_f_lvl_priv value = 0 }
 	if = {
 		limit = { has_variable = zz_ef_other_pool }
 		set_variable = {
@@ -163,6 +164,29 @@ zz_ef_reconcile = {
 				set_variable = { name = zz_ef_f_lvl_buy_pool value = { value = var:zz_ef_f_lvl_buy_tr multiply = -1 } }
 				change_variable = { name = zz_ef_lvl_buy_pool add = var:zz_ef_f_lvl_buy_pool }
 				change_variable = { name = zz_ef_other_pool subtract = var:zz_ef_f_lvl_buy_pool }
+			}
+			# Д.R4б.20: the privatization posted -- the pool paid the treasury for the state's levels out of the pops' deposits
+			# (deposits -> claims on the private sector, as the private construction out of deposits); the pool's «levels
+			# bought» gives the amount back, the book fell by it (the pool's part does not move)
+			if = {
+				limit = {
+					var:zz_ef_f_lvl_buy_pool < 0
+					has_variable = zz_ef_pop_deposits
+					var:zz_ef_pop_deposits > 0
+				}
+				set_variable = {
+					name = zz_ef_f_lvl_priv
+					value = {
+						value = var:zz_ef_f_lvl_buy_tr
+						max = { value = var:zz_ef_f_lvl_buy_pool multiply = -1 }
+						max = var:zz_ef_pop_deposits
+						min = 0
+					}
+				}
+				zz_ef_post = { FROM = zz_ef_pop_deposits TO = zz_ef_pop_claims_private V = var:zz_ef_f_lvl_priv }
+				change_variable = { name = zz_ef_pop_savings subtract = var:zz_ef_f_lvl_priv }
+				change_variable = { name = zz_ef_lvl_buy_pool add = var:zz_ef_f_lvl_priv }
+				change_variable = { name = zz_ef_f_lvl_buy_pool add = var:zz_ef_f_lvl_priv }
 			}
 		}
 		# the state as the buyer (the engine's nationalization: the treasury pays a multiple of the unit)
@@ -284,7 +308,7 @@ zz_ef_reconcile = {
 				NOT = { var:zz_ef_f_lvl_buy_tr = 0 }
 			}
 		}
-		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|lvl|pool [THIS.GetCountry.MakeScope.Var('zz_ef_f_lvl_buy_pool').GetValue|0]|d_complv [THIS.GetCountry.MakeScope.Var('zz_ef_d_complv').GetValue|1]|tr [THIS.GetCountry.MakeScope.Var('zz_ef_f_lvl_buy_tr').GetValue|0]|d_govlv [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_d_govlv')|2]|weeks [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_step_weeks_v')|0]|govlv [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gov_levels')|0]|privlv [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_priv_levels')|0]|bank_gov [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bk_gov_levels_v')|0]|bank_lv [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bk_levels_v')|0]|pool_now [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_raw_pool')|0]|gross [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pool_gross_v')|0]|net [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pool_net_v')|0]|other_tr [THIS.GetCountry.MakeScope.Var('zz_ef_f_other_tr').GetValue|0]"
+		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|lvl|pool [THIS.GetCountry.MakeScope.Var('zz_ef_f_lvl_buy_pool').GetValue|0]|priv [THIS.GetCountry.MakeScope.Var('zz_ef_f_lvl_priv').GetValue|0]|d_complv [THIS.GetCountry.MakeScope.Var('zz_ef_d_complv').GetValue|1]|tr [THIS.GetCountry.MakeScope.Var('zz_ef_f_lvl_buy_tr').GetValue|0]|d_govlv [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_d_govlv')|2]|weeks [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_step_weeks_v')|0]|govlv [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gov_levels')|0]|privlv [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_priv_levels')|0]|bank_gov [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bk_gov_levels_v')|0]|bank_lv [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bk_levels_v')|0]|pool_now [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_raw_pool')|0]|gross [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pool_gross_v')|0]|net [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pool_net_v')|0]|other_tr [THIS.GetCountry.MakeScope.Var('zz_ef_f_other_tr').GetValue|0]"
 	}
 	# the log countries, and any country with a large «прочее» of the week
 	if = {
