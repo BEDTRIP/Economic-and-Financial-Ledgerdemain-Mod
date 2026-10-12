@@ -1,0 +1,114 @@
+﻿# Subjects-banks of a country (Д.R4б.1; понятие «Банки», docs/banks.md): by the ownership of the "Bank" building's
+# levels -- every company with "Bank" levels is its own subject, the government's levels are «госбанки», the rest
+# (aristocrats, capitalists, foreign small owners) is «частные банкиры». A subject is a script container (1.13,
+# create_container; probe Р26): a company's -- with the company as parent (it goes when the company goes), the two
+# aggregates' -- with the country as parent. Its variables (Д.R4б.2): zz_ef_bk_kind (flag:company | gov | pri),
+# zz_ef_bk_lv -- its levels, zz_ef_bk_sh -- its share of the country's levels, zz_ef_bk_cty -- the country,
+# zz_ef_bk_co -- the company.
+#   on the country: var:zz_ef_bk_gov_box, var:zz_ef_bk_pri_box -- the aggregates, list zz_ef_bk_subj -- every subject
+#   (rebuilt each step), zz_ef_bk_t / _g / _cl / _ck -- all levels, the government's, the companies', their scale
+#   on a company: var:zz_ef_bk_box -- its subject, var:zz_ef_bk_lv -- its "Bank" levels as the window reads them
+#   (gui/ld_bank_hook.gui; script has no trigger for a company's levels of one building type)
+# A company's levels abroad count in its own country (the transnational subject -- R9а).
+
+# COUNTRY scope, its weekly step (zz_ef_money_model_step, after the reconciliation).
+zz_ef_bk_subj_step = {
+	save_temporary_scope_as = zz_ef_bk_c
+	zz_ef_bk_aggregates_ensure = yes
+	set_variable = { name = zz_ef_bk_t value = zz_ef_bk_levels_v }
+	set_variable = { name = zz_ef_bk_g value = zz_ef_bk_gov_levels_v }
+	set_variable = { name = zz_ef_bk_cl value = 0 }
+	clear_variable_list = zz_ef_bk_subj
+	add_to_variable_list = { name = zz_ef_bk_subj target = var:zz_ef_bk_gov_box }
+	add_to_variable_list = { name = zz_ef_bk_subj target = var:zz_ef_bk_pri_box }
+	every_company = {
+		limit = { company_owned_levels > 0 }
+		# the window measures its "Bank" levels (read next step)
+		if = {
+			limit = { NOT = { is_target_in_global_variable_list = { name = zz_ef_bk_hook target = this } } }
+			add_to_global_variable_list = { name = zz_ef_bk_hook target = this }
+		}
+		if = {
+			limit = { zz_ef_bk_company_banks = yes }
+			if = {
+				limit = { NOT = { has_variable = zz_ef_bk_box } }
+				zz_ef_bk_box_create = { KIND = company PARENT = this }
+				set_variable = { name = zz_ef_bk_box value = scope:zz_ef_bk_new }
+				var:zz_ef_bk_box = { set_variable = { name = zz_ef_bk_co value = prev } }
+			}
+			var:zz_ef_bk_box = { set_variable = { name = zz_ef_bk_lv value = prev.var:zz_ef_bk_lv } }
+			scope:zz_ef_bk_c = {
+				add_to_variable_list = { name = zz_ef_bk_subj target = prev.var:zz_ef_bk_box }
+				change_variable = { name = zz_ef_bk_cl add = prev.var:zz_ef_bk_lv }
+			}
+		}
+	}
+	# gone: a company subject without "Bank" levels -- closed (its accounts go to the private bankers with the bank
+	# book by subject, step 3)
+	every_company = {
+		limit = {
+			has_variable = zz_ef_bk_box
+			NOT = { zz_ef_bk_company_banks = yes }
+		}
+		var:zz_ef_bk_box = { destroy_container = yes }
+		remove_variable = zz_ef_bk_box
+	}
+	# the companies' levels within the private ones (the window lags a step; a company's levels abroad count here)
+	set_variable = { name = zz_ef_bk_free value = { value = var:zz_ef_bk_t subtract = var:zz_ef_bk_g min = 0 } }
+	set_variable = { name = zz_ef_bk_ck value = 1 }
+	if = {
+		limit = { var:zz_ef_bk_cl > var:zz_ef_bk_free }
+		set_variable = { name = zz_ef_bk_ck value = { value = var:zz_ef_bk_free divide = var:zz_ef_bk_cl } }
+	}
+	var:zz_ef_bk_gov_box = { set_variable = { name = zz_ef_bk_lv value = scope:zz_ef_bk_c.var:zz_ef_bk_g } }
+	set_variable = { name = zz_ef_bk_p value = zz_ef_bk_pri_levels_v }
+	var:zz_ef_bk_pri_box = { set_variable = { name = zz_ef_bk_lv value = scope:zz_ef_bk_c.var:zz_ef_bk_p } }
+	set_variable = { name = zz_ef_bk_shsum value = 0 }
+	every_in_list = {
+		variable = zz_ef_bk_subj
+		set_variable = { name = zz_ef_bk_sh value = zz_ef_bk_share_v }
+		scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_shsum add = prev.var:zz_ef_bk_sh } }
+	}
+	if = {
+		limit = { zz_ef_logs_on = yes }
+		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|bank_subj|n [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bk_subj_n_v')|0]|levels [THIS.GetCountry.MakeScope.Var('zz_ef_bk_t').GetValue|0]|gov [THIS.GetCountry.MakeScope.Var('zz_ef_bk_g').GetValue|0]|comp [THIS.GetCountry.MakeScope.Var('zz_ef_bk_cl').GetValue|0]|comp_k [THIS.GetCountry.MakeScope.Var('zz_ef_bk_ck').GetValue|2]|pri [THIS.GetCountry.MakeScope.Var('zz_ef_bk_p').GetValue|0]|share_sum [THIS.GetCountry.MakeScope.Var('zz_ef_bk_shsum').GetValue|3]"
+		if = {
+			limit = { zz_ef_log_country = yes }
+			every_company = {
+				limit = { has_variable = zz_ef_bk_box }
+				set_variable = { name = zz_ef_bk_sh value = var:zz_ef_bk_box.var:zz_ef_bk_sh }
+				debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCompany.GetCountry.GetNameNoFormatting]|bank_subj_co|[THIS.GetCompany.GetNameNoFormatting]|levels [THIS.GetCompany.MakeScope.Var('zz_ef_bk_lv').GetValue|0]|share [THIS.GetCompany.MakeScope.Var('zz_ef_bk_sh').GetValue|3]"
+			}
+		}
+	}
+}
+
+# COUNTRY scope: the two aggregates' subjects, once.
+zz_ef_bk_aggregates_ensure = {
+	if = {
+		limit = { NOT = { has_variable = zz_ef_bk_gov_box } }
+		zz_ef_bk_box_create = { KIND = gov PARENT = this }
+		set_variable = { name = zz_ef_bk_gov_box value = scope:zz_ef_bk_new }
+	}
+	if = {
+		limit = { NOT = { has_variable = zz_ef_bk_pri_box } }
+		zz_ef_bk_box_create = { KIND = pri PARENT = this }
+		set_variable = { name = zz_ef_bk_pri_box value = scope:zz_ef_bk_new }
+	}
+}
+
+# Any scope, scope:zz_ef_bk_c -- the country: a new subject of kind $KIND$ with parent $PARENT$, saved as
+# scope:zz_ef_bk_new; its accounts start at zero.
+zz_ef_bk_box_create = {
+	create_container = {
+		parent = $PARENT$
+		tags = { zz_ef_bk }
+		save_scope_as = zz_ef_bk_new
+	}
+	scope:zz_ef_bk_new = {
+		set_variable = { name = zz_ef_bk_kind value = flag:$KIND$ }
+		set_variable = { name = zz_ef_bk_cty value = scope:zz_ef_bk_c }
+		set_variable = { name = zz_ef_bk_lv value = 0 }
+		set_variable = { name = zz_ef_bk_sh value = 0 }
+	}
+}

@@ -1,0 +1,12 @@
+﻿# Д.R4б.1: the receiver of gui/ld_bank_hook.gui. COMPANY scope, scope:lv -- the company's "Bank" levels as the window
+# reads them: var:zz_ef_bk_lv (zz_ef_bk_subj_step reads it); the company off the list (next week's entry fires again).
+zz_ef_bank_hook_sg = {
+	scope = company
+	saved_scopes = {
+		lv
+	}
+	effect = {
+		set_variable = { name = zz_ef_bk_lv value = scope:lv }
+		remove_list_global_variable = { name = zz_ef_bk_hook target = this }
+	}
+}

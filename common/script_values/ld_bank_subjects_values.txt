@@ -1,0 +1,56 @@
+﻿# Subjects-banks of a country (Д.R4б.1, scripted_effects/ld_bank_subjects.txt).
+
+# COUNTRY scope: the country's "Bank" levels, and the part the government owns («госбанки»).
+zz_ef_bk_levels_v = {
+	value = 0
+	every_scope_building = {
+		limit = { is_building_type = building_zz_ef_bank }
+		add = level
+	}
+}
+zz_ef_bk_gov_levels_v = {
+	value = 0
+	every_scope_building = {
+		limit = {
+			is_building_type = building_zz_ef_bank
+			country_ownership_fraction > 0
+		}
+		add = {
+			value = level
+			multiply = country_ownership_fraction
+		}
+	}
+}
+# COUNTRY scope: «частные банкиры» -- the private levels without the companies' (scaled to fit)
+zz_ef_bk_pri_levels_v = {
+	value = var:zz_ef_bk_cl
+	multiply = var:zz_ef_bk_ck
+	multiply = -1
+	add = var:zz_ef_bk_free
+	min = 0
+}
+zz_ef_bk_subj_n_v = {
+	value = 0
+	every_in_list = {
+		variable = zz_ef_bk_subj
+		add = 1
+	}
+}
+
+# SUBJECT scope: its share of the country's levels; a country without banks -- all to «частные банкиры».
+zz_ef_bk_share_v = {
+	value = 0
+	if = {
+		limit = { var:zz_ef_bk_cty.var:zz_ef_bk_t > 0 }
+		value = var:zz_ef_bk_lv
+		if = {
+			limit = { var:zz_ef_bk_kind ?= flag:company }
+			multiply = var:zz_ef_bk_cty.var:zz_ef_bk_ck
+		}
+		divide = var:zz_ef_bk_cty.var:zz_ef_bk_t
+	}
+	else_if = {
+		limit = { var:zz_ef_bk_kind ?= flag:pri }
+		value = 1
+	}
+}

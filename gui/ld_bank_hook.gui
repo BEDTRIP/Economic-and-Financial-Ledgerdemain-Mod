@@ -1,0 +1,30 @@
+﻿# Д.R4б.1: a company's levels of the "Bank" building -- script has no trigger for them (company_owned_levels counts all
+# its buildings, and the bank companies own mines, trade centres, construction sectors from E&F's history); the window
+# knows them (BuildingType.GetNumLevelsOwnedByCompanyRaw, as the vanilla companies panel reads them). The pattern of gui/ld_money_hook.gui: an item per entry of the global list
+# zz_ef_bk_hook (companies, filled by zz_ef_bk_subj_step), a state fires on_finish when the item exists; the receiver
+# (scripted_guis/ld_bank_hook.txt) stores the levels on the company and takes it off the list. The int32 goes to a
+# fixed point bit by bit (10 bits, up to 1023 levels): IntToFixedPoint gives a float that MakeScopeValue does not take
+# (probe Р26, _archive/ld_probe_bk/).
+widget = {
+	name = zz_ef_bank_hook
+	datacontext = "[GetMetaPlayer.GetPlayedOrObservedCountry]"
+	visible = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
+	size = { 500 500 }
+	allow_outside = yes
+	alwaystransparent = yes
+	alpha = 1
+
+	flowcontainer = {
+		visible = "[DataModelHasItems(GetGlobalList('zz_ef_bk_hook'))]"
+		datamodel = "[GetGlobalList('zz_ef_bk_hook')]"
+		item = {
+			widget = {
+				datacontext = "[Scope.GetCompany]"
+				state = {
+					trigger_when = "[Scope.IsSet]"
+					on_finish = "[GetScriptedGui('zz_ef_bank_hook_sg').Execute( GuiScope.SetRoot( Company.MakeScope ).AddScope( 'lv', MakeScopeValue( Add_CFixedPoint( Add_CFixedPoint( Add_CFixedPoint( Add_CFixedPoint( Add_CFixedPoint( Add_CFixedPoint( Add_CFixedPoint( Add_CFixedPoint( Add_CFixedPoint( Select_CFixedPoint( IsOdd_int32( Divide_int32( GetBuildingType('building_zz_ef_bank').GetNumLevelsOwnedByCompanyRaw( Company.Self ), '(int32)1' ) ), '(CFixedPoint)1', '(CFixedPoint)0' ), Select_CFixedPoint( IsOdd_int32( Divide_int32( GetBuildingType('building_zz_ef_bank').GetNumLevelsOwnedByCompanyRaw( Company.Self ), '(int32)2' ) ), '(CFixedPoint)2', '(CFixedPoint)0' ) ), Select_CFixedPoint( IsOdd_int32( Divide_int32( GetBuildingType('building_zz_ef_bank').GetNumLevelsOwnedByCompanyRaw( Company.Self ), '(int32)4' ) ), '(CFixedPoint)4', '(CFixedPoint)0' ) ), Select_CFixedPoint( IsOdd_int32( Divide_int32( GetBuildingType('building_zz_ef_bank').GetNumLevelsOwnedByCompanyRaw( Company.Self ), '(int32)8' ) ), '(CFixedPoint)8', '(CFixedPoint)0' ) ), Select_CFixedPoint( IsOdd_int32( Divide_int32( GetBuildingType('building_zz_ef_bank').GetNumLevelsOwnedByCompanyRaw( Company.Self ), '(int32)16' ) ), '(CFixedPoint)16', '(CFixedPoint)0' ) ), Select_CFixedPoint( IsOdd_int32( Divide_int32( GetBuildingType('building_zz_ef_bank').GetNumLevelsOwnedByCompanyRaw( Company.Self ), '(int32)32' ) ), '(CFixedPoint)32', '(CFixedPoint)0' ) ), Select_CFixedPoint( IsOdd_int32( Divide_int32( GetBuildingType('building_zz_ef_bank').GetNumLevelsOwnedByCompanyRaw( Company.Self ), '(int32)64' ) ), '(CFixedPoint)64', '(CFixedPoint)0' ) ), Select_CFixedPoint( IsOdd_int32( Divide_int32( GetBuildingType('building_zz_ef_bank').GetNumLevelsOwnedByCompanyRaw( Company.Self ), '(int32)128' ) ), '(CFixedPoint)128', '(CFixedPoint)0' ) ), Select_CFixedPoint( IsOdd_int32( Divide_int32( GetBuildingType('building_zz_ef_bank').GetNumLevelsOwnedByCompanyRaw( Company.Self ), '(int32)256' ) ), '(CFixedPoint)256', '(CFixedPoint)0' ) ), Select_CFixedPoint( IsOdd_int32( Divide_int32( GetBuildingType('building_zz_ef_bank').GetNumLevelsOwnedByCompanyRaw( Company.Self ), '(int32)512' ) ), '(CFixedPoint)512', '(CFixedPoint)0' ) ) ) ).End )]"
+				}
+			}
+		}
+	}
+}
