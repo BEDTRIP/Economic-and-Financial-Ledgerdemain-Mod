@@ -1,0 +1,36 @@
+﻿# Probe R4б.1 (Р26, scripted_effects/ld_probe_bk.txt); to _archive/ld_probe_bk/ after the run.
+
+ld_probe_bk_new_v = {
+	value = var:ld_pb_new
+}
+
+# COUNTRY scope: the country's "Bank" levels and the part the government owns.
+ld_probe_bk_levels_v = {
+	value = 0
+	every_scope_building = {
+		limit = { is_building_type = building_zz_ef_bank }
+		add = level
+	}
+}
+ld_probe_bk_gov_levels_v = {
+	value = 0
+	every_scope_building = {
+		limit = {
+			is_building_type = building_zz_ef_bank
+			country_ownership_fraction > 0
+		}
+		add = {
+			value = level
+			multiply = country_ownership_fraction
+		}
+	}
+}
+
+# companies still waiting for the window
+ld_probe_bk_gui_list_v = {
+	value = 0
+	every_in_global_list = {
+		variable = ld_pb_companies
+		add = 1
+	}
+}

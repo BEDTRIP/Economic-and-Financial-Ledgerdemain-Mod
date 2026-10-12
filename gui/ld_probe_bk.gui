@@ -1,0 +1,30 @@
+﻿# Probe R4б.1 (Р26): a company's "Bank" levels and its variable, read by the window and handed to script
+# (scripted_guis/ld_probe_bk.txt). The pattern of gui/ld_money_hook.gui: an item per entry of a global list, a state
+# that fires on_finish when the item exists. To _archive/ld_probe_bk/ after the run.
+widget = {
+	name = ld_probe_bk_hook
+	datacontext = "[GetMetaPlayer.GetPlayedOrObservedCountry]"
+	visible = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
+	size = { 500 500 }
+	allow_outside = yes
+	alwaystransparent = yes
+	alpha = 1
+
+	flowcontainer = {
+		visible = "[DataModelHasItems(GetGlobalList('ld_pb_companies'))]"
+		datamodel = "[GetGlobalList('ld_pb_companies')]"
+		item = {
+			widget = {
+				datacontext = "[Scope.GetCompany]"
+				state = {
+					trigger_when = "[Scope.IsSet]"
+					on_finish = "[GetScriptedGui('ld_probe_bk_self_sg').Execute( GuiScope.SetRoot( Company.MakeScope ).AddScope( 'lv', MakeScopeValue( IntToFixedPoint( Company.GetBuildingTypeLevels( GetBuildingType('building_zz_ef_bank').Self ) ) ) ).End )]"
+				}
+				state = {
+					trigger_when = "[Scope.IsSet]"
+					on_finish = "[GetScriptedGui('ld_probe_bk_sg').Execute( GuiScope.SetRoot( Company.MakeScope ).AddScope( 'lv', MakeScopeValue( IntToFixedPoint( Company.GetBuildingTypeLevels( GetBuildingType('building_zz_ef_bank') ) ) ) ).AddScope( 'n', MakeScopeValue( Company.MakeScope.Var('ld_pb_n').GetValue ) ).End )]"
+				}
+			}
+		}
+	}
+}

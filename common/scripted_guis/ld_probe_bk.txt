@@ -1,0 +1,26 @@
+﻿# Probe R4б.1 (Р26): receivers of gui/ld_probe_bk.gui; to _archive/ld_probe_bk/ after the run.
+# COMPANY scope: scope:lv -- Company.GetBuildingTypeLevels( GetBuildingType('building_zz_ef_bank') ), scope:n -- the
+# company's var:ld_pb_n as the window reads it. Takes the company off the list.
+ld_probe_bk_sg = {
+	scope = company
+	saved_scopes = {
+		lv
+		n
+	}
+	effect = {
+		set_variable = { name = ld_pb_lv value = scope:lv }
+		set_variable = { name = ld_pb_n_gui value = scope:n }
+		remove_from_global_variable_list = { name = ld_pb_companies target = this }
+	}
+}
+
+# the same levels through GetBuildingType(...).Self
+ld_probe_bk_self_sg = {
+	scope = company
+	saved_scopes = {
+		lv
+	}
+	effect = {
+		set_variable = { name = ld_pb_lv2 value = scope:lv }
+	}
+}
