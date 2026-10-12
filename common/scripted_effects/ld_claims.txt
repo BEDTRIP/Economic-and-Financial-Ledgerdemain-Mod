@@ -205,6 +205,7 @@ zz_ef_rq_interest_step = {
 					zz_ef_rq_get = { MAP = zz_ef_rq_$H$_m D = scope:zz_ef_rq_d }
 					change_variable = { name = zz_ef_rq_h multiply = scope:zz_ef_rq_d.var:zz_ef_rq_rate_w }
 					zz_ef_rq_add = { H = $H$ K = m D = scope:zz_ef_rq_d V = var:zz_ef_rq_h }
+					zz_ef_rq_int_abr_$H$ = yes
 				}
 				if = {
 					limit = { NOT = { has_variable = zz_ef_rq_int_due } }
@@ -438,3 +439,25 @@ zz_ef_rq_fd_b_read = {
 		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_rq_fd_b|scope:zz_ef_rq_key)" }
 	}
 }
+
+# Holder scope, in zz_ef_rq_interest_step after the interest var:zz_ef_rq_h (units of scope:zz_ef_rq_d's money) is credited:
+# the CB's and the banks' foreign money is in the abroad account -- the interest in our money for its card
+# (var:zz_ef_f_fxint_abr, the window zz_ef_v_w_fxint_abr); the pops' and the fund's are not in it
+zz_ef_rq_int_abr = {
+	if = {
+		limit = { zz_ef_clr_gold_per_money > 0 }
+		if = { limit = { NOT = { has_variable = zz_ef_f_fxint_abr } } set_variable = { name = zz_ef_f_fxint_abr value = 0 } }
+		change_variable = {
+			name = zz_ef_f_fxint_abr
+			add = {
+				value = var:zz_ef_rq_h
+				multiply = scope:zz_ef_rq_d.zz_ef_rq_gpm_v
+				divide = zz_ef_clr_gold_per_money
+			}
+		}
+	}
+}
+zz_ef_rq_int_abr_cb = { zz_ef_rq_int_abr = yes }
+zz_ef_rq_int_abr_bk = { zz_ef_rq_int_abr = yes }
+zz_ef_rq_int_abr_pp = { }
+zz_ef_rq_int_abr_fd = { }

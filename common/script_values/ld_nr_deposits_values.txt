@@ -14,6 +14,16 @@ zz_ef_v_w_nr_xch = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_w_nr_xch } value = var:zz_ef_w_nr_xch }
 }
+# the CB's and the banks' foreign money bought (+) / sold (-) on the exchanges, our money, the last window -- the abroad card
+zz_ef_v_w_xch_abr = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_w_xch_abr } value = var:zz_ef_w_xch_abr }
+}
+# the interest the CB and the banks got on their foreign money, our money, the last window -- the abroad card
+zz_ef_v_w_fxint_abr = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_w_fxint_abr } value = var:zz_ef_w_fxint_abr }
+}
 zz_ef_v_w_nr_dep = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_w_nr_dep } value = var:zz_ef_w_nr_dep }
