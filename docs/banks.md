@@ -103,8 +103,7 @@
   на единицу множителя).
 - E&F, банковская часть (огромные файлы, смотреть `grep -n`):
   - `common/scripted_effects/01_financial_scripted_effects.txt`: `establish_bank_and_ef_compagnie` (:13164, ИИ раз в год
-    получает банковские компании), `ai_privat_bank_bond_1..25` (:4130…, покупка облигаций частными банками),
-    `private_ownership_production_stocks`, `financial_center_production_methods`.
+    получает банковские компании), `ai_privat_bank_bond_1..25` (:4130…, покупка облигаций частными банками).
   - `common/scripted_effects/08_list_effect.txt`: `privat_bank_variable_list` (список банковских компаний;
     `privat_bank_variable_list_ordered` — те же банки без сортировки, из него `ai_privat_bank_bond_N` берёт случайного
     покупателя облигаций), список `global_arbitrage_bank_variable_list_ordered` (:2209, по `gdp_var`; читатель —

@@ -38,7 +38,6 @@
 | `regen_ef_metal_hoard` | `common/pop_needs/ld_metal_hoard.txt`, `localization/<lang>/ld_metal_hoard_l_<lang>.yml` | — |
 | `regen_ef_monetary_policy` | `common/scripted_effects/ld_monetary_policy.txt`, `common/script_values/ld_monetary_policy_values.txt`, `common/scripted_triggers/ld_monetary_policy_triggers.txt`, `common/scripted_guis/ld_monetary_policy_buttons.txt`, `localization/<lang>/ld_monetary_policy_l_<lang>.yml` | — |
 | `regen_ef_money_supply_loc` | `localization/<lang>/replace/ld_money_supply_replace_l_<lang>.yml`, `gui/ld_money_hook.gui`, `common/scripted_effects/ld_money_log_rest.txt` | — |
-| `regen_ef_pm_stock_hook` | `common/scripted_effects/ld_pm_stock_hook.txt` | `common/scripted_effects/01_financial_scripted_effects.txt` (`private_ownership_production_stocks` — правила) |
 | `regen_ld_start_technologies` | `common/history/countries/ld_start_technologies.txt` | ЦБ истории (`common/history/buildings/00_ef_building.txt`), законы стандартов и валют (`common/history/global/99_ef_history_global_variable.txt`) |
 
 Генератор ведёт только записи, которые есть в его файлах; в файле могут быть и рукописные записи. Законы денежной

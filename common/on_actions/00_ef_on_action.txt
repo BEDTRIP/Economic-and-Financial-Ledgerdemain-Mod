@@ -51,12 +51,6 @@ on_five_year_pulse_country = {
     }
 }
 
-on_production_method_changed = {
-	on_actions = {
-    	ef_on_production_method_changed
-    }
-}
-
 on_battle_ended = {
 	on_actions = {
     	ef_on_battle_ended
@@ -325,14 +319,5 @@ ef_on_battle_ended = {
 			}
 			enemy_stats_is_occuped = yes
 		}
-	}
-}
-
-ef_on_production_method_changed = {
-	effect = {
-		# only the building that changed its method (scope -- building); the country-wide sweep
-		# private_ownership_production_stocks stays in the yearly pulse. Rules and the financial centre call --
-		# zz_ef_pm_stock_building (common/scripted_effects/ld_pm_stock_hook.txt).
-		zz_ef_pm_stock_building = yes
 	}
 }

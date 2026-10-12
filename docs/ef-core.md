@@ -13,8 +13,8 @@
 ### Здания и методы производства
 - `common/buildings/ef_01_industry.txt`, `ef_02_agro.txt`, `ef_03_mines.txt` (кроме `building_silver_mine`),
   `ef_04_plantations.txt`, `ef_06_urban_center.txt`, `ef_09_misc_resource.txt`, `ef_11_private_infrastructure.txt`
-  (порт, железная дорога, торговый центр) — `INJECT:building_<vanilla>` с добавлением `pmg_market_liquidity` и
-  `pmg_private_ownership_{manufacture,agricultural,mining,railroad}_stock` в ванильные здания; `ef_11` также
+  (порт, железная дорога, торговый центр) — `INJECT:building_<vanilla>` с добавлением `pmg_market_liquidity` в ванильные
+  здания (методы «акций» — в архиве, Д.R4б.8); `ef_11` также
   `INJECT:building_financial_district` (оценки инвестиций `bg_ef_private_construction_score`,
   `bg_financial_centre_score`, `bg_construction_score`).
 - `common/buildings/ef_03_mines.txt:53` — новое `building_silver_mine` (группа `bg_silver_mining`, доступно только при
@@ -25,16 +25,14 @@
   `pmg_minting_type`, `pmg_monetary_policy`). Частный банк — `buildings/ld_bank.txt`.
 - `common/buildings/ef_16_financial_centre.txt` — генерат (`regen_ld_financial_centres`): общий финцентр и 38 вариантов
   (`exchange-companies.md`).
-- `common/production_method_groups/01_ef_industry.txt`, `02_ef_agro.txt`, `03_ef_mine.txt`,
-  `11_ef_private_infrastructure.txt`, `15_ef_bank.txt`, `16_ef_financial_centre.txt` — PMG: `pmg_market_liquidity`,
-  `pmg_private_ownership_{manufacture,agricultural,mining,railroad}_stock`, 4 PMG серебряной шахты, `pmg_minting_type`,
+- `common/production_method_groups/01_ef_industry.txt`, `03_ef_mine.txt`, `15_ef_bank.txt`, `16_ef_financial_centre.txt` — PMG: `pmg_market_liquidity`,
+  4 PMG серебряной шахты, `pmg_minting_type`,
   `pmg_monetary_policy`, `pmg_currency_type`, `pmg_bond_exchange`, 4 биржи.
 - `common/production_methods/00_ef_market_liquidity.txt` — `pm_no_market_liquidity` (по закону «без денежной системы»),
   `pm_market_liquidity_currency` (вход `goods_input_liquidity_currency_add = 28`).
-- `common/production_methods/01_ef_industry.txt`, `02_ef_agro.txt`, `03_ef_mines.txt`,
-  `11_ef_private_infrastructure.txt` — PM «частного владения» (`pm_no_private_ownership_*` /
-  `pm_private_ownership_majority_*`: выход акций 12,5 на рабочую силу), PM серебряной шахты (кирка, насосы, взрывчатка,
-  паровой осёл), `REPLACE:pm_company_headquarter_*` (16 ванильных PM штаб-квартиры с ослабленными акциями капиталистов).
+- `common/production_methods/03_ef_mines.txt`, `11_ef_private_infrastructure.txt` — PM серебряной шахты (кирка, насосы,
+  взрывчатка, паровой осёл), `REPLACE:pm_company_headquarter_*` (16 ванильных PM штаб-квартиры с ослабленными акциями
+  капиталистов). PM «частного владения» (выпуск «акций») — в `_archive/ef_stock_goods_output/` (Д.R4б.8).
 - `common/production_methods/15_ef_bank.txt` — 6 PM стандарта
   (`pm_<fiat|silver|bimetallism|gold|gold_exchange|external_exchange>_standard_bank_money_currency`: выход
   `goods_output_bond_add` и `country_minting_add`), `pm_no_monetary_policy`/`pm_revaluation`/`pm_devaluation`.
@@ -163,10 +161,9 @@
 ## Прочие файлы E&F
 - Здания и PM добычи и сельского хозяйства: `common/buildings/ef_02_agro.txt`, `common/buildings/ef_04_plantations.txt`,
   `common/buildings/ef_09_misc_resource.txt` `common/buildings/ef_06_urban_center.txt` (`INJECT` групп PM ликвидности и
-  акций в ванильные здания); PM и группы — `common/production_methods/02_ef_agro.txt`,
-  `common/production_methods/03_ef_mines.txt`, `common/production_methods/11_ef_private_infrastructure.txt`,
-  `common/production_method_groups/02_ef_agro.txt`, `common/production_method_groups/03_ef_mine.txt`,
-  `common/production_method_groups/11_ef_private_infrastructure.txt`.
+  акций в ванильные здания); PM и группы — `common/production_methods/03_ef_mines.txt`,
+  `common/production_methods/11_ef_private_infrastructure.txt`, `common/production_method_groups/03_ef_mine.txt`
+  (методы «акций» — в `_archive/ef_stock_goods_output/`).
 - Типы модификаторов: `common/modifier_type_definitions/00_ef_country_modifier_types.txt`,
   `common/modifier_type_definitions/00_ef_state_modifier_types.txt`; модификаторы:
   `common/static_modifiers/00_ef_static_modifier.txt` (`INJECT:base_values`: чеканка, наличность зданий),

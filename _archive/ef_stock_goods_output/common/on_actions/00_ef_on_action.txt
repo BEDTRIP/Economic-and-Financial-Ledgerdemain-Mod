@@ -1,0 +1,17 @@
+# from common/on_actions/00_ef_on_action.txt, lines 54-58
+on_production_method_changed = {
+	on_actions = {
+    	ef_on_production_method_changed
+    }
+}
+
+# from common/on_actions/00_ef_on_action.txt, lines 331-338
+ef_on_production_method_changed = {
+	effect = {
+		# only the building that changed its method (scope -- building); the country-wide sweep
+		# private_ownership_production_stocks stays in the yearly pulse. Rules and the financial centre call --
+		# zz_ef_pm_stock_building (common/scripted_effects/ld_pm_stock_hook.txt).
+		zz_ef_pm_stock_building = yes
+	}
+}
+

@@ -19,8 +19,8 @@
 - `common/building_groups/zz_PSC_building_groups.txt` — `bg_construction` (частная, parent `bg_private_infrastructure`),
   `bg_construction_regulator`.
 - `common/production_methods/zz_PSC_construction.txt` — PM сектора
-  `pm_wooden/iron_frame/steel_frame/arc_welded_buildings` (вход: материалы; выход: `*_construction` + E&F
-  `manufacture_stock`), PM регулятора `pm_{wood,iron,steel,arc_welded}_point_conversion` (`country_construction_add`).
+  `pm_wooden/iron_frame/steel_frame/arc_welded_buildings` (вход: материалы; выход: `*_construction`; выпуск
+  «акций» E&F `manufacture_stock` снят — Д.R4б.8), PM регулятора `pm_{wood,iron,steel,arc_welded}_point_conversion` (`country_construction_add`).
 - `common/production_method_groups/PSC_construction.txt` — `pmg_construction_regulator`.
 - `common/goods/PSC_goods.txt` — `wood_/iron_/steel_/arc_welded_construction`.
 - `common/defines/PSC_defines.txt` — `CONSTRUCTION_CAMP_BUILDING = building_construction_regulator`.
@@ -85,8 +85,7 @@
 - `common/building_groups/00_ef_building_groups.txt:123` — группа `bg_ef_private_construction` (зданий в ней нет; на неё
   ссылается запись `bg_ef_private_construction_score` в `INJECT:building_financial_district`,
   `common/buildings/ef_11_private_infrastructure.txt:39`).
-- `common/buildings/ef_11_private_infrastructure.txt` — не здание: `INJECT` PMG (`pmg_market_liquidity`,
-  `pmg_private_ownership_*`) в порт/железную дорогу/торговый центр и `investment_scores` в `building_financial_district`
+- `common/buildings/ef_11_private_infrastructure.txt` — не здание: `INJECT` PMG `pmg_market_liquidity` в порт/железную дорогу/торговый центр и `investment_scores` в `building_financial_district`
   (`bg_construction_score` живой, `bg_ef_private_construction_score` — в группу без зданий).
 - `common/script_values/00_financial_scripted_value.txt:123-190` — переопределены:
   `building_urban_center_lvl_by_base_rate` (лимит), `building_ef_private_construction_lvl` (= сумма уровней
@@ -161,7 +160,7 @@
   входит через `zz_ef_rate_constr_applied`. Пишут деньги: только `zz_pb_ef_css_downsize_one` (выкуп сектора:
   `add_treasury -X` и `add_investment_pool +X`, X = доля частных x уровень x 15000, перенос казна -> пул без
   сторон-контрагентов).
-- Сектор производит E&F-товар `manufacture_stock` (`goods_output_manufacture_stock_add`) и содержит
+- Сектор «акций» не выпускает (Д.R4б.8) и содержит
   `pmg_market_liquidity` (`pm_market_liquidity_currency`, сохраняется при сносе уровня).
 - Покупатели `*_construction`: регулятор (очки), домохозяйства (`popneed_household_construction`), ЖКХ (4 PM городских
   центров).

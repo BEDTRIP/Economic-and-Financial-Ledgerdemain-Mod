@@ -1,0 +1,1692 @@
+# from common/scripted_effects/01_financial_scripted_effects.txt, lines 20285-20296
+# Every state with a financial centre: a stock exchange method on while the country's market sells that stock and the
+# economy is not cooperative or command, off otherwise (R8б.4: by the building group, the types' list --
+# zz_ef_fc_activate_pm, scripted_effects/ld_fc_types.txt).
+financial_center_production_methods = {
+	every_scope_state = {
+		limit = { building_financial_centre_any = yes }
+		zz_ef_fc_pm_switch = { K = manufacture }
+		zz_ef_fc_pm_switch = { K = agricultural }
+		zz_ef_fc_pm_switch = { K = mining }
+		zz_ef_fc_pm_switch = { K = railroad }
+	}
+}
+
+# from common/scripted_effects/01_financial_scripted_effects.txt, lines 20297-20333
+# State scope: the method pair pm_$K$_stock_exchange / pm_no_$K$_stock_exchange of the state's financial centres.
+zz_ef_fc_pm_switch = {
+	if = {
+		limit = {
+			owner = {
+				$K$_stock_market_goods_sell_orders > 0
+				NOT = {
+					OR = {
+						has_law = law_type:law_cooperative_ownership
+						has_law = law_type:law_command_economy
+					}
+				}
+			}
+			any_scope_building = {
+				is_building_group = bg_financial_centre
+				has_active_production_method = pm_no_$K$_stock_exchange
+			}
+		}
+		zz_ef_fc_activate_pm = { PM = pm_$K$_stock_exchange }
+	}
+	if = {
+		limit = {
+			owner = {
+				OR = {
+					has_law = law_type:law_cooperative_ownership
+					has_law = law_type:law_command_economy
+					$K$_stock_market_goods_sell_orders = 0
+				}
+			}
+			any_scope_building = {
+				is_building_group = bg_financial_centre
+				has_active_production_method = pm_$K$_stock_exchange
+			}
+		}
+		zz_ef_fc_activate_pm = { PM = pm_no_$K$_stock_exchange }
+	}
+}
+
+# from common/scripted_effects/01_financial_scripted_effects.txt, lines 20334-21970
+private_ownership_production_stocks = {
+	every_scope_state = {
+
+		################
+		#building_food_industry
+		if = {
+			limit = {
+				has_building = building_food_industry
+				b:building_food_industry  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_food_industry
+					production_method = pm_no_private_ownership_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_food_industry
+				production_method = pm_private_ownership_majority_manufacture_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_food_industry
+				b:building_food_industry  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_food_industry
+					production_method = pm_private_ownership_majority_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_food_industry
+				production_method = pm_no_private_ownership_manufacture_stock
+			}
+		}
+		#building_textile_mill
+		if = {
+			limit = {
+				has_building = building_textile_mill
+				b:building_textile_mill  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_textile_mill
+					production_method = pm_no_private_ownership_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_textile_mill
+				production_method = pm_private_ownership_majority_manufacture_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_textile_mill
+				b:building_textile_mill  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_textile_mill
+					production_method = pm_private_ownership_majority_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_textile_mill
+				production_method = pm_no_private_ownership_manufacture_stock
+			}
+		}
+		#building_furniture_manufactory
+		if = {
+			limit = {
+				has_building = building_furniture_manufactory
+				b:building_furniture_manufactory  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_furniture_manufactory
+					production_method = pm_no_private_ownership_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_furniture_manufactory
+				production_method = pm_private_ownership_majority_manufacture_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_furniture_manufactory
+				b:building_furniture_manufactory  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_furniture_manufactory
+					production_method = pm_private_ownership_majority_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_furniture_manufactory
+				production_method = pm_no_private_ownership_manufacture_stock
+			}
+		}
+		#building_glassworks
+		if = {
+			limit = {
+				has_building = building_glassworks
+				b:building_glassworks  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_glassworks
+					production_method = pm_no_private_ownership_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_glassworks
+				production_method = pm_private_ownership_majority_manufacture_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_glassworks
+				b:building_glassworks  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_glassworks
+					production_method = pm_private_ownership_majority_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_glassworks
+				production_method = pm_no_private_ownership_manufacture_stock
+			}
+		}
+		#building_tooling_workshop
+		if = {
+			limit = {
+				has_building = building_tooling_workshop
+				b:building_tooling_workshop  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_tooling_workshop
+					production_method = pm_no_private_ownership_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_tooling_workshop
+				production_method = pm_private_ownership_majority_manufacture_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_tooling_workshop
+				b:building_tooling_workshop  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_tooling_workshop
+					production_method = pm_private_ownership_majority_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_tooling_workshop
+				production_method = pm_no_private_ownership_manufacture_stock
+			}
+		}
+		#building_paper_mill
+		if = {
+			limit = {
+				has_building = building_paper_mill
+				b:building_paper_mill  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_paper_mill
+					production_method = pm_no_private_ownership_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_paper_mill
+				production_method = pm_private_ownership_majority_manufacture_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_paper_mill
+				b:building_paper_mill  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_paper_mill
+					production_method = pm_private_ownership_majority_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_paper_mill
+				production_method = pm_no_private_ownership_manufacture_stock
+			}
+		}
+		#building_chemical_plant
+		if = {
+			limit = {
+				has_building = building_chemical_plant
+				b:building_chemical_plant  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_chemical_plant
+					production_method = pm_no_private_ownership_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_chemical_plant
+				production_method = pm_private_ownership_majority_manufacture_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_chemical_plant
+				b:building_chemical_plant  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_chemical_plant
+					production_method = pm_private_ownership_majority_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_chemical_plant
+				production_method = pm_no_private_ownership_manufacture_stock
+			}
+		}
+		#building_explosives_factory
+		if = {
+			limit = {
+				has_building = building_explosives_factory
+				b:building_explosives_factory  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_explosives_factory
+					production_method = pm_no_private_ownership_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_explosives_factory
+				production_method = pm_private_ownership_majority_manufacture_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_explosives_factory
+				b:building_explosives_factory  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_explosives_factory
+					production_method = pm_private_ownership_majority_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_explosives_factory
+				production_method = pm_no_private_ownership_manufacture_stock
+			}
+		}
+		#building_synthetics_plant
+		if = {
+			limit = {
+				has_building = building_synthetics_plant
+				b:building_synthetics_plant  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_synthetics_plant
+					production_method = pm_no_private_ownership_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_synthetics_plant
+				production_method = pm_private_ownership_majority_manufacture_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_synthetics_plant
+				b:building_synthetics_plant  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_synthetics_plant
+					production_method = pm_private_ownership_majority_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_synthetics_plant
+				production_method = pm_no_private_ownership_manufacture_stock
+			}
+		}
+		#building_steel_mill
+		if = {
+			limit = {
+				has_building = building_steel_mill
+				b:building_steel_mill  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_steel_mill
+					production_method = pm_no_private_ownership_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_steel_mill
+				production_method = pm_private_ownership_majority_manufacture_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_steel_mill
+				b:building_steel_mill  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_steel_mill
+					production_method = pm_private_ownership_majority_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_steel_mill
+				production_method = pm_no_private_ownership_manufacture_stock
+			}
+		}
+		#building_motor_industry
+		if = {
+			limit = {
+				has_building = building_motor_industry
+				b:building_motor_industry  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_motor_industry
+					production_method = pm_no_private_ownership_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_motor_industry
+				production_method = pm_private_ownership_majority_manufacture_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_motor_industry
+				b:building_motor_industry  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_motor_industry
+					production_method = pm_private_ownership_majority_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_motor_industry
+				production_method = pm_no_private_ownership_manufacture_stock
+			}
+		}
+		#building_shipyard
+		if = {
+			limit = {
+				has_building = building_shipyard
+				b:building_shipyard  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_shipyard
+					production_method = pm_no_private_ownership_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_shipyard
+				production_method = pm_private_ownership_majority_manufacture_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_shipyard
+				b:building_shipyard  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_shipyard
+					production_method = pm_private_ownership_majority_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_shipyard
+				production_method = pm_no_private_ownership_manufacture_stock
+			}
+		}
+		#building_automotive_industry
+		if = {
+			limit = {
+				has_building = building_automotive_industry
+				b:building_automotive_industry  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_automotive_industry
+					production_method = pm_no_private_ownership_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_automotive_industry
+				production_method = pm_private_ownership_majority_manufacture_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_automotive_industry
+				b:building_automotive_industry  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_automotive_industry
+					production_method = pm_private_ownership_majority_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_automotive_industry
+				production_method = pm_no_private_ownership_manufacture_stock
+			}
+		}
+		#building_electrics_industry
+		if = {
+			limit = {
+				has_building = building_electrics_industry
+				b:building_electrics_industry  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_electrics_industry
+					production_method = pm_no_private_ownership_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_electrics_industry
+				production_method = pm_private_ownership_majority_manufacture_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_electrics_industry
+				b:building_electrics_industry  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_electrics_industry
+					production_method = pm_private_ownership_majority_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_electrics_industry
+				production_method = pm_no_private_ownership_manufacture_stock
+			}
+		}
+		#building_arms_industry
+		if = {
+			limit = {
+				has_building = building_arms_industry
+				b:building_arms_industry  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_arms_industry
+					production_method = pm_no_private_ownership_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_arms_industry
+				production_method = pm_private_ownership_majority_manufacture_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_arms_industry
+				b:building_arms_industry  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_arms_industry
+					production_method = pm_private_ownership_majority_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_arms_industry
+				production_method = pm_no_private_ownership_manufacture_stock
+			}
+		}
+		#building_artillery_foundry
+		if = {
+			limit = {
+				has_building = building_artillery_foundry
+				b:building_artillery_foundry  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_artillery_foundry
+					production_method = pm_no_private_ownership_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_artillery_foundry
+				production_method = pm_private_ownership_majority_manufacture_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_artillery_foundry
+				b:building_artillery_foundry  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_artillery_foundry
+					production_method = pm_private_ownership_majority_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_artillery_foundry
+				production_method = pm_no_private_ownership_manufacture_stock
+			}
+		}
+		#building_munition_plant
+		if = {
+			limit = {
+				has_building = building_munition_plant
+				b:building_munition_plant  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_munition_plant
+					production_method = pm_no_private_ownership_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_munition_plant
+				production_method = pm_private_ownership_majority_manufacture_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_munition_plant
+				b:building_munition_plant  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_munition_plant
+					production_method = pm_private_ownership_majority_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_munition_plant
+				production_method = pm_no_private_ownership_manufacture_stock
+			}
+		}
+
+		################
+		#building_rye_farm
+		if = {
+			limit = {
+				has_building = building_rye_farm
+				b:building_rye_farm  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_rye_farm
+					production_method = pm_no_private_ownership_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_rye_farm
+				production_method = pm_private_ownership_majority_agricultural_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_rye_farm
+				b:building_rye_farm  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_rye_farm
+					production_method = pm_private_ownership_majority_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_rye_farm
+				production_method = pm_no_private_ownership_agricultural_stock
+			}
+		}
+		#building_wheat_farm
+		if = {
+			limit = {
+				has_building = building_wheat_farm
+				b:building_wheat_farm  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_wheat_farm
+					production_method = pm_no_private_ownership_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_wheat_farm
+				production_method = pm_private_ownership_majority_agricultural_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_wheat_farm
+				b:building_wheat_farm  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_wheat_farm
+					production_method = pm_private_ownership_majority_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_wheat_farm
+				production_method = pm_no_private_ownership_agricultural_stock
+			}
+		}
+		#building_rice_farm
+		if = {
+			limit = {
+				has_building = building_rice_farm
+				b:building_rice_farm  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_rice_farm
+					production_method = pm_no_private_ownership_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_rice_farm
+				production_method = pm_private_ownership_majority_agricultural_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_rice_farm
+				b:building_rice_farm  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_rice_farm
+					production_method = pm_private_ownership_majority_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_rice_farm
+				production_method = pm_no_private_ownership_agricultural_stock
+			}
+		}
+		#building_maize_farm
+		if = {
+			limit = {
+				has_building = building_maize_farm
+				b:building_maize_farm  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_maize_farm
+					production_method = pm_no_private_ownership_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_maize_farm
+				production_method = pm_private_ownership_majority_agricultural_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_maize_farm
+				b:building_maize_farm  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_maize_farm
+					production_method = pm_private_ownership_majority_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_maize_farm
+				production_method = pm_no_private_ownership_agricultural_stock
+			}
+		}
+		#building_millet_farm
+		if = {
+			limit = {
+				has_building = building_millet_farm
+				b:building_millet_farm  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_millet_farm
+					production_method = pm_no_private_ownership_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_millet_farm
+				production_method = pm_private_ownership_majority_agricultural_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_millet_farm
+				b:building_millet_farm  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_millet_farm
+					production_method = pm_private_ownership_majority_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_millet_farm
+				production_method = pm_no_private_ownership_agricultural_stock
+			}
+		}
+		#building_livestock_ranch
+		if = {
+			limit = {
+				has_building = building_livestock_ranch
+				b:building_livestock_ranch  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_livestock_ranch
+					production_method = pm_no_private_ownership_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_livestock_ranch
+				production_method = pm_private_ownership_majority_agricultural_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_livestock_ranch
+				b:building_livestock_ranch  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_livestock_ranch
+					production_method = pm_private_ownership_majority_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_livestock_ranch
+				production_method = pm_no_private_ownership_agricultural_stock
+			}
+		}
+		#building_vineyard
+		if = {
+			limit = {
+				has_building = building_vineyard
+				b:building_vineyard  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_vineyard
+					production_method = pm_no_private_ownership_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_vineyard
+				production_method = pm_private_ownership_majority_agricultural_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_vineyard
+				b:building_vineyard  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_vineyard
+					production_method = pm_private_ownership_majority_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_vineyard
+				production_method = pm_no_private_ownership_agricultural_stock
+			}
+		}
+		#building_logging_camp
+		if = {
+			limit = {
+				has_building = building_logging_camp
+				b:building_logging_camp  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_logging_camp
+					production_method = pm_no_private_ownership_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_logging_camp
+				production_method = pm_private_ownership_majority_agricultural_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_logging_camp
+				b:building_logging_camp  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_logging_camp
+					production_method = pm_private_ownership_majority_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_logging_camp
+				production_method = pm_no_private_ownership_agricultural_stock
+			}
+		}
+		#building_rubber_plantation
+		if = {
+			limit = {
+				has_building = building_rubber_plantation
+				b:building_rubber_plantation  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_rubber_plantation
+					production_method = pm_no_private_ownership_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_rubber_plantation
+				production_method = pm_private_ownership_majority_agricultural_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_rubber_plantation
+				b:building_rubber_plantation  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_rubber_plantation
+					production_method = pm_private_ownership_majority_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_rubber_plantation
+				production_method = pm_no_private_ownership_agricultural_stock
+			}
+		}
+		#building_fishing_wharf
+		if = {
+			limit = {
+				has_building = building_fishing_wharf
+				b:building_fishing_wharf  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_fishing_wharf
+					production_method = pm_no_private_ownership_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_fishing_wharf
+				production_method = pm_private_ownership_majority_agricultural_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_fishing_wharf
+				b:building_fishing_wharf  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_fishing_wharf
+					production_method = pm_private_ownership_majority_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_fishing_wharf
+				production_method = pm_no_private_ownership_agricultural_stock
+			}
+		}
+		#building_whaling_station
+		if = {
+			limit = {
+				has_building = building_whaling_station
+				b:building_whaling_station  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_whaling_station
+					production_method = pm_no_private_ownership_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_whaling_station
+				production_method = pm_private_ownership_majority_agricultural_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_whaling_station
+				b:building_whaling_station  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_whaling_station
+					production_method = pm_private_ownership_majority_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_whaling_station
+				production_method = pm_no_private_ownership_agricultural_stock
+			}
+		}
+		#building_coffee_plantation
+		if = {
+			limit = {
+				has_building = building_coffee_plantation
+				b:building_coffee_plantation  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_coffee_plantation
+					production_method = pm_no_private_ownership_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_coffee_plantation
+				production_method = pm_private_ownership_majority_agricultural_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_coffee_plantation
+				b:building_coffee_plantation  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_coffee_plantation
+					production_method = pm_private_ownership_majority_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_coffee_plantation
+				production_method = pm_no_private_ownership_agricultural_stock
+			}
+		}
+		#building_cotton_plantation
+		if = {
+			limit = {
+				has_building = building_cotton_plantation
+				b:building_cotton_plantation  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_cotton_plantation
+					production_method = pm_no_private_ownership_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_cotton_plantation
+				production_method = pm_private_ownership_majority_agricultural_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_cotton_plantation
+				b:building_cotton_plantation  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_cotton_plantation
+					production_method = pm_private_ownership_majority_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_cotton_plantation
+				production_method = pm_no_private_ownership_agricultural_stock
+			}
+		}
+		#building_dye_plantation
+		if = {
+			limit = {
+				has_building = building_dye_plantation
+				b:building_dye_plantation  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_dye_plantation
+					production_method = pm_no_private_ownership_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_dye_plantation
+				production_method = pm_private_ownership_majority_agricultural_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_dye_plantation
+				b:building_dye_plantation  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_dye_plantation
+					production_method = pm_private_ownership_majority_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_dye_plantation
+				production_method = pm_no_private_ownership_agricultural_stock
+			}
+		}
+		#building_opium_plantation
+		if = {
+			limit = {
+				has_building = building_opium_plantation
+				b:building_opium_plantation  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_opium_plantation
+					production_method = pm_no_private_ownership_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_opium_plantation
+				production_method = pm_private_ownership_majority_agricultural_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_opium_plantation
+				b:building_opium_plantation  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_opium_plantation
+					production_method = pm_private_ownership_majority_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_opium_plantation
+				production_method = pm_no_private_ownership_agricultural_stock
+			}
+		}
+		#building_tea_plantation
+		if = {
+			limit = {
+				has_building = building_tea_plantation
+				b:building_tea_plantation  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_tea_plantation
+					production_method = pm_no_private_ownership_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_tea_plantation
+				production_method = pm_private_ownership_majority_agricultural_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_tea_plantation
+				b:building_tea_plantation  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_tea_plantation
+					production_method = pm_private_ownership_majority_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_tea_plantation
+				production_method = pm_no_private_ownership_agricultural_stock
+			}
+		}
+		#building_tobacco_plantation
+		if = {
+			limit = {
+				has_building = building_tobacco_plantation
+				b:building_tobacco_plantation  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_tobacco_plantation
+					production_method = pm_no_private_ownership_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_tobacco_plantation
+				production_method = pm_private_ownership_majority_agricultural_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_tobacco_plantation
+				b:building_tobacco_plantation  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_tobacco_plantation
+					production_method = pm_private_ownership_majority_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_tobacco_plantation
+				production_method = pm_no_private_ownership_agricultural_stock
+			}
+		}
+		#building_sugar_plantation
+		if = {
+			limit = {
+				has_building = building_sugar_plantation
+				b:building_sugar_plantation  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_sugar_plantation
+					production_method = pm_no_private_ownership_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_sugar_plantation
+				production_method = pm_private_ownership_majority_agricultural_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_sugar_plantation
+				b:building_sugar_plantation  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_sugar_plantation
+					production_method = pm_private_ownership_majority_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_sugar_plantation
+				production_method = pm_no_private_ownership_agricultural_stock
+			}
+		}
+		#building_banana_plantation
+		if = {
+			limit = {
+				has_building = building_banana_plantation
+				b:building_banana_plantation  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_banana_plantation
+					production_method = pm_no_private_ownership_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_banana_plantation
+				production_method = pm_private_ownership_majority_agricultural_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_banana_plantation
+				b:building_banana_plantation  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_banana_plantation
+					production_method = pm_private_ownership_majority_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_banana_plantation
+				production_method = pm_no_private_ownership_agricultural_stock
+			}
+		}
+		#building_silk_plantation
+		if = {
+			limit = {
+				has_building = building_silk_plantation
+				b:building_silk_plantation  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_silk_plantation
+					production_method = pm_no_private_ownership_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_silk_plantation
+				production_method = pm_private_ownership_majority_agricultural_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_silk_plantation
+				b:building_silk_plantation  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_silk_plantation
+					production_method = pm_private_ownership_majority_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_silk_plantation
+				production_method = pm_no_private_ownership_agricultural_stock
+			}
+		}
+		#building_vineyard
+		if = {
+			limit = {
+				has_building = building_vineyard
+				b:building_vineyard  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_vineyard
+					production_method = pm_no_private_ownership_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_vineyard
+				production_method = pm_private_ownership_majority_agricultural_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_vineyard
+				b:building_vineyard  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_vineyard
+					production_method = pm_private_ownership_majority_agricultural_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_vineyard
+				production_method = pm_no_private_ownership_agricultural_stock
+			}
+		}
+
+		################
+		#building_coal_mine
+		if = {
+			limit = {
+				has_building = building_coal_mine
+				b:building_coal_mine  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_coal_mine
+					production_method = pm_no_private_ownership_mining_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_coal_mine
+				production_method = pm_private_ownership_majority_mining_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_coal_mine
+				b:building_coal_mine  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_coal_mine
+					production_method = pm_private_ownership_majority_mining_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_coal_mine
+				production_method = pm_no_private_ownership_mining_stock
+			}
+		}
+		#building_iron_mine
+		if = {
+			limit = {
+				has_building = building_iron_mine
+				b:building_iron_mine  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_iron_mine
+					production_method = pm_no_private_ownership_mining_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_iron_mine
+				production_method = pm_private_ownership_majority_mining_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_iron_mine
+				b:building_iron_mine  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_iron_mine
+					production_method = pm_private_ownership_majority_mining_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_iron_mine
+				production_method = pm_no_private_ownership_mining_stock
+			}
+		}
+		#building_lead_mine
+		if = {
+			limit = {
+				has_building = building_lead_mine
+				b:building_lead_mine  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_lead_mine
+					production_method = pm_no_private_ownership_mining_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_lead_mine
+				production_method = pm_private_ownership_majority_mining_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_lead_mine
+				b:building_lead_mine  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_lead_mine
+					production_method = pm_private_ownership_majority_mining_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_lead_mine
+				production_method = pm_no_private_ownership_mining_stock
+			}
+		}
+		#building_sulfur_mine
+		if = {
+			limit = {
+				has_building = building_sulfur_mine
+				b:building_sulfur_mine  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_sulfur_mine
+					production_method = pm_no_private_ownership_mining_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_sulfur_mine
+				production_method = pm_private_ownership_majority_mining_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_sulfur_mine
+				b:building_sulfur_mine  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_sulfur_mine
+					production_method = pm_private_ownership_majority_mining_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_sulfur_mine
+				production_method = pm_no_private_ownership_mining_stock
+			}
+		}
+		#building_gold_mine
+		if = {
+			limit = {
+				has_building = building_gold_mine
+				b:building_gold_mine  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_gold_mine
+					production_method = pm_no_private_ownership_mining_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_gold_mine
+				production_method = pm_private_ownership_majority_mining_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_gold_mine
+				b:building_gold_mine  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_gold_mine
+					production_method = pm_private_ownership_majority_mining_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_gold_mine
+				production_method = pm_no_private_ownership_mining_stock
+			}
+		}
+		#building_silver_mine
+		if = {
+			limit = {
+				has_building = building_silver_mine
+				b:building_silver_mine  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_silver_mine
+					production_method = pm_no_private_ownership_mining_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_silver_mine
+				production_method = pm_private_ownership_majority_mining_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_silver_mine
+				b:building_silver_mine  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_silver_mine
+					production_method = pm_private_ownership_majority_mining_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_silver_mine
+				production_method = pm_no_private_ownership_mining_stock
+			}
+		}
+
+		################
+		#building_oil_rig
+		if = {
+			limit = {
+				has_building = building_oil_rig
+				b:building_oil_rig  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_oil_rig
+					production_method = pm_no_private_ownership_mining_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_oil_rig
+				production_method = pm_private_ownership_majority_mining_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_oil_rig
+				b:building_oil_rig  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_oil_rig
+					production_method = pm_private_ownership_majority_mining_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_oil_rig
+				production_method = pm_no_private_ownership_mining_stock
+			}
+		}
+
+		################
+		#building_railway
+		if = {
+			limit = {
+				has_building = building_railway
+				b:building_railway  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_railway
+					production_method = pm_no_private_ownership_railroad_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_railway
+				production_method = pm_private_ownership_majority_railroad_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_railway
+				b:building_railway  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_railway
+					production_method = pm_private_ownership_majority_railroad_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_railway
+				production_method = pm_no_private_ownership_railroad_stock
+			}
+		}
+
+		################
+		#building_power_plant
+		if = {
+			limit = {
+				has_building = building_power_plant
+				b:building_power_plant  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_power_plant
+					production_method = pm_no_private_ownership_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_power_plant
+				production_method = pm_private_ownership_majority_manufacture_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_power_plant
+				b:building_power_plant  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_power_plant
+					production_method = pm_private_ownership_majority_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_power_plant
+				production_method = pm_no_private_ownership_manufacture_stock
+			}
+		}
+
+		################
+		#building_trade_center
+		if = {
+			limit = {
+				has_building = building_trade_center
+				b:building_trade_center  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_trade_center
+					production_method = pm_no_private_ownership_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_trade_center
+				production_method = pm_private_ownership_majority_manufacture_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_trade_center
+				b:building_trade_center  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_trade_center
+					production_method = pm_private_ownership_majority_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_trade_center
+				production_method = pm_no_private_ownership_manufacture_stock
+			}
+		}
+
+		################
+		#building_port 
+		if = {
+			limit = {
+				has_building = building_port
+				b:building_port  = {
+					private_ownership_fraction > 0.5
+				}
+				is_production_method_active = {
+					building_type = building_port
+					production_method = pm_no_private_ownership_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_port
+				production_method = pm_private_ownership_majority_manufacture_stock
+			}
+		}
+		if = {
+			limit = {
+				has_building = building_port
+				b:building_port  = {
+					private_ownership_fraction <= 0.5
+				}
+				is_production_method_active = {
+					building_type = building_port
+					production_method = pm_private_ownership_majority_manufacture_stock
+				}
+			}
+			activate_production_method = {
+				building_type = building_port
+				production_method = pm_no_private_ownership_manufacture_stock
+			}
+		}
+	}
+}
+
