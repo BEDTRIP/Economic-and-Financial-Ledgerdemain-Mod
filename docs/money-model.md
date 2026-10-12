@@ -100,7 +100,8 @@
 | требования населения | `zz_ef_pop_claims_stocks`, `_bonds`, `_private` | население | по нулям (R6, R7) |
 | позиция клиринга недели | `zz_ef_clr_pos` (золото) | страна | `zz_ef_clr_step`, снимается расчётом `zz_ef_clr_settle` (`clearing-fx.md`) |
 | металл денежной власти / банков / населения | `zz_ef_am_gold` / `zz_ef_am_silver` (Д.R4а.2), `zz_ef_bankm_*`, `zz_ef_popm_*` | — | `ld_metal_accounts.txt`; у ЦБ биметаллизма — арбитраж через биржу (`zz_ef_f_mt_arb_g/_s`, `exchange-companies.md`) |
-Счета, которых нет, заводит `zz_ef_registry_init` из `zz_ef_country_init` — первый заход планировщика (раз за игру,
+Счета книги банков — сумма книг субъектов-банков (Д.R4б.2, `docs/banks.md`: «Книга по банкам»): у каждого субъекта —
+те же счета, они догоняют счета страны на её шаге после сверки. Счета, которых нет, заводит `zz_ef_registry_init` из `zz_ef_country_init` — первый заход планировщика (раз за игру,
 признак `zz_ef_registry`).
 
 **Проводка** — пара счетов, одна сумма: `zz_ef_post = { FROM TO V }` (наш → наш), `zz_ef_post_from_eng = { ENG TO V }`,

@@ -43,14 +43,16 @@ zz_ef_bk_subj_step = {
 			}
 		}
 	}
-	# gone: a company subject without "Bank" levels -- closed (its accounts go to the private bankers with the bank
-	# book by subject, step 3)
+	# gone: a company subject without "Bank" levels -- its accounts and claims to «частные банкиры», the subject closed
 	every_company = {
 		limit = {
 			has_variable = zz_ef_bk_box
 			NOT = { zz_ef_bk_company_banks = yes }
 		}
-		var:zz_ef_bk_box = { destroy_container = yes }
+		var:zz_ef_bk_box = {
+			zz_ef_bk_accounts_move = { TO = scope:zz_ef_bk_c.var:zz_ef_bk_pri_box }
+			destroy_container = yes
+		}
 		remove_variable = zz_ef_bk_box
 	}
 	# the companies' levels within the private ones (the window lags a step; a company's levels abroad count here)
@@ -110,5 +112,339 @@ zz_ef_bk_box_create = {
 		set_variable = { name = zz_ef_bk_cty value = scope:zz_ef_bk_c }
 		set_variable = { name = zz_ef_bk_lv value = 0 }
 		set_variable = { name = zz_ef_bk_sh value = 0 }
+	}
+}
+
+# The bank book by subject (Д.R4б.2): every subject keeps its own accounts -- zz_ef_bk_dep (pops' deposits), _fdd (the
+# investment fund's), _nrd (foreign CBs'), _gvd (the treasury's), _cbd (debt to the CB), _cap (capital), _cc / _bc
+# (consumer / business loans), _bnd (parts of foreign bonds), _inv (fund shares and foreign money bought), _mg / _ms
+# (metal) -- and its maps of claims zz_ef_rq_bk_m / _b / _f (the country's maps' keys and kinds, ld_claims.txt). The
+# country's accounts stay the books' sum, written where they were; at the country's step each subject account follows
+# the country's: what moved since the last step (the residual R = country - sum of subjects) is shared -- new deposits
+# and loans by the subjects' capacity (share of levels) x the appeal of their rate, debt to the CB by the liquidity gap,
+# metal, bonds, fund shares and claims by the share of levels, a fall by the subjects' own balances; capital (signed)
+# always by earning assets. What rounding leaves goes to «частные банкиры», so the sum equals the country's account
+# every step (log EFJ|bank_sum). A subject that is gone with its company drops out of the sum -- its balances come back
+# as residual.
+#   rate (принято ночью): «госбанки» -- the country's deposit rate; a private subject -- plus a premium from its capital
+#   ratio against the country's (zz_ef_bk_prem_k x the gap, within zz_ef_bk_prem_max); the appeal of the rate
+#   1 + zz_ef_bk_appeal_k x premium.
+
+# COUNTRY scope, its weekly step after zz_ef_bk_subj_step.
+zz_ef_bk_book_step = {
+	save_temporary_scope_as = zz_ef_bk_c
+	set_variable = { name = zz_ef_bk_capr value = zz_ef_bk_cty_capr_v }
+	every_in_list = {
+		variable = zz_ef_bk_subj
+		set_variable = { name = zz_ef_bk_prem value = zz_ef_bk_prem_v }
+		set_variable = { name = zz_ef_bk_rate value = { value = scope:zz_ef_bk_c.zz_ef_deposit_rate add = var:zz_ef_bk_prem } }
+	}
+	zz_ef_bk_alloc = { A = dep V = zz_ef_ledger_deposits_v W = zz_ef_bk_w_dep_v BYW = no }
+	zz_ef_bk_alloc = { A = fdd V = zz_ef_fd_dep_v W = zz_ef_bk_w_dep_v BYW = no }
+	zz_ef_bk_alloc = { A = nrd V = zz_ef_nr_dep_v W = zz_ef_bk_w_dep_v BYW = no }
+	zz_ef_bk_alloc = { A = gvd V = zz_ef_bk_c_gvd_v W = zz_ef_bk_w_dep_v BYW = no }
+	zz_ef_bk_alloc = { A = cc V = zz_ef_bk_c_cc_v W = zz_ef_bk_w_dep_v BYW = no }
+	zz_ef_bk_alloc = { A = bc V = zz_ef_bk_c_bc_v W = zz_ef_bk_w_dep_v BYW = no }
+	zz_ef_bk_alloc = { A = bnd V = zz_ef_bank_bonds W = zz_ef_bk_w_lv_v BYW = no }
+	zz_ef_bk_alloc = { A = inv V = zz_ef_bk_c_inv_v W = zz_ef_bk_w_lv_v BYW = no }
+	zz_ef_bk_alloc = { A = mg V = zz_ef_bankm_gold W = zz_ef_bk_w_lv_v BYW = no }
+	zz_ef_bk_alloc = { A = ms V = zz_ef_bankm_silver W = zz_ef_bk_w_lv_v BYW = no }
+	zz_ef_bk_alloc = { A = cbd V = zz_ef_bk_c_cbd_v W = zz_ef_bk_w_cbd_v BYW = no }
+	zz_ef_bk_alloc = { A = cap V = zz_ef_bk_c_cap_v W = zz_ef_bk_w_cap_v BYW = yes }
+	zz_ef_bk_map_alloc = { K = m }
+	zz_ef_bk_map_alloc = { K = b }
+	zz_ef_bk_map_alloc = { K = f }
+	if = {
+		limit = { zz_ef_logs_on = yes }
+		zz_ef_bk_sum_check = yes
+		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|bank_sum|diff [THIS.GetCountry.MakeScope.Var('zz_ef_bk_diff').GetValue|2]|map_diff [THIS.GetCountry.MakeScope.Var('zz_ef_bk_mdiff').GetValue|2]|n [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bk_subj_n_v')|0]|r_cap [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_cap').GetValue|0]|r_dep [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_dep').GetValue|0]|r_cc [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_cc').GetValue|0]|r_bc [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_bc').GetValue|0]|r_cbd [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_cbd').GetValue|0]|r_inv [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_inv').GetValue|0]|r_mg [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_mg').GetValue|0]|capital [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bk_c_cap_v')|0]|cap_ratio [THIS.GetCountry.MakeScope.Var('zz_ef_bk_capr').GetValue|3]"
+		if = {
+			limit = { zz_ef_log_country = yes }
+			every_in_list = {
+				variable = zz_ef_bk_subj
+				zz_ef_bk_subj_log = yes
+			}
+		}
+	}
+}
+
+# COUNTRY scope, scope:zz_ef_bk_c: subject account zz_ef_bk_$A$ follows the country's value $V$ (a script value); the
+# residual by weight $W$ (a subject script value) when it grows, or always ($BYW$ = yes, a signed account), else by the
+# subjects' balances; the rest -- «частные банкиры». var:zz_ef_bk_r_$A$ -- the residual shared (the log).
+zz_ef_bk_alloc = {
+	set_variable = { name = zz_ef_bk_v value = $V$ }
+	set_variable = { name = zz_ef_bk_r value = var:zz_ef_bk_v }
+	set_variable = { name = zz_ef_bk_sw value = 0 }
+	set_variable = { name = zz_ef_bk_sb value = 0 }
+	every_in_list = {
+		variable = zz_ef_bk_subj
+		if = {
+			limit = { NOT = { has_variable = zz_ef_bk_$A$ } }
+			set_variable = { name = zz_ef_bk_$A$ value = 0 }
+		}
+		set_variable = { name = zz_ef_bk_w value = $W$ }
+		scope:zz_ef_bk_c = {
+			change_variable = { name = zz_ef_bk_r subtract = prev.var:zz_ef_bk_$A$ }
+			change_variable = { name = zz_ef_bk_sw add = prev.var:zz_ef_bk_w }
+			change_variable = { name = zz_ef_bk_sb add = prev.var:zz_ef_bk_$A$ }
+		}
+	}
+	set_variable = { name = zz_ef_bk_r_$A$ value = var:zz_ef_bk_r }
+	if = {
+		limit = {
+			var:zz_ef_bk_sw > 0
+			OR = {
+				var:zz_ef_bk_r > 0
+				always = $BYW$
+				var:zz_ef_bk_sb <= 0
+			}
+		}
+		every_in_list = {
+			variable = zz_ef_bk_subj
+			change_variable = {
+				name = zz_ef_bk_$A$
+				add = {
+					value = scope:zz_ef_bk_c.var:zz_ef_bk_r
+					multiply = var:zz_ef_bk_w
+					divide = scope:zz_ef_bk_c.var:zz_ef_bk_sw
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = { var:zz_ef_bk_sb > 0 }
+		every_in_list = {
+			variable = zz_ef_bk_subj
+			change_variable = {
+				name = zz_ef_bk_$A$
+				add = {
+					value = scope:zz_ef_bk_c.var:zz_ef_bk_r
+					multiply = var:zz_ef_bk_$A$
+					divide = scope:zz_ef_bk_c.var:zz_ef_bk_sb
+				}
+			}
+		}
+	}
+	set_variable = { name = zz_ef_bk_r value = var:zz_ef_bk_v }
+	every_in_list = {
+		variable = zz_ef_bk_subj
+		scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_r subtract = prev.var:zz_ef_bk_$A$ } }
+	}
+	var:zz_ef_bk_pri_box = { change_variable = { name = zz_ef_bk_$A$ add = scope:zz_ef_bk_c.var:zz_ef_bk_r } }
+}
+
+# COUNTRY scope, scope:zz_ef_bk_c: the subjects' maps zz_ef_rq_bk_$K$ follow the country's key by key -- a debtor gone
+# from the country's map goes from theirs; a key's residual by the share of levels when it grows, by their holdings when
+# it falls; the rest -- «частные банкиры».
+zz_ef_bk_map_alloc = {
+	every_in_list = {
+		variable = zz_ef_bk_subj
+		if = {
+			limit = { has_variable_map = zz_ef_rq_bk_$K$ }
+			save_temporary_scope_as = zz_ef_bk_s
+			zz_ef_rq_keys_take = { MAP = zz_ef_rq_bk_$K$ }
+			every_in_list = {
+				variable = zz_ef_rq_keys
+				save_temporary_scope_as = zz_ef_bk_d
+				if = {
+					limit = {
+						NOT = {
+							scope:zz_ef_bk_c = { is_key_in_variable_map = { name = zz_ef_rq_bk_$K$ target = scope:zz_ef_bk_d } }
+						}
+					}
+					scope:zz_ef_bk_s = { remove_from_variable_map = { name = zz_ef_rq_bk_$K$ key = scope:zz_ef_bk_d } }
+				}
+			}
+		}
+	}
+	if = {
+		limit = { has_variable_map = zz_ef_rq_bk_$K$ }
+		zz_ef_rq_keys_take = { MAP = zz_ef_rq_bk_$K$ }
+		every_in_list = {
+			variable = zz_ef_rq_keys
+			save_temporary_scope_as = zz_ef_bk_d
+			scope:zz_ef_bk_c = {
+				zz_ef_rq_get = { MAP = zz_ef_rq_bk_$K$ D = scope:zz_ef_bk_d }
+				set_variable = { name = zz_ef_bk_kv value = var:zz_ef_rq_h }
+				set_variable = { name = zz_ef_bk_kr value = var:zz_ef_rq_h }
+				set_variable = { name = zz_ef_bk_ks value = 0 }
+				every_in_list = {
+					variable = zz_ef_bk_subj
+					zz_ef_rq_get = { MAP = zz_ef_rq_bk_$K$ D = scope:zz_ef_bk_d }
+					set_variable = { name = zz_ef_bk_kh value = var:zz_ef_rq_h }
+					scope:zz_ef_bk_c = {
+						change_variable = { name = zz_ef_bk_kr subtract = prev.var:zz_ef_bk_kh }
+						change_variable = { name = zz_ef_bk_ks add = prev.var:zz_ef_bk_kh }
+					}
+				}
+				every_in_list = {
+					variable = zz_ef_bk_subj
+					set_variable = { name = zz_ef_bk_mv value = var:zz_ef_bk_kh }
+					if = {
+						limit = {
+							OR = {
+								scope:zz_ef_bk_c.var:zz_ef_bk_kr > 0
+								scope:zz_ef_bk_c.var:zz_ef_bk_ks <= 0
+							}
+						}
+						change_variable = { name = zz_ef_bk_mv add = { value = scope:zz_ef_bk_c.var:zz_ef_bk_kr multiply = var:zz_ef_bk_sh } }
+					}
+					else = {
+						change_variable = {
+							name = zz_ef_bk_mv
+							add = {
+								value = scope:zz_ef_bk_c.var:zz_ef_bk_kr
+								multiply = var:zz_ef_bk_kh
+								divide = scope:zz_ef_bk_c.var:zz_ef_bk_ks
+							}
+						}
+					}
+					zz_ef_bk_map_put = { K = $K$ }
+				}
+				# the rest -- «частные банкиры»
+				set_variable = { name = zz_ef_bk_kr value = var:zz_ef_bk_kv }
+				every_in_list = {
+					variable = zz_ef_bk_subj
+					zz_ef_rq_get = { MAP = zz_ef_rq_bk_$K$ D = scope:zz_ef_bk_d }
+					scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_kr subtract = prev.var:zz_ef_rq_h } }
+				}
+				var:zz_ef_bk_pri_box = {
+					zz_ef_rq_get = { MAP = zz_ef_rq_bk_$K$ D = scope:zz_ef_bk_d }
+					set_variable = { name = zz_ef_bk_mv value = { value = var:zz_ef_rq_h add = scope:zz_ef_bk_c.var:zz_ef_bk_kr } }
+					zz_ef_bk_map_put = { K = $K$ }
+				}
+			}
+		}
+	}
+}
+
+# SUBJECT scope, scope:zz_ef_bk_d -- the debtor: its holding on the map zz_ef_rq_bk_$K$ set to var:zz_ef_bk_mv (none if
+# not above 0).
+zz_ef_bk_map_put = {
+	if = {
+		limit = { is_key_in_variable_map = { name = zz_ef_rq_bk_$K$ target = scope:zz_ef_bk_d } }
+		remove_from_variable_map = { name = zz_ef_rq_bk_$K$ key = scope:zz_ef_bk_d }
+	}
+	if = {
+		limit = { var:zz_ef_bk_mv > 0 }
+		add_to_variable_map = { name = zz_ef_rq_bk_$K$ key = scope:zz_ef_bk_d value = zz_ef_bk_mv_v }
+	}
+}
+
+# COUNTRY scope: the books' sum against the country's accounts -- var:zz_ef_bk_diff = the sum of |country - subjects|
+# over the accounts, var:zz_ef_bk_mdiff -- over the maps' totals (0 both).
+zz_ef_bk_sum_check = {
+	set_variable = { name = zz_ef_bk_diff value = 0 }
+	zz_ef_bk_diff_add = { A = dep V = zz_ef_ledger_deposits_v }
+	zz_ef_bk_diff_add = { A = fdd V = zz_ef_fd_dep_v }
+	zz_ef_bk_diff_add = { A = nrd V = zz_ef_nr_dep_v }
+	zz_ef_bk_diff_add = { A = gvd V = zz_ef_bk_c_gvd_v }
+	zz_ef_bk_diff_add = { A = cc V = zz_ef_bk_c_cc_v }
+	zz_ef_bk_diff_add = { A = bc V = zz_ef_bk_c_bc_v }
+	zz_ef_bk_diff_add = { A = bnd V = zz_ef_bank_bonds }
+	zz_ef_bk_diff_add = { A = inv V = zz_ef_bk_c_inv_v }
+	zz_ef_bk_diff_add = { A = mg V = zz_ef_bankm_gold }
+	zz_ef_bk_diff_add = { A = ms V = zz_ef_bankm_silver }
+	zz_ef_bk_diff_add = { A = cbd V = zz_ef_bk_c_cbd_v }
+	zz_ef_bk_diff_add = { A = cap V = zz_ef_bk_c_cap_v }
+	set_variable = { name = zz_ef_bk_mdiff value = 0 }
+	zz_ef_bk_mdiff_add = { K = m }
+	zz_ef_bk_mdiff_add = { K = b }
+	zz_ef_bk_mdiff_add = { K = f }
+}
+zz_ef_bk_diff_add = {
+	set_variable = { name = zz_ef_bk_t1 value = $V$ }
+	every_in_list = {
+		variable = zz_ef_bk_subj
+		scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_t1 subtract = prev.var:zz_ef_bk_$A$ } }
+	}
+	if = { limit = { var:zz_ef_bk_t1 < 0 } change_variable = { name = zz_ef_bk_t1 multiply = -1 } }
+	change_variable = { name = zz_ef_bk_diff add = var:zz_ef_bk_t1 }
+}
+zz_ef_bk_mdiff_add = {
+	set_variable = { name = zz_ef_bk_t1 value = 0 }
+	if = {
+		limit = { has_variable_map = zz_ef_rq_bk_$K$ }
+		every_key_in_variable_map = {
+			variable = zz_ef_rq_bk_$K$
+			save_temporary_scope_as = zz_ef_bk_d
+			scope:zz_ef_bk_c = {
+				zz_ef_rq_get = { MAP = zz_ef_rq_bk_$K$ D = scope:zz_ef_bk_d }
+				change_variable = { name = zz_ef_bk_t1 add = var:zz_ef_rq_h }
+			}
+		}
+	}
+	every_in_list = {
+		variable = zz_ef_bk_subj
+		if = {
+			limit = { has_variable_map = zz_ef_rq_bk_$K$ }
+			save_temporary_scope_as = zz_ef_bk_s
+			every_key_in_variable_map = {
+				variable = zz_ef_rq_bk_$K$
+				save_temporary_scope_as = zz_ef_bk_d
+				scope:zz_ef_bk_s = {
+					zz_ef_rq_get = { MAP = zz_ef_rq_bk_$K$ D = scope:zz_ef_bk_d }
+					scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_t1 subtract = prev.var:zz_ef_rq_h } }
+				}
+			}
+		}
+	}
+	if = { limit = { var:zz_ef_bk_t1 < 0 } change_variable = { name = zz_ef_bk_t1 multiply = -1 } }
+	change_variable = { name = zz_ef_bk_mdiff add = var:zz_ef_bk_t1 }
+}
+
+# SUBJECT scope (the log countries): one line of its book; a company's -- with its name.
+zz_ef_bk_subj_log = {
+	if = {
+		limit = { var:zz_ef_bk_kind ?= flag:company }
+		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.Var('zz_ef_bk_cty').GetCountry.GetNameNoFormatting]|bank_book_co|[THIS.Var('zz_ef_bk_co').GetCompany.GetNameNoFormatting]"
+	}
+	debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.Var('zz_ef_bk_cty').GetCountry.GetNameNoFormatting]|bank_book|kind [THIS.Var('zz_ef_bk_kind').GetFlagName]|levels [THIS.Var('zz_ef_bk_lv').GetValue|0]|share [THIS.Var('zz_ef_bk_sh').GetValue|3]|rate [THIS.Var('zz_ef_bk_rate').GetValue|4]|cap [THIS.Var('zz_ef_bk_cap').GetValue|0]|dep [THIS.Var('zz_ef_bk_dep').GetValue|0]|cc [THIS.Var('zz_ef_bk_cc').GetValue|0]|bc [THIS.Var('zz_ef_bk_bc').GetValue|0]|cbd [THIS.Var('zz_ef_bk_cbd').GetValue|0]|inv [THIS.Var('zz_ef_bk_inv').GetValue|0]|mg [THIS.Var('zz_ef_bk_mg').GetValue|0]|ms [THIS.Var('zz_ef_bk_ms').GetValue|0]|cash [THIS.ScriptValue('zz_ef_bk_cash_v')|0]"
+}
+
+# SUBJECT scope: all its accounts and claims to subject $TO$ (it closes: its company has no "Bank" levels).
+zz_ef_bk_accounts_move = {
+	save_temporary_scope_as = zz_ef_bk_from
+	zz_ef_bk_acc_move = { A = dep TO = $TO$ }
+	zz_ef_bk_acc_move = { A = fdd TO = $TO$ }
+	zz_ef_bk_acc_move = { A = nrd TO = $TO$ }
+	zz_ef_bk_acc_move = { A = gvd TO = $TO$ }
+	zz_ef_bk_acc_move = { A = cc TO = $TO$ }
+	zz_ef_bk_acc_move = { A = bc TO = $TO$ }
+	zz_ef_bk_acc_move = { A = bnd TO = $TO$ }
+	zz_ef_bk_acc_move = { A = inv TO = $TO$ }
+	zz_ef_bk_acc_move = { A = mg TO = $TO$ }
+	zz_ef_bk_acc_move = { A = ms TO = $TO$ }
+	zz_ef_bk_acc_move = { A = cbd TO = $TO$ }
+	zz_ef_bk_acc_move = { A = cap TO = $TO$ }
+	zz_ef_bk_map_move = { K = m TO = $TO$ }
+	zz_ef_bk_map_move = { K = b TO = $TO$ }
+	zz_ef_bk_map_move = { K = f TO = $TO$ }
+}
+zz_ef_bk_acc_move = {
+	if = {
+		limit = { has_variable = zz_ef_bk_$A$ }
+		$TO$ = {
+			if = { limit = { NOT = { has_variable = zz_ef_bk_$A$ } } set_variable = { name = zz_ef_bk_$A$ value = 0 } }
+			change_variable = { name = zz_ef_bk_$A$ add = scope:zz_ef_bk_from.var:zz_ef_bk_$A$ }
+		}
+		set_variable = { name = zz_ef_bk_$A$ value = 0 }
+	}
+}
+zz_ef_bk_map_move = {
+	if = {
+		limit = { has_variable_map = zz_ef_rq_bk_$K$ }
+		zz_ef_rq_keys_take = { MAP = zz_ef_rq_bk_$K$ }
+		every_in_list = {
+			variable = zz_ef_rq_keys
+			save_temporary_scope_as = zz_ef_bk_d
+			scope:zz_ef_bk_from = { zz_ef_rq_get = { MAP = zz_ef_rq_bk_$K$ D = scope:zz_ef_bk_d } }
+			$TO$ = {
+				zz_ef_rq_get = { MAP = zz_ef_rq_bk_$K$ D = scope:zz_ef_bk_d }
+				set_variable = { name = zz_ef_bk_mv value = { value = var:zz_ef_rq_h add = scope:zz_ef_bk_from.var:zz_ef_rq_h } }
+				zz_ef_bk_map_put = { K = $K$ }
+			}
+			scope:zz_ef_bk_from = { remove_from_variable_map = { name = zz_ef_rq_bk_$K$ key = scope:zz_ef_bk_d } }
+		}
 	}
 }

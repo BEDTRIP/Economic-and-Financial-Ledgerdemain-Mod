@@ -54,3 +54,103 @@ zz_ef_bk_share_v = {
 		value = 1
 	}
 }
+
+# ---- the bank book by subject (Д.R4б.2, zz_ef_bk_book_step) ----
+
+# the rate (принято ночью): a private subject's premium per unit of its capital ratio above the country's, and its
+# bound; the appeal of the rate per unit of premium (1 + zz_ef_bk_appeal_k x premium: +-1 pp -> x1.2 / x0.8)
+zz_ef_bk_prem_k = 0.25
+zz_ef_bk_prem_max = 0.01
+zz_ef_bk_appeal_k = 20
+
+# COUNTRY scope: the country's accounts the subjects' follow (those held as variables)
+zz_ef_bk_c_gvd_v = { value = 0 if = { limit = { has_variable = zz_ef_bank_gov_dep } value = var:zz_ef_bank_gov_dep } }
+zz_ef_bk_c_cbd_v = { value = 0 if = { limit = { has_variable = zz_ef_bank_cb_debt } value = var:zz_ef_bank_cb_debt } }
+zz_ef_bk_c_cap_v = { value = 0 if = { limit = { has_variable = zz_ef_bank_capital } value = var:zz_ef_bank_capital } }
+zz_ef_bk_c_cc_v = { value = 0 if = { limit = { has_variable = zz_ef_cc_debt } value = var:zz_ef_cc_debt } }
+zz_ef_bk_c_bc_v = { value = 0 if = { limit = { has_variable = zz_ef_bc_debt } value = var:zz_ef_bc_debt } }
+zz_ef_bk_c_inv_v = { value = 0 if = { limit = { has_variable = zz_ef_bank_inv } value = var:zz_ef_bank_inv } }
+# COUNTRY scope: the banks' capital ratio -- capital / earning assets (loans, bonds, fund shares and foreign money)
+zz_ef_bk_cty_capr_v = {
+	value = zz_ef_bk_c_cap_v
+	divide = {
+		value = zz_ef_bk_c_cc_v
+		add = zz_ef_bk_c_bc_v
+		add = zz_ef_bank_bonds
+		add = zz_ef_bk_c_inv_v
+		min = 1
+	}
+}
+
+# SUBJECT scope: earning assets, capital ratio, the rate's premium (none for «госбанки»)
+zz_ef_bk_assets_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_bk_cc } add = var:zz_ef_bk_cc }
+	if = { limit = { has_variable = zz_ef_bk_bc } add = var:zz_ef_bk_bc }
+	if = { limit = { has_variable = zz_ef_bk_bnd } add = var:zz_ef_bk_bnd }
+	if = { limit = { has_variable = zz_ef_bk_inv } add = var:zz_ef_bk_inv }
+	min = 0
+}
+zz_ef_bk_capr_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_bk_cap } value = var:zz_ef_bk_cap }
+	divide = {
+		value = zz_ef_bk_assets_v
+		min = 1
+	}
+}
+zz_ef_bk_prem_v = {
+	value = 0
+	if = {
+		limit = { NOT = { var:zz_ef_bk_kind ?= flag:gov } }
+		value = zz_ef_bk_capr_v
+		subtract = var:zz_ef_bk_cty.var:zz_ef_bk_capr
+		multiply = zz_ef_bk_prem_k
+		min = {
+			value = zz_ef_bk_prem_max
+			multiply = -1
+		}
+		max = zz_ef_bk_prem_max
+	}
+}
+# weights of the residual: the share of levels; x the appeal of the rate (deposits, loans); the liquidity gap (debt to
+# the CB: earning assets above deposits and capital); earning assets (capital) -- each + the share, so a country whose
+# subjects have none still shares by levels
+zz_ef_bk_w_lv_v = {
+	value = var:zz_ef_bk_sh
+}
+zz_ef_bk_w_dep_v = {
+	value = var:zz_ef_bk_prem
+	multiply = zz_ef_bk_appeal_k
+	add = 1
+	min = 0
+	multiply = var:zz_ef_bk_sh
+}
+zz_ef_bk_w_cbd_v = {
+	value = zz_ef_bk_assets_v
+	if = { limit = { has_variable = zz_ef_bk_dep } subtract = var:zz_ef_bk_dep }
+	if = { limit = { has_variable = zz_ef_bk_fdd } subtract = var:zz_ef_bk_fdd }
+	if = { limit = { has_variable = zz_ef_bk_nrd } subtract = var:zz_ef_bk_nrd }
+	if = { limit = { has_variable = zz_ef_bk_gvd } subtract = var:zz_ef_bk_gvd }
+	if = { limit = { has_variable = zz_ef_bk_cap } subtract = var:zz_ef_bk_cap }
+	min = 0
+	add = var:zz_ef_bk_sh
+}
+zz_ef_bk_w_cap_v = {
+	value = zz_ef_bk_assets_v
+	add = var:zz_ef_bk_sh
+}
+zz_ef_bk_mv_v = {
+	value = var:zz_ef_bk_mv
+}
+# SUBJECT scope: its part of the banks' cash (the pool): liabilities and capital less its earning assets
+zz_ef_bk_cash_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_bk_dep } add = var:zz_ef_bk_dep }
+	if = { limit = { has_variable = zz_ef_bk_fdd } add = var:zz_ef_bk_fdd }
+	if = { limit = { has_variable = zz_ef_bk_nrd } add = var:zz_ef_bk_nrd }
+	if = { limit = { has_variable = zz_ef_bk_gvd } add = var:zz_ef_bk_gvd }
+	if = { limit = { has_variable = zz_ef_bk_cbd } add = var:zz_ef_bk_cbd }
+	if = { limit = { has_variable = zz_ef_bk_cap } add = var:zz_ef_bk_cap }
+	subtract = zz_ef_bk_assets_v
+}
