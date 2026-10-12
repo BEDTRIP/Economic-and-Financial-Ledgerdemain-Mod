@@ -91,7 +91,7 @@
   `ai_privat_bank_*_bond_maturity_N_message`.
 - `common/alert_types/00_ef_alert_types.txt` — 3 алерта: `fso_alert`, `selle_bond_maturity_yers_time_5_Y/_10_Y`;
   `PSC_alert_types.txt` — PSC.
-- `common/journal_entries/00_ef_bank_central_je.txt` (`bank_je_central_1`), `00_ef_divers_je.txt` (`silver_crisis_je_1`,
+- `common/journal_entries/00_ef_divers_je.txt` (`silver_crisis_je_1`,
   `je_ef_efcc_situation`; союзы E&F — `_archive/ef_monetary_unions/`), `00_ef_financial_center_je.txt`
   (`financial_center_je_1`, `financial_center_je_2`); `common/journal_entry_groups/00_ef_journal_entries.txt` —
   `je_group_ef`.

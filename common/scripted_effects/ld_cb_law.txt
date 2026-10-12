@@ -1,6 +1,11 @@
-﻿# (Д.R3.2) the central bank law follows the CB until R4 (laws/ld_central_bank_laws.txt). Country scope;
-# history (history/global/ld_central_bank_law.txt) and E&F's monthly hub (on_actions/00_ef_on_action.txt).
-# A private CB (law_ld_cb_private) is kept as it is -- the start sets it (history/global/ld_central_bank_law.txt, Д.R4а.5).
+﻿# The central bank by law (Д.R4а.3, laws/ld_central_bank_laws.txt). Country scope.
+# The state and the private law found a CB (zz_ef_cb_found): E&F's modifier has_central_bank, the CB's building in the
+# capital -- a shell for minting and E&F's bond output until R5, its size -- the yearly growth by GDP
+# (macro_facilities_on_action_bc); the authority's metal stays on the country's accounts (zz_ef_am_*). The law "none"
+# closes it (zz_ef_cb_close). Reserves come from the authority before and go back to it, no metal given: on a metal
+# standard the banks (Д.R4а.11) -- the CB takes from their metal the norm of cover of the notes, closing gives it all back.
+
+# the start: the law follows the CB of the history (a private one is set there, history/global/ld_central_bank_law.txt)
 zz_ef_cb_law_sync = {
 	if = {
 		limit = {
@@ -17,4 +22,112 @@ zz_ef_cb_law_sync = {
 		}
 		activate_law = law_type:law_ld_cb_none
 	}
+}
+# the start's year (ld_start_setup.txt): a country E&F would give a CB (zz_ef_cb_ready) gets the state law -- as E&F's
+# start founded them by the technology
+zz_ef_cb_law_start = {
+	if = {
+		limit = {
+			zz_ef_cb_law_has_cb = no
+			zz_ef_cb_ready = yes
+		}
+		activate_law = law_type:law_ld_cb_state
+	}
+}
+# monthly (E&F's hub): the CB follows the law -- E&F's crises and lost CB states remove the building and the modifier
+zz_ef_cb_law_follow = {
+	if = {
+		limit = {
+			OR = {
+				has_law = law_type:law_ld_cb_state
+				has_law = law_type:law_ld_cb_private
+			}
+			NOT = { has_modifier = has_central_bank }
+		}
+		zz_ef_cb_found = yes
+	}
+	else_if = {
+		limit = {
+			has_law = law_type:law_ld_cb_none
+			has_modifier = has_central_bank
+		}
+		zz_ef_cb_close = yes
+	}
+}
+zz_ef_cb_found = {
+	if = {
+		limit = {
+			NOT = { has_modifier = has_central_bank }
+			exists = capital
+		}
+		capital = {
+			zz_ef_cm_create_owned_bank = { BANK_BLDG_TYPE = building_bank CB_SIZE = 5 }
+		}
+		# E&F: the CB's place in the capital, has_central_bank, the methods by the standard
+		central_bank_modifier = yes
+		central_bank_production_methods = yes
+		# the metal of the banks' notes (a metal standard): the norm of cover, at most what the banks hold
+		if = {
+			limit = {
+				has_modifier = has_central_bank
+				OR = {
+					zz_ef_metal_gold = yes
+					zz_ef_metal_silver = yes
+					zz_ef_metal_bimet = yes
+				}
+			}
+			zz_ef_am_init = yes
+			zz_ef_bankm_init = yes
+			set_variable = { name = zz_ef_t_cbf_g value = zz_ef_cb_found_take_gold }
+			set_variable = { name = zz_ef_t_cbf_s value = zz_ef_cb_found_take_silver }
+			change_variable = { name = zz_ef_bankm_gold subtract = var:zz_ef_t_cbf_g }
+			change_variable = { name = zz_ef_bankm_silver subtract = var:zz_ef_t_cbf_s }
+			change_variable = { name = zz_ef_am_gold add = var:zz_ef_t_cbf_g }
+			change_variable = { name = zz_ef_am_silver add = var:zz_ef_t_cbf_s }
+			zz_ef_mt_known_add = { M = g V = var:zz_ef_t_cbf_g }
+			zz_ef_mt_known_add = { M = s V = var:zz_ef_t_cbf_s }
+			if = { limit = { zz_ef_logs_on = yes } debug_log = "EFK|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|cb_found|g [THIS.GetCountry.MakeScope.Var('zz_ef_t_cbf_g').GetValue|0]|s [THIS.GetCountry.MakeScope.Var('zz_ef_t_cbf_s').GetValue|0]" }
+			remove_variable = zz_ef_t_cbf_g
+			remove_variable = zz_ef_t_cbf_s
+		}
+	}
+}
+zz_ef_cb_close = {
+	if = {
+		limit = { has_modifier = has_central_bank }
+		every_scope_state = {
+			limit = { has_building = building_bank }
+			remove_building = building_bank
+		}
+		remove_modifier = has_central_bank
+		# a metal standard: the authority is the banks again -- the metal goes back to them
+		if = {
+			limit = {
+				OR = {
+					zz_ef_metal_gold = yes
+					zz_ef_metal_silver = yes
+					zz_ef_metal_bimet = yes
+				}
+			}
+			zz_ef_am_init = yes
+			zz_ef_bankm_init = yes
+			set_variable = { name = zz_ef_t_cbf_g value = var:zz_ef_am_gold }
+			set_variable = { name = zz_ef_t_cbf_s value = var:zz_ef_am_silver }
+			change_variable = { name = zz_ef_bankm_gold add = var:zz_ef_t_cbf_g }
+			change_variable = { name = zz_ef_bankm_silver add = var:zz_ef_t_cbf_s }
+			set_variable = { name = zz_ef_am_gold value = 0 }
+			set_variable = { name = zz_ef_am_silver value = 0 }
+			change_variable = { name = zz_ef_t_cbf_g multiply = -1 }
+			change_variable = { name = zz_ef_t_cbf_s multiply = -1 }
+			zz_ef_mt_known_add = { M = g V = var:zz_ef_t_cbf_g }
+			zz_ef_mt_known_add = { M = s V = var:zz_ef_t_cbf_s }
+			remove_variable = zz_ef_t_cbf_g
+			remove_variable = zz_ef_t_cbf_s
+		}
+		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFK|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|cb_close" }
+	}
+}
+zz_ef_bankm_init = {
+	if = { limit = { NOT = { has_variable = zz_ef_bankm_gold } } set_variable = { name = zz_ef_bankm_gold value = 0 } }
+	if = { limit = { NOT = { has_variable = zz_ef_bankm_silver } } set_variable = { name = zz_ef_bankm_silver value = 0 } }
 }

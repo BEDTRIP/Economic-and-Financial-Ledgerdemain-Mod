@@ -1,7 +1,54 @@
 ﻿# The monetary authority (понятие «Денежная власть», Д.R4а.2): its metal -- the country's accounts var:zz_ef_am_gold /
 # zz_ef_am_silver (scripted_effects/ld_metal_accounts.txt).
 
-# Country scope: a CB holds metal and trades it for the country; without one the metal a building buys is the pops'.
+# Country scope: a CB holds the authority's metal and trades it for the country.
 zz_ef_am_holder = {
 	has_modifier = has_central_bank
+}
+# the country's central bank law founds a CB (Д.R4а.3, laws/ld_central_bank_laws.txt)
+zz_ef_cb_law_has_cb = {
+	OR = {
+		has_law = law_type:law_ld_cb_state
+		has_law = law_type:law_ld_cb_private
+	}
+}
+# E&F's readiness for a CB (macro_facilities_on_action_bc_limit): the technology, a stable recognized country
+zz_ef_cb_ready = {
+	has_technology_researched = central_banking
+	is_revolutionary = no
+	or = {
+		is_invalid_country = no
+		AND = {
+			is_player = yes
+			NOT = {
+				c:JAP ?= this # JAP is valided by is_valid_country
+			}
+		}
+	}
+	or = {
+		is_valid_country = yes #date de la bc
+		country_already_central_bank = yes
+		AND = {
+			var:gdp_view >= 1
+			NOT = {
+				c:JAP ?= this # JAP is valided by is_valid_country
+			}
+		}
+		AND = {
+			is_player = yes
+			NOT = {
+				c:JAP ?= this # JAP is valided by is_valid_country
+			}
+		}
+	}
+	#Si crise en lien avec la BC coupe toute possibilité de croissance ou de création de nouvelle currency
+	#Pb avec
+	not = {
+		or = {
+			has_modifier = central_bank_bankruptcy_country
+			has_modifier = currency_crisis_country
+			#var:extreme_weak_currency_solution_count >= 3
+
+		}
+	}
 }

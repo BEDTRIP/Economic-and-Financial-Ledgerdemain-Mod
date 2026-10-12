@@ -409,6 +409,32 @@ zz_ef_bank_mult_silver = {
 	max = 25000
 }
 
+# ---- the CB founded by law (Д.R4а.3): the banks' metal it takes on a metal standard --------
+# the norm of cover (zz_ef_cover_normal) of the notes at parity, in the standard's metal, at most what the banks hold
+zz_ef_cb_found_take_money = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_notes } value = var:zz_ef_notes }
+	multiply = zz_ef_cover_normal
+	multiply = zz_ef_gold_per_money_par
+	min = 0
+}
+zz_ef_cb_found_take_gold = {
+	value = zz_ef_cb_found_take_money
+	multiply = {
+		value = 1
+		subtract = zz_ef_metal_silver_share
+	}
+	max = var:zz_ef_bankm_gold
+	min = 0
+}
+zz_ef_cb_found_take_silver = {
+	value = zz_ef_cb_found_take_money
+	multiply = zz_ef_metal_silver_share
+	multiply = gold_to_silver_rate
+	max = var:zz_ef_bankm_silver
+	min = 0
+}
+
 # ---- step 7: the CB as an account (Д2.28 а) ----------------------------------------
 # Its building's purchase, percent on the method's input: (40% - cover) x 5000 -- +500% at 30% cover, +1000% (the cap) at
 # 20%, the method's own at 40%, none from 42% (the method buys ~44 gold a week for Britain); a weaker push (x 1500, at

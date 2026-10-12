@@ -80,7 +80,7 @@
 | Премия за риск: рейтинг + стабильность (zz_ef_cb_rule_risk / _rating / _stability) | живой | common/script_values/ld_cb_rate_values.txt:104-160 | участвует в ставке госзайма (ld_money_model.txt:1393) | подсказка ставки |
 | Премия за риск: валюта, долг, дефицит (zz_ef_risk_*) | живой | common/scripted_effects/ld_risk_premium.txt:6-80; common/script_values/ld_risk_premium_values.txt | zz_ef_risk_monthly из zz_ef_cb_rate_monthly; zz_ef_risk_parity_changed из zz_ef_mp_complete и ИИ-блока | подсказка ставки |
 | Концепты concept_zz_ef_policy_rule_rate / _discretionary_adjustment | живой | common/game_concepts/ld_cb_rate_concepts.txt:11,16 | refs=88 (локализация панели) | ссылки-подсказки |
-| ЖЗ bank_je_central_1 (центральный банк: прогресс-бары и выдача технологий) | живой | common/journal_entries/00_ef_bank_central_je.txt:1-139 | выдаёт banking/currency_standards/central_banking по ВВП; refs=11 | журнал игрока |
+| ЖЗ bank_je_central_1 (центральный банк: прогресс-бары и выдача технологий) | архив | `_archive/ef_bank_central_je/` | ЦБ — законом (Д.R4а.3) |
 
 ## Банки и вклады (`banks.md`)
 
