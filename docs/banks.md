@@ -25,11 +25,6 @@
 лог `EFJ|bank_cap`: `reval`, `inv`, `cb_metal` — возмещение банкам металла ЦБ, Д.R4а.9).
 
 ## Файлы
-- Проба Р26 (R4б, шаг 1, временно — после прогона в `_archive/ld_probe_bk/`): `common/scripted_effects/ld_probe_bk.txt`,
-  `common/script_values/ld_probe_bk_values.txt`, `common/on_actions/ld_probe_bk_on_actions.txt`,
-  `common/scripted_guis/ld_probe_bk.txt`, `events/ld_probe_bk_events.txt`, `gui/ld_probe_bk.gui`,
-  `gui/scripted_widgets/ld_probe_bk.txt` — переменные и
-  карты на компании и в контейнере, уровни «Банка» компании через окно, цена карт; лог `EFZ|…|bk_probe|`, `bk_comp|`.
 - `common/buildings/ld_bank.txt` — `building_zz_ef_bank` (группа `bg_zz_ef_banking`, PMG `pmg_zz_ef_bank_base`,
   `ownership_type = self`, `ai_nationalization_desire = -5`).
 - `common/building_groups/ld_banking_group.txt` — `bg_zz_ef_banking` (дочерняя `bg_trade`).
