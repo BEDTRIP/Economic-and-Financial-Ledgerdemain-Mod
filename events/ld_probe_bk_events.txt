@@ -1,0 +1,11 @@
+﻿namespace = ld_probe_bk
+
+# Probe R4б.1 (Р26, scripted_effects/ld_probe_bk.txt): the probe's monthly work inside an event -- its own line
+# («event (immediate) @ ld_probe_bk_events.txt») in the script profiler. To _archive/ld_probe_bk/ after the run.
+ld_probe_bk.1 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		ld_probe_bk_month = yes
+	}
+}

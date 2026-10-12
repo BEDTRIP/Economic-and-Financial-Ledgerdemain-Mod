@@ -1,26 +1,24 @@
 ﻿# Probe R4б.1 (Р26): receivers of gui/ld_probe_bk.gui; to _archive/ld_probe_bk/ after the run.
-# COMPANY scope: scope:lv -- Company.GetBuildingTypeLevels( GetBuildingType('building_zz_ef_bank') ), scope:n -- the
-# company's var:ld_pb_n as the window reads it. Takes the company off the list.
-ld_probe_bk_sg = {
+# COMPANY scope: scope:v -- a value, scope:w -- which one (flag): var:ld_pb_<w> = v.
+ld_probe_bk_v_sg = {
 	scope = company
 	saved_scopes = {
-		lv
-		n
+		v
+		w
 	}
 	effect = {
-		set_variable = { name = ld_pb_lv value = scope:lv }
-		set_variable = { name = ld_pb_n_gui value = scope:n }
-		remove_from_global_variable_list = { name = ld_pb_companies target = this }
+		if = { limit = { scope:w = flag:five } set_variable = { name = ld_pb_five value = scope:v } }
+		if = { limit = { scope:w = flag:five_i } set_variable = { name = ld_pb_five_i value = scope:v } }
+		if = { limit = { scope:w = flag:n_gui } set_variable = { name = ld_pb_n_gui value = scope:v } }
+		if = { limit = { scope:w = flag:lv } set_variable = { name = ld_pb_lv value = scope:v } }
+		if = { limit = { scope:w = flag:lv2 } set_variable = { name = ld_pb_lv2 value = scope:v } }
 	}
 }
 
-# the same levels through GetBuildingType(...).Self
-ld_probe_bk_self_sg = {
+# COMPANY scope: off the list (the item goes, next month's entry fires again).
+ld_probe_bk_done_sg = {
 	scope = company
-	saved_scopes = {
-		lv
-	}
 	effect = {
-		set_variable = { name = ld_pb_lv2 value = scope:lv }
+		remove_list_global_variable = { name = ld_pb_companies target = this }
 	}
 }

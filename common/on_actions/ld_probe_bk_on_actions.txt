@@ -1,4 +1,5 @@
-﻿# Probe R4б.1 (Р26, scripted_effects/ld_probe_bk.txt); to _archive/ld_probe_bk/ after the run.
+﻿# Probe R4б.1 (Р26, scripted_effects/ld_probe_bk.txt, events/ld_probe_bk_events.txt); to _archive/ld_probe_bk/ after
+# the run.
 on_monthly_pulse_country = {
 	on_actions = {
 		ld_probe_bk_monthly
@@ -7,6 +8,6 @@ on_monthly_pulse_country = {
 
 ld_probe_bk_monthly = {
 	effect = {
-		ld_probe_bk_month = yes
+		trigger_event = { id = ld_probe_bk.1 }
 	}
 }

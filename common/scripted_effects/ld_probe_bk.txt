@@ -5,8 +5,9 @@
 #      hands it back);
 #  (б) the company's levels of the "Bank" building -- script has no trigger for them (company_owned_levels counts all
 #      its buildings): the window reads Company.GetBuildingTypeLevels and hands them to script;
-#  (в) the price of maps: every company with bank levels and two subjects per country with banks do 4 rounds (a month of
-#      weeks) of read / remove / add on a 30-key map (the claims register's write, ld_claims.txt).
+#  (в) the price of maps: every company of a country with banks (an upper bound of the bank companies) and two subjects
+#      per country with banks do 4 rounds (a month of weeks) of read / remove / add on a 30-key map (the claims
+#      register's write, ld_claims.txt); run inside the event ld_probe_bk.1 -- its own line in the script profiler.
 # Log: EFZ|date|country|bk_probe|... (company lines -- bk_comp).
 
 # COUNTRY scope, monthly.
@@ -24,6 +25,9 @@ ld_probe_bk_month = {
 	set_variable = { name = ld_pb_comp_lv value = 0 }
 	set_variable = { name = ld_pb_comp_n value = 0 }
 	set_variable = { name = ld_pb_sum_n value = 0 }
+	set_variable = { name = ld_pb_load_n value = 0 }
+	set_variable = { name = ld_pb_bank_lv value = ld_probe_bk_levels_v }
+	set_variable = { name = ld_pb_gov_lv value = ld_probe_bk_gov_levels_v }
 	every_company = {
 		limit = { company_owned_levels > 0 }
 		if = {
@@ -46,17 +50,20 @@ ld_probe_bk_month = {
 				change_variable = { name = ld_pb_comp_lv add = prev.var:ld_pb_lv }
 				change_variable = { name = ld_pb_comp_n add = 1 }
 			}
+		}
+		# the load: every company of a country with banks (more than the bank companies -- an upper bound)
+		if = {
+			limit = { scope:ld_pb_cty.var:ld_pb_bank_lv > 0 }
 			ld_probe_bk_map_work = yes
 			ld_probe_bk_box = yes
 			ld_probe_bk_map_count = yes
+			scope:ld_pb_cty = { change_variable = { name = ld_pb_load_n add = 1 } }
 			if = {
 				limit = { zz_ef_logs_on = yes }
-				debug_log = "EFZ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCompany.GetCountry.GetNameNoFormatting]|bk_comp|[THIS.GetCompany.GetNameNoFormatting]|lv [THIS.GetCompany.MakeScope.Var('ld_pb_lv').GetValue|0]|lv_self [THIS.GetCompany.MakeScope.Var('ld_pb_lv2').GetValue|0]|n [THIS.GetCompany.MakeScope.Var('ld_pb_n').GetValue|0]|n_gui [THIS.GetCompany.MakeScope.Var('ld_pb_n_gui').GetValue|0]|map [THIS.GetCompany.MakeScope.Var('ld_pb_ms').GetValue|0]|box_n [THIS.GetCompany.MakeScope.Var('ld_pb_box_n').GetValue|0]|box_map [THIS.GetCompany.MakeScope.Var('ld_pb_box_ms').GetValue|0]"
+				debug_log = "EFZ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCompany.GetCountry.GetNameNoFormatting]|bk_comp|[THIS.GetCompany.GetNameNoFormatting]|lv [THIS.GetCompany.MakeScope.Var('ld_pb_lv').GetValue|0]|lv_self [THIS.GetCompany.MakeScope.Var('ld_pb_lv2').GetValue|0]|five [THIS.GetCompany.MakeScope.Var('ld_pb_five').GetValue|0]|five_i [THIS.GetCompany.MakeScope.Var('ld_pb_five_i').GetValue|0]|n [THIS.GetCompany.MakeScope.Var('ld_pb_n').GetValue|0]|n_gui [THIS.GetCompany.MakeScope.Var('ld_pb_n_gui').GetValue|0]|map [THIS.GetCompany.MakeScope.Var('ld_pb_ms').GetValue|0]|box_n [THIS.GetCompany.MakeScope.Var('ld_pb_box_n').GetValue|0]|box_map [THIS.GetCompany.MakeScope.Var('ld_pb_box_ms').GetValue|0]"
 			}
 		}
 	}
-	set_variable = { name = ld_pb_bank_lv value = ld_probe_bk_levels_v }
-	set_variable = { name = ld_pb_gov_lv value = ld_probe_bk_gov_levels_v }
 	if = {
 		limit = { var:ld_pb_bank_lv > 0 }
 		# «госбанки» and «частные банкиры»: two subjects on the country
@@ -65,7 +72,7 @@ ld_probe_bk_month = {
 		ld_probe_bk_map_count = yes
 		if = {
 			limit = { zz_ef_logs_on = yes }
-			debug_log = "EFZ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|bk_probe|bank_lv [THIS.GetCountry.MakeScope.Var('ld_pb_bank_lv').GetValue|0]|gov_lv [THIS.GetCountry.MakeScope.Var('ld_pb_gov_lv').GetValue|0]|comp_lv [THIS.GetCountry.MakeScope.Var('ld_pb_comp_lv').GetValue|0]|comp_n [THIS.GetCountry.MakeScope.Var('ld_pb_comp_n').GetValue|0]|sum_n [THIS.GetCountry.MakeScope.Var('ld_pb_sum_n').GetValue|0]|map [THIS.GetCountry.MakeScope.Var('ld_pb_ms').GetValue|0]|gui_list [THIS.GetCountry.MakeScope.ScriptValue('ld_probe_bk_gui_list_v')|0]"
+			debug_log = "EFZ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|bk_probe|bank_lv [THIS.GetCountry.MakeScope.Var('ld_pb_bank_lv').GetValue|0]|gov_lv [THIS.GetCountry.MakeScope.Var('ld_pb_gov_lv').GetValue|0]|comp_lv [THIS.GetCountry.MakeScope.Var('ld_pb_comp_lv').GetValue|0]|comp_n [THIS.GetCountry.MakeScope.Var('ld_pb_comp_n').GetValue|0]|sum_n [THIS.GetCountry.MakeScope.Var('ld_pb_sum_n').GetValue|0]|load_n [THIS.GetCountry.MakeScope.Var('ld_pb_load_n').GetValue|0]|map [THIS.GetCountry.MakeScope.Var('ld_pb_ms').GetValue|0]|gui_list [THIS.GetCountry.MakeScope.ScriptValue('ld_probe_bk_gui_list_v')|0]"
 		}
 	}
 }

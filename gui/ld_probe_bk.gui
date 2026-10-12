@@ -1,6 +1,8 @@
 ﻿# Probe R4б.1 (Р26): a company's "Bank" levels and its variable, read by the window and handed to script
 # (scripted_guis/ld_probe_bk.txt). The pattern of gui/ld_money_hook.gui: an item per entry of a global list, a state
-# that fires on_finish when the item exists. To _archive/ld_probe_bk/ after the run.
+# that fires on_finish when the item exists; each state tests one expression (a failing one is a nullptr in error.log,
+# the others still pass); the last one (after a second) takes the company off the list. To _archive/ld_probe_bk/
+# after the run.
 widget = {
 	name = ld_probe_bk_hook
 	datacontext = "[GetMetaPlayer.GetPlayedOrObservedCountry]"
@@ -16,13 +18,35 @@ widget = {
 		item = {
 			widget = {
 				datacontext = "[Scope.GetCompany]"
+				# a literal: the bridge with a company as root
 				state = {
 					trigger_when = "[Scope.IsSet]"
-					on_finish = "[GetScriptedGui('ld_probe_bk_self_sg').Execute( GuiScope.SetRoot( Company.MakeScope ).AddScope( 'lv', MakeScopeValue( IntToFixedPoint( Company.GetBuildingTypeLevels( GetBuildingType('building_zz_ef_bank').Self ) ) ) ).End )]"
+					on_finish = "[GetScriptedGui('ld_probe_bk_v_sg').Execute( GuiScope.SetRoot( Company.MakeScope ).AddScope( 'v', MakeScopeValue( '(CFixedPoint)5' ) ).AddScope( 'w', MakeScopeFlag( 'five' ) ).End )]"
+				}
+				# int -> fixed point
+				state = {
+					trigger_when = "[Scope.IsSet]"
+					on_finish = "[GetScriptedGui('ld_probe_bk_v_sg').Execute( GuiScope.SetRoot( Company.MakeScope ).AddScope( 'v', MakeScopeValue( IntToFixedPoint( '(int32)5' ) ) ).AddScope( 'w', MakeScopeFlag( 'five_i' ) ).End )]"
+				}
+				# the company's variable as the window reads it
+				state = {
+					trigger_when = "[Scope.IsSet]"
+					on_finish = "[GetScriptedGui('ld_probe_bk_v_sg').Execute( GuiScope.SetRoot( Company.MakeScope ).AddScope( 'v', MakeScopeValue( Company.MakeScope.Var('ld_pb_n').GetValue ) ).AddScope( 'w', MakeScopeFlag( 'n_gui' ) ).End )]"
+				}
+				# the company's bank levels
+				state = {
+					trigger_when = "[Scope.IsSet]"
+					on_finish = "[GetScriptedGui('ld_probe_bk_v_sg').Execute( GuiScope.SetRoot( Company.MakeScope ).AddScope( 'v', MakeScopeValue( IntToFixedPoint( Company.GetBuildingTypeLevels( GetBuildingType('building_zz_ef_bank') ) ) ) ).AddScope( 'w', MakeScopeFlag( 'lv' ) ).End )]"
 				}
 				state = {
 					trigger_when = "[Scope.IsSet]"
-					on_finish = "[GetScriptedGui('ld_probe_bk_sg').Execute( GuiScope.SetRoot( Company.MakeScope ).AddScope( 'lv', MakeScopeValue( IntToFixedPoint( Company.GetBuildingTypeLevels( GetBuildingType('building_zz_ef_bank') ) ) ) ).AddScope( 'n', MakeScopeValue( Company.MakeScope.Var('ld_pb_n').GetValue ) ).End )]"
+					on_finish = "[GetScriptedGui('ld_probe_bk_v_sg').Execute( GuiScope.SetRoot( Company.MakeScope ).AddScope( 'v', MakeScopeValue( IntToFixedPoint( Company.GetBuildingTypeLevels( GetBuildingType('building_zz_ef_bank').Self ) ) ) ).AddScope( 'w', MakeScopeFlag( 'lv2' ) ).End )]"
+				}
+				# then off the list
+				state = {
+					trigger_when = "[Scope.IsSet]"
+					duration = 1
+					on_finish = "[GetScriptedGui('ld_probe_bk_done_sg').Execute( GuiScope.SetRoot( Company.MakeScope ).End )]"
 				}
 			}
 		}
