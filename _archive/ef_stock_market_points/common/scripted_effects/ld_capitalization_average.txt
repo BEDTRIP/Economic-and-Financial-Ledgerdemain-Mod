@@ -1,0 +1,35 @@
+# from common/scripted_effects/ld_capitalization_average.txt line 157: the index block at the end of zz_ef_cap_monthly_update
+		### Index: equity / GDP x 1000.
+		set_variable = {
+			name = base_index_value
+			value = {
+				value = zz_ef_equity_capitalization
+				divide = {
+					value = gdp
+					min = 1
+				}
+				multiply = 1000
+				min = 1
+				max = 100000
+			}
+		}
+		if = {
+			limit = { NOT = { has_variable = zz_ef_cap_idx_timer } }
+			if = {
+				limit = { NOT = { has_variable = zz_ef_cap_idx_prev } }
+				set_variable = { name = zz_ef_cap_idx_prev value = var:base_index_value }
+			}
+			set_variable = {
+				name = base_index_value_dif
+				value = {
+					value = var:base_index_value
+					subtract = var:zz_ef_cap_idx_prev
+				}
+			}
+			set_variable = { name = zz_ef_cap_idx_prev value = var:base_index_value }
+			set_variable = {
+				name = zz_ef_cap_idx_timer
+				months = 12
+			}
+		}
+

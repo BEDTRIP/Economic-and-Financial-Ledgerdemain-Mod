@@ -1002,6 +1002,7 @@ zz_ef_xch_deal = {
 				multiply = scope:zz_ef_xch_d.zz_ef_xq_gold_$K$
 			}
 		}
+		zz_ef_xch_month_add = { K = $K$ }
 		# the buyer pays on top the exchange's fee, its trade policy's surcharge and a non-resident's fee (Д.R8.5,
 		# Д.R8б.18, Д.R8б.35) -- to the owners of the exchange's financial centre (var:zz_ef_xch_fee_acc, zz_ef_xch_fee_pay);
 		# matched on another exchange -- the exchange's fee once more, to the fund that did it (var:zz_ef_xd_cf)
@@ -1160,7 +1161,8 @@ zz_ef_xch_pool_pay = {
 
 # Country scope (an exchange's country), at its step: the fees and surcharges its exchange took since its last step
 # (var:zz_ef_xch_fee_acc) into the treasury -- the exchange is the state's infrastructure (Д.R4б.5); its financial centre
-# is a government building whose costs the budget pays (Д.R4б.7); var:zz_ef_f_xch_fee.
+# is a government building whose costs the budget pays (Д.R4б.7); var:zz_ef_f_xch_fee; in gold into the month's sum of
+# the exchange (zz_ef_xch_month_roll).
 zz_ef_xch_fee_pay = {
 	if = {
 		limit = { has_variable = zz_ef_xch_fee_acc }
@@ -1168,6 +1170,9 @@ zz_ef_xch_fee_pay = {
 		remove_variable = zz_ef_xch_fee_acc
 		zz_ef_eng_add_treasury = { V = var:zz_ef_f_xch_fee }
 		change_variable = { name = zz_ef_f_xch_tr add = var:zz_ef_f_xch_fee }
+		set_variable = { name = zz_ef_t_xfee value = { value = var:zz_ef_f_xch_fee multiply = zz_ef_xch_gpm_v } }
+		zz_ef_xmo_add = { N = fee V = var:zz_ef_t_xfee }
+		remove_variable = zz_ef_t_xfee
 	}
 }
 
@@ -1454,6 +1459,7 @@ zz_ef_xch_clear_exchange = {
 			limit = { zz_ef_logs_on = yes }
 			debug_log = "EFD|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|exchange|money [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xk_n_m_v')|0]|bonds [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xk_n_b_v')|0]|bid_step [THIS.GetCountry.MakeScope.Var('zz_ef_xr_ib').GetValue|0]|ask_step [THIS.GetCountry.MakeScope.Var('zz_ef_xr_ia').GetValue|0]|room [THIS.GetCountry.MakeScope.Var('zz_ef_xr_room').GetValue|0]"
 		}
+		set_variable = { name = zz_ef_xmo_as value = { value = zz_ef_xk_n_m_v add = zz_ef_xk_n_b_v min = zz_ef_xmo_as_v } }
 		save_temporary_scope_as = zz_ef_xc_e
 		every_in_list = {
 			variable = zz_ef_xk_m
@@ -1828,6 +1834,143 @@ zz_ef_xch_deal_count = {
 	}
 	zz_ef_xw_add = { N = deals V = 1 }
 	remove_variable = zz_ef_xd_ga
+}
+
+# ---- the exchange's month (Д.R4б.11): no points -- the exchanges compared by what goes through them ----------------
+
+# Any scope: the month's sum N of the scope exchange up by V (var:zz_ef_xmo_<N>).
+zz_ef_xmo_add = {
+	if = { limit = { NOT = { has_variable = zz_ef_xmo_$N$ } } set_variable = { name = zz_ef_xmo_$N$ value = 0 } }
+	change_variable = { name = zz_ef_xmo_$N$ add = $V$ }
+}
+# Holder scope, a deal settled (zz_ef_xch_deal): its value in gold into the month's sums of the exchange it went
+# through (scope:zz_ef_xch_e): the turnover -- the auction half on each side (its buys and sells meet, the exchange's
+# country settles the rest), the other sides whole; by kind; the deals; the part of the holders from abroad.
+zz_ef_xch_month_add = {
+	set_variable = { name = zz_ef_xd_gt value = var:zz_ef_xd_g }
+	if = { limit = { var:zz_ef_xd_gt < 0 } change_variable = { name = zz_ef_xd_gt multiply = -1 } }
+	if = { limit = { var:zz_ef_xd_f = 0 } change_variable = { name = zz_ef_xd_gt multiply = 0.5 } }
+	scope:zz_ef_xch_e = {
+		zz_ef_xmo_add = { N = to V = scope:zz_ef_xo_h.var:zz_ef_xd_gt }
+		zz_ef_xmo_add = { N = to_$K$ V = scope:zz_ef_xo_h.var:zz_ef_xd_gt }
+		zz_ef_xmo_add = { N = n V = 1 }
+	}
+	if = {
+		limit = { NOT = { scope:zz_ef_xch_e = this } }
+		scope:zz_ef_xch_e = { zz_ef_xmo_add = { N = fo V = scope:zz_ef_xo_h.var:zz_ef_xd_gt } }
+	}
+	remove_variable = zz_ef_xd_gt
+}
+# Member scope (scope:zz_ef_xm_hd), K -- the kind of MAP: its holdings in gold at the market and at the base
+# (zz_ef_xk_gold_<K>_v, zz_ef_xk_base_<K>_v of the debtor) into var:zz_ef_xm_hc / var:zz_ef_xm_hb.
+zz_ef_xmo_cap_map = {
+	if = {
+		limit = { has_variable_map = $MAP$ }
+		every_key_in_variable_map = {
+			variable = $MAP$
+			save_temporary_scope_as = zz_ef_rq_key
+			scope:zz_ef_xm_hd = {
+				$MAP$_read = yes
+				change_variable = { name = zz_ef_xm_hc add = { value = var:zz_ef_rq_h multiply = scope:zz_ef_rq_key.zz_ef_xk_gold_$K$_v } }
+				change_variable = { name = zz_ef_xm_hb add = { value = var:zz_ef_rq_h multiply = scope:zz_ef_rq_key.zz_ef_xk_base_$K$_v } }
+			}
+		}
+	}
+}
+# Any scope, monthly (zz_ef_world_month_ef): each exchange's month. Its capitalization -- the claims its members hold
+# (the countries trading on it, var:zz_ef_xch; its fund among them: the exchange's country is its own member), in gold
+# at the market and at the base; then the month's sums kept as last month's (var:zz_ef_xlm_*: the turnover, by kind, the
+# deals, the share from abroad, the fee, the capitalization and its overheat = the market / the base, the members, the
+# most assets a week), the turnover of 12 months counted (var:zz_ef_xlm_to_y), the line EFD|<exchange>|xch_month with
+# the logs on; the sums emptied.
+zz_ef_xch_month_roll = {
+	every_country = {
+		limit = {
+			has_variable = zz_ef_xch
+			exists = var:zz_ef_xch
+		}
+		save_temporary_scope_as = zz_ef_xm_hd
+		set_variable = { name = zz_ef_xm_hc value = 0 }
+		set_variable = { name = zz_ef_xm_hb value = 0 }
+		zz_ef_xmo_cap_map = { MAP = zz_ef_rq_cb_m K = m }
+		zz_ef_xmo_cap_map = { MAP = zz_ef_rq_bk_m K = m }
+		zz_ef_xmo_cap_map = { MAP = zz_ef_rq_pp_m K = m }
+		zz_ef_xmo_cap_map = { MAP = zz_ef_rq_fd_m K = m }
+		zz_ef_xmo_cap_map = { MAP = zz_ef_rq_tr_b K = b }
+		zz_ef_xmo_cap_map = { MAP = zz_ef_rq_cb_b K = b }
+		zz_ef_xmo_cap_map = { MAP = zz_ef_rq_bk_b K = b }
+		zz_ef_xmo_cap_map = { MAP = zz_ef_rq_pp_b K = b }
+		zz_ef_xmo_cap_map = { MAP = zz_ef_rq_fd_b K = b }
+		zz_ef_xmo_cap_map = { MAP = zz_ef_rq_bk_f K = f }
+		zz_ef_xmo_cap_map = { MAP = zz_ef_rq_pp_f K = f }
+		var:zz_ef_xch = {
+			zz_ef_xmo_add = { N = cap V = scope:zz_ef_xm_hd.var:zz_ef_xm_hc }
+			zz_ef_xmo_add = { N = capb V = scope:zz_ef_xm_hd.var:zz_ef_xm_hb }
+			zz_ef_xmo_add = { N = mem V = 1 }
+		}
+		remove_variable = zz_ef_xm_hc
+		remove_variable = zz_ef_xm_hb
+	}
+	every_country = {
+		limit = {
+			OR = {
+				zz_ef_has_exchange = yes
+				has_variable = zz_ef_xmo_to
+				has_variable = zz_ef_xmo_mem
+			}
+		}
+		zz_ef_xmo_add = { N = to V = 0 }
+		zz_ef_xmo_add = { N = to_m V = 0 }
+		zz_ef_xmo_add = { N = to_b V = 0 }
+		zz_ef_xmo_add = { N = n V = 0 }
+		zz_ef_xmo_add = { N = fo V = 0 }
+		zz_ef_xmo_add = { N = fee V = 0 }
+		zz_ef_xmo_add = { N = cap V = 0 }
+		zz_ef_xmo_add = { N = capb V = 0 }
+		zz_ef_xmo_add = { N = mem V = 0 }
+		zz_ef_xmo_add = { N = as V = 0 }
+		set_variable = { name = zz_ef_xlm_to value = var:zz_ef_xmo_to }
+		set_variable = { name = zz_ef_xlm_to_m value = var:zz_ef_xmo_to_m }
+		set_variable = { name = zz_ef_xlm_to_b value = var:zz_ef_xmo_to_b }
+		set_variable = { name = zz_ef_xlm_n value = var:zz_ef_xmo_n }
+		set_variable = { name = zz_ef_xlm_fee value = var:zz_ef_xmo_fee }
+		set_variable = { name = zz_ef_xlm_cap value = var:zz_ef_xmo_cap }
+		set_variable = { name = zz_ef_xlm_capb value = var:zz_ef_xmo_capb }
+		set_variable = { name = zz_ef_xlm_mem value = var:zz_ef_xmo_mem }
+		set_variable = { name = zz_ef_xlm_as value = var:zz_ef_xmo_as }
+		set_variable = { name = zz_ef_xlm_fo value = 0 }
+		if = {
+			limit = { var:zz_ef_xmo_to > 0 }
+			set_variable = { name = zz_ef_xlm_fo value = { value = var:zz_ef_xmo_fo divide = var:zz_ef_xmo_to } }
+		}
+		set_variable = { name = zz_ef_xlm_heat value = 1 }
+		if = {
+			limit = { var:zz_ef_xmo_capb > 0 }
+			set_variable = { name = zz_ef_xlm_heat value = { value = var:zz_ef_xmo_cap divide = var:zz_ef_xmo_capb } }
+		}
+		zz_ef_xmo_add = { N = ya V = var:zz_ef_xmo_to }
+		zz_ef_xmo_add = { N = mc V = 1 }
+		if = {
+			limit = { var:zz_ef_xmo_mc >= 12 }
+			set_variable = { name = zz_ef_xlm_to_y value = var:zz_ef_xmo_ya }
+			set_variable = { name = zz_ef_xmo_ya value = 0 }
+			set_variable = { name = zz_ef_xmo_mc value = 0 }
+		}
+		if = {
+			limit = { zz_ef_logs_on = yes }
+			debug_log = "EFD|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|xch_month|to_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_to').GetValue|0]|to_m_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_to_m').GetValue|0]|to_b_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_to_b').GetValue|0]|deals [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_n').GetValue|0]|foreign [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_fo').GetValue|3]|fee_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_fee').GetValue|0]|cap_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_cap').GetValue|0]|cap_base_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_capb').GetValue|0]|heat [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_heat').GetValue|3]|members [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_mem').GetValue|0]|assets [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_as').GetValue|0]|year_to_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xlm_to_y_v')|0]|fund_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xlm_fund_g_v')|0]|nav [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fd_nav_v')|3]|has [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fc_has_v')|0]"
+		}
+		set_variable = { name = zz_ef_xmo_to value = 0 }
+		set_variable = { name = zz_ef_xmo_to_m value = 0 }
+		set_variable = { name = zz_ef_xmo_to_b value = 0 }
+		set_variable = { name = zz_ef_xmo_n value = 0 }
+		set_variable = { name = zz_ef_xmo_fo value = 0 }
+		set_variable = { name = zz_ef_xmo_fee value = 0 }
+		set_variable = { name = zz_ef_xmo_cap value = 0 }
+		set_variable = { name = zz_ef_xmo_capb value = 0 }
+		set_variable = { name = zz_ef_xmo_mem value = 0 }
+		set_variable = { name = zz_ef_xmo_as value = 0 }
+	}
 }
 
 # Any scope, monthly with the logs on (zz_ef_world_month_ef): the world's line of the exchanges (EFD|WORLD) -- the

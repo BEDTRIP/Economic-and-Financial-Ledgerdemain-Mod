@@ -400,6 +400,101 @@ zz_ef_xk_n_b_v = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_xk_n_b } value = var:zz_ef_xk_n_b }
 }
+
+# ---- the exchange's month (Д.R4б.11): the exchanges compared by what goes through them, no points ----
+# Debtor scope: gold a unit of its claim K at the market (zz_ef_xk_gold_<K>_v) and at the base -- without the
+# exchange's multipliers of its money and bonds (Д.R8б.33), the worth before the demand; a fund's share -- its NAV
+zz_ef_xk_mul_m_safe_v = {
+	value = zz_ef_xmul_m_v
+	min = 0.01
+}
+zz_ef_xk_mul_b_safe_v = {
+	value = zz_ef_xmul_b_v
+	min = 0.01
+}
+zz_ef_xk_gold_m_v = { value = zz_ef_xq_gold_m }
+zz_ef_xk_base_m_v = {
+	value = zz_ef_xq_gold_m
+	divide = zz_ef_xk_mul_m_safe_v
+}
+zz_ef_xk_gold_b_v = { value = zz_ef_xq_gold_b }
+zz_ef_xk_base_b_v = {
+	value = zz_ef_xq_gold_b
+	divide = zz_ef_xk_mul_m_safe_v
+	divide = zz_ef_xk_mul_b_safe_v
+}
+zz_ef_xk_gold_f_v = {
+	value = zz_ef_fd_nav_v
+	multiply = zz_ef_xch_gpm_v
+}
+zz_ef_xk_base_f_v = {
+	value = zz_ef_xk_gold_f_v
+	divide = zz_ef_xk_mul_m_safe_v
+}
+# Exchange scope: the most assets in its book a week this month (zz_ef_xch_clear_exchange)
+zz_ef_xmo_as_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_xmo_as } value = var:zz_ef_xmo_as }
+}
+# Exchange scope: last month (zz_ef_xch_month_roll), in gold -- the turnover, the capitalization at the market, its
+# overheat (the market over the base), the share of the turnover from abroad, the members, the turnover of the last
+# 12 months counted (none in the first year); the rank of the table «Биржи мира» -- the year's turnover, in the first
+# year last month's x 12
+zz_ef_xlm_to_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_xlm_to } value = var:zz_ef_xlm_to }
+}
+zz_ef_xlm_cap_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_xlm_cap } value = var:zz_ef_xlm_cap }
+}
+zz_ef_xlm_heat_v = {
+	value = 1
+	if = { limit = { has_variable = zz_ef_xlm_heat } value = var:zz_ef_xlm_heat }
+}
+zz_ef_xlm_fo_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_xlm_fo } value = var:zz_ef_xlm_fo }
+}
+zz_ef_xlm_mem_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_xlm_mem } value = var:zz_ef_xlm_mem }
+}
+zz_ef_xlm_to_y_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_xlm_to_y } value = var:zz_ef_xlm_to_y }
+}
+zz_ef_xlm_rank_v = {
+	value = zz_ef_xlm_to_v
+	multiply = 12
+	if = { limit = { has_variable = zz_ef_xlm_to_y } value = var:zz_ef_xlm_to_y }
+}
+# Country scope: last month's turnover and overheat of the exchange it trades on (var:zz_ef_xch) -- the menus
+zz_ef_xch_my_to_v = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = zz_ef_xch
+			exists = var:zz_ef_xch
+		}
+		value = var:zz_ef_xch.zz_ef_xlm_to_v
+	}
+}
+zz_ef_xch_my_heat_v = {
+	value = 1
+	if = {
+		limit = {
+			has_variable = zz_ef_xch
+			exists = var:zz_ef_xch
+		}
+		value = var:zz_ef_xch.zz_ef_xlm_heat_v
+	}
+}
+# Exchange scope: its fund's capital in gold (the EFD|xch_month line)
+zz_ef_xlm_fund_g_v = {
+	value = zz_ef_fd_capital_v
+	multiply = zz_ef_xch_gpm_v
+}
 # the world's sums of the month (the EFD|WORLD line)
 zz_ef_xw_orders_v = {
 	value = 0
