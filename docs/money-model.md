@@ -31,7 +31,21 @@
   готовность E&F к ЦБ (`ld_cb_law.txt`). Счета `zz_ef_am_*`, `zz_ef_am_init`, недельный `zz_ef_am_sweep` — в
   `ld_metal_accounts.txt` (Д.R4а.2).
 - `common/scripted_effects/ld_metal_accounts.txt` — старт металла, недельные покупки/продажи ЦБ/банков/населения, выкуп
-  у населения, сверка металла ЦБ, мировая линия металла.
+  у населения, сверка металла ЦБ, мировая линия металла. Металл покупает вход зданий «Банк»: спрос банков + денежной
+  власти (`zz_ef_cb_buy_*_goods` от базы здания ЦБ E&F `var:zz_ef_cb_base_g/_s`) + кубышки казны, купленное делится по
+  долям прошлой недели (`var:zz_ef_mt_cb_share_*`, `_tr_share_*`); продажа власти и казны — выход наибольшего «Банка»
+  (`zz_ef_cb_gold_sell`, `zz_ef_tr_gold_sell`); банкам расход на металл власти возмещается из пула в капитал
+  (`zz_ef_cb_metal_net_cost`, `zz_ef_f_cb_metal_pay`), казна платит за свой (`zz_ef_trm_market_net`, Д.R4а.9, Д.R4а.13).
+- `common/scripted_effects/ld_treasury_metal.txt`, `common/script_values/ld_treasury_metal_values.txt`,
+  `common/scripted_guis/ld_treasury_metal.txt` — кубышка казны (Д.R4а.13): счета `zz_ef_trm_gold/_silver` (резервные
+  единицы), заявки рынка `zz_ef_trm_buy_g/_s`, `_sell_g/_s` (товары, шаг кнопки `zz_ef_trm_step_goods` = 10);
+  `zz_ef_trm_market_settle` (в шаге металла: купленное и проданное, казна ↔ пул и капитал банков, мировая линия),
+  `zz_ef_trm_sell_set`; сдать власти `zz_ef_trm_to_authority` (по паритету минус `zz_ef_trm_fee` 1,5 %: ЦБ — в его металл,
+  известное движение сверки, деньги в казну; казна-власть — перекладка без денег; банки металлического стандарта — в
+  их металл, платят из капитала), выкупить `zz_ef_trm_from_authority` (у ЦБ на металлическом стандарте — сверх нормы
+  покрытия `zz_ef_trm_am_free_*`, с комиссией из казны); ИИ сдаёт всю кубышку, когда казна в долгу
+  (`zz_ef_trm_ai_step`). Мировая линия металла считает кубышку с металлом власти (`zz_ef_wm_sum_cb_*`), наследник
+  забирает её (`zz_ef_metal_heir_world`). Блок «Кубышка казны» — Бюджет → Экономика под казной.
 - `common/scripted_triggers/ld_metal_triggers.txt` — `zz_ef_cb_metal_standard` (ЦБ на стандарте с металлом);
   `zz_ef_metal_gold/_silver/_bimet` — металл стандарта по закону (у внешневалютного — по закону якоря
   `var:zz_ef_anchor`), `zz_ef_exchange_std` (Д.R8а.6).

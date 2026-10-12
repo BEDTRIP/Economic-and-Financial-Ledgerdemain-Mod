@@ -38,6 +38,7 @@ _archive/<механизм>/
 | Деньги за металл по Юму (`zz_ef_hume_money_on`) | `ef_hume_money/` | ветка `if` в `zz_ef_cb_hume_step`; два значения |
 | Зонды EFJ / EFD | `ef_probes_efj_efd/` | два вызова и два эффекта в `ld_money_model.txt`; 4 значения |
 | Журнал «Центральный банк» `bank_je_central_1` и его прогресс-бары | `ef_bank_central_je/` | файл `common/journal_entries/00_ef_bank_central_je.txt` целиком; `currency_standards_progress_bar`, `central_banking_progress_bar` из `00_ef_progressbar.txt` |
+| Перевод казны в металл ЦБ `transfer_gold_to_central_bank_metal_reserves` (металл из ничего) | `ef_treasury_metal_transfer/` | раздел в `gui/ld_economy_panel.gui`; 4 scripted_gui в `00_economic_scripted_guis.txt`; `transfer_gold_to_central_bank_metal_reserves_sc`; начальная переменная в `10_new_country_var.txt` |
 | Приказы валюты по уровням `buy_sell_currency_order` (вызывали несуществующие эффекты `buy_<cur>_N`) | `ef_currency_orders_numbered/` | определение `buy_sell_currency_order` и его вызов в `central_bank_ef_on_half_yearly_pulse_country` (`00_on_action_main.txt`) |
 | ПМ потребления металла банка: тела `central_bank_production_methods`, `_3`, `_4` (ПМ не существуют) | `ef_central_bank_pm_consuption/` | тела трёх эффектов в `01_economic_scripted_effects.txt` (определения остались пустыми) |
 | ПМ `pm_privately_owned_building_arms_industry` (вне групп, несуществующий модификатор) | `ef_arms_industry_pm/` | определение из `00_ef_market_liquidity.txt` |

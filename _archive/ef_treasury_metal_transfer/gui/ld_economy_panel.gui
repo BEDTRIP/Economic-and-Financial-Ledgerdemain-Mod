@@ -1,0 +1,171 @@
+# from gui/ld_economy_panel.gui (the section «transfer to the CB's metal reserves»)
+						#transfer_government_treasury_to_central_bank_metal_reserves
+						section_header_button = {
+							#visible = "[Not(IsDataModelEmpty(AccessPlayer.GetAvailableCompanies))]"
+
+							blockoverride "left_text" {
+								text = "transfer_government_treasury_to_central_bank_metal_reserves"
+							}
+
+							blockoverride "onclick" {
+								onclick = "[GetVariableSystem.Toggle('transfer_government_treasury_to_central_bank_metal_reserves')]"
+
+							}
+
+							blockoverride "onclick_showmore" {
+								visible = "[Not(GetVariableSystem.Exists('transfer_government_treasury_to_central_bank_metal_reserves'))]"
+							}
+
+							blockoverride "onclick_showless" {
+								visible = "[GetVariableSystem.Exists('transfer_government_treasury_to_central_bank_metal_reserves')]"
+							}
+						}
+						flowcontainer = {
+							using = default_list_position
+							direction = vertical
+							visible = "[GetVariableSystem.Exists('transfer_government_treasury_to_central_bank_metal_reserves')]"
+							margin_top = 10
+
+							#monetary_policy_tools_no
+							flowcontainer = {
+								visible = "[GetScriptedGui('no_has_monetary_policy_tools_tech_visibility').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+								margin_top = 0
+								margin_right = 0
+								margin_left = 0
+
+								parentanchor = hcenter
+
+								spacing = 15
+
+								direction = vertical
+
+
+								textbox = {
+									margin_bottom = 5
+
+									text = "you_need_monetary_policy_tools"
+									parentanchor = hcenter
+
+									align = hcenter
+									elide = right
+									default_format = "#white #bold"
+									autoresize = yes
+									fontsize = 20
+									allow_outside = no
+									multiline = yes
+									minimumsize = { 500 40 }
+									maximumsize = { 500 -1 }
+									
+								}
+								
+							}
+
+							#has_monetary_policy_tools_tech_visibility
+							flowcontainer  = {
+								margin_top = 0
+								margin_right = 0
+								margin_left = 0
+								margin_bottom = 10
+								visible = "[GetScriptedGui('has_monetary_policy_tools_tech_visibility').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+								spacing = 20
+
+								direction = vertical
+
+								parentanchor = hcenter
+
+								textbox = {
+									autoresize = yes
+									text = "transfer_government_treasury_to_central_bank_metal_reserves_desc"
+									align = nobaseline
+									parentanchor = hcenter
+									fontsize = 40
+								}
+
+								flowcontainer = {
+									margin_top = 0
+									margin_right = 0
+									margin_left = 0
+
+									spacing = 20
+
+									direction = vertical
+									parentanchor = hcenter
+
+									background = {
+										using = entry_bg
+										margin= { 10 10 }
+									}
+
+									flowcontainer = {
+										margin_top = 0
+										margin_right = 0
+										margin_left = 0
+
+										direction = horizontal
+										spacing = 20
+										parentanchor = hcenter
+
+										### DOWNSIZE
+										button_icon_minus_action = {
+											name = "transfer_gold_to_central_bank_metal_reserves_reduce"
+											size = { 35 35 }
+											parentanchor = vcenter
+											# tooltip = "transfer_gold_to_central_bank_metal_reserves_reduce"
+											enabled = "[GetScriptedGui('transfer_gold_to_central_bank_metal_reserves_reduce').IsValid( GuiScope.SetRoot(GetPlayer.MakeScope ).End)]"
+											onclick = "[GetScriptedGui('transfer_gold_to_central_bank_metal_reserves_reduce').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+											using = tooltip_below
+										}
+										textbox = {
+											autoresize = yes
+											text = "transfer_government_treasury_to_central_bank_metal_reserves"
+											#tooltip = "CENTRAL_BANK_INTEREST_EFFECT"
+											align = nobaseline
+											parentanchor = vcenter
+											fontsize = 15
+
+										}
+										### EXPAND
+										button_icon_plus_action = {
+											name = "transfer_gold_to_central_bank_metal_reserves_increase"
+											size = { 35 35 }
+											parentanchor = vcenter
+											# tooltip = "transfer_gold_to_central_bank_metal_reserves_increase"
+											onclick = "[GetScriptedGui('transfer_gold_to_central_bank_metal_reserves_increase').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+										}
+									}
+								}
+
+								button_icon_square = {
+									name = "transfer_gold_to_central_bank_metal_reserves"
+
+									size = { 138 40 }
+									parentanchor = hcenter
+
+									align = hcenter|nobaseline
+
+									#tooltip = "transfer_gold_to_central_bank_metal_reserves"
+									using = tooltip_below
+
+									enabled = "[GetScriptedGui('transfer_gold_to_central_bank_metal_reserves_visible').IsValid( GuiScope.SetRoot(GetPlayer.MakeScope ).End)]"
+									onclick = "[GetScriptedGui('transfer_gold_to_central_bank_metal_reserves').Execute( GuiScope.SetRoot(GetPlayer.MakeScope ).End)]"
+									textbox = {
+										using = fontsize_large
+										autoresize = yes
+										text = "Transfert"
+										parentanchor = hcenter
+										#default_format = "#white #bold"
+										align = vcenter|nobaseline
+										position = { 0 3 }
+										fontsize = 25
+
+									}
+
+								}
+							}
+						}
+
+

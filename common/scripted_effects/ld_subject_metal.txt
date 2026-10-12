@@ -42,6 +42,9 @@ zz_ef_metal_heir_world = {
 						}
 						zz_ef_metal_heir_take = { V = am_gold }
 						zz_ef_metal_heir_take = { V = am_silver }
+						# the treasury's hoard (Д.R4а.13)
+						zz_ef_metal_heir_take = { V = trm_gold }
+						zz_ef_metal_heir_take = { V = trm_silver }
 						# its claims and the claims on its money (Д.R4а.8, ld_claims.txt)
 						zz_ef_rq_heir_take = yes
 						if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|metal_heir|pop_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_popm_gold')|0]|pop_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_popm_silver')|0]|bank_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bankm_gold')|0]|bank_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bankm_silver')|0]" }

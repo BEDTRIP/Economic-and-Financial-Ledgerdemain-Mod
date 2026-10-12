@@ -1,0 +1,97 @@
+﻿# The treasury's hoard (Д.R4а.13, scripted_effects/ld_treasury_metal.txt): the buttons in Budget -> Economy, the
+# treasury's block (gui/ld_economy_panel.gui). A market order of a button's step (zz_ef_trm_step_goods) -- bought / sold
+# by the Banks over the coming weeks, an opposite order cancels it; to / from the authority -- the same step at parity.
+zz_ef_trm_buy_gold = {
+	is_valid = { NOT = { has_law = law_type:law_no_monetary_system } }
+	effect = {
+		custom_tooltip = zz_ef_trm_buy_effect
+		hidden_effect = { zz_ef_trm_order_buy = { M = g } }
+	}
+}
+zz_ef_trm_sell_gold = {
+	is_valid = {
+		OR = {
+			zz_ef_trm_buy_g_v > 0
+			zz_ef_trm_gold_goods_v >= zz_ef_trm_step_goods
+		}
+	}
+	effect = {
+		custom_tooltip = zz_ef_trm_sell_effect
+		hidden_effect = { zz_ef_trm_order_sell = { M = g } }
+	}
+}
+zz_ef_trm_gold_to_auth = {
+	is_valid = {
+		zz_ef_trm_gold_v > 0
+		NOT = { has_law = law_type:law_no_monetary_system }
+	}
+	effect = {
+		custom_tooltip = zz_ef_trm_to_auth_effect
+		hidden_effect = {
+			set_variable = { name = zz_ef_trm_u value = zz_ef_trm_step_units_g }
+			zz_ef_trm_to_authority = { M = g METAL = gold }
+			remove_variable = zz_ef_trm_u
+		}
+	}
+}
+zz_ef_trm_gold_from_auth = {
+	is_valid = {
+		zz_ef_am_holder = yes
+		zz_ef_trm_am_free_g > 0
+	}
+	effect = {
+		custom_tooltip = zz_ef_trm_from_auth_effect
+		hidden_effect = {
+			set_variable = { name = zz_ef_trm_u value = zz_ef_trm_step_units_g }
+			zz_ef_trm_from_authority = { M = g METAL = gold }
+			remove_variable = zz_ef_trm_u
+		}
+	}
+}
+zz_ef_trm_buy_silver = {
+	is_valid = { NOT = { has_law = law_type:law_no_monetary_system } }
+	effect = {
+		custom_tooltip = zz_ef_trm_buy_effect
+		hidden_effect = { zz_ef_trm_order_buy = { M = s } }
+	}
+}
+zz_ef_trm_sell_silver = {
+	is_valid = {
+		OR = {
+			zz_ef_trm_buy_s_v > 0
+			zz_ef_trm_silver_goods_v >= zz_ef_trm_step_goods
+		}
+	}
+	effect = {
+		custom_tooltip = zz_ef_trm_sell_effect
+		hidden_effect = { zz_ef_trm_order_sell = { M = s } }
+	}
+}
+zz_ef_trm_silver_to_auth = {
+	is_valid = {
+		zz_ef_trm_silver_v > 0
+		NOT = { has_law = law_type:law_no_monetary_system }
+	}
+	effect = {
+		custom_tooltip = zz_ef_trm_to_auth_effect
+		hidden_effect = {
+			set_variable = { name = zz_ef_trm_u value = zz_ef_trm_step_units_s }
+			zz_ef_trm_to_authority = { M = s METAL = silver }
+			remove_variable = zz_ef_trm_u
+		}
+	}
+}
+zz_ef_trm_silver_from_auth = {
+	is_valid = {
+		zz_ef_am_holder = yes
+		zz_ef_trm_am_free_s > 0
+	}
+	effect = {
+		custom_tooltip = zz_ef_trm_from_auth_effect
+		hidden_effect = {
+			set_variable = { name = zz_ef_trm_u value = zz_ef_trm_step_units_s }
+			zz_ef_trm_from_authority = { M = s METAL = silver }
+			remove_variable = zz_ef_trm_u
+		}
+	}
+}

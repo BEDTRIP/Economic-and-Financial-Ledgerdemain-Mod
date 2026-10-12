@@ -219,36 +219,46 @@ zz_ef_cb_buy_silver_goods = {
 		}
 	}
 }
+zz_ef_metal_demand_gold_goods = {
+	value = zz_ef_cb_buy_gold_goods
+	add = zz_ef_bank_buy_gold_goods
+	add = zz_ef_trm_buy_g_v
+}
 zz_ef_cb_share_gold = {
 	value = 0
 	if = {
-		limit = {
-			OR = {
-				zz_ef_cb_buy_gold_goods > 0
-				zz_ef_bank_buy_gold_goods > 0
-			}
-		}
+		limit = { zz_ef_metal_demand_gold_goods > 0 }
 		value = zz_ef_cb_buy_gold_goods
-		divide = {
-			value = zz_ef_cb_buy_gold_goods
-			add = zz_ef_bank_buy_gold_goods
-		}
+		divide = zz_ef_metal_demand_gold_goods
 	}
+}
+zz_ef_tr_share_gold = {
+	value = 0
+	if = {
+		limit = { zz_ef_metal_demand_gold_goods > 0 }
+		value = zz_ef_trm_buy_g_v
+		divide = zz_ef_metal_demand_gold_goods
+	}
+}
+zz_ef_metal_demand_silver_goods = {
+	value = zz_ef_cb_buy_silver_goods
+	add = zz_ef_bank_buy_silver_goods
+	add = zz_ef_trm_buy_s_v
 }
 zz_ef_cb_share_silver = {
 	value = 0
 	if = {
-		limit = {
-			OR = {
-				zz_ef_cb_buy_silver_goods > 0
-				zz_ef_bank_buy_silver_goods > 0
-			}
-		}
+		limit = { zz_ef_metal_demand_silver_goods > 0 }
 		value = zz_ef_cb_buy_silver_goods
-		divide = {
-			value = zz_ef_cb_buy_silver_goods
-			add = zz_ef_bank_buy_silver_goods
-		}
+		divide = zz_ef_metal_demand_silver_goods
+	}
+}
+zz_ef_tr_share_silver = {
+	value = 0
+	if = {
+		limit = { zz_ef_metal_demand_silver_goods > 0 }
+		value = zz_ef_trm_buy_s_v
+		divide = zz_ef_metal_demand_silver_goods
 	}
 }
 # the authority's sale: an output modifier on one Banks building
@@ -393,14 +403,13 @@ zz_ef_bank_buy_silver_goods = {
 	multiply = gold_to_silver_rate
 	divide = zz_ef_silver_units_per_good
 }
-# The percent for the banks' modifier: the banks' and the authority's purchase over the methods' base - 1, in percent,
+# The percent for the banks' modifier: the banks', the authority's and the treasury's purchase over the methods' base - 1, in percent,
 # -100..+25000 (E&F's cap).
 zz_ef_bank_mult_gold = {
 	value = -100
 	if = {
 		limit = { zz_ef_bank_base_gold_goods > 0 }
-		value = zz_ef_bank_buy_gold_goods
-		add = zz_ef_cb_buy_gold_goods
+		value = zz_ef_metal_demand_gold_goods
 		divide = zz_ef_bank_base_gold_goods
 		subtract = 1
 		multiply = 100
@@ -412,8 +421,7 @@ zz_ef_bank_mult_silver = {
 	value = -100
 	if = {
 		limit = { zz_ef_bank_base_silver_goods > 0 }
-		value = zz_ef_bank_buy_silver_goods
-		add = zz_ef_cb_buy_silver_goods
+		value = zz_ef_metal_demand_silver_goods
 		divide = zz_ef_bank_base_silver_goods
 		subtract = 1
 		multiply = 100
@@ -548,28 +556,34 @@ zz_ef_cb_buyback_premium = 1.02
 # Every account summed over the world, gold and silver apart (Д3.1), against the start's stock + bought - sold
 # (cumulative globals, zz_ef_wm_add). The rest = what moved metal without the market or a pair -- 0 when the
 # system is closed (E&F's own metal operations with its private banks' metal would show here, Д3.5 / Ф3).
+# the state's: the authority's reserves and the treasury's hoard (Д.R4а.13)
 zz_ef_wm_sum_cb_gold = {
 	value = 0
 	every_country = {
 		limit = { is_country_alive = yes }
 		add = gold_state_native_for_stockpile
+		add = zz_ef_trm_gold_v
 	}
 	every_in_global_list = {
 		variable = zz_ef_mh_list
 		limit = { is_country_alive = no }
 		add = gold_state_native_for_stockpile
+		add = zz_ef_trm_gold_v
 	}
 }
+# the state's: the authority's reserves and the treasury's hoard (Д.R4а.13)
 zz_ef_wm_sum_cb_silver = {
 	value = 0
 	every_country = {
 		limit = { is_country_alive = yes }
 		add = silver_state_native_for_stockpile
+		add = zz_ef_trm_silver_v
 	}
 	every_in_global_list = {
 		variable = zz_ef_mh_list
 		limit = { is_country_alive = no }
 		add = silver_state_native_for_stockpile
+		add = zz_ef_trm_silver_v
 	}
 }
 zz_ef_wm_sum_bank_gold = {

@@ -1,0 +1,120 @@
+﻿#############################################
+# The treasury's hoard (Д.R4а.13, понятие «Казна»): its own metal, apart from the authority's reserves, covering
+# nothing. Effects: scripted_effects/ld_treasury_metal.txt; buttons: scripted_guis/ld_treasury_metal.txt.
+# Units -- the reserve units (ld_metal_accounts_values.txt): gold a good x 100, silver a good x 775; at parity a gold
+# unit is a unit of money, a silver one -- 1 / gold_to_silver_rate.
+#############################################
+
+# a button's order, goods
+zz_ef_trm_step_goods = 10
+# the authority's commission on a sale to it and a purchase from it (Д.R4а.13, принято ночью)
+zz_ef_trm_fee = 0.015
+
+zz_ef_trm_gold_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_trm_gold } value = var:zz_ef_trm_gold }
+}
+zz_ef_trm_silver_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_trm_silver } value = var:zz_ef_trm_silver }
+}
+zz_ef_trm_gold_goods_v = {
+	value = zz_ef_trm_gold_v
+	divide = zz_ef_gold_units_per_good
+}
+zz_ef_trm_silver_goods_v = {
+	value = zz_ef_trm_silver_v
+	divide = zz_ef_silver_units_per_good
+}
+# the open orders, goods
+zz_ef_trm_buy_g_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_trm_buy_g } value = var:zz_ef_trm_buy_g }
+}
+zz_ef_trm_buy_s_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_trm_buy_s } value = var:zz_ef_trm_buy_s }
+}
+zz_ef_trm_sell_g_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_trm_sell_g } value = var:zz_ef_trm_sell_g }
+}
+zz_ef_trm_sell_s_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_trm_sell_s } value = var:zz_ef_trm_sell_s }
+}
+# the hoard at parity, money
+zz_ef_trm_money_v = {
+	value = zz_ef_trm_gold_v
+	add = {
+		value = zz_ef_trm_silver_v
+		divide = gold_to_silver_rate
+	}
+}
+# a step of the hoard's metal at parity (one token for the effects): var:zz_ef_trm_u (units of metal $M$)
+zz_ef_trm_u_money_g = {
+	value = var:zz_ef_trm_u
+}
+zz_ef_trm_u_money_s = {
+	value = var:zz_ef_trm_u
+	divide = gold_to_silver_rate
+}
+# the step of a button, units
+zz_ef_trm_step_units_g = {
+	value = zz_ef_trm_step_goods
+	multiply = zz_ef_gold_units_per_good
+}
+zz_ef_trm_step_units_s = {
+	value = zz_ef_trm_step_goods
+	multiply = zz_ef_silver_units_per_good
+}
+# the authority's metal it may sell to the treasury: with a CB on a metal standard -- over the norm of cover, else all
+zz_ef_trm_am_free_g = {
+	value = gold_state_native_for_stockpile
+	if = {
+		limit = {
+			zz_ef_cb_metal_standard = yes
+			zz_ef_cb_cover > 0
+		}
+		multiply = {
+			value = zz_ef_cb_cover
+			subtract = zz_ef_cover_normal
+			divide = zz_ef_cb_cover
+			min = 0
+		}
+	}
+	min = 0
+}
+zz_ef_trm_am_free_s = {
+	value = silver_state_native_for_stockpile
+	if = {
+		limit = {
+			zz_ef_cb_metal_standard = yes
+			zz_ef_cb_cover > 0
+		}
+		multiply = {
+			value = zz_ef_cb_cover
+			subtract = zz_ef_cover_normal
+			divide = zz_ef_cb_cover
+			min = 0
+		}
+	}
+	min = 0
+}
+# the treasury's money, the engine's (gold_reserves)
+zz_ef_trm_treasury_v = {
+	value = gold_reserves
+}
+# the week's net payment of the hoard's market deals to the Banks (+: the treasury pays), at the market price
+zz_ef_trm_market_net = {
+	value = var:zz_ef_f_mt_tr_in_g
+	subtract = var:zz_ef_f_mt_tr_out_g
+	divide = zz_ef_gold_units_per_good
+	multiply = zz_ef_gold_price
+	add = {
+		value = var:zz_ef_f_mt_tr_in_s
+		subtract = var:zz_ef_f_mt_tr_out_s
+		divide = zz_ef_silver_units_per_good
+		multiply = zz_ef_silver_price
+	}
+}

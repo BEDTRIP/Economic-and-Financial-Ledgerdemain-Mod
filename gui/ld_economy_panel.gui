@@ -1415,6 +1415,173 @@ types zz_ef_economy_panel
 				}
 			}
 
+			# the treasury's hoard (Д.R4а.13, scripted_guis/ld_treasury_metal.txt)
+			default_header = {
+				blockoverride "text" {
+					text = "zz_ef_trm_title"
+				}
+				tooltip = "zz_ef_trm_title_tt"
+			}
+			flowcontainer = {
+				spacing = 6
+				direction = vertical
+				using = default_list_position
+				margin_bottom = 10
+				textbox = {
+					text = "zz_ef_trm_value_row"
+					autoresize = yes
+					parentanchor = hcenter
+					align = hcenter|nobaseline
+				}
+					flowcontainer = {
+						direction = horizontal
+						spacing = 6
+						parentanchor = hcenter
+						textbox = {
+							text = "zz_ef_trm_gold_row"
+							autoresize = no
+							size = { 230 32 }
+							align = left|nobaseline
+							parentanchor = vcenter
+							elide = right
+						}
+						button_icon_square = {
+							size = { 96 32 }
+							parentanchor = vcenter
+							tooltip = "[GetScriptedGui('zz_ef_trm_buy_gold').BuildTooltip( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							using = tooltip_below
+							enabled = "[GetScriptedGui('zz_ef_trm_buy_gold').IsValid( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							onclick = "[GetScriptedGui('zz_ef_trm_buy_gold').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							textbox = {
+								text = "zz_ef_trm_btn_buy"
+								autoresize = yes
+								parentanchor = center
+								align = hcenter|nobaseline
+								default_format = "#white #bold"
+							}
+						}
+						button_icon_square = {
+							size = { 96 32 }
+							parentanchor = vcenter
+							tooltip = "[GetScriptedGui('zz_ef_trm_sell_gold').BuildTooltip( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							using = tooltip_below
+							enabled = "[GetScriptedGui('zz_ef_trm_sell_gold').IsValid( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							onclick = "[GetScriptedGui('zz_ef_trm_sell_gold').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							textbox = {
+								text = "zz_ef_trm_btn_sell"
+								autoresize = yes
+								parentanchor = center
+								align = hcenter|nobaseline
+								default_format = "#white #bold"
+							}
+						}
+						button_icon_square = {
+							size = { 96 32 }
+							parentanchor = vcenter
+							tooltip = "[GetScriptedGui('zz_ef_trm_gold_to_auth').BuildTooltip( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							using = tooltip_below
+							enabled = "[GetScriptedGui('zz_ef_trm_gold_to_auth').IsValid( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							onclick = "[GetScriptedGui('zz_ef_trm_gold_to_auth').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							textbox = {
+								text = "zz_ef_trm_btn_to_auth"
+								autoresize = yes
+								parentanchor = center
+								align = hcenter|nobaseline
+								default_format = "#white #bold"
+							}
+						}
+						button_icon_square = {
+							size = { 96 32 }
+							parentanchor = vcenter
+							tooltip = "[GetScriptedGui('zz_ef_trm_gold_from_auth').BuildTooltip( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							using = tooltip_below
+							enabled = "[GetScriptedGui('zz_ef_trm_gold_from_auth').IsValid( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							onclick = "[GetScriptedGui('zz_ef_trm_gold_from_auth').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							textbox = {
+								text = "zz_ef_trm_btn_from_auth"
+								autoresize = yes
+								parentanchor = center
+								align = hcenter|nobaseline
+								default_format = "#white #bold"
+							}
+						}
+					}
+					flowcontainer = {
+						direction = horizontal
+						spacing = 6
+						parentanchor = hcenter
+						textbox = {
+							text = "zz_ef_trm_silver_row"
+							autoresize = no
+							size = { 230 32 }
+							align = left|nobaseline
+							parentanchor = vcenter
+							elide = right
+						}
+						button_icon_square = {
+							size = { 96 32 }
+							parentanchor = vcenter
+							tooltip = "[GetScriptedGui('zz_ef_trm_buy_silver').BuildTooltip( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							using = tooltip_below
+							enabled = "[GetScriptedGui('zz_ef_trm_buy_silver').IsValid( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							onclick = "[GetScriptedGui('zz_ef_trm_buy_silver').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							textbox = {
+								text = "zz_ef_trm_btn_buy"
+								autoresize = yes
+								parentanchor = center
+								align = hcenter|nobaseline
+								default_format = "#white #bold"
+							}
+						}
+						button_icon_square = {
+							size = { 96 32 }
+							parentanchor = vcenter
+							tooltip = "[GetScriptedGui('zz_ef_trm_sell_silver').BuildTooltip( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							using = tooltip_below
+							enabled = "[GetScriptedGui('zz_ef_trm_sell_silver').IsValid( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							onclick = "[GetScriptedGui('zz_ef_trm_sell_silver').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							textbox = {
+								text = "zz_ef_trm_btn_sell"
+								autoresize = yes
+								parentanchor = center
+								align = hcenter|nobaseline
+								default_format = "#white #bold"
+							}
+						}
+						button_icon_square = {
+							size = { 96 32 }
+							parentanchor = vcenter
+							tooltip = "[GetScriptedGui('zz_ef_trm_silver_to_auth').BuildTooltip( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							using = tooltip_below
+							enabled = "[GetScriptedGui('zz_ef_trm_silver_to_auth').IsValid( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							onclick = "[GetScriptedGui('zz_ef_trm_silver_to_auth').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							textbox = {
+								text = "zz_ef_trm_btn_to_auth"
+								autoresize = yes
+								parentanchor = center
+								align = hcenter|nobaseline
+								default_format = "#white #bold"
+							}
+						}
+						button_icon_square = {
+							size = { 96 32 }
+							parentanchor = vcenter
+							tooltip = "[GetScriptedGui('zz_ef_trm_silver_from_auth').BuildTooltip( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							using = tooltip_below
+							enabled = "[GetScriptedGui('zz_ef_trm_silver_from_auth').IsValid( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							onclick = "[GetScriptedGui('zz_ef_trm_silver_from_auth').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							textbox = {
+								text = "zz_ef_trm_btn_from_auth"
+								autoresize = yes
+								parentanchor = center
+								align = hcenter|nobaseline
+								default_format = "#white #bold"
+							}
+						}
+					}
+			}
+
+
 			############################################################################################################################################################
 			############################################################################################################################################################
 			############################################################################################################################################################
@@ -2361,175 +2528,6 @@ types zz_ef_economy_panel
 						# 		maximumsize = { 500 -1 }
 						# 	}
 						# }
-
-						#transfer_government_treasury_to_central_bank_metal_reserves
-						section_header_button = {
-							#visible = "[Not(IsDataModelEmpty(AccessPlayer.GetAvailableCompanies))]"
-
-							blockoverride "left_text" {
-								text = "transfer_government_treasury_to_central_bank_metal_reserves"
-							}
-
-							blockoverride "onclick" {
-								onclick = "[GetVariableSystem.Toggle('transfer_government_treasury_to_central_bank_metal_reserves')]"
-
-							}
-
-							blockoverride "onclick_showmore" {
-								visible = "[Not(GetVariableSystem.Exists('transfer_government_treasury_to_central_bank_metal_reserves'))]"
-							}
-
-							blockoverride "onclick_showless" {
-								visible = "[GetVariableSystem.Exists('transfer_government_treasury_to_central_bank_metal_reserves')]"
-							}
-						}
-						flowcontainer = {
-							using = default_list_position
-							direction = vertical
-							visible = "[GetVariableSystem.Exists('transfer_government_treasury_to_central_bank_metal_reserves')]"
-							margin_top = 10
-
-							#monetary_policy_tools_no
-							flowcontainer = {
-								visible = "[GetScriptedGui('no_has_monetary_policy_tools_tech_visibility').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-								margin_top = 0
-								margin_right = 0
-								margin_left = 0
-
-								parentanchor = hcenter
-
-								spacing = 15
-
-								direction = vertical
-
-
-								textbox = {
-									margin_bottom = 5
-
-									text = "you_need_monetary_policy_tools"
-									parentanchor = hcenter
-
-									align = hcenter
-									elide = right
-									default_format = "#white #bold"
-									autoresize = yes
-									fontsize = 20
-									allow_outside = no
-									multiline = yes
-									minimumsize = { 500 40 }
-									maximumsize = { 500 -1 }
-									
-								}
-								
-							}
-
-							#has_monetary_policy_tools_tech_visibility
-							flowcontainer  = {
-								margin_top = 0
-								margin_right = 0
-								margin_left = 0
-								margin_bottom = 10
-								visible = "[GetScriptedGui('has_monetary_policy_tools_tech_visibility').IsShown( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-								spacing = 20
-
-								direction = vertical
-
-								parentanchor = hcenter
-
-								textbox = {
-									autoresize = yes
-									text = "transfer_government_treasury_to_central_bank_metal_reserves_desc"
-									align = nobaseline
-									parentanchor = hcenter
-									fontsize = 40
-								}
-
-								flowcontainer = {
-									margin_top = 0
-									margin_right = 0
-									margin_left = 0
-
-									spacing = 20
-
-									direction = vertical
-									parentanchor = hcenter
-
-									background = {
-										using = entry_bg
-										margin= { 10 10 }
-									}
-
-									flowcontainer = {
-										margin_top = 0
-										margin_right = 0
-										margin_left = 0
-
-										direction = horizontal
-										spacing = 20
-										parentanchor = hcenter
-
-										### DOWNSIZE
-										button_icon_minus_action = {
-											name = "transfer_gold_to_central_bank_metal_reserves_reduce"
-											size = { 35 35 }
-											parentanchor = vcenter
-											# tooltip = "transfer_gold_to_central_bank_metal_reserves_reduce"
-											enabled = "[GetScriptedGui('transfer_gold_to_central_bank_metal_reserves_reduce').IsValid( GuiScope.SetRoot(GetPlayer.MakeScope ).End)]"
-											onclick = "[GetScriptedGui('transfer_gold_to_central_bank_metal_reserves_reduce').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-											using = tooltip_below
-										}
-										textbox = {
-											autoresize = yes
-											text = "transfer_government_treasury_to_central_bank_metal_reserves"
-											#tooltip = "CENTRAL_BANK_INTEREST_EFFECT"
-											align = nobaseline
-											parentanchor = vcenter
-											fontsize = 15
-
-										}
-										### EXPAND
-										button_icon_plus_action = {
-											name = "transfer_gold_to_central_bank_metal_reserves_increase"
-											size = { 35 35 }
-											parentanchor = vcenter
-											# tooltip = "transfer_gold_to_central_bank_metal_reserves_increase"
-											onclick = "[GetScriptedGui('transfer_gold_to_central_bank_metal_reserves_increase').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-										}
-									}
-								}
-
-								button_icon_square = {
-									name = "transfer_gold_to_central_bank_metal_reserves"
-
-									size = { 138 40 }
-									parentanchor = hcenter
-
-									align = hcenter|nobaseline
-
-									#tooltip = "transfer_gold_to_central_bank_metal_reserves"
-									using = tooltip_below
-
-									enabled = "[GetScriptedGui('transfer_gold_to_central_bank_metal_reserves_visible').IsValid( GuiScope.SetRoot(GetPlayer.MakeScope ).End)]"
-									onclick = "[GetScriptedGui('transfer_gold_to_central_bank_metal_reserves').Execute( GuiScope.SetRoot(GetPlayer.MakeScope ).End)]"
-									textbox = {
-										using = fontsize_large
-										autoresize = yes
-										text = "Transfert"
-										parentanchor = hcenter
-										#default_format = "#white #bold"
-										align = vcenter|nobaseline
-										position = { 0 3 }
-										fontsize = 25
-
-									}
-
-								}
-							}
-						}
 
 						divider_decorative = { 	
 							size =  { 75% 10 }

@@ -1,0 +1,198 @@
+﻿#############################################
+# The treasury's hoard (Д.R4а.13, понятие «Казна»): var:zz_ef_trm_gold / zz_ef_trm_silver, reserve units, apart from the
+# authority's reserves (zz_ef_am_*), covering nothing. It is bought and sold on the market through the country's Banks
+# (an order, goods: var:zz_ef_trm_buy_g / _s, var:zz_ef_trm_sell_g / _s -- the Banks' input and output, the treasury
+# pays them back the price, ld_metal_accounts.txt), sold to the authority at parity less its commission and bought from
+# it (a CB on a metal standard -- only over the norm of cover). Without a CB on a fiat, exchange, external standard the
+# authority is the treasury itself: the metal moves between its accounts, no money. On a metal standard without a CB
+# the banks buy it at parity. Values: script_values/ld_treasury_metal_values.txt; buttons: scripted_guis/ld_treasury_metal.txt.
+#############################################
+
+zz_ef_trm_init = {
+	if = { limit = { NOT = { has_variable = zz_ef_trm_gold } } set_variable = { name = zz_ef_trm_gold value = 0 } }
+	if = { limit = { NOT = { has_variable = zz_ef_trm_silver } } set_variable = { name = zz_ef_trm_silver value = 0 } }
+	if = { limit = { NOT = { has_variable = zz_ef_trm_buy_g } } set_variable = { name = zz_ef_trm_buy_g value = 0 } }
+	if = { limit = { NOT = { has_variable = zz_ef_trm_buy_s } } set_variable = { name = zz_ef_trm_buy_s value = 0 } }
+	if = { limit = { NOT = { has_variable = zz_ef_trm_sell_g } } set_variable = { name = zz_ef_trm_sell_g value = 0 } }
+	if = { limit = { NOT = { has_variable = zz_ef_trm_sell_s } } set_variable = { name = zz_ef_trm_sell_s value = 0 } }
+	if = { limit = { NOT = { has_variable = zz_ef_mt_tr_sell_g } } set_variable = { name = zz_ef_mt_tr_sell_g value = 0 } }
+	if = { limit = { NOT = { has_variable = zz_ef_mt_tr_sell_s } } set_variable = { name = zz_ef_mt_tr_sell_s value = 0 } }
+}
+
+# Country scope, in the weekly metal step (zz_ef_metal_week_step) after the week's metal is read: what the Banks bought
+# for the hoard and sold of it comes in / goes out, the orders shrink, the treasury pays the Banks the net at the market
+# price (the pool, the banks' capital), the world line counts it.
+zz_ef_trm_market_settle = {
+	zz_ef_trm_init = yes
+	change_variable = { name = zz_ef_trm_gold add = var:zz_ef_f_mt_tr_in_g }
+	change_variable = { name = zz_ef_trm_silver add = var:zz_ef_f_mt_tr_in_s }
+	change_variable = { name = zz_ef_trm_gold subtract = var:zz_ef_f_mt_tr_out_g }
+	change_variable = { name = zz_ef_trm_silver subtract = var:zz_ef_f_mt_tr_out_s }
+	change_variable = { name = zz_ef_trm_buy_g subtract = { value = var:zz_ef_f_mt_tr_in_g divide = zz_ef_gold_units_per_good } }
+	change_variable = { name = zz_ef_trm_buy_s subtract = { value = var:zz_ef_f_mt_tr_in_s divide = zz_ef_silver_units_per_good } }
+	change_variable = { name = zz_ef_trm_sell_g subtract = { value = var:zz_ef_f_mt_tr_out_g divide = zz_ef_gold_units_per_good } }
+	change_variable = { name = zz_ef_trm_sell_s subtract = { value = var:zz_ef_f_mt_tr_out_s divide = zz_ef_silver_units_per_good } }
+	if = { limit = { var:zz_ef_trm_buy_g < 0 } set_variable = { name = zz_ef_trm_buy_g value = 0 } }
+	if = { limit = { var:zz_ef_trm_buy_s < 0 } set_variable = { name = zz_ef_trm_buy_s value = 0 } }
+	if = { limit = { var:zz_ef_trm_sell_g < 0 } set_variable = { name = zz_ef_trm_sell_g value = 0 } }
+	if = { limit = { var:zz_ef_trm_sell_s < 0 } set_variable = { name = zz_ef_trm_sell_s value = 0 } }
+	set_variable = { name = zz_ef_f_trm_pay value = zz_ef_trm_market_net }
+	if = {
+		limit = { var:zz_ef_f_trm_pay > 0 }
+		zz_ef_post_eng = { FROM = treasury TO = pool CLAIM = zz_ef_bank_capital V = var:zz_ef_f_trm_pay }
+	}
+	else_if = {
+		limit = { var:zz_ef_f_trm_pay < 0 }
+		set_variable = { name = zz_ef_t_trm value = var:zz_ef_f_trm_pay }
+		change_variable = { name = zz_ef_t_trm multiply = -1 }
+		zz_ef_post_eng_paid = { FROM = pool TO = treasury PAYER = zz_ef_bank_capital V = var:zz_ef_t_trm }
+		remove_variable = zz_ef_t_trm
+	}
+	zz_ef_wm_add = { KEY = buy_gold VALUE = var:zz_ef_f_mt_tr_in_g }
+	zz_ef_wm_add = { KEY = buy_silver VALUE = var:zz_ef_f_mt_tr_in_s }
+	zz_ef_wm_add = { KEY = sell_gold VALUE = var:zz_ef_f_mt_tr_out_g }
+	zz_ef_wm_add = { KEY = sell_silver VALUE = var:zz_ef_f_mt_tr_out_s }
+}
+
+# Country scope, in the weekly metal step: the coming week's sale -- the order, at most the hoard (goods), an output
+# modifier on the largest Banks building; var:zz_ef_mt_tr_sell_g / _s -- what was set (the next step's reading).
+zz_ef_trm_sell_set = {
+	zz_ef_trm_init = yes
+	set_variable = { name = zz_ef_mt_tr_sell_g value = { value = var:zz_ef_trm_sell_g max = zz_ef_trm_gold_goods_v min = 0 } }
+	set_variable = { name = zz_ef_mt_tr_sell_s value = { value = var:zz_ef_trm_sell_s max = zz_ef_trm_silver_goods_v min = 0 } }
+	every_scope_building = {
+		limit = { is_building_type = building_zz_ef_bank }
+		if = { limit = { has_modifier = zz_ef_tr_gold_sell } remove_modifier = zz_ef_tr_gold_sell }
+		if = { limit = { has_modifier = zz_ef_tr_silver_sell } remove_modifier = zz_ef_tr_silver_sell }
+	}
+	if = {
+		limit = {
+			OR = {
+				var:zz_ef_mt_tr_sell_g > 0
+				var:zz_ef_mt_tr_sell_s > 0
+			}
+		}
+		ordered_scope_building = {
+			limit = { is_building_type = building_zz_ef_bank }
+			order_by = level
+			max = 1
+			if = {
+				limit = { root.var:zz_ef_mt_tr_sell_g > 0 }
+				add_modifier = { name = zz_ef_tr_gold_sell multiplier = root.var:zz_ef_mt_tr_sell_g }
+			}
+			if = {
+				limit = { root.var:zz_ef_mt_tr_sell_s > 0 }
+				add_modifier = { name = zz_ef_tr_silver_sell multiplier = root.var:zz_ef_mt_tr_sell_s }
+			}
+		}
+	}
+}
+
+# Country scope: a market order of $M$ (g / s) for a button's step (goods); a buy cancels a sale order first and back.
+zz_ef_trm_order_buy = {
+	zz_ef_trm_init = yes
+	if = {
+		limit = { var:zz_ef_trm_sell_$M$ > 0 }
+		set_variable = { name = zz_ef_trm_sell_$M$ value = 0 }
+	}
+	else = {
+		change_variable = { name = zz_ef_trm_buy_$M$ add = zz_ef_trm_step_goods }
+	}
+}
+zz_ef_trm_order_sell = {
+	zz_ef_trm_init = yes
+	if = {
+		limit = { var:zz_ef_trm_buy_$M$ > 0 }
+		set_variable = { name = zz_ef_trm_buy_$M$ value = 0 }
+	}
+	else = {
+		change_variable = { name = zz_ef_trm_sell_$M$ add = zz_ef_trm_step_goods }
+	}
+}
+
+# Country scope: the hoard's metal $M$ (g / s), var:zz_ef_trm_u units (at most what it holds), to the authority at parity
+# less the commission. A CB or the treasury's own authority -- into the authority's metal (a known move of its
+# reconciliation); the banks of a metal standard -- into their metal, they pay out of their capital (the pool).
+zz_ef_trm_to_authority = {
+	zz_ef_trm_init = yes
+	if = { limit = { var:zz_ef_trm_u > var:zz_ef_trm_$METAL$ } set_variable = { name = zz_ef_trm_u value = var:zz_ef_trm_$METAL$ } }
+	if = {
+		limit = { var:zz_ef_trm_u > 0 }
+		change_variable = { name = zz_ef_trm_$METAL$ subtract = var:zz_ef_trm_u }
+		set_variable = { name = zz_ef_f_trm_auth value = zz_ef_trm_u_money_$M$ }
+		if = {
+			limit = { zz_ef_am_holder = yes }
+			zz_ef_am_init = yes
+			change_variable = { name = zz_ef_am_$METAL$ add = var:zz_ef_trm_u }
+			zz_ef_mt_known_add = { M = $M$ V = var:zz_ef_trm_u }
+			# the treasury as the authority -- its own accounts, no money
+			if = {
+				limit = { has_modifier = has_central_bank }
+				change_variable = { name = zz_ef_f_trm_auth multiply = { value = 1 subtract = zz_ef_trm_fee } }
+				zz_ef_eng_add_treasury = { V = var:zz_ef_f_trm_auth }
+			}
+			else = {
+				set_variable = { name = zz_ef_f_trm_auth value = 0 }
+			}
+		}
+		else = {
+			zz_ef_bankm_init = yes
+			change_variable = { name = zz_ef_bankm_$METAL$ add = var:zz_ef_trm_u }
+			change_variable = { name = zz_ef_f_trm_auth multiply = { value = 1 subtract = zz_ef_trm_fee } }
+			zz_ef_post_eng_paid = { FROM = pool TO = treasury PAYER = zz_ef_bank_capital V = var:zz_ef_f_trm_auth }
+		}
+		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFK|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|trm_to_auth|$M$ [THIS.GetCountry.MakeScope.Var('zz_ef_trm_u').GetValue|0]|money [THIS.GetCountry.MakeScope.Var('zz_ef_f_trm_auth').GetValue|0]" }
+	}
+}
+# Country scope: var:zz_ef_trm_u units of $M$ from the authority into the hoard, at parity plus the commission -- as much
+# as the authority may sell (zz_ef_trm_am_free_*) and the treasury can pay; the treasury as the authority -- no money.
+zz_ef_trm_from_authority = {
+	zz_ef_trm_init = yes
+	if = {
+		limit = { zz_ef_am_holder = yes }
+		zz_ef_am_init = yes
+		if = { limit = { var:zz_ef_trm_u > zz_ef_trm_am_free_$M$ } set_variable = { name = zz_ef_trm_u value = zz_ef_trm_am_free_$M$ } }
+		set_variable = { name = zz_ef_f_trm_auth value = 0 }
+		if = {
+			limit = { has_modifier = has_central_bank }
+			set_variable = { name = zz_ef_f_trm_auth value = zz_ef_trm_u_money_$M$ }
+			change_variable = { name = zz_ef_f_trm_auth multiply = { value = 1 add = zz_ef_trm_fee } }
+			if = {
+				limit = { var:zz_ef_f_trm_auth > zz_ef_trm_treasury_v }
+				set_variable = { name = zz_ef_trm_u value = 0 }
+				set_variable = { name = zz_ef_f_trm_auth value = 0 }
+			}
+		}
+		if = {
+			limit = { var:zz_ef_trm_u > 0 }
+			change_variable = { name = zz_ef_am_$METAL$ subtract = var:zz_ef_trm_u }
+			change_variable = { name = zz_ef_trm_$METAL$ add = var:zz_ef_trm_u }
+			set_variable = { name = zz_ef_t_trm value = var:zz_ef_trm_u }
+			change_variable = { name = zz_ef_t_trm multiply = -1 }
+			zz_ef_mt_known_add = { M = $M$ V = var:zz_ef_t_trm }
+			remove_variable = zz_ef_t_trm
+			if = {
+				limit = { var:zz_ef_f_trm_auth > 0 }
+				zz_ef_eng_sub_treasury = { V = var:zz_ef_f_trm_auth }
+			}
+			if = { limit = { zz_ef_logs_on = yes } debug_log = "EFK|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|trm_from_auth|$M$ [THIS.GetCountry.MakeScope.Var('zz_ef_trm_u').GetValue|0]|money [THIS.GetCountry.MakeScope.Var('zz_ef_f_trm_auth').GetValue|0]" }
+		}
+	}
+}
+
+# Country scope, weekly (zz_ef_metal_week_step): the AI sells its whole hoard to the authority when its treasury is in
+# debt (Д.R4а.13); the player decides with the buttons.
+zz_ef_trm_ai_step = {
+	if = {
+		limit = {
+			is_player = no
+			gold_reserves < 0
+			zz_ef_trm_money_v > 0
+		}
+		set_variable = { name = zz_ef_trm_u value = zz_ef_trm_gold_v }
+		zz_ef_trm_to_authority = { M = g METAL = gold }
+		set_variable = { name = zz_ef_trm_u value = zz_ef_trm_silver_v }
+		zz_ef_trm_to_authority = { M = s METAL = silver }
+		remove_variable = zz_ef_trm_u
+	}
+}

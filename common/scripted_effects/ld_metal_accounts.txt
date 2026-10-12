@@ -302,32 +302,59 @@ zz_ef_metal_week_step = {
 	# what was bought / sold this week
 	# the CB's and the banks' input (goods) once each: the pops' part below is the states' consumption less these two
 	# (= zz_ef_pop_<metal>_goods, with the same floor at 0)
-	# the Banks' input is the banks' and the authority's: split by last week's shares
+	# the Banks' input is the banks', the authority's and the treasury's (its hoard, Д.R4а.13): split by last week's shares
 	if = { limit = { NOT = { has_variable = zz_ef_mt_cb_share_g } } set_variable = { name = zz_ef_mt_cb_share_g value = 0 } }
 	if = { limit = { NOT = { has_variable = zz_ef_mt_cb_share_s } } set_variable = { name = zz_ef_mt_cb_share_s value = 0 } }
+	if = { limit = { NOT = { has_variable = zz_ef_mt_tr_share_g } } set_variable = { name = zz_ef_mt_tr_share_g value = 0 } }
+	if = { limit = { NOT = { has_variable = zz_ef_mt_tr_share_s } } set_variable = { name = zz_ef_mt_tr_share_s value = 0 } }
 	set_variable = { name = zz_ef_t_bank_in_g value = zz_ef_bank_in_gold_goods }
 	set_variable = { name = zz_ef_t_bank_in_s value = zz_ef_bank_in_silver_goods }
 	set_variable = { name = zz_ef_t_cb_in_g value = var:zz_ef_t_bank_in_g }
 	change_variable = { name = zz_ef_t_cb_in_g multiply = var:zz_ef_mt_cb_share_g }
 	set_variable = { name = zz_ef_t_cb_in_s value = var:zz_ef_t_bank_in_s }
 	change_variable = { name = zz_ef_t_cb_in_s multiply = var:zz_ef_mt_cb_share_s }
+	set_variable = { name = zz_ef_t_tr_in_g value = var:zz_ef_t_bank_in_g }
+	change_variable = { name = zz_ef_t_tr_in_g multiply = var:zz_ef_mt_tr_share_g }
+	set_variable = { name = zz_ef_t_tr_in_s value = var:zz_ef_t_bank_in_s }
+	change_variable = { name = zz_ef_t_tr_in_s multiply = var:zz_ef_mt_tr_share_s }
 	change_variable = { name = zz_ef_t_bank_in_g subtract = var:zz_ef_t_cb_in_g }
 	change_variable = { name = zz_ef_t_bank_in_s subtract = var:zz_ef_t_cb_in_s }
+	change_variable = { name = zz_ef_t_bank_in_g subtract = var:zz_ef_t_tr_in_g }
+	change_variable = { name = zz_ef_t_bank_in_s subtract = var:zz_ef_t_tr_in_s }
 	# a step after a gap -- the buildings' input of the weeks the step covers
 	change_variable = { name = zz_ef_t_cb_in_g multiply = zz_ef_step_weeks_v }
 	change_variable = { name = zz_ef_t_cb_in_s multiply = zz_ef_step_weeks_v }
+	change_variable = { name = zz_ef_t_tr_in_g multiply = zz_ef_step_weeks_v }
+	change_variable = { name = zz_ef_t_tr_in_s multiply = zz_ef_step_weeks_v }
 	change_variable = { name = zz_ef_t_bank_in_g multiply = zz_ef_step_weeks_v }
 	change_variable = { name = zz_ef_t_bank_in_s multiply = zz_ef_step_weeks_v }
 	set_variable = { name = zz_ef_f_mt_cb_in_g value = var:zz_ef_t_cb_in_g }
 	change_variable = { name = zz_ef_f_mt_cb_in_g multiply = zz_ef_gold_units_per_good }
 	set_variable = { name = zz_ef_f_mt_cb_in_s value = var:zz_ef_t_cb_in_s }
 	change_variable = { name = zz_ef_f_mt_cb_in_s multiply = zz_ef_silver_units_per_good }
+	# the Banks' metal output: the treasury's sale (last week's order, var:zz_ef_mt_tr_sell_g / _s) and the authority's
+	zz_ef_trm_init = yes
+	set_variable = { name = zz_ef_f_mt_tr_in_g value = var:zz_ef_t_tr_in_g }
+	change_variable = { name = zz_ef_f_mt_tr_in_g multiply = zz_ef_gold_units_per_good }
+	set_variable = { name = zz_ef_f_mt_tr_in_s value = var:zz_ef_t_tr_in_s }
+	change_variable = { name = zz_ef_f_mt_tr_in_s multiply = zz_ef_silver_units_per_good }
+	set_variable = { name = zz_ef_f_mt_tr_out_g value = { value = zz_ef_cb_out_gold_goods max = var:zz_ef_mt_tr_sell_g } }
+	set_variable = { name = zz_ef_f_mt_tr_out_s value = { value = zz_ef_cb_out_silver_goods max = var:zz_ef_mt_tr_sell_s } }
 	set_variable = { name = zz_ef_f_mt_cb_out_g value = zz_ef_cb_out_gold_goods }
+	change_variable = { name = zz_ef_f_mt_cb_out_g subtract = var:zz_ef_f_mt_tr_out_g }
 	change_variable = { name = zz_ef_f_mt_cb_out_g multiply = zz_ef_gold_units_per_good }
 	change_variable = { name = zz_ef_f_mt_cb_out_g multiply = zz_ef_step_weeks_v }
 	set_variable = { name = zz_ef_f_mt_cb_out_s value = zz_ef_cb_out_silver_goods }
+	change_variable = { name = zz_ef_f_mt_cb_out_s subtract = var:zz_ef_f_mt_tr_out_s }
 	change_variable = { name = zz_ef_f_mt_cb_out_s multiply = zz_ef_silver_units_per_good }
 	change_variable = { name = zz_ef_f_mt_cb_out_s multiply = zz_ef_step_weeks_v }
+	change_variable = { name = zz_ef_f_mt_tr_out_g multiply = zz_ef_gold_units_per_good }
+	change_variable = { name = zz_ef_f_mt_tr_out_g multiply = zz_ef_step_weeks_v }
+	change_variable = { name = zz_ef_f_mt_tr_out_s multiply = zz_ef_silver_units_per_good }
+	change_variable = { name = zz_ef_f_mt_tr_out_s multiply = zz_ef_step_weeks_v }
+	# a sale never more than the hoard holds
+	if = { limit = { var:zz_ef_f_mt_tr_out_g > var:zz_ef_trm_gold } set_variable = { name = zz_ef_f_mt_tr_out_g value = var:zz_ef_trm_gold } }
+	if = { limit = { var:zz_ef_f_mt_tr_out_s > var:zz_ef_trm_silver } set_variable = { name = zz_ef_f_mt_tr_out_s value = var:zz_ef_trm_silver } }
 	set_variable = { name = zz_ef_f_mt_bank_in_g value = var:zz_ef_t_bank_in_g }
 	change_variable = { name = zz_ef_f_mt_bank_in_g multiply = zz_ef_gold_units_per_good }
 	set_variable = { name = zz_ef_f_mt_bank_in_s value = var:zz_ef_t_bank_in_s }
@@ -338,6 +365,7 @@ zz_ef_metal_week_step = {
 			value = zz_ef_state_gold_cons
 			multiply = zz_ef_step_weeks_v
 			subtract = var:zz_ef_t_cb_in_g
+			subtract = var:zz_ef_t_tr_in_g
 			subtract = var:zz_ef_t_bank_in_g
 			min = 0
 		}
@@ -349,6 +377,7 @@ zz_ef_metal_week_step = {
 			value = zz_ef_state_silver_cons
 			multiply = zz_ef_step_weeks_v
 			subtract = var:zz_ef_t_cb_in_s
+			subtract = var:zz_ef_t_tr_in_s
 			subtract = var:zz_ef_t_bank_in_s
 			min = 0
 		}
@@ -403,6 +432,8 @@ zz_ef_metal_week_step = {
 	set_variable = { name = zz_ef_f_cb_metal_pay value = zz_ef_cb_metal_net_cost }
 	zz_ef_eng_add_pool = { V = var:zz_ef_f_cb_metal_pay }
 	change_variable = { name = zz_ef_bank_capital add = var:zz_ef_f_cb_metal_pay }
+	# the treasury's hoard: its purchases and sales on the market through the Banks (ld_treasury_metal.txt)
+	zz_ef_trm_market_settle = yes
 
 	# the CB buys back from the pops under 40% cover (a pair: metal pops -> CB, new money -> their savings)
 	set_variable = { name = zz_ef_f_mt_buyback value = 0 }
@@ -533,6 +564,8 @@ zz_ef_metal_week_step = {
 	set_variable = { name = zz_ef_mt_bank_mult_s value = zz_ef_bank_mult_silver }
 	set_variable = { name = zz_ef_mt_cb_share_g value = zz_ef_cb_share_gold }
 	set_variable = { name = zz_ef_mt_cb_share_s value = zz_ef_cb_share_silver }
+	set_variable = { name = zz_ef_mt_tr_share_g value = zz_ef_tr_share_gold }
+	set_variable = { name = zz_ef_mt_tr_share_s value = zz_ef_tr_share_silver }
 	# no bank levels -- no building of the type (a level-0 building is gone), so nothing to remove or add
 	if = {
 		limit = { var:zz_ef_mt_bank_levels > 0 }
@@ -567,6 +600,9 @@ zz_ef_metal_week_step = {
 		if = { limit = { has_modifier = zz_ef_cb_gold_sell } remove_modifier = zz_ef_cb_gold_sell }
 		if = { limit = { has_modifier = zz_ef_cb_silver_sell } remove_modifier = zz_ef_cb_silver_sell }
 	}
+	# the treasury's hoard: the AI's rule, then its sale order for the coming week, at most the hoard (goods)
+	zz_ef_trm_ai_step = yes
+	zz_ef_trm_sell_set = yes
 	if = {
 		limit = {
 			var:zz_ef_mt_cb_sell > 0
