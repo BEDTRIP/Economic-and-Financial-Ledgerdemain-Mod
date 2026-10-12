@@ -240,4 +240,5 @@ on_action, `ld_*` и PSC добавляют свои. Недельного пу�
 | EFZ | `common/scripted_effects/ld_psc_log.txt` | стройка PSC за неделю: траты, роздано штатам, очки, остаток, выпуск стройтоваров, прибыль и уровни стройсекторов (`common/script_values/ld_psc_log_values.txt`) (`construction.md`, «Логи») | `zz_ef_psc_log` |
 | EFC | `common/scripted_effects/ld_money_model.txt:1177,1179` | кризисный выкуп валюты: должно/выплачено; эмитент | `zz_ef_crisis_redeem` (из `zz_ef_rq_crisis_resell`) |
 | EFO / EFF | `common/scripted_effects/ld_money_log_rest.txt:5` / `6–10` | остаток баланса / статьи по зданиям, банкам, заграничные, казна, ЦБ | недельный `zz_ef_money_log_rest` (из `ld_money_model.txt:544`) |
+| EFP | `common/scripted_effects/ld_probe_leak.txt` | проба утечек (ночь R4б): заказы и баланс рынка, прибыль и касса зданий, доход и расходы каждой группы населения — Великобритания и Франция; разбор — `vic3_mods/tools/ld_probe_leak.py` | недельный, после `EFO` |
 Других `debug_log` в `common/` и `events/` нет (grep по `debug_log` и `log =`).

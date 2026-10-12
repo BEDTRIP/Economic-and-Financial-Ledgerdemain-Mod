@@ -22,3 +22,9 @@ zz_ef_has_cb_v = {
 	value = 0
 	if = { limit = { has_modifier = has_central_bank } value = 1 }
 }
+
+# probe (ld_probe_leak.txt): the buildings' weekly profit, all of the country's buildings
+zz_ef_probe_bprofit = {
+	value = 0
+	every_scope_building = { add = weekly_profit }
+}

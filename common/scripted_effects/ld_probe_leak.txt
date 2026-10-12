@@ -1,0 +1,18 @@
+﻿# Probe (R4б night, the leaks): what the engine does with money outside the budget. Weekly, after the EFO line, for
+# Great Britain and France only: the market's totals of buy and sell orders and its balance (EFP|mkt), the sum of the
+# buildings' weekly profit (EFP|bld), every pop's income, expenses and wealth (EFP|pop). Read by
+# tools/ld_probe_leak.py against EFO b_rest and EFR leak. Country scope.
+zz_ef_probe_leak = {
+	if = {
+		limit = {
+			OR = {
+				AND = { exists = c:GBR THIS = c:GBR }
+				AND = { exists = c:FRA THIS = c:FRA }
+			}
+		}
+		debug_log = "EFP|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|mkt|tag [THIS.GetCountry.GetTagName]|buy [THIS.GetCountry.GetMarket.GetTotalBuyOrders|0]|sell [THIS.GetCountry.GetMarket.GetTotalSellOrders|0]|bal [THIS.GetCountry.GetMarket.GetBalance|0]|bprofit [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_probe_bprofit')|0]|bcash [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_building_cash')|0]|gdpw [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gdp_week')|0]"
+		every_scope_pop = {
+			debug_log = "EFP|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetPop.GetCountry.GetNameNoFormatting]|pop|size [THIS.GetPop.GetTotalSize]|inc [THIS.GetPop.GetIncome|2]|exp [THIS.GetPop.GetExpenses|2]|wexp [THIS.GetPop.GetWeeklyExpenses|2]|wp [THIS.GetPop.GetWealthProgression|3]|w [THIS.GetPop.GetCurrentWealth]"
+		}
+	}
+}
