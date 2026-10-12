@@ -1,0 +1,24 @@
+﻿# Values for the run's logs only (ld_acc_log.txt: EFW|all, EFV|mkt): the country's market of metal, its people, its
+# debt -- read once a month with the logs on; docs/entry-points.md, «Логи».
+
+# Country scope (a market's owner): its market's gold and silver this week, goods -- buy and sell orders, made, used
+zz_ef_mkt_buyo_g = { value = market.mg:gold.market_goods_buy_orders }
+zz_ef_mkt_sello_g = { value = market.mg:gold.market_goods_sell_orders }
+zz_ef_mkt_prod_g = { value = market.mg:gold.market_goods_production }
+zz_ef_mkt_cons_g = { value = market.mg:gold.market_goods_consumption }
+zz_ef_mkt_buyo_s = { value = market.mg:silver.market_goods_buy_orders }
+zz_ef_mkt_sello_s = { value = market.mg:silver.market_goods_sell_orders }
+zz_ef_mkt_prod_s = { value = market.mg:silver.market_goods_production }
+zz_ef_mkt_cons_s = { value = market.mg:silver.market_goods_consumption }
+# Country scope: the people (the share of radicals and loyalists, the average standard of living, the literacy) and
+# the government's legitimacy
+zz_ef_soc_radical_v = { value = radical_fraction }
+zz_ef_soc_loyalist_v = { value = loyalist_fraction }
+zz_ef_soc_sol_v = { value = average_sol }
+zz_ef_soc_literacy_v = { value = literacy_rate }
+zz_ef_soc_legit_v = { value = legitimacy }
+# 1 with a CB
+zz_ef_has_cb_v = {
+	value = 0
+	if = { limit = { has_modifier = has_central_bank } value = 1 }
+}

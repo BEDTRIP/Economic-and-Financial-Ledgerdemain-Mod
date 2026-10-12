@@ -1002,7 +1002,7 @@ zz_ef_xch_deal = {
 				multiply = scope:zz_ef_xch_d.zz_ef_xq_gold_$K$
 			}
 		}
-		zz_ef_xch_month_add = { K = $K$ }
+		zz_ef_xch_month_add = { K = $K$ T = $T$ }
 		# the buyer pays on top the exchange's fee, its trade policy's surcharge and a non-resident's fee (Д.R8.5,
 		# Д.R8б.18, Д.R8б.35) -- to the owners of the exchange's financial centre (var:zz_ef_xch_fee_acc, zz_ef_xch_fee_pay);
 		# matched on another exchange -- the exchange's fee once more, to the fund that did it (var:zz_ef_xd_cf)
@@ -1845,7 +1845,8 @@ zz_ef_xmo_add = {
 }
 # Holder scope, a deal settled (zz_ef_xch_deal): its value in gold into the month's sums of the exchange it went
 # through (scope:zz_ef_xch_e): the turnover -- the auction half on each side (its buys and sells meet, the exchange's
-# country settles the rest), the other sides whole; by kind; the deals; the part of the holders from abroad.
+# country settles the rest), the other sides whole; by kind; the deals; the part of the holders from abroad; by the
+# holder's kind T and side.
 zz_ef_xch_month_add = {
 	set_variable = { name = zz_ef_xd_gt value = var:zz_ef_xd_g }
 	if = { limit = { var:zz_ef_xd_gt < 0 } change_variable = { name = zz_ef_xd_gt multiply = -1 } }
@@ -1854,6 +1855,14 @@ zz_ef_xch_month_add = {
 		zz_ef_xmo_add = { N = to V = scope:zz_ef_xo_h.var:zz_ef_xd_gt }
 		zz_ef_xmo_add = { N = to_$K$ V = scope:zz_ef_xo_h.var:zz_ef_xd_gt }
 		zz_ef_xmo_add = { N = n V = 1 }
+	}
+	# by the holder's side: bought (b_) / sold (s_) by the CB, the banks, the pops, the treasury
+	if = {
+		limit = { var:zz_ef_xd_a > 0 }
+		scope:zz_ef_xch_e = { zz_ef_xmo_add = { N = b_$T$ V = scope:zz_ef_xo_h.var:zz_ef_xd_gt } }
+	}
+	else = {
+		scope:zz_ef_xch_e = { zz_ef_xmo_add = { N = s_$T$ V = scope:zz_ef_xo_h.var:zz_ef_xd_gt } }
 	}
 	if = {
 		limit = { NOT = { scope:zz_ef_xch_e = this } }
@@ -1929,6 +1938,14 @@ zz_ef_xch_month_roll = {
 		zz_ef_xmo_add = { N = capb V = 0 }
 		zz_ef_xmo_add = { N = mem V = 0 }
 		zz_ef_xmo_add = { N = as V = 0 }
+		zz_ef_xmo_add = { N = b_cb V = 0 }
+		zz_ef_xmo_add = { N = s_cb V = 0 }
+		zz_ef_xmo_add = { N = b_bk V = 0 }
+		zz_ef_xmo_add = { N = s_bk V = 0 }
+		zz_ef_xmo_add = { N = b_pp V = 0 }
+		zz_ef_xmo_add = { N = s_pp V = 0 }
+		zz_ef_xmo_add = { N = b_tr V = 0 }
+		zz_ef_xmo_add = { N = s_tr V = 0 }
 		set_variable = { name = zz_ef_xlm_to value = var:zz_ef_xmo_to }
 		set_variable = { name = zz_ef_xlm_to_m value = var:zz_ef_xmo_to_m }
 		set_variable = { name = zz_ef_xlm_to_b value = var:zz_ef_xmo_to_b }
@@ -1958,7 +1975,7 @@ zz_ef_xch_month_roll = {
 		}
 		if = {
 			limit = { zz_ef_logs_on = yes }
-			debug_log = "EFD|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|xch_month|to_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_to').GetValue|0]|to_m_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_to_m').GetValue|0]|to_b_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_to_b').GetValue|0]|deals [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_n').GetValue|0]|foreign [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_fo').GetValue|3]|fee_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_fee').GetValue|0]|cap_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_cap').GetValue|0]|cap_base_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_capb').GetValue|0]|heat [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_heat').GetValue|3]|members [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_mem').GetValue|0]|assets [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_as').GetValue|0]|year_to_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xlm_to_y_v')|0]|fund_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xlm_fund_g_v')|0]|nav [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fd_nav_v')|3]|has [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fc_has_v')|0]"
+			debug_log = "EFD|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|xch_month|to_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_to').GetValue|0]|to_m_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_to_m').GetValue|0]|to_b_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_to_b').GetValue|0]|deals [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_n').GetValue|0]|foreign [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_fo').GetValue|3]|fee_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_fee').GetValue|0]|cap_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_cap').GetValue|0]|cap_base_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_capb').GetValue|0]|heat [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_heat').GetValue|3]|members [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_mem').GetValue|0]|assets [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_as').GetValue|0]|year_to_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xlm_to_y_v')|0]|fund_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xlm_fund_g_v')|0]|nav [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fd_nav_v')|3]|has [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fc_has_v')|0]|b_cb_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_b_cb').GetValue|0]|s_cb_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_s_cb').GetValue|0]|b_bk_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_b_bk').GetValue|0]|s_bk_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_s_bk').GetValue|0]|b_pp_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_b_pp').GetValue|0]|s_pp_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_s_pp').GetValue|0]|b_tr_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_b_tr').GetValue|0]|s_tr_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_s_tr').GetValue|0]"
 		}
 		set_variable = { name = zz_ef_xmo_to value = 0 }
 		set_variable = { name = zz_ef_xmo_to_m value = 0 }
@@ -1970,6 +1987,14 @@ zz_ef_xch_month_roll = {
 		set_variable = { name = zz_ef_xmo_capb value = 0 }
 		set_variable = { name = zz_ef_xmo_mem value = 0 }
 		set_variable = { name = zz_ef_xmo_as value = 0 }
+		set_variable = { name = zz_ef_xmo_b_cb value = 0 }
+		set_variable = { name = zz_ef_xmo_s_cb value = 0 }
+		set_variable = { name = zz_ef_xmo_b_bk value = 0 }
+		set_variable = { name = zz_ef_xmo_s_bk value = 0 }
+		set_variable = { name = zz_ef_xmo_b_pp value = 0 }
+		set_variable = { name = zz_ef_xmo_s_pp value = 0 }
+		set_variable = { name = zz_ef_xmo_b_tr value = 0 }
+		set_variable = { name = zz_ef_xmo_s_tr value = 0 }
 	}
 }
 

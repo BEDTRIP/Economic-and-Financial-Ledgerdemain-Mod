@@ -272,6 +272,59 @@ zz_ef_metal_start_log = {
 	if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|metal_start|what [THIS.GetCountry.MakeScope.Var('zz_ef_ms_what').GetValue|0]|cb_gold [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cbm_gold')|0]|cb_silver [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cbm_silver')|0]|pop_gold [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_popm_gold')|0]|pop_silver [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_popm_silver')|0]|bank_gold [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bankm_gold')|0]|bank_silver [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bankm_silver')|0]|parity [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_valuation')|4]|cover [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_cb_cover')|3]|m2 [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_agg_m2')|0]|gdp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_raw_gdp')|0]" }
 }
 
+# ---- the pops' hoard over its target (Д.R4б.17) ----------------------------------
+# Country scope, the weekly step after the purchases (before the CB card and the snapshot): the share
+# zz_ef_popm_out_frac_v of the pops' metal, both metals, goes to the CB -- a metal standard with a CB: new notes at
+# parity into their savings (as the buy-back) -- or else to the banks: a deposit, the money into the pool (the banks'
+# book: the deposit is their liability, the metal stays outside the book as all their metal). var:zz_ef_f_popm_cb /
+# _bank -- the money of the week; the metal -- var:zz_ef_f_popm_g / _s (units).
+zz_ef_popm_dishoard = {
+	set_variable = { name = zz_ef_f_popm_cb value = 0 }
+	set_variable = { name = zz_ef_f_popm_bank value = 0 }
+	set_variable = { name = zz_ef_f_popm_g value = 0 }
+	set_variable = { name = zz_ef_f_popm_s value = 0 }
+	if = {
+		limit = {
+			has_variable = zz_ef_pop_savings
+			zz_ef_popm_out_frac_v > 0
+		}
+		set_variable = { name = zz_ef_t_pf value = zz_ef_popm_out_frac_v }
+		set_variable = { name = zz_ef_f_popm_g value = { value = zz_ef_popm_gold multiply = var:zz_ef_t_pf } }
+		set_variable = { name = zz_ef_f_popm_s value = { value = zz_ef_popm_silver multiply = var:zz_ef_t_pf } }
+		set_variable = { name = zz_ef_t_pm value = { value = zz_ef_popm_money multiply = var:zz_ef_t_pf } }
+		change_variable = { name = zz_ef_popm_gold subtract = var:zz_ef_f_popm_g }
+		change_variable = { name = zz_ef_popm_silver subtract = var:zz_ef_f_popm_s }
+		if = {
+			limit = {
+				has_modifier = has_central_bank
+				zz_ef_am_holder = yes
+				OR = {
+					zz_ef_metal_gold = yes
+					zz_ef_metal_silver = yes
+					zz_ef_metal_bimet = yes
+				}
+			}
+			zz_ef_am_init = yes
+			change_variable = { name = zz_ef_am_gold add = var:zz_ef_f_popm_g }
+			change_variable = { name = zz_ef_am_silver add = var:zz_ef_f_popm_s }
+			change_variable = { name = zz_ef_pop_savings add = var:zz_ef_t_pm }
+			change_variable = { name = zz_ef_notes add = var:zz_ef_t_pm }
+			set_variable = { name = zz_ef_f_popm_cb value = var:zz_ef_t_pm }
+		}
+		else = {
+			zz_ef_bankm_init = yes
+			change_variable = { name = zz_ef_bankm_gold add = var:zz_ef_f_popm_g }
+			change_variable = { name = zz_ef_bankm_silver add = var:zz_ef_f_popm_s }
+			change_variable = { name = zz_ef_pop_savings add = var:zz_ef_t_pm }
+			change_variable = { name = zz_ef_pop_deposits add = var:zz_ef_t_pm }
+			zz_ef_eng_add_pool = { V = var:zz_ef_t_pm }
+			set_variable = { name = zz_ef_f_popm_bank value = var:zz_ef_t_pm }
+		}
+		remove_variable = zz_ef_t_pf
+		remove_variable = zz_ef_t_pm
+	}
+}
+
 # ---- step 8: the world line of metal ------------------------------------------
 # global_var:zz_ef_wm_<KEY> += VALUE -- cumulative since the start (never reset): start_* the start's stock,
 # buy_* bought on the market, sell_* sold to it; written by zz_ef_world_acc with the accounts' sums (EFG).
@@ -307,8 +360,11 @@ zz_ef_metal_week_step = {
 	if = { limit = { NOT = { has_variable = zz_ef_mt_cb_share_s } } set_variable = { name = zz_ef_mt_cb_share_s value = 0 } }
 	if = { limit = { NOT = { has_variable = zz_ef_mt_tr_share_g } } set_variable = { name = zz_ef_mt_tr_share_g value = 0 } }
 	if = { limit = { NOT = { has_variable = zz_ef_mt_tr_share_s } } set_variable = { name = zz_ef_mt_tr_share_s value = 0 } }
-	set_variable = { name = zz_ef_t_bank_in_g value = zz_ef_bank_in_gold_goods }
-	set_variable = { name = zz_ef_t_bank_in_s value = zz_ef_bank_in_silver_goods }
+	# what the market really sold of the buildings' orders (Д.R4б.16)
+	set_variable = { name = zz_ef_t_fill_g value = zz_ef_metal_fill_gold }
+	set_variable = { name = zz_ef_t_fill_s value = zz_ef_metal_fill_silver }
+	set_variable = { name = zz_ef_t_bank_in_g value = { value = zz_ef_bank_in_gold_goods multiply = var:zz_ef_t_fill_g } }
+	set_variable = { name = zz_ef_t_bank_in_s value = { value = zz_ef_bank_in_silver_goods multiply = var:zz_ef_t_fill_s } }
 	set_variable = { name = zz_ef_t_cb_in_g value = var:zz_ef_t_bank_in_g }
 	change_variable = { name = zz_ef_t_cb_in_g multiply = var:zz_ef_mt_cb_share_g }
 	set_variable = { name = zz_ef_t_cb_in_s value = var:zz_ef_t_bank_in_s }
@@ -363,6 +419,7 @@ zz_ef_metal_week_step = {
 		name = zz_ef_f_mt_pop_in_g
 		value = {
 			value = zz_ef_state_gold_cons
+			multiply = var:zz_ef_t_fill_g
 			multiply = zz_ef_step_weeks_v
 			subtract = var:zz_ef_t_cb_in_g
 			subtract = var:zz_ef_t_tr_in_g
@@ -375,6 +432,7 @@ zz_ef_metal_week_step = {
 		name = zz_ef_f_mt_pop_in_s
 		value = {
 			value = zz_ef_state_silver_cons
+			multiply = var:zz_ef_t_fill_s
 			multiply = zz_ef_step_weeks_v
 			subtract = var:zz_ef_t_cb_in_s
 			subtract = var:zz_ef_t_tr_in_s
@@ -475,6 +533,9 @@ zz_ef_metal_week_step = {
 		# paid in new banknotes -- the CB's debt to the pops
 		change_variable = { name = zz_ef_notes add = var:zz_ef_f_mt_buyback_money }
 	}
+	zz_ef_popm_dishoard = yes
+	remove_variable = zz_ef_t_fill_g
+	remove_variable = zz_ef_t_fill_s
 	# the CB card (UI.11): its reserves' change by purchases, sales and the buy-back
 	if = {
 		limit = { NOT = { has_variable = zz_ef_cb_stock_acc } }

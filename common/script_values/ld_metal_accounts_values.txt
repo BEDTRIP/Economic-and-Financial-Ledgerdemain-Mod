@@ -345,7 +345,35 @@ zz_ef_bank_base_silver_goods = {
 	}
 	min = 0
 }
-# The states' whole consumption (pops + buildings); the pops' = it - the CB's and the banks' input (step 1).
+# Д.R4б.16: the share of the metal ordered on the country's market that the market really sold -- its sell orders over
+# its buy orders, at most 1. The engine gives a buyer the whole order at a shortage price; the accounts take only what
+# was there, so the world's accounts grow with the mines, not with the orders.
+zz_ef_metal_fill_gold = {
+	value = 1
+	if = {
+		limit = {
+			exists = market
+			market.mg:gold.market_goods_buy_orders > 0
+		}
+		value = market.mg:gold.market_goods_sell_orders
+		divide = market.mg:gold.market_goods_buy_orders
+		max = 1
+	}
+}
+zz_ef_metal_fill_silver = {
+	value = 1
+	if = {
+		limit = {
+			exists = market
+			market.mg:silver.market_goods_buy_orders > 0
+		}
+		value = market.mg:silver.market_goods_sell_orders
+		divide = market.mg:silver.market_goods_buy_orders
+		max = 1
+	}
+}
+# The states' whole consumption: the pops' need (popneed_metal_hoard, financial products) and the input of the CB's and
+# the Banks' buildings -- no other building uses metal; the pops' = it - the buildings' input (step 1).
 zz_ef_state_gold_cons = {
 	value = 0
 	every_scope_state = {
@@ -548,6 +576,65 @@ zz_ef_cb_buyback_units = {
 	min = 0
 }
 zz_ef_cb_buyback_premium = 1.02
+
+# ---- the pops' hoard (Д.R4б.17; «Доверие к деньгам») -------------------------------
+# The pops keep a target share of all they hold (savings + metal) in metal: higher with the radicals, lower with the
+# loyalists -- the game's own split of the pops (Д.R7.1). Over the target they bring a share of the excess a week to the
+# CB (a metal standard with a CB: new notes at parity) or to the banks (a deposit; the metal is the banks'). Under the
+# target nothing is forced: they buy through their need on the market.
+zz_ef_popm_share_base = 0.1
+zz_ef_popm_share_radical_k = 0.5
+zz_ef_popm_share_loyalist_k = 0.1
+zz_ef_popm_share_min = 0.02
+zz_ef_popm_share_max = 0.6
+zz_ef_popm_dishoard_speed = 0.01
+zz_ef_popm_share_v = {
+	value = zz_ef_popm_share_base
+	add = { value = radical_fraction multiply = zz_ef_popm_share_radical_k }
+	subtract = { value = loyalist_fraction multiply = zz_ef_popm_share_loyalist_k }
+	min = zz_ef_popm_share_min
+	max = zz_ef_popm_share_max
+}
+zz_ef_popm_wealth_v = {
+	value = zz_ef_pop_savings
+	add = zz_ef_popm_money
+	min = 0
+}
+zz_ef_popm_target_v = {
+	value = zz_ef_popm_wealth_v
+	multiply = zz_ef_popm_share_v
+}
+# the share of the hoard brought out this week: speed x the excess over the target, of the hoard
+zz_ef_popm_out_frac_v = {
+	value = 0
+	if = {
+		limit = { zz_ef_popm_money > zz_ef_popm_target_v }
+		value = zz_ef_popm_money
+		subtract = zz_ef_popm_target_v
+		multiply = zz_ef_popm_dishoard_speed
+		multiply = zz_ef_step_weeks_v
+		divide = zz_ef_popm_money
+		max = 1
+	}
+}
+# the hoard's share of all the pops hold now (the logs)
+zz_ef_popm_share_now_v = {
+	value = 0
+	if = {
+		limit = { zz_ef_popm_wealth_v > 0 }
+		value = zz_ef_popm_money
+		divide = zz_ef_popm_wealth_v
+	}
+}
+# this week's metal the pops brought out, in money: to the CB / to the banks
+zz_ef_v_f_popm_cb = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_popm_cb } value = var:zz_ef_f_popm_cb }
+}
+zz_ef_v_f_popm_bank = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_popm_bank } value = var:zz_ef_f_popm_bank }
+}
 
 # ---- step 8: the world line of metal (EFV, zz_ef_world_metal_log) ---------------------
 # The pops' and banks' accounts of a country gone and not yet taken by its capital's owner (zz_ef_metal_heir_world, at
