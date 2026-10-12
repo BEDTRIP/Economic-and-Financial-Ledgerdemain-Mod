@@ -37,7 +37,7 @@ zz_ef_xch_world_set = {
 # var:zz_ef_xch_how -- 1 own, 2 the market owner's, 3 the bloc leader's, 4 the strongest bloc's, 5 the world's.
 # The strongest bloc: the engine gives a bloc's influence on a country only as its advantage over the rest -- the other
 # blocs and the country's unclaimed leverage (leverage_advantage); the bloc with the most influence has the largest
-# advantage, negative too. A bloc with no influence on the country gets 0 (r1011_081122: Switzerland -- Austria -389,
+# advantage, negative too. A bloc with no influence on the country gets 0 (for Switzerland: Austria -389,
 # Prussia -391, Russia 0), so it is left out (zz_ef_xch_bloc_has_influence).
 zz_ef_xch_route = {
 	if = { limit = { has_variable = zz_ef_xch } remove_variable = zz_ef_xch }

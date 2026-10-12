@@ -9492,8 +9492,8 @@ types zz_ef_economy_panel
 			text = "zz_ef_ep_holders_title"
 		}
 		blockoverride "pieslice" {
-			# a float, as vanilla's charts (GetCloutAsFloat); a formatted string drew nothing (run clr3) -- E&F's own pies
-			# pass one too and drew a red square
+			# a float, as vanilla's charts (GetCloutAsFloat); a formatted string draws nothing -- E&F's own pies
+			# pass one too and draw a red square
 			value = "[FixedPointToFloat(Scope.GetCountry.MakeScope.Var('zz_ef_holds_pc').GetValue)]"
 		}
 		blockoverride "color" {

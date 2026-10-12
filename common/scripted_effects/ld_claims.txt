@@ -346,8 +346,7 @@ zz_ef_rq_check_map = {
 }
 
 # Readers, one per map: the holding of the scope's map on scope:zz_ef_rq_key into var:zz_ef_rq_h (0 if none). A
-# parameter inside the quoted «variable_map(…|…)» is mangled by the engine (the «|» is taken for a parameter's default,
-# run r1009_221452) -- the map's name is written out here, the key is a saved scope.
+# parameter inside the quoted «variable_map(…|…)» is mangled by the engine (the «|» is taken for a parameter's default) -- the map's name is written out here, the key is a saved scope.
 zz_ef_rq_cb_m_read = {
 	set_variable = { name = zz_ef_rq_h value = 0 }
 	if = {
