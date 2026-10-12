@@ -593,6 +593,7 @@
 | `zz_ef_v_w_clr_cur_out` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_w_clr_fx_in_money` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_w_clr_fx_out_money` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
+| `zz_ef_v_w_nr_xch` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_w_clr_own_back` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_w_dep_int` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_v_w_hume_money` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |

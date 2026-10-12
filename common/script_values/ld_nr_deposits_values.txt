@@ -9,6 +9,11 @@ zz_ef_v_f_nr_dep = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_f_nr_dep } value = var:zz_ef_f_nr_dep }
 }
+# our money held abroad changed by the exchange's deals (+ more abroad, - came home), the last window -- the abroad card
+zz_ef_v_w_nr_xch = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_w_nr_xch } value = var:zz_ef_w_nr_xch }
+}
 zz_ef_v_w_nr_dep = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_w_nr_dep } value = var:zz_ef_w_nr_dep }

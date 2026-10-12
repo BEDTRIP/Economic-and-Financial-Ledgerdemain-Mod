@@ -50,9 +50,12 @@ zz_ef_nr_dep_step = {
 		if = { limit = { has_variable = zz_ef_f_clr_cur_out } change_variable = { name = zz_ef_f_nr_dep add = var:zz_ef_f_clr_cur_out } }
 		if = { limit = { has_variable = zz_ef_f_clr_own_back } change_variable = { name = zz_ef_f_nr_dep subtract = var:zz_ef_f_clr_own_back } }
 		# the exchange's deals in our money since our last step (zz_ef_xch_nr_after_m)
+		# (var:zz_ef_f_nr_xch -- the same for the abroad card: our money held abroad changed by the exchange)
+		set_variable = { name = zz_ef_f_nr_xch value = 0 }
 		if = {
 			limit = { has_variable = zz_ef_xch_nr_acc }
 			change_variable = { name = zz_ef_f_nr_dep add = var:zz_ef_xch_nr_acc }
+			set_variable = { name = zz_ef_f_nr_xch value = var:zz_ef_xch_nr_acc }
 			remove_variable = zz_ef_xch_nr_acc
 		}
 		if = {
