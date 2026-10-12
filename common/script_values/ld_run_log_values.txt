@@ -23,3 +23,34 @@ zz_ef_has_cb_v = {
 	if = { limit = { has_modifier = has_central_bank } value = 1 }
 }
 
+
+# The engine's market gap of the week (R4б night, the leaks): the market's goods sold less bought by the orders, at
+# the market's price -- money the engine adds (+) or takes away (-) between buyers and sellers. Country scope, the
+# market's owner (the EFM line).
+zz_ef_mkt_gap_week = {
+	value = 0
+	market = {
+		every_market_goods = {
+			add = {
+				value = market_goods_sell_orders
+				subtract = market_goods_buy_orders
+				multiply = zz_ef_mg_price_v
+			}
+		}
+	}
+}
+# MARKET_GOODS scope: the price of the goods in this market
+zz_ef_mg_price_v = {
+	value = goods.base_price
+	multiply = {
+		value = 1
+		add = {
+			value = market_goods_pricier
+			min = 0
+		}
+		subtract = {
+			value = market_goods_cheaper
+			min = 0
+		}
+	}
+}
