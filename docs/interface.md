@@ -53,9 +53,10 @@ GUI-тип регистрирует первый файл по имени (ASCII
   `_archive/ef_outdated_vanilla_gui/`, грузятся ванильные 1.13.
 
 ### Файлы проекта (`ld_*`, переопределяют типы E&F; грузятся раньше или вместо оригинала)
-- `gui/ld_economy_panel.gui` (генерат. `regen_ef_economy_panel_gui.py`) — `budget_panel_economy_panel_content` (:10,
+- `gui/ld_economy_panel.gui` (руками) — `budget_panel_economy_panel_content` (:10,
   оригинал из `00_ef_deported_gui_1.gui` удалён), торговый баланс в модели денег, `zz_ef_holders_piechart`,
-  `vo_plotline_minting` (вызов :4143).
+  `vo_plotline_minting` (вызов :4143). Блоки «Национальная валюта» и «Курс обмена» — у всех стран с денежной
+  системой (`exchange_rate_visibility`, Д.R4а.14), блок ЦБ — при ЦБ (`has_central_banking_tech_visibility`).
 - `gui/ld_cb_rate_panel.gui` (руками) — `budget_panel_financial_panel_content` (:10): ключевая ставка, ЦБ, облигации,
   таблицы держателей (`zz_ef_bt_in_list`/`zz_ef_bt_out_list`), биржа игрока — две таблицы (`zz_ef_xwin_own`,
   `zz_ef_xwin_book`, `ld_exchange_window.txt`), `mp_row` политики.

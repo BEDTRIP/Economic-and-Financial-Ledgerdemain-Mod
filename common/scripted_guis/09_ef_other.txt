@@ -2140,15 +2140,17 @@ silver_gui_6 = {
 		}
 	}
 
+	# the currency and its rate -- every country with a monetary system: its authority is the CB, the treasury or the
+	# banks (Д.R4а.11, Д.R4а.14)
 	exchange_rate_visibility = {
 		is_shown = {
-			has_central_bank_FS_SS_BS_GS_GES = yes
+			NOT = { has_law = law_type:law_no_monetary_system }
 		}
 	}
 
 	no_exchange_rate_visibility = {
 		is_shown = {
-			has_central_bank_FS_SS_BS_GS_GES = no
+			has_law = law_type:law_no_monetary_system
 		}
 	}
 
