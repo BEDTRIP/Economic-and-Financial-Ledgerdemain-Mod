@@ -1,5 +1,5 @@
 ﻿#############################################
-# Stage 2, night 6.10 -- the metal accounts.
+# The metal accounts.
 # Effects: scripted_effects/ld_metal_accounts.txt. Every unit of metal on an account was bought on the market
 # (or is the start's stock, logged as such): the CB (the monetary authority's var:zz_ef_am_gold / zz_ef_am_silver,
 # Д.R4а.2), the banks (var:zz_ef_bankm_gold / _silver, one per country -- by company in Ф3) and the pops
@@ -330,17 +330,17 @@ zz_ef_bank_mult_silver = {
 
 # ---- step 7: the CB as an account (Д2.28 а) ----------------------------------------
 # Its building's purchase, percent on the method's input: (40% - cover) x 5000 -- +500% at 30% cover, +1000% (the cap) at
-# 20%, the method's own at 40%, none from 42% (the method buys ~44 gold a week for Britain). Was x 1500, at most +300%:
-# run r1006_135058, Britain's cover 0.39 -> 0.27 in two years with the CB at the cap (~0.9M a year against the outflow
-# abroad and M2 +10% a year). Accepted at night 6.10, check the price of gold. Metal standards with a CB.
+# 20%, the method's own at 40%, none from 42% (the method buys ~44 gold a week for Britain); a weaker push (x 1500, at
+# most +300%) let Britain's cover fall 0.39 -> 0.27 in two years at the cap (~0.9M a year against the outflow abroad and
+# M2 +10% a year). Metal standards with a CB.
 zz_ef_cb_buy_mult = {
 	value = zz_ef_cover_normal
 	subtract = zz_ef_cb_cover
 	multiply = 5000
 	min = -100
 	max = 1000
-	# until the CB's start metal (Д.R1б.2, var:zz_ef_cb_start_due): the method's own -- r1006_141026, the start's cover read
-	# 0.33 for its first weeks, the CB bought +355..+491% and gold in London went to 161
+	# until the CB's start metal (Д.R1б.2, var:zz_ef_cb_start_due): the method's own -- the start's cover reads 0.33 for
+	# its first weeks, and buying by it sends gold in London to 161
 	if = {
 		limit = { has_variable = zz_ef_cb_start_due }
 		value = 0
@@ -353,8 +353,8 @@ zz_ef_cb_sell_units = {
 	if = {
 		limit = {
 			zz_ef_cb_cover > zz_ef_cb_sell_cover
-			# not before the CB's start metal (Д.R1б.2: r1006_135058, the first step read 0.75 cover before the engine filled
-			# the business cash, and Britain sold 440 gold)
+			# not before the CB's start metal (Д.R1б.2: the first step reads 0.75 cover before the engine fills the
+			# business cash -- Britain would sell 440 gold)
 			NOT = { has_variable = zz_ef_cb_start_due }
 		}
 		value = zz_ef_cb_cover
@@ -362,8 +362,8 @@ zz_ef_cb_sell_units = {
 		multiply = money_supply
 		multiply = zz_ef_cb_valuation
 		multiply = 0.02
-		# over 100% cover another 5% of that excess a week (run r1006_162423: the
-		# surplus countries' cover 2-3.6 -- the US 2.9, Belgium 3.6 -- the 2% did not hold it)
+		# over 100% cover another 5% of that excess a week (2% alone leaves the surplus countries at a cover of 2-3.6 --
+		# the US 2.9, Belgium 3.6)
 		if = {
 			limit = { zz_ef_cb_cover > zz_ef_cb_sell_cover_high }
 			add = {

@@ -1,5 +1,5 @@
 ﻿#############################################
-# Stage 2, night 6.10 (Ф1 + Ф2) -- the metal accounts: the start, the purchases, the world line.
+# The metal accounts (Ф1 + Ф2): the start, the purchases, the world line.
 # Values and units: script_values/ld_metal_accounts_values.txt. Called from the money model's weekly step
 # (scripted_effects/ld_money_model.txt).
 #############################################
@@ -49,8 +49,8 @@ zz_ef_am_sweep = {
 #     the buildings' cash (zz_ef_cb_metal_start_step, var:zz_ef_cb_start_due); E&F's metal from history is not taken
 #     (its scale is ~10 times our money); until then the CB does not trade metal (Д.R1б.2);
 #   * В4: E&F's metal of a country with a CB stays in its CB states, also when the country has no metal
-#     standard yet (a subject joins its overlord's through the currency zone after its first step -- Hanover, Lower
-#     Canada, Finland got 44-132 GDP of it as the pops' metal, r1008_062130); the CB's start scales it to 40% of M2 (the
+#     standard yet (a subject joins its overlord's through the currency zone after its first step -- else Hanover, Lower
+#     Canada, Finland would get 44-132 GDP of it as the pops' metal); the CB's start scales it to 40% of M2 (the
 #     currency at its E&F parity), gold and silver by one factor (E&F's ratio). A country without a CB: its CB states'
 #     metal goes to the pops;
 #   * E&F's metal outside a CB state (history writes it before the country has a CB -- Bavaria) -- the pops' too (Д.R1.1);
@@ -82,8 +82,8 @@ zz_ef_metal_start_step = {
 		set_variable = { name = zz_ef_am_silver value = 0 }
 	}
 	# Д.R1.1: E&F's metal outside a CB state -- history writes it into var:central_bank_location before the
-	# country has a CB (r1008_001240: Bavaria 37.1M gold in a state with no central_bank_historic_place; the first step
-	# did not see it, the CB made later counted it as its metal from nothing) -- the pops' too (В4), and 0. Only a
+	# country has a CB (Bavaria: 37.1M gold in a state with no central_bank_historic_place; unseen by the first step, a
+	# CB made later would count it as its metal from nothing) -- the pops' too (В4), and 0. Only a
 	# country with no metal standard: on a metal standard the CB made in the first month gets that state and the CB's
 	# start scales it to 40% of M2
 	every_scope_state = {
@@ -146,8 +146,8 @@ zz_ef_cb_metal_start_step = {
 		limit = {
 			has_variable = zz_ef_cb_start_due
 			zz_ef_cb_metal_standard = yes
-			# after the first receiver: the start deposits are in M2 (r1007_200927: at the first step the cover was set to
-			# 40% before them, and read 0.27-0.30 once they came in)
+			# after the first receiver: the start deposits are in M2 (a cover set to 40% before them reads 0.27-0.30 once
+			# they come in)
 			has_variable = zz_ef_pop_savings
 			zz_ef_agg_m2_to_gdp > 0.1
 			# a CB to hold the metal (E&F writes the CB's metal into its CB state in the first month by its own formula, the
@@ -194,8 +194,8 @@ zz_ef_cb_metal_start_step = {
 			remove_variable = zz_ef_metal_rescale
 		}
 		zz_ef_metal_start_cb_after = yes
-		# E&F's metal written since the last snapshot (its CB made in the first month, r1007_201854: Denmark 21.5M gold +
-		# 333M silver a week after the first step) is the start's stock too, not «прочее» of the CB's metal
+		# E&F's metal written since the last snapshot (its CB made in the first month: Denmark gets 21.5M gold + 333M
+		# silver a week after the first step) is the start's stock too, not «прочее» of the CB's metal
 		if = {
 			limit = { has_variable = zz_ef_mt_prev_g }
 			set_variable = { name = zz_ef_ms_g0 value = { value = var:zz_ef_ms_g0 subtract = var:zz_ef_mt_prev_g } }
@@ -290,7 +290,7 @@ zz_ef_wm_add = {
 # ---- steps 4, 5, 7: the week's purchases and sales ---------------------------------
 # Country scope, the weekly step (zz_ef_money_model_step, before the CB card's ledger). What the buildings bought /
 # sold under last week's modifiers goes to the accounts (goods x 100 gold / x 775 silver units); then the modifiers
-# for the coming week are set. The CB's purchase was monthly (Д2.7а, zz_ef_cb_metal_purchase_step) -- weekly now.
+# for the coming week are set. The CB buys weekly (Д2.7а).
 # var:zz_ef_f_mt_<what>_<metal>: units this week (cb_in, cb_out, bank_in, pop_in, buyback); var:zz_ef_cb_stock_acc
 # keeps the CB's change for its card (UI.11).
 zz_ef_metal_week_step = {
