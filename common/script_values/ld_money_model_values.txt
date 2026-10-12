@@ -1794,9 +1794,23 @@ zz_ef_bop_out_total = {
 zz_ef_abroad_net = {
 	value = zz_ef_foreign_assets
 	add = zz_ef_fx_money
+	add = zz_ef_abr_rq_money_v
 	subtract = zz_ef_fx_liab_all
 	# the parts of our engine debt held abroad (the bond ledger)
 	subtract = zz_ef_bl_held_v
+}
+# the other foreign money of the CB and the banks (zz_ef_fx_metal_update), in our money
+zz_ef_abr_rq_money_v = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = zz_ef_abr_rq_gold
+			zz_ef_clr_gold_per_money > 0
+		}
+		value = var:zz_ef_abr_rq_gold
+		divide = zz_ef_clr_gold_per_money
+	}
+	min = 0
 }
 # the clearing's currency at the last receiver (window values, П.6), in money
 zz_ef_v_w_clr_cur_out = {

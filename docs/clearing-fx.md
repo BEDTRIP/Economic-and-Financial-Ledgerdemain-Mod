@@ -43,6 +43,9 @@
   наши деньги: `zz_ef_holds_pc`, `zz_ef_holders_list`).
 - `common/script_values/ld_fx_reserves_values.txt` — `zz_ef_fx_reserves_metal` (чужие деньги в резервах ЦБ, которые идут
   в покрытие, в золоте: `var:zz_ef_fx_res_gold`, `zz_ef_fx_metal_update`).
+  Остальные чужие деньги, которыми платит клиринг (`zz_ef_clr_give_claim`): требования ЦБ к эмитентам без размена на
+  металл и требования банков — `var:zz_ef_abr_rq_gold` (тот же `zz_ef_fx_metal_update`), в наших деньгах
+  `zz_ef_abr_rq_money_v`; входят в запас счёта «Внешний сектор» (`zz_ef_abroad_net`), в покрытие — нет.
 - `common/scripted_effects/ld_stockpile_state_var_seed.txt` — смежный учётный файл.
 - `common/scripted_effects/ld_reference_strength.txt` — `zz_ef_currency_trade_step` (месяц: накладывает
   `zz_ef_currency_trade` по силе валюты), `zz_ef_reference_strength_step`.

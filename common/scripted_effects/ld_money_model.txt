@@ -1134,6 +1134,21 @@ zz_ef_fx_metal_update = {
 		limit = { zz_ef_metal_silver = yes }
 		change_variable = { name = zz_ef_fx_metal multiply = gold_to_silver_rate }
 	}
+	# the rest of the foreign money the clearing pays us in (zz_ef_clr_give_claim): the CB's claims on issuers that do not
+	# redeem in metal and the banks' claims, in gold -- the abroad account holds them (zz_ef_abroad_net); without them its
+	# card's «прочее» took every receipt (Britain -9.8M in 85 weeks, the probe r1012_230001)
+	set_variable = { name = zz_ef_abr_rq_gold value = 0 }
+	if = {
+		limit = { has_variable_map = zz_ef_rq_cb_m }
+		zz_ef_rq_value_gold = { MAP = zz_ef_rq_cb_m CONV = no }
+		set_variable = { name = zz_ef_abr_rq_gold value = var:zz_ef_rq_gold }
+		change_variable = { name = zz_ef_abr_rq_gold subtract = var:zz_ef_fx_res_gold }
+	}
+	if = {
+		limit = { has_variable_map = zz_ef_rq_bk_m }
+		zz_ef_rq_value_gold = { MAP = zz_ef_rq_bk_m CONV = no }
+		change_variable = { name = zz_ef_abr_rq_gold add = var:zz_ef_rq_gold }
+	}
 }
 
 # A seller redeems a currency in crisis for the
