@@ -19,8 +19,8 @@
 # again one level lower (create_building, level = old - 1), with its construction
 # and liquidity methods put back. Cash reserves: half. Ownership of the new
 # building is the engine's default for a new building -- the old owners lose all
-# its levels. Decided at night, to check in a run: who owns it after; whether
-# employment churns. Fallback if it misbehaves: remove_building only when level 1.
+# its levels. Open: who owns it after; whether employment churns (fallback if it
+# misbehaves: remove_building only when level 1).
 #
 # Players are left alone (is_player = no): the penalty and the journal are theirs.
 # Countries E&F has not initialised (no var:base_rate_percentage) are skipped.
@@ -34,8 +34,7 @@ zz_pb_ef_ai_sector_downsize = {
 		has_variable = base_rate_percentage
 	}
 	effect = {
-		# change_variable on an unset variable logs an error and sets nothing (run 2,
-		# 3.10: the timer never started and nothing was taken down)
+		# change_variable on an unset variable logs an error and sets nothing (an engine fact)
 		if = {
 			limit = { NOT = { has_variable = zz_pb_ef_ai_downsize_timer } }
 			set_variable = {

@@ -3,16 +3,9 @@
 #
 # Companion to common/on_actions/ld_stockpile_state_var_init.txt. That file
 # hangs this off on_game_started_after_lobby; this one also gets called once
-# from the monthly pulse behind a global flag, because the first run of the
-# on_action version did not clear the errors it was written for.
-#
-# WHAT THE 20:03 RUN SHOWED
-# The errors dropped but did not go to zero: `stockpiling_*_var_state_1 due to
-# not being set` went from ~151 blocks per in-game day to ~24. Most of that
-# drop is 7g collapsing three transfert calls into one, so the seed is worth
-# roughly nothing so far -- something about it is not reaching the states the
-# gate actually reads. Two candidates, and this file covers both rather than
-# guessing:
+# from the monthly pulse behind a global flag: the on_action alone does not
+# reach every state the gate reads (`stockpiling_*_var_state_1 due to not being
+# set`). Two reasons, both covered:
 #
 #   1. on_game_started_after_lobby may not fire on a loaded save the way it
 #      does on a new campaign. -> zz_ef_seed_stockpile_state_vars_backstop
@@ -26,10 +19,6 @@
 #      "states someone owns". -> the seed makes a second pass as
 #      every_country -> every_scope_state. Guarded by has_variable like the
 #      first, so when the first pass was enough this writes nothing.
-#
-# If the next run is clean, both are cheap enough to leave. If it is not, the
-# seed is not the problem and the reads are coming from somewhere other than
-# the states a country owns.
 #############################################
 
 ### Runs in STATE scope. Seven variables, every write guarded, values E&F's own

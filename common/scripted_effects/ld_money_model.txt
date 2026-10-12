@@ -127,9 +127,9 @@ zz_ef_money_model_step = {
 	if = {
 		limit = {
 			has_law = law_type:law_ld_cb_private
-			# after the pops' savings start (zz_ef_pop_savings_step): before it the deposits do not exist, and a
-			# change_variable of a missing variable leaves it empty for good (an engine fact); var:zz_ef_pop_savings is
-			# also the start's own "not yet" mark
+			# after the pops' savings start (zz_ef_pop_savings_step): before it the deposits do not exist (a
+			# change_variable of a missing variable is an error), and var:zz_ef_pop_savings is also the start's own
+			# "not yet" mark -- writing it first skips the start
 			has_variable = zz_ef_pop_savings
 			has_variable = zz_ef_pop_deposits
 		}
