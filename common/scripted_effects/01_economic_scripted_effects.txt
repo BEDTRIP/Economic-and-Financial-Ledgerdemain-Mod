@@ -3382,155 +3382,182 @@ global_monetary_reference_reset = {
 	###########################################################################################################################################################################################
 
 	fluctuations_money_value_1_year = {
-		change_variable = {
-			name = money_value_fixe_var_1_1Y
-			add = 1
-		}
-
+		# Д.R4б.15: a window of 1 year(s) -- the base at the count 1, the change at the count 3 (half-yearly calls),
+		# the next window's base the same value; a country's first call is skipped (a new country's value may not be
+		# set yet), its change counts once a window is full (var:zz_ef_mv_ok_1)
 		if = {
-			limit = {
-				var:money_value_fixe_var_1_1Y = 1
-			}
-			set_variable = {
-				name = money_value_var_half_1_year
-				value = money_value_rapported_inflation
-			}
+			limit = { NOT = { has_variable = zz_ef_mv_seen_1 } }
+			set_variable = zz_ef_mv_seen_1
 		}
-		if = {
-			limit = {
-				var:money_value_fixe_var_1_1Y = 2
-			}
-			set_variable = {
-				name = money_value_var_1_year
-				value = money_value_rapported_inflation
-			}
-			set_variable = {
-				name = money_value_dif_1
-				value = 0
-			}
+		else = {
 			change_variable = {
-				name = money_value_dif_1
-				add = var:money_value_var_1_year
-			}
-			change_variable = { #test
-				name = money_value_dif_1
-				subtract = var:money_value_var_half_1_year
-			}
-			change_variable = {
-				name = money_value_dif_1
-				divide = var:money_value_var_half_1_year
-			}
-
-			set_variable = {
 				name = money_value_fixe_var_1_1Y
-				value = 0
+				add = 1
 			}
 
 			if = {
 				limit = {
-					money_value_dif_1_final < -0.5
-					not = {
-						#protection de la devise lorsque le joeur ou y a change de standart monetaire de silver vers au-dessus, en effet la money value peut baisser alors que la parité à l'or reste la meme
-						#2 manière d'avoir ce modificateur:
-						#- soit changer le standart
-						#- soit changer la valeur du standart -> n peut pas modifier aussi rapidement la valeur et donc ne déclancherai quoi qu'il en soit pas de crise
-						has_modifier = foreign_exchange_controls
-					}
+					var:money_value_fixe_var_1_1Y = 1
 				}
-				#plus de protection comme pour central_bank_bankruptcy & country_bankruptcy
-				currency_crisis = yes
+				set_variable = {
+					name = money_value_var_half_1_year
+					value = money_value_rapported_inflation
+				}
+			}
+			if = {
+				limit = {
+					var:money_value_fixe_var_1_1Y = 3
+				}
+				set_variable = {
+					name = money_value_var_1_year
+					value = money_value_rapported_inflation
+				}
+				set_variable = {
+					name = money_value_dif_1
+					value = 0
+				}
+				change_variable = {
+					name = money_value_dif_1
+					add = var:money_value_var_1_year
+				}
+				change_variable = { #test
+					name = money_value_dif_1
+					subtract = var:money_value_var_half_1_year
+				}
+				change_variable = {
+					name = money_value_dif_1
+					divide = var:money_value_var_half_1_year
+				}
+
+				# the next window starts here: its base -- this value
+				set_variable = { name = money_value_fixe_var_1_1Y value = 1 }
+				set_variable = { name = money_value_var_half_1_year value = var:money_value_var_1_year }
+				set_variable = zz_ef_mv_ok_1
+
+				if = {
+					limit = {
+						money_value_dif_1_final < -0.5
+						not = {
+							#protection de la devise lorsque le joeur ou y a change de standart monetaire de silver vers au-dessus, en effet la money value peut baisser alors que la parité à l'or reste la meme
+							#2 manière d'avoir ce modificateur:
+							#- soit changer le standart
+							#- soit changer la valeur du standart -> n peut pas modifier aussi rapidement la valeur et donc ne déclancherai quoi qu'il en soit pas de crise
+							has_modifier = foreign_exchange_controls
+						}
+					}
+					#plus de protection comme pour central_bank_bankruptcy & country_bankruptcy
+					currency_crisis = yes
+				}
 			}
 		}
 	}
 	fluctuations_money_value_5_year = {
-		change_variable = {
-			name = money_value_fixe_var_1_5Y
-			add = 1
-		}
-
+		# Д.R4б.15: a window of 5 year(s) -- the base at the count 1, the change at the count 6 (yearly calls),
+		# the next window's base the same value; a country's first call is skipped (a new country's value may not be
+		# set yet), its change counts once a window is full (var:zz_ef_mv_ok_5)
 		if = {
-			limit = {
-				var:money_value_fixe_var_1_5Y = 1
-			}
-			set_variable = {
-				name = money_value_var_half_5_year
-				value = money_value_rapported_inflation
-			}
+			limit = { NOT = { has_variable = zz_ef_mv_seen_5 } }
+			set_variable = zz_ef_mv_seen_5
 		}
-		if = {
-			limit = {
-				var:money_value_fixe_var_1_5Y = 5
-			}
-			set_variable = {
-				name = money_value_var_5_year
-				value = money_value_rapported_inflation
-			}
-			set_variable = {
-				name = money_value_dif_5
-				value = 0
-			}
+		else = {
 			change_variable = {
-				name = money_value_dif_5
-				add = var:money_value_var_5_year
-			}
-			change_variable = {
-				name = money_value_dif_5
-				subtract = var:money_value_var_half_5_year
-			}
-			change_variable = {
-				name = money_value_dif_5
-				divide = var:money_value_var_half_5_year
-			}
-
-			set_variable = {
 				name = money_value_fixe_var_1_5Y
-				value = 0
+				add = 1
+			}
+
+			if = {
+				limit = {
+					var:money_value_fixe_var_1_5Y = 1
+				}
+				set_variable = {
+					name = money_value_var_half_5_year
+					value = money_value_rapported_inflation
+				}
+			}
+			if = {
+				limit = {
+					var:money_value_fixe_var_1_5Y = 6
+				}
+				set_variable = {
+					name = money_value_var_5_year
+					value = money_value_rapported_inflation
+				}
+				set_variable = {
+					name = money_value_dif_5
+					value = 0
+				}
+				change_variable = {
+					name = money_value_dif_5
+					add = var:money_value_var_5_year
+				}
+				change_variable = {
+					name = money_value_dif_5
+					subtract = var:money_value_var_half_5_year
+				}
+				change_variable = {
+					name = money_value_dif_5
+					divide = var:money_value_var_half_5_year
+				}
+
+				# the next window starts here: its base -- this value
+				set_variable = { name = money_value_fixe_var_1_5Y value = 1 }
+				set_variable = { name = money_value_var_half_5_year value = var:money_value_var_5_year }
+				set_variable = zz_ef_mv_ok_5
 			}
 		}
 	}
 	fluctuations_money_value_10_year = {
-		change_variable = {
-			name = money_value_fixe_var_1_10Y
-			add = 1
-		}
-
+		# Д.R4б.15: a window of 10 year(s) -- the base at the count 1, the change at the count 11 (yearly calls),
+		# the next window's base the same value; a country's first call is skipped (a new country's value may not be
+		# set yet), its change counts once a window is full (var:zz_ef_mv_ok_10)
 		if = {
-			limit = {
-				var:money_value_fixe_var_1_10Y = 1
-			}
-			set_variable = {
-				name = money_value_var_half_10_year
-				value = money_value_rapported_inflation
-			}
+			limit = { NOT = { has_variable = zz_ef_mv_seen_10 } }
+			set_variable = zz_ef_mv_seen_10
 		}
-		if = {
-			limit = {
-				var:money_value_fixe_var_1_10Y = 10
-			}
-			set_variable = {
-				name = money_value_var_10_year
-				value = money_value_rapported_inflation
-			}
-			set_variable = {
-				name = money_value_dif_10
-				value = 0
-			}
+		else = {
 			change_variable = {
-				name = money_value_dif_10
-				add = var:money_value_var_10_year
-			}
-			change_variable = {
-				name = money_value_dif_10
-				subtract = var:money_value_var_half_10_year
-			}
-			change_variable = {
-				name = money_value_dif_10
-				divide = var:money_value_var_half_10_year
-			}
-
-			set_variable = {
 				name = money_value_fixe_var_1_10Y
-				value = 0
+				add = 1
+			}
+
+			if = {
+				limit = {
+					var:money_value_fixe_var_1_10Y = 1
+				}
+				set_variable = {
+					name = money_value_var_half_10_year
+					value = money_value_rapported_inflation
+				}
+			}
+			if = {
+				limit = {
+					var:money_value_fixe_var_1_10Y = 11
+				}
+				set_variable = {
+					name = money_value_var_10_year
+					value = money_value_rapported_inflation
+				}
+				set_variable = {
+					name = money_value_dif_10
+					value = 0
+				}
+				change_variable = {
+					name = money_value_dif_10
+					add = var:money_value_var_10_year
+				}
+				change_variable = {
+					name = money_value_dif_10
+					subtract = var:money_value_var_half_10_year
+				}
+				change_variable = {
+					name = money_value_dif_10
+					divide = var:money_value_var_half_10_year
+				}
+
+				# the next window starts here: its base -- this value
+				set_variable = { name = money_value_fixe_var_1_10Y value = 1 }
+				set_variable = { name = money_value_var_half_10_year value = var:money_value_var_10_year }
+				set_variable = zz_ef_mv_ok_10
 			}
 		}
 	}

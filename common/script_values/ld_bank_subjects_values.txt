@@ -178,3 +178,10 @@ zz_ef_bk_loans_v = {
 	if = { limit = { has_variable = zz_ef_bk_cc } add = var:zz_ef_bk_cc }
 	if = { limit = { has_variable = zz_ef_bk_bc } add = var:zz_ef_bk_bc }
 }
+
+# SUBJECT scope: its share of the week's profit of the country's "Bank" buildings -- paid by the engine to the
+# owners as dividends, not into the subject's capital (Д.R4б.13)
+zz_ef_bk_inc_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_bk_inc } value = var:zz_ef_bk_inc }
+}

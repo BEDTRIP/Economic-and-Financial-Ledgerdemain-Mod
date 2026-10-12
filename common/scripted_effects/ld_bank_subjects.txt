@@ -71,9 +71,26 @@ zz_ef_bk_subj_step = {
 		set_variable = { name = zz_ef_bk_sh value = zz_ef_bk_share_v }
 		scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_shsum add = prev.var:zz_ef_bk_sh } }
 	}
+	# the "Bank" buildings' profit of the week by the subjects' shares (Д.R4б.13): the engine pays it to the buildings'
+	# owners as dividends -- a line of the subject's accounts, its capital does not move (no money a second time)
+	set_variable = { name = zz_ef_bk_bprof value = 0 }
+	every_scope_state = {
+		every_scope_building = {
+			limit = { is_building_type = building_zz_ef_bank }
+			scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_bprof add = prev.weekly_profit } }
+		}
+	}
+	every_in_list = {
+		variable = zz_ef_bk_subj
+		set_variable = { name = zz_ef_bk_inc value = 0 }
+		if = {
+			limit = { scope:zz_ef_bk_c.var:zz_ef_bk_shsum > 0 }
+			set_variable = { name = zz_ef_bk_inc value = { value = scope:zz_ef_bk_c.var:zz_ef_bk_bprof multiply = var:zz_ef_bk_sh divide = scope:zz_ef_bk_c.var:zz_ef_bk_shsum } }
+		}
+	}
 	if = {
 		limit = { zz_ef_logs_on = yes }
-		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|bank_subj|n [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bk_subj_n_v')|0]|levels [THIS.GetCountry.MakeScope.Var('zz_ef_bk_t').GetValue|0]|gov [THIS.GetCountry.MakeScope.Var('zz_ef_bk_g').GetValue|0]|comp [THIS.GetCountry.MakeScope.Var('zz_ef_bk_cl').GetValue|0]|comp_k [THIS.GetCountry.MakeScope.Var('zz_ef_bk_ck').GetValue|2]|pri [THIS.GetCountry.MakeScope.Var('zz_ef_bk_p').GetValue|0]|share_sum [THIS.GetCountry.MakeScope.Var('zz_ef_bk_shsum').GetValue|3]"
+		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|bank_subj|n [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bk_subj_n_v')|0]|levels [THIS.GetCountry.MakeScope.Var('zz_ef_bk_t').GetValue|0]|gov [THIS.GetCountry.MakeScope.Var('zz_ef_bk_g').GetValue|0]|comp [THIS.GetCountry.MakeScope.Var('zz_ef_bk_cl').GetValue|0]|comp_k [THIS.GetCountry.MakeScope.Var('zz_ef_bk_ck').GetValue|2]|pri [THIS.GetCountry.MakeScope.Var('zz_ef_bk_p').GetValue|0]|share_sum [THIS.GetCountry.MakeScope.Var('zz_ef_bk_shsum').GetValue|3]|bank_profit [THIS.GetCountry.MakeScope.Var('zz_ef_bk_bprof').GetValue|0]"
 		if = {
 			limit = { zz_ef_log_country = yes }
 			every_company = {
@@ -399,7 +416,7 @@ zz_ef_bk_subj_log = {
 		limit = { var:zz_ef_bk_kind ?= flag:company }
 		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.Var('zz_ef_bk_cty').GetCountry.GetNameNoFormatting]|bank_book_co|[THIS.Var('zz_ef_bk_co').GetCompany.GetNameNoFormatting]"
 	}
-	debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.Var('zz_ef_bk_cty').GetCountry.GetNameNoFormatting]|bank_book|kind [THIS.Var('zz_ef_bk_kind').GetFlagName]|levels [THIS.Var('zz_ef_bk_lv').GetValue|0]|share [THIS.Var('zz_ef_bk_sh').GetValue|3]|rate [THIS.Var('zz_ef_bk_rate').GetValue|4]|cap [THIS.Var('zz_ef_bk_cap').GetValue|0]|dep [THIS.Var('zz_ef_bk_dep').GetValue|0]|cc [THIS.Var('zz_ef_bk_cc').GetValue|0]|bc [THIS.Var('zz_ef_bk_bc').GetValue|0]|cbd [THIS.Var('zz_ef_bk_cbd').GetValue|0]|inv [THIS.Var('zz_ef_bk_inv').GetValue|0]|mg [THIS.Var('zz_ef_bk_mg').GetValue|0]|ms [THIS.Var('zz_ef_bk_ms').GetValue|0]|cash [THIS.ScriptValue('zz_ef_bk_cash_v')|0]"
+	debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.Var('zz_ef_bk_cty').GetCountry.GetNameNoFormatting]|bank_book|kind [THIS.Var('zz_ef_bk_kind').GetFlagName]|levels [THIS.Var('zz_ef_bk_lv').GetValue|0]|share [THIS.Var('zz_ef_bk_sh').GetValue|3]|rate [THIS.Var('zz_ef_bk_rate').GetValue|4]|cap [THIS.Var('zz_ef_bk_cap').GetValue|0]|dep [THIS.Var('zz_ef_bk_dep').GetValue|0]|cc [THIS.Var('zz_ef_bk_cc').GetValue|0]|bc [THIS.Var('zz_ef_bk_bc').GetValue|0]|cbd [THIS.Var('zz_ef_bk_cbd').GetValue|0]|inv [THIS.Var('zz_ef_bk_inv').GetValue|0]|mg [THIS.Var('zz_ef_bk_mg').GetValue|0]|ms [THIS.Var('zz_ef_bk_ms').GetValue|0]|cash [THIS.ScriptValue('zz_ef_bk_cash_v')|0]|inc [THIS.ScriptValue('zz_ef_bk_inc_v')|0]"
 }
 
 # SUBJECT scope: all its accounts and claims to subject $TO$ (it closes: its company has no "Bank" levels).

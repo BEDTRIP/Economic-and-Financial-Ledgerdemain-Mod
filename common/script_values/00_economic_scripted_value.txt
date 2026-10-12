@@ -5111,14 +5111,27 @@ private_bank_funds_min_limit_ratio = {
 }
 
 
+# the change of the currency's value over 1 / 5 / 10 years; 0 before a full window (Д.R4б.15)
 money_value_dif_1_final = {
-	value = var:money_value_dif_1
+	value = 0
+	if = {
+		limit = { has_variable = zz_ef_mv_ok_1 }
+		value = var:money_value_dif_1
+	}
 }
 money_value_dif_5_final = {
-	value = var:money_value_dif_5
+	value = 0
+	if = {
+		limit = { has_variable = zz_ef_mv_ok_5 }
+		value = var:money_value_dif_5
+	}
 }
 money_value_dif_10_final = {
-	value = var:money_value_dif_10
+	value = 0
+	if = {
+		limit = { has_variable = zz_ef_mv_ok_10 }
+		value = var:money_value_dif_10
+	}
 }
 
 ####################################
@@ -7345,4 +7358,18 @@ base_rate_effective_growth = {
 #valeur de suivit debug
 government_loan_fixe = {
 	value = var:government_loan
+}
+
+# 1 once the window of 1 / 5 / 10 years is full (Д.R4б.15) -- the tables show «—» before it
+zz_ef_mv_ok_1_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_mv_ok_1 } value = 1 }
+}
+zz_ef_mv_ok_5_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_mv_ok_5 } value = 1 }
+}
+zz_ef_mv_ok_10_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_mv_ok_10 } value = 1 }
 }

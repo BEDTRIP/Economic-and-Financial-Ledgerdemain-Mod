@@ -12931,7 +12931,11 @@ ai_privat_bank_bond_25_renforcement = {
 #########################################################################################################################################################################################
 #########################################################################################################################################################################################
 
-# establish bank compagnie
+# The start's E&F companies (history, 00_ef_building.txt): each founded company gets one level of its building in a
+# random state of its country -- a bank company one level of «Банк» (its company levels = its «Банк» levels, Д.R4б.12),
+# the others one level of their building, the private construction company 5 levels of the construction sector; a
+# company with no levels disappears in a month. The yearly call is gone (Д.R4б.3): companies founded after the start
+# date are not created.
 establish_bank_and_ef_compagnie = {
 
 	########################################################################################################################################
@@ -12968,29 +12972,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_NEW_YORK
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BankJPMorgan
+						country = "c:USA"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_BankJPMorgan
-							country="c:USA"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -13008,29 +12999,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_NEW_YORK
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BankGoldmanSachs
+						country = "c:USA"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_BankGoldmanSachs
-							country="c:USA"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -13048,29 +13026,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_NEW_YORK
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_ChaseBank
+						country = "c:USA"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_ChaseBank
-							country="c:USA"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -13088,29 +13053,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_NEW_YORK
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BankWellsFargo
+						country = "c:USA"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_BankWellsFargo
-							country="c:USA"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -13128,29 +13080,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_NEW_YORK
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BankAmericanExpress
+						country = "c:USA"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_BankAmericanExpress
-							country="c:USA"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -13170,29 +13109,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_HOLLAND
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_DeNederlandscheBank
+						country = "c:NET"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_DeNederlandscheBank
-							country="c:NET"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -13210,29 +13136,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_HOLLAND
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_amsterdamschebank
+						country = "c:NET"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_amsterdamschebank
-							country="c:NET"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -13250,29 +13163,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_HOLLAND
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_RotterdamscheBankvereeniging
+						country = "c:NET"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_RotterdamscheBankvereeniging
-							country="c:NET"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -13292,29 +13192,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_FLANDERS
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BanqueNationaleDeBelgique
+						country = "c:BEL"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_BanqueNationaleDeBelgique
-							country="c:BEL"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -13332,29 +13219,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_FLANDERS
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_SocieteGeneraledeBelgique
+						country = "c:BEL"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_SocieteGeneraledeBelgique
-							country="c:BEL"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -13372,29 +13246,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_FLANDERS
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BanqueDeBruxelles
+						country = "c:BEL"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_BanqueDeBruxelles
-							country="c:BEL"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -13414,29 +13275,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_EAST_SWITZERLAND
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_Bankenverein
+						country = "c:SWI"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_Bankenverein
-							country="c:SWI"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -13456,29 +13304,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_SVEALAND
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_HandelsBanken
+						country = "c:SWE"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_HandelsBanken
-							country="c:SWE"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -13498,29 +13333,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_ZEALAND
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_LandmandsBanken
+						country = "c:DEN"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_LandmandsBanken
-							country="c:DEN"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -13540,29 +13362,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_EASTERN_NORWAY
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_ChristianiaBank
+						country = "c:NOR"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_ChristianiaBank
-							country="c:NOR"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -13582,29 +13391,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_NEW_CASTILE
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BankofSpain
+						country = "c:SPA"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_BankofSpain
-							country="c:SPA"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -13622,29 +13418,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_NEW_CASTILE
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancoDeBilbao
+						country = "c:SPA"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_BancoDeBilbao
-							country="c:SPA"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -13662,29 +13445,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_NEW_CASTILE
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancoHispanoColonial
+						country = "c:SPA"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_BancoHispanoColonial
-							country="c:SPA"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -13704,29 +13474,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_ESTREMADURA
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancoDePortugal
+						country = "c:POR"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_BancoDePortugal
-							country="c:POR"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -13744,29 +13501,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_ESTREMADURA
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancoCommercialPortugues
+						country = "c:POR"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_BancoCommercialPortugues
-							country="c:POR"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -13784,29 +13528,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_ESTREMADURA
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_Bank_Ultramarino
+						country = "c:POR"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_Bank_Ultramarino
-							country="c:POR"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -13826,29 +13557,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_HOME_COUNTIES
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_Rothschild_Bank_gbr
+						country = "c:GBR"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_Rothschild_Bank_gbr
-							country="c:GBR"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -13866,29 +13584,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_ILE_DE_FRANCE
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_Rothschild_Bank_fra
+						country = "c:FRA"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_Rothschild_Bank_fra
-							country="c:FRA"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -13906,29 +13611,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_HESSE
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_Rothschild_Bank_ger
+						country = "c:GER"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_Rothschild_Bank_ger
-							country="c:GER"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -13946,29 +13638,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_AUSTRIA
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_Rothschild_Bank_aus
+						country = "c:AUS"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_Rothschild_Bank_aus
-							country="c:AUS"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -13986,29 +13665,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_CAMPANIA
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_Rothschild_Bank_ita
+						country = "c:ITA"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_Rothschild_Bank_ita
-							country="c:ITA"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14026,24 +13692,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_LAZIO
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancaDItalia
+						country = "c:ITA"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BancaDItalia
-							country = "c:ITA"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14059,24 +13717,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_LOMBARDY
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancaCommercialeItaliana
+						country = "c:ITA"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BancaCommercialeItaliana
-							country = "c:ITA"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14092,24 +13742,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_PIEDMONT
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_CassaDiRisparmioDiTorino
+						country = "c:SAR"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_CassaDiRisparmioDiTorino
-							country = "c:SAR"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14127,24 +13769,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_HOME_COUNTIES
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BankofEngland
+						country = "c:GBR"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BankofEngland
-							country = "c:GBR"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14160,24 +13794,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_HOME_COUNTIES
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_LloydsBank
+						country = "c:GBR"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_LloydsBank
-							country = "c:GBR"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14193,24 +13819,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_HOME_COUNTIES
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_barclaysBank
+						country = "c:GBR"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_barclaysBank
-							country = "c:GBR"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14226,24 +13844,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_HOME_COUNTIES
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_NationalWestminsterBank
+						country = "c:GBR"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_NationalWestminsterBank
-							country = "c:GBR"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14259,24 +13869,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_LOWLANDS
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_RoyalBankOfScotland
+						country = "c:GBR"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_RoyalBankOfScotland
-							country = "c:GBR"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14294,24 +13896,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_ILE_DE_FRANCE
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BanqueDeFrance
+						country = "c:FRA"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BanqueDeFrance
-							country = "c:FRA"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14327,24 +13921,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_RHONE
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BankCreditLyonnais
+						country = "c:FRA"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BankCreditLyonnais
-							country = "c:FRA"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14360,24 +13946,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_ILE_DE_FRANCE
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_SocieteGenerale
+						country = "c:FRA"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_SocieteGenerale
-							country = "c:FRA"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14393,24 +13971,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_ILE_DE_FRANCE
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BanqueDeParisEtDesPaysBas
+						country = "c:FRA"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BanqueDeParisEtDesPaysBas
-							country = "c:FRA"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14428,24 +13998,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_INGRIA
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_StateBankRussianEmpire
+						country = "c:RUS"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_StateBankRussianEmpire
-							country = "c:RUS"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14461,24 +14023,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_INGRIA
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_construction_sector
+				add_ownership = {
+					company = {
+						type = saint_petersburg_international_commercial_bank
+						country = "c:RUS"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = saint_petersburg_international_commercial_bank
-							country = "c:RUS"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14494,24 +14048,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_INGRIA
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_construction_sector
+				add_ownership = {
+					company = {
+						type = russo_chinese_bank
+						country = "c:RUS"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = russo_chinese_bank
-							country = "c:RUS"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14529,24 +14075,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_BRANDENBURG
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_DeutscheBank
+						country = "c:GER"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_DeutscheBank
-							country = "c:GER"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14562,24 +14100,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_BRANDENBURG
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_Reichsbank
+						country = "c:GER"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_Reichsbank
-							country = "c:GER"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14595,24 +14125,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_BRANDENBURG
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_PreussischeSeehandlung
+						country = "c:GER"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_PreussischeSeehandlung
-							country = "c:GER"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14628,24 +14150,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_BAVARIA
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BayerischeHypothekenUndWechselBank
+						country = "c:BAV"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BayerischeHypothekenUndWechselBank
-							country = "c:BAV"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14663,24 +14177,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_AUSTRIA
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_OesterreichischeNationalbank
+						country = "c:AUS"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_OesterreichischeNationalbank
-							country = "c:AUS"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14696,24 +14202,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_AUSTRIA
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_OesterreichischeCreditAnstalt
+						country = "c:AUS"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_OesterreichischeCreditAnstalt
-							country = "c:AUS"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14729,24 +14227,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_AUSTRIA
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_WienerBankverein
+						country = "c:AUS"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_WienerBankverein
-							country = "c:AUS"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14764,24 +14254,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_PELOPONNESE
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_bankofgreec
+						country = "c:GRE"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_bankofgreec
-							country = "c:GRE"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14799,24 +14281,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_EASTERN_THRACE
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_OttomanBank
+						country = "c:TUR"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_OttomanBank
-							country = "c:TUR"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14832,24 +14306,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_EASTERN_THRACE
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_TurkishZiraatBankasi
+						country = "c:TUR"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_TurkishZiraatBankasi
-							country = "c:TUR"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14865,24 +14331,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_EASTERN_THRACE
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BanqueImperialeOttomane
+						country = "c:TUR"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BanqueImperialeOttomane
-							country = "c:TUR"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14900,24 +14358,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_IRAKAJEMI
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_ImperialBankofPersia
+						country = "c:PER"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_ImperialBankofPersia
-							country = "c:PER"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14933,24 +14383,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_IRAKAJEMI
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BankMelliIran
+						country = "c:PER"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BankMelliIran
-							country = "c:PER"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14966,24 +14408,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_IRAKAJEMI
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BankTejaratPersia
+						country = "c:PER"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BankTejaratPersia
-							country = "c:PER"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -14999,24 +14433,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_IRAKAJEMI
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BankAngloPersian
+						country = "c:PER"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BankAngloPersian
-							country = "c:PER"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15034,24 +14460,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_LOWER_EGYPT
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BanqueEgyptienne
+						country = "c:EGY"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BanqueEgyptienne
-							country = "c:EGY"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15069,24 +14487,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_SEOUL
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_ChohungBank
+						country = "c:CHI"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_ChohungBank
-							country = "c:CHI"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15102,24 +14512,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_SHAOZHOU
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BankHSBC
+						country = "c:CHI"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BankHSBC
-							country = "c:CHI"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15135,24 +14537,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_SUZHOU
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BankIBC
+						country = "c:CHI"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BankIBC
-							country = "c:CHI"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15168,24 +14562,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_SUZHOU
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BankBOCOM
+						country = "c:CHI"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BankBOCOM
-							country = "c:CHI"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15201,24 +14587,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_BEIJING
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_DaQingBank
+						country = "c:CHI"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_DaQingBank
-							country = "c:CHI"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15236,24 +14614,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_KANTO
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_Mitsubishiexchangehousebank
+						country = "c:JAP"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_Mitsubishiexchangehousebank
-							country = "c:JAP"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15269,24 +14639,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_KANTO
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BankOfJapan
+						country = "c:JAP"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BankOfJapan
-							country = "c:JAP"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15302,24 +14664,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_KANTO
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_SumitomoBank
+						country = "c:JAP"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_SumitomoBank
-							country = "c:JAP"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15337,24 +14691,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_WEST_BENGAL
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_ImperialBankofIndia
+						country = "c:BIC"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_ImperialBankofIndia
-							country = "c:BIC"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15370,24 +14716,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_WEST_BENGAL
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BankOfIndiaCompany
+						country = "c:BIC"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BankOfIndiaCompany
-							country = "c:BIC"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15403,24 +14741,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_BOMBAY
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BankOfBombay
+						country = "c:BIC"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BankOfBombay
-							country = "c:BIC"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15438,24 +14768,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_ONTARIO
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_RoyalBankofCanada
+						country = "c:ONT"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_RoyalBankofCanada
-							country = "c:ONT"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15471,24 +14793,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_QUEBEC
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BankOfMontreal
+						country = "c:QUE"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BankOfMontreal
-							country = "c:QUE"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15504,24 +14818,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_ONTARIO
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_CanadianImperialBankOfCommerce
+						country = "c:CAN"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_CanadianImperialBankOfCommerce
-							country = "c:CAN"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15537,24 +14843,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_QUEBEC
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BankDesjardins
+						country = "c:QUE"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BankDesjardins
-							country = "c:QUE"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15572,24 +14870,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_NEW_SOUTH_WALES
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_ColonialBankOfAustralia
+						country = "c:NSW"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_ColonialBankOfAustralia
-							country = "c:NSW"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15605,24 +14895,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_NEW_SOUTH_WALES
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_NationalBankOfAustralia
+						country = "c:NSW"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_NationalBankOfAustralia
-							country = "c:NSW"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15638,24 +14920,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_NEW_SOUTH_WALES
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_SouthAustralianBank
+						country = "c:NSW"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_SouthAustralianBank
-							country = "c:NSW"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15673,24 +14947,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_MEXICO
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancoDeMexico
+						country = "c:MEX"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BancoDeMexico
-							country = "c:MEX"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15706,24 +14972,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_MEXICO
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_bancodelondresmexico
+						country = "c:MEX"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_bancodelondresmexico
-							country = "c:MEX"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15739,24 +14997,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_MEXICO
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancoMercantilMexicano
+						country = "c:MEX"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BancoMercantilMexicano
-							country = "c:MEX"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15774,24 +15024,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_COSTA_RICA
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancoCentralDeCostaRica
+						country = "c:COS"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BancoCentralDeCostaRica
-							country = "c:COS"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15809,24 +15051,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_GUATEMALA
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancoCentralDeGuatemala
+						country = "c:GUA"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BancoCentralDeGuatemala
-							country = "c:GUA"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15844,24 +15078,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_HONDURAS
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancoCentralDeHonduras
+						country = "c:HON"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BancoCentralDeHonduras
-							country = "c:HON"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15879,24 +15105,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_PANAMA
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancoNacionalDePanama
+						country = "c:PAN"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BancoNacionalDePanama
-							country = "c:PAN"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15914,24 +15132,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_RIO_DE_JANEIRO
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancoDoBrasil
+						country = "c:BRZ"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BancoDoBrasil
-							country = "c:BRZ"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15947,24 +15157,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_RIO_DE_JANEIRO
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancoMercantil
+						country = "c:BRZ"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BancoMercantil
-							country = "c:BRZ"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -15980,24 +15182,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_RIO_DE_JANEIRO
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancoCommercialDoBrasil
+						country = "c:BRZ"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BancoCommercialDoBrasil
-							country = "c:BRZ"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -16015,24 +15209,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_BUENOS_AIRES
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancoNacionArgentina
+						country = "c:ARG"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BancoNacionArgentina
-							country = "c:ARG"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -16048,24 +15234,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_BUENOS_AIRES
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancoHipotecarioNacional
+						country = "c:ARG"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BancoHipotecarioNacional
-							country = "c:ARG"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -16081,24 +15259,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_BUENOS_AIRES
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancoProvincia
+						country = "c:ARG"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BancoProvincia
-							country = "c:ARG"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -16116,24 +15286,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_SANTIAGO
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancoDeChile
+						country = "c:CHL"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BancoDeChile
-							country = "c:CHL"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -16149,24 +15311,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_SANTIAGO
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancoEstado
+						country = "c:CHL"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BancoEstado
-							country = "c:CHL"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -16182,24 +15336,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_SANTIAGO
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancoDeValparaiso
+						country = "c:CHL"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BancoDeValparaiso
-							country = "c:CHL"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -16217,24 +15363,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_LA_PAZ
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancoNacionalDeBolivia
+						country = "c:BOL"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BancoNacionalDeBolivia
-							country = "c:BOL"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -16252,24 +15390,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_CUNDINAMARCA
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancoRepublicaColombia
+						country = "c:CLM"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BancoRepublicaColombia
-							country = "c:CLM"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -16287,24 +15417,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_MIRANDA
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancoCentralDeVenezuela
+						country = "c:VNZ"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BancoCentralDeVenezuela
-							country = "c:VNZ"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -16322,24 +15444,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_WESTERN_CUBA
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancoEspanolDeLaHabana
+						country = "c:CUB"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BancoEspanolDeLaHabana
-							country = "c:CUB"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -16357,24 +15471,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_URUGUAY
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancoCentralDelUruguay
+						country = "c:URU"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BancoCentralDelUruguay
-							country = "c:URU"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -16392,24 +15498,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_BAJO_PARAGUAY
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancoNacionalDelParaguay
+						country = "c:PRG"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BancoNacionalDelParaguay
-							country = "c:PRG"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -16427,24 +15525,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_CAPE_COLONY
 		}
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_construction_sector level < 10 }
-						not = { has_building = building_construction_sector }
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BankSBoBSA
+						country = "c:SAF"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BankSBoBSA
-							country = "c:SAF"
-							levels = 10
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -16490,29 +15580,16 @@ establish_bank_and_ef_compagnie = {
 		}
 		add_company = company_type:company_private_construction
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = {
-							has_building = building_construction_sector
-						}
+			create_building = {
+				building = building_construction_sector
+				add_ownership = {
+					company = {
+						type = company_private_construction
+						country = "ROOT"
+						levels = 5
 					}
 				}
-				create_building={
-					building="building_construction_sector"
-					add_ownership={
-						company={
-							type=company_private_construction
-							country="ROOT"
-							levels=5
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -16567,27 +15644,16 @@ establish_bank_and_ef_compagnie = {
 		}
 		add_company = company_type:company_siemens_and_halske
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						not = { has_building = building_electrics_industry }
-						any_scope_building = {
-							is_building_type = building_electrics_industry
-							level < 10
-						}
+			create_building = {
+				building = building_electrics_industry
+				add_ownership = {
+					company = {
+						type = company_siemens_and_halske
+						country = "c:NGF"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_electrics_industry"
-					add_ownership = {
-						company = {
-							type = company_siemens_and_halske
-							country = "c:NGF"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -16601,43 +15667,27 @@ establish_bank_and_ef_compagnie = {
 		}
 		add_company = company_type:company_schichau
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						not = { has_building = building_motor_industry }
-						any_scope_building = {
-							is_building_type = building_motor_industry
-							level < 10
-						}
-						not = { has_building = building_shipyard }
-						any_scope_building = {
-							is_building_type = building_shipyard
-							level < 10
-						}
+			create_building = {
+				building = building_motor_industry
+				add_ownership = {
+					company = {
+						type = company_schichau
+						country = "c:NGF"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_motor_industry"
-					add_ownership = {
-						company = {
-							type = company_schichau
-							country = "c:NGF"
-							levels = 5
-						}
+				reserves = 0
+			}
+			create_building = {
+				building = building_shipyard
+				add_ownership = {
+					company = {
+						type = company_schichau
+						country = "c:NGF"
+						levels = 1
 					}
-					reserves = 0
 				}
-				create_building = {
-					building = "building_shipyard"
-					add_ownership = {
-						company = {
-							type = company_schichau
-							country = "c:NGF"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -16651,59 +15701,38 @@ establish_bank_and_ef_compagnie = {
 		}
 		add_company = company_type:company_rheinmetall
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						not = { has_building = building_artillery_foundry }
-						any_scope_building = {
-							is_building_type = building_artillery_foundry
-							level < 10
-						}
-						not = { has_building = building_munition_plant }
-						any_scope_building = {
-							is_building_type = building_munition_plant
-							level < 10
-						}
-						not = { has_building = building_explosives_factory }
-						any_scope_building = {
-							is_building_type = building_explosives_factory
-							level < 10
-						}
+			create_building = {
+				building = building_artillery_foundry
+				add_ownership = {
+					company = {
+						type = company_rheinmetall
+						country = "c:NGF"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_artillery_foundry"
-					add_ownership = {
-						company = {
-							type = company_rheinmetall
-							country = "c:NGF"
-							levels = 5
-						}
+				reserves = 0
+			}
+			create_building = {
+				building = building_munition_plant
+				add_ownership = {
+					company = {
+						type = company_rheinmetall
+						country = "c:NGF"
+						levels = 1
 					}
-					reserves = 0
 				}
-				create_building = {
-					building = "building_munition_plant"
-					add_ownership = {
-						company = {
-							type = company_rheinmetall
-							country = "c:NGF"
-							levels = 5
-						}
+				reserves = 0
+			}
+			create_building = {
+				building = building_explosives_factory
+				add_ownership = {
+					company = {
+						type = company_rheinmetall
+						country = "c:NGF"
+						levels = 1
 					}
-					reserves = 0
 				}
-				create_building = {
-					building = "building_explosives_factory"
-					add_ownership = {
-						company = {
-							type = company_rheinmetall
-							country = "c:NGF"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -16720,59 +15749,38 @@ establish_bank_and_ef_compagnie = {
 		}
 		add_company = company_type:company_krupp
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						not = { has_building = building_arms_industry }
-						any_scope_building = {
-							is_building_type = building_arms_industry
-							level < 10
-						}
-						not = { has_building = building_artillery_foundry }
-						any_scope_building = {
-							is_building_type = building_artillery_foundry
-							level < 10
-						}
-						not = { has_building = building_steel_mill }
-						any_scope_building = {
-							is_building_type = building_steel_mill
-							level < 10
-						}
+			create_building = {
+				building = building_arms_industry
+				add_ownership = {
+					company = {
+						type = company_krupp
+						country = "c:NGF"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_arms_industry"
-					add_ownership = {
-						company = {
-							type = company_krupp
-							country = "c:NGF"
-							levels = 5
-						}
+				reserves = 0
+			}
+			create_building = {
+				building = building_artillery_foundry
+				add_ownership = {
+					company = {
+						type = company_krupp
+						country = "c:NGF"
+						levels = 1
 					}
-					reserves = 0
 				}
-				create_building = {
-					building = "building_artillery_foundry"
-					add_ownership = {
-						company = {
-							type = company_krupp
-							country = "c:NGF"
-							levels = 5
-						}
+				reserves = 0
+			}
+			create_building = {
+				building = building_steel_mill
+				add_ownership = {
+					company = {
+						type = company_krupp
+						country = "c:NGF"
+						levels = 1
 					}
-					reserves = 0
 				}
-				create_building = {
-					building = "building_steel_mill"
-					add_ownership = {
-						company = {
-							type = company_krupp
-							country = "c:NGF"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -16786,27 +15794,16 @@ establish_bank_and_ef_compagnie = {
 		}
 		add_company = company_type:company_konigliche_porzellan_manufaktur_meissen
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						not = { has_building = building_glassworks }
-						any_scope_building = {
-							is_building_type = building_glassworks
-							level < 10
-						}
+			create_building = {
+				building = building_glassworks
+				add_ownership = {
+					company = {
+						type = company_konigliche_porzellan_manufaktur_meissen
+						country = "c:NGF"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_glassworks"
-					add_ownership = {
-						company = {
-							type = company_konigliche_porzellan_manufaktur_meissen
-							country = "c:NGF"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -16829,107 +15826,16 @@ establish_bank_and_ef_compagnie = {
 		}
 		add_company = company_type:company_PreussischeSeehandlung
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						not = { has_building = building_construction_sector }
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = { has_building = building_railway }
-						any_scope_building = {
-							is_building_type = building_railway
-							level < 10
-						}
-						not = { has_building = building_trade_center }
-						any_scope_building = {
-							is_building_type = building_trade_center
-							level < 10
-						}
-						not = { has_building = building_gold_mine }
-						any_scope_building = {
-							is_building_type = building_gold_mine
-							level < 10
-						}
-						not = { has_building = building_silver_mine }
-						any_scope_building = {
-							is_building_type = building_silver_mine
-							level < 10
-						}
-						not = { has_building = building_financial_centre_pru }
-						any_scope_building = {
-							is_building_group = bg_financial_centre
-							level < 10
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_PreussischeSeehandlung
+						country = "c:NGF"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_PreussischeSeehandlung
-							country = "c:NGF"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_railway"
-					add_ownership = {
-						company = {
-							type = company_PreussischeSeehandlung
-							country = "c:NGF"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_trade_center"
-					add_ownership = {
-						company = {
-							type = company_PreussischeSeehandlung
-							country = "c:NGF"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_gold_mine"
-					add_ownership = {
-						company = {
-							type = company_PreussischeSeehandlung
-							country = "c:NGF"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_silver_mine"
-					add_ownership = {
-						company = {
-							type = company_PreussischeSeehandlung
-							country = "c:NGF"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_financial_centre_pru"
-					add_ownership = {
-						company = {
-							type = company_PreussischeSeehandlung
-							country = "c:NGF"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -16977,43 +15883,27 @@ establish_bank_and_ef_compagnie = {
 		}
 		add_company = company_type:company_mav
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						not = { has_building = building_motor_industry }
-						any_scope_building = {
-							is_building_type = building_motor_industry
-							level < 10
-						}
-						not = { has_building = building_tooling_workshop }
-						any_scope_building = {
-							is_building_type = building_tooling_workshop
-							level < 10
-						}
+			create_building = {
+				building = building_motor_industry
+				add_ownership = {
+					company = {
+						type = company_mav
+						country = "c:HUN"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_motor_industry"
-					add_ownership = {
-						company = {
-							type = company_mav
-							country = "c:HUN"
-							levels = 5
-						}
+				reserves = 0
+			}
+			create_building = {
+				building = building_tooling_workshop
+				add_ownership = {
+					company = {
+						type = company_mav
+						country = "c:HUN"
+						levels = 1
 					}
-					reserves = 0
 				}
-				create_building = {
-					building = "building_tooling_workshop"
-					add_ownership = {
-						company = {
-							type = company_mav
-							country = "c:HUN"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -17027,59 +15917,38 @@ establish_bank_and_ef_compagnie = {
 		}
 		add_company = company_type:company_manfred_weiss
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						not = { has_building = building_steel_mill }
-						any_scope_building = {
-							is_building_type = building_steel_mill
-							level < 10
-						}
-						not = { has_building = building_munition_plant }
-						any_scope_building = {
-							is_building_type = building_munition_plant
-							level < 10
-						}
-						not = { has_building = building_automotive_industry }
-						any_scope_building = {
-							is_building_type = building_automotive_industry
-							level < 10
-						}
+			create_building = {
+				building = building_steel_mill
+				add_ownership = {
+					company = {
+						type = company_manfred_weiss
+						country = "c:HUN"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_steel_mill"
-					add_ownership = {
-						company = {
-							type = company_manfred_weiss
-							country = "c:HUN"
-							levels = 5
-						}
+				reserves = 0
+			}
+			create_building = {
+				building = building_munition_plant
+				add_ownership = {
+					company = {
+						type = company_manfred_weiss
+						country = "c:HUN"
+						levels = 1
 					}
-					reserves = 0
 				}
-				create_building = {
-					building = "building_munition_plant"
-					add_ownership = {
-						company = {
-							type = company_manfred_weiss
-							country = "c:HUN"
-							levels = 5
-						}
+				reserves = 0
+			}
+			create_building = {
+				building = building_automotive_industry
+				add_ownership = {
+					company = {
+						type = company_manfred_weiss
+						country = "c:HUN"
+						levels = 1
 					}
-					reserves = 0
 				}
-				create_building = {
-					building = "building_automotive_industry"
-					add_ownership = {
-						company = {
-							type = company_manfred_weiss
-							country = "c:HUN"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -17105,27 +15974,16 @@ establish_bank_and_ef_compagnie = {
 		}
 		add_company = company_type:company_galician_carpathian_oil
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						not = { has_building = building_oil_rig }
-						any_scope_building = {
-							is_building_type = building_oil_rig
-							level < 10
-						}
+			create_building = {
+				building = building_oil_rig
+				add_ownership = {
+					company = {
+						type = company_galician_carpathian_oil
+						country = "c:AUS"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_oil_rig"
-					add_ownership = {
-						company = {
-							type = company_galician_carpathian_oil
-							country = "c:AUS"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -17139,107 +15997,16 @@ establish_bank_and_ef_compagnie = {
 		}
 		add_company = company_type:company_WienerBankverein
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						not = { has_building = building_construction_sector }
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = { has_building = building_railway }
-						any_scope_building = {
-							is_building_type = building_railway
-							level < 10
-						}
-						not = { has_building = building_trade_center }
-						any_scope_building = {
-							is_building_type = building_trade_center
-							level < 10
-						}
-						not = { has_building = building_gold_mine }
-						any_scope_building = {
-							is_building_type = building_gold_mine
-							level < 10
-						}
-						not = { has_building = building_silver_mine }
-						any_scope_building = {
-							is_building_type = building_silver_mine
-							level < 10
-						}
-						not = { has_building = building_financial_centre_aus }
-						any_scope_building = {
-							is_building_group = bg_financial_centre
-							level < 10
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_WienerBankverein
+						country = "c:AUS"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_WienerBankverein
-							country = "c:AUS"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_railway"
-					add_ownership = {
-						company = {
-							type = company_WienerBankverein
-							country = "c:AUS"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_trade_center"
-					add_ownership = {
-						company = {
-							type = company_WienerBankverein
-							country = "c:AUS"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_gold_mine"
-					add_ownership = {
-						company = {
-							type = company_WienerBankverein
-							country = "c:AUS"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_silver_mine"
-					add_ownership = {
-						company = {
-							type = company_WienerBankverein
-							country = "c:AUS"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_financial_centre_aus"
-					add_ownership = {
-						company = {
-							type = company_WienerBankverein
-							country = "c:AUS"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -17258,59 +16025,38 @@ establish_bank_and_ef_compagnie = {
 		}
 		add_company = company_type:company_skoda
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						not = { has_building = building_steel_mill }
-						any_scope_building = {
-							is_building_type = building_steel_mill
-							level < 10
-						}
-						not = { has_building = building_motor_industry }
-						any_scope_building = {
-							is_building_type = building_motor_industry
-							level < 10
-						}
-						not = { has_building = building_artillery_foundry }
-						any_scope_building = {
-							is_building_type = building_artillery_foundry
-							level < 10
-						}
+			create_building = {
+				building = building_steel_mill
+				add_ownership = {
+					company = {
+						type = company_skoda
+						country = "c:AUS"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_steel_mill"
-					add_ownership = {
-						company = {
-							type = company_skoda
-							country = "c:AUS"
-							levels = 5
-						}
+				reserves = 0
+			}
+			create_building = {
+				building = building_motor_industry
+				add_ownership = {
+					company = {
+						type = company_skoda
+						country = "c:AUS"
+						levels = 1
 					}
-					reserves = 0
 				}
-				create_building = {
-					building = "building_motor_industry"
-					add_ownership = {
-						company = {
-							type = company_skoda
-							country = "c:AUS"
-							levels = 5
-						}
+				reserves = 0
+			}
+			create_building = {
+				building = building_artillery_foundry
+				add_ownership = {
+					company = {
+						type = company_skoda
+						country = "c:AUS"
+						levels = 1
 					}
-					reserves = 0
 				}
-				create_building = {
-					building = "building_artillery_foundry"
-					add_ownership = {
-						company = {
-							type = company_skoda
-							country = "c:AUS"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -17324,27 +16070,16 @@ establish_bank_and_ef_compagnie = {
 		}
 		add_company = company_type:company_ludwig_moser_and_sons
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						not = { has_building = building_glassworks }
-						any_scope_building = {
-							is_building_type = building_glassworks
-							level < 10
-						}
+			create_building = {
+				building = building_glassworks
+				add_ownership = {
+					company = {
+						type = company_ludwig_moser_and_sons
+						country = "c:AUS"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_glassworks"
-					add_ownership = {
-						company = {
-							type = company_ludwig_moser_and_sons
-							country = "c:AUS"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -17358,27 +16093,16 @@ establish_bank_and_ef_compagnie = {
 		}
 		add_company = company_type:company_gebruder_thonet
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						not = { has_building = building_furniture_manufactory }
-						any_scope_building = {
-							is_building_type = building_furniture_manufactory
-							level < 10
-						}
+			create_building = {
+				building = building_furniture_manufactory
+				add_ownership = {
+					company = {
+						type = company_gebruder_thonet
+						country = "c:AUS"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_furniture_manufactory"
-					add_ownership = {
-						company = {
-							type = company_gebruder_thonet
-							country = "c:AUS"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -17396,139 +16120,16 @@ establish_bank_and_ef_compagnie = {
 		}
 		add_company = company_type:company_OesterreichischeCreditAnstalt
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						not = { has_building = building_construction_sector }
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = { has_building = building_coal_mine }
-						any_scope_building = {
-							is_building_type = building_coal_mine
-							level < 10
-						}
-						not = { has_building = building_iron_mine }
-						any_scope_building = {
-							is_building_type = building_iron_mine
-							level < 10
-						}
-						not = { has_building = building_lead_mine }
-						any_scope_building = {
-							is_building_type = building_lead_mine
-							level < 10
-						}
-						not = { has_building = building_sulfur_mine }
-						any_scope_building = {
-							is_building_type = building_sulfur_mine
-							level < 10
-						}
-						not = { has_building = building_gold_mine }
-						any_scope_building = {
-							is_building_type = building_gold_mine
-							level < 10
-						}
-						not = { has_building = building_silver_mine }
-						any_scope_building = {
-							is_building_type = building_silver_mine
-							level < 10
-						}
-						not = { has_building = building_financial_centre_aus }
-						any_scope_building = {
-							is_building_group = bg_financial_centre
-							level < 10
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_OesterreichischeCreditAnstalt
+						country = "c:AUS"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_OesterreichischeCreditAnstalt
-							country = "c:AUS"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_coal_mine"
-					add_ownership = {
-						company = {
-							type = company_OesterreichischeCreditAnstalt
-							country = "c:AUS"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_iron_mine"
-					add_ownership = {
-						company = {
-							type = company_OesterreichischeCreditAnstalt
-							country = "c:AUS"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_lead_mine"
-					add_ownership = {
-						company = {
-							type = company_OesterreichischeCreditAnstalt
-							country = "c:AUS"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_sulfur_mine"
-					add_ownership = {
-						company = {
-							type = company_OesterreichischeCreditAnstalt
-							country = "c:AUS"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_gold_mine"
-					add_ownership = {
-						company = {
-							type = company_OesterreichischeCreditAnstalt
-							country = "c:AUS"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_silver_mine"
-					add_ownership = {
-						company = {
-							type = company_OesterreichischeCreditAnstalt
-							country = "c:AUS"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_financial_centre_aus"
-					add_ownership = {
-						company = {
-							type = company_OesterreichischeCreditAnstalt
-							country = "c:AUS"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -17544,27 +16145,16 @@ establish_bank_and_ef_compagnie = {
 		}
 		add_company = company_type:company_ricordi
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						not = { has_building = building_art_academy }
-						any_scope_building = {
-							is_building_type = building_art_academy
-							level < 10
-						}
+			create_building = {
+				building = building_art_academy
+				add_ownership = {
+					company = {
+						type = company_ricordi
+						country = "c:ITA"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_art_academy"
-					add_ownership = {
-						company = {
-							type = company_ricordi
-							country = "c:ITA"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -17578,43 +16168,27 @@ establish_bank_and_ef_compagnie = {
 		}
 		add_company = company_type:company_mantero_seta
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						not = { has_building = building_silk_plantation }
-						any_scope_building = {
-							is_building_type = building_silk_plantation
-							level < 10
-						}
-						not = { has_building = building_textile_mill }
-						any_scope_building = {
-							is_building_type = building_textile_mill
-							level < 10
-						}
+			create_building = {
+				building = building_silk_plantation
+				add_ownership = {
+					company = {
+						type = company_mantero_seta
+						country = "c:ITA"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_silk_plantation"
-					add_ownership = {
-						company = {
-							type = company_mantero_seta
-							country = "c:ITA"
-							levels = 5
-						}
+				reserves = 0
+			}
+			create_building = {
+				building = building_textile_mill
+				add_ownership = {
+					company = {
+						type = company_mantero_seta
+						country = "c:ITA"
+						levels = 1
 					}
-					reserves = 0
 				}
-				create_building = {
-					building = "building_textile_mill"
-					add_ownership = {
-						company = {
-							type = company_mantero_seta
-							country = "c:ITA"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -17628,43 +16202,27 @@ establish_bank_and_ef_compagnie = {
 		}
 		add_company = company_type:company_ansaldo
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						not = { has_building = building_artillery_foundry }
-						any_scope_building = {
-							is_building_type = building_artillery_foundry
-							level < 10
-						}
-						not = { has_building = building_steel_mill }
-						any_scope_building = {
-							is_building_type = building_steel_mill
-							level < 10
-						}
+			create_building = {
+				building = building_artillery_foundry
+				add_ownership = {
+					company = {
+						type = company_ansaldo
+						country = "c:ITA"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_artillery_foundry"
-					add_ownership = {
-						company = {
-							type = company_ansaldo
-							country = "c:ITA"
-							levels = 5
-						}
+				reserves = 0
+			}
+			create_building = {
+				building = building_steel_mill
+				add_ownership = {
+					company = {
+						type = company_ansaldo
+						country = "c:ITA"
+						levels = 1
 					}
-					reserves = 0
 				}
-				create_building = {
-					building = "building_steel_mill"
-					add_ownership = {
-						company = {
-							type = company_ansaldo
-							country = "c:ITA"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -17680,107 +16238,16 @@ establish_bank_and_ef_compagnie = {
 		}
 		add_company = company_type:company_BancaCommercialeItaliana
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						not = { has_building = building_construction_sector }
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = { has_building = building_railway }
-						any_scope_building = {
-							is_building_type = building_railway
-							level < 10
-						}
-						not = { has_building = building_trade_center }
-						any_scope_building = {
-							is_building_type = building_trade_center
-							level < 10
-						}
-						not = { has_building = building_gold_mine }
-						any_scope_building = {
-							is_building_type = building_gold_mine
-							level < 10
-						}
-						not = { has_building = building_silver_mine }
-						any_scope_building = {
-							is_building_type = building_silver_mine
-							level < 10
-						}
-						not = { has_building = building_financial_centre_ita }
-						any_scope_building = {
-							is_building_group = bg_financial_centre
-							level < 10
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_BancaCommercialeItaliana
+						country = "c:ITA"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_BancaCommercialeItaliana
-							country = "c:ITA"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_railway"
-					add_ownership = {
-						company = {
-							type = company_BancaCommercialeItaliana
-							country = "c:ITA"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_trade_center"
-					add_ownership = {
-						company = {
-							type = company_BancaCommercialeItaliana
-							country = "c:ITA"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_gold_mine"
-					add_ownership = {
-						company = {
-							type = company_BancaCommercialeItaliana
-							country = "c:ITA"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_silver_mine"
-					add_ownership = {
-						company = {
-							type = company_BancaCommercialeItaliana
-							country = "c:ITA"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_financial_centre_ita"
-					add_ownership = {
-						company = {
-							type = company_BancaCommercialeItaliana
-							country = "c:ITA"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -17806,107 +16273,16 @@ establish_bank_and_ef_compagnie = {
 		}
 		add_company = company_type:company_SocieteGenerale
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						not = { has_building = building_construction_sector }
-						any_scope_building = {
-							is_building_type = building_construction_sector
-							level < 10
-						}
-						not = { has_building = building_railway }
-						any_scope_building = {
-							is_building_type = building_railway
-							level < 10
-						}
-						not = { has_building = building_trade_center }
-						any_scope_building = {
-							is_building_type = building_trade_center
-							level < 10
-						}
-						not = { has_building = building_gold_mine }
-						any_scope_building = {
-							is_building_type = building_gold_mine
-							level < 10
-						}
-						not = { has_building = building_silver_mine }
-						any_scope_building = {
-							is_building_type = building_silver_mine
-							level < 10
-						}
-						not = { has_building = building_financial_centre_fra }
-						any_scope_building = {
-							is_building_group = bg_financial_centre
-							level < 10
-						}
+			create_building = {
+				building = building_zz_ef_bank
+				add_ownership = {
+					company = {
+						type = company_SocieteGenerale
+						country = "c:FRA"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_construction_sector"
-					add_ownership = {
-						company = {
-							type = company_SocieteGenerale
-							country = "c:FRA"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_railway"
-					add_ownership = {
-						company = {
-							type = company_SocieteGenerale
-							country = "c:FRA"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_trade_center"
-					add_ownership = {
-						company = {
-							type = company_SocieteGenerale
-							country = "c:FRA"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_gold_mine"
-					add_ownership = {
-						company = {
-							type = company_SocieteGenerale
-							country = "c:FRA"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_silver_mine"
-					add_ownership = {
-						company = {
-							type = company_SocieteGenerale
-							country = "c:FRA"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
-				create_building = {
-					building = "building_financial_centre_fra"
-					add_ownership = {
-						company = {
-							type = company_SocieteGenerale
-							country = "c:FRA"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -17939,24 +16315,16 @@ establish_bank_and_ef_compagnie = {
 		}
 		add_company = company_type:company_gwr
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_railway level < 10 }
-						not = { has_building = building_railway }
+			create_building = {
+				building = building_railway
+				add_ownership = {
+					company = {
+						type = company_gwr
+						country = "c:GBR"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_railway"
-					add_ownership = {
-						company = {
-							type = company_gwr
-							country = "c:GBR" #"ROOT"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -17969,24 +16337,16 @@ establish_bank_and_ef_compagnie = {
 		}
 		add_company = company_type:company_PennsylvaniaRailroad
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_railway level < 10 }
-						not = { has_building = building_railway }
+			create_building = {
+				building = building_railway
+				add_ownership = {
+					company = {
+						type = company_PennsylvaniaRailroad
+						country = "c:USA"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_railway"
-					add_ownership = {
-						company = {
-							type = company_PennsylvaniaRailroad
-							country = "c:USA" #"ROOT"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -18000,24 +16360,16 @@ establish_bank_and_ef_compagnie = {
 		}
 		add_company = company_type:company_standard_oil
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = { is_building_type = building_railway level < 10 }
-						not = { has_building = building_railway }
+			create_building = {
+				building = building_railway
+				add_ownership = {
+					company = {
+						type = company_standard_oil
+						country = "c:USA"
+						levels = 1
 					}
 				}
-				create_building = {
-					building = "building_railway"
-					add_ownership = {
-						company = {
-							type = company_standard_oil
-							country = "c:USA" #"ROOT"
-							levels = 5
-						}
-					}
-					reserves = 0
-				}
+				reserves = 0
 			}
 		}
 	}
@@ -18030,29 +16382,16 @@ establish_bank_and_ef_compagnie = {
 		}
 		add_company = company_type:company_basic_silver_mining_mex
 		random_scope_state = {
-			if = {
-				limit = {
-					or = {
-						any_scope_building = {
-							is_building_type = building_silver_mine
-							level < 10
-						}
-						not = {
-							has_building = building_silver_mine
-						}
+			create_building = {
+				building = building_silver_mine
+				add_ownership = {
+					company = {
+						type = company_basic_silver_mining_mex
+						country = "c:MEX"
+						levels = 1
 					}
 				}
-				create_building={
-					building="building_silver_mine"
-					add_ownership={
-						company={
-							type=company_basic_silver_mining_mex
-							country="c:MEX"
-							levels=10
-						}
-					}
-					reserves=0
-				}
+				reserves = 0
 			}
 		}
 	}

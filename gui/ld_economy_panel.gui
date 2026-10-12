@@ -9417,50 +9417,80 @@ types zz_ef_economy_panel
 
 										vertical_divider = {}
 
-										textbox = {
+										# Д.R4б.15: «—» before a full window of 1 year(s)
+										widget = {
 											layoutstretchfactor_horizontal = 1
 											layoutpolicy_horizontal = expanding
+											size = { 10 30 }
 											datacontext = "[Scope.GetCountry]"
-
-											text = "[Country.MakeScope.ScriptValue('money_value_dif_1_final')|%|+=]"
-											margin_left = 0
-											margin_bottom = 1
-											elide = right
-											align = hcenter|nobaseline
-											parentanchor = left
-											alwaystransparent = yes
+											textbox = {
+												visible = "[GreaterThan_CFixedPoint(Country.MakeScope.ScriptValue('zz_ef_mv_ok_1_v'), '(CFixedPoint)0')]"
+												text = "[Country.MakeScope.ScriptValue('money_value_dif_1_final')|%|+=]"
+												autoresize = yes
+												parentanchor = center
+												align = hcenter|nobaseline
+												alwaystransparent = yes
+											}
+											textbox = {
+												visible = "[Not(GreaterThan_CFixedPoint(Country.MakeScope.ScriptValue('zz_ef_mv_ok_1_v'), '(CFixedPoint)0'))]"
+												raw_text = "—"
+												autoresize = yes
+												parentanchor = center
+												align = hcenter|nobaseline
+												alwaystransparent = yes
+											}
 										}
 
 										vertical_divider = {}
 
-										textbox = {
+										# Д.R4б.15: «—» before a full window of 5 year(s)
+										widget = {
 											layoutstretchfactor_horizontal = 1
 											layoutpolicy_horizontal = expanding
+											size = { 10 30 }
 											datacontext = "[Scope.GetCountry]"
-
-											text = "[Country.MakeScope.ScriptValue('money_value_dif_5_final')|%|+=]"
-											margin_left = 0
-											margin_bottom = 1
-											elide = right
-											align = hcenter|nobaseline
-											parentanchor = left
-											alwaystransparent = yes
+											textbox = {
+												visible = "[GreaterThan_CFixedPoint(Country.MakeScope.ScriptValue('zz_ef_mv_ok_5_v'), '(CFixedPoint)0')]"
+												text = "[Country.MakeScope.ScriptValue('money_value_dif_5_final')|%|+=]"
+												autoresize = yes
+												parentanchor = center
+												align = hcenter|nobaseline
+												alwaystransparent = yes
+											}
+											textbox = {
+												visible = "[Not(GreaterThan_CFixedPoint(Country.MakeScope.ScriptValue('zz_ef_mv_ok_5_v'), '(CFixedPoint)0'))]"
+												raw_text = "—"
+												autoresize = yes
+												parentanchor = center
+												align = hcenter|nobaseline
+												alwaystransparent = yes
+											}
 										}
 
 										vertical_divider = {}
 
-										textbox = {
+										# Д.R4б.15: «—» before a full window of 10 year(s)
+										widget = {
 											layoutstretchfactor_horizontal = 1
 											layoutpolicy_horizontal = expanding
+											size = { 10 30 }
 											datacontext = "[Scope.GetCountry]"
-
-											text = "[Country.MakeScope.ScriptValue('money_value_dif_10_final')|%|+=]"
-											margin_left = 0
-											margin_bottom = 1
-											elide = right
-											align = hcenter|nobaseline
-											parentanchor = left
-											alwaystransparent = yes
+											textbox = {
+												visible = "[GreaterThan_CFixedPoint(Country.MakeScope.ScriptValue('zz_ef_mv_ok_10_v'), '(CFixedPoint)0')]"
+												text = "[Country.MakeScope.ScriptValue('money_value_dif_10_final')|%|+=]"
+												autoresize = yes
+												parentanchor = center
+												align = hcenter|nobaseline
+												alwaystransparent = yes
+											}
+											textbox = {
+												visible = "[Not(GreaterThan_CFixedPoint(Country.MakeScope.ScriptValue('zz_ef_mv_ok_10_v'), '(CFixedPoint)0'))]"
+												raw_text = "—"
+												autoresize = yes
+												parentanchor = center
+												align = hcenter|nobaseline
+												alwaystransparent = yes
+											}
 										}
 									}
 								}

@@ -190,6 +190,13 @@
 - Лог: `EFM|…|mu_join` / `mu_join_through` / `mu_sync` (паритет до и после) / `mu_leave` / `mu_head` / `mu` (месяц:
   покрытие, паритет, стандарт, престиж).
 
+## Рост стоимости валюты (таблица «Динамика стоимости валюты»; от E&F, окна — Д.R4б.15)
+- `fluctuations_money_value_1_year` (полугодовой пульс страны с ЦБ, `00_on_action_main.txt`), `_5_year`, `_10_year`
+  (годовой): база `money_value_var_half_<N>_year` = `money_value_rapported_inflation` на счёте 1, на счёте 3 / 6 / 11 —
+  `money_value_dif_<N>` = (сейчас − база) / база, база следующего окна — то же значение, счёт 1, флаг `zz_ef_mv_ok_<N>`;
+  первый вызов страны только ставит `zz_ef_mv_seen_<N>` (`01_economic_scripted_effects.txt`). `money_value_dif_<N>_final`
+  — 0 без флага (его читают кризис валюты и рейтинги); таблица `gui/ld_economy_panel.gui` — «—» по `zz_ef_mv_ok_<N>_v`.
+
 ## Логи
 - `EFM|…|std_switch|old …` — смена стандарта (`ld_standard_switch.txt:150`).
 - `EFE|…|note…|cover…|std…|cb…|ref…`, `EFE|…|cand`, `EFE|…|pick` — кандидаты и выбор эталона (`08_list_effect.txt:210`).

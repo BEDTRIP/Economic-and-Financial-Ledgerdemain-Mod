@@ -20,7 +20,8 @@
   `bg_construction_regulator`.
 - `common/production_methods/zz_PSC_construction.txt` — PM сектора
   `pm_wooden/iron_frame/steel_frame/arc_welded_buildings` (вход: материалы; выход: `*_construction`; выпуск
-  «акций» E&F `manufacture_stock` снят — Д.R4б.8), PM регулятора `pm_{wood,iron,steel,arc_welded}_point_conversion` (`country_construction_add`).
+  «акций» E&F `manufacture_stock` снят — Д.R4б.8; выход стройтоваров больше на его выручку по базовым ценам: 24 / 64 /
+  136 / 204 — Д.R4б.14), PM регулятора `pm_{wood,iron,steel,arc_welded}_point_conversion` (`country_construction_add`).
 - `common/production_method_groups/PSC_construction.txt` — `pmg_construction_regulator`.
 - `common/goods/PSC_goods.txt` — `wood_/iron_/steel_/arc_welded_construction`.
 - `common/defines/PSC_defines.txt` — `CONSTRUCTION_CAMP_BUILDING = building_construction_regulator`.
