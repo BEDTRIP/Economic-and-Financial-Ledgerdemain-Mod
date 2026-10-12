@@ -1807,6 +1807,17 @@ zz_ef_v_w_clr_own_back = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_w_clr_own_back } value = var:zz_ef_w_clr_own_back }
 }
+zz_ef_v_w_clr_fx_out_money = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = zz_ef_w_clr_fx_out
+			zz_ef_clr_gold_per_money > 0
+		}
+		value = var:zz_ef_w_clr_fx_out
+		divide = zz_ef_clr_gold_per_money
+	}
+}
 zz_ef_v_w_clr_fx_in_money = {
 	value = 0
 	if = {
