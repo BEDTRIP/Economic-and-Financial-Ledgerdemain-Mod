@@ -488,7 +488,7 @@ zz_ef_metal_week_step = {
 	zz_ef_wm_add = { KEY = sell_silver VALUE = var:zz_ef_f_mt_cb_out_s }
 	# the Banks paid for the authority's metal: paid back into the pool, the banks' capital (the CB's issue). Its sales
 	# (Д.R4б.26): the revenue stays in the Banks' cash -- outside M1 / M2, money taken out of circulation; the pool and
-	# the capital do not pay it (Britain's capital -1.49M by 06.1838 when they did, r1013_083643)
+	# the capital do not pay it (a CB that keeps selling would take them below 0)
 	set_variable = { name = zz_ef_f_cb_metal_pay value = { value = zz_ef_cb_metal_net_cost min = 0 } }
 	zz_ef_eng_add_pool = { V = var:zz_ef_f_cb_metal_pay }
 	change_variable = { name = zz_ef_bank_capital add = var:zz_ef_f_cb_metal_pay }

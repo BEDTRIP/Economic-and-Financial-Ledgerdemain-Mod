@@ -21,7 +21,7 @@ zz_pb_ef_css_downsize_one = {
 	if = {
 		limit = { scope:zz_css_buyout > 0 }
 		# (Д.R2.13) a posting -- the treasury -> the pool, the pops' deposits receive it (the owners of the
-		# private levels are the pops behind the pool); was the pool's «прочее» (the banks' book did not know it)
+		# private levels are the pops behind the pool), not the pool's «прочее»
 		owner = {
 			zz_ef_registry_init = yes
 			zz_ef_post_eng = { FROM = treasury TO = pool CLAIM = zz_ef_pop_deposits V = scope:zz_css_buyout }

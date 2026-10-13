@@ -114,8 +114,8 @@ zz_ef_reconcile = {
 	}
 	set_variable = { name = zz_ef_complv_prev value = var:zz_ef_t_complv }
 	remove_variable = zz_ef_t_complv
-	# the same for the private owners' levels: the pool pays a new private level as it is built (r1013_082500: 43 of
-	# the 69 multiples the companies' levels did not explain came with a private level more)
+	# the same for the private owners' levels: the pool pays a new private level as it is built (most multiples the
+	# companies' levels do not explain come with a private level more)
 	set_variable = { name = zz_ef_t_privlv value = zz_ef_priv_levels }
 	set_variable = { name = zz_ef_d_privlv value = 0 }
 	if = {
@@ -295,7 +295,7 @@ zz_ef_reconcile = {
 		}
 		# the treasury handed to a civil war's new country (the engine gives the rebels a part of it): the new countries
 		# whose origin is this one, not counted yet -- their treasury net, at most the treasury part's fall -- its own line
-		# (zz_ef_cw_tr), not «прочее» (the East India Company -1.84M the week its utilitarian rising began, r1013_011039)
+		# (zz_ef_cw_tr), not «прочее»
 		set_variable = { name = zz_ef_f_cw_tr value = 0 }
 		if = {
 			limit = { var:zz_ef_f_other_tr < zz_ef_cw_tr_min_neg }

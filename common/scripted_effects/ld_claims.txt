@@ -144,7 +144,7 @@ zz_ef_rq_heir_take = {
 	}
 	# the gone country's money held abroad is now the heir's: its banks owe it as non-residents' deposits (the book), the
 	# gone country's pool did not come with it -- out of the heir banks' capital, so the pool's part of «прочее» does not
-	# move (Spain -1.1M the week the Carlists' country went, r1013_011039; accepted at night, check)
+	# move (Spain -1.1M the week the Carlists' country went)
 	set_variable = { name = zz_ef_t_om0 value = { value = zz_ef_rq_out_m_v subtract = var:zz_ef_t_om0 } }
 	if = {
 		limit = { var:zz_ef_t_om0 > 0 }
