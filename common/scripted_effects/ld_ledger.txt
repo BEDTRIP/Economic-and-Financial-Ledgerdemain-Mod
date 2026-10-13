@@ -277,6 +277,33 @@ zz_ef_reconcile = {
 		# the debt of a gone country the engine handed over to its heir (zz_ef_metal_heir_world marks the heir for two
 		# steps): the principal's rise, at most the treasury part's fall -- its own line (zz_ef_heir_debt), not «прочее»
 		set_variable = { name = zz_ef_f_heir_debt value = 0 }
+		# a big rise of the treasury before the world's pass found the gone country (it runs on day 6 of the week): a gone
+		# country whose capital's region we now hold is ours to inherit -- its treasury is due here at once, and the world's
+		# pass does not hand it to another owner of the region (zz_ef_metal_heir_world; Д.R4б.31, 3rd kind)
+		if = {
+			limit = {
+				var:zz_ef_f_other_tr > zz_ef_other_tr_jump_min
+				has_global_variable_list = zz_ef_mh_list
+			}
+			save_temporary_scope_as = zz_ef_ht_c
+			every_in_global_list = {
+				variable = zz_ef_mh_list
+				limit = {
+					is_country_alive = no
+					NOT = { has_variable = zz_ef_mh_tr_taken }
+					has_variable = zz_ef_tr_prev
+					var:zz_ef_tr_prev > 0
+					has_variable = zz_ef_mh_region
+					var:zz_ef_mh_region = { any_scope_state = { owner = scope:zz_ef_ht_c } }
+				}
+				set_variable = { name = zz_ef_mh_tr_taken value = yes }
+				scope:zz_ef_ht_c = {
+					if = { limit = { NOT = { has_variable = zz_ef_heir_tr_due } } set_variable = { name = zz_ef_heir_tr_due value = 0 } }
+					change_variable = { name = zz_ef_heir_tr_due add = prev.var:zz_ef_tr_prev }
+					if = { limit = { NOT = { has_variable = zz_ef_heir_debt_steps } } set_variable = { name = zz_ef_heir_debt_steps value = 1 } }
+				}
+			}
+		}
 		if = {
 			limit = { has_variable = zz_ef_heir_debt_steps }
 			if = {

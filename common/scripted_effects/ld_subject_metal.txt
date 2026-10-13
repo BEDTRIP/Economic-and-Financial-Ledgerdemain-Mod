@@ -38,6 +38,8 @@ zz_ef_metal_heir_world = {
 								scope:zz_ef_mh_dead = {
 									has_variable = zz_ef_tr_prev
 									var:zz_ef_tr_prev > 0
+									# taken at once by the heir whose treasury rose before this pass (zz_ef_reconcile)
+									NOT = { has_variable = zz_ef_mh_tr_taken }
 								}
 							}
 							if = { limit = { NOT = { has_variable = zz_ef_heir_tr_due } } set_variable = { name = zz_ef_heir_tr_due value = 0 } }
