@@ -453,6 +453,11 @@ zz_ef_pool_other_week = {
 	subtract = zz_ef_v_f_bl_sold
 	add = zz_ef_v_f_bl_int_out
 	add = zz_ef_v_f_bl_redeem
+	# the investment funds' shares and the exchange's claims with abroad -- rows of the pool's card of their own: left in,
+	# the card counted them twice (its «прочее» = minus these flows)
+	add = zz_ef_v_f_fd_out
+	subtract = zz_ef_v_f_fd_in
+	subtract = zz_ef_v_f_xch_pool
 }
 # Unexplained change of M2 this week: the change minus the budget's lines
 # outside the accounts, minus the CB's net credit, plus the foreign bonds the
@@ -474,6 +479,10 @@ zz_ef_leak_week = {
 	add = zz_ef_v_d_bonds
 	add = zz_ef_v_w_dep_int
 	subtract = zz_ef_v_f_pool_other
+	# the funds' and the exchange's flows abroad left the pool's «прочее» -- the same flows, M2's own
+	subtract = zz_ef_v_f_fd_in
+	add = zz_ef_v_f_fd_out
+	subtract = zz_ef_v_f_xch_pool
 	# the trade centres' cash is business cash (M1), not abroad -- no longer taken out
 	subtract = zz_ef_tr_other_net
 	# M.3: Hume's coined / withdrawn money -- the CB's, not pops'
