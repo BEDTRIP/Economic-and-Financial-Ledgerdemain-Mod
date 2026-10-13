@@ -1,0 +1,134 @@
+# from common/scripted_effects/01_financial_scripted_effects.txt, lines 650-782 (14.10.2026)
+ai_credit_at_central_bank = {
+	if  = {
+		limit = { #pays avec tresorerie faible or de la guerre donc strategie d'endettement constant et roulement de la dette
+			credit_at_central_bank_interest_per_week_by_inflation < part_budget_authorized_debt_interest
+			national_debt_compared_gdp < national_debt_allowed_relative_gdp
+			gold_reserve_compared_gold_reserves_limit < 0.1
+			is_at_war = no
+			# Д.R4а.5: the CB lends the treasury within its cap (a private one less)
+			zz_ef_cb_loan_now_to_gdp < zz_ef_cb_loan_cap
+		}
+		# (Д.R2.8) the CB's loan to the treasury -- credit_at_central_bank is the ledger's account, the
+		# treasury's money is ours (marked); the amount is fixed first (it reads the treasury): the treasury up to
+		# zz_ef_cbl_target_share of its reserve limit, within the debt allowed (Д.R8в.23) -- the engine burns money
+		# above the limit
+		set_variable = { name = zz_ef_t_cbl value = zz_ef_cbl_take_v }
+		zz_ef_eng_add_treasury = { V = var:zz_ef_t_cbl }
+		every_scope_state = {
+			if = {
+				limit = {
+					has_modifier = financial_center_historic_place
+				}
+				change_variable = {
+					name = stockpiling_bond_var_state_1
+					add = {
+						value = owner.var:zz_ef_t_cbl
+						divide = owner.bond_price
+					}
+				}
+			}
+		}
+		change_variable = {
+			name = government_loan
+			add = {
+				value = var:zz_ef_t_cbl
+				divide = money_value_rapported_inflation
+			}
+		}
+		change_variable = {
+			name = credit_at_central_bank
+			add = var:zz_ef_t_cbl
+		}
+		remove_variable = zz_ef_t_cbl
+	}
+	if = {
+		limit  = { #pays en guerre avec reserve inf à 25%, a bessoin d'un coup de mains equivalent la dif pour atteindre 25% + 25% -> pas de limite donc possibilité de faire des 100ain% de dette
+			gold_reserve_compared_gold_reserves_limit < 0.15
+			is_at_war = yes
+		}
+		set_variable = { name = zz_ef_t_cbl value = national_debt_allowed_in_gold_war }
+		zz_ef_eng_add_treasury = { V = var:zz_ef_t_cbl }
+		every_scope_state = {
+			if = {
+				limit = {
+					has_modifier = financial_center_historic_place
+				}
+				change_variable = {
+					name = stockpiling_bond_var_state_1
+					add = owner.bond_producted_war
+				}
+			}
+		}
+		change_variable = {
+			name = government_loan
+			add = national_debt_allowed_in_currency_war
+		}
+		change_variable = {
+			name = credit_at_central_bank
+			add = var:zz_ef_t_cbl
+		}
+		remove_variable = zz_ef_t_cbl
+	}
+}
+ai_refund_central_bank = {
+	if  = {
+		limit  = {
+			gold_reserves_var > 0
+			national_debt_unauthorized < gold_reserves_var
+			var:credit_at_central_bank > national_debt_allowed_in_gold
+			is_at_war = no
+		}
+		# the repayment -- the treasury -> the CB's loan (marked); the amount is fixed first
+		set_variable = { name = zz_ef_t_cbl value = national_debt_unauthorized }
+		zz_ef_eng_sub_treasury = { V = var:zz_ef_t_cbl }
+		change_variable = {
+			name = government_loan
+			subtract = var:zz_ef_t_cbl
+		}
+		if = {
+			limit = {
+				var:government_loan < 0
+			}
+			set_variable = {
+				name = government_loan
+				value = 0
+			}
+		}
+
+		change_variable = {
+			name = credit_at_central_bank
+			subtract = var:zz_ef_t_cbl
+		}
+		remove_variable = zz_ef_t_cbl
+	}
+	if  = {
+		limit  = {
+			credit_at_central_bank_interest_per_week_by_inflation > part_budget_authorized_debt_interest
+			national_debt_refund_more_25_at_refund > 0
+			is_at_war = no
+		}
+		# add_treasury = {
+		# 	subtract = national_debt_unauthorized #ai_cheat ?
+		# }
+		# E&F forgives this part with no money -- the CB writes it off (its loss, var:zz_ef_cb_writeoff)
+		set_variable = { name = zz_ef_t_cbl value = national_debt_refund_more_25_at_refund }
+		if = { limit = { NOT = { has_variable = zz_ef_cb_writeoff } } set_variable = { name = zz_ef_cb_writeoff value = 0 } }
+		zz_ef_post = { FROM = credit_at_central_bank TO = zz_ef_cb_writeoff V = var:zz_ef_t_cbl }
+		change_variable = {
+			name = government_loan
+			subtract = var:zz_ef_t_cbl
+		}
+		if = {
+			limit = {
+				var:government_loan < 0
+			}
+			set_variable = {
+				name = government_loan
+				value = 0
+			}
+		}
+
+		remove_variable = zz_ef_t_cbl
+	}
+}

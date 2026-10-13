@@ -47,8 +47,7 @@
   - `common/scripted_effects/01_financial_scripted_effects.txt`: `ai_buy_bond_1..10` (:1016…, покупка ИИ у ЦБ другой
     страны: `add_treasury` на цену, переменные слота), `bond_maturity_1..10` (:22737, годовой счётчик срока, сброс
     слота), `ai_bond_maturity_1..10` (:23825), `ai_privat_bank_bond_1..25` (:4130…), `buy_bond_in_currrency_var`
-    (:32059), `country_credit_rating` (:18), `sovereign_bond_yields` (:499),
-    `ai_credit_at_central_bank`/`ai_refund_central_bank` (:667/:727), кризисы (`currency_crisis` :33346,
+    (:32059), `country_credit_rating` (:18), `sovereign_bond_yields` (:499), кризисы (`currency_crisis` :33346,
     `economic_crisis`, `financial_crash`, `central_bank_bankruptcy`, `country_bankruptcy`),
     `central_bank_debt_buyer_list_clear`.
   - `common/scripted_effects/00_on_action_main.txt`: `financial_center_ef_on_yearly_pulse_country` (:1086),

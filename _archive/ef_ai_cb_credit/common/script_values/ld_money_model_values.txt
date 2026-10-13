@@ -1,0 +1,15 @@
+# from common/script_values/ld_money_model_values.txt, lines 2749-2755 (14.10.2026)
+zz_ef_cbl_take_v = {
+	value = gold_reserves_limit
+	multiply = zz_ef_cbl_target_share
+	subtract = gold_reserves
+	max = national_debt_allowed_in_gold
+	min = 0
+}
+
+# from common/script_values/ld_money_model_values.txt, lines 2745-2748 (14.10.2026)
+# The CB's loan to the treasury in peace (ai_credit_at_central_bank, Д.R8в.23 -- a stopgap, the debt through the CB -- R5):
+# the treasury up to this share of its gold reserve limit, within the debt allowed (national_debt_allowed_in_gold); the
+# engine burns the treasury's money above the limit.
+zz_ef_cbl_target_share = 0.25
+

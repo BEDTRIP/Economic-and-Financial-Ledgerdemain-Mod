@@ -9,8 +9,7 @@
 # country's financial_center_historic_place state. The counters only grow:
 # every month the market owner adds 4 x the market's buy orders of each paper
 # (stockpile_finacial_product, 01_financial_scripted_effects.txt:793), and the
-# bond counter also gets every central-bank loan (ai_credit_at_central_bank,
-# :656). So capitalization was the integral of demand since 1836, and the bond
+# bond counter also got every central-bank loan. So capitalization was the integral of demand since 1836, and the bond
 # counter a debt that was never repaid. EF.23 (a 2%/month decay) only damped it.
 #
 # WHAT THIS DOES
@@ -48,8 +47,7 @@
 # monthly update (no variable yet) the quantity is this week's snapshot.
 #
 # The monthly accumulation is switched off (stockpile_finacial_product is
-# empty). E&F still writes its counters from
-# ai_credit_at_central_bank and moves them between states on relocation;
+# empty). E&F still moves its counters between states on relocation;
 # harmless, nothing reads the result.
 #
 # SCOPE: country. sg:<good> only exists in states that trade the good, hence

@@ -66,9 +66,10 @@
   (Д.R4а.9). Локализация `ld_cb_law_l_*.yml`. Виды ЦБ (Д.R4а.5): прибыль ЦБ (проценты банков по кредиту ЦБ) —
   государственного в казну, частного — владельцам (капиталистам: во вклады населения, `ld_money_model.txt`); кредит
   казне — предел `zz_ef_cb_loan_cap` (государственный 50 % ВВП, при фиате без предела, частный 15 %;
-  `ld_cb_loan_values.txt`, генератор `regen_ef_cb_loan.py`; кнопка и ИИ `ai_credit_at_central_bank`); правило ставки —
-  вес покрытия и инфляции `zz_ef_cb_kind_w_value` (частный 1,5, государственный 0,75). Частные на старте —
-  Великобритания, Франция, США, Австрия, Нидерланды (`history/global/ld_central_bank_law.txt`).
+  `ld_cb_loan_values.txt`, генератор `regen_ef_cb_loan.py`; кнопка игрока; ИИ E&F — в архиве,
+  `_archive/ef_ai_cb_credit/`, Д.R5.10); правило ставки — вес покрытия и инфляции `zz_ef_cb_kind_w_value` (частный 1,5,
+  государственный 0,75). Частные на старте — Великобритания, Франция, США, Австрия, Нидерланды
+  (`history/global/ld_central_bank_law.txt`).
 - Связанные файлы E&F с правкой в теле: `scripted_effects/01_economic_scripted_effects.txt`
   (`on_activate_law_revaluation/devaluation/no_monetary_policy` :35349-:42350 зовут `zz_ef_mp_init/_clear`; идеология
   «большая денежная политика» в `monetary_policy_ideology_dynamic` (:34557-:41604) учитывает `zz_ef_rate_policy_steps`),

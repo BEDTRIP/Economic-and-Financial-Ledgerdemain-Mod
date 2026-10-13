@@ -507,10 +507,9 @@ zz_ef_leak_week = {
 	subtract = zz_ef_v_f_gl_short
 }
 # The treasury's change beyond the week's budget and the CB's profit: E&F's
-# scripted moves on the treasury -- ai_refund_central_bank (the government
-# repays the CB from the treasury) and ai_buy_bond_N (the treasury buys other
-# countries' bonds), around 1 January (Russia -16.7M with a budget of -17K,
-# France -6.4M). Not pops' savings: shown as treasury
+# scripted moves on the treasury -- the player's repayment of the CB's loan and
+# ai_buy_bond_N (the treasury buys other countries' bonds), around 1 January.
+# Not pops' savings: shown as treasury
 # -> the CB and abroad. Not in the CB's metal (a refund and a bond purchase
 # cannot be told apart -- check).
 zz_ef_v_f_tr_other = {
@@ -1955,7 +1954,7 @@ zz_ef_v_d_tbonds = {
 	if = { limit = { has_variable = zz_ef_d_tbonds } value = var:zz_ef_d_tbonds }
 }
 # The E&F treasury moves beyond the budget minus the treasury's bond
-# purchases: the government repaying the CB (ai_refund_central_bank).
+# purchases: the government repaying the CB (the player's button).
 zz_ef_tr_to_cb = {
 	value = zz_ef_v_f_tr_other
 	add = zz_ef_v_d_tbonds
@@ -2740,18 +2739,6 @@ zz_ef_v_hk_aint = {
 zz_ef_v_hk_tfees = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_hk_tfees } value = var:zz_ef_hk_tfees }
-}
-
-# The CB's loan to the treasury in peace (ai_credit_at_central_bank, Д.R8в.23 -- a stopgap, the debt through the CB -- R5):
-# the treasury up to this share of its gold reserve limit, within the debt allowed (national_debt_allowed_in_gold); the
-# engine burns the treasury's money above the limit.
-zz_ef_cbl_target_share = 0.25
-zz_ef_cbl_take_v = {
-	value = gold_reserves_limit
-	multiply = zz_ef_cbl_target_share
-	subtract = gold_reserves
-	max = national_debt_allowed_in_gold
-	min = 0
 }
 
 # a private CB's profit this step -- its owners' deposits (zz_ef_money_model_step, Д.R4а.5); the deposits card's row
