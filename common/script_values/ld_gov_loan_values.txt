@@ -1,0 +1,23 @@
+﻿# The engine's debt at home -- the banks' loan to the government (Д.R5.2; scripted_effects/ld_gov_loan.txt).
+
+# the debt at home: the engine's principal less the parts held abroad, money
+zz_ef_gov_loan_home_v = {
+	value = principal
+	subtract = zz_ef_bl_held_v
+	min = 0
+}
+# the banks' asset, money
+zz_ef_bank_gov_loan_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_bank_gov_loan } value = var:zz_ef_bank_gov_loan }
+}
+# the pool's move this step: + a repayment and the interest, - a new loan
+zz_ef_v_f_gl_pool = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_gl_pool } value = var:zz_ef_f_gl_pool }
+}
+# a new loan the pool could not pay: the CB's credit to the banks (or their capital) -- money the engine made
+zz_ef_v_f_gl_short = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_gl_short } value = var:zz_ef_f_gl_short }
+}

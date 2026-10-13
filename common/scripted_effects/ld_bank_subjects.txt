@@ -139,7 +139,7 @@ zz_ef_bk_box_create = {
 
 # The bank book by subject (Д.R4б.2): every subject keeps its own accounts -- zz_ef_bk_dep (pops' deposits), _cpd (the
 # companies', Д.R4б.33), _fdd (the investment fund's), _nrd (foreign CBs'), _gvd (the treasury's), _cbd (debt to the CB), _cap (capital), _cc / _bc
-# (consumer / business loans), _bnd (parts of foreign bonds), _inv (fund shares and foreign money bought), _prv (the
+# (consumer / business loans), _bnd (parts of foreign bonds), _gvl (the loan to the government, Д.R5.2), _inv (fund shares and foreign money bought), _prv (the
 # state's levels bought, Д.R4б.23), _mg / _ms (metal) -- and its maps of claims zz_ef_rq_bk_m / _b / _f (the country's maps' keys and kinds, ld_claims.txt). The
 # country's accounts stay the books' sum, written where they were; at the country's step each subject account follows
 # the country's: what moved since the last step (the residual R = country - sum of subjects) is shared -- new deposits
@@ -169,6 +169,7 @@ zz_ef_bk_book_step = {
 	zz_ef_bk_alloc = { A = cc V = zz_ef_bk_c_cc_v W = zz_ef_bk_w_dep_v BYW = no }
 	zz_ef_bk_alloc = { A = bc V = zz_ef_bk_c_bc_v W = zz_ef_bk_w_dep_v BYW = no }
 	zz_ef_bk_alloc = { A = bnd V = zz_ef_bank_bonds W = zz_ef_bk_w_lv_v BYW = no }
+	zz_ef_bk_alloc = { A = gvl V = zz_ef_bank_gov_loan_v W = zz_ef_bk_w_lv_v BYW = no }
 	zz_ef_bk_alloc = { A = inv V = zz_ef_bk_c_inv_v W = zz_ef_bk_w_lv_v BYW = no }
 	zz_ef_bk_alloc = { A = prv V = zz_ef_bk_c_prv_v W = zz_ef_bk_w_lv_v BYW = no }
 	zz_ef_bk_alloc = { A = mg V = zz_ef_bankm_gold W = zz_ef_bk_w_lv_v BYW = no }
@@ -367,6 +368,7 @@ zz_ef_bk_sum_check = {
 	zz_ef_bk_diff_add = { A = cc V = zz_ef_bk_c_cc_v }
 	zz_ef_bk_diff_add = { A = bc V = zz_ef_bk_c_bc_v }
 	zz_ef_bk_diff_add = { A = bnd V = zz_ef_bank_bonds }
+	zz_ef_bk_diff_add = { A = gvl V = zz_ef_bank_gov_loan_v }
 	zz_ef_bk_diff_add = { A = inv V = zz_ef_bk_c_inv_v }
 	zz_ef_bk_diff_add = { A = prv V = zz_ef_bk_c_prv_v }
 	zz_ef_bk_diff_add = { A = mg V = zz_ef_bankm_gold }
@@ -439,6 +441,7 @@ zz_ef_bk_accounts_move = {
 	zz_ef_bk_acc_move = { A = cc TO = $TO$ }
 	zz_ef_bk_acc_move = { A = bc TO = $TO$ }
 	zz_ef_bk_acc_move = { A = bnd TO = $TO$ }
+	zz_ef_bk_acc_move = { A = gvl TO = $TO$ }
 	zz_ef_bk_acc_move = { A = inv TO = $TO$ }
 	zz_ef_bk_acc_move = { A = prv TO = $TO$ }
 	zz_ef_bk_acc_move = { A = mg TO = $TO$ }

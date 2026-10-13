@@ -1,0 +1,120 @@
+﻿# The engine's debt at home is the banks' term loan to the government (Д.R5.2, Д.R5.4; понятие «Облигации»). The engine
+# lends the treasury money of its own when the treasury runs short (principal grows) and takes the interest out of it
+# into nowhere; here the banks of the country pay for it: the debt at home (principal less the parts held abroad,
+# zz_ef_bl_held_v) is their asset zz_ef_bank_gov_loan, a new loan comes out of the pool, a repayment and the interest on
+# their part go into it (the interest -- their capital). The parts held abroad stay the bond ledger's (ld_bond_ledger.txt):
+# a part sold abroad is the banks' asset sold (the ledger put the price into the pool and the capital -- here the asset
+# and the capital go down), a part repaid abroad -- bought back. What the pool lacks for a new loan -- the CB's credit to
+# the banks (zz_ef_bank_cb_debt); without a CB the banks' capital (принято ночью, проверить). A fall of the principal in
+# default is a write-off: the asset and the capital, the pool does not move. The pool and the book move together --
+# «прочее» does not.
+
+# COUNTRY scope, weekly after the bond ledger (zz_ef_money_model_step).
+zz_ef_gov_loan_step = {
+	zz_ef_registry_init = yes
+	set_variable = { name = zz_ef_f_gl_pool value = 0 }
+	set_variable = { name = zz_ef_f_gl_int value = 0 }
+	set_variable = { name = zz_ef_f_gl_short value = 0 }
+	set_variable = { name = zz_ef_f_gl_heir value = 0 }
+	set_variable = { name = zz_ef_t_gl_p value = principal }
+	set_variable = { name = zz_ef_t_gl_h value = zz_ef_bl_held_v }
+	if = {
+		limit = { NOT = { has_variable = zz_ef_gl_prev_p } }
+		# the first step: the start's debt at home is the banks' from the start -- their asset and their capital
+		set_variable = { name = zz_ef_bank_gov_loan value = zz_ef_gov_loan_home_v }
+		change_variable = { name = zz_ef_bank_capital add = var:zz_ef_bank_gov_loan }
+	}
+	else = {
+		# the parts held abroad grew (sold) / fell (repaid abroad, bought back): the asset and the capital follow
+		set_variable = { name = zz_ef_t_gl_d value = { value = var:zz_ef_t_gl_h subtract = var:zz_ef_gl_prev_h } }
+		change_variable = { name = zz_ef_bank_gov_loan subtract = var:zz_ef_t_gl_d }
+		change_variable = { name = zz_ef_bank_capital subtract = var:zz_ef_t_gl_d }
+		# the principal: a new loan, a repayment, a write-off in default
+		set_variable = { name = zz_ef_t_gl_d value = { value = var:zz_ef_t_gl_p subtract = var:zz_ef_gl_prev_p } }
+		if = {
+			limit = {
+				var:zz_ef_t_gl_d > 0
+				has_variable = zz_ef_heir_debt_steps
+			}
+			# the debt of a gone country the engine handed over (Д.R5.9): the banks take it over with its holders' claims
+			# (zz_ef_rq_heir_take) -- the asset and the capital, the pool does not lend it
+			change_variable = { name = zz_ef_bank_gov_loan add = var:zz_ef_t_gl_d }
+			change_variable = { name = zz_ef_bank_capital add = var:zz_ef_t_gl_d }
+			set_variable = { name = zz_ef_f_gl_heir value = var:zz_ef_t_gl_d }
+		}
+		else_if = {
+			limit = { var:zz_ef_t_gl_d > 0 }
+			set_variable = {
+				name = zz_ef_f_gl_short
+				value = {
+					value = var:zz_ef_t_gl_d
+					subtract = { value = investment_pool min = 0 }
+					min = 0
+				}
+			}
+			set_variable = { name = zz_ef_f_gl_pool value = { value = var:zz_ef_f_gl_short subtract = var:zz_ef_t_gl_d } }
+			change_variable = { name = zz_ef_bank_gov_loan add = var:zz_ef_t_gl_d }
+			if = {
+				limit = { var:zz_ef_f_gl_short > 0 }
+				if = {
+					limit = { has_modifier = has_central_bank }
+					change_variable = { name = zz_ef_bank_cb_debt add = var:zz_ef_f_gl_short }
+				}
+				else = {
+					change_variable = { name = zz_ef_bank_capital add = var:zz_ef_f_gl_short }
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				var:zz_ef_t_gl_d < 0
+				in_default = yes
+			}
+			change_variable = { name = zz_ef_bank_gov_loan add = var:zz_ef_t_gl_d }
+			change_variable = { name = zz_ef_bank_capital add = var:zz_ef_t_gl_d }
+		}
+		else_if = {
+			limit = { var:zz_ef_t_gl_d < 0 }
+			set_variable = { name = zz_ef_f_gl_pool value = { value = var:zz_ef_t_gl_d multiply = -1 } }
+			change_variable = { name = zz_ef_bank_gov_loan add = var:zz_ef_t_gl_d }
+		}
+		# the interest on the banks' part of the debt, the week(s) since the last step
+		if = {
+			limit = {
+				var:zz_ef_t_gl_p > 0
+				var:zz_ef_bank_gov_loan > 0
+			}
+			set_variable = {
+				name = zz_ef_f_gl_int
+				value = {
+					value = zz_ef_v_g_ipay
+					multiply = var:zz_ef_bank_gov_loan
+					divide = var:zz_ef_t_gl_p
+					multiply = zz_ef_step_weeks_v
+					min = 0
+				}
+			}
+			change_variable = { name = zz_ef_f_gl_pool add = var:zz_ef_f_gl_int }
+			change_variable = { name = zz_ef_bank_capital add = var:zz_ef_f_gl_int }
+		}
+		zz_ef_eng_add_pool = { V = var:zz_ef_f_gl_pool }
+	}
+	set_variable = { name = zz_ef_gl_prev_p value = var:zz_ef_t_gl_p }
+	set_variable = { name = zz_ef_gl_prev_h value = var:zz_ef_t_gl_h }
+	remove_variable = zz_ef_t_gl_p
+	remove_variable = zz_ef_t_gl_h
+	if = { limit = { has_variable = zz_ef_t_gl_d } remove_variable = zz_ef_t_gl_d }
+	if = {
+		limit = { zz_ef_logs_on = yes }
+		if = {
+			limit = {
+				OR = {
+					zz_ef_log_country = yes
+					var:zz_ef_f_gl_short > 0
+					var:zz_ef_f_gl_heir > 0
+				}
+			}
+			debug_log = "EFB|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|gov_loan|loan [THIS.GetCountry.MakeScope.Var('zz_ef_bank_gov_loan').GetValue|0]|principal [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_debt_principal')|0]|held [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bl_held_v')|0]|pool [THIS.GetCountry.MakeScope.Var('zz_ef_f_gl_pool').GetValue|0]|int [THIS.GetCountry.MakeScope.Var('zz_ef_f_gl_int').GetValue|0]|short [THIS.GetCountry.MakeScope.Var('zz_ef_f_gl_short').GetValue|0]|heir [THIS.GetCountry.MakeScope.Var('zz_ef_f_gl_heir').GetValue|0]|cb [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_has_cb_v')|0]"
+		}
+	}
+}

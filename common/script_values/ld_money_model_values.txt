@@ -454,6 +454,8 @@ zz_ef_pool_other_week = {
 	subtract = zz_ef_v_f_bl_sold
 	add = zz_ef_v_f_bl_int_out
 	add = zz_ef_v_f_bl_redeem
+	# the banks' loan to the government: a new loan out of the pool, a repayment and the interest into it (Д.R5.2)
+	subtract = zz_ef_v_f_gl_pool
 	# the investment funds' shares and the exchange's claims with abroad -- rows of the pool's card of their own: left in,
 	# the card counted them twice (its «прочее» = minus these flows)
 	add = zz_ef_v_f_fd_out
@@ -501,6 +503,8 @@ zz_ef_leak_week = {
 	# consols' interest and buy-back left M2 for pops' savings by our rule (put there at the step)
 	add = zz_ef_v_f_cons_int
 	add = zz_ef_v_f_cons_buy
+	# a loan to the government the pool could not pay -- the CB's credit to the banks, not the engine's (Д.R5.2)
+	subtract = zz_ef_v_f_gl_short
 }
 # The treasury's change beyond the week's budget and the CB's profit: E&F's
 # scripted moves on the treasury -- ai_refund_central_bank (the government
