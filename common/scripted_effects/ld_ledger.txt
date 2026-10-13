@@ -436,7 +436,8 @@ zz_ef_reconcile = {
 # unchanged. The countries reconcile on their own days, so whichever comes second finds the other in a global list
 # (zz_ef_priv_buyers / zz_ef_priv_sellers, the sum on the country, for zz_ef_priv_wait_days) by the same sum; the
 # buyer's banks then hold the levels -- its asset zz_ef_bank_priv (its «прочее» is right at once, or at its next
-# reconciliation when the seller came second). Not matched -- the step stays «прочее» of the buyer.
+# reconciliation when the seller came second). Not matched at the buyer's step -- the line «выкуп уровней» of the
+# buyer until a seller comes.
 # Country scope, the seller (var:zz_ef_f_lvl_buy_tr -- the sum).
 zz_ef_priv_abroad_seller = {
 	save_temporary_scope_as = zz_ef_pv_s
@@ -447,6 +448,8 @@ zz_ef_priv_abroad_seller = {
 			has_variable = zz_ef_priv_buy_v
 			var:zz_ef_priv_buy_v = scope:zz_ef_pv_s.var:zz_ef_f_lvl_buy_tr
 		}
+		# the buyer's step took it as «выкуп уровней» -- now its banks' asset
+		change_variable = { name = zz_ef_lvl_buy_pool add = var:zz_ef_priv_buy_v }
 		zz_ef_priv_abroad_post = { V = var:zz_ef_priv_buy_v }
 		remove_variable = zz_ef_priv_buy_v
 		remove_list_global_variable = { name = zz_ef_priv_buyers target = this }
@@ -487,6 +490,19 @@ zz_ef_priv_abroad_buyer = {
 		if = {
 			limit = { NOT = { is_target_in_global_variable_list = { name = zz_ef_priv_buyers target = this } } }
 			add_to_global_variable_list = { name = zz_ef_priv_buyers target = this days = @zz_ef_priv_wait_days }
+		}
+		# no seller abroad yet: the engine bought levels from private owners (pops, a change of owner; Д.R4б.31, 2nd
+		# kind -- R6 posts the price to the seller, Д.R6.1) -- the line «выкуп уровней», not «прочее»; a seller found
+		# later takes it back (zz_ef_priv_abroad_seller)
+		change_variable = { name = zz_ef_lvl_buy_pool add = var:zz_ef_t_pmult }
+		change_variable = { name = zz_ef_f_lvl_buy_pool add = var:zz_ef_t_pmult }
+		set_variable = {
+			name = zz_ef_other_pool
+			value = {
+				value = investment_pool
+				subtract = zz_ef_bank_book_v
+				subtract = var:zz_ef_lvl_buy_pool
+			}
 		}
 	}
 	remove_variable = zz_ef_t_pbuy
