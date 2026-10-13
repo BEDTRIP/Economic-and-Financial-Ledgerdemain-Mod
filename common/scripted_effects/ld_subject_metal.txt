@@ -27,6 +27,18 @@ zz_ef_metal_heir_world = {
 						# the engine hands the gone country's debt over too (a revolt put down): the heir's next two reconciliations
 						# take a rise of its debt as inherited, not «прочее» (zz_ef_reconcile)
 						set_variable = { name = zz_ef_heir_debt_steps value = 2 }
+						# and its treasury (a rising put down, a won revolution merged back): its last treasury net of debt, the
+						# heir's next two reconciliations take a rise of the treasury up to it as inherited (zz_ef_heir_tr)
+						if = {
+							limit = {
+								scope:zz_ef_mh_dead = {
+									has_variable = zz_ef_tr_prev
+									var:zz_ef_tr_prev > 0
+								}
+							}
+							if = { limit = { NOT = { has_variable = zz_ef_heir_tr_due } } set_variable = { name = zz_ef_heir_tr_due value = 0 } }
+							change_variable = { name = zz_ef_heir_tr_due add = scope:zz_ef_mh_dead.var:zz_ef_tr_prev }
+						}
 						zz_ef_metal_heir_take = { V = popm_gold }
 						zz_ef_metal_heir_take = { V = popm_silver }
 						zz_ef_metal_heir_take = { V = bankm_gold }
