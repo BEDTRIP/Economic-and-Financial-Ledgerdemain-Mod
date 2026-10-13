@@ -82,6 +82,7 @@ zz_ef_bk_c_cap_v = { value = 0 if = { limit = { has_variable = zz_ef_bank_capita
 zz_ef_bk_c_cc_v = { value = 0 if = { limit = { has_variable = zz_ef_cc_debt } value = var:zz_ef_cc_debt } }
 zz_ef_bk_c_bc_v = { value = 0 if = { limit = { has_variable = zz_ef_bc_debt } value = var:zz_ef_bc_debt } }
 zz_ef_bk_c_inv_v = { value = 0 if = { limit = { has_variable = zz_ef_bank_inv } value = var:zz_ef_bank_inv } }
+zz_ef_bk_c_prv_v = { value = 0 if = { limit = { has_variable = zz_ef_bank_priv } value = var:zz_ef_bank_priv } }
 # COUNTRY scope: the banks' capital ratio -- capital / earning assets (loans, bonds, fund shares and foreign money)
 zz_ef_bk_cty_capr_v = {
 	value = zz_ef_bk_c_cap_v
@@ -90,6 +91,7 @@ zz_ef_bk_cty_capr_v = {
 		add = zz_ef_bk_c_bc_v
 		add = zz_ef_bank_bonds
 		add = zz_ef_bk_c_inv_v
+		add = zz_ef_bk_c_prv_v
 		min = 1
 	}
 }
@@ -101,6 +103,7 @@ zz_ef_bk_assets_v = {
 	if = { limit = { has_variable = zz_ef_bk_bc } add = var:zz_ef_bk_bc }
 	if = { limit = { has_variable = zz_ef_bk_bnd } add = var:zz_ef_bk_bnd }
 	if = { limit = { has_variable = zz_ef_bk_inv } add = var:zz_ef_bk_inv }
+	if = { limit = { has_variable = zz_ef_bk_prv } add = var:zz_ef_bk_prv }
 	min = 0
 }
 zz_ef_bk_capr_v = {

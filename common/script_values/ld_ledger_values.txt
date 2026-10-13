@@ -16,6 +16,8 @@ zz_ef_bank_book_v = {
 	subtract = zz_ef_bank_bonds
 	# (Д.R4а.12) the fund's shares and the foreign money the banks bought -- their asset at its value
 	if = { limit = { has_variable = zz_ef_bank_inv } subtract = var:zz_ef_bank_inv }
+	# (Д.R4б.23) the state's building levels the banks bought (privatization) -- their asset at the price paid
+	if = { limit = { has_variable = zz_ef_bank_priv } subtract = var:zz_ef_bank_priv }
 }
 zz_ef_ledger_deposits_v = {
 	value = 0
@@ -84,6 +86,21 @@ zz_ef_lvl_is_nat_v = {
 		}
 		value = 1
 	}
+}
+# 1 if the pool's step taken as a purchase of levels is the treasury's privatization of the same step (the same sum)
+zz_ef_lvl_priv_same_v = {
+	value = 0
+	if = {
+		limit = {
+			var:zz_ef_f_lvl_buy_pool < 0
+			zz_ef_lvl_pool_tr_sum_v = 0
+		}
+		value = 1
+	}
+}
+zz_ef_lvl_pool_tr_sum_v = {
+	value = var:zz_ef_f_lvl_buy_pool
+	add = var:zz_ef_f_lvl_buy_tr
 }
 zz_ef_lvl_tolerance_neg = {
 	value = zz_ef_lvl_tolerance
