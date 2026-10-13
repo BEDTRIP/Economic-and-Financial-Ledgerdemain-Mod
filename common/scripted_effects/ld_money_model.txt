@@ -468,6 +468,21 @@ zz_ef_bridge_apply = {
 	zz_ef_sw = { F = trade_fin }
 	zz_ef_sw = { F = div }
 	set_variable = { name = zz_ef_f_leak value = zz_ef_leak_week }
+	# the line «engine: the market gap» summed since the start, for the logs (EFW|all: every country, by market)
+	if = {
+		limit = { zz_ef_logs_on = yes }
+		if = { limit = { NOT = { has_variable = zz_ef_leak_cum } } set_variable = { name = zz_ef_leak_cum value = 0 } }
+		change_variable = { name = zz_ef_leak_cum add = var:zz_ef_f_leak }
+		# the market's owner: its market's gap over the same steps (В.R4б.28 probe)
+		if = {
+			limit = {
+				exists = market
+				market.owner = this
+			}
+			if = { limit = { NOT = { has_variable = zz_ef_mkt_gap_cum } } set_variable = { name = zz_ef_mkt_gap_cum value = 0 } }
+			change_variable = { name = zz_ef_mkt_gap_cum add = { value = zz_ef_mkt_gap_week multiply = zz_ef_step_weeks_v } }
+		}
+	}
 	zz_ef_pop_savings_step = yes
 	# the user 8.10: the CB's start metal the same day as the start deposits (40% of M2 needs them) -- not a week
 	# later at the next step (it stays there too, for a CB that is not ready yet)
@@ -490,7 +505,6 @@ zz_ef_bridge_apply = {
 		# inflow and abr (at the step it would read last week's)
 		if = { limit = { zz_ef_logs_on = yes } zz_ef_money_log_rest = yes }
 		if = { limit = { zz_ef_logs_on = yes } zz_ef_mkt_week_log = yes }
-		if = { limit = { zz_ef_logs_on = yes } zz_ef_probe_mkt = yes }
 	}
 }
 

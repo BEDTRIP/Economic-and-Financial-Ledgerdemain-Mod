@@ -138,3 +138,9 @@ zz_ef_mkt_gap_metal_v = {
 		multiply = market.mg:silver.zz_ef_mg_price_v
 	}
 }
+
+# the line «engine: the market gap» summed since the start (EFW|all; zz_ef_bridge_apply)
+zz_ef_leak_cum_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_leak_cum } value = var:zz_ef_leak_cum }
+}
