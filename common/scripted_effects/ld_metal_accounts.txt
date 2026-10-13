@@ -622,7 +622,9 @@ zz_ef_metal_week_step = {
 			change_variable = { name = zz_ef_mt_cb_sell divide = zz_ef_gold_units_per_good }
 		}
 	}
-	# the modifiers for the coming week
+	# the modifiers for the coming week; the orders' scale by the market (Д.R4б.27)
+	set_variable = { name = zz_ef_mt_k_g value = zz_ef_mt_k_g_next }
+	set_variable = { name = zz_ef_mt_k_s value = zz_ef_mt_k_s_next }
 	set_variable = { name = zz_ef_mt_bank_levels value = zz_ef_bank_levels }
 	set_variable = { name = zz_ef_mt_bank_g value = zz_ef_bank_buy_gold_goods }
 	set_variable = { name = zz_ef_mt_bank_s value = zz_ef_bank_buy_silver_goods }

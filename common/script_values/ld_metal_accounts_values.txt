@@ -439,6 +439,7 @@ zz_ef_bank_mult_gold = {
 	if = {
 		limit = { zz_ef_bank_base_gold_goods > 0 }
 		value = zz_ef_metal_demand_gold_goods
+		multiply = zz_ef_mt_k_g_v
 		divide = zz_ef_bank_base_gold_goods
 		subtract = 1
 		multiply = 100
@@ -451,12 +452,53 @@ zz_ef_bank_mult_silver = {
 	if = {
 		limit = { zz_ef_bank_base_silver_goods > 0 }
 		value = zz_ef_metal_demand_silver_goods
+		multiply = zz_ef_mt_k_s_v
 		divide = zz_ef_bank_base_silver_goods
 		subtract = 1
 		multiply = 100
 	}
 	min = -100
 	max = 25000
+}
+
+# Д.R4б.27: the Banks' metal orders (the authority's, the banks', the treasury hoard's) no larger than the market sells --
+# the engine charges a building for its whole input order, so an order over the market's sell orders burns money. The
+# scale k (var:zz_ef_mt_k_g / _s, 1 at the start) follows the market: k x its sell orders / buy orders each week (the
+# buy orders less our over-order converge to the sell orders without swinging), within [zz_ef_mt_k_min, 1].
+zz_ef_mt_k_min = 0.02
+zz_ef_mt_k_g_v = {
+	value = 1
+	if = { limit = { has_variable = zz_ef_mt_k_g } value = var:zz_ef_mt_k_g }
+}
+zz_ef_mt_k_s_v = {
+	value = 1
+	if = { limit = { has_variable = zz_ef_mt_k_s } value = var:zz_ef_mt_k_s }
+}
+zz_ef_mt_k_g_next = {
+	value = zz_ef_mt_k_g_v
+	if = {
+		limit = {
+			exists = market
+			market.mg:gold.market_goods_buy_orders > 0
+		}
+		multiply = market.mg:gold.market_goods_sell_orders
+		divide = market.mg:gold.market_goods_buy_orders
+	}
+	min = zz_ef_mt_k_min
+	max = 1
+}
+zz_ef_mt_k_s_next = {
+	value = zz_ef_mt_k_s_v
+	if = {
+		limit = {
+			exists = market
+			market.mg:silver.market_goods_buy_orders > 0
+		}
+		multiply = market.mg:silver.market_goods_sell_orders
+		divide = market.mg:silver.market_goods_buy_orders
+	}
+	min = zz_ef_mt_k_min
+	max = 1
 }
 
 # ---- the CB founded by law (Д.R4а.3): the banks' metal it takes on a metal standard --------

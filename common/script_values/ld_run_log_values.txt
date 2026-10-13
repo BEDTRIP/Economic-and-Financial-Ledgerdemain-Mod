@@ -110,6 +110,11 @@ zz_ef_mkt_gap_fin_v = {
 zz_ef_mkt_gap_psc_v = {
 	value = 0
 	add = {
+		value = market.mg:wood_construction.market_goods_sell_orders
+		subtract = market.mg:wood_construction.market_goods_buy_orders
+		multiply = market.mg:wood_construction.zz_ef_mg_price_v
+	}
+	add = {
 		value = market.mg:iron_construction.market_goods_sell_orders
 		subtract = market.mg:iron_construction.market_goods_buy_orders
 		multiply = market.mg:iron_construction.zz_ef_mg_price_v
@@ -144,3 +149,34 @@ zz_ef_leak_cum_v = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_leak_cum } value = var:zz_ef_leak_cum }
 }
+
+# the mod's goods on the market: buy and sell orders, goods a week (the EFM modg line; Д.R4б.27 -- the needs' weights
+# against the supply). Country scope, the market's owner.
+zz_ef_mg_b_wood = { value = market.mg:wood_construction.market_goods_buy_orders }
+zz_ef_mg_s_wood = { value = market.mg:wood_construction.market_goods_sell_orders }
+zz_ef_mg_b_iron = { value = market.mg:iron_construction.market_goods_buy_orders }
+zz_ef_mg_s_iron = { value = market.mg:iron_construction.market_goods_sell_orders }
+zz_ef_mg_b_steel = { value = market.mg:steel_construction.market_goods_buy_orders }
+zz_ef_mg_s_steel = { value = market.mg:steel_construction.market_goods_sell_orders }
+zz_ef_mg_b_arc = { value = market.mg:arc_welded_construction.market_goods_buy_orders }
+zz_ef_mg_s_arc = { value = market.mg:arc_welded_construction.market_goods_sell_orders }
+zz_ef_mg_b_gold = { value = market.mg:gold.market_goods_buy_orders }
+zz_ef_mg_s_gold = { value = market.mg:gold.market_goods_sell_orders }
+zz_ef_mg_b_silver = { value = market.mg:silver.market_goods_buy_orders }
+zz_ef_mg_s_silver = { value = market.mg:silver.market_goods_sell_orders }
+zz_ef_mg_b_bond = { value = market.mg:bond.market_goods_buy_orders }
+zz_ef_mg_s_bond = { value = market.mg:bond.market_goods_sell_orders }
+zz_ef_mg_b_mst = { value = market.mg:manufacture_stock.market_goods_buy_orders }
+zz_ef_mg_s_mst = { value = market.mg:manufacture_stock.market_goods_sell_orders }
+zz_ef_mg_b_ast = { value = market.mg:agricultural_stock.market_goods_buy_orders }
+zz_ef_mg_s_ast = { value = market.mg:agricultural_stock.market_goods_sell_orders }
+zz_ef_mg_b_nst = { value = market.mg:mining_stock.market_goods_buy_orders }
+zz_ef_mg_s_nst = { value = market.mg:mining_stock.market_goods_sell_orders }
+zz_ef_mg_b_rst = { value = market.mg:railroad_stock.market_goods_buy_orders }
+zz_ef_mg_s_rst = { value = market.mg:railroad_stock.market_goods_sell_orders }
+zz_ef_mg_b_mf = { value = market.mg:mutual_funds.market_goods_buy_orders }
+zz_ef_mg_s_mf = { value = market.mg:mutual_funds.market_goods_sell_orders }
+zz_ef_mg_b_lcur = { value = market.mg:local_currency.market_goods_buy_orders }
+zz_ef_mg_s_lcur = { value = market.mg:local_currency.market_goods_sell_orders }
+zz_ef_mg_b_qcur = { value = market.mg:liquidity_currency.market_goods_buy_orders }
+zz_ef_mg_s_qcur = { value = market.mg:liquidity_currency.market_goods_sell_orders }
