@@ -43,6 +43,23 @@ zz_ef_money_model_step = {
 	set_variable = { name = zz_ef_bcash value = zz_ef_building_cash_sum }
 	# the Banks' cash -- the banks' own money, out of M1 / M2
 	set_variable = { name = zz_ef_bkcash value = zz_ef_bank_cash_sum }
+	# our exchange's country or our anchor may be gone (annexed, split) since the monthly choice: the variable then points
+	# at nothing -- chosen again now, before the trade, the fund and the exchange read them
+	if = {
+		limit = {
+			has_variable = zz_ef_xch
+			NOT = { exists = var:zz_ef_xch }
+		}
+		zz_ef_xch_route = yes
+	}
+	if = {
+		limit = {
+			has_variable = zz_ef_anchor
+			NOT = { exists = var:zz_ef_anchor }
+		}
+		remove_variable = zz_ef_anchor
+		zz_ef_anchor_update = yes
+	}
 	# the trade, one measure, once a step
 	zz_ef_trade_step = yes
 	# the CB's metal rescaled this step, in money -- 0 since R1б.1 (no rescale; the CB card's line)

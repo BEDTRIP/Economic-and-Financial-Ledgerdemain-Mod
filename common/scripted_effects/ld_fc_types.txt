@@ -48,7 +48,8 @@ zz_ef_fc_remove = {
 # buttons speculative_share_5..8_button (scripted_buttons/00_ef_buttons.txt, scripted_guis/00_financial_scripted_guis.txt).
 zz_ef_fc_expand = {
 	if = {
-		limit = { has_variable = zz_ef_fc_state }
+		# the exchange's state may be gone (split, merged): the variable then points at nothing
+		limit = { has_variable = zz_ef_fc_state exists = var:zz_ef_fc_state }
 		var:zz_ef_fc_state = {
 			if = { limit = { has_building = building_financial_centre } while = { count = $N$ if = { limit = { can_construct_building = building_financial_centre } start_building_construction = building_financial_centre } } }
 			if = { limit = { has_building = building_financial_centre_arg } while = { count = $N$ if = { limit = { can_construct_building = building_financial_centre_arg } start_building_construction = building_financial_centre_arg } } }
@@ -453,7 +454,7 @@ zz_ef_fc_found = {
 			create_building = { building = building_financial_centre level = 1 }
 		}
 	}
-	if = { limit = { has_variable = zz_ef_fc_state } var:zz_ef_fc_state = { zz_ef_fc_variant_set = yes } }
+	if = { limit = { has_variable = zz_ef_fc_state exists = var:zz_ef_fc_state } var:zz_ef_fc_state = { zz_ef_fc_variant_set = yes } }
 	# the exchange's investment fund (scripted_effects/ld_investment_fund.txt)
 	zz_ef_fund_found = yes
 }
