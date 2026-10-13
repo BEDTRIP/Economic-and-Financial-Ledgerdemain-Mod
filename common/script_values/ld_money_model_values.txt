@@ -2706,3 +2706,15 @@ zz_ef_cbl_take_v = {
 	max = national_debt_allowed_in_gold
 	min = 0
 }
+
+# a private CB's profit this step -- its owners' deposits (zz_ef_money_model_step, Д.R4а.5); the deposits card's row
+zz_ef_v_f_cb_int_dep = {
+	value = 0
+	if = {
+		limit = {
+			has_law = law_type:law_ld_cb_private
+			has_variable = zz_ef_f_cb_interest
+		}
+		value = var:zz_ef_f_cb_interest
+	}
+}
