@@ -283,30 +283,6 @@ zz_ef_money_model_step = {
 	zz_ef_money_ledger_delta = { ACC = tbonds VALUE = zz_ef_treasury_bonds }
 	zz_ef_money_ledger_delta = { ACC = m2 VALUE = zz_ef_m2 }
 	zz_ef_money_ledger_delta = { ACC = cbm VALUE = zz_ef_cb_money }
-	# the foreign money is held in gold (the CB's reserves, the claims): our currency's gold value moving revalues it --
-	# the step's revaluation of the gold held at the last step, an article of the abroad card (not a flow)
-	set_variable = { name = zz_ef_f_abr_reval value = 0 }
-	if = {
-		limit = {
-			has_variable = zz_ef_abr_gold_prev
-			has_variable = zz_ef_abr_gpm_prev
-			var:zz_ef_abr_gpm_prev > 0
-			zz_ef_clr_gold_per_money > 0
-		}
-		set_variable = {
-			name = zz_ef_f_abr_reval
-			value = {
-				value = var:zz_ef_abr_gold_prev
-				divide = zz_ef_clr_gold_per_money
-				subtract = {
-					value = var:zz_ef_abr_gold_prev
-					divide = var:zz_ef_abr_gpm_prev
-				}
-			}
-		}
-	}
-	set_variable = { name = zz_ef_abr_gold_prev value = zz_ef_abr_gold_all_v }
-	set_variable = { name = zz_ef_abr_gpm_prev value = zz_ef_clr_gold_per_money }
 	# abroad = the net foreign position (bonds + the CB's foreign currency - our currency abroad)
 	zz_ef_money_ledger_delta = { ACC = abroad VALUE = zz_ef_abroad_net }
 	zz_ef_money_ledger_delta = { ACC = agg0 VALUE = zz_ef_agg_m0 }
