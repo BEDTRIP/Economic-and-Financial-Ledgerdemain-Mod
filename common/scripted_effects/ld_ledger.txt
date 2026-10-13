@@ -247,6 +247,21 @@ zz_ef_reconcile = {
 			change_variable = { name = zz_ef_lvl_buy_tr add = var:zz_ef_f_lvl_buy_tr }
 			change_variable = { name = zz_ef_f_other_tr subtract = var:zz_ef_f_lvl_buy_tr }
 		}
+		# the same not a whole multiple (the week's other moves blur it): the treasury fell in a step whose state's levels
+		# grew while the companies' or private owners' fell -- the state bought them, the whole fall (принято ночью)
+		else_if = {
+			limit = {
+				var:zz_ef_f_other_tr < zz_ef_other_tr_jump_min_neg
+				zz_ef_v_d_govlv >= 1
+				OR = {
+					var:zz_ef_d_complv < 0
+					var:zz_ef_d_privlv < 0
+				}
+			}
+			set_variable = { name = zz_ef_f_lvl_buy_tr value = var:zz_ef_f_other_tr }
+			change_variable = { name = zz_ef_lvl_buy_tr add = var:zz_ef_f_lvl_buy_tr }
+			change_variable = { name = zz_ef_f_other_tr subtract = var:zz_ef_f_lvl_buy_tr }
+		}
 		remove_variable = zz_ef_t_lvl
 		# the engine writes the debt off -- a declared bankruptcy, or a default cutting the debt down to the credit: the
 		# treasury net of debt rises by the debt gone, nobody's money moves -- its own line (zz_ef_bk_woff), not
