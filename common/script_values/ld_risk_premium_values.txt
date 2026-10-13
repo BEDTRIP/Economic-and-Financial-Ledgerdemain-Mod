@@ -57,7 +57,33 @@ zz_ef_risk_fx = {
 	max = zz_ef_risk_fx_max
 }
 
-# the engine's debt to GDP (principal: the treasury's loans), +1 pp per 25% of GDP over 25%, up to +3 pp
+# The load of the government's debt (Д.R5.3, Д.R5.1): the engine's debt against the real room to borrow -- the
+# buildings' cash reserves and the banks' free deposits (deposits of pops, companies, the fund and other CBs less the
+# consumer and business loans). Up to zz_ef_gov_load_free nothing; to the full room +zz_ef_gov_load_k per unit (+3 pp at
+# 100 %), over it steeply (+zz_ef_gov_load_over_k per unit: +2 pp per 10 %), at most zz_ef_gov_load_max.
+zz_ef_gov_load_free = 0.5
+zz_ef_gov_load_k = 0.06
+zz_ef_gov_load_over_k = 0.2
+zz_ef_gov_load_max = 0.15
+zz_ef_real_credit_limit = {
+	value = zz_ef_building_cash
+	add = {
+		value = zz_ef_ledger_deposits_v
+		add = zz_ef_comp_dep_v
+		add = zz_ef_fd_dep_v
+		add = zz_ef_nr_dep_v
+		subtract = zz_ef_cc_debt
+		subtract = zz_ef_bc_debt
+		min = 0
+	}
+	min = 1
+}
+zz_ef_gov_load = {
+	value = principal
+	divide = zz_ef_real_credit_limit
+	min = 0
+}
+# the engine's debt to GDP (principal: the treasury's loans) -- the log's debt_gdp
 zz_ef_risk_debt_to_gdp = {
 	value = principal
 	divide = {
@@ -67,11 +93,20 @@ zz_ef_risk_debt_to_gdp = {
 	min = 0
 }
 zz_ef_risk_debt = {
-	value = zz_ef_risk_debt_to_gdp
-	subtract = 0.25
-	multiply = 0.04
+	value = zz_ef_gov_load
+	max = 1
+	subtract = zz_ef_gov_load_free
 	min = 0
-	max = 0.03
+	multiply = zz_ef_gov_load_k
+	if = {
+		limit = { zz_ef_gov_load > 1 }
+		add = {
+			value = zz_ef_gov_load
+			subtract = 1
+			multiply = zz_ef_gov_load_over_k
+		}
+	}
+	max = zz_ef_gov_load_max
 }
 # the budget's balance of the week, a year, to GDP (deficit < 0)
 zz_ef_risk_balance_now = {

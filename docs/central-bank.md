@@ -24,7 +24,11 @@
 - Цена политики ставки: `common/scripted_effects/ld_rate_policy.txt` (`zz_ef_rate_policy_costs`),
   `common/static_modifiers/ld_rate_policy.txt` (`zz_ef_rate_policy_authority`, `_hard_money`, `_soft_money`).
 - Ставка госзаймов: `common/static_modifiers/ld_gov_rate.txt` (`zz_ef_gov_rate_mult`, `zz_ef_gov_rate_add`; ставит
-  `ld_money_model.txt:1393`).
+  `zz_ef_gov_rate_step` раз в месяц). Цель `zz_ef_gov_rate_target` = ключевая + премия `zz_ef_gov_rate_premium` (Д.R5.3,
+  Д.R5.5): риск `zz_ef_cb_rule_risk` + загрузка `zz_ef_risk_debt` (`ld_risk_premium_values.txt`: `zz_ef_gov_load` =
+  `principal` / `zz_ef_real_credit_limit`, константы `zz_ef_gov_load_*`) + слагаемые игры кроме базы
+  `zz_ef_gov_rate_game` (`zz_ef_gov_rate_game_base` 0,2, `_k` 0,25) + слово рынка `zz_ef_gov_rate_yield`
+  (`var:zz_ef_gr_yield` из множителя облигаций `zz_ef_xmul_b`), × (1 + `zz_ef_gov_rate_corr`).
 - Ставка → частная стройка: `common/static_modifiers/ld_rate_private_construction.txt` (множитель
   `zz_ef_rate_construction_mult`, `ld_money_model_values.txt:283`; ставит `ld_money_model.txt:1059`).
 - Девальвация/ревальвация (генерируются `tools/regen_ef_monetary_policy.py`):
@@ -51,20 +55,20 @@
   `central_bank_modifier` — модификатор `has_central_bank`, `central_bank_production_methods`; при металлическом
   стандарте ЦБ забирает у банков металл нормы покрытия банкнот `zz_ef_cb_found_take_gold/_silver`, известное движение
   сверки); «без ЦБ» → `zz_ef_cb_close` (здание снимается, модификатор тоже; металлический — металл власти банкам). ИИ
-  принимает государственный при технологии (`ai_enact_weight_modifier` = `zz_ef_cb_law_ai_weight`, 200), частный — только
-  игрок. Создание и рост ЦБ E&F по ВВП (`macro_facilities_on_action_bc`, `has_currency_law_but_no_building_central_bank`,
-  `introduction_new_currency`) — только при законе (`zz_ef_cb_law_has_cb`; готовность E&F — `zz_ef_cb_ready`,
-  `ld_monetary_authority_triggers.txt`). Старт: история ставит закон по ЦБ истории (`zz_ef_cb_law_sync`,
-  `history/global/ld_central_bank_law.txt`), год старта — государственный закон стране, готовой к ЦБ по E&F
-  (`zz_ef_cb_law_start`, `ld_start_setup.txt`); месяц — ЦБ следует закону (`zz_ef_cb_law_follow`, хаб E&F
-  `ef_on_monthly_pulse_country`: кризисы E&F снимают здание — закон его возвращает). Здание ЦБ E&F — оболочка чеканки и
-  выпуска товара «облигации» до R5; металл ЦБ покупают «Банки» (Д.R4а.9). Локализация `ld_cb_law_l_*.yml`. Виды
-  ЦБ (Д.R4а.5): прибыль ЦБ (проценты банков по кредиту ЦБ) — государственного в казну, частного — владельцам
-  (капиталистам: во вклады населения, `ld_money_model.txt`); кредит казне — предел `zz_ef_cb_loan_cap` (государственный
-  50 % ВВП, при фиате без предела, частный 15 %; `ld_cb_loan_values.txt`, генератор `regen_ef_cb_loan.py`; кнопка и ИИ
-  `ai_credit_at_central_bank`); правило ставки — вес покрытия и инфляции `zz_ef_cb_kind_w_value` (частный 1,5,
-  государственный 0,75). Частные на старте — Великобритания, Франция, США, Австрия, Нидерланды
-  (`history/global/ld_central_bank_law.txt`).
+  принимает государственный при технологии (`ai_enact_weight_modifier` = `zz_ef_cb_law_ai_weight`, 200), частный —
+  только игрок. Создание и рост ЦБ E&F по ВВП (`macro_facilities_on_action_bc`,
+  `has_currency_law_but_no_building_central_bank`, `introduction_new_currency`) — только при законе
+  (`zz_ef_cb_law_has_cb`; готовность E&F — `zz_ef_cb_ready`, `ld_monetary_authority_triggers.txt`). Старт: история
+  ставит закон по ЦБ истории (`zz_ef_cb_law_sync`, `history/global/ld_central_bank_law.txt`), год старта —
+  государственный закон стране, готовой к ЦБ по E&F (`zz_ef_cb_law_start`, `ld_start_setup.txt`); месяц — ЦБ следует
+  закону (`zz_ef_cb_law_follow`, хаб E&F `ef_on_monthly_pulse_country`: кризисы E&F снимают здание — закон его
+  возвращает). Здание ЦБ E&F — оболочка чеканки и выпуска товара «облигации» до R5; металл ЦБ покупают «Банки»
+  (Д.R4а.9). Локализация `ld_cb_law_l_*.yml`. Виды ЦБ (Д.R4а.5): прибыль ЦБ (проценты банков по кредиту ЦБ) —
+  государственного в казну, частного — владельцам (капиталистам: во вклады населения, `ld_money_model.txt`); кредит
+  казне — предел `zz_ef_cb_loan_cap` (государственный 50 % ВВП, при фиате без предела, частный 15 %;
+  `ld_cb_loan_values.txt`, генератор `regen_ef_cb_loan.py`; кнопка и ИИ `ai_credit_at_central_bank`); правило ставки —
+  вес покрытия и инфляции `zz_ef_cb_kind_w_value` (частный 1,5, государственный 0,75). Частные на старте —
+  Великобритания, Франция, США, Австрия, Нидерланды (`history/global/ld_central_bank_law.txt`).
 - Связанные файлы E&F с правкой в теле: `scripted_effects/01_economic_scripted_effects.txt`
   (`on_activate_law_revaluation/devaluation/no_monetary_policy` :35349-:42350 зовут `zz_ef_mp_init/_clear`; идеология
   «большая денежная политика» в `monetary_policy_ideology_dynamic` (:34557-:41604) учитывает `zz_ef_rate_policy_steps`),
@@ -77,10 +81,11 @@
    3 мес. (E&F читает их для арбитража, `00_on_action_main.txt:336`).
 3. Цель: `zz_ef_cb_rate_rating_target` = нейтраль (3% металл / 2.5% фиат) + инфляция (фиат) + рост денег − ВВП (±) +
    покрытие (металл; только у ЦБ); казна как власть без ЦБ (Д.R4а.11) — то же правило без покрытия, банки металлического
-   стандарта без ЦБ — `zz_ef_rate_no_authority` 6,5 %; коридор 2..12% металл, 0.5..25% фиат, у внешневалютного (подданный с якорем) — от ставки ЦБ якоря
-   (`zz_ef_cb_rate_anchor`, `var:zz_ef_anchor`) до неё + 4 пп в пределах 2..12% (`zz_ef_cb_rate_is_dependent`, R3.3,
-   Д.R8а.6); обменные стандарты — своя политика, как металлический (`zz_ef_cb_rate_floor/ceiling`).
-   `zz_ef_cb_rate_target` = правило + `var:zz_ef_rate_bias`. Шаг 0.5 пп (1 пп при разрыве > 5 пп). Страны без ЦБ — 6.5%.
+   стандарта без ЦБ — `zz_ef_rate_no_authority` 6,5 %; коридор 2..12% металл, 0.5..25% фиат, у внешневалютного
+   (подданный с якорем) — от ставки ЦБ якоря (`zz_ef_cb_rate_anchor`, `var:zz_ef_anchor`) до неё + 4 пп в пределах
+   2..12% (`zz_ef_cb_rate_is_dependent`, R3.3, Д.R8а.6); обменные стандарты — своя политика, как металлический
+   (`zz_ef_cb_rate_floor/ceiling`). `zz_ef_cb_rate_target` = правило + `var:zz_ef_rate_bias`. Шаг 0.5 пп (1 пп при
+   разрыве > 5 пп). Страны без ЦБ — 6.5%.
 4. Месячный шаг денежной модели (`ld_money_model.txt`): `zz_ef_rate_policy_costs` (:1043), `zz_ef_mp_step` (:1050),
    стройка (:1059), ставка госзаймов (:1393).
 5. Девальвация/ревальвация: закон → `zz_ef_mp_init` (старт = цель = покрытие). Игрок двигает `zz_ef_mp_target` кнопками

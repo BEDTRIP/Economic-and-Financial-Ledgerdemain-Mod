@@ -2520,8 +2520,38 @@ zz_ef_gov_rate_corr = {
 	min = -0.5
 	max = 1
 }
+# the game's own adds to the loan rate (technologies -2 pp, the constitution's amendments +1..+5 pp), but the base 20 %,
+# count x zz_ef_gov_rate_game_k in the premium (Д.R5.3)
+zz_ef_gov_rate_game_base = 0.2
+zz_ef_gov_rate_game_k = 0.25
+zz_ef_gov_rate_game = {
+	value = zz_ef_gov_rate_add_other
+	subtract = zz_ef_gov_rate_game_base
+	multiply = zz_ef_gov_rate_game_k
+}
+# the market's word (Д.R5.5): its bonds' market multiplier on the exchanges (var:zz_ef_xmul_b -- the buys over the sells
+# of its bonds, ld_exchange_trade.txt) under 1 -- they sell under the fair price, the yield is higher by the gap over
+# their average life; read monthly (zz_ef_gov_rate_step) into var:zz_ef_gr_yield, at most zz_ef_gov_rate_yield_max either
+# way; no deals -- the multiplier stays 1, no shift
+zz_ef_gov_rate_yield_max = 0.02
+zz_ef_gov_rate_yield_now = {
+	value = 1
+	subtract = zz_ef_xmul_b_v
+	divide = zz_ef_xq_life_b
+	max = zz_ef_gov_rate_yield_max
+	min = { value = zz_ef_gov_rate_yield_max multiply = -1 }
+}
+zz_ef_gov_rate_yield = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_gr_yield } value = var:zz_ef_gr_yield }
+}
+# the premium (Д.R5.3): the rating's risk + the debt's load + the game's adds + the market's word, scaled by the game's
+# multipliers
 zz_ef_gov_rate_premium = {
 	value = zz_ef_cb_rule_risk
+	add = zz_ef_risk_debt
+	add = zz_ef_gov_rate_game
+	add = zz_ef_gov_rate_yield
 	multiply = {
 		value = 1
 		add = zz_ef_gov_rate_corr

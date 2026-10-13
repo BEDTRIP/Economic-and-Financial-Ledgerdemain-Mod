@@ -1374,6 +1374,8 @@ zz_ef_business_credit_step = {
 # modifiers/ld_gov_rate.txt, values file). Ours cancels the other
 # multipliers (total 1) and tops the adds up to the target.
 zz_ef_gov_rate_step = {
+	# the market's word on its bonds, monthly (Д.R5.5)
+	set_variable = { name = zz_ef_gr_yield value = zz_ef_gov_rate_yield_now }
 	set_variable = { name = zz_ef_gr_target value = zz_ef_gov_rate_target }
 	set_variable = { name = zz_ef_gr_mult_new value = zz_ef_gov_rate_mult_other }
 	change_variable = { name = zz_ef_gr_mult_new multiply = -1 }
