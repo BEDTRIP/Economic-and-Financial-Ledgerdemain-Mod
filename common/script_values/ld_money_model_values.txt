@@ -1816,6 +1816,18 @@ zz_ef_abr_fx_all_v = {
 	add = zz_ef_abr_rq_money_v
 }
 # the CB's foreign money that counts in the cover (var:zz_ef_fx_res_gold), in our money at the clearing's rate
+# the gold behind zz_ef_abr_fx_all_v: the CB's foreign reserves and the claims abroad, in gold
+zz_ef_abr_gold_all_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_fx_res_gold } add = var:zz_ef_fx_res_gold }
+	if = { limit = { has_variable = zz_ef_abr_rq_gold } add = var:zz_ef_abr_rq_gold }
+	min = 0
+}
+# the step's revaluation of the foreign money by our currency's gold value (zz_ef_money_model_step)
+zz_ef_v_f_abr_reval = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_abr_reval } value = var:zz_ef_f_abr_reval }
+}
 zz_ef_abr_fx_res_money_v = {
 	value = 0
 	if = {
