@@ -403,6 +403,13 @@ zz_ef_money_hook_receive = {
 		if = { limit = { NOT = { exists = scope:g_ipay } } save_scope_value_as = { name = g_ipay value = 0 } }
 		if = { limit = { NOT = { exists = scope:g_sdebt } } save_scope_value_as = { name = g_sdebt value = 0 } }
 		if = { limit = { NOT = { exists = scope:g_sdebtf } } save_scope_value_as = { name = g_sdebtf value = 0 } }
+		if = { limit = { NOT = { exists = scope:g_winc } } save_scope_value_as = { name = g_winc value = 0 } }
+		if = { limit = { NOT = { exists = scope:g_wexp } } save_scope_value_as = { name = g_wexp value = 0 } }
+		if = { limit = { NOT = { exists = scope:g_wbal } } save_scope_value_as = { name = g_wbal value = 0 } }
+		if = { limit = { NOT = { exists = scope:g_tmpi } } save_scope_value_as = { name = g_tmpi value = 0 } }
+		if = { limit = { NOT = { exists = scope:g_tmpx } } save_scope_value_as = { name = g_tmpx value = 0 } }
+		if = { limit = { NOT = { exists = scope:g_tinc } } save_scope_value_as = { name = g_tinc value = 0 } }
+		if = { limit = { NOT = { exists = scope:g_texp } } save_scope_value_as = { name = g_texp value = 0 } }
 		set_variable = { name = zz_ef_hk_ext value = scope:ext }
 		set_variable = { name = zz_ef_hk_abr value = scope:abr }
 		set_variable = { name = zz_ef_hk_aint value = scope:g_aint }
@@ -421,7 +428,20 @@ zz_ef_money_hook_receive = {
 		set_variable = { name = zz_ef_g_ipay value = scope:g_ipay }
 		set_variable = { name = zz_ef_g_sdebt value = scope:g_sdebt }
 		set_variable = { name = zz_ef_g_sdebtf value = scope:g_sdebtf }
+		set_variable = { name = zz_ef_g_winc value = scope:g_winc }
+		set_variable = { name = zz_ef_g_wexp value = scope:g_wexp }
+		set_variable = { name = zz_ef_g_wbal value = scope:g_wbal }
+		set_variable = { name = zz_ef_g_tmpi value = scope:g_tmpi }
+		set_variable = { name = zz_ef_g_tmpx value = scope:g_tmpx }
+		set_variable = { name = zz_ef_g_tinc value = scope:g_tinc }
+		set_variable = { name = zz_ef_g_texp value = scope:g_texp }
 		set_variable = { name = zz_ef_hk_date_week value = global_var:zz_ef_sched_week }
+		# audit 13.10: the budget as the GUI and the script see it, the same moment, with the treasury and the debt --
+		# which sum explains the treasury's change (vic3_mods/tools/ld_budchk.py)
+		if = {
+			limit = { zz_ef_logs_on = yes }
+			debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|bud_chk|winc [THIS.GetCountry.MakeScope.Var('zz_ef_g_winc').GetValue|0]|wexp [THIS.GetCountry.MakeScope.Var('zz_ef_g_wexp').GetValue|0]|wbal [THIS.GetCountry.MakeScope.Var('zz_ef_g_wbal').GetValue|0]|tmpi [THIS.GetCountry.MakeScope.Var('zz_ef_g_tmpi').GetValue|0]|tmpx [THIS.GetCountry.MakeScope.Var('zz_ef_g_tmpx').GetValue|0]|tinc [THIS.GetCountry.MakeScope.Var('zz_ef_g_tinc').GetValue|0]|texp [THIS.GetCountry.MakeScope.Var('zz_ef_g_texp').GetValue|0]|ti [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_raw_total_income')|0]|te [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_raw_total_expenses')|0]|nti [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_raw_net_total_income')|0]|gold [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gold_reserves_v')|0]|principal [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_principal_v')|0]"
+		}
 	}
 }
 
