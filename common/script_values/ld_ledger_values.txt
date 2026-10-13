@@ -7,6 +7,8 @@ zz_ef_bank_book_v = {
 	add = zz_ef_ledger_deposits_v
 	add = zz_ef_fd_dep_v
 	add = zz_ef_nr_dep_v
+	# (Д.R4б.31) the register's change the pool gets only at our step
+	subtract = zz_ef_nr_dep_pending_v
 	if = { limit = { has_variable = zz_ef_bank_cb_debt } add = var:zz_ef_bank_cb_debt }
 	if = { limit = { has_variable = zz_ef_bank_gov_dep } add = var:zz_ef_bank_gov_dep }
 	if = { limit = { has_variable = zz_ef_bank_capital } add = var:zz_ef_bank_capital }

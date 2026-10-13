@@ -99,7 +99,9 @@
   `zz_ef_bank_cb_debt`, без ЦБ — капитал банков, лог `EFK|nr_short`), проценты держателям из капитала банков,
   модификатор `zz_ef_fx_holders_demand`); сами вклады — реестр требований (`claims.md`).
 - `common/script_values/ld_nr_deposits_values.txt` — `zz_ef_nr_dep_v` (наши деньги у держателей: `zz_ef_rq_out_m_v`),
-  `zz_ef_v_f_nr_dep`, `zz_ef_v_w_nr_dep`, `zz_ef_v_f_nr_int`, `zz_ef_fx_holders_demand_m` (до 20).
+  `zz_ef_nr_dep_pending_v` (изменение реестра, ещё не проведённое в пул: клиринг `zz_ef_clr_a_cur_out` −
+  `zz_ef_clr_a_own_back`, биржа `zz_ef_xch_nr_acc`, проценты держателям `zz_ef_rq_int_due`; книга банков его вычитает до
+  шага страны), `zz_ef_v_f_nr_dep`, `zz_ef_v_w_nr_dep`, `zz_ef_v_f_nr_int`, `zz_ef_fx_holders_demand_m` (до 20).
 - `common/scripted_triggers/ld_nr_deposits_triggers.txt` — `zz_ef_nr_issuer` (есть `has_central_bank`, не внешневалютный
   стандарт).
 - `common/static_modifiers/ld_fx_holders_demand.txt` — `zz_ef_fx_holders_demand` (`state_export_advantage_mult = 0.01`

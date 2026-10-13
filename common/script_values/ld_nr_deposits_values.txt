@@ -4,6 +4,25 @@
 zz_ef_nr_dep_v = {
 	value = zz_ef_rq_out_m_v
 }
+# the register's change not yet in the pool: the clearing's settlements and the exchange's deals in our money since our
+# last step, the holders' interest credited -- posted at our step (zz_ef_nr_dep_step), after the reconciliation; the
+# banks' book leaves it out until then (Д.R4б.31: a week's swing -x / +x of «прочее», not a loss)
+zz_ef_nr_dep_pending_v = {
+	value = 0
+	if = {
+		limit = { has_variable = zz_ef_model_started }
+		if = { limit = { has_variable = zz_ef_clr_a_cur_out } add = var:zz_ef_clr_a_cur_out }
+		if = { limit = { has_variable = zz_ef_clr_a_own_back } subtract = var:zz_ef_clr_a_own_back }
+		if = { limit = { has_variable = zz_ef_xch_nr_acc } add = var:zz_ef_xch_nr_acc }
+		if = {
+			limit = {
+				zz_ef_nr_issuer = yes
+				has_variable = zz_ef_rq_int_due
+			}
+			add = var:zz_ef_rq_int_due
+		}
+	}
+}
 # put into (+) / drawn out of (-) the pool this receiver / last window
 zz_ef_v_f_nr_dep = {
 	value = 0
