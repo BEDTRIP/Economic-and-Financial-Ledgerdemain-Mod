@@ -104,20 +104,18 @@ zz_ef_lvl_pmult_tr_sum_v = {
 	value = var:zz_ef_t_pmult
 	add = var:zz_ef_f_lvl_buy_tr
 }
-# 1 if the pool's step taken as a purchase of levels is the treasury's privatization of the same step (the same sum)
-zz_ef_lvl_priv_same_v = {
-	value = 0
-	if = {
-		limit = {
-			var:zz_ef_f_lvl_buy_pool < 0
-			zz_ef_lvl_pool_tr_sum_v = 0
-		}
-		value = 1
+# Д.R4б.25: a step's fall of the pool's part (var:zz_ef_t_lvl < 0) taken as the levels grown's price, at most their
+# count x zz_ef_lvl_price_max (the probe r1013_085559: 45-65K a level in Britain, multiples up to 200K)
+zz_ef_lvl_price_max = 250000
+zz_ef_lvl_buy_grown_v = {
+	value = var:zz_ef_t_lvl
+	max = {
+		value = var:zz_ef_d_complv
+		max = var:zz_ef_d_privlv
+		min = 1
+		multiply = zz_ef_lvl_price_max
+		multiply = -1
 	}
-}
-zz_ef_lvl_pool_tr_sum_v = {
-	value = var:zz_ef_f_lvl_buy_pool
-	add = var:zz_ef_f_lvl_buy_tr
 }
 zz_ef_lvl_tolerance_neg = {
 	value = zz_ef_lvl_tolerance

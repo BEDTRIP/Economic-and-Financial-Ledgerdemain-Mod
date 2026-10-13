@@ -139,12 +139,12 @@ zz_ef_reconcile = {
 		set_variable = { name = zz_ef_aown_prev value = zz_ef_v_g_aown }
 		set_variable = { name = zz_ef_fown_prev value = zz_ef_v_g_fown }
 	}
-	# the engine's purchases of building levels (250 x the level's construction points, a multiple of zz_ef_lvl_unit);
-	# the script has no hook. A step's change of the pool's part within zz_ef_lvl_tolerance of a whole negative multiple
-	# of the unit while the country's companies' or private owners' levels grew (Д.R4б.22): the multiple is this line, not «прочее»
-	# (zz_ef_lvl_buy_pool, summed), the rest stays «прочее». The treasury's multiples -- zz_ef_lvl_buy_tr: positive -- the
-	# state sold levels to the banks (privatization, Д.R4б.23: posted pool -> treasury, the banks' asset
-	# zz_ef_bank_priv), negative -- the state bought them (nationalization).
+	# the engine's purchases of building levels (the price depends on the building); the script has no hook. A step
+	# whose levels of the country's companies or private owners grew: the pool part's fall is their price, at most the
+	# levels grown x zz_ef_lvl_price_max (Д.R4б.22, Д.R4б.25) -- this line, not «прочее» (zz_ef_lvl_buy_pool, summed).
+	# The pool's multiple of zz_ef_lvl_unit (zz_ef_t_pmult) finds the state's levels it paid for. The treasury's multiples
+	# -- zz_ef_lvl_buy_tr: positive -- the state sold levels to the banks (privatization, Д.R4б.23: posted pool ->
+	# treasury, the banks' asset zz_ef_bank_priv), negative -- the state bought them (nationalization).
 	if = { limit = { NOT = { has_variable = zz_ef_lvl_buy_pool } } set_variable = { name = zz_ef_lvl_buy_pool value = 0 } }
 	if = { limit = { NOT = { has_variable = zz_ef_lvl_buy_tr } } set_variable = { name = zz_ef_lvl_buy_tr value = 0 } }
 	set_variable = { name = zz_ef_f_lvl_buy_pool value = 0 }
@@ -165,13 +165,13 @@ zz_ef_reconcile = {
 		}
 		if = {
 			limit = {
-				zz_ef_lvl_is_buy_v = 1
+				var:zz_ef_t_lvl < 0
 				OR = {
 					var:zz_ef_d_complv > 0
 					var:zz_ef_d_privlv > zz_ef_lvl_privlv_min
 				}
 			}
-			set_variable = { name = zz_ef_f_lvl_buy_pool value = zz_ef_lvl_mult_v }
+			set_variable = { name = zz_ef_f_lvl_buy_pool value = zz_ef_lvl_buy_grown_v }
 			change_variable = { name = zz_ef_lvl_buy_pool add = var:zz_ef_f_lvl_buy_pool }
 		}
 		# the pool's multiple, a purchase or not -- a privatization at home or abroad may be it
@@ -208,14 +208,13 @@ zz_ef_reconcile = {
 			change_variable = { name = zz_ef_f_other_tr subtract = var:zz_ef_f_lvl_buy_tr }
 			# the buyer is our banks (the engine privatizes to the country's investors, Д.R4б.23): the pool paid, the
 			# banks hold the levels -- their asset zz_ef_bank_priv, the book falls with the pool (the capital and the
-			# deposits do not move). The pool's own step of the same sum, if it was taken as a company's purchase, is
-			# this one.
+			# deposits do not move). The pool's fall of the step, if it was taken as a company's purchase, is this one.
 			if = {
 				limit = { zz_ef_lvl_priv_own_v = 1 }
 				set_variable = { name = zz_ef_f_lvl_priv value = var:zz_ef_f_lvl_buy_tr }
 				change_variable = { name = zz_ef_bank_priv add = var:zz_ef_f_lvl_priv }
 				if = {
-					limit = { zz_ef_lvl_priv_same_v = 1 }
+					limit = { var:zz_ef_f_lvl_buy_pool < 0 }
 					change_variable = { name = zz_ef_lvl_buy_pool subtract = var:zz_ef_f_lvl_buy_pool }
 					set_variable = { name = zz_ef_f_lvl_buy_pool value = 0 }
 				}
