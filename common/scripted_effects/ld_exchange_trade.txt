@@ -1502,11 +1502,21 @@ zz_ef_xch_clear_exchange = {
 		save_temporary_scope_as = zz_ef_xc_e
 		every_in_list = {
 			variable = zz_ef_xk_m
+			# a debtor gone since its orders were posted (annexed, a revolution won) -- the heir took its claims
+			limit = {
+				exists = this
+				is_country_alive = yes
+			}
 			save_temporary_scope_as = zz_ef_rq_key
 			scope:zz_ef_xc_e = { zz_ef_xch_clear_asset_m = yes }
 		}
 		every_in_list = {
 			variable = zz_ef_xk_b
+			# a debtor gone since its orders were posted (annexed, a revolution won) -- the heir took its claims
+			limit = {
+				exists = this
+				is_country_alive = yes
+			}
 			save_temporary_scope_as = zz_ef_rq_key
 			scope:zz_ef_xc_e = { zz_ef_xch_clear_asset_b = yes }
 		}

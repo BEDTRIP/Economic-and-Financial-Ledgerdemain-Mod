@@ -25,6 +25,9 @@ zz_ef_metal_bimet_law = {
 zz_ef_anchored = {
 	has_law = law_type:law_external_exchange_standard
 	has_variable = zz_ef_anchor
+	# the anchor may be gone (annexed, a revolution won) until the subject picks another
+	exists = var:zz_ef_anchor
+	var:zz_ef_anchor = { is_country_alive = yes }
 }
 zz_ef_metal_gold = {
 	OR = {

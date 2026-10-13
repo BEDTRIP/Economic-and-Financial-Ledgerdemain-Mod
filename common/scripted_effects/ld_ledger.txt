@@ -179,6 +179,13 @@ zz_ef_reconcile = {
 			limit = { zz_ef_lvl_is_buy_v = 1 }
 			set_variable = { name = zz_ef_t_pmult value = zz_ef_lvl_mult_v }
 		}
+		# a positive multiple: the pool got the price of levels its owners sold (the state's nationalization pays them,
+		# the treasury's line «выкуп уровней»; a sale abroad) -- the same line with the opposite sign, not «прочее»
+		else_if = {
+			limit = { zz_ef_lvl_is_nat_v = 1 }
+			set_variable = { name = zz_ef_f_lvl_buy_pool value = zz_ef_lvl_mult_v }
+			change_variable = { name = zz_ef_lvl_buy_pool add = var:zz_ef_f_lvl_buy_pool }
+		}
 		remove_variable = zz_ef_t_lvl
 	}
 	set_variable = {
