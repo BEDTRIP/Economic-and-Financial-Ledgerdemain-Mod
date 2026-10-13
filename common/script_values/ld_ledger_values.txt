@@ -87,6 +87,21 @@ zz_ef_lvl_is_nat_v = {
 		value = 1
 	}
 }
+# 1 if our pool paid the state's levels sold this step: its multiple is the treasury's, the other sign (Д.R4б.23)
+zz_ef_lvl_priv_own_v = {
+	value = 0
+	if = {
+		limit = {
+			var:zz_ef_t_pmult < 0
+			zz_ef_lvl_pmult_tr_sum_v = 0
+		}
+		value = 1
+	}
+}
+zz_ef_lvl_pmult_tr_sum_v = {
+	value = var:zz_ef_t_pmult
+	add = var:zz_ef_f_lvl_buy_tr
+}
 # 1 if the pool's step taken as a purchase of levels is the treasury's privatization of the same step (the same sum)
 zz_ef_lvl_priv_same_v = {
 	value = 0

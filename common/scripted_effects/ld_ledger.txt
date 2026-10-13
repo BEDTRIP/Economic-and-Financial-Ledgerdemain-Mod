@@ -125,6 +125,7 @@ zz_ef_reconcile = {
 	set_variable = { name = zz_ef_f_lvl_buy_pool value = 0 }
 	set_variable = { name = zz_ef_f_lvl_buy_tr value = 0 }
 	set_variable = { name = zz_ef_f_lvl_priv value = 0 }
+	set_variable = { name = zz_ef_t_pmult value = 0 }
 	if = { limit = { NOT = { has_variable = zz_ef_bank_priv } } set_variable = { name = zz_ef_bank_priv value = 0 } }
 	if = {
 		limit = { has_variable = zz_ef_other_pool }
@@ -144,6 +145,11 @@ zz_ef_reconcile = {
 			}
 			set_variable = { name = zz_ef_f_lvl_buy_pool value = zz_ef_lvl_mult_v }
 			change_variable = { name = zz_ef_lvl_buy_pool add = var:zz_ef_f_lvl_buy_pool }
+		}
+		# the pool's multiple, a purchase or not -- a privatization at home or abroad may be it
+		if = {
+			limit = { zz_ef_lvl_is_buy_v = 1 }
+			set_variable = { name = zz_ef_t_pmult value = zz_ef_lvl_mult_v }
 		}
 		remove_variable = zz_ef_t_lvl
 	}
@@ -176,23 +182,28 @@ zz_ef_reconcile = {
 			# banks hold the levels -- their asset zz_ef_bank_priv, the book falls with the pool (the capital and the
 			# deposits do not move). The pool's own step of the same sum, if it was taken as a company's purchase, is
 			# this one.
-			set_variable = { name = zz_ef_f_lvl_priv value = var:zz_ef_f_lvl_buy_tr }
-			change_variable = { name = zz_ef_bank_priv add = var:zz_ef_f_lvl_priv }
 			if = {
-				limit = {
-					var:zz_ef_f_lvl_buy_pool < 0
-					zz_ef_lvl_priv_same_v = 1
+				limit = { zz_ef_lvl_priv_own_v = 1 }
+				set_variable = { name = zz_ef_f_lvl_priv value = var:zz_ef_f_lvl_buy_tr }
+				change_variable = { name = zz_ef_bank_priv add = var:zz_ef_f_lvl_priv }
+				if = {
+					limit = { zz_ef_lvl_priv_same_v = 1 }
+					change_variable = { name = zz_ef_lvl_buy_pool subtract = var:zz_ef_f_lvl_buy_pool }
+					set_variable = { name = zz_ef_f_lvl_buy_pool value = 0 }
 				}
-				change_variable = { name = zz_ef_lvl_buy_pool subtract = var:zz_ef_f_lvl_buy_pool }
-				set_variable = { name = zz_ef_f_lvl_buy_pool value = 0 }
+				set_variable = {
+					name = zz_ef_other_pool
+					value = {
+						value = investment_pool
+						subtract = zz_ef_bank_book_v
+						subtract = var:zz_ef_lvl_buy_pool
+					}
+				}
 			}
-			set_variable = {
-				name = zz_ef_other_pool
-				value = {
-					value = investment_pool
-					subtract = zz_ef_bank_book_v
-					subtract = var:zz_ef_lvl_buy_pool
-				}
+			# our pool did not pay (a small pool cannot): the buyer is abroad -- another country's pool of the same week
+			# (zz_ef_priv_abroad_seller)
+			else = {
+				zz_ef_priv_abroad_seller = yes
 			}
 		}
 		# the state as the buyer (the engine's nationalization: the treasury pays a multiple of the unit)
@@ -290,6 +301,16 @@ zz_ef_reconcile = {
 		}
 		change_variable = { name = zz_ef_other_tr add = var:zz_ef_f_other_tr }
 	}
+	# the pool's multiple is neither a company's purchase nor our own privatization: the state's levels of another country
+	# bought (its treasury got the same sum these days)
+	if = {
+		limit = {
+			var:zz_ef_t_pmult < 0
+			var:zz_ef_f_lvl_buy_pool = 0
+			var:zz_ef_f_lvl_priv = 0
+		}
+		zz_ef_priv_abroad_buyer = yes
+	}
 	# a large unexplained move of the treasury -- the engine's numbers around it (the log only)
 	if = {
 		limit = {
@@ -348,6 +369,89 @@ zz_ef_reconcile = {
 			}
 		}
 		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|other [THIS.GetCountry.MakeScope.Var('zz_ef_other').GetValue|0]|d_other [THIS.GetCountry.MakeScope.Var('zz_ef_f_other').GetValue|0]|pool [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_raw_pool')|0]|book [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bank_book_v')|0]|other_pool [THIS.GetCountry.MakeScope.Var('zz_ef_other_pool').GetValue|0]|other_tr [THIS.GetCountry.MakeScope.Var('zz_ef_other_tr').GetValue|0]|lvl_pool [THIS.GetCountry.MakeScope.Var('zz_ef_lvl_buy_pool').GetValue|0]|lvl_tr [THIS.GetCountry.MakeScope.Var('zz_ef_lvl_buy_tr').GetValue|0]|bk_woff [THIS.GetCountry.MakeScope.Var('zz_ef_bk_woff').GetValue|0]|heir_debt [THIS.GetCountry.MakeScope.Var('zz_ef_heir_debt').GetValue|0]|cw_tr [THIS.GetCountry.MakeScope.Var('zz_ef_cw_tr').GetValue|0]|d_other_tr [THIS.GetCountry.MakeScope.Var('zz_ef_f_other_tr').GetValue|0]|trnet [THIS.GetCountry.MakeScope.Var('zz_ef_tr_prev').GetValue|0]|budget [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_budget_steps_v')|0]|capital [THIS.GetCountry.MakeScope.Var('zz_ef_bank_capital').GetValue|0]|dep [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_deposits')|0]|weeks [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_step_weeks_v')|0]|role [THIS.GetCountry.MakeScope.Var('zz_ef_role').GetValue|0]|d_pool [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_d_pool')|0]|contrib [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_contrib')|0]|transfer [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_transfer')|0]|bc_new [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_bc_new')|0]|bc_paid [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_bc_paid')|0]|dep_build [THIS.GetCountry.MakeScope.Var('zz_ef_f_dep_build').GetValue|0]|gross [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pool_gross_v')|0]|net [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pool_net_v')|0]"
+	}
+}
+
+# days a privatization abroad waits for its other side in the global lists below
+@zz_ef_priv_wait_days = 14
+
+# The state's building levels privatized to another country's investors (Д.R4б.23): the seller's treasury got the sum,
+# its own pool did not pay; the buyer's pool paid a multiple of the unit the same days with its companies' levels
+# unchanged. The countries reconcile on their own days, so whichever comes second finds the other in a global list
+# (zz_ef_priv_buyers / zz_ef_priv_sellers, the sum on the country, for zz_ef_priv_wait_days) by the same sum; the
+# buyer's banks then hold the levels -- its asset zz_ef_bank_priv (its «прочее» is right at once, or at its next
+# reconciliation when the seller came second). Not matched -- the step stays «прочее» of the buyer.
+# Country scope, the seller (var:zz_ef_f_lvl_buy_tr -- the sum).
+zz_ef_priv_abroad_seller = {
+	save_temporary_scope_as = zz_ef_pv_s
+	set_variable = { name = zz_ef_t_pv_done value = 0 }
+	random_in_global_list = {
+		variable = zz_ef_priv_buyers
+		limit = {
+			has_variable = zz_ef_priv_buy_v
+			var:zz_ef_priv_buy_v = scope:zz_ef_pv_s.var:zz_ef_f_lvl_buy_tr
+		}
+		zz_ef_priv_abroad_post = { V = var:zz_ef_priv_buy_v }
+		remove_variable = zz_ef_priv_buy_v
+		remove_list_global_variable = { name = zz_ef_priv_buyers target = this }
+		scope:zz_ef_pv_s = { set_variable = { name = zz_ef_t_pv_done value = 1 } }
+	}
+	if = {
+		limit = { var:zz_ef_t_pv_done = 0 }
+		set_variable = { name = zz_ef_priv_sell_v value = var:zz_ef_f_lvl_buy_tr days = @zz_ef_priv_wait_days }
+		if = {
+			limit = { NOT = { is_target_in_global_variable_list = { name = zz_ef_priv_sellers target = this } } }
+			add_to_global_variable_list = { name = zz_ef_priv_sellers target = this days = @zz_ef_priv_wait_days }
+		}
+	}
+	remove_variable = zz_ef_t_pv_done
+}
+# Country scope, the buyer (var:zz_ef_t_pmult -- the pool's multiple, negative).
+zz_ef_priv_abroad_buyer = {
+	save_temporary_scope_as = zz_ef_pv_b
+	set_variable = { name = zz_ef_t_pbuy value = { value = var:zz_ef_t_pmult multiply = -1 } }
+	set_variable = { name = zz_ef_t_pv_done value = 0 }
+	random_in_global_list = {
+		variable = zz_ef_priv_sellers
+		limit = {
+			NOT = { this = scope:zz_ef_pv_b }
+			has_variable = zz_ef_priv_sell_v
+			var:zz_ef_priv_sell_v = scope:zz_ef_pv_b.var:zz_ef_t_pbuy
+		}
+		remove_variable = zz_ef_priv_sell_v
+		remove_list_global_variable = { name = zz_ef_priv_sellers target = this }
+		scope:zz_ef_pv_b = {
+			zz_ef_priv_abroad_post = { V = var:zz_ef_t_pbuy }
+			set_variable = { name = zz_ef_t_pv_done value = 1 }
+		}
+	}
+	if = {
+		limit = { var:zz_ef_t_pv_done = 0 }
+		set_variable = { name = zz_ef_priv_buy_v value = var:zz_ef_t_pbuy days = @zz_ef_priv_wait_days }
+		if = {
+			limit = { NOT = { is_target_in_global_variable_list = { name = zz_ef_priv_buyers target = this } } }
+			add_to_global_variable_list = { name = zz_ef_priv_buyers target = this days = @zz_ef_priv_wait_days }
+		}
+	}
+	remove_variable = zz_ef_t_pbuy
+	remove_variable = zz_ef_t_pv_done
+}
+# Country scope, the buyer: its banks paid $V$ for levels abroad -- their asset; the pool's part follows the book
+zz_ef_priv_abroad_post = {
+	if = { limit = { NOT = { has_variable = zz_ef_bank_priv } } set_variable = { name = zz_ef_bank_priv value = 0 } }
+	change_variable = { name = zz_ef_bank_priv add = $V$ }
+	if = { limit = { NOT = { has_variable = zz_ef_f_lvl_priv } } set_variable = { name = zz_ef_f_lvl_priv value = 0 } }
+	change_variable = { name = zz_ef_f_lvl_priv add = $V$ }
+	if = {
+		limit = { has_variable = zz_ef_other_pool }
+		set_variable = {
+			name = zz_ef_other_pool
+			value = {
+				value = investment_pool
+				subtract = zz_ef_bank_book_v
+				subtract = var:zz_ef_lvl_buy_pool
+			}
+		}
 	}
 }
 
