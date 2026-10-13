@@ -58,19 +58,39 @@ zz_ef_nr_dep_step = {
 			set_variable = { name = zz_ef_f_nr_xch value = var:zz_ef_xch_nr_acc }
 			remove_variable = zz_ef_xch_nr_acc
 		}
+		# the holders draw out more than the pool holds (the banks lent it out): the register has already taken the claims
+		# off -- the shortfall is paid by the CB as credit to the banks, straight to the holders (the lender of last
+		# resort: the banks' debt to the CB grows, the pool does not move); without a CB the banks keep it (their
+		# capital). The book then moves as the pool does («прочее» untouched).
+		set_variable = { name = zz_ef_f_nr_short value = 0 }
 		if = {
 			limit = { var:zz_ef_f_nr_dep < 0 }
 			set_variable = {
-				name = zz_ef_f_nr_dep
+				name = zz_ef_f_nr_short
 				value = {
 					value = var:zz_ef_f_nr_dep
-					min = {
+					multiply = -1
+					subtract = {
 						value = investment_pool
 						min = 0
-						multiply = -1
 					}
+					min = 0
 				}
 			}
+			change_variable = { name = zz_ef_f_nr_dep add = var:zz_ef_f_nr_short }
+		}
+		if = {
+			limit = { var:zz_ef_f_nr_short > 0 }
+			if = {
+				limit = { has_modifier = has_central_bank }
+				if = { limit = { NOT = { has_variable = zz_ef_bank_cb_debt } } set_variable = { name = zz_ef_bank_cb_debt value = 0 } }
+				change_variable = { name = zz_ef_bank_cb_debt add = var:zz_ef_f_nr_short }
+			}
+			else = {
+				if = { limit = { NOT = { has_variable = zz_ef_bank_capital } } set_variable = { name = zz_ef_bank_capital value = 0 } }
+				change_variable = { name = zz_ef_bank_capital add = var:zz_ef_f_nr_short }
+			}
+			if = { limit = { zz_ef_logs_on = yes } debug_log = "EFK|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|nr_short|short [THIS.GetCountry.MakeScope.Var('zz_ef_f_nr_short').GetValue|0]|paid [THIS.GetCountry.MakeScope.Var('zz_ef_f_nr_dep').GetValue|0]|cb [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_has_cb_v')|0]" }
 		}
 		add_investment_pool = var:zz_ef_f_nr_dep
 	}

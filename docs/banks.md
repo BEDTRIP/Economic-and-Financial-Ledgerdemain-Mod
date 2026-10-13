@@ -95,8 +95,9 @@
   стандартам (`pm_*_standard_bank_money_currency`: `country_minting_add`, выпуск облигаций `goods_output_bond_add`),
   `pm_revaluation`/`pm_devaluation`.
 - `common/scripted_effects/ld_nr_deposits.txt` — `zz_ef_nr_dep_step` (недельный шаг: проценты ЦБ-держателя по чужим
-  деньгам, проводка клиринга `add_investment_pool` у эмитента, проценты держателям из капитала банков, модификатор
-  `zz_ef_fx_holders_demand`); сами вклады — реестр требований (`claims.md`).
+  деньгам, проводка клиринга `add_investment_pool` у эмитента (не больше пула; недостающее — кредит ЦБ банкам
+  `zz_ef_bank_cb_debt`, без ЦБ — капитал банков, лог `EFK|nr_short`), проценты держателям из капитала банков,
+  модификатор `zz_ef_fx_holders_demand`); сами вклады — реестр требований (`claims.md`).
 - `common/script_values/ld_nr_deposits_values.txt` — `zz_ef_nr_dep_v` (наши деньги у держателей: `zz_ef_rq_out_m_v`),
   `zz_ef_v_f_nr_dep`, `zz_ef_v_w_nr_dep`, `zz_ef_v_f_nr_int`, `zz_ef_fx_holders_demand_m` (до 20).
 - `common/scripted_triggers/ld_nr_deposits_triggers.txt` — `zz_ef_nr_issuer` (есть `has_central_bank`, не внешневалютный
