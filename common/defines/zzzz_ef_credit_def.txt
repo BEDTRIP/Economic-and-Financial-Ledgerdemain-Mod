@@ -1,9 +1,8 @@
-﻿# with business cash cut to ~0.3 GDP
-# (the cash cap in base_values) the credit limit -- cash reserves
-# + COUNTRY_MIN_CREDIT_BASE + COUNTRY_MIN_CREDIT_SCALED x GDP -- would fall from
-# ~2 GDPs to ~0.3. Grey's Soft Econ Adjustments set SCALED to 0.01
-# (zzz_MoG_SEA_def.txt, vanilla 0.5); 1.7 keeps the limit at ~2 GDPs. The file
-# name sorts after Grey's so this value wins. Check: debt capacity in runs.
+﻿# The engine's credit limit -- the buildings' cash reserves + COUNTRY_MIN_CREDIT_BASE + COUNTRY_MIN_CREDIT_SCALED x GDP --
+# is the outer edge of a default (Д.R5.1); the real room to borrow is the buildings' cash and the banks' free deposits
+# (zz_ef_real_credit_limit, the premium's load). SCALED is set so the engine's limit is near the real one on average:
+# the run r1014_010233 needs 0.26 (1838), 0.51 (1841), 0.72 (1844) of GDP over the cash reserves. The file name sorts
+# after Grey's Soft Econ Adjustments (zzz_MoG_SEA_def.txt, 0.01) so this value wins.
 NEconomy = {
-	COUNTRY_MIN_CREDIT_SCALED = 1.7
+	COUNTRY_MIN_CREDIT_SCALED = 0.5
 }
