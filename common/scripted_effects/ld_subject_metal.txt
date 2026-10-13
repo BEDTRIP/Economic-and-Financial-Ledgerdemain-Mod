@@ -11,6 +11,9 @@ zz_ef_metal_heir_world = {
 		variable = zz_ef_mh_list
 		limit = { is_country_alive = no }
 		save_scope_as = zz_ef_mh_dead
+		# the gone country and, next line, its heir (the sandbox script sits down as the heir when the player's country is
+		# gone, Д.R4б.34)
+		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFH|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|gone|tag [THIS.GetCountry.GetTagName]" }
 		# the heir -- not a decentralized nation: the world's line does not see its accounts; none -- it waits (counted
 		# with the world as a gone one's)
 		if = {
@@ -24,6 +27,7 @@ zz_ef_metal_heir_world = {
 				random_scope_state = {
 					limit = { owner = { NOT = { is_country_type = decentralized } } }
 					owner = {
+						if = { limit = { zz_ef_logs_on = yes } debug_log = "EFH|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|heir|tag [THIS.GetCountry.GetTagName]" }
 						# the engine hands the gone country's debt over too (a revolt put down): the heir's next two reconciliations
 						# take a rise of its debt as inherited, not «прочее» (zz_ef_reconcile)
 						set_variable = { name = zz_ef_heir_debt_steps value = 2 }
