@@ -94,6 +94,10 @@
 - `common/production_method_groups/15_ef_bank.txt`, `common/production_methods/15_ef_bank.txt` — методы ЦБ по валютным
   стандартам (`pm_*_standard_bank_money_currency`: `country_minting_add`, выпуск облигаций `goods_output_bond_add`),
   `pm_revaluation`/`pm_devaluation`.
+- `common/scripted_effects/ld_leak_back.txt` — `zz_ef_leak_back_step` (Д.R4б.33): статья «движок: оплачено сверх продаж
+  рынка» возвращается в пул вкладами населения (доля `zz_ef_leak_back_pop_share`,
+  `common/script_values/ld_leak_back_values.txt`) и компаний (`zz_ef_comp_dep`, `zz_ef_comp_dep_v`; у субъектов —
+  `zz_ef_bk_cpd`).
 - `common/scripted_effects/ld_nr_deposits.txt` — `zz_ef_nr_dep_step` (недельный шаг: проценты ЦБ-держателя по чужим
   деньгам, проводка клиринга `add_investment_pool` у эмитента (не больше пула; недостающее — кредит ЦБ банкам
   `zz_ef_bank_cb_debt`, без ЦБ — капитал банков, лог `EFK|nr_short`), проценты держателям из капитала банков,

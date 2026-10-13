@@ -1,0 +1,24 @@
+﻿# The engine's money burnt inside the private sector, returned to the pool (Д.R4б.33; scripted_effects/ld_leak_back.txt).
+
+# the pops' share of the line «движок: оплачено сверх продаж рынка» -- their deposits; the rest is the companies'
+# (принято ночью, проверить: the probe of step 2 -- ld_leak_split, r1013_180405 -- finds the line on PSC's construction
+# goods about one to one (the construction sector's inputs), on vanilla goods 0.03-0.75, the mod's financial goods and
+# metal unstable by country; one number for every country: vanilla to the pops, construction goods to the companies --
+# 50 / 170 of the run's line)
+zz_ef_leak_back_pop_share = 0.3
+
+# the companies' deposits in the banks -- a liability of the banks' book (zz_ef_bank_book_v), money
+zz_ef_comp_dep_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_comp_dep } value = var:zz_ef_comp_dep }
+}
+# returned to the pool (+) / taken out of it (-) this step; and in the window just closed (the pool's card, the next
+# step's pool change)
+zz_ef_v_f_leak_back = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_leak_back } value = var:zz_ef_f_leak_back }
+}
+zz_ef_v_w_leak_back = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_w_leak_back } value = var:zz_ef_w_leak_back }
+}

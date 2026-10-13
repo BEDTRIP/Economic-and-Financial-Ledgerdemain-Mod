@@ -1,5 +1,5 @@
 ﻿# the ledger's values (scripted_effects/ld_ledger.txt).
-# The banks' book -- our accounts of the pool: liabilities (deposits of pops, of the investment fund and of other CBs,
+# The banks' book -- our accounts of the pool: liabilities (deposits of pops, of companies, of the investment fund and of other CBs,
 # the CB's credit, the treasury's money, capital) less the loans (consumer, business). Before the first reconciliation
 # the capital is 0.
 zz_ef_bank_book_v = {
@@ -11,6 +11,8 @@ zz_ef_bank_book_v = {
 	subtract = zz_ef_nr_dep_pending_v
 	if = { limit = { has_variable = zz_ef_bank_cb_debt } add = var:zz_ef_bank_cb_debt }
 	if = { limit = { has_variable = zz_ef_bank_gov_dep } add = var:zz_ef_bank_gov_dep }
+	# (Д.R4б.33) the companies' deposits -- the engine's burnt money returned (ld_leak_back.txt)
+	if = { limit = { has_variable = zz_ef_comp_dep } add = var:zz_ef_comp_dep }
 	if = { limit = { has_variable = zz_ef_bank_capital } add = var:zz_ef_bank_capital }
 	if = { limit = { has_variable = zz_ef_cc_debt } subtract = var:zz_ef_cc_debt }
 	if = { limit = { has_variable = zz_ef_bc_debt } subtract = var:zz_ef_bc_debt }

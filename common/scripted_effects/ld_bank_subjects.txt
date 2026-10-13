@@ -137,8 +137,8 @@ zz_ef_bk_box_create = {
 	}
 }
 
-# The bank book by subject (Д.R4б.2): every subject keeps its own accounts -- zz_ef_bk_dep (pops' deposits), _fdd (the
-# investment fund's), _nrd (foreign CBs'), _gvd (the treasury's), _cbd (debt to the CB), _cap (capital), _cc / _bc
+# The bank book by subject (Д.R4б.2): every subject keeps its own accounts -- zz_ef_bk_dep (pops' deposits), _cpd (the
+# companies', Д.R4б.33), _fdd (the investment fund's), _nrd (foreign CBs'), _gvd (the treasury's), _cbd (debt to the CB), _cap (capital), _cc / _bc
 # (consumer / business loans), _bnd (parts of foreign bonds), _inv (fund shares and foreign money bought), _prv (the
 # state's levels bought, Д.R4б.23), _mg / _ms (metal) -- and its maps of claims zz_ef_rq_bk_m / _b / _f (the country's maps' keys and kinds, ld_claims.txt). The
 # country's accounts stay the books' sum, written where they were; at the country's step each subject account follows
@@ -163,6 +163,7 @@ zz_ef_bk_book_step = {
 	}
 	zz_ef_bk_alloc = { A = dep V = zz_ef_ledger_deposits_v W = zz_ef_bk_w_dep_v BYW = no }
 	zz_ef_bk_alloc = { A = fdd V = zz_ef_fd_dep_v W = zz_ef_bk_w_dep_v BYW = no }
+	zz_ef_bk_alloc = { A = cpd V = zz_ef_comp_dep_v W = zz_ef_bk_w_dep_v BYW = no }
 	zz_ef_bk_alloc = { A = nrd V = zz_ef_nr_dep_v W = zz_ef_bk_w_dep_v BYW = no }
 	zz_ef_bk_alloc = { A = gvd V = zz_ef_bk_c_gvd_v W = zz_ef_bk_w_dep_v BYW = no }
 	zz_ef_bk_alloc = { A = cc V = zz_ef_bk_c_cc_v W = zz_ef_bk_w_dep_v BYW = no }
@@ -360,6 +361,7 @@ zz_ef_bk_sum_check = {
 	set_variable = { name = zz_ef_bk_diff value = 0 }
 	zz_ef_bk_diff_add = { A = dep V = zz_ef_ledger_deposits_v }
 	zz_ef_bk_diff_add = { A = fdd V = zz_ef_fd_dep_v }
+	zz_ef_bk_diff_add = { A = cpd V = zz_ef_comp_dep_v }
 	zz_ef_bk_diff_add = { A = nrd V = zz_ef_nr_dep_v }
 	zz_ef_bk_diff_add = { A = gvd V = zz_ef_bk_c_gvd_v }
 	zz_ef_bk_diff_add = { A = cc V = zz_ef_bk_c_cc_v }
@@ -431,6 +433,7 @@ zz_ef_bk_accounts_move = {
 	save_temporary_scope_as = zz_ef_bk_from
 	zz_ef_bk_acc_move = { A = dep TO = $TO$ }
 	zz_ef_bk_acc_move = { A = fdd TO = $TO$ }
+	zz_ef_bk_acc_move = { A = cpd TO = $TO$ }
 	zz_ef_bk_acc_move = { A = nrd TO = $TO$ }
 	zz_ef_bk_acc_move = { A = gvd TO = $TO$ }
 	zz_ef_bk_acc_move = { A = cc TO = $TO$ }

@@ -145,6 +145,7 @@ zz_ef_bk_w_cbd_v = {
 	value = zz_ef_bk_assets_v
 	if = { limit = { has_variable = zz_ef_bk_dep } subtract = var:zz_ef_bk_dep }
 	if = { limit = { has_variable = zz_ef_bk_fdd } subtract = var:zz_ef_bk_fdd }
+	if = { limit = { has_variable = zz_ef_bk_cpd } subtract = var:zz_ef_bk_cpd }
 	if = { limit = { has_variable = zz_ef_bk_nrd } subtract = var:zz_ef_bk_nrd }
 	if = { limit = { has_variable = zz_ef_bk_gvd } subtract = var:zz_ef_bk_gvd }
 	if = { limit = { has_variable = zz_ef_bk_cap } subtract = var:zz_ef_bk_cap }
@@ -164,6 +165,7 @@ zz_ef_bk_cash_v = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_bk_dep } add = var:zz_ef_bk_dep }
 	if = { limit = { has_variable = zz_ef_bk_fdd } add = var:zz_ef_bk_fdd }
+	if = { limit = { has_variable = zz_ef_bk_cpd } add = var:zz_ef_bk_cpd }
 	if = { limit = { has_variable = zz_ef_bk_nrd } add = var:zz_ef_bk_nrd }
 	if = { limit = { has_variable = zz_ef_bk_gvd } add = var:zz_ef_bk_gvd }
 	if = { limit = { has_variable = zz_ef_bk_cbd } add = var:zz_ef_bk_cbd }
@@ -171,11 +173,12 @@ zz_ef_bk_cash_v = {
 	subtract = zz_ef_bk_assets_v
 }
 # SUBJECT scope (the panel «Инвестиционный пул — Частный банк», gui/ld_cb_rate_panel.gui, Д.R4б.4): its deposits (pops,
-# the fund, foreign CBs, the treasury) and loans (consumer, business)
+# companies, the fund, foreign CBs, the treasury) and loans (consumer, business)
 zz_ef_bk_deposits_v = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_bk_dep } add = var:zz_ef_bk_dep }
 	if = { limit = { has_variable = zz_ef_bk_fdd } add = var:zz_ef_bk_fdd }
+	if = { limit = { has_variable = zz_ef_bk_cpd } add = var:zz_ef_bk_cpd }
 	if = { limit = { has_variable = zz_ef_bk_nrd } add = var:zz_ef_bk_nrd }
 	if = { limit = { has_variable = zz_ef_bk_gvd } add = var:zz_ef_bk_gvd }
 }

@@ -122,6 +122,7 @@ zz_ef_bank_capital = {
 	add = zz_ef_cc_debt
 	add = zz_ef_bank_bonds
 	subtract = zz_ef_pop_deposits
+	subtract = zz_ef_comp_dep_v
 	subtract = zz_ef_bank_cb_debt
 	# other CBs' deposits (our currency they hold)
 	subtract = zz_ef_nr_dep_v
@@ -177,6 +178,7 @@ zz_ef_bank_assets = {
 }
 zz_ef_bank_liabilities = {
 	value = zz_ef_pop_deposits
+	add = zz_ef_comp_dep_v
 	add = zz_ef_fd_dep_v
 	add = zz_ef_bank_cb_debt
 	add = zz_ef_nr_dep_v
