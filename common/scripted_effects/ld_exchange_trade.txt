@@ -703,6 +703,8 @@ zz_ef_xch_buy_put = {
 	if = {
 		limit = {
 			has_variable = zz_ef_xo_bd_$T$_$K$
+			# the debtor chosen may be gone since
+			exists = var:zz_ef_xo_bd_$T$_$K$
 			zz_ef_xch_budget_$T$ > 0
 			NOT = { is_key_in_variable_map = { name = zz_ef_xa_$T$_$K$ target = var:zz_ef_xo_bd_$T$_$K$ } }
 		}

@@ -34,6 +34,8 @@ zz_ef_xch_point_v = {
 	if = {
 		limit = {
 			has_variable = zz_ef_xch
+			# a country that does not step (role V) keeps its exchange's country after it is gone
+			exists = var:zz_ef_xch
 			var:zz_ef_xch = { has_variable = zz_ef_xch_fee_m }
 		}
 		value = var:zz_ef_xch.var:zz_ef_xch_fee_m
