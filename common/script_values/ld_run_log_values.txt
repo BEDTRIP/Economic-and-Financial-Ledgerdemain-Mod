@@ -60,3 +60,81 @@ zz_ef_comp_levels_v = {
 	value = 0
 	every_company = { add = company_owned_levels }
 }
+
+# R4б probe (the engine's market gap by the mod's goods): Σ (sold - bought by the orders) x price of the mod's financial
+# goods (fin), PSC's construction goods (psc) and the metals (metal); the rest of zz_ef_mkt_gap_week -- vanilla goods.
+# Country scope, the market's owner (the EFM line).
+zz_ef_mkt_gap_fin_v = {
+	value = 0
+	add = {
+		value = market.mg:bond.market_goods_sell_orders
+		subtract = market.mg:bond.market_goods_buy_orders
+		multiply = market.mg:bond.zz_ef_mg_price_v
+	}
+	add = {
+		value = market.mg:manufacture_stock.market_goods_sell_orders
+		subtract = market.mg:manufacture_stock.market_goods_buy_orders
+		multiply = market.mg:manufacture_stock.zz_ef_mg_price_v
+	}
+	add = {
+		value = market.mg:agricultural_stock.market_goods_sell_orders
+		subtract = market.mg:agricultural_stock.market_goods_buy_orders
+		multiply = market.mg:agricultural_stock.zz_ef_mg_price_v
+	}
+	add = {
+		value = market.mg:mining_stock.market_goods_sell_orders
+		subtract = market.mg:mining_stock.market_goods_buy_orders
+		multiply = market.mg:mining_stock.zz_ef_mg_price_v
+	}
+	add = {
+		value = market.mg:railroad_stock.market_goods_sell_orders
+		subtract = market.mg:railroad_stock.market_goods_buy_orders
+		multiply = market.mg:railroad_stock.zz_ef_mg_price_v
+	}
+	add = {
+		value = market.mg:mutual_funds.market_goods_sell_orders
+		subtract = market.mg:mutual_funds.market_goods_buy_orders
+		multiply = market.mg:mutual_funds.zz_ef_mg_price_v
+	}
+	add = {
+		value = market.mg:local_currency.market_goods_sell_orders
+		subtract = market.mg:local_currency.market_goods_buy_orders
+		multiply = market.mg:local_currency.zz_ef_mg_price_v
+	}
+	add = {
+		value = market.mg:liquidity_currency.market_goods_sell_orders
+		subtract = market.mg:liquidity_currency.market_goods_buy_orders
+		multiply = market.mg:liquidity_currency.zz_ef_mg_price_v
+	}
+}
+zz_ef_mkt_gap_psc_v = {
+	value = 0
+	add = {
+		value = market.mg:iron_construction.market_goods_sell_orders
+		subtract = market.mg:iron_construction.market_goods_buy_orders
+		multiply = market.mg:iron_construction.zz_ef_mg_price_v
+	}
+	add = {
+		value = market.mg:steel_construction.market_goods_sell_orders
+		subtract = market.mg:steel_construction.market_goods_buy_orders
+		multiply = market.mg:steel_construction.zz_ef_mg_price_v
+	}
+	add = {
+		value = market.mg:arc_welded_construction.market_goods_sell_orders
+		subtract = market.mg:arc_welded_construction.market_goods_buy_orders
+		multiply = market.mg:arc_welded_construction.zz_ef_mg_price_v
+	}
+}
+zz_ef_mkt_gap_metal_v = {
+	value = 0
+	add = {
+		value = market.mg:gold.market_goods_sell_orders
+		subtract = market.mg:gold.market_goods_buy_orders
+		multiply = market.mg:gold.zz_ef_mg_price_v
+	}
+	add = {
+		value = market.mg:silver.market_goods_sell_orders
+		subtract = market.mg:silver.market_goods_buy_orders
+		multiply = market.mg:silver.zz_ef_mg_price_v
+	}
+}

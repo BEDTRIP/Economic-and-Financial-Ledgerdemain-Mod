@@ -130,7 +130,7 @@ zz_ef_mkt_week_log = {
 		limit = { exists = market }
 		if = {
 			limit = { market.owner = this }
-			debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|tag [THIS.GetCountry.GetTagName]|mkt [THIS.GetCountry.GetMarket.GetOwner.GetTagName]|bal [THIS.GetCountry.GetMarket.GetBalance|0]|gap [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mkt_gap_week')|0]|buy [THIS.GetCountry.GetMarket.GetTotalBuyOrders|0]|sell [THIS.GetCountry.GetMarket.GetTotalSellOrders|0]|msh_c [THIS.GetCountry.MakeScope.Var('zz_ef_msh_c').GetValue|4]"
+			debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|tag [THIS.GetCountry.GetTagName]|mkt [THIS.GetCountry.GetMarket.GetOwner.GetTagName]|bal [THIS.GetCountry.GetMarket.GetBalance|0]|gap [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mkt_gap_week')|0]|gap_fin [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mkt_gap_fin_v')|0]|gap_psc [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mkt_gap_psc_v')|0]|gap_metal [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_mkt_gap_metal_v')|0]|buy [THIS.GetCountry.GetMarket.GetTotalBuyOrders|0]|sell [THIS.GetCountry.GetMarket.GetTotalSellOrders|0]|msh_c [THIS.GetCountry.MakeScope.Var('zz_ef_msh_c').GetValue|4]"
 		}
 		else = {
 			debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|tag [THIS.GetCountry.GetTagName]|mkt [THIS.GetCountry.GetMarket.GetOwner.GetTagName]|msh_c [THIS.GetCountry.MakeScope.Var('zz_ef_msh_c').GetValue|4]"
