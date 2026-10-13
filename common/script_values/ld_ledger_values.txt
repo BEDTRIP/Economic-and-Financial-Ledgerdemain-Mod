@@ -107,11 +107,12 @@ zz_ef_lvl_pmult_tr_sum_v = {
 # Д.R4б.25: a step's fall of the pool's part (var:zz_ef_t_lvl < 0) taken as the levels grown's price, at most their
 # count x zz_ef_lvl_price_max (the probe r1013_085559: 45-65K a level in Britain, multiples up to 200K)
 zz_ef_lvl_price_max = 250000
+# (min = a lower bound: the fall, but not below the levels' price; the levels grown -- the larger count, at least 1)
 zz_ef_lvl_buy_grown_v = {
 	value = var:zz_ef_t_lvl
-	max = {
+	min = {
 		value = var:zz_ef_d_complv
-		max = var:zz_ef_d_privlv
+		min = var:zz_ef_d_privlv
 		min = 1
 		multiply = zz_ef_lvl_price_max
 		multiply = -1
