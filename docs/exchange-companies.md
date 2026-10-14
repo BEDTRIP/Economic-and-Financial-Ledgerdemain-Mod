@@ -179,15 +179,15 @@
   (`var:zz_ef_xd_g`; аукцион `zd_f = 0` — половину) в `zz_ef_xmo_to`, `zz_ef_xmo_to_<K>`, сделку в `zz_ef_xmo_n`,
   держатель не страна биржи — в `zz_ef_xmo_fo`; `zz_ef_xch_fee_pay` — комиссию в золоте `zz_ef_xmo_fee`;
   `zz_ef_xch_clear_exchange` — наибольшее за месяц число активов стакана `zz_ef_xmo_as`. Раз в месяц
-  `zz_ef_xch_month_roll` (из `zz_ef_world_month_ef`, без условия логов): каждая страна с `var:zz_ef_xch` оценивает свои
-  карты требований (`zz_ef_xmo_cap_map`: 11 карт `zz_ef_rq_<H>_<K>`; на должнике `zz_ef_xk_gold_<K>_v` — рынок,
-  `zz_ef_xk_base_<K>_v` — без множителей `zz_ef_xmul_m/_b`; пай — оценка × золото единицы) и добавляет бирже в
-  `zz_ef_xmo_cap` / `_capb`, `zz_ef_xmo_mem` + 1; затем у каждой биржи суммы → `var:zz_ef_xlm_*` (доля из-за границы
-  `fo` = `fo` / `to`, перегрев `heat` = `cap` / `capb`), оборот за 12 месяцев `zz_ef_xlm_to_y`, строка
-  `EFD|<биржа>|xch_month`, суммы обнуляются. Меню: `zz_ef_xch_my_to_v`, `zz_ef_xch_my_heat_v` (биржа страны по
-  маршруту); таблица «Биржи мира» (`country_index_variable_in_pts_list`, `08_list_effect.txt`): страны с
-  `zz_ef_has_exchange`, порядок — `zz_ef_xlm_rank_v` (оборот за год, в первый год — месяц × 12), колонки — оборот за
-  год, капитализация, перегрев.
+  `zz_ef_xch_month_roll` (из `zz_ef_world_month_ef`, без условия логов; следом — потери держателей
+  `zz_ef_hl_world_month`, `money-model.md`): каждая страна с `var:zz_ef_xch` оценивает свои карты требований
+  (`zz_ef_xmo_cap_map`: 11 карт `zz_ef_rq_<H>_<K>`; на должнике `zz_ef_xk_gold_<K>_v` — рынок, `zz_ef_xk_base_<K>_v` —
+  без множителей `zz_ef_xmul_m/_b`; пай — оценка × золото единицы) и добавляет бирже в `zz_ef_xmo_cap` / `_capb`,
+  `zz_ef_xmo_mem` + 1; затем у каждой биржи суммы → `var:zz_ef_xlm_*` (доля из-за границы `fo` = `fo` / `to`, перегрев
+  `heat` = `cap` / `capb`), оборот за 12 месяцев `zz_ef_xlm_to_y`, строка `EFD|<биржа>|xch_month`, суммы обнуляются.
+  Меню: `zz_ef_xch_my_to_v`, `zz_ef_xch_my_heat_v` (биржа страны по маршруту); таблица «Биржи мира»
+  (`country_index_variable_in_pts_list`, `08_list_effect.txt`): страны с `zz_ef_has_exchange`, порядок —
+  `zz_ef_xlm_rank_v` (оборот за год, в первый год — месяц × 12), колонки — оборот за год, капитализация, перегрев.
 - `common/scripted_triggers/ld_power_bloc_triggers.txt` — `REPLACE_OR_CREATE:country_can_form_power_bloc` (ваниль + своя
   биржа, Д.R8.7).
 - `common/production_methods/16_ef_financial_centre.txt` + `common/production_method_groups/16_ef_financial_centre.txt`

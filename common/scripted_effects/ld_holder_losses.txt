@@ -1,0 +1,83 @@
+﻿# The holders' losses (R7.6; Д.R7.9; понятия «Группа населения», «Биржа», «Требование»): the pops' claims on the
+# exchange (foreign money, bonds, shares, the fund's shares -- the maps zz_ef_rq_pp_<K>) re-valued monthly at this month's
+# prices against last month's; a fall over zz_ef_hl_min of the portfolio costs the rich pops (wealth from
+# zz_ef_hl_rich_wealth -- those whose needs hold the financial products) zz_ef_hl_levels_k levels of wealth per 100 % lost
+# (add_pop_wealth, whole levels). A rise is not paid back: the gains stay in the holders' deposits when they sell.
+# The price of a unit -- zz_ef_xk_gold_<K>_v of the debtor (a country, a company), in gold; last month's -- var:zz_ef_hl_px_<K>
+# on the debtor (taken after the losses).
+
+# any scope, monthly (zz_ef_world_month_ef), after the exchanges' month
+zz_ef_hl_world_month = {
+	every_country = {
+		limit = { has_variable = zz_ef_pop_savings }
+		zz_ef_hl_country = yes
+	}
+	every_country = {
+		set_variable = { name = zz_ef_hl_px_m value = zz_ef_xk_gold_m_v }
+		set_variable = { name = zz_ef_hl_px_b value = zz_ef_xk_gold_b_v }
+		set_variable = { name = zz_ef_hl_px_f value = zz_ef_xk_gold_f_v }
+	}
+	every_company = {
+		limit = { has_variable = zz_ef_co_shares }
+		set_variable = { name = zz_ef_hl_px_s value = zz_ef_xk_gold_s_v }
+	}
+}
+
+# COUNTRY scope -- the pops' holder
+zz_ef_hl_country = {
+	set_variable = { name = zz_ef_hl_v0 value = 0 }
+	set_variable = { name = zz_ef_hl_v1 value = 0 }
+	save_temporary_scope_as = zz_ef_hl_h
+	zz_ef_hl_map = { MAP = zz_ef_rq_pp_m K = m }
+	zz_ef_hl_map = { MAP = zz_ef_rq_pp_b K = b }
+	zz_ef_hl_map = { MAP = zz_ef_rq_pp_s K = s }
+	zz_ef_hl_map = { MAP = zz_ef_rq_pp_f K = f }
+	set_variable = { name = zz_ef_hl_levels value = 0 }
+	if = {
+		limit = {
+			var:zz_ef_hl_v0 > 0
+			var:zz_ef_hl_v1 < var:zz_ef_hl_v0
+		}
+		set_variable = { name = zz_ef_hl_frac value = { value = var:zz_ef_hl_v0 subtract = var:zz_ef_hl_v1 divide = var:zz_ef_hl_v0 } }
+		if = {
+			limit = { var:zz_ef_hl_frac > zz_ef_hl_min }
+			set_variable = { name = zz_ef_hl_levels value = { value = var:zz_ef_hl_frac multiply = zz_ef_hl_levels_k floor = yes } }
+		}
+		remove_variable = zz_ef_hl_frac
+	}
+	if = {
+		limit = { var:zz_ef_hl_levels >= 1 }
+		every_scope_pop = {
+			limit = { wealth >= zz_ef_hl_rich_wealth }
+			add_pop_wealth = {
+				wealth_distribution = { value = scope:zz_ef_hl_h.var:zz_ef_hl_levels multiply = -1 }
+				update_loyalties = yes
+			}
+		}
+		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|hold_loss|v0 [THIS.GetCountry.MakeScope.Var('zz_ef_hl_v0').GetValue|0]|v1 [THIS.GetCountry.MakeScope.Var('zz_ef_hl_v1').GetValue|0]|levels [THIS.GetCountry.MakeScope.Var('zz_ef_hl_levels').GetValue|0]" }
+	}
+	remove_variable = zz_ef_hl_v0
+	remove_variable = zz_ef_hl_v1
+	remove_variable = zz_ef_hl_levels
+}
+# holder scope, scope:zz_ef_hl_h: the map's holdings at last month's price (var:zz_ef_hl_v0; a debtor with none yet -- at
+# this month's) and at this month's (var:zz_ef_hl_v1), gold
+zz_ef_hl_map = {
+	if = {
+		limit = { has_variable_map = $MAP$ }
+		every_key_in_variable_map = {
+			variable = $MAP$
+			save_temporary_scope_as = zz_ef_rq_key
+			set_variable = { name = zz_ef_hl_p value = zz_ef_xk_gold_$K$_v }
+			set_variable = { name = zz_ef_hl_p0 value = var:zz_ef_hl_p }
+			if = { limit = { has_variable = zz_ef_hl_px_$K$ } set_variable = { name = zz_ef_hl_p0 value = var:zz_ef_hl_px_$K$ } }
+			scope:zz_ef_hl_h = {
+				$MAP$_read = yes
+				change_variable = { name = zz_ef_hl_v1 add = { value = var:zz_ef_rq_h multiply = scope:zz_ef_rq_key.var:zz_ef_hl_p } }
+				change_variable = { name = zz_ef_hl_v0 add = { value = var:zz_ef_rq_h multiply = scope:zz_ef_rq_key.var:zz_ef_hl_p0 } }
+			}
+			remove_variable = zz_ef_hl_p
+			remove_variable = zz_ef_hl_p0
+		}
+	}
+}
