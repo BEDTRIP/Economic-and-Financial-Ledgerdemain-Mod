@@ -1,0 +1,19 @@
+﻿# Probe R6.1: the receiver of gui/ld_probe_co.gui. COMPANY scope: the company's profit and its HQ building's cash
+# reserves as the window reads them. To _archive/ld_probe_co/ after the run.
+ld_probe_co_sg = {
+	scope = company
+	saved_scopes = {
+		pr
+		ca
+	}
+	effect = {
+		set_variable = { name = ld_pc_profit value = scope:pr }
+		set_variable = { name = ld_pc_cash value = scope:ca }
+		if = {
+			limit = { NOT = { has_variable = ld_pc_lv } }
+			set_variable = { name = ld_pc_lv value = 0 }
+		}
+		change_variable = { name = ld_pc_lv add = 1 }
+		remove_list_global_variable = { name = ld_pc_hook target = this }
+	}
+}

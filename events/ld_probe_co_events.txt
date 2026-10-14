@@ -1,0 +1,13 @@
+﻿namespace = ld_probe_co
+
+# Probe R6.1 (common/scripted_effects/ld_probe_co.txt); to _archive/ld_probe_co/ after the run.
+ld_probe_co.1 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		if = {
+			limit = { zz_ef_log_country = yes }
+			ld_probe_co_month = yes
+		}
+	}
+}

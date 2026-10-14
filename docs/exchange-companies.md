@@ -279,3 +279,8 @@
   `_TUS` в другом регистре).
 - `08_list_effect.txt` ссылается на ключи компаний, которых нет в диспетчере `ld_listing_switch.txt` (диспетчер знает
   только 271 тип); ссылки на ключи, которых нет ни в ванили, ни в CMF/ETF, ни в форке, удалены.
+
+**Проба R6.1 (временно, до разбора — в `_archive/ld_probe_co/`):** `common/scripted_effects/ld_probe_co.txt`,
+`events/ld_probe_co_events.txt`, `common/on_actions/ld_probe_co_on_actions.txt`, `common/scripted_guis/ld_probe_co.txt`,
+`gui/ld_probe_co.gui`, `gui/scripted_widgets/ld_probe_co.txt` — переменная, карта и список с ключом-компанией,
+исчезновение компании, прибыль компании и касса ШК из окна; лог `EFZ|…|co_probe|`, `co_comp|`.

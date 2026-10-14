@@ -1,0 +1,26 @@
+﻿# Probe R6.1 (the pattern of gui/ld_bank_hook.gui): an item per company of the global list ld_pc_hook hands
+# Company.GetProfit and Company.GetBuilding.GetCurrentCashReserves to script (scripted_guis/ld_probe_co.txt).
+# To _archive/ld_probe_co/ after the run.
+widget = {
+	name = ld_probe_co_hook
+	datacontext = "[GetMetaPlayer.GetPlayedOrObservedCountry]"
+	visible = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
+	size = { 500 500 }
+	allow_outside = yes
+	alwaystransparent = yes
+	alpha = 1
+
+	flowcontainer = {
+		visible = "[DataModelHasItems(GetGlobalList('ld_pc_hook'))]"
+		datamodel = "[GetGlobalList('ld_pc_hook')]"
+		item = {
+			widget = {
+				datacontext = "[Scope.GetCompany]"
+				state = {
+					trigger_when = "[Scope.IsSet]"
+					on_finish = "[GetScriptedGui('ld_probe_co_sg').Execute( GuiScope.SetRoot( Company.MakeScope ).AddScope( 'pr', MakeScopeValue( Company.GetProfit ) ).AddScope( 'ca', MakeScopeValue( Company.GetBuilding.GetCurrentCashReserves ) ).End )]"
+				}
+			}
+		}
+	}
+}

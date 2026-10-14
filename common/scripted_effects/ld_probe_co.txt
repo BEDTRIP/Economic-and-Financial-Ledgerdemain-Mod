@@ -1,0 +1,124 @@
+﻿# Probe R6.1 (Д.R6.14): where a company's account and the holders of its shares can live. Monthly, the countries of the
+# logs (events/ld_probe_co_events.txt). To _archive/ld_probe_co/ after the run.
+#  (а) a variable on every company of the country (a counter +1 a month), summed by the country;
+#  (б) a map on the country, key -- the company, value -- its counter (the claims register's write: remove the key, add
+#      it again); read by key, iterated (count and sum of the values);
+#  (в) a variable list of the companies on the country; iterated, the companies' counters summed through it;
+#  (г) France's company_dmc removed in May 1836: what is left of its key in the map and in the list, its variable;
+#  (д) the window (gui/ld_probe_co.gui) hands Company.GetProfit and the HQ building's GetCurrentCashReserves to script.
+# Log: EFZ|date|country|co_probe|... and EFZ|date|country|co_comp|<company>|...
+
+# COUNTRY scope, monthly.
+ld_probe_co_month = {
+	save_temporary_scope_as = ld_pc_cty
+	if = {
+		limit = { NOT = { has_variable = ld_pc_added } }
+		set_variable = { name = ld_pc_added value = 0 }
+	}
+	set_variable = { name = ld_pc_comp_n value = 0 }
+	set_variable = { name = ld_pc_sum value = 0 }
+	set_variable = { name = ld_pc_profit value = 0 }
+	set_variable = { name = ld_pc_cash value = 0 }
+	set_variable = { name = ld_pc_got value = 0 }
+	every_company = {
+		if = {
+			limit = { NOT = { has_variable = ld_pc_n } }
+			set_variable = { name = ld_pc_n value = 0 }
+		}
+		change_variable = { name = ld_pc_n add = 1 }
+		save_temporary_scope_as = ld_pc_co
+		scope:ld_pc_cty = {
+			change_variable = { name = ld_pc_comp_n add = 1 }
+			change_variable = { name = ld_pc_sum add = scope:ld_pc_co.var:ld_pc_n }
+			if = {
+				limit = { is_key_in_variable_map = { name = ld_pc_map target = scope:ld_pc_co } }
+				remove_from_variable_map = { name = ld_pc_map key = scope:ld_pc_co }
+			}
+			else = {
+				change_variable = { name = ld_pc_added add = 1 }
+			}
+			add_to_variable_map = { name = ld_pc_map key = scope:ld_pc_co value = scope:ld_pc_co.var:ld_pc_n }
+			if = {
+				limit = { NOT = { is_target_in_variable_list = { name = ld_pc_list target = scope:ld_pc_co } } }
+				add_to_variable_list = { name = ld_pc_list target = scope:ld_pc_co }
+			}
+		}
+		if = {
+			limit = { has_variable = ld_pc_profit }
+			scope:ld_pc_cty = {
+				change_variable = { name = ld_pc_got add = 1 }
+				change_variable = { name = ld_pc_profit add = scope:ld_pc_co.var:ld_pc_profit }
+				change_variable = { name = ld_pc_cash add = scope:ld_pc_co.var:ld_pc_cash }
+			}
+			debug_log = "EFZ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCompany.GetCountry.GetNameNoFormatting]|co_comp|[THIS.GetCompany.GetNameNoFormatting]|n [THIS.GetCompany.MakeScope.Var('ld_pc_n').GetValue|0]|profit [THIS.GetCompany.MakeScope.Var('ld_pc_profit').GetValue|0]|cash [THIS.GetCompany.MakeScope.Var('ld_pc_cash').GetValue|0]|lv [THIS.GetCompany.MakeScope.Var('ld_pc_lv').GetValue|0]"
+		}
+		if = {
+			limit = { NOT = { is_target_in_global_variable_list = { name = ld_pc_hook target = this } } }
+			add_to_global_variable_list = { name = ld_pc_hook target = this }
+		}
+	}
+	# (б) the map: iterate, read by key
+	set_variable = { name = ld_pc_map_it value = 0 }
+	set_variable = { name = ld_pc_map_sum value = 0 }
+	every_key_in_variable_map = {
+		variable = ld_pc_map
+		save_temporary_scope_as = ld_pc_k
+		scope:ld_pc_cty = {
+			change_variable = { name = ld_pc_map_it add = 1 }
+			set_variable = { name = ld_pc_rd value = "variable_map(ld_pc_map|scope:ld_pc_k)" }
+			change_variable = { name = ld_pc_map_sum add = var:ld_pc_rd }
+		}
+	}
+	# (в) the list
+	set_variable = { name = ld_pc_list_it value = 0 }
+	set_variable = { name = ld_pc_list_sum value = 0 }
+	set_variable = { name = ld_pc_list_var value = 0 }
+	every_in_list = {
+		variable = ld_pc_list
+		scope:ld_pc_cty = { change_variable = { name = ld_pc_list_it add = 1 } }
+		if = {
+			limit = { has_variable = ld_pc_n }
+			scope:ld_pc_cty = { change_variable = { name = ld_pc_list_var add = 1 } }
+			scope:ld_pc_cty = { change_variable = { name = ld_pc_list_sum add = prev.var:ld_pc_n } }
+		}
+	}
+	set_variable = { name = ld_pc_size_ok value = 0 }
+	if = {
+		limit = { variable_map_size = { name = ld_pc_map value = var:ld_pc_added } }
+		set_variable = { name = ld_pc_size_ok value = 1 }
+	}
+	set_variable = { name = ld_pc_lsize_ok value = 0 }
+	if = {
+		limit = { variable_list_size = { name = ld_pc_list target = var:ld_pc_added } }
+		set_variable = { name = ld_pc_lsize_ok value = 1 }
+	}
+	# (г) the removed company
+	if = {
+		limit = {
+			c:FRA ?= this
+			NOT = { has_variable = ld_pc_removed }
+			has_company = company_type:company_dmc
+			game_date >= 1836.5.1
+		}
+		company:company_dmc = { save_temporary_scope_as = ld_pc_dead }
+		set_variable = { name = ld_pc_dead value = scope:ld_pc_dead }
+		set_variable = { name = ld_pc_removed value = 1 }
+		remove_company = company_type:company_dmc
+		debug_log = "EFZ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|co_probe|removed company_dmc"
+	}
+	if = {
+		limit = { has_variable = ld_pc_dead }
+		set_variable = { name = ld_pc_dead_key value = 0 }
+		set_variable = { name = ld_pc_dead_list value = 0 }
+		if = {
+			limit = { is_key_in_variable_map = { name = ld_pc_map target = var:ld_pc_dead } }
+			set_variable = { name = ld_pc_dead_key value = 1 }
+		}
+		if = {
+			limit = { is_target_in_variable_list = { name = ld_pc_list target = var:ld_pc_dead } }
+			set_variable = { name = ld_pc_dead_list value = 1 }
+		}
+		debug_log = "EFZ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|co_probe|dead|key [THIS.GetCountry.MakeScope.Var('ld_pc_dead_key').GetValue|0]|list [THIS.GetCountry.MakeScope.Var('ld_pc_dead_list').GetValue|0]|name [THIS.GetCountry.MakeScope.Var('ld_pc_dead').GetCompany.GetNameNoFormatting]|n [THIS.GetCountry.MakeScope.Var('ld_pc_dead').GetCompany.MakeScope.Var('ld_pc_n').GetValue|0]"
+	}
+	debug_log = "EFZ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|co_probe|comps [THIS.GetCountry.MakeScope.Var('ld_pc_comp_n').GetValue|0]|sum [THIS.GetCountry.MakeScope.Var('ld_pc_sum').GetValue|0]|added [THIS.GetCountry.MakeScope.Var('ld_pc_added').GetValue|0]|map_it [THIS.GetCountry.MakeScope.Var('ld_pc_map_it').GetValue|0]|map_sum [THIS.GetCountry.MakeScope.Var('ld_pc_map_sum').GetValue|0]|size_ok [THIS.GetCountry.MakeScope.Var('ld_pc_size_ok').GetValue|0]|list_it [THIS.GetCountry.MakeScope.Var('ld_pc_list_it').GetValue|0]|list_var [THIS.GetCountry.MakeScope.Var('ld_pc_list_var').GetValue|0]|list_sum [THIS.GetCountry.MakeScope.Var('ld_pc_list_sum').GetValue|0]|lsize_ok [THIS.GetCountry.MakeScope.Var('ld_pc_lsize_ok').GetValue|0]|got [THIS.GetCountry.MakeScope.Var('ld_pc_got').GetValue|0]|profit [THIS.GetCountry.MakeScope.Var('ld_pc_profit').GetValue|0]|cash [THIS.GetCountry.MakeScope.Var('ld_pc_cash').GetValue|0]"
+}
