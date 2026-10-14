@@ -1,0 +1,7 @@
+# Из common/alert_types/PSC_alert_types.txt (R9.1, аудит PSC): условие REPLACE:insufficient_construction_for_investment,
+# заменено на valid = { always = no } (construction_demand_ratio всегда 0 -- алерт не срабатывал).
+
+	valid = {
+		has_sufficient_construction_capacity_for_investment = no
+		construction_demand_ratio > define:NEconomy|BUY_SELL_DIFF_AT_MAX_FACTOR
+	}

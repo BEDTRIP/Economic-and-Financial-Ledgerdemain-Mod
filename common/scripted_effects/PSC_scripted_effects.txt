@@ -44,21 +44,6 @@
 #Scope: Country
 set_construction_point_demand = {
     if = {
-        limit = {
-            has_variable = num_runs
-        }
-        change_variable = {
-            name = num_runs
-            add = 1
-        }
-    }
-    else = {
-        set_variable = {
-            name = num_runs
-            value = 1
-        }
-    }
-    if = {
         limit = { 
             has_technology_researched = urbanization
         }
@@ -130,12 +115,14 @@ set_construction_point_demand = {
                     add = scope:temp_production
                 }
             }
+            # the state's weight -- the value of its output at the base price, so every state gets the same money per
+            # unit of value (Д.R8в.27, Д.R9.5)
             owner = {
                 change_variable = {
                     name = weighted_total
                     add = {
                         value = scope:temp_production
-                        divide = scope:state_base_price
+                        multiply = scope:state_base_price
                     }
                 }
             }
@@ -279,39 +266,12 @@ set_construction_point_demand = {
 }
 
 #Scope: State
+# the regulator only grows to the sector's level (Д.R8в.27, Д.R9.5): a removed building comes back empty and hires anew;
+# levels above the need only lower its throughput (construction_throughput_mult)
 set_construction_regulator_level = {
     set_local_variable = {
         name = regulator_level
         value = construction_regulator_level
-    }
-    if = {
-        limit = {
-                state_has_building_type_levels = {
-                    target = bt:building_construction_regulator
-                    value > local_var:regulator_level
-                }
-        }
-        if = {
-            limit = {
-                OR = {
-                    NOT = {
-                        has_variable = week_count
-                    }
-                    var:week_count >= 4  
-                }
-            }
-            remove_building = "building_construction_regulator"
-            set_variable = {
-                name = week_count
-                value = 0
-            }
-        }
-        else = {
-            change_variable = {
-                name = week_count
-                add = 1
-            }
-        }
     }
     if = {
         limit = {

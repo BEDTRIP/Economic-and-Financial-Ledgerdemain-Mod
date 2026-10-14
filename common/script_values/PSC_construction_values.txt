@@ -60,6 +60,9 @@ privatisation_spending_percent_weekly = {
 	}
 }
 
+# Scope: State. The state's part of the country's construction spending: by the value of its output (output x the base
+# price, as weighted_total -- Д.R8в.27, Д.R9.5); never below 0 nor above what the states before it left
+# (var:psc_remaining_construction_spending of the country).
 state_construction_spending_allocation = {
 	# the same arithmetic without scope-change blocks (owner = { value = … } gave 'none', error.log)
 	value = owner.var:total_construction_spending
@@ -88,7 +91,7 @@ state_construction_spending_allocation = {
 	}
 	else = {
 		multiply = var:state_construction_production
-		divide = local_var:state_construction_base_price
+		multiply = local_var:state_construction_base_price
 
 		# demand only a limited amount more than is possible in this state
 		max = {
@@ -119,6 +122,8 @@ state_construction_spending_allocation = {
 			}
 		}
 	}
+	max = owner.var:psc_remaining_construction_spending
+	min = 0
 }
 
 construction_ordering = {
@@ -210,11 +215,6 @@ ai_construction_demand = {
 			divide = 5 # 1/5 of income on construction
 		}
 	}
-}
-
-construction_demand_ratio = {
-	# PSC sets no nominal construction demand -- the alert reads 0
-	value = 0
 }
 
 construction_regulator_level = {
@@ -421,6 +421,9 @@ recurse_n2 = {
 	value = recurse_n
 }
 
+# Construction efficiency of the state per staffed level of its construction sector (capped by
+# calculate_construction_sector_max_level): about ten times the game's per level of the method
+# (production_methods/13_construction.txt: 0.002 / 0.004 / 0.007 / 0.01), so a newer method never lowers it
 goods_efficiency_per_level = {
 	b:building_construction_sector = {
 		if = {
@@ -439,10 +442,10 @@ goods_efficiency_per_level = {
 			limit = {
 				has_active_production_method = pm_steel_frame_buildings
 			}
-			value = 0.007
+			value = 0.07
 		}
 		else = {
-			value = 0.01
+			value = 0.1
 		}
 	}
 }

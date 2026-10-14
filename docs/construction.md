@@ -1,8 +1,8 @@
 # Стройка (PSC + E&F private construction + лимит секторов)
 **Смысл.** Стройка — PSC внутри форка: частный сектор и казна платят за строительные товары, частная стройка — кредит
 банков из пула, рычаг — ставка. **Понятия:** [[Строительство|Стройка]], [[Инвестиционный пул|Пул]], [[Ставка ЦБ]],
-[[Рычаги на движок]]. **Решения:** Д.R3.7, Д.R2.13, Д.Г.6, Д.Г.7 (`решения.md`); отменённые Д.R8в.24, Д.R8в.26, Д.R8в.27
-— `этапы/R9.md`, «Перенесено».
+[[Рычаги на движок]]. **Решения:** Д.R3.7, Д.R2.13, Д.Г.6, Д.Г.7, Д.R9.5 (аудит PSC; правила — Д.R8в.27)
+(`решения.md`); отменённые Д.R8в.24, Д.R8в.26 — `этапы/R9.md`, «Перенесено».
 
 Частный сектор строит через здание `building_construction_sector` (PSC), казна платит остаток через регулятор очков
 `building_construction_regulator`; делёж долей (частные/государственные очки стройки) пересчитывается раз в неделю.
@@ -40,8 +40,9 @@
   `PSC_production_method_building_switch.txt` — разнос запуска по дням недели; создание регулятора с нужным PM.
 - `common/script_values/PSC_construction_values.txt` — расчёт трат/долей/эффективности (корень
   `calculate_total_construction_spending`, `privatisation_spending_percent`, `state_construction_spending_allocation`,
-  `state_construction_allocation`, `construction_ordering`, `ai_construction_demand`, `construction_demand_ratio` = 0 —
-  его переменную никто не задаёт, `_archive/ld_dead_readers/`, sqrt-рекурсия). `PSC_set_values.txt` — константы;
+  `state_construction_allocation`, `construction_ordering`, `ai_construction_demand`, `goods_efficiency_per_level` —
+  эффективность стройки штата на уровень сектора, около ×10 ванильной по методу: 0,02 / 0,035 / 0,07 / 0,1;
+  sqrt-рекурсия). `PSC_set_values.txt` — константы;
   `PSC_event_values.txt` — календарь недели.
 - `common/scripted_guis/PSC_construction_sguis.txt` — кнопки уровня трат (`psc_button_*_sgui`),
   `psc_save_real_construction_cost`, `psc_test_show`.
@@ -118,8 +119,9 @@
    - `private_construction_increase` (в форке = `zz_ef_psc_private_target - corrected_private_allocation`) кладётся
      модификатором `country_private_construction_allocation_add`;
    - `total_construction_spending` и по штатам в порядке `construction_ordering` (`ordered_scope_state`: `min = 0`,
-     `max = 1000`, `check_range_bounds = no` — все штаты): `set_construction_regulator_level` (подгон уровня регулятора,
-     `week_count` 4), `state_construction_spending_allocation` (доля штата, не больше остатка трат страны
+     `max = 1000`, `check_range_bounds = no` — все штаты): `set_construction_regulator_level` (регулятор растёт до
+     уровня сектора, не сносится — Д.R8в.27), `state_construction_spending_allocation` (доля штата — по стоимости его
+     выпуска: выпуск × базовая цена / `weighted_total`; от 0 до остатка трат страны
      `var:psc_remaining_construction_spending` — переменная страны, уменьшается после каждого штата и снимается после
      цикла), `set_state_construction_efficiency` (модификатор на сектор), `state_construction_allocation` ->
      `construction_throughput_mult` на регуляторе;
@@ -143,8 +145,7 @@
 | `real_construction_spending` | фактические траты (из GUI) | `psc_save_real_construction_cost` | `calculate_government_construction_spending` |
 | `privatisation_percent_estimate`, `prev_estimated_investment_pool` | доля пула, прошлая оценка | `set_construction_point_demand` | `privatisation_spending_percent*`, `zz_ef_psc_private_income` |
 | `corrected_private_allocation`, `prev_construction_allocation`, `weekly_income_multiplier` | поправка долей | `set_construction_point_demand` | `private_construction_increase`, `calculate_max_government_construction_spending` |
-| `national_production`, `weighted_total`, `state_construction_production` | производство стройтоваров (страна/штат) | `set_construction_point_demand` | аллокации |
-| `week_count` (штат) | счётчик сноса лишнего регулятора | `set_construction_regulator_level` | оно же |
+| `national_production`, `weighted_total`, `state_construction_production` | производство стройтоваров (страна/штат); `weighted_total` — сумма выпуск × базовая цена по штатам | `set_construction_point_demand` | аллокации |
 | `speculative_share_2` | штраф перестройки 0..100 (общая с E&F-кнопками/журналом) | `zz_pb_ef_overbuild_counter`, кнопки 9..12 | downsize, ban-кнопки, `speculative_share_2_penality`, JE-бар |
 | `zz_pb_ef_ob_old` | прошлое значение | counter | counter |
 | `zz_pb_ef_stimulus_mult` (таймер 1080 дн.) | множитель ставки в лимите вместо 5 | `speculative_share_9..12_button` | `zz_pb_ef_css_rate_mult` |
@@ -166,14 +167,15 @@
 - Покупатели `*_construction`: регулятор (очки), домохозяйства (`popneed_household_construction`), ЖКХ (4 PM городских
   центров).
 - GUI: панель стройки (`construction_panel`), журнал FSO (`financial_center_je_2`: `zz_pb_ef_fso_bubble_widget`,
-  `zz_pb_ef_fso_overcap_widget`, sgui `zz_pb_ef_fso_*`, `zz_pb_ef_css_private_{ban,allow}_sgui`), алерт
-  `insufficient_construction_for_investment`.
+  `zz_pb_ef_fso_overcap_widget`, sgui `zz_pb_ef_fso_*`, `zz_pb_ef_css_private_{ban,allow}_sgui`); алерт
+  `insufficient_construction_for_investment` выключен (`valid = { always = no }`: пул при стройке PSC не «простаивает»;
+  снятое — `_archive/psc_audit_r9/`).
 - ИИ-цены: `ai_construction_sector_price_pressure_bonus` в `ai_value` сектора.
 
 ## Логи
 `EFZ` (при логах, раз в неделю PSC на страну, `zz_ef_psc_log` в `common/scripted_effects/ld_psc_log.txt`): `total` —
 траты на стройку, `alloc` — роздано штатам, `pts` — очки, купленные на них, `rest` — не роздано, `prod` — выпуск
-стройтоваров страны, `gov` — государственная часть трат, `wtot` — сумма выпуск / базовая цена по штатам. Уведомление
+стройтоваров страны, `gov` — государственная часть трат, `wtot` — сумма выпуск × базовая цена по штатам. Уведомление
 игроку: `zz_pb_ef_overbuild_rising` (рост полосы `speculative_share_2` на 10).
 
 ## Прочие файлы

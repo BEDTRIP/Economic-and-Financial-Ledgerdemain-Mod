@@ -1,0 +1,50 @@
+# Из common/scripted_effects/PSC_scripted_effects.txt (R9.1, аудит PSC).
+
+# 1. Начало set_construction_point_demand -- счётчик прогонов (никто не читает):
+    if = {
+        limit = {
+            has_variable = num_runs
+        }
+        change_variable = {
+            name = num_runs
+            add = 1
+        }
+    }
+    else = {
+        set_variable = {
+            name = num_runs
+            value = 1
+        }
+    }
+
+# 2. Начало set_construction_regulator_level, после set_local_variable regulator_level -- снос регулятора, у которого
+#    уровней больше, чем у сектора штата (через 4 недели; следующий блок того же эффекта строил его заново пустым):
+    if = {
+        limit = {
+                state_has_building_type_levels = {
+                    target = bt:building_construction_regulator
+                    value > local_var:regulator_level
+                }
+        }
+        if = {
+            limit = {
+                OR = {
+                    NOT = {
+                        has_variable = week_count
+                    }
+                    var:week_count >= 4  
+                }
+            }
+            remove_building = "building_construction_regulator"
+            set_variable = {
+                name = week_count
+                value = 0
+            }
+        }
+        else = {
+            change_variable = {
+                name = week_count
+                add = 1
+            }
+        }
+    }
