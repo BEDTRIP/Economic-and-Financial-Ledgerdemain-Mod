@@ -221,7 +221,7 @@ zz_ef_bk_book_step = {
 	if = {
 		limit = { zz_ef_logs_on = yes }
 		zz_ef_bk_sum_check = yes
-		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|bank_sum|diff [THIS.GetCountry.MakeScope.Var('zz_ef_bk_diff').GetValue|2]|map_diff [THIS.GetCountry.MakeScope.Var('zz_ef_bk_mdiff').GetValue|2]|n [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bk_subj_n_v')|0]|r_cap [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_cap').GetValue|0]|r_dep [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_dep').GetValue|0]|r_cc [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_cc').GetValue|0]|r_bc [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_bc').GetValue|0]|r_cbd [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_cbd').GetValue|0]|r_inv [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_inv').GetValue|0]|r_mg [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_mg').GetValue|0]|capital [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bk_c_cap_v')|0]|cap_ratio [THIS.GetCountry.MakeScope.Var('zz_ef_bk_capr').GetValue|3]|lev [THIS.GetCountry.MakeScope.Var('zz_ef_bk_lev').GetValue|1]|free [THIS.GetCountry.MakeScope.Var('zz_ef_bk_free_cr').GetValue|0]|over [THIS.GetCountry.MakeScope.Var('zz_ef_bk_over').GetValue|0]|bc_rate [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bc_rate_v')|4]"
+		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|bank_sum|diff [THIS.GetCountry.MakeScope.Var('zz_ef_bk_diff').GetValue|2]|map_diff [THIS.GetCountry.MakeScope.Var('zz_ef_bk_mdiff').GetValue|2]|n [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bk_subj_n_v')|0]|r_cap [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_cap').GetValue|0]|r_dep [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_dep').GetValue|0]|r_cc [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_cc').GetValue|0]|r_bc [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_bc').GetValue|0]|r_cbd [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_cbd').GetValue|0]|r_inv [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_inv').GetValue|0]|r_mg [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_mg').GetValue|0]|capital [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bk_c_cap_v')|0]|cap_ratio [THIS.GetCountry.MakeScope.Var('zz_ef_bk_capr').GetValue|3]|lev [THIS.GetCountry.MakeScope.Var('zz_ef_bk_lev').GetValue|1]|free [THIS.GetCountry.MakeScope.Var('zz_ef_bk_free_cr').GetValue|0]|pfree [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pool_free')|0]|over [THIS.GetCountry.MakeScope.Var('zz_ef_bk_over').GetValue|0]|bc_rate [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bc_rate_v')|4]"
 		if = {
 			limit = { zz_ef_log_country = yes }
 			every_in_list = {
@@ -582,10 +582,11 @@ zz_ef_bk_fail_step = {
 # The banks' capital above the norm -- to their owners (Д.R9.3; понятие «Банки»): once a month a subject's capital above
 # zz_ef_bk_cap_norm of its earning assets (zz_ef_bk_div_due_v) goes -- a company subject's to its company's account
 # (zz_ef_co_acc, the companies' deposits zz_ef_comp_dep), «частные банкиры»' to the pops' deposits and savings (the
-# deposits' card line of dividends, zz_ef_f_bk_div_pop), «госбанки»' to the treasury out of the pool (at most the
-# pool; zz_ef_f_bk_div_tr, the pool's and the treasury's cards). The book holds: capital -> deposits leaves the pool
-# as it is, capital and the pool -> the treasury moves both; the subject's capital falls with the country's (the week's
-# residual stays 0). Log EFJ|bank_div. COUNTRY scope, its monthly pulse (zz_ef_bank_monthly), after the bankruptcies.
+# deposits' card line of dividends, zz_ef_f_bk_div_pop), «госбанки»' to the treasury out of the pool's free money (Д.R9.9,
+# zz_ef_pool_free: the pool under construction and credit stays; zz_ef_f_bk_div_tr, the pool's and the treasury's
+# cards), what is not paid stays capital. The book holds: capital -> deposits leaves the pool as it is, capital and the
+# pool -> the treasury moves both; the subject's capital falls with the country's (the week's residual stays 0). Log
+# EFJ|bank_div. COUNTRY scope, its monthly pulse (zz_ef_bank_monthly), after the bankruptcies.
 zz_ef_bk_div_step = {
 	if = {
 		limit = {
@@ -597,7 +598,7 @@ zz_ef_bk_div_step = {
 		set_variable = { name = zz_ef_bk_dv_co value = 0 }
 		set_variable = { name = zz_ef_bk_dv_pop value = 0 }
 		set_variable = { name = zz_ef_bk_dv_tr value = 0 }
-		set_variable = { name = zz_ef_bk_dv_room value = { value = investment_pool min = 0 } }
+		set_variable = { name = zz_ef_bk_dv_room value = zz_ef_pool_free }
 		# the subjects' books are the last week's: their dues are cut so the country's capital keeps the subjects' norm
 		# (var:zz_ef_bk_dv_k = (capital - the norms) / the dues, 0..1)
 		set_variable = { name = zz_ef_bk_dv_due value = 0 }
@@ -632,7 +633,10 @@ zz_ef_bk_div_step = {
 				else_if = {
 					limit = { var:zz_ef_bk_kind ?= flag:gov }
 					set_variable = { name = zz_ef_bk_dv value = { value = var:zz_ef_bk_dv max = scope:zz_ef_bk_c.var:zz_ef_bk_dv_room } }
-					scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_dv_tr add = prev.var:zz_ef_bk_dv } }
+					scope:zz_ef_bk_c = {
+						change_variable = { name = zz_ef_bk_dv_tr add = prev.var:zz_ef_bk_dv }
+						change_variable = { name = zz_ef_bk_dv_room subtract = prev.var:zz_ef_bk_dv }
+					}
 				}
 				else = {
 					scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_dv_pop add = prev.var:zz_ef_bk_dv } }
@@ -659,7 +663,7 @@ zz_ef_bk_div_step = {
 		change_variable = { name = zz_ef_f_bk_div_tr add = var:zz_ef_bk_dv_tr }
 		if = {
 			limit = { zz_ef_logs_on = yes }
-			debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|bank_div|co [THIS.GetCountry.MakeScope.Var('zz_ef_bk_dv_co').GetValue|0]|pop [THIS.GetCountry.MakeScope.Var('zz_ef_bk_dv_pop').GetValue|0]|tr [THIS.GetCountry.MakeScope.Var('zz_ef_bk_dv_tr').GetValue|0]|capital [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bk_c_cap_v')|0]|cap_ratio [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bk_cty_capr_v')|3]"
+			debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|bank_div|co [THIS.GetCountry.MakeScope.Var('zz_ef_bk_dv_co').GetValue|0]|pop [THIS.GetCountry.MakeScope.Var('zz_ef_bk_dv_pop').GetValue|0]|tr [THIS.GetCountry.MakeScope.Var('zz_ef_bk_dv_tr').GetValue|0]|pfree [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pool_free')|0]|capital [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bk_c_cap_v')|0]|cap_ratio [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bk_cty_capr_v')|3]"
 		}
 		remove_variable = zz_ef_bk_dv_room
 		remove_variable = zz_ef_bk_dv_due

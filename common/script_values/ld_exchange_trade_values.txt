@@ -8,12 +8,14 @@ zz_ef_xq_top = 9
 # a position under this share of the holder's portfolio is offered at the lowest step -- it goes first (Д.R8б.22)
 zz_ef_xch_small_share = 0.01
 # a holder's buying budget of a week, a share of its free money: the CB -- of its metal in money, the banks -- of their
-# capital (for money and for bonds each), the pops -- of their deposits; the banks and the pops -- at most this share
-# of the pool
+# capital (for money, bonds and shares each), the pops -- of their deposits; the banks and the pops -- at most this
+# share of the pool; the banks -- at most this share of the pool's free money for each of the three kinds (Д.R9.9,
+# zz_ef_pool_free; a third each -- принято ночью)
 zz_ef_xch_buy_share_cb = 0.01
 zz_ef_xch_buy_share_bk = 0.01
 zz_ef_xch_buy_share_pp = 0.005
 zz_ef_xch_buy_pool_cap = 0.1
+zz_ef_xch_bk_free_share = 0.33
 # the share of the banks' loan to our government (our own bonds) they offer on the exchange a week (Д.R6.6; принято
 # ночью)
 zz_ef_xch_ob_share = 0.01
@@ -323,6 +325,10 @@ zz_ef_xch_budget_bk = {
 		max = {
 			value = investment_pool
 			multiply = zz_ef_xch_buy_pool_cap
+		}
+		max = {
+			value = zz_ef_pool_free
+			multiply = zz_ef_xch_bk_free_share
 		}
 		min = 0
 	}

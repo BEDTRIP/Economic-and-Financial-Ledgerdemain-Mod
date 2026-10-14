@@ -190,6 +190,26 @@ zz_ef_pool_need = {
 	}
 	multiply = 13
 }
+# The pool's free money (Д.R9.9, Д.R9б.2; понятие «Банки»): the pool less the banks' need and less the free credit
+# limit within zz_ef_psc_credit_weeks of the new business credit (the private construction's lever, Д.R9.2,
+# ld_psc_private_allocation.txt) -- what neither construction nor the next quarter's credit needs. The banks' exchange
+# budget (zz_ef_xch_budget_bk) and «госбанки»' payout to the treasury (zz_ef_bk_div_step) come only out of it.
+zz_ef_pool_free = {
+	value = investment_pool
+	subtract = zz_ef_pool_need
+	if = {
+		limit = { has_variable = zz_ef_bk_free_cr }
+		subtract = {
+			value = var:zz_ef_bk_free_cr
+			max = {
+				value = zz_ef_v_f_bc_new
+				multiply = zz_ef_psc_credit_weeks
+			}
+			min = 0
+		}
+	}
+	min = 0
+}
 # Pool over its need, in needs (0 = no idle money).
 zz_ef_pool_idle = {
 	value = 0
