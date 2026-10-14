@@ -214,11 +214,12 @@
 
 ## Поток / порядок
 `on_monthly_pulse_country` → `zz_ef_capitalization_monthly` (`ld_capitalization_on_actions.txt`), страна, по порядку:
-1. `zz_ef_rich_literacy_update` — один проход по попам: `zz_ef_literate_rich_share`, `zz_ef_rich_literacy`.
+1. `zz_ef_rich_literacy_update` — один проход по попам: `zz_ef_literate_rich_share`, `zz_ef_rich_literacy`; доля
+   маргиналов `zz_ef_marg` (Д.R7.7, читает цель наличных — `money-model.md`).
 2. `zz_ef_listing_update` — если `zz_ef_listing_allowed`: ШК (`bg_company_headquarter`) по возрастанию уровня
    переводятся в `pm_company_headquarter_publicly_traded`, пока накопленные уровни < всех уровней ШК ×
-   `zz_ef_rich_literacy`; остальные — `pm_company_headquarter_privately_owned`; компания ШК метится
-   `zz_ef_listing_mark` (листинг, IPO — «Акции»). Без разрешения — все ШК в частные, метки сняты.
+   `zz_ef_rich_literacy`; остальные — `pm_company_headquarter_privately_owned`; компания ШК метится `zz_ef_listing_mark`
+   (листинг, IPO — «Акции»). Без разрешения — все ШК в частные, метки сняты.
 3. `zz_ef_cap_monthly_update` — снимок = `zz_ef_cap_listed_snapshot` (акции публичных компаний по рыночной цене,
    `zz_ef_co_cap_mkt_v`; Д.R6.12) делится на 4 «акции» E&F поровну, обновляются `zz_ef_cap_avg_{ms,as,mn,rr}` (вес
    0.0833), `zz_ef_cap_half` (вес 0.1667).
@@ -281,56 +282,54 @@
 
 **Счёт компании** (Д.R6.7; [[Компания]]): `common/scripted_effects/ld_company_accounts.txt`,
 `common/script_values/ld_company_accounts_values.txt`. Счёт — вклад компании в банках страны, `var:zz_ef_co_acc` на
-компании (в деньгах страны); вклады компаний страны `var:zz_ef_comp_dep` (книга банков, M2) = счета существующих компаний
-+ собиратель — частный сектор вне компаний, `zz_ef_co_rest_v` (остаток; счёт исчезнувшей компании становится его частью
-сам, переменные компании уходят с ней). Раз в месяц (`zz_ef_co_month_step`, из `zz_ef_money_model_monthly_step`):
-уровни компании `var:zz_ef_co_lv` = `company_owned_levels`, сумма `var:zz_ef_co_lv_sum`, доля в частных уровнях
-`var:zz_ef_co_share` (`zz_ef_priv_levels`, не больше 1), приход прошлого месяца `var:zz_ef_co_in_last`. Приход:
-`zz_ef_co_credit_lv = { V }` — по уровням на счета и в `zz_ef_comp_dep`: доля взносов в пул (`zz_ef_f_co_contrib`,
-`zz_ef_pop_deposits_step`), доля возврата сгоревшего (`zz_ef_co_leak_back`; остаток — собирателю); снятие
-`zz_ef_co_take = { V }` — со всех счетов и собирателя одной долей. Лог `EFJ|…|comp` — `acc`, `in`; `comp_sum` —
-`comp_dep`, `acc_sum`, `rest`, `share`, `bc_debt`, `co_debt`. Карточка вкладов — строкой (генератор
-`regen_ef_money_supply_loc.py`).
-**Кредит компаний** (Д.R6.9, Д.R6.13): деловой кредит страны `zz_ef_bc_debt` (`zz_ef_business_credit_step`,
-`ld_money_model.txt`; вся частная стройка пула сверх нового кредита — тоже он) — компаний по доле уровней:
-`zz_ef_co_debt_v` (компания) = долг × `zz_ef_co_lv_part_v` (её уровни / уровни компаний × `zz_ef_co_share`), остальное
-— собирателя; сумма по компаниям `zz_ef_co_debt_sum_v`. Обслуживание недели (`zz_ef_f_bc_paid`, из взносов в пул) —
-доля компаний `zz_ef_f_co_paid` со счетов по уровням (`zz_ef_co_pay_lv`; взносы им приходят той же долей раньше в том
-же шаге), остальное — из доли населения во взносах. Счёт меньше процентов месяца (`zz_ef_co_int_month_v`, ставка
-`zz_ef_cc_rate`) — `var:zz_ef_co_distress` на компании (банкротство — R11). Лог `comp`: `out` (расход месяца), `debt`,
-`distress`.
-**Дивиденды** (Д.R6.8): раз в месяц (`zz_ef_co_month_step`) счёт сверх нормы — `zz_ef_co_reserve_months` (3, принято
-ночью) месяцев расхода (обслуживание кредита) — владельцам из населения: вклады и сбережения населения (один агрегат —
-категория компании игры пока не делит), `zz_ef_comp_dep` убывает; `var:zz_ef_f_co_div` (окно `zz_ef_w_co_div` — строка
-карточки вкладов), на компании `var:zz_ef_co_div_last` (лог `comp`: `div`). Держатели акций — шаг 6.
+компании (в деньгах страны); вклады компаний страны `var:zz_ef_comp_dep` (книга банков, M2) = счета существующих
+компаний + собиратель — частный сектор вне компаний, `zz_ef_co_rest_v` (остаток; счёт исчезнувшей компании становится
+его частью сам, переменные компании уходят с ней). Раз в месяц (`zz_ef_co_month_step`, из
+`zz_ef_money_model_monthly_step`): уровни компании `var:zz_ef_co_lv` = `company_owned_levels`, сумма
+`var:zz_ef_co_lv_sum`, доля в частных уровнях `var:zz_ef_co_share` (`zz_ef_priv_levels`, не больше 1), приход прошлого
+месяца `var:zz_ef_co_in_last`. Приход: `zz_ef_co_credit_lv = { V }` — по уровням на счета и в `zz_ef_comp_dep`: доля
+взносов в пул (`zz_ef_f_co_contrib`, `zz_ef_pop_deposits_step`), доля возврата сгоревшего (`zz_ef_co_leak_back`; остаток
+— собирателю); снятие `zz_ef_co_take = { V }` — со всех счетов и собирателя одной долей. Лог `EFJ|…|comp` — `acc`, `in`;
+`comp_sum` — `comp_dep`, `acc_sum`, `rest`, `share`, `bc_debt`, `co_debt`. Карточка вкладов — строкой (генератор
+`regen_ef_money_supply_loc.py`). **Кредит компаний** (Д.R6.9, Д.R6.13): деловой кредит страны `zz_ef_bc_debt`
+(`zz_ef_business_credit_step`, `ld_money_model.txt`; вся частная стройка пула сверх нового кредита — тоже он) — компаний
+по доле уровней: `zz_ef_co_debt_v` (компания) = долг × `zz_ef_co_lv_part_v` (её уровни / уровни компаний ×
+`zz_ef_co_share`), остальное — собирателя; сумма по компаниям `zz_ef_co_debt_sum_v`. Обслуживание недели
+(`zz_ef_f_bc_paid`, из взносов в пул) — доля компаний `zz_ef_f_co_paid` со счетов по уровням (`zz_ef_co_pay_lv`; взносы
+им приходят той же долей раньше в том же шаге), остальное — из доли населения во взносах. Счёт меньше процентов месяца
+(`zz_ef_co_int_month_v`, ставка `zz_ef_cc_rate`) — `var:zz_ef_co_distress` на компании (банкротство — R11). Лог `comp`:
+`out` (расход месяца), `debt`, `distress`. **Дивиденды** (Д.R6.8): раз в месяц (`zz_ef_co_month_step`) счёт сверх нормы
+— `zz_ef_co_reserve_months` (3, принято ночью) месяцев расхода (обслуживание кредита) — владельцам из населения: вклады
+и сбережения населения (один агрегат — категория компании игры пока не делит), `zz_ef_comp_dep` убывает;
+`var:zz_ef_f_co_div` (окно `zz_ef_w_co_div` — строка карточки вкладов), на компании `var:zz_ef_co_div_last` (лог `comp`:
+`div`). Держатели акций — шаг 6.
 
 **Акции** (R6.6; Д.R6.3, Д.R6.8, Д.R6.10, Д.R6.11, Д.R6.14; [[Компания]], [[Биржа]], [[Требование]]):
 `common/scripted_effects/ld_company_shares.txt`, `common/script_values/ld_company_shares_values.txt`; вид требования `s`
-в реестре (`docs/claims.md`) и в стакане (`ld_exchange_book.txt` — генератор `regen_ld_exchange_book.py`, вид `s`, заявки
-`pp_s`, `bk_s`, `co_s`). Должник — компания. **Листинг:** месячный проход ШК (`zz_ef_listing_update`) метит компанию
-диспетчером `zz_ef_listing_mark = { S = public | private }` (генерат `regen_ef_listing.py`: тип ШК → компания страны —
-`zz_ef_co_go_public` / `_private`, `var:zz_ef_co_listed`). **IPO** (`zz_ef_co_ipo`; компания в листинге, у её счёта —
-`zz_ef_co_ipo_months` (6) месяцев `var:zz_ef_co_months`, прибыль года > 0 — принято ночью): акций `var:zz_ef_co_shares` =
-капитализация по справедливой цене (одна акция — единица денег страны по ней, не меньше `zz_ef_co_ipo_min_shares` =
-1000); доля
-`zz_ef_co_ipo_share` (0,25, принято ночью) — в непроданные (`zz_ef_rq_co_s` страны), остальное — населению страны
-(`zz_ef_rq_pp_s`), бесплатно; лог `EFJ|…|ipo`. **Цена** (Д.R6.11): капитализация по справедливой
-`zz_ef_co_cap_fair_v` = чистая прибыль года `zz_ef_co_np_y` (приход − расход счёта × 12, скользящая средняя
-`zz_ef_co_np_months` = 6 мес., `zz_ef_co_np_update`) / (ставка правительства + `zz_ef_equity_premium`), не меньше счёта и
-1; акция — `zz_ef_co_px_v` = она / акции; в золоте с множителем стакана — `zz_ef_xq_gold_s` (`var:zz_ef_xmul_s`, глубина
-— все акции компании); доходность по рыночной цене `zz_ef_co_yield_v`. **Торги:** акции компании идут на бирже, где
-торгует её страна (`zz_ef_co_trades_on`: листинг, акции, `owner.var:zz_ef_xch`); список компаний биржи `zz_ef_xls` —
-раз в месяц (`zz_ef_co_world_month`). В неделю держателя (`zz_ef_xch_step`): непроданные IPO — заявка по справедливой
-(`zz_ef_xch_post_sells_co`); население и банки продают свои (`zz_ef_xch_post_sells_s`: мелкая позиция — нижний шаг, иначе
-по выгоде держания, сохраняют, если выгода выше издержек покупки) и покупают лучшую из списка (`zz_ef_xch_post_buys_s`,
-бюджет — как на деньги); выгода и издержки — `zz_ef_xch_eval_s` (премия за риск, стоимость выхода и комиссии — по стране
-компании). Расчёт — общий (`zz_ef_xch_deal`; комиссия — `zz_ef_xch_deal_fee_s`): население — вклады и пул, банки — актив
-`zz_ef_bank_inv` (переоценка по цене акций — `zz_ef_bank_inv_revalue`), компания-продавец — на счёт
-(`zz_ef_xch_pay_co_s`, `var:zz_ef_co_ipo_got`, в доход для прибыли не идёт) и пул. Фонда, валютных точек и сведения
-между биржами у акций нет. **Дивиденды держателям** (Д.R6.8): у компании с акциями дивиденд месяца
-(`zz_ef_co_div_holders`) — держателям по доле (списки держателей компании), доля непроданных остаётся на счёте; население
-своей страны — вклады и сбережения, банки — капитал; держатель за рубежом — через клиринг: пул и поток с заграницей обеих
-стран (`zz_ef_xch_pool_acc`, `zz_ef_xch_ext_acc` — шаг `zz_ef_xch_step`). Итог держателя по акциям —
+в реестре (`docs/claims.md`) и в стакане (`ld_exchange_book.txt` — генератор `regen_ld_exchange_book.py`, вид `s`,
+заявки `pp_s`, `bk_s`, `co_s`). Должник — компания. **Листинг:** месячный проход ШК (`zz_ef_listing_update`) метит
+компанию диспетчером `zz_ef_listing_mark = { S = public | private }` (генерат `regen_ef_listing.py`: тип ШК → компания
+страны — `zz_ef_co_go_public` / `_private`, `var:zz_ef_co_listed`). **IPO** (`zz_ef_co_ipo`; компания в листинге, у её
+счёта — `zz_ef_co_ipo_months` (6) месяцев `var:zz_ef_co_months`, прибыль года > 0 — принято ночью): акций
+`var:zz_ef_co_shares` = капитализация по справедливой цене (одна акция — единица денег страны по ней, не меньше
+`zz_ef_co_ipo_min_shares` = 1000); доля `zz_ef_co_ipo_share` (0,25, принято ночью) — в непроданные (`zz_ef_rq_co_s`
+страны), остальное — населению страны (`zz_ef_rq_pp_s`), бесплатно; лог `EFJ|…|ipo`. **Цена** (Д.R6.11): капитализация
+по справедливой `zz_ef_co_cap_fair_v` = чистая прибыль года `zz_ef_co_np_y` (приход − расход счёта × 12, скользящая
+средняя `zz_ef_co_np_months` = 6 мес., `zz_ef_co_np_update`) / (ставка правительства + `zz_ef_equity_premium`), не
+меньше счёта и 1; акция — `zz_ef_co_px_v` = она / акции; в золоте с множителем стакана — `zz_ef_xq_gold_s`
+(`var:zz_ef_xmul_s`, глубина — все акции компании); доходность по рыночной цене `zz_ef_co_yield_v`. **Торги:** акции
+компании идут на бирже, где торгует её страна (`zz_ef_co_trades_on`: листинг, акции, `owner.var:zz_ef_xch`); список
+компаний биржи `zz_ef_xls` — раз в месяц (`zz_ef_co_world_month`). В неделю держателя (`zz_ef_xch_step`): непроданные
+IPO — заявка по справедливой (`zz_ef_xch_post_sells_co`); население и банки продают свои (`zz_ef_xch_post_sells_s`:
+мелкая позиция — нижний шаг, иначе по выгоде держания, сохраняют, если выгода выше издержек покупки) и покупают лучшую
+из списка (`zz_ef_xch_post_buys_s`, бюджет — как на деньги); выгода и издержки — `zz_ef_xch_eval_s` (премия за риск,
+стоимость выхода и комиссии — по стране компании). Расчёт — общий (`zz_ef_xch_deal`; комиссия — `zz_ef_xch_deal_fee_s`):
+население — вклады и пул, банки — актив `zz_ef_bank_inv` (переоценка по цене акций — `zz_ef_bank_inv_revalue`),
+компания-продавец — на счёт (`zz_ef_xch_pay_co_s`, `var:zz_ef_co_ipo_got`, в доход для прибыли не идёт) и пул. Фонда,
+валютных точек и сведения между биржами у акций нет. **Дивиденды держателям** (Д.R6.8): у компании с акциями дивиденд
+месяца (`zz_ef_co_div_holders`) — держателям по доле (списки держателей компании), доля непроданных остаётся на счёте;
+население своей страны — вклады и сбережения, банки — капитал; держатель за рубежом — через клиринг: пул и поток с
+заграницей обеих стран (`zz_ef_xch_pool_acc`, `zz_ef_xch_ext_acc` — шаг `zz_ef_xch_step`). Итог держателя по акциям —
 `zz_ef_co_holders_month` (перебором: акции исчезнувшей компании пропадают). Сверка реестра (`EFI`) — `n_s`, `out_s`,
 `bad_s`; лог стакана `EFD|…|asset_s` (на компании), оборот месяца `to_s_g`, `s_co_g`.
 

@@ -10,7 +10,21 @@ zz_ef_pop_cash_neg_real_add = 0.5
 # the share of the gap moved a week (Д.R7.3)
 zz_ef_pop_cash_move_share = 0.1
 
-# COUNTRY scope: the banknotes the pops want; the target -- at most their savings
+# COUNTRY scope: the marginals' share of the population (Д.R7.7, ld_rich_literacy.txt; 0 before the first month) -- no
+# deposits, so no interest, exchange or credit: their savings (less the metal) are banknotes
+zz_ef_marg_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_marg } value = var:zz_ef_marg }
+}
+# the savings less the metal (at the start, before var:zz_ef_pop_savings -- the start's norm)
+zz_ef_pop_cash_sav_v = {
+	value = zz_ef_pop_start_savings
+	subtract = zz_ef_popm_start_money
+	if = { limit = { has_variable = zz_ef_pop_savings } value = var:zz_ef_pop_savings }
+	min = 0
+}
+# COUNTRY scope: the banknotes the pops want -- the others' share of their target, the marginals' share of the savings;
+# the target -- at most the savings
 zz_ef_pop_cash_target_v = {
 	value = zz_ef_pop_cash_want_v
 	max = { value = zz_ef_pop_savings min = 0 }
@@ -30,6 +44,8 @@ zz_ef_pop_cash_want_v = {
 		limit = { zz_ef_deposit_rate < zz_ef_inflation }
 		multiply = { value = 1 add = zz_ef_pop_cash_neg_real_add }
 	}
+	multiply = { value = 1 subtract = zz_ef_marg_v }
+	add = { value = zz_ef_pop_cash_sav_v multiply = zz_ef_marg_v }
 }
 # the step's move into banknotes (+) or into deposits (-): the share of the gap a week x the weeks of the step
 zz_ef_pop_cash_move_v = {
