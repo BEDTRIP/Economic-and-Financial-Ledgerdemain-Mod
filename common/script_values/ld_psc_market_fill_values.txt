@@ -1,0 +1,32 @@
+﻿# The construction regulator orders no more of its construction good than the market sells (Д.R9.4; понятие
+# «Строительство», docs/construction.md). The engine gives a buyer its whole order at a shortage price and takes the
+# money for all of it: the part the market did not have burns (the line «движок: оплачено сверх продаж рынка»,
+# Д.R4б.27). A fill per good on the country, as the metal's (zz_ef_mt_k_g_next, ld_metal_accounts_values.txt): k x the
+# market's sell / buy orders of the good, within [zz_ef_psc_k_min, 1] -- the orders less the regulators' over-order
+# converge to the sell orders without swinging; the regulator's throughput is x k (scripted_effects/ld_psc_market_fill.txt).
+
+# the least fill (the regulator keeps some throughput while the market has none of its good)
+zz_ef_psc_k_min = 0.05
+
+# STATE scope: the fill of its regulator's good (by the regulator's method), 1 without a regulator
+zz_ef_psc_fill_v = {
+	value = 1
+	if = {
+		limit = { has_building = building_construction_regulator }
+		if = {
+			limit = { b:building_construction_regulator = { has_active_production_method = pm_wood_point_conversion } }
+			value = owner.var:zz_ef_psc_k_wood
+		}
+		else_if = {
+			limit = { b:building_construction_regulator = { has_active_production_method = pm_iron_point_conversion } }
+			value = owner.var:zz_ef_psc_k_iron
+		}
+		else_if = {
+			limit = { b:building_construction_regulator = { has_active_production_method = pm_steel_point_conversion } }
+			value = owner.var:zz_ef_psc_k_steel
+		}
+		else = {
+			value = owner.var:zz_ef_psc_k_arc_welded
+		}
+	}
+}

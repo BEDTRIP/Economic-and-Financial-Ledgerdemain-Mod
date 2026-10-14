@@ -1,0 +1,35 @@
+﻿# The regulator's fill by the market (Д.R9.4; script_values/ld_psc_market_fill_values.txt). COUNTRY scope, at the start
+# of PSC's week (set_construction_point_demand, PSC_scripted_effects.txt): var:zz_ef_psc_k_<good> for the four
+# construction goods of the country's market.
+zz_ef_psc_fill_update = {
+	zz_ef_psc_fill_good = { G = wood }
+	zz_ef_psc_fill_good = { G = iron }
+	zz_ef_psc_fill_good = { G = steel }
+	zz_ef_psc_fill_good = { G = arc_welded }
+}
+# k x sell / buy orders of $G$_construction (no buy orders -- 1)
+zz_ef_psc_fill_good = {
+	if = {
+		limit = { NOT = { has_variable = zz_ef_psc_k_$G$ } }
+		set_variable = { name = zz_ef_psc_k_$G$ value = 1 }
+	}
+	if = {
+		limit = {
+			exists = market
+			market.mg:$G$_construction.market_goods_buy_orders > 0
+		}
+		set_variable = {
+			name = zz_ef_psc_k_$G$
+			value = {
+				value = var:zz_ef_psc_k_$G$
+				multiply = market.mg:$G$_construction.market_goods_sell_orders
+				divide = market.mg:$G$_construction.market_goods_buy_orders
+				min = zz_ef_psc_k_min
+				max = 1
+			}
+		}
+	}
+	else = {
+		set_variable = { name = zz_ef_psc_k_$G$ value = 1 }
+	}
+}

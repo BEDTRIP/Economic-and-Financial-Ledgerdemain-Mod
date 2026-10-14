@@ -53,6 +53,13 @@
   (`gui/PSC_construction_expense_widget.gui`); оба файла — одна строка без перевода строки.
 
 **Ledgerdemain (`ld_*`) над PSC**
+- `common/scripted_effects/ld_psc_market_fill.txt`, `common/script_values/ld_psc_market_fill_values.txt` — регулятор не
+  больше предложения рынка (Д.R9.4): `zz_ef_psc_fill_update` в начале недели PSC — на стране `var:zz_ef_psc_k_<товар>`
+  (`wood`, `iron`, `steel`, `arc_welded`) = прошлое k × продажи / заказы стройтовара на рынке страны, в пределах
+  [`zz_ef_psc_k_min` 0,05; 1] (заказов нет — 1); в штате `zz_ef_psc_fill_v` — k товара его регулятора; пропускная
+  регулятора и очки штата × k. Регулятор игры берёт деньги за весь заказ, а недостающее на рынке сгорает (статья
+  «движок: оплачено сверх продаж рынка», Д.R4б.27) — k сводит заказы регуляторов к предложению, как металл
+  (`zz_ef_mt_k_*`).
 - `common/script_values/ld_psc_private_allocation.txt` — REPLACE `private_construction_increase` (цель
   `zz_ef_psc_private_target`: доход + простаивающий пул + ставка).
 - `common/script_values/ld_pb_overbuild_values.txt` — лимит и перестройка: `zz_pb_ef_css_levels`,
@@ -123,8 +130,8 @@
      уровня сектора, не сносится — Д.R8в.27), `state_construction_spending_allocation` (доля штата — по стоимости его
      выпуска: выпуск × базовая цена / `weighted_total`; от 0 до остатка трат страны
      `var:psc_remaining_construction_spending` — переменная страны, уменьшается после каждого штата и снимается после
-     цикла), `set_state_construction_efficiency` (модификатор на сектор), `state_construction_allocation` ->
-     `construction_throughput_mult` на регуляторе;
+     цикла), `set_state_construction_efficiency` (модификатор на сектор), `state_construction_allocation` × k товара
+     регулятора (`zz_ef_psc_fill_v`, Д.R9.4) -> `construction_throughput_mult` на регуляторе;
    - `prev_estimated_investment_pool = investment_pool + investment_pool_net_income`.
 4. `set_spending_value` (только игрок) -> `set_government_construction_spending`.
 5. `on_production_method_changed`, `on_building_built` (сектор) -> `set_new_point_conversion_method` (PM регулятора = PM
@@ -174,8 +181,10 @@
 
 ## Логи
 `EFZ` (при логах, раз в неделю PSC на страну, `zz_ef_psc_log` в `common/scripted_effects/ld_psc_log.txt`): `total` —
-траты на стройку, `alloc` — роздано штатам, `pts` — очки, купленные на них, `rest` — не роздано, `prod` — выпуск
-стройтоваров страны, `gov` — государственная часть трат, `wtot` — сумма выпуск × базовая цена по штатам. Уведомление
+траты на стройку, `alloc` — роздано штатам, `pts` — очки, купленные на них (× k рынка, Д.R9.4), `rest` — не роздано,
+`prod` — выпуск стройтоваров страны, `gov` — государственная часть трат, `wtot` — сумма выпуск × базовая цена по
+штатам, `csec_profit`, `csec_lv` — прибыль и уровни стройсекторов, `kw`, `ki` — k дерева и железа. Сводка по годам —
+`../vic3_mods/tools/ld_psc_sum.py`. Уведомление
 игроку: `zz_pb_ef_overbuild_rising` (рост полосы `speculative_share_2` на 10).
 
 ## Прочие файлы
