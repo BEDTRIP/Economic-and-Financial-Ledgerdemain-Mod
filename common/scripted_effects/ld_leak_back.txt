@@ -11,6 +11,7 @@
 # COUNTRY scope, the step's bridge part, after the line is set (zz_ef_bridge_apply).
 zz_ef_leak_back_step = {
 	set_variable = { name = zz_ef_f_leak_back value = 0 }
+	set_variable = { name = zz_ef_f_leak_back_pop value = 0 }
 	if = {
 		limit = {
 			has_variable = zz_ef_model_started
@@ -38,6 +39,7 @@ zz_ef_leak_back_step = {
 			set_variable = { name = zz_ef_t_lb_c value = 0 }
 		}
 		change_variable = { name = zz_ef_pop_deposits add = var:zz_ef_t_lb_p }
+		set_variable = { name = zz_ef_f_leak_back_pop value = var:zz_ef_t_lb_p }
 		change_variable = { name = zz_ef_comp_dep add = var:zz_ef_t_lb_c }
 		zz_ef_eng_add_pool = { V = var:zz_ef_f_leak_back }
 		if = {

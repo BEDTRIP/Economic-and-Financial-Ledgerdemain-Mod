@@ -22,3 +22,9 @@ zz_ef_v_w_leak_back = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_w_leak_back } value = var:zz_ef_w_leak_back }
 }
+# the pops' part of it in the window just closed -- the deposits card (the ledger's change of the deposits sees it a
+# step later)
+zz_ef_v_w_leak_back_pop = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_w_leak_back_pop } value = var:zz_ef_w_leak_back_pop }
+}
