@@ -1,0 +1,54 @@
+﻿#############################################
+# the literacy of the country's rich: the share of the companies' headquarters that go public (the listing,
+# scripted_effects/ld_listing.txt) -- reading a prospectus took literate investors. Pops rich enough to have financial
+# products in their basket (wealth 15 and up, where E&F's popneed_financial_products starts):
+#   var:zz_ef_rich_literacy        = literate rich / all rich (0..1)
+#   var:zz_ef_literate_rich_share  = literate rich / all pops (0..1, the log's)
+# The cut of the stock goods' output by it (EF.28) -- _archive/ld_stock_goods_capitalization/ (the goods are no longer
+# produced, Д.R6.12).
+#############################################
+
+# COUNTRY scope, monthly, from on_actions/ld_capitalization_on_actions.txt.
+# One walk over the country's pops; sums in local variables.
+zz_ef_rich_literacy_update = {
+	set_local_variable = { name = zz_lr_all value = 0 }
+	set_local_variable = { name = zz_lr_rich value = 0 }
+	set_local_variable = { name = zz_lr_rich_all value = 0 }
+	every_scope_pop = {
+		change_local_variable = { name = zz_lr_all add = total_size }
+		if = {
+			limit = { wealth >= 15 }
+			change_local_variable = { name = zz_lr_rich_all add = total_size }
+			change_local_variable = {
+				name = zz_lr_rich
+				add = {
+					value = total_size
+					multiply = literacy_rate
+				}
+			}
+		}
+	}
+	set_variable = {
+		name = zz_ef_literate_rich_share
+		value = {
+			value = local_var:zz_lr_rich
+			divide = {
+				value = local_var:zz_lr_all
+				min = 1
+			}
+		}
+	}
+	# the literacy of the rich themselves (literate rich / all rich), 0..1 -- the share of the
+	# companies' levels that go public (scripted_effects/ld_listing.txt)
+	set_variable = {
+		name = zz_ef_rich_literacy
+		value = {
+			value = local_var:zz_lr_rich
+			divide = {
+				value = local_var:zz_lr_rich_all
+				min = 1
+			}
+			max = 1
+		}
+	}
+}

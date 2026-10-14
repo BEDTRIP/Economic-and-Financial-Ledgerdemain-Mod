@@ -1,9 +1,8 @@
 ﻿#############################################
-# the stock market's capitalization = the value of what is listed:
-# the listed companies' yearly dividends / (the government's rate + an equity risk premium ~4 pp). The target
-#: about 0.3 GDP for Britain in the 1840s and ~1.0 by 1913 by itself, without steering the index.
-# E&F's stock goods (manufacture / agricultural / mining / railroad stock) are the exchange's turnover, not its
-# capitalization: until 5.10 the capitalization was their weekly output x 520 x price (EF.24).
+# the stock market's capitalization = the value of what is listed (Д.R6.12): the listed companies' shares at the market
+# price (ld_company_shares.txt; their fair price -- the year's net profit by the account / (the government's rate + an
+# equity risk premium ~4 pp), Д.R6.11). The target: about 0.3 GDP for Britain in the 1840s and ~1.0 by 1913 by itself,
+# without steering the index. The headquarters' dividends (zz_ef_listed_div_year) -- the log's only.
 #
 # Listed = company headquarters with the "publicly traded" method (EF.22, switched by script monthly, Д2.11:
 # scripted_effects/ld_listing.txt). A company's dividends are its headquarters' profit (the save: the HQ's
@@ -79,10 +78,17 @@ zz_ef_cap_discount = {
 	add = zz_ef_equity_premium
 	min = 0.02
 }
-# This month's capitalization (the snapshot the yearly average follows).
+# This month's capitalization (the snapshot the yearly average follows; Д.R6.12): the listed companies' shares at the
+# market price (zz_ef_co_cap_mkt_v, ld_company_shares_values.txt), in the country's money.
 zz_ef_cap_listed_snapshot = {
-	value = zz_ef_listed_div_year
-	divide = zz_ef_cap_discount
+	value = 0
+	every_company = {
+		limit = {
+			has_variable = zz_ef_co_listed
+			has_variable = zz_ef_co_shares
+		}
+		add = zz_ef_co_cap_mkt_v
+	}
 }
 zz_ef_cap_to_gdp = {
 	value = 0

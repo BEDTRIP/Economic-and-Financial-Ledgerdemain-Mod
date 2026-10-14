@@ -62,8 +62,7 @@
 
 ## Вызовы и связи
 - Товары `bond`/акции/`mutual_funds`/`liquidity_currency` участвуют в модели `ld_*` (клиринг, листинг, капитализация,
-  массовое владение акциями `script_values/ld_mass_shareholding_values.txt`, грамотность
-  `ld_stock_issue_literacy_values.txt`).
+  массовое владение акциями `script_values/ld_mass_shareholding_values.txt`; капитализация — акции компаний, Д.R6.12).
 - Для каждого товара в `modifier_type_definitions/00_ef_building_modifier_types.txt` заведены
   `goods_input_<good>_add/_mult`, `goods_output_<good>_add/_mult` (134 имени: 38 — на 10 живых товаров, 96 — на
   несуществующие товары (национальные валюты `<cur>_c`, `war_bond`), их читают значения `base_demande_<валюта>`

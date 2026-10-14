@@ -110,7 +110,7 @@
   помечены. Слоты игрока (`buy_bond_*`, погашение `bond_maturity_N`) реестр не ведёт — открыто.
 - Облигации ЦБ как товар `bond` — `pm_*_standard_bank_money_currency` (`production_methods/15_ef_bank.txt`,
   `goods_output_bond_add`), множитель по долгу — `ld_cb_bond_issuance.txt`.
-- Смежные: `ld_capitalization_snapshot.txt` (счётчики E&F), `ld_reference_currency_values.txt:86-112` (проценты частным
+- Смежные: `ld_capitalization_snapshot.txt` (средние капитализации), `ld_reference_currency_values.txt:86-112` (проценты частным
   банкам).
 
 ## Логи

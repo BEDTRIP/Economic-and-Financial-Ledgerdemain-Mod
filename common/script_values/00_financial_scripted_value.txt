@@ -2313,7 +2313,8 @@ manufacture_stock_market_goods_sell_orders = {
 		add = market.mg:manufacture_stock.market_goods_sell_orders
 	}
 }
-### Quantities read by every E&F formula: the yearly average / today's price.
+### Quantities read by every E&F formula: the yearly average / today's price (0 before the first average; the
+### capitalization is the listed shares, ld_listing_values.txt).
 stockpiling_manufacture_stock_var_state = {
 	if = {
 		limit = { has_variable = zz_ef_cap_avg_ms }
@@ -2324,7 +2325,7 @@ stockpiling_manufacture_stock_var_state = {
 		}
 	}
 	else = {
-		value = zz_ef_cap_qty_manufacture_stock
+		value = 0
 	}
 }
 manufacture_stock_by_price_in_gold = {
@@ -2366,7 +2367,7 @@ stockpiling_agricultural_stock_var_state = {
 		}
 	}
 	else = {
-		value = zz_ef_cap_qty_agricultural_stock
+		value = 0
 	}
 }
 agricultural_stock_by_price_in_gold = {
@@ -2408,7 +2409,7 @@ stockpiling_railroad_stock_var_state = {
 		}
 	}
 	else = {
-		value = zz_ef_cap_qty_railroad_stock
+		value = 0
 	}
 }
 railroad_stock_by_price_in_gold = {
@@ -2450,7 +2451,7 @@ stockpiling_mining_stock_var_state = {
 		}
 	}
 	else = {
-		value = zz_ef_cap_qty_mining_stock
+		value = 0
 	}
 }
 mining_stock_by_price_in_gold = {

@@ -1,6 +1,6 @@
 ﻿#############################################
 # EF.24 + EF.25, EF.28 -- monthly, per country:
-#   0. the share of literate rich pops and the stock issuance cut (EF.28);
+#   0. the literacy of the rich (the listing's share);
 #   1. capitalization averages and the stock index
 #      (scripted_effects/ld_capitalization_average.txt), then the
 #      12 monthly marks and the crash check (ld_capitalization_crash.txt);
@@ -21,9 +21,8 @@
 
 zz_ef_capitalization_monthly = {
 	effect = {
-		### stock issuance by the share of literate rich pops
-		### (scripted_effects/ld_stock_issue_literacy.txt).
-		zz_ef_stock_issue_update = yes
+		### the literacy of the rich -- the share of the headquarters that go public (scripted_effects/ld_rich_literacy.txt)
+		zz_ef_rich_literacy_update = yes
 		### listed companies -- the "publicly traded" HQ method by script (ld_listing.txt)
 		zz_ef_listing_update = yes
 		zz_ef_cap_monthly_update = yes

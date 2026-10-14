@@ -44,8 +44,9 @@
   `zz_ef_cap_half` (пункты индекса E&F — в `_archive/ef_stock_market_points/`, Д.R4б.11).
 - `common/scripted_effects/ld_capitalization_crash.txt` — `zz_ef_cap_monthly_crash_check`: 12 месячных отметок,
   `country_indice_value_dif_01`, вызов `financial_crash`.
-- `common/script_values/ld_capitalization_snapshot.txt` — `zz_ef_cap_weeks`(520), веса средних, `zz_ef_crash_floor`(5
-  млн), `zz_ef_cap_state_output_*_stock`, `zz_ef_cap_qty_*`, `zz_ef_cap_snap_*`, `zz_ef_equity_capitalization`.
+- `common/script_values/ld_capitalization_snapshot.txt` — веса средних, `zz_ef_crash_floor`(5 млн),
+  `zz_ef_equity_capitalization` (сумма четырёх средних E&F); капитализация по выпуску товаров-«акций» — в
+  `_archive/ld_stock_goods_capitalization/` (Д.R6.12).
 - `common/on_actions/ld_capitalization_on_actions.txt` — `zz_ef_capitalization_monthly` (в `on_monthly_pulse_country`),
   задаёт порядок шагов.
 - `common/on_actions/ld_bubble_on_actions.txt` + `common/script_values/ld_bubble_values.txt` +
@@ -54,9 +55,8 @@
 - `common/script_values/ld_mass_shareholding_values.txt` + `common/static_modifiers/ld_mass_shareholding.txt` —
   `zz_ef_mass_shareholding_points/_max`, модификатор `zz_ef_mass_shareholding`
   (`building_company_worker_dividends_add`).
-- `common/scripted_effects/ld_stock_issue_literacy.txt` + `common/script_values/ld_stock_issue_literacy_values.txt` +
-  `common/static_modifiers/ld_stock_issue_literacy.txt` — `zz_ef_stock_issue_update`, `zz_ef_stock_issue_cut_points`,
-  модификатор `zz_ef_stock_issue_literacy` (−выпуск 4 видов акций).
+- `common/scripted_effects/ld_rich_literacy.txt` — `zz_ef_rich_literacy_update`: грамотность богатых — доля ШК, которые
+  выходят на биржу; срез выпуска товаров-«акций» по ней — в `_archive/ld_stock_goods_capitalization/`.
 - `common/script_values/ld_company_slots.txt` — `zz_ef_slots_rating/_cb/_cap`, `zz_ef_cap_total`; читаются в
   `value_for_has_financial_center` (`common/script_values/00_economic_scripted_value.txt:4354`).
 - `common/buildings/ef_16_financial_centre.txt` — генерат (`tools/regen_ld_financial_centres.py`, таблица «вариант →
@@ -214,14 +214,14 @@
 
 ## Поток / порядок
 `on_monthly_pulse_country` → `zz_ef_capitalization_monthly` (`ld_capitalization_on_actions.txt`), страна, по порядку:
-1. `zz_ef_stock_issue_update` — один проход по попам: `zz_ef_literate_rich_share`, `zz_ef_rich_literacy`; пересадка
-   модификатора `zz_ef_stock_issue_literacy` (множитель `zz_ef_stock_issue_cut`).
+1. `zz_ef_rich_literacy_update` — один проход по попам: `zz_ef_literate_rich_share`, `zz_ef_rich_literacy`.
 2. `zz_ef_listing_update` — если `zz_ef_listing_allowed`: ШК (`bg_company_headquarter`) по возрастанию уровня
    переводятся в `pm_company_headquarter_publicly_traded`, пока накопленные уровни < всех уровней ШК ×
-   `zz_ef_rich_literacy`; остальные — `pm_company_headquarter_privately_owned`. Без разрешения — все ШК в частные.
-3. `zz_ef_cap_monthly_update` — снимок = `zz_ef_cap_listed_snapshot` (дивиденды публичных ШК за год ÷ (ставка
-   правительства `zz_ef_gov_rate_target` + 4 п.п.), min 0.02) делится по 4 акциям пропорционально выпуску
-   (`zz_ef_cap_snap_*`), обновляются `zz_ef_cap_avg_{ms,as,mn,rr}` (вес 0.0833), `zz_ef_cap_half` (вес 0.1667).
+   `zz_ef_rich_literacy`; остальные — `pm_company_headquarter_privately_owned`; компания ШК метится
+   `zz_ef_listing_mark` (листинг, IPO — «Акции»). Без разрешения — все ШК в частные, метки сняты.
+3. `zz_ef_cap_monthly_update` — снимок = `zz_ef_cap_listed_snapshot` (акции публичных компаний по рыночной цене,
+   `zz_ef_co_cap_mkt_v`; Д.R6.12) делится на 4 «акции» E&F поровну, обновляются `zz_ef_cap_avg_{ms,as,mn,rr}` (вес
+   0.0833), `zz_ef_cap_half` (вес 0.1667).
 4. `zz_ef_listing_log` — строка `EFL|`.
 5. `zz_ef_cap_monthly_crash_check` — отметки `zz_ef_cap_m1..m12`, `country_indice_value_dif_01 = half/m12 − 1`; крах
    (`financial_crash`), если < −50%, нет `zz_ef_cap_crash_cooldown` (15 мес), есть `has_financial_center`, капитализация
@@ -241,9 +241,8 @@
 ## Переменные
 | имя | смысл | пишет | читает |
 |---|---|---|---|
-| `zz_ef_literate_rich_share` | доля грамотных богатых (wealth ≥15) среди всех попов | `zz_ef_stock_issue_update` | `zz_ef_stock_issue_cut_points` |
-| `zz_ef_rich_literacy` | грамотность самих богатых, 0..1 | `zz_ef_stock_issue_update` | `zz_ef_listing_update`, лог |
-| `zz_ef_stock_issue_cut` | процентные пункты срезa выпуска акций | `zz_ef_stock_issue_update` | модификатор |
+| `zz_ef_literate_rich_share` | доля грамотных богатых (wealth ≥15) среди всех попов | `zz_ef_rich_literacy_update` | лог |
+| `zz_ef_rich_literacy` | грамотность самих богатых, 0..1 | `zz_ef_rich_literacy_update` | `zz_ef_listing_update`, лог |
 | `zz_ef_cap_avg_ms/_as/_mn/_rr` | годовая средняя капитализации (производство/сельхоз/добыча/ж.д. акции) | `zz_ef_cap_monthly_update` | `stockpiling_<вид>_var_state`, `zz_ef_cap_total` |
 | `zz_ef_cap_half` | средняя за полгода по всем акциям | `zz_ef_cap_monthly_update` | краш-проверка |
 | `zz_ef_cap_m1..m12` | месячные отметки `zz_ef_cap_half` | `zz_ef_cap_monthly_crash_check` | она же |
