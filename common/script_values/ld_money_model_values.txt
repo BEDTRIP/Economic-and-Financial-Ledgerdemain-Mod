@@ -989,6 +989,8 @@ zz_ef_cc_target = {
 	multiply = zz_ef_cc_share
 	# the cover squeezes the consumer credit too (1 at 40%, 0 at 20%)
 	multiply = zz_ef_cb_cover_credit_mult
+	# the marginals get no credit (Д.R7.7, ld_pop_cash_values.txt)
+	multiply = { value = 1 subtract = zz_ef_marg_v }
 }
 # Rollover of a year's term.
 zz_ef_cc_rollover = {
