@@ -2,7 +2,8 @@
 # exchange (foreign money, bonds, shares, the fund's shares -- the maps zz_ef_rq_pp_<K>) re-valued monthly at this month's
 # prices against last month's; a fall over zz_ef_hl_min of the portfolio costs the rich pops (wealth from
 # zz_ef_hl_rich_wealth -- those whose needs hold the financial products) zz_ef_hl_levels_k levels of wealth per 100 % lost
-# (add_pop_wealth, whole levels). A rise is not paid back: the gains stay in the holders' deposits when they sell.
+# (add_pop_wealth, whole levels, at most zz_ef_hl_levels_max a month), if the portfolio is at least zz_ef_hl_min_port of
+# the pops' savings (a few coins abroad do not move anyone's wealth). A rise is not paid back: the gains stay in the holders' deposits when they sell.
 # The price of a unit -- zz_ef_xk_gold_<K>_v of the debtor (a country, a company), in gold; last month's -- var:zz_ef_hl_px_<K>
 # on the debtor (taken after the losses).
 
@@ -37,11 +38,12 @@ zz_ef_hl_country = {
 		limit = {
 			var:zz_ef_hl_v0 > 0
 			var:zz_ef_hl_v1 < var:zz_ef_hl_v0
+			zz_ef_hl_port_share_v >= zz_ef_hl_min_port
 		}
 		set_variable = { name = zz_ef_hl_frac value = { value = var:zz_ef_hl_v0 subtract = var:zz_ef_hl_v1 divide = var:zz_ef_hl_v0 } }
 		if = {
 			limit = { var:zz_ef_hl_frac > zz_ef_hl_min }
-			set_variable = { name = zz_ef_hl_levels value = { value = var:zz_ef_hl_frac multiply = zz_ef_hl_levels_k floor = yes } }
+			set_variable = { name = zz_ef_hl_levels value = { value = var:zz_ef_hl_frac multiply = zz_ef_hl_levels_k floor = yes max = zz_ef_hl_levels_max } }
 		}
 		remove_variable = zz_ef_hl_frac
 	}

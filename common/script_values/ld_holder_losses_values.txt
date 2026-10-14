@@ -5,3 +5,19 @@ zz_ef_hl_min = 0.02
 zz_ef_hl_levels_k = 10
 # the pops who hold financial products: wealth from this (E&F's popneed_financial_products)
 zz_ef_hl_rich_wealth = 15
+# the portfolio counts from this share of the pops' savings; at most this many levels a month
+zz_ef_hl_min_port = 0.01
+zz_ef_hl_levels_max = 2
+# COUNTRY scope, in zz_ef_hl_country: the portfolio at last month's prices (var:zz_ef_hl_v0, gold) over the pops' savings
+zz_ef_hl_port_share_v = {
+	value = 0
+	if = {
+		limit = {
+			zz_ef_pop_savings > 0
+			zz_ef_clr_gold_per_money > 0
+		}
+		value = var:zz_ef_hl_v0
+		divide = zz_ef_clr_gold_per_money
+		divide = zz_ef_pop_savings
+	}
+}

@@ -409,8 +409,9 @@
   `common/script_values/ld_holder_losses_values.txt` — раз в месяц из `zz_ef_world_month_ef` после месяца бирж
   (`zz_ef_hl_world_month`): карты населения `zz_ef_rq_pp_m/b/s/f` по цене единицы `zz_ef_xk_gold_<K>_v` должника —
   сейчас и прошлого месяца (`var:zz_ef_hl_px_<K>` на должнике, снимок после расчёта); падение больше `zz_ef_hl_min` (2
-  %) портфеля — группам населения с благосостоянием от `zz_ef_hl_rich_wealth` (15) `add_pop_wealth` − ⌊доля ×
-  `zz_ef_hl_levels_k` (10)⌋ уровней, `update_loyalties`. Рост не возмещается. Лог `EFJ|…|hold_loss` (v0, v1, уровни).
+  %) портфеля (если он не меньше `zz_ef_hl_min_port` — 1 % сбережений населения) — группам населения с благосостоянием
+  от `zz_ef_hl_rich_wealth` (15) `add_pop_wealth` − ⌊доля × `zz_ef_hl_levels_k` (10)⌋ уровней, не больше
+  `zz_ef_hl_levels_max` (2) в месяц, `update_loyalties`. Рост не возмещается. Лог `EFJ|…|hold_loss` (v0, v1, уровни).
 - `EFT` — недельные покупки металла ЦБ/банков/населения (`zz_ef_metal_week_step`); `EFQ` — невязка металла ЦБ > 1000
   золота / 10000 серебра: металл ЦБ − снимок прошлого шага − известные движения (клиринг `zz_ef_f_clr_hume_g` / `_s`,
   кризисный выкуп `zz_ef_mt_known_g` / `_s` — `zz_ef_mt_known_add` у эмитента и продавца, пересчёт старта, арбитраж
