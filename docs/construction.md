@@ -21,7 +21,7 @@
 - `common/production_methods/zz_PSC_construction.txt` — PM сектора
   `pm_wooden/iron_frame/steel_frame/arc_welded_buildings` (вход: материалы; выход: `*_construction`; выпуск
   «акций» E&F `manufacture_stock` снят — Д.R4б.8; выход стройтоваров больше на его выручку по базовым ценам: 24 / 64 /
-  136 / 204 — Д.R4б.14; железо × 1,56 — 100, чтобы сектора покрывали заказы регуляторов без цены нехватки, Д.R9.10,
+  136 / 204 — Д.R4б.14; железо × 2 — 128, чтобы сектора покрывали заказы регуляторов без цены нехватки, Д.R9.10,
   принято ночью), PM регулятора `pm_{wood,iron,steel,arc_welded}_point_conversion` (`country_construction_add`;
   вход — 10 единиц своего стройтовара на очко).
 - `common/production_method_groups/PSC_construction.txt` — `pmg_construction_regulator`.
