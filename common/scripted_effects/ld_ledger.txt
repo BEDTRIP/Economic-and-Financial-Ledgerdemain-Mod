@@ -403,6 +403,38 @@ zz_ef_reconcile = {
 			}
 			remove_variable = zz_ef_t_cw
 		}
+		# the debt handed to a civil war's new country (the engine gives the rebels a part of the debt too): the treasury
+		# net of debt rose -- the new countries' debt net of their treasury, at most the rise -- the same line
+		else_if = {
+			limit = { var:zz_ef_f_other_tr > zz_ef_other_tr_jump_min }
+			save_temporary_scope_as = zz_ef_cw_o
+			set_variable = { name = zz_ef_t_cw value = 0 }
+			every_country = {
+				limit = {
+					exists = civil_war_origin_country
+					civil_war_origin_country = scope:zz_ef_cw_o
+					NOT = { has_variable = zz_ef_cw_debt_counted }
+					zz_ef_treasury_net_v < 0
+				}
+				set_variable = { name = zz_ef_cw_debt_counted value = 1 }
+				scope:zz_ef_cw_o = { change_variable = { name = zz_ef_t_cw subtract = prev.zz_ef_treasury_net_v } }
+			}
+			if = {
+				limit = { var:zz_ef_t_cw > 0 }
+				set_variable = {
+					name = zz_ef_f_cw_tr
+					value = {
+						value = var:zz_ef_f_other_tr
+						max = var:zz_ef_t_cw
+						multiply = -1
+					}
+				}
+				if = { limit = { NOT = { has_variable = zz_ef_cw_tr } } set_variable = { name = zz_ef_cw_tr value = 0 } }
+				change_variable = { name = zz_ef_cw_tr add = var:zz_ef_f_cw_tr }
+				change_variable = { name = zz_ef_f_other_tr add = var:zz_ef_f_cw_tr }
+			}
+			remove_variable = zz_ef_t_cw
+		}
 		change_variable = { name = zz_ef_other_tr add = var:zz_ef_f_other_tr }
 	}
 	# the pool's multiple is neither a company's purchase nor our own privatization: the state's levels of another country
