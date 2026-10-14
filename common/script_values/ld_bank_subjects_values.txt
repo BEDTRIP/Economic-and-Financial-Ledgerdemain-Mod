@@ -77,10 +77,10 @@ zz_ef_bk_fail_days = 365
 # the capital a subject keeps, a share of its earning assets; above it -- to the owners monthly (Д.R9.3, принято ночью)
 zz_ef_bk_cap_norm = 0.1
 # the leverage (Д.R9.2, принято ночью): a subject's loans (consumer + business) at most its capital x
-# zz_ef_bk_lev_base x (zz_ef_bk_lev_ref / the key rate), within [zz_ef_bk_lev_min, zz_ef_bk_lev_max]; the key rate's
-# floor in the division
+# zz_ef_bk_lev_base x (zz_ef_bk_lev_ref / the key rate), within [zz_ef_bk_lev_min, zz_ef_bk_lev_max] -- 10 at the
+# default key rate (zz_ef_money_rate without a rate); the key rate's floor in the division
 zz_ef_bk_lev_base = 10
-zz_ef_bk_lev_ref = 0.05
+zz_ef_bk_lev_ref = 0.065
 zz_ef_bk_lev_min = 5
 zz_ef_bk_lev_max = 20
 zz_ef_bk_lev_rate_floor = 0.0025

@@ -61,22 +61,30 @@ zz_ef_psc_private_income = {
 	min = 0
 }
 
-# The banks' free credit limit is the private construction's lever (Д.R9.2): the private share x min(1, the free limit
-# of the country's banks / zz_ef_psc_credit_weeks weeks of the private income) -- no free limit, no private share; a
-# country without the banks' book (outside the model) -- 1. var:zz_ef_bk_free_cr -- ld_bank_subjects.txt, the book step.
-zz_ef_psc_credit_weeks = 26
+# The banks' free credit limit is the private construction's lever (Д.R9.2): the private share x the lever -- from
+# zz_ef_psc_credit_floor with no free limit to 1 when the country's banks can lend zz_ef_psc_credit_weeks weeks of the
+# new business credit (the last week's, zz_ef_v_f_bc_new) -- the private construction shrinks, not stops (принято
+# ночью); a country without the banks' book (outside the model) -- 1. var:zz_ef_bk_free_cr -- ld_bank_subjects.txt,
+# the book step.
+zz_ef_psc_credit_weeks = 13
+zz_ef_psc_credit_floor = 0.5
 zz_ef_psc_credit_f = {
 	value = 1
 	if = {
 		limit = { has_variable = zz_ef_bk_free_cr }
 		value = var:zz_ef_bk_free_cr
 		divide = {
-			value = zz_ef_psc_private_income
+			value = zz_ef_v_f_bc_new
 			multiply = zz_ef_psc_credit_weeks
 			min = 1
 		}
 		min = 0
 		max = 1
+		multiply = {
+			value = 1
+			subtract = zz_ef_psc_credit_floor
+		}
+		add = zz_ef_psc_credit_floor
 	}
 }
 
