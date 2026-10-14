@@ -768,6 +768,20 @@ zz_ef_xp_co_s_read = {
 		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_xp_co_s|scope:zz_ef_rq_key)" }
 	}
 }
+zz_ef_xa_ob_b_read = {
+	set_variable = { name = zz_ef_rq_h value = 0 }
+	if = {
+		limit = { is_key_in_variable_map = { name = zz_ef_xa_ob_b target = scope:zz_ef_rq_key } }
+		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_xa_ob_b|scope:zz_ef_rq_key)" }
+	}
+}
+zz_ef_xp_ob_b_read = {
+	set_variable = { name = zz_ef_rq_h value = 0 }
+	if = {
+		limit = { is_key_in_variable_map = { name = zz_ef_xp_ob_b target = scope:zz_ef_rq_key } }
+		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_xp_ob_b|scope:zz_ef_rq_key)" }
+	}
+}
 
 # Exchange scope, key scope:zz_ef_rq_key: var:zz_ef_xm_v more at the step var:zz_ef_xm_s of the book.
 zz_ef_xch_book_add_m_s = {
@@ -1927,4 +1941,6 @@ zz_ef_xch_orders_empty = {
 	clear_variable_map = zz_ef_xp_bk_s
 	clear_variable_map = zz_ef_xa_co_s
 	clear_variable_map = zz_ef_xp_co_s
+	clear_variable_map = zz_ef_xa_ob_b
+	clear_variable_map = zz_ef_xp_ob_b
 }

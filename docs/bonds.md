@@ -36,7 +36,11 @@
   `zz_ef_f_gl_heir`); падение — погашение в пул, в дефолте — списание (актив и капитал); проценты на долю банков
   (`zz_ef_v_g_ipay` × доля × недели шага) — в пул и капитал. Пул-поток — строка карточки пула и вне
   `zz_ef_pool_other_week`; `zz_ef_f_gl_short` — вне статьи утечки. Лог `EFB|…|gov_loan`. Значения —
-  `common/script_values/ld_gov_loan_values.txt`.
+  `common/script_values/ld_gov_loan_values.txt`. Свои облигации банков на бирже (Д.R6.6): `zz_ef_xch_post_sells_ob`
+  (`ld_exchange_trade.txt`, неделя держателя) — заявка держателя `ob` на `zz_ef_xch_ob_share` (1 %) от
+  `zz_ef_bank_gov_loan` по справедливой × (1 + выгода банков); сделка не трогает реестр продавца
+  (`zz_ef_xch_is_own_b`), цена — в пул и капитал (`zz_ef_xch_pay_ob_b`), доля покупателя — его карта, итог `zz_ef_rq_out_b`
+  растёт — на следующем шаге здесь актив и капитал вниз на долю.
 - `common/scripted_effects/ld_consols.txt` — `zz_ef_consol_step` (недельный: продажа → долг, проценты казна → сбережения
   населения, выкуп излишка казны).
 - `common/script_values/ld_consols_values.txt` — `zz_ef_consol_output`, `zz_ef_consol_sale_week`, `zz_ef_consol_debt_v`,

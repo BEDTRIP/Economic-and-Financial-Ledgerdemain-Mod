@@ -81,6 +81,8 @@ zz_ef_xch_step = {
 		zz_ef_xch_post_sells = { T = bk K = b }
 		# the companies' shares (Д.R6.10, ld_company_shares.txt): the IPO's offer, the holders' sells and buys
 		zz_ef_xch_post_sells_co = yes
+		# the banks' part of our own debt (Д.R6.6)
+		zz_ef_xch_post_sells_ob = yes
 		zz_ef_xch_post_sells_s = { T = pp }
 		zz_ef_xch_post_sells_s = { T = bk }
 		zz_ef_xch_post_buys = yes
@@ -673,6 +675,32 @@ zz_ef_xch_post_buys = {
 	zz_ef_xch_buy_put = { T = bk K = b }
 	zz_ef_xch_buyback = yes
 }
+# Holder scope, scope:zz_ef_xch_e (Д.R6.6): the banks offer a part of their loan to our government -- the debt at home
+# (zz_ef_bank_gov_loan), our own bonds -- for buyers abroad: zz_ef_xch_ob_share of it a week at the fair price x (1 + the
+# banks' gain of holding it); the part is not in the register (the debt at home is the banks' one asset, ld_gov_loan.txt),
+# the deal moves no holding of ours (zz_ef_xch_is_own_b), the buyer's part enters the parts held abroad.
+zz_ef_xch_post_sells_ob = {
+	if = {
+		limit = {
+			zz_ef_bank_gov_loan_v > 0
+			NOT = { has_law_or_variant = law_type:law_isolationism }
+			NOT = { is_key_in_variable_map = { name = zz_ef_xa_ob_b target = this } }
+		}
+		save_temporary_scope_as = zz_ef_xch_d
+		zz_ef_xch_eval = { K = b }
+		zz_ef_xch_g_bk = yes
+		set_variable = { name = zz_ef_xo_s value = zz_ef_xch_ask_step_v }
+		set_variable = { name = zz_ef_xo_a value = { value = zz_ef_bank_gov_loan_v multiply = zz_ef_xch_ob_share } }
+		if = {
+			limit = {
+				var:zz_ef_xo_a > 0
+				var:zz_ef_xo_s >= 1
+				var:zz_ef_xo_s <= zz_ef_xq_top
+			}
+			zz_ef_xch_order_put = { T = ob K = b SIDE = s }
+		}
+	}
+}
 # Holder scope, scope:zz_ef_xch_e: the treasury buys back its own bonds when they stand below the principal and the
 # treasury has money (Д.R8б.37) -- a buy order at the fair price for its week's budget; bought parts are extinguished
 # (zz_ef_xch_deal)
@@ -766,6 +794,7 @@ zz_ef_xch_settle = {
 		zz_ef_xch_settle_map = { T = pp K = s }
 		zz_ef_xch_settle_map = { T = bk K = s }
 		zz_ef_xch_settle_map = { T = co K = s }
+		zz_ef_xch_settle_map = { T = ob K = b }
 	}
 	zz_ef_xch_orders_empty = yes
 	if = { limit = { has_variable = zz_ef_xo_e } remove_variable = zz_ef_xo_e }
@@ -1178,6 +1207,7 @@ zz_ef_xch_abr_track_bk_b = { }
 zz_ef_xch_abr_track_pp_b = { }
 zz_ef_xch_abr_track_fd_b = { }
 zz_ef_xch_abr_track_tr_b = { }
+zz_ef_xch_abr_track_ob_b = { }
 zz_ef_xch_abr_track_cb_f = { }
 zz_ef_xch_abr_track_bk_f = { }
 zz_ef_xch_abr_track_pp_f = { }
@@ -1227,6 +1257,12 @@ zz_ef_xch_pay_bk_b = {
 zz_ef_xch_pay_tr_b = {
 	zz_ef_eng_sub_treasury = { V = var:zz_ef_xd_x }
 	change_variable = { name = zz_ef_f_xch_tr subtract = var:zz_ef_xd_x }
+}
+# the banks sold a part of their loan to our government (Д.R6.6): the price into the pool and their capital; the asset
+# (zz_ef_bank_gov_loan) and the capital fall by the part at the next step of ld_gov_loan.txt (the parts held abroad grew)
+zz_ef_xch_pay_ob_b = {
+	change_variable = { name = zz_ef_bank_capital subtract = var:zz_ef_xd_x }
+	zz_ef_xch_pool_pay = yes
 }
 zz_ef_xch_pool_pay = {
 	add_investment_pool = { value = var:zz_ef_xd_x multiply = -1 }
@@ -2062,6 +2098,7 @@ zz_ef_xch_month_roll = {
 		zz_ef_xmo_add = { N = b_tr V = 0 }
 		zz_ef_xmo_add = { N = s_tr V = 0 }
 		zz_ef_xmo_add = { N = s_co V = 0 }
+		zz_ef_xmo_add = { N = s_ob V = 0 }
 		set_variable = { name = zz_ef_xlm_to value = var:zz_ef_xmo_to }
 		set_variable = { name = zz_ef_xlm_to_m value = var:zz_ef_xmo_to_m }
 		set_variable = { name = zz_ef_xlm_to_b value = var:zz_ef_xmo_to_b }
@@ -2092,7 +2129,7 @@ zz_ef_xch_month_roll = {
 		}
 		if = {
 			limit = { zz_ef_logs_on = yes }
-			debug_log = "EFD|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|xch_month|to_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_to').GetValue|0]|to_m_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_to_m').GetValue|0]|to_b_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_to_b').GetValue|0]|to_s_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_to_s').GetValue|0]|deals [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_n').GetValue|0]|foreign [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_fo').GetValue|3]|fee_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_fee').GetValue|0]|cap_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_cap').GetValue|0]|cap_base_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_capb').GetValue|0]|heat [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_heat').GetValue|3]|members [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_mem').GetValue|0]|assets [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_as').GetValue|0]|year_to_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xlm_to_y_v')|0]|fund_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xlm_fund_g_v')|0]|nav [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fd_nav_v')|3]|has [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fc_has_v')|0]|b_cb_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_b_cb').GetValue|0]|s_cb_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_s_cb').GetValue|0]|b_bk_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_b_bk').GetValue|0]|s_bk_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_s_bk').GetValue|0]|b_pp_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_b_pp').GetValue|0]|s_pp_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_s_pp').GetValue|0]|b_tr_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_b_tr').GetValue|0]|s_tr_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_s_tr').GetValue|0]|s_co_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_s_co').GetValue|0]"
+			debug_log = "EFD|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|xch_month|to_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_to').GetValue|0]|to_m_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_to_m').GetValue|0]|to_b_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_to_b').GetValue|0]|to_s_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_to_s').GetValue|0]|deals [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_n').GetValue|0]|foreign [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_fo').GetValue|3]|fee_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_fee').GetValue|0]|cap_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_cap').GetValue|0]|cap_base_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_capb').GetValue|0]|heat [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_heat').GetValue|3]|members [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_mem').GetValue|0]|assets [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_as').GetValue|0]|year_to_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xlm_to_y_v')|0]|fund_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xlm_fund_g_v')|0]|nav [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fd_nav_v')|3]|has [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fc_has_v')|0]|b_cb_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_b_cb').GetValue|0]|s_cb_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_s_cb').GetValue|0]|b_bk_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_b_bk').GetValue|0]|s_bk_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_s_bk').GetValue|0]|b_pp_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_b_pp').GetValue|0]|s_pp_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_s_pp').GetValue|0]|b_tr_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_b_tr').GetValue|0]|s_tr_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_s_tr').GetValue|0]|s_co_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_s_co').GetValue|0]|s_ob_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_s_ob').GetValue|0]"
 		}
 		set_variable = { name = zz_ef_xmo_to value = 0 }
 		set_variable = { name = zz_ef_xmo_to_m value = 0 }
@@ -2114,6 +2151,7 @@ zz_ef_xch_month_roll = {
 		set_variable = { name = zz_ef_xmo_b_tr value = 0 }
 		set_variable = { name = zz_ef_xmo_s_tr value = 0 }
 		set_variable = { name = zz_ef_xmo_s_co value = 0 }
+		set_variable = { name = zz_ef_xmo_s_ob value = 0 }
 	}
 }
 
