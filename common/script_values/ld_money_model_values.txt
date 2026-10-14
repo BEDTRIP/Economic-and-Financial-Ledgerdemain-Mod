@@ -955,11 +955,11 @@ zz_ef_v_f_cb_rescale = {
 
 
 # ---- EF.48 item 4: consumer credit -------------------------
-# One debt per country (var:zz_ef_cc_debt), countries with a central bank.
+# One debt per country (var:zz_ef_cc_debt), every country with the pool (Д.R9.6).
 # Limit: 4 months of income (GDP / 12 x 4); target = limit x f(rate): 100% at
 # a 2% key rate, 0 at 12%. Net borrowing moves 5% of the gap a week; the debt
-# rolls over in a year (1/52 repaid and re-lent a week). Rate: key + 3 pp,
-# interest to the pool (banks' income). New loans only from the free pool.
+# rolls over in a year (1/52 repaid and re-lent a week). Rate: key + 3 pp (without a CB -- the government's rate
+# + 3 pp), interest to the pool (banks' income). New loans only from the free pool.
 # Money: pool -> pops through the dependents' surcharge (static_modifiers/
 # ld_consumer_credit.txt), back pops -> pool. Mortgages: with housing (СТР.3).
 zz_ef_cc_speed = 0.05
@@ -970,8 +970,18 @@ zz_ef_cc_debt = {
 }
 zz_ef_cc_rate = {
 	value = zz_ef_money_rate
-	add = 0.03
+	# no CB, no key rate: the government's (Д.R9.6), as the monthly step set it
+	if = {
+		limit = {
+			NOT = { has_modifier = has_central_bank }
+			has_variable = zz_ef_gr_target
+		}
+		value = var:zz_ef_gr_target
+	}
+	add = zz_ef_cc_credit_premium
 }
+# the credit's premium over the key rate
+zz_ef_cc_credit_premium = 0.03
 zz_ef_cc_share = {
 	value = 0.12
 	subtract = zz_ef_money_rate

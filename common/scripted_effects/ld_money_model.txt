@@ -952,13 +952,12 @@ zz_ef_world_acc = {
 	}
 }
 
-# consumer credit, in the receiver after the savings (its pool
-# operations fall into the next week's window, like the deposits). Values:
-# script_values/ld_money_model_values.txt.
+# The consumer credit -- every country with the pool (Д.R9.6: the banks lend, not the CB; without a CB only the lender of
+# last resort is missing), in the receiver after the savings (its pool operations fall into the next week's window,
+# like the deposits). Values: script_values/ld_money_model_values.txt (the rate -- zz_ef_cc_rate).
 zz_ef_consumer_credit_step = {
 	if = {
 		limit = {
-			has_modifier = has_central_bank
 			has_variable = zz_ef_dependents
 			var:zz_ef_dependents > 0
 		}
@@ -1007,8 +1006,7 @@ zz_ef_consumer_credit_step = {
 }
 
 # The dependents' surcharge for the coming week: the consumer credit's net
-# flow (zz_ef_cc_wage_add). Every country with dependents: without a CB it is
-# 0 and clears the surcharge left by the earlier savings spending.
+# flow (zz_ef_cc_wage_add). Every country with dependents.
 zz_ef_pop_extra_income_step = {
 	if = {
 		limit = {
