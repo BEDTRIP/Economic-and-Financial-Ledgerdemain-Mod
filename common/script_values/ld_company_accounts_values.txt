@@ -94,3 +94,13 @@ zz_ef_v_w_co_div = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_w_co_div } value = var:zz_ef_w_co_div }
 }
+# COUNTRY scope: the banks' capital above the norm (Д.R9.3, ld_bank_subjects.txt) -- «частные банкиры»' into the pops'
+# deposits, «госбанки»' to the treasury out of the pool; the windows the cards cover
+zz_ef_v_w_bk_div_pop = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_w_bk_div_pop } value = var:zz_ef_w_bk_div_pop }
+}
+zz_ef_v_w_bk_div_tr = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_w_bk_div_tr } value = var:zz_ef_w_bk_div_tr }
+}

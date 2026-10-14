@@ -539,3 +539,71 @@ zz_ef_bk_fail_step = {
 		set_variable = { name = zz_ef_bk_failed value = 1 days = zz_ef_bk_fail_days }
 	}
 }
+
+# The banks' capital above the norm -- to their owners (Д.R9.3; понятие «Банки»): once a month a subject's capital above
+# zz_ef_bk_cap_norm of its earning assets (zz_ef_bk_div_due_v) goes -- a company subject's to its company's account
+# (zz_ef_co_acc, the companies' deposits zz_ef_comp_dep), «частные банкиры»' to the pops' deposits and savings (the
+# deposits' card line of dividends, zz_ef_f_bk_div_pop), «госбанки»' to the treasury out of the pool (at most the
+# pool; zz_ef_f_bk_div_tr, the pool's and the treasury's cards). The book holds: capital -> deposits leaves the pool
+# as it is, capital and the pool -> the treasury moves both; the subject's capital falls with the country's (the week's
+# residual stays 0). Log EFJ|bank_div. COUNTRY scope, its monthly pulse (zz_ef_bank_monthly), after the bankruptcies.
+zz_ef_bk_div_step = {
+	if = {
+		limit = {
+			has_variable = zz_ef_bk_gov_box
+			has_variable_list = zz_ef_bk_subj
+			has_variable = zz_ef_bank_capital
+		}
+		save_temporary_scope_as = zz_ef_bk_c
+		set_variable = { name = zz_ef_bk_dv_co value = 0 }
+		set_variable = { name = zz_ef_bk_dv_pop value = 0 }
+		set_variable = { name = zz_ef_bk_dv_tr value = 0 }
+		set_variable = { name = zz_ef_bk_dv_room value = { value = investment_pool min = 0 } }
+		every_in_list = {
+			variable = zz_ef_bk_subj
+			set_variable = { name = zz_ef_bk_dv value = zz_ef_bk_div_due_v }
+			if = {
+				limit = { var:zz_ef_bk_dv > 0 }
+				if = {
+					limit = {
+						var:zz_ef_bk_kind ?= flag:company
+						exists = var:zz_ef_bk_co
+					}
+					var:zz_ef_bk_co = { zz_ef_co_acc_add = { V = prev.var:zz_ef_bk_dv } }
+					scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_dv_co add = prev.var:zz_ef_bk_dv } }
+				}
+				else_if = {
+					limit = { var:zz_ef_bk_kind ?= flag:gov }
+					set_variable = { name = zz_ef_bk_dv value = { value = var:zz_ef_bk_dv max = scope:zz_ef_bk_c.var:zz_ef_bk_dv_room } }
+					scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_dv_tr add = prev.var:zz_ef_bk_dv } }
+				}
+				else = {
+					scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_dv_pop add = prev.var:zz_ef_bk_dv } }
+				}
+				change_variable = { name = zz_ef_bk_cap subtract = var:zz_ef_bk_dv }
+			}
+			remove_variable = zz_ef_bk_dv
+		}
+		# the country's accounts: capital -> the companies' deposits, the pops' deposits; capital and the pool -> treasury
+		if = { limit = { NOT = { has_variable = zz_ef_comp_dep } } set_variable = { name = zz_ef_comp_dep value = 0 } }
+		zz_ef_post = { FROM = zz_ef_bank_capital TO = zz_ef_comp_dep V = var:zz_ef_bk_dv_co }
+		if = { limit = { NOT = { has_variable = zz_ef_pop_deposits } } set_variable = { name = zz_ef_pop_deposits value = 0 } }
+		if = { limit = { NOT = { has_variable = zz_ef_pop_savings } } set_variable = { name = zz_ef_pop_savings value = 0 } }
+		zz_ef_post = { FROM = zz_ef_bank_capital TO = zz_ef_pop_deposits V = var:zz_ef_bk_dv_pop }
+		change_variable = { name = zz_ef_pop_savings add = var:zz_ef_bk_dv_pop }
+		if = {
+			limit = { var:zz_ef_bk_dv_tr > 0 }
+			zz_ef_post_eng_paid = { FROM = pool TO = treasury PAYER = zz_ef_bank_capital V = var:zz_ef_bk_dv_tr }
+		}
+		# the cards' flows (summed till the week's window roll, ld_money_model.txt)
+		if = { limit = { NOT = { has_variable = zz_ef_f_bk_div_pop } } set_variable = { name = zz_ef_f_bk_div_pop value = 0 } }
+		if = { limit = { NOT = { has_variable = zz_ef_f_bk_div_tr } } set_variable = { name = zz_ef_f_bk_div_tr value = 0 } }
+		change_variable = { name = zz_ef_f_bk_div_pop add = var:zz_ef_bk_dv_pop }
+		change_variable = { name = zz_ef_f_bk_div_tr add = var:zz_ef_bk_dv_tr }
+		if = {
+			limit = { zz_ef_logs_on = yes }
+			debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|bank_div|co [THIS.GetCountry.MakeScope.Var('zz_ef_bk_dv_co').GetValue|0]|pop [THIS.GetCountry.MakeScope.Var('zz_ef_bk_dv_pop').GetValue|0]|tr [THIS.GetCountry.MakeScope.Var('zz_ef_bk_dv_tr').GetValue|0]|capital [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bk_c_cap_v')|0]|cap_ratio [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bk_cty_capr_v')|3]"
+		}
+		remove_variable = zz_ef_bk_dv_room
+	}
+}

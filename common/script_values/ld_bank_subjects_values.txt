@@ -74,6 +74,8 @@ zz_ef_bk_prem_max = 0.01
 zz_ef_bk_appeal_k = 20
 # a bankrupt company is out of the subjects this long (days; принято ночью)
 zz_ef_bk_fail_days = 365
+# the capital a subject keeps, a share of its earning assets; above it -- to the owners monthly (Д.R9.3, принято ночью)
+zz_ef_bk_cap_norm = 0.1
 
 # COUNTRY scope: the country's accounts the subjects' follow (those held as variables)
 zz_ef_bk_c_gvd_v = { value = 0 if = { limit = { has_variable = zz_ef_bank_gov_dep } value = var:zz_ef_bank_gov_dep } }
@@ -157,6 +159,19 @@ zz_ef_bk_w_cbd_v = {
 zz_ef_bk_w_cap_v = {
 	value = zz_ef_bk_assets_v
 	add = var:zz_ef_bk_sh
+}
+# SUBJECT scope: its capital above the norm (zz_ef_bk_div_step)
+zz_ef_bk_div_due_v = {
+	value = 0
+	if = {
+		limit = { has_variable = zz_ef_bk_cap }
+		value = var:zz_ef_bk_cap
+		subtract = {
+			value = zz_ef_bk_assets_v
+			multiply = zz_ef_bk_cap_norm
+		}
+		min = 0
+	}
 }
 zz_ef_bk_mv_v = {
 	value = var:zz_ef_bk_mv

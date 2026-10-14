@@ -342,6 +342,10 @@ zz_ef_money_model_step = {
 	zz_ef_money_window_roll = { F = inflow }
 	# the companies' dividends into the pops' deposits (Д.R6.8, ld_company_accounts.txt; monthly, summed till the roll)
 	zz_ef_money_window_roll = { F = co_div }
+	# the banks' capital above the norm: «частные банкиры»' to the pops' deposits, «госбанки»' to the treasury (Д.R9.3,
+	# ld_bank_subjects.txt; monthly)
+	zz_ef_money_window_roll = { F = bk_div_pop }
+	zz_ef_money_window_roll = { F = bk_div_tr }
 	# the pops' banknotes <-> deposits (Д.R7.3, ld_pop_cash.txt)
 	zz_ef_money_window_roll = { F = cash_dep }
 	# the clearing's currency at the last receiver, for the abroad card
