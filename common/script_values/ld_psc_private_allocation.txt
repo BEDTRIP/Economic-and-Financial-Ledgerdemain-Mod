@@ -61,6 +61,25 @@ zz_ef_psc_private_income = {
 	min = 0
 }
 
+# The banks' free credit limit is the private construction's lever (Д.R9.2): the private share x min(1, the free limit
+# of the country's banks / zz_ef_psc_credit_weeks weeks of the private income) -- no free limit, no private share; a
+# country without the banks' book (outside the model) -- 1. var:zz_ef_bk_free_cr -- ld_bank_subjects.txt, the book step.
+zz_ef_psc_credit_weeks = 26
+zz_ef_psc_credit_f = {
+	value = 1
+	if = {
+		limit = { has_variable = zz_ef_bk_free_cr }
+		value = var:zz_ef_bk_free_cr
+		divide = {
+			value = zz_ef_psc_private_income
+			multiply = zz_ef_psc_credit_weeks
+			min = 1
+		}
+		min = 0
+		max = 1
+	}
+}
+
 # EF.31's rate term, as applied this month (0 before the first step).
 zz_ef_psc_rate_share = {
 	value = 0
@@ -86,6 +105,7 @@ zz_ef_psc_private_target = {
 		min = 0.01
 	}
 	add = zz_ef_psc_rate_share
+	multiply = zz_ef_psc_credit_f
 	min = 0
 	max = 1
 }

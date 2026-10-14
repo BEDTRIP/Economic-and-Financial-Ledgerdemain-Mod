@@ -73,7 +73,8 @@
   база — по ней модель цены PSC и вес штата (`calculate_state_construction_base_price`); множители входа — локальные
   переменные штата (блок регулятора читает только их).
 - `common/script_values/ld_psc_private_allocation.txt` — REPLACE `private_construction_increase` (цель
-  `zz_ef_psc_private_target`: доход + простаивающий пул + ставка).
+  `zz_ef_psc_private_target`: доход + простаивающий пул + ставка, × рычаг кредита `zz_ef_psc_credit_f` = min(1,
+  свободный лимит банков страны `var:zz_ef_bk_free_cr` / 26 недель частного дохода) — Д.R9.2, `docs/banks.md`).
 - `common/script_values/ld_pb_overbuild_values.txt` — лимит и перестройка: `zz_pb_ef_css_levels`,
   `zz_pb_ef_urban_center_levels`, `zz_pb_ef_css_rate_factor`, `zz_pb_ef_overcap_target/gap`, `zz_pb_ef_overbuild_step`,
   цена выкупа `zz_pb_ef_state_css_buyout`, порядок сноса `zz_pb_ef_state_css_downsize_order`.

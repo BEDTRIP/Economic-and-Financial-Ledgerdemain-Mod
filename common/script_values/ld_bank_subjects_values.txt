@@ -76,6 +76,18 @@ zz_ef_bk_appeal_k = 20
 zz_ef_bk_fail_days = 365
 # the capital a subject keeps, a share of its earning assets; above it -- to the owners monthly (Д.R9.3, принято ночью)
 zz_ef_bk_cap_norm = 0.1
+# the leverage (Д.R9.2, принято ночью): a subject's loans (consumer + business) at most its capital x
+# zz_ef_bk_lev_base x (zz_ef_bk_lev_ref / the key rate), within [zz_ef_bk_lev_min, zz_ef_bk_lev_max]; the key rate's
+# floor in the division
+zz_ef_bk_lev_base = 10
+zz_ef_bk_lev_ref = 0.05
+zz_ef_bk_lev_min = 5
+zz_ef_bk_lev_max = 20
+zz_ef_bk_lev_rate_floor = 0.0025
+# the capital a subject keeps above what its loans need at the leverage: the norm of Д.R9.3 is the larger of the two
+# (принято ночью) -- with 10 % of its earning assets only, a bank of loans alone would be at its limit whenever the
+# leverage is under 10
+zz_ef_bk_cap_buffer = 1.25
 
 # COUNTRY scope: the country's accounts the subjects' follow (those held as variables)
 zz_ef_bk_c_gvd_v = { value = 0 if = { limit = { has_variable = zz_ef_bank_gov_dep } value = var:zz_ef_bank_gov_dep } }
@@ -160,16 +172,61 @@ zz_ef_bk_w_cap_v = {
 	value = zz_ef_bk_assets_v
 	add = var:zz_ef_bk_sh
 }
+# COUNTRY scope: the key rate (without a CB -- the government's, zz_ef_cc_rate) and the leverage at it
+zz_ef_bk_lev_v = {
+	value = zz_ef_bk_lev_ref
+	divide = {
+		value = zz_ef_cc_rate
+		subtract = zz_ef_cc_credit_premium
+		min = zz_ef_bk_lev_rate_floor
+	}
+	multiply = zz_ef_bk_lev_base
+	min = zz_ef_bk_lev_min
+	max = zz_ef_bk_lev_max
+}
+# SUBJECT scope: its loan limit (capital x the country's leverage, var:zz_ef_bk_lev of the book step) and the free part
+zz_ef_bk_limit_v = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = zz_ef_bk_cap
+			exists = var:zz_ef_bk_cty
+			var:zz_ef_bk_cty = { has_variable = zz_ef_bk_lev }
+		}
+		value = var:zz_ef_bk_cap
+		multiply = var:zz_ef_bk_cty.var:zz_ef_bk_lev
+		min = 0
+	}
+}
+zz_ef_bk_free_v = {
+	value = zz_ef_bk_limit_v
+	subtract = zz_ef_bk_loans_v
+	min = 0
+}
+# SUBJECT scope: the capital its norm keeps -- the larger of zz_ef_bk_cap_norm of its earning assets and its loans x
+# zz_ef_bk_cap_buffer / the leverage
+zz_ef_bk_cap_keep_v = {
+	value = zz_ef_bk_assets_v
+	multiply = zz_ef_bk_cap_norm
+	if = {
+		limit = {
+			exists = var:zz_ef_bk_cty
+			var:zz_ef_bk_cty = { has_variable = zz_ef_bk_lev }
+		}
+		min = {
+			value = zz_ef_bk_loans_v
+			multiply = zz_ef_bk_cap_buffer
+			divide = var:zz_ef_bk_cty.var:zz_ef_bk_lev
+		}
+	}
+}
 # SUBJECT scope: its capital above the norm (zz_ef_bk_div_step)
 zz_ef_bk_div_due_v = {
 	value = 0
 	if = {
 		limit = { has_variable = zz_ef_bk_cap }
 		value = var:zz_ef_bk_cap
-		subtract = {
-			value = zz_ef_bk_assets_v
-			multiply = zz_ef_bk_cap_norm
-		}
+		subtract = zz_ef_bk_cap_keep_v
 		min = 0
 	}
 }

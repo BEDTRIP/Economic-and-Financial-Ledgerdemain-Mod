@@ -156,6 +156,8 @@ zz_ef_bk_box_create = {
 zz_ef_bk_book_step = {
 	save_temporary_scope_as = zz_ef_bk_c
 	set_variable = { name = zz_ef_bk_capr value = zz_ef_bk_cty_capr_v }
+	# the leverage at the key rate (Д.R9.2)
+	set_variable = { name = zz_ef_bk_lev value = zz_ef_bk_lev_v }
 	every_in_list = {
 		variable = zz_ef_bk_subj
 		set_variable = { name = zz_ef_bk_prem value = zz_ef_bk_prem_v }
@@ -179,10 +181,20 @@ zz_ef_bk_book_step = {
 	zz_ef_bk_map_alloc = { K = m }
 	zz_ef_bk_map_alloc = { K = b }
 	zz_ef_bk_map_alloc = { K = f }
+	# the banks' free credit limit (Д.R9.2): capital x leverage less loans, summed -- the private construction's lever
+	# (zz_ef_psc_credit_f, ld_psc_private_allocation.txt); the business credit's growth above it (the engine spent the
+	# pool already) is a credit all the same -- var:zz_ef_bk_over, the log
+	set_variable = { name = zz_ef_bk_free_cr value = 0 }
+	every_in_list = {
+		variable = zz_ef_bk_subj
+		set_variable = { name = zz_ef_bk_free value = zz_ef_bk_free_v }
+		scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_free_cr add = prev.var:zz_ef_bk_free } }
+	}
+	set_variable = { name = zz_ef_bk_over value = { value = var:zz_ef_bk_r_bc subtract = var:zz_ef_bk_free_cr min = 0 } }
 	if = {
 		limit = { zz_ef_logs_on = yes }
 		zz_ef_bk_sum_check = yes
-		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|bank_sum|diff [THIS.GetCountry.MakeScope.Var('zz_ef_bk_diff').GetValue|2]|map_diff [THIS.GetCountry.MakeScope.Var('zz_ef_bk_mdiff').GetValue|2]|n [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bk_subj_n_v')|0]|r_cap [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_cap').GetValue|0]|r_dep [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_dep').GetValue|0]|r_cc [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_cc').GetValue|0]|r_bc [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_bc').GetValue|0]|r_cbd [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_cbd').GetValue|0]|r_inv [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_inv').GetValue|0]|r_mg [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_mg').GetValue|0]|capital [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bk_c_cap_v')|0]|cap_ratio [THIS.GetCountry.MakeScope.Var('zz_ef_bk_capr').GetValue|3]"
+		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|bank_sum|diff [THIS.GetCountry.MakeScope.Var('zz_ef_bk_diff').GetValue|2]|map_diff [THIS.GetCountry.MakeScope.Var('zz_ef_bk_mdiff').GetValue|2]|n [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bk_subj_n_v')|0]|r_cap [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_cap').GetValue|0]|r_dep [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_dep').GetValue|0]|r_cc [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_cc').GetValue|0]|r_bc [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_bc').GetValue|0]|r_cbd [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_cbd').GetValue|0]|r_inv [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_inv').GetValue|0]|r_mg [THIS.GetCountry.MakeScope.Var('zz_ef_bk_r_mg').GetValue|0]|capital [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bk_c_cap_v')|0]|cap_ratio [THIS.GetCountry.MakeScope.Var('zz_ef_bk_capr').GetValue|3]|lev [THIS.GetCountry.MakeScope.Var('zz_ef_bk_lev').GetValue|1]|free [THIS.GetCountry.MakeScope.Var('zz_ef_bk_free_cr').GetValue|0]|over [THIS.GetCountry.MakeScope.Var('zz_ef_bk_over').GetValue|0]"
 		if = {
 			limit = { zz_ef_log_country = yes }
 			every_in_list = {
@@ -427,7 +439,7 @@ zz_ef_bk_subj_log = {
 		limit = { var:zz_ef_bk_kind ?= flag:company }
 		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.Var('zz_ef_bk_cty').GetCountry.GetNameNoFormatting]|bank_book_co|[THIS.Var('zz_ef_bk_co').GetCompany.GetNameNoFormatting]"
 	}
-	debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.Var('zz_ef_bk_cty').GetCountry.GetNameNoFormatting]|bank_book|kind [THIS.Var('zz_ef_bk_kind').GetFlagName]|levels [THIS.Var('zz_ef_bk_lv').GetValue|0]|share [THIS.Var('zz_ef_bk_sh').GetValue|3]|rate [THIS.Var('zz_ef_bk_rate').GetValue|4]|cap [THIS.Var('zz_ef_bk_cap').GetValue|0]|dep [THIS.Var('zz_ef_bk_dep').GetValue|0]|cc [THIS.Var('zz_ef_bk_cc').GetValue|0]|bc [THIS.Var('zz_ef_bk_bc').GetValue|0]|cbd [THIS.Var('zz_ef_bk_cbd').GetValue|0]|inv [THIS.Var('zz_ef_bk_inv').GetValue|0]|mg [THIS.Var('zz_ef_bk_mg').GetValue|0]|ms [THIS.Var('zz_ef_bk_ms').GetValue|0]|cash [THIS.ScriptValue('zz_ef_bk_cash_v')|0]|inc [THIS.ScriptValue('zz_ef_bk_inc_v')|0]"
+	debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.Var('zz_ef_bk_cty').GetCountry.GetNameNoFormatting]|bank_book|kind [THIS.Var('zz_ef_bk_kind').GetFlagName]|levels [THIS.Var('zz_ef_bk_lv').GetValue|0]|share [THIS.Var('zz_ef_bk_sh').GetValue|3]|rate [THIS.Var('zz_ef_bk_rate').GetValue|4]|cap [THIS.Var('zz_ef_bk_cap').GetValue|0]|dep [THIS.Var('zz_ef_bk_dep').GetValue|0]|cc [THIS.Var('zz_ef_bk_cc').GetValue|0]|bc [THIS.Var('zz_ef_bk_bc').GetValue|0]|cbd [THIS.Var('zz_ef_bk_cbd').GetValue|0]|inv [THIS.Var('zz_ef_bk_inv').GetValue|0]|mg [THIS.Var('zz_ef_bk_mg').GetValue|0]|ms [THIS.Var('zz_ef_bk_ms').GetValue|0]|cash [THIS.ScriptValue('zz_ef_bk_cash_v')|0]|inc [THIS.ScriptValue('zz_ef_bk_inc_v')|0]|free [THIS.Var('zz_ef_bk_free').GetValue|0]"
 }
 
 # SUBJECT scope: all its accounts and claims to subject $TO$ (it closes: its company has no "Bank" levels).
