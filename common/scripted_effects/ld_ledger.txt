@@ -657,6 +657,7 @@ zz_ef_lvl_buy_post = {
 		change_variable = { name = zz_ef_bank_priv add = var:zz_ef_f_lvl_post }
 		if = { limit = { NOT = { has_variable = zz_ef_pop_deposits } } set_variable = { name = zz_ef_pop_deposits value = 0 } }
 		change_variable = { name = zz_ef_pop_deposits add = var:zz_ef_f_lvl_post }
+		if = { limit = { has_variable = zz_ef_pop_savings } change_variable = { name = zz_ef_pop_savings add = var:zz_ef_f_lvl_post } }
 		zz_ef_eng_add_pool = { V = var:zz_ef_f_lvl_post }
 		set_variable = {
 			name = zz_ef_other_pool

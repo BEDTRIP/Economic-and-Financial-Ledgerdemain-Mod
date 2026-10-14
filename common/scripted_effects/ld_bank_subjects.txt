@@ -522,6 +522,7 @@ zz_ef_bk_fail_step = {
 				if = {
 					limit = { has_variable = zz_ef_pop_deposits }
 					zz_ef_post = { FROM = zz_ef_pop_deposits TO = zz_ef_bank_capital V = var:zz_ef_bk_fxd }
+					if = { limit = { has_variable = zz_ef_pop_savings } change_variable = { name = zz_ef_pop_savings subtract = var:zz_ef_bk_fxd } }
 				}
 				if = {
 					limit = { has_variable = zz_ef_fd_dep }
