@@ -1,0 +1,14 @@
+﻿# Trust in money (scripted_effects/ld_trust.txt; Д.R7.5).
+# the loyalists' weight in trust (Д.R7.5: ½)
+zz_ef_trust_loyalist_k = 0.5
+# COUNTRY scope: trust now, and as of the last month (var:zz_ef_trust; before the first month -- now)
+zz_ef_trust_now_v = {
+	value = 1
+	subtract = radical_fraction
+	add = { value = loyalist_fraction multiply = zz_ef_trust_loyalist_k }
+	min = 0
+}
+zz_ef_trust_v = {
+	value = zz_ef_trust_now_v
+	if = { limit = { has_variable = zz_ef_trust } value = var:zz_ef_trust }
+}

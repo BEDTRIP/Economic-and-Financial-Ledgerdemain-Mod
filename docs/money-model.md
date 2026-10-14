@@ -377,8 +377,13 @@
 - Покупки металла — × доля исполнения рынка (`zz_ef_metal_fill_gold/_silver`, Д.R4б.16); заказы «Банков» (денежная
   власть, банки, кубышка казны) — × масштаб `zz_ef_mt_k_g/_s` (каждую неделю × продажи / заказы рынка, от
   `zz_ef_mt_k_min` до 1, Д.R4б.27: движок берёт плату за весь заказ здания); кубышка населения сверх цели
-  (`zz_ef_popm_share_v` × `zz_ef_popm_wealth_v`) — `zz_ef_popm_dishoard`: 1 % излишка в неделю в ЦБ металлического
-  стандарта (банкноты, `zz_ef_f_popm_cb`) или в банки (вклад + пул, `zz_ef_f_popm_bank`), Д.R4б.17.
+  (`zz_ef_popm_share_v` × `zz_ef_popm_wealth_v`; доля = 0,1 + 0,5 × (1 − доверие к деньгам `zz_ef_trust_v`), 2–60 %)
+  — `zz_ef_popm_dishoard`: 1 % излишка в неделю в ЦБ металлического стандарта (банкноты, `zz_ef_f_popm_cb`) или в банки
+  (вклад + пул, `zz_ef_f_popm_bank`), Д.R4б.17.
+- **Доверие к деньгам** (Д.R7.5, [[Доверие к деньгам]]): `common/scripted_effects/ld_trust.txt`,
+  `common/script_values/ld_trust_values.txt` — раз в месяц (`zz_ef_trust_month_step` из `zz_ef_money_model_monthly_step`)
+  `var:zz_ef_trust` = 1 − `radical_fraction` + `zz_ef_trust_loyalist_k` (½) × `loyalist_fraction`; `zz_ef_trust_v` — оно
+  (до первого месяца — сейчас). Лог `EFW|…|all` — `trust`.
 - `EFT` — недельные покупки металла ЦБ/банков/населения (`zz_ef_metal_week_step`); `EFQ` — невязка металла ЦБ > 1000
   золота / 10000 серебра: металл ЦБ − снимок прошлого шага − известные движения (клиринг `zz_ef_f_clr_hume_g` / `_s`,
   кризисный выкуп `zz_ef_mt_known_g` / `_s` — `zz_ef_mt_known_add` у эмитента и продавца, пересчёт старта, арбитраж

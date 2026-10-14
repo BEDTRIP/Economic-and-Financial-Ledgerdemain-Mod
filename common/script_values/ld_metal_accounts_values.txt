@@ -621,20 +621,21 @@ zz_ef_cb_buyback_units = {
 zz_ef_cb_buyback_premium = 1.02
 
 # ---- the pops' hoard (Д.R4б.17; «Доверие к деньгам») -------------------------------
-# The pops keep a target share of all they hold (savings + metal) in metal: higher with the radicals, lower with the
-# loyalists -- the game's own split of the pops (Д.R7.1). Over the target they bring a share of the excess a week to the
+# The pops keep a target share of all they hold (savings + metal) in metal: the base + zz_ef_popm_share_distrust_k x the
+# distrust (1 - the trust in money, Д.R7.5: ld_trust.txt -- the radicals raise it, the loyalists lower it; at the 1840
+# world's shares, radicals 6 %, loyalists 1 %, 13 % as with the former coefficients). Over the target they bring a share of the excess a week to the
 # CB (a metal standard with a CB: new notes at parity) or to the banks (a deposit; the metal is the banks'). Under the
 # target nothing is forced: they buy through their need on the market.
 zz_ef_popm_share_base = 0.1
-zz_ef_popm_share_radical_k = 0.5
-zz_ef_popm_share_loyalist_k = 0.1
+zz_ef_popm_share_distrust_k = 0.5
 zz_ef_popm_share_min = 0.02
 zz_ef_popm_share_max = 0.6
 zz_ef_popm_dishoard_speed = 0.01
 zz_ef_popm_share_v = {
-	value = zz_ef_popm_share_base
-	add = { value = radical_fraction multiply = zz_ef_popm_share_radical_k }
-	subtract = { value = loyalist_fraction multiply = zz_ef_popm_share_loyalist_k }
+	value = 1
+	subtract = zz_ef_trust_v
+	multiply = zz_ef_popm_share_distrust_k
+	add = zz_ef_popm_share_base
 	min = zz_ef_popm_share_min
 	max = zz_ef_popm_share_max
 }

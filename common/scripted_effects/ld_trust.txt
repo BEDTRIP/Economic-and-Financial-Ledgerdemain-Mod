@@ -1,0 +1,9 @@
+﻿# Trust in money (R7.1; Д.R7.1, Д.R7.5; понятие «Доверие к деньгам»): no knob of its own -- the game's split of the pops
+# into loyalists, neutrals and radicals. Trust = 1 - the radicals' share + zz_ef_trust_loyalist_k x the loyalists' share
+# (shares of the population, the game's radical_fraction / loyalist_fraction), monthly into var:zz_ef_trust. Read by:
+# the pops' metal share (zz_ef_popm_share_v), the cash target (R7.2), the panic (R7.5).
+
+# COUNTRY scope, monthly (zz_ef_money_model_monthly_step).
+zz_ef_trust_month_step = {
+	set_variable = { name = zz_ef_trust value = zz_ef_trust_now_v }
+}
