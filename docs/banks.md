@@ -113,11 +113,10 @@
 - E&F, банковская часть (огромные файлы, смотреть `grep -n`):
   - `common/scripted_effects/01_financial_scripted_effects.txt`: `establish_bank_and_ef_compagnie` (стартовые компании
     E&F — зовёт история; банковской — 1 уровень «Банка», небанковской — 1 уровень своего здания, частной стройкомпании —
-    5 уровней стройсектора, Д.R4б.12; ежегодная раздача ИИ — в архиве, Д.R4б.3), `ai_privat_bank_bond_1..25` (:4130…,
-    покупка облигаций частными банками).
+    5 уровней стройсектора, Д.R4б.12; ежегодная раздача ИИ — в архиве, Д.R4б.3); покупки облигаций частными банками E&F
+    (`ai_privat_bank_bond_1..25`) — в `_archive/ef_ai_treasury_bonds/` (Д.R6.6: банки покупают на бирже).
   - `common/scripted_effects/08_list_effect.txt`: `privat_bank_variable_list` (список банковских компаний;
-    `privat_bank_variable_list_ordered` — те же банки без сортировки, из него `ai_privat_bank_bond_N` берёт случайного
-    покупателя облигаций), список `global_arbitrage_bank_variable_list_ordered` (:2209, по `gdp_var`; читатель —
+    `privat_bank_variable_list_ordered` — те же банки без сортировки), список `global_arbitrage_bank_variable_list_ordered` (:2209, по `gdp_var`; читатель —
     арбитраж — в `_archive/ef_bimetallic_arbitrage/`).
   - `common/script_values/00_financial_scripted_value.txt` — значения для интерфейса/ИИ покупок облигаций;
     `common/script_values/00_economic_scripted_value.txt:5335-6745` — `private_bank_funds*` (`private_bank_funds` =
@@ -148,8 +147,7 @@
 - Банковская наличность (`zz_ef_bank_cash_sum`, `ld_money_model_values.txt:2147`) вынесена из M1/M2; металл банков (вход
   золота/серебра) — `ld_metal_accounts.txt` (`zz_ef_bank_in_gold_goods`, `zz_ef_mt_bank_*`).
 - Год (`central_bank_ef_on_yearly_pulse_country`, `00_on_action_main.txt`): ежегодной раздачи банковских компаний ИИ нет
-  (`_archive/ef_bank_company_yearly/`, Д.R4б.3); `financial_center_ef_on_yearly_pulse_country` (:1086):
-  `ai_buy_central_bank_debt` (в т.ч. `ai_privat_bank_bond_N`).
+  (`_archive/ef_bank_company_yearly/`, Д.R4б.3); покупок облигаций ИИ E&F (`ai_buy_central_bank_debt`) нет — архив.
 - Проценты частных банков по чужим облигациям не начисляются (обе половины — в `_archive/ld_privbank_interest/`; вернуть
   одной проводкой в реестре облигаций, R5).
 
@@ -161,7 +159,7 @@
 | `zz_ef_rq_out_m` | наши деньги у держателей (реестр требований) | `zz_ef_rq_add` | `zz_ef_nr_dep_v`, `ld_reference_currency_values.txt`, `ld_ledger_values.txt` |
 | `zz_ef_f_nr_dep`, `zz_ef_f_nr_int` | поток недели: проводка клиринга (взнос/изъятие), проценты держателям | `zz_ef_nr_dep_step` | `zz_ef_v_f_nr_dep`, `zz_ef_v_f_nr_int`, лог `EFR` |
 | `zz_ef_bkcash` | наличность банков | `ld_money_model.txt:108` | модель денег |
-| `ai_privat_bank_bond_value_N`, `ai_privat_bank_buyer_slot_N`, `ai_privat_bank_seller_country_general_N` | облигации частных банков (E&F) | `ai_privat_bank_bond_N` | `zz_ef_bank_bonds` (`ld_money_model_values.txt:249`), `ld_bond_ledger.txt` (`zz_ef_pb_slot_N`) |
+| `ai_privat_bank_bond_value_N`, `ai_privat_bank_buyer_slot_N`, `ai_privat_bank_seller_country_general_N` | облигации частных банков (E&F) — не пишутся (покупки в архиве) | — | окно E&F |
 | `company_<Банк>_gold_stockpile_fix`, `_silver_stockpile_fix` (глобальные) | металл частного банка E&F | история (арбитраж `private_bank_arbitrage_*` — в `_archive/ef_bimetallic_arbitrage/`) | GUI E&F (`private_bank_gold_reserve_per_bank_gui`); модель `ld_*` их не читает |
 
 ## Вызовы и связи

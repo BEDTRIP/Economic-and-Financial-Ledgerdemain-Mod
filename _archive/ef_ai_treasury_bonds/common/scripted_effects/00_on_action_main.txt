@@ -1,0 +1,613 @@
+﻿# from common/scripted_effects/00_on_action_main.txt
+ai_buy_central_bank_debt = {
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			has_financial_center = yes #has fc
+			is_ai = yes
+			var:ai_selle_bond_maturity_yers_time_1 = 0
+		}
+		ai_buy_bond_1 = yes
+	}
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			has_financial_center = yes #has fc
+			is_ai = yes
+			var:ai_selle_bond_maturity_yers_time_2 = 0
+		}
+		ai_buy_bond_2 = yes
+	}
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			has_financial_center = yes #has fc
+			is_ai = yes
+			var:ai_selle_bond_maturity_yers_time_3 = 0
+		}
+		ai_buy_bond_3 = yes
+	}
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			has_financial_center = yes #has fc
+			is_ai = yes
+			var:ai_selle_bond_maturity_yers_time_4 = 0
+		}
+		ai_buy_bond_4 = yes
+	}
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			has_financial_center = yes #has fc
+			is_ai = yes
+			var:ai_selle_bond_maturity_yers_time_5 = 0
+		}
+		ai_buy_bond_5 = yes
+	}
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			has_financial_center = yes #has fc
+			is_ai = yes
+			var:ai_selle_bond_maturity_yers_time_6 = 0
+		}
+		ai_buy_bond_6 = yes
+	}
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			has_financial_center = yes #has fc
+			is_ai = yes
+			var:ai_selle_bond_maturity_yers_time_7 = 0
+		}
+		ai_buy_bond_7 = yes
+	}
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			has_financial_center = yes #has fc
+			is_ai = yes
+			var:ai_selle_bond_maturity_yers_time_8 = 0
+		}
+		ai_buy_bond_8 = yes
+	}
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			has_financial_center = yes #has fc
+			is_ai = yes
+			var:ai_selle_bond_maturity_yers_time_9 = 0
+		}
+		ai_buy_bond_9 = yes
+	}
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			has_financial_center = yes #has fc
+			is_ai = yes
+			var:ai_selle_bond_maturity_yers_time_10 = 0
+		}
+		ai_buy_bond_10 = yes
+	}
+
+	privat_bank_variable_list = yes
+
+	#1 Initial and renforcement
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			total_privat_bank >= 1
+			var:ai_privat_bank_buyer_slot_1 = 0
+			any_in_global_list = { variable = central_bank_debt_variable_list_ordered_1 always = yes } # the seller: a country with CB debt; empty list -- scope:seller unset
+			private_bank_funds > 1000000
+			position_regulator >= 1
+		}
+		ai_privat_bank_bond_1 = yes
+	}
+	if = {
+		limit = {
+			var:ai_privat_bank_buyer_slot_1 = 1
+		}
+		ai_privat_bank_bond_1_renforcement = yes
+	}
+	#2 Initial and renforcement
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			total_privat_bank >= 1
+			var:ai_privat_bank_buyer_slot_2 = 0
+			any_in_global_list = { variable = central_bank_debt_variable_list_ordered_1 always = yes } # the seller: a country with CB debt; empty list -- scope:seller unset
+			private_bank_funds > 1000000
+			position_regulator >= 2
+		}
+		ai_privat_bank_bond_2 = yes
+	}
+	if = {
+		limit = {
+			var:ai_privat_bank_buyer_slot_2 = 1
+		}
+		ai_privat_bank_bond_2_renforcement = yes
+	}
+	#3 Initial and renforcement
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			total_privat_bank >= 1
+			var:ai_privat_bank_buyer_slot_3 = 0
+			any_in_global_list = { variable = central_bank_debt_variable_list_ordered_1 always = yes } # the seller: a country with CB debt; empty list -- scope:seller unset
+			private_bank_funds > 1000000
+			position_regulator >= 3
+		}
+		ai_privat_bank_bond_3 = yes
+	}
+	if = {
+		limit = {
+			var:ai_privat_bank_buyer_slot_3 = 1
+		}
+		ai_privat_bank_bond_3_renforcement = yes
+	}
+	#4 Initial and renforcement
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			total_privat_bank >= 1
+			var:ai_privat_bank_buyer_slot_4 = 0
+			any_in_global_list = { variable = central_bank_debt_variable_list_ordered_1 always = yes } # the seller: a country with CB debt; empty list -- scope:seller unset
+			private_bank_funds > 1000000
+			position_regulator >= 4
+		}
+		ai_privat_bank_bond_4 = yes
+	}
+	if = {
+		limit = {
+			var:ai_privat_bank_buyer_slot_4 = 1
+		}
+		ai_privat_bank_bond_4_renforcement = yes
+	}
+	#5 Initial and renforcement
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			total_privat_bank >= 1
+			var:ai_privat_bank_buyer_slot_5 = 0
+			any_in_global_list = { variable = central_bank_debt_variable_list_ordered_1 always = yes } # the seller: a country with CB debt; empty list -- scope:seller unset
+			private_bank_funds > 1000000
+			position_regulator >= 5
+		}
+		ai_privat_bank_bond_5 = yes
+	}
+	if = {
+		limit = {
+			var:ai_privat_bank_buyer_slot_5 = 1
+		}
+		ai_privat_bank_bond_5_renforcement = yes
+	}
+	#6 Initial and renforcement
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			total_privat_bank >= 1
+			var:ai_privat_bank_buyer_slot_6 = 0
+			any_in_global_list = { variable = central_bank_debt_variable_list_ordered_1 always = yes } # the seller: a country with CB debt; empty list -- scope:seller unset
+			private_bank_funds > 1000000
+			position_regulator >= 6
+		}
+		ai_privat_bank_bond_6 = yes
+	}
+	if = {
+		limit = {
+			var:ai_privat_bank_buyer_slot_6 = 1
+		}
+		ai_privat_bank_bond_6_renforcement = yes
+	}
+	#7 Initial and renforcement
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			total_privat_bank >= 1
+			var:ai_privat_bank_buyer_slot_7 = 0
+			any_in_global_list = { variable = central_bank_debt_variable_list_ordered_1 always = yes } # the seller: a country with CB debt; empty list -- scope:seller unset
+			private_bank_funds > 1000000
+			position_regulator >= 7
+		}
+		ai_privat_bank_bond_7 = yes
+	}
+	if = {
+		limit = {
+			var:ai_privat_bank_buyer_slot_7 = 1
+		}
+		ai_privat_bank_bond_7_renforcement = yes
+	}
+	#8 Initial and renforcement
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			total_privat_bank >= 1
+			var:ai_privat_bank_buyer_slot_8 = 0
+			any_in_global_list = { variable = central_bank_debt_variable_list_ordered_1 always = yes } # the seller: a country with CB debt; empty list -- scope:seller unset
+			private_bank_funds > 1000000
+			position_regulator >= 8
+		}
+		ai_privat_bank_bond_8 = yes
+	}
+	if = {
+		limit = {
+			var:ai_privat_bank_buyer_slot_8 = 1
+		}
+		ai_privat_bank_bond_8_renforcement = yes
+	}
+	#9 Initial and renforcement
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			total_privat_bank >= 1
+			var:ai_privat_bank_buyer_slot_9 = 0
+			any_in_global_list = { variable = central_bank_debt_variable_list_ordered_1 always = yes } # the seller: a country with CB debt; empty list -- scope:seller unset
+			private_bank_funds > 1000000
+			position_regulator >= 9
+		}
+		ai_privat_bank_bond_9 = yes
+	}
+	if = {
+		limit = {
+			var:ai_privat_bank_buyer_slot_9 = 1
+		}
+		ai_privat_bank_bond_9_renforcement = yes
+	}
+	#10 Initial and renforcement
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			total_privat_bank >= 1
+			var:ai_privat_bank_buyer_slot_10 = 0
+			any_in_global_list = { variable = central_bank_debt_variable_list_ordered_1 always = yes } # the seller: a country with CB debt; empty list -- scope:seller unset
+			private_bank_funds > 1000000
+			position_regulator >= 10
+		}
+		ai_privat_bank_bond_10 = yes
+	}
+	if = {
+		limit = {
+			var:ai_privat_bank_buyer_slot_10 = 1
+		}
+		ai_privat_bank_bond_10_renforcement = yes
+	}
+	#11 Initial and renforcement
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			total_privat_bank >= 1
+			var:ai_privat_bank_buyer_slot_11 = 0
+			any_in_global_list = { variable = central_bank_debt_variable_list_ordered_1 always = yes } # the seller: a country with CB debt; empty list -- scope:seller unset
+			private_bank_funds > 1000000
+			position_regulator >= 11
+		}
+		ai_privat_bank_bond_11 = yes
+	}
+	if = {
+		limit = {
+			var:ai_privat_bank_buyer_slot_11 = 1
+		}
+		ai_privat_bank_bond_11_renforcement = yes
+	}
+	#12 Initial and renforcement
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			total_privat_bank >= 1
+			var:ai_privat_bank_buyer_slot_12 = 0
+			any_in_global_list = { variable = central_bank_debt_variable_list_ordered_1 always = yes } # the seller: a country with CB debt; empty list -- scope:seller unset
+			private_bank_funds > 1000000
+			position_regulator >= 12
+		}
+		ai_privat_bank_bond_12 = yes
+	}
+	if = {
+		limit = {
+			var:ai_privat_bank_buyer_slot_12 = 1
+		}
+		ai_privat_bank_bond_12_renforcement = yes
+	}
+	#13 Initial and renforcement
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			total_privat_bank >= 1
+			var:ai_privat_bank_buyer_slot_13 = 0
+			any_in_global_list = { variable = central_bank_debt_variable_list_ordered_1 always = yes } # the seller: a country with CB debt; empty list -- scope:seller unset
+			private_bank_funds > 1000000
+			position_regulator >= 13
+		}
+		ai_privat_bank_bond_13 = yes
+	}
+	if = {
+		limit = {
+			var:ai_privat_bank_buyer_slot_13 = 1
+		}
+		ai_privat_bank_bond_13_renforcement = yes
+	}
+	#14 Initial and renforcement
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			total_privat_bank >= 1
+			var:ai_privat_bank_buyer_slot_14 = 0
+			any_in_global_list = { variable = central_bank_debt_variable_list_ordered_1 always = yes } # the seller: a country with CB debt; empty list -- scope:seller unset
+			private_bank_funds > 1000000
+			position_regulator >= 14
+		}
+		ai_privat_bank_bond_14 = yes
+	}
+	if = {
+		limit = {
+			var:ai_privat_bank_buyer_slot_14 = 1
+		}
+		ai_privat_bank_bond_14_renforcement = yes
+	}
+	#15 Initial and renforcement
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			total_privat_bank >= 1
+			var:ai_privat_bank_buyer_slot_15 = 0
+			any_in_global_list = { variable = central_bank_debt_variable_list_ordered_1 always = yes } # the seller: a country with CB debt; empty list -- scope:seller unset
+			private_bank_funds > 1000000
+			position_regulator >= 15
+		}
+		ai_privat_bank_bond_15 = yes
+	}
+	if = {
+		limit = {
+			var:ai_privat_bank_buyer_slot_15 = 1
+		}
+		ai_privat_bank_bond_15_renforcement = yes
+	}
+	#16 Initial and renforcement
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			total_privat_bank >= 1
+			var:ai_privat_bank_buyer_slot_16 = 0
+			any_in_global_list = { variable = central_bank_debt_variable_list_ordered_1 always = yes } # the seller: a country with CB debt; empty list -- scope:seller unset
+			private_bank_funds > 1000000
+			position_regulator >= 16
+		}
+		ai_privat_bank_bond_16 = yes
+	}
+	if = {
+		limit = {
+			var:ai_privat_bank_buyer_slot_16 = 1
+		}
+		ai_privat_bank_bond_16_renforcement = yes
+	}
+	#17 Initial and renforcement
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			total_privat_bank >= 1
+			var:ai_privat_bank_buyer_slot_17 = 0
+			any_in_global_list = { variable = central_bank_debt_variable_list_ordered_1 always = yes } # the seller: a country with CB debt; empty list -- scope:seller unset
+			private_bank_funds > 1000000
+			position_regulator >= 17
+		}
+		ai_privat_bank_bond_17 = yes
+	}
+	if = {
+		limit = {
+			var:ai_privat_bank_buyer_slot_17 = 1
+		}
+		ai_privat_bank_bond_17_renforcement = yes
+	}
+	#18 Initial and renforcement
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			total_privat_bank >= 1
+			var:ai_privat_bank_buyer_slot_18 = 0
+			any_in_global_list = { variable = central_bank_debt_variable_list_ordered_1 always = yes } # the seller: a country with CB debt; empty list -- scope:seller unset
+			private_bank_funds > 1000000
+			position_regulator >= 18
+		}
+		ai_privat_bank_bond_18 = yes
+	}
+	if = {
+		limit = {
+			var:ai_privat_bank_buyer_slot_18 = 1
+		}
+		ai_privat_bank_bond_18_renforcement = yes
+	}
+	#19 Initial and renforcement
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			total_privat_bank >= 1
+			var:ai_privat_bank_buyer_slot_19 = 0
+			any_in_global_list = { variable = central_bank_debt_variable_list_ordered_1 always = yes } # the seller: a country with CB debt; empty list -- scope:seller unset
+			private_bank_funds > 1000000
+			position_regulator >= 19
+		}
+		ai_privat_bank_bond_19 = yes
+	}
+	if = {
+		limit = {
+			var:ai_privat_bank_buyer_slot_19 = 1
+		}
+		ai_privat_bank_bond_19_renforcement = yes
+	}
+	#20 Initial and renforcement
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			total_privat_bank >= 1
+			var:ai_privat_bank_buyer_slot_20 = 0
+			any_in_global_list = { variable = central_bank_debt_variable_list_ordered_1 always = yes } # the seller: a country with CB debt; empty list -- scope:seller unset
+			private_bank_funds > 1000000
+			position_regulator >= 20
+		}
+		ai_privat_bank_bond_20 = yes
+	}
+	if = {
+		limit = {
+			var:ai_privat_bank_buyer_slot_20 = 1
+		}
+		ai_privat_bank_bond_20_renforcement = yes
+	}
+	#21 Initial and renforcement
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			total_privat_bank >= 1
+			var:ai_privat_bank_buyer_slot_21 = 0
+			any_in_global_list = { variable = central_bank_debt_variable_list_ordered_1 always = yes } # the seller: a country with CB debt; empty list -- scope:seller unset
+			private_bank_funds > 1000000
+			position_regulator >= 21
+		}
+		ai_privat_bank_bond_21 = yes
+	}
+	if = {
+		limit = {
+			var:ai_privat_bank_buyer_slot_21 = 1
+		}
+		ai_privat_bank_bond_21_renforcement = yes
+	}
+	#22 Initial and renforcement
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			total_privat_bank >= 1
+			var:ai_privat_bank_buyer_slot_22 = 0
+			any_in_global_list = { variable = central_bank_debt_variable_list_ordered_1 always = yes } # the seller: a country with CB debt; empty list -- scope:seller unset
+			private_bank_funds > 1000000
+			position_regulator >= 22
+		}
+		ai_privat_bank_bond_22 = yes
+	}
+	if = {
+		limit = {
+			var:ai_privat_bank_buyer_slot_22 = 1
+		}
+		ai_privat_bank_bond_22_renforcement = yes
+	}
+	#23 Initial and renforcement
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			total_privat_bank >= 1
+			var:ai_privat_bank_buyer_slot_23 = 0
+			any_in_global_list = { variable = central_bank_debt_variable_list_ordered_1 always = yes } # the seller: a country with CB debt; empty list -- scope:seller unset
+			private_bank_funds > 1000000
+			position_regulator >= 23
+		}
+		ai_privat_bank_bond_23 = yes
+	}
+	if = {
+		limit = {
+			var:ai_privat_bank_buyer_slot_23 = 1
+		}
+		ai_privat_bank_bond_23_renforcement = yes
+	}
+	#24 Initial and renforcement
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			total_privat_bank >= 1
+			var:ai_privat_bank_buyer_slot_24 = 0
+			any_in_global_list = { variable = central_bank_debt_variable_list_ordered_1 always = yes } # the seller: a country with CB debt; empty list -- scope:seller unset
+			private_bank_funds > 1000000
+			position_regulator >= 24
+		}
+		ai_privat_bank_bond_24 = yes
+	}
+	if = {
+		limit = {
+			var:ai_privat_bank_buyer_slot_24 = 1
+		}
+		ai_privat_bank_bond_24_renforcement = yes
+	}
+	#25 Initial and renforcement
+	if = {
+		limit = {
+			has_central_bank_SS_BS_GS_GES_NISO = yes #has bc
+			total_privat_bank >= 1
+			var:ai_privat_bank_buyer_slot_25 = 0
+			any_in_global_list = { variable = central_bank_debt_variable_list_ordered_1 always = yes } # the seller: a country with CB debt; empty list -- scope:seller unset
+			private_bank_funds > 1000000
+			position_regulator >= 25
+		}
+		ai_privat_bank_bond_25 = yes
+	}
+	if = {
+		limit = {
+			var:ai_privat_bank_buyer_slot_25 = 1
+		}
+		ai_privat_bank_bond_25_renforcement = yes
+	}
+}
+
+# from bond_maturity_on_action (00_on_action_main.txt), the AI part:
+	############################
+	#AI
+	############################
+	if  = {
+		limit = {
+			var:ai_buy_bond_1_on > 0
+		}
+		ai_bond_maturity_1 = yes
+	}
+	if  = {
+		limit = {
+			var:ai_buy_bond_2_on > 0
+		}
+		ai_bond_maturity_2 = yes
+	}
+	if  = {
+		limit = {
+			var:ai_buy_bond_3_on > 0
+		}
+		ai_bond_maturity_3 = yes
+	}
+	if  = {
+		limit = {
+			var:ai_buy_bond_4_on > 0
+		}
+		ai_bond_maturity_4 = yes
+	}
+	if  = {
+		limit = {
+			var:ai_buy_bond_5_on > 0
+		}
+		ai_bond_maturity_5 = yes
+	}
+	if  = {
+		limit = {
+			var:ai_buy_bond_6_on > 0
+		}
+		ai_bond_maturity_6 = yes
+	}
+	if  = {
+		limit = {
+			var:ai_buy_bond_7_on > 0
+		}
+		ai_bond_maturity_7 = yes
+	}
+	if  = {
+		limit = {
+			var:ai_buy_bond_8_on > 0
+		}
+		ai_bond_maturity_8 = yes
+	}
+	if  = {
+		limit = {
+			var:ai_buy_bond_9_on > 0
+		}
+		ai_bond_maturity_9 = yes
+	}
+	if  = {
+		limit = {
+			var:ai_buy_bond_10_on > 0
+		}
+		ai_bond_maturity_10 = yes
+	}
+# and in financial_center_ef_on_yearly_pulse_country, before sovereign_bond_yields:
+	ai_buy_central_bank_debt = yes

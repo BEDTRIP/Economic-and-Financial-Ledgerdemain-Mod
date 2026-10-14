@@ -1,0 +1,163 @@
+﻿# from common/script_values/00_financial_scripted_value.txt
+ai_no_longer_exists_1 = {
+	value = 0
+	if = {
+		every_in_list = {
+			variable = ai_seller_country_general_1
+			add = 1
+			add = economic_instability_var_sc
+		}
+	}
+}
+ai_no_longer_exists_2 = {
+	value = 0
+	if = {
+		every_in_list = {
+			variable = ai_seller_country_general_2
+			add = 1
+			add = economic_instability_var_sc
+		}
+	}
+}
+ai_no_longer_exists_3 = {
+	value = 0
+	if = {
+		every_in_list = {
+			variable = ai_seller_country_general_3
+			add = 1
+			add = economic_instability_var_sc
+		}
+	}
+}
+ai_no_longer_exists_4 = {
+	value = 0
+	if = {
+		every_in_list = {
+			variable = ai_seller_country_general_4
+			add = 1
+			add = economic_instability_var_sc
+		}
+	}
+}
+ai_no_longer_exists_5 = {
+	value = 0
+	if = {
+		every_in_list = {
+			variable = ai_seller_country_general_5
+			add = 1
+			add = economic_instability_var_sc
+		}
+	}
+}
+ai_no_longer_exists_6 = {
+	value = 0
+	if = {
+		every_in_list = {
+			variable = ai_seller_country_general_6
+			add = 1
+			add = economic_instability_var_sc
+		}
+	}
+}
+ai_no_longer_exists_7 = {
+	value = 0
+	if = {
+		every_in_list = {
+			variable = ai_seller_country_general_7
+			add = 1
+			add = economic_instability_var_sc
+		}
+	}
+}
+ai_no_longer_exists_8 = {
+	value = 0
+	if = {
+		every_in_list = {
+			variable = ai_seller_country_general_8
+			add = 1
+			add = economic_instability_var_sc
+		}
+	}
+}
+ai_no_longer_exists_9 = {
+	value = 0
+	if = {
+		every_in_list = {
+			variable = ai_seller_country_general_9
+			add = 1
+			add = economic_instability_var_sc
+		}
+	}
+}
+ai_no_longer_exists_10 = {
+	value = 0
+	if = {
+		every_in_list = {
+			variable = ai_seller_country_general_10
+			add = 1
+			add = economic_instability_var_sc
+		}
+	}
+}
+bond_quantity_scripted = {
+	value = 0
+
+
+	# cpacité d'emprunt  par ligne  de   10% de la reserve
+	#consomme 70% de  la ressserve
+
+	#vérifit si le remaining_debt  est inferieur à gold_reserves_10 si  cela est  le  cas  alors  la  valeur  est  de remaining_debt
+
+	if  = {
+		limit  = {
+			scope:seller.remaining_debt < gold_reserves_10
+		}
+		add = {
+			value = 0
+			add = scope:seller.remaining_debt
+			divide = scope:seller.bond_price
+		}
+	}
+	if  = {
+		limit  = {
+			scope:seller.remaining_debt > gold_reserves_10
+		}
+		add = {
+			value = 0
+			add = gold_reserves_var_10
+			divide = scope:seller.bond_price
+		}
+	}
+}
+bond_quantity_scripted_privat_bank = {
+	value = 0
+
+	# cpacité d'emprunt  par ligne  de   10% de la reserve
+	#consomme 70% de  la ressserve
+
+	#vérifit si le remaining_debt  est inferieur à gold_reserves_10 si  cela est  le  cas  alors  la  valeur  est  de remaining_debt
+
+	#achat total si en dessous du seil direct
+	if  = {
+		limit  = {
+			scope:seller.remaining_debt < private_bank_funds_25
+			scope:seller.remaining_debt > 0 #si inf à 0 ou 0 alors bond_quantity_scripted_privat_bank = 0
+		}
+		add = {
+			value = 0
+			add = scope:seller.remaining_debt
+			divide = scope:seller.bond_price_in_gold
+		}
+	}
+	if  = {
+		limit  = {
+			scope:seller.remaining_debt > private_bank_funds_25
+			private_bank_funds_25 > 0 #si inf à 0 ou 0 alors bond_quantity_scripted_privat_bank = 0
+		}
+		add = {
+			value = 0
+			add = private_bank_funds_25
+			divide = scope:seller.bond_price_in_gold
+		}
+	}
+}
