@@ -23,3 +23,11 @@
 | `common/scripted_effects/ld_stock_issue_literacy.txt` | → `ld_rich_literacy.txt` (`zz_ef_rich_literacy_update`); снято: модификатор и `zz_ef_stock_issue_cut` (файл целиком — здесь) |
 | `common/on_actions/ld_capitalization_on_actions.txt` | `zz_ef_stock_issue_update = yes` → `zz_ef_rich_literacy_update = yes` |
 | `localization/<язык>/ld_cm_goods_l_<язык>.yml` | `zz_ef_stock_issue_literacy`, `zz_ef_stock_issue_literacy_desc` (11 языков; английский и русский — `localization/`) |
+
+## Кусок 2 (14.10.2026, R6.7): счётчики «акций» E&F в штатах
+`stockpiling_<акция>_stock_var_state_1` (четыре «акции») E&F копил в штате финцентра и переносил при переезде
+(`stockpiling_capital_state_transfert*`, `01_economic_scripted_effects.txt`); скрипт их больше не читает (капитализация
+— акции компаний). Удалено: 20 записей и чтений в `01_economic_scripted_effects.txt` (условие переноса, перенос в
+новый штат финцентра, сброс старого — здесь). Остались, пока их показывает окно штата E&F
+(`gui/00_ef_deported_gui_1.gui`, строки «акций» — R10): стартовые значения (`common/history/global/zz_ef_init_stockpiling_state_vars.txt`,
+`99_ef_history_global_variable.txt`, `10_new_country_var.txt`) и посев `ld_stockpile_state_var_seed.txt`.

@@ -9283,10 +9283,6 @@ stockpiling_capital_state_transfert = {
 				var:financial_center_site_var = 0
 				or = {
 					var:stockpiling_bond_var_state_1 > 0
-					var:stockpiling_manufacture_stock_var_state_1 > 0
-					var:stockpiling_agricultural_stock_var_state_1 > 0
-					var:stockpiling_mining_stock_var_state_1 > 0
-					var:stockpiling_railroad_stock_var_state_1 > 0
 				}
 			}
 		}
@@ -9314,7 +9310,8 @@ stockpiling_capital_state_transfert_financial_center_place = {
 	if  = {
 		limit  = {
 			exists = scope:financial_center_site_no_capital
-			#exists = scope:financial_center_site_capital
+			# no state marked as the financial centre's site -- nothing to move to (the scope is undefined then)
+			exists = scope:financial_center_site_capital
 		}
 
 		#actual Capital
@@ -9330,38 +9327,6 @@ stockpiling_capital_state_transfert_financial_center_place = {
 				add = {
 					scope:financial_center_site_no_capital = {
 						add = var:stockpiling_bond_var_state_1
-					}
-				}
-			}
-			change_variable = {
-				name = stockpiling_manufacture_stock_var_state_1
-				add = {
-					scope:financial_center_site_no_capital = {
-						add = var:stockpiling_manufacture_stock_var_state_1
-					}
-				}
-			}
-			change_variable = {
-				name = stockpiling_agricultural_stock_var_state_1
-				add = {
-					scope:financial_center_site_no_capital = {
-						add = var:stockpiling_agricultural_stock_var_state_1
-					}
-				}
-			}
-			change_variable = {
-				name = stockpiling_mining_stock_var_state_1
-				add = {
-					scope:financial_center_site_no_capital = {
-						add = var:stockpiling_mining_stock_var_state_1
-					}
-				}
-			}
-			change_variable = {
-				name = stockpiling_railroad_stock_var_state_1
-				add = {
-					scope:financial_center_site_no_capital = {
-						add = var:stockpiling_railroad_stock_var_state_1
 					}
 				}
 			}
@@ -9385,22 +9350,6 @@ stockpiling_capital_state_transfert_financial_center_place = {
 
 				set_variable = {
 					name = stockpiling_bond_var_state_1
-					value = 0
-				}
-				set_variable = {
-					name = stockpiling_manufacture_stock_var_state_1
-					value = 0
-				}
-				set_variable = {
-					name = stockpiling_agricultural_stock_var_state_1
-					value = 0
-				}
-				set_variable = {
-					name = stockpiling_mining_stock_var_state_1
-					value = 0
-				}
-				set_variable = {
-					name = stockpiling_railroad_stock_var_state_1
 					value = 0
 				}
 			}
@@ -9743,42 +9692,6 @@ enemy_capital_is_occuped = {
 				add = {
 					scope:occupied_capital = {
 						add = var:stockpiling_bond_var_state_1
-						multiply = 0.5
-					}
-				}
-			}
-			change_variable = {
-				name = stockpiling_manufacture_stock_var_state_1
-				add = {
-					scope:occupied_capital = {
-						add = var:stockpiling_manufacture_stock_var_state_1
-						multiply = 0.5
-					}
-				}
-			}
-			change_variable = {
-				name = stockpiling_agricultural_stock_var_state_1
-				add = {
-					scope:occupied_capital = {
-						add = var:stockpiling_agricultural_stock_var_state_1
-						multiply = 0.5
-					}
-				}
-			}
-			change_variable = {
-				name = stockpiling_mining_stock_var_state_1
-				add = {
-					scope:occupied_capital = {
-						add = var:stockpiling_mining_stock_var_state_1
-						multiply = 0.5
-					}
-				}
-			}
-			change_variable = {
-				name = stockpiling_railroad_stock_var_state_1
-				add = {
-					scope:occupied_capital = {
-						add = var:stockpiling_railroad_stock_var_state_1
 						multiply = 0.5
 					}
 				}
@@ -10791,22 +10704,6 @@ enemy_capital_is_occuped = {
 
 				change_variable = {
 					name = stockpiling_bond_var_state_1
-					divide = 2
-				}
-				change_variable = {
-					name = stockpiling_manufacture_stock_var_state_1
-					divide = 2
-				}
-				change_variable = {
-					name = stockpiling_agricultural_stock_var_state_1
-					divide = 2
-				}
-				change_variable = {
-					name = stockpiling_mining_stock_var_state_1
-					divide = 2
-				}
-				change_variable = {
-					name = stockpiling_railroad_stock_var_state_1
 					divide = 2
 				}
 

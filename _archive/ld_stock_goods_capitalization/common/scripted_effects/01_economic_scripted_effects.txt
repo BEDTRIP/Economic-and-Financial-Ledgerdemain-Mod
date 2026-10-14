@@ -1,0 +1,105 @@
+﻿# from common/scripted_effects/01_economic_scripted_effects.txt
+			change_variable = {
+				name = stockpiling_manufacture_stock_var_state_1
+				add = {
+					scope:financial_center_site_no_capital = {
+						add = var:stockpiling_manufacture_stock_var_state_1
+					}
+				}
+			}
+			change_variable = {
+				name = stockpiling_agricultural_stock_var_state_1
+				add = {
+					scope:financial_center_site_no_capital = {
+						add = var:stockpiling_agricultural_stock_var_state_1
+					}
+				}
+			}
+			change_variable = {
+				name = stockpiling_mining_stock_var_state_1
+				add = {
+					scope:financial_center_site_no_capital = {
+						add = var:stockpiling_mining_stock_var_state_1
+					}
+				}
+			}
+			change_variable = {
+				name = stockpiling_railroad_stock_var_state_1
+				add = {
+					scope:financial_center_site_no_capital = {
+						add = var:stockpiling_railroad_stock_var_state_1
+					}
+				}
+			}
+				set_variable = {
+					name = stockpiling_manufacture_stock_var_state_1
+					value = 0
+				}
+				set_variable = {
+					name = stockpiling_agricultural_stock_var_state_1
+					value = 0
+				}
+				set_variable = {
+					name = stockpiling_mining_stock_var_state_1
+					value = 0
+				}
+				set_variable = {
+					name = stockpiling_railroad_stock_var_state_1
+					value = 0
+				}
+			change_variable = {
+				name = stockpiling_manufacture_stock_var_state_1
+				add = {
+					scope:occupied_capital = {
+						add = var:stockpiling_manufacture_stock_var_state_1
+						multiply = 0.5
+					}
+				}
+			}
+			change_variable = {
+				name = stockpiling_agricultural_stock_var_state_1
+				add = {
+					scope:occupied_capital = {
+						add = var:stockpiling_agricultural_stock_var_state_1
+						multiply = 0.5
+					}
+				}
+			}
+			change_variable = {
+				name = stockpiling_mining_stock_var_state_1
+				add = {
+					scope:occupied_capital = {
+						add = var:stockpiling_mining_stock_var_state_1
+						multiply = 0.5
+					}
+				}
+			}
+			change_variable = {
+				name = stockpiling_railroad_stock_var_state_1
+				add = {
+					scope:occupied_capital = {
+						add = var:stockpiling_railroad_stock_var_state_1
+						multiply = 0.5
+					}
+				}
+			}
+				change_variable = {
+					name = stockpiling_manufacture_stock_var_state_1
+					divide = 2
+				}
+				change_variable = {
+					name = stockpiling_agricultural_stock_var_state_1
+					divide = 2
+				}
+				change_variable = {
+					name = stockpiling_mining_stock_var_state_1
+					divide = 2
+				}
+				change_variable = {
+					name = stockpiling_railroad_stock_var_state_1
+					divide = 2
+				}
+					var:stockpiling_manufacture_stock_var_state_1 > 0
+					var:stockpiling_agricultural_stock_var_state_1 > 0
+					var:stockpiling_mining_stock_var_state_1 > 0
+					var:stockpiling_railroad_stock_var_state_1 > 0
