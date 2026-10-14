@@ -598,9 +598,27 @@ zz_ef_bk_div_step = {
 		set_variable = { name = zz_ef_bk_dv_pop value = 0 }
 		set_variable = { name = zz_ef_bk_dv_tr value = 0 }
 		set_variable = { name = zz_ef_bk_dv_room value = { value = investment_pool min = 0 } }
+		# the subjects' books are the last week's: their dues are cut so the country's capital keeps the subjects' norm
+		# (var:zz_ef_bk_dv_k = (capital - the norms) / the dues, 0..1)
+		set_variable = { name = zz_ef_bk_dv_due value = 0 }
+		set_variable = { name = zz_ef_bk_dv_k value = var:zz_ef_bank_capital }
 		every_in_list = {
 			variable = zz_ef_bk_subj
-			set_variable = { name = zz_ef_bk_dv value = zz_ef_bk_div_due_v }
+			scope:zz_ef_bk_c = {
+				change_variable = { name = zz_ef_bk_dv_due add = prev.zz_ef_bk_div_due_v }
+				change_variable = { name = zz_ef_bk_dv_k subtract = prev.zz_ef_bk_cap_keep_v }
+			}
+		}
+		if = {
+			limit = { var:zz_ef_bk_dv_due > 0 }
+			set_variable = { name = zz_ef_bk_dv_k value = { value = var:zz_ef_bk_dv_k divide = var:zz_ef_bk_dv_due min = 0 max = 1 } }
+		}
+		else = {
+			set_variable = { name = zz_ef_bk_dv_k value = 0 }
+		}
+		every_in_list = {
+			variable = zz_ef_bk_subj
+			set_variable = { name = zz_ef_bk_dv value = { value = zz_ef_bk_div_due_v multiply = scope:zz_ef_bk_c.var:zz_ef_bk_dv_k } }
 			if = {
 				limit = { var:zz_ef_bk_dv > 0 }
 				if = {
@@ -644,5 +662,7 @@ zz_ef_bk_div_step = {
 			debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|bank_div|co [THIS.GetCountry.MakeScope.Var('zz_ef_bk_dv_co').GetValue|0]|pop [THIS.GetCountry.MakeScope.Var('zz_ef_bk_dv_pop').GetValue|0]|tr [THIS.GetCountry.MakeScope.Var('zz_ef_bk_dv_tr').GetValue|0]|capital [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bk_c_cap_v')|0]|cap_ratio [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bk_cty_capr_v')|3]"
 		}
 		remove_variable = zz_ef_bk_dv_room
+		remove_variable = zz_ef_bk_dv_due
+		remove_variable = zz_ef_bk_dv_k
 	}
 }
