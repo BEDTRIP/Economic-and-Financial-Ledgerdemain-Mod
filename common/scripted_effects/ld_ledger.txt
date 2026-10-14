@@ -247,11 +247,26 @@ zz_ef_reconcile = {
 			change_variable = { name = zz_ef_lvl_buy_tr add = var:zz_ef_f_lvl_buy_tr }
 			change_variable = { name = zz_ef_f_other_tr subtract = var:zz_ef_f_lvl_buy_tr }
 		}
-		# the same not a whole multiple (the week's other moves blur it): the treasury fell in a step whose state's levels
-		# grew while the companies' or private owners' fell -- the state bought them, the whole fall (принято ночью)
+		# the same not a whole multiple (the week's other moves blur it): the treasury fell by more than a level's unit in a
+		# step whose state's levels grew while the companies' or private owners' fell -- the state bought them, the whole
+		# fall; the treasury rose in a step whose state's levels fell while theirs grew -- it sold them, the whole rise
+		# (принято ночью)
 		else_if = {
 			limit = {
-				var:zz_ef_f_other_tr < zz_ef_other_tr_jump_min_neg
+				var:zz_ef_f_other_tr > zz_ef_lvl_unit
+				zz_ef_v_d_govlv <= -1
+				OR = {
+					var:zz_ef_d_complv > 0
+					var:zz_ef_d_privlv > 0
+				}
+			}
+			set_variable = { name = zz_ef_f_lvl_buy_tr value = var:zz_ef_f_other_tr }
+			change_variable = { name = zz_ef_lvl_buy_tr add = var:zz_ef_f_lvl_buy_tr }
+			change_variable = { name = zz_ef_f_other_tr subtract = var:zz_ef_f_lvl_buy_tr }
+		}
+		else_if = {
+			limit = {
+				var:zz_ef_f_other_tr < zz_ef_lvl_unit_neg
 				zz_ef_v_d_govlv >= 1
 				OR = {
 					var:zz_ef_d_complv < 0
