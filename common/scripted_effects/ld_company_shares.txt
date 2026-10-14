@@ -6,9 +6,10 @@
 # ld_claims.txt). One kind of share (Д.R6.3); a gone company's shares are lost with it (its key drops out of the maps'
 # passes -- the probe R6.1; the holders' totals follow the passes, zz_ef_co_holders_month).
 #   listing: the headquarters of the listed companies (ld_listing.txt) mark them, zz_ef_co_go_public / _private;
-#   IPO (Д.R6.10): at its first listing the company issues zz_ef_co_shares = its capitalization at the fair price; the
-#     share zz_ef_co_ipo_share of them it offers on the exchange (zz_ef_rq_co_s; the buyers' money -- its account), the
-#     rest -- to the pops of its country (zz_ef_rq_pp_s), free;
+#   IPO (Д.R6.10): listed, with zz_ef_co_ipo_months of its account behind it and a year's net profit over 0, the company
+#     issues zz_ef_co_shares = its capitalization at the fair price (a share -- a unit of its country's money at it,
+#     at least zz_ef_co_ipo_min_shares); the share zz_ef_co_ipo_share of them it offers on the exchange (zz_ef_rq_co_s;
+#     the buyers' money -- its account), the rest -- to the pops of its country (zz_ef_rq_pp_s), free;
 #   the price (Д.R6.11): the capitalization at the fair price = the year's net profit by the account (zz_ef_co_np_y: the
 #     income less the outflow, a moving average) / (the government's rate + zz_ef_equity_premium), at least the
 #     account; a share's fair price -- it over the shares x the stock's multiplier (var:zz_ef_xmul_s -- the book's
@@ -29,8 +30,15 @@ zz_ef_co_go_public = {
 		limit = { NOT = { has_variable = zz_ef_co_listed } }
 		set_variable = { name = zz_ef_co_listed value = 1 }
 	}
+	# the IPO waits for the company's profit to be known: zz_ef_co_ipo_months of its account and a year's net profit
+	# over 0 (the price is the profit's, Д.R6.11); till then it is listed with no shares
 	if = {
-		limit = { NOT = { has_variable = zz_ef_co_shares } }
+		limit = {
+			NOT = { has_variable = zz_ef_co_shares }
+			has_variable = zz_ef_co_months
+			var:zz_ef_co_months >= zz_ef_co_ipo_months
+			zz_ef_co_np_y_v > 0
+		}
 		zz_ef_co_ipo = yes
 	}
 }
@@ -46,7 +54,7 @@ zz_ef_co_go_private = {
 # to the pops of its country.
 zz_ef_co_ipo = {
 	save_temporary_scope_as = zz_ef_co_c
-	set_variable = { name = zz_ef_co_shares value = zz_ef_co_cap_fair_v }
+	set_variable = { name = zz_ef_co_shares value = { value = zz_ef_co_cap_fair_v min = zz_ef_co_ipo_min_shares } }
 	set_variable = { name = zz_ef_co_ipo_date value = 1 }
 	owner = {
 		set_variable = { name = zz_ef_t_ipo value = { value = scope:zz_ef_co_c.var:zz_ef_co_shares multiply = zz_ef_co_ipo_share } }

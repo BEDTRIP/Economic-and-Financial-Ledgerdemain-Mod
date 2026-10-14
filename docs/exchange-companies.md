@@ -309,8 +309,10 @@
 в реестре (`docs/claims.md`) и в стакане (`ld_exchange_book.txt` — генератор `regen_ld_exchange_book.py`, вид `s`, заявки
 `pp_s`, `bk_s`, `co_s`). Должник — компания. **Листинг:** месячный проход ШК (`zz_ef_listing_update`) метит компанию
 диспетчером `zz_ef_listing_mark = { S = public | private }` (генерат `regen_ef_listing.py`: тип ШК → компания страны —
-`zz_ef_co_go_public` / `_private`, `var:zz_ef_co_listed`). **IPO** (`zz_ef_co_ipo`, при первом листинге): акций
-`var:zz_ef_co_shares` = капитализация по справедливой цене (одна акция — единица денег страны по ней); доля
+`zz_ef_co_go_public` / `_private`, `var:zz_ef_co_listed`). **IPO** (`zz_ef_co_ipo`; компания в листинге, у её счёта —
+`zz_ef_co_ipo_months` (6) месяцев `var:zz_ef_co_months`, прибыль года > 0 — принято ночью): акций `var:zz_ef_co_shares` =
+капитализация по справедливой цене (одна акция — единица денег страны по ней, не меньше `zz_ef_co_ipo_min_shares` =
+1000); доля
 `zz_ef_co_ipo_share` (0,25, принято ночью) — в непроданные (`zz_ef_rq_co_s` страны), остальное — населению страны
 (`zz_ef_rq_pp_s`), бесплатно; лог `EFJ|…|ipo`. **Цена** (Д.R6.11): капитализация по справедливой
 `zz_ef_co_cap_fair_v` = чистая прибыль года `zz_ef_co_np_y` (приход − расход счёта × 12, скользящая средняя

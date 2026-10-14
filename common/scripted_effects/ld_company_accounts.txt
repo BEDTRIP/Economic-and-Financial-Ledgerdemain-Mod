@@ -36,8 +36,10 @@ zz_ef_co_month_step = {
 		set_variable = { name = zz_ef_co_out_last value = var:zz_ef_co_out }
 		set_variable = { name = zz_ef_co_in value = 0 }
 		set_variable = { name = zz_ef_co_out value = 0 }
-		# the year's net profit (the shares' fair price, Д.R6.11; ld_company_shares.txt)
+		# the year's net profit (the shares' fair price, Д.R6.11; ld_company_shares.txt) and the months of the account
 		zz_ef_co_np_update = yes
+		if = { limit = { NOT = { has_variable = zz_ef_co_months } } set_variable = { name = zz_ef_co_months value = 0 } }
+		change_variable = { name = zz_ef_co_months add = 1 }
 	}
 	set_variable = { name = zz_ef_co_share value = 0 }
 	if = {
