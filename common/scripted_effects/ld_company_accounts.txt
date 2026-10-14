@@ -1,0 +1,113 @@
+﻿# The companies' accounts (Д.R6.7; понятие «Компания»): a company is a subject of the model with its own account -- a
+# deposit in the country's banks, var:zz_ef_co_acc on the company, in the country's money. The country's companies'
+# deposits var:zz_ef_comp_dep (the banks' book, M2) = the accounts of its companies + the collector -- the private
+# sector outside the companies: zz_ef_co_rest_v, what is left of zz_ef_comp_dep over the accounts of the companies
+# that exist (a gone company's account is the collector's by itself; its variables go with it). The buildings' cash is
+# the engine's money (the script cannot move it): not the account.
+# In: the engine's contributions to the pool by the share of the companies' levels among the private levels
+# (zz_ef_pop_deposits_step, ld_money_model.txt; the rest -- the pops' deposits); the companies' part of the engine's
+# burnt money returned (ld_leak_back.txt: by the same share to the accounts, the rest to the collector); the credit,
+# the shares (R6.3, R6.6). A take (the engine made money) -- out of every account and the collector by the same
+# fraction. Log: EFJ|...|comp (the account, the last month's income), comp_sum.
+
+# COUNTRY scope, monthly (zz_ef_money_model_monthly_step): the companies' levels -- var:zz_ef_co_lv on each company,
+# their sum var:zz_ef_co_lv_sum, and their share of the private levels var:zz_ef_co_share (0..1); the last month's
+# income of each account (var:zz_ef_co_in_last) for the log.
+zz_ef_co_month_step = {
+	save_temporary_scope_as = zz_ef_co_cty
+	set_variable = { name = zz_ef_co_lv_sum value = 0 }
+	every_company = {
+		set_variable = { name = zz_ef_co_lv value = company_owned_levels }
+		scope:zz_ef_co_cty = { change_variable = { name = zz_ef_co_lv_sum add = prev.var:zz_ef_co_lv } }
+		if = { limit = { NOT = { has_variable = zz_ef_co_in } } set_variable = { name = zz_ef_co_in value = 0 } }
+		set_variable = { name = zz_ef_co_in_last value = var:zz_ef_co_in }
+		set_variable = { name = zz_ef_co_in value = 0 }
+	}
+	set_variable = { name = zz_ef_co_share value = 0 }
+	if = {
+		limit = { var:zz_ef_co_lv_sum > 0 }
+		set_variable = { name = zz_ef_t_pl value = zz_ef_priv_levels }
+		if = {
+			limit = { var:zz_ef_t_pl > 0 }
+			set_variable = {
+				name = zz_ef_co_share
+				value = {
+					value = var:zz_ef_co_lv_sum
+					divide = var:zz_ef_t_pl
+					max = 1
+				}
+			}
+		}
+		remove_variable = zz_ef_t_pl
+	}
+}
+
+# COUNTRY scope. $V$ >= 0 into the accounts of the companies by their levels (var:zz_ef_co_lv / var:zz_ef_co_lv_sum)
+# and into zz_ef_comp_dep; the companies' deposits only move here and in zz_ef_co_take.
+zz_ef_co_credit_lv = {
+	set_variable = { name = zz_ef_t_cov value = $V$ }
+	if = {
+		limit = {
+			var:zz_ef_t_cov > 0
+			has_variable = zz_ef_co_lv_sum
+			var:zz_ef_co_lv_sum > 0
+		}
+		set_variable = { name = zz_ef_t_cop value = { value = var:zz_ef_t_cov divide = var:zz_ef_co_lv_sum } }
+		every_company = {
+			limit = {
+				has_variable = zz_ef_co_lv
+				var:zz_ef_co_lv > 0
+			}
+			set_variable = { name = zz_ef_t_coa value = { value = var:zz_ef_co_lv multiply = prev.var:zz_ef_t_cop } }
+			zz_ef_co_acc_add = { V = var:zz_ef_t_coa }
+			remove_variable = zz_ef_t_coa
+		}
+		remove_variable = zz_ef_t_cop
+		if = { limit = { NOT = { has_variable = zz_ef_comp_dep } } set_variable = { name = zz_ef_comp_dep value = 0 } }
+		change_variable = { name = zz_ef_comp_dep add = var:zz_ef_t_cov }
+	}
+	remove_variable = zz_ef_t_cov
+}
+
+# COMPANY scope: $V$ into the account and the month's income.
+zz_ef_co_acc_add = {
+	if = { limit = { NOT = { has_variable = zz_ef_co_acc } } set_variable = { name = zz_ef_co_acc value = 0 } }
+	if = { limit = { NOT = { has_variable = zz_ef_co_in } } set_variable = { name = zz_ef_co_in value = 0 } }
+	change_variable = { name = zz_ef_co_acc add = $V$ }
+	change_variable = { name = zz_ef_co_in add = $V$ }
+}
+
+# COUNTRY scope. $V$ >= 0 out of zz_ef_comp_dep (at most what it holds): every account and the collector lose the same
+# fraction.
+zz_ef_co_take = {
+	if = { limit = { NOT = { has_variable = zz_ef_comp_dep } } set_variable = { name = zz_ef_comp_dep value = 0 } }
+	set_variable = { name = zz_ef_t_cov value = { value = $V$ min = 0 max = { value = var:zz_ef_comp_dep min = 0 } } }
+	if = {
+		limit = { var:zz_ef_t_cov > 0 }
+		set_variable = { name = zz_ef_t_cor value = { value = var:zz_ef_t_cov divide = var:zz_ef_comp_dep } }
+		every_company = {
+			limit = { has_variable = zz_ef_co_acc }
+			change_variable = { name = zz_ef_co_acc subtract = { value = var:zz_ef_co_acc multiply = prev.var:zz_ef_t_cor } }
+		}
+		remove_variable = zz_ef_t_cor
+		change_variable = { name = zz_ef_comp_dep subtract = var:zz_ef_t_cov }
+	}
+	remove_variable = zz_ef_t_cov
+}
+
+# COUNTRY scope, the leak-back's companies' part var:zz_ef_t_lb_c (ld_leak_back.txt): + by the share of the companies'
+# levels into their accounts, the rest to the collector; - out of all of it.
+zz_ef_co_leak_back = {
+	if = {
+		limit = { var:zz_ef_t_lb_c > 0 }
+		if = { limit = { NOT = { has_variable = zz_ef_co_share } } set_variable = { name = zz_ef_co_share value = 0 } }
+		set_variable = { name = zz_ef_t_lbs value = { value = var:zz_ef_t_lb_c multiply = var:zz_ef_co_share } }
+		zz_ef_co_credit_lv = { V = var:zz_ef_t_lbs }
+		change_variable = { name = zz_ef_comp_dep add = { value = var:zz_ef_t_lb_c subtract = var:zz_ef_t_lbs } }
+		remove_variable = zz_ef_t_lbs
+	}
+	else_if = {
+		limit = { var:zz_ef_t_lb_c < 0 }
+		zz_ef_co_take = { V = { value = var:zz_ef_t_lb_c multiply = -1 } }
+	}
+}

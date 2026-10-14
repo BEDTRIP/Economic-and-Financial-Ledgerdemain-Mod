@@ -280,6 +280,18 @@
 - `08_list_effect.txt` ссылается на ключи компаний, которых нет в диспетчере `ld_listing_switch.txt` (диспетчер знает
   только 271 тип); ссылки на ключи, которых нет ни в ванили, ни в CMF/ETF, ни в форке, удалены.
 
+**Счёт компании** (Д.R6.7; [[Компания]]): `common/scripted_effects/ld_company_accounts.txt`,
+`common/script_values/ld_company_accounts_values.txt`. Счёт — вклад компании в банках страны, `var:zz_ef_co_acc` на
+компании (в деньгах страны); вклады компаний страны `var:zz_ef_comp_dep` (книга банков, M2) = счета существующих компаний
++ собиратель — частный сектор вне компаний, `zz_ef_co_rest_v` (остаток; счёт исчезнувшей компании становится его частью
+сам, переменные компании уходят с ней). Раз в месяц (`zz_ef_co_month_step`, из `zz_ef_money_model_monthly_step`):
+уровни компании `var:zz_ef_co_lv` = `company_owned_levels`, сумма `var:zz_ef_co_lv_sum`, доля в частных уровнях
+`var:zz_ef_co_share` (`zz_ef_priv_levels`, не больше 1), приход прошлого месяца `var:zz_ef_co_in_last`. Приход:
+`zz_ef_co_credit_lv = { V }` — по уровням на счета и в `zz_ef_comp_dep`: доля взносов в пул (`zz_ef_f_co_contrib`,
+`zz_ef_pop_deposits_step`), доля возврата сгоревшего (`zz_ef_co_leak_back`; остаток — собирателю); снятие
+`zz_ef_co_take = { V }` — со всех счетов и собирателя одной долей. Лог `EFJ|…|comp` — `acc`, `in`; `comp_sum` —
+`comp_dep`, `acc_sum`, `rest`, `share`. Карточка вкладов — строкой (генератор `regen_ef_money_supply_loc.py`).
+
 **Проба R6.1 (временно, до разбора — в `_archive/ld_probe_co/`):** `common/scripted_effects/ld_probe_co.txt`,
 `events/ld_probe_co_events.txt`, `common/on_actions/ld_probe_co_on_actions.txt`, `common/scripted_guis/ld_probe_co.txt`,
 `gui/ld_probe_co.gui`, `gui/scripted_widgets/ld_probe_co.txt` — переменная, карта и список с ключом-компанией,

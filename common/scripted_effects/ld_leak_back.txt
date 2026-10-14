@@ -2,8 +2,8 @@
 # engine's behaviour the script cannot fix, measured and made good). The line «движок: оплачено сверх продаж рынка»
 # (var:zz_ef_f_leak, the week's rest by money conservation, ld_money_model_values.txt) -- a buyer pays for its whole
 # order, the sellers are paid for what sold -- comes back as deposits of those who lost it: the pops' share
-# (zz_ef_leak_back_pop_share) into their deposits, the rest into the companies' deposits (var:zz_ef_comp_dep; the
-# buildings' cash is out of the script's reach). The rest, not a list of losses: a loss a later stage posts itself
+# (zz_ef_leak_back_pop_share) into their deposits, the rest into the companies' deposits (var:zz_ef_comp_dep: the
+# companies' accounts by their levels and the collector, Д.R6.7; the buildings' cash is out of the script's reach). The rest, not a list of losses: a loss a later stage posts itself
 # (the pops' unspent income -- R7) leaves the rest by itself, nothing returns twice. A week the engine made money
 # (the line > 0) takes it out of the same deposits, at most what they and the pool hold. The pool and the book move
 # together -- «прочее» does not; the pool's card shows it a week later (var:zz_ef_w_leak_back).
@@ -42,7 +42,9 @@ zz_ef_leak_back_step = {
 		# the savings are banknotes + deposits (ld_money_model.txt, zz_ef_pop_savings_step)
 		if = { limit = { has_variable = zz_ef_pop_savings } change_variable = { name = zz_ef_pop_savings add = var:zz_ef_t_lb_p } }
 		set_variable = { name = zz_ef_f_leak_back_pop value = var:zz_ef_t_lb_p }
-		change_variable = { name = zz_ef_comp_dep add = var:zz_ef_t_lb_c }
+		# the companies' part: their accounts by the share of their levels, the rest -- the collector
+		# (ld_company_accounts.txt)
+		zz_ef_co_leak_back = yes
 		zz_ef_eng_add_pool = { V = var:zz_ef_f_leak_back }
 		if = {
 			limit = { zz_ef_logs_on = yes }

@@ -645,13 +645,15 @@ zz_ef_pop_savings_step = {
 	change_variable = { name = zz_ef_pop_savings add = var:zz_ef_f_dep_int }
 }
 
-# at the step after the business credit: the pops' contributions to the pool (the engine's gross income
-# of the pool, x the weeks of the step) are their deposits -- less the part that services the business credit (it
-# repays the banks' loans, zz_ef_f_bc_paid). The pool's private construction (its transfer to the treasury) less the
+# at the step after the business credit: the contributions to the pool (the engine's gross income of the pool, x the
+# weeks of the step) are deposits -- less the part that services the business credit (it repays the banks' loans,
+# zz_ef_f_bc_paid); the companies' share of them by their levels among the private levels (Д.R6.7,
+# var:zz_ef_co_share) goes into the companies' accounts (ld_company_accounts.txt), the rest -- the pops' deposits. The pool's private construction (its transfer to the treasury) less the
 # banks' new business credit is paid out of the deposits for building levels: deposits -> the private sector
 #. The planned economy has no pool -- no deposits.
 zz_ef_pop_deposits_step = {
 	set_variable = { name = zz_ef_f_dep_contrib value = 0 }
+	set_variable = { name = zz_ef_f_co_contrib value = 0 }
 	set_variable = { name = zz_ef_f_dep_build value = 0 }
 	if = {
 		limit = {
@@ -665,6 +667,12 @@ zz_ef_pop_deposits_step = {
 				subtract = zz_ef_v_f_bc_paid
 				min = 0
 			}
+		}
+		if = {
+			limit = { has_variable = zz_ef_co_share }
+			set_variable = { name = zz_ef_f_co_contrib value = { value = var:zz_ef_f_dep_contrib multiply = var:zz_ef_co_share } }
+			zz_ef_co_credit_lv = { V = var:zz_ef_f_co_contrib }
+			change_variable = { name = zz_ef_f_dep_contrib subtract = var:zz_ef_f_co_contrib }
 		}
 		change_variable = { name = zz_ef_pop_deposits add = var:zz_ef_f_dep_contrib }
 		change_variable = { name = zz_ef_pop_savings add = var:zz_ef_f_dep_contrib }
@@ -1085,6 +1093,8 @@ zz_ef_money_model_monthly_step = {
 		name = zz_ef_rate_private_construction
 		multiplier = var:zz_ef_rate_constr_applied
 	}
+	# the companies' levels and their share of the private levels (Д.R6.7, ld_company_accounts.txt)
+	zz_ef_co_month_step = yes
 	# the money tooltip's accounts in the log (ld_acc_log.txt)
 	zz_ef_acc_log = yes
 }

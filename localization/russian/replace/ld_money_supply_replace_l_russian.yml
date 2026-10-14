@@ -325,7 +325,7 @@
 
  # ---- deposits ----
  zz_ef_ms_deposits_01:0 "#b Вклады в банках за неделю: $zz_ef_ms_x_v_d_deposits$$zz_ef_ms_cur$#! #grey мод#!"
- zz_ef_ms_deposits_02:0 "  ↔ $zz_ef_ms_x_v_w_inflow$ $zz_ef_ms_cur$ #grey расч#! взносы в пул по движку за вычетом стройки из вкладов"
+ zz_ef_ms_deposits_02:0 "  ↔ $zz_ef_ms_x_v_w_inflow$ $zz_ef_ms_cur$ #grey расч#! взносы в пул по движку — доля населения (доля компаний по их уровням — на счета компаний) за вычетом стройки из вкладов"
  zz_ef_ms_deposits_03:0 "  ← #P +$zz_ef_ms_x_v_w_dep_int_2$ $zz_ef_ms_cur$#! #grey мод#! проценты (платят банки из пула)"
  zz_ef_ms_deposits_04:0 "  ← #P +$zz_ef_ms_x_v_f_popm_bank$ $zz_ef_ms_cur$#! #grey мод#! население сдало металл сверх нормы в банки"
  zz_ef_ms_deposits_05:0 "  ← #P +$zz_ef_ms_x_v_f_cb_int_dep$ $zz_ef_ms_cur$#! #grey мод#! прибыль частного ЦБ — вкладами владельцев"
@@ -522,6 +522,11 @@
  zz_ef_ms_x_v_f_xch_pool_neg:0 "[Max_CFixedPoint(Negate_CFixedPoint(Country.MakeScope.ScriptValue('zz_ef_v_f_xch_pool')), '(CFixedPoint)0')|D]"
  zz_ef_ms_x_v_f_xch_pool:0 "[Max_CFixedPoint(Country.MakeScope.ScriptValue('zz_ef_v_f_xch_pool'), '(CFixedPoint)0')|D]"
  zz_ef_ms_x_v_f_fd_pp:0 "[Country.MakeScope.ScriptValue('zz_ef_v_f_fd_pp')|D]"
+ zz_ef_ms_x_comp_dep_v:0 "[Country.MakeScope.ScriptValue('zz_ef_comp_dep_v')|D]"
+ zz_ef_ms_x_co_acc_sum_v:0 "[Country.MakeScope.ScriptValue('zz_ef_co_acc_sum_v')|D]"
+ zz_ef_ms_x_co_rest_v:0 "[Country.MakeScope.ScriptValue('zz_ef_co_rest_v')|D]"
+ zz_ef_ms_x_v_f_co_contrib:0 "[Country.MakeScope.ScriptValue('zz_ef_v_f_co_contrib')|D]"
+ zz_ef_ms_x_co_share_v:0 "[Country.MakeScope.ScriptValue('zz_ef_co_share_v')|%0]"
  zz_ef_ms_x_v_f_fd_out:0 "[Max_CFixedPoint(Country.MakeScope.ScriptValue('zz_ef_v_f_fd_out'), '(CFixedPoint)0')|D]"
  zz_ef_ms_x_v_f_fd_in:0 "[Max_CFixedPoint(Country.MakeScope.ScriptValue('zz_ef_v_f_fd_in'), '(CFixedPoint)0')|D]"
  zz_ef_ms_x_fd_dep_v:0 "[Country.MakeScope.ScriptValue('zz_ef_fd_dep_v')|D]"
@@ -642,6 +647,6 @@
  zz_ef_ms_deposits_10:0 "  ↔ $zz_ef_ms_x_v_d_deposits_rest$ $zz_ef_ms_cur$ #grey расч#! прочее"
  zz_ef_ms_x_v_w_leak_back_pop:0 "[Country.MakeScope.ScriptValue('zz_ef_v_w_leak_back_pop')|D+=]"
  zz_ef_ms_banks_45:0 "#b Кредит ЦБ банкам#! $zz_ef_ms_x_bank_cb_debt$ $zz_ef_ms_cur$, цель $zz_ef_ms_x_cb_credit_target$ $zz_ef_ms_cur$; пул — $zz_ef_ms_x_pool_months$ мес. взносов"
- zz_ef_ms_deposits_11:0 "Вклады — долг банков населению; деньги лежат в резервах банков (пул) и в выданных кредитах. Ставка по вкладам $zz_ef_ms_x_deposit_rate$ = ключевая − маржа банков $zz_ef_ms_x_deposit_margin$."
+ zz_ef_ms_deposits_11:0 "Вклады — долг банков населению; деньги лежат в резервах банков (пул) и в выданных кредитах. Ставка по вкладам $zz_ef_ms_x_deposit_rate$ = ключевая − маржа банков $zz_ef_ms_x_deposit_margin$. Вклады компаний $zz_ef_ms_x_comp_dep_v$ $zz_ef_ms_cur$ (счета компаний $zz_ef_ms_x_co_acc_sum_v$ $zz_ef_ms_cur$, прочий частный сектор $zz_ef_ms_x_co_rest_v$ $zz_ef_ms_cur$); за неделю им — $zz_ef_ms_x_v_f_co_contrib$ $zz_ef_ms_cur$ взносов, доля компаний в частных уровнях $zz_ef_ms_x_co_share_v$."
  zz_ef_ms_x_v_w_lvl_post:0 "[Max_CFixedPoint(Country.MakeScope.ScriptValue('zz_ef_v_w_lvl_post'), '(CFixedPoint)0')|D]"
  zz_ef_ms_x_v_w_lvl_post_2:0 "[Country.MakeScope.ScriptValue('zz_ef_v_w_lvl_post')|D]"

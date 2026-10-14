@@ -325,7 +325,7 @@
 
  # ---- deposits ----
  zz_ef_ms_deposits_01:0 "#b Bank deposits this week: $zz_ef_ms_x_v_d_deposits$$zz_ef_ms_cur$#! #grey mod#!"
- zz_ef_ms_deposits_02:0 "  ↔ $zz_ef_ms_x_v_w_inflow$ $zz_ef_ms_cur$ #grey calc#! contributions to the pool by the engine less construction paid from deposits"
+ zz_ef_ms_deposits_02:0 "  ↔ $zz_ef_ms_x_v_w_inflow$ $zz_ef_ms_cur$ #grey calc#! contributions to the pool by the engine — the pops' part (the companies' part by their levels goes to their accounts) less construction paid from deposits"
  zz_ef_ms_deposits_03:0 "  ← #P +$zz_ef_ms_x_v_w_dep_int_2$ $zz_ef_ms_cur$#! #grey mod#! interest (the banks pay it from the pool)"
  zz_ef_ms_deposits_04:0 "  ← #P +$zz_ef_ms_x_v_f_popm_bank$ $zz_ef_ms_cur$#! #grey mod#! pops sold their metal over the norm to the banks"
  zz_ef_ms_deposits_05:0 "  ← #P +$zz_ef_ms_x_v_f_cb_int_dep$ $zz_ef_ms_cur$#! #grey mod#! a private CB's profit — its owners' deposits"
@@ -522,6 +522,11 @@
  zz_ef_ms_x_v_f_xch_pool_neg:0 "[Max_CFixedPoint(Negate_CFixedPoint(Country.MakeScope.ScriptValue('zz_ef_v_f_xch_pool')), '(CFixedPoint)0')|D]"
  zz_ef_ms_x_v_f_xch_pool:0 "[Max_CFixedPoint(Country.MakeScope.ScriptValue('zz_ef_v_f_xch_pool'), '(CFixedPoint)0')|D]"
  zz_ef_ms_x_v_f_fd_pp:0 "[Country.MakeScope.ScriptValue('zz_ef_v_f_fd_pp')|D]"
+ zz_ef_ms_x_comp_dep_v:0 "[Country.MakeScope.ScriptValue('zz_ef_comp_dep_v')|D]"
+ zz_ef_ms_x_co_acc_sum_v:0 "[Country.MakeScope.ScriptValue('zz_ef_co_acc_sum_v')|D]"
+ zz_ef_ms_x_co_rest_v:0 "[Country.MakeScope.ScriptValue('zz_ef_co_rest_v')|D]"
+ zz_ef_ms_x_v_f_co_contrib:0 "[Country.MakeScope.ScriptValue('zz_ef_v_f_co_contrib')|D]"
+ zz_ef_ms_x_co_share_v:0 "[Country.MakeScope.ScriptValue('zz_ef_co_share_v')|%0]"
  zz_ef_ms_x_v_f_fd_out:0 "[Max_CFixedPoint(Country.MakeScope.ScriptValue('zz_ef_v_f_fd_out'), '(CFixedPoint)0')|D]"
  zz_ef_ms_x_v_f_fd_in:0 "[Max_CFixedPoint(Country.MakeScope.ScriptValue('zz_ef_v_f_fd_in'), '(CFixedPoint)0')|D]"
  zz_ef_ms_x_fd_dep_v:0 "[Country.MakeScope.ScriptValue('zz_ef_fd_dep_v')|D]"
@@ -642,6 +647,6 @@
  zz_ef_ms_deposits_10:0 "  ↔ $zz_ef_ms_x_v_d_deposits_rest$ $zz_ef_ms_cur$ #grey calc#! other"
  zz_ef_ms_x_v_w_leak_back_pop:0 "[Country.MakeScope.ScriptValue('zz_ef_v_w_leak_back_pop')|D+=]"
  zz_ef_ms_banks_45:0 "#b CB credit to banks#! $zz_ef_ms_x_bank_cb_debt$ $zz_ef_ms_cur$, target $zz_ef_ms_x_cb_credit_target$ $zz_ef_ms_cur$; the pool holds $zz_ef_ms_x_pool_months$ months of contributions"
- zz_ef_ms_deposits_11:0 "Deposits are the banks' debt to pops; the money is in the banks' reserves (the pool) and in their loans. Deposit rate $zz_ef_ms_x_deposit_rate$ = key − the banks' margin $zz_ef_ms_x_deposit_margin$."
+ zz_ef_ms_deposits_11:0 "Deposits are the banks' debt to pops; the money is in the banks' reserves (the pool) and in their loans. Deposit rate $zz_ef_ms_x_deposit_rate$ = key − the banks' margin $zz_ef_ms_x_deposit_margin$. The companies' deposits $zz_ef_ms_x_comp_dep_v$ $zz_ef_ms_cur$ (company accounts $zz_ef_ms_x_co_acc_sum_v$ $zz_ef_ms_cur$, the rest of the private sector $zz_ef_ms_x_co_rest_v$ $zz_ef_ms_cur$); this week $zz_ef_ms_x_v_f_co_contrib$ $zz_ef_ms_cur$ of contributions went to them, the companies' share of private levels $zz_ef_ms_x_co_share_v$."
  zz_ef_ms_x_v_w_lvl_post:0 "[Max_CFixedPoint(Country.MakeScope.ScriptValue('zz_ef_v_w_lvl_post'), '(CFixedPoint)0')|D]"
  zz_ef_ms_x_v_w_lvl_post_2:0 "[Country.MakeScope.ScriptValue('zz_ef_v_w_lvl_post')|D]"

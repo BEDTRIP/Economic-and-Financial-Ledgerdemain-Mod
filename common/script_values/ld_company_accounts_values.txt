@@ -1,0 +1,31 @@
+﻿# The companies' accounts (Д.R6.7, scripted_effects/ld_company_accounts.txt).
+# COUNTRY scope: the accounts of the companies that exist, and the collector -- the companies' deposits over them.
+zz_ef_co_acc_sum_v = {
+	value = 0
+	every_company = {
+		limit = { has_variable = zz_ef_co_acc }
+		add = var:zz_ef_co_acc
+	}
+}
+zz_ef_co_rest_v = {
+	value = zz_ef_comp_dep_v
+	subtract = zz_ef_co_acc_sum_v
+}
+zz_ef_co_share_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_co_share } value = var:zz_ef_co_share }
+}
+# the week's contributions to the pool that went into the companies' accounts (zz_ef_pop_deposits_step)
+zz_ef_v_f_co_contrib = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_co_contrib } value = var:zz_ef_f_co_contrib }
+}
+# COMPANY scope: the account and the last month's income (the log)
+zz_ef_co_acc_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_co_acc } value = var:zz_ef_co_acc }
+}
+zz_ef_co_in_last_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_co_in_last } value = var:zz_ef_co_in_last }
+}

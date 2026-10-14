@@ -1923,6 +1923,11 @@ zz_ef_agg_m2 = {
 	}
 	# the investment fund's deposit (ld_investment_fund.txt) -- a deposit in the banks, as the pops'
 	add = zz_ef_fd_dep_v
+	# the companies' deposits (Д.R6.7: their accounts and the collector, ld_company_accounts.txt)
+	add = {
+		value = zz_ef_comp_dep_v
+		min = 0
+	}
 }
 # Shares of a year's GDP, for the tooltip (the norm: Britain 1830s M2 ~45%).
 zz_ef_agg_m0_to_gdp = {
