@@ -1,7 +1,7 @@
 # Стройка (PSC + E&F private construction + лимит секторов)
 **Смысл.** Стройка — PSC внутри форка: частный сектор и казна платят за строительные товары, частная стройка — кредит
 банков из пула, рычаг — ставка. **Понятия:** [[Строительство|Стройка]], [[Инвестиционный пул|Пул]], [[Ставка ЦБ]],
-[[Рычаги на движок]]. **Решения:** Д.R3.7, Д.R2.13, Д.Г.6, Д.Г.7, Д.R9.5 (аудит PSC; правила — Д.R8в.27)
+[[Рычаги на движок]]. **Решения:** Д.R3.7, Д.R2.13, Д.Г.6, Д.Г.7, Д.R9.5 (аудит PSC; правила — Д.R8в.27), Д.R9.11
 (`решения.md`); отменённые Д.R8в.24, Д.R8в.26 — `история/2026-10-14 этап R9.md`, «Перенесено».
 
 Частный сектор строит через здание `building_construction_sector` (PSC), казна платит остаток через регулятор очков
@@ -22,7 +22,8 @@
   `pm_wooden/iron_frame/steel_frame/arc_welded_buildings` (вход: материалы; выход: `*_construction`; выпуск
   «акций» E&F `manufacture_stock` снят — Д.R4б.8; выход стройтоваров больше на его выручку по базовым ценам: 24 / 64 /
   136 / 204 — Д.R4б.14), PM регулятора `pm_{wood,iron,steel,arc_welded}_point_conversion` (`country_construction_add`;
-  вход — 10 единиц своего стройтовара на очко).
+  вход — по 10 каждого из четырёх стройтоваров на очко, доли режут модификаторы `zz_ef_reg_in_<товар>`, Д.R9.5; метод
+  регулятора называет товар сектора штата — по его базовой цене очки, Д.R9.11).
 - `common/production_method_groups/PSC_construction.txt` — `pmg_construction_regulator`.
 - `common/goods/PSC_goods.txt` — `wood_/iron_/steel_/arc_welded_construction`.
 - `common/defines/PSC_defines.txt` — `CONSTRUCTION_CAMP_BUILDING = building_construction_regulator`.
@@ -54,10 +55,17 @@
   (`gui/PSC_construction_expense_widget.gui`); оба файла — одна строка без перевода строки.
 
 **Ledgerdemain (`ld_*`) над PSC**
-- Сняты в R9 и лежат в архиве: закупка регулятора по рынку (Д.R9.5 — смесь стройтоваров, очки −21 %,
-  `_archive/psc_regulator_market_mix/`) и регулятор не больше предложения рынка (Д.R9.4 — очки −60 %,
-  `_archive/ld_psc_market_fill/`); вернуть — R9б: смесь с очками по базовой цене товара метода сектора (Д.R9.11),
-  регулятор — вместе с выпуском секторов (Д.R9.10).
+- `common/scripted_effects/ld_construction_market.txt`, `common/script_values/ld_construction_market_values.txt`,
+  `common/static_modifiers/ld_construction_market_modifiers.txt` (`zz_ef_reg_in_<товар>`: `goods_input_<товар>_mult`),
+  `common/modifier_type_definitions/ld_construction_market_modifier_types.txt` (типы `goods_input_<стройтовар>_mult` —
+  у товаров мода их нет), `localization/*/ld_construction_market_l_*.yml` — закупка регулятора по рынку (Д.R9.5,
+  Д.R9.11): `zz_ef_reg_market_step` в штате с регулятором каждую неделю PSC — доля товара `var:zz_ef_reg_s_<товар>` —
+  полшага (`zz_ef_reg_step`) к предложению рынка × (самая низкая местная цена / местная цена)² (местная цена — база × (1
+  + `state_goods_pricier`)); множители входа — локальные переменные штата (блок регулятора читает только их). Очки и
+  вес штата — по базовой цене товара метода регулятора (`calculate_state_construction_base_price`, как без смеси):
+  закупка дешёвого дерева в модели цены PSC не дорожает (Д.R9.11).
+- Снят в R9 и лежит в архиве: регулятор не больше предложения рынка (Д.R9.4 — очки −60 %, `_archive/ld_psc_market_fill/`);
+  вернуть — R9б, вместе с выпуском секторов (Д.R9.10).
 - `common/script_values/ld_psc_private_allocation.txt` — REPLACE `private_construction_increase` (цель
   `zz_ef_psc_private_target`: доход + простаивающий пул + ставка, × рычаг кредита `zz_ef_psc_credit_f` — от 0,5 без
   свободного лимита банков до 1, когда свободный лимит страны `var:zz_ef_bk_free_cr` ≥ 13 недель нового делового
@@ -131,7 +139,7 @@
      выпуска: выпуск × базовая цена / `weighted_total`; от 0 до остатка трат страны
      `var:psc_remaining_construction_spending` — переменная страны, уменьшается после каждого штата и снимается после
      цикла), `set_state_construction_efficiency` (модификатор на сектор), `state_construction_allocation` ->
-     `construction_throughput_mult` на регуляторе;
+     `construction_throughput_mult` на регуляторе; перед этим — `zz_ef_reg_market_step` (доли закупки, Д.R9.5);
    - `prev_estimated_investment_pool = investment_pool + investment_pool_net_income`.
 4. `set_spending_value` (только игрок) -> `set_government_construction_spending`.
 5. `on_production_method_changed`, `on_building_built` (сектор) -> `set_new_point_conversion_method` (PM регулятора = PM
@@ -146,6 +154,7 @@
 ## Переменные
 | имя | смысл | пишет | читает |
 |---|---|---|---|
+| `zz_ef_reg_s_<товар>` (штат) | доля товара в закупке регулятора (Д.R9.5) | `zz_ef_reg_market_step` | он же |
 | `last_construction_run` (страна) | дата последнего пересчёта | `set_construction_country`, `psc_save_real_construction_cost` | `psc_test_show`, `on_acquired_construction_tech` |
 | `construction_spending_level` (страна) | доля макс. госрасходов на стройку | `check_construction_spending_level`, `psc_button_*_sgui` | `max_government_construction_at_spending_level` |
 | `max_government_construction_spending`, `max_government_construction_at_spending_level`, `limited_government_construction_spending`, `total_construction_spending` | расходы | `set_construction_point_demand`, sgui | значения PSC, GUI |
