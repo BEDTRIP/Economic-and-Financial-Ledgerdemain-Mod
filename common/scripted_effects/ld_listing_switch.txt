@@ -2182,4 +2182,1088 @@ zz_ef_listing_go_private = {
 }
 
 zz_ef_listing_mark = {
+	if = {
+		limit = { is_building_type = building_company_BancaCommercialeItaliana }
+		owner = { if = { limit = { has_company = company_type:company_BancaCommercialeItaliana } company:company_BancaCommercialeItaliana = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BancaDItalia }
+		owner = { if = { limit = { has_company = company_type:company_BancaDItalia } company:company_BancaDItalia = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BancoCentralDeCostaRica }
+		owner = { if = { limit = { has_company = company_type:company_BancoCentralDeCostaRica } company:company_BancoCentralDeCostaRica = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BancoCentralDeGuatemala }
+		owner = { if = { limit = { has_company = company_type:company_BancoCentralDeGuatemala } company:company_BancoCentralDeGuatemala = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BancoCentralDeHonduras }
+		owner = { if = { limit = { has_company = company_type:company_BancoCentralDeHonduras } company:company_BancoCentralDeHonduras = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BancoCentralDeVenezuela }
+		owner = { if = { limit = { has_company = company_type:company_BancoCentralDeVenezuela } company:company_BancoCentralDeVenezuela = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BancoCentralDelUruguay }
+		owner = { if = { limit = { has_company = company_type:company_BancoCentralDelUruguay } company:company_BancoCentralDelUruguay = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BancoCommercialDoBrasil }
+		owner = { if = { limit = { has_company = company_type:company_BancoCommercialDoBrasil } company:company_BancoCommercialDoBrasil = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BancoCommercialPortugues }
+		owner = { if = { limit = { has_company = company_type:company_BancoCommercialPortugues } company:company_BancoCommercialPortugues = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BancoDeBilbao }
+		owner = { if = { limit = { has_company = company_type:company_BancoDeBilbao } company:company_BancoDeBilbao = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BancoDeChile }
+		owner = { if = { limit = { has_company = company_type:company_BancoDeChile } company:company_BancoDeChile = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BancoDeMexico }
+		owner = { if = { limit = { has_company = company_type:company_BancoDeMexico } company:company_BancoDeMexico = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BancoDePortugal }
+		owner = { if = { limit = { has_company = company_type:company_BancoDePortugal } company:company_BancoDePortugal = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BancoDeValparaiso }
+		owner = { if = { limit = { has_company = company_type:company_BancoDeValparaiso } company:company_BancoDeValparaiso = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BancoDoBrasil }
+		owner = { if = { limit = { has_company = company_type:company_BancoDoBrasil } company:company_BancoDoBrasil = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BancoEspanolDeLaHabana }
+		owner = { if = { limit = { has_company = company_type:company_BancoEspanolDeLaHabana } company:company_BancoEspanolDeLaHabana = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BancoEstado }
+		owner = { if = { limit = { has_company = company_type:company_BancoEstado } company:company_BancoEstado = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BancoHipotecarioNacional }
+		owner = { if = { limit = { has_company = company_type:company_BancoHipotecarioNacional } company:company_BancoHipotecarioNacional = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BancoHispanoColonial }
+		owner = { if = { limit = { has_company = company_type:company_BancoHispanoColonial } company:company_BancoHispanoColonial = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BancoMercantil }
+		owner = { if = { limit = { has_company = company_type:company_BancoMercantil } company:company_BancoMercantil = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BancoMercantilMexicano }
+		owner = { if = { limit = { has_company = company_type:company_BancoMercantilMexicano } company:company_BancoMercantilMexicano = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BancoNacionArgentina }
+		owner = { if = { limit = { has_company = company_type:company_BancoNacionArgentina } company:company_BancoNacionArgentina = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BancoNacionalDeBolivia }
+		owner = { if = { limit = { has_company = company_type:company_BancoNacionalDeBolivia } company:company_BancoNacionalDeBolivia = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BancoNacionalDePanama }
+		owner = { if = { limit = { has_company = company_type:company_BancoNacionalDePanama } company:company_BancoNacionalDePanama = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BancoNacionalDelParaguay }
+		owner = { if = { limit = { has_company = company_type:company_BancoNacionalDelParaguay } company:company_BancoNacionalDelParaguay = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BancoProvincia }
+		owner = { if = { limit = { has_company = company_type:company_BancoProvincia } company:company_BancoProvincia = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BancoRepublicaColombia }
+		owner = { if = { limit = { has_company = company_type:company_BancoRepublicaColombia } company:company_BancoRepublicaColombia = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BankAmericanExpress }
+		owner = { if = { limit = { has_company = company_type:company_BankAmericanExpress } company:company_BankAmericanExpress = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BankAngloPersian }
+		owner = { if = { limit = { has_company = company_type:company_BankAngloPersian } company:company_BankAngloPersian = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BankBOCOM }
+		owner = { if = { limit = { has_company = company_type:company_BankBOCOM } company:company_BankBOCOM = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BankCreditLyonnais }
+		owner = { if = { limit = { has_company = company_type:company_BankCreditLyonnais } company:company_BankCreditLyonnais = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BankDesjardins }
+		owner = { if = { limit = { has_company = company_type:company_BankDesjardins } company:company_BankDesjardins = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BankGoldmanSachs }
+		owner = { if = { limit = { has_company = company_type:company_BankGoldmanSachs } company:company_BankGoldmanSachs = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BankHSBC }
+		owner = { if = { limit = { has_company = company_type:company_BankHSBC } company:company_BankHSBC = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BankIBC }
+		owner = { if = { limit = { has_company = company_type:company_BankIBC } company:company_BankIBC = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BankJPMorgan }
+		owner = { if = { limit = { has_company = company_type:company_BankJPMorgan } company:company_BankJPMorgan = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BankMelliIran }
+		owner = { if = { limit = { has_company = company_type:company_BankMelliIran } company:company_BankMelliIran = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BankOfBombay }
+		owner = { if = { limit = { has_company = company_type:company_BankOfBombay } company:company_BankOfBombay = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BankOfIndiaCompany }
+		owner = { if = { limit = { has_company = company_type:company_BankOfIndiaCompany } company:company_BankOfIndiaCompany = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BankOfJapan }
+		owner = { if = { limit = { has_company = company_type:company_BankOfJapan } company:company_BankOfJapan = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BankOfMontreal }
+		owner = { if = { limit = { has_company = company_type:company_BankOfMontreal } company:company_BankOfMontreal = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BankSBoBSA }
+		owner = { if = { limit = { has_company = company_type:company_BankSBoBSA } company:company_BankSBoBSA = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BankTejaratPersia }
+		owner = { if = { limit = { has_company = company_type:company_BankTejaratPersia } company:company_BankTejaratPersia = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BankWellsFargo }
+		owner = { if = { limit = { has_company = company_type:company_BankWellsFargo } company:company_BankWellsFargo = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_Bank_Ultramarino }
+		owner = { if = { limit = { has_company = company_type:company_Bank_Ultramarino } company:company_Bank_Ultramarino = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_Bankenverein }
+		owner = { if = { limit = { has_company = company_type:company_Bankenverein } company:company_Bankenverein = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BankofEngland }
+		owner = { if = { limit = { has_company = company_type:company_BankofEngland } company:company_BankofEngland = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BankofSpain }
+		owner = { if = { limit = { has_company = company_type:company_BankofSpain } company:company_BankofSpain = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BanqueDeBruxelles }
+		owner = { if = { limit = { has_company = company_type:company_BanqueDeBruxelles } company:company_BanqueDeBruxelles = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BanqueDeFrance }
+		owner = { if = { limit = { has_company = company_type:company_BanqueDeFrance } company:company_BanqueDeFrance = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BanqueDeParisEtDesPaysBas }
+		owner = { if = { limit = { has_company = company_type:company_BanqueDeParisEtDesPaysBas } company:company_BanqueDeParisEtDesPaysBas = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BanqueEgyptienne }
+		owner = { if = { limit = { has_company = company_type:company_BanqueEgyptienne } company:company_BanqueEgyptienne = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BanqueImperialeOttomane }
+		owner = { if = { limit = { has_company = company_type:company_BanqueImperialeOttomane } company:company_BanqueImperialeOttomane = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BanqueNationaleDeBelgique }
+		owner = { if = { limit = { has_company = company_type:company_BanqueNationaleDeBelgique } company:company_BanqueNationaleDeBelgique = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BasicBank }
+		owner = { if = { limit = { has_company = company_type:company_BasicBank } company:company_BasicBank = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_BayerischeHypothekenUndWechselBank }
+		owner = { if = { limit = { has_company = company_type:company_BayerischeHypothekenUndWechselBank } company:company_BayerischeHypothekenUndWechselBank = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_CanadianImperialBankOfCommerce }
+		owner = { if = { limit = { has_company = company_type:company_CanadianImperialBankOfCommerce } company:company_CanadianImperialBankOfCommerce = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_CassaDiRisparmioDiTorino }
+		owner = { if = { limit = { has_company = company_type:company_CassaDiRisparmioDiTorino } company:company_CassaDiRisparmioDiTorino = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_ChaseBank }
+		owner = { if = { limit = { has_company = company_type:company_ChaseBank } company:company_ChaseBank = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_ChohungBank }
+		owner = { if = { limit = { has_company = company_type:company_ChohungBank } company:company_ChohungBank = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_ChristianiaBank }
+		owner = { if = { limit = { has_company = company_type:company_ChristianiaBank } company:company_ChristianiaBank = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_ColonialBankOfAustralia }
+		owner = { if = { limit = { has_company = company_type:company_ColonialBankOfAustralia } company:company_ColonialBankOfAustralia = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_DaQingBank }
+		owner = { if = { limit = { has_company = company_type:company_DaQingBank } company:company_DaQingBank = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_DeNederlandscheBank }
+		owner = { if = { limit = { has_company = company_type:company_DeNederlandscheBank } company:company_DeNederlandscheBank = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_DeutscheBank }
+		owner = { if = { limit = { has_company = company_type:company_DeutscheBank } company:company_DeutscheBank = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_HandelsBanken }
+		owner = { if = { limit = { has_company = company_type:company_HandelsBanken } company:company_HandelsBanken = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_ImperialBankofIndia }
+		owner = { if = { limit = { has_company = company_type:company_ImperialBankofIndia } company:company_ImperialBankofIndia = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_ImperialBankofPersia }
+		owner = { if = { limit = { has_company = company_type:company_ImperialBankofPersia } company:company_ImperialBankofPersia = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_LandmandsBanken }
+		owner = { if = { limit = { has_company = company_type:company_LandmandsBanken } company:company_LandmandsBanken = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_LloydsBank }
+		owner = { if = { limit = { has_company = company_type:company_LloydsBank } company:company_LloydsBank = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_Mitsubishiexchangehousebank }
+		owner = { if = { limit = { has_company = company_type:company_Mitsubishiexchangehousebank } company:company_Mitsubishiexchangehousebank = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_NationalBankOfAustralia }
+		owner = { if = { limit = { has_company = company_type:company_NationalBankOfAustralia } company:company_NationalBankOfAustralia = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_NationalWestminsterBank }
+		owner = { if = { limit = { has_company = company_type:company_NationalWestminsterBank } company:company_NationalWestminsterBank = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_OesterreichischeCreditAnstalt }
+		owner = { if = { limit = { has_company = company_type:company_OesterreichischeCreditAnstalt } company:company_OesterreichischeCreditAnstalt = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_OesterreichischeNationalbank }
+		owner = { if = { limit = { has_company = company_type:company_OesterreichischeNationalbank } company:company_OesterreichischeNationalbank = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_OttomanBank }
+		owner = { if = { limit = { has_company = company_type:company_OttomanBank } company:company_OttomanBank = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_PennsylvaniaRailroad }
+		owner = { if = { limit = { has_company = company_type:company_PennsylvaniaRailroad } company:company_PennsylvaniaRailroad = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_PreussischeSeehandlung }
+		owner = { if = { limit = { has_company = company_type:company_PreussischeSeehandlung } company:company_PreussischeSeehandlung = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_Reichsbank }
+		owner = { if = { limit = { has_company = company_type:company_Reichsbank } company:company_Reichsbank = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_Rothschild_Bank_aus }
+		owner = { if = { limit = { has_company = company_type:company_Rothschild_Bank_aus } company:company_Rothschild_Bank_aus = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_Rothschild_Bank_fra }
+		owner = { if = { limit = { has_company = company_type:company_Rothschild_Bank_fra } company:company_Rothschild_Bank_fra = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_Rothschild_Bank_gbr }
+		owner = { if = { limit = { has_company = company_type:company_Rothschild_Bank_gbr } company:company_Rothschild_Bank_gbr = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_Rothschild_Bank_ger }
+		owner = { if = { limit = { has_company = company_type:company_Rothschild_Bank_ger } company:company_Rothschild_Bank_ger = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_Rothschild_Bank_ita }
+		owner = { if = { limit = { has_company = company_type:company_Rothschild_Bank_ita } company:company_Rothschild_Bank_ita = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_RotterdamscheBankvereeniging }
+		owner = { if = { limit = { has_company = company_type:company_RotterdamscheBankvereeniging } company:company_RotterdamscheBankvereeniging = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_RoyalBankOfScotland }
+		owner = { if = { limit = { has_company = company_type:company_RoyalBankOfScotland } company:company_RoyalBankOfScotland = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_RoyalBankofCanada }
+		owner = { if = { limit = { has_company = company_type:company_RoyalBankofCanada } company:company_RoyalBankofCanada = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_SocieteGenerale }
+		owner = { if = { limit = { has_company = company_type:company_SocieteGenerale } company:company_SocieteGenerale = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_SocieteGeneraledeBelgique }
+		owner = { if = { limit = { has_company = company_type:company_SocieteGeneraledeBelgique } company:company_SocieteGeneraledeBelgique = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_SouthAustralianBank }
+		owner = { if = { limit = { has_company = company_type:company_SouthAustralianBank } company:company_SouthAustralianBank = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_StateBankRussianEmpire }
+		owner = { if = { limit = { has_company = company_type:company_StateBankRussianEmpire } company:company_StateBankRussianEmpire = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_SumitomoBank }
+		owner = { if = { limit = { has_company = company_type:company_SumitomoBank } company:company_SumitomoBank = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_TurkishZiraatBankasi }
+		owner = { if = { limit = { has_company = company_type:company_TurkishZiraatBankasi } company:company_TurkishZiraatBankasi = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_WienerBankverein }
+		owner = { if = { limit = { has_company = company_type:company_WienerBankverein } company:company_WienerBankverein = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_a_markwald_and_company }
+		owner = { if = { limit = { has_company = company_type:company_a_markwald_and_company } company:company_a_markwald_and_company = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_aker_mek }
+		owner = { if = { limit = { has_company = company_type:company_aker_mek } company:company_aker_mek = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_allatini_mills }
+		owner = { if = { limit = { has_company = company_type:company_allatini_mills } company:company_allatini_mills = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_altos_hornos_de_vizcaya }
+		owner = { if = { limit = { has_company = company_type:company_altos_hornos_de_vizcaya } company:company_altos_hornos_de_vizcaya = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_amsterdamschebank }
+		owner = { if = { limit = { has_company = company_type:company_amsterdamschebank } company:company_amsterdamschebank = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_anglo_persian_oil }
+		owner = { if = { limit = { has_company = company_type:company_anglo_persian_oil } company:company_anglo_persian_oil = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_anglo_sicilian_sulphur_company }
+		owner = { if = { limit = { has_company = company_type:company_anglo_sicilian_sulphur_company } company:company_anglo_sicilian_sulphur_company = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_ansaldo }
+		owner = { if = { limit = { has_company = company_type:company_ansaldo } company:company_ansaldo = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_ap_moller }
+		owner = { if = { limit = { has_company = company_type:company_ap_moller } company:company_ap_moller = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_armstrong_whitworth }
+		owner = { if = { limit = { has_company = company_type:company_armstrong_whitworth } company:company_armstrong_whitworth = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_assam_company }
+		owner = { if = { limit = { has_company = company_type:company_assam_company } company:company_assam_company = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_b_grimm }
+		owner = { if = { limit = { has_company = company_type:company_b_grimm } company:company_b_grimm = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_bacardi }
+		owner = { if = { limit = { has_company = company_type:company_bacardi } company:company_bacardi = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_bancodelondresmexico }
+		owner = { if = { limit = { has_company = company_type:company_bancodelondresmexico } company:company_bancodelondresmexico = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_bankofgreec }
+		owner = { if = { limit = { has_company = company_type:company_bankofgreec } company:company_bankofgreec = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_barclaysBank }
+		owner = { if = { limit = { has_company = company_type:company_barclaysBank } company:company_barclaysBank = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_basf }
+		owner = { if = { limit = { has_company = company_type:company_basf } company:company_basf = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_basic_chemicals }
+		owner = { if = { limit = { has_company = company_type:company_basic_chemicals } company:company_basic_chemicals = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_basic_electrics }
+		owner = { if = { limit = { has_company = company_type:company_basic_electrics } company:company_basic_electrics = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_basic_fishing }
+		owner = { if = { limit = { has_company = company_type:company_basic_fishing } company:company_basic_fishing = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_basic_gold_and_silver_mining_2 }
+		owner = { if = { limit = { has_company = company_type:company_basic_gold_and_silver_mining_2 } company:company_basic_gold_and_silver_mining_2 = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_basic_gold_mining }
+		owner = { if = { limit = { has_company = company_type:company_basic_gold_mining } company:company_basic_gold_mining = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_basic_gold_mining_rus }
+		owner = { if = { limit = { has_company = company_type:company_basic_gold_mining_rus } company:company_basic_gold_mining_rus = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_basic_home_goods }
+		owner = { if = { limit = { has_company = company_type:company_basic_home_goods } company:company_basic_home_goods = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_basic_metal_mining }
+		owner = { if = { limit = { has_company = company_type:company_basic_metal_mining } company:company_basic_metal_mining = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_basic_metalworks }
+		owner = { if = { limit = { has_company = company_type:company_basic_metalworks } company:company_basic_metalworks = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_basic_mineral_mining }
+		owner = { if = { limit = { has_company = company_type:company_basic_mineral_mining } company:company_basic_mineral_mining = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_basic_motors }
+		owner = { if = { limit = { has_company = company_type:company_basic_motors } company:company_basic_motors = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_basic_munitions }
+		owner = { if = { limit = { has_company = company_type:company_basic_munitions } company:company_basic_munitions = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_basic_oil }
+		owner = { if = { limit = { has_company = company_type:company_basic_oil } company:company_basic_oil = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_basic_paper }
+		owner = { if = { limit = { has_company = company_type:company_basic_paper } company:company_basic_paper = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_basic_shipyards }
+		owner = { if = { limit = { has_company = company_type:company_basic_shipyards } company:company_basic_shipyards = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_basic_silver_mining_mex }
+		owner = { if = { limit = { has_company = company_type:company_basic_silver_mining_mex } company:company_basic_silver_mining_mex = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_basic_steel }
+		owner = { if = { limit = { has_company = company_type:company_basic_steel } company:company_basic_steel = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_basic_textiles }
+		owner = { if = { limit = { has_company = company_type:company_basic_textiles } company:company_basic_textiles = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_basic_weapons }
+		owner = { if = { limit = { has_company = company_type:company_basic_weapons } company:company_basic_weapons = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_basileiades }
+		owner = { if = { limit = { has_company = company_type:company_basileiades } company:company_basileiades = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_bengal_coal_company }
+		owner = { if = { limit = { has_company = company_type:company_bengal_coal_company } company:company_bengal_coal_company = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_bolckow_vaughan }
+		owner = { if = { limit = { has_company = company_type:company_bolckow_vaughan } company:company_bolckow_vaughan = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_bombay_burmah_trading_corporation }
+		owner = { if = { limit = { has_company = company_type:company_bombay_burmah_trading_corporation } company:company_bombay_burmah_trading_corporation = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_bombay_dyeing_company }
+		owner = { if = { limit = { has_company = company_type:company_bombay_dyeing_company } company:company_bombay_dyeing_company = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_branobel }
+		owner = { if = { limit = { has_company = company_type:company_branobel } company:company_branobel = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_broken_hill_proprietary_company }
+		owner = { if = { limit = { has_company = company_type:company_broken_hill_proprietary_company } company:company_broken_hill_proprietary_company = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_bunge_born }
+		owner = { if = { limit = { has_company = company_type:company_bunge_born } company:company_bunge_born = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_calcutta_electric }
+		owner = { if = { limit = { has_company = company_type:company_calcutta_electric } company:company_calcutta_electric = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_caribbean_petroleum }
+		owner = { if = { limit = { has_company = company_type:company_caribbean_petroleum } company:company_caribbean_petroleum = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_chr_hansens }
+		owner = { if = { limit = { has_company = company_type:company_chr_hansens } company:company_chr_hansens = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_colt_firearms }
+		owner = { if = { limit = { has_company = company_type:company_colt_firearms } company:company_colt_firearms = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_compania_sansinena_de_carnes_congeladas }
+		owner = { if = { limit = { has_company = company_type:company_compania_sansinena_de_carnes_congeladas } company:company_compania_sansinena_de_carnes_congeladas = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_cordoba_railway }
+		owner = { if = { limit = { has_company = company_type:company_cordoba_railway } company:company_cordoba_railway = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_csfa }
+		owner = { if = { limit = { has_company = company_type:company_csfa } company:company_csfa = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_da_afghan_nassaji_sherkat }
+		owner = { if = { limit = { has_company = company_type:company_da_afghan_nassaji_sherkat } company:company_da_afghan_nassaji_sherkat = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_de_beers }
+		owner = { if = { limit = { has_company = company_type:company_de_beers } company:company_de_beers = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_dmc }
+		owner = { if = { limit = { has_company = company_type:company_dmc } company:company_dmc = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_duro_y_compania }
+		owner = { if = { limit = { has_company = company_type:company_duro_y_compania } company:company_duro_y_compania = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_eea }
+		owner = { if = { limit = { has_company = company_type:company_eea } company:company_eea = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_el_aguila }
+		owner = { if = { limit = { has_company = company_type:company_el_aguila } company:company_el_aguila = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_electricidad_de_caracas }
+		owner = { if = { limit = { has_company = company_type:company_electricidad_de_caracas } company:company_electricidad_de_caracas = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_elso_budapesti_gozmalom }
+		owner = { if = { limit = { has_company = company_type:company_elso_budapesti_gozmalom } company:company_elso_budapesti_gozmalom = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_ericsson }
+		owner = { if = { limit = { has_company = company_type:company_ericsson } company:company_ericsson = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_erste_brunner }
+		owner = { if = { limit = { has_company = company_type:company_erste_brunner } company:company_erste_brunner = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_espana_industrial }
+		owner = { if = { limit = { has_company = company_type:company_espana_industrial } company:company_espana_industrial = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_estaleiro_maua }
+		owner = { if = { limit = { has_company = company_type:company_estaleiro_maua } company:company_estaleiro_maua = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_estanifera_llallagua }
+		owner = { if = { limit = { has_company = company_type:company_estanifera_llallagua } company:company_estanifera_llallagua = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_famae }
+		owner = { if = { limit = { has_company = company_type:company_famae } company:company_famae = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_fcm }
+		owner = { if = { limit = { has_company = company_type:company_fcm } company:company_fcm = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_ferranti_ltd }
+		owner = { if = { limit = { has_company = company_type:company_ferranti_ltd } company:company_ferranti_ltd = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_fiat }
+		owner = { if = { limit = { has_company = company_type:company_fiat } company:company_fiat = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_ford_motor }
+		owner = { if = { limit = { has_company = company_type:company_ford_motor } company:company_ford_motor = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_franco_belge }
+		owner = { if = { limit = { has_company = company_type:company_franco_belge } company:company_franco_belge = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_fundicao_ipanema }
+		owner = { if = { limit = { has_company = company_type:company_fundicao_ipanema } company:company_fundicao_ipanema = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_fundidora_monterrey }
+		owner = { if = { limit = { has_company = company_type:company_fundidora_monterrey } company:company_fundidora_monterrey = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_galician_carpathian_oil }
+		owner = { if = { limit = { has_company = company_type:company_galician_carpathian_oil } company:company_galician_carpathian_oil = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_gebruder_thonet }
+		owner = { if = { limit = { has_company = company_type:company_gebruder_thonet } company:company_gebruder_thonet = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_general_electric }
+		owner = { if = { limit = { has_company = company_type:company_general_electric } company:company_general_electric = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_getzner_mutter }
+		owner = { if = { limit = { has_company = company_type:company_getzner_mutter } company:company_getzner_mutter = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_gotaverken }
+		owner = { if = { limit = { has_company = company_type:company_gotaverken } company:company_gotaverken = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_guinness }
+		owner = { if = { limit = { has_company = company_type:company_guinness } company:company_guinness = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_guthrie }
+		owner = { if = { limit = { has_company = company_type:company_guthrie } company:company_guthrie = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_gwr }
+		owner = { if = { limit = { has_company = company_type:company_gwr } company:company_gwr = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_hbc }
+		owner = { if = { limit = { has_company = company_type:company_hbc } company:company_hbc = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_hispano_suiza }
+		owner = { if = { limit = { has_company = company_type:company_hispano_suiza } company:company_hispano_suiza = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_ilva }
+		owner = { if = { limit = { has_company = company_type:company_ilva } company:company_ilva = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_imperial_ethiopian_railways }
+		owner = { if = { limit = { has_company = company_type:company_imperial_ethiopian_railways } company:company_imperial_ethiopian_railways = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_imperial_tobacco }
+		owner = { if = { limit = { has_company = company_type:company_imperial_tobacco } company:company_imperial_tobacco = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_ingolstadt_electrical_company }
+		owner = { if = { limit = { has_company = company_type:company_ingolstadt_electrical_company } company:company_ingolstadt_electrical_company = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_j_p_coats }
+		owner = { if = { limit = { has_company = company_type:company_j_p_coats } company:company_j_p_coats = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_jakub_klein }
+		owner = { if = { limit = { has_company = company_type:company_jakub_klein } company:company_jakub_klein = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_jiangnan_weaving_bureaus }
+		owner = { if = { limit = { has_company = company_type:company_jiangnan_weaving_bureaus } company:company_jiangnan_weaving_bureaus = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_jingdezhen }
+		owner = { if = { limit = { has_company = company_type:company_jingdezhen } company:company_jingdezhen = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_john_brown }
+		owner = { if = { limit = { has_company = company_type:company_john_brown } company:company_john_brown = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_john_cockerill }
+		owner = { if = { limit = { has_company = company_type:company_john_cockerill } company:company_john_cockerill = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_john_holt }
+		owner = { if = { limit = { has_company = company_type:company_john_holt } company:company_john_holt = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_john_hughes }
+		owner = { if = { limit = { has_company = company_type:company_john_hughes } company:company_john_hughes = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_kablin }
+		owner = { if = { limit = { has_company = company_type:company_kablin } company:company_kablin = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_kaiping_mining }
+		owner = { if = { limit = { has_company = company_type:company_kaiping_mining } company:company_kaiping_mining = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_kinkozan_sobei }
+		owner = { if = { limit = { has_company = company_type:company_kinkozan_sobei } company:company_kinkozan_sobei = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_kirgizian_mining_company }
+		owner = { if = { limit = { has_company = company_type:company_kirgizian_mining_company } company:company_kirgizian_mining_company = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_klanicko_drustvo }
+		owner = { if = { limit = { has_company = company_type:company_klanicko_drustvo } company:company_klanicko_drustvo = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_kouppas }
+		owner = { if = { limit = { has_company = company_type:company_kouppas } company:company_kouppas = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_krupp }
+		owner = { if = { limit = { has_company = company_type:company_krupp } company:company_krupp = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_la_rosada }
+		owner = { if = { limit = { has_company = company_type:company_la_rosada } company:company_la_rosada = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_lee_wilson }
+		owner = { if = { limit = { has_company = company_type:company_lee_wilson } company:company_lee_wilson = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_lilpop }
+		owner = { if = { limit = { has_company = company_type:company_lilpop } company:company_lilpop = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_ludwig_moser_and_sons }
+		owner = { if = { limit = { has_company = company_type:company_ludwig_moser_and_sons } company:company_ludwig_moser_and_sons = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_madura_mills }
+		owner = { if = { limit = { has_company = company_type:company_madura_mills } company:company_madura_mills = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_manfred_weiss }
+		owner = { if = { limit = { has_company = company_type:company_manfred_weiss } company:company_manfred_weiss = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_mantero_seta }
+		owner = { if = { limit = { has_company = company_type:company_mantero_seta } company:company_mantero_seta = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_maple_and_co }
+		owner = { if = { limit = { has_company = company_type:company_maple_and_co } company:company_maple_and_co = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_maschinenfabrik_oerlikon }
+		owner = { if = { limit = { has_company = company_type:company_maschinenfabrik_oerlikon } company:company_maschinenfabrik_oerlikon = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_massey_harris }
+		owner = { if = { limit = { has_company = company_type:company_massey_harris } company:company_massey_harris = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_mines_anzin }
+		owner = { if = { limit = { has_company = company_type:company_mines_anzin } company:company_mines_anzin = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_mitsubishi }
+		owner = { if = { limit = { has_company = company_type:company_mitsubishi } company:company_mitsubishi = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_mitsui }
+		owner = { if = { limit = { has_company = company_type:company_mitsui } company:company_mitsui = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_nam_dinh }
+		owner = { if = { limit = { has_company = company_type:company_nam_dinh } company:company_nam_dinh = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_nederlandse_petroleum }
+		owner = { if = { limit = { has_company = company_type:company_nederlandse_petroleum } company:company_nederlandse_petroleum = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_nhm }
+		owner = { if = { limit = { has_company = company_type:company_nhm } company:company_nhm = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_nicolas_portalis }
+		owner = { if = { limit = { has_company = company_type:company_nicolas_portalis } company:company_nicolas_portalis = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_noda_shoyu }
+		owner = { if = { limit = { has_company = company_type:company_noda_shoyu } company:company_noda_shoyu = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_nokia }
+		owner = { if = { limit = { has_company = company_type:company_nokia } company:company_nokia = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_norsk_hydro }
+		owner = { if = { limit = { has_company = company_type:company_norsk_hydro } company:company_norsk_hydro = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_oesterreichisch_alpine_montangesellschaft }
+		owner = { if = { limit = { has_company = company_type:company_oesterreichisch_alpine_montangesellschaft } company:company_oesterreichisch_alpine_montangesellschaft = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_oevg }
+		owner = { if = { limit = { has_company = company_type:company_oevg } company:company_oevg = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_ong_lung_sheng_tea_company }
+		owner = { if = { limit = { has_company = company_type:company_ong_lung_sheng_tea_company } company:company_ong_lung_sheng_tea_company = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_oriental_consolidated_mining }
+		owner = { if = { limit = { has_company = company_type:company_oriental_consolidated_mining } company:company_oriental_consolidated_mining = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_oriental_development_company }
+		owner = { if = { limit = { has_company = company_type:company_oriental_development_company } company:company_oriental_development_company = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_ottoman_tobacco_regie }
+		owner = { if = { limit = { has_company = company_type:company_ottoman_tobacco_regie } company:company_ottoman_tobacco_regie = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_pernambuco_textiles }
+		owner = { if = { limit = { has_company = company_type:company_pernambuco_textiles } company:company_pernambuco_textiles = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_peruvian_amazon }
+		owner = { if = { limit = { has_company = company_type:company_peruvian_amazon } company:company_peruvian_amazon = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_philips }
+		owner = { if = { limit = { has_company = company_type:company_philips } company:company_philips = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_private_construction }
+		owner = { if = { limit = { has_company = company_type:company_private_construction } company:company_private_construction = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_putilov_company }
+		owner = { if = { limit = { has_company = company_type:company_putilov_company } company:company_putilov_company = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_ralli_brothers }
+		owner = { if = { limit = { has_company = company_type:company_ralli_brothers } company:company_ralli_brothers = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_ramirez }
+		owner = { if = { limit = { has_company = company_type:company_ramirez } company:company_ramirez = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_rheinmetall }
+		owner = { if = { limit = { has_company = company_type:company_rheinmetall } company:company_rheinmetall = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_romanian_star }
+		owner = { if = { limit = { has_company = company_type:company_romanian_star } company:company_romanian_star = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_rossi }
+		owner = { if = { limit = { has_company = company_type:company_rossi } company:company_rossi = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_saint_etienne }
+		owner = { if = { limit = { has_company = company_type:company_saint_etienne } company:company_saint_etienne = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_san_miguel }
+		owner = { if = { limit = { has_company = company_type:company_san_miguel } company:company_san_miguel = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_sao_paulo_railway }
+		owner = { if = { limit = { has_company = company_type:company_sao_paulo_railway } company:company_sao_paulo_railway = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_savva_morozov }
+		owner = { if = { limit = { has_company = company_type:company_savva_morozov } company:company_savva_morozov = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_schichau }
+		owner = { if = { limit = { has_company = company_type:company_schichau } company:company_schichau = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_schneider_creusot }
+		owner = { if = { limit = { has_company = company_type:company_schneider_creusot } company:company_schneider_creusot = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_secn }
+		owner = { if = { limit = { has_company = company_type:company_secn } company:company_secn = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_sherkate_eslamiya }
+		owner = { if = { limit = { has_company = company_type:company_sherkate_eslamiya } company:company_sherkate_eslamiya = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_siam_electrical_company_limited }
+		owner = { if = { limit = { has_company = company_type:company_siam_electrical_company_limited } company:company_siam_electrical_company_limited = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_siemens_and_halske }
+		owner = { if = { limit = { has_company = company_type:company_siemens_and_halske } company:company_siemens_and_halske = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_skoda }
+		owner = { if = { limit = { has_company = company_type:company_skoda } company:company_skoda = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_societe_francaise_charbonnages_du_tonkin }
+		owner = { if = { limit = { has_company = company_type:company_societe_francaise_charbonnages_du_tonkin } company:company_societe_francaise_charbonnages_du_tonkin = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_societe_mokta_el_hadid }
+		owner = { if = { limit = { has_company = company_type:company_societe_mokta_el_hadid } company:company_societe_mokta_el_hadid = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_stabilimento_tecnico_di_fiume }
+		owner = { if = { limit = { has_company = company_type:company_stabilimento_tecnico_di_fiume } company:company_stabilimento_tecnico_di_fiume = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_standard_oil }
+		owner = { if = { limit = { has_company = company_type:company_standard_oil } company:company_standard_oil = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_steel_brothers }
+		owner = { if = { limit = { has_company = company_type:company_steel_brothers } company:company_steel_brothers = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_stt }
+		owner = { if = { limit = { has_company = company_type:company_stt } company:company_stt = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_sudamericana_de_vapores }
+		owner = { if = { limit = { has_company = company_type:company_sudamericana_de_vapores } company:company_sudamericana_de_vapores = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_sumitomo }
+		owner = { if = { limit = { has_company = company_type:company_sumitomo } company:company_sumitomo = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_sunhwaguk }
+		owner = { if = { limit = { has_company = company_type:company_sunhwaguk } company:company_sunhwaguk = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_tata }
+		owner = { if = { limit = { has_company = company_type:company_tata } company:company_tata = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_tokyo_electric_light_company }
+		owner = { if = { limit = { has_company = company_type:company_tokyo_electric_light_company } company:company_tokyo_electric_light_company = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_trubia }
+		owner = { if = { limit = { has_company = company_type:company_trubia } company:company_trubia = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_turkish_petroleum }
+		owner = { if = { limit = { has_company = company_type:company_turkish_petroleum } company:company_turkish_petroleum = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_uniao_fabril }
+		owner = { if = { limit = { has_company = company_type:company_uniao_fabril } company:company_uniao_fabril = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_united_fruit }
+		owner = { if = { limit = { has_company = company_type:company_united_fruit } company:company_united_fruit = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_ursus }
+		owner = { if = { limit = { has_company = company_type:company_ursus } company:company_ursus = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_us_steel }
+		owner = { if = { limit = { has_company = company_type:company_us_steel } company:company_us_steel = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_van_vlissingen_en_dudok_van_heel }
+		owner = { if = { limit = { has_company = company_type:company_van_vlissingen_en_dudok_van_heel } company:company_van_vlissingen_en_dudok_van_heel = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_wadia_shipbuilders }
+		owner = { if = { limit = { has_company = company_type:company_wadia_shipbuilders } company:company_wadia_shipbuilders = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_west_ural_petroleum }
+		owner = { if = { limit = { has_company = company_type:company_west_ural_petroleum } company:company_west_ural_petroleum = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_white_star_line }
+		owner = { if = { limit = { has_company = company_type:company_white_star_line } company:company_white_star_line = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_william_cramp }
+		owner = { if = { limit = { has_company = company_type:company_william_cramp } company:company_william_cramp = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_william_sandford }
+		owner = { if = { limit = { has_company = company_type:company_william_sandford } company:company_william_sandford = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_witkowitzer_bergbau_und_huttengewerkschaft }
+		owner = { if = { limit = { has_company = company_type:company_witkowitzer_bergbau_und_huttengewerkschaft } company:company_witkowitzer_bergbau_und_huttengewerkschaft = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_yasuda }
+		owner = { if = { limit = { has_company = company_type:company_yasuda } company:company_yasuda = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_ynchausti_y_compania }
+		owner = { if = { limit = { has_company = company_type:company_ynchausti_y_compania } company:company_ynchausti_y_compania = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_zastava }
+		owner = { if = { limit = { has_company = company_type:company_zastava } company:company_zastava = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_russo_chinese_bank }
+		owner = { if = { limit = { has_company = company_type:russo_chinese_bank } company:russo_chinese_bank = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
+		limit = { is_building_type = building_saint_petersburg_international_commercial_bank }
+		owner = { if = { limit = { has_company = company_type:saint_petersburg_international_commercial_bank } company:saint_petersburg_international_commercial_bank = { zz_ef_co_go_$S$ = yes } } }
+	}
 }
