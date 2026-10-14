@@ -35,7 +35,7 @@ zz_ef_v_f_co_paid = {
 	if = { limit = { has_variable = zz_ef_f_co_paid } value = var:zz_ef_f_co_paid }
 }
 # COMPANY scope (Д.R6.9): its part of the country's business credit -- the companies' share of zz_ef_bc_debt by its
-# levels; its month's interest on it (the weekly rate zz_ef_cc_rate / 52 x 52 / 12)
+# levels; its month's interest on it (the business credit's rate zz_ef_bc_rate_v / 12)
 zz_ef_co_lv_part_v = {
 	value = 0
 	if = {
@@ -58,7 +58,7 @@ zz_ef_co_debt_v = {
 }
 zz_ef_co_int_month_v = {
 	value = zz_ef_co_debt_v
-	multiply = owner.zz_ef_cc_rate
+	multiply = owner.zz_ef_bc_rate_v
 	divide = 12
 }
 zz_ef_co_out_last_v = {

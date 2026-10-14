@@ -616,8 +616,8 @@ zz_ef_deposit_margin = {
 	multiply = 0.01
 	add = 0.015
 }
-# Д.R4а.7: the deposits earn at most what the banks earn on them -- the loans' interest (consumer and business credit at
-# zz_ef_cc_rate) over the deposits, less zz_ef_deposit_income_margin; the banks' capital does not go under 0 paying it
+# Д.R4а.7: the deposits earn at most what the banks earn on them -- the loans' interest (consumer credit at zz_ef_cc_rate,
+# business credit at the banks' rate zz_ef_bc_rate_v) over the deposits, less zz_ef_deposit_income_margin; the banks' capital does not go under 0 paying it
 zz_ef_deposit_rate = {
 	value = zz_ef_money_rate
 	subtract = zz_ef_deposit_margin
@@ -634,8 +634,11 @@ zz_ef_bank_loan_yield = {
 	if = {
 		limit = { zz_ef_pop_deposits > 0 }
 		value = zz_ef_cc_debt
-		add = zz_ef_bc_debt
 		multiply = zz_ef_cc_rate
+		add = {
+			value = zz_ef_bc_debt
+			multiply = zz_ef_bc_rate_v
+		}
 		divide = zz_ef_pop_deposits
 	}
 }
@@ -1145,8 +1148,17 @@ zz_ef_bc_new = {
 }
 zz_ef_bc_interest = {
 	value = zz_ef_bc_debt
-	multiply = zz_ef_cc_rate
+	multiply = zz_ef_bc_rate_v
 	divide = 52
+}
+# the business credit's rate: the banks' loan rates weighted by their business loans (Д.R9.1, var:zz_ef_bk_bc_rate of
+# the book step, ld_bank_subjects.txt); before it -- the credit rate
+zz_ef_bc_rate_v = {
+	value = zz_ef_cc_rate
+	if = {
+		limit = { has_variable = zz_ef_bk_bc_rate }
+		value = var:zz_ef_bk_bc_rate
+	}
 }
 zz_ef_bc_due = {
 	value = zz_ef_bc_debt

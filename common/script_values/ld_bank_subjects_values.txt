@@ -156,6 +156,17 @@ zz_ef_bk_w_dep_v = {
 	min = 0
 	multiply = var:zz_ef_bk_sh
 }
+# business credit (Д.R9.1, Д.R9.2): the free limit x the appeal of the loan rate (a cheaper bank lends more) + the share
+# of levels (a country whose banks have no free limit shares the credit over it by levels)
+zz_ef_bk_w_bc_v = {
+	value = var:zz_ef_bk_prem
+	multiply = zz_ef_bk_appeal_k
+	multiply = -1
+	add = 1
+	min = 0
+	multiply = zz_ef_bk_free_v
+	add = var:zz_ef_bk_sh
+}
 zz_ef_bk_w_cbd_v = {
 	value = zz_ef_bk_assets_v
 	if = { limit = { has_variable = zz_ef_bk_dep } subtract = var:zz_ef_bk_dep }
