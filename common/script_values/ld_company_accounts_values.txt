@@ -29,3 +29,48 @@ zz_ef_co_in_last_v = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_co_in_last } value = var:zz_ef_co_in_last }
 }
+# the week's business-credit service the companies paid out of their accounts (zz_ef_pop_deposits_step)
+zz_ef_v_f_co_paid = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_co_paid } value = var:zz_ef_f_co_paid }
+}
+# COMPANY scope (Д.R6.9): its part of the country's business credit -- the companies' share of zz_ef_bc_debt by its
+# levels; its month's interest on it (the weekly rate zz_ef_cc_rate / 52 x 52 / 12)
+zz_ef_co_lv_part_v = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = zz_ef_co_lv
+			owner ?= { has_variable = zz_ef_co_lv_sum var:zz_ef_co_lv_sum > 0 has_variable = zz_ef_co_share }
+		}
+		value = var:zz_ef_co_lv
+		divide = owner.var:zz_ef_co_lv_sum
+		multiply = owner.var:zz_ef_co_share
+	}
+}
+zz_ef_co_debt_v = {
+	value = 0
+	if = {
+		limit = { owner ?= { has_variable = zz_ef_bc_debt } }
+		value = owner.var:zz_ef_bc_debt
+		multiply = zz_ef_co_lv_part_v
+	}
+}
+zz_ef_co_int_month_v = {
+	value = zz_ef_co_debt_v
+	multiply = owner.zz_ef_cc_rate
+	divide = 12
+}
+zz_ef_co_out_last_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_co_out_last } value = var:zz_ef_co_out_last }
+}
+# COUNTRY scope: the companies' part of the business credit; the collector's -- the rest
+zz_ef_co_debt_sum_v = {
+	value = 0
+	every_company = { add = zz_ef_co_debt_v }
+}
+zz_ef_bc_debt_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_bc_debt } value = var:zz_ef_bc_debt }
+}

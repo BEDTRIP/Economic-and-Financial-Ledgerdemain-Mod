@@ -8,7 +8,12 @@
 # (zz_ef_pop_deposits_step, ld_money_model.txt; the rest -- the pops' deposits); the companies' part of the engine's
 # burnt money returned (ld_leak_back.txt: by the same share to the accounts, the rest to the collector); the credit,
 # the shares (R6.3, R6.6). A take (the engine made money) -- out of every account and the collector by the same
-# fraction. Log: EFJ|...|comp (the account, the last month's income), comp_sum.
+# fraction.
+# The business credit (Д.R6.9): the country's zz_ef_bc_debt is the companies' by the share of their levels
+# (zz_ef_co_debt_v on a company: its levels' part of zz_ef_co_share of the debt), the rest -- the collector's; the
+# companies' part of the week's service (zz_ef_f_co_paid) is paid out of their accounts by their levels
+# (zz_ef_co_pay_lv). A company whose account is under its month's interest is marked var:zz_ef_co_distress (its
+# bankruptcy -- R11). Log: EFJ|...|comp (the account, the last month's income and outflow, the debt), comp_sum.
 
 # COUNTRY scope, monthly (zz_ef_money_model_monthly_step): the companies' levels -- var:zz_ef_co_lv on each company,
 # their sum var:zz_ef_co_lv_sum, and their share of the private levels var:zz_ef_co_share (0..1); the last month's
@@ -20,8 +25,11 @@ zz_ef_co_month_step = {
 		set_variable = { name = zz_ef_co_lv value = company_owned_levels }
 		scope:zz_ef_co_cty = { change_variable = { name = zz_ef_co_lv_sum add = prev.var:zz_ef_co_lv } }
 		if = { limit = { NOT = { has_variable = zz_ef_co_in } } set_variable = { name = zz_ef_co_in value = 0 } }
+		if = { limit = { NOT = { has_variable = zz_ef_co_out } } set_variable = { name = zz_ef_co_out value = 0 } }
 		set_variable = { name = zz_ef_co_in_last value = var:zz_ef_co_in }
+		set_variable = { name = zz_ef_co_out_last value = var:zz_ef_co_out }
 		set_variable = { name = zz_ef_co_in value = 0 }
+		set_variable = { name = zz_ef_co_out value = 0 }
 	}
 	set_variable = { name = zz_ef_co_share value = 0 }
 	if = {
@@ -39,6 +47,17 @@ zz_ef_co_month_step = {
 			}
 		}
 		remove_variable = zz_ef_t_pl
+	}
+	# the companies that cannot pay their month's interest out of the account (Д.R6.9; bankruptcy -- R11)
+	every_company = {
+		if = {
+			limit = { zz_ef_co_acc_v < zz_ef_co_int_month_v }
+			set_variable = { name = zz_ef_co_distress value = 1 }
+		}
+		else_if = {
+			limit = { has_variable = zz_ef_co_distress }
+			remove_variable = zz_ef_co_distress
+		}
 	}
 }
 
@@ -75,6 +94,35 @@ zz_ef_co_acc_add = {
 	if = { limit = { NOT = { has_variable = zz_ef_co_in } } set_variable = { name = zz_ef_co_in value = 0 } }
 	change_variable = { name = zz_ef_co_acc add = $V$ }
 	change_variable = { name = zz_ef_co_in add = $V$ }
+}
+
+# COUNTRY scope. $V$ >= 0 paid out of the accounts of the companies by their levels (the business credit's service,
+# zz_ef_pop_deposits_step) and out of zz_ef_comp_dep.
+zz_ef_co_pay_lv = {
+	set_variable = { name = zz_ef_t_cov value = $V$ }
+	if = {
+		limit = {
+			var:zz_ef_t_cov > 0
+			has_variable = zz_ef_co_lv_sum
+			var:zz_ef_co_lv_sum > 0
+		}
+		set_variable = { name = zz_ef_t_cop value = { value = var:zz_ef_t_cov divide = var:zz_ef_co_lv_sum } }
+		every_company = {
+			limit = {
+				has_variable = zz_ef_co_lv
+				var:zz_ef_co_lv > 0
+			}
+			set_variable = { name = zz_ef_t_coa value = { value = var:zz_ef_co_lv multiply = prev.var:zz_ef_t_cop } }
+			if = { limit = { NOT = { has_variable = zz_ef_co_acc } } set_variable = { name = zz_ef_co_acc value = 0 } }
+			if = { limit = { NOT = { has_variable = zz_ef_co_out } } set_variable = { name = zz_ef_co_out value = 0 } }
+			change_variable = { name = zz_ef_co_acc subtract = var:zz_ef_t_coa }
+			change_variable = { name = zz_ef_co_out add = var:zz_ef_t_coa }
+			remove_variable = zz_ef_t_coa
+		}
+		remove_variable = zz_ef_t_cop
+		change_variable = { name = zz_ef_comp_dep subtract = var:zz_ef_t_cov }
+	}
+	remove_variable = zz_ef_t_cov
 }
 
 # COUNTRY scope. $V$ >= 0 out of zz_ef_comp_dep (at most what it holds): every account and the collector lose the same

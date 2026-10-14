@@ -290,7 +290,16 @@
 `zz_ef_co_credit_lv = { V }` — по уровням на счета и в `zz_ef_comp_dep`: доля взносов в пул (`zz_ef_f_co_contrib`,
 `zz_ef_pop_deposits_step`), доля возврата сгоревшего (`zz_ef_co_leak_back`; остаток — собирателю); снятие
 `zz_ef_co_take = { V }` — со всех счетов и собирателя одной долей. Лог `EFJ|…|comp` — `acc`, `in`; `comp_sum` —
-`comp_dep`, `acc_sum`, `rest`, `share`. Карточка вкладов — строкой (генератор `regen_ef_money_supply_loc.py`).
+`comp_dep`, `acc_sum`, `rest`, `share`, `bc_debt`, `co_debt`. Карточка вкладов — строкой (генератор
+`regen_ef_money_supply_loc.py`).
+**Кредит компаний** (Д.R6.9, Д.R6.13): деловой кредит страны `zz_ef_bc_debt` (`zz_ef_business_credit_step`,
+`ld_money_model.txt`; вся частная стройка пула сверх нового кредита — тоже он) — компаний по доле уровней:
+`zz_ef_co_debt_v` (компания) = долг × `zz_ef_co_lv_part_v` (её уровни / уровни компаний × `zz_ef_co_share`), остальное
+— собирателя; сумма по компаниям `zz_ef_co_debt_sum_v`. Обслуживание недели (`zz_ef_f_bc_paid`, из взносов в пул) —
+доля компаний `zz_ef_f_co_paid` со счетов по уровням (`zz_ef_co_pay_lv`; взносы им приходят той же долей раньше в том
+же шаге), остальное — из доли населения во взносах. Счёт меньше процентов месяца (`zz_ef_co_int_month_v`, ставка
+`zz_ef_cc_rate`) — `var:zz_ef_co_distress` на компании (банкротство — R11). Лог `comp`: `out` (расход месяца), `debt`,
+`distress`.
 
 **Проба R6.1 (временно, до разбора — в `_archive/ld_probe_co/`):** `common/scripted_effects/ld_probe_co.txt`,
 `events/ld_probe_co_events.txt`, `common/on_actions/ld_probe_co_on_actions.txt`, `common/scripted_guis/ld_probe_co.txt`,

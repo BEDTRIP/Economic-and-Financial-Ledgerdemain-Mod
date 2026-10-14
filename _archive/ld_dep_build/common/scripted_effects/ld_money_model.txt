@@ -1,0 +1,20 @@
+# from common/scripted_effects/ld_money_model.txt, zz_ef_pop_deposits_step (inside the "has_variable = zz_ef_pop_savings"
+# block, after the deposits' contributions)
+		set_variable = {
+			name = zz_ef_f_dep_build
+			value = {
+				value = zz_ef_v_f_transfer
+				subtract = zz_ef_v_f_bc_new
+				min = 0
+				max = {
+					value = var:zz_ef_pop_deposits
+					min = 0
+				}
+			}
+		}
+		zz_ef_post = { FROM = zz_ef_pop_deposits TO = zz_ef_pop_claims_private V = var:zz_ef_f_dep_build }
+		change_variable = { name = zz_ef_pop_savings subtract = var:zz_ef_f_dep_build }
+# ... and in zz_ef_f_bc_short: subtract = var:zz_ef_f_dep_build; at the end:
+	change_variable = { name = zz_ef_f_inflow subtract = var:zz_ef_f_dep_build }
+# from common/scripted_effects/ld_ledger.txt, zz_ef_registry_init:
+		if = { limit = { NOT = { has_variable = zz_ef_pop_claims_private } } set_variable = { name = zz_ef_pop_claims_private value = 0 } }
