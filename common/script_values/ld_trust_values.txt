@@ -12,3 +12,13 @@ zz_ef_trust_v = {
 	value = zz_ef_trust_now_v
 	if = { limit = { has_variable = zz_ef_trust } value = var:zz_ef_trust }
 }
+# the panic (Д.R7.6; принято ночью): trust under this or down by more than this in a month; over the end and not falling --
+# over; the deposits go into banknotes this times faster
+zz_ef_panic_trust = 0.5
+zz_ef_panic_drop = 0.1
+zz_ef_panic_trust_end = 0.6
+zz_ef_panic_mult = 3
+zz_ef_panic_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_panic } value = 1 }
+}

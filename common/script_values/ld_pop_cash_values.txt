@@ -47,13 +47,21 @@ zz_ef_pop_cash_want_v = {
 	multiply = { value = 1 subtract = zz_ef_marg_v }
 	add = { value = zz_ef_pop_cash_sav_v multiply = zz_ef_marg_v }
 }
-# the step's move into banknotes (+) or into deposits (-): the share of the gap a week x the weeks of the step
+# the step's move into banknotes (+) or into deposits (-): the share of the gap a week x the weeks of the step; in a panic
+# (Д.R7.6, ld_trust.txt) the deposits go out zz_ef_panic_mult times faster
 zz_ef_pop_cash_move_v = {
 	value = zz_ef_pop_cash_target_v
 	subtract = zz_ef_pop_cash
 	multiply = {
 		value = zz_ef_pop_cash_move_share
 		multiply = zz_ef_step_weeks_v
+		if = {
+			limit = {
+				has_variable = zz_ef_panic
+				zz_ef_pop_cash_target_v > zz_ef_pop_cash
+			}
+			multiply = zz_ef_panic_mult
+		}
 		max = 1
 	}
 }

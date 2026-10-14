@@ -8,8 +8,8 @@ on_action, `ld_*` и PSC добавляют свои. Недельного пу�
 самовозобновляемый on_action (`trigger_event = { on_action = ... days = 7 }`).
 
 ## Файлы
-- `common/on_actions/00_ef_on_action.txt` — корневые on_action E&F (`ef_on_*_pulse_country`,
-  `ef_on_battle_ended`, `com_topbar_setup_ef`).
+- `common/on_actions/00_ef_on_action.txt` — корневые on_action E&F (`ef_on_*_pulse_country`, `ef_on_battle_ended`,
+  `com_topbar_setup_ef`).
 - `common/on_actions/PSC_on_actions.txt` — PSC: распределение очков стройки по дням месяца, пересчёт метода конверсии
   при смене PM/технологии/постройке сектора.
 - `common/on_actions/ld_*_on_actions.txt` — `ld_bank`, `ld_bubble`, `ld_capitalization`, `ld_cb_rate`, `ld_money_model`
@@ -29,6 +29,8 @@ on_action, `ld_*` и PSC добавляют свои. Недельного пу�
   `zz_ef_country_vars_init`).
 - `events/ld_world_month_events.txt` — скрытое событие `ld_world_month.1` (мировое E&F месяца у страны №1 по рангу,
   `ld_world_month.txt`).
+- `events/ld_panic_events.txt` — скрытые события `ld_panic.1` / `.2` (сообщение о начале и конце паники, root — страна;
+  `ld_trust.txt`, Д.R7.6).
 - `events/ld_start_setup_events.txt` — скрытые события `ld_start_setup.1` / `.2` (настройка старта E&F каждой стране при
   новой игре, root — страна).
 - `events/00_ef_economic_event.txt` — события E&F (запускаются из `ef_on_yearly_pulse_event_at_date` и эффектов);
@@ -133,13 +135,13 @@ on_action, `ld_*` и PSC добавляют свои. Недельного пу�
 `clear_<good>_contract_1_year`) → `central_bank_ef_on_yearly_pulse_country` (проценты ЦБ в золоте, накопленная инфляция,
 `monetary_systeme_transition` для ИИ, `credit_at_central_bank_interest_per_week[_off]`,
 `central_bank_production_methods`, `_3` для золотого обменного стандарта, `money_value_target_modification`,
-`extreme_weak_currency_solution[_player]`, `*_count_reset_condition`, арбитраж
-биметаллизма до 1873 `private_bank_arbitrage_gold_drain/_silver_drain`) → `financial_center_ef_on_yearly_pulse_country`
-(`ai_buy_central_bank_debt`,
-`sovereign_bond_yields`, `bond_maturity_on_action`, `financial_crash_count_reset_condition`) → `country_credit_rating`
-(ранг ≥ unrecognized_power) → `gdp_view_on_action`, `macro_facilities_on_action_bc`,
-`has_tech_central_bank_but_no_building_central_bank`, `has_currency_law_but_no_building_central_bank`,
-`gdp_view_on_action_fc`, `has_tech_financial_center_but_no_building_financial_center`, `has_second_financial_center` →
+`extreme_weak_currency_solution[_player]`, `*_count_reset_condition`, арбитраж биметаллизма до 1873
+`private_bank_arbitrage_gold_drain/_silver_drain`) → `financial_center_ef_on_yearly_pulse_country`
+(`ai_buy_central_bank_debt`, `sovereign_bond_yields`, `bond_maturity_on_action`,
+`financial_crash_count_reset_condition`) → `country_credit_rating` (ранг ≥ unrecognized_power) → `gdp_view_on_action`,
+`macro_facilities_on_action_bc`, `has_tech_central_bank_but_no_building_central_bank`,
+`has_currency_law_but_no_building_central_bank`, `gdp_view_on_action_fc`,
+`has_tech_financial_center_but_no_building_financial_center`, `has_second_financial_center` →
 `ef_on_yearly_pulse_event_at_date` (исторические события по датам: объединение Германии/Италии, события
 `00_ef_economic_event.5..65`, `silver_crisis_progress`).
 

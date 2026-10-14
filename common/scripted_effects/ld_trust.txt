@@ -1,9 +1,36 @@
 ﻿# Trust in money (R7.1; Д.R7.1, Д.R7.5; понятие «Доверие к деньгам»): no knob of its own -- the game's split of the pops
 # into loyalists, neutrals and radicals. Trust = 1 - the radicals' share + zz_ef_trust_loyalist_k x the loyalists' share
 # (shares of the population, the game's radical_fraction / loyalist_fraction), monthly into var:zz_ef_trust. Read by:
-# the pops' metal share (zz_ef_popm_share_v), the cash target (R7.2), the panic (R7.5).
+# the pops' metal share (zz_ef_popm_share_v), the cash target (ld_pop_cash.txt).
+# The panic (Д.R7.6): trust under zz_ef_panic_trust or down by more than zz_ef_panic_drop in a month -- var:zz_ef_panic,
+# the event ld_panic.1 (a message); the deposits go into banknotes zz_ef_panic_mult times faster (zz_ef_pop_cash_move_v)
+# until trust is back at zz_ef_panic_trust_end and not falling (ld_panic.2).
 
 # COUNTRY scope, monthly (zz_ef_money_model_monthly_step).
 zz_ef_trust_month_step = {
+	set_variable = { name = zz_ef_t_tr_prev value = zz_ef_trust_v }
 	set_variable = { name = zz_ef_trust value = zz_ef_trust_now_v }
+	set_variable = { name = zz_ef_t_tr_drop value = { value = var:zz_ef_t_tr_prev subtract = var:zz_ef_trust } }
+	if = {
+		limit = {
+			NOT = { has_variable = zz_ef_panic }
+			OR = {
+				var:zz_ef_trust < zz_ef_panic_trust
+				var:zz_ef_t_tr_drop > zz_ef_panic_drop
+			}
+		}
+		set_variable = zz_ef_panic
+		trigger_event = { id = ld_panic.1 }
+	}
+	else_if = {
+		limit = {
+			has_variable = zz_ef_panic
+			var:zz_ef_trust >= zz_ef_panic_trust_end
+			var:zz_ef_t_tr_drop <= 0
+		}
+		remove_variable = zz_ef_panic
+		trigger_event = { id = ld_panic.2 }
+	}
+	remove_variable = zz_ef_t_tr_prev
+	remove_variable = zz_ef_t_tr_drop
 }

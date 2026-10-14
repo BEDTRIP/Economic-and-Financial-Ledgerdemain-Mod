@@ -1,0 +1,20 @@
+﻿namespace = ld_panic
+
+# root -- a country whose trust in money broke (scripted_effects/ld_trust.txt, Д.R7.6): the message of the panic's start
+# and end; the panic itself is var:zz_ef_panic.
+ld_panic.1 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		post_notification = zz_ef_panic_start
+	}
+}
+ld_panic.2 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		post_notification = zz_ef_panic_end
+	}
+}

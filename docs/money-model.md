@@ -398,7 +398,12 @@
 - **Доверие к деньгам** (Д.R7.5, [[Доверие к деньгам]]): `common/scripted_effects/ld_trust.txt`,
   `common/script_values/ld_trust_values.txt` — раз в месяц (`zz_ef_trust_month_step` из
   `zz_ef_money_model_monthly_step`) `var:zz_ef_trust` = 1 − `radical_fraction` + `zz_ef_trust_loyalist_k` (½) ×
-  `loyalist_fraction`; `zz_ef_trust_v` — оно (до первого месяца — сейчас). Лог `EFW|…|all` — `trust`.
+  `loyalist_fraction`; `zz_ef_trust_v` — оно (до первого месяца — сейчас). Лог `EFW|…|all` — `trust`. Паника (Д.R7.6):
+  там же — доверие ниже `zz_ef_panic_trust` (0,5) или упало за месяц больше `zz_ef_panic_drop` (0,1) → `var:zz_ef_panic`
+  и событие `ld_panic.1` (сообщение `zz_ef_panic_start`, `events/ld_panic_events.txt`,
+  `common/messages/ld_panic_messages.txt`); снятие — доверие не ниже `zz_ef_panic_trust_end` (0,6) и не падает
+  (`ld_panic.2`). В панике снятие вкладов наличными к цели — × `zz_ef_panic_mult` (3) в `zz_ef_pop_cash_move_v`. Лог —
+  `panic`.
 - `EFT` — недельные покупки металла ЦБ/банков/населения (`zz_ef_metal_week_step`); `EFQ` — невязка металла ЦБ > 1000
   золота / 10000 серебра: металл ЦБ − снимок прошлого шага − известные движения (клиринг `zz_ef_f_clr_hume_g` / `_s`,
   кризисный выкуп `zz_ef_mt_known_g` / `_s` — `zz_ef_mt_known_add` у эмитента и продавца, пересчёт старта, арбитраж
