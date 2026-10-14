@@ -8,10 +8,15 @@
 # the least fill (the regulator keeps some throughput while the market has none of its good)
 zz_ef_psc_k_min = 0.05
 
-# STATE scope: the fill of its regulator's good (by the regulator's method), 1 without a regulator
+# STATE scope: the fill of its regulator's goods -- of the mix it buys (K, var:zz_ef_reg_fill, Д.R9.5,
+# ld_construction_market.txt), before its first week -- of its method's good; 1 without a regulator
 zz_ef_psc_fill_v = {
 	value = 1
 	if = {
+		limit = { has_variable = zz_ef_reg_fill }
+		value = var:zz_ef_reg_fill
+	}
+	else_if = {
 		limit = { has_building = building_construction_regulator }
 		if = {
 			limit = { b:building_construction_regulator = { has_active_production_method = pm_wood_point_conversion } }

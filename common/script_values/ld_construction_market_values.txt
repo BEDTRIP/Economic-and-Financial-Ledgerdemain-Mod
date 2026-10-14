@@ -1,0 +1,11 @@
+﻿# The construction regulator's purchase by the market (Д.R9.5; scripted_effects/ld_construction_market.txt).
+
+# a share's step a week toward the market's split (the rest is last week's): damps the swing of buying more of what
+# got cheap
+zz_ef_reg_step = 0.5
+# the local price's floor, a share of the base (a division safe at the bottom of the engine's price range), and the
+# start of the search for the cheapest price
+zz_ef_reg_price_floor = 0.01
+zz_ef_reg_price_none = 1000000
+# the least market fill of the mix (K)
+zz_ef_reg_fill_min = 0.05

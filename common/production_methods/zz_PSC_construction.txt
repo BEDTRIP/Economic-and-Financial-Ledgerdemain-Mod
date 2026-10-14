@@ -139,9 +139,14 @@ REPLACE_OR_CREATE:pm_wood_point_conversion = {
 		}
 	}
 
+	# 10 units of each construction good a point, cut to its share of the purchase by zz_ef_reg_in_<good> (Д.R9.5,
+	# scripted_effects/ld_construction_market.txt) -- 10 units a point in all
 	building_modifiers = {
 		workforce_scaled = {
 			goods_input_wood_construction_add = 10
+			goods_input_iron_construction_add = 10
+			goods_input_steel_construction_add = 10
+			goods_input_arc_welded_construction_add = 10
 		}
 		level_scaled = {
 			building_employment_bureaucrats_add = 20
@@ -162,9 +167,14 @@ REPLACE_OR_CREATE:pm_iron_point_conversion = {
 		}
 	}
 
+	# 10 units of each construction good a point, cut to its share of the purchase by zz_ef_reg_in_<good> (Д.R9.5,
+	# scripted_effects/ld_construction_market.txt) -- 10 units a point in all
 	building_modifiers = {
 		workforce_scaled = {
+			goods_input_wood_construction_add = 10
 			goods_input_iron_construction_add = 10
+			goods_input_steel_construction_add = 10
+			goods_input_arc_welded_construction_add = 10
 		}
 		level_scaled = {
 			building_employment_bureaucrats_add = 20
@@ -186,9 +196,14 @@ REPLACE_OR_CREATE:pm_steel_point_conversion = {
 		}
 	}
 
+	# 10 units of each construction good a point, cut to its share of the purchase by zz_ef_reg_in_<good> (Д.R9.5,
+	# scripted_effects/ld_construction_market.txt) -- 10 units a point in all
 	building_modifiers = {
 		workforce_scaled = {
+			goods_input_wood_construction_add = 10
+			goods_input_iron_construction_add = 10
 			goods_input_steel_construction_add = 10
+			goods_input_arc_welded_construction_add = 10
 		}
 		level_scaled = {
 			building_employment_bureaucrats_add = 20
@@ -210,8 +225,13 @@ REPLACE_OR_CREATE:pm_arc_welded_point_conversion = {
 		}
 	}
 
+	# 10 units of each construction good a point, cut to its share of the purchase by zz_ef_reg_in_<good> (Д.R9.5,
+	# scripted_effects/ld_construction_market.txt) -- 10 units a point in all
 	building_modifiers = {
 		workforce_scaled = {
+			goods_input_wood_construction_add = 10
+			goods_input_iron_construction_add = 10
+			goods_input_steel_construction_add = 10
 			goods_input_arc_welded_construction_add = 10
 		}
 		level_scaled = {
