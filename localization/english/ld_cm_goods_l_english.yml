@@ -13,9 +13,12 @@
  pm_zz_ef_bank_telegraph:0 "Telegraphic Transfers"
  pm_zz_ef_bank_modern:0 "Modern Bank"
 
- # EF.15: central bank bond output follows debt as % of GDP (modifier on the bank).
- zz_ef_cb_bond_issuance_low:0 "Bond Issuance: Debt Below Reference"
- zz_ef_cb_bond_issuance_high:0 "Bond Issuance: Debt Above Reference"
+ # the CB's bond issue by the Banks (by the CB's size and the debt); the CB's minting (Д.R9б.1).
+ zz_ef_cb_bond_issuance_low:0 "Central Bank Bond Issue: Less"
+ zz_ef_cb_bond_issuance_high:0 "Central Bank Bond Issue: More"
+ zz_ef_cb_minting:0 "Central Bank Minting"
+ zz_ef_cb_mint_reval:0 "Revaluation: Less Minting"
+ zz_ef_cb_mint_deval:0 "Devaluation: More Minting"
 
  # Modifier type of the minor-country currency grant (modifier_type_definitions/zz_ef_liquidity_currency_sell_orders.txt).
  state_sell_orders_liquidity_currency_add:0 "State Sell Orders: Local Currency"
@@ -37,3 +40,7 @@
  pm_zz_ef_bank_no_funds:0 "No Fund Shares"
  pm_zz_ef_bank_funds:0 "Fund Shares"
  pm_zz_ef_bank_funds_desc:0 "The banks put part of their money into the shares of their exchange's investment fund. On when the market sells the fund's shares."
+ pmg_zz_ef_bank_bonds:0 "Bonds"
+ pm_zz_ef_bank_no_bonds:0 "No Bonds"
+ pm_zz_ef_bank_bonds:0 "Bonds"
+ pm_zz_ef_bank_bonds_desc:0 "The banks issue bonds for the central bank: the country's issue grows with the central bank's size and the national debt."

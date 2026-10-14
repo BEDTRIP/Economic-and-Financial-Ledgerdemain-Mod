@@ -71,9 +71,7 @@ ef_on_monthly_pulse_recurence = {
 		if = {
 			limit = {
 				not = {
-					any_scope_state = {
-						has_building = building_bank
-					}
+					has_modifier = has_central_bank
 				}
 			}
 			activate_law = law_type:law_no_monetary_system
@@ -83,18 +81,11 @@ ef_on_monthly_pulse_recurence = {
  		}
 		if = {
 			limit = {
-				any_scope_state = {
-					has_building = building_bank
-				}
+				has_modifier = has_central_bank
 			}
-			every_scope_state = {
-				if = {
-					limit = {
-						has_building = building_bank
-					}
-					remove_building = building_bank
-				}
-			}
+			# a new country does not inherit the CB (Д.R9б.1; E&F: its building in a state was razed)
+			remove_modifier = has_central_bank
+			zz_ef_cb_mint_update = yes
 			central_bank_modifier = yes
 			activate_law = law_type:law_no_monetary_system
 			# no currency of its own (var:zz_ef_cur, ld_currency_var.txt)
@@ -1964,17 +1955,15 @@ money_value_global_var = {
 update_modifiers_bc_fc_ns = {
 	set_variable = { name = zz_ef_bcfcns_ran value = 0 }
 
-	#si il n'a pas le batiment il ne délanche pas
+	# the CB's minting and bonds (Д.R9б.1; ld_cb_size.txt, ld_cb_bond_issuance.txt) -- every country: without a CB they
+	# are taken off
+	zz_ef_cb_mint_update = yes
+	zz_ef_cb_bond_issuance_update = yes
 	if = {
 		limit = {
-			any_scope_state = {
-				has_building = building_bank
-			}
+			has_modifier = has_central_bank
 		}
 		central_bank_modifier = yes
-		### bond output of the central bank follows debt/GDP.
-		### ld_cb_bond_issuance.txt
-		zz_ef_cb_bond_issuance_update = yes
 		set_variable = { name = zz_ef_bcfcns_ran value = 1 }
 	}
 	if = {

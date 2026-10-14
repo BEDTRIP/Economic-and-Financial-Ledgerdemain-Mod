@@ -1,0 +1,21 @@
+# Из common/scripted_effects/ld_cb_law.txt (R9б.4): создание и снос здания ЦБ законом, как были.
+
+### header
+# The state and the private law found a CB (zz_ef_cb_found): E&F's modifier has_central_bank, the CB's building in the
+# capital -- a shell for minting and E&F's bond output until R5, its size -- the yearly growth by GDP
+# (macro_facilities_on_action_bc); the authority's metal stays on the country's accounts (zz_ef_am_*). The law "none"
+# closes it (zz_ef_cb_close).
+
+### zz_ef_cb_found: create_owned_bank
+		capital = {
+			zz_ef_cm_create_owned_bank = { BANK_BLDG_TYPE = building_bank CB_SIZE = 5 }
+		}
+		# E&F: the CB's place in the capital, has_central_bank, the methods by the standard
+		central_bank_modifier = yes
+
+### zz_ef_cb_close: remove_building
+		every_scope_state = {
+			limit = { has_building = building_bank }
+			remove_building = building_bank
+		}
+		remove_modifier = has_central_bank

@@ -1,0 +1,20 @@
+# Из common/scripted_effects/ld_metal_accounts.txt (R9б.4): условие базы и выключатель входа здания ЦБ (zz_ef_metal_week_step).
+
+	# the authority's base: E&F's CB building's method input while it stands
+	if = {
+		limit = { any_scope_building = { is_building_type = building_bank } }
+		set_variable = { name = zz_ef_cb_base_g value = zz_ef_cb_bldg_base_gold_goods }
+		set_variable = { name = zz_ef_cb_base_s value = zz_ef_cb_bldg_base_silver_goods }
+	}
+
+	# E&F's CB building buys nothing (its input switched off): the authority buys with the Banks
+	every_scope_building = {
+		limit = { is_building_type = building_bank }
+		if = { limit = { has_modifier = zz_ef_cb_metal_buy } remove_modifier = zz_ef_cb_metal_buy }
+		if = { limit = { has_modifier = zz_ef_cb_gold_sell } remove_modifier = zz_ef_cb_gold_sell }
+		if = { limit = { has_modifier = zz_ef_cb_silver_sell } remove_modifier = zz_ef_cb_silver_sell }
+		add_modifier = {
+			name = zz_ef_cb_metal_buy
+			multiplier = zz_ef_cb_bldg_buy_off
+		}
+	}

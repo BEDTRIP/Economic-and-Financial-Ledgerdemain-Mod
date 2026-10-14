@@ -22,21 +22,17 @@
   `01_financial_scripted_effects.txt`) — в случайном штате Мексики с этим модификатором.
 - Частная стройка — PSC `common/buildings/zz_PSC_construction.txt` (`building_construction_sector`); здания E&F
   `building_ef_private_construction` в форке нет.
-- `common/buildings/ef_15_bank.txt` — `building_bank` (центральный банк, `ownership_type = no_ownership`, PMG
-  `pmg_minting_type`, `pmg_monetary_policy`). Частный банк — `buildings/ld_bank.txt`.
+- Центральный банк E&F `building_bank` — в архиве (`_archive/ef_central_bank_building/`, Д.R9б.1): ЦБ — модификатор
+  страны (`central-bank.md`). Частный банк — `buildings/ld_bank.txt`.
 - `common/buildings/ef_16_financial_centre.txt` — генерат (`regen_ld_financial_centres`): общий финцентр и 38 вариантов
   (`exchange-companies.md`).
-- `common/production_method_groups/01_ef_industry.txt`, `03_ef_mine.txt`, `15_ef_bank.txt`, `16_ef_financial_centre.txt` — PMG: `pmg_market_liquidity`,
-  4 PMG серебряной шахты, `pmg_minting_type`,
-  `pmg_monetary_policy`, `pmg_currency_type`, `pmg_bond_exchange`, 4 биржи.
+- `common/production_method_groups/01_ef_industry.txt`, `03_ef_mine.txt`, `16_ef_financial_centre.txt` — PMG:
+  `pmg_market_liquidity`, 4 PMG серебряной шахты, `pmg_currency_type`, `pmg_bond_exchange`, 4 биржи.
 - `common/production_methods/00_ef_market_liquidity.txt` — `pm_no_market_liquidity` (по закону «без денежной системы»),
   `pm_market_liquidity_currency` (вход `goods_input_liquidity_currency_add = 28`).
 - `common/production_methods/03_ef_mines.txt`, `11_ef_private_infrastructure.txt` — PM серебряной шахты (кирка, насосы,
   взрывчатка, паровой осёл), `REPLACE:pm_company_headquarter_*` (16 ванильных PM штаб-квартиры с ослабленными акциями
   капиталистов). PM «частного владения» (выпуск «акций») — в `_archive/ef_stock_goods_output/` (Д.R4б.8).
-- `common/production_methods/15_ef_bank.txt` — 6 PM стандарта
-  (`pm_<fiat|silver|bimetallism|gold|gold_exchange|external_exchange>_standard_bank_money_currency`: выход
-  `goods_output_bond_add` и `country_minting_add`), `pm_no_monetary_policy`/`pm_revaluation`/`pm_devaluation`.
 - `common/production_methods/16_ef_financial_centre.txt` — `pm_bond_exchange` (выход `mutual_funds`, вход `bond`);
   методы бирж «акций» — в `_archive/ef_fc_stock_exchange_pm/` (Д.R4б.7).
 - `common/building_groups/00_ef_building_groups.txt` — `bg_bank`, `bg_financial_centre`, `bg_ef_private_construction`,

@@ -1,0 +1,11 @@
+# Из common/scripted_triggers/00_ef_custom_trigger.txt (R9б.4): тело market_owner_is_root_univ_with_buiding по методу
+# здания ЦБ.
+
+### market_owner_is_root_univ_with_buiding: PM check
+	any_scope_state = {
+		is_production_method_active = {
+			building_type = building_bank
+			production_method = pm_external_exchange_standard_bank_money_currency #pm_no_metal_consuption
+		}
+		# pm_no_subject_currency_type no longer exists (pmg_subject_currency_type is hidden): its negation is always true
+	}

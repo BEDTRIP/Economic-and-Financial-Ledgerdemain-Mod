@@ -1,0 +1,13 @@
+# Из common/script_values/ld_cb_bond_issuance_values.txt (R9б.4): два значения множителей здания ЦБ.
+
+# Split into two non-negative multipliers: one modifier for each direction,
+# so no modifier is ever applied with a negative multiplier.
+zz_ef_cb_bond_output_low = {
+	value = zz_ef_cb_bond_output_shift
+	multiply = -1
+	min = 0
+}
+zz_ef_cb_bond_output_high = {
+	value = zz_ef_cb_bond_output_shift
+	min = 0
+}

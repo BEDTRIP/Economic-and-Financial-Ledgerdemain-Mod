@@ -1,0 +1,23 @@
+# Из common/script_values/ld_metal_accounts_values.txt (R9б.4): база закупки металла денежной властью — вход метода
+# здания ЦБ, и выключатель его входа.
+
+# The authority's base: E&F's CB building's method input (1 gold / 10 silver per workforce), kept in var:zz_ef_cb_base_g /
+# _s while the building stands; its own input is switched off (zz_ef_cb_metal_buy at -100).
+zz_ef_cb_bldg_base_gold_goods = {
+	value = 0
+	every_scope_building = {
+		limit = { is_building_type = building_bank }
+		add = modifier:goods_input_gold_add
+	}
+	min = 0
+}
+zz_ef_cb_bldg_base_silver_goods = {
+	value = 0
+	every_scope_building = {
+		limit = { is_building_type = building_bank }
+		add = modifier:goods_input_silver_add
+	}
+	min = 0
+}
+# E&F's CB building's input percent: off
+zz_ef_cb_bldg_buy_off = -100

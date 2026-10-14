@@ -1,0 +1,39 @@
+# Из common/scripted_effects/00_on_action_main.txt (R9б.4): условия по зданию ЦБ, как были.
+
+### new country: no CB building
+		if = {
+			limit = {
+				not = {
+					any_scope_state = {
+						has_building = building_bank
+					}
+				}
+			}
+			activate_law = law_type:law_no_monetary_system
+
+### new country: CB building razed
+		if = {
+			limit = {
+				any_scope_state = {
+					has_building = building_bank
+				}
+			}
+			every_scope_state = {
+				if = {
+					limit = {
+						has_building = building_bank
+					}
+					remove_building = building_bank
+				}
+			}
+			central_bank_modifier = yes
+
+### update_modifiers_bc_fc_ns: CB building
+	#si il n'a pas le batiment il ne délanche pas
+	if = {
+		limit = {
+			any_scope_state = {
+				has_building = building_bank
+			}
+		}
+		central_bank_modifier = yes

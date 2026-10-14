@@ -1,0 +1,34 @@
+# Из common/scripted_effects/01_economic_scripted_effects.txt (R9б.4): блоки по зданию ЦБ (группа bg_bank), как были.
+
+### monetary_policy_inflation_reset_law: CB building's devaluation/revaluation markers
+	monetary_policy_inflation_reset_law = {
+		activate_law = law_type:law_no_monetary_policy
+		random_scope_building = {
+			limit = {
+				is_building_group = bg_bank
+			}
+			if = { limit = { has_modifier = devaluation_currency_25 } remove_modifier = devaluation_currency_25 }
+			if = { limit = { has_modifier = devaluation_currency_50 } remove_modifier = devaluation_currency_50 }
+			if = { limit = { has_modifier = devaluation_currency_75 } remove_modifier = devaluation_currency_75 }
+			if = { limit = { has_modifier = devaluation_currency_100 } remove_modifier = devaluation_currency_100 }
+			if = { limit = { has_modifier = revaluation_currency_25 } remove_modifier = revaluation_currency_25 }
+			if = { limit = { has_modifier = revaluation_currency_50 } remove_modifier = revaluation_currency_50 }
+			if = { limit = { has_modifier = revaluation_currency_75 } remove_modifier = revaluation_currency_75 }
+			if = { limit = { has_modifier = revaluation_currency_100 } remove_modifier = revaluation_currency_100 }
+		}
+	}
+
+### war: occupied capital's CB building throughput -100% 12 months (modifier_desactive_bank)
+	#deesactive la bank ceentrrale jusqu'à la fin de la guerre
+	scope:occupied_capital = {
+		random_scope_building = {
+			limit = {
+				is_building_group = bg_bank
+			}
+			if = { limit = { has_modifier = modifier_desactive_bank } remove_modifier = modifier_desactive_bank }
+			add_modifier = {
+				name = modifier_desactive_bank
+				months = 12
+			}
+		}
+	}

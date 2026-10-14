@@ -9,8 +9,8 @@
 услуги, бумагу, немного золота/серебра. Стартовые банки сеются один раз по рынку страны (40% — банковская компания E&F
 владельца, остальное — государство); прочие банковские компании старта — по уровню «Банка» (Д.R4б.12). Прибыль «Банков»
 движок платит владельцам — у субъекта строка `zz_ef_bk_inc` (его доля `zz_ef_bk_bprof` страны, лог `bank_book … inc`,
-панель «Доход зданий / нед»), капитал не меняется (Д.R4б.13). Центральный банк (`building_bank`) — государственное
-здание E&F без продажи валюты как товара. Вклады чужих ЦБ в наших банках — `nr_dep`. Фонды частных банков E&F — в
+панель «Доход зданий / нед»), капитал не меняется (Д.R4б.13). Здания ЦБ нет — ЦБ это модификатор страны (Д.R9б.1,
+`central-bank.md`); в стране с ЦБ «Банки» выпускают товар «облигации» (метод `pm_zz_ef_bank_bonds`). Вклады чужих ЦБ в наших банках — `nr_dep`. Фонды частных банков E&F — в
 `_archive/` (В.R3б.2); банковские компании E&F — владельцы зданий «Банк». Ключи в `ld_*` файлах имеют префикс `zz_ef_`
 (не `ld_`); в комментариях файлов старые имена `zz_ef_*.txt`.
 
@@ -122,13 +122,9 @@
 - `common/scripted_effects/ld_bank_seed.txt` — генерат: `zz_ef_bank_seed_step` (страна-владелец рынка, один раз, флаг
   `zz_ef_bank_seeded`), `zz_ef_bank_seed_state` (по штату), `zz_ef_bank_seed_company` (по банковской компании E&F,
   `$COMPANY$`), `zz_ef_bank_seed_state_owned` (запасной вариант — 100% государству).
-- `common/scripted_effects/ld_cm_bank_ownership.txt` — `zz_ef_cm_create_owned_bank` (строит/доращивает ЦБ до размера
-  `$CB_SIZE$`, государственный, резервы 0); зовут спавнеры E&F в `09_introduction_building_lvl.txt:23410…23523`.
-- `common/buildings/ef_15_bank.txt` — `building_bank` (ЦБ E&F: `buildable = no`, PMG `pmg_minting_type`,
-  `pmg_monetary_policy`).
-- `common/production_method_groups/15_ef_bank.txt`, `common/production_methods/15_ef_bank.txt` — методы ЦБ по валютным
-  стандартам (`pm_*_standard_bank_money_currency`: `country_minting_add`, выпуск облигаций `goods_output_bond_add`),
-  `pm_revaluation`/`pm_devaluation`.
+- `common/production_method_groups/ld_bank_pmg.txt` `pmg_zz_ef_bank_bonds`, `common/production_methods/ld_bank_pm.txt`
+  `pm_zz_ef_bank_no_bonds` / `pm_zz_ef_bank_bonds` — выпуск товара «облигации» «Банками» страны с ЦБ (Д.R9б.1; открыт
+  законами ЦБ, ставит `zz_ef_cb_bond_issuance_update`, `central-bank.md`).
 - `common/scripted_effects/ld_leak_back.txt` — `zz_ef_leak_back_step` (Д.R4б.33): статья «движок: оплачено сверх продаж
   рынка» возвращается в пул вкладами населения (доля `zz_ef_leak_back_pop_share`,
   `common/script_values/ld_leak_back_values.txt`) и компаний (`zz_ef_comp_dep`, `zz_ef_comp_dep_v`; у субъектов —
@@ -198,8 +194,7 @@
 | `company_<Банк>_gold_stockpile_fix`, `_silver_stockpile_fix` (глобальные) | металл частного банка E&F | история (арбитраж `private_bank_arbitrage_*` — в `_archive/ef_bimetallic_arbitrage/`) | GUI E&F (`private_bank_gold_reserve_per_bank_gui`); модель `ld_*` их не читает |
 
 ## Вызовы и связи
-- ЦБ создаётся спавнерами E&F через `zz_ef_cm_create_owned_bank` (`09_introduction_building_lvl.txt`,
-  `history/buildings/00_ef_building.txt:16`).
+- ЦБ — модификатор `has_central_bank` и размер `var:zz_ef_cb_size` (`ld_cb_size.txt`, `central-bank.md`).
 - `zz_ef_bank_levels` и `building_zz_ef_bank` читают `ld_metal_accounts_values.txt:230-278`,
   `ld_money_model_values.txt:2144-2150`.
 - Компании-владельцы: `common/company_types/00_ef_companies.txt` (`building_zz_ef_bank` в списках разрешённых зданий, 98

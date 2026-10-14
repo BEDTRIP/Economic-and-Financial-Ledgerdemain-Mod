@@ -1,0 +1,85 @@
+﻿# The central bank without E&F's building (Д.R9б.1; понятие «Центральный банк», docs/central-bank.md): what the building
+# did in its methods -- the minting, the base of the authority's metal purchase (zz_ef_cb_bldg_base_*_goods,
+# ld_metal_accounts_values.txt), the bonds' issue -- is now scaled by the CB's size. COUNTRY scope.
+
+# The size (E&F: the building's levels): 5 levels a 5 million of GDP (var:gdp_view, at least 5), never smaller, 5 again
+# after an economic crisis, at the start 5 or 20 by the history -- var:zz_ef_cb_size (zz_ef_cb_size_update in
+# macro_facilities_bc, the yearly pulse; initialize_historic_macro_facilities_bc; economic_crisis_destroy_central_bank).
+zz_ef_cb_size_step = 5
+zz_ef_cb_size_v = {
+	value = 0
+	if = {
+		limit = {
+			has_modifier = has_central_bank
+			has_variable = zz_ef_cb_size
+		}
+		value = var:zz_ef_cb_size
+	}
+}
+zz_ef_cb_size_target_v = {
+	value = 1
+	if = {
+		limit = { has_variable = gdp_view }
+		value = var:gdp_view
+		min = 1
+	}
+	multiply = zz_ef_cb_size_step
+}
+
+# The minting a unit of size by the monetary standard (E&F's methods pmg_minting_type: country_minting_add a workforce
+# unit of its building; the building stood fully staffed): fiat 250, a metal standard and the external exchange
+# standard 1000, an exchange standard 2500; ± 25 % by the monetary policy law (E&F's pmg_monetary_policy:
+# country_minting_mult; the modifiers zz_ef_cb_mint_reval / _deval, a point -- 1 %)
+zz_ef_cb_mint_fiat = 250
+zz_ef_cb_mint_metal = 1000
+zz_ef_cb_mint_exchange = 2500
+zz_ef_cb_mint_policy_pts = 25
+zz_ef_cb_mint_unit_v = {
+	value = zz_ef_cb_mint_fiat
+	if = {
+		limit = {
+			OR = {
+				has_law = law_type:law_silver_standard
+				has_law = law_type:law_bimetallism_standard
+				has_law = law_type:law_gold_standard
+				has_law = law_type:law_external_exchange_standard
+			}
+		}
+		value = zz_ef_cb_mint_metal
+	}
+	else_if = {
+		limit = { zz_ef_exchange_std = yes }
+		value = zz_ef_cb_mint_exchange
+	}
+}
+zz_ef_cb_mint_v = {
+	value = zz_ef_cb_mint_unit_v
+	multiply = zz_ef_cb_size_v
+}
+
+# The bonds' issue (the good "bonds", the pops' need of financial products): E&F's 10 a workforce unit of the CB's
+# building, now issued by the country's Banks (building_zz_ef_bank, method pm_zz_ef_bank_bonds) -- the country's issue
+# as it was: 10 x the size x the debt's factor (var:zz_ef_cb_bond_shift, ld_cb_bond_issuance_values.txt); the Banks'
+# output is brought to it by goods_output_bond_mult (zz_ef_cb_bond_issuance_update).
+zz_ef_cb_bond_unit = 10
+zz_ef_cb_bond_target_v = {
+	value = zz_ef_cb_bond_unit
+	multiply = zz_ef_cb_size_v
+	if = {
+		limit = { has_variable = zz_ef_cb_bond_shift }
+		multiply = {
+			value = 100
+			add = var:zz_ef_cb_bond_shift
+			divide = 100
+		}
+	}
+}
+# the Banks' own output of bonds (their method's goods_output_bond_add x their workforce)
+zz_ef_cb_bond_banks_v = {
+	value = 0
+	every_scope_building = {
+		limit = { is_building_type = building_zz_ef_bank }
+		add = modifier:goods_output_bond_add
+	}
+	min = 0
+}

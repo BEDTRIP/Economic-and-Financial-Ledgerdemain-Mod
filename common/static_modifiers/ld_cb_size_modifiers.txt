@@ -1,0 +1,14 @@
+﻿# The central bank's minting without E&F's building (Д.R9б.1; scripted_effects/ld_cb_size.txt): the country's minting
+# x zz_ef_cb_mint_v (the standard's minting a unit of size x the CB's size); the monetary policy law -- a point is 1 %.
+zz_ef_cb_minting = {
+	icon = gfx/interface/icons/timed_modifier_icons/central_bank_place.dds
+	country_minting_add = 1
+}
+zz_ef_cb_mint_reval = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_revaluation.dds
+	country_minting_mult = -0.01
+}
+zz_ef_cb_mint_deval = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_devaluation.dds
+	country_minting_mult = 0.01
+}

@@ -138,3 +138,27 @@ pm_zz_ef_bank_funds = {
 		}
 	}
 }
+
+# The good "bonds" (the pops' need of financial products) -- issued by the Banks of a country with its CB (Д.R9б.1;
+# E&F's CB building issued 10 a workforce unit of its own). The country's issue is the CB's: 10 x its size x the debt's
+# factor -- goods_output_bond_mult on every Bank brings the Banks' output to it (zz_ef_cb_bond_issuance_update); the
+# method's own output only spreads it over the Banks by their workforce (5 a unit -- принято ночью). The CB laws
+# unlock it: the owners do not pick it in a country without a CB.
+pm_zz_ef_bank_no_bonds = {
+	texture = "gfx/interface/icons/production_method_icons/market_trade.dds"
+	is_default = yes
+}
+pm_zz_ef_bank_bonds = {
+	texture = "gfx/interface/icons/production_method_icons/market_trade.dds"
+
+	unlocking_laws = {
+		law_ld_cb_state
+		law_ld_cb_private
+	}
+
+	building_modifiers = {
+		workforce_scaled = {
+			goods_output_bond_add = 5
+		}
+	}
+}

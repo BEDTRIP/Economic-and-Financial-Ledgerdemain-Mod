@@ -13,8 +13,9 @@
 ############################################################################################################################################################
 ############################################################################################################################################################
   
-base_demande_currency = { 
-	value = scope:central_bank_scope.modifier:goods_output_liquidity_currency_add  
+# the CB's output of the currency good -- none (Д.R9б.1: E&F's CB building's methods had none)
+base_demande_currency = {
+	value = 0
 }
 base_demande_currency_fix = { 
 	value = var:base_demande_currency_fix 

@@ -5,8 +5,7 @@
 # the service of moving money -- payments, transfers, bills. Our accounts already carry the money itself
 # (money model, M0-M3), so the good measures nothing; it is a service businesses (E&F's "market liquidity"
 # method, production_methods/00_ef_market_liquidity.txt) and the population (popneed_currency) buy, and
-# banks make. Until 5.10 the central bank made it, to the whole market's demand, ~15-20% of GDP of profit for
-# its owner (plan, "Этап 2 — решения").
+# banks make. In a country with its CB the banks also issue the good "bonds" (Д.R9б.1; pmg_zz_ef_bank_bonds).
 #
 # Private: built by financial districts (bg_trade score) and by E&F's 98 bank companies
 # (company_types/00_ef_companies.txt); state construction allowed too. No technology needed (with `banking` required
@@ -31,6 +30,7 @@ building_zz_ef_bank = {
 	production_method_groups = {
 		pmg_zz_ef_bank_base
 		pmg_zz_ef_bank_funds
+		pmg_zz_ef_bank_bonds
 	}
 
 	ai_nationalization_desire = -5	# state-owned levels (the seed's fallback): the AI sells them

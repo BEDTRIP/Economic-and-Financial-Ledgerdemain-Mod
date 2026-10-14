@@ -1,49 +1,69 @@
 ﻿#############################################
-# central bank bond output follows national debt / GDP.
-# The why and the formula: common/script_values/ld_cb_bond_issuance_values.txt.
+# The CB's bonds -- issued by the country's Banks (Д.R9б.1; понятие «Центральный банк», docs/central-bank.md): the good
+# "bonds" (the pops' need of financial products), the country's issue -- E&F's CB building's: 10 x the CB's size x the
+# debt's factor (zz_ef_cb_bond_target_v, ld_cb_size_values.txt; the factor -- ld_cb_bond_issuance_values.txt).
 #
-# Called once a month per country, from the central-bank branch of
-# update_modifiers_bc_fc_ns (00_on_action_main.txt) -- that branch
-# already runs only for countries that own a building_bank.
+# Called once a month per country (update_modifiers_bc_fc_ns, 00_on_action_main.txt). COUNTRY scope.
+#   * a country with its CB: the Banks' method with bonds (pm_zz_ef_bank_bonds, unlocked by the CB laws); their output
+#     (its goods_output_bond_add over their workforce) is brought to the issue by goods_output_bond_mult on every Bank --
+#     zz_ef_cb_bond_issuance_low / _high, a point is 1 % (var:zz_ef_cb_bond_pts);
+#   * without a CB: the method without bonds, no modifiers.
 #
-# COUNTRY scope. The ratio is stored on the country, the building reads it
-# through owner.var:.
-#
-# var:credit_at_central_bank is part of the debt and is set by E&F's own
-# credit effects. A country that never touched them has no variable; for it
-# the shift is 0 (E&F's output unchanged) rather than a flood of
-# "Failed to fetch variable" in error.log.
+# var:credit_at_central_bank is part of the debt and is set by E&F's own credit effects. A country that never touched
+# them has no variable; for it the debt's shift is 0 (the issue at the reference) rather than a flood of "Failed to
+# fetch variable" in error.log.
 #############################################
 
 zz_ef_cb_bond_issuance_update = {
+	set_variable = { name = zz_ef_cb_bond_pts value = 0 }
 	if = {
-		limit = { has_variable = credit_at_central_bank }
-		set_variable = { name = zz_ef_cb_bond_low value = zz_ef_cb_bond_output_low }
-		set_variable = { name = zz_ef_cb_bond_high value = zz_ef_cb_bond_output_high }
-	}
-	else = {
-		set_variable = { name = zz_ef_cb_bond_low value = 0 }
-		set_variable = { name = zz_ef_cb_bond_high value = 0 }
-	}
-	every_scope_state = {
-		limit = { has_building = building_bank }
-		every_scope_building = {
-			limit = { is_building_type = building_bank }
-			if = { limit = { has_modifier = zz_ef_cb_bond_issuance_low } remove_modifier = zz_ef_cb_bond_issuance_low }
-			if = { limit = { has_modifier = zz_ef_cb_bond_issuance_high } remove_modifier = zz_ef_cb_bond_issuance_high }
-			if = {
-				limit = { owner.var:zz_ef_cb_bond_low > 0 }
-				add_modifier = {
-					name = zz_ef_cb_bond_issuance_low
-					multiplier = owner.var:zz_ef_cb_bond_low
+		limit = { has_modifier = has_central_bank }
+		if = {
+			limit = { has_variable = credit_at_central_bank }
+			set_variable = { name = zz_ef_cb_bond_shift value = zz_ef_cb_bond_output_shift }
+		}
+		else = {
+			set_variable = { name = zz_ef_cb_bond_shift value = 0 }
+		}
+		activate_production_method = { building_type = building_zz_ef_bank production_method = pm_zz_ef_bank_bonds }
+		if = {
+			limit = { zz_ef_cb_bond_banks_v > 0 }
+			set_variable = {
+				name = zz_ef_cb_bond_pts
+				value = {
+					value = zz_ef_cb_bond_target_v
+					divide = zz_ef_cb_bond_banks_v
+					subtract = 1
+					multiply = 100
+					min = -100
 				}
 			}
-			else_if = {
-				limit = { owner.var:zz_ef_cb_bond_high > 0 }
-				add_modifier = {
-					name = zz_ef_cb_bond_issuance_high
-					multiplier = owner.var:zz_ef_cb_bond_high
+		}
+	}
+	else_if = {
+		limit = { has_variable = zz_ef_cb_bond_shift }
+		remove_variable = zz_ef_cb_bond_shift
+		activate_production_method = { building_type = building_zz_ef_bank production_method = pm_zz_ef_bank_no_bonds }
+	}
+	every_scope_building = {
+		limit = { is_building_type = building_zz_ef_bank }
+		if = { limit = { has_modifier = zz_ef_cb_bond_issuance_low } remove_modifier = zz_ef_cb_bond_issuance_low }
+		if = { limit = { has_modifier = zz_ef_cb_bond_issuance_high } remove_modifier = zz_ef_cb_bond_issuance_high }
+		if = {
+			limit = { owner.var:zz_ef_cb_bond_pts < 0 }
+			add_modifier = {
+				name = zz_ef_cb_bond_issuance_low
+				multiplier = {
+					value = owner.var:zz_ef_cb_bond_pts
+					multiply = -1
 				}
+			}
+		}
+		else_if = {
+			limit = { owner.var:zz_ef_cb_bond_pts > 0 }
+			add_modifier = {
+				name = zz_ef_cb_bond_issuance_high
+				multiplier = owner.var:zz_ef_cb_bond_pts
 			}
 		}
 	}

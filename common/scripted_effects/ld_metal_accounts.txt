@@ -568,9 +568,9 @@ zz_ef_metal_week_step = {
 	# the snapshot after this week's own moves
 	set_variable = { name = zz_ef_mt_prev_g value = gold_state_native_for_stockpile }
 	set_variable = { name = zz_ef_mt_prev_s value = silver_state_native_for_stockpile }
-	# the authority's base: E&F's CB building's method input while it stands
+	# the authority's base: by its standard x the CB's size, while the country has its CB (Д.R9б.1)
 	if = {
-		limit = { any_scope_building = { is_building_type = building_bank } }
+		limit = { has_modifier = has_central_bank }
 		set_variable = { name = zz_ef_cb_base_g value = zz_ef_cb_bldg_base_gold_goods }
 		set_variable = { name = zz_ef_cb_base_s value = zz_ef_cb_bldg_base_silver_goods }
 	}
@@ -649,17 +649,6 @@ zz_ef_metal_week_step = {
 				name = zz_ef_bank_silver_buy
 				multiplier = root.var:zz_ef_mt_bank_mult_s
 			}
-		}
-	}
-	# E&F's CB building buys nothing (its input switched off): the authority buys with the Banks
-	every_scope_building = {
-		limit = { is_building_type = building_bank }
-		if = { limit = { has_modifier = zz_ef_cb_metal_buy } remove_modifier = zz_ef_cb_metal_buy }
-		if = { limit = { has_modifier = zz_ef_cb_gold_sell } remove_modifier = zz_ef_cb_gold_sell }
-		if = { limit = { has_modifier = zz_ef_cb_silver_sell } remove_modifier = zz_ef_cb_silver_sell }
-		add_modifier = {
-			name = zz_ef_cb_metal_buy
-			multiplier = zz_ef_cb_bldg_buy_off
 		}
 	}
 	# the authority's sale -- on one Banks building (an unscaled output: on every building it would count each time)

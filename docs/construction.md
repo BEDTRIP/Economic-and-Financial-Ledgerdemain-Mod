@@ -100,7 +100,7 @@
   поэтому refs=0 в индексе.
 
 **E&F**
-- `common/building_groups/00_ef_building_groups.txt:123` — группа `bg_ef_private_construction` (зданий в ней нет; на неё
+- `common/building_groups/00_ef_building_groups.txt:72` — группа `bg_ef_private_construction` (зданий в ней нет; на неё
   ссылается запись `bg_ef_private_construction_score` в `INJECT:building_financial_district`,
   `common/buildings/ef_11_private_infrastructure.txt:39`).
 - `common/buildings/ef_11_private_infrastructure.txt` — не здание: `INJECT` PMG `pmg_market_liquidity` в порт/железную дорогу/торговый центр и `investment_scores` в `building_financial_district`

@@ -43,8 +43,8 @@
   населения, выкуп излишка казны).
 - `common/script_values/ld_consols_values.txt` — `zz_ef_consol_output`, `zz_ef_consol_sale_week`, `zz_ef_consol_debt_v`,
   `zz_ef_consol_interest_week`, `zz_ef_consol_buyback_week`, `zz_ef_consol_debt_to_gdp`, потоки `zz_ef_v_f_cons_*`.
-- `common/scripted_effects/ld_cb_bond_issuance.txt` — `zz_ef_cb_bond_issuance_update` (выпуск облигаций ЦБ по долг/ВВП,
-  зов из `00_on_action_main.txt:4293`) — смежно.
+- `common/scripted_effects/ld_cb_bond_issuance.txt` — `zz_ef_cb_bond_issuance_update` (товар «облигации» выпускают «Банки»
+  страны с ЦБ — по размеру ЦБ и долгу / ВВП, Д.R9б.1; зов из `update_modifiers_bc_fc_ns`) — смежно, `central-bank.md`.
 - E&F, облигационная часть:
   - `common/scripted_effects/01_financial_scripted_effects.txt`: `bond_maturity_1..10` (годовой счётчик срока слота
     игрока, сброс слота), `buy_bond_in_currrency_var` (:32059), `country_credit_rating` (:18), `sovereign_bond_yields`

@@ -450,13 +450,10 @@ market_owner_is_root_univ_with_buiding = { #market_owner_is_root_univ_with_buidi
 	#en gros le pays a la pm de la dépendence à une currency étrangère et il n'a pas la pm de non consomation de la currency étrangère
 	#QUand négativé: Le pays n'a pas la pm d'utilisation de pays étrangé et il a un pm de consomation du pays étrangé
 	#donc on doit changer la loi pour que çà marche
-	any_scope_state = {
-		is_production_method_active = {
-			building_type = building_bank
-			production_method = pm_external_exchange_standard_bank_money_currency #pm_no_metal_consuption
-		}
-		# pm_no_subject_currency_type no longer exists (pmg_subject_currency_type is hidden): its negation is always true
-	}
+	# E&F: its CB building's method of the external exchange standard (the only one that law unlocks) -- the CB and the
+	# law (Д.R9б.1)
+	has_modifier = has_central_bank
+	has_law = law_type:law_external_exchange_standard
 }
 
 bank_central_buiding_no_external_currency_consuption = {

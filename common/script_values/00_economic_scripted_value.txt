@@ -16,8 +16,10 @@
 ############################################################################################################################################################
  
 #silver
+# the CB's metal input -- the authority's base by its standard x the CB's size (Д.R9б.1; E&F: its building's method
+# input, ld_metal_accounts_values.txt)
 base_demande_silver = {
-	value = scope:central_bank_scope.modifier:goods_input_silver_add
+	value = zz_ef_cb_bldg_base_silver_goods
 }
 base_demande_silver_fix = {
 	value = var:base_demande_silver_fix
@@ -43,7 +45,7 @@ base_demande_silver_price = {
 
 #gold
 base_demande_gold = {
-	value = scope:central_bank_scope.modifier:goods_input_gold_add
+	value = zz_ef_cb_bldg_base_gold_goods
 }
 base_demande_gold_fix = {
 	value = var:base_demande_gold_fix
@@ -1433,7 +1435,7 @@ central_bank_overlord_currency_purchases = {
 #brace
 	#dinar
 	base_demande_dinar = {
-		value = scope:central_bank_scope.modifier:goods_input_dinar_c_add
+		value = 0 # the CB has no input of dinar (Д.R9б.1)
 	}
 	base_demande_dinar_fix = {
 		value = var:base_demande_dinar_fix
@@ -1458,7 +1460,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#dinar_algerian_dinar
 	base_demande_dinar_algerian_dinar = {
-		value = scope:central_bank_scope.modifier:goods_input_dinar_algerian_dinar_c_add
+		value = 0 # the CB has no input of dinar_algerian_dinar (Д.R9б.1)
 	}
 	base_demande_dinar_algerian_dinar_fix = {
 		value = var:base_demande_dinar_algerian_dinar_fix
@@ -1483,7 +1485,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#dinar_iraqi_dinar
 	base_demande_dinar_iraqi_dinar = {
-		value = scope:central_bank_scope.modifier:goods_input_dinar_iraqi_dinar_c_add
+		value = 0 # the CB has no input of dinar_iraqi_dinar (Д.R9б.1)
 	}
 	base_demande_dinar_iraqi_dinar_fix = {
 		value = var:base_demande_dinar_iraqi_dinar_fix
@@ -1508,7 +1510,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#dinar_libyan_dinar
 	base_demande_dinar_libyan_dinar = {
-		value = scope:central_bank_scope.modifier:goods_input_dinar_libyan_dinar_c_add
+		value = 0 # the CB has no input of dinar_libyan_dinar (Д.R9б.1)
 	}
 	base_demande_dinar_libyan_dinar_fix = {
 		value = var:base_demande_dinar_libyan_dinar_fix
@@ -1533,7 +1535,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#dinar_moroccan_dirham
 	base_demande_dinar_moroccan_dirham = {
-		value = scope:central_bank_scope.modifier:goods_input_dinar_moroccan_dirham_c_add
+		value = 0 # the CB has no input of dinar_moroccan_dirham (Д.R9б.1)
 	}
 	base_demande_dinar_moroccan_dirham_fix = {
 		value = var:base_demande_dinar_moroccan_dirham_fix
@@ -1558,7 +1560,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#dinar_omanian_rial
 	base_demande_dinar_omanian_rial = {
-		value = scope:central_bank_scope.modifier:goods_input_dinar_omanian_rial_c_add
+		value = 0 # the CB has no input of dinar_omanian_rial (Д.R9б.1)
 	}
 	base_demande_dinar_omanian_rial_fix = {
 		value = var:base_demande_dinar_omanian_rial_fix
@@ -1583,7 +1585,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#dinar_qiran
 	base_demande_dinar_qiran = {
-		value = scope:central_bank_scope.modifier:goods_input_dinar_qiran_c_add
+		value = 0 # the CB has no input of dinar_qiran (Д.R9б.1)
 	}
 	base_demande_dinar_qiran_fix = {
 		value = var:base_demande_dinar_qiran_fix
@@ -1608,7 +1610,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#dinar_saudi_riyal
 	base_demande_dinar_saudi_riyal = {
-		value = scope:central_bank_scope.modifier:goods_input_dinar_saudi_riyal_c_add
+		value = 0 # the CB has no input of dinar_saudi_riyal (Д.R9б.1)
 	}
 	base_demande_dinar_saudi_riyal_fix = {
 		value = var:base_demande_dinar_saudi_riyal_fix
@@ -1633,7 +1635,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#dinar_serbian_dinar
 	base_demande_dinar_serbian_dinar = {
-		value = scope:central_bank_scope.modifier:goods_input_dinar_serbian_dinar_c_add
+		value = 0 # the CB has no input of dinar_serbian_dinar (Д.R9б.1)
 	}
 	base_demande_dinar_serbian_dinar_fix = {
 		value = var:base_demande_dinar_serbian_dinar_fix
@@ -1658,7 +1660,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#dinar_tunisian_dinar
 	base_demande_dinar_tunisian_dinar = {
-		value = scope:central_bank_scope.modifier:goods_input_dinar_tunisian_dinar_c_add
+		value = 0 # the CB has no input of dinar_tunisian_dinar (Д.R9б.1)
 	}
 	base_demande_dinar_tunisian_dinar_fix = {
 		value = var:base_demande_dinar_tunisian_dinar_fix
@@ -1683,7 +1685,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#dinar_yugoslav_dinar
 	base_demande_dinar_yugoslav_dinar = {
-		value = scope:central_bank_scope.modifier:goods_input_dinar_yugoslav_dinar_c_add
+		value = 0 # the CB has no input of dinar_yugoslav_dinar (Д.R9б.1)
 	}
 	base_demande_dinar_yugoslav_dinar_fix = {
 		value = var:base_demande_dinar_yugoslav_dinar_fix
@@ -1708,7 +1710,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#dollar_australian_dollar
 	base_demande_dollar_australian_dollar = {
-		value = scope:central_bank_scope.modifier:goods_input_dollar_australian_dollar_c_add
+		value = 0 # the CB has no input of dollar_australian_dollar (Д.R9б.1)
 	}
 	base_demande_dollar_australian_dollar_fix = {
 		value = var:base_demande_dollar_australian_dollar_fix
@@ -1733,7 +1735,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#dollar_canadian_dollar
 	base_demande_dollar_canadian_dollar = {
-		value = scope:central_bank_scope.modifier:goods_input_dollar_canadian_dollar_c_add
+		value = 0 # the CB has no input of dollar_canadian_dollar (Д.R9б.1)
 	}
 	base_demande_dollar_canadian_dollar_fix = {
 		value = var:base_demande_dollar_canadian_dollar_fix
@@ -1758,7 +1760,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#dollar_caribbean_dollar
 	base_demande_dollar_caribbean_dollar = {
-		value = scope:central_bank_scope.modifier:goods_input_dollar_caribbean_dollar_c_add
+		value = 0 # the CB has no input of dollar_caribbean_dollar (Д.R9б.1)
 	}
 	base_demande_dollar_caribbean_dollar_fix = {
 		value = var:base_demande_dollar_caribbean_dollar_fix
@@ -1783,7 +1785,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#dollar_confederate_states_dollar
 	base_demande_dollar_confederate_states_dollar = {
-		value = scope:central_bank_scope.modifier:goods_input_dollar_confederate_states_dollar_c_add
+		value = 0 # the CB has no input of dollar_confederate_states_dollar (Д.R9б.1)
 	}
 	base_demande_dollar_confederate_states_dollar_fix = {
 		value = var:base_demande_dollar_confederate_states_dollar_fix
@@ -1808,7 +1810,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#dollar_liberian_dollar
 	base_demande_dollar_liberian_dollar = {
-		value = scope:central_bank_scope.modifier:goods_input_dollar_liberian_dollar_c_add
+		value = 0 # the CB has no input of dollar_liberian_dollar (Д.R9б.1)
 	}
 	base_demande_dollar_liberian_dollar_fix = {
 		value = var:base_demande_dollar_liberian_dollar_fix
@@ -1833,7 +1835,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#dollar_new_zealand_dollar
 	base_demande_dollar_new_zealand_dollar = {
-		value = scope:central_bank_scope.modifier:goods_input_dollar_new_zealand_dollar_c_add
+		value = 0 # the CB has no input of dollar_new_zealand_dollar (Д.R9б.1)
 	}
 	base_demande_dollar_new_zealand_dollar_fix = {
 		value = var:base_demande_dollar_new_zealand_dollar_fix
@@ -1858,7 +1860,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#dollar_sierra_leonean_dollar
 	base_demande_dollar_sierra_leonean_dollar = {
-		value = scope:central_bank_scope.modifier:goods_input_dollar_sierra_leonean_dollar_c_add
+		value = 0 # the CB has no input of dollar_sierra_leonean_dollar (Д.R9б.1)
 	}
 	base_demande_dollar_sierra_leonean_dollar_fix = {
 		value = var:base_demande_dollar_sierra_leonean_dollar_fix
@@ -1883,7 +1885,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#dollar_united_states_dollar
 	base_demande_dollar_united_states_dollar = {
-		value = scope:central_bank_scope.modifier:goods_input_dollar_united_states_dollar_c_add
+		value = 0 # the CB has no input of dollar_united_states_dollar (Д.R9б.1)
 	}
 	base_demande_dollar_united_states_dollar_fix = {
 		value = var:base_demande_dollar_united_states_dollar_fix
@@ -1908,7 +1910,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#eco_ariary
 	base_demande_eco_ariary = {
-		value = scope:central_bank_scope.modifier:goods_input_eco_ariary_c_add
+		value = 0 # the CB has no input of eco_ariary (Д.R9б.1)
 	}
 	base_demande_eco_ariary_fix = {
 		value = var:base_demande_eco_ariary_fix
@@ -1933,7 +1935,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#eco_central_african_eco
 	base_demande_eco_central_african_eco = {
-		value = scope:central_bank_scope.modifier:goods_input_eco_central_african_eco_c_add
+		value = 0 # the CB has no input of eco_central_african_eco (Д.R9б.1)
 	}
 	base_demande_eco_central_african_eco_fix = {
 		value = var:base_demande_eco_central_african_eco_fix
@@ -1958,7 +1960,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#eco_east_african_eco
 	base_demande_eco_east_african_eco = {
-		value = scope:central_bank_scope.modifier:goods_input_eco_east_african_eco_c_add
+		value = 0 # the CB has no input of eco_east_african_eco (Д.R9б.1)
 	}
 	base_demande_eco_east_african_eco_fix = {
 		value = var:base_demande_eco_east_african_eco_fix
@@ -1983,7 +1985,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#eco_ethiopian_birr
 	base_demande_eco_ethiopian_birr = {
-		value = scope:central_bank_scope.modifier:goods_input_eco_ethiopian_birr_c_add
+		value = 0 # the CB has no input of eco_ethiopian_birr (Д.R9б.1)
 	}
 	base_demande_eco_ethiopian_birr_fix = {
 		value = var:base_demande_eco_ethiopian_birr_fix
@@ -2008,7 +2010,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#eco_ghanaian_pound
 	base_demande_eco_ghanaian_pound = {
-		value = scope:central_bank_scope.modifier:goods_input_eco_ghanaian_pound_c_add
+		value = 0 # the CB has no input of eco_ghanaian_pound (Д.R9б.1)
 	}
 	base_demande_eco_ghanaian_pound_fix = {
 		value = var:base_demande_eco_ghanaian_pound_fix
@@ -2033,7 +2035,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#eco_nigerian_naira
 	base_demande_eco_nigerian_naira = {
-		value = scope:central_bank_scope.modifier:goods_input_eco_nigerian_naira_c_add
+		value = 0 # the CB has no input of eco_nigerian_naira (Д.R9б.1)
 	}
 	base_demande_eco_nigerian_naira_fix = {
 		value = var:base_demande_eco_nigerian_naira_fix
@@ -2058,7 +2060,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#eco_south_african_rand
 	base_demande_eco_south_african_rand = {
-		value = scope:central_bank_scope.modifier:goods_input_eco_south_african_rand_c_add
+		value = 0 # the CB has no input of eco_south_african_rand (Д.R9б.1)
 	}
 	base_demande_eco_south_african_rand_fix = {
 		value = var:base_demande_eco_south_african_rand_fix
@@ -2083,7 +2085,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#eco_tuareg_ouguiya
 	base_demande_eco_tuareg_ouguiya = {
-		value = scope:central_bank_scope.modifier:goods_input_eco_tuareg_ouguiya_c_add
+		value = 0 # the CB has no input of eco_tuareg_ouguiya (Д.R9б.1)
 	}
 	base_demande_eco_tuareg_ouguiya_fix = {
 		value = var:base_demande_eco_tuareg_ouguiya_fix
@@ -2108,7 +2110,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#eco_west_african_eco
 	base_demande_eco_west_african_eco = {
-		value = scope:central_bank_scope.modifier:goods_input_eco_west_african_eco_c_add
+		value = 0 # the CB has no input of eco_west_african_eco (Д.R9б.1)
 	}
 	base_demande_eco_west_african_eco_fix = {
 		value = var:base_demande_eco_west_african_eco_fix
@@ -2133,7 +2135,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#franc_belgian_franc
 	base_demande_franc_belgian_franc = {
-		value = scope:central_bank_scope.modifier:goods_input_franc_belgian_franc_c_add
+		value = 0 # the CB has no input of franc_belgian_franc (Д.R9б.1)
 	}
 	base_demande_franc_belgian_franc_fix = {
 		value = var:base_demande_franc_belgian_franc_fix
@@ -2158,7 +2160,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#franc_french_franc
 	base_demande_franc_french_franc = {
-		value = scope:central_bank_scope.modifier:goods_input_franc_french_franc_c_add
+		value = 0 # the CB has no input of franc_french_franc (Д.R9б.1)
 	}
 	base_demande_franc_french_franc_fix = {
 		value = var:base_demande_franc_french_franc_fix
@@ -2183,7 +2185,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#franc_luxembourgish_franc
 	base_demande_franc_luxembourgish_franc = {
-		value = scope:central_bank_scope.modifier:goods_input_franc_luxembourgish_franc_c_add
+		value = 0 # the CB has no input of franc_luxembourgish_franc (Д.R9б.1)
 	}
 	base_demande_franc_luxembourgish_franc_fix = {
 		value = var:base_demande_franc_luxembourgish_franc_fix
@@ -2208,7 +2210,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#franc_swiss_franc
 	base_demande_franc_swiss_franc = {
-		value = scope:central_bank_scope.modifier:goods_input_franc_swiss_franc_c_add
+		value = 0 # the CB has no input of franc_swiss_franc (Д.R9б.1)
 	}
 	base_demande_franc_swiss_franc_fix = {
 		value = var:base_demande_franc_swiss_franc_fix
@@ -2233,7 +2235,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#gulden
 	base_demande_gulden = {
-		value = scope:central_bank_scope.modifier:goods_input_gulden_c_add
+		value = 0 # the CB has no input of gulden (Д.R9б.1)
 	}
 	base_demande_gulden_fix = {
 		value = var:base_demande_gulden_fix
@@ -2258,7 +2260,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#gulden_bavarian_gulden
 	base_demande_gulden_bavarian_gulden = {
-		value = scope:central_bank_scope.modifier:goods_input_gulden_bavarian_gulden_c_add
+		value = 0 # the CB has no input of gulden_bavarian_gulden (Д.R9б.1)
 	}
 	base_demande_gulden_bavarian_gulden_fix = {
 		value = var:base_demande_gulden_bavarian_gulden_fix
@@ -2283,7 +2285,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#gulden_florin
 	base_demande_gulden_florin = {
-		value = scope:central_bank_scope.modifier:goods_input_gulden_florin_c_add
+		value = 0 # the CB has no input of gulden_florin (Д.R9б.1)
 	}
 	base_demande_gulden_florin_fix = {
 		value = var:base_demande_gulden_florin_fix
@@ -2308,7 +2310,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#gulden_hungarian_forint
 	base_demande_gulden_hungarian_forint = {
-		value = scope:central_bank_scope.modifier:goods_input_gulden_hungarian_forint_c_add
+		value = 0 # the CB has no input of gulden_hungarian_forint (Д.R9б.1)
 	}
 	base_demande_gulden_hungarian_forint_fix = {
 		value = var:base_demande_gulden_hungarian_forint_fix
@@ -2333,7 +2335,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#gulden_indies_guilder
 	base_demande_gulden_indies_guilder = {
-		value = scope:central_bank_scope.modifier:goods_input_gulden_indies_guilder_c_add
+		value = 0 # the CB has no input of gulden_indies_guilder (Д.R9б.1)
 	}
 	base_demande_gulden_indies_guilder_fix = {
 		value = var:base_demande_gulden_indies_guilder_fix
@@ -2358,7 +2360,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#gulden_south_german_gulden
 	base_demande_gulden_south_german_gulden = {
-		value = scope:central_bank_scope.modifier:goods_input_gulden_south_german_gulden_c_add
+		value = 0 # the CB has no input of gulden_south_german_gulden (Д.R9б.1)
 	}
 	base_demande_gulden_south_german_gulden_fix = {
 		value = var:base_demande_gulden_south_german_gulden_fix
@@ -2383,7 +2385,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#krone_czech_koruna
 	base_demande_krone_czech_koruna = {
-		value = scope:central_bank_scope.modifier:goods_input_krone_czech_koruna_c_add
+		value = 0 # the CB has no input of krone_czech_koruna (Д.R9б.1)
 	}
 	base_demande_krone_czech_koruna_fix = {
 		value = var:base_demande_krone_czech_koruna_fix
@@ -2408,7 +2410,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#krone_danish_krone
 	base_demande_krone_danish_krone = {
-		value = scope:central_bank_scope.modifier:goods_input_krone_danish_krone_c_add
+		value = 0 # the CB has no input of krone_danish_krone (Д.R9б.1)
 	}
 	base_demande_krone_danish_krone_fix = {
 		value = var:base_demande_krone_danish_krone_fix
@@ -2433,7 +2435,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#krone_estonian_kroon
 	base_demande_krone_estonian_kroon = {
-		value = scope:central_bank_scope.modifier:goods_input_krone_estonian_kroon_c_add
+		value = 0 # the CB has no input of krone_estonian_kroon (Д.R9б.1)
 	}
 	base_demande_krone_estonian_kroon_fix = {
 		value = var:base_demande_krone_estonian_kroon_fix
@@ -2458,7 +2460,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#krone_icelandic_krona
 	base_demande_krone_icelandic_krona = {
-		value = scope:central_bank_scope.modifier:goods_input_krone_icelandic_krona_c_add
+		value = 0 # the CB has no input of krone_icelandic_krona (Д.R9б.1)
 	}
 	base_demande_krone_icelandic_krona_fix = {
 		value = var:base_demande_krone_icelandic_krona_fix
@@ -2483,7 +2485,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#krone_norwegian_krone
 	base_demande_krone_norwegian_krone = {
-		value = scope:central_bank_scope.modifier:goods_input_krone_norwegian_krone_c_add
+		value = 0 # the CB has no input of krone_norwegian_krone (Д.R9б.1)
 	}
 	base_demande_krone_norwegian_krone_fix = {
 		value = var:base_demande_krone_norwegian_krone_fix
@@ -2508,7 +2510,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#krone_slovak_koruna
 	base_demande_krone_slovak_koruna = {
-		value = scope:central_bank_scope.modifier:goods_input_krone_slovak_koruna_c_add
+		value = 0 # the CB has no input of krone_slovak_koruna (Д.R9б.1)
 	}
 	base_demande_krone_slovak_koruna_fix = {
 		value = var:base_demande_krone_slovak_koruna_fix
@@ -2533,7 +2535,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#krone_swedish_krona
 	base_demande_krone_swedish_krona = {
-		value = scope:central_bank_scope.modifier:goods_input_krone_swedish_krona_c_add
+		value = 0 # the CB has no input of krone_swedish_krona (Д.R9б.1)
 	}
 	base_demande_krone_swedish_krona_fix = {
 		value = var:base_demande_krone_swedish_krona_fix
@@ -2558,7 +2560,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#leon_leu
 	base_demande_leon_leu = {
-		value = scope:central_bank_scope.modifier:goods_input_leon_leu_c_add
+		value = 0 # the CB has no input of leon_leu (Д.R9б.1)
 	}
 	base_demande_leon_leu_fix = {
 		value = var:base_demande_leon_leu_fix
@@ -2583,7 +2585,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#leon_lev
 	base_demande_leon_lev = {
-		value = scope:central_bank_scope.modifier:goods_input_leon_lev_c_add
+		value = 0 # the CB has no input of leon_lev (Д.R9б.1)
 	}
 	base_demande_leon_lev_fix = {
 		value = var:base_demande_leon_lev_fix
@@ -2608,7 +2610,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#lira
 	base_demande_lira = {
-		value = scope:central_bank_scope.modifier:goods_input_lira_c_add
+		value = 0 # the CB has no input of lira (Д.R9б.1)
 	}
 	base_demande_lira_fix = {
 		value = var:base_demande_lira_fix
@@ -2633,7 +2635,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#lira_ducato
 	base_demande_lira_ducato = {
-		value = scope:central_bank_scope.modifier:goods_input_lira_ducato_c_add
+		value = 0 # the CB has no input of lira_ducato (Д.R9б.1)
 	}
 	base_demande_lira_ducato_fix = {
 		value = var:base_demande_lira_ducato_fix
@@ -2658,7 +2660,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#lira_ottoman_lira
 	base_demande_lira_ottoman_lira = {
-		value = scope:central_bank_scope.modifier:goods_input_lira_ottoman_lira_c_add
+		value = 0 # the CB has no input of lira_ottoman_lira (Д.R9б.1)
 	}
 	base_demande_lira_ottoman_lira_fix = {
 		value = var:base_demande_lira_ottoman_lira_fix
@@ -2683,7 +2685,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#lira_scudo_pontificio
 	base_demande_lira_scudo_pontificio = {
-		value = scope:central_bank_scope.modifier:goods_input_lira_scudo_pontificio_c_add
+		value = 0 # the CB has no input of lira_scudo_pontificio (Д.R9б.1)
 	}
 	base_demande_lira_scudo_pontificio_fix = {
 		value = var:base_demande_lira_scudo_pontificio_fix
@@ -2708,7 +2710,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#lira_scudo_sardo
 	base_demande_lira_scudo_sardo = {
-		value = scope:central_bank_scope.modifier:goods_input_lira_scudo_sardo_c_add
+		value = 0 # the CB has no input of lira_scudo_sardo (Д.R9б.1)
 	}
 	base_demande_lira_scudo_sardo_fix = {
 		value = var:base_demande_lira_scudo_sardo_fix
@@ -2733,7 +2735,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#lira_toscane_lira
 	base_demande_lira_toscane_lira = {
-		value = scope:central_bank_scope.modifier:goods_input_lira_toscane_lira_c_add
+		value = 0 # the CB has no input of lira_toscane_lira (Д.R9б.1)
 	}
 	base_demande_lira_toscane_lira_fix = {
 		value = var:base_demande_lira_toscane_lira_fix
@@ -2758,7 +2760,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#mark
 	base_demande_mark = {
-		value = scope:central_bank_scope.modifier:goods_input_mark_c_add
+		value = 0 # the CB has no input of mark (Д.R9б.1)
 	}
 	base_demande_mark_fix = {
 		value = var:base_demande_mark_fix
@@ -2783,7 +2785,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#mark_finnish_markka
 	base_demande_mark_finnish_markka = {
-		value = scope:central_bank_scope.modifier:goods_input_mark_finnish_markka_c_add
+		value = 0 # the CB has no input of mark_finnish_markka (Д.R9б.1)
 	}
 	base_demande_mark_finnish_markka_fix = {
 		value = var:base_demande_mark_finnish_markka_fix
@@ -2808,7 +2810,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#peso
 	base_demande_peso = {
-		value = scope:central_bank_scope.modifier:goods_input_peso_c_add
+		value = 0 # the CB has no input of peso (Д.R9б.1)
 	}
 	base_demande_peso_fix = {
 		value = var:base_demande_peso_fix
@@ -2833,7 +2835,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#peso_argentine_peso
 	base_demande_peso_argentine_peso = {
-		value = scope:central_bank_scope.modifier:goods_input_peso_argentine_peso_c_add
+		value = 0 # the CB has no input of peso_argentine_peso (Д.R9б.1)
 	}
 	base_demande_peso_argentine_peso_fix = {
 		value = var:base_demande_peso_argentine_peso_fix
@@ -2858,7 +2860,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#peso_bolivien_peso
 	base_demande_peso_bolivien_peso = {
-		value = scope:central_bank_scope.modifier:goods_input_peso_bolivien_peso_c_add
+		value = 0 # the CB has no input of peso_bolivien_peso (Д.R9б.1)
 	}
 	base_demande_peso_bolivien_peso_fix = {
 		value = var:base_demande_peso_bolivien_peso_fix
@@ -2883,7 +2885,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#peso_chilean_peso
 	base_demande_peso_chilean_peso = {
-		value = scope:central_bank_scope.modifier:goods_input_peso_chilean_peso_c_add
+		value = 0 # the CB has no input of peso_chilean_peso (Д.R9б.1)
 	}
 	base_demande_peso_chilean_peso_fix = {
 		value = var:base_demande_peso_chilean_peso_fix
@@ -2908,7 +2910,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#peso_colombian_peso
 	base_demande_peso_colombian_peso = {
-		value = scope:central_bank_scope.modifier:goods_input_peso_colombian_peso_c_add
+		value = 0 # the CB has no input of peso_colombian_peso (Д.R9б.1)
 	}
 	base_demande_peso_colombian_peso_fix = {
 		value = var:base_demande_peso_colombian_peso_fix
@@ -2933,7 +2935,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#peso_costa_rican_colon
 	base_demande_peso_costa_rican_colon = {
-		value = scope:central_bank_scope.modifier:goods_input_peso_costa_rican_colon_c_add
+		value = 0 # the CB has no input of peso_costa_rican_colon (Д.R9б.1)
 	}
 	base_demande_peso_costa_rican_colon_fix = {
 		value = var:base_demande_peso_costa_rican_colon_fix
@@ -2958,7 +2960,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#peso_cuban_peso
 	base_demande_peso_cuban_peso = {
-		value = scope:central_bank_scope.modifier:goods_input_peso_cuban_peso_c_add
+		value = 0 # the CB has no input of peso_cuban_peso (Д.R9б.1)
 	}
 	base_demande_peso_cuban_peso_fix = {
 		value = var:base_demande_peso_cuban_peso_fix
@@ -2983,7 +2985,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#peso_ecuadorian_peso
 	base_demande_peso_ecuadorian_peso = {
-		value = scope:central_bank_scope.modifier:goods_input_peso_ecuadorian_peso_c_add
+		value = 0 # the CB has no input of peso_ecuadorian_peso (Д.R9б.1)
 	}
 	base_demande_peso_ecuadorian_peso_fix = {
 		value = var:base_demande_peso_ecuadorian_peso_fix
@@ -3008,7 +3010,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#peso_el_salvador_colon
 	base_demande_peso_el_salvador_colon = {
-		value = scope:central_bank_scope.modifier:goods_input_peso_el_salvador_colon_c_add
+		value = 0 # the CB has no input of peso_el_salvador_colon (Д.R9б.1)
 	}
 	base_demande_peso_el_salvador_colon_fix = {
 		value = var:base_demande_peso_el_salvador_colon_fix
@@ -3033,7 +3035,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#peso_guatemalan_quetzal
 	base_demande_peso_guatemalan_quetzal = {
-		value = scope:central_bank_scope.modifier:goods_input_peso_guatemalan_quetzal_c_add
+		value = 0 # the CB has no input of peso_guatemalan_quetzal (Д.R9б.1)
 	}
 	base_demande_peso_guatemalan_quetzal_fix = {
 		value = var:base_demande_peso_guatemalan_quetzal_fix
@@ -3058,7 +3060,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#peso_honduran_lempira
 	base_demande_peso_honduran_lempira = {
-		value = scope:central_bank_scope.modifier:goods_input_peso_honduran_lempira_c_add
+		value = 0 # the CB has no input of peso_honduran_lempira (Д.R9б.1)
 	}
 	base_demande_peso_honduran_lempira_fix = {
 		value = var:base_demande_peso_honduran_lempira_fix
@@ -3083,7 +3085,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#peso_mexican_peso
 	base_demande_peso_mexican_peso = {
-		value = scope:central_bank_scope.modifier:goods_input_peso_mexican_peso_c_add
+		value = 0 # the CB has no input of peso_mexican_peso (Д.R9б.1)
 	}
 	base_demande_peso_mexican_peso_fix = {
 		value = var:base_demande_peso_mexican_peso_fix
@@ -3108,7 +3110,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#peso_nicaraguan_cordoba
 	base_demande_peso_nicaraguan_cordoba = {
-		value = scope:central_bank_scope.modifier:goods_input_peso_nicaraguan_cordoba_c_add
+		value = 0 # the CB has no input of peso_nicaraguan_cordoba (Д.R9б.1)
 	}
 	base_demande_peso_nicaraguan_cordoba_fix = {
 		value = var:base_demande_peso_nicaraguan_cordoba_fix
@@ -3133,7 +3135,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#peso_paraguayan_peso
 	base_demande_peso_paraguayan_peso = {
-		value = scope:central_bank_scope.modifier:goods_input_peso_paraguayan_peso_c_add
+		value = 0 # the CB has no input of peso_paraguayan_peso (Д.R9б.1)
 	}
 	base_demande_peso_paraguayan_peso_fix = {
 		value = var:base_demande_peso_paraguayan_peso_fix
@@ -3158,7 +3160,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#peso_philippine_peso
 	base_demande_peso_philippine_peso = {
-		value = scope:central_bank_scope.modifier:goods_input_peso_philippine_peso_c_add
+		value = 0 # the CB has no input of peso_philippine_peso (Д.R9б.1)
 	}
 	base_demande_peso_philippine_peso_fix = {
 		value = var:base_demande_peso_philippine_peso_fix
@@ -3183,7 +3185,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#peso_sol_de_oro
 	base_demande_peso_sol_de_oro = {
-		value = scope:central_bank_scope.modifier:goods_input_peso_sol_de_oro_c_add
+		value = 0 # the CB has no input of peso_sol_de_oro (Д.R9б.1)
 	}
 	base_demande_peso_sol_de_oro_fix = {
 		value = var:base_demande_peso_sol_de_oro_fix
@@ -3208,7 +3210,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#peso_uruguayan_peso
 	base_demande_peso_uruguayan_peso = {
-		value = scope:central_bank_scope.modifier:goods_input_peso_uruguayan_peso_c_add
+		value = 0 # the CB has no input of peso_uruguayan_peso (Д.R9б.1)
 	}
 	base_demande_peso_uruguayan_peso_fix = {
 		value = var:base_demande_peso_uruguayan_peso_fix
@@ -3233,7 +3235,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#peso_venezuelan_peso
 	base_demande_peso_venezuelan_peso = {
-		value = scope:central_bank_scope.modifier:goods_input_peso_venezuelan_peso_c_add
+		value = 0 # the CB has no input of peso_venezuelan_peso (Д.R9б.1)
 	}
 	base_demande_peso_venezuelan_peso_fix = {
 		value = var:base_demande_peso_venezuelan_peso_fix
@@ -3258,7 +3260,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#pound_egyptian_pound
 	base_demande_pound_egyptian_pound = {
-		value = scope:central_bank_scope.modifier:goods_input_pound_egyptian_pound_c_add
+		value = 0 # the CB has no input of pound_egyptian_pound (Д.R9б.1)
 	}
 	base_demande_pound_egyptian_pound_fix = {
 		value = var:base_demande_pound_egyptian_pound_fix
@@ -3283,7 +3285,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#pound_irish_pound
 	base_demande_pound_irish_pound = {
-		value = scope:central_bank_scope.modifier:goods_input_pound_irish_pound_c_add
+		value = 0 # the CB has no input of pound_irish_pound (Д.R9б.1)
 	}
 	base_demande_pound_irish_pound_fix = {
 		value = var:base_demande_pound_irish_pound_fix
@@ -3308,7 +3310,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#pound_sterling
 	base_demande_pound_sterling = {
-		value = scope:central_bank_scope.modifier:goods_input_pound_sterling_c_add
+		value = 0 # the CB has no input of pound_sterling (Д.R9б.1)
 	}
 	base_demande_pound_sterling_fix = {
 		value = var:base_demande_pound_sterling_fix
@@ -3333,7 +3335,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#real
 	base_demande_real = {
-		value = scope:central_bank_scope.modifier:goods_input_real_c_add
+		value = 0 # the CB has no input of real (Д.R9б.1)
 	}
 	base_demande_real_fix = {
 		value = var:base_demande_real_fix
@@ -3358,7 +3360,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#real_brazilian_real
 	base_demande_real_brazilian_real = {
-		value = scope:central_bank_scope.modifier:goods_input_real_brazilian_real_c_add
+		value = 0 # the CB has no input of real_brazilian_real (Д.R9б.1)
 	}
 	base_demande_real_brazilian_real_fix = {
 		value = var:base_demande_real_brazilian_real_fix
@@ -3383,7 +3385,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#rupee_indian_rupee
 	base_demande_rupee_indian_rupee = {
-		value = scope:central_bank_scope.modifier:goods_input_rupee_indian_rupee_c_add
+		value = 0 # the CB has no input of rupee_indian_rupee (Д.R9б.1)
 	}
 	base_demande_rupee_indian_rupee_fix = {
 		value = var:base_demande_rupee_indian_rupee_fix
@@ -3408,7 +3410,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#rupee_indonesian_rupiah
 	base_demande_rupee_indonesian_rupiah = {
-		value = scope:central_bank_scope.modifier:goods_input_rupee_indonesian_rupiah_c_add
+		value = 0 # the CB has no input of rupee_indonesian_rupiah (Д.R9б.1)
 	}
 	base_demande_rupee_indonesian_rupiah_fix = {
 		value = var:base_demande_rupee_indonesian_rupiah_fix
@@ -3433,7 +3435,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#spe_baht
 	base_demande_spe_baht = {
-		value = scope:central_bank_scope.modifier:goods_input_spe_baht_c_add
+		value = 0 # the CB has no input of spe_baht (Д.R9б.1)
 	}
 	base_demande_spe_baht_fix = {
 		value = var:base_demande_spe_baht_fix
@@ -3458,7 +3460,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#spe_dong
 	base_demande_spe_dong = {
-		value = scope:central_bank_scope.modifier:goods_input_spe_dong_c_add
+		value = 0 # the CB has no input of spe_dong (Д.R9б.1)
 	}
 	base_demande_spe_dong_fix = {
 		value = var:base_demande_spe_dong_fix
@@ -3483,7 +3485,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#spe_drachma
 	base_demande_spe_drachma = {
-		value = scope:central_bank_scope.modifier:goods_input_spe_drachma_c_add
+		value = 0 # the CB has no input of spe_drachma (Д.R9б.1)
 	}
 	base_demande_spe_drachma_fix = {
 		value = var:base_demande_spe_drachma_fix
@@ -3508,7 +3510,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#spe_korean_won
 	base_demande_spe_korean_won = {
-		value = scope:central_bank_scope.modifier:goods_input_spe_korean_won_c_add
+		value = 0 # the CB has no input of spe_korean_won (Д.R9б.1)
 	}
 	base_demande_spe_korean_won_fix = {
 		value = var:base_demande_spe_korean_won_fix
@@ -3533,7 +3535,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#spe_latvian_lats
 	base_demande_spe_latvian_lats = {
-		value = scope:central_bank_scope.modifier:goods_input_spe_latvian_lats_c_add
+		value = 0 # the CB has no input of spe_latvian_lats (Д.R9б.1)
 	}
 	base_demande_spe_latvian_lats_fix = {
 		value = var:base_demande_spe_latvian_lats_fix
@@ -3558,7 +3560,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#spe_lithuanian_litas
 	base_demande_spe_lithuanian_litas = {
-		value = scope:central_bank_scope.modifier:goods_input_spe_lithuanian_litas_c_add
+		value = 0 # the CB has no input of spe_lithuanian_litas (Д.R9б.1)
 	}
 	base_demande_spe_lithuanian_litas_fix = {
 		value = var:base_demande_spe_lithuanian_litas_fix
@@ -3583,7 +3585,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#spe_peseta
 	base_demande_spe_peseta = {
-		value = scope:central_bank_scope.modifier:goods_input_spe_peseta_c_add
+		value = 0 # the CB has no input of spe_peseta (Д.R9б.1)
 	}
 	base_demande_spe_peseta_fix = {
 		value = var:base_demande_spe_peseta_fix
@@ -3608,7 +3610,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#spe_ruble
 	base_demande_spe_ruble = {
-		value = scope:central_bank_scope.modifier:goods_input_spe_ruble_c_add
+		value = 0 # the CB has no input of spe_ruble (Д.R9б.1)
 	}
 	base_demande_spe_ruble_fix = {
 		value = var:base_demande_spe_ruble_fix
@@ -3633,7 +3635,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#spe_uni
 	base_demande_spe_uni = {
-		value = scope:central_bank_scope.modifier:goods_input_spe_uni_c_add
+		value = 0 # the CB has no input of spe_uni (Д.R9б.1)
 	}
 	base_demande_spe_uni_fix = {
 		value = var:base_demande_spe_uni_fix
@@ -3658,7 +3660,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#spe_yen
 	base_demande_spe_yen = {
-		value = scope:central_bank_scope.modifier:goods_input_spe_yen_c_add
+		value = 0 # the CB has no input of spe_yen (Д.R9б.1)
 	}
 	base_demande_spe_yen_fix = {
 		value = var:base_demande_spe_yen_fix
@@ -3683,7 +3685,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#spe_yuan
 	base_demande_spe_yuan = {
-		value = scope:central_bank_scope.modifier:goods_input_spe_yuan_c_add
+		value = 0 # the CB has no input of spe_yuan (Д.R9б.1)
 	}
 	base_demande_spe_yuan_fix = {
 		value = var:base_demande_spe_yuan_fix
@@ -3708,7 +3710,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#spe_zloti
 	base_demande_spe_zloti = {
-		value = scope:central_bank_scope.modifier:goods_input_spe_zloti_c_add
+		value = 0 # the CB has no input of spe_zloti (Д.R9б.1)
 	}
 	base_demande_spe_zloti_fix = {
 		value = var:base_demande_spe_zloti_fix
@@ -3733,7 +3735,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#thaler_hannoveraner_thaler
 	base_demande_thaler_hannoveraner_thaler = {
-		value = scope:central_bank_scope.modifier:goods_input_thaler_hannoveraner_thaler_c_add
+		value = 0 # the CB has no input of thaler_hannoveraner_thaler (Д.R9б.1)
 	}
 	base_demande_thaler_hannoveraner_thaler_fix = {
 		value = var:base_demande_thaler_hannoveraner_thaler_fix
@@ -3758,7 +3760,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#thaler_prussian_thaler
 	base_demande_thaler_prussian_thaler = {
-		value = scope:central_bank_scope.modifier:goods_input_thaler_prussian_thaler_c_add
+		value = 0 # the CB has no input of thaler_prussian_thaler (Д.R9б.1)
 	}
 	base_demande_thaler_prussian_thaler_fix = {
 		value = var:base_demande_thaler_prussian_thaler_fix
@@ -3783,7 +3785,7 @@ central_bank_overlord_currency_purchases = {
 	}
 	#thaler_saxon_thaler
 	base_demande_thaler_saxon_thaler = {
-		value = scope:central_bank_scope.modifier:goods_input_thaler_saxon_thaler_c_add
+		value = 0 # the CB has no input of thaler_saxon_thaler (Д.R9б.1)
 	}
 	base_demande_thaler_saxon_thaler_fix = {
 		value = var:base_demande_thaler_saxon_thaler_fix

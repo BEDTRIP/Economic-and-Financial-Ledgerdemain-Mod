@@ -164,23 +164,37 @@ zz_ef_sav_norm = {
 # ---- steps 4, 5, 7: what was bought and sold this week, goods a week ------------
 # The monetary authority buys its metal with the input of the country's Banks (Д.R4а.9, Д2.7а): their input is the
 # banks' purchase plus the authority's; what came in is split by last week's shares (var:zz_ef_mt_cb_share_g / _s).
-# The authority's base: E&F's CB building's method input (1 gold / 10 silver per workforce), kept in var:zz_ef_cb_base_g /
-# _s while the building stands; its own input is switched off (zz_ef_cb_metal_buy at -100).
+# The authority's base -- by its standard x the CB's size (Д.R9б.1; E&F's CB building's method input a workforce unit:
+# gold 1 on the gold standard, silver 10 on the silver one, gold 1 and silver 5 on bimetallism, none on the others),
+# kept in var:zz_ef_cb_base_g / _s while the country has its CB.
+zz_ef_cb_base_gold_unit = 1
+zz_ef_cb_base_silver_unit = 10
+zz_ef_cb_base_bimet_silver_unit = 5
 zz_ef_cb_bldg_base_gold_goods = {
 	value = 0
-	every_scope_building = {
-		limit = { is_building_type = building_bank }
-		add = modifier:goods_input_gold_add
+	if = {
+		limit = {
+			OR = {
+				has_law = law_type:law_gold_standard
+				has_law = law_type:law_bimetallism_standard
+			}
+		}
+		value = zz_ef_cb_base_gold_unit
+		multiply = zz_ef_cb_size_v
 	}
-	min = 0
 }
 zz_ef_cb_bldg_base_silver_goods = {
 	value = 0
-	every_scope_building = {
-		limit = { is_building_type = building_bank }
-		add = modifier:goods_input_silver_add
+	if = {
+		limit = { has_law = law_type:law_silver_standard }
+		value = zz_ef_cb_base_silver_unit
+		multiply = zz_ef_cb_size_v
 	}
-	min = 0
+	else_if = {
+		limit = { has_law = law_type:law_bimetallism_standard }
+		value = zz_ef_cb_base_bimet_silver_unit
+		multiply = zz_ef_cb_size_v
+	}
 }
 zz_ef_cb_base_gold_goods = {
 	value = 0
@@ -190,8 +204,6 @@ zz_ef_cb_base_silver_goods = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_cb_base_s } value = var:zz_ef_cb_base_s }
 }
-# E&F's CB building's input percent: off
-zz_ef_cb_bldg_buy_off = -100
 # the authority's purchase for next week: the base x (1 + the percent, var:zz_ef_mt_cb_mult); none without a holder
 zz_ef_cb_buy_gold_goods = {
 	value = 0

@@ -1,8 +1,7 @@
 ﻿# The central bank by law (Д.R4а.3, laws/ld_central_bank_laws.txt). Country scope.
-# The state and the private law found a CB (zz_ef_cb_found): E&F's modifier has_central_bank, the CB's building in the
-# capital -- a shell for minting and E&F's bond output until R5, its size -- the yearly growth by GDP
-# (macro_facilities_on_action_bc); the authority's metal stays on the country's accounts (zz_ef_am_*). The law "none"
-# closes it (zz_ef_cb_close). Reserves come from the authority before and go back to it, no metal given: on a metal
+# The state and the private law found a CB (zz_ef_cb_found): E&F's modifier has_central_bank -- the CB is the modifier,
+# not a building (Д.R9б.1), its size -- the yearly growth by GDP (macro_facilities_on_action_bc, ld_cb_size.txt); the
+# authority's metal stays on the country's accounts (zz_ef_am_*). The law "none" closes it (zz_ef_cb_close). Reserves come from the authority before and go back to it, no metal given: on a metal
 # standard the banks (Д.R4а.11) -- the CB takes from their metal the norm of cover of the notes, closing gives it all back.
 
 # the start: the law follows the CB of the history (a private one is set there, history/global/ld_central_bank_law.txt)
@@ -34,7 +33,7 @@ zz_ef_cb_law_start = {
 		activate_law = law_type:law_ld_cb_state
 	}
 }
-# monthly (E&F's hub): the CB follows the law -- E&F's crises and lost CB states remove the building and the modifier
+# monthly (E&F's hub): the CB follows the law
 zz_ef_cb_law_follow = {
 	if = {
 		limit = {
@@ -60,10 +59,8 @@ zz_ef_cb_found = {
 			NOT = { has_modifier = has_central_bank }
 			exists = capital
 		}
-		capital = {
-			zz_ef_cm_create_owned_bank = { BANK_BLDG_TYPE = building_bank CB_SIZE = 5 }
-		}
-		# E&F: the CB's place in the capital, has_central_bank, the methods by the standard
+		zz_ef_cb_set = yes
+		# E&F: the CB's place in the capital, the methods by the standard
 		central_bank_modifier = yes
 		central_bank_production_methods = yes
 		# the metal of the banks' notes (a metal standard): the norm of cover, at most what the banks hold
@@ -95,11 +92,8 @@ zz_ef_cb_found = {
 zz_ef_cb_close = {
 	if = {
 		limit = { has_modifier = has_central_bank }
-		every_scope_state = {
-			limit = { has_building = building_bank }
-			remove_building = building_bank
-		}
 		remove_modifier = has_central_bank
+		zz_ef_cb_mint_update = yes
 		# a metal standard: the authority is the banks again -- the metal goes back to them
 		if = {
 			limit = {

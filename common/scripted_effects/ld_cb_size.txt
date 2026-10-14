@@ -1,0 +1,92 @@
+﻿# The central bank without E&F's building (Д.R9б.1; понятие «Центральный банк», docs/central-bank.md): the country has
+# its CB -- the modifier has_central_bank; the CB's size (var:zz_ef_cb_size) scales the minting, the authority's metal
+# purchase base and the bonds' issue. Values -- script_values/ld_cb_size_values.txt.
+
+# COUNTRY scope: the country has its CB (E&F: macro_facilities_bc, introduction_new_currency and the CB law built its
+# building in the capital and has_central_bank followed it) -- the modifier, the size, the minting.
+zz_ef_cb_set = {
+	if = {
+		limit = { NOT = { has_modifier = has_central_bank } }
+		add_modifier = { name = has_central_bank }
+	}
+	zz_ef_cb_size_update = yes
+	zz_ef_cb_mint_update = yes
+}
+
+# COUNTRY scope: the size grows with GDP, never shrinks (E&F: its building was grown to 5 levels a 5 million of GDP)
+zz_ef_cb_size_update = {
+	if = {
+		limit = { has_modifier = has_central_bank }
+		if = {
+			limit = { NOT = { has_variable = zz_ef_cb_size } }
+			set_variable = { name = zz_ef_cb_size value = zz_ef_cb_size_step }
+		}
+		set_variable = {
+			name = zz_ef_cb_size
+			value = {
+				value = var:zz_ef_cb_size
+				min = zz_ef_cb_size_target_v
+			}
+		}
+	}
+}
+
+# COUNTRY scope, monthly (update_modifiers_bc_fc_ns) and when the CB is set: the minting of the CB (E&F: its building's
+# methods) -- zz_ef_cb_minting x zz_ef_cb_mint_v, re-set when the value moved; the monetary policy law's ±25 %
+# (law_revaluation / law_devaluation) -- zz_ef_cb_mint_reval / _deval; none without a CB.
+zz_ef_cb_mint_update = {
+	if = {
+		limit = { has_modifier = has_central_bank }
+		set_variable = { name = zz_ef_t_mint value = zz_ef_cb_mint_v }
+		if = {
+			limit = {
+				OR = {
+					NOT = { has_modifier = zz_ef_cb_minting }
+					NOT = { has_variable = zz_ef_cb_mint_set }
+					NOT = { var:zz_ef_cb_mint_set = var:zz_ef_t_mint }
+				}
+			}
+			if = { limit = { has_modifier = zz_ef_cb_minting } remove_modifier = zz_ef_cb_minting }
+			add_modifier = {
+				name = zz_ef_cb_minting
+				multiplier = var:zz_ef_t_mint
+			}
+			set_variable = { name = zz_ef_cb_mint_set value = var:zz_ef_t_mint }
+		}
+		remove_variable = zz_ef_t_mint
+		if = {
+			limit = {
+				has_law = law_type:law_revaluation
+				NOT = { has_modifier = zz_ef_cb_mint_reval }
+			}
+			add_modifier = { name = zz_ef_cb_mint_reval multiplier = zz_ef_cb_mint_policy_pts }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_law = law_type:law_revaluation }
+				has_modifier = zz_ef_cb_mint_reval
+			}
+			remove_modifier = zz_ef_cb_mint_reval
+		}
+		if = {
+			limit = {
+				has_law = law_type:law_devaluation
+				NOT = { has_modifier = zz_ef_cb_mint_deval }
+			}
+			add_modifier = { name = zz_ef_cb_mint_deval multiplier = zz_ef_cb_mint_policy_pts }
+		}
+		else_if = {
+			limit = {
+				NOT = { has_law = law_type:law_devaluation }
+				has_modifier = zz_ef_cb_mint_deval
+			}
+			remove_modifier = zz_ef_cb_mint_deval
+		}
+	}
+	else = {
+		if = { limit = { has_modifier = zz_ef_cb_minting } remove_modifier = zz_ef_cb_minting }
+		if = { limit = { has_modifier = zz_ef_cb_mint_reval } remove_modifier = zz_ef_cb_mint_reval }
+		if = { limit = { has_modifier = zz_ef_cb_mint_deval } remove_modifier = zz_ef_cb_mint_deval }
+		if = { limit = { has_variable = zz_ef_cb_mint_set } remove_variable = zz_ef_cb_mint_set }
+	}
+}
