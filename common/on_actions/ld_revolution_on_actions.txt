@@ -1,12 +1,14 @@
 ﻿# a won revolution -- the winner takes the same monetary system (Д.R11.1, решения.md;
-# план.md, «R11 — гражданские войны»). Step 0: a probe -- what exists when (EFV log).
+# план.md, «R11 — гражданские войны»). Step 0: a probe -- what exists when (EFV log). The log lines that read the
+# target only with the target there: a revolution of a gone country fires weekly with an empty one (the triggers of
+# its script values on it are errors).
 on_revolution_end = {
 	on_actions = { zz_ef_rv_on_revolution_end }
 }
 zz_ef_rv_on_revolution_end = {
 	effect = {
 		scope:target ?= { set_variable = { name = zz_ef_rv_from value = root } }
-		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFV|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|rev_end|root_rev [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rv_is_rev_v')|0]|target [SCOPE.sC('target').GetNameNoFormatting]|target_rev [SCOPE.sC('target').MakeScope.ScriptValue('zz_ef_rv_is_rev_v')|0]" }
+		if = { limit = { zz_ef_logs_on = yes exists = scope:target } debug_log = "EFV|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|rev_end|root_rev [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rv_is_rev_v')|0]|target [SCOPE.sC('target').GetNameNoFormatting]|target_rev [SCOPE.sC('target').MakeScope.ScriptValue('zz_ef_rv_is_rev_v')|0]" }
 	}
 }
 on_revolution_start = {
@@ -16,7 +18,7 @@ zz_ef_rv_on_revolution_start = {
 	effect = {
 		# the new country is set up at once: its pulses come before E&F's monthly hub (scripted_effects/ld_country_init.txt)
 		scope:target ?= { zz_ef_country_init = yes }
-		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFV|[TimeKeeper.GetCurrentDate.GetString]||rev_start|target [SCOPE.sC('target').GetNameNoFormatting]|target_rev [SCOPE.sC('target').MakeScope.ScriptValue('zz_ef_rv_is_rev_v')|0]|target_std [SCOPE.sC('target').MakeScope.ScriptValue('zz_ef_std_code')|0]|target_cb [SCOPE.sC('target').MakeScope.ScriptValue('zz_ef_has_cb')|0]" }
+		if = { limit = { zz_ef_logs_on = yes exists = scope:target } debug_log = "EFV|[TimeKeeper.GetCurrentDate.GetString]||rev_start|target [SCOPE.sC('target').GetNameNoFormatting]|target_rev [SCOPE.sC('target').MakeScope.ScriptValue('zz_ef_rv_is_rev_v')|0]|target_std [SCOPE.sC('target').MakeScope.ScriptValue('zz_ef_std_code')|0]|target_cb [SCOPE.sC('target').MakeScope.ScriptValue('zz_ef_has_cb')|0]" }
 	}
 }
 on_secession_start = {
@@ -26,7 +28,7 @@ zz_ef_rv_on_secession_start = {
 	effect = {
 		# the new country is set up at once: its pulses come before E&F's monthly hub (scripted_effects/ld_country_init.txt)
 		scope:target ?= { zz_ef_country_init = yes }
-		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFV|[TimeKeeper.GetCurrentDate.GetString]||sec_start|target [SCOPE.sC('target').GetNameNoFormatting]|target_std [SCOPE.sC('target').MakeScope.ScriptValue('zz_ef_std_code')|0]|target_cb [SCOPE.sC('target').MakeScope.ScriptValue('zz_ef_has_cb')|0]" }
+		if = { limit = { zz_ef_logs_on = yes exists = scope:target } debug_log = "EFV|[TimeKeeper.GetCurrentDate.GetString]||sec_start|target [SCOPE.sC('target').GetNameNoFormatting]|target_std [SCOPE.sC('target').MakeScope.ScriptValue('zz_ef_std_code')|0]|target_cb [SCOPE.sC('target').MakeScope.ScriptValue('zz_ef_has_cb')|0]" }
 	}
 }
 on_secession_end = {
