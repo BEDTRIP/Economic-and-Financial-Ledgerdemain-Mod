@@ -55,8 +55,9 @@
 
 **Ledgerdemain (`ld_*`) над PSC**
 - Сняты в R9 и лежат в архиве: закупка регулятора по рынку (Д.R9.5 — смесь стройтоваров, очки −21 %,
-  `_archive/psc_regulator_market_mix/`, В.R9.11) и регулятор не больше предложения рынка (Д.R9.4 — очки −60 %,
-  `_archive/ld_psc_market_fill/`, В.R9.10).
+  `_archive/psc_regulator_market_mix/`) и регулятор не больше предложения рынка (Д.R9.4 — очки −60 %,
+  `_archive/ld_psc_market_fill/`); вернуть — R9б: смесь с очками по базовой цене товара метода сектора (Д.R9.11),
+  регулятор — вместе с выпуском секторов (Д.R9.10).
 - `common/script_values/ld_psc_private_allocation.txt` — REPLACE `private_construction_increase` (цель
   `zz_ef_psc_private_target`: доход + простаивающий пул + ставка, × рычаг кредита `zz_ef_psc_credit_f` — от 0,5 без
   свободного лимита банков до 1, когда свободный лимит страны `var:zz_ef_bk_free_cr` ≥ 13 недель нового делового
