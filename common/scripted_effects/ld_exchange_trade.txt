@@ -79,7 +79,12 @@ zz_ef_xch_step = {
 		zz_ef_xch_post_sells = { T = pp K = m }
 		zz_ef_xch_post_sells = { T = tr K = b }
 		zz_ef_xch_post_sells = { T = bk K = b }
+		# the companies' shares (Д.R6.10, ld_company_shares.txt): the IPO's offer, the holders' sells and buys
+		zz_ef_xch_post_sells_co = yes
+		zz_ef_xch_post_sells_s = { T = pp }
+		zz_ef_xch_post_sells_s = { T = bk }
 		zz_ef_xch_post_buys = yes
+		zz_ef_xch_post_buys_s = yes
 	}
 	# the clearing's debt of the last settlement in the receivers' money -- bought for the next payments (ld_clearing.txt)
 	zz_ef_clr_post_needs = yes
@@ -347,6 +352,13 @@ zz_ef_xpl_buy_m_read = {
 	if = {
 		limit = { is_key_in_variable_map = { name = zz_ef_xpl_buy_m target = scope:zz_ef_rq_key } }
 		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_xpl_buy_m|scope:zz_ef_rq_key)" }
+	}
+}
+zz_ef_xpl_buy_s_read = {
+	set_variable = { name = zz_ef_rq_h value = 0 }
+	if = {
+		limit = { is_key_in_variable_map = { name = zz_ef_xpl_buy_s target = scope:zz_ef_rq_key } }
+		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_xpl_buy_s|scope:zz_ef_rq_key)" }
 	}
 }
 zz_ef_xpl_buy_b_read = {
@@ -751,6 +763,9 @@ zz_ef_xch_settle = {
 		zz_ef_xch_settle_map = { T = pp K = m }
 		zz_ef_xch_settle_map = { T = tr K = b }
 		zz_ef_xch_settle_map = { T = bk K = b }
+		zz_ef_xch_settle_map = { T = pp K = s }
+		zz_ef_xch_settle_map = { T = bk K = s }
+		zz_ef_xch_settle_map = { T = co K = s }
 	}
 	zz_ef_xch_orders_empty = yes
 	if = { limit = { has_variable = zz_ef_xo_e } remove_variable = zz_ef_xo_e }
@@ -789,7 +804,7 @@ zz_ef_xch_settle_one = {
 	set_variable = { name = zz_ef_xo_is value = scope:zz_ef_xch_e.var:zz_ef_rq_h }
 	scope:zz_ef_xch_e = { zz_ef_xr_$K$_ib_read = yes }
 	set_variable = { name = zz_ef_xo_ib value = scope:zz_ef_xch_e.var:zz_ef_rq_h }
-	set_variable = { name = zz_ef_xo_pt value = scope:zz_ef_xch_d.zz_ef_xch_point_steps_v }
+	zz_ef_xch_settle_pt_$K$ = yes
 	set_variable = { name = zz_ef_xo_plo value = { value = zz_ef_xq_mid subtract = var:zz_ef_xo_pt } }
 	set_variable = { name = zz_ef_xo_phi value = { value = zz_ef_xq_mid add = var:zz_ef_xo_pt } }
 	scope:zz_ef_xch_e = { zz_ef_xr_$K$_xs_read = yes }
@@ -922,6 +937,10 @@ zz_ef_xch_settle_one = {
 	}
 }
 
+# Holder scope, scope:zz_ef_xch_d: the issuer's currency points in steps -> var:zz_ef_xo_pt (shares -- none)
+zz_ef_xch_settle_pt_m = { set_variable = { name = zz_ef_xo_pt value = scope:zz_ef_xch_d.zz_ef_xch_point_steps_v } }
+zz_ef_xch_settle_pt_b = { set_variable = { name = zz_ef_xo_pt value = scope:zz_ef_xch_d.zz_ef_xch_point_steps_v } }
+zz_ef_xch_settle_pt_s = { set_variable = { name = zz_ef_xo_pt value = 0 } }
 # Holder scope, a sell order's rest after the funds between the exchanges: the cheap rest bought by another exchange's
 # fund (money only; Д.R8б.36)
 # (bonds: nothing; the holder's parameter must be read, or the engine drops the call)
@@ -929,6 +948,12 @@ zz_ef_xch_settle_cheap_b = {
 	if = {
 		limit = { always = no }
 		zz_ef_xch_pay_$T$_b = yes
+	}
+}
+zz_ef_xch_settle_cheap_s = {
+	if = {
+		limit = { always = no }
+		zz_ef_xch_pay_$T$_s = yes
 	}
 }
 zz_ef_xch_settle_cheap_m = {
@@ -972,7 +997,7 @@ zz_ef_xch_deal = {
 	}
 	# our own bonds bought back -- not held: the engine's debt is cleared by them (Д.R8б.37)
 	if = {
-		limit = { scope:zz_ef_xch_d = this }
+		limit = { zz_ef_xch_is_own_$K$ = yes }
 		set_variable = { name = zz_ef_rq_dlt value = var:zz_ef_xd_a }
 	}
 	else = {
@@ -984,7 +1009,7 @@ zz_ef_xch_deal = {
 		limit = { NOT = { var:zz_ef_xd_a = 0 } }
 		if = {
 			limit = {
-				scope:zz_ef_xch_d = this
+				zz_ef_xch_is_own_$K$ = yes
 				var:zz_ef_xd_a > 0
 				credit > 0
 			}
@@ -1013,7 +1038,7 @@ zz_ef_xch_deal = {
 		set_variable = { name = zz_ef_xd_cf value = 0 }
 		if = {
 			limit = { var:zz_ef_xd_a > 0 }
-			set_variable = { name = zz_ef_xd_fee value = { value = zz_ef_xch_fee_buy_v multiply = var:zz_ef_xd_g } }
+			zz_ef_xch_deal_fee_$K$ = yes
 			scope:zz_ef_xch_e = {
 				if = { limit = { NOT = { has_variable = zz_ef_xch_fee_acc } } set_variable = { name = zz_ef_xch_fee_acc value = 0 } }
 				change_variable = { name = zz_ef_xch_fee_acc add = { value = scope:zz_ef_xo_h.var:zz_ef_xd_fee divide = zz_ef_xch_gpm_v } }
@@ -1116,6 +1141,12 @@ zz_ef_xch_nr_after_m = {
 	remove_variable = zz_ef_xd_om0
 }
 zz_ef_xch_nr_before_b = { }
+zz_ef_xch_nr_before_s = { }
+zz_ef_xch_nr_after_s = { }
+# Holder scope, in a deal: the buyer's costs on top, a share of the price in gold var:zz_ef_xd_g -> var:zz_ef_xd_fee
+# (shares -- against the company's country, ld_company_shares.txt)
+zz_ef_xch_deal_fee_m = { set_variable = { name = zz_ef_xd_fee value = { value = zz_ef_xch_fee_buy_v multiply = var:zz_ef_xd_g } } }
+zz_ef_xch_deal_fee_b = { set_variable = { name = zz_ef_xd_fee value = { value = zz_ef_xch_fee_buy_v multiply = var:zz_ef_xd_g } } }
 # Holder scope, after the claims of a deal changed hands (var:zz_ef_xd_a, units of the debtor's money): the CB's and the
 # banks' foreign money is in the abroad account (zz_ef_abroad_net) -- the deal's change at the debtor's value, in our
 # money, for the abroad card (var:zz_ef_f_xch_abr, the window zz_ef_v_w_xch_abr); the other holders' are not in it
@@ -1152,10 +1183,14 @@ zz_ef_xch_abr_track_bk_f = { }
 zz_ef_xch_abr_track_pp_f = { }
 zz_ef_xch_abr_track_fd_f = { }
 zz_ef_xch_abr_track_tr_f = { }
+zz_ef_xch_abr_track_pp_s = { }
+zz_ef_xch_abr_track_bk_s = { }
+zz_ef_xch_abr_track_co_s = { }
 zz_ef_xch_nr_after_b = { }
 # Holder scope: the other exchange's fund that bought the cheap rest (money only) -> scope:zz_ef_xd_o
 zz_ef_xch_deal_fund_o_m = { scope:zz_ef_xch_d.var:zz_ef_xcf_m = { save_temporary_scope_as = zz_ef_xd_o } }
 zz_ef_xch_deal_fund_o_b = { }
+zz_ef_xch_deal_fund_o_s = { }
 # Country scope, var:zz_ef_xd_xe: a flow from abroad into the country's step (its flows abroad, zz_ef_xch_step)
 zz_ef_xch_ext_in = {
 	if = { limit = { NOT = { has_variable = zz_ef_xch_ext_acc } } set_variable = { name = zz_ef_xch_ext_acc value = 0 } }
@@ -1496,9 +1531,9 @@ zz_ef_xch_clear_exchange = {
 		set_variable = { name = zz_ef_xr_room value = zz_ef_xch_fund_room_v }
 		if = {
 			limit = { zz_ef_logs_on = yes }
-			debug_log = "EFD|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|exchange|money [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xk_n_m_v')|0]|bonds [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xk_n_b_v')|0]|bid_step [THIS.GetCountry.MakeScope.Var('zz_ef_xr_ib').GetValue|0]|ask_step [THIS.GetCountry.MakeScope.Var('zz_ef_xr_ia').GetValue|0]|room [THIS.GetCountry.MakeScope.Var('zz_ef_xr_room').GetValue|0]"
+			debug_log = "EFD|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|exchange|money [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xk_n_m_v')|0]|bonds [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xk_n_b_v')|0]|shares [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xk_n_s_v')|0]|bid_step [THIS.GetCountry.MakeScope.Var('zz_ef_xr_ib').GetValue|0]|ask_step [THIS.GetCountry.MakeScope.Var('zz_ef_xr_ia').GetValue|0]|room [THIS.GetCountry.MakeScope.Var('zz_ef_xr_room').GetValue|0]"
 		}
-		set_variable = { name = zz_ef_xmo_as value = { value = zz_ef_xk_n_m_v add = zz_ef_xk_n_b_v min = zz_ef_xmo_as_v } }
+		set_variable = { name = zz_ef_xmo_as value = { value = zz_ef_xk_n_m_v add = zz_ef_xk_n_b_v add = zz_ef_xk_n_s_v min = zz_ef_xmo_as_v } }
 		save_temporary_scope_as = zz_ef_xc_e
 		every_in_list = {
 			variable = zz_ef_xk_m
@@ -1520,10 +1555,18 @@ zz_ef_xch_clear_exchange = {
 			save_temporary_scope_as = zz_ef_rq_key
 			scope:zz_ef_xc_e = { zz_ef_xch_clear_asset_b = yes }
 		}
+		# the companies' shares (a gone company drops out of the list's pass by itself)
+		every_in_list = {
+			variable = zz_ef_xk_s
+			save_temporary_scope_as = zz_ef_rq_key
+			scope:zz_ef_xc_e = { zz_ef_xch_clear_asset_s = yes }
+		}
 		clear_variable_list = zz_ef_xk_m
 		clear_variable_list = zz_ef_xk_b
+		clear_variable_list = zz_ef_xk_s
 		if = { limit = { has_variable = zz_ef_xk_n_m } remove_variable = zz_ef_xk_n_m }
 		if = { limit = { has_variable = zz_ef_xk_n_b } remove_variable = zz_ef_xk_n_b }
+		if = { limit = { has_variable = zz_ef_xk_n_s } remove_variable = zz_ef_xk_n_s }
 		zz_ef_xch_book_empty = yes
 		set_variable = zz_ef_xr_on
 	}
@@ -1539,6 +1582,7 @@ zz_ef_xch_fund_rest = {
 	zz_ef_xch_fund_rest_$K$ = yes
 }
 zz_ef_xch_fund_rest_b = { }
+zz_ef_xch_fund_rest_s = { }
 zz_ef_xch_fund_rest_m = {
 	if = {
 		limit = {
@@ -1603,6 +1647,7 @@ zz_ef_xch_points_set = {
 	zz_ef_xch_points_set_$K$ = yes
 }
 zz_ef_xch_points_set_b = { }
+zz_ef_xch_points_set_s = { }
 zz_ef_xch_points_set_m = {
 	if = {
 		limit = { scope:zz_ef_rq_key.zz_ef_xch_point_steps_v > 0 }
@@ -1620,6 +1665,7 @@ zz_ef_xch_issuer_rest = {
 	zz_ef_xch_issuer_rest_$K$ = yes
 }
 zz_ef_xch_issuer_rest_b = { }
+zz_ef_xch_issuer_rest_s = { }
 zz_ef_xch_issuer_rest_m = {
 	if = {
 		limit = { var:zz_ef_t_plo > 0 }
@@ -1681,6 +1727,8 @@ zz_ef_xch_cross_list_m = {
 		add_to_global_variable_list = { name = zz_ef_xcross_m target = scope:zz_ef_rq_key }
 	}
 }
+# shares -- not between the exchanges: a company's shares trade on its country's exchange only
+zz_ef_xch_cross_list_s = { }
 zz_ef_xch_cross_list_b = {
 	if = {
 		limit = { NOT = { is_target_in_global_variable_list = { name = zz_ef_xcross_b target = scope:zz_ef_rq_key } } }
@@ -1743,6 +1791,8 @@ zz_ef_xch_mul_depth_m = {
 	}
 }
 zz_ef_xch_mul_depth_b = { set_variable = { name = zz_ef_t_md value = zz_ef_bl_principal } }
+# (shares: all of the company's shares)
+zz_ef_xch_mul_depth_s = { set_variable = { name = zz_ef_t_md value = zz_ef_co_shares_v } }
 # Debtor scope, var:zz_ef_t_md -- the new multiplier: a convertible money within its currency points
 zz_ef_xch_mul_points_m = {
 	if = {
@@ -1758,6 +1808,7 @@ zz_ef_xch_mul_points_m = {
 	}
 }
 zz_ef_xch_mul_points_b = { }
+zz_ef_xch_mul_points_s = { }
 # Debtor scope: the money's rate abroad follows its multiplier at once (the claims' valuation, zz_ef_cur_par_update)
 zz_ef_xch_mul_after_m = {
 	if = {
@@ -1766,6 +1817,7 @@ zz_ef_xch_mul_after_m = {
 	}
 }
 zz_ef_xch_mul_after_b = { }
+zz_ef_xch_mul_after_s = { }
 
 # Exchange scope, scope:zz_ef_rq_key: the asset's results into the maps zz_ef_xr_<K>_* (an asset with nothing done --
 # none: its orders find 0), the log line (EFD, on the debtor).
@@ -1815,7 +1867,7 @@ zz_ef_xch_results_set = {
 				set_variable = { name = zz_ef_xl_fb value = { value = scope:zz_ef_xc_e.var:zz_ef_t_rb multiply = scope:zz_ef_xc_e.var:zz_ef_t_fb } }
 				set_variable = { name = zz_ef_xl_s value = scope:zz_ef_xc_e.var:zz_ef_t_cs9 }
 				set_variable = { name = zz_ef_xl_b value = scope:zz_ef_xc_e.var:zz_ef_t_cb1 }
-				debug_log = "EFD|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|asset|kind [THIS.GetCountry.MakeScope.Var('zz_ef_xl_k').GetValue|0]|step [THIS.GetCountry.MakeScope.Var('zz_ef_xl_c').GetValue|0]|matched [THIS.GetCountry.MakeScope.Var('zz_ef_xl_m').GetValue|0]|fund_buy [THIS.GetCountry.MakeScope.Var('zz_ef_xl_fs').GetValue|0]|fund_sell [THIS.GetCountry.MakeScope.Var('zz_ef_xl_fb').GetValue|0]|sells [THIS.GetCountry.MakeScope.Var('zz_ef_xl_s').GetValue|0]|buys [THIS.GetCountry.MakeScope.Var('zz_ef_xl_b').GetValue|0]|mul_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xmul_m_v')|3]|mul_b [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xmul_b_v')|3]"
+				zz_ef_xch_asset_log_$K$ = yes
 				remove_variable = zz_ef_xl_k
 				remove_variable = zz_ef_xl_c
 				remove_variable = zz_ef_xl_m
@@ -1835,6 +1887,16 @@ zz_ef_xch_results_set = {
 	remove_variable = zz_ef_t_rb
 	remove_variable = zz_ef_t_fs
 	remove_variable = zz_ef_t_fb
+}
+
+# Debtor scope, the asset's line of the clearing (EFD|asset): a country's money and bonds, a company's shares
+zz_ef_xch_asset_log_m = { zz_ef_xch_asset_log_c = yes }
+zz_ef_xch_asset_log_b = { zz_ef_xch_asset_log_c = yes }
+zz_ef_xch_asset_log_c = {
+	debug_log = "EFD|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|asset|kind [THIS.GetCountry.MakeScope.Var('zz_ef_xl_k').GetValue|0]|step [THIS.GetCountry.MakeScope.Var('zz_ef_xl_c').GetValue|0]|matched [THIS.GetCountry.MakeScope.Var('zz_ef_xl_m').GetValue|0]|fund_buy [THIS.GetCountry.MakeScope.Var('zz_ef_xl_fs').GetValue|0]|fund_sell [THIS.GetCountry.MakeScope.Var('zz_ef_xl_fb').GetValue|0]|sells [THIS.GetCountry.MakeScope.Var('zz_ef_xl_s').GetValue|0]|buys [THIS.GetCountry.MakeScope.Var('zz_ef_xl_b').GetValue|0]|mul_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xmul_m_v')|3]|mul_b [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xmul_b_v')|3]"
+}
+zz_ef_xch_asset_log_s = {
+	debug_log = "EFD|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCompany.GetCountry.GetNameNoFormatting]|asset_s|[THIS.GetCompany.GetNameNoFormatting]|kind [THIS.GetCompany.MakeScope.Var('zz_ef_xl_k').GetValue|0]|step [THIS.GetCompany.MakeScope.Var('zz_ef_xl_c').GetValue|0]|matched [THIS.GetCompany.MakeScope.Var('zz_ef_xl_m').GetValue|0]|sells [THIS.GetCompany.MakeScope.Var('zz_ef_xl_s').GetValue|0]|buys [THIS.GetCompany.MakeScope.Var('zz_ef_xl_b').GetValue|0]|mul_s [THIS.GetCompany.MakeScope.ScriptValue('zz_ef_xmul_s_v')|3]|px [THIS.GetCompany.MakeScope.ScriptValue('zz_ef_co_px_v')|3]|shares [THIS.GetCompany.MakeScope.ScriptValue('zz_ef_co_shares_v')|0]"
 }
 
 # ---- the logs --------------------------------------------------------------------------------------------------------
@@ -1961,6 +2023,9 @@ zz_ef_xch_month_roll = {
 		zz_ef_xmo_cap_map = { MAP = zz_ef_rq_fd_b K = b }
 		zz_ef_xmo_cap_map = { MAP = zz_ef_rq_bk_f K = f }
 		zz_ef_xmo_cap_map = { MAP = zz_ef_rq_pp_f K = f }
+		zz_ef_xmo_cap_map = { MAP = zz_ef_rq_pp_s K = s }
+		zz_ef_xmo_cap_map = { MAP = zz_ef_rq_bk_s K = s }
+		zz_ef_xmo_cap_map = { MAP = zz_ef_rq_co_s K = s }
 		var:zz_ef_xch = {
 			zz_ef_xmo_add = { N = cap V = scope:zz_ef_xm_hd.var:zz_ef_xm_hc }
 			zz_ef_xmo_add = { N = capb V = scope:zz_ef_xm_hd.var:zz_ef_xm_hb }
@@ -1980,6 +2045,7 @@ zz_ef_xch_month_roll = {
 		zz_ef_xmo_add = { N = to V = 0 }
 		zz_ef_xmo_add = { N = to_m V = 0 }
 		zz_ef_xmo_add = { N = to_b V = 0 }
+		zz_ef_xmo_add = { N = to_s V = 0 }
 		zz_ef_xmo_add = { N = n V = 0 }
 		zz_ef_xmo_add = { N = fo V = 0 }
 		zz_ef_xmo_add = { N = fee V = 0 }
@@ -1995,9 +2061,11 @@ zz_ef_xch_month_roll = {
 		zz_ef_xmo_add = { N = s_pp V = 0 }
 		zz_ef_xmo_add = { N = b_tr V = 0 }
 		zz_ef_xmo_add = { N = s_tr V = 0 }
+		zz_ef_xmo_add = { N = s_co V = 0 }
 		set_variable = { name = zz_ef_xlm_to value = var:zz_ef_xmo_to }
 		set_variable = { name = zz_ef_xlm_to_m value = var:zz_ef_xmo_to_m }
 		set_variable = { name = zz_ef_xlm_to_b value = var:zz_ef_xmo_to_b }
+		set_variable = { name = zz_ef_xlm_to_s value = var:zz_ef_xmo_to_s }
 		set_variable = { name = zz_ef_xlm_n value = var:zz_ef_xmo_n }
 		set_variable = { name = zz_ef_xlm_fee value = var:zz_ef_xmo_fee }
 		set_variable = { name = zz_ef_xlm_cap value = var:zz_ef_xmo_cap }
@@ -2024,11 +2092,12 @@ zz_ef_xch_month_roll = {
 		}
 		if = {
 			limit = { zz_ef_logs_on = yes }
-			debug_log = "EFD|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|xch_month|to_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_to').GetValue|0]|to_m_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_to_m').GetValue|0]|to_b_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_to_b').GetValue|0]|deals [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_n').GetValue|0]|foreign [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_fo').GetValue|3]|fee_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_fee').GetValue|0]|cap_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_cap').GetValue|0]|cap_base_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_capb').GetValue|0]|heat [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_heat').GetValue|3]|members [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_mem').GetValue|0]|assets [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_as').GetValue|0]|year_to_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xlm_to_y_v')|0]|fund_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xlm_fund_g_v')|0]|nav [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fd_nav_v')|3]|has [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fc_has_v')|0]|b_cb_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_b_cb').GetValue|0]|s_cb_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_s_cb').GetValue|0]|b_bk_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_b_bk').GetValue|0]|s_bk_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_s_bk').GetValue|0]|b_pp_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_b_pp').GetValue|0]|s_pp_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_s_pp').GetValue|0]|b_tr_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_b_tr').GetValue|0]|s_tr_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_s_tr').GetValue|0]"
+			debug_log = "EFD|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|xch_month|to_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_to').GetValue|0]|to_m_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_to_m').GetValue|0]|to_b_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_to_b').GetValue|0]|to_s_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_to_s').GetValue|0]|deals [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_n').GetValue|0]|foreign [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_fo').GetValue|3]|fee_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_fee').GetValue|0]|cap_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_cap').GetValue|0]|cap_base_g [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_capb').GetValue|0]|heat [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_heat').GetValue|3]|members [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_mem').GetValue|0]|assets [THIS.GetCountry.MakeScope.Var('zz_ef_xlm_as').GetValue|0]|year_to_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xlm_to_y_v')|0]|fund_g [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xlm_fund_g_v')|0]|nav [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fd_nav_v')|3]|has [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fc_has_v')|0]|b_cb_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_b_cb').GetValue|0]|s_cb_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_s_cb').GetValue|0]|b_bk_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_b_bk').GetValue|0]|s_bk_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_s_bk').GetValue|0]|b_pp_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_b_pp').GetValue|0]|s_pp_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_s_pp').GetValue|0]|b_tr_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_b_tr').GetValue|0]|s_tr_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_s_tr').GetValue|0]|s_co_g [THIS.GetCountry.MakeScope.Var('zz_ef_xmo_s_co').GetValue|0]"
 		}
 		set_variable = { name = zz_ef_xmo_to value = 0 }
 		set_variable = { name = zz_ef_xmo_to_m value = 0 }
 		set_variable = { name = zz_ef_xmo_to_b value = 0 }
+		set_variable = { name = zz_ef_xmo_to_s value = 0 }
 		set_variable = { name = zz_ef_xmo_n value = 0 }
 		set_variable = { name = zz_ef_xmo_fo value = 0 }
 		set_variable = { name = zz_ef_xmo_fee value = 0 }
@@ -2044,6 +2113,7 @@ zz_ef_xch_month_roll = {
 		set_variable = { name = zz_ef_xmo_s_pp value = 0 }
 		set_variable = { name = zz_ef_xmo_b_tr value = 0 }
 		set_variable = { name = zz_ef_xmo_s_tr value = 0 }
+		set_variable = { name = zz_ef_xmo_s_co value = 0 }
 	}
 }
 

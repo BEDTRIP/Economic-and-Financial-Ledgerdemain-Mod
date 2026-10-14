@@ -9,6 +9,8 @@
 #   zz_ef_rq_pp_b / zz_ef_rq_cb_b      b      the pops / the CB: bonds
 #   zz_ef_rq_pp_f / zz_ef_rq_bk_f      f      the pops / the banks: shares of the investment fund (the debtor -- its country)
 #   zz_ef_rq_fd_m / zz_ef_rq_fd_b      m, b   the investment fund of the country's exchange: its stock (ld_investment_fund.txt)
+#   zz_ef_rq_pp_s / zz_ef_rq_bk_s      s      the pops / the banks: shares (the debtor -- a company; ld_company_shares.txt)
+#   zz_ef_rq_co_s                      s      a country's companies: their shares not sold yet (the IPO)
 # A map's value cannot be overwritten by its key (probe ld_probe_map): remove the key and add it again. Iterating a
 # map while changing it is not done here: the keys go to a variable list first (zz_ef_rq_keys_take).
 
@@ -40,6 +42,7 @@ zz_ef_rq_add = {
 		add_to_variable_map = { name = zz_ef_rq_$H$_$K$ key = $D$ value = zz_ef_rq_dlt_v }
 	}
 	change_variable = { name = zz_ef_rq_dlt subtract = var:zz_ef_rq_old }
+	zz_ef_rq_hook_$K$ = { H = $H$ D = $D$ }
 	remove_variable = zz_ef_rq_v
 	if = {
 		limit = { NOT = { has_variable = zz_ef_rq_tot_$H$_$K$ } }
@@ -55,6 +58,24 @@ zz_ef_rq_add = {
 	}
 	remove_variable = zz_ef_rq_old
 }
+
+# HOLDER scope, in zz_ef_rq_add after the change (var:zz_ef_rq_dlt): shares -- the holder into the company's list of its
+# holder countries of the kind (zz_ef_co_h_<H>, the dividends: ld_company_shares.txt); other kinds -- nothing (the
+# parameters must be read, or the engine drops the call).
+zz_ef_rq_hook_s = {
+	if = {
+		limit = { var:zz_ef_rq_dlt > 0 }
+		$D$ = {
+			if = {
+				limit = { NOT = { is_target_in_variable_list = { name = zz_ef_co_h_$H$ target = scope:zz_ef_rq_ha } } }
+				add_to_variable_list = { name = zz_ef_co_h_$H$ target = scope:zz_ef_rq_ha }
+			}
+		}
+	}
+}
+zz_ef_rq_hook_m = { if = { limit = { always = no } $D$ = { set_variable = { name = zz_ef_rq_hk_$H$ value = 0 } } } }
+zz_ef_rq_hook_b = { if = { limit = { always = no } $D$ = { set_variable = { name = zz_ef_rq_hk_$H$ value = 0 } } } }
+zz_ef_rq_hook_f = { if = { limit = { always = no } $D$ = { set_variable = { name = zz_ef_rq_hk_$H$ value = 0 } } } }
 
 # Д.R4а.8: a gone country's claims and the claims on it go to its heir (zz_ef_metal_heir_world, ld_subject_metal.txt).
 # HEIR (country) scope, scope:zz_ef_mh_dead -- the gone country. Its holdings of map zz_ef_rq_$H$_$K$ move to the heir's
@@ -118,6 +139,9 @@ zz_ef_rq_heir_take = {
 	zz_ef_rq_heir_holdings = { H = fd K = b }
 	zz_ef_rq_heir_holdings = { H = pp K = f }
 	zz_ef_rq_heir_holdings = { H = bk K = f }
+	zz_ef_rq_heir_holdings = { H = pp K = s }
+	zz_ef_rq_heir_holdings = { H = bk K = s }
+	zz_ef_rq_heir_holdings = { H = co K = s }
 	save_temporary_scope_as = zz_ef_rq_he
 	set_variable = { name = zz_ef_t_om0 value = zz_ef_rq_out_m_v }
 	if = {
@@ -290,7 +314,19 @@ zz_ef_rq_world_check = {
 	set_global_variable = { name = zz_ef_rq_w_n_f value = 0 }
 	set_global_variable = { name = zz_ef_rq_w_out_f value = 0 }
 	set_global_variable = { name = zz_ef_rq_w_bad_f value = 0 }
+	set_global_variable = { name = zz_ef_rq_w_n_s value = 0 }
+	set_global_variable = { name = zz_ef_rq_w_out_s value = 0 }
+	set_global_variable = { name = zz_ef_rq_w_bad_s value = 0 }
 	every_country = {
+		every_company = {
+			limit = { has_variable = zz_ef_rq_out_s }
+			set_variable = { name = zz_ef_rq_chk_s value = 0 }
+		}
+	}
+	every_country = {
+		zz_ef_rq_check_map = { MAP = zz_ef_rq_pp_s K = s }
+		zz_ef_rq_check_map = { MAP = zz_ef_rq_bk_s K = s }
+		zz_ef_rq_check_map = { MAP = zz_ef_rq_co_s K = s }
 		zz_ef_rq_check_map = { MAP = zz_ef_rq_cb_m K = m }
 		zz_ef_rq_check_map = { MAP = zz_ef_rq_bk_m K = m }
 		zz_ef_rq_check_map = { MAP = zz_ef_rq_pp_m K = m }
@@ -338,7 +374,21 @@ zz_ef_rq_world_check = {
 		remove_variable = zz_ef_rq_chk_b
 		remove_variable = zz_ef_rq_chk_f
 	}
-	if = { limit = { zz_ef_logs_on = yes } debug_log = "EFI|[TimeKeeper.GetCurrentDate.GetString]|WORLD|n_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_n_m_v')|0]|out_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_out_m_v')|0]|bad_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_bad_m_v')|0]|n_b [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_n_b_v')|0]|out_b [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_out_b_v')|0]|bad_b [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_bad_b_v')|0]|n_f [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_n_f_v')|0]|out_f [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_out_f_v')|0]|bad_f [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_bad_f_v')|0]" }
+	# shares: the holders' maps = the company's shares
+	every_country = {
+		every_company = {
+			limit = { has_variable = zz_ef_rq_out_s }
+			if = { limit = { NOT = { has_variable = zz_ef_rq_chk_s } } set_variable = { name = zz_ef_rq_chk_s value = 0 } }
+			change_global_variable = { name = zz_ef_rq_w_out_s add = var:zz_ef_rq_out_s }
+			change_variable = { name = zz_ef_rq_chk_s subtract = var:zz_ef_rq_out_s }
+			if = {
+				limit = { OR = { var:zz_ef_rq_chk_s > 1 var:zz_ef_rq_chk_s < -1 } }
+				change_global_variable = { name = zz_ef_rq_w_bad_s add = 1 }
+			}
+			remove_variable = zz_ef_rq_chk_s
+		}
+	}
+	if = { limit = { zz_ef_logs_on = yes } debug_log = "EFI|[TimeKeeper.GetCurrentDate.GetString]|WORLD|n_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_n_m_v')|0]|out_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_out_m_v')|0]|bad_m [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_bad_m_v')|0]|n_b [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_n_b_v')|0]|out_b [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_out_b_v')|0]|bad_b [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_bad_b_v')|0]|n_f [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_n_f_v')|0]|out_f [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_out_f_v')|0]|bad_f [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_bad_f_v')|0]|n_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_n_s_v')|0]|out_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_out_s_v')|0]|bad_s [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_rq_w_bad_s_v')|0]" }
 }
 # HOLDER scope: each holding of MAP added to its debtor's var:zz_ef_rq_chk_<K> (zz_ef_rq_world_check).
 zz_ef_rq_check_map = {
@@ -442,6 +492,27 @@ zz_ef_rq_fd_m_read = {
 	if = {
 		limit = { is_key_in_variable_map = { name = zz_ef_rq_fd_m target = scope:zz_ef_rq_key } }
 		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_rq_fd_m|scope:zz_ef_rq_key)" }
+	}
+}
+zz_ef_rq_pp_s_read = {
+	set_variable = { name = zz_ef_rq_h value = 0 }
+	if = {
+		limit = { is_key_in_variable_map = { name = zz_ef_rq_pp_s target = scope:zz_ef_rq_key } }
+		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_rq_pp_s|scope:zz_ef_rq_key)" }
+	}
+}
+zz_ef_rq_bk_s_read = {
+	set_variable = { name = zz_ef_rq_h value = 0 }
+	if = {
+		limit = { is_key_in_variable_map = { name = zz_ef_rq_bk_s target = scope:zz_ef_rq_key } }
+		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_rq_bk_s|scope:zz_ef_rq_key)" }
+	}
+}
+zz_ef_rq_co_s_read = {
+	set_variable = { name = zz_ef_rq_h value = 0 }
+	if = {
+		limit = { is_key_in_variable_map = { name = zz_ef_rq_co_s target = scope:zz_ef_rq_key } }
+		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_rq_co_s|scope:zz_ef_rq_key)" }
 	}
 }
 zz_ef_rq_fd_b_read = {

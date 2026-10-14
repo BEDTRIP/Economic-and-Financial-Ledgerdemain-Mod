@@ -211,7 +211,8 @@ zz_ef_bank_inv_add = {
 	change_variable = { name = zz_ef_bank_inv add = $V$ }
 }
 # Country scope, weekly before the reconciliation (zz_ef_money_model_step): the asset at its value -- a fund's share at
-# the fund's capital over its shares (zz_ef_fd_nav_v), foreign money at its gold a unit over ours; the change -- the
+# the fund's capital over its shares (zz_ef_fd_nav_v), foreign money at its gold a unit over ours, a company's share at its
+# price (zz_ef_xq_gold_s); the change -- the
 # banks' capital (a gain or a loss of the revaluation; the book does not move).
 zz_ef_bank_inv_revalue = {
 	zz_ef_bank_inv_add = { V = 0 }
@@ -223,6 +224,7 @@ zz_ef_bank_inv_revalue = {
 				NOT = { var:zz_ef_bank_inv = 0 }
 				has_variable_map = zz_ef_rq_bk_f
 				has_variable_map = zz_ef_rq_bk_m
+				has_variable_map = zz_ef_rq_bk_s
 			}
 		}
 		set_variable = { name = zz_ef_t_bi value = 0 }
@@ -235,6 +237,21 @@ zz_ef_bank_inv_revalue = {
 				scope:zz_ef_bi_h = {
 					zz_ef_rq_get = { MAP = zz_ef_rq_bk_f D = scope:zz_ef_bi_k }
 					change_variable = { name = zz_ef_rq_h multiply = scope:zz_ef_bi_k.zz_ef_fd_nav_v }
+					change_variable = { name = zz_ef_t_bi add = var:zz_ef_rq_h }
+				}
+			}
+		}
+		# the companies' shares at their price (Д.R6.10; a gone company's drop out of the pass -- the loss is the capital's)
+		if = {
+			limit = { has_variable_map = zz_ef_rq_bk_s }
+			save_temporary_scope_as = zz_ef_bi_h
+			every_key_in_variable_map = {
+				variable = zz_ef_rq_bk_s
+				save_temporary_scope_as = zz_ef_bi_k
+				scope:zz_ef_bi_h = {
+					zz_ef_rq_get = { MAP = zz_ef_rq_bk_s D = scope:zz_ef_bi_k }
+					change_variable = { name = zz_ef_rq_h multiply = scope:zz_ef_bi_k.zz_ef_xq_gold_s }
+					change_variable = { name = zz_ef_rq_h divide = zz_ef_xch_gpm_v }
 					change_variable = { name = zz_ef_t_bi add = var:zz_ef_rq_h }
 				}
 			}

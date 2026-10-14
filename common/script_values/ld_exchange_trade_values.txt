@@ -269,12 +269,14 @@ zz_ef_xch_portfolio_bk = {
 	if = { limit = { has_variable = zz_ef_rq_tot_bk_m } add = var:zz_ef_rq_tot_bk_m }
 	if = { limit = { has_variable = zz_ef_rq_tot_bk_b } add = var:zz_ef_rq_tot_bk_b }
 	if = { limit = { has_variable = zz_ef_rq_tot_bk_f } add = var:zz_ef_rq_tot_bk_f }
+	if = { limit = { has_variable = zz_ef_rq_tot_bk_s } add = var:zz_ef_rq_tot_bk_s }
 }
 zz_ef_xch_portfolio_pp = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_rq_tot_pp_m } add = var:zz_ef_rq_tot_pp_m }
 	if = { limit = { has_variable = zz_ef_rq_tot_pp_b } add = var:zz_ef_rq_tot_pp_b }
 	if = { limit = { has_variable = zz_ef_rq_tot_pp_f } add = var:zz_ef_rq_tot_pp_f }
+	if = { limit = { has_variable = zz_ef_rq_tot_pp_s } add = var:zz_ef_rq_tot_pp_s }
 }
 zz_ef_xch_portfolio_tr = {
 	value = 0
@@ -401,6 +403,10 @@ zz_ef_xk_n_m_v = {
 zz_ef_xk_n_b_v = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_xk_n_b } value = var:zz_ef_xk_n_b }
+}
+zz_ef_xk_n_s_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_xk_n_s } value = var:zz_ef_xk_n_s }
 }
 
 # ---- the exchange's month (Д.R4б.11): the exchanges compared by what goes through them, no points ----
@@ -641,6 +647,7 @@ zz_ef_xwin_ask_v = {
 # the logs' codes (EFD): kind 1 money, 2 bonds; side 1 buy, 2 sell
 zz_ef_xl_code_m = 1
 zz_ef_xl_code_b = 2
+zz_ef_xl_code_s = 3
 zz_ef_xl_code_buy = 1
 zz_ef_xl_code_sell = 2
 

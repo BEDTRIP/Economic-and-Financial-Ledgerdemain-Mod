@@ -1,0 +1,82 @@
+﻿# The companies' shares (scripted_effects/ld_company_shares.txt; Д.R6.10, Д.R6.11).
+# the share of its shares a company offers on the exchange at the IPO; the rest -- to the pops of its country (Д.R6.10,
+# принято ночью)
+zz_ef_co_ipo_share = 0.25
+# the months of the net profit's moving average (the year's profit for the fair price, Д.R6.11; принято ночью)
+zz_ef_co_np_months = 6
+# COMPANY scope: the year's net profit by the account (income less outflow), the moving average
+zz_ef_co_np_y_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_co_np_y } value = var:zz_ef_co_np_y }
+}
+# COMPANY scope: the rate a share is capitalized at -- its country's government's rate + the equity premium (Д2.10)
+zz_ef_co_cap_rate_v = {
+	value = zz_ef_equity_premium
+	if = {
+		limit = { exists = owner }
+		add = owner.zz_ef_gov_rate_target
+	}
+	min = 0.01
+}
+# COMPANY scope: the capitalization at the fair price (Д.R6.11) -- the year's net profit / the rate, at least the account
+# and 1
+zz_ef_co_cap_fair_v = {
+	value = zz_ef_co_np_y_v
+	min = 0
+	divide = zz_ef_co_cap_rate_v
+	min = zz_ef_co_acc_v
+	min = 1
+}
+zz_ef_xmul_s_v = {
+	value = 1
+	if = { limit = { has_variable = zz_ef_xmul_s } value = var:zz_ef_xmul_s }
+}
+# COMPANY scope: a share's fair price in its country's money (the multiplier aside), in gold with the multiplier
+zz_ef_co_px_v = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = zz_ef_co_shares
+			var:zz_ef_co_shares > 0
+		}
+		value = zz_ef_co_cap_fair_v
+		divide = var:zz_ef_co_shares
+	}
+}
+zz_ef_xq_gold_s = {
+	value = zz_ef_co_px_v
+	multiply = zz_ef_xmul_s_v
+	if = {
+		limit = { exists = owner }
+		multiply = owner.zz_ef_xch_gpm_v
+	}
+}
+# the exchange's month (zz_ef_xmo_cap_map): a share in gold at the market and at the base (without the multiplier)
+zz_ef_xk_gold_s_v = { value = zz_ef_xq_gold_s }
+zz_ef_xk_base_s_v = {
+	value = zz_ef_co_px_v
+	if = {
+		limit = { exists = owner }
+		multiply = owner.zz_ef_xch_gpm_v
+	}
+}
+# COMPANY scope: the yield of a share at the market price -- the year's net profit over the capitalization at it
+zz_ef_co_yield_v = {
+	value = zz_ef_co_np_y_v
+	min = 0
+	divide = {
+		value = zz_ef_co_cap_fair_v
+		multiply = zz_ef_xmul_s_v
+		min = 1
+	}
+}
+# COMPANY scope: its shares (0 -- none) and their worth at the market price in its country's money (the capitalization)
+zz_ef_co_shares_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_co_shares } value = var:zz_ef_co_shares }
+}
+zz_ef_co_cap_mkt_v = {
+	value = zz_ef_co_shares_v
+	multiply = zz_ef_co_px_v
+	multiply = zz_ef_xmul_s_v
+}

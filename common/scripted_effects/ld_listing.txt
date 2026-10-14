@@ -5,7 +5,8 @@
 #   * allowed (scripted_triggers/ld_listing_triggers.txt: an exchange, joint-stock law, the technology) --
 #     the largest headquarters go public until their levels reach the country's share = the literacy of the
 #     rich (var:zz_ef_rich_literacy, zz_ef_stock_issue_update): reading a prospectus took literate investors;
-#     the rest are private;
+#     the rest are private; the headquarters' company is marked listed or not (zz_ef_listing_mark, Д.R6.10: its
+#     shares, scripted_effects/ld_company_shares.txt);
 #   * not allowed (no exchange, traditionalism...) -- every public headquarters goes back to private.
 # 6.10: every company has its own headquarters
 # type, building_company_<key>, group bg_company_headquarter; activate_production_method takes the type as a
@@ -49,10 +50,15 @@ zz_ef_listing_update = {
 					limit = { NOT = { has_active_production_method = pm_company_headquarter_publicly_traded } }
 					zz_ef_listing_go_public = yes
 				}
+				# the company is listed: its shares (Д.R6.10, ld_company_shares.txt)
+				zz_ef_listing_mark = { S = public }
 			}
-			else_if = {
-				limit = { has_active_production_method = pm_company_headquarter_publicly_traded }
-				zz_ef_listing_go_private = yes
+			else = {
+				if = {
+					limit = { has_active_production_method = pm_company_headquarter_publicly_traded }
+					zz_ef_listing_go_private = yes
+				}
+				zz_ef_listing_mark = { S = private }
 			}
 			change_local_variable = { name = zz_lst_cum add = level }
 		}
@@ -64,6 +70,10 @@ zz_ef_listing_update = {
 				has_active_production_method = pm_company_headquarter_publicly_traded
 			}
 			zz_ef_listing_go_private = yes
+		}
+		every_company = {
+			limit = { has_variable = zz_ef_co_listed }
+			zz_ef_co_go_private = yes
 		}
 	}
 }

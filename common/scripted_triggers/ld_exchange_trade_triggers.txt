@@ -74,3 +74,26 @@ zz_ef_xch_phase_week = {
 # a holder may order its own claim of the kind: bonds -- the treasury's buyback (Д.R8б.37)
 zz_ef_xch_own_ok_m = { always = no }
 zz_ef_xch_own_ok_b = { zz_ef_bl_principal > 0 }
+
+# COMPANY scope (Д.R6.10): its shares trade on the exchange E -- it is listed, has shares and its country trades on E
+zz_ef_co_trades_on = {
+	has_variable = zz_ef_co_listed
+	has_variable = zz_ef_co_shares
+	exists = owner
+	owner = {
+		has_variable = zz_ef_xch
+		var:zz_ef_xch = $E$
+	}
+}
+# Holder scope, scope:zz_ef_xch_d -- a company: no shares in or out under isolationism of the holder or of the company's
+# country (as zz_ef_xch_banned)
+zz_ef_xch_banned_s = {
+	OR = {
+		has_law_or_variant = law_type:law_isolationism
+		scope:zz_ef_xch_d.owner = { has_law_or_variant = law_type:law_isolationism }
+	}
+}
+# a holder's own claim of the kind: our bonds (the buyback), our money -- not held; shares -- never one's own
+zz_ef_xch_is_own_m = { scope:zz_ef_xch_d = this }
+zz_ef_xch_is_own_b = { scope:zz_ef_xch_d = this }
+zz_ef_xch_is_own_s = { always = no }
