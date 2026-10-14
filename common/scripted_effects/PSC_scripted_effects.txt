@@ -191,11 +191,6 @@ set_construction_point_demand = {
             max = 1000
             check_range_bounds = no
             set_construction_regulator_level = yes
-            # what the regulator buys by the market (Д.R9.5, Д.R9.11, ld_construction_market.txt)
-            if = {
-                limit = { has_building = building_construction_regulator }
-                zz_ef_reg_market_step = yes
-            }
 
             set_local_variable = {
                 name = state_construction_base_price
