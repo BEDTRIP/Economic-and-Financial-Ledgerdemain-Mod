@@ -188,3 +188,12 @@ zz_ef_at_war_v = {
 }
 # a fall of the treasury part this big (or bigger) is checked against the civil wars' new countries (zz_ef_cw_tr)
 zz_ef_cw_tr_min_neg = -10000
+# the price of levels bought from private owners paid to them this step / in the window just closed (Д.R6.1)
+zz_ef_v_f_lvl_post = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_f_lvl_post } value = var:zz_ef_f_lvl_post }
+}
+zz_ef_v_w_lvl_post = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_w_lvl_post } value = var:zz_ef_w_lvl_post }
+}

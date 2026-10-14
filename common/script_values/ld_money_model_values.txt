@@ -448,6 +448,8 @@ zz_ef_pool_other_week = {
 	subtract = zz_ef_v_w_nr_dep
 	# the engine's burnt money returned (Д.R4б.33)
 	subtract = zz_ef_v_w_leak_back
+	# the price of levels bought from private owners, paid to them (Д.R6.1)
+	subtract = zz_ef_v_w_lvl_post
 	# the treasury's surplus put into the pool
 	subtract = zz_ef_v_f_tr_pool
 	# the bond ledger's moves on the pool (a seller's), with abroad
@@ -494,6 +496,8 @@ zz_ef_leak_week = {
 	subtract = zz_ef_v_w_nr_dep
 	# the burnt money returned to the pool -- ours, not the engine's (Д.R4б.33)
 	subtract = zz_ef_v_w_leak_back
+	# the levels' price paid to their private sellers -- ours (Д.R6.1)
+	subtract = zz_ef_v_w_lvl_post
 	# the bond ledger with abroad -- the pool's (out of pool_other now) and the treasury's interest (out
 	# of the treasury's "other"; the parts repaid stay there, as E&F's bond moves)
 	subtract = zz_ef_v_f_bl_sold

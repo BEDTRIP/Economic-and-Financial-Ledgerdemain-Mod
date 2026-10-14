@@ -462,6 +462,9 @@ zz_ef_reconcile = {
 		}
 		zz_ef_priv_abroad_buyer = yes
 	}
+	# the levels the pool bought from private owners this step (the line «выкуп уровней», < 0) are paid to the sellers
+	# (Д.R6.1): the pops' deposits get the price, the banks hold the levels (zz_ef_bank_priv) -- a posting, not the line
+	zz_ef_lvl_buy_post = yes
 	# a large unexplained move of the treasury -- the engine's numbers around it (the log only)
 	if = {
 		limit = {
@@ -520,7 +523,7 @@ zz_ef_reconcile = {
 				zz_ef_f_other_abs_v > zz_ef_other_log_min
 			}
 		}
-		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|other [THIS.GetCountry.MakeScope.Var('zz_ef_other').GetValue|0]|d_other [THIS.GetCountry.MakeScope.Var('zz_ef_f_other').GetValue|0]|pool [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_raw_pool')|0]|book [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bank_book_v')|0]|other_pool [THIS.GetCountry.MakeScope.Var('zz_ef_other_pool').GetValue|0]|other_tr [THIS.GetCountry.MakeScope.Var('zz_ef_other_tr').GetValue|0]|lvl_pool [THIS.GetCountry.MakeScope.Var('zz_ef_lvl_buy_pool').GetValue|0]|lvl_tr [THIS.GetCountry.MakeScope.Var('zz_ef_lvl_buy_tr').GetValue|0]|bk_woff [THIS.GetCountry.MakeScope.Var('zz_ef_bk_woff').GetValue|0]|heir_debt [THIS.GetCountry.MakeScope.Var('zz_ef_heir_debt').GetValue|0]|heir_tr [THIS.GetCountry.MakeScope.Var('zz_ef_heir_tr').GetValue|0]|cw_tr [THIS.GetCountry.MakeScope.Var('zz_ef_cw_tr').GetValue|0]|d_other_tr [THIS.GetCountry.MakeScope.Var('zz_ef_f_other_tr').GetValue|0]|trnet [THIS.GetCountry.MakeScope.Var('zz_ef_tr_prev').GetValue|0]|budget [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_budget_steps_v')|0]|capital [THIS.GetCountry.MakeScope.Var('zz_ef_bank_capital').GetValue|0]|dep [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_deposits')|0]|weeks [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_step_weeks_v')|0]|role [THIS.GetCountry.MakeScope.Var('zz_ef_role').GetValue|0]|d_pool [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_d_pool')|0]|contrib [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_contrib')|0]|transfer [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_transfer')|0]|bc_new [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_bc_new')|0]|bc_paid [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_bc_paid')|0]|dep_build [THIS.GetCountry.MakeScope.Var('zz_ef_f_dep_build').GetValue|0]|gross [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pool_gross_v')|0]|net [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pool_net_v')|0]|d_complv [THIS.GetCountry.MakeScope.Var('zz_ef_d_complv').GetValue|2]|d_privlv [THIS.GetCountry.MakeScope.Var('zz_ef_d_privlv').GetValue|2]|d_govlv [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_d_govlv')|2]|d_aown [THIS.GetCountry.MakeScope.Var('zz_ef_d_aown').GetValue|0]|d_fown [THIS.GetCountry.MakeScope.Var('zz_ef_d_fown').GetValue|0]|pmult [THIS.GetCountry.MakeScope.Var('zz_ef_t_pmult').GetValue|0]|b_nr [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_nr_dep_v')|0]|b_nrp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_nr_dep_pending_v')|0]|b_fd [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fd_dep_v')|0]|b_cbd [THIS.GetCountry.MakeScope.Var('zz_ef_bank_cb_debt').GetValue|0]|b_gov [THIS.GetCountry.MakeScope.Var('zz_ef_bank_gov_dep').GetValue|0]|b_cc [THIS.GetCountry.MakeScope.Var('zz_ef_cc_debt').GetValue|0]|b_bc [THIS.GetCountry.MakeScope.Var('zz_ef_bc_debt').GetValue|0]|b_bonds [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bank_bonds')|0]|b_gvl [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bank_gov_loan_v')|0]|b_inv [THIS.GetCountry.MakeScope.Var('zz_ef_bank_inv').GetValue|0]|b_priv [THIS.GetCountry.MakeScope.Var('zz_ef_bank_priv').GetValue|0]"
+		debug_log = "EFJ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|other [THIS.GetCountry.MakeScope.Var('zz_ef_other').GetValue|0]|d_other [THIS.GetCountry.MakeScope.Var('zz_ef_f_other').GetValue|0]|pool [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_raw_pool')|0]|book [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bank_book_v')|0]|other_pool [THIS.GetCountry.MakeScope.Var('zz_ef_other_pool').GetValue|0]|other_tr [THIS.GetCountry.MakeScope.Var('zz_ef_other_tr').GetValue|0]|lvl_pool [THIS.GetCountry.MakeScope.Var('zz_ef_lvl_buy_pool').GetValue|0]|lvl_tr [THIS.GetCountry.MakeScope.Var('zz_ef_lvl_buy_tr').GetValue|0]|bk_woff [THIS.GetCountry.MakeScope.Var('zz_ef_bk_woff').GetValue|0]|heir_debt [THIS.GetCountry.MakeScope.Var('zz_ef_heir_debt').GetValue|0]|heir_tr [THIS.GetCountry.MakeScope.Var('zz_ef_heir_tr').GetValue|0]|cw_tr [THIS.GetCountry.MakeScope.Var('zz_ef_cw_tr').GetValue|0]|d_other_tr [THIS.GetCountry.MakeScope.Var('zz_ef_f_other_tr').GetValue|0]|trnet [THIS.GetCountry.MakeScope.Var('zz_ef_tr_prev').GetValue|0]|budget [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_budget_steps_v')|0]|capital [THIS.GetCountry.MakeScope.Var('zz_ef_bank_capital').GetValue|0]|dep [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pop_deposits')|0]|weeks [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_step_weeks_v')|0]|role [THIS.GetCountry.MakeScope.Var('zz_ef_role').GetValue|0]|d_pool [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_d_pool')|0]|contrib [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_contrib')|0]|transfer [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_transfer')|0]|bc_new [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_bc_new')|0]|bc_paid [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_bc_paid')|0]|dep_build [THIS.GetCountry.MakeScope.Var('zz_ef_f_dep_build').GetValue|0]|gross [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pool_gross_v')|0]|net [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_pool_net_v')|0]|d_complv [THIS.GetCountry.MakeScope.Var('zz_ef_d_complv').GetValue|2]|d_privlv [THIS.GetCountry.MakeScope.Var('zz_ef_d_privlv').GetValue|2]|d_govlv [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_d_govlv')|2]|d_aown [THIS.GetCountry.MakeScope.Var('zz_ef_d_aown').GetValue|0]|d_fown [THIS.GetCountry.MakeScope.Var('zz_ef_d_fown').GetValue|0]|pmult [THIS.GetCountry.MakeScope.Var('zz_ef_t_pmult').GetValue|0]|b_nr [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_nr_dep_v')|0]|b_nrp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_nr_dep_pending_v')|0]|b_fd [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_fd_dep_v')|0]|b_cbd [THIS.GetCountry.MakeScope.Var('zz_ef_bank_cb_debt').GetValue|0]|b_gov [THIS.GetCountry.MakeScope.Var('zz_ef_bank_gov_dep').GetValue|0]|b_cc [THIS.GetCountry.MakeScope.Var('zz_ef_cc_debt').GetValue|0]|b_bc [THIS.GetCountry.MakeScope.Var('zz_ef_bc_debt').GetValue|0]|b_bonds [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bank_bonds')|0]|b_gvl [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_bank_gov_loan_v')|0]|b_inv [THIS.GetCountry.MakeScope.Var('zz_ef_bank_inv').GetValue|0]|b_priv [THIS.GetCountry.MakeScope.Var('zz_ef_bank_priv').GetValue|0]|lvl_post [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_lvl_post')|0]"
 	}
 }
 
@@ -544,9 +547,7 @@ zz_ef_priv_abroad_seller = {
 			has_variable = zz_ef_priv_buy_v
 			var:zz_ef_priv_buy_v = scope:zz_ef_pv_s.var:zz_ef_f_lvl_buy_tr
 		}
-		# the buyer's step took it as «выкуп уровней» -- now its banks' asset
-		change_variable = { name = zz_ef_lvl_buy_pool add = var:zz_ef_priv_buy_v }
-		zz_ef_priv_abroad_post = { V = var:zz_ef_priv_buy_v }
+		# the buyer's step paid it to its pops as their levels' price (zz_ef_lvl_buy_post) and holds the levels -- kept
 		remove_variable = zz_ef_priv_buy_v
 		remove_list_global_variable = { name = zz_ef_priv_buyers target = this }
 		scope:zz_ef_pv_s = { set_variable = { name = zz_ef_t_pv_done value = 1 } }
@@ -636,4 +637,34 @@ zz_ef_other_world_log = {
 	set_global_variable = { name = zz_ef_wld_other_abs value = 0 }
 	set_global_variable = { name = zz_ef_wld_other_n value = 0 }
 	set_global_variable = { name = zz_ef_wld_other_tr value = 0 }
+}
+
+# Country scope, the end of the reconciliation (Д.R6.1): the pool's price of levels bought from private owners this step
+# (var:zz_ef_f_lvl_buy_pool < 0: the companies' or private owners' levels grew, or a multiple with no seller abroad) is
+# the sellers' -- the engine pays nobody: their deposits get it, the pool gets it back (our money for the engine's gone
+# payment), the banks hold the levels (zz_ef_bank_priv); the line «выкуп уровней» does not keep it. The pool and the book
+# move together. The pool's card shows it a step later (var:zz_ef_w_lvl_post).
+zz_ef_lvl_buy_post = {
+	set_variable = { name = zz_ef_f_lvl_post value = 0 }
+	if = {
+		limit = {
+			has_variable = zz_ef_model_started
+			var:zz_ef_f_lvl_buy_pool < 0
+		}
+		set_variable = { name = zz_ef_f_lvl_post value = { value = var:zz_ef_f_lvl_buy_pool multiply = -1 } }
+		change_variable = { name = zz_ef_lvl_buy_pool add = var:zz_ef_f_lvl_post }
+		if = { limit = { NOT = { has_variable = zz_ef_bank_priv } } set_variable = { name = zz_ef_bank_priv value = 0 } }
+		change_variable = { name = zz_ef_bank_priv add = var:zz_ef_f_lvl_post }
+		if = { limit = { NOT = { has_variable = zz_ef_pop_deposits } } set_variable = { name = zz_ef_pop_deposits value = 0 } }
+		change_variable = { name = zz_ef_pop_deposits add = var:zz_ef_f_lvl_post }
+		zz_ef_eng_add_pool = { V = var:zz_ef_f_lvl_post }
+		set_variable = {
+			name = zz_ef_other_pool
+			value = {
+				value = investment_pool
+				subtract = zz_ef_bank_book_v
+				subtract = var:zz_ef_lvl_buy_pool
+			}
+		}
+	}
 }
