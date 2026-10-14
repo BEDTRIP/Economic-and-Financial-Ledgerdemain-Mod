@@ -18,7 +18,8 @@
   `INJECT:building_financial_district` (оценки инвестиций `bg_ef_private_construction_score`,
   `bg_financial_centre_score`, `bg_construction_score`).
 - `common/buildings/ef_03_mines.txt:53` — новое `building_silver_mine` (группа `bg_silver_mining`, доступно только при
-  `silver_mine_max_level`, 4 PMG).
+  `silver_mine_max_level`, 4 PMG); стартовый рудник мексиканской компании (`establish_bank_and_ef_compagnie`,
+  `01_financial_scripted_effects.txt`) — в случайном штате Мексики с этим модификатором.
 - Частная стройка — PSC `common/buildings/zz_PSC_construction.txt` (`building_construction_sector`); здания E&F
   `building_ef_private_construction` в форке нет.
 - `common/buildings/ef_15_bank.txt` — `building_bank` (центральный банк, `ownership_type = no_ownership`, PMG

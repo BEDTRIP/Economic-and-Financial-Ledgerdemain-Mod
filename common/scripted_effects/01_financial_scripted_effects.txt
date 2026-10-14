@@ -4138,7 +4138,10 @@ establish_bank_and_ef_compagnie = {
 			#maximum_number_companies_exceeded_monthly_pulse >= 1 #les Compagnie classique ne +1 pas comme les bank
 		}
 		add_company = company_type:company_basic_silver_mining_mex
+		# a state with silver (E&F's cap, history/states/01_ef_states.txt): create_building does not check the building's
+		# possible -- without the limit a state with no silver (Sonora) could get the mine
 		random_scope_state = {
+			limit = { has_modifier = silver_mine_max_level }
 			create_building = {
 				building = building_silver_mine
 				add_ownership = {
