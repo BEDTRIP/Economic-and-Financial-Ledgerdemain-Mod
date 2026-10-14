@@ -305,7 +305,8 @@
 категория компании игры пока не делит), `zz_ef_comp_dep` убывает; `var:zz_ef_f_co_div` (окно `zz_ef_w_co_div` — строка
 карточки вкладов), на компании `var:zz_ef_co_div_last` (лог `comp`: `div`). Держатели акций — шаг 6.
 
-**Проба R6.1 (временно, до разбора — в `_archive/ld_probe_co/`):** `common/scripted_effects/ld_probe_co.txt`,
-`events/ld_probe_co_events.txt`, `common/on_actions/ld_probe_co_on_actions.txt`, `common/scripted_guis/ld_probe_co.txt`,
-`gui/ld_probe_co.gui`, `gui/scripted_widgets/ld_probe_co.txt` — переменная, карта и список с ключом-компанией,
-исчезновение компании, прибыль компании и касса ШК из окна; лог `EFZ|…|co_probe|`, `co_comp|`.
+**Компания в скрипте** (проба R6.1, `_archive/ld_probe_co/`): переменные и карты на компании; карта на стране с
+ключом-компанией и список компаний работают, как с ключом-страной; исчезнувшая компания уносит свои переменные, ключ
+остаётся (`is_key_in_variable_map` — да, `variable_map_size` считает), но перебор его пропускает — суммы по картам
+держателей только перебором. Прибыль компании (`Company.GetProfit`, неделя) и касса ШК — только в окне (мост окно →
+скрипт, как `gui/ld_bank_hook.gui`); здания компании скрипт не видит. Категория компании — по перечню типов.
