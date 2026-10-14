@@ -21,7 +21,8 @@
 - `common/production_methods/zz_PSC_construction.txt` — PM сектора
   `pm_wooden/iron_frame/steel_frame/arc_welded_buildings` (вход: материалы; выход: `*_construction`; выпуск
   «акций» E&F `manufacture_stock` снят — Д.R4б.8; выход стройтоваров больше на его выручку по базовым ценам: 24 / 64 /
-  136 / 204 — Д.R4б.14), PM регулятора `pm_{wood,iron,steel,arc_welded}_point_conversion` (`country_construction_add`;
+  136 / 204 — Д.R4б.14; железо × 1,56 — 100, чтобы сектора покрывали заказы регуляторов без цены нехватки, Д.R9.10,
+  принято ночью), PM регулятора `pm_{wood,iron,steel,arc_welded}_point_conversion` (`country_construction_add`;
   вход — 10 единиц своего стройтовара на очко).
 - `common/production_method_groups/PSC_construction.txt` — `pmg_construction_regulator`.
 - `common/goods/PSC_goods.txt` — `wood_/iron_/steel_/arc_welded_construction`.
@@ -54,10 +55,16 @@
   (`gui/PSC_construction_expense_widget.gui`); оба файла — одна строка без перевода строки.
 
 **Ledgerdemain (`ld_*`) над PSC**
-- Сняты и лежат в архиве: закупка регулятора по рынку (Д.R9.5, Д.R9.11 — смесь стройтоваров: очки −21 % в R9 и −7…−16 %
-  в R9б.2, дерево уходит в нехватку; `_archive/psc_regulator_market_mix/`, вопрос В.R9б.5 в `этапы/R9б.md`) и регулятор
-  не больше предложения рынка (Д.R9.4 — очки −60 %, `_archive/ld_psc_market_fill/`; вернуть — R9б, вместе с выпуском
-  секторов, Д.R9.10).
+- Снята и лежит в архиве: закупка регулятора по рынку (Д.R9.5, Д.R9.11 — смесь стройтоваров: очки −21 % в R9 и −7…−16 %
+  в R9б.2, дерево уходит в нехватку; `_archive/psc_regulator_market_mix/`, вопрос В.R9б.5 в `этапы/R9б.md`).
+- `common/scripted_effects/ld_psc_market_fill.txt`, `common/script_values/ld_psc_market_fill_values.txt` — регулятор не
+  больше предложения рынка (Д.R9.4, Д.R9.10): `zz_ef_psc_fill_update` в начале недели PSC — на стране
+  `var:zz_ef_psc_k_<товар>` (`wood`, `iron`, `steel`, `arc_welded`) = прошлое k × продажи / заказы стройтовара на рынке
+  страны, в пределах [`zz_ef_psc_k_min` 0,05; 1] (заказов нет — 1); в штате `zz_ef_psc_fill_v` — k товара метода его
+  регулятора (1 без регулятора); пропускная регулятора и очки штата × k. Регулятор игры берёт деньги за весь заказ, а
+  недостающее на рынке сгорает (статья «движок: оплачено сверх продаж рынка», Д.R4б.27) — k сводит заказы регуляторов к
+  предложению, как металл (`zz_ef_mt_k_*`); выпуск стройсекторов поднят, чтобы они окупались без цены нехватки (Д.R9.10,
+  выход методов — выше).
 - `common/script_values/ld_psc_private_allocation.txt` — REPLACE `private_construction_increase` (цель
   `zz_ef_psc_private_target`: доход + простаивающий пул + ставка, × рычаг кредита `zz_ef_psc_credit_f` — от 0,5 без
   свободного лимита банков до 1, когда свободный лимит страны `var:zz_ef_bk_free_cr` ≥ 13 недель нового делового
@@ -130,8 +137,9 @@
      уровня сектора, не сносится — Д.R8в.27), `state_construction_spending_allocation` (доля штата — по стоимости его
      выпуска: выпуск × базовая цена / `weighted_total`; от 0 до остатка трат страны
      `var:psc_remaining_construction_spending` — переменная страны, уменьшается после каждого штата и снимается после
-     цикла), `set_state_construction_efficiency` (модификатор на сектор), `state_construction_allocation` ->
-     `construction_throughput_mult` на регуляторе;
+     цикла), `set_state_construction_efficiency` (модификатор на сектор), `state_construction_allocation` × k рынка
+     товара регулятора (`zz_ef_psc_fill_v`, Д.R9.4) -> `construction_throughput_mult` на регуляторе; в начале недели —
+     `zz_ef_psc_fill_update` (k рынка);
    - `prev_estimated_investment_pool = investment_pool + investment_pool_net_income`.
 4. `set_spending_value` (только игрок) -> `set_government_construction_spending`.
 5. `on_production_method_changed`, `on_building_built` (сектор) -> `set_new_point_conversion_method` (PM регулятора = PM
@@ -146,6 +154,7 @@
 ## Переменные
 | имя | смысл | пишет | читает |
 |---|---|---|---|
+| `zz_ef_psc_k_<товар>` (страна) | k рынка стройтовара (Д.R9.4) | `zz_ef_psc_fill_update` | `zz_ef_psc_fill_v`, лог `EFZ` |
 | `last_construction_run` (страна) | дата последнего пересчёта | `set_construction_country`, `psc_save_real_construction_cost` | `psc_test_show`, `on_acquired_construction_tech` |
 | `construction_spending_level` (страна) | доля макс. госрасходов на стройку | `check_construction_spending_level`, `psc_button_*_sgui` | `max_government_construction_at_spending_level` |
 | `max_government_construction_spending`, `max_government_construction_at_spending_level`, `limited_government_construction_spending`, `total_construction_spending` | расходы | `set_construction_point_demand`, sgui | значения PSC, GUI |
@@ -181,9 +190,10 @@
 
 ## Логи
 `EFZ` (при логах, раз в неделю PSC на страну, `zz_ef_psc_log` в `common/scripted_effects/ld_psc_log.txt`): `total` —
-траты на стройку, `alloc` — роздано штатам, `pts` — очки, купленные на них, `rest` — не роздано,
+траты на стройку, `alloc` — роздано штатам, `pts` — очки, купленные на них (× K рынка, Д.R9.4), `rest` — не роздано,
 `prod` — выпуск стройтоваров страны, `gov` — государственная часть трат, `wtot` — сумма выпуск × базовая цена по
-штатам, `csec_profit`, `csec_lv` — прибыль и уровни стройсекторов, `cf` — рычаг кредита частной доли (Д.R9.2). Сводка
+штатам, `csec_profit`, `csec_lv` — прибыль и уровни стройсекторов, `cf` — рычаг кредита частной доли (Д.R9.2), `kw`,
+`ki` — k дерева и железа. Сводка
 по годам —
 `../vic3_mods/tools/ld_psc_sum.py`. Уведомление
 игроку: `zz_pb_ef_overbuild_rising` (рост полосы `speculative_share_2` на 10).
