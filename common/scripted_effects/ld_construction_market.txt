@@ -1,10 +1,9 @@
 ﻿# The construction regulator's purchase by the market (Д.R9.5, была Д.R8в.24; понятие «Строительство»,
 # docs/construction.md): the regulator buys all four construction goods -- 10 units of any of them make a point
 # (construction_goods_per_point; each regulator method takes 10 of each a point, the shares cut it). A share follows the
-# market's split: the good's supply x (the cheapest local price / its local price)^2, half the way a week. The market's
-# fill of each good (var:zz_ef_psc_k_<good> of the country, Д.R9.4, ld_psc_market_fill.txt) cuts the share further:
-# the effective share s' = s x k / K, the regulator's throughput x K = sum of s x k. The points the state's spending buys
-# -- PSC's price model at the base price of the effective mix (var:zz_ef_reg_bp, calculate_state_construction_base_price).
+# market's split: the good's supply x (the cheapest local price / its local price)^2, half the way a week. The points the
+# state's spending buys -- PSC's price model at the base price of the mix (var:zz_ef_reg_bp,
+# calculate_state_construction_base_price).
 # Values -- script_values/ld_construction_market_values.txt.
 
 # STATE scope with the regulator, weekly, before the state's spending turns into points (set_construction_point_demand).
@@ -36,16 +35,7 @@ zz_ef_reg_market_step = {
 		set_variable = { name = zz_ef_reg_s_steel value = 0 }
 		set_variable = { name = zz_ef_reg_s_arc_welded value = 0 }
 	}
-	# the market's fill: K = sum of s x k; the effective shares s x k / K, the mix's base price
-	set_variable = { name = zz_ef_reg_fill value = 0 }
-	zz_ef_reg_fill_add = { G = wood }
-	zz_ef_reg_fill_add = { G = iron }
-	zz_ef_reg_fill_add = { G = steel }
-	zz_ef_reg_fill_add = { G = arc_welded }
-	if = {
-		limit = { var:zz_ef_reg_fill < zz_ef_reg_fill_min }
-		set_variable = { name = zz_ef_reg_fill value = zz_ef_reg_fill_min }
-	}
+	# the inputs' multipliers and the mix's base price
 	set_variable = { name = zz_ef_reg_bp value = 0 }
 	zz_ef_reg_effective = { G = wood }
 	zz_ef_reg_effective = { G = iron }
@@ -134,40 +124,20 @@ zz_ef_reg_share_move = {
 	}
 }
 
-# STATE scope: K += $G$'s share x the market's fill of $G$ (the country's).
-zz_ef_reg_fill_add = {
-	change_variable = {
-		name = zz_ef_reg_fill
-		add = {
-			value = var:zz_ef_reg_s_$G$
-			multiply = owner.var:zz_ef_psc_k_$G$
-		}
-	}
-}
-
-# STATE scope: $G$'s effective share s x k / K -- the input multiplier local_var:zz_ef_reg_m_$G$ = it - 1, the mix's base
-# price += it x $G$'s base price.
+# STATE scope: $G$'s input multiplier local_var:zz_ef_reg_m_$G$ = its share - 1; the mix's base price += the share x
+# $G$'s base price.
 zz_ef_reg_effective = {
-	set_local_variable = {
-		name = zz_ef_reg_e
-		value = {
-			value = var:zz_ef_reg_s_$G$
-			multiply = owner.var:zz_ef_psc_k_$G$
-			divide = var:zz_ef_reg_fill
-			max = 1
-		}
-	}
-	set_local_variable = { name = zz_ef_reg_m_$G$ value = { value = local_var:zz_ef_reg_e subtract = 1 } }
+	set_local_variable = { name = zz_ef_reg_m_$G$ value = { value = var:zz_ef_reg_s_$G$ subtract = 1 } }
 	change_variable = {
 		name = zz_ef_reg_bp
 		add = {
-			value = local_var:zz_ef_reg_e
+			value = var:zz_ef_reg_s_$G$
 			multiply = $G$_construction_good_base_price
 		}
 	}
 }
 
-# REGULATOR scope: its input of $G$ = the effective share x the method's 10 units a point.
+# REGULATOR scope: its input of $G$ = the share x the method's 10 units a point.
 zz_ef_reg_input_set = {
 	if = {
 		limit = { has_modifier = zz_ef_reg_in_$G$ }

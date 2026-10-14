@@ -1,12 +1,11 @@
 ﻿# Scope: country, at the end of PSC's week (set_construction_point_demand, PSC_scripted_effects.txt). Log EFZ: the
 # construction spending, what the states got of it, the points it bought, the rest not given out, the construction goods
-# made, the government part, the states' weights, the construction sectors' weekly profit and levels, the regulators' fill
-# of wood and iron by the market (Д.R9.4), the banks' credit lever of the private share (Д.R9.2); docs/construction.md,
-# «Логи».
+# made, the government part, the states' weights, the construction sectors' weekly profit and levels, the banks' credit
+# lever of the private share (Д.R9.2); docs/construction.md, «Логи».
 zz_ef_psc_log = {
 	if = {
 		limit = { zz_ef_logs_on = yes }
-		debug_log = "EFZ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|total [THIS.GetCountry.MakeScope.Var('total_construction_spending').GetValue|0]|alloc [THIS.GetCountry.MakeScope.Var('zz_ef_c_alloc').GetValue|0]|pts [THIS.GetCountry.MakeScope.Var('zz_ef_c_pts').GetValue|1]|rest [THIS.GetCountry.MakeScope.Var('psc_remaining_construction_spending').GetValue|0]|prod [THIS.GetCountry.MakeScope.Var('national_production').GetValue|0]|gov [THIS.GetCountry.MakeScope.Var('limited_government_construction_spending').GetValue|0]|wtot [THIS.GetCountry.MakeScope.Var('weighted_total').GetValue|0]|csec_profit [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_csec_profit_v')|0]|csec_lv [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_csec_levels_v')|0]|cf [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_psc_credit_f')|3]|kw [THIS.GetCountry.MakeScope.Var('zz_ef_psc_k_wood').GetValue|3]|ki [THIS.GetCountry.MakeScope.Var('zz_ef_psc_k_iron').GetValue|3]"
+		debug_log = "EFZ|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|total [THIS.GetCountry.MakeScope.Var('total_construction_spending').GetValue|0]|alloc [THIS.GetCountry.MakeScope.Var('zz_ef_c_alloc').GetValue|0]|pts [THIS.GetCountry.MakeScope.Var('zz_ef_c_pts').GetValue|1]|rest [THIS.GetCountry.MakeScope.Var('psc_remaining_construction_spending').GetValue|0]|prod [THIS.GetCountry.MakeScope.Var('national_production').GetValue|0]|gov [THIS.GetCountry.MakeScope.Var('limited_government_construction_spending').GetValue|0]|wtot [THIS.GetCountry.MakeScope.Var('weighted_total').GetValue|0]|csec_profit [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_csec_profit_v')|0]|csec_lv [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_csec_levels_v')|0]|cf [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_psc_credit_f')|3]"
 	}
 	remove_variable = zz_ef_c_alloc
 	remove_variable = zz_ef_c_pts

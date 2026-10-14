@@ -47,8 +47,6 @@ set_construction_point_demand = {
         limit = { 
             has_technology_researched = urbanization
         }
-        # the regulators' fill by the market (Д.R9.4, ld_psc_market_fill.txt)
-        zz_ef_psc_fill_update = yes
         if = {
             limit = {
                 has_modifier = country_private_construction_allocation_add
@@ -224,13 +222,8 @@ set_construction_point_demand = {
                 name = state_construction
                 value = state_construction_allocation
             }
-            # the points the market can supply: x the fill of the regulator's good (Д.R9.4)
-            set_local_variable = {
-                name = psc_fill
-                value = zz_ef_psc_fill_v
-            }
             # the week's sums for the log EFZ (ld_psc_log.txt)
-            set_variable = { name = psc_state_points value = { value = local_var:state_construction multiply = local_var:psc_fill } }
+            set_variable = { name = psc_state_points value = local_var:state_construction }
             owner = {
                 change_variable = { name = zz_ef_c_alloc add = scope:psc_state.var:psc_state_spending_log }
                 change_variable = { name = zz_ef_c_pts add = scope:psc_state.var:psc_state_points }
@@ -249,7 +242,6 @@ set_construction_point_demand = {
                     name = modifier_mult
                     value = {
                         value = local_var:state_construction
-                        multiply = local_var:psc_fill
                         divide = {
                             value = level
                             min = 1
