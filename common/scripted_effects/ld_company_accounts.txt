@@ -13,7 +13,12 @@
 # (zz_ef_co_debt_v on a company: its levels' part of zz_ef_co_share of the debt), the rest -- the collector's; the
 # companies' part of the week's service (zz_ef_f_co_paid) is paid out of their accounts by their levels
 # (zz_ef_co_pay_lv). A company whose account is under its month's interest is marked var:zz_ef_co_distress (its
-# bankruptcy -- R11). Log: EFJ|...|comp (the account, the last month's income and outflow, the debt), comp_sum.
+# bankruptcy -- R11).
+# Dividends (Д.R6.8), monthly: the account over its norm (zz_ef_co_reserve_months of the last month's outflow -- the
+# credit's service) goes to the owners from the pops -- their deposits (one aggregate: the company's category of the
+# game does not split it yet) and savings; var:zz_ef_f_co_div (the deposits' card, its window zz_ef_w_co_div), the
+# company's var:zz_ef_co_div_last. The holders of the shares -- R6.6.
+# Log: EFJ|...|comp (the account, the last month's income, outflow and dividend, the debt), comp_sum.
 
 # COUNTRY scope, monthly (zz_ef_money_model_monthly_step): the companies' levels -- var:zz_ef_co_lv on each company,
 # their sum var:zz_ef_co_lv_sum, and their share of the private levels var:zz_ef_co_share (0..1); the last month's
@@ -47,6 +52,30 @@ zz_ef_co_month_step = {
 			}
 		}
 		remove_variable = zz_ef_t_pl
+	}
+	# the dividends (Д.R6.8)
+	if = {
+		limit = {
+			has_variable = zz_ef_pop_savings
+			has_variable = zz_ef_comp_dep
+		}
+		if = { limit = { NOT = { has_variable = zz_ef_f_co_div } } set_variable = { name = zz_ef_f_co_div value = 0 } }
+		set_variable = { name = zz_ef_t_cdv value = 0 }
+		every_company = {
+			set_variable = { name = zz_ef_co_div_last value = 0 }
+			if = {
+				limit = { zz_ef_co_div_due_v > 0 }
+				set_variable = { name = zz_ef_co_div_last value = zz_ef_co_div_due_v }
+				change_variable = { name = zz_ef_co_acc subtract = var:zz_ef_co_div_last }
+				scope:zz_ef_co_cty = { change_variable = { name = zz_ef_t_cdv add = prev.var:zz_ef_co_div_last } }
+			}
+		}
+		set_variable = { name = zz_ef_t_cdv value = { value = var:zz_ef_t_cdv max = { value = var:zz_ef_comp_dep min = 0 } } }
+		change_variable = { name = zz_ef_comp_dep subtract = var:zz_ef_t_cdv }
+		change_variable = { name = zz_ef_pop_deposits add = var:zz_ef_t_cdv }
+		change_variable = { name = zz_ef_pop_savings add = var:zz_ef_t_cdv }
+		change_variable = { name = zz_ef_f_co_div add = var:zz_ef_t_cdv }
+		remove_variable = zz_ef_t_cdv
 	}
 	# the companies that cannot pay their month's interest out of the account (Д.R6.9; bankruptcy -- R11)
 	every_company = {

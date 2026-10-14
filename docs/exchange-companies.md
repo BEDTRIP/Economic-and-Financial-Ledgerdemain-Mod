@@ -300,6 +300,10 @@
 же шаге), остальное — из доли населения во взносах. Счёт меньше процентов месяца (`zz_ef_co_int_month_v`, ставка
 `zz_ef_cc_rate`) — `var:zz_ef_co_distress` на компании (банкротство — R11). Лог `comp`: `out` (расход месяца), `debt`,
 `distress`.
+**Дивиденды** (Д.R6.8): раз в месяц (`zz_ef_co_month_step`) счёт сверх нормы — `zz_ef_co_reserve_months` (3, принято
+ночью) месяцев расхода (обслуживание кредита) — владельцам из населения: вклады и сбережения населения (один агрегат —
+категория компании игры пока не делит), `zz_ef_comp_dep` убывает; `var:zz_ef_f_co_div` (окно `zz_ef_w_co_div` — строка
+карточки вкладов), на компании `var:zz_ef_co_div_last` (лог `comp`: `div`). Держатели акций — шаг 6.
 
 **Проба R6.1 (временно, до разбора — в `_archive/ld_probe_co/`):** `common/scripted_effects/ld_probe_co.txt`,
 `events/ld_probe_co_events.txt`, `common/on_actions/ld_probe_co_on_actions.txt`, `common/scripted_guis/ld_probe_co.txt`,

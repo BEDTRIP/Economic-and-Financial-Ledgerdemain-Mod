@@ -74,3 +74,23 @@ zz_ef_bc_debt_v = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_bc_debt } value = var:zz_ef_bc_debt }
 }
+# Д.R6.8: the months of outflow a company keeps on its account; over it -- the dividend (принято ночью: 3)
+zz_ef_co_reserve_months = 3
+# COMPANY scope: the dividend due -- the account over its norm
+zz_ef_co_div_due_v = {
+	value = zz_ef_co_acc_v
+	subtract = {
+		value = zz_ef_co_out_last_v
+		multiply = zz_ef_co_reserve_months
+	}
+	min = 0
+}
+zz_ef_co_div_last_v = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_co_div_last } value = var:zz_ef_co_div_last }
+}
+# COUNTRY scope: the dividends paid to the pops' deposits, the window the deposits' card covers
+zz_ef_v_w_co_div = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_w_co_div } value = var:zz_ef_w_co_div }
+}
