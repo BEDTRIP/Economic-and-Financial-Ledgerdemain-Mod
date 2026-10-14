@@ -180,3 +180,25 @@ zz_ef_mg_b_lcur = { value = market.mg:local_currency.market_goods_buy_orders }
 zz_ef_mg_s_lcur = { value = market.mg:local_currency.market_goods_sell_orders }
 zz_ef_mg_b_qcur = { value = market.mg:liquidity_currency.market_goods_buy_orders }
 zz_ef_mg_s_qcur = { value = market.mg:liquidity_currency.market_goods_sell_orders }
+
+# The companies' accounts (Д.R6.2; the log only, ld_acc_log.txt): every finished building level of the country, the
+# buildings' cash a level, a company's own levels
+zz_ef_all_levels_v = {
+	value = 0
+	every_scope_building = {
+		limit = {
+			level > 0
+			NOT = { is_under_construction = yes }
+		}
+		add = level
+	}
+}
+zz_ef_cash_per_level_v = {
+	value = 0
+	if = {
+		limit = { zz_ef_all_levels_v > 0 }
+		value = zz_ef_building_cash
+		divide = zz_ef_all_levels_v
+	}
+}
+zz_ef_comp_own_levels_v = { value = company_owned_levels }
