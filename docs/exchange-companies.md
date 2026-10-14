@@ -208,10 +208,9 @@
 - Биржевая часть E&F вне перечисленного: `common/script_values/00_financial_scripted_value.txt` (`country_indice`,
   `<вид>_stock_price/_index`, `stockpiling_<вид>_var_state` — переписаны на скользящие средние),
   `common/scripted_effects/01_financial_scripted_effects.txt` (`financial_crash` 33541, `financial_crash_consequences`
-  34007, `bankrupt_company` 34260), `common/scripted_effects/09_introduction_building_lvl.txt:22135`
-  (`financial_center_modifier`, вешает `has_financial_center` с множителем),
-  `common/scripted_effects/00_on_action_main.txt:499` (`financial_center_ef_on_half_yearly_pulse_country`, сейчас без
-  биржевой логики).
+  34007), `common/scripted_effects/09_introduction_building_lvl.txt:22135` (`financial_center_modifier`, вешает
+  `has_financial_center` с множителем), `common/scripted_effects/00_on_action_main.txt:499`
+  (`financial_center_ef_on_half_yearly_pulse_country`, сейчас без биржевой логики).
 
 ## Поток / порядок
 `on_monthly_pulse_country` → `zz_ef_capitalization_monthly` (`ld_capitalization_on_actions.txt`), страна, по порядку:
@@ -237,7 +236,7 @@
    `zz_ef_money_rate`) + `zz_ef_slots_cap` (0..10, +1 за каждые 10% ВВП). Прочее: E&F больше не создаёт финцентры сам
    (по технологии, по ВВП, после краха — `_archive/ef_fc_spawners/`); крах → `economic_instability`; при втором кризисе
    в `01_financial_scripted_effects.txt:33766` — `financial_crash_consequences` (разрушает биржи, `government_loan`,
-   `add_investment_pool`, `bankrupt_company`).
+   `add_investment_pool`; `bankrupt_company` — в архиве, Д.R6.4).
 
 ## Переменные
 | имя | смысл | пишет | читает |
@@ -278,6 +277,5 @@
 ## Известные несоответствия
 - `financial_crash_consequences` перечисляет не все национальные биржи (нет `_dei`, `_han`, `_sax`, `_usa_2`, `_gbr_2`;
   `_TUS` в другом регистре).
-- `bankrupt_company` и `08_list_effect.txt` ссылаются на ключи компаний, которых нет в диспетчере
-  `ld_listing_switch.txt` (диспетчер знает только 271 тип); ссылки на ключи, которых нет ни в ванили, ни в CMF/ETF, ни в
-  форке, удалены.
+- `08_list_effect.txt` ссылается на ключи компаний, которых нет в диспетчере `ld_listing_switch.txt` (диспетчер знает
+  только 271 тип); ссылки на ключи, которых нет ни в ванили, ни в CMF/ETF, ни в форке, удалены.
