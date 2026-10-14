@@ -432,13 +432,7 @@ zz_ef_xr_b_xb_read = {
 		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_xr_b_xb|scope:zz_ef_rq_key)" }
 	}
 }
-zz_ef_xr_b_xf_read = {
-	set_variable = { name = zz_ef_rq_h value = 0 }
-	if = {
-		limit = { is_key_in_variable_map = { name = zz_ef_xr_b_xf target = scope:zz_ef_rq_key } }
-		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_xr_b_xf|scope:zz_ef_rq_key)" }
-	}
-}
+zz_ef_xr_b_xf_read = { set_variable = { name = zz_ef_rq_h value = 0 } }
 zz_ef_xs_s_1_read = {
 	set_variable = { name = zz_ef_rq_h value = 0 }
 	if = {
@@ -635,27 +629,9 @@ zz_ef_xr_s_lc_read = {
 		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_xr_s_lc|scope:zz_ef_rq_key)" }
 	}
 }
-zz_ef_xr_s_xs_read = {
-	set_variable = { name = zz_ef_rq_h value = 0 }
-	if = {
-		limit = { is_key_in_variable_map = { name = zz_ef_xr_s_xs target = scope:zz_ef_rq_key } }
-		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_xr_s_xs|scope:zz_ef_rq_key)" }
-	}
-}
-zz_ef_xr_s_xb_read = {
-	set_variable = { name = zz_ef_rq_h value = 0 }
-	if = {
-		limit = { is_key_in_variable_map = { name = zz_ef_xr_s_xb target = scope:zz_ef_rq_key } }
-		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_xr_s_xb|scope:zz_ef_rq_key)" }
-	}
-}
-zz_ef_xr_s_xf_read = {
-	set_variable = { name = zz_ef_rq_h value = 0 }
-	if = {
-		limit = { is_key_in_variable_map = { name = zz_ef_xr_s_xf target = scope:zz_ef_rq_key } }
-		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_xr_s_xf|scope:zz_ef_rq_key)" }
-	}
-}
+zz_ef_xr_s_xs_read = { set_variable = { name = zz_ef_rq_h value = 0 } }
+zz_ef_xr_s_xb_read = { set_variable = { name = zz_ef_rq_h value = 0 } }
+zz_ef_xr_s_xf_read = { set_variable = { name = zz_ef_rq_h value = 0 } }
 zz_ef_xa_cb_m_read = {
 	set_variable = { name = zz_ef_rq_h value = 0 }
 	if = {
@@ -1909,7 +1885,6 @@ zz_ef_xch_results_empty = {
 	clear_variable_map = zz_ef_xr_b_lc
 	clear_variable_map = zz_ef_xr_b_xs
 	clear_variable_map = zz_ef_xr_b_xb
-	clear_variable_map = zz_ef_xr_b_xf
 	clear_variable_map = zz_ef_xr_s_c
 	clear_variable_map = zz_ef_xr_s_ps
 	clear_variable_map = zz_ef_xr_s_pb
@@ -1920,9 +1895,6 @@ zz_ef_xch_results_empty = {
 	clear_variable_map = zz_ef_xr_s_ls
 	clear_variable_map = zz_ef_xr_s_lb
 	clear_variable_map = zz_ef_xr_s_lc
-	clear_variable_map = zz_ef_xr_s_xs
-	clear_variable_map = zz_ef_xr_s_xb
-	clear_variable_map = zz_ef_xr_s_xf
 }
 zz_ef_xch_orders_empty = {
 	clear_variable_map = zz_ef_xa_cb_m

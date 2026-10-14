@@ -523,6 +523,11 @@ zz_ef_rq_fd_b_read = {
 	}
 }
 
+# no map: the fund holds no shares, our own bonds are cleared, not held -- the engine compiles every H x K a caller
+# names (zz_ef_xch_deal for every T and K), these branches never run
+zz_ef_rq_fd_s_read = { set_variable = { name = zz_ef_rq_h value = 0 } }
+zz_ef_rq_ob_b_read = { set_variable = { name = zz_ef_rq_h value = 0 } }
+
 # Holder scope, in zz_ef_rq_interest_step after the interest is credited (zz_ef_rq_add's change var:zz_ef_rq_dlt, units of
 # scope:zz_ef_rq_d's money; var:zz_ef_rq_h holds the new total by then):
 # the CB's and the banks' foreign money is in the abroad account -- the interest in our money for its card

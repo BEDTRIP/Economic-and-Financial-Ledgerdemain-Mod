@@ -689,13 +689,14 @@ zz_ef_xch_post_sells_ob = {
 		save_temporary_scope_as = zz_ef_xch_d
 		zz_ef_xch_eval = { K = b }
 		zz_ef_xch_g_bk = yes
-		set_variable = { name = zz_ef_xo_s value = zz_ef_xch_ask_step_v }
+		# the banks' gain of holding the debt at home may put the ask over the book: then they offer at its top step (the
+		# offer is the policy, Д.R6.6; the unsold supply lowers the bonds' multiplier)
+		set_variable = { name = zz_ef_xo_s value = { value = zz_ef_xch_ask_step_v max = zz_ef_xq_top } }
 		set_variable = { name = zz_ef_xo_a value = { value = zz_ef_bank_gov_loan_v multiply = zz_ef_xch_ob_share } }
 		if = {
 			limit = {
 				var:zz_ef_xo_a > 0
 				var:zz_ef_xo_s >= 1
-				var:zz_ef_xo_s <= zz_ef_xq_top
 			}
 			zz_ef_xch_order_put = { T = ob K = b SIDE = s }
 		}
