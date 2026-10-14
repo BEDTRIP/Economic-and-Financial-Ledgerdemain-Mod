@@ -185,6 +185,9 @@ zz_ef_co_leak_back = {
 	}
 	else_if = {
 		limit = { var:zz_ef_t_lb_c < 0 }
-		zz_ef_co_take = { V = { value = var:zz_ef_t_lb_c multiply = -1 } }
+		# (a parameter is one token: a value block in it does not compile -- the sum goes in a variable)
+		set_variable = { name = zz_ef_t_lbn value = { value = var:zz_ef_t_lb_c multiply = -1 } }
+		zz_ef_co_take = { V = var:zz_ef_t_lbn }
+		remove_variable = zz_ef_t_lbn
 	}
 }
