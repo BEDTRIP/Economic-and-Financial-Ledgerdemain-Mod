@@ -463,6 +463,8 @@ zz_ef_pool_other_week = {
 	add = zz_ef_v_f_fd_out
 	subtract = zz_ef_v_f_fd_in
 	subtract = zz_ef_v_f_xch_pool
+	# the pops' banknotes brought into deposits / deposits drawn as banknotes (Д.R7.3)
+	subtract = zz_ef_v_w_cash_dep
 }
 # Unexplained change of M2 this week: the change minus the budget's lines
 # outside the accounts, minus the CB's net credit, plus the foreign bonds the
@@ -509,6 +511,8 @@ zz_ef_leak_week = {
 	add = zz_ef_v_f_cons_buy
 	# a loan to the government the pool could not pay -- the CB's credit to the banks, not the engine's (Д.R5.2)
 	subtract = zz_ef_v_f_gl_short
+	# the pops' banknotes into the pool and out of it -- ours (Д.R7.3)
+	subtract = zz_ef_v_w_cash_dep
 }
 # The treasury's change beyond the week's budget and the CB's profit: E&F's
 # scripted moves on the treasury -- the player's repayment of the CB's loan and
@@ -560,24 +564,47 @@ zz_ef_pop_start_savings = {
 	value = zz_ef_sav_norm
 	min = 0
 }
+# The pops' start (Д.R7.4, Д.R7.8): the savings' norm = banknotes + deposits + metal. The banknotes -- what the pops
+# want to hold (zz_ef_pop_cash_want_v, Д.R7.3), at most the savings less the metal (zz_ef_popm_start_money,
+# ld_metal_accounts_values.txt); the rest -- deposits. Against the deposits in the banks' book: the pool as it is (at
+# most zz_ef_dep_start_pool_share of it -- the rest is the banks' own capital), then the government's debt at home (the
+# banks' asset from the first step, ld_gov_loan.txt), then the start credit to the companies (zz_ef_bc_debt, by their
+# levels, Д.R6.9).
+zz_ef_pop_start_notes = {
+	value = zz_ef_pop_cash_want_v
+	max = {
+		value = zz_ef_pop_start_savings
+		subtract = zz_ef_popm_start_money
+		min = 0
+	}
+	min = 0
+}
 zz_ef_pop_start_deposits = {
 	value = zz_ef_pop_start_savings
-	# out of the pool as it is: at most zz_ef_dep_start_pool_share of it -- the rest is the banks' own capital (with the
-	# whole pool the capital starts at ~0 and the deposits' interest runs it negative)
+	subtract = zz_ef_popm_start_money
+	subtract = zz_ef_pop_start_notes
+	min = 0
+}
+# the share of the pool the pops' start deposits may take; the rest stays the banks' capital
+zz_ef_dep_start_pool_share = 0.9
+zz_ef_pop_start_dep_pool = {
+	value = zz_ef_pop_start_deposits
 	max = {
 		value = investment_pool
 		min = 0
 		multiply = zz_ef_dep_start_pool_share
 	}
 }
-# the share of the pool the pops' start deposits may take; the rest stays the banks' capital
-zz_ef_dep_start_pool_share = 0.9
-# the pops' start banknotes (Д.R8в.25): the savings' norm less the start deposits and the pops' start metal
-# (zz_ef_popm_start_money, ld_metal_accounts_values.txt)
-zz_ef_pop_start_notes = {
-	value = zz_ef_pop_start_savings
-	subtract = zz_ef_pop_start_deposits
-	subtract = zz_ef_popm_start_money
+zz_ef_pop_start_dep_gov = {
+	value = zz_ef_pop_start_deposits
+	subtract = zz_ef_pop_start_dep_pool
+	max = { value = zz_ef_gov_loan_home_v min = 0 }
+	min = 0
+}
+zz_ef_pop_start_dep_co = {
+	value = zz_ef_pop_start_deposits
+	subtract = zz_ef_pop_start_dep_pool
+	subtract = zz_ef_pop_start_dep_gov
 	min = 0
 }
 # ---- pops' deposits (the receiver) -------

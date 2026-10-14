@@ -342,6 +342,8 @@ zz_ef_money_model_step = {
 	zz_ef_money_window_roll = { F = inflow }
 	# the companies' dividends into the pops' deposits (Д.R6.8, ld_company_accounts.txt; monthly, summed till the roll)
 	zz_ef_money_window_roll = { F = co_div }
+	# the pops' banknotes <-> deposits (Д.R7.3, ld_pop_cash.txt)
+	zz_ef_money_window_roll = { F = cash_dep }
 	# the clearing's currency at the last receiver, for the abroad card
 	zz_ef_money_window_roll = { F = clr_cur_out }
 	zz_ef_money_window_roll = { F = clr_fx_in }
@@ -512,6 +514,8 @@ zz_ef_bridge_apply = {
 	# the line goes back to the pool as deposits of those who lost it (Д.R4б.33, ld_leak_back.txt)
 	zz_ef_leak_back_step = yes
 	zz_ef_pop_savings_step = yes
+	# the pops' banknotes <-> deposits to their target (Д.R7.3, ld_pop_cash.txt)
+	zz_ef_pop_cash_step = yes
 	# the user 8.10: the CB's start metal the same day as the start deposits (40% of M2 needs them) -- not a week
 	# later at the next step (it stays there too, for a CB that is not ready yet)
 	zz_ef_cb_metal_start_step = yes
@@ -614,13 +618,20 @@ zz_ef_money_window_roll = {
 zz_ef_pop_savings_step = {
 	if = {
 		limit = { NOT = { has_variable = zz_ef_pop_savings } }
-		# the pops' start savings are at their norm (zz_ef_pop_start_savings, Д.R8в.25): the deposits are the pool as it
-		# is (no money into it) -- at most 90% of the pool (the rest is the banks' capital), out of the banks' capital
-		# the first reconciliation set (the pool less the book); the pops' metal (zz_ef_metal_start_step) is part of
-		# the norm; the rest -- the banknotes (M0, var:zz_ef_notes), the CB's debt to them
+		# the pops' start savings are at their norm (zz_ef_pop_start_savings, Д.R8в.25): the banknotes as they want them
+		# (M0, var:zz_ef_notes, the CB's debt to them; Д.R7.3), the metal (zz_ef_metal_start_step), the rest --
+		# deposits (Д.R7.4, Д.R7.8). No money into the pool: the deposits' part the pool covers -- out of the banks'
+		# capital the first reconciliation set (the pool less the book); the part against the government's debt at home
+		# -- out of the capital its first step adds (ld_gov_loan.txt, either order); the rest -- the companies' start
+		# credit (the banks' asset zz_ef_bc_debt)
 		set_variable = { name = zz_ef_pop_deposits value = 0 }
-		set_variable = { name = zz_ef_t_dep0 value = zz_ef_pop_start_deposits }
+		set_variable = { name = zz_ef_t_dep0 value = zz_ef_pop_start_dep_pool }
+		change_variable = { name = zz_ef_t_dep0 add = zz_ef_pop_start_dep_gov }
 		zz_ef_post = { FROM = zz_ef_bank_capital TO = zz_ef_pop_deposits V = var:zz_ef_t_dep0 }
+		set_variable = { name = zz_ef_t_dep0 value = zz_ef_pop_start_dep_co }
+		if = { limit = { NOT = { has_variable = zz_ef_bc_debt } } set_variable = { name = zz_ef_bc_debt value = 0 } }
+		change_variable = { name = zz_ef_bc_debt add = var:zz_ef_t_dep0 }
+		change_variable = { name = zz_ef_pop_deposits add = var:zz_ef_t_dep0 }
 		remove_variable = zz_ef_t_dep0
 		set_variable = { name = zz_ef_notes value = zz_ef_pop_start_notes }
 		set_variable = {
@@ -638,7 +649,7 @@ zz_ef_pop_savings_step = {
 	# unexplained loss credited to the pops' savings as "levels sold", the treasury's event spending as savings, 10% a
 	# week of the savings over a norm written off "into wealth"; with the deposits = the engine's contributions there is
 	# nothing to drain, and an unexplained change is «прочее».
-	# cash <-> deposits by the cash norm -- _archive/ld_cash_norm/ (behaviour -- R7)
+	# cash <-> deposits -- zz_ef_pop_cash_step (ld_pop_cash.txt, Д.R7.3), after this step
 
 	set_variable = { name = zz_ef_f_dep_int value = zz_ef_dep_interest }
 	zz_ef_sw = { F = dep_int }

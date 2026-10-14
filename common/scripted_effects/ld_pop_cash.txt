@@ -1,0 +1,40 @@
+﻿# The pops' cash at hand against their deposits (R7.2; Д.R7.3; понятия «Доверие к деньгам», «Денежная масса»): the pops
+# keep a target of banknotes (zz_ef_pop_cash_target_v -- a share of GDP, more at a low trust in money and when deposits
+# earn less than inflation) and move zz_ef_pop_cash_move_share of the gap a week between the banknotes and the deposits.
+# The savings do not change: banknotes (var:zz_ef_notes, M0) <-> deposits (var:zz_ef_pop_deposits) and the pool with them
+# (the deposits are money in the banks). The step's move var:zz_ef_f_cash_dep (+ into the deposits) -- the window
+# zz_ef_v_w_cash_dep: out of the pool's «прочее» (zz_ef_pool_other_week) and the leak (zz_ef_leak_week), rows of the
+# cash and the deposits cards.
+
+# COUNTRY scope, at the receiver's step after the savings (zz_ef_pop_savings_step).
+zz_ef_pop_cash_step = {
+	set_variable = { name = zz_ef_f_cash_dep value = 0 }
+	if = {
+		limit = {
+			has_variable = zz_ef_pop_savings
+			has_variable = zz_ef_notes
+			has_variable = zz_ef_pop_deposits
+		}
+		# + -- deposits drawn into banknotes: at most the deposits and the pool; - -- banknotes brought in: at most them
+		set_variable = { name = zz_ef_t_cm value = zz_ef_pop_cash_move_v }
+		if = {
+			limit = { var:zz_ef_t_cm > 0 }
+			set_variable = {
+				name = zz_ef_t_cm
+				value = {
+					value = var:zz_ef_t_cm
+					max = { value = var:zz_ef_pop_deposits min = 0 }
+					max = { value = investment_pool min = 0 }
+				}
+			}
+		}
+		else = {
+			set_variable = { name = zz_ef_t_cm value = { value = var:zz_ef_t_cm min = { value = var:zz_ef_notes min = 0 multiply = -1 } } }
+		}
+		set_variable = { name = zz_ef_f_cash_dep value = { value = var:zz_ef_t_cm multiply = -1 } }
+		change_variable = { name = zz_ef_notes add = var:zz_ef_t_cm }
+		change_variable = { name = zz_ef_pop_deposits add = var:zz_ef_f_cash_dep }
+		zz_ef_eng_add_pool = { V = var:zz_ef_f_cash_dep }
+		remove_variable = zz_ef_t_cm
+	}
+}

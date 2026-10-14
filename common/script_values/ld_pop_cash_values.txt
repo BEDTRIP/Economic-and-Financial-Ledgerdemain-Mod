@@ -1,0 +1,47 @@
+﻿# The pops' cash at hand against their deposits (scripted_effects/ld_pop_cash.txt; Д.R7.3).
+# the target of banknotes, a share of GDP at the reference trust and deposits earning at least inflation (Д.R7.3: M0 ~ 15 %
+# of GDP; принято ночью)
+zz_ef_pop_cash_base = 0.15
+zz_ef_pop_cash_trust_ref = 0.8
+# the target's rise per point of trust under the reference (принято ночью)
+zz_ef_pop_cash_trust_k = 1
+# the target's rise when the deposit rate is under inflation (принято ночью)
+zz_ef_pop_cash_neg_real_add = 0.5
+# the share of the gap moved a week (Д.R7.3)
+zz_ef_pop_cash_move_share = 0.1
+
+# COUNTRY scope: the banknotes the pops want; the target -- at most their savings
+zz_ef_pop_cash_target_v = {
+	value = zz_ef_pop_cash_want_v
+	max = { value = zz_ef_pop_savings min = 0 }
+}
+zz_ef_pop_cash_want_v = {
+	value = gdp
+	min = 0
+	multiply = zz_ef_pop_cash_base
+	multiply = {
+		value = zz_ef_pop_cash_trust_ref
+		subtract = zz_ef_trust_v
+		multiply = zz_ef_pop_cash_trust_k
+		add = 1
+		min = 0
+	}
+	if = {
+		limit = { zz_ef_deposit_rate < zz_ef_inflation }
+		multiply = { value = 1 add = zz_ef_pop_cash_neg_real_add }
+	}
+}
+# the step's move into banknotes (+) or into deposits (-): the share of the gap a week x the weeks of the step
+zz_ef_pop_cash_move_v = {
+	value = zz_ef_pop_cash_target_v
+	subtract = zz_ef_pop_cash
+	multiply = {
+		value = zz_ef_pop_cash_move_share
+		multiply = zz_ef_step_weeks_v
+		max = 1
+	}
+}
+zz_ef_v_w_cash_dep = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_w_cash_dep } value = var:zz_ef_w_cash_dep }
+}
