@@ -61,9 +61,11 @@
 - Облигации ЦБ: `common/script_values/ld_cb_bond_issuance_values.txt` (множитель долга `zz_ef_cb_bond_output_shift`),
   `common/scripted_effects/ld_cb_bond_issuance.txt` (`zz_ef_cb_bond_issuance_update`: у страны с ЦБ метод «Банков»
   `pm_zz_ef_bank_bonds` — 5 на единицу рабочей силы, принято ночью; открыт законами ЦБ — без ЦБ владельцы его не
-  выбирают; на каждом «Банке» `zz_ef_cb_bond_issuance_low/_high` (`goods_output_bond_mult` ±0.01 за пункт) доводит
-  выпуск «Банков» до цели), `common/static_modifiers/ld_cb_bond_issuance.txt`; группа методов «Банка»
-  `pmg_zz_ef_bank_bonds` (`ld_bank_pmg.txt`, `ld_bank_pm.txt`).
+  выбирают; метод включается только в областях, где у «Банка» его нет: `activate_production_method` на активном методе
+  добавляет его в здание ещё раз, и выход считается по каждой копии; на каждом «Банке»
+  `zz_ef_cb_bond_issuance_low/_high` (`goods_output_bond_mult` ±0.01 за пункт) доводит выпуск «Банков» до цели),
+  `common/static_modifiers/ld_cb_bond_issuance.txt`; группа методов «Банка» `pmg_zz_ef_bank_bonds` (`ld_bank_pmg.txt`,
+  `ld_bank_pm.txt`).
 - Премия за риск: `common/script_values/ld_risk_premium_values.txt`, `common/scripted_effects/ld_risk_premium.txt`.
 - Закон «Центральный банк» (R3.2): группа `common/law_groups/ld_central_bank.txt` (`lawgroup_ld_central_bank`), законы
   `common/laws/ld_central_bank_laws.txt` (`law_ld_cb_state` / `_private` / `_none`, флаг `var:zz_ef_cb_kind` =

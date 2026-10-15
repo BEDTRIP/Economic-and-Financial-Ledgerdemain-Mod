@@ -25,7 +25,17 @@ zz_ef_cb_bond_issuance_update = {
 		else = {
 			set_variable = { name = zz_ef_cb_bond_shift value = 0 }
 		}
-		activate_production_method = { building_type = building_zz_ef_bank production_method = pm_zz_ef_bank_bonds }
+		# only where a Bank lacks it: activate_production_method on an active method adds it to the building again (the
+		# save's list grows a copy a month, and its output modifiers count every copy)
+		every_scope_state = {
+			limit = {
+				any_scope_building = {
+					is_building_type = building_zz_ef_bank
+					NOT = { has_active_production_method = pm_zz_ef_bank_bonds }
+				}
+			}
+			activate_production_method = { building_type = building_zz_ef_bank production_method = pm_zz_ef_bank_bonds }
+		}
 		if = {
 			limit = { zz_ef_cb_bond_banks_v > 0 }
 			set_variable = {
@@ -43,7 +53,15 @@ zz_ef_cb_bond_issuance_update = {
 	else_if = {
 		limit = { has_variable = zz_ef_cb_bond_shift }
 		remove_variable = zz_ef_cb_bond_shift
-		activate_production_method = { building_type = building_zz_ef_bank production_method = pm_zz_ef_bank_no_bonds }
+		every_scope_state = {
+			limit = {
+				any_scope_building = {
+					is_building_type = building_zz_ef_bank
+					has_active_production_method = pm_zz_ef_bank_bonds
+				}
+			}
+			activate_production_method = { building_type = building_zz_ef_bank production_method = pm_zz_ef_bank_no_bonds }
+		}
 	}
 	every_scope_building = {
 		limit = { is_building_type = building_zz_ef_bank }
