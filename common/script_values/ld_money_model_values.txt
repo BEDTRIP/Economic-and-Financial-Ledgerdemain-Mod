@@ -2352,8 +2352,11 @@ zz_ef_world_silver_orders = {
 	}
 }
 # the world's silver price in gold (zz_ef_silver_rate_update): the markets' ratio x (1 + elasticity x (the silver share of
-# the metal standards' money - its first month's)), within E&F's bounds
+# the metal standards' money - its first month's)), within E&F's bounds; the first month -- E&F's 15.5 : 1
+# (silver_to_gold_rate without the global variable): the start's metal is counted at it, and the markets' first week is
+# the start's noise (a building's input before the model's first step moves the silver price)
 zz_ef_silver_demand_elasticity = 1
+zz_ef_silver_to_gold_start = 0.06452
 zz_ef_silver_to_gold_world = {
 	value = zz_ef_silver_to_gold_market
 	if = {
@@ -2368,6 +2371,10 @@ zz_ef_silver_to_gold_world = {
 			add = 1
 			min = 0.2
 		}
+	}
+	if = {
+		limit = { NOT = { has_global_variable = zz_ef_s2g } }
+		value = zz_ef_silver_to_gold_start
 	}
 	max = 0.2
 	min = 0.01563

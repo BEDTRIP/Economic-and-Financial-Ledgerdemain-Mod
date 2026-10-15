@@ -374,7 +374,8 @@
 ## Вызовы и связи
 - Из модели вызываются другие подсистемы: `zz_ef_silver_rate_update` (мировая цена серебра к золоту раз в месяц:
   рыночная × (1 + `zz_ef_silver_demand_elasticity` × (доля серебра в деньгах металлических стандартов по M2 − её первый
-  месяц)), `zz_ef_silver_to_gold_world`, R8б.9), `zz_ef_reference_strength_step`, `zz_ef_currency_trade_step`,
+  месяц); первый месяц — 15,5 : 1 E&F, `zz_ef_silver_to_gold_start`: по нему считается стартовый металл, а рынок первой
+  недели — шум старта), `zz_ef_silver_to_gold_world`, R8б.9), `zz_ef_reference_strength_step`, `zz_ef_currency_trade_step`,
   `zz_ef_rate_policy_costs`, `zz_ef_mp_step`, `zz_ef_clr_step`, `zz_ef_nr_dep_step`, `zz_ef_consol_step`,
   `zz_ef_bond_ledger_step`, `zz_ef_cbfx_week_step` (клиринг, облигации, зона валюты, денежная политика).
 - Модель вызывается: `zz_ef_cur_intro` из `introduction_new_currency`
