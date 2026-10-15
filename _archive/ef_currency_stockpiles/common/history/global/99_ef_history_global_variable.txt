@@ -1,0 +1,321 @@
+# Cut from common/history/global/99_ef_history_global_variable.txt (R9б.5, piece 1): the 35 blocks that put a
+# country's own E&F currency stock into its CB state at the start (10 % of the circulation). Each block -- under
+# var:central_bank_location ?= { ... } of the country's history block; the line numbers are the old file's.
+# In the same file the start metal of the CB (gold_state_1 / silver_state_1) read the stock:
+#     add = var:stockpiling_<cur>_state_1
+# that read is now the same share inline: add = { value = owner.var:circulating_<cur>_c_var_1 multiply = 0.1 }
+
+# old lines 98-103: stockpiling_pound_sterling_state_1
+				change_variable = {
+					name = stockpiling_pound_sterling_state_1
+                    add  = {
+						value = owner.var:circulating_pound_sterling_c_var_1
+						multiply = 0.1					}
+				}
+
+# old lines 157-163: stockpiling_franc_french_franc_state_1
+				change_variable = {
+					name = stockpiling_franc_french_franc_state_1
+                    add  = {
+						value = owner.var:circulating_franc_french_franc_c_var_1
+						multiply = 0.1
+					}
+				}
+
+# old lines 209-215: stockpiling_dollar_united_states_dollar_state_1
+				change_variable = {
+					name = stockpiling_dollar_united_states_dollar_state_1
+                    add  = {
+						value = owner.var:circulating_dollar_united_states_dollar_c_var_1
+						multiply = 0.1
+					}
+				}
+
+# old lines 278-284: stockpiling_gulden_florin_state_1
+				change_variable = {
+					name = stockpiling_gulden_florin_state_1
+                    add  = {
+						value = owner.var:circulating_gulden_florin_c_var_1
+						multiply = 0.1
+					}
+				}
+
+# old lines 345-351: stockpiling_gulden_state_1
+				change_variable = {
+					name = stockpiling_gulden_state_1
+                    add  = {
+						value = owner.var:circulating_gulden_c_var_1
+						multiply = 0.1
+					}
+				}
+
+# old lines 395-401: stockpiling_spe_ruble_state_1
+				change_variable = {
+					name = stockpiling_spe_ruble_state_1
+                    add  = {
+						value = owner.var:circulating_spe_ruble_c_var_1
+						multiply = 0.25
+					}
+				}
+
+# old lines 445-451: stockpiling_thaler_prussian_thaler_state_1
+				change_variable = {
+					name = stockpiling_thaler_prussian_thaler_state_1
+                    add  = {
+						value = owner.var:circulating_thaler_prussian_thaler_c_var_1
+						multiply = 0.1
+					}
+				}
+
+# old lines 491-497: stockpiling_spe_yuan_state_1
+				change_variable = {
+					name = stockpiling_spe_yuan_state_1
+                    add  = {
+						value = owner.var:circulating_spe_yuan_c_var_1
+						multiply = 0.1
+					}
+				}
+
+# old lines 545-551: stockpiling_dollar_canadian_dollar_state_1
+                change_variable = {
+                    name = stockpiling_dollar_canadian_dollar_state_1
+                    add = {
+                        value = owner.var:circulating_dollar_canadian_dollar_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
+# old lines 594-600: stockpiling_dollar_canadian_dollar_state_1
+                change_variable = {
+                    name = stockpiling_dollar_canadian_dollar_state_1
+                    add = {
+                        value = owner.var:circulating_dollar_canadian_dollar_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
+# old lines 643-649: stockpiling_dollar_australian_dollar_state_1
+                change_variable = {
+                    name = stockpiling_dollar_australian_dollar_state_1
+                    add = {
+                        value = owner.var:circulating_dollar_australian_dollar_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
+# old lines 692-698: stockpiling_rupee_indian_rupee_state_1
+                change_variable = {
+                    name = stockpiling_rupee_indian_rupee_state_1
+                    add = {
+                        value = owner.var:circulating_rupee_indian_rupee_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
+# old lines 741-747: stockpiling_mark_finnish_markka_state_1
+                change_variable = {
+                    name = stockpiling_mark_finnish_markka_state_1
+                    add = {
+                        value = owner.var:circulating_mark_finnish_markka_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
+# old lines 790-796: stockpiling_rupee_indonesian_rupiah_state_1
+                change_variable = {
+                    name = stockpiling_rupee_indonesian_rupiah_state_1
+                    add = {
+                        value = owner.var:circulating_rupee_indonesian_rupiah_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
+# old lines 839-845: stockpiling_gulden_south_german_gulden_state_1
+                change_variable = {
+                    name = stockpiling_gulden_south_german_gulden_state_1
+                    add = {
+                        value = owner.var:circulating_gulden_south_german_gulden_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
+# old lines 888-894: stockpiling_thaler_hannoveraner_thaler_state_1
+                change_variable = {
+                    name = stockpiling_thaler_hannoveraner_thaler_state_1
+                    add = {
+                        value = owner.var:circulating_thaler_hannoveraner_thaler_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
+# old lines 937-943: stockpiling_thaler_saxon_thaler_state_1
+                change_variable = {
+                    name = stockpiling_thaler_saxon_thaler_state_1
+                    add = {
+                        value = owner.var:circulating_thaler_saxon_thaler_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
+# old lines 986-992: stockpiling_gulden_bavarian_gulden_state_1
+                change_variable = {
+                    name = stockpiling_gulden_bavarian_gulden_state_1
+                    add = {
+                        value = owner.var:circulating_gulden_bavarian_gulden_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
+# old lines 1035-1041: stockpiling_franc_swiss_franc_state_1
+                change_variable = {
+                    name = stockpiling_franc_swiss_franc_state_1
+                    add = {
+                        value = owner.var:circulating_franc_swiss_franc_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
+# old lines 1084-1090: stockpiling_franc_belgian_franc_state_1
+                change_variable = {
+                    name = stockpiling_franc_belgian_franc_state_1
+                    add = {
+                        value = owner.var:circulating_franc_belgian_franc_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
+# old lines 1133-1139: stockpiling_krone_danish_krone_state_1
+                change_variable = {
+                    name = stockpiling_krone_danish_krone_state_1
+                    add = {
+                        value = owner.var:circulating_krone_danish_krone_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
+# old lines 1182-1188: stockpiling_spe_drachma_state_1
+                change_variable = {
+                    name = stockpiling_spe_drachma_state_1
+                    add = {
+                        value = owner.var:circulating_spe_drachma_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
+# old lines 1231-1237: stockpiling_dinar_qiran_state_1
+                change_variable = {
+                    name = stockpiling_dinar_qiran_state_1
+                    add = {
+                        value = owner.var:circulating_dinar_qiran_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
+# old lines 1280-1286: stockpiling_real_state_1
+                change_variable = {
+                    name = stockpiling_real_state_1
+                    add = {
+                        value = owner.var:circulating_real_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
+# old lines 1329-1335: stockpiling_lira_toscane_lira_state_1
+                change_variable = {
+                    name = stockpiling_lira_toscane_lira_state_1
+                    add = {
+                        value = owner.var:circulating_lira_toscane_lira_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
+# old lines 1378-1384: stockpiling_lira_scudo_pontificio_state_1
+                change_variable = {
+                    name = stockpiling_lira_scudo_pontificio_state_1
+                    add = {
+                        value = owner.var:circulating_lira_scudo_pontificio_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
+# old lines 1427-1433: stockpiling_lira_scudo_sardo_state_1
+                change_variable = {
+                    name = stockpiling_lira_scudo_sardo_state_1
+                    add = {
+                        value = owner.var:circulating_lira_scudo_sardo_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
+# old lines 1476-1482: stockpiling_lira_ducato_state_1
+                change_variable = {
+                    name = stockpiling_lira_ducato_state_1
+                    add = {
+                        value = owner.var:circulating_lira_ducato_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
+# old lines 1525-1531: stockpiling_krone_swedish_krona_state_1
+                change_variable = {
+                    name = stockpiling_krone_swedish_krona_state_1
+                    add = {
+                        value = owner.var:circulating_krone_swedish_krona_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
+# old lines 1574-1580: stockpiling_peso_bolivien_peso_state_1
+                change_variable = {
+                    name = stockpiling_peso_bolivien_peso_state_1
+                    add = {
+                        value = owner.var:circulating_peso_bolivien_peso_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
+# old lines 1623-1629: stockpiling_peso_bolivien_peso_state_1
+                change_variable = {
+                    name = stockpiling_peso_bolivien_peso_state_1
+                    add = {
+                        value = owner.var:circulating_peso_bolivien_peso_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
+# old lines 1672-1678: stockpiling_real_brazilian_real_state_1
+                change_variable = {
+                    name = stockpiling_real_brazilian_real_state_1
+                    add = {
+                        value = owner.var:circulating_real_brazilian_real_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
+# old lines 1721-1727: stockpiling_peso_mexican_peso_state_1
+                change_variable = {
+                    name = stockpiling_peso_mexican_peso_state_1
+                    add = {
+                        value = owner.var:circulating_peso_mexican_peso_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
+# old lines 1770-1776: stockpiling_spe_peseta_state_1
+                change_variable = {
+                    name = stockpiling_spe_peseta_state_1
+                    add = {
+                        value = owner.var:circulating_spe_peseta_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
+# old lines 1819-1825: stockpiling_lira_ottoman_lira_state_1
+                change_variable = {
+                    name = stockpiling_lira_ottoman_lira_state_1
+                    add = {
+                        value = owner.var:circulating_lira_ottoman_lira_c_var_1
+                        multiply = 0.1
+                    }
+                }
+
