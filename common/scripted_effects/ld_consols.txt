@@ -13,7 +13,7 @@ zz_ef_consol_step = {
 	set_variable = { name = zz_ef_f_cons_sale value = zz_ef_consol_sale_week }
 	set_variable = { name = zz_ef_f_cons_int value = 0 }
 	set_variable = { name = zz_ef_f_cons_buy value = 0 }
-	# the sale: the engine already moved the money buyers -> CB building -> treasury; the claim is ours
+	# the sale: the engine already moved the money buyers -> the Banks; the claim is the treasury's
 	change_variable = { name = zz_ef_consol_debt add = var:zz_ef_f_cons_sale }
 	# payments only once pops' savings exist (the receiver opens them), so each has its other side
 	if = {

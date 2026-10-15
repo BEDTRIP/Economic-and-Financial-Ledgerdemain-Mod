@@ -384,7 +384,8 @@
   `localization/<язык>/replace/ld_money_supply_replace_l_<язык>.yml`, `ld_cb_rate_panel_*`, `ld_monetary_policy_*`;
   `gui/ld_money_hook.gui` — единственный GUI-узел модели (виджет `zz_ef_money_hook`, скрытый, на
   `GetGlobalList('zz_ef_hook_countries')`).
-- Металл ЦБ меняется только покупкой зданием ЦБ (`zz_ef_cb_metal_buy`): раздачи металла E&F из рынка нет.
+- Металл ЦБ меняется только покупкой денежной власти входом «Банков» страны (`zz_ef_metal_week_step`,
+  `ld_metal_accounts.txt`; Д.R4а.9): раздачи металла E&F из рынка нет.
 - Ручные операции E&F, меняющие счета мимо недельной записи (попадают в «прочее»/невязку `EFQ`):
   `global_monetary_reference_reset`, `transfer_gold_to_central_bank_metal_reserves`.
 

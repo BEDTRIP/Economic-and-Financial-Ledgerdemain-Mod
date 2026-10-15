@@ -260,7 +260,8 @@ zz_ef_money_model_step = {
 			set_variable = { name = zz_ef_f_cb_hume_m value = zz_ef_clr_hume_reserves_v }
 			change_variable = { name = zz_ef_f_cb_hume_m divide = zz_ef_cb_valuation }
 		}
-		# E&F's CB building stored metal since the last step (its monthly stockpiling), at the parity -- a line of the CB card
+		# the CB's reserves moved by its purchases, sales and the buy-back since the last step (zz_ef_metal_week_step), at
+		# the parity -- a line of the CB card
 		if = {
 			limit = { has_variable = zz_ef_cb_stock_acc }
 			set_variable = { name = zz_ef_f_cb_stock value = var:zz_ef_cb_stock_acc }
