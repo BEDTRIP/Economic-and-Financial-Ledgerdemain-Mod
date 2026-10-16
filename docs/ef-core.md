@@ -98,8 +98,6 @@
   `zz_ef_reinvestment_defines.txt` (`REINVESTMENT_SUBSISTENCE_FRACTION_REDUCTION=0`,
   `OWNER_COMPANY_PRIVATIZATION_CHANCE_MULTIPLIER=0.4`), `zzzz_ef_credit_def.txt` (`COUNTRY_MIN_CREDIT_SCALED=1.7`),
   `PSC_defines.txt`.
-- `common/game_rules/00_EF_unique_companies_game_rules.txt` — `TRY_REPLACE` ванильных правил
-  `unique_companies_banks`/`_newspapers`: по умолчанию `*_disabled`.
 
 ## Поток / порядок
 Расчёт — по пульсам (см. `entry-points`): `ef_on_*_pulse_country` зовёт эффекты из `00_on_action_main.txt`, а те —

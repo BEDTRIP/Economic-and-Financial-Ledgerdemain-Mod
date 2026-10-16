@@ -23,8 +23,6 @@
   `company_basic_gold_and_silver_mining_2`, `company_basic_gold_mining_rus`, `company_basic_silver_mining_mex`);
   `replaces_company` — подмена старых ключей; `building_types` — `building_zz_ef_bank` (98 раз,
   `common/buildings/ld_bank.txt`) или `building_financial_centre_<код>`.
-- `common/game_rules/00_EF_unique_companies_game_rules.txt` — правила
-  `unique_companies_banks`/`unique_companies_newspapers` (по умолчанию `*_disabled`, флаги).
 - `common/script_values/01_economic_company_value.txt` — НЕ биржа, а частные банки: `total_bank_funds`,
   `private_bank_*_reserve*` (фонды банков E&F — в `_archive/ef_bank_funds/`). Подсистема банков; здесь — только связь.
 - `common/scripted_effects/ld_listing.txt` — `zz_ef_listing_update` (месячный перевод ШК в «публичные/частные»),
