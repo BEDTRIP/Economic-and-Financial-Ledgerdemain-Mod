@@ -1,0 +1,59 @@
+﻿namespace = ld_probe_rhq
+
+# Probe R9а.1 (a company's presence abroad): run once from the console ("event ld_probe_rhq.1", any played country);
+# to _archive/ld_probe_rhq/ after the run. Logged EFP|... -- what exists after each try; the save shows the rest.
+#   1. a «Bank» in Paris owned by Rothschild of Britain (create_building, a company of another country);
+#   2. a regional headquarters of that company in Paris (create_building of building_company_regional_headquarter);
+ld_probe_rhq.1 = {
+	type = country_event
+	hidden = yes
+	immediate = {
+		if = {
+			limit = {
+				exists = c:GBR
+				c:GBR = { has_company = company_type:company_Rothschild_Bank_gbr }
+				exists = c:FRA
+			}
+			s:STATE_ILE_DE_FRANCE.region_state:FRA = {
+				create_building = {
+					building = building_zz_ef_bank
+					reserves = 0
+					add_ownership = {
+						company = {
+							type = company_Rothschild_Bank_gbr
+							country = c:GBR
+							levels = 3
+						}
+					}
+				}
+				debug_log = "EFP|[TimeKeeper.GetCurrentDate.GetString]|rhq|bank_in_paris|levels [THIS.GetState.MakeScope.ScriptValue('zz_ef_bank_levels')|0]"
+				create_building = {
+					building = building_company_regional_headquarter
+					add_ownership = {
+						company = {
+							type = company_Rothschild_Bank_gbr
+							country = c:GBR
+							levels = 1
+						}
+					}
+				}
+				if = {
+					limit = { any_scope_building = { is_building_type = building_company_regional_headquarter } }
+					debug_log = "EFP|[TimeKeeper.GetCurrentDate.GetString]|rhq|regional_hq_in_paris|yes"
+				}
+				else = {
+					debug_log = "EFP|[TimeKeeper.GetCurrentDate.GetString]|rhq|regional_hq_in_paris|no"
+				}
+			}
+			c:GBR.company:company_Rothschild_Bank_gbr = {
+				if = {
+					limit = { any_scope_regional_hqs = { level >= 1 } }
+					debug_log = "EFP|[TimeKeeper.GetCurrentDate.GetString]|rhq|company_regional_hqs|yes"
+				}
+				else = {
+					debug_log = "EFP|[TimeKeeper.GetCurrentDate.GetString]|rhq|company_regional_hqs|no"
+				}
+			}
+		}
+	}
+}
