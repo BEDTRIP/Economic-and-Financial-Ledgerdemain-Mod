@@ -79,7 +79,9 @@
 - `common/on_actions/ld_pb_overbuild_counter.txt` — месячный счётчик перестройки (`zz_pb_ef_overbuild_counter`).
 - `common/on_actions/ld_pb_ai_sector_downsize.txt` + `common/scripted_effects/ld_pb_ai_sector_downsize_effects.txt` — ИИ
   сносит по уровню (`zz_pb_ef_css_downsize_one`); выкуп частных уровней — проводка казна → пул, получатель — вклады
-  населения (`zz_ef_post_eng`, `CLAIM = zz_ef_pop_deposits`).
+  населения (`zz_ef_post_eng`, `CLAIM = zz_ef_pop_deposits`); методы нового здания (каркас, ликвидность) включаются
+  только если их нет — `activate_production_method` на активном методе добавляет зданию его копию, и выход считается по
+  каждой.
 - `common/static_modifiers/ld_pb_overbuild_modifiers.txt` — `zz_pb_ef_overbuilt_economy`
   (`building_construction_sector_throughput_add`); `common/messages/ld_pb_overbuild_messages.txt` —
   `zz_pb_ef_overbuild_rising`.
