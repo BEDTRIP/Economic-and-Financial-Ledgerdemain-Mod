@@ -116,7 +116,8 @@
    `zz_ef_cb_rule_stability` (дефолт, радикалы, легитимность, война, грамотность + `zz_ef_risk_fx` + `zz_ef_risk_debt` +
    `zz_ef_risk_deficit`), 0..8 пп; не входит в ставку ЦБ.
 7. Месяц, `update_modifiers_bc_fc_ns` (все страны) → `zz_ef_cb_mint_update` (чеканка) и, у стран с ЦБ,
-   `zz_ef_cb_bond_issuance_update`: метод облигаций «Банков», множитель долга `var:zz_ef_cb_bond_shift` (долг% /
+   `zz_ef_cb_bond_issuance_update`: метод облигаций — только у «Банка» компании-ЦБ (`var:zz_ef_cb_bank_state`, Д.R9б.12;
+   нет компании-ЦБ — облигаций нет), множитель долга `var:zz_ef_cb_bond_shift` (долг% /
    `zz_ef_cb_bond_reference_debt_pct` = 50, 0..3×), пункты `var:zz_ef_cb_bond_pts` = (цель / выпуск «Банков» − 1) × 100
    — `zz_ef_cb_bond_issuance_low/_high` на каждом «Банке».
 

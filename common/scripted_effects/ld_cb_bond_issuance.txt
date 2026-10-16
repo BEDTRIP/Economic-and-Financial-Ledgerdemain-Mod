@@ -4,7 +4,8 @@
 # debt's factor (zz_ef_cb_bond_target_v, ld_cb_size_values.txt; the factor -- ld_cb_bond_issuance_values.txt).
 #
 # Called once a month per country (update_modifiers_bc_fc_ns, 00_on_action_main.txt). COUNTRY scope.
-#   * a country with its CB: the Banks' method with bonds (pm_zz_ef_bank_bonds, unlocked by the CB laws); their output
+#   * a country with its CB: the method with bonds (pm_zz_ef_bank_bonds, unlocked by the CB laws) -- the CB company's
+#     own Bank only (var:zz_ef_cb_bank_state; Д.R9б.12), no CB company -- no bonds; its output
 #     (its goods_output_bond_add over their workforce) is brought to the issue by goods_output_bond_mult on every Bank --
 #     zz_ef_cb_bond_issuance_low / _high, a point is 1 % (var:zz_ef_cb_bond_pts);
 #   * without a CB: the method without bonds, no modifiers.
@@ -25,16 +26,37 @@ zz_ef_cb_bond_issuance_update = {
 		else = {
 			set_variable = { name = zz_ef_cb_bond_shift value = 0 }
 		}
-		# only where a Bank lacks it: activate_production_method on an active method adds it to the building again (the
-		# save's list grows a copy a month, and its output modifiers count every copy)
+		# the bonds -- only the CB company's own Bank (var:zz_ef_cb_bank_state, ld_bank_seed.txt; Д.R9б.12, Д.R9б.14: the
+		# script cannot see who owns the most levels of a building, the CB company's Bank is its own); the others -- none.
+		# Only where a Bank lacks the method: activate_production_method on an active method adds it to the building
+		# again (the save's list grows a copy a month, and its output modifiers count every copy)
 		every_scope_state = {
 			limit = {
+				OR = {
+					NOT = { exists = owner.var:zz_ef_cb_bank_state }
+					NOT = { owner.var:zz_ef_cb_bank_state = this }
+				}
 				any_scope_building = {
 					is_building_type = building_zz_ef_bank
-					NOT = { has_active_production_method = pm_zz_ef_bank_bonds }
+					has_active_production_method = pm_zz_ef_bank_bonds
 				}
 			}
-			activate_production_method = { building_type = building_zz_ef_bank production_method = pm_zz_ef_bank_bonds }
+			activate_production_method = { building_type = building_zz_ef_bank production_method = pm_zz_ef_bank_no_bonds }
+		}
+		if = {
+			limit = { exists = var:zz_ef_cb_bank_state }
+			var:zz_ef_cb_bank_state = {
+				if = {
+					limit = {
+						owner = prev
+						any_scope_building = {
+							is_building_type = building_zz_ef_bank
+							NOT = { has_active_production_method = pm_zz_ef_bank_bonds }
+						}
+					}
+					activate_production_method = { building_type = building_zz_ef_bank production_method = pm_zz_ef_bank_bonds }
+				}
+			}
 		}
 		if = {
 			limit = { zz_ef_cb_bond_banks_v > 0 }
