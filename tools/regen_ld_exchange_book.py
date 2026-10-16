@@ -14,7 +14,7 @@
   крайнего шага, исполненная по цене расчёта), `_fs` / `_fb` (доля остатка, которую взял / отдал фонд), `_is` / `_ib`
   (доля остатка после фонда, которую взял / отдал ЦБ-эмитент в своих валютных точках, Д.R8б.34); `_ls` / `_lb` / `_lc`
   — остаток по справедливой цене и ниже / и выше / по цене покупки фонда и ниже, `_xs` / `_xb` — доля остатка, сведённая
-  фондами с другими биржами, `_xf` — доля дешёвого остатка, которую выкупил фонд другой биржи (Д.R8б.36).
+  фондами с другими биржами, `_xl` — её часть со связанными биржами без второй комиссии (Д.R9а.9), `_xf` — доля дешёвого остатка, которую выкупил фонд другой биржи (Д.R8б.36).
 Заявки держателя (на его стране): `zz_ef_xa_<держатель>_<вид>` — объём, `zz_ef_xp_<держатель>_<вид>` — шаг (продажа —
 1..STEPS, покупка — 10 + шаг).
 """
@@ -31,10 +31,10 @@ MID = 5
 # (holder, kind) pairs that post orders: the maps of the register of claims (ld_claims.txt); s -- the companies' shares
 # (co -- the shares a company offers at its IPO, ld_company_shares.txt; ob -- the banks' part of our own debt, Д.R6.6)
 ORDERS = (("cb", "m"), ("bk", "m"), ("pp", "m"), ("tr", "b"), ("bk", "b"), ("pp", "s"), ("bk", "s"), ("co", "s"), ("ob", "b"))
-RESULTS = ("c", "ps", "pb", "fs", "fb", "is", "ib", "ls", "lb", "lc", "xs", "xb", "xf")
+RESULTS = ("c", "ps", "pb", "fs", "fb", "is", "ib", "ls", "lb", "lc", "xs", "xb", "xl", "xf")
 # results no code writes: shares trade on their own exchange only (no cross, ld_company_shares.txt), the fund of another
 # exchange buys up cheap money only (Д.R8б.36) -- their readers give 0, the maps are not cleared
-UNSET = {"zz_ef_xr_s_xs", "zz_ef_xr_s_xb", "zz_ef_xr_s_xf", "zz_ef_xr_b_xf"}
+UNSET = {"zz_ef_xr_s_xs", "zz_ef_xr_s_xb", "zz_ef_xr_s_xl", "zz_ef_xr_s_xf", "zz_ef_xr_b_xf"}
 # the clearing's tie-break: the step closer to the fair price first
 ORDER_OF_STEPS = sorted(range(1, STEPS + 1), key=lambda i: (abs(i - MID), i))
 

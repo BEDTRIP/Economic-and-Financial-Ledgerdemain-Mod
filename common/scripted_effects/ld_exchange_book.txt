@@ -215,6 +215,13 @@ zz_ef_xr_m_xb_read = {
 		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_xr_m_xb|scope:zz_ef_rq_key)" }
 	}
 }
+zz_ef_xr_m_xl_read = {
+	set_variable = { name = zz_ef_rq_h value = 0 }
+	if = {
+		limit = { is_key_in_variable_map = { name = zz_ef_xr_m_xl target = scope:zz_ef_rq_key } }
+		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_xr_m_xl|scope:zz_ef_rq_key)" }
+	}
+}
 zz_ef_xr_m_xf_read = {
 	set_variable = { name = zz_ef_rq_h value = 0 }
 	if = {
@@ -432,6 +439,13 @@ zz_ef_xr_b_xb_read = {
 		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_xr_b_xb|scope:zz_ef_rq_key)" }
 	}
 }
+zz_ef_xr_b_xl_read = {
+	set_variable = { name = zz_ef_rq_h value = 0 }
+	if = {
+		limit = { is_key_in_variable_map = { name = zz_ef_xr_b_xl target = scope:zz_ef_rq_key } }
+		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_xr_b_xl|scope:zz_ef_rq_key)" }
+	}
+}
 zz_ef_xr_b_xf_read = { set_variable = { name = zz_ef_rq_h value = 0 } }
 zz_ef_xs_s_1_read = {
 	set_variable = { name = zz_ef_rq_h value = 0 }
@@ -631,6 +645,7 @@ zz_ef_xr_s_lc_read = {
 }
 zz_ef_xr_s_xs_read = { set_variable = { name = zz_ef_rq_h value = 0 } }
 zz_ef_xr_s_xb_read = { set_variable = { name = zz_ef_rq_h value = 0 } }
+zz_ef_xr_s_xl_read = { set_variable = { name = zz_ef_rq_h value = 0 } }
 zz_ef_xr_s_xf_read = { set_variable = { name = zz_ef_rq_h value = 0 } }
 zz_ef_xa_cb_m_read = {
 	set_variable = { name = zz_ef_rq_h value = 0 }
@@ -1872,6 +1887,7 @@ zz_ef_xch_results_empty = {
 	clear_variable_map = zz_ef_xr_m_lc
 	clear_variable_map = zz_ef_xr_m_xs
 	clear_variable_map = zz_ef_xr_m_xb
+	clear_variable_map = zz_ef_xr_m_xl
 	clear_variable_map = zz_ef_xr_m_xf
 	clear_variable_map = zz_ef_xr_b_c
 	clear_variable_map = zz_ef_xr_b_ps
@@ -1885,6 +1901,7 @@ zz_ef_xch_results_empty = {
 	clear_variable_map = zz_ef_xr_b_lc
 	clear_variable_map = zz_ef_xr_b_xs
 	clear_variable_map = zz_ef_xr_b_xb
+	clear_variable_map = zz_ef_xr_b_xl
 	clear_variable_map = zz_ef_xr_s_c
 	clear_variable_map = zz_ef_xr_s_ps
 	clear_variable_map = zz_ef_xr_s_pb

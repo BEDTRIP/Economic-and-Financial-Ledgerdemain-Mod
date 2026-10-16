@@ -543,6 +543,24 @@ zz_ef_xw_cross_v = {
 	value = 0
 	if = { limit = { has_global_variable = zz_ef_xw_cross } value = global_var:zz_ef_xw_cross }
 }
+# matched between the linked exchanges first, in gold (Д.R9а.9)
+zz_ef_xw_link_v = {
+	value = 0
+	if = { limit = { has_global_variable = zz_ef_xw_link } value = global_var:zz_ef_xw_link }
+}
+zz_ef_xl_h_v = { value = var:zz_ef_xl_h }
+# COUNTRY scope (a company's): the integration of its books (Д.R9а.9, принято ночью) -- the share of the company's
+# capital a week's link between its exchanges carries: zz_ef_xl_integ_base, with the electric telegraph --
+# zz_ef_xl_integ_telegraph
+zz_ef_xl_integ_base = 0.5
+zz_ef_xl_integ_telegraph = 1
+zz_ef_xl_integ_v = {
+	value = zz_ef_xl_integ_base
+	if = {
+		limit = { has_technology_researched = electric_telegraph }
+		value = zz_ef_xl_integ_telegraph
+	}
+}
 zz_ef_xw_fund_buy_v = {
 	value = 0
 	if = { limit = { has_global_variable = zz_ef_xw_fund_buy } value = global_var:zz_ef_xw_fund_buy }
