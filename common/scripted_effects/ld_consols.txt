@@ -31,6 +31,7 @@ zz_ef_consol_step = {
 		if = {
 			limit = { var:zz_ef_f_cons_co > 0 }
 			var:zz_ef_cb_co = {
+				if = { limit = { NOT = { has_variable = zz_ef_co_acc } } set_variable = { name = zz_ef_co_acc value = 0 } }
 				change_variable = { name = zz_ef_co_acc subtract = prev.var:zz_ef_f_cons_co }
 				if = { limit = { NOT = { has_variable = zz_ef_co_out } } set_variable = { name = zz_ef_co_out value = 0 } }
 				change_variable = { name = zz_ef_co_out add = prev.var:zz_ef_f_cons_co }
