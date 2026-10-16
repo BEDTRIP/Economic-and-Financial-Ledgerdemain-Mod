@@ -1,7 +1,7 @@
 """Stage 1 (5.10, В1.6): do the money model's flows with the world add up?  eflog.txt of a run -> a monthly table.
 
 The user's goal for stage 1: every operation converges -- between the accounts and between the countries; money and
-metal neither appear nor vanish. This reads the money model's log lines (tools/run_vic3_sandbox.ps1 -> eflog.txt):
+metal neither appear nor vanish. This reads the money model's log lines (vic3_tools bridge/game/run_vic3_sandbox.ps1 with tools/vic3_hooks.ps1 -> eflog.txt):
 
   EFR (weekly; 5.10 -- only the ~9 countries the model logs, not the whole world: the sums below are theirs, a
       world check needs a world line from the model -- stage 1, В1.6): ext_net -- the week's net flow with the rest of the world, hume -- metal through the

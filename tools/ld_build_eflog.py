@@ -1,4 +1,4 @@
-"""Rebuild <run>/eflog.txt from the run's debug parts (as Close-And-Collect of tools/vic3_ui_lib.ps1 does).
+"""Rebuild <run>/eflog.txt from the run's debug parts (as Close-And-Collect of vic3_tools bridge/game/vic3_ui_lib.ps1 does).
 
 Usage:  py tools/ld_build_eflog.py <run>
 
