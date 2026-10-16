@@ -554,6 +554,11 @@ zz_ef_bank_seed_state = {
 			zz_ef_bank_seed_company = { COMPANY = company_BancoDeChile }
 		}
 		if = {
+			limit = { owner = { has_variable = zz_ef_bank_nocomp has_company = company_type:company_baring_brothers } }
+			owner = { remove_variable = zz_ef_bank_nocomp }
+			zz_ef_bank_seed_company = { COMPANY = company_baring_brothers }
+		}
+		if = {
 			limit = { owner = { has_variable = zz_ef_bank_nocomp } }
 			owner = { remove_variable = zz_ef_bank_nocomp }
 			zz_ef_bank_seed_state_owned = yes
@@ -2157,6 +2162,15 @@ zz_ef_bank_company_seed = {
 			owner = { set_variable = { name = zz_ef_cb_bank_state value = prev } }
 		}
 	}
+	else_if = {
+		limit = { has_company = company_type:company_baring_brothers }
+		set_variable = { name = zz_ef_cb_co value = company:company_baring_brothers }
+		set_variable = zz_ef_bkc_cb_company_baring_brothers
+		capital = {
+			zz_ef_bank_company_build = { COMPANY = company_baring_brothers }
+			owner = { set_variable = { name = zz_ef_cb_bank_state value = prev } }
+		}
+	}
 	if = {
 		limit = { has_company = company_type:company_BancoNacionArgentina }
 		if = {
@@ -3095,6 +3109,16 @@ zz_ef_bank_company_seed = {
 		}
 		else = {
 			zz_ef_bank_company_state = { COMPANY = company_BancoDeChile }
+		}
+	}
+	if = {
+		limit = { has_company = company_type:company_baring_brothers }
+		if = {
+			limit = { has_variable = zz_ef_bkc_cb_company_baring_brothers }
+			remove_variable = zz_ef_bkc_cb_company_baring_brothers
+		}
+		else = {
+			zz_ef_bank_company_state = { COMPANY = company_baring_brothers }
 		}
 	}
 	# presence (Д.R9а.5): company_Rothschild_Bank_gbr of GBR in STATE_ILE_DE_FRANCE, if no "Bank" of the country took it already

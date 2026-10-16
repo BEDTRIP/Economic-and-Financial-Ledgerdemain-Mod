@@ -318,6 +318,8 @@ BUILDINGS = {
 			add_company = company_type:company_NationalWestminsterBank
 			if = { limit = { not = { has_company = company_type:company_RoyalBankOfScotland } } add_company = company_type:company_RoyalBankOfScotland }
 			if = { limit = { not = { has_company = company_type:company_Rothschild_Bank_gbr } } add_company = company_type:company_Rothschild_Bank_gbr }
+			# Baring Brothers (Д.R9а.1): the fork's own special fund company
+			if = { limit = { not = { has_company = company_type:company_baring_brothers } } add_company = company_type:company_baring_brothers }
 			add_company = company_type:company_basic_gold_and_silver_mining_2
 
 			company:company_BankofEngland = {
@@ -341,6 +343,10 @@ BUILDINGS = {
 				set_company_state_region = s:STATE_LOWLANDS
 			}
 			company:company_Rothschild_Bank_gbr = {
+				set_company_establishment_date = 1830.1.1
+				set_company_state_region = s:STATE_HOME_COUNTIES
+			}
+			company:company_baring_brothers = {
 				set_company_establishment_date = 1830.1.1
 				set_company_state_region = s:STATE_HOME_COUNTIES
 			}

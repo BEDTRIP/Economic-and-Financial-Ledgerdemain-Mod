@@ -24,7 +24,7 @@ How (once per market, by its owner, in the owner's first monthly pulse):
     refused ("Failed to read key reference", run r1005_201105), and the state's region would take a dispatcher of
     ~700 regions x 98 companies x the ladder.
 Reads the fork: the bank companies are the ones of common/company_types/00_ef_companies.txt that list
-building_zz_ef_bank (the 94).
+building_zz_ef_bank (the 94 of E&F and the fork's).
 Logged per state: EFK|date|country|state|want N|tc T|built B.
 
 Usage:
@@ -45,6 +45,7 @@ import ld_gen  # noqa: E402
 
 OUT = "common/scripted_effects/zz_ef_bank_seed.txt"      # путь хотфикса; ld_gen пишет в форк ld_bank_seed.txt
 COMPANIES = os.path.join(ld_gen.FORK, "common", "company_types", "00_ef_companies.txt")
+COMPANIES_LD = os.path.join(ld_gen.FORK, "common", "company_types", "ld_companies.txt")   # the fork's own
 
 BANKS = [
     "company_BancoNacionArgentina",
@@ -141,6 +142,7 @@ BANKS = [
     "company_BancoCommercialDoBrasil",
     "company_BancoHipotecarioNacional",
     "company_BancoDeChile",
+    "company_baring_brothers",
 ]
 
 # Д.R9б.6, Д.R4а.10: the central banks among the bank companies -- the country's CB company is the first of these it
@@ -184,14 +186,14 @@ HEADER = """\
 def banks() -> list[str]:
     """BANKS (the order is the seed's: the first company the owner has gets the bank), checked against the fork's
     00_ef_companies.txt: exactly its companies that list building_zz_ef_bank."""
-    s = open(COMPANIES, encoding="utf-8-sig").read()
+    s = open(COMPANIES, encoding="utf-8-sig").read() + "\n" + open(COMPANIES_LD, encoding="utf-8-sig").read()
     found = set()
     for m in re.finditer(r"(?m)^(\w+)\s*=\s*\{", s):
         nxt = re.search(r"(?m)^\S", s[m.end():])
         body = s[m.end(): m.end() + nxt.start()] if nxt else s[m.end():]
         if re.search(r"(?m)^\s*building_zz_ef_bank\b", body):
             found.add(m.group(1))
-    assert found == set(BANKS) and len(BANKS) == 94, (found ^ set(BANKS))
+    assert found == set(BANKS) and len(BANKS) == 95, (found ^ set(BANKS))
     return BANKS
 
 
