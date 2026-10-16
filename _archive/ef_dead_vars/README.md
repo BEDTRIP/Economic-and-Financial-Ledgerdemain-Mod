@@ -25,8 +25,11 @@
   `release_<good>_var_1` нацзапаса — его нет) и строка-комментарий с тем же; ключи сообщений
   `notification_your_currency_are_{buy,sell}_message*` (`01_ef_notification_localization_l_*.yml`).
 
-**Оставлены:** `zz_ef_cb_kind` (прочтёт R4); `com_topbar_second_line`, `com_topbar_items` (общая верхняя панель
+**Оставлены:** `com_topbar_second_line`, `com_topbar_items` (общая верхняя панель
 сообщества — читает чужой GUI); `national_production` (PSC); `japan_emperor_restored`, `japan_restoration_complete`
 (переменные ванильного журнала Японии); `XXXX` — только в закомментированном GUI.
+
+**Снято позже (R9б.19):** `zz_ef_cb_kind` — писали законы ЦБ (`ld_central_bank_laws.txt`, `on_activate`),
+не читал никто: вид ЦБ везде читается законом (`has_law = law_type:law_ld_cb_*`).
 
 **Вернуть:** записи — на прежние места (в файлах архива — по порядку файлов); строки GUI и локализации — по списку.

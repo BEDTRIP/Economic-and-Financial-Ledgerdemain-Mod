@@ -4002,17 +4002,6 @@ gold_loaned_to_central_bank = {
 	add = ai_central_bank_gold_loaned_10
 
 
-	add = ai_central_bank_debt_privat_bank_gold_loaned_1
-	add = ai_central_bank_debt_privat_bank_gold_loaned_2
-	add = ai_central_bank_debt_privat_bank_gold_loaned_3
-	add = ai_central_bank_debt_privat_bank_gold_loaned_4
-	add = ai_central_bank_debt_privat_bank_gold_loaned_5
-	add = ai_central_bank_debt_privat_bank_gold_loaned_6
-	add = ai_central_bank_debt_privat_bank_gold_loaned_7
-	add = ai_central_bank_debt_privat_bank_gold_loaned_8
-	add = ai_central_bank_debt_privat_bank_gold_loaned_9
-	add = ai_central_bank_debt_privat_bank_gold_loaned_10
-
 	#max = total_debt
 }
 central_bank_interest_refund_per_year = {
@@ -4029,17 +4018,6 @@ central_bank_interest_refund_per_year = {
 	add = ai_central_bank_interest_refund_per_year_9
 	add = ai_central_bank_interest_refund_per_year_10
 
-	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_1
-	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_2
-	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_3
-	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_4
-	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_5
-	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_6
-	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_7
-	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_8
-	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_9
-	add = ai_entral_bank_debt_privat_bank_interest_refund_per_year_10
-
 	#player oublié
 }
 gold_loaned_to_central_bank_no_interest = { #for gui only
@@ -4055,17 +4033,6 @@ gold_loaned_to_central_bank_no_interest = { #for gui only
 	add = ai_central_bank_gold_loaned_8
 	add = ai_central_bank_gold_loaned_9
 	add = ai_central_bank_gold_loaned_10
-
-	add = ai_central_bank_debt_privat_bank_gold_loaned_1
-	add = ai_central_bank_debt_privat_bank_gold_loaned_2
-	add = ai_central_bank_debt_privat_bank_gold_loaned_3
-	add = ai_central_bank_debt_privat_bank_gold_loaned_4
-	add = ai_central_bank_debt_privat_bank_gold_loaned_5
-	add = ai_central_bank_debt_privat_bank_gold_loaned_6
-	add = ai_central_bank_debt_privat_bank_gold_loaned_7
-	add = ai_central_bank_debt_privat_bank_gold_loaned_8
-	add = ai_central_bank_debt_privat_bank_gold_loaned_9
-	add = ai_central_bank_debt_privat_bank_gold_loaned_10
 
 	#player oublié
 }
@@ -4315,129 +4282,8 @@ ai_central_bank_interest_refund_per_year_10 = {
 }
 
 
-#private bank gold
-ai_central_bank_debt_privat_bank_gold_loaned_1 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_1
-		add = owner.var:ai_privat_bank_bond_value_1
-	}
-}
-ai_central_bank_debt_privat_bank_gold_loaned_2 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_2
-		add = owner.var:ai_privat_bank_bond_value_2
-	}
-}
-ai_central_bank_debt_privat_bank_gold_loaned_3 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_3
-		add = owner.var:ai_privat_bank_bond_value_3
-	}
-}
-ai_central_bank_debt_privat_bank_gold_loaned_4 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_4
-		add = owner.var:ai_privat_bank_bond_value_4
-	}
-}
-ai_central_bank_debt_privat_bank_gold_loaned_5 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_5
-		add = owner.var:ai_privat_bank_bond_value_5
-	}
-}
-ai_central_bank_debt_privat_bank_gold_loaned_6 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_6
-		add = owner.var:ai_privat_bank_bond_value_6
-	}
-}
-ai_central_bank_debt_privat_bank_gold_loaned_7 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_7
-		add = owner.var:ai_privat_bank_bond_value_7
-	}
-}
-ai_central_bank_debt_privat_bank_gold_loaned_8 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_8
-		add = owner.var:ai_privat_bank_bond_value_8
-	}
-}
-ai_central_bank_debt_privat_bank_gold_loaned_9 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_9
-		add = owner.var:ai_privat_bank_bond_value_9
-	}
-}
-ai_central_bank_debt_privat_bank_gold_loaned_10 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_10
-		add = owner.var:ai_privat_bank_bond_value_10
-	}
-}
 
 
-ai_entral_bank_debt_privat_bank_interest_refund_per_year_1 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_1
-		add = owner.var:ai_privat_bank_interest_calculated_1
-	}
-}
-ai_entral_bank_debt_privat_bank_interest_refund_per_year_2 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_2
-		add = owner.var:ai_privat_bank_interest_calculated_2
-	}
-}
-ai_entral_bank_debt_privat_bank_interest_refund_per_year_3 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_3
-		add = owner.var:ai_privat_bank_interest_calculated_3
-	}
-}
-ai_entral_bank_debt_privat_bank_interest_refund_per_year_4 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_4
-		add = owner.var:ai_privat_bank_interest_calculated_4
-	}
-}
-ai_entral_bank_debt_privat_bank_interest_refund_per_year_5 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_5
-		add = owner.var:ai_privat_bank_interest_calculated_5
-	}
-}
-ai_entral_bank_debt_privat_bank_interest_refund_per_year_6 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_6
-		add = owner.var:ai_privat_bank_interest_calculated_6
-	}
-}
-ai_entral_bank_debt_privat_bank_interest_refund_per_year_7 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_7
-		add = owner.var:ai_privat_bank_interest_calculated_7
-	}
-}
-ai_entral_bank_debt_privat_bank_interest_refund_per_year_8 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_8
-		add = owner.var:ai_privat_bank_interest_calculated_8
-	}
-}
-ai_entral_bank_debt_privat_bank_interest_refund_per_year_9 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_9
-		add = owner.var:ai_privat_bank_interest_calculated_9
-	}
-}
-ai_entral_bank_debt_privat_bank_interest_refund_per_year_10 = {
-	every_in_list = {
-		variable = central_bank_debt_privat_bank_buyer_list_10
-		add = owner.var:ai_privat_bank_interest_calculated_10
-	}
-}
 
 ########################################################################################################################################
 ########################################################################################################################################

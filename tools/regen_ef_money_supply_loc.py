@@ -254,7 +254,6 @@ def check_text(lang, c):
         ("fixed_income", "постоянные доходы", "fixed income"),
         ("total_income", "все доходы", "total income"),
         ("minting_week", "чеканка", "minting"),
-        ("fixed_expenses", "постоянные расходы", "fixed expenses"),
         ("total_expenses", "все расходы", "total expenses"),
         ("military", "армия", "military"),
         ("pool_gross", "пул: приход", "pool: gross income"),

@@ -68,8 +68,8 @@
   `ld_bank_pm.txt`).
 - Премия за риск: `common/script_values/ld_risk_premium_values.txt`, `common/scripted_effects/ld_risk_premium.txt`.
 - Закон «Центральный банк» (R3.2): группа `common/law_groups/ld_central_bank.txt` (`lawgroup_ld_central_bank`), законы
-  `common/laws/ld_central_bank_laws.txt` (`law_ld_cb_state` / `_private` / `_none`, флаг `var:zz_ef_cb_kind` =
-  `flag:state/private/none`). **ЦБ — законом (Д.R4а.3):** государственный и частный — с технологией `central_banking`,
+  `common/laws/ld_central_bank_laws.txt` (`law_ld_cb_state` / `_private` / `_none`; вид ЦБ читается законом,
+  `has_law`). **ЦБ — законом (Д.R4а.3):** государственный и частный — с технологией `central_banking`,
   при денежной системе; `on_activate` → `zz_ef_cb_found` (`ld_cb_law.txt`: здание ЦБ E&F размера 5 в столице,
   `central_bank_modifier` — модификатор `has_central_bank`, `central_bank_production_methods`; при металлическом
   стандарте ЦБ забирает у банков металл нормы покрытия банкнот `zz_ef_cb_found_take_gold/_silver`, известное движение

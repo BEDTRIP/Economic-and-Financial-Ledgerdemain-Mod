@@ -739,7 +739,7 @@ def charts(D):
     for c in big:
         cc = C[c]
         B[c] = dict(budget=[['доходы', s('inc', 1e-3, 1, cc)], ['расходы', s('exp', 1e-3, 1, cc)],
-                            ['фикс. расходы', s('fix_exp', 1e-3, 1, cc)], ['армия', s('mil', 1e-3, 1, cc)],
+                            ['чеканка', s('mint', 1e-3, 1, cc)], ['армия', s('mil', 1e-3, 1, cc)],
                             ['пул на стройку', s('pool_constr', 1e-3, 1, cc)]],
                     debt=[['долг движка (без облигаций)', diff('debt', 'bonds_abroad', M, 2, cc)],
                           ['облигации у держателей', s('bonds_abroad', M, 2, cc)], ['весь долг', s('debt', M, 2, cc)],

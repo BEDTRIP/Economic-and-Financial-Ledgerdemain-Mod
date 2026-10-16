@@ -1,6 +1,6 @@
-﻿# In replace/ since 2026-09-24: these keys already exist in an earlier mod
-# or in vanilla, and localization is first-come -- outside replace/ this file
-# never showed.
+﻿# In replace/: these keys already exist in vanilla, and localization is first-come -- outside replace/ the file
+# never shows. The engine's level cap of the sector is not used: the cap is PSC's script
+# (calculate_construction_sector_max_level, Д.R9б.8) -- the levels of a state's sector that save construction goods.
 l_polish:
- state_building_construction_sector_max_level_add:1 "$building_construction_sector$ $state_construction_mult$ Cap"
- state_building_construction_sector_max_level_add_desc:1 "A bonus or penalty to the $state_construction_mult$ Cap of $building_construction_sector$ buildings."
+ state_building_construction_sector_max_level_add:1 "$building_construction_sector$ levels saving goods"
+ state_building_construction_sector_max_level_add_desc:1 "How many staffed levels of a state's $building_construction_sector$ save construction goods. Levels above it still produce construction, without the saving."

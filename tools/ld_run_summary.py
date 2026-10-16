@@ -162,7 +162,7 @@ def main():
         out.append(f'{y} steps {r[0]} pool {r[1]:.0f} tr {r[2]:.0f} d_govlv {r[3]:.0f} | lvl_pool {fmt(it.get("lvl_pool", 0))} '
                    f'lvl_tr {fmt(it.get("lvl_tr", 0))}')
     big = sorted(gdp_last, key=lambda c: -gdp_last[c])[:top]
-    bk = ('inc', 'exp', 'fix_exp', 'mil', 'debt', 'credit', 'pool_constr', 'm2', 'gdp', 'psc_pts', 'psc_total',
+    bk = ('inc', 'exp', 'mint', 'mil', 'debt', 'credit', 'pool_constr', 'm2', 'gdp', 'psc_pts', 'psc_total',
           'psc_csec_lv')
     for c in big:
         out.append(f'== budget {c}, a year\'s average (a week)')

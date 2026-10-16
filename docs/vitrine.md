@@ -9,7 +9,7 @@
 (`var:zz_ef_bank_capital`, `money-model.md`) + «прочее». Окна и файлы — `interface.md`.
 
 <!-- vitrine -->
-Сгенерировано `tools/ld_vitrine.py --write`. Имён 287: переменных 31, значений-витрины 94, вычисляемых при перерисовке 162; файлов 18.
+Сгенерировано `tools/ld_vitrine.py --write`. Имён 286: переменных 31, значений-витрины 94, вычисляемых при перерисовке 161; файлов 18.
 
 | имя | класс | где читается |
 | --- | --- | --- |
@@ -168,7 +168,6 @@
 | `zz_ef_popm_money` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_popm_silver` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_price_index` | calc | `localization/english/01_ef_tooltips_localization_l_english.yml`, `localization/english/replace/ld_money_supply_replace_l_english.yml` |
-| `zz_ef_raw_fixed_expenses` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_raw_fixed_income` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_raw_gdp` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_raw_military` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |

@@ -321,7 +321,7 @@
  zz_ef_ms_check_03:0 "#b Сверка — сырые числа движка, в неделю:#!"
  zz_ef_ms_check_04:0 "мост GUI → скрипт: внешние статьи бюджета записано $zz_ef_ms_x_v_f_ext$, сейчас $zz_ef_ms_x_v_f_mint_tr_rest$; оплачено сверх продаж рынка за неделю $zz_ef_ms_x_v_f_leak_2$ (данные недели: $zz_ef_ms_x_hook_ok$; в очереди $zz_ef_ms_x_expr_35$; вызовов моста всего $zz_ef_ms_x_hook_calls$, пробных $zz_ef_ms_x_hook_probe_calls$)"
  zz_ef_ms_check_05:0 "факт / прогноз: подоходный $zz_ef_ms_x_expr_36$ / [Country.GetIncomeTaxIncome|D]; все доходы $zz_ef_ms_x_raw_total_income$ / [Country.PredictWeeklyIncome|D]; трансфер пула $zz_ef_ms_x_v_f_transfer_2$ / $zz_ef_ms_x_pool_transfer_week$ / [Country.GetInvestmentIncome|D]"
- zz_ef_ms_check_06:0 "постоянные доходы $zz_ef_ms_x_raw_fixed_income$, все доходы $zz_ef_ms_x_raw_total_income$, чеканка $zz_ef_ms_x_raw_minting_week$, постоянные расходы $zz_ef_ms_x_raw_fixed_expenses$, все расходы $zz_ef_ms_x_raw_total_expenses$, армия $zz_ef_ms_x_raw_military$, пул: приход $zz_ef_ms_x_raw_pool_gross$, пул: чистый $zz_ef_ms_x_raw_pool_net$; ВВП в год $zz_ef_ms_x_raw_gdp$"
+ zz_ef_ms_check_06:0 "постоянные доходы $zz_ef_ms_x_raw_fixed_income$, все доходы $zz_ef_ms_x_raw_total_income$, чеканка $zz_ef_ms_x_raw_minting_week$, все расходы $zz_ef_ms_x_raw_total_expenses$, армия $zz_ef_ms_x_raw_military$, пул: приход $zz_ef_ms_x_raw_pool_gross$, пул: чистый $zz_ef_ms_x_raw_pool_net$; ВВП в год $zz_ef_ms_x_raw_gdp$"
  zz_ef_ms_check_07:0 "#grey Метки: дв — число движка как есть (бюджет, кассы, пул); мод — деньги, которые перевёл мод (вклады, кредиты, металл); расч — выведено из других чисел (сохранение денег, остаток, переоценка); оц — оценка (зарплаты = ВВП / 52); E&F — переменная E&F (облигации).#!"
 
  # ---- deposits ----
@@ -630,7 +630,6 @@
  zz_ef_ms_x_pool_transfer_week:0 "[Country.MakeScope.ScriptValue('zz_ef_pool_transfer_week')|D]"
  zz_ef_ms_x_raw_fixed_income:0 "[Country.MakeScope.ScriptValue('zz_ef_raw_fixed_income')|D]"
  zz_ef_ms_x_raw_minting_week:0 "[Country.MakeScope.ScriptValue('zz_ef_raw_minting_week')|D]"
- zz_ef_ms_x_raw_fixed_expenses:0 "[Country.MakeScope.ScriptValue('zz_ef_raw_fixed_expenses')|D]"
  zz_ef_ms_x_raw_total_expenses:0 "[Country.MakeScope.ScriptValue('zz_ef_raw_total_expenses')|D]"
  zz_ef_ms_x_raw_military:0 "[Country.MakeScope.ScriptValue('zz_ef_raw_military')|D]"
  zz_ef_ms_x_raw_pool_gross:0 "[Country.MakeScope.ScriptValue('zz_ef_raw_pool_gross')|D]"
