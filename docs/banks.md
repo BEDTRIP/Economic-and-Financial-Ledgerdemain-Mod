@@ -108,9 +108,9 @@
 - `common/buildings/ld_bank.txt` — `building_zz_ef_bank` (группа `bg_zz_ef_banking`, PMG `pmg_zz_ef_bank_base`,
   `ownership_type = self`, `ai_nationalization_desire = -5`).
 - `common/building_groups/ld_banking_group.txt` — `bg_zz_ef_banking` (дочерняя `bg_trade`).
-- `common/production_method_groups/ld_bank_pmg.txt` — `pmg_zz_ef_bank_base` (5 методов по эпохам),
-  `pmg_zz_ef_bank_funds` (`pm_zz_ef_bank_no_funds` / `pm_zz_ef_bank_funds` — вход паёв `mutual_funds` 0,04 на работника;
-  включает `zz_ef_fund_bank_pm_step`, где на рынке продаются паи фонда, R8б.6).
+- `common/production_method_groups/ld_bank_pmg.txt` — `pmg_zz_ef_bank_base` (5 методов по эпохам), `pmg_zz_ef_bank_bonds`
+  (облигации); метод «Паи фондов» — в `_archive/ld_bank_funds_pm/` (Д.R9б.13: паи банки покупают на бирже,
+  `zz_ef_rq_bk_f`).
 - `common/production_methods/ld_bank_pm.txt` — `pm_zz_ef_bank_money_changer … _modern`: выход
   `goods_output_liquidity_currency_add` 300…1600, вход services/paper/telephones/electricity + базовые 0.01 золота и
   0.02 серебра на рабочего (покупку металла регулируют модификаторы `zz_ef_bank_gold_buy`/`zz_ef_bank_silver_buy`, см.

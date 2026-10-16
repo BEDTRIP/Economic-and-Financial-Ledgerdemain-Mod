@@ -24,35 +24,14 @@ zz_ef_fund_found = {
 	}
 }
 
-# Country scope, monthly (zz_ef_money_model_monthly_step): the banks' method «Паи фондов» on where the market sells a
-# fund's shares, off elsewhere (a missing input would cut the banks' output); var:zz_ef_bank_funds_on.
-zz_ef_fund_bank_pm_step = {
-	if = {
-		limit = {
-			exists = market
-			market = { mg:mutual_funds = { market_goods_sell_orders > 0 } }
-		}
-		if = {
-			limit = { NOT = { has_variable = zz_ef_bank_funds_on } }
-			set_variable = zz_ef_bank_funds_on
-			activate_production_method = { building_type = building_zz_ef_bank production_method = pm_zz_ef_bank_funds }
-		}
-	}
-	else_if = {
-		limit = { has_variable = zz_ef_bank_funds_on }
-		remove_variable = zz_ef_bank_funds_on
-		activate_production_method = { building_type = building_zz_ef_bank production_method = pm_zz_ef_bank_no_funds }
-	}
-}
 
-# Country scope, weekly (zz_ef_money_model_step): the fund's shares the country's pops and banks bought this week
-# (the states' consumption of mutual_funds x its price), from the fund of its exchange (var:zz_ef_xch): the banks' part
-# -- their method's input, the rest -- the pops', as far as their deposits go. Paid: the pops' deposits and the banks'
-# capital -> the fund's deposit; to a fund abroad -- out of the pool, var:zz_ef_fd_in_for of the fund's country (its
-# step takes it into its pool and the deposit). Claims on the fund's country.
+# Country scope, weekly (zz_ef_money_model_step): the fund's shares the country's pops bought this week (the states'
+# consumption of mutual_funds x its price), from the fund of its exchange (var:zz_ef_xch), as far as their deposits go
+# (the banks buy the shares on the exchange, zz_ef_rq_bk_f -- Д.R9б.13). Paid: the pops' deposits -> the fund's
+# deposit; to a fund abroad -- out of the pool, var:zz_ef_fd_in_for of the fund's country (its step takes it into its
+# pool and the deposit). Claims on the fund's country.
 zz_ef_fund_shares_step = {
 	set_variable = { name = zz_ef_f_fd_pp value = 0 }
-	set_variable = { name = zz_ef_f_fd_bk value = 0 }
 	set_variable = { name = zz_ef_f_fd_out value = 0 }
 	if = {
 		limit = {
@@ -60,47 +39,33 @@ zz_ef_fund_shares_step = {
 			has_variable = zz_ef_pop_savings
 			zz_ef_fund_bought_week > 0
 		}
-		set_variable = { name = zz_ef_f_fd_bk value = zz_ef_fund_bank_week }
 		set_variable = {
 			name = zz_ef_f_fd_pp
 			value = {
 				value = zz_ef_fund_bought_week
-				subtract = var:zz_ef_f_fd_bk
 				max = zz_ef_pop_deposits
 				min = 0
 			}
 		}
 		save_temporary_scope_as = zz_ef_fd_h
 		var:zz_ef_xch = { save_temporary_scope_as = zz_ef_fd_c }
-		# a fund abroad: the money leaves the pool, as far as it goes (the banks' part first)
+		# a fund abroad: the money leaves the pool, as far as it goes
 		if = {
 			limit = { NOT = { scope:zz_ef_fd_c = this } }
-			set_variable = { name = zz_ef_t_fd_room value = { value = investment_pool min = 0 } }
-			set_variable = { name = zz_ef_f_fd_bk value = { value = var:zz_ef_f_fd_bk max = var:zz_ef_t_fd_room } }
-			change_variable = { name = zz_ef_t_fd_room subtract = var:zz_ef_f_fd_bk }
-			set_variable = { name = zz_ef_f_fd_pp value = { value = var:zz_ef_f_fd_pp max = var:zz_ef_t_fd_room } }
-			remove_variable = zz_ef_t_fd_room
+			set_variable = { name = zz_ef_f_fd_pp value = { value = var:zz_ef_f_fd_pp max = { value = investment_pool min = 0 } } }
 			set_variable = { name = zz_ef_f_fd_out value = var:zz_ef_f_fd_pp }
-			change_variable = { name = zz_ef_f_fd_out add = var:zz_ef_f_fd_bk }
 			zz_ef_eng_sub_pool = { V = var:zz_ef_f_fd_out }
 		}
 		change_variable = { name = zz_ef_pop_deposits subtract = var:zz_ef_f_fd_pp }
 		change_variable = { name = zz_ef_pop_savings subtract = var:zz_ef_f_fd_pp }
-		# the shares are the banks' asset (Д.R4а.12): the capital stays
-		zz_ef_bank_inv_add = { V = var:zz_ef_f_fd_bk }
 		if = {
 			limit = { var:zz_ef_f_fd_pp > 0 }
 			zz_ef_rq_add = { H = pp K = f D = scope:zz_ef_fd_c V = var:zz_ef_f_fd_pp }
-		}
-		if = {
-			limit = { var:zz_ef_f_fd_bk > 0 }
-			zz_ef_rq_add = { H = bk K = f D = scope:zz_ef_fd_c V = var:zz_ef_f_fd_bk }
 		}
 		scope:zz_ef_fd_c = {
 			if = {
 				limit = { scope:zz_ef_fd_h = this }
 				zz_ef_fd_dep_add = { V = scope:zz_ef_fd_h.var:zz_ef_f_fd_pp }
-				zz_ef_fd_dep_add = { V = scope:zz_ef_fd_h.var:zz_ef_f_fd_bk }
 			}
 			else = {
 				if = { limit = { NOT = { has_variable = zz_ef_fd_in_for } } set_variable = { name = zz_ef_fd_in_for value = 0 } }

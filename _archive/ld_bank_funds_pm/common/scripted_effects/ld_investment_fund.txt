@@ -1,0 +1,22 @@
+﻿# From common/scripted_effects/ld_investment_fund.txt.
+
+# Country scope, monthly (zz_ef_money_model_monthly_step): the banks' method «Паи фондов» on where the market sells a
+# fund's shares, off elsewhere (a missing input would cut the banks' output); var:zz_ef_bank_funds_on.
+zz_ef_fund_bank_pm_step = {
+	if = {
+		limit = {
+			exists = market
+			market = { mg:mutual_funds = { market_goods_sell_orders > 0 } }
+		}
+		if = {
+			limit = { NOT = { has_variable = zz_ef_bank_funds_on } }
+			set_variable = zz_ef_bank_funds_on
+			activate_production_method = { building_type = building_zz_ef_bank production_method = pm_zz_ef_bank_funds }
+		}
+	}
+	else_if = {
+		limit = { has_variable = zz_ef_bank_funds_on }
+		remove_variable = zz_ef_bank_funds_on
+		activate_production_method = { building_type = building_zz_ef_bank production_method = pm_zz_ef_bank_no_funds }
+	}
+}

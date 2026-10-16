@@ -1,0 +1,18 @@
+﻿# From common/script_values/ld_investment_fund_values.txt.
+
+# the banks' method «Паи фондов»: shares a workforce unit buys a week (production_methods/ld_bank_pm.txt) and the
+# workforce of a «Банк» level (its clerks)
+zz_ef_bank_fund_shares_per_unit = 0.04
+zz_ef_bank_workforce_per_level = 1000
+# ... of it the banks' (their method's input, at most the whole)
+zz_ef_fund_bank_week = {
+	value = 0
+	if = {
+		limit = { has_variable = zz_ef_bank_funds_on }
+		value = zz_ef_bank_levels
+		multiply = zz_ef_bank_workforce_per_level
+		multiply = zz_ef_bank_fund_shares_per_unit
+		multiply = zz_ef_fund_share_price
+		max = zz_ef_fund_bought_week
+	}
+}

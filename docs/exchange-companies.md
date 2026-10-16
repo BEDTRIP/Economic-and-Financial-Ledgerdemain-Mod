@@ -96,12 +96,10 @@
   (`common/buildings/ld_investment_fund.txt`; группа `bg_zz_ef_banking`, технология `financial_center`, `possible` —
   штат биржи своей страны, частная стройка) производит паи `mutual_funds` методом `pm_bond_exchange`
   (`pmg_bond_exchange` ушла из финцентра к фонду). Учреждается с биржей (`zz_ef_fund_found`,
-  `common/scripted_effects/ld_investment_fund.txt`: из `zz_ef_fc_found` и `zz_ef_fc_bind`). Паи покупают население
-  (потребность `popneed_financial_products`) и банки (метод «Паи фондов» `pm_zz_ef_bank_funds`, включает
-  `zz_ef_fund_bank_pm_step` раз в месяц, где на рынке продаются паи); неделя — `zz_ef_fund_shares_step`: купленное
-  страной (`zz_ef_fund_bought_week` = потребление `mutual_funds` штатов × цена 250; банки — `zz_ef_fund_bank_week` по их
-  методу, остальное — население, не больше их вкладов) → требования на фонд своей биржи (карты `zz_ef_rq_pp_f`,
-  `zz_ef_rq_bk_f`, вид f). Деньги за паи движок уже перевёл в кассу здания фонда; модель проводит покупку (Д.R8б.21):
+  `common/scripted_effects/ld_investment_fund.txt`: из `zz_ef_fc_found` и `zz_ef_fc_bind`). Товар паёв покупает
+  население (потребность `popneed_financial_products`; банки — на бирже, `zz_ef_rq_bk_f`, Д.R9б.13); неделя —
+  `zz_ef_fund_shares_step`: купленное страной (`zz_ef_fund_bought_week` = потребление `mutual_funds` штатов × цена 250,
+  не больше вкладов населения) → требования населения на фонд своей биржи (карта `zz_ef_rq_pp_f`, вид f). Деньги за паи движок уже перевёл в кассу здания фонда; модель проводит покупку (Д.R8б.21):
   вклады населения и капитал банков → вклад фонда `var:zz_ef_fd_dep` страны биржи (обязательство её банков — в книге
   банков и в M2); фонд за границей — покупатель платит из пула (`zz_ef_f_fd_out`), страна фонда на своём шаге берёт его
   в пул и во вклад (`var:zz_ef_fd_in_for` → `zz_ef_f_fd_in`); оба — поток с заграницей в клиринг (`zz_ef_ext_net_week`).
