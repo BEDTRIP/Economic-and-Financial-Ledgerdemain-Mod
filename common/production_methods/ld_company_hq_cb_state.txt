@@ -1,0 +1,34 @@
+﻿#############################################
+# A state CB's company (Д.R4а.10, Д.R9б.12; R9б.14): the CB company's headquarters (var:zz_ef_cb_co,
+# scripted_effects/ld_bank_seed.txt) under the state CB law is run by the government -- its dividends to the treasury.
+# Vanilla's pm_company_headquarter_government_run is opened only by the command economy (R9б.18), so the CB has its own
+# method: the state CB law opens it, the script sets it on the CB company's headquarters only and takes it off any other
+# (zz_ef_cb_hq_step, scripted_effects/ld_listing.txt). Staffing at E&F's scale, as the other ownership methods
+# (production_methods/11_ef_private_infrastructure.txt).
+#############################################
+
+pm_company_headquarter_ld_cb_state = {
+	texture = "gfx/interface/icons/production_method_icons/government_run.dds"
+	is_hidden_when_unavailable = yes
+
+	unlocking_company_categories = {
+		capitalist_owned
+	}
+
+	unlocking_laws = {
+		law_ld_cb_state
+	}
+
+	building_modifiers = {
+		level_scaled = {
+			building_employment_bureaucrats_add = 3
+			building_employment_clerks_add = 3.5
+		}
+		unscaled = {
+			building_bureaucrats_shares_add = 10
+			building_clerks_shares_add = 2
+			# the whole dividend to the treasury (принято ночью, проверить)
+			building_company_government_dividends_add = 1
+		}
+	}
+}

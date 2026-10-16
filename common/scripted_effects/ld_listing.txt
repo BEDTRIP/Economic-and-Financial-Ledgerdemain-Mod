@@ -16,6 +16,38 @@
 # COUNTRY scope, from on_actions/ld_capitalization_on_actions.txt before the capitalization update.
 #############################################
 
+# COUNTRY scope, monthly before the listing (R9б.14, Д.R9б.12): under the state CB law the CB company's headquarters
+# (var:zz_ef_cb_co) is run by the government -- pm_company_headquarter_ld_cb_state; any other headquarters with that
+# method goes back to private (the listing below skips the CB's). Only where the method is not active yet: a method
+# activated again is added to the building again.
+zz_ef_cb_hq_step = {
+	every_scope_building = {
+		limit = {
+			is_building_group = bg_company_headquarter
+			level > 0
+		}
+		set_local_variable = { name = zz_lst_cb value = 0 }
+		if = {
+			limit = { owner = { has_law = law_type:law_ld_cb_state } }
+			zz_ef_listing_cb_check = yes
+		}
+		if = {
+			limit = {
+				local_var:zz_lst_cb = 1
+				NOT = { has_active_production_method = pm_company_headquarter_ld_cb_state }
+			}
+			zz_ef_listing_go_cb_state = yes
+		}
+		else_if = {
+			limit = {
+				local_var:zz_lst_cb = 0
+				has_active_production_method = pm_company_headquarter_ld_cb_state
+			}
+			zz_ef_listing_go_private = yes
+		}
+	}
+}
+
 zz_ef_listing_update = {
 	set_local_variable = { name = zz_lst_tot value = zz_ef_hq_levels }
 	if = {
@@ -40,6 +72,7 @@ zz_ef_listing_update = {
 			limit = {
 				is_building_group = bg_company_headquarter
 				level > 0
+				NOT = { has_active_production_method = pm_company_headquarter_ld_cb_state }
 			}
 			order_by = level
 			max = 1000
