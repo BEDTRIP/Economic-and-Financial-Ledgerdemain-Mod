@@ -149,15 +149,15 @@ def main_text(lang, c):
     gold = "@gold!"
     ru = lang == "russian"
     # The user's aggregates (1.10 evening, run 12 -- as in real statistics): M0 = pops' cash at hand, M1 = +
-    # business cash (without the Banks' cash -- the banks' own money, В2 7.10), M2 = + pops' deposits, M3 = + claims on abroad. The treasury, the banks' own funds (the pool)
+    # business cash (without the Banks' cash -- the banks' own money, В2 7.10), M2 = + pops' deposits, M3 = + the bonds the public holds (Д.R9б.11). The treasury, the banks' own funds (the pool)
     # and the CB's reserves are accounts outside the money supply. The currency's value and the inflation read M2.
     if ru:
         L = dict(title="Денежная масса", total="Всего (#b M3#!)", week="за неделю", wk="неделя", mo="мес.", yr="год", y5="5л.",
                  m0="наличные", cash="Наличные на руках", cashf="{0} в накопления, {1} во вклады = {3};\\n       (всего накоплений {2})",
                  m1="M0 + счета", bld="Касса предприятий", tc="из них торговые центры",
                  m2="M1 + вклады", dep="Вклады в банках", check="Сверка с движком",
-                 m3="M2 + облигации других стран", abroad="Внешний сектор — чистая международная позиция", bonds="Облигации других стран",
-                 abf="банки {0}, казна {1}",
+                 m3="M2 + облигации у публики", abroad="Внешний сектор — чистая международная позиция", bonds="Облигации у публики",
+                 abf="население {0}, фонд биржи {1}, консоли {2}",
                  abrf="облигации {0} + валюта в ЦБ {1} − наша валюта за рубежом {2}",
                  out="Вне денежной массы:", tr="Казна (счёт правительства)",
                  bank="Резервы банков (пул)", bankf="банки должны вкладчикам {0} и ЦБ {1}, выдали кредитов {2}; капитал банков {3} {4}; касса зданий «Банк» {5} — деньги банков, не в M1",
@@ -173,8 +173,8 @@ def main_text(lang, c):
                  m0="cash", cash="Cash at hand", cashf="{0} into savings, {1} into deposits = {3};\\n       (all savings {2})",
                  m1="M0 + accounts", bld="Business cash", tc="of it trade centres",
                  m2="M1 + deposits", dep="Bank deposits", check="Reconciliation with the engine",
-                 m3="M2 + other countries' bonds", abroad="External sector — net international position", bonds="Other countries' bonds",
-                 abf="banks {0}, treasury {1}",
+                 m3="M2 + the public's bonds", abroad="External sector — net international position", bonds="The public's bonds",
+                 abf="pops {0}, the exchange's fund {1}, consols {2}",
                  abrf="bonds {0} + currency in the CB {1} − our currency abroad {2}",
                  out="Outside the money supply:", tr="Treasury (the government's account)",
                  bank="Bank reserves (the pool)", bankf="banks owe depositors {0} and the CB {1}, lent {2}; banks' capital {3} {4}; the Bank buildings' cash {5} — the banks' own money, not in M1",
@@ -215,8 +215,9 @@ def main_text(lang, c):
         f"→   {tt('zz_ef_ms_tt_deposits', L['dep'])}: #T {money('zz_ef_pop_deposits')}#!{mark('mod', ru)} "
         f"{delta('zz_ef_v_d_deposits')}",
         f"#b M3#! = {L['m3']}: #T {money('zz_ef_agg_m3')}#! {dyn(3)}",
-        f"→   {L['bonds']}: #T {money('zz_ef_foreign_assets')}#!{mark('ef', ru)} ("
-        + L["abf"].format(money("zz_ef_bank_bonds"), money("zz_ef_treasury_bonds")) + ")",
+        f"→   {L['bonds']}: ("
+        + L["abf"].format(money("zz_ef_m3_pp_bonds"), money("zz_ef_m3_fd_bonds"), money("zz_ef_consol_debt_v"))
+        + f"){mark('mod', ru)}",
         f"#b {L['out']}#!",
         f"→   {tt('zz_ef_ms_tt_treasury', L['tr'])}: #T {money('zz_ef_treasury')}#!{mark('eng', ru)} {delta('zz_ef_v_d_treasury')}",
         f"→   {tt('zz_ef_ms_tt_banks', L['bank'])}: #T {money('zz_ef_pool')}#!{mark('eng', ru)} {delta('zz_ef_v_d_pool')};\\n{ind}("

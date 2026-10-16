@@ -9,7 +9,7 @@
 (`var:zz_ef_bank_capital`, `money-model.md`) + «прочее». Окна и файлы — `interface.md`.
 
 <!-- vitrine -->
-Сгенерировано `tools/ld_vitrine.py --write`. Имён 286: переменных 31, значений-витрины 94, вычисляемых при перерисовке 161; файлов 18.
+Сгенерировано `tools/ld_vitrine.py --write`. Имён 288: переменных 31, значений-витрины 95, вычисляемых при перерисовке 162; файлов 18.
 
 | имя | класс | где читается |
 | --- | --- | --- |
@@ -112,6 +112,7 @@
 | `zz_ef_co_rest_v` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_co_share_v` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_comp_dep_v` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
+| `zz_ef_consol_debt_v` | vit | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_credit_limit` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_credit_now` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_credit_to_gdp` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
@@ -135,6 +136,8 @@
 | `zz_ef_hook_ok` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_hook_probe_calls` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_inflation` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
+| `zz_ef_m3_fd_bonds` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
+| `zz_ef_m3_pp_bonds` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_mp_cum_v` | vit | `localization/english/ld_monetary_policy_l_english.yml` |
 | `zz_ef_mp_dyn_pp` | calc | `localization/english/ld_monetary_policy_l_english.yml` |
 | `zz_ef_mp_flow_v` | vit | `localization/english/ld_monetary_policy_l_english.yml` |
@@ -185,7 +188,6 @@
 | `zz_ef_total_income_week` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_tr_to_cb` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_treasury` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
-| `zz_ef_treasury_bonds` | calc | `localization/english/replace/ld_money_supply_replace_l_english.yml` |
 | `zz_ef_trm_buy_g_v` | vit | `localization/english/ld_treasury_metal_l_english.yml` |
 | `zz_ef_trm_buy_s_v` | vit | `localization/english/ld_treasury_metal_l_english.yml` |
 | `zz_ef_trm_fee` | calc | `localization/english/ld_treasury_metal_l_english.yml` |

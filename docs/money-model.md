@@ -21,7 +21,8 @@
 - `common/scripted_effects/ld_money_model.txt` — недельный шаг, приёмник GUI-моста, ежемесячный шаг, сбережения/вклады,
   кредиты, кольца истории, ставка правительства, стартовый металл ЦБ (`ld_metal_accounts.txt`), выкуп валюты в кризис,
   зонды.
-- `common/script_values/ld_money_model_values.txt` — все формулы: счета, M0–M3, кредитные лимиты, ставки, платёжный
+- `common/script_values/ld_money_model_values.txt` — все формулы: счета, M0–M3 (M3 = M2 + облигации населения и фонда
+  биржи + консоли, `zz_ef_m3_pp_bonds`, `zz_ef_m3_fd_bonds`, `zz_ef_consol_debt_v`; Д.R9б.11), кредитные лимиты, ставки, платёжный
   баланс, кольца роста (почти все ключи `zz_ef_*`).
 - `common/scripted_triggers/ld_monetary_authority_triggers.txt` — денежная власть (Д.R4а.11): `zz_ef_am_holder` — власть
   держит резервы на счетах страны (металл `zz_ef_am_*`, чужие деньги — карта `zz_ef_rq_cb_m`) и ведёт клиринг: ЦБ, без

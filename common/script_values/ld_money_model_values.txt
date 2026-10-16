@@ -1780,7 +1780,7 @@ zz_ef_treasury_bonds = {
 	# the treasury's parts of other countries' engine debt (the bond ledger), not E&F's prices
 	value = zz_ef_bl_parts
 }
-# Claims on abroad in M3: the banks' and the treasury's foreign bonds; our money held abroad -- zz_ef_fx_liab_all
+# Claims on abroad (the account "abroad", not M3): the banks' and the treasury's foreign bonds; our money held abroad -- zz_ef_fx_liab_all
 # (the log's liab).
 zz_ef_foreign_assets = {
 	value = zz_ef_bank_bonds
@@ -2024,9 +2024,25 @@ zz_ef_agg_m2_to_gdp = {
 		divide = gdp
 	}
 }
+# M3 (Д.R9б.11) = M2 + the bonds the public holds: any treasury's bonds of the pops and of the fund of the country's
+# exchange, and the consols. Not the fund's shares (the fund's money is its deposit, in M2; its bonds are here), shares,
+# nor the banks' and the treasury's paper (their claims -- the account "abroad"). The maps' bonds are parts of the
+# sellers' engine debt, in the engine's money, as M2.
+zz_ef_m3_pp_bonds = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_rq_tot_pp_b } value = var:zz_ef_rq_tot_pp_b }
+	min = 0
+}
+zz_ef_m3_fd_bonds = {
+	value = 0
+	if = { limit = { has_variable = zz_ef_rq_tot_fd_b } value = var:zz_ef_rq_tot_fd_b }
+	min = 0
+}
 zz_ef_agg_m3 = {
 	value = zz_ef_agg_m2
-	add = zz_ef_foreign_assets
+	add = zz_ef_m3_pp_bonds
+	add = zz_ef_m3_fd_bonds
+	add = zz_ef_consol_debt_v
 }
 zz_ef_v_d_tbonds = {
 	value = 0

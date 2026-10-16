@@ -91,8 +91,8 @@
 | `zz_ef_bt_t_amt/_week/_b_amt/_b_year`, `zz_ef_bto_*` | строки таблиц (на стране) | `zz_ef_bonds_update` | GUI |
 
 ## Вызовы и связи
-- `zz_ef_foreign_assets` = `zz_ef_bank_bonds` + `zz_ef_treasury_bonds` (`ld_money_model_values.txt:1999-2008`) — позиция
-  «за рубежом» M3.
+- `zz_ef_foreign_assets` = `zz_ef_bank_bonds` + `zz_ef_treasury_bonds` (`ld_money_model_values.txt`) — облигации в
+  счёте «заграница»; в M3 — облигации населения и фонда биржи и консоли (Д.R9б.11), не эти.
 - Процент за неделю реестр берёт у движка (`zz_ef_v_g_ipay`).
 - Пул продавца (`investment_pool`) платит процент и погашения (не больше, чем там есть; недостающее —
   `zz_ef_f_bl_int_short`/`lost`).
