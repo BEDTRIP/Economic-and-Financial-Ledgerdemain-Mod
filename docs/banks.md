@@ -120,12 +120,22 @@
   `zz_ef_bank_levels` (уровни банков).
 - `common/on_actions/ld_bank_on_actions.txt` — `on_monthly_pulse_country` → `zz_ef_bank_monthly` →
   `zz_ef_bank_seed_step`.
-- `common/scripted_effects/ld_bank_seed.txt` — генерат: `zz_ef_bank_seed_step` (страна-владелец рынка, один раз, флаг
-  `zz_ef_bank_seeded`), `zz_ef_bank_seed_state` (по штату), `zz_ef_bank_seed_company` (по банковской компании E&F,
-  `$COMPANY$`), `zz_ef_bank_seed_state_owned` (запасной вариант — 100% государству).
+- `common/scripted_effects/ld_bank_seed.txt` — генерат (`tools/regen_ef_bank_seed.py`):
+  - `zz_ef_bank_company_seed` (история, `00_ef_building.txt`, после компаний; Д.R9б.6, Д.R4а.10) — каждой банковской
+    компании страны свой «Банк» на 5 уровней (`COMPANY_LEVELS`) в области без «Банка»: компании-ЦБ — в столице
+    (`var:zz_ef_cb_co` — компания, `var:zz_ef_cb_bank_state` — область её «Банка»), прочим — в случайной
+    инкорпорированной (`zz_ef_bank_company_state`, `zz_ef_bank_company_build`). Компания-ЦБ — первая из
+    `CB_COMPANIES` генератора, что есть у страны (Банк Англии, Банк Франции, Австрийский национальный …); нет ни одной
+    — первая банковская компания страны по списку засева (принято ночью). E&F (`establish_bank_and_ef_compagnie`) давал
+    каждой 1 уровень в случайной области — вторая компания там уровней не получала (`create_building` на стоящем
+    здании уровней не добавляет), и компании без уровней пропадали;
+  - `zz_ef_bank_seed_step` (страна-владелец рынка, один раз, флаг `zz_ef_bank_seeded`; веса — только области без
+    «Банка»), `zz_ef_bank_seed_state` (по штату), `zz_ef_bank_seed_company` (по банковской компании E&F, `$COMPANY$`),
+    `zz_ef_bank_seed_state_owned` (запасной вариант — 100% государству).
 - `common/production_method_groups/ld_bank_pmg.txt` `pmg_zz_ef_bank_bonds`, `common/production_methods/ld_bank_pm.txt`
-  `pm_zz_ef_bank_no_bonds` / `pm_zz_ef_bank_bonds` — выпуск товара «облигации» «Банками» страны с ЦБ (Д.R9б.1; открыт
-  законами ЦБ, ставит `zz_ef_cb_bond_issuance_update`, `central-bank.md`).
+  `pm_zz_ef_bank_no_bonds` / `pm_zz_ef_bank_bonds` — выпуск товара «облигации» «Банком» компании-ЦБ (Д.R9б.1, Д.R9б.12;
+  открыт законами ЦБ, ставит `zz_ef_cb_bond_issuance_update` только в области `var:zz_ef_cb_bank_state`, у прочих —
+  без облигаций; `central-bank.md`).
 - `common/scripted_effects/ld_leak_back.txt` — `zz_ef_leak_back_step` (Д.R4б.33): статья «движок: оплачено сверх продаж
   рынка» возвращается в пул вкладами населения (доля `zz_ef_leak_back_pop_share`,
   `common/script_values/ld_leak_back_values.txt`) и компаний (`zz_ef_comp_dep`, `zz_ef_comp_dep_v`; у субъектов —

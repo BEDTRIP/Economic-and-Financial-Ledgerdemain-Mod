@@ -147,6 +147,22 @@ BANKS = [
     "company_BancoDeChile",
 ]
 
+# Д.R9б.6, Д.R4а.10: the central banks among the bank companies -- the country's CB company is the first of these it
+# has; a country with none of them -- its first bank company in BANKS' order (принято ночью, проверить)
+CB_COMPANIES = [
+    "company_BankofEngland", "company_BanqueDeFrance", "company_OesterreichischeNationalbank",
+    "company_DeNederlandscheBank", "company_BankofSpain", "company_BancoDePortugal", "company_StateBankRussianEmpire",
+    "company_Reichsbank", "company_PreussischeSeehandlung", "company_BancaDItalia", "company_BankOfJapan",
+    "company_BanqueNationaleDeBelgique", "company_BancoDeMexico", "company_BancoCentralDelUruguay",
+    "company_BancoCentralDeCostaRica", "company_BancoCentralDeGuatemala", "company_BancoCentralDeHonduras",
+    "company_BancoCentralDeVenezuela", "company_BancoDoBrasil", "company_BancoNacionArgentina",
+    "company_BancoNacionalDeBolivia", "company_BancoRepublicaColombia", "company_BancoNacionalDePanama",
+    "company_BancoNacionalDelParaguay", "company_BankMelliIran", "company_DaQingBank", "company_ImperialBankofIndia",
+    "company_bankofgreec", "company_BanqueEgyptienne", "company_BanqueImperialeOttomane", "company_BancoEstado",
+]
+# a bank company's own "Bank" at the start (Д.R9б.6): levels, in a state where no other "Bank" stands
+COMPANY_LEVELS = 5
+
 SIZES = [1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 18, 22, 26, 30, 35, 40, 50, 60, 70, 80, 100, 120, 150, 200]
 COMPANY_SHARE = 0.4
 
@@ -236,9 +252,12 @@ zz_ef_bank_seed_step = {
 			}
 		}
 		set_variable = { name = zz_ef_bank_w value = 0 }
+		# the states where a bank company's own "Bank" stands are left out: create_building on a standing building adds
+		# no levels (Д.R9б.6)
 		every_country = {
 			limit = { exists = market market.owner = scope:zz_ef_bank_m }
 			every_scope_state = {
+				limit = { NOT = { has_building = building_zz_ef_bank } }
 				scope:zz_ef_bank_m = { change_variable = { name = zz_ef_bank_w add = prev.zz_ef_bank_tc_levels } }
 			}
 		}
@@ -248,7 +267,10 @@ zz_ef_bank_seed_step = {
 			every_country = {
 				limit = { exists = market market.owner = scope:zz_ef_bank_m }
 				every_scope_state = {
-					limit = { zz_ef_bank_tc_levels > 0 }
+					limit = {
+						zz_ef_bank_tc_levels > 0
+						NOT = { has_building = building_zz_ef_bank }
+					}
 					set_variable = {
 						name = zz_ef_bank_n
 						value = {
@@ -261,8 +283,17 @@ zz_ef_bank_seed_step = {
 				}
 			}
 		}
-		else = {
+		else_if = {
+			limit = { capital = { NOT = { has_building = building_zz_ef_bank } } }
 			capital = {
+				set_variable = { name = zz_ef_bank_n value = scope:zz_ef_bank_m.var:zz_ef_bank_l }
+				zz_ef_bank_seed_state = yes
+			}
+		}
+		else_if = {
+			limit = { any_scope_state = { NOT = { has_building = building_zz_ef_bank } } }
+			random_scope_state = {
+				limit = { NOT = { has_building = building_zz_ef_bank } }
 				set_variable = { name = zz_ef_bank_n value = scope:zz_ef_bank_m.var:zz_ef_bank_l }
 				zz_ef_bank_seed_state = yes
 			}
@@ -306,7 +337,83 @@ zz_ef_bank_seed_state = {
     o.append(ladder(with_company_block))
     o.append("}\n\n### STATE scope; no bank company (and the fallback): state-owned, sold by the AI.\nzz_ef_bank_seed_state_owned = {\n")
     o.append(ladder(lambda s: country(s)))
-    o.append("}\n")
+    o.append("}\n\n")
+    o.append(company_seed(keys))
+    return "".join(o)
+
+
+def company_seed(keys: list[str]) -> str:
+    """Д.R9б.6 (Д.R4а.10): at the start (history, after the companies are added) every bank company of the country
+    gets its own "Bank" -- COMPANY_LEVELS levels in a state where no other "Bank" stands: the CB company
+    (var:zz_ef_cb_co) in the capital, the others in a random incorporated state. A company lives only while it owns
+    levels; E&F gave each one level in a random state, and a second company there got none (create_building on a
+    standing building adds no levels), so most of them were gone at the start."""
+    cbs = [k for k in CB_COMPANIES if k in keys]
+    o = ["""### COUNTRY scope, history (history/buildings/00_ef_building.txt, after the companies): the bank companies' own
+### "Banks" (Д.R9б.6) and the CB company var:zz_ef_cb_co (Д.R4а.10), its "Bank"'s state var:zz_ef_cb_bank_state.
+zz_ef_bank_company_seed = {
+	save_scope_as = zz_ef_bkc_o
+"""]
+    chain = cbs + [k for k in keys if k not in cbs]
+    for i, k in enumerate(chain):
+        kw = "if" if i == 0 else "else_if"
+        o.append(f"""	{kw} = {{
+		limit = {{ has_company = company_type:{k} }}
+		set_variable = {{ name = zz_ef_cb_co value = company:{k} }}
+		set_variable = zz_ef_bkc_cb_{k}
+		capital = {{
+			zz_ef_bank_company_build = {{ COMPANY = {k} }}
+			owner = {{ set_variable = {{ name = zz_ef_cb_bank_state value = prev }} }}
+		}}
+	}}
+""")
+    for k in keys:
+        o.append(f"""	if = {{
+		limit = {{ has_company = company_type:{k} }}
+		if = {{
+			limit = {{ has_variable = zz_ef_bkc_cb_{k} }}
+			remove_variable = zz_ef_bkc_cb_{k}
+		}}
+		else = {{
+			zz_ef_bank_company_state = {{ COMPANY = {k} }}
+		}}
+	}}
+""")
+    o.append("""}
+
+### COUNTRY scope; $COMPANY$ -- a bank company of the country: its "Bank" in a state without one (incorporated first).
+zz_ef_bank_company_state = {
+	if = {
+		limit = { any_scope_state = { is_incorporated = yes NOT = { has_building = building_zz_ef_bank } } }
+		random_scope_state = {
+			limit = { is_incorporated = yes NOT = { has_building = building_zz_ef_bank } }
+			zz_ef_bank_company_build = { COMPANY = $COMPANY$ }
+		}
+	}
+	else_if = {
+		limit = { any_scope_state = { NOT = { has_building = building_zz_ef_bank } } }
+		random_scope_state = {
+			limit = { NOT = { has_building = building_zz_ef_bank } }
+			zz_ef_bank_company_build = { COMPANY = $COMPANY$ }
+		}
+	}
+}
+
+### STATE scope; scope:zz_ef_bkc_o -- the country.
+zz_ef_bank_company_build = {
+	create_building = {
+		building = building_zz_ef_bank
+		reserves = 0
+		add_ownership = {
+			company = {
+				type = $COMPANY$
+				country = scope:zz_ef_bkc_o
+				levels = """ + str(COMPANY_LEVELS) + """
+			}
+		}
+	}
+}
+""")
     return "".join(o)
 
 
