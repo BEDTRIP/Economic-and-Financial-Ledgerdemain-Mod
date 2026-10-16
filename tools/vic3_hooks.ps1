@@ -36,3 +36,22 @@ function Hook-FindHeir($tag) {
 function Hook-ShotSteps($own) {
     return "macro currency $own; macro cards $own; macro budget $own"
 }
+
+# The points of vic3_tools are measured on a 2560x1440 window; the game's interface keeps its size in pixels, so in a
+# smaller window it takes a bigger share of it: an anchored point moves by GUI.scale x 1440 / the window's height
+# (1920x1080 at GUI.scale 1 -- the lobby as 2560x1440 at 1.3). Overrides Scale-Px of vic3_ui_lib.ps1; at 1440 -- as
+# there.
+function Scale-Px($x, $y, $anchor) {
+    $s = $script:UiScale
+    $g = Get-Process -Name "victoria3" -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($g -and $g.MainWindowHandle -ne [IntPtr]::Zero) {
+        $r = New-Object W+RECT
+        [W]::GetWindowRect($g.MainWindowHandle, [ref]$r) | Out-Null
+        $h = $r.B - $r.T
+        if ($h -gt 200) { $s = $s * 1440 / $h }
+    }
+    if (-not $anchor -or [math]::Abs($s - 1.0) -lt 0.001) { return @($x, $y) }
+    $ax = if ($anchor -match 'r') { 2560 } elseif ($anchor -match 'l') { 0 } else { 1280 }
+    $ay = if ($anchor -match 'b') { 1440 } elseif ($anchor -match 't') { 0 } else { 720 }
+    return @(($ax + ($x - $ax) * $s), ($ay + ($y - $ay) * $s))
+}
