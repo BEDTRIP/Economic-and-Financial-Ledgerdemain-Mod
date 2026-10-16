@@ -27,6 +27,13 @@ air, Ledgerdemain books every move on both sides.
 
 Do **not** load E&F, PSC or E&F Hotfix together with it — they are inside.
 
+**DLC** are used freely where they hold the mechanic (Д.R9а.3); without one, that part is off and the rest works:
+
+- **Charters of Commerce** — companies' regional headquarters abroad (investment charter): the presence of a bank or
+  fund company in another country (cross-market subjects, overseas banks — in the works, R9а).
+- **Sphere of Influence** — power blocs (`power_bloc_features`): currency unions inside a bloc and the bloc's exchange
+  (the bloc mechanics of the fork read the game's power blocs; without them no blocs form).
+
 ## Credits
 
 - **Economic and Financial Mod (E&F) - V4** by **EBTX** —
