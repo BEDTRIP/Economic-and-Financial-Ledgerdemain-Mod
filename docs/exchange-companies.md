@@ -42,7 +42,11 @@
   добавлен INJECT в `pmg_ownership_building_company_headquarter`. Ванильные методы владения штабов —
   `common/production_methods/11_ef_private_infrastructure.txt`: полное тело ванили (категории компаний, законы,
   принципы) с наймом и долями E&F (Д.R9б.7): частный — только у капиталистических компаний, государственный — при
-  командной экономике, кооперативный — при кооперативной собственности.
+  командной экономике, кооперативный — при кооперативной собственности. Компания-ЦБ при законе гос-ЦБ —
+  `pm_company_headquarter_ld_cb_state` (`common/production_methods/ld_company_hq_cb_state.txt`, дивиденды казне 100 % —
+  принято ночью): ставит и снимает `zz_ef_cb_hq_step` (`ld_listing.txt`, раз в месяц перед листингом; диспетчеры
+  `zz_ef_listing_go_cb_state`, `zz_ef_listing_cb_check` — генерат `regen_ef_listing.py`); листинг штаб компании-ЦБ
+  не трогает (R9б.14, Д.R9б.12).
 - `common/scripted_effects/ld_capitalization_average.txt` — `zz_ef_cap_monthly_update`: 4 скользящих средних,
   `zz_ef_cap_half` (пункты индекса E&F — в `_archive/ef_stock_market_points/`, Д.R4б.11).
 - `common/scripted_effects/ld_capitalization_crash.txt` — `zz_ef_cap_monthly_crash_check`: 12 месячных отметок,
