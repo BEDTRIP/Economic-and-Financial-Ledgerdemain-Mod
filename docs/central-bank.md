@@ -88,6 +88,14 @@
   `_archive/ef_ai_cb_credit/`, Д.R5.10); правило ставки — вес покрытия и инфляции `zz_ef_cb_kind_w_value` (частный 1,5,
   государственный 0,75). Частные на старте — Великобритания, Франция, США, Австрия, Нидерланды
   (`history/global/ld_central_bank_law.txt`).
+- **Иностранный ЦБ** (Д.R9а.7, `law_ld_cb_foreign`): виден и доступен стране, где у иностранного банка есть местная
+  книга (`zz_ef_cb_foreign_possible`, `ld_cb_foreign_triggers.txt`; Д.R9а.2, `banks.md`); ведёт себя как частный
+  (`zz_ef_cb_private_like`: кредит казне, вес правила ставки, метод облигаций); прибыль — в капитал местной книги банка
+  (`var:zz_ef_cb_fbook`, `ld_money_model.txt`), облигации — «Банк» в области, где страна банка владеет уровнями
+  (`var:zz_ef_cb_bank_state`; своя — в `var:zz_ef_cb_bank_state_own` до конца закона); консоли — как у
+  государственного (долг казны; принято ночью). Месяц (`zz_ef_cb_foreign_step`): книги нет или страна банка воюет с
+  этой — закон сам сменяется на государственный (лог `EFK|cb_foreign_end`). ИИ — страна без `central_banking` при
+  местной книге, вес `zz_ef_cb_foreign_ai_weight` (100, принято ночью).
 - Связанные файлы E&F с правкой в теле: `scripted_effects/01_economic_scripted_effects.txt`
   (`on_activate_law_revaluation/devaluation/no_monetary_policy` :35349-:42350 зовут `zz_ef_mp_init/_clear`; идеология
   «большая денежная политика» в `monetary_policy_ideology_dynamic` (:34557-:41604) учитывает `zz_ef_rate_policy_steps`),

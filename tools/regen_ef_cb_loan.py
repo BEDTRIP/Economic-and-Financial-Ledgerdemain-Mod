@@ -57,7 +57,7 @@ zz_ef_cb_loan_now_to_gdp = {{
 zz_ef_cb_loan_cap = {{
 	value = {DEBT_CAP_STATE}
 	if = {{
-		limit = {{ has_law = law_type:law_ld_cb_private }}
+		limit = {{ zz_ef_cb_private_like = yes }}
 		value = {DEBT_CAP_PRIVATE}
 	}}
 	else_if = {{

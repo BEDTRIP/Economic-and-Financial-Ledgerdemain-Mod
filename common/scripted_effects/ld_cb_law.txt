@@ -9,8 +9,7 @@ zz_ef_cb_law_sync = {
 	if = {
 		limit = {
 			has_modifier = has_central_bank
-			NOT = { has_law = law_type:law_ld_cb_state }
-			NOT = { has_law = law_type:law_ld_cb_private }
+			zz_ef_cb_law_has_cb = no
 		}
 		activate_law = law_type:law_ld_cb_state
 	}
@@ -35,12 +34,10 @@ zz_ef_cb_law_start = {
 }
 # monthly (E&F's hub): the CB follows the law
 zz_ef_cb_law_follow = {
+	zz_ef_cb_foreign_step = yes
 	if = {
 		limit = {
-			OR = {
-				has_law = law_type:law_ld_cb_state
-				has_law = law_type:law_ld_cb_private
-			}
+			zz_ef_cb_law_has_cb = yes
 			NOT = { has_modifier = has_central_bank }
 		}
 		zz_ef_cb_found = yes
@@ -51,6 +48,84 @@ zz_ef_cb_law_follow = {
 			has_modifier = has_central_bank
 		}
 		zz_ef_cb_close = yes
+	}
+}
+# The foreign CB (Д.R9а.7): its bank -- a local book here (var:zz_ef_cb_fbook, Д.R9а.2; kept while it stays, else any
+# other), its bonds -- at a "Bank" here its country owns levels of (var:zz_ef_cb_bank_state; the country's own CB
+# company's state waits in var:zz_ef_cb_bank_state_own). No book any more, or the bank's country at war with this one --
+# the law turns to the state CB (the CB's metal and debts are the country's either way). Monthly and on the enactment.
+zz_ef_cb_foreign_step = {
+	if = {
+		limit = { has_law = law_type:law_ld_cb_foreign }
+		save_temporary_scope_as = zz_ef_cbf_c
+		if = {
+			limit = {
+				exists = var:zz_ef_cb_fbook
+				NOT = { is_target_in_variable_list = { name = zz_ef_bk_subj target = var:zz_ef_cb_fbook } }
+			}
+			remove_variable = zz_ef_cb_fbook
+		}
+		if = {
+			limit = {
+				NOT = { exists = var:zz_ef_cb_fbook }
+				zz_ef_cb_foreign_possible = yes
+			}
+			random_in_list = {
+				variable = zz_ef_bk_subj
+				limit = { has_variable = zz_ef_bk_local }
+				scope:zz_ef_cbf_c = { set_variable = { name = zz_ef_cb_fbook value = prev } }
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					NOT = { exists = var:zz_ef_cb_fbook }
+					NOT = { exists = var:zz_ef_cb_fbook.var:zz_ef_bk_home }
+					has_war_with = var:zz_ef_cb_fbook.var:zz_ef_bk_home
+				}
+			}
+			if = { limit = { zz_ef_logs_on = yes } debug_log = "EFK|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|cb_foreign_end" }
+			if = { limit = { exists = var:zz_ef_cb_fbook } remove_variable = zz_ef_cb_fbook }
+			activate_law = law_type:law_ld_cb_state
+		}
+		else = {
+			if = {
+				limit = {
+					NOT = { has_variable = zz_ef_cb_bank_state_own }
+					exists = var:zz_ef_cb_bank_state
+				}
+				set_variable = { name = zz_ef_cb_bank_state_own value = var:zz_ef_cb_bank_state }
+			}
+			var:zz_ef_cb_fbook.var:zz_ef_bk_home = { save_temporary_scope_as = zz_ef_cbf_h }
+			if = {
+				limit = {
+					any_scope_state = {
+						any_scope_building = {
+							is_building_type = building_zz_ef_bank
+							levels_owned_by_country = { target = scope:zz_ef_cbf_h value >= 1 }
+						}
+					}
+				}
+				random_scope_state = {
+					limit = {
+						any_scope_building = {
+							is_building_type = building_zz_ef_bank
+							levels_owned_by_country = { target = scope:zz_ef_cbf_h value >= 1 }
+						}
+					}
+					scope:zz_ef_cbf_c = { set_variable = { name = zz_ef_cb_bank_state value = prev } }
+				}
+			}
+		}
+	}
+	# not (any more) a foreign CB: the country's own CB company's state back
+	if = {
+		limit = {
+			NOT = { has_law = law_type:law_ld_cb_foreign }
+			has_variable = zz_ef_cb_bank_state_own
+		}
+		set_variable = { name = zz_ef_cb_bank_state value = var:zz_ef_cb_bank_state_own }
+		remove_variable = zz_ef_cb_bank_state_own
 	}
 }
 zz_ef_cb_found = {

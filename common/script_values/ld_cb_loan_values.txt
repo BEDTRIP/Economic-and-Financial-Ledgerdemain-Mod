@@ -21,7 +21,7 @@ zz_ef_cb_loan_now_to_gdp = {
 zz_ef_cb_loan_cap = {
 	value = 0.5
 	if = {
-		limit = { has_law = law_type:law_ld_cb_private }
+		limit = { zz_ef_cb_private_like = yes }
 		value = 0.15
 	}
 	else_if = {
@@ -32,3 +32,6 @@ zz_ef_cb_loan_cap = {
 
 # the AI's weight to enact the state CB law once it has central_banking (laws/ld_central_bank_laws.txt, Д.R4а.3)
 zz_ef_cb_law_ai_weight = 200
+# the AI's weight to enact the foreign CB law -- a country without central_banking where a foreign bank is present
+# (Д.R9а.7; принято ночью)
+zz_ef_cb_foreign_ai_weight = 100

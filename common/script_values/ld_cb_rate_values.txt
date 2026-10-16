@@ -220,7 +220,7 @@ zz_ef_cb_kind_w_state = 0.75
 zz_ef_cb_kind_w_value = {
 	value = 1
 	if = {
-		limit = { has_law = law_type:law_ld_cb_private }
+		limit = { zz_ef_cb_private_like = yes }
 		value = zz_ef_cb_kind_w_private
 	}
 	else_if = {

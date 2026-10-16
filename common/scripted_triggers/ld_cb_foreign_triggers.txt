@@ -1,0 +1,17 @@
+﻿# The foreign CB (Д.R9а.7; laws/ld_central_bank_laws.txt, scripted_effects/ld_cb_law.txt).
+
+# COUNTRY scope: a foreign bank keeps a local book here (Д.R9а.2) -- one of its banks' subjects (zz_ef_bk_subj)
+zz_ef_cb_foreign_possible = {
+	has_variable_list = zz_ef_bk_subj
+	any_in_list = {
+		variable = zz_ef_bk_subj
+		has_variable = zz_ef_bk_local
+	}
+}
+# COUNTRY scope: the CB acts as a private one -- private, or a foreign bank's
+zz_ef_cb_private_like = {
+	OR = {
+		has_law = law_type:law_ld_cb_private
+		has_law = law_type:law_ld_cb_foreign
+	}
+}

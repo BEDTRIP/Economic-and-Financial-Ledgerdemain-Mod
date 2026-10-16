@@ -142,8 +142,20 @@ zz_ef_money_model_step = {
 	}
 	change_variable = { name = zz_ef_bank_cb_debt subtract = var:zz_ef_f_cb_repay }
 	# the interest -- the banks pay it (their capital) to the CB; the CB's profit (Д.R4а.5): a state CB's -- the
-	# treasury's, a private one's -- its owners', the capitalists' deposits (no company of the CB: the probe Р25)
+	# treasury's, a private one's -- its owners', the capitalists' deposits (no company of the CB: the probe Р25); a
+	# foreign one's (Д.R9а.7) -- its bank's local book here: the banks' capital stays, the book gains it (the other books
+	# lose it as the week's residual, ld_bank_subjects.txt)
 	if = {
+		limit = {
+			has_law = law_type:law_ld_cb_foreign
+			exists = var:zz_ef_cb_fbook
+		}
+		var:zz_ef_cb_fbook = {
+			if = { limit = { NOT = { has_variable = zz_ef_bk_cap } } set_variable = { name = zz_ef_bk_cap value = 0 } }
+			change_variable = { name = zz_ef_bk_cap add = prev.var:zz_ef_f_cb_interest }
+		}
+	}
+	else_if = {
 		limit = {
 			has_law = law_type:law_ld_cb_private
 			# after the pops' savings start (zz_ef_pop_savings_step): before it the deposits do not exist (a
