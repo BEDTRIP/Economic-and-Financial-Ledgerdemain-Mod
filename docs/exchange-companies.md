@@ -39,7 +39,10 @@
   `joint_stock_companies` + не традиционализм/командная/кооперативная экономика).
 - `common/production_methods/ld_company_hq_publicly_traded.txt` +
   `common/production_method_groups/ld_company_hq_publicly_traded.txt` — `pm_company_headquarter_publicly_traded`,
-  добавлен INJECT в `pmg_ownership_building_company_headquarter`.
+  добавлен INJECT в `pmg_ownership_building_company_headquarter`. Ванильные методы владения штабов —
+  `common/production_methods/11_ef_private_infrastructure.txt`: полное тело ванили (категории компаний, законы,
+  принципы) с наймом и долями E&F (Д.R9б.7): частный — только у капиталистических компаний, государственный — при
+  командной экономике, кооперативный — при кооперативной собственности.
 - `common/scripted_effects/ld_capitalization_average.txt` — `zz_ef_cap_monthly_update`: 4 скользящих средних,
   `zz_ef_cap_half` (пункты индекса E&F — в `_archive/ef_stock_market_points/`, Д.R4б.11).
 - `common/scripted_effects/ld_capitalization_crash.txt` — `zz_ef_cap_monthly_crash_check`: 12 месячных отметок,
