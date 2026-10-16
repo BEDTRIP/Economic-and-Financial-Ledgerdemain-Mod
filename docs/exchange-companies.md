@@ -38,17 +38,18 @@
 - `common/scripted_triggers/ld_listing_triggers.txt` — `zz_ef_listing_allowed` (биржа ур.≥1 + технология
   `joint_stock_companies` + не традиционализм/командная/кооперативная экономика).
 - `common/company_types/ld_companies.txt` — компании форка: `company_baring_brothers` (Baring Brothers, Лондон; особая
-  компания-фонд, Д.R9а.1; банковская — свой «Банк» с начала игры, история `00_ef_building.txt`, засев `ld_bank_seed.txt`).
+  компания-фонд, Д.R9а.1; банковская — свой «Банк» с начала игры, история `00_ef_building.txt`, засев
+  `ld_bank_seed.txt`).
 - `common/production_methods/ld_company_hq_publicly_traded.txt` +
   `common/production_method_groups/ld_company_hq_publicly_traded.txt` — `pm_company_headquarter_publicly_traded`,
   добавлен INJECT в `pmg_ownership_building_company_headquarter`. Ванильные методы владения штабов —
   `common/production_methods/11_ef_private_infrastructure.txt`: полное тело ванили (категории компаний, законы,
   принципы) с наймом и долями E&F (Д.R9б.7): частный — только у капиталистических компаний, государственный — при
   командной экономике, кооперативный — при кооперативной собственности. Компания-ЦБ при законе гос-ЦБ —
-  `pm_company_headquarter_ld_cb_state` (`common/production_methods/ld_company_hq_cb_state.txt`, дивиденды казне 100 % —
-  принято ночью): ставит и снимает `zz_ef_cb_hq_step` (`ld_listing.txt`, раз в месяц перед листингом; диспетчеры
-  `zz_ef_listing_go_cb_state`, `zz_ef_listing_cb_check` — генерат `regen_ef_listing.py`); листинг штаб компании-ЦБ
-  не трогает (R9б.14, Д.R9б.12).
+  `pm_company_headquarter_ld_cb_state` (`common/production_methods/ld_company_hq_cb_state.txt`, в группу владения штаба
+  — `common/production_method_groups/ld_company_hq_cb_state.txt`, дивиденды казне 100 % — принято ночью): ставит и
+  снимает `zz_ef_cb_hq_step` (`ld_listing.txt`, раз в месяц перед листингом; диспетчеры `zz_ef_listing_go_cb_state`,
+  `zz_ef_listing_cb_check` — генерат `regen_ef_listing.py`); листинг штаб компании-ЦБ не трогает (R9б.14, Д.R9б.12).
 - `common/scripted_effects/ld_capitalization_average.txt` — `zz_ef_cap_monthly_update`: 4 скользящих средних,
   `zz_ef_cap_half` (пункты индекса E&F — в `_archive/ef_stock_market_points/`, Д.R4б.11).
 - `common/scripted_effects/ld_capitalization_crash.txt` — `zz_ef_cap_monthly_crash_check`: 12 месячных отметок,
@@ -91,28 +92,28 @@
   преимущество выбранного блока) у стран логов; `zz_ef_xch_world_set` (мир, месяц, из `zz_ef_world_month_ef`) —
   `global_var:zz_ef_xch_world`: страна эталонной валюты с биржей, иначе крупнейшая экономика с биржей;
   `zz_ef_xch_fees_set` — комиссии биржи по видам `var:zz_ef_xch_fee_m/_b/_f` = `zz_ef_xch_fee_v` (база 0,5 % × метод
-  здания биржи и закон — ниже, «Здание биржи»; без здания — минус 15 % базы за каждую финансовую технологию страны
-  биржи — фондовая биржа, акционерные общества, инвестиционные банки, паевые фонды, международные стандарты обмена,
-  современные финансовые инструменты; не ниже 10 % базы; Д.R8.5). Надбавка за
-  чужие требования `zz_ef_xch_surcharge_v` (покупатель, должник — `scope:zz_ef_xch_d`): нет для своих, сюзерена и
-  подданного, одного рынка и договора о правах на зарубежные инвестиции (`zz_ef_xch_free_with`), иначе по закону
-  торговой политики покупателя — свободная торговля 0,5 %, меркантилизм 1 %, протекционизм 2 %, кантонская система 3 %;
-  изоляционизм покупателя или должника — сделки нет (`zz_ef_xch_banned`; Д.R8б.18). Читатели — торги
-  (`ld_exchange_trade.txt`). `common/script_values/ld_exchange_values.txt` — числа, лога.
+  здания биржи и закон — ниже, «Здание биржи»; без здания — минус 15 % базы за каждую финансовую технологию страны биржи
+  — фондовая биржа, акционерные общества, инвестиционные банки, паевые фонды, международные стандарты обмена,
+  современные финансовые инструменты; не ниже 10 % базы; Д.R8.5). Надбавка за чужие требования `zz_ef_xch_surcharge_v`
+  (покупатель, должник — `scope:zz_ef_xch_d`): нет для своих, сюзерена и подданного, одного рынка и договора о правах на
+  зарубежные инвестиции (`zz_ef_xch_free_with`), иначе по закону торговой политики покупателя — свободная торговля 0,5
+  %, меркантилизм 1 %, протекционизм 2 %, кантонская система 3 %; изоляционизм покупателя или должника — сделки нет
+  (`zz_ef_xch_banned`; Д.R8б.18). Читатели — торги (`ld_exchange_trade.txt`).
+  `common/script_values/ld_exchange_values.txt` — числа, лога.
 - **Здание биржи** (R9в; Д.R9в.1–3): `common/buildings/ld_exchange.txt` (`building_ld_exchange`, `buildable = no`,
   `downsizeable = no`), группа `common/building_groups/ld_exchange_group.txt` (`bg_ld_exchange` — дочерняя
   `bg_government`: вкладка «Развитие», содержит государство), методы `pmg_ld_exchange_trading`
   (`common/production_method_groups/ld_exchange_pmg.txt`, `common/production_methods/ld_exchange_pm.txt`: голосовые
   торги — без технологии, банкирские дома — `investment_banks`, тикер и клиринг — `international_exchange_standards`;
-  клерки и бюрократы на уровень, принято ночью). Месяц (`zz_ef_xb_month_step`, `common/scripted_effects/ld_exchange_building.txt`,
-  из `ld_world_month.txt` после `zz_ef_xch_month_roll`, страны с `zz_ef_has_exchange`): здания нет — ставится в
-  `var:zz_ef_fc_state` (и в старых сейвах); уровень — на 1 в месяц к цели `zz_ef_xb_target_v` (1 + удвоения
-  капитализации `var:zz_ef_xlm_cap` сверх `zz_ef_xb_cap_base` 100 тыс. золота, до 15; принято ночью; `add_building_level`);
-  метод — лучший открытый, только где он не активен. Комиссия `zz_ef_xch_fee_v` (`ld_exchange_values.txt`) — множитель
-  активного метода `zz_ef_xch_fee_pm_*` × закон экономической системы `zz_ef_xch_fee_law_*`; у страны без здания — по
-  технологиям, как прежде. Снос, когда биржи нет, — R11. Триггер `zz_ef_xb_has` (`ld_fc_triggers.txt`). Лог
-  `EFD|…|xch_building` (уровень, цель, капитализация в базах, комиссия). Комиссия — проводкой в казну, в меню здания —
-  подсказкой (R10).
+  клерки и бюрократы на уровень, принято ночью). Месяц (`zz_ef_xb_month_step`,
+  `common/scripted_effects/ld_exchange_building.txt`, из `ld_world_month.txt` после `zz_ef_xch_month_roll`, страны с
+  `zz_ef_has_exchange`): здания нет — ставится в `var:zz_ef_fc_state` (и в старых сейвах); уровень — на 1 в месяц к цели
+  `zz_ef_xb_target_v` (1 + удвоения капитализации `var:zz_ef_xlm_cap` сверх `zz_ef_xb_cap_base` 100 тыс. золота, до 15;
+  принято ночью; `add_building_level`); метод — лучший открытый, только где он не активен. Комиссия `zz_ef_xch_fee_v`
+  (`ld_exchange_values.txt`) — множитель активного метода `zz_ef_xch_fee_pm_*` × закон экономической системы
+  `zz_ef_xch_fee_law_*`; у страны без здания — по технологиям, как прежде. Снос, когда биржи нет, — R11. Триггер
+  `zz_ef_xb_has` (`ld_fc_triggers.txt`). Лог `EFD|…|xch_building` (уровень, цель, капитализация в базах, комиссия).
+  Комиссия — проводкой в казну, в меню здания — подсказкой (R10).
 - Инвестиционный фонд (R8б, шаг 6; Д.R8б.2, Д.R8б.4, Д.R8б.5, Д.R8б.16): здание `building_ld_investment_fund`
   (`common/buildings/ld_investment_fund.txt`; группа `bg_zz_ef_banking`, технология `financial_center`, `possible` —
   штат биржи своей страны, частная стройка) производит паи `mutual_funds` методом `pm_bond_exchange`
@@ -120,18 +121,19 @@
   `common/scripted_effects/ld_investment_fund.txt`: из `zz_ef_fc_found` и `zz_ef_fc_bind`). Товар паёв покупает
   население (потребность `popneed_financial_products`; банки — на бирже, `zz_ef_rq_bk_f`, Д.R9б.13); неделя —
   `zz_ef_fund_shares_step`: купленное страной (`zz_ef_fund_bought_week` = потребление `mutual_funds` штатов × цена 250,
-  не больше вкладов населения) → требования населения на фонд своей биржи (карта `zz_ef_rq_pp_f`, вид f). Деньги за паи движок уже перевёл в кассу здания фонда; модель проводит покупку (Д.R8б.21):
-  вклады населения и капитал банков → вклад фонда `var:zz_ef_fd_dep` страны биржи (обязательство её банков — в книге
-  банков и в M2); фонд за границей — покупатель платит из пула (`zz_ef_f_fd_out`), страна фонда на своём шаге берёт его
-  в пул и во вклад (`var:zz_ef_fd_in_for` → `zz_ef_f_fd_in`); оба — поток с заграницей в клиринг (`zz_ef_ext_net_week`).
-  `zz_ef_fund_week_step` (страна биржи, после паёв): приток из-за границы, стартовый вклад банков — доля их капитала
-  `zz_ef_fd_start_share_of_capital` (0,1; один раз, флаг `zz_ef_fd_start_due` ставит `zz_ef_fund_found`; банки получают
-  паи), проценты по вкладу фонда по ставке вкладов из капитала банков (`zz_ef_fd_dep_interest`), капитал фонда
-  `var:zz_ef_fd_capital` = вклад + книга фонда (карты `zz_ef_rq_fd_m`, `zz_ef_rq_fd_b`) по оценке в золоте
-  (`zz_ef_fd_capital_update`; книга переоценивается раз в 4 недели — `zz_ef_xch_phase_week`). Лог `EFU` — раз в месяц по
-  фонду (`zz_ef_fund_log`). Дилер: ёмкость `zz_ef_fd_capacity` (уровни × `zz_ef_fd_capacity_per_level`), спред
-  `zz_ef_fd_spread` (ключевая ставка × 0,5), справедливая цена денег должника `zz_ef_q_fair_m`
-  (`common/script_values/ld_investment_fund_values.txt`). Торги фонда — остаток стакана (Д.R8б.19; ниже — «Торги»).
+  не больше вкладов населения) → требования населения на фонд своей биржи (карта `zz_ef_rq_pp_f`, вид f). Деньги за паи
+  движок уже перевёл в кассу здания фонда; модель проводит покупку (Д.R8б.21): вклады населения и капитал банков → вклад
+  фонда `var:zz_ef_fd_dep` страны биржи (обязательство её банков — в книге банков и в M2); фонд за границей — покупатель
+  платит из пула (`zz_ef_f_fd_out`), страна фонда на своём шаге берёт его в пул и во вклад (`var:zz_ef_fd_in_for` →
+  `zz_ef_f_fd_in`); оба — поток с заграницей в клиринг (`zz_ef_ext_net_week`). `zz_ef_fund_week_step` (страна биржи,
+  после паёв): приток из-за границы, стартовый вклад банков — доля их капитала `zz_ef_fd_start_share_of_capital` (0,1;
+  один раз, флаг `zz_ef_fd_start_due` ставит `zz_ef_fund_found`; банки получают паи), проценты по вкладу фонда по ставке
+  вкладов из капитала банков (`zz_ef_fd_dep_interest`), капитал фонда `var:zz_ef_fd_capital` = вклад + книга фонда
+  (карты `zz_ef_rq_fd_m`, `zz_ef_rq_fd_b`) по оценке в золоте (`zz_ef_fd_capital_update`; книга переоценивается раз в 4
+  недели — `zz_ef_xch_phase_week`). Лог `EFU` — раз в месяц по фонду (`zz_ef_fund_log`). Дилер: ёмкость
+  `zz_ef_fd_capacity` (уровни × `zz_ef_fd_capacity_per_level`), спред `zz_ef_fd_spread` (ключевая ставка × 0,5),
+  справедливая цена денег должника `zz_ef_q_fair_m` (`common/script_values/ld_investment_fund_values.txt`). Торги фонда
+  — остаток стакана (Д.R8б.19; ниже — «Торги»).
 - **Торги — стакан** (R8б, шаги 7, 13–17; Д.R8б.17, Д.R8б.19–22, Д.R8б.26, Д.R8б.32–37):
   `common/scripted_effects/ld_exchange_trade.txt` (логика), `common/scripted_effects/ld_exchange_book.txt` (генерат
   `tools/regen_ld_exchange_book.py`: карты стакана по шагам цены, читатели, сведение актива),
@@ -156,9 +158,9 @@
   + max(g, 0)) (выше шага 9 — нет заявки); если `g` больше издержек покупки — не продаёт, а покупает (скидка покупателя
   = издержки − выгода, Д.R8б.30). Покупка — лучший из короткого списка (хозяин рынка, лидер блока, эталон, три самых
   глубоких рынка — `global_list:zz_ef_xdeep`) по `g` − издержки > 0, на бюджет недели (ЦБ — 1 % металла в деньгах, банки
-  — 1 % капитала на деньги, облигации и акции каждые, население — 0,5 % вкладов; банки и население — не больше 10 % пула,
-  банки — и не больше трети свободных денег пула `zz_ef_pool_free` на каждый вид, Д.R9.9, `banks.md`);
-  казна выкупает свои облигации ниже номинала на 1 % казны в неделю (`zz_ef_xch_buyback`, Д.R8б.37). Издержки покупки
+  — 1 % капитала на деньги, облигации и акции каждые, население — 0,5 % вкладов; банки и население — не больше 10 %
+  пула, банки — и не больше трети свободных денег пула `zz_ef_pool_free` на каждый вид, Д.R9.9, `banks.md`); казна
+  выкупает свои облигации ниже номинала на 1 % казны в неделю (`zz_ef_xch_buyback`, Д.R8б.37). Издержки покупки
   (`zz_ef_xch_fee_buy_v`) — комиссия биржи + надбавка торговой политики + комиссия нерезидента (`zz_ef_xch_nonres_v`:
   ещё раз комиссия биржи × (1 − ½ доли торговли со страной биржи), Д.R8б.35). Заявки держателя — карты
   `zz_ef_xa_<держатель>_<вид>` (объём) и `zz_ef_xp_…` (шаг; покупка — 10 + шаг); ИИ ставит их заново каждую свою неделю.

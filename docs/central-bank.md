@@ -48,8 +48,8 @@
 - Размер ЦБ, чеканка, облигации (Д.R9б.1; здание ЦБ E&F `building_bank` — `_archive/ef_central_bank_building/`):
   `common/script_values/ld_cb_size_values.txt` (размер `zz_ef_cb_size_v` = `var:zz_ef_cb_size`; цель 5 × `gdp_view`;
   чеканка `zz_ef_cb_mint_v` = величина стандарта (`zz_ef_cb_mint_fiat` 250, `_metal` 1000 — и внешний стандарт,
-  `_exchange` 2500) × размер; цель выпуска облигаций `zz_ef_cb_bond_target_v` = 10 × размер × множитель долга;
-  выпуск «Банков» `zz_ef_cb_bond_banks_v`), `common/scripted_effects/ld_cb_size.txt` (`zz_ef_cb_set` — модификатор
+  `_exchange` 2500) × размер; цель выпуска облигаций `zz_ef_cb_bond_target_v` = 10 × размер × множитель долга; выпуск
+  «Банков» `zz_ef_cb_bond_banks_v`), `common/scripted_effects/ld_cb_size.txt` (`zz_ef_cb_set` — модификатор
   `has_central_bank`, размер, чеканка; `zz_ef_cb_size_update` — размер не меньше цели, не убывает;
   `zz_ef_cb_mint_update` — модификатор `zz_ef_cb_minting` × `zz_ef_cb_mint_v`, ±25 % `zz_ef_cb_mint_reval/_deval` при
   `law_revaluation/devaluation`), `common/static_modifiers/ld_cb_size_modifiers.txt`. Размер ставят: история
@@ -68,20 +68,20 @@
   `ld_bank_pm.txt`).
 - Премия за риск: `common/script_values/ld_risk_premium_values.txt`, `common/scripted_effects/ld_risk_premium.txt`.
 - Закон «Центральный банк» (R3.2): группа `common/law_groups/ld_central_bank.txt` (`lawgroup_ld_central_bank`), законы
-  `common/laws/ld_central_bank_laws.txt` (`law_ld_cb_state` / `_private` / `_none`; вид ЦБ читается законом,
-  `has_law`). **ЦБ — законом (Д.R4а.3):** государственный и частный — с технологией `central_banking`,
-  при денежной системе; `on_activate` → `zz_ef_cb_found` (`ld_cb_law.txt`: здание ЦБ E&F размера 5 в столице,
-  `central_bank_modifier` — модификатор `has_central_bank`, `central_bank_production_methods`; при металлическом
-  стандарте ЦБ забирает у банков металл нормы покрытия банкнот `zz_ef_cb_found_take_gold/_silver`, известное движение
-  сверки); «без ЦБ» → `zz_ef_cb_close` (здание снимается, модификатор тоже; металлический — металл власти банкам). ИИ
-  принимает государственный при технологии (`ai_enact_weight_modifier` = `zz_ef_cb_law_ai_weight`, 200), частный —
-  только игрок. Появление и рост ЦБ E&F по ВВП (`macro_facilities_on_action_bc`,
-  `has_currency_law_but_no_building_central_bank`, `introduction_new_currency`) — только при законе
-  (`zz_ef_cb_law_has_cb`; готовность E&F — `zz_ef_cb_ready`, `ld_monetary_authority_triggers.txt`). Старт: история
-  ставит закон по ЦБ истории (`zz_ef_cb_law_sync`, `history/global/ld_central_bank_law.txt`), год старта —
-  государственный закон стране, готовой к ЦБ по E&F (`zz_ef_cb_law_start`, `ld_start_setup.txt`); месяц — ЦБ следует
-  закону (`zz_ef_cb_law_follow`, хаб E&F `ef_on_monthly_pulse_country`: кризисы E&F снимают здание — закон его
-  возвращает). Металл ЦБ покупают «Банки» (Д.R4а.9). Локализация `ld_cb_law_l_*.yml`. Виды ЦБ (Д.R4а.5): прибыль ЦБ (проценты банков по кредиту ЦБ) —
+  `common/laws/ld_central_bank_laws.txt` (`law_ld_cb_state` / `_private` / `_none`; вид ЦБ читается законом, `has_law`).
+  **ЦБ — законом (Д.R4а.3):** государственный и частный — с технологией `central_banking`, при денежной системе;
+  `on_activate` → `zz_ef_cb_found` (`ld_cb_law.txt`: здание ЦБ E&F размера 5 в столице, `central_bank_modifier` —
+  модификатор `has_central_bank`, `central_bank_production_methods`; при металлическом стандарте ЦБ забирает у банков
+  металл нормы покрытия банкнот `zz_ef_cb_found_take_gold/_silver`, известное движение сверки); «без ЦБ» →
+  `zz_ef_cb_close` (здание снимается, модификатор тоже; металлический — металл власти банкам). ИИ принимает
+  государственный при технологии (`ai_enact_weight_modifier` = `zz_ef_cb_law_ai_weight`, 200), частный — только игрок.
+  Появление и рост ЦБ E&F по ВВП (`macro_facilities_on_action_bc`, `has_currency_law_but_no_building_central_bank`,
+  `introduction_new_currency`) — только при законе (`zz_ef_cb_law_has_cb`; готовность E&F — `zz_ef_cb_ready`,
+  `ld_monetary_authority_triggers.txt`). Старт: история ставит закон по ЦБ истории (`zz_ef_cb_law_sync`,
+  `history/global/ld_central_bank_law.txt`), год старта — государственный закон стране, готовой к ЦБ по E&F
+  (`zz_ef_cb_law_start`, `ld_start_setup.txt`); месяц — ЦБ следует закону (`zz_ef_cb_law_follow`, хаб E&F
+  `ef_on_monthly_pulse_country`: кризисы E&F снимают здание — закон его возвращает). Металл ЦБ покупают «Банки»
+  (Д.R4а.9). Локализация `ld_cb_law_l_*.yml`. Виды ЦБ (Д.R4а.5): прибыль ЦБ (проценты банков по кредиту ЦБ) —
   государственного в казну, частного — владельцам (капиталистам: во вклады населения, `ld_money_model.txt`); кредит
   казне — предел `zz_ef_cb_loan_cap` (государственный 50 % ВВП, при фиате без предела, частный 15 %;
   `ld_cb_loan_values.txt`, генератор `regen_ef_cb_loan.py`; кнопка игрока; ИИ E&F — в архиве,
@@ -89,13 +89,13 @@
   государственный 0,75). Частные на старте — Великобритания, Франция, США, Австрия, Нидерланды
   (`history/global/ld_central_bank_law.txt`).
 - **Иностранный ЦБ** (Д.R9а.7, `law_ld_cb_foreign`): виден и доступен стране, где у иностранного банка есть местная
-  книга (`zz_ef_cb_foreign_possible`, `ld_cb_foreign_triggers.txt`; Д.R9а.2, `banks.md`); ведёт себя как частный
-  (`zz_ef_cb_private_like`: кредит казне, вес правила ставки, метод облигаций); прибыль — в капитал местной книги банка
-  (`var:zz_ef_cb_fbook`, `ld_money_model.txt`), облигации — «Банк» в области, где страна банка владеет уровнями
-  (`var:zz_ef_cb_bank_state`; своя — в `var:zz_ef_cb_bank_state_own` до конца закона); консоли — как у
-  государственного (долг казны; принято ночью). Месяц (`zz_ef_cb_foreign_step`): книги нет или страна банка воюет с
-  этой — закон сам сменяется на государственный (лог `EFK|cb_foreign_end`). ИИ — страна без `central_banking` при
-  местной книге, вес `zz_ef_cb_foreign_ai_weight` (100, принято ночью).
+  книга (`zz_ef_cb_foreign_possible`, `common/scripted_triggers/ld_cb_foreign_triggers.txt`; Д.R9а.2, `banks.md`); ведёт
+  себя как частный (`zz_ef_cb_private_like`: кредит казне, вес правила ставки, метод облигаций); прибыль — в капитал
+  местной книги банка (`var:zz_ef_cb_fbook`, `ld_money_model.txt`), облигации — «Банк» в области, где страна банка
+  владеет уровнями (`var:zz_ef_cb_bank_state`; своя — в `var:zz_ef_cb_bank_state_own` до конца закона); консоли — как у
+  государственного (долг казны; принято ночью). Месяц (`zz_ef_cb_foreign_step`): книги нет или страна банка воюет с этой
+  — закон сам сменяется на государственный (лог `EFK|cb_foreign_end`). ИИ — страна без `central_banking` при местной
+  книге, вес `zz_ef_cb_foreign_ai_weight` (100, принято ночью).
 - Связанные файлы E&F с правкой в теле: `scripted_effects/01_economic_scripted_effects.txt`
   (`on_activate_law_revaluation/devaluation/no_monetary_policy` :35349-:42350 зовут `zz_ef_mp_init/_clear`; идеология
   «большая денежная политика» в `monetary_policy_ideology_dynamic` (:34557-:41604) учитывает `zz_ef_rate_policy_steps`),
