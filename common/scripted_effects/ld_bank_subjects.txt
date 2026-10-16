@@ -226,7 +226,9 @@ zz_ef_bk_aggregates_ensure = {
 }
 
 # Any scope, scope:zz_ef_bk_c -- the country: a new subject of kind $KIND$ with parent $PARENT$, saved as
-# scope:zz_ef_bk_new; its accounts start at zero.
+# scope:zz_ef_bk_new; its accounts start at zero. A company's subject (home or a local book) is new for a year -- no
+# bankruptcy (zz_ef_bk_fail_step) -- and takes its starting capital at the country's next book step (zz_ef_bk_seed_cap;
+# Д.R9а.11).
 zz_ef_bk_box_create = {
 	create_container = {
 		parent = $PARENT$
@@ -238,6 +240,80 @@ zz_ef_bk_box_create = {
 		set_variable = { name = zz_ef_bk_cty value = scope:zz_ef_bk_c }
 		set_variable = { name = zz_ef_bk_lv value = 0 }
 		set_variable = { name = zz_ef_bk_sh value = 0 }
+		if = {
+			limit = { var:zz_ef_bk_kind = flag:company }
+			set_variable = { name = zz_ef_bk_young value = 1 days = zz_ef_bk_grace_days }
+			set_variable = zz_ef_bk_seed
+		}
+	}
+}
+
+# COUNTRY scope (zz_ef_bk_book_step, before the allocation): a new company subject's starting capital (Д.R9а.11) -- its
+# share of levels x the capital of the country's subjects, moved from the others with capital > 0 pro rata (no new
+# money: the books' sum holds); nothing to take (the start: all accounts are zero) -- nothing moves. Log EFK|bank_seed.
+zz_ef_bk_seed_cap = {
+	every_in_list = {
+		variable = zz_ef_bk_subj
+		limit = { has_variable = zz_ef_bk_seed }
+		save_temporary_scope_as = zz_ef_bk_sn
+		set_variable = zz_ef_bk_sn_me
+		scope:zz_ef_bk_c = {
+			set_variable = { name = zz_ef_bk_sc_t value = 0 }
+			set_variable = { name = zz_ef_bk_sc_p value = 0 }
+			every_in_list = {
+				variable = zz_ef_bk_subj
+				limit = { has_variable = zz_ef_bk_cap }
+				scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_sc_t add = prev.var:zz_ef_bk_cap } }
+				if = {
+					limit = {
+						NOT = { has_variable = zz_ef_bk_sn_me }
+						var:zz_ef_bk_cap > 0
+					}
+					scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_sc_p add = prev.var:zz_ef_bk_cap } }
+				}
+			}
+			if = {
+				limit = {
+					var:zz_ef_bk_sc_t > 0
+					var:zz_ef_bk_sc_p > 0
+					var:zz_ef_bk_shsum > 0
+				}
+				set_variable = { name = zz_ef_bk_sc_k value = {
+					value = var:zz_ef_bk_sc_t
+					multiply = scope:zz_ef_bk_sn.var:zz_ef_bk_sh
+					divide = var:zz_ef_bk_shsum
+					divide = var:zz_ef_bk_sc_p
+					max = 1
+				} }
+				set_variable = { name = zz_ef_bk_sc_a value = 0 }
+				every_in_list = {
+					variable = zz_ef_bk_subj
+					limit = {
+						NOT = { has_variable = zz_ef_bk_sn_me }
+						has_variable = zz_ef_bk_cap
+						var:zz_ef_bk_cap > 0
+					}
+					set_variable = { name = zz_ef_bk_mv value = { value = var:zz_ef_bk_cap multiply = scope:zz_ef_bk_c.var:zz_ef_bk_sc_k } }
+					change_variable = { name = zz_ef_bk_cap subtract = var:zz_ef_bk_mv }
+					scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_sc_a add = prev.var:zz_ef_bk_mv } }
+					remove_variable = zz_ef_bk_mv
+				}
+				scope:zz_ef_bk_sn = {
+					if = { limit = { NOT = { has_variable = zz_ef_bk_cap } } set_variable = { name = zz_ef_bk_cap value = 0 } }
+					change_variable = { name = zz_ef_bk_cap add = scope:zz_ef_bk_c.var:zz_ef_bk_sc_a }
+					if = {
+						limit = { zz_ef_logs_on = yes }
+						debug_log = "EFK|[TimeKeeper.GetCurrentDate.GetString]|[THIS.Var('zz_ef_bk_cty').GetCountry.GetNameNoFormatting]|bank_seed|[THIS.Var('zz_ef_bk_co').GetCompany.GetNameNoFormatting]|cap [THIS.Var('zz_ef_bk_cap').GetValue|0]|of [THIS.Var('zz_ef_bk_cty').GetCountry.MakeScope.Var('zz_ef_bk_sc_t').GetValue|0]"
+					}
+				}
+				remove_variable = zz_ef_bk_sc_k
+				remove_variable = zz_ef_bk_sc_a
+			}
+			remove_variable = zz_ef_bk_sc_t
+			remove_variable = zz_ef_bk_sc_p
+		}
+		remove_variable = zz_ef_bk_seed
+		remove_variable = zz_ef_bk_sn_me
 	}
 }
 
@@ -270,6 +346,7 @@ zz_ef_bk_book_step = {
 		# its loan rate (Д.R9.1): the credit rate + the same premium
 		set_variable = { name = zz_ef_bk_lrate value = { value = scope:zz_ef_bk_c.zz_ef_cc_rate add = var:zz_ef_bk_prem } }
 	}
+	zz_ef_bk_seed_cap = yes
 	zz_ef_bk_alloc = { A = dep V = zz_ef_ledger_deposits_v W = zz_ef_bk_w_dep_v BYW = no }
 	zz_ef_bk_alloc = { A = fdd V = zz_ef_fd_dep_v W = zz_ef_bk_w_dep_v BYW = no }
 	zz_ef_bk_alloc = { A = cpd V = zz_ef_comp_dep_v W = zz_ef_bk_w_dep_v BYW = no }
@@ -629,7 +706,7 @@ zz_ef_bk_map_move = {
 # investment fund) lose its hole pro rata, up to their deposits (posting deposits -> capital in the book's country);
 # what a book held goes back as the week's residual to the other banks of its country by their shares
 # (zz_ef_bk_book_step); the company is out of the subjects for zz_ef_bk_fail_days (its levels count with «частные
-# банкиры»), then new subjects with empty accounts. Принято ночью, проверить: the aggregates («госбанки», «частные
+# банкиры»), then new subjects. A company with a book younger than a year does not close (Д.R9а.11). Принято ночью, проверить: the aggregates («госбанки», «частные
 # банкиры») do not close; foreign CBs' and the treasury's deposits do not lose (their registers live elsewhere).
 # Logs EFK|bank_fail (a book), EFK|bank_group (a company with books abroad). COUNTRY scope, its monthly pulse
 # (zz_ef_bank_monthly).
@@ -645,6 +722,7 @@ zz_ef_bk_fail_step = {
 		save_temporary_scope_as = zz_ef_bk_gc
 		set_variable = { name = zz_ef_bk_gcap value = 0 }
 		set_variable = { name = zz_ef_bk_gcbd value = 0 }
+		set_variable = { name = zz_ef_bk_gyoung value = 0 }
 		if = {
 			limit = { has_variable = zz_ef_bk_box }
 			var:zz_ef_bk_box = { zz_ef_bk_group_add = yes }
@@ -664,6 +742,7 @@ zz_ef_bk_fail_step = {
 			limit = {
 				var:zz_ef_bk_gcap < 0
 				var:zz_ef_bk_gcbd <= 0
+				var:zz_ef_bk_gyoung = 0
 			}
 			if = {
 				limit = { has_variable = zz_ef_bk_box }
@@ -686,12 +765,17 @@ zz_ef_bk_fail_step = {
 		}
 		remove_variable = zz_ef_bk_gcap
 		remove_variable = zz_ef_bk_gcbd
+		remove_variable = zz_ef_bk_gyoung
 	}
 }
 
 # SUBJECT scope (a company's book), scope:zz_ef_bk_gc -- the company: its capital and debt to the CB, in gold, added to
-# the company's var:zz_ef_bk_gcap, var:zz_ef_bk_gcbd.
+# the company's var:zz_ef_bk_gcap, var:zz_ef_bk_gcbd; a book younger than a year -- var:zz_ef_bk_gyoung (Д.R9а.11).
 zz_ef_bk_group_add = {
+	if = {
+		limit = { has_variable = zz_ef_bk_young }
+		scope:zz_ef_bk_gc = { set_variable = { name = zz_ef_bk_gyoung value = 1 } }
+	}
 	if = {
 		limit = {
 			has_variable = zz_ef_bk_cap
