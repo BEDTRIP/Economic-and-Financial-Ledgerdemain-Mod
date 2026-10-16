@@ -1,4 +1,4 @@
-
+﻿
 # COPY-PASTED FOR NOW
 @panel_width_minus_20 = 520			# used to be 440
 @panel_width_minus_20_half = 260	# used to be 220
@@ -110,7 +110,7 @@ types market_states_panel
 						using = fontsize_large
 						autoresize = yes
 						raw_text = "#BOLD [GetPlayer.GetName]#!"
-						align = Hcenter
+						align = hcenter
 						elide = right
 						parentanchor = hcenter
 					}
@@ -129,7 +129,7 @@ types market_states_panel
 							using = fontsize_large
 							autoresize = yes
 							raw_text = "1 [GetPlayer.GetCustom('currency_symbol')] = [GetPlayer.MakeScope.ScriptValue('money_value_rapported_inflation')|+D] @gold!"
-							align = Hcenter
+							align = hcenter
 							elide = right
 							parentanchor = center
 						}
@@ -138,7 +138,7 @@ types market_states_panel
 							using = fontsize_large
 							autoresize = yes
 							raw_text = "1 [GetPlayer.GetCustom('currency_symbol')] = #v [Market.GetOwner.MakeScope.ScriptValue('exchange_rate_for_international_trade_buy_market_panel')|+D] #! [Market.GetOwner.GetCustom('currency_symbol')]"
-							align = Hcenter
+							align = hcenter
 							elide = right
 							parentanchor = center
 						}
@@ -178,7 +178,7 @@ types market_states_panel
 						using = fontsize_large
 						autoresize = yes
 						raw_text = "#BOLD [Market.GetOwner.GetName]#!"
-						align = Hcenter
+						align = hcenter
 						elide = right
 						parentanchor = center
 
@@ -198,7 +198,7 @@ types market_states_panel
 							using = fontsize_large
 							autoresize = yes
 							raw_text = "1 [Market.GetOwner.GetCustom('currency_symbol')] = [Market.GetOwner.MakeScope.ScriptValue('money_value_rapported_inflation')|+D] #! [Market.GetOwner.GetCustom('monetary_system')]"
-							align = Hcenter
+							align = hcenter
 							elide = right
 							parentanchor = center
 						}
@@ -206,7 +206,7 @@ types market_states_panel
 							using = fontsize_large
 							autoresize = yes
 							raw_text = "1 [Market.GetOwner.GetCustom('currency_symbol')] = #v [Market.GetOwner.MakeScope.ScriptValue('exchange_rate_for_international_trade_buy_for_target_market_panel')|+D] #! [GetMetaPlayer.GetPlayedOrObservedCountry.GetCustom('currency_symbol')]"
-							align = Hcenter
+							align = hcenter
 							elide = right
 							parentanchor = center
 						}

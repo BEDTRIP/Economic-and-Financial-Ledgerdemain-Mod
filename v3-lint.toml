@@ -7,8 +7,9 @@
 
 [[suppress]]
 key = "missing-item"
-message = "building type building_company_"
-why = "the engine makes a building_company_<key> type for every company type (company_<key> is defined); the game logs nothing about them"
+message = "building type"
+file = "common/scripted_effects/ld_listing_switch.txt"
+why = "the engine makes a headquarters type building_<company key> for every company type (the save: building_company_hbc, building_company_east_india_company; keys without company_ give building_russo_chinese_bank …); the game logs no unknown building type at load"
 
 [[suppress]]
 key = "validation"
@@ -77,10 +78,6 @@ key = "text-fit"
 plan = "R12 Л.3: texts that do not fit their boxes"
 
 [[suppress]]
-key = "choice"
-plan = "R12 Л.4: align / parentanchor written Hcenter / Vcenter"
-
-[[suppress]]
 key = "gui"
 message = "SetRoot"
 plan = "R12 Л.4: ScriptedGui.Execute without GuiScope.SetRoot"
@@ -131,11 +128,7 @@ plan = "R12 Л.8: REPLACE bodies without fields of the record they replace"
 [[suppress]]
 key = "missing-item"
 message = "building type"
-plan = "R12 Л.9: building types that no longer exist (listing switch, city graphics, MPM panel)"
-
-[[suppress]]
-key = "reader-directives"
-plan = "R12 Л.9: @panel_width_minus_10 not defined in ld_economy_panel.gui (zero width)"
+plan = "R12 Л.9: building types that no longer exist (city graphics, MPM panel)"
 
 [[suppress]]
 key = "validation"
@@ -144,11 +137,6 @@ plan = "R12 Л.9: single errors (expected number / integer, game_date)"
 [[suppress]]
 key = "structure"
 plan = "R12 Л.9: draggable_behavior block where a value is expected (copies of vanilla panels)"
-
-[[suppress]]
-key = "gui"
-message = "unexpected value"
-plan = "R12 Л.9: `size { … }` without = in gui/country_panel.gui"
 
 [[suppress]]
 key = "image-size"
@@ -165,10 +153,6 @@ plan = "R12 Л.9: a script value defined twice"
 [[suppress]]
 key = "strict-scopes"
 plan = "R12 Л.9: local_var used where it may be unset (PSC, building levels)"
-
-[[suppress]]
-key = "bom"
-plan = "R12 Л.9: gui/00_ef_deported_gui_1.gui without a BOM"
 
 [[suppress]]
 key = "missing-item"
