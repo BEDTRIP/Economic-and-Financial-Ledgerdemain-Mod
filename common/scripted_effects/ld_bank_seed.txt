@@ -3511,3 +3511,482 @@ zz_ef_bank_company_build = {
 		}
 	}
 }
+
+### COUNTRY scope, the host (zz_ef_bk_subj_step, scope:zz_ef_bk_c): the local books of the companies present here
+### (PRESENCE, Д.R9а.2) -- zz_ef_bk_local_book with the company as scope:zz_ef_bk_x.
+zz_ef_bk_presence_step = {
+	if = {
+		limit = {
+			this = c:FRA
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_Rothschild_Bank_gbr }
+		}
+		c:GBR = { company:company_Rothschild_Bank_gbr = { save_temporary_scope_as = zz_ef_bk_x } }
+		zz_ef_bk_local_book = { HOME = c:GBR }
+	}
+	if = {
+		limit = {
+			this = c:AUS
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_Rothschild_Bank_gbr }
+		}
+		c:GBR = { company:company_Rothschild_Bank_gbr = { save_temporary_scope_as = zz_ef_bk_x } }
+		zz_ef_bk_local_book = { HOME = c:GBR }
+	}
+	if = {
+		limit = {
+			this = c:FRM
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_Rothschild_Bank_gbr }
+		}
+		c:GBR = { company:company_Rothschild_Bank_gbr = { save_temporary_scope_as = zz_ef_bk_x } }
+		zz_ef_bk_local_book = { HOME = c:GBR }
+	}
+	if = {
+		limit = {
+			this = c:SIC
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_Rothschild_Bank_gbr }
+		}
+		c:GBR = { company:company_Rothschild_Bank_gbr = { save_temporary_scope_as = zz_ef_bk_x } }
+		zz_ef_bk_local_book = { HOME = c:GBR }
+	}
+	if = {
+		limit = {
+			this = c:PER
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_ImperialBankofPersia }
+		}
+		c:GBR = { company:company_ImperialBankofPersia = { save_temporary_scope_as = zz_ef_bk_x } }
+		zz_ef_bk_local_book = { HOME = c:GBR }
+	}
+	if = {
+		limit = {
+			this = c:TUR
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_OttomanBank }
+		}
+		c:GBR = { company:company_OttomanBank = { save_temporary_scope_as = zz_ef_bk_x } }
+		zz_ef_bk_local_book = { HOME = c:GBR }
+	}
+	if = {
+		limit = {
+			this = c:MEX
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_bancodelondresmexico }
+		}
+		c:GBR = { company:company_bancodelondresmexico = { save_temporary_scope_as = zz_ef_bk_x } }
+		zz_ef_bk_local_book = { HOME = c:GBR }
+	}
+	if = {
+		limit = {
+			this = c:QUE
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_BankOfMontreal }
+		}
+		c:GBR = { company:company_BankOfMontreal = { save_temporary_scope_as = zz_ef_bk_x } }
+		zz_ef_bk_local_book = { HOME = c:GBR }
+	}
+	if = {
+		limit = {
+			this = c:ONT
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_RoyalBankofCanada }
+		}
+		c:GBR = { company:company_RoyalBankofCanada = { save_temporary_scope_as = zz_ef_bk_x } }
+		zz_ef_bk_local_book = { HOME = c:GBR }
+	}
+	if = {
+		limit = {
+			this = c:NSW
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_ColonialBankOfAustralia }
+		}
+		c:GBR = { company:company_ColonialBankOfAustralia = { save_temporary_scope_as = zz_ef_bk_x } }
+		zz_ef_bk_local_book = { HOME = c:GBR }
+	}
+}
+
+### BUILDING scope, scope:zz_ef_bk_c: its levels owned by country $HOME$ (up to 64) added to
+### scope:zz_ef_bk_c.var:zz_ef_bk_xl.
+zz_ef_bk_owned_levels = {
+	if = {
+		limit = { levels_owned_by_country = { target = $HOME$ value >= 33 } }
+		if = {
+			limit = { levels_owned_by_country = { target = $HOME$ value >= 49 } }
+			if = {
+				limit = { levels_owned_by_country = { target = $HOME$ value >= 57 } }
+				if = {
+					limit = { levels_owned_by_country = { target = $HOME$ value >= 61 } }
+					if = {
+						limit = { levels_owned_by_country = { target = $HOME$ value >= 63 } }
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 64 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 64 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 63 } }
+						}
+					}
+					else = {
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 62 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 62 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 61 } }
+						}
+					}
+				}
+				else = {
+					if = {
+						limit = { levels_owned_by_country = { target = $HOME$ value >= 59 } }
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 60 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 60 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 59 } }
+						}
+					}
+					else = {
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 58 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 58 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 57 } }
+						}
+					}
+				}
+			}
+			else = {
+				if = {
+					limit = { levels_owned_by_country = { target = $HOME$ value >= 53 } }
+					if = {
+						limit = { levels_owned_by_country = { target = $HOME$ value >= 55 } }
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 56 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 56 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 55 } }
+						}
+					}
+					else = {
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 54 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 54 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 53 } }
+						}
+					}
+				}
+				else = {
+					if = {
+						limit = { levels_owned_by_country = { target = $HOME$ value >= 51 } }
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 52 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 52 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 51 } }
+						}
+					}
+					else = {
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 50 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 50 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 49 } }
+						}
+					}
+				}
+			}
+		}
+		else = {
+			if = {
+				limit = { levels_owned_by_country = { target = $HOME$ value >= 41 } }
+				if = {
+					limit = { levels_owned_by_country = { target = $HOME$ value >= 45 } }
+					if = {
+						limit = { levels_owned_by_country = { target = $HOME$ value >= 47 } }
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 48 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 48 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 47 } }
+						}
+					}
+					else = {
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 46 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 46 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 45 } }
+						}
+					}
+				}
+				else = {
+					if = {
+						limit = { levels_owned_by_country = { target = $HOME$ value >= 43 } }
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 44 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 44 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 43 } }
+						}
+					}
+					else = {
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 42 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 42 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 41 } }
+						}
+					}
+				}
+			}
+			else = {
+				if = {
+					limit = { levels_owned_by_country = { target = $HOME$ value >= 37 } }
+					if = {
+						limit = { levels_owned_by_country = { target = $HOME$ value >= 39 } }
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 40 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 40 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 39 } }
+						}
+					}
+					else = {
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 38 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 38 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 37 } }
+						}
+					}
+				}
+				else = {
+					if = {
+						limit = { levels_owned_by_country = { target = $HOME$ value >= 35 } }
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 36 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 36 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 35 } }
+						}
+					}
+					else = {
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 34 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 34 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 33 } }
+						}
+					}
+				}
+			}
+		}
+	}
+	else = {
+		if = {
+			limit = { levels_owned_by_country = { target = $HOME$ value >= 17 } }
+			if = {
+				limit = { levels_owned_by_country = { target = $HOME$ value >= 25 } }
+				if = {
+					limit = { levels_owned_by_country = { target = $HOME$ value >= 29 } }
+					if = {
+						limit = { levels_owned_by_country = { target = $HOME$ value >= 31 } }
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 32 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 32 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 31 } }
+						}
+					}
+					else = {
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 30 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 30 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 29 } }
+						}
+					}
+				}
+				else = {
+					if = {
+						limit = { levels_owned_by_country = { target = $HOME$ value >= 27 } }
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 28 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 28 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 27 } }
+						}
+					}
+					else = {
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 26 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 26 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 25 } }
+						}
+					}
+				}
+			}
+			else = {
+				if = {
+					limit = { levels_owned_by_country = { target = $HOME$ value >= 21 } }
+					if = {
+						limit = { levels_owned_by_country = { target = $HOME$ value >= 23 } }
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 24 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 24 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 23 } }
+						}
+					}
+					else = {
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 22 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 22 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 21 } }
+						}
+					}
+				}
+				else = {
+					if = {
+						limit = { levels_owned_by_country = { target = $HOME$ value >= 19 } }
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 20 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 20 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 19 } }
+						}
+					}
+					else = {
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 18 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 18 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 17 } }
+						}
+					}
+				}
+			}
+		}
+		else = {
+			if = {
+				limit = { levels_owned_by_country = { target = $HOME$ value >= 9 } }
+				if = {
+					limit = { levels_owned_by_country = { target = $HOME$ value >= 13 } }
+					if = {
+						limit = { levels_owned_by_country = { target = $HOME$ value >= 15 } }
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 16 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 16 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 15 } }
+						}
+					}
+					else = {
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 14 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 14 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 13 } }
+						}
+					}
+				}
+				else = {
+					if = {
+						limit = { levels_owned_by_country = { target = $HOME$ value >= 11 } }
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 12 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 12 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 11 } }
+						}
+					}
+					else = {
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 10 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 10 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 9 } }
+						}
+					}
+				}
+			}
+			else = {
+				if = {
+					limit = { levels_owned_by_country = { target = $HOME$ value >= 5 } }
+					if = {
+						limit = { levels_owned_by_country = { target = $HOME$ value >= 7 } }
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 8 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 8 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 7 } }
+						}
+					}
+					else = {
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 6 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 6 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 5 } }
+						}
+					}
+				}
+				else = {
+					if = {
+						limit = { levels_owned_by_country = { target = $HOME$ value >= 3 } }
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 4 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 4 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 3 } }
+						}
+					}
+					else = {
+						if = {
+							limit = { levels_owned_by_country = { target = $HOME$ value >= 2 } }
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 2 } }
+						}
+						else = {
+							scope:zz_ef_bk_c = { change_variable = { name = zz_ef_bk_xl add = 1 } }
+						}
+					}
+				}
+			}
+		}
+	}
+}

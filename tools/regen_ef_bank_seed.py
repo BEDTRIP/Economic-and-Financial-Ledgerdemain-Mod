@@ -353,6 +353,7 @@ zz_ef_bank_seed_state = {
     o.append(ladder(lambda s: country(s)))
     o.append("}\n\n")
     o.append(company_seed(keys))
+    o.append(presence_books())
     return "".join(o)
 
 
@@ -486,6 +487,53 @@ zz_ef_bank_company_build = {
 \t}
 }
 """)
+    return "".join(o)
+
+
+# a building's levels owned by a country, read up to this many (levels_owned_by_country has no value to read -- a
+# binary ladder of thresholds)
+OWNED_MAX = 64
+
+
+def owned_ladder(lo: int, hi: int, ind: str) -> str:
+    """Levels in [lo, hi] owned by $HOME$: thresholds halving the range, the leaf adds its count."""
+    if lo == hi:
+        return f"{ind}scope:zz_ef_bk_c = {{ change_variable = {{ name = zz_ef_bk_xl add = {lo} }} }}\n"
+    mid = (lo + hi + 1) // 2
+    return (f"{ind}if = {{\n{ind}\tlimit = {{ levels_owned_by_country = {{ target = $HOME$ value >= {mid} }} }}\n"
+            + owned_ladder(mid, hi, ind + "\t") + f"{ind}}}\n{ind}else = {{\n"
+            + owned_ladder(lo, mid - 1, ind + "\t") + f"{ind}}}\n")
+
+
+def presence_books() -> str:
+    """Д.R9а.2 (R9а.4): the local book of a company present abroad (PRESENCE) -- a subject of the host's banks, its
+    levels the host's "Bank" levels its country owns (one company per country and host: the trigger sees countries,
+    not companies)."""
+    pairs = [(co, tag, t) for co, tag, states in PRESENCE for t, _ in states]
+    assert len({(tag, t) for _, tag, t in pairs}) == len(pairs), "two companies of one country in one host"
+    o = ["""### COUNTRY scope, the host (zz_ef_bk_subj_step, scope:zz_ef_bk_c): the local books of the companies present here
+### (PRESENCE, Д.R9а.2) -- zz_ef_bk_local_book with the company as scope:zz_ef_bk_x.
+zz_ef_bk_presence_step = {
+"""]
+    for co, tag, t in pairs:
+        o.append(f"""	if = {{
+		limit = {{
+			this = c:{t}
+			exists = c:{tag}
+			c:{tag} = {{ has_company = company_type:{co} }}
+		}}
+		c:{tag} = {{ company:{co} = {{ save_temporary_scope_as = zz_ef_bk_x }} }}
+		zz_ef_bk_local_book = {{ HOME = c:{tag} }}
+	}}
+""")
+    o.append("""}
+
+### BUILDING scope, scope:zz_ef_bk_c: its levels owned by country $HOME$ (up to """ + str(OWNED_MAX) + """) added to
+### scope:zz_ef_bk_c.var:zz_ef_bk_xl.
+zz_ef_bk_owned_levels = {
+""")
+    o.append(owned_ladder(1, OWNED_MAX, "\t"))
+    o.append("}\n")
     return "".join(o)
 
 

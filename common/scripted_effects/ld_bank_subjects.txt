@@ -9,7 +9,11 @@
 #   (rebuilt each step), zz_ef_bk_t / _g / _cl / _ck -- all levels, the government's, the companies', their scale
 #   on a company: var:zz_ef_bk_box -- its subject, var:zz_ef_bk_lv -- its "Bank" levels as the window reads them
 #   (gui/ld_bank_hook.gui; script has no trigger for a company's levels of one building type)
-# A company's levels abroad count in its own country (the transnational subject -- R9а).
+#   on a company: list zz_ef_bk_books -- its local books abroad, var:zz_ef_bk_lvh -- its levels at home
+# A company present abroad (PRESENCE of tools/regen_ef_bank_seed.py) keeps a local book in the host (Д.R9а.2): a subject
+# of the host's banks (its accounts in the host's money, var:zz_ef_bk_local), parent -- the company; its levels -- the
+# host's "Bank" levels the company's country owns (zz_ef_bk_presence_step). One capital and one bankruptcy -- over all
+# its books (zz_ef_bk_fail_step); its other levels abroad count at home.
 
 # COUNTRY scope, its weekly step (zz_ef_money_model_step, after the reconciliation).
 zz_ef_bk_subj_step = {
@@ -28,6 +32,7 @@ zz_ef_bk_subj_step = {
 			limit = { NOT = { is_target_in_global_variable_list = { name = zz_ef_bk_hook target = this } } }
 			add_to_global_variable_list = { name = zz_ef_bk_hook target = this }
 		}
+		zz_ef_bk_home_levels = yes
 		if = {
 			limit = { zz_ef_bk_company_banks = yes }
 			if = {
@@ -39,12 +44,12 @@ zz_ef_bk_subj_step = {
 			# its country now: a company passes with an annexed or split country, its subject with it (the books follow by
 			# the weekly allocation; the exceptional events -- R11)
 			var:zz_ef_bk_box = {
-				set_variable = { name = zz_ef_bk_lv value = prev.var:zz_ef_bk_lv }
+				set_variable = { name = zz_ef_bk_lv value = prev.var:zz_ef_bk_lvh }
 				set_variable = { name = zz_ef_bk_cty value = scope:zz_ef_bk_c }
 			}
 			scope:zz_ef_bk_c = {
 				add_to_variable_list = { name = zz_ef_bk_subj target = prev.var:zz_ef_bk_box }
-				change_variable = { name = zz_ef_bk_cl add = prev.var:zz_ef_bk_lv }
+				change_variable = { name = zz_ef_bk_cl add = prev.var:zz_ef_bk_lvh }
 			}
 		}
 	}
@@ -60,7 +65,9 @@ zz_ef_bk_subj_step = {
 		}
 		remove_variable = zz_ef_bk_box
 	}
-	# the companies' levels within the private ones (the window lags a step; a company's levels abroad count here)
+	# the local books of the companies of other countries present here (Д.R9а.2)
+	zz_ef_bk_presence_step = yes
+	# the companies' levels within the private ones (the window lags a step)
 	set_variable = { name = zz_ef_bk_free value = { value = var:zz_ef_bk_t subtract = var:zz_ef_bk_g min = 0 } }
 	set_variable = { name = zz_ef_bk_ck value = 1 }
 	if = {
@@ -105,6 +112,102 @@ zz_ef_bk_subj_step = {
 			}
 		}
 	}
+}
+
+# COMPANY scope (zz_ef_bk_subj_step): var:zz_ef_bk_lvh -- its "Bank" levels at home: the window's, less its local
+# books'; a local book no host updated for two weeks (the host is gone) is closed -- it is in no country's sum already.
+zz_ef_bk_home_levels = {
+	save_temporary_scope_as = zz_ef_bk_hc
+	set_variable = { name = zz_ef_bk_lvh value = 0 }
+	if = {
+		limit = { has_variable = zz_ef_bk_lv }
+		set_variable = { name = zz_ef_bk_lvh value = var:zz_ef_bk_lv }
+	}
+	if = {
+		limit = { has_variable_list = zz_ef_bk_books }
+		every_in_list = {
+			variable = zz_ef_bk_books
+			limit = { NOT = { has_variable = zz_ef_bk_wk } }
+			scope:zz_ef_bk_hc = { add_to_variable_list = { name = zz_ef_bk_stale target = prev } }
+		}
+		if = {
+			limit = { has_variable_list = zz_ef_bk_stale }
+			every_in_list = {
+				variable = zz_ef_bk_stale
+				scope:zz_ef_bk_hc = { remove_list_variable = { name = zz_ef_bk_books target = prev } }
+				destroy_container = yes
+			}
+			clear_variable_list = zz_ef_bk_stale
+		}
+		every_in_list = {
+			variable = zz_ef_bk_books
+			scope:zz_ef_bk_hc = { change_variable = { name = zz_ef_bk_lvh subtract = prev.var:zz_ef_bk_lv } }
+		}
+		if = {
+			limit = { var:zz_ef_bk_lvh < 0 }
+			set_variable = { name = zz_ef_bk_lvh value = 0 }
+		}
+	}
+}
+
+# COUNTRY scope, the host; scope:zz_ef_bk_c -- it, scope:zz_ef_bk_x -- a company of country $HOME$ present here
+# (zz_ef_bk_presence_step): its local book (Д.R9а.2) -- levels = the host's "Bank" levels $HOME$ owns
+# (zz_ef_bk_owned_levels), on the host's list of subjects and in its companies' levels; none or bankrupt -- the book
+# closes, its accounts and claims to «частные банкиры» of the host.
+zz_ef_bk_local_book = {
+	set_variable = { name = zz_ef_bk_xl value = 0 }
+	every_scope_state = {
+		every_scope_building = {
+			limit = {
+				is_building_type = building_zz_ef_bank
+				levels_owned_by_country = { target = $HOME$ value >= 1 }
+			}
+			zz_ef_bk_owned_levels = { HOME = $HOME$ }
+		}
+	}
+	scope:zz_ef_bk_x = {
+		if = {
+			limit = {
+				has_variable_list = zz_ef_bk_books
+				any_in_list = { variable = zz_ef_bk_books var:zz_ef_bk_cty ?= scope:zz_ef_bk_c }
+			}
+			random_in_list = {
+				variable = zz_ef_bk_books
+				limit = { var:zz_ef_bk_cty ?= scope:zz_ef_bk_c }
+				scope:zz_ef_bk_c = { set_variable = { name = zz_ef_bk_lb value = prev } }
+			}
+		}
+	}
+	if = {
+		limit = {
+			var:zz_ef_bk_xl > 0
+			scope:zz_ef_bk_x = { NOT = { has_variable = zz_ef_bk_failed } }
+		}
+		if = {
+			limit = { NOT = { has_variable = zz_ef_bk_lb } }
+			zz_ef_bk_box_create = { KIND = company PARENT = scope:zz_ef_bk_x }
+			scope:zz_ef_bk_new = {
+				set_variable = { name = zz_ef_bk_co value = scope:zz_ef_bk_x }
+				set_variable = zz_ef_bk_local
+			}
+			scope:zz_ef_bk_x = { add_to_variable_list = { name = zz_ef_bk_books target = scope:zz_ef_bk_new } }
+			set_variable = { name = zz_ef_bk_lb value = scope:zz_ef_bk_new }
+		}
+		var:zz_ef_bk_lb = {
+			set_variable = { name = zz_ef_bk_lv value = scope:zz_ef_bk_c.var:zz_ef_bk_xl }
+			set_variable = { name = zz_ef_bk_wk value = 1 days = zz_ef_bk_book_seen_days }
+		}
+		add_to_variable_list = { name = zz_ef_bk_subj target = var:zz_ef_bk_lb }
+		change_variable = { name = zz_ef_bk_cl add = var:zz_ef_bk_xl }
+	}
+	else_if = {
+		limit = { has_variable = zz_ef_bk_lb }
+		var:zz_ef_bk_lb = { zz_ef_bk_accounts_move = { TO = scope:zz_ef_bk_c.var:zz_ef_bk_pri_box } }
+		scope:zz_ef_bk_x = { remove_list_variable = { name = zz_ef_bk_books target = scope:zz_ef_bk_c.var:zz_ef_bk_lb } }
+		var:zz_ef_bk_lb = { destroy_container = yes }
+	}
+	if = { limit = { has_variable = zz_ef_bk_lb } remove_variable = zz_ef_bk_lb }
+	remove_variable = zz_ef_bk_xl
 }
 
 # COUNTRY scope: the two aggregates' subjects, once.
@@ -519,63 +622,131 @@ zz_ef_bk_map_move = {
 	}
 }
 
-# Bankruptcy of a bank (Д.R4б.6; понятие «Банкротство»): once a month a company subject with capital < 0 and no credit
-# from the CB closes -- its depositors (pops and the investment fund) lose the hole pro rata, up to their deposits
-# (posting deposits -> capital); what it held goes back as the week's residual to the other banks of the country by their
-# shares (zz_ef_bk_book_step); the company is out of the subjects for zz_ef_bk_fail_days (its levels count with
-# «частные банкиры»), then a new subject with empty accounts. Принято ночью, проверить: the aggregates («госбанки»,
-# «частные банкиры») do not close; foreign CBs' and the treasury's deposits do not lose (their registers live elsewhere).
-# Log EFK|bank_fail. COUNTRY scope, its monthly pulse (zz_ef_bank_monthly).
+# Bankruptcy of a bank (Д.R4б.6; понятие «Банкротство»): once a month a company whose capital is < 0 with no credit from
+# the CB closes -- over all its books, home and local abroad (Д.R9а.2: one capital, in gold, zz_ef_rq_gpm_v of each
+# book's country; a local book's loss is covered by the rest while the sum holds). Each book's depositors (pops and the
+# investment fund) lose its hole pro rata, up to their deposits (posting deposits -> capital in the book's country);
+# what a book held goes back as the week's residual to the other banks of its country by their shares
+# (zz_ef_bk_book_step); the company is out of the subjects for zz_ef_bk_fail_days (its levels count with «частные
+# банкиры»), then new subjects with empty accounts. Принято ночью, проверить: the aggregates («госбанки», «частные
+# банкиры») do not close; foreign CBs' and the treasury's deposits do not lose (their registers live elsewhere).
+# Logs EFK|bank_fail (a book), EFK|bank_group (a company with books abroad). COUNTRY scope, its monthly pulse
+# (zz_ef_bank_monthly).
 zz_ef_bk_fail_step = {
 	save_temporary_scope_as = zz_ef_bk_c
 	every_company = {
 		limit = {
-			has_variable = zz_ef_bk_box
-			var:zz_ef_bk_box = {
-				has_variable = zz_ef_bk_cap
-				var:zz_ef_bk_cap < 0
-				OR = {
-					NOT = { has_variable = zz_ef_bk_cbd }
-					var:zz_ef_bk_cbd <= 0
-				}
+			OR = {
+				has_variable = zz_ef_bk_box
+				has_variable_list = zz_ef_bk_books
 			}
 		}
-		var:zz_ef_bk_box = {
-			set_variable = { name = zz_ef_bk_hole value = { value = var:zz_ef_bk_cap multiply = -1 } }
-			set_variable = { name = zz_ef_bk_liab value = 0 }
-			if = { limit = { has_variable = zz_ef_bk_dep } change_variable = { name = zz_ef_bk_liab add = var:zz_ef_bk_dep } }
-			if = { limit = { has_variable = zz_ef_bk_fdd } change_variable = { name = zz_ef_bk_liab add = var:zz_ef_bk_fdd } }
-			set_variable = { name = zz_ef_bk_loss value = { value = var:zz_ef_bk_hole max = var:zz_ef_bk_liab } }
-			set_variable = { name = zz_ef_bk_xd value = 0 }
-			set_variable = { name = zz_ef_bk_xf value = 0 }
-			if = {
-				limit = { var:zz_ef_bk_liab > 0 }
-				if = { limit = { has_variable = zz_ef_bk_dep } set_variable = { name = zz_ef_bk_xd value = { value = var:zz_ef_bk_loss multiply = var:zz_ef_bk_dep divide = var:zz_ef_bk_liab } } }
-				if = { limit = { has_variable = zz_ef_bk_fdd } set_variable = { name = zz_ef_bk_xf value = { value = var:zz_ef_bk_loss multiply = var:zz_ef_bk_fdd divide = var:zz_ef_bk_liab } } }
+		save_temporary_scope_as = zz_ef_bk_gc
+		set_variable = { name = zz_ef_bk_gcap value = 0 }
+		set_variable = { name = zz_ef_bk_gcbd value = 0 }
+		if = {
+			limit = { has_variable = zz_ef_bk_box }
+			var:zz_ef_bk_box = { zz_ef_bk_group_add = yes }
+		}
+		if = {
+			limit = { has_variable_list = zz_ef_bk_books }
+			every_in_list = {
+				variable = zz_ef_bk_books
+				zz_ef_bk_group_add = yes
 			}
-			scope:zz_ef_bk_c = {
-				set_variable = { name = zz_ef_bk_fxd value = prev.var:zz_ef_bk_xd }
-				set_variable = { name = zz_ef_bk_fxf value = prev.var:zz_ef_bk_xf }
-				set_variable = { name = zz_ef_bk_fhole value = prev.var:zz_ef_bk_hole }
-				set_variable = { name = zz_ef_bk_fdep value = prev.var:zz_ef_bk_dep }
-				if = {
-					limit = { has_variable = zz_ef_pop_deposits }
-					zz_ef_post = { FROM = zz_ef_pop_deposits TO = zz_ef_bank_capital V = var:zz_ef_bk_fxd }
-					if = { limit = { has_variable = zz_ef_pop_savings } change_variable = { name = zz_ef_pop_savings subtract = var:zz_ef_bk_fxd } }
-				}
-				if = {
-					limit = { has_variable = zz_ef_fd_dep }
-					zz_ef_post = { FROM = zz_ef_fd_dep TO = zz_ef_bank_capital V = var:zz_ef_bk_fxf }
-				}
+			if = {
+				limit = { zz_ef_logs_on = yes }
+				debug_log = "EFK|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCompany.GetCountry.GetNameNoFormatting]|bank_group|[THIS.GetCompany.GetNameNoFormatting]|cap_gold [THIS.GetCompany.MakeScope.Var('zz_ef_bk_gcap').GetValue|0]|cbd_gold [THIS.GetCompany.MakeScope.Var('zz_ef_bk_gcbd').GetValue|0]|books [THIS.GetCompany.MakeScope.ScriptValue('zz_ef_bk_books_n_v')|0]"
 			}
 		}
 		if = {
-			limit = { zz_ef_logs_on = yes }
-			debug_log = "EFK|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCompany.GetCountry.GetNameNoFormatting]|bank_fail|[THIS.GetCompany.GetNameNoFormatting]|hole [THIS.GetCompany.GetCountry.MakeScope.Var('zz_ef_bk_fhole').GetValue|0]|dep [THIS.GetCompany.GetCountry.MakeScope.Var('zz_ef_bk_fdep').GetValue|0]|pop_loss [THIS.GetCompany.GetCountry.MakeScope.Var('zz_ef_bk_fxd').GetValue|0]|fund_loss [THIS.GetCompany.GetCountry.MakeScope.Var('zz_ef_bk_fxf').GetValue|0]|levels [THIS.GetCompany.MakeScope.Var('zz_ef_bk_lv').GetValue|0]"
+			limit = {
+				var:zz_ef_bk_gcap < 0
+				var:zz_ef_bk_gcbd <= 0
+			}
+			if = {
+				limit = { has_variable = zz_ef_bk_box }
+				var:zz_ef_bk_box = {
+					zz_ef_bk_box_fail = yes
+					destroy_container = yes
+				}
+				remove_variable = zz_ef_bk_box
+			}
+			if = {
+				limit = { has_variable_list = zz_ef_bk_books }
+				every_in_list = {
+					variable = zz_ef_bk_books
+					zz_ef_bk_box_fail = yes
+					destroy_container = yes
+				}
+				clear_variable_list = zz_ef_bk_books
+			}
+			set_variable = { name = zz_ef_bk_failed value = 1 days = zz_ef_bk_fail_days }
 		}
-		var:zz_ef_bk_box = { destroy_container = yes }
-		remove_variable = zz_ef_bk_box
-		set_variable = { name = zz_ef_bk_failed value = 1 days = zz_ef_bk_fail_days }
+		remove_variable = zz_ef_bk_gcap
+		remove_variable = zz_ef_bk_gcbd
+	}
+}
+
+# SUBJECT scope (a company's book), scope:zz_ef_bk_gc -- the company: its capital and debt to the CB, in gold, added to
+# the company's var:zz_ef_bk_gcap, var:zz_ef_bk_gcbd.
+zz_ef_bk_group_add = {
+	if = {
+		limit = {
+			has_variable = zz_ef_bk_cap
+			exists = var:zz_ef_bk_cty
+		}
+		scope:zz_ef_bk_gc = {
+			change_variable = { name = zz_ef_bk_gcap add = { value = prev.var:zz_ef_bk_cap multiply = prev.var:zz_ef_bk_cty.zz_ef_rq_gpm_v } }
+		}
+	}
+	if = {
+		limit = {
+			has_variable = zz_ef_bk_cbd
+			var:zz_ef_bk_cbd > 0
+			exists = var:zz_ef_bk_cty
+		}
+		scope:zz_ef_bk_gc = {
+			change_variable = { name = zz_ef_bk_gcbd add = { value = prev.var:zz_ef_bk_cbd multiply = prev.var:zz_ef_bk_cty.zz_ef_rq_gpm_v } }
+		}
+	}
+}
+
+# SUBJECT scope (a book of a failing company), scope:zz_ef_bk_gc -- the company: its depositors lose its hole (capital
+# below 0) pro rata, up to their deposits -- the posting in its country; log EFK|bank_fail.
+zz_ef_bk_box_fail = {
+	set_variable = { name = zz_ef_bk_hole value = 0 }
+	if = { limit = { has_variable = zz_ef_bk_cap } set_variable = { name = zz_ef_bk_hole value = { value = 0 subtract = var:zz_ef_bk_cap min = 0 } } }
+	set_variable = { name = zz_ef_bk_liab value = 0 }
+	if = { limit = { has_variable = zz_ef_bk_dep } change_variable = { name = zz_ef_bk_liab add = var:zz_ef_bk_dep } }
+	if = { limit = { has_variable = zz_ef_bk_fdd } change_variable = { name = zz_ef_bk_liab add = var:zz_ef_bk_fdd } }
+	set_variable = { name = zz_ef_bk_loss value = { value = var:zz_ef_bk_hole max = var:zz_ef_bk_liab } }
+	set_variable = { name = zz_ef_bk_xd value = 0 }
+	set_variable = { name = zz_ef_bk_xf value = 0 }
+	if = {
+		limit = { var:zz_ef_bk_liab > 0 }
+		if = { limit = { has_variable = zz_ef_bk_dep } set_variable = { name = zz_ef_bk_xd value = { value = var:zz_ef_bk_loss multiply = var:zz_ef_bk_dep divide = var:zz_ef_bk_liab } } }
+		if = { limit = { has_variable = zz_ef_bk_fdd } set_variable = { name = zz_ef_bk_xf value = { value = var:zz_ef_bk_loss multiply = var:zz_ef_bk_fdd divide = var:zz_ef_bk_liab } } }
+	}
+	var:zz_ef_bk_cty = {
+		set_variable = { name = zz_ef_bk_fxd value = prev.var:zz_ef_bk_xd }
+		set_variable = { name = zz_ef_bk_fxf value = prev.var:zz_ef_bk_xf }
+		set_variable = { name = zz_ef_bk_fhole value = prev.var:zz_ef_bk_hole }
+		set_variable = { name = zz_ef_bk_fdep value = 0 }
+		if = { limit = { prev = { has_variable = zz_ef_bk_dep } } set_variable = { name = zz_ef_bk_fdep value = prev.var:zz_ef_bk_dep } }
+		if = {
+			limit = { has_variable = zz_ef_pop_deposits }
+			zz_ef_post = { FROM = zz_ef_pop_deposits TO = zz_ef_bank_capital V = var:zz_ef_bk_fxd }
+			if = { limit = { has_variable = zz_ef_pop_savings } change_variable = { name = zz_ef_pop_savings subtract = var:zz_ef_bk_fxd } }
+		}
+		if = {
+			limit = { has_variable = zz_ef_fd_dep }
+			zz_ef_post = { FROM = zz_ef_fd_dep TO = zz_ef_bank_capital V = var:zz_ef_bk_fxf }
+		}
+	}
+	if = {
+		limit = { zz_ef_logs_on = yes }
+		debug_log = "EFK|[TimeKeeper.GetCurrentDate.GetString]|[THIS.Var('zz_ef_bk_cty').GetCountry.GetNameNoFormatting]|bank_fail|[THIS.Var('zz_ef_bk_co').GetCompany.GetNameNoFormatting]|hole [THIS.Var('zz_ef_bk_cty').GetCountry.MakeScope.Var('zz_ef_bk_fhole').GetValue|0]|dep [THIS.Var('zz_ef_bk_cty').GetCountry.MakeScope.Var('zz_ef_bk_fdep').GetValue|0]|pop_loss [THIS.Var('zz_ef_bk_cty').GetCountry.MakeScope.Var('zz_ef_bk_fxd').GetValue|0]|fund_loss [THIS.Var('zz_ef_bk_cty').GetCountry.MakeScope.Var('zz_ef_bk_fxf').GetValue|0]|levels [THIS.Var('zz_ef_bk_lv').GetValue|0]"
 	}
 }
 
@@ -607,7 +778,7 @@ zz_ef_bk_div_step = {
 			variable = zz_ef_bk_subj
 			scope:zz_ef_bk_c = {
 				change_variable = { name = zz_ef_bk_dv_due add = prev.zz_ef_bk_div_due_v }
-				change_variable = { name = zz_ef_bk_dv_k subtract = prev.zz_ef_bk_cap_keep_v }
+				change_variable = { name = zz_ef_bk_dv_k subtract = prev.zz_ef_bk_cap_hold_v }
 			}
 		}
 		if = {

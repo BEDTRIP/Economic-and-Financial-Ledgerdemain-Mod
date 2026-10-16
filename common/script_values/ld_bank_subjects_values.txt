@@ -36,6 +36,28 @@ zz_ef_bk_pri_levels_v = {
 	add = var:zz_ef_bk_free
 	min = 0
 }
+# COMPANY scope: its local books abroad (Д.R9а.2)
+zz_ef_bk_books_n_v = {
+	value = 0
+	if = {
+		limit = { has_variable_list = zz_ef_bk_books }
+		every_in_list = {
+			variable = zz_ef_bk_books
+			add = 1
+		}
+	}
+}
+# SUBJECT scope: the capital it keeps in the month's payout -- its norm; a local book -- all of it
+zz_ef_bk_cap_hold_v = {
+	value = zz_ef_bk_cap_keep_v
+	if = {
+		limit = {
+			has_variable = zz_ef_bk_local
+			has_variable = zz_ef_bk_cap
+		}
+		value = var:zz_ef_bk_cap
+	}
+}
 zz_ef_bk_subj_n_v = {
 	value = 0
 	every_in_list = {
@@ -74,6 +96,8 @@ zz_ef_bk_prem_max = 0.01
 zz_ef_bk_appeal_k = 20
 # a bankrupt company is out of the subjects this long (days; принято ночью)
 zz_ef_bk_fail_days = 365
+# a local book abroad not updated by its host this long is closed (the host is gone; zz_ef_bk_home_levels)
+zz_ef_bk_book_seen_days = 14
 # the capital a subject keeps, a share of its earning assets by kind (Д.R9б.4): loans, bonds and the privatised levels
 # -- zz_ef_bk_cap_norm, the investments (fund shares, others' money and claims, revalued weekly) --
 # zz_ef_bk_cap_norm_inv, so a paper gain of the revaluation stays as the reserve against the next one; above the norm --
@@ -245,11 +269,15 @@ zz_ef_bk_cap_keep_v = {
 		}
 	}
 }
-# SUBJECT scope: its capital above the norm (zz_ef_bk_div_step)
+# SUBJECT scope: its capital above the norm (zz_ef_bk_div_step); a local book abroad pays none -- its capital stays in
+# the host (one capital of the company, Д.R9а.2: a payout abroad would be a cross-border flow; принято ночью)
 zz_ef_bk_div_due_v = {
 	value = 0
 	if = {
-		limit = { has_variable = zz_ef_bk_cap }
+		limit = {
+			has_variable = zz_ef_bk_cap
+			NOT = { has_variable = zz_ef_bk_local }
+		}
 		value = var:zz_ef_bk_cap
 		subtract = zz_ef_bk_cap_keep_v
 		min = 0
