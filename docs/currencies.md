@@ -110,7 +110,9 @@
   валюты (`money_value_0` = `zz_ef_metal_value`) и ставка ЦБ — свои, как у металлического. Металл — закон, сменить
   металл — сменить закон; соотношение биметаллизма (`zz_ef_bimet_ratio`, рычаг `zz_ef_can_bimet_ratio`) — и у
   биметаллического обменного. Автопереход ИИ E&F
-  (`is_monetary_systeme_transition_valid_country_to_gold_exchange_standard`) ставит обменный своего металла. Триггеры
+  (`is_monetary_systeme_transition_valid_country_to_gold_exchange_standard`) ставит обменный своего металла; эталон в
+  руках страны (`var:reference_currency_owned_by_the_country_fixe`, `reference_currency_in_gold_fixe`) — требования её
+  ЦБ к эмитенту-эталону (`zz_ef_rq_cb_m`, Д.R9б.15), а не запас валюты E&F в штатах. Триггеры
   металла (`ld_metal_triggers.txt`): `zz_ef_metal_gold/_silver/_bimet` (закон или якорь), `zz_ef_metal_*_law` (свой
   закон), `zz_ef_exchange_std` (один из трёх обменных). Металл ЦБ, паритет, покрытие, клиринг,
   `money_value_target_real_in_gold` читают их; переход между стандартами одного металла запасы и паритет не меняет.

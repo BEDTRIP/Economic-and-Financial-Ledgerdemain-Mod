@@ -33,10 +33,22 @@ global_monetary_reference_global_var_fixe = {
 		value = money_supply_stockpile_by_other_country_reference_currency_flux
 	}
 }
+# the reference currency the country holds (the AI's move to the gold exchange standard,
+# is_monetary_systeme_transition_valid_country_to_gold_exchange_standard): its CB's claims on the reference's issuer --
+# money of the issuer, map zz_ef_rq_cb_m (Д.R9б.15), not E&F's currency stockpile in the states (R9б.5)
 reference_currency_in_gold_fixe = {
-	set_variable = {
-		name = reference_currency_owned_by_the_country_fixe
-		value = reference_currency_owned_by_the_country
+	set_variable = { name = reference_currency_owned_by_the_country_fixe value = 0 }
+	if = {
+		limit = { any_country = { has_modifier = global_monetary_reference } }
+		random_country = {
+			limit = { has_modifier = global_monetary_reference }
+			save_temporary_scope_as = zz_ef_ref_issuer
+		}
+		if = {
+			limit = { has_variable_map = zz_ef_rq_cb_m }
+			zz_ef_rq_get = { MAP = zz_ef_rq_cb_m D = scope:zz_ef_ref_issuer }
+			set_variable = { name = reference_currency_owned_by_the_country_fixe value = var:zz_ef_rq_h }
+		}
 	}
 
 	# set_variable = {
