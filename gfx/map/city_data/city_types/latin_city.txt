@@ -1,5 +1,8 @@
 ﻿latin_city = {
-	graphical_culture = "latin"
+	trigger = {
+		latin_american_buildings_trigger = yes
+	}
+	weight = 100
 	city_type = city
 	
 	min_residential_buildings = 2
@@ -71,7 +74,6 @@
 
 
 	#mods
-	building_bank = {"european_city_government_administration_01_mesh"}
 
 	building_financial_centre = {"european_city_government_administration_01_mesh"}
 	building_financial_centre_arg = {"european_city_government_administration_01_mesh"}
@@ -118,4 +120,14 @@
 	
 
 	building_silver_mine = {"generic_manufactory_03_mesh"}
+
+	# 1.13 buildings (vanilla city types)
+	building_naval_administration = {"latin_port_navalbase_01_mesh"}
+	building_art_academy = {"latin_city_academy_01_mesh"}
+	building_barrack = {"latin_city_barracks_01_mesh"}
+	building_company_headquarter = {"generic_companyhq_01_mesh"}
+	building_company_regional_headquarter = {"generic_regionalcompanyhq_01_mesh"}
+	building_army_logistics_center = {"generic_logisticscenter_01_mesh"}
+	# the exchange (buildings/ld_exchange.txt) -- the financial district's mesh
+	building_ld_exchange = {"latin_city_financialdistrict_01_mesh"}
 }

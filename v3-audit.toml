@@ -1,0 +1,43 @@
+# Deliberate omissions for `v3 audit stale <mod> --declared v3-audit.toml` (R9б closure check): full bodies that leave
+# out fields vanilla has, on purpose. A new finding is either fixed or declared here with its reason.
+
+[[declared]]
+folder = "common/building_groups"
+key = "bg_construction"
+fields = ["is_government_funded", "lens", "urbanization"]
+why = "PSC: the construction sector is private infrastructure (bg_private_infrastructure), not funded by the government; the lens and urbanization come with the private group"
+
+[[declared]]
+folder = "common/buildings"
+key = "building_construction_sector"
+fields = ["has_max_level"]
+why = "PSC: private construction sectors are not capped by the state's level limit"
+
+[[declared]]
+folder = "common/production_methods"
+key = "pm_wooden_buildings"
+fields = ["country_modifiers", "state_modifiers"]
+why = "PSC: construction points come from construction goods the sector makes, not from country_construction_add / state_construction_mult"
+
+[[declared]]
+folder = "common/production_methods"
+key = "pm_iron_frame_buildings"
+fields = ["country_modifiers", "state_modifiers"]
+why = "PSC: as pm_wooden_buildings"
+
+[[declared]]
+folder = "common/production_methods"
+key = "pm_steel_frame_buildings"
+fields = ["country_modifiers", "state_modifiers"]
+why = "PSC: as pm_wooden_buildings"
+
+[[declared]]
+folder = "common/production_methods"
+key = "pm_arc_welded_buildings"
+fields = ["country_modifiers", "state_modifiers"]
+why = "PSC: as pm_wooden_buildings"
+
+[[declared]]
+folder = "common/named_colors"
+key = "colors"
+why = "E&F's colors of its own goods: the engine adds named colors file by file, the vanilla goods' colors stay"
