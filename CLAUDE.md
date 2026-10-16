@@ -1,8 +1,8 @@
 # E&F: Ledgerdemain — правила для агента (загружается автоматически)
 
 Мод Victoria 3 1.13: форк E&F 4.1.7 (автор EBTX) со встроенным PSC 1.3.7 и перенесённым хотфиксом проекта. Соседний репо
-`../vic3_mods` — инструменты (`tools/`, мост `vic3-pc`), навыки (`night-run`, `night-until`, `vic3-sandbox`), общие
-правила git и движка (`Правила работы с модами Victoria 3.md`).
+`../vic3_mods` — инструменты (`tools/`, мост `vic3-pc`), навыки (`night-run`, `night-until`, `vic3-sandbox`). Движок и
+компачи — навыки `vic3-modding` и `vic3-compat` плагина vic3tools (`../vic3_tools/claude-plugin/skills/`).
 
 ## Что читать
 
