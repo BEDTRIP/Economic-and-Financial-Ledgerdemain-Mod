@@ -57,7 +57,7 @@
   `economic_sentiment_index_modifier_1..3`.
 - `.../00_ef_dynamic_modifier_state.txt` — штатные: `central_bank_place`/`_historic_place`, `financial_center_place*`,
   `looted_state`, `silver_mine_max_level`, `offshore_port`.
-- `.../00_ef_dynamic_modifier_building.txt` — зданий: `financial_crash`, `economic_crisis`, `*_deemande` (спрос),
+- `.../00_ef_dynamic_modifier_building.txt` — зданий: `financial_crash`, `economic_crisis`, `bond_deemande` (спрос на облигации; спрос на акции — в `_archive/ef_exchange_demands/`), `mutual_fund_supply`,
   `overbuilt_economy_modifier`, `modifier_desactive_bank/_building`.
 - `.../00_ef_static_modifier.txt` — движковые `base_values`, `country_gdp`.
 ### Скрипты

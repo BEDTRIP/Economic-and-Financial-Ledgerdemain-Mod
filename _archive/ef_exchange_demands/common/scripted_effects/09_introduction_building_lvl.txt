@@ -1,0 +1,57 @@
+# From common/scripted_effects/09_introduction_building_lvl.txt.
+			if = { limit = { has_modifier = manufacture_stock_deemande } remove_modifier = manufacture_stock_deemande }
+			add_modifier = {
+				name = manufacture_stock_deemande
+				multiplier = target_demand_manufacture_stock_for_modifier
+			}
+			if = { limit = { has_modifier = agricultural_stock_deemande } remove_modifier = agricultural_stock_deemande }
+			add_modifier = {
+				name = agricultural_stock_deemande
+				multiplier = target_demand_agricultural_stock_for_modifier
+			}
+			if = { limit = { has_modifier = mining_stock_deemande } remove_modifier = mining_stock_deemande }
+			add_modifier = {
+				name = mining_stock_deemande
+				multiplier = target_demand_mining_stock_for_modifier
+			}
+			if = { limit = { has_modifier = railroad_stock_deemande } remove_modifier = railroad_stock_deemande }
+			add_modifier = {
+				name = railroad_stock_deemande
+				multiplier = target_demand_railroad_stock_for_modifier
+			}
+			if = { limit = { has_modifier = manufacture_stock_deemande } remove_modifier = manufacture_stock_deemande }
+			add_modifier = {
+				name = manufacture_stock_deemande
+				multiplier = target_demand_manufacture_stock_for_modifier
+			}
+			if = { limit = { has_modifier = agricultural_stock_deemande } remove_modifier = agricultural_stock_deemande }
+			add_modifier = {
+				name = agricultural_stock_deemande
+				multiplier = target_demand_agricultural_stock_for_modifier
+			}
+			if = { limit = { has_modifier = mining_stock_deemande } remove_modifier = mining_stock_deemande }
+			add_modifier = {
+				name = mining_stock_deemande
+				multiplier = target_demand_mining_stock_for_modifier
+			}
+			if = { limit = { has_modifier = railroad_stock_deemande } remove_modifier = railroad_stock_deemande }
+			add_modifier = {
+				name = railroad_stock_deemande
+				multiplier = target_demand_railroad_stock_for_modifier
+			}
+	set_variable = {
+		name = base_demande_manufacture_stock_fix
+		value = base_demande_manufacture_stock
+	}
+	set_variable = {
+		name = base_demande_agricultural_stock_fix
+		value = base_demande_agricultural_stock
+	}
+	set_variable = {
+		name = base_demande_mining_stock_fix
+		value = base_demande_mining_stock
+	}
+	set_variable = {
+		name = base_demande_railroad_stock_fix
+		value = base_demande_railroad_stock
+	}

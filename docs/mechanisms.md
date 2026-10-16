@@ -100,6 +100,7 @@
 | Назначение банковских компаний ИИ establish_bank_and_ef_compagnie | живой: ежегодный вызов — архив `_archive/ef_bank_company_yearly/` (Д.R4б.3); история старта зовёт, подарок — 1 уровень (Д.R4б.12) | common/scripted_effects/01_financial_scripted_effects.txt | история `00_ef_building.txt` (стартовые компании, Д.R4б.12); компании — владельцы посева | компании в списке компаний |
 | Облигации частных банков ai_privat_bank_bond_1..25 | архив | _archive/ef_ai_treasury_bonds/ | заменены заявками на бирже (Д.R6.6) | — |
 | Метод «Банка» «Паи фондов» (pmg_zz_ef_bank_funds, zz_ef_fund_bank_pm_step) | архив | _archive/ld_bank_funds_pm/ | паи банки покупают на бирже (Д.R9б.13) | — |
+| Спрос финцентра на акции (`<акция>_deemande`, R9в.4) | архив | _archive/ef_exchange_demands/ | входов акций у метода финцентра нет — множитель ничего не умножал | — |
 | Долг ЦБ перед частными банками (central_bank_debt_privat_bank_buyer_list_N, ai_central_bank_debt_privat_bank_*) | архив | _archive/ef_cb_debt_private_banks/ | списки никто не заполнял, суммы всегда 0 (R9б.19) | — |
 | Скрипт-значения private_bank_funds* (E&F) | живой | common/script_values/00_economic_scripted_value.txt:5335-6745 | private_bank_funds = investment_pool (:6246), refs=186; часть без вызовов (_growing_projection_ratio, _monthly refs=0) | таблицы банков в GUI E&F |
 | Кнопки/GUI банков в 00_financial_scripted_guis.txt | живой | common/scripted_guis/00_financial_scripted_guis.txt | только облигации/кредит/ставка; банковских кнопок нет | панели облигаций E&F |

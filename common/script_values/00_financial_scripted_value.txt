@@ -2830,45 +2830,9 @@ bond_price_by_demand_fc = {
 	}
 	multiply = bond_price_brut
 }
-manufacture_stock_price_by_demand_fc = {
-	value = target_demand_manufacture_stock_ajusted
-	if = {
-		limit = { has_variable = base_demande_manufacture_stock_fix }
-		max = { value = var:base_demande_manufacture_stock_fix multiply = 251 min = 0 }
-	}
-	multiply = manufacture_stock_price_brut
-}
-agricultural_stock_price_by_demand_fc = {
-	value = target_demand_agricultural_stock_ajusted
-	if = {
-		limit = { has_variable = base_demande_agricultural_stock_fix }
-		max = { value = var:base_demande_agricultural_stock_fix multiply = 251 min = 0 }
-	}
-	multiply = agricultural_stock_price_brut
-}
-mining_stock_price_by_demand_fc = {
-	value = target_demand_mining_stock_ajusted
-	if = {
-		limit = { has_variable = base_demande_mining_stock_fix }
-		max = { value = var:base_demande_mining_stock_fix multiply = 251 min = 0 }
-	}
-	multiply = mining_stock_price_brut
-}
-railroad_stock_price_by_demand_fc = {
-	value = target_demand_railroad_stock_ajusted
-	if = {
-		limit = { has_variable = base_demande_railroad_stock_fix }
-		max = { value = var:base_demande_railroad_stock_fix multiply = 251 min = 0 }
-	}
-	multiply = railroad_stock_price_brut
-}
 total_cost_fcc = {
 	value = 0
 	add = bond_price_by_demand_fc
-	add = manufacture_stock_price_by_demand_fc
-	add = agricultural_stock_price_by_demand_fc
-	add = mining_stock_price_by_demand_fc
-	add = railroad_stock_price_by_demand_fc
 }
 base_supply_mutual_fund_fix = {
 	value = var:base_demande_bond_fix
@@ -2978,49 +2942,6 @@ bond_market_goods_sell_orders_ratio = {
 ############
 #manufacture_stock
 ############
-base_demande_manufacture_stock = {
-	value = scope:financial_center_scope.modifier:goods_input_manufacture_stock_add
-}
-base_demande_manufacture_stock_fix = {
-	value = var:base_demande_manufacture_stock_fix
-
-	min = 0.001 #test Div/0
-}
-target_demand_manufacture_stock = {
-    value = manufacture_stock_market_goods_sell_orders
-    multiply = 1 #ajuster cette valeur pour augmenter prix du bien au dessus de neutralité
-}
-target_demand_manufacture_stock_ajusted = {
-	value = target_demand_manufacture_stock
-	subtract = market.mg:manufacture_stock.market_goods_exports
-	divide = { value = building_financial_num min = 1 }
-
-	if = {
-		limit = {
-			or = {
-				is_subject = yes
-				not = { market.owner = root }
-			}
-		}
-		multiply = 0.05
-	}
-	if = { limit = { has_modifier = speculative_share_modifier_2 } multiply = 0.75 }
-	if = { limit = { has_modifier = speculative_share_modifier_3 } multiply = 0.5 }
-	if = { limit = { has_modifier = speculative_share_modifier_4 } multiply = 0.25 }
-
-	min = 0
-}
-target_demand_manufacture_stock_for_modifier = {
-	value = 0
-	if = {
-		limit = { exists = this has_variable = base_demande_manufacture_stock_fix base_demande_manufacture_stock_fix > 0 }
-		value = target_demand_manufacture_stock_ajusted
-		subtract = base_demande_manufacture_stock_fix
-		divide = base_demande_manufacture_stock_fix
-		multiply = 100
-	}
-	max = 25000
-}
 manufacture_stock_market_goods_sell_orders_ratio = {
     value = manufacture_stock_market_goods_sell_orders
 	multiply = financial_product_by_trade_route
@@ -3028,49 +2949,6 @@ manufacture_stock_market_goods_sell_orders_ratio = {
 ############
 #agricultural_stock
 ############
-base_demande_agricultural_stock = {
-	value = scope:financial_center_scope.modifier:goods_input_agricultural_stock_add
-}
-base_demande_agricultural_stock_fix = {
-	value = var:base_demande_agricultural_stock_fix
-
-	min = 0.001 #test Div/0
-}
-target_demand_agricultural_stock = {
-    value = agricultural_stock_market_goods_sell_orders
-    multiply = 1 #ajuster cette vvaleur pour augmenter prix du bien au dessus de neutralité
-}
-target_demand_agricultural_stock_ajusted = {
-	value = target_demand_agricultural_stock
-	subtract = market.mg:agricultural_stock.market_goods_exports
-	divide = { value = building_financial_num min = 1 }
-
-	if = {
-		limit = {
-			or = {
-				is_subject = yes
-				not = { market.owner = root }
-			}
-		}
-		multiply = 0.05
-	}
-	if = { limit = { has_modifier = speculative_share_modifier_2 } multiply = 0.75 }
-	if = { limit = { has_modifier = speculative_share_modifier_3 } multiply = 0.5 }
-	if = { limit = { has_modifier = speculative_share_modifier_4 } multiply = 0.25 }
-
-	min = 0
-}
-target_demand_agricultural_stock_for_modifier = {
-	value = 0
-	if = {
-		limit = { exists = this has_variable = base_demande_agricultural_stock_fix base_demande_agricultural_stock_fix > 0 }
-		value = target_demand_agricultural_stock_ajusted
-		subtract = base_demande_agricultural_stock_fix
-		divide = base_demande_agricultural_stock_fix
-		multiply = 100
-	}
-	max = 25000
-}
 agricultural_stock_market_goods_sell_orders_ratio = {
     value = agricultural_stock_market_goods_sell_orders
 	multiply = financial_product_by_trade_route
@@ -3078,49 +2956,6 @@ agricultural_stock_market_goods_sell_orders_ratio = {
 ############
 #mining_stock
 ############
-base_demande_mining_stock = {
-	value = scope:financial_center_scope.modifier:goods_input_mining_stock_add
-}
-base_demande_mining_stock_fix = {
-	value = var:base_demande_mining_stock_fix
-
-	min = 0.001 #test Div/0
-}
-target_demand_mining_stock = {
-    value = mining_stock_market_goods_sell_orders
-    multiply = 1 #ajuster cette vvaleur pour augmenter prix du bien au dessus de neutralité
-}
-target_demand_mining_stock_ajusted = {
-	value = target_demand_mining_stock
-	subtract = market.mg:mining_stock.market_goods_exports
-	divide = { value = building_financial_num min = 1 }
-
-	if = {
-		limit = {
-			or = {
-				is_subject = yes
-				not = { market.owner = root }
-			}
-		}
-		multiply = 0.05
-	}
-	if = { limit = { has_modifier = speculative_share_modifier_2 } multiply = 0.75 }
-	if = { limit = { has_modifier = speculative_share_modifier_3 } multiply = 0.5 }
-	if = { limit = { has_modifier = speculative_share_modifier_4 } multiply = 0.25 }
-
-	min = 0
-}
-target_demand_mining_stock_for_modifier = {
-	value = 0
-	if = {
-		limit = { exists = this has_variable = base_demande_mining_stock_fix base_demande_mining_stock_fix > 0 }
-		value = target_demand_mining_stock_ajusted
-		subtract = base_demande_mining_stock_fix
-		divide = base_demande_mining_stock_fix
-		multiply = 100
-	}
-	max = 25000
-}
 mining_stock_market_goods_sell_orders_ratio = {
     value = mining_stock_market_goods_sell_orders
 	multiply = financial_product_by_trade_route
@@ -3128,49 +2963,6 @@ mining_stock_market_goods_sell_orders_ratio = {
 ############
 #railroad_stock
 ############
-base_demande_railroad_stock = {
-	value = scope:financial_center_scope.modifier:goods_input_railroad_stock_add
-}
-base_demande_railroad_stock_fix = {
-	value = var:base_demande_railroad_stock_fix
-
-	min = 0.001 #test Div/0
-}
-target_demand_railroad_stock = {
-    value = railroad_stock_market_goods_sell_orders
-    multiply = 1 #ajuster cette vvaleur pour augmenter prix du bien au dessus de neutralité
-}
-target_demand_railroad_stock_ajusted = {
-	value = target_demand_railroad_stock
-	subtract = market.mg:railroad_stock.market_goods_exports
-	divide = { value = building_financial_num min = 1 }
-
-	if = {
-		limit = {
-			or = {
-				is_subject = yes
-				not = { market.owner = root }
-			}
-		}
-		multiply = 0.05
-	}
-	if = { limit = { has_modifier = speculative_share_modifier_2 } multiply = 0.75 }
-	if = { limit = { has_modifier = speculative_share_modifier_3 } multiply = 0.5 }
-	if = { limit = { has_modifier = speculative_share_modifier_4 } multiply = 0.25 }
-
-	min = 0
-}
-target_demand_railroad_stock_for_modifier = {
-	value = 0
-	if = {
-		limit = { exists = this has_variable = base_demande_railroad_stock_fix base_demande_railroad_stock_fix > 0 }
-		value = target_demand_railroad_stock_ajusted
-		subtract = base_demande_railroad_stock_fix
-		divide = base_demande_railroad_stock_fix
-		multiply = 100
-	}
-	max = 25000
-}
 railroad_stock_market_goods_sell_orders_ratio = {
     value = railroad_stock_market_goods_sell_orders
 	multiply = financial_product_by_trade_route
