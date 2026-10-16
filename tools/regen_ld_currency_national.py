@@ -210,7 +210,9 @@ def eff_text(gr):
         # a culture's or language's own word -- only if all the primary cultures have it (Russia with Ukrainians as a
         # primary culture is not on the hryvnia); a heritage -- any primary culture, the first group
         cnt = "count = all " if tier != "heritage" else ""
-        L.append(f"\t{'if' if first else 'else_if'} = {{ limit = {{ any_primary_culture = {{ {cnt}OR = {{ {cond} }} }} }} "
+        if len(ks) > 1:
+            cond = f"OR = {{ {cond} }}"   # one condition -- without an OR around it (R12 Л.10)
+        L.append(f"\t{'if' if first else 'else_if'} = {{ limit = {{ any_primary_culture = {{ {cnt}{cond} }} }} "
                  f"set_variable = {{ name = zz_ef_cur_noun value = flag:{n} }} }}")
         first = False
     L.append("\telse_if = { limit = { has_variable = zz_ef_cur_noun } remove_variable = zz_ef_cur_noun }")
