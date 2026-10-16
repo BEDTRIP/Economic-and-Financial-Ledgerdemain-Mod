@@ -109,11 +109,13 @@
   `common/scripted_effects/ld_exchange_building.txt`, из `ld_world_month.txt` после `zz_ef_xch_month_roll`, страны с
   `zz_ef_has_exchange`): здания нет — ставится в `var:zz_ef_fc_state` (и в старых сейвах); уровень — на 1 в месяц к цели
   `zz_ef_xb_target_v` (1 + удвоения капитализации `var:zz_ef_xlm_cap` сверх `zz_ef_xb_cap_base` 100 тыс. золота, до 15;
-  принято ночью; `add_building_level`); метод — лучший открытый, только где он не активен. Комиссия `zz_ef_xch_fee_v`
-  (`ld_exchange_values.txt`) — множитель активного метода `zz_ef_xch_fee_pm_*` × закон экономической системы
-  `zz_ef_xch_fee_law_*`; у страны без здания — по технологиям, как прежде. Снос, когда биржи нет, — R11. Триггер
-  `zz_ef_xb_has` (`ld_fc_triggers.txt`). Лог `EFD|…|xch_building` (уровень, цель, капитализация в базах, комиссия).
-  Комиссия — проводкой в казну, в меню здания — подсказкой (R10).
+  принято ночью) — `create_building` стоящего здания поднимает его до заданного уровня (как регулятор PSC); снять
+  уровень нечем (`add_building_level` в 1.13 нет — `error.log`), упавшая капитализация уровень не снижает (принято
+  ночью); метод — лучший открытый, только где он не активен. Комиссия `zz_ef_xch_fee_v` (`ld_exchange_values.txt`) —
+  множитель активного метода `zz_ef_xch_fee_pm_*` × закон экономической системы `zz_ef_xch_fee_law_*`; у страны без
+  здания — по технологиям, как прежде. Снос, когда биржи нет, — R11. Триггер `zz_ef_xb_has` (`ld_fc_triggers.txt`). Лог
+  `EFD|…|xch_building` (уровень, цель, капитализация в базах, комиссия). Комиссия — проводкой в казну, в меню здания —
+  подсказкой (R10).
 - Инвестиционный фонд (R8б, шаг 6; Д.R8б.2, Д.R8б.4, Д.R8б.5, Д.R8б.16): здание `building_ld_investment_fund`
   (`common/buildings/ld_investment_fund.txt`; группа `bg_zz_ef_banking`, технология `financial_center`, `possible` —
   штат биржи своей страны, частная стройка) производит паи `mutual_funds` методом `pm_bond_exchange`

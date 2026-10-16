@@ -2,8 +2,10 @@
 
 # COUNTRY scope, an exchange's country (zz_ef_has_exchange), monthly after the exchanges' month (zz_ef_xch_month_roll,
 # ld_world_month.txt): the building in the exchange's state -- founded at the first month (old saves too), then one
-# level a month towards the capitalization's target (zz_ef_xb_target_v); the best trading method its technologies open,
-# activated only where it is not active (activate_production_method on an active method adds a copy).
+# level a month up towards the capitalization's target (zz_ef_xb_target_v): create_building of a standing building
+# raises it to the level given (as PSC's regulator); there is no effect taking one level off (add_building_level is
+# unknown to 1.13, error.log), so a fallen capitalization keeps the level (принято ночью); the best trading method its
+# technologies open, activated only where it is not active (activate_production_method on an active method adds a copy).
 zz_ef_xb_month_step = {
 	if = {
 		limit = { zz_ef_xb_has = no }
@@ -14,14 +16,8 @@ zz_ef_xb_month_step = {
 		set_variable = { name = zz_ef_xb_d value = { value = zz_ef_xb_target_v subtract = zz_ef_xb_level_v } }
 		if = {
 			limit = { var:zz_ef_xb_d >= 1 }
-			var:zz_ef_fc_state = { add_building_level = { building = building_ld_exchange level = 1 } }
-		}
-		else_if = {
-			limit = {
-				var:zz_ef_xb_d <= -1
-				zz_ef_xb_level_v > 1
-			}
-			var:zz_ef_fc_state = { add_building_level = { building = building_ld_exchange level = -1 } }
+			set_local_variable = { name = zz_ef_xb_next value = { value = zz_ef_xb_level_v add = 1 } }
+			var:zz_ef_fc_state = { create_building = { building = building_ld_exchange level = local_var:zz_ef_xb_next } }
 		}
 		remove_variable = zz_ef_xb_d
 		var:zz_ef_fc_state = {
