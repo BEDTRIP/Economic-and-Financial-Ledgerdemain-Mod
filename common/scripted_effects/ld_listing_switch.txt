@@ -433,6 +433,10 @@ zz_ef_listing_go_public = {
 		state = { activate_production_method = { building_type = building_company_barclaysBank production_method = pm_company_headquarter_publicly_traded } }
 	}
 	else_if = {
+		limit = { is_building_type = building_company_baring_brothers }
+		state = { activate_production_method = { building_type = building_company_baring_brothers production_method = pm_company_headquarter_publicly_traded } }
+	}
+	else_if = {
 		limit = { is_building_type = building_company_basf }
 		state = { activate_production_method = { building_type = building_company_basf production_method = pm_company_headquarter_publicly_traded } }
 	}
@@ -1502,6 +1506,10 @@ zz_ef_listing_go_private = {
 	else_if = {
 		limit = { is_building_type = building_company_barclaysBank }
 		state = { activate_production_method = { building_type = building_company_barclaysBank production_method = pm_company_headquarter_privately_owned } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_baring_brothers }
+		state = { activate_production_method = { building_type = building_company_baring_brothers production_method = pm_company_headquarter_privately_owned } }
 	}
 	else_if = {
 		limit = { is_building_type = building_company_basf }
@@ -2575,6 +2583,10 @@ zz_ef_listing_mark = {
 		owner = { if = { limit = { has_company = company_type:company_barclaysBank } company:company_barclaysBank = { zz_ef_co_go_$S$ = yes } } }
 	}
 	else_if = {
+		limit = { is_building_type = building_company_baring_brothers }
+		owner = { if = { limit = { has_company = company_type:company_baring_brothers } company:company_baring_brothers = { zz_ef_co_go_$S$ = yes } } }
+	}
+	else_if = {
 		limit = { is_building_type = building_company_basf }
 		owner = { if = { limit = { has_company = company_type:company_basf } company:company_basf = { zz_ef_co_go_$S$ = yes } } }
 	}
@@ -3644,6 +3656,10 @@ zz_ef_listing_go_cb_state = {
 	else_if = {
 		limit = { is_building_type = building_company_barclaysBank }
 		state = { activate_production_method = { building_type = building_company_barclaysBank production_method = pm_company_headquarter_ld_cb_state } }
+	}
+	else_if = {
+		limit = { is_building_type = building_company_baring_brothers }
+		state = { activate_production_method = { building_type = building_company_baring_brothers production_method = pm_company_headquarter_ld_cb_state } }
 	}
 	else_if = {
 		limit = { is_building_type = building_company_basf }
@@ -5454,6 +5470,17 @@ zz_ef_listing_cb_check = {
 				has_company = company_type:company_barclaysBank
 				exists = var:zz_ef_cb_co
 				var:zz_ef_cb_co = company:company_barclaysBank
+			}
+		}
+		set_local_variable = { name = zz_lst_cb value = 1 }
+	}
+	else_if = {
+		limit = {
+			is_building_type = building_company_baring_brothers
+			owner = {
+				has_company = company_type:company_baring_brothers
+				exists = var:zz_ef_cb_co
+				var:zz_ef_cb_co = company:company_baring_brothers
 			}
 		}
 		set_local_variable = { name = zz_lst_cb value = 1 }

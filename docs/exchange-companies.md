@@ -37,6 +37,8 @@
   `zz_ef_cap_listed_snapshot`, `zz_ef_cap_to_gdp`.
 - `common/scripted_triggers/ld_listing_triggers.txt` — `zz_ef_listing_allowed` (биржа ур.≥1 + технология
   `joint_stock_companies` + не традиционализм/командная/кооперативная экономика).
+- `common/company_types/ld_companies.txt` — компании форка: `company_baring_brothers` (Baring Brothers, Лондон; особая
+  компания-фонд, Д.R9а.1; банковская — свой «Банк» с начала игры, история `00_ef_building.txt`, засев `ld_bank_seed.txt`).
 - `common/production_methods/ld_company_hq_publicly_traded.txt` +
   `common/production_method_groups/ld_company_hq_publicly_traded.txt` — `pm_company_headquarter_publicly_traded`,
   добавлен INJECT в `pmg_ownership_building_company_headquarter`. Ванильные методы владения штабов —
