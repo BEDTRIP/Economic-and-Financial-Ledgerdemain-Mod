@@ -369,7 +369,7 @@
 | `zz_ef_mt_bank_mult_g/s`, `zz_ef_mt_cb_mult`, `zz_ef_mt_cb_sell` | множители модификаторов `ld_metal_trade` на следующую неделю | `zz_ef_metal_week_step` | `add_modifier` на зданиях `building_zz_ef_bank` (только при `zz_ef_mt_bank_levels > 0`) / `building_bank` |
 | глобальные `zz_ef_wm_<start/buy/sell/oth>_<gold/silver>` | мировая линия металла (накопительно; только при `zz_ef_logs_on`) | `zz_ef_wm_add` | `zz_ef_wm_v_*`, `zz_ef_wm_rest_*`, лог `EFV` |
 | глобальные `zz_ef_hook_countries` (список), `zz_ef_hook_calls`, `zz_ef_hook_probe_calls` | очередь моста, счётчики вызовов (счётчики — только при `zz_ef_logs_on`) | `zz_ef_money_model_step`, `zz_ef_money_hook_receive`, `zz_ef_money_hook_probe_sg` | `gui/ld_money_hook.gui`, `zz_ef_hook_ok` |
-| `stockpiling_<cur>_state_1`, `stockpiling_<cur>_reserve_currency_state_1` (регион, E&F) | собственный запас валюты ЦБ (E&F); чужие деньги ЦБ — карта `zz_ef_rq_cb_m` (`claims.md`) | история и ввод валют E&F | `money_supply_state` |
+| `stockpiling_<cur>_state_1`, `stockpiling_<cur>_reserve_currency_state_1` (регион, E&F) | собственный запас валюты ЦБ (E&F); чужие деньги ЦБ — карта `zz_ef_rq_cb_m` (`claims.md`) | никто (история и переносы — в `_archive/ef_currency_stockpiles/`, R9б.5б); запас всегда 0 | `money_supply_state` (E&F, окна — R10); счёта `cb` в сверке нет |
 | `<cur>_c_no_own` (значение, 95 валют) | запас валюты минус `money_supply` | — (значения) | `currency_no_own` → `gui/ld_economy_panel.gui` (текст «currency_no_own») |
 
 ## Вызовы и связи

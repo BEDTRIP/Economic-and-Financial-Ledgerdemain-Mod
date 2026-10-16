@@ -923,33 +923,6 @@ def closing_expr():
     return acc
 
 
-def fx_card(lang):
-    """E&F's currency good in the CB's stock -- counts, not money."""
-    cur, sv, money, delta, tt = ctx("Country")
-    ru = lang == "russian"
-    unit = "шт." if ru else "units"
-    rows = [
-        ("in", "выпуск: продажи товара-валюты на рынке", "issue: sales of the currency good on the market", "zz_ef_cb_issue_month"),
-        ("out", "в обращение: здания и население страны", "into circulation: the country's buildings and pops",
-         "zz_ef_cb_demand_own"),
-        ("out", "в обращение: другие страны рынка", "into circulation: other countries of the market",
-         "zz_ef_cb_demand_others"),
-        ("in", "девальвация", "devaluation", "zz_ef_cb_devaluation_month"),
-        ("out", "ревальвация", "revaluation", "zz_ef_cb_revaluation_month"),
-    ]
-    L = [f"#b {'Склад товара-валюты ЦБ (E&F) за месяц' if ru else 'The CB stock of the currency good (E&F) this month'}: "
-         f"{sv('zz_ef_v_d_cb', 'D+=')} {unit}#!"]
-    for dr, r, e, name in rows:
-        v = f"[Country.MakeScope.ScriptValue('{name}')|D]"
-        L.append(f"  ← #P +{v}#! {unit} {r if ru else e}" if dr == "in" else f"  → #N −{v}#! {unit} {r if ru else e}")
-    L += ["", ("Это не деньги, а штуки товара liquidity_currency (E&F считает их × 4 в месяц и рисует значком валюты). "
-               "В деньгах движка ЦБ — обычное здание: его выручка в кассе предприятий.") if ru else
-          ("These are not money but counts of the liquidity_currency good (E&F counts them × 4 a month and draws "
-           "them with the currency sign). In the engine's money the CB is an ordinary building: its revenue is in "
-           "business cash.")]
-    return "\\n".join(L)
-
-
 def card_resid(head, rows):
     """A card's «прочее»: its head less its rows (sign -1: the row adds to the head, +1: takes from it)."""
     v = lambda n: f"Country.MakeScope.ScriptValue('{n}')"
