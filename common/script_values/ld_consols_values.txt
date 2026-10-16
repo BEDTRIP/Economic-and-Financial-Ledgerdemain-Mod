@@ -35,6 +35,21 @@ zz_ef_consol_debt_v = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_consol_debt } value = var:zz_ef_consol_debt }
 }
+# its buy-back: the company's account over a year's interest, spread over a year (принято ночью), at most the debt
+zz_ef_consol_co_buyback_week = {
+	value = 0
+	if = {
+		limit = { zz_ef_consol_private = yes }
+		value = var:zz_ef_cb_co.zz_ef_co_acc_v
+		subtract = {
+			value = zz_ef_consol_interest_week
+			multiply = 52
+		}
+		divide = 52
+		max = zz_ef_consol_debt_v
+		min = 0
+	}
+}
 # Interest of the week at the government's rate.
 zz_ef_consol_interest_week = {
 	value = zz_ef_consol_debt_v

@@ -40,7 +40,11 @@
   трогает реестр продавца (`zz_ef_xch_is_own_b`), цена — в пул и капитал (`zz_ef_xch_pay_ob_b`), доля покупателя — его
   карта, итог `zz_ef_rq_out_b` растёт — на следующем шаге здесь актив и капитал вниз на долю.
 - `common/scripted_effects/ld_consols.txt` — `zz_ef_consol_step` (недельный: продажа → долг, проценты казна → сбережения
-  населения, выкуп излишка казны).
+  населения, выкуп излишка казны). При частном ЦБ с компанией-ЦБ (`zz_ef_consol_private`,
+  `common/scripted_triggers/ld_consols_triggers.txt`; Д.R9б.12) консоли — долг компании: проценты и выкуп (счёт сверх
+  годовых процентов, за год — принято ночью, `zz_ef_consol_co_buyback_week`) — со счёта компании-ЦБ `zz_ef_co_acc` во
+  вклады населения (`zz_ef_post` вклады компаний → вклады населения, поток `zz_ef_f_co_div` — карточка вкладов; за
+  неделю — `zz_ef_f_cons_co`, лог `EFS|…|co`); казна не платит.
 - `common/script_values/ld_consols_values.txt` — `zz_ef_consol_output`, `zz_ef_consol_sale_week`, `zz_ef_consol_debt_v`,
   `zz_ef_consol_interest_week`, `zz_ef_consol_buyback_week`, `zz_ef_consol_debt_to_gdp`, потоки `zz_ef_v_f_cons_*`.
 - `common/scripted_effects/ld_cb_bond_issuance.txt` — `zz_ef_cb_bond_issuance_update` (товар «облигации» выпускают «Банки»

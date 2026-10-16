@@ -1048,8 +1048,8 @@ def deposits_card(lang):
                                                                                if ru else "the engine's burnt money returned: the pops' part (last week)"),
          f"  ← #P +{money('zz_ef_v_w_lvl_post')}#!{mark('mod', ru)} " + ("выкуп уровней у частных владельцев: цена продавцам (прошлая неделя)"
                                                                        if ru else "levels bought from private owners: the price to the sellers (last week)"),
-         f"  ← #P +{money('zz_ef_v_w_co_div')}#!{mark('mod', ru)} " + ("дивиденды компаний владельцам — со счетов сверх нормы (прошлая неделя)"
-                                                                      if ru else "the companies' dividends to their owners — out of the accounts over their norm (last week)"),
+         f"  ← #P +{money('zz_ef_v_w_co_div')}#!{mark('mod', ru)} " + ("дивиденды компаний владельцам — со счетов сверх нормы; консоли частного ЦБ — проценты и выкуп со счёта компании-ЦБ (прошлая неделя)"
+                                                                      if ru else "the companies' dividends to their owners — out of the accounts over their norm; a private CB's consols — interest and buy-back out of the CB company's account (last week)"),
          f"  ← #P +{money('zz_ef_v_w_bk_div_pop')}#!{mark('mod', ru)} " + ("частные банкиры: капитал банков сверх норматива — владельцам (прошлая неделя)"
                                                                           if ru else "private bankers: the banks' capital over its norm — to the owners (last week)"),
          f"  ↔ {sv('zz_ef_v_w_cash_dep', 'D+=')} {cur}{mark('mod', ru)} " + ("наличные к цели: сдали во вклады (+), сняли (−) — прошлая неделя"

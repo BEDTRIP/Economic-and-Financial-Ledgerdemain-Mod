@@ -650,7 +650,7 @@
  zz_ef_ms_banks_44:0 "  assets $zz_ef_ms_x_bank_assets$ $zz_ef_ms_cur$: reserves (the pool) $zz_ef_ms_x_pool$ $zz_ef_ms_cur$, business credit $zz_ef_ms_x_bc_debt$ $zz_ef_ms_cur$, consumer credit $zz_ef_ms_x_cc_debt$ $zz_ef_ms_cur$, bonds $zz_ef_ms_x_bank_bonds$ $zz_ef_ms_cur$"
  zz_ef_ms_x_v_f_gl_pool_neg:0 "[Max_CFixedPoint(Negate_CFixedPoint(Country.MakeScope.ScriptValue('zz_ef_v_f_gl_pool')), '(CFixedPoint)0')|D]"
  zz_ef_ms_x_v_f_gl_pool:0 "[Max_CFixedPoint(Country.MakeScope.ScriptValue('zz_ef_v_f_gl_pool'), '(CFixedPoint)0')|D]"
- zz_ef_ms_deposits_10:0 "  ← #P +$zz_ef_ms_x_v_w_co_div$ $zz_ef_ms_cur$#! #grey mod#! the companies' dividends to their owners — out of the accounts over their norm (last week)"
+ zz_ef_ms_deposits_10:0 "  ← #P +$zz_ef_ms_x_v_w_co_div$ $zz_ef_ms_cur$#! #grey mod#! the companies' dividends to their owners — out of the accounts over their norm; a private CB's consols — interest and buy-back out of the CB company's account (last week)"
  zz_ef_ms_x_v_w_leak_back_pop:0 "[Country.MakeScope.ScriptValue('zz_ef_v_w_leak_back_pop')|D+=]"
  zz_ef_ms_banks_45:0 "  liabilities $zz_ef_ms_x_bank_liabilities$ $zz_ef_ms_cur$: deposits $zz_ef_ms_x_pop_deposits$ $zz_ef_ms_cur$, the investment fund's deposit $zz_ef_ms_x_fd_dep_v$ $zz_ef_ms_cur$, CB debt $zz_ef_ms_x_bank_cb_debt$ $zz_ef_ms_cur$, other CBs' deposits $zz_ef_ms_x_nr_dep_v$ $zz_ef_ms_cur$"
  zz_ef_ms_banks_46:0 "  #b banks' capital $zz_ef_ms_x_bank_capital$ $zz_ef_ms_cur$#! (under zero — deposits not covered)"

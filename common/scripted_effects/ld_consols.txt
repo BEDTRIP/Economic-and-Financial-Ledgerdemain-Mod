@@ -15,8 +15,35 @@ zz_ef_consol_step = {
 	set_variable = { name = zz_ef_f_cons_buy value = 0 }
 	# the sale: the engine already moved the money buyers -> the Banks; the claim is the treasury's
 	change_variable = { name = zz_ef_consol_debt add = var:zz_ef_f_cons_sale }
-	# payments only once pops' savings exist (the receiver opens them), so each has its other side
+	set_variable = { name = zz_ef_f_cons_co value = 0 }
+	# a private CB's consols are its company's debt (Д.R9б.12): the interest and the buy-back out of the CB company's
+	# account (var:zz_ef_cb_co, ld_bank_seed.txt) into the pops' deposits -- the companies' payments to the pops
+	# (zz_ef_f_co_div, the deposits' card); the treasury pays nothing
 	if = {
+		limit = {
+			has_variable = zz_ef_pop_savings
+			zz_ef_consol_private = yes
+		}
+		set_variable = { name = zz_ef_f_cons_co value = zz_ef_consol_interest_week }
+		zz_ef_sw = { F = cons_co }
+		change_variable = { name = zz_ef_f_cons_co add = zz_ef_consol_co_buyback_week }
+		change_variable = { name = zz_ef_consol_debt subtract = zz_ef_consol_co_buyback_week }
+		if = {
+			limit = { var:zz_ef_f_cons_co > 0 }
+			var:zz_ef_cb_co = {
+				change_variable = { name = zz_ef_co_acc subtract = prev.var:zz_ef_f_cons_co }
+				if = { limit = { NOT = { has_variable = zz_ef_co_out } } set_variable = { name = zz_ef_co_out value = 0 } }
+				change_variable = { name = zz_ef_co_out add = prev.var:zz_ef_f_cons_co }
+			}
+			if = { limit = { NOT = { has_variable = zz_ef_comp_dep } } set_variable = { name = zz_ef_comp_dep value = 0 } }
+			zz_ef_post = { FROM = zz_ef_comp_dep TO = zz_ef_pop_deposits V = var:zz_ef_f_cons_co }
+			change_variable = { name = zz_ef_pop_savings add = var:zz_ef_f_cons_co }
+			if = { limit = { NOT = { has_variable = zz_ef_f_co_div } } set_variable = { name = zz_ef_f_co_div value = 0 } }
+			change_variable = { name = zz_ef_f_co_div add = var:zz_ef_f_cons_co }
+		}
+	}
+	# payments only once pops' savings exist (the receiver opens them), so each has its other side
+	else_if = {
 		limit = { has_variable = zz_ef_pop_savings }
 		set_variable = { name = zz_ef_f_cons_int value = zz_ef_consol_interest_week }
 		# the interest of the weeks the step covers
@@ -44,6 +71,6 @@ zz_ef_consol_step = {
 				var:zz_ef_f_cons_sale > 0
 			}
 		}
-		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFS|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|debt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_consol_debt_v')|0]|sale [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_cons_sale')|0]|int [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_cons_int')|0]|buy [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_cons_buy')|0]|out [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_consol_output')|1]|price [THIS.GetCountry.MakeScope.ScriptValue('bond_price')|2]|grt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gov_rate_target')|4]|d_gdp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_consol_debt_to_gdp')|3]" }
+		if = { limit = { zz_ef_logs_on = yes } debug_log = "EFS|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|debt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_consol_debt_v')|0]|sale [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_cons_sale')|0]|int [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_cons_int')|0]|buy [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_v_f_cons_buy')|0]|co [THIS.GetCountry.MakeScope.Var('zz_ef_f_cons_co').GetValue|0]|out [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_consol_output')|1]|price [THIS.GetCountry.MakeScope.ScriptValue('bond_price')|2]|grt [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_gov_rate_target')|4]|d_gdp [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_consol_debt_to_gdp')|3]" }
 	}
 }
