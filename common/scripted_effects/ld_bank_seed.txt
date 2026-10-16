@@ -214,11 +214,6 @@ zz_ef_bank_seed_state = {
 			zz_ef_bank_seed_company = { COMPANY = company_BancaDItalia }
 		}
 		if = {
-			limit = { owner = { has_variable = zz_ef_bank_nocomp has_company = company_type:company_Rothschild_Bank_ita } }
-			owner = { remove_variable = zz_ef_bank_nocomp }
-			zz_ef_bank_seed_company = { COMPANY = company_Rothschild_Bank_ita }
-		}
-		if = {
 			limit = { owner = { has_variable = zz_ef_bank_nocomp has_company = company_type:company_BankOfJapan } }
 			owner = { remove_variable = zz_ef_bank_nocomp }
 			zz_ef_bank_seed_company = { COMPANY = company_BankOfJapan }
@@ -439,11 +434,6 @@ zz_ef_bank_seed_state = {
 			zz_ef_bank_seed_company = { COMPANY = company_BanqueDeParisEtDesPaysBas }
 		}
 		if = {
-			limit = { owner = { has_variable = zz_ef_bank_nocomp has_company = company_type:company_Rothschild_Bank_fra } }
-			owner = { remove_variable = zz_ef_bank_nocomp }
-			zz_ef_bank_seed_company = { COMPANY = company_Rothschild_Bank_fra }
-		}
-		if = {
 			limit = { owner = { has_variable = zz_ef_bank_nocomp has_company = company_type:saint_petersburg_international_commercial_bank } }
 			owner = { remove_variable = zz_ef_bank_nocomp }
 			zz_ef_bank_seed_company = { COMPANY = saint_petersburg_international_commercial_bank }
@@ -459,11 +449,6 @@ zz_ef_bank_seed_state = {
 			zz_ef_bank_seed_company = { COMPANY = company_DeutscheBank }
 		}
 		if = {
-			limit = { owner = { has_variable = zz_ef_bank_nocomp has_company = company_type:company_Rothschild_Bank_ger } }
-			owner = { remove_variable = zz_ef_bank_nocomp }
-			zz_ef_bank_seed_company = { COMPANY = company_Rothschild_Bank_ger }
-		}
-		if = {
 			limit = { owner = { has_variable = zz_ef_bank_nocomp has_company = company_type:company_OesterreichischeCreditAnstalt } }
 			owner = { remove_variable = zz_ef_bank_nocomp }
 			zz_ef_bank_seed_company = { COMPANY = company_OesterreichischeCreditAnstalt }
@@ -472,11 +457,6 @@ zz_ef_bank_seed_state = {
 			limit = { owner = { has_variable = zz_ef_bank_nocomp has_company = company_type:company_WienerBankverein } }
 			owner = { remove_variable = zz_ef_bank_nocomp }
 			zz_ef_bank_seed_company = { COMPANY = company_WienerBankverein }
-		}
-		if = {
-			limit = { owner = { has_variable = zz_ef_bank_nocomp has_company = company_type:company_Rothschild_Bank_aus } }
-			owner = { remove_variable = zz_ef_bank_nocomp }
-			zz_ef_bank_seed_company = { COMPANY = company_Rothschild_Bank_aus }
 		}
 		if = {
 			limit = { owner = { has_variable = zz_ef_bank_nocomp has_company = company_type:company_TurkishZiraatBankasi } }
@@ -1674,15 +1654,6 @@ zz_ef_bank_company_seed = {
 		}
 	}
 	else_if = {
-		limit = { has_company = company_type:company_Rothschild_Bank_ita }
-		set_variable = { name = zz_ef_cb_co value = company:company_Rothschild_Bank_ita }
-		set_variable = zz_ef_bkc_cb_company_Rothschild_Bank_ita
-		capital = {
-			zz_ef_bank_company_build = { COMPANY = company_Rothschild_Bank_ita }
-			owner = { set_variable = { name = zz_ef_cb_bank_state value = prev } }
-		}
-	}
-	else_if = {
 		limit = { has_company = company_type:company_Mitsubishiexchangehousebank }
 		set_variable = { name = zz_ef_cb_co value = company:company_Mitsubishiexchangehousebank }
 		set_variable = zz_ef_bkc_cb_company_Mitsubishiexchangehousebank
@@ -1980,15 +1951,6 @@ zz_ef_bank_company_seed = {
 		}
 	}
 	else_if = {
-		limit = { has_company = company_type:company_Rothschild_Bank_fra }
-		set_variable = { name = zz_ef_cb_co value = company:company_Rothschild_Bank_fra }
-		set_variable = zz_ef_bkc_cb_company_Rothschild_Bank_fra
-		capital = {
-			zz_ef_bank_company_build = { COMPANY = company_Rothschild_Bank_fra }
-			owner = { set_variable = { name = zz_ef_cb_bank_state value = prev } }
-		}
-	}
-	else_if = {
 		limit = { has_company = company_type:saint_petersburg_international_commercial_bank }
 		set_variable = { name = zz_ef_cb_co value = company:saint_petersburg_international_commercial_bank }
 		set_variable = zz_ef_bkc_cb_saint_petersburg_international_commercial_bank
@@ -2016,15 +1978,6 @@ zz_ef_bank_company_seed = {
 		}
 	}
 	else_if = {
-		limit = { has_company = company_type:company_Rothschild_Bank_ger }
-		set_variable = { name = zz_ef_cb_co value = company:company_Rothschild_Bank_ger }
-		set_variable = zz_ef_bkc_cb_company_Rothschild_Bank_ger
-		capital = {
-			zz_ef_bank_company_build = { COMPANY = company_Rothschild_Bank_ger }
-			owner = { set_variable = { name = zz_ef_cb_bank_state value = prev } }
-		}
-	}
-	else_if = {
 		limit = { has_company = company_type:company_OesterreichischeCreditAnstalt }
 		set_variable = { name = zz_ef_cb_co value = company:company_OesterreichischeCreditAnstalt }
 		set_variable = zz_ef_bkc_cb_company_OesterreichischeCreditAnstalt
@@ -2039,15 +1992,6 @@ zz_ef_bank_company_seed = {
 		set_variable = zz_ef_bkc_cb_company_WienerBankverein
 		capital = {
 			zz_ef_bank_company_build = { COMPANY = company_WienerBankverein }
-			owner = { set_variable = { name = zz_ef_cb_bank_state value = prev } }
-		}
-	}
-	else_if = {
-		limit = { has_company = company_type:company_Rothschild_Bank_aus }
-		set_variable = { name = zz_ef_cb_co value = company:company_Rothschild_Bank_aus }
-		set_variable = zz_ef_bkc_cb_company_Rothschild_Bank_aus
-		capital = {
-			zz_ef_bank_company_build = { COMPANY = company_Rothschild_Bank_aus }
 			owner = { set_variable = { name = zz_ef_cb_bank_state value = prev } }
 		}
 	}
@@ -2471,16 +2415,6 @@ zz_ef_bank_company_seed = {
 		}
 		else = {
 			zz_ef_bank_company_state = { COMPANY = company_BancaDItalia }
-		}
-	}
-	if = {
-		limit = { has_company = company_type:company_Rothschild_Bank_ita }
-		if = {
-			limit = { has_variable = zz_ef_bkc_cb_company_Rothschild_Bank_ita }
-			remove_variable = zz_ef_bkc_cb_company_Rothschild_Bank_ita
-		}
-		else = {
-			zz_ef_bank_company_state = { COMPANY = company_Rothschild_Bank_ita }
 		}
 	}
 	if = {
@@ -2924,16 +2858,6 @@ zz_ef_bank_company_seed = {
 		}
 	}
 	if = {
-		limit = { has_company = company_type:company_Rothschild_Bank_fra }
-		if = {
-			limit = { has_variable = zz_ef_bkc_cb_company_Rothschild_Bank_fra }
-			remove_variable = zz_ef_bkc_cb_company_Rothschild_Bank_fra
-		}
-		else = {
-			zz_ef_bank_company_state = { COMPANY = company_Rothschild_Bank_fra }
-		}
-	}
-	if = {
 		limit = { has_company = company_type:saint_petersburg_international_commercial_bank }
 		if = {
 			limit = { has_variable = zz_ef_bkc_cb_saint_petersburg_international_commercial_bank }
@@ -2964,16 +2888,6 @@ zz_ef_bank_company_seed = {
 		}
 	}
 	if = {
-		limit = { has_company = company_type:company_Rothschild_Bank_ger }
-		if = {
-			limit = { has_variable = zz_ef_bkc_cb_company_Rothschild_Bank_ger }
-			remove_variable = zz_ef_bkc_cb_company_Rothschild_Bank_ger
-		}
-		else = {
-			zz_ef_bank_company_state = { COMPANY = company_Rothschild_Bank_ger }
-		}
-	}
-	if = {
 		limit = { has_company = company_type:company_OesterreichischeCreditAnstalt }
 		if = {
 			limit = { has_variable = zz_ef_bkc_cb_company_OesterreichischeCreditAnstalt }
@@ -2991,16 +2905,6 @@ zz_ef_bank_company_seed = {
 		}
 		else = {
 			zz_ef_bank_company_state = { COMPANY = company_WienerBankverein }
-		}
-	}
-	if = {
-		limit = { has_company = company_type:company_Rothschild_Bank_aus }
-		if = {
-			limit = { has_variable = zz_ef_bkc_cb_company_Rothschild_Bank_aus }
-			remove_variable = zz_ef_bkc_cb_company_Rothschild_Bank_aus
-		}
-		else = {
-			zz_ef_bank_company_state = { COMPANY = company_Rothschild_Bank_aus }
 		}
 	}
 	if = {
@@ -3193,6 +3097,98 @@ zz_ef_bank_company_seed = {
 			zz_ef_bank_company_state = { COMPANY = company_BancoDeChile }
 		}
 	}
+	# presence (Д.R9а.5): company_Rothschild_Bank_gbr of GBR in STATE_ILE_DE_FRANCE, if no "Bank" of the country took it already
+	if = {
+		limit = {
+			this = c:FRA
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_Rothschild_Bank_gbr }
+			exists = s:STATE_ILE_DE_FRANCE.region_state:FRA
+			s:STATE_ILE_DE_FRANCE.region_state:FRA = { NOT = { has_building = building_zz_ef_bank } }
+		}
+		s:STATE_ILE_DE_FRANCE.region_state:FRA = {
+			create_building = {
+				building = building_zz_ef_bank
+				reserves = 0
+				add_ownership = {
+					company = {
+						type = company_Rothschild_Bank_gbr
+						country = c:GBR
+						levels = 5
+					}
+				}
+			}
+		}
+	}
+	# presence (Д.R9а.5): company_Rothschild_Bank_gbr of GBR in STATE_AUSTRIA, if no "Bank" of the country took it already
+	if = {
+		limit = {
+			this = c:AUS
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_Rothschild_Bank_gbr }
+			exists = s:STATE_AUSTRIA.region_state:AUS
+			s:STATE_AUSTRIA.region_state:AUS = { NOT = { has_building = building_zz_ef_bank } }
+		}
+		s:STATE_AUSTRIA.region_state:AUS = {
+			create_building = {
+				building = building_zz_ef_bank
+				reserves = 0
+				add_ownership = {
+					company = {
+						type = company_Rothschild_Bank_gbr
+						country = c:GBR
+						levels = 5
+					}
+				}
+			}
+		}
+	}
+	# presence (Д.R9а.5): company_Rothschild_Bank_gbr of GBR in STATE_HESSE, if no "Bank" of the country took it already
+	if = {
+		limit = {
+			this = c:FRM
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_Rothschild_Bank_gbr }
+			exists = s:STATE_HESSE.region_state:FRM
+			s:STATE_HESSE.region_state:FRM = { NOT = { has_building = building_zz_ef_bank } }
+		}
+		s:STATE_HESSE.region_state:FRM = {
+			create_building = {
+				building = building_zz_ef_bank
+				reserves = 0
+				add_ownership = {
+					company = {
+						type = company_Rothschild_Bank_gbr
+						country = c:GBR
+						levels = 5
+					}
+				}
+			}
+		}
+	}
+	# presence (Д.R9а.5): company_Rothschild_Bank_gbr of GBR in STATE_CAMPANIA, if no "Bank" of the country took it already
+	if = {
+		limit = {
+			this = c:SIC
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_Rothschild_Bank_gbr }
+			exists = s:STATE_CAMPANIA.region_state:SIC
+			s:STATE_CAMPANIA.region_state:SIC = { NOT = { has_building = building_zz_ef_bank } }
+		}
+		s:STATE_CAMPANIA.region_state:SIC = {
+			create_building = {
+				building = building_zz_ef_bank
+				reserves = 0
+				add_ownership = {
+					company = {
+						type = company_Rothschild_Bank_gbr
+						country = c:GBR
+						levels = 5
+					}
+				}
+			}
+		}
+	}
 }
 
 zz_ef_bank_company_state = {
@@ -3213,14 +3209,112 @@ zz_ef_bank_company_state = {
 }
 
 zz_ef_bank_company_build = {
-	create_building = {
-		building = building_zz_ef_bank
-		reserves = 0
-		add_ownership = {
-			company = {
-				type = $COMPANY$
-				country = scope:zz_ef_bkc_o
-				levels = 5
+	if = {
+		limit = {
+			state_region = s:STATE_ILE_DE_FRANCE
+			scope:zz_ef_bkc_o = c:FRA
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_Rothschild_Bank_gbr }
+		}
+		create_building = {
+			building = building_zz_ef_bank
+			reserves = 0
+			add_ownership = {
+				company = {
+					type = $COMPANY$
+					country = scope:zz_ef_bkc_o
+					levels = 5
+				}
+				company = {
+					type = company_Rothschild_Bank_gbr
+					country = c:GBR
+					levels = 5
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			state_region = s:STATE_AUSTRIA
+			scope:zz_ef_bkc_o = c:AUS
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_Rothschild_Bank_gbr }
+		}
+		create_building = {
+			building = building_zz_ef_bank
+			reserves = 0
+			add_ownership = {
+				company = {
+					type = $COMPANY$
+					country = scope:zz_ef_bkc_o
+					levels = 5
+				}
+				company = {
+					type = company_Rothschild_Bank_gbr
+					country = c:GBR
+					levels = 5
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			state_region = s:STATE_HESSE
+			scope:zz_ef_bkc_o = c:FRM
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_Rothschild_Bank_gbr }
+		}
+		create_building = {
+			building = building_zz_ef_bank
+			reserves = 0
+			add_ownership = {
+				company = {
+					type = $COMPANY$
+					country = scope:zz_ef_bkc_o
+					levels = 5
+				}
+				company = {
+					type = company_Rothschild_Bank_gbr
+					country = c:GBR
+					levels = 5
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			state_region = s:STATE_CAMPANIA
+			scope:zz_ef_bkc_o = c:SIC
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_Rothschild_Bank_gbr }
+		}
+		create_building = {
+			building = building_zz_ef_bank
+			reserves = 0
+			add_ownership = {
+				company = {
+					type = $COMPANY$
+					country = scope:zz_ef_bkc_o
+					levels = 5
+				}
+				company = {
+					type = company_Rothschild_Bank_gbr
+					country = c:GBR
+					levels = 5
+				}
+			}
+		}
+	}
+	else = {
+		create_building = {
+			building = building_zz_ef_bank
+			reserves = 0
+			add_ownership = {
+				company = {
+					type = $COMPANY$
+					country = scope:zz_ef_bkc_o
+					levels = 5
+				}
 			}
 		}
 	}

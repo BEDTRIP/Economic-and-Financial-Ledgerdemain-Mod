@@ -1,0 +1,280 @@
+﻿# From common/company_types/00_ef_companies.txt.
+
+#ITA
+company_Rothschild_Bank_ita = {
+	icon = "gfx/interface/icons/company_icons/bank/company_Rothschild_Bank_ita.dds"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufacturing_light.dds"
+
+	preferred_headquarters = { STATE_CAMPANIA } # Rien ici comme demandé
+	flavored_company = yes
+
+	building_types = {
+		building_financial_centre_ita
+		building_financial_centre_tus
+		building_financial_centre_sic
+		building_financial_centre_sar
+		building_zz_ef_bank
+	}
+
+	potential = {
+		has_interest_marker_in_region = region_southern_europe
+	}
+
+	attainable = {
+		hidden_trigger = { # Hide attainable if it's always fulfilled by possible
+			any_scope_state = {
+				state_region = s:STATE_CAMPANIA
+			}
+		}
+	}
+
+	possible = {
+		any_scope_state = {
+			is_incorporated = yes
+			any_scope_building = {
+				is_building_type = building_financial_district
+				level >= 5
+			}
+		}
+	}
+
+	prosperity_modifier = {
+		country_military_goods_cost_mult = -0.075 #War Financing
+		country_max_weekly_construction_progress_add = 7.5 #Many Infrastructure Projects
+
+		country_loan_interest_rate_mult = -0.05
+		country_private_construction_allocation_mult = 0.05
+
+		state_farmers_investment_pool_contribution_add = 0.015
+		state_shopkeepers_investment_pool_contribution_add = 0.015
+		state_clergymen_investment_pool_contribution_add = 0.04
+		state_aristocrats_investment_pool_contribution_add = 0.07
+		state_capitalists_investment_pool_contribution_add = 0.05
+
+		building_nationalization_investment_return_add = 0.05
+		country_government_dividends_reinvestment_add = 0.05
+		country_government_dividends_efficiency_add = 0.05
+
+		country_max_companies_add = 1
+	}
+
+	ai_weight = {
+		value = 3 # Higher base value for flavored companies
+	}
+}
+company_Rothschild_Bank_fra = {
+	icon = "gfx/interface/icons/company_icons/bank/company_Rothschild_Bank_fra.dds"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufacturing_light.dds"
+
+	flavored_company = yes
+
+	preferred_headquarters = {STATE_ILE_DE_FRANCE }
+
+	possible_prestige_goods = {
+		railroad_stock_fra
+	}
+
+	building_types = {
+		#building_bank
+		#building_financial_district
+		#building_construction_sector ### СТР.5: banks keep only banking
+		#building_railway ### СТР.5: banks keep only banking
+		#building_port
+		#building_trade_center ### СТР.5: banks keep only banking
+		#building_gold_mine ### СТР.5: banks keep only banking
+		#building_silver_mine ### СТР.5: banks keep only banking
+
+		building_financial_centre_fra
+		building_zz_ef_bank
+	}
+
+	potential = {
+		has_interest_marker_in_region = region_western_europe
+
+	}
+
+	attainable = {
+		hidden_trigger = { # Hide attainable if it's always fulfilled by possible
+			any_scope_state = {
+				state_region = s:STATE_ILE_DE_FRANCE
+
+			}
+		}
+	}
+
+	possible = {
+		any_scope_state = {
+			is_incorporated = yes
+			any_scope_building = {
+				is_building_type = building_financial_district
+				level >= 1
+			}
+		}
+	}
+
+	prosperity_modifier = {
+		country_military_goods_cost_mult = -0.075 #War Financing
+		country_max_weekly_construction_progress_add = 7.5 #Many Infrastructure Projects
+
+		country_loan_interest_rate_mult = -0.05
+		country_private_construction_allocation_mult = 0.05
+
+		state_farmers_investment_pool_contribution_add = 0.015
+		state_shopkeepers_investment_pool_contribution_add = 0.015
+		state_clergymen_investment_pool_contribution_add = 0.04
+		state_aristocrats_investment_pool_contribution_add = 0.07
+		state_capitalists_investment_pool_contribution_add = 0.05
+
+		building_nationalization_investment_return_add = 0.05
+		country_government_dividends_reinvestment_add = 0.05
+		country_government_dividends_efficiency_add = 0.05
+
+		country_max_companies_add = 1
+	}
+
+	ai_weight = {
+		value = 3 # Higher base value for flavored companies
+	}
+}
+#FRM
+company_Rothschild_Bank_ger = {
+	icon = "gfx/interface/icons/company_icons/bank/company_Rothschild_Bank_ger.dds"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufacturing_light.dds"
+
+	flavored_company = yes
+
+	possible_prestige_goods = {
+		railroad_stock_ger
+	}
+
+	building_types = {
+		#building_bank
+		#building_financial_district
+		#building_construction_sector ### СТР.5: banks keep only banking
+		#building_railway ### СТР.5: banks keep only banking
+		#building_port
+		#building_trade_center ### СТР.5: banks keep only banking
+		#building_gold_mine ### СТР.5: banks keep only banking
+		#building_silver_mine ### СТР.5: banks keep only banking
+
+		building_financial_centre_frm
+		building_financial_centre_pru
+		building_zz_ef_bank
+	}
+
+	potential = {
+		has_interest_marker_in_region = region_central_europe
+	}
+
+	attainable = {
+		hidden_trigger = { # Hide attainable if it's always fulfilled by possible
+			any_scope_state = {
+				state_region = s:STATE_HESSE
+
+			}
+		}
+	}
+
+	possible = {
+		any_scope_state = {
+			is_incorporated = yes
+			any_scope_building = {
+				is_building_type = building_financial_district
+				level >= 1
+			}
+		}
+	}
+
+	prosperity_modifier = {
+		country_military_goods_cost_mult = -0.075 #War Financing
+		country_max_weekly_construction_progress_add = 7.5 #Many Infrastructure Projects
+
+		country_loan_interest_rate_mult = -0.05
+		country_private_construction_allocation_mult = 0.05
+
+		state_farmers_investment_pool_contribution_add = 0.015
+		state_shopkeepers_investment_pool_contribution_add = 0.015
+		state_clergymen_investment_pool_contribution_add = 0.04
+		state_aristocrats_investment_pool_contribution_add = 0.07
+		state_capitalists_investment_pool_contribution_add = 0.05
+
+		building_nationalization_investment_return_add = 0.05
+		country_government_dividends_reinvestment_add = 0.05
+		country_government_dividends_efficiency_add = 0.05
+
+		country_max_companies_add = 1
+	}
+
+	ai_weight = {
+		value = 3 # Higher base value for flavored companies
+	}
+}
+company_Rothschild_Bank_aus = {
+	icon = "gfx/interface/icons/company_icons/bank/company_Rothschild_Bank_aus.dds"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufacturing_light.dds"
+
+	preferred_headquarters = { STATE_BOHEMIA }
+	flavored_company = yes
+
+	building_types = {
+		#building_bank
+		#building_financial_district
+		#building_construction_sector ### СТР.5: banks keep only banking
+		#building_railway ### СТР.5: banks keep only banking
+		#building_port
+		#building_trade_center ### СТР.5: banks keep only banking
+		#building_gold_mine ### СТР.5: banks keep only banking
+		#building_silver_mine ### СТР.5: banks keep only banking
+
+		building_financial_centre_aus
+		building_zz_ef_bank
+	}
+
+	potential = {
+		has_interest_marker_in_region = region_central_europe
+
+	}
+
+	attainable = {
+		hidden_trigger = { # Hide attainable if it's always fulfilled by possible
+			any_scope_state = {
+				state_region = s:STATE_AUSTRIA
+
+			}
+		}
+	}
+
+	possible = {
+		any_scope_state = {
+			is_incorporated = yes
+			any_scope_building = {
+				is_building_type = building_financial_district
+				level >= 1
+			}
+		}
+	}
+
+	prosperity_modifier = {
+		country_military_goods_cost_mult = -0.075 #War Financing
+		country_max_weekly_construction_progress_add = 7.5 #Many Infrastructure Projects
+
+		country_loan_interest_rate_mult = -0.05
+		country_private_construction_allocation_mult = 0.05
+
+		state_farmers_investment_pool_contribution_add = 0.015
+		state_shopkeepers_investment_pool_contribution_add = 0.015
+		state_clergymen_investment_pool_contribution_add = 0.04
+		state_aristocrats_investment_pool_contribution_add = 0.07
+		state_capitalists_investment_pool_contribution_add = 0.05
+
+		building_nationalization_investment_return_add = 0.05
+		country_government_dividends_reinvestment_add = 0.05
+		country_government_dividends_efficiency_add = 0.05
+
+		country_max_companies_add = 1
+	}
+
+	ai_weight = {
+		value = 3 # Higher base value for flavored companies
+	}
+}

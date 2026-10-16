@@ -19,12 +19,12 @@ How (once per market, by its owner, in the owner's first monthly pulse):
   * owners: 40% an E&F bank company of the state's owner if it has one, the rest the state -- sold by the AI to
     private owners (ai_nationalization_desire -5 on the building; run r1005_194935: in a year and a half 339 of
     1097 state levels went to financial districts and companies). A company type cannot be a variable, so the
-    company is a macro argument: one ladder per bank company (the 98 of zz_ef_cm_companies.txt).
+    company is a macro argument: one ladder per bank company (the 94 of zz_ef_cm_companies.txt).
     The financial district cannot be the seed's owner: it needs a literal region -- `region = scope:...` is
     refused ("Failed to read key reference", run r1005_201105), and the state's region would take a dispatcher of
     ~700 regions x 98 companies x the ladder.
 Reads the fork: the bank companies are the ones of common/company_types/00_ef_companies.txt that list
-building_zz_ef_bank (the 98).
+building_zz_ef_bank (the 94).
 Logged per state: EFK|date|country|state|want N|tc T|built B.
 
 Usage:
@@ -73,7 +73,6 @@ BANKS = [
     "company_BancoCentralDeGuatemala",
     "company_BancoCentralDeHonduras",
     "company_BancaDItalia",
-    "company_Rothschild_Bank_ita",
     "company_BankOfJapan",
     "company_Mitsubishiexchangehousebank",
     "company_BancoDeMexico",
@@ -118,14 +117,11 @@ BANKS = [
     "company_BankCreditLyonnais",
     "company_SocieteGenerale",
     "company_BanqueDeParisEtDesPaysBas",
-    "company_Rothschild_Bank_fra",
     "saint_petersburg_international_commercial_bank",
     "russo_chinese_bank",
     "company_DeutscheBank",
-    "company_Rothschild_Bank_ger",
     "company_OesterreichischeCreditAnstalt",
     "company_WienerBankverein",
-    "company_Rothschild_Bank_aus",
     "company_TurkishZiraatBankasi",
     "company_BanqueImperialeOttomane",
     "company_BankTejaratPersia",
@@ -162,6 +158,13 @@ CB_COMPANIES = [
 ]
 # a bank company's own "Bank" at the start (Д.R9б.6): levels, in a state where no other "Bank" stands
 COMPANY_LEVELS = 5
+# a bank company's presence abroad at the start (Д.R9а.5): its "Bank" levels in another country's state -- the company,
+# its country, the states (country, state region); in the capital of a country with its own CB company both own the
+# one "Bank" (create_building on a standing building adds no levels)
+PRESENCE = [
+    ("company_Rothschild_Bank_gbr", "GBR", [("FRA", "STATE_ILE_DE_FRANCE"), ("AUS", "STATE_AUSTRIA"),
+                                            ("FRM", "STATE_HESSE"), ("SIC", "STATE_CAMPANIA")]),
+]
 
 SIZES = [1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 18, 22, 26, 30, 35, 40, 50, 60, 70, 80, 100, 120, 150, 200]
 COMPANY_SHARE = 0.4
@@ -188,7 +191,7 @@ def banks() -> list[str]:
         body = s[m.end(): m.end() + nxt.start()] if nxt else s[m.end():]
         if re.search(r"(?m)^\s*building_zz_ef_bank\b", body):
             found.add(m.group(1))
-    assert found == set(BANKS) and len(BANKS) == 98, (found ^ set(BANKS))
+    assert found == set(BANKS) and len(BANKS) == 94, (found ^ set(BANKS))
     return BANKS
 
 
@@ -379,6 +382,32 @@ zz_ef_bank_company_seed = {
 		}}
 	}}
 """)
+    for co, tag, states in PRESENCE:
+        for t, st in states:
+            o.append(f"""\t# presence (Д.R9а.5): {co} of {tag} in {st}, if no "Bank" of the country took it already
+\tif = {{
+\t\tlimit = {{
+\t\t\tthis = c:{t}
+\t\t\texists = c:{tag}
+\t\t\tc:{tag} = {{ has_company = company_type:{co} }}
+\t\t\texists = s:{st}.region_state:{t}
+\t\t\ts:{st}.region_state:{t} = {{ NOT = {{ has_building = building_zz_ef_bank }} }}
+\t\t}}
+\t\ts:{st}.region_state:{t} = {{
+\t\t\tcreate_building = {{
+\t\t\t\tbuilding = building_zz_ef_bank
+\t\t\t\treserves = 0
+\t\t\t\tadd_ownership = {{
+\t\t\t\t\tcompany = {{
+\t\t\t\t\t\ttype = {co}
+\t\t\t\t\t\tcountry = c:{tag}
+\t\t\t\t\t\tlevels = {COMPANY_LEVELS}
+\t\t\t\t\t}}
+\t\t\t\t}}
+\t\t\t}}
+\t\t}}
+\t}}
+""")
     o.append("""}
 
 ### COUNTRY scope; $COMPANY$ -- a bank company of the country: its "Bank" in a state without one (incorporated first).
@@ -399,19 +428,50 @@ zz_ef_bank_company_state = {
 	}
 }
 
-### STATE scope; scope:zz_ef_bkc_o -- the country.
+### STATE scope; scope:zz_ef_bkc_o -- the country. In a state of a foreign company's presence (PRESENCE) -- one "Bank" of both.
 zz_ef_bank_company_build = {
-	create_building = {
-		building = building_zz_ef_bank
-		reserves = 0
-		add_ownership = {
-			company = {
-				type = $COMPANY$
-				country = scope:zz_ef_bkc_o
-				levels = """ + str(COMPANY_LEVELS) + """
-			}
-		}
-	}
+""")
+    first = True
+    for co, tag, states in PRESENCE:
+        for t, st in states:
+            o.append(f"""\t{'if' if first else 'else_if'} = {{
+\t\tlimit = {{
+\t\t\tstate_region = s:{st}
+\t\t\tscope:zz_ef_bkc_o = c:{t}
+\t\t\texists = c:{tag}
+\t\t\tc:{tag} = {{ has_company = company_type:{co} }}
+\t\t}}
+\t\tcreate_building = {{
+\t\t\tbuilding = building_zz_ef_bank
+\t\t\treserves = 0
+\t\t\tadd_ownership = {{
+\t\t\t\tcompany = {{
+\t\t\t\t\ttype = $COMPANY$
+\t\t\t\t\tcountry = scope:zz_ef_bkc_o
+\t\t\t\t\tlevels = {COMPANY_LEVELS}
+\t\t\t\t}}
+\t\t\t\tcompany = {{
+\t\t\t\t\ttype = {co}
+\t\t\t\t\tcountry = c:{tag}
+\t\t\t\t\tlevels = {COMPANY_LEVELS}
+\t\t\t\t}}
+\t\t\t}}
+\t\t}}
+\t}}
+""")
+            first = False
+    o.append(("\telse = {\n" if not first else "\t{\n") + """\t\tcreate_building = {
+\t\t\tbuilding = building_zz_ef_bank
+\t\t\treserves = 0
+\t\t\tadd_ownership = {
+\t\t\t\tcompany = {
+\t\t\t\t\ttype = $COMPANY$
+\t\t\t\t\tcountry = scope:zz_ef_bkc_o
+\t\t\t\t\tlevels = """ + str(COMPANY_LEVELS) + """
+\t\t\t\t}
+\t\t\t}
+\t\t}
+\t}
 }
 """)
     return "".join(o)

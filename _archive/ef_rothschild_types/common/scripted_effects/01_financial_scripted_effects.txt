@@ -1,0 +1,53 @@
+# From common/scripted_effects/01_financial_scripted_effects.txt.
+	if = {
+		limit = {
+			game_date > 1817.1.1
+			c:FRA ?= this
+			NOT = {
+				has_company = company_type:company_Rothschild_Bank_fra
+			}
+		}
+		add_company = company_type:company_Rothschild_Bank_fra
+		company:company_Rothschild_Bank_fra = {
+			set_company_state_region = s:STATE_ILE_DE_FRANCE
+		}
+	}
+	if = {
+		limit = {
+			game_date > 1760.1.1
+			c:GER ?= this
+			NOT = {
+				has_company = company_type:company_Rothschild_Bank_ger
+			}
+		}
+		add_company = company_type:company_Rothschild_Bank_ger
+		company:company_Rothschild_Bank_ger = {
+			set_company_state_region = s:STATE_HESSE
+		}
+	}
+	if = {
+		limit = {
+			game_date > 1820.1.1
+			c:AUS ?= this
+			NOT = {
+				has_company = company_type:company_Rothschild_Bank_aus
+			}
+		}
+		add_company = company_type:company_Rothschild_Bank_aus
+		company:company_Rothschild_Bank_aus = {
+			set_company_state_region = s:STATE_AUSTRIA
+		}
+	}
+	if = {
+		limit = {
+			game_date > 1821.1.1
+			c:ITA ?= this
+			NOT = {
+				has_company = company_type:company_Rothschild_Bank_ita
+			}
+		}
+		add_company = company_type:company_Rothschild_Bank_ita
+		company:company_Rothschild_Bank_ita = {
+			set_company_state_region = s:STATE_CAMPANIA
+		}
+	}

@@ -147,16 +147,7 @@ BUILDINGS = {
 			}
 		}
 		#FRM
-		if = {
-			limit = {
-				c:FRM ?= this
-			}
-			add_company = company_type:company_Rothschild_Bank_ger
-			company:company_Rothschild_Bank_ger = {
-				set_company_establishment_date = 1830.1.1
-				set_company_state_region = s:STATE_HESSE
-			}
-		}   
+   
 		#BAV
 		if = {
 			limit = {
@@ -170,52 +161,9 @@ BUILDINGS = {
 		}
 		 
 		#NGF
-		if = {
-			limit = {
-				c:NGF ?= this
-			}
-			add_company = company_type:company_PreussischeSeehandlung
-			add_company = company_type:company_basic_gold_and_silver_mining_2
-			company:company_PreussischeSeehandlung = {
-				set_company_establishment_date = 1830.1.1
-				set_company_state_region = s:STATE_BRANDENBURG
-			}
-			company:company_basic_gold_and_silver_mining_2 = {
-				set_company_establishment_date = 1830.1.1
-				set_company_state_region = s:STATE_BRANDENBURG
-			}
-			add_company = company_type:company_Rothschild_Bank_ger
-			company:company_Rothschild_Bank_ger = {
-				set_company_establishment_date = 1830.1.1
-				set_company_state_region = s:STATE_HESSE
-			}
-		} 
+ 
 		#GER
-		if = {
-			limit = {
-				c:GER ?= this
-			} 
-			add_company = company_type:company_PreussischeSeehandlung
-			company:company_PreussischeSeehandlung = {
-				set_company_establishment_date = 1830.1.1
-				set_company_state_region = s:STATE_BRANDENBURG
-			}
-			add_company = company_type:company_basic_gold_and_silver_mining_2
-			company:company_basic_gold_and_silver_mining_2 = {
-				set_company_establishment_date = 1830.1.1
-				set_company_state_region = s:STATE_BRANDENBURG
-			}
-			add_company = company_type:company_Rothschild_Bank_ger
-			company:company_Rothschild_Bank_ger = {
-				set_company_establishment_date = 1830.1.1
-				set_company_state_region = s:STATE_HESSE
-			}
-			add_company = company_type:company_BayerischeHypothekenUndWechselBank
-			company:company_BayerischeHypothekenUndWechselBank = {
-				set_company_establishment_date = 1830.1.1
-				set_company_state_region = s:STATE_BAVARIA
-			}
-		} 
+ 
 		##################
 		#Germany end
 		################## 
@@ -224,43 +172,8 @@ BUILDINGS = {
 		#Italy
 		################## 
 		#SIC
-		if = {
-			limit = {
-				c:SIC ?= this
-			}
-			add_company = company_type:company_Rothschild_Bank_ita
-			company:company_Rothschild_Bank_ita = {
-				set_company_establishment_date = 1830.1.1
-				set_company_state_region = s:STATE_CAMPANIA
-			}
-		}
 
 		#ITA
-		if = {
-			limit = {
-				c:ITA ?= this
-			}
-			add_company = company_type:company_Rothschild_Bank_ita
-			company:company_Rothschild_Bank_ita = {
-				set_company_establishment_date = 1830.1.1
-				set_company_state_region = s:STATE_CAMPANIA
-			}
-			add_company = company_type:company_BancaDItalia
-			company:company_BancaDItalia = {
-				set_company_establishment_date = 1830.1.1
-				set_company_state_region = s:STATE_PIEDMONT
-			}
-			# add_company = company_type:company_BancaCommercialeItaliana
-			# company:company_BancaCommercialeItaliana = {
-			# 	set_company_establishment_date = 1830.1.1
-			# 	set_company_state_region = s:STATE_PIEDMONT
-			# }
-			add_company = company_type:company_CassaDiRisparmioDiTorino
-			company:company_CassaDiRisparmioDiTorino = {
-				set_company_establishment_date = 1830.1.1
-				set_company_state_region = s:STATE_PIEDMONT
-			}
-		}
 		##################
 		#italy end
 		################## 
@@ -437,26 +350,6 @@ BUILDINGS = {
 			}
 		}
 		#FRA
-		if = {
-			limit = {
-				c:FRA ?= this
-			}
-			if = { limit = { not = { has_company = company_type:company_BanqueDeFrance } } add_company = company_type:company_BanqueDeFrance }
-			if = { limit = { not = { has_company = company_type:company_Rothschild_Bank_fra } } add_company = company_type:company_Rothschild_Bank_fra }
-			add_company = company_type:company_basic_gold_and_silver_mining_2
-			company:company_BanqueDeFrance = {
-				set_company_establishment_date = 1830.1.1
-				set_company_state_region = s:STATE_ILE_DE_FRANCE
-			}
-			company:company_Rothschild_Bank_fra = {
-				set_company_establishment_date = 1830.1.1
-				set_company_state_region = s:STATE_ILE_DE_FRANCE
-			}
-			company:company_basic_gold_and_silver_mining_2 = {
-				set_company_establishment_date = 1830.1.1
-				set_company_state_region = s:STATE_ILE_DE_FRANCE
-			}
-		}
 		#USA
 		if = {
 			limit = {
@@ -500,21 +393,6 @@ BUILDINGS = {
 			}
 		}
 		#AUS
-		if = {
-			limit = {
-				c:AUS ?= this
-			}
-			add_company = company_type:company_OesterreichischeCreditAnstalt
-			if = { limit = { not = { has_company = company_type:company_Rothschild_Bank_aus } } add_company = company_type:company_Rothschild_Bank_aus }
-			company:company_OesterreichischeCreditAnstalt = {
-				set_company_establishment_date = 1830.1.1
-				set_company_state_region = s:STATE_AUSTRIA
-			}
-			company:company_Rothschild_Bank_aus = {
-				set_company_establishment_date = 1830.1.1
-				set_company_state_region = s:STATE_AUSTRIA
-			}
-		}
 		#NET
 		if = {
 			limit = {
@@ -767,8 +645,6 @@ BUILDINGS = {
 		}   
 		
 		establish_bank_and_ef_compagnie = yes
-		# every bank company its own "Bank", the CB company's in the capital (Д.R9б.6, ld_bank_seed.txt)
-		zz_ef_bank_company_seed = yes
 		
 		#prosperity max at start
 		every_character = {
@@ -824,8 +700,8 @@ BUILDINGS = {
 				building="building_construction_sector"
 				add_ownership={
 					company={
-						type=company_Rothschild_Bank_aus
-						country="c:AUS"
+						type=company_Rothschild_Bank_gbr
+						country="c:GBR"
 						levels=1
 					}
 				}
@@ -853,8 +729,8 @@ BUILDINGS = {
 					building="building_construction_sector"
 					add_ownership={
 						company={
-							type=company_Rothschild_Bank_aus
-							country="c:AUS"
+							type=company_Rothschild_Bank_gbr
+							country="c:GBR"
 							levels=1
 						}
 					}
@@ -882,8 +758,8 @@ BUILDINGS = {
 				building="building_construction_sector"
 				add_ownership={
 					company={
-						type=company_Rothschild_Bank_ger
-						country="c:FRM"
+						type=company_Rothschild_Bank_gbr
+						country="c:GBR"
 						levels=1
 					}
 				}
@@ -897,8 +773,8 @@ BUILDINGS = {
 				building="building_railway"
 				add_ownership={
 					company={
-						type=company_Rothschild_Bank_ger
-						country="c:FRM"
+						type=company_Rothschild_Bank_gbr
+						country="c:GBR"
 						levels=1
 					}
 				}
@@ -912,8 +788,8 @@ BUILDINGS = {
 				building="building_railway"
 				add_ownership={
 					company={
-						type=company_Rothschild_Bank_ger
-						country="c:FRM"
+						type=company_Rothschild_Bank_gbr
+						country="c:GBR"
 						levels=1
 					}
 				}
@@ -927,8 +803,8 @@ BUILDINGS = {
 				building="building_railway"
 				add_ownership={
 					company={
-						type=company_Rothschild_Bank_ger
-						country="c:FRM"
+						type=company_Rothschild_Bank_gbr
+						country="c:GBR"
 						levels=1
 					}
 				}
@@ -942,8 +818,8 @@ BUILDINGS = {
 				building="building_railway"
 				add_ownership={
 					company={
-						type=company_Rothschild_Bank_ger
-						country="c:FRM"
+						type=company_Rothschild_Bank_gbr
+						country="c:GBR"
 						levels=1
 					}
 				}
@@ -957,8 +833,8 @@ BUILDINGS = {
 				building="building_railway"
 				add_ownership={
 					company={
-						type=company_Rothschild_Bank_ger
-						country="c:FRM"
+						type=company_Rothschild_Bank_gbr
+						country="c:GBR"
 						levels=1
 					}
 				}
@@ -972,8 +848,8 @@ BUILDINGS = {
 				building="building_railway"
 				add_ownership={
 					company={
-						type=company_Rothschild_Bank_ger
-						country="c:FRM"
+						type=company_Rothschild_Bank_gbr
+						country="c:GBR"
 						levels=1
 					}
 				}
@@ -987,8 +863,8 @@ BUILDINGS = {
 				building="building_railway"
 				add_ownership={
 					company={
-						type=company_Rothschild_Bank_ger
-						country="c:FRM"
+						type=company_Rothschild_Bank_gbr
+						country="c:GBR"
 						levels=1
 					}
 				}
@@ -1016,8 +892,8 @@ BUILDINGS = {
 					building="building_construction_sector"
 					add_ownership={
 						company={
-							type=company_Rothschild_Bank_ger
-							country="c:GER"
+							type=company_Rothschild_Bank_gbr
+							country="c:GBR"
 							levels=1
 						}
 					}
@@ -1034,8 +910,8 @@ BUILDINGS = {
 					building="building_railway"
 					add_ownership={
 						company={
-							type=company_Rothschild_Bank_ger
-							country="c:GER"
+							type=company_Rothschild_Bank_gbr
+							country="c:GBR"
 							levels=1
 						}
 					}
@@ -1052,8 +928,8 @@ BUILDINGS = {
 					building="building_railway"
 					add_ownership={
 						company={
-							type=company_Rothschild_Bank_ger
-							country="c:GER"
+							type=company_Rothschild_Bank_gbr
+							country="c:GBR"
 							levels=1
 						}
 					}
@@ -1070,8 +946,8 @@ BUILDINGS = {
 					building="building_railway"
 					add_ownership={
 						company={
-							type=company_Rothschild_Bank_ger
-							country="c:GER"
+							type=company_Rothschild_Bank_gbr
+							country="c:GBR"
 							levels=1
 						}
 					}
@@ -1088,8 +964,8 @@ BUILDINGS = {
 					building="building_railway"
 					add_ownership={
 						company={
-							type=company_Rothschild_Bank_ger
-							country="c:GER"
+							type=company_Rothschild_Bank_gbr
+							country="c:GBR"
 							levels=1
 						}
 					}
@@ -1106,8 +982,8 @@ BUILDINGS = {
 					building="building_railway"
 					add_ownership={
 						company={
-							type=company_Rothschild_Bank_ger
-							country="c:GER"
+							type=company_Rothschild_Bank_gbr
+							country="c:GBR"
 							levels=1
 						}
 					}
@@ -1124,8 +1000,8 @@ BUILDINGS = {
 					building="building_railway"
 					add_ownership={
 						company={
-							type=company_Rothschild_Bank_ger
-							country="c:GER"
+							type=company_Rothschild_Bank_gbr
+							country="c:GBR"
 							levels=1
 						}
 					}
@@ -1142,8 +1018,8 @@ BUILDINGS = {
 					building="building_railway"
 					add_ownership={
 						company={
-							type=company_Rothschild_Bank_ger
-							country="c:GER"
+							type=company_Rothschild_Bank_gbr
+							country="c:GBR"
 							levels=1
 						}
 					}
@@ -1172,8 +1048,8 @@ BUILDINGS = {
 					building="building_construction_sector"
 					add_ownership={
 						company={
-							type=company_Rothschild_Bank_ger
-							country="c:NGF"
+							type=company_Rothschild_Bank_gbr
+							country="c:GBR"
 							levels=1
 						}
 					}
@@ -1190,8 +1066,8 @@ BUILDINGS = {
 					building="building_railway"
 					add_ownership={
 						company={
-							type=company_Rothschild_Bank_ger
-							country="c:NGF"
+							type=company_Rothschild_Bank_gbr
+							country="c:GBR"
 							levels=1
 						}
 					}
@@ -1208,8 +1084,8 @@ BUILDINGS = {
 					building="building_railway"
 					add_ownership={
 						company={
-							type=company_Rothschild_Bank_ger
-							country="c:NGF"
+							type=company_Rothschild_Bank_gbr
+							country="c:GBR"
 							levels=1
 						}
 					}
@@ -1226,8 +1102,8 @@ BUILDINGS = {
 					building="building_railway"
 					add_ownership={
 						company={
-							type=company_Rothschild_Bank_ger
-							country="c:NGF"
+							type=company_Rothschild_Bank_gbr
+							country="c:GBR"
 							levels=1
 						}
 					}
@@ -1244,8 +1120,8 @@ BUILDINGS = {
 					building="building_railway"
 					add_ownership={
 						company={
-							type=company_Rothschild_Bank_ger
-							country="c:NGF"
+							type=company_Rothschild_Bank_gbr
+							country="c:GBR"
 							levels=1
 						}
 					}
@@ -1262,8 +1138,8 @@ BUILDINGS = {
 					building="building_railway"
 					add_ownership={
 						company={
-							type=company_Rothschild_Bank_ger
-							country="c:NGF"
+							type=company_Rothschild_Bank_gbr
+							country="c:GBR"
 							levels=1
 						}
 					}
@@ -1280,8 +1156,8 @@ BUILDINGS = {
 					building="building_railway"
 					add_ownership={
 						company={
-							type=company_Rothschild_Bank_ger
-							country="c:NGF"
+							type=company_Rothschild_Bank_gbr
+							country="c:GBR"
 							levels=1
 						}
 					}
@@ -1298,8 +1174,8 @@ BUILDINGS = {
 					building="building_railway"
 					add_ownership={
 						company={
-							type=company_Rothschild_Bank_ger
-							country="c:NGF"
+							type=company_Rothschild_Bank_gbr
+							country="c:GBR"
 							levels=1
 						}
 					}
@@ -1323,8 +1199,8 @@ BUILDINGS = {
 				}
 				add_ownership={
 					company={
-						type=company_Rothschild_Bank_ger
-						country="c:FRM"
+						type=company_Rothschild_Bank_gbr
+						country="c:GBR"
 						levels=1
 					}
 				}
@@ -1359,8 +1235,8 @@ BUILDINGS = {
 					}
 					add_ownership={
 						company={
-							type=company_Rothschild_Bank_ger
-							country="c:NGF"
+							type=company_Rothschild_Bank_gbr
+							country="c:GBR"
 							levels=1
 						}
 					}
@@ -1442,8 +1318,8 @@ BUILDINGS = {
 					} 
 					add_ownership={
 						company={
-							type=company_Rothschild_Bank_ger
-							country="c:GER"
+							type=company_Rothschild_Bank_gbr
+							country="c:GBR"
 							levels=1
 						}
 					}
@@ -1537,8 +1413,8 @@ BUILDINGS = {
 				building="building_construction_sector"
 				add_ownership={
 					company={
-						type=company_Rothschild_Bank_ita
-						country="c:SIC"
+						type=company_Rothschild_Bank_gbr
+						country="c:GBR"
 						levels=1
 					}
 				}
@@ -1584,8 +1460,8 @@ BUILDINGS = {
 				building="building_construction_sector"
 				add_ownership={
 					company={
-						type=company_Rothschild_Bank_aus
-						country="c:AUS"
+						type=company_Rothschild_Bank_gbr
+						country="c:GBR"
 						levels=1
 					}
 				}
@@ -1635,8 +1511,8 @@ BUILDINGS = {
 					building="building_construction_sector"
 					add_ownership={
 						company={
-							type=company_Rothschild_Bank_aus
-							country="c:AUS"
+							type=company_Rothschild_Bank_gbr
+							country="c:GBR"
 							levels=1
 						}
 					}
@@ -2196,8 +2072,8 @@ BUILDINGS = {
 				building="building_construction_sector"
 				add_ownership={
 					company={
-						type=company_Rothschild_Bank_fra
-						country="c:FRA"
+						type=company_Rothschild_Bank_gbr
+						country="c:GBR"
 						levels=1
 					}
 				}
@@ -4037,48 +3913,9 @@ BUILDINGS = {
 		}
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	# every bank company its own "Bank", the CB company's in the capital, and the companies' presence abroad
+	# (Д.R9б.6, Д.R9а.5; ld_bank_seed.txt) -- a pass of its own after every country's companies are added
+	every_country = {
+		zz_ef_bank_company_seed = yes
+	}
 }
