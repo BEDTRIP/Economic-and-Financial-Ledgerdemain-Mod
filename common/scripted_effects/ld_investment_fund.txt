@@ -119,6 +119,9 @@ zz_ef_fund_week_step = {
 			save_temporary_scope_as = zz_ef_fd_c
 			zz_ef_rq_add = { H = bk K = f D = scope:zz_ef_fd_c V = var:zz_ef_f_fd_start }
 		}
+	}
+	if = {
+		limit = { has_variable = zz_ef_fd_dep }
 		zz_ef_fd_special_start = yes
 	}
 	if = {
@@ -141,9 +144,10 @@ zz_ef_fund_week_step = {
 	}
 }
 
-# Country scope (a new fund's country, zz_ef_fund_week_step, after the banks' start): the special fund companies of the
-# country (Ротшильды, Бэринги; zz_ef_co_special_fund) buy its shares for zz_ef_fd_special_share of its capital each, out
-# of their accounts (Д.R9а.10): the companies' deposits -> the fund's deposit, a claim of kind f of the country's
+# Country scope (a fund's country, zz_ef_fund_week_step, after the banks' start): each special fund company of the
+# country (Ротшильды, Бэринги; zz_ef_co_special_fund) buys its shares once, for zz_ef_fd_special_share of the fund's
+# deposit, out of its account -- the first week its account holds money (the fund starts before the companies'
+# accounts fill; принято ночью) (Д.R9а.10): the companies' deposits -> the fund's deposit, a claim of kind f of the country's
 # companies (zz_ef_rq_co_f), the company's part -- var:zz_ef_co_fd_f; their gain -- the share's value (the fund's capital
 # over its shares). Log EFK|fund_special.
 zz_ef_fd_special_start = {
@@ -152,6 +156,7 @@ zz_ef_fd_special_start = {
 	every_company = {
 		limit = {
 			zz_ef_co_special_fund = yes
+			NOT = { has_variable = zz_ef_co_fd_f }
 			zz_ef_co_acc_v > 0
 		}
 		set_variable = {

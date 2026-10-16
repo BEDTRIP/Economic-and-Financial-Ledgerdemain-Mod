@@ -250,8 +250,18 @@ zz_ef_bk_box_create = {
 
 # COUNTRY scope (zz_ef_bk_book_step, before the allocation): a new company subject's starting capital (Д.R9а.11) -- its
 # share of levels x the capital of the country's subjects, moved from the others with capital > 0 pro rata (no new
-# money: the books' sum holds); nothing to take (the start: all accounts are zero) -- nothing moves. Log EFK|bank_seed.
+# money: the books' sum holds). The country's first subjects (its first book step, var:zz_ef_bk_seed_ok not yet set)
+# are not new -- the start's capital comes to them by the allocation. Log EFK|bank_seed.
 zz_ef_bk_seed_cap = {
+	if = {
+		limit = { NOT = { has_variable = zz_ef_bk_seed_ok } }
+		every_in_list = {
+			variable = zz_ef_bk_subj
+			limit = { has_variable = zz_ef_bk_seed }
+			remove_variable = zz_ef_bk_seed
+		}
+		set_variable = zz_ef_bk_seed_ok
+	}
 	every_in_list = {
 		variable = zz_ef_bk_subj
 		limit = { has_variable = zz_ef_bk_seed }
