@@ -96,16 +96,10 @@
 			}
 			var:central_bank_location ?= {
 				change_variable = {
-					name = stockpiling_pound_sterling_state_1
-                    add  = {
-						value = owner.var:circulating_pound_sterling_c_var_1
-						multiply = 0.1					}
-				}
-				change_variable = {
 					name = gold_state_1
                     add = {
 						value = owner.var:circulating_pound_sterling_c_var_1
-						add = var:stockpiling_pound_sterling_state_1
+						add = { value = owner.var:circulating_pound_sterling_c_var_1 multiply = 0.1 }
                     	add = owner.building_saving
 						multiply = owner.var:money_value_target_1
 					}
@@ -155,17 +149,10 @@
 			}
 			var:central_bank_location ?= {
 				change_variable = {
-					name = stockpiling_franc_french_franc_state_1
-                    add  = {
-						value = owner.var:circulating_franc_french_franc_c_var_1
-						multiply = 0.1
-					}
-				}
-				change_variable = {
 					name = silver_state_1
                     add = {
 						value = owner.var:circulating_franc_french_franc_c_var_1
-						add = var:stockpiling_franc_french_franc_state_1
+						add = { value = owner.var:circulating_franc_french_franc_c_var_1 multiply = 0.1 }
                     	add = owner.building_saving
 						multiply = owner.var:money_value_target_1
 						multiply = gold_to_silver_rate
@@ -176,7 +163,7 @@
 					name = gold_state_1
                     add = {
 						value = owner.var:circulating_franc_french_franc_c_var_1
-						add = var:stockpiling_franc_french_franc_state_1
+						add = { value = owner.var:circulating_franc_french_franc_c_var_1 multiply = 0.1 }
                     	add = owner.building_saving
 						multiply = owner.var:money_value_target_1
 						multiply = 0.5
@@ -207,17 +194,10 @@
 			}
 			var:central_bank_location ?= {
 				change_variable = {
-					name = stockpiling_dollar_united_states_dollar_state_1
-                    add  = {
-						value = owner.var:circulating_dollar_united_states_dollar_c_var_1
-						multiply = 0.1
-					}
-				}
-				change_variable = {
 					name = silver_state_1
                     add = {
 						value = owner.var:circulating_dollar_united_states_dollar_c_var_1
-						add = var:stockpiling_dollar_united_states_dollar_state_1
+						add = { value = owner.var:circulating_dollar_united_states_dollar_c_var_1 multiply = 0.1 }
                     	add = owner.building_saving
 						multiply = owner.var:money_value_target_1
 						multiply = gold_to_silver_rate
@@ -228,7 +208,7 @@
 					name = gold_state_1
                     add = {
 						value = owner.var:circulating_dollar_united_states_dollar_c_var_1
-						add = var:stockpiling_dollar_united_states_dollar_state_1
+						add = { value = owner.var:circulating_dollar_united_states_dollar_c_var_1 multiply = 0.1 }
                     	add = owner.building_saving
 						multiply = owner.var:money_value_target_1
 						multiply = 0.1
@@ -276,17 +256,10 @@
 			}
 			var:central_bank_location ?= {
 				change_variable = {
-					name = stockpiling_gulden_florin_state_1
-                    add  = {
-						value = owner.var:circulating_gulden_florin_c_var_1
-						multiply = 0.1
-					}
-				}
-				change_variable = {
 					name = silver_state_1
                     add = {
 						value = owner.var:circulating_gulden_florin_c_var_1
-						add = var:stockpiling_gulden_florin_state_1
+						add = { value = owner.var:circulating_gulden_florin_c_var_1 multiply = 0.1 }
                     	add = owner.building_saving
 						multiply = owner.var:money_value_target_1
 					}
@@ -302,7 +275,7 @@
 				# 	name = silver_state_1
                 #     add = {
 				# 		value = owner.var:circulating_gulden_florin_c_var_1
-				# 		add = var:stockpiling_gulden_florin_state_1
+				# 		add = { value = owner.var:circulating_gulden_florin_c_var_1 multiply = 0.1 }
 				# 		multiply = owner.var:money_value_target_1
 				# 		multiply = 0.90
 				# 	}
@@ -311,7 +284,7 @@
 				# 	name = gold_state_1
                 #     add = {
 				# 		value = owner.var:circulating_gulden_florin_c_var_1
-				# 		add = var:stockpiling_gulden_florin_state_1
+				# 		add = { value = owner.var:circulating_gulden_florin_c_var_1 multiply = 0.1 }
 				# 		multiply = owner.var:money_value_target_1
 				# 		multiply = 0.10
 				# 	}
@@ -343,17 +316,10 @@
 			}
 			var:central_bank_location ?= {
 				change_variable = {
-					name = stockpiling_gulden_state_1
-                    add  = {
-						value = owner.var:circulating_gulden_c_var_1
-						multiply = 0.1
-					}
-				}
-				change_variable = {
 					name = silver_state_1
                     add = {
 						value = owner.var:circulating_gulden_c_var_1
-						add = var:stockpiling_gulden_state_1
+						add = { value = owner.var:circulating_gulden_c_var_1 multiply = 0.1 }
                     	add = owner.building_saving
 						multiply = owner.var:money_value_target_1
 						#multiply = 0.80
@@ -363,7 +329,7 @@
 					name = gold_state_1
                     add = {
 						value = owner.var:circulating_gulden_c_var_1
-						add = var:stockpiling_gulden_state_1
+						add = { value = owner.var:circulating_gulden_c_var_1 multiply = 0.1 }
                     	add = owner.building_saving
 						multiply = owner.var:money_value_target_1
 						#multiply = 0.20
@@ -393,17 +359,10 @@
 			}
 			var:central_bank_location ?= {
 				change_variable = {
-					name = stockpiling_spe_ruble_state_1
-                    add  = {
-						value = owner.var:circulating_spe_ruble_c_var_1
-						multiply = 0.25
-					}
-				}
-				change_variable = {
 					name = silver_state_1
                     add = {
 						value = owner.var:circulating_spe_ruble_c_var_1
-						add = var:stockpiling_spe_ruble_state_1
+						add = { value = owner.var:circulating_spe_ruble_c_var_1 multiply = 0.25 }
                         add = owner.building_saving
 						multiply = owner.var:money_value_target_1
 						#multiply = 0.75
@@ -413,7 +372,7 @@
 					name = gold_state_1
                     add = {
 						value = owner.var:circulating_spe_ruble_c_var_1
-						add = var:stockpiling_spe_ruble_state_1
+						add = { value = owner.var:circulating_spe_ruble_c_var_1 multiply = 0.25 }
                     	add = owner.building_saving
 						multiply = owner.var:money_value_target_1
 						multiply = 0.1
@@ -443,17 +402,10 @@
 			}
 			var:central_bank_location ?= {
 				change_variable = {
-					name = stockpiling_thaler_prussian_thaler_state_1
-                    add  = {
-						value = owner.var:circulating_thaler_prussian_thaler_c_var_1
-						multiply = 0.1
-					}
-				}
-				change_variable = {
 					name = silver_state_1
                     add = {
 						value = owner.var:circulating_thaler_prussian_thaler_c_var_1
-						add = var:stockpiling_thaler_prussian_thaler_state_1
+						add = { value = owner.var:circulating_thaler_prussian_thaler_c_var_1 multiply = 0.1 }
                     	add = owner.building_saving
 						multiply = owner.var:money_value_target_1
 					}
@@ -489,17 +441,10 @@
 			}
 			var:central_bank_location ?= {
 				change_variable = {
-					name = stockpiling_spe_yuan_state_1
-                    add  = {
-						value = owner.var:circulating_spe_yuan_c_var_1
-						multiply = 0.1
-					}
-				}
-				change_variable = {
 					name = silver_state_1
                     add = {
 						value = owner.var:circulating_spe_yuan_c_var_1
-						add = var:stockpiling_spe_yuan_state_1
+						add = { value = owner.var:circulating_spe_yuan_c_var_1 multiply = 0.1 }
                     	add = owner.building_saving
 						multiply = owner.var:money_value_target_1
 					}
@@ -543,17 +488,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_dollar_canadian_dollar_state_1
-                    add = {
-                        value = owner.var:circulating_dollar_canadian_dollar_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_dollar_canadian_dollar_c_var_1
-                        add = var:stockpiling_dollar_canadian_dollar_state_1
+                        add = { value = owner.var:circulating_dollar_canadian_dollar_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -592,17 +530,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_dollar_canadian_dollar_state_1
-                    add = {
-                        value = owner.var:circulating_dollar_canadian_dollar_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_dollar_canadian_dollar_c_var_1
-                        add = var:stockpiling_dollar_canadian_dollar_state_1
+                        add = { value = owner.var:circulating_dollar_canadian_dollar_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -641,17 +572,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_dollar_australian_dollar_state_1
-                    add = {
-                        value = owner.var:circulating_dollar_australian_dollar_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_dollar_australian_dollar_c_var_1
-                        add = var:stockpiling_dollar_australian_dollar_state_1
+                        add = { value = owner.var:circulating_dollar_australian_dollar_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -690,17 +614,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_rupee_indian_rupee_state_1
-                    add = {
-                        value = owner.var:circulating_rupee_indian_rupee_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_rupee_indian_rupee_c_var_1
-                        add = var:stockpiling_rupee_indian_rupee_state_1
+                        add = { value = owner.var:circulating_rupee_indian_rupee_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -739,17 +656,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_mark_finnish_markka_state_1
-                    add = {
-                        value = owner.var:circulating_mark_finnish_markka_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_mark_finnish_markka_c_var_1
-                        add = var:stockpiling_mark_finnish_markka_state_1
+                        add = { value = owner.var:circulating_mark_finnish_markka_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -788,17 +698,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_rupee_indonesian_rupiah_state_1
-                    add = {
-                        value = owner.var:circulating_rupee_indonesian_rupiah_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_rupee_indonesian_rupiah_c_var_1
-                        add = var:stockpiling_rupee_indonesian_rupiah_state_1
+                        add = { value = owner.var:circulating_rupee_indonesian_rupiah_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -837,17 +740,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_gulden_south_german_gulden_state_1
-                    add = {
-                        value = owner.var:circulating_gulden_south_german_gulden_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_gulden_south_german_gulden_c_var_1
-                        add = var:stockpiling_gulden_south_german_gulden_state_1
+                        add = { value = owner.var:circulating_gulden_south_german_gulden_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -886,17 +782,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_thaler_hannoveraner_thaler_state_1
-                    add = {
-                        value = owner.var:circulating_thaler_hannoveraner_thaler_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_thaler_hannoveraner_thaler_c_var_1
-                        add = var:stockpiling_thaler_hannoveraner_thaler_state_1
+                        add = { value = owner.var:circulating_thaler_hannoveraner_thaler_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -935,17 +824,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_thaler_saxon_thaler_state_1
-                    add = {
-                        value = owner.var:circulating_thaler_saxon_thaler_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_thaler_saxon_thaler_c_var_1
-                        add = var:stockpiling_thaler_saxon_thaler_state_1
+                        add = { value = owner.var:circulating_thaler_saxon_thaler_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -984,17 +866,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_gulden_bavarian_gulden_state_1
-                    add = {
-                        value = owner.var:circulating_gulden_bavarian_gulden_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_gulden_bavarian_gulden_c_var_1
-                        add = var:stockpiling_gulden_bavarian_gulden_state_1
+                        add = { value = owner.var:circulating_gulden_bavarian_gulden_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -1033,17 +908,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_franc_swiss_franc_state_1
-                    add = {
-                        value = owner.var:circulating_franc_swiss_franc_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_franc_swiss_franc_c_var_1
-                        add = var:stockpiling_franc_swiss_franc_state_1
+                        add = { value = owner.var:circulating_franc_swiss_franc_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -1082,17 +950,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_franc_belgian_franc_state_1
-                    add = {
-                        value = owner.var:circulating_franc_belgian_franc_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_franc_belgian_franc_c_var_1
-                        add = var:stockpiling_franc_belgian_franc_state_1
+                        add = { value = owner.var:circulating_franc_belgian_franc_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -1131,17 +992,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_krone_danish_krone_state_1
-                    add = {
-                        value = owner.var:circulating_krone_danish_krone_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_krone_danish_krone_c_var_1
-                        add = var:stockpiling_krone_danish_krone_state_1
+                        add = { value = owner.var:circulating_krone_danish_krone_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -1180,17 +1034,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_spe_drachma_state_1
-                    add = {
-                        value = owner.var:circulating_spe_drachma_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_spe_drachma_c_var_1
-                        add = var:stockpiling_spe_drachma_state_1
+                        add = { value = owner.var:circulating_spe_drachma_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -1229,17 +1076,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_dinar_qiran_state_1
-                    add = {
-                        value = owner.var:circulating_dinar_qiran_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_dinar_qiran_c_var_1
-                        add = var:stockpiling_dinar_qiran_state_1
+                        add = { value = owner.var:circulating_dinar_qiran_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -1278,17 +1118,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_real_state_1
-                    add = {
-                        value = owner.var:circulating_real_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_real_c_var_1
-                        add = var:stockpiling_real_state_1
+                        add = { value = owner.var:circulating_real_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -1327,17 +1160,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_lira_toscane_lira_state_1
-                    add = {
-                        value = owner.var:circulating_lira_toscane_lira_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_lira_toscane_lira_c_var_1
-                        add = var:stockpiling_lira_toscane_lira_state_1
+                        add = { value = owner.var:circulating_lira_toscane_lira_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -1376,17 +1202,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_lira_scudo_pontificio_state_1
-                    add = {
-                        value = owner.var:circulating_lira_scudo_pontificio_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_lira_scudo_pontificio_c_var_1
-                        add = var:stockpiling_lira_scudo_pontificio_state_1
+                        add = { value = owner.var:circulating_lira_scudo_pontificio_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -1425,17 +1244,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_lira_scudo_sardo_state_1
-                    add = {
-                        value = owner.var:circulating_lira_scudo_sardo_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_lira_scudo_sardo_c_var_1
-                        add = var:stockpiling_lira_scudo_sardo_state_1
+                        add = { value = owner.var:circulating_lira_scudo_sardo_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -1474,17 +1286,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_lira_ducato_state_1
-                    add = {
-                        value = owner.var:circulating_lira_ducato_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_lira_ducato_c_var_1
-                        add = var:stockpiling_lira_ducato_state_1
+                        add = { value = owner.var:circulating_lira_ducato_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -1523,17 +1328,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_krone_swedish_krona_state_1
-                    add = {
-                        value = owner.var:circulating_krone_swedish_krona_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_krone_swedish_krona_c_var_1
-                        add = var:stockpiling_krone_swedish_krona_state_1
+                        add = { value = owner.var:circulating_krone_swedish_krona_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -1572,17 +1370,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_peso_bolivien_peso_state_1
-                    add = {
-                        value = owner.var:circulating_peso_bolivien_peso_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_peso_bolivien_peso_c_var_1
-                        add = var:stockpiling_peso_bolivien_peso_state_1
+                        add = { value = owner.var:circulating_peso_bolivien_peso_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -1621,17 +1412,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_peso_bolivien_peso_state_1
-                    add = {
-                        value = owner.var:circulating_peso_bolivien_peso_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_peso_bolivien_peso_c_var_1
-                        add = var:stockpiling_peso_bolivien_peso_state_1
+                        add = { value = owner.var:circulating_peso_bolivien_peso_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -1670,17 +1454,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_real_brazilian_real_state_1
-                    add = {
-                        value = owner.var:circulating_real_brazilian_real_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_real_brazilian_real_c_var_1
-                        add = var:stockpiling_real_brazilian_real_state_1
+                        add = { value = owner.var:circulating_real_brazilian_real_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -1719,17 +1496,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_peso_mexican_peso_state_1
-                    add = {
-                        value = owner.var:circulating_peso_mexican_peso_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_peso_mexican_peso_c_var_1
-                        add = var:stockpiling_peso_mexican_peso_state_1
+                        add = { value = owner.var:circulating_peso_mexican_peso_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -1768,17 +1538,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_spe_peseta_state_1
-                    add = {
-                        value = owner.var:circulating_spe_peseta_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_spe_peseta_c_var_1
-                        add = var:stockpiling_spe_peseta_state_1
+                        add = { value = owner.var:circulating_spe_peseta_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
@@ -1817,17 +1580,10 @@
 
             var:central_bank_location ?= {
                 change_variable = {
-                    name = stockpiling_lira_ottoman_lira_state_1
-                    add = {
-                        value = owner.var:circulating_lira_ottoman_lira_c_var_1
-                        multiply = 0.1
-                    }
-                }
-                change_variable = {
                     name = silver_state_1
                     add = {
                         value = owner.var:circulating_lira_ottoman_lira_c_var_1
-                        add = var:stockpiling_lira_ottoman_lira_state_1
+                        add = { value = owner.var:circulating_lira_ottoman_lira_c_var_1 multiply = 0.1 }
                         add = owner.building_saving
                         multiply = owner.var:money_value_target_1
                     }
