@@ -125,11 +125,11 @@ plan = "R12 Л.8: TRY_REPLACE on game rules that exist nowhere else (their flags
 [[suppress]]
 key = "replace-fields"
 file = "common/production_methods/11_ef_private_infrastructure.txt"
-plan = "R9б.18 (В.R9б.9): E&F's 15 company HQ ownership methods replaced without vanilla's unlocking / disallowing conditions"
+plan = "R9б.18 (Д.R9б.7): E&F's 15 company HQ ownership methods replaced without vanilla's unlocking / disallowing conditions -- INJECT the building_modifiers only"
 
 [[suppress]]
 key = "replace-fields"
-plan = "R9б В.R9б.10: PSC's construction sector without has_max_level, bg_construction without lens / urbanization"
+why = "as in PSC by decision (Д.R9б.8): the construction sector has no engine level cap (PSC caps it by script, calculate_construction_sector_max_level), bg_construction and the construction methods are PSC's own (no country / state construction modifiers -- construction is not counted twice)"
 
 [[suppress]]
 key = "missing-item"
