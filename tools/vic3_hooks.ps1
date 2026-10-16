@@ -41,8 +41,11 @@ function Hook-ShotSteps($own) {
 # smaller window it takes a bigger share of it: an anchored point moves by GUI.scale x 1440 / the window's height
 # (1920x1080 at GUI.scale 1 -- the lobby as 2560x1440 at 1.3). Overrides Scale-Px of vic3_ui_lib.ps1; at 1440 -- as
 # there.
+# The console is a tool (tools_gui_scale, not GUI.scale): its boxes are measured at 2560x1440 from the top left and move
+# by 1440 / the window's height only (anchor "tlT").
+if ($Screens -and $Screens["console"]) { $Screens["console"].anchor = "tlT"; $Screens["console"].anchor2 = "tlT" }
 function Scale-Px($x, $y, $anchor) {
-    $s = $script:UiScale
+    $s = if ($anchor -match 'T') { 1.0 } else { $script:UiScale }
     $g = Get-Process -Name "victoria3" -ErrorAction SilentlyContinue | Select-Object -First 1
     if ($g -and $g.MainWindowHandle -ne [IntPtr]::Zero) {
         $r = New-Object W+RECT
