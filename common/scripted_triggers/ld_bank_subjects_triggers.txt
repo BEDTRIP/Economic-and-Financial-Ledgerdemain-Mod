@@ -8,3 +8,11 @@ zz_ef_bk_company_banks = {
 	has_variable = zz_ef_bk_lvh
 	var:zz_ef_bk_lvh > 0
 }
+
+# COMPANY scope: a special fund company (Д.R9а.1) -- holds shares of the fund of its exchange (Д.R9а.10)
+zz_ef_co_special_fund = {
+	OR = {
+		is_company_type = company_type:company_Rothschild_Bank_gbr
+		is_company_type = company_type:company_baring_brothers
+	}
+}

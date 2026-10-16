@@ -23,7 +23,7 @@
 | `zz_ef_rq_bk_m`, `zz_ef_rq_pp_m` | m | банки, население | биржа (`ld_exchange_trade.txt`), проценты |
 | `zz_ef_rq_tr_b`, `zz_ef_rq_bk_b` | b — облигации | казна, банки | реестр облигаций (`bonds.md`): покупки E&F, погашение, проценты, урезание |
 | `zz_ef_rq_pp_b`, `zz_ef_rq_cb_b` | b | население, ЦБ | не пишутся (реестр облигаций их не обслуживает — R5) |
-| `zz_ef_rq_pp_f`, `zz_ef_rq_bk_f` | f — паи инвестиционного фонда (должник — страна биржи фонда) | население, банки | `zz_ef_fund_shares_step` (`ld_investment_fund.txt`); стартовый вклад банков — `zz_ef_fund_week_step` |
+| `zz_ef_rq_pp_f`, `zz_ef_rq_bk_f`, `zz_ef_rq_co_f` | f — паи инвестиционного фонда (должник — страна биржи фонда) | население, банки, особые компании-фонды страны (Д.R9а.10) | `zz_ef_fund_shares_step` (`ld_investment_fund.txt`); стартовый вклад банков — `zz_ef_fund_week_step`, паи особых компаний — `zz_ef_fd_special_start` |
 | `zz_ef_rq_fd_m`, `zz_ef_rq_fd_b` | m, b | инвестиционный фонд биржи (на стране биржи) | биржа — остаток стакана (`ld_exchange_trade.txt`; облигации — R5), проценты; оценка — `zz_ef_fd_capital_update` |
 | `zz_ef_rq_pp_s`, `zz_ef_rq_bk_s`, `zz_ef_rq_co_s` | s — акции компании (должник — компания; Д.R6.3, Д.R6.14) | население, банки; компании страны — непроданные акции IPO | IPO (`zz_ef_co_ipo`), биржа (`ld_exchange_trade.txt`, `ld_company_shares.txt`); у компании `zz_ef_rq_out_s` = все её акции, держатели — списки `zz_ef_co_h_pp` / `_bk` (хук `zz_ef_rq_hook_s` в `zz_ef_rq_add`); исчезнувшая компания пропадает из переборов, итог держателя — по перебору (`zz_ef_co_holders_month`) |
 

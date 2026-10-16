@@ -30,6 +30,8 @@ zz_ef_fd_capital_v = {
 # The fund's money (Д.R8б.21): its deposit in the banks of its country (the banks' liability, zz_ef_bank_book_v); a new
 # fund gets this share of the banks' capital (Д.R8б.16), its deposit earns the deposit rate
 zz_ef_fd_start_share_of_capital = 0.1
+# a special fund company (Ротшильды, Бэринги) buys this share of a new fund of its exchange (Д.R9а.10)
+zz_ef_fd_special_share = 0.1
 zz_ef_fd_dep_v = {
 	value = 0
 	if = { limit = { has_variable = zz_ef_fd_dep } value = var:zz_ef_fd_dep }

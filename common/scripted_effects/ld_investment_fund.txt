@@ -1,7 +1,8 @@
 ﻿# The investment fund (понятие «Инвестиционный фонд»; Д.R8б.2, Д.R8б.4, Д.R8б.5, Д.R8б.16, Д.R8б.21): the building
 # «Инвестиционный фонд» by each exchange (buildings/ld_investment_fund.txt) makes the fund's shares (mutual_funds); the
 # pops (their need of financial products) and the banks (their method «Паи фондов») buy them -- a share is a claim on
-# the fund (kind f, maps zz_ef_rq_pp_f / zz_ef_rq_bk_f, the debtor -- the fund's country). The engine has already moved
+# the fund (kind f, maps zz_ef_rq_pp_f / zz_ef_rq_bk_f / zz_ef_rq_co_f -- the special companies', the debtor -- the
+# fund's country). The engine has already moved
 # the buyer's money into the fund building's cash; the model records the purchase as a posting: the pops pay out of
 # their deposits, the banks out of their capital, into the fund's deposit in the banks of its country
 # (var:zz_ef_fd_dep -- the banks' liability, in their book). A buyer abroad pays out of its pool, the fund's banks get
@@ -118,6 +119,7 @@ zz_ef_fund_week_step = {
 			save_temporary_scope_as = zz_ef_fd_c
 			zz_ef_rq_add = { H = bk K = f D = scope:zz_ef_fd_c V = var:zz_ef_f_fd_start }
 		}
+		zz_ef_fd_special_start = yes
 	}
 	if = {
 		limit = {
@@ -137,6 +139,48 @@ zz_ef_fund_week_step = {
 			zz_ef_fd_capital_update = yes
 		}
 	}
+}
+
+# Country scope (a new fund's country, zz_ef_fund_week_step, after the banks' start): the special fund companies of the
+# country (Ротшильды, Бэринги; zz_ef_co_special_fund) buy its shares for zz_ef_fd_special_share of its capital each, out
+# of their accounts (Д.R9а.10): the companies' deposits -> the fund's deposit, a claim of kind f of the country's
+# companies (zz_ef_rq_co_f), the company's part -- var:zz_ef_co_fd_f; their gain -- the share's value (the fund's capital
+# over its shares). Log EFK|fund_special.
+zz_ef_fd_special_start = {
+	save_temporary_scope_as = zz_ef_fd_c
+	set_variable = { name = zz_ef_t_fsb value = zz_ef_fd_dep_v }
+	every_company = {
+		limit = {
+			zz_ef_co_special_fund = yes
+			zz_ef_co_acc_v > 0
+		}
+		set_variable = {
+			name = zz_ef_t_fsp
+			value = {
+				value = scope:zz_ef_fd_c.var:zz_ef_t_fsb
+				multiply = zz_ef_fd_special_share
+				max = zz_ef_co_acc_v
+			}
+		}
+		if = {
+			limit = { var:zz_ef_t_fsp > 0 }
+			change_variable = { name = zz_ef_co_acc subtract = var:zz_ef_t_fsp }
+			if = { limit = { NOT = { has_variable = zz_ef_co_fd_f } } set_variable = { name = zz_ef_co_fd_f value = 0 } }
+			change_variable = { name = zz_ef_co_fd_f add = var:zz_ef_t_fsp }
+			scope:zz_ef_fd_c = {
+				if = { limit = { NOT = { has_variable = zz_ef_comp_dep } } set_variable = { name = zz_ef_comp_dep value = 0 } }
+				if = { limit = { NOT = { has_variable = zz_ef_fd_dep } } set_variable = { name = zz_ef_fd_dep value = 0 } }
+				zz_ef_post = { FROM = zz_ef_comp_dep TO = zz_ef_fd_dep V = prev.var:zz_ef_t_fsp }
+				zz_ef_rq_add = { H = co K = f D = scope:zz_ef_fd_c V = prev.var:zz_ef_t_fsp }
+			}
+			if = {
+				limit = { zz_ef_logs_on = yes }
+				debug_log = "EFK|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCompany.GetCountry.GetNameNoFormatting]|fund_special|[THIS.GetCompany.GetNameNoFormatting]|paid [THIS.GetCompany.MakeScope.Var('zz_ef_t_fsp').GetValue|0]|fund_base [THIS.GetCompany.GetCountry.MakeScope.Var('zz_ef_t_fsb').GetValue|0]"
+			}
+		}
+		remove_variable = zz_ef_t_fsp
+	}
+	remove_variable = zz_ef_t_fsb
 }
 
 # Country scope (a fund's country): var:zz_ef_fd_capital = the deposit + the fund's claims at their value in gold, in the

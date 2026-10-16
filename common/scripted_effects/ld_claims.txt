@@ -8,6 +8,7 @@
 #   zz_ef_rq_tr_b / zz_ef_rq_bk_b      b      the treasury / the banks: bonds (own and foreign)
 #   zz_ef_rq_pp_b / zz_ef_rq_cb_b      b      the pops / the CB: bonds
 #   zz_ef_rq_pp_f / zz_ef_rq_bk_f      f      the pops / the banks: shares of the investment fund (the debtor -- its country)
+#   zz_ef_rq_co_f                      f      a country's special fund companies: shares of the fund (Д.R9а.10)
 #   zz_ef_rq_fd_m / zz_ef_rq_fd_b      m, b   the investment fund of the country's exchange: its stock (ld_investment_fund.txt)
 #   zz_ef_rq_pp_s / zz_ef_rq_bk_s      s      the pops / the banks: shares (the debtor -- a company; ld_company_shares.txt)
 #   zz_ef_rq_co_s                      s      a country's companies: their shares not sold yet (the IPO)
@@ -139,6 +140,7 @@ zz_ef_rq_heir_take = {
 	zz_ef_rq_heir_holdings = { H = fd K = b }
 	zz_ef_rq_heir_holdings = { H = pp K = f }
 	zz_ef_rq_heir_holdings = { H = bk K = f }
+	zz_ef_rq_heir_holdings = { H = co K = f }
 	zz_ef_rq_heir_holdings = { H = pp K = s }
 	zz_ef_rq_heir_holdings = { H = bk K = s }
 	zz_ef_rq_heir_holdings = { H = co K = s }
@@ -336,6 +338,7 @@ zz_ef_rq_world_check = {
 		zz_ef_rq_check_map = { MAP = zz_ef_rq_cb_b K = b }
 		zz_ef_rq_check_map = { MAP = zz_ef_rq_pp_f K = f }
 		zz_ef_rq_check_map = { MAP = zz_ef_rq_bk_f K = f }
+		zz_ef_rq_check_map = { MAP = zz_ef_rq_co_f K = f }
 		zz_ef_rq_check_map = { MAP = zz_ef_rq_fd_m K = m }
 		zz_ef_rq_check_map = { MAP = zz_ef_rq_fd_b K = b }
 	}
@@ -485,6 +488,13 @@ zz_ef_rq_bk_f_read = {
 	if = {
 		limit = { is_key_in_variable_map = { name = zz_ef_rq_bk_f target = scope:zz_ef_rq_key } }
 		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_rq_bk_f|scope:zz_ef_rq_key)" }
+	}
+}
+zz_ef_rq_co_f_read = {
+	set_variable = { name = zz_ef_rq_h value = 0 }
+	if = {
+		limit = { is_key_in_variable_map = { name = zz_ef_rq_co_f target = scope:zz_ef_rq_key } }
+		set_variable = { name = zz_ef_rq_h value = "variable_map(zz_ef_rq_co_f|scope:zz_ef_rq_key)" }
 	}
 }
 zz_ef_rq_fd_m_read = {

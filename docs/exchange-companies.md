@@ -127,13 +127,16 @@
   платит из пула (`zz_ef_f_fd_out`), страна фонда на своём шаге берёт его в пул и во вклад (`var:zz_ef_fd_in_for` →
   `zz_ef_f_fd_in`); оба — поток с заграницей в клиринг (`zz_ef_ext_net_week`). `zz_ef_fund_week_step` (страна биржи,
   после паёв): приток из-за границы, стартовый вклад банков — доля их капитала `zz_ef_fd_start_share_of_capital` (0,1;
-  один раз, флаг `zz_ef_fd_start_due` ставит `zz_ef_fund_found`; банки получают паи), проценты по вкладу фонда по ставке
-  вкладов из капитала банков (`zz_ef_fd_dep_interest`), капитал фонда `var:zz_ef_fd_capital` = вклад + книга фонда
-  (карты `zz_ef_rq_fd_m`, `zz_ef_rq_fd_b`) по оценке в золоте (`zz_ef_fd_capital_update`; книга переоценивается раз в 4
-  недели — `zz_ef_xch_phase_week`). Лог `EFU` — раз в месяц по фонду (`zz_ef_fund_log`). Дилер: ёмкость
-  `zz_ef_fd_capacity` (уровни × `zz_ef_fd_capacity_per_level`), спред `zz_ef_fd_spread` (ключевая ставка × 0,5),
-  справедливая цена денег должника `zz_ef_q_fair_m` (`common/script_values/ld_investment_fund_values.txt`). Торги фонда
-  — остаток стакана (Д.R8б.19; ниже — «Торги»).
+  один раз, флаг `zz_ef_fd_start_due` ставит `zz_ef_fund_found`; банки получают паи); тогда же особые компании-фонды
+  страны (Ротшильды, Бэринги — `zz_ef_co_special_fund`, `ld_bank_subjects_triggers.txt`) покупают паи на
+  `zz_ef_fd_special_share` (0,1) капитала фонда каждая со своего счёта (`zz_ef_fd_special_start`, Д.R9а.10: вклады
+  компаний → вклад фонда, требование `zz_ef_rq_co_f`, доля компании — `var:zz_ef_co_fd_f`; лог `EFK|fund_special`),
+  проценты по вкладу фонда по ставке вкладов из капитала банков (`zz_ef_fd_dep_interest`), капитал фонда
+  `var:zz_ef_fd_capital` = вклад + книга фонда (карты `zz_ef_rq_fd_m`, `zz_ef_rq_fd_b`) по оценке в золоте
+  (`zz_ef_fd_capital_update`; книга переоценивается раз в 4 недели — `zz_ef_xch_phase_week`). Лог `EFU` — раз в месяц по
+  фонду (`zz_ef_fund_log`). Дилер: ёмкость `zz_ef_fd_capacity` (уровни × `zz_ef_fd_capacity_per_level`), спред
+  `zz_ef_fd_spread` (ключевая ставка × 0,5), справедливая цена денег должника `zz_ef_q_fair_m`
+  (`common/script_values/ld_investment_fund_values.txt`). Торги фонда — остаток стакана (Д.R8б.19; ниже — «Торги»).
 - **Торги — стакан** (R8б, шаги 7, 13–17; Д.R8б.17, Д.R8б.19–22, Д.R8б.26, Д.R8б.32–37):
   `common/scripted_effects/ld_exchange_trade.txt` (логика), `common/scripted_effects/ld_exchange_book.txt` (генерат
   `tools/regen_ld_exchange_book.py`: карты стакана по шагам цены, читатели, сведение актива),
