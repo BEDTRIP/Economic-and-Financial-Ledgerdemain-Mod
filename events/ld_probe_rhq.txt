@@ -27,6 +27,16 @@ ld_probe_rhq.1 = {
 					}
 				}
 				debug_log = "EFP|[TimeKeeper.GetCurrentDate.GetString]|rhq|bank_in_paris|levels [THIS.GetState.MakeScope.ScriptValue('zz_ef_bank_levels')|0]"
+				# the levels of the Paris «Bank» owned by Britain (its company) -- the trigger 1.13 has for it
+				every_scope_building = {
+					limit = { is_building_type = building_zz_ef_bank }
+					if = { limit = { levels_owned_by_country = { target = c:GBR value >= 1 } } debug_log = "EFP|rhq|gbr_levels_ge_1|yes" }
+					if = { limit = { levels_owned_by_country = { target = c:GBR value >= 3 } } debug_log = "EFP|rhq|gbr_levels_ge_3|yes" }
+					if = { limit = { levels_owned_by_country = { target = c:GBR value >= 6 } } debug_log = "EFP|rhq|gbr_levels_ge_6|yes" }
+					if = { limit = { levels_owned_by_country = { target = c:FRA value >= 1 } } debug_log = "EFP|rhq|fra_levels_ge_1|yes" }
+					if = { limit = { fraction_of_levels_owned_by_country = { target = c:GBR value >= 0.3 } } debug_log = "EFP|rhq|gbr_fraction_ge_0.3|yes" }
+					debug_log = "EFP|rhq|paris_bank|level [THIS.GetBuilding.GetLevel]"
+				}
 				create_building = {
 					building = building_company_regional_headquarter
 					add_ownership = {
