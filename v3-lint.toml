@@ -1,5 +1,6 @@
 # v3 lint of the fork: what the baseline knew, sorted out 16.10.2026 (`v3 lint --triage`).
-# `why` — noise, with the reason; `plan` — a real problem, tracked in этапы/R12.md, section «Линт» (Л.N).
+# `why` — noise, with the reason; `plan` — a real problem, tracked in этапы/R12.md, section «Линт» (Л.N), or in a
+# step of another stage (R9б.N — moved there by the audit of 16.10).
 # Evidence for "the game accepts it": a run of 16.10 (r1016_070354, -debug_mode) logged no error in any file of the
 # fork at load — the 23 located errors are all CMF and vanilla files.
 
@@ -123,7 +124,12 @@ plan = "R12 Л.8: TRY_REPLACE on game rules that exist nowhere else (their flags
 
 [[suppress]]
 key = "replace-fields"
-plan = "R12 Л.8: REPLACE bodies without fields of the record they replace"
+file = "common/production_methods/11_ef_private_infrastructure.txt"
+plan = "R9б.18 (В.R9б.9): E&F's 15 company HQ ownership methods replaced without vanilla's unlocking / disallowing conditions"
+
+[[suppress]]
+key = "replace-fields"
+plan = "R9б В.R9б.10: PSC's construction sector without has_max_level, bg_construction without lens / urbanization"
 
 [[suppress]]
 key = "missing-item"
@@ -144,7 +150,7 @@ plan = "R12 Л.9: inflation.dds sizes not divisible by 4"
 
 [[suppress]]
 key = "removed"
-plan = "R12 Л.9: fixed_expenses was removed in 1.13"
+plan = "R9б.19: fixed_expenses was removed in 1.13 -- the fix_exp field of EFW|budget is always 0"
 
 [[suppress]]
 key = "exact-duplicate-item"
@@ -152,7 +158,8 @@ plan = "R12 Л.9: a script value defined twice"
 
 [[suppress]]
 key = "strict-scopes"
-plan = "R12 Л.9: local_var used where it may be unset (PSC, building levels)"
+message = "local_var:"
+why = "every one of these local variables is set on the lines just above, in the same effect (set_local_variable, then add_modifier multiplier = local_var:x); tiger loses it inside the multiplier"
 
 [[suppress]]
 key = "missing-item"
