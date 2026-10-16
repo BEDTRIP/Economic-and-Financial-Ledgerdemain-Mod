@@ -1677,42 +1677,6 @@ zz_ef_bank_company_seed = {
 		}
 	}
 	else_if = {
-		limit = { has_company = company_type:company_ColonialBankOfAustralia }
-		set_variable = { name = zz_ef_cb_co value = company:company_ColonialBankOfAustralia }
-		set_variable = zz_ef_bkc_cb_company_ColonialBankOfAustralia
-		capital = {
-			zz_ef_bank_company_build = { COMPANY = company_ColonialBankOfAustralia }
-			owner = { set_variable = { name = zz_ef_cb_bank_state value = prev } }
-		}
-	}
-	else_if = {
-		limit = { has_company = company_type:company_RoyalBankofCanada }
-		set_variable = { name = zz_ef_cb_co value = company:company_RoyalBankofCanada }
-		set_variable = zz_ef_bkc_cb_company_RoyalBankofCanada
-		capital = {
-			zz_ef_bank_company_build = { COMPANY = company_RoyalBankofCanada }
-			owner = { set_variable = { name = zz_ef_cb_bank_state value = prev } }
-		}
-	}
-	else_if = {
-		limit = { has_company = company_type:company_ImperialBankofPersia }
-		set_variable = { name = zz_ef_cb_co value = company:company_ImperialBankofPersia }
-		set_variable = zz_ef_bkc_cb_company_ImperialBankofPersia
-		capital = {
-			zz_ef_bank_company_build = { COMPANY = company_ImperialBankofPersia }
-			owner = { set_variable = { name = zz_ef_cb_bank_state value = prev } }
-		}
-	}
-	else_if = {
-		limit = { has_company = company_type:company_BankOfMontreal }
-		set_variable = { name = zz_ef_cb_co value = company:company_BankOfMontreal }
-		set_variable = zz_ef_bkc_cb_company_BankOfMontreal
-		capital = {
-			zz_ef_bank_company_build = { COMPANY = company_BankOfMontreal }
-			owner = { set_variable = { name = zz_ef_cb_bank_state value = prev } }
-		}
-	}
-	else_if = {
 		limit = { has_company = company_type:company_BankSBoBSA }
 		set_variable = { name = zz_ef_cb_co value = company:company_BankSBoBSA }
 		set_variable = zz_ef_bkc_cb_company_BankSBoBSA
@@ -1745,15 +1709,6 @@ zz_ef_bank_company_seed = {
 		set_variable = zz_ef_bkc_cb_company_Bankenverein
 		capital = {
 			zz_ef_bank_company_build = { COMPANY = company_Bankenverein }
-			owner = { set_variable = { name = zz_ef_cb_bank_state value = prev } }
-		}
-	}
-	else_if = {
-		limit = { has_company = company_type:company_OttomanBank }
-		set_variable = { name = zz_ef_cb_co value = company:company_OttomanBank }
-		set_variable = zz_ef_bkc_cb_company_OttomanBank
-		capital = {
-			zz_ef_bank_company_build = { COMPANY = company_OttomanBank }
 			owner = { set_variable = { name = zz_ef_cb_bank_state value = prev } }
 		}
 	}
@@ -2105,15 +2060,6 @@ zz_ef_bank_company_seed = {
 		set_variable = zz_ef_bkc_cb_company_SouthAustralianBank
 		capital = {
 			zz_ef_bank_company_build = { COMPANY = company_SouthAustralianBank }
-			owner = { set_variable = { name = zz_ef_cb_bank_state value = prev } }
-		}
-	}
-	else_if = {
-		limit = { has_company = company_type:company_bancodelondresmexico }
-		set_variable = { name = zz_ef_cb_co value = company:company_bancodelondresmexico }
-		set_variable = zz_ef_bkc_cb_company_bancodelondresmexico
-		capital = {
-			zz_ef_bank_company_build = { COMPANY = company_bancodelondresmexico }
 			owner = { set_variable = { name = zz_ef_cb_bank_state value = prev } }
 		}
 	}
@@ -2482,26 +2428,6 @@ zz_ef_bank_company_seed = {
 		}
 	}
 	if = {
-		limit = { has_company = company_type:company_ColonialBankOfAustralia }
-		if = {
-			limit = { has_variable = zz_ef_bkc_cb_company_ColonialBankOfAustralia }
-			remove_variable = zz_ef_bkc_cb_company_ColonialBankOfAustralia
-		}
-		else = {
-			zz_ef_bank_company_state = { COMPANY = company_ColonialBankOfAustralia }
-		}
-	}
-	if = {
-		limit = { has_company = company_type:company_RoyalBankofCanada }
-		if = {
-			limit = { has_variable = zz_ef_bkc_cb_company_RoyalBankofCanada }
-			remove_variable = zz_ef_bkc_cb_company_RoyalBankofCanada
-		}
-		else = {
-			zz_ef_bank_company_state = { COMPANY = company_RoyalBankofCanada }
-		}
-	}
-	if = {
 		limit = { has_company = company_type:company_BancoNacionalDePanama }
 		if = {
 			limit = { has_variable = zz_ef_bkc_cb_company_BancoNacionalDePanama }
@@ -2522,16 +2448,6 @@ zz_ef_bank_company_seed = {
 		}
 	}
 	if = {
-		limit = { has_company = company_type:company_ImperialBankofPersia }
-		if = {
-			limit = { has_variable = zz_ef_bkc_cb_company_ImperialBankofPersia }
-			remove_variable = zz_ef_bkc_cb_company_ImperialBankofPersia
-		}
-		else = {
-			zz_ef_bank_company_state = { COMPANY = company_ImperialBankofPersia }
-		}
-	}
-	if = {
 		limit = { has_company = company_type:company_BancoDePortugal }
 		if = {
 			limit = { has_variable = zz_ef_bkc_cb_company_BancoDePortugal }
@@ -2549,16 +2465,6 @@ zz_ef_bank_company_seed = {
 		}
 		else = {
 			zz_ef_bank_company_state = { COMPANY = company_BancoNacionalDelParaguay }
-		}
-	}
-	if = {
-		limit = { has_company = company_type:company_BankOfMontreal }
-		if = {
-			limit = { has_variable = zz_ef_bkc_cb_company_BankOfMontreal }
-			remove_variable = zz_ef_bkc_cb_company_BankOfMontreal
-		}
-		else = {
-			zz_ef_bank_company_state = { COMPANY = company_BankOfMontreal }
 		}
 	}
 	if = {
@@ -2619,16 +2525,6 @@ zz_ef_bank_company_seed = {
 		}
 		else = {
 			zz_ef_bank_company_state = { COMPANY = company_Bankenverein }
-		}
-	}
-	if = {
-		limit = { has_company = company_type:company_OttomanBank }
-		if = {
-			limit = { has_variable = zz_ef_bkc_cb_company_OttomanBank }
-			remove_variable = zz_ef_bkc_cb_company_OttomanBank
-		}
-		else = {
-			zz_ef_bank_company_state = { COMPANY = company_OttomanBank }
 		}
 	}
 	if = {
@@ -3052,16 +2948,6 @@ zz_ef_bank_company_seed = {
 		}
 	}
 	if = {
-		limit = { has_company = company_type:company_bancodelondresmexico }
-		if = {
-			limit = { has_variable = zz_ef_bkc_cb_company_bancodelondresmexico }
-			remove_variable = zz_ef_bkc_cb_company_bancodelondresmexico
-		}
-		else = {
-			zz_ef_bank_company_state = { COMPANY = company_bancodelondresmexico }
-		}
-	}
-	if = {
 		limit = { has_company = company_type:company_BancoMercantilMexicano }
 		if = {
 			limit = { has_variable = zz_ef_bkc_cb_company_BancoMercantilMexicano }
@@ -3213,6 +3099,144 @@ zz_ef_bank_company_seed = {
 			}
 		}
 	}
+	# presence (Д.R9а.5): company_ImperialBankofPersia of GBR in STATE_IRAKAJEMI, if no "Bank" of the country took it already
+	if = {
+		limit = {
+			this = c:PER
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_ImperialBankofPersia }
+			exists = s:STATE_IRAKAJEMI.region_state:PER
+			s:STATE_IRAKAJEMI.region_state:PER = { NOT = { has_building = building_zz_ef_bank } }
+		}
+		s:STATE_IRAKAJEMI.region_state:PER = {
+			create_building = {
+				building = building_zz_ef_bank
+				reserves = 0
+				add_ownership = {
+					company = {
+						type = company_ImperialBankofPersia
+						country = c:GBR
+						levels = 5
+					}
+				}
+			}
+		}
+	}
+	# presence (Д.R9а.5): company_OttomanBank of GBR in STATE_EASTERN_THRACE, if no "Bank" of the country took it already
+	if = {
+		limit = {
+			this = c:TUR
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_OttomanBank }
+			exists = s:STATE_EASTERN_THRACE.region_state:TUR
+			s:STATE_EASTERN_THRACE.region_state:TUR = { NOT = { has_building = building_zz_ef_bank } }
+		}
+		s:STATE_EASTERN_THRACE.region_state:TUR = {
+			create_building = {
+				building = building_zz_ef_bank
+				reserves = 0
+				add_ownership = {
+					company = {
+						type = company_OttomanBank
+						country = c:GBR
+						levels = 5
+					}
+				}
+			}
+		}
+	}
+	# presence (Д.R9а.5): company_bancodelondresmexico of GBR in STATE_MEXICO, if no "Bank" of the country took it already
+	if = {
+		limit = {
+			this = c:MEX
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_bancodelondresmexico }
+			exists = s:STATE_MEXICO.region_state:MEX
+			s:STATE_MEXICO.region_state:MEX = { NOT = { has_building = building_zz_ef_bank } }
+		}
+		s:STATE_MEXICO.region_state:MEX = {
+			create_building = {
+				building = building_zz_ef_bank
+				reserves = 0
+				add_ownership = {
+					company = {
+						type = company_bancodelondresmexico
+						country = c:GBR
+						levels = 5
+					}
+				}
+			}
+		}
+	}
+	# presence (Д.R9а.5): company_BankOfMontreal of GBR in STATE_QUEBEC, if no "Bank" of the country took it already
+	if = {
+		limit = {
+			this = c:QUE
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_BankOfMontreal }
+			exists = s:STATE_QUEBEC.region_state:QUE
+			s:STATE_QUEBEC.region_state:QUE = { NOT = { has_building = building_zz_ef_bank } }
+		}
+		s:STATE_QUEBEC.region_state:QUE = {
+			create_building = {
+				building = building_zz_ef_bank
+				reserves = 0
+				add_ownership = {
+					company = {
+						type = company_BankOfMontreal
+						country = c:GBR
+						levels = 5
+					}
+				}
+			}
+		}
+	}
+	# presence (Д.R9а.5): company_RoyalBankofCanada of GBR in STATE_ONTARIO, if no "Bank" of the country took it already
+	if = {
+		limit = {
+			this = c:ONT
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_RoyalBankofCanada }
+			exists = s:STATE_ONTARIO.region_state:ONT
+			s:STATE_ONTARIO.region_state:ONT = { NOT = { has_building = building_zz_ef_bank } }
+		}
+		s:STATE_ONTARIO.region_state:ONT = {
+			create_building = {
+				building = building_zz_ef_bank
+				reserves = 0
+				add_ownership = {
+					company = {
+						type = company_RoyalBankofCanada
+						country = c:GBR
+						levels = 5
+					}
+				}
+			}
+		}
+	}
+	# presence (Д.R9а.5): company_ColonialBankOfAustralia of GBR in STATE_NEW_SOUTH_WALES, if no "Bank" of the country took it already
+	if = {
+		limit = {
+			this = c:NSW
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_ColonialBankOfAustralia }
+			exists = s:STATE_NEW_SOUTH_WALES.region_state:NSW
+			s:STATE_NEW_SOUTH_WALES.region_state:NSW = { NOT = { has_building = building_zz_ef_bank } }
+		}
+		s:STATE_NEW_SOUTH_WALES.region_state:NSW = {
+			create_building = {
+				building = building_zz_ef_bank
+				reserves = 0
+				add_ownership = {
+					company = {
+						type = company_ColonialBankOfAustralia
+						country = c:GBR
+						levels = 5
+					}
+				}
+			}
+		}
+	}
 }
 
 zz_ef_bank_company_state = {
@@ -3323,6 +3347,150 @@ zz_ef_bank_company_build = {
 				}
 				company = {
 					type = company_Rothschild_Bank_gbr
+					country = c:GBR
+					levels = 5
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			state_region = s:STATE_IRAKAJEMI
+			scope:zz_ef_bkc_o = c:PER
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_ImperialBankofPersia }
+		}
+		create_building = {
+			building = building_zz_ef_bank
+			reserves = 0
+			add_ownership = {
+				company = {
+					type = $COMPANY$
+					country = scope:zz_ef_bkc_o
+					levels = 5
+				}
+				company = {
+					type = company_ImperialBankofPersia
+					country = c:GBR
+					levels = 5
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			state_region = s:STATE_EASTERN_THRACE
+			scope:zz_ef_bkc_o = c:TUR
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_OttomanBank }
+		}
+		create_building = {
+			building = building_zz_ef_bank
+			reserves = 0
+			add_ownership = {
+				company = {
+					type = $COMPANY$
+					country = scope:zz_ef_bkc_o
+					levels = 5
+				}
+				company = {
+					type = company_OttomanBank
+					country = c:GBR
+					levels = 5
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			state_region = s:STATE_MEXICO
+			scope:zz_ef_bkc_o = c:MEX
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_bancodelondresmexico }
+		}
+		create_building = {
+			building = building_zz_ef_bank
+			reserves = 0
+			add_ownership = {
+				company = {
+					type = $COMPANY$
+					country = scope:zz_ef_bkc_o
+					levels = 5
+				}
+				company = {
+					type = company_bancodelondresmexico
+					country = c:GBR
+					levels = 5
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			state_region = s:STATE_QUEBEC
+			scope:zz_ef_bkc_o = c:QUE
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_BankOfMontreal }
+		}
+		create_building = {
+			building = building_zz_ef_bank
+			reserves = 0
+			add_ownership = {
+				company = {
+					type = $COMPANY$
+					country = scope:zz_ef_bkc_o
+					levels = 5
+				}
+				company = {
+					type = company_BankOfMontreal
+					country = c:GBR
+					levels = 5
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			state_region = s:STATE_ONTARIO
+			scope:zz_ef_bkc_o = c:ONT
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_RoyalBankofCanada }
+		}
+		create_building = {
+			building = building_zz_ef_bank
+			reserves = 0
+			add_ownership = {
+				company = {
+					type = $COMPANY$
+					country = scope:zz_ef_bkc_o
+					levels = 5
+				}
+				company = {
+					type = company_RoyalBankofCanada
+					country = c:GBR
+					levels = 5
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			state_region = s:STATE_NEW_SOUTH_WALES
+			scope:zz_ef_bkc_o = c:NSW
+			exists = c:GBR
+			c:GBR = { has_company = company_type:company_ColonialBankOfAustralia }
+		}
+		create_building = {
+			building = building_zz_ef_bank
+			reserves = 0
+			add_ownership = {
+				company = {
+					type = $COMPANY$
+					country = scope:zz_ef_bkc_o
+					levels = 5
+				}
+				company = {
+					type = company_ColonialBankOfAustralia
 					country = c:GBR
 					levels = 5
 				}

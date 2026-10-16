@@ -186,21 +186,11 @@ BUILDINGS = {
 			limit = {
 				c:QUE ?= this
 			}
-			if = { limit = { not = { has_company = company_type:company_BankOfMontreal } } add_company = company_type:company_BankOfMontreal }
-			company:company_BankOfMontreal = {
-				set_company_establishment_date = 1830.1.1
-				set_company_state_region = s:STATE_QUEBEC
-			}
 		}
 		#ONT
 		if = {
 			limit = {
 				c:ONT ?= this
-			}
-			add_company = company_type:company_RoyalBankofCanada
-			company:company_RoyalBankofCanada = {
-				set_company_establishment_date = 1830.1.1
-				set_company_state_region = s:STATE_ONTARIO
 			}
 		}
 
@@ -208,16 +198,6 @@ BUILDINGS = {
 		if = {
 			limit = {
 				c:CAN ?= this
-			}
-			add_company = company_type:company_RoyalBankofCanada
-			company:company_RoyalBankofCanada = {
-				set_company_establishment_date = 1830.1.1
-				set_company_state_region = s:STATE_ONTARIO
-			}
-			add_company = company_type:company_BankOfMontreal
-			company:company_BankOfMontreal = {
-				set_company_establishment_date = 1830.1.1
-				set_company_state_region = s:STATE_ONTARIO
 			}
 			add_company = company_type:company_CanadianImperialBankOfCommerce
 			company:company_CanadianImperialBankOfCommerce = {
@@ -241,22 +221,12 @@ BUILDINGS = {
 			limit = {
 				c:NSW ?= this
 			}
-			add_company = company_type:company_ColonialBankOfAustralia
-			company:company_ColonialBankOfAustralia = {
-				set_company_establishment_date = 1830.1.1
-				set_company_state_region = s:STATE_NEW_SOUTH_WALES
-			}
 		}
 
 		#AST
 		if = {
 			limit = {
 				c:AST ?= this
-			}
-			add_company = company_type:company_ColonialBankOfAustralia
-			company:company_ColonialBankOfAustralia = {
-				set_company_establishment_date = 1830.1.1
-				set_company_state_region = s:STATE_NEW_SOUTH_WALES
 			}
 			add_company = company_type:company_NationalBankOfAustralia
 			company:company_NationalBankOfAustralia = {
@@ -350,6 +320,37 @@ BUILDINGS = {
 				set_company_establishment_date = 1830.1.1
 				set_company_state_region = s:STATE_HOME_COUNTIES
 			}
+			# the overseas banks (Д.R9а.6): companies of Britain, their «Bank» in the country of work (PRESENCE, ld_bank_seed.txt)
+			if = { limit = { not = { has_company = company_type:company_ImperialBankofPersia } } add_company = company_type:company_ImperialBankofPersia }
+			company:company_ImperialBankofPersia = {
+				set_company_establishment_date = 1830.1.1
+				set_company_state_region = s:STATE_HOME_COUNTIES
+			}
+			if = { limit = { not = { has_company = company_type:company_OttomanBank } } add_company = company_type:company_OttomanBank }
+			company:company_OttomanBank = {
+				set_company_establishment_date = 1830.1.1
+				set_company_state_region = s:STATE_HOME_COUNTIES
+			}
+			if = { limit = { not = { has_company = company_type:company_bancodelondresmexico } } add_company = company_type:company_bancodelondresmexico }
+			company:company_bancodelondresmexico = {
+				set_company_establishment_date = 1830.1.1
+				set_company_state_region = s:STATE_HOME_COUNTIES
+			}
+			if = { limit = { not = { has_company = company_type:company_BankOfMontreal } } add_company = company_type:company_BankOfMontreal }
+			company:company_BankOfMontreal = {
+				set_company_establishment_date = 1830.1.1
+				set_company_state_region = s:STATE_HOME_COUNTIES
+			}
+			if = { limit = { not = { has_company = company_type:company_RoyalBankofCanada } } add_company = company_type:company_RoyalBankofCanada }
+			company:company_RoyalBankofCanada = {
+				set_company_establishment_date = 1830.1.1
+				set_company_state_region = s:STATE_HOME_COUNTIES
+			}
+			if = { limit = { not = { has_company = company_type:company_ColonialBankOfAustralia } } add_company = company_type:company_ColonialBankOfAustralia }
+			company:company_ColonialBankOfAustralia = {
+				set_company_establishment_date = 1830.1.1
+				set_company_state_region = s:STATE_HOME_COUNTIES
+			}
 			company:company_basic_gold_and_silver_mining_2 = {
 				set_company_establishment_date = 1830.1.1
 				set_company_state_region = s:STATE_HOME_COUNTIES
@@ -432,12 +433,7 @@ BUILDINGS = {
 			limit = {
 				c:TUR ?= this
 			}
-			add_company = company_type:company_OttomanBank
 			add_company = company_type:company_basic_gold_and_silver_mining_2
-			company:company_OttomanBank = {
-				set_company_establishment_date = 1830.1.1
-				set_company_state_region = s:STATE_EASTERN_THRACE
-			}
 		}
 		#CHI
 		if = {
@@ -530,12 +526,7 @@ BUILDINGS = {
 			limit = {
 				c:PER ?= this
 			}
-			add_company = company_type:company_ImperialBankofPersia
 			add_company = company_type:company_basic_gold_and_silver_mining_2
-			company:company_ImperialBankofPersia = {
-				set_company_establishment_date = 1830.1.1
-				set_company_state_region = s:STATE_IRAKAJEMI
-			}
 			company:company_basic_gold_and_silver_mining_2 = {
 				set_company_establishment_date = 1830.1.1
 				set_company_state_region = s:STATE_IRAKAJEMI
@@ -546,12 +537,7 @@ BUILDINGS = {
 			limit = {
 				c:MEX ?= this
 			}
-			add_company = company_type:company_bancodelondresmexico
 			if = { limit = { not = { has_company = company_type:company_basic_silver_mining_mex } } add_company = company_type:company_basic_silver_mining_mex }
-			company:company_bancodelondresmexico = {
-				set_company_establishment_date = 1830.1.1
-				set_company_state_region = s:STATE_MEXICO
-			}
 			company:company_basic_silver_mining_mex = {
 				set_company_establishment_date = 1830.1.1
 				set_company_state_region = s:STATE_MEXICO
@@ -1617,7 +1603,7 @@ BUILDINGS = {
 					}
 					company={
 						type=company_BankOfMontreal
-						country="c:QUE"
+						country="c:GBR"
 						levels=1
 					}
 				}
@@ -1628,7 +1614,7 @@ BUILDINGS = {
 				add_ownership={
 					company={
 						type=company_BankOfMontreal
-						country="c:QUE"
+						country="c:GBR"
 						levels=5
 					}
 				}
@@ -1662,7 +1648,7 @@ BUILDINGS = {
 						}
 						company={
 							type=company_RoyalBankofCanada
-							country="c:CAN"
+							country="c:GBR"
 							levels=1
 						}
 					}
@@ -1673,7 +1659,7 @@ BUILDINGS = {
 					add_ownership={
 						company={
 							type=company_BankOfMontreal
-							country="c:CAN"
+							country="c:GBR"
 							levels=5
 						}
 					}
@@ -1691,7 +1677,7 @@ BUILDINGS = {
 				add_ownership={
 					company={
 						type=company_RoyalBankofCanada
-						country="c:ONT"
+						country="c:GBR"
 						levels=5
 					}
 				}
@@ -1718,7 +1704,7 @@ BUILDINGS = {
 					}
 					company={
 						type=company_RoyalBankofCanada
-						country="c:ONT"
+						country="c:GBR"
 						levels=1
 					}
 				}
@@ -1736,7 +1722,7 @@ BUILDINGS = {
 					add_ownership={
 						company={
 							type=company_RoyalBankofCanada
-							country="c:CAN"
+							country="c:GBR"
 							levels=5
 						}
 					}
@@ -1763,7 +1749,7 @@ BUILDINGS = {
 						}
 						company={
 							type=company_BankOfMontreal
-							country="c:CAN"
+							country="c:GBR"
 							levels=1
 						}
 					}
@@ -1805,7 +1791,7 @@ BUILDINGS = {
 					}
 					company={
 						type=company_ColonialBankOfAustralia
-						country="c:NSW"
+						country="c:GBR"
 						levels=1
 					}
 				}
@@ -1816,7 +1802,7 @@ BUILDINGS = {
 				add_ownership={
 					company={
 						type=company_ColonialBankOfAustralia
-						country="c:NSW"
+						country="c:GBR"
 						levels=5
 					}
 				}
@@ -1850,7 +1836,7 @@ BUILDINGS = {
 						}
 						company={
 							type=company_ColonialBankOfAustralia
-							country="c:AST"
+							country="c:GBR"
 							levels=1
 						}
 					}
@@ -1861,7 +1847,7 @@ BUILDINGS = {
 					add_ownership={
 						company={
 							type=company_ColonialBankOfAustralia
-							country="c:AST"
+							country="c:GBR"
 							levels=5
 						}
 					}
@@ -2304,7 +2290,7 @@ BUILDINGS = {
 				add_ownership={
 					company={
 						type=company_OttomanBank
-						country="c:TUR"
+						country="c:GBR"
 						levels=5
 					}
 				}
@@ -3017,7 +3003,7 @@ BUILDINGS = {
 				add_ownership={
 					company={
 						type=company_bancodelondresmexico #company_basic_silver_mining_mex
-						country="c:MEX"
+						country="c:GBR"
 						levels=9
 					}
 				}
@@ -3888,7 +3874,7 @@ BUILDINGS = {
 				add_ownership={
 					company={
 						type=company_ImperialBankofPersia
-						country="c:PER"
+						country="c:GBR"
 						levels=3
 					}
 				}
@@ -3910,7 +3896,7 @@ BUILDINGS = {
 				add_ownership={
 					company={
 						type=company_ImperialBankofPersia
-						country="c:PER"
+						country="c:GBR"
 						levels=2
 					}
 				}

@@ -166,7 +166,16 @@ COMPANY_LEVELS = 5
 PRESENCE = [
     ("company_Rothschild_Bank_gbr", "GBR", [("FRA", "STATE_ILE_DE_FRANCE"), ("AUS", "STATE_AUSTRIA"),
                                             ("FRM", "STATE_HESSE"), ("SIC", "STATE_CAMPANIA")]),
+    # the overseas banks (Д.R9а.6): companies of Britain, their "Bank" only in the country of work
+    ("company_ImperialBankofPersia", "GBR", [("PER", "STATE_IRAKAJEMI")]),
+    ("company_OttomanBank", "GBR", [("TUR", "STATE_EASTERN_THRACE")]),
+    ("company_bancodelondresmexico", "GBR", [("MEX", "STATE_MEXICO")]),
+    ("company_BankOfMontreal", "GBR", [("QUE", "STATE_QUEBEC")]),
+    ("company_RoyalBankofCanada", "GBR", [("ONT", "STATE_ONTARIO")]),
+    ("company_ColonialBankOfAustralia", "GBR", [("NSW", "STATE_NEW_SOUTH_WALES")]),
 ]
+# the companies with no "Bank" of their own at home -- only the presence ones (Д.R9а.6)
+OVERSEAS = {co for co, _, _ in PRESENCE[1:]}
 
 SIZES = [1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 18, 22, 26, 30, 35, 40, 50, 60, 70, 80, 100, 120, 150, 200]
 COMPANY_SHARE = 0.4
@@ -359,6 +368,7 @@ def company_seed(keys: list[str]) -> str:
 zz_ef_bank_company_seed = {
 	save_scope_as = zz_ef_bkc_o
 """]
+    keys = [k for k in keys if k not in OVERSEAS]
     chain = cbs + [k for k in keys if k not in cbs]
     for i, k in enumerate(chain):
         kw = "if" if i == 0 else "else_if"

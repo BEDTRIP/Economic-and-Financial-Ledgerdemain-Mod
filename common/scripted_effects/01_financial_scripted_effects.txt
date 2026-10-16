@@ -1365,16 +1365,16 @@ establish_bank_and_ef_compagnie = {
 	}
 
 	#TUR
-	# company_OttomanBank
+	# company_OttomanBank -- a company of Britain, its "Bank" in the country of work (Д.R9а.6)
 	if = {
 		limit = {
 			game_date > 1856.1.1
-			c:TUR ?= this
+			c:GBR ?= this
 			NOT = { has_company = company_type:company_OttomanBank }
 		}
 		add_company = company_type:company_OttomanBank
 		company:company_OttomanBank = {
-			set_company_state_region = s:STATE_EASTERN_THRACE
+			set_company_state_region = s:STATE_HOME_COUNTIES
 		}
 	}
 	# company_TurkishZiraatBankasi
@@ -1403,16 +1403,16 @@ establish_bank_and_ef_compagnie = {
 	}
 
 	#PER
-	# company_ImperialBankofPersia
+	# company_ImperialBankofPersia -- a company of Britain, its "Bank" in the country of work (Д.R9а.6)
 	if = {
 		limit = {
 			game_date > 1888.1.1
-			c:PER ?= this
+			c:GBR ?= this
 			NOT = { has_company = company_type:company_ImperialBankofPersia }
 		}
 		add_company = company_type:company_ImperialBankofPersia
 		company:company_ImperialBankofPersia = {
-			set_company_state_region = s:STATE_IRAKAJEMI
+			set_company_state_region = s:STATE_HOME_COUNTIES
 		}
 	}
 	# company_BankMelliIran
@@ -1605,28 +1605,28 @@ establish_bank_and_ef_compagnie = {
 	}
 
 	#CAN
-	# company_RoyalBankofCanada
+	# company_RoyalBankofCanada -- a company of Britain, its "Bank" in the country of work (Д.R9а.6)
 	if = {
 		limit = {
 			game_date > 1864.1.1
-			c:ONT ?= this
+			c:GBR ?= this
 			NOT = { has_company = company_type:company_RoyalBankofCanada }
 		}
 		add_company = company_type:company_RoyalBankofCanada
 		company:company_RoyalBankofCanada = {
-			set_company_state_region = s:STATE_ONTARIO
+			set_company_state_region = s:STATE_HOME_COUNTIES
 		}
 	}
-	# company_BankOfMontreal
+	# company_BankOfMontreal -- a company of Britain, its "Bank" in the country of work (Д.R9а.6)
 	if = {
 		limit = {
 			game_date > 1817.1.1
-			c:QUE ?= this
+			c:GBR ?= this
 			NOT = { has_company = company_type:company_BankOfMontreal }
 		}
 		add_company = company_type:company_BankOfMontreal
 		company:company_BankOfMontreal = {
-			set_company_state_region = s:STATE_QUEBEC
+			set_company_state_region = s:STATE_HOME_COUNTIES
 		}
 	}
 	# company_CanadianImperialBankOfCommerce
@@ -1655,16 +1655,16 @@ establish_bank_and_ef_compagnie = {
 	}
 
 	#AST
-	# company_ColonialBankOfAustralia
+	# company_ColonialBankOfAustralia -- a company of Britain, its "Bank" in the country of work (Д.R9а.6)
 	if = {
 		limit = {
 			game_date > 1837.1.1
-			c:NSW ?= this
+			c:GBR ?= this
 			NOT = { has_company = company_type:company_ColonialBankOfAustralia }
 		}
 		add_company = company_type:company_ColonialBankOfAustralia
 		company:company_ColonialBankOfAustralia = {
-			set_company_state_region = s:STATE_NEW_SOUTH_WALES
+			set_company_state_region = s:STATE_HOME_COUNTIES
 		}
 	}
 	# company_NationalBankOfAustralia
@@ -1705,16 +1705,16 @@ establish_bank_and_ef_compagnie = {
 			set_company_state_region = s:STATE_MEXICO
 		}
 	}
-	# company_bancodelondresmexico
+	# company_bancodelondresmexico -- a company of Britain, its "Bank" in the country of work (Д.R9а.6)
 	if = {
 		limit = {
 			game_date > 1864.1.1
-			c:MEX ?= this
+			c:GBR ?= this
 			NOT = { has_company = company_type:company_bancodelondresmexico }
 		}
 		add_company = company_type:company_bancodelondresmexico
 		company:company_bancodelondresmexico = {
-			set_company_state_region = s:STATE_MEXICO
+			set_company_state_region = s:STATE_HOME_COUNTIES
 		}
 	}
 	# company_BancoMercantilMexicano
