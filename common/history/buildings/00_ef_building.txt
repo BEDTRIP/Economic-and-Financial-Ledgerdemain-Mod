@@ -161,8 +161,43 @@ BUILDINGS = {
 		}
 		 
 		#NGF
+		if = {
+			limit = {
+				c:NGF ?= this
+			}
+			add_company = company_type:company_PreussischeSeehandlung
+			add_company = company_type:company_basic_gold_and_silver_mining_2
+			company:company_PreussischeSeehandlung = {
+				set_company_establishment_date = 1830.1.1
+				set_company_state_region = s:STATE_BRANDENBURG
+			}
+			company:company_basic_gold_and_silver_mining_2 = {
+				set_company_establishment_date = 1830.1.1
+				set_company_state_region = s:STATE_BRANDENBURG
+			}
+		}
  
 		#GER
+		if = {
+			limit = {
+				c:GER ?= this
+			} 
+			add_company = company_type:company_PreussischeSeehandlung
+			company:company_PreussischeSeehandlung = {
+				set_company_establishment_date = 1830.1.1
+				set_company_state_region = s:STATE_BRANDENBURG
+			}
+			add_company = company_type:company_basic_gold_and_silver_mining_2
+			company:company_basic_gold_and_silver_mining_2 = {
+				set_company_establishment_date = 1830.1.1
+				set_company_state_region = s:STATE_BRANDENBURG
+			}
+			add_company = company_type:company_BayerischeHypothekenUndWechselBank
+			company:company_BayerischeHypothekenUndWechselBank = {
+				set_company_establishment_date = 1830.1.1
+				set_company_state_region = s:STATE_BAVARIA
+			}
+		}
  
 		##################
 		#Germany end
@@ -174,6 +209,26 @@ BUILDINGS = {
 		#SIC
 
 		#ITA
+		if = {
+			limit = {
+				c:ITA ?= this
+			}
+			add_company = company_type:company_BancaDItalia
+			company:company_BancaDItalia = {
+				set_company_establishment_date = 1830.1.1
+				set_company_state_region = s:STATE_PIEDMONT
+			}
+			# add_company = company_type:company_BancaCommercialeItaliana
+			# company:company_BancaCommercialeItaliana = {
+			# 	set_company_establishment_date = 1830.1.1
+			# 	set_company_state_region = s:STATE_PIEDMONT
+			# }
+			add_company = company_type:company_CassaDiRisparmioDiTorino
+			company:company_CassaDiRisparmioDiTorino = {
+				set_company_establishment_date = 1830.1.1
+				set_company_state_region = s:STATE_PIEDMONT
+			}
+		}
 		##################
 		#italy end
 		################## 
@@ -357,6 +412,21 @@ BUILDINGS = {
 			}
 		}
 		#FRA
+		if = {
+			limit = {
+				c:FRA ?= this
+			}
+			if = { limit = { not = { has_company = company_type:company_BanqueDeFrance } } add_company = company_type:company_BanqueDeFrance }
+			add_company = company_type:company_basic_gold_and_silver_mining_2
+			company:company_BanqueDeFrance = {
+				set_company_establishment_date = 1830.1.1
+				set_company_state_region = s:STATE_ILE_DE_FRANCE
+			}
+			company:company_basic_gold_and_silver_mining_2 = {
+				set_company_establishment_date = 1830.1.1
+				set_company_state_region = s:STATE_ILE_DE_FRANCE
+			}
+		}
 		#USA
 		if = {
 			limit = {
@@ -400,6 +470,16 @@ BUILDINGS = {
 			}
 		}
 		#AUS
+		if = {
+			limit = {
+				c:AUS ?= this
+			}
+			add_company = company_type:company_OesterreichischeCreditAnstalt
+			company:company_OesterreichischeCreditAnstalt = {
+				set_company_establishment_date = 1830.1.1
+				set_company_state_region = s:STATE_AUSTRIA
+			}
+		}
 		#NET
 		if = {
 			limit = {
