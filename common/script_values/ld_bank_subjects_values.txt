@@ -74,8 +74,12 @@ zz_ef_bk_prem_max = 0.01
 zz_ef_bk_appeal_k = 20
 # a bankrupt company is out of the subjects this long (days; принято ночью)
 zz_ef_bk_fail_days = 365
-# the capital a subject keeps, a share of its earning assets; above it -- to the owners monthly (Д.R9.3, принято ночью)
+# the capital a subject keeps, a share of its earning assets by kind (Д.R9б.4): loans, bonds and the privatised levels
+# -- zz_ef_bk_cap_norm, the investments (fund shares, others' money and claims, revalued weekly) --
+# zz_ef_bk_cap_norm_inv, so a paper gain of the revaluation stays as the reserve against the next one; above the norm --
+# to the owners monthly (Д.R9.3)
 zz_ef_bk_cap_norm = 0.1
+zz_ef_bk_cap_norm_inv = 0.25
 # the leverage (Д.R9.2, принято ночью): a subject's loans (consumer + business) at most its capital x
 # zz_ef_bk_lev_base x (zz_ef_bk_lev_ref / the key rate), within [zz_ef_bk_lev_min, zz_ef_bk_lev_max] -- 10 at the
 # default key rate (zz_ef_money_rate without a rate); the key rate's floor in the division
@@ -214,11 +218,21 @@ zz_ef_bk_free_v = {
 	subtract = zz_ef_bk_loans_v
 	min = 0
 }
-# SUBJECT scope: the capital its norm keeps -- the larger of zz_ef_bk_cap_norm of its earning assets and its loans x
+# SUBJECT scope: the capital its norm keeps -- the larger of the norms by kind of its earning assets and its loans x
 # zz_ef_bk_cap_buffer / the leverage
 zz_ef_bk_cap_keep_v = {
 	value = zz_ef_bk_assets_v
+	if = { limit = { has_variable = zz_ef_bk_inv } subtract = var:zz_ef_bk_inv }
+	min = 0
 	multiply = zz_ef_bk_cap_norm
+	if = {
+		limit = { has_variable = zz_ef_bk_inv }
+		add = {
+			value = var:zz_ef_bk_inv
+			min = 0
+			multiply = zz_ef_bk_cap_norm_inv
+		}
+	}
 	if = {
 		limit = {
 			exists = var:zz_ef_bk_cty
