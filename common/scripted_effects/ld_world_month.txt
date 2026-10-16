@@ -31,6 +31,11 @@ zz_ef_world_month_ef = {
 	zz_ef_co_world_month = yes
 	# each exchange's month: turnover, capitalization, members (ld_exchange_trade.txt, Д.R4б.11)
 	zz_ef_xch_month_roll = yes
+	# the exchanges' buildings: founded, levels by the capitalization, the trading method (ld_exchange_building.txt, Д.R9в.2)
+	every_country = {
+		limit = { zz_ef_has_exchange = yes }
+		zz_ef_xb_month_step = yes
+	}
 	# the pops' losses on their claims' prices -- the rich lose wealth (ld_holder_losses.txt, Д.R7.9)
 	zz_ef_hl_world_month = yes
 	# the register of claims adds up (ld_claims.txt, the EFI line) -- a check for the logs only

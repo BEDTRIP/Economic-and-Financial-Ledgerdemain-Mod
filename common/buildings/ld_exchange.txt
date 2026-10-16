@@ -1,0 +1,23 @@
+﻿#############################################
+# «Биржа» / «Stock Exchange» (R9в; Д.R9в.1–3; понятие «Биржа», docs/exchange-companies.md). The country's exchange as a
+# building: one per country, in the exchange's state (var:zz_ef_fc_state), the state's; nobody builds or downsizes it --
+# the script founds it with the exchange and sets its levels monthly by the exchange's capitalization
+# (scripted_effects/ld_exchange_building.txt). Its methods -- the trading by the financial technologies; the active one
+# sets the exchange's fee (zz_ef_xch_fee_v, script_values/ld_exchange_values.txt).
+#############################################
+
+building_ld_exchange = {
+	building_group = bg_ld_exchange
+	icon = "gfx/interface/icons/invention_icons/stock_exchanges.dds"
+	city_type = city
+	levels_per_mesh = 50
+	required_construction = construction_cost_low
+	buildable = no
+	downsizeable = no
+
+	production_method_groups = {
+		pmg_ld_exchange_trading
+	}
+
+	background = "gfx/interface/icons/building_icons/backgrounds/building_panel_bg_monuments.dds"
+}

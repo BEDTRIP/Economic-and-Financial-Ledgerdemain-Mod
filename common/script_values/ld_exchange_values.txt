@@ -1,18 +1,45 @@
 ﻿# The exchange (scripted_effects/ld_exchange.txt).
-# the base fee of a deal, a share of its value (Д.R8.5: 0.5 %); each financial technology of the exchange's country
-# takes zz_ef_xch_fee_tech_cut of the base off, down to zz_ef_xch_fee_min of it
+# the base fee of a deal, a share of its value (Д.R8.5: 0.5 %). The exchange's building (Д.R9в.3): its active trading
+# method's factor -- the outcry (stock_exchange, joint_stock_companies), the banking houses (investment_banks,
+# mutual_funds), the ticker (international_exchange_standards, modern_financial_instruments): the middle of the two
+# technologies' steps of 15 % each (принято ночью); the economic system's law -- laissez-faire a bonus, the command
+# economy a malus (принято ночью). A country without the building (not an exchange) -- each financial technology takes
+# zz_ef_xch_fee_tech_cut of the base off, down to zz_ef_xch_fee_min of it.
 zz_ef_xch_fee_base = 0.005
 zz_ef_xch_fee_tech_cut = 0.15
 zz_ef_xch_fee_min = 0.1
+zz_ef_xch_fee_pm_outcry = 0.85
+zz_ef_xch_fee_pm_houses = 0.55
+zz_ef_xch_fee_pm_ticker = 0.25
+zz_ef_xch_fee_law_laissez_faire = 0.9
+zz_ef_xch_fee_law_command = 1.25
 zz_ef_xch_fee_v = {
 	value = 1
-	if = { limit = { has_technology_researched = stock_exchange } subtract = zz_ef_xch_fee_tech_cut }
-	if = { limit = { has_technology_researched = joint_stock_companies } subtract = zz_ef_xch_fee_tech_cut }
-	if = { limit = { has_technology_researched = investment_banks } subtract = zz_ef_xch_fee_tech_cut }
-	if = { limit = { has_technology_researched = mutual_funds } subtract = zz_ef_xch_fee_tech_cut }
-	if = { limit = { has_technology_researched = international_exchange_standards } subtract = zz_ef_xch_fee_tech_cut }
-	if = { limit = { has_technology_researched = modern_financial_instruments } subtract = zz_ef_xch_fee_tech_cut }
-	min = zz_ef_xch_fee_min
+	if = {
+		limit = { zz_ef_xb_has = yes }
+		if = {
+			limit = { var:zz_ef_fc_state = { any_scope_building = { is_building_type = building_ld_exchange has_active_production_method = pm_ld_exchange_ticker } } }
+			value = zz_ef_xch_fee_pm_ticker
+		}
+		else_if = {
+			limit = { var:zz_ef_fc_state = { any_scope_building = { is_building_type = building_ld_exchange has_active_production_method = pm_ld_exchange_banking_houses } } }
+			value = zz_ef_xch_fee_pm_houses
+		}
+		else = {
+			value = zz_ef_xch_fee_pm_outcry
+		}
+		if = { limit = { has_law_or_variant = law_type:law_laissez_faire } multiply = zz_ef_xch_fee_law_laissez_faire }
+		else_if = { limit = { has_law_or_variant = law_type:law_command_economy } multiply = zz_ef_xch_fee_law_command }
+	}
+	else = {
+		if = { limit = { has_technology_researched = stock_exchange } subtract = zz_ef_xch_fee_tech_cut }
+		if = { limit = { has_technology_researched = joint_stock_companies } subtract = zz_ef_xch_fee_tech_cut }
+		if = { limit = { has_technology_researched = investment_banks } subtract = zz_ef_xch_fee_tech_cut }
+		if = { limit = { has_technology_researched = mutual_funds } subtract = zz_ef_xch_fee_tech_cut }
+		if = { limit = { has_technology_researched = international_exchange_standards } subtract = zz_ef_xch_fee_tech_cut }
+		if = { limit = { has_technology_researched = modern_financial_instruments } subtract = zz_ef_xch_fee_tech_cut }
+		min = zz_ef_xch_fee_min
+	}
 	multiply = zz_ef_xch_fee_base
 }
 # The surcharge on a claim on another country (Д.R8б.18): the scope -- the buyer, scope:zz_ef_xch_d -- the debtor. None
@@ -63,4 +90,42 @@ zz_ef_xch_n_5_v = {
 # influence over the most of the other blocs' and the country's unclaimed leverage
 zz_ef_xch_bloc_adv = {
 	value = "leverage_advantage(scope:zz_ef_xch_c)"
+}
+
+# The exchange's building (Д.R9в.2): its levels by the exchange's capitalization in gold (var:zz_ef_xlm_cap) -- one,
+# and one more for each doubling above zz_ef_xb_cap_base (the largest exchange of 1841, ~64 mln, -- 10 levels; принято
+# ночью), up to 15.
+zz_ef_xb_cap_base = 100000
+zz_ef_xb_target_v = {
+	value = 1
+	if = { limit = { zz_ef_xb_ratio_v >= 1 } add = 1 }
+	if = { limit = { zz_ef_xb_ratio_v >= 2 } add = 1 }
+	if = { limit = { zz_ef_xb_ratio_v >= 4 } add = 1 }
+	if = { limit = { zz_ef_xb_ratio_v >= 8 } add = 1 }
+	if = { limit = { zz_ef_xb_ratio_v >= 16 } add = 1 }
+	if = { limit = { zz_ef_xb_ratio_v >= 32 } add = 1 }
+	if = { limit = { zz_ef_xb_ratio_v >= 64 } add = 1 }
+	if = { limit = { zz_ef_xb_ratio_v >= 128 } add = 1 }
+	if = { limit = { zz_ef_xb_ratio_v >= 256 } add = 1 }
+	if = { limit = { zz_ef_xb_ratio_v >= 512 } add = 1 }
+	if = { limit = { zz_ef_xb_ratio_v >= 1024 } add = 1 }
+	if = { limit = { zz_ef_xb_ratio_v >= 2048 } add = 1 }
+	if = { limit = { zz_ef_xb_ratio_v >= 4096 } add = 1 }
+	if = { limit = { zz_ef_xb_ratio_v >= 8192 } add = 1 }
+}
+zz_ef_xb_ratio_v = {
+	value = 0
+	if = {
+		limit = { has_variable = zz_ef_xlm_cap }
+		value = var:zz_ef_xlm_cap
+		divide = zz_ef_xb_cap_base
+	}
+}
+# the building's levels now (0 without it)
+zz_ef_xb_level_v = {
+	value = 0
+	if = {
+		limit = { zz_ef_xb_has = yes }
+		value = var:zz_ef_fc_state.b:building_ld_exchange.level
+	}
 }

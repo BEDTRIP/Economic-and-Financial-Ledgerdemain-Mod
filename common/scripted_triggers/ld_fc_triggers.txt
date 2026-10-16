@@ -69,3 +69,12 @@ zz_ef_xch_bloc_has_influence = {
 		}
 	}
 }
+# COUNTRY scope: its exchange's building stands in the exchange's state (Д.R9в.1, buildings/ld_exchange.txt)
+zz_ef_xb_has = {
+	has_variable = zz_ef_fc_state
+	exists = var:zz_ef_fc_state
+	var:zz_ef_fc_state = {
+		owner ?= prev
+		has_building = building_ld_exchange
+	}
+}

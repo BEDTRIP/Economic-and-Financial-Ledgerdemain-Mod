@@ -1,0 +1,12 @@
+﻿# The exchange's trading (buildings/ld_exchange.txt; Д.R9в.3): the better the technology, the lower the fee
+# (zz_ef_xch_fee_v reads the active method); the script keeps the best one open (zz_ef_xb_month_step).
+pmg_ld_exchange_trading = {
+	texture = "gfx/interface/icons/generic_icons/mixed_icon_base.dds"
+	ai_selection = most_productive
+
+	production_methods = {
+		pm_ld_exchange_open_outcry
+		pm_ld_exchange_banking_houses
+		pm_ld_exchange_ticker
+	}
+}

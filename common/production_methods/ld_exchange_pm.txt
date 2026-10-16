@@ -1,0 +1,45 @@
+﻿# The exchange's trading methods (production_method_groups/ld_exchange_pmg.txt; Д.R9в.3): three steps over the six
+# financial technologies -- stock_exchange and joint_stock_companies (the outcry), investment_banks and mutual_funds,
+# international_exchange_standards and modern_financial_instruments (the ticker); each method's fee factor --
+# zz_ef_xch_fee_pm_* (script_values/ld_exchange_values.txt). Jobs per level -- clerks, and bureaucrats for the
+# registers; fewer clerks and more bureaucrats as the trading gets technical (принято ночью).
+pm_ld_exchange_open_outcry = {
+	texture = "gfx/interface/icons/invention_icons/stock_exchanges.dds"
+
+	building_modifiers = {
+		level_scaled = {
+			building_employment_clerks_add = 400
+			building_employment_bureaucrats_add = 100
+		}
+	}
+}
+
+pm_ld_exchange_banking_houses = {
+	texture = "gfx/interface/icons/invention_icons/investment_banks.dds"
+
+	unlocking_technologies = {
+		investment_banks
+	}
+
+	building_modifiers = {
+		level_scaled = {
+			building_employment_clerks_add = 350
+			building_employment_bureaucrats_add = 150
+		}
+	}
+}
+
+pm_ld_exchange_ticker = {
+	texture = "gfx/interface/icons/invention_icons/international_exchange_standards.dds"
+
+	unlocking_technologies = {
+		international_exchange_standards
+	}
+
+	building_modifiers = {
+		level_scaled = {
+			building_employment_clerks_add = 300
+			building_employment_bureaucrats_add = 200
+		}
+	}
+}

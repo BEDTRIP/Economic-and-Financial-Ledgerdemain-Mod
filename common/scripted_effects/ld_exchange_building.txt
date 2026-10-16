@@ -1,0 +1,57 @@
+﻿# The exchange's building (R9в; Д.R9в.1–3; buildings/ld_exchange.txt, docs/exchange-companies.md).
+
+# COUNTRY scope, an exchange's country (zz_ef_has_exchange), monthly after the exchanges' month (zz_ef_xch_month_roll,
+# ld_world_month.txt): the building in the exchange's state -- founded at the first month (old saves too), then one
+# level a month towards the capitalization's target (zz_ef_xb_target_v); the best trading method its technologies open,
+# activated only where it is not active (activate_production_method on an active method adds a copy).
+zz_ef_xb_month_step = {
+	if = {
+		limit = { zz_ef_xb_has = no }
+		var:zz_ef_fc_state = { create_building = { building = building_ld_exchange level = 1 } }
+	}
+	if = {
+		limit = { zz_ef_xb_has = yes }
+		set_variable = { name = zz_ef_xb_d value = { value = zz_ef_xb_target_v subtract = zz_ef_xb_level_v } }
+		if = {
+			limit = { var:zz_ef_xb_d >= 1 }
+			var:zz_ef_fc_state = { add_building_level = { building = building_ld_exchange level = 1 } }
+		}
+		else_if = {
+			limit = {
+				var:zz_ef_xb_d <= -1
+				zz_ef_xb_level_v > 1
+			}
+			var:zz_ef_fc_state = { add_building_level = { building = building_ld_exchange level = -1 } }
+		}
+		remove_variable = zz_ef_xb_d
+		var:zz_ef_fc_state = {
+			if = {
+				limit = {
+					owner = { has_technology_researched = international_exchange_standards }
+					any_scope_building = {
+						is_building_type = building_ld_exchange
+						NOT = { has_active_production_method = pm_ld_exchange_ticker }
+					}
+				}
+				activate_production_method = { building_type = building_ld_exchange production_method = pm_ld_exchange_ticker }
+			}
+			else_if = {
+				limit = {
+					owner = {
+						has_technology_researched = investment_banks
+						NOT = { has_technology_researched = international_exchange_standards }
+					}
+					any_scope_building = {
+						is_building_type = building_ld_exchange
+						NOT = { has_active_production_method = pm_ld_exchange_banking_houses }
+					}
+				}
+				activate_production_method = { building_type = building_ld_exchange production_method = pm_ld_exchange_banking_houses }
+			}
+		}
+		if = {
+			limit = { zz_ef_logs_on = yes }
+			debug_log = "EFD|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|xch_building|level [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xb_level_v')|0]|target [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xb_target_v')|0]|cap_x [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xb_ratio_v')|1]|fee [THIS.GetCountry.MakeScope.ScriptValue('zz_ef_xch_fee_v')|5]"
+		}
+	}
+}

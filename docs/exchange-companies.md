@@ -90,14 +90,29 @@
   преимущество наибольшее, даже отрицательное) и `zz_ef_xch_strong_bloc` (блок найден); лог `EFH|…|route` (с `blev` —
   преимущество выбранного блока) у стран логов; `zz_ef_xch_world_set` (мир, месяц, из `zz_ef_world_month_ef`) —
   `global_var:zz_ef_xch_world`: страна эталонной валюты с биржей, иначе крупнейшая экономика с биржей;
-  `zz_ef_xch_fees_set` — комиссии биржи по видам `var:zz_ef_xch_fee_m/_b/_f` = `zz_ef_xch_fee_v` (база 0,5 %, минус 15 %
-  базы за каждую финансовую технологию страны биржи — фондовая биржа, акционерные общества, инвестиционные банки, паевые
-  фонды, международные стандарты обмена, современные финансовые инструменты; не ниже 10 % базы; Д.R8.5). Надбавка за
+  `zz_ef_xch_fees_set` — комиссии биржи по видам `var:zz_ef_xch_fee_m/_b/_f` = `zz_ef_xch_fee_v` (база 0,5 % × метод
+  здания биржи и закон — ниже, «Здание биржи»; без здания — минус 15 % базы за каждую финансовую технологию страны
+  биржи — фондовая биржа, акционерные общества, инвестиционные банки, паевые фонды, международные стандарты обмена,
+  современные финансовые инструменты; не ниже 10 % базы; Д.R8.5). Надбавка за
   чужие требования `zz_ef_xch_surcharge_v` (покупатель, должник — `scope:zz_ef_xch_d`): нет для своих, сюзерена и
   подданного, одного рынка и договора о правах на зарубежные инвестиции (`zz_ef_xch_free_with`), иначе по закону
   торговой политики покупателя — свободная торговля 0,5 %, меркантилизм 1 %, протекционизм 2 %, кантонская система 3 %;
   изоляционизм покупателя или должника — сделки нет (`zz_ef_xch_banned`; Д.R8б.18). Читатели — торги
   (`ld_exchange_trade.txt`). `common/script_values/ld_exchange_values.txt` — числа, лога.
+- **Здание биржи** (R9в; Д.R9в.1–3): `common/buildings/ld_exchange.txt` (`building_ld_exchange`, `buildable = no`,
+  `downsizeable = no`), группа `common/building_groups/ld_exchange_group.txt` (`bg_ld_exchange` — дочерняя
+  `bg_government`: вкладка «Развитие», содержит государство), методы `pmg_ld_exchange_trading`
+  (`common/production_method_groups/ld_exchange_pmg.txt`, `common/production_methods/ld_exchange_pm.txt`: голосовые
+  торги — без технологии, банкирские дома — `investment_banks`, тикер и клиринг — `international_exchange_standards`;
+  клерки и бюрократы на уровень, принято ночью). Месяц (`zz_ef_xb_month_step`, `common/scripted_effects/ld_exchange_building.txt`,
+  из `ld_world_month.txt` после `zz_ef_xch_month_roll`, страны с `zz_ef_has_exchange`): здания нет — ставится в
+  `var:zz_ef_fc_state` (и в старых сейвах); уровень — на 1 в месяц к цели `zz_ef_xb_target_v` (1 + удвоения
+  капитализации `var:zz_ef_xlm_cap` сверх `zz_ef_xb_cap_base` 100 тыс. золота, до 15; принято ночью; `add_building_level`);
+  метод — лучший открытый, только где он не активен. Комиссия `zz_ef_xch_fee_v` (`ld_exchange_values.txt`) — множитель
+  активного метода `zz_ef_xch_fee_pm_*` × закон экономической системы `zz_ef_xch_fee_law_*`; у страны без здания — по
+  технологиям, как прежде. Снос, когда биржи нет, — R11. Триггер `zz_ef_xb_has` (`ld_fc_triggers.txt`). Лог
+  `EFD|…|xch_building` (уровень, цель, капитализация в базах, комиссия). Комиссия — проводкой в казну, в меню здания —
+  подсказкой (R10).
 - Инвестиционный фонд (R8б, шаг 6; Д.R8б.2, Д.R8б.4, Д.R8б.5, Д.R8б.16): здание `building_ld_investment_fund`
   (`common/buildings/ld_investment_fund.txt`; группа `bg_zz_ef_banking`, технология `financial_center`, `possible` —
   штат биржи своей страны, частная стройка) производит паи `mutual_funds` методом `pm_bond_exchange`
