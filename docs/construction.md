@@ -68,7 +68,8 @@
   предложению, как металл (`zz_ef_mt_k_*`); выпуск стройсекторов поднят, чтобы они окупались без цены нехватки (Д.R9.10,
   выход методов — выше).
 - `common/script_values/ld_psc_private_allocation.txt` — REPLACE `private_construction_increase` (цель
-  `zz_ef_psc_private_target`: доход + простаивающий пул + ставка, × рычаг кредита `zz_ef_psc_credit_f` — от 0,5 без
+  `zz_ef_psc_private_target`: доход + простаивающий пул (сверх нужды банков `zz_ef_pool_need`, за
+  `zz_ef_psc_idle_release_weeks` = 13 недель, Д.R9б.3) + ставка, × рычаг кредита `zz_ef_psc_credit_f` — от 0,5 без
   свободного лимита банков до 1, когда свободный лимит страны `var:zz_ef_bk_free_cr` ≥ 13 недель нового делового
   кредита (Д.R9.2, принято ночью; `docs/banks.md`).
 - `common/script_values/ld_pb_overbuild_values.txt` — лимит и перестройка: `zz_pb_ef_css_levels`,
