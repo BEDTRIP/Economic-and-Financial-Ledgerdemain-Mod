@@ -71,6 +71,16 @@ var:central_bank_location ?= {
 финцентра и кризисы (`01_economic_scripted_effects.txt`), `money_supply_state` и счёт `cb`, кнопки
 `00_financial_scripted_guis.txt`.
 
+## Кусок 2 — перенос при переезде столицы и оккупации
+
+`common/scripted_effects/01_economic_scripted_effects.txt`: из `stockpiling_capital_state_transfert` (переезд столицы /
+места ЦБ), `stockpiling_capital_state_transfert_financial_center_place` и `enemy_capital_is_occuped` (оккупация
+столицы) вырезаны 475 блоков `change_variable` / `set_variable` запасов **валют** (`stockpiling_<валюта>_state_1`,
+`…_reserve_currency_state_1`; 95 валют — у которых есть `_reserve_currency`) — сюда, тем же путём. Запасы товаров
+нацзапаса (`stockpiling_<товар>_state_1`, R13), металл (счёт страны), `all_<валюта>_stored`, грабёж — на месте. После
+куска 1 запасы валют всегда 0 — перенос ничего не двигал. Вернуть — блоки на прежние места в этих эффектах (порядок
+в файле архива — порядок в эффекте).
+
 ## Запас валюты-эталона (Д.R9б.15)
 
 ### Вырезано
