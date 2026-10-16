@@ -4,7 +4,7 @@
 `stockpiling_<валюта>_state_1` и `…_reserve_currency_state_1` (невыпущенные деньги ЦБ); их сумма — `money_supply_state`
 (`01_economic_currency_scripted_value.txt`). Модель денег форка этот запас не ведёт: его читают только счёт `cb` сверки
 (`ld_money_model.txt`, `zz_ef_money_ledger_delta = { ACC = cb VALUE = money_supply_state }`), карточка ЦБ, панели и
-значения E&F (разведка — `этапы/R9б.md`, R9б.5а). Снимается кусками (R9б.5); здесь — снятое.
+значения E&F (разведка — `история/2026-10-17 этап R9б.md`, R9б.5а). Снимается кусками (R9б.5); здесь — снятое.
 
 ## Кусок 1 — старт (история)
 

@@ -56,7 +56,7 @@
 
 **Ledgerdemain (`ld_*`) над PSC**
 - Снята и лежит в архиве: закупка регулятора по рынку (Д.R9.5, Д.R9.11 — смесь стройтоваров: очки −21 % в R9 и −7…−16 %
-  в R9б.2, дерево уходит в нехватку; `_archive/psc_regulator_market_mix/`, вопрос В.R9б.5 в `этапы/R9б.md`).
+  в R9б.2, дерево уходит в нехватку; `_archive/psc_regulator_market_mix/`, вопрос В.R9б.5 в `история/2026-10-17 этап R9б.md`).
 - `common/scripted_effects/ld_psc_market_fill.txt`, `common/script_values/ld_psc_market_fill_values.txt` — регулятор не
   больше предложения рынка (Д.R9.4, Д.R9.10): `zz_ef_psc_fill_update` в начале недели PSC — на стране
   `var:zz_ef_psc_k_<товар>` (`wood`, `iron`, `steel`, `arc_welded`) = прошлое k × продажи / заказы стройтовара на рынке
