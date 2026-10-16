@@ -117,7 +117,8 @@ plan = "R12 Л.6: a lone $ in localization (currency symbols)"
 
 [[suppress]]
 key = "modifiers"
-plan = "R12 Л.7: state / building modifiers in a country's static modifier do nothing"
+file = "common/static_modifiers/00_ef_dynamic_modifier_country.txt"
+why = "a static modifier names no scope, so tiger sees none; these are added to the country (ef_on_monthly_pulse_country → currency_strength_modifier / inflation_modifier), and state and building modifiers on a country reach its states and buildings, as vanilla's do (law_mercantilism state_export_advantage_mult, law_industry_banned state_expected_sol_mult, trait country_modifier state_tax_waste_add, tech banking country_minting_mult, law_isolationism country_disallow_trade_bool)"
 
 [[suppress]]
 key = "prefixes"
