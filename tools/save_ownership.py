@@ -13,8 +13,8 @@ Save format notes — архив «блок Г, стройка — ход раб
 """
 import os, re, sys, json, collections
 
-HERE = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "vic3_mods", "tools"))  # paths below are relative to vic3_mods/tools, where these tools lived
-HOTFIX = os.path.join(HERE, '..', '_ef', 'ef hotfix 1.13', 'common', 'company_types')
+HERE = os.path.dirname(os.path.abspath(__file__))  # tools/ of the fork; two levels under Projects/vic3, like vic3_mods/tools
+HOTFIX = os.path.join(HERE, '..', '..', 'vic3_mods', '_ef', 'ef hotfix 1.13', 'common', 'company_types')
 SG = os.path.expanduser(r'~\Documents\Paradox Interactive\Victoria 3\save games')
 
 NONPROD = {'building_manor_house', 'building_financial_district', 'building_barrack', 'building_conscription_center',

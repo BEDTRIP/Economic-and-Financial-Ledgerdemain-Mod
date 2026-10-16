@@ -219,7 +219,7 @@ class Gen:
         out = ["---", "tags: [ваниль, карта]", "---", "# Карта ванили",
                "",
                "Понятия игры — подсказки-понятия Victoria 3 1.13 (`common/game_concepts`, локализация), по заметке на понятие.",
-               "Сгенерировано `../vic3_mods/tools/regen_ld_vanilla_concepts.py`: текст игры руками не править, раздел",
+               "Сгенерировано `tools/regen_ld_vanilla_concepts.py`: текст игры руками не править, раздел",
                f"«{FORK_HEAD}» пишется руками и сохраняется. Понятия мода — [[_Карта понятий]].", ""]
         used = sorted((c for c in self.concepts if c in self.fork), key=lambda c: self.names[c].lower())
         if used:

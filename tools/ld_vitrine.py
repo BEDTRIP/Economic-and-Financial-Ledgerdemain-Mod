@@ -81,7 +81,7 @@ def scan():
 def block(rows):
     n = {c: sum(1 for r in rows if r[1] == c) for c in ("var", "vit", "calc")}
     files = sorted({f for r in rows for f in r[2]})
-    out = [B, f"Сгенерировано `../vic3_mods/tools/ld_vitrine.py --write`. Имён {len(rows)}: переменных {n['var']}, "
+    out = [B, f"Сгенерировано `tools/ld_vitrine.py --write`. Имён {len(rows)}: переменных {n['var']}, "
               f"значений-витрины {n['vit']}, вычисляемых при перерисовке {n['calc']}; файлов {len(files)}.", "",
            "| имя | класс | где читается |", "| --- | --- | --- |"]
     for name, cls, fs in rows:

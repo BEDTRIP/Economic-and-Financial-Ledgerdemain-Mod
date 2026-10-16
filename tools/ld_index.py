@@ -19,7 +19,7 @@ from collections import Counter
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from vic3tools.legacy import ld_pdx  # noqa: E402
 
-HERE = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "vic3_mods", "tools"))  # paths below are relative to vic3_mods/tools, where these tools lived
+HERE = os.path.dirname(os.path.abspath(__file__))  # tools/ of the fork; two levels under Projects/vic3, like vic3_mods/tools
 FORK = os.path.normpath(os.path.join(HERE, "..", "..", "Economic-and-Financial-Ledgerdemain-Mod"))
 OUT = os.path.normpath(os.path.join(HERE, "..", "..", "_tmp_analysis", "ld_index"))
 WORD = re.compile(r"[A-Za-z_][A-Za-z0-9_]*")

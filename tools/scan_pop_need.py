@@ -15,8 +15,8 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import save_ownership as SO  # noqa: E402
 
-HERE = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "vic3_mods", "tools"))  # paths below are relative to vic3_mods/tools, where these tools lived
-DEFAULT_PKG = os.path.join(HERE, '..', '_ef', 'ef hotfix 1.13', 'common', 'buy_packages', 'zz_ef_currency_need_packages.txt')
+HERE = os.path.dirname(os.path.abspath(__file__))  # tools/ of the fork; two levels under Projects/vic3, like vic3_mods/tools
+DEFAULT_PKG = os.path.join(HERE, '..', '..', 'vic3_mods', '_ef', 'ef hotfix 1.13', 'common', 'buy_packages', 'zz_ef_currency_need_packages.txt')
 
 
 def opt(args, name, default, cast=str):

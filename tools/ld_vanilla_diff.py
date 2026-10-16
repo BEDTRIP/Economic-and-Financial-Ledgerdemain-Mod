@@ -16,7 +16,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import ld_gen  # noqa: E402
 
-HERE = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "vic3_mods", "tools"))  # paths below are relative to vic3_mods/tools, where these tools lived
+HERE = os.path.dirname(os.path.abspath(__file__))  # tools/ of the fork; two levels under Projects/vic3, like vic3_mods/tools
 VAN = os.path.normpath(os.path.join(HERE, "..", "..", "vic3_mods_out", ".vanillaVIC3"))
 EF = re.compile(r"GetScriptedGui|GetCustom|ScriptValue|zz_ef|\bef_|_ef_|EF_|currency|E&F", re.I)
 
