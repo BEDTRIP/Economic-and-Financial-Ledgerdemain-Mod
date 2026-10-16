@@ -19,7 +19,7 @@
   `_archive/ef_currency_laws/` (R8в, шаг 5): валюта — `var:zz_ef_cur = flag:<cur>`; ставят история E&F
   (`99_ef_history_global_variable.txt`), союз (`ld_monetary_union.txt`); новая страна без банка — без валюты
   (`00_on_action_main.txt`); все проверки валюты E&F (`has_law = law_type:law_<cur>_currency`, 2190 мест) —
-  `var:zz_ef_cur ?= flag:<cur>`. Список валют для генераторов — `../vic3_mods/tools/data/ld_currencies.txt`.
+  `var:zz_ef_cur ?= flag:<cur>`. Список валют для генераторов — `tools/data/ld_currencies.txt`.
 - `common/laws/01_ef_monetary_system.txt` — `law_no_monetary_system`, `law_fiat_standard`, `law_silver_standard`,
   `law_bimetallism_standard`, `law_gold_standard`, обменные `law_gold_exchange_standard`,
   `law_silver_exchange_standard`, `law_bimetallism_exchange_standard`, `law_external_exchange_standard`; `on_activate` /

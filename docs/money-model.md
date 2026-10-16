@@ -61,7 +61,7 @@
   месяц
 - `common/script_values/ld_run_log_values.txt` — значения строки `EFW|<страна>|all` и `EFV|<владелец>|mkt` (лог прогона:
   доли металла населения, радикалы, уровни государства и частников) (`EFW|…|acc|`, по странам с моделью и сумма мира) —
-  для разбора прогонов (`../vic3_mods/tools/ld_run_series.py`).
+  для разбора прогонов (`tools/ld_run_series.py`).
 - `common/scripted_effects/ld_money_log_rest.txt` — сгенерированный `debug_log` «прочее» карточек (`EFO`); не править
   (генератор `tools/regen_ef_money_supply_loc.py`).
 - `common/scripted_guis/ld_money_hook.txt` + `gui/ld_money_hook.gui` — мост GUI→скрипт: строки бюджета, доступные только

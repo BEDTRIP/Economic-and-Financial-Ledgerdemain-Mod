@@ -23,7 +23,7 @@
 | Потребности населения и товары | `pop-needs.md` | `common/pop_needs/00_ef_pop_needs.txt`, `common/buy_packages/00_ef_buy_packages.txt`, `common/goods/ef_00_goods.txt` |
 | Ядро E&F: здания и PM, модификаторы, триггеры, решения, события, журналы | `ef-core.md` | `common/scripted_effects/01_economic_scripted_effects.txt`, `common/scripted_triggers/00_ef_custom_trigger.txt` |
 | Интерфейс: панели, мост GUI → скрипт, отладочные окна, локализация; список имён витрины — генерат `vitrine.md` | `interface.md`, `vitrine.md` | `gui/00_ef_deported_gui_1.gui`, `common/scripted_guis/00_economic_scripted_guis.txt`, `gui/ld_money_hook.gui` |
-| Генераторы файлов `ld_*` | `generators.md` | `../vic3_mods/tools/regen_ef_*.py` |
+| Генераторы файлов `ld_*` | `generators.md` | `tools/regen_ef_*.py` |
 | **Реестр механизмов** — живой / выключен / мёртвый / дубль | `mechanisms.md` | — |
 
 ## Порядок шага (кратко; подробно — `entry-points.md`)
@@ -69,7 +69,7 @@
 | уборка мёртвого | `mechanisms.md` → документ подсистемы → перенос в `_archive/` |
 | файл `ld_*` нельзя править руками? | `generators.md` |
 
-## Инструменты (`../vic3_mods/tools/`)
+## Инструменты (`tools/`)
 - `ld_index.py` — индекс определений форка и числа ссылок на каждое (`refs = 0` — кандидат в мёртвые; -1 — точка входа
   движка). Вывод — `_tmp_analysis/ld_index/index.tsv`.
 - `ld_docs_check.py` — каждый файл `common/` и `events/` упомянут в `docs/`, пути в `docs/` существуют. Запускать после
@@ -78,4 +78,4 @@
   `ld_sync_live.py` — живая копия мода.
 - `ld_smells.py` — смеллы кода по графу вызовов: где проверки закона валюты, цепочки `if / else_if`, перебор в переборе,
   семейства имён «по одной на сущность», переменные без читателя / писателя, дубли, числа, шапки генератов без
-  генератора; «жара» места — неделя / месяц / год / старт / окна. `python ../vic3_mods/tools/ld_smells.py` — сводка.
+  генератора; «жара» места — неделя / месяц / год / старт / окна. `python tools/ld_smells.py` — сводка.

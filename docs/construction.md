@@ -197,7 +197,7 @@
 штатам, `csec_profit`, `csec_lv` — прибыль и уровни стройсекторов, `cf` — рычаг кредита частной доли (Д.R9.2), `kw`,
 `ki` — k дерева и железа. Сводка
 по годам —
-`../vic3_mods/tools/ld_psc_sum.py`. Уведомление
+`tools/ld_psc_sum.py`. Уведомление
 игроку: `zz_pb_ef_overbuild_rising` (рост полосы `speculative_share_2` на 10).
 
 ## Прочие файлы
