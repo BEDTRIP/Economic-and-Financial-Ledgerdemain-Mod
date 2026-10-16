@@ -1,0 +1,187 @@
+# v3 lint of the fork: what the baseline knew, sorted out 16.10.2026 (`v3 lint --triage`).
+# `why` — noise, with the reason; `plan` — a real problem, tracked in этапы/R12.md, section «Линт» (Л.N).
+# Evidence for "the game accepts it": a run of 16.10 (r1016_070354, -debug_mode) logged no error in any file of the
+# fork at load — the 23 located errors are all CMF and vanilla files.
+
+# --- noise: tiger does not know 1.13 or the engine ---------------------------------------------------------------
+
+[[suppress]]
+key = "missing-item"
+message = "building type building_company_"
+why = "the engine makes a building_company_<key> type for every company type (company_<key> is defined); the game logs nothing about them"
+
+[[suppress]]
+key = "validation"
+message = "variable_map"
+why = "1.13 variable maps (variable_map:, variable_map(...)); the game loads them without error"
+
+[[suppress]]
+key = "validation"
+message = "`variable = ` is only for"
+why = "1.13 takes variable = in any_/ordered_/random_in_list; the game loads it without error"
+
+[[suppress]]
+key = "unknown-field"
+file = "common/script*"
+why = "1.13 effects and values tiger does not know (create_container, destroy_container, market_exports, market_imports); the game loads them without error"
+
+[[suppress]]
+key = "scopes"
+file = "common/scripted_guis/*"
+why = "a scripted GUI's scope comes from the window that calls it; tiger sees none and guesses"
+
+[[suppress]]
+key = "scopes"
+file = "common/scripted_effects/ld_clearing.txt"
+why = "variable maps hold values and countries by design; tiger deduces one type per list"
+
+[[suppress]]
+key = "scopes"
+file = "common/scripted_effects/08_list_effect.txt"
+why = "variable lists of companies sorted by value; tiger deduces the list as countries from its first use"
+
+[[suppress]]
+key = "scopes"
+file = "common/history/*"
+why = "history effects run in the scope the history file gives; tiger sees none"
+
+[[suppress]]
+key = "datafunctions"
+message = "GetSearchBar"
+why = "vanilla uses MarketPanel.GetSearchBar too (building_browser_panel.gui, politics_panel.gui)"
+
+# --- real, tracked in этапы/R12.md, «Линт» -------------------------------------------------------------------------
+
+[[suppress]]
+key = "missing-item"
+message = "script value"
+file = "localization/*"
+plan = "R12 Л.1: dead E&F GUI localization — currency orders (buy_*_order) and others, 99 keys × 11 languages"
+
+[[suppress]]
+key = "missing-item"
+message = "could not find goods"
+plan = "R12 Л.1: modifier types on E&F currency goods that no longer exist"
+
+[[suppress]]
+key = "gui-type-ignored"
+plan = "R12 Л.2: E&F copies of vanilla GUI types that never apply"
+
+[[suppress]]
+key = "duplicate-item"
+file = "gui/*"
+plan = "R12 Л.2: E&F copies of vanilla GUI types and templates"
+
+[[suppress]]
+key = "text-fit"
+plan = "R12 Л.3: texts that do not fit their boxes"
+
+[[suppress]]
+key = "choice"
+plan = "R12 Л.4: align / parentanchor written Hcenter / Vcenter"
+
+[[suppress]]
+key = "gui"
+message = "SetRoot"
+plan = "R12 Л.4: ScriptedGui.Execute without GuiScope.SetRoot"
+
+[[suppress]]
+key = "missing-file"
+plan = "R12 Л.5: icon files that do not exist"
+
+[[suppress]]
+key = "missing-item"
+message = "text icon"
+plan = "R12 Л.5: text icons that do not exist"
+
+[[suppress]]
+key = "missing-localization"
+plan = "R12 Л.6: localization missing in some languages"
+
+[[suppress]]
+key = "missing-item"
+message = "custom localization"
+plan = "R12 Л.6: custom localization that does not exist"
+
+[[suppress]]
+key = "datafunctions"
+plan = "R12 Л.6: OLD_STANDARD / NEW_STANDARD as data functions in event text"
+
+[[suppress]]
+key = "markup"
+plan = "R12 Л.6: broken markup in localization"
+
+[[suppress]]
+key = "localization"
+plan = "R12 Л.6: a lone $ in localization (currency symbols)"
+
+[[suppress]]
+key = "modifiers"
+plan = "R12 Л.7: state / building modifiers in a country's static modifier do nothing"
+
+[[suppress]]
+key = "prefixes"
+plan = "R12 Л.8: REPLACE / INJECT of items that do not exist, a prefix on a game rule"
+
+[[suppress]]
+key = "replace-fields"
+plan = "R12 Л.8: REPLACE bodies without fields of the record they replace"
+
+[[suppress]]
+key = "missing-item"
+message = "building type"
+plan = "R12 Л.9: building types that no longer exist (listing switch, city graphics, MPM panel)"
+
+[[suppress]]
+key = "reader-directives"
+plan = "R12 Л.9: @panel_width_minus_10 not defined in ld_economy_panel.gui (zero width)"
+
+[[suppress]]
+key = "validation"
+plan = "R12 Л.9: single errors (expected number / integer, game_date)"
+
+[[suppress]]
+key = "structure"
+plan = "R12 Л.9: draggable_behavior block where a value is expected (copies of vanilla panels)"
+
+[[suppress]]
+key = "gui"
+message = "unexpected value"
+plan = "R12 Л.9: `size { … }` without = in gui/country_panel.gui"
+
+[[suppress]]
+key = "image-size"
+plan = "R12 Л.9: inflation.dds sizes not divisible by 4"
+
+[[suppress]]
+key = "removed"
+plan = "R12 Л.9: fixed_expenses was removed in 1.13"
+
+[[suppress]]
+key = "exact-duplicate-item"
+plan = "R12 Л.9: a script value defined twice"
+
+[[suppress]]
+key = "strict-scopes"
+plan = "R12 Л.9: local_var used where it may be unset (PSC, building levels)"
+
+[[suppress]]
+key = "bom"
+plan = "R12 Л.9: gui/00_ef_deported_gui_1.gui without a BOM"
+
+[[suppress]]
+key = "missing-item"
+message = "unknown sound"
+plan = "R12 Л.9: a sound that does not exist (PSC construction panel)"
+
+[[suppress]]
+key = "logic"
+plan = "R12 Л.10: smells (OR with one item, an if that changes nothing)"
+
+[[suppress]]
+key = "field-missing"
+plan = "R12 Л.10: if without limit (08_list_effect.txt)"
+
+[[suppress]]
+key = "duplicate-field"
+plan = "R12 Л.10: a field repeated in one block"
