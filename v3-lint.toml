@@ -51,6 +51,16 @@ key = "datafunctions"
 message = "GetSearchBar"
 why = "vanilla uses MarketPanel.GetSearchBar too (building_browser_panel.gui, politics_panel.gui)"
 
+[[suppress]]
+key = "prefixes"
+file = "common/production_methods/11_ef_private_infrastructure.txt"
+why = "tiger orders files by name across mods (11_ef_ < vanilla 14_companies); the engine loads mods after vanilla, so the REPLACE finds pm_company_headquarter_* — no load error in error.log (vic3-modding, load-and-override)"
+
+[[suppress]]
+key = "prefixes"
+file = "common/ideologies/00_ef_ig_ideologies.txt"
+why = "tiger orders files by name across mods (00_ef_ig_ < vanilla 00_ig_); the engine loads mods after vanilla, so the INJECT finds the ideologies — no load error in error.log"
+
 # --- real, tracked in этапы/R12.md, «Линт» -------------------------------------------------------------------------
 
 [[suppress]]
@@ -84,7 +94,7 @@ plan = "R12 Л.4: ScriptedGui.Execute without GuiScope.SetRoot"
 
 [[suppress]]
 key = "missing-file"
-plan = "R12 Л.5: icon files that do not exist"
+plan = "R12 Л.5: icon files that do not exist (76 of 78 only by letter case: financial_centre_ARG.dds named, _arg.dds referenced)"
 
 [[suppress]]
 key = "missing-item"
@@ -119,7 +129,7 @@ why = "a static modifier names no scope, so tiger sees none; these are added to 
 
 [[suppress]]
 key = "prefixes"
-plan = "R12 Л.8: REPLACE / INJECT of items that do not exist, a prefix on a game rule"
+plan = "R12 Л.8: TRY_REPLACE on game rules that exist nowhere else (their flags are read by nobody)"
 
 [[suppress]]
 key = "replace-fields"
