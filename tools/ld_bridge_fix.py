@@ -6,7 +6,7 @@
 1. Рабочее дерево форка моста (`../_bridge/Economic-and-Financial-Ledgerdemain-Mod`) не создаётся: папку наполняет
    Syncthing (`README.sync-conflict-…`), `git worktree add` отвечает «already exists». Ищет корень папки Syncthing
    (`.stfolder` вверх от `_bridge`), дописывает `/_bridge` в его `.stignore` (если нет), затем `git worktree prune` и
-   удаляет папку, если в ней нет `.git` (то есть это не живое рабочее дерево).
+   отодвигает папку в `_bridge/_stale/<время>/` (не удаляет), если в ней нет `.git` (то есть это не живое рабочее дерево).
 2. Правка справочника навыка `vic3-modding` (`add_building_level` в 1.13 нет): облачной сессии пуш в `vic3_tools`
    закрыт (403) — патч применяется в checkout `vic3_tools` на ПК (`git am`) и пушится его учёткой; только если
    checkout на `main` и чистый, патч ещё не применён.
@@ -60,9 +60,12 @@ def unsync():
     if not DRY:
         git("worktree", "prune", cwd=FORK)
     if os.path.isdir(WT) and not os.path.exists(os.path.join(WT, ".git")):
-        print(f"remove {WT}: {sorted(os.listdir(WT))}")
+        # moved aside, not deleted: what Syncthing put there stays at hand
+        to = os.path.join(BRIDGE, "_stale", time.strftime("%Y%m%d-%H%M%S"), os.path.basename(WT))
+        print(f"move {WT} -> {to}: {sorted(os.listdir(WT))}")
         if not DRY:
-            shutil.rmtree(WT)
+            os.makedirs(os.path.dirname(to), exist_ok=True)
+            shutil.move(WT, to)
     print(f"worktree dir now exists={os.path.isdir(WT)}")
 
 
