@@ -841,6 +841,8 @@ zz_ef_xch_settle_one = {
 	set_variable = { name = zz_ef_xo_xs value = scope:zz_ef_xch_e.var:zz_ef_rq_h }
 	scope:zz_ef_xch_e = { zz_ef_xr_$K$_xb_read = yes }
 	set_variable = { name = zz_ef_xo_xb value = scope:zz_ef_xch_e.var:zz_ef_rq_h }
+	scope:zz_ef_xch_e = { zz_ef_xr_$K$_xl_read = yes }
+	set_variable = { name = zz_ef_xo_xl value = { value = scope:zz_ef_xch_e.var:zz_ef_rq_h max = var:zz_ef_xo_xb } }
 	set_variable = { name = zz_ef_xo_a3 value = 0 }
 	set_variable = { name = zz_ef_xo_a1 value = 0 }
 	set_variable = { name = zz_ef_xo_a2 value = 0 }
@@ -957,8 +959,6 @@ zz_ef_xch_settle_one = {
 		# one without the second fee (Д.R9а.9), the rest with it
 		if = {
 			limit = { var:zz_ef_xo_p >= zz_ef_xq_mid }
-			scope:zz_ef_xch_e = { zz_ef_xr_$K$_xl_read = yes }
-			set_variable = { name = zz_ef_xo_xl value = { value = scope:zz_ef_xch_e.var:zz_ef_rq_h max = var:zz_ef_xo_xb } }
 			set_variable = { name = zz_ef_xo_a4 value = { value = var:zz_ef_xo_a subtract = var:zz_ef_xo_a1 subtract = var:zz_ef_xo_a2 subtract = var:zz_ef_xo_a3 } }
 			set_variable = { name = zz_ef_xd_a value = { value = var:zz_ef_xo_a4 multiply = var:zz_ef_xo_xl } }
 			if = {
