@@ -44,8 +44,11 @@ function Hook-ShotSteps($own) {
 # The console is a tool (tools_gui_scale, not GUI.scale): its boxes are measured at 2560x1440 from the top left and move
 # by 1440 / the window's height only (anchor "tlT").
 if ($Screens -and $Screens["console"]) { $Screens["console"].anchor = "tlT"; $Screens["console"].anchor2 = "tlT" }
+# «Конец игры»: the left button of its bottom row keeps its left end -- its box moves up from the bottom only (anchor
+# "bX": x as measured; on 1920x1080 a box moved from the left reached the button's text and was not seen as flat).
+if ($Screens -and $Screens["gameover"]) { $Screens["gameover"].anchor = "bX" }
 function Scale-Px($x, $y, $anchor) {
-    $s = if ($anchor -match 'T') { 1.0 } else { $script:UiScale }
+    $s = if ($anchor -cmatch 'T') { 1.0 } else { $script:UiScale }
     $g = Get-Process -Name "victoria3" -ErrorAction SilentlyContinue | Select-Object -First 1
     if ($g -and $g.MainWindowHandle -ne [IntPtr]::Zero) {
         $r = New-Object W+RECT
@@ -56,5 +59,6 @@ function Scale-Px($x, $y, $anchor) {
     if (-not $anchor -or [math]::Abs($s - 1.0) -lt 0.001) { return @($x, $y) }
     $ax = if ($anchor -match 'r') { 2560 } elseif ($anchor -match 'l') { 0 } else { 1280 }
     $ay = if ($anchor -match 'b') { 1440 } elseif ($anchor -match 't') { 0 } else { 720 }
-    return @(($ax + ($x - $ax) * $s), ($ay + ($y - $ay) * $s))
+    $nx = if ($anchor -cmatch 'X') { $x } else { $ax + ($x - $ax) * $s }
+    return @($nx, ($ay + ($y - $ay) * $s))
 }
