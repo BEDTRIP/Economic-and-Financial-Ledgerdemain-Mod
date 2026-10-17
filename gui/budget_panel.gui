@@ -1,13 +1,13 @@
-# COPY-PASTED FOR NOW
-@panel_width_minus_10 = 1060			# used to be 450
-@panel_width = 1080  				# used to be 460
-@panel_width_half = 540				# used to be 230
-@panel_width_plus_10 = 1090  		# used to be 470
-@panel_width_plus_14 = 1094			# used to be 474
-@panel_width_plus_14_half = 547		# used to be 237
-@panel_width_plus_20 = 1100			# used to be 480
-@panel_width_plus_30 = 1110			# used to be 490
-@panel_width_plus_70 = 1150			# used to be 530
+# vanilla side panel constants + 613: the window is twice the vanilla side panel (D.R10.10)
+@panel_width_minus_10 = 1143
+@panel_width = 1153
+@panel_width_half = 576
+@panel_width_plus_10 = 1163
+@panel_width_plus_14 = 1167
+@panel_width_plus_14_half = 583
+@panel_width_plus_20 = 1173
+@panel_width_plus_30 = 1183
+@panel_width_plus_70 = 1223
 
 types budget
 {
@@ -46,7 +46,32 @@ types budget
 					position = { 0 -4 }
 					parentanchor = hcenter
 
-					using = sidepanel_top_header
+					# sidepanel_top_header with the ornament stretched whole: with vanilla's
+					# spriteborder 280 only a 10 px strip of it stretches and the pattern breaks
+					background = {
+						using = top_header_bg
+
+						modify_texture = {
+							texture = "gfx/interface/backgrounds/top_header_frame_mask.dds"
+							spriteType = Corneredstretched
+							texture_density = 2
+							spriteborder = { 80 0 }
+							blend_mode = alphamultiply
+						}
+						modify_texture = {
+							texture = "gfx/interface/backgrounds/top_header_dec.dds"
+							spriteType = Corneredstretched
+							texture_density = 2
+							spriteborder = { 0 0 }
+							blend_mode = overlay
+						}
+					}
+					background = {
+						texture = "gfx/interface/backgrounds/top_header_frame.dds"
+						spriteType = Corneredstretched
+						texture_density = 2
+						spriteborder = { 80 0 }
+					}
 				}
 
 				block "header_texts" {
