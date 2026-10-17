@@ -1,18 +1,19 @@
 # COPY-PASTED FOR NOW
-@panel_width_minus_10 = 530			# used to be 450
-@panel_width = 540  				# used to be 460
-@panel_width_half = 270				# used to be 230
-@panel_width_plus_10 = 550  		# used to be 470
-@panel_width_plus_14 = 554			# used to be 474
-@panel_width_plus_14_half = 277		# used to be 237
-@panel_width_plus_20 = 560			# used to be 480
-@panel_width_plus_30 = 570			# used to be 490
-@panel_width_plus_70 = 610			# used to be 530
+@panel_width_minus_10 = 1060			# used to be 450
+@panel_width = 1080  				# used to be 460
+@panel_width_half = 540				# used to be 230
+@panel_width_plus_10 = 1090  		# used to be 470
+@panel_width_plus_14 = 1094			# used to be 474
+@panel_width_plus_14_half = 547		# used to be 237
+@panel_width_plus_20 = 1100			# used to be 480
+@panel_width_plus_30 = 1110			# used to be 490
+@panel_width_plus_70 = 1150			# used to be 530
 
 types budget
 {
 	type budget_panel = default_block_window {
 		name = "budget_panel"
+		size = { 1226 0 }  # probe R10 step 1: twice the vanilla side panel (613)
 
 		blockoverride "animation_state_block" {
 			state = {
