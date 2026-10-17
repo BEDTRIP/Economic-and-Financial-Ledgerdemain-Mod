@@ -35,6 +35,70 @@ types budget
 			text = "BUDGET_PANEL_TITLE"
 		}
 
+		# vanilla window_header (block_windows.gui) at the panel's doubled width: its constants
+		# belong to block_windows.gui, so the header stays 560 wide without this; D.R10.11
+		blockoverride "window_header" {
+			widget = {
+				size = { @panel_width_plus_20 102 }
+
+				widget = {
+					size = { @panel_width_plus_30 106 }
+					position = { 0 -4 }
+					parentanchor = hcenter
+
+					using = sidepanel_top_header
+				}
+
+				block "header_texts" {
+					flowcontainer = {
+						parentanchor = center
+
+						block "header_texts_before" {}
+
+						textbox = {
+							using = header_font_fancy
+							using = header_font_fancy_size
+
+							block "window_header_name" {
+								raw_text = "Default Window Name"
+							}
+
+							align = hcenter|nobaseline
+							autoresize = yes
+
+							block "header_texts_maximum_size" {
+								maximumsize = { 395 70 }
+							}
+
+							multiline = yes
+							fontsize_min = 17
+
+							default_format = "#header"
+						}
+					}
+				}
+
+				block "entire_back_button" {
+					back_button_large = {
+						position = { 8 30 }
+						block "header_back_button" {
+							onclick = "[InformationPanelBar.OpenPreviousPanel]"
+							input_action = "back"
+						}
+					}
+				}
+
+				close_button_large = {
+					position = { -8 30 }
+					parentanchor = right
+					block "header_close_button" {
+						onclick = "[InformationPanelBar.ClosePanel]"
+					}
+					shortcut = "close_window"
+				}
+			}
+		}
+
 		blockoverride "map_modes_button" {
 			map_modes_single_button_minimized = {
 				datacontext = "[BudgetPanel.GetMapModeList]"
@@ -47,6 +111,7 @@ types budget
 		{
 			### TOP PART
 			top_illu = {
+				size = { @panel_width_plus_20 100 }
 				blockoverride "illu" {
 					texture = "gfx/interface/illustrations/top_illus/top_illu_budget.dds"
 				}
