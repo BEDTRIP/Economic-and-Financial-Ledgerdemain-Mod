@@ -160,3 +160,4 @@ _archive/<механизм>/
 | Четыре типа Ротшильдов E&F (`company_Rothschild_Bank_fra/ger/aus/ita`; Д.R9а.5) | `ef_rothschild_types/` | определения типов; `add_company` и блоки компаний в истории; ветки `establish_bank_and_ef_compagnie`; строки списков; запасы металла E&F; подписи; названия × 11 языков; 4 иконки; уровни в истории — на `_gbr` |
 | Проба R9а.1 `ld_probe_rhq.1` (уровни компании в чужой стране, региональный штаб скриптом; Д.R9а.8) | `ld_probe_rhq/` | файл пробы целиком |
 | Правила игры E&F `unique_companies_banks` / `_newspapers` (`TRY_REPLACE:` несуществующей записи, флаги не читаются) | `ef_unique_companies_rules/` | файл `common/game_rules/00_EF_unique_companies_game_rules.txt` целиком |
+| Копии ванильных панелей E&F `maj/` (18 файлов, 360 типов и шаблонов, игра их не применяла; R12 Л.2, Д.R12.1) | `ef_gui_maj_copies/` | папка `gui/ef_dev_and_custom_windows/maj/` целиком |

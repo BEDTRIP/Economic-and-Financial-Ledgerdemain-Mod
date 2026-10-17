@@ -44,13 +44,10 @@ GUI-тип регистрирует первый файл по имени (ASCII
 - `gui/ef_dev_and_custom_windows/ef_custom_windows.gui` (2835 строк) — одно окно `default_popup` `gold_reserve_window`
   (резервы металла); открывается `ExecuteConsoleCommand('gui.createwidget …')` +
   `GetVariableSystem.Toggle('gold_reserve_window')`.
-- `gui/ef_dev_and_custom_windows/maj/Essential/*.gui` (5: `building_browser_panel`, `building_details_panel`,
-  `goods_panel`, `goods_state_panel`, `production_methods`) и `maj/NonEssential/*.gui` (13: `map_list_panel`,
-  `outliner_pinnable_types`, `graph_tooltips`, …) — копии ванильных; игра не применяет ни один их тип и шаблон (360,
-  «already registered» в `gui.log`: тип регистрирует первый файл по имени, ванильный и CMF — ближе к корню `gui/`); что
-  с ними — R12 Л.2; устаревшие копии без правок E&F (`map_markers`, `custom_tooltip`, `military_formation_panel`,
-  `popups`, `right_click_menu`, `frontend/shared/lists.gui`) — в `_archive/ef_outdated_vanilla_gui/`, грузятся ванильные
-  1.13.
+- Копии ванильных панелей E&F (`maj/`, 18 файлов, 360 типов и шаблонов — игра их не применяла) — в
+  `_archive/ef_gui_maj_copies/` (R12 Л.2, Д.R12.1); устаревшие копии без правок E&F (`map_markers`, `custom_tooltip`,
+  `military_formation_panel`, `popups`, `right_click_menu`, `frontend/shared/lists.gui`) — в
+  `_archive/ef_outdated_vanilla_gui/`, грузятся ванильные 1.13.
 
 ### Файлы проекта (`ld_*`, переопределяют типы E&F; грузятся раньше или вместо оригинала)
 - `gui/ld_economy_panel.gui` (руками) — `budget_panel_economy_panel_content` (:10, оригинал из

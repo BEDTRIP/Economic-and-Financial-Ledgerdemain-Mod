@@ -1,4 +1,4 @@
-"""Отличия файлов форка от ванили (ФК2, шаг 4): копии ванильных GUI в `gui/ef_dev_and_custom_windows/maj/`.
+"""Отличия файлов форка от ванили (ФК2, шаг 4): копии ванильных GUI (были в `gui/ef_dev_and_custom_windows/maj/`, теперь `_archive/ef_gui_maj_copies/`).
 
     python tools/ld_vanilla_diff.py <путь в форке> [<путь в ванили>] [--hunks N]
 
