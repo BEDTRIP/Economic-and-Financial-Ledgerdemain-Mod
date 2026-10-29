@@ -12,4 +12,4 @@ v3 gfx build --mod .                               # все карточки →
 v3 gfx check gfx/interface/icons/goods_icons/<имя>.dds
 ```
 
-Виды, их размеры и доводка — `vic3_tools/vic3tools/gfx/cards.py`; разбор ванили — `этапы/R10.md`, «Виды графики».
+Виды, их размеры и доводка — `vic3_tools/vic3tools/gfx/cards.py`; разбор ванили — этап R10 в узле (`../docs/этапы/Этап R10. Интерфейс и графика.md`), «Виды графики».

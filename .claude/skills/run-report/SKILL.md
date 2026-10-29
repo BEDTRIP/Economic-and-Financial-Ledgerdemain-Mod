@@ -21,7 +21,7 @@ description: The run report of the fork «E&F: Ledgerdemain» — one HTML page,
 1. Скрипт и форк на ПК — свежие: `checkout("main")` (сверить хеш).
 2. На ПК — данные и страница:
    `py_tool("ld_run_report", ["runs/<id>", "runs/<id>/report.html", "--until", "1847.12", "--data", "runs/<id>/report.jsonl"])`.
-   Прогоны этапов — до конца 1847 (`план.md` форка): `--until 1847.12`, чтобы прогоны сравнивались по годам.
+   Прогоны этапов — до конца 1847 (план узла `../docs/план.md`, «Как идёт работа»): `--until 1847.12`, чтобы прогоны сравнивались по годам.
 3. Данные сюда: `python3 tools/pc_bridge/pc_fetch.py runs/<id>/report.jsonl <scratchpad>/report_<id>.jsonl`; база —
    так же её `report.jsonl` (прошлый прогон этапа; у старых прогонов без файла — сначала шаг 2 по ним).
 4. Страница здесь: `python3 tools/ld_run_report.py --from-data <scratchpad>/report_<id>.jsonl <scratchpad>/report_<id>.html
