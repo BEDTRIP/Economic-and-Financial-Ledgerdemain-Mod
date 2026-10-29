@@ -1,4 +1,4 @@
-"""Construction by year from the fork's EFZ lines (форк, R9; docs/construction.md форка, «Логи»).
+"""Construction by year from the fork's EFZ lines (форк, R9; docs/код/construction.md форка, «Логи»).
 
 Usage:  py tools/ld_psc_sum.py <run>/eflog.txt [--countries "Великобритания,Великая Цин"] [--top 8]
 

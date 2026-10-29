@@ -20,4 +20,4 @@ Template '…' already registered at …» (тип регистрирует пе
   `tools/ld_vanilla_diff.py` (путь к копии — здесь).
 
 **Удалено из живых файлов:** папка `gui/ef_dev_and_custom_windows/maj/` целиком (здесь, по исходным путям); строки
-`docs/mechanisms.md`, `docs/interface.md`.
+`docs/код/mechanisms.md`, `docs/код/interface.md`.

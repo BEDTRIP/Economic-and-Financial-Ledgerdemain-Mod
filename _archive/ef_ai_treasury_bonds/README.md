@@ -18,7 +18,7 @@
 | `common/script_values/00_economic_scripted_value.txt` | `gold_reserves_10`, `gold_reserves_var_10`, `private_bank_funds_25` — читали только архивные (здесь) |
 | `common/scripted_effects/10_new_country_var.txt` | 20 стартовых `set_variable` слотов ИИ (`ai_buy_bond_N_on`, `ai_selle_bond_maturity_yers_N`) и 50 — слотов частных банков без читателя (`ai_privat_bank_bond_value_N_new`, `ai_privat_bank_buyer_slot_N`; здесь) |
 | `common/scripted_effects/ld_bond_ledger.txt` (генерат `regen_ef_bond_ledger.py`) | `zz_ef_bl_slot_1..10`, `zz_ef_bl_slot_free`, `zz_ef_pb_slot_1..25`, `zz_ef_pb_no_seller`, `zz_ef_bl_register` и их вызовы в `zz_ef_bond_ledger_step` (здесь) |
-| `docs/entry-points.md` | строка лога `EFP` (покупка банков без продавца) |
+| `docs/код/entry-points.md` | строка лога `EFP` (покупка банков без продавца) |
 
 Осталось (кусок 2 — R6.9): слоты игрока E&F (`buy_bond_N`, `bond_maturity_N`, кнопки `00_financial_scripted_guis.txt`),
 окно E&F и наша панель с таблицами слотов ИИ (`ai_seller_country_general_N`, `ai_total_bond_value_N`,

@@ -4,10 +4,10 @@
    `PSC_*`, `<cur>`/`<lang>` — любое имя).
 2. Каждый путь в обратных кавычках в `docs/` (начинается с `common/`, `gui/`, `events/`, `localization/`) существует
    (маски — совпадают хотя бы с одним файлом), строка `путь:N` — не дальше конца файла.
-3. Каждая вики-ссылка `[[Имя]]` / `[[Имя|подпись]]` в `docs/`, `понятия/`, `ваниль/`, `этапы/`, `план.md`,
-   `решения.md` ведёт на заметку `понятия/Имя.md` (или другой `.md` форка с таким именем); заметка понятия без входящих
+3. Каждая вики-ссылка `[[Имя]]` / `[[Имя|подпись]]` в `docs/` (кроме `docs/история/`), `ваниль/`, `этапы/`, `план.md`,
+   `решения.md` ведёт на заметку `docs/понятия/Имя.md` (или другой `.md` форка, узла `../docs/` или источников `../vic3_mods_out/docs/`); заметка понятия без входящих
    ссылок — тоже ошибка.
-4. Заметка понятия (`понятия/`, кроме `_*` и заметок с тегом `обзор`) — разделы «## Подсказка», «## Рабочее»,
+4. Заметка понятия (`docs/понятия/`, кроме `_*` и заметок с тегом `обзор`) — разделы «## Подсказка», «## Рабочее»,
    «### Целевое значение», «### Что в коде» по порядку; подсказка не пустая, без кода в обратных кавычках и номеров
    решений, абзац и пункт списка — одной строкой, как текст подсказки в игре (она уйдёт в игру как есть).
 
@@ -49,7 +49,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--fork", default=FORK)
     a = ap.parse_args()
-    docs = os.path.join(a.fork, "docs")
+    docs = os.path.join(a.fork, "docs", "код")
     refs = []
     for f in sorted(os.listdir(docs)):
         if f.endswith(".md"):
@@ -94,7 +94,7 @@ HEADS = ("## Подсказка", "## Рабочее", "### Целевое зн�
 
 def notes_format(fork):
     """Заметки понятий: разделы по порядку; подсказка без кода и номеров решений."""
-    d = os.path.join(fork, "понятия")
+    d = os.path.join(fork, "docs", "понятия")
     bad, n = [], 0
     for f in sorted(os.listdir(d)) if os.path.isdir(d) else []:
         if not f.endswith(".md") or f.startswith("_"):
@@ -129,11 +129,16 @@ def wiki(fork):
     for dp, dn, fn in os.walk(fork):
         dn[:] = [d for d in dn if d not in (".git", "common", "gui", "events", "localization", "gfx", "_archive")]
         names.update(f[:-3] for f in fn if f.endswith(".md"))
+    # заметки соседей по хранилищу Obsidian: узел vic3 (решения, этапы) и документы внешних источников (ваниль)
+    for nb in (os.path.join(fork, "..", "docs"), os.path.join(fork, "..", "vic3_mods_out", "docs")):
+        for dp, dn, fn in os.walk(nb):
+            dn[:] = [d for d in dn if d != ".git"]
+            names.update(f[:-3] for f in fn if f.endswith(".md"))
     srcs = [os.path.join(fork, "план.md"), os.path.join(fork, "решения.md")]
-    for d in ("docs", "понятия", "ваниль", "этапы"):
-        dd = os.path.join(fork, d)
-        if os.path.isdir(dd):
-            srcs += [os.path.join(dd, f) for f in sorted(os.listdir(dd)) if f.endswith(".md")]
+    for d in ("docs", "ваниль", "этапы"):  # docs/ — без истории: её текст не переписывают
+        for dp, dn, fn in os.walk(os.path.join(fork, d)):
+            dn[:] = sorted(x for x in dn if x != "история")
+            srcs += [os.path.join(dp, f) for f in sorted(fn) if f.endswith(".md")]
     bad, seen = [], set()
     for src in srcs:
         if not os.path.exists(src):
@@ -144,12 +149,12 @@ def wiki(fork):
             if "\n" in m.group(0):
                 bad.append(f"{rel}: ссылка через перенос строки — {m.group(0)[:40]!r}")
                 continue
-            n = m.group(1).strip()
+            n = m.group(1).strip().rstrip("\\").split("/")[-1]  # хвост пути — по имени файла; `\|` — подпись в таблице
             if n not in names:
                 bad.append(f"{rel}: [[{n}]]")
             elif n != own:
                 seen.add(n)
-    notes = os.path.join(fork, "понятия")
+    notes = os.path.join(fork, "docs", "понятия")
     orphans = []
     if os.path.isdir(notes):
         orphans = [f[:-3] for f in sorted(os.listdir(notes))

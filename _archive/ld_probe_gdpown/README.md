@@ -13,4 +13,4 @@
 `fraction_of_levels_owned_by_country`, `country_ownership_fraction`; у компании — `company_owned_levels`,
 `company_employed_levels`; перебора зданий компании нет (`every_scope_building` — только страна и штат).
 
-**Вырезано:** `events/ld_probe_gdpown_events.txt` (здесь), строка `EFZ` таблицы логов `docs/entry-points.md`.
+**Вырезано:** `events/ld_probe_gdpown_events.txt` (здесь), строка `EFZ` таблицы логов `docs/код/entry-points.md`.

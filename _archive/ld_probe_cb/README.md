@@ -18,4 +18,4 @@
 - Ошибок по файлам пробы нет.
 
 **Вырезано:** `common/company_types/ld_probe_cb_company.txt`, `common/scripted_effects/ld_probe_cb.txt`,
-`events/ld_probe_cb_events.txt` (здесь), абзац пробы в `docs/central-bank.md`.
+`events/ld_probe_cb_events.txt` (здесь), абзац пробы в `docs/код/central-bank.md`.

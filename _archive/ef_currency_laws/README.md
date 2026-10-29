@@ -9,7 +9,7 @@
 **Чем заменено:** R8в, шаг 5 — валюта — данные (`var:zz_ef_cur = flag:<cur>`, Д.R8а.2): история и ввод валюты ставят
 переменную (`set_variable` + `zz_ef_cur_name_set`), новая страна без банка — снимает её, проверки E&F —
 `var:zz_ef_cur ?= flag:<cur>`; союз хранит свою валюту члена (`var:zz_ef_mu_cur_own`). Список валют генераторов —
-`../vic3_mods/tools/data/ld_currencies.txt`. `docs/currencies.md`.
+`../vic3_mods/tools/data/ld_currencies.txt`. `docs/код/currencies.md`.
 
 **Удалено из живых файлов:**
 - `common/laws/01_ef_currency_type.txt` — целиком (здесь);

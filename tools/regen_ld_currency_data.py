@@ -17,7 +17,7 @@
   на металл (`var:zz_ef_rq_conv`) для оценки требований (`ld_claims.txt`, Д.R8а.4, Д.R8а.5);
 - национальные валюты (страна без своей): `zz_ef_cur_set` зовёт `zz_ef_cur_noun_set`, `currency_name` — ветки
   `zz_ef_cur_nat_<слово>` (`tools/regen_ld_currency_national.py`);
-- `docs/currency-table.md` — таблица: ключ, название (англ., рус.), ISO, страны и паритет на 1836.
+- `docs/код/currency-table.md` — таблица: ключ, название (англ., рус.), ISO, страны и паритет на 1836.
 
 ISO — справочник ниже (для исторических валют без кода — «—»). `--check` — только сравнить, код выхода 1 при расхождениях.
 """
@@ -36,7 +36,7 @@ CHECK = ld_gen.CHECK
 HIST = "common/history/global/99_ef_history_global_variable.txt"
 CUSTOM = "common/customizable_localization/00_ef_localization_ custom.txt"
 VAR_FILE = "common/scripted_effects/ld_currency_var.txt"
-TABLE = "docs/currency-table.md"
+TABLE = "docs/код/currency-table.md"
 NAMES = "localization/{0}/01_ef_currency_name_localization_l_{0}.yml"
 
 ISO = {
@@ -106,7 +106,7 @@ def var_text(curs):
          "# (ld_monetary_union.txt); no var -- no E&F currency, a national word (Д.R8а.2, С17; E&F's currency laws --",
          "# _archive/ef_currency_laws/, R8в). Called at the start (ld_start_setup.txt),",
          "# a new country's init, every January (zz_ef_money_model_monthly_step), after an introduction; read by E&F's and",
-         "# the model's per-currency ladders and currency_name / currency_symbol. Table: docs/currency-table.md.",
+         "# the model's per-currency ladders and currency_name / currency_symbol. Table: docs/код/currency-table.md.",
          "zz_ef_cur_set = {"]
     # R3а (8.10): no currency of its own -- a national one by the capital's region (ld_currency_national.txt)
     L.append("\tzz_ef_cur_names = yes")
@@ -186,7 +186,7 @@ def custom_text(curs):
 def table_text(curs, hist, en, ru):
     L = ["# Таблица валют", "",
          "Сгенерирована `tools/regen_ld_currency_data.py` из законов, истории и локализации форка — руками не",
-         "править. Переменная валюты страны — `var:zz_ef_cur` (`flag:<ключ>`), `docs/currencies.md`. Паритет — металл на",
+         "править. Переменная валюты страны — `var:zz_ef_cur` (`flag:<ключ>`), `docs/код/currencies.md`. Паритет — металл на",
          "национальную единицу из истории E&F на 1.1.1836 (курс между валютами и подписи; в деньгах движка не участвует, Д.R1б.1).",
          "Название в игре — «<прилагательное страны> <слово>» (эмитент — сама страна; `currency_name`); столбцы «название» —",
          "названия E&F по ключу (окна E&F).",

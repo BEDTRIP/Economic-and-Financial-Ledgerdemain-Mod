@@ -2,7 +2,7 @@
 
 Вынуто R9б.4 по Д.R9б.1 (исполняет Д.R4а.9, Д.R5.11): центральный банк — модификатор страны `has_central_bank`, не
 здание; что здание делало своими методами — чеканка, база закупки металла, выпуск товара «облигации» — теперь от размера
-ЦБ (`common/script_values/ld_cb_size_values.txt`, `common/scripted_effects/ld_cb_size.txt`; `docs/central-bank.md`).
+ЦБ (`common/script_values/ld_cb_size_values.txt`, `common/scripted_effects/ld_cb_size.txt`; `docs/код/central-bank.md`).
 
 **Что делало здание.** Государственное здание в столице (`ownership_type = no_ownership`, группа `bg_bank` —
 `is_government_funded`, зарплаты из бюджета, прибыль — казне), 75 рабочих мест на уровень (25 бюрократов, 50 клерков).

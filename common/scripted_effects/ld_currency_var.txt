@@ -3,7 +3,7 @@
 # (ld_monetary_union.txt); no var -- no E&F currency, a national word (Д.R8а.2, С17; E&F's currency laws --
 # _archive/ef_currency_laws/, R8в). Called at the start (ld_start_setup.txt),
 # a new country's init, every January (zz_ef_money_model_monthly_step), after an introduction; read by E&F's and
-# the model's per-currency ladders and currency_name / currency_symbol. Table: docs/currency-table.md.
+# the model's per-currency ladders and currency_name / currency_symbol. Table: docs/код/currency-table.md.
 zz_ef_cur_set = {
 	zz_ef_cur_names = yes
 	if = { limit = { zz_ef_logs_on = yes } debug_log = "EFM|[TimeKeeper.GetCurrentDate.GetString]|[THIS.GetCountry.GetNameNoFormatting]|cur_nat|[THIS.GetCountry.GetCustom('currency_name')]|code [THIS.GetCountry.GetCustom('currency_code')]|sign [THIS.GetCountry.GetCustom('currency_symbol')]" }

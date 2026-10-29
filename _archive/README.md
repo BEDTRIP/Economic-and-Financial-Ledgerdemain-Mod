@@ -5,13 +5,13 @@
 она не попадает. Не нужен — папку механизма можно удалить.
 
 **Правила переноса:**
-- Мёртвый или выключенный механизм (`docs/mechanisms.md`) не удаляется, а **переносится** сюда вместе со своими вызовами
+- Мёртвый или выключенный механизм (`docs/код/mechanisms.md`) не удаляется, а **переносится** сюда вместе со своими вызовами
   и интерфейсом: вырезанное — по исходным путям (только вырезанное, в начале — откуда), `README.md` механизма — что
   делал, кто вызывал, переменные, интерфейс и **точный список удалённых из живых файлов вызовов и элементов GUI** (файл,
   ключ, текст), чтобы вернуть.
 - Переносить, только если имени в живых файлах не осталось: `python ../vic3_mods/tools/ld_index.py`, затем
   `python ../vic3_mods/tools/ld_docs_check.py`. Живой код на `_archive/` не ссылается.
-- В том же коммите — строка в таблице ниже, строка реестра `docs/mechanisms.md`, документ подсистемы и заметка понятия.
+- В том же коммите — строка в таблице ниже, строка реестра `docs/код/mechanisms.md`, документ подсистемы и заметка понятия.
 
 Устройство папки механизма:
 
@@ -140,8 +140,8 @@ _archive/<механизм>/
 | Пересчёт резервов подданного в металл якоря `zz_ef_anchor_metal_step` | `ld_anchor_metal_conversion/` | определение и вызов в `zz_ef_anchor_update` (`ld_anchor.txt`) |
 | Возврат металла ушедшего ЦБ-штата `zz_ef_cb_state_owner_step` (металл — счёт страны, Д.R4а.2) | `ld_cb_state_owner/` | определение и шапка `ld_subject_metal.txt`; вызов в `zz_ef_money_model_step` (`ld_money_model.txt`) |
 | Банкротство ЦБ E&F `central_bank_bankruptcy` (вечное: признак входил в своё же условие; Д.R4а.6) | `ef_central_bank_bankruptcy/` | определение из `01_financial_scripted_effects.txt`; блок вызова в `01_economic_scripted_effects.txt` |
-| Проба R4а.1 (Р25): компания скриптом `company_ld_probe_cb` | `ld_probe_cb/` | три файла пробы целиком; абзац в `docs/central-bank.md` |
-| Проба R4б.1 (Р26): субъект-банк на компании и в контейнере, уровни «Банка» компании из окна, цена карт | `ld_probe_bk/` | семь файлов пробы целиком; абзац в `docs/banks.md` |
+| Проба R4а.1 (Р25): компания скриптом `company_ld_probe_cb` | `ld_probe_cb/` | три файла пробы целиком; абзац в `docs/код/central-bank.md` |
+| Проба R4б.1 (Р26): субъект-банк на компании и в контейнере, уровни «Банка» компании из окна, цена карт | `ld_probe_bk/` | семь файлов пробы целиком; абзац в `docs/код/banks.md` |
 | Выпуск товаров-«акций» E&F: методы «частного владения», хук смены метода, годовой перебор, выход стройсектора PSC, переключатель методов финцентра, «акции» в потребности населения (Д.R4б.8) | `ef_stock_goods_output/` | 49 строк PMG в `buildings/ef_*.txt`, 8 строк PSC, вызовы в `00_on_action_main.txt`, `09_introduction_building_lvl.txt`, `ld_start_setup.txt`, on_action смены метода, 4 записи потребности |
 | Методы бирж «акций» финцентра, деление комиссии по владельцам финцентра (Д.R4б.5, Д.R4б.7) | `ef_fc_stock_exchange_pm/` | 4 группы и 8 методов из `16_ef_financial_centre.txt`; 2 значения из `ld_exchange_trade_values.txt`; `zz_ef_fc_activate_pm` из генерата `ld_fc_types.txt` |
 | Ежегодная раздача ИИ банковских компаний E&F с подарком уровней (`establish_bank_and_ef_compagnie` в годовом пульсе, Д.R4б.3) | `ef_bank_company_yearly/` | блок `if is_ai` в `central_bank_ef_on_yearly_pulse_country` (`00_on_action_main.txt`) |
@@ -149,7 +149,7 @@ _archive/<механизм>/
 | ИИ-кредит ЦБ казне E&F `ai_credit_at_central_bank` / `ai_refund_central_bank` (Д.R5.10; + `zz_ef_cbl_take_v`, `zz_ef_cbl_target_share`, `gold_reserve_compared_gold_reserves_limit`, `bond_producted_war`) | `ef_ai_cb_credit/` | два определения из `01_financial_scripted_effects.txt`; блок `if is_ai` с вызовами в `00_on_action_main.txt` (месячный хаб); четыре значения |
 | Банкротство компаний E&F `bankrupt_company` (удаление компании с процветанием < 100 в кризис; Д.R6.4) | `ef_bankrupt_company/` | определение (3170 строк) и два вызова в последствиях кризисов `01_financial_scripted_effects.txt` |
 | Частная стройка пула из вкладов населения → требования «частный сектор» (`zz_ef_f_dep_build`, `zz_ef_pop_claims_private`; Д.R6.13) | `ld_dep_build/` | блок стройки из вкладов в `zz_ef_pop_deposits_step` (`ld_money_model.txt`), начальное значение `zz_ef_pop_claims_private` в `zz_ef_registry_init` (`ld_ledger.txt`) |
-| Проба R6.1 `ld_probe_co.1` (компания — ключ карты и списка, исчезновение компании, прибыль и касса ШК из окна; Д.R6.14) | `ld_probe_co/` | шесть файлов пробы целиком; абзац в `docs/exchange-companies.md` |
+| Проба R6.1 `ld_probe_co.1` (компания — ключ карты и списка, исчезновение компании, прибыль и касса ШК из окна; Д.R6.14) | `ld_probe_co/` | шесть файлов пробы целиком; абзац в `docs/код/exchange-companies.md` |
 | Капитализация по выпуску товаров-«акций» (`zz_ef_cap_qty/snap_*`) и срез выпуска по грамотности богатых (`zz_ef_stock_issue_literacy`; Д.R6.12) | `ld_stock_goods_capitalization/` | 12 значений выпуска, разбивка снимка по выпуску, запасной ход E&F-количеств, модификатор и его значения, 2 ключа локализации × 11 языков |
 | Покупки облигаций ИИ E&F: казна `ai_buy_bond_N`, частные банки `ai_privat_bank_bond_N`, погашение `ai_bond_maturity_N`, слоты реестра (Д.R6.6) | `ef_ai_treasury_bonds/` | 90 определений E&F, 110 сообщений, 14 значений, 20 стартовых переменных, 38 записей реестра, вызов в годовом хабе |
 | Здание ЦБ E&F `building_bank`: уровни по ВВП (переключатель `macro_facilities_bc`), методы чеканки и политики, выпуск «облигаций», вход металла, создание и снос (R9б.4, Д.R9б.1) | `ef_central_bank_building/` | файлы здания, методов, групп, `ld_cm_bank_ownership.txt`, 7 иконок методов; группа `bg_bank`; модификаторы `modifier_desactive_bank`, `currency_demande`, `zz_ef_cb_metal_buy`; условия и создание / снос здания в `09_introduction_building_lvl.txt`, `00_on_action_main.txt`, `ld_cb_law.txt`, `01_economic_scripted_effects.txt`, `00_ef_custom_trigger.txt`, `ld_metal_accounts*.txt`, `ld_cb_bond_issuance*.txt`; ключи локализации (11 языков) — список в README |

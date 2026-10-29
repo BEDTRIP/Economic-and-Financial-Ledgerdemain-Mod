@@ -10,7 +10,7 @@
 
 **Чем заменено:** R8в, шаг 4 (Д.R8в.13, Д.R8в.16) — статья «Монетарная интеграция»
 (`common/treaty_articles/ld_monetary_integration.txt`) и записи `ld_latin_union_je` / `ld_scandinavian_union_je`
-(`common/journal_entries/ld_monetary_union_je.txt`); `docs/currencies.md`, «Валютные союзы».
+(`common/journal_entries/ld_monetary_union_je.txt`); `docs/код/currencies.md`, «Валютные союзы».
 
 **Удалено из живых файлов** (вырезанное — здесь по исходным путям):
 - `common/treaty_articles/16_latin_monetary_union_treaty.txt`, `17_scandinavian_monetary_union_treaty.txt` — целиком;

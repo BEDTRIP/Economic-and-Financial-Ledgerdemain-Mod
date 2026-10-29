@@ -44,7 +44,7 @@ def main():
             cache[rel] = t.split("\n")
         return cache[rel]
     ok = bad = 0
-    docs = os.path.join(ld_gen.FORK, "docs")
+    docs = os.path.join(ld_gen.FORK, "docs", "код")
     for fn in sorted(os.listdir(docs)):
         if not fn.endswith(".md"):
             continue

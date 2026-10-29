@@ -7,7 +7,7 @@ description: The run report of the fork «E&F: Ledgerdemain» — one HTML page,
 
 Страница одинакова для всех прогонов (пользователь 12.10: «чтоб я тоже понимал, что происходит»): тот же порядок
 разделов, те же графики, в начале раздела — что показано и какая норма; сводка «Коротко» — по фиксированным порогам.
-Скрипт — `tools/ld_run_report.py` (что читает — его docstring); строки лога, на которых он стоит, — `docs/entry-points.md`
+Скрипт — `tools/ld_run_report.py` (что читает — его docstring); строки лога, на которых он стоит, — `docs/код/entry-points.md`
 форка, «Логи» (`EFW|all`, `EFV|mkt`, `EFJ|lvl`, `EFD|xch_month`, …).
 
 ## Когда

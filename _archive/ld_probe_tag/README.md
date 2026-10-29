@@ -8,4 +8,4 @@
 `zz_ef_iso2_<тег>` теперь пишет он.
 
 **Вырезано:** `events/ld_probe_tag_events.txt`, `localization/<11 языков>/ld_probe_tag_l_<язык>.yml` (здесь — английский);
-строка `EFZ` из таблицы логов `docs/entry-points.md`.
+строка `EFZ` из таблицы логов `docs/код/entry-points.md`.

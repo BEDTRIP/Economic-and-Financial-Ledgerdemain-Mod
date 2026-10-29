@@ -8,5 +8,5 @@ unique_companies_banks` — одно определение, это), ничег
 никто не читает (`v3 refs` — только сам файл). В игре правило не появлялось.
 
 **Удалено из живых файлов:** файл `common/game_rules/00_EF_unique_companies_game_rules.txt` целиком (здесь); строки в
-`docs/exchange-companies.md`, `docs/ef-core.md`, `docs/mechanisms.md`. **Вернуть:** вернуть файл, если в набор войдёт
+`docs/код/exchange-companies.md`, `docs/код/ef-core.md`, `docs/код/mechanisms.md`. **Вернуть:** вернуть файл, если в набор войдёт
 мод с этими правилами.

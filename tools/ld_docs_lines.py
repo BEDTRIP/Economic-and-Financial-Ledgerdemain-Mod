@@ -60,7 +60,7 @@ def main():
         names.setdefault(os.path.basename(p), p)
     mention = re.compile(r"((?:common|gui|events)/[^\s`:,;()]+\.(?:txt|gui)|\b[\w.\-]+\.(?:txt|gui))")
     num = re.compile(r"(:|(?<=\d)(?:,\s?|-|–|…|\.\.)|^)(\d+)")
-    docs = os.path.join(ld_gen.FORK, "docs")
+    docs = os.path.join(ld_gen.FORK, "docs", "код")
     total = 0
     for fn in sorted(os.listdir(docs)):
         if not fn.endswith(".md"):

@@ -21,9 +21,9 @@ but is never set» (error.log каждого запуска), сами блок�
 `ld_nr_deposits.txt`, `ld_monetary_policy.txt` — `has_variable`); из `zz_ef_game_started` — `OR` с датой (остался флаг);
 локализация `zz_pb_ef_overbuilt_brake`, `zz_pb_ef_overbuilt_brake_desc` (11 языков, `ld_pb_overbuild_l_*.yml`:
 «Construction Overcapacity (old)» / «Избыточные строительные мощности (старое)»); строка `zz_pb_ef_overbuild_v2` в
-таблице `docs/construction.md`; комментарий «old m0/m1/m2 rings … left to rot in old saves» в `ld_money_model.txt`.
+таблице `docs/код/construction.md`; комментарий «old m0/m1/m2 rings … left to rot in old saves» в `ld_money_model.txt`.
 Ранее: только сами блоки (здесь, по тем же путям); комментарий о `zz_ef_cap_ref0` /
-`zz_ef_cap_index0` в шапке `ld_capitalization_average.txt`; строка реестра `docs/mechanisms.md` «Очистка старых баз
-индекса»; строка таблицы `docs/exchange-companies.md`.
+`zz_ef_cap_index0` в шапке `ld_capitalization_average.txt`; строка реестра `docs/код/mechanisms.md` «Очистка старых баз
+индекса»; строка таблицы `docs/код/exchange-companies.md`.
 
 **Вернуть:** вставить блоки на прежние места (перед `zz_ef_ring_w_push = { M = agg0 }` и в конец годовой отметки; остальные — места указаны в файлах архива).

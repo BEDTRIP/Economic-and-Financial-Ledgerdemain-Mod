@@ -32,4 +32,4 @@
 
 **Вырезано:** `common/scripted_effects/ld_probe_bk.txt`, `common/script_values/ld_probe_bk_values.txt`,
 `common/on_actions/ld_probe_bk_on_actions.txt`, `common/scripted_guis/ld_probe_bk.txt`, `events/ld_probe_bk_events.txt`,
-`gui/ld_probe_bk.gui`, `gui/scripted_widgets/ld_probe_bk.txt` (здесь), абзац пробы в `docs/banks.md`.
+`gui/ld_probe_bk.gui`, `gui/scripted_widgets/ld_probe_bk.txt` (здесь), абзац пробы в `docs/код/banks.md`.
