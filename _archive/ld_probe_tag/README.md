@@ -1,3 +1,10 @@
+---
+type: code
+description: "Проба R8а.7: тег страны и `Localize(Concatenate(...))` в строке: событие ld_probe_tag.1 (только из консоли) писало в debug.log строку EFZ|<GetTagName>|<имя>|<Concatenate('a', 'b')>|<Localize(Concatenate('zz_ef_iso2_', тег))>| у GBR,…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ld_probe_tag/**"]
+---
 # Проба R8а.7: тег страны и `Localize(Concatenate(...))` в строке
 
 **Что делало:** событие `ld_probe_tag.1` (только из консоли) писало в `debug.log` строку `EFZ|<GetTagName>|<имя>|<Concatenate('a', 'b')>|<Localize(Concatenate('zz_ef_iso2_', тег))>|`

@@ -1,3 +1,10 @@
+---
+type: code
+description: "Значения PSC без ссылок: скрипт-значения PSC, которые ни один файл форка не читает (проверено grep по common/ events/ gui/ localization/, define: и GUI не используют)."
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/psc_unused_values/**"]
+---
 # Значения PSC без ссылок
 
 **Что делали:** скрипт-значения PSC, которые ни один файл форка не читает (проверено grep по `common/ events/ gui/ localization/`, `define:`

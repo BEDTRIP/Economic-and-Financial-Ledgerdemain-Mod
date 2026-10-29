@@ -1,3 +1,10 @@
+---
+type: code
+description: "Арбитраж частных банков E&F (`privat_bank_*_currency`): E&F: частные банки покупали валюту за металл при rise_base_rate, продавали за металл ЦБ при down_base_rate / revaluation_currency_target, после 1873 «атаковали» серебро…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_privat_bank_arbitrage/**"]
+---
 # Арбитраж частных банков E&F (`privat_bank_*_currency`)
 
 E&F: частные банки покупали валюту за металл при `rise_base_rate`, продавали за металл ЦБ при `down_base_rate` /

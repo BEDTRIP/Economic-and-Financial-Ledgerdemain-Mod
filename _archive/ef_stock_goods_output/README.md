@@ -1,3 +1,10 @@
+---
+type: code
+description: "Выпуск товаров-«акций» E&F (Д.R4б.8): методы «частного владения» (pmg_private_ownership_{manufacture,agricultural,mining,railroad}_stock, pm_private_ownership_majority_*_stock: выход «акций» 12,5 на рабочую…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_stock_goods_output/**"]
+---
 # Выпуск товаров-«акций» E&F (Д.R4б.8)
 
 **Что делало:** методы «частного владения» (`pmg_private_ownership_{manufacture,agricultural,mining,railroad}_stock`,

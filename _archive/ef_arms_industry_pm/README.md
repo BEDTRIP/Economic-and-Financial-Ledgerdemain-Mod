@@ -1,3 +1,10 @@
+---
+type: code
+description: "`pm_privately_owned_building_arms_industry`: ПМ частного владения арсеналом (unlocking_production_methods на ванильные ПМ арсенала, building_employment_capitalists_add = 100, building_capitalists_money_add = 5). Не…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_arms_industry_pm/**"]
+---
 # `pm_privately_owned_building_arms_industry`
 
 **Что делал:** ПМ частного владения арсеналом (`unlocking_production_methods` на ванильные ПМ арсенала, `building_employment_capitalists_add = 100`, `building_capitalists_money_add = 5`).

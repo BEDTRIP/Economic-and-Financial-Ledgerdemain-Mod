@@ -1,3 +1,10 @@
+---
+type: code
+description: "Объекты валют таблицы ЦБ E&F (`currency_import_export_value_<cur>_03`): 95 глобальных переменных-флагов (история common/history/global/00_ef_economic_global_variable.txt) — строки таблицы E&F «валюта в торговом балансе», через них таблица…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_cbfx_currency_objects/**"]
+---
 # Объекты валют таблицы ЦБ E&F (`currency_import_export_value_<cur>_03`)
 
 **Что делало:** 95 глобальных переменных-флагов (история `common/history/global/00_ef_economic_global_variable.txt`) —

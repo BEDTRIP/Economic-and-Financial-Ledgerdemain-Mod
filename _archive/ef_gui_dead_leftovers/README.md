@@ -1,3 +1,10 @@
+---
+type: code
+description: "Мёртвое в GUI и журналах E&F: | что | откуда (файл) | почему мёртвое | | --- | --- | --- | | типы vo_plotline_income_formwork, vo_plotline_income, vo_plotline_expenses_formwork, vo_plotline_expenses,…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_gui_dead_leftovers/**"]
+---
 # Мёртвое в GUI и журналах E&F
 
 | что | откуда (файл) | почему мёртвое |

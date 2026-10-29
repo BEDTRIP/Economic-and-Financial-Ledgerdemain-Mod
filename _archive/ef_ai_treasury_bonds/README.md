@@ -1,3 +1,10 @@
+---
+type: code
+description: "Покупки облигаций ИИ E&F: казна (`ai_buy_bond_N`) и частные банки (`ai_privat_bank_bond_N`): Вынуто 14.10.2026 (R6.9, кусок 1; Д.R6.6, Д.R5.6). Раз в год (financial_center_ef_on_yearly_pulse_country → ai_buy_central_bank_debt) казна страны ИИ покупала облигации…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_ai_treasury_bonds/**"]
+---
 # Покупки облигаций ИИ E&F: казна (`ai_buy_bond_N`) и частные банки (`ai_privat_bank_bond_N`)
 
 Вынуто 14.10.2026 (R6.9, кусок 1; Д.R6.6, Д.R5.6). Раз в год (`financial_center_ef_on_yearly_pulse_country` →

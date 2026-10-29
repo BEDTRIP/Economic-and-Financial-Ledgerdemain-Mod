@@ -1,3 +1,10 @@
+---
+type: code
+description: "Несортированная таблица валют ЦБ `zz_ef_cbfx_update` (мёртвый): скриптовый GUI заполнял глобальный список zz_ef_cbfx_list валютами, которые держит ЦБ (zz_ef_cbfx_<cur> > 0), для таблицы E&F. Заменён zz_ef_cbfx_update_sorted (тот же…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_cbfx_update/**"]
+---
 # Несортированная таблица валют ЦБ `zz_ef_cbfx_update` (мёртвый)
 
 **Что делал:** скриптовый GUI заполнял глобальный список `zz_ef_cbfx_list` валютами, которые держит ЦБ (`zz_ef_cbfx_<cur> > 0`),

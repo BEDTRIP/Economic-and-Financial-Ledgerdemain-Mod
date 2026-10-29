@@ -1,3 +1,10 @@
+---
+type: code
+description: "Журнал «Центральный банк» (`bank_je_central_1`): Журнал игрока без ЦБ: каждый месяц показывал два прогресс-бара по ВВП (currency_standards_progress_bar, central_banking_progress_bar) и выдавал технологии banking +…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_bank_central_je/**"]
+---
 # Журнал «Центральный банк» (`bank_je_central_1`)
 
 **Что делал.** Журнал игрока без ЦБ: каждый месяц показывал два прогресс-бара по ВВП (`currency_standards_progress_bar`,

@@ -1,3 +1,10 @@
+---
+type: code
+description: "ИИ-форекс E&F (`ai_buy_sell_currency` → `buy_<cur>_currency` / `sell_<cur>_currency`): раз в год ИИ-владелец рынка с ЦБ на серебре / биметалле / золоте (has_central_bank_SS_BS_GS_NISO) по каждой из 95 валют: если валюта не слабая — buy_<cur>_currency…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_ai_forex/**"]
+---
 # ИИ-форекс E&F (`ai_buy_sell_currency` → `buy_<cur>_currency` / `sell_<cur>_currency`)
 
 **Что делало:** раз в год ИИ-владелец рынка с ЦБ на серебре / биметалле / золоте (`has_central_bank_SS_BS_GS_NISO`)

@@ -1,3 +1,10 @@
+---
+type: code
+description: "Валюта формируемой страны (R3.7): При on_country_formed у страны с ЦБ zz_ef_cf_find искал закон валюты E&F, в can_enact которого есть новый тег (Германия → марка); есть и не действует — событие…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_currency_formed/**"]
+---
 # Валюта формируемой страны (R3.7)
 
 **Что делало.** При `on_country_formed` у страны с ЦБ `zz_ef_cf_find` искал закон валюты E&F, в `can_enact` которого есть

@@ -1,3 +1,10 @@
+---
+type: code
+description: "Сироты переносов R2 (8.10): определения, которые читали только вынесенные этой ночью механизмы (_archive/ef_ai_forex/, ef_stockpiling_currency/, ef_currency_reform/, ef_bimetallic_arbitrage/,…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_r2_orphans/**"]
+---
 # Сироты переносов R2 (8.10)
 
 **Что это:** определения, которые читали только вынесенные этой ночью механизмы (`_archive/ef_ai_forex/`,

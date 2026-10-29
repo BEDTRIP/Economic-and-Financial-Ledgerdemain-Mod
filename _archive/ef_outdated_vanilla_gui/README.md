@@ -1,3 +1,10 @@
+---
+type: code
+description: "Устаревшие копии ванильных GUI (до 1.13): E&F держал копии ванильных файлов (gui/ef_dev_and_custom_windows/maj/NonEssential/{map_markers, custom_tooltip,military_formation_panel,popups,right_click_menu}.gui,…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_outdated_vanilla_gui/**"]
+---
 # Устаревшие копии ванильных GUI (до 1.13)
 
 **Что это:** E&F держал копии ванильных файлов (`gui/ef_dev_and_custom_windows/maj/NonEssential/{map_markers,

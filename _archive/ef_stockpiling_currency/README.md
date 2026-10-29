@@ -1,3 +1,10 @@
+---
+type: code
+description: "Месячный пересчёт запасов валют E&F (`stockpiling_currency` → `stockpiling_currency_type_1`): раз в месяц у страны-владельца рынка с ЦБ (central_bank_ef_on_monthly_pulse_country) по каждой валюте с money_value_<cur> > 0 (95 веток stockpiling_currency_type_1 = {…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_stockpiling_currency/**"]
+---
 # Месячный пересчёт запасов валют E&F (`stockpiling_currency` → `stockpiling_currency_type_1`)
 
 **Что делало:** раз в месяц у страны-владельца рынка с ЦБ (`central_bank_ef_on_monthly_pulse_country`) по каждой

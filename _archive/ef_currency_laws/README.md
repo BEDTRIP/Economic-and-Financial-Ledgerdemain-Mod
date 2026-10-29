@@ -1,3 +1,10 @@
+---
+type: code
+description: "Законы валют E&F: группа законов lawgroup_currency_type («Суверенные деньги») — 95 законов law_<cur>_currency и law_no_market_liquidity (нет валюты). Закон и был валютой страны: его…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_currency_laws/**"]
+---
 # Законы валют E&F
 
 **Что делало:** группа законов `lawgroup_currency_type` («Суверенные деньги») — 95 законов `law_<cur>_currency` и

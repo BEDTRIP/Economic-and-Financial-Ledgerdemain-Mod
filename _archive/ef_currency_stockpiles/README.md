@@ -1,3 +1,10 @@
+---
+type: code
+description: "Запас своей валюты ЦБ E&F в штате (`stockpiling_<валюта>_state_1`): E&F держит в штате ЦБ (var:central_bank_location) собственный запас валюты страны — stockpiling_<валюта>_state_1 и …_reserve_currency_state_1 (невыпущенные деньги ЦБ);…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_currency_stockpiles/**"]
+---
 # Запас своей валюты ЦБ E&F в штате (`stockpiling_<валюта>_state_1`)
 
 **Что делал.** E&F держит в штате ЦБ (`var:central_bank_location`) собственный запас валюты страны —

@@ -1,3 +1,10 @@
+---
+type: code
+description: "Значения E&F без ссылок (ночь 8.10, запас): 410 script value E&F, на которые нет ни одной ссылки: ld_index.py — 0, и во всём тексте форка (common/, gui/, localization/) имя встречается только в своём определении.…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_unused_values_8_10/**"]
+---
 # Значения E&F без ссылок (ночь 8.10, запас)
 
 **Что это:** 410 script value E&F, на которые нет ни одной ссылки: `ld_index.py` — 0, и во всём тексте форка (`common/`,

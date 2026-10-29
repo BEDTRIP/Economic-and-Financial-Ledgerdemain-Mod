@@ -1,3 +1,10 @@
+---
+type: code
+description: "Закомментированные алерты `buy_sell_<товар>_order` (29): алерты игроку «приказ покупки/продажи товара будет исполнен» (valid: var:buy_<good>_1/var:sell_<good>_1, open_panel = market|msa). Все 29 блока в файле закомментированы…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_alerts_buy_sell_order/**"]
+---
 # Закомментированные алерты `buy_sell_<товар>_order` (29)
 
 **Что делали:** алерты игроку «приказ покупки/продажи товара будет исполнен» (`valid`: `var:buy_<good>_1`/`var:sell_<good>_1`, `open_panel = market|msa`). Все 29 блока в файле закомментированы

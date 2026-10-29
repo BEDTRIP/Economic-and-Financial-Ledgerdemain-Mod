@@ -1,3 +1,10 @@
+---
+type: code
+description: "Спрос финцентра на акции E&F (R9в.4): финцентр E&F (bg_financial_centre) каждый месяц вешал на своё здание модификаторы «спроса» на четыре вида акций — manufacture_stock_deemande,…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_exchange_demands/**"]
+---
 # Спрос финцентра на акции E&F (R9в.4)
 
 **Что было:** финцентр E&F (`bg_financial_centre`) каждый месяц вешал на своё здание модификаторы «спроса» на четыре

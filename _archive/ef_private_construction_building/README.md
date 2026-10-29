@@ -1,3 +1,10 @@
+---
+type: code
+description: "Здание-пустышка E&F `building_ef_private_construction` и всё, что с ним связано: E&F-овское здание «частный строительный сектор» (ef_14_private_construction.txt, группа bg_ef_private_construction, 4 PM pm_*_buildings_private). В форке оно не…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_private_construction_building/**"]
+---
 # Здание-пустышка E&F `building_ef_private_construction` и всё, что с ним связано
 
 **Что делало:** E&F-овское здание «частный строительный сектор» (`ef_14_private_construction.txt`, группа `bg_ef_private_construction`, 4 PM

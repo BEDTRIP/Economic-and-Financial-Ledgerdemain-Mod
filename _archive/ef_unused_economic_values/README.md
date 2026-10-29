@@ -1,3 +1,10 @@
+---
+type: code
+description: "Значения без ссылок в `00_economic_scripted_value.txt` (70): вспомогательные script_values (valid_purchasable_currency_amount[_N], gold_reserve_rest, gold_available_for_purchase_N, gold_reserves_*,…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_unused_economic_values/**"]
+---
 # Значения без ссылок в `00_economic_scripted_value.txt` (70)
 
 **Что делали:** вспомогательные script_values (`valid_purchasable_currency_amount[_N]`, `gold_reserve_rest`, `gold_available_for_purchase_N`, `gold_reserves_*`,

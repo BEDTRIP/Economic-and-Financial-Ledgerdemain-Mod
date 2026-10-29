@@ -1,3 +1,10 @@
+---
+type: code
+description: "Копии ванильных панелей E&F (`gui/ef_dev_and_custom_windows/maj/`): 18 файлов — копии ванильных панелей (maj/Essential: building_browser_panel, building_details_panel, goods_panel, goods_state_panel, production_methods; maj/NonEssential:…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_gui_maj_copies/**"]
+---
 # Копии ванильных панелей E&F (`gui/ef_dev_and_custom_windows/maj/`)
 
 **Что это:** 18 файлов — копии ванильных панелей (`maj/Essential`: `building_browser_panel`, `building_details_panel`,

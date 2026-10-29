@@ -1,3 +1,10 @@
+---
+type: code
+description: "Кризисная продажа валюты E&F по 95 валютам (`all_currency_resold`, `sell_<cur>_currency_crisis`): при кризисе валюты страны (E&F global_monetary_reference_reset — банкротство ЦБ эталона; economic_instability — валютный кризис) каждая страна с ЦБ звала…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_currency_crisis_resold/**"]
+---
 # Кризисная продажа валюты E&F по 95 валютам (`all_currency_resold`, `sell_<cur>_currency_crisis`)
 
 **Что делало:** при кризисе валюты страны (E&F `global_monetary_reference_reset` — банкротство ЦБ эталона;

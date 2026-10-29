@@ -1,3 +1,10 @@
+---
+type: code
+description: "Методы бирж «акций» финцентра и деление комиссии по владельцам (Д.R4б.5, Д.R4б.7): четыре группы методов финцентра (pmg_{manufacture,agricultural,mining,railroad}_stock_exchange, pm_no_* / pm_*_stock_exchange: вход goods_input_<вид>_stock_add 1 на…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_fc_stock_exchange_pm/**"]
+---
 # Методы бирж «акций» финцентра и деление комиссии по владельцам (Д.R4б.5, Д.R4б.7)
 
 **Что делало:** четыре группы методов финцентра (`pmg_{manufacture,agricultural,mining,railroad}_stock_exchange`,

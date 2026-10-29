@@ -1,3 +1,10 @@
+---
+type: code
+description: "Заказы запаса за золото и покупка запаса из казны (E&F): (1) В buy_<g>_order / sell_<g>_order (29 товаров) ветка «флаг var:<buy|sell>_<g>_in_gold_1 = 1 → <buy|sell>_<g>_order_in_gold = yes»; сами эффекты *_order_in_gold нигде…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_stockpile_gold_orders/**"]
+---
 # Заказы запаса за золото и покупка запаса из казны (E&F)
 
 **Что делало.** (1) В `buy_<g>_order` / `sell_<g>_order` (29 товаров) ветка «флаг `var:<buy|sell>_<g>_in_gold_1 = 1` → `<buy|sell>_<g>_order_in_gold = yes»; сами эффекты

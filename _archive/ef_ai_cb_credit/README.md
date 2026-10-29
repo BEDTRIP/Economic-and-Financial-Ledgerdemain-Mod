@@ -1,3 +1,10 @@
+---
+type: code
+description: "ИИ-кредит ЦБ казне E&F: Раз в месяц (хаб E&F 00_on_action_main.txt, ветка is_ai и has_central_bank_SS_BS_GS_GES_NISO) ИИ занимал у своего ЦБ, когда казна ниже 10 % предела золотого резерва (в…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_ai_cb_credit/**"]
+---
 # ИИ-кредит ЦБ казне E&F
 
 **Что делал.** Раз в месяц (хаб E&F `00_on_action_main.txt`, ветка `is_ai` и `has_central_bank_SS_BS_GS_GES_NISO`) ИИ

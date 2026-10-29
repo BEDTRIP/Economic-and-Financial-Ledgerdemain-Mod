@@ -1,3 +1,10 @@
+---
+type: code
+description: "Окно обмена валют E&F и кнопки форекса игрока (95 валют): вкладка рынка «global» (InformationPanel 'msa', тип market_global_panel_content), раздел «exchange_currency»: выбор валюты (choose_currency_type_<cur>, переменные…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_forex_windows/**"]
+---
 # Окно обмена валют E&F и кнопки форекса игрока (95 валют)
 
 **Что делало:** вкладка рынка «global» (`InformationPanel` `'msa'`, тип `market_global_panel_content`), раздел

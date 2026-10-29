@@ -1,3 +1,10 @@
+---
+type: code
+description: "`central_bank_production_methods`, `_3`, `_4` (ПМ «потребления металла» банка): переключало ПМ building_bank по закону денежной системы / валюте подданного: pm_silver_consuption, pm_gold_consuption, pm_bimetallism_consuption, pm_no_metal_consuption,…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_central_bank_pm_consuption/**"]
+---
 # `central_bank_production_methods`, `_3`, `_4` (ПМ «потребления металла» банка)
 
 **Что делало:** переключало ПМ `building_bank` по закону денежной системы / валюте подданного: `pm_silver_consuption`, `pm_gold_consuption`, `pm_bimetallism_consuption`,

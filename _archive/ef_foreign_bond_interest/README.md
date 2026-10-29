@@ -1,3 +1,10 @@
+---
+type: code
+description: "Строка расходов эмитента `zz_ef_foreign_bond_interest` (мёртвый): статический модификатор страны (country_expenses_add = 1, множитель — zz_ef_bond_interest_due_week: годовой процент держателей по облигациям страны / 48) — эмитент…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_foreign_bond_interest/**"]
+---
 # Строка расходов эмитента `zz_ef_foreign_bond_interest` (мёртвый)
 
 **Что делал:** статический модификатор страны (`country_expenses_add = 1`, множитель — `zz_ef_bond_interest_due_week`: годовой

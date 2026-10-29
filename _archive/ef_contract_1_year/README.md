@@ -1,3 +1,10 @@
+---
+type: code
+description: "Сбор очистки контрактов `contract_1_year`: contract_1_year (205 строк) для 29 товаров ставило var:<good>_contract_1_year = 1 и звало clear_<good>_contract_1_year; никто не вызывал (те же 29…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_contract_1_year/**"]
+---
 # Сбор очистки контрактов `contract_1_year`
 
 **Что делало:** `contract_1_year` (205 строк) для 29 товаров ставило `var:<good>_contract_1_year = 1` и звало `clear_<good>_contract_1_year`; никто не вызывал

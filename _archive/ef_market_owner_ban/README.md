@@ -1,3 +1,10 @@
+---
+type: code
+description: "Запрет стандартов на чужом рынке (`is_not_market_owner`): Триггер E&F is_not_market_owner (страна на существующем чужом рынке) стоял в can_enact законов law_silver_standard, law_bimetallism_standard, law_gold_standard…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_market_owner_ban/**"]
+---
 # Запрет стандартов на чужом рынке (`is_not_market_owner`)
 
 **Что делал.** Триггер E&F `is_not_market_owner` (страна на существующем чужом рынке) стоял в `can_enact` законов

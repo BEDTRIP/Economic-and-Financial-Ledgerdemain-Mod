@@ -1,3 +1,10 @@
+---
+type: code
+description: "Валютная зона подданного (`zz_ef_cur_zone`): раз в месяц (zz_ef_money_model_monthly_step), на первом шаге страны и после ввода валюты E&F (ld_currency_intro_metal.txt) подданный сюзерена с ЦБ на металлическом…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ld_currency_zone/**"]
+---
 # Валютная зона подданного (`zz_ef_cur_zone`)
 
 **Что делало:** раз в месяц (`zz_ef_money_model_monthly_step`), на первом шаге страны и после ввода валюты E&F

@@ -1,3 +1,10 @@
+---
+type: code
+description: "Деньги за металл по Юму (zz_ef_f_hume_money, ветка в zz_ef_cb_hume_step): M.3: металл, пришедший по клирингу в ЦБ (var:zz_ef_f_hume), чеканился в деньги по паритету — add_investment_pool на сумму (на выходе — не больше пула). П.5 (4.10):…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_hume_money/**"]
+---
 # Деньги за металл по Юму (zz_ef_f_hume_money, ветка в zz_ef_cb_hume_step)
 
 **Что делало.** M.3: металл, пришедший по клирингу в ЦБ (`var:zz_ef_f_hume`), чеканился в деньги по паритету — `add_investment_pool` на сумму (на выходе — не больше пула).

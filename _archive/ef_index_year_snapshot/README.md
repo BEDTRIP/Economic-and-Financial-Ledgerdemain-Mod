@@ -1,3 +1,10 @@
+---
+type: code
+description: "Годовой снимок индекса E&F: fluctuations_country_indice_value_year (разница индекса за год → country_indice_value_dif_01, при падении ниже −0,5 financial_crash) и…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_index_year_snapshot/**"]
+---
 # Годовой снимок индекса E&F
 
 `fluctuations_country_indice_value_year` (разница индекса за год → `country_indice_value_dif_01`, при падении ниже −0,5

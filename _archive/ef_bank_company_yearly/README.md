@@ -1,3 +1,10 @@
+---
+type: code
+description: "Ежегодная раздача ИИ банковских компаний E&F (Д.R4б.3, аудит Ч10): в годовом пульсе страны (central_bank_ef_on_yearly_pulse_country, common/scripted_effects/ 00_on_action_main.txt) ИИ-стране — establish_bank_and_ef_compagnie:…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_bank_company_yearly/**"]
+---
 # Ежегодная раздача ИИ банковских компаний E&F (Д.R4б.3, аудит Ч10)
 
 **Что делало:** в годовом пульсе страны (`central_bank_ef_on_yearly_pulse_country`, `common/scripted_effects/

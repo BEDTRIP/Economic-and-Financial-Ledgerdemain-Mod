@@ -1,3 +1,10 @@
+---
+type: code
+description: "Код валюты E&F (`currency_ISO_4217`): пользовательская локализация currency_ISO_4217 (страна) выбирала по var:zz_ef_cur ключ <cur>_ISO_4217 — трёхбуквенный код одной из 95 валют E&F (DZD, GBP…); у страны без…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_currency_iso_code/**"]
+---
 # Код валюты E&F (`currency_ISO_4217`)
 
 **Что делало:** пользовательская локализация `currency_ISO_4217` (страна) выбирала по `var:zz_ef_cur` ключ

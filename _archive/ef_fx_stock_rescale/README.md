@@ -1,3 +1,10 @@
+---
+type: code
+description: "Перемасштаб валютных запасов ЦБ-региона (zz_ef_fx_stock_rescale): Эффект уровня штата: умножал stockpiling_<cur>_state_1 и stockpiling_<cur>_reserve_currency_state_1 (95 валют) на owner.var:zz_ef_metal_rescale — тем же коэффициентом,…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_fx_stock_rescale/**"]
+---
 # Перемасштаб валютных запасов ЦБ-региона (zz_ef_fx_stock_rescale)
 
 **Что делало.** Эффект уровня штата: умножал `stockpiling_<cur>_state_1` и `stockpiling_<cur>_reserve_currency_state_1` (95 валют) на `owner.var:zz_ef_metal_rescale` —

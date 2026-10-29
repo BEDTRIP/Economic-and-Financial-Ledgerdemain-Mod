@@ -1,3 +1,10 @@
+---
+type: code
+description: "Возврат металла ушедшего ЦБ-штата (`zz_ef_cb_state_owner_step`): Металл ЦБ лежал на штате ЦБ (gold_state_1 / silver_state_1 с central_bank_historic_place); штат, перешедший к другой стране (восстание, война), уносил его. Каждую неделю…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ld_cb_state_owner/**"]
+---
 # Возврат металла ушедшего ЦБ-штата (`zz_ef_cb_state_owner_step`)
 
 **Что делал.** Металл ЦБ лежал на штате ЦБ (`gold_state_1` / `silver_state_1` с `central_bank_historic_place`); штат,

@@ -1,3 +1,10 @@
+---
+type: code
+description: "Очистка списков покупателей / продавцов, в которые никто не пишет: ничего. В шагах погашения облигаций (bond_maturity_N, 01_financial_scripted_effects.txt) после раздачи списки сбрасываются clear_variable_list; 15 из них никто никогда…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_never_filled_lists/**"]
+---
 # Очистка списков покупателей / продавцов, в которые никто не пишет
 
 **Что делали:** ничего. В шагах погашения облигаций (`bond_maturity_N`, `01_financial_scripted_effects.txt`) после

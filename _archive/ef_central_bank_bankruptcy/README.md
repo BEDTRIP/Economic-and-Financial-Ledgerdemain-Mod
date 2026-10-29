@@ -1,3 +1,10 @@
+---
+type: code
+description: "Банкротство ЦБ E&F (`central_bank_bankruptcy`): Месячный эффект модификаторов валюты (01_economic_scripted_effects.txt) при extreme_weak_currency (E&F: ценность денег в золоте < 0,01 или уже банкрот) у страны с ЦБ на…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_central_bank_bankruptcy/**"]
+---
 # Банкротство ЦБ E&F (`central_bank_bankruptcy`)
 
 **Что делал.** Месячный эффект модификаторов валюты (`01_economic_scripted_effects.txt`) при `extreme_weak_currency`

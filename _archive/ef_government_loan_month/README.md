@@ -1,3 +1,10 @@
+---
+type: code
+description: "Долг казны ЦБ от чеканки E&F (`government_loan_month`): раз в месяц (central_bank_ef_on_monthly_pulse_country) government_loan (долг казны ЦБ, E&F) += country_minting_month (модификаторы чеканки страны × 4) — долг рос без…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_government_loan_month/**"]
+---
 # Долг казны ЦБ от чеканки E&F (`government_loan_month`)
 
 **Что делало:** раз в месяц (`central_bank_ef_on_monthly_pulse_country`) `government_loan` (долг казны ЦБ, E&F)

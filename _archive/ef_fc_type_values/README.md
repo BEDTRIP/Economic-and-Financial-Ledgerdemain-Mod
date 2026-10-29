@@ -1,3 +1,10 @@
+---
+type: code
+description: "Значения «есть ли у страны финцентр вида X» (`has_building_financial_centre_<x>`, `_custom_location`): по значению на каждый тип финцентра (есть ли в стране; есть ли в штате главной биржи) — читали building_financial_num, расширение zz_ef_fc_expand и название…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_fc_type_values/**"]
+---
 # Значения «есть ли у страны финцентр вида X» (`has_building_financial_centre_<x>`, `_custom_location`)
 
 **Что делало:** по значению на каждый тип финцентра (есть ли в стране; есть ли в штате главной биржи) — читали

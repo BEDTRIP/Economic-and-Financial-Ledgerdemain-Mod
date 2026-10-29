@@ -1,3 +1,10 @@
+---
+type: code
+description: "Переменные, которые ставятся, но никто не читает (дочистка 7.10): ничего. Движок писал «Variable '…' is set but is never used» (error.log каждого запуска). Проверено: имени нет ни в чтениях var: / has_variable / Var('…') скриптов, ни в…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_unread_variables_2/**"]
+---
 # Переменные, которые ставятся, но никто не читает (дочистка 7.10)
 
 **Что делали:** ничего. Движок писал «Variable '…' is set but is never used» (error.log каждого запуска). Проверено:

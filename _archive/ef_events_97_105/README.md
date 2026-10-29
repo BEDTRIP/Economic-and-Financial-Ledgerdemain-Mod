@@ -1,3 +1,10 @@
+---
+type: code
+description: "События `.97 .971 .98 .981 .982` и `.100–.105`: .97–.982 — скрытые (hidden = yes) «FEED»-события арбитража частных банков: в immediate post_notification = 00_ef_economic_event_<N>_message (покупка/продажа валюты…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_events_97_105/**"]
+---
 # События `.97 .971 .98 .981 .982` и `.100–.105`
 
 **Что делали:** .97–.982 — скрытые (`hidden = yes`) «FEED»-события арбитража частных банков: в `immediate` `post_notification = 00_ef_economic_event_<N>_message`

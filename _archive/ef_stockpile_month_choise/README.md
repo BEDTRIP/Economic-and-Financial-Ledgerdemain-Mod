@@ -1,3 +1,10 @@
+---
+type: code
+description: "Значения `<товар>_month_choise` склада: ничего. 29 скрипт-значений <товар>_month_choise = { value = var:<товар>_month_choise } (раздел «release» склада, 00_stockpile_scripted_value.txt): переменную…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_stockpile_month_choise/**"]
+---
 # Значения `<товар>_month_choise` склада
 
 **Что делали:** ничего. 29 скрипт-значений `<товар>_month_choise = { value = var:<товар>_month_choise }` (раздел

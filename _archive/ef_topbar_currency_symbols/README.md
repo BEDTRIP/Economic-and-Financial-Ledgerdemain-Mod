@@ -1,3 +1,10 @@
+---
+type: code
+description: "Символ валюты в верхней панели — 96 текстбоксов: Тип currency_symbol_top_bar (gui/00_ef_deported_gui_2.gui, вызов — gui/topbar.gui) держал текстбокс на каждый из 95 законов валюты (currency_symbol_<cur>, у каждого свой…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_topbar_currency_symbols/**"]
+---
 # Символ валюты в верхней панели — 96 текстбоксов
 
 **Что делало.** Тип `currency_symbol_top_bar` (`gui/00_ef_deported_gui_2.gui`, вызов — `gui/topbar.gui`) держал

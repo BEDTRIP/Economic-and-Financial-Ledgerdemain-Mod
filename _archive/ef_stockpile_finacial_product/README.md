@@ -1,3 +1,10 @@
+---
+type: code
+description: "Пустой учёт финпродуктов `stockpile_finacial_product`: Пустое определение stockpile_finacial_product = { } и его месячный вызов. Раньше копило биржевые счётчики «пул акций» (stockpiling_<вид>_var_state_1 и др.); эти…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_stockpile_finacial_product/**"]
+---
 # Пустой учёт финпродуктов `stockpile_finacial_product`
 
 Пустое определение `stockpile_finacial_product = { }` и его месячный вызов. Раньше копило биржевые счётчики «пул акций»

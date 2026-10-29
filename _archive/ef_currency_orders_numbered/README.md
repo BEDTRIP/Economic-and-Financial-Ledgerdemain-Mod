@@ -1,3 +1,10 @@
+---
+type: code
+description: "`buy_sell_currency_order` (приказы валюты по уровням `buy_<cur>_N` / `sell_<cur>_N`): эффект buy_sell_currency_order (6938 строк, 950 блоков if { limit = { has_modifier = has_central_bank var:<buy|sell>_<cur>_<1..5> = 1 } <buy|sell>_<cur>_<N> = yes } по…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_currency_orders_numbered/**"]
+---
 # `buy_sell_currency_order` (приказы валюты по уровням `buy_<cur>_N` / `sell_<cur>_N`)
 
 **Что делало:** эффект `buy_sell_currency_order` (6938 строк, 950 блоков `if { limit = { has_modifier = has_central_bank var:<buy|sell>_<cur>_<1..5> = 1 } <buy|sell>_<cur>_<N> = yes }` по 95 валютам). Эффектов `buy_<cur>_<N>` / `sell_<cur>_<N>` в моде и ваниле нет

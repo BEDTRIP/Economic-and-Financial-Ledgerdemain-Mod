@@ -1,3 +1,10 @@
+---
+type: code
+description: "Капитализация по выпуску товаров-«акций» и срез выпуска по грамотности богатых: Вынуто 14.10.2026 (R6.7, Д.R6.12). Товары-«акции» E&F (manufacture_stock, agricultural_stock, mining_stock, railroad_stock) больше не производятся (Д.R4б.8);…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ld_stock_goods_capitalization/**"]
+---
 # Капитализация по выпуску товаров-«акций» и срез выпуска по грамотности богатых
 
 Вынуто 14.10.2026 (R6.7, Д.R6.12). Товары-«акции» E&F (`manufacture_stock`, `agricultural_stock`, `mining_stock`,

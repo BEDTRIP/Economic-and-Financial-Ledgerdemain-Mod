@@ -1,3 +1,10 @@
+---
+type: code
+description: "Проба R8б, шаг 0: доли ВВП у чужих владельцев (`gdp_ownership_ratio`): ld_probe_gdpown.1 (только из консоли) — для каждой пары стран «хозяин — владелец» лестница gdp_ownership_ratio = { target = <владелец> value > 0.01 / 0.05 / 0.10 / 0.25…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ld_probe_gdpown/**"]
+---
 # Проба R8б, шаг 0: доли ВВП у чужих владельцев (`gdp_ownership_ratio`)
 
 **Что делало:** `ld_probe_gdpown.1` (только из консоли) — для каждой пары стран «хозяин — владелец» лестница

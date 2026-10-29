@@ -1,3 +1,10 @@
+---
+type: code
+description: "Стоимость валюты по закону для клиринга (`zz_ef_rc_currency_value`): Значение zz_ef_rc_currency_value (common/script_values/ld_reserve_trade_values.txt, генератор regen_ef_reserve_trade) — стоимость E&F валюты закона страны…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_rc_currency_value/**"]
+---
 # Стоимость валюты по закону для клиринга (`zz_ef_rc_currency_value`)
 
 **Что делало.** Значение `zz_ef_rc_currency_value` (`common/script_values/ld_reserve_trade_values.txt`, генератор

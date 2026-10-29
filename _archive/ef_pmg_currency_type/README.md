@@ -1,3 +1,10 @@
+---
+type: code
+description: "Группа PM `pmg_currency_type` («Выпускаемая валюта»): Скрытая группа метода производства ЦБ: pm_no_currency_type / pm_currency_liquidity_currency (выход goods_output_liquidity_currency_add по занятости). В building_bank…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_pmg_currency_type/**"]
+---
 # Группа PM `pmg_currency_type` («Выпускаемая валюта»)
 
 Скрытая группа метода производства ЦБ: `pm_no_currency_type` / `pm_currency_liquidity_currency` (выход

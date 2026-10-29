@@ -1,3 +1,10 @@
+---
+type: code
+description: "Биметаллический арбитраж частных банков E&F (`private_bank_arbitrage_gold_drain` / `_silver_drain`): раз в год (central_bank_ef_on_yearly_pulse_country) у страны на биметаллизме до 1873: при перекосе рыночного соотношения золота и серебра к законному…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_bimetallic_arbitrage/**"]
+---
 # Биметаллический арбитраж частных банков E&F (`private_bank_arbitrage_gold_drain` / `_silver_drain`)
 
 **Что делало:** раз в год (`central_bank_ef_on_yearly_pulse_country`) у страны на биметаллизме до 1873: при перекосе

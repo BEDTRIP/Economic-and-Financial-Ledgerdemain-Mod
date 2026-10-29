@@ -1,3 +1,10 @@
+---
+type: code
+description: "Месячный учёт спроса на финпродукты `stockpiling_<вид>_1`: stockpiling_bond_1, _manufacture_stock_1, _agricultural_stock_1, _mining_stock_1, _railroad_stock_1 (считали stockpiling_<вид>_var_2 из заказов рынка, при var_1 <…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_stockpiling_financial_1/**"]
+---
 # Месячный учёт спроса на финпродукты `stockpiling_<вид>_1`
 
 `stockpiling_bond_1`, `_manufacture_stock_1`, `_agricultural_stock_1`, `_mining_stock_1`, `_railroad_stock_1` (считали

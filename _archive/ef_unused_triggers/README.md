@@ -1,3 +1,10 @@
+---
+type: code
+description: "Триггеры без ссылок в `00_ef_custom_trigger.txt` (114): 95 law_<валюта>_monetary_system_FS_trigger (в customizable_localization есть только варианты _SS/_BS/_GS/_GES*) и 19 прочих триггеров, на которые нет ссылок (проверено…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_unused_triggers/**"]
+---
 # Триггеры без ссылок в `00_ef_custom_trigger.txt` (114)
 
 **Что делали:** 95 `law_<валюта>_monetary_system_FS_trigger` (в customizable_localization есть только варианты `_SS/_BS/_GS/_GES*`) и 19 прочих триггеров, на которые нет ссылок

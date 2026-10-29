@@ -1,3 +1,10 @@
+---
+type: code
+description: "Значения и триггер валют без ссылок: | файл (исходный путь) | ключ | что было | | --- | --- | --- | | common/script_values/ld_reference_currency_values.txt | zz_ef_reserves_money | zz_ef_cb_money +…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_unused_currency_values/**"]
+---
 # Значения и триггер валют без ссылок
 
 | файл (исходный путь) | ключ | что было |

@@ -1,3 +1,10 @@
+---
+type: code
+description: "Осиротевшее после выноса мёртвых GUI (script_values, эффекты, sgui): Определения, на которые ссылались только вынесенные блоки (ef_unused_scripted_guis, окна ef_dev_custom_windows, отладка ef_debug_mode, ef_gui_dead_leftovers); после…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_gui_orphans/**"]
+---
 # Осиротевшее после выноса мёртвых GUI (script_values, эффекты, sgui)
 
 **Что это.** Определения, на которые ссылались только вынесенные блоки (`ef_unused_scripted_guis`, окна `ef_dev_custom_windows`, отладка `ef_debug_mode`, `ef_gui_dead_leftovers`);

@@ -1,3 +1,10 @@
+---
+type: code
+description: "Денежная реформа E&F (`reset_law_event_currency`, кнопка `currency_introduction`): при сверхслабой валюте (extreme_weak_currency, курс в золоте < 0,01) — новая валюта: - ИИ: extreme_weak_currency_solution (годовой пульс ЦБ, 00_on_action_main.txt)…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_currency_reform/**"]
+---
 # Денежная реформа E&F (`reset_law_event_currency`, кнопка `currency_introduction`)
 
 **Что делало:** при сверхслабой валюте (`extreme_weak_currency`, курс в золоте < 0,01) — новая валюта:

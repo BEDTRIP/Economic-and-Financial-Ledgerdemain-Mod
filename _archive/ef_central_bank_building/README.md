@@ -1,3 +1,10 @@
+---
+type: code
+description: "Здание ЦБ E&F (`building_bank`): Вынуто R9б.4 по Д.R9б.1 (исполняет Д.R4а.9, Д.R5.11): центральный банк — модификатор страны has_central_bank, не здание; что здание делало своими методами — чеканка,…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_central_bank_building/**"]
+---
 # Здание ЦБ E&F (`building_bank`)
 
 Вынуто R9б.4 по Д.R9б.1 (исполняет Д.R4а.9, Д.R5.11): центральный банк — модификатор страны `has_central_bank`, не

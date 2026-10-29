@@ -1,3 +1,10 @@
+---
+type: code
+description: "Мёртвая customizable_localization E&F: 1237 определений customizable_localization (13,8 тыс. строк) в common/customizable_localization/00_ef_localization_ custom.txt, на которые нет ни одной ссылки в моде…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_dead_custom_loc/**"]
+---
 # Мёртвая customizable_localization E&F
 
 **Что это.** 1237 определений `customizable_localization` (13,8 тыс. строк) в

@@ -1,3 +1,10 @@
+---
+type: code
+description: "Ввод валюты E&F по культуре: при технологии currency_standards или постройке ЦБ (introduction_new_currency) 95 эффектов introduction_of_<cur> выбирали валюту E&F по культуре страны…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_currency_introduction/**"]
+---
 # Ввод валюты E&F по культуре
 
 **Что делало:** при технологии `currency_standards` или постройке ЦБ (`introduction_new_currency`) 95 эффектов

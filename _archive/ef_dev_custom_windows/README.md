@@ -1,3 +1,10 @@
+---
+type: code
+description: "Тестовые окна E&F и дубли `maj/`: gui/ef_dev_and_custom_windows/ef_custom_windows.gui (56 тыс. строк) — 83 default_popup. Живое окно одно — gold_reserve_window (оно осталось в файле, строки 1–2835;…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_dev_custom_windows/**"]
+---
 # Тестовые окна E&F и дубли `maj/`
 
 **Что делало.** `gui/ef_dev_and_custom_windows/ef_custom_windows.gui` (56 тыс. строк) — 83 `default_popup`. Живое окно одно —

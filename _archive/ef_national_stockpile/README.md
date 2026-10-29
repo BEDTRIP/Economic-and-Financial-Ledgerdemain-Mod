@@ -1,3 +1,10 @@
+---
+type: code
+description: "Национальный запас товаров E&F (нацзапас): Страна-владелец рынка с технологиями stockpiling_goods → national_stockpile копила и выпускала 29 товаров (ammunition small_arms artillery tanks aeroplanes grain fabric…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_national_stockpile/**"]
+---
 # Национальный запас товаров E&F (нацзапас)
 
 **Что делало.** Страна-владелец рынка с технологиями `stockpiling_goods` → `national_stockpile` копила и выпускала

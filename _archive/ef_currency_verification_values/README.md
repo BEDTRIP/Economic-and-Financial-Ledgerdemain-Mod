@@ -1,3 +1,10 @@
+---
+type: code
+description: "Проверочные значения валют (E&F): Всё в common/script_values/01_economic_currency_scripted_value.txt (вырезано по блокам, исходные строки — в заголовках блоков архивного файла)."
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_currency_verification_values/**"]
+---
 # Проверочные значения валют (E&F)
 
 Всё в `common/script_values/01_economic_currency_scripted_value.txt` (вырезано по блокам, исходные строки — в заголовках блоков архивного файла).

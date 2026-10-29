@@ -1,3 +1,10 @@
+---
+type: code
+description: "ИИ-стройка E&F `ai_building_strategy` (закомментированная часть): эффект ai_building_strategy (common/scripted_effects/00_on_action_main.txt, ~3380 строк) — ИИ-стратегии покупки и постройки зданий E&F (частные шахты, фабрики, порты,…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_ai_building_strategy/**"]
+---
 # ИИ-стройка E&F `ai_building_strategy` (закомментированная часть)
 
 **Что делал:** эффект `ai_building_strategy` (`common/scripted_effects/00_on_action_main.txt`, ~3380 строк) — ИИ-стратегии покупки и

@@ -1,3 +1,10 @@
+---
+type: code
+description: "Эффекты E&F без вызовов (ночь 8.10, запас): два scripted effect, которые никто не вызывал (ld_index.py — 0 ссылок). - currency_of_player_reset (common/scripted_effects/01_economic_scripted_effects.txt, строки…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_dead_effects_8_10/**"]
+---
 # Эффекты E&F без вызовов (ночь 8.10, запас)
 
 **Что это:** два scripted effect, которые никто не вызывал (`ld_index.py` — 0 ссылок).

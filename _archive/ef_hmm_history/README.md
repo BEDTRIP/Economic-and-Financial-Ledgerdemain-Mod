@@ -1,3 +1,10 @@
+---
+type: code
+description: "Стартовые условия E&F для Historical Map Mod (выключено): в common/history/global/99_ef_history_global_variable.txt (проход every_country истории) ветка «HMM bc start» задавала центробанки, металл, законы и индексы стран для…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_hmm_history/**"]
+---
 # Стартовые условия E&F для Historical Map Mod (выключено)
 
 **Что делало:** в `common/history/global/99_ef_history_global_variable.txt` (проход `every_country` истории) ветка

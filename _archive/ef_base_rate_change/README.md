@@ -1,3 +1,10 @@
+---
+type: code
+description: "Контроллер ставки E&F `base_rate_change`: | что | откуда | | --- | --- | | пустое определение base_rate_change = { # EF.30: the rate is set by zz_ef_cb_rate_step. } |…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_base_rate_change/**"]
+---
 # Контроллер ставки E&F `base_rate_change`
 
 | что | откуда |

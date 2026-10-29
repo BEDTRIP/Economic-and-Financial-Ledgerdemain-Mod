@@ -1,3 +1,10 @@
+---
+type: code
+description: "Военные PM `pm_government_aid_*` (5) и тип модификатора `goods_input_war_bond_add`: пять PM «заказа правительства» для военных зданий (pm_government_aid_building_arms_industry_0/_1, _munition_industry, _tank_industry, _shipbuilding_industry): вход…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_government_aid_pm/**"]
+---
 # Военные PM `pm_government_aid_*` (5) и тип модификатора `goods_input_war_bond_add`
 
 **Что делали:** пять PM «заказа правительства» для военных зданий (`pm_government_aid_building_arms_industry_0/_1`, `_munition_industry`, `_tank_industry`,

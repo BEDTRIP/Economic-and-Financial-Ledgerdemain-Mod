@@ -1,3 +1,10 @@
+---
+type: code
+description: "Мёртвое и снятое по аудиту PSC (`psc_audit_r9`): Вынуто 14.10.2026, R9.1 (аудит PSC, Д.R9.5, Д.R8в.27)."
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/psc_audit_r9/**"]
+---
 # Мёртвое и снятое по аудиту PSC (`psc_audit_r9`)
 
 Вынуто 14.10.2026, R9.1 (аудит PSC, Д.R9.5, Д.R8в.27).

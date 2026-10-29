@@ -1,3 +1,10 @@
+---
+type: code
+description: "Самосоздание финцентров E&F: macro_facilities_on_action_fc и macro_facilities_fc_<x> (38 вариантов + общий macro_facilities_fc) создавали финцентр стране, у которой есть технология financial_center…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_fc_spawners/**"]
+---
 # Самосоздание финцентров E&F
 
 **Что делало:** `macro_facilities_on_action_fc` и `macro_facilities_fc_<x>` (38 вариантов + общий `macro_facilities_fc`)

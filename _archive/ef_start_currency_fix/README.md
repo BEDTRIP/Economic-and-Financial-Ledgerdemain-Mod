@@ -1,3 +1,10 @@
+---
+type: code
+description: "Правки законов валют на старте (`zz_ef_currency_fix.txt`, п. 1–3): глобальная история после 99_ef_history_global_variable.txt: Вюртембергу — activate_law = law_type:law_gulden_south_german_gulden_currency (опечатка E&F в имени закона);…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_start_currency_fix/**"]
+---
 # Правки законов валют на старте (`zz_ef_currency_fix.txt`, п. 1–3)
 
 **Что делало:** глобальная история после `99_ef_history_global_variable.txt`: Вюртембергу — `activate_law =

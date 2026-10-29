@@ -1,3 +1,10 @@
+---
+type: code
+description: "Товары национальных валют `<cur>_c`, их цвета и модификаторы; `bond_usa`: E&F задумывал товар на каждую национальную валюту (95 штук: dinar_c, dollar_united_states_dollar_c, …) — в common/goods/ef_00_goods.txt все блоки…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_goods_currencies/**"]
+---
 # Товары национальных валют `<cur>_c`, их цвета и модификаторы; `bond_usa`
 
 **Что делали:** E&F задумывал товар на каждую национальную валюту (95 штук: `dinar_c`, `dollar_united_states_dollar_c`, …) — в

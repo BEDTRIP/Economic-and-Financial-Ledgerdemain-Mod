@@ -1,3 +1,10 @@
+---
+type: code
+description: "Правила игры E&F «уникальные компании» (`unique_companies_banks`, `unique_companies_newspapers`): TRY_REPLACE: двух правил игры — по умолчанию banks_disabled / newspapers_disabled с флагами того же имени. Видимо, рассчитано на мод «Unique Companies», которого в…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_unique_companies_rules/**"]
+---
 # Правила игры E&F «уникальные компании» (`unique_companies_banks`, `unique_companies_newspapers`)
 
 **Что делало:** `TRY_REPLACE:` двух правил игры — по умолчанию `banks_disabled` / `newspapers_disabled` с флагами того

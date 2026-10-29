@@ -1,3 +1,10 @@
+---
+type: code
+description: "Значения `zz_ef_pop_gold_goods` / `zz_ef_pop_silver_goods` (мёртвые после оптимизации): покупка золота / серебра населением за неделю = потребление металла штатами (zz_ef_state_*_cons) минус вход ЦБ и банков (zz_ef_cb_in_*_goods, zz_ef_bank_in_*_goods).…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_pop_metal_goods_values/**"]
+---
 # Значения `zz_ef_pop_gold_goods` / `zz_ef_pop_silver_goods` (мёртвые после оптимизации)
 
 **Что делали:** покупка золота / серебра населением за неделю = потребление металла штатами (`zz_ef_state_*_cons`) минус

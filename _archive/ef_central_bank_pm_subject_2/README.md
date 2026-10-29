@@ -1,3 +1,10 @@
+---
+type: code
+description: "`central_bank_production_methods_2` и `_2_act` (ПМ ЦБ для подданных): central_bank_production_methods_2 (2670 строк, «Désactiver suite à trop de bug») переключало PM здания building_bank у подданных по валюте…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_central_bank_pm_subject_2/**"]
+---
 # `central_bank_production_methods_2` и `_2_act` (ПМ ЦБ для подданных)
 
 **Что делало:** `central_bank_production_methods_2` (2670 строк, «Désactiver suite à trop de bug») переключало PM здания `building_bank` у подданных по валюте

@@ -1,3 +1,10 @@
+---
+type: code
+description: "Торговля в разрезе 95 валют E&F: записи кнопки и подписи без читателя: кнопка игрока trade_balance_actualized (common/scripted_guis/09_ef_other.txt, кнопки в gui/ld_economy_panel.gui) кроме счётчиков торгового баланса записывала по каждой…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_trade_by_currency/**"]
+---
 # Торговля в разрезе 95 валют E&F: записи кнопки и подписи без читателя
 
 **Что делало:** кнопка игрока `trade_balance_actualized` (`common/scripted_guis/09_ef_other.txt`, кнопки в

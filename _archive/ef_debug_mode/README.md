@@ -1,3 +1,10 @@
+---
+type: code
+description: "Отладочный режим E&F (`EF_debug_mode`): Виджет 01_ef_debug_widget зеркалил [InDebugMode] (консольный режим отладки игры) в глобальную переменную EF_debug_mode через sgui EF_sg_set_debug_flag /…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_debug_mode/**"]
+---
 # Отладочный режим E&F (`EF_debug_mode`)
 
 **Что делал.** Виджет `01_ef_debug_widget` зеркалил `[InDebugMode]` (консольный режим отладки игры) в глобальную переменную `EF_debug_mode`

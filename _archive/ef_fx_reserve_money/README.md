@@ -1,3 +1,10 @@
+---
+type: code
+description: "Печать / изъятие валюты по валютному резерву E&F: money_creation_in_foreign_exchange_reserve (1538 строк) и money_destruction_in_foreign_exchange_reserve (1537 строк): E&F («desactivé ?» в комментарии автора) менял…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_fx_reserve_money/**"]
+---
 # Печать / изъятие валюты по валютному резерву E&F
 
 `money_creation_in_foreign_exchange_reserve` (1538 строк) и `money_destruction_in_foreign_exchange_reserve` (1537 строк):

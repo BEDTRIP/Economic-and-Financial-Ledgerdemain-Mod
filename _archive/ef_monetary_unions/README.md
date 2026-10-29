@@ -1,3 +1,10 @@
+---
+type: code
+description: "Латинский и Скандинавский союзы E&F: записи дневника latin_monetary_union_je_1 (Франция с 1860 года, игрок в Европе) и scandinavian_monetary_union_je_1 (лидер скандинавских стран по списку…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_monetary_unions/**"]
+---
 # Латинский и Скандинавский союзы E&F
 
 **Что делало:** записи дневника `latin_monetary_union_je_1` (Франция с 1860 года, игрок в Европе) и

@@ -1,3 +1,10 @@
+---
+type: code
+description: "Вызов `initialize_historic_macro_facilities_ns` (история зданий): в history/buildings для FRA/GBR/AUS/PRU/NET/CHI/BEL/USA/RUS (и is_valid_country_hmm) вызывался эффект initialize_historic_macro_facilities_ns = { STOCKPILE_SITE =…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_initialize_macro_facilities/**"]
+---
 # Вызов `initialize_historic_macro_facilities_ns` (история зданий)
 
 **Что делало:** в `history/buildings` для FRA/GBR/AUS/PRU/NET/CHI/BEL/USA/RUS (и `is_valid_country_hmm`) вызывался эффект

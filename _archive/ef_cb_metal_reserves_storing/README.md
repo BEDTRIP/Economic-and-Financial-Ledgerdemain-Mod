@@ -1,3 +1,10 @@
+---
+type: code
+description: "Месячная раздача и покупка металла ЦБ (E&F storing_*, zz_ef_cb_metal_purchase_step): E&F раз в месяц клало в gold_state_1 / silver_state_1 столичного штата ЦБ заявки рынка на продажу металла × 100 × 4 (storing_gold_1, storing_silver_1 — металл из…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_cb_metal_reserves_storing/**"]
+---
 # Месячная раздача и покупка металла ЦБ (E&F storing_*, zz_ef_cb_metal_purchase_step)
 
 **Что делало.** E&F раз в месяц клало в `gold_state_1` / `silver_state_1` столичного штата ЦБ заявки рынка на продажу металла

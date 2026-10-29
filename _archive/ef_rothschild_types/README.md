@@ -1,3 +1,10 @@
+---
+type: code
+description: "Четыре типа Ротшильдов E&F (R9а.3, Д.R9а.5): E&F держал пять типов компании Ротшильдов — company_Rothschild_Bank_gbr (Лондон) и _fra (Париж), _ger (Франкфурт, страна FRM), _aus (Вена), _ita (Неаполь, SIC), — каждый…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_rothschild_types/**"]
+---
 # Четыре типа Ротшильдов E&F (R9а.3, Д.R9а.5)
 
 **Что было:** E&F держал пять типов компании Ротшильдов — `company_Rothschild_Bank_gbr` (Лондон) и `_fra` (Париж),

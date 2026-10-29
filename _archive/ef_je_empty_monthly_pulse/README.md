@@ -1,3 +1,10 @@
+---
+type: code
+description: "Пустой `on_monthly_pulse` журнала `financial_center_je_2`: Блок on_monthly_pulse = { effect = { } } с одними комментариями (пузырь speculative_share_1 ведёт ld_bubble_on_actions.txt, перестройку speculative_share_2 —…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_je_empty_monthly_pulse/**"]
+---
 # Пустой `on_monthly_pulse` журнала `financial_center_je_2`
 
 Блок `on_monthly_pulse = { effect = { } }` с одними комментариями (пузырь `speculative_share_1` ведёт `ld_bubble_on_actions.txt`, перестройку `speculative_share_2` — `ld_pb_overbuild_counter.txt`).

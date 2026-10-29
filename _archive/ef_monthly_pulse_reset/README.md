@@ -1,3 +1,10 @@
+---
+type: code
+description: "Месячный `ef_on_monthly_pulse_reset`: ничего. Определение закомментировано (# ef_on_monthly_pulse_reset = { # }), вызов в ef_on_monthly_pulse_country закомментирован."
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_monthly_pulse_reset/**"]
+---
 # Месячный `ef_on_monthly_pulse_reset`
 
 **Что делало:** ничего. Определение закомментировано (`# ef_on_monthly_pulse_reset = {` `# }`), вызов в `ef_on_monthly_pulse_country` закомментирован.

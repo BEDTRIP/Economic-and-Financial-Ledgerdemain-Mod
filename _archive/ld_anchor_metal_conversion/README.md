@@ -1,3 +1,10 @@
+---
+type: code
+description: "Пересчёт резервов подданного в металл якоря: zz_ef_anchor_metal_step (из zz_ef_anchor_update, ld_anchor.txt): у подданного на внешневалютном стандарте переписывал резервы ЦБ в металл якоря по курсу (серебро →…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ld_anchor_metal_conversion/**"]
+---
 # Пересчёт резервов подданного в металл якоря
 
 **Что делал.** `zz_ef_anchor_metal_step` (из `zz_ef_anchor_update`, `ld_anchor.txt`): у подданного на внешневалютном

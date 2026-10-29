@@ -1,3 +1,10 @@
+---
+type: code
+description: "Зонды EFJ и EFD (zz_ef_probe_newyear_cash, zz_ef_probe_pop_income): Диагностика (3.10, этап 0): zz_ef_probe_newyear_cash — в декабре и в первую январскую неделю логировал EFJ по каждому зданию с наличными > 10 000 (откуда скачок наличных…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_probes_efj_efd/**"]
+---
 # Зонды EFJ и EFD (zz_ef_probe_newyear_cash, zz_ef_probe_pop_income)
 
 **Что делали.** Диагностика (3.10, этап 0): `zz_ef_probe_newyear_cash` — в декабре и в первую январскую неделю логировал `EFJ` по каждому зданию с наличными > 10 000 (откуда

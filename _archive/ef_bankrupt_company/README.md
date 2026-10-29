@@ -1,3 +1,10 @@
+---
+type: code
+description: "Банкротство компаний E&F `bankrupt_company`: Вызывался из последствий кризисов E&F — financial_crash_consequences и economic_crisis_consequences (01_financial_scripted_effects.txt): по жёсткому списку из ~300 типов…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_bankrupt_company/**"]
+---
 # Банкротство компаний E&F `bankrupt_company`
 
 **Что делал.** Вызывался из последствий кризисов E&F — `financial_crash_consequences` и `economic_crisis_consequences`

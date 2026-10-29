@@ -1,3 +1,10 @@
+---
+type: code
+description: "Метод «Банка» «Паи фондов» (R8б.6, Д.R8б.16, Д.R8б.24): группа методов pmg_zz_ef_bank_funds здания «Банк» (building_zz_ef_bank): pm_zz_ef_bank_funds — вход паёв mutual_funds 0,04 на единицу рабочей силы;…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ld_bank_funds_pm/**"]
+---
 # Метод «Банка» «Паи фондов» (R8б.6, Д.R8б.16, Д.R8б.24)
 
 **Что делал:** группа методов `pmg_zz_ef_bank_funds` здания «Банк» (`building_zz_ef_bank`): `pm_zz_ef_bank_funds` — вход

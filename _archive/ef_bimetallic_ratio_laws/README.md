@@ -1,3 +1,10 @@
+---
+type: code
+description: "Соотношение биметаллизма — группа законов E&F: Группа lawgroup_bimetalism_ratio (законы law_bimetallic_ratio_no/10/15/20, иконки) и 7 поправок закона 15:1 (amendment_*_bimetallic_ratio*: Франция 15,5, латинский союз…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_bimetallic_ratio_laws/**"]
+---
 # Соотношение биметаллизма — группа законов E&F
 
 **Что делало.** Группа `lawgroup_bimetalism_ratio` (законы `law_bimetallic_ratio_no/10/15/20`, иконки) и 7 поправок

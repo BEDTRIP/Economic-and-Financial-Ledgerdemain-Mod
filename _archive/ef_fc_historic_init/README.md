@@ -1,3 +1,10 @@
+---
+type: code
+description: "Историческое создание финцентра `initialize_historic_macro_facilities_fc` и запасы финцентра США: эффект initialize_historic_macro_facilities_fc (09_introduction_building_lvl.txt) — технологии financial_center, stock_exchange, здание финцентра в $FIN_CENT_SITE$,…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_fc_historic_init/**"]
+---
 # Историческое создание финцентра `initialize_historic_macro_facilities_fc` и запасы финцентра США
 
 **Что делали:** эффект `initialize_historic_macro_facilities_fc` (`09_introduction_building_lvl.txt`) — технологии

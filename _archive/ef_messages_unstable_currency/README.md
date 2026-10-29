@@ -1,3 +1,10 @@
+---
+type: code
+description: "Сообщения `unstable_currency_toast` / `unstable_currency_message`: ленточное и тост-уведомление «потеря доверия к валюте». post_notification на них нигде нет. Переменные, интерфейс: нет."
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_messages_unstable_currency/**"]
+---
 # Сообщения `unstable_currency_toast` / `unstable_currency_message`
 
 **Что делали:** ленточное и тост-уведомление «потеря доверия к валюте». `post_notification` на них нигде нет. **Переменные, интерфейс:** нет.

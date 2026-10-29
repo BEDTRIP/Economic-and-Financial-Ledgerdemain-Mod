@@ -1,3 +1,10 @@
+---
+type: code
+description: "Символ валюты по закону — купюра E&F (`currency_symbol_generic`, `currency_symbol_<cur>`): 96 custom loc currency_symbol_<cur> (по одной на валюту закона E&F, условие var:zz_ef_cur ?= flag:<cur>, текст — <cur>_texture, текстиконка купюры @<cur>!) и…"
+project: vic3
+tags: [форк, архив]
+paths: ["_archive/ef_currency_banknote_symbols/**"]
+---
 # Символ валюты по закону — купюра E&F (`currency_symbol_generic`, `currency_symbol_<cur>`)
 
 **Что делало:** 96 custom loc `currency_symbol_<cur>` (по одной на валюту закона E&F, условие `var:zz_ef_cur ?= flag:<cur>`,
