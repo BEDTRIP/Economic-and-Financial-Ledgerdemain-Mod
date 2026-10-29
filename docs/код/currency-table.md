@@ -1,8 +1,9 @@
 ---
-type: code
-description: "Таблица валют: Сгенерирована tools/regen_ld_currency_data.py из законов, истории и локализации форка — руками не править."
+type: reference
+description: "Таблица валют форка: ключ, название (англ., рус.), ISO, страны и паритет на 1836 — генерат"
 project: vic3
 tags: [форк, код]
+generated: "tools/regen_ld_currency_data.py"
 ---
 # Таблица валют
 
