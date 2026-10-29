@@ -29,4 +29,4 @@ paths: ["_archive/ld_probe_co/**"]
 
 **Вырезано:** `common/on_actions/ld_probe_co_on_actions.txt`, `common/scripted_effects/ld_probe_co.txt`,
 `common/scripted_guis/ld_probe_co.txt`, `events/ld_probe_co_events.txt`, `gui/ld_probe_co.gui`,
-`gui/scripted_widgets/ld_probe_co.txt` (здесь), абзац пробы в `docs/код/exchange-companies.md`.
+`gui/scripted_widgets/ld_probe_co.txt` (здесь), абзац пробы в [[exchange-companies]].

@@ -13,7 +13,7 @@ paths: ["_archive/ef_currency_crisis_resold/**"]
 в ЦБ-штате продавца (`stockpiling_<cur>_state_1`) — эмитенту за металл по паритету (`zz_ef_crisis_redeem`), запас — в 0,
 `reset_debt_in_national_currency` у эмитента.
 
-**Почему вынуто (R8б, шаг 2):** чужие деньги ЦБ — реестр требований (карта `zz_ef_rq_cb_m`, `docs/код/claims.md`), а не
+**Почему вынуто (R8б, шаг 2):** чужие деньги ЦБ — реестр требований (карта `zz_ef_rq_cb_m`, [[claims]]), а не
 запасы E&F в ЦБ-штатах; продажа держателей — `zz_ef_rq_crisis_resell` (`common/scripted_effects/ld_claims.txt`).
 `reset_debt_in_national_currency` (звали только `sell_<cur>_currency_crisis`) — тоже здесь: долг E&F в нацвалюте модель не ведёт.
 

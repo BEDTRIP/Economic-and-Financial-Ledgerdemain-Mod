@@ -14,7 +14,7 @@ paths: ["_archive/ef_cb_debt_private_banks/**"]
 
 **Почему мёртв:** списки никто не заполнял — их только очищали (`central_bank_debt_privat_bank_buyer_list_N_clear`,
 кнопка очистки списков ЦБ); значения складывались в суммы E&F и всегда давали 0 (покупки облигаций частными банками E&F —
-в `_archive/ef_ai_treasury_bonds/`, Д.R6.6). Найдено аудитом 16.10, снято в R9б.19.
+в `_archive/ef_ai_treasury_bonds/`, [[Д.R6.6 — Свои облигации в реестре|Д.R6.6]]). Найдено аудитом 16.10, снято в R9б.19.
 
 **Вырезано** (по исходным путям этой папки):
 - `common/script_values/00_financial_scripted_value.txt` — 20 значений `ai_central_bank_debt_privat_bank_gold_loaned_1..10`,

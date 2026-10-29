@@ -1,0 +1,22 @@
+# Документы форка: v3 docs check (раскладка — Д.ДОК.4). README.md — страница мода, SECURITY.md и other/ — не документы.
+name = "ledgerdemain"
+project = "vic3"
+node = "vic3"
+docs = ["docs/**", "_archive/**/README.md", "tools/**/README.md", "gfx_src/README.md"]
+history = ["docs/история/**"]
+map = "docs/понятия/_Карта понятий.md"
+# у понятий форка «Подсказка» вместо «Сути» (уходит в игру текстом); у заметок использования и обзоров — только «Рабочее»
+concept_core = ["Суть", "Подсказка"]
+concept_no_core_tags = ["обзор", "использование"]
+# пути в обратных кавычках в документах — существуют; файлы common/ и events/ — в paths какого-нибудь документа
+code_roots = ["common/", "gui/", "events/", "localization/"]
+cover = ["common/**", "events/**"]
+cover_strict = true
+# номера решений в комментариях кода и скриптов
+code_ext = [".txt", ".gui", ".yml", ".py"]
+code_exclude = ["_archive/**"]
+code_decision = '(?<![\w.\-])([ДВ][.\-]?(?:R\d+[а-я]?|П|Г|\d+)(?:\.[\dА-Яа-яA-Za-z]+)+)'
+# где сверять пути: документы кода (понятия и решения называют и пути ваниль, и старые пути)
+code_roots_in = ["docs/код/**"]
+# правило форка: формат заметок понятий — подсказка уходит в игру текстом (Д.R10.8)
+extra = ["python tools/ld_docs_check.py"]

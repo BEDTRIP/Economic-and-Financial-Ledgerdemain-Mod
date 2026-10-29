@@ -3,12 +3,13 @@ type: code
 description: "Стройка (PSC + E&F private construction + лимит секторов): Стройка — PSC внутри форка: частный сектор и казна платят за строительные товары, частная стройка — кредит банков из пула, рычаг — ставка."
 project: vic3
 tags: [форк, код]
+paths: ["common/buildings/zz_PSC_construction.txt", "common/building_groups/zz_PSC_building_groups.txt", "common/production_methods/zz_PSC_construction.txt", "common/production_method_groups/PSC_construction.txt", "common/goods/PSC_goods.txt", "common/defines/PSC_defines.txt", "common/history/global/PSC_global.txt", "common/history/buildings/PSC_buildings.txt", "common/modifier_type_definitions/PSC_building_modifier_types.txt", "common/static_modifiers/PSC_modifiers.txt", "common/alert_types/PSC_alert_types.txt", "common/on_actions/PSC_on_actions.txt", "common/scripted_effects/PSC_scripted_effects.txt", "common/scripted_effects/PSC_delay_event_switch.txt", "common/script_values/PSC_construction_values.txt", "common/scripted_guis/PSC_construction_sguis.txt", "gui/PSC_construction_panel.gui", "gui/shared/PSC_construction_spending_options.gui", "gui/PSC_construction_expense_widget.gui", "gui/PSC_states_panel_buildings.gui", "gui/PSC_goods_texticons.gui", "common/game_concepts/PSC_game_concepts.txt", "gui/scripted_widgets/PSC_scripted_widgets.txt", "common/scripted_effects/ld_psc_market_fill.txt", "common/script_values/ld_psc_market_fill_values.txt", "common/script_values/ld_psc_private_allocation.txt", "common/script_values/ld_pb_overbuild_values.txt", "common/script_values/ld_pb_remap_pcs_values.txt", "common/on_actions/ld_pb_overbuild_counter.txt", "common/on_actions/ld_pb_ai_sector_downsize.txt", "common/scripted_effects/ld_pb_ai_sector_downsize_effects.txt", "common/static_modifiers/ld_pb_overbuild_modifiers.txt", "common/messages/ld_pb_overbuild_messages.txt", "common/scripted_buttons/ld_pb_css_private_ban_buttons.txt", "common/scripted_guis/ld_pb_fso_sguis.txt", "gui/scripted_widgets/ld_pb_fso_widgets.gui", "gui/ld_national_capacity_chart.gui", "common/static_modifiers/ld_rate_private_construction.txt", "common/pop_needs/ld_household_construction.txt", "common/buy_packages/00_ef_buy_packages.txt", "common/production_methods/ld_household_construction_pms.txt", "common/building_groups/00_ef_building_groups.txt", "common/buildings/ef_11_private_infrastructure.txt", "common/script_values/00_financial_scripted_value.txt", "common/scripted_effects/09_introduction_building_lvl.txt", "common/history/buildings/00_ef_building.txt", "common/defines/zz_ef_reinvestment_defines.txt", "common/scripted_guis/00_financial_scripted_guis.txt", "common/scripted_effects/ld_psc_log.txt", "common/script_values/PSC_set_values.txt", "common/script_values/PSC_event_values.txt", "common/scripted_effects/PSC_production_method_building_switch.txt", "common/script_values/ld_pb_ai_construction_values.txt"]
 ---
 # Стройка (PSC + E&F private construction + лимит секторов)
 **Смысл.** Стройка — PSC внутри форка: частный сектор и казна платят за строительные товары, частная стройка — кредит
 банков из пула, рычаг — ставка. **Понятия:** [[Строительство|Стройка]], [[Инвестиционный пул|Пул]], [[Ставка ЦБ]],
-[[Рычаги на движок]]. **Решения:** Д.R3.7, Д.R2.13, Д.Г.6, Д.Г.7, Д.R9.5 (аудит PSC; правила — Д.R8в.27)
-(`docs/решения/`); отменённые Д.R8в.24, Д.R8в.26 — `docs/история/2026-10-14 этап R9.md`, «Перенесено».
+[[Рычаги на движок]]. **Решения:** [[Д.R3.7 — Частная стройка — только на деньги населения и банков|Д.R3.7]], [[Д.R2.13 — Выкуп сектора PSC — проводка казна → пул|Д.R2.13]], [[Д.Г.6 — Где нет секторов — натуральные хозяйства производят немного|Д.Г.6]], [[Д.Г.7 — Сколько дают натуральные хозяйства — столько, сколько покупают|Д.Г.7]], [[Д.R9.5 — Аудит PSC и закупка регулятора по рынку — в R9|Д.R9.5]] (аудит PSC; правила — [[Д.R8в.27 — Цикл PSC|Д.R8в.27]])
+(`docs/решения/`); отменённые [[Д.R8в.24 — Регулятор стройки покупает все четыре стройматериала|Д.R8в.24]], [[Д.R8в.26 — В регуляторе стройки работают рабочие|Д.R8в.26]] — [[2026-10-14 этап R9]], «Перенесено».
 
 Частный сектор строит через здание `building_construction_sector` (PSC), казна платит остаток через регулятор очков
 `building_construction_regulator`; делёж долей (частные/государственные очки стройки) пересчитывается раз в неделю.
@@ -26,8 +27,8 @@ tags: [форк, код]
   `bg_construction_regulator`.
 - `common/production_methods/zz_PSC_construction.txt` — PM сектора
   `pm_wooden/iron_frame/steel_frame/arc_welded_buildings` (вход: материалы; выход: `*_construction`; выпуск
-  «акций» E&F `manufacture_stock` снят — Д.R4б.8; выход стройтоваров больше на его выручку по базовым ценам: 24 / 64 /
-  136 / 204 — Д.R4б.14; железо × 2 — 128, чтобы сектора покрывали заказы регуляторов без цены нехватки, Д.R9.10,
+  «акций» E&F `manufacture_stock` снят — [[Д.R4б.8 — Товары-«акции» E&F|Д.R4б.8]]; выход стройтоваров больше на его выручку по базовым ценам: 24 / 64 /
+  136 / 204 — [[Д.R4б.14 — Стройка без «акций»|Д.R4б.14]]; железо × 2 — 128, чтобы сектора покрывали заказы регуляторов без цены нехватки, [[Д.R9.10 — Регулятор стройки не больше предложения рынка — вместе с выпуском|Д.R9.10]],
   принято ночью), PM регулятора `pm_{wood,iron,steel,arc_welded}_point_conversion` (`country_construction_add`;
   вход — 10 единиц своего стройтовара на очко).
 - `common/production_method_groups/PSC_construction.txt` — `pmg_construction_regulator`.
@@ -61,23 +62,23 @@ tags: [форк, код]
   (`gui/PSC_construction_expense_widget.gui`); оба файла — одна строка без перевода строки.
 
 **Ledgerdemain (`ld_*`) над PSC**
-- Снята и лежит в архиве: закупка регулятора по рынку (Д.R9.5, Д.R9.11 — смесь стройтоваров: очки −21 % в R9 и −7…−16 %
-  в R9б.2, дерево уходит в нехватку; `_archive/psc_regulator_market_mix/`, вопрос В.R9б.5 в `docs/история/2026-10-17 этап R9б.md`).
+- Снята и лежит в архиве: закупка регулятора по рынку ([[Д.R9.5 — Аудит PSC и закупка регулятора по рынку — в R9|Д.R9.5]], [[Д.R9.11 — Закупка регулятора по рынку — очки по базовой цене товара метода|Д.R9.11]] — смесь стройтоваров: очки −21 % в R9 и −7…−16 %
+  в R9б.2, дерево уходит в нехватку; `_archive/psc_regulator_market_mix/`, вопрос В.R9б.5 в [[2026-10-17 этап R9б]]).
 - `common/scripted_effects/ld_psc_market_fill.txt`, `common/script_values/ld_psc_market_fill_values.txt` — регулятор не
-  больше предложения рынка (Д.R9.4, Д.R9.10): `zz_ef_psc_fill_update` в начале недели PSC — на стране
+  больше предложения рынка ([[Д.R9.4 — Регулятор стройки — не больше предложения рынка|Д.R9.4]], [[Д.R9.10 — Регулятор стройки не больше предложения рынка — вместе с выпуском|Д.R9.10]]): `zz_ef_psc_fill_update` в начале недели PSC — на стране
   `var:zz_ef_psc_k_<товар>` (`wood`, `iron`, `steel`, `arc_welded`) = прошлое k × продажи / заказы стройтовара на рынке
   страны, в пределах [`zz_ef_psc_k_min` 0,05; 1] (заказов нет — 1); в штате `zz_ef_psc_fill_v` — k товара метода его
   регулятора (1 без регулятора и в штате без стройсекторов: там метод регулятора — по технологии, а не по секторам,
   `set_point_conversion_method_from_tech`, и товара на рынке может не быть — принято ночью); пропускная регулятора и
   очки штата × k. Регулятор игры берёт деньги за весь заказ, а
-  недостающее на рынке сгорает (статья «движок: оплачено сверх продаж рынка», Д.R4б.27) — k сводит заказы регуляторов к
-  предложению, как металл (`zz_ef_mt_k_*`); выпуск стройсекторов поднят, чтобы они окупались без цены нехватки (Д.R9.10,
+  недостающее на рынке сгорает (статья «движок: оплачено сверх продаж рынка», [[Д.R4б.27 — Разрыв|Д.R4б.27]]) — k сводит заказы регуляторов к
+  предложению, как металл (`zz_ef_mt_k_*`); выпуск стройсекторов поднят, чтобы они окупались без цены нехватки ([[Д.R9.10 — Регулятор стройки не больше предложения рынка — вместе с выпуском|Д.R9.10]],
   выход методов — выше).
 - `common/script_values/ld_psc_private_allocation.txt` — REPLACE `private_construction_increase` (цель
   `zz_ef_psc_private_target`: доход + простаивающий пул (сверх нужды банков `zz_ef_pool_need`, за
-  `zz_ef_psc_idle_release_weeks` = 13 недель, Д.R9б.3) + ставка, × рычаг кредита `zz_ef_psc_credit_f` — от 0,5 без
+  `zz_ef_psc_idle_release_weeks` = 13 недель, [[Д.R9б.3 — Свободные деньги пула — частной стройке быстрее|Д.R9б.3]]) + ставка, × рычаг кредита `zz_ef_psc_credit_f` — от 0,5 без
   свободного лимита банков до 1, когда свободный лимит страны `var:zz_ef_bk_free_cr` ≥ 13 недель нового делового
-  кредита (Д.R9.2, принято ночью; `docs/код/banks.md`).
+  кредита ([[Д.R9.2 — Лимит кредита — у каждого банка свой|Д.R9.2]], принято ночью; [[banks]]).
 - `common/script_values/ld_pb_overbuild_values.txt` — лимит и перестройка: `zz_pb_ef_css_levels`,
   `zz_pb_ef_urban_center_levels`, `zz_pb_ef_css_rate_factor`, `zz_pb_ef_overcap_target/gap`, `zz_pb_ef_overbuild_step`,
   цена выкупа `zz_pb_ef_state_css_buyout`, порядок сноса `zz_pb_ef_state_css_downsize_order`.
@@ -104,7 +105,7 @@ tags: [форк, код]
 - `common/pop_needs/ld_household_construction.txt` — `popneed_household_construction` (4 стройтовара); подключён в
   `common/buy_packages/00_ef_buy_packages.txt` (`wealth_1..9`).
 - `common/production_methods/ld_household_construction_pms.txt` — 10 `INJECT:` в натуральные PM
-  (`pm_home_workshops_*_subsistence_*`: +0.06 `wood_construction`, рисовые — 0.12; Д.Г.7) и 4 `REPLACE:` ванильных PM
+  (`pm_home_workshops_*_subsistence_*`: +0.06 `wood_construction`, рисовые — 0.12; [[Д.Г.7 — Сколько дают натуральные хозяйства — столько, сколько покупают|Д.Г.7]]) и 4 `REPLACE:` ванильных PM
   городского центра (`pm_market_stalls/squares/covered_markets/arcades`: вход — стройтовар). Ключи — ванильные имена,
   поэтому refs=0 в индексе.
 
@@ -145,11 +146,11 @@ tags: [форк, код]
      модификатором `country_private_construction_allocation_add`;
    - `total_construction_spending` и по штатам в порядке `construction_ordering` (`ordered_scope_state`: `min = 0`,
      `max = 1000`, `check_range_bounds = no` — все штаты): `set_construction_regulator_level` (регулятор растёт до
-     уровня сектора, не сносится — Д.R8в.27), `state_construction_spending_allocation` (доля штата — по стоимости его
+     уровня сектора, не сносится — [[Д.R8в.27 — Цикл PSC|Д.R8в.27]]), `state_construction_spending_allocation` (доля штата — по стоимости его
      выпуска: выпуск × базовая цена / `weighted_total`; от 0 до остатка трат страны
      `var:psc_remaining_construction_spending` — переменная страны, уменьшается после каждого штата и снимается после
      цикла), `set_state_construction_efficiency` (модификатор на сектор), `state_construction_allocation` × k рынка
-     товара регулятора (`zz_ef_psc_fill_v`, Д.R9.4) -> `construction_throughput_mult` на регуляторе; в начале недели —
+     товара регулятора (`zz_ef_psc_fill_v`, [[Д.R9.4 — Регулятор стройки — не больше предложения рынка|Д.R9.4]]) -> `construction_throughput_mult` на регуляторе; в начале недели —
      `zz_ef_psc_fill_update` (k рынка);
    - `prev_estimated_investment_pool = investment_pool + investment_pool_net_income`.
 4. `set_spending_value` (только игрок) -> `set_government_construction_spending`.
@@ -165,7 +166,7 @@ tags: [форк, код]
 ## Переменные
 | имя | смысл | пишет | читает |
 |---|---|---|---|
-| `zz_ef_psc_k_<товар>` (страна) | k рынка стройтовара (Д.R9.4) | `zz_ef_psc_fill_update` | `zz_ef_psc_fill_v`, лог `EFZ` |
+| `zz_ef_psc_k_<товар>` (страна) | k рынка стройтовара ([[Д.R9.4 — Регулятор стройки — не больше предложения рынка\|Д.R9.4]]) | `zz_ef_psc_fill_update` | `zz_ef_psc_fill_v`, лог `EFZ` |
 | `last_construction_run` (страна) | дата последнего пересчёта | `set_construction_country`, `psc_save_real_construction_cost` | `psc_test_show`, `on_acquired_construction_tech` |
 | `construction_spending_level` (страна) | доля макс. госрасходов на стройку | `check_construction_spending_level`, `psc_button_*_sgui` | `max_government_construction_at_spending_level` |
 | `max_government_construction_spending`, `max_government_construction_at_spending_level`, `limited_government_construction_spending`, `total_construction_spending` | расходы | `set_construction_point_demand`, sgui | значения PSC, GUI |
@@ -189,7 +190,7 @@ tags: [форк, код]
   входит через `zz_ef_rate_constr_applied`. Пишут деньги: только `zz_pb_ef_css_downsize_one` (выкуп сектора:
   `add_treasury -X` и `add_investment_pool +X`, X = доля частных x уровень x 15000, перенос казна -> пул без
   сторон-контрагентов).
-- Сектор «акций» не выпускает (Д.R4б.8) и содержит
+- Сектор «акций» не выпускает ([[Д.R4б.8 — Товары-«акции» E&F|Д.R4б.8]]) и содержит
   `pmg_market_liquidity` (`pm_market_liquidity_currency`, сохраняется при сносе уровня).
 - Покупатели `*_construction`: регулятор (очки), домохозяйства (`popneed_household_construction`), ЖКХ (4 PM городских
   центров).
@@ -201,9 +202,9 @@ tags: [форк, код]
 
 ## Логи
 `EFZ` (при логах, раз в неделю PSC на страну, `zz_ef_psc_log` в `common/scripted_effects/ld_psc_log.txt`): `total` —
-траты на стройку, `alloc` — роздано штатам, `pts` — очки, купленные на них (× K рынка, Д.R9.4), `rest` — не роздано,
+траты на стройку, `alloc` — роздано штатам, `pts` — очки, купленные на них (× K рынка, [[Д.R9.4 — Регулятор стройки — не больше предложения рынка|Д.R9.4]]), `rest` — не роздано,
 `prod` — выпуск стройтоваров страны, `gov` — государственная часть трат, `wtot` — сумма выпуск × базовая цена по
-штатам, `csec_profit`, `csec_lv` — прибыль и уровни стройсекторов, `cf` — рычаг кредита частной доли (Д.R9.2), `kw`,
+штатам, `csec_profit`, `csec_lv` — прибыль и уровни стройсекторов, `cf` — рычаг кредита частной доли ([[Д.R9.2 — Лимит кредита — у каждого банка свой|Д.R9.2]]), `kw`,
 `ki` — k дерева и железа. Сводка
 по годам —
 `tools/ld_psc_sum.py`. Уведомление

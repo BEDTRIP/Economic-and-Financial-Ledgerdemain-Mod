@@ -3,11 +3,12 @@ type: reference
 description: "Документы кода форка по подсистемам — что где и с чего начать; файл папки docs/код/"
 project: vic3
 tags: [форк, код]
+paths: ["common/history/", "common/scripted_effects/ld_start_setup.txt", "common/scripted_effects/ld_metal_accounts.txt", "common/on_actions/", "common/scripted_effects/00_on_action_main.txt", "common/scripted_effects/ld_money_model.txt", "common/script_values/01_economic_currency_scripted_value.txt", "common/scripted_effects/ld_standard_switch.txt", "common/script_values/ld_cb_rate_values.txt", "common/scripted_effects/ld_monetary_policy.txt", "common/buildings/ld_bank.txt", "common/scripted_effects/ld_bank_seed.txt", "common/scripted_effects/ld_nr_deposits.txt", "common/scripted_effects/ld_bond_ledger.txt", "common/scripted_effects/ld_consols.txt", "common/scripted_effects/ld_claims.txt", "common/script_values/ld_claims_values.txt", "common/scripted_effects/ld_clearing.txt", "common/scripted_guis/ld_cbfx.txt", "common/company_types/00_ef_companies.txt", "common/scripted_effects/ld_listing.txt", "common/script_values/ld_capitalization_snapshot.txt", "common/scripted_effects/PSC_scripted_effects.txt", "common/script_values/ld_pb_overbuild_values.txt", "common/pop_needs/00_ef_pop_needs.txt", "common/buy_packages/00_ef_buy_packages.txt", "common/goods/ef_00_goods.txt", "common/scripted_effects/01_economic_scripted_effects.txt", "common/scripted_triggers/00_ef_custom_trigger.txt", "gui/00_ef_deported_gui_1.gui", "common/scripted_guis/00_economic_scripted_guis.txt", "gui/ld_money_hook.gui", "common/history/buildings/", "common/history/global/", "common/history/states/", "common/scripted_effects/ld_country_init.txt"]
 ---
 # Документация мода — карта
 
 Для агента, который правит мод: **код** — где лежит, какие переменные и вызовы. **Что это и зачем** — заметки `docs/понятия/`
-([[_Карта понятий]]): одно понятие — одна заметка; **почему так** — `docs/решения/`; **что дальше** — план узла `../docs/план.md` и этапы `../docs/этапы/`.
+([[_Карта понятий]]): одно понятие — одна заметка; **почему так** — `docs/решения/`; **что дальше** — план узла [[план]] и этапы `../docs/этапы/`.
 Читать этот файл первым, дальше — документ нужной подсистемы; каждый документ начинается со смысла и ссылок на понятия.
 Документы описывают текущее состояние: правка мода, которая меняет описанное, правит документ и заметку понятия в том же
 коммите (`CLAUDE.md` форка). Игра `docs/` не читает. Ключи в файлах `ld_*` — с префиксом `zz_ef_`.
@@ -56,11 +57,11 @@ tags: [форк, код]
 - Файлы E&F и PSC — под своими именами (`00_ef_*`, `01_*`, `ef_*`, `PSC_*`). Файлы проекта — `ld_*`; **ключи внутри
   `ld_*` сохранили имена `zz_ef_*` / `zz_pb_ef_*`** (эффекты, значения, переменные, on_action'ы).
 - Переменные E&F по валюте — шаблон с `<cur>` (95 валют): `stockpiling_<cur>_state_1`, `money_value_<cur>` …; металл
-  денежной власти — счета страны `zz_ef_am_gold` / `zz_ef_am_silver` (Д.R4а.2).
+  денежной власти — счета страны `zz_ef_am_gold` / `zz_ef_am_silver` ([[Д.R4а.2 — Счета денежной власти|Д.R4а.2]]).
 - Логи — `debug_log` с префиксом `EFx|дата|страна|метка|поле значение|…` в `game.log`; таблица префиксов —
   `entry-points.md`, «Логи».
 - GUI-тип регистрирует первый файл по имени; дубль типа — мёртвый (`interface.md`).
-- Мёртвые механизмы — в `_archive/` (игра не читает; оглавление — `_archive/README.md`, правила — `CLAUDE.md`).
+- Мёртвые механизмы — в `_archive/` (игра не читает; оглавление — [[_archive/README]], правила — `CLAUDE.md`).
 
 ## Куда смотреть
 | задача | куда |
@@ -78,8 +79,9 @@ tags: [форк, код]
 ## Инструменты (`tools/`)
 - `ld_index.py` — индекс определений форка и числа ссылок на каждое (`refs = 0` — кандидат в мёртвые; -1 — точка входа
   движка). Вывод — `_tmp_analysis/ld_index/index.tsv`.
-- `ld_docs_check.py` — каждый файл `common/` и `events/` упомянут в `docs/`, пути в `docs/` существуют. Запускать после
-  правки документов или добавления / удаления файлов.
+- `v3 docs check` (раскладка — `docs-check.toml`) — каждый файл `common/` и `events/` в `paths` какого-нибудь документа кода, пути
+  в документах кода существуют, ссылки и шапки по методике; формат заметок понятий — `ld_docs_check.py` (его зовёт
+  `v3 docs check`). Запускать после правки документов или добавления / удаления файлов.
 - `ld_gen.py` + `regen_ef_*.py` — генераторы (`generators.md`); `ld_loc_langs.py` — девять языков из английского;
   `ld_sync_live.py` — живая копия мода.
 - `ld_smells.py` — смеллы кода по графу вызовов: где проверки закона валюты, цепочки `if / else_if`, перебор в переборе,

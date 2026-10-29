@@ -11,7 +11,7 @@ paths: ["_archive/ef_currency_stockpiles/**"]
 `stockpiling_<валюта>_state_1` и `…_reserve_currency_state_1` (невыпущенные деньги ЦБ); их сумма — `money_supply_state`
 (`01_economic_currency_scripted_value.txt`). Модель денег форка этот запас не ведёт: его читают только счёт `cb` сверки
 (`ld_money_model.txt`, `zz_ef_money_ledger_delta = { ACC = cb VALUE = money_supply_state }`), карточка ЦБ, панели и
-значения E&F (разведка — `docs/история/2026-10-17 этап R9б.md`, R9б.5а). Снимается кусками (R9б.5); здесь — снятое.
+значения E&F (разведка — [[2026-10-17 этап R9б]], R9б.5а). Снимается кусками (R9б.5); здесь — снятое.
 
 ## Кусок 1 — старт (история)
 
@@ -95,7 +95,7 @@ var:central_bank_location ?= {
 - `common/script_values/01_economic_currency_scripted_value.txt` — `reference_currency_owned_by_the_country` (668 строк:
   запас валюты-эталона страны по 95 валютам). Его читал только `reference_currency_in_gold_fixe`
   (`01_economic_scripted_effects.txt`) — для перехода ИИ на золотодевизный стандарт
-  (`is_monetary_systeme_transition_valid_country_to_gold_exchange_standard`). Заменено (Д.R9б.15): требования ЦБ
+  (`is_monetary_systeme_transition_valid_country_to_gold_exchange_standard`). Заменено ([[Д.R9б.15 — Переход ИИ на золотодевизный стандарт без запасов валют E&F|Д.R9б.15]]): требования ЦБ
   страны к эмитенту-эталону (карта `zz_ef_rq_cb_m`, деньги эмитента).
 
 ### Удалено из живых файлов

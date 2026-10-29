@@ -3,6 +3,7 @@ type: code
 description: "Потребности населения и товары: Что население покупает из денег и финпродуктов и как это висит на пакетах покупок."
 project: vic3
 tags: [форк, код]
+paths: ["common/pop_needs/00_ef_pop_needs.txt", "common/pop_needs/ld_household_construction.txt", "common/pop_needs/ld_metal_hoard.txt", "common/buy_packages/00_ef_buy_packages.txt", "common/goods/ef_00_goods.txt", "common/goods/PSC_goods.txt", "common/named_colors/00_ef_goods_colors.txt", "common/prestige_goods/00_ef_prestige_goods.txt", "common/company_types/00_ef_companies.txt"]
 ---
 # Потребности населения и товары
 **Смысл.** Что население покупает из денег и финпродуктов и как это висит на пакетах покупок. **Понятия:**
@@ -45,15 +46,15 @@ tags: [форк, код]
   на уровне 1 до 432 на уровне 99; спрос населения ~2% ВВП, решение Д2.2). Ключ в строке один: повторы одного ключа в
   `goods` движок складывает.
 - `popneed_household_construction = Y` — строительные товары, во всех 99 уровнях (6 → 30750; × 0,8 — заказы не больше
-  продаж рынка, Д.R4б.27).
-- `popneed_metal_hoard = Z` — металлы-накопления, уровни 5–14 (1 → 6; × 0,55, Д.R4б.27), и в строках 1–4 и 15–99
+  продаж рынка, [[Д.R4б.27 — Разрыв|Д.R4б.27]]).
+- `popneed_metal_hoard = Z` — металлы-накопления, уровни 5–14 (1 → 6; × 0,55, [[Д.R4б.27 — Разрыв|Д.R4б.27]]), и в строках 1–4 и 15–99
   отсутствует.
 - Покупки населения по этой потребности — металл населения `zz_ef_popm_gold/silver` (`zz_ef_metal_week_step`):
   потребление штатов `sg:<металл>.state_goods_consumption` минус вход банков
   (`building_zz_ef_bank`; металл ЦБ покупают они же), не ниже 0; в статистике движка — обычный спрос населения на товар. Отдельного потребления
   попов скрипт не читает (`triggers.log`: только `state_goods_consumption`), но других потребителей золота и серебра нет
   ни в форке, ни в пачке (поиск `goods_input_gold/silver_*` по оригиналам модов и мастерской), так что остаток точен.
-- `popneed_financial_products = F` — финпродукты, начиная с уровня 15 (14 → 126195 на 99; × 0,35, Д.R4б.27). Цепочка:
+- `popneed_financial_products = F` — финпродукты, начиная с уровня 15 (14 → 126195 на 99; × 0,35, [[Д.R4б.27 — Разрыв|Д.R4б.27]]). Цепочка:
   `liquidity_currency` производят банки (`production_methods/ld_bank_pm.txt`, `ld_trade_center_settlements.txt`) и
   покупают здания (`pm_market_liquidity_currency`, вход 28) и попы; `bond`/акции производят ПМ владения
   (`goods_output_<stock>_add` в `production_methods/01..03/11_ef_*`) и покупают фин. центры
@@ -68,7 +69,7 @@ tags: [форк, код]
 
 ## Вызовы и связи
 - Товары `bond`/акции/`mutual_funds`/`liquidity_currency` участвуют в модели `ld_*` (клиринг, листинг, капитализация,
-  массовое владение акциями `script_values/ld_mass_shareholding_values.txt`; капитализация — акции компаний, Д.R6.12).
+  массовое владение акциями `script_values/ld_mass_shareholding_values.txt`; капитализация — акции компаний, [[Д.R6.12 — Капитализация и товары-«акции»|Д.R6.12]]).
 - Для каждого товара в `modifier_type_definitions/00_ef_building_modifier_types.txt` заведены
   `goods_input_<good>_add/_mult`, `goods_output_<good>_add/_mult` (134 имени: 38 — на 10 живых товаров, 96 — на
   несуществующие товары (национальные валюты `<cur>_c`, `war_bond`), их читают значения `base_demande_<валюта>`

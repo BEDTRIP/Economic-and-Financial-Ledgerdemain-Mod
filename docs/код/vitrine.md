@@ -3,10 +3,11 @@ type: code
 description: "Витрина — список имён, которые читают окна: Окна читают значения модели только через витрину (Витрина; Д.R0.8.10, Д.R3б.3): всё, что они берут функциями данных (ScriptValue / Var / GetVariable с zz_ef_*),…"
 project: vic3
 tags: [форк, код]
+paths: ["localization/english/replace/ld_money_supply_replace_l_english.yml", "localization/english/ld_economy_panel_l_english.yml", "localization/english/ld_bimet_ratio_l_english.yml", "gui/ld_cb_rate_panel.gui", "localization/english/ld_bond_tables_l_english.yml", "localization/english/ld_pb_overbuild_l_english.yml", "localization/english/01_ef_tooltips_localization_l_english.yml", "localization/english/ld_cb_rate_panel_l_english.yml", "localization/english/replace/ld_cb_loan_replace_l_english.yml", "gui/ld_economy_panel.gui", "localization/english/01_ef_je_localization_l_english.yml", "localization/english/ld_monetary_policy_l_english.yml", "localization/english/ld_monetary_union_l_english.yml", "localization/english/ld_treasury_metal_l_english.yml", "localization/english/ld_panic_l_english.yml", "gui/ld_money_hook.gui", "localization/english/ld_exchange_window_l_english.yml", "gui/00_ef_deported_gui_1.gui"]
 ---
 # Витрина — список имён, которые читают окна
 
-Окна читают значения модели только через витрину ([[Витрина]]; Д.R0.8.10, Д.R3б.3): всё, что они берут функциями
+Окна читают значения модели только через витрину ([[Витрина]]; [[Д.R0.8.10 — Слой «витрины» GUI с R1а|Д.R0.8.10]], [[Д.R3б.3 — Витрина — только у играющих игроков|Д.R3б.3]]): всё, что они берут функциями
 данных (`ScriptValue` / `Var` / `GetVariable` с `zz_ef_*`), перечислено ниже. Классы: `var` — переменная страны; `vit` —
 значение, которое только читает переменную (дёшево); `calc` — значение, считаемое при каждой перерисовке окна
 (переносится за переменную шага в R10; новые числа для окон — переменная шага + `zz_ef_v_*`). Торговля недели в «Бюджет

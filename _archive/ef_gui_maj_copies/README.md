@@ -13,7 +13,7 @@ paths: ["_archive/ef_gui_maj_copies/**"]
 `outliner_pinnable_types`, `panel_military`, `pop_details_panel`, `strait_panel`, `table_tooltips`,
 `world_market_panel`), 281 тип и 79 шаблонов.
 
-**Почему вынесено (R12 Л.2, Д.R12.1):** игра не применяла ни одного — `gui.log` прогона r1016_203107: все 360 «Type /
+**Почему вынесено (R12 Л.2, [[Д.R12.1 — Копии ванильных панелей E&F в gui ef_dev_and_custom_windows maj|Д.R12.1]]):** игра не применяла ни одного — `gui.log` прогона r1016_203107: все 360 «Type /
 Template '…' already registered at …» (тип регистрирует первый файл по имени, ванильный и CMF лежат ближе к корню
 `gui/`). В игре видны ванильные и CMF-панели; без папки ничего не меняется.
 
@@ -27,4 +27,4 @@ Template '…' already registered at …» (тип регистрирует пе
   `tools/ld_vanilla_diff.py` (путь к копии — здесь).
 
 **Удалено из живых файлов:** папка `gui/ef_dev_and_custom_windows/maj/` целиком (здесь, по исходным путям); строки
-`docs/код/mechanisms.md`, `docs/код/interface.md`.
+[[mechanisms]], [[interface]].

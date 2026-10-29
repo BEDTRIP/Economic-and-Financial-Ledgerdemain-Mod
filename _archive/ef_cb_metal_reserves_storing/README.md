@@ -8,7 +8,7 @@ paths: ["_archive/ef_cb_metal_reserves_storing/**"]
 # Месячная раздача и покупка металла ЦБ (E&F storing_*, zz_ef_cb_metal_purchase_step)
 
 **Что делало.** E&F раз в месяц клало в `gold_state_1` / `silver_state_1` столичного штата ЦБ заявки рынка на продажу металла
-× 100 × 4 (`storing_gold_1`, `storing_silver_1` — металл из ничего). Д2.7а: обёртка `stockpiling_central_bank_metal_reserves_state`
+× 100 × 4 (`storing_gold_1`, `storing_silver_1` — металл из ничего). [[Д2.7а — Металл ЦБ — только купленный зданием ЦБ|Д2.7а]]: обёртка `stockpiling_central_bank_metal_reserves_state`
 опустошена, их вызов выключен; месячная покупка по модификаторам здания ЦБ (`zz_ef_cb_metal_purchase_step`, пишет
 `gold_state_1`/`silver_state_1` и `zz_ef_cb_stock_acc`) заменена недельной `zz_ef_metal_week_step` (`ld_metal_accounts.txt`).
 

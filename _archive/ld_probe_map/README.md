@@ -27,4 +27,4 @@ paths: ["_archive/ld_probe_map/**"]
   переживают автосейв и его загрузку (`ld_probe_mapsave.1` → r1009_041518, `.2` после загрузки → r1009_041941: FRA 22,
   RUS 33, `has_variable_map` / `has_global_variable_map` — да).
 
-**Вырезано:** `events/ld_probe_map_events.txt`, `events/ld_probe_mapsave_events.txt` (здесь), строка `EFZ` таблицы логов `docs/код/entry-points.md`.
+**Вырезано:** `events/ld_probe_map_events.txt`, `events/ld_probe_mapsave_events.txt` (здесь), строка `EFZ` таблицы логов [[entry-points]].

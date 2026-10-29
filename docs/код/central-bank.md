@@ -3,19 +3,20 @@ type: code
 description: "ЦБ: ставка, денежная политика, кредит ЦБ, облигации ЦБ, премия за риск: ЦБ — опциональный субъект и обычный владелец денежной власти: ставка, паритет, кредит банкам и казне, металл."
 project: vic3
 tags: [форк, код]
+paths: ["common/script_values/ld_cb_rate_values.txt", "common/on_actions/ld_cb_rate_on_actions.txt", "common/scripted_effects/ld_central_bank_rate.txt", "common/scripted_guis/ld_cb_rate_buttons.txt", "common/game_concepts/ld_cb_rate_concepts.txt", "common/scripted_guis/00_financial_scripted_guis.txt", "gui/ld_cb_rate_panel.gui", "common/scripted_effects/ld_rate_policy.txt", "common/static_modifiers/ld_rate_policy.txt", "common/static_modifiers/ld_gov_rate.txt", "common/static_modifiers/ld_rate_private_construction.txt", "common/scripted_effects/ld_monetary_policy.txt", "common/script_values/ld_monetary_policy_values.txt", "common/scripted_guis/ld_monetary_policy_buttons.txt", "common/scripted_triggers/ld_monetary_policy_triggers.txt", "common/laws/01_ef_monetary_policy.txt", "common/scripted_triggers/ld_bimet_ratio_triggers.txt", "common/scripted_guis/ld_bimet_ratio_buttons.txt", "common/script_values/ld_cb_loan_values.txt", "common/script_values/ld_cb_size_values.txt", "common/scripted_effects/ld_cb_size.txt", "common/static_modifiers/ld_cb_size_modifiers.txt", "common/script_values/ld_cb_bond_issuance_values.txt", "common/scripted_effects/ld_cb_bond_issuance.txt", "common/static_modifiers/ld_cb_bond_issuance.txt", "common/script_values/ld_risk_premium_values.txt", "common/scripted_effects/ld_risk_premium.txt", "common/law_groups/ld_central_bank.txt", "common/laws/ld_central_bank_laws.txt", "common/scripted_triggers/ld_cb_foreign_triggers.txt"]
 ---
 # ЦБ: ставка, денежная политика, кредит ЦБ, облигации ЦБ, премия за риск
 **Смысл.** ЦБ — опциональный субъект и обычный владелец денежной власти: ставка, паритет, кредит банкам и казне, металл.
 **Понятия:** [[Центральный банк]], [[Ставка ЦБ]], [[Девальвация и ревальвация]], [[Премия за риск]],
-[[Денежная власть]], [[Покрытие]]. **Решения:** Д.R3.2, Д.R3.3, Д.R8а.6, Д.R8а.9, Д.R8а.12, Д.R2.8 (`docs/решения/`).
-**Крайне слабая валюта** (`is_extreme_weak_currency`, Д.R4а.6): курс к паритету < `zz_ef_cb_crisis_vtp` (0,5) и покрытие
+[[Денежная власть]], [[Покрытие]]. **Решения:** [[Д.R3.2 — Группа «Центральный банк»|Д.R3.2]], [[Д.R3.3 — Правила выпуска и ставки по стандарту|Д.R3.3]], [[Д.R8а.6 — Обменные стандарты — апгрейд металлического, три закона по металлу|Д.R8а.6]], [[Д.R8а.9 — Частный ЦБ — компания|Д.R8а.9]], [[Д.R8а.12 — Денежная власть — один субъект|Д.R8а.12]], [[Д.R2.8 — Кредит ЦБ казне — счёт реестра и проводки|Д.R2.8]] (`docs/решения/`).
+**Крайне слабая валюта** (`is_extreme_weak_currency`, [[Д.R4а.6 — Банкротства ЦБ E&F нет|Д.R4а.6]]): курс к паритету < `zz_ef_cb_crisis_vtp` (0,5) и покрытие
 ЦБ < `zz_ef_cb_crisis_cover` (0,1) (`ld_reference_currency_values.txt`); банкротства ЦБ E&F нет
 (`_archive/ef_central_bank_bankruptcy/`). **От E&F, не решалось:** валютный кризис (спад ценности > 50 % за полгода).
 
 Ставка ЦБ (`var:base_rate_percentage`, доли: 0.05 = 5%) каждые 3 месяца шагает к цели: правило (нейтральная + инфляция +
 рост денег + покрытие металлом) плюс политика игрока `var:zz_ef_rate_bias` (±2 пп, кнопки). Девальвация/ревальвация —
 инструмент ЦБ с целью по покрытию; ИИ двигает паритет по правилу. Премия за риск правительства (рейтинг + стабильность +
-валюта + долг + дефицит) входит в ставку государственных займов. Здания ЦБ нет (Д.R9б.1): ЦБ — модификатор
+валюта + долг + дефицит) входит в ставку государственных займов. Здания ЦБ нет ([[Д.R9б.1 — Здание ЦБ E&F building_bank — в архив|Д.R9б.1]]): ЦБ — модификатор
 `has_central_bank`, его размер — по ВВП; чеканка и база закупки металла — по стандарту × размер, товар «облигации»
 выпускают «Банки» страны с ЦБ — по размеру и долгу / ВВП.
 
@@ -31,8 +32,8 @@ tags: [форк, код]
 - Цена политики ставки: `common/scripted_effects/ld_rate_policy.txt` (`zz_ef_rate_policy_costs`),
   `common/static_modifiers/ld_rate_policy.txt` (`zz_ef_rate_policy_authority`, `_hard_money`, `_soft_money`).
 - Ставка госзаймов: `common/static_modifiers/ld_gov_rate.txt` (`zz_ef_gov_rate_mult`, `zz_ef_gov_rate_add`; ставит
-  `zz_ef_gov_rate_step` раз в месяц). Цель `zz_ef_gov_rate_target` = ключевая + премия `zz_ef_gov_rate_premium` (Д.R5.3,
-  Д.R5.5): риск `zz_ef_cb_rule_risk` + загрузка `zz_ef_risk_debt` (`ld_risk_premium_values.txt`: `zz_ef_gov_load` =
+  `zz_ef_gov_rate_step` раз в месяц). Цель `zz_ef_gov_rate_target` = ключевая + премия `zz_ef_gov_rate_premium` ([[Д.R5.3 — Ставка займов|Д.R5.3]],
+  [[Д.R5.5 — Доходность и ставка|Д.R5.5]]): риск `zz_ef_cb_rule_risk` + загрузка `zz_ef_risk_debt` (`ld_risk_premium_values.txt`: `zz_ef_gov_load` =
   `principal` / `zz_ef_real_credit_limit`, константы `zz_ef_gov_load_*`) + слагаемые игры кроме базы
   `zz_ef_gov_rate_game` (`zz_ef_gov_rate_game_base` 0,2, `_k` 0,25) + слово рынка `zz_ef_gov_rate_yield`
   (`var:zz_ef_gr_yield` из множителя облигаций `zz_ef_xmul_b`), × (1 + `zz_ef_gov_rate_corr`).
@@ -44,14 +45,14 @@ tags: [форк, код]
   `common/scripted_guis/ld_monetary_policy_buttons.txt` (`zz_ef_mp_visible`, `zz_ef_mp_target_m5/m1/p1/p5`,
   `zz_ef_mp_pace_minus/plus`), `common/scripted_triggers/ld_monetary_policy_triggers.txt` (`zz_ef_mp_can_work`,
   `zz_ef_mp_law_on`); законы `common/laws/01_ef_monetary_policy.txt`.
-- Соотношение биметаллизма (Д.R8а.11, руками): `common/scripted_triggers/ld_bimet_ratio_triggers.txt` —
+- Соотношение биметаллизма ([[Д.R8а.11 — Соотношение биметаллизма — параметр стандарта, рычаг денежной власти|Д.R8а.11]], руками): `common/scripted_triggers/ld_bimet_ratio_triggers.txt` —
   `zz_ef_can_bimet_ratio` (кто двигает рычаг: биметаллизм, ЦБ, `var:zz_ef_bimet_ratio`; условие — только здесь),
   `common/scripted_guis/ld_bimet_ratio_buttons.txt` — `zz_ef_bimet_ratio_minus/_plus` (±0,5, от 10 до 25), строка
   «Золото : серебро» в `gui/ld_cb_rate_panel.gui` после строки девальвации/ревальвации; читает
   `bimetallic_rate_gold_to_silver` (`00_economic_scripted_value.txt`). ИИ соотношение не двигает.
 - Кредит ЦБ: `common/script_values/ld_cb_loan_values.txt` (`zz_ef_cb_loan_after_to_gdp`, `_now_to_gdp`); кнопка
   `set_debt_issued` — `00_financial_scripted_guis.txt:2294` (лимит 50% ВВП), `debt_issued_relative_GDP_reduce` (:2270).
-- Размер ЦБ, чеканка, облигации (Д.R9б.1; здание ЦБ E&F `building_bank` — `_archive/ef_central_bank_building/`):
+- Размер ЦБ, чеканка, облигации ([[Д.R9б.1 — Здание ЦБ E&F building_bank — в архив|Д.R9б.1]]; здание ЦБ E&F `building_bank` — `_archive/ef_central_bank_building/`):
   `common/script_values/ld_cb_size_values.txt` (размер `zz_ef_cb_size_v` = `var:zz_ef_cb_size`; цель 5 × `gdp_view`;
   чеканка `zz_ef_cb_mint_v` = величина стандарта (`zz_ef_cb_mint_fiat` 250, `_metal` 1000 — и внешний стандарт,
   `_exchange` 2500) × размер; цель выпуска облигаций `zz_ef_cb_bond_target_v` = 10 × размер × множитель долга; выпуск
@@ -64,7 +65,7 @@ tags: [форк, код]
   (`economic_crisis_destroy_central_bank`). База закупки металла денежной властью `zz_ef_cb_bldg_base_*_goods`
   (`ld_metal_accounts_values.txt`): золото 1 × размер (золотой стандарт, биметаллизм), серебро 10 × размер (серебряный),
   5 × размер (биметаллизм).
-- Облигации ЦБ: `common/script_values/ld_cb_bond_issuance_values.txt` (множитель долга `zz_ef_cb_bond_output_shift`),
+- [[Облигации]] ЦБ: `common/script_values/ld_cb_bond_issuance_values.txt` (множитель долга `zz_ef_cb_bond_output_shift`),
   `common/scripted_effects/ld_cb_bond_issuance.txt` (`zz_ef_cb_bond_issuance_update`: у страны с ЦБ метод «Банков»
   `pm_zz_ef_bank_bonds` — 5 на единицу рабочей силы, принято ночью; открыт законами ЦБ — без ЦБ владельцы его не
   выбирают; метод включается только в областях, где у «Банка» его нет: `activate_production_method` на активном методе
@@ -75,7 +76,7 @@ tags: [форк, код]
 - Премия за риск: `common/script_values/ld_risk_premium_values.txt`, `common/scripted_effects/ld_risk_premium.txt`.
 - Закон «Центральный банк» (R3.2): группа `common/law_groups/ld_central_bank.txt` (`lawgroup_ld_central_bank`), законы
   `common/laws/ld_central_bank_laws.txt` (`law_ld_cb_state` / `_private` / `_none`; вид ЦБ читается законом, `has_law`).
-  **ЦБ — законом (Д.R4а.3):** государственный и частный — с технологией `central_banking`, при денежной системе;
+  **ЦБ — законом ([[Д.R4а.3 — ЦБ появляется законом группы «Центральный банк»|Д.R4а.3]]):** государственный и частный — с технологией `central_banking`, при денежной системе;
   `on_activate` → `zz_ef_cb_found` (`ld_cb_law.txt`: здание ЦБ E&F размера 5 в столице, `central_bank_modifier` —
   модификатор `has_central_bank`, `central_bank_production_methods`; при металлическом стандарте ЦБ забирает у банков
   металл нормы покрытия банкнот `zz_ef_cb_found_take_gold/_silver`, известное движение сверки); «без ЦБ» →
@@ -86,16 +87,16 @@ tags: [форк, код]
   `ld_monetary_authority_triggers.txt`). Старт: история ставит закон по ЦБ истории (`zz_ef_cb_law_sync`,
   `history/global/ld_central_bank_law.txt`), год старта — государственный закон стране, готовой к ЦБ по E&F
   (`zz_ef_cb_law_start`, `ld_start_setup.txt`); месяц — ЦБ следует закону (`zz_ef_cb_law_follow`, хаб E&F
-  `ef_on_monthly_pulse_country`: кризисы E&F снимают здание — закон его возвращает). Металл ЦБ покупают «Банки»
-  (Д.R4а.9). Локализация `ld_cb_law_l_*.yml`. Виды ЦБ (Д.R4а.5): прибыль ЦБ (проценты банков по кредиту ЦБ) —
+  `ef_on_monthly_pulse_country`: кризисы E&F снимают здание — закон его возвращает). [[Металл]] ЦБ покупают «Банки»
+  ([[Д.R4а.9 — ЦБ без «Банков»|Д.R4а.9]]). Локализация `ld_cb_law_l_*.yml`. Виды ЦБ ([[Д.R4а.5 — Частный ЦБ от государственного|Д.R4а.5]]): прибыль ЦБ (проценты банков по кредиту ЦБ) —
   государственного в казну, частного — владельцам (капиталистам: во вклады населения, `ld_money_model.txt`); кредит
   казне — предел `zz_ef_cb_loan_cap` (государственный 50 % ВВП, при фиате без предела, частный 15 %;
   `ld_cb_loan_values.txt`, генератор `regen_ef_cb_loan.py`; кнопка игрока; ИИ E&F — в архиве,
-  `_archive/ef_ai_cb_credit/`, Д.R5.10); правило ставки — вес покрытия и инфляции `zz_ef_cb_kind_w_value` (частный 1,5,
+  `_archive/ef_ai_cb_credit/`, [[Д.R5.10 — Кредит ЦБ казне|Д.R5.10]]); правило ставки — вес покрытия и инфляции `zz_ef_cb_kind_w_value` (частный 1,5,
   государственный 0,75). Частные на старте — Великобритания, Франция, США, Австрия, Нидерланды
   (`history/global/ld_central_bank_law.txt`).
-- **Иностранный ЦБ** (Д.R9а.7, `law_ld_cb_foreign`): виден и доступен стране, где у иностранного банка есть местная
-  книга (`zz_ef_cb_foreign_possible`, `common/scripted_triggers/ld_cb_foreign_triggers.txt`; Д.R9а.2, `banks.md`); ведёт
+- **Иностранный ЦБ** ([[Д.R9а.7 — Закон «Внешний ЦБ»|Д.R9а.7]], `law_ld_cb_foreign`): виден и доступен стране, где у иностранного банка есть местная
+  книга (`zz_ef_cb_foreign_possible`, `common/scripted_triggers/ld_cb_foreign_triggers.txt`; [[Д.R9а.2 — Отделение межрыночного субъекта — часть субъекта|Д.R9а.2]], `banks.md`); ведёт
   себя как частный (`zz_ef_cb_private_like`: кредит казне, вес правила ставки, метод облигаций); прибыль — в капитал
   местной книги банка (`var:zz_ef_cb_fbook`, `ld_money_model.txt`), облигации — «Банк» в области, где страна банка
   владеет уровнями (`var:zz_ef_cb_bank_state`; своя — в `var:zz_ef_cb_bank_state_own` до конца закона); консоли — как у
@@ -113,10 +114,10 @@ tags: [форк, код]
 2. `zz_ef_cb_rate_step`: `base_rate_percentage += zz_ef_cb_rate_next_step`; ставит `rise_base_rate`/`down_base_rate` на
    3 мес. (E&F читает их для арбитража, `00_on_action_main.txt:336`).
 3. Цель: `zz_ef_cb_rate_rating_target` = нейтраль (3% металл / 2.5% фиат) + инфляция (фиат) + рост денег − ВВП (±) +
-   покрытие (металл; только у ЦБ); казна как власть без ЦБ (Д.R4а.11) — то же правило без покрытия, банки металлического
+   покрытие (металл; только у ЦБ); казна как власть без ЦБ ([[Д.R4а.11 — Денежная власть без ЦБ|Д.R4а.11]]) — то же правило без покрытия, банки металлического
    стандарта без ЦБ — `zz_ef_rate_no_authority` 6,5 %; коридор 2..12% металл, 0.5..25% фиат, у внешневалютного
    (подданный с якорем) — от ставки ЦБ якоря (`zz_ef_cb_rate_anchor`, `var:zz_ef_anchor`) до неё + 4 пп в пределах
-   2..12% (`zz_ef_cb_rate_is_dependent`, R3.3, Д.R8а.6); обменные стандарты — своя политика, как металлический
+   2..12% (`zz_ef_cb_rate_is_dependent`, R3.3, [[Д.R8а.6 — Обменные стандарты — апгрейд металлического, три закона по металлу|Д.R8а.6]]); обменные стандарты — своя политика, как металлический
    (`zz_ef_cb_rate_floor/ceiling`). `zz_ef_cb_rate_target` = правило + `var:zz_ef_rate_bias`. Шаг 0.5 пп (1 пп при
    разрыве > 5 пп). Страны без ЦБ — 6.5%.
 4. Месячный шаг денежной модели (`ld_money_model.txt`): `zz_ef_rate_policy_costs` (:1043), `zz_ef_mp_step` (:1050),
@@ -130,7 +131,7 @@ tags: [форк, код]
    `zz_ef_cb_rule_stability` (дефолт, радикалы, легитимность, война, грамотность + `zz_ef_risk_fx` + `zz_ef_risk_debt` +
    `zz_ef_risk_deficit`), 0..8 пп; не входит в ставку ЦБ.
 7. Месяц, `update_modifiers_bc_fc_ns` (все страны) → `zz_ef_cb_mint_update` (чеканка) и, у стран с ЦБ,
-   `zz_ef_cb_bond_issuance_update`: метод облигаций — только у «Банка» компании-ЦБ (`var:zz_ef_cb_bank_state`, Д.R9б.12;
+   `zz_ef_cb_bond_issuance_update`: метод облигаций — только у «Банка» компании-ЦБ (`var:zz_ef_cb_bank_state`, [[Д.R9б.12 — Облигации у «Банков» компании-ЦБ, консоль — долг того, чей ЦБ|Д.R9б.12]];
    нет компании-ЦБ — облигаций нет), множитель долга `var:zz_ef_cb_bond_shift` (долг% /
    `zz_ef_cb_bond_reference_debt_pct` = 50, 0..3×), пункты `var:zz_ef_cb_bond_pts` = (цель / выпуск «Банков» − 1) × 100
    — `zz_ef_cb_bond_issuance_low/_high` на каждом «Банке».
@@ -150,7 +151,7 @@ tags: [форк, код]
 | `zz_ef_risk_fx_pen`, `zz_ef_risk_fx_step`, `zz_ef_risk_susp` | штраф за манипуляцию паритетом / приостановку обмена, затухание 60 мес. | `zz_ef_risk_fx_add`, `zz_ef_risk_monthly` | `zz_ef_risk_fx` |
 | `zz_ef_risk_bal_avg` | скользящее (12 мес.) сальдо бюджета / ВВП | `zz_ef_risk_monthly` | `zz_ef_risk_balance_avg` |
 | `zz_ef_risk_legit` | часть премии за легитимность (< 25 — 0,02, < 50 — 0,01), раз в месяц: триггер легитимности дорог | `zz_ef_risk_monthly` | `zz_ef_cb_rule_stability` |
-| `zz_ef_cb_size` | размер ЦБ (Д.R9б.1) | `zz_ef_cb_size_update`, история, кризис | `zz_ef_cb_size_v` |
+| `zz_ef_cb_size` | размер ЦБ ([[Д.R9б.1 — Здание ЦБ E&F building_bank — в архив\|Д.R9б.1]]) | `zz_ef_cb_size_update`, история, кризис | `zz_ef_cb_size_v` |
 | `zz_ef_cb_mint_set` | множитель чеканки, поставленный модификатору | `zz_ef_cb_mint_update` | он же |
 | `zz_ef_cb_bond_shift`, `zz_ef_cb_bond_pts` | множитель долга выпуска облигаций (пункты), пункты модификатора «Банков» | `zz_ef_cb_bond_issuance_update` | `zz_ef_cb_bond_target_v`; «Банки» (`owner.var:`) |
 | `credit_at_central_bank`, `government_loan`, `debt_issued_relative_GDP(_percentage)`, `zz_ef_cb_writeoff` | долг казны перед ЦБ — счёт реестра (деньги движка; `government_loan` — то же в валюте E&F), размер займа, списанное ЦБ без денег | `set_debt_issued`, `refund_credit_at_central_bank(_all)`, ИИ `ai_credit_at_central_bank` / `ai_refund_central_bank` — проводками (деньги казны помечены `zz_ef_tr_mark`) | `zz_ef_cb_loan_*`, `zz_ef_cb_bond_debt_pct`, `ld_money_model_values.txt:301` |

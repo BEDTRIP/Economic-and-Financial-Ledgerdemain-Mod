@@ -11,7 +11,7 @@ paths: ["_archive/ef_market_owner_ban/**"]
 `law_silver_standard`, `law_bimetallism_standard`, `law_gold_standard` (`common/laws/01_ef_monetary_system.txt`) и в
 `is_valid` трёх кнопок смены стандарта (`common/scripted_guis/00_economic_scripted_guis.txt`). Движок на загрузке
 срезал стандарт истории у стран на чужом рынке (Бавария, Саксония, Вюртемберг, Финляндия, Ганновер: «not permitted to
-retain law»), Бавария и Саксония весь прогон были без денежной системы при ЦБ с металлом. Решение — Д.R8а.3 / R8а.5:
+retain law»), Бавария и Саксония весь прогон были без денежной системы при ЦБ с металлом. Решение — [[Д.R8а.3 — Валюта у каждого тега своя, кроме валютных союзов|Д.R8а.3]] / R8а.5:
 страна на чужом рынке — со своей денежной системой.
 
 **Вырезано:** определение триггера — `common/scripted_triggers/00_ef_custom_trigger.txt` (здесь).

@@ -1,91 +1,31 @@
-"""Проверка документации форка «E&F: Ledgerdemain» (`docs/`, ФК2).
+"""Формат заметок понятий форка — правило форка поверх `v3 docs check` (он зовёт эту проверку из `docs-check.toml`).
 
-1. Каждый файл `common/` и `events/` форка упомянут в `docs/` — путём целиком или маской (`common/laws/01_ef_*.txt`,
-   `PSC_*`, `<cur>`/`<lang>` — любое имя).
-2. Каждый путь в обратных кавычках в `docs/` (начинается с `common/`, `gui/`, `events/`, `localization/`) существует
-   (маски — совпадают хотя бы с одним файлом), строка `путь:N` — не дальше конца файла.
-3. Каждая вики-ссылка `[[Имя]]` / `[[Имя|подпись]]` в `docs/` (кроме `docs/история/`), `ваниль/`, `этапы/`, `план.md`,
-   `решения.md` ведёт на заметку `docs/понятия/Имя.md` (или другой `.md` форка, узла `../docs/` или источников `../vic3_mods_out/docs/`); заметка понятия без входящих
-   ссылок — тоже ошибка.
-4. Заметка понятия (`docs/понятия/`, кроме `_*`, заметок с тегом `обзор` и `использование` — у них только «## Рабочее») — разделы «## Подсказка», «## Рабочее»,
-   «### Целевое значение», «### Что в коде» по порядку; подсказка не пустая, без кода в обратных кавычках и номеров
-   решений, абзац и пункт списка — одной строкой, как текст подсказки в игре (она уйдёт в игру как есть).
+Заметка понятия (`docs/понятия/`, кроме `_*`, заметок с тегом `обзор`; у тега `использование` — только «## Рабочее») —
+разделы «## Подсказка», «## Рабочее», «### Целевое значение», «### Что в коде» по порядку; подсказка не пустая, без кода
+в обратных кавычках и номеров решений, абзац и пункт списка — одной строкой: подсказка уходит в игру текстом
+(Д.R10.8). Шапки, ссылки, пути `paths`, покрытие `common/` и `events/`, номера решений в коде — `v3 docs check`.
 
     python tools/ld_docs_check.py [--fork <путь>]
 
-Код выхода 1 — есть непокрытые файлы, битые ссылки или заметки не по формату. Ничего не меняет.
+Код выхода 1 — заметки не по формату. Ничего не меняет.
 """
 import argparse
-import fnmatch
 import os
 import re
 import sys
 
-HERE = os.path.dirname(os.path.abspath(__file__))  # tools/ of the fork; two levels under Projects/vic3, like vic3_mods/tools
-FORK = os.path.normpath(os.path.join(HERE, "..", "..", "Economic-and-Financial-Ledgerdemain-Mod"))
-ROOTS = ("common/", "gui/", "events/", "localization/")
-REF = re.compile(r"`((?:common|gui|events|localization)/[^`\n:]+?)(?::(\d+)[^`]*)?`")
-
-
-def files(fork, top):
-    for dp, dn, fn in os.walk(os.path.join(fork, top)):
-        for f in fn:
-            yield os.path.relpath(os.path.join(dp, f), fork).replace(os.sep, "/")
-
-
-def pattern(p):
-    p = re.sub(r"<[^>]+>", "*", p)
-    return p.rstrip("/") + ("/**" if p.endswith("/") else "")
-
-
-def match(pat, rel):
-    if pat.endswith("/**"):
-        pat = pat[:-3]
-    return fnmatch.fnmatchcase(rel, pat) or any(
-        fnmatch.fnmatchcase(rel[:i], pat) for i in range(len(rel)) if rel[i] == "/")
+FORK = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--fork", default=FORK)
     a = ap.parse_args()
-    docs = os.path.join(a.fork, "docs", "код")
-    refs = []
-    for f in sorted(os.listdir(docs)):
-        if f.endswith(".md"):
-            text = open(os.path.join(docs, f), encoding="utf-8").read()
-            for m in REF.finditer(text):
-                refs.append((f, m.group(1), int(m.group(2)) if m.group(2) else None))
-    all_files = [r for t in ROOTS for r in files(a.fork, t)]
-    bad = []
-    pats = set()
-    for doc, p, line in refs:
-        pat = pattern(p)
-        pats.add(pat)
-        hit = [r for r in all_files if match(pat, r)]
-        if not hit:
-            bad.append(f"{doc}: нет файла `{p}`")
-        elif line and "*" not in pat:
-            with open(os.path.join(a.fork, hit[0]), "rb") as fh:
-                n = fh.read().count(b"\n") + 1
-            if line > n:
-                bad.append(f"{doc}: `{p}:{line}` — в файле {n} строк")
-    need = [r for t in ("common/", "events/") for r in files(a.fork, t)]
-    uncovered = [r for r in need if not any(match(p, r) for p in pats)]
-    print(f"ссылок {len(refs)}, битых {len(bad)}; файлов common/events {len(need)}, не упомянуто {len(uncovered)}")
+    sys.stdout.reconfigure(encoding="utf-8")
+    bad = notes_format(a.fork)
     for x in bad:
-        print("  битая:", x)
-    for x in uncovered:
-        print("  не упомянут:", x)
-    wbad, orphans = wiki(a.fork)
-    for x in wbad:
-        print("  битая вики-ссылка:", x)
-    for x in orphans:
-        print("  понятие без ссылок на него:", x)
-    fbad = notes_format(a.fork)
-    for x in fbad:
         print("  формат заметки:", x)
-    sys.exit(1 if bad or uncovered or wbad or orphans or fbad else 0)
+    sys.exit(1 if bad else 0)
 
 
 ITEM_LINE = re.compile(r"^(- |\d+\. )")
@@ -122,49 +62,6 @@ def notes_format(fork):
             bad.append(f"{f}: абзац подсказки — не одной строкой (ld_md_wrap.py склеит)")
     print(f"формат заметок понятий: проверено {n}, не по формату {len(bad)}")
     return bad
-
-
-WIKI = re.compile(r"\[\[([^\]|#]+)(?:[#|][^\]]*)?\]\]")
-
-
-def wiki(fork):
-    """Вики-ссылки документации форка: (битые, понятия без входящих ссылок)."""
-    names = set()
-    for dp, dn, fn in os.walk(fork):
-        dn[:] = [d for d in dn if d not in (".git", "common", "gui", "events", "localization", "gfx", "_archive")]
-        names.update(f[:-3] for f in fn if f.endswith(".md"))
-    # заметки соседей по хранилищу Obsidian: узел vic3 (решения, этапы) и документы внешних источников (ваниль)
-    for nb in (os.path.join(fork, "..", "docs"), os.path.join(fork, "..", "vic3_mods_out", "docs")):
-        for dp, dn, fn in os.walk(nb):
-            dn[:] = [d for d in dn if d != ".git"]
-            names.update(f[:-3] for f in fn if f.endswith(".md"))
-    srcs = [os.path.join(fork, "план.md"), os.path.join(fork, "решения.md")]
-    for d in ("docs", "ваниль", "этапы"):  # docs/ — без истории: её текст не переписывают
-        for dp, dn, fn in os.walk(os.path.join(fork, d)):
-            dn[:] = sorted(x for x in dn if x != "история")
-            srcs += [os.path.join(dp, f) for f in sorted(fn) if f.endswith(".md")]
-    bad, seen = [], set()
-    for src in srcs:
-        if not os.path.exists(src):
-            continue
-        rel = os.path.relpath(src, fork)
-        own = os.path.basename(src)[:-3]
-        for m in WIKI.finditer(open(src, encoding="utf-8").read()):
-            if "\n" in m.group(0):
-                bad.append(f"{rel}: ссылка через перенос строки — {m.group(0)[:40]!r}")
-                continue
-            n = m.group(1).strip().rstrip("\\").split("/")[-1]  # хвост пути — по имени файла; `\|` — подпись в таблице
-            if n not in names:
-                bad.append(f"{rel}: [[{n}]]")
-            elif n != own:
-                seen.add(n)
-    notes = os.path.join(fork, "docs", "понятия")
-    orphans = []
-    if os.path.isdir(notes):
-        orphans = [f[:-3] for f in sorted(os.listdir(notes))
-                   if f.endswith(".md") and f[:-3] not in seen and not f.startswith("_")]
-    print(f"вики-ссылки: битых {len(bad)}, понятий без входящих ссылок {len(orphans)}")
-    return bad, orphans
 
 
 if __name__ == "__main__":

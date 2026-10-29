@@ -3,6 +3,7 @@ type: code
 description: "Ядро экономики E&F и прочее: Содержимое E&F вокруг денег, которое живёт рядом с нашей моделью: здания и методы, законы, модификаторы, технологии, журналы, события, решения."
 project: vic3
 tags: [форк, код]
+paths: ["common/buildings/ef_01_industry.txt", "common/buildings/ef_03_mines.txt", "common/buildings/zz_PSC_construction.txt", "common/buildings/ef_16_financial_centre.txt", "common/production_method_groups/01_ef_industry.txt", "common/production_methods/00_ef_market_liquidity.txt", "common/production_methods/03_ef_mines.txt", "common/production_methods/16_ef_financial_centre.txt", "common/building_groups/00_ef_building_groups.txt", "common/modifier_type_definitions/00_ef_building_modifier_types.txt", "common/static_modifiers/00_ef_dynamic_modifier_country.txt", "common/scripted_effects/01_economic_scripted_effects.txt", "common/scripted_effects/08_list_effect.txt", "common/script_values/00_economic_scripted_value.txt", "common/scripted_triggers/00_ef_custom_trigger.txt", "common/decisions/00_ef_ai_loooting.txt", "common/ideologies/00_ef_ig_ideologies.txt", "common/institutions/00_ef_institutions.txt", "common/technology/technologies/ef_technology.txt", "common/messages/00_ef_messages.txt", "common/alert_types/00_ef_alert_types.txt", "common/journal_entries/00_ef_divers_je.txt", "common/journal_entry_groups/00_ef_journal_entries.txt", "events/00_ef_economic_event.txt", "common/defines/00_ef_defines.txt", "common/buildings/ef_02_agro.txt", "common/buildings/ef_04_plantations.txt", "common/buildings/ef_09_misc_resource.txt", "common/buildings/ef_06_urban_center.txt", "common/production_methods/11_ef_private_infrastructure.txt", "common/production_method_groups/03_ef_mine.txt", "common/modifier_type_definitions/00_ef_country_modifier_types.txt", "common/modifier_type_definitions/00_ef_state_modifier_types.txt", "common/static_modifiers/00_ef_static_modifier.txt", "common/static_modifiers/00_ef_dynamic_modifier_building.txt", "common/static_modifiers/00_ef_dynamic_modifier_state.txt", "common/defines/zzzz_ef_credit_def.txt", "common/prestige_goods/00_ef_prestige_goods_2.txt", "common/customizable_localization/00_ef_localization_ custom.txt", "localization/*/ld_currency_symbol_l_*.yml"]
 ---
 # Ядро экономики E&F и прочее
 **Смысл.** Содержимое E&F вокруг денег, которое живёт рядом с нашей моделью: здания и методы, законы, модификаторы,
@@ -20,7 +21,7 @@ tags: [форк, код]
 - `common/buildings/ef_01_industry.txt`, `ef_02_agro.txt`, `ef_03_mines.txt` (кроме `building_silver_mine`),
   `ef_04_plantations.txt`, `ef_06_urban_center.txt`, `ef_09_misc_resource.txt`, `ef_11_private_infrastructure.txt`
   (порт, железная дорога, торговый центр) — `INJECT:building_<vanilla>` с добавлением `pmg_market_liquidity` в ванильные
-  здания (методы «акций» — в архиве, Д.R4б.8); `ef_11` также
+  здания (методы «акций» — в архиве, [[Д.R4б.8 — Товары-«акции» E&F|Д.R4б.8]]); `ef_11` также
   `INJECT:building_financial_district` (оценки инвестиций `bg_ef_private_construction_score`,
   `bg_financial_centre_score`, `bg_construction_score`).
 - `common/buildings/ef_03_mines.txt:53` — новое `building_silver_mine` (группа `bg_silver_mining`, доступно только при
@@ -28,7 +29,7 @@ tags: [форк, код]
   `01_financial_scripted_effects.txt`) — в случайном штате Мексики с этим модификатором.
 - Частная стройка — PSC `common/buildings/zz_PSC_construction.txt` (`building_construction_sector`); здания E&F
   `building_ef_private_construction` в форке нет.
-- Центральный банк E&F `building_bank` — в архиве (`_archive/ef_central_bank_building/`, Д.R9б.1): ЦБ — модификатор
+- [[Центральный банк]] E&F `building_bank` — в архиве (`_archive/ef_central_bank_building/`, [[Д.R9б.1 — Здание ЦБ E&F building_bank — в архив|Д.R9б.1]]): ЦБ — модификатор
   страны (`central-bank.md`). Частный банк — `buildings/ld_bank.txt`.
 - `common/buildings/ef_16_financial_centre.txt` — генерат (`regen_ld_financial_centres`): общий финцентр и 38 вариантов
   (`exchange-companies.md`).
@@ -38,9 +39,9 @@ tags: [форк, код]
   `pm_market_liquidity_currency` (вход `goods_input_liquidity_currency_add = 28`).
 - `common/production_methods/03_ef_mines.txt`, `11_ef_private_infrastructure.txt` — PM серебряной шахты (кирка, насосы,
   взрывчатка, паровой осёл), `REPLACE:pm_company_headquarter_*` (16 ванильных PM штаб-квартиры с ослабленными акциями
-  капиталистов). PM «частного владения» (выпуск «акций») — в `_archive/ef_stock_goods_output/` (Д.R4б.8).
+  капиталистов). PM «частного владения» (выпуск «акций») — в `_archive/ef_stock_goods_output/` ([[Д.R4б.8 — Товары-«акции» E&F|Д.R4б.8]]).
 - `common/production_methods/16_ef_financial_centre.txt` — `pm_bond_exchange` (выход `mutual_funds`, вход `bond`);
-  методы бирж «акций» — в `_archive/ef_fc_stock_exchange_pm/` (Д.R4б.7).
+  методы бирж «акций» — в `_archive/ef_fc_stock_exchange_pm/` ([[Д.R4б.7 — Финцентр|Д.R4б.7]]).
 - `common/building_groups/00_ef_building_groups.txt` — `bg_bank`, `bg_financial_centre`, `bg_ef_private_construction`,
   `bg_silver_mining`.
 ### Модификаторы
@@ -124,7 +125,7 @@ tags: [форк, код]
 | 92195, 104223 | `reset_debt_in_national_currency[_player]` (2×2 тыс. строк) | да (GUI/смена закона) |
 | 94312–98727 | `stockpiling_capital_state_transfert`, `..._financial_center_place`, `enemy_capital_is_occuped` (1,8 тыс.), `enemy_stats_is_occuped` | да (месячный, решение ИИ, бой) |
 | 98819–104131 | `central_bank_production_methods`, `_3`, `_4` — пустые определения (тела в `_archive/ef_central_bank_pm_consuption/`) | пусто |
-| 106333–107230 | `remove_suject_currency`, `subject_currency` | живые (подданные; неподданный на чужом рынке — со своей системой, Д.R8а.3) |
+| 106333–107230 | `remove_suject_currency`, `subject_currency` | живые (подданные; неподданный на чужом рынке — со своей системой, [[Д.R8а.3 — Валюта у каждого тега своя, кроме валютных союзов\|Д.R8а.3]]) |
 Внутри E&F-тел встроены вызовы модели: `zz_ef_cb_rate_step`, `zz_ef_std_switch_*`, `zz_ef_mp_init/_clear`,
 `zz_ef_cb_cover`, `zz_ef_cover_normal`; кризис валюты — `zz_ef_rq_crisis_resell` (`claims.md`) вместо
 `all_currency_resold` E&F (в `_archive/ef_currency_crisis_resold/`).
@@ -132,7 +133,7 @@ tags: [форк, код]
 ## Переменные
 | имя | смысл | пишет | читает |
 |---|---|---|---|
-| `gold_state_1`, `silver_state_1` (штат) | металл, записанный E&F в штат ЦБ: стартовая формула истории, кнопка «золото в резервы ЦБ»; каждую неделю переходит на счёт страны `zz_ef_am_*` (`zz_ef_am_sweep`, Д.R4а.2) | history, `transfer_gold_to_central_bank_metal_reserves` | `zz_ef_am_sweep`; вне штата ЦБ — правило старта `zz_ef_metal_start_step` |
+| `gold_state_1`, `silver_state_1` (штат) | металл, записанный E&F в штат ЦБ: стартовая формула истории, кнопка «золото в резервы ЦБ»; каждую неделю переходит на счёт страны `zz_ef_am_*` (`zz_ef_am_sweep`, [[Д.R4а.2 — Счета денежной власти\|Д.R4а.2]]) | history, `transfer_gold_to_central_bank_metal_reserves` | `zz_ef_am_sweep`; вне штата ЦБ — правило старта `zz_ef_metal_start_step` |
 | `money_value_<cur>` / `money_value_in_gold_<cur>` (глобальные) | курс валюты и в золоте по каждой из 95 валют | `money_value[_in_gold]_<cur>_global_var` | инфляция, GUI |
 | `base_rate_percentage`, `rise_base_rate`, `down_base_rate` | ставка ЦБ; модификаторы направления | `zz_ef_cb_rate_step` | `central_bank_ef_on_monthly_pulse_country`, PSC |
 | `speculative_share_1` / `_2` | пузырь / индекс перестройки | `ld_bubble`, `ld_pb_overbuild_counter` | JE `financial_center_je_2` |
@@ -179,4 +180,4 @@ tags: [форк, код]
   `var:zz_ef_cur_noun`, «<прилагательное страны> <слово>»; `currency_code` — две буквы страны (`zz_ef_cur_iso2`: свои
   или главы союза) + первая буква слова, `currency_symbol` — знак кода из таблицы генератора, иначе код
   (`zz_ef_iso2_<тег>`, `zz_ef_code_<слово>`, `zz_ef_sym_code_<код>` в `localization/*/ld_currency_symbol_l_*.yml`;
-  Д.R8в.20), генератор `regen_ld_currency_symbol`; пробел в имени файла — авторский).
+  [[Д.R8в.20 — Код валюты — две буквы страны + первая буква слова, как в ISO 4217|Д.R8в.20]]), генератор `regen_ld_currency_symbol`; пробел в имени файла — авторский).

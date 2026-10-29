@@ -20,4 +20,4 @@ paths: ["_archive/ld_probe_mshare/**"]
 - Цена: 20 проходов × все страны × 40 сравнений — меньше секунды (метки `debug.log` в одну секунду).
 - Имя члена через `SCOPE.sCountry('…')` в `debug_log` не вывелось (пусто).
 
-**Вырезано:** `events/ld_probe_mshare_events.txt` (здесь), строка `EFZ` таблицы логов `docs/код/entry-points.md`.
+**Вырезано:** `events/ld_probe_mshare_events.txt` (здесь), строка `EFZ` таблицы логов [[entry-points]].

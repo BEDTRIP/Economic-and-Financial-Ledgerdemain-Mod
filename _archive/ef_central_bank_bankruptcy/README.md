@@ -13,7 +13,7 @@ paths: ["_archive/ef_central_bank_bankruptcy/**"]
 `economic_instability`. Признак `var:central_bank_bankruptcy >= 1` сам входил в `is_extreme_weak_currency` — страна
 оставалась «банкротом» навсегда (Австрия, Ганновер: `EFC|…|issuer|crisis 2`).
 
-**Почему в архиве.** Д.R4а.6: банкротства ЦБ E&F нет, крайняя слабость валюты — по правилам модели
+**Почему в архиве.** [[Д.R4а.6 — Банкротства ЦБ E&F нет|Д.R4а.6]]: банкротства ЦБ E&F нет, крайняя слабость валюты — по правилам модели
 (`is_extreme_weak_currency`: курс к паритету < `zz_ef_cb_crisis_vtp` и покрытие < `zz_ef_cb_crisis_cover`).
 
 **Удалено из живых файлов.**

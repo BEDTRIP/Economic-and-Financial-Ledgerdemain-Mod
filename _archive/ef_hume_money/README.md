@@ -20,7 +20,7 @@ paths: ["_archive/ef_hume_money/**"]
 - `set_variable zz_ef_f_hume_money = 0` в начале `zz_ef_cb_hume_step`, `zz_ef_money_window_roll = { F = hume_money }` (`zz_ef_w_hume_money` = 0) и значения `zz_ef_v_f_hume_money`,
   `zz_ef_v_w_hume_money`: `zz_ef_v_w_hume_money` вычитается в `zz_ef_v_d_pool_rest` и ещё одном значении (`ld_money_model_values.txt`), его же и `zz_ef_v_f_hume_money` читают
   логи `EFO`/`EFF` (`ld_money_log_rest.txt`, генератор `regen_ef_money_supply_loc`) и ключи локализации `zz_ef_ms_banks_25/26`, `zz_ef_ms_x_v_w_hume_money(_neg)` (генератор) — нули в карточке банков.
-- Металл Юма (`zz_ef_f_hume`, `zz_ef_f_cb_hume_m`, `zz_ef_wld_hume*`) — живой.
+- [[Металл]] Юма (`zz_ef_f_hume`, `zz_ef_f_cb_hume_m`, `zz_ef_wld_hume*`) — живой.
 
 **Удалено из живых файлов.** Блок `if` стандарта металла из `zz_ef_cb_hume_step` (за `zz_ef_clr_step = yes`, перед `zz_ef_world_acc = yes`), два определения/комментария значений.
 **Вернуть.** Блок — на место; значения — перед `zz_ef_v_f_abr` и после `zz_ef_v_f_ext_net`; включить `zz_ef_hume_money_on = 1` (внимание: двойной счёт).

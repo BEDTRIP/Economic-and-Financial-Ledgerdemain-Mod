@@ -34,9 +34,9 @@ paths: ["_archive/ld_probe_bk/**"]
 - Цена (профилировщик, r1012_101806, захват 482,9 с, 27 месяцев): весь месячный хук с пробой — 3,8 с (≈ 0,14 с / мес)
   при нагрузке на все компании стран с «Банками» (их больше, чем банковских); без нагрузки на компании (r1012_100056) —
   0,10 с / мес; отдельной строкой проба в листьях не видна (< 0,5 с). Порог 1 с / мес не достигнут — портфели требований
-  по банкам (Д.R4б.2).
+  по банкам ([[Д.R4б.2 — Что делится по банкам|Д.R4б.2]]).
 - Ошибок по файлам пробы, кроме разобранных выше, нет.
 
 **Вырезано:** `common/scripted_effects/ld_probe_bk.txt`, `common/script_values/ld_probe_bk_values.txt`,
 `common/on_actions/ld_probe_bk_on_actions.txt`, `common/scripted_guis/ld_probe_bk.txt`, `events/ld_probe_bk_events.txt`,
-`gui/ld_probe_bk.gui`, `gui/scripted_widgets/ld_probe_bk.txt` (здесь), абзац пробы в `docs/код/banks.md`.
+`gui/ld_probe_bk.gui`, `gui/scripted_widgets/ld_probe_bk.txt` (здесь), абзац пробы в [[banks]].

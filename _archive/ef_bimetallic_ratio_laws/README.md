@@ -11,7 +11,7 @@ paths: ["_archive/ef_bimetallic_ratio_laws/**"]
 закона 15:1 (`amendment_*_bimetallic_ratio*`: Франция 15,5, латинский союз 15,5, США 1834 — 16,1 и 1873, Испания 15,1,
 Германия 14,5, Нидерланды 15,6) задавали законное соотношение золота к серебру (`bimetallic_rate_gold_to_silver`).
 Каждый закон стандарта включал «без соотношения», биметаллизм — 15:1; позиции идеологий групп интересов по группе.
-Решение — Д.R8а.11 (пользователь 8.10): соотношение — параметр биметаллического стандарта `var:zz_ef_bimet_ratio`.
+Решение — [[Д.R8а.11 — Соотношение биметаллизма — параметр стандарта, рычаг денежной власти|Д.R8а.11]] (пользователь 8.10): соотношение — параметр биметаллического стандарта `var:zz_ef_bimet_ratio`.
 
 **Вырезано (по исходным путям):** `common/laws/01_ef_bimetalism_ratio.txt`, `common/amendments/00_ef_amendments.txt`,
 `gfx/interface/icons/law_icons/law_bimetallic_ratio_*.dds`, `localization/{english,russian}/00_ef_amandement_localization_l_*.yml`

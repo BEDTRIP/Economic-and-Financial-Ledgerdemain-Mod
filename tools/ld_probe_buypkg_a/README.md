@@ -1,3 +1,10 @@
+---
+type: code
+description: "Проба R0.6, вариант A: файл пакетов форка как есть (оба ключа) — какое из двух значений ключа в wealth_N берёт движок"
+project: vic3
+tags: [форк, проба]
+paths: ["tools/ld_probe_buypkg_a"]
+---
 # LD Probe BuyPkg A — файл пакетов форка как есть (оба ключа)
 
 Проба R0.6 (7.10): в `00_ef_buy_packages.txt` форка ключ `popneed_currency` стоит в каждой `wealth_N` дважды. Три

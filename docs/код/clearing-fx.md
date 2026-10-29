@@ -3,6 +3,7 @@ type: code
 description: "Клиринг, форекс, резервы, торговля валютой: Расчёты страны с заграницей за неделю: позиция страны (сальдо в золоте) → в конце недели позиции сводятся внутри групп металла, остаток — между группами; каждый…"
 project: vic3
 tags: [форк, код]
+paths: ["common/scripted_effects/ld_clearing.txt", "common/script_values/ld_clearing_values.txt", "common/scripted_triggers/ld_clearing_triggers.txt", "common/scripted_guis/ld_cbfx.txt", "common/script_values/ld_fx_reserves_values.txt", "common/scripted_effects/ld_stockpile_state_var_seed.txt", "common/scripted_effects/ld_reference_strength.txt", "common/static_modifiers/ld_currency_trade.txt", "common/static_modifiers/ld_fx_holders_demand.txt", "common/modifier_type_definitions/ld_liquidity_currency_sell_orders.txt", "common/production_methods/00_ef_market_liquidity.txt", "common/scripted_effects/01_economic_scripted_effects.txt", "common/scripted_guis/09_ef_other.txt", "common/script_values/00_economic_scripted_value.txt", "gui/ld_economy_panel.gui", "gui/00_ef_deported_gui_1.gui"]
 ---
 # Клиринг, форекс, резервы, торговля валютой
 **Смысл.** Расчёты страны с заграницей за неделю: позиция страны (сальдо в золоте) → в конце недели позиции сводятся
@@ -10,7 +11,7 @@ tags: [форк, код]
 (требование получателя на плательщика), остальное — по стандарту получателя (металл, его валюта из резервов плательщика,
 долг недели). Палаты и главы клиринга нет. **Понятия:** [[Клиринг]], [[Зачёт по группам металла]],
 [[Торговля с заграницей]], [[Сила валюты]], [[Вклады нерезидентов]], [[Биржа]], [[Денежная власть]]. **Решения:**
-Д.R0.8.4, Д.R3.4, Д.R8в.1, Д.R8в.2, Д.R8в.4, Д.R8в.11 (`docs/решения/`).
+[[Д.R0.8.4 — Торговля — одна проводка для сверки и клиринга|Д.R0.8.4]], [[Д.R3.4 — Торговый рычаг — от перекоса реального курса к эталону, потолок ±50 %|Д.R3.4]], [[Д.R8в.1 — Страны в одном рынке — позиция члена по долям рынка|Д.R8в.1]], [[Д.R8в.2 — Зачёт по группам металла|Д.R8в.2]], [[Д.R8в.4 — Платежи клиринга|Д.R8в.4]], [[Д.R8в.11 — Платёж клиринга — набор|Д.R8в.11]] (`docs/решения/`).
 
 Форекс E&F (ИИ-сделки и окно обмена игрока) — в `_archive/` (`ef_ai_forex/`, `ef_forex_windows/`); заявки игрока —
 биржей (R8б). Валютные запасы ЦБ показываются таблицей и диаграммой держателей. Сила валюты двигает торговлю. E&F
@@ -28,7 +29,7 @@ tags: [форк, код]
   держатель cb / bk), `zz_ef_clr_give_metal`: `zz_ef_clr_metal_out` у плательщика (ЦБ — металл своего стандарта из
   столичного штата ЦБ; без ЦБ — банки, сначала золото, потом серебро; что ушло золотом / серебром —
   `var:zz_ef_clr_out_g` / `_s`) и `zz_ef_clr_metal_in` у получателя — тот же металл, без перевода серебра в золото
-  (Д.R8в.28; ЦБ — `zz_ef_clr_cb_metal_add` в столичный штат ЦБ, банки — `var:zz_ef_bankm_gold` / `_silver`),
+  ([[Д.R8в.28 — Металл клиринга|Д.R8в.28]]; ЦБ — `zz_ef_clr_cb_metal_add` в столичный штат ЦБ, банки — `var:zz_ef_bankm_gold` / `_silver`),
   `zz_ef_clr_give_back` (валюта получателя из резервов плательщика возвращается эмитенту), `zz_ef_clr_need_add` (долг
   недели в валюте получателя — карта `zz_ef_clr_need`), `zz_ef_clr_post_needs` (на шаге биржи плательщика — заявка на
   покупку этой валюты по верхнему шагу, `zz_ef_xch_order_put`), `zz_ef_clr_take_acc` / `zz_ef_clr_take_hume` (итоги
@@ -37,13 +38,13 @@ tags: [форк, код]
 - `common/script_values/ld_clearing_values.txt` (рукописный) — спрос получателя по доверию к деньгам плательщика
   `zz_ef_clr_metal_share` (сила 0,75…1,25 → 100 %…30 %, эталон — 15 %), его рост у ЦБ металлического стандарта ниже цели
   покрытия `zz_ef_clr_recv_boost` (до ×2 при нуле), предложение плательщика по покрытию `zz_ef_clr_cover_keep` (вся доля
-  0 на цели, вся при двойной цели; Д.R8в.28, Д.R8в.29), взгляд плательщика для лога `zz_ef_clr_own_share` = 1 − спрос ×
+  0 на цели, вся при двойной цели; [[Д.R8в.28 — Металл клиринга|Д.R8в.28]], [[Д.R8в.29 — Доля платежа клиринга не в деньгах плательщика — баланс|Д.R8в.29]]), взгляд плательщика для лога `zz_ef_clr_own_share` = 1 − спрос ×
   предложение, золото за единицу денег `zz_ef_clr_gold_per_money` (своё, без своих денег — среднее мира) и
   `zz_ef_clr_gpm_own`, металл к оплате `zz_ef_clr_metal_av_g` (у ЦБ — только сверх пола покрытия `zz_ef_clr_cover_floor`
-  = половина цели, доля `zz_ef_clr_over_floor`; Д.R8в.30), итоги недели `zz_ef_v_f_clr_*` (карточка заграницы), мировые
+  = половина цели, доля `zz_ef_clr_over_floor`; [[Д.R8в.30 — Пол покрытия в клиринге|Д.R8в.30]]), итоги недели `zz_ef_v_f_clr_*` (карточка заграницы), мировые
   суммы `zz_ef_clr_w_*_v` (лог `EFN`), `zz_ef_cbfx_g_v` (порядок строк таблицы).
 - `common/scripted_triggers/ld_clearing_triggers.txt` — `zz_ef_clr_cb_ok` (денежная власть держит резервы — ЦБ или казна,
-  `zz_ef_am_holder`, Д.R4а.11; иначе — банки), `zz_ef_clr_wants_metal` (металлический стандарт, не обменный).
+  `zz_ef_am_holder`, [[Д.R4а.11 — Денежная власть без ЦБ|Д.R4а.11]]; иначе — банки), `zz_ef_clr_wants_metal` (металлический стандарт, не обменный).
 - `common/scripted_guis/ld_cbfx.txt` — `zz_ef_cbfx_update_sorted` (таблица чужих денег ЦБ по эмитентам: список
   `zz_ef_cbfx_list`, строка — переменные эмитента `zz_ef_cbfx_u/_g/_mn/_dd`), `zz_ef_holders_update` (какие ЦБ держат
   наши деньги: `zz_ef_holds_pc`, `zz_ef_holders_list`).
@@ -64,10 +65,10 @@ tags: [форк, код]
 - `common/modifier_type_definitions/ld_liquidity_currency_sell_orders.txt` — объявляет
   `state_sell_orders_liquidity_currency_add` (модификатора с ним больше нет).
 - `common/production_methods/00_ef_market_liquidity.txt` — `pm_no_market_liquidity` (по закону «без денежной системы»,
-  Д.R8а.2), `pm_market_liquidity_currency` (вход `goods_input_liquidity_currency_add = 28` — бизнесы покупают услугу
+  [[Д.R8а.2 — Без денежной системы — своей валюты нет|Д.R8а.2]]), `pm_market_liquidity_currency` (вход `goods_input_liquidity_currency_add = 28` — бизнесы покупают услугу
   расчётов у банков), далее методы военных заказов (`pm_government_aid_*`).
 - E&F, форекс:
-  - ИИ-форекс E&F (`ai_buy_sell_currency` → `buy_/sell_<cur>_currency`) — в `_archive/ef_ai_forex/` (R2, Д.R2.2; форекс
+  - ИИ-форекс E&F (`ai_buy_sell_currency` → `buy_/sell_<cur>_currency`) — в `_archive/ef_ai_forex/` (R2, [[Д.R2.2 — ИИ-форекс E&F — в архив|Д.R2.2]]; форекс
     ЦБ сделками — R8); в `central_bank_ef_on_yearly_pulse_country` остался `monetary_systeme_transition`; арбитражи —
     см. поток.
   - `common/scripted_effects/01_economic_scripted_effects.txt`: `trade_balance` (:11204).
@@ -92,11 +93,11 @@ tags: [форк, код]
   |pos_i| × kp × pos_j / gp. Остатки групп — между группами, насколько остатки мира совпадают: d_i × xp × res_j / rp,
   минус комиссия биржи плательщика (не доходит до получателя, `f_clr_fee`). Не совпавшее миром — не сведено
   (`f_clr_unm`: + не получено, − не заплачено).
-- Платёж-набор (Д.R8в.11, Д.R8в.29): доля 1 − m — требованием получателя на плательщика, m — баланс спроса получателя
+- Платёж-набор ([[Д.R8в.11 — Платёж клиринга — набор|Д.R8в.11]], [[Д.R8в.29 — Доля платежа клиринга не в деньгах плательщика — баланс|Д.R8в.29]]): доля 1 − m — требованием получателя на плательщика, m — баланс спроса получателя
   (`zz_ef_clr_metal_share` плательщика × `zz_ef_clr_recv_boost` получателя, не больше 1) и предложения плательщика
   (`zz_ef_clr_cover_keep`) с весом w = ВВП получателя / сумма ВВП обоих (`zz_ef_clr_pair`) (его деньги во вкладах в
   банках плательщика, `vklady` — `banks.md`); остаток металлическому стандарту — металлом из резервов плательщика (по
-  мировой цене; получатель держит тот же металл, Д.R8в.28); затем валютой получателя из резервов плательщика (требование
+  мировой цене; получатель держит тот же металл, [[Д.R8в.28 — Металл клиринга|Д.R8в.28]]); затем валютой получателя из резервов плательщика (требование
   гасится у эмитента — «своя вернулась»); остаток — долг недели: тоже требование на плательщика, и плательщик на
   следующем шаге выставляет заявку на покупку валюты получателя (по верхнему шагу стакана своей биржи). Ненужные
   требования получатель продаёт на бирже (R8б).
@@ -120,7 +121,7 @@ tags: [форк, код]
 | `zz_ef_clr_a_hume_g` / `_s` → `zz_ef_f_clr_hume_g` / `_s` | то же по металлам, в их единицах | `zz_ef_clr_cb_metal_add` → `zz_ef_clr_take_hume` | `zz_ef_metal_reconcile` |
 | карта `zz_ef_clr_need` (плательщик) | долг недели в валюте получателя, ед. | `zz_ef_clr_need_add` | `zz_ef_clr_post_needs` (заявка на бирже, карта очищается) |
 | `global_var:zz_ef_clr_wl` | мировая строка: поток стран без своих денег за неделю, золото | `zz_ef_clr_step` | лог `EFN` (обнуляется в расчёте) |
-| `zz_ef_am_gold`, `zz_ef_am_silver` (страна) | металл денежной власти (Д.R4а.2) | клиринг, `ld_metal_accounts.txt` | вся модель металла |
+| `zz_ef_am_gold`, `zz_ef_am_silver` (страна) | металл денежной власти ([[Д.R4а.2 — Счета денежной власти\|Д.R4а.2]]) | клиринг, `ld_metal_accounts.txt` | вся модель металла |
 | карты `zz_ef_rq_cb_m`, `zz_ef_rq_bk_m` (страна) | чужие деньги ЦБ / банков по эмитентам, в их деньгах (`claims.md`) | `zz_ef_clr_give_claim`, `zz_ef_clr_give_back`, `zz_ef_rq_interest_step`, `zz_ef_rq_crisis_resell`, биржа | таблица ЦБ, `zz_ef_fx_metal_update` |
 | `stockpiling_<cur>_state_1` (штат ЦБ) | E&F: собственный запас валюты ЦБ (невыпущенные деньги); чужих денег здесь больше нет; на старте 0: история его не ставит, стартовый металл ЦБ в истории считает его прежнюю долю прямо (0,1 обращения) | никто (перенос при переезде и оккупации столицы — в `_archive/ef_currency_stockpiles/`, R9б.5б); остались кнопка E&F перевода в пул и покупка облигаций за валюту — окно E&F, R10 | значения E&F (`money_supply_state` = 0 и др.; окна E&F — R10); модель форка и сверка не читают |
 | карты `zz_ef_cbfx_d`, `zz_ef_cbfx_p` (игрок) | изменение за неделю и прошлое значение по эмитентам | `zz_ef_cbfx_week_step` | таблица ЦБ |
@@ -128,7 +129,7 @@ tags: [форк, код]
 | `trade_balance_in_gold_fixe` | счётчик торгового баланса E&F (держится 0) | `trade_balance`, кнопка `trade_balance_actualized` | `central_bank_reserves_*` E&F |
 
 ## Вызовы и связи
-- `zz_ef_clr_gold_per_money` (золото на единицу денег: своя — `zz_ef_clr_gpm_own` = `zz_ef_value_to_parity`, Д.R8а.4;
+- `zz_ef_clr_gold_per_money` (золото на единицу денег: своя — `zz_ef_clr_gpm_own` = `zz_ef_value_to_parity`, [[Д.R8а.4 — Курс по стандарту|Д.R8а.4]];
   без денежной системы — среднее мира по ВВП `global_var:zz_ef_wld_gpm_avg`) читают клиринг, таблицы облигаций
   (`ld_bond_tables.txt`), модель денег.
 - `zz_ef_fx_liab_all` = `zz_ef_nr_dep_v` — наши деньги за границей (`banks.md`).

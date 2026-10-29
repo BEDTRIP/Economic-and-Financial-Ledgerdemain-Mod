@@ -3,10 +3,11 @@ type: code
 description: "Интерфейс (панели, окна, мост GUI → скрипт, локализация): Всё, что игрок видит и нажимает; окна читают витрину и ничего не считают."
 project: vic3
 tags: [форк, код]
+paths: ["gui/budget_panel.gui", "gui/market_panel.gui", "gui/states_panel.gui", "gui/country_panel.gui", "gui/topbar.gui", "gui/companies_panel.gui", "gui/construction_panel.gui", "gui/texticons.gui", "gui/00_ef_texticons.gui", "gui/00_ef_deported_gui_1.gui", "gui/00_ef_deported_gui_2.gui", "gui/00_MPM_building_details_panel.gui", "gui/scripted_widgets/00_ef_custom_widgets.gui", "common/journal_entries/00_ef_divers_je.txt", "gui/scripted_widgets/PSC_scripted_widgets.txt", "gui/PSC_construction_expense_widget.gui", "gui/ef_dev_and_custom_windows/ef_custom_windows.gui", "gui/ld_economy_panel.gui", "gui/ld_cb_rate_panel.gui", "gui/ld_currency_symbol_fix.gui", "gui/ld_national_capacity_chart.gui", "gui/ld_money_hook.gui", "gui/scripted_widgets/ld_money_hook.txt", "gui/ld_bank_hook.gui", "gui/scripted_widgets/ld_bank_hook.txt", "common/scripted_guis/ld_bank_hook.txt", "gui/ld_logs_hook.gui", "gui/scripted_widgets/ld_logs_hook.txt", "gui/scripted_widgets/ld_pb_fso_widgets.gui", "common/journal_entries/00_ef_financial_center_je.txt", "gui/PSC_construction_panel.gui", "gui/PSC_states_panel_buildings.gui", "gui/shared/PSC_construction_spending_options.gui", "gui/PSC_goods_texticons.gui", "common/scripted_guis/00_economic_scripted_guis.txt", "common/scripted_guis/00_financial_scripted_guis.txt", "common/scripted_guis/09_ef_other.txt", "common/scripted_guis/PSC_construction_sguis.txt", "common/scripted_guis/ld_*.txt", "common/scripted_buttons/00_ef_buttons.txt", "common/scripted_progress_bars/00_ef_progressbar.txt", "common/game_concepts/00_ef_game_concepts.txt", "localization/*/", "common/scripted_effects/ld_money_model.txt", "common/journal_entries/*", "common/script_values/ld_money_model_values.txt", "common/scripted_guis/ld_exchange_window.txt", "common/scripted_effects/08_list_effect.txt", "common/script_values/00_economic_scripted_value.txt", "common/scripted_guis", "common/game_concepts/ld_cb_rate_concepts.txt"]
 ---
 # Интерфейс (панели, окна, мост GUI → скрипт, локализация)
 **Смысл.** Всё, что игрок видит и нажимает; окна читают витрину и ничего не считают. **Понятия:** [[Витрина]],
-[[Мост GUI]]. **Решения:** Д.R3б.3, Д.R0.8.10 (`docs/решения/`).
+[[Мост GUI]]. **Решения:** [[Д.R3б.3 — Витрина — только у играющих игроков|Д.R3б.3]], [[Д.R0.8.10 — Слой «витрины» GUI с R1а|Д.R0.8.10]] (`docs/решения/`).
 
 Всё, что игрок видит и нажимает: ванильные панели, переписанные E&F (бюджет, рынок, страна, штат, топбар, компании),
 вкладки валют/запасов/ЦБ, журнальные виджеты, окно резервов. Кнопки зовут скрипт через scripted_gui; данные идут в GUI
@@ -51,7 +52,7 @@ GUI-тип регистрирует первый файл по имени (ASCII
   (резервы металла); открывается `ExecuteConsoleCommand('gui.createwidget …')` +
   `GetVariableSystem.Toggle('gold_reserve_window')`.
 - Копии ванильных панелей E&F (`maj/`, 18 файлов, 360 типов и шаблонов — игра их не применяла) — в
-  `_archive/ef_gui_maj_copies/` (R12 Л.2, Д.R12.1); устаревшие копии без правок E&F (`map_markers`, `custom_tooltip`,
+  `_archive/ef_gui_maj_copies/` (R12 Л.2, [[Д.R12.1 — Копии ванильных панелей E&F в gui ef_dev_and_custom_windows maj|Д.R12.1]]); устаревшие копии без правок E&F (`map_markers`, `custom_tooltip`,
   `military_formation_panel`, `popups`, `right_click_menu`, `frontend/shared/lists.gui`) — в
   `_archive/ef_outdated_vanilla_gui/`, грузятся ванильные 1.13.
 
@@ -59,7 +60,7 @@ GUI-тип регистрирует первый файл по имени (ASCII
 - `gui/ld_economy_panel.gui` (руками) — `budget_panel_economy_panel_content` (:10, оригинал из
   `00_ef_deported_gui_1.gui` удалён), торговый баланс в модели денег, `zz_ef_holders_piechart`, `vo_plotline_minting`
   (вызов :4143). Блоки «Национальная валюта» и «Курс обмена» — у всех стран с денежной системой
-  (`exchange_rate_visibility`, Д.R4а.14), блок ЦБ — при ЦБ (`has_central_banking_tech_visibility`).
+  (`exchange_rate_visibility`, [[Д.R4а.14 — Блок «Национальная валюта»|Д.R4а.14]]), блок ЦБ — при ЦБ (`has_central_banking_tech_visibility`).
 - `gui/ld_cb_rate_panel.gui` (руками) — `budget_panel_financial_panel_content` (:10): ключевая ставка, ЦБ, облигации,
   таблицы держателей (`zz_ef_bt_in_list`/`zz_ef_bt_out_list`), биржа игрока — две таблицы (`zz_ef_xwin_own`,
   `zz_ef_xwin_book`, `ld_exchange_window.txt`), `mp_row` политики.
@@ -68,9 +69,9 @@ GUI-тип регистрирует первый файл по имени (ASCII
 - `gui/ld_national_capacity_chart.gui` — единственное определение `ef_bp_national_capacity_piechart` (используется
   `ld_economy_panel.gui:8273`); ряд в металле стандарта, доли — в золотом эквиваленте.
 - `gui/ld_money_hook.gui` — мост «бюджет → скрипт» (см. ниже); регистрация `gui/scripted_widgets/ld_money_hook.txt`.
-- `gui/ld_bank_hook.gui` — мост «уровни «Банка» компании → скрипт» (Д.R4б.1, `docs/код/banks.md`); регистрация
+- `gui/ld_bank_hook.gui` — мост «уровни «Банка» компании → скрипт» ([[Д.R4б.1 — Кто такой банк|Д.R4б.1]], [[banks]]); регистрация
   `gui/scripted_widgets/ld_bank_hook.txt`, приёмник `common/scripted_guis/ld_bank_hook.txt`.
-- `gui/ld_logs_hook.gui` — в режиме отладки включает логи `EF*` (`zz_ef_logs_debug_sg`; `docs/код/entry-points.md`, «Логи»);
+- `gui/ld_logs_hook.gui` — в режиме отладки включает логи `EF*` (`zz_ef_logs_debug_sg`; [[entry-points]], «Логи»);
   регистрация `gui/scripted_widgets/ld_logs_hook.txt`.
 - `gui/scripted_widgets/ld_pb_fso_widgets.gui` — журнальные виджеты `zz_pb_ef_fso_bubble_widget`,
   `zz_pb_ef_fso_overcap_widget`, `zz_pb_ef_fso_hide_bars_widget` (подключены
@@ -143,7 +144,7 @@ GUI-тип регистрирует первый файл по имени (ASCII
 | `zz_ef_hook_probe_calls` (глобальная) | счётчик запусков моста | `zz_ef_money_hook_probe_sg` | `common/script_values/ld_money_model_values.txt` |
 | `zz_ef_cbfx_list`, `zz_ef_holders_list` | таблицы валют ЦБ и держателей | `ld_cbfx.txt` | `gui/ld_economy_panel.gui` |
 | `zz_ef_bt_in_list`, `zz_ef_bt_out_list` | таблицы облигаций | `ld_bond_tables.txt` | `gui/ld_cb_rate_panel.gui` |
-| `zz_ef_xwin_own` — наши активы, `zz_ef_xwin_book` — предложения на нашей бирже: прошедшие через её стакан на прошлой неделе (ключи `zz_ef_xr_<вид>_c` биржи) и короткий список (хозяин рынка, лидер блока, эталон, `zz_ef_xdeep`) (глобальные списки); на строке-стране `zz_ef_xwin_fair/_last/_hold/_gold/_bid/_ask` (`zz_ef_xwin_row_set`; облигации — без bid / ask фонда); на игроке `zz_ef_xpl_kind`, `zz_ef_xpl_sum` (заголовок — значения `zz_ef_xwin_fee_v/_bid_v/_ask_v`), карты заявок `zz_ef_xpl_buy_m/_b`, `zz_ef_xpl_sell_m/_b` | окно биржи игрока (минимальное, Д.R8б.13) | `common/scripted_guis/ld_exchange_window.txt` (`zz_ef_xwin_fill` — `ld_exchange_trade.txt`: кнопка «Обновить» и у игроков раз в неделю в конце `zz_ef_xch_week_close`) | `gui/ld_cb_rate_panel.gui`; заявки — `zz_ef_xch_post_player` (шаг игрока) |
+| `zz_ef_xwin_own` — наши активы, `zz_ef_xwin_book` — предложения на нашей бирже: прошедшие через её стакан на прошлой неделе (ключи `zz_ef_xr_<вид>_c` биржи) и короткий список (хозяин рынка, лидер блока, эталон, `zz_ef_xdeep`) (глобальные списки); на строке-стране `zz_ef_xwin_fair/_last/_hold/_gold/_bid/_ask` (`zz_ef_xwin_row_set`; облигации — без bid / ask фонда); на игроке `zz_ef_xpl_kind`, `zz_ef_xpl_sum` (заголовок — значения `zz_ef_xwin_fee_v/_bid_v/_ask_v`), карты заявок `zz_ef_xpl_buy_m/_b`, `zz_ef_xpl_sell_m/_b` | окно биржи игрока (минимальное, [[Д.R8б.13 — R8б — одна очередь по зависимостям, остаток — следующей ночью\|Д.R8б.13]]) | `common/scripted_guis/ld_exchange_window.txt` (`zz_ef_xwin_fill` — `ld_exchange_trade.txt`: кнопка «Обновить» и у игроков раз в неделю в конце `zz_ef_xch_week_close`) | `gui/ld_cb_rate_panel.gui`; заявки — `zz_ef_xch_post_player` (шаг игрока) |
 | `national_capacity_variable_list_ordered_1` | порядок кругов резервов | `common/scripted_effects/08_list_effect.txt` | `gui/ld_national_capacity_chart.gui` |
 | `EF_gui_room_brut` | число открытых «комнат» окна резервов | `common/script_values/00_economic_scripted_value.txt` | `EF_room_gui_N` |
 | GUI-флаги (`GetVariableSystem`) | `currency_reserves`, `seller_country`, `ai_seller`, `national_debt`, `small_monetary_policy`, `ef_companies_compact`, `hide_current_companies`, `zz_pb_ef_fso_overcap_closed`, `zz_pb_ef_fso_bubble_closed`, `gold_reserve_window` | GUI | GUI |
@@ -156,7 +157,7 @@ GUI-тип регистрирует первый файл по имени (ASCII
   определён только `world_currency_…` в `09_ef_other.txt`), 9 вызовов `gdpg_sort_by_country_gdp` (там же; sgui —
   `gdp_sort_by_country_gdp`), `je_meiji_restoration_get_faction_sgui` (`states_panel.gui`, ванильное имя). Клик не
   выполняет эффекта (ожидается ошибка поиска sgui в `error.log`; в игре не проверено).
-- `topbar.gui` → `currency_symbol_top_bar` (один `GetCustom('currency_symbol')` — знак или код валюты, Д.R8в.20,
+- `topbar.gui` → `currency_symbol_top_bar` (один `GetCustom('currency_symbol')` — знак или код валюты, [[Д.R8в.20 — Код валюты — две буквы страны + первая буква слова, как в ISO 4217|Д.R8в.20]],
   `currencies.md`).
 - Комментарий в `common/game_concepts/ld_cb_rate_concepts.txt` называет `zz_ef_cb_rate_panel_l_*.yml`; файлы локализации
   — `ld_cb_rate_panel_l_*.yml`.

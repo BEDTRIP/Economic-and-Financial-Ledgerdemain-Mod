@@ -7,11 +7,11 @@ paths: ["_archive/ef_ai_treasury_bonds/**"]
 ---
 # Покупки облигаций ИИ E&F: казна (`ai_buy_bond_N`) и частные банки (`ai_privat_bank_bond_N`)
 
-Вынуто 14.10.2026 (R6.9, кусок 1; Д.R6.6, Д.R5.6). Раз в год (`financial_center_ef_on_yearly_pulse_country` →
+Вынуто 14.10.2026 (R6.9, кусок 1; [[Д.R6.6 — Свои облигации в реестре|Д.R6.6]], [[Д.R5.6 — Сроки|Д.R5.6]]). Раз в год (`financial_center_ef_on_yearly_pulse_country` →
 `ai_buy_central_bank_debt`) казна страны ИИ покупала облигации чужого ЦБ слотами `ai_buy_bond_1..10`, частные банки —
 слотами `ai_privat_bank_bond_1..25` (и `_renforcement`); погашение казны — `ai_bond_maturity_N` в
 `bond_maturity_on_action`. Реестр облигаций (`ld_bond_ledger.txt`) брал слоты как вход покупок
-(`zz_ef_bl_slot_N`, `zz_ef_pb_slot_N` → `zz_ef_bl_register`). Теперь покупки — заявками на бирже (Д.R6.6): банки и
+(`zz_ef_bl_slot_N`, `zz_ef_pb_slot_N` → `zz_ef_bl_register`). Теперь покупки — заявками на бирже ([[Д.R6.6 — Свои облигации в реестре|Д.R6.6]]): банки и
 население покупают доли в стакане (`ld_exchange_trade.txt`), банки продают за рубеж долю внутреннего долга
 (`zz_ef_xch_post_sells_ob`).
 
@@ -25,7 +25,7 @@ paths: ["_archive/ef_ai_treasury_bonds/**"]
 | `common/script_values/00_economic_scripted_value.txt` | `gold_reserves_10`, `gold_reserves_var_10`, `private_bank_funds_25` — читали только архивные (здесь) |
 | `common/scripted_effects/10_new_country_var.txt` | 20 стартовых `set_variable` слотов ИИ (`ai_buy_bond_N_on`, `ai_selle_bond_maturity_yers_N`) и 50 — слотов частных банков без читателя (`ai_privat_bank_bond_value_N_new`, `ai_privat_bank_buyer_slot_N`; здесь) |
 | `common/scripted_effects/ld_bond_ledger.txt` (генерат `regen_ef_bond_ledger.py`) | `zz_ef_bl_slot_1..10`, `zz_ef_bl_slot_free`, `zz_ef_pb_slot_1..25`, `zz_ef_pb_no_seller`, `zz_ef_bl_register` и их вызовы в `zz_ef_bond_ledger_step` (здесь) |
-| `docs/код/entry-points.md` | строка лога `EFP` (покупка банков без продавца) |
+| [[entry-points]] | строка лога `EFP` (покупка банков без продавца) |
 
 Осталось (кусок 2 — R6.9): слоты игрока E&F (`buy_bond_N`, `bond_maturity_N`, кнопки `00_financial_scripted_guis.txt`),
 окно E&F и наша панель с таблицами слотов ИИ (`ai_seller_country_general_N`, `ai_total_bond_value_N`,

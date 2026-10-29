@@ -7,8 +7,8 @@ paths: ["_archive/ld_stock_goods_capitalization/**"]
 ---
 # Капитализация по выпуску товаров-«акций» и срез выпуска по грамотности богатых
 
-Вынуто 14.10.2026 (R6.7, Д.R6.12). Товары-«акции» E&F (`manufacture_stock`, `agricultural_stock`, `mining_stock`,
-`railroad_stock`) больше не производятся (Д.R4б.8); капитализация биржи — акции компаний по рыночной цене
+Вынуто 14.10.2026 (R6.7, [[Д.R6.12 — Капитализация и товары-«акции»|Д.R6.12]]). Товары-«акции» E&F (`manufacture_stock`, `agricultural_stock`, `mining_stock`,
+`railroad_stock`) больше не производятся ([[Д.R4б.8 — Товары-«акции» E&F|Д.R4б.8]]); капитализация биржи — акции компаний по рыночной цене
 (`zz_ef_cap_listed_snapshot`, `ld_listing_values.txt`; акции — `ld_company_shares.txt`).
 
 ## Что делало
