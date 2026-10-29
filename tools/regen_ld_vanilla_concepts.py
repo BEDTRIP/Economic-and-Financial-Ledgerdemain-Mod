@@ -1,22 +1,21 @@
-"""Ванильные понятия игры (Vickypedia, подсказки-понятия) — граф заметок `ваниль/` форка «E&F: Ledgerdemain».
+"""Термины игры (Vickypedia, подсказки-понятия) — граф ваниль `vic3_mods_out/docs/vanilla/Термины/` (репо vic3_out_docs).
 
     py tools/regen_ld_vanilla_concepts.py [--vanilla <game>] [--fork <путь>] [--lang russian] [--check]
 
 Источник — ваниль: `common/game_concepts/*.txt` (ключи понятий) и вся локализация `localization/<язык>/` (текст, имена
 законов, зданий, типов населения, на которые ссылаются подсказки) плюс английская — для синонимов. Пишет по заметке на
-понятие: `ваниль/<имя понятия>.md` — имя, синонимы (формы имени, английское, ключ), описание из игры; ссылки
-`[Concept('concept_x', 'текст')]`, `[concept_x]`, `$concept_x$` — вики-ссылками `[[Имя|текст]]` (подпись длиннее 80
-знаков — целое описание — идёт текстом: ссылка в markdown не переносится через строку). Формы одного понятия
-(`concept_radicals`, `concept_radicalism`) — синонимы заметки `concept_radical`. Имя, совпавшее с заметкой мода
-(`docs/понятия/`), получает « (ваниль)». Плюс `ваниль/_Карта ванили.md`. Текст игры руками не править — правится генератор.
+понятие: `Термины/<имя понятия>.md` — шапка по методике узла vic3, имя, синонимы (формы имени, английское, ключ),
+описание из игры; ссылки `[Concept('concept_x', 'текст')]`, `[concept_x]`, `$concept_x$` — вики-ссылками
+`[[Имя|текст]]` (подпись длиннее 80 знаков — целое описание — идёт текстом: ссылка в markdown не переносится через
+строку). Формы одного понятия (`concept_radicals`, `concept_radicalism`) — синонимы заметки `concept_radical`. Имя,
+совпавшее с заметкой понятия форка (`docs/понятия/`), получает « (ваниль)». Плюс `Термины/_Карта ванили.md`.
 
-Два графа заметок форка: `docs/понятия/` (мод) и `ваниль/` (игра) — пересекаются ссылками. Как форк использует понятие игры,
-пишется руками в ванильной заметке под заголовком «### Как используется в форке» (до конца файла): генератор этот
-раздел сохраняет, в том числе при смене имени заметки (по ключу понятия из `source:`). Понятие игры в `docs/понятия/` не
-переписывается.
+Генерат с ручным разделом: текст игры руками не править — правится генератор; раздел «## Рабочее» (до конца файла)
+пишется руками и сохраняется, в том числе при смене имени заметки (по ключу `key:`). Граф ваниль описывает только
+игру: как форк или мод пользуется понятием — в их заметках с `uses` (решение узла Д.ДОК.15).
 
-`--check` — только сравнить, код выхода 1 при расхождении. Ваниль по умолчанию — первая найденная: `vic3_mods_out/
-.vanillaVIC3(/game)` рядом с репо (на ПК и в worktree моста), установленная игра.
+`--check` — только сравнить, код выхода 1 при расхождении. Ваниль по умолчанию — первая найденная: снимок
+`vic3_mods_out/.vanillaVIC3(/game)` рядом с репо (Д.ДОК.13 — снимок 1.13), установленная игра.
 """
 import argparse
 import os
@@ -25,8 +24,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-FORK_HEAD = "### Как используется в форке"
-SOURCE = re.compile(r"^source: игра, `(concept_\w+)`", re.M)
+GEN = "regen_ld_vanilla_concepts.py (tools/ форка); ручной раздел — «## Рабочее»"
+HAND_HEAD = "## Рабочее"
+SOURCE = re.compile(r"^key: (concept_\w+)$", re.M)
 LOC_LINE = re.compile(r'^\s*([A-Za-z0-9_.\-]+):\d*\s*"(.*)"\s*(#.*)?$')
 BAD_NAME = re.compile(r'[\\/:*?"<>|#^\[\]]')
 
@@ -47,13 +47,13 @@ def load_loc(folder):
 
 
 def fork_sections(folder):
-    """Hand-written part of the existing notes: concept key -> text from FORK_HEAD to the end of the file."""
+    """Hand-written part of the existing notes: concept key -> text from HAND_HEAD to the end of the file."""
     out = {}
     if folder.is_dir():
         for f in sorted(os.listdir(folder)):
             if f.endswith(".md"):
                 t = (folder / f).read_text(encoding="utf-8")
-                m, i = SOURCE.search(t), t.find("\n" + FORK_HEAD)
+                m, i = SOURCE.search(t), t.find("\n" + HAND_HEAD)
                 if m and i >= 0:
                     out[m.group(1)] = t[i + 1:].rstrip() + "\n"
     return out
@@ -211,19 +211,18 @@ class Gen:
         al = ", ".join('"' + a.replace('"', "'") + '"' for a in self.aliases(c))
         body = self.conv(desc) if desc else "_Описания в игре нет._"
         fork = "\n" + self.fork[c] if c in self.fork else ""
-        return (f"---\naliases: [{al}]\ntags: [ваниль]\nsource: игра, `{c}` (tools/regen_ld_vanilla_concepts.py)\n---\n"
+        dsc = f"Термин игры «{name}» — подсказка-понятие Victoria 3 1.13 (`{c}`)".replace('"', "'")
+        return (f'---\ntype: concept\ndescription: "{dsc}"\nproject: vic3\nsource: vanilla\naliases: [{al}]\n'
+                f'tags: [ваниль, термин]\ngenerated: "{GEN}"\nkey: {c}\n---\n'
                 f"# {name}\n\n{body}\n{fork}")
 
     def index(self):
         rows = sorted(self.concepts, key=lambda c: self.names[c].lower())
-        out = ["---", "tags: [ваниль, карта]", "---", "# Карта ванили",
-               "",
-               "Понятия игры — подсказки-понятия Victoria 3 1.13 (`common/game_concepts`, локализация), по заметке на понятие.",
-               "Сгенерировано `tools/regen_ld_vanilla_concepts.py`: текст игры руками не править, раздел",
-               f"«{FORK_HEAD}» пишется руками и сохраняется. Понятия мода — [[_Карта понятий]].", ""]
-        used = sorted((c for c in self.concepts if c in self.fork), key=lambda c: self.names[c].lower())
-        if used:
-            out += ["## Используются в форке", ""] + [f"- [[{self.names[c]}]]" for c in used]
+        out = ["---", "type: map", 'description: "Карта терминов игры Victoria 3 1.13 — все подсказки-понятия по алфавиту"',
+               "project: vic3", "source: vanilla", "tags: [ваниль, термин]", f'generated: "{GEN}"', "---",
+               "# Карта ванили", "",
+               "Термины игры — подсказки-понятия Victoria 3 1.13 (`common/game_concepts`, локализация), по заметке на понятие.",
+               "Генерат: текст игры руками не править, ручной раздел заметки — «## Рабочее», генератор его сохраняет.", ""]
         letter = None
         for c in rows:
             n = self.names[c]
@@ -250,9 +249,9 @@ def main():
     concepts = load_concepts(van / "common" / "game_concepts")
     loc = load_loc(van / "localization" / a.lang)
     en = load_loc(van / "localization" / "english")
-    mod = fork / "понятия"
+    mod = fork / "docs" / "понятия"
     mod_names = {f[:-3] for f in os.listdir(mod) if f.endswith(".md")} if mod.is_dir() else set()
-    dst = fork / "ваниль"
+    dst = ROOT / "vic3_mods_out" / "docs" / "vanilla" / "Термины"
     g = Gen(concepts, loc, en, mod_names, fork_sections(dst))
     out = {f"{g.names[c]}.md": g.note(c) for c in concepts}
     out["_Карта ванили.md"] = g.index()
@@ -263,7 +262,7 @@ def main():
           f"изменено {len(changed)}, лишних {len(stale)}")
     if a.check:
         sys.exit(1 if changed or stale else 0)
-    dst.mkdir(exist_ok=True)
+    dst.mkdir(parents=True, exist_ok=True)
     for f in changed:
         (dst / f).write_text(out[f], encoding="utf-8", newline="\n")
     for f in stale:
