@@ -183,6 +183,9 @@ def main():
 
     REPORT.parent.mkdir(parents=True, exist_ok=True)
     with open(REPORT, "w", encoding="utf-8") as o:
+        # рабочий отчёт агента: человеку его не показывают (методика, «Шапка документа», audience)
+        o.write('---\ntype: reference\ndescription: "Сверка переноса хотфикса (ФК1) — отчёт ld_verify_port.py"\n'
+                'project: vic3\naudience: agent\ntags: [форк, отчёт]\ngenerated: "tools/ld_verify_port.py"\n---\n')
         o.write("# Сверка переноса хотфикса (ФК1) — `ld_verify_port.py`\n\n")
         o.write(f"ключей: база {len(a)}, форк {len(b)}; только в базе {len(only_a)}, только в форке {len(only_b)}, "
                 f"разное определение {len(diff)}\n")

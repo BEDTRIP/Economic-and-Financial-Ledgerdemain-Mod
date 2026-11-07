@@ -488,6 +488,9 @@ def main():
 
     REPORT.parent.mkdir(parents=True, exist_ok=True)
     with open(REPORT, "w", encoding="utf-8") as o:
+        # рабочий отчёт агента: человеку его не показывают (методика, «Шапка документа», audience)
+        o.write('---\ntype: reference\ndescription: "Перенос хотфикса в форк (ФК1) — отчёт ld_port_hotfix.py"\n'
+                'project: vic3\naudience: agent\ntags: [форк, отчёт]\ngenerated: "tools/ld_port_hotfix.py"\n---\n')
         o.write("# Перенос хотфикса в форк (ФК1) — отчёт `ld_port_hotfix.py`\n\n")
         for k in sorted(report):
             o.write(f"- {k}: {len(report[k])}\n")

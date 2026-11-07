@@ -112,6 +112,9 @@ def main():
 
     os.makedirs(os.path.dirname(args.out), exist_ok=True)
     with open(args.out, "w", encoding="utf-8") as o:
+        # рабочий отчёт агента: человеку его не показывают (методика, «Шапка документа», audience)
+        o.write('---\ntype: reference\ndescription: "Хотфикс E&F → форк: чьё каждое определение (ФК1)"\n'
+                'project: vic3\naudience: agent\ntags: [форк, отчёт]\ngenerated: "tools/ld_hotfix_owners.py"\n---\n')
         o.write("# Хотфикс E&F → форк: чьё каждое определение (ФК1)\n\n")
         o.write("Сгенерировано `tools/ld_hotfix_owners.py`; классы — в его докстринге.\n\n")
         o.write("| класс | определений |\n| --- | --- |\n")
